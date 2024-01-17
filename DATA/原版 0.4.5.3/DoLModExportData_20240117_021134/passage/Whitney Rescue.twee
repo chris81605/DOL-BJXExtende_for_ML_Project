@@ -1,0 +1,56 @@
+:: Whitney Rescue []
+<<set $location to "school">><<schooleffects>><<effects>>
+
+<<set $rescued += 1>>
+<<if $rescue is 3>>
+	<<set $whitneyRescueSafe to true>>
+<</if>>
+<<person1>>
+你听到一声喊叫。
+<<switch random(1, 3)>>
+	<<case 3>>
+		<<person>>抬起头，正好接住了惠特尼突如其来的一拳。
+	<<case 2>>
+		<<person>>还没来得及转身，就被揪住领子拉扯了过去，面向了愤怒的惠特尼，
+	<<case 1>>
+		<<person>>回头看去，然后僵住了。是惠特尼，<<nnpc_he "Whitney">>双手抱胸，正大步向你们走来，
+<</switch>>
+旁边是<<nnpc_his "Whitney">>的朋友们。
+<<print either(
+	`"滚开，失败者<<if $enemyno gte 2>>们<</if>>！"`,
+	`"我允许过你使用<<phim>>吗？"`,
+	`"那不是你的东西。"`,
+	`"<<pShes>>是我的。"`,
+	`"拿开你的脏手。"`,
+	`"滚。"`
+)>>
+<<status 1>><<gcool>>
+<br><br>
+
+两人对峙着，
+<<print either(
+	"片刻之后，",
+	"紧张的对视之后，",
+	"简短的口头交流后，"
+)>>
+那个<<person>>
+<<print either(
+	"把惠特尼推倒在地",
+	"恐惧地呜咽起来",
+	"冲惠特尼比了个中指"
+)>>
+并匆忙逃离现场<<if $enemyno is 2>>，<<his>>的朋友也跟着走了<<elseif $enemyno gte 3>>，其他人也跟着走了<</if>>。
+<br><br>
+
+<<if $whitneyRescueSlime>>
+	你感到一阵剧痛，这是史莱姆对你反抗的教训。
+	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<br><br>
+<</if>>
+
+<<clotheson>>
+<<endcombat>>
+<<npc Whitney>><<person1>>
+
+<<link [[继续|Whitney Rescue 2]]>><</link>>
+<br>

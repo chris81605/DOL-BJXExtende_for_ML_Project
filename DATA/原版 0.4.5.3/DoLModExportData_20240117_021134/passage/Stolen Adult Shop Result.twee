@@ -1,0 +1,33 @@
+:: Stolen Adult Shop Result []
+<<effects>>
+<<ShowUnderEquip "over">>
+<<ShowUnderEquip "normal">>
+<<if currentSkillValue('skulduggery') lt 90>>
+	西里斯用眼角的余光观察着入口处。没有其他路能出去，所以你在离开前把所有东西都放了回去。
+	<<clothingReset>>
+<<else>>
+	<<rng>>
+	<<if crimeSumCurrent("thievery","petty") gte 50000 or (crimeSumCurrent("thievery","petty") gte 40000 and $rng * 20 gte currentSkillValue('skulduggery')) or (crimeSumCurrent("thievery","petty") gte 25000 and $rng * 10 gte currentSkillValue('skulduggery'))
+	or (crimeSumCurrent("thievery","petty") gte 10000 and $rng * 5 gte currentSkillValue('skulduggery'))>>
+		<<generate1>><<person1>>
+		西里斯用眼角的余光观察着入口处。当你试图走过去时，<<nnpc_he "Sirris">>拦下了你。
+		<br><br>
+		"嗯——我一直在盯着你，"<<he>>继续说，"这回我就放你走，但你暂时被禁止进入这里。希望能让你学会为什么不能偷东西"
+		<<if $adultShop.banCount lt 4>>
+			<<set $adultShop.ban to 7>>
+		<<elseif $adultShop.banCount lt 8>>
+			<<set $adultShop.ban to 10>>
+		<<else>>
+			<<set $adultShop.ban to 14>>
+		<</if>>
+		<<crime "thievery">>
+		<<set $adultShop.banCount++>>
+	<<else>>
+		西里斯用眼角的余光观察着入口处。万幸你身手敏捷，不留一丝痕迹。
+		<<crime "thievery">>
+	<</if>>
+	<<set _crime to ($tryOn.value / 100)>>
+	<<crimeUp _crime "thievery">>
+<</if>>
+<br><br>
+<<link [[继续|Elk Street]]>><<set $tryOn.autoReset to true>><<adultShopClear>><</link>>

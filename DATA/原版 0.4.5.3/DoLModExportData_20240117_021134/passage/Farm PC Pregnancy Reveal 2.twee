@@ -1,0 +1,94 @@
+:: Farm PC Pregnancy Reveal 2 []
+<<effects>>
+
+<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+	<<if C.npc.Alex.dom gte 30>>
+		<<He>>靠上前，把你紧紧抱在<<his>>怀里。"这也意味着你是我的东西了，"<<He>>脸上露出一丝阴沉的表情，"而我不会允许雷米夺走我的东西。"
+		<br><br>
+
+		"不用担心，如果有什么情况，我可以一个人保护好你和农场，"<<he>>一边看着你的肚子一边说道。
+		<br><br>
+
+	<<else>>
+		<<He>>再次靠上来，抱住了你，把<<his>>的下巴放在你的肩膀上。"我会保护你的，"<<he>>说。
+		<br><br>
+
+		<<his>>的表情柔和了下来，"雷米尽管放马过来吧，我不会让<<nnpc_him "Remy">>毁了我的任何东西。"
+		<br>
+		"农场也好，你也好，我会保护所有值得保护的东西……"<<his>>的眼里涌起泪水。
+		<br><br>
+
+	<</if>>
+
+	<<He>>摇了摇<<his>>的头。"那种事情之后再说，现在我们有更重要的事要考虑。现在开始要给我们的新成员准备房间了。"<<He>>的表情再次舒展成了微笑。
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") gte 1 or pregnancyCountBetweenParents("pc","Alex") gte 1>>
+
+	<<else>>
+		"上面其实还有第三个房间，我们也许能把它利用起来。"
+		<br><br>
+
+		<span class="gold">你现在可以扩张小屋了。</span>
+		<br><br>
+
+	<</if>>
+
+	<<if $farm_work isnot undefined and $farm_work.alex isnot undefined and $farm_work.alex.includes("admin","clearing")>>
+		<<link [[继续|Farm Alex Bedroom]]>><<endevent>><</link>>
+
+	<<else>>
+		<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	你在沙发坐下，艾利克斯走进厨房去泡茶。
+	<br><br>
+
+	<<He>>递给你一个杯子，"抱歉，我只是一时不知道该怎么面对。并不是说我不高兴，我只是太惊讶了。"<<He>>喝了一口茶。
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		"你觉得宝宝能跟我们一起住吗？"你问<<him>>。
+
+	<<else>>
+		"也许这次我们能把一切都准备好，"你说。
+	<</if>>
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		<<His>>的表情舒缓下来，"农场的工作还是太多了……如果宝宝出生的时候事情还没有好转，我们就得把宝宝送去孤儿院了，"<<he>>说。
+		<br><br>
+
+		你的思绪转向贝利，想起了孤儿们在那里的待遇，你张开嘴想要说些什么，但<<he>>打断了你。
+		<br><br>
+
+		"我知道！我也不想这样，但这只是在农场的情况好起来前的权宜之计。而且我只是在做最坏情况的假设。"
+		<br><br>
+
+		<<link [[继续|Farm PC Pregnancy Reveal 3]]>><</link>>
+
+	<<else>>
+		"农场现在的工作太多了……如果宝宝出生的时候情况还没有好转的话，我们就不得不把宝宝送到孤儿院了，"<<he>>说。
+		<br><br>
+
+		你的思绪转向你还住在孤儿院的<<if childrenCountBetweenParents("Alex", "pc") is 1 or childrenCountBetweenParents("pc", "Alex") is 1>>孩子<<else>>孩子们<</if>>。
+		<br><br>
+
+		<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 30>>
+			<<He>>皱起眉头。"要避免这种情况，你得帮我好好干农活才行。我其实真的很不想我的孩子住在孤儿院。"
+
+		<<else>>
+			<<He>>叹了口气，"要避免这种情况，我们得好好干农活才行。我实在不忍心想象我们的孩子要住在孤儿院。"
+
+		<</if>>
+		<br><br>
+
+		<<He>>喝完了自己的茶。"得赶紧开始工作了。"
+		<br><br>
+
+		<<link [[离开|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<</if>>

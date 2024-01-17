@@ -1,0 +1,56 @@
+:: Robin Caught CD []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+	<!-- flip pronoun while the player doesn't recognise robin -->
+	<<genderswap>>
+	<<run npcEquipSet(_robin, setup.npcClothesSets.find(n => n.name === (_robin.pronoun is "m" ? "femaleTown1" : "maleTown1")))>>
+
+	在一番心理斗争之后，你的好奇心占据了上风。你将门打开，看到一个穿着<<npcClothesText _robin "upper">>的<<personsimple>>，
+	而这家伙正背对着你，审视着<<himself>>。
+	<br><br>
+
+	在你进入房间的时候，那个<<personsimple>>透过镜子注意到了你。<<He>>在转身面向你之前用手遮住了脸。
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"你，你对罗宾做了什么？"你颤颤巍巍地说着，不知道这个陌生人的意图是什么。
+	<<elseif $speech_attitude is "bratty">>
+		"你在罗宾的房间里做什么？" 你已经做好了战斗的准备。
+	<<else>>
+		"你是谁？" 你这样问道，毕竟你并不确定这个陌生人的意图到底是什么。
+	<</if>>
+	<br><br>
+
+	那个<<personsimple>>犹豫了一下，然后开口回答了，"我不是什么陌生人！是我啊！"
+	<<if $pronoun is "f">>
+		她用手擦去了一些化妆品。
+	<<else>>
+		你认出了这个声音。
+	<</if>>
+	<span class="green">是罗宾</span>。
+	<!-- restore pronoun -->
+	<<genderswap>>
+	<br><br>
+
+	<!-- Please add more options here if you add another Robin crossdressing starting event -->
+	<<if _robin.cdstart is "christmas">>
+		"我试穿了你在圣诞节送给我的那个礼物，我想你是对的，"<<he>>说，"我确实相当喜欢。"
+	<<elseif _robin.cdstart is "halloween">>
+		"自从我试过打扮成<<print (_robin.pronoun is "m" ? "女巫" : "吸血鬼")>>之后，我就一直想再来一次变装。"
+	<<else>>
+		<!-- Failsafe, only if CDstart is otherwise empty for some reason -->
+		"我在一家商店的橱窗里看到了这套衣服，我无法控制自己去想它，"<<he>>继续说道，"如果穿上的话，我可能会看起来更加<<print (_robin.pronoun is "m" ? "可爱" : "帅气")>>。"
+	<</if>>
+	<<if _robin.dom gte 40>>
+		罗宾深吸了一口气，然后缓慢地旋转一周。"那么，看起来怎么样？"<<He>>在询问着的同时用充满希冀的目光看向你。
+	<<else>>
+		罗宾满脸通红地移开视线，"抱歉吓到你了。给我一分钟时间，我去把衣服换回来。"
+	<</if>>
+	<br><br>
+
+	<<link [[鼓励|Robin CD Encourage]]>><<npcincr Robin love 5>><</link>><<gglove>>
+	<br>
+	<<link [[温柔地劝阻|Robin CD Soft Discourage]]>><<npcincr Robin love 1>><</link>><<glove>>
+	<br>
+	<<link [[斥责|Robin CD Harsh Discourage]]>><<npcincr Robin dom -3>><<stress 4>><<npcincr Robin love -5>><<npcincr Robin trauma 3>><</link>><<gstress>><<grtrauma>><<lllove>><<lldom>>
+	<br>

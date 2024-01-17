@@ -1,0 +1,65 @@
+:: Underground Cell Resist Finish []
+<<if $enemyhealth lte 0>>
+
+	<<person>>摇摇晃晃地离开了你。
+	<<if $undergroundbrothel.water gte 1>>
+		“你会屈服的，”<<he>>说道，“就算你不屈服，最后也只会虚弱得没法抵抗，何必要为难自己呢？”<<He>>砰的一声关上了门。
+	<<else>>
+		“所以这就是你打算干的？”<<he>>失望地说道。“好吧，让我看看没水喝之后你还会不会这么顽强。”<<He>>砰地关上了门。
+		<<set $undergroundbrothel.water to 1>>
+	<</if>>
+
+	<<undergroundReturnToCell>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<He>>喘着气，“也许……也许下次把。现在我要休息一下。”门在<<him>>身后砰地关上了，你陷入了黑暗。
+	<br><br>
+
+	<<undergroundReturnToCell>>
+
+<<elseif $pain gte 1>>
+
+	你被打得根本无法反抗。那些<<person>>将无助的你从牢房里拖了出来。
+	<br><br>
+
+	<<endcombat>>
+	<<set $phase to $phaselast>>
+
+	<<if $phase is 1>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[继续|Underground Robin Dice Intro]]>><</link>>
+		<<else>>
+			<<link [[继续|Underground Dance Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 2>>
+		<<if $undergroundbrothel.robin>>
+			<<if $tentacledisable is "t">>
+				<<link [[乖乖过去|Underground Robin Stage Intro]]>><</link>>
+			<<else>>
+				<<link [[乖乖过去|Underground Robin Tentacles Intro]]>><</link>>
+			<</if>>
+		<<else>>
+			<<link [[继续|Underground Presentation]]>><</link>>
+		<</if>>
+	<<elseif $phase is 3>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[继续|Underground Robin Machine Intro]]>><</link>>
+		<<else>>
+			<<link [[继续|Underground Stage Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 4>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[悄悄地走|Underground Robin Kiss Intro]]>><</link>>
+		<<else>>
+			<<link [[继续|Underground Film Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 5>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[继续|Underground Robin Hunt Intro]]>><</link>>
+		<<else>>
+			<<link [[继续|Underground Hunt Intro]]>><</link>>
+		<</if>>
+	<</if>>
+<</if>>

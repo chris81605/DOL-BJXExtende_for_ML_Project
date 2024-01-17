@@ -1,0 +1,53 @@
+:: Rent Hospital Fight Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">><<set $baileydefeatedlewd += 1>><<set $baileydefeatedchain += 1>><<earnFeat "Bailey's Trouble Maker">>
+
+	<<He>>抓住栏杆，高潮让<<his>>失神。这是你逃回医院的全部机会。这不会是最后一次，但现在你还没有问题。
+	<<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if crimeSumCurrent() gte 1000>>
+		<<link [[继续|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续->Hospital front]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	<<set $baileydefeated += 1>><<set $baileydefeatedchain += 1>>
+
+	<<He>>摔倒在楼梯上，大喊了几句脏话。你抓住机会逃回医院。这不会是最后一次，但现在你还没有问题。
+	<<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if crimeSumCurrent() gte 1000>>
+		<<link [[继续|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续->Hospital front]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<set $baileydefeatedchain to 0>>
+	<<unset $bailey_encroach>>
+
+	你倒在地上，因为受伤而动弹不得。
+	<br><br>
+
+	<<set $upperoff to 0>>
+	<<set $loweroff to 0>>
+	<<set $underloweroff to 0>>
+	<<set $underupperoff to 0>>
+	<<endcombat>>
+
+
+	<<link [[继续|Rent Intro]]>><</link>>
+<</if>>

@@ -1,0 +1,61 @@
+:: Street Stalk Eden Finish []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<person1>>
+<<if $stalk_end is "confront">>
+	<<if $phase is 1>>
+		伊甸非常用力地拽住了你的胳膊，<<He>>看起来似乎很生气。
+	<<else>>
+		<<if $stalk_assess>>
+			伊甸用力紧紧抓住你的手臂，把你转过来面对<<he>>。<<He>>看起来很生气。
+		<<else>>
+			你被转过身，来到一个高大的身影面前。那是伊甸。<<He>>看起来很生气。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<endcombat>>
+	<<npc Eden>><<person1>>
+
+	<<if $edenCagedEscape>>
+		"我告诉过你，我会再找到你的，是吧？"<<he>>咆哮着，把你拉近。"看起来你还没有学会你的位置。走吧。"
+	<<else>>
+		"你他妈的去哪了？"<<he>>咆哮着，把你拉近。
+		<<if $allure gte (3000 * $alluremod)>>
+			"我担心死了，而你却像个荡妇一样在城里到处晃荡！"
+		<<else>>
+			"我担心死了，而你就在城里到处晃荡！"
+		<</if>>
+		<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 70>>
+			<<set $NPCName[$NPCNameList.indexOf("Eden")].love to 70>>
+			<<llllove>>
+		<</if>>
+		<br><br>
+
+		在你还来得及开口之前，伊甸开始把你拖走。"我也不想听你的借口。"<<He>>看起来很不舒服，走路时眼神不停地游移。<<his>>的嘴角因厌恶而扭曲。"你还让我出来找你。我们回家后事情不会好过的。"
+	<</if>>
+	<br><br>
+
+	<<link [[反抗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[试着拉开距离|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[顺从 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif $stalk_end is "hide">>
+	你从藏身的地方出来。<<if $stalk_assess>>伊甸<<else>>跟踪你的那个人<</if>>已经不见了。<<tearful>>你继续走自己的路。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<<else>>
+	当你逃进<<if Time.dayState is "night">>黑暗的<<else>>人群<</if>>时，<<if $stalk_assess>>伊甸的<<else>>一把熟悉的<</if>>声音在你身后大喊，但你继续奔跑着。最终，声音逐渐消失。<<tearful>>你放慢了脚步，继续前行。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<</if>>

@@ -1,0 +1,35 @@
+:: English Play Curtain Call 2 []
+<<effects>><<run statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+
+悉尼转身看向你，"你那边干得不错。"<<person1>><<he>>说道。
+<<if $englishPlayApproval lte 50>>
+	"考虑到各种问题的话，结果可能会还会更糟糕。"
+<<elseif $englishPlayApproval lte 75>>
+	"我觉得我们做得不错，我们所有人。"
+<<else>>
+	"我不觉得我们能干得更好了。"
+<</if>>
+<br><br>
+
+<<He>>想继续说下去，但是西里斯突然从后面拥住<<him>>，打断了<<his>>的话。"我简直不敢相信我的眼睛！我的小Syd，真正的演员！"<<nnpc_he "Sirris">>满怀热情，"别告诉你的朋友们，在台上你无疑是最棒的那个。"<<nnpc_he "Sirris">>笑了起来。
+两人继续交谈着，直到西里斯准备把悉尼带走，悉尼犹豫了一下。"<<sydneymum>>我其实想留下来观看其他的演出。"西里斯看上去很惊讶，不过还是同意了。悉尼朝你挥了挥手，然后选了个位置。
+<br><br>
+
+<<if $englishPlayKylarReplace>>
+	你想听一听<<person2>><<person>>的感想，然而你哪里都找不到<<he>>。<<he>>肯定一演完就走了。
+<<elseif !$englishPlayKylarLeave>>
+	凯拉尔瞥了悉尼一眼，然后转向你，"我真的得走了，"<<person2>><<He>>说道，"我今天玩得很开心……不过很高兴终于结束了。之后再找你聊天，好吗？"<<He>>拥抱了你一下，然后朝着出口匆匆离开了。
+<</if>>
+<<storeon "play_upper">>
+<<storeon "play_lower">>
+<<endevent>>
+<<clearNPC actor_replacement>>
+<br><br>
+
+你现在可以离开了，不过留下来支援你的同学会让他们更加亲近你。
+<br>
+<<link [[留下观看表演 (0:20)|English Play Watch]]>><<trauma -2>><<tiredness 2>><<status 1>><<pass 20>><</link>><<ltrauma>><<gtiredness>><<gcool>>
+<br><br>
+
+<<link [[离开市政厅 (0:01)|Cliff Street]]>><<englishplayfinish>><<pass 1>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

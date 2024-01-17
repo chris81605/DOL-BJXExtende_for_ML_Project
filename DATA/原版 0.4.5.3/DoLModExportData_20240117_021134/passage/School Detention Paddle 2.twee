@@ -1,0 +1,78 @@
+:: School Detention Paddle 2 []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcspank>><<npcidlegenitals>>
+	<<set $spankobject to "paddle">>
+	<<set $enemyanger += 200>>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+<<if $schoolfameblackmail isnot undefined and random(1, 10) is 1>>
+	礼顿靠得很近，低声说道，声音小到让<<print $paddle_other_student>>听不到。"我们都知道你很喜欢这个，顽皮的<<girl>>。"<<He>>猛地打了你一下，以此强调<<his>>言论。<<violence 5>><<combattrauma 10>><<ggstress>><<ggtrauma>><<ggpain>>
+<<elseif $enemyanger lte 0>>
+	礼顿退了一步，用手拍了拍<<his>>的戒尺。"我想你已经得到了教训，"<<he>>得意地笑着说道。
+<<else>>
+	<<switch random(1, 12)>>
+		<<case 1>>
+			<<print $paddle_other_student>>靠得近了些，以便看得更清楚。
+		<<case 2>>
+			"狠狠打<<phim>>，我想看<<phim>>尖叫！"<<print $paddle_other_student>>叫嚷着。礼顿坏笑地答应了，将戒尺重重甩下。<<violence 3>><<gstress>><<gtrauma>><<gpain>>
+		<<case 3>>
+			你看见相机在你背后闪烁，是<<print $paddle_other_student>>在给你的凌辱场面拍照。<<combattrauma 2>><<fameexhibitionism 2 "pic">><<gtrauma>>
+		<<case 4>>
+			礼顿回头看向<<print $paddle_other_student>>。<<He>>坏笑道，"或许我该让我们的朋友在我完事后继续陪你玩玩。"<<set $stress += 6>><<gstress>>
+		<<case 5>>
+			礼顿没有留情，用一连串狠厉的板子教训了你的<<bottom>>。<<print $paddle_other_student>>兴奋地看着。<<violence 5>><<combattrauma 5>><<ggstress>><<ggtrauma>><<ggpain>>
+		<<case 6>>
+			<<if $worn.under_lower.exposed gte 1>>
+				每被打一下，你的屁股就会变得越来越刺痛，皮肤慢慢变成一种鲜艳欲滴的红色。<<violence 4>><<ggpain>>
+			<<else>>
+				礼顿一边用戒尺打着你的<<bottom>>一边笑着说道。"你不该感谢我还让你穿着衣服吗。"<<violence 2>><<gpain>>
+			<</if>>
+		<<case 7>>
+			<<if $delinquency gte 800>>
+				"这就是像你这样的小崽子应得的。"礼顿冷笑着，用戒尺狠狠地打下去。<<violence 4>><<gpain>>
+			<<elseif $physique gte $physiquesize * 0.75>>
+				礼顿笑着，享受着侮辱你的过程。"现在倒没那么坚强了，不是吗？"<<combattrauma 4>><<gtrauma>>
+			<<else>>
+				礼顿在准备下一次打过来时说道："从现在起，你会成为一个好<<girl>>的，对吗？"<<combattrauma 2>><<gtrauma>>
+			<</if>>
+		<<case 8>>
+			<<if $pain gte 100>>
+				礼顿冷笑道："你再怎么哭都是没用的，这影响不到你要承担的后果。"<<combattrauma 2>><<gtrauma>>
+			<<elseif $masochism_level gte 3>>
+				在这种痛苦的感觉下，你不禁愉快地扭动着身体。礼顿见到这一幕嘲笑道："你这个肮脏的小妓女，你喜欢这个，不是吗？"<<combattrauma 2>><<gtrauma>>
+			<<elseif $masochism_level gte 1>>
+				疼痛让你兴奋起来。当礼顿再次把戒尺放下时，你的
+				<<if $player.penisExist and $player.vaginaExist>>
+					<<penis>>高高耸起、<<pussy>>完全湿润
+				<<elseif $player.penisExist>>
+					<<penis>>僵硬地顶在桌面上
+				<<else>>
+					体液慢慢渗到了桌面，形成了一小滩湖泊
+				<</if>>
+				。<<violence 2>><<gpain>>
+			<<else>>
+				当礼顿给你的<<bottom>>来了一记痛苦的重击时，你吓了一跳。<<violence 2>><<gpain>>
+			<</if>>
+		<<case 9 10 11 12>>
+			礼顿在<<print $paddle_other_student>>的注视下继续惩罚你。
+	<</switch>>
+<</if>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $enemyanger lte 0>>
+	<span id="next"><<link [[继续|School Detention Paddle 2 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Detention Paddle 2]]>><</link>></span><<nexttext>>
+<</if>>

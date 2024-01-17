@@ -1,0 +1,554 @@
+:: Widgets BeastEjaculation [widget]
+<<widget "beastejaculation">>
+	<<set $ejaculating to 1>>
+	<<set $enemyejaculated += 1>>
+	<<set $pronoun to "i">>
+	<<set _jj to $active_enemy>>
+	<<set _npcisWolfType to ["wolf","wolfboy","wolfgirl"].includes($NPCList[_jj].type)>>
+	<<set _npcisDogType to ["dog","dogboy","doggirl"].includes($NPCList[_jj].type)>>
+	<<set _npcisFoxType to ["fox","foxboy","foxgirl"].includes($NPCList[_jj].type)>>
+	<<set _legLocked to $leglocktarget is $active_enemy>>
+	<<set _legLockedKnot to _legLocked ? 0.5 : 1>>
+	<<set _pregnancyBoost to 0>>
+
+	<!-- Male BEAST -->
+	<<if $NPCList[_jj].penis is "thighs">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			精液从<<bhis>><<print $NPCList[_jj].penisdesc>>射出，喷射在你的大腿和肚子上。
+			<<thighejacstat>><<tummyejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "thigh" "semen" 5>><<bodyliquid "tummy" "semen" 5>>
+		<<else>>
+			<<bHe>>射在你的大腿上。
+			<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "thigh" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "vaginaentrance">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			<<if playerChastity("vagina")>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的$worn.genitals.cn_name_cap并且流下你的大腿。
+			<<else>>
+				精液从<<bhis>><<print $NPCList[_jj].penisdesc>>射出，淋湿你的<<pussy>>，从你的大腿滑落。
+				<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 5, rngType: "canWash"}`>>
+			<</if>>
+			<<vaginalentranceejacstat>><<thighejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "vaginaoutside" "semen" 5>>
+		<<else>>
+			<<if playerChastity("vagina")>>
+				<<bHe>>射在你的$worn.genitals.cn_name_cap上。
+			<<else>>
+				<<bHe>>射精在你的<<pussy>>上。
+				<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 5, rngType: "canWash"}`>>
+			<</if>>
+			<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "vaginaoutside" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "vaginaimminent">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			<<if playerChastity("vagina")>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的$worn.genitals.cn_name_cap并且流下你的大腿。
+			<<else>>
+				精液从<<bhis>><<print $NPCList[_jj].penisdesc>>射出，淋湿你的<<pussy>>，从你的大腿滑落。
+				<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 15, rngType: "canWash"}`>>
+			<</if>>
+			<<vaginalentranceejacstat>><<thighejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "vaginaoutside" "semen" 5>>
+		<<else>>
+			<<if playerChastity("vagina")>>
+				<<bHe>>射在你的$worn.genitals.cn_name_cap上。
+			<<else>>
+				<<bHe>>射精在你的<<pussy>>上。
+				<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 15, rngType: "canWash"}`>>
+			<</if>>
+			<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "vaginaoutside" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "vagina">>
+		<<if (random(1, 100) gte 81 * _legLockedKnot and (_npcisDogType or _npcisFoxType)) or (random(1, 100) gte 61 * _legLockedKnot and _npcisWolfType) or _args[0] is "knot">>
+			<<if _args[0] is "knot">>
+				<<set _knotted to true>><<knot_stat>>
+				随着最后一次抽插，<<bhe>>把鸡巴深深插入你的身体，锁结在你的<<pussy>>里涨大。<<bHe>>把精液射入你的子宫深处。你感觉精液在你体内多到快要溢出，但是却被出口的锁结堵住了。<<beasttype>>从你的身上爬下来，背对着你，但是因为身下的锁结你们依然连在一起。
+			<<else>>
+				<<set _knotted_short to true>><<knot_stat>>
+				随着最后一次抽插，<<bhe>>把鸡巴深深插入你的身体，锁结在你的<<pussy>>里涨大。<<bHe>>把精液射入你的子宫深处，你感觉精液在你体内多到快要溢出，但是却被出口的锁结堵住了。<<beasttype>>从你的身上爬下来，背对着你，但是因为身下的锁结你们依然连在一起五分钟，直到锁结缩小到你可以把<<beasttype>>的肉棒扯出来并摆脱它。
+				<<pass 5>>
+			<</if>>
+			<<if _npcisWolfType>><<transform wolf 1>><</if>>
+			<<if _npcisFoxType>><<transform fox 1>><</if>>
+			<<set _pregnancyBoost to 25>>
+		<<elseif ["boar", "pig"].some(type => $NPCList[_jj].type.includes(type))>>
+			精液自<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>的<<print $NPCList[_jj].penisdesc>>流出。你因羞耻而呆愣了好几分钟，<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>的肉棒坚定地射满你的子宫。
+			<br>
+			<<if $audiencepresent gte 1>>
+				观众很享受这场表演。
+				<<if $pregnancyspeechdisable is "f">>
+					<<print either(
+						`"我简直不敢相信，居然和猪做爱。"`,
+						`"我打赌<<pshe>>喜欢被猪干。"`
+					)>>
+				<<else>>
+					<<print either(
+						`"我简直不敢相信，居然被一头猪操了。"`,
+						`"我打赌<<pshe>>喜欢被猪干。"`
+					)>>
+				<</if>>
+				<br>
+				<<print either(
+					`"真是个肮脏的骚货。"`,
+					`"这是你这个骚货应得的。"`
+				)>>
+				<br>
+				<<print either(
+					`"告诉我猪肉棒是什么味道。"`,
+					`"这个<<bitch>>会操翻整个猪圈。"`
+				)>>
+				<br>
+			<</if>>
+			<br>
+
+			尽管溢到了边缘，精液仍没有漏出来。甚至<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>摇着尾巴离开后都还是满的。随后你感到压力升高，一个由硬质精液组成的塞子掉到地上。<<print $NPCList[_jj].type.includes("pig") ? "猪" : "野猪">>的精液随后溢出，漫过你的双腿。
+			<<bodyliquid "vagina" "semen" 2>><<bodyliquid "vaginaoutside" "semen" 2>><<bodyliquid "thigh" "semen">><<pass 30>><<vaginalentranceejacstat>><<thighejacstat>>
+		<<elseif $NPCList[_jj].penissize gte 5>>
+			精液从<<bhis>>的<<print $NPCList[_jj].penisdesc>>喷涌而出，填满你的子宫并从你的<<pussy>>流出瀑布。
+			<<vaginalentranceejacstat>><<set $hygiene += 4500>><<bodyliquid "vagina" "semen" 4>><<bodyliquid "vaginaoutside" "semen" 5>>
+		<<else>>
+			<<bHe>>把精液射入你的子宫深处。
+		<</if>>
+		<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "vagina" "semen">>
+		<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 100 + _pregnancyBoost}`>>
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "cheeks">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			精液从<<bhis>><<print $NPCList[_jj].penisdesc>>喷涌而出，将你的后背射的满满的，甚至沾到了你的头发。精液淌过你<<bottom>>，滴落在地上。
+			<<bottomejacstat>><<hairejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "bottom" "semen" 5>><<bodyliquid "hair" "semen" 5>>
+		<<else>>
+			<<bHe>>射在你的背上。
+			<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "bottom" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "anusentrance">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			<<if playerChastity("anus")>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的$worn.genitals.cn_name_cap并且流下你的大腿。
+			<<else>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的<<bottom>>并且流下你的大腿。
+			<</if>>
+			<<bottomejacstat>><<thighejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "bottom" "semen" 5>><<bodyliquid "thigh" "semen" 5>>
+		<<else>>
+			<<if playerChastity("anus")>>
+				<<bHe>>射在你的$worn.genitals.cn_name_cap上。
+			<<else>>
+				<<bHe>>射精到你的<<bottom>>上。
+			<</if>>
+			<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "bottom" "semen">>
+		<</if>>
+	<</if>>
+	<<if $NPCList[_jj].penis is "anusimminent">>
+		<<if $NPCList[_jj].penissize gte 5>>
+			<<if playerChastity("anus")>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的$worn.genitals.cn_name_cap并且流下你的大腿。
+			<<else>>
+				精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的<<bottom>>并且流下你的大腿。
+			<</if>>
+			<<bottomejacstat>><<thighejacstat>><<ejacstat>><<set $hygiene += 5000>><<bodyliquid "bottom" "semen" 5>><<bodyliquid "thigh" "semen" 5>>
+		<<else>>
+			<<if playerChastity("anus")>>
+				<<bHe>>射在你的$worn.genitals.cn_name_cap上。
+			<<else>>
+				<<bHe>>射精到你的<<bottom>>上。
+			<</if>>
+			<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "bottom" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "anus">>
+		<<if (random(1, 100) gte 81 * _legLockedKnot and (_npcisDogType or _npcisFoxType)) or (random(1, 100) gte 61 * _legLockedKnot and _npcisWolfType) or _args[0] is "knot">>
+			<<if _args[0] is "knot">>
+				<<set _knotted to true>><<knot_stat>>
+				随着最后一次抽插，<<bhis>>把阴茎结塞入你的<<bottom>>，然后深深射入了你的肠道。你能感觉到精液射满快要溢出，但是却被出口的锁结堵住了。<<beasttype>>从你的身上爬下来，背对着你，但是因为身下的锁结你们依然连在一起。
+			<<else>>
+				<<set _knotted_short to true>><<knot_stat>>
+				随着最后一次抽插，<<bhis>>的肉棒深深插入你的<<bottom>>，锁结在你体内膨胀起来，然后<<bHe>>射入你的肠道。你能感觉到精液射满快要溢出，但是却被出口的锁结堵住了。<<beasttype>>从你的身上爬下来，背对着你，但是因为身下的锁结你们依然连在一起分钟，直到锁结缩小到你可以把<<beasttype>>的肉棒扯出来并摆脱它。
+				<<pass 5>>
+			<</if>>
+			<<if _npcisWolfType>><<transform wolf 1>><</if>>
+			<<if _npcisFoxType>><<transform fox 1>><</if>>
+			<<set _pregnancyBoost to 25>>
+		<<elseif ["boar", "pig"].some(type => $NPCList[_jj].type.includes(type))>>
+			精液自<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>的<<print $NPCList[_jj].penisdesc>>流出。你因羞耻而呆愣了好几分钟，<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>的肉棒坚定地射满你的屁股。
+			<br>
+			<<if $audiencepresent gte 1>>
+				观众很享受这场表演。
+				<<if $pregnancyspeechdisable is "f">>
+					<<print either(
+						`"我简直不敢相信，居然和猪做爱。"`,
+						`"我打赌<<pshe>>喜欢被猪干。"`
+					)>>
+				<<else>>
+					<<print either(
+						`"我简直不敢相信，居然被一头猪操了。"`,
+						`"我打赌<<pshe>>喜欢被猪干。"`
+					)>>
+				<</if>>
+				<br>
+				<<print either(
+					`"真是个肮脏的骚货。"`,
+					`"这是你这个骚货应得的。"`
+				)>>
+				<br>
+				<<print either(
+					`"告诉我猪肉棒是什么味道。"`,
+					`"这个<<bitch>>会操翻整个猪圈。"`
+				)>>
+				<br>
+			<</if>>
+			<br>
+			尽管溢到了边缘，精液仍没有漏出来。甚至<<print $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>摇着尾巴离开后都还是满的。随后你感到压力升高，一个由硬质精液组成的塞子掉到地上。<<print $NPCList[_jj].type.includes("pig") ? "猪" : "野猪">>的精液随后溢出，漫过你的双腿。
+			<<bodyliquid "anus" "semen" 2>><<bodyliquid "bottom" "semen" 2>><<bodyliquid "thigh" "semen">><<pass 30>><<bottomejacstat>><<thighejacstat>>
+		<<elseif $NPCList[_jj].penissize gte 5>>
+			精液自<<bhis>>的<<print $NPCList[_jj].penisdesc>>涌出，灌满你的直肠并喷向外界，濡湿了你的<<bottom>>。
+			<<bottomejacstat>><<set $hygiene += 4500>><<bodyliquid "anus" "semen" 4>><<bodyliquid "bottom" "semen" 5>><<set $hunger -= 1800>><<set $thirst -= 1800>>
+		<<else>>
+			<<bHe>>在你的深处射精。
+		<</if>>
+		<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "anus" "semen">><<set $hunger -= 200>><<set $thirst -= 200>>
+		<<recordSperm `{target: "pc", spermOwner: $NPCList[_jj], spermType: $NPCList[_jj].type, rngModifier: 100 + _pregnancyBoost, genital:"anus"}`>>
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "chest">>
+		<<if $position is "missionary">>
+			<<bHe>>射在你的脖子和胸部上。
+			<<neckejacstat>><<set $hygiene += 500>><<bodyliquid "neck" "semen">>
+		<<else>>
+			<<bHe>>射在你的腹部和胸部上。
+			<<tummyejacstat>><<set $hygiene += 500>><<bodyliquid "tummy" "semen">>
+		<</if>>
+		<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "chest" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "mouthentrance">>
+		<<bHe>>射在你的脸上。
+		<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "mouthimminent">>
+		<<switch random(1, 3)>>
+		<<case 1 2>>
+			<<bHe>>射在你的脸上。
+			<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" "semen">>
+		<<case 3>>
+			<<bHe>>向你的脸上射出大量的精液，流过你撅起的嘴唇，流你的嘴里。
+			<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "face" "semen">>
+			<<if _npcisWolfType>><<transform wolf 1>><</if>>
+			<<if _npcisFoxType>><<transform fox 1>><</if>>
+		<</switch>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "mouth">>
+		<<if (random(1, 100) gte 81 and (_npcisDogType or _npcisFoxType)) or (random(1, 100) gte 61 and _npcisWolfType)>>
+			<<knot_stat>>
+			最后一次插入，<<bhe>>向你喉咙深处射精的同时，强行让<<bhis>>的锁结穿过你的牙齿，<span class="pink">强迫你吞咽。</span>当你发觉<<bhis>>的精液逆流进你嘴里时，<<if $pain gte 40>>眼泪涌出划过你的脸颊<<else>>你开始作呕<</if>>。<<beasttype>>从你身上爬下背朝着你，但是你被锁住与它一同度过了羞耻的五分钟，直到锁结收缩到足以让<<beasttype>>摇着尾巴离开。
+			<<pass 5>><<cumswallow `$NPCList[_jj].type` null "knotted">>
+			<<if _npcisWolfType>><<transform wolf 1>><</if>>
+			<<if _npcisFoxType>><<transform fox 1>><</if>>
+		<<else>>
+			<<bHe>>在你的喉咙里射精。
+			<<cumswallow `$NPCList[_jj].type` null `npcSemenMod($NPCList[_jj].penissize)`>>
+		<</if>>
+		<<oralejacstat>><<ejacstat>>
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "feet">>
+		<<bHe>>射在你的脚上。
+		<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "feet" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "leftarm" and $NPCList[_jj].penis is "rightarm">>
+		<<bHe>>射在你的手上。
+		<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "leftarm" "semen">><<bodyliquid "rightarm" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "leftarm">><<bHe>>在你的左手上射精。
+		<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "leftarm" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "rightarm">><<bHe>>在你右手上射精。
+		<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "rightarm" "semen">>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "otheranusentrance" or $NPCList[_jj].penis is "otheranusimminent">>
+		<<beasttype>>用<<bhis>>的屁股摩擦时射精。
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "otheranus">>
+		<<beasttype>>在你抽插<<bhis>>的屁股时射精。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is 0>>
+		<<if $NPCList[_jj].stance is "topface">>
+			<<bHe>>射在你的脖子上。
+			<<neckejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "neck" "semen">>
+		<<else>>
+			<<bHe>>射在你的肚子上。
+			<<tummyejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "tummy" "semen">>
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].penis is "penis" or $NPCList[_jj].penis is "penisentrance" or $NPCList[_jj].penis is "penisimminent">>
+		<<if $position is "missionary">>
+			<<bHe>>射在你的胸部和脖子上。
+			<<chestejacstat>><<neckejacstat>><<set $hygiene += 500>><<bodyliquid "tummy" "semen">>
+		<<else>>
+			<<bHe>>射在你的肚子和<<penisSimple>>上。
+			<<tummyejacstat>><<set $hygiene += 500>><<bodyliquid "tummy" "semen">>
+		<</if>>
+		<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<bodyliquid "chest" "semen">>
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<!-- Female BEAST -->
+
+	<<if $NPCList[_jj].vagina is "penisimminent" or $NPCList[_jj].vagina is "penisentrance">>
+		<<if playerChastity("penis")>>
+			你感觉到当<<= $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>达到高潮时，振动从你的$worn.genitals.cn_name_cap传来。
+		<<else>>
+			当那只<<beasttype>>达到高潮时，你感觉到热量流过你的<<penis>>。
+		<</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "penis">>
+		那只<<beasttype>>在你的<<penis>>上达到高潮，它的肉壁在你的肉棒周围脉动着。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if ($NPCList[_jj].vagina is "vaginaentrance" or $NPCList[_jj].vagina is "vaginaimminent") and playerChastity("vagina")>>
+		你感觉到当<<= $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>达到高潮时，振动从你的$worn.genitals.cn_name_cap传来。
+	<<elseif $NPCList[_jj].vagina is "vaginaentrance" or $NPCList[_jj].vagina is "vaginaimminent">>
+		<<beasttype>>高潮时，你感受到热量流过你的<<pussy>>。
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "vagina" and playerChastity("vagina")>>
+		当<<= $NPCList[_jj].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>高潮时你感到你的$worn.genitals.cn_name_cap在震动。
+	<<elseif $NPCList[_jj].vagina is "vagina">>
+		<<beasttype>>高潮时，你感受到热量流过你的<<pussy>>。<<beasttype>>的体液与你的体液交融着溢出。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "mouthimminent">>
+		<<beasttype>>高潮时，你感受到热量流过你的脸颊。
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "mouthentrance">>
+		<<beasttype>>高潮时，你感受到热量流过你的脸颊。
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "mouth">>
+		<<beasttypes>>的兽穴在你的嘴边颤抖着高潮了，<<beasttype>>的爱液和你的唾液混合到一起。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "otheranusentrance" or $NPCList[_jj].vagina is "otheranusimminent">>
+		你舔着<<beasttype>>的屁股，它颤抖着高潮了。
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is "otheranus">>
+		你拍打<<beasttype>>的屁股，它颤抖着高潮了。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].mouth is "penis">>
+		你操<<beasttype>>的嘴巴，它颤抖着高潮了。
+		<<if _npcisWolfType>><<transform wolf 1>><</if>>
+		<<if _npcisFoxType>><<transform fox 1>><</if>>
+	<</if>>
+
+	<<if $NPCList[_jj].vagina is 0>>
+		<<beasttype>>颤抖着高潮了。
+	<</if>>
+
+	<!-- End orgasm loop -->
+
+	<!-- PC reaction loop -->
+	<<if $consensual is 1>>
+		<<if $deviancy gte 75>>
+			<<print either("你淫荡地", "你兴奋地", "你淫荡地")>>
+		<<elseif $deviancy gte 15>>
+			<<print either("你感觉自己淫荡，", "你感觉自己欲火焚身，", "你感觉自己浑身酥痒")>>
+		<<else>>
+			<<print either("你感觉自己心烦意乱，", "你感觉自己坐立不安，", "你感觉自己浑身难受")>>
+		<</if>>
+		<<if $NPCList[_jj].penis is "anus" or $NPCList[_jj].penis is "mouth" or $NPCList[_jj].penis is "vagina">>
+			<<set _fucked to "操过了">>
+		<<elseif $NPCList[_jj].vagina is "penis" or $NPCList[_jj].mouth is "penis" or $NPCList[_jj].vagina is "otheranus">>
+			<<set _fucked to "强上了">>
+		<<elseif $NPCList[_jj].vagina isnot "none" and $NPCList[_jj].penis is "none">>
+			<<set _fucked to "玩弄了">>
+		<<else>>
+			<<set _fucked to "搞得一团糟">>
+		<</if>>
+		<<if $audience gte 6 or $pilloryaudience gte 6>>在人群面前<<elseif $audiencepresent gte 1 or $pilloryaudience gte 1>>在别人面前<</if>>被一只<<beasttype>>_fucked。
+	<<else>>
+		<<if $deviancy gte 75>>
+			<<print either("你感到羞耻，", "你感到尴尬，", "你感到心烦意乱，")>>
+		<<elseif $deviancy gte 15>>
+			<<print either("你感到恶心，", "你感到不舒服，", "你感到非常难受，")>>
+		<<else>>
+			<<print either("你感到难受，", "你感到厌恶，", "你感到恶心，")>>
+		<</if>>
+			<<if $NPCList[_jj].penis is "anus" or $NPCList[_jj].penis is "mouth" or $NPCList[_jj].penis is "vagina">>
+				<<set _fucked to "被一只<<beasttype>>操">>
+			<<elseif $NPCList[_jj].vagina is "penis" or $NPCList[_jj].mouth is "penis" or $NPCList[_jj].vagina is "otheranus">>
+				<<set _fucked to "操了一只<<beasttype>>">>
+			<<elseif $NPCList[_jj].vagina isnot "none" and $NPCList[_jj].penis is "none">>
+				<<set _fucked to "被一只<<beasttype>>虐待">>
+			<<else>>
+				<<set _fucked to "被迫取悦一只<<beasttype>>">>
+			<</if>>
+		<<if $audience gte 6 or $pilloryaudience gte 6>>在人群面前<<elseif $audiencepresent gte 1 or $pilloryaudience gte 1>>在别人面前<<else>>身不由己地<</if>>_fucked。
+	<</if>>
+	<br><br><br>
+
+	<<if $options.images is 1 and $options.combatImages is 1>>
+		<<combatimg>>
+		<br>
+	<</if>>
+	<<fetishPregnancyImg>>
+
+	<<set $active_enemy += 1>>
+	<<if _args[0] isnot "short">>
+		<<if $water is 0>>
+			<<if _knotted is true>>
+				<<bHis>>的锁结仍然紧紧卡在你里面，防止精液外泄。
+				<br><br>
+			<<elseif playerHasButtPlug() and $NPCList[_jj].penis is "anus">>
+				你的$worn.butt_plug.namecap可以防止精液漏出来。
+			<<elseif $NPCList[_jj].penis is "vagina" or $NPCList[_jj].penis is "anus">><<set $semenpuddle += 1>>
+				<<bHis>>的阴茎滑出来；
+				<<switch Math.clamp($semenpuddle, 1,4)>>
+					<<case 1>>
+						无法容纳的精液流了出来，在你身下堆积成一滩。
+						<br><br>
+					<<case 2>>
+						无法容纳的精液流了出来，在你脚下堆积得越来越多。
+						<br><br>
+					<<case 3>>
+						无法容纳的精液流了出来，你身下的堆积的精液进一步扩大。
+						<br><br>
+					<<case 4>>
+						无法容纳的精液流了出来，流入到你身下不断增长的精液池。
+						<br><br>
+				<</switch>>
+			<</if>>
+			<<if _knotted isnot true and $watersportsdisable is "f" and $enemyanger gte random(20, 200)>>
+				<<if $NPCList[_jj].type.includes("dog") or $NPCList[_jj].type.includes("wolf")>>
+					<<bHe>>抬起一条腿往你身上撒尿，标志着<<bhis>>的领地。
+				<<else>>
+					<<bHe>>在你身上撒尿，标志着<<bhis>>的领地。
+				<</if>>
+				<<urinestat>>
+				<br><br>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<!-- Index BEAST to next up -->
+
+	<<switch $active_enemy>>
+	<<case 0>>
+		<<set $enemyarousal to $enemyarousal1>>
+		<<set $enemyanger to $enemyanger1>>
+		<<set $enemyhealth to $enemyhealth1>>
+		<<set $enemytrust to $enemytrust1>>
+	<<case 1>>
+		<<set $enemyarousal to $enemyarousal2>>
+		<<set $enemyanger to $enemyanger2>>
+		<<set $enemyhealth to $enemyhealth2>>
+		<<set $enemytrust to $enemytrust2>>
+	<<case 2>>
+		<<set $enemyarousal to $enemyarousal3>>
+		<<set $enemyanger to $enemyanger3>>
+		<<set $enemyhealth to $enemyhealth3>>
+		<<set $enemytrust to $enemytrust3>>
+	<<case 3>>
+		<<set $enemyarousal to $enemyarousal4>>
+		<<set $enemyanger to $enemyanger4>>
+		<<set $enemyhealth to $enemyhealth4>>
+		<<set $enemytrust to $enemytrust4>>
+	<<case 4>>
+		<<set $enemyarousal to $enemyarousal5>>
+		<<set $enemyanger to $enemyanger5>>
+		<<set $enemyhealth to $enemyhealth5>>
+		<<set $enemytrust to $enemytrust5>>
+	<<case 5>><!-- Should be unused case -->
+		<<set $enemyarousal to $enemyarousal6>>
+		<<set $enemyanger to $enemyanger6>>
+		<<set $enemyhealth to $enemyhealth6>>
+		<<set $enemytrust to $enemytrust6>>
+	<<default>>
+		<span class="red">ERROR: Beastejac index error</span>
+	<</switch>>
+
+	<<if $player.vaginaExist>>
+		<<set $vaginause to 0>>
+		<<set $vaginastate to 0>>
+	<</if>>
+
+	<<if playerHasStrapon() or $player.penisExist>>
+		<<set $penisuse to 0>>
+		<<set $penisstate to 0>>
+	<</if>>
+
+
+	<<set $mouthuse to 0>>
+	<<set $anususe to 0>>
+	<<unset $neckuse>>
+
+	<<if $worn.face.type.includes("gag")>>
+		<<set $mouthuse to "gagged">>
+	<</if>>
+
+	<<set $thighuse to 0>>
+	<<set $bottomuse to 0>>
+	<<set $feetuse to 0>>
+	<<if $leftarm isnot "bound" and $position isnot "wall">>
+		<<set $leftarm to 0>>
+	<</if>>
+	<<if $rightarm isnot "bound" and $position isnot "wall">>
+		<<set $rightarm to 0>>
+	<</if>>
+	<<set $chestuse to 0>>
+	<<set $cheststate to 0>>
+	<<if $head isnot "bound" and $position isnot "wall">>
+		<<set $head to 0>>
+	<</if>>
+
+	<<set $anusstate to 0>>
+	<<set $mouthstate to 0>>
+
+	<<set $leftaction to 0>>
+	<<set $rightaction to 0>>
+	<<set $vaginaaction to 0>>
+	<<set $penisaction to 0>>
+	<<set $anusaction to 0>>
+	<<set $thighaction to 0>>
+	<<set $cheekaction to 0>>
+	<<set $feetaction to 0>>
+	<<set $mouthaction to 0>>
+
+	<<set $rapeavoid to 1>>
+	<<set $ejaculating to 0>>
+<</widget>>

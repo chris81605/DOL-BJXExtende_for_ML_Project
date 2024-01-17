@@ -1,0 +1,96 @@
+:: Whitney Rescue 2 []
+<<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $exposed gte 1>>
+	惠特尼看着你<<lewdness>>，咧嘴笑了。
+	<<print either(
+		`"你的衣服连五秒钟都穿不住是吧？"`,
+		`"你果然知道怎么引起我的注意。"`,
+		`"你这是自找的。"`
+	)>>
+	<<npcincr Whitney lust 10>><<glust>>
+	<br><br>
+
+	<<He>>抓住你的手臂把你拉起来，"来吧。我不想别人有什么非分之想。"
+	<br><br>
+
+	<<link [[继续|Whitney Rescue Exposed]]>><<set $whitneyRescueExit to "hallways">><</link>>
+	<br>
+<<elseif $whitneyRescueSafe>>
+	"你真幸运，荡妇，"惠特尼转向你说，"我——"
+	<br><br>
+
+	一道愤怒的嗓音
+	<<switch $whitneyRescueExit>>
+		<<case "canteen">>穿过了食堂，
+		<<case "courtyard">>从教室的窗内传来，
+		<<case "classroom">>从教室外传来，
+		<<default>>从走廊传来，
+	<</switch>>
+	打断了惠特尼的话。<<He>>做了个鬼脸。"妈的，得走了。"
+	<<He>>
+	<<print either(
+		"弄乱了你的头发",
+		"拍了一下你的<<bottom>>",
+		"轻轻拍了一下你的脸颊"
+	)>>
+	然后逃跑了。<<tearful>>你振作起来。
+	<br><br>
+
+	<<whitneyRescueEnd>>
+<<elseif $NPCName[$NPCNameList.indexOf("Whitney")].lust gte random(1, 80)>>
+	<<tearful>>你站起身，还没走远，惠特尼就抓住你，把你推到
+	<<switch $whitneyRescueExit>>
+		<<case "canteen">>墙上。
+		<<case "courtyard">>栅栏上。
+		<<case "classroom">>黑板上。
+		<<default>>储物柜边上。
+	<</switch>>
+	<<He>>把手猛地按在你的头旁边，挡住你逃跑的去路。
+	<br><br>
+
+	<<print either(
+		`"什么，救你一命没有奖励吗？"<<he>>问道，"连一句‘谢谢’都没有？"`,
+		`"你以为你能上哪儿去？"<<he>>挑眉问你，"你还欠着我呢。"`,
+		`"你确定没忘记什么吗？"<<he>>盯着你问道，"连谢谢都不跟我说一声吗？"`
+	)>>
+	<br><br>
+
+	<<if $trauma gte ($traumamax / 5) * 4>>
+		<<link [[崩溃 (0:05)|Whitney Rescue Break]]>><<pass 5>><<npcincr Whitney dom 3>><</link>><<ggdom>>
+		<br>
+	<</if>>
+	<<link [[跪下|Whitney Rescue Sex]]>><<set $sexstart to 1>><<stress 6>><<npcincr Whitney dom 1>><</link>><<promiscuous1>><<gstress>><<gdom>>
+	<br>
+	<<link [[用吻回报|Whitney Rescue Kiss]]>><<npcincr Whitney dom 1>><<npcincr Whitney lust 5>><</link>><<promiscuous1>><<kissvirginitywarning>><<gdom>><<glust>>
+	<br>
+	<<link [["对" + $NPCList[0].pronouns.him + "道谢"|Whitney Rescue Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<br>
+<<else>>
+	"不要动。"<<He>>抓住你的下巴，把你的脸转过来面对<<him>>。
+	<<if $pain gte 80>>
+		"你真是个爱哭鬼，"<<he>>嘲笑道，"来。"
+		<br><br>
+
+		<<He>>从<<his>>衬衫口袋里掏出几张皱巴巴的纸巾塞到你手里。"快点，别让人看见了。" 你赶紧擦干眼泪。<<lpain>><<pain -4>>
+	<<else>>
+		<<He>>放开了你，然后
+		<<switch random(1, 3)>>
+			<<case 3>>得意地笑了。"至少你的嘴还能用。"
+			<<case 2>>叹了口气。"很好。他们没有把你搞得太惨。"
+			<<case 1>>推了你一把。"你这笨蛋。总让我为些破事生气。"
+		<</switch>>
+	<</if>>
+	<br><br>
+
+	<<He>>在你的屁股上拍了一下就把你打发走了。
+	<<print either(
+		`"别给自己惹上麻烦。"<<he>>笑着说，"我喜欢我的荡妇完好无损。"`,
+		`"注意安全，"<<he>>警告，"我不想让别人认为我的<<girl>>很容易下手。"`,
+		`"如果我抓到别人和你鬼混，我会狠狠揍他们一顿，"<<he>>说，"你也逃不掉。"`
+	)>>
+	<<stress 2>><<npcincr Whitney lust 10>><<gstress>><<glust>>
+	<br><br>
+
+	<<whitneyRescueEnd>>
+<</if>>

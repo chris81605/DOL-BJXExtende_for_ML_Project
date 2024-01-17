@@ -1,0 +1,46 @@
+:: Strip Club Goon Exaggerate []
+<<effects>>
+
+
+你给<<person>>说了个大概，但夸大了保安的数量，以及客户的财富。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green"><<He>>似乎相信了。</span>
+	<<if $rng gte 81>>
+		"王子大人？我会让布莱尔知道的。"
+	<<elseif $rng gte 61>>
+		"一个酋长？我没有猜到。"
+	<<elseif $rng gte 41>>
+		"你说退伍老兵？那我必须告诉布莱尔了。操。"
+	<<elseif $rng gte 21>>
+		"安保听起来很讨厌，最好让布莱尔先去……算了。"
+	<<else>>
+		"我想这里的夜晚很忙。我会通知布莱尔。"
+	<</if>>
+	<<He>>溜进一条小巷。
+	<<glove "Briar">>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry -= 2>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He>>冷笑着。<span class="red">你不认为<<he>>会买账。</span>
+	"我会让布莱尔知道的，"<<he>>说，然后溜进一条小巷。<<llove "Briar">>
+	<br><br>
+	<<npcincr Briar love -1>>
+	<<set $brothel_rivalry += 2>>
+	<<skulduggeryuse>>
+
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<</if>>

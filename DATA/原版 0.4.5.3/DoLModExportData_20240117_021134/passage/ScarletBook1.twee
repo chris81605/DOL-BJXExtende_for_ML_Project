@@ -1,0 +1,36 @@
+:: ScarletBook1 []
+<<if $scarletExitPassage is undefined>>
+	<<set $scarletExitPassage to "School Library">>
+<</if>>
+<<if $scarletExitPassage is "School Library">>
+	你从篮子里拿出一本猩红封皮的书。书名用烫金的字印在上面，《劳尔与珍妮特》。
+<<else>>
+	你拿着那本名为《劳尔和珍妮特》的猩红书籍在床上躺下。
+<</if>>
+<<if currentSkillValue('english') gte 600>>
+	你对这本书非常熟悉，它是1616年的一部经典英国戏剧。大致内容是一对恋人的悲惨故事。
+	<br><br>
+	<<link [[阅读 (0:20)|ScarletBook2]]>><<pass 20>><<stress -6>><<englishskill>><</link>><<genglish>><<lstress>>
+	<br>
+<<elseif currentSkillValue('english') gte 500>>
+	这是一个关于十七世纪的一对恋人的经典故事。
+	<br><br>
+	<<link [[阅读 (0:20)|ScarletBook2]]>><<pass 20>><<stress -6>><<englishskill>><</link>><<genglish>><<lstress>>
+	<br>
+<<elseif currentSkillValue('english') gte 400>>
+	你知道那本书，它讲述了十七世纪的两个恋人的故事。
+	<br><br>
+	<<link [[阅读 (0:20)|ScarletBook2]]>><<pass 20>><<englishskill>><</link>><<genglish>>
+	<br>
+<<elseif currentSkillValue('english') gte 300>>
+	这个标题听起来很熟悉，好像是关于中世纪的那对恋人的故事？
+	<br><br>
+	<<link [[阅读 (0:20)|ScarletBook2]]>><<pass 20>><<englishskill>><</link>><<genglish>>
+	<br>
+<<else>>
+	你随便翻开一页书。这篇文章看起来像是一百年前写的。有些词听起来很荒谬，难以理解。那时候人们真的这么说话吗？
+	<br><br>
+<</if>>
+	<<link [[把书收起来|$scarletExitPassage]]>><<unset $scarletExitPassage>><</link>>
+
+/*indev scarlet book event. English: 300-399*/

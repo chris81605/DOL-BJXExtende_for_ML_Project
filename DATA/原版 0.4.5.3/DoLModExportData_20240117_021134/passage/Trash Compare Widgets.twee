@@ -1,0 +1,103 @@
+:: Trash Compare Widgets [widget]
+<<widget "TrashComparePlayerChastity">>
+	<<group>>一看到你的<<print $worn.genitals.cn_name_cap>>就失望地呻吟起来。"这他妈什么鬼？"<<trashSelect>><<person>>问道。<<his>>失望地在你的$worn.genitals.cn_name_cap上挥舞着武器。"愚蠢的白莲花！"
+	<br><br>
+	<<He>>上前，指着你。"我觉得我们应该撕掉它，只是为了给你一个教训。"<<He>>挡着你的路。
+	<<stress 6>><<gstress>>
+	<br><br>
+	<<Hes>>被<<trashSelect>><<person>>拉了回来，哼了一声。"什么？不，我们不会做这个的。那太傻了。我不参与其中。"
+<</widget>>
+
+<<widget "TrashComparePlayerBreastsReact">>
+	<<switch $player.breastsize>>
+		<<case 0>>
+			那些<<group>>爆发出一阵大笑。"<<pShes>>平得像块板！"<<trashSelect>><<person>>嘲笑道。
+			<<set _notInsecure to $player.gender is "m" or $acceptance_breasts_tiny gte 1000>>
+			<<set _insecurityType to "breasts_tiny">>
+		<<case 1 2 3>>
+			那些<<group>>在检查你的<<breasts>>时轻笑。"有点偏小，"<<trashSelect>><<person>>说道。
+			<<set _notInsecure to $player.gender is "m" or $acceptance_breasts_small gte 1000>>
+			<<set _insecurityType to "breasts_small">>
+		<<case 4 5 6>>
+			那些<<group>>看到你的<<breasts>>就讨论不停。"非常好，"<<trashSelect>><<person>>微笑着说道。"合适的大小。" 其他人点头同意。
+			<<set _notInsecure to $player.gender is "f" or $acceptance_breasts_big gte 1000>>
+			<<set _insecurityType to "breasts_big">>
+			<<set _kind to true>>
+		<<case 7 8 9>>
+			<<group>>惊叹了几声。<<trashSelect>><<person>>轻轻地吹了一声口哨。"这才是有料的奶子。"
+			<<set _notInsecure to $player.gender is "f" or $acceptance_breasts_big gte 1000>>
+			<<set _insecurityType to "breasts_big">>
+		<<case 10 11 12>>
+			"我靠，" 那个<<trashSelect>><<person>>惊呼。那<<group>>的其他成员也跟着惊呼起来。那<<person>>咧嘴一笑，模仿挤牛奶的动作。"<<pShes>>水好多。你甚至可以淹死在那些东西里！"
+			<<set _notInsecure to $acceptance_breasts_big gte 1000>>
+			<<set _insecurityType to "breasts_big">>
+			<<set _breastEnvy to !_noFollowUp and $trashCompare.enviousBreastIds.length gte 1 and $deviancy gte 55>>
+	<</switch>>
+	<br><br>
+
+	<<if _notInsecure>>
+		你并没怎么在意。
+	<<else>>
+		<<if _kind>>尽管<<his>>语气亲切，羞耻感却油然而生<<else>>羞耻感油然而生<</if>>，涨红了脸。
+		<<insecurity _insecurityType 2>><<ginsecurity _insecurityType>>
+	<</if>>
+
+	<<if _breastEnvy>>
+		<br><br>
+		<<set _result to "breastEnvy">>
+		<<personselect $trashCompare.enviousBreastIds.pluck()>>
+		你注意到<<person>>正羡慕地盯着你。<span class="lewd">一个淫荡的念头在脑海中闪过。</span>你也许可以帮助<<personsimple>>。你甚至可以从中赚点小钱。
+	<</if>>
+<</widget>>
+
+<<widget "TrashComparePlayerPenisReact">>
+	<<switch $player.penissize>>
+		<<case -2>>
+			那些<<group>>爆发出无法控制的笑声。"这是我见过的最小的东西！"<<trashSelect>><<person>>哄笑道。"哎呦，看看这个小家伙？它甚至能勃起吗？"
+			<<set _notInsecure to $acceptance_penis_tiny gte 1000>>
+			<<set _insecurityType to "penis_tiny">>
+		<<case -1 0>>
+			那些<<group>>面面相觑，然后大笑起来。"谁有显微镜？"<<trashSelect>><<person>>开玩笑道。
+			<<set _notInsecure to $acceptance_penis_tiny gte 1000>>
+			<<set _insecurityType to "penis_tiny">>
+		<<case 1>>
+			那些<<group>>低头看着你的<<penis>>，一对情侣发出轻笑。"有点偏小，"<<trashSelect>><<person>>说道。"没什么大不了的。"
+			<<set _notInsecure to $acceptance_penis_small gte 1000>>
+			<<set _insecurityType to "penis_small">>
+		<<case 2>>
+			那些<<group>>低头看着你的<<penis>>，喃喃自语。"大小不错，"<<trashSelect>><<person>>说道。"不算大，但也不算小。"
+		<<case 3>>
+			那些<<group>>低头看着你的<<penis>>，有几个人发出了轻微的喘息声。"比我想象的要大，"<<trashSelect>><<person>>说道。"这倒不是什么坏事。"
+			<<set _notInsecure to $acceptance_penis_big gte 1000>>
+			<<set _insecurityType to "penis_big">>
+			<<set _kind to true>>
+		<<case 4>>
+			"我靠，"<<trashSelect>><<person>>低喃道。"真他妈的怪物。"那个<<group>>的其他人震惊地瞪大了眼睛。
+			<<set _notInsecure to $acceptance_penis_big gte 1000>>
+			<<set _insecurityType to "penis_big">>
+			<<set _penisEnvy to !_noFollowUp and $trashCompare.enviousPenisIds.length gte 1 and $deviancy gte 55>>
+	<</switch>>
+	<<if $player.penissize isnot 2>>
+		<br><br>
+		<<if _notInsecure>>
+			<<if _kind>>你很高兴他们对你印象深刻。<<else>>尽管你并不是特别在意。<</if>>
+		<<else>>
+			<<if _kind>>尽管<<his>>语气亲切，羞耻感却油然而生<<else>>羞耻感油然而生<</if>>，涨红了脸。
+			<<insecurity _insecurityType 2>><<ginsecurity _insecurityType>>
+		<</if>>
+	<</if>>
+
+	<<if $player.vaginaExist>>
+		<br><br>
+		<<set _result to "herm">>
+		"嘿，等等！"<<trashSelect>><<person>>喊道。"看！<<pShe>>也有小穴！"当<<group>>的其他人挪动脚步以获得更好的角度看清时发出了零星的惊讶声。
+	<</if>>
+
+	<<if _penisEnvy>>
+		<br><br>
+		<<set _result to "penisEnvy">>
+		<<personselect $trashCompare.enviousPenisIds.pluck()>>
+		你注意到<<person>>正羡慕地盯着你。<span class="lewd">一个淫荡的念头在脑海中闪过。</span>你也许可以帮助<<personsimple>>。你甚至可以从中赚点小钱。
+		<<set _boy to _text_output>>
+	<</if>>
+<</widget>>

@@ -1,0 +1,66 @@
+:: Domus Errand []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">><<pass 5>>
+<<person1>><<He>>把订单递给你。"给他们看看就可以了。谢谢。"
+<br><br>
+<<generate2>><<person2>>
+你快步走到街角的商店。
+<<if $weather is "clear">>
+	除了买雪糕和冰沙的孩子们之外，这里很安静。人们可能都在室内或外面的酒吧里观看比赛。孩子们带着糖果离开了。
+<<elseif $weather is "rain">>
+	里面一片空荡荡。在糟糕的天气和比赛之间，所有人都会选择待在家里。
+	<br>
+	"外面在下雨吗？"店员问道。
+	<br>
+	你站在门口，衣服上还滴着水。你不确定<<he>>是不是在开玩笑。
+	<br>
+<<elseif $weather is "overcast">>
+	店里空荡荡的。人们可能在室内观看比赛。
+<<elseif $weather is "snow">>
+	店里空荡荡的。人们可能正在躲避寒冷。
+<</if>>
+<br>
+你把订单交给柜台后面那<<person>>。
+<br><br>
+
+"好的，"<<he>>说，"拿酒的话，需要你出示一下身份证。"
+<br>
+<<if $id is 0>>
+	"这不是给我喝的。我只是替别人取货。"
+	<br>
+	"抱歉，"<<he>>耸耸肩。
+	<br>
+	"但是……那些人让我帮忙来拿的。"
+	<br>
+	"抱歉，不过……"<<he>>环顾了一下商店周围。现在空无一人。"除非你能以其他方式证明你的年龄。"
+	<br>
+	"其他方式证明？"
+	<br>
+	<<if $player.gender_appearance is "f">>
+		"要不让我检查一下你的乳房？"
+		<br>
+		<<if $exhibitionism gte 35>><<link [[允许|Domus Errand Proof]]>><<set $phase to 1>><</link>><</if>>
+		<br>
+		<<link [[拒绝|Domus Errand Proof]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		"要不让我检查一下你的阴茎？"
+		<br><br>
+		<<if $exhibitionism gte 35>>
+			<<if playerChastity()>>
+				你不能遵从，因为你带着贞操带。
+			<<else>>
+				<<link [[接受|Domus Errand Proof]]>><<set $phase to 2>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<link [[拒绝|Domus Errand Proof]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你把身份证递过去。<<He>>看了一会儿，把它还给你，然后搬来了一大箱啤酒。
+	<br>
+	"祝你有愉快的一天。"
+	<br><br>
+	<<link [[继续|Domus Errand End]]>><<set $phase to 1>><</link>>
+	<br>
+<</if>>

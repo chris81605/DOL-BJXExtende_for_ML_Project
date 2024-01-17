@@ -1,0 +1,34 @@
+:: Forest Cutter Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<if isLoveInterest("Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+	<</if>>
+
+	<<maninit>>
+	<<set $enemytrust += 50>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Cutter Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Cutter Sex]]>><</link>></span><<nexttext>>
+<</if>>

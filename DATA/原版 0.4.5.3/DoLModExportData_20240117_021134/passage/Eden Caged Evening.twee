@@ -1,0 +1,40 @@
+:: Eden Caged Evening []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"伊、伊甸？"你喃喃。"我的腿疼，我能走动一下吗？"
+	<<elseif $speech_attitude is "bratty">>
+		"嘿，我这里很疼。"你喊道。"你能让我出去几分钟吗？"
+	<<else>>
+		"嘿，我的腿很疼。"你说道。"我能伸展一下吗？"
+	<</if>>
+	<br><br>
+
+	伊甸挑了挑眉毛，放下了<<his>>的书，走到了笼子旁。<<he>>蹲下来与你对视，咧嘴笑。"我能得到什么回报？"
+	<br><br>
+
+	<<link [["提供" + $NPCList[0].pronouns.him + "服务"|Eden Caged Evening 2]]>><<set $phase to 0>><<npcincr Eden trust 5>><<npcincr Eden dom 1>><</link>><<gtrust>><<gdom>>
+	<br>
+	<<link [[无所谓|Eden Caged Evening 2]]>><<set $phase to 1>><<npcincr Eden trust -5>><<npcincr Eden dom -1>><</link>><<ltrust>><<ldom>>
+	<br>
+<<else>>
+	整个晚上都很安静，只能听到篝火的声音和伊甸翻书的声音。几个小时过去了，<<nnpc_title "Eden">>起床准备睡觉。
+	<br><br>
+
+	"表现好一些，或许某天我会让你回到床上睡觉，"<<he>>说完后爬上毛毯，很快就睡着了。
+	<br><br>
+
+	独自一人，只有伊甸的鼾声陪伴着你，你在想该怎么办。
+	<br><br>
+
+	<<if $edenCaged.escape gte 9>>
+		<span class="purple">大门松动了，但是因为伊甸就在附近，你离开也不会有多远。</span>你必须等到<<hes>>分心的时候。
+		<br>
+	<<else>>
+		<<link [[尝试逃跑 (5:00)|Eden Caged]]>><<set $phase to 1>><<set $edenCaged.escape += 1>><<pass 5 hours>><</link>>
+	<</if>>
+	<br>
+	<<link [[睡觉过夜 (5:00)|Eden Caged]]>><<set $phase to 2>><<pass 5 hours>><</link>>
+	<br>
+<</if>>

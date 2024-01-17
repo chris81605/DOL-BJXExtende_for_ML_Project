@@ -1,0 +1,36 @@
+:: Dance Studio Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+	<<else>>
+		没有人来帮你。
+		<<set $alarm to 0>>
+		<<if $drugged gte 1>>药物抑制了你，你的哭泣没那么有说服力。<</if>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Dance Studio Molestation Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Dance Studio Molestation Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Dance Studio Molestation]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Dance Studio Molestation Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Dance Studio Molestation Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Dance Studio Molestation]]>><</link>></span><<nexttext>>
+<</if>>

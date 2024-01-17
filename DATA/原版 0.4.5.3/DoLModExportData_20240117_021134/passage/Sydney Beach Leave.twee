@@ -1,0 +1,29 @@
+:: Sydney Beach Leave []
+<<set $outside to 1>><<set $location to "town">><<effects>><<run statusCheck("Sydney")>><<sydneySchedule>>
+<<if $swimChange>>
+	<<unset $swimChange>><<set $sydney.swim to "crossdress">>
+<</if>>
+<<if $weather is "clear" or $weather is "overcast">>
+	悉尼穿着<<his>>的<<if $exit is "library">>校服<<else>>长袍<</if>>走出更衣间。
+<</if>>
+<<if ["shop", "home"].includes(_sydney_location)>>
+	你和<<him>>一起回到海星街。<<if $sydneyromance is 1>><<if _sydneyStatus.includes("corrupt")>><<He>>握住你的手<<else>>你握住<<He>>的手<</if>>。<<takeHandholdingVirginity "Sydney" "romantic">><</if>>
+	<br><br>
+	"我现在得走了。谢谢你陪我！"<<if $sydneyromance is 1>><<He>>吻了你的脸颊，然后对你挥手告别<<else>><<he>>站了一会儿，背对着你挥手告别<</if>>，向着麋鹿街走去。
+	<br><br>
+	<<link [[继续|Starfish Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $exit is "temple">>
+	<<set $location to "temple">><<set $bus to "wolf">>
+	你和<<him>>平安无事地走回了狼街。"谢谢你带我去海滩！偶尔从神殿那儿繁杂的职务中放松一下还是很不错的。"
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	你和<<him>>一起回到海星街。"谢谢你陪我！偶尔从神殿那儿繁杂的职务中放松一下还是很不错的。说到这个，我正要去那里……<<if $sydneyromance is 1>>你……愿意陪我一起去吗？<<else>>我们还有很多事情要做，你愿意和我一起去吗？<</if>>"
+	<br><br>
+	<<link [[陪悉尼走到神殿|Sydney Leave Temple]]>><<npcincr Sydney love 1>><<stress -3>><</link>><<glove>><<lstress>>
+	<br>
+	<<link [[离开|Sydney Beach Leave 2]]>><</link>>
+	<br>
+<</if>>
+<<unset $exit>>

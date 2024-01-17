@@ -1,0 +1,57 @@
+:: Prison Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+
+	<<wakingEffects $sleepHoursTotal>>
+	<<if $nightmares gte 1 and $controlled is 0>>
+		<<if _wakingEffect isnot undefined>>
+			你梦到了
+		<<else>>
+			你梦到你
+		<</if>>
+		被一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+	<<else>>
+		<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+			你睡得很安稳，但你现在有些许不舒服。
+			<br><br>
+		<<elseif $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+			你的睡眠被淫秽的梦所困扰。
+			<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+			<<arousal `100 * $sleepHoursTotal`>>
+			<<if $arousal gte $arousalmax>>
+				它们把你推向了高潮的顶点。
+				<<orgasm>>
+			<<else>>
+				<br><br>
+			<</if>>
+		<<elseif !_wakingEffect>>
+			你睡得很香。
+			<br><br>
+		<<else>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<sleepeffects>>
+	<<if $daily.prison.wake>>
+		一阵铃声响起，将你从睡梦中唤醒。
+		<br><br>
+		<<set $wardrobe_location to "prison">>
+		<<wardrobeSelection true>>
+		<<radiooutfits>>
+		<br><br>
+		<<link [[继续|Prison Cell]]>><<bedclotheson "prison bed">><<endevent>><</link>>
+		<br>
+
+	<<else>>
+		<br><br>
+		<<set $wardrobe_location to "prison">>
+		<<wardrobeSelection true>>
+		<<radiooutfits>>
+		<br><br>
+		<<link [[起来|Prison Cell]]>><<bedclotheson "prison bed">><</link>>
+	<</if>>
+<</if>>

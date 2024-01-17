@@ -1,0 +1,52 @@
+:: Pillory Skirt []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $rng gte 51>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	<<He>>掀开你的裙摆，露出你的<<undies>>让所有人都看到。"是的，"<<he>>说道。"我觉得这个更适合你。"<<He>>回到人群中，留下你暴露在外。
+<<else>>
+	<<He>>解开你裤子前面的纽扣，露出你的<<undies>>让所有人都看到。"是的，"<<he>>说道。"我觉得这个更适合你。"<<He>>回到人群中，留下你暴露在外。
+<</if>>
+<br><br>
+
+<<set $worn.lower.skirt_down to 0>><<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
+<<endevent>>
+<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+<br>
+
+<<else>>
+
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	<<He>>撩起你裙子的下摆，偷偷往下看。
+<<else>>
+	<<He>>轻轻拉开你的腰带，偷看里面。
+<</if>>
+
+	<<if $worn.under_lower.type.includes("naked") and !playerChastity()>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			"<<pShe>>在<<pher>>裙子下面什么都没穿！"<<person>>大声宣布。
+		<<else>>
+			"<<pShe>>下面什么都没穿！"<<person>>大声宣布。
+		<</if>>
+		<br><br>
+	"真是个变态，"人群中有人说道。
+	<br><br>
+	<<elseif $worn.under_lower.type.includes("naked") and playerChastity()>>
+	"<<pShe>>穿着$worn.genitals.cn_name_cap！"<<person>>高声宣布。
+	<br><br>
+	"我猜<<pshe>>喜欢被锁起来，"人群中的一个人说道。"我敢打赌，这是<<pher>>一生最美好的时光。"
+	<br><br>
+	<<else>>
+	"<<pShe>>穿着$worn.under_lower.colour的$worn.under_lower.cn_name_cap！"<<person>>大声宣布。
+	<br><br>
+		<<if $player.gender_appearance isnot $worn.under_lower.gender and $worn.under_lower.gender isnot "n">>
+		"真是个变态，"人群中有人说道。"异装癖，还当着这么多人的面！"
+		<br><br>
+		<</if>>
+	<</if>>
+
+<<endevent>>
+<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+<br>
+
+<</if>>

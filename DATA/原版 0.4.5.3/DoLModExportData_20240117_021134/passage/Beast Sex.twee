@@ -1,0 +1,26 @@
+:: Beast Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastNEWinit 1 dog>>/* - Delete if beasts are already generated*/
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>/* - Delete if there aren't multiple beasts*/
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Beast Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Beast Sex]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,63 @@
+:: Forest Fox Nest Scare []
+<<effects>>
+你把你的头靠在<<beasttype>>旁边。
+<br><br>
+
+<<if $fox gte 6>>
+	你发出一声高分贝的尖叫，然后<<bhe>>跳起来，发出一声类似的尖叫作为回应。你们俩都盯着对方，尖叫着，然后<<bhe>>爬开了。
+<<elseif $harpy gte 6>>
+	你发出一声刺耳的尖叫声，然后<<bhe>>跳起来尖叫作为回应。你们俩都盯着对方，尖叫着，然后<<bhe>>爬开了。
+<<elseif $wolf gte 6>>
+	"汪。"<<bHe>>跳了起来，尾巴鼓了起来，发出一声尖厉的尖叫，然后慌忙走开了。
+<<elseif $cat gte 6>>
+	"喵。"<<bHe>>跳了起来，尾巴鼓了起来，发出一声尖厉的尖叫，然后慌忙走开了。
+<<elseif $cow gte 6>>
+	"哞。"<<bHe>>跳了起来，尾巴鼓了起来，发出一声尖厉的尖叫，然后慌忙走开了。
+<<else>>
+	"抓住你了。"<<bHe>>跳了起来，尾巴鼓了起来，发出一声尖厉的尖叫，然后慌忙走开了。
+<</if>>
+<<if $NPCList[0].traits.includes("clumsy")>>
+	<<bHe>>跌跌撞撞的后退，踩碎了一些鸟蛋。<<set $forest_nest.eggs -= 2>>
+<</if>>
+<br><br>
+
+<<if $NPCList[0].traits.includesAny("territorial", "clever")>>
+	<<bHe>>在离你不远的地方停了下来，然后转身坐下。<<bHe>>的好心情看起来完全消失了。
+	<<if $foresthunt gte 1>>
+		<<set $foresthunt += 3>>
+		<<bHe>>挺起胸膛，然后向空中发出一声更大的尖叫。
+		<br><br>
+
+		<span class="red">你感觉追捕你的生物越靠越近。</span>
+		<<if $monster is 1>>
+			<<bHe>>对你得意地笑了笑，然后飞奔而去。
+		<<else>>
+			<<bHe>>朝你汪汪叫了几声，然后飞奔而去。
+		<</if>>
+	<<else>>
+		<<saveNPC 0 "fox_grudge">>
+		<<set $fox_grudge to 1>>
+		<<if $monster is 1>>
+			"狗东西，"<<bhe>>叫道。"<span class="red">我会记住的</span>。"
+		<<else>>
+			<span class="red">小狐狸，愤怒了</span>！
+		<</if>>
+	<</if>>
+	<br><br>
+
+	你决定不再逗留。<<tending_bird_eggs $forest_nest.eggs>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<<else>>
+	<<bHe>>停下来回头看了你一眼，然后继续逃跑。<<tending_bird_eggs $forest_nest.eggs>>
+	<br><br>
+
+	<<if $forest_nest.eggs gte 1>>
+		<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+		<br>
+	<</if>>
+	<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<</if>>

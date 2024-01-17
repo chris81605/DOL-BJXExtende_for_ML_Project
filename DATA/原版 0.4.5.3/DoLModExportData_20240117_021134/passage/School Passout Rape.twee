@@ -1,0 +1,83 @@
+:: School Passout Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<generatey1>><<generatey2>><<maninit>><<person1>>
+
+	<<if random(1) is 0>>
+		<<hand_gag 0 left>>
+		"嘘，<<pshes>>醒了。"有一群<<fullGroup>>站在你旁边。你正躺在学校操场旁边的小屋里。你还没来得及发出声音，那个<<person1>><<person>>就用手捂住了你的嘴。"现在该我们了，不会有人知道的！"
+	<<else>>
+		"嘘——<<pshes>>醒了。"<<fullGroup>>站在你身边。你躺在学校操场上的小屋里。
+
+		你还没说出一个字，
+		<<person1>>
+		<<if $NPCList[0].penis isnot "none">>
+			<<person>>弯下腰，用一只手捂住你的嘴，同时
+			<<if $pronoun is "m">>
+				解开<<his>>裤子的拉链，
+			<<else>>
+				掀起<<his>>裙子，
+			<</if>>,
+			露出<<his>>勃起的肉棒。<<He>>弯下身子，把手从你的嘴上拿开，并把那玩意凑近你的脸。
+			<br><br>
+
+			还没等你反应过来，<<person2>><<person>>压在你的肚子上，这使你喘不过气。接着<<he>>又抓住你的双手阻止你反抗。
+			<<He>><<if $pronoun is "f">>耻笑<<else>>低声轻笑<</if>>。
+			"你现在哪儿也没法去，<<girl>>。"
+			<br><br>
+
+			这使你无力阻止<<person1>><<person>>拿<<his>>阴茎对着你的嘴。
+			<<set $NPCList[0].penis to "mouthentrance">><<set $NPCList[0].location.genitals = "head">>
+			<<set $mouthuse to "penis">><<set $mouthstate to "entrance">><<set $mouthtarget to 0>>
+		<<else>>
+			<<person>>弯下腰，用手捂住你的嘴。<<He>>跨坐在你的脸上，把身子压低，
+			用<<his>>膝盖抵住你的下巴，使得你抬头看向<<his>>裙子。<<He>>掀起<<his>>裙子，露出<<his>>湿润的外阴。你知道会发生什么。
+			<br><br>
+
+			还没等你反应过来，<<person2>><<person>>压在你的肚子上，这使你喘不过气。接着<<he>>又抓住你的双手阻止你反抗。
+			<<He>><<if $pronoun is "f">>耻笑<<else>>低声轻笑<</if>>。
+			"你现在哪儿也没法去，<<girl>>。"
+			<br><br>
+			<<if $facesitdisable is "f">>
+				这使你无力阻止<<person1>><<person>>，你看着<<his>>的外阴离你越来越近。
+				<<He>>把手从你的嘴上拿开，只有这样<<he>>才能在跨坐在你头上时用<<his>>潮湿的外阴对着你的脸。
+				<<set $NPCList[0].vagina to "facesit">><<set $NPCList[_n].location.genitals = "head">>
+				<<set $mouthuse to "facesit">><<set $mouthstate to "vagina">><<set $mouthtarget to 0>>
+			<<else>>
+				这使你无力阻止<<person1>><<person>>拿<<his>>外阴对着你的嘴。
+				<<set $NPCList[0].vagina to "mouth">><<set $NPCList[0].location.genitals to "head">>
+				<<set $mouthuse to "othervagina">><<set $mouthstate to "othervagina">><<set $mouthtarget to 0>>
+			<</if>>
+		<</if>>
+
+		<<if random(1) is 0>>
+			<<set $NPCList[1].lefthand to "arms">>
+		<<else>>
+			<<set $NPCList[1].righthand to "arms">>
+		<</if>>
+		<<set $leftarm to "grappled">><<set $rightarm to "grappled">>
+		<<disablearms>><<violence 2>><<bruise leftarm>><<bruise rightarm>>
+		<<set $position to "missionary">>
+	<</if>>
+	<br><br>
+	<<enableSchoolRescue "Whitney" "Leighton">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|School Passout Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Passout Rape]]>><</link>></span><<nexttext>>
+<</if>>

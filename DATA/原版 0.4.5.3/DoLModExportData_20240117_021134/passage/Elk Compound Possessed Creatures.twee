@@ -1,0 +1,85 @@
+:: Elk Compound Possessed Creatures []
+<<effects>>
+<<world_corruption "soft" -3>>
+<<if $possessed and $compoundWraith is "willing">>
+	<<wraithExorcise true true>>
+	你停下脚步，感到胸口一阵紧绷。一只苍白的手臂伸了出来，接着又是另一只。那苍白的身影从你的身体里面钻了出来，让你一时摇摇晃晃。
+	<br><br>
+<</if>>
+
+<<if $compoundWraith is "willing">>
+	那苍白的身影打了个响指，每个金属箱子都扭曲变形了。一个箱子被撕裂开来，一种几乎是白色、近乎半透明的物质流了出来。它起伏着，从箱子里爬出来，摇摇摆摆地向那个身影移动着。<span class="gold">是一团苍白史莱姆。</span>
+	<br><br>
+
+	那苍白的身影弯下腰，轻轻地拾起它，轻抚着。越来越多的箱子被破裂开来，显露出各种各样的生物，全都苍白如同象牙。有史莱姆、长长的触手、被卷须覆盖的生物，以及其他形态各异的生物。
+	<<if $wraith.offspring is "sold">>
+		<span class="green">你甚至看到了被你卖掉的肤色苍白的孩子。</span>
+	<</if>>
+	他们都聚集在那个苍白的身影周围。祂的肩膀下垂，如释重负。
+	<br>
+	有一只苍白的、皮革般的多肢生物，大概有半个你那么高，飞快地朝你爬过来。你本能地举起双臂自卫，但它并没有攻击你，反而轻轻地蹭着你的身体，然后吱吱叫着跳开了。
+	<<stress -6>><<lstress>>
+	<br><br>
+
+	最后，苍白的身影放下了史莱姆，挥了挥手。一个漩涡状的紫色圆盘出现在地板上，生物们毫无畏惧地跳了进去。一只手从背后轻轻地落在你的肩上，你知道它属于那个苍白的人影，尽管祂就站在你面前。
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">你想忏悔。</span>"
+	<<else>>
+		"<span class="wraith">你有着一颗慈悲的心。</span>"
+	<</if>>
+	<br>
+	<<if $museumAntiques.antiques.antiquehourglass isnot "found" and $museumAntiques.antiques.antiquehourglass isnot "talk" and $museumAntiques.antiques.antiquehourglass isnot "museum">>
+		<<set $antiquemoney += 1400>><<museumAntiqueStatus "antiquehourglass" "found">>
+		祂把手伸进某一个箱子，这里似乎根本没有装任何生物，然后祂取出了一个用一种无法辨认的金属制成的华丽沙漏，边缘上刻有各种各样的铭文。博物馆馆长可能会对它感兴趣。"<span class="wraith">时光已经流逝，但他们也不应该承受这样的命运。紧紧抓住它，别让它从你手中溜走。</span>"
+	<<else>>
+		<<set $blackmoney += 1000>>
+		祂用触手从附近的墙上取下几个装置，递给了你。黑市上的某些人可能会对这感兴趣。"<span class="wraith">这是给你的谢礼，顺便也能给他们添点堵。</span>"
+	<</if>>
+	<<npcincr "Ivory Wraith" love 3>><<gglove>><<lobsession 1>>
+<<else>>
+	你打了一个响指，每个金属箱子都扭曲变形了。一个箱子被撕裂开来，一个白色、几乎半透明的物质流了出来。它起伏着，从箱子里爬出，缓慢移向开阔的地方。<span class="gold">是一团苍白史莱姆。</span>
+	<br><br>
+
+	它似乎犹豫不决，但在你的眼睛闪现出一抹<<wraithEyes>>光后，它便慢慢向你靠近。你轻轻地拾起它，轻抚着。越来越多的箱子被破裂开来，显露出各种各样的生物，全都苍白如同象牙。有史莱姆、长长的触手、被卷须覆盖的生物，以及其他形态各异的生物。
+	<<if $wraith.offspring is "sold">>
+		<span class="green">你甚至看到了被你卖掉的肤色苍白的孩子。</span>
+	<</if>>
+	它们都围着你。你的肩膀终于放松，如释重负。
+	<br>
+	有一只苍白的、皮革般的多肢生物，大概有半个你那么高，飞快地朝你爬过来。你心里一阵犯紧张，但它并没有攻击你，反而轻轻地蹭着你的身体，然后吱吱叫着跳开了。
+	<br><br>
+
+	最后，你放下史莱姆，挥了挥手。一个漩涡状的紫色圆盘出现在地板上，生物们毫无畏惧地跳了进去。
+	<br><br>
+
+	<<if $compoundWraith is "accepted">>
+		<<if $wraith.state is "haunt">>
+			"<span class="wraith">盗墓贼。</span>"
+		<<else>>
+			"<span class="wraith">屠夫。</span>"
+		<</if>>
+		祂通过你的嘴说话，但这一次，祂听起来不像往常那样充满愤怒。"<span class="wraith">赎罪罢，这只是开始。有朝一日，你会不仅仅是一个工具。</span>"
+		<br>
+		<<if $museumAntiques.antiques.antiquehourglass isnot "found" and $museumAntiques.antiques.antiquehourglass isnot "talk" and $museumAntiques.antiques.antiquehourglass isnot "museum">>
+			<<set $antiquemoney += 1400>><<museumAntiqueStatus "antiquehourglass" "found">>
+			祂把手伸进某一个箱子，这里似乎根本没有装任何生物，然后祂拿出了一个用一种无法辨认的金属制成的华丽沙漏，边缘上刻有各种各样的铭文。博物馆馆长可能会对它很感兴趣。"<span class="wraith">我相信这个在你的手中比在他们的手中更安全。紧紧抓住它，别让它从你手中溜走。</span>"
+		<<else>>
+			<<set $blackmoney += 1000>>
+			祂用触手从附近的墙上取下几个装置，递给了你。黑市上的某些人可能会对这感兴趣。"<span class="wraith">这是给你的谢礼，顺便也能给他们添点堵。</span>"
+		<</if>>
+		<<npcincr "Ivory Wraith" love 1>><<glove>><<if $wraith.offspring is "sold">><<lobsession 1>><<else>><<lobsession 3>><</if>>
+	<</if>>
+<</if>>
+<<if $wraith.offspring is "sold">>
+	<<unset $wraithAngerCooldown>>
+	<<set $wraith.offspring to "">>
+<</if>>
+<<set $wraithCompoundCooldown to 30>>
+<<unset $wraithCompoundChance>>
+<br><br>
+
+<<if $possessed>>
+	<span class="nextLink"><<link [[继续|Elk Compound Possessed Creatures 2]]>><</link>></span><<nexttext>>
+<<else>>
+	<<link [[继续|Elk Compound Possessed Creatures 2]]>><</link>><<nexttext>>
+<</if>>

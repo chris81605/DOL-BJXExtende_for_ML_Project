@@ -1,0 +1,49 @@
+:: Olive Book 1 []
+<<if $per_npc.pinch>>
+	<<loadNPC 0 pinch>>
+	<<person1>>
+<<else>>
+	<<generate1>><<person1>>
+	<<if $NPCList[0].gender is "m">>
+		<<set $NPCList[0].penisdesc to "细小阴茎">>
+		<<set $NPCList[0].penissize to 1>>
+	<</if>>
+	<<set $NPCList[0].fullDescription to "林奇" + ($NPCList[0].pronoun is "m" ? "先生" : "女士")>>
+	<<npcClothesName $NPCList[0] "robinGiftChristmas">>
+	<<saveNPC 0 pinch>>
+<</if>>
+
+<<if $oliveExitPassage is "School Library">>
+	你从书篮里拿出那本橄榄色封皮的书，上面的书名用白色字体写着："《林奇<<if $pronoun is "m">>先生<<else>>女士<</if>>与圣诞节》。"
+<<else>>
+	你拿着那本橄榄色封皮的书躺在床上，上面的书名用白色字体写着： "《林奇<<if $pronoun is "m">>先生<<else>>女士<</if>>与圣诞节》。"
+<</if>>
+<br><br>
+
+<<if $englishtrait gte 3>>
+	你对这本书非常熟悉，这是一个十分经典的圣诞故事，它有超过半个世纪的历史。它向广大民众传授了传统节日的价值。你不禁注意到，这个版本与你听说过的其他版本相比似乎有所不同。
+	<br><br>
+	<<link [[阅读 (0:20)|Olive Book 2]]>><<pass 20>><<stress -6>><<englishskill>><</link>><<genglish>><<lstress>>
+	<br>
+<<elseif $englishtrait gte 2>>
+	你很了解这本书。谁会不知道这本书呢？毕竟这是一个经典的圣诞故事，你不禁注意到，与你听说过的其他版本相比，这个版本似乎有所不同。
+	<br><br>
+	<<link [[阅读 (0:20)|Olive Book 2]]>><<pass 20>><<stress -6>><<englishskill>><</link>><<genglish>><<lstress>>
+	<br>
+<<elseif $englishtrait gte 1>>
+	你知道这本书，它讲述了一个经典的圣诞故事。
+	<br><br>
+	<<link [[阅读 (0:20)|Olive Book 2]]>><<pass 20>><<englishskill>><</link>><<genglish>>
+	<br>
+<<elseif $englishtrait gte 0>>
+	这个书名听起来很熟悉，但你不太清楚它到底讲了些什么。
+	<br><br>
+	<<link [[阅读 (0:20)|Olive Book 2]]>><<pass 20>><<englishskill>><</link>><<genglish>>
+	<br>
+<<else>>
+	你随意翻开书的某一页，它看起来就像你每年都会听到的那个愚蠢的圣诞故事，你对此完全没有兴趣，然后你便将它放回了原处。
+	<br><br>
+<</if>>
+<<link [[把书收起来|$oliveExitPassage]]>><<unset $oliveExitPassage>><<pinchEnd>><</link>>
+
+/*indev scarlet book event. English: 300-399*/

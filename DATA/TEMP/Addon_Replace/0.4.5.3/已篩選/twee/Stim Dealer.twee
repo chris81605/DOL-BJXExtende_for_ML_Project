@@ -1,0 +1,27 @@
+:: Stim Dealer []
+<<effects>>
+
+<<generate1>><<person1>>你走近潜伏在阴影中的身影。你在逐渐靠近后，看见一个穿着厚重外套的<<person>>。
+<br><br>
+
+<<link [[求购兴奋剂|Stim Dealer Buy]]>><</link>>
+<br>
+<<if $mathsstimstolen is 0>>
+<<set $skulduggerydifficulty to 600>>
+<<elseif $mathsstimstolen is 1>>
+<<set $skulduggerydifficulty to 800>>
+<<elseif $mathsstimstolen is 2>>
+<<set $skulduggerydifficulty to 1000>>
+<<else>>
+<<set $skulduggerydifficulty to 1200>>
+<</if>>
+/* 北极星模组 */
+<<link [[偷兴奋剂|Stim Dealer Steal]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+/* 北极星 */
+<br>
+	<<if $hallucinations gte 1>>
+	<<link [[故意偷窃被抓|Stim Dealer Steal]]>><<set $skulduggerydifficulty to 10000>><<trauma -60>><</link>><<dangerousText>><<llltrauma>>
+	<br>
+	<</if>>
+<<link [[离开|Oxford Street]]>><<endevent>><</link>>
+<br>

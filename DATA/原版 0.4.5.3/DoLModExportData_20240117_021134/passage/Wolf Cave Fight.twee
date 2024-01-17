@@ -1,0 +1,43 @@
+:: Wolf Cave Fight []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	你稍微调整了下姿势，好让发情的<<beasttype>>更好‘办事’。
+	<<deviancy1>><<set $enemytrust -= 20>>
+		<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red">它们忙着做自己的事，无法帮助你。</span>'>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Wolf Cave Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Cave Fight]]>><</link>></span><<nexttext>>
+<</if>>

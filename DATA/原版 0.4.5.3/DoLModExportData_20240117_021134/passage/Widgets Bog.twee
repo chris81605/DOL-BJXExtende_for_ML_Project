@@ -1,0 +1,215 @@
+:: Widgets Bog [widget]
+<<widget "passoutbog">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<set $bogdepth to 0>><<set $bogwater to 0>>
+		<<pregnancyWatersBrokenPassout "bog">>
+	<<else>>
+		你把自己逼得太紧了。
+		<<if $bogwater gte 1>>
+			你勉强地靠在了树上，这才避免落入水中。
+		<</if>>
+		<br><br>
+
+		<<passout>>
+		<<set $danger to random(1, 10000)>>
+		<<if $danger gte (9900 - $allure)>>
+			<<if $rng gte 71 and $plantdisable is "f" and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+				<<link [[你眼前一黑……|Bog Plant Tentacle Passout]]>><</link>>
+			<<else>>
+				<<link [[你眼前一黑……|Bog Passout]]>><</link>>
+			<</if>>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<</if>>
+	<<pass 1 hour>>
+	<<trauma 6>><<set $stress -= 2000>>
+<</widget>>
+
+<<widget "eventbog">>
+	<<cleareventpool>>
+	<<if $bogwater gte 1>>
+		<<addinlineevent "bog_water_lizard">>
+			水面开始翻涌，当你注意到时，一个黑影突然从水中跃出，来不及躲闪的你被溅了一身的水！
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				<<beastNEWinit 1 lizard>>
+				一只满脸都是鳞片的<<beasttype>>出现在了你的眼前，<<bHe>>猛的向你扑来并试图将你拉入水底。
+				<br><br>
+
+				<<link [[继续|Bog Lizard Rape]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<else>>
+				一只大蜥蜴用嘴咬住了你，虽然你设法挣脱了，但依旧受到了一点小伤。<<beastescape>>
+				<br><br>
+
+				你将自己拉回了到了道路上。
+				<br><br>
+
+				<<link [[继续|Bog]]>><<set $bogwater to 0>><<set $eventskip to 1>><</link>>
+				<br>
+			<</if>>
+		<</addinlineevent>>
+		<<addinlineevent "bog_water_tentacles">>
+			<<if $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+				有什么东西从水底中抓住你的脚踝。藤蔓从树上滑下並穿过水面。
+				<br><br>
+
+				<<link [[挣扎|Bog Tentacles]]>><<set $molestationstart to 1>><</link>>
+				<br>
+				<<if $deviancy gte 75>>
+					<<link [[拉近距离|Bog Tentacles]]>><<set $molestationstart to 2>><</link>><<deviant5>>
+				<</if>>
+			<<else>>
+				有什么东西从水底下抓住了你的脚踝。你试图推开它，但很快就被拖下水。
+				<br><br>
+
+				你继续挣扎，最终挣脱了它的束缚。你趟着水逃走了。<<stress 12>><<ggstress>><<trauma 6>><<ggtrauma>>
+				<br><br>
+
+				<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+				<br>
+			<</if>>
+		<</addinlineevent>>
+		<<addinlineevent "bog_water_noise">>
+			当你涉水而行时，你听到远处有轻微的水花声。你试图寻找，但却什么都没看见到。在走神的时候你撞上了一堆悬挂着的藤蔓，一时间惊慌失措起来。<<stress 12>><<ggstress>>
+			<br><br>
+			
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<addinlineevent "bog_water_tangle">>
+			当你涉水而行时，有什么东西卡住了你的脚。你拉了拉，但没有什么效果。当你试图挣脱时，另一只脚也被缠住了。<<stress 6>><<gstress>>
+			<br><br>
+
+			虽然花费了一些时间，但你最终还是成功地解放了自己。<<pass 10>>
+			<br><br>
+
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<if $parasitedisable is "f" and ($parasite.tummy.name is undefined or $parasite.bottom.name is undefined)>>
+			<<addinlineevent "bog_water_parasite" 0.33>>
+				<<if $parasite.tummy.name is undefined>>
+					<<parasite tummy urchin>>
+					你感觉有东西粘在你的胃上。
+				<<else>>
+					<<parasite bottom urchin>>
+					你感觉有东西粘在你的下身上。
+				<</if>>
+				<span class="lewd">它开始发热。</span>你试图把它拉下来，但它一动不动。
+				<br><br>
+
+				<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+				<br>
+			<</addinlineevent>>
+		<</if>>
+	<<else>>
+		<<addinlineevent "bog_lizard">>
+			水面开始翻涌，你听到巨大的水花声，一个庞然大物跳上了走道。 
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				<<beastNEWinit 1 lizard>>
+				一只长满鳞片的 <<beasttype>>正饥渴地盯着你。
+				<br><br>
+
+				<<link [[让自己看起来更高大凶猛|Bog Lizard Stand]]>><</link>><<physiquedifficulty 6000 16000>>
+				<br>
+				<<link [[跑|Bog Lizard Run]]>><</link>><<athleticsdifficulty>>
+				<br>
+			<<else>>
+				你逃走了，但并非毫发无伤。<<beastescape>>
+				<br><br>
+
+				<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+				<br>
+			<</if>>
+		<</addinlineevent>>
+		<<addinlineevent "bog_noise">>
+			走着走着，你听到身后不远处有轻微的水花声。你试图寻找，但却什么都没看见到。在走神的时候你撞上了一堆悬挂着的藤蔓，一时间惊慌失措起来。<<stress 12>><<ggstress>>
+			<br><br>
+			
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<addinlineevent "bog_gap">>
+			你来到了一段断裂的走道。虽然距离太远而无法跳过对面，但有一根粗大的藤蔓从缺口处垂下来。
+			<br><br>
+
+			<<link [[荡过去|Bog Swing]]>><</link>><<athleticsdifficulty>>
+			<br>
+			<<link [[游泳|Bog]]>><<set $bogwater to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<if $hallucinations gte 1>>
+			<<addinlineevent "bog_lost">>
+				
+				前面的路有点不对劲。当你走近时，你会发现木走道突然戛然而止。看起来木走道并没有断裂。像是自然的终点，前方除了水之外什么也没有。
+				<br><br>
+
+				你转过身来。<span class="red">走道向多个方向延伸。</span>你甚至分不清自己是从哪个方向来的。
+				<br><br>
+
+				<<if $boglost gte 10>>
+					<<link [[坚持走同一条路 (0:05)|Bog Lost Stay]]>><<pass 5>><</link>>
+					<br>
+				<</if>>
+				<<link [[朝第一条路走 (0:15)|Bog Lost]]>><<set $boglost to 0>><<pass 15>><<set $phase to 1>><</link>>
+				<br>
+				<<link [[朝第二条路走 (0:15)|Bog Lost]]>><<set $boglost to 0>><<pass 15>><<set $phase to 2>><</link>>
+				<br>
+				<<link [[朝第三条路走 (0:15)|Bog Lost]]>><<set $boglost to 0>><<pass 15>><<set $phase to 3>><</link>>
+				<br>
+				<<link [[朝第四条路走 (0:15)|Bog Lost]]>><<set $boglost to 0>><<pass 15>><<set $phase to 4>><</link>>
+				<br>
+			<</addinlineevent>>
+		<</if>>
+	<</if>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "eventbogsafe">>
+	<<cleareventpool>>
+	<<addinlineevent "event_ambient">>
+		<<eventAmbient>>
+		<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<if $bogwater gte 1>>
+		<<addinlineevent "safebog_water_1">>
+			水面下有什么东西擦过你的腿，然后飞快地离去了。<<stress 6>><<gstress>>
+			<br><br>
+
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<addinlineevent "safebog_water_2">>
+			一只青蛙坐在你面前的荷叶上。它好奇地看着你，然后呱呱叫了起来。
+			<br><br>
+			
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>	
+	<<else>>
+		<<addinlineevent "safebog_spores">>
+			前方一棵树上覆盖着一簇奇怪的菌荚。当你经过时，其中一个释放出淡淡的粉红色雾气。你感觉很奇怪。<<hallucinogen 20>><<ghallucinogens>>
+			<br><br>
+
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<addinlineevent "safebog_splash">>
+			一阵巨大的水花声从你的左侧传来。你望过去，却只看到水波荡漾。<<stress 6>><<gstress>>
+			<br><br>
+
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>
+		<<addinlineevent "safebog_walk">>
+			木头小路使旅程变轻松了。
+			<br><br>
+
+			<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</addinlineevent>>	
+	<</if>>
+	<<runeventpool>>
+<</widget>>

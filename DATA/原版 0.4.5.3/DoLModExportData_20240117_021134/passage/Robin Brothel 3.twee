@@ -1,0 +1,98 @@
+:: Robin Brothel 3 []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $phase is 0>>
+	罗宾微笑起来。"谢谢。"
+	<<if $exposed gte 1>>
+		<<towelup>>
+		<<He>>拉着你的手带你走出大楼，一起到了附近的一个公交站，在你们离开前罗宾坚持让你先去更衣室换了身衣服。
+	<<else>>
+		然后<<he>>拉着你的手带你走出大楼，来到了附近的公交站。
+	<</if>>
+	你一边和罗宾聊天一边等待。很明显，<<hes>>试图忽略你刚才正在做的事情。
+	<br><br>
+
+	<<if Time.dayState is "night">>
+		<<generate2>><<generate3>>
+		一辆公共汽车很快停了下来，你和罗宾坐在后面。你朝<<him>>瞥了一眼。
+		<<He>>看起来很累。你因为让<<him>>这么晚还在外面而感到内疚。<<stress 2>><<gstress>>
+		<br><br>
+
+		整段车程平安无事，直到坐在你前面的<<person2>><<person>>突然从座位上转过身来，<<he>>咧嘴笑着。
+		<br>
+		"哦，你可真是个可爱的小家伙，"<<he>>低声说道，"你应该知道不能在晚上乘公共汽车。"
+		<br>
+		罗宾动了动，皱起了眉头。
+		<<if _robin.trauma gte 50>>
+			<<He>>紧紧地抱着你，尽最大努力保护你。
+		<<else>>
+			"离<<phim>>远点儿，否则我就要报警了。"
+		<</if>>
+		<br><br>
+
+		<<personsimple>>笑了笑，似乎觉得很有趣，然后看了看<<person2>><<him>>旁边的<<person3>><<person>>，对方耸耸肩。
+		<<person>>向后看，做出一副放弃的样子。
+		<br>
+		"好吧，你赢了。今晚我可不想同时对付两个麻烦。"
+		<br>
+		<<endevent>>
+		<<npc Robin>><<person1>>
+		罗宾的表情依然紧张，<<he>>把手伸进<<his>>的口袋里想拿出什么。
+		但最终，<<he>>还是决定不使用它。就算你尽自己最大的努力，你也无法想象那到底是什么。
+		<br><br>
+
+		剩下的车程顺利通过了。
+	<<else>>
+		回家的路上风平浪静。罗宾把头靠在你的肩上，手仍然和你的手缠在一起。
+		<<stress -2>><<trauma -2>><<lstress>><<ltrauma>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Robin Brothel Home]]>><</link>>
+	<br>
+<<elseif $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		你盯着自己的脚。"我需要这样做。如果我不的话，贝利就会……"你的声音逐渐变得微弱。
+	<<elseif $speech_attitude is "bratty">>
+		你转过身背对罗宾。你做不到看着<<him>>的眼睛。"这就是这个世界的规则。"
+	<<else>>
+		你摇摇头，"如果我不付钱，贝利会让我们两个人都变成我现在的境地。我很抱歉，罗宾……"
+	<</if>>
+	<br><br>
+	罗宾难以信服地看着你。
+	<<if _robin.trauma gte 50>>
+		"但、但是……拜托，我们可以一起努力。我们可以另想办法。一个不会伤害我们的办法……"
+		<<He>>眼睛低垂，<<his>>的手在颤抖。"只是，请一定要回家……"<<His>>的声音变成了微弱的呜咽。
+	<<else>>
+		"我不想看到你糟蹋自己，即使这是为了我们好。"
+		<<He>>抓住你的肩膀。<<His>>的手在颤抖。"求你了，和我回家吧！"
+	<</if>>
+	<br><br>
+
+	从心底里，你并不确定自己是不是真的想留在这里。此刻如果你想要留下，也许你必须表现得更坚定。
+	<br><br>
+
+	<<link [[和罗宾离开|Robin Brothel 3]]>><<set $phase to 0>><<npcincr Robin love 3>><<npcincr Robin trauma -2>><</link>><<glove>><<lrtrauma>>
+	<br>
+	<<link [[坚持留下来|Robin Brothel 3]]>><<set $phase to 2>><<npcincr Robin love -10>><<npcincr Robin dom -20>><<npcincr Robin trauma 4>><</link>><<lllove>><<llldom>><<grtrauma true>>
+	<br>
+<<elseif $phase is 2>>
+	尽管罗宾对你在这里工作感到很绝望，但你并不打算让步。<<He>>陷入沉默，挫败地点点头。
+	眼泪从<<his>>的脸颊上滚下来，<<he>>看着你，希望你能重新考虑考虑。但你没有理会。
+	<br><br>
+	<<if _robin.trauma gte 50>>
+		"对不起，打扰你了……"
+	<<else>>
+		"好吧，我不打扰你了。只是……"
+	<</if>>
+	罗宾的声音结结巴巴。"请小心。"
+	<br><br>
+
+	在离开房间之前，罗宾又用含泪的眼睛看了你一眼，门在身后轻轻地关上了。
+	<<stress 6>><<trauma 6>><<gstress>><<gtrauma>><<npcincr Robin trauma 4>><<grtrauma true>>
+	<br><br>
+
+	<<link [[继续|Brothel]]>><<endevent>><</link>>
+	<br>
+<</if>>

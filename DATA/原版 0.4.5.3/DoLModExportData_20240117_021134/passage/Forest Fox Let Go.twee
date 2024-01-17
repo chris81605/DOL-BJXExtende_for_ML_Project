@@ -1,0 +1,76 @@
+:: Forest Fox Let Go []
+<<effects>>
+你让<<beasttype>>离开。
+
+<<if $NPCList[0].traits.includes("territorial")>>
+	<<if $phase is 2>>
+		<<if $monster is 1>>
+			<<bHe>>待在原地没动。<<bHes>>在盯着你……是因为渴望吗？
+			<br><br>
+
+			你还没反应过来，<<bhe>>就扑向你了。你们两个都摔倒了，直到<<bhes>>压到你身上，双腿横跨在你身侧。"你以为你可以……让我兴奋起来……"<<bhis>>将<<bhis>>的手放在你的胸前揉捏了起来。
+			<br><br>
+
+			"……而不坚持到底？"
+			<br><br>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<elseif $bestialitydisable is "f">>
+			<span class="red"><<bHe>>抓住机会向你猛扑过去</span>。看来你已经把<<bhim>>的欲望挑起来了。<<bHe>>把你推倒，把你按在地上。
+			<br><br>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<else>>
+			<span class="red"><<bHe>>抓住机会向你扑来</span>。你勉强避开了<<bhis>>的啃咬，你成功逃脱了。<<beastescape>>
+			<br><br>
+
+			<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $monster is 1>>
+			<<bHe>>困惑地盯着你看了一会儿，然后匆匆逃离了你。<<bhe>>对你大吼："我还期待更多呢。"
+		<<else>>
+			<<bHe>>从你身边逃离，头也不回。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<</if>>
+<<elseif $NPCList[0].traits.includes("friendly")>>
+	<<bHis>>的耳朵愉快地晃动着。
+	<<if $monster is 1>>
+		"谢谢你<<if $phase is 2>>陪我玩和<</if>>抚摸我，"<<bhe>>说道。"我希望所有的人都像你一样。"
+	<</if>>
+	<<bHe>>用鼻子蹭了蹭你，然后逃进森林。<<stress -3>><<lstress>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<<elseif $NPCList[0].traits.includes("clumsy")>>
+	<<bHe>>笨拙地跪在地上。
+	<br><br>
+
+	<<if $monster is 1>>
+		"你真……<<if $phase is 2>>好<<else>>奇怪<</if>>。"
+	<</if>>
+	<<if $phase is 2>>
+		<<bHe>>用鼻子蹭了蹭你，然后逃进森林。<<stress -3>><<lstress>>
+	<<else>>
+		<<bHe>>跑到森林里去了。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<<else>>
+	<<bHe>>犹豫地站起来，然后迅速逃离你。
+	<<bHe>>在一段距离外停下来，回头看了看你，然后继续跑。
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<</if>>

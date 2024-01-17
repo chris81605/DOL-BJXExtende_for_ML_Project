@@ -1,0 +1,46 @@
+:: Pound Work Sweep []
+<<effects>>
+
+你拿扫帚把笼子里的毛扫干净。让它们整齐地堆在一起，然后把它们扫进簸箕里。
+<br><br>
+<<beastNEWinit 1 dog>>
+<<if random(1, 2) is 2>>
+	扫帚被一只<<beasttype>>用<<bhis>>牙齿咬住，卡住了。
+	<br><br>
+
+	<<link [[斥责|Pound Work Sweep Scold]]>><</link>><<tendingdifficulty 1 200>>
+	<br>
+	<<link [[搏斗|Pound Work Sweep Wrestle]]>><</link>><<physiquedifficulty 1 6000>>
+	<br>
+<<else>>
+	<<endevent>><<generate1>><<person1>>
+	一个<<person>>在你经过时抓住了把手，阻止了你。<<He>>靠近你，把手放在你的<<bottom>>上。<<gstress>><<stress 6>>
+	<br><br>
+	"让我来教你如何正确地扫地，"<<he>>说着，走近了一步。
+	<<if $NPCList[0].penissize gte 3>>
+		你感受到<<his>><<print $NPCList[0].penisdesc>>紧贴在你身上。
+	<</if>>
+	<br><br>
+
+	<<if $anxiety gte 2>>
+		<span class="red">恐慌袭来，</span>你向<<person>>挥拳。你听到一声痛苦的呼喊，看到一道深红色的闪光，同时<<he>>松开了手。你逃到院子里的一个没人的地方。休息着，直到你的呼吸平静下来。你认为你没有把<<him>>伤得太重。<<crime "assault">><<crimeUp 10 "assault">>
+		<br><br>
+
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<<elseif $anxiety gte 1>>
+		<span class="red">恐慌袭上心头，</span>你被恐惧所束缚，无法移动。<<person>>将此视为默许。<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<<link [[继续|Pound Work Sweep Go]]>><</link>><<if $tending lt 200>><<gtending>><</if>>
+		<br>
+	<<else>>
+		<<link [[顺其自然|Pound Work Sweep Go]]>><<trauma 6>><</link>><<if $tending lt 200>><<gtending>><</if>>
+		<br>
+		<<link [[推搡|Pound Work Sweep Shove]]>><<pound_status 1>><<stress 6>><</link>><<gstress>><<gpound_status>>
+		<br>
+	<</if>>
+<</if>>

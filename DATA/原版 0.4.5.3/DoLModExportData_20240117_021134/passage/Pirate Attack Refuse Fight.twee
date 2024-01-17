@@ -1,0 +1,32 @@
+:: Pirate Attack Refuse Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+    <<generateRole 0 0 "pirate">><<person1>>
+    <<generateRole 1 0 "pirate">>
+    <<generateRole 2 0 "pirate">>
+    <<generateRole 3 0 "pirate">>
+    <<generateRole 4 0 "pirate">>
+    <<generateRole 5 0 "pirate">>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Pirate Attack Refuse Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Pirate Attack Refuse Fight]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,60 @@
+:: Underground Robin Escape Stalk End []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<run statusCheck("Robin")>>
+
+<<person1>>
+<<if $stalk_end is "confront">>
+	<<if $feetaction is "confront">>
+		<<if $speech_attitude is "meek">>
+			"我能做到，”你安慰自己。“罗宾，注意安全，好吗？”你转身面对追赶你的人。
+		<<elseif $speech_attitude is "bratty">>
+			"继续！我会赶上来的。”你对罗宾笑了笑，然后转向追赶你的人。
+		<<else>>
+			"罗宾，继续跑，不要停，就这样跑回家吧！”面对追赶的人你说。
+		<</if>>
+	<<else>>
+		<<if !$stalk_assess>>一双手从后面抓住了你。<<else>><<person1>><<person>>的手从后面抓住了你。<</if>>
+		<br><br>
+
+		你让罗宾继续跑。
+	<</if>>
+	罗宾犹豫地点了点头，然后消失在树林中。
+	<br><br>
+
+	罗宾安全了，你松了一口气。
+	<br><br>
+
+	<<saveNPC 0 dungeon_1>><<saveNPC 1 dungeon_2>><<saveNPC 2 dungeon_3>>
+	<<endcombat>>
+	<<loadNPC 0 dungeon_1>><<loadNPC 1 dungeon_2>><<loadNPC 2 dungeon_3>>
+	<<clearNPC dungeon_1>><<clearNPC dungeon_2>><<clearNPC dungeon_3>>
+	<<run delete $NPCList[0].state>><<run delete $NPCList[1].state>><<run delete $NPCList[2].state>>
+
+	当<<person2>><<person>>和<<person3>><<person>>走到<<him>>旁边时，<<person1>><<person>>偏了偏头。“<<nnpc_his "Robin">>跑了也无所谓，你就连着<<nnpc_him "Robin">>的那份一起受着吧！”他们向你逼近。
+	<br><br>
+
+	<<link [[继续|Underground Robin Escape Fight]]>><<set $fightstart to 1>><</link>>
+<<elseif $stalk_end is "hide">>
+	你从藏身之处出来。<<if $stalk_assess>><<person1>><<person>><<else>>跟踪你的人<</if>>无处可寻。<<tearful>>你转向罗宾。<<nnpc_He "Robin">>紧紧地拥抱你。
+	<br><br>
+
+	罗宾往外偷看。“他们走了吗？"
+	<br><br>
+
+	你点点头，抓住罗宾的手，继续穿过森林。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Underground Robin Escape Orphanage]]>><<set $phase to 1>><</link>>
+<<else>>
+	你们成功逃掉了，罗宾喘了口气。"我还想要……拥抱，"<<nnpc_he "Robin">>喘息着。<<tearful>>你把<<nnpc_him "Robin">>抱进了怀中，罗宾也紧紧回应了你。
+	<br><br>
+
+	罗宾靠在你身上几分钟后，你握住<<nnpc_his "Robin">>的手，带着<<nnpc_him "Robin">>回了孤儿院。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Underground Robin Escape Orphanage]]>><<set $phase to 1>><</link>>
+<</if>>

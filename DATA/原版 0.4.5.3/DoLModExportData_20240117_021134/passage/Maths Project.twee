@@ -1,0 +1,48 @@
+:: Maths Project []
+<<effects>>
+<<set $mathschance = Math.clamp($mathschance, 0, 100)>>
+<<if $mathschance is 0>>
+	数学竞赛的册子就在你面前的桌子上。你面对的这项任务是艰巨的。你有<span class="red"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<elseif $mathschance lte 20>>
+	数学竞赛的册子就在你面前的桌子上，而你面对的这项任务已经取得了一点点的进步。你有<span class="pink"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<elseif $mathschance lte 40>>
+	你的数学竞赛基础方案就在你面前的桌子上。你有<span class="purple"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<elseif $mathschance lte 60>>
+	你的数学竞赛方案就在你面前的桌子上。还有很大的改进空间。你有<span class="blue"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<elseif $mathschance lte 80>>
+	你的数学竞赛方案就在你面前的桌子上。它还不完整，但它代表着令人印象深刻的努力。你有<span class="lblue"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<elseif $mathschance lte 99>>
+	你的数学竞赛方案就在你面前的桌子上。你知道它是错的，但它同样能令人感到钦佩。你有<span class="teal"><<print $mathschance>>%</span>的机会来赢得比赛。
+<<else>>
+	你的数学竞赛方案就在你面前的桌子上。你本不该能解开它的，但你很自信你做到了。你有<span class="green"><<print $mathschance>>%</span>的机会来赢得比赛。
+<</if>>
+
+<br><br>
+你有<span class="gold">$mathsinfo</span>的理解。
+<br>
+<<if $stimdealerknown is 1>>
+	你有<span class="gold">$mathsstim</span>支兴奋剂。
+	<br>
+<</if>>
+<br>
+<<set _chair to Furniture.get('chair')>>
+<<icon "projectMaths.png">><<link [[制定解法 (2:00)|Maths Project Work]]>><<if $location is "home" and _chair.type.includes("comfy")>><<set $mathschance += 5>><<else>><<set $mathschance += 1>><</if>><<mathsskill 2>><<pass 120>><<stress 12>><</link>><<gstress>><<gmaths>>
+<br>
+<<if $mathsstim gte 1 and playerIsPregnant() and playerAwareTheyArePregnant()>>
+	<span class="blue">你知道自己怀有身孕，不能服用兴奋剂。</span>
+<<elseif $mathsstim gte 1>>
+	<<pillicon "stimulant">><<link [[使用兴奋剂 (2:00)|Maths Project Stim]]>><<if $location is "home" and _chair.type.includes("comfy")>><<set $mathschance += 20>><<else>><<set $mathschance += 16>><</if>><<set $mathsstim -= 1>><<set $mathsstimused += 1>><<mathsskill 40>><<pass 120>><</link>><<gggmaths>>
+	<br>
+<</if>>
+<<if $mathsinfo gte 1>>
+	<<investigateicon>><<link [[运用一条数学见解 (2:00)|Maths Project Work]]>><<set $mathsinfo -= 1>><<if $location is "home" and _chair.type.includes("comfy")>><<set $mathschance += 12>><<else>><<set $mathschance += 8>><</if>><<mathsskill 40>><<pass 120>><</link>><<ggmaths>>
+	<br>
+<</if>>
+<br>
+<<if $location is "home">>
+	<<getouticon>><<link [[停止|Bedroom]]>><</link>>
+	<br>
+<<else>>
+	<<getouticon>><<link [[停止|School Library]]>><</link>>
+	<br>
+<</if>>

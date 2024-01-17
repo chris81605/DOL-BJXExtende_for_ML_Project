@@ -1,0 +1,41 @@
+:: Prison Intro Repeat []
+<<location "sea">><<effects>>
+
+<<prison_init>>
+
+<<generate_relaxed_guard 0>>
+<<generate_anxious_guard 1>>
+<<generate_veteran_guard 2>>
+<<generate_methodical_guard 3>>
+
+<<if $weather is "rain">>
+	你被安置在附近的长椅上，顶棚为你遮挡着雨水。偶然的风吹动着你的发梢，雨滴从你的眼角划过，滴落在脸颊。
+<<elseif $weather is "clear">>
+	你被安置在附近的长椅上。
+<<else>>
+	你被安置在附近的长椅上。
+<</if>>
+<br><br>
+
+"我就知道你会回来，"<<person1>><<relaxed_guard 0>>摇了摇头。
+<<if $prison.relaxed gte 80>>
+	<<He>>听起来很悲伤。
+<<else>>
+	<<He>>一直在看手机，根本没有看你。
+<</if>>
+<br>
+<<if $prison.anxious gte 80>>
+	"你就不能不惹事生非吗？"<<person2>><<anxious_guard 1>>又好气又好笑，"或者你只是想我们了？"
+<<else>>
+	"你就不能少干那出吗？"<<person2>><<anxious_guard 1>>叹了口气。
+<</if>>
+<br>
+<<if $prison.veteran gte 80>>
+	"职业罪犯是这样的。"<<person3>><<veteran_guard 2>>耸耸肩。
+<<else>>
+	"一朝做贼……"<<person3>><<veteran_guard 2>>擦着甲板回答。
+<</if>>
+<br><br>
+
+<<link [[继续|Prison Intro Repeat 2]]>><<pass 60>><</link>>
+<br>

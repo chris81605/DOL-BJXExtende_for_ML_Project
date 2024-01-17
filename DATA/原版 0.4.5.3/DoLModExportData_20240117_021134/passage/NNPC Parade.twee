@@ -1,0 +1,59 @@
+:: NNPC Parade []
+<!-- Used to debug Named NPCs by displaying all attributes. -->
+<span class="red">TOTAL NAMED NPCS: $NPCName.length</span>
+<br>
+<!-- Example of introduction, variable set / increment, and put away of npc -->
+/% <<npc Robin>> %/
+/% In walks $npc[0], and takes a bow. <<He>> has more Trauma now. And out <<he>> goes.<br> %/
+/% <<npcset $npc[0] trauma 80>> %/
+/% <<npcincr $npc[0] trauma 100>> %/
+/% <<endnpc>> %/
+
+<<set _genderColor to {"m": "blue", "h": "purple", "f": "pink"}>>
+
+<<for _i = 0; _i lt $NPCName.length; _i++>>
+	<<set _nnpc to $NPCName[_i]>>
+	<<set _nnpc_init_backup to _nnpc.init>>
+	<<npc _nnpc.nam>>
+	<<set _listnpc to $NPCList[0]>>
+	<br>
+	NNPC #<<print _i>>: <span class="green">_nnpc.nam, the _nnpc.title</span>
+	<br>
+	<<set _pColor to _genderColor[_nnpc.pronoun]>>
+	<<set _gColor to _genderColor[_nnpc.gender]>>
+	PRONOUN: <span @class="_pColor"><<print _nnpc.pronoun.toUpperCase()>></span> |
+	GENDER: <span @class="_gColor"><<print _nnpc.gender.toUpperCase()>></span>
+	<br>
+	Penis Size: <span class="gold">_nnpc.penissize</span>, Desc: <span class="gold">_nnpc.penisdesc</span>,
+	State: <span @class="_nnpc.penis is 'none' ? 'red' : 'gold'">_nnpc.penis</span>
+	<br>
+	Breast Size: <span class="gold">_nnpc.breastsize</span>, Desc: <span class="gold">_nnpc.breastsdesc</span>
+	<br>
+	TYPE: <span class="blue"><<if _nnpc.adult>>Adult<<elseif _nnpc.teen>>Teen<<else>>???<</if>></span>
+	| INSECURITY: <span class="red">_nnpc.insecurity</span>
+	<br>
+	TRUST:	<span class="gold">_nnpc.trust</span>
+	| LOVE:		<span class="gold">_nnpc.love</span>
+	| DOM:		<span class="gold">_nnpc.dom</span>
+	| LUST:		<span class="gold">_nnpc.lust</span>
+	| RAGE:		<span class="gold">_nnpc.rage</span>
+	| TRAUMA: <span class="gold">_nnpc.trauma</span>
+	<br>
+	STATE: _nnpc.state
+	<br>
+	CLOTHES: <span class="teal">_nnpc.clothes.set</span>
+	<br>
+	Upper: <span class="teal">_nnpc.clothes.upper.name</span> | Lower: <span class="teal">_nnpc.clothes.lower.name</span>
+	<br>
+	Outfits: [<<print '<span class="teal">'+_nnpc.outfits.join('</span>, <span class="teal">')+"</span>">>]
+	<br>
+
+	You have <<if _nnpc_init_backup isnot 1>><span class="red">not</span><</if>> been introduced to <<him>>.
+	<br>
+	<<endnpc _nnpc.nam>>
+	<<set _nnpc.init to _nnpc_init_backup>>
+
+	<hr>
+<</for>>
+
+<<link [[Next|Bedroom]]>><</link>>

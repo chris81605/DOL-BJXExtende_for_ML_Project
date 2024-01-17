@@ -1,0 +1,297 @@
+:: Widgets Events Swimming [widget]
+<<widget "eventsswimming">>
+	<<outfitChecks>>
+
+	<<if $rng gte 91 and $leftarm is "bound" and $rightarm is "bound">>
+		<<npc Mason>><<person1>>
+		梅森示意你过去一下，你<<if $feetuse is "bound">>蝶泳着<</if>>游到了池边。
+		"你为什么不使用你的手臂？"<<He>>注意到你身上的捆绑。"哦！你可以自己把这些东西拿下来吗？我想我有一些剪刀。"
+		<br><br>
+
+		<<link [[获得解放|Events Swimming Freed]]>><<unbind>><</link>>
+		<br>
+		<<link [[拒绝|Events Swimming Freed Refuse]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 81>>
+
+		<<generates1>><<generates2>>游泳池的另一边爆发了一场争吵。
+		当梅森游过去阻止争斗的时候，一个<<fullGroup>>向你游过来，并把你困在中间。
+		<<person>>开始乘机摸你的屁股，一旁的<<person1>><<person>>笑了起来。
+		"你看起来很孤独，<<bitch>>。别担心，我们在这里陪着你。"
+		<br><br>
+
+		<<link [[推开这些家伙|Swimming Lesson Shove]]>><</link>>
+		<br>
+
+		<<if $cool lt 80>>
+			<<link [[忍受|Events Swimming Molestation]]>><<set $molestationstart to 1>><</link>><<gtrauma>><<gstress>><<garousal>>
+			<br>
+		<<else>>
+			<<link [[忍受|Events Swimming Endure]]>><<trauma 2>><<stress 2>><<arousal 200 "bottom">><</link>><<gtrauma>><<gstress>><<garousal>>
+			<br>
+		<</if>>
+
+	<<elseif $rng gte 71>>
+
+		<<rng>>
+		<<npc Mason>><<generates2>><<person2>>
+		<br><br>
+		梅森指着你附近的一个<<person>>。"你，出来一下，我想看看你的潜水技术。"
+		<br><br>
+
+		<<if $rng % 5 == 0 and $swimnudecounter gte 3>>/*1 in 5 chance*/
+			<<person>>游到泳池边缘后爬上了岸，在稍作休整之后，<<He>>走到了跳水板前。而班里一些人停下来观看。
+			<br><br>
+
+			<<link [[继续|Events Swimming NPC Dive]]>><<set $phase to 3>><</link>>
+			<br>
+
+		<<elseif $rng % 5 == 0>>
+			那个<<person>>游到泳池边缘，然后对梅森耳语了几句。梅森的脸一下子就红透了，在回了一句话后便转身离开了，而那个<<person>>则去继续游泳。
+			片刻之后，你听到一声响亮的哨声。是梅森叫大家到泳池边集合。
+			<br><br>
+
+			"同学们！大家都过来！是时候进行动作示范了。"
+			<br><br>
+
+			<<link [[继续|Events Swimming NPC Dive]]>><<set $phase to 2>><</link>>
+			<br>
+
+		<<elseif $rng % 10>>/*9 in 10 chance*/
+			<<person>>游到泳池边缘后爬上了岸，在稍作休整之后，<<He>>走到了跳水板前。而班里一些人停下来观看。
+			<br><br>
+
+			<<link [[继续|Events Swimming NPC Dive]]>><<set $phase to 1>><</link>>
+			<br>
+
+		<<else>>
+			那个<<person>>拒绝了，梅森试图劝说<<him>>甚至后面威胁<<him>>说要让<<he>>留校，但<<he>>就是不会潜水。
+			<br><br>
+
+			<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+
+	<<elseif $rng gte 61 and $worn.lower.type.includes("naked") and !_underOutfit>>
+		<<rng>>
+		<<npc Mason>><<person1>>梅森指着你说道："爬出来，我想看看你的潜水技术。"
+		<<if playerBellyVisible()>>
+			你红着脸提醒<<him>>你现在<<if $exposed gte 1 and $swimall isnot 1>>裸体和<</if>>怀孕的状态。
+			<<He>>尴尬地看向你的肚子，"哦，很抱歉……"<<He>>短暂地停顿了一下继续说道："我不想伤害孩子。"
+			<br><br>
+			<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+		<<elseif $swimall is 1 and $exposed gte 1>>
+			你将自己暴露在寒冷的空气当中，随后走到潜水平台的边缘，<<swimmingtext>>潜入水里。
+			<br><br>
+
+			你回到了水面上，梅森向你竖起了大拇指，随后<<his>>又将注意力转移到了其他地方。
+			<<gswimming>><<swimmingskilluse>>
+			<br><br>
+
+			<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<br>
+		<<elseif $exposed gte 1>>
+			你的脸一下子红了起来，你小声提醒<<him>>你现在正保持着裸体。<<He>>尴尬地将头转了过去。
+			"你仍然需要潜水，"<<he>>说道："我会试着分散其他学生的注意力的。"
+			<br><br>
+
+			<<He>>站在跳水台对面的水池边上说道："各位，现在是时候进行示范了。"
+			你等待着，直到所有人都离你很远之后，你才<<nervously>>爬了出来。
+
+			<<rng>>
+			<<if $rng gte 81>>
+				<<generates2>><<person2>>然而当你接近跳台时，一个<<person>>突然转过身来。
+				当<<he>>向<<his>>的朋友们喊叫时，你试图遮住身体，以此来避免吸引更多的注意力。虽然梅森试图控制局势，但并没有什么用。
+				全班同学很快就开始盯着你。
+				<<gtrauma>><<trauma 2>><<gstress>><<stress 2>>
+				<br><br>
+				<<if $exhibitionism gte 75>>
+					<<ind>><<link [[炫耀|Events Swimming Flaunt]]>><</link>><<exhibitionist5>>
+					<br>
+				<</if>>
+				<<swimicon "dive">><<link [[总之潜水|Events Swimming Lewd Dive]]>><<trauma 2>><<stress 2>><</link>><<gtrauma>><<gstress>>
+				<br>
+				<<runicon>><<link [[逃跑|Event Swimming Run]]>><<detention 1>><</link>><<gdelinquency>>
+				<br>
+			<<else>>
+				你瞥了一眼班上的其他人，在看到他们仍然背对着你后，你<<swimmingtext>>潜入水中。
+				<<gstress>><<stress 2>><<gswimming>><<swimmingskilluse>>
+				<br><br>
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+
+		<<else>>
+			你将自己暴露在寒冷的空气当中，随后走到潜水平台的边缘，<<swimmingtext>>潜入水里。
+			<br><br>
+
+			你回到了水面上，梅森向你竖起了大拇指，随后<<his>>又将注意力转移到了其他地方。
+			你觉得有点不对劲，然后你猛的感觉到你的<<undies>><<underlowerplural>>消失了！
+			<br><br>
+
+			<<rng>>
+			<<if $school gte 1600 or $rng lt 80>>
+				你注意到你的衣服正漂浮在几英尺远的地方，你迅速游过去并拿上衣服。你扫视了一下泳池周围，应该没有人注意到这的情况。
+				<<gstress>><<stress 2>><<gswimming>><<swimmingskilluse>>
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+
+				<<endevent>><<generates1>><<person1>><<underlowerstrip>>
+				你环顾四周，看到你的衣服正漂浮在水中。你向它们游去，但一个<<person>>比你更快赶过去。
+				<<He>>在把它们放在你够不着的地方后对你笑着说道："在公共场合脱衣服？谁会知道像你这样的书呆子会如此变态。"
+				<<He>>开始审视你那暴露的身体，然后观察梅森的注意力是否在这边。
+				"我想和你玩玩。你最好按我的要求去做，否则你将会在剩下的课程中继续赤身裸体。"
+				<br><br>
+
+				<<link [[接受|Events Swimming Molestation Single]]>><<set $molestationstart to 1>><</link>>
+				<br>
+				<<link [[拒绝|Events Swimming Refuse]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<<elseif $rng gte 41>>
+		<<generates1>><<person1>>一个<<person>>似乎在游泳池周围跟踪你。但是每当你看向<<him>>的时候，<<he>>总是会让目光看向别的地方。
+		<br><br>
+
+		<<link [[与其对峙|Events Swimming Stalk Confront]]>><<detention 1>><</link>><<gdelinquency>>
+		<br>
+		<<link [[无视这家伙|Events Swimming Stalk Ignore]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 21>>
+		<<generates1>><<generates2>><<generates3>>
+		一个<<fullGroup>>开始试图找你的麻烦，这家伙不停地在水底下跟踪和触摸你。
+		你可以试着游离这些家伙，但如果你失败了，那么事情可能会变得十分糟糕。
+		<br><br>
+
+		<<link [[游离|Events Swimming Swim Away]]>><</link>><<swimmingdifficulty 1 800>>
+		<br>
+		<<link [[忍受|Events Swimming Swim Endure]]>><<stress 2>><<trauma 2>><<arousal 100 "bottom">><<arousal 100 "genitals">><</link>><<gtrauma>><<gstress>><<garousal>>
+		<br>
+
+	<<else>>
+		<<if $worn.lower.type.includes("naked")>>
+			<<pain 5>>
+			你感到屁股传来一阵剧痛，你漂到距离除垢泵太近的地方了，你的屁股被扇叶夹住了。
+			你设法不让自己哭出来，以避免吸引到更多的注意力。
+			<<gstress>><<stress 2>>
+			<br><br>
+			<<link [[继续|Swimming Lesson]]>><</link>>
+		<<else>>
+			<<set $worn.lower.integrity -= 4>>
+			<<exposure>>
+			有东西正拖着你的$worn.lower.cn_name_cap。你漂得离除垢泵太近了，你的衣服被它的扇叶卡住了。
+			<<integritycheck>>
+			<<exposure>>
+			<<if $worn.lower.type.includes("naked")>>
+				你试图挣脱开来，但当你这样做的时候，你的衣服被残忍地从你的身体上撕下来，并在一瞬间就消失在了除垢泵里，只留下
+				<<if $worn.upper.type.includes("naked")>>
+					你一丝不挂。
+				<<else>>
+					从腰部往下都是光溜溜的你。
+				<</if>>
+			<<else>>
+				你试图离开，顺便将你的$worn.lower.cn_name_cap<<lowerplural>>从除垢泵里救出来。它还能穿，但是磨损得更严重了。
+			<</if>>
+			<br><br>
+			<<link [[继续|Swimming Lesson]]>><</link>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsswimmingsafe">>
+	<<npc Mason>><<person1>>
+	<<if $rng gte 21>>
+		梅森让全班练习<<print either("潜泳", "蛙泳", "仰泳", "蝶泳")>>。
+		<<He>>在水池外围巡逻，指点那些不太会游泳的人。
+		<br><br>
+	<<else>>
+		梅森让全班同学练习潜水。
+		<<He>>在水池外围观看，指点那些不太会游泳的人。
+		<br><br>
+	<</if>>
+
+	<<if currentSkillValue('swimmingskill') lte 100>>
+		你不太擅长游泳，甚至都很难停留在水面上。
+	<<elseif currentSkillValue('swimmingskill') lte 300>>
+		你不能游得很快，由于肌肉的紧绷，你需要经常休息才行。
+	<<elseif currentSkillValue('swimmingskill') lte 500>>
+		你的游泳技术并不差，但你还有很长的路要走。
+	<<elseif currentSkillValue('swimmingskill') lte 900>>
+		你的游泳技术非常好，你在班级里是最好的那一批。
+	<<else>>
+		你的游泳技巧十分高超，很容易就成为班上游得最好的那个。
+	<</if>>
+	<br><br>
+	<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
+<</widget>>
+
+<<widget "schoolpoolexposed">>
+	<<if $schoolstate is "fifth" and $swimnudecounter gte 1>>
+		你走进游泳馆。<<covered>>
+		<<schoolpoolmasoncheck>>
+		<<if _masonCanUnlock>>
+			<<include "Mason Chastity Prompt">>
+		<</if>>
+		<br><br>
+	<<else>>
+		<<npc Mason>><<generatey2>><<generatey3>>你深吸一口气，就这样展示着你的<<lewdness>>走入泳池室。
+		一个<<person2>><<person>>最先看到你，随后<<He>>马上用手遮住自己的脸，并放声尖叫起来。
+		班上其他同学也纷纷效仿，他们反应不一，有的欢喜有的尴尬，有高兴的有不高兴的，也有一些比较拘谨的学生非常厌恶。
+		<<if $player.penisExist>>
+			<<if $player.penissize is 4>>
+				<<if maleChance() lt 100>>
+					那些女孩们的眼神似乎粘在了你的<<genitals>>上，有几个女孩甚至开始互相兴奋低语。
+					有几个男孩显然对你赤身裸体的出现感到不太高兴。<<if maleChance() gt 0>>其他人似乎很感兴趣。<</if>>
+				<<else>>
+					那些男孩们目不转睛地盯着你的<<genitals>>，有几个男孩开始互相兴奋低语。
+				<</if>>
+				<<incgpenisinsecurity>>
+				<<status 10>><<gcool>>
+			<<elseif $player.penissize lte 1>>
+				一些女孩开始互相小声耳语，而一些男孩则表现出相当得意的表情。
+				<<incgpenisinsecurity>>
+			<</if>>
+		<</if>>
+		<br><br>
+		<<person1>>梅森转过身来面对着你，然后迅速移开<<He>>的目光。"你的泳衣，"<<he>>说道。"去拿它。"
+		<<detention 6>>
+		<br><br>
+		"哦？"你说着的同时抬起一只手平放在眉心，仿佛在扫视周围。"我想知道我把它放在哪里了。" 全班哄堂大笑了起来。
+		<br><br>
+		梅森极力不让自己看向你，但是<<Hes>>的脸依旧红的通透。"快回到更衣室里去，请，请快点。"
+		<br><br>
+	<</if>>
+	<<if !_masonCanUnlock or $schoolstate isnot "fifth">>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><<endevent>><</link>>
+		<br>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "schoolpoolmasoncheck">>
+	<<set _anyBound to $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	<<if _anyBound>>
+		梅森立即注意到了你被绑的<<boundBodyParts>>。
+		<<print [
+			`"你那样游泳不安全。"`,
+			`"有点儿过了。"`,
+			`"很明显……让你那样游泳不安全。"`,
+			`"你不能这样游泳。"`
+		].random()>>
+		<br><br>
+		<<He>>走到了你身后，<span class="green">你感觉你的四肢自由了。</span><<unbind>>
+	<</if>>
+	<<if !C.npc.Mason.chastityKeyCarried and playerChastity() and $worn.genitals.origin is "Winter" and (C.npc.Mason.love gte 5 or C.npc.Mason.lust gte 10)
+		and getVisibleClothesList().find(o => o === V.worn.genitals)>>
+		<<if _anyBound>><<He>>
+		<<else>>梅森<</if>>注意到了，眼睛情不自禁的一直盯着你的$worn.genitals.cn_name_cap看。
+		<<He>>一直紧盯着，直到<<he>>反应过来，红着脸转过身去。你感觉有些不适。
+		<<set C.npc.Mason.chastityKeyCarried to 1>><<set $daily.masonChastityRemovalDeclined to 1>>
+	<</if>>
+<</widget>>

@@ -1,0 +1,48 @@
+:: Farm Alex Tease []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+你踩在艾利克斯的被子上，站在<<him>>和衣柜之间。<<He>>扑向<<his>>的
+<<print (_alex.pronoun is "f" ? "平角裤" : "四角裤")>>
+<<if $athleticsSuccess>>
+
+	<span class="green">但你一下把它们拿远了。</span><<He>>不得不同时用一只手拽着自己的衬衫遮住大腿之间，因而处于劣势之中。<<ldom>><<npcincr Alex dom -1>>
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"你要为此惩罚我吗？"你揶揄道。
+	<<elseif $speech_attitude is "bratty">>
+		"没那么有趣，"你说道。"不是吗？"
+	<<else>>
+		"你想要回来吗？"你问，"你拿什么来换它们？"
+	<</if>>
+	<br><br>
+
+	艾利克斯服软了。"你的目的已经达到了，"<<he>>的脸涨得通红。"可以把衣服还给我了。"
+	<br><br>
+
+	<<link [[归还|Farm Alex Tease Give]]>><<npcincr Alex love 1>><</link>><<glove>>
+	<br>
+	<<link [[要求演出|Farm Alex Tease Demand]]>><<npcincr Alex love -1>><<npcincr Alex dom -3>><<npcincr Alex lust 5>><</link>><<llove>><<lldom>><<gglust>>
+	<br>
+<<else>>
+	<span class="red">你手上的东西被强行夺走了。</span> <<gdom>><<npcincr Alex dom 1>>
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我、我只是想让你明白被这么做是什么感觉，"你说，转身让<<him>>穿衣服。"我知道你在偷看我睡觉。"
+	<<elseif $speech_attitude is "bratty">>
+		"我还以为你喜欢这种下流游戏呢，"你说着，转身让<<him>>穿衣服。"喜欢到很想把它强加给我。"
+	<<else>>
+		"是你先开始的，"你边说，转身让<<him>>穿衣服，"我知道你喜欢偷看我睡觉。"
+	<</if>>
+	<br><br>
+
+	"我、我不明白你的意思，"艾利克斯撒谎说道。你觉得<<he>>肯定已经明白你的意思了。
+	<br><br>
+
+	你回到自己的床上。
+	<br><br>
+
+	<<link [[继续|Farm Bed]]>><<endevent>><</link>>
+<</if>>

@@ -1,0 +1,39 @@
+:: Street Car []
+<<outfitChecks>>
+<<effects>>
+<<if $phase is 1 or $phase is 10>>
+	你爬上车的后座，之后那个<<person>>把车开到了一个隐蔽的小巷。<<He>>也来到了后座。
+	<<promiscuity2>>
+
+	<<link [[继续|Street Car Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	<<if $rng gte 81 and _middleOutfit is false and $worn.upper.exposed lte 1 and _overOutfit is false and $worn.over_upper.exposed lte 1>>
+		你加快了脚步，想逃离这个变态。然而<<his>>跟上了你的步伐并再次挥舞着<<he>>的那叠钞票说道："好吧，那你就给我小小地表演一下如何？脱掉你的衬衫就行。"
+		<br><br>
+		<<stress 6>>
+		<<if $player.gender_appearance is "m" and $player.breastsize lte 2>>
+			<<link [[脱掉上衣|Street Car Strip]]>><<set $phase to 1>><</link>><<exhibitionist1>>
+			<br>
+		<<else>>
+			<<if $exhibitionism gte 55>>
+				<<link [[脱掉上衣|Street Car Strip]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+				<br>
+			<</if>>
+		<</if>>
+		<<link [[再次拒绝|Street Car]]>><<set $phase to 3>><</link>><<gstress>>
+		<br>
+	<<else>>
+		你加快脚步，以此来逃离这个变态。
+		<br><br>
+		<<stress 3>>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<elseif $phase is 3>>
+	你加快脚步，以此来逃离这个变态，这次<<he>>并没有追上你。
+	<br><br>
+	<<stress 3>>
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

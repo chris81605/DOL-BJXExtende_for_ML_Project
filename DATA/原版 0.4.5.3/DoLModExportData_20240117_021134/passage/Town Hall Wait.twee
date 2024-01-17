@@ -1,0 +1,135 @@
+:: Town Hall Wait []
+<<effects>>
+
+你排在了一个<<person2>><<person>>身后。
+
+<<if $rng gte 91>>
+    <<He>>带着一个正在晃动着的宠物笼，当轮到<<his>>时，<<he>>将其放到前台，坐前台的那个<<person1>><<person>>摇了摇头，那个<<person2>><<person>>也耸耸肩，然后直接转身离开了。
+    <br><br>
+<<elseif $rng gte 81>>
+    在轮到<<he>>之前，<<He>>就一直在踱着小碎步，在轮到<<his>>之后，<<he>>满脸悲愤地说道："是轮到我上厕所了么？"
+    <br>
+    <<person1>><<person>>静静地看着<<person2>><<him>>。"为什么要排队等？外面有公共厕所。"
+    <br>
+    <<person>>看了一眼周围，然后向前倾身，小声说了几句话。你听不清楚话语的内容，但是<<person1>><<person>>翻了个白眼，然后指向了左边的一扇门。<<person2>><<person>>冲了过去。
+    <br><br>
+<<elseif $rng gte 71>>
+    在轮到<<he>>时，<<his>>咧嘴一笑，随后轻轻说了一句："奎恩在等我。"
+    <br><br>
+    接待员挥手示意<<him>>通过。
+    <br><br>
+<<elseif $rng gte 61>>
+    <<He>>攥紧拳头，在轮到<<his>>时，<<he>>重锤了一下柜台，"园艺，"<<he>>说道，"只是普通的——"
+    <br><br>
+    接待员挥手示意<<him>>通过。
+    <br><br>
+<<elseif $rng gte 51>>
+    <<He>>不断揉着<<his>>的眼睛，在轮到<<his>>时，<<he>>忍不住地打了个哈欠。"我要——"<<he>>又打了个哈欠，"我要投诉有人扰民，位置在——"
+    <br><br>
+    接待员取来一摞纸，砰的一声丢在桌子上："请填写这些表格。"
+    <br><br>
+    那个<<person2>><<person>>明显愣了一下，但却没有抱怨什么。
+    <br><br>
+<<elseif $rng gte 41>>
+    <<He>>的腋下夹着一个厚厚的文件夹，在轮到<<his>>时，<<he>>将其放在桌上："这是你们要求的，那些有关野兽袭击的照片。"
+    <br><br>
+    接待员接过文件夹并打开过目，你注意到照片里是满是撕裂的家具，墙上有抓痕印，甚至有扇门从铰链上被扯了下来。
+    <br><br>
+    "我会把这个发给相关部门，在他们做出决策的时候会联系你的。"
+    <br>
+    "这需要多久？"
+    <br>
+    "我不知道，但请离开，<<sir>>，后面还有人在等待着呢。"
+    <br>
+    虽然<<He>>还在抱怨，但也只能无奈地离开。
+    <br><br>
+<<elseif $rng gte 31>>
+    <<He>>不停地搓着手掌并打颤，但这个房间的温度对你来说却很舒适。在轮到<<his>>时，<<he>>又朝掌心哈了口气。
+    <br><br>
+    "有人让我来查辆车。"
+    <br>
+    接待员在电脑上敲了几下："右边第三个门。"
+    <br><br>
+<<elseif $rng gte 21>>
+    <<He>>有些茫然地环顾四周，轮到<<his>>时，"泥嚎，窝来着里和施长见面，窝予约过了。"<<he>>操着一口外国腔。
+    <br><br>
+    接待员挥手示意<<him>>通过。
+    <br><br>
+<<elseif $rng gte 11>>
+    <<He>>捧着种有一朵雏菊的花盆，"园艺。"在轮到<<his>>时，<<he>>直接说道。随后接待员点点头，<<person>>便直接离开了，<<he>>似乎知道应该去哪里。
+    <br><br>
+<<else>>
+    <<He>>抱着一大摞纸，在轮到<<his>>时，<<he>>将其摔在柜台上。"全部填好了。"<<he>>喘着气说道。
+    <br>
+    "谢谢，"接待员回答道，"我会确保市长第一时间拿到它的。"
+    <br>
+    <<person>>转身就把纸扔进了垃圾箱。
+    <br><br>
+<</if>>
+轮到你了，<<person1>><<person>>正等着。
+<br><br>
+
+<<if $hookah_plot is 1>>
+    你还记得你在水烟馆做的梦，想起市长被关起来了。<span class="teal">你突然有了主意。</span><<set $hookah_plot to 2>>
+    <br><br>
+<</if>>
+
+<<askicon>><<link [[询问关于市长办公室的事情|Town Hall Ask]]>><</link>>
+<br>
+<<if $town_projects.bridge is undefined or $town_projects.bridge is 1>>
+    <span class="black">未发现任何改造项目。</span>
+    <br>
+<<elseif $town_projects.bridge is 2>>
+    <<askicon>><<link [[询问关于在旧渠道上建造一座桥的事情 (1:00)|Town Hall Projects Bridge]]>><<pass 60>><</link>>
+    <br>
+<<elseif $town_projects.bridge gte 3>>
+    <span class="green">旧运河上的桥已建设完毕。</span>
+    <br>
+<</if>>
+<<if $town_projects.road is undefined or $town_projects.road is 1>>
+    <span class="black">未发现任何改造项目。</span>
+    <br>
+<<elseif $town_projects.road is 2>>
+    <<askicon>><<link [[询问关于在镇子和湖泊之间修建一条道路的事情 (2:00)|Town Hall Projects Road]]>><<pass 2 hours>><</link>>
+    <br>
+<<elseif $town_projects.road gte 3>>
+    <span class="green">小镇与湖泊之间的路已修建完毕。</span>
+    <br>
+<</if>>
+<<if $town_projects.diving is undefined or $town_projects.diving is 1>>
+    <span class="black">未发现任何改造项目。</span>
+    <br>
+<<elseif $town_projects.diving is 2>>
+    <<askicon>><<link [[询问关于在湖边建造一个实地考古办事处的事情 (1:00)|Town Hall Projects Diving]]>><<pass 60>><</link>>
+    <br>
+<<elseif $town_projects.diving gte 3>>
+    <span class="green">湖边的考古工作站已建造完毕。</span>
+    <br>
+<</if>>
+<<if $town_projects.thicket is undefined or $town_projects.thicket is 1>>
+    <span class="black">未发现任何改造项目。</span>
+    <br>
+<<elseif $town_projects.thicket is 2>>
+    <<askicon>><<link [[询问关于维护住宅区内的灌木丛的事情 (1:00)|Town Hall Projects Thicket]]>><<pass 60>><</link>>
+    <br>
+<<elseif $town_projects.thicket gte 3>>
+    <span class="green">住宅区的灌木得到了维护。</span>
+    <br>
+<</if>>
+<<if $town_projects.green is undefined or $town_projects.green is 1>>
+    <span class="black">未发现任何改造项目。</span>
+<<elseif $town_projects.green is 2>>
+    <<askicon>><<link [[询问关于清理学校后面的绿地的事情 (1:00)|Town Hall Projects Green]]>><<pass 60>><</link>>
+    <br>
+<<elseif $town_projects.green gte 3>>
+    <span class="green">学校后面的绿地得到了维护。</span>
+    <br>
+<</if>>
+<<if $hookah_plot is 2>>
+    <<ind>><<link [[说你要见市长|Town Hall Computer]]>><<set $hookah_plot to 3>><</link>>
+    <br>
+<</if>>
+
+<br>
+<<getouticon>><<link [[离开|Cliff Street]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,51 @@
+:: Sewers Algae []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersalgae">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。你不能走得太快，以免在墙上和地板上的藻类上滑倒。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $smuggler_location is "sewer" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18 and !$possessed>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		凳子旁边有一堆火在燃烧，看起来像刚刚有人匆忙离开了。<span class="gold">也许他们只是在躲避摩根。</span>
+		<br><br>
+	<<else>>
+		<<smugglerdifficultytext>>
+	<</if>>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>><<set _hideOption to true>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
+		<<sewericon "algae">><<link [[躲在水草后面|Sewers Algae Hide]]>><</link>>
+		<br>
+	<</if>>
+	<<if $smuggler_location is "sewer" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18 and !$possessed>>
+		<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<else>>
+			<<smugglerdifficultyactions>>
+		<</if>>
+	<</if>>
+	<<sewericon "mud">><<link [[泥泞的隧道 (0:05)|Sewers Mud]]>><<pass 5>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Sewers Industrial">>
+		<<sewericon "main">><span class="nextLink"><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "main">><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

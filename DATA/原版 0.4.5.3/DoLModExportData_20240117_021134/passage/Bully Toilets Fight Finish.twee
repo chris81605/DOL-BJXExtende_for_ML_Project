@@ -1,0 +1,37 @@
+:: Bully Toilets Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	惠特尼倒在地上，喘着气。<<tearful>>你推开<<his>>困惑的朋友们，离开了厕所。
+	<<set _outsideBathroom to true>>
+<<elseif $enemyhealth lte 0>>
+
+	你把惠特尼推进一个小隔间，然后逃走了。<<His>>的朋友们正陷入困惑中，没有阻止你。
+	<br><br>
+
+	<<tearful>>你摇摇晃晃地离开厕所。
+	<<set _outsideBathroom to true>>
+<<else>>
+
+	你倒在地上，伤得无法抵抗。
+	<br><br>
+
+	惠特尼的朋友们围在你身边，用脚狠狠地踢着你。你蜷缩起来保护自己，直到恶霸们厌倦了。
+	<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<tearful>>你踉跄着站起身来。
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<if _outsideBathroom>>
+	<<link [[继续|School Toilets]]>><</link>>
+<<elseif $bus is "boys">>
+	<<link [[继续|"School Boy's Toilets"]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<link [[继续|"School Girl's Toilets"]]>><<set $eventskip to 1>><</link>>
+<</if>>

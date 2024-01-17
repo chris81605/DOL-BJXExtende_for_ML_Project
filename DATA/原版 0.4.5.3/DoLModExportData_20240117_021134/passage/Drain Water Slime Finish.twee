@@ -1,0 +1,53 @@
+:: Drain Water Slime Finish []
+<<effects>>
+<<if $swimdistance lte 1>>
+	<<tearful>>你从水流里爬了出来，把史莱姆甩在身后。
+	<br><br>
+	<<if $timer gte 30>>
+		<<set $bus to "residentialdrain">>
+	<<elseif $timer gte 20>>
+		<<set $bus to "commercialdrain">>
+	<<elseif $timer gte 10>>
+		<<set $bus to "industrialdrain">>
+	<<else>>
+		<<set $bus to "drainexit">>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $timer lte 0>>
+	水把你带到排水管的尽头。你试图抓住隧道的一边，但无济于事。你被带到户外，然后坠入了下面的大海。<<tearful>>你挣扎着浮出水面。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<seacliffseventend>>
+<<else>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<link [[继续|Drain Water Passout]]>><<pass 1 hour>><</link>>
+<</if>>

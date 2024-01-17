@@ -1,0 +1,26 @@
+:: Livestock Job Harper Refuse []
+<<effects>>
+
+哈珀向你走来，但你退后了。
+
+<<if $worn.face.type.includes("gag")>>
+	你试着说话，但口塞使你的话语变成了含糊不清的咕哝。
+<<elseif $speech_attitude is "meek">>
+	"请、请不要这样对我，"你请求道，"你吓到我了。"
+<<elseif $speech_attitude is "bratty">>
+	"我不是牛，"你说道，"我不会让你们这些疯子这样对待我的。"
+<<else>>
+	"我不会配合你的，"你说道，"这是不对的。"
+<</if>>
+<br><br>
+
+"非常抱歉，"雷米说，"给我一点时间。"这时两个农场工人走进了房子。雷米抓住你皮带的底部，把你拉近。
+<br><br>
+
+"你不能让我在医生面前丢脸，"<<he>>小声说道，"乖乖让<<endevent>><<npc Harper>><<person1>><<him>>检查你，否则我们动手的话场面可能不会很好看。"
+<br><br>
+
+<<link [[服从|Livestock Job Harper Obey]]>><<sub 1>><<livestock_obey 1>><<transform cow 1>><<npcincr Remy dom 1>><</link>><<gobey>>
+<br>
+<<link [[反抗|Livestock Job Harper Resist]]>><<def 1>><<livestock_obey -5>><<npcincr Remy dom -1>><</link>><<llobey>><<physiquedifficulty 1 $physiquemax>>
+<br>

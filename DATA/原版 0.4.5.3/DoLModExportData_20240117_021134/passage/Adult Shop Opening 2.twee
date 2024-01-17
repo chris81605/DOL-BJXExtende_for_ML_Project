@@ -1,0 +1,62 @@
+:: Adult Shop Opening 2 []
+<<effects>>
+<<run statusCheck("Sydney")>>
+
+<<person2>>
+人群勉强排成了队。你现在能看见商店内部了，里面人满为患。西里斯从人群当中挤了出来，来到你的身边。
+<br><br>
+
+<<if $adultshopcontribution gte 12>>
+	"感谢你能来。"<<he>>笑着拍了拍你的肩膀，"你帮了我这么多忙，现在要麻烦你最后一回。我雇了临时工帮我处理前台和做客服，不过我有个特殊的工作想要你做。"
+<<elseif $adultshopcontribution gte 1>>
+	"感谢你能来。"<<he>>拍了拍你的肩膀，"之前你帮过我的忙，现在要再麻烦你一回。我雇了临时工帮我处理前台和做客服，不过我有个特殊的工作想要你做。"
+<<else>>
+	"感谢你能来。"<<he>>笑了笑，"我想麻烦你一下，不过你也可以拒绝。我雇了临时工帮我处理前台和做客服，不过我有个特殊的工作想要你做。"
+<</if>>
+<br><br>
+
+<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("corruptLust")>>
+	"我们可以示范部分商品，"悉尼说着，盯着一卷皮鞭。"谁能想到这些武器还能有如此亵渎的用法呢！"
+<<elseif _sydneyStatus.includes("pure") or _sydneyStatus.includes("pureLust")>>
+	"我很想支持你，"悉尼的声音很紧张，"但千万别让我违背神殿的规定。"
+<<else>>
+	"我很想支持你，"悉尼看上去有些紧张，"但千万别让我做色色的事情。"
+<</if>>
+<br>
+"别想得那么污！"西里斯又好气又好笑，"我只是想让你们当个模特，那里有张床——"
+<br>
+<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("corruptLust")>>
+	"床！"悉尼双手抱胸，"真不错。"
+<<elseif _sydneyStatus.includes("pure") or _sydneyStatus.includes("pureLust")>>
+	"听上去不对劲，"悉尼叹了口气。
+<<else>>
+	"听上去有点过了，"悉尼叹了口气。
+<</if>>
+<br>
+"我只是想让你们穿着我们卖的睡衣躺在床上，没别的。"
+<br>
+<<person1>>
+<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("corruptLust")>>
+	悉尼顿时松了口气，露出了微笑。"这我应该可以。"
+<<elseif _sydneyStatus.includes("pure") or _sydneyStatus.includes("pureLust")>>
+	悉尼摇了摇头，转向你。"抱歉，"<<he>>的脸颊轻微发烫，"我受不了这样。"
+<<else>>
+	悉尼点了点头，"只要睡衣不会让司祭不爽就行。"
+<</if>>
+<br>
+西里斯转向你，"你呢？"
+<br><br>
+
+<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("corruptLust")>>
+	<<link [[同意提供帮助|Adult Shop Opening Corrupt]]>><<set $adultshopcontribution += 1>><<npcincr Sirris love 10>><</link>><<ggglove>>
+	<br>
+<<elseif _sydneyStatus.includes("pure") or _sydneyStatus.includes("pureLust")>>
+	<<link [[同意提供帮助|Adult Shop Opening Pure]]>><<set $adultshopcontribution += 1>><<npcincr Sirris love 10>><</link>><<ggglove>>
+	<br>
+<<else>>
+	<<link [[同意提供帮助|Adult Shop Opening Neutral]]>><<set $adultshopcontribution += 1>><<npcincr Sirris love 10>><</link>><<ggglove>>
+	<br>
+<</if>>
+
+<<link [[拒绝|Adult Shop Opening Refuse]]>><</link>>
+<br>

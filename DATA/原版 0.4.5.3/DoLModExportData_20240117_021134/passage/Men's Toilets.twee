@@ -1,0 +1,64 @@
+:: Men's Toilets []
+<<set $outside to 0>><<set $location to "park">><<effects>><<set $bus to "parkmens">>
+
+你在公园的男厕所里。
+<<storeon "parkmens" "check">>
+<<if _store_check is 1>>
+	你的衣服存放在水槽的下面。
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutpark>>
+<<else>>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $player.gender_appearance is "f" and $eventskip is 0>>
+			<<eventstoilets>>
+		<<else>>
+			<<storeactions "parkmens">>
+			<<if $exhibitionism gte 75 and Time.dayState is "day" and $exposed gte 2 and !$daily.parkStreak>>
+				<span class="lewd">全裸地站在洗手间，让你有一种想裸奔穿过公园的淫荡冲动。肯定会有很多人看到你的。</span>
+				<br><br>
+				<<ind>><<link [[裸奔|Park Streak]]>><<set $daily.parkStreak to true>><<pass 1>><<arousal 100>><</link>><<exhibitionist5>><<garousal>>
+				<br>
+			<<elseif $exhibitionism gte 55>>
+				<span class="lewd">一个淫荡的想法冲击着你。</span>你可以脱光衣服，在某个隔间里等待毫无戒心的路人看到你。
+				<<if Time.dayState is "dusk" or Time.dayState is "night">>
+					<br><br>
+					<<stripicon>><<link [[脱光了在隔间里等着 (0:20)|Toilets Stall]]>><<pass 20>><</link>><<exhibitionist4>>
+					<br>
+				<<else>>
+					<span class="blue">然而，最好还是等到夜幕降临。</span>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<mirroricon>><<link [[照镜子 (0:02)|Simple Mirror]]>><<pass 2>><<set $previousPassage = $passage>><</link>>
+			<br>
+			<<if $exhibitionism gte 35 or $arousal gte 9000>>
+				<<ind>><<link [[自慰|Men's Toilets Masturbation]]>><<set $masturbationstart to 1>><</link>>
+				<br>
+			<</if>>
+			<<if setup.bodyliquid.combined("face") gte 1 or $skin.left_cheek.pen is "pen" or $skin.right_cheek.pen is "pen" or $skin.forehead.pen is "pen" or $skin.left_cheek.pen is "mud" or $skin.right_cheek.pen is "mud" or $skin.forehead.pen is "mud" or $skin.left_cheek.pen is "lipstick" or $skin.right_cheek.pen is "lipstick" or $skin.forehead.pen is "lipstick">>
+				<<bathroomicon "sink">><<link [[洗脸 (0:05)|Men's Toilets Wash]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+			<<if setup.bodyliquid.combined("mouth") gte 1>>
+				<<bathroomicon "sink">><<link [[漱口 (0:05)|Men's Toilets Rinse]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+			<<pregnancyTest "Men's Toilets">>
+			<<if _store_check isnot 1>>
+				<<getouticon>><<link [[离开|Park]]>><</link>>
+			<<elseif $exposed gte 2 and $exhibitionism gte 35>>
+				<<sneakicon>><<link [[溜出去|Park Toilets Sneak]]>><<set $phase to 2>><</link>><<exhibitionist3>>
+			<<elseif $exposed is 1>>
+				<<sneakicon>><<link [[溜出去|Park Toilets Sneak]]>><<set $phase to 1>><</link>><<exhibitionist1>>
+			<<elseif $exposed lte 0>>
+				<<getouticon>><<link [[离开|Park]]>><</link>>
+			<</if>>
+		<</if>>
+<</if>>
+
+<<set $eventskip to 0>>
+<<storecleanup>>

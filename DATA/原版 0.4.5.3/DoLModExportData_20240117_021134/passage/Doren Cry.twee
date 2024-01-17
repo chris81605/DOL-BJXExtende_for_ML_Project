@@ -1,0 +1,20 @@
+:: Doren Cry []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+你靠在<<him>>身上哭泣，而<<He>>也将你轻轻地抱在怀里。你们就保持着这样的姿势度过了一个小时，现在你感觉好多了。
+<<control 10>>
+<br><br>
+<<if $rng gte 81 and $NPCName[$NPCNameList.indexOf("Doren")].love gte 10>>
+	<<He>>将你拉开并说道："我现在必须去做下准备了。"<<He>>停顿了下，然后接着说道："如果你愿意的话，你可以和我一起去，毕竟我只是打算去慢跑。"
+	<br><br>
+	<<link [[跟着一起去慢跑 (0:30)|Doren Jog]]>><<npcincr Doren love 1>><<stress -12>><<trauma -6>><<pass 30>><<athletics 3>><</link>><<gathletics>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[离开|Barb Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<He>>将你拉开并说道："我现在必须去做下准备了，有人正在等我呢，我很高兴你今天来找我，如果你愿意的话，你可以明天再来。"
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Barb Street]]>><</link>>
+	<br>
+<</if>>

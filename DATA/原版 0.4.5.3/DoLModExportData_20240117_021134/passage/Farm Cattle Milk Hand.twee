@@ -1,0 +1,77 @@
+:: Farm Cattle Milk Hand []
+<<effects>>
+
+<<if $monster is 1>>
+	你牵着一只<<beasttype>>进入牛棚，坐在<<bhim>>旁边的凳子上。<<bHe>>跪在桶边，期待地哞哞叫着。
+
+	<<if $NPCList[0].pronoun is "m">>
+		<<if $NPCList[0].vagina isnot "none">>
+			你用双手捏住<<bhis>>的乳头，然后开始挤压。
+		<<else>>
+			你双手拿着<<bhis>>已经勃起的阴茎开始撸动。<<handstat>><<handejacstat>>
+		<</if>>
+	<<else>>
+		<<if $NPCList[0].penis isnot "none">>
+			你一手拿着<<bhis>>已经勃起的阴茎，一手抓住乳房，然后开始挤压。<<handstat>><<handejacstat>>
+		<<else>>
+			你用双手抓住<<bhis>>的乳房，然后开始挤压。
+		<</if>>
+	<</if>>
+<<else>>
+	你把<<beasttype>>牵进牛棚，坐到了它旁边的一张凳子上。它满怀期待地哞哞叫着。你用双手抓住它
+	<<if $NPCList[0].penis isnot "none">>已经勃起的肉棒<<else>>乳房<</if>>
+	，开始工作。
+<</if>>
+<br><br>
+<<if $cattle_milked lte 6 or $deviancy lt 15>>
+	这么亲力亲为感觉很奇怪。你提醒自己这没什么奇怪的，但这种感觉很难摆脱。
+<<elseif $cattle_milked lte 1200 or $deviancy lt 35>>
+	你已经习惯了给牛挤奶，<<beasttype>>很喜欢被你照顾。
+<<else>>
+	你一边做白日梦，一边工作，你那双训练有素的手自己动了起来。<<beasttype>>很感谢你的照顾。
+<</if>>
+<<deviancy1>>
+
+你<<tendingtext>>挤压和摩擦着。
+<<switch $phase>>
+	<<case 3>><<farm_count 3>>三分钟后，
+	<<case 4>><<farm_count 4>>四分钟后，
+	<<case 5>><<farm_count 5>>五分钟后，
+	<<case 10>><<farm_count 10>>十分钟后，
+	<<case 15>><<farm_count 15>>十五分钟后，
+	<<case 20>><<farm_count 20>>二十分钟后，
+	<<case 25>><<farm_count 25>>二十五分钟后，
+	<<default>><<farm_count 30>>三十分钟后，
+<</switch>>
+<<rng>>
+<<if $watersportsdisable is "f" and $NPCList[0].penis isnot "none" and $rng gte 96>>
+	你注意到桶里装的是尿液而不是奶水。你把它倒掉了。
+<<else>>
+	你得到了一桶<<beasttype>>的牛奶。
+<</if>>
+<br><br>
+
+<<if $farm_work.cattle_text is undefined>>
+	<<set $farm_work.cattle_text to 0>>
+<</if>>
+<<switch $farm_work.cattle_text>>
+<<case 0>>
+	<<set $farm_work.cattle_text += 1>>
+	那只<<beasttype>>小跑着离开了。
+<<case 1>>
+	<<set $farm_work.cattle_text += 1>>
+	<<beasttype>>舔了舔你的手，然后小跑着离开了。<<lstress>><<stress -1>>
+<<case 2>>
+	<<set $farm_work.cattle_text += 1>>
+	那只<<beasttype>>被哄了好一会儿才愿意回到田野里。
+<<case 3>>
+	<<set $farm_work.cattle_text += 1>>
+	那只<<beasttype>>匆匆离去，急切地回到了田野里。
+<<case 4>>
+	<<set $farm_work.cattle_text to 0>>
+	那只<<beasttype>>有些找不到出口，但很快就小跑着回到了田野里。
+<</switch>>
+
+<br><br>
+<<endevent>>
+<<farm_milk_actions>>

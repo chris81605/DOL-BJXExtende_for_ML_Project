@@ -1,0 +1,36 @@
+:: Underground Robin Hunt Molestation Finish []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<undergroundRobinTopic "hunt" "undiscussed">>
+	<<ejaculation>>
+	当那个<<person>>抓住你的皮带，把你拉起来时，你听到人群之间窃窃私语。
+	<<if !$worn.feet.type.includes("shackle")>>
+		你的脚裸再次被冰冷的枷锁所铐住了。
+		<<shackle_feet>>
+	<</if>>
+	“我希望其他人也和我们一样，能和猎物玩得开心。”
+	<br><br>
+
+	附近响起了一声尖叫，人群冲出去调查，留下那个<<person>>把你拖回地牢，回到你的牢房。罗宾很快就倒下了。
+	<<undergroundReturnToCell>>
+<<elseif $enemyhealth lte 0>>
+	<<person>>倒在一棵树上。<<tearful>>你爬了起来。
+	<<if _robin.dom gte 70>>
+		罗宾推开攻击<<nnpc_him "Robin">>的$robinBeast，抓住你的手，
+	<<else>>
+		你把$robinBeast从罗宾身上推下来，抓住<<nnpc_his "Robin">>的手，
+	<</if>>
+	你们一起逃跑。<<person1>><<person>>试图阻止你们，但你们躲开了<<him>>并逃进了森林。
+	<br><br>
+
+	<<undergroundEscapeForestRobin>>
+
+<<else>>
+	罗宾推开攻击<<nnpc_him "Robin">>的$robinBeast，并推开<<person>>，然后抓住你的手。
+	你们一起逃跑。<<person2>><<person>>试图阻止你们，但你们躲开了<<him>>并逃进了森林。
+	<br><br>
+
+	<<undergroundEscapeForestRobin>>
+<</if>>
+<<unset $robinBeast>>

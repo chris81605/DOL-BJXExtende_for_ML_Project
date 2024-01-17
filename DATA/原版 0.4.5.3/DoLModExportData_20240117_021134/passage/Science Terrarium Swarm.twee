@@ -1,0 +1,40 @@
+:: Science Terrarium Swarm []
+<<set $outside to 1>><<set $location to "school">><<effects>><<set $bus to "danube">>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "worms" "玻璃罐" "悬挂在玻璃容器上方" "掉进了容器里" "阻挡" 0 10>>
+
+	<<set $timer to 24>>
+	<<set $phase to 2>>
+<</if>>
+
+<<if $phase is 2>>
+	<<set $phase to 1>>
+	这对学生坐着观看。
+	<br><br>
+<<else>>
+	<<if $orgasmdown gte 1 and $phase is 1>>
+		<<set $phase to 0>>
+		"真是难以置信，" 那个<<person1>><<person>>欢呼着，"你因为这个高潮了？" 围观的看起来欣喜若狂。你觉得颜面尽失。
+		<<combattrauma 10>>
+	<<else>>
+		围观的人正在欣赏你的表演。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<audience>>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $stress gte $stressmax or $timer lte 0>>
+	<span id="next"><<link [[继续|Science Terrarium Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Science Terrarium Swarm]]>><</link>></span><<nexttext>>
+<</if>>

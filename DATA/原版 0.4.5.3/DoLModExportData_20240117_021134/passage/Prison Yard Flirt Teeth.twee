@@ -1,0 +1,56 @@
+:: Prison Yard Flirt Teeth []
+<<effects>>
+
+<<generate1>><<person1>>
+<<if $speech_attitude is "meek">>
+	"谁、谁有多余的牙齿？"你问，"我真的很需要它们。"
+<<elseif $speech_attitude is "bratty">>
+	"你们这些人渣有没有人有多余的牙齿？"你问，"我拿它们有用。"
+<<else>>
+	"我想要一些牙齿，"你说，"有人能帮我吗？"
+<</if>>
+<br><br>
+
+<<if $rng gte 81>>
+	<<set _rng to random(7, 15)>>
+	<span class="green">一个<<person>>丢给你一个棕色小包。</span> <<prison_teeth _rng>><<prison_teeth_text _rng>>
+	<br><br>
+
+	<<link [[继续|Prison Yard]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	<<set _rng to random(7, 15)>>
+	<<if $exposed gte 1>>
+		一个<<person>>用淫荡的眼神看着你的<<lewdness>>，<span class="green">之后丢给你一个棕色小包。</span> <<prison_teeth _rng>><<prison_teeth_text _rng>>
+		<br><br>
+
+		<<link [[继续|Prison Yard]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		一个<<person>>向你送去秋波。"唉呀，"<<he>>对你说，"你得先自己争取。我知道一个安静的地方。"
+		<br><br>
+
+		<<if $promiscuity gte 35>>
+			<<link [[接受|Prison Yard Flirt Accept]]>><</link>><<promiscuous3>>
+			<br>
+		<<else>>
+			<span class="blue">你还没有淫乱到可以接受这样的提议。</span>
+			<br>
+		<</if>>
+		<<link [[拒绝|Prison Yard]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	一个<<person>>向你送去秋波。"唉呀，"<<he>>对你说，"你得先自己争取。我知道一个安静的地方。"
+	<br><br>
+
+	<<if $promiscuity gte 35>>
+		<<link [[接受|Prison Yard Flirt Accept]]>><</link>><<promiscuous3>>
+		<br>
+	<<else>>
+		<span class="blue">你还没有淫乱到可以接受这样的提议。</span>
+		<br>
+	<</if>>
+	<<link [[拒绝|Prison Yard]]>><<endevent>><</link>>
+	<br>
+<</if>>

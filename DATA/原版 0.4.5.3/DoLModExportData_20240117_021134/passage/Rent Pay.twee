@@ -1,0 +1,28 @@
+:: Rent Pay []
+<<effects>>
+
+<<rentpay>>
+
+<<if $bus is "hospital">>
+	<<if crimeSumCurrent() gte 1000>>
+		<<link [[继续|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续->Hospital front]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $phase is 1>>
+		<<endevent>>
+		<<npc Robin>><<person1>>
+		当你离开<<his>>的房间时，你看到罗宾从拐角处向你跑来。"你没事！"<<He>>紧紧抱着你。
+		"贝利昨晚把我带走了，我还以为会发生可怕的事，"<<he>>心有余悸地说道。
+		<br><br>
+
+		你们再次拥抱了对方，然后回到了各自的房间。
+		<br><br>
+
+	<</if>>
+	<<link [[继续|Bedroom]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,23 @@
+:: Underground Robin Dice Intro 4 []
+<<effects>>
+
+"<<number $playerDice>>，”$diceAnnouncer说。"那么<<nnpc_he "Robin">>将得到<<number $robinDice>>。"罗宾<<print $playerDice gt $robinDice ? "非常感激" : "感觉被背叛了">>。
+<br><br>
+
+<<for _d to 1; _d lte $playerDice; _d++>>
+	<<generateNPC _d>>
+<</for>>
+<<person1>>
+<<if $playerDice is 1>>
+	观众中的一个<<person>>爬上舞台，向你走来。
+<<else>>
+	观众中一些<<fullGroup>>爬上舞台，向你靠近。
+<</if>>
+<<if $robinDice is 1>>
+	另一个人爬上舞台，走近罗宾。
+<<else>>
+	<<Number $robinDice>>更多的人爬上舞台，走近罗宾。
+<</if>>
+<br><br>
+
+<<link [[继续|Underground Robin Dice Molestation]]>><<set $molestationstart to 1>><</link>>

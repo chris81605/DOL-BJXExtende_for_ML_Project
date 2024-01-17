@@ -1,0 +1,48 @@
+:: Underground Cell Molestation Finish []
+<<if $enemyhealth lte 0>>
+	那个<<person>>吃痛退开，随后踉跄朝<<he>>来时的地方走去，重重锤了一下门。
+	"让我出去，"<<he>>喊道，"你把我和一个精神病患者关在一起。" 门打开后<<he>>便离开了。
+	<br><br>
+
+	<<endevent>>
+	<<generate1>><<person1>>
+	<<if $undergroundbrothel.water gte 1>>
+		门再次打开了，一个<<person>>站在门口，"你终归会屈服的。"<<he>>说道。
+		“就算你没有，最后也只会虚弱得没法抵抗，何必要为难自己呢？”<<He>>砰的一声关上了门。
+	<<else>>
+		门再次打开了，一个<<person>>站在门口，"所以这就是你要干的事情吗？"<<he>>失望地说道。
+		“好吧，让我看看没水喝之后你还会不会这么顽强。”<<He>>砰地关上了门。
+		<<set $undergroundbrothel.water to 1>>
+	<</if>>
+	<<undergroundReturnToCell "skip">>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $forcedprostitutionstat += 1>><<fameprostitution 1>>
+	满足之后，<<he>>把你留在了床垫上，然后原路离开了。
+	<<undergroundReturnToCell false>>
+
+	<<if $undergroundbrothel.water gte 22>>
+		<<generate1>><<person1>>
+		门再次打开了，一个<<person>>站在了门口。“好<<girl>>，”<<he>>微笑着说道。
+		<<if $undergroundbrothel.water gte 6>>
+			<<if $NPCList[0].penis isnot "none">>
+				<<He>>进入了房间，随后关上了<<him>>身后的门。“我们会给你喝水的，不过……现在你先得用我的肉棒解渴。”
+				<br><br>
+				<<link [[继续|Underground Cell Oral]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<else>>
+				“我们会重新打开你的水龙头，你会给我们赚很多钱的。”<<He>>关上了门，你再次陷入了黑暗。
+				<<set $undergroundbrothel.water to 0>>
+				<br><br>
+				<<link [[继续|Underground Cell]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<else>> <!-- unreachable because water is always greater than 6, if water is greater than 22. -->
+			“我们还不打算重新让你喝上水，你还没有因为你的抵抗而受到足够的惩罚。不过继续保持你的工作态度。”
+			<<He>>砰地关上了门。
+			<br><br>
+			<<link [[继续|Underground Cell]]>><<set $eventskip to 1>><</link>>
+		<</if>>
+	<<else>>
+		<<link [[继续|Underground Cell]]>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</if>>

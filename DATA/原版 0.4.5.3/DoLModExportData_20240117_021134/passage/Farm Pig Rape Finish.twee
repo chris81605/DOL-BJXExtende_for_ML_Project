@@ -1,0 +1,82 @@
+:: Farm Pig Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	<<farm_text pig>>心满意足地从你身上爬下。
+
+	<<if $farm_work.pig.monster is true>>
+		其他人欢呼起来。
+		<br>
+		<<if random(1, 2) is 2>>
+			"还觉得自己了不起吗，嗯？"
+		<<else>>
+			"希望<<pshe>>能认清自己的地位。"
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"你刚才应该更粗暴点的。"
+		<<else>>
+			"干嘛对<<pshe>>那么温柔，下次你应该更粗暴点。"
+		<</if>>
+		<br>
+		<<if random(1, 2) is 2>>
+			"我们应该把<<phim>>关在这。"
+		<<else>>
+			"该轮到我了！"
+		<</if>>
+	<</if>><<lrespect>><<farm_pigs -1>>
+	<br><br>
+
+	<<tearful>>你挣扎着逃出了猪圈，并锁上了身后的大门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<farm_text pig>>畏怯了，从你身边退开。其他猪也跟着散开。<<grespect>><<farm_pigs 1>>
+	<br><br>
+
+	<<tearful>>你离开了猪圈，锁上了身后的大门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<else>><<set $rescued += 1>>
+
+	"我来了！"是艾利克斯。听到声音后，<<farm_text pig>>从你身边退开。其余的猪也一哄而散。<<lrespect>><<farm_pigs -1>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+
+	<<npc Alex>><<person1>>
+	艾利克斯跑到了围栏边上，看见你狼狈的样子，哈哈笑出了声。<<He>>伸出一只手，把你从地上拉了起来。"猪就是这个样子，"<<he>>说，"尽管大胆地呵斥它们，使劲吼一句它们就全听话了。"
+	<br><br>
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		艾利克斯递给你几块毛巾，然后继续<<his>>的工作。<<towelup>>
+	<<else>>
+		艾利克斯递给你几块毛巾，让你擦去身上的泥巴，然后继续<<his>>的工作。
+	<</if>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

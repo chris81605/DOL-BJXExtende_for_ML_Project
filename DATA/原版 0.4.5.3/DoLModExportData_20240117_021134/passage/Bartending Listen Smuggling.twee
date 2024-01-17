@@ -1,0 +1,57 @@
+:: Bartending Listen Smuggling []
+<<effects>>
+
+你清洁着两人附近的吧台。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<set $smuggler_known to 1>><<set $fedora_unlock to 1>>
+<span class="green">他们对你的存在没什么反应。</span><<person1>><<persons>>的声音更清晰了。
+<br><br>
+
+"有一大批货要来了，"<<he>>说道。
+<<if $smuggler_timer gte 2>>
+	"<span class="gold">从现在起，$smuggler_timer 天。</span>在晚上，午夜之前。
+<<elseif $smuggler_timer is 1>>
+	"<span class="gold">明晚。</span>午夜之前。
+<<else>>
+	"<span class="gold">今晚。</span>午夜之前。
+<</if>>
+	<<if $smuggler_location is "forest">>
+		他们会带着东西穿过森林。"
+	<<elseif $smuggler_location is "sewer">>
+		他们将会通过旧下水道运输物品。"
+	<<elseif $smuggler_location is "beach">>
+		他们计划在海滩旁的大礁石上登陆。"
+	<<elseif $smuggler_location is "bus">>
+		他们会把它藏在公交车上。"
+	<</if>>
+<br><br>
+	<<if $smuggler_stolen_stat gte 4>>
+		"我听说他们有麻烦了，"<<person2>><<person>>说道，"有货不见了。"
+		<br><br>
+
+		"是啊，行吧，"<<person1>><<person>>回道，偷偷环顾了下俱乐部。"他们带了后援。真不晓得有谁胆敢惹这帮家伙。"
+		<br><br>
+	<</if>>
+<<skulduggeryuse>>
+
+其余的班次没有发生任何事件。<<tipreceive>>
+<br><br>
+
+<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+
+<<else>>
+
+他们看了你一眼，<span class="red">然后安静下来。</span>在你离开前，他们都不再聊天了。
+<br><br>
+
+<<skulduggeryuse>>
+
+其余的班次没有发生任何事件。<<tipreceive>>
+<br><br>
+
+<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+
+<</if>>

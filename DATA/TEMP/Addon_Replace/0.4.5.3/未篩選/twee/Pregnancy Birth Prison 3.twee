@@ -1,0 +1,42 @@
+:: Pregnancy Birth Prison 3 []
+<<effects>>
+<<generate5>><<person5>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+你在医疗室醒来，一个助产士正微笑着站在你的床边。
+<<if $litter_size is 1>>
+	<<his>>怀抱着一个包裹着的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。”<<he>>说着，把孩子递给了你。孩子闭着双眼躺在你的怀里，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我尽快赶来了。那个守卫把你的孩子接生得很好，我给你和孩子做了全套检查，"助产士说，"你们都很健康。对了，你想好孩子的名字了吗？"
+	<br><br>
+
+<<elseif $litter_size is 2>>
+	怀抱着两个裹在襁褓中的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。"<<he>>说着，把两个孩子先后递给你。两个孩子分别被你的双臂怀抱着，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我尽快赶来了。那个守卫把你的孩子接生得很好，我给你和孩子做了全套检查，"助产士说，"你们都很健康。对了，你想好孩子们的名字了吗？"
+	<br><br>
+
+<<else>>
+
+	<<his>>怀里抱着三个被包裹起来的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。”<<he>>说着，把两个孩子递给你，让你双手各抱着一个，最后把第三个孩子放在了你的胸口。孩子们闭着眼睛，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我尽快赶来了。那个守卫把你的孩子接生得很好，我给你和孩子做了全套检查，"助产士说，"你们都很健康。对了，你想好孩子们的名字了吗？"
+	<br><br>
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<setBabyIntro "pc" "Bailey">>
+<<birthUi "pc" "prison" "home" "Pregnancy Birth Prison 4" 120>>

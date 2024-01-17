@@ -1,0 +1,32 @@
+:: School Infirmary Doren []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 1>>
+	多伦关切地把送你送回了教室。<<He>>告诉你如果你需要人谈心，可以放学后去找<<him>>，<<he>>会给你开门。
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $kylarenglish is 1>>
+		你发现凯拉尔坐在教室后面。在看到你之后，<<nnpc_His "Kylar">>的眼睛变亮了，笑着邀请你去坐<<nnpc_him "Kylar">>旁边的位置。
+		<br><br>
+
+		<<link [[坐凯拉尔旁边|School Infirmary Doren 2]]>><<set $kylarenglishstate to "active">><<set $phase to 0>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><</link>><<glove>><<lksuspicion>>
+		<br>
+		<<link [[坐其他人旁边|School Infirmary Doren 2]]>><<set $kylarenglishstate to "watching">><<set $phase to 1>><<npcincr Kylar love -5>><<npcincr Kylar rage 5>><</link>><<lllove>><<ggksuspicion>>
+		<br>
+	<<else>>
+		你找到一张宽敞的桌子，坐下来。
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你告诉多伦你坚持不了，<<He>>点点头。
+	<br><br>
+
+	"没关系，最好不要把自己逼得太紧。"<<He>>在离开前拍拍你的背。
+	<br><br>
+
+	<<link [[离开|Hallways]]>><<endevent>><<infirmary_excused>><</link>>
+	<br>
+<</if>>

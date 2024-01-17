@@ -1,0 +1,67 @@
+:: Sewers Algae []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersalgae">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。你不能走得太快，以免在墙上和地板上的藻类上滑倒。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $smuggler_location is "sewer" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18 and !$possessed>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		凳子旁边有一堆火在燃烧，看起来像刚刚有人匆忙离开了。<span class="gold">也许他们只是在躲避摩根。</span>
+		<br><br>
+	<<else>>
+		<<smugglerdifficultytext>>
+	<</if>>
+<</if>>
+<<if $sewerschased is 1>>
+	<<if $smuggler_pub_known is 1>>
+		通往走私者酒吧的路被交叉的金属棒阻拦了，至少现在，无法通行了。
+		<br><br>
+	<<elseif $historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1)>>
+		你注意到在一面砖墙下有个洞，洞足够大，能够允许挤过去。至少现在，交叉的金属棒使入口无法通行。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>><<set _hideOption to true>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
+		<<sewericon "algae">><<link [[躲在水草后面|Sewers Algae Hide]]>><</link>>
+		<br>
+	<</if>>
+	<<if $smuggler_location is "sewer" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18 and !$possessed>>
+		<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<else>>
+			<<smugglerdifficultyactions>>
+		<</if>>
+	<</if>>
+	<<if $smuggler_pub_known is 1 and $sewerschased isnot 1>>
+		<<ind>><<link [[挤过通道去往走私者酒吧 (0:05)|Smuggler Pub]]>><<pass 5>><<sewersend>><</link>>
+		<br>
+	<<elseif ($historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1)) and $sewerschased isnot 1>>
+		<<ind>><<link [[挤过墙上的破洞 (0:05)|Smuggler Pub Sewer Intro]]>><<pass 5>><<sewersend>><</link>>
+		<br>
+	<</if>>
+	<<sewericon "mud">><<link [[泥泞的隧道 (0:05)|Sewers Mud]]>><<pass 5>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Sewers Industrial">>
+		<<sewericon "main">><span class="nextLink"><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "main">><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

@@ -1,0 +1,34 @@
+:: Deep Sea Ship 
+<<underwater>><<effects>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<if $shiproom is 0>>
+		你进入沉船的厨房。古老的炉灶年久失修，锈迹斑斑，杂草丛生。鱼儿在架子间穿梭，躲在许多缝隙里。一条长长的走廊通向船的深处，大部分门都是密封的，但有一扇门的铰链被炸断，留下一个门形的洞。
+	<<elseif $shiproom is 1>>
+		你现在所在的房间里堆满了各种形状和大小的陶罐，看来沉船可能用这里来存放战利品。很多陶罐都被打碎了，战利品也锈迹斑斑，但还有很多陶罐看起来完好无损。一扇门通向厨房，地板上的一个大洞通向船的更深处。
+	<<elseif $shiproom is 2>>
+		你在一个破烂的房间中，地板大部分已经碎裂，你可以看到下面的海底。一尊巨大的石像矗立在房间中心，散发着令人平静的蓝光。石像上长着发光的苔藓，尽管如此，你还是能看到一个美丽的美人鱼雕像。
+	<</if>>
+	<br><br>
+	<<if $shiproom is 0>>
+		<<link [[离开沉船|Sea Dive]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<if $shiproom is 1>>
+		<<link [[搜索陶罐|Deep Sea Ship Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<if $shiproom is 2>>
+		<<link [[向雕像祈祷|Deep Sea Ship Statue]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<if $shiproom gt 0>>
+		<<link [[游回入口处|Deep Sea Ship]]>><<wateraction>><<set $shiproom -= 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+		<br>
+	<</if>>
+	<<if $shiproom lt 2>>
+		<<link [[游向更深处|Deep Sea Ship]]>><<wateraction>><<set $shiproom += 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>

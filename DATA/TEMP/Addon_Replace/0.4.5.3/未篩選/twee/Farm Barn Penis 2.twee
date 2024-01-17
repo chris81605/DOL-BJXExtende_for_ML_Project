@@ -1,0 +1,84 @@
+:: Farm Barn Penis 2 []
+<<effects>>
+
+<<if $farm.barn gte 1>>
+	<<set $farm_penis_milk to ($semen_amount / 1.5)>>
+<<else>>
+	<<set $farm_penis_milk to ($semen_amount / 2)>>
+<</if>>
+<<set _original_amount to $semen_amount>>
+机器继续着它罪恶的工作，更猛烈地吮吸着。你感到体内涌起一股暖流。<<gggarousal>><<arousal 10000>>
+<<orgasm>>
+<br>
+你的精液被管子收集进一个玻璃罐里。机器没有给你喘息的机会。<<gggarousal>><<arousal 10000>>
+<<orgasm>>
+<<arousal 10000>>
+<<orgasm>>
+<br>
+
+你保持双手和膝盖着地，机器不断地给你挤奶，吮吸出它能吸到的所有东西。就在你担心自己快要晕过去的时候，机器停了下来。
+<br><br>
+
+/* Either use the amount of semen produced by those three orgasms, or the original amount calculated for $farm_penis_milk, whichever is larger */
+<<set _orgasm_semen to _original_amount - $semen_amount>>
+<<if _orgasm_semen gt $farm_penis_milk>>
+	<<set $farm_penis_milk to _orgasm_semen>>
+<<else>>
+	<<semen_amount `-($farm_penis_milk - _orgasm_semen)`>>
+	<<set $semen_produced_stat += ($farm_penis_milk - _orgasm_semen)>>
+<</if>>
+
+<<if $farm_penis_milk gte 3000>>
+	<span class="green">玻璃罐里的精液几乎要溢出来了。</span><<farmCatchChance 0.4>>
+<<elseif $farm_penis_milk gte 2000>>
+	<span class="teal">玻璃罐里已经装满一半的精液。</span><<farmCatchChance 0.2>>
+<<elseif $farm_penis_milk gte 1000>>
+	<span class="lblue">玻璃罐里装有大量精液。</span><<farmCatchChance 0.1>>
+<<elseif $farm_penis_milk gte 300>>
+	<span class="blue">玻璃罐里已经有相当数量的精液。</span><<farmCatchChance 0.05>>
+<<else>>
+	<span class="purple">玻璃罐里只有一点点精液。</span><<farmCatchChance 0.01>>
+<</if>>
+<br><br>
+
+<<if $farm_penis_milk gte 2000>>
+	<<set $farm_penis_milk to Math.trunc($farm_penis_milk / 1000)>>
+	<span class="gold">你已经装满了$farm_penis_milk瓶精液。</span>
+	<<tending_give bottle_of_semen $farm_penis_milk>>
+<<elseif $farm_penis_milk gte 1000>>
+	<<set $farm_penis_milk to Math.trunc($farm_penis_milk / 1000)>>
+	<span class="gold">你用精液装满了瓶子。</span>
+	<<tending_give bottle_of_semen $farm_penis_milk>>
+<<else>>
+	<<set $farm_penis_milk to Math.trunc($farm_penis_milk / 300)>>
+	<<if $farm_penis_milk lte 0>>
+		<<set $farm_penis_milk to 1>>
+	<</if>>
+	你的存量不够装满一瓶。你将其与牛奶混合。<<gfarm>>
+	<<farm_yield $farm_penis_milk>>
+<</if>>
+<br><br>
+
+<<unset $farm_penis_milk>>
+<<barn_img penis>>
+
+<<if $farm.milking.dayMilking is true and Time.hour gte 7 and Time.hour lte 21 and $farm_end is undefined>>
+	你用颤抖的手取下吸筒，然后站了起来。
+	<<deviancy2>>
+
+	<<link [[继续 (0:30)|Farm Cattle Milk]]>><<pass 30>><<clotheson>><<machine_end>><</link>>
+	<br>
+<<elseif $farm.milking.caught is true and $farm.milking.alexNightEvent is false>>
+	<<set $farm.milking.alexNightEvent to true>>
+	<<set $farm.milking.dayMilking to true>>
+	你用颤抖的手取下吸筒。
+	<<deviancy2>>
+	<<link [[继续 (0:30)|Farm Barn Caught]]>><<pass 30>><<machine_end>><<endevent>><</link>>
+	<br>
+<<else>>
+	你用颤抖的手取下吸筒，然后站了起来。
+	<<deviancy2>>
+
+	<<link [[继续 (0:30)|Farm Barn]]>><<pass 30>><<clotheson>><<machine_end>><</link>>
+	<br>
+<</if>>

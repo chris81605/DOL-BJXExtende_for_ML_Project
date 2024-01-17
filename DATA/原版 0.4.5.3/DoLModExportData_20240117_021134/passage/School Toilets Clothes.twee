@@ -1,0 +1,107 @@
+:: School Toilets Clothes []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $phase is 1>>
+	<<if $changingRoomGender is "boys">>
+		<<storeon "schoolboys" "delete">>
+	<<else>>
+		<<storeon "schoolgirls" "delete">>
+	<</if>>
+	你听见有人带着你的衣服离开了房间。
+	<br><br>
+	<<endevent>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 2>>
+	你喊了出来。"等等！那些衣服是我的！"你听见脚步声停下了。
+	<br><br>
+	<<if $player.gender_appearance is "f" and $changingRoomGender is "boys">>
+		<<person1>><<person>>说道："这里是不允许女孩子进来的，把门打开吧。"
+		<br><br>
+		<<link [[开门|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<if $speech_attitude is "bratty">>
+			<<link [[让那个家伙丢过来|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<br>
+		<<else>>
+			<<link [[恳求丢过来|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<br>
+		<</if>>
+	<<elseif $player.gender_appearance is "m" and $changingRoomGender is "girls">>
+		<<person1>><<person>>说道："这里是不允许男孩子进来的，把门打开吧。"
+		<br><br>
+		<<link [[开门|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<if $speech_attitude is "bratty">>
+			<<link [[让那个家伙丢过来|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<br>
+		<<else>>
+			<<link [[恳求丢过来|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<person1>><<person>>说道："哦？如果我把它们还给你的话，你会为此做什么？"
+		<br><br>
+		<<if $promiscuity gte 15>>
+			<<link [[用你的身体做报酬|School Toilets Sex]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+		<<if $money gte 1500>>
+			<<link [[为此付钱 (£15)|School Toilets Clothes]]>><<set $money -= 1500>><<set $phase to 3>><</link>>
+			<br>
+		<</if>>
+		<<if $speech_attitude is "bratty">>
+			<<link [[让那个家伙丢过来|School Toilets Clothes]]>><<set $phase to 4>><</link>>
+			<br>
+		<<else>>
+			<<link [[恳求丢过来|School Toilets Clothes]]>><<set $phase to 5>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $phase is 3>>
+	你从门缝底下塞了点钱过去，在等了一会后，<<person>>继续说道。"很好。我像我会把它们留在找到它们的地方，走吧。"你听到他离开了房间。
+	<br><br>
+	当那个人走后，你打开隔间门往外看。果然，你的衣服就在之前的地方。
+	<br><br>
+	<<endevent>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 4>>
+	"听着，"你说道，"你尽可以拿走我的东西，但我会找到你，然后把一根铁钉塞进你那没用的屁眼里。"
+	<br><br>
+	你语气中的某些东西确实影响到了他们。"冷静点，你这个该死的疯子。我们只是在和你开玩笑。"当他们走后，你往隔间门外看，你的衣服依旧安全地躺在你放置的地方。
+	<br><br>
+	<<endevent>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 5>>
+	你试图恳求他们，但很显然这没什么用。"如果你不打算合作的话，"<<person1>><<person>>说着。"那我为什么要这样做？"他大笑着离开这里。当你从隔间向外窥视时，看见你放衣服的地方已经空空如也。
+	<<if $changingRoomGender is "boys">>
+		<<storeon "schoolboys" "delete">>
+	<<else>>
+		<<storeon "schoolgirls" "delete">>
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

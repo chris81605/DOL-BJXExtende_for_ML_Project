@@ -1,0 +1,31 @@
+:: Farm Shopping 2 []
+<<effects>>
+
+<<He>>在收银台前把所有东西结算好。"总共<<printmoney $farm_work.shopping_money>>，"<<he>>说。
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<<He>>用目光审视你的身体。"除非你想用另一种方式付款？"
+	<br><br>
+
+	<<link [[用钱支付|Farm Shopping Pay]]>><</link>>
+	<br>
+	<<link [[抢了就跑|Farm Shopping Steal]]>><<crimeUp 50 "thievery">><</link>><<athleticsdifficulty 1 600>><<crime "thievery">>
+	<br>
+	<<link [[引诱和欺骗|Farm Shopping Seduce]]>><<crimeUp 50 "coercion">><</link>><<promiscuous1>><<crime "coercion">>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[用你的身体支付|Farm Shopping Prostitution]]>><</link>><<promiscuous2>>
+		<br>
+	<<elseif $uncomfortable.prostituting is false>>
+		<<link [[用你的身体支付|Farm Shopping Prostitution]]>><<set $desperateaction to 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[付钱|Farm Shopping Pay]]>><</link>>
+	<br>
+	<<link [[抢了就跑|Farm Shopping Steal]]>><<crimeUp 50 "thievery">><</link>><<crime "thievery">><<athleticsdifficulty 1 600>>
+	<br>
+<</if>>

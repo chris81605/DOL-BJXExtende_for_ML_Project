@@ -1,0 +1,197 @@
+:: Tentacle Plains []
+<<location "tentworld">><<effects>>
+<<if $tentacleorgasmignore is undefined>><<set $tentacleorgasmignore to 0>><</if>>
+/* 北极星模组 */
+<<if $options.bjx_divine and $tentacledemonhunter is 1>>
+    你在触手平原上，空气中弥漫着香甜的气息。
+    之前满眼的触手全部消失不见，似乎在刻意躲避着你。
+    <<drugs 10>>
+    <br><br>
+<<elseif $options.bjx_animal and $tentaclefox gte 1>>
+    你在触手平原上，空气中弥漫着香甜的气息。
+    触手从地面伸直伸向你，听从你的安排，温柔地抚摸着你要求被抚摸的地方。
+    <<drugs 10>><<garousal>><<arousal 1200>>
+    <br><br>
+<<else>>
+    你在触手平原上，空气中弥漫着香甜的气息。
+    触手从地面伸直伸向你的<<genitals>>，抚摸着你的大腿和它们可以到达的任何其他地方。
+    <<drugs 10>><<ggarousal>><<arousal 1200>>
+    <br><br>
+<</if>>
+/* 北极星 */
+<<if $phase is 1>>
+	你向北走。
+	<br><br>
+<</if>>
+<<if $phase is 2>>
+	你向南走。
+	<br><br>
+<</if>>
+<<if $phase is 3>>
+	你向东走。
+	<br><br>
+<</if>>
+<<if $phase is 4>>
+	你向西走。
+	<br><br>
+<</if>>
+<<tentaclewolf>>
+<<set $phase to 0>>
+<<if $stress gte $stressmax>>
+	<<passouttentacleworld>>
+/* 北极星模组 */
+<<elseif $arousal gte $arousalmax and $tentaclefox gte 3 and $options.bjx_animal>>
+    <<orgasm>>
+    听着你满足的呻吟，触手们炫耀似的晃动着，似乎在请求你的奖赏。
+	<br><br>
+    <<link [[奖励它们|Tentacle Plains Admire Sex]]>><<set $sexstart to 1>><</link>>
+    <br>
+    <<link [[告诉它们还不够|Tentacle Plains]]>><</link>>
+    <br>
+<<elseif $arousal gte $arousalmax and $tentacledemonhunter is 1>>
+    <<orgasm>>
+    尽管你又一次高潮了，但那些触手依旧无动于衷，看来同样的伎俩已经骗不到它们，你对此感到一丝遗憾。
+	<br><br>
+    <<link [[继续|Tentacle Plains]]>><<set $tentacledemonhunter to 1>><</link>>
+    <br>
+<<elseif $arousal gte $arousalmax and $eventskip isnot 1 and $tentacleorgasmignore lte 0>>
+	<<orgasm>>
+	充满活力地，你周围的触手猛然间伸出很长。他们缠住你的手臂，把你拖到地上。
+	<br><br>
+	<<if $options.bjx_divine and $demonhunter gte 2>>
+	    触手们迫不及待地蜂拥而来，然而等待它们的却是你滚烫又致命的腐蚀性体液。
+	    <br><br>
+	    接触到体液的触手们痛苦地翻滚着，仿佛遇到除草剂的杂草们接连死去。远处的触手们瑟瑟发抖，钻进地里不见了踪影。
+	    <br><br>
+		<<link [[冷笑|Tentacle Plains]]>><<set $tentacledemonhunter to 1>><</link>><<demonhunter>>
+		<br>
+	<<else>>
+	    <<link [[继续|Tentacle Rape]]>><<set $molestationstart to 1>><</link>>
+	    <br>
+	<</if>>
+/* 北极星 */
+<<else>>
+	<<if $arousal gte $arousalmax and $tentacleorgasmignore gte 1>>
+		<<orgasm>><<set $tentacleorgasmignore -= 1>>
+		触手没有抓到你的破绽。
+		<br><br>
+	<</if>>
+	<<if $tentnorth is 0 and $tenteast is 0>>
+		<<if $tentacleEntrance is "mirror">>
+			你站在镜子前。
+			<br>
+			<<mirroricon "blood">><<link [[漫步|Tentacle Home Return]]>><</link>>
+		/* 北极星模组 */
+		<<elseif $tentacleEntrance is "lakehouse">>
+			你站在镜子前。
+			<br>
+			<<mirroricon "blood">><<link [[走进去|Tentacle Lake House Return]]>><</link>>
+		/* 北极星 */
+		<<else>>
+			精神病院的门就在附近。
+			<br>
+			<<asylumicon "door">><<link [[返回精神病院|Tentacle Return]]>><</link>>
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $tentnorth is $tentportalnorth and $tenteast is $tentportaleast>>
+		<<if $wolfgirl gte 6 and $syndromewolves gte 1>>
+			你在远处看到另一扇门，与带你到这里的那扇门相似，被触手包围。门敞开着，森林就在另一边，你看到了逃脱的希望。突然，一个黑影模糊地闪过，开始对其中一根触手撕咬咆哮。
+			<br><br>
+			<<foresticon>><<link [[往门口跑|Tentacle Wolf Escape]]>><</link>>
+			<br><br>
+		<<else>>
+			一扇门在这里敞开着。那边是一片森林。
+			<br>
+			<<foresticon>><<link [[进入|Tentacle Escape]]>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if $tentnorth gte 5 or $tentnorth lte -5 or $tenteast gte 5 or $tenteast lte -5>>
+		平原一直延伸到地平线。你不想离开门太远。
+		<br><br>
+	<</if>>
+	<<if $tentnorth is 4 and $tenteast is 4 and $tentspray isnot 1>>
+		一道红光在齐胸高的空中盘旋，由细长的触手高高举起。
+		<br>
+		<<peppersprayicon>><<link [[触碰|Tentacle Plains Spray]]>><<set $spraymax += 1>><<set $tentspray to 1>><<spray 5>><</link>><<gspraymax>>
+		<br><br>
+	<</if>>
+	/* 北极星模组 */
+	<<if $tentnorth is -2 and $tenteast is -2 and $tentcloth isnot 1>>
+		一套造型奇特的衣服悬浮在空中，与胸口齐高，由细长的卷须托着。
+		<br>
+		<<link [[触碰|Living Clothes Discovery]]>><<set $tentcloth to 1>><</link>>
+		<br><br>
+	<</if>>
+	/* 北极星 */
+	<<if $tentnorth lt 5>>
+		<<tentacleicon "north">><<link [[向北 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tentnorth += 1>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $tentnorth gt -5>>
+		<<tentacleicon "south">><<link [[向南 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tentnorth -= 1>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $tenteast lt 5>>
+		<<tentacleicon "east">><<link [[向东 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tenteast += 1>><<set $phase to 3>><</link>>
+		<br>
+	<</if>>
+	<<if $tenteast gt -5>>
+		<<tentacleicon "west">><<link [[向西 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tenteast -= 1>><<set $phase to 4>><</link>>
+		<br>
+	<</if>>
+	<<if $demon gte 6 and $tentacleadmire gte 1>>
+		<<ind>><<link [[献上自己|Tentacle Plains Admire]]>><</link>><<demon>>
+		<br>
+	<<elseif $demon gte 6>>
+		<<ind>><<link [[欣赏|Tentacle Plains Admire]]>><</link>><<demon>>
+		<br>
+	<</if>>
+	<<if $tentaclewolf gte 2>>
+		<<ind>><<link [[嚎叫|Tentacle Plains Howl]]>><<transform wolf 1>><</link>><<wolfgirl>>
+		<br>
+	<</if>>
+	<<if $angel gte 6 and $tentacleangel gte 2>>
+		<<ind>><<link [[抵抗|Tentacle Plains Resist]]>><</link>><<angel>>
+		<br>
+	<<elseif $angel gte 6>>
+		<<ind>><<link [[集中|Tentacle Plains Resist]]>><</link>><<angel>>
+		<br>
+	<</if>>
+	<<if $fallenangel gte 2>>
+		<<ind>><<link [[绝望|Tentacle Plains Despair]]>><</link>><<fallenangel>>
+		<br>
+	<</if>>
+	<<if $cat gte 6>>
+		<<ind>><<link [[突袭|Tentacle Plains Cat]]>><<transform cat 1>><</link>><<cat>>
+		<br>
+	<</if>>
+	<<if $cow gte 6 and $breastfeedingdisable is "f">>
+		<<ind>><<link [[让触手榨乳|Tentacle Cow Breasts]]>><<transform cow 1>><</link>><<cow>>
+		<br>
+	<</if>>
+	<<if $cow gte 6 and $player.penisExist and !playerChastity("penis")>>
+		<<ind>><<link [[让触手榨精|Tentacle Cow Penis]]>><<transform cow 1>><</link>><<cow>>
+		<br>
+	<</if>>
+	<<if $harpy gte 6>>
+		<<ind>><<link [[从高处俯瞰|Tentacle Bird]]>><<transform bird 1>><</link>><<flight_text>>
+		<br>
+	<</if>>
+	/* 北极星模组 */
+	<<if !$options.bjx_animal and $fox gte 6>>
+		<<ind>><<link [[寻找能偷的东西|Tentacle Plains Fox]]>><<transform fox 1>><</link>><<fox>>
+		<br>		
+	<</if>>
+	<<if $options.bjx_animal and $fox gte 6>>
+		<<ind>><<link [[尝试调教触手|Tentacle Plains Fox New]]>><<transform fox 1>><</link>><<fox>>
+		<br>		
+	<</if>>
+	<<if $options.bjx_animal and $dragon gte 6>>
+		<<ind>><<link [[龙之咆哮|Tentacle Plains Dragon]]>><<transform dragon 1>><</link>><<dragon>>
+		<br>
+	<</if>>
+	/* 北极星 */
+<</if>>
+<<set $eventskip to 0>>

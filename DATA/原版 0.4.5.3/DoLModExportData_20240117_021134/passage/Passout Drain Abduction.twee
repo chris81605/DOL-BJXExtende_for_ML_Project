@@ -1,0 +1,23 @@
+:: Passout Drain Abduction []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<generate2>><<maninit>>
+	<<npcClothesType $NPCList[0] "worker">><<npcClothesType $NPCList[1] "worker">>
+	<<set $leftarm to "bound">><<set $rightarm to "bound">><<upperruined>><<lowerruined>><<underruined>>
+	你在一个没有窗户的房间里醒来。一根绳子缠在你的腰上，将你的手臂绑在背后并把你吊在天花板上。一个<<fullGroup>>坐在你的面前。<<if $worn.handheld.name isnot "naked">>你的$worn.handheld.cn_name_cap不见了。<<handheldruined>><</if>>"<<pShe>>醒了。"那个<<person>>走到你身后，在你的屁股上狠狠地抽了一下。"我们可以保留我们在工作中发现的任何东西，所以我们可以对你为所欲为，不要试图反抗。"
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyarousal lt $enemyarousalmax and $enemyhealth gt 0>>
+	<span id="next"><<link [[继续|Passout Drain Abduction]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Passout Drain Abduction Finish]]>><</link>></span><<nexttext>>
+<</if>>

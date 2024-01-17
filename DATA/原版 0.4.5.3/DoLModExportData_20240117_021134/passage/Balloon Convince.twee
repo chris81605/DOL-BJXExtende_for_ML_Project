@@ -1,0 +1,58 @@
+:: Balloon Convince []
+<<effects>>
+<<npc Robin 2>><<person2>>
+
+<<switch $phase>>
+	<<case "persuade">>
+		你详细地论述了罗宾的<<print Time.season is "winter" ? "热巧克力" : "柠檬水">>的优点。为了增加印象分，你还编造了一个与罗宾的孤儿身分有关的悲惨故事。
+		<br><br>
+		<<if $englishSuccess>>
+			“你真的能帮<<person2>><<him>>很大的忙，<<person1>><<sir>>，”你眼神诚恳地说。“<<Hes>>是个好人，<<he>>只是需要有人给<<him>>一次机会。我向你保证，这会是个互惠互利的好事。<<He>>会乐意将顾客引导到你这里来。另外，帮助一个不幸的孤儿在这个残酷的世界中站稳脚跟，一定会善有善报的！”
+			<br><br>
+			那个<<person1>><<person>>似乎被你充满激情的话语所感动。<<balloonRobinHelped>>
+			<br><br>
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<<else>>
+			那个<<person1>><<person>>看起来并未被打动。“所以，<<person2>><<personsimple>>过得很辛苦，但谁不是呢？我这里不是慈善机构，我看不出<<he>>可以为我带来什么好处。”
+			<br><br>
+			<<person1>><<He>>叹了口气。“听着，我不是个铁石心肠的混蛋，”<<personsimple>>说。“我还没被说服，但我还挺喜欢你的。改天再来我的摊位，我会很乐意听你说。”
+			<<set $daily.ex.balloonConvince to 1>>
+			<<set $balloonStand.robin.status to "convince">>
+			<br><br>
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<</if>>
+
+	<<case "seduce">>
+		<<set $seductiondifficulty to 8000>>
+		<<seductioncheck>>
+		<br><br>
+		<<seductionskilluptext>>
+		<<seductionskilluse>>
+
+		“你确定我无法说服你吗？”你压低嗓音，靠在了<<person1>><<his>>的摊位上。你舔了舔嘴唇，毫不掩饰的目光直指<<his>>的胯部。“我的口活很厉害，我想我们能至少在这方面达成共识。”<<promiscuity4>>
+
+		<<if $seductionrating gte $seductionrequired>>
+			<<He>>迟疑了一下，但最终还是妥协了。“啊，也行。”<<He>>迅速环顾四周，然后引导你钻到摊位下面。“好好利用你这张嘴，那我就会帮你。快点，别被人看见。我想我看到了一些潜在的客户正在那儿。”
+			<br><br>
+			<<link [[继续|Balloon Sex]]>><<set $sexstart to 1>><</link>>
+		<<else>>
+			那个<<person>>看着你，<<he>>突然大笑起来，这让你感到尴尬。“不行，抱歉。听着，我不是个趁人之危的混蛋，”<<He>>说。“我不感兴趣，但我还挺喜欢你的。明天再来摊位，我很乐意听你说。下次用你的话语来说服我，而不是……这种事情。”<<himself>>偷笑几声，挥手示意你离开。
+			<<set $daily.ex.balloonConvince to 1>>
+			<<set $balloonStand.robin.status to "convince">>
+			<br><br>
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<</if>>
+
+	<<case "bribe">>
+		<<if $speech_attitude is "meek">>
+			“这样能让这笔交易更诱人吗？”你数出£300递给<<person1>> <<him>>。
+		<<elseif $speech_attitude is "bratty">>
+			“有钱好办事，对吧？£300怎么样？”你数出钱，塞进<<person1>><<his>>的手中。
+		<<else>>
+			“£300能说服你吗？”你数出钱，递给<<person1>><<him>>。
+		<</if>>
+		<br><br>
+		<<He>>将钱收进口袋，看起来已经被你给打动了。<<balloonRobinHelped>>
+		<br><br>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>

@@ -1,0 +1,23 @@
+:: Sextoys Inventory []
+<<if $worn.lower.name != "naked">>
+	<span id="stiShowUnderwearCn"><<link "显示/隐藏下衣">><<run window.tempHideLower()>><<run Links.generateLinkNumbers($(".passage"))>><</link>></span>
+<</if>>
+<div id="stiCursedText" class="ssm_fade_in"></div>
+<br>
+<div class="sti_grid" id="sti_grid">
+	<div class="sti_grid_title">性玩具物品栏</div>
+</div>
+<br>
+<div class="sti_gridDescContainer" id="stiDescPillContainer" style="display: none;">
+	<div class="sti_descContainer" id="sti_descContainer"></div>
+</div>
+<br><br>
+<<run window.patchStraponsWearStatus()>>
+<<run window.sexToysInventoryInit()>>
+
+<<if $debug is 1>>
+	<<link [[刷新|Sextoys Inventory]]>><</link>>
+	<br>
+<</if>>
+
+<<link [[离开|$sextoyInvReturnLink]]>><<unset $sextoyInvReturnLink>><</link>>

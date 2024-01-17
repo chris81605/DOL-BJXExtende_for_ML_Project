@@ -1,0 +1,19 @@
+:: Passout alley []
+你把自己逼得太紧了。
+<br><br>
+<<passout>>
+<<set $safealley to 0>>
+<<set $dangeralley to 0>>
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>><<set $dangeralley to random(1, 100)>><</if>>
+<<if $danger lt (9900 - $allure)>><<set $safealley to random(1, 100)>><</if>>
+<<if $dangeralley gte 71>>
+	<<link [[苏醒|Abduction]]>><<set $molestationstart to 1>><</link>>
+<<elseif $dangeralley gte 45>>
+	<<link [[苏醒|Street Wake]]>><</link>>
+<<elseif $dangeralley gte 1>>
+	<<link [[苏醒|Molestation alley]]>><<set $molestationstart to 1>><</link>>
+<</if>>
+<<if $safealley gte 1>><<ambulance>><</if>>
+<<pass 1 hour>>
+<<trauma 6>><<set $stress -= 2000>>

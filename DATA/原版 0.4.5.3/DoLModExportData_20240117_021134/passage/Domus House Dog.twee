@@ -1,0 +1,60 @@
+:: Domus House Dog []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $enemyno to 1>>
+	<<set $enemynomax to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $enemytrust -= 40>><<set $enemyanger += 20>>
+	<<enable_rescue>>
+<<elseif $sexstart is 1>>
+	<<set $enemyno to 1>>
+	<<set $enemynomax to 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<set $enemytrust -= 40>>
+	你躺在地上并摆出交配的姿势。那只<<beasttype>>平静了下来，它的一些本能被你的动作所唤醒。
+	<<deviancy2>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<if between($phase,1,2) and $orgasmdown gte 2>>
+	<<set $phase += 2>>
+	<<person2>>“哇，”<<person>>说，“我的<<beasttype>>的婊子让你高潮了。也许这对你来说并不是一种惩罚，可能还是种享受呢。”你觉得很丢脸。<<famebestiality 1>>
+	<br><br>
+<<elseif $phase gte 1>>
+	<<person2>>那个<<person>>坐在沙发上看着你。
+	<br><br>
+<</if>>
+<<effectsman>>
+<<if ($phase % 2) and $alarm is 1>>
+	<<alarmstate '<span class="red"><<person2>>这个<<person>>大笑着。"怎么啦，小骚货？<<person1>>难道<<bhe>>对你来说太大了吗？"</span><<person1>>'1>>
+	<<set $alarm to 0>>
+	<<set $phase += 1>>
+<<else>>
+	<<alarmstate '<span class="red">没人能听见你的叫喊声。</span>'>>
+<</if>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $phase is 0>>
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Domus House Dog Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Domus House Dog]]>><</link>></span><<nexttext>>
+	<</if>>
+<<else>>
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Domus House Dog Finish 2]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Domus House Dog]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>

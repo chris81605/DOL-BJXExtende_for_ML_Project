@@ -1,0 +1,86 @@
+:: Docks []
+<<set $outside to 1>><<set $location to "docks">><<dockeffects>><<effects>>
+<<skul_dock_init>>
+你正待在码头这里。
+<<if Time.dayState is "dawn">>
+	大家都在忙碌着，各种载具来来往往，运送着货物。
+<<elseif Time.dayState is "day">>
+	大家都在忙碌着，码头工人们正在停泊的船只旁工作着。
+<<elseif Time.dayState is "night">>
+	码头晚上关门了。巡逻保安的灯光照亮了堆叠着的集装箱。
+<<elseif Time.dayState is "dusk">>
+	最后一艘船也离开了，余下的船只将在这里停泊过夜。
+<</if>>
+<br>
+
+<<if $dockwork gte 1 and Time.schoolDay and $idDocksReveal isnot 2 and Time.hour is 7>>
+	<br>
+
+	你靠近了其他工人，但经理拦住了你。"抱歉，<<girl>>，没门。你知道规矩的：工作日学生不能来。"
+
+	<<if $id is 1>>
+		<<set $idDocksReveal to 1>>
+		<br>
+		<span class="blue">也许如果你给他们看看你从布莱尔那买的身份证，他们就会让你今天在这儿工作了？</span>
+		<br>
+	
+	<</if>>
+<</if>>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "docks">>
+	<br>
+<</if>>
+<br>
+<<if $dockwork is 2 and Time.hour is 7 and Time.schoolDay and $idDocksReveal isnot 1>>
+	码头的工人们已经陆陆续续来上班了。但他们不会让你在上学日上班的。
+	<br><br>
+<</if>>
+/* 北极星模组 */
+<<if $money gte 100000 and $history gte 700 and $exposed lte 0>>
+	<<link [[找船去四季岛 (0:20)|Docks Ride]]>><<pass 20>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<if $robindebtevent gte 1 and $docksrobinintro isnot 1>>
+	<<investigateicon>><<link [[寻找罗宾 (0:20)|Docks_Robin]]>><<pass 20>><</link>>
+	<br>
+<</if>>
+<<if $id is 1 and $dockwork gte 1 and Time.hour is 7 and $idDocksReveal is 1>>
+	<<ind>><<link [[用假ID (0:02)|Docks Fake ID]]>><</link>>
+	<br>
+<</if>>
+<<if $dockwork is 1 and Time.dayState isnot "night" and $exposed lte 0>>
+	<<docksicon>><<link [[接取工作 (0:30)|Docks Take Job]]>><<pass 30>><<set $dockwork to 2>><</link>>
+	<br>
+<<elseif $dockwork is 2 and Time.hour is 7 and $exposed lte 0 and (!Time.schoolDay or $idDocksReveal is 2)>>
+	<<docksicon>><<link [[在码头工作 (12:00)|Docks Start]]>><</link>><<gtiredness>>
+	<br>
+<<elseif $dockwork is undefined and Time.dayState isnot "night" and $exposed lte 0>>
+	<<askicon>><<link [[询求工作 (0:05)|Docks Ask]]>><<pass 5>><<set $dockwork to 1>><</link>>
+	<br>
+<</if>>
+<<if $exposed lte 0 and Time.dayState isnot "night" and $dockstatus gte 80 and $dockwage lt 2000>>
+	<<askicon>><<link [[要求加薪 (0:05)|Docks Raise]]>><<pass 5>><<set $dockwage += 100>><<dockstatus -20>><</link>><<llcool>>
+	<br>
+<</if>>
+<<if Time.dayState is "night">>
+	<<sneakicon>><<link [[溜进去 (0:05)|Docks Sneak Start]]>><<set $bus to "S">><</link>>
+	<br>
+<</if>>
+<<storeon "docks" "check">>
+<<if _store_check is 1>>
+	<<dressasyouwereicon>><<link [[穿好衣服|Docks]]>><<storeon "docks">><</link>>
+	<br>
+<</if>>
+
+<br>
+<<mericon>><<link [[离开|Mer Street]]>><</link>>
+<br>
+
+<<if $debug is 1>>
+	<<link [[最大化码头地位|Docks]]>><<set $dockstatus to 100>><</link>>
+	<br>
+	<<link [[最小化码头地位|Docks]]>><<set $dockstatus to 0>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,84 @@
+:: Flats Knock []
+<<effects>>
+
+<<if $flats_progress is 1 and random(1, 10) is 10>>
+你走近一个公寓准备要敲门。然后你注意到了门把手，<span class="purple">它像一朵莲花一样，</span>你记起了那个警告。据说这里住着坏人。
+    <br><br>
+<<link [[无论如何都要敲门|Flats Lotus]]>><<set $flats_progress to 2>><</link>>
+    <br>
+<<link [[离开|Flats]]>><</link>>
+    <br>
+<<else>>
+    <<cleareventpool>>
+
+    <<addinlineevent "flats_vacant" 2>>
+你走近其中一间公寓，敲了敲门。没有人回答。
+        <br><br>
+
+<<link [[闯入|Flats Lock]]>><</link>>
+        <br>
+<<link [[去下一个公寓 (0:01)|Flats Knock]]>><<pass 1>><</link>>
+        <br>
+<<link [[停止|Flats]]>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "flats work_1" 1>>
+        <<generate1>><<person1>>
+你走近一个公寓，敲了敲门。门开了，露出一个<<person>>。<<He>>靠在门框上。"多可爱的客人啊，"<<he>>说。"有什么可以帮你的吗？"
+        <br><br>
+<<link [[询求工作|Flats Lecherous Ask]]>><</link>>
+        <br>
+<<link [[说你敲错门了，然后离开|Flats]]>><<endevent>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "flats work_2" 1>>
+        <<generate1>><<person1>>
+你走近一个公寓，敲了敲门。你听到里面传来狗叫声。
+        <br><br>
+"安静点！"一个<<personsimple>>喊道。"愚蠢的杂种。"门开了，露出一个<<person>>。<<him>>身后的地板散落着乱七八糟的杂物。"有什么事吗？"
+        <br><br>
+<<link [[询求工作|Flats Dog Ask]]>><</link>>
+        <br>
+<<link [[说你敲错门了，然后离开|Flats]]>><<endevent>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "flats work_3" 1>>
+        <<generate1>><<person1>>
+你走近一个公寓，敲了敲门。门开了，露出一个<<person>>。<<He>>靠在门框上。"多可爱的客人啊，"<<he>>说。"有什么可以帮你的吗？"
+        <br><br>
+<<link [[询求工作|Flats Kitchen Ask]]>><</link>>
+        <br>
+<<link [[说你敲错门了，然后离开|Flats]]>><<endevent>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "flats work_4" 1>>
+        <<generate1>><<person1>>
+你走到一个公寓前敲响了门。门打开了，露出一个穿着得体的<<person>>。"不是我想见的人，"<<he>>说道。"你有什么事吗？"
+        <br><br>
+<<link [[询求工作|Flats Laundry Ask]]>><</link>>
+        <br>
+<<link [[说你敲错门了，然后离开|Flats]]>><<endevent>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "flats work_5" 1>>
+        <<generate1>><<generate2>><<person1>>
+你还没走到门口就听到了声音。你敲门，门开了，露出了一个<<person>>。
+        <br><br>
+"是谁啊？"从深处传来了<<person2>><<persons>>的声音。
+        <br>
+"是个<<girl>>，"<<person1>><<person>>回答。
+        <br><br>
+
+<<link [[询求工作|Flats Pair Ask]]>><</link>>
+        <br>
+<<link [[说你敲错门了，然后离开|Flats]]>><<endevent>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<runeventpool>>
+<</if>>

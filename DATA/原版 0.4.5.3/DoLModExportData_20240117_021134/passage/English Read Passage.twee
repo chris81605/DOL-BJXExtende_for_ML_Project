@@ -1,0 +1,127 @@
+:: English Read Passage []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $phase is 0>> /* Tell Doren */
+	<<if $NPCName[$NPCNameList.indexOf("Doren")].love gte 10>>
+		多伦摇了摇头，然后把<<his>>的书递给了你。<br>
+		"这次我就放过你了，"<<he>>说道，"不过下次要准备好。"
+	<<else>>
+		多伦摇了摇头，然后把<<his>>的书递给了你。<br>
+		"你这样不行啊，"<<he>>说道，"下次记得准备好些。"<<detention 1>><<gdelinquency>>
+	<</if>>
+<<elseif $phase is 1>> /* Ask friends for help */
+	<<if $kylarenglishstate is "active">> /* Active Kylar will always help */
+		凯拉尔把自己的书递给了你。"拿我的，亲爱的。"<<status -10>><<lcool>>
+		<br><br>
+		你读了其中一个段落。
+		<br><br>
+		多伦点了点头，走向了另一个学生。
+	<<elseif ($cool - random(1,$coolmax)) gte 0>> /* Cooler you are, the greater the chance other students will help */
+		你看向了周围的学生。一个朋友悄悄地把<<pher>>的书递给了你。
+		<br><br>
+		你快速地读出了段落。
+		<br><br>
+		多伦点了点头，点名了另一个学生。
+	<<else>>
+		没人帮忙。等了一会儿后，多伦明白了你的情况。
+		<br><br>
+		"我想<<pshes>>在求助，"多伦说道，"<<pshes>>忘记带<<pher>>的书了。有谁愿意帮下<<phim>>吗？"
+		<br><br>
+		没人回应。多伦看上去很失望，最后把自己的书给了你。"同学们，我还以为你们会有更好的表现的。"
+		<br><br>
+		"给你，"<<he>>叹了口气，"继续吧。"<<status -5>><<lcool>>
+		<br><br>
+		在你念完一段后，多伦去找另外的学生了。
+	<</if>>
+<<elseif $phase is 2>> /* Make up something */
+	<<if currentSkillValue('english') gte 700>>
+		<<set $skulduggerydifficulty to 200>><<skulduggerycheck "silent">>
+		<<if $skulduggerysuccess is 1>>
+			你编造了一个段落，并假装在读，模仿着原文的语气、措辞和韵律。
+			<<if $promiscuity gte 66 or $exhibitionism gte 66>>
+				只是为了有趣，你公然使用诱惑性的句子，在性的方面用夸张地描绘了你口中的<<print $player.gender_appearance is "m"? "男" : "女">>主角，
+				而描绘其他人时则用下流的双关。
+				<br><br>
+				同学们都很喜欢，不过多伦看起来有些怀疑，让你快速读完就去找下一个学生了。<<gcool>><<status 3>>
+			<<elseif $purity lte 400 or $awareness gte 500>>
+				只是为了好玩，你加了点下流的文字游戏跟影射。一些学生被你逗乐了。<<gcool>><<status 2>>
+				<br><br>
+				多伦看上去有些怀疑，但还是继续让下一个学生朗读其他的段落。
+			<<else>>
+				多伦没有注意到，尽管下一个需要朗读的学生对从哪里开始感到困惑。
+			<</if>>
+			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+				<br><br>你侥幸逃脱了。<<skulduggeryskilluse>>
+			<</if>>
+		<<else>>
+			<<generates2>><<person1>>
+			你照着原文编造了一个段落，并假装在读，但有些心虚。
+			在全班同学的注视下，你开始支支吾吾，直到最终完全停了下来。
+			<br><br>
+			"你在乱念些什么呢，<<lass>>？"多伦问道。
+			<br><br>
+			<<if $speech_attitude is "meek">>
+				"老师对不起，"你盯着你的桌子说道。<<status -5>><<lcool>>
+				<br><br>
+				多伦悲哀地摇了摇头道："你需要做得更好。"<<detention 1>><<gdelinquency>>
+			<<elseif $speech_attitude is "bratty">>
+				"不，"你说道，"我没有乱念。"
+				<br><br>
+				"<<pShe>>有，老师，"<<person2>>一个<<person>>说道，"书上完全没那些内容。"
+				<br><br>
+				"谁问你了？"你怒视着<<him>>，<<He>>在你的注视下退缩了。<<status 2>><<gcool>>
+				<br><br>
+				"马上停下！"<<person1>>多伦看向你说道。
+				<<if $delinquency gte 400>>
+					"我了解你，<<lass>>，不过在我的课堂上，我会有更高的要求。"
+				<<else>>
+					"我本以为你会做得更好，<<lass>>。"
+				<</if>><<detention 3>><<gdelinquency>>
+			<<else>>
+				你还没来得及想出怎么回应，<<person2>>一个<<person>>就抢先答道："<<pShe>>有，<<person1>>老师，这些句子没一句是在书上的。"
+				<br><br>
+				多伦看着你。
+				<<if $delinquency gte 400>>
+					"唉，<<lass>>，在我的课堂上，我有更高的要求。"
+				<<else>>
+					"我以为你会表现得更好的，<<lass>>。"
+				<</if>><<detention 2>><<gdelinquency>>
+			<</if>>
+			<br><br>
+			<<person1>>多伦摇了摇头，然后点了下一位学生。"继续。"
+		<</if>>
+	<<elseif currentSkillValue('english') gte 250 and ((currentSkillValue('english') + currentSkillValue('skulduggery')) gte 500)>>
+		你胡编了一段文章来假装朗读，多伦很快就发现了你在干什么。
+		<br><br>
+		"想象力不错，"<<he>>说道，"不过可以请你开始读真的那段了吗，<<lass>>。"
+		<br><br>
+		"我，我没有书。"
+		<br><br>
+		"这可不好，不是吗？"<<detention 2>><<gdelinquency>>
+		<br><br>
+		多伦点名了另一名学生。那名学生点了点头然后继续朗读。
+	<<else>>
+		你开始胡编乱造。你自以为干得还不错，毕竟这听起来像是真的，不过很快就有许多学生开始嘲笑起了你。
+		<<if $kylarenglishstate is "active">>
+			凯拉尔看起来替你感到尴尬。
+		<</if>>恼火的多伦打断了你。<<status -5>><<lcool>>
+		<br><br>
+		"你现在能正经读书了吗，<<lass>>。"
+		<br><br>
+		"我，我没有书。"
+		<br><br>
+		"我知道了。"<<detention 2>><<gdelinquency>>
+		<br><br>
+		多伦点名了另一名学生。"你肯定带了书吧？"
+		<br><br>
+		那名学生点了点头，继续朗读。
+	<</if>>
+<<elseif $phase is 3>> /* Refuse */
+	你拒绝朗读。
+	<br><br>
+	多伦很恼火，不过一些学生似乎对你肃然起敬。<<detention 3>><<gdelinquency>><<gcool>><<status 2>>
+	<br><br>
+	下一名学生继续朗读了起来。
+<</if>><br><br>
+<<endevent>>
+<<link [[继续|English Lesson]]>><</link>>
+<br>

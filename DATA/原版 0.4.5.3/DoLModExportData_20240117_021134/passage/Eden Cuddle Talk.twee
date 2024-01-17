@@ -1,0 +1,83 @@
+:: Eden Cuddle Talk []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+<<if $rng gte 95>>
+	你向伊甸询问对小镇的看法。<<He>>紧张起来。"那个地方很危险。我是认真的。"<<He>>把你拉近到身边。"离远点。"
+<<elseif $rng gte 90>>
+	你向伊甸询问对森林的看法。"这里很好，"<<he>>说，"只是很容易感到孤独。"你告诉伊甸你现在正在这里陪着<<him>>。<<He>>露出一个微笑。
+<<elseif $rng gte 85>>
+	你和伊甸谈起了火。你们说话的时候，<<He>>一边给余烬添着火。"森林里的夜晚可能很冷，"<<he>>说道，"所以足够的柴火是必要的。"
+<<elseif $rng gte 80>>
+	你询问伊甸关于<<his>>的家庭。"没什么好说的。"<<He>>避开了你的目光。
+<<elseif $rng gte 75>>
+	你问伊甸<<he>>从哪里得到<<his>>的旧钓鱼杂志的。"一个老朋友，"<<he>>说道。
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"是……谁？"你问。
+	<<elseif $speech_attitude is "bratty">>
+		"谁是你的朋友？"你问。
+	<<else>>
+		"那人是谁？"你问。
+	<</if>>
+	<br><br>
+	伊甸什么也没说，只是轻笑着把你拉近。
+<<elseif $rng gte 70>>
+	你问起伊甸关于<<his>>名字的事。"是天堂的意思，"<<he>>说，把你抱得更近。<span class="green">在<<his>>的怀抱中，你感到一种安全感和安宁。</span><<trauma -1>><<stress -1>><<lstress>><<ltrauma>>
+<<elseif $rng gte 65>>
+	你问起伊甸<<his>>小屋的事情。"虽然有点空荡荡，但还是我的家，"<<he>>说道。
+<<elseif $rng gte 60>>
+	你询问伊甸关于<<his>>的农作物的事。"照顾起来并不容易，"<<he>>承认，"但能以自己的努力得到回报。"
+<<elseif $rng gte 55>>
+	你问伊甸关于蘑菇的事。"很高兴不用为找蘑菇而走太远，"<<he>>说道。
+<<elseif $rng gte 50>>
+	你告诉伊甸<<him>>给猎物剥皮时的气味让你觉得很恶心。<<He>>咯咯地笑，"过一段时间你就会习惯的。"
+<<elseif $rng gte 45>>
+	你问伊甸关于森林里的动物的事。"野生动物是危险的。"<<He>>把你拉近，"待在小屋附近别乱跑。"
+<<elseif $rng gte 40>>
+	你问伊甸关于阅读的事。"可以用来打发时间，"<<he>>说道。
+<<elseif $rng gte 35>>
+	你问伊甸<<hes>>在森林里生活了多长时间。"有一段时间了，"<<he>>说道。<<He>>没有继续说得更详细。
+<<elseif $rng gte 30>>
+	你问伊甸学校的事。<<He>>耸耸肩，"我一直都更倾向于在实践中学习。"
+<<elseif $rng gte 25>>
+	你问伊甸关于<<his>>的枪的话题。"它已经陪了我有一段时间了，"<<he>>说道。
+<<elseif $rng gte 20>>
+	你问伊甸打猎的事。"在这里生活，打猎是必须的，"<<he>>说道。
+<<elseif $rng gte 15>>
+	<<if $edenradiointro is 2>>
+		你问伊甸关于收音机的事。"在那之前我从没想过自己还能当个舞者，"<<he>>笑着说道。
+	<<else>>
+		你询问伊甸跳舞的事。<<He>>对你的问题皱了皱眉头，"我没有什么经验，"<<he>>说道。
+	<</if>>
+<<elseif $rng gte 10>>
+	你问到了<<his>>多余的种植圃。"从没用过，"<<he>>说道，"你想的话可以随便用。"
+<<elseif $rng gte 5>>
+	你问伊甸泉水的事。"它很难维护，所以我从不费心。"<<he>>说道。
+<<else>>
+	你问伊甸关于物资采购的事，而<<He>>叹了口气。"如果可以我尽量不会去做。"
+<</if>>
+<br><br>
+
+<<if Time.hour isnot 0>>
+	<<couchicon>><<link [[继续拥抱 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -6>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>><<lstress>>
+	<br>
+	<<if Time.days % 2 is 0>>
+		<<if $eden_shoot gte 1>>
+			<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+			<br>
+		<<else>>
+			<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<pass 30>><<trauma -3>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[站起来|Cabin Eden Actions]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

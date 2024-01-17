@@ -1,0 +1,128 @@
+:: Briar's Office []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+<<npc Briar>><<person1>>
+<<if $phase is 1>>
+	"好！当你准备好工作的时候就过来，我会让其他员工知道你要加入他们的。"<<He>>站了起来，带着你上楼。在你下楼的时候，<<He>>默不作声。
+	<br><br>
+
+	<<link [[继续|Brothel]]>><<endevent>><</link>>
+
+<<elseif $brotheljob is 1 and $fame.prostitution gte 30 and not $brothelshowdata.intro>>
+	<<set $brothelshowdata.intro to 1>><<set $brothelshowdata.type to "none">>
+	布莱尔倚靠在窗台上，看向窗外。"真高兴你能加入我们，"<<he>>头也不转地说道。"好些人一来就要点你。看起来你已经有点出名了。"<<He>>转过身来，仔细端详着你。"我希望在<span class="gold">星期五</span>举行一场小小的演出，把那些大客户吸引过来。你有兴趣成为这次表演的主角吗？"
+	<br><br>
+
+	<<He>>并没有等待你回答。"我知道这不是你一般会做的事，而我也需要点时间准备下。回去好好想想，考虑好了再来找我。到那个时候我们再谈具体条件——还有你的报酬。"
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Brothel]]>><</link>>
+	<br>
+
+<<elseif $brotheljob is 1 and $fame.prostitution gte 200 and $brothelshowdata.intro is 1>>
+	<<set $brothelshowdata.intro to 2>>
+	布莱尔正坐在<<his>>桌子后面打着电话。<<He>>示意你稍微等一下。
+	你等着布莱尔打完电话。<<He>>看向了你，心情看起来不错。
+	<br><br>
+
+	"我们的小明星来了。”布莱尔坐到了<<his>>沙发上说道。
+	<br><br>
+
+	"看起来你的表演很成功。你有一些仰慕者很愿意花大价钱来跟你度过一段时间。”<<he>>说道。<<He>>拍打着沙发，邀请你坐在<<him>>的身边。
+	<br><br>
+
+	<<link [[坐下|Brothel Escort Job Intro]]>><<set $phase to 1>><</link>><<glove>><<npcincr Briar love 1>>
+	<br>
+	<<link [[站着|Brothel Escort Job Intro]]>><<set $phase to 2>><</link>>
+
+<<elseif $brotheljob isnot 1>>
+
+	布莱尔侧躺在沙发上，手里举着一杯红酒。在你进来时，<<He>>的目光转向了你。"你有没有重新考虑我的提议？"
+	<br><br>
+
+	<<link [[有|"Briar's Office"]]>><<endevent>><<set $brotheljob to 1>><<set $phase to 1>><<set $wardrobes.brothel.unlocked to true>><</link>>
+	<br>
+	<<if $id is 0>>
+		<<link [[询问身份证的事|"Briar's Office ID"]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[离开|Brothel]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	布莱尔侧躺在沙发上，手里举着一杯红酒。在你进来时，<<He>>的目光转向了你。"有什么需要我做的吗？"
+	<br><br>
+
+	<<if isPubfameTaskAccepted("briar")>>
+		<<His>>的笔记本电脑放在<<him>>旁边的沙发上。"米奇"让你黑进布莱尔的电脑。
+		<br>
+		你
+		<<if $pubfame.briar.distract is 2>>
+			<span class="green">已安排好人去分散注意</span>，
+		<<else>>
+			<span class="pink">没有分散注意的手段</span>，
+		<</if>>
+		<<if $pubfame.briar.distract is 2 and ($pubfame.briar.escape is 2 or $cat gte 6) or $pubfame.briar.distract isnot 2 and $pubfame.briar.escape isnot 2 and $cat lt 6>>
+			然后
+		<<else>>
+			但是
+		<</if>>
+		<<if $pubfame.briar.escape is 2>>
+			<span class="green">规划好了逃生路线</span>。
+		<<elseif $cat gte 6>>
+			你可以轻松地通过窗户逃跑。<span class="green">猫总是能平稳落地。</span>
+		<<else>>
+			<span class="pink">没有计划好的逃跑路线</span>。
+		<</if>>
+		<<if !$pubfame.briar.notice and $pubfame.briar.distract isnot 2>>
+			<<set $pubfame.briar.notice to true>>
+			<<if $cat gte 6>>
+				你可以通过在妓院闲逛来分散注意力。
+			<<else>>
+				你可以通过在妓院闲逛，来找到一个分散注意力和逃跑路线的机会。
+			<</if>>
+		<</if>>
+		<br>
+		<<link [[分散布莱尔的注意|Briar Hack]]>><</link>>
+		<br><br>
+	<</if>>
+	<<if $brothelVending>>
+		<<if $brothelVending.status is "idea">>
+			<<condomicon "machine">><<link [[让布莱尔安装一台自动售货机 (0:20)|Brothel VM ask]]>><<pass 20>><</link>>
+			<br>
+		<<elseif $brothelVending.products and $brothelVending.status is "set" and !$weekly.brothelVMCollect>>
+			<<highicon>><<link [[收自动贩卖机的钱 (0:10)|Brothel VM income]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $brothelshowdata.intro and $brothelshowdata.type is "none">>
+		<<brothelicon "stage">><<link [[安排一场演出|"Briar's Office Show"]]>><</link>>
+		<br>
+	<</if>>
+	<<if $brothelshowdata.intro is 2>>
+		<<if $brothel_escortjob is undefined>>
+			<<ind>><<link [[为有钱的顾客服务|Brothel Escort Job Accept]]>><</link>>
+			<br>
+
+		<<elseif $brothel_escortjob.accept isnot true and $weekly.escortjob isnot 1>>
+			<<ind>><<link [[为有钱的顾客服务|Brothel Escort Job Accept]]>><</link>>
+			<br>
+
+		<</if>>
+	<</if>>
+	<<if $id is 0>>
+		<<askicon>><<link [[询问身份证的事|"Briar's Office ID"]]>><</link>>
+		<br>
+	<</if>>
+	<<if $brothel_machine_repair is 1>>
+		<<askicon>><<link [[向布莱尔询问性爱机器的事|Briar Machine Ask]]>><<set $brothel_machine_repair to 2>><</link>>
+		<br>
+	<<elseif $brothel_machine_repair is 3>>
+		<<ind>><<link [[把凝胶交给布莱尔|Briar Gel Give]]>><<set $brothel_machine_repair to 4>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Brothel]]>><<endevent>><</link>>
+
+<</if>>

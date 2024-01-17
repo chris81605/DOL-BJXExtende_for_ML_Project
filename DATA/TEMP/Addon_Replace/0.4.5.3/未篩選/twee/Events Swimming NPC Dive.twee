@@ -1,0 +1,87 @@
+:: Events Swimming NPC Dive []
+<<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
+<<if $phase is 1>>那<<person>>
+	<<if $rng gte 80>>
+		优雅地潜入
+	<<elseif $rng gte 60>>
+		吃力地跳入水中
+	<<elseif $rng gte 40>>
+		熟练地潜入
+	<<elseif $rng gte 20>>
+		快速跳跃
+	<<else>>
+		笨拙地扑通
+	<</if>>
+	进水里。
+	<<if $rng gte 60>>
+		一伙人<<if $rng lt 80>>挖苦地<</if>>
+		鼓掌。
+	<</if>>
+	<<if $rng % 4 is 0 and $swimall is 1>>
+		几个人红着脸盯着看<<person>>的私部。
+	<<elseif $rng % 4 is 0>>
+		不幸的是，<<he>>在潜水过程中把泳衣弄丢了。一伙学生开始骚扰<<him>>。
+	<</if>>
+	<br><br>
+
+	你继续游泳。
+
+	<br><br>
+	<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
+<<elseif $phase is 2>>/*secret dive*/
+	梅森开始在泳池边演示一项游泳技巧。
+	<<if $awareness gte 200 or ($rng % 3 is 0)>>
+		<<if $awareness gte 300 or currentSkillValue('skulduggery') gte 400>>
+			发现梅森试图分散你的注意力，
+		<<else>>
+			<<if $rng % 2>>听到身后有声音，<<else>>注意到梅森向你这边看了一眼，<</if>>
+		<</if>>你转过身去，看到那个<<person>>赤身裸体地爬上跳板。
+		<br><br>
+		<<link [[移开视线|Events Swimming NPC Nude Dive]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[看|Events Swimming NPC Nude Dive]]>><<set $phase to 2>><</link>><<garousal>>
+		<br>
+		<<link [[吸引注意力|Events Swimming NPC Nude Dive]]>><<set $phase to 3>><</link>><<gcool>>
+		<br>
+	<<else>>
+		这很有趣。过了一会儿，你听到身后传来水声。
+		<br>
+		似乎<<person>>在没人注意的时候潜入了水中。太奇怪了。
+		<br><br>
+
+		你继续游泳。
+
+		<br><br>
+		<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 3>>那个<<person>>裸体爬上了跳板，然后
+	<<if $rng gte 80>>
+		优雅地潜入
+	<<elseif $rng gte 60>>
+		吃力地跳入水中
+	<<elseif $rng gte 40>>
+		熟练地潜入
+	<<elseif $rng gte 20>>
+		快速跳跃
+	<<else>>
+		笨拙地扑通
+	<</if>>
+	到水里。<<if $rng gte 60>>有些人在鼓掌。<</if>>
+	<<if $exhibitionism gte 35>>
+		<br><br>
+		想象自己如此暴露会让你感到兴奋。
+		<<garousal>><<arousal 3>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	重力短暂倒转，把<<him>>甩到天花板上，然后无助地掉入水池。(这是一个错误，请报告)/*error*/
+
+	<br><br>
+	<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+	<br>
+<</if>>

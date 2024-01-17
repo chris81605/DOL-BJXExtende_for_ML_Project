@@ -1,0 +1,29 @@
+:: Bully Parasite []
+<<effects>>
+
+<<if $phase is 0>>
+	<<WhitneyParasite>>
+<<else>>
+	<<if $physiqueSuccess>>
+		随着一阵力量的爆发，你甩掉了<<group>>，准备战斗。
+		<br><br>
+		<<link [[战斗|Bully Parasite Fight]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<physiquedifficulty 1 10000 true>>
+		<<if $physiqueSuccess>>
+			你又惊恐又愤怒，不断挣扎着。你用力抖开了惠特尼的一个跟班，你的力量震惊了其他人。另一个跟班上前想要再抓住你，但你还是挣脱了对方，眼前的闹剧让惠特尼失去了耐心。最后，惠特尼在你的腹部狠狠地打了一拳，疼到你失去了力气。
+			<<pain 10>><<gpain>>
+		<<else>>
+			恐惧万分，你拼命挣扎着逃离<<group>>的控制，希望能够稍微摆脱他们的控制，然后安全逃脱。不幸的是，你的力量不足以摆脱这么多强壮的手的控制。你可悲的挣扎只换来了一些
+			<<if playerBellySize(true) gte 8>>
+				踢向小腿
+			<<else>>
+				重击腹部
+			<</if>>
+			来自惠特尼的一记耳光，你竟然敢抗拒。
+			<<pain 15>><<ggpain>>
+		<</if>>
+		<br><br>
+		<<WhitneyParasite>>
+	<</if>>
+<</if>>

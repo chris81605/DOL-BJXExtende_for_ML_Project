@@ -1,0 +1,42 @@
+:: Arcade Popular Gamer 2 []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+<<rng>>
+<<if $phase is 1>>
+	<<if $rng gt 40 + Math.floor(currentSkillValue("handskill") / 40)>>
+		你决定采用保守的战术赚取分数，寄希望于你的对手会出现失误。然而，你的对手很快就发现了你的意图，也采取了稳妥的策略。<<he>>用老练的手法不停得分，一直让自己的分数压你一头。
+		<br><br>
+		你最后以大比分输掉了比赛。你听到人群中有人窃窃私语，说你的游戏玩得太菜了。<<status -5>><<lcool>>
+	<<else>>
+		你决定不要冒险，使用稳妥的方法赚取分数，寄希望于对方出现失误。对方决定抓住这次机会扩大比分，向更有风险的目标发起了挑战。
+		<br><br>
+		对方遭到多次攻击，在最后一波比拼中输给了你。你听到人群中有人小声夸赞你技术高超。<<status 1>><<ggcool>><<set _win to true>>
+	<</if>>
+<<else>>
+	<<if $rng gt Math.floor(currentSkillValue("handskill") / 10)>>
+		你决定冒险挑战高分目标。你试图多贪一些人头，但自己也因此受到了一些伤害。
+		<br><br>
+		最后，你的扣分反而比得分还多，这让你输掉了比赛。你听到人群中有人在议论你的莽夫玩法。<<status -5>><<lcool>>
+	<<else>>
+		你决定铤而走险挑战高分目标。你玩得很惊险，在击杀高危敌人时，你虽然躲开了敌人的攻击，但也显得非常勉强。
+		<br><br>
+		最后，你的努力还是有了回报，你获得了很多的分数。你听到人群中有人在窃窃私语，谈论你大胆的游戏方式。<<status 1>><<ggcool>><<set _win to true>>
+	<</if>>
+<</if>>
+<br><br>
+<<if _win is true>>
+	<<switch random(1,2)>>
+		<<case 1>>
+			"肯，肯定是机器的问题，你个笨比。" 那个<<person>>一边气得跺脚一边走开，嘴里还偷偷地咒骂。众人被<<his>>的丑态逗乐了。
+		<<case 2>>
+			那个<<person>>一边在你肩膀上拍了拍："你打得很好嘛！这样下去你都可以去参加电竞比赛了！" 众人为<<his>>的优雅鼓起了掌。<<stress -2>><<lstress>>
+	<</switch>>
+<<else>>
+	<<switch random(1,2)>>
+		<<case 1>>
+			"我就知道你是个垃圾，赶紧滚出这里去吧！"那个<<person>>举起<<his>>的双臂，迎接人群中零散的掌声。
+		<<case 2>>
+			"胜败乃兵家常事，"<<he>>说道，"你已经尽力了。"当人群为<<his>>的真诚鼓掌时，<<person>>给了你一个灿烂的微笑。
+	<</switch>>
+<</if>>
+<br><br>
+<<arcadeEndLink>>

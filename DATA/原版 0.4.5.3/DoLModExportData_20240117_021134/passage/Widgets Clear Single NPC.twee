@@ -1,0 +1,28 @@
+:: Widgets Clear Single NPC [widget]
+<!-- usage tip: if you want to clear an npc and copy another into its position, don't forget to use clone(). example:
+	<<set $NPCList[1] to clone($NPCList[2])>>
+	<<clearsinglenpc 2>>
+-->
+<<widget "clearsinglenpc">>
+	<<if typeof _args[0] isnot "number">>
+		<span class="red">附带"clearsinglenpc"错误！请报告此问题！</span>
+	<</if>>
+
+	<<set _i to _args[0]>>
+	<<set $NPCList[_i] to clone(setup.baseNPC)>>
+	<<if $enemyno gt 0>>
+		<<set $enemyno -= 1>>
+	<</if>>
+	<<if $endeventerror is undefined>>
+		<<run EventSystem.pop(_i)>>
+	<</if>>
+	<<if $enemyno is 0>>
+		<<set $pronoun to 0>>
+		<<if $endeventerror is undefined>>
+			<<run EventSystem.clear()>>
+		<</if>>
+	<</if>>
+	<<if $NPCList[_i].strapon isnot undefined>>
+		<<run delete $NPCList[_i].strapon>>
+	<</if>>
+<</widget>>

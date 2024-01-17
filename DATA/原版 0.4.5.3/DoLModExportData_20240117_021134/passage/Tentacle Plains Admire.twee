@@ -1,0 +1,36 @@
+:: Tentacle Plains Admire []
+<<location "tentworld">><<effects>>
+<<if $tentacleadmire is undefined>>
+	<<set $tentacleadmire to 0>>
+	当你的眼睛扫视一望无际的地平线时，一切似乎都变慢了。触手的平稳摇摆对你来说几乎是催眠的。不久你也会原地摇摆。你脚下的触须让你发痒。
+	<<ltrauma>><<lstress>><<garousal>>
+	<br><br>
+	<<trauma -6>><<stress -6>><<arousal 600>>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<elseif $tentacleadmire is 0>>
+	<<set $tentacleadmire to 1>>
+	当你专注于风景时，一切都开始融化。其他似乎都不重要。外面的世界没有意义。你唯一的想法就是这个领域可以为你提供的巨大乐趣。你的尾巴在幻影微风中移动，触手轻轻爬上你的腿。
+	<<ltrauma>><<lstress>><<garousal>>
+	<br><br>
+	<<trauma -6>><<stress -6>><<arousal 600>>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<elseif $tentacleadmire is 1>>
+	<<set $tentacleadmire to 2>>
+	当热量在你体内积聚时，你没有感到内疚或自我厌恶。每根触手似乎都在挑衅地示意你靠近一步。你再也忍不住了。你跪倒在地，向周围无数的触手展示自己。他们回应你的提议，并蛇行在你的胳膊、腿和尾巴上。
+	<<gcontrol>><<control 25>><<ltrauma>><<lstress>><<ggarousal>>
+	<br><br>
+	<<trauma -6>><<stress -6>><<arousal 1200>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		一对触手到达你的<<if $leftarm is "bound" or $rightarm is "bound">>手臂<</if>><<if ($leftarm is "bound" or $rightarm is "bound") and $feetuse is "bound">>和<</if>><<if $feetuse is "bound">>腿<</if>>并在你的绳子上喷射粘性液体，慢慢溶解它们。<<unbind>>
+		<br><br>
+	<</if>>
+	<<link [[继续|Tentacle Plains Admire Sex]]>><<set $sexstart to 1>><</link>>
+<<else>>
+	只是想着将要发生的事情就让你发疯。你可以随时离开，但你却留在这里。你蹲在地上，每只手各拿一根触手。它们热切地回应你的触摸，很快一大群触手向你袭来。
+	<<gcontrol>><<control 25>><<ltrauma>><<lstress>><<ggarousal>>
+	<br><br>
+	<<trauma -6>><<stress -6>><<arousal 1200>>
+	<<link [[继续|Tentacle Plains Admire Sex]]>><<set $sexstart to 1>><</link>>
+<</if>>

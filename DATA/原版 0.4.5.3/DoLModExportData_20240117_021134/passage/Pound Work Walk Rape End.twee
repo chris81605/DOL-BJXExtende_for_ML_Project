@@ -1,0 +1,59 @@
+:: Pound Work Walk Rape End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。<<gpound_status>><<pound_status 1>>
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Work Walk Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Work Walk Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		在满足之后，<<beasttype>>离开了。但是另一个家伙想要试试。<<lpound_status>><<pound_status -1>>
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Work Walk Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Work Walk Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	欲望渐渐消退，你重新站了起来。你十分疲惫，而<<beastsplural>>也是如此，使你可以把它们带回小镇。
+	<br><br>
+	<<clotheson>>
+	<<pass 60>>
+	<<exposure>>
+	<<if $exposed gte 1>>
+		你能透过树的缝中看到建筑了。<<tearful>>你看向你的身体。<<covered>>
+		<br><br>
+
+		<<link [[寻求帮助|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+		<br>
+		<<if $deviancy gte 35>>
+			<<link [[藏在狗群中间|Pound Work Walk Hide]]>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<if $exposed gte 2 and $exhibitionism gte 75>>
+			<<link [[随遇而安|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+			<br>
+		<<elseif $exposed gte 1 and $exhibitionism gte 55>>
+			<<link [[随遇而安|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<<else>>
+		<<endcombat>>
+		<<set $phase to 2>>
+		<<pound_walk_end>>
+	<</if>>
+<</if>>

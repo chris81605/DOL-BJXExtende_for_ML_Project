@@ -1,0 +1,105 @@
+:: Office Shredder Struggle []
+<<effects>>
+<<if $worn.lower.name isnot "naked" and clothingData("lower", $worn.lower, "skirt") is 1>>
+	<<if $physiqueSuccess>>
+		<<if $worn.lower.integrity lte 0>>
+			你把手臂压在碎纸机上，用尽全力推，几下巨响后，你向后摔倒在地。
+			<br><br>
+			你惊恐地抬头看着碎纸机，因为它<span class="lewd">消耗了你的$worn.lower.cn_name_cap的最后几英寸！</span>
+			<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+			<br><br>
+			你站起来，紧张地环视房间，掩盖你的<<lewdness>>。
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你把胳膊压在碎纸机上，用尽全身力气推，跌跌撞撞地向后推，终于把你的$worn.lower.cn_name_cap从碎纸机里解放了出来。
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.lower.integrity -= 10 * $phase>>
+		<<if $worn.lower.integrity lte 0>>
+			<<if $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+				<<if $worn.upper.set is $worn.lower.set>>
+					你试图抓住你$worn.lower.cn_name_cap松散的织物，但无济于事。当<span class="lewd">你的$worn.lower.cn_name_cap消失在碎纸机的嘴里时，你的<<breasts>>被粗暴地拉向碎纸机。</span><<gpain>><<pain 5>>
+					<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+
+					<<shredderactions "upper">>
+				<<else>>
+					你试图强迫自己远离碎纸机，但当<span class="lewd">你的$worn.lower.cn_name_cap被撕碎并消耗掉时，你滑倒了，向前倒在了碎纸机上。</span><<gpain>><<pain 5>>
+					<br><br>
+					更糟糕的是，你的$worn.upper.cn_name_cap现在被抓住了！
+					<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+					<<set $phase to 1>>
+					<<shredderactions "upper">>
+					<br>
+				<</if>>
+			<<else>>
+				你试图抓住你的$worn.lower.cn_name_cap松散的织物，但无济于事。当<span class="lewd">你的$worn.lower.cn_name_cap的碎片被从你身上扯下来放进碎纸机时，一声巨响回荡在整个房间。</span>
+				<br><br>
+				<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+				你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+				<<exposure>>
+				<br><br>
+				<<link [[继续|Office Shredder End]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你抓住你的$worn.lower.cn_name_cap松散的织物，拼命地拉它，同时扭动你的<<bottom>>想要挣脱，但碎纸机凶恶的大嘴拒绝放松。
+			<<set $worn.under_lower.integrity -= 20>>
+			<<if $worn.under_lower.name isnot "naked" and $worn.under_lower.integrity lte 0>>
+				<br><br>
+				在你的挣扎中，你不知怎么地设法<span class="lewd">撕掉了你的$worn.under_lower.cn_name_cap，它的碎片现在堆在你的两脚之间。</span>
+				<<underlowerruined>><<clothesruinstat>><<set $under_loweroff to 0>>
+			<</if>>
+			<<shredderactions "lower">>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+	<<if $physiqueSuccess>>
+		<<if $worn.upper.integrity lte 0>>
+			你把手臂压在碎纸机上，用尽全力推，几下巨响后，你向后摔倒在地。<<gpain>><<pain 5>>
+			<br><br>
+			<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+			你惊恐地抬头看着碎纸机，因为它<span class="lewd">吞噬了你的$worn.upper.cn_name_cap的最后几寸！</span>你站起来，紧张地环顾房间，掩盖你的<<lewdness>>。
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你把胳膊压在碎纸机上，用尽全身力气推，跌跌撞撞地向后推，终于把你的$worn.upper.cn_name_cap从碎纸机里解放了出来。
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.upper.integrity -= 10 * $phase>>
+		<<if $worn.upper.integrity lte 0>>
+			你试图抓住你的$worn.upper.cn_name_cap松散的织物，但无济于事。当<span class="lewd">你的$worn.upper.cn_name_cap的碎片被从你身上扯下来放进碎纸机时，一声巨响回荡在整个房间。</span>
+			<br><br>
+			<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+			你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你抓住你的$worn.upper.cn_name_cap松散的织物，拼命地拉它，同时扭动你的<<breasts>>想要挣脱，但碎纸机凶恶的大嘴拒绝放松。
+			<<set $worn.under_upper.integrity -= 20>>
+			<<if $worn.under_upper.name isnot "naked" and $worn.under_upper.integrity lte 0>>
+				<br><br>
+				在你的挣扎中，你不知何故设法放松了你的$worn.under_upper.cn_name_cap。<span class="lewd">当它落入碎纸机并被完全消耗时，你倒吸了一口气。</span>
+				<<underupperruined>><<clothesruinstat>><<set $under_upperoff to 0>>
+			<</if>>
+			<<shredderactions "upper">>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

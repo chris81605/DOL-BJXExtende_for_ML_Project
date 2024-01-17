@@ -1,0 +1,56 @@
+:: Connudatus Street Thievery []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
+你扫视了一下人群。
+<<if Time.dayState is "night">>
+	这么多的人在这个时候都喝醉了，所以这应该不是什么难事。
+<</if>>
+<<if $rng gte 80>>
+	<<if Time.dayState is "night">>
+		<<generate1>><<person1>>一个<<person>>摇摇晃晃地摔倒在你面前。"我有些太笨手笨脚了，"<<he>>含糊不清地说着，虽然<<he>>试图站起来，但却没能成功。
+		<<if $pronoun is "m">>
+			看起来<<he>>把<<his>>的衬衫不小心丢在哪里了，但<<he>>似乎并不关心，甚至可能压根没意识到这件事。
+		<<else>>
+			<<His>>的低胸礼服松松垮垮地挂着，随后<<he>>向前倾倒，向你展示着<<his>>那不雅的乳房。<<He>>似乎并不在意，甚至可能没有意识到。
+		<</if>>
+		<br><br>
+		<<link [[抢劫|Connudatus Drunkard Rob]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[将其扶起来|Connudatus Drunkard]]>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<person1>>一个<<person>>正在一个摊位前弯着腰看着面前的显示屏，而你则注意到<<His>>的<<wallet>>正挂在<<him>>身后的一条细绳上。
+		<br><br>
+		<<link [[夺取|Connudatus Snatch]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[放弃这个目标|Connudatus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 60>>
+	<<generate1>><<generate2>>一群<<fullGroup>>坐在一家餐馆外面，那个<<person1>><<persons>>的<<wallet>>放在<<his>>腿边的一个袋子上。
+	<br><br>
+	<<link [[拿走|Connudatus Thievery Restaurant]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[放弃这个目标|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 45>>
+	<<generate1>><<person1>>你发现一个游客正在拍照，<<He>>也许钱多的烧得慌。
+	<br><br>
+	<<link [[偷窃相机|Connudatus Camera]]>><</link>>
+	<br>
+	<<link [[离开|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 20>>
+	一辆汽车停在一家商店前面，<<generate1>><<person1>>一个<<person>>下车并进入商店，<<his>>的车门就那样敞开着，而<<his>>的<<wallet>>就放在座位上。
+	<br><br>
+	<<link [[拿走|Connudatus Car]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[放弃这个目标|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<generate1>><<person1>>一个<<person>>正坐在长椅上，而这家伙的<<wallet>>就放在了旁边的位置。
+	<br><br>
+	<<link [[拿走|Connudatus Street Bench]]>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[放弃这个目标|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+<</if>>

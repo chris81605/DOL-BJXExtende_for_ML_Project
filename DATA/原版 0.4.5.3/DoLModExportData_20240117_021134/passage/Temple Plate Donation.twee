@@ -1,0 +1,75 @@
+:: Temple Plate Donation []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $phase is 0>>
+	你把一枚一镑硬币放在盘子上。那个<<monk>>向你<<if $pronoun is "m">>微微鞠躬<<else>>屈膝行礼<</if>>。
+	<<if $sydneyPresent>>
+		悉尼向你点头表示赞同。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+
+<<elseif $phase is 1>>
+	你把一张五镑的钞票放在盘子上。"我们感激这样的善意，"<<he>>说，"谢谢。"
+	<<if $sydneyPresent>>
+		悉尼向你微笑。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+
+<<elseif !$soup_kitchen_known>>
+	你在盘子里放了£25。<<monk>>笑容满面地看向你。"谢谢您，"<<he>>说，"这对神殿的维护有着长远的帮助。"<<He>>顿了一下，然后继续道："也许您想进一步帮助我们？我们长期运营着一间施粥所，厨房在晚上<span class="gold"><<ampm 18 00>> - <<ampm 21 00>></span>开放。我们非常希望能再添一位帮手。"
+	<br><br>
+
+	"如果你感兴趣的话，你可以在隔壁灰色建筑物里找到厨房。"
+	<br><br>
+
+	<span class="gold">你发现了狼街上的施粥所。</span>
+	<br><br>
+	<<set $soup_kitchen_known to 1>>
+	<<if $sydneyPresent>>
+		悉尼轻拍了一下你的肩膀，点头道："你真是太慷慨了。"
+		<br><br>
+	<</if>>
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+
+<<else>>
+	你把£25放在盘子上。那个<<monk>>向你微笑着，<<he>>说道："谢谢，这笔钱对维护这座建筑大有帮助。"
+	<br><br>
+
+	<<if $sydneyPresent>>
+		悉尼轻拍了一下你的肩膀，点头道："你真是太慷慨了。"
+		<br><br>
+	<</if>>
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+<</if>>

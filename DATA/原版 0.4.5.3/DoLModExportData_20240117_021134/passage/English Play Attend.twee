@@ -1,0 +1,62 @@
+:: English Play Attend []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+你来到了市礼堂。几排横跨主厅的座位对着另一侧的大舞台。
+<br><br>
+
+<<if C.npc.Robin.init is 1 and getRobinLocation() is "englishPlay">>
+	<<npc Robin>><<person1>>
+	<<if $fromRobinRoom>>
+		<<unset $fromRobinRoom>>
+		罗宾叫你等<<him>>一下，然后冲进了旁边的房间换衣服。几分钟后，<<he>>作为一颗装饰精美的圣诞树出现了。
+		<<if C.npc.Robin.trauma gte 40>>
+			"看看他们让我穿上了什么。这应该不会很显眼，所以大概没什么问题。"
+		<<else>>
+			"看看他们让我穿上了什么，超有范儿不是吗？"
+		<</if>>
+	<<else>>
+		当你走近通向舞台的台阶时，你发现一棵装饰华丽的圣诞树挡在你的面前。你咳了一下，圣诞树转过身来，里面是一个穿着戏服的人，那是罗宾。
+		<br><br>
+
+		<<if C.npc.Robin.trauma gte 40>>
+			"噢。嗨，嗨！我……我想我应该参加的。看看他们让我穿什么了，不过这应该不会太引人注目，所以应该没问题。"
+		<<else>>
+			"噢，你好啊！"<<he>>笑道，"看看他们让我穿上了什么，很时髦不是吗？"
+		<</if>>
+	<</if>>
+		你跟<<him>>说了会话。
+	<<if $englishPlayRoles.Player isnot "none">>
+		<<He>>会表演另一出戏。"真糟糕，我估计会错过你们的演出。不过，祝你好运！"
+	<<else>>
+		如果你留下了的话，你会看到<<his>>的演出。"很高兴你来了，祝我好运吧！"
+	<</if>>
+	<<endevent>>
+	<br><br>
+<</if>>
+
+<<if $englishPlayRoles.Player isnot "none">>
+	<<npc Doren>><<person1>>
+	你到后台去找多伦，<<he>>正在跟一些同事说着话。"很高兴你能来。"<<he>>转过头来对你说道。
+	"你搭档刚到。<<if $englishPlayKylarReplace>>我们得在开始前找个人替代凯拉尔。<</if>>你应该跟他们说说话，准备好你们的表演。"
+	<br><br>
+
+	不少人进入了礼堂，座位逐渐被坐满了。演出马上就要开始了。
+	<<endevent>>
+	<br><br>
+
+	<<link [[去后台|English Play Backstage]]>><</link>>
+	<br>
+
+<<else>>
+	<<if Time.hour is 17>>
+		你找了个靠前的位置，有很多人进入了礼堂，演出马上就要开始了。
+	<<else>>
+		在一场演出快结束的时候，你安静地找了个座位。下一场估计很快就要开始了。
+	<</if>>
+	留下了看演出会增进你跟其他同学的感情。
+	<br><br>
+
+	<<link [[看一场表演 (0:20)|English Play Watch]]>><<trauma -2>><<tiredness 2>><<status 1>><<pass 20>><</link>><<ltrauma>><<gtiredness>><<gcool>>
+	<br>
+	<<link [[离开礼堂 (0:01)|Cliff Street]]>><<pass 1>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

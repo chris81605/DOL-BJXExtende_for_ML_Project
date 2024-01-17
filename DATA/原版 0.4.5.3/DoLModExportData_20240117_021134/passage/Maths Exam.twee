@@ -1,0 +1,120 @@
+:: Maths Exam []
+<<schooleffects>><<effects>>
+
+<<set _time_temp to (59 - Time.minute)>>
+<<pass _time_temp>>
+
+<<npc River 1>><<person1>>
+<<generatey2>> <!-- student who doesn't stop writing when the exam is over -->
+
+<<switch $phase>>
+	<<case 0 7>>
+		<<if $phase is 7>>你尽力无视史莱姆的命令，并且<<else>><</if>>
+		<<if $whitneymaths is "active">>
+			试图专心答题，但来自惠特尼的频繁骚扰让你很难集中注意力。
+		<<elseif $whitneymaths is "seat">>
+			试着专注于考试，但惠特尼时不时在你身上摸来摸去，让你难以专心。<<garousal>><<arousal 300 "genitals">><<arousal 300 "bottom">>
+		<<else>>
+			专注于考试，尽你所能地不去理会其他学生的书写声和抱怨。
+		<</if>>
+	<<case 1>>
+		<<if $whitneymaths is "active">>
+			你深吸一口气，试着不让来自惠特尼的频繁骚扰影响你。
+		<<elseif $whitneymaths is "seat">>
+			你深吸一口气，试着不让惠特尼的骚扰影响你。<<garousal>><<arousal 150 "genitals">><<arousal 150 "bottom">>
+		<<else>>
+			你深吸一口气，试着不让压力影响你的发挥。
+		<</if>>
+	<<case 2 6 8>>
+		<<if $phase is 8>>
+			<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+				<<skulduggerycheck>><<set _cheating to true>>
+				史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强行让你想方设法在考试中作弊。
+			<<else>>
+				你试着无视史莱姆的命令，专心考试。你能感受到它尝试迫使你作弊<span class="green">但是失败了，</span>然而，它仍然会分散你的注意力。<<set $exam_chance -= 5>><<passPercent -5>>
+			<</if>>
+		<<else>>
+			<<skulduggerycheck>><<set _cheating to true>>
+			<<if $phase is 6>>你遵从了史莱姆的命令，想办法在考试中作弊。<</if>>
+		<</if>>
+		<<generatey3>><<person3>>
+
+		<<if _cheating>>
+			你朝边上撇了一眼。你旁边的<<person>>看起来很自信。你使了些小动作，掩住眼睛，
+			<<if $skulduggerysuccess is 1>>
+				希望躲避瑞沃的目光。<span class="green">你设法收集到了几道难题的答案。</span>
+				<<set $exam_chance += 10>><<passPercent 10>>
+			<<else>>
+				希望能如此，
+				<br><br>
+				<span class="red">"不要东张西望，"</span>瑞沃说，<<person1>><<his>>锐利的眼神像剑一样穿透了你。<<He>>没有再多说一个字，但你知道你的试卷将会受到彻底的检查。
+				<<gstress>><<stress 6>><<set $exam_chance -= 10>><<passPercent -10>><<ggdelinquency>><<detention 5>>
+			<</if>>
+			<br><br>
+
+			<<skulduggeryuse true>>
+		<</if>>
+	<<case 3>>
+		<<npc Whitney 3>>
+		<<if $danceSuccess>>
+			当惠特尼扔出橡皮的时候，你迅速瞥了一眼身后，<span class="green">并设法接住飞过来的橡皮。</span>
+			<<person3>><<his>>橡皮遭到半路拦截，惠特尼只能干瞪眼。
+			<<set $exam_chance += 5>><<passPercent 5>>
+		<<else>>
+			惠特尼扔出橡皮时，你迅速瞥了一眼身后，希望能从空中抓住它。
+			<br><br>
+
+			<span class="red">"不要东张西望，"</span>瑞沃说，<<person1>><<his>>锐利的眼神像剑一样穿透了你。<<He>>没有再多说一个字，但你知道你的试卷将会受到彻底的检查。
+			<<gstress>><<stress 6>><<passPercent -10>><<set $exam_chance -= 10>>
+			<br><br>
+
+			惠特尼没再骚扰你，但你知道<<person3>><<hes>>在得意地笑。
+		<</if>>
+	<<default>>
+		<<if $phase is 4 or $phase is 5>>
+			<<npc Whitney 3>><<person3>>
+			你<<npcUndressText $NPCName[$NPCNameList.indexOf("Whitney")] "lower">>，
+			<<if $phase is 4>>
+				然后用你的手指包裹住<<his>>的<<print $NPCName[$NPCNameList.indexOf("Whitney")].penisdesc>>。
+			<<else>>
+				然后把你的手指按向<<his>>的阴蒂。
+			<</if>>
+			你<<handtext>>抚摸着<<him>>。
+			<br><br>
+			<<if currentSkillValue("handskill") gte random(1, 1000)>>
+				在瑞沃注意到之前，你得赶快让<<him>>完事。
+				<<if $phase is 4>>
+					<<He>>尽可能控制自己不发出声音，但还是颤抖着<span class="green">高潮了，汁液流到了你的手上。</span><<bodyliquid "leftarm" "semen">>
+				<<else>>
+					<<He>>努力让自己不发出声音，但还是颤抖着<span class="green">高潮了。</span>
+				<</if>>
+				<<passPercent 5>><<set $exam_chance += 5>>
+				<br><br>
+
+				<<He>>懒散地靠着椅背，十分满意，允许你继续完成卷子。
+			<<else>>
+				你知道在瑞沃注意到之前，你得尽快让<<him>>完事，但在动作如此受限的情况下，这可不是件容易事。
+				<br><br>
+
+				<span class="red">"别动来动去，"</span>瑞沃说，<<person1>><<his>>凝视像剑一样穿透了你。你抽走了手，忍受着惠特尼的骚扰。<<garousal>><<arousal 300 "genitals">><<arousal 300 "bottom">>
+			<</if>>
+		<</if>>
+<</switch>>
+<br><br>
+
+瑞沃观察着全场，偶尔向墙上的钟投去一瞥。“停笔，”<<person1>><<he>>说。一个<<person2>><<person>>仍然在奋笔疾书，直到瑞沃向<<him>>瞪了一眼。
+<br><br>
+
+瑞沃开始批卷，并让全班同学在此期间解决书本后面的一些"有趣的"谜题。<<person1>><<he>>只花了几分钟时间。
+<br><br>
+
+批改过的卷子落在你的桌上。
+<<exam_result "maths">>
+<br><br>
+
+<!-- Add text for interacting with Whitney here, if they are present? -->
+铃响了，你和其他学生一起拖着脚步加入走廊中的人群。
+<br><br>
+
+<<link [[继续|Hallways]]>><<if $whitneymaths>><<set $whitneymaths to "absent">><</if>><<endevent>><</link>>
+<br>

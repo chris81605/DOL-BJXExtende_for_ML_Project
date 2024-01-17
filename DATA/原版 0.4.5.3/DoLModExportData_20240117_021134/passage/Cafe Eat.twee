@@ -1,0 +1,24 @@
+:: Cafe Eat []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+<<switch $phase>>
+	<<case "fruity ale">>
+		<<set _food to "一杯果味啤酒。啤酒很快放在一个寻常的啤酒杯里端了上来。喝起来很甜，度数不高。好喝">>
+	<<case "winter ale">>
+		<<set _food to "冬日啤酒。啤酒迅速放在一个曲线漂亮的玻璃杯里端了上来。喝起来很甜，不是苦的。好喝">>
+	<<case "shandy">>
+		<<set _food to "一杯柠檬啤酒。啤酒很快放在罐子里，和一个啤酒杯一起端了上来。很明显，你需要自己倒酒。柠檬口味让你精神一振">>
+	<<case "autumn ale">>
+		<<set _food to "一杯秋日啤酒。啤酒很快端了上来。喝起来很甜，带点焦糖味。好喝">>
+	<<case "fruit salad">>
+		<<set _food to "一份水果沙拉。沙拉迅速端了上来，满是新鲜的草莓、蓝莓、猕猴桃，还有一片片菠萝。味道很甜，好吃">>
+	<<case "gingerbread">>
+		<<set _food to "一份姜饼人。饼干很快端了上来，糖霜铺就的脸正对你微笑。味道很甜，好吃，让你想起了圣诞时节">>
+		<<wearProp "gingerbread">>
+	<<default>>
+		<<set _food to "一份食物。食物迅速端了上来，你很快就吃完了。好吃">>
+<</switch>>
+
+<<print $daily.earSlimeOceanBreezeCafeEat ? "你决定听从耳中史莱姆，" : "你">>坐了下来，点了_food。
+你向窗外望去，<<print $weather is "rain" ? "街道细雨绵绵，令你感觉舒适" : $weather is "snow" ? "街道白雪皑皑，令你感觉舒适" : "凝望大海，享受微风">>。
+<br><br>
+<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>

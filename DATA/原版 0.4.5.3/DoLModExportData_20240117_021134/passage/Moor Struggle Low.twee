@@ -1,0 +1,39 @@
+:: Moor Struggle Low []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "lurker">>/*Creature species*/
+	<<struggle_creatures 1 2>>/*How many creatures will be involved, and their health.*/
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $analdisable is "f">>
+		<<set $struggle.anus.creature to "lurker">><<set $anususe to "struggle">><<set $anusstate to "struggle">><<set $struggle.enemy[0].location to "anus">>
+	<</if>>
+	<<set $timer to 12>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<if $timer is 12>>
+	<<struggle_add 1 2>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">第二个生物从石楠花丛中跳了出来！</span>
+	<br><br>
+<<elseif $timer is 8 and random(1, 2) is 2>>
+	<<struggle_add 1 2>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">第三个生物从石楠花从中跳了出来！</span>
+	<br><br>
+<</if>>
+
+<<struggle>>
+
+
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Moor Struggle Low End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Moor Struggle Low]]>><</link>></span>
+	<br>
+<</if>>

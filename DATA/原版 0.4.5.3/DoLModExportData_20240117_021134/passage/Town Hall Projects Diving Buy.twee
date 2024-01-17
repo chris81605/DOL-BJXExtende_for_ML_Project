@@ -1,0 +1,52 @@
+:: Town Hall Projects Diving Buy []
+<<effects>>
+
+"非常好！"奎恩惊讶道，"我会联系其他人，我们将立刻展开工作。"
+<br><br>
+
+<<if $museumAntiques.antiques.antiqueivorynecklace is "found">>
+    你起身准备离开，但在你走到门前的那刻，你听到桌下传来了咔哒声，你身旁的门锁上了。
+    "但首先，我要收走那条项链。"
+    <<if $worn.neck.name isnot "naked">>
+        你困惑地指着你脖子上的$worn.neck.cn_name_cap，"不，不是那条。"
+    <<else>>
+        你困惑地歪着头。
+    <</if>>
+    <br><br>
+
+    奎恩站起身来："'巨兽长牙，剥离其蛮。星辉蔚蓝，夜色墨染。'耳熟吗？你刚从湖里摸来的，不是么？"你意识到<<hes>>说的是那条象牙项链，你还把它带在身上。你下意识后退一步，而奎恩回以了你一个人畜无害的笑容。
+    "放轻松，我会给你丰厚的报酬，比你从博物馆里得到的更多，但它必须……得到妥善保管。"
+    <br><br>
+
+    <<He>>打开一个抽屉，开始数钱，其中不少是你刚刚交出的："<span class="gold">£6000</span>怎样？"
+    <br><br>
+
+    <<link [[成交|Town Hall Projects Diving Necklace]]>><<set $phase to 1>><</link>>
+    <br>
+    <<link [[拒绝|Town Hall Projects Diving Necklace]]>><<set $phase to 2>><</link>>
+    <br>
+<<else>>
+    <<if $museumAntiques.antiques.antiqueivorynecklace is "notFound">>
+		<<museumAntiqueStatus "antiqueivorynecklace" "found">>
+		<<museumAntiqueStatus "antiqueivorynecklace" "talk">>
+        <<world_corruption "hard" 2>>
+		<<set $necklaceThief to "diver">>
+        <<if C.npc["Ivory Wraith"].init is 1>>
+            <<npcincr "Ivory Wraith" lust 10>>
+        <</if>>
+        你站起身，离开办公室。"替我向贝利问好。"市长在你的身后喊道。
+        <br><br>
+
+        <<link [[继续|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <<else>>
+        <<He>>看向身旁展出着的那条<<him>>引以为傲的象牙项链。"想象一下，还有多少历史的碎片都被掩埋在了水底啊。"
+        <br><br>
+
+        你站起身，离开办公室。"替我向贝利问好。"市长在你的身后喊道。
+        <br><br>
+
+        <<link [[继续|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+<</if>>

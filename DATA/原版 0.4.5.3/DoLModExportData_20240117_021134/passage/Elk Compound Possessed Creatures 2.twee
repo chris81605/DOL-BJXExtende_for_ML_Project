@@ -1,0 +1,34 @@
+:: Elk Compound Possessed Creatures 2 []
+<<effects>><<generate1>><<generate2>><<generate3>><<person1>>
+
+突然的噪音引起了你的注意。三个警卫在一个<<person>>的带领下跑进了房间。<<He>>看了看倒在地上的警卫，然后转向你。"抓住<<phim>>。"<<fullGroup>>前进着。
+<br><br>
+
+<<switch $compoundWraith>>
+	<<case "willing">>
+		苍白的身影将一只手放在你的肩上，另两只手捂住了你的耳朵。"<span class="wraith">愿他们永远无法触碰到你，赶快离开吧，<<pcpetname "wraith">>。</span>"祂仍然用手捂着你的耳朵，祂的口中发出了刺耳的尖叫声。即使你的耳朵被捂住，声音仍然非常响亮。你可以想象警卫们听到的声音有多大，他们全都踉跄着倒下了。
+		<br><br>
+
+		那苍白的身影闭上嘴巴，收回了手，然后消失了。你跑进走廊，上了电梯，电梯门自动关上了。电梯带着你上升，你走出门，回到院子里。
+		<br><br>
+
+		<<link [[继续|Elk Compound]]>><<endevent>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+	<<case "accepted">>
+		<<wraithExorcise true true>>
+		两只手臂从背后伸出，遮住了你的耳朵。"<span class="wraith">正如你帮助了我，我也会帮助你，<<pcpetname "wraith">>。</span>"祂仍然用手捂着你的耳朵，祂的口中发出了刺耳的尖叫声。即使你的耳朵被捂住，声音仍然非常响亮。你可以想象警卫们听到的声音有多大，他们全都踉跄着倒下了。你的喉咙像被刀割了一样疼痛。
+		<<pain 2>><<gpain>>
+		<br><br>
+
+		那个苍白的身影从你的背部离开了你的身体，让你摇摇晃晃向前跌去。当那个身影逐渐消失时，你的踉跄转变成了疾跑。你跑进走廊，上了电梯，电梯门自动关上了。电梯带着你上升，你走出门，回到院子里。
+		<br><br>
+
+		<<link [[继续|Elk Compound]]>><<endevent>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+	<<case "resisted">>
+		<<set _wraithWill to Math.clamp(Math.floor(1 + $wraith.will) - $control, 1, 1000)>>
+		警卫包围你，抓住了你的胳膊。"带<<phim>>去审讯室，"<<person>>说。"<<pShe>>有很多问题要回答。"<span class="red">你试图挣脱，但那苍白的身影把你的身体拉住了。</span>
+		<br><br>
+
+		<<link [[尽你的全力去反抗|Elk Compound Possessed Guards]]>><<def 1>><<set $phase to 0>><<stress 12>><</link>><<willpowerdifficulty 1 _wraithWill>><<gstress>>
+		<br>
+		<span class="nextLink"><<link [[屈服|Elk Compound Possessed Guards]]>><<sub 1>><<set $phase to 1>><</link>></span>
+<</switch>>

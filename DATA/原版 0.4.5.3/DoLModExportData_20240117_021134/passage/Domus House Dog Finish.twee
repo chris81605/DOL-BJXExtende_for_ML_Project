@@ -1,0 +1,60 @@
+:: Domus House Dog Finish []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<beasttype>>欢快地吠叫着走到窗前。
+	<<tearful>>你站了起来。
+	<br><br>
+	<<saveNPC 0 domus_skul_dog>>
+	<<clotheson>>
+	<<endcombat>>
+	<<loadNPC 0 domus_skul_dog>>
+	<<clearNPC domus_skul_dog>>
+	<<beasttype>>平静下来，你注意到<<bhis>>的项圈闪烁着光芒。你走近一看，发现上面镶满了珠宝。
+	<br><br>
+	<<link [[拿走|Domus House Collar]]>><<crimeUp 50 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	这只<<beasttype>>畏缩不前，随后便翻身投降。
+	<<tearful>>你站了起来。
+	<br><br>
+	<<saveNPC 0 domus_skul_dog>>
+	<<clotheson>>
+	<<endcombat>>
+	<<loadNPC 0 domus_skul_dog>>
+	<<clearNPC domus_skul_dog>>
+	<<beasttype>>平静下来，你注意到<<bhis>>的项圈闪烁着光芒。你走近一看，发现上面镶满了珠宝。
+	<br><br>
+	<<link [[拿走|Domus House Collar]]>><<crimeUp 50 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescue to 0>>
+	<<if $NPCList[0].stance is "top">>
+		<<person2>>你听到了脚步声朝你过来。"你在这儿干什么，<<print $NPCList[0].pronouns.boy>>？"一个<<person>>对你说道。
+		当<<He>>看到你时，<<he>>笑了。"这样在我的房子里偷偷摸摸，真是太好了。"<<He>>坐了下来。"别介意。"
+		<br><br>
+		<<link [[继续|Domus House Dog]]>><<set $phase to 1>><</link>>
+	<<else>>
+		<<person2>>"你在那里得到了什么？"一位<<person>>说道。
+		当<<He>>看到你时，<<he>>笑了。"这样在我的房子里鬼鬼祟祟，真是太好了。但我有个更好的主意。"<<He>>抓住<<beasttype>>的衣领，把它从你身上拽下来。
+		<<saveNPC 1 domus_skul_dog_owner>>
+		<<endcombat>>
+		<<famebestiality 1>>
+		<<loadNPC 0 domus_skul_dog_owner>>
+		<<clearNPC domus_skul_dog_owner>>
+		<br><br>
+		<<link [[继续|Domus House Sneak Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<beasttype>>背对你。<<bHe>>又对你咆哮，但是没有动作。<<tearful>>你环顾四周。你看不到任何有价值的东西。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<</if>>

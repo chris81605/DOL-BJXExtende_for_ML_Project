@@ -1,0 +1,64 @@
+:: Sewers Ticking Number []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<if $sewerswatchattempt is $sewerswatchnumber>>
+	你按下$sewerswatchattempt，门打开了。里面是一块古董表。你收进了兜里。
+	<<set $antiquemoney += 200>><<museumAntiqueStatus "antiquewatch" "found">>
+	<br><br>
+	<<if $slimedisable is "f" and $hallucinations gte 1 and $sewerscountdown is 0>>
+		史莱姆扩散到你的另一只手臂。
+		<br><br>
+
+		<<link [[继续|Sewers Slime]]>><</link>>
+		<br>
+	<<else>>
+		<<if $slimedisable is "f" and $hallucinations gte 1 and $sewerscountdown lt 3>>
+			你把史莱姆从四肢上剥下来。
+			<br><br>
+		<</if>>
+		<<link [[继续|Sewers Workshop]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $sewerscountdown is 0>>
+	在倒计时到0的时候你准备好了。保险箱发出了咔哒声并熄灭了灯。滴答声没有停止，但保险箱也打不开。
+	<br><br>
+	<<if $slimedisable is "f" and $hallucinations gte 1>>
+		史莱姆扩散到你的另一只手臂。
+		<br><br>
+		<<link [[继续|Sewers Slime]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Sewers Workshop]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $sewerscountdown is 1>>
+	什么也没发生。你没时间了。
+	<br><br>
+	"10……9……8……"
+	<br><br>
+	<<if $slimedisable is "f" and $hallucinations gte 1>>
+		你的一只胳膊被史莱姆缠住了。
+		<br><br>
+	<</if>>
+	<<sewerscountdown>>
+<<elseif $sewerscountdown is 2>>
+	什么也没发生。你可以再试一次。
+	<br><br>
+	"20……19……18……"
+	<br><br>
+	<<if $slimedisable is "f" and $hallucinations gte 1>>
+		史莱姆扩散到你的另一条腿。
+		<br><br>
+	<</if>>
+	<<sewerscountdown>>
+<<else>>
+	什么也没发生。你可以再试一次。
+	<br><br>
+	"30……29……28……"
+	<br><br>
+	<<if $slimedisable is "f" and $hallucinations gte 1>>
+		有东西爬上了你的腿。它是史莱姆的触手。它渐渐消失在黑暗中。它抓得很紧，但你应该能把它撬开。如果你没分心的话。
+		<br><br>
+	<</if>>
+	<<sewerscountdown>>
+<</if>>
+<<set $sewerscountdown -= 1>>

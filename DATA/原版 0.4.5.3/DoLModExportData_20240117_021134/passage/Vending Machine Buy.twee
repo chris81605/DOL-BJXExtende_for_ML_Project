@@ -1,0 +1,24 @@
+:: Vending Machine Buy []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+你把钱放进了售卖机，一盒两袋装避孕套从出货口滑出来。
+<<if Time.schoolTime>>
+	<<if $changingRoomGender is "boys">>
+		<<generatesm1>>
+	<<else>>
+		<<generatesf1>>
+	<</if>>
+	<<if $promiscuity gte 50>>
+		<br><br>
+		一个<<person1>><<person>>进了厕所，<<He>>盯着你，你将避孕套放进口袋里，并对<<him>>微笑。
+	<<else>>
+		<br><br>
+		<<person1>><<person>>走进浴室，朝你的方向看了看。你一直等到<<he>>背对着你，开始洗手。你迅速拿起包裹，偷偷放进口袋。
+	<</if>>
+<<else>>
+	你拿走了它们。
+<</if>>
+<<set $money -= 2000>>
+<<gcondoms 2>>
+<br><br>
+<<set $daily.vendingMachine[$changingRoomGender] to true>>
+<<link [[返回|$currentToiletReturn]]>><<endevent>><</link>>

@@ -1,0 +1,46 @@
+:: Pregnancy Birth Hospital 3 []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<endevent>>
+<<generate1>><<person1>>
+
+<<set $litter_size to getPregnancyObject().fetus.length>>
+
+你在另一个房间醒来，一个助产士正微笑着站在你的床边，
+<<if $litter_size is 1>>
+
+	怀抱着一个裹在襁褓中的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。”<<he>>说着，把孩子递给了你。孩子闭着双眼躺在你的怀里，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我们已经做了全套检查，"助产士说，"孩子很健康。你想好名字了吗？"
+	<br><br>
+
+<<elseif $litter_size is 2>>
+
+	怀抱着两个裹在襁褓中的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。"<<he>>说着，把两个孩子先后递给你。两个孩子分别被你的双臂怀抱着，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我们已经做了全套检查，"助产士说，"孩子们都很健康。你想好名字了吗？"
+	<br><br>
+
+<<else>>
+
+	怀抱着三个裹在襁褓中的婴儿。
+	<br><br>
+
+	"看来妈妈醒了。”<<he>>说着，把两个孩子递给你，让你双手各抱着一个，最后把第三个孩子放在了你的胸口。孩子们闭着眼睛，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我们已经做了全套检查，"助产士说，"孩子们都很健康。你想好名字了吗？"
+	<br><br>
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<birthUi "pc" "hospital" "home" "Pregnancy Birth Hospital 4" _time>>

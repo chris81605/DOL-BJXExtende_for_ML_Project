@@ -1,0 +1,64 @@
+:: Prison Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemynomax gte 2>>
+		他们留下你一人躺在地板上。<<lrespect>><<prison_inmates -1>>
+	<<else>>
+		<<He>>把你独自一人留在地板上。<<lrespect>><<prison_inmates -1>>
+	<</if>>
+	<br><br>
+	<<tearful>>你爬了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_prison>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		他们转身逃离你。
+	<<else>>
+		<<He>>背对着你，举起双手投降。
+	<</if>>
+	<<switch $enemynomax>>
+		<<case 1>>
+			<<grespect>><<prison_inmates 1>>
+		<<case 2>>
+			<<grespect>><<prison_inmates 2>>
+		<<case 3>>
+			<<ggrespect>><<prison_inmates 3>>
+		<<case 4>>
+			<<ggrespect>><<prison_inmates 4>>
+		<<case 5>>
+			<<ggrespect>><<prison_inmates 5>>
+		<<default>>
+			<<gggrespect>><<prison_inmates 6>>
+	<</switch>>
+	<br><br>
+	<<tearful>>你拍了拍衣服。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_prison>>
+
+<<else>>
+	<<set $rescued += 1>>
+	<<if $enemynomax gte 2>>
+		沉重的脚步声从你的背后传来，人群慌忙散场，<<tearful>>你挣扎着爬了起来。
+	<<else>>
+		沉重的脚步声从你的背后传来，<<he>>慌忙离场，<<tearful>>你挣扎着爬了起来。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<generate_veteran_guard 0>><<person1>>
+	"是你引发的混乱是吧，"<<veteran_guard 0>>把手搭在你的肩膀上，"你给我过来。"
+	<br><br>
+	<<link [[乖乖过去|Prison Punishment]]>><<endevent>><</link>>
+	<br>
+	<<link [[战斗|Prison Punishment Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<</if>>

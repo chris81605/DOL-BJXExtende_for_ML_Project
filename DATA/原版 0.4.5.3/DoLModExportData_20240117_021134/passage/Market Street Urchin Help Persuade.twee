@@ -1,0 +1,53 @@
+:: Market Street Urchin Help Persuade []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">>
+<<if $phase is 0>>
+	你向市场摊主解释孤儿院生活的恐怖，以及<<person1>><<person>>必须经历的事。<br>
+	<<if $chef_speech is "bailey">>
+		市场上的摊主<<print either("害怕地","黯然地","满脸痛苦地")>>望着远方。"我听说过关于那个地方的传言。"<<set _bar to random(0,400)>>
+	<<else>>
+		市场摊主看起来对你的说法持怀疑态度。<<set _bar to random(0,1000)>>
+	<</if>>
+<<else>>
+	你告诉市场的摊主这个<<person>>在学校工作有多努力，而报警可能会毁掉<<his>>的整个未来。<<set _bar to random(0,800)>>
+<</if>><br><br>
+<<if currentSkillValue('english') gte _bar>>
+	你话语间的强烈情感让摊主的态度缓和了下来。
+	<br>
+	<<if $phase is 0>>
+		市场摊主叹了声气，挥手赶走看热闹的围观者。你们俩都被叫了进去。<br>
+		"我也不是什么魔鬼。如果你饿了，任何时候都可以来找我要。只是拜托别偷我的东西。好吗？"<br>
+		那个<<person>>笑了笑，犹豫了一下，然后开始递还食物。<br>
+		"拿着吧。送你了。现在，你们两个。都给我离开这里。" <<lstress>><<stress -3>>
+		<br><br>
+		"谢谢，"当你走远时，那个<<person>>说道。"我欠你个人情。"<<ghope>><<hope 1>>
+		<br><br>
+		<<link [[离开|Connudatus Street]]>><<famegood 20>><<unset $urchin_debt>><<endevent>><</link>>
+		<br>
+	<<else>>
+		"好了，好了！别闹了！" 摊主笑了笑，"我又有什么资格阻止一个具有如此伟大和改变未来世界潜力的人呢？
+		这次我放<<him>>离开。现在，把东西还给我，然后滚，趁我还没后悔。如果让我再看到你靠近我的摊位，你最好是来购物的。
+		还有……你，在我雇用你做售货员之前赶紧离开这里！"<br>
+		那个<<person>>交出了赃物。而摊主回到了自己的摊位。
+		<br><br>
+		"谢谢，"当你走远时，那个<<person>>说道。"我欠你一个人情。"<<gcool>><<status 1>>
+		<br><br>
+		<<link [[继续|Connudatus Street]]>><<famegood 20>><<unset $urchin_debt>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif currentSkillValue('english') gte (_bar/2)>>
+	听到你的话中的信念，市场的摊主同意了。
+	<br><br>
+	"好吧，但必须有人为此付钱。"<br><br>
+	<<if $money gte $urchin_debt>>
+		<<link [[主动付款|Market Street Urchin Help Pay]]>><</link>><br>
+		<<refuseicon>><<link [[拒绝支付|Market Street Urchin Not Pay]]>><</link>><br>
+		<br>
+	<<else>>
+		<span class="red">你负担不起。</span>
+		<br><br>
+		<<link [[解释说你的钱不够|Market Street Urchin Not Pay]]>><<famegood 2>><</link>><br>
+	<</if>>
+<<else>>
+	摊主不相信，决定拖着<<person>>去警察局。<br><br>
+	<<link [[继续|Connudatus Street]]>><<unset $urchin_debt>><<endevent>><</link>>
+<</if>>

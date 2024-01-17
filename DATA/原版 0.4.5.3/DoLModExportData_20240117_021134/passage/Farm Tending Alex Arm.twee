@@ -1,0 +1,45 @@
+:: Farm Tending Alex Arm []
+<<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 10 and $rng gte 51>>
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+		你伸出手扶艾利克斯起来。但是，<span class="pink"><<he>>却把你拉到了<<him>>的身上。</span>
+		<br><br>
+		"哎呀，"<<he>>笑着，用<<his>>另一只手摸着你的<<bottom>>，"注意脚下。"<<gtrauma>><<gstress>><<garousal>><<trauma 6>><<stress 6>><<arousal 600 "bottom">>
+		<br><br>
+		<<link [[生气|Farm Tending Alex Lewd Angry]]>><<trauma -6>><<npcincr Alex love -1>><<npcincr Alex dom -1>><</link>><<llove>><<ldom>><<ltrauma>>
+		<br>
+		<<link [[忍耐|Farm Tending Alex Endure]]>><</link>>
+		<br>
+		<<if $promiscuity gte 15>>
+			<<link [[摸索回去|Farm Tending Alex Grope]]>><<npcincr Alex lust 1>><</link>><<promiscuous2>><<glust>>
+			<br>
+		<</if>>
+
+	<<else>>
+		你伸出手扶艾利克斯起来。但是<span class="pink"><<he>>却把你一起拉到了<<if $weather is "rain" or $weather is "snow">>泥里<<else>>地上<</if>>。</span>
+		<br><br>
+		"哎呀，"<<he>>笑了，"注意脚下。"<<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[生气|Farm Tending Alex Angry]]>><<npcincr Alex dom -1>><<npcincr Alex love -1>><</link>><<ldom>><<llove>>
+		<br>
+		<<link [[一笑了之|Farm Tending Alex Laugh]]>><<npcincr Alex dom 1>><<npcincr Alex love 1>><<stress -6>><</link>><<gdom>><<glove>><<lstress>>
+		<br>
+	<</if>>
+<<else>>
+	你帮艾利克斯站了起来。
+	<<if $weather is "rain">>
+		<<He>>擦去泥。
+	<<else>>
+		<<He>>把自己拍干净。
+	<</if>>
+	"谢谢，"<<he>>说道。
+	<<if $alex_countdown is undefined and $farm_stage gte 7>>
+		"小心周围的'小动物'，如果有需要一定要使劲揍它们。或者喊我一声，就算我们都跌倒了，至少我们可以互相扶起来。"
+	<<else>>
+		"小心周围的'小动物'，如果有需要一定要使劲揍它们。"
+	<</if>>
+	<br><br>
+	<<destination_farm>>
+<</if>>

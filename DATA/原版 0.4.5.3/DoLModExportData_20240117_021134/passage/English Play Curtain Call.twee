@@ -1,0 +1,41 @@
+:: English Play Curtain Call []
+<<effects>>
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		过了一会儿，悉尼从幕后出现了，你跟他们并排在站在一起，鞠躬向观众致谢。
+	<<case "Taylor">>
+		随着演出继续，没过多久<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>就从后台出现，跟你和悉尼站在一起，向观众鞠躬致谢。
+	<<case "Sterling">>
+		随着演出终于结束，你从帷幕后面出现，跟悉尼和<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>站在一起，鞠躬向观众致谢。
+<</switch>>
+<<if $englishPlayApproval lte 50>>
+	<span class="red">你得到了一些嘲笑和同情的掌声。</span><<stress 12>><<trauma 6>><<ggstress>><<gtrauma>>
+<<elseif $englishPlayApproval lte 75>>
+	<span class="teal">大家以热烈的掌声欢迎你。</span><<stress -6>><<lstress>>
+<<else>>
+	<span class="green">大家都为你站起来鼓掌。</span><<trauma -24>><<lltrauma>>
+<</if>>
+<br><br>
+
+你跟他们两个回到后台，多伦跟你打了声招呼。
+<<npc Doren 3>><<person3>>
+<<if $englishPlayApproval lte 50>>
+	<<He>>以宽慰地笑容看着你们说道："你们只要记得这个就好了，你们登台不是为了表演什么让人最难忘的节日，而只是在把大家聚在一起，提醒他们节日的到来。"<<He>>不舒服地看了观众一眼，"重要的是你们尝试过了。"
+<<elseif $englishPlayApproval lt 75>>
+	"你们做得很棒！"<<he>>说道，"我可以看出观众每一秒都在享受着你们的表演。如果运气好的话，<<nnpc_Title "Leighton">>或许会允许我们明年有更多这样的节目，谢谢你们为演出做的练习。"<<npcincr Doren love 1>>
+<<else>>
+	"不敢相信，"<<he>>说道，"你们的演出无人能及，太完美了！"多伦骄傲地笑着。"过来这边，你们太让我自豪了！"<<He>>给了你们一个热情的拥抱，紧紧地抱住了你们三个。<<npcincr Doren love 3>>
+<</if>>
+<<if $englishPlayApproval gte 75>>
+	<<set $englishPlayWell to 1>>
+	<<earnFeat "Rich Hearts">>
+	<<status 40>><<gggcool>>
+	<<famesocial 40>>
+<</if>>
+<br><br>
+
+你们谢幕后走下舞台，让下一组人上场。当你经过的时候，有些观众送上赞美，但另一些人的评论则没有那么温和。
+<br><br>
+
+<<link [[继续|English Play Curtain Call 2]]>><</link>>
+<br>

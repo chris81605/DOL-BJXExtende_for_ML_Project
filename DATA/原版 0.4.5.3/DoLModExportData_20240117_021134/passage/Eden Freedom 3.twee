@@ -1,0 +1,40 @@
+:: Eden Freedom 3 []
+<<effects>>
+
+<!-- <<npc Eden>><<person1>> -->"我已经给了你一整天的时间，"<<he>>对你说，"你是想去睡到别人的床上，对吗？"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"不，不，"你说道，"你知道我只属于你一个人。"
+<<elseif $speech_attitude is "bratty">>
+	"我不是个荡妇，"你说道，"只是有时我需要离开更长时间。"
+<<else>>
+	"不是的！"你说道，"只是，每天为了上学都得穿过树林实在太冒险了。"
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 100>><<set $edenfreedom to 2>><<set $edendays to 0>>
+	<<He>>看起来想要争论，但还是无奈地叹了口气。"行吧。反正我也习惯了一个人。<span class="gold">你最多可以离开一个星期。</span>如果你离开得更久，我就会去把你抓回来。"
+	<br><br>
+
+	<<link [[拥抱|Eden Freedom 2]]>><<set $phase to 2>><<npcincr Eden love 1>><</link>><<glove>>
+	<br>
+	<<if $bus is "edenclearing">>
+		<<link [[点头|Eden Clearing]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[点头|Eden Cabin]]>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	<<He>>摇摇头。"那个城镇很危险。你在那里待的时间越少越好。"
+	<br><br>
+
+	<i>如果<<he>>更喜欢你的话，<<he>>可能会更愿意满足你的要求。</i>
+	<br><br>
+
+	<<if $bus is "edenclearing">>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

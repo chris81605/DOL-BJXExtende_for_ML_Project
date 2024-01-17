@@ -1,0 +1,77 @@
+:: Tentacle Bird []
+<<effects>>
+
+你腾空而起，将扭动的触手留在下方很远的地方。你的翅膀很快就疲倦了，但你可以获得良好的视野。
+<br><br>
+
+
+<<set _tent_portal_north to $tentnorth - $tentportalnorth>>
+<<set _tent_portal_east to $tenteast - $tentportaleast>>
+
+<<set _tent_spray_north to $tentnorth - 4>>
+<<set _tent_spray_east to $tenteast - 4>>
+
+
+<<if _tent_portal_north lte 2 and _tent_portal_north gte -2 and _tent_portal_east lte 2 and _tent_portal_east gte -2>>
+	<<set _tent_found to true>>
+	你看到一扇绿色的门。
+	<<if _tent_portal_north is 0>>
+	<<elseif _tent_portal_north gte 1>>
+		向南<<Number _tent_portal_north*10>>分钟。
+	<<elseif _tent_portal_north lt 0>>
+		向北<<Number _tent_portal_north*-10>>分钟。
+	<</if>>
+	<<if _tent_portal_east is 0>>
+	<<elseif _tent_portal_east gte 1>>
+		向西<<Number _tent_portal_east*10>>分钟。
+	<<elseif _tent_portal_east lt 0>>
+		向东<<Number _tent_portal_east*-10>>分钟。
+	<</if>>
+	<br>
+<</if>>
+<<if $tentnorth gte -2 and $tentnorth lte 2 and $tenteast gte -2 and $tenteast lte 2>>
+	<<set _tent_found to true>>
+	<<if $tentacleEntrance is "mirror">>
+		你看到你卧室的镜子。
+	<<else>>
+		你看到精神病院的门了。
+	<</if>>
+	<<if $tentnorth is 0>>
+	<<elseif $tentnorth gte 1>>
+		向南<<Number $tentnorth*10>>分钟。
+	<<elseif $tentnorth lt 0>>
+		向北<<Number $tentnorth*-10>>分钟。
+	<</if>>
+	<<if $tenteast is 0>>
+	<<elseif $tenteast gte 1>>
+		向西<<Number $tenteast*10>>分钟。
+	<<elseif $tenteast lt 0>>
+		向东<<Number $tenteast*-10>>分钟。
+	<</if>>
+	<br>
+<</if>>
+<<if _tent_spray_north gte -2 and _tent_spray_north lte 2 and _tent_spray_east gte -2 and _tent_spray_east lte 2>>
+	<<set _tent_found to true>>
+	你看到一个奇怪的物体。
+	<<if _tent_spray_north is 0>>
+	<<elseif _tent_spray_north gte 1>>
+		向南<<Number _tent_spray_north*10>>分钟。
+	<<elseif _tent_spray_north lt 0>>
+		向北<<Number _tent_spray_north*-10>>分钟。
+	<</if>>
+	<<if _tent_spray_east is 0>>
+	<<elseif _tent_spray_east gte 1>>
+		向西<<Number _tent_spray_east*10>>分钟。
+	<<elseif _tent_spray_east lt 0>>
+		向东<<Number _tent_spray_east*-10>>分钟。
+	<</if>>
+	<br>
+<</if>>
+<<if _tent_found isnot true>>
+	你看不到任何有趣的东西。
+	<br>
+<</if>>
+<br><br>
+
+<<link [[继续|Tentacle Plains]]>><<set $eventskip to 1>><</link>>
+<br>

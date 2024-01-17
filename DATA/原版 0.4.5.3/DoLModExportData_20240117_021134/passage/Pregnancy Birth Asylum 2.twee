@@ -1,0 +1,43 @@
+:: Pregnancy Birth Asylum 2 []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+接着，助产士给你戴上了一个面罩。你感到意识逐渐模糊。又有几个身影出现在你周围，他们的身影逐渐模糊。
+<br><br>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+
+<<switch playerNormalPregnancyType()>>
+	<<case "human">>
+		一片朦胧中，你隐约听到了哈珀的声音。"正常人类<<if !$player.vaginaExist>>，非正常分娩<</if>>，但还是让其他人保持在线，以防万一……"
+		<br><br>
+
+		你感觉时间似乎扭曲了，时快时慢，只有疼痛在变得越来越剧烈。你不断听到"深呼吸"、"用力"之类的指令，每次你都尽力配合着。
+		<br><br>
+
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Asylum 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+	<<case "wolf">>
+		一片朦胧中，你隐约听到了哈珀的声音。"不是人类。这是一次非常规分娩。严格按照我的指示行事……"
+		<br><br>
+
+		你感觉时间似乎扭曲了，时快时慢，只有疼痛在变得越来越剧烈。你不断听到"深呼吸"、"用力"之类的指令，每次你都尽力配合着。
+		<br><br>
+
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Asylum Wolf]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+<</switch>>

@@ -1,0 +1,56 @@
+:: Wraith Stalk Finish []
+<<effects>>
+
+<<if $stalk_end is "escaped">>
+	你放慢了脚步。你听到周围有微弱的笑声，但是附近没有人。<<tearful>>随后你继续你的旅程。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+
+<<elseif $stalk_end is "passed">>
+	薄雾慢慢消失在视野中。<<tearful>>你继续你的旅程。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+
+<<elseif $stalk_end is "hide">>
+	薄雾慢慢消失在视野中。<<covered>><<tearful>>你离开藏身之处并继续自己的行程。
+	<br><br>
+
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+	<br>
+<<elseif $stalk_end is "confront">>
+	<<silently>><<endcombat>><</silently>>
+	<<generateWraith 1 true>><<person1>>
+	<<initWraith>><<set $wraith.exit to "town">>
+
+	苍白的身影发出嘲笑声，身体以不自然的角度向前倾斜。<<rainWraith true>>
+	<<switch $wraith.gen>>
+		<<case "man">>
+			<<He>>朝天举起<<his>>的手，然后一股看不见的力量把你推到地上。
+		<<case "tentacles" "abomination" "slimetentacles">>
+			你觉得有东西顺着你的腿往上滑。你低头一看，一团苍白的触手包围着你！
+		<<case "slime">>
+			<<He>>朝天举起了<<his>>的手，然后一团闪闪发光的紫色物出现在你的上方。一群苍白起伏的泥状物跳了出来！
+		<<case "arms">>
+			狂躁的笑容掠过<<his>>的脸庞，另外几对手臂从<<his>>的背后伸出，每一对手臂都以奇怪的方式做着手势。
+	<</switch>>
+	<br><br>
+
+	<<if isBloodmoon()>>
+		<<link [[继续|Wraith Caught]]>><</link>>
+	<<else>>
+		<<link [[继续|Wraith Stalk Attack]]>><</link>>
+	<</if>>
+	<br>
+<</if>>

@@ -1,0 +1,42 @@
+:: Wolf Pack []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastNEWinit 1 dog>>
+	<<beastCombatInit>>
+
+	<<beastTrainGenerate>>
+
+	You awaken to find yourself surrounded by a pack of stray dogs!
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<set $alarm to 0>>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[Next|Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[Next->Wolf Pack Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[Next|Wolf Pack]]>><</link>></span><<nexttext>>
+	<</if>>
+
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[Next->Wolf Pack Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[Next->Wolf Pack Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[Next->Wolf Pack]]>><</link>></span><<nexttext>>
+<</if>>

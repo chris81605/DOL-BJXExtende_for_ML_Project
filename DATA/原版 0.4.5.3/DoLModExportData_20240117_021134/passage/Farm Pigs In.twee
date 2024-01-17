@@ -1,0 +1,40 @@
+:: Farm Pigs In []
+<<effects>>
+
+你把<<farm_text_many pig>>赶回猪圈。有的猪似乎不愿移动，需要哄着才肯挪动。
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and ($bestialitydisable is "f" or $farm_work.pig.monster is true)>>
+<!-- Modified for Monster People -->
+		<<if $farm_work.pig.monster is true>>
+			你设法让最后一只站了起来。当你把<<farm_him pig>>赶进圈舍后，突然，一只<<farm_he pig>>叼住你的手臂，试图把你拽到地上。
+		<<else>>
+			你设法让最后一只站了起来。正当你要把它弄进圈舍时，它用后腿站了起来，试着把你推到地上。
+		<</if>>
+		<br><br>
+
+		<<link [[训斥|Farm Pigs Scold]]>><</link>><<tendingdifficulty 1 600>>
+		<br>
+		<<link [[推开|Farm Pigs Shove]]>><</link>><<physiquedifficulty 1 12000>>
+		<br>
+		<<link [[忍耐|Farm Pigs Endure]]>><<trauma 6>><<stress 6>><<farm_pigs -1>><</link>><<lrespect>>
+		<br>
+		<<if $deviancy gte 35>>
+			<<link [[帮它一把|Farm Pigs Hand]]>><<set $sexstart to 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<!-- The <<farm_text_many pig>> seems agitated. It's a little scary.<<gstress>><<stress 6>> -->
+		<!-- <br><br> -->
+
+		<!-- <<link [[Next|Farm Work]]>><</link>> -->
+		<!-- <br> -->
+<<else>>
+	<<if $farm_work.pig.monster is true>>
+		你设法让最后一只站了起来，成功把所有<<farm_him pig>>赶进了圈舍。
+	<<else>>
+		你设法让最后一只站了起来，把它赶进了圈舍。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

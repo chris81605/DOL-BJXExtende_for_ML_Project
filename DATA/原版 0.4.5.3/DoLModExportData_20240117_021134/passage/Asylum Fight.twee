@@ -1,0 +1,25 @@
+:: Asylum Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	你翻过桌子，扑向哈珀。<<He>>按下警报，但没有人过来。他们成功引开护工了。
+	<<set $asylumdistracted to 0>><<set $enemyhealth *= 0.6>><<set $enemyhealthmax *= 0.6>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Asylum Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Asylum Fight]]>><</link>></span><<nexttext>>
+<</if>>

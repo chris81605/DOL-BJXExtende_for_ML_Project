@@ -1,0 +1,85 @@
+:: Sewers Review []
+<<if $phase is 0>>
+	<<if $school gte 1600>>
+		你告诉摩根你的成绩很
+	<<else>>
+		你叹了口气，然后告诉摩根你的成绩很
+	<</if>>
+	<<if $school gte 4000>>
+		<span class="green">出类拔萃</span>
+		<<set _result to "good">>
+	<<elseif $school gte 2800>>
+		<span class="teal">优秀</span>
+		<<set _result to "good">>
+	<<elseif $school gte 1600>>
+		<span class="lblue">优良</span>
+		<<set _result to "okay">>
+	<<elseif $school gte 800>>
+		<span class="blue">好</span>
+		<<set _result to "okay">>
+	<<elseif $school gte 400>>
+		<span class="purple">差</span>
+		<<set _result to "bad">>
+	<<elseif $school gte 1>>
+		<span class="pink">糟糕</span>
+		<<set _result to "bad">>
+	<<else>>
+		<span class="red">糟糕透顶</span>
+		<<set _result to "naked">>
+	<</if>>
+	在学校的表现。
+<<else>>
+	<<if $englishSuccess>>
+		你告诉摩根，你的成绩非常优秀，所有老师都为你感到骄傲。<span class="green">摩根相信了。</span>
+		<<set _result to "good">>
+	<<else>>
+		你告诉摩根你的成绩很糟糕。是那种差的惨绝人寰惊天地泣鬼神无人能比的糟糕，无论是哪个老师对着你的成绩都得叹气说一声没救，这孩子未来只能进厂了的地步。<span class="red">不知道是不是描述得太夸张了，你没能说服<<him>>。</span>
+		<<set _result to "bad">>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if _result is "good">>
+	<<npcincr Morgan love 1>>
+	"太棒了！我就知道我的可爱孩子很聪明！”摩根兴奋地说道，<<He>>把手放在你的头上，摸弄着你的头发。“我很开心，<<charles>>，<<mummy>>为你感到骄傲！你传承了我们高贵的家名！"
+	<<stress -6>><<lstress>>
+	<br><br>
+
+	<<link [[继续|Sewers Morgan]]>><</link>>
+<<elseif _result is "okay">>
+	"我对你的期望很高的……”摩根失望地叹了口气，你能看到<<his>>脸上的失望。“那么我们只能继续上课了，从现在开始吧。"
+	<br><br>
+
+	<<He>>向你走近了。
+	<<set _eventsDone to Object.keys($daily.morgan)>>
+	<<if $rng gte 51 and _eventsDone lte 3>>
+		<<set _lessons to []>>
+		<<run ["history", "maths", "science", "english"].forEach(n => _eventsDone.includes(n) ? false : _lessons.push(n))>>
+		<<set _lesson to _lessons.random().toUpperFirst()>>
+
+		摩根抓住你的手腕，把你拉到一个废弃的桌子旁，强迫你坐下。“乖孩子，”<<he>>说，“是时候复习了。我们这次要重点讲_lesson，一定要认真听。"
+		<br><br>
+		/* these passage names are constructed:
+		|Sewers Maths], |Sewers History], |Sewers Science], |Sewers English] */
+		<<link [[继续|"Sewers " + _lesson]]>><</link>>
+	<<else>>
+		"我们来复习一下你擅长的科目，<<charles>>。”摩根靠近你，一边脱自己的衣服一边开始摸索着你的身体。
+		<br><br>
+
+		<<link [[继续|Sewers Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><<set $daily.morgan.sex to 1>><</link>>
+	<</if>>
+<<elseif _result is "bad">>
+	<<npcincr Morgan love -1>>
+	摩根暴跳如雷，迅速靠近你，紧握着拳头。“我们上了那么多课，你还敢在学校做坏事！”<<He>>紧紧抓住你的手臂，“坏<<girl>><<charles>>！"
+	<br><br>
+
+	你被强行压在<<his>>的身下。你咬紧牙关，做好最坏的打算。
+	<br><br>
+
+	<<link [[拒绝|Sewers Spank]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+	摩根摩挲着下巴沉思。“有传言说裸体学习可以帮助人增强记忆，”<<he>>说道。“但这可能是无稽之谈。"
+	<br><br>
+
+	<<link [[继续|Sewers Morgan]]>><</link>>
+<</if>>

@@ -1,0 +1,40 @@
+:: Monster Test []
+<<location "sea">><<effects>>
+
+<<if $molestationstart is 1>><<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<molested>>
+	<<controlloss>>
+
+	<<set $enemytype to "tentacles">>
+	<<tentaclestart 6 15>>
+
+	<<set $vorestage to 1>>
+	<<set $vorecreature to "whale">>
+	<<set $vorestrength to 1>><<set $position to "doggy">>
+	<<if $hallucinations gte 1>>
+		<<set $voretentacles to 1>>
+	<<else>>
+		<<set $voretentacles to 0>>
+	<</if>>
+
+	<<swarminit "fish" "swarm" "moving towards you" "encircle you" "fend off" 1 9>>
+
+	<<set $swimdistance to 20>>
+	<<set $water to 1>>
+	<<resetLastOptions>>
+	<<getCombatDefaultsType>>
+<</if>>
+
+<<voreeffects>><<swarmeffects>><<effectstentacles>>
+<<vore>><<swarm>><<tentacles>>
+<<statetentacles>>
+<<actionsOmni>>
+
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+<<elseif $vorestage lte 0>>
+	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Monster Test]]>><</link>></span><<nexttext>>
+<</if>>

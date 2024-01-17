@@ -1,0 +1,49 @@
+:: Office Streak Stairs []
+<<effects>>
+你低姿前进，利用掩体潜行至楼梯。
+<<set $danger to random(1,10000)>>
+<<if $danger gte 9000 - ($streakSpeed * 1500)>>
+	<<if $rng gte 90 - ($officeFloor * 2)>>
+		一个<<generate1>><<person1>><<person>>走进你所在的过道，开始向你走来，所以你躲进附近的一个储物柜等待<<him>>经过。
+		<br>
+		你靠在门上，试图喘口气，这时门猛地打开了，把你撞倒在地。
+		<br>
+		你抬头看到那个<<person1>><<person>>站在你面前，用欲念的目光凝视着你。
+		<br><br>
+		<<link [[继续|Office Supply Molest]]>><<set $molestationstart to 1>><</link>>
+	<<elseif $rng gte 70 - $officeFloor>>
+		就在你以为安全了的时候，你撞上了一个保安。
+		<br><br>
+		"你跟我来。"
+		<br><br>
+		<<link [[继续|Office Security Escort]]>><<pass $officeFloor>><</link>>
+	<<else>>
+		你遇到一大群<<people>>挡住了通往楼梯的路。其中一个人开始朝你走来。
+		<br>
+		你注意到附近有一辆用布盖着的服务车，所以你爬进去隐藏你的<<lewdness>>。
+		<br>
+		就在你以为安全了的时候，车却开始移动了。一分钟后，车停了下来，你听到有人走开了。
+		<br><br>
+		<<set _cartDistance to random(-2,2)>>
+		<<if _cartDistance gte 0>>
+			你从购物车下面偷看，想弄清楚自己的方位，却发现自己已经离楼梯更远了！
+		<<else>>
+			你从购物车下面偷看，想弄清楚自己的方位，却发现自己离楼梯更近了！
+		<</if>>
+		<<set $stairDistance += _cartDistance>>
+		<<officestreakactions>>
+	<</if>>
+<<else>>
+	<<set $stairDistance -= $streakSpeed>>
+	<<if $stairDistance lte 0>>
+		你从藏身之处奔向楼梯井，保持低调，躲在别人看不到的地方。你走到门口，偷偷溜了进去。这门是从里面锁上的，所以现在没有回头路了。
+		<br>
+		你花点时间喘口气。你会需要它的，因为你有<<number $officeFloor>>层要下。
+		<br><br>
+		<<link [[下楼梯|Office Stairwell]]>><</link>>
+	<<else>>
+		你走到你觉得安全的地方，然后停下来躲<<officestreakhide>>
+		<<officestreakactions>>
+	<</if>>
+<</if>>
+<<unset $streakSpeed>>

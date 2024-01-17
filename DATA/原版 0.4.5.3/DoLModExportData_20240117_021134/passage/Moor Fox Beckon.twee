@@ -1,0 +1,36 @@
+:: Moor Fox Beckon []
+<<effects>>
+你慢慢地向<<beasttype>>伸出手，尽量让自己看起来没有威胁性。
+<br><br>
+<<if $tendingSuccess>>
+	<<if $monster is 1>>
+		<<bHe>>肌肉紧绷着，盯着你看了一会儿。
+		<<if $NPCList[0].traits.includes("clever")>>
+			然后，<<bhe>>咧嘴一笑。"你是这个意思吗？好吧，好吧，你赢了。"<<bhe>>说着，靠近过来。
+		<<elseif $NPCList[0].traits.includes("cowardly")>>
+			<<bHe>>犹豫地走近。"你……你好。"
+		<<else>>
+			<<bHe>>摇摇头。"你真是个怪人。"<<bHe>>靠近过来。
+		<</if>>
+
+		你小心翼翼地伸手抚摸<<bhis>>的双耳中间，以免惊吓到<<bhim>>。
+	<<else>>
+		<<bHe>>在原地停留了一会儿，但最终还是靠近了你。你小心翼翼地伸手抚摸着<<bhis>>的双耳中间，以免惊吓到<<bhim>>。
+	<</if>>
+	<br><br>
+
+	<<link [[爱抚|Moor Fox Pet]]>><</link>><<tendingdifficulty _tendingMin _tendingMax>>
+	<br>
+	<<if $deviancy gte 35>>
+		<<link [["爱"抚|Moor Fox Deviant Pet]]>><<transform fox 1>><</link>><<deviant3>>
+	<<else>>
+		<span class="blue">你的异种癖还不够，没办法做出进一步的行动。</span>
+	<</if>>
+	<br>
+<<else>>
+	<<bHe>>看了你一会儿，然后迅速离开了。<<trauma 2>><<gtrauma>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

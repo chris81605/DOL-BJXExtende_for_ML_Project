@@ -1,0 +1,32 @@
+:: School Infirmary Robin Accept []
+<<set $outside to 1>><<set $location to "town">><<schooleffects>><<effects>>
+
+你离开学校，和罗宾一起穿过小镇<<if $robinromance is 1>>，<<his>>的手臂挽住了你<</if>>。
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 40>>
+	<<Hes>>今天充满活力，在路途中不断地尝试逗你笑。你们笑得很开心。
+<<else>>
+	<<He>>不时地瞥你一眼，似乎很享受与你一起的片刻安宁。
+<</if>>
+<<trauma -6>><<stress -6>><<ltrauma>><<lstress>>
+<br><br>
+
+一到家，罗宾就直接带你去了你的房间。
+<<if ["afternoon","late"].includes($schoolstate)>>
+	在回<<He>>自己的房间之前，<<he>>说你可以随时找<<he>>聊天。
+<<else>>
+	"我该回去上课了。"<<He>>拥抱你，"之后再聊吧。
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+		你好好休息，好吗？"
+	<<else>>
+		我希望到那时你会感觉好些。"
+	<</if>>
+	<br><br>
+
+	在<<he>>离开时，<<he>>轻轻关上门。
+<</if>>
+<br><br>
+
+<<link [[继续|Bedroom]]>><<endevent>><<infirmary_excused>><</link>>
+<br>

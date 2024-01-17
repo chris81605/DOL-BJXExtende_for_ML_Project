@@ -1,0 +1,40 @@
+:: Science Project Lichen []
+<<effects>>
+
+<<if $phase is 0>>
+	<<set $sciencelichentempleready += 1>>
+	你测量起粉色地衣的数据，并将其重量、体积、发现地点、外观一一记录下来。你还注意到它会散发出一种类似草莓的气味，这味道让你身体有些发热。
+	<<garousal>><<arousal 600>>
+	<br><br>
+<<elseif $phase is 1>>
+	<<set $sciencelichenparkready += 1>>
+	你测量起白色地衣的数据，并将其重量、体积、发现地点、外观一一记录下来。你还注意到它会散发出一种类似烟煤的气味，这味道让你打了个大大的喷嚏。
+	<br><br>
+<<elseif $phase is 2>>
+	<<set $sciencelichendrainready += 1>>
+	你测量起紫罗兰色地衣的数据，并将其重量、体积、发现地点、外观一一记录下来。你还注意到它会散发出海边的特有气味，这味道让你感到莫名的激动。
+	<<ggarousal>><<arousal 3000>>
+	<br><br>
+<<else>>
+	<<set $sciencelichenlakeready += 1>>
+	你测量起紫色地衣的数据，并将其重量、体积、发现地点、外观一一记录下来。你还注意到它会散发出异常甜腻的香味，这味道让你的手莫名颤抖起来。
+	<<drugs 180>>
+	<br><br>
+<</if>>
+
+<<if $scienceproject is "ongoing">>
+	<<link [[继续|Science Project]]>><<set $phase to 0>><</link>>
+	<br>
+<<else>>
+	你看了看时间，突然意识到<span class="red">科学竞赛已经结束了。</span>
+	<br><br>
+	在这个时候继续钻研下去的话是很愚蠢的，你将这个已经过时的项目扔进了垃圾桶，并对浪费的精力和时间感到烦躁。
+	<br><br>
+
+	<<if $location is "home">>
+		<<link [[继续|Bedroom]]>><</link>>
+	<<else>>
+		<<link [[继续|School Library]]>><</link>>
+	<</if>>
+	<br>
+<</if>>

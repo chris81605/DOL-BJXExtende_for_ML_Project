@@ -1,0 +1,36 @@
+:: Prison Exercise Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He>>把杠铃放在你身上，然后走开了。
+	<br><br>
+	<<tearful>>你喘了口气。力量恢复后，你举起杠铃，解放了自己。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_prison>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<person>>后退两步，警惕地看着你。"你比看上去更难对付。"<<grespect>><<prison_inmates 1>>
+	<br><br>
+	<<tearful>>你喘了口气。力量恢复后，你举起杠铃，解放了自己。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_prison>>
+<<else>>
+	<<set $rescued += 1>>
+	听到沉重的脚步声，<<person>>落荒而逃。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<generate_veteran_guard 0>><<person1>>
+	当<<veteran_guard 0>>来到时，你还被困在杠铃下面。"你扰乱了本机构的和平与安宁，"<<veteran_guard 0>>看着你说道。<<He>>举起杠铃，解放了你，然后把手放在你的肩膀上。"你跟我来。"
+	<br><br>
+	<<link [[乖乖过去|Prison Punishment]]>><<endevent>><</link>>
+	<br>
+	<<link [[反抗|Prison Punishment Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<</if>>

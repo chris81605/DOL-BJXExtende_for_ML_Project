@@ -1,0 +1,87 @@
+:: Wolf Cave Spar 2 []
+<<effects>>
+
+<<switch $phase>>
+	<<case 0>>
+		你试着用一些强大的攻击来压倒<<beasttype>>，迅速而果断地结束战斗。<<beasttype>>在你的前两次猛击下躲闪，但是
+		<<if $physiqueSuccess>>
+			<<set _victory to 1>>
+			第三下击中了<<bhim>>，接着第四下<span class="green">更是把<<bhim>>打倒在地。</span>
+		<<else>>
+			你第三下打到了<<bhim>>。<span class="red"><<bHe>>差点就闪过去了。</span><<bHe>>用力<<if $monster is 1>>踢<<else>>冲击<</if>>你的膝盖，你一个踉跄跌倒在地。
+		<</if>>
+		<<physique 4>>
+	<<case 1>>
+		你尝试消耗<<beasttypes>>的体力，同时节约自己的精力。<<beasttype>>向前冲去攻击，而你后退。<<bHe>>接着冲锋，你闪到一边。
+		<<if $athleticsSuccess>>
+			<<set _victory to 1>>
+			<span class="green"><<bHe>>开始大口喘气，接着你挥出一击。<<bHes>>没来的及躲开。</span>
+		<<else>>
+			<span class="red">你的脚勾到了一个树根。</span>你摔倒在地，而<<bhes>>则冲向你，把<<if $monster is 1>>手<<else>>爪子<</if>>摁在你的脖子上。胜负已分。
+		<</if>>
+		<<physique 2>><<athletics 2>>
+	<<case 2>>
+		你尝试在<<bhim>>周围跳舞，一边攻击一边躲闪<<bhers>>的反击。
+		<<if $danceSuccess>>
+			<<set _victory to 1>>
+			<span class="green">你发现避开对手的攻击很容易。</span>你躲开了<<beasttype>>的猛扑，并给<<bhis>>的<<if $monster is 1>>的下巴<<else>>鼻子<</if>>致命一击。
+		<<else>>
+			你有些敏捷。<span class="red">但不像<<bhim>>那么敏捷。</span>无论你怎么努力，你甚至连一拳都打不到<<bhim>>。很明显<<bhes>>在戏弄你，你在疲惫和失败中跪倒在地。
+		<</if>>
+		<<physique 2>><<danceskill 2>>
+<</switch>>
+<<gtiredness>><<tiredness 12>>
+<<if !_victory>>
+	<<pain 6>><<gpain>>
+<</if>>
+<br><br>
+
+<<if _victory>>
+	<<if $wolfpackharmony gte 10>>
+		那<<beasttype>>在痛苦中呻吟，退后了几步之后把<<bhis>>屁股朝向你。
+		<<if $monster is 1>>
+			"<<pPackbrother>>可以取得<<pher>>的奖赏。"
+		<</if>>
+		<br><br>
+		<<if $deviancy gte 35>>
+			<<link [[接受邀请|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>><<deviant3>>
+		<<else>>
+			<span class="blue">你的异种癖等级还不足以让你接受它。</span>
+		<</if>>
+		<br>
+		<<link [[拒绝|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<<elseif $wolfpackferocity gte 10>>
+		那<<beasttype>>在痛苦中呻吟，咆哮着退后了几步。当你试图接近来检查<<bhe>>的伤势时，<<bHe>>露出了<<bhis>>的尖牙。
+		<<if $monster is 1>>
+			"<<ppackbrother>>还想要什么？你已经赢了。"
+		<</if>>
+		<br><br>
+		<<link [[继续|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<<else>>
+		那<<beasttype>>在痛苦中呻吟，退后了几步之后便低下<<bhis>>的头回到了<<bhis>>的休息处。
+		<br><br>
+		<<link [[继续|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<<if $wolfpackferocity gte 10>>
+		那<<beasttype>>露出<<bhis>>的尖牙把你按在地上。<<bHes>>不仅仅满足于在战斗中击败你。
+		<br><br>
+		<<if $deviancy gte 35>>
+			<<link [[顺从|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 1>><<sub 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<link [[挣扎|Wolf Cave Spar Sex]]>><<set $molestationstart to 1>><<def 1>><</link>>
+	<<elseif $wolfpackharmony gte 10>>
+		<<beasttype>>发出满意的咯咯声，用<<bhis>>的<<if $monster is 1>>手<<else>>鼻子<</if>>推了推你。<<bHis>>的尾巴不自觉地摇着。
+		<br><br>
+		<<if $deviancy gte 35>>
+			<<link [[奖励|Wolf Cave Spar Sex]]>><<set $sexstart to 1>><<set $phase to 2>><<sub 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+		<<link [[喘口气 (0:05)|Wolf Cave Clearing]]>><<endevent>><<pass 5>><</link>>
+	<<else>>
+		<<beasttype>>发出满意的咯咯声，回到<<bhis>>的休息处。
+		<br><br>
+		<<link [[喘口气 (0:05)|Wolf Cave Clearing]]>><<endevent>><<pass 5>><</link>>
+	<</if>>
+<</if>>

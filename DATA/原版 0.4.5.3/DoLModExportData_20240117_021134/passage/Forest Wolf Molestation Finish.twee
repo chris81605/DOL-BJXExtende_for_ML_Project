@@ -1,0 +1,52 @@
+:: Forest Wolf Molestation Finish []
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	<<if $syndromewolves gte 1>>
+		<<if $monster is 1>>
+			<<bHe>>毫不费力就抓住你的颈背，在把你扛在了肩上。当你被带走的时候，你感觉自己像一只无助的小狗。
+		<<else>>
+			<<bHe>>抓住你的颈背，就像是抓住一只迷路的小狗。
+		<</if>>
+		<br><br>
+
+		<<link [[顺其自然|Wolf Cave Returned]]>><<endcombat>><</link>>
+		<br>
+		<<link [[挣扎|Forest Wolf Molestation Resist]]>><<endcombat>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<<else>>
+		黑狼似乎满足了，但还没有结束。
+		<<if $monster is 1>>
+			"你。跟我，"<<bhe>>说道。你怀疑自己别无选择。<<bhe>>拖着你的肩膀，你被胁迫了。
+		<<else>>
+			<<bHe>>抓住你的颈背。
+		<</if>>
+		<<bHe>>想带你去个地方。
+		<br><br>
+
+		<<link [[顺其自然|Forest Wolf Cave Intro]]>><<endcombat>><</link>>
+		<br>
+		<<link [[挣扎|Forest Wolf Molestation Resist]]>><<endcombat>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $enemyhealth lte 0>><<set $foresthunt to 0>>
+	<<if $monster is 1>>
+		尽管<<bhis>>展示了强大的力量，你还是成功地克服了它。你挣脱了黑狼的控制。<<bhe>>喉咙里发出低吼。"不是容易的猎物。"<<bHe>>夹着尾巴逃进了森林。你感到自豪，意识到打败比你体型大近两倍的东西并不容易。
+	<<else>>
+		尽管<<bhis>>很强大，你还是成功地打败了黑狼。<<bHe>>夹着尾巴逃进了森林。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<tearful>>你振作了起来。
+	<br><br>
+
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

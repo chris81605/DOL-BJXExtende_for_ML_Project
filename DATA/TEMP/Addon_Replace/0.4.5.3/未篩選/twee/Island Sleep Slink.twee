@@ -1,0 +1,31 @@
+:: Island Sleep Slink []
+<<effects>>
+
+你遁入阴影中，像<<person1>><<person>>和<<person2>><<person>>一样匍匐着爬行。然后，<<person3>><<person>>出现了。
+<<if $rng gte $island_roll>>
+	<span class="green">他们完全没注意到你</span>，不知道他们会去哪。
+	<br><br>
+
+	<<link [[继续|Island]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $islander_language gte 100>>
+		他们互相看了看。
+		"<<pshes>>肯定在这儿。”<<person1>><<person>>道。
+		<br>
+		"那就小点声！”<<person2>><<person>>回道。
+		<br>
+		"不必了。”<<person3>><<person>>开口，“我看到<<phim>>了！”<span class="red"><<He>>指向你。</span>
+	<<elseif $islander_language gte 50>>
+		他们互相窃窃私语。很明显，他们在找你，直到<<person2>><<person>><span class="red">指着你喊了起来。</span>
+	<<else>>
+		他们用一种难以理解的语言窃窃私语，并扫视着地面，好像在寻找着什么。<<person2>><<person>><span class="red">指着你大叫。</span>
+	<</if>>
+	<br><br>
+
+	<<link [[战斗|Island Sleep Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[屈服 (0:30)|Island Sleep Submit]]>><</link>>
+	<br>
+<</if>>
+<<unset $island_roll>>

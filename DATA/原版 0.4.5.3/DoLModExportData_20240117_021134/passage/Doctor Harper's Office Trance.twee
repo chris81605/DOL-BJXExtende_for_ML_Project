@@ -1,0 +1,54 @@
+:: Doctor Harper's Office Trance []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+<<if $phase is 0>>
+	你努力摆脱了那种影响。哈珀的语气一成不变："今天就到这里吧。记住，别害怕放松。"<<He>>为你打开了门。"下个星期，同一时间，我们继续。保重。"
+	<br><br>
+
+	<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>
+<<elseif $phase is 1>>
+	<<if $hypnosis is 0>><<set $hypnosis to 1>><<hypnotised 1>>
+
+		你滑入了更深的恍惚之中。<span class="green">你从未感到如此安宁。</span>你听到哈珀的声音漂浮而来。"很好。现在，我要你记住这种感觉。以后，每当你精疲力竭，无所适从的时候……"<<He>>指示着你。"你不会记得这个。我扔下这支笔，你就会醒过来。"
+		<br><br>
+
+		钢笔铿锵落地。你眨了眨眼睛。你回到了现实，感觉比进入办公室前好了很多。你回想起哈珀在你被催眠期间对你说过话，至于说了什么，你已经不记得了。
+		<br><br>
+
+		<<He>>对你笑着。"今天也很成功。你很棒。"<<He>>为你打开了门。"下个星期，同一时间，我们继续。保重。"
+		<br><br>
+		<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>
+
+	<<elseif $hypnosis is 1>>
+		你陷入了更深的恍惚状态。<span class="green">你回到熟悉的平静状态。</span>你听到哈珀的声音飘来。"很好。"<<He>>在办公桌的抽屉里翻找，拿出了一台相机。"现在，脱掉你的衣服。"
+		<br><br>
+
+		<<link [[脱掉你的衣服 (0:20)|Doctor Harper's Office Camera]]>><<pass 20>><<npcincr Harper dom 5>><<set $hypnosis to 2>><<hypnotised 1>><<set $phase to 1>><<strip>><</link>>
+		<br>
+		<<link [[拒绝|Doctor Harper's Office Camera]]>><<npcincr Harper dom -5>><<set $phase to 0>><<stress 6>><</link>><<gstress>>
+		<br>
+	<<elseif $hypnosis is 2>>
+		<span class="green">你越陷越深地进入了催眠状态，回到了熟悉的平静状态。</span>你听到哈珀的声音向你飘来。<<He>>说："很好。"<<He>>迅速走到窗口，打开窗户，一位<<generate2>><<person2>><<person>>拿着一个大相机和三脚架爬了进来。
+		<br><br>
+
+		在<<he>>设置相机时，<<person1>>哈珀转身对你轻声说："脱掉你的衣服。"
+		<br><br>
+
+		<<link [[脱掉你的衣服 (0:20)|Doctor Harper's Office Camera2]]>><<pass 20>><<npcincr Harper dom 5>><<set $hypnosis to 3>><<set $phase to 1>><<hypnotised 1>><<strip>><</link>>
+		<br>
+		<<link [[拒绝|Doctor Harper's Office Camera2]]>><<npcincr Harper dom -5>><<stress 6>><<set $phase to 0>><</link>><<gstress>>
+		<br>
+	<<elseif $hypnosis gte 3>>
+
+		<span class="green">你进入更深的恍惚状态，然后回到熟悉的平静状态。</span>你听到哈珀的声音飘来。"很好。"<<He>>轻快地走到窗前打开它，然后<<generate2>><<person2>><<person>>携带大型相机和三角架，走过去。<<generate3>><<generate4>><<generate5>><<generate6>><<He>>紧随其后的是另外四个人，分别是<<person3>><<person>>、<<person4>><<person>>、<<person5>><<person>>和<<person6>><<person>>。
+		<br><br>
+
+		<<person2>>当<<person>>设置相机时，其他四个人开始递给哈珀钱。<<person1>><<He>>数了数，然后把钱藏在抽屉里，转身对你说："脱掉你的衣服。"<<he>>的声音很轻柔。
+		<br><br>
+
+		<<link [[脱掉你的衣服 (0:20)|Doctor Harper's Office Camera3]]>><<pass 20>><<npcincr Harper dom 5>><<set $phase to 1>><<hypnotised 1>><<strip>><</link>>
+		<br>
+		<<link [[拒绝|Doctor Harper's Office Camera3]]>><<npcincr Harper dom -5>><<stress 6>><<set $phase to 0>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>

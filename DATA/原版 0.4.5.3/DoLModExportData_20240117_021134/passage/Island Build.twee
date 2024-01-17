@@ -1,0 +1,40 @@
+:: Island Build []
+<<effects>>
+
+你环顾营地。四周布满了叶片与草，而能够使用的木头比较难找，因为缺乏切割工具所以你得一边探索一边留意大小形状合适的木块，然后用锋利的石头稍作调整。
+<br><br>
+只要精力足够，你就能做出简单的家具来。
+<br><br>
+<<if $island[$island.home].space is 0>>
+	家具摆不下了。
+	<br><br>
+<<else>>
+	你还有地方放<<number $island[$island.home].space>>个家具。
+	<br><br>
+<</if>>
+
+你还有<<number $island.wood>>块木头。
+<br><br>
+
+<<if $tiredness gte $tirednessmax>>
+	你太累了，什么也造不了。
+<<else>>
+	<div id="islandUpgrades">
+		<<islandBuildOption trap>>
+		<<islandBuildOption curtains>>
+		<<islandBuildOption bird_feeder>>
+		<<islandBuildOption camouflage>>
+		<<islandBuildOption decor>>
+		<<islandBuildOption chair>>
+		<<if $islander_mask gte 1>>
+			<<islandBuildOption islanderMask>>
+		<</if>>
+		<<if $island.explore_locations.includes("bay")>>
+			<<islandBuildOption raft>>
+		<</if>>
+	</div>
+<</if>>
+<br><br>
+
+<<link [[返回|Island]]>><</link>>
+<br>

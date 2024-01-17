@@ -1,0 +1,179 @@
+:: Underground Robin Machine []
+<<set _robin to statusCheck("Robin")>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 6>><<set $machine_ammo to 8>>
+	<<if $player.vaginaExist and $analdisable is "f">>
+		<<machine_init vaginal anal arm_chains leg_chains>>
+		<<set $machine.vaginal.armed to 1>><<set $machine.anal.armed to 1>>
+	<<elseif $player.vaginaExist>>
+		<<machine_init vaginal arm_chains leg_chains>>
+		<<set $machine.vaginal.armed to 1>>
+	<<else>>
+		<<machine_init anal arm_chains leg_chains>>
+		<<set $machine.anal.armed to 1>>
+	<</if>>
+
+	<<if _robin.dom gte 80 and _robin.trauma lte 20>>
+		<<set $timer to 12>>
+	<<elseif _robin.dom gte 60 and _robin.trauma lte 40>>
+		<<set $timer to 10>>
+	<<elseif _robin.dom gte 40 and _robin.trauma lte 60>>
+		<<set $timer to 9>>
+	<<else>>
+		<<set $timer to 8>>
+	<</if>>
+	<<set $robinFucked to false>><<set $robinMachineSpeed to 2>>
+<</if>>
+
+<<effects>>
+<<machine_effects>>
+<<machine_combat>>
+
+<<if $phase is 1>>
+	你让他们让你的机器慢下来。$machineHandler打开一个开关，你的性爱机器减慢到一个更合理的水平。
+	<<if $robinFucked>>
+		罗宾发出了一声痛苦的叫声，因为<<nnpc_his "Robin">>的机器再次加速。
+		<<npcincr Robin trauma 1>><<grtrauma true>>
+	<<else>>
+		罗宾发出了既宽慰又担心的声音。
+	<</if>>
+	<<machine_speed 2>>
+	<<set $timer to random(2,4)>>
+<<elseif $phase is 2>>
+	你让他们让你的机器慢下来。$machineHandler打开一个开关，你的性爱机器慢下来了。
+	<<if $robinFucked>>
+		罗宾发出一声尖叫，<<nnpc_his "Robin">>的机器更响了。你能听到它不断抽插<<nnpc_him "Robin">>的声音。
+		<<npcincr Robin trauma 3>><<npcincr Robin dom -5>><<ggrtrauma true>><<lldom "Robin">>
+	<<else>>
+		罗宾惊恐地大叫。
+	<</if>>
+	<<npcincr Robin love -1>><<llove>>
+	<<machine_speed 1>>
+	<<set $timer to random(2,4)>>
+<<else>>
+	<<if $robinFucked is true>>
+		<<if $anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1>>
+			<<set _fucking to "操着">>
+		<<else>>
+			<<set _fucking to "威胁着">>
+		<</if>>
+		<<switch $robinMachineSpeed>>
+			<<case 3>>
+				<<if random(-100,60) gte (_robin.dom - _robin.trauma) and $timer lte 0>>
+					"<span class="red">慢点儿！</span>"罗宾哭喊道，“慢点儿，求你们了！我受不了了！"
+					<br><br>
+
+					$machineHandler拨动一个开关，然后_fucking你的机器降到了正常速度。罗宾松了一口气，不时抽泣一声。
+					<<machine_speed 2>>
+					<<set $timer to random(3,5)>>
+				<<else>>
+					<<print either(
+						"罗宾痛苦地尖叫。",
+						"你听到罗宾发出痛苦的哀号。",
+						"机器折磨得罗宾奄奄一息，<<nnpc_he \"Robin\">>挣扎着喘着气。"
+					)>>
+					<<npcincr Robin trauma 3>><<ggrtrauma true>>
+				<</if>>
+			<<case 2>>
+				<<if random(-100,30) gte (_robin.dom - _robin.trauma) and $timer lte 0>>
+					"你……”罗宾虚弱地对你喊道。“你介意他们放慢我的速度吗？你不答应也——"
+					<br><br>
+
+					$machineHandler在你回答之前就按下了一个开关，_fucking你的机器<span class="red">加速了。</span>罗宾大声抗议。“喂，<<pshe>>还没有回答呢！喂！"
+					<<machine_speed 3>>
+					<<set $timer to random(3,5)>>
+				<<else>>
+					<<print either(
+						"罗宾大声呼救。",
+						"你听见罗宾正试图挣脱束缚<<nnpc_his \"Robin\">>的锁链。",
+						"罗宾抽泣，<<nnpc_his \"Robin\">>的声音打断了机器的推力。"
+					)>>
+					<<npcincr Robin trauma 1>><<grtrauma true>>
+				<</if>>
+			<<case 1>>
+				<<print either(
+					"罗宾不舒服地呻吟着。",
+					"罗宾虚弱地挣扎着，但似乎并不害怕。",
+					"罗宾咆哮着想要挣脱。"
+				)>>
+		<</switch>>
+	<<else>>
+		<<if $timer gte 8>>
+			<span class="green">罗宾大声反抗。你能听到塑料撞击的声音。</span>
+		<<elseif $timer gte 6>>
+			<span class="lblue">你听到罗宾在挣扎，<<nnpc_he "Robin">>踢着机器。</span>
+		<<elseif $timer gte 4>>
+			<span class="blue">你听到罗宾在挣扎。机器被撞击的声音变弱了。</span>
+		<<elseif $timer gte 2>>
+			<span class="purple">你听到罗宾的呼喊，伴随着叮当作响的链条。</span>
+		<<elseif $timer is 1>>
+			<span class="pink">罗宾惊恐地大叫。</span>
+		<<else>>
+			<<set $robinFucked to true>>
+			<<NPCVirginityTakenByOther "Robin" "anal" "性爱机器">>
+			<<if _robin.vagina isnot "none">>
+				<<NPCVirginityTakenByOther "Robin" "vaginal" "性爱机器">>
+			<</if>>
+			<span class="red">你听到罗宾痛苦的尖叫，机器穿透了<<nnpc_his "Robin">>的
+				<<if _npcVirgin.vaginal and _npcVirgin.anal>>
+					从未被侵犯过的小穴和屁股。
+				<<elseif _npcVirgin.vaginal>>
+					处女穴，还有<<nnpc_his "Robin">>的屁股。
+				<<elseif _npcVirgin.anal>>
+					<<if _robin.vagina isnot "none">>
+						从未被侵犯过的屁股，以及<<nnpc_his "Robin">>的小穴。
+					<<else>>
+						从未被侵犯过的屁股。
+					<</if>>
+				<<else>>
+					<<if _robin.vagina isnot "none">>
+						小穴和屁股。
+					<<else>>
+						屁股。
+					<</if>>
+				<</if>>
+			</span>
+			人群兴奋地欢呼起来。
+			<<npcincr Robin trauma 5>><<ggrtrauma true>><<control -10>><<lcontrol>>
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<audience>>
+
+<<set $phase to 0>>
+<<machine_state>>
+
+<<if $orgasmdown gte 1 or $pain gte 100 and $willpowerpain is undefined>>
+<<else>>
+	<br>
+	你的嘴是空闲着的。
+	<<if ($anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1) and $machine.speed gte 2>>
+		你可以叫他们让你的机器慢下来，但罗宾会吃苦头的。
+	<</if>>
+	<br>
+	<label><<radiobutton "$phase" 0 autocheck>> 什么也不说</label> |
+	<<if $anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1>>
+		<<if $machine.speed is 3>>
+			<label><<radiobutton "$phase" 1 autocheck>> <span class="brat">让他们慢下来</span></label> |
+		<<elseif $machine.speed is 2>>
+			<label><<radiobutton "$phase" 2 autocheck>> <span class="brat">让他们慢下来</span></label> |
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<machine_actions>>
+
+<<if $machine.number lte 0>>
+	<span id="next"><<link [[继续|Underground Robin Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Robin Machine]]>><</link>></span><<nexttext>>
+<</if>>
+<br>

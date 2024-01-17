@@ -1,0 +1,146 @@
+:: Museum []
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<if $museumintro isnot 1>>
+	<<set $museumintro to 1>><<set $phase to 0>>
+
+	<<npc Winter>><<person1>>你进入了昏暗的博物馆。几个小窗户紧贴着高高的天花板，俯瞰着整个大厅，从中漏入的阳光并没有让大厅里明亮多少。其他房间也一样昏暗。
+	<br><br>
+
+	温特正站在那里给一个铜壶抛光。<<He>>笔直地看着你。“不要到处乱摸，”<<he>>说，“估计你也没洗过手。”
+	<br><br>
+
+	<<link [[气愤地回应|Museum Intro]]>><<def 1>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[服从地回应|Museum Intro]]>><<sub 1>><<set $phase to 1>><<npcincr Winter love 1>><</link>><<glove>>
+	<br>
+	<<link [[调情着回应|Museum Intro]]>><<set $phase to 2>><<npcincr Winter love -1>><</link>><<promiscuous1>><<llove>>
+	<br>
+<<elseif $bell_timer lte 0>>
+	<<unset $bell_timer>>
+	<<if $worn.feet.type.includes("shackle")>>
+		你打开门时，一个带着兜帽的人冲了出来。你穿着$worn.feet.cn_name_cap的脚下一绊，和<<his>>摔在了一起。这个人跳了起来，疼痛地喊叫着，一瘸一拐地跑了。你回过神来时，那个人已经没影了。
+	<<else>>
+		你打开门时，一个带着兜帽的人冲了出来，差点把你撞倒在地上。你回过神来时，那个人已经没影了。
+	<</if>>
+	<br><br>
+	<<npc Winter>><<person1>>
+	你进入博物馆，<span class="red">发现温特躺在地上。</span><<His>>的双眼紧闭。古董被从底座上撞下，散落了一地。皮革地图还挂在墙上，但上面被撕开了好大一个口子。
+	<br><br>
+
+	你走近了温特，<<he>>咳嗽了几声。"真是毫无敬畏之心……"<<he>>费力地说着，睁开了眼睛。"我没事，只是上了年纪罢了。他们听到你来被吓到了，就抓起铃铛跑了。估计他们原本还想多拿点的。"
+	<br><br>
+	<<link [[陪着温特|Museum Attack Stay]]>><<museumAntiqueStatus "antiquebell" "stolen">><<npcincr Winter love 1>><<npcincr Winter dom -5>><<world_corruption "hard" 2>><</link>><<lldom>><<glove>>
+	<br>
+	<<link [[去追歹徒|Museum Attack]]>><</link>>
+	<br>
+<<elseif $museumhorseintro is undefined and $museumAntiques.museumCount gte 10>>
+	<<set $museumhorseintro to 0>>
+	<<npc Winter>><<person1>>你进入了昏暗的博物馆。温特正盯着展示台上的一个铜壶看。"就是不知道这东西放哪好。"<<he>>叹了口气，注意到了你。"你来的正好。你最近帮我做了这么多事，我想拜托你一件事。"<<He>>走向房间的一角，那里有一个大型物体，一块脏兮兮的布盖在上面。<<He>>把布扯开，露出了一个三角马。
+	<br><br>
+
+	"这可是真古董，"<<he>>一脸满足地说着，"而且保存得很好。"
+	<br><br>
+
+	<<if $awareness gte 200>>
+		“这是个刑具吧。”你说。
+		<br><br>
+
+		"不错啊。"<<he>>回应道，"确实是刑具。行刑者让受刑者坐在上面，然后在身上绑重物，压迫他们的胯部。一般同时还会进行鞭笞。"
+	<<else>>
+		"这是干什么用的？"你问。
+		<br><br>
+
+		"这是件刑具，"<<he>>回应道。"但是现在……有别的用途。行刑者让受刑者坐在上面，然后在身上绑重物，压迫他们的胯部。一般同时还会进行鞭笞。"
+	<</if>>
+	<br><br>
+	<<He>>一只手搭在三角马上。"我想进行一次展示，激发人们对历史的兴趣。"<<He>>看向你。"我想请你帮忙。别给自己压力，考虑一下就行。"
+	<br><br>
+
+	<<link [[继续|Museum]]>><<endevent>><</link>>
+	<br>
+<<elseif $museumduckintro is undefined and $museumAntiques.museumCount gte 20>>
+	<<set $museumduckintro to 0>>
+	<<npc Winter>><<generate2>><<person2>>你进入了昏暗的博物馆。一名<<person>>与你擦肩而过。
+	<br><br>
+	<<person1>>
+	"我正好想见你来着，"温特说着，将目光从一张深褐色的木椅上移开。"最近我在和一名很有意思的<<person2>><<if $pronoun is "m">>先生<<else>>女士<</if>>交流，你刚刚进来的时候应该看到<<him>>了。"<<person1>>
+	<br><br>
+
+	<<person1>>温特一只手指按在身旁的椅子上。"我收到了一份捐赠物品，十分的特别。"
+	<br><br>
+
+	<<if $awareness gte 300>>
+		你仔细看了看。这张椅子后面有一个钩子，似乎是用来拴在什么东西上的。“这是一张浸水椅，”你说，“用来把人吊进水里呛水用的。”
+		<br><br>
+
+		"真不错，"<<he>>回应道，"你说的完全正确。一般会把椅子吊在……某种吊机上，然后把受刑者泡进河里。有些情况下可以弄死人。"
+	<<else>>
+		"这是干什么用的？"你问。
+		<br><br>
+
+		"用来施刑的，"<<he>>回应道。"这叫浸水椅。看见后面那个钩子了吗？把它拴在一台吊机上，再把受刑人绑在椅子上，然后把人吊进水里呛水，甚至可以致死。"
+	<</if>>
+	<br><br>
+	"我想进行一次公开展示，"<<he>>继续说着，"我找到了可以提供其他部分的人，而且附近就有一条河。我想请你帮忙，但也不是非要你帮忙不可。你考虑一下吧。"
+	<br><br>
+
+	<<link [[继续|Museum]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你正在待在博物馆里，贵重的历史文物挂满了墙壁与走道两侧。
+	<<if $museuminterest gte 100>>
+		游客挤满了博物馆，饶有兴致的观看着古董。温特似乎很劳累，但一脸满足。
+	<<elseif $museuminterest gte 60>>
+		建筑里挤满了游客，都是来看古董的。
+	<<elseif $museuminterest gte 20>>
+		有些游客正在观看展台里的物品。
+	<<else>>
+		除了你以外，博物馆里并没有游客。
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "museum">>
+	<</if>>
+	<br><br>
+
+	<<if $museumhorseintro is 0>>
+		<<link [[同意参加三角马展示|Museum Horse Agree]]>><<set $museumhorseintro to 1>><</link>>
+		<br>
+	<<elseif $museumhorseintro is 1 and $museumhorse isnot 1>>
+		<<link [[参加三角马展示 (1:00)|Museum Horse]]>><<pass 60>><<set $museumhorse to 1>><</link>><<gpain>><<exhibitionist1>>
+		<br>
+	<</if>>
+	<<if $museumduckintro is 0>>
+		<<link [[同意参加浸水椅展示|Museum Duck Agree]]>><<set $museumduckintro to 1>><</link>>
+		<br>
+	<<elseif $museumduckintro is 1 and $museumduck isnot 1>>
+		<<link [[参加浸水椅展示 (1:00)|Museum Duck]]>><<pass 60>><<set $museumduck to 1>><</link>><<exhibitionist1>>
+		<br>
+	<</if>>
+	<<if $museumAntiqueJournalHints is undefined>>
+		<<set $museumAntiqueJournalHints to []>>
+	<</if>>
+	<<museumtalk>>
+	<<if $worn.feet.type.includes("shackle")>>
+		<<link [[请求移除脚镣 (0:10)|Museum Shackle]]>><<pass 10>><</link>>
+		<br>
+	<</if>>
+	<<if $temple_spear_mission is 1 and !$temple_spear_mission_winter>>
+		<<link [[询问文物长矛的事|Museum Spear]]>><</link>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueforestgem is "museum" and $daily.museumGreenGemTouch isnot 1>>
+		<<link [[触摸绿宝石|Museum Green Gem Touch]]>><<stress -9>><<set $daily.museumGreenGemTouch to 1>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<if $antiquemoney gt 0>>
+		<<link [[出售古董|Museum Sell]]>><<if $museumAntiques.antiques.antiquesilvermask is "found">><<set $phase to 1>><<else>><<set $phase to 0>><</if>><<if $museumAntiques.antiques.antiqueivorynecklace is "found">><<world_corruption "hard" 2>><</if>><<museumdonate>><</link>>
+		<br>
+	<</if>>
+	<<link [[环顾博物馆|Museum Look around]]>><</link>>
+	<br><br>
+
+	<<oxfordicon>><<link [[离开|Oxford Street]]>><</link>>
+	<br>
+
+<</if>>

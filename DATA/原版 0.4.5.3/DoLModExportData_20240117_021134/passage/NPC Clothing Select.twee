@@ -1,0 +1,47 @@
+:: NPC Clothing Select []
+<br>
+The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+<br>
+A terminal is attached to the tube. You look at the prompts.
+<br><br>
+<i>Please select the construct's outfit.</i>
+<br>
+
+<<set _clothesOptions to setup.npcClothesSets.map(c => c.name)>>
+
+<<listbox "_npcClothes" autoselect>>
+	<<optionsfrom _clothesOptions>>
+<</listbox>>
+<br><br>
+
+<i>Please select the construct's configuration.</i>
+<br>
+<label>Male <<radiobutton "_npcPronoun" "m">></label> |
+<label>Female <<radiobutton "_npcPronoun" "f">></label> |
+<label>Use Settings <<radiobutton "_npcPronoun" "" checked>></label>
+<br>
+
+<label>Penis <<radiobutton "_npcGender" "m">></label> |
+<label>Vagina <<radiobutton "_npcGender" "f">></label> |
+<label>Both <<radiobutton "_npcGender" "h">></label> |
+<label>Use Settings <<radiobutton "_npcGender" "" checked>></label>
+<br>
+
+<label>Teen <<radiobutton "_npcType" "t">></label> |
+<label>Adult <<radiobutton "_npcType" "a">></label> |
+<label>Random <<radiobutton "_npcType" "r" checked>></label>
+<br><br>
+
+<!-- storing the values and then generating the npc in the next passage is a bit more convenient for debugging. -->
+<<link [[Sex|NPC Clothing Fight]]>>
+	<<set $sexstart to 1>>
+	<<set $npcOptions to {"type": _npcType, "pronoun": _npcPronoun, "gender": _npcGender, "clothes": _npcClothes}>>
+<</link>>
+<br>
+<<link [[Rape|NPC Clothing Fight]]>>
+	<<set $fightstart to 1>>
+	<<set $npcOptions to {"type": _npcType, "pronoun": _npcPronoun, "gender": _npcGender, "clothes": _npcClothes}>>
+<</link>>
+<br><br>
+
+<<link [[Back home|Bedroom]]>><</link>>

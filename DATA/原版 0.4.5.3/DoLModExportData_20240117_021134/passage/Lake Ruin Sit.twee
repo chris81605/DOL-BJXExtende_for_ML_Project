@@ -1,0 +1,50 @@
+:: Lake Ruin Sit []
+<<set $outside to 0>><<set $location to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+
+你抓住矮柱，把你的<<bottom>>紧贴着它。你一触摸，一盏红灯亮起，照亮了房间。之前未曾见过的雕像从上面凝视着你。
+<br><br>
+<<if !(!$player.vaginaExist and playerIsPregnant())>>
+	你猛地后退，痉挛着。房间摇晃颤动，地板上出现了一道裂缝。它变宽了，更多的红光透了进来。
+	<<if numberOfEarSlime() gte 2>>
+		你感觉到史莱姆从你的耳朵里蠕动着。它们消失在了裂缝里。
+		<<world_corruption "soft" 20>>
+	<<else>>
+		你感觉到史莱姆从你的耳朵里蠕动着。它消失在了裂缝里。
+		<<world_corruption "soft" 10>>
+	<</if>>
+	<br><br>
+
+	<<set $earSlime.corruption to 0>>
+
+	<<if $slime_tf is 1>>
+		<<set $slime_tf to 0>>
+		<<set $physicalTransform to 0>>
+	<</if>>
+
+	<<if $parasite.left_ear.name is "slime">>
+		<<removeparasite left_ear>>
+	<</if>>
+	<<if $parasite.right_ear.name is "slime">>
+		<<removeparasite right_ear>>
+	<</if>>
+	<<set $noEarSlime to true>>
+
+	<<if $tentacledisable is "f">>
+		光线消失了，一切都变得安静了。但你感觉到了一个存在。有东西留了下来。
+		<br><br>
+
+		十几根触手沿着矮柱蜷曲而上，形成了一个囚笼把你围住。
+		<br><br>
+
+		<<link [[继续|Lake Ruin Sit Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+
+		<<link [[继续|Lake Ruin Plinth]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	不过几秒，和来时一样突然，周围又恢复了原状。似乎有什么东西在抑制着自己。<<if playerAwareTheyArePregnant()>>你觉得可能和你的怀孕有关。<</if>>
+	<br><br>
+	<<link [[继续|Lake Ruin Plinth]]>><</link>>
+<</if>>

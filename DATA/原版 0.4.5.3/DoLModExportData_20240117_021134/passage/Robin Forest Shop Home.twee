@@ -1,0 +1,24 @@
+:: Robin Forest Shop Home []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+你向格威岚告别，你和罗宾一起走回了孤儿院。
+<<if $forest_costume.bought>>
+	罗宾很<<if $forest_costume.cd>>紧张，但是也很<</if>>兴奋，<<his>>紧紧地抓着<<= $forest_costume.name.replace("witch","女巫").replace("vampire","吸血鬼")>>装在胸前比对着。
+<<else>>
+	罗宾一路上都很兴奋，一直在谈论刚买的万圣节服装有多酷。
+<</if>>
+<br><br>
+<<unset $forest_costume>><<unset $robin_in_forest_shop>>
+
+<<if Time.monthDay is 31 and Time.hour is 16>>
+	你们到达大厅时，罗宾看到了聚在一起已经穿好了化妆服的孤儿们。"我要迟到了，我最好快点儿去换衣服，"<<he>>急切地说。
+	<<set _costume to getHalloweenCostume()>>
+	"<<if _costume is "none">>你也快去换衣服吧！<</if>>如果你想加入我们的话，一两分钟后再回来找我。"<<He>>冲进<<his>>的房间换衣服。
+	<br><br>
+
+	你回了自己的房间。
+	<br><br>
+
+	<<link [[继续|Bedroom]]>><<endevent>><</link>>
+<<else>>
+	<<robinoptions>>
+<</if>>

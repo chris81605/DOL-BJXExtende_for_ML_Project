@@ -1,0 +1,72 @@
+:: Childrens Home Toys Widgets [widget]
+<<widget "childrenToysUI">>
+	<<if $player.inventory.childrenToys.length gt 0>>
+		<div class="toysUiElement">
+			<h4>你随身携带的玩具</h4>
+			<<for _i to 0; _i lt $player.inventory.childrenToys.length; _i++>>
+				<label>
+					<<radiobutton "_selectedCurrentToy" _i autocheck>>
+					<span @class="$player.inventory.childrenToys[_i].colour"><<print $player.inventory.childrenToys[_i].name_lower>></span>
+				</label>
+				<br>
+			<</for>>
+			<br>
+			<<link "扔掉">>
+				<<run $player.inventory.childrenToys.deleteAt(_selectedCurrentToy)>>
+				<<set _selectedCurrentToy to 0>>
+				<<childrenToysUIReplace>>
+			<</link>>
+			<br>
+			<<if $storedChildrenToys[$location].length lt 10>>
+				<<link "递玩具">>
+					<<run $storedChildrenToys[$location].push($player.inventory.childrenToys[_selectedCurrentToy])>>
+					<<run $player.inventory.childrenToys.deleteAt(_selectedCurrentToy)>>
+					<<set _selectedCurrentToy to 0>>
+					<<childrenToysUIReplace>>
+				<</link>>
+			<<else>>
+				你每次不能留下超过10个玩具。
+			<</if>>
+		</div>
+	<<else>>
+		<div class="toysUiElement">你没有携带儿童玩具。</div>
+	<</if>>
+
+	<<if $storedChildrenToys[$location].length gt 0>>
+		<div class="toysUiElement">
+			<h4>你的孩子们可以玩的玩具</h4>
+			<<for _i to 0; _i lt $storedChildrenToys[$location].length; _i++>>
+				<label>
+					<<radiobutton "_selectedLocationToy" _i autocheck>>
+					<span @class="$storedChildrenToys[$location][_i].colour"><<print $storedChildrenToys[$location][_i].name_lower>></span>
+				</label>
+				<br>
+			<</for>>
+			<br>
+			<<link "扔掉">>
+				<<run $storedChildrenToys[$location].deleteAt(_selectedLocationToy)>>
+				<<set _selectedLocationToy to 0>>
+				<<childrenToysUIReplace>>
+			<</link>>
+			<br>
+			<<if $player.inventory.childrenToys.length lt 5>>
+				<<link "拿回">>
+					<<run $player.inventory.childrenToys.push($storedChildrenToys[$location][_selectedLocationToy])>>
+					<<run $storedChildrenToys[$location].deleteAt(_selectedLocationToy)>>
+					<<set _selectedLocationToy to 0>>
+					<<childrenToysUIReplace>>
+				<</link>>
+			<<else>>
+				你每次携带的玩具不能超过5件。
+			<</if>>
+		</div>
+	<<else>>
+		<div class="toysUiElement">你没有在这里留下任何儿童玩具。</div>
+	<</if>>
+<</widget>>
+
+<<widget "childrenToysUIReplace">>
+	<<replace "#childrenToysUI">>
+		<<childrenToysUI>>
+	<</replace>>
+<</widget>>

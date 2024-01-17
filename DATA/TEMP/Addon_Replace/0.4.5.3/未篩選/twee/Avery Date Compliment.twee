@@ -1,0 +1,40 @@
+:: Avery Date Compliment []
+<<effects>><<set $outside to 0>>
+<<pass 20>>
+<<if $speech_attitude is "meek">>
+	"你看起来比我好多了，”你说。
+<<elseif $speech_attitude is "bratty">>
+	"我们两个很般配。”你说。
+<<else>>
+	"你看起来也很棒，”你说。
+<</if>>
+<br><br>
+
+<<He>>笑着打开旁边的门。"上来吧，距离不远。"
+<br><br>
+
+
+<<if $avery_location is 2>><<set $avery_location to 0>>
+	<<He>>开车送你到商业街，最终把车停到了一家豪华的酒店前。<<He>>递给你一把钥匙，上面潦草地写着房间号。"给。拿着这个，你先去上面等我。我去停一下车。"你从车里下来进了酒店。
+	<br><br>
+
+	<<link [[继续|Avery Hotel]]>><</link>>
+	<br>
+<<elseif $avery_location is 1>><<set $avery_location to 2>>
+
+	<<generate2>>
+	<<He>>开车送你到多瑙河街一栋公馆的前门。<<He>>向一位身着侍者服装的<<person2>><<person>>出示了一张请柬，当另一辆车停在你们后面等待时，<<person>>向你们挥了挥手。
+	<br><br>
+	<<endevent>><<npc Avery>><<person1>>
+
+	<<link [[继续|Avery Party]]>><</link>>
+	<br>
+<<else>><<set $avery_location to 1>>
+	<<He>>开车送你到康努达塔斯街，然后把车停在一家餐馆外面。<<He>>领着你进入大楼的时候，伸手让你挽住。
+	<br><br>
+
+	<<link [[牵手|Avery Date 2]]>><<set $phase to 1>><</link>><<handholdingvirginitywarning>>
+	<br>
+	<<link [[拒绝|Avery Date 2]]>><<set $phase to 2>><<npcincr Avery love -1>><<set $endear -= 10>><</link>><<lendear>><<llove>>
+	<br>
+<</if>>

@@ -1,0 +1,29 @@
+:: Wardrobe Sale Crate Result []
+<<set $tailorMonthlyService to 7>>
+<<set _value to 0>>
+<<set _equip to setup.clothingLayer.all>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
+	<<set _toDelete to []>>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if setup.clothes[_equip[$_i]][clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])].shop.length is 0>>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(tailorClothingCost($wardrobe[_equip[$_i]][$_j],_equip[$_i]) * ($wardrobe[_equip[$_i]][$_j].integrity / clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max')) / 3)>>
+		<<run _toDelete.push(clone($_j))>>
+	<</for>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
+		<</if>>
+	<</for>>
+<</for>>
+司机把箱子拿走，留下<<printmoney `_value + 5000`>>在原地。
+<<set $money += Math.floor(_value + 5000)>>
+<br><br>
+<<link [[继续|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>

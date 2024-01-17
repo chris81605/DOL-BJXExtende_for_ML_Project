@@ -1,0 +1,81 @@
+:: Hospital Keycard Distract []
+<<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<if $speech_attitude is "meek">>
+		"对不起，"你礼貌地问，"我的一个朋友病得很重，来接受治疗。<<pShe>>服药后病情加重。我想和你们的经理，或者更高的人谈谈，只是想问一些事情。可以吗？"
+	<<elseif $speech_attitude is "bratty">>
+		你把你的手放在柜台上。"我的朋友来这里是因为<<pshe>>发烧了。<<pShe>>告诉你<<pshe>>对什么过敏，但你仍然给<<phim>>用药，使<<phim>>出荨麻疹！把你们的经理叫来，马上！"
+	<<else>>
+		你走近柜台。"我朋友生病的时候来过这里，"你说，"我想<<pshe>>对你给的药物有严重的过敏反应。我能见一下你们经理吗？"
+	<</if>>
+	<br><br>
+
+	<<if $NPCList[0].skills.security gte 700>>
+		<<person>>眨眼，猝不及防。"我……对不起，<<psir>>。让我去把<<him>>叫来。"
+	<<elseif $NPCList[0].skills.security lte 300>>
+		"啊，该死，"<<person>>低声咕哝着。"好好好。给我五分钟。"
+	<<else>>
+		<<person>>皱起眉头。"哦，马上就来。给我一点时间。"
+	<</if>>
+	<<He>>走到后面的房间。
+	<br><br>
+
+	你扫视四周，确保没有人在看你，然后躲到柜台后面，在橱柜里搜寻。你在电脑下面的顶层柜子里找到了一张钥匙卡。
+	<br><br>
+
+	<<pubfameComplete "hospital">>
+
+	<<link [[继续|Hospital Foyer]]>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<endevent>><</link>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"嗨，呃，"你说道。"你能……去后面看看有什么东西吗？我听到好像有人……闯进来了？"
+	<<elseif $speech_attitude is "bratty">>
+		"天哪！"你指着<<him>>身后喊道，"墙着火了！"
+	<<else>>
+		"你的，嗯，"你说，"你的橱柜……跌倒了。你后面。"
+	<</if>>
+	<br><br>
+
+	<<if $pubfame.hospital.seduce>>
+		<<if $NPCList[0].skills.security gte 700>>
+			<<person>>扬起眉毛，但点点头。"好吧，<<girl>>。"<<He>>转过身来，一边检查后墙，一边吹着欢快的口哨。
+			<br><br>
+
+			你很快就想把手伸到柜台那边去，但是当你这么做的时候，<span class="red"><<he>>把<<his>>的胳膊伸到<<him>>后面，抓住了你的手腕</span>。"跟我走，"<<he>>用一种欢快的声音说，被<<hes>>抓住你的手出卖了。"让我给你讲个故事。"<<He>>把你从桌子上拉开，开始把你拖到大厅里。
+			<br><br>
+
+			<<link [[反抗|Hospital Keycard Caught]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+			<br>
+			<<link [[屈服|Hospital Keycard Caught]]>><<set $phase to 1>><</link>>
+		<<elseif $NPCList[0].skills.security lte 300>>
+			<<person>>困惑地眨了眨眼，转过身来。你试着把手伸过柜台，但是<<he>>转身太快，你被迫把胳膊往后拉。"奇怪，"<<he>>咕哝着。"一定是错过了。"
+			<br><br>
+
+			<<link [[勾引|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<skulduggerydifficulty>>
+			<br>
+			<<link [[回去|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+		<<else>>
+			<<set $phase2 to 1>>
+			<<person>>皱起眉头。"就是这样。我受够了你的捣乱。"没有任何警告，<span class="red"><<he>>绕过柜台，抓住你的手臂</span>，带着你穿过大厅。
+			<br><br>
+			<<link [[反抗|Hospital Keycard Caught]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+			<br>
+			<<link [[屈服|Hospital Keycard Caught]]>><<set $phase to 1>><</link>>
+		<</if>>
+	<<else>>
+		<<if $NPCList[0].skills.security gte 700>>
+			"我确定，"那个<<person>>苦笑着说，"好了，你来这里是为了什么吗？"
+		<<elseif $NPCList[0].skills.security lte 300>>
+			<<person>>困惑地眨了眨眼，转过身来。你试着把手伸过柜台，但是<<he>>转身太快，你被迫把胳膊往后拉。"奇怪，"<<he>>咕哝着。"一定是错过了。"
+		<<else>>
+			<<person>>皱起眉头。"如果你是来这儿胡闹的，就滚吧。"
+		<</if>>
+		<br><br>
+
+		<<link [[勾引|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<link [[回去|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+	<</if>>
+<</if>>

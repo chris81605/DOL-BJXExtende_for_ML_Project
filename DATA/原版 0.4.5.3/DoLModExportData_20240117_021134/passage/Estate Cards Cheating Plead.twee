@@ -1,0 +1,64 @@
+:: Estate Cards Cheating Plead []
+<<effects>>
+<!-- <<if $estate.cards.state is "ride">>  is omitted because in that state the apologise option isn't given -->
+
+
+<<if $speech_attitude is "meek">>
+	"对不起，我作弊了，请原谅我！"你求饶道。
+<<elseif $speech_attitude is "bratty">>
+	"噢，操，我认输，"你说，"咱们可以一笔勾销吗？"
+<<else>>
+	"我认输，"你说道，"对不起。"
+<</if>>
+
+<<set _plead_points to $estate._base_plead_points + random($estate._plead_rng_min, $estate._plead_rng_max)>>
+<<set _plead_success to (_plead_points gte $estate._plead_required_points)>>
+
+<<if not $estate.prev_apologised and _plead_success>>
+	<<if $wren_intro isnot undefined>>
+		<<set $estate_cards_end to "cheat_moor">>
+	<</if>>
+	<br><br>
+	伦恩叹了一口气。"我该拿你怎么办呢？"<<he>>说道。<br><br>
+	<span class="green">你的请求似乎打动<<him>>了。</span>
+	<br><br>
+	"不能把这个人给<span class="pink"><<nnpc_him "Remy">></span>，这会给他们带来太多麻烦的，"伦恩说道。
+	<br>
+	"我们该怎么处理<<phim>>？"<<he>>问<<his>>的朋友们，你被完全包围了起来。
+	<br><br>
+	<<if $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+		"把<<phim>>丢进荒原里吧，"<<person2>><<person>>回答。
+	<<else>>
+		<<clothesruined>><<exposure>>
+		"还需要问吗，"<<person2>><<person>>回答道。手从各个方向伸过来，拉扯着你身上的布料，你的衣服被撕碎，身体完全暴露出来。<<covered>>
+	<</if>>
+	<br><br>
+	他们把你举起来，就这样把光着身子的你抬向出口。门卫看见你，边笑着边打开了大门。
+	<br><br>
+
+	他们把你扔了出去。你身后的大门哐当地关上了，你踉跄地爬起来，一边摇摇晃晃地离开一边忍受着身后的嘲笑声。
+	<br><br>
+
+	<!-- estate end 3 -->
+	<<card_pot_confiscated>>
+	<<estate_cards_finish>>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
+	<br>
+<<else>>
+	<<if $estate.prev_apologised>>
+		<br><br>
+		伦恩用怀疑的眼神看了你一会儿，然后发出了嘲讽的笑声。
+		<br><br>
+		"你真不知羞耻，你知道吗？"<<he>>说，<span class="red">"上次你就是这么跟我们说的。"</span>
+	<<else>>
+		<br><br>
+		<span class="red">"对不起是没用的，<<lass>>，"</span>伦恩说，"得确保你吸取足够的教训才行。"
+	<</if>>
+
+	<br><br>
+	"现在开始，做一个好<<girl>>，不要做傻事。"<<he>>笑着说道。
+
+	<br><br>
+	<<blackjackCaughtControls 2>>
+<</if>>

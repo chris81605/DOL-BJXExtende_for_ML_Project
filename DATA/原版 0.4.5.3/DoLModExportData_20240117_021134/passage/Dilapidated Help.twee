@@ -1,0 +1,216 @@
+:: Dilapidated Help []
+<<effects>>
+<<run statusCheck("Sydney")>>
+<<if $adultshopprogress gte 15>>
+	你帮助悉尼上货，而西里斯则在后面工作着。你透过门上的裂缝，看到有火星飞过。
+	<br><br>
+	<<person2>>
+	<<if random(1)>>
+		<<generate3>><<person3>>
+		你听到有人在敲窗。一名<<person>>站在外面。<<He>>指了指<<him>>旁边的一个板条箱，便走开了。<<person2>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼跳了起来，朝着门口走去。过了一会儿，<<Hes>>抱着板条箱蹦蹦跳跳地跑回来了。
+			<br><br>
+			"你猜这是什么？"<<he>>一关上门，便迫不及待地把箱子放下，从满地散落的工具中抄起一根撬棍。没等你回答，箱子便咔的一声撬开了。
+			<br><br>
+			<<link [[继续|Dilapidated Toy]]>><</link>>
+			<br>
+		<<elseif _sydneyStatus.includes("pure")>>
+			悉尼稍微等了一会才去拿货。<<He>>双手抱着箱子，匆忙进入了后面的房间。箱子里不知道装了什么东西。
+			<br><br>
+			<<link [[建议打开箱子|Dilapidated Suggest]]>><</link>>
+			<br>
+			<<link [[不管悉尼|Dilapidated Let]]>><</link>>
+			<br>
+		<<else>>
+			悉尼稍微等了一会才去拿货。<<He>>双手抱着箱子走过你身边，然后向后面的房间走去。
+			<br><br>
+			<<link [[建议打开箱子|Dilapidated Suggest]]>><</link>>
+			<br>
+			<<link [[不管悉尼|Dilapidated Let]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<Hes>>看着琳琅满目的商品，表情十分着迷——尤其是看向SM道具区的时候，皮鞭，马鞭，捆绑带，"用不好的话就是在严刑拷打，"<<he>>用手扶着下巴，"我在神殿见过差不多的东西。"
+			<br><br>
+
+			<<link [[戴上一个项圈并调戏悉尼|Dilapidated Collar Corrupt]]>><<npcincr Sydney purity -2>><<npcincr Sydney lust 5>><</link>><<set _lustincrdisplay to 1>><<lspurity>><<glust>>
+			<br>
+			<<link [[继续工作|Dilapidated Collar Refuse]]>><</link>>
+			<br>
+		<<elseif _sydneyStatus.includes("pure")>>
+			<<He>>犹豫着拿起一个商品，又赶快放开，仿佛眼前的物品是一堆活蹦乱跳的眼镜蛇。皮鞭，马鞭，小黄书，假阳具和震动棒在<<he>>的手下被杂乱地放在架子上。
+			<br><br>
+
+			<<link [[戴上一个项圈并调戏悉尼|Dilapidated Collar]]>><<npcincr Sydney purity -2>><<npcincr Sydney lust 5>><</link>><<set _lustincrdisplay to 1>><<lspurity>><<glust>>
+			<br>
+			<<link [[继续工作|Dilapidated Collar Refuse]]>><</link>>
+			<br>
+		<<else>>
+			<<He>>把货品一个个摆放整齐，并没有盯着它们看，强制着自己不被这些皮鞭，马鞭，小黄书，假阳具和震动棒什么的吸引注意力。
+			<br><br>
+
+			<<link [[戴上一个项圈并调戏悉尼|Dilapidated Collar]]>><<npcincr Sydney purity -2>><<npcincr Sydney lust 5>><</link>><<set _lustincrdisplay to 1>><<lspurity>><<glust>>
+			<br>
+			<<link [[继续工作|Dilapidated Collar Refuse]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $adultshopprogress gte 8>>
+	你帮助悉尼清空了板条箱，而西里斯则在后面的房间工作着。你听到零星的敲锤子的声音。
+	<br><br>
+	<<person2>>
+	<<if random(1)>>
+		<<generate3>>
+		你听到有人敲门。
+		<<if _sydneyStatus.includes("corrupt")>>
+			"我来开。"悉尼一脸期待地跑了过去。
+			<br><br>
+			一名拿着货的<<person3>><<person>>微笑着站在门外。悉尼签收了货物，双手把板条箱搬了进来。
+			<br><br>
+			"你猜这是什么？"<<person2>><<he>>一关上门，便迫不及待地把箱子放下，从满地散落的工具中抄起一根撬棍。<<He>>没等你回答，便咔的一声撬开了箱子。
+			<br><br>
+			<<link [[继续|Dilapidated Toy]]>><</link>>
+			<br>
+		<<elseif _sydneyStatus.includes("pure")>>
+			敲门声响起，悉尼的脸瞬间沉了下来。
+			<br><br>
+
+			<<link [[让悉尼开门|Dilapidated Door Suggest]]>><</link>>
+			<br>
+			<<link [[自己开门|Dilapidated Door Answer]]>><</link>>
+			<br>
+		<<else>>
+			悉尼看上去并不想开门。
+			<br><br>
+
+			<<link [[让悉尼开门|Dilapidated Door Suggest]]>><</link>>
+			<br>
+			<<link [[自己开门|Dilapidated Door Answer]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+
+		你听到店铺前传来人声。一群围观的人们正朝窗户里偷看，好奇店里有什么。
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼拍了拍手，"我们可以给店里打点广告，"<<he>>提议道，"我刚好有合适的东西。"<<He>>伸手从其中一个板条箱里拿出一个口球和一段绳子，并以令人生疑的熟练度迅速把口球绑在了自己的头上，并抓住绳子。"跟我来。"
+			<br><br>
+
+			<<link [[跟随悉尼|Dilapidated Gag]]>><<famebusiness 5>><<npcincr Sydney purity -5>><<npcincr Sydney lust 10>><</link>><<llspurity>><<gglust>>
+			<br>
+			<<link [[拒绝|Dilapidated Gag Refuse]]>><</link>>
+			<br>
+		<<elseif _sydneyStatus.includes("pure")>>
+			悉尼冲到了货架后，生怕被人看见。
+			<br><br>
+
+			<<link [[安抚|Dilapidated Gawker Reassure]]>><<npcincr Sydney love 1>><<npcincr Sydney purity 2>><</link>><<glove>><<gpurity>>
+			<br>
+			<<link [[无视|Dilapidated Gawker Ignore]]>><</link>>
+			<br>
+			<<link [[挑逗|Dilapidated Gawker Tease]]>><<npcincr Sydney purity -2>><</link>><<exhibitionist1>><<lspurity>>
+			<br>
+		<<else>>
+			悉尼躲在货架后，生怕被看见。
+			<br><br>
+
+			<<link [[安抚|Dilapidated Gawker Reassure]]>><<npcincr Sydney love 1>><<npcincr Sydney purity 2>><</link>><<glove>><<gpurity>>
+			<br>
+			<<link [[无视|Dilapidated Gawker Ignore]]>><</link>>
+			<br>
+			<<link [[挑逗|Dilapidated Gawker Tease]]>><<npcincr Sydney purity -2>><</link>><<exhibitionist1>><<lspurity>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	你帮助悉尼给墙壁刷漆，而西里斯则在后面的房间工作着。你不知道<<person1>><<hes>>在里面干什么，不过你偶尔能听到滋滋的电钻声。
+	<br><br>
+	<<person2>>
+	<<if random(1)>>
+		<<generate3>><<person3>>
+		一辆货车停在了外面，车上下来了个<<person>>，手里拿着一个小板条箱。西里斯从门里探出头来。"悉尼，去拿一下吧。"<<person1>><<he>>转头继续忙活着，"我手上拿了东西。"
+		<br><br>
+
+		<<person3>><<person>>意味深长地笑了笑，把板条箱递给了悉尼。
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼装作什么都不知道的样子，腼腆地笑了笑。<<person2>><<Hes>>把箱子搬回了店里，几乎是跳着走的。
+			<br><br>
+			"你猜这是什么？"<<he>>把箱子放下，从满地散落的工具中抄起一根撬棍。<<He>>没等你回答，便咔的一声撬开了箱子。
+			<br><br>
+			<<link [[继续|Dilapidated Toy]]>><</link>>
+			<br>
+		<<elseif _sydneyStatus.includes("pure")>>
+			<<person2>>悉尼还是没能强迫自己回应，<<he>>捂着脸冲回了后面的房间。
+			<br><br>
+			<<He>>从你身边冲过，迫切地想钻进后面的房间。
+			<br><br>
+
+			<<link [[建议打开箱子|Dilapidated Suggest]]>><</link>>
+			<br>
+			<<link [[不管悉尼|Dilapidated Let]]>><</link>>
+			<br>
+		<<else>>
+			<<person2>>悉尼不敢看那人的眼睛，但还是小声地挤出一句谢谢，又冲回了店里。
+			<br><br>
+			<<He>>从你身边走过，走向后面的房间。
+			<br><br>
+
+			<<link [[建议打开箱子|Dilapidated Suggest]]>><</link>>
+			<br>
+			<<link [[不管悉尼|Dilapidated Let]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		为了防止油漆溅到衣服，你们俩都穿上了厚厚的围裙。房间里本来就够热了，悉尼有些焦躁。
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<if $sydneyromance gte 1>>
+				"太热了，"悉尼扯下了围裙，"我下面不穿了。"<<He>>开始脱衣服。
+				<br><br>
+
+				<<if $exhibitionism gte 15>>
+					<<link [[加入|Dilapidated Paint Suit Romance]]>><<npcincr Sydney lust 10>><</link>><<exhibitionist2>><<gglust>>
+					<br>
+				<</if>>
+				<<link [[观看|Dilapidated Paint Watch Romance]]>><<npcincr Sydney lust 5>><<arousal 600>><</link>><<glust>><<garousal>>
+				<br>
+				<<link [[移开视线|Dilapidated Paint Look]]>><</link>>
+				<br>
+			<<else>>
+				"太热了，"悉尼扯下了围裙，"我下面不穿了。"<<He>>开始脱衣服。
+				<br><br>
+
+				<<if $exhibitionism gte 15>>
+					<<link [[加入|Dilapidated Paint Suit]]>><<npcincr Sydney lust 10>><</link>><<exhibitionist2>><<gglust>>
+					<br>
+				<</if>>
+				<<link [[观看|Dilapidated Paint Watch]]>><<npcincr Sydney lust 5>><<arousal 600>><</link>><<glust>><<garousal>>
+				<br>
+				<<link [[移开视线|Dilapidated Paint Look]]>><</link>>
+				<br>
+			<</if>>
+		<<elseif _sydneyStatus.includes("pure")>>
+			"抱歉热到你们了，"西里斯从后面的房间里走了出来，"空调出现了故障，过会儿就修好了。"
+			<br><br>
+
+			工作很辛苦，你们出了很多汗，但进展很顺利。
+			<br><br>
+
+			<<link [[继续|Dilapidated End]]>><</link>>
+			<br>
+		<<else>>
+			"抱歉热到你们了，"西里斯从后面的房间里走了出来，"空调出现了故障，过会儿就修好了。"
+			<br><br>
+
+			工作很辛苦，你们出了很多汗。悉尼松了松衣服，缓解着酷热。
+			<br><br>
+
+			<<link [[继续|Dilapidated End]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

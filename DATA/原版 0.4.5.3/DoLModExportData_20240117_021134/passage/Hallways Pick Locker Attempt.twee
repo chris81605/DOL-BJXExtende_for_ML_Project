@@ -1,0 +1,13 @@
+:: Hallways Pick Locker Attempt []
+<<effects>>
+<<set _unlockChance to random($lock, 500)>>
+<<if currentSkillValue('skulduggery') gte _unlockChance>>
+	你成功地撬开了锁<<if !$worn.under_lower.type.includes("naked") or !$worn.lower.type.includes("naked")>>，并整理好了衣物<</if>>。
+	<<stress -5>><<lstress>><<lockereventnext>>
+	<br>
+<<else>>
+	你紧张地试图打开储物柜，但它仍然紧紧关闭。<<stress 2>><<gstress>>
+	<br><br>
+	<<set $lock to $lock + 50>>
+	<<lockereventpassages>>
+<</if>>

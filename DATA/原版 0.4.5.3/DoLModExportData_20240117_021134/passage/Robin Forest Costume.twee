@@ -1,0 +1,52 @@
+:: Robin Forest Costume []
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+<<switch $phase>>
+	<<case "witch">> <<set $forest_costume to {"name": "witch", "gender": "f"}>>
+	<<case "vampire">> <<set $forest_costume to {"name": "vampire", "gender": "m"}>>
+<</switch>>
+<<set $forest_costume.cd to ($NPCName[$NPCNameList.indexOf("Robin")].pronoun isnot $forest_costume.gender)>>
+
+"你应该试试这件，"你说着，拿起<<= $forest_costume.name.replace("witch","女巫").replace("vampire","吸血鬼")>>装冲着<<him>>比划。
+<br><br>
+<<if $forest_costume.cd>>
+	"但是，这是<<print ($forest_costume.gender is "m" ? "男" : "女")>>装啊！"罗宾惊讶地说。
+	<br><br>
+	"那又怎样？"你回答，"这可是万圣节，好玩有趣不就够了吗？"
+	<br><br>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].love lt 60>>
+		罗宾犹豫了一下，然后摇了摇头。"这衣服很酷，"<<he>>说，"但是我穿出去会很尴尬的。"
+		<br><br>
+		<<robinForestCostumeOptions $forest_costume.name>>
+		<br>
+	<<else>>
+		罗宾犹豫了一下，然后接过了衣服。你离开屏风给了<<him>>一些隐私。
+		<br><br>
+		"不准笑话我啊，"没一会儿，屏风后传出了罗宾的声音。<<He>>没有等你的回应就走了出来，
+		<<switch $forest_costume.name>>
+			<<case "witch">>罗宾还在调整<<his>>的帽子。服装在<<his>>的腰部出奇的紧，给人一种女性化的印象。衣服很合身。
+			<<case "vampire">>罗宾还在调整<<his>>的衣领。衣服很合身。
+		<</switch>>
+		<br><br>
+		<<He>>在一旁的镜子里检查着<<himself>>的样子。
+		<br><br>
+		<<link [[挑逗|Robin Forest Costume Tease]]>><</link>>
+		<br>
+		<<link [[赞美|Robin Forest Costume Compliment]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	"好吧。"罗宾接过衣服说。你离开屏风给了<<him>>一些隐私。
+	<br><br>
+	"我准备好了，"没过一会儿，屏风后传出了罗宾的声音。没有等你的回应<<He>>就走了出来，
+	<<switch $forest_costume.name>>
+		<<case "witch">>罗宾还在调整<<his>>的帽子。这套服装紧裹着<<his>>的腰部，展现了<<his>>女性化的轮廓。衣服很合身。
+		<<case "vampire">>罗宾还在调整<<his>>的衣领。衣服很合身。
+	<</switch>>
+	<br><br>
+	<<He>>在一旁的镜子里检查着<<himself>>的样子。
+	<br><br>
+	<<link [[挑逗|Robin Forest Costume Tease]]>><</link>>
+	<br>
+	<<link [[赞美|Robin Forest Costume Compliment]]>><</link>>
+	<br>
+<</if>>

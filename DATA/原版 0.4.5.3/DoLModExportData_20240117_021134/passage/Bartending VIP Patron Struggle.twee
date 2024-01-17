@@ -1,0 +1,58 @@
+:: Bartending VIP Patron Struggle []
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+你尝试挣脱那<<persons>>的控制。
+<<if $physiqueSuccess>>
+	<<famescrap 1>>
+	<<if $bodysize lte 1>>
+		<<Hes>>体型比你大，但<span class="green">你成功地扭转了<<his>>胳膊，恢复了自由。</span>
+	<<else>>
+		<span class="green">你制服了<<him>>然后恢复了自由。</span>
+	<</if>>
+	<br><br>
+	<<He>>脸色铁青地抓着手臂，摇摇晃晃地离开了你。<<He>>咆哮着诅咒你，发誓着要报仇，离开了俱乐部。保安看起来很开心，也松了一口气。
+	<br><br>
+
+	你回去工作了，剩下的工作时间里无事发生。
+	<<tipreceive>>
+	<br><br>
+
+	<<if !$per_npc.bartend and random(1, 2) is 2>>
+	<<saveNPC 0 bartend>>
+	<</if>>
+
+	<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+	<br>
+<<else>>
+
+	<<if $bodysize lte 1>>
+		<<Hes>>体型比你大，<span class="red">你没办法挣脱<<his>>控制。</span>
+	<<else>>
+		<<he>>比你更强壮，<span class="red">你没办法挣脱控制。</span>
+	<</if>>
+	<<He>>把你拖出了俱乐部，关上了你背后的逃生门。
+	<br><br>
+
+	<<if $rng gte 81>>
+		<<generate2>><<generate3>><<generate4>>
+
+		"该死，"一个陌生的声音说道："你找了个可爱的家伙。"<<person2>><<person>>，<<person3>><<person>>和<<person4>><<person>>从黑暗中走了出来。
+		<br><br>
+
+		那个<<person1>><<person>>在背后抓住了你。
+		<br><br>
+
+		<<link [[继续|Bartending VIP Patron Gang Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<<else>>
+
+		那个<<person>>在背后抓住了你。
+		<br><br>
+
+		<<link [[继续|Bartending VIP Patron Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<</if>>
+
+<</if>>

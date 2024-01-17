@@ -1,0 +1,25 @@
+:: Adult Shop Closed []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+	你路过了一家成人用品店，它目前关着门。
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+
+	<<link [[撬锁 (0:10)|Adult Shop]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+	<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span>
+	<<skulduggeryrequired>>
+	<br><br>
+	<</if>>
+
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Adult Shop]]>><<pass 1>><<set $ghostIn to true>><</link>>
+	<br>
+<</if>>
+/* 北极星 */

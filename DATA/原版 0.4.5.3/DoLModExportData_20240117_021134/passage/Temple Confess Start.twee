@@ -1,0 +1,39 @@
+:: Temple Confess Start []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你进入了忏悔室的左侧隔间。你面前有一张带软垫的长凳，你坐了下来。
+	<br><br>
+
+	你的左手边有一根绳子，它连接着外部的一个铃铛，木条将你与另一侧的相隔开。
+	它们遍布着符号。下侧有一扇小小的金属百叶窗，一个银制的碗附着在下方的墙上。
+	你右边是一摞纸。
+	<br><br>
+
+	长凳上方的架子上有一些毛巾。
+<<else>>
+	你正在忏悔室里，担任告解员的角色。
+<</if>>
+<br><br>
+
+<<if Time.hour gte 6 and Time.hour lt 22>>
+	<<if $exposed gte 1>>
+		你从上面的架子上拿了几条毛巾。
+		<<towelup>>
+		<br><br>
+	<</if>>
+
+	<<link [[等待忏悔者 (0:30)|Temple Confess]]>><<pass 30>><</link>>
+	<br>
+	<<link [[离开|Temple]]>><<endconfession>><</link>>
+	<br>
+<<else>>
+	你听到有人敲了敲门。"忏悔室在夜间关闭，<<sister>>。感谢您今日的工作。"
+	<br><br>
+
+	你离开了隔间，只见一位身着黑袍的<<generateConfessor 1>><<person1>><<monk>>朝你微笑。<<He>>锁上了你身后的门。
+	<br><br>
+
+	<<link [[继续|Temple]]>><<endconfession>><</link>>
+	<br>
+<</if>>

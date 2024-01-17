@@ -1,0 +1,41 @@
+:: Garden Stem Help []
+<<effects>>
+
+当你周围的藤蔓开始收紧时，你选择大声呼救。
+
+<<if Time.dayState is "night">>
+	<<generate1>><<person1>>
+	一开始没有任何回应，只有晚风吹过头顶树枝的哗啦声。紧接着你听到花园篱笆那吱吱作响着，然后便是砰的一声。
+	<br><br>
+
+	"看呐，"一个<<personsimple>>的声音说道。"一个可怜的孤儿被<<pherself>>缠住了。"一个<<person>>蹲在你面前，轻蔑地看着你。"他们说过不允许进入孤儿院，但你现在不在孤儿院，不是吗？"<<He>>扯掉了那些藤蔓，但只是为了能更顺利压到你的身上。
+	<br><br>
+
+	<<link [[继续|Garden Stem Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<run statusCheck("Robin")>>
+	<<if $rng gte 51 and _robin_location is "orphanage" and $NPCName[$NPCNameList.indexOf("Robin")].trauma lt 80 and $daily.robin.tending isnot 1>>
+		<<npc Robin>><<person1>>
+		"我来了！"罗宾喊了一声。<<He>>从孤儿院赶了过来，当<<he>>看到你时直接倒吸一口了凉气。"你都被缠成这个样子了。"<<He>>单膝跪在地上，开始试图在不造成任何伤害的情况下解开缠绕在一起的枝条。
+		<br><br>
+
+		这些藤蔓在<<his>>的手下开始松动，你勉强可以扭动身体了。"幸好你没有掉进刺痛的荨麻里，"<<he>>吁了一口气，"我试着清空花园里的这些东西，但它们好像一夜之间就会再长出来。"
+		<br><br>
+		你向罗宾表达你的感谢，<<he>>回到了孤儿院。
+		<br><br>
+
+		<<link [[继续|Garden Flowers]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<generatey1>><<person1>>
+		你听到有脚步声传来。"不要担心，"一个<<person>>在说着的同时走了过来，蹲在了你的身边。"它们没有刺。"<<he>>扯掉了束缚你的藤蔓，皱起了眉头。"这些东西真的勒得很紧，就好像它们有自己的意识一样。"
+		<br><br>
+
+		在<<persons>>的帮助下，你设法摆脱了困境。在你对<<him>>表达之后，<<he>>回到孤儿院。
+		<br><br>
+
+		<<link [[继续|Garden Flowers]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

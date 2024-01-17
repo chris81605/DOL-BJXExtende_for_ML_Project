@@ -1,0 +1,131 @@
+:: Containers []
+<<set $outside to 0>><<set $location to $container.lastLocation>><<effects>>
+<<set $phase to $phase || $location>>
+<<set _container to $container[$phase]>>
+<<set _aPregnancy to $sexStats.anus.pregnancy>>
+<<set _vPregnancy to $sexStats.vagina.pregnancy>>
+<<set $checkboxResult to {}>>
+
+<<if _container.count is 0>>
+	<<if _container.deadCreatures is 0>>
+		你的<span class="gold"><<print _container.name>></span>里目前还没有<<if $pregnancyStats.namesParasitesChild is true>>孩子<<else>>寄生物<</if>>。
+	<<else>>
+		<<if $pregnancyStats.namesParasitesChild is true>>你的孩子<<else>>寄生物<</if>>因为缺乏照顾与喂养，看起来<span class="red">有部分已经死去了</span>。你花了一些时间去埋葬哀悼它们。
+		<<ggtrauma>>
+		<br><br>
+		<<if $pregnancyStats.namesParasitesChild is true>>
+			<<set _traumaMulti to 2>>
+		<<else>>
+			<<set _traumaMulti to 1>>
+		<</if>>
+		<<trauma `30 * _traumaMulti * _container.deadCreatures`>>
+		<<if $wraith.state and $wraithShow>>
+			<<if !$wraithAngerCount>>
+				<<set $wraithAngerCount to 1>>
+			<</if>>
+			<<set _wraithRage to ($wraithAngerCount * 2)>>
+			<<unset $wraithShow>>
+			<<unset $wraithAngerCount>>
+			你感觉到有东西从背后小心翼翼地抓住你的脖子。
+			<br><br>
+			"<span class="wraith">不可饶恕。你很快就会加入<<if _container.count isnot 1>>它们<<else>>它<</if>>的行列。</span>"<<stress 12>><<trauma 12>><<ggstress>><<ggtrauma>>
+			<br><br>
+			你转过身去，但那里什么也没有。<<gobsession _wraithRage>>
+			<br><br>
+		<</if>>
+
+		<<link [[继续 (1:00)|$passage]]>><<set _container.deadCreatures to 0>><<pass 60>><</link>>
+	<</if>>
+<<else>>
+	<<if _container.visited is false>>
+		你检查着<<if $pregnancyStats.namesParasitesChild is true>>你的孩子<<if _container.count isnot 1>>们<</if>><<else>>寄生物<<if _container.count isnot 1>>们<</if>><</if>>，且确保<<if _container.count isnot 1>>它们拥有<<else>>它拥有<</if>>在<span class="gold"><<print _container.name>></span>里生活所需的一切。
+		<br>
+		<<creatureVisit>>
+	<<else>>
+		<<creatureVisit false>>
+		你看着你那待在<span class="gold"><<print _container.name>></span>里的<<if $pregnancyStats.namesParasitesChild is true>>孩子<<if _container.count isnot 1>>们<</if>><<else>>寄生物<<if _container.count isnot 1>>们<</if>><</if>>。
+	<</if>>
+	<br><br>
+	它的最大容量是<<number _container.maxCount>>。<<if _container.feederName>>多亏了你留下的<span class="gold"><<print _container.feederName>></span>，<</if>><<if $pregnancyStats.namesParasitesChild is true>>你的孩子<<if _container.count isnot 1>>们<</if>><<else>>寄生物<<if _container.count isnot 1>>们<</if>><</if>>离开你的照料可以存活<<number _container.maxDaysWithoutFood>>天。
+	<<if _container.decorations>>你的水箱里设有<<luxuryTooltip>>。<</if>>
+	<<if $phase is "farm" and $farm.parasitebarn gte 2>>设置在谷仓里的装置是<<luxuryTooltip>>的。<</if>>
+	<!-- For players who had multiple parasite children before the tooltip update -->
+	<<if $pregnancyStats.parasiteTypesSeen.length gte 4 and (!$pregnancyStats.parasiteBook or $pregnancyStats.parasiteBook is 1)>>
+		<<set $pregnancyStats.parasiteBook to 1>>
+		<br><br>
+		<span class="gold">哈珀医生也许能帮你进一步了解你的<<if $pregnancyStats.namesParasitesChild is true>>孩子<<if _container.count isnot 1>>们<</if>><<else>>寄生物<<if _container.count isnot 1>>们<</if>><</if>>。</span>
+	<<elseif $pregnancyStats.parasiteTypesSeen.length gte 4 and $pregnancyStats.parasiteBook is 2>>
+		<br><br>
+		<span class="gold">你可以在商业街的宠物店购置一本笔记本，用来记录你的<<if $pregnancyStats.namesParasitesChild is true>>孩子<<if _container.count isnot 1>>们<</if>><<else>>寄生物<<if _container.count isnot 1>>们<</if>><</if>>的情况。</span>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $pregnancyStats.parasiteBook is 3>>
+	<div id="info" class="no-numberify"><<assignmenticon>><<link "打开笔记本">><<replace "#info">><<containerInfo>><</replace>><</link>></div>
+<</if>>
+
+<<if _container.count gt 0>>
+	<ul>
+		<<for _i to 0; _i lt _container.maxCount; _i++>>
+			<<if _container.creatures[_i] is undefined>>
+				<<continue>>
+			<</if>>
+			<<if _container.creatures[_i] isnot null>>
+				<li><label><<print '<<checkbox "$checkboxResult[' + clone(_i) + ']" false true>>'>> - <<creatureTooltip>> - <<print _container.creatures[_i].stats.gender.replace("Male","雄性").replace("Female","雌性").replace("Hermaphrodite","雌雄同体")>> - <<creatureActivity _container.creatures[_i].stats.speed>></label></li>
+			<</if>>
+		<</for>>
+	</ul>
+<</if>>
+
+<<if _container.deadCreatures is 0>>
+	<<if _aPregnancy.type !== "parasite">>
+	<<elseif _aPregnancy.parasiteFeltMovement>>
+		<<if playerChastity("anus")>>
+			你在装备着护肛板时，无法生下<<if $pregnancyStats.namesParasitesChild is true>>寄生物孩子们<<else>>寄生物<</if>>。
+		<<else>>
+			<<if $pregnancyStats.namesParasitesChild is true>>
+				<<link [[尝试生下肛门内的寄生物孩子 (1:00)|GiveBirth]]>><<pass 60>><<set $giveBirthLocation to "anus">><</link>>
+			<<else>>
+				<<link [[尝试生下肛门内的寄生物 (1:00)|GiveBirth]]>><<pass 60>><<set $giveBirthLocation to "anus">><</link>>
+			<</if>>
+		<</if>>
+		<br><br>
+	<<elseif _aPregnancy.fetus.length - (_aPregnancy.motherStatus is 2 ? 1 : 0) gt 0>>
+		你肛门内的<<print ($pregnancyStats.namesParasitesChild is true ? "寄生物孩子" : "寄生物们")>>还未准备好生产。
+		<br><br>
+	<</if>>
+	<<if _vPregnancy.type !== "parasite">>
+	<<elseif _vPregnancy.parasiteFeltMovement>>
+		<<if playerChastity("hidden")>>
+			你在装备着贞操带时，无法生下<<if $pregnancyStats.namesParasitesChild is true>>寄生物孩子们<<else>>寄生物<</if>>。
+		<<else>>
+			<<if $pregnancyStats.namesParasitesChild is true>>
+				<<link [[尝试生下阴道内的寄生物孩子们 (1:00)|GiveBirth]]>><<pass 60>><<set $giveBirthLocation to "vagina">><</link>>
+			<<else>>
+				<<link [[尝试生下阴道内的寄生物 (1:00)|GiveBirth]]>><<pass 60>><<set $giveBirthLocation to "vagina">><</link>>
+			<</if>>
+		<</if>>
+		<br><br>
+	<<elseif _vPregnancy.fetus.length - (_aPregnancy.motherStatus is 2 ? 1 : 0) gt 0>>
+		你阴道内的<<print ($pregnancyStats.namesParasitesChild is true ? "寄生物孩子" : "寄生物们")>>还未准备好生产。
+		<br><br>
+	<</if>>
+	<<if _container.count gt 0>>
+		<<link [[带去售卖|$passage]]>>
+			<<for _i to 0; _i lt _container.maxCount;_i++>>
+				<<if _container.creatures[_i] is undefined>>
+					<<continue>>
+				<</if>>
+				<<if _container[_i] isnot null>>
+					<<if $checkboxResult[_i] is true>>
+						<<set $number to clone(_i)>> /* unused */
+						<<moveCreature $phase "portable" _i>>
+					<</if>>
+				<</if>>
+			<</for>>
+		<</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|_container.leaveLink]]>><</link>>
+<</if>>

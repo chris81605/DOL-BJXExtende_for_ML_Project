@@ -1,0 +1,23 @@
+:: Livestock Intro 3 []
+<<effects>>
+
+<<if $phase is 1>><<set $phase to 0>>
+	<<if $worn.face.type.includes("gag")>>
+		你试图抗议，但是$worn.face.cn_name_cap让你的话模糊不清。你只能不停地<<if $speech_attitude is "bratty">>咆哮<<else>>呜咽<</if>>。
+	<<elseif $speech_attitude is "meek">>
+		"求求你，让我走吧，"你抗议道。
+	<<elseif $speech_attitude is "bratty">>
+		"让我马上走，"你要求道。
+	<<else>>
+		"我不是牲畜，"你抗议道。"放开我。"
+	<</if>>
+你被忽视了。
+<</if>>
+
+<<personsimple>>靠得更近了，<<He>>抓住你的下巴，让你的头偏向一边。<<He>>检查一侧脸颊，然后是另一侧。<<He>>把手指插进你的嘴唇里，试图打开你的嘴。
+<br><br>
+
+<<link [[接受|Livestock Intro Allow]]>><<transform cow 1>><<sub 1>><<livestock_obey 1>><<npcincr Remy love 1>><<npcincr Remy dom 1>><</link>><<gobey>>
+<br>
+<<link [[用力咬|Livestock Intro Chomp]]>><<def 1>><<livestock_obey -20>><<npcincr Remy love -1>><<npcincr Remy dom -1>><</link>><<lllobey>>
+<br>

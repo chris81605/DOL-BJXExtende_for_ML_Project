@@ -1,0 +1,58 @@
+:: Town Eden Park Flirt []
+<<effects>>
+
+你向伊甸靠得更近。
+
+<<if $awarelevel gte 2>>
+	<<if Time.dayState isnot "day">>
+		<<if random(1) is 0 and $NPCList[0].breastsize gte 2>>
+			你指向河里的鸭子时，手不小心碰到了<<his>>$NPCList[0].breastsdesc。
+		<<else>>
+			当你笨拙地试图挽起<<his>>的胳膊时，你的手不小心碰到了<<his>>的屁股。
+		<</if>>
+		你试图把它当做一个意外敷衍过去，但你觉得<<hes>>可能不会相信。
+	<<else>>
+		你在<<his>>的耳边低声说道，"这里有一些我们可以享受私人时间的地方。"
+	<</if>>
+	<<npcincr Eden lust 2>><<glust>>
+<<else>>
+	你朝<<him>>微笑着，让你的眼神和身体传达出你无法言说的意思。
+<</if>>
+<<promiscuity1>>
+
+<<if Time.dayState isnot "day">>
+	在你们走路时，<<He>>把手放在你的<<bottom>>上，不时轻轻捏一下。
+	<<arousal 100 "bottom">><<garousal>>
+<<else>>
+	<<He>>靠向你，<<his>>的手擦过你的腰。你感受到<<he>>温热的呼吸洒在你的耳边。
+	<<arousal 50>><<garousal>>
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].lust gte 50 or
+		(Time.dayState isnot "day" and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 30)>>
+	<<if $awarelevel gte 2>>
+		"淘气的<<girl>>，"<<he>>说着，握住你的胳膊，"我等不及了。这附近一定能找到个僻静的地方。"
+	<<else>>
+		"可怜的<<girl>>，"<<he>>说，"你现在需要被满足，这附近一定能找到个僻静的地方。"
+	<</if>>
+	<br><br>
+
+	<<He>>紧握你的胳膊，加快脚步，眼中充满了欲望。
+	<br><br>
+
+	<<He>>带你走到一片树丛下面，茂密的灌木屏蔽了周围的视线。附近没有人。伊甸转过身来，将你拉近。
+	<br><br>
+
+	<<if Time.dayState is "day">>
+		<span class="pink">虽然是白天，但伊甸似乎已经不在乎了。</span>
+		<<arousal 100>><<npcincr Eden lust 2>><<garousal>><<glust>>
+		<br><br>
+	<</if>>
+	<<link [[继续|Town Eden Park Flirt Sex]]>><<set $sexstart to 1>><</link>>
+<<else>>
+	"等我们回家再说吧，<<girl>>，"<<he>>说，"到时候我会提醒你，你属于谁。"伊甸给了你一个快速的吻，好像是为了阻止任何反对意见。
+	<<takeKissVirginity Eden romantic>>
+	<br><br>
+	<<link [[继续|Town Eden Park Finish]]>><</link>>
+<</if>>

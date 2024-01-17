@@ -1,0 +1,99 @@
+:: Maths Lesson []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.maths to true>>
+
+<<mathsWhitneyAttendChance>>
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	瑞沃在过道里走来走去，把白色的考卷放在每个学生面前。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<exam maths>>
+	<br><br>
+	<<npc River>><<person1>>
+	学生们翻开第一页，将试卷混乱地叠在一起。瑞沃禁止交头接耳。<<He>>坐在教室前面，冰冷的目光没有看向特定的某个人，而是注视着每一个人。
+
+	<<if $whitneymaths is "active">>
+		即便是惠特尼也保持着安静，但这并没阻止<<nnpc_him "Whitney">>用一个腋下投球把一块橡皮扔到你背上。
+	<<elseif $whitneymaths is "seat">>
+		即便是惠特尼也保持着安静，但这并没阻止<<nnpc_him "Whitney">>在桌子下边偷偷摸你。<<garousal>><<arousal 300 "bottom">><<arousal 300 "genitals">>
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "River">>
+		<!-- Note: There should be special text if Whitney is directly involved in the player's orgasm -->
+		<<orgasmLocation "classroom">>
+	<</if>>
+	<<exam_cheat maths>>
+	<<if !$daily.earSlimeCheatExam and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,200) gte 150 - $earSlime.corruption>>
+		<<set $daily.earSlimeCheatExam to true>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">你感觉脑袋里的史莱姆在命令你考试作弊。</span>它承诺如果你遵守的话，就给予你奖励<<if $earSlime.startedThreats>>，如果你不遵守的话，就要承担相应的后果<</if>>。
+		<br><br>
+		<<link [[服从|Maths Exam]]>><<set $phase to 6>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[违抗|Maths Exam]]>><<set $phase to 8>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[无视|Maths Exam]]>><<set $phase to 7>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[集中精力|Maths Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+		<br>
+		<<link [[试图放松|Maths Exam]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[作弊|Maths Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<if $whitneymaths is "active">>
+			<<link [[抓住惠特尼的橡皮|Maths Exam]]>><<set $phase to 3>><</link>><<dancedifficulty 1 1000>>
+			<br>
+		<<elseif $whitneymaths is "seat">>
+			<<if $promiscuity gte 35>>
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].penis isnot "none">>
+					<<link [[用手指服务满足惠特尼|Maths Exam]]>><<set $phase to 4>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 1000>><<ghandskill>><<glove>><<glust>>
+					<br>
+				<</if>>
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].vagina isnot "none">>
+					<<link [[用你的手指满足惠特尼|Maths Exam]]>><<set $phase to 5>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 1000>><<ghandskill>><<glove>><<glust>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[报复|Whitney Maths Exam]]>><<def 1>><</link>><<physiquedifficulty 1 $physiquemax>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if Time.minute lte 5>>
+		数学课开始了，你打算怎么表现？
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		数学课还在继续，你打算怎么表现？
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "River">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<mathicon>><<link [[专注课程|Maths Lesson Focus]]>><</link>><<gstress>><<gmaths>>
+	<br>
+	<<if $whitneymaths is "seat">>
+		<<socialiseicon>><<link [[和惠特尼聊天|Maths Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<glove>><<gharass>>
+		<br>
+	<<else>>
+		<<socialiseicon>><<link [[和同学们社交|Maths Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+		<br>
+	<</if>>
+	<<daydreamicon>><<link [[做白日梦|Maths Lesson Daydream]]>><</link>><<lstress>><<lharass>>
+	<br>
+
+	<<if $whitneymaths is "seat" and $exhibitionism gte 75>>
+		<<ind>><<link [[自慰|Maths Lesson Masturbate]]>><<set $masturbationstart to 1>><<npcincr Whitney lust 1>><</link>><<exhibitionist5>><<glust "Whitney">>
+		<br>
+	<<elseif $exhibitionism gte 55>>
+		<<ind>><<link [[自慰|Maths Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<</if>>

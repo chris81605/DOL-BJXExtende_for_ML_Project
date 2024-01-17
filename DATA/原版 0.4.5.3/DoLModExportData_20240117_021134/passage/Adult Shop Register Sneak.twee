@@ -1,0 +1,21 @@
+:: Adult Shop Register Sneak []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+<<set $weekly.theft.adultShop to true>>
+<<set $tip to random(4000, 10000)>>
+你熟练打开了收银机，清点着里面的钱。
+一共有<<printmoney $tip>>。
+<br><br>
+<<if currentSkillValue('skulduggery') lt 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+<<if $rng gte 86>>
+	<<skulshopevents>>
+<<else>>
+	<<link [[拿走|Adult Shop]]>><<set $money += $tip>><<crimeUp `$tip / 100` "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[不管|Adult Shop]]>><</link>>
+	<br>
+<</if>>

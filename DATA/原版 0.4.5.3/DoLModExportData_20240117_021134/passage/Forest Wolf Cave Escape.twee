@@ -1,0 +1,27 @@
+:: Forest Wolf Cave Escape []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if $wolfpacktrust gte 12>>
+	当你试图离开时，狼群看着你，但没有采取任何行动来阻止你。看来他们足够信任你，让你走。
+	<<lstress>>
+
+	<br><br>
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $forest to 80>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $wolfpackfear gte 12>>
+	当你试图离开时，狼群向你咆哮，但没有采取任何行动来阻止你。看来它们太害怕你了，不敢试图阻止你。
+	<<lstress>>
+
+	<br><br>
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $forest to 80>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+	当你试图离开时狼群立刻炸了锅。它们挡住了你的去路。狼群盯着你，并咆哮着警告。
+	<<stress 6>><<gstress>>
+	<br><br>
+	<<link [[无论如何尝试逃跑|Forest Wolf Cave Rape]]>><<beastNEWinit 6 wolf>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[让步|Forest Wolf Cave]]>><</link>>
+	<br>
+<</if>>

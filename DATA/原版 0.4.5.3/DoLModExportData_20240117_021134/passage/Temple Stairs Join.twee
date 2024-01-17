@@ -1,0 +1,28 @@
+:: Temple Stairs Join []
+<<temple_effects>><<effects>>
+你藏入楼梯口，坐在见习教徒们的旁边。
+<<if $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest">>
+	他们很高兴新教友的加入。
+<<else>>
+	由于你在神殿的地位，他们起初对你有所戒备，但很快就变得热情亲切了起来。
+<</if>>
+<br><br>
+你们开始聊天。每当有<<generate1>><<person1>><<monk>>走过，你们就悄悄地躲起来，为这种幼稚的行为乐此不疲。
+<br><br>
+<<endevent>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $temple_rank is "initiate">>
+		你从楼梯下面出来。过了一会你听到身后传来脚步声。是一位见习教徒——一个<<generateyTemple 1>><<person1>><<person>>，追上了你。"你很可爱，"<<he>>说。<<He>>轻轻地握住了你的前臂。"我知道一个清静的地方，我们可以独处。"
+	<<else>>
+		你从楼梯下方走了出来。过了一会，你听到身后传来脚步声。是一位见习教徒——一个<<generateyTemple 1>><<person1>><<person>>，追上了你。“不好意思<<sister>>”<<he>>一边说着，一边轻轻地握住了你的前臂。“我一直对你抱有一些罪恶的想法。你愿意帮我进行忏悔吗？”
+	<</if>>
+	<br><br>
+	<<link [[接受|Temple Stairs Sex Accept]]>><<grace -1 monk>><</link>><<promiscuous2>><<lgrace monk>>
+	<br>
+	<<link [[拒绝|Temple Stairs Sex Refuse]]>><<grace 3 monk>><</link>><<ggrace monk>>
+	<br>
+<<else>>
+	<<link [[继续|Temple]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,32 @@
+:: Avery Date 2 []
+<<effects>><<set $outside to 0>>
+<<pass 20>><<famesocial 10>><<set $dateCount.Total++>><<set $dateCount.Avery++>>
+<<if $phase is 1>>
+	你让艾弗里牵着你的手。<<He>>笑了。<<takeHandholdingVirginity "Avery" "romantic">>
+	<br><br>
+<<else>>
+	你局促地站着。<<He>>对你皱眉，什么也没说。
+	<br><br>
+<</if>>
+<<set $phase to 0>>
+<<generate2>><<person2>>一个<<person>>对你们打招呼。“啊哈，”<<he>>说，"很高兴再次见到你<<person1>><<sir>>，还有你的朋友。" <<person2>><<He>>对你微笑。"这边请。"
+<br><br>
+
+<<He>>带你到二楼窗户旁边的一张小桌子。"我去拿菜单，"<<he>>说。
+<br><br>
+
+当<<he>>返回时，<<he>>带的不是菜单，而是一瓶葡萄酒。<<He>>等待着你们的指示。艾弗里对你微笑。"很好喝的，相信我。"
+<br><br>
+
+<<person1>>
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<br>
+<<else>>
+	<<link [[喝艾弗里推荐的酒|Avery Date Wine]]>><<alcohol 120>><<drugs 180>><<set $endear += 10>><<npcincr Avery love 1>><</link>><<glove>><<gendear>><<garousal>>
+<</if>>
+<br>
+<<link [[让他们倒酒，但不喝|Avery Date No Wine]]>><</link>>
+<br>
+<<link [[提出想喝别的|Avery Date Drink]]>><<def 1>><<npcincr Avery rage 5>><<set $endear -= 5>><</link>><<garage>><<lendear>>
+<br>

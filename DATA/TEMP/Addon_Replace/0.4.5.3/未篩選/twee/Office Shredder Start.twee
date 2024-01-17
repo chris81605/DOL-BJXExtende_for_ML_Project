@@ -1,0 +1,35 @@
+:: Office Shredder Start []
+<<location "office_building">><<effects>>
+你在<<checkfloor>>上向客户报告，一个<<generate1>><<person1>><<person>>交给你一大堆文件。<<He>>指引你到复印室，里面有一台令人印象深刻的文件碎纸机。你把文件放进碎纸机口，但什么也没发生。
+<br><br>
+你认为这个设备一定没有通电，所以你把手伸到它后面。果然，它没有插电。你挣扎着去够电源线，但最终还是可以插上了。它呼的一声就活了。
+<br><br>
+<<set $rng to 60>>
+<<if $rng gte 60>>
+	<<if $worn.lower.name isnot "naked" and clothingData("lower", $worn.lower, "skirt") is 1>>
+		在你离开碎纸机之前，你感到有什么东西在拉你的$worn.lower.cn_name_cap。你恐惧地低头看着衣物被慢慢地拉进碎纸机！
+		/* <<set $worn.lower.integrity -= 10>> */
+		<<set $phase to 0>>
+
+		<<shredderactions "lower">>
+		<br>
+	<<elseif $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+		在你离开碎纸机之前，你感到有什么东西在拉你的$worn.upper.cn_name_cap。你恐惧地低头看着衣物被慢慢地拉进碎纸机！
+		/* <<set $worn.upper.integrity -= 10>> */
+		<<set $phase to 0>>
+
+		<<shredderactions "upper">>
+	<<else>>
+		<<tiredness 3>>
+		你开始把文件放进它等待的嘴里。就在你以为已经写完了的时候，<<person1>><<person>>又送来了一大堆文件。
+		<br><br>
+		在碎纸40分钟后，<<person1>><<person>>回来递给你小费。<<assignmenttip 6>>
+		<<completeassignment>>
+	<</if>>
+<<else>>
+	<<tiredness 3>>
+	你离开碎纸机，开始把文件塞进等待着的碎纸机嘴里。就在你以为已经写完了的时候，<<person1>><<person>>又送来了一大堆文件。
+	<br>
+	在碎纸40分钟后，<<person1>><<person>>回来递给你小费。<<assignmenttip 6>>
+	<<completeassignment>>
+<</if>>

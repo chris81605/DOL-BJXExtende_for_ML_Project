@@ -1,0 +1,52 @@
+:: Underground Intro2 []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<if $phase is 1>>
+	<<set _withRobin to 1>>
+	<<set _robin to statusCheck("Robin")>>
+<</if>>
+
+<<if _withRobin is 1>>/* 4 npcs are generated so far, person1 is robin */
+	你和罗宾进入另一条走廊，走廊的一边是几个金属的地板舱口。<<person3>><<person>>打开其中一个，把你推了进去。至少，你落在了某个柔软的东西上。
+	很快，你听到一个相邻的舱门打开，<<person1>>罗宾发出一声尖叫，大概<<hes>>也被扔进去了。
+	<br><br>
+
+	<<person3>>“你们两个，你们的角色很简单。照我说的去做。你不会想知道上一个大吵大闹的<<girl>>发生了什么。”
+	<<He>>砰地关上舱门，你陷入了完全的黑暗中，听着<<his>>渐行渐远的脚步声。
+	<br><br>
+
+	你在黑暗中摸索着，发现自己掉在了像床垫一样的东西上。房间角落里还有一扇锁着的金属门和一个水龙头，但除此之外，房间里什么都没有。
+	<br><br>
+
+	<<person1>>“你在吗？”你听到罗宾<<if _robin.dom lte 40>>颤抖的<</if>>声音从附近传来。
+	当你追踪<<his>>声音的位置时，你发现墙上有一个连接你们的小洞。
+<<else>>/* 2 npcs are present */
+	你们进入另一条走廊，走廊的一侧有一些金属地板舱口。<<person2>><<He>>打开其中一个，把你推了进去。至少，你落在了某个柔软的东西上。
+	“你的角色很简单。照我说的去做。你不会想知道上一个大吵大闹的<<girl>>发生了什么。”
+	<<He>>砰地关上舱门，让你陷入了完全的黑暗中。
+	<br><br>
+
+	你在黑暗中摸索着，发现自己掉在了像床垫一样的东西上。
+	房间角落里还有一扇锁着的金属门和一个水龙头，但除此之外，房间里什么都没有。
+<</if>>
+<br><br>
+
+<<set $undergroundbrothel to {
+	"active": true,
+	"time": 0,
+	"timepass": true,
+	"water": 0,
+	"escape": 0
+}>>
+<<if _withRobin>>
+	<<set $undergroundbrothel.robin to true>>
+	<<set $undergroundbrothel.robinTopics to {
+		"cold": "undiscussed",
+		"lonely": "undiscussed",
+		"dark": "undiscussed",
+		"scared": "undiscussed",
+		"touch": "undiscussed"
+	}>>
+	<<set $undergroundbrothel.robinTalk to 0>>
+<</if>>
+<<link [[继续|Underground Cell]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

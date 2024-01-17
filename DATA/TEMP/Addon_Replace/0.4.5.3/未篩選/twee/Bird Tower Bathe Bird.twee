@@ -1,0 +1,32 @@
+:: Bird Tower Bathe Bird []
+<<effects>>
+
+<<npc "Great Hawk">>
+<<if $monster is 1 and $phase is 1>>
+	你牵着<<beasttypes>>的手，<<bhe>>把你带到浴池。<<takeHandholdingVirginity "Great Hawk" "romantic">>
+<</if>>
+<<strip>>
+<<wash>>
+你脱下衣服。<<beasttype>>游到水池的另一边，为你腾出空间。你滑入水中。天气很冷，但你很快就适应了。
+<br><br>
+
+<<if $daily.birdWash is undefined>>
+	<<set $daily.birdWash to 1>>
+	<<if $monster is 1>>
+		<<beasttype>>在空中盘旋了一圈，缓缓地降落在了你的身后。<<bhe>>轻轻地把爪子摁在了你的胸前，翅膀展开着。"你想让我帮你清洗吗？"
+	<<else>>
+		<<beasttype>>游了回来，用翅膀往你身上洒水。<<bHe>>在试着帮你洗澡。
+	<</if>>
+	<br><br>
+
+	<<link [[接受|Bird Tower Bathe Bird Accept]]>><<if $monster is 1>><<arousal 1800>><</if>><<transform bird 1>><</link>><<if $monster is 1>><<ggarousal>><<deviant1>><</if>>
+	<br>
+	<<link [[拒绝|Bird Tower Bathe Bird Refuse]]>><</link>>
+	<br>
+<<else>>
+	你很快就变得一尘不染。
+	<br><br>
+
+	<<link [[继续|Bird Tower]]>><<endevent>><<clotheson>><</link>>
+	<br>
+<</if>>

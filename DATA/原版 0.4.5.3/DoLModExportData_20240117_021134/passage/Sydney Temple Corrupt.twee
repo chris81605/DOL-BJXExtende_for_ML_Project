@@ -1,0 +1,40 @@
+:: Sydney Temple Corrupt []
+<<set $outside to 0>><<set $location to "temple">><<run statusCheck("Sydney")>><<sydneySchedule>><<temple_effects>><<effects>><<set _sydneyPray to true>>
+<<if $speech_attitude is "meek">>
+	"所以，我们准备好去做……去做你说的事儿了？"你悄声问道。
+<<elseif $speech_attitude is "bratty">>
+	"准备好打破誓约了吗？"你压低了声音。
+<<else>>
+	"我们准备好要去实施你的计划了吗？"你悄声问<<him>>。
+<</if>>
+<br><br>
+<<if !_sydneyStatus.includes("corrupt")>>
+	<<unset $sydneyChastityRemoveCorrupt>><<unset $sydneyChastityRemoveIntro>>
+	悉尼羞愧地低下了头。"那件事……我……"<<he>>叹了口气，"也许是我言之过早了。我们真应该好好考虑，这究竟是不是我们想要的。"
+	<br><br>
+	<i><span class="pink">悉尼的堕落度已不足以让<<his>>有拆除贞操带的想法。或许你需要重新将<<him>>拉回与欲望的苦苦挣扎中。</span></i>
+	<br><br>
+	<<sydneyOptions>>
+<<elseif playerChastity() and !$worn.genitals.origin is "temple">>
+	悉尼露出笑颜，但很快便消失了。"我想起来了。你的贞操带……不是神殿里的，对吧？"你点点头，悉尼皱了皱眉头。
+	"无计可施，至少在这里不行。神殿里的钥匙只能打开神殿里的贞操带。在你找到解开你贞操带的方法前，我们什么也做不了。"
+	<br><br>
+	<<sydneyOptions>>
+<<elseif $temple_rank is undefined or $temple_rank is "prospective">>
+	悉尼露出笑颜，但很快便消失了。"我们没办法溜进那个地方，因为你甚至还不是见习教徒。你得给约旦<<nnpc_brother "Jordan">>表明加入的意愿，之后我们才能行动。"
+	<br><br>
+	<<sydneyOptions>>
+<<elseif Time.hour gte 21>>
+	悉尼做了个深呼吸。"我准备好了。"<<He>>默默清点周围<<monks>>的人数。"很好，我们的机会来了。我会先过去，你两分钟后进去。"<<He>>给你罗列了神殿后厅需要留意的地方和一些不容易发现的细节。
+	<br><br>
+	<<He>>刚要站起，却又坐了回去，转身看向你。"你确定你完全准备好了吗？打破誓约在这里可是非常严重的事，要是我们被抓到……"
+	<br><br>
+	<<link [[是的 (0:02)|Sydney Temple Corrupt 2]]>><<pass 2>><</link>>
+	<br>
+	<<link [[算了|Sydney Temple Corrupt Cancel]]>><</link>>
+	<br>
+<<else>>
+	悉尼脸红了，但还是点点头。"我们得等到天黑再行动。太阳一落山，就到这儿见我。"
+	<br><br>
+	<<sydneyOptions>>
+<</if>>

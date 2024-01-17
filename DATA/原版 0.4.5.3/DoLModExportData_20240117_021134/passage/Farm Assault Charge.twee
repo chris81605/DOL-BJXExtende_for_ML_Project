@@ -1,0 +1,27 @@
+:: Farm Assault Charge []
+<<effects>>
+
+你冲向了入侵者，艾利克斯在你身侧。
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+			<<generate1>><<generate2>>
+			他们有三个人。其中一个去拦截艾利克斯了，留下<<fullGroup>>给你。
+			<br><br>
+			<<person1>>
+		<<else>>
+			<<generate1>><<person1>>
+			他们有两个人，其中一个去拦截艾利克斯了，留下一个<<person>>给你。
+			<br><br>
+		<</if>>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+
+			<<link [[继续|Farm Assault Alex Fight Bailey]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续|Farm Assault Alex Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</for>>

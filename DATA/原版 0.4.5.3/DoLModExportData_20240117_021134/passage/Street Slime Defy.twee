@@ -1,0 +1,44 @@
+:: Street Slime Defy []
+<<set $outside to 0>><<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身离开<<person>>。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身离开那个<<person>>，你感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它迫使你朝着相反的方向前进。<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+	<<endevent>>
+
+	<<destinationeventend>>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $promiscuity gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你转身离开那个<<person>>。你感到一阵剧痛，这是史莱姆对你反抗的教训。它试图强迫你停下来，<span class="red">，而你无法</span>抵抗它的影响。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	在史莱姆的催促下，你接近了那个<<person>>。
+	<br><br>
+
+	"来……来上我！" 你喊道。
+	<br><br>
+
+	<<person>>吃了一惊，但很快清醒过来。<<He>>扫视四周，然后抓住了你的胳膊，把你拉进了一条小巷里。
+	<br><br>
+
+	<<link [[继续|Street Slime Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你转身离开那个<<person>>，你感到一阵剧痛，这是史莱姆对你反抗的教训。你感觉它迫使你朝着相反的方向前进。<span class="green">但它失败了</span>。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<endevent>>
+
+	<<destinationeventend>>
+<</if>>

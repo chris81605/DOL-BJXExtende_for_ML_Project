@@ -1,0 +1,27 @@
+:: Farm Slime Strip Defy []
+<<effects>>
+<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10) and !$earSlime.defyCooldown>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你试图忽略史莱姆，但感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="red">你无法</span>抵抗它的影响。<<ggwillpower>><<willpower 3>>
+	<br><br>
+	按照史莱姆的命令，你找到一个你认为安全的地方，然后在去干活之前脱光了衣服。
+	<<undressclothes "farmHidingSpot">><<set $slimeFarmNakedStored to true>><<set $daily.slimeFarmNaked to true>>
+	<<if $farm_stage gte 7>><<set $farm_naked to 1>><</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+<<else>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你试着忽略史莱姆，但感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你感到一阵剧痛，这是史莱姆对你反抗的教训。你觉得它在尝试迫使你暴露自己。<span class="green">但它失败了</span>。<<gwillpower>><<willpower 1>>
+	<</if>>
+	<<set $daily.slimeFarmNaked to false>>
+	<br><br>
+	<<link [[继续|Farm Work]]>><</link>>
+<</if>>

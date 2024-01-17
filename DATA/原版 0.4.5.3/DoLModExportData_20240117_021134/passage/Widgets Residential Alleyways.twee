@@ -1,0 +1,72 @@
+:: Widgets Residential Alleyways [widget]
+<<widget "residentialex1">>
+	<<generate1>>你强压住狂跳的心脏并继续前进，当你听到前面有声音时，你走进一条死胡同并躲在了一个垃圾箱的后面。随着声音渐渐远去，正当你准备离开时，你突然看见垃圾箱伴随着嘎吱声被打开了！你还没来得及反应，一双手臂就出现并将你拖了进去。
+	<br><br>
+
+	<<set $molestationstart to 1>>
+
+	<span id="next"><<link [[继续->Molestation Residential]]>><</link>></span><<nexttext>>
+<</widget>>
+
+<<widget "residentialex2">>
+	<<beastNEWinit 1 dog>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		你强压住狂跳的心脏并继续前进，当你听到前面有声音时，你走进一条死胡同并躲在了一个垃圾箱的后面。随着声音越来越大，你认出了这些家伙是和你一个学校的学生，这些家伙在小巷的尽头处停了下来，这让你陷入了进退维谷的处境，当你四处寻找逃跑路线时，你注意到一个流浪<<beasttype>>正待在一张废弃的报纸下面看着你。
+		<br><br>
+
+		<<bHe>>摇着尾巴走到你身边，然后吠叫了起来，你希望这不会吸引太多的注意力。
+		<br><br>
+		<<set $timer to 10>>
+
+		<!-- Modified for Monster People -->
+		<<if $leftarm is 'bound' and $rightarm is 'bound'>>
+			<<link [[忍耐|Residential Dog]]>><<set $phase to 5>><<set $noise += 1>><</link>>
+		<<else>>
+			<<link [[抚摸它的耳朵->Residential Dog]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[忍耐|Residential Dog]]>><<set $phase to 1>><<set $noise += 1>><</link>>
+		<</if>>
+		<br><br>
+	<<else>>
+		你强压住狂跳的心脏并继续前进，当你听到前面有声音时，你走进一条死胡同并躲在了一个垃圾箱的后面。随着声音越来越大，你认出了这些家伙是和你一个学校的学生，这些家伙在小巷的尽头处停了下来，这让你陷入了进退维谷的处境，当你四处寻找逃跑路线时，你注意到一个流浪<<beasttype>>正待在一张废弃的报纸下面看着你。
+		<br><br>
+
+		<<bHe>>咆哮了起来，<span class="red">这吸引了那两人的注意力。</span>你听到那几个家伙正在逐步靠近。
+		<br><br>
+
+		<<link [[继续|Residential Dog Alarm]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "residentialex3">>
+	<<generatey1>><<generatey2>><<person1>>
+	你正走在两排房子之间的小路上，一个足球飞过围栏落在了你的附近，"白痴，"另一边，一个<<personsimple>>的声音响起，"去把它捡回来。"你听到草地上的脚步声正在快速接近。
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	前面还有很长一段路，而且没有什么可以隐藏的地方，你又回头看了一眼，往回走也不会好到哪里去。
+	<br><br>
+
+	<<link [[把球踢回去|Residential Kick]]>><</link>><<athleticsdifficulty 1 800>>
+	<br>
+	<<link [[爬过另一侧的围栏|Residential Fence]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "residential">>
+	<<if $nextPassageCheck is "Residential alleyways">>
+		<<add_link "<span class='nextLink'><<alleyicon>><<link [[住宅区小巷 (0:05)|Residential alleyways]]>><<pass 5>><<set $wraith.exit to 'town'>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<alleyicon>><<link [[住宅区小巷 (0:05)|Residential alleyways]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "residentialquick">>
+	<<alleyicon>><<link [[住宅区小巷|Residential alleyways]]>><</link>>
+<</widget>>
+
+<<widget "residentialeventend">>
+	<<link [[继续|Residential alleyways]]>><<set $eventskip to 1>><</link>>
+<</widget>>

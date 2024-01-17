@@ -1,0 +1,163 @@
+:: Bus seat []
+<<set $outside to 0>><<effects>>
+<<if Time.schoolDay and Time.hour gte 7 and Time.hour lte 8>>
+	你正坐在公交车上，这里挤满了准备上学的学生。
+<<elseif Time.schoolDay and Time.hour is 15>>
+	你正站在公交车上，这里挤满了放学回家的学生。
+<</if>>
+<<if $weather is "rain">>
+	车窗正经受着雨水的冲刷，那噼啪作响的声音便是它们的杰作。
+<</if>>
+<<if playerBellyVisible()>>
+	<<generate1>>看到你的肚子后，在公交车上车口坐着的一个<<person1>><<person>>迅速站起来给你让座。<<if !$daily.pregnancyBus>><<set $daily.pregnancyBus to true>><<trauma -3>><<ltrauma>><</if>>
+	<<endevent>>
+<<else>>
+	你找了一个座位坐下，就那样出神地望着窗外。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passoutbus>>
+<<elseif playerBellyVisible() and $rng gte 75 and getPregnancyObject().awareOf is true>>
+	/* event is only possible if the player knows they are pregnant, and their belly is visible */
+	你旁边的一个<<generate1>><<person1>><<person>>时不时低头看你的腹部。
+	<br><br>
+	<<link [["让" + $NPCList[0].pronouns.him + "摸摸你的肚子"|Bus Pregnancy Touch]]>><</link>>
+	<br>
+	<<link [[等下车就行了|Bus Pregnancy Wait]]>><</link>>
+	<br>
+<<else>>
+	<<set $dangerbus to 0>>
+	<<set $danger to random(1, 10000)>>
+	<<if $danger gte (9900 - $allure)>><<set $dangerbus to random(1, 2)>>
+		<<if $wraith.hunt and isBloodmoon() and $dangerbus is 1>>
+			你凝视着窗外的风景，所有的一切都沐浴在红色的月光之下，而你则突然注意到一个脸色异常苍白的家伙停下了脚步并正透过窗户死死地盯着你看。
+			<br><br>
+			在过了一会后，你又在马路的另一边看到了它。在巴士到达下一站之后，只不过眨眼间的功夫，它又消失不见了。
+			<br><br>
+			你咽了口唾沫，扭头看去，那家伙正坐在巴士的后排。
+			<br><br>
+			公交车到了你要下车的站，你赶忙起身离开。<<stress 12>><<ggstress>>
+			<<set $wraith.hunt++>>
+			<<destination5>>
+		<<elseif $dangerbus is 1>>
+			<<generate1>>一个<<person1>><<person>>在坐在了你旁边的位置后，将一只手放在了你的腿上。
+			<br><br>
+			<<if $rng gte 71 - ($allure/100)>>
+				<<link [[换个位置|Bus move]]>><<set $molestationstart to 1>><</link>><<gharass>>
+				<br>
+			<<else>>
+				<<link [[换个位置|Bus move Safe]]>><</link>><<gharass>>
+				<br>
+			<</if>>
+			<<if $rng gte 91 - ($allure/100)>>
+				<<link [[保持不动|Bus Chikan Start]]>><</link>><<gtrauma>><<gstress>>
+				<br><br>
+			<<else>>
+				<<link [[忍受下来|Bus endure safe]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+				<br><br>
+			<</if>>
+		<<elseif $dangerbus is 2>>
+			<<if Time.hour gte 7 and Time.hour lte 8 and Time.schoolDay>>
+				一些坏学生正在找那些不受欢迎的学生的茬。
+				<br><br>
+				<<if $cool lt 80>>
+					<<generatey1>><<generatey2>><<generatey3>>其中一个<<person1>><<person>>坐在你旁边。<<his>>的其他两个朋友，<<person2>><<person>>和<<person3>><<person>>，坐在你面前，靠在他们的座位上。
+					<br><br>
+					"我们没有说你可以坐我们的公交车，"<<person1>><<person>>说道。
+					<br>
+					"可能是<<pShes>>太蠢了，没想过这种事，"<<person2>><<person>>插话道。
+					<br>
+					<<if $player.gender_appearance is "m" and $worn.upper.type.includes("naked")>>
+						"肯定是。<<pShe>>都忘记了穿衬衫。"
+						<br>
+						"又或者<<pshe>>根本不喜欢穿衣服。也许<<pshe>>希望我们帮忙把它们脱掉。"
+						<br><br>
+						<<if $speech_attitude is "bratty">>
+							"滚开，"你说道，决心不被他们被羞辱。
+							<br><br>
+						<<elseif $speech_attitude is "meek">>
+							你低着头看着你的膝盖，摇着头拒绝。
+							<br><br>
+						<<else>>
+							"离我远点，"你说道。
+							<br><br>
+						<</if>>
+						"但我坚持，"<<person1>><<person>>说，一边抓住你的$worn.lower.cn_name_cap。
+						<br><br>
+						<<link [[继续|Bus School Strip]]>><<set $molestationstart to 1>><</link>>
+						<br>
+					<<else>>
+						<<person3>><<person>>对着你咧嘴笑。"我知道，"<<he>>说道。"<<pullup>>你的$worn.upper.cn_name_cap怎么样？让我们好好看看你。"
+						<br><br>
+						<<link [[默许|Bus Comply]]>><<trauma 6>><<stress 6>><<sub 1>><</link>><<gtrauma>><<gstress>>
+						<br>
+						<<link [[拒绝|Bus Refuse]]>><<def 1>><</link>>
+						<br>
+					<</if>>
+				<<else>>
+					你坐的巴士到达了目的地。
+					<<destination5>>
+				<</if>>
+			<<elseif Time.hour is 15 and Time.schoolDay>>
+				一些坏学生正在找那些不受欢迎的学生的茬。
+				<br><br>
+				<<if $cool lt 80>>
+					<<generatey1>><<generatey2>><<generatey3>>其中一个<<person1>><<person>>坐在你旁边。<<his>>的其他两个朋友，<<person2>><<person>>和<<person3>><<person>>，坐在你面前，靠在他们的座位上。
+					<br><br>
+					"我们没有说你可以坐我们的公交车，"<<person1>><<person>>说道。
+					<br>
+					"可能是<<pShes>>太蠢了，没想过这种事，"<<person2>><<person>>插话道。
+					<br>
+					<<if $player.gender_appearance is "m" and $worn.upper.type.includes("naked")>>
+						"肯定是。<<pShe>>都忘记了穿衬衫。"
+						<br>
+						"又或者<<pshe>>根本不喜欢穿衣服。也许<<pshe>>希望我们帮忙把它们脱掉。"
+						<br><br>
+
+						<<if $speech_attitude is "bratty">>
+							"滚开，"你说道，你决心不被他们被羞辱。
+							<br><br>
+						<<elseif $speech_attitude is "meek">>
+							你低着头看着你的膝盖，摇着头拒绝。
+							<br><br>
+						<<else>>
+							"离我远点，"你说道。
+							<br><br>
+						<</if>>
+						"但我坚持，"<<person1>><<person>>说，一边抓住你的$worn.lower.cn_name_cap。
+						<br><br>
+						<<link [[继续|Bus School Strip]]>><<set $molestationstart to 1>><</link>>
+						<br>
+					<<else>>
+						<<person3>><<person>>对着你咧嘴笑。"我知道，"<<he>>说道。"<<pullup>>你的$worn.upper.cn_name_cap怎么样？让我们好好看看你。"
+						<br><br>
+						<<link [[默许|Bus Comply]]>><<trauma 6>><<stress 6>><<sub 1>><</link>><<gtrauma>><<gstress>>
+						<br>
+						<<link [[拒绝|Bus Refuse]]>><<def 1>><</link>>
+						<br>
+					<</if>>
+				<<else>>
+					你坐的巴士到达了目的地。
+					<<destination5>>
+				<</if>>
+			<<else>>
+				<<generate1>><<generate2>>公交车上的<<people>>似乎挤在你周围。有些人甚至把座位移得更近。
+				<br><br>
+				<<if Time.dayState is "night">>
+					公共汽车接近你的目的地，但没有减速。你想过去告诉司机，但一位<<person1>><<person>>挡住了你的去路。"这么快就要走了？"一位<<person2>><<person>>从后面抓住你。"有没有人告诉过你不要在晚上闲逛。"
+					<br><br>
+					<<link [[继续|Bus Seat Rape]]>><<set $molestationstart to 1>><</link>>
+					<br>
+				<<else>>
+					公共汽车到达了你的目的地。当你走在过道上时，<<person1>><<person>>抓住你的手臂。"别急着这么快走，留下来多跟我们玩玩嘛，"你挣扎着从<<he>>手上获得自由，离开公交车，只听见身后的笑声：<<catcall>>
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+					<<endevent>>
+					<<destination5>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		你坐的巴士到达了目的地。
+		<<destination5>>
+	<</if>>
+<</if>>

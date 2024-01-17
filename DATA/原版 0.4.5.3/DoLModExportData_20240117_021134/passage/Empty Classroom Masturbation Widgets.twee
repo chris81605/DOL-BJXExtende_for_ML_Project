@@ -1,0 +1,83 @@
+:: Empty Classroom Masturbation Widgets [widget]
+<<widget "emptyClassroomMasturbationIntro">>
+	<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+		走廊里通常充满了人们走路和说话的声音，现在却一片寂静。
+		<<set _exhibLevel to 2>><<set _exhibNeeded to 15>>
+		<<if $exhibitionism gte _exhibNeeded>>
+			<br><br>
+
+			<span class="lewd">一个下流的想法在你脑海里浮现。</span>
+			<<if $exposed gte 2>>
+				既然你已经赤身裸体了，也许可以再进一步。
+			<<else>>
+				如果你在这间空教室里找点乐子，没人会注意到的，对吧？
+			<</if>>
+		<</if>>
+	<<elseif ["morning", "lunch", "afternoon"].includes($schoolstate)>>
+		你仍能听到走廊里传来的闷响。
+		<<if $schoolstate is "morning">>
+			现在已经来了不少人了，学生们正互相打着招呼。不过，应该还有一会儿才会有人进来。
+		<<elseif $schoolstate is "lunch">>
+			走廊里的人很多，学生们正彼此交谈着什么。不过，应该还有一会儿才会有人进来。
+		<<else>> <!-- afternoon -->
+			走廊里来往的人很多，学生们正互相道别回家。不过，现在应该不会有人再进来了。
+		<</if>>
+		<<set _exhibLevel to 3>><<set _exhibNeeded to 35>>
+		<<if $exhibitionism gte _exhibNeeded>>
+			<br><br>
+
+			<span class="lewd">一个下流的想法在你脑海里浮现。</span>
+			虽然很冒险，但你也许可以在
+			<<if $schoolstate is "morning">>开始上课<<elseif $schoolstate is "lunch">>午餐结束<<else>>学校关门<</if>>之前找点乐子。
+		<</if>>
+	<</if>>
+
+	<br><br>
+	<<if $exhibitionism gte _exhibNeeded>>
+		<<if $exposed gte 2>>
+			<<link [[自慰|Empty Classroom Masturbation]]>><<set $masturbationstart to 1>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+		<<else>>
+			<<link [[脱光|Empty Classroom Strip]]>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "emptyClassroomCaughtOrgasm">>
+	<<if $arousal gte 9000>>
+		惊吓让你心跳加速，最终把你推向高潮<<if $masturbationorgasm gte 1>>，而且也是最后一次<</if>>。
+		<<orgasm>><<set $masturbationorgasm += 1>>
+	<</if>>
+<</widget>>
+
+<<widget "emptyClassroomMasturbationDescription">>
+	<<set $_caught to _args[0]>> /* true or false */
+	<<set $_stood to ($_caught ? "站" : "曾站")>>
+	<<if _masturbation_semen gt 0>>
+		<<if _masturbation_semen gte 1000>>
+			你的精液覆盖了课桌，形成了一个大池子和无数条痕迹，这些痕迹都指向你$_stood的地方。<<if !$_caught>>人们很难相信这一切都是来自同一个人。<</if>>
+		<<elseif _masturbation_semen gte 500>>
+			你的精液落在了许多课桌上，留下了大量的痕迹，这些痕迹都指向你$_stood的地方。<<if !$_caught>>人们很难相信这一切都是来自同一个人。<</if>>
+		<<elseif _masturbation_semen gte 250>>
+			你的精液落在了离你$_stood的很远的地方，沿途覆盖了多张桌子。
+		<<elseif _masturbation_semen gte 100>>
+			靠近你的那张桌子上满是你的精液。
+		<<else>>
+			前面的桌子上也沾上了一点你的精液。
+		<</if>>
+	<</if>>
+
+	<<if _masturbation_milk gt 0>>
+		<<if _masturbation_milk gte 1000>>
+			你的乳汁喷射在了前面的桌子上，这个量多到即使你后面的桌子也被溅到也不会让你惊讶了。
+		<<elseif _masturbation_milk gte 500>>
+			你前面的那张桌子上满是你的乳汁。
+		<<elseif _masturbation_milk gte 250>>
+			你的奶水溅射到了前面的几张桌子上。
+		<<elseif _masturbation_milk gte 100>>
+			离你$_stood的地方最近的那张桌子溅上了你的乳汁。
+		<<else>>
+			你的乳汁滴落在了你$_stood的地方旁边的桌子上。
+		<</if>>
+	<</if>>
+<</widget>>

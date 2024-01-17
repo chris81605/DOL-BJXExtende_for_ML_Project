@@ -1,0 +1,71 @@
+:: Widgets Mason [widget]
+<<widget "mason_actions">>
+	<<if $mason_pond is undefined and $NPCName[$NPCNameList.indexOf("Mason")].love gte 30>>
+		<<set $mason_pond to 1>>
+		"这里的地下有很多水，"梅森说道，"事实上，宅邸街下面就有一条小溪。我一直想在那里买套房子，这样就能建一座自己的泉水池了。"
+		<br><br>
+		<<He>>突然哗啦一声坐起身，"你就住在宅邸街，对吧？"<<he>>问道，然后又坐回了水中。"修泉水池的价格不菲。而且你需要得到监护人的许可。不过还是值得考虑的。"
+		<br><br>
+	<</if>>
+	<<if Time.dayState is "night">>
+		最后一缕阳光在树叶间消逝。梅森站起身。"如果我们在这里待得太久，我们会着凉的，"<<he>>说道，"天黑后森林会很危险。让我送你回家吧。"
+		<br><br>
+
+		<<for _active_clothes range Object.keys($store)>>
+			<<for _i to 0; _i lt $store[_active_clothes].length; _i++>>
+				<<if $store[_active_clothes][_i].location is "lakeshore">>
+					<<set _temp_clothes_present to 1>>
+					<<break>>
+				<</if>>
+			<</for>>
+		<</for>>
+
+		<<if _temp_clothes_present is 1>>
+			<<link [[换好衣服，然后和梅森一起回家 (0:40)|Mason Walk]]>><<pass 40>><<storeon "lakeshore">><<set $masonDressed to true>><</link>>
+			<br>
+		<</if>>
+
+		<<link [[和梅森一起走回家 (0:30)|Mason Walk]]>><<pass 30>><</link>>
+		<br>
+		<<link [[说你自己能行|Mason Walk Refuse]]>><</link>>
+		<br>
+	<<elseif playerChastity() and $worn.genitals.origin is "Winter" and C.npc.Mason.chastityKeyCarried and !$daily.masonChastityRemovalDeclined
+		and getVisibleClothesList().find(o => o === V.worn.genitals) and (C.npc.Mason.love gte 10 or C.npc.Mason.lust gte 15)>>
+		<<include "Mason Chastity Prompt">>
+	<<else>>
+		<<link [[聊天 (0:30)|Mason Pond Chat]]>><<npcincr Mason love 1>><<pass 30>><<stress -6>><</link>><<glove>><<lstress>>
+		<br>
+		<<link [[调情 (0:30)|Mason Pond Flirt]]>><<pass 30>><<npcincr Mason love -1>><<npcincr Mason lust 1>><</link>><<promiscuous1>><<llove>><<glust>>
+		<br>
+		<<link [[离开|Lake Waterfall]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "mason_greet">>
+	<<if $NPCName[$NPCNameList.indexOf("Mason")].love gte 30>>
+		"很高兴见到你，"<<he>>笑着说道，"我喜欢有人陪伴。"
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].love gte 10>>
+		"我一直想着能不能遇见你，"<<he>>冲你打招呼。
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].love gte -10>>
+		"嘿，"<<he>>说。
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].love gte -30>>
+		"你有什么事吗？"<<he>>问道。
+	<<else>>
+		"请不要打扰我，"<<he>>说道。
+	<</if>>
+<</widget>>
+
+<<widget "mason_greet_lust">>
+	<<if $NPCName[$NPCNameList.indexOf("Mason")].lust gte 30>>
+		"请，请穿上衣服，"<<he>>说着，挪动着身体似乎要隐藏什么。
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte 10>>
+		"你应该穿上一些衣服，"<<he>>说道，"如果被人看到，其他人可能会对我们产生误会的。"
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte -10>>
+		"你应该穿上一些衣服，"<<he>>说道。
+	<<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte -30>>
+		"那不是向你的老师展示你自己的正确方式，"<<he>>说道。
+	<<else>>
+		<<He>>无奈地叹了口气。
+	<</if>>
+<</widget>>

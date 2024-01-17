@@ -1,0 +1,39 @@
+:: Elk Compound Possessed Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>><<set $noAdmire to true>><<set $noBodyWriting to true>>
+	<<if $compoundWraith is "willing">>
+		"<span class="wraith">让我来处理这些，让我来处理他们，</span>"你的声音低语着。
+	<<else>>
+		"<span class="wraith">陷得深点，再深一点，</span>"你的声音讥笑着。
+	<</if>>
+	<<if !$wraith.will>>
+		<<set $wraith.will to random(1300, 1700)>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+<<if _resist gte 1 and $compoundWraith is "willing">>
+	<<set $finish to 1>>
+	<span class="black">在你的抵抗下，那个苍白的身影闪过一阵困惑。</span>
+	<br><br>
+<<elseif _resist gte 1 and $compoundWraith is "accepted">>
+	<<set $compoundWraith to "resisted">>
+	<span class="black">在你的反抗下，那个苍白的身影闪过一丝轻蔑。</span>
+	<br><br>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or _controlRegain is 1>>
+	<span id="next" class="nextWraith"><<link [[继续|Elk Compound Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next" class="nextWraith"><<link [[继续|Elk Compound Possessed Fight]]>><</link>></span><<nexttext>>
+<</if>>

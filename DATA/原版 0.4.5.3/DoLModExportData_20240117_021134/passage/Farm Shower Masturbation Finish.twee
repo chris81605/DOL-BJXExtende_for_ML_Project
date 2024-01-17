@@ -1,0 +1,27 @@
+:: Farm Shower Masturbation Finish []
+<<effects>>
+<<if random(0,100) gte Math.clamp(108 - ($masturbationorgasm * 4),60,100) and Time.dayState isnot "night">>
+	<<endmasturbation>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>当你站起来的时候，你注意到门开着，脸红了的艾利克斯抓住门把手。
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 20>>
+		<<He>>犹豫了一下，然后上前一步，关上身后的门。"你看起来在那儿玩得很开心，我可以加入吗？"<<he>>说，把你推到墙上。
+		<br><br>
+		<<if $promiscuity gte 15>>
+			<<link [[允许|Farm Shower Masturbation Sex]]>><<set $sexstart to 1>><<npcincr Alex dom 1>><<npcincr Alex love 1>><</link>><<gdom>><<glove>>
+			<br>
+		<</if>>
+		<<link [[跑出去|Farm Work]]>><<clotheson>><<npcincr Alex lust 5>><<endevent>><</link>><<gglust>>
+	<<else>>
+		<<He>>犹豫了一下，然后关上了门。你起来洗漱，直到你再次变得干干净净。<<wash>>
+		<br><br>
+		<<link [[继续|Farm Work]]>><<clotheson>><<npcincr Alex lust 2>><<endevent>><</link>><<glust>>
+		<br>
+	<</if>>
+<<else>>
+	<<endmasturbation>>
+	<<endcombat>>
+	你起来洗，直到干干净净。<<wash>>
+	<br><br>
+	<<link [[继续|Farm Work]]>><<clotheson>><</link>>
+<</if>>

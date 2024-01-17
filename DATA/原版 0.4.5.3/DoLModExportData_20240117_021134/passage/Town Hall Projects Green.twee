@@ -1,0 +1,44 @@
+:: Town Hall Projects Green []
+<<effects>>
+
+<<person1>><<person>>犹豫了一下，"好像得去环境部？"<<he>>没有特别问谁，"对，左边第二个门。"
+<br><br>
+<<endevent>>
+<<generate1>><<person1>>
+你跟着引导进入一个小房间，一个<<person>>盯着显示屏，没发现你的到来。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "打扰一下，"你开口道。
+<<elseif $speech_attitude is "bratty">>
+    "哟，"你喊道。
+<<else>>
+    "你好，"你问好道。
+<</if>>
+<br><br>
+
+听到你的声音，<<He>>跳了起来，脸上露出一丝畏惧，见到是你才松了一口气，"抱歉，"<<him>>说，"我以为是别人，可以为你做什么？"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "学校里长了一片野草，"你抱怨道，"太丑了，我想让那里保持整洁。"
+<<elseif $speech_attitude is "bratty">>
+    "学校那长了一大片野草，"你解释道，"我想清理掉它们。"
+<<else>>
+    "学校里长了片野草，"你说，"太丑了，我打算砍掉它们，清出空地给学生。"
+<</if>>
+<br><br>
+
+"我们没有多的劳动力，"<<he>>说，"而且也没有资金去保持道路整洁，至少需要<span class="gold">£30000</span>才能腾出精力去处理这些。"
+<br><br>
+
+<<if $money gte 3000000>>
+    <<link [[支付草地清理费用 (£30000)|Town Hall Projects Green Buy]]>><<set $money -= 3000000>><<set $town_projects.green to 3>><<status 6>><</link>><<ggghope>>
+    <br>
+<<else>>
+    <span class="blue">你手头没有那么多钱。</span>
+    <br>
+<</if>>
+
+<<link [[离开|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

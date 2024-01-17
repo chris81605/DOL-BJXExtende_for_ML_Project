@@ -1,0 +1,73 @@
+:: School Changing Room Strip []
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<set _genderAppearance to $player.gender_appearance is "m" ? "男孩" : "女孩">>
+<<if $phase is 1>>
+	你<<nervously>>脱下你的衣服。有些<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>脸红地别开了视线，但大多数人对此感到些许好奇。一群人聚集在你周围，你很快便完全赤裸了。
+	<<covered>>
+	<br><br>
+<<else>>
+	<<flaunting>>你<<nervously>>脱掉衣服，尽可能多的招摇显摆。许多人脸红地转过头去，但你周围仍然聚集了一群人。你很快就在<<print $changingRoomGender is "boys" ? "他们" : "她们">>的注视下赤身裸体了。
+	<<covered>><<exhibitionism5>>
+<</if>>
+<<strip>>
+
+<<if $player.gender is $player.gender_appearance or playerChastity("hidden")>>
+	<<person>>一把抢走了你的衣服。"如果你还想要它们，"<<he>>瞪着你，"最好照我们说的做。"
+	<br><br>
+	其他<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>喊着给出建议。
+	<<if $worn.neck.collared is 1>>
+		<<person>>无视<<print $changingRoomGender is "boys" ? "他们" : "她们">>，捡起你的皮带。"很好，"<<he>>拍了拍掌心，"该遛狗了，给我趴下。"
+		<br><br>
+		<<link [[跪下 (0:10)|School Changing Room Knees]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[拒绝|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<<else>>
+		"每个人都拿上你的手机，"<<he>>对身边的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>招呼道，"拍的照片越多越好。"接着<<He>>又转了回来，"报应到了，给我趴下。"
+		<br><br>
+		<<link [[俯下身子 (0:10)|School Changing Room Bend]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[拒绝|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $player.penisExist and $player.vaginaExist>>
+	<<if $schoolrep.herm gte 5 and !$worn.face.type.includes("mask")>>
+		当你露出<<genitals_are>>时，<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>们一下子兴奋了起来。"我就知道！"那人伸手去抢你的衣服。"你就是学校里的那个怪胎！"
+		<br><br>
+	<<elseif $schoolrep.herm gte 3 and !$worn.face.type.includes("mask")>>
+		在看到了你的<<genitals>>后，<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>们突然激动了起来。"没错的，"那个<<person>>伸手抢走了你的衣服。"你就是那个传闻中的怪胎！真是难以置信。"
+		<br><br>
+	<<else>>
+		<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>们目瞪口呆地看着你的<<genitals>>，吓得说不出话来。<<person>>首先从震惊中回过神来。"你真是个拐人，"<<he>>的手臂颤抖着，一把抢过你的衣服。
+		<br><br>
+	<</if>>
+	<<if $promiscuity gte 35>>
+		<<link [[引诱|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [[承认你天生如此|School Changing Room Crossdress Honest]]>><</link>>
+	<br>
+	<<link [[归咎于一个诅咒 (0:05)|School Changing Room Herm Explain]]>><<set $phase to 0>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<link [[归咎于奇怪的科学实验 (0:05)|School Changing Room Herm Explain]]>><<set $phase to 1>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<schoolrep herm 1>>
+<<else>>
+	<<if $schoolrep.crossdress gte 5 and !$worn.face.type.includes("mask")>>
+		"所以流言是真的，"<<person>>似乎很满意眼前的景象，"你真是个<<gender>>……所以你为什么要这么做？你是个变态吗？"
+	<<elseif $schoolrep.crossdress gte 3 and !$worn.face.type.includes("mask")>>
+		<<person>>张大了嘴。"你就是我一直听说的那个异装者，"<<he>>难以置信地摇了摇头，"你为什么要这样做？你是变态吗？"
+	<<else>>
+		<<person>>张大了嘴。"你不是个_genderAppearance？"<<he>>难以置信地摇了摇头，"那你为什么穿成这样？"
+	<</if>>
+	<br><br>
+	<<if $promiscuity gte 35>>
+		<<link [[引诱|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [["说你就是喜欢穿" + _genderAppearance +"的服装"|School Changing Room Crossdress Honest]]>><</link>>
+	<br>
+	<<link [[辩解说你是被逼无奈 (0:05)|School Changing Room Crossdress Forced]]>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<schoolrep crossdress 1>>
+<</if>>

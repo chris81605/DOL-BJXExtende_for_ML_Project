@@ -1,0 +1,19 @@
+:: Brothel Vending Machine Buy []
+<<effects>>
+<<if $phase is 1>>
+	你把钱放进了售卖机，然后你取走了一盒从出货口滑出来的3袋装避孕套。
+	<<set $money -= 8000>>
+	<<gcondoms 3>>
+	<<set $brothelVending.condoms -=1>>
+	<<set $brothelVending.condomsSold +=1>>
+	<br><br>
+	<<link [[返回|Brothel Dressing Room]]>><<endevent>><</link>>
+<<else>>
+	你把钱塞进自动售卖机，从出货口滑出了一瓶润滑液。你拿走了它。
+	<<set $money -= 3000>>
+	<<run window.sexShopOnBuyClick(8, false, false, false)>>
+	<<set $brothelVending.lube -=1>>
+	<<set $brothelVending.lubeSold +=1>>
+	<br><br>
+	<<link [[返回|Brothel Dressing Room]]>><<endevent>><</link>>
+<</if>>

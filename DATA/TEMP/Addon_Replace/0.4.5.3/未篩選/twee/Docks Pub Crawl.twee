@@ -1,0 +1,120 @@
+:: Docks Pub Crawl []
+<<set $outside to 0>><<set $location to "pub">><<dockeffects>><<effects>>
+<<set $dockpubcount += 1>>
+<<if Time.hour gte 3 and Time.hour lte 18>>
+
+	你的同事们拍着你的背，称赞着你的吃苦耐劳。散场后踉跄着回家了。
+	<<gcool>><<dockstatus 5>>
+	<br><br>
+
+	<<destinationeventend>>
+
+<<elseif $rng gte 81>>
+	<<generateSailor 1>><<generateSailor 2>><<generateSailor 3>><<generateSailor 4>><<generateSailor 5>><<generateSailor 6>><<person1>>
+	你被你的同事们簇拥着，<<if $drunk gte 360>>蹒跚着<</if>>走进了梅尔街的一家酒吧。酒吧里十分热闹，停泊船只上的水手们都在这里放松。
+	<br><br>
+
+	"十分钟后开始酒吧问答，"老板豪爽地喊着，"赢了的队伍免一轮酒费。"你的同事们立马报了名。水手们对此表示不屑，"你们不可能赢的。"水手中的一个<<person>>说道。你的同事们立马用五花八门的脏话予以回击。
+	<br><br>
+
+	"你们几个小逼崽子还真能吹牛逼啊，"在一番"友好交流"之后，<<person>>说道。<<He>>从口袋里掏出£60，其他水手们也纷纷效仿。"压£360赌我们能赢。"你旁边夸下海口的工人们这下有些犹豫了。
+	<br><br>
+
+	<<if $promiscuity gte 35>>
+		<<link [[用身体做赌注|Docks Pub Crawl Body]]>><<dockstatus 1>><</link>><<promiscuous3>><<gcool>>
+		<br>
+	<</if>>
+	<<if $money gte 6000>>
+		<<link [[跟注 (£60)|Docks Pub Crawl Bet]]>><<set $money -= 6000>><</link>>
+		<br>
+		<</if>>
+	<<link [[什么也不赌|Docks Pub Crawl Quiz Refuse]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[不参与|Docks Pub Crawl Quiz Refuse]]>><<set $phase to 1>><</link>>
+	<br>
+
+<<elseif $rng gte 61>>
+
+	你被你的同事们簇拥着，<<if $drunk gte 360>>蹒跚着<</if>>走进了丰收街的一家酒吧。一些满脸横肉的顾客上下打量着你。
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<generate1>><<person1>>一名<<person>>坐在了你身边，把手放在了你的大腿上。"要不要陪我单独玩一会？"<<he>>说。
+		<br><br>
+
+		<<link [[接受|Docks Pub Crawl Sex]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
+		<br>
+		<<link [[拒绝|Docks Pub Crawl Sex Refuse]]>><</link>>
+		<br>
+	<<else>>
+		你们一起喝了几轮酒，完全无视了其他顾客们邪恶的目光。然后一起离开了。
+		<br><br>
+
+		<<dockpuboptions>>
+	<</if>>
+
+<<elseif $rng gte 41>>
+
+	你被你的同事们簇拥着，<<if $drunk gte 360>>蹒跚着<</if>>走进了倒钩街的一家酒吧。
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		你听到一名码头工人正在讨论你的话题。<<generate1>><<person1>>"你确定那个小<<girl>>受得了？"<<he>>说。"<<pshe>>真能喝吗？我可不想被人家家长找麻烦。"
+		<br><br>
+
+		<<link [[拼酒|Docks Pub Crawl Contest]]>><<dockstatus 1>><<set $phase to 0>><</link>><<gcool>>
+		<br>
+		<<link [[保持沉默|Docks Pub Crawl Silent]]>><<dockstatus -1>><</link>><<lcool>>
+		<br>
+
+	<<else>>
+		并没有人注意到你和其他码头工人们。你们喝了几轮酒，一起离开了。
+		<br><br>
+
+		<<dockpuboptions>>
+	<</if>>
+
+<<elseif $rng gte 21>>
+
+	你被你的同事们簇拥着，<<if $drunk gte 360>>蹒跚着<</if>>走进了康努达塔斯街的一家酒吧。
+	<br><br>
+
+	<<generate1>><<generatep2>><<person2>>你注意到一个码头工人正盯着房间另一边的<<person>>。
+	<br><br>
+
+	<<link [[鼓励|Docks Pub Crawl Eyeing Encourage]]>><</link>>
+	<br>
+	<<link [[无视|Docks Pub Crawl Eyeing Ignore]]>><</link>>
+	<br>
+
+<<else>>
+
+	你被你的同事们簇拥着，<<if $drunk gte 360>>蹒跚着<</if>>走进了商业街的一家酒吧。
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		你吸引了人们的注意。有的顾客试图与你调情。
+		<br><br>
+
+		<<link [[调情|Docks Pub Crawl Flirt]]>><</link>><<promiscuous1>>
+		<br>
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			<<link [[挑逗|Docks Pub Crawl Tease]]>><</link>><<exhibitionist1>>
+			<br>
+			<</if>>
+		<<link [[无视|Docks Pub Crawl Flirt Ignore]]>><</link>>
+		<br>
+
+	<<else>>
+
+		并没有人注意到你和其他码头工人们。你们喝了几轮酒，一起离开了。
+		<br><br>
+
+		<<dockpuboptions>>
+
+	<</if>>
+
+<</if>>

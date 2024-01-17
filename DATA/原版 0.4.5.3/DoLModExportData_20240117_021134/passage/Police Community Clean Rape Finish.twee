@@ -1,0 +1,63 @@
+:: Police Community Clean Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"差不多值回票价了，"<<person>>一边说，一边穿好<<his>>的衣服。"回头见，婊子。"
+	<br><br>
+	<<tearful>>你跟着他们回到了街上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<loadNPC 0 "community_police">>
+	<<loadNPC 1 "community_criminal">>
+	<<person1>>
+	<<clearNPC "community_police">>
+	<<clearNPC "community_criminal">>
+	<<link [[继续|Police Community Clean Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	你把<<person1>><<person>>推到墙上，并在冲回街道时躲开了另外两个人。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	罪犯跟在你后面，但当他们从巷子里冲出来时引起了警察的注意，于是便决定不要干得太过火。<<tearful>>你回到了工作岗位。
+	<br><br>
+	<<loadNPC 0 "community_police">>
+	<<loadNPC 1 "community_criminal">>
+	<<person1>>
+	<<clearNPC "community_police">>
+	<<clearNPC "community_criminal">>
+	<<link [[继续|Police Community Clean Work]]>><</link>>
+	<br>
+
+<<else>>
+	<<set $rescued += 1>>/*Unnecessary if rescue is impossible*/
+	"你他妈的在干什么？"警察在巷口说道。<<person1>><<person>>和<<his>>的同事远离你。"这个荡妇在卖<<pherself>>，"<<he>>结结巴巴地说道。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<loadNPC 0 "community_police">>
+	<<loadNPC 1 "community_criminal">>
+	<<person1>>
+	<<clearNPC "community_police">>
+	<<clearNPC "community_criminal">>
+	<span class="red">"这又计一天的社区服务，"</span>警官说道。"你们所有人，滚回队伍里。"
+	<br><br>
+	<<set $community_service += 1>>
+
+	<<if $speech_attitude is "meek">>
+		害怕情况恶化，你拿起你的垃圾棒，继续工作。
+	<<elseif $speech_attitude is "bratty">>
+		你把怨气憋在心里，拿起你的垃圾棒，然后继续工作。
+	<<else>>
+		不想把事闹大，你拿起你的垃圾棒，继续工作。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Police Community Clean Work]]>><</link>>
+	<br>
+<</if>>

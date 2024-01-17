@@ -1,0 +1,42 @@
+:: History Lesson Daydream []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $trauma gte (($traumamax / 10) * 7)>>
+	你一个人安静地待着，担心轻举妄动会引起整个班级的嘲弄。
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	你沉浸于自己的思绪，试图远离不断蔓延的焦虑感。
+<<else>>
+	你并没有集中注意力上课，而是懒洋洋地看着窗外，思考着放学后要做些什么。
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	下课铃响起，课程结束了。你
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		拿上你的外套然后
+	<</if>>
+	离开了教室。
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[继续|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[继续|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure / 2))>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>

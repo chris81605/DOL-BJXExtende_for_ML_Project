@@ -1,0 +1,98 @@
+:: Canteen Lunch Fight Finish []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<His>>的朋友们笑了。"是不是这个小混蛋让你射了？"
+	<br><br>
+
+	"不、不是的，"<<he>>辩解，脸跟着变红了。其他霸凌者们觉得这很有趣，他们忘记了罗宾继续讨论这个话题。
+	<br><br>
+
+	<<endevent>><<npc Robin>><<person1>>
+
+	罗宾的手臂从背后抱住你。"你救了我，"<<he>>说，"我的英雄。"你也觉得脸红了。
+	你边吃边坐着和罗宾聊天。"我去教室里等着，"你吃完后，<<he>>说，"我不喜欢迟到。"
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>><<pass 20>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+
+	"哎哟，痛死了，"<<he>>说道，"我得去找护士。"<<him>>离开食堂时，<<he>>的朋友们边取笑<<him>>边跟着离开了。
+	<<tearful>>但还是得意地站起身来。
+	<<ltrauma>><<lstress>><<gcool>><<trauma -6>><<stress -12>><<status 1>>
+	<br><br>
+
+	<<endevent>><<npc Robin>><<person1>>
+
+	罗宾的手臂从背后抱住你。"你救了我，"<<he>>说，"我的英雄。"你觉得脸红了。
+	你边吃边坐着和罗宾聊天。"我去教室里等着，"你吃完后，<<he>>说，"我不喜欢迟到。"
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>><<pass 20>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<person1>><<person>>突然被
+	<<print either(
+		"一罐汽水砸到。",
+		"空托盘砸到。",
+		"数学课本砸到。",
+		"一盒牛奶砸到。",
+		"吃了一半的糕点砸到。",
+		"一团土豆泥砸到。"
+	)>>
+	"喂！谁扔的？"<<he>>质问四周。但当<<him>>看到惠特尼和<<nnpc_his "Whitney">>的手下时，<<His>>的愤怒变成了恐慌。<<Hes>>迅速跑出了食堂。<<status 1>><<gcool>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Robin>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 10>>
+		罗宾的手臂从背后抱住你。<<He>>抽泣着，"我、我好怕。"你把<<him>>扶回了桌子上，抱着<<him>>直到<<he>>平静下来。<<stress 6>><<gstress>><<npcincr Robin dom -1>><<ldom>>
+	<<else>>
+		罗宾扶你站起来。"你还好吗？"<<he>>问道。
+		<<if $robinromance is 1>>
+			"我从没见惠特尼这么生气过。"一阵尴尬的沉默。罗宾看起来好像有什么话要说，但最后<<he>>还是默默回到了桌子边。<<npcincr Robin dom -1>><<ldom>>
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 80>>
+			"我希望惠特尼不要老是在你身边晃悠，"<<him>>叹了口气，"<<nnpc_He "Whitney">>这次帮我们摆脱了麻烦，但<<nnpc_hes "Whitney">>并不总是那么好。"<<He>>捏着你的肩膀。"只是……小心点。"
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+			"惠特尼很可怕。你确定要……"<<He>>停下来摇摇头，"你很安全，这才是最重要的。"
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
+			"我从没见惠特尼这么生气过。"<<He>>皱着眉头沉思着，最后露出了柔和的微笑，"我想每个人都有弱点。"<<He>>笑着顽皮地戳了你一下。
+		<<else>>
+			"我从没见惠特尼这么生气过。<<nnpc_He "Whitney">>一定很喜欢你。"<<He>>咯咯地笑，"有什么问题吗？每个人都在谈论这件事！"
+		<</if>>
+	<</if>>
+	<<endevent>>
+	<br><br>
+
+	你边吃边坐着和罗宾聊天。"我去教室里等着，"<<nnpc_he "Robin">>在你吃完时说，"我不喜欢迟到。"
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>><<pass 20>>
+	<br><br>
+<<else>>
+
+	你倒在地上，因为受伤了失去了战斗能力。
+	"没错，"<<person1>><<person>>说，"像个贱货一样给我趴地上吧。"<<He>>和<<his>>的朋友们边哄笑着离开了食堂。
+	<<lcool>><<status -10>>
+	<br><br>
+
+	<<endevent>><<npc Robin>><<person1>>
+
+	罗宾的手臂从背后抱住你。
+	"你救了我，"<<he>>说，"我的英雄。"你脸红了。你继续坐下来和罗宾一边聊天，一边吃饭。
+	"我去教室里等着，"你吃完后<<he>>说，"我不喜欢迟到。"
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>><<pass 20>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<br><br>
+<<link [[继续|Canteen]]>><</link>>

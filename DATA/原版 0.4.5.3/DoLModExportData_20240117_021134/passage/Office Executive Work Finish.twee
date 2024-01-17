@@ -1,0 +1,55 @@
+:: Office Executive Work Finish []
+<<effects>>
+<<tiredness 5>>
+你完成了工作，回到<<person1>><<person>>那里。
+<br>
+<<if $execFight is 0>>
+	<<if $stripCount isnot 0>>
+		<<set $tipTotal to (6 * $stripCount)>>
+	<<else>>
+		<<set $tipTotal to 5>>
+	<</if>>
+	"你干得不错，"<<he>>边说边递给你小费。<<assignmenttip $tipTotal>>"效率又高又听话，我喜欢这种临时工。"
+	<br>
+	<<if $execFetish is 1 and $stripCount isnot 0>>
+		<<set $execSell to (200 * $officeFloor)>>
+		<<He>>想把鞋子递给你，但犹豫了一下。"如果你让我留着这些，我就额外给你<span class="gold"><<printmoney $execSell>></span>。"
+		<br><br>
+		<<link [[接受|Office Executive Sell]]>><</link>>
+		<br>
+		<<link [[拒绝|Office Executive Sell Decline]]>><</link>>
+	<<elseif $stripCount isnot 0>>
+		<<set $execSell to (1500 * $officeFloor) * ($stripCount / 3)>>
+		<<if $stripCount is 1>>
+			<<He>>开始把衣服递给你，但犹豫了一下。"如果你让我留着这个，我就额外给你<span class="gold"><<printmoney $execSell>></span>。"
+		<<else>>
+			<<He>>开始把衣服递给你，但犹豫了一下。"如果你让我留着这些，我就额外给你<span class="gold"><<printmoney $execSell>></span>。"
+		<</if>>
+		<<if $exposed gte 1>>
+			<<He>>笑了，<<he>>的眼睛紧盯着你的<<lewdness>>。"别担心，我会给你穿的。"
+		<</if>>
+		<br><br>
+		<<link [[接受|Office Executive Sell]]>><</link>>
+		<br>
+		<<link [[拒绝|Office Executive Sell Decline]]>><</link>>
+	<<else>>
+		<<completeassignment>>
+	<</if>>
+<<else>>
+	"对于一个不听话的小混蛋来说，这是一份不错的工作，"<<he>>抱怨道。
+	<br>
+	<<rng>>
+	<<if $rng gte (80 - $officeFloor)>>
+		"不过，不要以为工作做得好就可以弥补你对上级的不服从。像你这样的小混蛋，他们的衣服是不能留着的。"<<He>>朝你扔围裙。"这是你应得的。现在滚出我的办公室。"
+		<<stealclothes>>
+		<<clotheson>>
+		<<pass 60>>
+		<br><br>
+		<<link [[继续|Office Streak]]>><</link>>
+	<<else>>
+		<<He>>把你的衣服扔向你。"滚出我的办公室，下次要学会服从你的上司。"
+		<br>
+		<<clotheson>>
+		<<completeassignment>>
+	<</if>>
+<</if>>

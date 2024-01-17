@@ -1,0 +1,26 @@
+:: Prison Spire Work Get []
+<<effects>>
+
+<<if $prison.birds gte random(1, 30) and random(1, 5) isnot 5>>
+	你靠近<<beasttype>>。<<bHe>>观察着你。然后，腾空而起，<span class="green">把$hawk_loot留在了身后。</span>
+	<br><br>
+	<<endevent>>
+	<<generate_anxious_guard 0>>
+	你把$hawk_loot还给了<<anxious_guard 0>>。"看来情况还不算太糟，"<<person1>><<he>>说道。<<glove>><<lsuspicion>><<prison_rep anxious 1>><<prison_guards 1>>
+	<br><br>
+	<<unset $hawk_loot>>
+	<<prison_spire_options>>
+<<else>>
+	你靠近那只<<beasttype>>。<<bHe>>注意到了你，然后用翅膀围住了$hawk_loot。
+	<<if $monster is 1>>
+		"我保管，"<<bhe>>说道，"回到主人那里去。"<<bHe>>的语气听起来很焦虑。
+	<<else>>
+		<<bHe>>尖声大叫，看起来十分焦虑。
+	<</if>>
+	<br><br>
+
+	<<link [[安抚|Prison Spire Work Soothe]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+	<<link [[放弃|Prison Spire Work Give Up]]>><<prison_birds 1>><<prison_guards -1>><</link>><<gsuspicion>><<prison_birds_text>>
+	<br>
+<</if>>

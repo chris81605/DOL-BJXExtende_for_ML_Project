@@ -1,0 +1,35 @@
+:: Brothel Punishment Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $punishmentposition is "wall">>
+		<<set $position to "wall">>
+		<<set $enemyhealthmax to 1000>><<set $enemyhealth to 1000>>
+		<<else>><!-- Gloryhole outcome with $punishmentposition = "gloryhole" -->
+		<<npcoral>>
+		<<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
+		<<set $enemyarousal to $enemyarousalmax - 100>>
+		<<set $NPCList[0].lefthand to "none">>
+		<<set $position to "doggy">>
+		<<set $NPCList[0].righthand to "none">>
+		<<set $NPCList[0].mouth to "none">>
+	<</if>>
+<</if>>
+<<set $enemyarousal += 10>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $penisbitten is 1>>
+	<span id="next"><<link [[继续|Brothel Punishment Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Punishment Molestation]]>><</link>></span><<nexttext>>
+<</if>>

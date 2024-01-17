@@ -1,0 +1,59 @@
+:: Avery Hotel Morning []
+<<set _autosavehere to true>>
+<<sleep true>><<effects>>
+<<sleepeffects>>
+<<averyscore>>
+<<storeon "averyhotel">>
+<<wakingEffects true>>
+<<if _wakingEffect is "dryheaving">>
+	你睡得很安稳，但你现在有些许不舒服。
+	<br><br>
+	"我想昨晚对你来说太难熬了。至少你把心里的忧愁都抒发掉了，"艾弗里说。
+<<else>>
+	<<if _wakingEffect isnot undefined>>
+		看着艾弗里
+	<<else>>
+		你醒来时艾弗里
+	<</if>>
+	已经穿好衣服，你的<<if $worn.upper.set is $worn.lower.set>>$worn.upper.cn_name_cap<<else>>$worn.upper.cn_name_cap和$worn.lower.cn_name_cap<</if>>放在床脚，叠得整整齐齐。"早上好，<<pcpetname "Avery">>。"
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"早……早上好，"
+	<<elseif $speech_attitude is "bratty">>
+		"早上好，可人儿，"
+	<<else>>
+		"早安，"
+	<</if>>
+	你说。
+<</if>>
+<<endevent>><<npc Avery>><<person1>>
+你伸手去拿衣服。<<He>>迅速把它们从你身边拿走，然后调皮地扔回给了你。
+<br><br>
+
+<<if $endear gte 60>>
+"昨晚太棒了，谢谢你能顺着我的意思来，"<<he>>说。
+<<elseif $endear gte 30>>
+"谢谢你让我度过了愉快的夜晚，"<<he>>说。
+<<else>>
+"快点穿好衣服，"<<he>>说，"出去的时候别让我难堪。"
+<</if>>
+<br><br>
+
+<<He>>收拾好<<his>>的东西，拿走了房间钥匙。<<He>>把你带到大堂，然后回到了已经在大堂门口准备好了的车上。当<<he>>开车送你回家时，你回头看了一眼酒店。
+<br><br>
+<<storeon "averyCar" "check">>
+<<if _store_check is 1>>
+	<<storeon "averyCar">>
+	你穿上放在后座上的外套。
+	<br><br>
+<</if>>
+回到孤儿院后<<he>>打开<<his>>鼓鼓的<<wallet>>从里面拿出了一叠现金。<<He>>拿着<span class="gold">£<<print ($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10)>></span>。"给自己买点好东西，我请客。"
+<br><br>
+
+你伸手去拿钱，但<<he>>却把钱拿开了。"首先，"<<he>>微笑着用手点了点<<his>>的嘴唇。
+<br><br>
+
+<<link [[亲吻|Avery Hotel Kiss]]>><<npcincr Avery love 1>><</link>><<glove>>
+<br>
+<<link [[拒绝|Avery Hotel Kiss Refuse]]>><</link>>
+<br>

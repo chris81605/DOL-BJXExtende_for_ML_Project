@@ -1,0 +1,103 @@
+:: Dance Job Party Intermission []
+<<effects>>
+<<pass 30>>
+
+<<if $phase is 2 and !$dance_job_exhib>>
+	<<set $dance_job_exhib to true>><<dance_job_interest 10>>
+	伴随着音乐声的散去，你走下餐桌时发现自己成了众人瞩目的焦点。
+	<<exhibitionism5>>
+<<elseif $phase is 1 and !$dance_job_exhib>>
+	<<set $dance_job_exhib to true>><<dance_job_interest 5>>
+	尽管聚会的大部分注意力都在别处，但当你从桌子上走下来时，还是有几个客人色眯眯地盯着你。
+	<<exhibitionism3>>
+<</if>>
+
+<<dance_job_text>>
+
+<<if $timeStamp gte $dance_job_time>>
+	聚会似乎已步入尾声，一个<<generate1>><<person1>><<person>>向你走来。"感谢你的到来，"<<he>>说道。"你真的把气氛带起来了，这是你的报酬。"<<He>>递给你一沓现金。
+	<<if $dance_job_interest gte 100>>
+		<span class="green">"这是额外的小费。"</span><<He>>眨眨眼。你得到了<<moneyGain 500>>。
+		<<earnFeat "Life of the Party">>
+	<<else>>
+		你得到了<<moneyGain 300>>。
+	<</if>>
+	<br><br>
+
+	<<silently>><<clotheson>><</silently>>
+
+	<<if $exposed gte 1>>
+		你挥手道别，然后离开大楼。<<He>>在你离开前递给了你一条毛巾。"可不能让你感冒了。"
+		<<towelup>>
+		<br><br>
+	<<else>>
+		你挥手道别，然后离开了大楼。
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Domus Street]]>><<endevent>><<dance_job_end>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $dance_job_interest lte 0>>
+	<<generate1>><<person1>>一个<<person>>向你走来。"真遗憾，"<<he>>说，"一切都搞砸了，但还是谢谢你能来。"<<He>>指向门。
+	<br><br>
+
+	<<link [[离开|Dance Job Party Intermission Leave]]>><</link>>
+	<br>
+	<<if $submissive lte 500>>
+		<<link [[索要报酬|Dance Job Party Demand]]>><<def 1>><</link>><<defianttext>>
+		<br>
+	<</if>>
+<<else>>
+	聚会还在继续。
+	<<if $rng gte 81>>
+		<<generate1>><<person1>>一个<<person>>喝多了，被送出去了。<<endevent>>
+	<<elseif $rng gte 61>>
+		<<if $weather is "rain">>
+			本地有一段短暂的干旱期，后花园亦是如此，而今雨季再次到来，此地也重新焕发生机。
+		<<else>>
+			有些人在花园里闲逛，那边空间更大。
+		<</if>>
+	<<elseif $rng gte 41>>
+		你注意到两个人偷偷去了楼上。
+	<<elseif $rng gte 21>>
+		酒水即将告罄。<<generate1>><<person1>><<person>>又出去取了些回来。<<endevent>>
+	<<else>>
+		有人打翻了桌子，把饮料洒得到处都是。清理工作随之展开。
+	<</if>>
+	<br><br>
+	<<if $exposed gte 2 and $dance_job_bunny isnot 1>>
+		<<set $dance_job_bunny to 1>>
+		一个<<generate1>><<person1>><<person>>向你走来。<<He>>红着脸不敢与你对视，结果却低头看向你的身体。最后<<he>>干脆闭上了眼睛。
+		<br><br>
+		"我，我有一些事情要你做，”<<he>>说。“如果你愿意的话。”<<He>>拿出一件衣服。这是一件兔子紧身衣，还有一个装饰着兔子耳朵的发箍。
+		<br><br>
+
+		<<link [[穿紧身衣|Dance Job Party Leotard]]>><<dance_job_interest 3>><</link>><<ginterest>>
+		<br>
+		<<link [[穿上所有衣物|Dance Job Party Wear]]>><<dance_job_interest 5>><</link>><<ginterest>>
+		<br>
+		<<link [[拒绝|Dance Job Party Nothing]]>><<dance_job_interest 10>><</link>><<gginterest>>
+		<br>
+		<<link [[只戴兔耳|Dance Job Party Ears]]>><<dance_job_interest 20>><</link>><<ggginterest>>
+		<br>
+	<<else>>
+		在他们想让你再次登台之前，你可以自由活动。
+		<br><br>
+
+		<<set $skulduggerydifficulty to 400>>
+		/* 北极星模组 */
+		<<link [[偷藏一些食物带给孤儿们|Dance Job Party Food]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+		/* 北极星 */
+		<br>
+		<<link [[闲谈|Dance Job Party Schmooze]]>><</link>><<englishdifficulty 1 1000>>
+		<br>
+		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+			<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+		<<else>>
+			<<link [[喝酒|Dance Job Party Drink]]>><<alcohol 5>><</link>>
+		<</if>>
+		<br>
+		<<link [[吃东西|Dance Job Party Eat]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+<</if>>

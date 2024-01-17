@@ -1,0 +1,80 @@
+:: Bully Oral []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+	<<set _start to true>>
+<</if>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set _start to true>>
+<</if>>
+
+<<if _start>>
+	<<set _whitney to $NPCName[$NPCNameList.indexOf("Whitney")]>>
+	<<if _whitney.dom gte 15>>
+		<<set $position to "missionary">>
+		<<He>>把你踹倒，<<npcUndressText _whitney "lower" "self">>，<<npcRevealText $NPCList[0] "lower">>。<<He>>得意地笑了。
+		<<if $NPCList[0].vagina isnot "none" and ($NPCList[0].penis is "none" or random(0,1))>>
+			<<if $facesitdisable is "f">>
+				"你最好屏住呼吸。"
+				<br><br>
+
+				惠特尼在你的上方将<<his>>的重量往下沉，愉快地坐在你的脸上。<<He>>把你的嘴埋进<<his>>的下体摩擦。
+				<<set $NPCList[0].vagina to "facesit">><<set $NPCList[0].location.genitals to "head">>
+				<<set $mouthuse to "facesit">><<set $mouthstate to "vagina">><<set $mouthtarget to 0>>
+			<<else>>
+				"呆在你该呆的地方。"
+				<br><br>
+
+				<<He>>的膝盖跨过你，同时压着你的肩膀。<<He>>抓着你的头贴近<<his>>的裤裆。
+				<<set $NPCList[0].vagina to "mouth">><<set $NPCList[0].location.genitals to "head">>
+				<<set $mouthuse to "othervagina">><<set $mouthstate to "othervagina">><<set $mouthtarget to 0>>
+			<</if>>
+		<<else>>
+			"呆在你该呆的地方。"
+			<br><br>
+
+			<<He>>的膝盖跨过你，同时压着你的肩膀。<<He>>抓着你的头贴近<<his>>的裤裆。
+			<<npcoral>>
+		<</if>>
+		<<violence 4>>
+	<<else>>
+		<<He>>强迫你跪下，<<npcUndressText _whitney "lower" "self">>，<<npcRevealText $NPCList[0] "lower">>。
+		"嘴巴张大点，"<<he>>说。<<him>>朋友们在旁边起哄。
+		<<npcoral>>
+	<</if>>
+	<<if $consensual>>
+		<<promiscuity4>>
+	<<else>>
+		<br><br>
+	<</if>>
+
+	<<set $NPCList[0].lefthand to "hair">><<set $enemyanger to 70>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Bully Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bully Oral]]>><</link>></span><<nexttext>>
+<</if>>

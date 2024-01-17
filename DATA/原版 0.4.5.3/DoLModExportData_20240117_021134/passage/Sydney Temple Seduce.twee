@@ -1,0 +1,21 @@
+:: Sydney Temple Seduce []
+<<effects>>
+"我堕入了欲望的深渊，我祈求你能帮我解脱。"你低下了头。
+<br><br>
+<<set $seductiondifficulty to 8000 - (($NPCName[$NPCNameList.indexOf("Sydney")].love + $NPCName[$NPCNameList.indexOf("Sydney")].lust) * 15) - $NPCName[$NPCNameList.indexOf("Sydney")].purity>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<<if $seductionrating gte $seductionrequired>>
+	<<He>>看了看周围，神情有些紧张。"你……我或许可以……帮忙。"<<He>>清了清嗓子，随后压低了声音。"作为……一名……<<if $sydney.rank is "initiate">>引导者<<else>><<temple_title "Sydney">><</if>>，我的职责是……帮助那些被罪欲折磨着的人。那里有个房间，我们不会被打扰……如果你愿意的话……"<<npcincr Sydney lust 1>><<npcincr Sydney purity -5>><<gslust>><<llspurity>>
+	<br><br>
+	<<link [[继续|Sydney Temple Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<His>>的脸一下子就红了，结结巴巴似乎想说点什么，但最终什么都没说出来，转过身一溜烟地跑掉了。
+	<br><br>
+	<<sydneySexFail>>
+	<br><br>
+	<<link [[继续|Temple]]>><<endevent>><</link>>
+	<br>
+<</if>>

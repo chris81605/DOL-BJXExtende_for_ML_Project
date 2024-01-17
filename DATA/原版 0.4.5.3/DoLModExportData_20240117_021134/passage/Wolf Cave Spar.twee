@@ -1,0 +1,52 @@
+:: Wolf Cave Spar []
+<<effects>><<beastNEWinit 1 wolf>><<person1>>
+
+你接近猎兽们休息的老地方，为即将到来的狩猎做准备。
+<br><br>
+
+你似乎感觉心中有所领悟，你四肢着地摆出野兽的姿势，露出你的<<if $transformationParts.traits.fangs isnot "disabled">>尖牙<<else>>牙齿<</if>>。
+<br><br>
+
+猎兽者中的一个，一个<<beasttype>>，
+<<if $wolfpackharmony gte 10 and $wolfpackferocity gte 10>>
+	回应了你的呼号，并准备好战斗。
+	<<if $monster is 1>>
+		"<<pPackbrother>>永不后退！"
+	<</if>>
+<<elseif $wolfpackharmony gte 10>>
+	打着哈欠爬起来回应你的挑衅。
+	<<if $monster is 1>>
+		"糟糕的消磨时间方法。"
+	<</if>>
+<<elseif $wolfpackferocity gte 10>>
+	凶恶地跳起来回应你的挑衅。
+	<<if $monster is 1>>
+		"<<pPackbrother>>，你将倒下！"
+	<</if>>
+<<elseif $wolfpackferocity gte 1>>
+	咆哮着走到你身边，回答你的决斗要求。
+	<<if $monster is 1>>
+		"也不是不行。"
+	<</if>>
+<<else>>
+	在躺下之前瞥了一眼你的方向。
+	<<if $monster is 1>>
+		"<span class="red">不能浪费精力。毫无意义。</span>"
+	<<else>>
+		<span class="red"><<bHe>>没有用来决斗的体力。</span>
+	<</if>>
+	<<set _reject to 1>>
+<</if>>
+<br><br>
+
+<<if _reject>>
+	<<link [[继续|Wolf Cave Clearing]]>><</link>>
+<<else>>
+	<<pass 20>><<stress -6>>
+	<<link [[迎头痛击|Wolf Cave Spar 2]]>><<set $phase to 0>><</link>><<physiquedifficulty 2000 $physiquemax>>
+	<br>
+	<<link [[以耐力取胜|Wolf Cave Spar 2]]>><<set $phase to 1>><</link>><<athleticsdifficulty 200 1000>>
+	<br>
+	<<link [["以智胜过" + $NPCList[0].pronouns.him|Wolf Cave Spar 2]]>><<set $phase to 2>><</link>><<dancedifficulty 200 1000>>
+	<br>
+<</if>>

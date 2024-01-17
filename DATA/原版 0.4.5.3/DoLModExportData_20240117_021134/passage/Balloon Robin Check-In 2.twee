@@ -1,0 +1,40 @@
+:: Balloon Robin Check-In 2 []
+<<if ["angry", "appeased"].includes($balloonStand.owner)>>
+	<<if $phase is 0>>
+		“<<print $speech_attitude is "meek" ? "我、我不是故意的！对不起……" : $speech_attitude is "bratty" ? "我错了，好吗？我只是想帮忙，" : "我搞砸了。对不起，">>”你告诉<<person2>><<him>>。
+	<<elseif $phase is 1>>
+		你斥责罗宾，提醒<<person2>><<him>>你已尽全力在帮忙了。<<He>><<print C.npc.Robin.dom gte 80 ? "在你的长篇大论中打断了你" : "在你训斥<<him>>时垂下了头。当你说完后，<<he>>抬起头来">>。
+	<<else>>
+		你闭上了你的嘴。罗宾痛苦地看了你一眼，才又继续说道。
+	<</if>>
+	“我知道这不是你的错，”罗宾说。<<person2>><<He>><<print C.npc.Robin.dom gte 50 ? "凝视着你，<<his>>捏紧了拳头" : "有点无法直视你的眼睛">>。“感谢你的尝试，但是<<print C.npc.Robin.dom gte 50 ? "我可以照顾好自己" : "我觉得你帮倒忙了">>。”<<He>>叹了口气。“我只是……需要一些时间，好吗？”
+	<br><br>
+<<else>>
+	<<if $phase is 0>>
+		“<<print $speech_attitude is "meek" ? "我、我很抱歉……" : $speech_attitude is "bratty" ? "我错了，好吗？" : "我很抱歉，">>”你告诉<<person2>><<him>>。“我只是想帮上忙。”
+		<br><br>
+		“帮谁？<<person1>><<Him>>还是我？”罗宾问。<<person2>><<He>>的声音听起来快要哭出来了。“如果你想帮我，你应该告诉<<person1>><<him>>让人们来找我买饮料，而不是让<<his>>去卖自己的饮料。”
+		<br><br>
+		“我很抱歉，”你无助地重复道。“你说得对，我不应该那样做。我以为或许……”你停下来，摇了摇头。“我不是故意伤害你的。”
+		<br><br>
+		“我知道。”<<person2>><<He>>看着地面。“谢谢你想帮我的忙。”
+	<<elseif $phase is 1>>
+		你对着罗宾提高了音量，斥责了<<him>>的天真。你告诉<<his>>，你是在帮<<him>>，<<print $robinpaid gte 1 ? "如果<<he>>希望能够自食其力，<<he>>需要找一份真正的工作" : "因为仅仅靠卖柠檬水是无法维持生计的">>。等你的话说完，<<hes>>已经泪流满面。
+		<br><br>
+		“我会做得更好，”<<he>>咕哝着，“这样你就不用一直支持我了……”<<He>>需要一些时间来平复<<himself>>的心情。
+	<<else>>
+		你找不到合适的话来说，只能保持沉默。
+		<br><br>
+		罗宾对你的沉默似乎更加难过了。“你甚至不能告诉我原因吗？”<<person2>><<he>>的语调中带着颤音，泪水潸然而下。<<npcincr Robin trauma 5>><<grtrauma>>
+	<</if>>
+	<br><br>
+	最终，罗宾深吸了一口气，咽了咽唾沫。“<<print C.npc.Robin.dom gte 50 ? "我希望你现在就离开" : "拜、拜托，请离开">>，”<<person2>><<he>>说。“我只是……现在想一个人静静。”
+<</if>>
+
+<<He>>回到了<<his>>的摊位上，一直回避着和你眼神接触，直到你离开。
+<br><br>
+
+<<switch $location>>
+	<<case "park">><<link [[继续|Park]]>><<endevent>><</link>>
+	<<default>>	<<link [[继续|Beach]]>><<endevent>><</link>>
+<</switch>>

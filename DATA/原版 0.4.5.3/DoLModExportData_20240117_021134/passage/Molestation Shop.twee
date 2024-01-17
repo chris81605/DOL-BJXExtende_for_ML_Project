@@ -1,0 +1,64 @@
+:: Molestation Shop []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<generate2>><<tailorinit>>
+	<<upperruined>>
+	<<lowerruined>>
+	<<underruined>>
+	<<handheldruined>>
+	你醒来时发现自己全身赤裸地被吊在一个小房间里。你的手腕被一根细绳绑在一起，挂在天花板的一个钩子上。<<person1>><<person>>拿着卷尺测量你的胸部，<<person2>><<person>>抚摸着你的<<bottom>>。
+	<<set $phase to 1>>
+<</if>>
+<<if $phase is 1>>
+"现在别动，亲爱的。"<<person1>><<He>>把胶带缠在你的躯干上，一直缠到腋窝下。
+<<set $phase to 2>>
+<<elseif $phase is 2>>
+<<person1>><<He>>把胶带顺着你的胸部向下直到压到你的<<nipples>>。
+<<set $phase to 3>><<arousal 50 "breasts">>
+<<elseif $phase is 3>>
+<<person1>><<He>>将卷尺再往下移动，测量你的腹部。
+<<set $phase to 4>>
+<<elseif $phase is 4>>
+<<person1>><<He>>测量你的<<bottom>>。
+<<set $phase to 5>>
+<<elseif $phase is 5>>
+<<person1>><<He>>用胶带的一端戳了戳你的<<genitals>>。金属触碰到如此敏感的部位时，你的反应很剧烈。<<He>>开始测量你的腿。
+<<set $phase to 6>><<arousal 50 "genitals">>
+<<elseif $phase is 6>>
+<<person1>><<He>>很满意，放下了磁带。"我们正好有这个东西！"
+<<set $phase to 7>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[继续->Molestation Shop Alarm]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Molestation Shop Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Molestation Shop]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Molestation Shop Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Molestation Shop Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Molestation Shop]]>><</link>></span><<nexttext>>
+<</if>>

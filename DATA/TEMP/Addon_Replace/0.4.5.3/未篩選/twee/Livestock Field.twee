@@ -1,0 +1,219 @@
+:: Livestock Field []
+<<set $outside to 1>><<effects>>
+
+你在雷米农场的牛场里。
+<!-- Modified for Monster People -->
+<<if ($monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
+	<<livestock_cows "cap">>在远离电围栏的地方吃草，尽管它旁边的草长得很茂盛。
+<<else>>
+	奶牛咀嚼着青草，远离通电围栏，尽管旁边的草越来越厚。
+<</if>>
+
+一条河穿过角落。牛群离翻腾的河水几乎和它们离篱笆一样远。
+<br><br>
+
+<<if Time.hour gte 12>>
+	雷米的马在河边觅食。<<livestock_cows>>避开他们。
+	<br><br>
+<</if>>
+
+<<livestock_obey_description>>
+<br>
+<<if $livestock_grass isnot 1>>
+	<<hunger_description>>
+	<br>
+<</if>>
+<br>
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "remy">>
+<<elseif $stress gte $stressmax>>
+	<<passoutremy>>
+<<elseif Time.hour gte 18>>
+	<<npc Remy>><<person1>>
+	两个农场工人把门推开，门咯咯作响。雷米大踏步向前，骑上一匹<<livestock_horse>>，绕着场地疾驰。<<He>>绕着牛群，把它们围在一起，把它们推向出口。
+	<br><br>
+	<<if $hunger gte 2000>>
+		你觉得头晕。<span class="red">你饿坏了。</span>甚至看到草都想直接吃进嘴里充饥。
+		<<gggstress>><<stress 36>>/*<<physique_loss 36>><<willpower 12>>*/
+	<<elseif $hunger gte 1600>>
+		你的肚子发出饥饿的叫声。<span class="pink">你太饿了。</span>甚至一看到草就想直接吃下去。
+		<<ggstress>><<stress 18>>
+	<<elseif $hunger gte 1200>>
+		你的肚子咕噜咕噜叫。<span class="purple">你很饿。</span>即使是孤儿院的食物也很可口。
+		<<gstress>><<stress 6>>
+	<<elseif $hunger gte 800>>
+		<span class="blue">你有点饿，</span>但考虑到目前的情况，这是可以容忍的。
+	<<elseif $hunger gte 400>>
+		你想吃点东西，<span class="lblue">但是你还不饿</span>
+		<<lstress>><<stress -6>>
+	<<elseif $hunger gte 1>>
+		<span class="teal">你现在还很饱。</span>至少饥饿感不会让你睡不着觉。
+		<<lstress>><<stress -6>>
+	<<else>>
+		<span class="green">你的肚子已经饱了。</span>至少饥饿感不会让你睡不着觉。
+		<<lstress>><<stress -6>>
+	<</if>>
+	<br><br>
+	<<if $livestock_muzzle is 1>>
+		<<if $livestock_obey gte 60>>
+			<<unset $livestock_muzzle>>
+			你和牛被带回牛棚。两个农场工人在入口处把你拉到一边，在你的嘴上扣上一个口套。
+			<br><br>
+
+			"等等，"雷米的声音从后面传来。<<He>>骑着马跟在最后一头牛的身后，然后停在你身边。<<He>>往下看。"我认为它已经证明了自己是安全的，"<<he>>说道。"没必要用嘴套。"<<He>>骑着马离开了，农场工人拿走了设备，解放了你的嘴。
+			<br><br>
+
+			你被带进牛棚，一个农场工人把你推进牢房。
+			<br><br>
+		<<else>>
+			你和牛被带回牛棚。两个农场工人在入口处把你拉到一边，然后<span class="purple">用嘴套套住你的嘴。</span>
+			<<facewear 23>>
+			<br><br>
+
+			你被带进牛棚，一个农场工人把你推进牢房。
+			<br><br>
+		<</if>>
+	<<else>>
+		你和牛被带回牛棚，在那里一个农场工人把你推进你的牢房。
+		<br><br>
+	<</if>>
+
+	<<endevent>>
+	<<link [[继续|Livestock Cell]]>><</link>>
+	<br>
+<<elseif Time.hour is 12>>
+
+	<<if $livestock_obey gte 30>>
+		<<npc Remy>><<person1>>
+		大门打开了，雷米骑着一匹<<livestock_horse>>冲了进来。<<He>>从<<his>>的<<livestock_horse>>上下来并环顾四周，直到<<his>>的目光落在你身上。"你在这呀，<<girl>>，"<<he>>说，"我们有一份特别的工作给你，过来。"<<He>>走得更近，牵着链子。
+		<br><br>
+
+		<<link [[服从|Livestock Job Obey]]>><<npcincr Remy dom 1>><<livestock_obey 1>><</link>><<gobey>>
+		<br>
+		<<link [[拒绝|Livestock Job Refuse]]>><<npcincr Remy dom -1>><<livestock_obey -1>><</link>><<lobey>>
+		<br>
+
+	<<else>>
+		<<npc Remy>><<person1>>
+		大门打开了，雷米骑着一匹马走了进来，每匹马都有一个帮手骑着。<<He>>停了下来，但农场工人继续骑着马。他们围着你围成一个圈，每个人都带着一根长长的牛鞭。
+		<br><br>
+		雷米下马，拉着缰绳走了过来。"我们为你准备了一份特别的工作，过来。"
+		<br><br>
+
+		<<link [[服从|Livestock Job Disobedient Obey]]>><<npcincr Remy dom 1>><<livestock_obey 1>><</link>><<gobey>>
+		<br>
+		<<link [[拒绝|Livestock Job Disobedient Refuse]]>><<npcincr Remy dom -1>><<livestock_obey -1>><<pain 6>><</link>><<lobey>><<gpain>>
+		<br>
+	<</if>>
+<<elseif $daily.livestock.remyEvent isnot 1 and $rng gte 96>>
+	<<set $daily.livestock.remyEvent to 1>><<npc Remy>><<person1>>
+	你看到雷米正在向<<his>>的<<livestock_horses>>走去。<<He>>正在检查要挑选其中哪一匹。<<He>>手中牵着缰绳。
+	<br><br>
+
+	<<link [[走向雷米|Livestock Field Bridle]]>><</link>>
+	<br>
+	<<link [[忽视|Livestock Field Bridle Ignore]]>><</link>>
+<<else>>
+	<<if $livestock_grass is 1>>
+		<<unset $livestock_grass>>
+		<<set $daily.earSlimeGrassEating to true>>
+		你看看场地周围。有很多可以锻炼的空地，但似乎没有其他事情可做。
+		<br><br>
+		<<generate1>><<person1>><<set $hunger to 1200>>
+		<span class="pink">你的肚子咕噜咕噜叫。</span>你听到一声轻笑。一个农场工人在栅栏的另一边看着你。"饿了，<<girl>>？"<<he>>又笑了。"那里有很多草。你最好做个好<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>然后乖乖吃了。"
+		<br><br>
+
+		<<link [[吃草|Livestock Field Intro Grass]]>><<hunger -400>><<livestock_obey 1>><<transform cow 1>><</link>><<gobey>><<lhunger>>
+		<br>
+		<<link [[无视|Livestock Field Intro Ignore]]>><</link>>
+		<br>
+		<<link [[抗议|Livestock Field Intro Protest]]>><</link>>
+		<br>
+	<<elseif $arousal gte $arousalmax>>
+		<<orgasm>>你的膝盖弯曲，然后你跪到草地上。
+		<!-- Modified for Monster People -->
+		<<if ($monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
+			<<if maleChance() lt random(1, 100)>>
+				田野里的母牛们困惑地看着四周。
+
+			<<else>>
+				农场周围的公牛困惑地看着四周。
+
+			<</if>>
+		<<else>>
+		<</if>>
+		<br><br>
+		<<generate1>><<generate2>><<generate3>><<generate4>><<person1>>
+		你躺在田里，不一会儿就听见脚步声来了。"看我发现了什么？"你身边有个<<personsimple>>的声音说道。"不舒服吗？"
+		<br><br>
+		"我想它需要被照顾照顾，"一位<<person2>><<person>>说，<<he>>蹲在你身边，把你的肩膀贴在地上。你听到更多的农场工人走近。
+		<br><br>
+
+		<<link [[继续|Livestock Field Gang]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<elseif !(Time.days % 6) and $daily.eden.farmRescue isnot 1 and C.npc.Eden.love gte 120 and ($edenfreedom is 1 and $edendays gte 4 or $edenfreedom gte 2 and $edendays gte 9)>>
+		你看到远处有个人影，潜伏在沼地上。
+		<br><br>
+		<<link [[调查|Eden Fence Rescue]]>><<npcincr Eden dom 5>><<set $daily.eden.farmRescue to 1>><</link>>
+		<br>
+		<<link [[忽视|Eden Fence Ignore]]>><<set $daily.eden.farmRescue to 1>><</link>>
+		<br>
+	<<elseif !$daily.earSlimeGrassEating and random(0, 100) lte 15 - ($weekly.earSlimeGrassEating || 0) and ($parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime") and Time.hour lte 9>>
+		<<set $daily.earSlimeGrassEating to true>>
+		<<if $earSlime.growth gt 50 and $earSlime.growth gte (currentSkillValue('willpower') / 10)>>
+			<<set $weekly.earSlimeGrassEating to ($weekly.earSlimeGrassEating || 0) + 4>>
+			<span class="lewd">你感觉到脑子里的史莱姆在命令你迷失自我，要求你一边吃草，一边四肢着地爬行。</span>现在它不能保证任何事情。它把自己的意志强加于你，并期望得到服从。
+			<br><br>
+
+			<<link [[屈服|Livestock Slime Field Grass Extreme Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>><<gobey>><<lhunger>>
+			<br>
+			<<link [[无视|Livestock Slime Field Grass Extreme Defy]]>><<corruption -3>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<llcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<<else>>
+			<span class="lewd">你感觉到头脑中的史莱姆在命令你吃草，同时用四肢爬行。</span>如果你遵守，它会给你带来回报，如果你不遵守，它会伤害到你。
+			<br><br>
+
+			<<link [[屈服|Livestock Slime Field Grass Obey]]>><<pass 60>><<livestock_obey 1>><<transform cow 1>><<hunger -400>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>><<gobey>><<lhunger>>
+			<br>
+			<<link [[无视|Livestock Slime Field Grass Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $daily.earSlimeGrassEating to true>>
+		<<farmicon "grass">><<link [[吃草 (1:00)|Livestock Field Grass]]>><<pass 60>><<livestock_obey 1>><<transform cow 1>><<hunger -400>><</link>><<gobey>><<lhunger>>
+		<br>
+		<<exerciseicon>><<link [[锻炼 (1:00)|Livestock Field Exercise]]>><<pass 60>><<tiredness 6>><<athletics 6>><</link>><<gtiredness>><<gathletics>>
+		<br>
+		<<if $livestock_fence is 1>>
+			<<investigateicon>><<link [[检查围栏|Livestock Field Fence]]>><<unset $livestock_fence>><</link>>
+			<br>
+		<<elseif $livestock_dig gte 25>>
+			<<getouticon "dig">><<link [[接近围栏下的隧道|Livestock Tunnel]]>><</link>>
+			<br>
+		<<elseif $livestock_dig gte 24 and $physiquesize lte 12000>>
+			<<getouticon "dig">><<link [[接近围栏下的隧道|Livestock Tunnel]]>><</link>><<small_text>>
+			<br>
+		<<elseif $livestock_dig gte 23 and $physiquesize lte 10000>>
+			<<getouticon "dig">><<link [[接近围栏下的隧道|Livestock Tunnel]]>><</link>><<small_text>>
+			<br>
+		<<elseif $livestock_dig gte 22 and $physiquesize lte 6000>>
+			<<getouticon "dig">><<link [[接近围栏下的隧道|Livestock Tunnel]]>><</link>><<small_text>>
+			<br>
+		<<else>>
+			<<getouticon "dig">><<link [[在围栏下面挖洞 (1:00)|Livestock Field Dig]]>><<pass 60>><<tiredness 6>><<set $livestock_dig += 1>><</link>><<gtiredness>>
+			<br>
+		<</if>>
+		<<if $livestock_river is 1>>
+			<<wolfcaveicon "stream">><<link [[检查河流|Livestock Field River Examine]]>><<unset $livestock_river>><</link>>
+			<br>
+		<<else>>
+			<<wolfcaveicon "stream">><<link [[靠近河流|Livestock Field River]]>><</link>>
+			<br>
+		<</if>>
+		<<if Time.hour gte 12>>
+			<<animalicon "horse">><<link [[接近雷米的马|Livestock Field Horse]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

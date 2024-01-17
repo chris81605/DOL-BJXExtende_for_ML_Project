@@ -1,0 +1,33 @@
+:: Pound Food Event Slime Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身从<<beasttype>>身边走开。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身从<<beasttype>>身旁逃开。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="teal">它还没从先前控制你的疲累中恢复过来。</span>你能感受到它还在挣扎着，尝试控制你把身体献给<<beasttype>>，<span class="green">但是它失败了</span>。
+	<</if>>
+	<br><br>
+	<<link [[继续|Pound Food End]]>><<endevent>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $deviancy gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	史莱姆试图维持它的控制。<span class="red">它压制着你的意志，</span>逼迫你为<<beasttype>>献出自己的身体。<<bHe>>发出几声低吟，并露出<<bhis>>的獠牙。
+	<<ggwillpower>><<willpower 3>><<llpound_status>>
+	<br><br>
+	"空气中弥漫着爱，”一名工作人员说。几个人正在观看。
+	<br><br>
+	<<link [[继续|Pound Food Rape]]>><<set $molestationstart to 1>><<set $phase to 1>><<sub 3>><<pound_status -9>><</link>>
+<<else>>
+	史莱姆试图维持它对你的控制，<span class="green">但你的反抗成功了，</span>并想办法从<<beasttype>>身边挣脱开来。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<link [[继续|Pound Food End]]>><<endevent>><</link>>
+	<br>
+<</if>>

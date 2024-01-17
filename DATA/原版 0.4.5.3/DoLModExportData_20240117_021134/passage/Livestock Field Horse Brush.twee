@@ -1,0 +1,69 @@
+:: Livestock Field Horse Brush []
+<<effects>>
+
+<<if $livestock_horse gte 2>>
+	你用手指梳理马毛。他们争着轮到自己。
+<<else>>
+	你用手指梳理马匹的头发。他们很谨慎，但没有拒绝你。你感觉他们比表现出来的更享受。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $rng gte 51>>
+		<<rng>>
+		<<if $rng gte 51>>
+			<<if $livestock_horse_rescued is undefined>>
+
+				一匹老马一瘸一拐地走过。不像其他马，它忽略了你。你看向它的腿。一个巨大的碎片卡在它的前肢中，看上去就很疼。
+				<br><br>
+
+				当它靠近时，其他的马都让开了。
+				<br><br>
+
+				<<link [[试着帮忙|Livestock Field Horse Help]]>><</link>><<tendingdifficulty 700 1000>>
+				<br>
+				<<link [[无视|Livestock Field]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+
+				你搀扶的那匹老马飞奔而过，充分利用它那痊愈的腿。它看到你就高兴地嘶叫。
+				<<ltrauma>><<trauma -6>>
+				<br><br>
+
+				<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+				<br>
+
+			<</if>>
+		<<else>>
+			<<generate1>><<person1>>"多可爱啊，"栅栏后面的一个声音说道。是一个<<person>>。<<Hes>>穿着农场工人的服装。"牛和马是最好的朋友。我应该拍下来，上传到网上说不定会有不错的点击量呢。"马被<<his>>嘲弄的语气激怒了。
+			<br><br>
+
+			<<He>>咬了一口苹果。半人马渴望地盯着水果。"怎么了？"<<person>>问道。"厌倦了草？太糟糕了。没有甜美多汁的苹果给你们。"为了说明这一点，<<he>>把没吃过的苹果扔到离栅栏很远的地方。完全够不着。
+			<br><br>
+
+			农场工人走后，两匹年轻的半人马冲了过来。他们试图挤过缺口，但电围栏的电击疼痛阻止了他们。
+			<br><br>
+
+			<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		一匹半人马似乎很沮丧。它对着别人跺脚，差点咬到你。
+		<br><br>
+
+		<<if $bestialitydisable is "f">>
+			<<if beastMaleChance() gte random(1, 100)>>
+				<<link [[看看它下面|Livestock Field Horse Lewd]]>><</link>><<deviant1>>
+			<<else>>
+				<<link [[看看它下面|Livestock Field Horse Lewd Female]]>><</link>><<deviant1>>
+			<</if>>
+			<br>
+		<</if>>
+		<<link [[无视|Livestock Field]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|Livestock Field]]>><</link>>
+	<br>
+<</if>>

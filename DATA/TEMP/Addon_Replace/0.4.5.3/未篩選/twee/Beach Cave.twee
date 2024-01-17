@@ -1,0 +1,59 @@
+:: Beach Cave []
+<<set $location to "underground">><<set $outside to 0>>
+<<if $cave gte 50>>
+<<elseif $cave gte 20>>
+	<<water waist>>
+<<else>>
+	<<water>>
+<</if>>
+<<effects>>
+<<set $cave = Math.clamp($cave, 0, 100)>>
+你在海岸边的一个山洞里，自然发光的地衣爬满了洞壁。
+<br><br>
+<<if $cave gte 100>>
+	<span class="lblue">你处于洞穴的深处。</span>一个腐朽的木头王座立在你的面前。
+	<<if !$weekly.beachCaveCompass>>
+		那里有一个箱子。
+	<</if>>
+<<elseif $cave gte 50>>
+	你的脚淹没在湍急的水流中。
+<<elseif $cave gte 20>>
+	水没过了你的腰部。
+<<elseif $cave gte 1>>
+	水没过了你的脖子。
+<<else>>
+	水没过了你的脖颈。通向外面的洞顶就在附近的水面下，但你得游过去。
+<</if>>
+<br><br>
+
+<<beach_cave_pursuit>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutcave>>
+<<elseif $eventskip isnot 1 and $cave lt 100>>
+	<<if random(1, 4) is 4>>
+		<<eventscavetreasure>>
+	<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventscave>>
+	<<else>>
+		<<eventscavesafe>>
+	<</if>>
+<<else>>
+	<<if $cave lt 100>>
+		<<caveicon "west">><<link [[往更深处走 (0:10)|Beach Cave]]>><<set $cave += 5>><<pass 10>><</link>>
+		<br>
+	<<elseif !$weekly.beachCaveCompass>>
+		<<caveicon "treasure">><<link [[打开箱子|Beach Cave Open]]>><<set $weekly.beachCaveCompass to true>><</link>>
+		<br>
+	<</if>>
+	<<if $cave gt 0>>
+		<<caveicon "sea">><<link [[往大海走 (0:10)|Beach Cave]]>><<set $cave -= 5>><<pass 10>><</link>>
+		<br>
+	<<else>>
+		<<swimicon "up">><<link [[游出去 (0:05)|Beach Cave Up]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

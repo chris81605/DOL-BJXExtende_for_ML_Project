@@ -1,0 +1,67 @@
+:: School Passout Rape Finish []
+<<effects>><<set $stress -= 500>>
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation>>
+
+"不要试图告发我们，没有人会相信你。"这俩人留你躺在硬质地板上。<<tearful>>你挣扎着站起来。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[继续|School Rear Courtyard]]>><</link>>
+
+<<elseif $enemyhealth lte 0>>
+<<group>>因痛退开，<<tearful>>你趁机从小屋里跑了出来。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[继续|School Rear Courtyard]]>><</link>>
+
+<<elseif $rescue gte 1 and $alarm is 1>><<set $rescued += 1>>
+	<<if $rescue is 2>>
+		门突然被踹开了，惠特尼冲了进来，站在身后的是<<nnpc_his "Whitney">>同伙。
+		<<if $pillory_tenant.special.name isnot "Leighton">>
+			<<nnpc_He "Whitney">>看了看你和两个学生，然后皱起了眉头。你不知道<<nnpc_his "Whitney">>的愤怒是针对谁的。<<status 1>><<gcool>>
+			<br><br>
+
+			在事态升级之前，另一个身影走到了门口，是礼顿。
+			<<npc Leighton 3>>
+			"不管这里发生了什么，一切都结束了。我希望你们这群人从我的办公室——"
+			<br><br>
+
+			还没等礼顿说完，惠特尼就扇了<<person1>><<person>>一个耳光。在<<nnpc_his "Whitney">>朋友的怂恿下，他们殴打在了一起。礼顿愤怒地试图制止他们。
+			<br><br>
+
+			<<tearful>>你趁着混乱溜到了外面。
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+
+			<<link [[继续|School Rear Courtyard]]>><</link>>
+			<br>
+		<<else>>
+			<<fullGroup>>被突然闯进门的惠特尼袭击，大声呼喊。你趁乱溜到了外面。<<status 1>><<gcool>>
+			<br><br>
+
+			<<clotheson>>
+			<<endcombat>>
+			<<npc Whitney>><<person1>>
+
+			<<link [[继续|Whitney Rescue 2]]>><<set $whitneyRescueExit to "courtyard">><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<endevent>>
+		<<npc Leighton>>礼顿闯进了小屋，<<group>>想要解释却被吓得说不出话，躲闪的眼神中带着恐惧。礼顿把他们一个个从小屋拎了出来。<<tearful>>你振作了起来。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[继续|School Rear Courtyard]]>><</link>>
+	<</if>>
+<</if>>

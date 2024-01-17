@@ -1,0 +1,39 @@
+:: NPC Role Select []
+<br>
+The lights flash on. You find yourself in a strange chamber, completely smooth and featureless. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters. A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+<br>
+A terminal is attached to the tube. You look at the prompts.
+<br><br>
+<i>Please select the construct's descriptor. Leave blank for default generation.</i>
+<br>
+
+<<if $npcselectdesc is undefined>><<set $npcselectdesc to "custom">><</if>>
+<<textbox "$npcselectdesc" $npcselectdesc>>
+<br><br>
+
+<i>Please select the construct's role. Leave blank for default generation.</i>
+<br>
+
+<<if $npcselectrole is undefined>><<set $npcselectrole to "construct">><</if>>
+<<textbox "$npcselectrole" $npcselectrole>>
+<br><br>
+
+<<link [[Sex|NPC Role Fight]]>><<set $sexstart to 1>>
+	<<if $npcselectdesc is undefined>><<set $npcselectdesc to "custom">><</if>>
+	<<if $npcselectrole is undefined>><<set $npcselectrole to "construct">><</if>>
+	<<set $npcselectdesc to Util.escape($npcselectdesc)>>
+	<<set $npcselectrole to Util.escape($npcselectrole)>>
+	<<generateRole 0 $npcselectdesc $npcselectrole>><<person1>>
+	<<unset $npcselectdesc>><<unset $npcselectrole>>
+<</link>>
+<br>
+<<link [[Fight|NPC Role Fight]]>><<set $fightstart to 1>>
+	<<if $npcselectdesc is undefined>><<set $npcselectdesc to "custom">><</if>>
+	<<if $npcselectrole is undefined>><<set $npcselectrole to "construct">><</if>>
+	<<set $npcselectdesc to Util.escape($npcselectdesc)>>
+	<<set $npcselectrole to Util.escape($npcselectrole)>>
+	<<generateRole 0 $npcselectdesc $npcselectrole>><<person1>>
+	<<unset $npcselectdesc>><<unset $npcselectrole>>
+<</link>>
+<br><br>
+<<link [[Back home|Bedroom]]>><<unset $npcselectdesc>><<unset $npcselectrole>><</link>>

@@ -1,0 +1,32 @@
+:: Eden Recaptured Seduction []
+<<effects>>
+
+<<set $seductiondifficulty to (10000 - ($NPCName[$NPCNameList.indexOf("Eden")].lust * 50))>>
+<<seductioncheck>>
+<br><br>
+
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><br><br><</if>><<seductionskilluse>>
+
+你跪了下来。
+<<if $speech_attitude is "meek">>
+	"我可以补偿你！"你说道。
+<<elseif $speech_attitude is "bratty">>
+	"我想我知道你需要什么，"你说道。
+<<else>>
+	"让我补偿你吧，"你说道。
+<</if>>
+你<<npcUndressText $NPCName[$NPCNameList.indexOf("Eden")] "lower">>。
+
+<<if $seductionrating gte $seductionrequired>>
+	"这是一个很好的补偿我的方式，"<<he>>说着，用一只手压在你的后脑勺上，把你推得更近。
+	<br><br>
+
+	<<link [[继续|Eden Recaptured Oral]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<He>>把你推到地上。"这可不行，不可能让你这么简单就被原谅。"
+	<br><br>
+
+	<<link [[继续|Eden Recaptured Spank]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

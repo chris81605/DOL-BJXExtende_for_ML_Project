@@ -1,0 +1,36 @@
+:: Street Bottom Finish []
+<<if $enemyhealth lte 0>>
+	<<if Time.dayState isnot "night">>
+		<<He>>吃痛退开，给了你需要的机会。<<tearful>>你钻进了人群。
+		<br><br>
+	<<else>>
+		<<He>>吃痛退开，给了你需要的机会。<<tearful>>你逃到了暗处。
+		<br><br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+		<<if playerBellyVisible() and $pregnancyspeechdisable is "f">>
+			<<He>>吼道，"你最好快点跑<<slut>>，否则我可能会做出让自己后悔的事情来。"
+		<<else>>
+			<<He>>把你推到地上，喊道："愚蠢的<<slut>>！"
+		<</if>>
+		<<violence 1>>
+		<br><br>
+	<<elseif $enemyanger gte 1>>
+		<<he>>沉默着离开了。
+		<br><br>
+	<<else>>
+		<<He>>笑着说，"我们应该再做一次，<<slut>>。" 说完，<<he>>又捏了捏你的<<bottom>>，然后站起来，把你一个人撇在地上就走了。
+		<br><br>
+	<</if>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<effects>><<set $rescued += 1>>
+	你的呼救声引起了过路人的注意，他们朝小巷口张望。<<He>>停止了对你的侵犯，朝相反的方向走去。
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+<</if>>
+<<clotheson>>
+<<endcombat>>
+<<destinationeventend>>

@@ -1,0 +1,39 @@
+:: Monster Tower Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastNOGENinit>>
+
+	<<set $enemyhealthmax to 400>><<set $enemyhealth to 400>><<set $enemyarousalmax to 1000>>
+
+	<<if $NPCList[0].monster is "monster">>
+		你抚摸着<<tower_creature_text>>的胸膛。<<bHe>>皱了皱鼻头，嘴里嘟囔着。你没有停下，而是把手伸向更底下的部位。
+		<<deviancy2>>
+
+		你无法抵抗，<<bhe>>抓住你的手腕，将你拉近，另一只手则紧紧搂住你的腰。
+	<<else>>
+		你摩擦着生物的肚子。它因你的动作睁开一只眼睛。你盯着它，把手向它身体更下方摸去。
+		<<deviancy2>>
+
+		野兽无力抵御，只能爬起身来。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Monster Tower Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Monster Tower Sex]]>><</link>></span><<nexttext>>
+<</if>>

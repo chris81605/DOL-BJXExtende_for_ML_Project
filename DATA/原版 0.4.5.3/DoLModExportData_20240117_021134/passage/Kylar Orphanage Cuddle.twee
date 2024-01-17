@@ -1,0 +1,45 @@
+:: Kylar Orphanage Cuddle []
+<<effects>>
+
+<<endevent>>
+<<npc Kylar>><<person1>>
+
+你和凯拉尔躺在床上，安心地靠在彼此的怀中。
+<<if $phase is 1>>
+	你有点惊讶<<if $arousal gte 6000>>，也有点失望<</if>>凯拉尔没有试图和你握手，<<his>>的手臂仍然搂着你的<<if $submissive gte 1150 or $daily.kylar.sleepRape is true>>肩膀<<else>>腰<</if>>。
+<</if>>
+你可以感觉到<<his>>喷洒在你皮肤上的呼吸变得稳定而平静。
+<br><br>
+
+<<if ($kylarenglish is undefined or $kylarenglish is 0) and $kylar.timer.love lte 0>>
+	<span class="lewd">"我爱你，"</span><<he>>靠在你的<<if $submissive gte 1150 or $daily.kylar.sleepRape is true>>头发里<<else>>胸口<</if>>呢喃。
+	<br><br>
+
+	<<him>>花了几秒才意识到自己说了什么。当<<he>>晃过神来时，<<he>>的全身开始变得僵硬，快速从你身边分开，差点从床上掉下来。"我，我不是那个意思，"<<he>>结结巴巴地说，"我的意思是我确，确实——不，不是的，你知道，就是那个那个浪漫的那种，就，就是说，但我没有……我，我只是——我不是故意的——"<<Hes>>惊慌失措。
+	<br><br>
+
+	<<link [[亲吻|Kylar Orphanage Cuddle Kiss]]>><<npcincr Kylar love 10>><<npcincr Kylar lust 5>><<npcincr Kylar rage -10>><</link>><<ggglove>><<gglust>><<llksuspicion>>
+	<br>
+	<<link [[斥责|Kylar Orphanage Cuddle Berate]]>><<set $kylar.timer.love to random(2,5)>><<npcincr Kylar love -5>><</link>><<lllove>>
+	<br>
+	<<link [[假装什么都没发生|Kylar Orphanage Cuddle Ignore]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>><<llove>><<gksuspicion>>
+
+<<else>>
+	<<if $phase is 0>>
+		凯拉尔紧紧地抱住你，几分钟过去了，仍不愿放手。
+	<</if>>
+	最终<<he>>放开了你，<<he>>看起来很失望。"我不应该在这里呆太久，"<<he>>说。<<if Time.hour gte 18 or Time.hour lte 7>>"他们在等我。"<</if>>你<<if $phase isnot 2>>坐了起来，然后<</if>>看着<<him>>，<<His>>的头发粘在脸上。你向前伸手，把它拂去，<<he>>笑了。
+	<br><br>
+
+	<<if Time.hour lte 18 and Time.hour gte 7>>
+		<<if $weather is "rain" or $weather is "snow">>
+			<<link [[一起走到游戏厅 (0:15)|Kylar Arcade Walk]]>><<pass 15>><</link>>
+		<br>
+		<<else>>
+			<<link [[一起走到公园 (0:15)|Kylar Park Walk]]>><<pass 15>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+	<<link [[向凯拉尔道别|Kylar Orphanage Leave]]>><</link>>
+<</if>>

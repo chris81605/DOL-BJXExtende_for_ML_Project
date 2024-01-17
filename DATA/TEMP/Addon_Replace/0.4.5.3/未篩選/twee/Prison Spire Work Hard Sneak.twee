@@ -1,0 +1,46 @@
+:: Prison Spire Work Hard Sneak []
+<<effects>>
+
+
+你缓慢地走过去，希望自己不被发现，然后蹲下去捡起了闪亮的牙齿。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">那个<<beastsplural>>忙于梳毛而没有发现你。</span>
+	<br><br>
+
+	<<endevent>>
+
+	"干得漂亮！"<<generate_anxious_guard 0>><<anxious_guard 0>>称赞道。
+	<<if $prison.anxious gte 60>>
+		"你可以留几颗牙齿，但别告诉其他人。"<<prison_teeth_text 2>><<prison_teeth 2>>
+	<</if>>
+	<<lsuspicion>><<prison_guards -1>>
+	<br><br>
+
+
+	<<skulduggeryuse>>
+
+	<<prison_spire_options>>
+
+<<else>>
+
+	<<beastNEWinit 5 "hawk">><<person1>>
+	<span class="red">一个<<beasttype>>懒洋洋地躺在灯塔上，把头转向了你。</span>
+	<<if $monster is 1>>
+		<<bHe>>跳到地上。"想拿不属于你的东西？"<<bhe>>对你说，"放下来！"
+	<<else>>
+		<<bHe>>跳下来向你走来，死盯着鲨鱼牙齿。
+	<</if>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[放下牙齿|Prison Spire Work Drop]]>><<prison_guards -1>><</link>><<gsuspicion>>
+	<br>
+	<<link [[威胁|Prison Spire Work Threaten]]>><</link>><<physiquedifficulty 10000 20000>>
+	<br>
+
+<</if>>

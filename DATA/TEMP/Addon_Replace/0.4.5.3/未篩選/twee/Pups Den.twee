@@ -1,0 +1,52 @@
+:: Pups Den []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if ((Time.hour gte 8 and Time.hour lte 15) or (Time.hour gte 18))>>
+    <<unset $breastfeedend>>
+<</if>>
+
+你在狼洞里一个隐蔽的洞穴里。临时制作的咀嚼玩具散落一地。
+<br><br>
+
+你的一个旅伴守卫着小狼窝的入口。
+<br><br>
+
+<<if Object.values($children).find(child => child.mother === "Black Wolf" && child.location === "wolf_cave") and ((Time.hour gte 6 and Time.hour lte 7) or (Time.hour gte 16 and Time.hour lte 17))>>
+黑狼躺在洞穴的一角，周围围着一群小狼。
+    <br><br>
+
+    <<if $breastfeedend isnot 1>>
+<<link [[靠近|BW Pups Breastfeed]]>><</link>>
+        <br>
+
+    <<else>>
+<<link [[靠近|BW Pups Breastfeed]]>><</link>>
+    <br>
+
+    <</if>>
+
+<</if>>
+
+<<if $bestialitydisable is "f" and $breastfeedingdisable is "f" and $lactating is 1 and $deviancy gte 35 and ($monsterchance lt 100 or ($monsterhallucinations is "t" and $hallucinations is 0))>>
+
+	<<if $wolfcavebreast is 3>>
+		<span class="blue">幼崽们都喝足了奶。</span>
+        <br>
+	<<else>>
+		<<link [[母乳喂养一些幼崽 (0:05)|Wolf Cave Breastfeed]]>><<set $phase to 0>><</link>><<deviant3>>
+        <br>
+	<</if>>
+<</if>>
+
+<<if Object.values($children).find(child => child.mother === "pc" && child.location === "wolf_cave") and ((Time.hour gte 6 and Time.hour lte 7) or (Time.hour gte 16 and Time.hour lte 17)) and $breastfeedend isnot 1>>
+
+<<link [[查看你的孩子们|PC Pups Breastfeed]]>><</link>>
+    <br>
+
+<<else>>
+<<link [[查看你的孩子们|Childrens Home]]>><<set $exitPassage to $passage>><</link>>
+    <br>
+<</if>>
+
+
+<<link [[离开|Wolf Cave]]>><</link>>

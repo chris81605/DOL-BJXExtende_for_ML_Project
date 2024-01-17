@@ -1,0 +1,114 @@
+:: Widgets Events Sea [widget]
+<<widget "eventsseabeach">>
+	<<if Time.dayState isnot "night" and $weather is "clear">>
+
+		<<if $rng gte 96>>
+			<<sea1>>
+		<<elseif $rng gte 81>>
+			<<seabeach1>>
+		<<elseif $rng gte 61>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<<elseif Time.dayState isnot "night" and ($weather is "rain" or $weather is "snow")>>
+
+		<<if $rng gte 96>>
+			<<sea1>>
+		<<elseif $rng gte 81>>
+			<<seabeach2>>
+		<<elseif $rng gte 71>>
+			<<searape>>
+		<<elseif $rng gte 51>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<<elseif Time.dayState isnot "night">>
+
+		<<if $rng gte 81>>
+			<<sea1>>
+		<<elseif $rng gte 71>>
+			<<searape>>
+		<<elseif $rng gte 51>>
+			<<sea5>>
+		<<elseif $rng gte 36>>
+			<<seatangle>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<<else>>
+
+		<<if $rng gte 95>>
+			<<if $swarmdisable is "f">><<sea3>><<else>><<sea1>><</if>>
+		<<elseif $rng gte 81>>
+			<<sea1>>
+		<<elseif $rng gte 61>>
+			<<sea5>>
+		<<else>>
+			<<sea2>>
+		<</if>>
+
+	<</if>>
+<</widget>>
+
+<<widget "eventssea">>
+	<<set _dangerevent to random(1, 100)>>
+	<<if _dangerevent lte 10>>
+		<<if $swarmdisable is "f">>
+			<<sea3>>
+		<<else>>
+			<<sea1>>
+		<</if>>
+	<<elseif _dangerevent lte 20>>
+		<<sea1>>
+	<<elseif _dangerevent lte 30>>
+		<<searape>>
+	<<elseif _dangerevent lte 50>>
+		<<sea5>>
+	<<elseif _dangerevent lte 60>>
+		<<seatangle>>
+	<<elseif _dangerevent lte 80>>
+		<<sea2>>
+	<<elseif _dangerevent lte 100>>
+		<<sea7>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsdeepsea">>
+	<<set _dangerevent to random(1, 96)>>
+	<<if _dangerevent lte 10>>
+		<<if $swarmdisable is "f">>
+			<<sea3>>
+		<<else>>
+			<<sea1>>
+		<</if>>
+	<<elseif _dangerevent lte 20>>
+		<<sea1>>
+	<<elseif _dangerevent lte 30>>
+		<<sea4>>
+	<<elseif _dangerevent lte 40>>
+		<<seavore>>
+	<<elseif _dangerevent lte 50>>
+		<<sea5>>
+	<<elseif _dangerevent lte 60>>
+		<<seatentacles>>
+	<<elseif _dangerevent lte 70>>
+		<<sea6>>
+	<<elseif _dangerevent lte 80>>
+		<<seaflotsam>>
+	<<elseif _dangerevent lte 90>>
+		<<sea_struggle>>
+	<<elseif _dangerevent lte 91>>
+		<<sea_eye>>
+	<<elseif _dangerevent lte 96>>
+		<<sea_chest>>
+	<</if>>
+<</widget>>

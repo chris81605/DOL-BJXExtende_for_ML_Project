@@ -1,0 +1,218 @@
+:: Bird Tower []
+<<set $outside to 0>><<set $location to "tower">><<effects>><<getTarget true>>
+<<if $bird.state is undefined>>
+	<<bird_init>>/*Fixes rare broken save issue*/
+<</if>>
+<<bird_schedule>>
+
+你正身处荒原深处的<<if $syndromebird is 1>>你的高塔里<<else>>一座高塔废墟里<</if>>。
+<<if $syndromebird isnot 1>><<hunger_description>><</if>>
+<br><br>
+
+<<npc "Great Hawk">>
+<<if $bird.state is "home">>
+	<<switch $bird.activity>>
+	<<case "sing">>
+		<<beasttype>>在塔的边缘唱歌。
+	<<case "bathe">>
+		<<beasttype>>正在雨水池里洗澡。
+	<<case "groom">>
+		<<beasttype>>坐在<<bhis>>的栖木上，清理着<<bhis>>的羽毛。
+	<<case "build">>
+		<<beasttype>>正在筑巢。
+	<<default>>
+		<<beasttype>>栖息在<<bhis>>的巢中。
+		<<set $birdSleep to 1>>
+	<</switch>>
+<<else>>
+	<<beasttype>>出去打猎了。
+<</if>>
+<<if $exposed gte 1>>
+	<<if $syndromebird is 1>>
+		<<if $arousal gte $arousalmax / 2 and $bird.state isnot "home">>
+			你发现自己非常渴望<<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>伙伴<</if>>的翅膀带来的温暖。
+		<</if>>
+	<<else>>
+		<<if $bird.state isnot "home">>
+			在暴露的状态下能有一些隐私让你感到宽慰。
+		<<else>>
+			在<<beasttype>>面前暴露自己让你感到尴尬。
+		<</if>>
+	<</if>>
+<</if>>
+<<endevent>>
+<br><br>
+
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyWatersBrokenPassout "castle">>
+<<elseif $bird.state is "hunting" and $bird.timer lte 0 and !$possessed>>
+	<<npc "Great Hawk">>
+	你听到了翅膀拍打的声音，<<beasttype>>回来了。
+
+	<<bHe>>降落下来，<<if $monster is 1>>走<<else>>跳<</if>>到你身边。
+	<<bird_hunt_return>>
+<<elseif $bird.state is "home" and Time.dayState isnot "night" and $bird.timer lte 0 and !$possessed>>
+	<<npc "Great Hawk">>
+	<<if $monster is 1>>
+		<<beasttype>>从
+		<<if $bird.activity is "build" or $bird.activity is "sleep">>
+			<<bhis>>的巢里起身。
+		<<elseif $bird.activity is "bathe">>
+			雨水池里起身，<<bhis>>抖动着翅膀。
+		<<else>>
+			<<bhis>>的栖木上起身。
+		<</if>>
+		"<<print either(
+			"我渴望狩猎。",
+			"荒野在呼唤我。",
+			"我的爪子渴望猎物。",
+			"风在召唤我。",
+			"我得伸展一下自己的翅膀了。"
+		)>>我会带礼物回来的。"<<bHe>>展开翅膀，从塔上起飞。
+	<<else>>
+		<<beasttype>>从
+		<<if $bird.activity is "build" or $bird.activity is "sleep">>
+			<<bhis>>的巢里起身，
+		<<elseif $bird.activity is "bathe">>
+			雨水池里起身，
+		<<else>>
+			<<bhis>>的栖木上起身，
+		<</if>>
+		<<bhis>>展开翅膀，从塔上飞了出去。
+	<</if>>
+	<br><br>
+	<<set $bird.timer to random(30, 60)>>
+	<<set $bird.state to "hunting">>
+	<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<<elseif $bird.state is "home" and $bird.lock is 1 and $syndromebird is 1 and !$possessed>>
+	<<npc "Great Hawk">>
+	<<beasttype>><<if $monster is 1>>走<<else>>跳<</if>>进了房间。<<bHe>>停在活板门旁边，用自己的爪子抓住生锈的锁。锁一瞬间就被碾碎了，<<bHe>>抓住剩下的金属部分，然后把门打开。<<bHe>>从翻起的灰尘中跳开。
+	<br><br>
+
+	<<if $monster is 1>>
+		"这样我不在的时候，你就更容易离开了，"<<bhe>>说道，"去吧，但不要离开太久，<<wife>>。没有你的巢很冷。"
+	<<else>>
+		<<bHe>>朝洞点头，然后回到鸟巢，叽叽喳喳的叫了几声。
+	<</if>>
+	<br><br>
+
+	你向其中望去，一段石阶盘旋延伸进黑暗中。
+	<br><br>
+	<<set $bird.lock to undefined>>
+
+	<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<<elseif $bird.mirror is 1 and $bird.mirror_unknown is 1 and $bird.state is "home" and !$possessed>>
+	<<set $bird.mirror_unknown to undefined>>
+	<<npc "Great Hawk">>
+	你听到一声尖叫。<<beasttype>>在空中盘旋，爪子伸展着，<<bhis>>正在凝视着镜子里的自己的倒影。
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我……这只是一面镜子，"你说道。"我希望我们家里能有一个。"
+	<<elseif $speech_attitude is "bratty">>
+		"别鬼叫了，"你说道。"这只是一面镜子。"
+	<<else>>
+		"怎么了？"你问。"这只是一面镜子。"
+	<</if>>
+	<br><br>
+	<<if $monster gte 1>>
+		<<beasttype>>落到地面上。"我很讨厌这东西，"<<bhe>>说道。<<bHis>>的爪子嵌进石头里。"感觉很危险。但如果你喜欢——"<<bHe>>露出纠结的表情。"不用的时候我们在上面盖块布吧。"
+	<<else>>
+		<<bHe>>唧唧叫，<<bhis>>的爪子嵌进石头里。<<bHe>>飞走了一会儿，回来时拿着一破旧的大布，把它扔在镜子上。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<<elseif $bird.syndrome gte 20 and $syndromebird isnot 1 and $bird.state is "home" and $bird.activity isnot "sleep" and !$possessed>>
+	<<npc "Great Hawk">>
+	你看着凝视着荒原的<<beasttype>>，光线撒在<<bhis>>光滑美丽的羽毛上。<span class="red"><<bhis>>没有错，<<bHe>>只是想要一个伴侣而已。
+	<br>
+	你获得了斯德哥尔摩综合症：
+	<<if $monster is 1>>
+		哈比
+	<<else>>
+		巨鹰
+	<</if>>
+	特质。</span>
+	<br><br>
+	<<if $loveInterest.primary is "None">>
+		<<set $loveInterest.primary to "Great Hawk">>
+		<span class = "gold">巨鹰现在是你的爱人了！这不是你所期望的找到配偶的方式，但你依然感到振奋。</span>
+		<br><br>
+	<<else>>
+		<span class = "gold">你现在可以将巨鹰称作是你的爱人了！这不是你所期望的找到配偶的方式，但你依然感到振奋。<br>可以在"态度"菜单中改变你的爱情对象。</span>
+		<br><br>
+	<</if>>
+	<<set $syndromebird to 1>>
+	<<set $bird.syndrome to undefined>>
+	<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<npc "Great Hawk">><<person1>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		<<if $possessed>>
+			你低头盯着你的绑带。你一拉，它们就散架了，再也没办法束缚你。
+			<br><br>
+			<<unbind>>
+		<<else>>
+			<<undobindingsicon>><<link [[解除束缚 (0:10)|Bird Tower Unbind]]>><<bird_pass 10>><<unbind>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<mooricon "perch">><<link [[接近栖木|Bird Tower Perch]]>><</link>>
+	<br>
+	<<mooricon "rainwater">><<link [[坐在雨水池旁|Bird Tower Rainwater Pool]]>><</link>>
+	<br>
+	<<if $syndromebird isnot 1>>
+		<<crimeicon "mark">><<link [[看向塔外 (0:05)|Bird Tower Look]]>><<bird_pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $bird.lock is 1>>
+		<<investigateicon>><<link [[检查活板门 (0:05)|Bird Tower Door]]>><<bird_pass 5>><</link>>
+		<br>
+	<<else>>
+		<<getouticon "hole">><<link [[进入活板门 (0:05)|Bird Tower Base Descend]]>><<bird_pass 5>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $syndromebird isnot 1>>
+		<<investigateicon>><<link [[寻找材料 (1:00)|Bird Tower Search]]>><<bird_pass 60>><</link>>
+		<br>
+	<</if>>
+	<<if $syndromebird and $lurkers_held gte 1 and $bird.state is "home" and $bird.activity is "build">>
+		<<ind>><<link "把潜伏者给<<bhim>>" "Bird Tower Give Captured Lurker">><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $estate_fence is "quest" and $syndromebird is 1 and $bird.state is "home" and $bird.activity isnot "sleep">>
+		<<askicon>><<link [[请求帮助闯入雷米庄园|Bird Tower Estate]]>><</link>>
+		<br>
+	<</if>>
+	<<mooricon "nest">><<link [[睡在巢里|Bird Tower Bed]]>><</link>>
+	<br>
+	<<bedicon "zzz">><<link [[睡在别的地方|Bird Tower Bed Alone]]>><<bird_stockholm -2>><</link>><<if $syndromebird isnot 1>><<lstockholm>><</if>>
+	<<if $bird.mirror is 1>>
+		<br>
+		<<if $nextPassageCheck is "Bird Tower Mirror">>
+			<span class="nextLink"><<mirroricon>><<link [[镜子|Bird Tower Mirror]]>><<preMirror>><</link>></span>
+		<<else>>
+			<<mirroricon>><<link [[镜子|Bird Tower Mirror]]>><<preMirror>><</link>>
+		<</if>>
+	<</if>>
+		<br>
+	<<if $syndromebird is 1>>
+		<br>
+		<<link [[设置|Settings]]>><<set $settingsExitPassage to "Bird Tower">><</link>>
+		<br>
+		<<attitudesControlCheck>>
+		<<if $attitudesControl.showGoldLink is true>>
+			<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+		<<else>>
+			<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+		<</if>>
+		<br><br>
+	<</if>>
+	<<endevent>>
+<</if>>

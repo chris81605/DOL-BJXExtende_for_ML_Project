@@ -1,0 +1,79 @@
+:: Elk Compound Wraith Fight Finish []
+<<effects>>
+<<if !$wraithCount>>
+	<<if $wraith.state isnot "haunt" and !["dead","sold"].includes($wraith.offspring)>>
+		<<set $wraithCount to 1>><<set $wraithMax to 1>>
+	<<else>>
+		<<set $wraithCount to 0>>
+		<<set $wraithMax to 3>>
+		<<if ["dead","sold"].includes($wraith.offspring)>>
+			<<set $wraithMax++>>
+		<</if>>
+		<<if $tentacledisable is "t">>
+			<<set $wraithMax -->>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $enemyhealth lte 0>>
+	当<<he>>踉踉跄跄地后退时，<<person>>震惊地低头看着你。
+	<<if $wraith.gen is "abomination">>
+		那些触手无力地掉落在地上，化为一股粉色的雾气。
+	<<elseif $wraith.gen is "arms">>
+		<<His>>额外的触手折回来。
+	<</if>>
+	<<His>>的头向后倾斜，随着一声短暂的尖叫声消散成了虚无。你的耳朵嗡嗡作响，你觉得自己听到了哭声。<<He>>说了些什么，但你听不清楚。
+	<br><br>
+	<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+	<<endRainWraith true>>
+	<<set $wraith.defeated++>>
+	<<clotheson>>
+	<<endcombat>><<endWraith>><<clearWraith>>
+	<<set $wraithCompoundCooldown to 10>>
+	<<set $wraithCompoundChance to 10>>
+	<<link [[继续|Elk Compound]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax or $pain gte 100 and $willpowerpain is 0 or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax>>
+		<<kissWraith "stress">>
+		<br><br>
+		<<if $pain gte 100 or $stress gte $stressmax>>
+			<<if $pain gte 100>>
+				<span class="red">你受伤太严重了，无法反抗。</span>
+			<<else>>
+				一切太过沉重，你的精神再也无法承受。
+			<</if>>
+			这个身影开始从下向上迅速消散成白雾。你发现自己的嘴巴张大着，什么都感觉不到。
+			<br><br>
+			白雾进入你的嘴里，让你整个身体感觉又冷又僵硬。那个身影已经消失了。你站起来，但双腿失去知觉。
+			<br><br>
+			<<link [[继续|Elk Compound Possessed Intro]]>><<endWraith>><<clearWraith>><<clotheson>><<endcombat>><<wraithPossess>><</link>>
+			<br>
+		<<elseif $wraith.state is "haunt" or ["dead","sold"].includes($wraith.offspring)>>
+			那个人皱起了眉头："<span class="wraith">你从我这里拿走的还不够多吗？我会另找办法的。</span>"<<He>>消失在激流中。
+			<br><br>
+			<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+			<<endRainWraith true>>
+			<<clotheson>>
+			<<endcombat>><<endWraith>><<clearWraith>>
+			<<set $wraithCompoundCooldown to 10>>
+			<<set $wraithCompoundChance to 10>>
+			<<link [[继续|Elk Compound]]>><</link>>
+		<<else>>
+			人影皱起眉头。"<span class="wraith">就像从石头里挤出鲜血一样。我会另找办法的。</span>"<<He>>消失在激流中。
+			<br><br>
+			<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+			<<endRainWraith true>>
+			<<clotheson>>
+			<<endcombat>><<endWraith>><<clearWraith>>
+			<<set $wraithCompoundCooldown to 10>>
+			<<set $wraithCompoundChance to 10>>
+			<<link [[继续|Elk Compound]]>><</link>>
+		<</if>>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[继续|Elk Compound Wraith Fight]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

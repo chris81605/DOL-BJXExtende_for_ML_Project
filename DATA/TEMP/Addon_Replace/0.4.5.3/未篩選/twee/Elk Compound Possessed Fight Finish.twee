@@ -1,0 +1,63 @@
+:: Elk Compound Possessed Fight Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	警卫们倒在地上，呻吟着。你从他们身边走开，踩在<<person1>><<persons>>握紧着拳的手臂上，并走向墙边码放的一堆箱子。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<if $compoundWraith is "willing">>
+		<<canvas-model-override "mouth" "smile">>
+	<</if>>
+
+	<span class="nextLink"><<link [[继续|Elk Compound Possessed Creatures]]>><<endevent>><<set $pain to 0>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	警卫们倒在地上，呻吟着。你从他们身边走开，踩在<<person1>><<persons>>握紧着拳的手臂上，并走向墙边码放的一堆箱子。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<if $compoundWraith is "willing">>
+		<<canvas-model-override "mouth" "smile">>
+	<</if>>
+
+	<span class="nextLink"><<link [[继续|Elk Compound Possessed Creatures]]>><<endevent>><<set $pain to 0>><</link>></span><<nexttext>>
+<<elseif $finish is 1>>
+	<<wraithExorcise true true>>
+	你踉跄着向后退去，那个苍白的身影从你的胸膛里抽出来。"<span class="wraith">也许还有另一种方法。</span><span class="tentacle">就像作为两者，就像...</span>"
+	<br><br>
+
+	"这是什么鬼东西？！"<<person2>><<person>>尖叫着，试图爬开时差点摔倒。"那个——那个鬼东西是从<<pher>>胸口钻出来的！你们都看到了吧！"
+	<br><br>
+
+	"是的，我看到了，"<<person1>><<person>>翻了个白眼，"市长告诉了我们这件事。靠近那混蛋玩意——"<<he>>用拇指指向了箱子，"会让我们看到幻觉。别理它就行了。"
+	<br><br>
+
+	"你说得倒轻巧！"<<person2>><<person>>尖叫，苍白的身影绕着<<him>>，邪恶地笑着。<<person1>><<person>>叹了口气，走向你，无视<<his>>同伴的呼喊。
+	<br><br>
+
+	<<saveNPC 0 "compound_guard">>
+	<<endcombat>>
+	<<loadNPC 0 "compound_guard">><<clearNPC "compound_guard">>
+
+	<<link [[继续|Elk Compound No Longer Possessed Fight]]>><<set $fightstart to 1>><</link>>
+<<else>>
+	<<wraithExorcise true true>>
+	<span class="gold">你停下来。</span>你感到有股力量在推动你继续前进，继续战斗，但你下定决心集中精力。你已经重新掌握了自己的身体，不打算再放手。警卫们对你停止战斗感到困惑。
+	<br><br>
+
+	你痛苦地弯下腰。祂正在从你体内挣扎着抽出来，明白祂已经被击败了。你看到一双苍白、半透明的手臂从你的胸膛中伸出。费了老大功夫，祂从你的身体里钻了出来。
+	<br><br>
+
+	祂的头突然后仰，随后在你脑海中发出一声愤怒的咆哮，消散成了虚无。你的耳朵嗡嗡作响，祂的声音充斥着四周。"<span class="wraith">成功近在咫尺，你却对我刀锋相向，真是残忍至极。</span>"警卫们惊慌失措地向后退去，<<tearful>>你跑向走廊，警卫见势也追了上来。
+	<br><br>
+
+	你设法在他们追上之前成功到达电梯，电梯门自动关上了。他们砰砰地敲打电梯门，但随着电梯上行，逐渐听不到敲门声了。最终，电梯停下，你跑出门，回到了院子内。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+	<<set $wraithCompoundCooldown to 10>>
+	<<set $wraithCompoundChance to 10>>
+
+	<<link [[继续|Elk Compound]]>><<unset $compoundWraith>><<endRainWraith>><<endWraith>><<clearWraith>><<set $compoundalarm += 5>><<set $eventskip to 1>><</link>>
+<</if>>

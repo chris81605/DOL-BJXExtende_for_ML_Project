@@ -1,0 +1,38 @@
+:: Eden Breakfast Sex Finish []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<npcincr Eden lust -20>>
+
+	伊甸用<<his>>的手拨弄你的头发，微笑着表示感谢。<<lllust>>
+<<elseif $enemyhealth lte 0>>
+
+	"你这个忘恩负义的贱人，"<<he>>说道，"我就该把你赶出去，让狼把你吃了！"<<He>>痛得皱起眉，抱着自己的身体，"我得把伤口处理一下才行。"
+	<br><br>
+
+	<<He>>把你一个人留在炉子旁。
+<<elseif $finish is 1>>
+	<<He>>皱起眉头，但还是叹着气离开了，没有继续打扰你。
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<npc Eden>><<person1>>
+<<foodicon "pancakes">><<link [[做平常的早餐 (0:20)|Eden Breakfast]]>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<pass 20>><<set $phase to 0>><<housekeeping 1 100>><</link>><<housekeepingdifficulty 1 100>><<gdom>>
+<br>
+<<if $housekeeping gte 100>>
+	<<foodicon "eat">><<link [[做创新的早餐 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 1>><</link>>
+	<br>
+	<<if $edengarden gte 3>>
+		<<tendingicon "carrots">><<link [[用种植圃里的蔬菜 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 3>><<npcincr Eden love 3>><</link>><<gglove>>
+		<br>
+	<</if>>
+	<<if $edenshrooms gte 3>>
+		<<tendingicon "mushrooms">><<link [[用木桶里的蘑菇 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 4>><<npcincr Eden lust 30>><</link>><<ggglust>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="blue">你还不是一个熟练的管家，做不出更有创意的东西。</span>
+	<br>
+<</if>>
+<<refuseicon>><<link [[拒绝|Eden Breakfast]]>><<npcincr Eden love -1>><<npcincr Eden dom -1>><<set $phase to 2>><</link>><<ldom>><<llove>>

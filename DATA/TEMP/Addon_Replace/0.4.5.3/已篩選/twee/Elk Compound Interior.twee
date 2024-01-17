@@ -1,0 +1,38 @@
+:: Elk Compound Interior []
+<<set $outside to 0>><<set $location to "compound">><<effects>>
+/* 北极星模组 */
+<<if $ghostIn>>
+	你成功地穿门而入。
+<<else>>
+	你成功地撬开门锁，推门而入。
+<</if>>
+/* 北极星 */
+<<set $compoundalarm += 1>>
+<<if $skulduggery lt 400>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+里面主要是一个大电梯。
+<<if $compoundcentre is 1>>
+	你没办法操作它。
+<<else>>
+	你看不出怎么操作它，但角落里的桌子上放着一台笔记本电脑，旁边是一个小罐子。
+<</if>>
+<br><br>
+<<if $compoundcentre isnot 1>>
+	<<if $compoundspray isnot 1>>
+		<<link [[拿走东西离开|Elk Compound Interior Take]]>><<set $blackmoney += 100>><<crimeUp 100 "thievery">><<set $spraymax += 1>><<spray 5>><<world_corruption "soft" -10>><</link>><<crime "thievery">><<gspraymax>>
+	<<else>>
+		<<link [[拿走东西离开|Elk Compound Interior Take]]>><<set $blackmoney += 100>><<crimeUp 100 "thievery">><<spray 1>><</link>><<crime "thievery">><<gspray>>
+	<</if>>
+	<br>
+<</if>>
+<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the central building")>>
+	<<link [[放下相机|Elk Compound Interior Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("the central building")>><</link>><<gsecurity>>
+	<br>
+<</if>>
+<br>
+<<link [[离开|Elk Compound]]>><</link>>
+<br>

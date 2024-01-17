@@ -1,0 +1,91 @@
+:: Wolf Deer []
+<<npc "Black Wolf">>
+<<location "forest">><<effects>>
+你顺着鹿的足迹走。它们抬起头的频率更高，好像能闻到你闻不到的东西。过了一段时间，它们开始冲刺。
+<br><br>
+<<if $athleticsSuccess>>
+	它们不会阻碍你，<span class="green">但你能跟上。</span>你们很快就到了目的地。另一边站着一只孤独的鹿。它停止了觅食，一看到狼群就惊慌失措地跑了起来。
+	<br><br>
+	<<if 20 + $wolfpackharmony + $wolfpackferocity gte $rng>>
+		它穿过森林，在树林之间穿梭，很快就看不见了。黑狼从狼群中跑出来，开始追赶它。你们跑到另一片空地，发现黑狼胜利地站在猎物面前。
+		<br><br>
+		<<if random(1,5) is 1>>
+			<<endevent>><<beastNEWinit 1 wolf>><<saveNPC 0 rival_wolf>>
+			狼群聚集在猎物周围，但在它们有机会大快朵颐之前，有什么东西阻止了它们。另一伙狼群出现在你们面前。它们露出牙齿，以威胁的姿态走近。
+			<br><br>
+			<<if $wolfpackleader is 1>>
+				它们的领导者，一个体型较大的<<beasttype>>，<<bhis>>的眼睛紧盯着你。
+				<<if $monster is 1>>
+					"你是领导者吗？"<<bhe>>咆哮道。"后退！猎物归我们了！"
+				<<else>>
+					<<bHe>>发出攻击性的咆哮，要求你将猎物交给<<bhim>>。
+				<</if>>
+				<br><br>
+				一开始是一个小团体，你开始注意到更多的敌对团体成员从灌木丛后面走出来，包围着你的其他兄弟。它们的数量超过了你们。
+				<br><br>
+				<<endevent>><<npc "Black Wolf">>
+				黑狼站在你身边。
+				<<if $monster is 1>>
+					"下达命令吧，"<<bhe>>低声对你说道。"狼群会听从你的所有指令。"
+				<</if>>
+				<br><br>
+				<<wolf_cave_plural>>在等待着你的信号。
+				<br><br>
+				<<endevent>><<loadNPC 0 rival_wolf>>
+				<<link [[和对面的首领战斗|Wolf Rival Challenge]]>><</link>>
+				<br>
+				<<if $deviancy gte 15>>
+					<<link [[主动出击|Wolf Rival Offer]]>><</link>><<deviant2>>
+					<br>
+				<</if>>
+				<<link [[撤退|Wolf Rival Retreat]]>><</link>>
+			<<else>>
+				它们的首领，一个体型较大的<<beasttype>>，<<bhis>>的眼睛紧盯着黑狼。
+				<<if $monster is 1>>
+					"你是领导者吗？"<<bhe>>咆哮道。"后退！猎物归我们了！"
+				<<else>>
+					<<bHe>>给了黑狼一个令人不寒而栗的眼神，要求狼群将猎物交给<<bhim>>。
+				<</if>>
+				<br><br>
+				<<endevent>><<npc "Black Wolf">>
+				黑狼咆哮着回来，<<bhis>>的耳朵压低了。你开始注意到更多的敌对成员从灌木丛后面走出来，包围着你的其他兄弟。它们的数量超过了你们。
+				<br><br>
+				<<bHis>>因为突然的袭击失去了信心，黑狼似乎不确定如何应对。
+				<br><br>
+				<<if $deviancy gte 15>>
+					<<endevent>><<loadNPC 0 rival_wolf>>
+					<<link [[主动出击|Wolf Rival Offer]]>><</link>><<deviant2>>
+					<br>
+				<</if>>
+				<<link [[逃跑|Wolf Rival Flee]]>><</link>><<athleticsdifficulty 1 1000>>
+			<</if>>
+		<<else>>
+			黑狼将最美味的部分留给了自己，你发现附近有一些成熟的浆果，对你来说更加美味。你坐在鹿旁边。
+			<<if $monster is 1>>
+				<<bHe>>坐在你身旁，把手放在了你的头上。"狩猎很成功，要感谢<<ppackbrother>>。"
+			<</if>>
+			<<stress -12>><<lstress>>
+			<br><br>
+			狼群慵懒地躺在那里，悠闲地享用食物。突然，一场小争斗爆发了，黑狼离开了<<bhis>>在鹿旁边的位置去平息争吵。
+			<br><br>
+			<<endevent>>
+			<<wolfpackhuntoptions>>
+		<</if>>
+	<<else>>
+		它穿过森林，在树林之间穿梭。狼群追着它跑，但以如此快的速度奔跑，它们很快就累坏了。鹿逃走了。
+		<br><br>
+		<i>更高的和谐和凶猛增加了狩猎成功的机会。</i>
+		<br><br>
+		<<wolf_cave_plural>>沮丧但并没有放弃，它们试图捕捉到更容易的猎物气味。突然，它们闻到了某种气味，于是开始奔跑起来。
+		<<gathletics>><<athletics 6>><<physique 6>>
+		<br><br>
+		<<endevent>>
+		<<set $bus to "wolfcaveclearing">>
+		<<wolfhuntevents>>
+	<</if>>
+<<else>>
+	它们不会阻碍你，<span class="red">你的速度跟不上</span>。你在森林里和它们失散了。
+	<br><br>
+	<<link [[继续|Forest]]>><<endevent>><<set $forest to 60>><</link>>
+	<br>
+<</if>>

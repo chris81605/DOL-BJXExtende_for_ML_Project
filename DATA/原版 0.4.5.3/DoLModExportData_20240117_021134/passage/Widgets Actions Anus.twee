@@ -1,0 +1,246 @@
+:: Widgets Actions Anus [widget]
+<<widget "actionsanustopenis">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].penis is 0>>
+			<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+				<!-- Do Nothing -->
+			<<elseif $NPCList[_j].stance isnot "topface">>
+				<<if $anusactiondefault is "anustopenis">>
+					| <label><span class="sub">跨在<<his>>的肉棒上</span> <<radiobutton "$anusaction" "anustopenis" checked>><<analdifficulty>> <<combatpromiscuous5>></label>
+				<<else>>
+					| <label><span class="sub">跨坐在<<his>>的肉棒上</span><<radiobutton "$anusaction" "anustopenis">><<analdifficulty>> <<combatpromiscuous5>></label>
+				<</if>>
+				<<break>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</widget>>
+
+<<widget "actionsanustopenisnew">>
+	<<if $NPCList[$anustarget].penis is 0>>
+		<<if $consensual is 1 and ($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore>>
+			<!-- Do Nothing -->
+		<<elseif $NPCList[$anustarget].stance isnot "topface" and ($enemytype isnot "man" or ($NPCList[$anustarget].location.genitals is 0 and $NPCList[$anustarget].location.head isnot "genitals"))>>
+			<<set _penis to (npcHasStrapon($anustarget) ? "穿戴式假阳具" : "肉棒")>>
+			<<if $NPCList[$anustarget].chastity.penis.includes("chastity")>>
+				<<set _anusaction["跨坐在" + $NPCList[$anustarget].pronouns.his + "的" + $NPCList[$anustarget].chastity.penis.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "上"] to "anustopenis">>
+			<<else>>
+				<<set _anusaction["跨坐在" + $NPCList[$anustarget].pronouns.his + "的" + _penis + "上" ] to "anustopenis">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanuspenisfuck">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<if playerChastity("anus")>>
+		<!-- Do Nothing -->
+	<<elseif $worn.under_lower.anus_exposed is 1 and $worn.lower.anus_exposed is 1>>
+		<<for _j = $enemyno-1; _j gte _end; _j-->>
+			<<if $NPCList[_j].penis is "anusentrance" or $NPCList[_j].penis is "anusimminent">>
+				<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+					<!-- Do Nothing -->
+				<<else>>
+					<<if $anusactiondefault is "anuspenisfuck">>
+						| <label><span class="sub">容纳<<his>>的肉棒</span> <<radiobutton "$anusaction" "anuspenisfuck" checked>> <<combatpromiscuous5>><<analvirginitywarning>><<NPCvirginitywarning $NPCList[_j].fullDescription "penile">></label>
+					<<else>>
+						| <label><span class="sub">容纳<<his>>的肉棒</span> <<radiobutton "$anusaction" "anuspenisfuck">> <<combatpromiscuous5>><<analvirginitywarning>><<NPCvirginitywarning $NPCList[_j].fullDescription "penile">></label>
+					<</if>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanuspenisfucknew">>
+	<<if playerChastity("anus")>>
+		<!-- Do Nothing -->
+	<<elseif $worn.under_lower.anus_exposed is 1 and $worn.lower.anus_exposed is 1>>
+		<<if $NPCList[$anustarget].penis is "anusentrance" or $NPCList[$anustarget].penis is "anusimminent">>
+			<<if $consensual is 1 and (($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore) or $NPCList[$anustarget].chastity.penis.includes("chastity")>>
+				<!-- Do Nothing -->
+			<<else>>
+				<<set _penis to (npcHasStrapon($anustarget) ? "穿戴式假阳具" : "肉棒")>>
+				<<set _anusaction["容纳"+$NPCList[$anustarget].pronouns.his+"的"+_penis] to "anuspenisfuck">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanuspenisdoublefuck">>
+	<<if playerChastity("anus")>>
+		<!-- Do Nothing -->
+	<<elseif $worn.under_lower.anus_exposed is 1 and $worn.lower.anus_exposed is 1>>
+		<<if $consensual is 1 and (($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore) or $awareness lt 300>>
+			<!-- Do Nothing -->
+		<<else>>
+			<<if $NPCList[$anustarget].penis is "anusdouble" or $NPCList[$anustarget].penis is "anusimminentdouble" or $NPCList[$anustarget].chastity.penis.includes("chastity")>>
+				<<set _anusaction["容纳"+$NPCList[$anusdoubletarget].pronouns.his+"的"+$NPCList[$anusdoubletarget].penisdesc] to "anuspenisdoublefuck">>
+			<<elseif $NPCList[$anusdoubletarget].penis is "anusdouble" or $NPCList[$anusdoubletarget].penis is "anusimminentdouble" or $NPCList[$anusdoubletarget].chastity.penis.includes("chastity")>>
+				<<set _anusaction["容纳"+$NPCList[$anustarget].pronouns.his+"的"+$NPCList[$anustarget].penisdesc] to "anuspenisdoublefuck">>
+			<<elseif !($NPCList[$anustarget].chastity.penis.includes("chastity") and $NPCList[$anusdoubletarget].chastity.penis.includes("chastity"))>>
+				<<set _anusaction["容纳全部阴茎"] to "anuspenisdoublefuck">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusMouthEntrance">>
+	<<if $NPCList[$anustarget].mouth is "anusentrance">>
+		<<if $consensual is 1 and $promiscuity lt 0 and !$promiscuityIgnore>>
+		<<else>>
+			<<set _anusaction["把你的屁股压在" + $NPCList[$anustarget].pronouns.his + "的嘴上"] to "bottombay">>
+		<</if>>
+		<<set _anusaction["磨蹭" + $NPCList[$anustarget].pronouns.his + "的脸"] to "othermouthtease">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusMouthImminent">>
+	<<if $NPCList[$anustarget].mouth is "anusimminent">>
+		<<set _anusaction["在" + $NPCList[$anustarget].pronouns.his + "的嘴唇上磨蹭"] to "othermouthrub">>
+		<<set _anusaction["拉开距离"] to "othermouthescape">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusMouthPenetration">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _anusaction["配合"] to "othermouthcooperate">>
+	<<else>>
+		<<set _anusaction["蹭动"] to "othermouthcooperate">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusHandEntrance">>
+	<<if $NPCList[$anustarget].lefthand is "anusentrance" or $NPCList[$anustarget].righthand is "anusentrance">>
+		<<if $consensual is 1 and $promiscuity lt 0 and !$promiscuityIgnore>>
+		<<else>>
+			<<set _anusaction["把你的臀部紧紧地贴在" + $NPCList[$anustarget].pronouns.his + "的手上"] to "bottomhandbay">>
+		<</if>>
+		<<set _anusaction["用你的菊穴在" + $NPCList[$anustarget].pronouns.his + "的手指上磨蹭"] to "handtease">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusHandPenetration">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _anusaction["配合"] to "handcooperate">>
+	<<else>>
+		<<set _anusaction["抓住它"] to "handtake">>
+		<<set _anusaction["蹭动"] to "handcooperate">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusPenisEntrance">>
+	<<actionsanuspenisfucknew>>
+	<<if $consensual is 1 and ($promiscuity lte 54 and $enemytype is "man" or $deviancy lte 54 and $enemytype isnot "man") and !$promiscuityIgnore>>
+	<<else>>
+		<<set _anusaction["用你的臀部夹住它"] to "penischeeks">>
+	<</if>>
+	<<if $vaginause is 0 and !playerChastity("vagina")>>
+		<<set _anusaction["提供小穴替代"] to "penispussy">>
+	<</if>>
+	<<if $vaginaldoubledisable is "f" and $awareness gt 300 and $vaginause is "penis" and $NPCList[$vaginatarget].penissize gte 2 and $NPCList[$anustarget].penissize gte 2 and !playerChastity("vagina") and !["legLock","legLocked"].includes($feetuse)>>
+		<<set _anusaction["提供双龙入穴"] to "penispussydouble">>
+	<</if>>
+	<<set _anusaction["挑逗龟头"] to "penistease">>
+	<<if $analdoubledisable is "f" and _secondtarget is true and ($vaginause is 0 or ($vaginause isnot 0 and $vaginause isnot "penisdouble")) and $awareness gte 300 and !["legLock","legLocked"].includes($feetuse)>>
+		<<if $npc.includes($NPCList[$anusdoubletarget].fullDescription)>>
+			<<set _anusaction["跨坐在" + $NPCList[$anusdoubletarget].fullDescription + "的" + $NPCList[$anusdoubletarget].penisdesc + "上"] to "anustopenisdouble">>
+		<<else>>
+			<<set _anusaction["跨坐在" + $NPCList[$anusdoubletarget].fullDescription + "的" + $NPCList[$anusdoubletarget].penisdesc + "上"] to "anustopenisdouble">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusPenisImminent">>
+	<<actionsanuspenisfucknew>>
+	<<set _anusaction["磨蹭"] to "rub">>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("analskill") gte 800>>
+		<<set _anusaction["寸止" + $NPCList[$anustarget].pronouns.him] to "penisEdging">>
+	<</if>>
+	<<set _anusaction["拉开距离"] to "escape">>
+<</widget>>
+
+<<widget "actionsanusPenisPenetration">>
+	<<set _anusaction["抓住它"] to "take">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _anusaction["配合"] to "cooperate">>
+	<<else>>
+		<<set _anusaction["性交"] to "cooperate">>
+	<</if>>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("analskill") gte 800>>
+		<<set _anusaction["寸止" + $NPCList[$anustarget].pronouns.him] to "penisEdging">>
+	<</if>>
+	<<if !playerIsPregnant() and canBeMPregnant() and !$player.vaginaExist and playerPregnancyPossibleWith($NPCList[$anustarget]) and $enemyarousal gte $enemyarousalmax and $demon gte 6 and $demonbuild gte 90>>
+		<<if playerAwareTheyCanBePregnant()>>
+			<<set _anusaction["强制授孕"] to "forceImpregnation">>
+		<<else>>
+			<<set _anusaction["?????"] to "forceImpregnation">>
+		<</if>>
+	<</if>>
+	<<if _secondtarget is true and ($vaginause is 0 or ($vaginause isnot 0 and $vaginause isnot "penisdouble")) and $awareness gte 300 and !["legLock","legLocked"].includes($feetuse)>>
+		<<if $npc.includes($NPCList[$anusdoubletarget].fullDescription)>>
+			<<set _anusaction["跨坐在" + $NPCList[$anusdoubletarget].fullDescription + "的" + $NPCList[$anusdoubletarget].penisdesc + "上"] to "anustopenisdouble">>
+		<<else>>
+			<<set _anusaction["跨坐在" + $NPCList[$anusdoubletarget].fullDescription + "的" + $NPCList[$anusdoubletarget].penisdesc + "上"] to "anustopenisdouble">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusPenisDoubleEntrance">>
+	<<actionsanuspenisdoublefuck>>
+	<<set _anusaction["挑逗"] to "penisdoubletease">>
+	<<if $vaginause is 0 and !playerChastity("vagina")>>
+		<<set _anusaction["提供小穴替代"] to "penispussydap">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusPenisDoubleImminent">>
+	<<actionsanuspenisdoublefuck>>
+	<<set _anusaction["磨蹭"] to "rub">>
+	<<if ($consensual is 0 or ($promiscuity gte 75 and $enemytype is "man") or ($deviancy gte 75 and $enemytype isnot "man")) and currentSkillValue("analskill") gte 800>>
+		<<set _anusaction["寸止" + $NPCList[$anustarget].pronouns.him] to "penisDoubleEdging">>
+	<</if>>
+	<<set _anusaction["拉开距离"] to "doubleescape">>
+<</widget>>
+
+<<widget "actionsanusPenisDoublePenetration">>
+	<<set _anusaction["抓住它"] to "doubletake">>
+	<<if $consensual is 0 or ($promiscuity lte 74 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 74 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _anusaction["配合"] to "doublecooperate">>
+	<<else>>
+		<<set _anusaction["性交"] to "doublecooperate">>
+		<<if $NPCList[$anustarget].penis isnot "anusdouble" or $NPCList[$anusdoubletarget].penis isnot "anusdouble">>
+			<<set _anusaction["容纳第二根阴茎"] to "anuspenisdoublefuck">>
+		<</if>>
+	<</if>>
+	<<if ($consensual is 0 or ($promiscuity gte 75 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("analskill") gte 800>>
+		<<set _anusaction["寸止" + $NPCList[$anustarget].pronouns.him] to "penisDoubleEdging">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusFaceAgainstAnus">>
+	<<set _anusaction["磨蹭"] to "otherMouthAnusRub">>
+	<<set _anusaction["停止"] to "otherMouthAnusStop">>
+<</widget>>
+
+<<widget "actionsanusHandAgainstAnus">>
+	<<set _anusaction["磨蹭"] to "handAnusRub">>
+	<<set _anusaction["停止"] to "handAnusStop">>
+<</widget>>
+
+<<widget "actionsanusPenisAgainstAnus">>
+	<<set _anusaction["磨蹭"] to "otherAnusRub">>
+	<<set _anusaction["停止"] to "otherAnusStop">>
+<</widget>>

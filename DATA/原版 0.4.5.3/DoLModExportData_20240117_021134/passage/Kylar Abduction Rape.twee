@@ -1,0 +1,34 @@
+:: Kylar Abduction Rape []
+<<if $molestationstart is 1>>
+	<<set _kylar to statusCheck("Kylar")>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $enemyarousalmax *= 2>><<set $kylar.raped += 1>>
+	<<set $NPCList[0].lefthand to ($worn.under_lower.type.includes("naked") ? 0 : "underlowerclothes")>>
+	<<set $NPCList[0].righthand to ($worn.lower.type.includes("naked") ? 0 : "lowerclothes")>>
+	<<if _kylar.penis isnot "none" and $player.vaginaExist and (_kylar.vagina is "none" or random(0,1))>>
+		<<set $NPCList[0].penis to "vaginaentrance">><<set $vaginause to "penis">><<set $vaginastate to "entrance">><<set $vaginatarget to 0>><<set $NPCList[0].location.genitals to "genitals">>
+	<<elseif _kylar.vagina isnot "none" and $player.penisExist>>
+		<<set $NPCList[0].vagina to "penisentrance">><<set $penisuse to "othervagina">><<set $penisstate to "entrance">><<set $penistarget to 0>><<set $NPCList[0].location.genitals to "genitals">>
+	<</if>>
+<</if>>
+
+<<set $enemyarousal += 15>>
+<<He>>亲吻、舔舐、用牙齿啃咬着你，同时用<<his>>的全身蹭着你的身体。
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Kylar Abduction Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Kylar Abduction Rape]]>><</link>></span><<nexttext>>
+<</if>>

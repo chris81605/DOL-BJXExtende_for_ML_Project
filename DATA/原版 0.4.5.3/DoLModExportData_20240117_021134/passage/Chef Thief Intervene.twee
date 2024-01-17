@@ -1,0 +1,32 @@
+:: Chef Thief Intervene []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+
+你把手伸到桌子下面，拖出一个<<person>>。
+
+<<if $rng gte 51>>
+	你没有认出<<him>>，而<<He>>也满脸恐惧地看着你。
+	<br><br>
+
+	<<link [[让他们走|Chef Thief Let]]>><<famegood 1>><</link>>
+	<br>
+	<<link [[拿回小面包|Chef Thief Take]]>><</link>>
+	<br>
+	<<if $money gte 5000>>
+		<<link [[给他们买小面包 (£50)|Chef Thief Buy]]>><<famegood 4>><<set $money -= 5000>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+	<</if>>
+
+<<else>>
+	你认出了<<him>>，<<him>>也是孤儿院的人，<<his>>一开始十分害怕，但当<<He>>看见是你之后，<<he>>放松了下来。
+	<br><br>
+
+	<<link [[让他们走|Chef Thief Let]]>><<hope 1>><<famegood 1>><</link>><<ghope>>
+	<br>
+	<<link [[拿回小面包|Chef Thief Take]]>><<hope -1>><</link>><<lhope>>
+	<br>
+	<<if $money gte 5000>>
+		<<link [[给他们买小面包 (£50)|Chef Thief Buy]]>><<famegood 4>><<hope 1>><<set $money -= 5000>><<trauma -6>><</link>><<ghope>><<ltrauma>>
+		<br>
+	<</if>>
+
+<</if>>

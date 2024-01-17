@@ -1,0 +1,88 @@
+:: Brothel Show Swarm []
+<<if $sexstart is 1>>
+	<<set $cumbucket to 0>>
+	<<if $rng gte 91>>
+		<<set $cumbucket to 1>>
+	<</if>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<set _swarmsType to ["eels","snakes","worms","worms","worms","maggots"]>>
+	<<if $spiderdisable is "f">>
+		<<run _swarmsType.push("spiders")>>
+	<</if>>
+	<<set $enemytype to "swarm">>
+	<<set _swarmsTypeSelected to _swarmsType.pluck()>>
+	<<swarminit _swarmsTypeSelected "小动物" "向你移动" "包围着你" "稳定" 4 2>>
+	<<set $combat to 0>>
+	<<set $timer to 20>>
+	<<set $nowiggle to true>>
+	布莱尔的打手开始往玻璃缸里倒入<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。
+	<<set $sexstart to 0>>
+<</if>>
+<<if $cumbucket is 1>>
+	<<if $timer gte 17>>
+		你看见布莱尔从观众中挤过。
+	<<elseif $timer gte 10>>
+		你看见布莱尔从观众中挤过，时不时停下向人群中说着什么。
+	<<elseif $timer gte 6>>
+		布莱尔似乎在替你向观众索取小费。
+	<<elseif $timer gte 3>>
+		布莱尔继续从观众中挤过，手里拿着什么重物。
+	<</if>>
+<</if>>
+<<if $timer is 16>>
+	<span class="pink">它们往缸中倒入了更多<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<</if>>
+<<if $timer is 13>>
+	<span class="pink">它们往缸中倒入了更多<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<</if>>
+<<if $timer is 9>>
+	<span class="pink">它们往缸中倒入了更多<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<</if>>
+<<if $timer is 7>>
+	<span class="pink">它们往缸中倒入了更多<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<</if>>
+
+<<if $timer is 1 and $cumbucket is 1>>
+	观众们纷纷慷慨解囊。<span class="red">布莱尔脸上露出了一丝微笑，把一桶东西浇在了你头上。</span>
+	<br>
+	<<set _sexId to getSexesFromRandomGroup()>>
+	<span class="red">是一桶<<getfluidsfromgroup _sexId>>。</span>观众们欢呼了起来。
+	<br>
+	<span class="pink">连<<print $swarm.type.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>似乎也被刺激，亢奋了起来。</span>
+	<<drenchfromgroup _sexId>>
+	<<set $cumbucket to 0>>
+	<<set $timer to 6>>
+	<!-- "gte BOTH" means groups containing males, or only those with penises. -->
+	<<if _sexId gte SexTypes.BOTH>>
+		<<fertiliseParasites>>
+		<<fertiliseParasites "vagina">>
+		<<recordSperm `{genital: "vagina", target: "pc", spermOwner: "cum bucket", spermType: "human", daysTillRemovalOverride: 12, quantity: random(5,10)}`>>
+		<<recordSperm `{genital: "anus", target: "pc", spermOwner: "cum bucket", spermType: "human", daysTillRemovalOverride: 12, quantity: random(5,10)}`>>
+	<</if>>
+	<<fetishPregnancyImg>>
+<</if>>
+
+<<if $face isnot "covered">>
+	<<fameexhibitionism 1>>
+<</if>>
+
+<<effects>><<swarmeffects>>
+<<swarm>>
+<<audience>>
+<br><br>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Brothel Show Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Show Swarm]]>><</link>></span><<nexttext>>
+<</if>>

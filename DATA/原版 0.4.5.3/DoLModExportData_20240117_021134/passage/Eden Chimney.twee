@@ -1,0 +1,40 @@
+:: Eden Chimney []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+<<switch $edenchimney>>
+	<<case 0>>
+		你擦洗着烟囱，烟灰一波一波地往下掉。你一直努力干活，直到自己累得无法继续。你查看起自己的成果。
+		烟囱仍然很脏，但看起来比以前好多了。
+	<<case 1>>
+		你擦洗烟囱的砖块，洗去几个月积攒下来的烟灰。
+		你每隔几分钟就让自己休息一下，呼吸新鲜空气。一轮工作下来，烟囱仍然很脏。
+	<<case 2>>
+		你继续擦洗烟囱。虽然这是一项艰巨的工作，但你至少取得了明显的进展。
+	<<case 3>>
+		你继续擦洗烟囱。它基本上已经干净了，但仍有一些烟灰残留。
+	<<default>>
+		你继续努力了一段时间，直到烟囱完全清洁干净。
+<</switch>>
+<<physique 3>>
+<br><br>
+
+<<set $edenchimney += 1>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 26 and ((Time.hour gt 6 and Time.hour lt 11) or Time.hour gt 14)>>
+	在试图从烟囱里挤出来的时候，你的胳膊被夹在了你的身体两侧，把你卡住了。在恐慌中，你开始大喊着向伊甸呼救。
+	你听到脚步声走近，然后一双强有力的手抓住你的腰部并开始拉动。在挣扎中，你不可避免地与伊甸互相摩擦了好几次，
+	<<if $NPCList[0].penis isnot "none">>
+		渐渐地，你感到<<his>>的<<print $NPCList[0].penisdesc>>硬了起来。
+	<<else>>
+		你听到<<his>>的呼吸逐渐加快。
+	<</if>>
+	当你终于自由时，你们两个人都倒在了地上，伊甸立刻抓住机会把你压倒了。
+	<br><br>
+
+	<<link [[亲吻伊甸|Eden Chimney Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<gdom>><<glove>>
+	<br>
+	<<link [[推开伊甸|Eden Chimney Push]]>><<npcincr Eden love -3>><<npcincr Eden dom -1>><</link>><<ldom>><<lllove>>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+<</if>>
+<br>

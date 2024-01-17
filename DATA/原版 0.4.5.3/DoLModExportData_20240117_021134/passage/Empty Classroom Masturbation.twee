@@ -1,0 +1,42 @@
+:: Empty Classroom Masturbation []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<set $timer to 50>><<set _justStarted to true>>
+	你在把衣服留在教室后面后走到前面，面对着这些空荡荡的课桌，你思考着自己将要做的事情和做完之后其他人在得知后会怎么想。
+	你的身体开始颤抖，你已经无法忍耐了。
+	<br><br>
+	<<masturbationstart>>
+	<<set $phase to 1>>
+<<else>>
+	<<set $phase to 0>>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+
+<<if ["first","second","third","fourth","fifth"].includes($schoolstate)>>
+	<<set _interruption to "Empty Classroom Masturbation Finish">>
+<<elseif $timer lte 0>>
+	<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+		<<set _interruption to "Empty Classroom Masturbation Guard">>
+	<<elseif Time.hour lte 14>>
+		<<set _interruption to "Empty Classroom Masturbation Student">>
+	<<else>> <!-- lunch -->
+		<<set _interruption to "Empty Classroom Masturbation Janitor">>
+	<</if>>
+<</if>>
+
+<<if $corruptionMasturbation>>
+	<span class="red">你耳朵里的史莱姆不让你停下。</span>
+<</if>>
+<div id="masturbationButtons">
+	<<if _interruption>>
+		<div id="next"><<link [[继续|_interruption]]>><<set $finish to 0>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next"><<link [[继续|Empty Classroom Masturbation]]>><</link>><<nexttext>></div>
+	<</if>>
+	<<masturbationStopControls>>
+</div>
+<br><br><br><br><br>

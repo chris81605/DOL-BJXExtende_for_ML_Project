@@ -1,0 +1,44 @@
+:: Farm Road 3 []
+<<location "farmroad3">><<effects>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你走进更深的乡村。树木变得茂密，直到道路被包围。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你往城里走。这条路变成了一片灌木丛，两边都有树木环绕着你。<<physique 3>>
+<<else>>
+	你在连接城镇和周围农田的道路上。这条路被树包围着。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		微风吹过树林，摇曳着树枝，抚摸着你的脸。<<lstress>><<stress 6>>
+		<br><br>
+
+		<<destinationfarmroad>>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<roadicon>><<link [[走进乡村 (0:30)|Farm Road 4]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+	<<roadicon>><<link [[朝小镇走 (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

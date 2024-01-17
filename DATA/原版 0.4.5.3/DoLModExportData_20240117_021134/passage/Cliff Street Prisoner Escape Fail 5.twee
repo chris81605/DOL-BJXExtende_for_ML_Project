@@ -1,0 +1,34 @@
+:: Cliff Street Prisoner Escape Fail 5 []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">><<earnFeat "You're the Laughingstock">>
+<<set _sentence_days_left to Math.floor(($pillory_tenant.endDate - $timeStamp) / Time.secondsPerDay)>>/* Calc hours remaining */
+<<set _hours to Math.floor(($pillory_tenant.endDate - $timeStamp) / Time.secondsPerHour)>>/* hours to end hour */
+<<if _hours gte 27>><<set _hours to 27>><</if>>
+<<if _hours lt 2>><<set _hours to 2>><</if>> /* cap hours: high and low */
+
+<<person2>>
+<<if $phase lte 1>>
+	<<if _hours gte 18>><<famegood 30>>"哇哦！"那个<<person>>看起来大吃一惊。"这……这真是令人震惊的无私奉献。我相信其他人都不会介意的。嗯，没错。"
+	<<elseif _hours gte 12>><<famegood 20>>那个<<person>>看起来吃了一惊，"这……这实际上是相当光荣的，而且我相信公众也不会介意。嗯，没错。"
+	<<else>><<famegood 10>>那个<<person>>看起来吃了一惊。"好吧，我只是没想到真的有人会贯彻执行这些。"
+	<</if>>
+<<else>>
+	<<person>>你面前大笑。"好心人太多了！不，你会被关上颈手枷了。"
+<</if>>
+<br><br>
+<<The_pillory_person>>提前获释。如释重负一般，这个人衷心地感谢着你。<<famegood 5>>
+警察们把你强行塞到<<his>>所处位置的颈手枷上，在把装置安装好后，把你的胳膊和脑袋锁在了固定位置。
+<br><br>
+那个<<person2>><<person>>轻轻地拍了拍你的光屁股，"祝你在这里面玩得开心，在<<number _hours>>小时后会有人来放你出来的。
+<<if $phase is 3>><<set _bonus to random(2,4)>><<set _hours += _bonus>>不过才……<<Number _hours>>小时。再额外奖励我们跑<<Number _bonus>>小时吧。一起享受跑步的愉悦！"
+<<elseif $phase is 0>><<set _discount to random(2,4)>><<set _hours -= _discount>>啊……就关<<number _hours>>小时吧，不过你道歉了，所以就加上<<number _discount>>个小时的折扣好了。"
+<<else>>如果我们记得的话。"
+<</if>><br><br>
+警察离开了。那个<<if $phase is 3>>之前追逐着你的<</if>><<person4>><<person>>随之给了你一个飞吻。
+<<set $pillorytime to _hours>>
+<<set $pilloryaudience to ($pillory_tenant.crowd/2)>>
+<<crimeDown 5000>>
+<<clear_pillory>>
+<<endevent>>
+<br><br>
+<<link [[继续|Pillory]]>><</link>>
+<br>

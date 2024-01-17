@@ -1,0 +1,26 @@
+:: Canteen Lunch []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $rng gte 91>>
+	<<generates1>><<generates2>><<person1>>
+	你坐下来吃饭。一个<<person>>走过来拍了拍你的肩膀。"我给你做了午饭，"<<he>>笑着拿了一个棕色的纸袋，把它放在了桌上。"吃得开心哦！"
+	<br><br>
+
+	<<link [[吃|Canteen Lunch Sandwich]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[把它扔掉|Canteen Lunch Sandwich]]>><<set $phase to 0>><<status -5>><</link>><<lcool>>
+<<else>>
+	<<if $cool gte 160>>
+		你坐下来吃饭，同桌的其他学生抢着想要吸引你的注意。
+		<<stress -2>><<trauma -1>><<lstress>><<ltrauma>>
+	<<elseif $cool lt 40>>
+		你坐下来吃饭。同桌的其他学生很快就离开了桌子，不想被人看到和你在一起。
+		<<gtrauma>><<stress 1>><<trauma 1>>
+	<<else>>
+		你坐下来吃饭，没人注意你。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+<</if>>
+<br>

@@ -1,0 +1,63 @@
+:: Hospital Keycard Seduce []
+<<effects>>
+<<if $NPCList[0].skills.security gte 700>>
+	<<set $seductiondifficulty to 4000>>
+<<elseif $NPCList[0].skills.security lte 300>>
+	<<set $seductiondifficulty to 2000>>
+<<else>>
+	<<set $seductiondifficulty to 6000>>
+<</if>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><br><br><</if>><<seductionskilluse>>
+
+你靠在柜台上。"这肯定是一份吃力不讨好的工作，"你咕噜着。"也许我可以带你去玩一玩？"
+<<promiscuity2>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<generatep2>><<set $NPCList[1].role to "nurse">><<saveNPC 1 "pubfame_nurse">>
+	<<if $NPCList[0].skills.security gte 700>>
+		<<person>>张开<<his>>的嘴，但停顿了一下。<<He>>斜眼看着你，摸了摸<<his>>下巴一会儿，<span class="green">然后点头同意了</span>。
+		<br>
+		"嘿，我要去休息了，"<<he>>对旁边的<<person2>><<person>>说。"十分钟后就会回来。"护士点头回应，然后<<person1>><<person>>从柜台走出来，把你带到壁橱前。"我觉得这是我应得的，"那个<<person>>咯咯地笑着，把你拉近。
+	<<elseif $NPCList[0].skills.security lte 300>>
+		<<person>>咧嘴一笑<span class="green">并点头</span>。"伙计，你知道这份工作有多无聊吗？谢谢你给我的生活加上调料。"<<He>>离开柜台，然后和附近的<<person2>><<person>>搭话。"嘿，我现在要休息十五分钟！"
+		<br>
+		"哦，不，不行！"<<person>>回叫道，"你刚休息回来，你这个色狼！"<<person1>><<person>>抓住你的手臂，飞快跑到壁橱里，无视护士的抗议。
+		<br>
+		"让我们看看这里有什么，"<<he>>说着把你拉近。
+	<<else>>
+		<<person>>环顾四周，然后<span class="green">点头</span>。"我要休息一下，"<<he>>对附近的<<person2>><<person>>说。护士点头回应，然后<<person1>><<he>>带你到一个壁橱前。
+		<br>
+		"通常情况下，我不会在工作中这样做，"<<he>>把你拉近。"但我想我可以破例一次。"
+	<</if>>
+	<br><br>
+
+	你让<<him>>放下<<his>>的防备。<span class="gold">现在你只需要在做爱时从<<him>>那里偷走卡片。</span>
+	<br><br>
+
+	<<link [[继续|Hospital Keycard Seduce Sex]]>><<set $sexstart to 1>><</link>>
+<<else>>
+	<<if $NPCList[0].skills.security gte 700>>
+		<<person>><span class="red">摇头</span>。"现在是上班时间，我不能走，"<<he>>说，"我不想丢掉这份工作。还有什么需要我帮忙的吗？"
+	<<elseif $NPCList[0].skills.security lte 300>>
+		<<person>>上下打量你，<span class="red">然后咂了咂舌</span>。"我可不想为这码事让同事对我大喊大叫，"<<he>>说，"你真的需要什么吗？"
+	<<else>>
+		<<person>><span class="red">皱着眉头，摇头拒绝了</span>。"你觉得我是个变态吗？"<<he>>问道，"你是想在工作期间挑战最速被炒传说？如果你不需要什么，请离开这里。"
+	<</if>>
+	<br><br>
+
+	<<if $NPCList[0].skills.security gte 700>>
+		<<set $skulduggerydifficulty to 1000>>
+	<<elseif $NPCList[0].skills.security lte 300>>
+		<<set $skulduggerydifficulty to 100>>
+	<<else>>
+		<<set $skulduggerydifficulty to 500>>
+	<</if>>
+
+	<<if !$pubfame.hospital.distract>>
+		<<link [[分散注意力|Hospital Keycard Distract]]>><<set $pubfame.hospital.distract to 1>><</link>><<skulduggerydifficulty>>
+		<br>
+	<</if>>
+	<<link [[回去|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>
+<</if>>

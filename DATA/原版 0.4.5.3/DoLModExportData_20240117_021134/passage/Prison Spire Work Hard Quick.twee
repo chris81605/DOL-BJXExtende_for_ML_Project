@@ -1,0 +1,40 @@
+:: Prison Spire Work Hard Quick []
+<<effects>>
+
+你绕着灯塔跑圈，一口气把牙齿都捡了起来。
+<<if $athleticsSuccess>>
+	<<beastNEWinit 5 hawk>><<person1>>
+	<<beastsplural>>停止了梳理的动作，转而看着你，但还没等它们蓄力追赶，<span class="green">你就回到小屋里了</span>。
+	<br><br>
+
+	<<endevent>>
+	"干得漂亮，"一回到小屋，<<generate_anxious_guard 0>><<anxious_guard 0>>立马开口说道。
+	<<if $prison.anxious gte 60>>
+		"你可以留几颗牙齿，但别告诉其他人。"<<prison_teeth_text 2>><<prison_teeth 2>>
+	<</if>>
+	<<lsuspicion>><<prison_guards 1>>
+	<br><br>
+
+	<<prison_spire_options>>
+<<else>>
+	<<beastNEWinit 5 hawk>><<person1>>
+	<<beastsplural>>停止了梳理的动作，转而盯着你看。匆忙离开之时，<span class="red">你被一块浮木绊倒了。</span><<gstress>><<gpain>><<stress 6>><<pain 4>>
+	<br><br>
+	<<if $monster is 1>>
+		<<beastsplural>>大笑起来。
+	<<else>>
+		<<beastsplural>>因欢乐而尖啸。
+	<</if>>
+	其中一个跳下灯塔，降落在离你几米远的地方。
+	<<if $monster is 1>>
+		"想拿不属于你的东西？"<<bhe>>说，"放下来！"
+	<<else>>
+		<<bHe>>死盯着鲨鱼牙齿。
+	<</if>>
+	<br><br>
+	<<link [[放下牙齿|Prison Spire Work Drop]]>><<prison_guards -1>><</link>><<gsuspicion>>
+	<br>
+	<<link [[威胁|Prison Spire Work Threaten]]>><</link>><<physiquedifficulty 10000 20000>>
+	<br>
+
+<</if>>

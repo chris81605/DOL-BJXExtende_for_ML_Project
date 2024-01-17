@@ -1,0 +1,30 @@
+:: Ocean Breeze Plates []
+<<if $phase is 0>>
+	这需要几分钟，但你设法把所有的东西都摆到桌子上。
+	<br><br>
+	剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+	<br><br>
+<<elseif $phase is 1>>
+	<<if $danceSuccess>>
+		<<set $tipmod to 0.2>><<tipset "serving">>
+
+		<<set $tip += 500>>
+		<<set $tip += 100>>
+
+		你把盘子放到托盘上然后<<dancetext>>把它们放在肩上平衡，确保不让任何东西洒出来。<span class="green">你把所有东西都完好无损地送到餐桌上。</span>
+		<br><br>
+		<<npc Sam>><<person1>>当<<he>>路过时，萨姆向你竖起大拇指。<<npcincr Sam love 1>><<glove>>
+		<br><br>
+		剩下的工作时间里无事发生。有人给了你一笔小费。<<tipreceive>>
+		<br><br>
+	<<else>>
+		你把盘子放到托盘上然后<<dancetext>>把它们放在肩上平衡，小心翼翼不让任何东西洒出来。然而，你在走出厨房时失去了平衡，<span class="red">不小心将几盘食物摔在地上。</span>萨姆向你投来不满的目光。<<npcincr Sam love -1>><<llove>><<stress 6>><<gstress>>
+		<br><br>
+		你一边收拾烂摊子一边叹气。
+		<br><br>
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<br><br>
+	<</if>>
+<</if>>
+<<pass 1 hour>>
+<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>

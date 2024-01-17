@@ -1,0 +1,92 @@
+:: Bully Pier Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set _start to true>>
+	你允许惠特尼将你随意摆弄，不顾旁边可能有人围观。
+	<<exhibitionism5>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+	<<set _start to true>>
+	<<if $phase is 1>>
+		你试图远离惠特尼，但是<<he>>
+		<<if $whitPierSex is "penile">>
+			把你拉了回来，用手紧紧抓着你的<<bottom>>。
+		<<else>>
+			压在你身上，使你无法动弹。
+		<</if>>
+		"我把你拖到这里来不是让你来表演当个胆小鬼的。"
+	<<else>>
+		<<if $exhibitionism lt 75>>
+			你害怕别人看到你这个样子，
+		<<else>>
+			你不想，
+		<</if>>
+		但你知道最好不要惹到惠特尼。于是你静静地保持不动。
+	<</if>>
+	<<controlloss>>
+	<br><br>
+<</if>>
+
+<<if _start>>
+	<<switch $whitPierSex>>
+		<<case "vaginal">>
+			<<set $position to "doggy">><<set $position_lock to 1>>
+			<<set $vaginause to "penis">><<set $NPCList[0].penis to "vaginaentrance">><<set $vaginastate to "entrance">><<set $vaginatarget to 0>>
+			<<set $NPCList[0].location.genitals = "genitals">>
+		<<case "penile">>
+			<<set $position to "missionary">><<set $position_lock to 1>>
+			<<set $penisuse to "othervagina">><<set $NPCList[0].vagina to "penisentrance">><<set $penisstate to "entrance">><<set $penistarget to 0>>
+			<<set $NPCList[0].location.genitals = "genitals">>
+		<<case "anal">>
+			<<set $position to "doggy">><<set $position_lock to 1>>
+			<<set $anususe to "penis">><<set $NPCList[0].penis to "anusentrance">><<set $anusstate to "entrance">><<set $anustarget to 0>>
+			<<set $NPCList[0].location.genitals = "genitals">>
+		<<case "handjob">>
+			<<set $position to "doggy">><<set $position_lock to 1>>
+			<<set $NPCList[0].lefthand to "penisentrance">><<set $penisuse to 1>><<set $penisstate to "otherhandentrance">>
+		<<case "fingering">>
+			<<set $position to "doggy">><<set $position_lock to 1>>
+			<<set $NPCList[0].lefthand to "vaginaentrance">><<set $vaginause to 1>><<set $vaginastate to "otherhandentrance">>
+	<</switch>>
+	<<set $timer to 9>>
+	<<set $audienceforceteen to 1>>
+<</if>>
+
+<<effects>>
+
+<<if $whitPierPhase is 0>>
+	<<if $timer lte 1>>
+		<span class="red">船长正看着你！</span>
+	<<elseif $timer lte 3>>
+		<span class="pink">船离得很近，你能看到船长。</span>
+	<<elseif $timer lte 5>>
+		<span class="purple">船越来越近了。</span>
+	<<elseif $timer lte 7>>
+		<span class="blue">一艘船来了，就在近海。</span>
+	<<else>>
+		<span class="lblue">你看到地平线上有一个小点。</span>
+	<</if>>
+<</if>>
+
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($timer lte 0 and $whitPierPhase is 0)>>
+	<span id="next"><<link [[继续|Bully Pier Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bully Pier Sex]]>><</link>></span><<nexttext>>
+<</if>>

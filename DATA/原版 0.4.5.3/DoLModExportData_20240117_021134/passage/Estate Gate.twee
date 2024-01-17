@@ -1,0 +1,34 @@
+:: Estate Gate []
+<<effects>>
+
+<<generate1>><<person1>>
+你走近大门。
+
+<<if Time.dayState is "night">>
+	突然一束强光射来。你遮住眼睛。
+<<else>>
+	一个<<person>>离开检查站，对着<<his>>的无线电说话。
+<</if>>
+<br><br>
+
+<<if $daily.estateBluffed is true>>
+	<<He>>透过大门窥视。"又是你？"<<he>>说道。"清除。"
+	<br><br>
+
+	<i>他们今天不让你进去。</i>
+	<br><br>
+<<else>>
+	<<He>>看着你。"这里是雷米庄园，"<<he>>说道，"你是干什么的？"
+	<br><br>
+	<<if $estate_fence is undefined>>
+		<<set $estate_fence to "quest">>
+		<i>你可以通过突破栅栏来避开大门，但是你需要一个与黑社会有联系的人的帮助，或者一个了解沼地的人。</i>
+		<br><br>
+	<</if>>
+
+	<<set $skulduggerydifficulty to 800>>
+	<<link [[虚张声势|Estate Bluff]]>><<set $daily.estateBluffed to true>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>
+<<link [[转身离开|Estate Approach]]>><<endevent>><</link>>
+<br>

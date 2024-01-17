@@ -1,0 +1,61 @@
+:: Farm Assault Fight Bailey Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"你会继续走下去的，"<<person1>><<person>>喃喃自语道。
+	<<if $enemynomax gte 2>>
+		贝利的打手们太过茫然跟疲惫，无法继续入侵。<span class="green">他们摇摇晃晃地离开了田地。</span>
+	<<else>>
+		<<Hes>>太过茫然跟疲惫，无法继续入侵。<span class="green">摇摇晃晃地离开了田地。</span>
+	<</if>>
+	<br><br>
+	<<tearful>>你准备着下一步行动。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<elseif $enemyhealth lte 0>>
+	"该死，"那个<<person1>><<person>>说道，"贝利会很不高兴的。"
+	<<if $enemynomax gte 2>>
+		<span class="green">贝利的打手们逃离了田地，</span>消失在了夜色中。
+	<<else>>
+		<span class="green"><<He>>逃离了田地，</span>消失在了夜色中。
+	<</if>>
+	<br><br>
+	<<tearful>>你准备着下一步行动。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+
+<<else>>
+	你摔倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+	那个<<person1>><<person>>蹲在你身边说道："抱歉，不过这就是这个世界的运行方式。"
+	<br><br>
+	你无法阻止<<him>>把你的手脚都绑在一起，并堵住你的嘴。"之后见<<girl>>。"
+	<br><br>
+	<<tearful>>你在绳索中挣扎着。虽然很困难，不过应该还是可以挣脱的。
+	<br><br>
+	<<endcombat>>
+	<<set $farm_assault.bindings to 3>>
+	<<bind>>
+	<<facewear 23>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+
+<</if>>

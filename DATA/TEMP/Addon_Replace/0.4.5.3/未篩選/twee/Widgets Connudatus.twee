@@ -1,0 +1,124 @@
+:: Widgets Connudatus [widget]
+<<widget "connudatus">>
+	<<if $nextPassageCheck is "Connudatus Street">>
+		<<add_link "<span class='nextLink'><<connudatusicon>><<link [[康努达塔斯街 (0:05) (俱乐部)|Connudatus Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<connudatusicon>><<link [[康努达塔斯街 (0:05) (俱乐部)|Connudatus Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "connudatusquick">>
+	<<connudatusicon>><<link [[康努达塔斯街|Connudatus Street]]>><</link>>
+<</widget>>
+
+<<widget "connudatuseventend">>
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "connudatuswallet">>
+	你找到找一个安静的地方，打开<<wallet>>。
+
+	<<rng>>
+	<<if $rng gte 91>>
+
+		你没有找到太多东西，只有一些零钱，价值<<moneyGainDisplay 2 true true>>。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 81>>
+
+		你没有找到太多东西，只有一些零钱，价值<<moneyGainDisplay 3 true true>>。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 71>>
+
+		你发现<<moneyGainDisplay 8 true true>>藏在一个暗格中。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 61>>
+
+		你找到了一张黑色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 8>><<crimeUp 8 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 51>>
+
+		你发现有<<moneyGainDisplay 15 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 41>>
+
+		你找到了一张银色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 15>><<crimeUp 15 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 31>>
+
+		你发现有<<moneyGainDisplay 25 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 21>>
+
+		你翻到一张金色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 25>><<crimeUp 25 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 11>>
+
+		你找到了一张白金信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 50>><<crimeUp 50 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<else>>
+
+		你发现有<<moneyGainDisplay 50 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<</if>>
+<</widget>>

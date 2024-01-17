@@ -1,0 +1,40 @@
+:: Farm Pigs Out []
+<<effects>>
+
+
+你走进猪圈，放出<<farm_text_many pig>>。它们毫不迟疑地走向过道。你打开了远处那个门，让它们进入外面的一个露天小圈舍。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+<!-- Modified for monster people -->
+	<<if $bestialitydisable is "f" or $farm_work.pig.monster is true>>
+		<<if $farm_work.pig.monster is true>>
+			最后一只抓住了你的头发，试图把你按倒在地。
+		<<else>>
+			最后一只站起后腿，试图将你按倒在地。
+		<</if>>
+		<br><br>
+
+		<<link [[训斥|Farm Pigs Scold]]>><</link>><<tendingdifficulty 1 600>>
+		<br>
+		<<link [[推开|Farm Pigs Shove]]>><</link>><<physiquedifficulty 1 12000>>
+		<br>
+		<<link [[忍耐|Farm Pigs Endure]]>><<trauma 6>><<stress 6>><<farm_pigs -1>><</link>><<lrespect>>
+		<br>
+		<<if $deviancy gte 35>>
+			<<link [[帮它一把|Farm Pigs Hand]]>><<set $sexstart to 1>><</link>><<deviant3>>
+			<br>
+		<</if>>
+	<<else>>
+		<<farm_text_many pig>>看起来很不安，好像有点被吓到了。<<gstress>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

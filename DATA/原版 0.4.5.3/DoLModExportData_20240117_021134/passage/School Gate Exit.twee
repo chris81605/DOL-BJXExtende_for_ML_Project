@@ -1,0 +1,19 @@
+:: School Gate Exit []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+
+学校大门紧闭，被一把结实的挂锁封住。
+<br><br>
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+
+	<<lockpickicon>><<link [[撬开 (0:10)|Oxford Street]]>><<pass 10>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+	<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+	<</if>>
+
+<<getouticon>><<link [[离开|School Front Courtyard]]>><</link>>
+<br>

@@ -1,0 +1,91 @@
+:: School Front Courtyard []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "schoolfrontcourtyard">>
+
+<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
+	<<if $schoolstate is "morning">>
+		你在学校前面的中庭。虽然还没正式上课，但很多学生已经聚集在一起，叽叽喳喳地聊天。
+		<br><br>
+	<<elseif $schoolstate is "afternoon">>
+		你在学校前面的中庭。这些设施还会继续开放几个小时，有些学生在那里跑来跑去玩耍。
+		<<if Time.weekDay is 6 and $framed is "whitney" and C.npc.Whitney.state isnot "pillory">>
+			<br>
+			你听到了几声叫喊，到的时候正好看见<span class="gold">惠特尼被几个警官用手铐拷着拖出学校。</span><<imprison_whitney>>
+		<<elseif Time.weekDay is 6 and $framed is "leighton" and $pillory_tenant.special.name isnot "Leighton">>
+			<br>
+			你在听到一些非常大的抗议声后便匆忙赶了过去，<span class="gold">你正好看到礼顿被警察带走了。</span><<imprison_leighton>>
+		<<elseif $detention gte 1 and $daily.school.detentionAttended isnot 1 and $headnodetention isnot 1 and $pillory_tenant.special.name isnot "Leighton">>
+			<span class="purple">你看见校长守着大门口</span>，你本应被留校察看，如果你从那里（大门）出去，会被抓个正着。
+		<<elseif $bullytimer gte 1 and $bullytimeroutside gte 1 and $daily.whitney.bullyGate isnot 1 and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state)>>
+			<span class="purple">你看见惠特尼在大门口附近晃悠。</span>
+		<</if>>
+		<br><br>
+	<<elseif $schoolstate is "lunch">>
+		你在学校前面的中庭。这里挤满了午休的学生。
+		<br><br>
+	<<else>>
+		你在学校前面的中庭。因为现在是上课时间，这里空无一人。
+		<br><br>
+	<</if>>
+	<<if $exposed gte 1>>
+		你躲在一个小屋后面，使你的<<lewdness>>得以隐藏。
+		<br><br>
+	<</if>>
+<<else>>
+	你在学校前面的中庭。
+	<<if $weather is "rain">>
+		这里空无一物，雨水从横梁上流下。
+	<<elseif $weather is "snow">>
+		这里空无一人，白雪皑皑的大地映出一幅幽美的风景画。
+	<<else>>
+		这里空无一人。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<schoolperiodtext>>
+
+<<if $stress gte $stressmax>>
+	<<link [[你眼前一黑……|School Passout]]>><</link>>
+<<elseif $adultshopintro is undefined and $adultshopunlocked is undefined and $adultshopintrosirris is undefined and $schoolstate is "afternoon" and Time.weekDay is 6 and $exposed lte 0>>
+	<<set $adultshopintrosirris to 1>>
+
+	西里斯从主楼冲出来，双臂紧紧抓着一个大纸箱。<<npc Sirris>><<person1>><<He>>看起来不知为何有些急迫。<<He>>停在<<his>>的车旁，笨拙地摸索着<<his>>口袋里叮当作响的钥匙。
+	<br><br>
+
+
+	<<link [[提供帮助|School Sirris Help]]>><<npcincr Sirris love 1>><</link>><<glove>>
+	<br>
+	<<link [[旁观|School Sirris Watch]]>><</link>>
+
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<eventscourtyard>>
+<<else>>
+	<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate) and $exposed gte 1>>
+		<<sneakicon>><<link [[溜到学校后面 (0:05)|School Rear Courtyard]]>><<pass 5>><</link>>
+		<br>
+	<<else>>
+		<<entranceicon>><<link [[进入学校 (0:01)|Hallways]]>><<pass 1>><</link>>
+		<br>
+		<<schoolicon "courtyard">><<link [[后操场 (0:02)|School Rear Courtyard]]>><<pass 2>><</link>>
+		<br><br>
+		<<if $schoolstate is "afternoon" and $detention gte 1 and $daily.school.detentionAttended isnot 1 and $headnodetention isnot 1 and $pillory_tenant.special.name isnot "Leighton">>
+			<<oxfordicon>><<link [[离开学校|School Leave Stop]]>><<schoolclothesreset>><</link>>
+			<br>
+		<<elseif $schoolstate is "afternoon" and $bullytimer gte 1 and $bullytimeroutside gte 1 and $daily.whitney.bullyGate isnot 1 and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state)>>
+			<<oxfordicon>><<link [[离开学校|School Leave Whitney]]>><<schoolclothesreset>><</link>>
+			<br>
+		<<elseif Time.schoolDay and Time.hour gte 7 and Time.hour lte 16>>
+			<<oxfordicon>><<link [[离开学校 (0:01)|Oxford Street]]>><<schoolclothesreset>><<pass 1>><</link>>
+			<br>
+		<<else>>
+			<<oxfordicon>><<link [[离开学校|School Gate Exit]]>><<schoolclothesreset>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

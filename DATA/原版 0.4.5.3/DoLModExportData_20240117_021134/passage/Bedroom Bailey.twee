@@ -1,0 +1,33 @@
+:: Bedroom Bailey []
+<<effects>><<run statusCheck("Robin")>>
+<!-- Bailey catches you by surprise, no time to get dressed -->
+
+<<if $inRobinsRoom>>
+	罗宾的卧室门在没有任何预兆的情况下被突然打开，<span class="red">是贝利。</span>
+	<br><br>
+
+	"你以为躲在罗宾的房间就能逃过去了？"贝利冷笑道。
+<<else>>
+	你的卧室门在没有任何预兆的情况下被突然打开，<span class="red">是贝利。</span>
+<</if>>
+
+<<if $exposed gte 1>>
+	<<nnpc_He "Bailey">>随意地看了你一眼，"把衣服穿上。"<<nnpc_he "Bailey">>说道。<<nnpc_He "Bailey">>打了个响指，"快一点。"
+	你匆忙穿上上一次穿的衣服。<<bedclotheson "bed">>
+<</if>>
+<br><br>
+
+<<if $robinfirstrentfight>> <!-- the first robin fight has already happened -->
+	<<if !["sleep", "orphanage"].includes(_robin_location)>>
+		<<rentduerobin 0>>
+	<<else>>
+		<<rentduerobin 1>>
+	<</if>>
+<<else>>
+	<<if ["sleep", "orphanage"].includes(_robin_location) and $inRobinsRoom>>
+		<<rentdue 1>> <!-- Robin is in the room with the PC -->
+	<<else>>
+		<<rentdue 0>>
+	<</if>>
+<</if>>
+<<unset $inRobinsRoom>>

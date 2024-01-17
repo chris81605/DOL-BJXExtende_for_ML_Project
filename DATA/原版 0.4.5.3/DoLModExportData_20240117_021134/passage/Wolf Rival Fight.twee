@@ -1,0 +1,27 @@
+:: Wolf Rival Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $enemyanger += 200>>
+	<<set $enemyhealth to 300>><<set $enemyhealthmax to 300>>
+<</if>>
+<<set $enemyanger += 10>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Wolf Rival Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Rival Fight]]>><</link>></span><<nexttext>>
+<</if>>

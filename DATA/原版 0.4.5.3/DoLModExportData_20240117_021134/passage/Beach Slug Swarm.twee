@@ -1,0 +1,49 @@
+:: Beach Slug Swarm []
+<<effects>>
+
+<<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "eels" "鳗鱼" "向你移动" "包围着你" "击退" 1 6>>
+
+	<<set $swimdistance to 10>>
+	<<set $water to 1>>
+	<<set $timer to 10>>
+<</if>>
+
+<<if $timer lte 0>>
+	<<set $pursuit += 1>>
+	<<set $timer to 10>>
+<</if>>
+
+<<slug_text>>
+<br>
+
+<<if $swimdistance gte 10>>
+	你需要开始朝着岸上游！
+<<elseif $swimdistance gte 5>>
+	离岸边还有很远一段距离。
+<<elseif $swimdistance gte 3>>
+	离岸边只有一半距离了。
+<<elseif $swimdistance gte 1>>
+	你快到岸边了。
+<<else>>
+	岸边就近在咫尺了！
+<</if>>
+<br><br>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Beach Slug Swarm Finish]]>><</link>></span><<nexttext>>
+<<elseif $pursuit gte 3>>
+	<span id="next"><<link [[继续|Beach Slug Swarm Finish]]>><</link>></span><<nexttext>>
+<<elseif $swimdistance lte 0>>
+	<span id="next"><<link [[继续|Beach Slug Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Beach Slug Swarm]]>><</link>></span><<nexttext>>
+<</if>>

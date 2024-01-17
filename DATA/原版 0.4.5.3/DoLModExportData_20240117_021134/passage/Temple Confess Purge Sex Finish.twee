@@ -1,0 +1,70 @@
+:: Temple Confess Purge Sex Finish []
+<<temple_effects>><<effects>>
+<<set $punishmentposition to 0>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $gloryholestat += 1>>
+	<<if $temple_confessor_intro>>
+		<span class="red">银制的容器还是空着的。</span>
+		<br><br>
+	<</if>>
+	<<switch $attendant>>
+		<<case "corrupt_5_fake">>
+			"你们这些古板的家伙是不是说什么都信！"<<He>>大笑着逃出了隔间。
+		<<case "sinner_2">>
+			"谢谢，我明天会回来的！"<<He>>穿好衣服，离开了隔间。
+		<<case "sinner_3">>
+			"谢……谢谢你的宽恕，<<sister>>……"<<He>>害羞地穿好衣服，离开了。
+		<<case "sinner_10">>
+			"不错，感觉比水果好。"<<He>>穿好衣服，离开了隔间。
+		<<case "sinner_generic_repent">>
+			"谢……谢谢你的宽恕，<<sister>>……"<<He>>害羞地穿好衣服，离开了。
+		<<case "sinner_generic_rapist">>
+			"你……你放纵了我这些可怕的想法。我觉得自己比之前更堕落了！"<<He>>穿好衣服，愤怒地冲出了忏悔室。
+		<<default>>
+			"谢……谢谢你的宽恕，<<sister>>……"<<He>>害羞地穿好衣服，离开了。
+	<</switch>>
+	<<grace -4>><<llgrace>>
+	<br><br>
+
+	<<tearful>>你重新坐回长凳上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	你听到墙后传来一阵痛苦的叫喊，
+	<<if $NPCList[0].penis isnot "none">>
+		面前的$NPCList[0].penisdesc消失了。
+	<<else>>
+		面前的小穴消失了。
+	<</if>>
+	<<switch $attendant>>
+		<<case "corrupt_5_fake">>
+			"操！被你看穿了吗？可笑的婊子。我会记住的！"<<He>>逃出了隔间。<<grace 2>><<ggrace>>
+		<<case "sinner_2">>
+			"呃！操！你搞什么？！"<<He>>穿好衣服匆匆离开了隔间。<<grace 2>><<ggrace>>
+		<<case "sinner_10">>
+			"不，我以后还是选择水果吧。"<<He>>穿好衣服离开了隔间。<<grace 2>><<ggrace>>
+		<<case "sinner_generic_rapist">>
+			"行……好吧！我懂了！我不会再强奸了！"<<He>>穿好衣服，怒气冲冲地离开了忏悔室。<<grace 2>><<ggrace>>
+		<<default>>
+			你听见<<him>>穿好衣服的声音，<<he>>匆匆离开了隔间。<<grace -2>><<lgrace>>
+	<</switch>>
+	<br><br>
+	<<tearful>>你重新坐回长凳上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<<else>>
+	你听见<<person>>在墙的另一边发出不满的咕哝。<<He>>穿好衣服，离开了隔间。<<grace -2>><<lgrace>>
+	<br><br>
+	<<tearful>>你重新坐回长凳上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<</if>>

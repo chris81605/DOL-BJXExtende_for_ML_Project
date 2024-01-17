@@ -1,0 +1,29 @@
+:: Asylum Garden []
+<<effects>>
+
+每个病人都有一块可以任意使用的种植圃。大多数都处于荒废状态，但也有些种植圃上少量种植着漂亮的花草。
+<br><br>
+
+<<plot_effects>>
+
+<<if $asylum_plot_intro is 1>><<unset $asylum_plot_intro>>
+	<<plots_init asylum 1 earth 3 small>>
+<</if>>
+
+<<display_plot asylum>>
+
+<<if !$plants_known.includes("poppy")>>
+	<<icon "tending/poppy.png">> <<link [[寻找种子 (0:30)|Asylum Garden Seeds]]>><<set $plants_known.push("poppy")>><<pass 30>><</link>>
+	<br>
+<<elseif $rng % 4 == 0 and $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7>>/*1 in 4 chance if in right stage*/
+	<<if $o_long_and_beautiful lt 9>><<set $o_long_and_beautiful += 1>><</if>>
+	<br>
+	一个头发又长又乱的女孩似乎正在附近的种植圃上观察着你。
+	<<if currentSkillValue('tending') gte 600>>你不是很确定，但她好像很欣赏你的护理技巧。<<if $o_long_and_beautiful lt 9>><<set $o_long_and_beautiful += 1>><</if>><</if>>
+<</if>>
+<br>
+
+<<getouticon>><<link [[离开|Asylum]]>><</link>>
+<br>
+
+<<unset $event_trigger>>

@@ -1,0 +1,88 @@
+:: Cliff Street Pillory []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<if $pillory_tenant.exists>>
+	你加入了峭壁街的颈手枷周围的人群。
+	<<npc_pillory_detail>>
+	<<if $stress gte ($stressmax / 10) * 3>>
+		<span class="gold">你感觉你的压力很大。</span>情况已经逐渐失控。
+		你看到一些人向<<the_pillory_person>>扔水果，看起来很有趣。<span class="teal">你有种想加入的冲动。</span>
+		<<if Time.dayState isnot "night">>
+			<br>
+			只有等到晚上这些围观群众都回家去了，你才敢做一些更淫荡的事情。
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if Time.dayState is "night">>
+		<<if $stress gte ($stressmax / 10) * 3>>
+			<<if $pillory_tenant.fruitstock gte 1>>
+				<<ind>><<link [[扔水果 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<span class="red">现在已经没有水果可扔了。</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $cat gte 6 and ($pillory_tenant.ass + $pillory_tenant.genital) gte 2>>
+			<<ind>><<link [[擦洗那个囚犯 (0:05)|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 1>><</link>>
+			<br>
+		<</if>>
+		<<if $pillory_tenant.lowerexposed gte 2 and $stress gte 4000 and $trauma gte (($traumamax / 5) * 1)>>
+			<<ind>><<link [[掌掴那个囚犯 (0:05)|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 2>><</link>><<llstress>><<ltrauma>>
+			<br>
+		<</if>>
+		<<if $pillory_tenant.lowerexposed lte 1 or (($pronoun is "m" and $pillory_tenant.upperexposed lte 1) or ($pronoun is "f" and $pillory_tenant.upperexposed lte 2)) and $stress gte 7000 and $trauma gte (($traumamax / 5) * 2)>>
+			<<stripicon>><<link [[让那个囚犯走光 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 3>><</link>><<llstress>>
+			<br>
+		<</if>>
+		<<if $submissive lte 1000 or $fame.good gte 50 or $stat_police.pillory gte 1 or (($awareness + $purity) gte 1050)>>
+			<<if ($pillory_tenant.lowerexposed + $pillory_tenant.upperexposed) gte 1>>
+				<<ind>><<link [[帮那个囚犯遮掩一下 (0:05)|Cliff Street Prisoner Night Help]]>><<pass 5>><<set $phase to 0>><</link>><<gstress>>
+				<br>
+			<</if>>
+			<<if $speech_attitude is "bratty" or $fame.good gte 150 or $stat_police.pillory gte 1 or (($awareness + $purity) gte 1400)>>
+				<<if $pillory_tenant.crowd gte 8>><<set $skulduggerydifficulty to 1350>> /* 50% chance of failure, even at max skulduggery */
+				<<elseif $pillory_tenant.crowd gte 6>><<set $skulduggerydifficulty to 1250>> /* 30% fail at max skul */
+				<<elseif $pillory_tenant.crowd gte 4>><<set $skulduggerydifficulty to 1100>> /* 10% chance of success, even at max skulduggery */
+				<<else>><<set $skulduggerydifficulty to 875>>
+				<</if>>
+				<<ind>><<link [[释放囚犯 (0:05)|Cliff Street Prisoner Night Help]]>><<pass 5>><<set $phase to 1>><</link>> <<crime "obstruction">><<skulduggerydifficulty>><<dangerousText>>
+				<br>
+			<<else>>
+				<span class="pink">你缺乏尝试营救的决心。</span>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>> /* day */
+		<<if $stress gte ($stressmax / 5) * 2>>
+			<<if $pillory_tenant.fruitstock gte 1>>
+				<<ind>><<link [[扔水果 (0:02)|Cliff Street Prisoner]]>><<pass 2>><<set $phase to 0>><<stress -6>><<set $pillory_tenant.fruitstock -= 1>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<span class="red">现在已经没有水果可扔了。</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $pillory_tenant.lowerexposed lte 1 and $pillory_tenant.wedgied isnot 1 and ($stress gte 6000 or $trauma gte (($traumamax / 5) * 2))>>
+			<<ind>><<link [[提起囚犯的内裤 (0:05)|Cliff Street Prisoner]]>><<set $pillory_tenant.wedgied to 1>><<pass 5>><<set $phase to 4>><<stress -12>><</link>><<llstress>><<ltrauma>>
+			<br>
+		<</if>>
+		<<if $submissive lte 1000 or $fame.good gte 50 or $stat_police.pillory gte 1 or (($awareness + $purity) gte 1050)>>
+			<<if ($pillory_tenant.lowerexposed + $pillory_tenant.upperexposed) gte 1>>
+				<<ind>><<link [[帮那个囚犯遮掩一下 (0:05)|Cliff Street Prisoner]]>><<pass 5>><<set $phase to 5>><</link>><<gstress>>
+				<br>
+				<span class="teal">在光天化日之下，你不敢多帮忙，也许在夜晚的掩护下可以试试。</span>
+				<br><br>
+			<<else>>
+				<span class="teal">在光天化日之下，你不敢帮忙，也许在夜晚的掩护下可以试试。</span>
+				<br><br>
+			<</if>>
+		<</if>>
+
+	<</if>>
+	<<endevent>>
+<<else>>
+	峭壁街上有一小群人正在围观颈手枷，你还没来得及加入人群，颈手枷里的人好像就已经被释放了。
+	<br><br>
+<</if>>
+<<getouticon>><<link [[离开|Cliff Street]]>><</link>>
+<br>

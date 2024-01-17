@@ -1,0 +1,41 @@
+:: Barb Exposed []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "barb">>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutstreet>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+
+<<else>>
+	<<if $options.mapTop is true>>
+		<<map "barb">>
+		<br>
+	<</if>>
+
+	<<add_link "其他区域<br>">><<hideDisplay>>
+	<<domusexposed>>
+	<<cliff>>
+	<<connudatus>>
+	<<if $exposed lte 0>>
+		<<buswait>>
+	<</if>>
+	/* 北极星模组 */
+	<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+		<<flywait>>
+	<</if>>
+	/* 北极星 */
+	<<loiter>>
+
+	<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+	<<residential>>
+	<<stormdrain>>
+	<br>
+	<<displayLinks>>
+	<<if $options.mapTop isnot true>>
+		<br>
+		<<map "barb" "exposed">>
+	<</if>>
+
+<</if>>
+
+<<set $eventskip to 0>>

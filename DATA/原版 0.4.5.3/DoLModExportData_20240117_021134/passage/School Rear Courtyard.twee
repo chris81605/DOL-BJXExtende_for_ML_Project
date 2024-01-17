@@ -1,0 +1,107 @@
+:: School Rear Courtyard []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "schoolrearcourtyard">>
+
+<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
+	<<if $schoolstate is "morning">>
+		你在学校的后操场。虽然还没正式上课，但很多学生已经聚集在一起，叽叽喳喳地聊天。
+		<br><br>
+	<<elseif $schoolstate is "afternoon">>
+		你在学校的后操场。这些设施还会继续开放几个小时，有些学生在那里跑来跑去玩耍。
+		<br><br>
+	<<elseif $schoolstate is "lunch">>
+		你在学校的后操场，这里挤满了午休的学生。
+		<br><br>
+	<<else>>
+		你在学校的后操场。因为现在是上课时间，这里空无一人。
+		<br><br>
+	<</if>>
+	<<if $exposed gte 1>>
+		你躲在一个小屋后面，使你的<<lewdness>>得以隐藏。
+		<br><br>
+	<</if>>
+<<else>>
+	后操场空荡荡的。
+	<br><br>
+<</if>>
+
+<<schoolperiodtext>>
+
+<<if $stress gte $stressmax>>
+	<<link [[你眼前一黑……|School Passout]]>><</link>>
+<<elseif $town_projects.green is 1>>
+	<<set $town_projects.green to 2>>
+	你差点踩到一条小蛇。它迅速钻进了一个墙上的缺口，一颗粗壮的橡树周围长满了野草。学生们都对这片区域敬而远之，因为这里遍布各种各样的小虫子。<span class="teal">你突然冒出了一个想法。</span>如果能把这里的草清理掉，学生就有更多的活动空间了。
+	<br><br>
+	<i>你可以在市政厅询问绿地的情况。</i>
+	<br><br>
+	<<link [[继续|School Rear Courtyard]]>><</link>>
+	<br>
+<<elseif $town_projects.green is 3>>
+	<<set $town_projects.green to 4>>
+	这里发生了变化。橡树周围的野草都被清除了，创造出一片绿草地，整个庭院的氛围都得到了改观。<span class="green">学生们现在有一个吃午饭的好地方了。</span>
+	<br><br>
+	<<earnFeat "School Green">>
+	<<link [[继续|School Rear Courtyard]]>><</link>>
+	<br>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventscourtyard>>
+	<<else>>
+		<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate) and $exposed gte 1>>
+			<<schoolicon>><<link [[偷偷溜进学校 (0:03)|Hallways]]>><<pass 3>><</link>>
+			<br>
+			<<schoolicon>><<link [[偷偷溜进学校前院 (0:05)|School Front Courtyard]]>><<pass 5>><</link>>
+			<br><br>
+			<<fenceicon>><<link [[越过栅栏爬到工业区 (0:02)|School Rear Fence Exit]]>><<pass 2>><</link>>
+			<br>
+		<<else>>
+			<<if $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $weather isnot "rain" and $weather isnot "snow" and $schoolstate is "lunch">>
+				凯拉尔坐在树桩上，低头盯着地面。
+				<br>
+				<<schoolicon "stump">><<link [[接近|Kylar Courtyard]]>><<set $kylar_text_trigger to true>><</link>>
+				<br><br>
+			<<elseif $englishPlay is "ongoing" and $englishPlayRoles.Kylar isnot "none" and $englishPlayRoles.KylarKnown and $exposed lte 0 and $weather isnot "rain" and $weather isnot "snow" and $schoolstate is "afternoon">>
+				<<if $englishPlayReadiness gte 56 and $englishPlayRoles.SydneyKnown and !$englishPlayDoubleRehearsal>>
+					凯拉尔不在这里。你四处观察，在学校的窗户那边察觉到了<<nnpc_him "Kylar">>一闪而过的身影。<span class="gold">看起来<<nnpc_hes "Kylar">>在语文教室。</span>
+					<br><br>
+				<<else>>
+					凯拉尔坐在树桩上，低头盯着地面。
+					<br>
+					<<schoolicon "stump">><<link [[接近|Kylar Courtyard]]>><<set $kylar_text_trigger to true>><</link>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<if $exposed lte 0 and $schoolstate is "lunch">>
+				<<schoolicon "stump">><<link [[在树桩上休息 (0:10)|School Stump]]>><<stress -1>><<pass 10>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
+				<br>
+				<<if $town_projects.green gte 4>>
+					<<socialiseicon>><<link [[坐在草地上聊天 (0:10)|School Green]]>><<trauma -1>><<stress -1>><<pass 10>><<status 1>><</link>><<gcool>><<ltrauma>><<lstress>>
+					<br>
+				<</if>>
+			<</if>>
+			<<if $schoolstate is "lunch" and $panty_thief gte 1>>
+				<<crimeicon "mark">><<link [[寻找内衣小偷 (0:10)|School Panty]]>><<pass 10>><</link>>
+				<br>
+			<</if>>
+			<<entranceicon>><<link [[进入学校 (0:01)|Hallways]]>><<pass 1>><</link>>
+			<br>
+			<<schoolicon "courtyard">><<link [[前操场 (0:02)|School Front Courtyard]]>><<pass 2>><</link>>
+			<br><br>
+			<<fenceicon>><<link [[越过栅栏爬到工业区 (0:02)|School Rear Fence Exit]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+
+		<<if $historytrait gte 1>>
+			<<if $parktunnelintro gte 1>>
+				<<parkicon>><<link [[通往公园的密道 (0:05)|Park]]>><<pass 5>><</link>>
+				<br>
+			<<else>>
+				<<parkicon>><<link [[通往公园的密道 (0:05)|Park Tunnel]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

@@ -1,0 +1,50 @@
+:: Pirate Bilge []
+<<location "seapirates">><<set $outside to 0>><<effects>><<getTarget true>>
+
+你在船底，在海盗船的深处。墙壁吱吱作响，发出呻吟声。
+<<if $exposed gte 1>>
+	你躲在影子中，担心自己未着寸缕的状态会被人看见。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpirates>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $pirate_rank gte 1>>
+		<<set _allure to ($allure / 2)>>
+	<<else>>
+		<<set _allure to $allure>>
+	<</if>>
+	<<if ($danger gte (9900 - _allure) or $eventforced) and $eventskip is 0>>
+		<<events_pirate_bilge>>
+	<<elseif Time.hour gte 12 and Time.hour lte 18 and $pirate_attack is undefined>>
+		“大家注意！”泽菲尔在上方吼道。“进入作战状态！”
+		<br><br>
+		海盗们从阴暗的小隔间中涌出，急匆匆地奔跑着。你被人群挟带，一同来到了甲板上。
+		<br><br>
+		<<link [[继续|Pirate Attack]]>><<set $pirate_attack to 1>><</link>>
+		<br>
+	<<elseif random(1, 4) is 4 and $exposed lte 0 and $eventskip is 0>>
+		<<pirate_mate_work bilge>>
+	<<else>>
+
+		<<if Time.dayState is "night">>
+			<<link [[搜寻 (1:00)|Pirate Search]]>><<pass 60>><</link>>
+			<br>
+			<br><br>
+		<</if>>
+
+
+		<<link [[床|Pirate Bed]]>><</link>>
+		<br><br>
+		<<if $nextPassageCheck is "Pirate Cabin">>
+			<span class="nextLink"><<link [[船舱 (0:01)|Pirate Cabin]]>><<pass 1>><</link>></span>
+		<<else>>
+			<<link [[船舱 (0:01)|Pirate Cabin]]>><<pass 1>><</link>>
+		<</if>>
+		<br>
+
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

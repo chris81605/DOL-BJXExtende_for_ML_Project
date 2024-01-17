@@ -1,0 +1,72 @@
+:: Robin's Stand CD Explain Full []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+
+	<<if $speech_attitude is "meek">>
+		你慢步走向罗宾并将<<him>>抱住，"你没事吧？"你轻声问道。
+	<<elseif $speech_attitude is "bratty">>
+		"嘿，我平时认识的罗宾去哪里了？"你轻轻地揉了揉<<his>>的头发，"怎么了？"
+	<<else>>
+		你轻轻拍了拍罗宾的背并问道。"你感觉还好吗？"你问，"如果你不愿意的话，你不必去出摊的。"
+	<</if>>
+	<br><br>
+	<<if _robin.cdstanddenial is 1>>
+		<<if _robin.dom gte 60>>
+			"你有空吗？我想在我的摊位上试试穿我的异装，"<<he>>满怀希冀地问道。
+		<<else>>
+			"那个，我想在摆摊的时候穿这个……"<<he>>在说着的同时朝<<his>>的衣服做了个手势。<<His>>的声音很轻，"我在想，你能不能和我一起去呢。"
+		<</if>>
+	<<else>>
+		<<set _clothes to (Time.season is "winter" ? "coldHoodie" : (_robin.pronoun is "m" ? "femaleTown1" : "maleTown1"))>>
+		<<set _clothes to setup.npcClothesSets.find(n => n.name === _clothes)>>
+		<<if _robin.dom gte 60>>
+			"好吧，"<<he>>在停顿了好一会之后才开口，"你知道，我最近还挺喜欢在孤儿院变装的，对吧？"
+			<<He>>在继续说下去之前又停顿了一下，"我想在我的<<if Time.season is "winter">>热巧克力<<else>>柠檬水<</if>>摊上也开始这样做。"
+			<<He>>指着身上<<print Time.season is "winter" ? (_robin.pronoun is "m" ? "粉色紧身的" : "蓝色宽松的") : "">>
+			<<print _clothes.desc>><<if _robin.pronoun is "f">>和一件束胸衣<</if>>。
+			"我甚至还弄来了一套新衣服！
+			<<if _robin.pronoun is "m">>
+				我也一直有在练习化妆。"
+			<<else>>
+				我想我关于模仿男人形态也更得心应手了。"
+			<</if>>
+			<<He>>微笑着，但很快笑容就消失了。"我可能只是害怕一个人就这样走到公共场合。"罗宾叹了口气。
+			"嘿，你不介意和我一起吧？有你陪伴在我身边时，我总是感觉更安心。"
+
+		<<else>>
+			<<He>>给了你一个轻微的微笑，然后叹了口气。"好吧，也许不那么好，"<<he>>说，"到目前为止，我真的很喜欢变装。但是……"
+			又是一声叹息。"我可没有信心在其他地方这样做。"
+			<<He>>指着身上<<print Time.season is "winter" ? (_robin.pronoun is "m" ? "粉色紧身的" : "蓝色宽松的") : "">>
+			<<print _clothes.desc>><<if _robin.pronoun is "f">>和一件束胸衣<</if>>。
+			"我买了一套新衣服，想要试一下。"<<He>>看着衣服笑了笑，但那个笑容慢慢消失了。
+			“我害怕那些人会盯着我看，”<<he>>继续向你倾诉着。
+			"大家只会觉得我是一个变、变态……"罗宾开始抽噎起来。
+			<<if _robin.pronoun is "m">>
+				"我还让其他孤儿来教了我怎么化妆。"
+			<<else>>
+				"我还让其他孤儿来教了我该如何表现得更有男子气概。"
+			<</if>>
+			<br><br>
+
+			<<if $robinromance>>
+			你小心地擦去了<<his>>眼中的泪水。
+			<</if>>
+			<<if $speech_attitude is "meek">>
+				"没事的……"你小声安慰着<<him>>。
+			<<elseif $speech_attitude is "bratty">>
+				"谁在乎别人怎么看呢，对吧？你就是最好最完美的，我保证。"你抱了抱罗宾。
+			<<else>>
+				“罗宾，不要在意别人的想法，尽情享受自己想要穿成的模样就好。”你向<<him>>微笑。当安慰不起效的时候，你紧紧抱住了<<him>>。
+			<</if>>
+			<br><br>
+
+			<<His>>的泪水继续缓缓流淌。"你一直很支持我，我不想再多要什么了，但是，你觉得你这次能陪我一起去吗？
+			即使只有一小会儿，我也会感觉更安全。”
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[跟罗宾一起去 (1:00)|Robin's Stand CD Accept]]>><<pass 60>><<npcincr Robin love 5>><</link>><<gglove>>
+	<br>
+	<<link [[拒绝|Robin's Stand CD Refuse]]>><<npcincr Robin love -5>><</link>><<lllove>>
+	<br>

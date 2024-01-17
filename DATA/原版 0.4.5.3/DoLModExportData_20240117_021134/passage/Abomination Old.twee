@@ -1,0 +1,35 @@
+:: Abomination Old []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<abomination>>
+	You awaken to find yourself being assaulted by a strange beast!
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next->Abomination Old]]>><</link>></span><<nexttext>>
+<</if>>

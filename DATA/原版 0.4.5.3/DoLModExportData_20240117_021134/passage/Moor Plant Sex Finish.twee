@@ -1,0 +1,36 @@
+:: Moor Plant Sex Finish []
+<<set $location to "moor">><<set $outside to 1>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"太有趣了！"<<person>>轻快地说，"我希望更多的人类能像你一样。"
+	<br><br>
+
+	<<if $phase is 1 and $rng gte 76>>
+		<span class="blue">之前的奇怪生物跃上了<<his>>的肩膀。</span>"你真是个好帮手，小家伙。"<<He>>笑得很灿烂。"我成功和一个可爱的<<girl>>做爱了。"<<He>>挠了挠它的背，小怪物舒服得"咕咕"叫着。
+		<<trauma 3>><<gtrauma>>
+	<<else>>
+		<<He>>把自己从地上支撑起来，掸了掸一根藤蔓。"如果你再次光顾这里，请来找我！我很乐意再来一次！"
+	<</if>>
+	<<He>>离开了，<<his>>的藤蔓在身后晃晃悠悠的。
+<<elseif $enemyhealth lte 0>>
+	<<person>>从你身边退开，小心翼翼地看着你。"啊呀啊呀，这样太奇怪了不是吗？<<if $phase is 1>>不管怎么样我可救了你哦？某人事后就忘记这份恩情了。<<else>>我只是希望咱们能一起体验舒服的感觉。<</if>>"<<His>>的藤蔓都从你身边缩了回去。
+	<br><br>
+
+	<<if $phase is 1 and $rng gte 76>>
+		<span class="blue">之前的奇怪生物跳到<<his>>的肩膀上，叽叽喳喳地叫着。</span>"嗯，我没事，小家伙，"<<person>>说道，"也许这招会对其他人奏效。"
+	<<else>>
+		<<He>>揉了揉<<his>>的一根藤蔓，皱起眉。"好吧，如果你再来这里的话，可以来找我。我们可以继续没完成的快乐时光——如果你心情更好些的话。"
+	<</if>>
+	<<He>>走开了，藤蔓无力地拖在<<him>>身后。
+<</if>>
+<br><br>
+
+<<tearful>>你振作了起来。
+<<clotheson>>
+<<endcombat>>
+<<if $plantMoney>>
+	你从地上捡起硬币。你获得了<<printmoney $plantMoney>>。
+	<<set $money += $plantMoney>><<unset $plantMoney>>
+	<br><br>
+<</if>>
+<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>

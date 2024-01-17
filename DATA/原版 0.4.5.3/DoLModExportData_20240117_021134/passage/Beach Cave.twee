@@ -1,0 +1,74 @@
+:: Beach Cave []
+<<set $location to "underground">><<set $outside to 0>>
+<<if $cave gte 50>>
+<<elseif $cave gte 20>>
+	<<water waist>>
+<<else>>
+	<<water>>
+<</if>>
+<<effects>>
+<<set $cave = Math.clamp($cave, 0, 100)>>
+你在海岸边的一个山洞里，自然发光的地衣爬满了洞壁。
+<br><br>
+<<if $cave gte 100>>
+	<span class="lblue">你处于洞穴的深处。</span>一个腐朽的木头王座立在你的面前。
+	<<if !$weekly.beachCaveCompass>>
+		那里有一个箱子。
+	<</if>>
+<<elseif $cave gte 50>>
+	你的脚淹没在湍急的水流中。
+<<elseif $cave gte 20>>
+	水没过了你的腰部。
+<<elseif $cave gte 1>>
+	水没过了你的脖子。
+<<else>>
+	水没过了你的脖颈。通向外面的洞顶就在附近的水面下，但你得游过去。
+<</if>>
+<br><br>
+
+<<if $cave gte 50 and $cave lt 54 and $smuggler_pub_known is 1>>
+	你听到了有什么声响的回音，并看到了隐藏在一块岩石后面的通道，它通往走私者巢穴的。
+	<br><br>
+<<elseif $cave gte 50 and $cave lt 54 and ($historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1))>>
+	你听到了有什么声响的回音，你想起历史课上所学到的走私者巢穴，似乎就是一个这样的洞窟。
+	<br><br>
+<</if>>
+
+<<beach_cave_pursuit>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutcave>>
+<<elseif $eventskip isnot 1 and $cave lt 100>>
+	<<if random(1, 4) is 4>>
+		<<eventscavetreasure>>
+	<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventscave>>
+	<<else>>
+		<<eventscavesafe>>
+	<</if>>
+<<else>>
+	<<if $cave gte 50 and $cave lt 54 and $smuggler_pub_known is 1>>
+		<<ind>><<link [[沿着隧道前往走私者酒吧 (0:05)|Smuggler Pub]]>><<pass 5>><<beach_cave_end>><</link>>
+		<br>
+	<<elseif $cave gte 50 and $cave lt 54 and ($historytrait gte 4 or ($temple_spear_mission gte 1 and $temple_spear_mission_winter is 1))>>
+		<<ind>><<link [[沿着隧道前往走私者酒吧 (0:05)|Smuggler Pub Beach Cave Intro]]>><<pass 5>><<beach_cave_end>><</link>>
+		<br>
+	<</if>>
+	<<if $cave lt 100>>
+		<<caveicon "west">><<link [[往更深处走 (0:10)|Beach Cave]]>><<set $cave += 5>><<pass 10>><</link>>
+		<br>
+	<<elseif !$weekly.beachCaveCompass>>
+		<<caveicon "treasure">><<link [[打开箱子|Beach Cave Open]]>><<set $weekly.beachCaveCompass to true>><</link>>
+		<br>
+	<</if>>
+	<<if $cave gt 0>>
+		<<caveicon "sea">><<link [[往大海走 (0:10)|Beach Cave]]>><<set $cave -= 5>><<pass 10>><</link>>
+		<br>
+	<<else>>
+		<<swimicon "up">><<link [[游出去 (0:05)|Beach Cave Up]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

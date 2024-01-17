@@ -1,0 +1,35 @@
+:: Street Kylar Rape []
+<<run statusCheck("Kylar")>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<set $kylar.raped += 1>>
+	<<if Time.dayState isnot "night">><<enable_rescue>><</if>>
+	凯拉尔把你推向小巷，<<his>>的刀指在你的腰上。你们转过另一个拐角，那里躺着一张床垫。
+	<<if _kylarStatus.includes("MaxRage")>>
+		<<set $NPCList[0].righthand to "none">>
+		<<He>>把你推到上面，跳到你身上，把刀架在你的脖子上。
+	<<else>>
+		<<He>>一把将你推到上面，扔掉刀，跳到你身上。
+	<</if>>
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<if $NPCList[0].righthand is "none">>
+	<<He>>用刀抵住你的喉咙。<<if $enemyarousal gte ($enemyarousalmax / 3)>>刀子在<<his>>手中颤抖。<</if>><<gpain>><<violence 5>>
+	<br><br>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[继续|Street Kylar Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Kylar Rape]]>><</link>></span><<nexttext>>
+<</if>>

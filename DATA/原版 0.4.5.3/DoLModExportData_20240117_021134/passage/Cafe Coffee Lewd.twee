@@ -1,0 +1,29 @@
+:: Cafe Coffee Lewd []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+<<if $milk_amount gte 40>>
+你准备实操你的下流想法，打算制作一些拿铁咖啡。你在加牛奶前都正常煮着咖啡。
+<br><br>
+
+唯一的问题是要用多少牛奶？
+<br><br>
+
+<<link [[使用正常量|Cafe Coffee Creation]]>><<set $phase to 1>><</link>>
+<br>
+	<<if $milk_amount gte 70>>
+		<<link [[使用中等量|Cafe Coffee Creation]]>><<set $phase to 2>><</link>><<note "+ 怀疑？" "red">>
+		<br>
+		<<if $milk_amount gte 100>>
+			<<link [[使用大剂量|Cafe Coffee Creation]]>><<set $phase to 3>><<set $chef_sus += 15>><</link>><<gsuspicion>>
+			<br>
+			<<if $milk_amount gte 150 and $promiscuity gte 35>>
+				<<link [[使用极大量|Cafe Coffee Creation]]>><<set $phase to 4>><<set $chef_sus += 30>><</link>><<ggsuspicion>><<promiscuous3>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<else>>
+	你拿起一个小碗，开始挤奶。你试着从乳房中挤出奶水，但<<if $milk_amount lte 1>>没有<<else>>没多少<</if>>奶水流出来。看来你的奶水已经一滴不剩了。你只能正常煮咖啡。
+	<br><br>
+	<<link [[正常煮咖啡|Cafe Coffee Creation]]>><</link>>
+	<br>
+<</if>>

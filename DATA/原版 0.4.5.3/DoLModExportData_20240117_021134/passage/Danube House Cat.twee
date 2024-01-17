@@ -1,0 +1,78 @@
+:: Danube House Cat []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $enemyno to 1>>
+	<<set $enemynomax to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+
+	<<if $phase is 0>>
+		猫扑向了你。
+		<br><br>
+	<<elseif $phase is 3>>
+		<<set $phase to 0>>
+	<</if>>
+	<<set $NPCList[0].stance to "top">>
+
+	<<enable_rescue>>
+
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<set $enemyno to 1>>
+	<<set $enemynomax to 1>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<set $enemytrust -= 40>>
+	你躺倒在地，并摆出交配的姿势，那只<<beasttype 0>>抬起头并盯着你，随后<<bhis 0>>开始踱步走近。
+	<<if $monster is 1>>
+		"我想……我们能找点乐子，主人并不需要知道。"
+	<</if>>
+	<<deviancy2>>
+
+	<<set $phase to 0>>
+	<<enable_rescue>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<if $phase is 1 and $orgasmdown gte 2>>
+	<<set $phase to 2>>
+		<<if $NPCList[0].penis isnot "none">>
+			<<person2>><<person>>笑着鼓掌。“<<bHis 0>>阴茎的形状是为了促进交配对象排卵，”<<he>>说，“我很高兴它也能满足人类荡妇。”你觉得很丢脸。<<famebestiality 1>>
+			<br><br>
+		<</if>>
+	<<elseif $phase gte 1>>
+	<<person2>><<person>>斜靠在沙发上，看着你。
+	<br><br>
+<</if>>
+
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $phase is 0>>
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Danube House Cat Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Danube House Cat]]>><</link>></span><<nexttext>>
+	<</if>>
+<<else>>
+	<<if _combatend>>
+<span id="next"><<link [[继续|Danube House Cat Finish 2]]>><</link>></span><<nexttext>>
+	<<else>>
+<span id="next"><<link [[继续|Danube House Cat]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>

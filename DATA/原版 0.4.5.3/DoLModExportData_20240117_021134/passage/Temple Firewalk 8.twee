@@ -1,0 +1,32 @@
+:: Temple Firewalk 8 []
+<<effects>>
+你迈出了最后一步。虽然疼痛难忍，但你终于成功穿越。
+<<pain 6>>
+<br><br>
+你的脚陷入凉爽的土壤中。<<person2>><<monk>>看上去很钦佩，甚至有些惊讶。<<He>>和其他见习教徒们一起鼓掌，神殿阳台上的其他<<monks>>也加入了鼓掌声。你检查了自己的脚底，发现它们被煤灰覆盖，但完全没有烧伤。
+<br><br>
+<<if $phase is 0>>
+	"火并不会伤到你，"约旦说，"它只是燃尽你的污秽。恭喜你，在教会的眼中，你纯洁无瑕。"
+	<br><br>
+<<else>>
+	"火并不会伤到你，"约旦说，"它只是燃尽你的污秽。你已经通过了试炼。恭喜你。"
+	<br><br>
+	约旦回到了神殿，然后<<person2>><<monk>>用一桶沙子扑灭了炭火。
+	<br><br>
+	<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and _sydney_location is "temple">>
+		悉尼拥抱了你。"我就知道你能做到！"<<stress -6>><<lstress>><<npcincr Sydney love 1>><<glove>>
+		<br><br>
+	<</if>>
+<</if>>
+<<clotheson>>
+<<if $phase is 0>>
+	<<if $player.virginity.penile isnot true and $player.virginity.vaginal isnot true>>
+		你获得了<span class="blue">贞操誓言</span>特质。
+		<br><br>
+	<</if>>
+	<<link [[继续|Temple Firewalk Success]]>><</link>>
+<<else>>
+	<<endevent>>
+	<<link [[继续|Temple Garden]]>><</link>>
+	<br>
+<</if>>

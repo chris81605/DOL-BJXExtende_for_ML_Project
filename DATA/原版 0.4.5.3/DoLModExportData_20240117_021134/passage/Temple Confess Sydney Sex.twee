@@ -1,0 +1,272 @@
+:: Temple Confess Sydney Sex []
+<<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+<<if $sexstart is 1>>
+	<<set $corruptionEvent to 1>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 600>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<set $enemyarousalmax += 100>>
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+	<<if _sydneyChastity and $NPCName[$NPCNameList.indexOf("Sydney")].chastity.anus.includes("shield")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+	<<set $timer to random(6, 12)>>
+	<<set $sydneyConfession to {Sound: 0, Attendant: "", State: "", Pronoun: "", Choice: ""}>>
+<</if>>
+<<if $timer lte 0 and $sydneyConfession.State isnot "exposed" and $sydneyConfession.State isnot "gone" and $sydneyConfession.State isnot "leaving">>
+	<<temple_effects>>
+	<<set $sydneyConfession.State to "leaving">>
+	忏悔者在等着你的回应。
+	<<if $orgasmdown gte 1>>
+		<span class="pink">你因高潮的兴奋而无法回复。</span>
+		<span class="red"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>愤怒地抽了口气，意识到了你在做的事。</span>"死变态！"
+		<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>从忏悔室跑了出去。<<grace -4>><<llgrace>>
+		<<set $timer to 0>><<set $sydneyConfession.State to "exposed">>
+		<br><br>
+
+		<<link [[继续|Temple Confess Sydney Sex]]>><<set $speechdisable to 0>><</link>>
+		<br>
+	<<else>>
+		<<if $NPCList[0].vagina.toString().includes("mouth")>>
+			<<set $NPCList[0].vagina to 0>>
+			悉尼从你的嘴抽了出来。
+		<<elseif $NPCList[0].penis.toString().includes("mouth")>>
+			<<set $NPCList[0].penis to 0>>
+			悉尼从你的嘴抽了出来。
+		<<elseif $mouthuse is "kiss" and $NPCList[0].mouth is "kiss">>
+			<<set $NPCList[0].mouth to 0>>
+			悉尼从你们的吻中抽离。
+		<<else>>
+			悉尼停了下来。
+		<</if>>
+		<<set $mouthuse to 0>><<set $mouthstate to 0>><<set $mouthaction to 0>><<set $head to 0>>
+		<br><br>
+
+		你打算该如何回应？
+		<br>
+		<<link [[宽恕|Temple Confess Sydney Sex]]>><<set $sydneyConfession.Choice to "forgive">><</link>>
+		<br>
+		<<link [[忏悔|Temple Confess Sydney Sex]]>><<set $sydneyConfession.Choice to "repent">><</link>>
+		<br>
+		<<link [[赎罪|Temple Confess Sydney Sex]]>><<set $sydneyConfession.Choice to "contrition">><</link>>
+		<br>
+	<</if>>
+<<elseif $timer lte 0 and $sydneyConfession.State is "leaving">>
+	<<set $sydneyConfession.State to "gone">>
+	<<switch $sydneyConfession.Choice>>
+		<<case "forgive">>
+			<<if $angel gte 6 or ($confessionsTaken gte 10 and $grace gte 25)>>
+				"我以言辞宽恕你，"你的声音非常的平和，"但你也必须用实际行动宽恕自己。"
+			<<elseif $speech_attitude is "meek">>
+				"我-我以言辞宽恕你，"你的声音非常的平和，"但你也必须用实际行动宽恕自己。"
+			<<elseif $speech_attitude is "bratty">>
+				"你被宽恕了，"你的声音非常的平和，"但你也需要宽恕自己。"
+			<<else>>
+				"你被宽恕了，"你的声音非常的平和，"但你也必须用实际行动去宽恕自己。"
+			<</if>>
+			<br><br>
+			<<switch $sydneyConfession.Attendant>>
+				<<case "sinner_1">>
+					<<set $sydneyConfession.Choice to "correct">>
+					"我明白了。谢谢你，<<sister>>。"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>离开了隔间。<<grace 1>><<ggrace>>
+				<<case "sinner_2">>
+					"我被宽恕了吗？啊，谢谢你，<<sister>>！"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>> 离开了隔间。<<grace -2>><<lgrace>>
+				<<case "sinner_3">>
+					"宽恕？为——为什么你会在我做下这一切之后，依然宽恕我的罪行？你知道我在说什么吗？！"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>沉默地离开了，脚步声很沉重。<<grace -2>><<lgrace>>
+			<</switch>>
+			<br><br>
+		<<case "repent">>
+			<<if $angel gte 6 or ($confessionsTaken gte 10 and $grace gte 25)>>
+				"忏悔，然后重新做人，你就会被宽恕。"你对此十分确信。
+			<<elseif $speech_attitude is "meek">>
+				"你……你被宽恕了，"你点了点头，"但你仍然需要忏悔。"
+			<<elseif $speech_attitude is "bratty">>
+				"你被原谅了。但你必须自己振作起来然后忏悔。"你说。
+			<<else>>
+				"你被宽恕了。但你必须忏悔。"你说。
+			<</if>>
+			<br><br>
+			<<switch $sydneyConfession.Attendant>>
+				<<case "sinner_1">>
+					"当、当然了，<<sister>>。我会忏悔的。"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>走出了隔间。<<grace -2>><<lgrace>>
+				<<case "sinner_2">>
+					<<set $sydneyConfession.Choice to "correct">>
+					"我可能正需要这样严格的教诲，来让我重新找回自我，<<sister>>。"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>走出了隔间。<<grace 1>><<ggrace>>
+				<<case "sinner_3">>
+					"我会忏悔的，但这并没有办法弥补我所做过的糟糕的事。"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>走出了隔间。<<grace -2>><<lgrace>>
+			<</switch>>
+		<<case "contrition">>
+			<<if !$daily.contritions>>
+				<<set $daily.contritions to 0>>
+			<</if>>
+			你打算从纸堆里面拿出一张纸。你拼命伸手，但因为悉尼挡着而没办法够到。<<He>>替你拿了一张，然后从<<his>>的袍子里抽出一根红色记号笔，把它从金属百叶窗的缝隙里滑进你这边。
+			<br><br>
+
+			"要进行赎罪，你必须之后再来一趟。请把你的全名写在张纸上。我们的专门人员会协助你进行净化的。"
+			<br><br>
+			<<switch $sydneyConfession.Attendant>>
+				<<case "sinner_1">>
+					"我的名字？我……我不想这么做！"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>离开了隔间。<<grace -2>><<lgrace>>
+				<<case "sinner_2">>
+					"我……你只是想用我的名字告发我吧！"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>怒气冲冲地走出了隔间。<<grace -2>><<lgrace>>
+				<<case "sinner_3">>
+					<<set $sydneyConfession.Choice to "correct">><<set $daily.contritions ++>>
+					"净化……当然了。谢谢你，<<sister>>。"<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>把自己的名字写在纸上，走出了隔间。<<grace 1>><<ggrace>>
+			<</switch>>
+	<</switch>>
+	<br><br>
+
+	悉尼松了口气。
+	<<switch _sydneyArousal>>
+		<<case "high">>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"时间正好，来这边。"
+			<<else>>
+				"请……请快点，我……"
+			<</if>>
+		<<default>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"好了，接下来呢？"
+			<<else>>
+				"你还要……继续吗？"
+			<</if>>
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Temple Confess Sydney Sex]]>><<set $speechdisable to 0>><</link>>
+	<br>
+<<else>>
+	<<set $enemyanger to -10>>
+	<<temple_effects>><<effects>>
+	<<effectsman>>
+	<<man>>
+	<<if _sound is 1>>
+		<<set $sydneyConfession.Sound++>>
+	<</if>>
+	<<if $enemyarousal gte ($enemyarousalmax / 5) * 3>>
+		<<set _sydneyArousal to "high">>
+	<<else>>
+		<<set _sydneyArousal to "low">>
+	<</if>>
+
+	<<if $timer is 4>>
+		<<set $sydneyConfession.Attendant to either("sinner_1", "sinner_2", "sinner_3")>>
+		<<set $sydneyConfession.Pronoun to ($rng lte maleChance() ? "m" : "f")>>
+		<<set $sydneyConfession.State to "present">>
+		<<set $speechdisable to 1>>
+		<span class="red">另一扇门打开了。</span>你们俩都愣住了，悉尼捂住了<<his>>的嘴。
+		<br><br>
+		<<if $NPCList[0].vagina.toString().includes("mouth")>>
+			<<set $NPCList[0].vagina to 0>>
+			悉尼从你的嘴抽了出来。
+		<<elseif $NPCList[0].penis.toString().includes("mouth")>>
+			<<set $NPCList[0].penis to 0>>
+			悉尼从你的嘴抽了出来。
+		<<elseif $mouthuse is "kiss" and $NPCList[0].mouth is "kiss">>
+			<<set $NPCList[0].mouth to 0>>
+			悉尼从你们的吻中抽离。
+		<</if>>
+		<<set $mouthuse to 0>><<set $mouthstate to 0>><<set $mouthaction to 0>><<set $head to 0>>
+		<<switch _sydneyArousal>>
+			<<case "high">>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"可、可恶！"<<he>>低声说着，
+				<<else>>
+					<<He>>呜咽着，
+				<</if>>
+			<<default>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"呃，不……"<<he>>低声说着，
+				<<else>>
+					"我会……保持安静的，"<<he>>低身说着，
+				<</if>>
+		<</switch>>
+		与此同时，有人坐在了你们的另一边。
+		<br><br>
+	<<elseif $timer is 3>>
+		忏悔者叹了口气。对面传来了一个<<if $sydneyConfession.Pronoun is "m">>男性<<else>>女性<</if>>的声音。
+		<<if $orgasmdown gte 1>>
+			<<set $sydneyConfession.Sound++>>
+			"请原谅我，<<sister>>，我……嗯？你还好吗？"你迅速点了点头，想起来<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>现在看不到你。
+			<br><br>
+
+			"呃……我没事，"你试着掩饰自己的呻吟，"让我……呃，我是说让你的罪恶暴露于此，这样你才能得到呜……宽恕。"
+		<<elseif _sound>>
+			"请原谅我，<<sister>>，我……嗯？你还好吗？"你迅速点了点头，想起来<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>现在看不到你。
+			<br><br>
+
+			"我没事，让你的罪恶暴露于此，这样你才得以获得宽恕。"你说。
+		<<else>>
+			你回应了忏悔者。"欢迎，请完全将罪恶暴露于此，求你的罪得赦免。"
+			<br><br>
+
+			"宽恕我，<<sister>>，宽恕我的罪过。"
+		<</if>>
+		<br><br>
+	<<elseif $timer is 2>>
+		<<if $sydneyConfession.Sound gte 3>>
+			<span class="red"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>愤怒地抽了口气，意识到了你在做的事。</span>"死变态！"
+			<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>从忏悔室跑了出去。<<grace -4>><<llgrace>>
+			<<set $timer to 0>><<set $sydneyConfession.State to "exposed">><<set $speechdisable to 0>>
+		<<else>>
+			忏悔者开口了。
+			<<switch $sydneyConfession.Attendant>>
+				<<case "sinner_1">>
+					"我对我邻居的配偶有不纯的想法，而我自己明明有着幸福的婚姻……"
+				<<case "sinner_2">>
+					"我……我是个犯罪者。我在咖啡馆趁人不注意时偷走了别人的钱。"
+				<<case "sinner_3">>
+					"我做了一些非常不好的事，我强奸了一个妓院的舞者。"
+			<</switch>>
+			<<if $orgasmdown gte 1>>
+				<<set $sydneyConfession.Sound++>>
+				<span class="pink"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>听见了你的呻吟。</span>"你的声音好像有点奇怪，<<sister>>。"
+			<<elseif _sound>>
+				<span class="pink"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>听见了你发出的声音。</span>"我……什么？"
+			<</if>>
+		<</if>>
+		<br><br>
+	<<elseif $timer is 1>>
+		<<set $timer to 0>>
+		<<if $sydneyConfession.Sound gte 3>>
+			<span class="red"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>愤怒地抽了口气，意识到了你在做的事。</span>"死变态！"
+			<<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>从忏悔室跑了出去。<<grace -4>><<llgrace>>
+			<<set $timer to 0>><<set $sydneyConfession.State to "exposed">><<set $speechdisable to 0>>
+		<<else>>
+			忏悔者开口了。
+			<<switch $sydneyConfession.Attendant>>
+				<<case "sinner_1">>
+					"……我从来没有出过轨！我并不想要有这种想法，只是……这种想法就这么出现在我脑子里。"
+				<<case "sinner_2">>
+					"……也许我已经对这种快感上瘾了。我担心我很快真的会做出糟糕的事。"
+				<<case "sinner_3">>
+					"……明明求我停下，但我却没有听。"
+			<</switch>>
+			<<if $orgasmdown gte 1>>
+				<<set $sydneyConfession.Sound++>>
+				<span class="pink"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>听见了你的呻吟。</span>"抱歉，你还好吗？"
+			<<elseif _sound>>
+				<span class="pink"><<if $sydneyConfession.Pronoun is "m">>他<<else>>她<</if>>你见了你发出的声音。</span>"抱歉，你那边发生什么了吗？"
+			<</if>>
+		<</if>>
+		<br><br>
+	<</if>>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
+
+	<<if _combatend>>
+		<span id="next"><<link [[继续|Temple Confess Sydney Sex Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Temple Confess Sydney Sex]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>

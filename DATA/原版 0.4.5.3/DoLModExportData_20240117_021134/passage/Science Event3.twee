@@ -1,0 +1,92 @@
+:: Science Event3 []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $scienceprogression gte 4 and $delinquency gte 1000>>
+	西里斯对你笑了笑，然后说道："这部分课程是关于人体解剖学的。我需要你脱掉你的衣服。嗯，是所有的衣服。不要感到尴尬，而且这对这门课来说很重要。"
+	<br><br>
+	<<link [[拒绝|Science Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+	<br>
+	<<if $uncomfortable.nude is false>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 4>><<npcincr Sirris dom 1>><<scienceskill>><<arousal 600>><</link>><<garousal>><<gscience>>
+		<br>
+	<<else>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 4>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><</link>><<gstress>><<gscience>>
+		<br>
+	<</if>>
+<<elseif $scienceprogression gte 3 and $delinquency gte 600>>
+	西里斯转向全班说道："好了，请你们安静下来。" 但班上的同学并没有展现出相应的尊重。西里斯转头对你笑着说道："这部分课程是关于人体解剖学的，所以我需要你脱掉你的衣服，所有的衣服。不要感到尴尬，毕竟这对这门课来说很重要。"
+	<br><br>
+	<<link [[拒绝|Science Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+	<br>
+	<<if $uncomfortable.nude is false>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 3>><<npcincr Sirris dom 1>><<scienceskill>><<arousal 600>><<set $scienceprogression to 4>><</link>><<garousal>><<gscience>>
+		<br>
+	<<else>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 3>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><<set $scienceprogression to 4>><</link>><<gstress>><<gscience>>
+		<br>
+	<</if>>
+<<elseif $scienceprogression gte 2 and $delinquency gte 400>>
+	西里斯对你笑了笑，然后说道："这部分课程是关于人体解剖学的。我需要你脱掉你的衣服。嗯，是所有的衣服。不要感到尴尬，而且这对这门课来说很重要。"
+	<br><br>
+	<<link [[拒绝|Science Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+	<br>
+	<<if $uncomfortable.nude is false>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 2>><<npcincr Sirris dom 1>><<scienceskill>><<arousal 600>><<set $scienceprogression to 3>><</link>><<garousal>><<gscience>>
+		<br>
+	<<else>>
+		<<link [[脱衣服|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 2>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><<set $scienceprogression to 3>><</link>><<gstress>><<gscience>>
+		<br>
+	<</if>>
+<<elseif $scienceprogression gte 1 and $delinquency gte 10>>
+	西里斯对你笑着说："我需要你为这部分讲解脱衣服，不过别担心，你想的话，你可以留着你的内裤。"
+	<br><br>
+	<<if !$worn.under_lower.type.includes("naked")>>
+		<<link [[拒绝|Science Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+		<br>
+		<<if $uncomfortable.underwear is false>>
+			<<link [[脱衣服|Science Undress]]>><<upperstrip>><<lowerstrip>><<set $phase to 1>><<npcincr Sirris dom 1>><<scienceskill>><<arousal 600>><<set $scienceprogression to 2>><</link>><<garousal>><<gscience>>
+			<br>
+		<<else>>
+			<<link [[脱衣服|Science Undress]]>><<upperstrip>><<lowerstrip>><<set $phase to 1>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><<set $scienceprogression to 2>><</link>><<gstress>><<gscience>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $uncomfortable.nude is false>>
+			你说得很大声，以确保全班都能听到："我里面没穿。"
+		<<else>>
+			你尽可能小声地说，确保只有西里斯能听到："我……我里面没穿。"
+			<br>
+		<</if>>
+		<<if $delinquency gte 400>>
+			<<He>>微微地脸红了。"你知道的，这违反了校规。我还是要请你脱光衣服，这对课堂很重要。"
+			<br><br>
+			<<link [[拒绝|Science Refusal]]>><<detention 1>><</link>><<gdelinquency>>
+			<br>
+			<<if $uncomfortable.nude is false>>
+				<<link [[脱下|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 2>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><<arousal 300>><<set $scienceprogression to 2>><</link>><<garousal>><<gscience>>
+				<br>
+			<<else>>
+				<<link [[脱下|Science Undress]]>><<schoolrep_naked>><<strip>><<set $phase to 2>><<npcincr Sirris dom 1>><<scienceskill>><<stress 1>><<trauma 1>><<set $scienceprogression to 2>><</link>><<gtrauma>><<gstress>><<gscience>>
+				<br>
+			<</if>>
+		<<else>>
+			<<He>>的脸微红，<<his>>的眼神躲闪着你。"哦，请，请找个位置坐下。"
+			<<gstress>><<gtrauma>>
+			<br><br>
+			<<link [[坐下|Science Lesson]]>><<stress 1>><<trauma 1>><<endevent>><</link>>
+			<br>
+			<<if $exhibitionism gte 75>>
+				<<link [[总之先脱光|Science Undress]]>><<strip>><<schoolrep_naked>><<set $phase to 5>><<set $scienceprogression to 2>><<scienceskill>><</link>><<gscience>><<exhibitionist5>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<else>>
+	西里斯对你笑着。"别担心，我们不会做什么有侵犯性质的事情的。"<<He>>转向其他人。"好吧，你们能安静点吗……"
+	<br><br>
+
+	<<He>>谈论各种骨骼和器官，指着你身体对应的部分来演示它们的位置。过了一会儿，<<he>>感谢你，把你送回你的座位上。
+	<<gscience>><<scienceskill>>
+	<br><br>
+	<<link [[继续|Science Lesson]]>><<endevent>><<set $scienceprogression to 1>><</link>>
+	<br>
+<</if>>

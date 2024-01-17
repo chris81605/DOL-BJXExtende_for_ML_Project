@@ -1,0 +1,325 @@
+:: Temple []
+<<set $outside to 0>><<set $location to "temple">><<sydneySchedule>><<temple_effects>><<effects>>
+你现在处于神殿的大殿中。巨大的石墙与柱子耸立着，直入穹窿。成排的座椅面向着房间尽头处的祭坛。
+<<if Time.dayState isnot "night" and Time.dayState isnot "dusk">>
+	一个穿着白色修道袍的人跪在祭坛前。
+<</if>>
+<<if Time.weekDay is 1 and Time.hour is 12 and $daily.massAttended isnot 1>>
+	座位上坐满了来参加周日弥撒的信众。
+<</if>>
+<<if $exposed gte 1>>
+	你躲在一根柱子后面，以此隐藏你的<<nudity>>。
+<</if>>
+<br><br>
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyWatersBrokenPassout "temple">>
+<<elseif $stress gte $stressmax>>
+	<<passouttemple>>
+<<elseif $temple_chastity_timer lte 0 and $temple_rank isnot undefined and $temple_rank isnot "prospective" and $exposed lte 0>><<set $temple_chastity_timer to 30>>
+	<<if $templePromised is "Sydney">>
+		<<npc Jordan>><<person1>>
+		<<if Time.dayState isnot "night" and Time.dayState isnot "dusk">>
+			那人影转过身来——是约旦。"我的孩子，"<<he>>的声音肃穆且沉静，"是时候进行贞洁检查了。
+		<<else>>
+			"我的孩子，"一个声音从旁边传来，是约旦。"是时候进行贞洁检查了。
+		<</if>>
+		我们必须确保你们仍然纯洁。如果你和你的同伴不纯洁，我们将对你们进行净化。”
+		<br><br>
+		<<if _sydney_location is "temple">>
+			另一个人影打着哈欠走了过来——是悉尼。
+		<<else>>
+			<<He>>耐心地对你笑了笑。"会回来的，放心好了。请你不要太过担忧。"
+		<</if>>
+		<br><br>
+		<<link [[允许检查|Sydney Temple Test]]>><</link>>
+		<br>
+		<<link [[拒绝检查|Sydney Temple Test Refuse]]>><<npcincr Sydney love -5>><</link>><<lllove>>
+		<br>
+		<<link [[承认自己的不洁|Sydney Temple Test Admission]]>><<npcincr Sydney love -10>><</link>><<llllove>>
+		<br>
+	<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].virginity.temple isnot true and $templePromised isnot "Sydney">>
+		<<npc Jordan>><<person1>>
+		<<if Time.dayState isnot "night" and Time.dayState isnot "dusk">>
+			那个人影转过身来——是约旦，<<he>>正抓着悉尼的手臂。"我的孩子，"<<he>>悲伤地摇了摇头，"<span class="red">悉尼没有通过<<nnpc_his "Sydney">>的贞操检查。</span>
+		<<else>>
+			"我的孩子，"旁边传来了一个声音，约旦抓着悉尼出现了。"<span class="red">悉尼没有通过<<nnpc_his "Sydney">>的贞洁检查。</span>
+		<</if>>
+		我们知道你是罪魁祸首，你必须和<<nnpc_him "Sydney">>一起被净化……我很抱歉。"约旦从袍子里拿出了一个小铃铛，轻轻地晃了起来。
+		<br><br>
+		约旦放开了悉尼，<<nnpc_his "Sydney">>迅速地跑了过来，紧紧地挽住了你。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Sydney Temple Punish Intro]]>><</link>>
+		<br>
+	<<else>>
+		<<npc Jordan>><<person1>>
+		<<if Time.dayState isnot "night" and Time.dayState isnot "dusk">>
+			那人影转过身来——是约旦。"我的孩子，"<<he>>的声音肃穆且沉静，"是时候进行贞洁检查了。
+		<<else>>
+			"我的孩子，"一个声音从旁边传来，是约旦。"是时候进行贞洁检查了。
+		<</if>>
+		我们必须确保你的无暇——如果你不再纯洁，你将会被净化。"
+		<br><br>
+
+		<<link [[接受检查|Temple Test]]>><<set $phase to 2>><</link>>
+		<br>
+		<<link [[拒绝检查|Temple Test Refuse]]>><</link>>
+		<br>
+		<<link [[承认自己的不洁|Temple Test Admission]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $temple_event is 1 and Time.dayState isnot "night" and $exposed lte 0>><<set $temple_event to 0>>
+	<<eventstemple>>
+
+<<elseif _sydneyTemple and $sydneyAnalRosary and $exposed lte 0>>
+	<<npc Sydney>><<person1>>
+	<<run statusCheck("Sydney")>>
+	<<unset $sydneyAnalRosary>>
+	<<if _sydneyStatus.includes("pure")>>
+		你看到悉尼从柱子后面探出头来，<<his>>的手里正摆弄着什么——<span class="lewd">那是一串肛珠，</span>商店里那个。
+		<br><br>
+
+		当意识到有人靠近时，悉尼的呼吸变得急促了起来，但在发现是你后，<<he>>又长舒了一口气。"我做不到，"<<he>>不安地摇着头，"我以为我能，但这太……太……"
+		<br>
+		<<He>>结结巴巴地说不出话来，只是猛烈地摇着头。只见<<He>>把珠子往你手中一塞，飞一般地匆匆跑开了，在这过程中悉尼一直盯着地面，根本不敢抬头。
+		<br><br>
+
+		在这如此神圣的地方，你的手中拿着一串肛珠——你不知道该干什么，于是耸了耸肩，就这样将它扔在了地上，留着给某个幸运的<<monk>>前来处理。
+		<br><br>
+
+		<<link [[继续|Temple]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼笑着朝你跑了过来，发缕在前额摇晃着。
+		<<else>>
+			你注意到悉尼正缓缓地向你走来，<<His>>一脸窘迫，从脖颈一直红到了耳根。
+		<</if>>
+		<span class="lewd"><<His>>的脖子上挂着一串肛珠——跟商店里的是同一款。</span>
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>用一只手捂住嘴，试图掩饰自己的笑声。"你应该看看你现在的表情！我可没骗你！想不到吧？"
+		<<else>>
+			<<He>>紧张地笑了笑，努力着与你相对视。"呃……这？我，我之前说过的，然后就这样了。"
+		<</if>>
+		<br><br>
+
+		<<link [["鼓励" + $NPCList[0].pronouns.him + "进行炫耀"|Temple Sydney Rosary]]>><<set $phase to 2>><<grace -3>><<npcincr Sydney purity -5>><</link>><<llgrace>><<llspurity>><<sydneyWarning>>
+		<br>
+		<<link [["赞扬" + $NPCList[0].pronouns.him|Temple Sydney Rosary]]>><<set $phase to 1>><<npcincr Sydney love 1>><<npcincr Sydney purity -1>><</link>><<glove>><<lspurity>>
+		<br>
+		<<link [["斥责" + $NPCList[0].pronouns.him|Temple Sydney Rosary]]>><<set $phase to 0>><<npcincr Sydney purity 3>><</link>><<ggspurity>><<sydneyWarning>>
+		<br>
+	<</if>>
+
+<<elseif $dance_job_intro and $jordan_ritual_dance is undefined and ($grace gte 80 and $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest") and $exposed lte 0>>
+	<<npc Jordan>><<person1>>
+	"我的孩子，"一旁的声音说。这是约旦，看起来比平时更憔悴。一缕顽皮的头发落在了<<his>>的眼睛之间。"我必须请个人情。<span class="gold">你认识查里吗？</span>原谅我这样问，但您作为舞者名声在外。"
+	<br><br>
+
+	"我们的一个小羊羔最近在多瑙河街一个庄园里找了份工作，之后就消失了。此庄园素以雇佣艺人而闻名。若你要去工作，请留意任何怪异之处，务必小心，无须冒险。如有任何线索，请及时告知我。多谢。"
+	<br><br>
+
+	<<link [[继续|Temple]]>><<set $jordan_ritual_dance to 1>><<endevent>><</link>>
+	<br>
+<<elseif $adultshopgrandopening is true and _sydneyTemple is true and $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $adultshopunlocked isnot true and $exposed lte 0>>
+	<<set $adultshopopeningsydney to true>>
+	<<npc Sydney>><<person1>>
+	<<run statusCheck("Sydney")>>
+	悉尼出去的时候差点撞到你。
+	<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("corruptLust")>>
+		"啊哈，"<<he>>抓着你的前臂说，"我正希望能碰见你呢。快点，我们要错过开幕典礼了！"
+		<br><br>
+	<<elseif _sydneyStatus.includes("pure") or _sydneyStatus.includes("pureLust")>>
+		"哦，嘿，"<<he>>腼腆地笑了笑，"我想去看看成人商店的开业典礼，你愿意陪我一起去吗？和你在一起的话，我就不会觉得有那么尴尬了。"
+		<br><br>
+	<<else>>
+		"哦，嘿，"<<he>>对你笑了笑，"我想去看看成人商店的开业典礼，你愿意陪我一起去吗？到时候那里应该会很热闹的。"
+		<br><br>
+	<</if>>
+	<<link [[与悉尼一起去 (1:00)|Adult Shop Opening Walk]]>><<pass 10>><</link>>
+	<br>
+	<<link [[拒绝|Temple]]>><<endevent>><</link>>
+	<br>
+<<elseif ($temple_rank is "monk" or $temple_rank is "priest") and ($renttime lte -2 or $renttime lte 0 and Time.hour gte 4 and Time.hour lte 21)>>
+	<<if $temple_bailey is undefined>>
+		<<npc "Bailey" 1>>
+		<<npc "Jordan" 2>>
+		<<if $per_npc.bishop_right_hand>>
+			<<loadNPC 2 "bishop_right_hand">><<loadNPC 3 "bishop_left_hand">>
+		<<else>>
+			<<generateConfessor 3>><<set _generate_partner to 2>><<generateConfessor 4>>
+			<<saveNPC 2 "bishop_right_hand">><<saveNPC 3 "bishop_left_hand">>
+		<</if>>
+		<<person2>>约旦站在祭坛前，身侧是
+		<<if $per_npc.bishop_right_hand.pronoun is $per_npc.bishop_left_hand.pronoun>>
+			两位身着深色长袍的<<priests>>。
+		<<else>>
+			一男一女两位身着深色长袍的司祭。
+		<</if>>
+		他们正对着一个熟悉的身影说话——是<span class="red">贝利。</span>
+		<br><br>
+		"感谢你的理解，" 约旦在你走近时对贝利说道，"你有权关心你的被监护人。" <<He>>注意到了你。"啊，他们来了。"
+		<br><br>
+		贝利转向你，<<person1>><<his>>的脸上舒展开一个不寻常的温暖笑容。"见到你真高兴，"<<he>>说道，"你着实让我担心啊。"然后，<<He>>靠得更近了，用只有你能听到的声音小声耳语道：<span class="gold">"这周算是让你逃掉了，</span>不过我会时不时来拜访，收走本该给我的东西。"
+		<br><br>
+
+		<<link [[点头|Temple Bailey Intro Nod]]>><<set $temple_bailey to 1>><<stress 6>><<grace 1>><</link>><<gstress>><<ggrace>>
+		<br>
+		<<link [[拒绝|Temple Bailey Intro Refuse]]>><<set $temple_bailey to 1>><<trauma -6>><<grace -3>><</link>><<llgrace>><<ltrauma>>
+		<br>
+		<<link [[保持沉默|Temple Bailey Intro Silent]]>><<set $temple_bailey to 1>><</link>>
+		<br>
+		<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+	<<else>>
+		<<npc "Bailey">><<person1>>
+		<<if $per_npc.bishop_right_hand>>
+			<<loadNPC 1 "bishop_right_hand">><<loadNPC 2 "bishop_left_hand">>
+		<<else>>
+			<<generateConfessor 2>><<set _generate_partner to 1>><<generateConfessor 3>>
+			<<saveNPC 1 "bishop_right_hand">><<saveNPC 2 "bishop_left_hand">>
+		<</if>>
+		一只手放在了你的肩上。<span class="red">是贝利。</span><<Hes>>身边站着一个<<person2>><<person>>和<<person3>><<person>>。"我是来看你的情况的，"<<person1>><<he>>说着，露出一个老道的、迷人的笑容。<<His>>攥着你肩膀的手更用力了些，然后靠到你耳边，用只有你能听到的声音说，"是时候付钱了。"
+		<br>
+		"神殿必须支持本地社区。"
+		<br>
+		“是时候付钱了。”
+		<br><br>
+
+		贝利听了后者的话，不禁皱起了眉头。
+		<br><br>
+
+		<<temple_bailey_options>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "temple">>
+	<</if>>
+	<<if $scienceproject is "ongoing" and $sciencelichentemple is 0 and $exposed lte 0>>
+		<<scienceicon "pink lichen">><<link [[寻找地衣 (0:30)|Temple Lichen]]>><<pass 30>><<set $sciencelichentemple to 1>><</link>>
+		<br>
+	<</if>>
+	<<if Time.dayState isnot "night" and $exposed is 0 and $daily.jordanMissing isnot 1>>
+		<<templeicon "altar">><<link [[接近人影|Temple Jordan]]>><</link>>
+		<br>
+	<</if>>
+
+	<<if Time.weekDay is 1 and Time.hour gte 11 and Time.hour lte 12 and $daily.massAttended isnot 1 and $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Jordan")].init is 1>>
+		<<if $angel gte 6>>
+			<<templeicon "altar">><<link [[参加弥撒 (1:00)|Temple Mass Angel]]>><<purity 10>><<pass 60>><<trauma -18>><<stress -18>><<set $daily.massAttended to 1>><</link>><<gpurity>><<lltrauma>><<llstress>>
+			<br>
+		<<elseif $fallenangel gte 2>>
+			<<templeicon "altar">><<link [[参加弥撒 (1:00)|Temple Mass Fallen Angel]]>><<purity 70>><<pass 60>><<trauma 6>><<stress 6>><<pain 6>><<set $daily.massAttended to 1>><</link>><<gggpurity>><<gtrauma>><<gstress>><<gpain>>
+			<br>
+		<<elseif $demon gte 6>>
+			<<templeicon "altar">><<link [[参加弥撒 (1:00)|Temple Mass Demon]]>><<purity 10>><<pass 60>><<trauma 6>><<stress 6>><<pain 6>><<set $daily.massAttended to 1>><</link>><<gggpurity>><<gtrauma>><<gstress>><<gpain>>
+			<br>
+		<<else>>
+			<<templeicon "altar">><<link [[参加弥撒 (1:00)|Temple Mass]]>><<purity 10>><<pass 60>><<set $daily.massAttended to 1>><</link>><<gpurity>>
+			<br>
+		<</if>>
+	<<elseif $exposed lte 0>>
+		<<templeicon "pray">><<link [[祈祷 (1:00)|Temple Pray]]>><<set $eventskip to 1>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $exposed lte 0>>
+		<<if Time.weekDay is 1 and Time.hour gte 11 and Time.hour lte 12>>
+			<span class="purple">忏悔室在弥撒期间暂时关闭。</span>
+			<br>
+		<<elseif Time.hour gte 6 and Time.hour lt 22>>
+			<<if $temple_rank is "monk" and !$confessionsTaken>>
+				<<templeicon "confession">><<link [[接近忏悔室|Temple Confess Tutorial]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<templeicon "confession">><<link [[接近忏悔室|Temple Confess Approach]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<span class="purple">忏悔室在夜间暂时关闭。</span>
+			<br>
+		<</if>>
+	<<elseif $exposed gte 1>>
+		<<if Time.weekDay is 1 and Time.hour gte 11 and Time.hour lte 12>>
+			<span class="red">忏悔室在弥撒期间暂时关闭。你不能躲在里面。</span>
+			<br>
+		<<elseif Time.hour gte 6 and Time.hour lt 22 and !($temple_rank is "monk" and !$confessionsTaken)>>
+			<<templeicon "confession">><<link [[接近忏悔室|Temple Confess Approach]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<span class="red">忏悔室在夜间暂时关闭。你不能躲在里面。</span>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $exhibitionism gte 55 and $angel lte 0>>
+		<<ind>><<link [[自慰 (0:20)|Temple Masturbation]]>><<pass 20>><<set $masturbationstart to 1>><</link>><<llpurity>>
+		<br>
+	<</if>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $exposed lte 0>>
+		<<if _sydney_location is "late" and Time.schoolDay>>
+			<<if $sydneyScience is 1 and !$sydneySeen.includes("science")>>
+			/* Do nothing. Prevents Sydney from being interactable if their science intro is ready. */
+			<<else>>
+				<br>
+				有人在长椅上睡着了。你仔细一看，发现那是悉尼。<<if Time.hour is 9>><<nnpc_He "Sydney">>上学迟到了。<<else>>如果不叫醒<<nnpc_he "Sydney">>，<<nnpc_him "Sydney">>可能就上学迟到了。<</if>>
+				<br>
+				<<templeicon "pew">><<link [["叫醒" + $NPCName[$NPCNameList.indexOf("Sydney")].pronouns.him|Temple Sydney Wakeup]]>><<endevent>><<npcincr Sydney love 1>><</link>><<glove>>
+				<br>
+			<</if>>
+		<<elseif _sydney_location is "temple">>
+			<br>
+			<<switch $sydney_templeWork>>
+				<<case "pray">>
+					悉尼正坐在长椅上，低头祷告着。
+					<br>
+					<<templeicon "pew">><<link [[接近悉尼|Temple Sydney]]>><<set $phase to 1>><</link>>
+				<<case "garden">>
+					<span class="teal">你可以看到悉尼带着园艺用品在神殿进进出出。</span>
+				<<case "quarters">>
+					<span class="teal">你看见悉尼拎着要洗的衣服和清洁用品在宿舍进进出出。</span>
+				<<case "mass">>
+					<span class="teal">悉尼可能正在准备弥撒。</span>
+				<<case "sleep">>
+					<span class="teal">悉尼在这里过夜。</span>
+				<<case "anguish">>
+					<<if $weekly.trialFailed>>
+						<span class="teal">悉尼仍在审判仪式中。</span>
+					<<else>>
+						<span class="teal">悉尼在这里过夜。</span>
+					<</if>>
+			<</switch>>
+		<<elseif !$daily.sydney.offSchedule and (_sydney_location_message is "shop" or _sydney_location_message is "home" or _sydney_location_message is "rehearsal")>>
+			<span class="blue">你在附近没有看到悉尼。</span>
+			<br>
+			<<askicon>><<link [[四处打听悉尼在哪里|Temple Sydney Ask]]>><<set $daily.sydney.offSchedule to true>><</link>>
+		<</if>>
+	<</if>>
+
+
+
+	<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+		<br>
+		<<if $prayer_room_init is 1>>
+			<<templeicon "garden">><<link [[花园|Temple Garden]]>><</link>>
+			<br>
+			<<templeicon "quarters">><<link [[宿舍|Temple Quarters]]>><</link>>
+			<br>
+			<<templeicon "prayer room">><<link [[祈祷室|Temple Prayer Entrance]]>><</link>>
+			<br>
+		<<else>>
+			<<templeicon>><<link [[探索神殿 (0:30)|Temple Prayer Explore]]>><<pass 30>><<set $prayer_room_init to 1>><</link>>
+			<br>
+		<</if>>
+		<<if $temple_rank is "monk" or $temple_rank is "priest">>
+			<<ind>><<link [[回廊|Temple Cloister]]>><</link>>
+			<br>
+		<</if>>
+
+	<</if>>
+	<br>
+	<<wolficon>><<link [[离开 (0:01)|Wolf Street]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+<<set $eventskip to 0>>

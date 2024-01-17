@@ -1,0 +1,29 @@
+:: Bully Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>><<hand_gag 0 left>>
+	你推开惠特尼试图逃跑，但<<he>>从背后抓住你，伸出手臂捂住你的嘴。
+	<br><br>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没有人来帮助你，大概是因为你的不良名声。</span>">>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Bully Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bully Fight]]>><</link>></span><<nexttext>>
+<</if>>

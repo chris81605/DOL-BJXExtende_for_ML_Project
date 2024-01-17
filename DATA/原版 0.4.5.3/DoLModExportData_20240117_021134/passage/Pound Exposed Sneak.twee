@@ -1,0 +1,48 @@
+:: Pound Exposed Sneak []
+<<effects>>
+
+<<generate1>><<generate2>><<person1>>
+你跪下来，从门缝中偷看。一个<<person>>和<<person2>><<person>>正在背对着你聊天。
+<br><br>
+
+这只是一个很短的距离，但你的心却不由自主地怦怦直跳。
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你抓过毛巾后爬了回去。你匆忙地用毛巾<<if $upperwet gte 1>>擦干<<else>>包裹住<</if>>自己。<<dry_towel>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<link [[继续|Pound]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	你试图抓住毛巾，但你颤抖的手反而撞到了手推车上，把它撞得更远。
+	<br><br>
+
+	你再次追上它，但那个<<person1>><<person>>刚好转身发现了你。"那我们这里有什么？"<<he>>说，提醒<<his>>的朋友。
+	<br>
+	"穿成这样在外面爬。"<<person2>><<person>>说道。<<He>>摇了摇头。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Pound Exposed Caught]]>><</link>>
+	<br>
+
+<</if>>

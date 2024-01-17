@@ -1,0 +1,59 @@
+:: Lake Depths Ice []
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakedepths">><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	你在冰冻的湖中央，靠近游泳码头。
+<<else>>
+	<<if $weather is "snow">>
+		你在冰冻的湖中央，靠近游泳码头。浓密的雪使周围的森林难以看清。
+	<<else>>
+		你在冰冻的湖中央，靠近游泳码头。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if !Time.schoolDay and $weather is "snow" and Time.dayState is "day">>
+	有人在游泳码头旁挖了一个穿过冰面的洞。
+<<else>>
+	<<if $lake_ice_broken is undefined>>
+		有人在游泳码头上留下了一些装备，包括一把铲子。这里的冰很薄，你可以用一些力气打破它。
+	<<else>>
+		冰面上有一个洞，可以进入下面的水中。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>这里没有地方可以藏身。
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure + 1000)) and $eventskip is 0 and $lakesurface is 1>>
+	<span class="purple">有什么东西跟着你从深处来了。</span><<eventlakewater>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakeice>>
+<<else>>
+	<<if !Time.schoolDay and $weather is "snow" and Time.dayState is "day">>
+		<<set $lake_ice_broken to 1>>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths Ice Break">>
+		<<swimicon "down">><span class="nextLink"><<link [[向下|Lake Depths Ice Break]]>><<pass 12>><</link>></span>
+		<br>
+	<<elseif $lake_ice_broken is undefined>>
+		<<swimicon "break">><<link [[破冰 (0:30)|Lake Ice Break]]>><<pass 30>><<set $lake_ice_broken to 2>><<tiredness 3>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		<<swimicon "dive">><<link [[潜水 (0:01)|Lake Underwater]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+
+	<<lakeicon>><<link [[走向岸边 (0:12)|Lake Shallows Ice]]>><<pass 12>><</link>>
+	<br><br>
+
+	<<set $eventskip to 0>>
+<</if>>
+<<set $lakesurface to 0>>

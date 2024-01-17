@@ -1,0 +1,33 @@
+:: Moor Vehicle Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	两人靠在车上，气喘吁吁。<<tearful>>你跑过石楠丛。他们已经疲惫不堪，无力追赶。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Moor]]>><<set $eventskip += 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	两人退回车里，锁上车门。车子在泥泞中发动，他们开走了。
+	<br><br>
+	<<tearful>>你独自振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Moor]]>><<set $eventskip += 1>><</link>>
+	<br>
+
+<<else>>
+	你倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+	<<saveNPC 0 moor_pair_1>>
+	<<saveNPC 1 moor_pair_2>>
+	<<steal>>
+	<<endcombat>>
+	<<loadNPC 0 moor_pair_1>>
+	<<loadNPC 1 moor_pair_2>>
+	<<link [[继续|Moor Vehicle Defeat]]>><<clotheson>><</link>>
+
+<</if>>

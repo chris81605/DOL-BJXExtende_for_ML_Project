@@ -1,0 +1,71 @@
+:: Hallways Locker Struggle Free Attempt []
+<<effects>>
+<<if $worn.lower.type.includes("naked") or $phase gte 1>>
+	<<set $worn.under_lower.integrity -= 20>>
+	<<set _wornname to $worn.under_lower.cn_name_cap>>
+	<<set _wornintegrity to $worn.under_lower.integrity>>
+<<else>>
+	<<set $worn.lower.integrity -= 15>>
+	<<set _wornname to $worn.lower.cn_name_cap>>
+	<<set _wornintegrity to $worn.lower.integrity>>
+<</if>>
+
+<<if $phase gte 1>>
+	你竭尽全力将自己从储物柜上拉开，_wornname在你的<<print $phase is 1 ? "臀间" : "<<genitals>>上">>来回拉扯，磨得你很是难受。
+<</if>>
+<<if $physiqueSuccess>>
+	<<if _wornintegrity gt 0>>
+		<<if $phase gte 1>>
+			你终于挣脱了，只是布料情况不容乐观。
+		<<else>>
+			你用力拉扯你的_wornname，终于重获了自由，只是布料情况不容乐观。
+		<</if>>
+		<<stress -5>><<lstress>>
+		<br>
+	<<else>>
+		<<if $phase is 2>>
+			经过一段时间，它终于被撕开，这让围观的学生们非常高兴。你迅速用手试图遮盖自己走光的部位，但他们仍指着你笑个不停。
+		<<elseif $phase is 1>>
+			经过一段时间，它终于被撕开！你迅速试图掩盖自己，而其他学生则指着你笑个不停。
+		<<else>>
+			你继续用力拉扯着你的_wornname，它从你的身体上被撕下来！
+		<</if>>
+		<<stress 5>><<gstress>>
+		<br><br>
+		<<integritycheck>><<exposure>>
+		<br>
+	<</if>>
+	<<lockereventnext>>
+<<else>>
+	<<if _wornintegrity gt 0>>
+		<<if $phase gte 1>>
+			你听到一声响亮的撕裂声，但它仍然卡在储物柜里！
+		<<else>>
+			你用力拉扯着你的_wornname，听到一声巨大的撕裂声，但它仍然卡在储物柜里！
+		<</if>>
+		<<stress 2>><<gstress>>
+		<br>
+		<<if $exhibitionism gte 35>>
+			<<covered>>
+			<br>
+		<</if>>
+		<<lockereventpassages>>
+	<<else>>
+		你穿上了你的_wornname。
+		<br><br>
+		<<integritycheck>><<exposure>>
+		<<if !$worn.under_lower.type.includes("naked")>>
+			<span class="red">你的$worn.under_lower.cn_name_cap<<underlowerplural>>仍然卡在储物柜上！</span><<stress 5>><<gstress>>
+			<br><br>
+			<<set $phase to 0>>
+			<<if $exhibitionism gte 35>>
+				<<covered>>
+				<br>
+			<</if>>
+			<<lockereventpassages>>
+		<<else>>
+			<br>
+			<<lockereventnext>>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,44 @@
+:: Pregnancy Birth Hospital 6 []
+<<set $location to "town">><<effects>>
+
+<<npc "Bailey">><<person1>>
+<<getChildrenIds>><<childSelect _childrenIds.last()>>
+贝利在医院大厅等你。<<He>>看到你时露出了几分微笑，装得十分真诚。"我们已经准备好了一个地方，"<<he>>说道。
+<<if $litter_size is 1>>
+
+<<elseif $litter_size is 2>>
+	"两个孩子都安置得好。"
+<<else>>
+	"三个孩子都安置得好。"
+<</if>>
+<<He>>带着你走到外面，<<his>>的车就在那里等候。<<He>>为你打开了副驾驶门，然后从另一侧上车。
+<br><br>
+引擎启动了。
+<!-- Bailey may not know about all your pregnancies -->
+<<set _knownPregnancyCount to knowsAboutPregnancyTotal("pc","Bailey","home")>>
+<<if _knownPregnancyCount is 1>>
+	"你要负责照顾自己的后代，"<<he>>说道。"如果要我帮忙的话，每周<<if $litter_size gte 2>>每个<</if>>都要额外再收<span class="red">£100</span>的抚养费。"
+	<br><br>
+	"不准把他们带出育儿室，”<<he>>从医院停车场开<<he>>车出来的时候说，“绝对不行。"
+<<elseif _knownPregnancyCount lte 4>>
+	"你要负责照顾自己的后代，"<<he>>说道。"如果要我帮忙的话，每周<<if $litter_size gte 2>>每个<</if>>都要额外再收<span class="red">£100</span>的抚养费。
+	<br><br>
+<<else>>
+	"你个不负责任的荡妇，"<<he>>说，"记住，如果要我帮忙照顾你的后代的话，每周<<if $litter_size gte 2>>每个<</if>>都要额外再收<span class="red">£100</span>的抚养费。
+<</if>>
+<<if $baileydefeatedchain gte 3>>
+	你看到<<him>>一瞬间的冷笑。"我也不想把你的小逼崽子们送给别人养，但如果你再敢反抗我的话，就别想再见他们了。"
+<</if>>
+<br><br>
+
+<<if $litter_size is 1>>
+	<<link [[把你宝宝的名字告诉贝利|Pregnancy Birth Hospital 7]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[只是抱紧宝宝|Pregnancy Birth Hospital 7]]>><</link>>
+	<br>
+<<else>>
+	<<link [[把你宝宝的名字告诉贝利|Pregnancy Birth Hospital 7]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[只是抱紧宝宝|Pregnancy Birth Hospital 7]]>><</link>>
+	<br>
+<</if>>

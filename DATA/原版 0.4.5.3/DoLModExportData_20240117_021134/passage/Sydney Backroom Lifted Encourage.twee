@@ -1,0 +1,43 @@
+:: Sydney Backroom Lifted Encourage []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>>
+
+<<if $speech_attitude is "meek">>
+	你用你的大腿推正了悉尼的脑袋。
+	<br><br>
+
+	"别害羞嘛，"你轻声说着，抚摸着你的胸部。"你想怎样都行。"
+<<elseif $speech_attitude is "bratty">>
+	你抓住悉尼的脑袋，按向你双腿之间。
+	<br><br>
+
+	"我可不会让人白看，"你咯咯笑了起来，"你得付出相应的回报。"
+<<else>>
+	你抬起悉尼的下巴，凑向你的裆部。
+	<br><br>
+
+	"可以给你看，"你咯咯笑了起来，"但你也要给我相应的回报。"
+<</if>>
+<<promiscuity3>>
+
+<<set $seductiondifficulty to 8000 - (($NPCName[$NPCNameList.indexOf("Sydney")].love + $NPCName[$NPCNameList.indexOf("Sydney")].lust) * 15) - $NPCName[$NPCNameList.indexOf("Sydney")].purity>>
+<<seductioncheck>>
+<br><br>
+
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<He>>看上去十分紧张，咽了口口水，但并没有退缩。<<He>>缓缓地靠了过来，在你的<<genitals>>上颤抖地呼出一口气。
+	<br><br>
+
+	<<link [[继续|Sydney Backroom Lift Sex]]>><<set $phase to 1>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<His>>睁大了眼睛，随后又立刻闭了起来，惊慌失措地把你推开。你被撞到附近的架子上，<<he>>见状冲到你身边，结结巴巴地道歉。<<pain 1>><<gpain>>
+	<br><br>
+
+	<<sydneySexFail>>
+	<br><br>
+
+	<<link [[继续|Sydney Backroom Lift End]]>><</link>>
+	<br>
+<</if>>

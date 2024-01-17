@@ -1,0 +1,29 @@
+:: Farm Assault Intro []
+<<effects>>
+<<set $bus to "yard">>
+<<farm_assault_init>>
+
+你冲了出去，发现艾利克斯站在院子里。
+<br><br>
+<<set $farm_attack_timer to random(17, 24)>>
+<<npc Alex>><<person1>>
+"他们是不会从这里通过的，"<<he>>指向道路点了点头。"他们会尝试偷偷溜进来。"<<he>>递给你一台对讲机。"有很多需要保护的田地，我们得分头行动。不过如果我们联合起来行动的话，我们会有更强的力量。"
+<br><br>
+
+<<if $farm.tower gte 2 and $farm.tower_guard>>
+	<<He>>向瞭望塔挥了挥手，$farm.tower_guard闪了一下探照灯以作回应。
+<<elseif $farm.tower and $farm.tower_guard>>
+	<<He>>向瞭望塔挥了挥手，你看到$farm.tower_guard挥手回应。
+<<elseif $farm.tower>>
+	<<He>>指着瞭望塔。"爬上去的话我们的视野会更好"
+<</if>>
+<br><br>
+
+<<if $leftarm is "bound" or $rightarm is "bound">>
+	艾利克斯解开了绑着你的东西。你不能以那个样子保卫农场。
+	<<unbind>>
+	<br><br>
+<</if>>
+
+<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+<br>

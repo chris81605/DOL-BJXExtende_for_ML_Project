@@ -1,0 +1,64 @@
+:: Maths Competition End []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<endevent>>
+<<npc Leighton>><<person1>>
+礼顿、瑞沃和两位客人在台上商议了一会儿。
+<<if $mathschance gte 1 and $mathschancestart is 0>>
+	礼顿似乎在和其他人争论。
+	<<if $mathschance gte $rng>>
+		瑞沃在礼顿上台在麦克风前清起嗓子时愤怒地举起双手。
+	<<else>>
+		<<He>>摇了摇头，接着上台在麦克风前清了清嗓子。
+		<br><br>
+	<</if>>
+<</if>>
+
+"我们已经做了一个决定，"<<he>>说。
+
+<<if $mathschance gte $rng>>
+	<span class="green">"获胜者是那个<<haircolourtext>>头发的学生。"<<He>>指着你说，</span>"上来吧。"
+	<br><br>
+
+	你登上台与礼顿握手，<<he>>对着旁边等待已久的摄影师露出了一个微笑。<<He>>把奖杯递到你手中。里面有<<moneyGain 2000>>。
+	观众们欢呼雀跃，不住鼓掌。
+	<<npcincr River love 5>><<llltrauma>><<trauma -120>><<famebusiness 100 "pic">>
+	<br><br>
+
+	<<if $mathsexposed isnot undefined>>
+		<<endevent>><<npc River>><<person1>>"我希望你从现在开始每次考试都能得到A*。"瑞沃勉强与你对视说道，"你已经证明自己有这个能力了。"<<He>>和礼顿把你和其他学生请出大门，在路上一些人试图对你动手动脚。
+		<<llldelinquency>><<detention -54>>
+		<br><br>
+	<<else>>
+		<<endevent>><<npc River>><<person1>>"我希望你从现在开始每次考试都能得到A*。"瑞沃面带笑容地说道，"你已经证明自己有这个能力了。"<<He>>和礼顿把你和其他学生请出大门。
+		<<llldelinquency>><<detention -54>>
+		<br><br>
+	<</if>>
+
+	<<set $mathsproject to "won">><<set $mathsprojectwon to 1>><<earnFeat "Maths Competition Winner">>
+	<<mathsprojectfinish>>
+
+	<<link [[继续|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<generate2>>
+	<span class="red"><<He>>宣布<<person2>><<person>>是获胜者。</span><<He>>激动地冲上去收下了<<his>>的奖杯。
+	<br><br>
+
+	<<if $mathsexposed isnot undefined>>
+		礼顿把你和其他学生赶出大厅。"我感谢你的努力，"瑞沃在离开时对你说道。<<nnpc_He "River">>挣扎着看着你的眼睛。
+		<<lldelinquency>><<detention -18>>
+		<br><br>
+		在出去的路上，有几个人试图揩你油。
+		<br><br>
+	<<else>>
+		礼顿把你和其他学生赶出大厅。"我很欣赏你的努力，"瑞沃在离开时对你说，然后被一位西装革履的客人拉走。
+		<<lldelinquency>><<detention -18>>
+		<br><br>
+	<</if>>
+
+	<<set $mathsproject to "done">>
+	<<mathsprojectfinish>>
+
+	<<link [[继续|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

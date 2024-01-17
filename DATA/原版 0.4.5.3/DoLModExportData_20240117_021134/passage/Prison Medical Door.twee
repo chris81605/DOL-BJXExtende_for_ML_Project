@@ -1,0 +1,23 @@
+:: Prison Medical Door []
+<<effects>>
+
+你走近那扇黑黄相间的门。门上没有明显的锁，但旁边有一个键盘。
+
+<<if $prison.code is 1>>
+	伦恩声称<<nnpc_he Wren>>卖给你的代码会起作用。
+	<<if $prison.schedule is "work">>
+		<<generate_methodical_guard 0>><<person1>>
+		在尝试之前，你需要等待<<methodical_guard 0>>离开。
+		<br><br>
+	<<else>>
+		<br><br>
+		<<link [[进入|Prison Medical Shock]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你需要找到密码。
+	<br><br>
+<</if>>
+
+<<link [[离开|Prison Medical]]>><<endevent>><</link>>
+<br>

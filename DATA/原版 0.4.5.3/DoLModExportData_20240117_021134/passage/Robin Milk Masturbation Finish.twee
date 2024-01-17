@@ -1,0 +1,59 @@
+:: Robin Milk Masturbation Finish []
+<<endmasturbation>>
+<<endcombat>>
+<<clothesontowel>>
+<<npc Robin>><<person1>>
+<<set _robin to statusCheck("Robin")>>
+<<if $masturbation_fluid gte 500>>
+
+	<span class="green">瓶子里装满了奶水，</span>你离开厕所。
+	<br><br>
+	罗宾看到你，笑了。
+	<<if _robin.trauma gte 40>>
+		"谢谢你这么快就回来，"
+	<<else>>
+		"你来得真快，"
+	<</if>>
+	<<He>>接过瓶子。"还是热的。真不知道你哪弄来这么新鲜的。"<<He>>把牛奶倒进小锅里，你悄悄把<<his>>的£5放到了柜台上。
+	<<gglove>><<npcincr Robin love 3>>
+	<br><br>
+
+<<else>>
+
+	你停止了手淫。
+	<<if $finish isnot 1>>
+		你已经努力了有一段时间了，罗宾也正在等你回去。
+	<</if>>
+
+	<<if $masturbation_fluid gte 400>>
+		<span class="teal">你收集的液体差不多够了，</span>但你还需要去买一些来补上剩下的。
+	<<elseif $masturbatoin_fluid gte 300>>
+		<span class="lblue">你收集了大量的液体，</span>但你还需要去买一些来补上剩下的。
+	<<elseif $masturbation_fluid gte 200>>
+		<span class="blue">你收集了一些液体，</span>但你还需要去买一些来补上剩下的。
+	<<elseif $masturbation_fluid gte 100>>
+		<span class="purple">你收集了一些液体，</span>但你还需要去买一些来补上剩下的。
+	<<elseif $masturbation_fluid gte 50>>
+		<span class="purple">你收集了少量的液体，</span>但你还需要去买一些来补上剩下的。
+	<<elseif $masturbation_fluid gte 1>>
+		<span class="pink">你收集了少量的液体，</span>但你还需要去买一些来补上剩下的。
+	<<else>>
+		<span class="red">你没有收集到任何液体，</span>所以你只能去买。
+	<</if>>
+	<br><br>
+
+	<<set _moneySaved to Math.round($masturbation_fluid / 100)>>
+	<<set $robinmoney += _moneySaved>>
+
+	你走到丰收街，来到一家主打新鲜农产品的乡村商店。他们按毫升出售牛奶，店主可以给你加满一瓶。
+	<br><br>
+
+	<<if $masturbation_fluid gte 1>>
+		你回到罗宾身边。当<<he>>看到你时，露出了微笑。<<He>>接过牛奶，把它倒进小锅里，你悄悄把<<his>>的零钱放到了柜台上。<<glove>><<npcincr Robin love 1>>
+	<<else>>
+		你回到罗宾身边。<<He>>看到你后，露出了微笑，把你带回的牛奶倒进小锅里。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<robinChocolateOfferHelp>>

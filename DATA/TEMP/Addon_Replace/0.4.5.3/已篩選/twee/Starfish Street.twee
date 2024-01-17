@@ -1,0 +1,127 @@
+:: Starfish Street []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "starfish">><<getTarget true>>
+你正待在海星街，海风从海面上吹来。
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		一些游客正冒着雨走在海滨大道上。
+	<<elseif $weather is "snow">>
+		盐可以有效的防止积雪沉冻，但很少有游客会冒着严寒来到这里。
+	<<else>>
+		两侧的道路上挤满了游客，这些外来人频繁地进出这里的娱乐场所。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		晨雨也随之到来。
+	<<elseif $weather is "snow">>
+		雪地上的积雪已经湿透压实了。
+	<<else>>
+		游客们站在海滨大道上观看日出。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		因为下雨，游客们不会在街道上出现。
+	<<elseif $weather is "snow">>
+		沿着海滨长廊，泥浆在被遮蔽的地方形成。
+	<<else>>
+		游客们正站在海滨大道上观看日落。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		暴雨倾盆而下。
+	<<elseif $weather is "snow">>
+		地面上形成了成片的泥泞。
+	<<else>>
+		你看到地平线上的微弱灯光。
+	<</if>>
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "street">>
+	<<if $exposed is 1 and $topless is 0>>
+		<span class="lewd">这套衣服在附近的海滩上可能没什么问题，但穿在这里就显得太淫荡了！</span>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<elseif $bailey_pound is 2>>
+	<<set $bailey_pound to 3>>
+	两辆救护车停在动物收容所外面。<<generate1>><<person1>>一个<<person>>把一台担架推到其中一辆车的后面，然后他们就开车离开了。
+	<br><br>
+	<<link [[继续|Starfish Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "starfish">>
+			<br>
+		<</if>>
+		可访问地点
+		<br>
+		<<beachicon>><<link [[沙滩 (0:05)|Beach]]>><<pass 5>><</link>>
+		<br>
+		<<if Time.dayState is "day" or Time.dayState is "dusk">>
+		<<arcadeicon>><<link [[游戏厅 (0:01)|Arcade]]>><<pass 1>><</link>>
+		<br>
+		<<else>>
+		<<arcadeicon>><<link [[游戏厅 (0:01)|Arcade Lock]]>><<pass 1>><</link>>
+		<br>
+		<</if>>
+		<<if $exhibitionismrun is "starfish">>
+			<<ind>><<link [[炫耀你的屁股 (0:15)|Starfish Challenge]]>><</link>>
+			<br>
+		<</if>>
+		<<if $chaletsintro gte 2 and $exposed lt 2>>
+			<<chaleticon>><<link [[木屋 (0:05)|Chalets Work]]>><<chalets_start>><<pass 5>><</link>>
+			<br>
+		<<elseif $exposed lt 2>>
+			<<chaleticon>><<link [[木屋 (0:02)|Chalets Intro]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if $openinghours is 1>>
+			<<poundicon>><<link [[流浪狗收留所 (0:01)|Pound]]>><<pass 1>><</link>>
+			<br>
+		<<elseif Time.hour is $closinghour>>
+			<span class="blue">人们正在离开流浪狗收留所。</span>现在是关门时间。
+			<br>
+		<<else>>
+			<<poundicon>><<link [[流浪狗收留所 (0:01)|Pound Lock]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "其他区域<br>">><<hideDisplay>>
+			<<cliff>>
+			<<mer>>
+			<<high>>
+			<<oxford>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			/* 北极星模组 */
+			<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+				<<flywait>>
+			<</if>>
+			/* 北极星 */
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+		<<park>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "starfish">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

@@ -1,0 +1,85 @@
+:: Street Bully Chased Fight Finish []
+<<set $outside to 1>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	笑声把<<person>>拉回现实。<<he>>尴尬地逃离了巷子，放弃了目标。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Whitney>><<person1>>
+
+	惠特尼慢悠悠地向你走来，一只手放在你的<<bottom>>上。“你那么热衷于捍卫我的荣誉吗，还是说你只是一个荡妇？”<<He>>捏了捏你，“反正我也不在乎。”<<arousal 100 "bottom">><<npcincr Whitney lust 5>><<garousal>><<glust>>
+	<br><br>
+
+	<<if $whitneyromance is 1>>
+		<<link [[要求奖励|Street Bully Chased Reward]]>><<npcincr Whitney dom -1>><<set $phase to 1>><</link>><<promiscuous1>><<ldom>>
+		<br>
+		<<link [[什么也不说|Street Bully Chased Reward]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		他们很快就厌倦了你的“胜利”，然后回去继续他们的荒唐行为。<<tearful>>你继续你的路。
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	<<person>>摇摇晃晃地退后。当<<him>>逃离小巷时，惠特尼和<<nnpc_his "Whitney">>的朋友们大声嘲笑<<he>>。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Whitney>><<person1>>
+
+	惠特尼悠闲地向你走来，把一只胳膊搭在你肩上。
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 10>>
+		"你是个好斗的小混蛋，”<<he>>咧嘴笑着承认，“这改变不了我们之间的关系。"
+	<<else>>
+		"很高兴知道你不是我一个人的麻烦，”<<he>>说，“你是个十足的婊子。"
+	<</if>>
+	<<status 1>><<npcincr Whitney love 1>><<glove>><<gcool>>
+	<br><br>
+
+	<<if $whitneyromance is 1>>
+		<<link [[要求奖励|Street Bully Chased Reward]]>><<npcincr Whitney dom -1>><<set $phase to 1>><</link>><<promiscuous1>><<ldom>>
+		<br>
+		<<link [[什么也不说|Street Bully Chased Reward]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		他们很快就厌倦了你的“胜利”，然后回去继续他们的荒唐行为。<<tearful>>你继续前行。
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	你倒在地上，伤得无法动弹。
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 10 and $whitneyromance is 1>>
+		"该死的小鬼，”<<person>>咆哮道，“看我给你点颜色——"
+		<br><br>
+
+		<<Hes>>被惠特尼猛烈的一拳打断，倒在地上。其他人也加入进来，轮流殴打这个<<person>>。<<Hes>>迅速被赶跑了。
+		<br><br>
+
+		<<hes>>走后，惠特尼转向你。
+		<<endevent>><<npc Whitney>><<person1>>
+		<<He>>看起来和以前一样生气。也许更气了。“你这个傻瓜。”<<He>>强行吻住了你。“除非有我允许，不然谁也不准操你。”<<npcincr Whitney dom 1>><<npcincr Whitney lust 5>><<gdom>><<glust>>
+		<br><br>
+
+		<<He>>在送你离开之前，先确认了下你没有受到什么伤害。<<tearful>>你踉踉跄跄地走着。<<pain -6>><<trauma -6>><<stress 6>><<ltrauma>><<lpain>><<gstress>>
+	<<else>>
+		"该死的小东西，”<<person>>低声咆哮道。<<He>>踢了一下倒在地上的你。<<trauma 6>><<stress 6>><<gtrauma>><<gstress>>
+		<br><br>
+
+		<<tearful>>你站了起来。那个<<person>>和惠特尼都不见了。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<</if>>

@@ -1,0 +1,70 @@
+:: Park Exercise Heels []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+	<<rng 8>>
+	<<if $rng is 1>>
+		<<set _exercise to "蹲坐运动">>
+	<<elseif $rng is 2>>
+		<<set _exercise to "开合跳">>
+	<<elseif $rng is 3>>
+		<<set _exercise to "做弓步">>
+	<<elseif $rng is 4>>
+		<<set _exercise to "做有氧操">>
+	<<else>>
+		<<set _exercise to "锻炼">>
+	<</if>>
+
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		你在荒废的公园里_exercise，在冷雨倾盆的情况下踩着水坑。
+	<<elseif $weather is "snow">>
+		你在无人的公园里_exercise，小心着不在冰上滑倒。
+	<<else>>
+		你在荒废的公园里_exercise。凉爽的夜风轻抚着你的皮肤。
+	<</if>>
+	<<physique 1>>
+	<<rng>>
+	<<if $rng gte 91>>
+		<<generate1>><<person1>>
+		你听到身后响起脚步声，便回头瞥了一眼。<<person>>在跟踪，<span class="pink">纠缠着你。</span>
+		<br><br>
+
+		<<link [[继续|Park Run Stalk]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<br><br>
+		<<link [[继续|Park]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		你在几乎荒废的公园里_exercise。
+	<<elseif $weather is "snow">>
+		你在公园里_exercise，周围都在下雪。
+	<<elseif $weather is "overcast">>
+		你在荒废的公园里_exercise。感受着微风轻拂过你的皮肤。
+	<<else>>
+		你在荒废的公园里_exercise。空气和阳光照在皮肤上的感觉很好。
+	<</if>>
+	<<physique 1>>
+
+	<<rng>>
+	<<if $rng lte 20 and $footdisable is "f">>
+		<br><br>
+		<<generate1>><<person1>>
+		一个<<person>>走近你。"我注意到你穿着$worn.feet.cn_name_cap在锻炼，"<<he>>笑着说，"那看起来很累。你休息一下，我给你做个脚底按摩怎么样？"<<he>>问道。
+		<br>
+		<<if $awareness lte 100>>你对<<person>>为什么会提供这样的东西感到惊讶，但你感谢<<his>>的好意。
+		<<elseif $awareness lte 300>><<person>>似乎对你的脚相当感兴趣。
+		<<else>><<person>>有恋足癖！
+		<</if>>
+		<br>
+		<br>
+		<<link [[接受足部按摩|Park Exercise Heels Massage]]>><<tiredness -5>><<stress -5>><</link>><<ltiredness>><<lstress>>
+		<br>
+		<<link [[不了，谢谢|Park Exercise Heels No Massage]]>><<control 5>><</link>><<gcontrol>>
+	<<else>>
+		<br><br>
+		<<link [[继续|Park]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

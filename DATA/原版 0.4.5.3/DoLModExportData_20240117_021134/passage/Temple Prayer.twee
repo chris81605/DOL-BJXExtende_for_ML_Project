@@ -1,0 +1,357 @@
+:: Temple Prayer []
+<<temple_effects>><<pass 60>><<effects>>
+<<set _rng to random(1,7)>>
+
+<<hallucinogen 60>>
+你坐在垫子上并开始祈祷，熏香的味道让你感到轻盈和眩晕。
+
+<<switch _rng>>
+	<<case 1>>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].love gte 60 and random(1, 2) is 2>>
+			你的脑海里出现了罗宾的身影，
+				<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 21>>
+					和<<nnpc_hes "Robin">>所忍受的痛苦。
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					你下意识地扬起嘴角。
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $trauma gte ($traumamax / 5) * 4>>
+			你想想人们在可怕的追求中是多么的无情，尽管如此，你还是意识到自己依旧活了下来。
+			<<gawareness>><<awareness 1>>
+		<<elseif $trauma gte ($traumamax / 5) * 3>>
+			你想到了人们对你做过的所有可怕的事情，这是一种很奇怪的宣泄。
+			<<lltrauma>><<trauma -12>>
+		<<elseif $trauma gte ($traumamax / 5) * 2>>
+			你想到了你所承受的所有痛苦，这是一种很奇怪的宣泄方式。
+			<<ltrauma>><<trauma -6>>
+		<<elseif $trauma gte $traumamax / 5>>
+			你想到了有些人是多么的可怕，但你没有像你预期的那样感到报复的快感。
+			<<gpurity>><<purity 1>>
+		<<else>>
+			你想到发生了这么多的事情，你是如何设法照顾自己的。
+			<<lstress>><<stress -6>>
+		<</if>>
+	<<case 2>>
+		<<run statusCheck("Kylar")>>
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 60 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and random(1, 2) is 2>>
+			你的脑海里出现了凯拉尔的身影，
+				<<if _kylarStatus.includes("Rage")>>
+					你想知道<<nnpc_hes "Kylar">>是否在找你，<<nnpc_He "Kylar">>很可能就在找你的路上。
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					以及<<nnpc_he "Kylar">>为你画的肖像画。
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $stress gte ($stressmax / 5) * 4>>
+			你试图闭上眼睛，但你发现你无法说服自己不去睁开眼睛盯着那扇门，你意识到你是多么害怕一个袭击者会突然冲进来，你在心里告诉自己，在神殿是不会发生这样的事情的。
+			<<gcontrol>><<control 10>>
+		<<elseif $stress gte ($stressmax / 5) * 3>>
+			你意识到你的心脏跳得有多快，只有在休息的时候，你才能稍稍平静下来。
+			<<llstress>><<stress -12>>
+		<<elseif $stress gte ($stressmax / 5) * 2>>
+			你都能听到你剧烈的心跳声，伴随着时间的推移，心跳声逐渐平静了下来。
+			<<lstress>><<stress -6>>
+		<<elseif $stress gte $stressmax / 5>>
+			你发现你在担心自己会在回家的路上被袭击，于是你告诉自己现在的担心是没有意义的。
+			<<gcontrol>><<control 5>>
+		<<else>>
+			你感到很平静。
+			<<ltrauma>><<trauma -6>>
+		<</if>>
+	<<case 3>>
+		<<if $NPCName[$NPCNameList.indexOf("Whitney")].love gte 21 and $NPCName[$NPCNameList.indexOf("Whitney")].state isnot "dungeon" and random(1, 2) is 2>>
+			你的脑海里出现了惠特尼的身影，
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 14>>
+					以及<<nnpc_he "Whitney">>如何总是试图控制你。
+					<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+				<<else>>
+					以及<<nnpc_him "Whitney">>所带来的奇怪安全感，那种远离他人的安全感。
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<</if>>
+		<<elseif $arousal gte ($arousalmax / 5) * 4>>
+			尽管你很努力，你还是无法阻去想那些性事。
+			<<gstress>><<larousal>><<stress 6>><<arousal -6>>
+		<<elseif $arousal gte ($arousalmax / 5) * 3>>
+			关于性的想法闯入你的脑海，你极力挣扎着不让它们靠近。
+			<<larousal>><<arousal 600>>
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			你的想法一直向性事靠拢，但你设法阻止了它的蔓延。
+			<<larousal>><<arousal 600>>
+		<<elseif $arousal gte $arousalmax / 5>>
+			你努力让你的头脑保持清醒和专注。
+		<<else>>
+			你能够保持头脑的清醒并让注意力集中。
+			<<gwillpower>><<willpower 1>>
+		<</if>>
+	<<case 4>>
+		<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 120 and random(1, 2) is 2>>
+			你的脑海里出现了伊甸的身影，
+			<<if $NPCName[$NPCNameList.indexOf("Eden")].lust gte 60>>
+				以及<<nnpc_he "Eden">>那十分强烈的控制欲。
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				你想知道<<nnpc_hes "Eden">>在森林里怎么样了。
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $control gte ($controlmax / 5) * 4>>
+			你感到安全、有保障和宁静。
+			<<gpurity>><<purity 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+		<<elseif $control gte ($controlmax / 5) * 3>>
+			厚重的石墙给予了你安心感。
+			<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+		<<elseif $control gte ($controlmax / 5) * 2>>
+			你很难保持闭目养神，困于驱除杂念。
+			<<ltrauma>><<trauma -6>>
+		<<elseif $control gte $controlmax / 5>>
+			恐惧支配着你的头脑，但你的心逐渐平稳下来，随着时间的推移，你感到没那么焦虑了。
+			<<gcontrol>><<control 10>>
+		<<else>>
+			你的内心保持着恐慌，但随着时间的推移，你的心脏逐渐平稳下来，你的焦虑感也随之减少。
+			<<gcontrol>><<control 10>>
+		<</if>>
+	<<case 5>>
+		<<if $NPCName[$NPCNameList.indexOf("Avery")].love gte 60 and $NPCName[$NPCNameList.indexOf("Avery")].state is "active" and random(1, 2) is 2>>
+			你的脑海里出现了艾弗里的身影，
+			<<if $NPCName[$NPCNameList.indexOf("Avery")].rage gte 60 and $averyragerevealed is 1>>
+				还有当你让<<nnpc_his "Avery">>失望时<<nnpc_his "Avery">>对你的态度。你紧紧地攥着你的手臂。
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				以及<<nnpc_hes "Avery">>带你参加的周六约会，<<nnpc_He "Avery">>对你很好。
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $awareness gte 800>>
+			你感觉到某种力量在压在你身上。是你看不见的某种事物。
+			<<ggwillpower>><<gtrauma>><<willpower 3>><<trauma 6>><<gstress>><<stress 6>>
+		<<elseif $awareness gte 600>>
+			你知道这个位置不是随意选的，他们把它建在这里是有原因的。你感到不安，你想知道那些司祭们懂得什么，又不懂什么。
+			<<gwillpower>><<willpower 1>><<gtrauma>><<trauma 6>>
+		<<elseif $awareness gte 400>>
+			你想知道这个房间是否像表面看起来那么安全。
+			<<gstress>><<stress 6>>
+		<<elseif $awareness gte 200>>
+			你顺着薰香的痕迹，发现它从地板上的格栅里涌出。
+		<<else>>
+			香气在你的周围流转，构成美丽的图案。
+			<<lstress>><<stress -6>>
+		<</if>>
+	<<case 6>>
+		<<run statusCheck("Sydney")>>
+		<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 90 and random(1, 2) is 2>>
+			你的脑海里出现了悉尼的身影，
+			<<if ($templePromised is "Sydney" and $player.virginity.temple isnot true) or $NPCName[$NPCNameList.indexOf("Sydney")].virginity.temple isnot true or ($templePromised isnot "Sydney" and !_sydneyVirgin)>>
+				以及你们在神的见证下，所许下的，已经破碎的誓言。
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				<<if $sydneySeen.includes("corruptroom")>>
+					以及你们过去是如何玷污这个房间的。你的脸上泛出一层红晕。
+					<<garousal>><<arousal 600>>
+				<<else>>
+					你想知道<<nnpc_hes "Sydney">>是否也常常这样祈祷着。
+				<</if>>
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 4>>
+			你的身体随时都有崩溃的风险，不知道为什么，你发现自己能够保持清醒。
+			<<ggwillpower>><<willpower 6>><<gstress>><<stress 6>><<ltiredness>><<tiredness -12>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 3>>
+			你感觉自己的眼皮正在打架，但熏香的味道和快速掐一把大腿带来的痛感使你保持着清醒。
+			<<gwillpower>><<willpower 3>><<ltiredness>><<tiredness -6>>
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 2>>
+			在意识回到现实之前，你出现了片刻的恍惚。
+			<<gtiredness>><<tiredness 6>>
+		<<elseif $tiredness gte (C.tiredness.max / 5)>>
+			你深吸一口气，然后放松你的肩颈。
+			<<lstress>><<stress -6>><<ltiredness>><<tiredness -6>>
+		<<else>>
+			香气渗入你的肌肉，这使你感到舒畅，你发出一声舒适的叹息。
+			<<lstress>><<stress -6>><<ltrauma>><<trauma -6>><<gtiredness>><<tiredness 6>>
+		<</if>>
+	<<case 7>>
+		<<if $NPCName[$NPCNameList.indexOf("Alex")].love gte 60 and random(1, 2) is 2>>
+			你的脑海里出现了艾利克斯的身影，还有农场。
+			<<if $farm_attacked is 1>>
+				你意识到你错过了突袭，<span class="red">雷米趁你不在的时候发动了袭击</span>。你的心一下子沉了下去。
+				<<lcontrol>><<control -10>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<<elseif $farm_attack_timer is 0>>
+				<<if Time.hour gte 21>>
+					<<if Time.hour is 23 and Time.minute gte 30>>
+						雷米将在今晚发动袭击，<span class="red">而你则无法提供任何帮助</span>。这让你的心一下子沉了下去。
+						<<lcontrol>><<control -10>>
+					<<else>>
+						<span class="pink">雷米可能已经开始发动袭击了。</span>
+					<</if>>
+				<<else>>
+					<span class="purple">雷米今晚将会发动袭击。</span>
+				<</if>>
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<<elseif $farm.aggro gte 60>>
+				雷米的手下就是不肯放过你。
+				<<ltrauma>><<gstress>><<trauma -6>><<stress 6>>
+			<<else>>
+				你希望农场有个好的收成。
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+			<</if>>
+		<<else>>
+			你的脑海里出现了贝利的身影，
+			<<if $renttime lte 0>>
+				<<babyRent true>>
+				<<if $money gte $rentmoney + ($babyRent or 0)>>
+					你有足够的钱支付给<<nnpc_him "Bailey">>。
+					<<if $baileydefeatedchain gte 1>>
+						但你想知道你是否真的需要这样做。
+					<<else>>
+						真是万幸。
+					<</if>>
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<<else>>
+					你没有足够的钱支付给<<nnpc_him "Bailey">>。
+					<<if $baileydefeatedchain gte 1>>
+						你想知道你是否需要这样做。
+					<<else>>
+						你想知道是否有什么方法可以快速赚钱。
+					<</if>>
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<</if>>
+			<<else>>
+				<<babyRent true>>
+				<<if $money gte $rentmoney + ($babyRent or 0)>>
+					你有足够的钱在<<rentday>>支付给<<nnpc_him "Bailey">>，
+					<<if $baileydefeatedchain gte 1>>
+						但你想知道你是否真的需要这样做。
+					<<else>>
+						真是万幸。
+					<</if>>
+					<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<<else>>
+					你没有足够的钱在<<rentday>>支付给<<nnpc_him "Bailey">>。
+					<<if $baileydefeatedchain gte 1>>
+						你想知道你是否需要这样做。
+					<<else>>
+						你想知道是否有什么方法可以快速赚钱。
+					<</if>>
+					<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<</if>>
+			<</if>>
+		<</if>>
+<</switch>>
+<br><br>
+
+<<rng>>
+<<if $rng is 100 or $rng gte 91 and $worn.neck.name is "holy pendant">>
+	<span class="green">你感知到了一种存在。</span>周围的熏香渐变成一种珍珠般的白色，它逐渐变亮变浑，直到你完全身处于这白色的海洋之中。
+	<br><br>
+	你感觉到无比安全，就像有一种难以想象的强大而仁慈的东西在保护着你。
+	<br><br>
+	一股温暖感充斥在你的内心。
+	<br><br>
+
+	<<link [[放开心神，拥抱这一切|Temple Prayer Holy Embrace]]>><<control 50>><<trauma -50>><<stress -50>><<awareness 12>><<purity 12>><</link>><<ggpurity>><<gggcontrol>><<llltrauma>><<lllstress>><<ggawareness>>
+	<br>
+	<<link [[摆脱这种感觉|Temple Prayer Holy Snap]]>><<willpower 5>><<control 20>><<trauma -18>><<stress -18>><</link>><<ggwillpower>><<ggcontrol>><<lltrauma>><<llstress>>
+	<br>
+<<elseif $rng is 99 or $rng gte 91 and $worn.neck.name is "stone pendant">>
+	<span class="blue">你感觉到了一种存在。</span>香味越来越浓，直到你周围的墙壁消失在了雾中，而你则屏住了呼吸。
+	<br><br>
+
+	有东西正在观察你，某种硕大无朋的东西，你感觉不到它的恶意，只有好奇。
+	<br><br>
+
+	你周围的地面似乎在上升，但也有可能是你在下沉，你已无法分辨。
+	<br><br>
+
+	<<link [[放开心神，拥抱这一切|Temple Prayer Stone Embrace]]>><<arousal 5000>><<scienceskill 12>><<mathsskill 12>><<historyskill 12>><<purity 6>><<awareness 24>><</link>><<gpurity>><<gggawareness>><<gghistory>><<ggscience>><<ggmaths>><<gggarousal>>
+	<br>
+	<<link [[摆脱这种感觉|Temple Prayer Stone Snap]]>><<historyskill 3>><<mathsskill 3>><<scienceskill 3>><<set $school += 9>><<willpower 5>><</link>><<ggwillpower>><<ghistory>><<gscience>><<gmaths>>
+	<br>
+<<elseif $rng is 98 or $rng gte 91 and $worn.neck.name is "dark pendant">>
+	<span class="red">你感知到一种存在。</span>墙上的火把一闪一闪地熄灭，让你没入一片漆黑，那些高窗本该透进一些光亮，但却什么也没有。
+	<br><br>
+
+	你漂浮在虚空中，再也感觉不到脚下的垫子。你并不孤单，有东西正从那遥远到不可方物的所在向你直奔而来。一种原始的恐惧攫住了你的心灵。
+	<<ggstress>><<stress 6>>
+	<br><br>
+
+	<<link [[放开心神，拥抱这一切|Temple Prayer Dark Embrace]]>><<awareness 24>><<purity -36>><<willpower 12>><<stress 36>><</link>><<gggawareness>><<lllpurity>><<ggwillpower>><<gggstress>>
+	<br>
+	<<link [[摆脱这种感觉|Temple Prayer Dark Snap]]>><<awareness 6>><<purity -6>><<willpower 6>><<stress 6>><</link>><<gawareness>><<lpurity>><<gwillpower>><<gstress>>
+	<br>
+<<elseif $rng gte 91>>
+	你感到有什么东西，像是某种存在正在看着你，虽然它只持续了一小会儿，但你依旧紧张地环顾了一下四周。
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 81>>
+	香气让你感到头晕目眩。
+	<<lstress>><<stress -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 71>>
+	香气让你感到莫名的温暖感。
+	<<garousal>><<arousal 600>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 61>>
+	香气让你感到疏快畅通。
+	<<ltrauma>><<trauma -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 51>>
+	你听到了外面的鸟鸣声。
+	<<lstress>><<stress -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 41>>
+	香气有助于你集中注意力。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 31>>
+	香气使你头脑清醒。
+	<<larousal>><<arousal -6>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 21>>
+	那种香气带给你一股莫名的安全感。
+	<<gcontrol>><<control 10>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 12>>
+	香气使你的皮肤发痒，让你沉浸在朦胧的雾气之中。
+	<<hallucinogen 60>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 9>>
+	你的思绪徘徊到了学校，你想到了你的上一堂数学课，你以一种新的眼光来看待学习的内容。
+	<<gmaths>><<mathsskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 6>>
+	你的思绪徘徊到了学校，你想到了你的上一堂语文课，你以一种新的眼光来看待学习的内容。
+	<<genglish>><<englishskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<elseif $rng gte 3>>
+	你的思绪徘徊到了学校，你想到了你的上一堂科学课，你以一种新的眼光来看待学习的内容。
+	<<gscience>><<scienceskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<<else>>
+	你的思绪徘徊到了学校，你想到了你的上一堂历史课，你以一种新的眼光来看待学习的内容。
+	<<ghistory>><<historyskill 3>>
+	<br><br>
+
+	<<prayerend>>
+<</if>>

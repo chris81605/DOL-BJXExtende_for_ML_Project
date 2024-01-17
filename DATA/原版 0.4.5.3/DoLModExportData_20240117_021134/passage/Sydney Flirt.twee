@@ -1,0 +1,237 @@
+:: Sydney Flirt []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+<<if _sydneyChastity and $sydneyChastityKnown and $rng gte 92>>
+	"你该把你的贞操带给拆了，"你说着，指向<<his>>的胯下，"想象一下到时候你会有多少乐子。"
+	<br><br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<if $sydneyromance is 1>>
+			"那可能得你来帮我搞烂它，或者对我更粗暴一点。"<<he>>坏笑着怼了回来。
+		<<else>>
+			"说得像我没试过一样。"<<he>>撇撇嘴。
+		<</if>>
+	<<else>>
+		<<if $sydneyromance is 1>>
+			"我……我不想冒任何风险，至少也等结婚了再说。"<<He>>红着脸看向一边。
+		<<else>>
+			<<His>>的脸涨得通红。"谁，谁会期待那种事……"
+		<</if>>
+	<</if>>
+<<elseif $sydneySeen.includes("parent") and $rng gte 84>>
+	"我想知道西里斯会不会想要孙子孙女，"你说着，向悉尼俯下身去。
+	<br><br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<if $sydneyromance is 1>>
+			<<He>>没有预兆地贴近亲了你一口。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+			<br><br>
+			"<<nnpc_He "Sirris">>当然想，
+			<<if (knowsAboutAnyPregnancy("pc", "Sydney") and $NPCName[$NPCNameList.indexOf("Sydney")].gender is "m") or ($genderknown.includes("Sydney") and $player.penisExist and $NPCName[$NPCNameList.indexOf("Sydney")].gender is "f") or ($genderknown.includes("Sydney") and $player.gender isnot $NPCName[$NPCNameList.indexOf("Sydney")].gender) or (!$genderknown.includes("Sydney") and $player.gender_appearance isnot $NPCName[$NPCNameList.indexOf("Sydney")].gender)>>
+				我也很清楚我要和谁一起去实现。"<<He>>歪歪嘴，给你一个俏皮的笑容。
+			<<else>>
+				不过做不到我也不在乎。"<<He>>深情地看着你，轻轻地笑了起来。
+			<</if>>
+		<<else>>
+			<<He>>把笔放下，直直盯着你。"这是一个邀请吗？"
+		<</if>>
+	<<else>>
+		<<if $sydneyromance is 1>>
+			<<He>>看向了一旁，有些紧张。"<<nnpc_He "Sirris">>总是给我说这种事。"
+		<<else>>
+			悉尼用手捂住了脸。过了好几分钟，<<he>>才回答你。"<<nnpc_He "Sirris">>想……"
+		<</if>>
+	<</if>>
+<<else>>
+	<<switch random(1, 10)>>
+		<<case 1>>
+			<<switch _sydneyStatus>>
+				<<case "pure" "pureLust" "neutralLust">>
+					"你脸红的时候真是太可爱了，"你捏了<<he>>一把。
+					<<if $sydneyromance is 1>>
+						<br><br>
+						"还，还不是你的错！就知道逗我……"<<He>>捧住脸，咯咯直笑。"这不公平……"<<trauma -1>><<ltrauma>>
+					<<else>>
+						悉尼的脸变得更红了。<<He>>尴尬地别过脸去，以沉默回应你的调戏。<<npcincr Sydney lust 1>><<glust>>
+					<</if>>
+				<<case "corrupt" "corruptLust">>
+					"太可爱了，看看你变了多少。"你捏了捏<<he>>。
+					<<if $sydneyromance is 1>>
+						<br><br>
+						"拜你所赐喽。"<<He>>压了上来，手指抵住你的双唇。"我希望我表达了我的感激。"<<arousal 50>><<garousal>>
+					<<else>>
+						<<His>>的脸烧了起来，但看上去很得意。
+					<</if>>
+				<<default>>
+					"你真可爱。"你眨了眨眼。
+					<<if $sydneyromance is 1>>
+						"你更可爱！闭嘴！"<<He>>用手捂住了脸。
+					<<else>>
+						<<He>>窘迫地别过脸去，以突然的沉默回应你的调戏。
+					<</if>>
+			<</switch>>
+		<<case 2>>
+			"<<print either(`给我看看你的'货'呗，`, `我知道你这儿还卖'其他东西'，`, `让我看看你这儿的'好货'怎么样？`)>>"你俯下身子<<if $sydneyromance is 1>>，把手搁在了<<his>>的大腿上<</if>>。
+			<br><br>
+			<<switch _sydneyStatus>>
+				<<case "pure" "neutral">>
+					<<if $sydneyromance is 1>>
+						<<He>>红着脸张望一番。"在，在这里？你确定？"<<He>>倒吸一口气，"不，不可以……但是……"
+						<<if random(1, 2) is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].clothes.lower.name.includes("skirt")>>
+							<<He>>小心地掀起<<his>>的校裙，只让你短短瞥到一眼<<his>>的裙底。
+						<<elseif $pronoun is "f">>
+							<<He>>解开<<npcClothesText $NPCList[0] "upper">>的第一颗扣子，扯开领口，让你看见<<his>>纯白胸罩包裹的<<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>。在短短一瞥之后，<<he>>便急急忙忙地把扣子重新扣了起来。
+						<<else>>
+							<<He>>用拇指撑开<<npcClothesText $NPCList[0] "lower">>裤腰，只让你短短瞥到一眼<<his>>的内裤。
+						<</if>>
+						<br><br>
+						"好，好了，已经够了……"<<npcincr Sydney lust 1>><<glust>>
+					<<else>>
+						<<His>>的头转向一边。"我们……拐角那儿还有更多衣服，除了我穿的这些。"<<He>>似乎没注意你话里有话。
+					<</if>>
+				<<case "pureLust" "neutralLust">>
+					<<if $sydneyromance is 1>>
+						<<He>>红着脸张望了一番，然后咯咯地笑了起来。"当然。"
+						<<if random(1, 2) is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].clothes.lower.name.includes("skirt")>>
+							<<He>>掀起<<his>>的校裙，让你短短瞥到一眼<<his>>的内裤。接着，<<He>>把衣料都褪下。<<sydneyExpose>><<he>>将手掩住小丘，给你了一个近乎乞求的眼神，但还是在你俩失去理智前整理好了衣物。
+						<<elseif $pronoun is "f">>
+							<<He>>解开<<npcClothesText $NPCList[0] "upper">>的第一颗扣子，扯开领口，让你看见<<his>>纯白胸罩包裹下的<<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>。
+							悉尼将胸罩拉下。你从身后握住这一对柔软的乳房，开始轻轻地搓揉了起来，激得<<him>>娇声喘息着……在事态开始失控之前，<<he>>慌乱地整理好了衣物。
+						<<else>>
+							<<He>>用拇指撑开<<npcClothesText $NPCList[0] "lower">>，让你短短瞥到一眼<<his>>的内裤，然后将衣料褪下。<<sydneyExpose>><<he>>用手掩住下体，给你了一个近乎乞求的眼神，但最终还是在你俩失去理智之前整理好了衣物。
+						<</if>>
+						<br><br>
+						"我……我确实想，但……"<<npcincr Sydney lust 1>><<glust>>
+					<<else>>
+						<<His>>把头转向一边。"我们……拐角那儿还有更多的衣——"<<he>>止住，似乎意识到你刚才在说什么。"消停点！"
+					<</if>>
+				<<case "corrupt" "corruptLust">>
+					<<if $sydneyromance is 1>>
+						"得寸进尺。不过，我喜欢。"
+						<<if random(1, 2) is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].clothes.lower.name.includes("skirt")>>
+							<<He>>坏笑地掀起校裙，不着片缕的下体让你一览无余。<<sydneyExpose>><<He>>伸手搓揉逗弄着自己的阴蒂，毫不掩饰地盯着你的眼睛。这时，一个学生走过，<<his>>飞速地理好裙子，不满地撇了撇嘴。
+						<<elseif $pronoun is "f">>
+							<<He>>解开<<npcClothesText $NPCList[0] "upper">>的第一颗扣子，扯开领口，让你看见<<his>>纯白胸罩包裹下的<<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>。
+							<<He>>将胸罩拉下，牵起你的手，带你覆上<<his>>的胸部。你抚弄了好一会儿，<<he>>在你的动作下徒劳地咽下呻吟，身体则不住地颤抖着……随着情欲的愈发高涨，<<he>>最终把衣物扣了回去，以免场面出现失控。
+						<<else>>
+							<<He>>的拇指伸进<<npcClothesText $NPCList[0] "lower">>，将其缓缓褪下，不着片缕的下体让你一览无余。<<sydneyExpose>><<He>>伸手在上套弄着，直视你的眼睛。这时，一个学生走过，<<his>>飞速地穿好裤子，不满地撇了撇嘴。
+						<</if>>
+						<br><br>
+						"我想要你多摸摸我。"<<npcincr Sydney lust 1>><<glust>>
+					<<else>>
+						"啊，你真是可爱呢，继续努力的话你或许就能一睹为快了。"<<He>>满脸通红地回到了工作之中。
+					<</if>>
+			<</switch>>
+		<<case 3>>
+			你蹑手蹑脚地走到悉尼身后，把手放上<<his>>的双肩，<<handtext>>开始给<<him>>按摩。
+			<<if $speech_attitude is "meek">>
+				"希望你不要介意我帮你按按肩。"
+			<<elseif $speech_attitude is "bratty">>
+				"放松一下吧，我想你应该休息一会儿了。"
+			<<else>>
+				"你工作很用心，真的很让人佩服。"
+			<</if>>
+			你眨巴着眼睛。
+			<br><br>
+			<<if currentSkillValue("handskill") gte 800>>
+				悉尼瘫了下来。<<He>>什么都没有说，只是躺进椅子，愉悦地把椅子蹭得吱嘎作响。<<npcincr Sydney lust 1>><<glust>>
+			<<elseif currentSkillValue("handskill") gte 400>>
+				<<he>>在你的按捏下逐渐放松了起来。"你很擅长这个嘛。"<<He>>幸福地靠在了椅子上，享受着你的按摩。
+			<<else>>
+				<<He>>刚开始有些紧张，不过之后便放松了下来。"感觉有点奇怪，但我挺喜欢的。"<<He>>试着在你按摩的时候继续工作。
+			<</if>>
+			<br><br>
+			在<<he>>不经意的时候，你在<<his>>的耳边轻声说了一些涩情的话。
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<He>>转过身来，也同样地对着你耳语<<if $sydneyromance is 1>>，然后趁你不备亲了一下你的脸颊<</if>>。<<arousal 50>><<garousal>><br><br>
+			<<else>>
+				<<if $sydneyromance is 1>>
+					<<His>>脸红了，但并没有试图阻止你。
+				<<else>>
+					"什，什么？我不懂。"<<he>>睁大了眼睛。
+				<</if>>
+			<</if>>
+			过了一会儿，你才放开<<him>>。
+		<<case 4>>
+			你把$worn.upper.cn_name_cap绷紧，勾勒出你身体的曲线。"我要一件新衬衫，你得把这件拿走了。"你给了<<he>>一个wink。
+			<br><br>
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<if $sydneyromance is 1>>
+					"或许我需要来帮你确认合适的……尺码。亲自。"<<He>>向你吐吐舌头。
+				<<else>>
+					"我很乐意帮你脱掉它。"<<he>>坏笑了起来。
+				<</if>>
+			<<else>>
+				<<if $sydneyromance is 1>>
+					"我……可，可以等会儿吗？现在有其他人看着呢……"<<He>>试着躲避你的眼神，但还是忍不住往你的胸口偷瞄。<<npcincr Sydney lust 1>><<glust>>
+				<<else>>
+					"抱歉，<<nnpc_title "Leighton">>不允许退换，但你也可以买一件新的。"<<He>>埋头工作着，似乎没意识到你话里有话。
+				<</if>>
+			<</if>>
+		<<case 5>>
+			"认真的<<personsimple>>最迷人。" 你眨眼。
+			<<if $sydneyromance is 1>>
+				<<His>>立马端正坐好，向你扬起笑容。
+			<<else>>
+				<<He>>红着脸看向一边。
+			<</if>>
+		<<case 6>>
+			你懒洋洋地把玩着悉尼的头发。
+			<<if $sydneySeen.includes("hairchange")>>
+				这可真让你兴奋，因为你是唯一一个让<<him>>改变的人！<<stress -3>><<lstress>>
+			<<else>>
+				手里的长发像往常一样亮丽有型。
+			<</if>>
+			<br><br>
+			<<He>>发出一声短暂而愉悦的叹息，但不愿去承认。<<npcincr Sydney lust 1>><<glust>>
+		<<case 7>>
+			你在悉尼耳边悄悄说着什么。<<His>>的眼睛陡然睁大。"你知道我们还在图书馆吧。"
+		<<case 8>>
+			你把手放在悉尼的腿上。
+			<<if _sydneyStatus.includes("corrupt") and $sydneyromance is 1>>
+				<<He>>把你的手放到下腹，然后继续工作。
+			<<else>>
+				<<if $sydneyromance is 1>>
+					<<He>>深呼了一口气，又朝你笑笑。
+				<<else>>
+					<<He>>的身子瞬间绷起。"抱歉，我还不是很习惯。"<<npcincr Sydney lust 1>><<glust>>
+				<</if>>
+			<</if>>
+		<<case 9>>
+			<<set _noOptions to 1>>
+			你随便对悉尼说着什么，但似乎<<he>>的注意力不在这儿。"我记得我把它放在这……噢！"<<He>>看向身后大书柜的柜顶。
+			<br><br>
+			"我真希望他们没拿我的梯子，但我也不应该擅离职守……"<<He>>稍加思索，"这会违反安全规定，但……你能站到我肩上去拿那本书吗？"
+			<br><br>
+			<<link [[同意|Sydney Flirt Book Grab]]>><<npcincr Sydney love 1>><</link>><<glove>>
+			<br>
+			<<link [[拒绝|Sydney Flirt Book Refuse]]>><<npcincr Sydney love -1>><<npcincr Sydney purity 1>><</link>><<llove>><<gspurity>>
+			<br>
+			<<if $bodysize is 3>>
+				你应该够高，刚好能拿到这本书。
+				<br>
+				<<link [[伸手拿书|Sydney Flirt Book Tall]]>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><</link>><<glove>><<glust>>
+				<br>
+			<</if>>
+		<<case 10>>
+			你给悉尼讲了一个黄段子。
+			<<switch _sydneyStatus>>
+				<<case "pure" "neutral">>
+					<<if $sydneyromance is 1>>
+						<<His>>的脸红了。<<npcincr Sydney lust 1>><<glust>>
+					<<else>>
+						<<He>>好像没搞懂笑点。
+					<</if>>
+				<<case "pureLust" "neutralLust">>
+					<<His>>的脸红了。<<npcincr Sydney lust 1>><<glust>>
+				<<case "corrupt" "corruptLust">>
+					<<He>>歪歪嘴，回复给你一个俏皮的微笑。
+			<</switch>>
+	<</switch>>
+<</if>>
+<<if _noOptions isnot 1>>
+	<br>
+	<<promiscuity1>>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+		凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+		<br><br>
+	<</if>>
+	<<sydneyOptions>>
+<</if>>

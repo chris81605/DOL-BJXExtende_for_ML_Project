@@ -1,0 +1,33 @@
+:: Temple Sydney Wakeup []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<npc "Sydney">><<person1>><<unset $sydneyLate>><<set $daily.sydney.wake to true>>
+你坐在悉尼的身旁。<<him>>的旁边整齐地叠放着一些衣物，看起来像是<<his>>校服。
+<br><br>
+<<if $sydneyromance is 1>>
+	你轻轻地吻了一口<<his>>的面颊。
+<<else>>
+	你温柔地将手放到<<his>>肩部。
+<</if>>
+<<His>>的眼睛微微睁开，惊恐地四处张望着。直到发现你，<<his>>紧绷的面孔才放松了一些。<<sydneyGreeting>>
+<br><br>
+<<He>>伸了个懒腰，打了个哈欠。"谢谢。如果不是你找到我，我可能会再次<<if $sydneySeen.includes("science")>>错过科学课<<else>>上学迟到<</if>>。"<<if $sydneyromance is 1>><<He>>亲了亲你的面颊，然后紧紧地拥住了你。<</if>>
+<br><br>
+<<if Time.hour is 6>>
+	"距离上学还有一小段时间，到时候我们可以一起去——如果你愿意的话。"<<He>>笑了笑，转身回去继续祷告。
+	<br><br>
+	<<sydneyOptions>>
+<<elseif Time.hour is 9 and $sydneySeen.includes("science")>>
+	<<He>>收拾好东西，摇摇晃晃地站了起来，试图摆脱<<his>>的困意。
+	<<His>>的眼睛缓缓睁大。"我们的课！我们已经迟到了！"<<He>>手忙脚乱了一会儿，然后面向你，"快！"<<he>>没有预兆地一把抓住你的手，拽着你离开了神殿。<<takeHandholdingVirginity "Sydney" `($sydneyromance is 1?"romantic":"consensual")`>>
+	<br><br>
+	<<link [[继续 (0:05)|Sydney Walk School]]>><<pass 5>><<set $phase to 2>><</link>>
+	<br>
+<<else>>
+	<<He>>收拾好东西，摇摇晃晃地站了起来，试图摆脱<<his>>的困意。
+	"要跟我一起去上学吗？"<<He>>的微笑里充满了期待。
+	<br><br>
+	<<link [[好的 (0:10)|Sydney Walk School]]>><<pass 10>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[不了|Temple]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

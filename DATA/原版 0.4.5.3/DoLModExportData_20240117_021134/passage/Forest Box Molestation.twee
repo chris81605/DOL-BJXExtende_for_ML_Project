@@ -1,0 +1,40 @@
+:: Forest Box Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+
+	<<if $phase is 1>>
+		<<set $enemytrust -= 40>>
+	<<elseif $phase is 2>>
+		<<set $enemyanger += 40>><<set $enemytrust -= 100>><<set $enemyhealth -= 100>>
+		你站在原地，等待他们靠近。
+		趁他们不注意，你一脚踩在<<person2>><<persons>>的脚上，然后猛得抽打<<his>>的脸，把<<him>>一巴掌打倒在地。
+		<<person1>>那个<<person>>不觉得有趣。"愚蠢的贱人。你会为此付出代价的。"
+		<br><br>
+	<</if>>
+
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 40>>
+	<<promiscuity2>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Box Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Box Molestation]]>><</link>></span><<nexttext>>
+<</if>>

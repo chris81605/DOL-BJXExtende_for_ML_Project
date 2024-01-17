@@ -1,0 +1,32 @@
+:: Domus Entrance Pet []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and ($monster is 1 or $bestialitydisable is "f")>>
+
+	你跪下来，伸出一只手。<<bHe>>停止了咆哮，但似乎又变得有些太亲昵了。<<bHe>>试图爬跨到你身上。
+	<<if $monster is 1>>
+		"如果你想和我成为朋友，就别动。"
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Domus Entrance Dog]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<<else>>
+
+	<<beasttypes>>的行为随着你表现出的爱意而改变，<<bHe>>舔你的手，接着小跑回了<<bhis>>狗窝。没有人应门。
+	<<if $monster is 1>>
+		"我跟你说了，家里没人。明天再来吧。"
+	<</if>>
+	<br><br>
+
+	<<link [[闯入|Domus House Lock]]>><</link>>
+	<br>
+	<<link [[去下一家 (0:02)|Domus House Knock]]>><<pass 2>><</link>>
+	<br>
+	<<link [[停止|Domus Street]]>><</link>>
+	<br>
+	<<endevent>>
+
+<</if>>

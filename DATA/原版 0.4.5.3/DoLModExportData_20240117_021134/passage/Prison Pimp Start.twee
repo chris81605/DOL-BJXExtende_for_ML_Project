@@ -1,0 +1,46 @@
+:: Prison Pimp Start []
+<<effects>>
+<<set $prison_pimp_serviced to 0>>
+<<if random(1, 2) is 2>>
+	这个房间空旷狭窄，除了墙上有个洞，其他什么也没有。<<veteran_guard 0 cap>>把你弯腰推了进去，另一边一片漆黑，你的手腕被钳制，动弹不得。
+	<br><br>
+	<<endevent>>
+	<<generate1>><<generate2>><<generate3>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<npcClothesType $NPCList[_i] "town">>
+	<</for>>
+	<<person1>>
+	有陌生的声音从你附近的墙壁里传出。有人在拍你的<<bottom>>。
+	<br><br>
+	<<if $prison.attention_level is 1>>
+		<<set $prison_pimp to 1>>
+		<<link [[继续|Prison Pimp Wall]]>><<set $prison.attention_level to 2>><<set $molestationstart to 1>><</link>>
+	<<elseif $prison.attention_level is 2>>
+		<<set $prison_pimp to 2>>
+		<<link [[继续|Prison Pimp Wall]]>><<set $prison.attention_level to 3>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<set $prison_pimp to 3>>
+		<<link [[继续|Prison Pimp Wall]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<<else>>
+	这个房间空旷狭窄。里面什么也没有……除了墙上的两个铁铐。你被<<veteran_guard 0 cap>>猛地一推，后背靠在了铁铐之间的墙上。你的双臂被铁铐扣住。
+	<br><br>
+	<<endevent>>
+	<<generate1>><<generate2>><<generate3>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<npcClothesType $NPCList[_i] "town">>
+	<</for>>
+	一个<<fullGroup>>进来了，眼神满是欲望。他们穿得不像是囚犯。
+	<br><br>
+	<<if $prison.attention_level is 1>>
+		<<set $prison_pimp to 1>>
+		<<link [[继续|Prison Pimp Rape]]>><<set $prison.attention_level to 2>><<set $molestationstart to 1>><</link>>
+	<<elseif $prison.attention_level is 2>>
+		<<set $prison_pimp to 2>>
+		<<link [[继续|Prison Pimp Rape]]>><<set $prison.attention_level to 3>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<set $prison_pimp to 3>>
+		<<link [[继续|Prison Pimp Rape]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<</if>>
+<br>

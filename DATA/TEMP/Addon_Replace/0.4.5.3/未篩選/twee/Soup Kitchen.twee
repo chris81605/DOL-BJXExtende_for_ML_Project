@@ -1,0 +1,33 @@
+:: Soup Kitchen []
+<<set $outside to 0>><<set $location to "temple">><<effects>>
+<<if $soup_kitchen_init isnot 1>>
+	<<set $soup_kitchen_init to 1>>
+	你寻找着别人告诉你的那座灰色建筑。你发现它隐藏在神殿阴影下的树林中。当你走近时，你闻到了煮熟的菜香。里面是一个大殿，一排排的桌子一直延伸下去。这些桌子旁坐着各种年龄段的人，包括几个家庭。当你进入时，没有人关注你。
+	<br><br>
+	<<npc River>><<person1>>
+	你走到远处，一个戴着发网的<<personsimple>>正在往碗里舀汤，你认出了<<him>>，是瑞沃。在其身旁有几个<<monks>>正在帮忙。
+	<br><br>
+	<<link [[继续|Soup Kitchen Intro]]>><</link>>
+	<br>
+<<elseif Time.hour gte 21>>
+	<<generate1>><<person1>>施粥所会在晚上关门，附近神殿里的几个<<monks>>会来这里帮助打扫卫生。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Wolf Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你在待在狼街的施粥所内，大厅里摆放着一排排拥挤的桌子，而厨房就在后面，整个房间里充满了热汤的味道。
+	<br><br>
+	<<link [[协助瑞沃 (1:00)|Soup Kitchen Work]]>><<pass 60>><<famegood 5>><<trauma -6>><<npcincr River love 1>><</link>><<glove>><<ltrauma>>
+	<br>
+	<<if $mathsproject is "ongoing" and $river_help isnot 1>>
+		<<link [[向瑞沃寻求数学竞赛的帮助|Soup Kitchen Maths]]>><</link>>
+		<br>
+	<</if>>
+	<<if $loft_known is 1 and $loft_river isnot 1 and $NPCName[$NPCNameList.indexOf("River")].love gte 40>>
+		<<link [[告诉瑞沃关于孤儿院阁楼的事情|River Loft]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[离开|Wolf Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

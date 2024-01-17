@@ -1,0 +1,103 @@
+:: Brothel Dressing Room []
+<<effects>><<set $outside to 0>><<set $location to "brothel">>
+
+你在妓院的更衣室里。室内有几面镜子，正被做发型和化妆的工作人员们占据着。
+<br><br>
+
+<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+	<<undobindingsicon>><<link [[解除束缚 (0:10)|Brothel Dressing Room]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+	<br><br>
+<</if>>
+
+<<if $brothelVending>>
+	<<if $brothelVending.status is "asked" or ($brothelVending.status is "sold" and $brothelVending.weeksEmpty lt 4)>>
+		<<condomicon "machine">><span class="gold">你可以在购物中心购买一台自动售货机，并在此放置。</span>
+		<br><br>
+	<<elseif $brothelVending.status is "sold" and $brothelVending.weeksEmpty gte 4>>
+		<<condomicon "machine">><span class="gold">你的自动售货机已经被卖掉了。你应该和布莱尔谈谈。</span>
+		<br><br>
+	<<elseif $brothelVending.status is "bought">>
+		<<condomicon "machine">> <<link [[安装自动售货机 (0:30)|Brothel Dressing Room]]>><<set $brothelVending.status to "set">><<set $weekly.brothelVMCollect to true>><<pass 30>><</link>>
+		<br><br>
+	<<elseif $brothelVending.status is "set">>
+		<<if $brothelVending.products>>
+			<<set _outOfStock to []>>
+			<<set _full to []>>
+			<<set _buyMore to []>>
+			<<set _productsAvailable to []>>
+			<<set _productsToPurchase to []>>
+			<<if $brothelVending.condoms lt 200>><<run _buyMore.push(`去<span class="gold">药店</span>购买避孕套`)>><</if>>
+			<<if $brothelVending.lube lt 200>><<run _buyMore.push(`去<span class="gold">成人用品店</span>购买润滑液`)>><</if>>
+
+			<<if $brothelVending.condoms is 0>>
+				<<run _outOfStock.push(`避孕套售货机`)>>
+			<<elseif $brothelVending.condoms gte 200>>
+				<<run _full.push(`避孕套售货机`)>>
+			<<else>>
+				<<run _productsAvailable.push(`<span class="gold">$brothelVending.condoms</span>袋避孕套`)>>
+				<<run _productsToPurchase.push(`<span class="blue">$brothelVending.condomsToRefill</span>包避孕套`)>>
+			<</if>>
+			<<if $brothelVending.lube is 0>>
+				<<run _outOfStock.push(`润滑液售货机`)>>
+			<<elseif $brothelVending.lube gte 200>>
+				<<run _full.push(`润滑液售货机`)>>
+			<<else>>
+				<<run _productsAvailable.push(`<span class="gold">$brothelVending.lube</span>瓶润滑液`)>>
+				<<run _productsToPurchase.push(`<span class="blue">$brothelVending.lubeToRefill</span>瓶润滑剂`)>>
+			<</if>>
+
+			<<condomicon "machine">>你检查了自动售卖机的库存。
+			<<if _full.length gte 1>>
+				<<print _full.join("和")>>是<span class="green">满的</span>。
+			<</if>>
+			<<if _outOfStock.length gte 1>>
+				<<print _outOfStock.join("和")>>是<span class="red">空的</span>。
+			<</if>>
+			<<if _productsAvailable.length gte 1>>
+				机器里面有<<print _productsAvailable.join("和")>>。还能放<<print _productsToPurchase.join("和")>>。
+			<</if>>
+			<<if _buyMore.length gte 1>>
+				你可以<<print _buyMore.join("，")>>。
+			<</if>>
+			你<<print $weekly.brothelVMCollect ? "已经收取了" : "还没有收取">>本周的收入。
+			<br>
+			<<if $brothelVending.products % 2 and $brothelVending.condoms gte 1>>
+				<<condomicon>><<link [[买避孕套 (£80)|Brothel Vending Machine Buy]]>><<set $phase to 1>><</link>> | <span class="red">贵了</span> <mouse class="tooltip linkBlue">(?)<span>你把三联包避孕套的价格定为 £80，而它们在药店里只要 £60。<i class="green">你去药店买会更划算。</i></span></mouse>
+				<br>
+			<</if>>
+			<<if $brothelVending.products gte 2 and $brothelVending.lube gte 1>>
+				<<sextoysicon "lube">><<link [[买润滑剂 (£30)|Brothel Vending Machine Buy]]>><<set $phase to 2>><</link>> | <span class="red">贵了</span> <mouse class="tooltip linkBlue">(?)<span>你把润滑剂的价格定为 £30，而在成人用品店只要花 £20。<i class="green">你在成人用品店买会更划算。</i></span></mouse>
+				<br>
+			<</if>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<wardrobeicon>><<link [[衣柜|Brothel Wardrobe]]>><</link>>
+<br>
+<<if playerHasSexToys()>>
+	<<sextoysicon>><<link [[性玩具|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+	<br>
+<</if>>
+<<mirroricon>><<link [[镜子|Brothel Mirror]]>><<preMirror>><</link>>
+<br><br>
+
+<<if isPubfameTaskAccepted("briar") and $pubfame.briar.distract isnot 2>>
+	你注意到一个舞者正在将衣物装进手提箱里。
+	<br>
+	<<getinicon>><<link [[接近|Brothel Distraction]]>><</link>>
+	<br><br>
+<</if>>
+
+<<getouticon>><<link [[回到俱乐部 (0:01)|Brothel]]>><<pass 1>><</link>>
+<br><br>
+<<link [[设置|Settings]]>><<set $settingsExitPassage to "Brothel Dressing Room">><</link>>
+<br>
+<<attitudesControlCheck>>
+<<if $attitudesControl.showGoldLink is true>>
+	<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+<<else>>
+	<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+<</if>>
+<br><br>

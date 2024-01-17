@@ -1,0 +1,76 @@
+:: Street Private Photoshoot Sex []
+/* $phase 0: consensual, 1: failed mind control resist, 2: refused, 3: ongoing */
+<<switch $phase>>
+	<<case 0>>
+		<<if $tipmod gt 0>>
+			<<set $tipmod += 0.50>>
+		<</if>>
+		<<promiscuity3>>
+		<<consensual>>
+		<<set $consensual to 1>>
+		<<neutral 1>>
+		<<maninit>>
+	<<case 1>>
+		<<if $tipmod gt 0>>
+			<<set $tipmod += 0.50>>
+		<</if>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+		<<maninit>>
+	<<case 2>>
+		<<if $tipmod gt 0>>
+			<<set $tipmod += 0.25>>
+		<</if>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+		<<maninit>>
+		<<set $enemyanger += 20>>
+		<<if $tipmod gt 0>>
+			<<set $enemyanger += 30>>
+		<</if>>
+	<<case 3>>
+		<<if $trance gt 0 and $trueconsensual is 0 and $orgasmdown lte 0>>
+			<<willpowerdifficulty 1 `1500 + ($hypnosis * 100)` "silent">>
+			/* note: inconsistent line breaks on account of differently spaced standard combat text which follows */
+			<<if $willpowerSuccess gt 0>>
+				<<set $trance to 0>>
+				你努力集中注意力，重新控制自己的身体，<span class="green">最终取得成功。</span>
+			<<else>>
+				你努力集中注意力，重新控制自己的身体，<span class="red">但它仍被强烈的欲望所操控。</span>
+				<br>
+			<</if>>
+		<<elseif $alarm is 1>>
+			<<set $alarm to 0>>
+			<<set _rescuechance to 35>>
+			<<if Time.dayState is "night">>
+				<<set _rescuechance to 10>>
+			<</if>>
+			<<if random(0, 100) lt _rescuechance>>
+				<<set $rescue to 1>>
+				你回荡的哭声穿过小巷，<span class="green">似乎吸引到一些注意力。</span>
+				<br>
+			<<else>>
+				你回荡的哭声穿过小巷，<span class="red">但没有引起注意。</span>
+				<br>
+			<</if>>
+		<</if>>
+	<<default>>
+<</switch>>
+<<set $phase to 3>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[继续|Street Private Photoshoot Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Private Photoshoot Sex]]>><</link>></span><<nexttext>>
+<</if>>

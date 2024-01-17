@@ -1,0 +1,116 @@
+:: Robin Cow []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+	你爬到罗宾身边，嗅着<<his>>的耳朵。你哞哞叫着希望引起注意。
+	<br><br>
+	<<if $livestock_robin is 1>>
+		<<set $livestock_robin += 1>>
+		"好痒，"<<he>>咯咯笑着拍了拍你。
+		<<if $rng gte 76>>
+			"谁是最可爱的牛牛？"
+		<<elseif $rng gte 51>>
+			"吃草的时间到了吗？"
+		<<elseif $rng gte 26>>
+			<<He>>抚摸着你的下巴。
+		<<else>>
+			"你真是一头可爱的牛牛。"
+		<</if>>
+		<br><br>
+	<<elseif $livestock_robin is 2>>
+		<<set $livestock_robin += 1>>
+		罗宾皱起眉头。“有人对你做了这种事？”<<he>>问道。<<He>>的手紧紧抓住了手柄。
+		<br><br>
+		你高兴地哞了一声，然后点头。<<He>>张着嘴，好像想说话，但什么也没说出来。
+		<<if $robinconsole is 0>>
+			<<He>>盯着窗外。
+		<<else>>
+			<<He>>转回电视屏幕。
+		<</if>>
+		<br><br>
+	<<elseif $livestock_robin is 3>>
+		<<set $livestock_robin += 1>>
+		猝不及防，罗宾抓住你的肩膀，把你拉进<<his>>的怀里。太紧了，你哞哞叫着抗议。<<He>>放手了。
+		<br><br>
+		"对、对不起，我不是故意要弄痛你的，"罗宾抱歉地说。你微笑着发出快乐的哞声。
+
+		<<if $robinconsole is 0>>
+			<<He>>凝视着窗外，却不时地瞥你一眼。
+		<<else>>
+			<<He>>回到<<his>>的游戏中，但你注意到<<him>>不时地瞥你一眼。
+		<</if>>
+		<br><br>
+	<<elseif $livestock_robin is 4>>
+		<<set $livestock_robin += 1>>
+		"你有一段时间没回家了，"罗宾脸上露出阴沉的表情，"贝利把你带走了吗？发生什么事了吗？"
+		<br><br>
+		你对<<his>>的问题哞哞叫。
+		<<if $robinconsole is 0>>
+			<<He>>没有再说其他什么，但<<he>>盯向窗外的眼神分明十分焦虑。
+		<<else>>
+			<<He>>没有再说其他什么，但你听到<<his>>手柄上的塑料被抓得吱吱作响。
+		<</if>>
+		<br><br>
+	<<elseif $livestock_robin is 5>>
+		<<set $livestock_robin += 1>>
+		罗宾盯着你。"我知道你身上发生了不好的事情。求求你，和我谈谈吧，"<<he>>恳求道。
+		<br><br>
+		你点点头，开始描述你在雷米那里的日子。你娓娓道来，说你积极又高产，说他们因此多么保护你。然而，你知道你必须回家，所以你离开了。
+		<br><br>
+		你说话的时候罗宾用手捂住了<<his>>的嘴，惊恐地瞪大了眼睛。眼泪顺着<<his>>的面颊流了下来。你说完一切后，<<He>>温柔地拥抱你，轻声细语。"只要我们在一起，你总会好起来的。我会一直陪着你的。我很抱歉。"<<gggdom>><<npcincr Robin dom 10>>
+		<br><br>
+		你不知道<<he>>是什么意思，但你还是高兴地哞了一声。
+		<br><br>
+	<<elseif $livestock_robin is 6>>
+		<<set $livestock_robin += 1>>
+		"没关系，"罗宾说着握住你的手，"我就在你身边。我会帮你好起来的。"
+		<br><br>
+
+		<<set _noOptions to 1>>
+		<<link [[坚称你是幸福的|Robin Cow Happy]]>><</link>>
+		<br>
+		<<link [[点头|Robin Cow Help]]>><</link>><<lstress>><<ltrauma>>
+		<br>
+	<<elseif $livestock_robin is 10>>
+		罗宾对你微笑。<<He>>知道你很开心，但<<hes>>还是很担心你。<br><br>
+		<<if $robinconsole is 0>>
+			<<He>>凝视着窗外，却一直在朝你这边瞥。
+		<<else>>
+			<<He>>继续<<his>>的游戏，但一直会朝你这边瞥。
+		<</if>>
+		<br><br>
+	<<else>>
+		"没关系，"罗宾说着握住你的手，"我永远在你身边。我会帮你好起来的。"<br><br>
+		<<if $robinconsole is 0>>
+			<<He>>凝视着窗外，却一直在朝你这边瞥。
+		<<else>>
+			<<He>>继续<<his>>的游戏，但一直会朝你这边瞥。
+		<</if>>
+		<br><br>
+	<</if>>
+<<else>>
+	你爬到罗宾身边，嗅着<<his>>的耳朵。你哞哞叫着希望引起注意。
+	<br><br>
+
+	"好痒，"<<he>>咯咯笑着拍了拍你。
+	<<if $rng gte 76>>
+		"谁是最可爱的牛牛？"
+	<<elseif $rng gte 51>>
+		"吃草的时间到了吗？"
+	<<elseif $rng gte 26>>
+		<<He>>抚摸着你的下巴。
+	<<else>>
+		"你真是一头可爱的牛牛。"
+	<</if>>
+	<<if $robinconsole is 0>>
+		你把头枕在<<his>>膝上，<<print $robin.timer.hurt gte 1 ? "直到<<he>>稍稍挪开距离" : "而<<he>>则盯着窗外">>。
+	<<else>>
+		你将头枕在<<his>>膝上，<<print $robin.timer.hurt gte 1 ? "直到<<he>>稍稍挪开距离" : "<<he>>玩着游戏">>。
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<if _noOptions isnot 1>>
+	<<robinoptions>>
+<</if>>

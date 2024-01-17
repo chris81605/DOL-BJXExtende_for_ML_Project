@@ -1,0 +1,46 @@
+:: Wolf Cave Play []
+<<beastNEWinit 1 wolf>>
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if !$weekly.watchingForest and $wolfpackharmony gte 20 and Time.dayState is "day" and $rng gte 80 and $wolfstate is "cave">>
+	<<set $weekly.watchingForest to true>>
+	<<npc "Black Wolf">>
+
+	<<if $monster is 1>>
+
+		当你在和年轻的狼玩耍时，你感到有温暖的东西抚摸着你的下背部。你回头看，看到黑狼的手放在你的腰上。
+		<br><br>
+
+		"需要你，"<<bhe>>说道。
+		<br><br>
+
+	<<else>>
+
+		当你在和小狼玩的时候，你感觉到有什么东西湿润了你的背部。你向后看，看到黑狼在用鼻子戳你。
+		<br><br>
+
+	<</if>>
+
+	<<bHe>>不经常引起你的注意，所以你找借口走开，跟着黑狗。
+	<br><br>
+
+	黑狼一直朝森林的边缘走去，一边摇着尾巴，一边回头看着你，好像在邀请你一起走。
+	<br><br>
+
+	<<link [[跟随黑狼|Watching the Forest Follow]]>><</link>>
+	<br>
+	<<link [[呆在洞穴里|Watching the Forest Stay]]>><</link>><<lharmony>>
+
+<<elseif $rng gte 51>>
+	你和一个年轻的<<beastsplural>>玩闹打斗。<<bHe>>跳起来用嘴咬住你的胳膊，但没有用力咬下去，直到<<bHe>>把你拉到地上。<<bHe>>闻你的腹股沟。
+	<br><br>
+	<<link [[让它继续|Wolf Cave Play Sex]]>><<set $sexstart to 1>><</link>><<deviant1>>
+	<br>
+	<<link [[把它推开|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你和年轻的<<beastsplural>>玩类似于捉迷藏的游戏。它们不愿离开洞穴太远，但附近有很多藏身之处。它们的嗅觉给了它们一个优势，它们每次都能很快找到你，但这很有趣。
+	<br><br>
+	<<link [[继续|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<br>
+<</if>>

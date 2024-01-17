@@ -1,0 +1,41 @@
+:: Pirate Attack Scum End 3 []
+<<effects>>
+
+泽菲尔转向你。
+
+<<if $pirate_attention gte 10>>
+    <<if $museumAntiques.antiques.antiquegoldcompass isnot "found" and $museumAntiques.antiques.antiquegoldcompass isnot "talk" and $museumAntiques.antiques.antiquegoldcompass isnot "museum">>
+        <<earnFeat "Lost Heirloom">>
+        "你的工作做得十分不错，"<<he>>说着，将手伸进夹克，"希望你拿着这个。"<<He>>掏出一枚指南针，看起来似乎是黄金制的。
+        <br><br>
+        "我不需要这东西。有星星为我指路，还有我的望远镜。但对我来说，这东西有着情感价值——这是我偷到的第一个东西。"<<He>>在把它递给你的时候，闭上了眼睛，仿佛十分不忍失去它。
+        <br><br>
+        这件黄金制品十分值钱，而且作为古董，它的价值更加珍贵。<<set $antiquemoney += 5000>><<museumAntiqueStatus "antiquegoldcompass" "found">>
+        <br><br>
+    <<else>>
+        "你再次完成了出色的工作，"<<he>>说，"得把属于你的那份报酬提前给你，"泽菲尔递给你一叠钞票。你获得了<<moneyGain 1000>>。
+        <br><br>
+    <</if>>
+<<elseif $pirate_attention gte 6>>
+    “做得好，”<<he>>说道。“让我把你的份提前发给你。”泽菲尔递给你一迭钞票。你获得了<<moneyGain `$pirate_attention * 100`>>。
+    <br><br>
+<<elseif $piratate_attention gte 1>>
+    “不赖啊，”<<he>>说道。“让我把你的份提前发给你。”泽菲尔递给你一迭钞票。你获得了<<moneyGain `$pirate_attention * 100`>>。
+    <br><br>
+<<else>>
+    "我本来期望你能更好的分散注意的，"<<he>>说，"但反正，我们也找到一点值钱货，足够让
+    <<if $malechance gte 100>>
+        小伙们满意了。"
+    <<elseif $malechance lte 0>>
+        姑娘们满意了。"
+    <<else>>
+        小伙和姑娘们满意了。"
+    <</if>>
+    <br><br>
+<</if>>
+
+海盗们继续抢夺观众的贵重物品，从脖子上拿走珠宝，从手腕上拿走手表，将钱包和皮夹里的东西都倒进他们的袋子里。没有再开枪。但任何抵抗的人都会被殴打，而其他观众则移开了视线。
+<br><br>
+
+<<link [[继续|Pirate Attack Scum End 4]]>><</link>>
+<br>

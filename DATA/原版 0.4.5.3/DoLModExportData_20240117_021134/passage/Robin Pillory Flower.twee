@@ -1,0 +1,71 @@
+:: Robin Pillory Flower []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<npc Robin>><<person1>>
+
+你靠近罗宾。
+<<switch $robinPillory.danger>>
+	<<case 0 1 2 3 4 5 6 7>>
+		<<He>>看着你，如释重负。
+	<<case 8 9 10 11>>
+		<<He>>泪眼汪汪地看着你。
+	<<default>>
+		<<He>>似乎并没有认出面前的你。
+<</switch>>
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"我有个主意，我可以用一种难闻的植物把你盖住，它会让你失去吸引力，"你向罗宾解释你的计划。
+<<elseif $speech_attitude is "bratty">>
+	"我会给你涂上一些脏东西，只要把你弄得脏兮兮的，那些混蛋就不会想碰你了，"你解释道。
+<<else>>
+	"我得拿点脏东西把你遮起来，"你解释道，"这样他们就不会对你太感兴趣了。"
+<</if>>
+<br><br>
+
+<<if $robinPillory.danger lte 7>>
+	"如果真的有用的话……"罗宾叹了口气，"我相信你，我宁愿用这种办法也不想再遭遇任何事情了。"
+<<elseif $robinPillory.danger lte 11>>
+	罗宾温顺地点点头。
+<<else>>
+	罗宾眨了眨眼睛，仍然无神地注视着远方。
+<</if>>
+<br><br>
+
+你跑到附近的园艺商店，开始寻找一些能派上用场的东西。
+<<if $tendingSuccess>>
+	<span class="green">你发现了一种花，虽然无毒，但是可以加工成难闻的糊状物。</span>
+	你买下了足够多的花，让罗宾能涂抹全身。虽然花了些时间，但是你成功带着浆糊回到了罗宾那里。
+	<br><br>
+
+	<<if $robinPillory.danger lte 7>>
+		"好难闻！"罗宾一闻到它的气味就皱起了眉。
+	<<elseif $robinPillory.danger lte 11>>
+		罗宾的眼睛睁得大大的，咳嗽起来。
+	<<else>>
+		罗宾的鼻子抽搐了一下，但是<<he>>一动不动。
+	<</if>>
+	<br><br>
+
+	你在罗宾身上涂上一层薄薄的糊状物。效果不会持续很长时间，但应该足够用来<span class="gold">分散人群的注意力了</span>。
+	<<set $robinPillory.distracted to 1>>
+	<<set $robinPillory.distractions.push("flower")>>
+<<else>>
+	你试着找到一些东西，任何气味难闻到足以驱散人群的东西，但你找不到。你放弃了，空着手回到了罗宾身边。
+	<br><br>
+
+	<<if $robinPillory.danger lte 7>>
+		"没关系，我们会想出别的办法的！"<<He>>试着装出一副勇敢的样子。
+	<<elseif $robinPillory.danger lte 11>>
+		罗宾的眼睛落在了人群上。"哦，不……"
+	<<else>>
+		罗宾看起来快要哭了。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if Time.hour lte 22>>
+	<<link [[继续|Robin Pillory Watch]]>><<endevent>><</link>>
+<<else>>
+	<<link [[继续|Robin Pillory Failure]]>><<endevent>><</link>>
+<</if>>
+<br>

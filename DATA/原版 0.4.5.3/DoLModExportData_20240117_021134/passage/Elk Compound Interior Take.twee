@@ -1,0 +1,32 @@
+:: Elk Compound Interior Take []
+<<set $outside to 0>><<set $location to "compound">><<effects>><<set $compoundcentre to 1>>
+
+<<if $compoundspray is 1>>
+	你拿起了笔记本电脑和喷罐，向出口走去。
+	<br><br>
+<<else>>
+	<<set $compoundspray to 1>>
+	你拿起了笔记本电脑和喷罐。喷罐看起来可以补充你的防狼喷雾，但底部露出了一块电脑芯片。你把它收了起来，向出口走去。
+	<br><br>
+
+	<span class="gold">你获得了额外的防狼喷雾。</span>
+	<br><br>
+<</if>>
+
+<<if random(1, 4) is 4>>
+	你按下了门边的按钮，但什么都没有发生。你再按了一下，你的左右两侧便分别打开了一扇暗门，从中弹射出了金属机械臂，抓住了你的手腕，把你按在了地上。
+	<br><br>
+	<span class="red">探测到入侵者。</span>警报响了起来。被人发现只是时间问题了。
+	<<set $compoundalarm += 1>>
+	<<set $daily.compoundState to 1>>
+	<br><br>
+	<<if $player.vaginaExist or $analdisable is "f">>
+		<<ind>><<link [[抗议|Elk Compound Interior Seduce]]>><</link>>
+		<br>
+	<</if>>
+	<<ind>><<link [[挣扎|Elk Compound Interior Struggle]]>><</link>>
+	<br>
+<<else>>
+	<<getouticon>><<link [[离开|Elk Compound]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,16 @@
+:: Elk Compound Smoke []
+<<set $outside to 0>><<set $location to "compound">><<effects>>
+这座建筑的门很容易打开，当你进去之后，发现里面充满了香甜的烟雾。这些烟雾不仅让你只能看见附近几英尺的环境，而且还让你感到头晕目眩。
+<br><br>
+
+<<if !$compoundsmoke>>
+	<<ind>><<link [[探索 (0:10)|Elk Compound Explore]]>><<pass 10>><</link>>
+	<br>
+<</if>>
+<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with smoke stacks")>>
+	<<ind>><<link [[放下相机|Elk Compound Smoke Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("有烟囱的建筑")>><</link>><<gsecurity>>
+	<br>
+<</if>>
+<br>
+<<getouticon>><<link [[离开|Elk Compound]]>><</link>>
+<br>

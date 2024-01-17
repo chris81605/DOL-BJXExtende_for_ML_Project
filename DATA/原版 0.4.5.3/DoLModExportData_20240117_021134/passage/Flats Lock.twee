@@ -1,0 +1,17 @@
+:: Flats Lock []
+<<effects>><<set $lock to 200>>
+
+这扇门正紧锁着。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<lockpickicon>><<link [[闯入 (0:05)|Flats Sneak]]>><<pass 5>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+
+<<getouticon>><<link [[离开|Flats]]>><</link>>
+<br>

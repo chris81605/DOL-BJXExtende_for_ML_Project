@@ -1,0 +1,69 @@
+:: Temple Cloister []
+<<set $location to "temple">><<set $outside to 0>><<effects>>
+
+你现在位于神殿回廊，此地不对外开放。<<if $malechance is 100>>修士们<<elseif $malechance is 0>>修女们<<else>>修士和修女们<</if>>于外围游走，在通往别处的走廊中时隐时现。
+<br><br>
+
+六臂六翼的天使雕塑决然地立在中央，最下方的两只手臂持着一面与地平线齐平的大镜子。
+<br><br>
+
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyWatersBrokenPassout "temple">>
+<<elseif $stress gte $stressmax>>
+	<<passouttemple>>
+<<elseif $exposed gte 1>>
+    你在回廊里蹑手蹑脚，每当听到脚步声，就闪到石像鬼的柱子后面，以此来遮掩你的裸体。
+    <br><br>
+    <<if $temple_cloister_progress>>
+        <<link [[去宿舍的秘密通道 (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[公共大厅 (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 7 and $temple_cloister_week_event is undefined>>
+    <<generateTemple 1>><<person1>>
+    你注意到一个<<monk desc>>跪在雕像前祈祷，<<he>>是如此沉静，似乎<<himself>>就是一座雕像。<<His>>的嘴唇翕动，随后站了起来，睁开了眼睛。
+    <br><br>
+    "啊，"<<he>>笑着说道，"我以前没见过你。" <<He>>鞠了一躬。"欢迎加入我们的教会。"
+    <br><br>
+    <<link [[继续|Temple Loris]]>><<saveNPC 0 "loris_younger">><<set $temple_cloister_week_event to 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 14 and $temple_cloister_week_event is 1>>
+    <<generateTemple 1>><<person1>>
+    你听到喘息声。是一位<<monk desc>>在草坪里练鞭，鞭子以无规则的方式绕着<<himself>>旋转。<<He>>看起来不知所措。
+    <br><br>
+    <<he>>对上你的眼睛，惊声尖叫，手中的鞭子失控。鞭子缠住<<his>>的身体，捆住胳膊和腿。<<He>>在地上翻滚。
+    <br><br>
+
+    <<link [[帮忙|Temple Lemur Help]]>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+    <br>
+    <<link [[看着 (0:02)|Temple Lemur Watch]]>><<pass 2>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><</link>>
+    <br>
+
+<<else>>
+    <<if $temple_cloister_progress is undefined>>
+        <<link [[探索 (1:00)|Temple Cloister Explore]]>><<set $temple_cloister_progress to 1>><<pass 60>><</link>>
+        <br>
+    <<else>>
+        <<link [[训练室 (0:01)|Temple Cloister Training]]>><<pass 1>><</link>>
+        <br>
+        <<if $temple_confessor_intro>>
+            <<link [[查看维戈雕像|Temple Cloister Statue]]>><</link>>
+            <br>
+        <<else>>
+            <<link [[检查六臂雕像|Temple Cloister Statue]]>><</link>>
+            <br>
+        <</if>>
+        <<link [[照镜子|Temple Cloister Mirror]]>><<preMirror>><</link>>
+        <br>
+        <<link [[淋浴 (0:01)|Temple Cloister Showers]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <br>
+    <<if $temple_cloister_progress>>
+        <<link [[去宿舍的秘密通道 (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[公共大厅 (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<</if>>

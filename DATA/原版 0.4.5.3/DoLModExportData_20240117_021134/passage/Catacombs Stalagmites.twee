@@ -1,0 +1,33 @@
+:: Catacombs Stalagmites []
+<<effects>><<set $bus to "stalagmites">>
+
+你在森林下面的地下墓穴里。一大片岩石牙齿挡住了东面的通道，但北面有一个陡峭的斜坡。你也许能爬上去。
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs barrow>>
+<<else>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Barrow Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "north">><<link [[往上爬 (0:01)|Catacombs Bores Climb]]>><<pass 1>><</link>>
+	<br>
+	<<caveicon "west">><<link [[向西走 (0:10)|Catacombs Stream]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

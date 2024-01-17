@@ -1,0 +1,106 @@
+:: Pregnancy Belly Test []
+Increase and decrease belly size here.
+If you use anything but the exit link below to exit this scene, your belly size will be stuck, so be careful!
+Unset V.bellySizeDebug to fix.
+<hr>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>><<set $consensual to 1>>
+	<<generate1>><<person1>>
+	<<maninit>>
+	<<set $bellySizeDebug to playerBellySize()>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<br><br>
+<<if $options.images is 1 and $options.combatImages is 1>>
+	<<if $position isnot "stalk">>
+		<<timed 100ms>>
+			<<combatimg>>
+			<br>
+		<</timed>>
+	<</if>>
+<</if>>
+<hr>
+<label class="no-numberify">
+	<span class="lewd">Body:</span><br>
+	<div class="small-description">
+		<<link [[Roll over|Pregnancy Belly Test]]>><<set $position to (V.position === "doggy" ? "missionary" : "doggy")>><</link>>
+		<br>
+		Change Speed:
+		<<link [[Idle|Pregnancy Belly Test]]>><<set $animDebug to false>><<set $enemyarousal to 0>><</link>> |
+		<<link [[Slow|Pregnancy Belly Test]]>><<set $animDebug to true>><<set $enemyarousal to 0>><</link>> |
+		<<link [[Med|Pregnancy Belly Test]]>><<set $animDebug to true>><<set $enemyarousal to 1 + ($enemyarousalmax / 5) * 1>><</link>> |
+		<<link [[Fast|Pregnancy Belly Test]]>><<set $animDebug to true>><<set $enemyarousal to 1 + ($enemyarousalmax / 5) * 3>><</link>> |
+		<<link [[Very Fast|Pregnancy Belly Test]]>><<set $animDebug to true>><<set $enemyarousal to 1 + ($enemyarousalmax / 5) * 4>><</link>> |
+	</div>	
+	<hr>
+	<span class="lewd">Belly:</span><br>
+	<div class="small-description">
+		<<set $bellySizeDebug to Math.clamp($bellySizeDebug,0,24)>>
+		<span class="blue">Current Belly Size: $bellySizeDebug</span>
+		<<ind>>
+		Increase belly size by:
+		<<link [[1|Pregnancy Belly Test]]>><<set $bellySizeDebug++>><</link>> |
+		<<link [[5|Pregnancy Belly Test]]>><<set $bellySizeDebug += 5>><</link>> |
+		<<link [[10|Pregnancy Belly Test]]>><<set $bellySizeDebug += 10>><</link>> |
+		<<ind>>
+		Decrease belly size by:
+		<<link [[1|Pregnancy Belly Test]]>><<set $bellySizeDebug-->><</link>> |
+		<<link [[5|Pregnancy Belly Test]]>><<set $bellySizeDebug -= 5>><</link>> |
+		<<link [[10|Pregnancy Belly Test]]>><<set $bellySizeDebug -= 10>><</link>> |
+		<<ind>>
+		Description:
+		<<bellyDescription "pc" true>>
+	</div>
+	<hr>
+	<span class="green">Clothes:</span><br>
+	<div class="small-description">
+		Strip:
+		<<link [[Strip All|Pregnancy Belly Test]]>><<strip>><</link>> |
+		<<if $worn.upper.name isnot "naked">><<link [[Upper|Pregnancy Belly Test]]>><<upperstrip>><</link>> |<</if>>
+		<<if $worn.under_upper.name isnot "naked">><<link [[Under_Upper|Pregnancy Belly Test]]>><<underupperstrip>><</link>> |<</if>>
+		<<if $worn.lower.name isnot "naked">><<link [[Lower|Pregnancy Belly Test]]>><<lowerstrip>><</link>> |<</if>>
+		<<if $worn.under_lower.name isnot "naked">><<link [[Under_Lower|Pregnancy Belly Test]]>><<underlowerstrip>><</link>> |<</if>>
+		<<if $worn.head.name isnot "naked">><<link [[Head|Pregnancy Belly Test]]>><<headstrip>><</link>> |<</if>>
+		<<if $worn.face.name isnot "naked">><<link [[Face|Pregnancy Belly Test]]>><<facestrip>><</link>> |<</if>>
+		<<if $worn.hands.name isnot "naked">><<link [[Hands|Pregnancy Belly Test]]>><<handsstrip>><</link>> |<</if>>
+		<<if $worn.legs.name isnot "naked">><<link [[Legs|Pregnancy Belly Test]]>><<legsstrip>><</link>> |<</if>>
+		<<if $worn.feet.name isnot "naked">><<link [[Feet|Pregnancy Belly Test]]>><<feetstrip>><</link>> |<</if>>
+		<br>
+		Displace:
+		<<if $worn.upper.name isnot "naked">><<link [[Upper|Pregnancy Belly Test]]>><<set $leftaction to "upper">><</link>> |<</if>>
+		<<if $worn.under_upper.name isnot "naked">><<link [[Under_Upper|Pregnancy Belly Test]]>><<set $leftaction to "under_upper">><</link>> |<</if>>
+		<<if $worn.lower.name isnot "naked">><<link [[Lower|Pregnancy Belly Test]]>><<set $leftaction to "lower">><</link>> |<</if>>
+		<<if $worn.under_lower.name isnot "naked">><<link [[Under_Lower|Pregnancy Belly Test]]>><<set $leftaction to "under_lower">><</link>> |<</if>>		
+		<br>
+		<<link [[Fix All Clothes|Pregnancy Belly Test]]>><<clotheson>><</link>>
+	</div>
+	<hr>
+	<span class="gold">Props:</span><br>
+	<div class="small-description">
+		<<set _propList to ["haybale", "table", "bench", "milk", "semen", "rails", "neck_shackle", "arm_shackle", "leg_shackle", "breast_pump", "penis_pump", "examtable", "hospitalbed", "ivbag"]>>
+		Add:
+		<<for _pr1 to 0; _pr1 < _propList.length; _pr1 ++>>
+			<<if !$prop.includes(_propList[_pr1])>>
+				<<capture _pr1>>
+					<<link [[_propList[_pr1]|Pregnancy Belly Test]]>><<prop _propList[_pr1]>><</link>> |
+				<</capture>>
+			<</if>>
+		<</for>>
+		<br>
+		Remove:
+		<<for _pr2 to 0; _pr2 < _propList.length; _pr2 ++>>
+			<<if $prop.includes(_propList[_pr2])>>
+				<<capture _pr2>>
+					<<link [[_propList[_pr2]|Pregnancy Belly Test]]>><<set $prop.delete(_propList[_pr2])>><</link>> |
+				<</capture>>
+			<</if>>
+		<</for>>
+	</div>
+</label>
+<br>
+<<link [[Back home|Bedroom]]>><<endcombat>><<unset $bellySizeDebug>><<unset $animDebug>><<clotheson>><</link>>
+<br>
+
+<!-- Used in the debug start events -->

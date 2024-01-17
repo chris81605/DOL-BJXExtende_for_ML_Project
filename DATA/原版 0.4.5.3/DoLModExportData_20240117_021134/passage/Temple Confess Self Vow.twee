@@ -1,0 +1,121 @@
+:: Temple Confess Self Vow []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $templePromised>>
+	"原谅我，<<sister_npc>>，原谅我打破了与我承诺陪伴的那位的誓约，"你说。
+<<else>>
+	"原谅我，<<sister_npc>>，原谅我打破了我的誓约，"你说。
+<</if>>
+<br><br>
+
+<<switch $attendant>>
+	<<case "Jordan">>
+		"我……知道了。感谢你的诚实。你必须被净化。我会召集专门人员。请离开隔间。"你隐约听到铃响的声音。你离开了忏悔室，迎接你的惩罚。
+		<br><br>
+
+		<<if $templePromised is "Sydney">>
+			"你的爱人也会被召来，并和你一同受惩罚。我很抱歉。"你听着。你转过身去，看到约旦正离开忏悔室。
+			<br><br>
+
+			<<link [[继续|Sydney Temple Punish Intro Confession]]>><<endconfessionself>><</link>>
+			<br>
+		<<else>>
+			你转过身去，看到约旦正离开忏悔室。<<He>>没有看你。
+			<br><br>
+
+			<<link [[继续|Temple Arcade Intro]]>><<endconfessionself>><</link>>
+			<br>
+		<</if>>
+	<<case "Sydney">>
+		<<if $sydneyromance gte 1>>
+			<<He>>一开始什么也没说。对面的身影扭动着，你看得出<<his>>很不舒服。
+		<<else>>
+			<<He>>发出一声叹息。
+		<</if>>
+		"我明白了，谢谢你的诚实，但你必须得到净化。我会召唤我们的专家，请从小屋出去。"
+		<br><br>
+
+		你照做了。另一扇门打开，你看见有人迈了出来。<span class="red">是悉尼。</span>
+		<<if $sydneyromance gte 1>>
+			<<run statusCheck("Sydney")>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<if $templePromised isnot "Sydney" and (C.npc.Sydney.virginity.temple isnot true or $player.virginity.temple is "Sydney")>>
+					<<He>>僵在原地，但渐渐咯咯笑起来，"你是想把我们做的坏事都说出来吗，嗯？你刚才真的吓到我了。"
+					<br><br>
+
+					<<link [[告诉悉尼你想面对自己的惩罚|Sydney Temple Punish Intro Early]]>><<endconfessionself>><</link>>
+					<br>
+					<<link [[让悉尼不要告诉别人|Sydney Temple Punish Intro Cancel]]>><<endconfessionself>><</link>>
+					<br>
+				<<else>>
+					<<He>>愣住了。"呃……好吧，该死。"<<He>>不安地扭动着身体，"谢谢你……至少愿意提前告诉我。虽然你可能本来不打算这么做。"
+					<<npcincr Sydney love -10>><<lllove>>
+					<br><br>
+
+					<<link [[道歉|Sydney Temple Punish Intro Apologise]]>><<endconfessionself>><</link>>
+					<br>
+					<<link [[让悉尼不要告诉别人|Sydney Temple Punish Intro Forget]]>><<endconfessionself>><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				<<if $templePromised isnot "Sydney" and (C.npc.Sydney.virginity.temple isnot true or $player.virginity.temple is "Sydney")>>
+					<<He>>看起来似乎稍微松了口气。"如果你想为我们的……不谨慎接受惩罚的话，你可以提前跟我说的。"
+					<br><br>
+
+					<<link [[告诉悉尼你想面对自己的惩罚|Sydney Temple Punish Intro Early]]>><<endconfessionself>><</link>>
+					<br>
+					<<link [[让悉尼不要告诉别人|Sydney Temple Punish Intro Cancel]]>><<endconfessionself>><</link>>
+					<br>
+				<<else>>
+					<<He>>愣住了。"不、不……不、不、不！告诉我这不是真的！"<<He>>眼中开始溢出泪水。
+					<<npcincr Sydney love -10>><<lllove>>
+					<br><br>
+
+					<<link [[道歉|Sydney Temple Punish Intro Apologise]]>><<endconfessionself>><</link>>
+					<br>
+					<<link [[让悉尼不要告诉别人|Sydney Temple Punish Intro Forget]]>><<endconfessionself>><</link>>
+					<br>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<He>>看了你一会儿，然后移开目光，摇响了忏悔室的铃铛。
+			<br><br>
+
+			<<link [[继续|Temple Arcade Intro]]>><<endconfessionself>><</link>>
+			<br>
+		<</if>>
+	<<case "Confessor">>
+		"很遗憾。真的非常遗憾。感谢你的诚实，你必须被净化。请离开隔间，不要做抵抗。"你隐约听到铃响的声音。你离开了忏悔室，迎接你的惩罚。
+		<br><br>
+
+		<<if $templePromised is "Sydney">>
+			"你的爱人也会被召来，和你一同被惩罚。我很抱歉。"你听见另一边的人这么对你说。<<He>>从你身后的隔间走出来，把手放在了你的肩膀上。<<He>>身上穿着黑色的长袍。
+			<br><br>
+
+			<<link [[继续|Sydney Temple Punish Intro Confession]]>><<endconfessionself>><</link>>
+			<br>
+		<<else>>
+			<<He>>从你身后的隔间走出来，把手放在了你的肩膀上。<<He>>身上穿着黑色的长袍。
+			<br><br>
+
+			<<link [[继续|Temple Arcade Intro]]>><<endconfessionself>><</link>>
+			<br>
+		<</if>>
+	<<default>>
+		"感谢你的诚实。你必须被净化。请离开隔间。"你隐约听到铃响的声音。你离开了忏悔室，迎接你的惩罚。
+		<br><br>
+
+		<<if $templePromised is "Sydney">>
+			"你的爱人也会被召来，和你一同被惩罚，"你听见另一边的人这么对你说。<<He>>迅速走出了隔间，避免和你目光接触。
+			<br><br>
+
+			<<link [[继续|Sydney Temple Punish Intro Confession]]>><<endconfessionself>><</link>>
+			<br>
+		<<else>>
+			<<He>>迅速离开了隔间，避免和你目光接触。
+			<br><br>
+
+			<<link [[继续|Temple Arcade Intro]]>><<endconfessionself>><</link>>
+			<br>
+		<</if>>
+<</switch>>

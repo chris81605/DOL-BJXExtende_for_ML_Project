@@ -1,0 +1,38 @@
+:: Widgets VersionCheck [widget]
+<<widget "doVersionCheck">>
+	/* Run stuff on every save load */
+	<<if onLoadUpdateCheck>>
+		<<set $saveVersion to ($saveVersions ? $saveVersions.last() : "ancient")>> /*update save version */
+	<</if>>
+
+	/* Run stuff on every page refresh, save load, or version mismatch */
+	<<if versionUpdateCheck or onLoadUpdateCheck or !$saveVersions or $saveVersions.last() isnot StartConfig.version>>
+		<<set versionUpdateCheck to false>>
+		<<set onLoadUpdateCheck to false>>
+
+		/* convert game version to numeric value for use in <<backComp>> */
+		<<set _version to ($saveVersions ? $saveVersions.last().replace(/[^0-9.]+/g, "").split(".") : 0)>>
+		<<set _version to (_version ? _version[0]*1000000 + _version[1]*10000 + _version[2]*100 + _version[3]*1 : 0)>>
+		<<backComp>>
+		/* 北极星模组 */
+		<<variablesBJXModUpdate>>
+		/* 北极星 */
+
+		<<updatehistorycontrols>>
+		<<set _preventUpdate to true>> /*prevent rewriting autosaves */
+		<<setFont>>
+		<<run zoom($options.zoom)>>
+		<<run syncFavourites()>>
+		<<run initCustomLenses()>>	/* push custom eyelenses inside setup.colours.eyes; on every load/refresh it needs to be done. */
+		<<run syncDebugAddedEvents()>>
+		<<run toggleConfirmDialogUponTabClose()>> /* enable/disable confirm dialog when user tries to close browser tab. based on V.options.confirmDialogUponTabClose */
+	<</if>>
+
+	/* Variables that you need to check on every passage */
+	<<set $link_table to []>>
+	<<set $map.hideLinksCheck to []>>
+	/* Determine if the player is in a safe passage. Used to catch softlocks */
+	<<if setup.majorAreas.includes($passage)>>
+		<<set $safePassage to $passage>>
+	<</if>>
+<</widget>>

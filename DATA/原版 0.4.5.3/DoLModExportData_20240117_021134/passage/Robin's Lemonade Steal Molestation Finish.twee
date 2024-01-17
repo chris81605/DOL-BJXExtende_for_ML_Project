@@ -1,0 +1,46 @@
+:: Robin's Lemonade Steal Molestation Finish []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"好啊，"<<he>>说，"用这钱嫖一次，价格还挺公道的。"
+	<br><br>
+<<elseif $enemyhealth lte 0>>
+	"操你妈的<<bitch>>，"<<he>>怒骂，"留着你那该死的水吧。你迟早有一天要付出代价的。"<<He>>一瘸一拐地走了。
+	<br><br>
+<<elseif $finish is 1>>
+	"他妈的荡妇，"<<he>>说，"拿上你那该死的水滚出去！"
+	<br><br>
+<<else>>
+	<<set $rescued += 1>>
+	你的哭声吸引了注意。街上的人们开始往这边张望。无法忍受被围观，那个<<person>>从你身边离开了。"他妈的！<<bitch>>，"<<he>>说，"留着你那该死的水吧。你迟早有一天要付出代价的。"
+	<br><br>
+<</if>>
+<<clothesontowel>>
+<<endcombat>>
+<<npc Robin>><<person1>>
+<<tearful>>你走回罗宾身边，<<he>>一看到你就立刻冲过来帮忙。
+<<if _robin.trauma gte 40>>
+	"太谢谢你了！我很高兴你没有离开那么久，我都开始担心了。"罗宾看起来松了一口气。
+<<else>>
+	"你是怎么——"<<he>>停顿了一下，"你不可能就这么一路把这些搬过来了吧。"
+<</if>>
+<br><br>
+<<if $pain gte 40>>
+	<<He>>看到了你的眼泪。"怎么了？"<<he>>问道。罗宾紧紧抱住了你。你对着<<his>>的肩膀抽泣，感觉好一点了。
+	<<npcincr Robin dom 1>><<gdom>>
+	<<lpain>><<pain -5>>
+	<br><br>
+<</if>>
+<<if _robin.trauma gte 40>>
+	你悄悄地把<<he>>给你的£20留在了小摊上。
+<<else>>
+	"我在附近的商店里发现它打折了，"你说。
+	<br><br>
+	"你真会省钱，谢谢你。"你悄悄地把<<he>>给你的£2留在小摊上。
+<</if>>
+<<npcincr Robin love 1>><<glove>>
+<br><br>
+<<endevent>>
+<<lemonade_stand_options>>

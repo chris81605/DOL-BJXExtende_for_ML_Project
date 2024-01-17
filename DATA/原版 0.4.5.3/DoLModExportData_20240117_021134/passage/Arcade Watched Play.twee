@@ -1,0 +1,20 @@
+:: Arcade Watched Play []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+
+<<if $rng gte 81>>
+你继续玩。那个<<person>>慢慢地靠得更近了，直到<<he>>压在了你的背上，伸出手来。
+<br><br>
+<<link [[继续|Arcade Watched Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+<<else>>
+你觉得是自己想多了，就继续玩下去。那个<<person>>很快就走开了，去给其他人提供建议。
+<br><br>
+<<endevent>>
+	<<if $money gte 500 and Time.dayState isnot "night">>
+		<<link [[ 继续玩游戏 (£5 0:20)|Arcade Play]]>><<set $money -= 500>><<pass 20>><<stress -2>><</link>><<lstress>>
+		<br>
+	<</if>>
+		<<link [[停止|Arcade]]>><</link>>
+		<br>
+<</if>>

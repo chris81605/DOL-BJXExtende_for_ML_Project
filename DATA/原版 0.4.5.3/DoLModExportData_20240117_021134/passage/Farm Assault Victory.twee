@@ -1,0 +1,80 @@
+:: Farm Assault Victory []
+<<effects>>
+
+<<npc Alex>><<person1>>
+
+<<if $farm_destroyed is true>>
+	"最好别他妈让我再看见你们，"艾利克斯朝他们吼道。<<He>>转身向你，"很高兴这次他们只是白白浪费了自己的时间，但我们真的不应该让他们继续在农场里横行霸道了。"
+	<br><br>
+<<elseif $fields_damaged gte 1>>
+	"最好别他妈让我再看见你们，"艾利克斯朝他们吼道。<<He>>转身向你，又看了看身后冒着浓烟的农田。"至少我们控制住了损失，"<<he>>说，"我们下次会准备得更加充分。"
+	<br><br>
+<<else>>
+	"最好别他妈让我再看见你们，"艾利克斯朝他们吼道。<<He>>转身向你，浑身是泥，却难掩<<his>>的兴奋之情。"我们做到了，以后也一定都能做到！"
+	<br><br>
+<</if>>
+
+<<if $farm_assault.tower is "defeated">>
+	<<He>>看向瞭望塔的方向："操，希望$farm.tower_guard没事。"
+	<br><br>
+	<<endevent>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	你们看见守卫坐在瞭望塔的底部，
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		正试着点燃一根捡来的烟屁股。"这活可比我想象中难多了，"<<he>>说，"能拉我一把不？"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		正在跟别人打电话。"——老大来了，一会再打给你。"<<He>>冲你咧了咧嘴："你真该看看我在被放倒前解决了多少个杂种。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		盯着天空。"抱歉，老大，"<<he>>看到了你，"我已经尽力了。"
+	<<else>>
+		看着你走近。"天使们要来带我上天堂了吗？"<<he>>哈哈大笑。
+	<</if>>
+	你和艾利克斯帮<<him>>起身。
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"我没事，"<<he>>继续说，"伸展伸展腿脚就好了。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"那里面有把椅子，"<<he>>指了指瞭望塔，"我得稍微休息一下。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"不用担心我，"<<he>>说，"我能照顾好自己。"
+	<<else>>
+		"光是碰碰你的小手就已经快治好我了，"<<he>>继续说，"我甚至觉得现在就能回到岗位上去了。"
+	<</if>>
+	<br><br>
+
+<<elseif $farm_assault.tower is "manned" or $farm_assault.tower is "attacked">>
+	你看到$farm.tower_guard走了过来。
+	<<endevent>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"很高兴看到你们都没事，"<<he>>说，"刚才可真惊险啊。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"事情变得有趣了，"<<he>>说道。"我想我需要喘口气。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"干得好，"<<he>>说道。"希望我有帮到忙。"
+	<<else>>
+		"你真该看看我在那上面的样子，"<<he>>说道。"三个——"<<he>>停顿了一下。"我是说，五个，壮硕的怪物从塔的一侧爬了上来，但我让它们都滚回去了。"
+	<</if>>
+	<br><br>
+<<else>>
+
+<</if>>
+
+<<endevent>>
+<<npc Alex>><<person1>>
+你们一起走回小屋。
+<<if isLoveInterest("Alex")>>
+	艾利克斯搂着你的肩。
+<<else>>
+	艾利克斯拍了拍你的肩膀。
+<</if>>
+"我们赢了，但雷米还会再回来的。所以我们也会做好准备。"
+<br><br>
+<span class="red">雷米将在<<number $farm_attack_timer>>天后再次发起袭击。</span>
+<br><br>
+
+<<unset $fields_damaged>>
+<<unset $farm_destroyed>>
+<<farm_assault_end>>
+
+<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+<br>

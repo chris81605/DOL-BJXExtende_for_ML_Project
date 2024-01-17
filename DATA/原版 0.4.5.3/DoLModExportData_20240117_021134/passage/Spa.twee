@@ -1,0 +1,86 @@
+:: Spa []
+<<set $outside to 0>><<set $location to "spa">><<effects>>
+
+<<if !$daily.spaEvent>>
+	<<spa_event_select>>
+<</if>>
+
+你待在多瑙河街上的水疗中心。巨大的玻璃幕墙通道通向天然温泉，侧面的走廊通向其他设施。
+一块标牌上写着："日晒床开放中。每小时
+<<if Time.season is "summer">>
+	£10
+<<elseif Time.season is "winter">>
+	£60
+<<else>>
+	£25
+<</if>>
+。价格随季节变化。"
+<br><br>
+<<if $openinghours is 1>>
+	<<if $daily.spaEvent is "party">>
+		<span class="purple">喷泉水池里挤满了人，吵闹的音乐从里面传来。</span>看来有人包下了场地正在举行派对。
+	<<else>>
+		顾客们正在各自的池子里放松。
+	<</if>>
+<<else>>
+	设施内十分安静，你只能听到泉水流动的声音。
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+
+	<<passoutshop>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "spa">>
+	<</if>>
+	<<if Time.hour is $closinghour>>
+		现在是关门时间，接待员正在清场。<<if $exposed gte 1>>一想到自己这副样子可能会被人看到，你心里就不由得一紧。<</if>>
+		<br>
+	<<elseif $openinghours is 0>>
+		你只身一人站在黑暗中。
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<if $uncomfortable.nude is false>>
+		你藏在一个衣柜里。一想到可能会被人抓个现行你就寒毛竖立，但你还是觉得待着不动更明智一点。
+		<<else>>
+		你藏在橱柜里以保护自尊。
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $openinghours is 1 and $exposed lt 1>>
+		<<generate1>><<person1>>
+		<<if $spa_job gte 1>>
+			<<ind>><<link [[担任按摩师 (0:50)|Spa Work Start]]>><<endevent>><<set $money += 1000>><</link>>
+			<br>
+		<<else>>
+			接待员，一名<<person>>从桌子上抬起头，皱了皱眉。"有事快说，"<<he>>说，"这可不是街头流浪的小鬼该来的地方。"
+			<br><br>
+			<<askicon>><<link [[询求工作|Spa Work Ask]]>><</link>>
+			<br>
+		<</if>>
+		<<if Time.season is "spring" or Time.season is "autumn">>
+			<<if $money gte 2500>>
+				<<ind>><<link [[日晒沙龙 (£25 1:00)|Spa Tan]]>><<set $money -= 2500>><</link>><<lstress>><<gggtanned>>
+				<br>
+			<</if>>
+		<<elseif Time.season is "winter">>
+			<<if $money gte 6000>>
+				<<ind>><<link [[日晒沙龙 (£60 1:00)|Spa Tan]]>><<set $money -= 6000>><</link>><<lstress>><<gggtanned>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $money gte 1000>>
+				<<ind>><<link [[日晒沙龙 (£10 1:00)|Spa Tan]]>><<set $money -= 1000>><</link>><<lstress>><<gggtanned>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $openinghours is 0 and Time.hour isnot $closinghour and !$weekly.theft.spa>>
+		<<shopicon "register">><<link [[检查收银机|Spa Register]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<danubeicon>><<link [[离开|Danube Street]]>><<endevent>><</link>>
+	<br>
+<</if>>

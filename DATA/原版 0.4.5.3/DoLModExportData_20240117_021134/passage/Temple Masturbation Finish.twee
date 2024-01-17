@@ -1,0 +1,43 @@
+:: Temple Masturbation Finish []
+<<effects>>
+<<if $timer lte 1>>
+	<span class="red">一位<<generate1>><<person1>><<monk>>绕着柱子走。</span><<His>>闭着眼睛进行冥想祈祷，但是在<<he>>踢到你的腿时差点摔倒。在<<he>>转身之前，你赶紧把自己遮住。
+	<br><br>
+	<<if $temple_rank is "initiate">>
+		<<He>>面向你。"你不能随便乱坐，见习教徒！"<<he>>说，"我都想向主教报告你了。"
+		<<lgrace monk>><<grace -1 monk>>
+	<<elseif $temple_rank is "monk">>
+		<<He>>面对着你。"非常抱歉<<sister>>，"<<he>>说，"我以后会更小心的。"
+	<<else>>
+		<<He>>面对着你，<<he>>说道："原谅我吧，我以后会更加小心的。"
+	<</if>>
+	<<if $exposed gte 1>>
+		<<He>>喘息着再次闭上<<his>>的眼睛，<<he>>意识到了你的穿着状态。<<he>>结结巴巴地说道，"我，我……"<<he>>继续走<<his>>自己的路。
+		<br><br>
+	<<else>>
+		<<He>>继续走<<his>>的路，现在睁大了<<his>>的眼睛。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $masturbationorgasm gte 1>>
+	你环顾四周，似乎没有人注意到你对这片神圣之地的亵渎。
+	<<if $angel gte 6>>
+	<span class="red">回想之后，你对自己感到厌恶。</span>
+	<<llpurity>><<purity -20>><<ggtrauma>><<trauma 50>>
+	<<elseif $demon gte 6>>
+	<span class="green">回想之后，你感受到了前所未有的兴奋！</span>
+	<<llpurity>><<purity -20>><<llstress>><<stress -12>>
+	<<else>>
+	你感受到一阵冰冷的罪恶感袭来，但很快就消失了。
+	<<purity -10>><<llpurity>><<gtrauma>><<trauma 6>>
+	<</if>>
+<<else>>
+	你还未高潮就停了下来。四周一片寂静，似乎没有人注意到你。
+<</if>>
+<br><br>
+<<endmasturbation>>
+<<clotheson>>
+<<endcombat>>
+
+<<link [[继续|Temple]]>><</link>>
+<br>

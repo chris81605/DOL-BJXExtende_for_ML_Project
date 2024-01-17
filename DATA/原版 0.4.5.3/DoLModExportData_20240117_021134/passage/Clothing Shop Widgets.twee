@@ -1,0 +1,175 @@
+:: Clothing Shop Widgets [widget]
+<<widget "clothingShop-main">>
+	<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>><<unset $tempDisable>>
+	<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+	<<set $shopName = "clothing">>
+
+	你在服装店内。这儿的服装数不胜数，但如果想找奇装异服，可能还要另寻他处。
+	<br><br>
+
+	<<if $stress gte $stressmax>>
+	<<passoutshop>>
+	<<else>>
+		<<if Time.hour is 21>>
+			现在要关门了。保安正把大家赶到外面。<<if $exposed gte 1>>你意识到如果保安发现你穿成这样，你会有多大风险时，你内心感到了恐慌。<</if>>
+			<br><br>
+
+			<<if $exposed lte 0>>
+				<<highicon>><<link [[出去|High Street]]>><</link>>
+				<br>
+			<<else>>
+				<<ind>><<link [["躲起来直到关门 (1:00)"|Clothing Shop]]>><<pass 1 hour>><</link>>
+			<</if>>
+		<<else>>
+			<div id="tryonstats-div"><<tryOnStats>></div>
+			<<unset $shopListStartCount>>
+			<<unset $clothes_choice>>
+			<<set $shopPage = 0>>
+
+			<<if Time.dayState is "night">>
+				你独自一人在黑暗中。
+				<br><br>
+			<<elseif $exposed gte 1>>
+				你藏在一排衣服里以保护自尊。
+				<br><br>
+			<</if>>
+
+			<span>保暖度:</span>
+			<<warmthscale>>
+			<div id="warmth-description">
+				<<warmth_description>>
+			</div>
+			<br><br>
+			<<clothingcategoryicon "all">>
+			<<link "查看全部">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
+			<br><br>
+			<<if $debug is 1>>
+				<<clothingcategoryicon "overoutfit">>
+				<<link "浏览外衣套装">><<replace "#clothingShop-div">><<OverOutfitShop>><</replace>><</link>>
+				<br><br>
+			<</if>>
+			<<clothingcategoryicon "outfit">>
+			<<link "查看套装">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "upper">>
+			<<link "查看上装">><<replace "#clothingShop-div">><<TopShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "lower">>
+			<<link "查看下装">><<replace "#clothingShop-div">><<BottomShop>><</replace>><</link>>
+			<br><br>
+			<<clothingcategoryicon "underoutfit">>
+			<<link "查看内衣（套装）">><<replace "#clothingShop-div">><<UnderOutfitShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "underupper">>
+			<<link "查看内衣（上衣）">><<replace "#clothingShop-div">><<UnderTopShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "underlower">>
+			<<link "查看内衣（下衣）">><<replace "#clothingShop-div">><<UnderBottomShop>><</replace>><</link>>
+			<br><br>
+			<<clothingcategoryicon "head">>
+			<<link "查看头饰">><<replace "#clothingShop-div">><<HeadShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "face">>
+			<<link "查看面饰">><<replace "#clothingShop-div">><<FaceShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "neck">>
+			<<link "查看颈饰">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
+			<br><br>
+			<<clothingcategoryicon "handheld">>
+			<<link "查看手持物品">><<replace "#clothingShop-div">><<HandheldShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "hand">>
+			<<link "查看手饰">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "legs">>
+			<<link "查看袜子">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
+			<br>
+			<<clothingcategoryicon "feet">>
+			<<link "查看鞋类">><<replace "#clothingShop-div">><<FeetShop>><</replace>><</link>>
+			/*<br>
+			*<<clothingcategoryicon "strapon">> <!-- disable for now-->
+			*<<link "View Genital Wear">><<replace "#clothingShop-div">><<GenitalShop>><</replace>><</link>>*/
+			<br><br>
+			<<run linkifyDivs('.button-back-to-shop')>>
+
+			<<if $clothingrebuy is 1>>
+				<<rebuyicon "disable">><<link [[禁用服装自动重购功能|Rebuy Shop]]>><</link>>
+				<br>
+			<<else>>
+				<<rebuyicon "enable">><<link [[启用服装自动重购功能|Rebuy Shop]]>><</link>>
+				<br>
+			<</if>>
+
+			<<if Time.dayState is "night" and Time.hour isnot $closinghour and !$weekly.theft.clothingShop>>
+				<<shopicon "register">><<link [[检查收银机|Clothing Shop Register]]>><</link>>
+				<br>
+			<</if>>
+
+			<br>
+
+			<<if Time.dayState is "night" or $tryOn.value is 0>>
+				<<if Time.dayState is "night" and $clothingShop.spotted is true and $clothingShop.stolenClothes gt 0>>
+					<<getouticon>>
+					<<link [[离开|Clothing Shop Night Guard Found]]>>
+						<<shopClothingFilterReset>>
+						<<ShowUnderEquip "normal">>
+						<<ShowUnderEquip "over">>
+						<<set $tryOn.autoReset to true>>
+						<<crimeUp `$tryOn.value / 100` "thievery">>
+						<<shopHoodCheck>>
+						<<shopCommandoCheck>>
+					<</link>>
+				<<else>>
+					<<getouticon>>
+					<<link [[离开|Shopping Centre Top]]>>
+						<<shopClothingFilterReset>>
+						<<ShowUnderEquip "normal">>
+						<<ShowUnderEquip "over">>
+						<<set $tryOn.autoReset to true>>
+						<<crimeUp `$tryOn.value / 100` "thievery">>
+						<<shopHoodCheck>>
+						<<shopCommandoCheck>>
+					<</link>>
+				<</if>>
+				<<if $tryOn.value gt 0>>
+					<<crime "thievery">>
+				<</if>>
+				<br><br>
+			<<elseif $tryOn.value gt 0>>
+				<<ind>><<link "归还衣服">><<clothingReset>>
+					<<updatesidebarimg>>
+					<<updatesidebardescription>>
+					<<updateallure>>
+					<<updatewarmthscale>>
+					<<updatewarmthdescription>>
+					<<updateclothingshop>>
+					<<run updateMoment()>>
+				<</link>>
+				<br>
+				<<if $tryOn.value lt $money>>
+					<<sendItemsToDropdown>>
+					<<ind>><<link "购买衣服">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+					<br>
+					<<ind>><<link "购买并送到衣柜">>
+						<<buyTryOnClothes "wardrobe">>
+						<<updatesidebarmoney>>
+						<<updatesidebarimg>>
+						<<updatesidebardescription>>
+						<<updateallure>>
+						<<updatewarmthscale>>
+						<<updatewarmthdescription>>
+						<<updateclothingshop>>
+						<<run updateMoment()>>
+					<</link>>
+					<br>
+				<</if>>
+				<<getouticon>><<link [[带着偷到的衣服离开|Stolen Clothing Shop Result]]>><<shopClothingFilterReset>><<shopHoodCheck>><<shopCommandoCheck>><</link>><<crime "thievery">>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "clothingcategoryicon">>
+	<<icon `"clothes/categories/" + _args[0] + ".png"`>>
+<</widget>>

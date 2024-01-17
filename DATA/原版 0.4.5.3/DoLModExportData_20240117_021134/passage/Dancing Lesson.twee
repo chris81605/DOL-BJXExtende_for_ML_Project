@@ -1,0 +1,98 @@
+:: Dancing Lesson []
+<<if $dancestudiointro is 1 and $phase is 0>><<pass 20>><</if>>
+<<set $outside to 0>><<set $location to "dance_studio">><<effects>>
+
+<<if $dancestudiointro isnot 1>>
+	<<danceStudioIntro "Dancing Lesson">>
+<<elseif $dancestage gte 2>>
+	<<tiredness 4>><<danceskill 14>><<danceskilluse>><<wearandtear "dance">><<physique 2>>
+	这节课的其余时间无事发生。
+	<br><br>
+	<<link [[继续|Dance Studio]]>><<endevent>><</link>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "danceStudioLesson">>
+	<</if>>
+	<<if $exposed gte 1>>
+		不知怎么的，你似乎分散了班上的注意力。低头一看，你很快发现了原因。
+		<<if $uncomfortable.nude is false>>
+			你为自己的暴露感到一阵兴奋，并默许其他人偷偷瞥向你的胴体。
+			<br>
+			当查里带着毛巾冲向你时，你掩饰自己，尽力维持体面。
+			<<towelup>><<garousal>><<gstress>><<gtrauma>><<arousal 100>><<npcincr Charlie love 1>><<glove>>
+			<br><br>
+		<<else>>
+			当查里拿着毛巾冲向你时，你尖叫着掩饰好自己。
+			<<towelup>><<garousal>><<gstress>><<gtrauma>><<arousal 100>><<stress 1>><<trauma 1>><<npcincr Charlie love 1>><<glove>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<tiredness 4>><<set $dancestage += 1>><<danceskill 14>><<danceskilluse>><<wearandtear "dance">><<physique 2>><<npc Charlie>><<person1>>
+	<<if $rng lte 20>>
+		<<set $dancelesson to "barre">>
+		你抓着扶手杆，以此来拉伸和锻炼你的肌肉。
+		<<if currentSkillValue('danceskill') lte 200>>
+			这很难保持平衡。你从镜子里看到自己的样子有点傻，特别是与更有经验的学生相比。
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			你很擅长保持平衡。你可以练习更高深的技术了。
+		<<else>>
+			你可以用它作为替代伙伴，在练习空中技巧时支撑你的体重。其他一些学生羡慕地看着。
+		<</if>>
+		<br><br>
+	<<elseif $rng lte 40>>
+		<<set $dancelesson to "duo">><<generate2>><<person2>>
+		你和<<person>>搭档。
+		<<if currentSkillValue('danceskill') lte 200>>
+			<<He>>比你更有经验，所以让<<him>>带着你。
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			在练习技巧时你需要一个伙伴，以便于轮流协助对方。
+		<<elseif currentSkillValue('danceskill') lte 1000>>
+			你很有经验地带领着对方的动作，尽可能小心翼翼避免把<<him>>逼得过紧。
+		<</if>>
+		<br><br>
+	<<elseif $rng lte 60>>
+		<<set $dancelesson to "airbarre">>
+		你抓住空中的扶手杆，以此来拉伸和锻炼你的肌肉。
+		<<if currentSkillValue('danceskill') lte 200>>
+			有经验的学生用它来锻炼自己的力量和姿态，而你却只能滑稽地摇摆身体。
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			你努力培养自己的仪态。
+		<<elseif currentSkillValue('danceskill') lte 1000>>
+			你被高举在空中，充分展示着你的优雅和技巧。
+		<</if>>
+		<br><br>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			在做空中训练时，你才意识到穿裙子来跳舞是个错误的决定。事实证明，当你跃在空中时，全班人绝对都能看到你裙下的<<undies>>。
+			<<set _uncomVar to ($worn.under_lower.type.includes("naked") ? "nude" : "underwear")>>
+			<<if $uncomfortable[_uncomVar] is false>>
+				<span class="lewd">你毫不介意别人的眼光。</span>
+				<<garousal>><<arousal 600>>
+				<br><br>
+			<<else>>
+				<<garousal>><<gstress>><<gtrauma>><<arousal 600>><<stress 6>><<trauma 6>>
+				<br><br>
+			<</if>>
+		<</if>>
+	<<elseif $rng lte 80>>
+		<<set $dancelesson to "instructor">>
+		查里亲自为你指导了几次。
+		<<if currentSkillValue('danceskill') lte 200>>
+			<<He>>帮助你掌握基本的知识。
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			<<He>>示范了一些新的舞步供你练习。
+		<<elseif currentSkillValue('danceskill') lte 1000>>
+			<<He>>帮你纠正了一些姿势上的缺陷。
+		<</if>>
+		<br><br>
+	<<elseif $rng lte 100>>
+		<<set $dancelesson to "noinstructor">>
+		查里在全班同学面前演示了一些动作，同学们都尽力向<<him>>学习。
+		<br><br>
+	<</if>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventsdance>>
+	<<else>>
+		<<link [[继续|Dancing Lesson]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

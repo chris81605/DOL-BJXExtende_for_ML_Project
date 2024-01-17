@@ -1,0 +1,61 @@
+:: Brothel Private Sex Finish []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<if $stealtarget isnot "">><<set $brothel_thief += 1>><</if>>
+<<if $consensual is 1>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $prostitutionstat += 1>><<fameprostitution 1>>
+		<<if $phase is 2>>
+	"这是你的报酬，婊子，"<<person>>高潮了，喘着气对你说道。<<He>>头也不回地离开了房间。
+	<br><br>
+	<<tipreceive>>
+		<<elseif $phase is 1>>
+	"这是你的报酬，婊子，"<<person>>高潮了，喘着气对你说道。<<He>>头也不回地离开了房间。
+	<br><br>
+	<<tipreceive>>
+		<<else>>
+		<<He>>满意地笑着。"谢谢你的陪伴。喏，拿着。"在离开房间之前，<<He>>对你露出了一个灿烂的笑容。
+		<br><br>
+	<<tipreceive>>
+		<</if>>
+
+	<<else>>
+		<<if $phase is 2>>
+		"行。你可别指望拿到一分钱。"<<He>>厌恶地看着你，离开了房间。
+		<br><br>
+		<<elseif $phase is 1>>
+		"行。你可别指望拿到一分钱。"<<He>>厌恶地看着你，离开了房间。
+		<br><br>
+		<<else>>
+		"我做错什么了吗？真的对不起！"<<He>>从房间里跑了出去。
+		<br><br>
+		<</if>>
+
+	<</if>>
+
+<<else>>
+
+	<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<fameprostitution 1>>
+	"这是你的报酬，婊子，"<<person>>高潮了，喘着气对你说道。他们头也不回地离开了房间。
+	<br><br>
+	<<tipreceive>>
+	<<elseif $enemyhealth lte 0>>
+	你成功地把<<person>>击退，为你提供了逃跑的时间。<<tearful>>你逃进了繁忙的妓院主室。
+	<br><br>
+
+	<</if>>
+
+<</if>>
+<br><br>
+
+<<clotheson>>
+
+<<endcombat>>
+<<rng>>
+<<if crimeSumCurrent() gte 4500 and $brothel_raid gte 1 and $brothel_thief gte $rng>>
+/*If you're (a) very wanted and (b) Briar has been raided before, then the (c) chance of Briar selling you out increases the more you steal from their customers.*/
+	<<link [[继续|Brothel Arrest]]>><</link>>
+<<else>>
+	<<link [[继续|Brothel]]>><</link>>
+<</if>>

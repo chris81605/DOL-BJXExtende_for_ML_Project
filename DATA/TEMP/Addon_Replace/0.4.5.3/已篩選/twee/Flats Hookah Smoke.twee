@@ -1,0 +1,31 @@
+:: Flats Hookah Smoke []
+<<effects>>
+
+你坐在水烟管前的垫子上，把水管放到嘴里，然后吸气。
+<br><br>
+
+你躺在地上，大脑一片混沌，你感觉天花板在你的眼中不断旋转，旋转。四周光怪陆离，一片炫彩，整个人仿佛已经不在人间。
+<br><br>
+
+/* 北极星模组 */
+<<if $awareness gte 400 or currentSkillValue('willpower') gte 600>>
+/* 北极星 */
+你几乎要被压垮，<span class="green">但是你坚持下来了。</span>一片外星森林从传送门出现。巨大的触须在天空中扭曲扭动。
+    <br><br>
+    <<if $tentacledisable is "f">>
+<<link [[进入|Tentacle Forest Entrance]]>><<set $tentacleEntrance to "hookah">><<endevent>><</link>>
+        <br>
+	<<else>>
+		<span class="red">你被它们吓坏了，</span>开始反抗自己的意识，试图强迫自己醒来。然而，在短暂的清醒时刻，<span class="lewd">你想知道如果你放任你的思想，会发生什么。</span>
+		<br><br>
+		<<link [[尝试进入|Tentacle Forest Enable]]>><</link>><<willpowerdifficulty 1 1>> | <span class="pink">这将使触手可以出现。</span> <!-- Appears even with blind stats enabled. Intentional -->
+		<br>
+	<</if>>
+<<link [[忽视|Flats Hookah Flow]]>><<pass 1 hour>><<willpower 6>><<if $awareness lt 600>><<awareness 6>><</if>><</link>><<ggwillpower>><<if $awareness lt 600>><<ggawareness>><</if>>
+    <br>
+<<else>>
+你无法理解它，<span class="red">你的思想脱离了你的控制。</span><<ggwillpower>><<willpower 6>><<if $awareness lt 600>><<ggawareness>><<awareness 6>><</if>>
+    <br><br>
+<<link [[继续|Flats Hookah Flow]]>><<pass 1 hour>><</link>>
+    <br>
+<</if>>

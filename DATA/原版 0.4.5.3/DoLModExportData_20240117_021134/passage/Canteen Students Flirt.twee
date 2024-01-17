@@ -1,0 +1,41 @@
+:: Canteen Students Flirt []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你诱人地靠在桌子上，和那个<<person>>讲着话。"你看起来很紧张，有什么我能帮忙的吗？"
+<<promiscuity1>>
+
+<<if $cool gte 160>>
+	<<He>>打量了一下你，脸红了起来。"你……想去个僻静的地方吗？"<<He>>明显有别的想法。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[接受|Canteen Student Encounter]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Canteen]]>><<endevent>><</link>>
+<<elseif $cool lt 40>>
+	<<set $daily.school.canteenApproach to 1>>
+	这个学生团体爆发出一声大笑——除了<<person>>以外，<<He>>看起来非常窘迫。"滚开！别再和我说话了。"
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<He>>打量了一下你，脸红了起来。"你……想去个僻静的地方吗？"<<He>>明显有别的想法。
+		<br><br>
+
+		<<if $promiscuity gte 15>>
+			<<link [[接受|Canteen Student Encounter]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+			<br>
+		<</if>>
+		<<link [[拒绝|Canteen]]>><<endevent>><</link>>
+	<<else>>
+		<<set $daily.school.canteenApproach to 1>>
+		<<He>>脸红了，把头转了过去。周围的朋友开始嘲笑<<his>>是个怂包。
+		<br><br>
+
+		<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

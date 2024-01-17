@@ -1,0 +1,70 @@
+:: Beach Day Encounter []
+<<location "beach">><<effects>>
+
+<<if $phase is 0>>
+	你走向那个假装没有注意到你的<<person>>，直到你停在<<him>>面前。
+	<<if playerBellyVisible()>>
+		你离<<He>>足够近的时候，<<he>>注意到了你怀孕的肚子。"天呐！"<<he>>高兴地叫道，"你要当妈妈了吗？"
+	<<else>>
+		<<He>>看着你，但不说话。
+	<</if>>
+	<br><br>
+
+	<<link [[闲聊 (0:10)|Beach Day Encounter]]>><<set $phase to 1>><<pass 10>><<stress -2>><<trauma -1>><</link>><<lstress>><<ltrauma>>
+	<br>
+	<<link [[调情 (0:05)|Beach Day Encounter]]>><<pass 5>><<set $phase to 2>><</link>><<promiscuous1>>
+	<br>
+	<<link [[离开|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 1>>
+	<<if playerBellyVisible()>>
+		你与<<him>>进行了一场深入的谈话。你了解到，为人父母的压力真的让<<him>>不堪重负。"我想这孩子也有父亲吧？"
+		<br><br>
+
+		<<link [[说你是单亲|Beach Day Encounter Pregnancy Talk]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[说你知道孩子的父亲是谁|Beach Day Encounter Pregnancy Talk]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		你开始谈论一些无关紧要的话题，试图缓解<<him>>的尴尬与羞怯之情。<<He>>礼貌地回应着你，但大部分时间都是你在说话。你注意到<<he>>在你不注意时偷偷地看着你。
+		<br><br>
+
+		<<link [[道别|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+		<<link [[调情 (0:05)|Beach Day Encounter]]>><<pass 5>><<set $phase to 2>><</link>><<promiscuous1>>
+		<br>
+	<</if>>
+<<elseif $phase is 2>>
+	你在旁边的毛巾上坐下。"像你这样优秀的大人，"你把身体倾向<<him>>。"平时一定积攒了不少压力吧。"
+	<<if $NPCList[0].penis is "clothed">>
+		<<He>>慌忙将腿移到一边，似乎想掩饰着什么。
+	<<else>>
+		随着你动作的继续，<<He>>的脸烧得通红。
+	<</if>>
+	<<promiscuity1>>
+
+	<<link [[停止|Beach Day Encounter]]>><<set $phase to 3>><</link>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[魅惑|Beach Day Encounter]]>><<set $phase to 4>><</link>><<seductiondifficulty>><<promiscuous2>>
+		<br>
+	<</if>>
+<<elseif $phase is 3>>
+	你对取得的效果非常满意，你起身告辞。
+	<br><br>
+
+	<<link [[继续|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 4>><<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>><<promiscuity2>>
+	<<if 1000 - ($rng * 10) - currentSkillValue("seductionskill") - ($attractiveness / 10) lte -100>>
+		你直勾勾地盯着<<his>>，同时把身体缓缓地压在了<<hers>>的身上，清楚表明了你的意图。<<He>>瞥了一眼孩子们。放心地确认了他们的注意力正在别的地方。<<he>>翻身把你拉入怀中，你能感受到<<his>>急促的心跳声。
+		<br><br>
+
+		<<link [[继续|Beach Day Encounter Sex]]>><<set $sexstart to 1>><</link>>
+	<<else>>
+		你直勾勾地盯着<<his>>，同时把身体缓缓地压在了<<hers>>的身上，清楚表明了你的意图。<<he>>结结巴巴地推辞，手忙脚乱地爬起来，去照顾<<his>>的孩子。
+		<br><br>
+
+		<<link [[耸耸肩|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</if>>

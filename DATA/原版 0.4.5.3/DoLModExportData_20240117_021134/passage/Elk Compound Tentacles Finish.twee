@@ -1,0 +1,18 @@
+:: Elk Compound Tentacles Finish []
+<<effects>>
+这个生物失去了对你的兴趣，并消失在粉红色的液体中。<<tearful>>你挣扎着站起来并成功来到水晶处。它触摸起来很是温暖。
+<<clotheson>>
+<<endcombat>>
+<<set $compoundpipes to 1>>
+<<set $blackmoney += 50>>
+<<set $compoundalarm += 1>>
+<<crimeUp 50 "thievery">>
+<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with storage tanks")>>
+	<<link [[放下相机|Elk Compound Pipes Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("the building with storage tanks")>><</link>><<gsecurity>>
+	<br>
+	<<link [[离开|Elk Compound]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Elk Compound]]>><</link>>
+	<br>
+<</if>>

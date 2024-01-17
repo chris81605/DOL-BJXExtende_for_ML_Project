@@ -1,0 +1,32 @@
+:: Sydney Temple Pure 3 []
+<<effects>>
+<br><<he>>仔细地把你打量了一番
+<<if $angel gte 6>>
+	，不时地踱着步。只见<<he>>的眼睛缓缓放大，一脸惊讶地看着你。"<span class="gold">这个人……在发着圣光。</span>一座真正的纯洁的灯塔。"<<He>>激动地转向约旦，对你啧啧称赞着。"我完全相信此人会严肃地对待这个誓约。"<<set $jordanScore += 20>>
+<<elseif $fallenangel gte 2 or $demon gte 6>>
+	，缓缓地皱起了眉头。"<span class="red">这个人……一团污秽。</span>真可悲。"
+	<<if $fallenangel gte 2 and $forgiveintro is 1>>
+		<br><br>
+		约旦露出了微笑。"<<pShe>>已经向我坦白了<<pher>>的错误，并希望改进自己。如果硬要说什么的话，那就是<span class="green">迷途知返，道远可钦。</span>"
+		<<set $jordanScore += 5>>
+	<<else>>
+		<<set $jordanScore -= 10>>
+	<</if>>
+<<elseif $purity gte 999>>
+	<<He>>从头到脚审视了你一番，脸上露出轻快的笑容。"<span class="green">你一直以来都追随着圣光的指引，着实令人倾佩。</span>"<<set $jordanScore += 15>>
+<<elseif $purity gte 900>>
+	<<He>>从头到脚审视了你一番，对你微微一笑。"<span class="lblue">你一直以来都追随着圣光的指引，你的努力得到了认可。</span>"<<set $jordanScore += 10>>
+<<elseif $purity gte 500>>
+	<<He>>从头到脚审视了你一番，神情异常严肃。"<span class="purple">你似乎……有些迷失了方向，</span>你需要及时回头。"
+<<else>>
+	<<He>>皱着眉头审视着你。"<span class="red">可惜，你已经堕入了罪恶的深渊。</span>"<<He>>叹了一口气，对着约旦摇了摇头。"在进行任何仪式之前，应该让这个人赎罪，但决定不在我。"<<set $jordanScore -= 5>>
+<</if>>
+<br><br>
+约旦对<<monk>>点点头，那人鞠了一躬，随即离开了房间。"接下来的部分需要你们分开进行测试，请随我来。"约旦带你走向一个紧邻的单间，里面同样放着一张华丽的桌子。"请在这儿等一会儿，我需要先对悉尼的部分进行测试。"
+<br><br>
+<<endevent>><<npc "Sydney" 1>><<person1>><<npc "Jordan" 2>><<person2>>
+<<link [[等待 (0:15)|Sydney Temple Pure 4]]>><<set $phase to 1>><<pass 15>><</link>>
+<br>
+<<set $skulduggerydifficulty to 700>>
+<<link [[偷听|Sydney Temple Pure Eavesdrop]]>><</link>><<skulduggerydifficulty>>
+<br>

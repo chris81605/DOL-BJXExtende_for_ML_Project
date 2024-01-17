@@ -1,0 +1,16 @@
+:: Pregnancy Birth Hospital Passout []
+<<set $outside to 0>><<effects>>
+
+你当场倒下，最后听到的是一阵脚步声。
+<br><br>
+
+<<switch $location>>
+	<<case "moor" "forest">><<set _time to 60>>
+	<<case "town">><<set _time to 15>>
+	<<default>><<set _time to 30>>
+<</switch>>
+<<set _hours to Math.floor(_time / 60)>>
+<<set _minutes to _time % 60>>
+<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital]]>><<pass _time>><<set $phase to 1>><</link>>
+
+/*Rescued by someone*/

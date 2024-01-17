@@ -1,0 +1,133 @@
+:: Forest Fox Nest Sneak []
+<<effects>>
+<<beasttype>>跳到了灌木丛后面，开始挖洞。你慢慢地走出来，从后面向<<bhim>>靠近。
+<br><br>
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<if $NPCList[0].traits.includes("friendly")>>
+		<<set _tendingMin to 1>><<set _tendingMax to 300>>
+	<<elseif $NPCList[0].traits.includes("territorial")>>
+		<<set _tendingMin to 200>><<set _tendingMax to 700>>
+	<<else>>
+		<<set _tendingMin to 100>><<set _tendingMax to 600>>
+	<</if>>
+	你小心翼翼地避开任何松散的石头或树枝，<span class="green">悄无声息地走到了<<bhim>>身后。</span>
+	<<skulduggeryuse>>
+
+	<<link [[抚摸|Forest Fox Nest Pet]]>><</link>><<tendingdifficulty _tendingMin _tendingMax>><<llstress>>
+	<br>
+	<<link [[恐吓|Forest Fox Nest Scare]]>><<trauma -10>><</link>><<lltrauma>>
+	<br>
+<<else>>
+	你走了一半的路程，<span class="red">然后踩到了一个树枝上，发出了巨大的声响。</span>
+	<br><br>
+
+	<<if $NPCList[0].traits.includes("cowardly")>>
+		<<beasttypes>>的尾巴猛地竖了起来，膨胀了起来，<<bhe>>突然转向你，在这个过程中掉落了鸟蛋。
+		<<if $monster is 1>>
+			<<bHe>>向后摇晃了一下，然后恢复了平衡，迅速逃离。从越来越远的距离，<<bhe>>向你大喊："你抓不到我！"
+		<<else>>
+			<<bHe>>向后发出几声尖叫，然后摇晃着向后倒退一步，然后恢复平衡，迅速逃离。
+		<</if>>
+		<br><br>
+
+		有几个鸟蛋被打碎了。<<set $forest_nest.eggs -= 2>><<tending_bird_eggs $forest_nest.eggs>>
+		<br><br>
+
+		<<if $forest_nest.eggs gte 1>>
+			<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<elseif $NPCList[0].traits.includes("territorial")>>
+		<<beasttypes>>的耳朵动了一下。<<bHe>>静止了一会儿。然后，在一个迅速的动作中，<<bhe>>跳了起来，向你猛扑！
+		<br><br>
+
+		尽管<<bHe>>体型娇小，但还是轻松地将你撞倒了。
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<if $monster is 1>>
+				<<bHe>>按住你的双臂。
+				<<if $fox gte 6>>
+					"这是干什么？想找个轻松的伴侣吗，小狐狸？"
+				<<elseif $cat gte 6>>
+					<<if $NPCList[0].pronoun is "f" and $NPCList[0].breastsize gte 4 and $NPCList[0].lactation is 1>>
+						"想要得到一些奶水吗，小猫咪？"<<bHe>>把<<bhis>>的$NPCList[0].breastsdesc压在你身上，<<bhis>>的脸离你只有几英寸远。
+					<<else>>
+						"你离家还有点远吧，小猫？"
+					<</if>>
+				<<elseif $wolf gte 6>>
+					"寻找容易的猎物，小狼崽？你在这里不是捕食者。"
+				<<else>>
+					"以为你可以悄悄接近我，肥肉？"
+				<</if>>
+				<<bHe>>伸展着身体，将<<bhis>>的后部抬起到空中。"你真幸运。我现在心情相当好。"
+			<<else>>
+				<<bHe>>朝你发出了一声尖叫，将你按在地上。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<else>>
+			你向后推了一下自己，然后逃跑了。<<beastescape>>
+			<br><br>
+
+			<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><</link>>
+			<br>
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("clever")>>
+		<<beasttypes>>的耳朵动了一下。<<bHe>>静止了一会儿，没有动弹。
+		<<if $monster is 1>>
+			然后，在一个迅速的动作中，<<bhe>>转身向你扔了鸟蛋！
+			<br><br>
+
+			它直接打在你脸上，蛋黄溅得到处都是。<<bHe>>嘲笑你，在地上滚了几下才跑开。<<bodyliquid "face" "goo">><<stress 6>><<pain 2>><<gstress>><<gpain>>
+		<<else>>
+			然后，在一个快速的动作中，<<bhe>>跳跃起来并猛扑过去！
+			<br><br>
+
+			尽管<<bhis>>的尺寸相对较小，但仍能轻松将你击倒。<<bHe>>在你正上方快速地吃着鸟蛋，蛋黄溅得你浑身都是。<<bHe>>发出了几声听起来有点像笑声的高声吠叫，在地上翻滚了几圈，跑开了。<<bodyliquid "face" "goo">><<stress 6>><<pain 2>><<gstress>><<gpain>>
+		<</if>>
+		<br><br>
+
+		<<set $forest_nest.eggs -= 3>><<tending_bird_eggs $forest_nest.eggs>>
+		<br><br>
+
+		<<if $forest_nest.eggs gte 1>>
+			<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<elseif $NPCList[0].traits.includes("clumsy")>>
+		当<<bhe>>迅速转向你时，<<beasttypes>>的尾巴竖立起来并膨胀起来。
+		<<if $monster is 1>>
+			<<bHe>>向后踉跄，<span class="red">正好踩在鸟蛋上</span>。<<bHe>>迅速调整回警惕姿势。"你吓到我了！别再这么干了！"<<bhe>>喊道，看起来很生气，但很快转而开始舔自己尾巴上沾到的蛋液。<<bHe>>似乎很快就忘了你的存在。
+		<<else>>
+			<<bHe>>翻过身，<span class="red">压碎了鸟蛋</span>。<<bHe>>立刻展现出警惕姿势，盯向你。过了一会儿，<<bhe>>终于放松了下来，开始舔自己毛上沾到的蛋液。<<bHe>>似乎很快就忘了你的存在。
+		<</if>>
+		<<set $forest_nest.eggs to 0>>
+		<br><br>
+
+		<<link [[抚摸|Forest Fox Nest Pet]]>><<set $phase2 to 1>><</link>><<tendingdifficulty 1 200>><<llstress>>
+		<br>
+		<<if $fox gte 6 and $monster is 1>>
+			<<link [["把" + $NPCList[0].pronouns.him + "舔干净"|Forest Fox Nest Lick]]>><<set $phase2 to 1>><</link>><<deviant1>><<fox>>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<else>>
+		<<beasttypes>>的尾巴炸开了花，直直立起。<<bHe>>毫不犹豫地冲了出去，路上打碎了一个鸟蛋。<<bHe>>跑开一定距离后，停下来看了看你，然后头也不回地跑了。
+		<<set $forest_nest.eggs -= 2>><<tending_bird_eggs $forest_nest.eggs>>
+		<br><br>
+
+		<<if $forest_nest.eggs gte 1>>
+			<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<</if>>
+<</if>>

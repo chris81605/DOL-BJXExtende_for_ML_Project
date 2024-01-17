@@ -1,0 +1,127 @@
+:: Bully Theft []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<pass 20>>
+惠特尼拖着你穿过学校大门。"我们要去麋鹿街，"<<he>>说，"你要帮我们找一些东西。"一路上你被不断推着往前走。
+<br><br>
+
+你来到一个有围墙的院子旁。墙底有一个小洞。"我的烟没了，"惠特尼说，"去给我弄一些来。"<<He>>把你推倒在地，踢了好几次你的<<bottom>>，逼着你爬进洞里。
+<br><br>
+
+你爬到了另一半，站了起来。你现在位于一栋大楼后面的空地上。不远处有辆车，后备箱门户大开，里面有许多大箱子装的香烟。你走过去，偷走了几盒。
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].lust gte 40>>
+	你回到了墙角，无事发生，直到你试图爬到另一边——你试着挤过去，却被卡住了。
+	<br><br>
+
+	惠特尼从你手中接过烟盒，但当<<he>>注意到你的困境时，<<he>>顿了顿。
+	<<if $speech_attitude is "meek">>
+		"帮，帮帮我，"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"不要只是站在那儿，"你说。
+	<<else>>
+		"请帮帮忙，"你说道。
+	<</if>>
+	<br><br>
+
+	然后，<<He>>笑了。"帮你？一个小偷吗？"<<He>>一边得意地哼哼着，一边慢慢靠近你，"不。除非……"
+	<br><br>
+
+	<<He>>停在你面前，把<<his>>的胯部顶到你无助的脸上。你透过<<his>>的<<print setup.npcClothesSets.find(item => item.name === $NPCList[0].clothes.set).clothes["lower"].desc>>感觉到
+	<<if $NPCList[0].penis isnot "none">>
+		<<his>>的<<print $NPCList[0].penisdesc>>
+	<<else>>
+		来自<<his>>阴部的热量
+	<</if>>
+	。"除非你能说服我。"
+	<br><br>
+
+	<<link [[顺其自然|Bully Theft Submit]]>><<set $molestationstart to 1>><<trauma 6>><<npcincr Whitney dom 1>><</link>><<gtrauma>><<gdom>>
+	<br>
+
+		<<if $promiscuity gte 15 and $whitneyromance is 1>>
+
+			<<link [[同意|Bully Theft Agree]]>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><</link>><<promiscuous2>><<glove>><<gdom>>
+			<br>
+
+		<</if>>
+
+	<<link [[拒绝|Bully Theft Refuse]]>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
+	<br>
+<<else>>
+	<<endevent>>
+	<<beastNEWinit 1 dog>>
+	你感到自己无路可逃，
+	<<if $monster isnot 1 and $bestialitydisable is "t">>
+		<<endevent>><<generate1>><<person1>>
+		<<set _whitWall to ($NPCList[0].pronoun is "m" ? "man" : "woman")>>
+		你听到身后有一声喊叫。有人来了。
+	<<else>>
+		<<set _whitWall to "dog">>
+		你听到身后传来一声咆哮。你快速奔跑，咆哮声变成了吠叫。
+	<</if>>
+	<br><br>
+
+	你从洞里探出身子。惠特尼从你手里接过烟盒。你试着爬过去，但你被卡住了。
+
+	<<if $speech_attitude is "meek">>
+		"帮，帮帮我，"你说。
+	<<elseif $speech_attitude is "bratty">>
+		"不要只是站在那儿，"你说。
+	<<else>>
+		"请帮帮忙，"你说道。
+	<</if>>
+	<br><br>
+
+	<<if _whitwall is "dog" and $monster isnot 1 and $bestialitydisable is "t">>
+		<<endevent>>
+		<<npc Whitney>><<person1>>
+		惠特尼笑了。"不，我可不想因为帮小偷而被抓到。再见，荡妇。"
+		<<npcincr Whitney lust 5>><<glust>>
+		<br><br>
+
+		你扭动着身子，设法在狗靠近你之前穿过那个洞。你在挣扎的过程中受伤了，还弄坏了你的衣服。
+		<<npcincr Whitney lust 5>><<glust>><<beastescape>>
+		<br><br>
+
+		<<endevent>>
+
+		<<link [[继续|Elk Street]]>><<endevent>><</link>>
+		<br>
+	<<elseif $whitneyromance is 1>>
+		<<endevent>>
+		<<npc Whitney>><<person1>>
+		惠特尼想了一会儿，然后抓住了你的手臂。<<He>>把你拉到安全的地方。
+		<<if _whitWall is "dog">>
+			"不能让那条狗对你为所欲为。否则你闻起来会变得很怪。"
+		<<else>>
+			"不能让某个<<if _whitWall is "man">>变态<<else>>荡妇<</if>>对你为所欲为。否则你也可能爽到。"
+		<</if>>
+		<<He>>和<<his>>的朋友们笑了，"回头见，<<girl>>。谢谢你的帮助。"
+		<<npcincr Whitney lust 5>><<glust>>
+		<br><br>
+
+		<<endevent>>
+
+		<<link [[继续|Elk Street]]>><<endevent>><</link>>
+		<br>
+	<<else>><!-- Modified for Beast People -->
+		惠特尼笑了。"不，我可不想因为帮小偷而被抓到。再见，荡妇。"
+		<<npcincr Whitney lust 5>><<glust>>
+		<br><br>
+
+		<<if _whitWall is "dog">>
+			你感觉到<<beasttype>>在拱你的屁股。
+			<br><br>
+
+			<<link [[继续|Bully Theft Dog]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			你感到一只手在你的背后。"你得为那些烟付钱，小东西，"<<he>>喘着气说，"或者别的什么东西。"
+			<br><br>
+
+			<<link [[继续|Bully Theft No Dog]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,32 @@
+:: Bath Robin Join 2 []
+<<effects>>
+
+<<if $phase is 0>>
+	罗宾僵住了，<<his>>脱衬衫的动作卡在了中途。"那，那好吧，"<<he>>有些困惑，"我先回房间了……"<<He>>尴尬地穿上衣服离开浴室。
+	<br><br>
+
+	<<link [[继续|Bath]]>><<endevent>><</link>>
+<<else>>
+	罗宾微笑着脱光衣服，然后进入浴缸。浴缸不是双人型的大浴缸，容纳两个人有些勉强。罗宾往角落里挪了挪为你腾出空间。"过来吧，"<<he>>温柔地把你的头拉到<<his>>的膝盖上。<<He>>把洗发水涂抹到你的头发上，然后洗了起来，<<his>>轻轻哼唱着你熟悉的小调。
+	<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+	<br><br>
+
+	洗完头发后，罗宾开始帮你清洗身体。罗宾帮你清洗着身上的灰尘和污垢，你也帮<<him>>一起清洗。
+	<<if C.npc.Robin.dom gte 80 and C.npc.Robin.lust gte 60>>
+		<<he>>给你洗澡时，<<his>>的手移动到了你的<<breasts>>和<<genitals>>上。你能感觉到<<his>>的动作从擦洗慢慢变成了揉捏、摸索。
+		<br><br>
+
+		<<ind>><<link [[坚持只洗澡|Robin Bath Out]]>><<set $phase to 1>><<trauma -6>><<stress -6>><<npcincr Robin dom -1>><</link>><<lstress>><<ltrauma>><<ldom>>
+		<br>
+		<<ind>><<link [[拥抱|Robin Bath Sex]]>><<set $phase to 1>><<npcincr Robin dom 1>><<set $sexstart to 1>><</link>><<gdom>>
+	<<else>>
+		你们互相替对方擦拭身体，然后用水冲干净泡沫。最后，你们俩都洗得干干净净。
+		<br><br>
+
+		<<getouticon>><<link [[离开|Robin Bath Out]]>><<set $phase to 0>><</link>>
+		<<if $promiscuity gte 15>>
+			<br>
+			<<ind>><<askicon>><<link [[请求更近一步|Robin Bath Sex]]>><<set $phase to 0>><<npcincr Robin love 1>><<npcincr Robin dom 1>><<set $sexstart to 1>><</link>><<glove>><<gdom>>
+		<</if>>
+	<</if>>
+<</if>>

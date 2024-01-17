@@ -1,0 +1,36 @@
+:: Elk Sydney Walk []
+<<set $outside to 1>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>><<sydneySchedule>>
+你点点头，悉尼对你笑了笑。
+<<if $bus isnot "rehearsal">>
+	<<He>>整理完东西后，你和<<him>>一起走到麋鹿街。
+<<else>>
+	你和<<him>>走到麋鹿街。
+<</if>>
+<<set $bus to "elk">>
+<<if $sydneyromance is 1>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		在你们走路的时候，<<he>>轻轻牵住了你的手。
+	<<else>>
+		当你走路时，<<He>>的手紧张地碰了碰你，于是你握住了它。
+	<</if>>
+	<<takeHandholdingVirginity "Sydney" "romantic">>
+	<br><br>
+<</if>>
+你在路上和<<him>>聊着天。
+<<if $adultshopunlocked is undefined>>
+	<<print either(
+		`"谢谢你能来陪我，独自行走是很孤独的。"`,
+		`"人们已经在谈论这家店了，多少有点尴尬。"`,
+		`悉尼时而抚摸着<<his>>的十字架。`
+	)>>
+<<else>>
+	<<print either(
+		`"谢谢你能来陪我，独自行走是很孤独的。"`,
+		`"我们的店有很多顾客，我反正一点也不意外。"`,
+		`悉尼时而抚摸着<<his>>的十字架。`
+	)>>
+<</if>>
+<br><br>
+你们相安无事的抵达了麋鹿街。悉尼朝你挥手告别，然后走进了西里斯的商店。
+<br><br>
+<<link [[继续|Elk Street]]>><<endevent>><<set $eventskip to 1>><</link>>

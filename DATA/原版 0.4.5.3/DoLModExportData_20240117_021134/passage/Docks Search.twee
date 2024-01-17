@@ -1,0 +1,110 @@
+:: Docks Search []
+<<effects>>
+<<skul_dock_init>>
+所有集装箱看上去几乎都一样。你一个个的撬开挂锁，开箱查看。
+
+<<if $skulduggery lt 500>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+
+<<rng 6>>
+<<if $rng is 1>>
+	你找到了许多建材。
+<<elseif $rng is 2>>
+	你找到了许多果蔬。
+<<elseif $rng is 3>>
+	你找到了许多农具。
+<<elseif $rng is 4>>
+	你找到了许多汽车零部件。
+<<elseif $rng is 5>>
+	它们都是空的。
+<<else>>
+	你找到了许多桶原油。
+<</if>>
+<<if $rng isnot 5>>
+	虽然量大值钱，但你带走不了那么多。
+<</if>>
+
+<br><br>
+
+<<if $skul_dock[$bus].contents is "gold">>
+	<<if $skul_dock[$bus].state is "known">>
+		你知道这附近有黄金。你又撬开了一个集装箱，里面装满了棕色的包裹。你认出了这些包裹，开始在里面搜寻着，最终找到了其中一个包裹，比其他的包裹都重。你撕开包裹，里面有一小根金条。
+		<br><br>
+		<<earnFeat "Employee Benefits">>
+		<<link [[拿走 (0:05)|Docks Gold]]>><<pass 5>><<crimeUp 3000 "thievery">><<set $blackmoney += 3000>><</link>><<crime "thievery">>
+		<br>
+	<<else>>
+		你继续搜寻着，发现了一个装满棕色包裹的集装箱。
+		<br><br>
+
+		<<link [[仔细搜寻 (1:00)|Docks Gold Careful]]>><<pass 60>><</link>>
+		<br>
+		<<link [[撕开包裹 (0:05)|Docks Gold Tear]]>><<crimeUp 100 "thievery">><<pass 5>><</link>><<crime "thievery">>
+		<br>
+	<</if>>
+
+<<elseif $skul_dock[$bus].contents is "aphrodisiacs">>
+	<<if $skul_dock[$bus].state is "known">>
+		你知道那种奇怪的液体就在这附近。你又撬开了一个集装箱，里面发出了紫色的光。集装箱里有好几个罐子，上面标注着危险物质的字样，但其中只有一罐在发着光。奇怪的液体在这个罐子里翻腾着。
+		<br><br>
+	<<else>>
+		你继续搜索着。你又撬开了一个集装箱，里面发出了紫色的光。集装箱里有好几个罐子，上面标注着危险物质的字样，但其中只有一罐在发着光。奇怪的液体在这个罐子里翻腾着。
+		<br><br>
+	<</if>>
+
+
+	<<link [[拿走 (0:05)|Docks Aphrodisiacs]]>><<pass 5>><<crimeUp 1200 "thievery">><<set $blackmoney += 1200>><</link>><<crime "thievery">>
+	<br>
+<<elseif $skul_dock[$bus].contents is "electronics">>
+	<<if $skul_dock[$bus].state is "known">>
+		你知道这些集装箱里肯定有可以带走的东西。你又撬开了一个集装箱，里面装满了电子产品。电视太大搬不走，但也有小件的东西。虽然黑市上卖不出全价，但至少能值回点辛苦费。
+		<br><br>
+	<<else>>
+		你又搜刮了一个集装箱，里面装满了电子产品。电视，麦克风，大多数都太大，难以搬走，但也有小件的东西。虽然黑市上卖不出全价，但至少能值回点辛苦费。
+		<br><br>
+	<</if>>
+
+	<<link [[拿走 (0:05)|Docks Electronics]]>><<pass 5>><<crimeUp 300 "thievery">><<set $blackmoney += 300>><</link>><<crime "thievery">>
+	<br>
+<<elseif $skul_dock[$bus].contents is "fertiliser">>
+	<<if currentSkillValue('tending') gte 400>>
+		<<if $skul_dock[$bus].state is "known">>
+			你知道这些集装箱里肯定有可以带走的东西。你又撬开了一个集装箱，里面装满了肥料袋。你知道你带不走多少，但稍微拿一点以后应该用得上。
+			<br><br>
+		<<else>>
+			你又搜刮了一个集装箱，里面装满了肥料袋。你知道你带不走多少，但稍微拿一点以后应该用得上。
+			<br><br>
+		<</if>>
+		<<link [[拿走一些 (0:05)|Docks fertiliser]]>><<pass 5>><<crimeUp 200 "thievery">><<set $fertiliser.current++>><</link>><<crime "thievery">>
+	<<else>>
+		你又搜刮了一个集装箱，里面装满了似乎是装着土的袋子。
+		<br><br>
+	<</if>>
+	<br>
+<<elseif $skul_dock[$bus].contents is "equipment">>
+	<<if $skul_dock[$bus].state is "known">>
+		你知道这附近有特种装备。你又撬开了一个集装箱，里面装满了板条箱，上面画着粉色的标志。灯光照亮了集装箱深处的什么东西。
+		<br><br>
+	<<else>>
+		你又撬开了一个集装箱，里面装满了板条箱，上面画着粉色的标志。灯光照亮了集装箱深处的什么东西。是一件黑色的猫女服。
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Docks Catsuit]]>><</link>>
+	<br>
+
+
+<<else>>
+	你打开了最后一个集装箱。里面是空的。
+	<br><br>
+<</if>>
+
+
+<<link [[离开|Docks Sneak]]>><<set $eventskip to 1>><</link>>
+<br>
+
+<<set $skul_dock[$bus].state to "empty">>

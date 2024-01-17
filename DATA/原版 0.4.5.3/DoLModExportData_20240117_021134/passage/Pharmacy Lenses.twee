@@ -1,0 +1,53 @@
+:: Pharmacy Lenses []
+玻璃后面陈列着各种各样的彩色隐形眼镜，你可以通过购买镜片来改变你眼睛的颜色。
+<<if $makeup.owned.eyelenses.length + $makeup.owned.custom_eyelenses.length gt 0>>
+	<br>
+	你已经拥有下列颜色的镜片:
+	<span style="display: inline-block;">
+	<<set _lenses to []>>
+	<<run $makeup.owned.eyelenses.forEach(colour => {
+		const colourClass = colour.replace(/ /g, '-')
+		_lenses.push(`<span @class="'eye-${colourClass}'"><span class="left-iris" style="color:#6E4E11;">${setup.colourName(colour)}</span></span>`);
+	})>>
+	<<if ($makeup.owned.custom_eyelenses.length gt 0)>>
+		<<set _uniqueCustomLenses to [...new Set($makeup.owned.custom_eyelenses)]>> /* Filter out non-unique lenses */
+		<<run _uniqueCustomLenses.forEach(lens => {
+			const colour = window.colorNameTranslate(lens, "spaced name");
+			const colourClass = nullable(nullable($custom_eyecolours.find(c => c.name is colour)).canvasfilter).blend; /* nullable fix to be removed when we can use ?. again */
+			if (colourClass){
+				_lenses.push(`<span class="eye-custom"><span @style="'color:${colourClass}'">${colour}</span></span>`);
+			}
+		})>>
+	<</if>>
+
+	<<print _lenses.join("、")>>。/* Print the list */
+	</span>
+<</if>>
+<br><br>
+
+<<set _availableColours = ["dark blue", "light blue", "purple", "hazel", "amber", "green", "light green", "lime green", "grey", "light grey", "red", "pink"].filter(x => !$makeup.owned.eyelenses.includes(x))>><<set _availableColoursEN = ["dark blue", "light blue", "purple", "hazel", "amber", "green", "light green", "lime green", "grey", "light grey", "red", "pink"]>><<set _availableColoursCN = ["深蓝色", "浅蓝色", "紫色", "榛子色", "琥珀色", "绿色", "浅绿色", "青绿色", "灰色", "浅灰色", "红色", "粉红色"]>>
+<<if _availableColours.length == 0>>
+	你已经收集了隐形眼镜的所有的颜色款式，现在没有什么可以让你买的了。
+	<br><br>
+<<else>>
+	每副镜片的价格是<span class="gold">£200</span>。
+	<br>
+	<<set _lensChoice = _availableColours[0]>>
+	<<for _i, _colour range _availableColours>>
+		<label><span @class="'eye-' + _colour.replace(/ /g, '-')"><span class="colour-eye" style="color:#6E4E11;"><<print _availableColoursCN[_availableColoursEN.indexOf(_colour)]>></span></span>&nbsp;<<print '<<radiobutton "_lensChoice" "'+_colour+'" ' + (_lensChoice is _colour ? "checked" : "") + '>>'>></label> |
+	<</for>>
+	<br><br>
+
+	<<if $money gte 20000>>
+		<<link [[购买并送回家中|Pharmacy Lenses]]>><<set $money -= 20000>><<set $makeup.owned.eyelenses.push(_lensChoice)>><</link>>
+		<br>
+		<<link [[购买并穿戴|Pharmacy]]>><<set $money -= 20000>><<set $makeup.owned.eyelenses.push(_lensChoice)>><<set $makeup.eyelenses = {"left":_lensChoice, "right":_lensChoice}>><</link>>
+		<br>
+	<<else>>
+		<span class="purple">你买不起这个东西。</span>
+		<br>
+	<</if>>
+<</if>>
+<<link [[要求定制彩色隐形眼镜|Pharmacy Ask Custom Lenses]]>><</link>>
+<br>
+<<link [[离开|Pharmacy]]>><</link>>

@@ -1,0 +1,70 @@
+:: Robin Brothel Home []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+你们到达孤儿院，一起走下了公共汽车。罗宾送你回了你的房间。
+<br><br>
+
+<<if $robinBrothelVisit gte 1>>
+	<<if _robin.trauma gte 50>>
+		<<He>>强颜欢笑。"谢谢你和我一起回家，"<<he>>含泪地笑着说。
+		"一想到失去你，我就害怕……"<<He>>紧紧地抱着你，<<his>>的双臂紧张地颤抖着。
+		<br>
+		"你不需要独自承受这一切，"<<he>>抽泣着，"我们会熬过去的，贝利阻止不了我们，我们不会让<<nnpc_him "Bailey">>为所欲为。"
+		<br>
+		<<He>>紧紧地抱住着你，过了好久才松开手。<<Hes>>微笑着，但是眼中却含着泪水。
+	<<else>>
+		<<He>>对你微笑。"你能回家真的太好了，我们肯定能想出办法的。"
+		<<He>>将你抱在<<his>>的怀里，轻轻抚摸你的后脑勺。
+		<br>
+		"你不需要独自承受这一切，"<<he>>轻声说，"我们会熬过去的，贝利阻止不了我们。"
+		<br>
+		<<He>>紧紧地抱着你，过了好久才松开手。<<Hes>>对你微笑。
+	<</if>>
+<<else>>
+	<<if _robin.trauma gte 50>>
+		进房间后，罗宾坐到了床上。
+		<br><br>
+		你把一只手放在罗宾的肩膀上，温柔地安抚<<him>>。这似乎让<<his>>稍微打起精神来了。
+		<br><br>
+		"对不起。我真的很在乎你，而且……"<<He>>叹了口气，看起来很沮丧，"请不要生气……我只是不想你落得和我一样的下场。"
+		<br>
+		你紧紧抱着<<him>>直到<<he>>停止颤抖。"我们会想办法的，"<<he>>说着，无力地笑了。
+	<<else>>
+		一进房间，<<he>>就开口了。"对不起。我并不想对你的工作说些什么，但是我很担心你，而且……"
+		<<He>>叹了口气，看起来很沮丧。"我希望你不会生气。"
+		<br>
+		你把一只手放在罗宾的肩膀上，温柔地安抚<<him>>。这似乎让<<his>>稍微打起精神来了。
+		"我们会想办法的，"<<he>>说着，微微一笑。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if Time.dayState is "night">>
+	罗宾瞥了一眼钟。
+	<<if _robin.trauma gte 50>>
+		<<He>>打了个呵欠。"我可能得回自己的房间了，"<<he>>无奈地说。
+	<<else>>
+		"时间不早了，"<<he>>打着哈欠，"该休息了，我们都需要些休息。"
+	<</if>>
+	<br><br>
+
+	<<link [[点头|Robin Brothel Sleep]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[叫罗宾陪着你|Robin Brothel Sleep]]>><<set $phase to 1>><<stress -6>><<trauma -6>><<npcincr Robin love 1>><<npcincr Robin dom 1>><<npcincr Robin lust 1>><</link>><<lstress>><<ltrauma>><<glove>><<gdom>><<glust>>
+	<br>
+<<else>>
+	罗宾在你房间里又待了一会儿，确保你没事。几分钟后，<<he>>亲了亲你的脸颊，然后站了起来。
+	<br>
+	<<if _robin.trauma gte 50>>
+		"我可能得回自己的房间了。"<<he>>无奈地说。<<He>>在门口徘徊片刻，关切地盯着你。"注意安全。"
+	<<else>>
+		"我要回房间了，"<<he>>在门口徘徊片刻，关切地盯着你，"一定要注意安全。"
+	<</if>>
+	<br><br>
+	<<He>>拖着脚走进走廊，把你一个人留在了房间里。
+	<br><br>
+
+	<<link [[继续|Bedroom]]>><<endevent>><</link>>
+	<br>
+<</if>>

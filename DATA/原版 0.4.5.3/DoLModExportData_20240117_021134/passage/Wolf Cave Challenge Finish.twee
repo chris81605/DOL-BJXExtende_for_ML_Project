@@ -1,0 +1,49 @@
+:: Wolf Cave Challenge Finish []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+
+	黑狼冷静下来了。其他<<beastsplural>>看起来很感激，松了口气。
+	<<gharmony>>
+	<br><br>
+
+	<<tearful>>你爬起来，站住脚跟。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<elseif $enemyhealth lte 0>>
+	整个狼群都在看着，看着黑狼翻起<<bhis>>后背，露出肚子表示臣服。
+	<br><br>
+
+	<<tearful>>你嚎叫起来。其他<<beastsplural>>跟着你一同嚎叫着。
+	<<if $monster is 1>>
+		黑狼说道。"你……很强。比黑狼更强。我知道当时带着你是正确的。"
+	<</if>>
+	黑狼一瘸一拐地走开，去照顾它的伤势了。<span class="gold">现在你可以带领狼群狩猎了。</span>
+	<<set $wolfpackleader to 1>><<earnFeat "Head of the Pack">>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<else>>
+	你倒在地上，已经没法再战斗下去了。黑狼抓着你的脖子<<if $monster isnot 1>>用嘴叼住<</if>>，把你按在地上片刻，然后放开了你。
+	<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<if $wolfpackpoisoned isnot 1>>
+		<i>黑狼非常强壮。但一定有什么办法可以让局面均势。</i>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>

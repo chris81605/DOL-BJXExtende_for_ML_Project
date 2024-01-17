@@ -1,0 +1,21 @@
+:: Market Street Urchin Help Pay []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">>
+<<if $phase % 10 is 1 and $rng % 3 is 0>> /* price not yet agreed? 1 in 3 chance of a price hike */
+	<<set $urchin_debt *= 2>>
+	"好吧，"摊主说道："但自从<<person1>><<he>>试图从我这里偷东西后，价格就涨到了<<printmoney $urchin_debt>>。"
+<<else>>
+	"好吧，"摊主说："付了这<<printmoney $urchin_debt>>就行，然后从我眼前消失。你们该庆幸今天我很忙。"
+<</if>>
+<br><br>
+<<if $money gte $urchin_debt>>
+	你向市场摊主付款。<<ghope>><<hope 1>><<set $money -= $urchin_debt>>
+	<br><br>
+	摊主仔细数过之后便挥手让你们俩离开。"还不快走。"
+	<br><br>
+	<<link [[继续|Connudatus Street]]>><<famegood 20>><<unset $urchin_debt>><<endevent>><</link>>
+	<br>
+<<else>>
+	<span class="red">你负担不起。</span>
+	<br><br>
+	<<link [[解释说你的钱不够|Market Street Urchin Not Pay]]>><<famegood 2>><</link>><br>
+<</if>>

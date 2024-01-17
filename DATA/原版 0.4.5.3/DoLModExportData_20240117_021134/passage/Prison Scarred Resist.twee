@@ -1,0 +1,20 @@
+:: Prison Scarred Resist []
+<<effects>>
+
+你反抗。
+
+<<if $prison.scarred gte 80>>
+	<<scarred_inmate 0 cap>>沮丧地咆哮道，"你真是个臭小孩。行吧。"<<He>>拧开你项圈上的绳子。"走。"<<llove>><<prison_rep scarred -5>>
+	<br><br>
+	<<prison_detach_leash>>
+	<span class="green">你获得了<<scarred_inmate 0 apo>>的保护。</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<prison_unbind>>
+	<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+<<else>>
+	<<scarred_inmate 0 cap>>咆哮。
+	<br><br>
+
+	<<link [[继续|Prison Scarred Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<</if>>

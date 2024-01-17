@@ -1,0 +1,50 @@
+:: Sydney Library Rescue Rest []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+你再也撑不住了，缓缓地闭上双眼。你能感受到悉尼正抚摸着你的头发，<<his>>平稳的呼吸让你慢慢进入浅眠。<br>一个吻印在了你的额头上。
+<<stress -3>><<lstress>>
+<br><br>
+
+你没一会便醒了，而悉尼已经离开。
+<<if $exposed gte 1 or $exposedTemp is 1>>
+	<<unset $exposedTemp>>
+	在<<his>>原来的位置上放了一堆校服，还有一张纸条。
+	<<if $player.gender_appearance is "m">>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<set $clothingselector to "f">>
+			那些都是女装。纸条上写着："必须回去工作了。抱歉，这是我能拿出来的全部衣服 ;)"  ——悉尼
+		<<else>>
+			<<set $clothingselector to "m">>
+			纸条上写着："必须回去工作了。好好休息。爱你。" ——悉尼
+		<</if>>
+	<<else>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<set $clothingselector to "m">>
+			那些都是男装。纸条上写着："必须回去工作了。抱歉，这是我能拿出来的全部衣服 ;)"  ——悉尼
+		<<else>>
+			<<set $clothingselector to "f">>
+			纸条上写着："必须回去工作了。好好休息。爱你。" ——悉尼
+		<</if>>
+	<</if>>
+	<br><br>
+	<<if $bodywritingLvl gte 2>>
+		<<sydneyBodywritingLocation>>
+		<<if _writingFail isnot 1>>
+			你看向镜子，发现身上留有马克笔的痕迹。你的<<bodypart _bodypart>>现在写上了: <<sydneyBodywriting sleepyhead>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<link [[换好衣服然后离开 (0:01)|School Library]]>><<schoolspareclothes>><<endevent>><<set $eventskip to 1>><<pass 1>><</link>>
+	<br>
+<<else>>
+	在<<his>>原来的位置上有一张纸条。纸条上写着："必须回去工作了，好好休息。爱你。" ——悉尼
+	<br><br>
+	<<if $bodywritingLvl gte 2>>
+		<<sydneyBodywritingLocation>>
+		<<if _writingFail isnot 1>>
+			你看向镜子，发现身上留有马克笔的痕迹。你的<<bodypart _bodypart>>现在写上了: <<sydneyBodywriting sleepyhead>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<link [[继续|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

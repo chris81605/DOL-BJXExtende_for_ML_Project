@@ -1,0 +1,46 @@
+:: Wolf Cave Breastfeed []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 1>>
+	你也鼓励那些不那么自信的狼吃奶。
+<<else>>
+	<<if $worn.upper.exposed lte 0 or $worn.under_upper.exposed lte 0>>
+		<<upperstrip>><<underupperstrip>>你露出你的<<breasts>>，鼓励狼崽吃奶。
+	<<else>>
+		你鼓励小狼吃奶。
+	<</if>>
+<</if>>
+<<pass 5>>
+<<if $milk_amount gte 1>>
+	<<if $wolfcavebreast is undefined>>
+		<<set $wolfcavebreast to 1>>
+	<<else>>
+		<<set $wolfcavebreast += 1>>
+	<</if>>
+
+	小狼们闻着你的乳房。一只含住了一个乳头，用笨拙的舔来戏弄你。<<deviancy3>>
+
+	<<if $wolfcavebreast is 3>>
+		最后的幼崽很满意。他们蜷缩起来打盹。
+		<<gharmony>>
+	<<else>>
+		其他的狼都在争抢机会。
+	<</if>>
+	<br><br>
+	<<transform wolf 1>>
+	<<breastfeed 5>>
+	<<if $wolfcavebreast isnot 3>>
+		<<link [[继续喂养 (0:05)|Wolf Cave Breastfeed]]>><<set $phase to 1>><</link>><<deviant3>>
+		<br>
+	<</if>>
+	<<link [[停止|Pups Den]]>><<clotheson>><<set $phase to 0>><</link>>
+	<br>
+<<else>>
+
+	奶水不会从你的乳头流出。<span class="pink">你用完了。</span>狼在沮丧中继续咬着。
+	<<gpain>><<pain 6>><<milkvolume 1>>
+	<br><br>
+
+	<<link [[继续|Pups Den]]>><<clotheson>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

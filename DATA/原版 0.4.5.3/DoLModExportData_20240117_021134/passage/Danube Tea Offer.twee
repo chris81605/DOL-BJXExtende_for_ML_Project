@@ -1,0 +1,42 @@
+:: Danube Tea Offer []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<<set $tipmod to 2>><<tipset>>
+
+	手指颤抖着，<<he>>看了看<<his>><<wallet>>。"我会给你<<printmoney $tip>>，"<<he>>说道。"拜托了，我需要这个。"
+	<br><br>
+
+	<<link [[接受|Danube Tea Sex]]>><<set $sexstart to 1>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[拒绝|Danube Tea Refuse]]>><</link>>
+	<br>
+
+<<else>>
+	<<rng>>
+	<<if $rng gte 81>>
+
+		"我们已经同意了你的价格，"<<he>>说着，用更大的力气抓住了你。
+		<br><br>
+
+		<<link [[继续|Danube Tea Sex]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<<else>>
+
+		"对不起，"<<he>>说道。"但是我想你应该拿着你的钱走人，我没有意识到我让一个娼妓进来了。"
+		<<He>>给你<<moneyGain 25>>并示意你离开。
+		<br><br>
+
+		<<link [[继续|Danube Street]]>><<endevent>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

@@ -1,0 +1,85 @@
+:: Maths Whitney Oral []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+	<<set $position to "doggy">>
+	你想要拒绝，但还是觉得服从惠特尼是更简单的选择。当瑞沃在教室的另一边被分散了注意力的时候，你溜到了惠特尼的桌子底下。你得快点，不然瑞沃会注意到的。
+	<br><br>
+
+	你钻到了桌子下面，惠特尼<<npcUndressText $NPCName[$NPCNameList.indexOf("Whitney")] "lower" "self">>，
+	<<set $enemyanger to 70>>
+	<<if $NPCList[0].penis isnot "none">>
+		露出了<<him>>已经勃起的肉棒。
+	<<else>>
+		露出了<<his>>的小穴。
+	<</if>>
+	<<He>>抓着你的头发让你靠近。
+	<br><br>
+
+	<<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $head to "grappled">><<set $NPCList[0].mouth to "none">><<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
+	<<set $timer to 10>>
+	<<enable_rescue>>
+<</if>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $position to "doggy">>
+	你确认了瑞沃在教室的另一边被分散了注意力，然后溜到了惠特尼的桌子底下。你得快点，不然瑞沃会注意到的。
+	<br><br>
+
+	你钻到了桌子下面，惠特尼<<npcUndressText $NPCName[$NPCNameList.indexOf("Whitney")] "lower" "self">>，
+	<<set $enemyanger to 70>>
+	<<if $NPCList[0].penis isnot "none">>
+		露出了<<him>>已经勃起的肉棒。你俯下身去，用舌头从根部开始舔到龟头，让<<him>>感觉到你呼吸吹拂在<<his>>皮肤上。
+	<<else>>
+		露出了<<his>>的小穴。你用舌头滑过<<his>>的阴唇，让<<him>>感觉到你的呼吸正吹拂着<<his>>皮肤。
+	<</if>>
+	<<He>>把手伸到桌子下面，抓住了你的头发。
+	<<if $phase is 2>>
+		<<promiscuity1>>
+	<<elseif $phase is 1>>
+		<<promiscuity4>>
+	<<else>>
+		<br><br>
+	<</if>>
+
+	<<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $head to "grappled">><<set $NPCList[0].mouth to "none">><<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
+	<<set $timer to 10>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+
+<<if $timer gte 8>>
+	<span class="blue">瑞沃在教室的另一边被分散了注意力。</span>
+<<elseif $timer gte 4>>
+	<span class="purple">瑞沃正在朝这边走来，不过被其他学生分散了注意力。</span>
+<<elseif $timer gte 1>>
+	<span class="pink">已经注意到了你空着的座位。</span>
+<<else>>
+	<span class="red">瑞沃已经很接近了！</span>
+<</if>>
+
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<set $enemyarousal += 20>>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Maths Whitney Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Maths Whitney Oral]]>><</link>></span><<nexttext>>
+<</if>>

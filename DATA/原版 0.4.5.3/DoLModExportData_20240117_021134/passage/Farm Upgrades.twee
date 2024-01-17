@@ -1,0 +1,36 @@
+:: Farm Upgrades []
+<<effects>>
+<<farm_work_update>>
+<<if $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	你坐在艾利克斯旁边，查看着农场的各种升级方案。
+	<br><br>
+<<else>>
+	你坐在桌子前，查看着农场的各种升级方案。
+	<br><br>
+<</if>>
+
+<<farm_upgrades_current>>
+<<farm_upgrades_status>>
+
+<<if ($sexStats.anus.pregnancy.motherStatus gte 1 or $sexStats.vagina.pregnancy.motherStatus gte 1) and !$farm.parasitebarn and $farm.build isnot "parasites 1">>
+	你的思绪转向了你亲自孕育的各种小生物。农场有你照顾它们所需的一切。<span class="blue">一个主意突然涌上心头。</span>
+	<br>
+	<<ind>><<link [[为你的寄生物建造畜棚|Farm Upgrades Parasite Barn]]>><</link>>
+	<br><br>
+<</if>>
+<<if !$alex_greenhouse>>
+	附近的垃圾桶里有一张揉皱的红墨水涂满的纸。
+	<br>
+	<<ind>><<link [[查看|Farm Upgrades Greenhouse]]>><</link>>
+	<br><br>
+<</if>>
+
+<<if _upgrade_count gte 8>>
+	<<earnFeat "The Rival Estate">>
+<</if>>
+<<if _upgrade_count gte 1>>
+	<<earnFeat "The Rival Farm">>
+<</if>>
+
+<<getouticon>><<link [[离开|Farm Alex Bedroom]]>><</link>>
+<br>

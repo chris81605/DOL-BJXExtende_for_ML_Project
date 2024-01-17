@@ -1,0 +1,90 @@
+:: Adult Shop Sydney Cuffed Finish []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>>
+<<run statusCheck("Sydney")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<tearful>>你解开了悉尼的手铐。<<his>>的双手被解开，落在了你肩膀上。
+	<<if _sydneyStatus.includes("corrupt")>>
+		而<<he>>则顺势抱住了你。
+		<<if _sydneyChastity and $sydneyChastityKnown>>
+			<<sydneyChastityMessage>><<npcincr Sydney lust 3>><<ggslust>>
+		<<else>>
+			<<npcincr Sydney lust -20>><<lllslust>>
+		<</if>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+		<br><br>
+
+		<<He>>将手铐绕在手指上旋转，"也许下次，我会把你锁起来。我打赌你会喜欢的。"<<arousal 100>><<garousal>><<npcincr Sydney lust 1>><<glust>>
+	<<else>>
+		而<<he>>则倒在了你的怀里。
+		<<if _sydneyChastity and $sydneyChastityKnown>>
+			<<sydneyChastityMessage>><<npcincr Sydney lust 3>><<ggslust>>
+		<<else>>
+			<<npcincr Sydney lust -20>><<lllslust>>
+		<</if>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+		<br><br>
+
+		<<if $corruptionRollover is 1>>
+			<<unset $corruptionRollover>>
+			<<He>>做了个深呼吸，"如此无助的感觉，确实让人有些害怕。但……"<<He>>脸颊微红，" 这感觉也还不错，<span class="lewd">我们什么时候可以再来一次？</span>"
+		<<else>>
+			<<Hes>>浑身颤抖着。"我不喜欢那种无力感……但是如果是你的话……"<<He>>叹了口气，抬起头，脸上挂着一缕微笑，"反正，你开心我就开心。"
+		<</if>>
+		<<npcincr Sydney purity -1>><<lspurity>>
+	<</if>>
+	<br><br>
+
+	悉尼紧紧抱着你的胳膊，你们俩就这么回到了店里，继续工作。
+<<elseif $enemyhealth lte 0>>
+	悉尼痛叫一声，把你踢开。
+	<<if _sydneyStatus.includes("corrupt")>>
+		"认真的？趁我被绑住，然后就这么对我？"
+	<<else>>
+		"等，等等！这太痛了！"
+	<</if>>
+	你不禁注意到<<hes>>通红的脸。<<npcincr Sydney lust 1>><<glust>>
+	<br><br>
+
+	房间的门被轰开，西里斯冲了进来。"悉尼？没事吧？我听到……"
+	<br>
+	<<nnpc_He "Sirris">>看见眼前的光景，声音弱了下去。<<nnpc_he "Sirris">>皱了皱眉，"我这是打扰到你们了吗？"
+	<br>
+	悉尼咬紧牙关，努力保持着冷静。"我没事，帮我解开这个吧。"
+	<br><br>
+
+	西里斯冲过你身旁，解开了悉尼的手铐，<<his>>胳膊被解开，落了下来。<<He>>嘟囔着什么，出去了。西里斯瞪了你一眼，皱了皱眉，跟着悉尼一起离开了。<<npcincr Sirris love -5>>
+	<br><br>
+
+	<<tearful>>你跟着他们出去了。
+<<else>>
+	<<switch _sydneyStatus>>
+		<<case "pure">>
+			悉尼似乎松了一口气，但还是担心地看了你一眼。"你……你不会就要这样丢下我吧？"
+		<<case "corrupt">>
+			"呃，这可真是浪费时间。"悉尼不满地叹了一声，"你知道把自己这样铐起来有多难受吗？"
+		<<default>>
+			"呃……好吧。"<<He>>下意识想要离开，但被手铐扯了回去。<<He>>十分尴尬地看向你。"来帮我一下吧？"
+	<</switch>>
+	<br><br>
+
+	<<tearful>>你解开了悉尼的手铐，<<He>>揉了揉手腕。
+	<br><br>
+	<<switch _sydneyStatus>>
+		<<case "pure">>
+			"那玩意戴起来真没看上去那么舒服。"<<he>>一边嘟囔着一边走了出去，又担心地看了你一眼。"下次要做的话……就别这样了，好吗？"
+		<<case "corrupt">>
+			"你老是这样临阵脱逃，下次要换我把你铐起来。"<<He>>朝你眨了眨眼，走了出去。你不知道<<hes>>是认真的还是在开玩笑。<<stress 2>><<arousal 100>><<npcincr Sydney lust 1>><<gstress>><<garousal>><<gslust>>
+		<<default>>
+			"感觉……没我想象的那么好玩。"<<He>>皱了皱眉，小声嘟囔着，"下次要么把你铐起来好了……"<<arousal 50>><<npcincr Sydney lust 1>><<garousal>><<glust>>
+	<</switch>>
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[继续|Adult Shop]]>><</link>>
+<br>

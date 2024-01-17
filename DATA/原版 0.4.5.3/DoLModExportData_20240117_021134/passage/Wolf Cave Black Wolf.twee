@@ -1,0 +1,59 @@
+:: Wolf Cave Black Wolf []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<if $phase is 0>>
+		你把手伸到<<beasttype>>底下，用手握住那大东西。
+		<<npchand>><<deviancy1>>
+	<<elseif $phase is 2>>
+		<<clothesstrip>><<deviancy5>>
+		你向前弯曲，双手和膝盖呈顺从的姿势，然后放下你的肩膀，把你的屁股翘起来，把你的<<print ($player.vaginaExist ? '<<pussy>>': 'anus')>>暴露在狼面前。<<bHe>>压在你身上，让你在它巨大的体型下保持稳定。
+		<<npc_attempt_sex>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+		<<set $NPCList[0].location.head to "head">>
+		<<set $NPCList[0].location.genitals to "genitals">>
+	<<elseif $phase is 3>>
+		<<clothesstrip>><<deviancy5>>
+		你靠近黑狼，把嘴靠近<<bhis>>的深色皮毛。你试图顽皮地咬<<bhim>>，但黑狼把<<bhis>>的爪子放在你身上，然后毫不费力地把你撞倒在地，<<bHis>>巨大的重量和体型让你无路可逃。
+		<<npc_attempt_sex>>
+		<<set $position to "missionary">>
+		<<set $position_lock to 1>>
+		<<set $NPCList[0].location.head to "head">>
+		<<set $NPCList[0].location.genitals to "genitals">>
+	<<else>>
+		你靠在<<beasttype>>下面。
+		<<npcoral>><<deviancy4>>
+	<</if>>
+	<<blackwolfhealth>><<set $enemytrust -= 20>>
+	<!--Prevents the mate event from occurring back to back with black wolf sex-->
+	<<set $daily.blackWolfHeatEvent to Time.hour>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<blackwolfhealth>><<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Wolf Cave Black Wolf Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Cave Black Wolf]]>><</link>></span><<nexttext>>
+<</if>>

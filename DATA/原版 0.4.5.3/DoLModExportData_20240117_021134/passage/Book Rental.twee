@@ -1,0 +1,127 @@
+:: Book Rental []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>><<run statusCheck("Sydney")>>
+你
+<<switch $bookRent>>
+	<<case "return">>
+		归还了<<if $book_rent_timer lt 0>><<set $recentReturnTimer to 14>>逾期的<</if>>
+		<<switch $phase>>
+			<<case 6>>
+				<<if $per_npc.pinch isnot undefined>>
+					《林奇<<if $per_npc.pinch.pronoun is "m">>先生<<else>>女士<</if>>的圣诞追寻之旅》一书的副本
+					<<clearNPC pinch>>
+				<<else>>
+					那本橄榄色的书。
+				<</if>>
+			<<case 5>>
+				《劳尔与珍妮特》一书的副本。
+			<<default>>
+				<<print $studyBooks.rented.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>教材。
+		<</switch>>
+		<<set $studyBooks.rented to "none">>
+		<<if _sydney_location is "library">>
+			<<if $book_rent_timer lt 0>>
+				<<if $NPCName[$NPCNameList.indexOf("Sydney")].love lt 10>>
+					"逾期了，但至少它没有损坏。请尽量在规定时间内返还得更准时些。"悉尼皱起了眉头，拔开笔帽写下了一些东西。<<bookCriminal>>
+				<<elseif $sydneyromance is 1>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"我希望你能把持住租期，就像你把持住我一样，"<<he>>说着脸却又红了起来，浑身都散发着可爱的气息。<<bookCriminal>>
+					<<else>>
+						"我真希望我可以为你网开一面，但是……我不敢违背礼顿<<nnpc_Title "Leighton">>……我害怕被<<nnpc_He "Leighton">>责问。"<<bookCriminal>>
+					<</if>>
+				<<else>>
+					"逾期了。"悉尼抬起头来，"我知道你清楚的。"<<bookCriminal>>
+				<</if>>
+			<<elseif $book_rent_timer is 14>>
+				"这速度可真是……快。"悉尼在收银机上摸索了一会儿，然后递给你<<moneyGain 15>>。
+			<<elseif $book_rent_timer gt 7>>
+				"提前完成学习了吗？"悉尼在收银机前摸索了一会儿，然后递给你<<moneyGain 10>>。
+			<<else>>
+				"感谢你准时归还！"悉尼高兴地从你手里接过书，然后把它放回原处。
+			<</if>>
+			<<unset $bookOverdue>>
+			<<set $book_rent_timer to 0>>
+			<br><br>
+			<<sydneyOptions>>
+		<<else>>
+			<<set $bookReturnedAbsent to 1>>
+			<<set $book_rent_timer to 0>>
+			<br><br>
+			<<bookRentalOptions>>
+			<br>
+			<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<<case "rent">>
+		借了
+		<<if $phase is 6>>
+			那本奇怪的橄榄色的书。
+			<<switch _sydneyStatus>>
+				<<case "corrupt" "corruptLust">>
+					悉尼捂嘴偷笑。"我本以为这本书是给孩子们看的，不知道它为什么会在这儿。但是，嘿，你随意就好了。"
+				<<default>>
+					悉尼笑了起来。"嗷~，我喜欢这本书！约旦<<nnpc_Brother "Jordan">>每年圣诞节都会给我读它。"
+			<</switch>>
+			<br><br>
+			<<He>>正准备把书拿给你，但看到封面又停了下来，微微皱起了眉头。"这书看起来可真古怪……"<<He>>摊开书页扫了几眼，又摇了摇头把书递给你，"享用。"
+		<<elseif $phase is 5>>
+			《劳尔与珍妮特》一书的副本。
+			<<switch _sydneyStatus>>
+				<<case "pure">>
+					<<if $sydneyromance is 1>>
+						悉尼对你笑了笑。"你所期许的爱情？我希望它有一个更幸福的结局。"<<He>>低着头，脸上还带着一抹绯红，十分可爱。"你……你认为我们会得到一个幸福的结局吗？"
+					<<else>>
+						悉尼低头看着书，皱起了眉头。"美好的爱情故事，但我一直没有搞明白他们想做什么，为什么他们要——"<<he>>打断了自己的话，"哦！抱歉，我不该剧透的，请享受这个作品！"
+					<</if>>
+				<<case "pureLust">>
+					悉尼脸颊顿时升起了一层浅浅的红晕。"一本……有趣的书！<<if $sydneyromance is 1>>也许……也许我们……我们可以一起看……如果你有空。"<<He>>羞涩地向着你眨了下眼，然后将书递还给你。在接触到你手指的一瞬间，却又马上又像是受惊的小鹿一样，纤细的手指飞也似地从书上挪开<<else>><<He>>把书还回给你，不敢与你有眼神接触<</if>>。
+				<<case "corrupt">>
+					悉尼低头看了一眼书，笑了一声。"真是本罪恶的读物，但小心不要看得太过火。"<<he>>朝你眨了眨眼。
+				<<case "corruptLust">>
+					悉尼低头看了一眼书，笑了一声。"真是本罪恶的读物，但小心不要看得太过火。"<<He>>眨了眨眼，把书递给你。<<if $sydneyromance is 1>>正当你伸手去拿书的时候，<<he>>突然温柔地捧住了你的手。"也许我们可以在某个时候复现一下书中的第三幕第五场。"<<arousal 1000>><<garousal>><<else>><</if>>
+				<<default>>
+					悉尼低头看了看书，皱起了眉头。"一个充满爱与罪恶的故事。"<<if $temple_rank>><<He>>倾身在你耳边压低了声音。"约旦其实是这本书的忠实粉丝，但请不要告诉<<nnpc_him "Jordan">>是我说的！<<nnpc_He "Jordan">>曾讲过，这是一个警示，关于爱与欲望的警示……不要去逾越界限，不要心甘情愿地走入深渊。"<</if>><<He>>把书递回给你。"请慢慢欣赏。"
+			<</switch>>
+		<<else>>
+			一本<<print $studyBooks.rented.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>教材。
+			<<if $sydneyromance is 1>>
+				悉尼对你笑了笑。"你真的很用功，你知道吗？我真为你感到骄傲。"
+			<<else>>
+				悉尼露出了微笑。"感谢你的租赁！"
+			<</if>>
+		<</if>>
+		<<set $book_rent_timer to 14>>
+		<br><br>
+		<<sydneyOptions>>
+	<<case "renew">>
+		延长借书期限
+		<<if $studyBooks.rented is "Raul and Janet">>
+			《劳尔与珍妮特》一书的副本。
+		<<elseif $studyBooks.rented is "Pinch">>
+			那本橄榄色的书。
+		<<else>>
+			<<print $studyBooks.rented.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>教材。
+		<</if>>
+		<<set $book_rent_timer to 14>>
+		悉尼露出了微笑。"谢谢你对于学习的专注。<<if $sydneyromance is 1 and _sydneyStatus.includes("corrupt")>>如果可以的话，也请对我保持专注？<</if>>"
+		<br><br>
+		<<sydneyOptions>>
+	<<case "steal">>
+		偷取了
+		<<if $phase is 6>>
+			一本橄榄色的书。
+		<<elseif $phase is 5>>
+			《劳尔与珍妮特》一书的副本。
+		<<else>>
+			一本<<print $studyBooks.stolen.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>教材。
+		<</if>>
+		<<set $bookStolen to 1>>
+		<br><br>
+		<<bookRentalOptions>>
+		<br>
+		<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><<crimeUp 20 "thievery">><</link>><<crime "thievery">>
+		<br>
+	<<default>>
+<</switch>>
+<br><br>
+<br>

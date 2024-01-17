@@ -1,0 +1,41 @@
+:: Sydney Walk School []
+<<set $outside to 1>><<set $location to "town">><<effects>><<run statusCheck("Sydney")>>
+<<if $phase is 2>>
+	你们两人以惊人的速度从狼街跑到牛津街，中途越过公园。<<physique 3>>
+	<br><br>
+	悉尼冲进学校的前门，跟在你后面直奔西里斯的教室。
+	<br><br>
+	<<link [[继续|Science Classroom]]>><<endevent>><<set $daily.sydney.scienceWalk to 1>><</link>>
+	<br>
+<<else>>
+	悉尼走到<<if $NPCName[$NPCNameList.indexOf("Jordan")].init is 1>>约旦身边<<else>>那个身影旁边<</if>>，然后聊了一小会儿。<<nnpc_He "Jordan">>对你笑了笑，悉尼跑回你身边，你们一起离开了神殿。
+	<br><br>
+	<<if $daily.sydney.wake is true>>
+		在走路的过程中，悉尼黏在你的胳膊上，几乎快要睡着了。<<trauma -4>><<stress -6>><<ltrauma>><<lstress>>
+	<<else>>
+		<<if $sydneyromance is 1>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				悉尼走路时牵着你的手。
+			<<else>>
+				悉尼在走路时紧张地碰了下你的手，你转而牵住了它。
+			<</if>>
+			<<takeHandholdingVirginity "Sydney" "romantic">>
+			<br><br>
+		<</if>>
+		你在路上和<<him>>聊着天。
+		<<switch random(1, 3)>>
+			<<case 1>>
+				"约旦<<nnpc_Brother "Jordan">>真的很好，只是我希望<<nnpc_he "Jordan">>能在我祷告睡着时叫醒我。"
+			<<case 2>>
+				"谢谢你陪我一起，我一个人去上学难免会有些孤单。"
+			<<case 3>>
+				"我总是在上学前做祷告，它能帮助我保持头脑清醒。"
+		<</switch>>
+		<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<</if>>
+	<br><br>
+	你们到了。悉尼向你挥手告别，然后向图书馆走去。
+	<br><br>
+	<<link [[继续|School Front Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

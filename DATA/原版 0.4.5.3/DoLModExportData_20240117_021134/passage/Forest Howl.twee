@@ -1,0 +1,34 @@
+:: Forest Howl []
+<<location "forest">><<effects>>
+
+<<if $syndromewolves gte 1>>
+	你抬起头，朝树冠嚎叫。<<if $phase is 1>><<beastNEWinit 2 wolf>><<beastsplural>>加入了<<else>><<beastNEWinit 1 wolf>><<beasttype>>加入了<</if>>你的合唱，其他动物在远处回应了你。几分钟后，嚎叫声逐渐减弱，<<if $phase is 1>><<beastsplural>>走了出来。<<else>><<beasttype>>走了出来。<</if>>
+	<br><br>
+
+	<<if $monster is 1>>
+		"<<pPackbrother>>，很高兴看到你。"
+		<br><br>
+	<</if>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $phase is 1>>
+			<<if $deviancy gte 35>>
+				<<link [[交尾|Forest Wolf Sex2]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant3>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $deviancy gte 15>>
+				<<link [[交尾|Forest Wolf Sex]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant2>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<link [[轻拍并离开|Forest Pat]]>><<trauma -6>><<stress -12>><</link>><<ltrauma>><<lstress>>
+	<br>
+
+<<else>>
+	你抬起头，朝树冠嚎叫。<<if $phase is 1>><<beastNEWinit 2 wolf>><<beastsplural>>加入了<<else>><<beastNEWinit 1 wolf>><<beasttype>>加入了<</if>>你的合唱，其他动物在远处回应了你。几分钟后，嚎叫声逐渐减弱。<<if $phase is 1>><<beastsplural>>离开了。<<else>><<beasttype>>离开了。<</if>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

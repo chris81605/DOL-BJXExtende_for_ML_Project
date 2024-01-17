@@ -1,0 +1,111 @@
+:: Farm Rest []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+<<if $phase is 1>>
+	<<npc Alex>><<person1>>
+	你靠近艾利克斯。
+	<<if $weather is "clear">>
+		<<He>>在树冠的阴影中斜靠在树干上。
+	<<elseif $weather is "rain">>
+		<<He>>在树冠的荫蔽下避雨。
+	<<elseif $weather is "snow">>
+		<<He>>在树冠的荫蔽下避雪。
+	<<else>>
+		<<He>>斜靠在树下。
+	<</if>>
+	<<He>>听到你的脚步声后抬起帽檐，看向你。
+	<<if $exposed gte 1>>
+		<<covered>><<He>>看向别处。
+	<</if>>
+	<br><br>
+
+	<<if _alex.love gte 10>>
+		<<if _alex.dom gte 10>>
+			"想休息的时候随时都可以休息，"<<he>>说道，"这是你应得的。"
+		<<elseif _alex.dom lte -10>>
+			"我很高兴见到你，"<<he>>说道，"你愿意和我坐在一起吗？"
+		<<else>>
+			"希望你能来陪陪我，"<<he>>拍了拍一旁的地面。
+		<</if>>
+	<<elseif _alex.love lte -10>>
+		<<if _alex.dom gte 10>>
+			"又怎么了？"<<he>>叹了一口气。
+		<<elseif _alex.dom lte -10>>
+			"怎么了又？"<<he>>问道。
+		<<else>>
+			"有事吗？"<<he>>问道。
+		<</if>>
+	<<else>>
+		<<if _alex.dom gte 10>>
+			"如果有什么需要帮忙的就告诉我，"<<he>>说道。
+		<<elseif _alex.dom lte -10>>
+			"偶尔休息一下也不错，"<<he>>说道。
+		<<else>>
+			"你随时可以过来跟我一起休息，"<<he>>说道，"偶尔休息一下才对。"
+		<</if>>
+	<</if>>
+	<br><br>
+<<else>>
+	<<farm_work_update>>
+<</if>>
+
+	<<if isLoveInterest("Alex")>>
+		<<if Time.season is "winter">>
+			你们挤在一起取暖。
+		<<elseif _alex.dom lte -10>>
+			<<He>>靠在你身上。
+		<<else>>
+			你坐下来靠着<<him>>。
+		<</if>>
+	<<else>>
+		你坐下来靠在树上。
+	<</if>>
+
+<<rng 2>>
+<<if $rng is 1 and $farm_stage gte 4>>
+	艾利克斯向你搭话。
+	<<farm_tell_alex>>
+<<else>>
+	<<farm_relax_chat>>
+<</if>>
+<br><br>
+
+<<rng>>
+<<set $danger to random(1, 10000)>>
+<<if (!npcIsPregnant("Alex") and !playerBellyVisible() and !knowsAboutPregnancy("pc","Alex")) and $danger gte (9900 - $allure) and $farm_stage gte 4>>
+	<<if $farm_relax_drink is "accept">>
+		"再喝一杯吗？"<<he>>从身后拿出又一个瓶子。
+	<<elseif $farm_relax_drink is "refuse">>
+		"你确定不想喝一杯吗？"<<he>>又从身后把瓶子拿了出来。
+	<<else>>
+		"想喝一杯吗？"<<he>>突然问道。<<He>>从树根下面的坑里拿出一个瓶子递给你，"都说酒不该一个人喝。"
+	<</if>>
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+		<<link [[喝|Farm Rest Drink]]>><<alcohol 120>><<stress -6>><<npcincr Alex love 1>><</link>><<glove>><<lstress>>
+	<</if>>
+	<br>
+	<<link [[拒绝|Farm Rest Refuse]]>><</link>>
+	<br>
+
+<<elseif C.npc.Alex.love gte 60 and $phase isnot 5 and $weather isnot "rain" and $rng gte 81 and $exposed lte 0>>
+	"今天想出去走走吗？多点运动量也许是件好事。"
+	<br><br>
+
+	艾利克斯在树下伸了个懒腰。"或者我们也可以像往常一样坐在这里休息。我都不介意。"
+	<br><br>
+
+	<<He>>微笑着等待你的回答。
+	<br><br>
+
+	<<link [[同意 (0:20)|Farm Meadow Date]]>><<npcincr Alex love 1>><</link>><<glove>>
+	<br>
+	<<link [[进行一些休息|$passage]]>><<set $phase to 5>><</link>>
+
+<<else>>
+	<<farm_relax_end>>
+<</if>>

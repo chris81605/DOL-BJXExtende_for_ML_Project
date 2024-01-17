@@ -1,0 +1,58 @@
+:: Prison Intro Boat []
+<<location "sea">><<effects>>
+
+<<prison_init>>
+
+<<generate_relaxed_guard 0>>
+<<generate_anxious_guard 1>>
+<<generate_veteran_guard 2>>
+<<generate_methodical_guard 3>>
+
+<<if $weather is "rain">>
+	你被安置在附近的长椅上，顶棚为你遮挡着雨水。偶然的风吹动着你的发梢，雨滴从你的眼角划过，滴落在脸颊。
+<<elseif $weather is "clear">>
+	你被安置在附近的长椅上。
+<<else>>
+	你被安置在附近的长椅上。
+<</if>>
+<br><br>
+
+在看管你的人中，<<person1>><<personsimple "normal">>一手掌舵一手拿着手机，姿态十分悠闲放松。而<<him>>的身旁则站着一个<<person2>><<personsimple "normal">>，神情紧张异常。
+<br><br>
+
+"你觉得<<pshe>>会撑多久？"<<he>>转头看向你。
+<br>
+掌舵人<<person1>><<personsimple "normal">>瞥了你一眼。
+
+<<if $beauty gte ($beautymax * 0.9)>>
+	"像<<phim>>这样的美人很难说，"<<he>>耸耸肩。"<<pShe>>会安好的，前提是<<pshe>>够聪明当了某个大个傻逼的小婊子……至于不嘛——"<<he>>停顿一下，"至少<<pshe>>会忙着被人蹂躏，干不出什么真正的蠢事。"
+<<elseif $beauty gte ($beautymax * 0.4)>>
+	"像<<phim>>这样的美人不至于混得很差，"<<he>>冷笑，"如果<<pshe>>不傻。"
+<<else>>
+	"<<pShe>>是很可爱，"<<he>>耸耸肩，"只要<<pshe>>肯低头做人。"
+<</if>>
+<br><br>
+<<if $physiquesize gte 16000>>
+	<<if $physique gte 15000>>
+		"<<pShes>>就一大个傻逼，"一个<<person3>><<personsimple "normal">>用毛巾擦拭着自己的手。<<He>>看起来比其他人年纪要大。"个太大了，没准是个麻烦。"
+	<<else>>
+		"<<pShes>>就一大个愣子，"一个<<person3>><<personsimple "normal">>用毛巾擦拭着自己的手。<<He>>看起来比其他人年纪要大。"没准最后会成为头头。"
+	<</if>>
+<br>
+"那还要等<<pshe>>再大点，现在就一小屁孩。"<<person2>><<personsimple "normal">>漫不经心地扳着手指。
+<<elseif $physique gte ($physiquesize * 0.9)>>
+	"<<pShe>>看着像个刺头，" 一个<<person3>><<personsimple "normal">>插嘴道。<<He>>看起来比其他人年纪要大。"指不定会超出你的预期。"
+	<br>
+	"除非<<pshe>>和错的人叫上板。"<<person2>><<anxious_guard 1>>冷笑了一声。
+<<else>>
+	"我怎么知道，"一个<<person3>><<personsimple "normal">>用毛巾擦拭着自己的手。<<He>>看起来比其他人年纪要大。"一个星期吧。"
+<</if>>
+<br><br>
+
+他们当着你的面继续争吵，就好像你不存在一样。
+<br><br>
+
+<<link [[抱怨|Prison Intro Boat Complain]]>><<pain 4>><<def 1>><<prison_guards 1>><</link>><<gpain>><<gsuspicion>>
+<br>
+<<link [[保持沉默|Prison Intro Boat 2]]>><<stress 6>><<sub 1>><<set $phase to 1>><</link>><<gstress>>
+<br>

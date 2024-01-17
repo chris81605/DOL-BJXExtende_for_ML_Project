@@ -1,0 +1,37 @@
+:: Moor Abduction Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<person1>><<person>>由于精疲力尽而倒在地上，无法再继续。你抓住机会逃跑了。<<He>>只能无力地朝你跑掉的方向伸手去抓，却只抓到了空气。
+	<br><br>
+	<<tearful>>你跌倒在远处的地上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<earnFeat "Slippery">>
+	<<link [[继续|Moor]]>><<end_moor_captive>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	你将<<person1>><<person>>推向了笼子，<<he>>重重地摔在了<<his>>的朋友身上。你抓住机会，拔腿就跑。
+	<br><br>
+	<<tearful>>你跌倒在远处的地上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<earnFeat "Slippery">>
+	<<link [[继续|Moor]]>><<end_moor_captive>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+	你倒在地上，伤得无法动弹。<<person1>><<person>>帮助<<his>>的同事镇压了一个逃跑的奇怪生物。其他的暴徒也很快赶到，他们的笼子很快重新装满。
+	<br><br>
+	<<tearful>>你被拉着站起来。有人再次绑住了你的手。<<bind>><<set $moor_binding to 6>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor Abduction Walk]]>><<pass 60>><</link>>
+	<br>
+
+<</if>>

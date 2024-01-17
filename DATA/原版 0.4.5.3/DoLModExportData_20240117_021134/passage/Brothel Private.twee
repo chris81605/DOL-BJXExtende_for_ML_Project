@@ -1,0 +1,159 @@
+:: Brothel Private []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+<<if $phase is 0>>
+
+<<set $tipmod to 3>><<tipset>>
+
+<<promiscuity3>>你带着<<person>>进入了其中一个小房间。相对于妓院的主体而言，它亮了许多，以至于你的眼睛需要一段适应时间。在房间的一角，有一个带有钢管的小舞台。房间里还有一张被特殊塑造的沙发，以供多种不同的体位使用。
+<br><br>
+
+	<<if $rng gte 71>>
+在你转身之前，<<person>>把手环在你的腰上，亲吻你的脖子。
+<br><br>
+
+	<<link [[推开|Brothel Private]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[试着在被爱抚的时候谈判|Brothel Private]]>><<arousal 300 "genitals">><<arousal 300 "breasts">><<set $phase to 2>><<submission 5>><<garousal>><</link>>
+	<br>
+
+	<<else>>
+<<person>>羞怯地站在门边，显然在等你行动。
+<br><br>
+<<rng>>
+
+		<<if $tipreaction is "low">>
+你牵着<<him>>的手，坐到沙发上。你们协商的价格为<<printmoney $tip>>，低于你的期望。
+<br><br>
+
+"我知道这不算多，"<<he>>说，"但如果我明天还想吃得起饭的话，我只能掏得起这么多钱。"<<He>>低头看向了<<his>>的脚。
+<br><br>
+
+			<<if $rng gte 51>>
+			"还有，如果可以的话，我不想碰任何东西。嗯，也许会有一些吧，但我主要是想和你谈谈。"
+			<br><br>
+
+			<<link [[接受 (0:30)|Brothel Private]]>><<set $phase to 3>><<pass 30>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 4>><</link>>
+			<br>
+			<<else>>
+			<<link [[接受 (0:30)|Brothel Private Sex]]>><<set $consensual to 1>><<pass 30>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 4>><</link>>
+			<br>
+			<</if>>
+
+		<<elseif $tipreaction is "mid">>
+你牵着<<him>>的手，坐到沙发上。你们协商的价格为<<printmoney $tip>>，在你的期望之内。
+<br><br>
+
+			<<if $rng gte 51>>
+			<<He>>轻轻地说，"还有，如果可以的话，我不想碰任何东西。嗯，也许会有一些吧，但我主要是想和你谈谈。"
+			<br><br>
+
+			<<link [[接受 (0:30)|Brothel Private]]>><<set $phase to 3>><<pass 30>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 4>><</link>>
+			<br>
+			<<else>>
+			<<link [[接受 (0:30)|Brothel Private Sex]]>><<pass 30>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 4>><</link>>
+			<br>
+			<</if>>
+		<</if>>
+
+	<</if>>
+
+<<elseif $phase is 1>>
+	<<if $rng gte 21>>
+	你从<<person>>手中挣脱出来。<<He>>看起来十分焦躁，但是对你无能为力。
+	<<set $enemyanger += 20>>
+
+		<<if $tipreaction is "low">>
+	你们协商的价格为<<printmoney $tip>>，低于你的期望。
+	<br><br>
+
+	"你觉得你能值更多钱？"<<He>>笑了，"要知道，我能免费操和你一样的婊子。给你钱就像是做慈善一样。"
+	<br><br>
+
+			<<link [[接受 (0:30)|Brothel Private Sex]]>><<pass 30>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 5>><</link>>
+			<br>
+
+		<<elseif $tipreaction is "mid">>
+	你们协商的价格为<<printmoney $tip>>，在你的期望之内。
+	<br><br>
+
+			<<link [[接受 (0:30)|Brothel Private Sex]]>><<pass 30>><<set $consensual to 1>><<set $sexstart to 1>><</link>>
+			<br>
+			<<link [[拒绝|Brothel Private]]>><<set $phase to 5>><</link>>
+			<br>
+
+		<</if>>
+
+	<<else>>
+	你试图把自己从<<his>>的手中拉开，但是<<he>>一手抓住你的胳膊，并用另一只手堵上了你的嘴。
+	<br><br>
+	<<set $enemyanger += 20>>
+
+	<<link [[继续|Brothel Private Sex]]>><<pass 30>><<set $molestationstart to 1>><</link>>
+	<br>
+
+	<</if>>
+
+<<elseif $phase is 2>>
+	<<if $tipreaction is "low">>
+在<<his>>的不断骚扰之下，你依旧协商了<<printmoney $tip>>的价格，低于你的期望。
+<br><br>
+	<<elseif $tipreaction is "mid">>
+在<<his>>的不断骚扰之下，你依旧协商了<<printmoney $tip>>的价格，在你的期望之内。
+<br><br>
+	<</if>>
+
+	<<link [[接受 (0:30)|Brothel Private Sex]]>><<set $consensual to 1>><<pass 30>><<set $sexstart to 1>><</link>>
+	<br>
+	<<link [[拒绝|Brothel Private]]>><<set $phase to 5>><</link>>
+	<br>
+
+<<elseif $phase is 3>>
+<<He>>把<<his>>的头枕在你的腿上，你随即开始轻抚<<his>>的头发。你同情地听着<<He>>讲述着<<his>>的日常生活。尽管话题如此庸常，<<he>>一时竟泪流满面，向你讲述着<<he>>如何无法向<<his>>的配偶敞开心扉。
+<br><br>
+
+当<<his>>的三十分钟过去了之后，<<he>>把商定的价钱付给了你，并对你付出的时间表达了谢意。<<He>>看起来对你十分感激。
+<br><br>
+<<fameprostitution 1>>
+
+<<clotheson>>
+
+<<link [[继续|Brothel]]>><<set $money += $tip>><<endevent>><</link>>
+
+<<elseif $phase is 4>>
+<<He>>点了点头，眼神阴沉。<<He>>迅速离开了房间。
+<br><br>
+
+<<clotheson>>
+
+<<link [[继续|Brothel]]>><<endevent>><</link>>
+
+<<elseif $phase is 5>>
+<<rng>>
+	<<if $rng gte 21>>
+	<<He>>看向你，似乎不知如何是好。最终，<<he>>说："反正你身上估计也有点脏东西。"随后便离开了房间。
+	<br><br>
+
+<<clotheson>>
+
+<<link [[继续|Brothel]]>><<endevent>><</link>>
+
+	<<else>>
+<<He>>茫然地看着你，然后大笑起来。"很好，现在给我跪下，否则老子抽死你！"<<He>>朝你袭来！
+<br><br>
+
+<<link [[继续|Brothel Private Sex]]>><<pass 30>><<set $molestationstart to 1>><</link>>
+<br>
+
+	<</if>>
+<</if>>

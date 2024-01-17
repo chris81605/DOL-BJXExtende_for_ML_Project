@@ -1,0 +1,29 @@
+:: Pub Fame Decline []
+<<effects>>
+<<if $pubfame.task is "niki">><<run delete $photo.pubfame>><<clearNPC "pubfame_model">><</if>>
+<<if $pubfame.task is "briar" and $per_npc.pubfame_distract>><<clearNPC "pubfame_distract">><</if>>
+<<pubfameReset>><<set $pubfame.timer to 1>>
+
+<<if $phase is 1>>
+	你告诉米奇，你放弃帮现在这个人情。
+<</if>>
+"可惜，"米奇说。"如果你说完了的话，那我还有事要做。"
+<br><br>
+
+<<if !$pubfame.declined and $phase is 0>>
+	<<set $pubfame.declined to true>>
+	米奇刚要关门，"等一下，"你说，"能给我换个别的任务吗？"
+	<br><br>
+
+	米奇叹了口气。"行吧，但就这一次。如果你之后再拒绝委托，那咱就一拍两散。"
+	<br><br>
+
+	<<link [[继续|Pub Fame]]>><<run delete $pubfame.timer>><<set $pubfame.status to "ready">><<set $phase to 1>><</link>>
+<<else>>
+	米奇关上门。你回到兰德里的桌旁。"你现在有什么打算？"<<he>>问道。
+	<br><br>
+
+	<<endevent>><<npc Landry>><<person1>>
+	<<landryoptions>>
+	<<link [[离开|Pub]]>><<endevent>><</link>>
+<</if>>

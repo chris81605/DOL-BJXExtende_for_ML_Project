@@ -1,0 +1,25 @@
+:: Underground Cell Lock []
+<<set $outside to 0>><<set $location to "underground">><<effects>><<set $lock to 1000>>
+
+金属门锁得很紧。它使用先进的电子锁。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">你认为你可以搞定它。</span>
+	<br><br>
+	<<link [[开门 (0:05)|Underground Cell Sneak]]>><<pass 5>><</link>>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+/* 北极星模组 */
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Underground Cell Sneak]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<set $undergroundbrothel.timepass to false>>
+<<link [[停止|Underground Cell]]>><</link>>
+<br>

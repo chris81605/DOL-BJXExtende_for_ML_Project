@@ -1,0 +1,82 @@
+:: Estate Cards Intro []
+<<effects>>
+
+<<npc "Wren">><<person1>>
+<<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+<<if $wren_intro is undefined>>
+	<<if $wren_seen is "catsuit">>
+		"你又溜到不该来的地方了？"一个年轻的<<if $pronoun is "m">>短发男人<<else>>留着齐肩长发的女人<</if>>说道。<span class="gold">是伦恩。</span>"就像我们在码头相遇时一样。"<<He>>看起来这次没带武器。
+		<br>
+		"也许<<pshe>>想来一起玩牌？"一旁的<<person2>><<person>>建议道，眼睛同时盯着你的身体，"我还挺期待<<pShe>>输掉以后能给我找点乐子。"
+		<br>
+		"怎么样<<girl>>？"伦恩问道，"想玩二十一点吗？"
+		<br><br>
+		<i><span class="blue">你突然有了一个想法。</span>他们似乎没有敌意。现在。你可以扭转局势，使之对你有利，但要小心。</i>
+		<br><br>
+	<<elseif $wren_seen is "prison">>
+		"你又溜到不该来的地方了？"一个年轻的<<if $pronoun is "m">>短发男人<<else>>留着齐肩长发的女人<</if>>说道。<span class="gold">是伦恩。</span>"希望你别再进监狱。"
+		<br>
+		"也许<<pshe>>想来一起玩牌？"一旁的<<person2>><<person>>建议道，眼睛同时盯着你的身体，"我还挺期待<<pShe>>输掉以后能给我找点乐子。"
+		<br>
+		"怎么样<<girl>>？"伦恩问道，"想玩二十一点吗？"
+		<br><br>
+		<i><span class="blue">你突然有了一个想法。</span>他们似乎没有敌意。现在。你可以扭转局势，使之对你有利，但要小心。</i>
+		<br><br>
+	<<else>>
+		"你又溜到不该来的地方了？"一个年轻的<<if $pronoun is "m">>短发男人<<else>>留着齐肩长发的女人<</if>>说道，"淘气。"
+		<br>
+		"也许<<pshe>>想来一起玩牌？"一旁的<<person2>><<person>>建议道，眼睛同时盯着你的身体，"我还挺期待<<pShe>>输掉以后能给我找点乐子。"
+		<br>
+		"怎么样，<<girl>>？"开始那个<<person1>><<nnpc_gender "Wren">>问道。<<Hes>>看起来没比你大多少，"来玩二十一点吗？"
+		<br><br>
+		<<if $farm_stage lte 4 or $farm_stage is undefined>>
+			<i><span class="blue">你恍然大悟。</span>这可能是米奇提到过的伦恩。</i>
+		<<else>>
+			<i><span class="blue">你突然有了一个想法。</span>他们似乎没有敌意。现在。你可以扭转局势，使之对你有利，但要小心。</i>
+		<</if>>
+		<br><br>
+	<</if>>
+
+<<else>>
+
+	<<if $estate_cards_end is "naked">>
+		"看这是谁来了，"伦恩说，脸上露出得意的微笑，"上次我们扒光了你的衣服。希望你回家的路上没太冷。"<<His>>的朋友们大笑起来。
+	<<elseif $estate_cards_end is "left_early">>
+		"看这是谁来了，"伦恩说道，"希望你这次能多待一会儿。"
+	<<elseif $estate_cards_end is "wren_finished_early">>
+		"看这是谁来了，"伦恩说道，"上次我<i>差这么一点儿</i>就赢过你了。"
+	<<elseif $estate_cards_end is "chaos">>
+		<!-- this check is currently always false -->
+		"看这是谁来了，"伦恩说道，"上次你把我们这儿弄得一团糟，勉强原谅你吧。毕竟我一直想着再跟你玩一场。"
+	<<elseif $estate_cards_end is "run">>
+		"看是谁来了，"伦恩笑着说，"上次你逃跑了。这次可别这样。"
+	<<elseif $estate_cards_end is "sex">>
+		"看看是谁来了，"伦恩咧嘴笑道，"我说过你会再来的。"<<His>>的朋友们都笑了。
+	<<elseif $estate_cards_end is "sex_safe">>
+		"看看是谁来了，"伦恩说道，"你肯定还戴着那根带子，搞得好像自己这样就安全了一样。"
+	<<elseif $estate_cards_end is "oral" or $estate_cards_end is "pc_won_and_oral">>
+		"看这是谁来了，"伦恩说道，"很高兴你在这儿。我的朋友们很喜欢你上次的表现。我保证会再把你赢趴下的。"
+	<<elseif $wren_seen is "letter">>
+		"看这是谁来了，"伦恩说道，"又有我的信呢，还是你准备好和我玩游戏了？"
+	<<elseif $estate_cards_end is "cheat_run">>
+		"看看是谁来了，"伦恩说道，"上次你可表现得非常不好，不仅作弊，还趁机逃跑了。准备好受罚了吗？"
+	<<elseif $estate_cards_end is "cheat_moor">>
+		"看这是谁来了，"伦恩说道，"你上次作弊了，真是个坏<<girl>>。希望你已经吸取了教训。"
+	<<elseif $estate_cards_end is "pc_won">>
+		"看是谁来了，"伦恩说道，"上次你把我们晾在一边，真是太不尽兴了。今天想来玩牌吗？"
+	<<elseif $estate_cards_end is "cheat_remy">>
+		<<if $NPCName[$NPCNameList.indexOf('Wren')].love gte 20>>
+			"看是谁来了，"伦恩说道，"我知道你很快就会回来的——我赌赢了。"
+		<<else>>
+			"看是谁来了，"伦恩说道，"再次见到你并不意外。希望你没有给他们添太多麻烦。"
+		<</if>>
+	<<elseif $wren_seen is "catsuit">>
+		"看这是谁来了，"伦恩说道，"在工作时遇到你真令人高兴。"
+	<<else>>
+		"看是谁来了，"伦恩说道，"想玩个游戏吗？"
+	<</if>>
+	<<unset $estate_cards_end>>
+<</if>>
+
+<br><br>
+<<cards_start_play_options>>

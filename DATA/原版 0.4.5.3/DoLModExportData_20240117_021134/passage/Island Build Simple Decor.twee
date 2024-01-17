@@ -1,0 +1,15 @@
+:: Island Build Simple Decor []
+<<effects>>
+
+你拿着几块木头和一块锋利的石头坐下来。用点时间你应该能雕刻出一些装饰。但是你要雕刻什么呢？
+<br><br>
+<<set $island[$island.home].decoration to "雕像">>
+<<textbox "$island[$island.home].decoration" "figurines">>
+
+<<link [[继续|Island Build]]>>
+	<<if $island[$island.home].decoration is undefined or $island[$island.home].decoration is "">>
+		<<set $island[$island.home].decoration to "雕像">>
+	<</if>>
+	<<set $island[$island.home].decoration to Util.escape($island[$island.home].decoration).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>>
+<</link>>
+<br>

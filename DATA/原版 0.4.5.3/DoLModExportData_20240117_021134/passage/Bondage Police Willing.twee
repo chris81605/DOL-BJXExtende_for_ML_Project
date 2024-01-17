@@ -1,0 +1,59 @@
+:: Bondage Police Willing []
+<<effects>>
+
+你被铐上手铐拖在警察后面走。你觉得<<He>>把你推进了警车的后座。
+<br><br>
+
+<<He>>打开驾驶室的门但没有坐进去，而是<<him>>开始讲话，描述着你的外貌。
+<br><br>
+<<if crimeSumCurrent() gte 5000>>
+	<<He>>笑着拍了拍车顶。"看来我逮到了一个下流的<<girl>>。真想知道他们会对你的<<phim>>做什么。"<<He>>钻进驾驶室把车开走。
+	<br><br>
+
+	"我一敲见你就知道你有麻烦了，"<<he>>边开车边说。
+	<br><br>
+
+	<<link [[继续|Hospital Arrest Sit]]>><</link>>
+<<elseif crimeSumCurrent() gte 1000>>
+	"好，"<<he>>说，"我这就把<<phim>>带过去。"<<He>>钻进驾驶室把车开走。
+	<br><br>
+
+	"我知道你惹过不少麻烦。"<<person>>边开车边说："我敢肯定你会上颈手枷的。"
+	<br><br>
+
+	<<link [[继续|Hospital Arrest Sit]]>><</link>>
+<<else>>
+	"收到。"<<he>>讲道。"你今天走运了。"<<His>>伸手解开你的眼罩。
+
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		<<if $worn.face.type.includes("gag")>>
+			<<He>>拿出了你的封口布，给你的<<if $rightarm is "bound" or $leftarm is "bound">>手臂<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">>和<</if>><<if $feetuse is "bound">>双腿<</if>>解绑。
+		<<else>>
+			<<He>>也给你的<<if $rightarm is "bound" or $leftarm is "bound">>手臂<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">>和<</if>><<if $feetuse is "bound">>双腿<</if>>解了绑。
+		<</if>><<unbind>>
+	<<else>>
+		<<if $worn.face.type.includes("gag")>>
+			<<He>>拿出了你的封口布。
+		<<else>>
+		<</if>>
+	<</if>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	光亮使你眯起眼睛。
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	"有个重要人士要我们好好照顾你，"<<he>>说，"你真走运。"
+	<br><br>
+
+	<<if $exposed gte 1>><<towelup>>
+	<<He>>给你几条毛巾包裹身体，然后开车把你送回孤儿院。
+	<<else>>
+	<<He>>开车把你送回孤儿院。
+	<</if>>
+	<br><br>
+	<<endcombat>>
+	<<link [[继续|Orphanage]]>><</link>>
+	<br>
+<</if>>
+
+<br>

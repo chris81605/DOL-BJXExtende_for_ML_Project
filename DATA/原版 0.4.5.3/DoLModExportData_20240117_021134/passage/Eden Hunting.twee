@@ -1,0 +1,62 @@
+:: Eden Hunting []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+<<if $phase is 0 and $exposed gte 1 and !$daily.eden.exposed>>
+	<<His>>目光停留在你的<<lewdness>>上。"我不想让你独自一人这样。"
+	<br><br>
+
+	<<link [[走进去|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+	<<link [[待在外面|Eden Clearing]]>><<endevent>><<set $daily.eden.exposed to 1>><</link>>
+<<elseif $phase is 0>>
+	<<He>>消失在树林之间。
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<br>
+<<elseif $phase is 1 and $exposed gte 1 and !$daily.eden.exposed>>
+	<<He>>点了点头，但是<<his>>的目光停留在你的<<lewdness>>上。“我不想让你一个人呆在那里。”
+	<br><br>
+
+	<<link [[走进去|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+	<<link [[待在外面|Eden Clearing]]>><<endevent>><<set $daily.eden.exposed to 1>><</link>>
+<<elseif $phase is 1>>
+	<<He>>对你点了点头，然后消失在树林之间。
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	"别傻了，"<<he>>说道。"掠食者已经学会远离小屋了。你在这里会很安全的。"
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		你说："只有和你在一起我才有安全感。"
+	<<elseif $speech_attitude is "bratty">>
+		"也许如果你把枪留在这里，我就会觉得安全，"你说道。
+	<<else>>
+		"你确定我在这里独处是安全的吗？"你问道。
+	<</if>>
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 50>>
+		"好吧。"<<he>>说道。"但是要安静，靠近我。带个篮子，你可以留意一下有没有浆果。"
+		<br><br>
+
+		<<if $exposed gte 1>>
+			当你走过去加入<<him>>时，伊甸扫视着你的身体，凝视着你的裸露，然后说："下次你应该穿上衣服。"<<he>>拉着你靠近。
+			<br><br>
+		<</if>>
+	<<link [[继续|Eden Hunt]]>><</link>>
+	<<else>>
+		"我不能同时狩猎和照顾你，"<<he>>说道。"这是最后的决定。"
+		<br><br>
+
+		<i>如果<<he>>更喜欢你，<<he>>可能会更愿意接受你的请求。</i>
+		<br><br>
+
+		<<link [[继续|Eden Hunting]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+<</if>>

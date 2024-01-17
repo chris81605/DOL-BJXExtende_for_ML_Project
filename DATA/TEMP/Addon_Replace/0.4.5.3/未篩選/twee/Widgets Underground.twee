@@ -1,0 +1,93 @@
+:: Widgets Underground [widget]
+<<widget "dungeonescape">>
+	<<if $baileySold>>
+		<<set $baileyReunionScene to "dungeon">>
+	<</if>>
+
+	<<if $whitneyromance is 1>>
+		<<set $whitneyReunionScene to "dungeon">>
+	<</if>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
+		<<if $home_gone gte 4 and !$undergroundbrothel.robin>>
+			<<set $robinReunionScene to "dungeon">>
+		<<elseif $undergroundbrothel.robinGone>>
+			<<set $robinReunionScene to "dungeonRobin">>
+		<</if>>
+	<</if>>
+
+	<<if $undergroundbrothel.robin>>
+		<<set $robinmissing to 0>>
+	<</if>>
+
+	<<unset $baileySold>>
+	<<unset $wraithUnderground>>
+	<<set $undergroundbrothelescaped to true>>
+	<<set $undergroundbrothel to {"escape": $undergroundbrothel.escape}>>
+	<<unset $underground_shirt>>
+<</widget>>
+
+<<widget "undergroundCellOptions">>
+	<<ind>><<link [[休息 (1:00)|Underground Cell Rest]]>><<pass 1 hour>><<set $tiredness -= 1000>><</link>><<ltiredness>>
+	<br>
+	<<if $undergroundbrothel.robin and !$undergroundbrothel.robinSpoke>>
+		<<ind>><<link [[和罗宾说话 (0:10)|Underground Cell Robin Talk]]>><<pass 10>><<stress -4>><<trauma -4>><<npcincr Robin trauma -2>><</link>><<lstress>><<ltrauma>><<lrtrauma>>
+		<br>
+	<</if>>
+	<<if $undergroundbrothel.escape is 0>>
+		<<investigateicon>><<link [[寻找出路|Underground Cell Look]]>><</link>>
+	<<elseif $undergroundbrothel.escape gte 19>>
+		<<getouticon "hole">><<link [[逃跑|Underground Escape]]>><</link>>
+	<<elseif $undergroundbrothel.escape gte 18 and $physiquesize lte 12000>>
+		<<getouticon "hole">><<link [[逃跑|Underground Escape]]>><</link>><<small_text>>
+	<<elseif $undergroundbrothel.escape gte 17 and $physiquesize lte 10000>>
+		<<getouticon "hole">><<link [[逃跑|Underground Escape]]>><</link>><<small_text>>
+	<<elseif $undergroundbrothel.escape gte 16 and $physiquesize lte 6000>>
+		<<getouticon "hole">><<link [[逃跑|Underground Escape]]>><</link>><<small_text>>
+	<<else>>
+		<<getouticon "dig">><<link [[挖 (1:00)|Underground Cell Dig]]>><<pass 1 hour>><</link>>
+	<</if>>
+	<br>
+	<<investigateicon>><<link [[检查门|Underground Cell Lock]]>><</link>>
+<</widget>>
+
+<<widget "undergroundEscapeForestStart">>
+	<<clotheson>>
+	<<endcombat>>
+
+	一股寒意涌上你的脊柱，这是某种原始本能发出的警告。<span class="red">有东西在追你。</span>
+	<<set $foresthunt to 1>><<dungeonescape>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<set $forest to 40>><</link>>
+<</widget>>
+
+<<widget "undergroundReturnToCell">>
+	<<tearful>>你坐在床垫上。
+	<<if _args[0] is "Robin">>
+		至少罗宾逃走了。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if _args[0] is "skip">>
+		<<set $eventskip to 1>>
+	<</if>>
+
+	<<if _args[0] is undefined or _args[0]>>
+		<<link [[继续|Underground Cell]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "undergroundPlantFakeChoice">>
+	"你脑袋被门夹了吗？”<<person2>><<person>>咕哝着，“不管<<pshe>>愿不愿意，<<pShes>>都是你的。"
+	<br><br>
+
+	"噢，是的！我都忘了这地方是这样工作的！”<<person1>><<person>>把手拍在一起，向你扑来。
+	<br><br>
+
+	<<link [[继续|Underground Plant Molestation]]>><<set $molestationstart to 1>><</link>>
+<</widget>>

@@ -1,0 +1,25 @@
+:: Bully Tattoo Write []
+<<effects>>
+
+<<set _loc to $daily.whitney.writingTarget>>
+<<set _loc_text to _loc.replace(/(left_|right_)/, "").replace("shoulder","肩膀").replace("forehead","额头").replace("cheek","脸颊")>> <!-- example: converts "left_cheek" to just "cheek", or "right_shoulder" to just "shoulder" -->
+<<if $skin[_loc].special is "Whitney">>
+	惠特尼带着满意的微笑审视着你的_loc_text。
+<<elseif !$skin[_loc].writing>>
+	惠特尼俯身向前，手里拿着笔，在你的_loc_text上潦草地写着什么。<<He>>退后一步欣赏<<his>>的作品，然后从<<his>>朋友那里一把抓来一面镜子。<<He>>将镜子举在你面前。你的_loc_text现在写着：<<bodywriting_npc_whitney _loc>>
+<</if>>
+<br><br>
+
+<<if $pain gte 100>>
+	"很好，"惠特尼说。<<He>>抓住你的手臂，把你拉向街道。你伤得太重了，无法反抗。
+<<else>>
+	"喜欢吗？"惠特尼问道，"很好，"<<he>>没有等你回答。<<He>>抓住你的手臂，"让我们把它变成永久性的。"<<He>>把你拉向街道。
+<</if>>
+<br><br>
+
+<<link [[顺其自然 (0:20)|Bully Tattoo]]>><<sub 1>><<npcincr Whitney dom 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<gdom>>
+<br>
+<<if $pain lt 100>>
+	<<link [[反抗|Bully Outside Fight]]>><<def 1>><<npcincr Whitney dom -1>><<set $fightstart to 1>><</link>><<ldom>>
+	<br>
+<</if>>

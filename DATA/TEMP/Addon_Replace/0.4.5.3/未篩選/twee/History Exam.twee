@@ -1,0 +1,52 @@
+:: History Exam []
+<<schooleffects>><<effects>>
+
+<<set _time_temp to (59 - Time.minute)>>
+<<pass _time_temp>>
+
+<<npc Winter>><<person1>>
+
+<<switch $phase>>
+	<<case 0>>
+		你专注于考试，尽你所能地不去理会其他学生的书写和抱怨声。
+	<<case 1>>
+		你深吸一口气，试着不让压力影响你的发挥。
+	<<case 2>>
+		<<skulduggerycheck>>
+		温特把<<himself>>一头扎进一本书中，看起来并没有多么在意讲台下面。
+
+
+		<<if $skulduggerysuccess is 1>>
+			你知道那是假象，当老师的注意力被这儿那儿的事吸引的时候，你瞥了一眼你的同桌，<span class="green">并设法获得了一些难题的答案。</span>
+			<<set $exam_chance += 10>><<passPercent 10>>
+		<<else>>
+			你抓住这个机会，看了一眼你同桌的试卷。
+			<br><br>
+			<<if $robinhistory is "seat">>
+				<span class="red">罗宾用手肘推了你一下。</span>"你不该作弊的！"
+				<br><br>
+
+				温特抬头看了一眼，"别说话。" 你现在不会再有机会转移老师的注意力了。<<gstress>><<stress 6>><<set $exam_chance -= 10>><<passPercent -10>>
+			<<else>>
+				<span class="red">"不许作弊。"</span>温特头也不抬地说。尽管<<he>>没有挑明，但你知道<<he>>指的是你。<<gstress>><<stress 6>><<set $exam_chance -= 10>><<passPercent -10>><<ggdelinquency>><<detention 5>>
+			<</if>>
+		<</if>>
+		<br><br>
+
+		<<skulduggeryuse true>>
+<</switch>>
+<br><br>
+
+当学生们奋笔疾书做题时，温特随意翻阅着<<person1>><<his>>的书。温特把书合上。"考试结束。"<<he>>宣布。
+<br><br>
+
+你们排成另一排。温特把<<he>>收上来的试卷挨个批改。<<his>>红笔在上面不断划过，你的也不例外。<<He>>把试卷还给了你。
+<<exam_result "history">>
+<br><br>
+
+<!-- Add text for interacting with Robin here, if they are present? -->
+下课铃响了，你随着熙熙攘攘的学生们离开教室。
+<br><br>
+
+<<link [[继续|Hallways]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,70 @@
+:: Moor Phallus Plant Masturbation Finish []
+<<effects>>
+<<if $anususe isnot "mpenisflowerpenetrate" and $vaginause isnot "mpenisflowerpenetrate" and $mouth isnot "mpenisflowersuck">>
+	<<endmasturbation>>
+	<<endcombat>>
+
+	你费了很大的力气，才迫使你的手离开你的身体，随即抓住两簇草来将你的双手保持在原地。最终，你忍着疼痛，匍匐着逃离了那朵花。
+	<br><br>
+
+	<<if $tentacledisable is "f">>
+		<<if $plantdisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover")) and $rng gte 76>>
+			<<generatePlant1>><<person1>>
+			<span class="red">你的脚踝被什么东西缠住了。</span>藤蔓缠绕在你的腰间，将你牢牢固定住，一个<<person>>走到你面前，喘着粗气，头发上挂着<<plant_details>>装饰，看起来凌乱不堪，满头大汗。
+			<br><br>
+
+			"你让我都兴奋起来了，"<<he>>喃喃自语着，"真是一场好戏，干嘛停下呢？"藤蔓突然伸向了你，把你拉到了<<him>>那儿。"看来我得自己来了。"
+			<br><br>
+
+			<<link [[继续|Moor Plant Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+		<<elseif $hallucinations gte 2 or $backgroundTraits.includes("plantlover")>>
+			<span class="red">你的脚踝被什么东西缠住了。</span>根从花的底部长出来，缠绕在你的腰间，把你拖了回去。
+			<br><br>
+
+			<<link [[继续|Moor Tentacles]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			你逃离了气味的影响，变得气喘吁吁。<<gtiredness>><<ggstress>><<tiredness 6>><<stress 12>>
+			<br><br>
+
+			<<link [[继续|Moor]]>><<clotheson>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		你逃离了气味的影响，变得气喘吁吁。<<gtiredness>><<ggstress>><<tiredness 6>><<stress 12>>
+		<br><br>
+
+		<<link [[继续|Moor]]>><<clotheson>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $anususe is "mpenisflowerpenetrate">>
+		<<purity -1>><<bodyliquid "anus" "nectar">><<analejacstat>><<ejacstat>>
+		粘稠的液体从顶端喷射出来，温暖灌满了你的肠道。
+		<<if canImpregnateParasite("anus")>>
+			<span class="red">在整个过程中，你感到了它短暂的膨胀。</span>
+			<<impregnateParasite "vine" true "anus">>
+			<<fertiliseParasites "anus">>
+		<</if>>
+	<<elseif $vaginause is "mpenisflowerpenetrate">>
+		<<purity -1>><<bodyliquid "vagina" "nectar">><<vaginalejacstat>><<ejacstat>>
+		粘稠的液体从顶端喷射出来，温暖灌满了你的子宫。
+		<<if canImpregnateParasite("vagina")>>
+			<span class="red">在整个过程中，你感到了它短暂的膨胀。</span>
+			<<impregnateParasite "vine" true "vagina">>
+			<<fertiliseParasites "vagina">>
+		<</if>>
+	<<elseif $mouth is "mpenisflowersuck">>
+		<<purity -1>><<bodyliquid "mouth" "nectar">><<oralejacstat>><<ejacstat>>
+		粘稠的液体从顶端喷发出来，温暖充满了你的嘴巴。
+	<</if>>
+	感到心满意足后，你逃脱了由气味引起的恍惚。
+	<br><br>
+
+	<<endmasturbation>>
+	<<endcombat>>
+	<<link [[继续|Moor]]>><<clotheson>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+<<unset $moorPhallusPlant>>
+<<unset $moorFlower>>

@@ -1,0 +1,51 @@
+:: Police Community Wasteland Threaten []
+<<effects>>
+
+你挣脱了<<persons>>的掌控，站在一边，举起你的斧头。
+<<if $speech_attitude is "meek">>
+	"退后，"你说道。"我，我可不是好惹的。"
+<<elseif $speech_attitude is "bratty">>
+	"再碰我一下，"你说道。"你手就没了。"
+<<else>>
+	"退后，"你说道。"我受够了你这样的变态。"
+<</if>>
+<br><br>
+其他罪犯都笑了，但是那个<<person>>举起手走开了。
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	"放轻松<<girl>>，"<<he>>说道。<span class="green"><<He>>听起来很谨慎。</span>"我只是说你是一个性感的——"<<He>>被树根绊倒了，当<<he>>掉进荆棘里时大喊。更多笑声传来。
+	<br><br>
+
+	<<if $hallucinations gte 2>>
+		<<skulduggeryuse>>
+		<<person>>尖叫。树枝缠绕着<<his>>的四肢，似乎把<<him>>拖进了植被深处。笑声停止了。
+		<br><br>
+		<<link [[救援|Police Community Wasteland Rescue]]>><</link>><<willpowerdifficulty 1 1000>>
+		<br>
+		<<link [[呼救|Police Community Wasteland Help]]>><</link>>
+		<br>
+	<<else>>
+		警察匆匆赶来查看，<span class="green">但你已经回到工作岗位。</span><<ltrauma>><<trauma -6>>
+		<br><br>
+		<<skulduggeryuse>>
+		<<person1>>
+		<<link [[继续|Police Community Wasteland End]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+	<<person1>>
+	警官冲过来调查，<span class="red">并发现你还拿着斧头当武器。</span><<person1>>"这可不行！"<<he>>朝你大喊。<span class="red">"多加一天社区服务，</span>并且我会把这件事报告局里。"<<crime "assault">><<crimeUp 100 "assault">><<set $community_service += 1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	余下的过程都平淡无奇。
+	<br><br>
+
+	<<link [[继续|Police Community Wasteland End]]>><</link>>
+	<br>
+
+
+<</if>>

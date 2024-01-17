@@ -1,0 +1,63 @@
+:: Catacombs []
+<<location "catacombs">><<set $bus to "catacombs">><<set $outside to 0>><<effects>>
+
+你在森林下面的地下墓穴里。一段楼梯向上通向教堂墓地。一个六臂天使的雕像朝你微笑，用最低的手抱着一个点燃的火盆。
+<br><br>
+
+<<if $museumAntiques.antiques.antiqueivorystatuette isnot "found" and $museumAntiques.antiques.antiqueivorystatuette isnot "talk" and $museumAntiques.antiques.antiqueivorystatuette isnot "museum">>
+	雕像的肩膀上有一个小雕像。你可以够到它。
+	<br><br>
+<</if>>
+
+<<if $worn.face.type.includes("blindfold")>>
+	一阵暖风拂过你的脸，<span class="green">你的眼罩脱落了，</span>变成了一条破布。很难想象它刚才还很结实。
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	<br><br>
+<</if>>
+
+<<if $worn.upper.name is "cocoon" or $worn.lower.name is "cocoon bottom">>
+	雕像的眼睛闪烁着。缠在你身上的网松弛了，<span class="green">散成了碎片。</span>
+	<br><br>
+	<<if $worn.upper.name is "cocoon">>
+		<<upperruined>>
+	<</if>>
+	<<if $worn.lower.name is "cocoon bottom">>
+		<<lowerruined>>
+	<</if>>
+<</if>>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<i>当火炬熄灭时，避开陷阱和其他肮脏的东西会变得更加困难。</i>
+<br><br>
+
+<<set $eventskip to 1>>
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs normal>>
+<<else>>
+	<<if $museumAntiques.antiques.antiqueivorystatuette isnot "found" and $museumAntiques.antiques.antiqueivorystatuette isnot "talk" and $museumAntiques.antiques.antiqueivorystatuette isnot "museum">>
+		<<ind>><<link [[拿走雕像|Catacombs Statuette]]>><</link>><<crime "thievery">>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<undobindingsicon>><<link [[烧断束缚|Catacombs Unbind]]>><<pain 1>><</link>><<gpain>>
+		<br>
+	<</if>>
+	<<if $catacombs_torch lt 100>>
+		<<caveicon "torch">><<link [[点燃火把|Catacombs Light]]>><</link>><<gtorch>>
+		<br>
+	<</if>>
+	<<caveicon "east">><<link [[向东走  (0:10)|Catacombs Sarcophagi]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+	<br>
+	<<caveicon "west">><<link [[向西走 (0:10)|Catacombs Prison]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+	<br><br>
+
+	<<getouticon>><<link [[离去|Churchyard]]>><<catacombs_end>><</link>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

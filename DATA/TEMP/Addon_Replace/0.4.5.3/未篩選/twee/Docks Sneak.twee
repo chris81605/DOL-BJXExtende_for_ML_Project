@@ -1,0 +1,78 @@
+:: Docks Sneak []
+<<effects>>
+<<skul_dock_init>>
+你正待在码头这里。
+
+<<if $stress gte $stressmax>>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "docksSneak">>
+	<<else>>
+		你把自己逼得太紧了。
+		<br><br>
+		<<passout>>
+		<<set $danger to random(1, 10000)>>
+		<<if $danger gte (9900 - $allure)>>
+			<<link [[继续|Passout Docks]]>><</link>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<</if>>
+<<elseif Time.dayState isnot "night">>
+	当太阳出现在地平线上时，你听到入口传来说话声和金属的叮当声，这代表着今天的第一批工人马上就要到了。
+	<br><br>
+	<<pass 5>>
+	你无法在白天行窃。
+	<<if $exposed gte 1>>
+		你悄悄地溜回入口处，希望能把你的<<lewdness>>遮蔽起来。幸运的是，你顺利通过了侧门并且没有被发现。
+	<<else>>
+		你走回入口处，没有人注意到你。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Docks]]>><<set $bus to "mer">><</link>>
+	<br>
+<<elseif $eventskip is 0>>
+	<<events_skul_dock>>
+<<else>>
+	<<switch $bus>>
+	<<case "NW">>
+		你潜行至锚泊的船只旁。
+	<<case "N">>
+		你潜行爬上了通往锚泊船只顶部甲板的过道。
+	<<case "NE">>
+		你潜行至岸边的仓库附近。仓库里装满了机械，但外面也有堆得高高的集装箱。
+	<<case "W">>
+		你从关机的起重机之间潜行过去。
+	<<case "M">>
+		你从两堆高高垒起的集装箱之间潜行过去。
+	<<case "E">>
+		你从办公房前潜行过去。
+	<<case "SW">>
+		你潜行穿过卡车卸货区。有几辆车停在这里过夜。
+	<<case "S">>
+		你潜行穿过前门。
+	<<case "SE">>
+		你潜行穿过开阔的停车场。
+	<</switch>>
+	<br><br>
+	<<dock_security_text>>
+	<br><br>
+	<<if $skul_dock[$bus].state is "empty">>
+		你已经搜查过这里的集装箱了。
+		<br><br>
+	<<elseif $skul_dock[$bus].state is "known" and $skul_dock[$bus].contents is "none">>
+		这里的集装箱里没有对你有价值的东西。
+		<br><br>
+	<<else>>
+		<<swimicon "break">><<link [[闯入集装箱 (0:30)|Docks Search]]>><<crimeUp 5 "trespassing">><<dock_security 1>><</link>><<crime "trespassing">><<gsecurity>><<skul_dock_state $bus>>
+		<br><br>
+	<</if>>
+	<<skul_dock_nav>>
+	<<if $bus is "NW" or $bus is "N" or $bus is "NE">>
+		<<swimicon "dive">><<link [[潜入海里|Docks Dive]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

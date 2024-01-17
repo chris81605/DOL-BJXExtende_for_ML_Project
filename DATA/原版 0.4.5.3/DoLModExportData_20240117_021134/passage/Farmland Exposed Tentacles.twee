@@ -1,0 +1,29 @@
+:: Farmland Exposed Tentacles []
+<<effects>>
+
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+
+	<<set _randomtentacles to random(6, 10)>>
+	<<tentaclestart _randomtentacles 10 "shoot" "vine" true>>
+
+<</if>>
+
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[继续|Farmland Exposed Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farmland Exposed Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,23 @@
+:: Moor Garlic []
+<<effects>>
+
+你开始把大蒜从地上一个个拔出来，
+<<if $tendingSuccess>>
+	<span class="green">并很快收集了足够销售的数量。</span>
+	<<tending_pick garlic_bulb 30 50>>
+	<br><br>
+
+	<<if !$plants_known.includes("garlic_bulb")>>
+		一些大蒜头还没成熟，你可以把它们用作种植。<span class="gold">你现在可以种植<<icon "tending/garlic.png">>大蒜了。</span><<set $plants_known.push("garlic_bulb")>>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<span class="red">却找不到任何可以拿去卖的个体。</span><<gtending>><<tending 2>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

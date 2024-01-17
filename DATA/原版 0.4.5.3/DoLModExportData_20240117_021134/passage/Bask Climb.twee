@@ -1,0 +1,32 @@
+:: Bask Climb []
+<<set $outside to 1>><<set $location to "home">><<effects>>
+
+你抓住一根较矮的树枝并开始爬树。当你向上爬时，你为自己的暴露感到不安，你只希望树叶和树枝能够提供足够的遮蔽。
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51 and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+		当树枝猛然抽动起来的时候，你下意识护住了腿。这些枝条蠕动着向你袭来，并试图缠绕住你，最终它们一点点把你包裹住。
+		<br><br>
+
+		<<link [[继续|Bask Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		在这里，你可以无视孤儿院的栅栏，直接看到邻家的窗户。突然间一个窗口猛然打开，一个<<generate1>><<person1>><<person>>探出身子。<<He>>在看到你后朝你笑了笑，"你……现在是赤身裸体吗？"<<he>>努力伸长着脖子，想要透过树叶看到你赤裸的全身。"在那儿等一会，我去拿我的相机。"挂着你衣服的树枝还要在靠外面一些，你认为在<<he>>回来之前，你可能无法取回衣服了。
+		<br><br>
+		<<fameexhibitionism 1>>
+		<<link [[执意前进|Bask Climb Exhibitionism]]>><<trauma 6>><<stress 6>><<arousal 600>><</link>><<gtrauma>><<gstress>><<garousal>>
+		<br><br>
+		<<link [[向树下爬|Bask Sneak]]>><<set $upperoff to 0>><<set $loweroff to 0>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你抓着树枝向挂着衣服的那头爬去，而当你到达能够到衣服的位置时，树枝稍微有些下沉，但你还是安全的取回衣服并爬回了树干。你安稳落地。
+	<br><br>
+
+	<<clotheson>>
+
+	<<link [[继续|Garden]]>><</link>>
+	<br>
+<</if>>

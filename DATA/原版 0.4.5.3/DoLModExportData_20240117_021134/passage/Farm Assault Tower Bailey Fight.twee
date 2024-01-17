@@ -1,0 +1,29 @@
+:: Farm Assault Tower Bailey Fight []
+<<effects>>
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<set $enemyhealthmax *= 1.3>>
+	<<set $enemyhealth *= 1.3>>
+	<<set $enemyarousalmax *= 1.3>>
+<</if>>
+
+$farm.tower_guard在附近战斗。
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Farm Assault Tower Bailey Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Assault Tower Bailey Fight]]>><</link>></span><<nexttext>>
+<</if>>

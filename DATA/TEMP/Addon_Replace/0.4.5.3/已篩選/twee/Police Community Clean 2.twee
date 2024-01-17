@@ -1,0 +1,87 @@
+:: Police Community Clean 2 []
+<<set $bus to "harvest">><<effects>>
+<<person1>>
+你在街道的一边排队，吸引着众多路人的目光。这里的排水沟充斥着垃圾。"没错，你这个堕落的人，"<<person>>说道。
+<<if $leftarm is "bound" or $rightarm is "bound">>
+	当<<He>>说话时，<<he>>移除你手臂上的束缚带。
+<</if>>
+"你们每个人都要拿一根棍子和一个袋子。把这个烂摊子清理干净。埋头干吧。你们清理完后，我会检查你们的袋子。如果我不满意，就记你们缺席。现在开始吧。"
+<br><br>
+
+你拿起一根棍子去工作。
+<<pass 20>>
+
+<<if random(1, 2) is 2 and $police_trash gte 2 and $fame.prostitution gte 100>>
+	/*Police trash can be set to 3 later during this event.*/
+	你和其他罪犯沿着街道前进，<<person>>则在一旁监督。<<person2>><<person>>，和你一起工作的正是那个在车上色迷迷盯着你的人。<<He>>干得很快，很快就装满了一个袋子。
+	<br><br>
+
+	"嘿，<<girl>>，"<<he>>说道，将手放在你的<<bottom>>上。"让我们来做个交易如何？我们来干剩下的活，你带上这个鼓鼓囊囊的袋子滚蛋。"<<He>>挤过来。"作为回报，你将和我享受一会独处的时光。"<<He>>朝着一条附近的小巷点了点头。<<gstress>><<garousal>><<stress 6>><<arousal 6 "bottom">>
+	<br><br>
+	警官忙于接电话，不会注意到短暂的缺席。
+	<br><br>
+	<<if $promiscuity gte 35>>
+		<<link [[接受|Police Community Clean Accept]]>><<set $phase to 0>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Police Community Clean Refuse]]>><</link>>
+	<br>
+<<elseif random(1, 2) is 2 and $police_trash gte 1>>
+	<<if $police_trash is 1>>
+		<<set $police_trash to 2>>
+	<</if>>
+	你和其他罪犯沿着街道前进，而<<person>>则在一旁监督。
+	当你把手伸进下水道时，你感觉到了$worn.lower.cn_name_cap被什么东西轻轻地扯了一下。
+	<<person2>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		过了一会，<span class="lewd">有人翻起了下摆，暴露出你的
+		<<if $worn.under_lower.type.includes("naked")>>
+			<<bottom>>。<<fameexhibitionism 5>>有个家伙吹了个口哨。
+		<<else>>
+			$worn.under_lower.cn_name_cap。
+		<</if>>
+		</span>
+		<br><br>
+		你遮住你自己，然后转而面向袭击者。
+	<<elseif $worn.upper.set isnot $worn.lower.set>>
+		过了一会，<span class="lewd">有个家伙把碎料从你大腿上扯下来，露出你的<<undies>>。</span>
+		<<if $worn.under_lower.type.includes("naked")>>
+			有个家伙吹了吹口哨。<<fameexhibitionism 5>>
+		<</if>>
+		<br><br>
+		你遮住你自己，然后转而面向袭击者。
+	<<else>>
+		过了一会，<span class="lewd">有人掐了掐你的<<bottom>>。</span><<gpain>><<pain 1>>
+		<br><br>
+		你拍了拍你的屁股，然后转身面向袭击者。
+	<</if>>
+	<<if $phase is 1>>
+		<<person>>用<<his>>棍子点了点你，然后咧嘴笑了起来。
+		<br><br>
+	<<else>>
+		<<person>>将棍子收在身后。
+		<br><br>
+	<</if>>
+
+	<<link [[告诉警察|Police Community Clean Tell]]>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<link [[扳回一城|Police Community Clean Even]]>><<trauma -6>><</link>><<ltrauma>>
+	<br>
+	<<link [[无视|Police Community Clean Ignore 2]]>><<trauma 6>><</link>><<gtrauma>>
+	<br>
+<<else>>
+	<<if $police_trash is undefined>>
+		<<set $police_trash to 1>>
+	<</if>>
+
+	你和其他罪犯沿着街道前进，而<<person>>则在一旁监督。
+	<br><br>
+
+	<<link [[努力工作|Police Community Clean Work]]>><<tiredness 6>><<stress 6>><</link>><<gtiredness>><<gstress>>
+	<br>
+	<<set $skulduggerydifficulty to 400>>
+	/* 北极星模组 */
+	<<link [[摸鱼并偷别人的垃圾|Police Community Clean Laze]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+    /* 北极星 */
+	<br>
+<</if>>

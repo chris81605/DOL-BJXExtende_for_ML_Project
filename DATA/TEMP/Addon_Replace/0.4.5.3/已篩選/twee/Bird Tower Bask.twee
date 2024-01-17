@@ -1,0 +1,401 @@
+:: Bird Tower Bask []
+<!-- This passage is only accessible to a player that already has stockholm syndrome. -->
+<<effects>><<rng>>
+<<npc "Great Hawk">>
+<<if $birdBask is undefined>>
+	<<set $birdBask to 1>>
+	<<if $monster is 1>>
+		你坐在<<beasttype>>的大腿上，<<bhe>>收拢环绕着你的翅膀，保护你不受<<if Time.dayState is "dawn">>清晨寒意<<elseif Time.dayState is "dusk">>傍晚寒冷<<else>>风<</if>>的侵袭。
+	<<else>>
+		你坐在<<beasttype>>旁边，<<bhim>>就这样用<<bhis>>的翅膀环抱住你。
+	<</if>>
+<</if>>
+<<bird_schedule>>
+<<if $bird.activity is "bathe" and $bird.state is "home">>
+	<<unset $birdBask>><<unset $birdPerch>>
+	<<if $monster is 1>>
+		<<beasttype>>站起身，向你伸出手。"是时候去洗干净了，来吧。"
+	<<else>>
+		<<beasttype>>抖动着<<bhis>>的翅膀，从栖木上往退下，向雨水池走去。
+	<</if>>
+	<br><br>
+	<<link [[跟上 (0:30)|Bird Tower Bathe Bird]]>><<bird_pass 30>><<endevent>><<set $phase to 1>><</link>><<if $monster is 1>><<handholdingvirginitywarning>><<NPCvirginitywarning "Great Hawk" "handholding">><</if>><br>
+	<<link [[留下|Bird Tower Perch]]>><<endevent>><</link>><br>
+<<elseif $rng gte 91>>
+	<<if $harpy gte 6>>
+		<<beasttype>>稍微停下了<<bhis>>的歌曲，<<bhe>>开始轻轻地梳理你的翅膀。
+		<<if $monster is 1>>
+			<<bHis>>的触碰温柔而熟练，<<bhis>>的手指在你的羽毛间穿梭，让你的身体感受到一阵阵的愉悦。<<arousal 1000>><<garousal>>
+		<<else>>
+			<<bHe>>轻轻地用喙穿过你的羽毛，让你的身体感受到一阵阵的愉悦。<<arousal 1000>><<garousal>>
+		<</if>>
+		<<transform bird 1>>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+			<<if $monster is 1>>
+				你稍微把背靠向<<bhis>>的手臂，向<<if Time.dayState is "dawn">>早晨的空气<<elseif Time.dayState is "dusk">>夜晚的空气<<else>>风<</if>>发出愉悦的呼喊。<<bHe>>紧紧地抱着你。"你的求偶之歌很好听。很快我们会一起清理干净的。"
+				你微微颤抖，然后<<bhe>>轻轻地对你嘀嘀咕咕。
+			<<else>>
+				你弓起背部，<<bhim>>将翅膀环抱住你，以防止你摔倒。<<bHe>>轻轻对你嘀嘀咕咕。
+			<</if>>
+			<<npcincr "Great Hawk" dom 5>><<ggdom>>
+			<br><br>
+			<<if $bird.activity is "sing" or $bird.activity is "groom">>
+				<<link [[奖励|Bird Tower Perch Sex]]>><<set $sexstart to 1>><<set $phase to 1>><<transform bird 1>><<npcincr "Great Hawk" love 1>><</link>><<deviant1>><<glove>><br>
+			<</if>>
+			<<bird_perch_options>>
+		<<else>>
+			<br><br>
+
+			<<link [[好好享受 (0:05)|Bird Tower Bask Groom]]>><<bird_pass 5>><<stress -3>><<npcincr "Great Hawk" love 1>><<npcincr "Great Hawk" dom 1>><</link>><<lstress>><<glove>><<gdom>><br>
+			<<link [[推开|Bird Tower Bask Groom Push]]>><<npcincr "Great Hawk" dom -1>><</link>><<ldom>><br>
+		<</if>>
+	/* 北极星模组 */
+	<<elseif $dragon gte 6>>
+		<<beasttype>>短暂地停下了歌声，望向了你的翅膀。
+		<<if $monster is 1>>
+			<<bHis>>轻柔地触摸着你，你的身体从<<bhis>>双手抚摸你翅膀的动作中得到了快感。<<arousal 1000>><<garousal>>
+		<<else>>
+			<<bHe>>开始用自己的羽翼按摩你的翅膀，在你的身体里掀起快感的浪潮。<<arousal 1000>><<garousal>>
+		<</if>>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+			<<if $monster is 1>>
+				你在<<bhis>>的怀抱中弓起背，对着<<if $daystate is "dawn">>清晨的空气<<elseif $daystate is "dusk">>傍晚的空气<<else>>风<</if>>发出快乐的呼喊。<<bHe>>将你抱得更紧了。"你的交配之歌很动听，我们很快就能互相梳洗了。"
+				你轻轻地颤抖，然后<<bhe>>开始悄悄地对你咕咕叫起来。
+			<<else>>
+				你弓起背部，<<bhim>>将<<bhis>>的翅膀包裹在你周围，以防止你摔倒。<<bHe>>悄悄地对你嘀嘀咕咕。
+			<</if>>
+			<<npcincr "Great Hawk" dom 5>><<ggdom>>
+			<br><br>
+			<<if $bird.activity is "sing" or $bird.activity is "groom">>
+				<<link [[回报|Bird Tower Perch Sex]]>><<set $sexstart to 1>><<set $phase to 1>><<npcincr "Great Hawk" love 1>><</link>><<deviant1>><<glove>><br>
+			<</if>>
+			<<bird_perch_options>>
+		<<else>>
+			<br><br>
+			<<link [[享受 (0:05)|Bird Tower Bask Groom Dragon]]>><<bird_pass 5>><<stress -3>><<npcincr "Great Hawk" love 1>><<npcincr "Great Hawk" dom 1>><</link>><<lstress>><<glove>><<gdom>><br>
+			<<link [[推开|Bird Tower Bask Groom Push]]>><<npcincr "Great Hawk" dom -1>><</link>><<ldom>><br>
+		<</if>>
+	<<elseif $angel gte 6 or $demon gte 6 or $fallenangel gte 2 or $bee gte 6>>
+	/* 北极星 */
+		<<beasttype>>稍微停下了<<bhis>>的歌曲，观察着你的翅膀。
+		<<if $monster is 1>>
+			"看起来有些奇怪，和我的不一样，但它们是你的东西，所以它们很漂亮。"
+		<<else>>
+			<<bHe>>笨拙地看着你背上的翅膀，偶尔戳它们一下。<<bHe>>很可能很好奇为什么它们看起来和<<bhis>>自己的不一样。
+		<</if>>
+		一段时间后，<<bHe>>重新回到自己的歌曲中。
+		<br><br>
+		<<bird_perch_options>>
+	<<else>>
+		<<beasttype>>盯着你的背。<<bHe>>用自己的翅膀摩擦着它。
+		<<if $monster is 1>>
+			"别担心。我相信你的很快就会长出来的。到时候我们就可以一起飞了。"<<if $NPCName[$NPCNameList.indexOf("Great Hawk")].love gte 50>>你转过头看着<<bhim>>。"我会很高兴的。没有你的天空是如此的空荡荡。"<</if>>
+		<</if>>
+			一段时间后，<<bHe>>重新回到自己的歌曲中。
+		<br><br>
+		<<bird_perch_options>>
+	<</if>>
+<<elseif $rng gte 81>>
+	<<switch $weather>>
+		<<case "clear">>
+			太阳<<if Time.dayState is "dawn">>升起<<elseif Time.dayState is "dusk">>落下<</if>>，它的光线温暖了你的脸，你坐在<<beasttypes>>怀抱中。你感到很宁静。<<stress -12>><<trauma -3>><<lstress>><<ltrauma>>
+		<<case "overcast">>
+			灰色的天空似乎在呼唤你，乞求你入加它们。<<stress -3>><<lstress>>
+		<<case "rain">>
+			潮湿的草淡淡的气味，石头上雨滴的合唱，混合着<<beasttypes>>的歌曲，使得你短暂地入睡。<<tiredness -20>><<ltiredness>>
+		<<case "snow">>
+			尽管空气寒冷，远方的积雪在阳光下闪闪发亮，你在<<beasttypes>>的怀抱中依然很温暖。<<stress -6>><<trauma -3>><<lstress>><<ltrauma>>
+		<<default>>
+			你舒适地坐在<<beasttypes>>的怀抱中。
+	<</switch>>
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 71>>
+<<run statusCheck("Kylar")>>
+	你的思绪转向
+	<<if random(1,2) is 1>>
+		<<switch $loveInterest.primary>>
+			<<case "Robin">>
+				罗宾。
+				<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 50>>
+					你想起自己丢下了<<nnpc_him "Robin">>，感觉心情一沉。<<stress 12>><<ggstress>>
+				<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+					不知道<<nnpc_he "Robin">>是不是会来找你。
+				<<else>>
+					不知道<<nnpc_he "Robin">>现在怎么样，你感到一阵内疚。
+				<</if>>
+			<<case "Kylar">>
+				凯拉尔。
+				<<if _kylarStatus.includes("Rage")>>
+					不知道<<nnpc_he "Kylar">>会不会来找你。仔细考虑之后，你觉得"会不会"应该替换为"正在"。<<stress 3>><<gstress>>
+				<<else>>
+					你希望自己不在的时候，<<nnpc_he "Kylar">>不会受到霸凌。
+				<</if>>
+			<<case "Whitney">>
+				惠特尼。很难猜测<<nnpc_he "Whitney">>发现你做的事后会有什么反应。
+			<<case "Sydney">>
+				悉尼。
+				<<if Time.weekDay is 1>>
+					<<nnpc_He "Sydney">>现在应该正在神殿里努力工作吧？
+				<<else>>
+					一想到<<nnpc_his "Sydney">>的微笑，你就感到一阵温暖。
+				<</if>>
+			<<case "Eden">>
+				伊甸。<<nnpc_He "Eden">>可能会猎杀巨鹰作为消遣，尤其是当<<nnpc_he "Eden">>发现你现在的处境后。
+			<<case "Avery">>
+				艾弗里。
+				<<if Time.weekDay is 7 and $averyseen isnot 1>>
+					<<nnpc_He "Avery">>可能正在找你，想约你一起进行下次约会吧？
+				<<elseif $averydate is 1>>
+					毕竟你们晚些时候有一场约会。
+				<<elseif $NPCName[$NPCNameList.indexOf("Avery")].rage gte 20 and $averyragerevealed is 1>>
+					你很高兴能离开这么远，至少在<<nnpc_he "Avery">>平静下来之前。
+				<<else>>
+					你笑了，想象着<<nnpc_him "Avery">>试图挽回颜面时辩解的样子。
+				<</if>>
+			<<case "Alex">>
+				艾利克斯，还有农场。
+				<<if $farm.aggro gte 60>>
+					你希望雷米没有给<<nnpc_him "Alex">>带来太多麻烦。
+				<<elseif $farm.tower_guard_unpaid gte 1>>
+					$farm.tower_guard的工资还没付。你希望这不会影响你们的契约。
+				<<else>>
+					你希望收成能不错。
+				<</if>>
+			<<case "Black Wolf">>
+				森林，还有你的族群。不知道它们是不是会想你。
+			<<default>>
+				你遭遇过的所有困苦，它们现在都伤害不到，乃至接触不到你了。此刻，你看了看那用翅膀裹着你的
+				<<if $monster is 1>>
+					<<nnpc_wife "Great Hawk">>
+				<<else>>
+					巨鹰，
+				<</if>>
+				，心里充满勇气，无所畏惧。<<trauma -10>><<lltrauma>>
+		<</switch>>
+	<<elseif $loveInterest.secondary isnot "None">>
+		<<switch $loveInterest.secondary>>
+			<<case "Robin">>
+				罗宾。
+				<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 50>>
+					你想起自己丢下了<<nnpc_him "Robin">>，感觉心情一沉。<<stress 12>><<ggstress>>
+				<<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+					不知道<<nnpc_he "Robin">>是不是会来找你。
+				<<else>>
+					不知道<<nnpc_he "Robin">>现在怎么样，你感到一阵内疚。
+				<</if>>
+			<<case "Kylar">>
+				凯拉尔。
+				<<if _kylarStatus.includes("Rage")>>
+					不知道<<nnpc_he "Kylar">>会不会来找你。仔细考虑之后，你觉得"会不会"应该替换为"正在"。<<stress 3>><<gstress>>
+				<<else>>
+					你希望自己不在的时候，<<nnpc_he "Kylar">>不会受到霸凌。
+				<</if>>
+			<<case "Whitney">>
+				惠特尼。很难猜测<<nnpc_he "Whitney">>发现你做的事后会有什么反应。
+			<<case "Sydney">>
+				悉尼。
+				<<if Time.weekDay is 1>>
+					<<nnpc_He "Sydney">>现在应该正在神殿里努力工作吧？
+				<<else>>
+					一想到<<nnpc_his "Sydney">>的微笑，你就感到一阵温暖。
+				<</if>>
+			<<case "Eden">>
+				伊甸。<<nnpc_he "Eden">>可能会猎杀巨鹰作为消遣，尤其是当<<nnpc_he "Eden">>发现你现在的处境后。
+			<<case "Avery">>
+				艾弗里。
+				<<if Time.weekDay is 7 and $averyseen isnot 1>>
+					<<nnpc_he "Avery">>可能正在找你，想约你一起进行下次约会吧？
+				<<elseif $averydate is 1>>
+					毕竟你们晚些时候有一场约会。
+				<<elseif $NPCName[$NPCNameList.indexOf("Avery")].rage gte 20 and $averyragerevealed is 1>>
+					你很高兴能离开这么远，至少在<<nnpc_he "Avery">>平静下来之前。
+				<<else>>
+					你笑了，想象着<<nnpc_him "Avery">>试图挽回颜面时辩解的样子。
+				<</if>>
+			<<case "Alex">>
+				艾利克斯，还有农场。
+				<<if $farm.aggro gte 60>>
+					你希望雷米没有给<<nnpc_him "Alex">>带来太多麻烦。
+				<<elseif $farm.tower_guard_unpaid gte 1>>
+					$farm.tower_guard的工资还没付。你希望这不会影响你们的契约。
+				<<else>>
+					你希望收成能不错。
+				<</if>>
+			<<case "Black Wolf">>
+				森林，还有你的族群。不知道它们是不是会想你。
+			<<default>>
+				你遭遇过的所有困苦，它们现在都伤害不到，乃至接触不到你了。此刻，你看了看那用翅膀裹着你的
+				<<if $monster is 1>>
+					<<nnpc_wife "Great Hawk">>,
+				<<else>>
+					巨鹰，
+				<</if>>
+				，心里充满勇气，无所畏惧。<<trauma -10>><<lltrauma>>
+		<</switch>>
+	<<else>>
+		你遭遇过的所有困苦，它们现在都伤害不到，乃至接触不到你了。此刻，你看了看那用翅膀裹着你的
+		<<if $monster is 1>>
+			<<nnpc_wife "Great Hawk">>,
+		<<else>>
+			巨鹰，
+		<</if>>
+		，心里充满勇气，无所畏惧。<<trauma -10>><<lltrauma>>
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 61>>
+	<<beasttype>>突然停止歌唱，迅速转过头，凝视着荒原上的什么东西。
+	<<if $monster is 1>>
+		"我看到有什么东西，在那边。"<<bHe>>指了指远处的某物。
+	<<else>>
+		<<bHe>>一定看到了什么。
+	<</if>>
+	<<if $transformationParts.traits.sharpEyes isnot "disabled">>
+		多亏了你超凡的视力，你也看到了。
+		<<switch random(1,6)>>
+			<<case 1>>
+				<<endevent>><<beastNEWinit 3 fox>>
+				三个<<beastsplural>>在小山顶上互相打闹滚作一团。
+				<<endevent>><<npc "Great Hawk">>
+				<<if $monster is 1>>
+					<<beasttype>>发出一声轻笑，
+				<<else>>
+					<<beasttype>>摇了摇头，
+				<</if>>
+				然后又开始唱歌了。
+			<<case 2>>
+				地平线上隐约可见一大群人正朝着小镇的方向走去。
+				<<if $monster is 1>>
+					"没有翅膀的家伙们喜欢集体行动，但我更喜欢只和<<wife>>待在一起，"<<bhe>>说道，
+				<<else>>
+					<<bhe>>亲昵地蹭了一下你的脸颊，
+				<</if>>
+				然后又开始唱歌了。
+			<<case 3>>
+				<<if $hallucinations gte 2 and $tentacledisable is "f">>
+					远处的地面上，一根小小的紫色触手滑了出来，然后像它出现的时候一样，迅速消失在地面上。
+					<<if $monster is 1>>
+						"我不喜欢那些东西。它们会让我的视野变得模糊。"
+					<<else>>
+						<<beasttype>>发出了一声短促的尖叫。
+					<</if>>
+					过了几分钟，<<bhe>>再次开始唱歌。
+				<<else>>
+					至少，你觉得自己看到了什么，那里刚才肯定有什么，只是你刚好错过了。
+					<<if $monster is 1>>
+						"你看到了吗？小小的、紫色的、黏糊糊的那些东西。我讨厌他们。"<<bHe>>稍微把你抱紧了一些，
+					<<else>>
+						<<beasttype>>发出了一声短促的尖叫，
+					<</if>>
+					过了几分钟，再次开始唱歌。
+				<</if>>
+			<<case 4>>
+				你看到一个穿着黑衣服、戴着兜帽的可疑人影潜伏在一座小丘后头。你眨了眨眼睛，那个人不知何时消失了。<<beasttype>>继续回到歌声中。
+			<<case 5>>
+				你看到远处闪烁着一个光点，好像是什么非常闪亮的东西。过了一会儿，你意识到那只是一块反光的垃圾。
+				<<if $monster is 1>>
+					"有危险。"
+				<<else>>
+					<<beasttype>>可能看到了自己的倒影。
+				<</if>>
+				<<endevent>><<beastNEWinit 1 fox>>
+				这时，一只路过的<<beasttype>>迅速将它拾起，然后跑出了视线。
+				<<endevent>><<npc "Great Hawk">>
+				<<if $monster is 1>>
+					"他们是故意的，这些小家伙总是用这种把戏来骚扰我。"<<bHe>>噘着嘴说道，
+				<<else>>
+					<<beasttype>>尖鸣了一声，
+				<</if>>
+				但还是继续回到了自己的歌声中。
+			<<case 6>>
+				你看到远处有一个人，全身赤裸。
+				<<if $tentacledisable is "f" and $plantdisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+					<<Plant_details>>散落在他们的头发中，蔓延的藤蔓缠绕在他们身上。起初，你以为他们正在被攻击，但之后却发现他们似乎操控着这些藤蔓。
+					<br><br>
+					<<if $monster is 1>>
+						"奇怪的生物，"<<beasttype>>说道，"它们和没有翅膀的生物一样在荒原上生存。也许数量更多。"
+					<<else>>
+						<<beasttype>>莫名其妙地摇了摇头。
+					<</if>>
+				<<else>>
+					他们似乎不在意自己的暴露，也不在乎<<if $weather is "rain" or $weather is "snow">>的影响<</if>>。
+					<<if $monster is 1>>
+						"奇怪的没有翅膀的家伙，"<<beasttype>>说道，"他们中的大多数不是应该更喜欢穿着衣服吗。"
+					<<else>>
+						<<beasttype>>莫名其妙地摇了摇头。
+					<</if>>
+				<</if>>
+				<<bHe>>的歌声暂停了几秒。
+			<<default>>
+		<</switch>>
+	<<else>>
+		你无法看清那是什么。一会儿之后，<<bhe>>平静下来，回到了自己的歌声中。
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 51>>
+	<<beasttype>>继续唱歌，每隔几分钟就停顿一下。
+	<<if $rng is 51>>
+		某些时候，<<bhe>>在开始一首新的曲子前会有些犹豫。
+		<<if $monster is 1>>
+			<<bHe>>稍微用咳嗽清了清嗓子，然后继续唱歌，歌声婉转又连贯。
+		<<else>>
+			<<bHe>>突然左右晃动头部，然后从喉咙里吐出一小块骨头。之后<<bHe>>再次恢复歌声，没有遇到其他的困难。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 41>>
+	<<beasttype>>停下了歌声，然后
+	<<if $monster is 1>>
+		用双臂搂住你。
+		"<<print either(
+			"我爱你。",
+			"谢谢你愿意陪伴着我。",
+			"我曾是如此害怕独处，而现在我再也不用害怕了。",
+			"你很完美。",
+			"我亲爱的。"
+		)>>"
+		<br><br>
+		<<if $bird.activity is "sing" or $bird.activity is "groom">>
+			<<link [[亲吻|Bird Perch Monster Kiss]]>><<npcincr "Great Hawk" love 1>><</link>><<glove>><<kissvirginitywarning>><<NPCvirginitywarning "Great Hawk" "kiss">><br>
+		<</if>>
+		<<bird_perch_options>>
+	<<else>>
+		将头靠在你的肩膀上。
+		<br><br>
+		<<bird_perch_options>>
+	<</if>>
+<<elseif $rng gte 31>>
+	<<beasttype>>的声音响彻荒原，像是对荒原上所有居民一声热情的<<if Time.dayState is "dawn">>早上好<<elseif Time.dayState is "dusk">>晚上好<<else>>问候<</if>>。又或许这只是<<bhe>>在变相的炫耀你。
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 21>>
+	<<beasttype>>的歌声继续响彻荒原。从远处传来回应的歌声，两道声音相互应和，直到另一个声音最终停了下来。
+	<<if $monster is 1>>
+		"<<print either(
+			"我们分享了天空和云彩的知识，这些会很有用的。",
+			"必须告诉他们，我已经不是单身了。",
+			"我讲了有关我们最好一次狩猎的故事。",
+			"他们讲了自己的故事，总是让我也很兴奋。",
+			"他们正在寻找伴侣。我们应该小心。"
+		)>>"
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 11>>
+	荒原静默无声，只有<<beasttypes>>的歌声穿透寂静。
+	<br><br>
+	<<bird_perch_options>>
+<<elseif $rng gte 1>>
+	<<beasttype>>稍微休息了一下自己的嗓子。
+	<br><br>
+	<<bird_perch_options>>
+<<else>>
+	<span class="teal"><<beasttypes>>的旋律让你感到有些熟悉，</span>这些音节透过你的<<if $harpy gte 6>>翅膀<<else>>手指<</if>>流动，但你不能完全理解其中的意思。
+	<br><br>
+	<<bird_perch_options>>
+<</if>>

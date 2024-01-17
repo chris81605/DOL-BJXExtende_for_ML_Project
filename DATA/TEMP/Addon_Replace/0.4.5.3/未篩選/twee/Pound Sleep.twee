@@ -1,0 +1,51 @@
+:: Pound Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+	<<if _slimeWakeMasturbation is 1>>
+		<<set _masturbationExit to "Pound Sleep">>
+		<<slimeWakeMasturbation>>
+	<<else>>
+		<<wakingEffects $sleepHoursTotal>>
+		<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+			你睡得很安稳，但你现在有些许不舒服。
+			<br><br>
+		<<elseif $nightmares gte 1 and $controlled is 0>>
+			你<<if _wakingEffect>>梦见了<<else>>梦到自己被<</if>>一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+		<<else>>
+			<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte ($arousalmax / 10) * 9>>
+				你的睡眠被淫秽的梦境<<if _wakingEffect>>打断<<else>>所困扰<</if>>。
+				<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+				<<arousal `100 * $sleepHoursTotal`>>
+				<<if $arousal gte $arousalmax>>
+					它们把你推向了高潮的顶点。
+					<<orgasm>><<set _orgasm to true>>
+				<<else>>
+					<br><br>
+				<</if>>
+			<<elseif !_wakingEffect>>
+				你睡得很香。
+				<br><br>
+			<<else>>
+				<br><br>
+			<</if>>
+		<</if>>
+
+		<<sleepeffects>>
+		<<if _sleepinterrupt>>
+			你被齐声的狗叫吵醒。
+			<br><br>
+
+			<<link [[继续|Pound Cage]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<br><br>
+
+			<<link [[起身|Pound Cage]]>><<endevent>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</if>>

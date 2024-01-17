@@ -1,0 +1,68 @@
+:: Widgets Effects Pain [widget]
+<<widget "effectspain">>
+	<<if $leftaction is "leftstruggleweak" and $rightaction is "rightstruggleweak">>
+		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftstruggleweak">><<set $rightactiondefault to "rightstruggleweak">>
+		<<if $position is "stalk">>
+			你与疼痛作斗争，试图让自己站起来，但是没有力气了。
+		<<else>>
+			你与痛苦作斗争，试图把它们推开，但是你没力气了。
+		<</if>>
+		<<brat 2>><<set _br to true>>
+	<</if>>
+
+	<<if $leftaction is "leftstruggleweak">>
+		<<set $leftaction to 0>><<set $leftactiondefault to "leftstruggleweak">>
+		<<if $position is "stalk">>
+			你与疼痛作斗争，试图用左臂把自己撑起来，但是力气太小了。
+		<<else>>
+			你与疼痛作斗争，用你的左臂推它们，但是你的力气太少了。
+		<</if>>
+		<<brat 1>><<set _br to true>>
+	<</if>>
+
+	<<if $rightaction is "rightstruggleweak">>
+		<<set $rightaction to 0>><<set $rightactiondefault to "rightstruggleweak">>
+		<<if $position is "stalk">>
+			你与疼痛作斗争，试图用右臂把自己推起来，但是力气太小了。
+		<<else>>
+			你与疼痛作斗争，用你的右臂推着它们，但是你没力气了。
+		<</if>>
+		<<brat 1>><<set _br to true>>
+	<</if>>
+
+	<<if $leftaction is "leftprotect" and $rightaction is "rightprotect">>
+		<<set $leftaction to 0>><<set $rightaction to 0>><<set $leftactiondefault to "leftprotect">><<set $rightactiondefault to "rightprotect">>
+		你保护你身体的柔软部分，保护他们免受进一步的伤害。<span class="green"> - 疼痛</span>
+		<<meek 2>><<pain -2>><<set _br to true>>
+	<</if>>
+
+	<<if $leftaction is "leftprotect">>
+		<<set $leftaction to 0>><<set $leftactiondefault to "leftprotect">>
+		你用左手紧紧抓住身体上的一个敏感部位，保护它不受伤害。<span class="green"> - 疼痛</span>
+		<<meek 1>><<pain -1>><<set _br to true>>
+	<</if>>
+
+	<<if $rightaction is "rightprotect">>
+		<<set $rightaction to 0>><<set $rightactiondefault to "rightprotect">>
+		你用右手紧紧抓住身体上的一个敏感部位，保护它不受伤害。<span class="green"> - 疼痛</span>
+		<<meek 1>><<pain -1>><<set _br to true>>
+	<</if>>
+
+	<<if _br is true>>
+		<br>
+	<</if>>
+
+	<<if $mouthaction is "stifle">>
+		<<set $mouthaction to 0>><<set $mouthactiondefault to "stifle">>
+		你试着平稳你的呼吸，你试着抑制你的哭泣……尽管很痛苦，但你还是做到了。<span class="green"> - 疼痛</span>
+		<<pain -1>>
+	<</if>>
+
+	<<if $mouthaction is "letout">>
+		<<set $mouthaction to 0>><<set $mouthactiondefault to "letout">><<set _sound to 1>>
+		你没有抑制住你的眼泪，你被哭泣和呜咽打断。<span class="green"> - 压力</span>
+		<<meek 1>><<stress -2>>
+	<</if>>
+
+	<<painclamp>>
+<</widget>>

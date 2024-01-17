@@ -1,0 +1,46 @@
+:: Forest Bully Help []
+你拼命呼救，希望得到最好的结果。除了一些受惊的鸟外，森林似乎一片寂静。<br><br>
+<<rng>>
+<<if $rng lte 20 >>
+	等了几分钟后，你看到一个学生悄悄地溜到你身边，走到绳子固定的地方，轻轻地把你放回地面，然后跑回树林里赶上了朋友们。双脚踏地的那刻，你长舒一口气，胯间的压迫感也消失了。
+	<br><br>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<elseif $rng lte 40 >>
+	<<generate2>><<person2>>
+	等了几分钟后，一个<<person>>被刚刚的骚动所吸引，一路慢悠悠地跑过来。<<he>>看到你的处境后马上把你放了下来。双脚踏地的那刻，你长舒一口气，胯间的压迫感也消失了。<<He>>确认你没事后才走开。
+	<br><br>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+
+<<elseif $rng lte 60>>
+	<<generate2>><<person2>>
+	等了几分钟后，一个<<person>>被刚刚的骚动所吸引，一路慢悠悠地跑过来。看到你的模样，<<his>>的脸上露出邪恶的笑容。<<He>>抓住你的脚踝，用力向下拉。这股力量猛拉着你的$worn.under_lower.cn_name_cap，<<print ($player.ballsExist ? "紧紧地挤着你的睾丸" : "紧紧地夹住你的阴唇")>>，使你痛苦万分，直到你的下衣终于从身上撕裂下来。<<gpain>><<ggstress>><<pain 25>><<stress 50>><<set $worn.under_lower.integrity to 0>>
+	<br><br>
+	你倒在地上，痛苦地抓着裆部，而<<he>>却大笑着走开了。
+	<br><br>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+
+<<elseif $rng lte 80 and $bestialitydisable is "f">>
+	等了几分钟后，你看到一只独狼受到噪声的吸引，从树丛中走出来。它咆哮着，然后咬住了你的脚踝！这股重量猛拉着你的$worn.under_lower.cn_name_cap，<<print ($player.ballsExist ? "紧紧地挤着你的睾丸" : "紧紧地夹住你的阴唇")>>，使你疼痛万分，直到你的下衣被撕扯了下来。<<gpain>><<ggstress>><<pain 25>><<stress 50>><<set $worn.under_lower.integrity to 0>>.
+	<br><br>
+	你痛苦地捂住裆部，跌倒在地。狼看见你暴露出弱点，一跃跳到了你的身上！
+	<br><br><<beastNEWinit 1 wolf>>
+	<<link [[继续|Forest Wolf]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+	你等了几分钟，但没有人来。微风吹动着你，让你轻轻地来回摇晃，迫使你不时地转移重心，这增加了你的不适感。
+	<br><br>
+	<<if $worn.under_lower.integrity gte 11>>
+		寂静只被偶尔从你的$worn.under_lower.cn_name_cap传来的撕裂声打破，看来你的<<underlowerplural>>已经破烂不堪。<<set $worn.under_lower.integrity -= 10>>
+		<br><br>
+		仍然被困在空中，你需要再试一次或者呼救。
+		<br><br>
+		<<link [[爬|Forest Bully Climb]]>><</link>>
+		<br>
+		<<link [[呼救|Forest Bully Help]]>><</link>>
+	<<else>>
+		寂静只被偶尔从你的$worn.under_lower.cn_name_cap传来的撕裂声打破。最终，布料坚持不住了，把你掉在了地上。
+		<br><br>
+		过了一会儿，你站起身来继续前进，绳子上还绑着你$worn.under_lower.cn_name_cap的残片。<<set $worn.under_lower.integrity -= 10>>
+		<br><br>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<</if>>
+<</if>>

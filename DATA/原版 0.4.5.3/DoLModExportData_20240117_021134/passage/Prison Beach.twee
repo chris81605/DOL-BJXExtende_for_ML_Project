@@ -1,0 +1,94 @@
+:: Prison Beach []
+<<location "beach">><<set $outside to 1>><<effects>><<effects_prison>>
+
+你在监狱外的秘密海滩上，海浪十分汹涌。
+<<if $prison.watchers_friend is 2>>
+
+<<elseif $prison.schedule is "revolt">>
+	你听到了正在进行中的叛乱反抗。<<prison_attention 10>>
+<<else>>
+	来势汹汹的影子在头顶上盘旋。
+<</if>>
+<br><br>
+
+
+<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and $prison_wren_boat_intro is 1 and Time.weekDay is 6>>
+	<<npc "Wren">><<person1>>
+	一艘船停在岸边，伦恩从甲板下走出来。<<He>>跃过水面并跳到附近的一块岩石上，然后弯下身子准备去捡一个箱子，但当<<He>>看到你时，<<he>>停下了手上的动作。
+	<br><br>
+	"你是个聪明的<<girl>>，"<<he>>盯着你，"我不应该感到惊讶，所以让我们把这个海滩作为我们两个人之间的秘密。"<<He>>提起了箱子，回到<<his>>的船上。
+	<br><br>
+
+	<<link [[继续|Prison Beach]]>><<endevent>><<unset $prison_wren_boat_intro>><</link>>
+	<br>
+<<else>>
+	<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and Time.weekDay is 6>>
+		<<npc "Wren">><<person1>>
+		伦恩在船上忙活着。
+		<br><br>
+		<<endevent>>
+	<<elseif Time.hour is 13 and !$prison_wren_intro and Time.weekDay is 6>>
+		伦恩的船在海滩附近停泊。
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if Time.hour is 5>>
+		很快就要点名了。<span class="pink">如果你不尽快回到你的牢房，就会有麻烦。</span>
+		<br><br>
+	<</if>>
+
+	<<if $prison.schedule is "hunt">>
+		<<beastNEWinit 1 hawk>><<person1>>
+		一个<<beasttype>>向你飞来，<span class="red">伸出了它的爪子。</span>你惊慌失措地逃跑，企图避免<<bhis>>追捕。
+		<br><br>
+		<<bHe>>追着你进了隧道，潜入了院子之中。
+		<br><br>
+
+		<<link [[继续|Prison Yard]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		小鱼从浅而平静的泻湖中跃出。
+		<br>
+		<<if (Time.hour is 12 or Time.hour is 14) and !$prison_wren_intro and Time.weekDay is 6>>
+			<br>
+			<<link [[与伦恩交谈|Prison Beach Wren]]>><</link>>
+			<br>
+		<</if>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<<if $worn.feet.type.includes("shackle")>>
+				<br>
+				<span class="blue">你不能在手臂被捆绑，腿被铐住的情况下游泳。</span>
+			<br><br>
+			<<else>>
+				<br>
+				<span class="blue">你不能在手臂被捆绑的情况下游泳。</span>
+			<br><br>
+			<</if>>
+		<<elseif $worn.feet.type.includes("shackle")>>
+			<br>
+			<span class="blue">你不能带着脚镣游泳。</span>
+			<br><br>
+		<<else>>
+			<<link [[练习游泳 (1:00)|Prison Beach Swim]]>><<pass 60>><<stress -6>><<tiredness 6>><</link>><<gtiredness>><<gswimming>><<lstress>>
+			<br><br>
+
+			<<link [[游离岛屿 (0:05)|Prison Beach Escape]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+		<<if $prison.yard_door is 1>>
+			<<link [[从隧道前往庭院 (0:01)|Prison Yard]]>><<pass 1>><<set $location to "prison">><</link>>
+			<br>
+		<<else>>
+			一条倾斜的隧道通向岛屿，<span class="blue">但里面有一扇锁着的门。</span>
+			<br>
+		<</if>>
+
+		<<if $prison.tunnel gte 120>>
+			<<link [[从隧道回牢房 (0:05)|Prison Tunnel Edge]]>><<pass 5>><<set $phase to 1>><<set $location to "prison">><</link>>
+			<br>
+		<</if>>
+		<<prison_map beach>>
+	<</if>>
+<</if>>

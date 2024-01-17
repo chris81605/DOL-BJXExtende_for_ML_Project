@@ -1,0 +1,225 @@
+:: Kylar Chat []
+<<set $outside to 0>><<effects>><<run statusCheck("Kylar")>>
+<<set $kylar_action to "chat">>
+
+<<if _kylarStatus.includes("Love")>>
+	<<bodywritingExposureCheck>>
+	<<if _bodywriting_exposed gte 1 and !$daily.kylar.bodywriting and _bodypart>>
+		<<set $daily.kylar.bodywriting to true>>
+		<<if $skin[_bodypart].special is "Kylar">>
+			<<if $kylarenglish gte 1>>
+				<<if $skin[_bodypart].pen is "tattoo" and $kylar_tattoo isnot 1>>
+					<<set $kylar_tattoo to 1>>
+					你和凯拉尔聊天。<<He>>轻轻地用手指抚摸着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>，眨了眨眼睛。"这，这是一个纹身……"<<he>>低声说道，"它，它会永远留在你身上……"
+					<br><br>
+					<<He>>摸了一会儿你的<<bodypart _bodypart>>，然后落下一个吻。<<He>>接着又亲了一口，再一次，然后再一次。<<his>>的呼吸变得沉重，<<He>>吻遍你的整张脸，最后托起你的头，猛地将<<his>>嘴唇压在你的嘴上。<<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+					<br><br>
+					<<He>>拉开距离，凝视着你的眼睛。"我爱你，"<<he>>用沙哑的声音低声说道，"我很高兴你也同样爱我。"
+					<<npcincr Kylar love 3>><<npcincr Kylar rage -10>><<gglove>><<lllksuspicion>>
+				<<else>>
+					你和凯拉尔聊天。<<He>>轻轻地用手指抚摸着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>，然后开心地笑了。"我爱你，"<<he>>低声说道，"真的真的很爱你。"
+					<<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<glove>><<lksuspicion>>
+				<</if>>
+			<<else>>
+				你和凯拉尔聊天。<<He>>轻轻地用手指抚摸着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>，脸变得红了起来。
+				<<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<glove>><<lksuspicion>>
+			<</if>>
+		<<elseif ["Robin","Whitney","Eden","Avery","Alex","Black Wolf","Great Hawk"].includes($skin[_bodypart].special) or ($skin[_bodypart].special is "Sydney" and $kylarSeen.includes("sydneyWriting") and ($skin[_bodypart].lewd is 1 or !_kylarStatus.includes("Calm")))>>
+			<<if ["marker","tattoo","brand","magic"].includes($skin[_bodypart].pen)>>
+				<<set $kylarBodywriting to 1>>
+				你和凯拉尔聊天。<<He>>试图擦掉你<<bodypart _bodypart>>上的<<tattoo _bodypart>>，但却没能擦掉。<<He>>皱起眉头，最后怒气冲冲地坐了回去。
+				<<ggksuspicion>><<glust>><<npcincr Kylar lust 1>><<npcincr Kylar rage 3>>
+			<<else>>
+				你和凯拉尔聊天。<span class="blue"><<He>>试图擦掉你<<bodypart _bodypart>>上的<<tattoo _bodypart>></span>，开始在你的<<bodypart _bodypart>>上
+				<<if $skin[_bodypart].pen is "pen">>
+					用墨水涂抹。
+				<<else>>
+					用<<print $skin[_bodypart].pen>>涂画。
+				<</if>>
+				<<He>>靠回了椅子上，似乎非常满意。
+				<<bodywriting_clear _bodypart>>
+				<<gksuspicion>><<glust>><<npcincr Kylar lust 1>><<npcincr Kylar rage 1>>
+			<</if>>
+		<<elseif $skin[_bodypart].special is "Sydney">>
+			<<if $daily.sydney.kylarFrown>>
+				你和凯拉尔聊天。<<He>>凝视着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>摇了摇头。"你不该让<<nnpc_him "Sydney">>这么做的。"
+				<<He>>暴躁地撩起<<his>>的头发，露出了<span class="purple">"Kylar >:("</span>，看起来从午饭开始这个一直保留在<<his>>的额头上。
+			<<elseif $skin[_bodypart].lewd is 1>>
+				<<set $kylarSeen.pushUnique("sydneyWriting")>>
+				你和凯拉尔聊天。<<He>>盯着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>笑了。"<<nnpc_He "Sydney">>也对你做了一样的事情吗？"但<<He>>顿了顿，仔细又看了一遍你身上的字，皱起眉头，笑容逐渐转化为了疑惑。
+				<<if $skin[_bodypart].writing is "Book Criminal <3">>
+					"嗯——为什么是一颗心？"<<he>>问道，"通常不该是一张愤怒的脸吗？"
+				<</if>>
+				<<gksuspicion>><<glust>><<npcincr Kylar lust 1>><<npcincr Kylar rage 1>>
+			<<else>>
+				你和凯拉尔聊天。<<He>>盯着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>笑了，"<<nnpc_He "Sydney">>也对你做了一样的事情吗？"
+				<<if ($rng gte 51 or $daily.sydney.kylarBook) and Time.schoolDay>>
+					<<He>>撩起头发，露出额头上
+					<<if $skin[_bodypart].writing is "Book Criminal >:(">>
+						和你一样的涂鸦
+					<<else>>
+						<span class="purple">"图书罪人 >:("的涂鸦</span>
+					<</if>>
+					。
+				<</if>>
+			<</if>>
+		<<elseif ["combat","violence","criminal"].includes($skin[_bodypart].special)>>
+			你和凯拉尔聊天。<<He>>瞥了一眼你<<bodypart _bodypart>>上的<<tattoo _bodypart>>有些惊讶，但没有多在意。
+		<<elseif $skin[_bodypart].special is "pregnancy">>
+			/*ToDo: Pregnancy, write once Kylar's reaction to/thoughts on pregnancy is better understood.
+			May differ based on gender, jealousy and whether or not Kylar has impregnated the PC in the past.*/
+		<<elseif ["prostitution","rape","exhibitionism","sex"].includes($skin[_bodypart].special) or $skin[_bodypart].lewd is 1>>
+			<<set $kylarBodywriting to 1>>
+			你和凯拉尔聊天。<<He>>盯着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>，但是没有多在意。
+			<<gksuspicion>><<glust>><<npcincr Kylar lust 1>><<npcincr Kylar rage 1>>
+		<<else>>
+			你和凯拉尔一起聊天。<<He>>的眼睛盯着你<<bodypart _bodypart>>上的<<tattoo _bodypart>>。
+			<<switch $skin[_bodypart].pen>>
+				<<case "tattoo">>
+					"你纹身的时候疼吗？"<<he>>问道。
+				<<case "brand">>
+					"纹身的时候会痛吗？"<<he>>关心地问道，"你一定很坚强。"
+				<<case "magic">>
+					"它怎么还会发光呢？"<<he>>问道。
+				<<case "lipstick" "mud">>
+					"那个是<<print $skin[_bodypart].pen>>弄的吗？"<<he>>问道，"真的很奇怪。"
+				<<default>>
+					"你知道的，那个写上去也不会一直保留的，"<<he>>说道，"我小的时候经常在自己身上写，墨水最终总是会褪色。"
+			<</switch>>
+		<</if>>
+	<<elseif $rng gte 96>>
+		你和凯拉尔聊天。"你没在想其他人，对吧？"<<he>>看起来有点不安，"我会知道的。"
+		<<if $loveInterest.primary is "Kylar" and $loveInterest.secondary is "None">>
+			<<glove>><<npcincr Kylar love 1>>
+		<<else>>
+			<<gstress>><<stress 1>>
+		<</if>>
+	<<elseif $rng gte 91 and $pregnancyspeechdisable is "f">>
+		你和凯拉尔聊天。"我一直在想我们未来孩子的名字，"<<he>>说。
+		<<gstress>><<stress 1>>
+	<<elseif $rng gte 81>>
+		你和凯拉尔聊天，中途<<He>>找了很多借口来跟你身体接触。
+	<<elseif $rng gte 71>>
+		你和凯拉尔聊天。"我希望没有人给你添麻烦，"<<he>>说。
+	<<elseif $rng gte 61>>
+		你和凯拉尔聊天。<<He>>把头靠在你的肩膀上。
+	<<elseif $rng gte 51>>
+		你和凯拉尔聊天。"你太棒了，"<<he>>说。
+	<<elseif $rng gte 41>>
+		你和凯拉尔聊天。"你让我感觉很安心，"<<he>>说。
+	<<elseif $rng gte 31>>
+		你和凯拉尔聊天。<<He>>拿出写生本，开始画
+		<<if $bus is "starfish">>
+			<<print either("一台街机游戏机", "一个游戏的主角", "地上的一枚硬币", "摇杆和按钮", "天花板角落里的蜘蛛网")>>。
+		<<elseif $bus is "schoollibrary">>
+			<<print either("一个书架", "生物教科书上的烧杯图片", "一个半满的篮子", "雨水飞溅的窗户", "天花板角落里挂着的蜘蛛网")>>。
+		<<elseif $bus is "kylarmanor">>
+			<<print either("乱七八糟的床单", "天窗", "一台监视器", "复式楼的栏杆", "天花板角落里挂着的蜘蛛网")>>。
+		<<elseif Time.season is "winter">>
+			<<print either("挂在树上的冰柱", "附近雪地里的雪人", "一棵叶子掉光的树", "一个被丢弃的水瓶", "一张摇摇欲坠的蜘蛛网")>>。
+		<<else>>
+			<<print either("一只离你们很远的松鼠", "一只在转圈圈的花栗鼠", "一只栖息在树枝上的鸽子", "一些野花", "天空中的一团奇怪的云", "树枝之间串着的一张蜘蛛网")>>。
+		<</if>>
+		<<He>>将写生本转向你，给你看画的画。<<He>>画得很好。
+	<<elseif $rng gte 26>>
+		你和凯拉尔聊天。<<He>>拿出<<his>>的写生本，开始为你画像。
+		<<He>>甚至不用特意去看你，都能把你画画得栩栩如生。
+	<<elseif $rng gte 21>>
+		你和凯拉尔聊天。<<He>>拿出<<his>>的写生本，开始画你<<print either("穿着傻乎乎衣服", "戴着傻乎乎帽子")>>的画。
+		你的笑声吸引了<<his>>的注意，<<he>>也笑了。
+	<<elseif $rng gte 11>>
+		<<if $kylar.riddle is 0>>
+			<<set $kylar.riddle to 1>>
+			你告诉凯拉尔一个你最近读到的谜语。"我以前从没听过这个，"<<he>>说。<<He>>皱起脸沉思了几秒钟。
+		<<else>>
+			<<if $dissociation gte 1>>
+				你跟凯拉尔聊天。"你的眼睛，"<<he>>突然说道。<<He>>盯着你看了几秒钟，然后把你拥入怀中。
+				"会没事的，我保证。"
+				<<trauma -12>><<lltrauma>>
+			<<else>>
+				你跟凯拉尔聊天。"我喜欢你的眼睛，"<<he>>有些羞涩，"对不起，突然说出这种话。"
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if _kylarStatus.includes("Rage")>>
+			你跟凯拉尔聊天。<<He>>把<<his>>的手伸向你的头发，然后用手指轻轻梳过。你感觉很舒服。
+		<<else>>
+			你和凯拉尔聊天。<<He>>把<<his>>的手伸向你的头发，但是很快就收回了手。<<he>>看着你。
+			"可以吗？"在你肯定地点头后，<<he>>向前伸出手，然后用手指轻轻梳过你的头发。你感觉很舒服。
+		<</if>>
+		<<ltiredness>><<tiredness -6>>
+		<br><br>
+
+		<<set _tf to checkTFparts()>>
+		<<set _tfSplit to random(0,1)>>
+		<<if (_tf.angelHalo or _tf.fallenAngelHalo) and _tfSplit is 0>>
+			过了一会儿，<<his>>的眼睛转向你的<<if $fallenangel>>破损的<</if>>光环，<<he>>慢慢伸出手去触摸它。
+			当<<he>>发现<<he>>什么也没够到的时候，<<he>>眯着眼睛看着你头顶的空气，皱起了眉头。
+			"我可以发誓刚才有……"<<He>>缩回<<his>>的手，继续抚摸你的头发，困惑地皱着眉。
+			<br><br>
+		<<elseif _tf.demonHorns and _tf.cowHorns>>
+			过了一会儿，<<he>>伸出手来戳了戳你的恶魔角，"这是真的吗？"<<he>>问道。
+			"这又是什么？"<<His>>的手落到了你的牛角上。
+			在接下来的几分钟内，<<he>>来回确认你的两只角，有时轻轻抚摸，有时敲一敲。
+			<br><br>
+		<<elseif (_tf.demonHorns and _tfSplit is 0) or (_tf.cowHorns and _tfSplit is 1)>>
+			过了一会儿，<<he>>伸出手来戳了戳你的角，"这些是真的吗？"<<he>>问道。
+			在几分钟的时间里，<<he>>时而抚摸，时而敲击你的角，看起来陶醉其中。
+			<br><br>
+		<<elseif (_tf.wolfEars or _tf.catEars) and _tfSplit is 1>>
+			过了一会儿，<<his>>用手拂过你的<<print (_tf.wolfEars ? "狼" : "猫")>>耳。
+			你颤抖着在<<his>>的触摸下发出<<print (_tf.wolfEars ? "嗷呜" : "咕噜声")>>。
+			<<He>>冲你微微一笑。"很敏感吗？"接下来的几分钟，<<he>>在你的耳朵周围抓挠，还向着你的耳朵吹气。
+			<<if _tf.wolfTail or _tf.catTail>>
+				你的尾巴<<print (_tf.wolfTail ? "高兴地摇晃" : "满足地摆动")>>，有时会碰到<<him>>。
+			<</if>>
+			<br><br>
+		<<elseif _tf.foxEars and _tfSplit is 1>>
+			过了一会儿，<<his>>的手拂过你的狐狸耳朵。它在<<his>>的触摸下轻轻摆动着。
+			<<He>>冲你微微一笑。"很敏感吗？"接下来的几分钟，<<he>>在你的耳朵周围抓挠，还向着你的耳朵吹气。
+			<<if _tf.foxTail>>
+				你的尾巴上下摆动，偶尔会碰到<<him>>。
+			<</if>>
+			<br><br>
+		<<elseif _tf.birdPlumage and _tfSplit is 1>>
+			过了一会儿，<<he>>伸出了<<his>>的另一只手梳理你的翅膀。"这些是羽毛吗？"<<he>>问道。
+			接下来的几分钟内，<<he>>不断用一只手抚摸你的头发，另一只手抚摸你的羽毛。
+			<<if $player.perceived_breastsize gte 3 or $player.gender_appearance is "f" or ($player.gender is "f" and $genderknown.includes("Kylar"))>>
+				突然，<<his>>的手不小心碰到了你的胸口，<<he>>立马紧张地向后退缩。
+				"对，对不起，我不是故意的……对不起。"在那之后，<<he>>就只是看着你的羽毛，怎么也不愿意继续摸了。
+			<</if>>
+			<br><br>
+		<</if>>
+		最后，<<he>>收回<<his>>的手，对你露出微笑。"谢谢。你的头发真柔软，"<<he>>说。
+	<</if>>
+<<else>>
+	<<if $rng gte 91>>
+		你试图鼓励<<him>>说话，但<<hes>>好像觉得听你讲话就满足了。
+	<<elseif $rng gte 81>>
+		你问<<hes>>今天过得开不开心，<<He>>没有反应。
+	<<elseif $rng gte 71>>
+		你们闲聊了一会儿。<<He>>一边点头一边发出难以理解的声音。
+	<<elseif $rng gte 61>>
+		你称赞<<his>>的头发。<<He>>轻轻拍了拍自己的头，然后笑着盯着<<if $bus is "schoollibrary" or $bus is "starfish">>地板<<else>>地面<</if>>。
+	<<elseif $rng gte 51>>
+		你讲了几个笑话。<<He>>发出含糊的笑声，但一直没有看向你。
+	<<elseif $rng gte 41>>
+		你说今天天气很好。<<He>>心不在焉地点点头，<<if $weather is "clear" or $weather is "overcast">>什么都没说<<else>>然后突然眨眨眼，疑惑地看向你<</if>>。
+	<<elseif $rng gte 31 and Time.season isnot "winter">>
+		你问<<he>>能不能帮你做一些功课。
+		<<if $bus is "schoollibrary">>
+			<<He>>沉默地递给你一本<<print either("科学教科书", "数学教科书", "语文教科书", "历史教科书", "漫画。<<He>>似乎没有注意到<<he>>给了你什么")>>。
+		<<else>>
+			<<He>>低声咕哝着。
+		<</if>>
+	<<elseif $rng gte 21>>
+		你们随意地闲聊着。"嗯，对，"<<he>>低声咕哝着。然而你并没有问<<he>>什么需要回答的问题。
+	<<elseif $rng gte 11 and $kylar.riddle isnot 1>>
+		<<set $kylar.riddle to 1>>
+		你跟凯拉尔说了一个你最近读到的谜语。<<He>>没有回应，但似乎考虑了一会儿。
+	<<else>>
+		你问<<he>>是不是喜欢画画。<<He>>精神振作了一点，但很快又安静了下来。
+	<</if>>
+<</if>>
+<br><br>
+<<kylaroptions>>

@@ -1,0 +1,70 @@
+:: Office Meeting Progress []
+<<effects>>
+<<set $danger to random(1,10000)>>
+<<if $danger gte 8000 - (300 * $officeFloor)>>
+	<<if $rng gte 51 or ($bestialitydisable is "t" or $monster isnot 1)>>
+		一个<<person3>><<person>>走进房间，坐在你旁边。
+		<br><br>
+		<<if $NPCList[1].skills.security gte 600>>
+			"这应该是一个有趣的会议，"<<he>>用充满欲望的目光看着你。
+		<<elseif $NPCList[1].skills.security lte 300>>
+			<<He>>不小心用<<his>>的公文包撞了你。"对不起，"<<he>>紧张地说。
+		<<else>>
+			<<He>>什么也没说，但你注意到<<he>>看了你几眼。
+		<</if>>
+		<br><br>
+		开会几分钟后，你感到有东西碰了你的腿。<<person3>><<person>>已经开始摩擦你的穿着$worn.lower.cn_name_cap的腿了。
+		<<meetingmolestactions>>
+	<<else>>
+		一个<<person3>><<person>>走进房间，带来了一只<<beasttype 0>>。
+		<br>
+		"这是我的情感支持动物，"<<person3>><<person>>坐在会议桌旁说。<<beasttype 0>>盯着你看。
+		<br>
+		"啊，<<person1>><<if $pronoun is "m">>他<<else>>她<</if>>喜欢你！"<<person3>><<person>>在将<<his>>的注意力转向会议之前说。
+		<br><br>
+		开会没多久，你就感觉到脚下有东西。<<beasttype 0>>已经开始拖拽你的$worn.lower.cn_name_cap!
+		<<meetingpetactions>>
+	<</if>>
+<<elseif $rng gte 85>>
+	会议平淡无奇，直到做报告的那个<<person3>><<person>>试图回忆起关于你们城镇的一件不为人知的事情。房间里似乎没有人知道<<he>>在说什么。你认为你记得在历史课上听说过这件事，但老师让你保持安静。
+	<br><br>
+	<<link [[说点什么|Office Meeting History Speak]]>><</link>><br>
+	<<link [[保持沉默|Office Meeting History Silence]]>><</link>>
+<<elseif $rng gte 70>>
+	<<person3>><<person>>做了一个令人痛苦的无聊的演讲，但是尽管<<his>>举止干巴巴，你还是了解到一些关于这个城镇的有趣的事实。<<ghistory>><<historyskill>>
+	<br><br>
+	<<link [[继续|Office Meeting End]]>><</link>>
+<<elseif $rng gte 55>>
+	你觉得会议过得很快，直到<<person3>><<person>>开始谈论孤儿院。
+	<br><br>
+	"是啊，整个地方都是他们。如果你幸运的话，你会得到一个处女，最好的部分是没有人在乎他们是否失踪了，"<<he>>不知道是有意还是无意地瞥了你一眼。
+	<br><br>
+	<<He>>虽然没有这么直接称呼你，但你情不自禁地认为对方知道你住的地方，这让你感觉很不舒服。<<gstress>><<stress 2>>
+	<br><br>
+	<<link [[继续|Office Meeting End]]>><</link>>
+<<elseif $rng gte 40>>
+	在会议期间，另一个临时工，一个<<person4>><<person>>，进来在角落摆好茶点。
+	<br>
+	<<he>>正在工作时，一个<<person3>><<person>>走到<<person4>><<him>>跟前，用<<person3>><<his>>的手<<person4>>
+	<<if $pronoun is "f">>
+		撩起了<<persons>>的裙子。
+	<<else>>
+		脱掉了<<persons>>的裤子。
+	<</if>>
+	<br><br>
+	<<link [[继续观看|Office Meeting Temp Watch]]>><</link>> <<promiscuous1>>
+	<br>
+	<<link [[移开目光|Office Meeting Temp Look Away]]>><</link>>
+<<elseif $rng gte 25>>
+	随着会议的进行，你注意到一个<<person2>><<person>>在<<his>>的座位上来回移动，<<his>>的眼睛里有一种狡猾的神情。在<<him>>对面，一个<<person4>><<person>>正抓着桌子，看起来很兴奋。
+	<br>
+	你忍不住偷看了一下桌子下面，你看到<<person3>><<person>>已经脱掉了<<his>>的鞋子，正在用<<person3>><<his>>的脚摩擦<<person4>><<persons>>的胯部。
+	<br>
+	你坐直身子，继续做笔记。没过多久，<<person4>><<person>>跑出了房间，<<his>>的手一直捂着<<his>>的腹股沟。
+	<br><br>
+	<<link [[继续|Office Meeting End]]>><</link>>
+<<else>>
+	会议上的演讲者讲得非常快，非常安静，但你能够跟上他的脚步，并尽你所能做笔记。
+	<br><br>
+	<<link [[继续|Office Meeting End]]>><</link>>
+<</if>>

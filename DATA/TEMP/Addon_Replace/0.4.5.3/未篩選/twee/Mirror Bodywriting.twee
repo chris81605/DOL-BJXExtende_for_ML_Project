@@ -1,0 +1,46 @@
+:: Mirror Bodywriting []
+<<effects>>
+<<if $writeaction and $writebodyaction>>
+	<<add_bodywriting $writebodyaction $writeaction pen>>
+	你在<<bodypart $writebodyaction>>上写道<span class="lewd">"<<print $skin[$writebodyaction].writ_cn>>"</span>。
+	<<unset $writeaction>><<unset $writebodyaction>>
+<<elseif $writeaction>>
+	<span class="blue">你必须要选择想要书写的部位。</span>
+	<<unset $writeaction>>
+<<elseif $writebodyaction>>
+	<span class="blue">你必须选择书写的内容。</span>
+	<<unset $writebodyaction>>
+<<else>>
+	你将笔贴近你的皮肤。
+<</if>>
+<br><br>
+书写地点：
+<br>
+<<for _active_bodypart range setup.bodyparts>>
+	<<if $skin[_active_bodypart].writing>>
+	<<else>>
+		<<set _bodypart_detected to 1>>
+		<label>写在你的<<bodypart _active_bodypart>><<capture _active_bodypart>><<radiobutton "$writebodyaction" _active_bodypart>><</capture>></label>
+		<br>
+	<</if>>
+<</for>>
+<<if _bodypart_detected isnot 1>>
+	你的皮肤上已经没有可书写的空间了。
+	<br>
+<</if>>
+<br>
+书写文本：
+<br>
+<label><span class="lewd">£5娼妓<<radiobutton "$writeaction" "five_pound_whore">></span></label> |
+<label><span class="lewd">口交—>£10<<radiobutton "$writeaction" "ten_pound_a_pop">></span></label> |
+<label><span class="lewd">一炮£25<<radiobutton "$writeaction" "twenty_five_pound_per_fuck">></span></label> |
+<label><span class="lewd">£100<<radiobutton "$writeaction" "one_hundred_pound">></span></label> |
+<label><span class="lewd">给我钱就不算强奸<<radiobutton "$writeaction" "its_not_rape_if_you_pay_me">></span></label> |
+<label><span class="lewd">娼妓<<radiobutton "$writeaction" "whore">></span></label> |
+<label><span class="lewd">站街鸭子<<radiobutton "$writeaction" "slut_for_hire">></span></label> |
+<label><span class="lewd">肉便器出租<<radiobutton "$writeaction" "body_for_sale">></span></label> |
+<br><br>
+<<link [[写东西|Mirror Bodywriting]]>><</link>>
+<br>
+<<link [[停止|$passage_mirror]]>><<unset $writeaction>><<unset $writebodyaction>><</link>>
+<br>

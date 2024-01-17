@@ -1,0 +1,179 @@
+:: Widgets Elk [widget]
+<<widget "elk">>
+	<<if $nextPassageCheck is "Elk Street">>
+		<<add_link "<span class='nextLink'><<elkicon>><<link [[麋鹿街 (0:05)|Elk Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<elkicon>><<link [[麋鹿街 (0:05)|Elk Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "elkquick">>
+	<<elkicon>><<link [[麋鹿街|Elk Street]]>><</link>>
+<</widget>>
+
+<<widget "elkeventend">>
+	<<link [[继续|Elk Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "compoundoptions">>
+	<<if $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 9>>
+		<span class="teal"><<Hes>>表现得有些情绪激动且坐立难安。</span>
+		<br><br>
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 6>>
+		<span class="blue"><<He>>皱着眉头，下意识地转着<<his>>的笔。</span>
+		<br><br>
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 2>>
+		<span class="purple"><<He>>不耐烦地摆弄着<<his>>的笔。</span>
+		<br><br>
+	<</if>>
+
+	<<if $compoundhonest gte 5>>
+		"谢谢你的合作，"<<he>>说道。"你根本构不成一个威胁，对吗？"
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>>记下了一些笔记。"我会让保安知道摄像头的事。我们还需要留意这个叫'米奇'的人物。"
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">摄像头不可能还在原位了。你需要重新开始。</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He>>拉动杠杆，你脚下的舱门打开了。木板让出了通道，你翻滚着落下，从管道滑进冰冷的水中，溅起一片水花。<<trauma 6>><<gtrauma>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		你不能再继续了，这实在太疼了。你告诉<<him>>所有<<he>>想知道的事，只要能别让痛苦再继续下去就行。
+		<br><br>
+
+		"你根本就不是一个威胁，"<<he>>失望地说道。
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>>记下了一些笔记。"我会让保安知道摄像头的事。我们还需要留意这个叫'米奇'的人物。"
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">摄像头不可能还在原位了。你需要重新开始。</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He>>拉动杠杆，你脚下的舱门打开了。木板让出了通道，你翻滚着落下，从管道滑进冰冷的水中，溅起一片水花。
+		<<trauma 6>><<gtrauma>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $arousal gte $arousalmax>>
+		你感觉自己快要高潮了，但却迟迟没有到来。这种感觉变得难以忍受。"哦，我忘了说，"<<he>>说，"这台机器可以把你带到绝顶的边缘。但它不会让你真正高潮。除非你把我要的东西告诉我。"
+		<br><br>
+
+		你受不了，你就是没办法再承受下去了。你一边挣扎着反抗束缚，一边把一切都告诉了<<him>>，只为能得到释放。"你根本不构成威胁，"<<he>>说着，拨动了一个开关。
+		<br><br>
+
+		<<orgasm>>
+
+		<<if isPubfameTaskAccepted("compound", "done")>>
+			<<set $pubfame.status to "hiding">><<set $pubfame.timer to 14>>
+			<<world_corruption "soft" 10>>
+			<<He>>记下了一些笔记。"我会让保安知道摄像头的事。我们还需要留意这个叫'米奇'的人物。"
+			<br>
+			<<if $pubfame.compound.cameras.length gte 1>>
+				<span class="red">摄像头不可能还在原位了。你需要重新开始。</span>
+			<</if>>
+			<<set $pubfame.compound.cameras to []>>
+			<br><br>
+		<</if>>
+		<<He>>拉动杠杆，你脚下的舱门打开了。木板让出了通道，你翻滚着落下，从管道滑进冰冷的水中，溅起一片水花。<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<<endevent>>
+		<<link [[继续|Drain Water]]>><<set $bus to "industrialdrain">><</link>>
+
+	<<elseif $compoundhonest + $compoundlie + $compoundmock + $compoundbeg + $compoundflirt gte 10>>
+
+		<<He>>站了起来，<<his>>的急躁情绪越发显著。"我就知道这行不通，"<<he>>说，"我们还是用老办法吧。"
+		<br><br>
+
+		<<He>>松开你的捆绑，把你从木板拉到了水泥地上。<<He>>从<<his>>的外套里掏出一把刀，俯视着你，但当<<he>>试图移动时，<<his>>遭遇了阻力。"什——"<<he>>看了看<<he>>的另一只手，发现它卡在用来固定你的一个捆绑物里。"怎么可能……你这个小混蛋。"
+		<<ltrauma>><<lstress>><<set $stress -= 2000>><<trauma -6>>
+		<br><br>
+
+		<<if $skulduggery lte 400>>
+			<<skulduggeryskilluse>>
+		<<else>>
+			<span class="blue">这太简单了，你什么都没学到。</span>
+			<br><br>
+		<</if>>
+
+		你捡起<<he>>用来折磨你的机器。它也许值点钱。"放下，"<<he>>说，"那很贵。"
+		<<set $blackmoney += 200>>
+		这就对了。
+		<br><br>
+
+		你找不到开门的方法，<<person>>也不愿意提供信息，但你在角落里发现了一个金属舱门。你打开舱门，爬进黑暗中。
+		<<earnFeat "Mouth Sealed Shut">>
+		<br><br>
+		<<endevent>>
+		<<set $torturesurvivor to 1>>
+		<<link [[继续|Industrial Drain]]>><<set $eventskip to 1>><</link>>
+		<br>
+
+	<<else>>
+
+		<<if $compoundhonest lte 4>>
+			<<link [[诚实相待|Elk Compound Honest]]>><<set $compoundhonest += 1>><<arousal 3000>><<pain -3>><<stress 6>><</link>><<garousal>><<gstress>><<lpain>>
+			<br>
+		<</if>>
+		<<if $compoundlie lte 4>>
+			<<link [[撒谎|Elk Compound Lie]]>><<set $compoundlie += 1>><<arousal -1000>><<pain 7>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<larousal>><<gpain>>
+			<br>
+		<<else>>
+			你太紧张了，根本想不出别的谎话。
+			<br>
+		<</if>>
+
+		<<if $submissive lte 500 and $compoundmock lte 4>>
+			<<link [[讥讽|Elk Compound Mock]]>><<def 1>><<set $compoundmock += 1>><<arousal -2000>><<pain 7>><<stress 6>><</link>><<gstress>><<larousal>><<gpain>>
+			<br>
+		<</if>>
+		<<if $submissive gte 1500 and $compoundbeg lte 4>>
+			<<link [[恳求|Elk Compound Beg]]>><<sub 1>><<set $compoundbeg += 1>><<arousal 3000>><<pain -5>><<stress 6>><</link>><<gstress>><<garousal>><<lpain>>
+			<br>
+		<</if>>
+
+		<<if $compoundflirt is 0>>
+			<<link [[调情|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous1>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 1 and $promiscuity gte 15>>
+			<<link [[调情|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous2>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 2 and $promiscuity gte 35>>
+			<<link [[调情|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous3>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 3 and $promiscuity gte 55>>
+			<<link [[调情|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous4>><<lpain>>
+			<br>
+		<<elseif $compoundflirt is 4 and $promiscuity gte 75>>
+			<<link [[调情|Elk Compound Flirt]]>><<set $compoundflirt += 1>><<pain -3>><</link>><<promiscuous5>><<lpain>>
+			<br>
+		<</if>>
+
+<</if>>
+<</widget>>
+
+<<widget "passoutcompound">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "compound">>
+	<<else>>
+		你把自己逼得太紧了。你昏了过去。
+		<br><br>
+
+		<<link [[继续|Elk Compound Experiment]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>

@@ -1,0 +1,48 @@
+:: Pub Guard Accept []
+<<effects>>
+
+
+<<if $NPCList[0].traits.includes("relaxed")>>
+	"这是为了长久的合作，"<<person>>说着的同时喝掉了<<his>>手中的酒。"我的名字是<span class="gold"><<print $NPCList[0].name>></span>，你只要把去农场的路指出来就行了。"
+	<br><br>
+
+	你指出前往农场的路线。"好的，我会在黄昏时赶到，然后一直坚守岗位直到黎明。嗯，感觉很容易。"
+	<br><br>
+
+	<<He>>踉跄着走出了酒吧。
+	<br><br>
+
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	"听起来很棒，"<<person>>说道。"打电话给我，我叫<span class="gold"><<print $NPCList[0].name>></span>。那么，你的这个农场在哪里？"
+	<br><br>
+
+	你指出路线，"我知道了，我下午晚些时候到那，不知道什么时候才能把我遇到的第一只狐狸吓跑。"
+	<br><br>
+
+	<<He>>起身回到了<<his>>的朋友身边。
+	<br><br>
+
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	"好吧，"<<person>>说道。"我叫<span class="gold"><<print $NPCList[0].name>></span>。"<<He>>站了起来，"我知道那个农场在哪里。"<<He>>说完之后便离开了酒馆。
+	<br><br>
+
+<<else>>
+	<<person>>犹豫了一下，然后点了点头。"这可能很有趣，"<<he>>说道，"你可以联系我，我叫<span class="gold"><<print $NPCList[0].name>></span>。我们以后有的是时间互相了解，那么，这个农场在哪里？
+	<br><br>
+
+	你给<<him>>指出路线。"那里可没有巴士站，"<<he>>抱怨道。"但我会去那里上夜班的。"
+	<br><br>
+
+	说完之后，<<He>>大摇大摆地走出酒吧。
+	<br><br>
+
+<</if>>
+
+<<saveNPC 0 "farm_tower_guard">>
+<<set $farm.tower_guard to clone($NPCList[0].name)>>
+<<set $farm.tower_guard_unpaid to 1>>
+<<set $farm.tower_guard_skill to clone($NPCList[0].skills.security)>>
+<<earnFeat "To Watch the Fields">>
+
+<<link [[继续|Pub]]>><<endevent>><</link>>
+<br>

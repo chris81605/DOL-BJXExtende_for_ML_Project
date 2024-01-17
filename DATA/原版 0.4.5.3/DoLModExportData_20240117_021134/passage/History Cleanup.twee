@@ -1,0 +1,73 @@
+:: History Cleanup []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $phase lte 1>><<pass 10>>
+	你从你的椅子上蹦起来然后
+	<<if $phase is 1>>赶紧去找老师说明你的情况。温特因愤怒而绷紧了神经，但它不是针对你的。你<</if>>
+	冲出教室跑去浴室。你把自己关在一个空隔间里，脱掉衣服把痒痒粉从身上扫掉。
+	你还把它从已经发红的皮肤上磨掉。
+	<br><br>
+	你确信自己已经弄干净后，你穿上衣服回到了教室。
+	<br><br>
+	<<if $schoolstate isnot "fourth">>
+		等你回来的时候，已经要下课了。
+		<<if $phase is 0>>
+			温特抱着双臂站在门边。
+			<br>
+			"你回来用的时间真长。也许在留堂的时候，你可以告诉校长什么事这么重要。"
+		<<else>>
+			<br><br>
+			当其他学生走进大厅时，他们向你投来阴沉的目光。你不在的时候他们肯定有过麻烦。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		当你走进教室时，整个教室都安静了下来。
+		<<if $phase is 0>>
+			温特怒视。
+			<br>
+			"很高兴你能来上课。也许在留堂的时候，你可以告诉校长什么事这么重要。"
+			<br><br>
+		<<else>>
+			全班都怒视着你。你不在的时候他们肯定有过麻烦。
+			<br><br>
+			温特挥手示意你坐回座位。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|History Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 2>>/*strip*/
+	坐在座位上，你脱下衣服，把它架到一边，以便擦掉这看起来就有问题的粉末。
+	你感到其他几个学生的目光都在盯着你，但温特已经转移到下一个话题，并假装没有
+	<<if $worn.under_lower.type.includes("naked")>>
+		注意到。直到你开始调整你的$worn.lower.cn_name_cap。全班都被你暴露出的<<genitals>>吸引了注意。
+		<br>
+		一名学生吹起了口哨，整个教室爆发出一阵笑声。
+		<br><br>
+		"穿好衣服，"温特要求道，"校长会在留校的时候跟你谈这件事的。"
+		<<detention 2>>
+	<<elseif $worn.under_upper.type.includes("naked") and $player.breastsize gte 1>>
+		注意到。直到你开始调整你的$worn.upper.cn_name_cap并暴露出你的<<breasts>>。
+		一名学生吹起了口哨，笑声响彻整个教室。
+		<br><br>
+		"把那里挡好，"温特要求道，"校长会在留校的时候跟你谈这件事的。"
+		<<detention 2>>
+	<<else>>注意到，也许是觉得先前活动之后衣柜出了什么问题。
+	<</if>>
+	<br><br>
+	瘙痒很快就消退了。
+	<br><br>
+
+	<<link [[继续|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	瘙痒过来很长时间才能消退。
+	<<pain 5>><<stress 20>>
+	<br><br>
+
+	<<link [[继续|History Lesson]]>><<endevent>><</link>>
+	<br>
+<</if>>

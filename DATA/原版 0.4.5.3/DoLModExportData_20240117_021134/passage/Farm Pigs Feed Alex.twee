@@ -1,0 +1,43 @@
+:: Farm Pigs Feed Alex []
+<<effects>>
+
+<<npc Alex>><<person1>>
+你看到艾利克斯一手提着一个沉重的桶正穿过院子。
+
+<<if $speech_attitude is "meek">>
+	"我、我能帮忙吗？"你问道。
+<<elseif $speech_attitude is "bratty">>
+	你伸手拿起其中的一个桶。"让我来帮忙，"你说道。
+<<else>>
+	"你需要帮忙吗？"你问道。
+<</if>>
+<br><br>
+
+看见你拿起桶，艾利克斯笑了。"谢谢，有我们两个人会更快的。"
+<br><br>
+
+你帮艾利克斯把饲料搬过院子，把它们倒进栅栏内的食槽中。
+
+
+<<if $farm_work.pigs_fed gte 6>>
+	<<farm_text_many pig>>狼吞虎咽地吃着饲料，吃完之后<span class="green">它们躺倒在地，非常满足。</span>
+<<else>>
+	<span class="blue"><<farm_text_many pig>>猛吞着饲料，看起来它们还是很饿。</span>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	"趴下！"艾利克斯在你身后喊道。你转过身来，发现一只<<farm_text pig>>咬住了艾利克斯的<<if $pronoun is "f">>裙子<<else>>短裤<</if>>。
+	<br><br>
+
+	<<link [[训斥猪|Farm Pigs Alex Scold]]>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<link [[只是看着|Farm Pigs Alex Watch]]>><<npcincr Alex lust 1>><<arousal 600>><</link>><<glust>><<garousal>>
+	<br>
+<<else>>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

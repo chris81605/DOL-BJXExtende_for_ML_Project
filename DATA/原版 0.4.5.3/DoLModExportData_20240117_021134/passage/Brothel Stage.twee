@@ -1,0 +1,52 @@
+:: Brothel Stage []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+你在妓院最大的舞台的后台。最吸引人的表演都在这个舞台上展出。
+<br><br>
+
+<<if $brothel_machine_repair is undefined>>
+	一台性爱机器摆在角落里，旁边贴了一张纸条，写着："故障"。
+	<br><br>
+<</if>>
+
+<<if isPubfameTaskAccepted("briar") and !$pubfame.briar.escape and $cat lte 5>>
+	<<set $pubfame.briar.escape to 1>>
+	一扇遮挡窗户的窗帘拉开了一些，它正好位于二楼布莱尔办公室的正下方。
+	<br><br>
+
+	<span class="blue">你突然有了一个想法。</span>如果你能弄到一个面向布莱尔办公室的梯子，你可以从那里离开。
+	<br><br>
+<</if>>
+
+<<if $brothelshowdata.type isnot "none" and Time.weekDay is 6 and not $brothelshowdata.done>>
+	你看见布莱尔在和最大的舞台旁的某人说话。你同意今天表演。
+	<br><br>
+
+	<<if $brothelshowdata.type is "horse">>
+		<<if $farm.steed>>
+			<<if $bestialitydisable is "f" or $per_npc.saddled_steed.monster is "monster">>
+				你的$farm.steed骏马在等着你。
+				<br><br>
+				<img class="icon" src="img/ui/gold_star.png"><<link [[参与演出|Brothel Show]]>><</link>>
+				<br>
+			<<else>>
+				你回想起约定好的表演内容，不由得感到压力万钧。你开始觉得恶心。<span class="red">你不敢上台表演了。</span>
+				<br>
+			<</if>>
+		<<else>>
+			<span class="blue">你约好要在舞台上和马同台共演，但你从来没骑过马！</span>
+			<br>
+		<</if>>
+	<<else>>
+		<img class="icon" src="img/ui/gold_star.png"><<link [[参与演出|Brothel Show]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $brothel_machine_repair is undefined>>
+	<<investigateicon>><<link [[调查机器|Brothel Machine Investigate]]>><<set $brothel_machine_repair to 1>><</link>>
+	<br>
+<</if>>
+
+<<getouticon>><<link [[离开|Brothel]]>><</link>>
+<br>

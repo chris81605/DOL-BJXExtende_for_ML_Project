@@ -1,0 +1,24 @@
+:: Police Station Collar []
+<<set $outside to 0>><<set $location to "police_station">><<effects>>
+你问<<person>>是否可以把你的项圈取下来。
+<<if $worn.neck.collaredpolice is 1 and $community_service gte 1>>
+	<span class="red">"做不到，"</span><<he>>否定掉了你的提议，"这是你处罚的一部分。等你完成你的社会服务后，我们会摘除它。"
+	<br><br>
+	<<if $promiscuity gte 15 and $daily.policeCollarSeduceAttempt isnot 1>>
+		<<link [[勾引|Police Station Seduce]]>><<set $daily.policeCollarSeduceAttempt to 1>><<set $phase to 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<<else>>
+	"当然，"<<he>>说道，"这将花费£200。你真的不应该就为了好玩而去穿这些东西。它们不但是政府的财产，而且这玩意儿你怎么闹也脱不掉。"
+	<br><br>
+	<<if $promiscuity gte 15 and $daily.policeCollarSeduceAttempt isnot 1>>
+		<<link [[勾引|Police Station Seduce]]>><<set $daily.policeCollarSeduceAttempt to 1>><<set $phase to 0>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<if $money gte 20000>>
+		<<link [[付钱|Police Station Collar Removal]]>><<set $money -= 20000>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<link [[离开|Police Station]]>><</link>>
+<br>

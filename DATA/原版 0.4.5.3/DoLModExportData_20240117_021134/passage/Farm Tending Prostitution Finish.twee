@@ -1,0 +1,86 @@
+:: Farm Tending Prostitution Finish []
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $prostitutionstat += 1>><<fameprostitution 1>>
+	<<person>>靠到了墙上。"值得，"<<he>>边说边递给你
+	<<if $phase is 1>>
+		<<moneyGain 20>>。
+	<<elseif $phase is 2>>
+		<<moneyGain 50>>。
+	<<else>>
+		<<moneyGain 100>>。
+	<</if>>
+	<<He>>站起来走开了。
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你从围栏边退开。
+	<<else>>
+		<<tearful>>你爬过围栏。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<<elseif $enemyhealth lte 0>>
+	<<person>>转身逃跑。
+	<<if $farm.wall gte 4>>
+		<<He>>被一个沟绊了一下，<<his>>害怕地回头看了你一眼，然后跑走了。
+	<<elseif $farm.wall is 3>>
+		<<He>>爬上围栏，掉到了另一边，逃跑的同时害怕地回头看了你一眼。
+	<<else>>
+		<<He>>掉到了围栏的另一边，逃跑的同时害怕地回头看了你一眼。
+	<</if>>
+	<br><br>
+	<<tearful>>你拍去身上的灰尘。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+	"我来了！"是艾利克斯。<<person>>从你身边后退，向<<he>>来的方向逃跑了。
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你爬回围栏内。
+	<<else>>
+		<<tearful>>你爬回<<farm_fence>>内。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+
+	<<npc Alex>><<person1>>
+	艾利克斯及时赶到，向闯入者喊话。"别让我在这儿再撞见你！"
+	<br><br>
+
+	"太不尊重人了，"<<he>>嘟囔着。
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<covered>><<He>>红着脸看向了别处，好像刚刚才注意到你的穿着。"我给你找点什么遮着。"<<garousal>><<towelup>>
+		<br><br>
+
+		一会儿之后，<<He>>拿了条毛巾过来，然后回去工作了。<<pass 1>>
+	<<else>>
+		"我得回去工作了。"
+	<</if>>
+	<<gdom>><<npcincr Alex dom 1>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<destination_farm>>
+<<else>>
+	"很好，"当<<person>>站起来时，<<he>>说道，"但你拿不到钱了。"
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你从围栏边退开。
+	<<else>>
+		<<tearful>>你爬回<<farm_fence>>内。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<</if>>

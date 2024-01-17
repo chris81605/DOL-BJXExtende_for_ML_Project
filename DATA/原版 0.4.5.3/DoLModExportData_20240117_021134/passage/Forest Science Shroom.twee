@@ -1,0 +1,29 @@
+:: Forest Science Shroom []
+<<location "forest">><<effects>>
+
+<<if $scienceshroomknown isnot 1>>
+	<<set $scienceshroomknown to 1>>
+	<span class="gold">你发现了一个新的科学项目。</span>
+	<br><br>
+<</if>>
+
+<<if $phase is 0>>
+	<<set $scienceshroomheart += 1>>
+	你跪下来采集蘑菇。它们闻起来有一股清香味。
+	<<ltiredness>><<tiredness -6>>
+	<br><br>
+
+	<span class="gold">你可以在卧室或学校图书馆中，将找到的蘑菇添加到科学项目中。</span>
+	<br><br>
+<<else>>
+	<<set $scienceshroomwolf += 1>>
+	你跪下来采蘑菇。它们闻起来有股甜味。
+	<<garousal>><<arousal 600>>
+	<br><br>
+
+	<span class="gold">你可以在卧室或学校图书馆中，将找到的蘑菇添加到科学项目中。</span>
+	<br><br>
+<</if>>
+
+<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<br>

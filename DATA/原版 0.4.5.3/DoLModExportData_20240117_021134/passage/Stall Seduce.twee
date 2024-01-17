@@ -1,0 +1,75 @@
+:: Stall Seduce []
+<<effects>>
+
+<<if $stall_seduced is 0>><<set $seductiondifficulty to 2000>>
+	"这就要走了？" 你嘀咕道。那个<<person>>转过身来。你的脸靠在胳膊肘上，凝望着<<him>>的眼睛。"我们才刚开始了解彼此呢。"
+	<<promiscuity1>>
+<<elseif $stall_seduced is 1>><<set $seductiondifficulty to 4000>>
+	"我想你忘了拿你的零钱，" 你说道。这引起了<<his>>的注意。
+	<<if $worn.upper.type.includes("naked")>>
+		<<He>>转过身来，发现你背对着<<him>>，扭动着<<bottom>>弯着腰。你从肩膀间偷看看看有没有效果。
+	<<else>>
+		<<He>>转过身来发现你身体前倾，上衣松垮垮地垂挂着。<<He>>能把你的身子看个精光。
+		<<if $player.gender_appearance is "f" and $worn.under_upper.type.includes("naked")>>
+			你没穿胸罩，让效果更好了。
+		<</if>>
+	<</if>>
+	<<exhibitionism1>>
+	"我的错，"你小声嘀咕。
+	<br><br>
+<<elseif $stall_seduced is 2>><<set $seductiondifficulty to 6000>>
+	"非常感谢你的照顾，"你说，"但你忘了一件事。"<<He>>回到了柜台前。你紧握着<<his>>的双手，身体微微前倾，在<<his>>的脸颊落下一吻。
+	<<promiscuity2>>
+<<else>>
+	<<if $worn.under_lower.type.includes("naked")>><<set $seductiondifficulty to 8000>>
+		"我喜欢在这儿摆摊，" 你说道，"没人会发现我下面是裸着的。"
+		<<exhibitionism3>>
+
+	<<else>><<set $seductiondifficulty to 10000>>
+		"我喜欢在这儿摆摊，"你说，"没人会发现我下面只穿了条内裤。"
+		<<exhibitionism2>>
+	<</if>>
+<</if>>
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+<span class="gold">你对自己的诱惑力更有信心了。</span>
+<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<set $stall_seduced += 1>>
+	<<He>>脸红起来，移开了目光，<span class="green">但似乎不想马上离开。</span>
+	<<set $enemyarousal += 20>>
+	<br><br>
+
+	<<set $stall_plant to $plant_inventory.random()>>
+
+	<<if setup.plants[$stall_plant].special.includes("large")>>
+		<<set $stall_amount to 1>>
+	<<else>>
+		<<set $stall_amount to random(11, 30)>>
+	<</if>>
+	<<if $stall_amount gte $plants[$stall_plant].amount>>
+		<<set $stall_amount to clone($plants[$stall_plant].amount)>>
+	<</if>>
+	<<set $stall_cost to Math.round(clone(setup.plants[$stall_plant].plant_cost))>>
+
+	<<He>>走回你的摊位，在<span class="green"><<print setup.plants[$stall_plant].plural>></span>前停下脚步。"这，这种<span class="green"><<stall_amount>></span>多少钱？"
+	<br><br>
+
+	<<stall_trust>>
+	<br><br>
+
+	<<stall_sell_actions>>
+
+<<else>>
+
+	<<He>>脸红了，但转身<span class="red">继续走<<his>>的路。</span>
+	<br><br>
+
+	<<stall_actions>>
+
+<</if>>

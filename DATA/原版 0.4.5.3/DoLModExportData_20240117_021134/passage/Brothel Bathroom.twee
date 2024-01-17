@@ -1,0 +1,23 @@
+:: Brothel Bathroom []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+你在妓院的澡堂里。这里有供舞者们在工作中或下班后使用的公共淋浴头。这些淋浴头并不干净，但你见过更脏的。没人特别关注你。
+<br><br>
+
+<<if $stress gte $stressmax>>
+<<passoutshop>>
+<<else>>
+	<<pregnancyTest "Brothel Bathroom">>
+	<<if $exhibitionism gte 35>>
+		<<bathroomicon "shower">><<link [[冲个澡 (0:15)->Brothel Shower]]>><<strip>><<pass 15>><<stress -1>><<set $hygiene to 0>><</link>><<lstress>>
+		<br><br>
+		<<getouticon>><<link [[妓院 (0:01)->Brothel]]>><<pass 1>><</link>>
+		<br>
+	<<else>>
+		你不愿意用公共淋浴头。
+		<br><br>
+		<<getouticon>><<link [[妓院 (0:01)->Brothel]]>><<pass 1>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

@@ -1,0 +1,51 @@
+:: Estate []
+<<set $outside to 1>><<set $location to "estate">><<effects>>
+
+<<estate_chaos_bar>>
+<br>
+
+你在雷米庄园，靠近前门。
+<<if $estate.chaos gte 100>>
+	你听到喊叫声。
+<</if>>
+<<if $estate.cards.cattle is 1>>
+	两只逃跑的牛经过。
+<</if>>
+附近有一座石制小建筑。
+<<if $estate.chaos gte 100>>
+	<span class="green">保安们在混乱中逃离了他们的岗位！</span>
+<<elseif $estate.chaos gte 80>>
+	<span class="teal">前面有两个保安。</span>他们看起来准备逃跑。
+<<elseif $estate.chaos gte 60>>
+	<span class="lblue">外面有三个保安。</span>他们看起来很紧张。
+<<elseif $estate.chaos gte 40>>
+	<span class="blue">外面有四个保安。</span>他们看起来很谨慎。
+<<elseif $estate.chaos gte 20>>
+	<span class="purple">外面有五个保安。</span>他们看起来很谨慎。
+<<else>>
+	<span class="pink">外面站着六个长相粗野的保安。</span>
+<</if>>
+还有一间小屋，建筑外的泥地上布满了脚印，外面停着几辆汽车。
+<<if $estate.cards.fire is 1>>
+	烟雾弥漫天空。
+<</if>>
+<br><br>
+
+前面有一个大畜棚，远处山上隐约可见一座庄园。
+<br><br>
+
+
+<<ind>><<link [[接近石头建筑 (0:02)|Estate Stone Approach]]>><<pass 2>><</link>>
+<br>
+<<if $estate.cards_done isnot true>>
+	<<mooricon "remy cottage">><<link [[走进小屋 (0:02)|Estate Cards Enter]]>><<pass 2>><</link>>
+	<br>
+<</if>>
+
+<<if $estate.entrance is "gate">>
+	<<getouticon>><<link [[离开|Estate Leave Gate]]>><</link>>
+	<br>
+<<else>>
+	<<getouticon>><<link [[离开|Estate Leave Secret]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,82 @@
+:: Avery Party Dance Fair []
+<<effects>>
+
+这对伴侣在热烈的掌声中结束了舞蹈。轮到你们了。你和艾弗里挽起彼此的臂膀开始跳舞。
+<br><br>
+
+<<if $danceSuccess>>
+
+	<span class="green">你舞跳得很好，</span>优雅又华丽。艾弗里很乐意被你领导。你瞥见<<person3>><<person>>在观看时皱起了眉头。<<if $speech_attitude is "bratty">>你俏皮地吐舌。<</if>>
+	<<danceskilluse>>
+	<br><br>
+
+	<<if $rng gte 51>>
+		你旋转着离开艾弗里，靠向观众。但当你们试图重聚时，你遇到了麻烦。<<person3>><<person>>从人群中伸出手，<span class="pink">一把抓住了你的$worn.lower.cn_name_cap。</span><<He>>用力拖拽着。
+		<<set $worn.lower.integrity -= 50>>
+		<br><br>
+		<<if $worn.lower.integrity lte 0>>
+			<<integritycheck>><<exposure>>
+			伴随着可怕的撕裂声，你的衣服从你的身体上撕落，留在了<<persons>>的手中。
+				<<if $worn.under_lower.type.includes("naked")>>
+					<<if !playerChastity("hidden")>>
+						<<set $genderknown.pushUnique("Avery")>>
+					<</if>>
+					你在房间的中间，赤裸着腰部以下的地方。你的<<genitals>>和<<bottom>>成为了目光的焦点。<<covered>>
+					<br><br>
+					<<fameexhibitionism 30>>
+					<<if $exhibitionism gte 75>>
+						<<link [[继续跳舞|Avery Party Dance Naked]]>><</link>><<exhibitionist5>>
+						<br>
+					<</if>>
+					<<link [[跑|Avery Party Dance Run]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+				<<else>>
+					在房间的中间，视线的中心，你的腰部以下现在只剩下了$worn.under_lower.cn_name_cap。<<covered>>
+					<br><br>
+					<<fameexhibitionism 10>>
+					<<if $exhibitionism gte 35>>
+						<<link [[继续跳舞|Avery Party Dance Undies]]>><</link>><<exhibitionist3>>
+						<br>
+					<</if>>
+					<<link [[跑|Avery Party Dance Run]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+					<br>
+
+				<</if>>
+		<<else>>
+			你将衣服从<<his>>的束缚中撕走。它们破损得更厉害了，但应该还挺得住。你回到舞蹈中完成了整支舞。
+			<br><br>
+
+			音乐停了下来，客人们鼓起了热烈的掌声。你和艾弗里显然是赢家，你鞠了一躬。
+			<<gglove>><<ggendear>><<npcincr Avery love 3>><<set $endear += 20>><<famesocial 10>>
+			<br><br>
+			<<earnFeat "Ballroom Show-off">>
+			你和艾弗里在派对结束前都被仰慕者包围着。你们一起离开了大厦。
+			<br><br>
+
+			<<link [[继续|Avery Party End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		音乐停了下来，客人们鼓起了热烈的掌声。你和艾弗里显然是赢家，你鞠了一躬。
+		<<gglove>><<ggendear>><<npcincr Avery love 3>><<set $endear += 20>><<famesocial 10>>
+		<br><br>
+		<<earnFeat "Ballroom Show-off">>
+		你和艾弗里在派对结束前都被仰慕者包围着。你们一起离开了大厦。
+		<br><br>
+
+		<<link [[继续|Avery Party End]]>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	<span class="red">很不幸，</span>在这么多人的注视下，艾弗里并不想让你领舞，你们一直踩在对方的脚上。你瞥见了<<person3>><<person>>脸上得意的笑容。
+	<<danceskilluse>><<lendear>><<set $endear -= 10>>
+	<br><br>
+	音乐停了下来，很明显你输了。观众还是鼓起了掌，尽管与你的竞争对手获得的相比，他们鼓掌的声音太小了。
+	<br><br>
+
+	聚会结束时，艾弗里向熟人道别，你们一起离开了公馆。
+	<br><br>
+
+	<<link [[继续|Avery Party End]]>><</link>>
+
+<</if>>

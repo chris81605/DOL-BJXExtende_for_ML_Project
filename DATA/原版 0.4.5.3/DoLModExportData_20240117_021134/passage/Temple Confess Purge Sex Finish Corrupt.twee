@@ -1,0 +1,88 @@
+:: Temple Confess Purge Sex Finish Corrupt []
+<<temple_effects>><<effects>>
+<<set $punishmentposition to 0>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $gloryholestat += 1>>
+	<<if $temple_confessor_intro>>
+		<<if $NPCList[0].vagina.toString().includes("mouth") or $NPCList[0].penis.toString().includes("mouth")>>
+			<span class="lewd">你吸收了堕落。</span>
+		<<else>>
+			银制容器现在装满了亮粉色的液体。<span class="lewd">你轻轻倾斜容器，将堕落全部摄入。</span>
+		<</if>>
+		<<if $angel gte 6>>
+			<span class="gold">你内在的纯洁消解了它。</span>
+		<<elseif $demon gte 6>>
+			<span class="purple">你的身心与它相融合。</span><<stress -12>><<trauma -6>><<purity -40>><<llstress>><<ltrauma>><<lllpurity>>
+		<<else>>
+			<<purity -25>><<llpurity>>
+		<</if>>
+		<<grace 3>><<gggrace>><<world_corruption "soft" -1>>
+		<br><br>
+
+		<<switch $attendant>>
+			<<case "corrupt_1">>
+				"那些洞……不见了，不见了！"<<He>>发出狂喜的喊叫，"谢谢你，<<sister>>！"<<He>>穿好衣服离开了。
+			<<case "corrupt_2">>
+				"我感觉……自己变得不一样了。谢谢你，<<sister>>。"<<He>>穿好衣服，离开了。
+			<<case "corrupt_3">>
+				"安……安静下来了。终于……我欠你的，<<sister>>。"<<He>>穿好衣服，离开了。
+			<<case "corrupt_4" "corrupt_7">>
+				"我就像是……被净化了。那些可怕的想法全都消失了！谢谢你，<<sister>>！"<<He>>穿好衣服，离开了。
+			<<case "corrupt_5">>
+				"真不错，那些污秽全都不见了。一个月后我会再来的，我亲爱的。"<<He>>穿好衣服，离开了。
+			<<case "corrupt_6">>
+				"我就像是能重新呼吸了一样！谢谢你，<<sister>>！"<<He>>穿好衣服，离开了。
+			<<case "corrupt_8">>
+				你听见了一声粗重的喘息。"终、终于！结束了！我欠你的，小可爱。"<<He>>穿好衣服，离开了。
+			<<case "corrupt_9">>
+				"啊……净化得真舒服，谢谢你，亲爱的<<sister>>。"<<He>>穿好衣服，离开了。
+			<<default>>
+				"啊……净化得真舒服，谢谢你，亲爱的<<sister>>。"<<He>>穿好衣服，离开了。
+		<</switch>>
+		<<tearful>>你重新坐回长凳上。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+		<br>
+	<<else>>
+		<<saveNPC 0 "penitent_drain">>
+		<<endcombat>>
+		<<loadNPC 0 "penitent_drain">><<person1>>
+
+		银制的碗现在装满了淫秽的液体。
+		<span class="red">亮粉色的液体从中溢出。</span>
+		<br><br>
+
+		<<link [[检视|Temple Confess Inspect]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	你听到墙后传来一阵痛苦的叫喊，
+	<<if $NPCList[0].penis isnot "none">>
+		面前的$NPCList[0].penisdesc消失了。
+	<<else>>
+		面前的小穴消失了。
+	<</if>>
+	<<if $attendant is "corrupt_1">>
+		"不、不……！洞变多了！洞越来越多了！"
+	<</if>>
+	<<He>>迅速逃离了隔间。<<grace -2>><<lgrace>>
+	<br><br>
+
+	<<tearful>>你重新坐回长凳上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<<else>>
+	你听见<<person>>在墙的另一边发出不满的咕哝。
+	<br><br>
+	<<tearful>>你重新坐回长凳上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<</if>>

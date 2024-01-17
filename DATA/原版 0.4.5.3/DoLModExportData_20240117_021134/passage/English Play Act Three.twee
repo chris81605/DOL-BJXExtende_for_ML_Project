@@ -1,0 +1,82 @@
+:: English Play Act Three []
+<<effects>><<run statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+<<set $phase to 0>>
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		<<if $englishPlayKylarReplace>>
+			你跟<<person2>><<person>>一起登台演出最后一幕，悉尼这次不在。<<him>>得来说最后一句台词。
+			<br><br>
+
+			<<He>>面向你道："虽然很艰难，不过很高兴我们终于可以没人打扰地在一起了。"
+			最后的这幕将以一个吻结束。你记得多伦说过没必要真的吻下去，不过观众肯定会喜欢那个的。
+			<br><br>
+
+			<<link [[避免亲吻|English Play Act Three No Kiss]]>><</link>>
+			<br>
+			<<link [[亲脸颊|English Play Act Three Kiss]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[亲嘴唇|English Play Act Three Kiss]]>><</link>><<kissvirginitywarning>>
+			<br>
+		<<else>>
+			你跟凯拉尔一起登台演出最后一幕，悉尼这次不在。最后的台词就看凯拉尔的了。
+			<br><br>
+
+			<<person2>><<He>>面对你说道："这一夜很长，不过我们终于单独在一起了。我<<sterlingFather>>是否赞成我们在一起并不重要，无论发生什么，我都不会离开你的。"
+			<br><br>
+
+			最后的这幕将以一个吻结束。你记得多伦说过没必要真的吻下去，不过观众肯定会喜欢那个的。
+			<br><br>
+
+			<<link [[避免亲吻|English Play Act Three No Kiss]]>><<npcincr Kylar rage 5>><</link>><<ggksuspicion>>
+			<br>
+			<<link [[亲凯拉尔的脸颊|English Play Act Three Kiss]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[亲凯拉尔的嘴唇|English Play Act Three Kiss]]>><<npcincr Kylar rage -5>><</link>><<llksuspicion>><<kissvirginitywarning>>
+			<br>
+		<</if>>
+	<<case "Taylor">>
+		最后一幕开始了，悉尼站在你的身边。
+		<<if $englishPlayKylarReplace>>
+			<<person2>><<person>>不会参演最后的环节。
+		<<else>>
+			凯拉尔不会参演最后的环节。
+			<<if !isLoveInterest("Kylar")>>
+				你瞥了一眼后台确认<<person2>><<he>>是不是在看着。<span class="green">多伦给你竖起了大拇指。</span>
+			<</if>>
+		<</if>>
+		悉尼现在得说出最后一句台词。
+
+		"你不必担心，我亲爱的泰勒。只要我们对彼此的爱依然真挚，就没有什么大不了的。我不在乎其他人对我们婚姻的看法，我今晚只需要你的爱作为慰藉。"
+		<br><br>
+
+		最后的这幕将以一个吻结束。你记得多伦说过没必要真的吻下去，不过观众肯定会喜欢那个的。
+		<br><br>
+
+		<<link [[避免亲吻|English Play Act Three No Kiss]]>><</link>>
+		<br>
+		<<link [[亲悉尼的脸颊|English Play Act Three Kiss]]>><<npcincr Sydney love 1>><<set $phase to 1>><</link>><<glove "Sydney">>
+		<br>
+		<<link [[亲悉尼的嘴唇|English Play Act Three Kiss]]>><<npcincr Sydney love 5>><</link>><<gglove "Sydney">>
+		<br>
+
+	<<case "Sterling">>
+		你的角色在最后一幕并不登场，所以你得在后台等着。你得等到演出结束。你看到悉尼和<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>消失在帷幕的另一边。
+		<br><br>
+
+		你耐心地等待着表演继续，不过你开始感到好奇。演员逐渐安静下来，你透过帷幕看向舞台。
+		你轻轻地把沉重的帷幕挪开了一点点，刚好足够让你瞥见舞台。你看见<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>和悉尼紧张地站在一起，避免着眼神接触。
+		<br><br>
+
+		你记得这一部分。最后一幕要求卡斯跟泰勒接吻。<span class="blue">悉尼正盯着你。</span>多伦说没必要真的吻下去，不过观众肯定会对那个有更积极的反应。
+		<br><br>
+
+		<<if $englishPlayKylarReplace>>
+			<<link [[鼓励|English Play Act Three Kiss]]>><<npcincr Sydney purity -2>><</link>><<lspurity>><<gapproval>>
+			<br>
+		<<else>>
+			<<link [[鼓励|English Play Act Three Kiss]]>><<npcincr Kylar love -2>><<npcincr Sydney purity -2>><</link>><<llove "Kylar">><<lspurity>><<gapproval>>
+			<br>
+		<</if>>
+		<<link [[什么也不做|English Play Act Three No Kiss]]>><</link>><<lapproval>>
+		<br>
+<</switch>>

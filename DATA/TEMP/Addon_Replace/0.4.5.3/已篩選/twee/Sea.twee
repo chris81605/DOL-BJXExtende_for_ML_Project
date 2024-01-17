@@ -1,0 +1,208 @@
+:: Sea []
+<<location "sea">><<water>><<effects>>
+<<if $sea is 0>>
+	你在城外海滩附近的海里游泳。
+	<<if Time.dayState is "night">>
+		灯光在水面上闪烁。
+	<<elseif Time.dayState is "dawn">>
+		阴影在朝阳下延长。
+	<<elseif Time.dayState is "dusk">>
+		阴影在夕阳下延长。
+	<<else>>
+		它充满活力。
+	<</if>>
+	<<physique>>
+	<br><br>
+	<<if $stress gte $stressmax>>
+		<<passoutsea>>
+	<<else>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+			<<eventsdeepsea>>
+		<<else>>
+			<<swimmingdifficulty 1 100 true>>
+			<<if $swimmingSuccess>>
+				<span class="green">你成功游过逆潮。</span>
+				<br><br>
+				<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<set $sea += 10>><<pass 10>><<tiredness 2>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+				<br>
+				<<swimicon "back">><<link [[游向岸边 (0:10)|Sea Beach]]>><<pass 10>><<tiredness 2>><<set $sea to 0>><</link>><<gtiredness>><<swimmingdifficultytext0>>
+				<br>
+			<<else>>
+				你试着逆流而上，<span class="red">但水流对你来说太强了。</span>你被进一步推向大海。
+				<br><br><br>
+				<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<elseif $sea lte 20>>
+	你在海里游泳。
+	<<if Time.dayState is "night">>
+		你可以看到附近的小镇，它的灯光在水面上闪闪发光。
+	<<else>>
+		你可以看到附近的小镇。
+	<</if>>
+	<<physique>>
+	<br><br>
+	<<if $stress gte $stressmax>>
+		<<passoutsea>>
+	<<else>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+			<<eventsdeepsea>>
+		<<else>>
+			<<swimmingdifficulty 1 100 true>>
+			<<if $swimmingSuccess>>
+				<span class="green">你成功游过逆潮。</span>
+				<br><br>
+				<<if $sea gte 40>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 200>>
+					<br>
+				<<else>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+					<br>
+				<</if>>
+				<<swimicon "back">><<link [[游向岸边 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea -= 10>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+				<br>
+			<<else>>
+				你试着逆流而上，<span class="red">但水流对你来说太强了。</span>你被进一步推向大海。
+				<br><br>
+				<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<elseif $sea lte 50>>
+	你在海里游泳。
+	<<if Time.dayState is "night">>
+		<<if $weather is "clear">>
+			远处的城镇在夜色的映衬下熠熠生辉。
+		<<else>>
+			你可以看到远处的城镇，一道橙色的光照亮了上面的云。
+		<</if>>
+	<<else>>
+		你可以看到远处的城镇。
+	<</if>>
+	/* 北极星模组 */
+	<br><br>
+	远处的水面上闪烁着四色的光芒。
+	/* 北极星 */
+	<<physique>>
+	<br><br>
+	<<if $stress gte $stressmax>>
+		<<passoutsea>>
+	<<else>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+			<<eventsdeepsea>>
+		<<else>>
+			<<swimmingdifficulty 1 200 true>>
+			<<if $swimmingSuccess>>
+				<span class="green">你成功游过逆潮。</span>
+				<br><br>
+				<<if $sea gte 40>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+					<br>
+					/* 北极星模组 */
+					<<swimicon>><<link [[游向四色光芒 (0:10)|Sea Reef]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+					<br>
+					/* 北极星 */
+				<<else>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 200>>
+					<br>
+				<</if>>
+				<<swimicon "back">><<link [[游向岸边 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea -= 10>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+				<br>
+			<<else>>
+				你试着逆流而上，<span class="red">但水流对你来说太强了。</span>你被进一步推向大海。
+				<br><br><br>
+				<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<elseif $sea lte 99>>
+	你在海里游泳。
+	<<if Time.dayState is "night">>
+		<<if $weather is "clear">>
+			你可以看到小镇在地平线上闪闪发光。
+		<<else>>
+			你可以看到地平线上的城镇，照亮了上面的云。
+		<</if>>
+	<<else>>
+		你可以看到地平线上的小镇。
+	<</if>>
+	<<physique>>
+	<br><br>
+	<<if $stress gte $stressmax>>
+		<<passoutsea>>
+	<<else>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+			<<eventsdeepsea>>
+		<<else>>
+			<<swimmingdifficulty 1 300 true>>
+			<<if $swimmingSuccess>>
+				<span class="green">你成功游过逆潮。</span>
+				<br><br>
+				<<if $sea gte 90>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 400>>
+					<br>
+					/* 北极星模组 */
+					<<swimicon>><<link [[潜水 (0:10)|Sea Dive]]>><<pass 10>><<tiredness 2>><<set $phase to 0>><</link>><<gtiredness>>
+					<br>
+					/* 北极星 */
+				<<else>>
+					<<swimicon>><<link [[游得更远 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea += 10>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+					<br>
+				<</if>>
+				<<if $sea lte 60>>
+					<<swimicon "back">><<link [[游向岸边 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea -= 10>><</link>><<gtiredness>><<swimmingdifficulty 1 200>>
+					<br>
+				<<else>>
+					<<swimicon "back">><<link [[游向岸边 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea -= 10>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+					<br>
+				<</if>>
+			<<else>>
+				你试着逆流而上，<span class="red">但水流对你来说太强了。</span>你被进一步推向大海。
+				<br><br>
+				<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<elseif $sea gte 100>>
+	<<set $sea to 100>>
+	你在海里游泳。
+	<<if Time.dayState is "night">>
+		附近有个小岛，在夜色中隐藏着。如果没有灯塔，你是看不到的。不规则形状的光束角度和弧度。
+	<<else>>
+		附近有一个岛，由一个堡垒控制，四周是锯齿状的岩石。
+	<</if>>
+	<<physique>>
+	<br><br>
+	<<earnFeat "The Endless Deep">>
+	<<if $stress gte $stressmax>>
+		<<passoutsea>>
+	<<else>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+			<<eventsdeepsea>>
+		<<else>>
+			<<swimmingdifficulty 1 400 true>>
+			<<if $swimmingSuccess>>
+				<span class="green">你成功游过逆潮。</span>
+				<br><br>
+				<<swimicon "back">><<link [[游向岸边 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea -= 10>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+				<br>
+			<<else>>
+				你试着逆流而上，<span class="red">但水流对你来说太强了。</span>你被进一步推向大海。
+				<br><br>
+				<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

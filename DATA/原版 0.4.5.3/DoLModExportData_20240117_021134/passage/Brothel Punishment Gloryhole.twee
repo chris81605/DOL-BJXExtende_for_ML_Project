@@ -1,0 +1,67 @@
+:: Brothel Punishment Gloryhole []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+<<if $punishmenthole lte 0>>
+
+	<<endevent>><<npc Briar>><<person1>>牢房门打开了，布莱尔走了进来，手里拿着一把刀。<<He>>把吊着你的绳子割开，你掉在了地上。"这下我们两清了。"<<he>>一边说着，一边继续割着你身上的绳子。
+	<<if $briarPunishReason is "whore">>
+		"如果你还想接着卖身的话，也得来我这卖。"
+	<<else>>
+		"也许现在你会三思而后行，不敢再触怒我了。"
+	<</if>>
+	<<unset $briarPunishReason>>
+	<<He>>割完了绳子，退了一步。"听懂了吗？很好。"<<He>>让到一边，一名<<generate2>><<person2>><<person>>走了进来，把你原路拖了出去，关上了门。你的双手没被解开，仍被绑着。
+	<br><br>
+
+	<<if $brothelknown isnot 1>>
+		<<set $brothelknown to 1>><span class="gold">你现在可以访问丰收街的妓院了。</span>
+	<</if>>
+
+	<<clotheson>>
+	<<endevent>>
+
+	<<set $head to 0>>
+	<<set $feetuse to 0>>
+	<<set $punishmentposition to 0>>
+
+	<<link [[继续|Harvest Street]]>><</link>>
+	<br>
+<<elseif $punishmentposition is "wall">><!-- Wall outcome with $position = "wall" -->
+	你被绳子绑在牢房里，你的腿，屁股和<<genitals>>从墙上的洞里伸着出去，无论如何挣扎都无法挪动分毫。
+	<br><br>
+	<<set $punishmenthole -= 1>>
+
+	<<generate1>><<person1>>
+
+	<<switch random(1, 8)>>
+		<<case 1 2>>
+			有人捏了你的<<bottom>>一把。
+		<<case 3 4>>
+			你感觉有人在抚摸你的<<genitals>>。
+		<<case 5 6>>
+			你感觉有人在舔你的大腿后部。
+		<<default>>
+			有人拍了你的<<bottom>>一把。
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Brothel Punishment Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>><!-- Gloryhole outcome with $punishmentposition = "gloryhole" -->
+	你被绳子绑在牢房里，嘴抵在墙上的洞上，无论如何挣扎都无法挪动分毫。
+	<br><br>
+	<<set $punishmenthole -= 1>>
+
+	<<generate1>><<person1>>
+
+	<<if $NPCList[0].vagina is "clothed">>
+	有人把阴部抵在了洞上，抵在了你的嘴唇上。
+	<br><br>
+	<<else>>
+	有人把一根$NPCList[0].penisdesc伸进了洞里，抵着你的嘴唇。
+	<br><br>
+	<</if>>
+
+	<<link [[继续|Brothel Punishment Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

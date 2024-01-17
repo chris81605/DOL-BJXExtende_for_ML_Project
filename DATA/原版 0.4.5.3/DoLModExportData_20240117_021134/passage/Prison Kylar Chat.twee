@@ -1,0 +1,40 @@
+:: Prison Kylar Chat []
+<<effects>>
+
+<<pass 1>><<advancetohour>>
+
+你和凯拉尔聊天。
+<<rng 10>>
+<<switch $rng>>
+	<<case 1>>
+		<<He>>提到了<<He>>刚到这里时对另一名囚犯所做的事情。"这、这就是我被单独关押的原因，"<<He>>低下了头，"在你刚来的时候。"<<gstress>><<stress 6>>
+	<<case 2>>
+		"我发现了很多藏东西的地方，"<<he>>说道，"这里的人都不太会藏东西。"
+	<<case 3>>
+		"我不敢对视别人，"<<he>>说道，"他们都离我远远的。"
+	<<case 4>>
+		"这里和学校没有什么不同，"<<he>>说道。
+	<<case 5>>
+		"真不知道为什么人们试图翻墙离开，"<<he>>抬起头，"那些鸟那么大。"
+	<<case 6>>
+		"食堂里居然没有鱼，"<<he>>说道，"所以这里到底从哪里弄来这么多的食物？"
+	<<case 7>>
+		"医疗室里有一个柜子，"<<he>>说道，"我想知道里面有些什么。"
+	<<case 8>>
+		"院子里那扇上锁的门一定通往某个有趣的地方，"<<he>>说道。
+	<<case 9>>
+		"那些家伙不让我进尖塔，"<<he>>说道，"我只是想去探索一下。"
+	<<default>>
+		"我看到了人们看你的眼神，"<<he>>似乎有些紧张，"只要我在你身边，那、那些家伙就不敢轻举妄动。"
+<</switch>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].lust gte 20>>
+	<<set _rng to random(6, 12)>>
+	你正打算离开，<<He>>抓住了你的手腕。"我、我有东西给你，"<<He>>从口袋里掏出一把鲨鱼牙齿，"这……这个。"
+	<<prison_teeth_text _rng>><<prison_teeth _rng>><<lllust>><<npcincr Kylar lust -20>>
+	<br><br>
+<</if>>
+
+<<link [[继续|Prison Block]]>><<endevent>><</link>>
+<br>

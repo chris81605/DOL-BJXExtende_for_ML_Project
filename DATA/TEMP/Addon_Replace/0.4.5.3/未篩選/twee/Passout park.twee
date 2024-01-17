@@ -1,0 +1,29 @@
+:: Passout park []
+你将自己逼得太紧了。
+<br><br>
+<<passout>>
+<<set $bus to "park">>
+<<set $dangerpark to 0>>
+<<set $safepark to 0>>
+<<set $danger to random(1, 10000)>>
+
+<<if $danger gte (9900 - $allure)>>
+	<<set $dangerpark to random(1, 100)>>
+<<elseif $danger lt (9900 - $allure)>>
+	<<set $safepark to random(1, 100)>>
+<</if>>
+
+<<if $dangerpark gte 81>>
+	<<link [[醒来|Abduction]]>><<set $molestationstart to 1>><</link>>
+<<elseif $dangerpark gte 1>>
+	<<link [[醒来|Dog Park]]>><<set $molestationstart to 1>><</link>>
+	<!--
+		<<link [[醒来|Abduction]]>><<set $molestationstart to 1>><</link>>
+	-->
+<</if>>
+
+<<if $safepark gte 1>><<ambulance>><</if>>
+
+<<pass 1 hour>>
+
+<<trauma 6>><<set $stress -= 2000>>

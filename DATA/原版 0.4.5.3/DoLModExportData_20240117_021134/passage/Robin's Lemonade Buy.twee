@@ -1,0 +1,31 @@
+:: Robin's Lemonade Buy []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+你买了四大瓶水，把它们拖回来给罗宾。那沉甸甸的重量让你走得很慢，你需要经常休息。幸好距离不是太远，罗宾看到你后立刻就冲过来帮忙了。
+<<if _robin.trauma gte 40>>
+	"太谢谢你了！我很高兴你没有离开那么久，我都开始担心了。"罗宾看起来松了一口气。
+	当你回到<<his>>的小摊时，<<he>>紧紧抱住了你。
+	<<if $phase is 0>>
+		<br><br>
+
+		你悄悄地把<<he>>给你的£20留在了小摊上。
+		<<set $robinmoney += 2>>
+	<<else>>
+		<<set $robinmoney -= 2>>
+	<</if>>
+<<else>>
+	"你是怎么——"<<he>>停顿了一下，"你不可能就这么一路把这些搬过来了吧。"
+	<br><br>
+
+	"我在附近的商店里发现它打折了，"你说。
+	<br><br>
+
+	"你真会省钱，谢谢你。"你悄悄地把<<he>>给你的£2留在小摊上。
+<</if>>
+<<npcincr Robin love 1>><<glove>>
+<br><br>
+
+<<endevent>>
+
+<<lemonade_stand_options>>

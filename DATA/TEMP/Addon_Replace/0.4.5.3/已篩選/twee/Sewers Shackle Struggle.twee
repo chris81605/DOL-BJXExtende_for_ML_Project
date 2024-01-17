@@ -1,0 +1,56 @@
+:: Sewers Shackle Struggle []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<if $sewerschasedstep lte 0>>
+	<<npc Morgan>><<person1>>“哦，你这个可怜的小东西。看看你现在的样子，”摩根从阴影中走了出来。<<He>>在你的脚镣底部拧上一根别针，把你放了出来。“<<charles>>，不要再给我添麻烦了。”<<He>>抓住你的手臂用力拉。
+	<br><br>
+	<<set $sewerschased to 0>>
+	<<link [[乖乖过去|Sewers Return]]>><</link>>
+	<br>
+	<<link [[战斗|Sewers Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<<elseif $physiqueSuccess and $phase is 0>>
+	<<set $phase += 1>>
+	你把镣铐扯开，然后逃跑。
+	<br><br>
+	你听到了摩根的尖叫声，紧接着是金属的撞击声。
+	<br><br>
+	<<endevent>>
+	<<destinationsewers>>
+	<<set $sewerschased to 0>>
+<<elseif $physiqueSuccess and $phase is 1>>
+	<<set $phase += 1>>
+	你把镣铐扯开，然后逃跑。
+	<br><br>
+	你听到了摩根的尖叫声，紧接着是金属的撞击声。
+	<br><br>
+	<<endevent>>
+	<<destinationsewers>>
+	<<set $sewerschased to 0>>
+<<elseif $physiqueSuccess and $phase gte 2>>
+	<<set $phase += 1>>
+	你把镣铐扯开，然后逃跑。
+	<br><br>
+	你听到了摩根的尖叫声，紧接着是金属的撞击声。
+	<br><br>
+	<<set $sewerschased to 0>>
+	<<endevent>>
+	<<destinationsewers>>
+<<else>>
+	你试着挣脱枷锁。它有点松动，但仍然卡住了。再试试说不定就成功了。<<morganhunt>>
+	<br><br>
+	<<set $phase += 1>>
+	<<link [[反抗|Sewers Shackle Struggle]]>><</link>>
+	<<if $phase is 1>>
+		<<physiquedifficulty 6000 16000>>
+	<<elseif $phase gte 2>>
+		<<physiquedifficulty 1 10000>>
+	<<else>>
+		<<physiquedifficulty 10000 20000>>
+	<</if>>
+	<br>
+	<<set $skulduggerydifficulty to 600>>
+	/* 北极星模组 */
+	<<link [[尝试撬锁|Sewers Shackle Pick]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+	/* 北极星 */
+	<br>
+<</if>>

@@ -1,0 +1,42 @@
+:: Forest Nest Search Eggs []
+<<effects>>
+<<if $tendingSuccess>>
+	<span class="green">你找到了一些可存活的卵。</span><<tending_bird_eggs $forest_nest.eggs>>
+	<br><br>
+
+	<<if $forest.fox gte 2 and $NPCList[0].traits.includesAny("territorial","clever","clumsy")>>
+		当你抬头时，听到身后有沙沙声传来。一个<<beasttype>>从树林里出现。
+		<<if $monster is 1>>
+			<<if $NPCList[0].traits.includes("territorial")>>
+				"这是我的地盘。你会为此付出代价的。"
+			<<else>>
+				"我先看到的！"
+			<</if>>
+			<<bHe>>想跟你抢蛋！
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Forest Fox Nest Rape]]>><<set $phase2 to 1>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<elseif $forest.fox gte 2>>
+		当你抬头时，听到身后有沙沙声传来。一个<<beasttype>>从树林里探出头来。
+		<<bHe>>看起来很温顺，似乎不想和你抢蛋。
+		<br><br>
+
+		<<link [[交出一个蛋|Forest Nest Search Offer]]>><<set $plants.bird_egg.amount -= 1>><</link>><<note "- 蛋" "red">>
+		<br>
+		<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+		<br>
+		<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">这些蛋看起来都不适合交易。</span><<gtending>><<tending 2>>
+	<br><br>
+
+	<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

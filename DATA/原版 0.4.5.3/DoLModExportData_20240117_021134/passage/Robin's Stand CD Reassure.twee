@@ -1,0 +1,44 @@
+:: Robin's Stand CD Reassure []
+<<set $outside to 1>><<set $location to (Time.season is "winter" ? "park" : "beach")>><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+	<<set _robin.crossdress to 4>>
+	<<set _robin.cdquest to 4>>
+	<<person1>>
+
+	<<if $speech_attitude is "meek">>
+		"对不起，"你握着<<his>>的手，"我相信你……"
+	<<elseif $speech_attitude is "bratty">>
+		"没有人能伤害你，"你紧紧地抱着<<him>>，"我保证。"
+	<<else>>
+		"如果你喜欢这样，就不要让别人阻止你，"你轻轻地抚摸着<<his>>的背。
+	<</if>>
+	<br><br>
+
+	<<if _robin.dom gte 60>>
+		罗宾抬起头，微笑着看着你。"你是我最好的<<if $robinromance>><<girlfriend>><<else>>朋友<</if>>。"
+		罗宾紧紧把你按在怀里，然后松开了怀抱。“你说得对，”<<he>>微笑着说。
+		"在你身边，我不会让任何人阻止我做我想做的事情。"<<He>>的声音变得很低，你几乎听不清。
+		"我感觉我能在你身边真正做自己。"<<He>>清了清嗓子。
+		"我们继续卖<<print (Time.season is "winter" ? "热巧克力" : "柠檬水")>>吧！"
+	<<else>>
+		罗宾仰起头看着你，脸上露出微笑。"你总能让我感觉好一些。"<<he>>的声音再次恢复了活力。
+		"我不会让那一个坏人阻挡我的脚步。"<<His>>的声音变小了，"再次感谢你陪着我。如果没有你，我不知道会怎么样。"
+		<<His>>的声音几乎变成了低语。"在你身边，我感觉我能够真正地做回自己。"
+	<</if>>
+	<br><br>
+
+	你们分开彼此，继续一起经营摊位。幸运的是，剩下的顾客都很友善。
+	<br><br>
+
+	<<endevent>>
+	<<if Time.season is "winter">>
+		<<link [[提供帮助 (0:30)|Robin Chocolate Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Park]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[提供帮助 (0:30)|Robin's Lemonade Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Beach]]>><</link>>
+		<br>
+	<</if>>

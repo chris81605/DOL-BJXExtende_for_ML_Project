@@ -1,0 +1,28 @@
+:: Residential Dog Alarm []
+<<effects>>
+<<if $alarm is 1>>
+	你的尖叫惊动了几个人。
+	<br><br>
+<</if>>
+听到他们接近的声音，<<beasttype>>停止了冒险，跳开了。
+<br><br>
+<<endcombat>>
+<<generatey1>><<generatey2>>在恢复之前，你就被<<fullGroup>>发现了。
+<br><br>
+<<set $danger to random(1, 10000)>><<set $dangerstreet to 0>>
+<<if $danger gte (9900 - ($allure * 3))>>
+	<<set $dangerstreet to random(1, 100)>>
+	他们利用了你的弱点。
+	<br><br>
+
+	<<link [[继续|Residential Pair]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	看到你在困境中，<<fullGroup>>帮助你站起来。
+	<br><br>
+	<<set $rescued += 1>>
+	<<clothesontowel>>
+	<<person1>><<person>>看起来很关心。"你还好吗？"<<tearful>>你含泪点头，感谢他们的关心，然后告别。
+	<br><br>
+	<<residentialeventend>>
+<</if>>

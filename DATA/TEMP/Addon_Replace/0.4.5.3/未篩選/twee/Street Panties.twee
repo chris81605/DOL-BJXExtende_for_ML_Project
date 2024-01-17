@@ -1,0 +1,80 @@
+:: Street Panties []
+<<effects>>
+<<if $phase is 1>>
+	你同意交易，在附近的小巷找到一个隐蔽的地方继续交易。
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		当你把$worn.under_lower.cn_name_cap褪至膝盖处，并把裙边高高撩起时，<<person>>瞪大双眼盯着你的身体。你将一条腿抽出，随后是另一条腿，这么做之后你的裙下已经是真空。
+		<br><br>
+	<<else>>
+		在将它们脱掉时，你让<<person>>转过身去。在<<his>>完全转身后，你脱下你的<<allBottoms>>，将你的$worn.under_lower.cn_name_cap从双腿滑下。你觉得太过暴露，快速地将你的<<allBottoms>>全部穿回。
+		<br><br>
+	<</if>>
+	你将那片布料递给<<him>>，<<he>>用颤抖的双手接住。"上面还有体温。"<<he>>这样说着将它抵在<<his>>的脸上。
+	<<if $rng lte 50 and Time.dayState is "night">>
+		<<underlowerruined>>
+		<<He>>正要将钱递给你的时候，犹豫了一下。<<He>>伸回<<his>>的<<if $pronoun is "m">>钱包<<else>>女式钱包<</if>>从中抽出很多的票子。
+		<br><br>
+		"£270买剩下的，"<<he>>说道："买你的全部衣服。总共是£300买下全部。"
+		<br>
+		<<He>>将钱举在你的面前。
+		<br><br>
+		<<if $exhibitionism gte 75>>
+			<<link [[同意|Street Panties All]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+		<</if>>
+		<br>
+		<<link [[拒绝|Street Panties All]]>><<set $phase to 2>><</link>>
+		<br>
+	<<else>>
+		<<if ($player.bodyliquid.vagina.semen + $player.bodyliquid.vaginaoutside.semen + $player.bodyliquid.anus.semen + $player.bodyliquid.bottom.semen ) gte 3>>
+			$worn.under_lower.cn_name_cap紧贴着<<his>>的脸。<<He>>露出了笑容。"而且浸透了精液和淫水。"
+			<br><br>
+			<<He>>把它们从<<his>>的脸上剥下，
+		<<elseif $arousal gte ($arousalmax / 5) * 3>>
+			<<He>>注意到明显的湿印，对着它深深地吸了一口气："闻起来像是发情了。"
+			<br><br>
+			<<He>>
+		<<else>>
+			<<He>>
+		<</if>>
+		将钱递给你随后离开。
+		<<exhibitionism3>>
+		<<underlowerruined>>
+		<<set $money += 3000>><<fameexhibitionism 1>>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<elseif $phase is 2>>
+	你回<<person>>一个害羞的微笑，"但是首先我要有东西穿着。" 你走开留<<him>>在原地无话可说。
+	<<exhibitionism2>>
+	<<endevent>>
+	<<destinationeventend>>
+<<elseif $phase is 3>>
+	你加快脚步，以此来逃离这个变态。
+	<br><br>
+	<<stress 3>>
+	<<endevent>>
+	<<destinationeventend>>
+<<elseif $phase is 4>>
+	你回<<person>>一个害羞的微笑，"可是，<<print ["你看", "看到了吗？"].pluck()>>我什么都没穿。"
+	<br><br>
+	扫了一眼随后眨了眨眼
+	<<if (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.name is "naked") or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.name is "naked")>>
+		你把裙子提过臀部
+	<<else>>
+		你把腰带的前端拉了下来
+	<</if>>
+	，将你的<<genitals>>在<<person>>眼前一闪而过。
+	<<if $player.gender_appearance isnot $player.gender and $NudeGenderDC gt 0>>
+		<<person>>目瞪口呆，显然没预料到你如此明目张胆的暴露行为。另一件<<he>>同样没预料到的事情是你居然是个<<if $player.gender is "m">>男孩<<elseif $player.gender is "h">>双性人<<else>><<if $player.penisExist>>长着肉棒<</if>>女孩<</if>>。
+	<<else>>
+		<<if Time.dayState is "day">>
+			<<person>>瞪大眼睛看着你，被你在光天化日之下大街上公然露阴的行为惊呆了。
+		<<else>>
+			<<person>>震惊地看着你，被你在大街上的公然露阴行为惊呆了。
+		<</if>>
+	<</if>>
+	让<<he>>看够了，你心满意足地离开了，将彻底无话可说的<<person>>留在原地。
+	<<exhibitionism4>>
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

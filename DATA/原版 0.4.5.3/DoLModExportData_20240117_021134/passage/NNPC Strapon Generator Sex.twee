@@ -1,0 +1,45 @@
+:: NNPC Strapon Generator Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	With a hiss of steam, the tube retracts to the ceiling.
+	A figure walks out, looking identical to <<print $NPCList[0].fullDescription>>,
+	<<if $NPCList[0].fullDescription is "Whitney">>
+		although fully nude and holding a <<print $NPCList[0].strapon.description>> in <<his>> hand.
+		<br><br>
+		<<setNPCStrapon $NPCList[0] $NPCName[$NPCNameList.indexOf("Whitney")].strapons[0]>>
+		"This thing is cute and all, but I've already got one", <<he>> says,
+		throwing it away and pulling <<his>> favourite <<print $NPCList[0].strapon.description>> out of nowhere.
+	<<else>>
+		although fully nude and wearing a <<print $NPCList[0].strapon.description>>.
+	<</if>>
+	<br><br>
+
+	"Beginning sex encounter," the <<personsimple>> says in a flat tone, before <<his>> face morphs into a lascivious smile. <<catcall>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $finish is 1>>
+	<span id="next"><<link [[FINISH|NNPC Strapon Generator Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[HEALTH|NNPC Strapon Generator Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[ORGASM|NNPC Strapon Generator Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $pain gte 100 and $willpowerpain is 0>>
+	<span id="next"><<link [[PAIN|NNPC Strapon Generator Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|NNPC Strapon Generator Sex]]>><</link>></span><<nexttext>>
+<</if>>
+<br>
+<<link [[Emergency exit|NNPC Strapon Generator Sex Finish]]>><<set $finish to 1>><</link>>
+<br><br><br><br>

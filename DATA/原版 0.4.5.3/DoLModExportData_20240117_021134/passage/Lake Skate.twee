@@ -1,0 +1,105 @@
+:: Lake Skate []
+<<effects>>
+
+你穿上一双溜冰鞋，然后站在冰面上。
+
+<<if currentSkillValue('danceskill') gte 1000>>
+	你优雅地滑过、跳跃和旋转。
+	<<if $laketeenspresent is 1 and $rng gte 51>>
+		<span class="green">学生们看着，对你的技能感到敬畏。</span><<ltrauma>><<gcool>><<trauma -6>><<status 1>>
+	<</if>>
+<<elseif currentSkillValue('danceskill') gte 800>>
+	你以良好的速度滑行，并练习更高级的技巧。
+	<<if $laketeenspresent is 1 and $rng gte 81>>
+		<span class="green">学生们看着，对你的技能感到敬畏。</span><<ltrauma>><<gcool>><<trauma -6>><<status 1>>
+	<</if>>
+<<elseif currentSkillValue('danceskill') gte 600>>
+	你以良好的速度滑过。
+<<elseif currentSkillValue('danceskill') gte 400>>
+	你的步伐很好，很少摇晃。
+<<elseif currentSkillValue('danceskill') gte 200>>
+	你有点摇摇晃晃，但设法将一只脚放在另一只脚前面而不会摔倒。
+<<elseif currentSkillValue('danceskill') gte 100>>
+	你可以保持直立，但仅此而已。
+<<else>>
+	你甚至很难保持直立。<<gpain>><<pain 4>>
+	<br><br>
+
+	<<if $laketeenspresent is 1>>
+		<<if $cool gte random(1, 400)>>
+			<<generatey1>><<person1>>
+			其他学生咯咯地笑，但很同情。你远不是唯一一个挣扎的人。一个<<person1>><<person>>伸出一只手臂来稳定你。<<gdanceskill>>
+		<<elseif random(1, 400) gte $cool>>
+			其他学生嘲笑你。<<gtrauma>><<gstress>><<lcool>><<status -10>><<trauma 6>><<stress 6>>
+		<<else>>
+			其他学生咯咯地笑，但很同情。你远不是唯一一个挣扎的人。
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<endevent>>
+
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $laketeenspresent is 1>>
+	<<if $rng gte 81>>
+		<<generatey1>><<person1>>
+		一个<<person>>滑过，<<He>>在<<he>>经过时旋转并眨眼。看起来<<Hes>>似乎试图在炫耀自己的技术。
+		<br><br>
+
+		<<link [[挑战 (0:05)|Lake Skate Challenge]]>><<pass 5>><</link>><<dancedifficulty 200 1000>>
+		<br>
+		<<link [[无视|Lake Shallows Ice]]>><<endevent>><</link>>
+		<br>
+
+	<<elseif $rng gte 61>>
+		你在岸上钓到一个欣赏你的<<generatey1>><<person1>><<person>>。当你的目光与<<hers>>相遇时，<<He>>移开视线。
+		<br><br>
+
+		<<link [[带到冰上 (0:05)|Lake Skate Flirt]]>><<pass 5>><</link>><<promiscuous1>>
+		<br>
+		<<link [[无视|Lake Shallows Ice]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		<<generatey1>><<person1>>
+		一个<<person>>滑向你，并从背后用<<his>>的手臂环住你。<<He>>舔你的耳朵。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+
+		<<link [[推开|Lake Skate Shove]]>><<ltrauma>><<def 1>><</link>>
+		<br>
+		<<link [[忍耐|Lake Skate Endure]]>><<stress 6>><<arousal 600>><</link>><<gstress>><<garousal>>
+		<br>
+	<<elseif $rng gte 21>>
+		<<generatey1>><<person1>>
+		<<dancedifficulty 400 1000 true>>
+		<<if $danceSuccess>>
+			当<<he>>滑向你时，<<person>>摇摇晃晃。"你、你能教我像你一样滑冰吗？"
+			<br><br>
+
+			<<link [[教 (0:20)|Lake Skate Teach]]>><<trauma -6>><<pass 20>><</link>><<ltrauma>>
+			<br>
+			<<link [[拒绝|Lake Skate Refuse]]>><</link>>
+			<br>
+		<<else>>
+			一个<<person>>滑行停在你面前。"需要帮助吗？"<<he>>问道。"我可以给你一些指点。"
+			<br><br>
+
+			<<link [[接受 (0:20)|Lake Skate Learn]]>><<trauma -6>><<pass 20>><<danceskill 6>><</link>><<gdanceskill>>
+			<br>
+			<<link [[拒绝|Lake Skate Learn Refuse]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<generatey1>><<person1>><<generatey2>><<generatey3>><<generatey4>>
+		几个小混混围着一个<<person>>。他们将<<him>>推离其他学生，试图孤立<<him>>。
+		<br><br>
+		<<link [[干涉 (0:05)|Lake Skate Intervene]]>><<def 1>><<famegood 4>><<pass 5>><</link>>
+		<br>
+		<<link [[无视|Lake Shallows Ice]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|Lake Shallows Ice]]>><</link>>
+	<br>
+<</if>>

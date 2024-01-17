@@ -1,0 +1,26 @@
+:: Underground Robin Dice Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemytrust -= 80>>
+	<<set $enemyanger += 60>>
+	<<set _rTrauma to [0,4,8,12,16,20,25][$robinDice]>>
+	<<npcincr Robin trauma _rTrauma>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+<<undergroundRobinInterlude>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Underground Robin Dice Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Robin Dice Molestation]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,29 @@
+:: Wolf Cave Hand Refuse []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+你拖着脚步离开黑狼，准备再次进攻。但是没有人来。<<bHe>>转身走开了。<<if $monster is 1>>"没关系。你会学到的。<</if>>
+<br><br>
+<<set $syndromewolves to 1>>
+<<set $wolfevent to 0>>
+<<set $wolfstate to "cave">>
+<<set $wolfpackferocity to 10>>
+<<set $wolfpackharmony to 10>>
+<<if $bestialitydisable is "f">>
+	<span class="red"><i>这不是它们的错。它们只是可爱的动物。</i>你获得了"斯德哥尔摩综合症:狼群"特质。</span>
+<<else>>
+	<span class="red"><i>这不是它们的错。它们只是可爱的怪物。</i>你获得了"斯德哥尔摩综合症:狼人"特质。</span>
+<</if>>
+<br><br>
+<<npc "Black Wolf">>/*<<beastNNPCinit>>*/
+<<if $loveInterest.primary is "None" and $deviancy gte 35>>
+	<<set $loveInterest.primary to "Black Wolf">>
+	<span class="gold">黑狼现在是你的爱人了！<<bHe>>似乎很高兴找到了伴侣。</span>
+<<elseif $deviancy gte 35>>
+	<span class="gold">你现在可以将黑狼称作是你的爱人了！<<bHe>>似乎很高兴找到了伴侣。
+	<br>
+	你可以在"态度"菜单中改变你的爱慕对象。</span>
+<<else>>
+	<span class="blue">你不确定一个<<beasttype>>是否会成为一个好的爱情对象……</span>
+<</if>>
+<br><br>
+<<link [[继续|Wolf Cave]]>><<endevent>><</link>>
+<br>

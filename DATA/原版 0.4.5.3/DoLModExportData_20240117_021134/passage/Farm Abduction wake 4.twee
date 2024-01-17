@@ -1,0 +1,18 @@
+:: Farm Abduction wake 4 []
+<<set $location to "alex_cottage">><<set $outside to 0>><<effects>>
+
+<<set _autosavehere to true>>
+<<set _hour to clone(Time.hour)>>
+<<for _i to 0; _i lt 12; _i++>>
+	<<set _hour++>>
+	<<if _hour % 24 gte 6 and _hour % 24 lte 9>>
+		<<set _multi to _hour - Time.hour>>
+		<<pass `1 * _multi` hour>><<tiredness `-12 * _multi`>><<effects>>
+		<<break>>
+	<</if>>
+<</for>>
+<<sleepeffects>>
+你决定在沙发上躺到天亮。你二天，你在太阳刚刚升起时睁开了眼睛。
+<br><br>
+<!--Might be best to change this later-->
+<<link [[继续|Farm Work]]>><</link>>

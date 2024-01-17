@@ -1,0 +1,36 @@
+:: Drain Slime Watch []
+<<effects>>
+
+你静静地看着，史莱姆覆盖了你的整个背部，
+<<if !$worn.upper.type.includes("naked")>>
+	<span class="pink">伴随着嘶嘶声，你的<<print $worn.upper.cn_name_cap>>被融化了。</span>
+	<<set $worn.upper.integrity -= 1000>>
+	<<integritycheck>>
+	<<exposure>>
+<<elseif !$worn.under_upper.type.includes("naked")>>
+	<span class="pink">伴随着嘶嘶声，你的<<print $worn.under_upper.cn_name_cap>>被融化了。</span>
+	<<set $worn.under_upper.integrity -= 1000>>
+	<<integritycheck>>
+	<<exposure>>
+<<else>>
+	它使你的皮肤发痒。<<ggarousal>><<arousal 600>>
+	<br>
+<</if>>
+<br>
+你注意到一个规律。它每次蔓延扩散的时候都会跳跃，都会压扁自己。
+<br><br>
+<<if $arousal gte 10000>>
+	你在等待时机，但一种温暖的感觉传遍了你的皮肤。<<orgasm>>
+	<br><br>
+
+	你的膝盖一弯，然后瘫倒在地。史莱姆抓住了你的破绽。
+	<br><br>
+
+	<<link [[继续|Drain Struggle]]>><<set $phase to 1>><<set $struggle_start to 1>><</link>>
+	<br>
+<<else>>
+	你等待时机，在它脆弱的时候抓住它，把它扔过水道。它啪的一声撞在远处的墙上，最后消失在了一个排水沟里。
+	<br><br>
+
+	<<destinationstormdrain>>
+<</if>>

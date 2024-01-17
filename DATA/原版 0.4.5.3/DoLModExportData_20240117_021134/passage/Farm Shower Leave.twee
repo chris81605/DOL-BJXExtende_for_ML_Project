@@ -1,0 +1,29 @@
+:: Farm Shower Leave []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"别，别看，"你说道，"请离开。"
+<<elseif $speech_attitude is "bratty">>
+	"走开，"你说道，"变态。"
+<<else>>
+	"请离开，"你说道。
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 20>>
+	艾利克斯犹豫了一下，然后走向前，关上了<<him>>身后的门。"你确定？"<<he>>说着，将你推到了墙上。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[接受|Farm Shower Sex]]>><<set $sexstart to 1>><<npcincr Alex dom 1>><<npcincr Alex love 1>><</link>><<gdom>><<glove>>
+		<br>
+	<</if>>
+	<<link [[推开|Farm Shower Shove]]>><<npcincr Alex dom -1>><<npcincr Alex love -1>><</link>><<llove>><<ldom>>
+	<br>
+<<else>>
+	艾利克斯犹豫了一下，然后关上了门。你穿过小屋去擦干身子。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<clotheson>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,73 @@
+:: Forest Fox Nest Rape Finish []
+<<location "forest">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<if $monster is 1>>
+			<<if $phase is 3>>
+				<<bHe>>边喘气边抱着你。<<bHe>>长长地呼了一口气，闭上眼睛，用鼻子吸进你的身体。过了一会儿，<<bhe>>似乎意识到<<bhe>>在做什么，并迅速站起来。"把它当作一个教训吧！"
+			<<else>>
+				<<bHe>>站起来，得意地看着你。"记住你的位置。"
+			<</if>>
+		<<else>>
+			<<bHe>>得意洋洋。
+		<</if>>
+	<<else>>
+		<<if $monster is 1>>
+			<<bHe>>跪在地上。"谢谢。也许我现在可以找到一个真正的伴侣了。"
+		<<else>>
+			<<bHe>>舔你的脸。
+		<</if>>
+	<</if>>
+	<<bHe>>从树丛间溜走了，看起来很满意。
+	<br><br>
+
+	<<tearful>>你站了起来。<<if $phase2 isnot 1>><<tending_bird_eggs $forest_nest.eggs>><</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<if $monster is 1>>
+			<<if $phase is 3>>
+				<<bHe>>踉跄着离开你，颤抖着。"你……你会后悔的，<<foxnickname>>。"
+			<<else>>
+				<<bHe>>退缩，对着你露出牙齿。"还不错，<<foxnickname>>。"
+			<</if>>
+		<<else>>
+			<<bHe>>从你身边滚开，沮丧地咆哮。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<if $monster is 1>>
+			"哇哦！停下！"
+		<<else>>
+			<<bHe>>从你身边滚开了。
+		<</if>>
+	<<else>>
+		<<if $monster is 1>>
+			<<bHe>>躲着你。"没有鸟蛋。必须再找一个巢穴。"
+		<<else>>
+			<<bHe>>从你身边滚开了。
+		<</if>>
+	<</if>>
+	<<beasttype>>在树间逃窜。
+	<br><br>
+
+	<<tearful>>你振作起来。<<if $phase2 isnot 1>><<tending_bird_eggs $forest_nest.eggs>><</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<beasttype>>从你身边离开，钻入了树丛中。<<if $phase2 isnot 1>><<tending_bird_eggs $forest_nest.eggs>><</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

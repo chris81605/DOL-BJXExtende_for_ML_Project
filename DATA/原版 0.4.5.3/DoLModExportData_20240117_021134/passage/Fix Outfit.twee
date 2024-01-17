@@ -1,0 +1,15 @@
+:: Fix Outfit []
+<<if $exposed gte 1>>
+		裁缝在修复时，你继续躲藏着，经过令人坐立难安的等待后，<<he>>将你的<<print $outfitRepair.cn_name_cap>>交还给你，你穿上了它。
+		<br><br>
+	<<else>>
+		你一直在店里闲逛，直到裁缝把你叫过去做些小修小改。
+		就这样，你的<<print $outfitRepair.cn_name_cap>>变得完好如初。
+		<br><br>
+	<</if>>
+
+	<<set $worn[$outfitRepair.wornHalf].integrity = clothingData($outfitRepair.wornHalf,$worn[$outfitRepair.wornHalf],'integrity_max')>>
+	<<set makeMissingOutfit($outfitRepair)>>
+	<<unset $outfitRepair>>
+
+<<link [[返回|Tailor Shop]]>><<endevent>><</link>>

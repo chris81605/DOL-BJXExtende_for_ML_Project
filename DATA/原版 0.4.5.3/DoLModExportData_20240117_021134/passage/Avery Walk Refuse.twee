@@ -1,0 +1,61 @@
+:: Avery Walk Refuse []
+<<set $outside to 0>><<effects>>
+
+<<if $speech_attitude is "meek">>
+	"谢谢，"你说，"但剩下的路我们可以自己走。"
+<<elseif $speech_attitude is "bratty">>
+	"不了，"你说，"反正我们快到了。"
+<<else>>
+	"没事的，"你说，"剩下的路我们可以走过去。"
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Avery")].rage gte random(20, 100)>><<set $averyragerevealed to 1>>
+
+	艾弗里阴沉地看了罗宾一眼。<<He>>凝视着前方，用手指轻敲方向盘，接着<<he>>打开车门走了出来。"我已经很给你面子了！"<<he>>咆哮着向你走来。"该死的，给我上车！"<<He>>抓住你的手臂，想把你拽走。<<He>>完全不理睬站在你身边抱紧<<endevent>><<npc Robin>><<person1>>书包的罗宾。
+	<br><br>
+
+	<<endevent>>
+	<<npc Avery>><<person1>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 91>>
+		<<set $robinaverybeat to 1>>
+
+		艾弗里看着你的身后。<<his>>的脸上带着怒气，一个书包突然砸到了<<his>>的脸上。随着一声惨叫，<<he>>松开了你的手臂，倒在<<his>>的车上。罗宾走上前去，拿起<<endevent>><<npc Robin>><<person1>><<his>>的书包，并把它用力砸在了艾弗里的头上。里面厚实的书本带着很重的力道。"放开<<phim>>！"罗宾喊道。"<<pShes>>是我的！"
+		<br><br>
+
+		<<endevent>><<npc Avery>><<person1>>
+
+		艾弗里举着<<his>>的双臂防身，并匆忙回了<<his>>的车上。<<He>>瞪着罗宾："你会后悔的，我保证！"<<his>>的汽车呼啸而过。
+		<br><br>
+
+		<<endevent>><<npc Robin>><<person1>>
+
+		罗宾用<<his>>的双臂抱住你，<<Hes>>浑身都在发抖，直到艾弗里的身影彻底消失才放下心来。
+		<br><br>
+
+		<<link [[感谢罗宾|Avery Walk Thank]]>><<npcincr Robin love 3>><</link>><<gglove>>
+		<br>
+		<<link [[调戏罗宾|Avery Walk Tease]]>><<npcincr Robin love 1>><<npcincr Robin lust 1>><</link>><<glove>><<glust>>
+		<br>
+	<<else>>
+		<<link [[顺从|Avery Walk Comply]]>><<npcincr Avery rage -5>><</link>><<larage>>
+		<br>
+		<<link [[拒绝|Avery Walk Refuse 2]]>><<npcincr Avery rage 5>><</link>><<garage>>
+		<br>
+	<</if>>
+<<else>>
+	艾弗里暗暗地看了罗宾一眼，但还是笑了笑，<<his>>的笑意不达眼底。"随你便。"<<He>>开车走了。
+	<<llove>><<npcincr Avery love -1>>
+	<br><br>
+
+	"对不起，"罗宾松了一口气，"希望你不是为了我才拒绝的，<<He>>确实让我有些害怕。"
+	<<glove>><<npcincr Robin love 1>>
+	<br><br>
+
+	罗宾的心情开朗起来，你们一起走着去了学校。
+	<br><br>
+
+	<<link [[继续|School Front Courtyard]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,66 @@
+:: School Rear Fence Exit []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+你把自己撑过栅栏并落到了另一边。
+
+/*
+ * "I'm tired of this mother fucking fence
+ *	and this mother fucking ripping of clothing.
+ *	Options to not rip clothing"
+ *				-- Skullky, 2020
+ */
+<<if !$daily.school.fenceHop>>
+	<<if !$fenceFamiliarity>>
+		<<set $fenceFamiliarity to 0>>
+	<<elseif $fenceFamiliarity lt 20>>
+		<<set $fenceFamiliarity++>>
+	<</if>>
+	<<transform "cat" 1>>
+	<<set $daily.school.fenceHop to 1>>
+<</if>>
+/* chance to hop the fence based on athletics or fence familiarity, capped at 95% */
+<<set _fencehop to Math.max(($fenceFamiliarity - 1) * 5, currentSkillValue("athletics") / 11)>>
+
+/* find the top-most slot that is not naked */
+<<set _slots to ["over_lower", "lower", "under_lower"]>>
+<<set _cloth to _slots.find(c => !V.worn[c].type.includes("naked"))>>
+/* find the bottom slot that is not naked, and if it's the same as the top one (but not under_lower) - pc is going commando */
+<<set _commando to _slots.reverse().find(c => !V.worn[c].type.includes("naked")) === _cloth and _cloth isnot "under_lower">>
+<<if $cat gte 6>>
+	一阵手忙脚乱地调整，你最后四肢着地。
+<<elseif _cloth isnot undefined and _fencehop lte $rng>>
+	/* has clothes, failed the check */
+	<<if _fencehop gte 95>>
+		尽管你有一定翻越栅栏的经验，但下来还是花了好大功夫。
+	<<elseif _fencehop gte 50>>
+		你的翻越围栏技能还有很大的进步空间，衣服布料撕裂的声音提醒了你这一点。
+	<</if>>
+	<<set $worn[_cloth].integrity -= 20>>
+	<<if $worn[_cloth].integrity lte 0>>
+		你感到异常寒冷，你回头看向栅栏，发现你的<<print $worn[_cloth].cn_name_cap>>挂在了栅栏的尖刺上。
+	<<else>>
+		在你翻过去的时候，你的<<print $worn[_cloth].cn_name_cap>>被尖刺轻微钩破了。
+	<</if>>
+<<elseif _cloth isnot undefined>>
+	/* has clothes, succeeded the check */
+	<<if _fencehop gte 95>>
+		翻越栅栏对你来说轻车熟路，你毫不费力地翻了过去。
+	<<elseif _fencehop gte 50>>
+		翻越栅栏花了一些时间，之前的练习让你能够毫发无损地翻过去。
+	<<else>>
+		真是走了狗屎运，你成功翻越了栅栏，毫发无伤。
+	<</if>>
+<<elseif _fencehop lte $rng>>
+	/* naked, failed */
+	过了一会儿，你的<<print either("肩部","背部","臀部")>>感到一阵尖锐的痛感。看来你终究还是被这老栅栏划伤了。<<pain 8>><<stress 6>><<ggpain>><<gstress>>
+<</if>>
+<<if _commando>>
+	<br>
+	微风轻抚你的<<genitals>>，让你瑟瑟发抖<<if $body_temperature is "cold">>。这真的很冷。<<stress 6>><<gstress>><<elseif $exhibitionism gte 15>><span class="lewd">却又有些兴奋</span>。<<arousal 150>><<garousal>><<else>>。<</if>>
+<</if>>
+
+<<integritycheck>>
+<br><br>
+
+<<link [[继续|Industrial alleyways]]>><</link>>
+<br><br>

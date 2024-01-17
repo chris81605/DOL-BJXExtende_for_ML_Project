@@ -1,0 +1,18 @@
+:: Temple Firewalk 7 []
+<<effects>>
+你忍不住开始畏缩，你的脚再次落下。你离目标如此之近。
+<<pain 5>>
+<br><br>
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+	<span class="green">你想知道之后是否需要去医院。但你并不担心。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<templeicon "trialcontinue">><<link [[继续|Temple Firewalk 8]]>><</link>><<gpain>>
+	<br>
+<<else>>
+	<span class="red">你实在是忍受不了了。你能闻到自己的脚在烧。</span>你跳到安全的地方。<<person2>><<monk>>和其他见习教徒们为你的尝试鼓掌。"离成功很近了。"你听到其中一个人小声说。<<monk>>摇了摇<<his>>的头。
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+	<<link [[继续|Temple Firewalk Jump]]>><</link>>
+	<br>
+<</if>>

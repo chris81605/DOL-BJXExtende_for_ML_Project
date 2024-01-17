@@ -1,0 +1,37 @@
+:: Police Station []
+<<set $outside to 0>><<set $location to "police_station">><<effects>>
+<<if !$NPCList[0].pronoun>>
+	<<generatePolice 1>>
+<</if>>
+你站在警察局的大厅里。一个穿着警官制服的<<person1>><<person>>坐在接待台后。
+<<if crimeSumCurrent() gte 5000>>
+	<<him>>身后贴了一张通缉令，<span class="red">上面印着你的照片。</span>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "policeStation">>
+<</if>>
+<br><br>
+<<if $community_service gte 1 and $community_service_done isnot 1 and $exposed lte 0 and Time.hour lt 21 and Time.hour gte 6>>
+	<<link [[社区劳务 (1:00)|Police Community]]>><</link>>
+	<br>
+<</if>>
+<<if crimeSumCurrent() gte 1000>>
+	<<link [[自首 (1:00)|Police Turn]]>><<pass 6>><</link>><<note "这能微微减轻你的罪状" "green">>
+	<br>
+<</if>>
+<<if $worn.neck.collared is 1 or $worn.neck.name is "collar">>
+	<<link [[要求摘除项圈|Police Station Collar]]>><</link>>
+	<br>
+<</if>>
+<<if $worn.feet.type.includes("shackle")>>
+	<<link [[请求拆除镣铐|Police Station Shackle]]>><</link>>
+	<br>
+<</if>>
+<<if $headdrive is 1 and $headpolice isnot 1>>
+	<<link [[提供对礼顿不利的证据|Police Leighton]]>><</link>>
+	<br>
+<</if>>
+
+<br>
+<<link [[离开|Barb Street]]>><<endevent>><</link>>
+<br>

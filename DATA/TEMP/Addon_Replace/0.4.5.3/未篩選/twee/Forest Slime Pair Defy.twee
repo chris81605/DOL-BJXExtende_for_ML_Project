@@ -1,0 +1,49 @@
+:: Forest Slime Pair Defy []
+<<location "forest">><<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身向树林里跑去，确保远离那两人，不让史莱姆得逞。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身向树林里跑去，确保远离那两人，不让史莱姆得逞。你感到一阵剧痛，这是史莱姆对你反抗的教训。不过，<span class="teal">它仍然因为之前强制控制你而筋疲力尽。</span>你感觉它试图让你向相反的方向走，<span class="green">但却失败了。</span>
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $promiscuity gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $slimeDefyCooldown to 8>>
+	<</if>>
+	<<generate1>><<generate2>>
+	你转身跑进森林，确保你远离那两人，不让史莱姆得逞。你感到一阵剧痛，这是史莱姆对你反抗的教训。它试图迫使你的腿朝另一个方向移动，<span class="red">并支配了你的意志。</span>
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	你停在小路中央等待，一些<<fullGroup>>走进了视野。当他们看到你这个陌生的<<girl>>站在那里，盯着他们看时，他们放慢了脚步。
+	<br><br>
+
+	"你迷路了吗？"<<person1>><<person>>问道。
+	<br><br>
+
+	"我，我需要，"你说道。"我需要你们陪伴我。"
+	<br><br>
+
+	那对人面面相觑，露出了一个坏笑。"我们很乐意效劳，"<<he>>说着，向你走近了一步。
+	<br><br>
+
+	<<link [[继续|Forest Slime Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你转身向树林里跑去，确保远离那两人，不让史莱姆得逞。你感到一阵剧痛，这是史莱姆对你反抗的教训。它试图让你向相反的方向走，<span class="green">但是失败了。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<endevent>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

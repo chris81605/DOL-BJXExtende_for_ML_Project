@@ -1,0 +1,104 @@
+:: Widgets Underground Robin [widget]
+<<widget "undergroundRobinTopic">>
+	<<if $undergroundbrothel.robin>>
+		<<set $_state to _args[1] ? _args[1] : "discussed">>
+		<<set $undergroundbrothel.robinTopics[_args[0]] to $_state>>
+	<</if>>
+<</widget>>
+
+<<widget "undergroundEscapeForestRobin">>
+	<<endcombat>>
+	<<clotheson>>
+
+	你来到了森林里，不顾方向地开始逃跑，罗宾则紧跟在你后面。但<span class="red"><<nnpc_Hes "Robin">>不是唯一一个跟着你的人。</span>
+	<br><br>
+
+	<<link [[继续|Underground Robin Escape Stalk]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "undergroundRobinTopicRefresh">>
+	<<if Object.entries(V.undergroundbrothel.robinTopics).filter(pair => pair[1] === "undiscussed").length lte 0>>
+		<<set $undergroundbrothel.robinTopics to {
+			"cold": "undiscussed",
+			"lonely": "undiscussed",
+			"dark": "undiscussed",
+			"scared": "undiscussed",
+			"touch": "undiscussed"
+		}>>
+	<</if>>
+<</widget>>
+
+<<widget "undergroundRobinInterlude">>
+	<<set _rRNG to random(1,3)>>
+	<<if _rRNG gte 2>>
+		<<print either(
+			"你听到了罗宾的喊声。",
+			"罗宾痛苦地喊叫着。",
+			"罗宾呜咽。"
+		)>>
+		<<npcincr Robin trauma 1>><<grtrauma true>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "undergroundRobinKiss">>
+	<<set $speechdisable to 1>>
+	<<if $robinFucked>>
+		<<if _args[0] is "kissback">>
+			<<print either(
+				"罗宾犹豫着给了你一个回吻，罗宾在<<person3>><<person>>凌辱<<person2>><<him>>时低声呜咽着。",
+				"当你亲吻<<He>>时，<<him>>紧紧地闭上了<<his>>的眼睛，每次<<person3>><<person>>用下体拍打罗宾的小穴时<<him>>都会抽搐。",
+				"伴随着<<person3>><<persons>>凶狠的撞击，<<He>>对着你尖叫。"
+			)>>
+		<<else>>
+			<<print either(
+				"看到罗宾抽泣的样子，<<person3>><<person>>放声大笑。",
+				"每当<<person3>><<person>>撞向<<person2>><<him>>时，<<He>>都会发出呜咽。",
+				"<<He>>满脸泪水，浑身颤抖着抱住你。每当<<person3>><<person>>猛拉<<person2>><<his>>的皮带时，<<his>>的身体都会颤抖。"
+			)>>
+		<</if>>
+		<<npcincr Robin trauma 3>><<grtrauma true>>
+	<<elseif $timer gte 5>>
+		<<if _args[0] is "kissback">>
+			<<He>>在<<person3>><<person>>的紧握下挣扎着，和你一起接吻。
+		<<else>>
+			罗宾在<<person3>><<persons>>的紧握中挣扎扭动。
+		<</if>>
+	<<elseif $timer gte 3>>
+		<<if _args[0] is "kissback">>
+			<<person3>><<person>>猛拉罗宾的皮带，<<person2>><<he>>对着你的嘴大叫。
+		<<else>>
+			<<person3>><<person>>猛拉罗宾的皮带，<<person2>><<he>>痛苦地大叫。
+		<</if>>
+	<<elseif $timer gte 1>>
+		<<if _args[0] is "kissback">>
+			罗宾害怕地闭上眼睛，试图把注意力集中在你的嘴唇上。
+		<<else>>
+			罗宾用力摇头，在恐惧中对着你的嘴哭泣。
+		<</if>>
+	<<else>>
+		<<set $robinFucked to 1>>
+		<span class="red">罗宾尖叫，因为<<person3>><<person>>突然把<<his>>的<<npcPenis>>插入了罗宾阴茎下的
+			<<if _robin.vagina isnot "none">>
+				<<NPCVirginityTakenByOther "Robin" "vaginal" $NPCList[2].fullDescription>>
+				<<if _npcVirgin.vaginal is true>>
+					处子小穴中。
+				<<else>>
+					小穴中。
+				<</if>>
+			<<else>>
+				<<NPCVirginityTakenByOther "Robin" "anal" $NPCList[2].fullDescription>>
+				<<if _npcVirgin.vaginal is true>>
+					从未被侵犯过的屁股。
+				<<else>>
+					屁股。
+				<</if>>
+			<</if>>
+		</span>
+		<<npcincr Robin trauma 5>><<ggrtrauma true>><<control -10>><<lcontrol>>
+	<</if>>
+
+	<<if _args[0] is "kissback">>
+		<<set $kissTurns++>>
+	<</if>>
+<</widget>>

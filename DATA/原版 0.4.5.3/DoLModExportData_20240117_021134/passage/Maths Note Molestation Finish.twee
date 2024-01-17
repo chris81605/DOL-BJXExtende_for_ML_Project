@@ -1,0 +1,122 @@
+:: Maths Note Molestation Finish []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyhealth lte 0>>
+
+	那个<<group>>吃痛退开。<<tearful>>你抓住机会逃跑。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+	<<else>>
+		你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+	<</if>>
+
+	你颤抖着回到教室。
+	<br><br>
+
+	<<link [[继续|Maths Lesson]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"回见了，废物。"<<person1>><<person>>说道。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+	<<else>>
+		你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+	<</if>>
+
+	<<tearful>>你走回教室。
+	<br><br>
+
+	<<link [[继续|Maths Lesson]]>><</link>>
+<<elseif $rescue gte 2 and $alarm is 1>><<set $rescued += 1>>
+	一个愤怒的声音在大厅里回荡。"放我的<<girl>>走。"是惠特尼<<if $whitneymaths isnot "active" and $whitneymaths isnot "seat">>，身侧是<<nnpc_his "Whitney">>的朋友们<</if>>。攻击你的人紧张起来。<<status 1>><<gcool>>
+	<br><br>
+
+	那个<<group>>紧张地互相看了一眼，权衡胜算。
+	<<if $delinquency lt 400 and $pillory_tenant.special.name isnot "Leighton">>
+		在他们做出决定之前，第二个声音打破了沉默，吓得他们开始逃跑，把你扔在地上。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		你抬头一看，发现礼顿正快速接近，<<nnpc_his "Leighton">>眼睛正瞪着惠特尼。
+		<<npc Leighton>><<endevent>>
+		"又是你，我就知道。"
+		<br><br>
+
+		"把你的臭手拿开，你什么都不知道！"惠特尼在被拖到校长办公室时抗议道。
+		<br><br>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+		<<tearful>>你赶紧回到教室。
+		<<set $whitneymaths to "sent">>
+		<br><br>
+
+		<<link [[继续|Maths Lesson]]>><</link>>
+		<br>
+	<<else>>
+		最后，<<person1>><<person>>把你推给了惠特尼。"不知道你看上这废物那里了。"<<he>>嘲笑道。<<He>>跟<<his>>伙伴们都溜走了。
+		<br><br>
+
+		惠特尼转了转<<nnpc_his "Whitney">>眼睛。"虚张声势。"
+		<<if $whitneymaths is "seat" or $whitneymaths is "active">>
+			片刻的沉默之后，惠特尼愤怒地推了你一把，"闭嘴，我无聊了。"
+			<<set $whitneymaths to "sent">>
+			<<set $whitneyRescueAlone to true>>
+		<</if>>
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+
+		<<link [[继续|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><<set $whitneyRescueSpecial to "mathsNote">><</link>>
+		<br>
+	<</if>>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	<<endevent>><<npc Leighton>><<person1>>礼顿绕过一个角落，听到了你的尖叫声。<<group>>的态度马上就变了，他们被赶回了<<his>>办公室。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+	<<else>>
+		你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+	<</if>>
+
+	<<tearful>>你走回教室。
+	<br><br>
+
+	<<link [[继续|Maths Lesson]]>><</link>>
+<<else>>
+
+	"回见了，废物。"<<person1>><<person>>说道。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+	<<else>>
+		你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+	<</if>>
+
+	<<tearful>>你走回教室。
+	<br><br>
+
+	<<link [[继续|Maths Lesson]]>><</link>>
+<</if>>

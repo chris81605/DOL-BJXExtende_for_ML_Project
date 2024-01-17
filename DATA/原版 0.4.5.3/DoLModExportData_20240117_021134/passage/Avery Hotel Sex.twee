@@ -1,0 +1,29 @@
+:: Avery Hotel Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<npcClothesType $NPCList[0] "undies">>
+	<<set $enemytrust += 100>>
+	<<if $phase is 0>>
+		你亲吻<<him>>，你们开始探索彼此。<<takeKissVirginity "Avery" `($dateCount.Avery gte 3?"loveInterest":"romantic")`>>
+	<<else>>
+		你把腿圈在了<<him>>的腰上，强迫<<him>>翻过来，最后你骑在了<<him>>的上面。
+	<</if>>
+	<<promiscuity1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Avery Hotel Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Avery Hotel Sex]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,66 @@
+:: Farm Assault Pick []
+<<effects>>
+
+
+
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+
+		<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+			你躲在阴影里跟踪着入侵者，等待着机会。
+		<<else>>
+			你躲在阴影里跟踪着入侵者，等待着机会。
+		<</if>>
+		<br><br>
+
+		<<skulduggerycheck>>
+		<<if $skulduggerysuccess is 1>>
+
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<span class="green">你找到了一个。</span><<generate1>><<person1>><<person>>跟<<his>>伙伴们离得太远。你从黑暗中冲出，击中了<<His>>的头。<<He>>瘫倒在地，失去了意识。
+				<br><br>
+				<<endevent>>
+				<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+			<<else>>
+				<span class="green">你找到了一个。</span><<generate1>><<person1>><<person>>站得离树篱太近。你从黑暗中冲出，击中了<<His>>的头。<<He>>瘫倒在地，失去了意识。
+				<br><br>
+				<<endevent>>
+				<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+			<</if>>
+			<br><br>
+
+			<<skulduggeryuse>>
+
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+
+		<<else>>
+
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+					<<generate1>>
+				<<else>>
+					<<generate1>>
+				<</if>>
+				<span class="red">你没找到目标。</span>打手们相互靠得太近，攻击一个就会引起其他人的注意。
+				<br><br>
+
+				<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<generate1>><<person1>>
+				你躲在阴影中跟踪着一个<<person>>入侵者，等待着一个机会。当<<he>>转身的时候，你蹑手蹑脚地接近了，<span class="red">但在黑暗中被绊倒了，</span>摔倒在地，并引起了<<his>>警觉。
+				<br><br>
+
+				<<He>>转过身来定住了，但你不确定<<he>>是否清楚你在哪里。
+				<br><br>
+
+				<<link [[战斗|Farm Assault Fight]]>><<set $fightstart to 1>><</link>>
+				<br>
+				<<link [[逃离|Farm Assault Flight]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</for>>

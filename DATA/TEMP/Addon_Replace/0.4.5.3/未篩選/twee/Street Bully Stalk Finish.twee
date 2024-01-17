@@ -1,0 +1,58 @@
+:: Street Bully Stalk Finish []
+<<set $outside to 1>><<effects>>
+
+<<if $stalk_end is "confront">>
+	<<if $feetaction is "confront">>
+		惠特尼瞪着你，双臂交叉。
+	<<else>>
+		<<if !$stalk_assess>>一双手<<else>>惠特尼<</if>>从你身后抓住了你。
+	<</if>>
+	<<if $whitneyromance is 1>>
+		"你到这儿来就是想找麻烦，是不是？”<<if !$stalk_assess>>是惠特尼。<</if>><<His>>的朋友们从<<his>>肩后窥视。<<He>>笑了。“那正好，你走运了。"
+	<<else>>
+		"擅闯要罚款的，荡妇。”<<if !$stalk_assess>>是惠特尼。<</if>><<His>>的朋友们将你团团围住。“你很走运，这次算你便宜。"
+	<</if>>
+	<br><br>
+
+	<<silently>><<endcombat>><</silently>>
+	<<npc Whitney>><<person1>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 15>>
+		<<He>>打了个响指，然后指了指<<his>>下面。
+	<<else>>
+		<<He>>把一只手放在你的头上，往下推去。
+	<</if>>
+	<<if Time.dayState isnot "night">>
+		<span class="lewd">你可以清楚地看到相邻的街道。</span>
+	<</if>>
+	<br><br>
+
+	<<if $promiscuity gte 55>>
+		<<link [[帮惠特尼口交|Street Bully Sex]]>><<set $phase to 0>><<set $sexstart to 1>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><</link>><<promiscuous4>><<glove>><<gdom>>
+		<br>
+	<</if>>
+	<<if $whitneyromance is 1>>
+		<<link [[要求去一个隐蔽的地方|Street Bully Private]]>><<npcincr Whitney dom -1>><</link>><<promiscuous1>><<ldom>>
+		<br>
+	<</if>>
+	<<link [[顺其自然|Street Bully Sex]]>><<set $phase to 0>><<set $molestationstart to 1>><<trauma 6>><<stress 6>><<npcincr Whitney dom 1>><</link>><<gtrauma>><<gstress>><<gdom>>
+	<br>
+	<<link [[战斗|Street Bully Fight]]>><<npcincr Whitney dom -1>><<set $fightstart to 1>><</link>>
+	<br>
+<<elseif $stalk_end is "hide">>
+	你从藏身之处出来。<<if $stalk_assess>>惠特尼<<else>>跟踪你的人<</if>>无处可寻。<<tearful>>你继续你的路。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<<else>>
+	你放慢脚步，<<tearful>>随后你继续前进。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<</if>>

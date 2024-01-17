@@ -1,0 +1,48 @@
+:: Street Slime Extreme Defy []
+<<set $outside to 0>><<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 3>>
+		你转身离开<<person>>。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身离开那个<<person>>，你感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它迫使你朝着相反的方向前进。<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+	<<endevent>>
+
+	<<destinationeventend>>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $promiscuity gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 6>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 12>>
+	<</if>>
+	<<clothesstrip>>
+	你试图反抗史莱姆，<span class="red">但它实在太强大了。</span>你无法控制你的身体，只能眼睁睁地看着它一件件的脱掉你的衣服。然后让你一丝不挂地待在街上。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	<<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+	<<person1>><<person>>被惊呆了，而且不止<<Hes>>一个。没过几分钟，街上的其他人也发现了。许多人开始向你走来，其他人则加快步伐逃离了现场。
+	<br><br>
+
+	你倒在地上，扭动着，呻吟着。你不确定自己在做什么，但它起作用了。人群涌向你，无法抑制他们的欲望。
+	<br><br>
+
+	<<link [[继续|Street Slime Extreme Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你试着对抗史莱姆，当它反击时，一股莫名的愤怒涌上心头，<span class="green">但你设法将你的身体从它的控制中挣脱特出来。</span>当史莱姆惩罚你的反抗时，你全身都变得非常疼痛。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	你离开了<<person>>。
+	<br><br>
+
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<endevent>>
+
+	<<destinationeventend>>
+<</if>>

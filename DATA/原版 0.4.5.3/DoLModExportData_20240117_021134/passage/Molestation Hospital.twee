@@ -1,0 +1,38 @@
+:: Molestation Hospital []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<nurseinit>><<person1>>你感到胳膊上一阵剧痛。睁开眼睛，看到一个身穿护士装和医用口罩的<<person>>在给你注射一种神秘的液体。几乎立刻，一种迷糊感笼罩着你。你很难动弹，甚至思考。一种异样的温暖在你的腹部升起。
+	<br>
+<</if>>
+
+<<effects>><<set $outside to 0>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Hospital Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Hospital Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Molestation Hospital]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Hospital Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Hospital Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Molestation Hospital]]>><</link>></span><<nexttext>>
+<</if>>

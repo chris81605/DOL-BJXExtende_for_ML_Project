@@ -1,0 +1,49 @@
+:: Riding School Contact Fight Finish []
+<<effects>>
+
+<<if $pain gte 100 and $willpowerpain is 0>>
+	太痛了。<<tearful>>你瘫倒在地。
+	<br><br>
+
+	<<person3>><<person>>用瓶子浸泡抹布并将其举到嘴边。你虚弱地试图转过身去，但<<he>>用另一只手按住你的脸。甜美的气味让你的思绪游移，你的意识消失。
+	<br><br>
+
+	<<endcombat>>
+
+	<<link [[继续|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><<clotheson>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<fullGroup>>失去了平衡。<<tearful>>你站起来跑开了。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<if Time.hour isnot $closinghour>>
+		<<investigateicon>><<link [[找别人 (0:20)|Riding School Contact]]>><<pass 20>><<endevent>><</link>>
+		<br>
+		<<getouticon>><<link [[暂时放弃|Riding School]]>><<endevent>><</link>>
+	<<else>>
+		关门的时间到了。马匹们被赶回马圈，游客们也在离开。<<if $exposed gte 1>>你偷偷溜走，趁还没有人看到你的<<lewdness>>。<</if>>
+		<br><br>
+
+		<<link [[继续|Farmland]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你把<<person1>><<person>>从你身上推开，你的人落在<<person2>><<person>>身上，而那个人又撞倒了<<person3>><<person>>。<<tearful>>你站起来跑开了，留下他们争论到底是谁的错。
+	<br><br>
+
+	<<endcombat>><<clotheson>>
+
+	<<if Time.hour isnot $closinghour>>
+		<<investigateicon>><<link [[找别人 (0:20)|Riding School Contact]]>><<pass 20>><<endevent>><</link>>
+		<br>
+		<<getouticon>><<link [[暂时放弃|Riding School]]>><<endevent>><</link>>
+	<<else>>
+		关门的时间到了。马匹们被赶回马圈，游客们也在离开。<<if $exposed gte 1>>你偷偷溜走，趁还没有人看到你的<<lewdness>>。<</if>>
+		<br><br>
+
+		<<link [[继续|Farmland]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

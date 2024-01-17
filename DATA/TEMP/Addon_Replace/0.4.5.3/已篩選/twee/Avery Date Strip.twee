@@ -1,0 +1,25 @@
+:: Avery Date Strip []
+<<effects>>
+/* 北极星模组 */
+<<set $money += ((($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1)) * 100)>>
+/* 北极星 */
+<<strip>>
+<<if !playerChastity("hidden")>>
+	<<set $genderknown.pushUnique("Avery")>>
+<</if>>
+
+在车里很尴尬，你脱掉衣服，赤身裸体地坐在艾弗里身边。<<covered>> <<He>>盯着你看了很久，然后把钱递给你。"我会再联络你的，<<pcpetname "Avery">>，"<<he>>说。
+<br><br>
+<<He>>看着你穿好衣服然后下车。<<He>>在开车离开前又逗留了一会儿。
+<br><br>
+
+<<endevent>>
+<<link [[继续|Domus Street]]>>
+	<<clotheson>>
+	<<set $eventskip to 1>>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+	<</if>>
+<</link>>
+<br>

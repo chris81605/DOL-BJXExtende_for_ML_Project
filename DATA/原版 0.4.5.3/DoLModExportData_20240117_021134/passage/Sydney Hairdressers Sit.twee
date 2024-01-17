@@ -1,0 +1,39 @@
+:: Sydney Hairdressers Sit []
+<<run statusCheck("Sydney")>>
+<<effects>>
+你让悉尼安坐，自己则坐到<<him>>的旁边。
+<<generate2>><<person2>>一个<<person>>很快出现在你们俩的身后。<<person1>>"好吧，让我看看
+<<if $sydneyromance is 1>>
+	这对可爱的情侣想要什么？"听到这句话，<<if _sydneyStatus.includes("corrupt")>>悉尼用手捂住嘴偷偷地笑了起来<<else>>悉尼的脸瞬间染上了红晕<</if>>。
+<<else>>
+	<<if $player.gender_appearance is "m" and $pronoun is "m">>
+		你们两位英俊的先生想要什么？"
+	<<elseif $player.gender_appearance is "f" and $pronoun is "f">>
+		你们两位可爱的女士要做什么？"
+	<<else>>
+		你们两个想要什么？"
+	<</if>>
+<</if>>
+<br><br>
+<<if !$sydneySeen.includes("hairchange")>>
+	<<person2>><<He>>给悉尼展示了一些发型设计和颜色示例。<<person1>>
+	你看向了悉尼，<<he>>正盯着一个有黑色马尾的照片，之后<<he>>又转向了另一个，那人松散的刘海遮住了一只眼。
+	<br><br>
+<</if>>
+<<hairdressersPricelist>>
+<<set $sydneyHairOption to $sydney.hair>>
+<<set $dyeOption to "noChange">>
+<div id="currentCost" class="gold">
+	付款：£0
+</div>
+<div id="hairDressersSydney">
+	<<hairDressersOptionsSydney>>
+</div>
+<<hairdressersResetAlt>>
+<<if $money gte _currentCost>>
+	<<link [[继续|Sydney Hairdressers Sit 2]]>><<set $money -= _currentCost>><</link>>
+<<elseif $money lt _currentCost>>
+	你没有足够的钱付给理发师。
+<</if>>
+<br><br>
+<<link [[离开|Sydney Hairdressers Cancel]]>><<endevent>><</link>>

@@ -1,0 +1,61 @@
+:: Temple Vigil 11 []
+<<effects>><<set $body_temperature to "hot">>
+
+<<if $phase is 2>>
+	<<canvas-model-override "arm_left" "idle">>
+	你牵起悉尼的手。<<person6>><<His>>脸上的顾虑顿时一扫而空，然后，同之前无数次的微笑那般，再次向你展露笑颜。<<takeHandholdingVirginity "Sydney" "romantic">>
+	<br><br>
+<</if>>
+
+你随即走向火堆。热浪驱散了你整晚忍受的寒冷。你出了一身汗。
+<br><br>
+
+<<person2>><<person>>面无表情地盯着火堆，紧握着十字架的指节微微发白。<<person3>><<person>>双目紧闭，嘴唇疯狂地蠕动着。
+<<if $phase is 2>>
+	悉尼紧紧握住你的手。
+<<elseif $templePromised is "Sydney">>
+	<<set $phase to 2>><<canvas-model-override "arm_left" "idle">>
+	悉尼跌跌撞撞地走到你身边。你接住<<person6>><<him>>，握着<<his>>的手，扶<<his>>站稳。 <<takeHandholdingVirginity "Sydney" "romantic">>
+<<else>>
+	悉尼重复念叨着什么，但被火焰的噼啪声淹没了。
+<</if>>
+<br><br>
+
+突然，你感觉双目刺痛。眨眼间，视野扭转——邪恶的化身笼罩了整个小镇，罪孽的镰刀横扫了这片地区。这股恶意撕开了无数通往现世的裂隙。铺天盖地的裂隙小而细碎，但足以让罪恶的仆从们蠕动着侵入现世、足以招募新的仆从。仆从们又将撕开更多更大的裂隙。
+<br><br>
+
+紧接着，你感到皮肤刺痛。炽烈至极的火舌包裹着你。你的皮肤生出水泡，然后如蜡一般消融了。
+
+<<if $phase is 2>>
+	<<if (currentSkillValue('willpower') / 10) gte (($pain - 10) + random(0, 10))>>
+		<span class="green">但此身不过是樊笼而已。</span>火焰释放了你。你不再恐惧，因为你没有恐惧。
+		<<gwillpower>><<willpower 1>><<wash>>
+		<br><br>
+
+		<<link [[继续|Temple Vigil 12]]>><</link>>
+		<br>
+	<<else>>
+		<span class="red">恐惧和痛苦将你们俩淹没，疯狂攫取了你们。</span>你们逃离火堆，投入约旦的怀抱。
+		<<ggwillpower>><<willpower 10>>
+		<br><br>
+
+		<<link [[继续|Temple Vigil End Sydney]]>><<set $weekly.trialFailed to "Sydney">><<canvas-model-override "clear">><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if (currentSkillValue('willpower') / 10) gte ($pain + random(0, 10))>>
+		<span class="green">但此身不过樊笼而已。</span>火焰释放了你。你不再恐惧，因为你没有恐惧。
+		<<gwillpower>><<willpower 1>><<wash>>
+		<br><br>
+
+		<<link [[继续|Temple Vigil 12]]>><</link>>
+		<br>
+	<<else>>
+		<span class="red">恐惧和痛苦将你淹没，疯狂攫取了你。</span>你逃离火堆，投入约旦的怀抱。
+		<<ggwillpower>><<willpower 10>>
+		<br><br>
+
+		<<link [[继续|Temple Vigil End]]>><<set $weekly.trialFailed to "pyre">><<canvas-model-override "clear">><</link>>
+		<br>
+	<</if>>
+<</if>>

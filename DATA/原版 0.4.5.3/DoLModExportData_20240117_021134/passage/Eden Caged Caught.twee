@@ -1,0 +1,36 @@
+:: Eden Caged Caught []
+<<set $outside to 1>><<effects>>
+
+<<if $phase is 1>>
+	伊甸是对的。你离开太久了。你可能无法挣脱。
+	<br><br>
+
+	<<if $location is "forest">>
+		<<He>>没有松开抓握，但当你们穿过森林的时候，<<he>>开始放松对你的控制。
+	<<else>>
+		<<He>>引导你走向森林。大多数人都没有注意到你。跟上<<his>>快速的步伐很困难。
+	<</if>>
+	<br><br>
+
+	你被拉进小屋。伊甸在你身后砰地关上门。一切都和你离开的时候一样。除了睡觉区域附近的笼子。
+	<br><br>
+<<else>>
+	<<if $location is "forest">>
+		伊甸粗暴地拉着你的手腕，迫使你跟在<<him>>身后跌跌撞撞地回家。
+	<<else>>
+		伊甸的抓握依旧紧紧地抓住你，引导你走向森林。人们看着你经过，但没有人干涉，尽管你呼救求助。<<trauma 3>><<gtrauma>>
+		<br><br>
+
+		即使在你们走出城镇的郊区后，伊甸也没有放松，仍然紧紧地拉着你穿过树林。城镇的声音逐渐被大自然的死寂所取代。
+	<</if>>
+	<br><br>
+
+	你眼前那熟悉和温馨的小屋似乎笼罩着一层不祥的阴影。你突然感觉胃一阵下沉，当看到角落里阴森森的铁笼时，恐惧感更加强烈了。
+<</if>>
+<<set $outside to 0>><<set $location to "cabin">>
+<br><br>
+
+<<link [[挣扎|Eden Caged Intro]]>><<set $phase to 0>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+<br>
+<<link [[顺从|Eden Caged Intro]]>><<set $phase to 1>><<sub 1>><<stress 6>><<npcincr Eden dom 1>><</link>><<gstress>><<gdom>>
+<br>

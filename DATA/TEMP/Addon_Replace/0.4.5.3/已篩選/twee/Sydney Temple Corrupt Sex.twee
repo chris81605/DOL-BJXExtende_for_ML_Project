@@ -1,0 +1,64 @@
+:: Sydney Temple Corrupt Sex []
+<<run statusCheck("Sydney")>><<set $prayerRoom to true>>
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>>
+		<<set $consensual to 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<molested>>
+	<</if>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<set $enemyarousalmax to 600>>
+	<<switch $loveDrunk>>
+		<<case 1>>
+			你感觉有一双无形的手把你和悉尼推到了一起。<<hallucinogen 60>>
+		<<case 2>>
+			不记得是什么时候开始的，<span class="lewd">你所有衣服的都消失了。你有些意识模糊。</span><<hallucinogen 60>>
+			<<undress "prayerroom">><<npcexpose>>
+		<<case 3>>
+			<span class="lewd">房间在你们的眼前回旋上升，只剩下了无尽的欲望。</span><<hallucinogen 60>>
+			<<npcexpose>>
+		<<default>>
+			<<npcexpose>>
+	<</switch>>
+	<<if $loveDrunk>>
+		<<npc_attempt_sex>>
+	<</if>>
+	<<set $NPCList[0].pregnancyAvoidance to 0>>
+<</if>>
+<<switch $loveDrunk>>
+	<<case undefined>>
+		<span class="lewd">沉香的味道让你感到飘然与眩晕。</span><<hallucinogen 5>>
+	<<case 1>>
+		<span class="lewd">神殿在熔化。</span><<hallucinogen 5>>
+	<<case 2>>
+		<span class="lewd">沉香萦绕在你们身侧，将你们紧紧缠绕在一起。</span><<hallucinogen 10>>
+	<<default>>
+		<span class="lustful">合二为一。</span><<hallucinogen 10>>
+<</switch>>
+
+<<arousal 200>>
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+/* 北极星模组 */
+<<if $enemyhealth lte 0 or $enemyarousal gte $enemyarousalmax or $finish is 1 and !$loveDrunk>>
+/* 北极星 */
+	<span id="next"><<link [[继续|Sydney Temple Corrupt Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif _combatend and $gamemode is "soft" and $finish is 1>>
+	<span id="next"><<link [[继续|Sydney Temple Corrupt Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sydney Temple Corrupt Sex]]>><</link>></span><<nexttext>>
+<</if>>

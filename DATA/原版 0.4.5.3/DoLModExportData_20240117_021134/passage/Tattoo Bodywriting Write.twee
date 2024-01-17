@@ -1,0 +1,67 @@
+:: Tattoo Bodywriting Write []
+<<effects>>
+
+<<if $bodyWritingSelected is null>>
+	<<unset $bodyWritingSelected>>
+<</if>>
+<<if $bodyWritingSelected isnot undefined>>
+	你告诉纹身师你想在
+	<<if isLoveInterest($skin[$bodyPartSelected].special)>>
+		"<span class="lewd"><<print $bodyWritingSelected>></span>"
+	<<elseif $skin[$bodyPartSelected].special isnot "none">>
+		"<span class="red"><<print $bodyWritingSelected>></span>"
+	<<elseif $skin[$bodyPartSelected].lewd is 1>>
+		"<span class="pink"><<print $bodyWritingSelected>></span>"
+	<<else>>
+		"<span class="purple"><<print $bodyWritingSelected>></span>"
+	<</if>>
+	到你的<<bodypart $bodyPartSelected>>上，你查看了一下效果。
+
+	<<set _part to $skin[$bodyPartSelected]>>
+	<<set _lewd to _part.lewd is 1>>
+	<<set _deviant to ["bestiality", "Black Wolf", "Great Hawk"].includes(_part.special)>>
+
+	<br><br>
+	<<link [[做成纹身 (£500 1:00)|Tattoo Bodywriting]]>>
+		<<pass 60>>
+		<<set $money -= 50000>>
+		<<pain 6>>
+		<<if _lewd or _deviant>>
+			<<control 50>>
+		<<else>>
+			<<control 25>>
+		<</if>>
+		<<set $tattoo_bodypart to $bodyPartSelected>>
+		<<set $tattoo_parlour to clone(_part)>>
+		<<set _part.pen to "tattoo">>
+		<<unset $bodyWritingSelected>>
+		<<unset $bodyPartSelected>>
+		<<unset $bodywritingSet>>
+	<</link>><<gpain>><<if _lewd or _deviant>><<gggcontrol>><<else>><<ggcontrol>><</if>>
+
+	<br>
+	<<link [[选择其它图案|Tattoo Bodywriting Write]]>>
+		<<bodywriting_clear $bodyPartSelected>>
+		<<unset $bodyWritingSelected>>
+		<<unset $bodyPartSelected>>
+		<<unset $bodywritingSet>>
+	<</link>>
+<<else>>
+	<<link [[返回|Tattoo Bodywriting Choice]]>><<unset $bodywritingSet>><</link>>
+	<br><br>
+
+	你思考了一下自己想要的纹身图案。
+	<br><br>
+	__纹身__<br>
+
+	<<bodywriting>><br>
+
+	<<bodywritingOptions>>
+
+	<<set _bodyPartOptionsSkip to []>>
+	<<if $exhibitionism lte 34>>
+		<<set _bodyPartOptionsSkip to _bodyPartOptionsSkip.concat(["left_bottom","right_bottom","pubic","breasts"])>>
+	<</if>>
+
+	<<bodywritingMenuLinks _bodyPartOptionsSkip>>
+<</if>>

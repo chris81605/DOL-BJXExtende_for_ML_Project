@@ -1,0 +1,189 @@
+:: Sydney Crawl Oral []
+<<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>><<npcoral>><<set $NPCList[0].mouth to "none">><<set $speechdisable to 1>>
+	<<set $NPCList[0].lefthand to "hair">><<set $NPCList[0].righthand to "none">><<set $head to "grappled">>
+	<<set $enemytrust += 100>>
+	<<set $timer to random(6,10)>>
+	<<if !["early","late"].includes($schoolstate)>>
+		<<set $rescue to 1>>
+	<</if>>
+	<<set $sydneyOral to {Sound: 0, Student: 0, Book: 0}>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<if !["early","late"].includes($schoolstate)>>
+	<<if _sound is 1>>
+		<<set $sydneyOral.Sound to 1>>
+	<</if>>
+	<<if $enemyarousal gte ($enemyarousalmax / 5) * 3>>
+		<<set _sydneyArousal to "high">>
+	<<else>>
+		<<set _sydneyArousal to "low">>
+	<</if>>
+
+	<<if $timer is 4>>
+		<<set $sydneyOral.Student to 1>>
+		<<switch _sydneyArousal>>
+			<<case "high">>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"请不要慢下来。"<<he>>伏在你的耳边压低了声音，
+				<<else>>
+					<<He>>轻轻地喘息着，
+				<</if>>
+			<<default>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"哎呀，变得有趣起来了。"<<he>>在你耳边笑了起来，
+				<<else>>
+					"请小声一点。"<<he>>压低了声音，
+				<</if>>
+		<</switch>>
+		<span class="lewd">有脚步声在向你们靠近</span>。
+		<br><br>
+
+	<<elseif $timer is 3>>
+		一个学生在柜台前询问着什么。
+		<<switch _sydneyArousal>>
+			<<case "high">>
+				<<if _sound>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"或，或许下面有人，或许也没有，"悉尼漏出一声呻吟，声音不住地开始颤抖，"嗯，你是来还，还书的？"
+					<<else>>
+						"下，下面没人！" 悉尼大喊道，"你，你你是来还书的，对吧？"
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"是，是，我马上把，把你该该该死的书还回去。"悉尼呻吟道。
+					<<else>>
+						"是，是的，我马上拿书，书给你。"悉尼的声音在抖。
+					<</if>>
+				<</if>>
+			<<default>>
+				<<if _sound>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"我当然知道，你来猜猜看呗，"悉尼咯咯笑了起来，"嗯，你是来还书的吧？"
+					<<else>>
+						"下面没人！" 悉尼大喊道，"你是来还书的，对吧？"
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"是的，我可以帮你把书还回去。"悉尼慌张地笑了起来。
+					<<else>>
+						"是，是的，我马上把书拿给你。"悉尼的手指不自然地在桌面上抓挠着，"希望你能按时归还。"
+					<</if>>
+				<</if>>
+		<</switch>>
+		<br><br>
+
+	<<elseif $timer is 2>>
+		有什么东西砸在了柜台上——看样子是一本书。
+		<<switch _sydneyArousal>>
+			<<case "high">>
+				<<if _sound>>
+					一个学生询问着什么。
+					<<if _sydneyStatus.includes("corrupt")>>
+						"或，或许下面有人，或许没有，" 悉尼漏出一声呻吟，声音颤抖了起来。
+					<<else>>
+						"下，下面没人！" 悉尼大喊道。
+					<</if>>
+				<</if>>
+				<<He>>翻了翻这本书。
+				<<if $rng gte 65>>
+					<<set $sydneyOral.Book to 2>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"逾期了，" 悉尼咯咯地笑了起来，"真不守规矩。"
+					<<else>>
+						"逾，逾期了。"悉尼颤抖得结巴了。
+					<</if>>
+					你听见<<him>>拔开了笔帽。
+				<<else>>
+					<<set $sydneyOral.Book to 1>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"谢谢你按时归——"<<he>>漏出一声淫荡的喘息。
+					<<else>>
+						"谢，谢谢你按，按时归……还。"<<he>>忍不住喘了出来。
+					<</if>>
+				<</if>>
+			<<default>>
+				<<if _sound>>
+					一个学生询问着什么。
+					<<if _sydneyStatus.includes("corrupt")>>
+						"我当然知道，你来猜猜看呗。"悉尼轻轻地笑了起来。
+					<<else>>
+						"下面没人！" 悉尼大喊道。
+					<</if>>
+				<</if>>
+				<<He>>翻了翻这本书。
+				<<if $rng gte 85>>
+					<<set $sydneyOral.Book to 2>>
+					"逾期了，" 悉尼挣扎着把手抬起，"你知，知道规矩。"你听见<<him>>拔开了笔帽。
+				<<else>>
+					<<set $sydneyOral.Book to 1>>
+					"谢，谢谢你按时归还。"<<he>>挤出一个微笑。
+				<</if>>
+		<</switch>>
+		<br><br>
+
+	<<elseif $timer is 1>>
+		<<if $sydneyOral.Book is 2>>
+			你感觉悉尼向前倾身，大概是在学生额头上写着什么。过了一会儿，你听见脚步声越来越远。
+		<<else>>
+			你听见脚步声越来越远。
+		<</if>>
+		<<set $sydneyOral.Book to 0>>
+		<<set $sydneyOral.Student to 0>>
+		<br><br>
+
+	<<elseif $timer is 0>>
+		<<set $timer to random(6, 10)>>
+		<<switch _sydneyArousal>>
+			<<case "high">>
+				<<if $sydneyOral.Sound is 1>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"你太露骨了，声音那么大。"悉尼压低了声音，揪住你的头发，"如果我拉一下你，你会喘出来吗？我亲爱的？呵呵，请继续，不要停。"
+					<<else>>
+						"请，请不要这么大声，"悉尼恳求道，"我不想被抓——"<<He>>突然喘息了一声，猛地捂住了嘴巴。
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"太顺利了点，"悉尼压低了声音，把手伸到柜台下揉了揉你的脸。"我倒是希望别人能够发现呢。"说完，<<He>>放肆地呻吟了一声。
+					<<else>>
+						"刚，刚才太近了，"悉尼压低了声音，"要，要是被发现了……"
+					<</if>>
+				<</if>>
+			<<default>>
+				<<if $sydneyOral.Sound is 1>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"听听，听听，你就想着被别人逮到对吧，"悉尼数落了一句，揪住了你的头发，然后轻轻地笑了起来。"或许我应该给所有人看看你现在在干什么……给所有人看看你是有多爱我，好不好？"
+					<<else>>
+						"请不要这么大声，" 悉尼恳求道，"差点有人发现你了。"
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"真刺激，"悉尼轻轻笑了起来，"不知道可不可以在食堂也这么干。"
+					<<else>>
+						"我，我的心在怦怦直跳，"悉尼压制着颤抖的声音，"太近了——他们随时可能看见我们，然后……"
+					<</if>>
+				<</if>>
+		<</switch>>
+		<br><br>
+		<<set $sydneyOral.Sound to 0>>
+	<</if>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sydney Crawl Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sydney Crawl Oral]]>><</link>></span><<nexttext>>
+<</if>>

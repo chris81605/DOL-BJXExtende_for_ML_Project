@@ -1,0 +1,38 @@
+:: Rent Pay Robin []
+<<effects>>
+
+<<rentpay>>
+
+<<endevent>>
+<<npc "Robin">><<person1>>
+贝利离开后，罗宾轻轻抱着你。"对不起，"<<he>>说道。
+
+<<if $bus is "hospital">>
+	<br><br>
+
+	<<set $companion to "Robinrent">>
+	<<if crimeSumCurrent() gte 1000>>
+		<<link [[继续|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Hospital front]]>><<pass 10>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $inRobinsRoom>>
+		<<He>>在<<his>>的床上坐下。"那太可怕了。"
+		<br><br>
+
+		你花了点时间，确认罗宾没事后，就离开房间回到大厅。
+		<br><br>
+
+		<<link [[继续|Orphanage]]>><<endevent>><</link>>
+	<<else>>
+		<<He>>最后还是离开了你的卧室，"你有什么需求，尽管告诉我。"
+		<br><br>
+
+		<<link [[继续|Bedroom]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+<</if>>
+<<unset $inRobinsRoom>>

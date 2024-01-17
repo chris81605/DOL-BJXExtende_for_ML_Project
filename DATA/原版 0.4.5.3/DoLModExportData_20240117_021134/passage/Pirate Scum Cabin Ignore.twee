@@ -1,0 +1,20 @@
+:: Pirate Scum Cabin Ignore []
+<<effects>>
+
+<<if random(1, 2) is 2>>
+    你继续走，无视<<person1>><<person>>和<<his>>的朋友们。<<He>>咕哝了些颠三倒四的话，就没有然后了。
+    <br><br>
+    <<link [[继续|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<<else>>
+    你继续走，无视<<person1>><<person>>和<<his>>的朋友们。“别就这么走了，”<<person>>说。当<<his>>站起来时你听见<<he>>的椅脚在木地板上刮擦的声音。<<He>>向你走来，一边走一边从<<his>>身旁的架子上抓起一瓶深色液体。“喝一口这个。它会让你感觉很好。我保证。”
+    <br><br>
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+    	<<link [[喝下|Pirate Scum Cabin Drink]]>><<pirate_status 1>><<alcohol 120>><</link>><<grespect>><<ggalcohol>>
+	<</if>>
+    <br>
+    <<link [[拒绝|Pirate Scum Cabin Drink Refuse]]>><<pirate_status -1>><</link>><<lrespect>>
+    <br>
+<</if>>

@@ -1,0 +1,30 @@
+:: Temple Spear Questions []
+<<effects>>
+
+<<switch $spearQuestion>>
+	<<case "why">>
+		"好吧，"约旦说道："必须是一个勇敢善良的人才行。" <<He>>戛然而止，好像这个解释就足矣。
+	<<case "what">>
+		"有很多食物和饮料。我们在神殿花园举办，并邀请整个城镇的人参加。当太阳落山，血月升起时，我们其中一人会高举长矛。他们将不畏黑夜，在接下来的一个世纪里保护小镇的安全。"
+		<br><br>
+		约旦微笑起来。
+	<<case "where">>
+		"我会从博物馆开始，"约旦说道："虽然它只在周末开放，但那里的历史学家很乐意帮忙。可能<<nnpc_he "Winter">>会挖出一些东西。"
+<</switch>>
+<br><br>
+
+<<if !$spearQuestions.includes("why")>>
+	<<link [[询问为什么一定要是你|Temple Spear Questions]]>><<set $temple_spear_mission to 1>><<set $spearQuestion to "why">><<set $spearQuestions.push("why")>><</link>>
+	<br>
+<</if>>
+<<if !$spearQuestions.includes("what")>>
+	<<link [[询问节日内容|Temple Spear Questions]]>><<set $temple_spear_mission to 1>><<set $spearQuestion to "what">><<set $spearQuestions.push("what")>><</link>>
+	<br>
+<</if>>
+<<if !$spearQuestions.includes("where")>>
+	<<link [[询问你应该从哪里寻找|Temple Spear Questions]]>><<set $spearQuestion to "where">><<set $spearQuestions.push("where")>><</link>>
+<br>
+<</if>>
+<br><br>
+<<link [[离开|Temple]]>><<set $temple_spear_mission to 1>><<unset $spearQuestion>><<unset $spearQuestions>><</link>>
+<br>

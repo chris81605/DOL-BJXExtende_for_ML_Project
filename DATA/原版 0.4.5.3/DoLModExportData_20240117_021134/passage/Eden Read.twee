@@ -1,0 +1,43 @@
+:: Eden Read []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+<<set $edenBook to 1>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+<<if $phase is 0>>
+	你依偎着伊甸。<<he>>在火光中紧紧地拥着你，一边为你朗读
+<<else>>
+	伊甸在火光中为你读着
+<</if>>
+
+<<if $rng gte 81>>
+	一本关于森林的旧书。它描述了仍在古代废墟上进行的仪式。<<ghistory>><<historyskill>><<genglish>><<englishskill>>
+<<elseif $rng gte 61>>
+	<<set _eden_romance_novel to true>>
+	一本言情小说。你注意到<<he>>跳过了黄色的段落，而且<<he>>是脸红了吗？<<genglish>><<englishskill>><<glust>><<npcincr Eden lust 1>>
+<<elseif $rng gte 41>>
+	一本关于荒野求生的书——<<He>>在讲的过程中不断插入自己的真实经历，其中有一些确实十分有趣。<<genglish>><<englishskill>><<gscience>><<scienceskill>>
+<<elseif $rng gte 21>>
+	一本旧的钓鱼杂志。你想知道<<he>>是从哪里得到的。
+<<else>>
+	一部维多利亚时代的小说。有点拖沓，不过伊甸好像挺喜欢的。你打起了瞌睡。<<genglish>><<englishskill>><<ltiredness>><<tiredness -3>>
+<</if>>
+<br><br>
+<<if Time.hour isnot 0>>
+	<<if _eden_romance_novel is true>>
+		<<link [[挑逗|Eden Read Tease]]>><<npcincr Eden lust 1>><<npcincr Eden love 1>><</link>><<glust>><<glove>>
+		<br>
+		<<link [[坚持让伊甸读完 (0:30)|Eden Read Insist]]>><<pass 30>><<def 1>><<npcincr Eden lust 5>><</link>><<gglust>>
+		<br>
+		<<link [[继续听 (0:30)|Eden Read]]>><<pass 30>><<trauma -3>><<npcincr Eden love 1>><<set $phase to 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<<else>>
+		<<link [[继续听 (0:30)|Eden Read]]>><<pass 30>><<trauma -3>><<npcincr Eden love 1>><<set $phase to 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<link [[站起来|Cabin Eden Actions]]>><</link>>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>
+<br>

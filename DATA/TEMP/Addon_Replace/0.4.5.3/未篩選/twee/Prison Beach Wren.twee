@@ -1,0 +1,48 @@
+:: Prison Beach Wren []
+<<effects>>
+<<npc Wren>><<person1>>
+伦恩把一条腿搁在船舷上。"有什么我可以帮助你的吗？"<<he>>问道。
+<br><br>
+
+<<if $prison.wren_names is 2>>
+	<<link [[请求搭船|Prison Beach Wren Lift]]>><</link>>
+	<br>
+<<elseif $prison.wren_names is 1>>
+	<<if $per_npc.scarred_inmate.name_known is 1 and $prison_wren_scarred isnot 1>>
+		<<link [[给出那位有疤痕的囚犯的名字|Prison Beach Wren Scarred]]>><<set $prison_wren_scarred to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_scarred isnot 1>>
+		<span class="blue">伦恩想知道那个有疤痕的囚犯的名字。</span>
+		<br>
+	<</if>>
+	<<if $per_npc.relaxed_guard.name_known is 1 and $prison_wren_relaxed isnot 1>>
+		<<link [[给出那位松懈的守卫的名字|Prison Beach Wren Relaxed]]>><<set $prison_wren_relaxed to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_relaxed isnot 1>>
+		<span class="blue">伦恩想知道那个松懈的守卫的名字。</span>
+		<br>
+	<</if>>
+	<<if $per_npc.veteran_guard.name_known is 1 and $prison_wren_veteran isnot 1>>
+		<<link [[给出那位老练的守卫的名字|Prison Beach Wren Veteran]]>><<set $prison_wren_veteran to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_veteran isnot 1>>
+		<span class="blue">伦恩想知道那个老练的守卫的名字。</span>
+		<br>
+	<</if>>
+	<<if $per_npc.methodical_guard.name_known is 1 and $prison_wren_methodical isnot 1>>
+		<<link [[给出那位守纪的守卫的名字|Prison Beach Wren Methodical]]>><<set $prison_wren_methodical to 1>><</link>>
+		<br>
+	<<elseif $prison_wren_methodical isnot 1>>
+		<span class="blue">伦恩想要知道那位守纪的守卫的名字。</span>
+		<br>
+	<</if>>
+	<<if $prison_wren_relaxed is 1 and $prison_wren_scarred is 1 and $prison_wren_veteran is 1 and $prison_wren_methodical is 1>>
+		<<link [[告诉伦恩所有的名字|Prison Beach Wren Names]]>><<set $prison.wren_names to 2>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[请求搭船|Prison Beach Wren Ask]]>><<set $prison.wren_names to 1>><</link>>
+	<br>
+<</if>>
+<<link [[离开|Prison Beach]]>><<endevent>><</link>>
+<br>

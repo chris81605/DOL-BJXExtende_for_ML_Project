@@ -1,0 +1,64 @@
+:: Livestock Escape []
+<<effects>>
+
+<<npc Remy>><<person1>>
+你跑过开阔的田野。你想躲在树篱后面，但他们的狗肯定会闻出你的味道。
+<br><br>
+
+你听到身后传来了马蹄声。你回头一看，是骑着<<livestock_horse>>的雷米。
+<<set $remyEscapeSteed to _text_output>>
+<<Hes>>向你的位置快速逼近。
+<br><br>
+
+<span class="red"><i>没有人能跑得过马。</i></span>特别是在开阔的场地上。雷米到了你身边，绕了个圈，然后停在了你面前。<<His>>面色阴沉。
+
+<<if $livestock_obey gte 60>>
+	"我对你太失望了，"<<he>>啪的一声扬起了<<his>>的鞭子。"眼下只有一个办法了。"
+<<elseif $livestock_obey gte 20>>
+	"坏<<girls>>应该受到惩罚，"<<he>>说着，扬起<<his>>的鞭子啪的一声向你抽了过来。"希望你未来能学乖一点儿。"
+<<else>>
+	"不过是逃跑而已，"<<he>>啪的一声扬起了<<his>>的鞭子。"需要多少次，我就惩罚你多少次。"
+<</if>>
+
+<<if $livestock_horse gte 2>>
+	<<unset $livestock_escape>><<livestockescape>>
+	<!-- Modified for Monster People -->
+	<<if $remyEscapeSteed is "centaur">>
+		<<generate2>>
+		<<He>>将手臂举过<<his>>的头顶，但是在<<he>>挥鞭时，<span class="green">被一只有力的手抓住了。</span>
+		<br><br>
+		半人马抓住雷米的手臂，然后把<<person1>><<him>>整个人从马鞍上举起来扔到了地上，雷米震惊地睁大了眼睛。
+		<br><br>
+		半人马小跑到你身边，抓住你的腰，把你丢到了<<person2>><<his>>的背上。<<He>>开始奔跑，然后速度越来越快。你为了不摔下去用双手抱住<<his>>的腰。
+		<br><br>
+
+		<<link [[继续|Livestock Escape Centaur]]>><<unset $remyEscapeSteed>><</link>>
+		<br>
+	<<else>>
+		<<He>>把<<his>>的手臂举过<<his>>的头顶，<span class="green">但在<<he>>把手臂放下来时，马儿猛地后仰，</span>把<<his>>甩了出去。马站得太高，以至雷米翻出了马鞍，摔在下方的草地上。
+		<br><br>
+		马儿小跑到你面前，低下了头。你爬上马鞍。马儿突然跑起，随即飞驰起来。你双臂抱住马脖子，生怕摔倒。
+		<br><br>
+
+		<<link [[继续|Livestock Escape Horse]]>><<unset $remyEscapeSteed>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<!--<<if $edenwhip is 0>>
+		<<set $edenwhip to 1>>
+	<</if>> -->
+
+	<<He>>把<<his>>的手举过头顶，随后抵住你裸露的皮肤。
+	<<ggpain>><<pain 12>>
+	<br><br>
+
+	你听到农场工人和狗从后面走来。
+	<br><br>
+
+	<<link [[道歉|Livestock Apologise]]>><<sub 1>><<transform cow 1>><</link>>
+	<br>
+	<<link [[抗议|Livestock Protest]]>><<def 1>><</link>>
+	<br>
+	<<link [[保持沉默|Livestock Silent]]>><</link>>
+	<br>
+<</if>>

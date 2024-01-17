@@ -1,0 +1,115 @@
+:: Robin Walk School []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $tutorial is 0 and $debug is 0>>
+	<<endevent>>
+	<<generate1>><<person1>>在你和罗宾一起离开孤儿院时，你不小心撞到了一个路过的<<person>>。<<He>>踉跄了一下差点摔倒，然后愤怒地回头看向你，但当<<his>>看到你的脸时，<<he>>眼中的愤怒变成了色欲，"你是我这周里见过最可爱的小家伙！来吧，到我这儿来。"
+	<br><br>
+	<<He>>立刻把你拖进一条小巷，罗宾震惊地呆在原地。
+	<br><br>
+	<<link [[继续|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Robin Walk School Tutorial">><</link>>
+<<elseif $robinromance is 1>>
+	你和罗宾一起离开孤儿院走路去上学。
+
+	<<He>>的手背摩挲着你的手背。你握住了它。<<takeHandholdingVirginity "Robin" "romantic">>
+	<<if _robin.trauma gte 80>>
+	<<elseif _robin.trauma gte 40>>
+	<<else>>
+		你一边走一边和<<him>>聊天。
+	<</if>>
+	<<ltrauma>><<lstress>><<lrtrauma>><<trauma -2>><<stress -4>><<npcincr Robin trauma -2>>
+	<br><br>
+	<<endevent>>
+<<else>>
+	你和罗宾一起离开孤儿院走路去上学。
+
+	<<if _robin.trauma gte 80>>
+		<<if $robin_injured gte 1>>
+			<<Hes>>一瘸一拐的。
+		<<else>>
+			<<He>>慢慢地走着。
+		<</if>>
+		你也放慢脚步，让<<He>>能跟上你的步伐。<<him>>在一路上都保持着沉默，每当有人经过你们身边时，<<He>>都会下意识地向你靠近。
+	<<elseif _robin.trauma gte 40>>
+		你们在路上闲聊了几句，但只要有其他人经过你们身边，<<he>>就会陷入沉默。
+	<<else>>
+		你在路上和<<him>>一起聊天。
+		<<ltrauma>><<lstress>><<lrtrauma>><<trauma -2>><<stress -4>><<npcincr Robin trauma -2>>
+	<</if>>
+	<br><br>
+	<<endevent>>
+<</if>>
+
+<<if $tutorial is 0 and $debug is 0>>
+	<<set $tutorial to 1>>
+
+<<elseif $NPCName[$NPCNameList.indexOf("Avery")].love gte random(20, 100) and $NPCName[$NPCNameList.indexOf("Avery")].state is "active" and $robinaverybeat isnot 1>>
+	<<npc Avery>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Avery")].rage gte 20 and $averyragerevealed is 1>>
+		一辆汽车停在你身边。当车窗摇下来的时候，罗宾紧张了起来，坐在驾驶位的是一个<<if $pronoun is "m">>穿着西装的男人<<else>>穿着优雅裙子的女人<</if>>，是艾弗里。<<he>>从车里走了出来，用愤怒的眼神看着你。艾弗里抓住了你的手臂，"给我进去！"<<He>>冷淡地瞥了一眼站在一旁的罗宾，继续把你拉向还没有熄火的车，"至于你的朋友，就自己走路吧。"
+		<br><br>
+
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 91>><<set $robinaverybeat to 1>>
+			你跌跌撞撞地被艾弗里拉扯着往前走，正当<<His>>的怒火稍稍减弱时，一个书包突然撞向了<<his>>的脸。伴随着一声惨叫，<<his>>倒在了车上。罗宾走上前去，拿起<<endevent>><<npc Robin>><<person1>><<his>>的书包，把它用力地砸在了艾弗里的头上，包里沉甸甸的书籍打得一定很痛。"放开<<phim>>！" 罗宾喊道，"<<pShes>>是我的！"
+			<br><br>
+
+			<<endevent>><<npc Avery>><<person1>>
+
+			艾弗里一边抬起双臂防御，一边匆忙回到了<<his>>的车上。<<He>>愤怒地瞪着罗宾，“你会后悔的，我保证！”<<His>>发动汽车离开了。
+			<br><br>
+
+			<<endevent>><<npc Robin>><<person1>>
+
+			罗宾用<<his>>的双臂抱住你，<<Hes>>浑身都在发抖，直到艾弗里的身影彻底消失才放下心来。
+			<br><br>
+
+			<<link [[向罗宾道谢|Avery Walk Thank]]>><<npcincr Robin love 3>><</link>><<gglove>>
+			<br>
+			<<link [[调戏罗宾|Avery Walk Tease]]>><<npcincr Robin love 1>><<npcincr Robin lust 1>><</link>><<glove>><<glust>>
+			<br>
+		<<else>>
+			<<endevent>><<npc Robin>><<person1>>
+			罗宾低头盯着自己的脚尖。
+			<br><br>
+			<<endevent>><<npc Avery>><<person1>>
+
+			<<link [[服从|Avery Walk Comply]]>><<npcincr Avery rage -5>><</link>><<larage>>
+			<br>
+			<<link [[拒绝|Avery Walk Refuse 2]]>><<npcincr Avery rage 5>><</link>><<garage>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $averywalkintro is 1>>
+			一辆汽车停在你身边，当窗户落下时，罗宾紧张了起来。车门打开，<<if $pronoun is "m">>穿着西装的男人<<else>>穿着优雅裙子的女人<</if>>探出头来，是艾弗里。"我来载你一程，"<<he>>说，"上车。"
+			<br><br>
+
+			<<endevent>><<npc Robin>><<person1>>
+			罗宾皱眉等待着你的回应，<<He>>看起来很紧张。
+			<br><br>
+			<<endevent>><<npc Avery>><<person1>>
+
+			<<link [[让罗宾放心|Avery Walk School]]>><</link>>
+			<br>
+			<<link [[拒绝|Avery Walk Refuse]]>><<npcincr Avery rage 1>><</link>><<garage>>
+			<br>
+		<<else>>
+			一辆汽车停在你身边，当窗户落下时，罗宾紧张了起来，车门打开，一个<<if $pronoun is "m">>穿着西装的男人<<else>>穿着优雅裙子的女人<</if>>探出头来，是艾弗里。“我正要去上班，”<<he>>说。“刚好顺路，让我载你一程吧。”<<He>>瞥了罗宾一眼。“……至于你的朋友嘛，也可以一起。”
+			<br><br>
+
+			<<endevent>><<npc Robin>><<person1>>
+			罗宾皱眉等待着你的回应，<<He>>看起来很紧张。
+			<br><br>
+			<<endevent>><<npc Avery>><<person1>>
+
+			<<link [[让罗宾放心|Avery Walk School]]>><</link>>
+			<br>
+			<<link [[拒绝|Avery Walk Refuse]]>><<npcincr Avery rage 1>><</link>><<garage>>
+			<br>
+		<</if>>
+	<</if>>
+	<<set $averywalkintro to 1>>
+<<else>>
+	<<link [[继续|School Front Courtyard]]>><</link>>
+	<br>
+<</if>>

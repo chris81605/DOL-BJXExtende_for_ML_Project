@@ -1,0 +1,72 @@
+:: Sydney Temple Pure Test []
+<<effects>>
+约旦严肃地向你点头。"请脱掉衣服。"
+你脱掉衣服，希望不会很冷。约旦在两手间擦拭上白色粉末，然后跪了在你的面前。
+<<if playerChastity() and $worn.genitals.origin is "temple">>
+	<<He>>拿着一根奇怪的杆状物抵住你的$worn.genitals.cn_name_cap，装置随即咔嗒落地。
+<</if>>
+<<if $player.penisExist>>
+	<<He>>用两根食指夹住你的阴茎，温柔地在上面套弄着，细致地查看包皮的状况。你试图分散自己的注意力，但阴茎还是在<<his>>的抚摸下慢慢挺立。
+<</if>>
+<<if $player.vaginaExist>>
+	随后<<He>>用<<his>>双手的拇指轻触着你的阴部，温柔地打开了你的
+	<<if setup.bodyliquid.combined("vagina") gte 2>>
+		<<if setup.bodyliquid.combined("vagina") gte 6>>
+			阴唇。潮水喷涌而出，溅了约旦一脸，沿着<<his>>的双手流下。
+			<<He>>震惊地跌坐在地，慌忙擦掉了眼中和嘴里的液体。
+			<br>
+			<<He>>看向你。
+		<<elseif setup.bodyliquid.combined("vagina") gte 4>>
+			阴唇。一股淫液涌出，滴在了约旦的手上，浸到了<<his>>的袖子里。
+			<<He>>惊叫地向后跳去，惊恐地甩着双手。
+			<br>
+		<<else>>
+			阴唇。淫液如细流淌下你的双腿，约旦吃惊地抽出双手。
+			<br>
+		<</if>>
+		"那可不是一个好兆头。"<<he>>喃喃道。
+		<br><br>
+	<<else>>
+		阴唇，清晰地看到了里面的景象。
+		<br>
+	<</if>>
+	你不愿承认，但你的身体确实在淫荡地回应着这个检验。
+<</if>>
+<br><br>
+抚弄持续了几分钟。最后<<he>>完成手上的活儿，起身看向了你。
+<<arousal 1000 "genitals">>
+<<if $player.virginity.penile is true and $player.virginity.vaginal is true or $player.virginity.temple is true>>
+	"恭喜。你是无瑕的，希望你能继续保持。评估完成，你通过了。"
+	<<if playerChastity() and $worn.genitals.origin is "temple">>
+		<<He>>没有把贞操带还给你。"不管怎么说，接下来的部分需要你解下贞操带。"<<set $phase2 to 1>>
+		<<set $worn.genitals.type.push("broken")>>
+		<<genitalsruined>>
+		<<if $vaginalchastityparasite isnot 0>>
+			<span class="pink">随着贞操带的解除，<<= $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴道中脱落。</span>
+			<br>
+			<<set $vaginalchastityparasite to 0>>
+		<</if>>
+		<<if $penilechastityparasite isnot 0>>
+			<span class="pink">随着贞操带的解除，<<= $penilechastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴茎上脱落下来。</span>
+			<br>
+			<<set $penilechastityparasite to 0>>
+		<</if>>
+		<<if $analchastityparasite isnot 0>>
+			<span class="pink">随着贞操带的解除，<<= $analchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的肛门掉了出来。</span>
+			<br>
+			<<set $analchastityparasite to 0>>
+		<</if>>
+		<<if playerChastity("anus")>><<set $worn.genitals.anal_shield to 0>><</if>>
+	<</if>>
+	<br><br>
+	<<He>>转过身，以便让你穿好衣服。
+	<br><br>
+	<<link [[继续|Sydney Temple Pure Pass]]>><</link>>
+<<else>>
+	<<set $templetest to "failed">>
+	"很遗憾，你已经被玷污了。"<<His>>的声音微微颤抖，你不确定是不是你的错觉。"你必须被净化。我会召集专人来，请一定要配合。"<<He>>从斗篷里拿出一枚小铃，摇了摇。"考虑到你的感受，悉尼不会被净化，也不会知晓此事。"
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Temple Arcade Intro]]>><</link>>
+	<br>
+<</if>>

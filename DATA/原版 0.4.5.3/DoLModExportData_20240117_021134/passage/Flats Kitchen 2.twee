@@ -1,0 +1,34 @@
+:: Flats Kitchen 2 []
+<<effects>>
+
+你走进客厅。"完事了？"<<he>>看了你一眼，然后伸着懒腰从电视机前站起来。
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	"啊，该付钱了啊。真是不好意思，我是个一贫如洗的穷光蛋。"<<He>>带着歉意的微笑耸了耸肩。"我浑身上下就只有五镑。"
+	<br><br>
+	<<link [[接受5镑的报酬|Flats Kitchen Fiver]]>><</link>>
+	<br>
+	<<if $promiscuity gte 35>>
+		<<link [[勾引|Flats Kitchen Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<<else>>
+		<span class="blue">你还没淫乱到可以"谈判"。</span>
+		<br>
+	<</if>>
+	<<if $submissive lte 500>>
+		<<link [[威胁要拿走电视机|Flats Kitchen Threaten]]>><<lstress>><</link>><<defianttext>><<stress -6>>
+		<br>
+	<<else>>
+		<span class="blue">你还没有强势到能恐吓他人的地步。</span>
+		<br>
+	<</if>>
+<<else>>
+	"啊，该付钱了啊。真是不好意思，我是个一贫如洗的穷光蛋。"<<He>>带着歉意的微笑耸了耸肩，似乎在等待你的反应。"开玩笑的，给你。"<<He>>递给你钱。
+	<br><br>
+
+	你获得了<<moneyGain 15>>。
+	<br><br>
+
+	<<link [[继续|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>

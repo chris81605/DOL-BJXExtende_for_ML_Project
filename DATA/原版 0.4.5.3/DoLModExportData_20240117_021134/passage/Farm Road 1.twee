@@ -1,0 +1,67 @@
+:: Farm Road 1 []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "farmroad1">>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你走到了城郊的深处，建筑物变得更加稀疏，尽管附近山丘上仍有一些住宅。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你向镇上走去，住宅开始变得多了起来，成排的房屋矗立在附近的山上。<<physique 3>>
+<<else>>
+	你在连接城镇和周围农田的道路上，附近山上点缀着各式各样的房屋。
+<</if>>
+<br><br>
+
+<<if $farm>>
+	<<if $farm.steed>>
+		你$farm.steed的骏马正在空旷的田野上吃草。
+		<br><br>
+	<</if>>
+<</if>>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		你听到身后传来一阵刺耳的车轮声，一辆汽车正在快速驶来，而且在它和你身后的灌木丛之间没有多少可以躲避的余地了。
+		<br><br>
+
+		<<link [[跳入灌木丛中|Farm Road Jump]]>><<pain 6>><</link>><<gpain>>
+		<br>
+		<<if $submissive lte 500>>
+			<<link [[原地不动|Farm Road Stand]]>><<def 1>><</link>><<defianttext>>
+			<br>
+		<</if>>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<roadicon>><<link [[走进乡村 (0:30)|Farm Road 2]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+	<<if $farm>>
+		<<if $farm.steed>>
+			<<if $farm.stable gte 1>>
+				<<farmicon "horse">><<link [[骑马到农场 (0:15)|Farm Ride Farm]]>><<tiredness 2>><<loadNPC 0 "saddled_steed">><<pass 15>><</link>><<gtiredness>>
+				<br>
+			<<else>>
+				<<farmicon "horse">><<link [[骑马到农场 (0:30)|Farm Ride Farm]]>><<tiredness 2>><<loadNPC 0 "saddled_steed">><<pass 30>><</link>><<gtiredness>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<entertownicon>><<link [[进入镇子 (0:05)|Harvest Street]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

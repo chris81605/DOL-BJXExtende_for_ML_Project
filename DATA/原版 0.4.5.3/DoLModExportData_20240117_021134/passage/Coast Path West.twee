@@ -1,0 +1,35 @@
+:: Coast Path West []
+<<effects>>
+
+<<if $speed is "fly">>
+	<<flight_effects>>
+	你又跑又跳。此时你的身后吹来一阵柔风，带着你沿小路前行。
+	<br><br>
+	<<physique 2>><<athletics 2>>
+	<br><br>
+<</if>>
+你沿着这条路向西走。野草和其他植物经常会出现在路上，有的时候甚至会将路全部遮住，但找到路并不难，因为它总是紧贴着悬崖。
+<br><br>
+<<if $speed is "jog">>
+	<br><br>
+	<<athleticsdifficulty 250 700 true>>
+	<<if $athleticsSuccess>>
+		你迎着风慢跑。<span class="green">海边的空气<<if $weather is "clear" and Time.dayState is "day">>和阳光<</if>>让人感到十分的清爽。</span>
+	<<else>>
+		你逆着风慢跑。<span class="red">你感到有些吃力。</span><<gtiredness>><<tiredness 2>>
+	<</if>>
+<<elseif $speed is "run">>
+	<br><br>
+	<<athleticsdifficulty 650 1000 true>>
+	<<if $athleticsSuccess>>
+		你逆着风奔跑。<span class="green">海边的空气<<if $weather is "clear" and Time.dayState is "day">>和阳光<</if>>让你神清气爽。</span>
+	<<else>>
+		你逆着风慢跑。<span class="red">你感到有些吃力。</span><<gtiredness>><<tiredness 5>>
+	<</if>>
+<</if>>
+<<unset $speed>>
+你看到了远方的城镇。
+<br><br>
+
+<<link [[继续|Coast Path]]>><</link>>
+<br>

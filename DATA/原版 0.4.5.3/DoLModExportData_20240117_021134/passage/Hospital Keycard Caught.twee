@@ -1,0 +1,58 @@
+:: Hospital Keycard Caught []
+<<effects>>
+
+<<if $physiqueSuccess and $phase isnot 1>>
+	你从<<his>>手中抽出你的手臂，<span class="green">解放了自己</span>。
+	<<if $NPCList[0].skills.security gte 700>>
+		那个<<person>>让你走，转身面对你，叹了口气。你犹豫着后退，但<<he>>没有再抓住你。
+		<br><br>
+
+		"不想听这个故事吗？"<<he>>给了你一个悲伤的微笑，"嗯，那很好。你要照顾好自己。我希望有一天你能安定下来。这种生活不会让你走得很远，希望我能成为你的教训。"<<He>>转身走下大厅，头也不回。
+	<<else>>
+		你往另一个方向跑。"嘿！"那个<<person>>喊道，"回来！不不不……"
+	<</if>>
+	<br><br>
+
+	你穿过门厅，来到大街上。
+	<br><br>
+
+	<<link [[继续|Nightingale Street]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><</link>>
+<<else>>
+	<<if $phase isnot 1>>
+		你试图把你的手臂从<<his>>的手中挣脱出来，<span class="red">但是失败了</span>。
+		<br><br>
+	<</if>>
+	<<if $NPCList[0].skills.security gte 700>>
+		<<set $pubfame.status to "accepted">>
+		"你这种犯罪生活方式不会成功的，"<<he>>继续说道。"松散的线头会把你绊倒。可怕的结局来得太快了。重要的结局停止了相遇。最终，<i>一切</i>都会结束。整个事情。"
+		<br><br>
+
+		<<He>>向经过的一名护士挥手示意。<<person2>><<He>>看到你被<<person1>><<person>>拖着，似乎并不感到惊讶。"这就是我来这里的原因，追求更好的生活。一些让我感到骄傲的事情。但是问题是，我现在做的这份工作？它并不意味着我的旧生活不存在。"
+		<br><br>
+
+		"你知道他们怎么叫我吗？<span class="pink">老鼠</span>。这不是什么犯罪的称赞，只是因为我告发了人。每天，一直都是这样。我想有些事情永远不会改变。"
+		<br><br>
+
+		<<He>>走到一扇没有标记的门前，<span class="blue">用门禁卡打开了它</span>。你没注意到<<him>>拿回了门禁卡，直到现在才发现。<<He>>把你扔了进去，给了你一个怜悯的微笑。"不管怎么说，我支持你。总有一天，你会找到比这更好的生活。"<<He>>转过身走了。
+		<<silently>><<underworld_nickname>><</silently>>
+		<<if _text_output is "meat">>
+			"祝你好运。"
+		<<else>>
+			"回头见，<span class="pink"><<underworld_nickname>></span>。"
+		<</if>>
+		<br><br>
+	<<else>>
+		<<if $phase2 is 1>>
+			"这份工作真是地狱，"<<he>>说着，没有放慢脚步。"像你这样的小混混让一切都变得更加困难。"<<He>>厌恶地摇了摇头。"别再阻塞机器了，<<girl>>。我们支撑着这个城镇。"
+		<<else>>
+			"教训已经学到了，"<<he>>说着，没有放慢脚步。"可爱的<<girl>>想要感谢我做的工作。休息一下也没什么损失，对吧？"<<He>>厌恶地摇了摇头。"性是一种骗局。我永远不应该离开神殿。"
+		<</if>>
+		<br><br>
+
+		<<He>>走到一扇没有标记的门前，用<<his>>的门禁卡打开了它，然后把你扔了进去，转身离开了。
+	<</if>>
+	门砰地一声关上了。你这边没有把手<<if $skulduggery gte 300>>，也没有任何可以摆弄的机械装置<</if>>。
+	<br><br>
+
+	<<link [[继续|Abduction Hospital]]>><<endevent>><<clearNPC "pubfame_receptionist">><<clearNPC "pubfame_nurse">><<set $pubfame.hospital.active to 0>><<set $phase to 1>><</link>>
+<</if>>

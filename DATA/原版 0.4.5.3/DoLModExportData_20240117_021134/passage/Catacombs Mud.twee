@@ -1,0 +1,33 @@
+:: Catacombs Mud []
+<<effects>><<set $bus to "mud">>
+
+你在森林下面的地下墓穴里。石头上刻着巨大的沟，通向一片无边无际的泥土，一直延伸到黑暗中。
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs barrow>>
+<<else>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Barrow Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "east">><<link [[向东走  (0:10)|Catacombs Masonry]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+	<br>
+	<<caveicon "north">><<link [[往上爬 (0:01)|Catacombs Ridge Climb]]>><<pass 1>><</link>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

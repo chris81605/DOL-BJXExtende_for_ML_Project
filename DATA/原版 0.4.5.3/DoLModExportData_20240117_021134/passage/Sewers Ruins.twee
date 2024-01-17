@@ -1,0 +1,39 @@
+:: Sewers Ruins []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersruins">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。这里的隧道坍塌了，露出了古老的石雕。一阵奇怪的微风吹来。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>><<set _hideOption to true>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
+		<<sewericon "ruins">><<link [[躲进废墟|Sewers Ruins Hide]]>><</link>>
+		<br>
+	<</if>>
+	<<sewericon "rubble">><<link [[坍陷的管道 (0:05)|Sewers Rubble]]>><<pass 5>><</link>>
+	<br>
+	<<askicon>><<link [[跟随微风 (0:05)|Sewers Hole]]>><<pass 5>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Sewers Commercial">>
+		<<sewericon "main">><span class="nextLink"><<link [[全是垃圾的隧道 (0:05)|Sewers Commercial]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "main">><<link [[全是垃圾的隧道 (0:05)|Sewers Commercial]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

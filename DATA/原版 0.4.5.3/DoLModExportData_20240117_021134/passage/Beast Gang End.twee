@@ -1,0 +1,59 @@
+:: Beast Gang End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Beast Gang]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Beast Gang End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Beast Gang]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Beast Gang End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃走了。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		心满意足的<<beasttype>>离开了。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		野兽们感觉你带来的麻烦超过了价值，于是纷纷逃离。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		野兽抛下了你，你现在疲惫不堪，身体发软。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		野兽抛下了你，你现在疲惫不堪，身体发软。
+	<</if>>
+	<br><br>
+	<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+
+	你得救了。
+	<br><br>
+	<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

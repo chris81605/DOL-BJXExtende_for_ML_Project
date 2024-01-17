@@ -1,0 +1,34 @@
+:: Castle Call []
+<<effects>>
+
+<<npc "Great Hawk">>
+你朝高塔上呼喊。
+
+<<if $bird.state isnot "home" and $bird.timer gte 0>>
+	没有任何回应，<<bHe>>一定是外出了。
+	<br><br>
+
+	<<link [[等待|Castle Call Wait]]>><<bird_pass $bird.timer>><</link>>
+	<br>
+	<<link [[停止|Castle]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<set $location to "tower">>
+	在你喊出的那一瞬间，<<beasttype>>从你们的巢穴里俯冲下来。<<bHe>>用爪子抓住你的肩膀，将你带回了巢穴。
+	<br><br>
+	<<if ($leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound")>>
+		<<bHe>>好奇地看着你身上的束缚，突然向你猛地伸出爪子。<span class="green">你身上的束缚碎成了布条。</span>
+		<<unbind>>
+		<br><br>
+	<</if>>
+	<<if $monster is 1>>
+		<<bHe>>用自己的胳膊和翅膀环抱住你："欢迎回家，<<wife>>。"说完之后<<bhe>>转身返回了巢穴。
+	<<else>>
+		<<bHe>>深情的啄了你一下，然后转身回到了巢穴。
+	<</if>>
+	<br><br>
+	<<set $bird.timer to 20>>
+	<<set $bird.state to "home">>
+	<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<</if>>

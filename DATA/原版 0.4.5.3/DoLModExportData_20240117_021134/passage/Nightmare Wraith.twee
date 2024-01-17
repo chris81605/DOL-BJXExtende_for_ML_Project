@@ -1,0 +1,28 @@
+:: Nightmare Wraith []
+<<effects>><<nightmareStart "wraith">><<set $location to "temple">>
+<<set Time.setTime(12, 0)>>
+
+你陷入不安的睡眠。
+<br><br>
+
+你脸朝下地醒来，躺在一块草地上。眨眨眼睛，摆脱剩余的睡意，你站起身来，环顾四周。
+<br><br>
+
+你在一个俯瞰神殿的山丘上。在你身后的树林中，传来炊烟和欢笑声。这一切看起来都有些熟悉。
+<<if $awarelevel gte 2>>
+	这看起来像是森林中的湖泊，但你并没有看到水。
+<</if>>
+<br><br>
+
+<<if $nightmaresSeen.includes("wraith")>>
+	你知道这个地方。这不是真的。<span class="purple">你心生不安。</span>
+	<br><br>
+
+	<<link [[苏醒|Nightmare Wraith Wake]]>><<set $phase to 0>><</link>><<nightmareWakeDifficulty>>
+	<br>
+	<span class="nextLink"><<link [[待着|Nightmare Wraith 2]]>><<set $phase to 1>><</link>></span>
+	<br>
+<<else>>
+	<<link [[继续|Nightmare Wraith 2]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

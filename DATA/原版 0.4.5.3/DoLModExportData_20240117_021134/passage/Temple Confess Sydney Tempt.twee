@@ -1,0 +1,87 @@
+:: Temple Confess Sydney Tempt []
+<<temple_effects>><<effects>>
+<<run statusCheck("Sydney")>>
+
+<<if $speech_attitude is "meek">>
+	"你想……到我这边来吗？我们可以享受一点私密时间。"
+<<elseif $speech_attitude is "bratty">>
+	"为什么不到我这边来，直接忏悔你的淘气行为呢？"
+<<else>>
+	"想到我这边来吗？我们可以做点别的什么？"
+<</if>>
+<br><br>
+
+<<if $phase is 1>>
+	悉尼认出了你的声音后，似乎松了口气。
+<</if>>
+<<if _sydneyStatus.includes("corrupt")>>
+	"哦，我的爱，你可真是欲求不满！"<<He>>走出了隔间，"谢谢你，<<sister>>，谢谢你的宽恕。"<<He>>稍微观察了一下周围，走出了隔间，确保没人在看。你替<<him>>打开了你这侧的门。
+	<br><br>
+
+	<<He>>在你旁边的长凳上坐下，你锁上了门。
+	<<if $sydney.rank is "initiate">>
+		"亲爱的<<sister>>，你能不能帮帮这个可怜的小见习教徒进行忏悔？"
+	<<else>>
+		"嗯？那你说说你的罪都有哪些？"
+	<</if>>
+	<<He>>把你拉近到身边。
+	<br><br>
+
+	<<link [[继续|Temple Confess Sydney Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	"要在这里吗？我……你真的很欲求不满。"<<He>>走出了隔间，"谢、谢谢你，<<sister>>，谢谢你的宽恕。"<<He>>稍微观察了一下周围，走出了隔间，确保没人在看。你替<<him>>打开了你这侧的门。
+	<br><br>
+
+	<<He>>在你旁边的长凳上坐下。
+	<<if _sydneyStatus.includes("Lust")>>
+		你将一只手放在<<his>>的胸前，温柔地将<<him>>推倒。<<He>>忍不住喘出一口气，抱住了你。
+		<<sydneyLewd>>
+		<br><br>
+
+		<<link [[继续|Temple Confess Sydney Sex]]>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		<br><br>
+		<<set $seductiondifficulty to 8000 - (($NPCName[$NPCNameList.indexOf("Sydney")].love + $NPCName[$NPCNameList.indexOf("Sydney")].lust) * 15) - $NPCName[$NPCNameList.indexOf("Sydney")].purity>>
+		<<seductioncheck>>
+		<br><br>
+
+		<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+		<br><br>
+
+		你把手放在<<his>>的胸部，温柔地让<<him>>躺了下来。
+		<<if $seductionrating gte $seductionrequired>>
+			<span class="green"><<He>>重重吐出一口气，张开双臂拥住了你。</span>
+			<<sydneyLewd>>
+			<br><br>
+
+			<<link [[继续|Temple Confess Sydney Sex]]>><<set $sexstart to 1>><</link>>
+			<br>
+		<<else>>
+			"等，等等！我……我真不知道要干什么……我还……"<<He>>微微颤抖着。
+			<<sydneySexFail>>
+			<br>
+			照顾到<<his>>的犹豫，你决定放慢节奏。
+			你开始隔着<<his>>的内裤用<<handtext>>爱抚<<his>>的<<sydneyGenitals>><<if !$sydneyChastityKnown and _sydneyChastity>>，<span class="lewd">但你感觉到有什么东西阻碍了你</span><</if>>。<<He>>看起来非常的紧张，但没有试图去阻止你。<<He>>温柔地放开了你的手，然后把双腿分开，以便你更容易地接触。你脱下了<<his>>的内裤。
+			<br><br>
+			<<sydneyExpose>> <<if _sydneyChastity>>隔着<<his>>的贞操带<</if>>，你毫不犹豫地给<<him>>带来想要的快感。随着你的触摸，<<he>>渐渐地<<if $NPCList[0].penis isnot "none">>勃起<<else>>湿润<</if>>了，脸红得无法直视你。你继续抚摸了一段时间，最后俯身在<<his>>的脖子上轻吻，引得<<he>>发出呻吟。
+			<<if _sydneyChastity>>
+				然而，由于有贞操带遮挡，你无法让<<him>>达到高潮。你只能选择继续挑逗<<him>>。
+			<<else>>
+				再也没有能阻挡你的东西，你
+				<<if $NPCList[0].penis isnot "none">>
+					抓住<<his>>的阴茎，然后用拇指开始摩擦龟头。
+				<<else>>
+					慢慢地插入一根手指。<<Hes>>出奇地湿润，手指很轻松地进去了。
+				<</if>>
+				<<him>>撑不了多久。在你让<<him>>达到高潮时，<<He>>用一只手紧紧抓住你，而另一只则手捂住<<his>>的嘴巴来压制住呻吟。
+			<</if>>
+			<<npcincr Sydney purity 2>><<gspurity>>
+			<br><br>
+
+			<<link [[继续|Temple Confess Sydney Tempt End]]>><<set $phase to 2>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

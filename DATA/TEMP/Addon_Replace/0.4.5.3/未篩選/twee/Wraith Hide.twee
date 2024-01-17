@@ -1,0 +1,23 @@
+:: Wraith Hide []
+<<effects>>
+祂还没看到你。你疯狂地寻找藏身之处，最终把目光落在了<<if $location is "park">>一片大灌木丛<<else>>一个空垃圾箱<</if>>上。
+<br><br>
+你尽可能安静地藏进去。<<print $weather.replace("rain","雨").replace("snow","雪")>>开始越下越大了。你坐着等着，每隔几分钟就向外偷看一眼。
+<br><br>
+你的耳朵开始嗡嗡作响。透过那小小的缝隙，一件长长的白袍拖在了地上。
+<br><br>
+<<if $rng gte 51 or $slimedisable is "t">>
+	<<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">>
+		<span class="red">你感觉到脑子里的史莱姆发出了奇怪的声音，就好像它们在呼唤着什么。</span>
+		<br><br>
+	<</if>>
+	<<link [[屏住呼吸保持冷静|Wraith Hide Hold]]>><</link>><<willpowerdifficulty 1 $willpowermax>>
+	<br>
+<<else>>
+	有东西在戳你的屁股。你屏气回头，尽量保持安静。一小块苍白的史莱姆在你的身上缓慢地爬行。
+	<br><br>
+	<<link [[保持安静|Wraith Hide Struggle]]>><<set $struggle_start to 1>><</link>>
+	<br>
+<</if>>
+<<link [[跳出来逃走|Wraith Run]]>><<set $phase to 1>><</link>><<athleticsdifficulty 800 1500>>
+<br>

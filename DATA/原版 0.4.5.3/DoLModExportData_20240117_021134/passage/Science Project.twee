@@ -1,0 +1,60 @@
+:: Science Project []
+<<effects>>
+
+<<if $sciencelichenknown is 1>>
+	你有一个正在进行的关于地衣的研究项目。目前它有<<print ($sciencelichenparkready * 25 + $sciencelichenlakeready * 25 + $sciencelichendrainready * 25 + $sciencelichentempleready * 25)>>%的概率赢得比赛。
+	<br>
+<</if>>
+<<if $sciencelichentemple is 1 and $sciencelichentempleready lt 1>>
+	<<scienceicon "pink lichen">><<link [[加入粉色地衣 (3:00)|Science Project Lichen]]>><<set $phase to 0>><<pass 3 hours>><<scienceskill 18>><</link>><<gggscience>>
+	<br>
+<</if>>
+<<if $sciencelichenpark is 1 and $sciencelichenparkready lt 1>>
+	<<scienceicon "white lichen">><<link [[加入白色地衣 (3:00)|Science Project Lichen]]>><<set $phase to 1>><<pass 3 hours>><<scienceskill 18>><</link>><<gggscience>>
+	<br>
+<</if>>
+<<if $sciencelichendrain is 1 and $sciencelichendrainready lt 1>>
+	<<scienceicon "violet lichen">><<link [[添加蓝紫色地衣 (3:00)|Science Project Lichen]]>><<set $phase to 2>><<pass 3 hours>><<scienceskill 18>><</link>><<gggscience>>
+	<br>
+<</if>>
+<<if $sciencelichenlake is 1 and $sciencelichenlakeready lt 1>>
+	<<scienceicon "purple lichen">><<link [[添加紫色地衣 (3:00)|Science Project Lichen]]>><<set $phase to 3>><<pass 3 hours>><<scienceskill 18>><</link>><<gggscience>>
+	<br>
+<</if>>
+<br>
+<<if $scienceshroomknown is 1>>
+	你有一个正在进行的关于蘑菇的科学项目。目前它有<<print ($scienceshroomwolfready * 10 + $scienceshroomheartready * 10)>>%的机会赢得比赛。
+	<br>
+	你已经测量了 $scienceshroomheartready/5 个心形蘑菇。
+	<br>
+	你已经测量了 $scienceshroomwolfready/5 个狼菇。
+	<br>
+<</if>>
+<<if $scienceshroomheart gt $scienceshroomheartready>>
+	<<tendingicon "mushrooms">><<link [[添加心形蘑菇 (1:00)|Science Project Shroom]]>><<set $phase to 0>><<pass 1 hour>><<scienceskill 6>><</link>><<ggscience>>
+	<br>
+<</if>>
+<<if $scienceshroomwolf gt $scienceshroomwolfready>>
+	<<tendingicon "wolfshrooms">><<link [[添加狼菇 (1:00)|Science Project Shroom]]>><<set $phase to 1>><<pass 1 hour>><<scienceskill 6>><</link>><<ggscience>>
+	<br>
+<</if>>
+<br>
+<<if $sciencephallusknown is 1>>
+	你有一个正在进行的关于性器官大小的科学项目。目前它有<<print ($sciencephallusready * 10)>>%的机会赢得比赛。
+	<br>
+	<<if $sciencephallus gt $sciencephallusready>>
+		<<icon "projectScience.png">><<link [[添加性器测量结果 (1:00)|Science Project Phallus]]>><<set $phase to 0>><<pass 1 hour>><<scienceskill 6>><</link>><<ggscience>>
+		<br>
+	<</if>>
+<</if>>
+
+你只能向展会提交一个科学项目。
+<br><br>
+
+<<if $location is "home">>
+	<<getouticon>><<link [[停止|Bedroom]]>><</link>>
+	<br>
+<<else>>
+	<<getouticon>><<link [[停止|School Library]]>><</link>>
+	<br>
+<</if>>

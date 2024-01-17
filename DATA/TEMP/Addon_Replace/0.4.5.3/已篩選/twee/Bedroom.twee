@@ -1,0 +1,448 @@
+:: Bedroom []
+<<bedclotheson "bed">>
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>><<getTarget true>>
+/* 北极星模组 */
+<span class="camouflage text"><a onclick="V.codeinput = 0">
+你正待在你的卧室中。
+</a></span><br><br>
+/* 北极星 */
+
+/* Wallpaper */
+<<set _furniture to $furniture.bedroom>>
+<<if _furniture.wallpaper>>
+	<<switch _furniture.wallpaper.name>>
+		<<case "vines">>
+			下流的绿色藤蔓在墙上蠕动。
+			<<if $backgroundTraits.includes("plantlover")>>
+				糟糕的想法萦绕在你的脑中。
+			<</if>>
+		<<case "tentacles">>
+			紫色的触手沿墙壁滑行。
+			<<if $demon gte 6>>
+				快乐的想法在你的脑海中掠过。
+			<</if>>
+		<<case "plainwhite">>
+			普通的白色壁纸覆盖着墙壁。
+		<<case "wavywhite">>
+			波浪形图案的壁纸由白色渐变为黑色。这是某种性暗示吗？
+		<<case "hearts">>
+			粉色的心形图案覆盖着墙壁。
+		<<case "cowgirls">>
+			墙上贴着牛娘跳舞的海报。
+		<<case "trees">>
+			墙上绿色的树木让你仿佛置身于森林。
+		<<case "crosses">>
+			金色的十字架覆盖着墙壁。
+		<<default>> /* Custom */
+			_furniture.wallpaper.name的图案覆盖着墙壁。
+			<<if ['dol', 'degrees of lewdity'].some(e => _furniture.wallpaper.name === e)>>
+				不知为何给你一种熟悉的感觉。
+			<<elseif _furniture.wallpaper.name.startsWith('&lt;&lt')>>
+				<span class="black">你的作弊行为被抓到了！</span>
+			<</if>>
+	<</switch>>
+<<else>>
+	朴素的墙壁将你与外界隔绝开来。
+<</if>>
+
+/* Misc Furniture */
+<<set _desk to Furniture.get('desk')>>
+<<if _desk is null>>
+	<<set _desk to Furniture.set('desk','desk')>>
+<</if>>
+<<set _chair to Furniture.get('chair')>>
+<<if _chair is null>>
+	<<set _chair to Furniture.set('chair','chair')>>
+<</if>>
+	<<deskText "icon">> /* If no desk options (read a book, work on project, etc.) are available, desk and icon appear here */
+	<<tableText "icon">> /* If no fish tank is available to be placed on an owned table or chairs, table and chairs appear here */
+
+/* Decorations */
+<<set _deco to Furniture.get('decoration')>>
+<<if _deco>>
+	<br>
+	<<switch _deco.name>>
+		<<case "large bear plushie">>
+			<<furnitureicon _deco.iconFile>>那个_deco.nameCap被放在角落里。
+		<<default>>
+			<<furnitureicon _deco.iconFile>>那个_deco.nameCap正挂在墙上。
+	<</switch>>
+<</if>>
+
+<<set _owlplush to Furniture.get('owlplushie')>>
+<<if _owlplush>>
+	<br>
+	<<switch _owlplush.id>>
+		<<case "owlplushie">>
+			<<furnitureicon _owlplush.iconFile>>那个_owlplush.nameCap与周围的黑暗融为一体，它貌似正在衣柜上凝视着你。
+	<</switch>>
+<</if>>
+
+<<set _windowsill to Furniture.get('windowsill')>>
+<<if _windowsill>>
+	<br>
+	<<switch _windowsill.name>> /* can be expanded further */
+		<<case "ominous jar">> /* unused */
+			<<furnitureicon _windowsill.iconFile>>_windowsill.nameCap颇有气势地立在窗台上。
+		<<default>>
+			<<furnitureicon _windowsill.iconFile>>你的_windowsill.nameCap被放在了窗台上。
+	<</switch>>
+<</if>>
+
+<<set _poster to Furniture.get('poster')>>
+<<if _furniture.poster>>
+	<br>
+	<<switch _furniture.poster.name>>
+		<<case "cowgirl">>
+			<<furnitureicon _poster.iconFile>>墙上挂着一张牛女孩的海报。
+		<<case "cat">>
+			<<furnitureicon _poster.iconFile>>墙上挂着一张猫咪海报。下面的文字写着："坚持住！"
+		<<case "puppy">>
+			<<furnitureicon _poster.iconFile>>墙上挂着一张小狗的海报。
+		<<default>> /* Custom */
+			<<furnitureicon _poster.iconFile>>墙上挂着一张_furniture.poster.nameCap的海报。
+			<<if ['dol', 'degrees of lewdity'].some(e => _furniture.poster.name === e)>>
+				不知道为什么，你总感觉有一阵奇怪的熟悉感。
+			<<elseif _furniture.poster.name.startsWith('&lt;&lt;')>>
+				<span class="black">你的作弊行为被抓到了！</span>
+			<</if>>
+	<</switch>>
+<</if>>
+
+/* Events */
+<br><br>
+<<if $robinbed is "yours" and Time.hour gte 6 and !$possessed>>
+	<<unset $robinbed>>
+	<<npc Robin>><<person1>>罗宾打了个哈欠，走回<<his>>自己的房间。<<endevent>>
+	<<if Time.hour is 6 and Time.minute lte 20>><<run setRobinLocationOverride("orphanage", 6)>><</if>>
+	<br><br>
+<</if>>
+<<if $unbind is 1>>
+	<<unset $unbind>>
+	<<if $possessed>>
+		你看向身上那些拘束住你的东西。你轻轻一拉，它们就松开了，也没办法再继续绑住你了。<<unbind>>
+		<br><br>
+	<<else>>
+		<span class="green">你靠着你的<span style="position:relative;top:-5px"><<furnitureicon _desk.iconFile>></span>桌子将束缚给弄了下来。</span>你花了不少功夫，但捆绑物最终还是屈服了，四肢得以解放。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $study is 1>>
+	<<unset $study>>
+	<<if $phase is 1>>
+		你翻开你的科学教科书，开始阅读。
+		<<scienceskill>>
+	<<elseif $phase is 2>>
+		你翻开你的数学教科书，开始阅读。
+		<<mathsskill>>
+	<<elseif $phase is 3>>
+		你翻开你的语文教科书，开始阅读。
+		<<englishskill>>
+	<<elseif $phase is 4>>
+		你翻开你的历史教科书，开始阅读。
+		<<historyskill>>
+	<</if>>
+	<<endevent>>
+	<br><br>
+<</if>>
+
+<<if $nextPassageCheck is "Bedroom">>
+	<span class="nextLink"><<link [[抬头看看月亮|Bedroom]]>><</link>></span>
+	<br>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passouthome>>
+	<<exit>>
+<</if>>
+
+<<if $christmas is 1 and Time.monthDay is 25 and $christmas_robin_visit is undefined and $christmas_robin_gift_received is undefined and Time.dayState isnot "night" and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and !$possessed>>
+	<<set $christmas_robin_visit to true>>
+	<<christmas_robin_visit>>
+	<<exit>>
+<</if>>
+
+<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+	<<undobindingsicon>><<link [[解除束缚 (0:10)|Bedroom]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+	<br><br>
+<</if>>
+
+<<if $robinpaid is 1 and $robinmissing is 0 and $robinnote isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].lust gte 10 and $NPCName[$NPCNameList.indexOf("Robin")].love gte 60 and $NPCName[$NPCNameList.indexOf("Robin")].trauma lt 10>>
+	<span class="gold">窗边貌似有张便条。</span>
+	<br>
+	<<askicon>><<link [[阅读|Robin Note]]>><<set $robinnote to 1>><</link>>
+	<br><br>
+<</if>>
+
+/* Desk */
+<<deskText "noicon">> /* If project, study, or Christmas options are available, desk location appears here, in line with bed/wardrobe/etc locations */
+
+/* Bed */
+你的床占据了这个房间的大部分空间。
+<<set _bed to Furniture.get('bed')>>
+<<if $nextPassageCheck is "Bed">>
+	<br>
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		<span class="nextLink"><<furnitureicon _bed.iconFile>><<link [[罗宾|Bed]]>><</link>></span>
+	<<else>>
+		<span class="nextLink"><<furnitureicon _bed.iconFile>><<link [[凯拉尔|Bed]]>><</link>></span>
+	<</if>>
+	<br>
+	<<listsleepoutfits>>
+<<elseif !($earSlime.event and $earSlime.noSleep)>>
+	<br>
+	<<furnitureicon _bed.iconFile>><<link [[脱光并爬到床上|Bed]]>><<undressSleep "bed">><</link>>
+	<br>
+	<<listsleepoutfits>>
+
+	<<if _bed.type.includes("comfy")>>
+		<<furnitureicon _bed.iconFile>><<link [[在床上自慰|Home Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<br>
+	<<if $possessed>>
+		<span class="red">你脑袋里的史莱姆保持着沉默。</span>
+	<<else>>
+		<span class="red">史莱姆想要你在上床睡觉前<<print $earSlime.event.replace("go commando","裸奔").replace("have sex with someone or something","与某人或者某物做爱").replace("only sleep naked from now on","现在开始裸睡").replace("have sex with someone","与某人做爱").replace("go running or swimming naked","裸跑或者裸泳").replace("steal something","偷东西").replace("go running or swimming","跑步或者游泳").replace("study at the school library while naked","在学校图书馆裸体学习").replace("for an hour","一个小时").replace("for two hours","两个小时").replace("only wear","穿一会").replace("feminine","女装").replace("masculine","男装").replace("clothes for a while","").replace("ejaculate into someones vagina","在某人小穴里射精").replace("masturbate and orgasm at least","自慰并且高潮至少").replace("ten times","十次").replace("five times","五次").replace("get sperm into your" ,"用精液填满你的").replace("vagina","小穴").replace("anus","菊穴").replace(" ","")>>。</span>
+	<</if>>
+	<br>
+<</if>>
+
+<<roomoptions>>
+<br>
+/* Wardrobe */
+<<set _wardrobe to Furniture.get('wardrobe')>>
+<<if _wardrobe>>
+	你的衣服正放在_wardrobe.nameCap里面。
+<</if>>
+<br>
+<<furnitureicon _wardrobe.iconFile>><<link [[衣柜|Wardrobe]]>><</link>>
+<br>
+<<if playerHasSexToys()>>
+	<<sextoysicon>><<link [[性玩具|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+	<br>
+<</if>>
+<<if $nextPassageCheck is "Mirror">>
+	<span class="nextLink"><<mirroricon>><<link [[镜子|Mirror]]>><<preMirror>><</link>></span>
+	<br>
+<<elseif $christmas is 1 and !$christmas_wraith and _wraithEvent>>
+	<br>
+	<span class="purple">你瞥了一眼镜子，里面似乎有一个奇怪的光点。</span>
+	<br>
+	<<mirroricon "blood">><<link [[镜子|Christmas Mirror]]>><<preMirror>><</link>>
+	<br>
+<<elseif Time.hour is 3 and $hallucinations gte 2 and $daily.mirrorTentacles isnot 1 and $tentacledisable is "f">>
+	<br>
+	<span class="purple">一道阴森诡异的光芒从你的镜子中折散而出。</span>
+	<br>
+	<<mirroricon "blood">><<link [[镜子|Eerie Mirror]]>><<preMirror>><<set $daily.mirrorTentacles to 1>><<set $phase to 0>><</link>>
+	<br>
+<<else>>
+	<<mirroricon "home">><<link [[镜子|Mirror]]>><<preMirror>><</link>>
+	<br>
+<</if>>
+
+/*Table*/
+<<tableText "noicon">> /* If fish tank option available, table/chair location appears here, in line with bed/wardrobe locations */
+/* 北极星模组 */
+<<if $options.bjx_antiques and ($museumAntiques.antiques.antiqueliquor is "found" or $museumAntiques.antiques.antiqueliquor is "take")>>
+    <<link [[喝古董酒|Forest Mansion Bottle Drink]]>><<set $lastpassage to "Bedroom">><</link>>
+    <br>
+<</if>>
+<<if $options.bjx_antiques and $worn.neck.name isnot "ivory necklace" and ($museumAntiques.antiques.antiqueivorynecklace is "found" or $museumAntiques.antiques.antiqueivorynecklace is "take")>>
+    <<link [[戴上象牙项链|Antique Ivory Neck Lace Wear]]>><<set $lastpassage to "Bedroom">><</link>>
+    <br>
+<</if>>
+<<if $options.bjx_antiques and ($museumAntiques.antiques.antiquescroll is "found" or $museumAntiques.antiques.antiquescroll is "take")>>
+    <<link [[展开言灵卷轴|Home Open Antiquescroll]]>><<set $lastpassage to "Bedroom">><</link>>
+    <br>
+<</if>>
+/* 北极星 */
+
+/* Travel */
+<br>
+外面的走廊与孤儿院的其他地方相连接。
+<<if $exposed gte 2>>
+	<<if Time.dayState isnot "night">>
+		<<if $exhibitionism gte 75>>
+			<br>
+			<span class="purple">一想到你要裸着<<genitals>>出门，就让人兴奋了起来。只要你够小心的话，就会没事的，对吧？</span>
+			<<orphanageWard>>
+			<br>
+			<<bathroomLink>>
+			<br>
+			<<robinroom_link>>
+			<br>
+			<<home_outside>>
+			<br><br>
+		<<elseif $exhibitionism gte 55>>
+			<br>
+			<span class="purple">一想到你要裸着<<genitals>>出门，就让人兴奋了起来。但你现在这样连一个小时都躲不了。等天黑再说吧。</span>
+			<br><br>
+		<<else>>
+			<<orphanageWard>>
+			<br>
+			<span class="red">你不可能这个样子出门！</span>
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $exhibitionism gte 55>>
+			<br>
+			<span class="purple">一想到你要裸着<<genitals>>出门，就让人兴奋了起来。反正已经晚上了，能出什么差错呢？</span>
+			<<orphanageWard>>
+			<br>
+			<<bathroomLink>>
+			<br>
+			<<robinroom_link>>
+			<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+			<br>
+			<<home_outside>>
+			<br><br>
+		<<else>>
+			<<orphanageWard>>
+			<br>
+			<span class="red">你不可能这个样子出门！</span>
+			<br><br>
+		<</if>>
+	<</if>>
+<<elseif $exposed gte 1>>
+	<<if Time.dayState isnot "night">>
+		<<if $exhibitionism gte 35>>
+			<br>
+			<span class="purple">一想到要以如此淫荡的穿着出门，你就会心跳加速。只要你够小心的话，就会没事的，对吧？</span>
+			<<orphanageWard>>
+			<br>
+			<<bathroomLink>>
+			<br>
+			<<robinroom_link>>
+			<br>
+			<<home_outside>>
+			<br><br>
+		<<elseif $exhibitionism gte 15>>
+			<br>
+			<span class="purple">一想到要以如此淫荡的穿着出门，你就会心跳加速。但你现在这样连一个小时都躲不了。等天黑再说吧。</span>
+			<br><br>
+		<<else>>
+			<<orphanageWard>>
+			<br>
+			<span class="red">你不可能这个样子出门！</span>
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $exhibitionism gte 15>>
+			<br>
+			<span class="purple">一想到要穿着如此淫荡的衣服出门，你就兴奋不已。反正是晚上，有什么关系呢？</span>
+			<br>
+			<<orphanageWard>>
+			<br>
+			<<bathroomLink>>
+			<br>
+			<<robinroom_link>>
+			<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+			<br>
+			<<home_outside>>
+			<br><br>
+		<<else>>
+			<<orphanageWard>>
+			<br>
+			<span class="red">你不可能这个样子出门！</span>
+			<br><br>
+		<</if>>
+	<</if>>
+<<elseif $worn.under_lower.type.includes("naked")>>
+	<<if $underwarningskip is 1>>
+		<<orphanageWard>>
+		<br>
+		<<bathroomLink>>
+		<br>
+		<<robinroom_link>>
+		<br>
+		<<if Time.hour gte 18 and Time.hour lte 20 and $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40 and $robinmissing is 0 and !$robinTraumaVisit>>
+			<<main_hall_icon>><<link [[大厅 (0:01)|Robin Trauma Visit]]>><<set $phase to 1>><<pass 1>><</link>>
+			<br>
+		<<else>>
+			<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<<home_outside>>
+		<br><br>
+		<<set _kylar to statusCheck("Kylar")>>
+		<<if $kylar_camera is 4>>
+			那个猫头鹰玩偶正在衣柜上看着你，你清楚的知道里面有一个摄像头。
+			<br>
+			<<ind>><<link [[决定如何处理凯拉尔的相机 (0:05)|Bedroom Kylar Camera]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+		<<if $kylar_camera is 0>>
+			凯拉尔送给你的礼物盒子就放在了你的床脚。
+			<br>
+			<<link [[打开看看|Bedroom Kylar Gift Open]]>><</link>>
+			<br><br>
+		<<elseif $kylar_camera is 1>>
+			凯拉尔送给你的礼物盒子就放在你的床脚，里面放着一个猫头鹰玩偶。
+			<br>
+			<<link [[把它作为装饰品保留下来|Bedroom Kylar Gift Keep]]>><</link>>
+			<br>
+			<<link [[把它送给一个孤儿|Bedroom Kylar Gift Orphan]]>><<hope 1>><</link>><<ghope>>
+			<br><br>
+		<</if>>
+	<<else>>
+		<br>
+		<span class="pink">你没有穿内裤！一想到要这样出门，你的脉搏就加快了。</span>
+		<br>
+		<<link [[这没什么|Bedroom]]>><<set $underwarningskip to 1>><</link>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<orphanageWard>>
+	<br>
+	<<bathroomLink>>
+	<br>
+	<<robinroom_link>>
+	<br>
+	<<if Time.hour gte 18 and Time.hour lte 20 and $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40 and $robinmissing is 0 and !$robinTraumaVisit>>
+		<<main_hall_icon>><<link [[大厅 (0:01)|Robin Trauma Visit]]>><<set $phase to 1>><<pass 1>><</link>>
+		<br>
+	<<else>>
+		<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<home_outside>>
+	<br><br>
+
+/* Kylar */
+	<<set _kylar to statusCheck("Kylar")>>
+	<<if $kylar_camera is 4>>
+		那个猫头鹰玩偶正在衣柜上看着你，你清楚的知道里面有一个摄像头。
+		<br>
+		<<ind>><<link [[决定如何处理凯拉尔的相机 (0:05)|Bedroom Kylar Camera]]>><<pass 5>><</link>>
+		<br><br>
+	<</if>>
+	<<if $kylar_camera is 0>>
+		凯拉尔送给你的礼物盒子就放在了你的床脚。
+		<br>
+		<<link [[打开看看|Bedroom Kylar Gift Open]]>><</link>>
+		<br><br>
+	<<elseif $kylar_camera is 1>>
+		凯拉尔送给你的礼物盒子就放在你的床脚，里面放着一个猫头鹰玩偶。
+		<br>
+		<<link [[把它作为装饰品保留下来|Bedroom Kylar Gift Keep]]>><</link>>
+		<br>
+		<<link [[把它送给一个孤儿|Bedroom Kylar Gift Orphan]]>><<hope 1>><</link>><<ghope>>
+		<br><br>
+	<</if>>
+<</if>>
+
+/* Settings */
+<<link [[设置|Settings]]>><<set $settingsExitPassage to "Bedroom">><</link>>
+<br>
+/* 北极星模组 */
+<<if V.codeinput is 1>><<link [[输入代码|Code]]>><</link>><br><</if>>
+/* 北极星 */
+<<attitudesControlCheck>>
+<<if $attitudesControl.showGoldLink is true>>
+	<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+<<else>>
+	<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+<</if>>

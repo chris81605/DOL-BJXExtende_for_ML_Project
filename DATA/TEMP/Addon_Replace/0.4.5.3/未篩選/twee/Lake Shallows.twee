@@ -1,0 +1,143 @@
+:: Lake Shallows []
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakeshallows">><<water>><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	你正在湖里靠近岸边的地方游泳，岸边一副生气勃勃的样子，人们在沙滩和水里玩耍。
+<<else>>
+	<<if $weather is "rain">>
+		你在湖里游泳，靠近岸边。雨水淹没了森林的声音。
+	<<else>>
+		你在湖里游泳，靠近岸边。今天湖畔上没有人，森林的声音弥漫在空气中。
+	<</if>>
+<</if>>
+<<if !Time.schoolDay and $weather is "rain" and Time.dayState is "day">>
+	有人在码头外游泳。
+<</if>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+	荷花在你身边漂浮。
+<</if>>
+<br><br>
+
+<<if $laketeenspresent is 1 and $exposed gte 1>>
+	<<if $exhibitionism gte 75>>
+		你在水下保持低调。你真的很想表现出你的<<lewdness>>，但你克制自己不这样做，可能应该找点东西来掩饰自己。
+	<<else>>
+		你在水下保持低调，以免被人看到你的<<lewdness>>。你需要找点东西来掩饰。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $lakeswim is 1>>
+	<<set $lakeswim to 0>>
+	你在湖里练习游泳。
+	<<if Time.dayState is "night">>
+		<<if $weather is "rain">>
+			黑暗的水面在雨中舞动，令人兴奋但也有些恐惧。
+		<<else>>
+			黑色的水很温柔。
+		<</if>>
+	<<elseif Time.dayState is "dusk">>
+		<<if $weather is "rain">>
+			雨让凉爽的水面变得激动起来。
+		<<else>>
+			太阳落在树上，水面映出它的影子。
+		<</if>>
+	<<elseif Time.dayState is "dawn">>
+		<<if $weather is "rain">>
+			雨让凉爽的水面变得激动起来。
+		<<else>>
+			早晨太阳升起，水面映出它的影子。
+		<</if>>
+	<<else>>
+		<<if $weather is "rain">>
+			雨让温暖的水面变得激动起来。
+		<<else>>
+			水很温暖，也很温柔。
+		<</if>>
+	<</if>>
+	<<physique 3>><<swimmingskilluse>>
+	<br><br>
+<</if>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你收集芦苇和百合做成了一件衣服，系在胸前。它很脆弱、暴露，你觉得如果不小心就会破掉，但总比什么都没有强。
+	<<plantupper>>
+	<br><br>
+	<<if $rng gte 91 and $parasite.nipples.name is undefined and $parasitedisable is "f">>
+		你的满足感被一种刺痛的感觉打断，它在<<nipples>>上。震惊之下，你拉下衣服找到了罪魁祸首。两个小而柔软的无脊椎动物附着在你的胸前，像试图哺乳一样按摩和吸吮着你的乳头。它们一点也不疼，但这种感觉让你感到性冲动。你试图拉开它们，以解除它们对你的骚扰，但它们抓得太紧了。而且，用任何力量触摸它们都会使它们更紧地吸吮。你需要帮助才能将它们拿掉。
+		<<parasite nipples urchin>><<garousal>><<arousal 600 "breasts">>
+		<br><br>
+	<</if>>
+	<<exposure>>
+<</if>>
+<<if $phase is 2>>
+	<<set $phase to 0>>
+	你收集芦苇和百合做成了一件衣服，系在腰间。它很脆弱、暴露，你觉得如果不小心就会破掉，但总比什么都没有强。
+	<<plantlower>>
+	<br><br>
+	<<if $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite">>
+		/* Prevents the 2 types of parasites from interacting */
+	<<elseif $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !playerChastity("penis")>>
+		你的满足感被一种刺痛的感觉打断，它在<<penis>>上。震惊之下，你举起裙子找到了罪魁祸首。一只小而柔软的无脊椎动物附着在你的身上，像试图哺乳一样按摩和吸吮着你的阴部。它一点也不疼，但这种感觉让你感到羞耻和兴奋。你试图拉开它，以解除它对你的骚扰，但它抓得太紧了。而且，用任何力量触摸它都会使它更紧地吸吮。你需要帮助才能将它拿掉。
+		<<parasite penis urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !playerChastity("hidden") and !$player.penisExist>>
+		你的满足感被一种刺痛的感觉打断，它在<<pussy>>上。震惊之下，你举起裙子找到了罪魁祸首。一只小而柔软的无脊椎动物附着在你的阴蒂上，像试图哺乳一样按摩和吸吮着你。它一点也不疼，但这种感觉让你感到羞耻和兴奋。你试图拉开它，以解除它对你的骚扰，但它抓得太紧了。而且，用任何力量触摸它都会使它更紧地吸吮。你需要帮助才能将它拿掉。
+		<<parasite clit urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<</if>>
+	<<exposure>>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakewater>>
+<<else>>
+	<<swimicon "back">><<link [[练习游泳 (0:30)|Lake Shallows]]>><<pass 30>><<stress -6>><<tiredness 6>><<set $lakeswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>>
+	<br>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[用植物做上衣 (0:20)|Lake Shallows]]>><<pass 20>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[用植物做裙子 (0:20)|Lake Shallows]]>><<pass 20>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+		<<icon "tending/lotus.png">> <<link [[寻找种子 (0:30)|Lake Lotus]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
+		<br>
+	<</if>>
+	<<if $exposed gte 1 and $laketeenspresent is 1>>
+		<br>
+	<<elseif $debug is 1>>
+		<<docksicon>><<link [[游向码头 (0:10)|Lake Dock]]>><<pass 10>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths">>
+		<span class="nextLink"><<link [[更进一步|Lake Depths]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<swimicon>><<link [[游得更远 (0:12)|Lake Depths]]>><<pass 12>><</link>>
+	<</if>>
+	<br>
+	<<if $exposed gte 1 and $laketeenspresent is 1>>
+		<<if $exposed gte 2 and $exhibitionism gte 75>>
+			<<lakeicon>><<link [[光着离开水面 (0:02)|Lake Shore Exposed]]>><<set $phase to 0>><<pass 2>><</link>><<exhibitionist5>>
+		<<elseif $exposed gte 1 and $exhibitionism gte 55>>
+			<<lakeicon>><<link [[光着离开水面 (0:02)|Lake Shore Exposed]]>><<set $phase to 1>><<pass 2>><</link>><<exhibitionist4>>
+		<</if>>
+	<<else>>
+		<<lakeicon>><<link [[岸边 (0:02)|Lake Shore]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+	<<set $eventskip to 0>>
+<</if>>

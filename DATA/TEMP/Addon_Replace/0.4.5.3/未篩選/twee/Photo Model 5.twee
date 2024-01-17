@@ -1,0 +1,41 @@
+:: Photo Model 5 []
+<<effects>>
+
+<<if $photo.pubfame>>
+	"还有更多的事情要做，"尼奇说道。<<nnpc_He "Niki">>调整灯光。"我们接下来要拍几张赤裸上身的照片。"
+<<else>>
+	"快好了，"尼奇终于说道。<<nnpc_He "Niki">>调整灯光。"一些袒胸照会很好。我给你双倍的酬劳。所以它应该是<span class="gold">£<<print $photo.money * 2>>。</span>"
+<</if>>
+<br><br>
+<<set $photo.time += 30>>
+
+<<if $enemyno gte 2>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink">那个<<person>>坐在<<his>>的椅子上，一边把玩着<<his>>的电话一边冷漠地盯着你看。</span>
+	<<else>>
+		那个<<person>>坐在<<his>>的椅子上并将身体向前倾着，而那个<<person2>><<person>>则是舔了舔<<his>>的嘴唇。<<person1>>
+	<</if>>
+	<br><br>
+<<elseif $enemyno is 1>>
+	<<if $photo.blackmail gte 1>>
+		<span class="pink">那个<<person>>坐在<<his>>的椅子上，一边把玩着<<his>>的电话一边冷漠地盯着你看。</span>
+	<<else>>
+		那个<<person>>坐在<<his>>的椅子上并将身体向前倾着。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<link [[拒绝|Photo Model Topless Refuse]]>><<set $photo.refused += 1>><</link>>
+<br>
+<<if $exhibitionism gte 55>>
+	<<link [[接受|Photo Model Topless]]>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $uncomfortable.prostituting is false>>
+	<<link [[接受|Photo Model Topless]]>><<set $desperateaction to 1>><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<elseif $photo.blackmail gte 1>>
+	<<link [[接受|Photo Model Topless]]>><<trauma 12>><<stress 12>><<set $phase to 1>><</link>><<ggtrauma>><<ggstress>><<glove "Niki">>
+<<elseif $photo.pubfame>>
+	<<link [[接受|Photo Model Topless]]>><<set $desperateaction to "你需要那张照片">><<set $phase to 0>><</link>><<exhibitionist4>><<glove "Niki">>
+<<else>>
+	<span class="blue">你没有那么淫荡和绝望。</span>
+<</if>>
+<br>

@@ -1,0 +1,211 @@
+:: Widgets Effects Penis [widget]
+<<widget "effectspenistovagina">>
+	<<if $penisaction is "penistovagina">>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 10>><<penileskilluse>><<combatpromiscuity5>>
+		<<if combatSkillCheck("penile", $penistarget)>>
+			<<if $NPCList[$penistarget].vagina is 0>>
+				<<set $_target to $NPCList[$penistarget]>>
+				<<set $_target.vagina to "penisentrance">>
+				<<submission 2>>
+				<<set $penisuse to "othervagina">><<set $penisstate to "entrance">>
+				<<if $leftarm is "coverpenis">>
+					<<set $leftarm to 0>>
+				<</if>>
+				<<if $rightarm is "coverpenis">>
+					<<set $rightarm to 0>>
+				<</if>>
+
+				<span class="lblue">你把<<penis>>顶在<<combatpersons>>的<<npcVagina $penistarget>>。</span>
+				<<if $NPCList[$penistarget].condom and $NPCList[$penistarget].condom.willUse is true and !$player.condom and $parasite.penis.name is undefined>>
+					<<if playerChastity("penis")>>
+						<<He>>试图给你戴上避孕套，但隔着$worn.genitals.cn_name_cap套不进去。<span class="red"><<He>>很快就放弃了。</span>
+						<<set $NPCList[$penistarget].condom.willUse to false>>
+					<<else>>
+						<span class="green"><<He>>把<<condomDesc $penistarget>>套在了你的<<penis>>上。</span>
+						<<equipNPCCondom $penistarget "player">>
+					<</if>>
+				<</if>>
+				<<if $enemytype is "beast">><<set $_target.stance to "top">><</if>>
+				<<set $_target.location.genitals to "genitals">>
+			<<else>>
+				<span class="blue">你试着把<<penis>>挤进<<combatpersons>>的<<npcVagina $penistarget>>里，但入口已经被占据了。</span><<set $penisactiondefault to "penistovagina">>
+			<</if>>
+		<<else>>
+			<span class="blue">你试着把<<penis>>挤进<<combatpersons>>的<<npcVagina $penistarget>>里，但<<he>>把你推开了。</span><<set $penisactiondefault to "penistovagina">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "effectspenistoanus">>
+	<<if $penisaction is "penistoanus">>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 10>><<penileskilluse>><<combatpromiscuity5>>
+		<<if combatSkillCheck("penile", $penistarget)>>
+			<<if ($NPCList[$penistarget].vagina is 0 or $NPCList[$penistarget].vagina is "none") and ($NPCList[$penistarget].penis is 0 or $NPCList[$penistarget].penis is "none")>>
+				<<set $_target to $NPCList[$penistarget]>>
+				<<if $_target.vagina isnot "none">>
+					<<set $_target.vagina to "otheranusentrance">>
+				<</if>>
+				<<if $_target.penis isnot "none">>
+					<<set $_target.penis to "otheranusentrance">>
+				<</if>>
+				<<submission 2>>
+				<<set $penisuse to "otheranus">><<set $penisstate to "otheranusentrance">><<set $penisactiondefault to "otheranustease">>
+				<<if $leftarm is "coverpenis">>
+					<<set $leftarm to 0>>
+				<</if>>
+				<<if $rightarm is "coverpenis">>
+					<<set $rightarm to 0>>
+				<</if>>
+
+				<span class="lblue">你把<<penis>>顶在<<combatpersons>>的屁股上。</span>
+				<<if $enemytype is "beast">><<set $_target.stance to "top">><</if>>
+				<<set $_target.location.genitals to "genitals">>
+			<<else>>
+				<span class="blue">你试着把<<penis>>挤进<<combatpersons>>的<<npcAnus $penistarget>>里，但是你的姿势不允许。</span>
+				<<set $penisactiondefault to "penistoanus">>
+				<<if $NPCList[$penistarget].condom and $NPCList[$penistarget].condom.willUse is true and !$player.condom and $parasite.penis.name is undefined>>
+					<<if playerChastity("penis")>>
+						<<He>>试图给你戴上避孕套，但隔着$worn.genitals.cn_name_cap套不进去。<span class="red"><<He>>很快就放弃了。</span>
+						<<set $NPCList[$penistarget].condom.willUse to false>>
+					<<else>>
+						<span class="green"><<He>>把<<condomDesc $penistarget>>套在了你的<<penis>>上。</span>
+						<<equipNPCCondom $penistarget "player">>
+					<</if>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<span class="blue">你试着把<<penis>>挤进<<combatpersons>>的<<npcAnus $penistarget>>里，但<<he>>把你推开了。</span>
+			<<set $penisactiondefault to "penistoanus">>
+			<<if $NPCList[$penistarget].condom and $NPCList[$penistarget].condom.willUse is true and !$player.condom and $parasite.penis.name is undefined>>
+				<<if playerChastity("penis")>>
+					<<He>>试图给你戴上避孕套，但隔着$worn.genitals.cn_name_cap套不进去。<span class="red"><<He>>很快就放弃了。</span>
+					<<set $NPCList[$penistarget].condom.willUse to false>>
+				<<else>>
+					<span class="green"><<He>>把<<condomDesc $penistarget>>套在了你的<<penis>>上。</span>
+					<<equipNPCCondom $penistarget "player">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "effectspenisvaginafuck">>
+	<<if $penisaction is "penisvaginafuck" and (playerPenisSize() gte 0 or $arousal gte $arousalmax * (3 / 4))>>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 20>><<penileskilluse>><<combatpromiscuity5>>
+		<<if random(0,1) is 1 or ($penisWetness + (currentSkillValue("penileskill") / 10)) gte (playerPenisSize() * 15) + random(1, 40)>>
+			<<set $_target to $NPCList[$penistarget]>>
+			<<set $_target.vagina to "penis">><<set $penisactiondefault to "cooperate">>
+			<<if playerHasStrapon()>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>深深地捅进了<<combatpersons>>的小穴。</span>
+				<<sex 30 "genitals" $penistarget>>
+			<<elseif $player.virginity.penile isnot true>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>深深地捅进了<<combatpersons>>的小穴。</span>
+				<<sex 30 "genitals" $penistarget>>
+				<<raped>><<penisraped>>
+			<<elseif $player.virginity.penile is true>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>用你的处男肉棒刺入了<<combatpersons>>的小穴。</span>
+				<span class="red">你感觉到你的包皮从龟头上推离，<<virginitylosttext $NPCList[_n].fullDescription>></span>
+				<<sex 100 "genitals" $penistarget>><<violence 30>><<bruise penis>><<set $speechpenisvirgin to 1>>
+				<<raped>><<penisraped>>
+			<</if>>
+			<<penilestat>>
+			<<set $penisstate to "penetrated">>
+			<<takeVirginity $_target.fullDescription "penile">>
+			<<takeNPCVirginity $penistarget "vaginal">>
+		<<else>>
+			你<<peniletext>>把<<penis>>顶在<<combatpersons>>的小穴，<span class="blue">但没有插得进去，</span>只是来回摩擦着<<his>>的阴蒂。
+			<<sex 20 "genitals" $penistarget>><<penilestat>><<set $penisactiondefault to "penisvaginafuck">>
+		<</if>>
+	<<elseif $penisaction is "penisvaginafuck">>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<set $penisactiondefault to "penisvaginafuck">>
+		<span class="red">你未能插入<<combatpersons>>的小穴。</span>你太小了，还得再硬一些。
+	<</if>>
+<</widget>>
+
+<<widget "effectspenisanusfuck">>
+	<<if $penisaction is "penisanusfuck" and (playerPenisSize() gte 0 or $arousal gte ($arousalmax / 4) * 3)>>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 20>><<penileskilluse>><<combatpromiscuity5>>
+		<<if random(0,1) is 1 or ($penisWetness + (currentSkillValue("penileskill") / 10)) gte (playerPenisSize() * 15) + random(1, 40)>>
+			<<set $_target to $NPCList[$penistarget]>>
+			<<if $_target.vagina is "otheranusentrance" or $_target.vagina is "otheranusimminent">>
+				<<set $_target.vagina to "otheranus">>
+			<</if>>
+			<<if $_target.penis is "otheranusentrance" or $_target.penis is "otheranusimminent">>
+				<<set $_target.penis to "otheranus">>
+			<</if>>
+			<<set $penisactiondefault to "otheranuscooperate">>
+			<<if playerHasStrapon()>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>深深地捅进了<<combatpersons>>的屁股。</span>
+				<<sex 30 "genitals" $penistarget>>
+			<<elseif $player.virginity.penile isnot true>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>深深地捅进了<<combatpersons>>的屁股。</span>
+				<<sex 30 "genitals" $penistarget>>
+				<<penilestat>><<raped>><<penisraped>>
+			<<elseif $player.virginity.penile is true>>
+				<<penis_lube_text>> <span class="pink">你<<peniletext>>用你的处男肉棒刺入了<<combatpersons>>的屁股。</span>
+				<span class="red">你感觉到你的包皮从龟头上推离，<<virginitylosttext $NPCList[_n].fullDescription>></span>
+				<<sex 100 "genitals" $penistarget>><<violence 30>><<bruise penis>><<set $speechpenisvirgin to 1>>
+				<<penilestat>><<raped>><<penisraped>>
+			<</if>>
+			<<set $penisstate to "otheranus">>
+			<<takeVirginity $_target.fullDescription "penile">>
+			<<takeNPCVirginity $penistarget "anal">>
+		<<else>>
+			你<<peniletext>>把你的<<penis>>顶在<<combatpersons>>的菊穴，<span class="blue">但没有插得进去，</span>只是来回在<<his>>的臀部之间摩擦着。
+			<<sex 20 "genitals" $penistarget>><<penilestat>><<set $penisactiondefault to "penisanusfuck">>
+		<</if>>
+	<<elseif $penisaction is "penisanusfuck">>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<set $penisactiondefault to "penisanusfuck">>
+		<span class="red">你未能插入<<combatpersons>>的菊穴。</span>你太小了，还得再硬一些。
+	<</if>>
+<</widget>>
+
+<<widget "effectspenistopenis">>
+	<<if $penisaction is "penistopenis">>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 5>><<penileskilluse>><<combatpromiscuity5>>
+		<<if combatSkillCheck("penile", $penistarget)>>
+			<<if $NPCList[$penistarget].penis is 0>>
+				<<set $_target to $NPCList[$penistarget]>>
+				<<submission 5>><<set $penisuse to "otherpenis">><<set $penisstate to "otherpenisentrance">>
+				<<set $_target.penis to "penisentrance">><<set $penisactiondefault to "otherpenisrub">>
+				<<if $leftarm is "coverpenis">>
+					<<set $leftarm to 0>>
+				<</if>>
+				<<if $rightarm is "coverpenis">>
+					<<set $rightarm to 0>>
+				<</if>>
+				<span class="lblue">你<<if playerChastity("penis")>>隔着$worn.genitals.cn_name_cap，<</if>>用自己的<<penisSimple>>向<<combatpersons>>的<<npcPenisSimple $penistarget>>蹭去。</span>
+				<<if $enemytype is "beast">>
+					<<set $_target.stance to "top">>
+				<</if>>
+				<<set $_target.location.genitals to "genitals">>
+			<<else>>
+				<span class="blue">你试着把<<penis>>贴到<<combatpersons>>的<<npcPenisSimple $penistarget>>上，但阳具已经被占用了。</span><<set $penisactiondefault to "penistopenis">>
+			<</if>>
+		<<else>>
+			<span class="blue">你试着将你的<<penis>>贴到<<combatpersons>>的<<npcPenisSimple $penistarget>>上，但<<ohe>>把你推开了。</span><<set $penisactiondefault to "penistopenis">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "effectspenistopenisfuck">>
+	<<if $penisaction is "penistopenisfuck" and ["penisentrance", "penisimminent"].includes($NPCList[$penistarget].penis)>>
+		<<personselect $penistarget>>
+		<<set $penisaction to 0>><<submission 5>><<penileskilluse>><<combatpromiscuity5>>
+		<<if combatSkillCheck("penile", $penistarget)>>
+			<<submission 5>><<set $penisuse to "otherpenis">><<set $penisstate to "otherpenis">>
+			<<set $NPCList[$penistarget].penis to "penis">><<set $penisactiondefault to "fencingcooperate">>
+			<span class="blue">你<<if playerChastity("penis")>>隔着$worn.genitals.cn_name_cap，<</if>>将自己的阴茎向着<<combatpersons>>的<<npcPenisSimple $penistarget>>顶去。</span>
+		<<else>>
+			<span class="blue">你试着将你的<<penis>>压向<<combatpersons>>，但<<ohe>>将你推开了。</span>
+			<<set $penisactiondefault to "penistopenisfuck">>
+		<</if>>
+	<</if>>
+<</widget>>

@@ -1,0 +1,65 @@
+:: Photo Model Topless Refuse []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"对，对不起，"你小声说道："我对此感到有些不舒服。"
+<<elseif $speech_attitude is "bratty">>
+	"对不起，做不到，"你说道。
+<<else>>
+	"我感觉有些不舒服，"你说道。
+<</if>>
+<<if $enemyno gte 1 and $photo.blackmail gte 1>>
+	那个<<person>>摇了摇<<his>>的头。<<photo_evidence_upload>>
+<</if>>
+<br><br>
+<<if $photo.refused gte 2>>
+	尼奇点点头，没有再说话便结束了照片拍摄。
+	<br><br>
+	<<set $photo.refused to 0>>
+	<<exposure>>
+	<<set $photo.evidence to 1>>
+	你站在屏幕
+	<<if $worn.upper.name isnot "naked">>
+		屏风，并脱掉$worn.upper.cn_name_cap。
+	<<else>>
+		后面。
+	<</if>>
+	然而，在你穿衣服之前，<span class="purple">你听到一声咔哒声，</span>屏风倒了，<span class="pink">把你暴露在房间里。</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<set $worn.upper to clone(setup.clothes.upper[0])>>
+	<<set $worn.lower to clone(setup.clothes.lower[0])>>
+	<<set $worn.under_upper to clone(setup.clothes.under_upper[0])>>
+	<<set $worn.under_lower to clone(setup.clothes.under_lower[0])>>
+	<<if $enemyno gte 2>>
+		在旁边围观的那些家伙发出一阵欢呼，同时你还注意到三角相机上的指示灯仍然是绿色的。<<covered>>
+	<<elseif $enemyno gte 1>>
+		在旁边围观的那个<<person>>发出一阵欢呼，同时你还注意到三角相机上的指示灯仍然是绿色的。<<covered>>
+	<<else>>
+		你注意到三角相机的指示灯依旧是绿色的。<<covered>>
+	<</if>>
+	<br><br>
+	尼奇捂着<<nnpc_his "Niki">>的眼睛冲了过来。<<nnpc_He "Niki">>抬起倒下的屏风，再次将你与房间的其他部分分隔开来，随后<<nnpc_He "Niki">>从屏风的另一边向你道歉。
+	<br><br>
+
+	<<link [[继续|Photo Model Topless End]]>><</link>>
+	<br>
+<<else>>
+	尼奇点点头，没有再说话便结束了照片拍摄。
+	<br><br>
+	<<famemodel 20 "pic">>
+	<<storeon "photo">>
+	你在屏风后面穿好衣服，在出来之后发现尼奇在数现金，你这次赚了<<moneyGain $photo.money>>。
+	<br><br>
+	<<if $photo.pubfame>>
+		"你做得很好，"<<nnpc_he "Niki">>说道。"<span class="red">我不能给你照片。</span>但是下周再来，我们看看你那时是否准备好了。"
+	<<else>>
+		"你做得很好，"<<nnpc_he "Niki">>说道："我想下周可以再拍一次。"
+	<</if>>
+	<br><br>
+
+	在钱到手之后，你离开了摄影工作室。
+	<br><br>
+
+	<<link [[继续|Nightingale Street]]>><<photo_end>><</link>>
+	<br>
+<</if>>

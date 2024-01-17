@@ -1,0 +1,325 @@
+:: Pregnancy ultrasound 2 []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+/*Alex variables*/
+<<if getPregnancyObject().fetus[0].father is "Alex">>
+	<<set C.npc.Alex.pregnancy.ultraSoundPics to true>>
+<</if>>
+
+你脱掉衣服，然后躺了下来。
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.timer lte _pregnancy.timerEnd * 0.3>>
+	<<set _pregnancy.awareOfMultiple to true>>
+	"恐怕你的怀孕周数还不足以进行B超检查。"哈珀医生评论道，"但是我们可以用杜卜勒来监听胎心音。"
+	<br><br>
+	<<He>>拿起一个手持的小型仪器，转动刻度盘，然后用一个小圆棒压住你的下腹部。<<He>>将圆棒的探头在你身上移动，这个仪器发出稳定的嘶嘶声，偶尔还会发出低沉的响声。<<He>>放缓了动作，那些低沉的声音变得规律了起来，急促又富有能量，像是一支舞曲。
+	<br><br>
+	"就是这儿了！你听。是个健康的孩子。"大概比每秒两下又多一点，连续不断的低沉声响让你整个人变得平静下来了。<<lstress>>
+	<br><br>
+	<<stress -10>>
+	<<if _pregnancy.fetus.length gt 1>>
+		<<He>>略微移动探测棒，然后露出了难以掩饰的惊讶表情。"还有另外一个。" 你听到另一个胎心音，以略微不同的节奏跳动。<<gstress>><<stress 6>>
+		<br><br>
+	<</if>>
+	<<if C.npc.Alex.pregnancy.ultraSound is "requested">>
+		<<set C.npc.Alex.pregnancy.ultraSound to "collected2">>
+		你希望<<him>>给你开一个证明你怀孕的医生证明，<<He>>敲击了一会儿电脑键盘，然后打印出了一张看起来还挺正式的文件。<<He>>在上面漂亮地签下名，然后递给了你。
+		<br><br>
+	<</if>>
+<<else>>
+	<<if C.npc.Alex.pregnancy.ultraSound is "requested">><<set C.npc.Alex.pregnancy.ultraSound to "collected">><</if>>
+	/* Player has pictures of the babies */
+	<<set _pregnancy.ultrasoundDone to true>>
+	<<bodyliquid "vaginaoutside" "goo" 2>>
+	哈珀医生为检查准备好了耦合凝胶和探测棒。你发现凝胶并不像想象中冰凉，而是带着舒适的温暖，<<he>>将凝胶厚厚地涂抹在了你的腹部。
+	<br><br>
+
+	<<if $cowbuild gte 20>>
+		你抑制住发出哞哞声的冲动，你的乳头因为期待而刺痛。<<garousal>><<arousal 3>> <br><br>
+	<<elseif $wolfbuild gte 20>>
+		/* Your wolf fur gets slightly matted by the gel.<br><br> */
+	<<elseif $catbuild gte 20>>
+		/* Your cat fur gets slightly matted by the gel. <br><br> */
+	<</if>>
+	<<He>>将探测棒在你的小腹左右移动着，屏幕随之变幻闪烁，在<<his>>的脸上留下深浅不一的灰色阴影。
+	<br>
+	<<if _pregnancy.type isnot "human">>
+		哈珀在观察仪器时没有说一句话，一旁的技术员面带关切地看了你一眼，你不由地担心起来。在测量不同部位时，技术员一边在电脑不断点击和录入，记录着胎儿的腿部，头部，肱部以及羊水量。
+	<<else>>
+		在测量不同部位时，技术员一边在电脑不断点击和录入。
+	<</if>>
+	<br><br>
+
+	<<if _pregnancy.fetus.length gt 1>>
+		<<set _multiple to true>>
+	<<else>>
+		<<set _multiple to false>>
+		<<switch _pregnancy.fetus[0].gender>>
+			<<case "m">>
+				<<set _he to "他">>
+				<<set _He to "他">>
+				<<set _his to "他">>
+				<<set _His to "他">>
+				<<set _him to "他">>
+				<<set _gender to "male">>
+			<<case "f">>
+				<<set _he to "她">>
+				<<set _He to "她">>
+				<<set _his to "她">>
+				<<set _His to "她">>
+				<<set _him to "她">>
+				<<set _gender to "female">>
+			<<case "h">>
+				<<set _he to "她">>
+				<<set _He to "她">>
+				<<set _his to "她">>
+				<<set _His to "她">>
+				<<set _him to "她">>
+				<<set _gender to "hermaphrodite">>
+		<</switch>>
+	<</if>>
+	<<if _pregnancy.type isnot "human" and _pregnancy.fetus[0].monster>>
+		<<set _type to _pregnancy.fetus[0].type + "人">>
+	<<else>>
+		<<set _type to _pregnancy.fetus[0].type>>
+	<</if>>
+	<<switch _pregnancy.type>>
+		<<case "human">>
+			在最后<<He>>面向你。"你想看看么？"
+			<<He>>把显示器转向你那边。
+			<<if !_pregnancy.awareOfMultiple and _pregnancy.fetus.length gt 1>>
+				你对你所看到的感到惊讶。
+			<</if>>
+			<br><br>
+
+			医生在你的腹部移动探头时，你看到<<if _multiple>><<if _pregnancy.fetus.length is 3>>三<<else>>两<</if>>对<<else>>一对<</if>>眼睛、手臂、手掌、腿和脚。<<stress -5>><<lstress>>
+			<br><br>
+
+			"很好，"医生说："我会把它们印出来给你带回家。"
+			<br><br>
+
+			<<if !_pregnancy.genderKnown>>
+				<<set _pregnancy.genderKnown to true>>
+				"是时候了，"医生宣告。
+				<<if _multiple>>
+					"我希望你知道你的孩子的性别会感到兴奋。"
+					<br><br>
+
+					<<He>>将探头划过你微微隆起的肚子。压迫感让你不太舒服。
+					<<pregnancyGendersText>>
+					<br><br>
+				<<else>>
+					"你对知晓孩子性别感到兴奋吗？"<<he>>问道。
+					<br><br>
+
+					<<He>>将探头划过你滚圆的腹部。压迫感让你不太舒服。
+					<<if _pregnancy.fetus[0].gender is "m">>
+						“是个男孩，”<<he>>说，“祝贺你。”你在屏幕上看不出有任何表明这点的征兆，但哈珀似乎很自信。
+						<br><br>
+					<<elseif _pregnancy.fetus[0].gender is "f">>
+						"是个女孩，"<<he>>宣布道，"祝贺你。"你在屏幕上看不出有任何表明这点的征兆，但哈珀似乎很自信。
+						<br><br>
+					<<else>>
+						"恐怕我分不清究竟是男孩还是女孩，"<<he>>挠了挠头道，"<span class="blue">看起来两者皆是。</span>不管怎样，祝贺你，孩子很健康。"
+						<br><br>
+					<</if>>
+				<</if>>
+			<</if>>
+			<<if _pregnancy.timer gte _pregnancy.timerEnd * 0.9>>
+			/* 36-40 weeks, full term */
+				<<if ! _multiple>>
+					"好消息，"<<he>>继续说，"你的宝宝已经入盆，枕位。这应该能缓解你的压力。"
+				<</if>>
+				你分娩的日子已经不远了。医生递给了你一些印刷册，上面是关于分娩知识，以及产兆开始时应该怎么做的内容。"羊水破了的时候记得来找我们。我们会好好照顾你的。"
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.8>>
+			/*32-36 weeks, preterm */
+				当医生继续检查时，你感到腹内被踢了几下。"根据这些测量结果，"技术员说，"几周后你就足月了。你做好生产计划了吗？你得确保自己得到足够的休息和营养。"
+				<br><br>
+				你知道你需要休息，还需要钱。<<gstress>><<stress 6>>
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.7>>
+			/*28-32 weeks */
+				<<if !_multiple>>
+					"看，<<print _he>>在动。"医生说，"你能看到手指吗？"你看到<<print _his>>就像在对着屏幕招手。你能同时感觉到肚子里的胎动。<<llstress>><<stress -7>>
+					<br><br>
+
+					"你的孩子看起来很健康，"哈珀继续说道，"<<print _He>>只需要继续长大，增加体重，让<<print _his>>的肺部发育成熟。
+					从现在开始你要注意自身的健康，因为你孩子的一切都依赖于你的身体。”
+				<<else>>
+					"看，在动，"医生说，"你能看到手指吗？"孩子的一只手似乎在向屏幕挥动，你能同时感觉到肚子里的胎动。<<llstress>><<stress -7>>
+					哈珀继续说道，“你的孩子看起来很健康，他们只需要继续长大，增加体重，让他们的肺部发育成熟。
+					从现在开始你要注意自身的健康，因为你孩子的一切都依赖于你的身体。”
+				<</if>>
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.6>>
+			/* 24-28 weeks */
+				<<if _multiple>>
+					医生继续检查你的腹部。在<<he>>这么做时，你的孩子们似乎被刺激到了，它们动来动去地回应着你们，你感觉肚子里就像有一群蝴蝶在飞舞。
+					<br><br>
+					"看起来一切正常，"哈珀说，"你的宝宝们有<<print _pregnancy.fetus[0].features.size>>的体型，并且十分健康。请在几个月后足月时再来我们这检查。"
+					<br><br>
+				<<else>>
+					医生继续检查你的腹部。在<<he>>这么做时，你的孩子似乎被刺激到了，它动来动去地回应着你们，你感觉肚子里就像有一群蝴蝶在飞舞。
+					<br><br>
+					"看起来一切正常，"哈珀说，"你的宝宝有<<print _pregnancy.fetus[0].features.size>>的体型，并且十分健康。请在几个月后足月时再来我们这检查。"
+					<br><br>
+				<</if>>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.4>>
+			/* 16-24 weeks */
+				<<if _multiple>>
+					"你的宝宝很好，"医生说，"它们比你只怀一个的情况要小一些，但是它们反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。"
+					<<llstress>> <<stress -8>>
+					<br><br>
+					屏幕上你能看到他们在活动着，双腿与手臂不断地交换位置。其中一个抽动一下。"在打嗝，"哈珀向你说明。
+					<br><br>
+				<<else>>
+					"你的宝宝发育不错，"医生说。"<<print _He>>反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。"
+					<<llstress>> <<stress -8>>
+					<br><br>
+					屏幕上你能看到<<print _him>>在活动着，双腿与手臂不断地交换位置。突然<<print _He>>抽动一下。"在打嗝，"哈珀向你保证。
+					<br><br>
+				<</if>>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.3>>
+			/* 12-16 weeks */
+				<<if _multiple>>
+					"你的宝宝们很健康，"医生说，"他们反应灵敏，而且活动得很顺畅。羊水充足，应该是正常妊娠。"<<llstress>><<stress -8>>
+					<br><br>
+					你能看到他们在屏幕上在活动着，双腿与手臂不断地交换位置。其中一个抽动一下。"在打嗝，"哈珀向你保证。
+				<<else>>
+					"你的宝宝很健康，"医生说，"<<print _He>>反应灵敏，而且活动得很顺畅。羊水充足，应该是正常妊娠。"<<llstress>><<stress -8>>
+					<br><br>
+					你能看到<<print _him>>在屏幕上在活动着，双腿与手臂不断地交换位置。<<print _He>>抽动一下。"在打嗝，"哈珀向你保证。
+				<</if>>
+				<br><br>
+			<<else>>
+			/* Shouldn't get here. */
+			<</if>>
+
+		<<case "wolf">>
+			<<if !_pregnancy.awareOfDetails>>
+				"恭喜你，"<<he>>开口，转向你，"你很幸运，这次妊娠不同寻常，你怀的不是人类的孩子，而是<span class="lewd"> 
+				<<if _multiple>>
+					一窝<<print _type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>崽。
+				<<else>>
+					一只_type崽。
+				<</if>>
+				</span>印象深刻。"
+				<br><br>
+
+				哈珀对你笑着。"没什么好担心的，你的<<if _multiple>>孩子们<<else>>孩子<</if>>十分健康。你想看看吗？"
+			<<else>>
+				在最后<<He>>面向你。"你想看看么？"
+			<</if>>
+			<<He>>把显示器转向你那边。
+			<br><br>
+
+			医生在你的整个腹部移动探头时，你看到<<if _multiple>><<number _pregnancy.fetus.length>>套<<else>>一对<</if>>眼睛、腿和爪子。<<stress -5>><<lstress>>
+			<br><br>
+			"很好，"医生说："我会把它们印出来给你带回家。"
+			<br><br>
+
+			<<if !_pregnancy.genderKnown>>
+				<<set _pregnancy.genderKnown to true>>
+				"是时候了，"医生宣告。
+				<<if _multiple>>
+					"我希望你知道你的孩子的性别会感到兴奋。"
+					<br><br>
+
+					<<He>>将探头划过你微微隆起的肚子。压迫感让你不太舒服。
+					<<pregnancyGendersText>>
+					<br><br>
+				<<else>>
+					"你对知晓孩子性别感到兴奋吗？"<<he>>问道。
+					<br><br>
+
+					<<He>>将探头划过你滚圆的腹部。压迫感让你不太舒服。
+					<<if _pregnancy.fetus[0].gender is "m">>
+						“是个男孩，”<<he>>说，“祝贺你。”你在屏幕上看不出有任何表明这点的征兆，但哈珀似乎很自信。
+						<br><br>
+					<<elseif _pregnancy.fetus[0].gender is "f">>
+						"是个女孩，"<<he>>宣布道，"祝贺你。"你在屏幕上看不出有任何表明这点的征兆，但哈珀似乎很自信。
+						<br><br>
+					<<else>>
+						"恐怕我分不清究竟是男孩还是女孩，"<<he>>挠了挠头道，"<span class="blue">看起来两者皆是。</span>不管怎样，祝贺你，孩子很健康。"
+						<br><br>
+					<</if>>
+				<</if>>
+			<</if>>
+			<<if _pregnancy.timer gte _pregnancy.timerEnd * 0.9>>
+			/* 36-40 weeks, full term */
+				<<if ! _multiple>>
+					“好消息，”<<he>>继续说：“你的崽子已经入盆，枕位。这应该会减轻你的压力。”
+				<</if>>
+				你很快就要生了。医生递给你一些关于分娩的文献，以及产兆开始时应该怎么做。不过里面没提到狼。"羊水破了请来看我们。我们会好好照顾你的。"
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.8>>
+			/*32-36 weeks, preterm */
+				当医生继续检查时，你感觉到了几次颤动。“根据这些测量结果，”技术人员说，“你很快就要足月了，我们认为。这很难说，因为……非人类怀孕。你得做好生产计画，确保你能得到休息和营养。”
+				<br><br>
+				你知道你需要休息，需要钱。你想知道你该把孩子们放在哪里。<<gstress>><<stress 6>>
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.7>>
+			/*28-32 weeks */
+				<<if !_multiple>>
+					“看，<<print _he>>在动，”医生说，“你能看到趾头吗？”<<print _his>>的一只爪子似乎在向屏幕挥舞。你能同时感觉到肚子里的胎动。<<llstress>><<stress -7>>
+					<br><br>
+
+					"你的崽子看起来很健康，"哈珀继续说道。"<<print _He>>只需要继续成长、增加体重，让肺部成熟。
+					从现在开始你要注意自身的健康，因为你孩子的一切都依赖于你的身体。”
+				<<else>>
+					“看，它们在动，”医生说，“你能看到脚趾吗？”它们的一只爪子似乎在向屏幕挥舞。你能同时感觉到肚子里的胎动。<<llstress>><<stress -7>>
+					哈珀继续说道，“你的孩子看起来很健康，他们只需要继续长大，增加体重，让他们的肺部发育成熟。
+					你现在做出健康的选择是非常重要的，因为你的孩子在任何事情上都依赖于你的身体。尤其重要的是，你要小心处理这种不寻常的怀孕。”
+				<</if>>
+				<br><br>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.6>>
+			/* 24-28 weeks */
+				<<if _multiple>>
+					医生继续检查你的腹部。因为<<he>>的做法，你感觉就像有一群蝴蝶在里面，因为你的幼崽在被刺激的时候来回翻动。
+					<br><br>
+					"看起来一切正常，"哈珀说："你的崽子们有<<print _pregnancy.fetus[0].features.size>>的体型，并且十分健康。请在几个月后临盆时再来我们这检查。"
+					<br><br>
+				<<else>>
+					医生继续检查你的腹部。因为<<he>>的动作，你感觉就像有一群蝴蝶在里面，因为你的幼崽在被刺激的时候来回翻动。
+					<br><br>
+					"看起来一切正常，"哈珀说："你的崽子有<<print _pregnancy.fetus[0].features.size>>的体型，并且十分健康。请在几个月后临盆时再来我们这检查。"
+					<br><br>
+				<</if>>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.4>>
+			/* 16-24 weeks */
+				<<if _multiple>>
+					"你的孩……崽子们，发育得不错，"医生说。"他们比只怀一只要小一点，但是反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。与正常的妊娠一样正常。"
+					<<llstress>> <<stress -8>>
+					<br><br>
+					屏幕上你能看到它们在活动着，双腿不断地变换位置。其中一个抽动一下。"在打嗝，"哈珀向你保证。
+					<br><br>
+				<<else>>
+					"你的崽子发育不错，"医生说。"<<print _He>>反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。与正常的妊娠一样正常。"
+					<<llstress>> <<stress -8>>
+					<br><br>
+					屏幕上你能看到<<print _him>>在活动着，双腿不断地变换位置。突然<<print _He>>抽动一下。"在打嗝，"哈珀向你保证。
+					<br><br>
+				<</if>>
+			<<elseif _pregnancy.timer gte _pregnancy.timerEnd * 0.3>>
+			/* 12-16 weeks */
+				<<if _multiple>>
+					"你的崽子们很健康，"医生说，"它们反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。与正常的妊娠一样正常。"<<llstress>><<stress -8>>
+					<br><br>
+					屏幕上你能看到它们在活动着，双腿不断地变换位置。其中一个抽动一下。"在打嗝，"哈珀向你保证。
+				<<else>>
+					"你的崽子很健康，"医生说。"<<print _He>>反应灵敏，而且活动得很顺畅。羊水也充足，应该是正常妊娠。与正常的妊娠一样正常。"<<llstress>><<stress -8>>
+					<br><br>
+					屏幕上你能看到<<print _him>>在活动着，双腿不断地变换位置。突然<<print _He>>抽动一下。"在打嗝，"哈珀向你保证。
+				<</if>>
+				<br><br>
+			<<else>>
+			/* Shouldn't get here. */
+			<</if>>
+		<<default>>
+	<</switch>>
+	<<makeAwareOfDetails>>
+	<<set _pregnancy.awareOfMultiple to true>>
+<</if>>
+
+<<link [[继续|Pregnancy ultrasound 3]]>><</link>>

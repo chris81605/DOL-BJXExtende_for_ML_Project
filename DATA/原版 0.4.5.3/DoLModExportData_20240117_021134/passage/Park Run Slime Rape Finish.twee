@@ -1,0 +1,36 @@
+:: Park Run Slime Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $phase is 3>>
+		那个<<person1>><<person>>晃着头沮丧地走开了。<<tearful>>你挣扎着站了起来。
+	<<elseif $phase is 4>>
+		"一个在公园四处揽客的变态，我应该逮捕你的。"警官笑了起来，"但我喜欢你，你知道吗？我想想还是宽容一点吧。"<<tearful>>你看着他们逐渐走远，挣扎着爬了起来。
+	<<else>>
+		"一个在公园四处揽客的变态，"<<person1>><<person>>自言自语着，"愿<<pshe>>如愿以偿。"<<tearful>>你看着<<if $phase is 1>>他们<<else>><<he>><</if>>逐渐走远，挣扎着爬了起来。
+	<</if>>
+	<br><br>
+	<<if $rapeavoid is 0 and $stress gte 1000>>
+		<span class="green">你脑中的史莱姆正安抚着你。</span><<if $stress gte 5000>><<lllstress>><<else>><<llstress>><</if>><<stress `$stress / -200`>>
+		<br><br>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<if $phase is 1 or $phase is 4>>
+		你把他们推开，<<tearful>>往树林中跑去。
+	<<elseif $phase is 2 or $phase is 3>>
+		你把<<person>>推开，<<tearful>>往树林中跑去。
+	<</if>>
+	
+	<span class="red">你觉得脑子里的史莱姆在惩罚你，因为你违抗了它的命令。</span>
+	<<pain 12>><<stress 12>><<trauma 18>><<ggpain>><<ggtrauma>><<ggstress>><<set $earSlime.defyCooldown += 4>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+<</if>>

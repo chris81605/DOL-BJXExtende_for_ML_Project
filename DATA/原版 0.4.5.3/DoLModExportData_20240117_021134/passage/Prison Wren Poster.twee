@@ -1,0 +1,28 @@
+:: Prison Wren Poster []
+<<effects>>
+
+<<if $prison.poster and $phase isnot 1>>
+	"我会把旧的拿走，"<<he>>补充道，"就当是帮你的忙。太多的装饰品会吸引那些乱看的人。"
+	<br><br>
+
+	<<He>>在掌心里滚着牙齿。"还要吗？"
+	<br><br>
+
+	<<link [[更换你的海报|Prison Wren Poster]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[算了|Prison Wren]]>><<unset $poster_choice>><</link>>
+	<br>
+<<else>>
+	"我会让人把它挂在你的牢房里的，"伦恩说道，"放心，是免费的。"
+	<br><br>
+
+	<<if $phase is 1>>
+		<span class="gold">牢房墙上的海报已被替换。</span>
+	<<else>>
+		<span class="gold">你的牢房墙上现在有了一张海报。</span>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Prison Yard]]>><<prison_teeth -50>><<set $prison.poster to $poster_choice>><<unset $poster_choice>><<endevent>><</link>>
+	<br>
+<</if>>

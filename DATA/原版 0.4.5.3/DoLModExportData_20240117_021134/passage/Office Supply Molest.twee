@@ -1,0 +1,38 @@
+:: Office Supply Molest []
+<<effects>>
+<<if $molestationstart is 2>>
+	你醒来发现自己在一个储物柜里。你不确定你在哪一层。在你上面有一个<<generate1>><<person1>><<person>>。
+	<<set $officeFloor to random(4,15)>>
+	<br><br>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyanger to 0>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyanger to 0>>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Office Supply Molest Escape]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Office Supply Molest Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Office Supply Molest]]>><</link>></span><<nexttext>>
+<</if>>

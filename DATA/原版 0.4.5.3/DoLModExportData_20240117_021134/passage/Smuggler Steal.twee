@@ -1,0 +1,42 @@
+:: Smuggler Steal []
+<<effects>>
+
+<<smugglerdifficultynpcs>>
+
+你偷偷地溜到那个打开的袋子附近，旁边有一个身影，是一个<<person>>。
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+<<if $smuggler_stolen_stat gte 4>>
+	你隐藏在附近的黑暗之中，等待着你的机会。在确保无人注意的时候，你趁机将手伸进了袋子里。<<person1>>幸好，那个<<person>><span class="green">并没有将头抬起来。</span>东西在你的掌心微微发热，你带着它蹑手蹑脚地离开了。
+<<elseif $smuggler_stolen_stat gte 2>>
+	你隐藏在附近的黑暗之中，等待着你的机会。在确保无人注意的时候，你趁机将手伸进了袋子里。<<person1>>幸好，那个<<person>><span class="green">并没有将头抬起来。</span>东西在你的掌心微微发热，你带着它蹑手蹑脚地离开了。
+<<else>>
+	<<He>>似乎不在警戒状态。<span class="green">当你把手伸进包里时，那家伙并没有抬头</span>。在抓住了一个温暖的物体之后，你悄悄地从这地方溜了出去。
+<</if>>
+<br><br>
+
+<<skulduggeryuse>>
+
+<<smugglerobject>>
+<<endevent>>
+<<destinationsmuggler>>
+
+<<else>>
+
+	<<if $smuggler_stolen_stat gte 4>>
+		你隐藏在附近的黑暗之中，等待着你的机会。在确保无人注意的时候，你趁机将手伸进了袋子里，<span class="red">那<<person>>一把抓住了你的胳膊</span>。"我们等你出手等了很久了，小毛贼。"<<His>>的同伴们靠了过来。
+	<<elseif $smuggler_stolen_stat gte 2>>
+		你隐藏在附近的黑暗之中，等待着你的机会。在确保无人注意的时候，你趁机将手伸进了袋子里，<span class="red">刚要拿出来什么，你的胳膊一下子便被抓住了。</span>"看我抓到了什么，"<<person>>对着<<person2>><<person>>眨了眨眼。"这就是那个小偷小摸的小混蛋——既然人在手上了，不如好好地找点乐子。"<<person1>>
+	<<else>>
+		<<He>>似乎不在警戒状态。你偷偷地把手伸进了袋子，<span class="red">但<<him>>猛地转过身来</span>，一把抓住了你的胳膊。
+	<</if>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+<<link [[继续|Smuggler Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+<</if>>

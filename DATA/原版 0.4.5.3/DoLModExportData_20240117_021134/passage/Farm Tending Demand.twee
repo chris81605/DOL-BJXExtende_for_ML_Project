@@ -1,0 +1,49 @@
+:: Farm Tending Demand []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我是个对工作很热情的人，"你说道，"给我钱，你就可以对我为所欲为。"
+<<elseif $speech_attitude is "bratty">>
+	"当然，"你说道，"如果你付钱的话。"
+<<else>>
+	"你得为此付出点什么，"你说道，"我需要钱。"
+<</if>>
+<<promiscuity3>>
+
+<<if $phase is 1>>
+	<<set $seductiondifficulty to 6000>>
+<<elseif $phase is 2>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $phase is 3>>
+	<<set $seductiondifficulty to 10000>>
+<</if>>
+
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<span class="green">"很好，"</span><<person>>说道，"现在给我滚过来。"
+	<br><br>
+
+	你爬过围栏，<<he>>扑向你。
+	<br><br>
+
+	<<link [[继续|Farm Tending Prostitution]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+<<else>>
+
+	<span class="red">"到处都是他妈的妓女，"</span><<person>>不满地咕哝，"不用了。"
+	<br><br>
+
+	<<destination_farm>>
+
+<</if>>

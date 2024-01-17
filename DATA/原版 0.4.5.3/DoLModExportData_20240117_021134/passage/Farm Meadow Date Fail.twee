@@ -1,0 +1,42 @@
+:: Farm Meadow Date Fail []
+<<effects>><<npc "Alex">><<integritycheck no_text>><<exposure>>
+
+<<if $phase is 1>>
+    <<if $tending gte 600>>
+        "坏<<steed_text>>，"你呵斥着，<span class="green">你的声音坚定而有力，</span>"老实点！"<<grespect>><<farm_horses 1>>
+        <br><br>
+
+        <<if $steed is "male" or $steed is "female">>
+            <<steed_He>>举起一只手捂住自己的脸，摇了摇头。"对不起，"<<steed_he>>说，"我不知道自己怎么了。"
+        <<else>>
+            <<steed_He>>摇了摇头。攻击性从<<steed_his>>身上消失了。
+        <</if>>
+        <br><br>
+
+        当你再次爬上<<steed_text>>时，艾利克斯松了一口气。
+        <br><br>
+
+        <<link [[继续|Farm Meadow Date 2]]>><<set $alex_meadow_date_scold to 1>><<thighskill 5>><</link>>
+
+    <<else>>
+        "坏，坏<<steed_text>>，"你结结巴巴地说，<span class="red">你的声音在颤抖。</span><<lrespect>><<farm_horses -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+        <br><br>
+
+        突然，艾利克斯用尽全力抓住了<<steed_text>>的缰绳。<<gdom>><<npcincr Alex dom 1>>
+        <br><br>
+
+        "哇，别紧张，<<if $steed is "male">>小子<<else>>姑娘<</if>>。"
+        <br><br>
+
+    <</if>>
+
+<<else>>
+    "我来了！" 艾利克斯说。
+    <br><br>
+
+    <<He>>用尽全力抓住<<steed_text>>的缰绳。"哇，别紧张，<<if $steed is "male">>小子<<else>>姑娘<</if>>。"<<gdom>><<npcincr Alex dom 1>>
+    <br><br>
+
+    <<link [[继续|Farm Meadow Date Fail 2]]>><</link>>
+
+<</if>>

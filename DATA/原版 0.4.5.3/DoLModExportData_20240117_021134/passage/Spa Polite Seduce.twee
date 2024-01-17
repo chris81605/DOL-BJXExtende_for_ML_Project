@@ -1,0 +1,40 @@
+:: Spa Polite Seduce []
+<<effects>>
+
+
+<<set $seductiondifficulty to 10000>>
+<<seductioncheck>>
+<br><br>
+<<seductionskilluptext>>
+<<seductionskilluse>>
+
+你站在<<person>>的前面，阻止<<him>>离开房间。"你确定没有什么我可以为你做的吗？"你靠在门框上问道。
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<<He>>犹豫了一下，<span class="green">扫视了一遍你的身体，</span>然后摇了摇头，打破了这种氛围。"我做不到，"<<he>>说道，"我<<spouse>>会杀了我的。"
+	<<if !$soup_kitchen_known>>
+		<<He>>看着你的眼睛，但是某种东西让<<him>>移开了视线。"他们负担过重，但是如果你需要帮助，狼街上有一家施粥所。它在神殿旁边的一座灰色建筑里。开放时间是<span class="gold"><<ampm 18 00>>到<<ampm 21 00>></span>。"
+		<br><br>
+
+		<span class="gold">你发现了狼街上的施粥所。</span>
+		<br><br>
+		<<set $soup_kitchen_known to 1>>
+		<<He>>从你身边推开。
+	<<else>>
+		<<He>>从你身边推开。
+	<</if>>
+	<br><br>
+	<<link [[恳求|Spa Polite Beg]]>><<sub 1>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<link [[让你的顾客离开|Spa Polite Leave]]>><</link>>
+	<br>
+<<else>>
+
+	<<person>>犹豫了一下，<span class="red">然后摇了摇头。</span>"我只是想按摩。"<<he>>说，"谢谢你。"<<He>>绕开了你。
+	<br><br>
+
+	<<spa_end>>
+
+<</if>>

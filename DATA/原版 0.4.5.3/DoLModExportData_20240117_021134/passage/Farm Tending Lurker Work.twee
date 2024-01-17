@@ -1,0 +1,30 @@
+:: Farm Tending Lurker Work []
+<<effects>>
+
+也许只是一只老鼠。
+
+<<if $rng gte 71>>
+	你回到工作中，过了一会儿，有什么东西从庄稼里跳出来，径直朝你扑来。
+	<br><br>
+	<<if $deviancy gte 55>>
+		<<link [[站着不动|Farm Tending Lurker Stand Still]]>><</link>><<deviant4>>
+		<br>
+	<</if>>
+	<<link [[躲闪|Farm Tending Lurker Dodge]]>><</link>><<dancedifficulty 1 1200>>
+	<br>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<link [[尖叫|Farm Tending Lurker Scream]]>><<npcincr Alex dom 1>><</link>><<gdom "Alex">>
+	<<else>>
+		<<link [[尖叫|Farm Tending Lurker Scream Fail]]>><</link>><<gdom "Alex">>
+	<</if>>
+	<br>
+	<<if $farm_stage gte 10 and $lurkers_held lt 1>>
+		<<link [[投掷捕捉网|Farm Tending Lurker Hurl net]]>><</link>><<dancedifficulty 1 1200>><<athleticsdifficulty 0 1200>>
+		<br>
+	<</if>>
+<<else>>
+	你回到工作中，没有再遇到干扰。
+	<br><br>
+
+	<<destination_farm>>
+<</if>>

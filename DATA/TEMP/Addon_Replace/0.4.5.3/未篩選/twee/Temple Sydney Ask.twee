@@ -1,0 +1,41 @@
+:: Temple Sydney Ask []
+<<set $outside to 0>><<set $location to "temple">><<sydneySchedule>><<temple_effects>><<effects>>
+<<if $templePromised is "Sydney">>
+	<<set _sydneyText to "我承诺陪伴的那位">>
+<<elseif isLoveInterest("Sydney")>>
+	<<set _sydneyText to "我的" + ($NPCName[$NPCNameList.indexOf("Sydney")].pronoun is "m" ? "男" : "女") + "朋友">>
+<<else>>
+	<<set _sydneyText to "我的朋友">>
+<</if>>
+<<generateTemple 1>><<person1>>
+你走向一个<<person1>><<monk>>打扮的<<person>>，上前拽了拽<<his>>的<<npcClothesText $NPCList[0] "upper">>。<<he>>转过身来，对你投以微笑。
+<br><br>
+<<if $speech_attitude is "meek">>
+	<<set _respond to "结结巴巴地">>
+	"我，我在找_sydneyText，"你笑了笑，"<<nnpc_Hes "Sydney">>这个时间一般就在附近，你知道悉尼去哪儿了吗？"
+<<elseif $speech_attitude is "bratty">>
+	<<set _respond to "低声嘀咕着">>
+	" _sydneyText呢？"你双手抱胸，"这个点<<nnpc_Hes "Sydney">>肯定在附近。
+	<<if $temple_rank is undefined>>
+		我发誓，要是你这个混蛋对悉尼做了什么——"
+	<<else>>
+		我发誓，要是有人对悉尼做了什么——"
+	<</if>>
+<<else>>
+	<<set _respond to "">>
+	"我在找_sydneyText，"你揉捏着手指，"你知道在哪里可以找到悉尼吗？"
+<</if>>
+<br><br>
+<<if _sydney_location_message is "shop">>
+	"啊，悉尼！<<nnpc_He "Sydney">>早些时候给约旦说过了。我想<<nnpc_he "Sydney">>是去<<nnpc_his "Sydney">><<sydneymother>>的店里帮忙了，好像在镇上的……<span class="gold">麋鹿街</span>，要是我没记错的话。"
+<<elseif _sydney_location_message is "rehearsal">>
+	"啊，悉尼！<<nnpc_He "Sydney">>告诉过我们<<nnpc_he "Sydney">>要<span class="blue">参加学校里的什么戏剧来着的</span>，是圣诞主题演出……也许还在学校？"
+<<else>>
+	"啊，悉尼！<<nnpc_He "Sydney">>今天走得很早。<span class="red">看起来情绪很低落</span>，应该是回家了吧？<<nnpc_he "Sydney">>明天会回来的。"
+<</if>>
+<br><br>
+你_respond向<<him>>道谢。<<he>>点了点头，回到了自己的岗位上。
+<br><br>
+<<endevent>>
+<<link [[继续|Temple]]>><</link>>
+<br>

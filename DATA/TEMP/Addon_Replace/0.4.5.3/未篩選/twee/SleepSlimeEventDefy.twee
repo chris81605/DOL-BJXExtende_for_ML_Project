@@ -1,0 +1,25 @@
+:: SleepSlimeEventDefy []
+<<effects>>
+<<if !$slimeBedExit>>
+	<<set $slimeBedExit to "Bed">>
+	<<set $slimeBedroomExit to "Bedroom">>
+<</if>>
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你违抗了史莱姆的要求，不再听从它的指令而是直接上床。<span class="red">它没有阻止你，因为它知道可以用其他方式来惩罚你。</span>
+	<<else>>
+		你试图反抗史莱姆的要求，不再听从它的指令而是直接上床。<span class="teal">它因之前卖力控制你而疲惫不堪，</span>它试图重新掌握主权，<span class="green">但它失败了，强迫不了你走向相反的方向。</span>
+	<</if>>
+	<<set $earSlime.event to "">>
+	<br><br>
+	<<link [[Next|$slimeBedExit]]>><<unset $slimeBedExit>><<unset $slimeBedroomExit>><</link>>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	史莱姆会强迫你服从它的要求。
+	<<slimeEventResult>>
+<<else>>
+	你可以无视史莱姆的要求，不听它的话上床睡觉。
+	<<set $earSlime.event to "">><<set $earSlime.defyCooldown += 4>>
+	<br><br>
+	<<link [[Next|$slimeBedExit]]>><<unset $slimeBedExit>><<unset $slimeBedroomExit>><</link>>
+<</if>>

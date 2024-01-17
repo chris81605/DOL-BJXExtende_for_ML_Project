@@ -1,0 +1,34 @@
+:: Bartending VIP Patron Refuse []
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<if $speech_attitude is "meek">>
+	"很抱歉<<sir>>，"你说道，"我得在吧台里工作。"
+<<elseif $speech_attitude is "bratty">>
+	"你瞎吗？"你说道，"我很忙，去烦那些舞者吧。"
+<<else>>
+	"我只在吧台里工作，"你说道，"或许其中一个舞者会愿意招待你的。"
+<</if>>
+<br><br>
+
+<<if $rng gte 61>>
+你准备转身离开那个<<person>>，但<<he>><span class="red">抓住了你的手臂。</span>"给我听好了，小<<bitch>>，"<<he>>啐了一口，"没人能拒绝我。"<<He>>瞟了保安一眼，"你觉得他们会帮你？不会的，他们知道我是谁，现在快给我出去。"
+<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+<br><br>
+
+<<link [[服从|Bartending VIP Patron Comply]]>><</link>>
+<br>
+<<link [[拒绝|Bartending VIP Patron Refuse 2]]>><</link>>
+<br>
+
+<<else>>
+你准备转身离开那个<<person>>，<<He>>一直在低声咒骂着你，但没有更进一步动作地离开了。<<tipreceive>>
+<br><br>
+
+<<if !$per_npc.bartend and random(1, 2) is 2>>
+	<<saveNPC 0 bartend>>
+<</if>>
+
+<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+<br>
+
+<</if>>

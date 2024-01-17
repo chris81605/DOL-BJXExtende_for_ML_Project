@@ -1,0 +1,55 @@
+:: Elk Compound Crystal []
+<<set $outside to 0>><<set $location to "compound">><<effects>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51 and $tentacledisable is "f" and $hallucinations gte 2>>
+		当你穿过走道时，有几条触手从你脚下的液体中升起。
+		<br><br>
+		<<link [[继续|Elk Compound Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		当你穿过走道时，你脚下的液体变得躁动起来。一些液体溅到你身上并开始侵蚀你的衣服。
+		<<if !$worn.over_upper.type.includes("naked")>>
+			<<set $worn.over_upper.integrity -= 10>>
+		<<else>>
+			<<set $worn.upper.integrity -= 10>>
+		<</if>>
+		<<if !$worn.over_lower.type.includes("naked")>>
+			<<set $worn.over_lower.integrity -= 10>>
+		<<else>>
+			<<set $worn.lower.integrity -= 10>>
+		<</if>>
+		<br><br>
+		你继续走到中心并拿起了水晶。它触摸起来很是温暖。
+		<br><br>
+		<<set $compoundpipes to 1>>
+		<<set $blackmoney += 50>>
+		<<set $compoundalarm += 1>>
+		<<crimeUp 50 "thievery">>
+		<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with storage tanks")>>
+			<<link [[放下相机|Elk Compound Pipes Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("the building with storage tanks")>><</link>><<gsecurity>>
+			<br>
+			<<link [[离开|Elk Compound]]>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续|Elk Compound]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	你穿过走道并拿起水晶，它触摸起来很是温暖。
+	<br><br>
+	<<set $compoundpipes to 1>>
+	<<set $blackmoney += 50>>
+	<<set $compoundalarm += 1>>
+	<<crimeUp 50 "thievery">>
+	<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with storage tanks")>>
+		<<link [[放下相机|Elk Compound Pipes Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("the building with storage tanks")>><</link>><<gsecurity>>
+		<br>
+		<<link [[离开|Elk Compound]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Elk Compound]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

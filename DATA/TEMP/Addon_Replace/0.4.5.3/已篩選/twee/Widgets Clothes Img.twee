@@ -1,0 +1,713 @@
+:: Widgets Clothes Img [widget]
+<<widget "baseClothingStrings">>
+	<<set _worn = $worn[_args[0]]>>
+	<<set _class to 'anim-idle-2f' + (_worn.colour_sidebar and typeof(_worn.colour) == "string" ? ' clothes-'+_worn.colour.replace(/ /g, '-'):'')>>
+	<<set _classAcc to 'anim-idle-2f ' + (_worn.accessory_colour_sidebar and typeof(_worn.accessory_colour) == "string" ? ' clothes-'+_worn.accessory_colour.replace(/ /g, '-') :'')>>
+	<<set _style to (_worn.colourCustom ? _worn.colourCustom :'')>>
+	<<set _styleAcc to (_worn.accessory_colourCustom ? _worn.accessory_colourCustom :'')>>
+<</widget>>
+
+<<widget "baseClothingImg">>
+	<<if $worn[_args[0]].name isnot "naked">>
+		<<baseClothingStrings _args[0]>>
+		<div @class="'clothes-div layer-'+_args[0]">
+			<<if $worn[_args[0]].mainImage isnot 0>>
+				<img @class="_class" @src="'img/clothes/'+[_args[0]]+'/' + $worn[_args[0]].variable + '/' + 'full.png'" @style="_style">
+			<</if>>
+			<<if $worn[_args[0]].accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/'+[_args[0]]+'/' + $worn[_args[0]].variable + '/' + 'acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<if $worn[_args[0]].back_img is 1>>
+			<div @class="'clothes-div layer-'+_args[0]+'-back'">
+				<img @class="$worn[_args[0]].back_img_colour is 'secondary' ? _classAcc : _class" @src="'img/clothes/'+[_args[0]]+'/' + $worn[_args[0]].variable + '/' + 'back.png'" @style="_styleAcc">
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "neckimg">>
+	<<if $worn.neck.name isnot "naked">>
+		<<if $worn.neck.name is "necktie">>
+			<<baseClothingStrings "neck">>
+			<<if $worn.upper.has_collar is 1>>
+				<<set _tieimg = "full_nocollar">>
+			<<else>>
+				<<set _tieimg = "full">>
+			<</if>>
+			<div @class="'clothes-div layer-neck'">
+			<img @class="_class" @src="'img/clothes/neck/' + $worn.neck.variable + '/' + _tieimg + '.png'" @style="_style">
+			<img @class="_classAcc" @src="'img/clothes/neck/' + $worn.neck.variable + '/' + 'acc.png'" @style="_styleAcc">
+			<<if $worn.neck.leash is 1>>
+				<img @class="_class" @src="'img/clothes/neck/collar/leash.png'">
+			<</if>>
+			</div>
+		<<else>>
+			<<baseClothingImg "neck">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "handsimg">>
+	<<if $worn.hands.name isnot "naked">>
+		<<baseClothingStrings "hands">>
+		<div @class="'clothes-div layer-hands'">
+			<<if $worn.hands.mainImage isnot 0>>
+				<img @class="_class" @src="'img/clothes/hands/' + $worn.hands.variable + '/' + 'full.png'" @style="_style">
+			<</if>>
+			<<if $worn.hands.leftImage is 1 and $leftarm isnot "bound" and $leftarm isnot "grappled" and $leftarm isnot "behind">>
+				<<set _leftImage to "left">>
+				<<if _coverLeft is true>>
+					<<run _leftImage += "_cover">>
+				<</if>>
+				<img @class="_class" @src="'img/clothes/hands/' + $worn.hands.variable + '/' + _leftImage + '.png'" @style="_style">
+				<<if $worn.hands.accessory is 1>>
+					<img @class="_classAcc" @src="'img/clothes/hands/' + $worn.hands.variable + '/' + _leftImage + '_acc.png'" @style="_styleAcc">
+				<</if>>
+			<</if>>
+			<<if $worn.hands.rightImage is 1 and $rightarm isnot "bound" and $rightarm isnot "grappled" and $rightarm isnot "behind">>
+				<<set _rightImage to "right">>
+				<<if _coverRight is true>>
+					<<run _rightImage += "_cover">>
+				<</if>>
+				<img @class="_class" @src="'img/clothes/hands/' + $worn.hands.variable + '/' + _rightImage + '.png'" @style="_style">
+				<<if $worn.hands.accessory is 1>>
+					<img @class="_classAcc" @src="'img/clothes/hands/' + $worn.hands.variable + '/' + _rightImage + '_acc.png'" @style="_styleAcc">
+				<</if>>
+			<</if>>
+		</div>
+	<</if>>
+<</widget>>
+
+<<widget "underupperimg">>
+	<<if $worn.under_upper.name isnot "naked">>
+		<<baseClothingStrings "under_upper">>
+		<<switch $underupperwetstage>>
+			<<case 1>><<set _underUpperWetness to " clothes-damp">>
+			<<case 2>><<set _underUpperWetness to " clothes-wet">>
+			<<case 3>><<set _underUpperWetness to " clothes-drenshed">>
+			<<default>><<set _underUpperWetness to "">>
+		<</switch>>
+
+		<<if $worn.under_upper.integrity lte (clothingData('under_upper',$worn.under_upper,'integrity_max') / 10) * 2>>
+			<<set _imgName to "tattered">>
+		<<elseif $worn.under_upper.integrity lte (clothingData('under_upper',$worn.under_upper,'integrity_max') / 10) * 5>>
+			<<set _imgName to "torn">>
+		<<elseif $worn.under_upper.integrity lte (clothingData('under_upper',$worn.under_upper,'integrity_max') / 10) * 9>>
+			<<set _imgName to "frayed">>
+		<<else>>
+			<<set _imgName to "full">>
+		<</if>>
+		<div @class="'clothes-div layer-under_upper' + _underUpperWetness">
+			<<if $worn.under_upper.mainImage isnot 0>>
+				<img @class="_class" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + _imgName + '.png'" @style="_style">
+			<</if>>
+			<<if setup.clothes.under_upper[clothesIndex('under_upper', $worn.under_upper)].breast_img is 1>>
+				<img @class="_class" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + (Math.min(_breastSize, 5)) + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.under_upper.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + 'acc' + ($worn.under_upper.accessory_integrity_img ? '_' + _imgName : '') + '.png'" @style="_styleAcc">
+			<</if>>
+			<<if $worn.under_upper.breast_acc_img is 1>>
+				<img @class="_classAcc" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + (Math.min(_breastSize, 5)) + '_acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<set _sleeveClass to {
+			"": _class,
+			"primary": _class,
+			"no": "",
+			"secondary": _classAcc
+		}[$worn.under_upper.sleeve_colour||""]>>
+		<<if _coverRight isnot undefined and $worn.under_upper.sleeve_img is 1>>
+			<div @class="'clothes-div layer-rightarmunderclothes' + _underUpperWetness">
+			<<if _coverRight is true>>
+				<img @class="_sleeveClass" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + 'right_cover.png'" @style="_style">
+			<<else>>
+				<img @class="_sleeveClass" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + 'right.png'" @style="_style">
+			<</if>>
+			</div>
+		<</if>>
+		<<if _coverLeft isnot undefined and $worn.under_upper.sleeve_img is 1>>
+			<div @class="'clothes-div layer-leftarmunderclothes' + _underUpperWetness">
+			<<if _coverLeft is true>>
+				<img @class="_sleeveClass" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + 'left_cover.png'" @style="_style">
+			<<else>>
+				<img @class="_sleeveClass" @src="'img/clothes/under_upper/' + $worn.under_upper.variable + '/' + 'left.png'" @style="_style">
+			<</if>>
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "underlowerimg">>
+	<<if $worn.under_lower.name isnot "naked">>
+		<<baseClothingStrings "under_lower">>
+		<<switch $underlowerwetstage>>
+			<<case 1>><<set _underlowerWetness to " clothes-damp">>
+			<<case 2>><<set _underlowerWetness to " clothes-wet">>
+			<<case 3>><<set _underlowerWetness to " clothes-drenshed">>
+			<<default>><<set _underlowerWetness to "">>
+		<</switch>>
+
+		<<if $worn.under_lower.integrity lte (clothingData('under_lower',$worn.under_lower,'integrity_max') / 10) * 2>>
+			<<set _imgName to "tattered">>
+		<<elseif $worn.under_lower.integrity lte (clothingData('under_lower',$worn.under_lower,'integrity_max') / 10) * 5>>
+			<<set _imgName to "torn">>
+		<<elseif $worn.under_lower.integrity lte (clothingData('under_lower',$worn.under_lower,'integrity_max') / 10) * 9>>
+			<<set _imgName to "frayed">>
+		<<else>>
+			<<set _imgName to "full">>
+		<</if>>
+		<<if $worn.under_lower.mainImage isnot 0 and $worn.under_lower.high_img is 1>>
+			<div @class="'clothes-div layer-under_lower-high' + _underlowerWetness">
+				<img @class="_class" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + _imgName + '.png'" @style="_style">
+			</div>
+		<</if>>
+		<div @class="'clothes-div layer-under_lower' + _underlowerWetness">
+			<<if $worn.under_lower.mainImage isnot 0 and $worn.under_lower.high_img isnot 1>>
+				<img @class="_class" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + _imgName + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.under_lower.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + 'acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<if $worn.under_lower.penis_img is 1 and $player.penisExist>>
+			<div @class="'clothes-div layer-under_lower-top' + _underlowerWetness">
+				<img @class="_class" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + 'penis.png'" @style="_style">
+				<<if $worn.under_lower.accessory is 1>>
+					<img @class="_classAcc" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + 'acc_penis.png'" @style="_styleAcc">
+				<</if>>
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "lowerimg">>
+	<<if $worn.lower.name isnot "naked">>
+		<<baseClothingStrings "lower">>
+		<<switch $lowerwetstage>>
+			<<case 1>><<set _lowerWetness to " clothes-damp">>
+			<<case 2>><<set _lowerWetness to " clothes-wet">>
+			<<case 3>><<set _lowerWetness to " clothes-drenshed">>
+			<<default>><<set _lowerWetness to "">>
+		<</switch>>
+
+		<<if $worn.lower.integrity lte (clothingData('lower',$worn.lower,'integrity_max') / 10) * 2>>
+			<<set _imgName to "tattered">>
+		<<elseif $worn.lower.integrity lte (clothingData('lower',$worn.lower,'integrity_max') / 10) * 5>>
+			<<set _imgName to "torn">>
+		<<elseif $worn.lower.integrity lte (clothingData('lower',$worn.lower,'integrity_max') / 10) * 9>>
+			<<set _imgName to "frayed">>
+		<<else>>
+			<<set _imgName to "full">>
+		<</if>>
+
+		<<if $worn.lower.mainImage isnot 0 and $worn.lower.high_img is 1>>
+			<div @class="'clothes-div layer-lower-high' + _lowerWetness">
+				<img @class="_class" @src="'img/clothes/lower/' + $worn.lower.variable + '/' + _imgName + '.png'" @style="_style">
+			</div>
+		<</if>>
+		<div @class="'clothes-div layer-lower' + _lowerWetness">
+			<<if $worn.lower.mainImage isnot 0 and $worn.lower.high_img isnot 1>>
+				<img @class="_class" @src="'img/clothes/lower/' + $worn.lower.variable + '/' + _imgName + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.lower.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/lower/' + $worn.lower.variable + '/' + 'acc' + ($worn.lower.accessory_integrity_img ? '_' + _imgName : '') + '.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<if $worn.lower.back_img is 1>>
+			<div @class="'clothes-div layer-back-lower' + _lowerWetness">
+				<img @class="$worn.lower.back_img_colour is 'secondary' ? _classAcc : _class" @src="'img/clothes/lower/' + $worn.lower.variable + '/' + 'back.png'" @style="_style">
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "overlowerimg">>
+	<<if $worn.over_lower.name isnot "naked">>
+		<<baseClothingStrings "over_lower">>
+		<<if $worn.over_lower.integrity lte (clothingData('over_lower',$worn.over_lower,'integrity_max') / 10) * 2>>
+			<<set _imgName to "tattered">>
+		<<elseif $worn.over_lower.integrity lte (clothingData('over_lower',$worn.over_lower,'integrity_max') / 10) * 5>>
+			<<set _imgName to "torn">>
+		<<elseif $worn.over_lower.integrity lte (clothingData('over_lower',$worn.over_lower,'integrity_max') / 10) * 9>>
+			<<set _imgName to "frayed">>
+		<<else>>
+			<<set _imgName to "full">>
+		<</if>>
+		<div class="layer-over_lower">
+			<<if $worn.over_lower.mainImage isnot 0>>
+				<img @class="_class" @src="'img/clothes/over_lower/' + $worn.over_lower.variable + '/' + _imgName + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.over_lower.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/over_lower/' + $worn.over_lower.variable + '/' + 'acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<if $worn.over_lower.back_img is 1>>
+			<div class="layer-back-lower">
+				<img @class="$worn.over_lower.back_img_colour is 'secondary' ? _classAcc : _class" @src="'img/clothes/over_lower/' + $worn.over_lower.variable + '/' + 'back.png'" @style="_style">
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "genitalsimg">>
+	<<if $worn.genitals.name isnot "naked">>
+		<<set _genitalsColour = ($worn.genitals.colour ? " clothes-"+$worn.genitals.colour.replace(/ /g, '-') : "")>>
+		<div class="layer-genitals">
+			<<if $worn.genitals.mainImage isnot 0 and !setup.clothes.genitals[clothesIndex('genitals',$worn.genitals)].hideUnderLower.includes($worn.under_lower.name)>>
+				<<if $worn.genitals.name is "chastity cage" and $parasite.penis.name is "urchin">>
+					<<if $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 2>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'tattered_urchin.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 5>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'torn_urchin.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 9>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'frayed_urchin.png'" @style="$worn.genitals.colourCustom">
+					<<else>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'full_urchin.png'" @style="$worn.genitals.colourCustom">
+					<</if>>
+				<<elseif $worn.genitals.name is "chastity cage" and $parasite.penis.name is "slime">>
+					<<if $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 2>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'tattered_slime.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 5>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'torn_slime.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 9>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'frayed_slime.png'" @style="$worn.genitals.colourCustom">
+					<<else>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'full_slime.png'" @style="$worn.genitals.colourCustom">
+					<</if>>
+				<<else>>
+					<<if $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 2>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'tattered.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 5>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'torn.png'" @style="$worn.genitals.colourCustom">
+					<<elseif $worn.genitals.integrity lte (clothingData('genitals',$worn.genitals,'integrity_max') / 10) * 9>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'frayed.png'" @style="$worn.genitals.colourCustom">
+					<<else>>
+						<img @class="'anim-idle-2f' + _genitalsColour" @src="'img/clothes/genitals/' + $worn.genitals.variable + '/' + 'full.png'" @style="$worn.genitals.colourCustom">
+					<</if>>
+				<</if>>
+			<</if>>
+		</div>
+	<</if>>
+<</widget>>
+
+<<widget "upperimg">>
+	<<if $worn.upper.name isnot "naked">>
+		<<baseClothingStrings "upper">>
+		<<switch $upperwetstage>>
+			<<case 1>><<set _upperWetness to " clothes-damp">>
+			<<case 2>><<set _upperWetness to " clothes-wet">>
+			<<case 3>><<set _upperWetness to " clothes-drenshed">>
+			<<default>><<set _upperWetness to "">>
+		<</switch>>
+		<<set _tucked = $upperTucked and !setup.clothes.upper[clothesIndex('upper', $worn.upper)].notuck and $worn.upper.outfitPrimary is undefined ? " tucked" : "">>
+		<<set $_hoodDown to $worn.upper.hoodposition is "down" ? "_down" : "">>
+		<<set $_altPosition to $worn.upper.altposition is "alt" ? "_alt" : "">>
+		<div @class="'clothes-div layer-upper' + _tucked + _upperWetness">
+			<<if $worn.upper.mainImage isnot 0>>
+				<<if $worn.upper.integrity lte (clothingData('upper',$worn.upper,'integrity_max') / 10) * 2>>
+					<<set _imgName to "tattered">>
+				<<elseif $worn.upper.integrity lte (clothingData('upper',$worn.upper,'integrity_max') / 10) * 5>>
+					<<set _imgName to "torn">>
+				<<elseif $worn.upper.integrity lte (clothingData('upper',$worn.upper,'integrity_max') / 10) * 9>>
+					<<set _imgName to "frayed">>
+				<<else>>
+					<<set _imgName to "full">>
+				<</if>>
+				<img @class="_class" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + _imgName + $_hoodDown + $_altPosition + '.png'" @style="_style">
+			<</if>>
+			<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].breast_img is 1>>
+				<img @class="_class" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + (Math.min(_breastSize, 5)) + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.upper.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + 'acc' + ($worn.upper.accessory_integrity_img ? '_' + _imgName : '') + $_hoodDown + $_altPosition + '.png'" @style="_styleAcc">
+			<</if>>
+			<<if $worn.upper.breast_acc_img is 1>>
+				<img @class="_classAcc" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + (Math.min(_breastSize, 5)) + '_acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<set _sleeveClass to {
+			"": _class,
+			"primary": _class,
+			"no": "",
+			"secondary": _classAcc
+		}[$worn.upper.sleeve_colour||""]>>
+		<<if _coverRight isnot undefined and setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+			<div @class="'clothes-div layer-rightarmclothes' + _upperWetness">
+				<<if _coverRight is true>>
+					<img @class="_sleeveClass" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + 'right_cover.png'" @style="_style">
+				<<else>>
+					<img @class="_sleeveClass" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + 'right.png'" @style="_style">
+				<</if>>
+			</div>
+		<</if>>
+		<<if _coverLeft isnot undefined and setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+			<div @class="'clothes-div layer-leftarmclothes' + _upperWetness">
+				<<if _coverLeft is true>>
+					<img @class="_sleeveClass" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + 'left_cover.png'" @style="_style">
+				<<else>>
+					<img @class="_sleeveClass" @src="'img/clothes/upper/' + $worn.upper.variable + '/' + 'left.png'" @style="_style">
+				<</if>>
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "overupperimg">>
+	<<if $worn.over_upper.name isnot "naked">>
+		<<baseClothingStrings "over_upper">>
+		<<if $worn.over_upper.integrity lte (clothingData('over_upper',$worn.over_upper,'integrity_max') / 10) * 2>>
+			<<set _imgName to "tattered">>
+		<<elseif $worn.over_upper.integrity lte (clothingData('over_upper',$worn.over_upper,'integrity_max') / 10) * 5>>
+			<<set _imgName to "torn">>
+		<<elseif $worn.over_upper.integrity lte (clothingData('over_upper',$worn.over_upper,'integrity_max') / 10) * 9>>
+			<<set _imgName to "frayed">>
+		<<else>>
+			<<set _imgName to "full">>
+		<</if>>
+		<div class="layer-over_upper">
+			<<if $worn.over_upper.mainImage isnot 0>>
+				<img @class="_class" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + _imgName + '.png'" @style="_style">
+			<</if>>
+			<<if setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].breast_img is 1>>
+				<img @class="_class" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + (Math.min(_breastSize, 5)) + '.png'" @style="_style">
+			<</if>>
+			<<if $worn.over_upper.accessory is 1>>
+				<img @class="_classAcc" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + 'acc.png'" @style="_styleAcc">
+			<</if>>
+		</div>
+		<<set _sleeveClass to {
+			"": _class,
+			"primary": _class,
+			"no": "",
+			"secondary": _classAcc
+		}[$worn.over_upper.sleeve_colour||""]>>
+		<<if _coverRight isnot undefined and setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].sleeve_img is 1>>
+			<div class="layer-rightarmoverclothes">
+				<<if _coverRight is true>>
+					<img @class="_sleeveClass" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + 'right_cover.png'" @style="_style">
+				<<else>>
+					<img @class="_sleeveClass" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + 'right.png'" @style="_style">
+				<</if>>
+			</div>
+		<</if>>
+		<<if _coverLeft isnot undefined and setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].sleeve_img is 1>>
+			<div class="layer-leftarmoverclothes">
+				<<if _coverLeft is true>>
+					<img @class="_sleeveClass" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + 'left_cover.png'" @style="_style">
+				<<else>>
+					<img @class="_sleeveClass" @src="'img/clothes/over_upper/' + $worn.over_upper.variable + '/' + 'left.png'" @style="_style">
+				<</if>>
+			</div>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "imgOpacity">>
+	<<if _underUpperOpacity is undefined>>
+		<<set _opacity to 1>>
+		<<if !$worn.under_upper.type.includes("swim")>>
+			<<if $underupperwetstage gte 3>>
+				<<set _opacity = Math.clamp(_opacity - 0.5, 0, 1)>>
+			<<elseif $underupperwetstage gte 2>>
+				<<set _opacity = Math.clamp(_opacity - 0.25, 0, 1)>>
+			<</if>>
+		<</if>>
+		<<set _underUpperOpacity to " opacity("+_opacity+")">>
+	<</if>>
+
+	<<if _underLowerOpacity is undefined>>
+		<<set _opacity to 1>>
+		<<if !$worn.under_lower.type.includes("swim")>>
+			<<if $underlowerwetstage gte 3>>
+				<<set _opacity = Math.clamp(_opacity - 0.5, 0, 1)>>
+			<<elseif $underlowerwetstage gte 2>>
+				<<set _opacity = Math.clamp(_opacity - 0.25, 0, 1)>>
+			<</if>>
+		<</if>>
+		<<set _underLowerOpacity to " opacity("+_opacity+")">>
+	<</if>>
+
+	<<if _lowerOpacity is undefined>>
+		<<set _opacity to 1>>
+		<<if !$worn.lower.type.includes("swim")>>
+			<<if $lowerwetstage gte 3>>
+				<<set _opacity = Math.clamp(_opacity - 0.5, 0, 1)>>
+			<<elseif $lowerwetstage gte 2>>
+				<<set _opacity = Math.clamp(_opacity - 0.25, 0, 1)>>
+			<</if>>
+		<</if>>
+		<<set _lowerOpacity to " opacity("+_opacity+")">>
+	<</if>>
+
+	<<if _upperOpacity is undefined>>
+		<<set _opacity to 1>>
+		<<if !$worn.upper.type.includes("swim")>>
+			<<if $upperwetstage gte 3>>
+				<<set _opacity = Math.clamp(_opacity - 0.5, 0, 1)>>
+			<<elseif $upperwetstage gte 2>>
+				<<set _opacity = Math.clamp(_opacity - 0.25, 0, 1)>>
+			<</if>>
+		<</if>>
+		<<set _upperOpacity to " opacity("+_opacity+")">>
+	<</if>>
+<</widget>>
+
+<<widget "player-base-body">>
+	<<set _filters to $skinColor.current>>
+	<<set _img to setup.tanImg.sidebar[($options.tanImgEnabled ? "t" : "f")]>>
+	<div id="img" @class="limitedColourContainerClasses() + ' noAnimations'">
+		<<charLight "118px" "187px" "limited">>
+		<<if $options.sidebarRenderer is 'canvas' or $options.sidebarRenderer is 'both'>> /* <img> renderer */
+			<<canvas-player-base-body>>
+		<</if>>
+		<<if $options.sidebarRenderer is 'img' or $options.sidebarRenderer is 'both'>> /* legacy renderer */
+		/*Prep for image checks*/
+		<<switch $player.perceived_breastsize>>
+		<<case 12>>
+			<<set _breastSize to 6>>
+		<<case 8 9 10 11>>
+			<<set _breastSize to 5>>
+		<<case 6 7>>
+			<<set _breastSize to 4>>
+		<<case 4 5>>
+			<<set _breastSize to 3>>
+		<<case 3>>
+			<<set _breastSize to 2>>
+		<<case 0 1 2>>
+			<<set _breastSize to 1>>
+		<</switch>>
+		<<if $player.penisExist>>
+			<<set _penisSize to Math.clamp($player.penissize, -2, 4)>>
+		<</if>>
+		<<set _disabled to ["disabled","hidden"]>>
+
+		<img class="layer-base" @src="_img.basenoarms" @style="'filter: '+_filters.body">
+		<img class="layer-basehead" @src="_img.basehead" @style="'filter: '+_filters.body">
+
+		<<if $options.tanImgEnabled>>
+			<<if $skinColor.tanValues[0] isnot $skinColor.tanValues[2]>>
+				<img class="layer-base" @src="_img.baseTanSwimshorts" @style="'filter: '+_filters.swimshorts">
+				<img class="layer-base" @src="_img.baseTanSwimsuit_UUpper" @style="'filter: '+_filters.swimsuitTop">
+				<img class="layer-base" @src="_img.baseTanSwimsuit_ULower" @style="'filter: '+_filters.swimsuitBottom">
+				<img class="layer-base" @src="_img.baseTanBikini_ULower" @style="'filter: '+_filters.bikiniBottom">
+			<</if>>
+		<</if>>
+
+		<img class="layer-base" @src="_img.leftarmidle" @style="'filter: '+_filters.body">
+
+		<<if !_disabled.includes($transformationParts.demon.wings)>>
+			<<if $exposed gte 2 and $dontHide is false and $transformationParts.traits.flaunting is "default">>
+				<img class="layer-tailPenisCover" @src="'img/transformations/demon/flauntwings/'+$transformationParts.demon.wings+'.png'">
+			<<else>>
+				<img class="layer-backhair" @src="'img/transformations/demon/wings/'+$transformationParts.demon.wings+'.png'">
+			<</if>>
+		<</if>>
+		<<if !_disabled.includes($transformationParts.angel.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/angel/rightwing/'+$transformationParts.angel.wings+'.png'">
+		<</if>>
+		<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/fallen/rightwing/'+$transformationParts.fallenAngel.wings+'.png'">
+		<</if>>
+		<<if !_disabled.includes($transformationParts.bird.wings)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/bird/rightwing/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+		/* 北极星模组 */
+		<<if !_disabled.includes($transformationParts.bee.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/bee/rightwing/'+$transformationParts.bee.wings+'.png'">
+		<</if>>
+		/* 北极星 */
+
+		<img class="layer-base" @src="_img.rightarmidle" @style="'filter: '+_filters.body">
+		<<if !_disabled.includes($transformationParts.demon.tail)>>
+			<<if $exposed gte 2 and $dontHide is false and $transformationParts.traits.flaunting is "default">>
+				<img class="layer-tailPenisCover" @src="'img/transformations/demon/flaunttail/'+$transformationParts.demon.tail+'.png'">
+			<<else>>
+				<img class="layer-backhair" @src="'img/transformations/demon/tail/'+$transformationParts.demon.tail+'.png'">
+			<</if>>
+		<</if>>
+		<<if !_disabled.includes($transformationParts.angel.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/angel/leftwing/'+$transformationParts.angel.wings+'.png'">
+		<</if>>
+		<<if !_disabled.includes($transformationParts.fallenAngel.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/fallen/leftwing/'+$transformationParts.fallenAngel.wings+'.png'">
+		<</if>>
+		<<if !_disabled.includes($transformationParts.bird.wings)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/bird/leftwing/'+$transformationParts.bird.wings+'.png'">
+		<</if>>
+		/* 北极星模组 */
+		<<if !_disabled.includes($transformationParts.bee.wings)>>
+			<img class="layer-backhair" @src="'img/transformations/bee/leftwing/'+$transformationParts.bee.wings+'.png'">
+		<</if>>
+		/* 北极星 */
+
+		<<if !_disabled.includes($transformationParts.fallenAngel.halo)>>
+			<img class="layer-over_head-back" @src="'img/transformations/fallen/backbrokenhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+			<img class="layer-halo-front" @src="'img/transformations/fallen/frontbrokenhalo/'+$transformationParts.fallenAngel.halo+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.angel.halo)>>
+			<img class="layer-over_head-back" @src="'img/transformations/angel/backhalo/'+$transformationParts.angel.halo+'.png'">
+			<img class="layer-halo-front" @src="'img/transformations/angel/fronthalo/'+$transformationParts.angel.halo+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.wolf.tail)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/wolf/tail/'+$transformationParts.wolf.tail+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.cat.tail)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/cat/tail/'+$transformationParts.cat.tail+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.wolf.ears)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/wolf/ears/'+$transformationParts.wolf.ears+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.wolf.pits)>>
+			<img class="layer-hirsute colour-hair" @src="'img/transformations/hirsute/pits/'+$transformationParts.wolf.pits+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.wolf.pubes)>>
+			<img class="layer-hirsute colour-hair" @src="'img/transformations/hirsute/pubes/'+$transformationParts.wolf.pubes+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.wolf.cheeks)>>
+			<img class="layer-hirsute colour-hair" @src="'img/transformations/wolf/cheeks/'+$transformationParts.wolf.cheeks+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.cat.ears)>>
+			<img class="layer-backhair colour-hair" @src="'img/transformations/cat/ears/'+$transformationParts.cat.ears+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.demon.horns)>>
+			<img class="layer-horns" @src="'img/transformations/demon/horns/'+$transformationParts.demon.horns+'.png'">
+			/*<img class="layer-face colour-hair" src="img/transformations/demon/hair_overlay.png">*/
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.cow.horns)>>
+			<img class="layer-horns" @src="'img/transformations/cow/horns/'+$transformationParts.cow.horns+'.png'">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.cow.ears)>>
+			<img class="layer-horns" @src="'img/transformations/cow/ears/'+$transformationParts.cow.ears+'.png'">
+			<img class="layer-face" src="img/transformations/cow/tag.png">
+		<</if>>
+
+		<<if !_disabled.includes($transformationParts.cow.tail)>>
+			<img class="layer-backhair" @src="'img/transformations/cow/tail/'+$transformationParts.cow.tail+'.png'">
+		<</if>>
+
+		<<if $hairposition is "front">>
+			<img class="layer-hairforwards colour-hair" @src="'img/hair/sides/' + $hairtype + '/' + $hairlengthstage + '.png'">
+		<<else>>
+			<img class="layer-backhair colour-hair" @src="'img/hair/sides/' + $hairtype + '/' + $hairlengthstage + '.png'">
+		<</if>>
+		<img class="layer-fronthair colour-hair" @src="'img/hair/fringe/' + $fringetype + '/' + $fringelengthstage + '.png'">
+
+	<<if $hairlengthstage is "thighs">>
+		<<switch $hairtype>>
+			<<case "default">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/default/thighs.png">
+			<<case "loose">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/loose/thighs.png">
+			<<case "curl">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/curl/thighs.png">
+			<<case "defined curl">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/defined curl/thighs.png">
+			<<case "neat">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/neat/thighs.png">
+			<<case "dreads">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/dreads/thighs.png">
+			<<default>>
+		<</switch>>
+	<<elseif $hairlengthstage is "feet">>
+		<<switch $hairtype>>
+			<<case "default">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/default/feet.png">
+			<<case "loose">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/loose/feet.png">
+			<<case "straight">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/straight/feet.png">
+			<<case "curl">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/curl/feet.png">
+			<<case "defined curl">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/defined curl/feet.png">
+			<<case "neat">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/neat/feet.png">
+			<<case "dreads">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/dreads/feet.png">
+			<<case "ruffled">>
+				<img class="layer-backhair colour-hair anim-idle-2f" src="img/hair/back/ruffled/feet.png">
+			<<default>>
+		<</switch>>
+	<</if>>
+
+
+		<<if $options.neverNudeMenus>> /* If player doesn't want to see nude character in menus, render the default breifs or bra + panties on their body */
+			<<if $player.gender_appearance neq "m" or $player.perceived_breastsize gte 3>>
+				<div class="clothes-div layer-under_upper">
+					<img class="clothes-pale-white" src="img/clothes/under_upper/plainbra/full.png" style="">
+					<img class="clothes-pale-white" src="img/clothes/under_upper/plainbra/2.png" style="">
+				</div>
+			<</if>>
+			<<if $player.gender_appearance is "m">>
+				<div class="clothes-div layer-under_lower">
+					<img class="clothes-pale-white" src="img/clothes/under_lower/briefs/full.png" style="">
+					<img class="" src="img/clothes/under_lower/briefs/acc.png" style="">
+				</div>
+			<<else>>
+				<div class="clothes-div layer-under_lower">
+					<img class="clothes-pale-white" src="img/clothes/under_lower/plainpanties/full.png" style="">
+				</div>
+			<</if>>
+		<<else>>
+			<img class="layer-breasts" @src="_img['breasts'+ _breastSize]" @style="'filter: '+_filters.breasts">
+			<<if $options.tanImgEnabled and $skinColor.tanValues[0] isnot $skinColor.tanValues[1]>>
+				<img class="layer-breasts" @src="_img.baseTanBikini_UUpper + _breastSize + '.png'" @style="'filter: '+_filters.bikiniTop">
+			<</if>>
+
+			<<if $pbdisable is "f">>
+				<<set _pbColour = ($makeup.pbcolour != 0 ? $makeup.pbcolour : $naturalhaircolour).replace(/ /g, '-')>>
+				<div @class="'layer-pbhair pbhair-' + _pbColour">
+				<<if $pblevel gt 1>>
+					<img class="anim-idle-2f" @src="'img/hair/phair/pb' + $pblevel + '.png'">
+				<</if>>
+				<<if $pbstrip gte 1>>
+					<img class="anim-idle-2f" @src="'img/hair/phair/pbstrip' + $pbstrip + '.png'">
+				<</if>>
+				</div>
+				<div @class="'layer-pbhairballs pbhair-' + _pbColour">
+				<<if $player.ballsExist is true and $pblevelballs gt 1 and !$worn.genitals.name.startsWith("chastity")>>
+					<img class="anim-idle-2f" @src="'img/hair/phair/balls/' + _penisSize + '_pb' + $pblevelballs + '.png'">
+				<</if>>
+				</div>
+			<</if>>
+
+			<!-- P image insert here - This is not compatible with female pdmod, requires additional editing - add new layer in base.css-->
+			<<if _penisSize isnot undefined>>
+				<<if $player.virginity.penile is true>>
+					<img class="layer-penis" @src="_img['penis_virgin' + ($player.ballsExist ? '':'noballs') + _penisSize]" @style="'filter: '+_filters.penis">
+				<<else>>
+					<img class="layer-penis" @src="_img['penis' + ($player.ballsExist ? '':'noballs') + _penisSize]" @style="'filter: '+_filters.penis">
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<if playerHasStrapon()>>
+			<<set _class to 'anim-idle-2f' + ($worn.under_lower.colour_sidebar and typeof($worn.under_lower.colour) == "string" ? ' clothes-'+$worn.under_lower.colour.replace(/ /g, '-'):'')>>
+			<<set _style to ($worn.under_lower.colourCustom ? $worn.under_lower.colourCustom : $worn.under_lower.colour)>>
+			<div @class="'clothes-div layer-under_lower'">
+				<img @class="_class" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/full.png'" @style="_style">
+				<<if $worn.under_lower.accessory is 1>>
+					<<set _classAcc to 'anim-idle-2f ' + ($worn.under_lower.accessory_colour_sidebar and typeof($worn.under_lower.accessory_colour) == "string" ? ' clothes-'+$worn.under_lower.accessory_colour.replace(/ /g, '-') :'')>>
+					<<set _styleAcc to ($worn.under_lower.accessory_colourCustom ? $worn.under_lower.accessory_colourCustom :'')>>
+					<img @class="_classAcc" @src="'img/clothes/under_lower/' + $worn.under_lower.variable + '/' + 'acc.png'" @style="_styleAcc">
+				<</if>>
+			</div>
+		<</if>>
+
+		<<faceimg 1>>
+		<</if>> /* $options.sidebarRenderer is img */
+	</div>
+<</widget>>

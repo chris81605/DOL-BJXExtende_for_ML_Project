@@ -1,0 +1,100 @@
+:: School Detention Paddle 3 []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcspank>><<npcidlegenitals>>
+	<<set $spankobject to "paddle">>
+	<<set $detentionAudienceComments to []>>
+	<<set $enemyanger += 200>>
+<</if>>
+
+<<if $mouthaction is "apologise" and !$detentionAudienceComments.includes("apologise")>>
+	<<set _audienceComment to "apologise">><<set $detentionAudienceComments.pushUnique("apologise")>>
+<<elseif $orgasmdown gte 1 and !$detentionAudienceComments.includes("orgasm")>>
+	<<set _audienceComment to "orgasm">><<set $detentionAudienceComments.pushUnique("orgasm")>>
+<<elseif $mouthaction is "moan" and !$detentionAudienceComments.includes("moan")>>
+	<<set _audienceComment to "moan">><<set $detentionAudienceComments.pushUnique("moan")>>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+<<if _audienceComment>>
+	<<switch _audienceComment>>
+		<<case "apologise">>
+			<<print $paddle_other_student_A>>以嘲讽的语气模仿你刚才的道歉，另外两人大笑起来。<<set $stress += 12>><<combattrauma 5>><<status -10>><<gstress>><<gtrauma>><<lcool>>
+		<<case "orgasm">>
+			学生们在一旁看着你在沉浸高潮的兴奋中不住颤抖的淫荡模样，惊得忍不住张大了嘴巴："<<pher>>真的只是因为被打屁股就达到高潮了吗？"<<print $paddle_other_student_B>>已经完全傻眼了。
+			<br>
+			"该死的变态。"<<print $paddle_other_student_C>>窃笑着。
+			<br>
+			他们继续一边举起手机一边戏弄你，拍下了你的色情照片。礼顿满意又得意地笑着。<<combattrauma 5>><<famesex 12 "pic">>
+		<<case "moan">>
+			那位<<print $paddle_other_student_A>>轻轻推了一下<<print $paddle_other_student_C>>，咧嘴笑着说："听着！<<pShes>>对这个感到兴奋！"他们全部大笑起来。<<combattrauma 3>><<gtrauma>>
+	<</switch>>
+<<elseif $schoolfameblackmail isnot undefined and random(1, 10) is 1>>
+	礼顿把身子靠近我并用小到其他学生听不到的声音说："我们都知道你对这个感到兴奋，淫乱的<<girl>>。"<<He>>猛地拍疼你，以此强调<<his>>的言论。<<violence 5>><<combattrauma 10>><<ggstress>><<ggtrauma>><<ggpain>>
+<<elseif $enemyanger lte 0>>
+	礼顿退了一步，用手拍了拍<<his>>的戒尺。"我想你已经得到了教训，"<<he>>得意地笑着说道。
+<<else>>
+	<<switch random(1, 12)>>
+		<<case 1>>
+			那位<<print $paddle_other_student_B>>指着你然后对着<<print $paddle_other_student_C>>轻声说着什么。他们都咯咯地笑了起来。<<combattrauma 3>><<gtrauma>>
+		<<case 2>>
+			"更有力地去打<<phim>>，我想要看到<<phim>>尖叫！"那位<<print $paddle_other_student_A>>这般叫喊，其他人热切地点头同意。礼顿得意地笑着同意，把戒尺重重拍下来。<<violence 3>><<gstress>><<gtrauma>><<gpain>>
+		<<case 3>>
+			三个学生举起手机，笑着拍照。<<combattrauma 3>><<fameexhibitionism 6 "pic">><<gtrauma>>
+		<<case 4>>
+			礼顿透过<<his>>的手臂凝视着其他学生。<<He>>得意地笑着说："也许我结束后该让他们教训你一下。希望那样会让你得到教训。"<<set $stress += 18>><<ggstress>>
+		<<case 5>>
+			礼顿没有留情，用一连串狠厉的板子教训了你的<<bottom>>。在<<he>>以刺人的一板子收尾的时候，其他学生欢呼了起来。<<violence 5>><<combattrauma 5>><<ggstress>><<ggtrauma>><<ggpain>>
+		<<case 6>>
+			<<if $worn.under_lower.exposed gte 1>>
+				每被打一下，你的屁股就会变得越来越刺痛，皮肤慢慢变成一种鲜艳欲滴的红色。<<violence 4>><<ggpain>>
+			<<else>>
+				礼顿一边用戒尺打着你的<<bottom>>一边笑着说道。"你不该感谢我还让你穿着衣服吗。"<<violence 2>><<gpain>>
+			<</if>>
+		<<case 7>>
+			<<if $delinquency gte 800>>
+				"这就是像你这样的小崽子应得的。"礼顿冷笑着，用戒尺狠狠地打下去。<<violence 4>><<gpain>>
+			<<elseif $physique gte $physiquesize * 0.75>>
+				礼顿笑着，享受着侮辱你的过程。"现在倒没那么坚强了，不是吗？"<<combattrauma 4>><<gtrauma>>
+			<<else>>
+				礼顿在准备下一次打过来时说道："从现在起，你会成为一个好<<girl>>的，对吗？"<<combattrauma 2>><<gtrauma>>
+			<</if>>
+		<<case 8>>
+			<<if $pain gte 100>>
+				礼顿冷笑道："你再怎么哭都是没用的，这影响不到你要承担的后果。"<<combattrauma 2>><<gtrauma>>
+			<<elseif $masochism_level gte 3>>
+				在这种痛苦的感觉下，你不禁愉快地扭动着身体。礼顿见到这一幕嘲笑道："你这个肮脏的小妓女，你喜欢这个，不是吗？"<<combattrauma 2>><<gtrauma>>
+			<<elseif $masochism_level gte 1>>
+				疼痛让你兴奋起来。当礼顿再次把戒尺放下时，你的
+				<<if $player.penisExist and $player.vaginaExist>>
+					<<penis>>高高耸起、<<pussy>>完全湿润
+				<<elseif $player.penisExist>>
+					<<penis>>僵硬地顶在桌面上
+				<<else>>
+					体液慢慢渗到了桌面，形成了一小滩湖泊
+				<</if>>
+				。<<violence 2>><<gpain>><<garousal>>
+			<<else>>
+				当礼顿给你的<<bottom>>来了一记痛苦的重击时，你吓了一跳。<<violence 2>><<gpain>>
+			<</if>>
+		<<case 9 10 11 12>>
+			礼顿在学生们的注视下继续惩罚你。
+	<</switch>>
+<</if>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $enemyanger lte 0>>
+	<span id="next"><<link [[继续|School Detention Paddle 3 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Detention Paddle 3]]>><</link>></span><<nexttext>>
+<</if>>

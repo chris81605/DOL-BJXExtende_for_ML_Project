@@ -1,0 +1,33 @@
+:: Toilets Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<switch $phase>>
+		<<case 3>>
+			<<npcoral>>
+		<<case 4>>
+			<<npc_attempt_sex>>
+			<<set $NPCList[1].penis to "mouthentrance">><<submission 5>><<set $mouthstate to "entrance">><<set $mouthuse to "penis">><<set $mouthtarget to 1>>
+			当<<person1>><<person>>靠近你时，<<person2>><<person>>将<<his>>的阴茎压在你的嘴唇上。
+		<<case 5>>
+			<<npc_attempt_sex>>
+		<<default>>
+	<</switch>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Toilets Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Toilets Sex]]>><</link>></span><<nexttext>>
+<</if>>

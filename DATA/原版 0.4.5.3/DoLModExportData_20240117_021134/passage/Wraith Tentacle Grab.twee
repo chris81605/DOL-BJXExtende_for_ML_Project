@@ -1,0 +1,25 @@
+:: Wraith Tentacle Grab []
+<<effects>>
+<<physiquedifficulty 5000 16000 true>>
+你抓住触手试着让它平静下来。<<deviancy1>>
+<<if $physiqueSuccess>>
+	它冲向你，<span class="green">速度不快，</span>在你意识到它在做什么之前，它把粘液喷到了你的手上。
+	<<bodyliquid "leftarm" "goo">><<bodyliquid "rightarm" "goo">>
+	<br><br>
+	<<if $location is "sewers">>
+		<<water>>
+		当那苍白的触须疲惫不堪时，它缩了回去，这时又有几只触须从水渠里钻出来，缠住你的四肢和腰部，把你拉入水中。它们很容易承受你的重量。
+	<<else>>
+		筋疲力尽的苍白触须缩回去，同时又有几只触须从检修井里钻出来，缠绕着你的四肢和腰部，把你拖到地下。它们很容易承受你的重量。
+	<</if>>
+	<br><br>
+	<<link [[继续|Wraith Tentacle Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你失败了，<span class="red">它钻到了你的腿下，把你绊倒了。</span>
+	<<gpain>><<pain 5>><<gtrauma>><<gstress>><<stress 6>><<trauma 6>>
+	<br><br>
+	恐惧感越来越强烈，你无法摆脱这样的想法：无论什么东西在追捕你，祂都知道你现在在哪里。
+	<<set $wraith.hunt++>>
+	<<exitWraith>>
+<</if>>

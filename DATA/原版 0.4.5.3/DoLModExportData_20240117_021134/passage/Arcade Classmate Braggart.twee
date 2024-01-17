@@ -1,0 +1,23 @@
+:: Arcade Classmate Braggart []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+<<if $phase is 1>>
+	你双手不离街机，后撤了半步，然后以一个流畅的姿态向那个<<persons>>的肚子上踹了一脚，把<<He>>踢翻在地。看到这一场景，你身边的旁观者都笑了起来。<<status 1>><<gcool>>
+<<elseif $phase is 2>>
+	你起身给那个<<person>>让出位子，虽然你还没打完这一句。"很好。别再浪费时间了。"<<he>>把币投了进去。
+<<elseif $phase is 3>>
+	你没有理会那个<<person>>，而是专注于尽力击败屏幕中出现的敌人。
+	<br><br>
+	一小群人聚集了起来，不停地嘲笑着你，分散了你的注意力。
+	<<rng>>
+	<<if $rng gte 140 - Math.floor(currentSkillValue("handskill") / 10)>>
+		你轻松赢下了最后的挑战，得到了人群的热烈欢呼。在你离开的同时，那个<<person>>一直盯着屏幕。<<status 2>><<ggcool>>
+	<<elseif $rng gte 100 - Math.floor(currentSkillValue("handskill") / 10)>>
+		你总算取得了最终阶段的胜利，赢得了人群的热烈欢呼。
+		<br><br>
+		"你不过是走了运罢了。"<<He>>在你离开时对你耳语。
+	<<else>>
+		你在最终阶段输了，人群中响起了一阵欢呼，其中就属<<person>>笑得最大声。你默默离开了。<<status -5>><<lcool>>
+	<</if>>
+<</if>>
+<br><br>
+<<arcadeEndLink>>

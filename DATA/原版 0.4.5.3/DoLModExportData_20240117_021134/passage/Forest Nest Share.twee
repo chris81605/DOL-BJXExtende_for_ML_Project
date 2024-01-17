@@ -1,0 +1,27 @@
+:: Forest Nest Share []
+<<effects>>
+<<if $forest_nest.eggs lte 0>>
+	你拿起一个破碎的鸟蛋，<<if $fox gte 6>>急切地舔起蛋黄<<else>>犹豫地把蛋清和蛋黄倒进嘴里。情况没有你想象的那么糟<</if>>。
+<<else>>
+	你拿起一个鸟蛋，<<if $fox gte 6>>急切地把它掰开倒进嘴里<<else>>犹豫地把它掰开倒进嘴里。情况没有你想象的那么糟<</if>>。
+<</if>>
+<br><br>
+
+<<if $monster is 1>>
+	你花了一些时间与<<beasttype>>交谈，对方似乎很高兴终于有一个友好的人可以说说话。
+<<else>>
+	你花了一些时间抚摸<<beasttype>>，它似乎很喜欢被关注。
+<</if>>
+<br><br>
+
+<<if $forest_nest.eggs gte 2>>
+	<<set $forest_nest.eggs to Math.floor($forest_nest.eggs / 2)>>
+	<<bHe>>让你拿走剩下的鸡蛋的一半。<<tending_bird_eggs $forest_nest.eggs>>
+<<else>>
+	没有蛋可以带走了。
+<</if>>
+你告别了它。
+<br><br>
+
+<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,27 @@
+:: Maths Lesson Daydream []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $trauma gte (($traumamax / 10) * 7)>>
+	你保持沉默，担心一个错误的举动会让整个班级嘲笑你。
+	<<if $whitneymaths is "seat">>惠特尼似乎没有注意到你，因为<<nnpc_he "Whitney">>看着学生们在院子里闲逛。<</if>>
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	你专注于自己的想法，试图远离不断蔓延的焦虑。
+	<<if $whitneymaths is "seat">>比起听瑞沃的课，惠特尼似乎对看鸟更感兴趣。<</if>>
+<<else>>
+	你并没有集中注意力上课，而是懒洋洋地盯着窗外，思考着放学后要做什么。
+	<<if $whitneymaths is "seat">>惠特尼也有同样的想法。<</if>>
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+
+
+<<if $phase is 1>>
+	<<mathsLessonEnd>>
+<<else>>
+	<<mathsLessonEvent 0.5>>
+<</if>>

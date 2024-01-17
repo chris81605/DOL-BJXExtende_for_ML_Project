@@ -1,0 +1,266 @@
+:: Wolf Relax []
+<<effects>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你向黑狼走去。
+	<<if $wolfgirl gte 6 and $wolfpackferocity gte 15 and $wolfpackharmony gte 15 and Time.dayState isnot "night" and ($daily.blackWolfHeatEvent or 0) - Time.hour lte -3 and ((playerHeatMinArousal() and (V.player.vaginaExist or canBeMPregnant()) and $NPCName[$NPCNameList.indexOf("Black Wolf")].penis isnot "none") or 
+	(playerRutMinArousal() and $NPCName[$NPCNameList.indexOf("Black Wolf")].vagina isnot "none"))>>
+		<<set $daily.blackWolfHeatEvent to Time.hour>>
+		<<set _blackWolfHeatEvent to true>>
+		<<bHe>>注意到你之后坐了起来，好奇地看着你。
+		<<if $monster is 1>>
+			"你需要帮助吗，<<ppackbrother>>？"<<bHe>>笑了，然后朝你的方向嗅了嗅。"我很乐意帮忙。"
+		<<else>>
+			<<bHis>>朝你的方向嗅了嗅后，它的尾巴开始摇晃起来。
+		<</if>>
+
+	<<elseif C.npc["Black Wolf"].pregnancy.pcAwareOf is true or (playerIsPregnant() and playerAwareTheyArePregnant()) and knowsAboutPregnancy("pc","Black Wolf")>>
+
+		<<bwpcinteraction>>
+
+	<<elseif $wolfpackferocity gte 20 and $wolfpackharmony gte 20>>
+		当<<bHe>>注意到你过去之后便坐了起来。<<bHis>>的尾巴开始左右摇晃起来。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"有什么能帮到<<ppackbrother>>的吗？"
+				<<case 2>>
+					"很高兴看到<<ppackbrother>>平安无事。"
+				<<default>>
+					"<<pPackbrother>>请做准备。今晚狩猎。"
+			<</switch>>
+		<</if>>
+	<<elseif $wolfpackferocity gte 10 and $wolfpackharmony gte 10>>
+		当你接近时，<<bHe>>转过来看着你。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"<<pPackbrother>>，你还好吗？"
+				<<case 2>>
+					"我来这休息。安静。"
+				<<default>>
+					"族群曾经过得更好，族群也曾经过得更糟。"
+			<</switch>>
+		<<else>>
+			<<bHe>>用<<bhis>>的鼻子轻推你的胳膊。
+		<</if>>
+	<<elseif $wolfpackferocity gte 15>>
+		<<bHe>>嚼着一块你无法辨认的大骨头，但这至少不是人类的。<<bHe>>对你低吼，但在嗅了你并认出你的气味后平静下来。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"<<ppackbrother>>想要什么？"
+				<<case 2>>
+					"<<pPackbrother>>应该在下面。和幼崽们玩。"
+				<<default>>
+					"现在不想被打扰。"
+			<</switch>>
+		<</if>>
+	<<elseif $wolfpackharmony gte 15>>
+		<<bHe>>正迷迷糊糊地打盹，但被你的突然到来唤醒。<<bHe>>打了个哈欠。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"族群安静了。现在可以睡觉了。"
+				<<case 2>>
+					"幼崽……可爱，且吵闹。"
+				<<default>>
+					"洞穴有时太吵。常来这边小憩。"
+			<</switch>>
+		<</if>>
+	<<elseif $wolfpackferocity gte 1 and $wolfpackharmony gte 1>>
+		当你走近时，<<bHis>>的耳朵抖动了一下，但<<bhe>>并没有转头表示注意到你了。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"别带其他族群来这。"
+				<<case 2>>
+					"坐，<<ppackbrother>>。"
+				<<default>>
+					"族群向森林长嚎。有时森林也以长嚎回应。"
+			<</switch>>
+		<</if>>
+	<<else>>
+		<<bHe>>低头轻轻地呜咽着。<<bHe>>转了一下头，发现了你，但似乎并不在乎你的存在。
+		<<if $monster is 1>>
+			<<switch random(1,3)>>
+				<<case 1>>
+					"别管我。"
+				<<case 2>>
+					"有时候想知道这会持续多久。"
+				<<default>>
+					"需要来这边。为了……独处。"
+			<</switch>>
+		<</if>>
+	<</if>>
+	<<if !_blackWolfHeatEvent>>
+		<br><br>
+		你坐在<<bhim>>旁边。即使你们都坐着，<<if $monster is 1>>你的头也只够到<<bhis>>的胸部<<else>><<bhe>>也可以俯视你<</if>>。
+	<</if>>
+<<else>>
+	你坐在黑狼身边休息。
+	<<switch random(1,8)>>
+		<<case 1>>
+			你听到下面某处有比较幼小的<<wolf_cave_plural>>的声音。黑狼慈爱地看着他们在河边打闹。
+			<<if $monster is 1>>
+				"看到年轻的孩子们玩耍真让人心旷神怡，"<<bhe>>用一种令人惊讶的温柔声音说。<<if getPregnancyObject("Black Wolf").totalBirthEvents gte 1>>"很高兴现在有自己的窝了。"<<else>>"希望有一天能有自己的后代。"<</if>>
+			<<else>>
+				你可以看到<<bhis>>的身体已经不那么紧张了。
+			<</if>>
+		<<case 2>>
+			<<bHe>>站得很高，俯瞰着洞穴和周围地区。之后<<bHe>>很快安定下来。
+			<<if $monster is 1>>
+				"族群在这里很安全，"<<bhe>>说道。"外来者敬而远之。"
+			<<else>>
+				<<bHe>>发出一声满意的咕噜声，为洞穴的安全感到满足。
+			<</if>>
+		<<case 3 4>>
+			<<if $syndromeeden is 1 and $rng gte 51>>
+				<<bHe>>眺望着伊甸的小屋所在的方向。<<bHis>>的耳朵紧贴着<<bhis>>的头。
+				<<if $monster is 1>>
+					"前几天听到非常大的噪音，"<<bhe>>说道。"可怕的人类造物。"
+				<<else>>
+					你考虑了一下枪响对狼来说有多大，不禁皱了皱眉。难怪<<bhe>>会担心。
+				<</if>>
+			<<else>>
+				你伸手去摸<<bhis>>的皮毛，试图安抚<<bhim>>。
+				<<if $monster is 1>>
+					"<<ppackbrother>>难道认为我是被驯化的吗？"<<bhe>>问道，躲开了你的触碰。
+				<<else>>
+					<<bHe>>气呼呼地走开，就好像被冒犯了一样。
+				<</if>>
+			<</if>>
+		<<case 5>>
+			<<if $monster is 1>>
+				<<bHe>>摩挲着<<bhis>>腿上的一个部位。"<<pPackbrother>>应该避免独自狩猎，"<<bhe>>说道。"孤狼是孤独的傻瓜。脱离族群，最终受伤，甚至更糟。"
+			<<else>>
+				<<bHe>>在舔它腿上的伤口。这个伤口看起来相当老旧，但似乎不太困扰<<bhim>>。
+			<</if>>
+		<<case 6>>
+			湖的方向有什么东西吸引了<<bhis>>的注意。<<bHe>>歪着<<bhis>>的脑袋一副困惑的样子。
+			<<if $monster is 1>>
+				"<<pPackbrother>>如果要去湖边，一定要小心，"<<bhe>>警告。"族群无论如何都会避开这个地方。"
+			<<else>>
+				<<bHe>>似乎很紧张。
+			<</if>>
+		<<case 7>>
+			<<bHe>>开始嗅着你，把<<bhis>>的鼻子埋在你的头发里然后在上面吹气。
+			<<if $monster is 1>>
+				"永远不会忘记<<ppackbrothers>>气味，"<<bhe>>说道。"如果有必要，可以为了<<ppackbrother>>追踪整个森林。"
+			<<else>>
+				<<bHe>>现在可能已经记住了你的气味。
+			<</if>>
+		<<case 8>>
+			<<if $wolfgirl gte 4 and $transformationParts.wolf.ears isnot "hidden">>
+				<<if random(1,2) is 1>>
+					<<bHe>>嗅了嗅你的脸，然后亲昵地蹭你的脖子。
+					<<if $monster is 1>>
+						"<<pPackbrothers>>皮毛今天看起来很漂亮，"<<bhe>>说道。
+					<<else>>
+						<<bHe>>现在可能已经记住了你的气味。
+					<</if>>
+				<<else>>
+					<<bHe>>羡慕你的狼耳朵。<<bHe>>轻轻地咬着它们。
+					<<if $monster is 1>>
+						"<<pPackbrother>>已经适应了和族群一起生活，"<<bhe>>说道。
+					<</if>>
+				<</if>>
+			<<elseif $cat gte 4 and $transformationParts.cat.ears isnot "hidden">>
+				<<bHe>>瞪着你的猫耳朵。
+				<<if $monster is 1>>
+					"<<pPackbrother>>迷失了<<pher>>的方向，"<<bhe>>摇着<<bhis>>的头说，"<<pPackbrother>>应该和狼群待一段时间。"
+				<<else>>
+					<<bHe>>对你咆哮着，但很快又阻止了<<bhimself>>停了下来。
+				<</if>>
+			<<elseif $fox gte 4 and $transformationParts.fox.ears isnot "hidden">>
+				<<bHe>>瞪着你的狐狸耳朵。
+				<<if $monster is 1>>
+					"<<pPackbrother>>看起来很麻烦，"<<bhe>>摇着<<bhis>>的头说道，"应该和族群待上一段时间的。"
+				<<else>>
+					<<bHe>>对你咆哮着，但很快又阻止了<<bhimself>>停了下来。
+				<</if>>
+			<<elseif $harpy gte 4 and $transformationParts.bird.plumage isnot "hidden">>
+				<<bHe>>着迷地盯着你的羽毛。
+				<<if $monster is 1>>
+					<<bHe>>靠近你，手沿着你的翅膀抚摸。"从没见过这种东西，"<<bhe>>说道，"至少在这片森林里。"
+				<<else>>
+					<<bHe>>靠近你，嗅着你的翅膀。<<bHe>>可能没有这么近地看过翅膀。
+				<</if>>
+			<<elseif $cow gte 4 and $transformationParts.cow.ears isnot "hidden">>
+				<<bHe>>盯着你的牛耳朵，歪着<<bhis>>的头。
+				<<if $monster is 1>>
+					"<<pPackbrothers>>的耳朵不能竖起来，”<<bhe>>说道。“远距离听力差。希望<<pPackbrothers>>还能听到族群的嚎叫。"
+				<<else>>
+					<<bHe>>靠过去嗅它们，
+					<<if $transformationParts.cow.horns isnot "hidden" or $demon gte 2 and $transformationParts.demon.horns isnot "hidden">>
+						但是<<bhis>>的鼻子碰到了你的角。<<bHe>>边恫吓着边后退。
+					<<else>>
+						骚痒的感觉让你咯咯发笑。
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $monster is 1>>
+					<<bHe>>用手抚摸你的头发。"<<ppackbrother>>是在战斗中失去了耳朵吗？我表示哀悼。"你咯咯地笑着轻拍脑袋的侧面，露出你的人类耳朵。<<bHe>>似乎搞不明白，气呼呼地看向别处。
+				<<else>>
+					<<bHe>>靠过来闻你的脸。
+				<</if>>
+			<</if>>
+	<</switch>>
+<</if>>
+<br><br>
+
+<<if $wolfevent is 1 and ($wolfstate is "cave" and !["finished","ongoing"].includes($huntstate) and ["dusk", "night"].includes(Time.dayState))>>
+	<<set $huntstate to "ongoing">><<set $wolfpackpoisoned to 0>>
+	<<if npcBellySize("Black Wolf") lte 15>>
+		<<set $wolfstate to "hunt">>
+		黑狼站起来嚎叫起来。狼群的其他成员也加入进来。
+		<<if $monster is 1>>
+			"我们将要去狩猎。做好准备。"
+		<<else>>
+			它们去狩猎了。
+		<</if>>
+	<<else>>
+		<<set $blackWolfNotHunting to true>>
+		族群在树林中奔跑时开始嚎叫和咆哮。你坐到黑狼边上的岩石上，看着<<bhe>>轻触着<<bhis>>怀孕的肚子。
+		<<if $monster is 1>>
+			<br><br>
+			<<bHe>>叹了口气，躺下看着族群。
+		<</if>>
+	<</if>>
+	<<endevent>>
+	<br><br>
+
+	<<link [[跟着一起去|Wolf Cave Hunt]]>><</link>>
+	<br>
+	<<link [[看它们离开|Wolf Cave Hunt Leave]]>><</link>>
+	<br>
+<<elseif Time.dayState is "night">>
+	黑狼站了起来。
+	<<if $monster is 1>>
+		"天黑了，"<<bhe>>说道，"该去睡了。"<<bHe>>走开了。
+	<<else>>
+		<<bHe>>看着夜空，然后走开了。
+	<</if>>
+	<br><br>
+	<<link [[继续|Wolf Cave Clearing]]>><<endevent>><</link>>
+<<else>>
+	<<if _blackWolfHeatEvent and $deviancy gte 75>>
+		<<if playerAwareTheyAreInHeat() and $NPCList[0].penis isnot "none" and (($player.vaginaExist and !playerChastity("vagina")) or (canBeMPregnant() and !playerChastity("anus")))>>
+			<<link [[展示你的背后|Wolf Cave Black Wolf Before Mate]]>><</link>><<deviant5>><<wolfgirl>><<heat>>
+			<br>
+		<</if>>
+		<<if playerRutMinArousal() and $NPCList[0].vagina isnot "none" and !playerChastity("penis")>>
+			<<link [[顽皮地咬|Wolf Cave Black Wolf Before Mate]]>><<set $phase to 1>><</link>><<deviant5>><<wolfgirl>><<rut>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if playerIsPregnant() and playerAwareTheyArePregnant() and playerBellySize() gte 7 and !knowsAboutPregnancy("pc","Black Wolf")>>
+		<<link [[露出你的肚子 (0:10)|Player Presents Pregnancy To Black Wolf]]>><<pass 10>><</link>>
+		<br>
+	<</if>>
+	<<link [[休息 (0:15)|Wolf Relax]]>><<pass 15>><<stress -3>><<tiredness -6>><<npcincr "Black Wolf" love 1>><<if $rng gte 71>><<transform wolf 1>><</if>><</link>><<lstress>><<ltiredness>>
+	<br>
+	<<link [[离开|Wolf Cave Clearing]]>><<endevent>><</link>>
+	<br>
+<</if>>

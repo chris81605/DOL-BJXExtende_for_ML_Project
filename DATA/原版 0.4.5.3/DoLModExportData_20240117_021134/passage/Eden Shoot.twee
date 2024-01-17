@@ -1,0 +1,37 @@
+:: Eden Shoot []
+<<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $eden_shoot is 1>>
+	<<set $eden_shoot to 2>>
+
+	伊甸点上油灯，带你走出小屋。<<he>>示意你在门廊下等<<he>>，然后消失在小屋后面。没过多久，<<He>>再次出现，带着一个鹿形靶子，把它安置在几十步外的一块荒地上。
+	<br><br>
+
+	在让你碰枪之前，<<He>>先告诉了你如何操作枪。你大致已经掌握了要点。<<He>>把它交给你，你对准目标。"不是那样的，"<<he>>说着，悄悄地靠近你的身后。<<He>>双臂绕过你的肩膀，握住你的双手以更好地演示。"像这样拿着。"
+	<br><br>
+
+	<<edenicon "target">><<link [[集中|Eden Shoot First Focus]]>><</link>>
+	<br>
+	<<ind>><<link [[用你的屁股磨蹭伊甸的胯部|Eden Shoot Rub]]>><<npcincr Eden lust 5>><<arousal 600 "bottom">><</link>><<glust>><<garousal>>
+	<br>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	在伊甸的指导下，你在室外练习射击。<<He>>通过实操来进行教学。"不是那样的，"<<he>>一边说一边悄悄地靠近你的身后。<<his>>的双臂绕过你的肩膀，握住你的双手以更好地演示。"像这样拿着。"
+	<br><br>
+
+	<<edenicon "target">><<link [[集中|Eden Shoot Focus]]>><</link>>
+	<br>
+	<<ind>><<link [[用你的屁股磨蹭伊甸的胯部|Eden Shoot Rub]]>><<npcincr Eden lust 5>><<arousal 600 "bottom">><</link>><<glust>><<garousal>>
+	<br>
+<<else>>
+	<<set $stat_shoot += random(20, 40)>>
+	在伊甸的指导下，你在室外练习射击。在你结束射击之前，鹿形的靶子上添了好几个弹孔。
+	<br><br>
+	<<if Time.hour isnot 0>>
+		<<edenicon "target">><<link [[继续练习 (0:30)|Eden Shoot]]>><<pass 30>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[进去|Eden Cabin]]>><<endevent>><</link>>
+<</if>>

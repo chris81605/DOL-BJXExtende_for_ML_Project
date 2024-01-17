@@ -1,0 +1,53 @@
+:: Balloon Purchase []
+<<effects>>
+	<<if $balloonStand.owner is "angry" and ["hot drink","cold drink"].includes($phase)>>
+		<<person>>注视着你，良久，叹了口气。“好吧，”<<he>>语带无奈。“听着，我为失去冷静而道歉。在承诺帮助之后却开始卖我自己的饮料确实是挺混账的，但公平地说，在你承诺让我摆脱困境之后伤害了我，我也不喜欢生气。我们现在互不相欠，对吧？”
+		<br><br>
+		<<He>>说得有道理。你点头赞同。“我们互不相欠。”
+		<<set $balloonStand.owner to "appeased">>
+	<<else>>
+		<<set _sir to $player.gender_appearance is 'f' ? '女士' : '先生'>>
+		“<<print $balloonStand.owner is "angry" ? "行，好吧，" : either("当然了，", "这就来，_sir，", "必须的，", "来了，", "马上来！")>>”<<person>>说道。
+	<</if>>
+	<br><br>
+	<<switch $phase>>
+		<<case "hot drink" "cold drink">>
+			<<set $daily.ex.balloonDrink to ($daily.ex.balloonDrink or 0) + 1>>
+			<<set _prop to $phase is "cold drink" ? "lemonade" : "mug">>
+			<<wearProp _prop>>
+
+			<<set _drink to $phase is "hot drink" ?
+			"一杯热气腾腾的<<seasonal_beverage>>。纸杯温暖了你的双手" :
+			"一杯冰<<seasonal_beverage>>。塑料杯在你手里捂得发热。">>
+			<<He>>给你倒了_drink。
+
+			<<if $daily.ex.balloonDrink is 2>>
+				“口渴了，嗯？”<<he>>说。“<<print playerBellyVisible() ? "看来你得给肚子里的小家伙补充点水分" : "很高兴看到你能摄取足够的水分">>。”<<He>>对你微笑。
+			<<elseif $daily.ex.balloonDrink is 3>>
+				“我得为其他顾客留些，所以之后我不得不停止供应给你。”<<He>>给你一个歉意的微笑。
+			<</if>>
+
+		<<case "popcorn">>
+			<<He>>舀了一些刚爆好的爆米花。当<<he>>递给你时，袋子还是温热的。
+			<<set $daily.ex.popcorn to ($daily.ex.popcorn or 0) + 1>>
+			<<wearProp "popcorn">>
+
+			<<if $daily.ex.popcorn is 2 and $balloonStand.owner isnot "angry">>
+				“你一定饿了，”<<he>>说。<<print playerBellyVisible() ? `“我猜你现在吃饭不仅仅只为了你自己。”<<He>>面带微笑，爱怜地看了一眼你的孕肚。` : `“家里是不是吃的东西不太够啊？”<<he>>的眉头瞬间拧了拧，但很快又摇了摇头。`>>
+			<<elseif $daily.ex.popcorn is 3>>
+				“我得为其他顾客留些，所以之后我不得不停止供应给你。”<<print $balloonStand.owner is "angry" ? "<<His>>语气生硬地说" : "<<He>>给你一个歉意的微笑">>。
+			<</if>>
+	<</switch>>
+	"<<print $balloonStand.owner is "angry" ? "给你。快滚。" : either("很高兴见到你，亲爱的。", "祝你今天余下的时光过得愉快。", "感谢你的惠顾。", "请享用！")>>"
+	<br><br>
+	<<switch $phase>>
+		<<case "hot drink" "cold drink">>
+			<<link [[喝一口 (0:15)|Balloon Consume]]>><<stress -9>><<pass 15>><</link>><<lstress>><br>
+		<<case "popcorn">>
+			<<link [[吃爆米花 (0:15)|Balloon Consume]]>><<set $phase to $balloonStand.robin.status is "help needed" ? "ask_eat" : "popcorn">><<trauma -3>><</link>><<ltrauma>><br>
+			<<if $balloonStand.robin.status is "help needed">>
+				<<link [[等下再享用|Balloon Consume]]>><<set $phase to "ask">> <<set $popcorn += 1>><<handheldon>><</link>><br>
+			<<else>>
+				<<link [[等下再享用|Beach]]>><<set $eventskip to 1>><<set $popcorn += 1>><<endevent>><</link>>
+			<</if>>
+	<</switch>>

@@ -1,0 +1,70 @@
+:: Pirate Rope []
+<<set $outside to 1>><<effects>>
+<<bind>>
+你被绑缚并悬挂在了海盗船的桅杆上。
+<<if Time.dayState is "night">>
+    <<if $weather is "rain">>
+        冰冷的雨滴让你颤抖。
+    <<else>>
+        冰凉的晚风让你颤抖。
+    <</if>>
+<<else>>
+    <<if $exposed gte 1>>
+        船员们一边偷看你的<<nudity>>一边工作着。
+    <<else>>
+        船员们在你的附近继续工作，偶尔会投来一丝好奇或愉悦的目光。
+    <</if>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+    <<cleareventpool>>
+    <<addinlineevent "pirate_rope_day_1" 1>>
+        <<generateRole 0 0 "pirate">><<person1>>
+        一个<<person>>拿着<<his>>的手机大摇大摆地走过来。<<He>>在旁边蹲下，将相机对准<<him>>和你，摆好姿势准备自拍。
+        <br><br>
+
+        <<link [[对着镜头微笑|Pirate Rope Smile]]>><</link>>
+        <br>
+        <<link [[遮住脸|Pirate Rope Look]]>><</link>>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "pirate_rope_day_2" 1>>
+        <<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<person1>>
+        一位<<person>>跟<<person2>><<person>>靠拢过来。“我们要来操你，完事后就把你丢在这里。听起来不错吧？”
+        <br><br>
+        
+        <<link [[同意|Pirate Rope Rape Agree]]>><</link>>
+        <br>
+        <<link [[拒绝|Pirate Rope Rape Refuse]]>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+        <br>
+    <</addinlineevent>>
+
+    <<addinlineevent "pirate_rope_day_3" 1>>
+        <<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<generateRole 2 0 "pirate">><<person1>>
+        一群海盗，<<person>>、<<person2>><<person>>和<<person3>><<person>>坐在不远处的栏杆上，对你进行辱骂。
+        <br><br>
+
+        <<link [[大声骂他们无赖|Pirate Rope Slackers]]>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+        <br>
+        <<link [[转移自己的注意|Pirate Rope Focus]]>><<stress -6>><</link>><<lstress>>
+        <br>
+    <</addinlineevent>>
+    <<runeventpool>>
+<<else>>
+    <<if Time.dayState is "night">>
+        <span class="blue">晚上这个时候，周围并没有多少人。</span>
+        <br>
+    <<else>>
+        <<link [[辱骂船员 (1:00)|Pirate Rope Insult]]>><<def 1>><<pass 60>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+        <br>
+        <<link [[求助|Pirate Rope Call]]>><<sub 1>><<pirate_status -3>><</link>><<llrespect>>
+        <br>
+    <</if>>
+    <<link [[挣扎 (1:00)|Pirate Rope Struggle]]>><<pass 60>><</link>><<difficulty 15>>
+    <br>
+<</if>>
+
+<<set $eventskip to 0>>

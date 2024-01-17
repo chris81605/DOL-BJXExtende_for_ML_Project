@@ -1,0 +1,34 @@
+:: Museum Attack 2 []
+<<effects>>
+
+<<endevent>>
+<<generate1>><<person1>>
+你跑了出去，来到了牛津街，正好看见戴着兜帽的人跑过一个转角。你紧追不舍，
+
+
+
+<<if $athleticsSuccess>>
+	<<set $outside to 1>><<set $location to "alley">><<set $bus to "industrial">>
+	也跑过转角，<span class="green">看见<<him>>躲进了一个小巷里。</span>你跟着<<him>>穿过一片迷宫一般的工业区建筑，把<<him>>堵在了一面砖墙前。
+	<br><br>
+
+	<<He>>转过身站定，把铃铛举在身前。<<He>>摇动铃铛，但不是像你和温特一样为了听个响，而是有规律地摇动着。
+	<br><br>
+
+	<<link [[继续|Museum Attack 3]]>><</link>>
+	<br>
+<<else>>
+	<<museumAntiqueStatus "antiquebell" "stolen">><<world_corruption "hard" 2>>
+	但等你追到拐角处时，<span class="red">那人早就跑没了影。</span>
+	<br><br>
+	<<endevent>><<npc Winter>><<person1>>
+	你回到了博物馆。温特已经站起来了，正倚靠在一个底座上。
+	<br><br>
+	"不准再这样做傻事了，"<<he>>说道。"警察会制裁犯人的。"<<He>>注意到了皮革地图上的口子，叹了口气。
+	<br><br>
+
+	<<link [[帮温特整理 (0:30)|Museum Attack Help]]>><<pass 30>><<npcincr Winter love 1>><<npcincr Winter dom -1>><</link>><<ldom>><<glove>>
+	<br>
+	<<link [[离开|Oxford Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

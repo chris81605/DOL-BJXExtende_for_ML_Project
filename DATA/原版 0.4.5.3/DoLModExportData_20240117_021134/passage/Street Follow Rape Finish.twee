@@ -1,0 +1,47 @@
+:: Street Follow Rape Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Street Follow Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，畏惧着。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Street Follow Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Street Follow Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Street Follow Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<else>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃进巷道深处。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		<<beasttype>>留让你躺在坚硬的水泥地上。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		这只<<beastsplural>>觉得你所带来的麻烦远超于你的价值，于是它便转身遁入巷道深处。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		<<beastsplural>>将筋疲力尽的你留在坚硬的水泥地上瑟瑟发抖。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		<<beastsplural>>将筋疲力尽的你留在坚硬的水泥地上瑟瑟发抖。
+	<</if>>
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

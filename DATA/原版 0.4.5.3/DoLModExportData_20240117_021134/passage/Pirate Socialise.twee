@@ -1,0 +1,79 @@
+:: Pirate Socialise []
+<<effects>>
+
+你坐下来和海盗们交谈。
+<br><br>
+<<if $rng gte 81>>
+    他们谈论着自己的家庭。他们中大部分和你来自同一个镇子，但另一些人则来自遥远的海外。
+    <br><br>
+<<elseif $rng gte 61>>
+    他们似乎对泽菲尔既害怕又崇拜。
+    <br><br>
+<<elseif $rng gte 41>>
+    他们对着自己的性经历吹牛。
+    <<if $fame.sex gte 1000>>
+        他们在谈话间一直打量着你，这些人似乎听说过你的名气。<<grespect>><<pirate_status 1>>
+    <</if>>
+    <br><br>
+<<elseif $rng gte 21>>
+    他们谈论了先前的一次袭击，讨论着那些赃物能卖出多少钱。
+    <br><br>
+<<else>>
+    他们交换着彼此在水中目睹的奇怪生物的故事。
+    <<if $awareness lt 300>>
+        <<gawareness>><<awareness 1>>
+    <</if>>
+    <br><br>
+<</if>>
+<<set $rng to random(1, 100)>>
+<<if $rng gte 81>>
+	<<generateRole 0 0 "pirate">><<person1>>
+    一个<<person>>将手放在了你的大腿上，<<his>>的手离你的<<genitals>>很近。
+	<br><br>
+	<<link [[假装没有注意到|Pirate Socialise Pretend]]>><</link>>
+    <br>
+    <<link [[挪开身体|Pirate Socialise Move]]>><</link>>
+    <br>
+    <<link [[主动回应|Pirate Socialise Return]]>><</link>><<promiscuous1>>
+    <br>
+<<elseif $rng gte 61>>
+    <<generateRole 0 0 "pirate">><<person1>>
+    一个<<person>>抓住了你的大腿，把你掀翻在地，压在了你身上。<<He>>靠上前企图吻你。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+    <br><br>
+
+    <<if $promiscuity gte 15>>
+        <<link [[吻|Pirate Socialise Kiss]]>><</link>><<promiscuous2>><<kissvirginitywarning>>
+        <br>
+    <</if>>
+    <<link [[别过脸|Pirate Socialise Turn]]>><</link>>
+    <br>
+    <<link [[揍一拳|Pirate Socialise Punch]]>><<def 1>><<stress 6>><<trauma -6>><<pirate_status 1>><</link>><<gstress>><<grespect>><<ltrauma>>
+    <br>
+<<elseif $rng gte 41>>
+    <<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<person1>>
+    一个<<person>>和<<person2>><<person>>坐在你左右两侧，紧紧靠着你。你能感觉到他们的呼吸洒在你的脖子两边，你颤抖起来。
+    <br><br>
+
+    <<link [[挪开身体|Pirate Socialise Pair Move]]>><</link>>
+    <br>
+    <<link [[原地不动|Pirate Socialise Pair Stay]]>><<arousal 1200>><</link>><<ggarousal>>
+    <br>
+<<elseif $rng gte 21>>
+    <<generateRole 0 0 "pirate">><<person1>>
+    一个<<person>>试图和你调情，但<<his>>的口齿太过不清，根本听不出在说什么。最终，<<He>>倒在地上，身边留下一个空的马克杯。
+    <br><br>
+
+    <<link [[继续|Pirate Cabin]]>><<endevent>><</link>>
+    <br>
+<<else>>
+    <<generateRole 0 0 "pirate">><<person1>>
+    你注意到一个<<person>>在桌子另一侧盯着你看。<<He>>没有和任何人说话，当你回看过去时，<<him>>也没有任何反应。
+    <br><br>
+
+    <<link [[盯人比赛|Pirate Socialise Contest]]>><</link>><<willpowerdifficulty 1 500>>
+    <br>
+    <<link [["坐到" + $NPCList[0].pronouns.him + "旁边"|Pirate Socialise Sit]]>><</link>>
+    <br>
+    <<link [[看向一边|Pirate Socialise Look]]>><</link>>
+    <br>
+<</if>>

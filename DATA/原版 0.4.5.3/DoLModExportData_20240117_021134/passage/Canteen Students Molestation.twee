@@ -1,0 +1,29 @@
+:: Canteen Students Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	<<enableSchoolRescue "Whitney" "delinquency">>
+	<<set $timer to 20>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没人过来帮你，看来你的风评不怎么样。</span>">>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue gte 2>>
+	<span id="next"><<link [[继续|Whitney Rescue]]>><<set $whitneyRescueExit to "canteen">><</link>></span><<nexttext>>
+<<elseif _combatend or ($timer lte 0)>>
+	<span id="next"><<link [[继续|Canteen Students Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Canteen Students Molestation]]>><</link>></span><<nexttext>>
+<</if>>

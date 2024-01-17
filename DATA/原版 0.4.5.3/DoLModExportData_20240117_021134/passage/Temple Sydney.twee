@@ -1,0 +1,39 @@
+:: Temple Sydney []
+<<set $outside to 0>><<set $location to "temple">><<sydneySchedule>><<temple_effects>><<effects>>
+<<npc "Sydney">><<person1>>
+<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 100 and $NPCName[$NPCNameList.indexOf("Sydney")].lust gte 10 and $sydneyromance isnot 1 and !$sydneyFriendZoned>>
+	当看见你时，悉尼的眼睛顿时亮了起来，<<He>>看起来有些紧张，面色潮红。<<set _sydneyRomanceConfront to true>>
+<<elseif $sydneyChastityRemoveIntro>>
+	你在悉尼身旁坐下，<<He>>似乎有些紧张。
+<<elseif $phase is 1>>
+	你与悉尼亲昵地坐在长凳上。<<He>>看了看你，露出一个温柔的微笑，然后便继续<<his>>的祷告。
+<<else>>
+	悉尼的双眼紧闭，无声地祷告着。
+<</if>>
+<<if !$sydneySeen.includes("initiate") and $temple_rank is "initiate">>
+	<<set $sydneySeen.pushUnique("initiate")>>
+	"<<nnpc_Brother "Jordan">>约旦告诉了我这个喜讯，恭喜……见习教徒。"
+<<elseif $weekly.trialFailed>>
+	<<if $weekly.trialFailed is "Sydney">>
+		"对于试验，我很抱歉，"<<he>>毫无征兆地开口，脸上露出一丝苦涩的微笑。"下次不会这样了，对吗？"
+	<<else>>
+		"我也没通过试炼，"<<he>>毫无征兆地开口，脸上露出一丝苦涩的微笑。
+		<<switch $weekly.trialFailed>>
+			<<case "strip">>
+				"在我的第一次测试中，我也拒绝脱衣……就像你一样。"
+			<<case "cold">>
+				<<if $sydneyromance is 1>>
+					"下次我会试着让你暖和起来。"
+				<<else>>
+					"内心的炙热，让我一路走到了现在——就像约旦为我们倒下的热巧克力一样。"
+				<</if>>
+			<<case "whisper">>
+				"是风吗？我知道那并不好受。"
+			<<default>>
+				"永远是火焰，让我忍受不住。"
+		<</switch>>
+	<</if>>
+	<<run delete $weekly.trialFailed>>
+<</if>>
+<br><br>
+<<sydneyOptions>>

@@ -1,0 +1,33 @@
+:: Avery Helicopter []
+<<effects>><<set $phase to 0>>
+
+你上了直升机，在艾弗里身边坐下。<<He>>越过你关上了舱门，只留你和<<him>>两人独处，但你还是能隔着前面的玻璃板看到飞行员的脑袋。直升机起飞时你有点头晕。艾弗里露出了一丝狡黠的微笑。
+<br><br>
+
+"我正要去多瑙河街附近见一个重要客户，所以我得到了使用公司直升机的许可。这次会面很重要，不过我还是想抽点时间给你。希望你能理解我的心意。"
+<br><br>
+
+你望向窗外，下方的小镇越来越小，远处是无垠的天空。<br><br>
+
+<<if !playerBellyVisible()>>
+	艾弗里往玻璃杯中倒酒，然后把其中一只倒满的玻璃杯递给你，那酒杯晶莹剔透，看起来既脆弱又昂贵。
+	<br><br>
+
+	"喝点儿香槟？"
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+		<br>
+	<<else>>
+		<<link [[喝|Avery Helicopter Drink]]>><<alcohol 120>><<drugs 180>><<npcincr Avery rage -2>><<npcincr Avery love 1>><</link>><<galcohol>><<glove>><<larage>>
+		<br>
+	<</if>>
+
+	<<link [[拒绝|Avery Helicopter Refuse]]>><<npcincr Avery rage 5>><</link>><<garage>>
+
+<<else>>
+
+	<<link [[继续|Avery Helicopter 2]]>><</link>>
+
+<</if>>

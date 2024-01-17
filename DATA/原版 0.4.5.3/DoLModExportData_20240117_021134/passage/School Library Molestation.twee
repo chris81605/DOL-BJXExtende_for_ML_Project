@@ -1,0 +1,26 @@
+:: School Library Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>><<hand_gag 0 left>>
+	<<enableSchoolRescue "delinquency">>
+	<<set $timer to 20>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没有人来帮助你，大概是因为你名声不好。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|School Library Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Library Molestation]]>><</link>></span><<nexttext>>
+<</if>>

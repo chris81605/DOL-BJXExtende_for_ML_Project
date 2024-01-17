@@ -1,0 +1,103 @@
+:: Beach Volleyball Play []
+<<location "beach">><<effects>>
+学生们很高兴有第六个球员，特别是那个<<person1>><<person>>。
+<br><br>
+<<physique 3>>
+<<set $eventcheck to random(1, 10000)>>
+<<if $eventcheck gte (9900 - ($allure))>>
+	<<if $rng gte 51>><<molested>>
+		<<if $worn.lower.type.includes("naked")>>
+			你太过专注于对方的队伍，完全没有注意到会有内鬼。一双手抓住了你$worn.under_lower.cn_name_cap的边缘。
+		<<else>>
+			你太专注于对方的队伍，你没有注意到你自己的队伍偷袭了你。一双手抓住了你$worn.lower.cn_name_cap的边缘。
+		<</if>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set isnot $worn.upper.set>>
+			在你做出反应之前，<<person1>><<person>>已经把它完全拉到了你的膝盖上，
+		<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set is $worn.upper.set>>
+			在你做出反应之前，<<person1>><<person>>已经把它拉到了一边，
+		<<else>>
+			在你做出反应之前，<<person1>><<person>>已经把它举起来了，
+		<</if>>
+		<<if $worn.under_lower.name is "naked" or $worn.lower.name is "naked">>
+			<<if $uncomfortable.nude is false>>
+				你的<<genitals>>瞬间一览无遗。人群哄笑着做着下流的手势，你却感到内心一阵躁动。
+				<br><br>
+				你整理衣服，比你需要的时间长了一点。
+				<<garousal>><<arousal 300>>
+			<<else>>
+				你的<<genitals>>瞬间一览无遗。人群哄笑着做着下流的手势，你的脸涨得通红，努力保卫着自己的尊严。
+				<<garousal>><<gstress>><<gtrauma>><<arousal 300>><<stress 3>><<trauma 3>>
+			<</if>>
+		<<else>>
+			<<if $uncomfortable.underwear is false>>
+				你的$worn.under_lower.cn_name_cap暴露了。两支队伍都爆发出笑声，包括你。只是<<if $worn.under_lower.plural is 0>>一件<</if>>$worn.under_lower.cn_name_cap，你不觉得尴尬。
+				<<gcool>><<status 5>><<garousal>><<gstress>>
+			<<else>>
+				你的$worn.under_lower.cn_name_cap暴露了。双方都爆发出笑声，你赶紧保护自己的尊严。
+				<<lcool>><<status -10>><<garousal>><<gstress>><<gtrauma>><<arousal 100>><<stress 1>><<trauma 1>>
+			<</if>>
+		<</if>>
+		<br><br>
+	<<else>>
+		<!-- if RNG is lower -->
+		<<if $topless is 1>>
+			在比赛进行到一半的时候，球撞上了你裸露的胸部，把你撞倒在地。
+			<<if $player.breastsize gte 2>>
+				<br>
+				你的<<breasts>>由于裸露的皮肤撞击而有点疼。
+				<<pain 1>><<gpain>>
+				<br>
+			<</if>>
+			这很尴尬，但你很快就重新振作了起来。
+			<br><br>
+		<<elseif !$worn.over_upper.type.includes("naked")>>
+			在比赛进行到一半的时候，球撞上了你的胸部，把你撞倒在地。
+			<<set $worn.over_upper.integrity -= 1>><<set $worn.upper.integrity -= 1>><<integritycheck>><<exposure>>
+			<<if $player.gender_appearance is "m" or !$worn.over_upper.type.includes("naked") or !$worn.upper.type.includes("naked") or !$worn.under_upper.type.includes("naked")>>
+				这很尴尬，但你很快就重新振作了起来。
+				<br><br>
+			<<else>>
+				<<if $uncomfortable.nude is false>>
+					更糟的是，你的衣服破烂不堪，使得胸部一览无遗。人群哄笑着做着下流的手势，你却感到内心一阵躁动。
+					<<garousal>><<arousal 300>><<towelup>>
+				<<else>>
+					更糟的是，你的衣服破烂不堪，使得胸部一览无遗。人群哄笑着做着下流的手势，你的脸涨得通红，努力用一条毛巾保卫着自己的尊严。
+					<<garousal>><<gstress>><<gtrauma>><<arousal 300>><<stress 3>><<trauma 3>><<towelup>>
+				<</if>>
+			<</if>>
+		<<else>>
+			在比赛进行到一半的时候，球撞上了你的胸部，把你撞倒在地。
+			<<set $worn.upper.integrity -= 1>><<set $worn.under_upper.integrity -= 1>><<integritycheck>><<exposure>>
+			<<if $player.gender_appearance is "m" or !$worn.upper.type.includes("naked") or !$worn.under_upper.type.includes("naked")>>
+				这很尴尬，但你很快就重新振作了起来。
+				<br><br>
+			<<else>>
+				<<if $uncomfortable.nude is false>>
+					更糟的是，你的衣服破烂不堪，使得胸部一览无遗。人群哄笑着做着下流的手势，你却感到内心一阵躁动。
+					<<garousal>><<arousal 300>><<towelup>>
+				<<else>>
+					更糟的是，你的衣服破烂不堪，使得胸部一览无遗。人群哄笑着做着下流的手势，你的脸涨得通红，努力用一条毛巾保卫着自己的尊严。
+					<<garousal>><<gstress>><<gtrauma>><<arousal 300>><<stress 3>><<trauma 3>><<towelup>>
+				<</if>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<!-- end of RNG -->
+	<</if>>
+<<else>>
+	你玩得很愉快。
+	<br><br>
+<</if>>
+<<if Time.dayState is "night">>
+	太阳已经完全落山了，要继续玩下去就很困难了。<<person1>><<person>>告诉你他们要去参加一个海滩派对，并邀请你一起去。
+	<br><br>
+	<<link [[接受 (0:10)|Beach Party Chat]]>><<pass 10>><<endevent>><<lstress>><<status 1>><</link>><<gcool>><<lstress>>
+	<br>
+	<<link [[找借口说再见|Beach]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	<<link [[玩更多 (0:30)|Beach Volleyball Play]]>><<pass 30>><<stress -6>><<tiredness 6>><<status 1>><<athletics 3>><</link>><<gcool>><<gathletics>><<lstress>><<gtiredness>>
+	<br>
+	<<link [[停止|Beach]]>><<endevent>><</link>>
+	<br><br>
+<</if>>

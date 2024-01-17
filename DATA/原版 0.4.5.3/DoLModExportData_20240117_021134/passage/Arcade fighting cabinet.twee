@@ -1,0 +1,80 @@
+:: Arcade fighting cabinet []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+<<if maleChance() gte random(1,100)>>
+	<<set _characterGender to "m">>
+<<else>>
+	<<set _characterGender to "f">>
+<</if>>
+<<switch $arcadeCharacter>>
+	<<case "villainous">>
+		你选择那个身着大衣，面相歹毒的角色。<<print (_characterGender is "m"?"他":"她")>>眼露凶光。
+	<<case "spiky hair">>
+		你选择那个留着刺猬头的角色。<<print (_characterGender is "m"?"他":"她")>>举起拳头，向你凹了个造型。
+	<<case "scantily-clad">>
+		你选择那个衣着暴露的角色。<<print (_characterGender is "m"?"他":"她")>>炫耀着自己已经不剩下什么想象空间的身体，朝你抛了个媚眼。
+	<<case "muscular">>
+		你选择了那个一身筋肉的家伙。<<print (_characterGender is "m"?"他":"她")>>曲着手臂，向你展示<<print (_characterGender is "m"?"他":"她")>>的肱二头肌。
+<</switch>>
+<<rng>>
+<<if $rng gte 50>>
+	"2号玩家"位置上空无一人，你只好与电脑对战。
+	<br><br>
+	<<set _chance to random(1, 100)>>
+	<<set _chance += Math.floor(currentSkillValue("handskill") / 25)>>
+	<<if _chance gte 90>>
+		你轻易取胜，以一套高难度的连招结束了战斗。<<stress -4>><<lstress>>
+	<<elseif _chance gte 75>>
+		你勉强取胜，靠着脸滚键盘打败了电脑。
+	<<else>>
+		你被轻易击败。你怀疑电脑在作弊。
+	<</if>>
+	<br><br>
+	<<arcadeEndLink>>
+<<else>>
+	<<generatey1>><<person1>>
+	一个<<person>>走到了"2号玩家"位置上。
+	<<set _chance to random(1, 100)>>
+	<<if _chance gte 90>>
+		你不费吹灰之力就击败了<<person>>。
+		<br><br>
+		<<switch random(1,3)>>
+			<<case 1>><<He>>沮丧地举起双手，离开了机器。
+			<<case 2>><<He>>愤怒地指责你在游戏中作弊，然后气呼呼地离开了机器。
+			<<case 3>><<He>>说你打得不错，然后去另一台机子了。<<stress -4>><<lstress>>
+		<</switch>>
+		<br><br>
+		<<arcadeEndLink>>
+	<<elseif _chance gte 75>>
+		你和<<person>>难分上下，比赛一直进行到最后一局。
+		<br><br>
+		<<switch random(1,3)>>
+			<<case 1>><<He>>重重地拍了一下机器，然后冲了出去。
+			<<case 2>><<He>>骂骂咧咧地走开了。
+			<<case 3>><<He>>笑着称赞你的立回。<<stress -2>><<lstress>>
+		<</switch>>
+		<br><br>
+		<<arcadeEndLink>>
+	<<elseif _chance gte 25>>
+		你开始与<<person>>对战，但很快就落入下风。你在想是否有什么方法能扳回局面。
+		<br><br>
+		<<if ($worn.under_upper.name isnot "naked" or !$worn.under_upper.type.includes("naked")) and $exhibitionism gte 15>>
+			<<link [[挑逗|Arcade fighting cabinet Rigging]]>><<set $phase to 1>><</link>><<exhibitionist2>>
+			<br>
+		<<elseif $exhibitionism gte 55>>
+			<<link [[挑逗|Arcade fighting cabinet Rigging]]>><<set $phase to 2>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+		<<link [[妨碍操作|Arcade fighting cabinet Rigging]]>><<set $phase to 3>><</link>>
+		<br>
+		<<link [[公平对战|Arcade fighting cabinet Rigging]]>><<set $phase to 4>><</link>>
+	<<else>>
+		你被<<person>>无情碾压，根本不是<<him>>的对手。
+		<<switch random(1,3)>>
+			<<case 1>><<He>>一言不发地走开了。
+			<<case 2>><<He>>讥讽地评论了一句，然后大摇大摆地离开了机器。
+			<<case 3>><<He>>优雅地接受了自己的胜利，并教了你几招有用的技巧。
+		<</switch>>
+		<br><br>
+		<<arcadeEndLink>>
+	<</if>>
+<</if>>

@@ -1,0 +1,34 @@
+:: Farm Breakfast Tea Receive []
+<<effects>>
+
+你坐在电视机前，艾利克斯走进厨房。你听到水沸腾的声音。一分钟后，艾利克斯拿着两个冒着热气的杯子回来了。
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Alex")].lust gte 20>>
+	"还有什么我能服务的吗？"<<he>>弯腰把杯子放在你旁边的小桌子上。
+	<br><br>
+
+	<<link [[亲吻|Farm Breakfast Kiss]]>><<npcincr Alex love 1>><<npcincr Alex lust 5>><</link>><<kissvirginitywarning>><<glove>><<glust>>
+	<br>
+	<<if $promiscuity gte 55 and !playerChastity("hidden") and (!playerChastity("cage") or $player.vaginaExist)>>
+		<<link [[把艾利克斯的头压在你的下面|Farm Breakfast Receive Oral]]>><<set $sexstart to 1>><<set $daily.alex.breakfastSex to true>><</link>>
+		<br>
+	<</if>>
+	<<link [[普通地喝茶|Farm Breakfast Just]]>><</link>>
+	<br>
+<<else>>
+	茶的香气令人放松。
+	<br><br>
+
+	<<if Time.hour gte 6>>
+		<<He>>看了一眼墙上的钟。"该工作了。回头见，"<<he>>边说边站起来朝门口走去。
+		<br><br>
+
+		<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+	<<farm_cottage_tv_options>>
+	<<link [[站起来|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>
+<</if>>

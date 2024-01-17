@@ -1,0 +1,157 @@
+:: Pet Shop []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+你在宠物店里<<if Time.dayState is "night">>大多数动物现在都在睡觉<<else>>一小部分小动物转头看向你<</if>>。它们看起来很可爱，但你不确定贝利会不会让你养它们。
+<br><br>
+<<if $daily.seenPets isnot true and Time.dayState isnot "night" and $fame.bestiality gte 200 and $bestialitydisable is "f" and ($monsterchance lt 100 or $monsterhallucinations is "t")>>
+	<<set $daily.seenPets to true>><<generate1>><<person1>>
+	<<if $fame.bestiality gte 600>>
+		当你走进商店时，一个<<person>>拦住了你。<<Hes>>戴着铭牌，穿着这里的制服。<<His>>的语气礼貌而坚定。
+		"这些动物由我负责，我不希望你以任何方式接触它们。如果你不是来买东西的，就请离开。"<<stress 12>><<ggstress>>
+		<br><br>
+	<<elseif $fame.bestiality gte 400>>
+		其中一个职工跟随着你的脚步。你无法躲避<<his>>警惕的目光。<<stress 6>><<gstress>>
+		<br><br>
+	<<else>>
+		每次你接近动物时，店主都会密切关注你。你不知道为什么。
+		<br><br>
+	<</if>>
+	<<endevent>>
+<<elseif $daily.seenPets isnot true and Time.dayState isnot "night">>
+	<<set $daily.seenPets to true>><<stress -10>>
+	你在店里四处看了看，还抚摸了一些猫和狗。
+	<<lstress>>
+	<br><br>
+<</if>>
+<<if Time.dayState is "night" and Time.hour isnot $closinghour and !$weekly.theft.petShop>>
+	<<shopicon "register">><<link [[检查收银机|Pet Shop Register]]>><</link>>
+	<br>
+<</if>>
+<<if $pregnancyStats.wolfToysUnlocked and Time.dayState isnot "night">>
+	<<if $player.inventory.childrenToys is undefined>>
+		<<set $player.inventory.childrenToys to []>>
+	<</if>>
+	<<if !$storedChildrenToys>><<set $storedChildrenToys to {}>><</if>>
+	<<toySelection>>
+	<<petshopicon "chew">> <<link [[狼用磨牙玩具|Pet Shop Item]]>><<set $selectedToy to clone(_toySelection["chewToy"])>><</link>>
+	<br>
+<</if>>
+<<if $farm_stage gte 7 and Time.dayState isnot "night">>
+	<<petshopicon "treat">><<link [[狗粮 (每份£1)|Pet Shop Treats]]>><</link>>
+	<br>
+<</if>>
+<<if $pregnancyStats.parasiteDoctorEvents gte 2 and Time.dayState isnot "night">>
+	<<set _motherStatus to $sexStats.anus.pregnancy.motherStatus + $sexStats.vagina.pregnancy.motherStatus>>
+	<<set _container to $container.home>>
+	<br>
+	<<if $boughtItem isnot undefined>>
+		<<generate1>><<person1>>你告诉店主你想买下<span class="gold"><<print $boughtItem.replace("Small Automatic ","小型自动").replace("Large Automatic ","大型自动").replace("Automatic ","自动").replace("Feeder","喂食器").replace("Small Automatic ","小型自动").replace("Small ","小").replace("Large ","大").replace("Huge ","超大").replace("Fish Tank","鱼缸").replace("Standard ","标准").replace("Exotic ","异国风情的").replace("Decorations","装饰")>>。</span> "当然，<<if $player.gender_appearance is "m">>先生<<else>>女士<</if>>，"<<he>>笑着说道，"我会尽快把它送到你家的。"<<endevent>>
+		<hr>
+		<<PetShopBoughtItem>>
+	<</if>>
+	__容量升级:__
+	<br>
+	<<if (_motherStatus is 0 and _container.upgrades.capacity lt 1) or (_motherStatus gt 0 and _container.upgrades.capacity lt 4)>>
+		<<if _motherStatus gte 0 and _container.upgrades.capacity is 0>>
+			<<if $money gte 20000>>
+				<<petshopicon "tank small">><<link [[购买小鱼缸 £200|$passage]]>><<set $boughtItem to "Small Fish Tank">><</link>>
+				<br>
+			<<elseif _container.upgrades.capacity lt 1>>
+				你没有能够买下小鱼缸的£200。
+				<br>
+			<</if>>
+		<</if>>
+		<<if _motherStatus gte 1>>
+			<<if $money gte 50000 and _container.upgrades.capacity lt 2>>
+				<<petshopicon "tank medium">><<link [[购买鱼缸 £500|$passage]]>><<set $boughtItem to "Fish Tank">><</link>>
+				<br>
+			<<elseif _container.upgrades.capacity lt 2>>
+				你没有能够买下鱼缸的£500。
+				<br>
+			<</if>>
+			<<if $money gte 100000 and _container.upgrades.capacity lt 3>>
+				<<petshopicon "tank large">><<link [[购买大型鱼缸 £1,000|$passage]]>><<set $boughtItem to "Large Fish Tank">><</link>>
+				<br>
+			<<elseif _container.upgrades.capacity lt 3>>
+				你没有能够买下大鱼缸的£1,000。
+				<br>
+			<</if>>
+			<<if $money gte 500000 and _container.upgrades.capacity lt 4>>
+				<<petshopicon "tank huge">><<link [[购买巨型鱼缸 £5,000|$passage]]>><<set $boughtItem to "Huge Fish Tank">><</link>>
+				<br>
+			<<elseif _container.upgrades.capacity lt 4>>
+				你没有能够买下巨型鱼缸的£5,000。
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		你有最好的玻璃缸了。
+		<br>
+	<</if>>
+	<<if _motherStatus gte 1 and _container.upgrades.capacity gt 1>>
+		<br>
+		__食物升级:__
+		<br>
+		<<if _container.upgrades.foodStorage lt 3>>
+			<<if $money gte 50000 and _container.upgrades.foodStorage lt 1>>
+				<<petshopicon "feeder">><<link [[购买小型自动喂食器 £500|$passage]]>><<set $boughtItem to "Small Automatic Feeder">><</link>>
+				<br>
+			<<elseif _container.upgrades.foodStorage lt 1>>
+				你没有能够买下小型自动喂食器的£500。
+				<br>
+			<</if>>
+			<<if $money gte 150000 and _container.upgrades.foodStorage lt 2>>
+				<<petshopicon "feeder">><<link [[购买自动喂食器 £1,500|$passage]]>><<set $boughtItem to "Automatic Feeder">><</link>>
+				<br>
+			<<elseif _container.upgrades.foodStorage lt 2>>
+				你没有能够买下自动喂食器的£500。
+				<br>
+			<</if>>
+			<<if $money gte 750000 and _container.upgrades.foodStorage lt 3>>
+				<<petshopicon "feeder">><<link [[购买大型自动喂食器 £7,500|$passage]]>><<set $boughtItem to "Large Automatic Feeder">><</link>>
+				<br>
+			<<elseif _container.upgrades.foodStorage lt 3>>
+				你没有能够买下大型自动喂食器的£7,500。
+				<br>
+			<</if>>
+		<<elseif _motherStatus gte 1>>
+			你已经拥有了最棒的自动喂食器。
+			<br>
+		<</if>>
+	<</if>>
+	<<if _container.upgrades.capacity gt 2>>
+		<br>
+		__装修升级:__
+		<br>
+		<<if _container.upgrades.luxury lt 1 or (_container.upgrades.capacity gt 3 and _container.upgrades.luxury lt 2)>>
+			<<if $money gte 500000 and _container.upgrades.luxury lt 1>>
+				<<petshopicon "decor">><<link [[购买标志装饰 £5,000|$passage]]>><<set $boughtItem to "Standard Decorations">><</link>>
+				<br>
+			<<elseif _container.upgrades.luxury lt 1>>
+				你没有能够买下基础鱼缸装饰的£5,000。
+				<br>
+			<</if>>
+			<<if $money gte 1500000 and _container.upgrades.luxury lt 2 and _container.upgrades.capacity gt 3>>
+				<<petshopicon "decor exotic">><<link [[购买异国风情的装饰 £15,000|$passage]]>><<set $boughtItem to "Exotic Decorations">><</link>>
+				<br>
+			<<elseif _container.upgrades.luxury lt 2 and _container.upgrades.capacity gt 3>>
+				你没有能够买下奇异鱼缸装饰的£15,000。
+				<br>
+			<</if>>
+		<<else>>
+			你已经有了最好的鱼缸装饰。
+			<br>
+		<</if>>
+	<</if>>
+	<<if $pregnancyStats.parasiteBook is 2>>
+		<br>
+		<<if $money gte 2000>>
+			<<assignmenticon>><<link [[买笔记本 (£20)|Pet Shop Book]]>><<set $money -= 2000>><</link>>
+		<<else>>
+			你可以买一个笔记本用来收集你的寄生物的信息。但它的价格是£20，你买不起。
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>
+<br>

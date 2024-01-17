@@ -1,0 +1,34 @@
+:: Prison Attention Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<he>>摇摇晃晃地从你身边离开。围观的囚犯们爆发出一阵嘘声，开着下流的玩笑。<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<prison_revolt_options>>
+
+<<elseif $enemyhealth lte 0>>
+	<<He>>转身就跑，险些把警棍掉地上。囚犯们欢呼起来。<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>><<greb>><<prison_reb 1>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<prison_revolt_options>>
+
+<<else>>
+	你倒在地上，疼痛让你无法抵抗。
+	<<clotheson>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		<<He>>蹲在了你的身旁，抓住你身上的捆绑用具，然后把你拖了起来。
+	<<else>>
+		<<He>>把你的手铐在背后，将你拖了起来。
+		<<bind>>
+	<</if>>
+	<br><br>
+	<<tearful>>你被拖着走。
+	<br><br>
+	<<endcombat>>
+	<<generate_veteran_guard 0>><<person1>>
+	<<link [[继续|Prison Attention 2]]>><</link>>
+
+<</if>>

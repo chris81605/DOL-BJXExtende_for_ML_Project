@@ -1,0 +1,54 @@
+:: Forest Wolf Molestation Resist Finish []
+<<location "forest">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	第二次对<<bhim>>来说太多了，<<bhe>>睡着了。
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<set $foresthunt to 0>>
+	尽管<<bhis>>的力量很强大，你还是成功击败了黑狼。<<bHe>>逃进了森林。
+	<<if $monster is 1>>
+	"麻烦，"<<bhe>>咆哮。"这不是一个容易的猎物。"
+	<</if>>
+
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	被黑狼的袭击弄得遍体鳞伤，你只能呜咽着，没有任何办法反抗，
+	<<if $monster is 1>>
+		任由<<bhe>>把你扔到<<bhis>>的肩膀上，然后跑进森林深处。
+	<<else>>
+		任由<<bhe>>抓住你的脖子，跳进森林。
+	<</if>>
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<if $syndromewolves gte 1>>
+		<<link [[继续|Wolf Cave Returned]]>><<endcombat>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Forest Wolf Cave Intro]]>><<endcombat>><</link>>
+		<br>
+	<</if>>
+<</if>>

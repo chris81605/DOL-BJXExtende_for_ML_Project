@@ -1,0 +1,81 @@
+:: Bondage Two Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation>>
+
+那两人靠着墙把你放下。你觉得自己在一条小巷里，但实际上在哪你也说不准。
+<br><br>
+
+<<tearful>>你试着确定自己的方位。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<set $eventskip to 1>>
+<<destinationbondage>>
+
+<<elseif $enemyhealth lte 0>>
+
+你把两人推开后，随便选了条路跌跌撞撞地开始逃跑。
+<br><br>
+
+<<tearful>>你试着确定自己的方位。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<set $eventskip to 1>>
+<<destinationbondage>>
+
+<<else>>
+	<<set $rescued += 1>>
+
+		<<endcombat>>
+		<<generatePolice 1>><<person1>>你听见一声警哨。那两人靠着墙把你放下，然后从你身边退开。又一声哨响，你听见两人逃离时飞快的脚步声。
+		<br><br>
+
+		<<clotheson>>
+
+		<<tearful>>你试着判断自己到底在哪。你听见越来越多的脚步声在朝你靠近。
+		<br><br>
+
+		<<if $exposed gte 1>>
+			"你因公开猥亵罪被捕了，" 一个愤怒的声音说，"你还犯有煽动他人进行猥亵行为罪！"<<He>>抓住你的胳膊，打算把你拽走。
+			<<crime "exposure">><<crimeUp 40 "exposure">>
+			<br><br>
+			<<if $worn.face.type.includes("gag")>>
+				你嘴被堵着，根本没机会为自己申辩。
+				<br><bR>
+			<</if>>
+
+			<<link [[自愿前往|Bondage Police Willing]]>><</link>>
+			<br>
+			<<if !$worn.face.type.includes("gag")>>
+				<<link [[试着解释一下|Bondage Police Explain]]>><</link>><<englishdifficulty 0 1000>>
+				<br>
+			<</if>>
+			<<link [[为逃跑而战|Bondage Police Fight]]>><<set $fightstart to 1>><<crimeUp 50 "resisting">><<crimeUp 50 "assault">><</link>><<crimes "resisting" "assault">>
+			<br>
+
+		<<else>>
+
+			"没事了，这位<<if $player.gender_appearance is "f">>小姐<<else>>先生<</if>>，"一个威严的声音说道，"我是警察，你需要帮助吗？"
+			<br><br>
+			<<if $worn.face.type.includes("gag")>>
+				<<He>>肯定注意到了你的塞口布，认为你确实遇到了麻烦。
+			<<else>>
+				你解释了一下情况。
+			<</if>>
+			<<blindfoldremove>>
+
+			"是谁对你做了这些？"<<he>>问道。"尽可能地描述一下事件发生的时间和地点，我会把报告提交上去。但警局最近太忙了，我没法保证能及时处理。"
+			<br><br>
+
+			<<link [[做报告 (0:20)|Bondage Police Report]]>><<pass 20>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+			<br>
+			<<link [[不做报告|Bondage Police No Report]]>><</link>>
+			<br>
+		<</if>>
+<</if>>

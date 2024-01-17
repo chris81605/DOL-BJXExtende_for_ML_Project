@@ -1,0 +1,100 @@
+:: Drain Water []
+<<set $outside to 0>><<set $location to "drain">><<effects>><<water>><<wPersist>>
+你在下水道中，正被<<if $weather is "rain">>汹涌的<<else>>水流<</if>>依托着前行。
+<br><br>
+<<if $unbindattempt is 1>><<set $unbindattempt to 0>>
+	<<if $rng gte 51>>
+		<<unbind>>你试图在隧道的侧面削弱你的束缚。它们变得松动，你设法解开了手臂的束缚！
+		<br><br>
+	<<else>>
+		你试图通过两侧的走道来解除你的束缚，但并没有成功。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $stress gte $stressmax>>
+	你不能再忍受了。你昏了过去。
+	<br><br>
+	<<link [[继续|Drain Water Passout]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1>>
+		<<rng>>
+		<<if $rng gte 75 and $slimedisable is "f" and $hallucinations gte 2>>
+			水开始在你周围凝结。
+			<br><br>
+			<<link [[继续|Drain Water Slime]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<elseif $rng gte 51 and $swarmdisable is "f">>
+			一群鳗鱼向你移动。
+			<br><br>
+			<<link [[继续|Drain Water Eels]]>><<set $molestationstart to 1>><</link>>
+		<<elseif $rng gte 26 and $worn.upper.exposed gte 2 and $parasite.nipples.name is undefined and $parasitedisable is "f">>
+			你试图游向人行道，但你的<<nipples>>被一种刺痛感打断了。两只奇怪的软体动物附着在你身上，吸吮着，仿佛在尝试哺乳。当你碰到它们时，它们更紧地抓住了你，引发出羞耻的感觉。你需要外部的帮助才能摆脱它们。
+			<<parasite nipples urchin>><<garousal>><<arousal 600 "breasts">>
+			<br><br>
+			<<link [[继续|Drain Water]]>>
+				<<movealongdrainwater>>
+			<</link>>
+			<br>
+		<<elseif $rng gte 10>><!-- Modified for Beast People -->
+			<<beastNEWinit 1 lizard>>
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				水中的影子向你移动。
+				<br><br>
+				<<link [[继续|Drain Water Lizard]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<else>>
+				水中的影子向你移动。你向它泼水，然后设法把它吓跑，不管它是什么。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+				<br><br>
+
+				<<link [[继续|Drain Water]]>><<endevent>><<set $eventskip to 1>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你试图游到人行道上，但水太急了。
+			<<if $bus is "drainexit">>
+				你被带到户外，然后被丢进了下面的大海。
+				<br><br>
+				<<link [[继续|Sea Cliffs]]>><<set $worn.over_upper.integrity -= 20>><<set $worn.over_lower.integrity -= 20>><<set $worn.upper.integrity -= 20>><<set $worn.lower.integrity -= 20>><<set $worn.under_lower.integrity -= 20>><</link>>
+			<<else>>
+				它让你沿着排水系统流得很远。
+				<br><br>
+				<<link [[继续|Drain Water]]>><</link>>
+				<br>
+			<</if>>
+			<<movealongdrainwater>>
+		<</if>>
+	<<else>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			你挣扎着待在水面上。
+			<<if $bus isnot "drainexit">>
+				<br><br>
+				<<link [[解放你的手臂|Drain Water]]>>
+					<<movealongdrainwater>>
+					<<set $unbindattempt to 1>>
+				<</link>>
+			<<else>>
+				水流带着你向排水管的尽头流去。你试图用被束缚的手臂紧紧抓住边缘，但是毫无用处。你被带离了水流，然后坠入了下面的海洋中。
+				<br><br>
+				<<link [[继续|Sea Cliffs]]>><<set $worn.over_upper.integrity -= 20>><<set $worn.over_lower.integrity -= 20>><<set $worn.upper.integrity -= 20>><<set $worn.lower.integrity -= 20>><<set $worn.under_lower.integrity -= 20>><</link>>
+			<</if>>
+		<<else>>
+			你紧紧抓住隧道的边缘，把自己拖到安全的地方。
+			<br><br>
+			<<if $bus is "residentialdrain">>
+				<<residentialdraineventend>>
+				<br>
+			<<elseif $bus is "commercialdrain">>
+				<<commercialdraineventend>>
+				<br>
+			<<elseif $bus is "industrialdrain">>
+				<<industrialdraineventend>>
+				<br>
+			<<elseif $bus is "drainexit">>
+				<<drainexiteventend>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

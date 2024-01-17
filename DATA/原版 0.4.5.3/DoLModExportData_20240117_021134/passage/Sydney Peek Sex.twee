@@ -1,0 +1,35 @@
+:: Sydney Peek Sex []
+<<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+<<if $sexstart is 1>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 600>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<set $enemyarousalmax += 100>>
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+	<<if _sydneyChastity and $NPCName[$NPCNameList.indexOf("Sydney")].chastity.anus.includes("shield")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+	你们俩跌撞地闯进更衣室。
+<</if>>
+
+<<set $enemyanger to -10>>
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sydney Peek Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sydney Peek Sex]]>><</link>></span><<nexttext>>
+<</if>>

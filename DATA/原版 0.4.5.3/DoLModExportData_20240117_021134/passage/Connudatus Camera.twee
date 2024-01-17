@@ -1,0 +1,77 @@
+:: Connudatus Camera []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $speech_attitude is "meek">>
+	"对不起，<<sir>>，"你拍了拍<<his>>的袖子。"我喜欢帮忙。我可以为你拍张照吗？"
+<<elseif $speech_attitude is "bratty">>
+	"是新来的吗？"你说，"看起来你需要帮助。我可以为你拍照吗？"
+<<else>>
+	"你好，"你说，"我可以为你拍张照吗？"
+<</if>>
+<br><br>
+<<He>>微笑着说："你真好心，给你。"<<he>>递给你相机，退到你的几英尺之外。
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">你无法在这样简单的目标身上学到任何东西。</span>
+<</if>>
+<br><br>
+<<if $rng gte 61>>
+	<<He>>比你预想的要早转身。"嘿！"<<he>>喊道，"把那个还给我！" 你开始奔跑，<<he>>在你后面追赶。
+	<<gstress>><<stress 6>><<tiredness 12>><<gtiredness>>
+	<br><br>
+	<<athleticsdifficulty 1 1000 true>>
+	<<if $athleticsSuccess>>
+		你绕着摊位跑，试图甩掉<<him>>，<span class="green">成功了</span>。你找到一个安静的地方，检查相机。
+		<<if $rng gte 81>>
+			相机看起来相当昂贵。你应该能拿到一些钱。
+			<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+		<<elseif $rng gte 61>>
+			这相机很普通，但应该还值得一些钱。
+			<<set $blackmoney += 15>><<crimeUp 25 "thievery">>
+		<<elseif $rng gte 41>>
+			这相机是个便宜货，但不是毫无价值。
+			<<set $blackmoney += 10>><<crimeUp 10 "thievery">>
+		<<elseif $rng gte 21>>
+			它看起来相当俗气，不值很多钱。
+			<<set $blackmoney += 5>><<crimeUp 5 "petty">>
+		<<else>>
+			它看起来相当俗气，配不上制造它用的塑料。
+		<</if>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Connudatus Street]]>><</link>>
+		<br>
+	<<else>>
+		你绕着摊位跑，试图甩掉<<him>>，但<span class="red">失败了</span>。<<him>>把你追到了一个小巷里。你绕过一个拐角，发现有一扇篱笆挡住了你的去路。那个<<person>>站在你身后。
+		<br><br>
+		"他们说这个城镇的<<girls>>都很软弱，很顺从，"<<he>>卷起袖子说，"我想我需要给你看看你的地位。"
+		<br><br>
+		<<link [[扔掉相机|Connudatus Camera Throw]]>><</link>>
+		<br>
+		<<link [[继续拿着|Connudatus Camera Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<He>>及时转身，看到你消失在人群中。
+	<br><br>
+	你找到一个安静的地方，检查相机。
+	<<if $rng gte 81>>
+		相机看起来相当昂贵。你应该能拿到一些钱。
+		<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+	<<elseif $rng gte 61>>
+		这相机很普通，但应该还值得一些钱。
+		<<set $blackmoney += 15>><<crimeUp 25 "thievery">>
+	<<elseif $rng gte 41>>
+		这相机是个便宜货，但不是毫无价值。
+		<<set $blackmoney += 10>><<crimeUp 10 "thievery">>
+	<<elseif $rng gte 21>>
+		它看起来相当俗气，不值很多钱。
+		<<set $blackmoney += 5>><<crimeUp 5 "petty">>
+	<<else>>
+		它看起来相当俗气，配不上制造它用的塑料。
+	<</if>>
+	<<endevent>>
+	<br><br>
+	<<link [[继续|Connudatus Street]]>><</link>>
+	<br>
+<</if>>

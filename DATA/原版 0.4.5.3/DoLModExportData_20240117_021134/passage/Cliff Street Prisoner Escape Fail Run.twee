@@ -1,0 +1,55 @@
+:: Cliff Street Prisoner Escape Fail Run []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<athleticsdifficulty 600 1300 f>>
+<<if $athleticsSuccess>>
+	你突然冲向公路，<span class="green">并在躲开了一个不知从哪冒出的攻击</span>后继续跑路。
+	<br><br>
+	你很快就把那两个条子甩在了后面，但那个<<person4>><<person>>却一直紧跟在你后面，你在镇上的街道上狂奔着，而那名警察则无情地紧跟其后。
+	<br><br><<person4>>
+	<<rng>>
+	<<if $rng gte 80>> /* only 20% chance of escape for most */
+		你感觉你的肺正在燃烧，就在你快要崩溃的时候，你听到<<him>>似乎被什么东西绊倒，咕噜一声撞到了墙上。<br>
+		因为肾上腺素的飙升，你在<<he>>恢复过来之前便先恢复了过来。
+		<br><br>
+		在历经了这么多的困难后，你逃了出来。你爬过最后一道栅栏，发现自己在丰收街附近的汽车站。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Bus Station]]>><<pass 5>><</link>>
+	<<elseif $rng gte 60 and $harpy gte 6 and $birdFly gte 1>> /* harpies get a bit more chance */
+		你感觉你的肺正在燃烧，就在你快要崩溃的时候，你听到<<him>>似乎被什么东西绊了个踉跄。<br>
+		肾上腺素的飙升提升了你的领先优势，在冲过一个转角下坡时，你借助地形张开翅膀，翱翔于天空之中。
+		<br><br>
+		尽管困难重重，但你还是逃了出来，会飞就是牛逼！在城镇上空翱翔了一会儿后，你降落在商业区购物中心的屋顶上。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Commercial rooftops]]>><<pass 5>><</link>>
+	<<elseif $rng gte 40>>
+		在跑了半个镇之后，最后一名警察<span class="green">貌似终于撑不住了。</span>然而，当你跑过一个转角进入一条小巷时，你发现自己走进了<span class="red">一个死胡同。</span>
+		<br><br>
+		那个<<person4>><<person>>很快就追上并拦下了你。"抓住你了。"<<he>>喘着气逐步向你靠近。
+		<br><br>
+		当你正准备放弃时，你注意到墙根处有一个打开的地下室窗户。你不知道里面有什么，但不进去就得面对警察。
+		<br><br>
+		<<link [[穿过那个窗户|Hospital Arrest Molestation]]>><<endevent>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[不逃跑，直接自首|Cliff Street Prisoner Escape Fail 2]]>><<set $phase to 3>><</link>>
+		<br>
+	<<else>>
+		尽管你努力奔跑，但却没有上面成果。那个警察不断逼近，<span class="red">终于把你抓住了。</span><br>
+		你重重地摔在地面上。
+		<br><br>
+		<<link [[继续|Cliff Street Prisoner Escape Fail 2]]>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if playerBellySize(true) gte 8>>
+		你突然冲向公路，<span class="red">但警察已经做好了准备，其中一人轻而易举地绊倒了你。</span><<ggpain>><<pain 12>>
+	<<else>>
+		你突然冲向公路，<span class="red">但警察已经做好了准备，其中一人朝你的腹部重重地来了一拳。</span><<ggpain>><<pain 12>><br>
+		你跪在地上大口大口地喘气。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Cliff Street Prisoner Escape Fail 2]]>><<set $phase to 1>><</link>>
+	<br>
+<</if>>

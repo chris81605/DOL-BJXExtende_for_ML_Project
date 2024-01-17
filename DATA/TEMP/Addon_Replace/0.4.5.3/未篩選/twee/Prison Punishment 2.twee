@@ -1,0 +1,181 @@
+:: Prison Punishment 2 []
+<<effects>>
+
+<<if $prison.active_punishments.includes($prison_punishment)>>
+	<<prison_list_speech>><<methodical_guard 0>>说道："我们已经罚了你这个了。
+	<<for _i to $prison_punishment_number - 2; _i lt 11; _i++>>
+		<<if !$prison.active_punishments.includes($prison.punishments[_i])>>
+			<<set _prison_punishment_hi to $prison.punishments[_i]>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<for _i to $prison_punishment_number - 2; _i gt 0; _i-->>
+		<<if !$prison.active_punishments.includes($prison.punishments[_i])>>
+			<<set _prison_punishment_lo to $prison.punishments[_i]>>
+			<<break>>
+		<</if>>
+	<</for>>
+	<<if !_prison_punishment_hi>>
+		<<set $prison_punishment to _prison_punishment_lo>>
+		我们会在列表里向前选一个可用的惩罚。"<<He>>看着列表。<<prison_list_speech end>>
+		<br><br>
+	<<elseif !_prison_punishment_lo>>
+		<<set $prison_punishment to _prison_punishment_hi>>
+		我们会在列表里向后选一个可用的惩罚。"<<He>>看着列表。<<prison_list_speech end>>
+		<br><br>
+	<<else>>
+		根据掷硬币的结果，我们会在列表里选前一个或后一个，决定你下一个合适的惩罚。"
+		<br><br>
+		<<relaxed_guard 1 cap>><<person2>>从<<his>>口袋里掏出一枚硬币。"正面向前。"<<He>>掷出硬币，用<<his>>空着的手盖上去，再饶有兴致地移开手。
+		<br><br>
+
+		<<if random(1, 2) is 2>>
+			<<set $prison_punishment to _prison_punishment_lo>>
+			"正，"<<he>>宣布道，他们纷纷转向了金属板。<<prison_list_speech end>>
+		<<else>>
+			<<set $prison_punishment to _prison_punishment_hi>>
+			"反，"<<he>>宣布道，他们纷纷转向了金属板。<<prison_list_speech end>>
+		<</if>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<prison_list_speech>><<methodical_guard 0>>说。
+	<br><br>
+<</if>>
+
+<<switch $prison_punishment>>
+	<<case "free use">>
+		<<leash 20>>
+		<<if $prison.active_punishments.includes("leash")>>
+			<<attach_leash>>
+		<</if>>
+		"哦我的<<girl>>，"<<veteran_guard 3>>轻声笑道，"囚犯们会很高兴的。"
+		<br><br>
+		<<methodical_guard 0 cap>>再次在下面翻找。杂乱的金属零件丁零当啷得砸在桌子上，其中有个金属项圈，在项圈的上刻着歪歪扭扭的<span class="red">"公用性奴"</span>。
+		<br><br>
+
+		<<relaxed_guard 1 cap>>解开了你的项圈、衣领，但是这种自由是相当短暂的，新的项圈甚至更加沉重。
+		<br><br>
+
+		<<link [[继续|Prison Punishment Free]]>><<prison_punishment_init>><</link>>
+		<br>
+
+	<<case "nude">>
+		<<if $worn.upper.name is "naked" and $worn.lower.name is "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+			<<methodical_guard 0 cap>><<person1>>调整了一下<<his>>的眼镜。<span class="pink">"你现在不许穿衣服了，"</span><<he>>说道。"根据你的身边的人的判断，看起来你已经领先于我们了。"
+		<<else>>
+			<<clothesruined>>
+			<<methodical_guard 0 cap>><<person1>>在其他守卫靠近的时候调整了一下<<his>>的眼镜。<span class="pink">"你的衣服被没收了，"</span><<he>>说，"你会接受你身边的人的评判。"
+			<br><br>
+			他们用手猛地抓住并拽走了你身上的衣服，留下你光溜溜的待在房间正中。
+			<br><br>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Prison Punishment Nude]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "blindfold">>
+		<<if $worn.face.name is "gag">>
+			<<set $worn.face.type.push("broken")>>
+			<<faceruined>>
+			<<facewear 6>>
+		<<else>>
+			<<facewear 5>>
+		<</if>>
+		"你得注意点你的脚下，"<<methodical_guard 0>><<person1>>说道。你听到后面的脚步声，但在你转过身之前被一块布捂住了眼睛。<span class="purple">你被蒙上了眼睛。</span>
+		<br><br>
+
+		<<link [[继续|Prison Punishment Blindfold]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "topless">>
+		<<if $worn.upper.name is "naked" and $worn.under_upper.name is "naked">>
+			<<methodical_guard 0 cap>><<person1>>调整了一下<<his>>的眼镜。<span class="blue">"你现在上半身不许穿衣服了，"</span><<he>>说，"这是为了展现你的奉献精神。看起来你已经领先于我们了。"
+			<br><br>
+		<<else>>
+			<<upperruined>><<underupperruined>>
+			<<methodical_guard 0 cap>><<person1>>在其他守卫靠近的时候调整了一下<<his>>的眼镜。<span class="blue">"你现在上半身不许穿衣服了，"</span><<he>>说，"这是为了展现你的奉献精神。"
+			<br><br>
+			他们用手猛地抓住并拽走了你身上的衣服，留下你上半身赤裸着待在房间正中。
+			<br><br>
+
+		<</if>>
+		<<link [[继续|Prison Punishment Topless]]>><<prison_punishment_init>><</link>>
+		<br>
+		<br><br>
+	<<case "leash">>
+		<<attach_leash>>
+		<<veteran_guard 3 cap>><<person4>>走近着，拿出一根绳子。<span class="lblue"><<He>>把一端系在你脖子的项圈上，</span>然后把另一端递给<<relaxed_guard 1>>。"这是个好<<bitch>>。"
+		<br><br>
+
+		<<link [[继续|Prison Punishment Leash]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "underwear">>
+		<<if $worn.upper.name is "naked" and $worn.lower.name is "naked">>
+			<<methodical_guard 0 cap>><<person1>>调整了一下<<his>>的眼镜。<span class="teal">"你现在除了内衣以外什么都不许穿，"</span><<he>>说，"这是你的赎罪，虽说看起来你已经领先于我们了。"
+		<<else>>
+			<<upperruined>><<lowerruined>>
+			<<methodical_guard 0 cap>><<person1>>在其他守卫靠近前调整了一下<<his>>的眼镜。<span class="teal">"你除了内裤什么都不许穿，"</span><<he>>说，"这是你的赎罪。"四周的手向你伸过来，撕扯着你身上的衣服，直到你光溜溜的留在房间中。
+		<</if>>
+		<br><br>
+		<<link [[继续|Prison Punishment Underwear]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "cuffs">>
+		<<feetwear 26>>
+		<<methodical_guard 0 cap>><<person1>>再次在桌子下面翻找起来。<span class="lblue">一个被铁链绑起来的金属球砸在了桌子上。</span><<veteran_guard 3 cap>><<person4>>把它拿在手上，并蹲在你的旁边。
+		<br><br>
+		"也许这种束缚会让你想起你的地位。"
+		<br><br>
+
+		<<link [[继续|Prison Punishment Cuffs]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "bottomless">>
+		<<if $worn.lower.name is "naked" and $worn.under_lower.name is "naked">>
+			<<methodical_guard 0 cap>><<person1>>调整了一下<<his>>的眼镜。"你需要接受惩罚，"<<he>>说。<span class="blue">"你的下半身不许穿衣服。</span>看起来你已经领先于我们了。"
+			<br><br>
+		<<else>>
+			<<lowerruined>><<underlowerruined>>
+			<<methodical_guard 0 cap>><<person1>>在其他守卫靠近的时候调整了一下<<his>>的眼镜。"你需要受到惩罚，"<<he>>说，<span class="blue">"下半身不许穿衣服。"</span>
+			<br><br>
+			他们用手撕扯着你的下装，留下你下半身赤裸着待在房间正中。
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Prison Punishment Bottomless]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "gag">>
+		<<if $worn.face.name is "blindfold">>
+			<<set $worn.face.type.push("broken")>>
+			<<faceruined>>
+			<<facewear 6>>
+		<<else>>
+			<<facewear 4>>
+		<</if>>
+		<<methodical_guard 0 cap>><<person1>>把手伸到桌子下面。<span class="purple"><<He>>把一个塑料口塞扔到桌上。</span><<anxious_guard 2 cap>><<person3>>把它拿起来，装在了你的脸上。
+		<br><br>
+
+		<<link [[继续|Prison Punishment Mask]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "bindings">>
+		<<set $leftarm to "bound">><<set $rightarm to "bound">>
+		<<methodical_guard 0 cap>>向<<veteran_guard 3>><<person4>>点头，后者拿出了一段绳子。"别动，<<girl>>。"<<He>>把你的双臂捆在一起，让你束手无策。
+		<br><br>
+
+		<<link [[继续|Prison Punishment Bindings]]>><<prison_punishment_init>><</link>>
+		<br>
+	<<case "rut">>
+		<<veteran_guard 3 cap>><<person4>>笑了。"很高兴认识你，"<<he>>笑道，将你推向桌子对面的缺口。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br>
+		"如果<<pshe>>能给我们带回来些值钱的东西，"<<anxious_guard 2>>说着，"我们就让<<phim>>回来，对吧？"<<lstress>><<stress -6>>
+		<br>
+		"没错，"<<veteran_guard 3>>回道，"但发情窟早就被摸了个干净了。"<<gstress>><<stress 6>>
+		<br>
+		"有些囚犯自己找到了上来的路，"<<relaxed_guard 1>>补充道。<<lstress>><<stress -6>>
+		<br>
+		"但不常见。"<<veteran_guard 3 cap>>的靴子一推你的后背，你跌入了黑暗之中。<<gtrauma>><<ggstress>><<trauma 6>><<stress 12>>
+		<br><br>
+
+		<<link [[继续|Prison Punishment Rut]]>><</link>>
+		<br>
+	<<default>>
+
+<</switch>>

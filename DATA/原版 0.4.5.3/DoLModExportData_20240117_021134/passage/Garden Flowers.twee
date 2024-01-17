@@ -1,0 +1,79 @@
+:: Garden Flowers []
+<<effects>>
+<<plot_effects>>
+
+<<if $alex_greenhouse gte 3>>
+	<<set $outside to 0>>
+	你正待在温室里，两侧的架子上摆上了花盆，而孤儿们正在种植草药和鲜花一类的东西。
+	<br><br>
+<<else>>
+	<<set $outside to 1>>
+<</if>>
+
+
+<<if $garden_flowers_intro is 1>>
+	<<unset $garden_flowers_intro>>
+	<<plots_init garden 3 earth 1 small>>
+	<i>一旦发现了种子，就可以将其种在这里。种子可以在任意的野外地区里找到。护理技能可以减少耕种时间，同时可以提高收获作物的质量和数量。</i>
+	<br><br>
+<</if>>
+
+
+<<if $event_trigger is 1>>
+	<<set _robin to statusCheck("Robin")>>
+	<<if $rng gte 51 and _robin_location is "orphanage" and _robin.trauma lt 80 and $daily.robin.tending isnot 1>>
+		<<set $daily.robin.tending to 1>>
+		<<npc Robin>><<person1>>
+		<<if _robin.trauma gte 40>>
+			你听到草地上传来了轻快的脚步声——是罗宾。
+			<br><br>
+
+			"希望我没有失礼，"<<he>>顶着红肿的双眼看着你浇水。"我听到有人在这里浇水，我就猜是不是你。"
+			<br><br>
+
+			<<link [[拥抱 (0:05)|Garden Robin Hug]]>><<pass 5>><<npcincr Robin love 1>><<npcincr Robin trauma -1>><<trauma -6>><</link>><<ltrauma>><<glove>><<lrtrauma>>
+			<br>
+			<<link [[让罗宾帮忙 (0:10)|Garden Robin Help]]>><<npcincr Robin love 1>><<trauma -6>><<stress -6>><<pass 10>><</link>><<ltrauma>><<lstress>><<glove>>
+			<br>
+			<<link [[告诉罗宾你完事了|Garden Robin Finished]]>><</link>>
+			<br>
+		<<else>>
+			你听到草地上传来了轻快的脚步声——是罗宾。
+			<br><br>
+
+			"我就知道是你，"<<he>>一边说着一边朝你走来，"有什么我可以帮忙的吗？"
+			<br><br>
+
+			<<link [[让罗宾帮忙 (0:10)|Garden Robin Help]]>><<npcincr Robin love 1>><<trauma -6>><<stress -6>><<pass 10>><</link>><<ltrauma>><<lstress>><<glove>>
+			<br>
+			<<link [[告诉罗宾你完事了|Garden Robin Finished]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 31 and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+		有什么东西掠过你的大腿。可能只是一只小虫子，你把它甩了开来，但它不一会又回来了。你往下看去，一根藤蔓正卷曲在你的脚踝上。
+		<br><br>
+
+		<<link [[甩掉它|Garden Stem Shake]]>><</link>>
+		<br>
+		<<link [[仔细查看|Garden Stem Look]]>><</link>>
+		<br>
+	<<else>>
+		<<hallucinogen 60>>
+		当你浇水时，一种奇怪的气味从植物丛中蔓延出来。你感到一阵头晕目眩。<<ghallucinogens>><<if $backgroundTraits.includes("plantlover")>><<arousal 6>><<garousal>><</if>>
+		<br><br>
+
+		<<link [[继续|Garden Flowers]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<display_plot garden>>
+	<<if !$plants_known.includes("daisy")>>
+		<<icon "tending/daisy.png">> <<link [[寻找种子 (0:30)|Garden Flowers Seeds]]>><<set $plants_known.push("daisy")>><<pass 30>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Garden]]>><</link>>
+	<br>
+<</if>>
+
+<<unset $event_trigger>>

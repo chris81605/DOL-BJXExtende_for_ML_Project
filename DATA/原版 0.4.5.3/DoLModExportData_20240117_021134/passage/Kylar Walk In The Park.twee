@@ -1,0 +1,50 @@
+:: Kylar Walk In The Park []
+<<set $location to "park">><<set $outside to 1>><<effects>><<run statusCheck("Kylar")>>
+<<set $kylar_action to "walk">>
+<<set $dateCount.Total++>><<set $dateCount.Kylar++>>
+<<if $weather is "clear">>
+	<<if $speech_attitude is "meek">>
+		"今天天气很好，你能和我一起走走吗？"你害羞地问。
+	<<elseif $speech_attitude is "bratty">>
+		"今天的天气很适合外出，来吧，和我一起走走，"你说。
+	<<else>>
+		"真是美好的一天，想出去散步吗？"你高兴地说。
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"我不喜欢一个人散步，你能和我一起走吗？"你害羞地问。
+	<<elseif $speech_attitude is "bratty">>
+		"我需要活动活动，来吧，和我一起走走，"你说。
+	<<else>>
+		"想去散步吗？"你问。
+	<</if>>
+<</if>>
+<br><br>
+<<if _kylarStatus.includes("Rage")>>
+	凯拉尔注视着你，"当然！每个人都需要看到我们是多么幸福的一对，"<<he>>说着，站了起来，紧紧抓住你的手臂。<<pain 5>><<stress 3>><<gpain>><<gstress>>
+<<elseif _kylarStatus.includes("Sus")>>
+	"所以你真的愿意被人看到和我在一起，"<<he>>很兴奋，站起身向你走来，"好，我们走吧。"
+<<else>>
+	你可以从<<his>>的眼中看到喜悦的火花，<<He>>迅速站起来，走到你身边。
+<</if>>
+你们两个开始在公园里散步，欣赏风景。
+<<if _kylarStatus.includes("Rage")>>
+	几分钟后，你的手臂被凯拉尔抓住的位置开始泛痛。
+	<br><br>
+	<<link [[让凯拉尔松开你的手臂，握住你的手|Kylar Walk In The Park 2]]>><<set $phase to 1>><<npcincr Kylar love 1>><</link>><<glove>><<lksuspicion>><<handholdingvirginitywarning>><<NPCvirginitywarning "Kylar" "handholding">>
+	<br>
+	<<link [[忍耐|Kylar Walk In The Park 2]]>><<pain 5>><<stress 3>><</link>><<gpain>><<gstress>>
+<<elseif _kylarStatus.includes("Sus")>>
+	你注意到凯拉尔的手在微微颤抖，<<He>>在自己以为你没注意的时候，不时偷偷看你一眼。
+	<br><br>
+	<<link [[握住凯拉尔的手|Kylar Walk In The Park 2]]>><<set $phase to 1>><<npcincr Kylar love 1>><</link>><<glove>><<lksuspicion>><<handholdingvirginitywarning>><<NPCvirginitywarning "Kylar" "handholding">>
+	<br>
+	<<link [[继续走路|Kylar Walk In The Park 2]]>><</link>>
+<<else>>
+	你注意到<<his>>的手在你的手附近徘徊。
+	<br><br>
+	<<link [[握住凯拉尔的手|Kylar Walk In The Park 2]]>><<set $phase to 1>><<npcincr Kylar love 1>><</link>><<glove>><<lksuspicion>><<handholdingvirginitywarning>><<NPCvirginitywarning "Kylar" "handholding">>
+	<br>
+	<<link [[继续走路|Kylar Walk In The Park 2]]>><</link>>
+<</if>>
+<br>

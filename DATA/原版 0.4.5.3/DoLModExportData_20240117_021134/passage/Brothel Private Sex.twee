@@ -1,0 +1,54 @@
+:: Brothel Private Sex []
+<<if $molestationstart is 1>>
+<<set $molestationstart to 0>>
+<<controlloss>>
+<<violence 1>>
+<<neutral 1>>
+<<molested>>
+
+<<maninit>>
+	<<if $phase is 1>>
+<<set $NPCList[0].lefthand to "arms">>
+<<set $leftarm to "grappled">>
+<<set $rightarm to "grappled">>
+<<hand_gag 0 right>>
+	<<elseif $phase is 5>>
+<<set $enemyanger += 40>>
+	<</if>>
+
+<<elseif $sexstart is 1>>
+<<set $sexstart to 0>>
+<<set $consensual to 1>>
+<<neutral 1>>
+
+<<maninit>>
+<<set $enemytrust += 40>>
+	<<if $phase is 2>>
+"这最好值得我花的钱，"<<he>>说道。
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+	<<if $phase is 1>>
+"这最好值得我花的钱，"<<he>>说道。
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<set _chance to random(1, 200)>>
+/* 0.5% (1/200) chance per turn, only when crime is non-zero, when over 6 weeks into game, and gte 3 weeks from last raid*/
+<<if _chance is 13 and crimeSumCurrent() gte 500 and Time.days gte 42 and ((Time.days - $brothel_raid_day) gte 21)>>
+	<span id="next"><<link [[继续|Brothel Raid]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal lte $enemyarousalmax and $enemyhealth gte 0 and $finish is 0>>
+	<span id="next"><<link [[继续|Brothel Private Sex]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Private Sex Finish]]>><</link>></span><<nexttext>>
+<</if>>

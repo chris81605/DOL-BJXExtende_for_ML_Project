@@ -1,0 +1,124 @@
+:: Prison Tunnel Dig []
+<<effects>>
+
+<<for _dig to 0; _dig lt $prison_dig; _dig++>>
+	<<set $prison.tunnel += 1>>
+	<<tiredness 6>>
+	<<advancetohour>>
+	<<if Time.hour is 6>>
+		<<set $prison.schedule to "wake">>
+		<<break>>
+	<</if>>
+<</for>>
+<<unset $prison_dig>>
+
+<<if $prison.tunnel gte 120>>
+	你爬进黑暗深处，继续挖掘。
+	<br><br>
+	<span class="green">你被一阵突然而令人振奋的微风吹拂。</span>闻起来像盐。你挖掉最后一块岩石，把洞扩大到足够容纳你的身体。
+	<br><br>
+	<<earnFeat "Time and Pressure">>
+	你在岛的边缘，在大海上方。
+	<br><br>
+
+<<elseif $prison.tunnel gte 100>>
+	你爬进黑暗深处，继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		贝壳融入在周围的石头里。
+	<<case 2>>
+		你感觉你听到了海鸥的声音，不过也可能是你的幻觉。
+	<<case 3>>
+		你听到隆隆声。
+	<</switch>>
+<<elseif $prison.tunnel gte 80>>
+	你爬进黑暗中，继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		你听见了湍急的水流。
+	<<case 2>>
+		隧道在颤抖，天花板降下灰尘。
+	<<case 3>>
+		你吸入了些灰尘，开始咳嗽。<<gstress>><<stress 6>>
+	<</switch>>
+<<elseif $prison.tunnel gte 60>>
+	你从洞里爬出来，继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		脆弱的岩石很容易碎裂。<<lstress>><<stress -6>>
+	<<case 2>>
+		你的胳膊被粗糙的岩石擦伤了。<<gpain>><<pain 4>>
+	<<case 3>>
+		岩石均匀一致。
+	<</switch>>
+<<elseif $prison.tunnel gte 40>>
+	你爬下洞，继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		你敲到了什么硬东西，摸起来像一块鹅卵石。你可以在它周围挖掘，把它从岩石中撬出来。
+	<<case 2>>
+		天然岩石就像沙子一样碎裂开来。
+	<<case 3>>
+		石砌融入天然岩石，后者更脆弱。
+	<</switch>>
+<<elseif $prison.tunnel gte 20>>
+	你爬进洞里继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		其中有一块砖已经松动，这很好。<<lstress>><<stress -6>>
+	<<case 2>>
+		石砌结构古老。有些砖块已经变形了。
+	<<case 3>>
+		上方的一块砖掉了下来，砸到你的背上。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+	<</switch>>
+<<elseif $prison.tunnel gte 10>>
+	你把手伸进洞里继续挖掘。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		海报在突如其来的微风中飘动。你停顿了片刻才继续。
+	<<case 2>>
+		太黑了，你什么也看不见，但还是瞥了一眼牢房的门，确保没有人看着。
+	<<case 3>>
+		下层的石头比上层更坚硬，颜色也更深。
+	<</switch>>
+<<else>>
+	你一块一块地凿开墙壁。
+	<<set _rng to random(1, 3)>>
+	<<switch random(1, 3)>>
+	<<case 1>>
+		裂缝变宽。
+	<<case 2>>
+		你听到一声咳嗽，僵住片刻才继续。<<gstress>><<stress 6>>
+	<<case 3>>
+		它不费吹灰之力就碎了。
+	<</switch>>
+<</if>>
+<br><br>
+
+<<if $prison.schedule is "wake" and $prison.morning isnot 1>>
+	<<generate_methodical_guard 0>><<person1>>
+	你听到牢门在你身后打开发出的嘎嘎声。
+	<<if $prison.tunnel gte 20>>
+		你冲进隧道，用海报盖住入口。
+	<<else>>
+		你用海报盖住入口。
+	<</if>>
+
+	一个<<personsimple "normal">>的声音响彻大厅。"点名。"其他囚犯排起了队。
+	<br><br>
+
+	<<link [[排队|Prison Cell Role]]>><<cell_trouble -1>><</link>>
+	<br>
+	<<link [[拒绝|Prison Cell Refuse]]>><<prison_guards 1>><<prison_inmates 1>><<pain 4>><<cell_trouble 1>><</link>><<gpain>><<gsuspicion>><<grespect>>
+	<br>
+	<<set $prison.morning to 1>>
+<<else>>
+	<<link [[继续|Prison Cell]]>><</link>>
+	<br>
+<</if>>

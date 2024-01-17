@@ -1,0 +1,43 @@
+:: Sea Beach Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if Time.dayState isnot "night" and $location is "beach">>
+		<<enable_rescue>>
+	<</if>>
+	<<if $phase isnot 1>>
+		你想挣脱，但<<he>>不会让你成功的！
+		<br><br>
+	<<else>>
+		<<set $NPCList[0].lefthand to "arms">>
+		<<set $leftarm to "grappled">>
+		<<set $rightarm to "grappled">>
+		<<hand_gag 0 right>>
+	<</if>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<promiscuity1>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<if Time.dayState isnot "night" and $location is "beach">>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sea Beach Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Beach Molestation]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,140 @@
+:: Forest Fox Nest Challenge []
+<<effects>>
+<<if $harpy gte 6>>
+	你发出一声刺耳的尖叫，张开你的翅膀。
+<<else>>
+	你为了引起注意，对着<<beasttype>>大吼大叫起来。
+<</if>>
+<br><br>
+
+<<if $NPCList[0].traits.includes("clumsy")>>
+	然而，在你能坚持下去之前，<<bhe>>在震惊中笨拙地踉跄着回来，<span class="red">压碎了剩下的鸟蛋。</span>这个特殊的<<beasttype>>似乎太笨拙了，无法有效地进行挑战。
+	<br><br>
+
+	<<if $monster is 1>>
+		<<bHe>>迅速调整好<<bhimself>>的位置。"你吓到我了！别这样！"<<bhe>>喊道。<<bhis>>看起来很生气，但很快开始试图舔掉<<bhis>>尾巴上被毁的蛋。<<bHe>>好像马上就忘了你在那里。
+	<<else>>
+		<<bHe>>以猛扑的姿势结束，盯着你看。过了一会儿，<<bhe>>放松了下来，开始试图舔掉毛皮上被破坏的蛋。<<bHe>>好像马上就忘了你在那里。
+	<</if>>
+	<<set $forest_nest.eggs to 0>>
+	<br><br>
+
+	<<link [[抚摸|Forest Fox Nest Pet]]>><<set $phase2 to 1>><</link>><<tendingdifficulty 1 200>><<llstress>>
+	<br>
+	<<if $fox gte 6 and $monster is 1>>
+		<<link [["把" + $NPCList[0].pronouns.him + "舔干净"|Forest Fox Nest Lick]]>><<set $phase2 to 1>><</link>><<deviant1>><<fox>>
+		<br>
+	<</if>>
+	<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<<elseif $NPCList[0].traits.includes("cowardly")>>
+	然而，在你能跟上之前，<<bhis>>蓬起尾巴逃走了，顺带还带走了一些蛋。看来这只<<beasttype>>特别胆小。
+	<<set $forest_nest.eggs -= 2>>
+	<br><br>
+
+	<<tending_bird_eggs $forest_nest.eggs>>
+	<br><br>
+
+	<<if $forest_nest.eggs gte 1>>
+		<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+		<br>
+	<</if>>
+	<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<<else>>
+	你尽量让自己显得高大，
+	<<if $physiqueSuccess or $harpy gte 6>>
+		<span class="green">和<<bhis>>的尾巴鼓起来。</span>
+		<<if $NPCList[0].traits.includes("territorial")>>
+			<<if $monster is 1>>
+				"该死的！好吧，蛋都归你了！"<<bHe>>仓惶转身跑了。
+			<<else>>
+				<<bHe>>在沮丧中咆哮，但匆忙后退。
+			<</if>>
+		<<else>>
+			<<bHe>>大叫一声，头也不回地逃走了。
+		<</if>>
+		<br><br>
+
+		<<tending_bird_eggs $forest_nest.eggs>>
+		<br><br>
+
+		<<if $forest_nest.eggs gte 1>>
+			<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<else>>
+		<<if $NPCList[0].traits.includes("territorial")>>
+			但是<<bhe>><span class="red">只是看着你</span>。
+			<<if $monster is 1>>
+				"在我的地盘上挑战我？"<<bHe>>嘲笑道，"你需要得到教训。"
+			<</if>>
+			<<beasttype>>向你冲来！
+			<br><br>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<elseif $NPCList[0].traits.includes("clever")>>
+			但是<<bhis>><span class="red">只是动了动耳朵</span>。
+			<<if $monster is 1>>
+				然后，在一个快速的动作中，<<bhe>>捡起并向你扔了一个鸟蛋！
+				<br><br>
+
+				它直接打在你脸上，蛋黄溅得到处都是。<<bHe>>嘲笑你，在地上滚了几下才跑开。<<bodyliquid "face" "goo">><<stress 6>><<pain 2>><<gstress>><<gpain>>
+			<<else>>
+				然后，在一个快速的动作中，<<bhe>>跳跃起来并猛扑过去！
+				<br><br>
+
+				尽管<<bhis>>的尺寸相对较小，但仍能轻松将你击倒。<<bHe>>在你正上方快速地吃着鸟蛋，蛋黄溅得你浑身都是。<<bHe>>发出了几声听起来有点像笑声的高声吠叫，在地上翻滚了几圈，跑开了。<<bodyliquid "face" "goo">><<stress 6>><<pain 2>><<gstress>><<gpain>>
+			<</if>>
+			<br><br>
+
+			<<set $forest_nest.eggs -= 3>><<tending_bird_eggs $forest_nest.eggs>>
+			<br><br>
+
+			<<if $forest_nest.eggs gte 1>>
+				<<link [[埋一个|Forest Nest Bury]]>><<trauma -3>><<transform fox 1>><<set $plants.bird_egg.amount -= 1>><</link>><<ltrauma>><<note "- 蛋" "red">>
+				<br>
+			<</if>>
+			<<link [[离开|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+			<br>
+		<<elseif $NPCList[0].traits.includes("friendly")>>
+			但是<<bhe>><span class="red">只是朝你歪了歪头</span>。<<bhe>>毫不动摇地走近，嗅了嗅你。
+			<<if $monster is 1>>
+				<<bHe>>在抚摸你的头之前<span class="green">咯咯地笑。</span>"你是想吓唬我吗？你太可爱了。"
+				<br><br>
+
+				<<bHe>>回到蛋堆坐了下来。
+				<<if $forest_nest.eggs lte 0>>
+					"它们都坏了。没办法留下来。想要分享吗？"<<bHe>>拍了拍<<bhim>>旁边的地面。
+				<<else>>
+					"还剩下一些。想要分享吗？"<<bHe>>把一个放进<<bhis>>的嘴里，拍了拍<<bhim>>旁边的地面。
+				<</if>>
+			<<else>>
+				过了一会儿，<span class="green">它舔了舔你的腿。</span><<bHis>>的舌头让你很痒。
+				<br><br>
+
+				<<bHe>>回到蛋堆坐了下来，埋头就吃，然后扭头回看，
+				<<if $forest_nest.eggs lte 0>>
+					鼻子上蹭了一些蛋黄。
+				<<else>>
+					嘴里叼着个鸟蛋。
+				<</if>>
+				<<bHe>>似乎想和你分享。
+			<</if>>
+			<br><br>
+
+			<<if $fox gte 6>>
+				<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress -4>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress 2>><</link>><<gstress>>
+				<br>
+			<</if>>
+			<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

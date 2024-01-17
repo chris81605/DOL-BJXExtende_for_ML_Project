@@ -1,0 +1,77 @@
+:: Lake Firepit []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 30>><<set $bus to "lakefirepit">>
+<<if Time.season is "winter">>
+	<<if $laketeenspresent is 1>>
+		你在篝火坑旁。几个学生坐在一圈石凳上。其他人试图在附近的冰上滑冰。
+	<<elseif Time.dayState is "night">>
+		<<if $laketeensfire is 1>>
+			你在篝火坑旁。人们围着篝火坐着，聊天喝酒。火光在湖面上的倒影几乎令人着迷。
+		<<else>>
+			你在篝火坑旁。黑暗的湖水在冰下微微波动，但你看不清水面的样子。
+		<</if>>
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你在篝火坑旁。坑周围围着一圈石凳。
+	<<else>>
+		你在篝火坑旁。坑周围围着一圈石凳。
+	<</if>>
+	<<if $weather is "snow">>
+		雪花落在冰面上。
+	<<else>>
+		冰面显得非常寂静。
+	<</if>>
+<<else>>
+	<<if $laketeenspresent is 1>>
+		你在篝火坑旁。几个学生坐在一圈石凳上。你可以看到几个人在岸边的水中戏水。
+	<<elseif Time.dayState is "night">>
+		<<if $laketeensfire is 1>>
+			你在篝火坑旁。人们围着篝火坐着，聊天喝酒。火光在湖面上的倒影几乎令人着迷。
+		<<else>>
+			你在篝火坑旁。黑暗的湖水在下方微微波动，但你看不清水面的样子。
+		<</if>>
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你在篝火坑旁。坑周围围着一圈石凳。
+	<<else>>
+		你在篝火坑旁。坑周围围着一圈石凳。
+	<</if>>
+	<<if $weather is "rain">>
+		雨打在湖面上，水波荡漾，仿佛有了生命一样。
+	<<else>>
+		水面显得非常平静。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and $laketeenspresent is 1 or $laketeensfire is 1>>
+	<<if $exhibitionism gte 75>>
+		你低下身子，躲在树丛中。你真的很想展示你的<<lewdness>>，但你克制了自己，没有这么做。
+	<<else>>
+		你低下身子，躲在树丛中，以免你<<lewdness>>被看到。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "lake" `$laketeenspresent isnot 1`>>
+	<</if>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<link [[南下去岸边 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<br><br>
+
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and $exhibitionism gte 35>>
+		<span class="red">你耳朵里的史莱姆拒绝让你穿着泳装离开。</span>
+	<<else>>
+		<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

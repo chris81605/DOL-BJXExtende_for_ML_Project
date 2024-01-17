@@ -1,0 +1,42 @@
+:: Hypnotist Test Sex []
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>><<set $consensual to 1>>
+		<<neutral 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<</if>>
+	<<if $phase is "Harper">>
+		<<npc Harper>><<person1>>
+		Doctor Harper approaches you. "It's time to commit medical malpractice," <<he>> says.
+	<<else>>
+		<<generate1>><<person1>><<set $NPCList[0].traits.pushUnique("hypnotist")>>
+		A <<person>> walks up to you. "Hey," <<he>> says. "You're feeling sleepy, or whatever. Let's get this over with."
+	<</if>>
+	<<maninit>><<enable_rescue>>
+	<<set $NPCList[0].lefthand to "hypnosis">><<set $NPCList[0].lefttool to "pendant">>
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[FINISH|Hypnotist Test Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[HEALTH|Hypnotist Test Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[ORGASM|Hypnotist Test Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Hypnotist Test Sex]]>><</link>></span><<nexttext>>
+<</if>>
+<br>
+<<link [[Emergency exit|Hypnotist Test Sex Finish]]>><<set $finish to 1>><</link>>
+<br><br><br><br>

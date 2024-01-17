@@ -1,0 +1,55 @@
+:: Sydney Temple Punish Intro Apologise []
+<<effects>><<run statusCheck("Sydney")>>
+<<npc "Sydney">><<person1>>
+<<effects>>
+<<if $speech_attitude is "meek">>
+	"我……我是来赎罪的！这样就可以了吗？我很抱歉！"
+<<elseif $speech_attitude is "bratty">>
+	"操，不应该是这样的……我很抱歉，我是来赎罪的。"
+<<else>>
+	"我是来为此赎罪的，我很抱歉。"
+<</if>>
+<br><br>
+
+<<if $templePromised is "Sydney">>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼双手抱胸，只是简单地瞥了你一眼。"你来赎罪？难道你忘了我吗？我们是一体的，无论遇到什么……我们都有罪。"
+	<<else>>
+		<<His>>紧紧握住了拳头。"你怎么能这样？！我……我不能……"<<He>>踉跄着往后退步，直至撞到了忏悔室的门壁。"你想赎罪？那么我也必须——这是圣经的教义，这是我们再次合一的唯一方式。"
+	<</if>>
+	<<He>>摇响了忏悔室的铃铛。"好了，我希望你做好了准备。我会宽恕你……等我们一同受罚之后……就快了。"
+	<br><br>
+
+	<<generate2>><<person2>><<generate3>><<generate4>>一名<<priest>>从一扇标有红色十字架的门里走出，两侧还跟随着一众<<monks>>。
+	<br><br>
+	一个<<priest>>从长袍里拿出了口球。"为了赎罪，你们必须证明你们之间的羁绊依旧牢固。请不要动。"
+	<br><br>
+
+	悉尼站在了你的身侧。
+	<br><br>
+
+	<<link [[抓紧悉尼|Sydney Temple Punish Intro 2]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<link [[推开悉尼|Sydney Temple Punish Intro 2]]>><<set $phase to 2>><<npcincr Sydney love -5>><</link>><<lllove>>
+	<br>
+<<else>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼双手抱胸，只是淡淡地瞥了你一眼。"我的心在痛，如同刀绞……我……我……"<<he>>别过头，"对不起。"
+	<<else>>
+		<<His>>紧紧握住了拳头。"你怎么能这样？！我……我不能……"<<He>>踉跄着往后退步，直至撞到了忏悔室的门壁。"如……如果你是为此来赎罪的……"
+	<</if>>
+	<br><br>
+
+	<<He>>摇响了忏悔室的铃铛。"好了，我希望你做好了准备。我会宽恕你……等我们一同受罚之后……就快了。"
+	<br><br>
+
+	<<endevent>><<generateConfessor 1>><<person1>><<generateConfessor 2>><<generateConfessor 3>>
+	一位<<monk>>从一个带有红十字标志的门中走出来，旁边还跟着其他两个人。一人向悉尼保证，他们会轻柔地对待你。
+	<br><br>
+
+	悉尼擦了擦<<his>>的脸，然后离开了房间，这时一个<<monk>>笑了。"为了赎罪，你必须做一件事，不要动。"
+	<br><br>
+
+	<<link [[继续|Temple Arcade Submit]]>><</link>>
+	<br>
+<</if>>

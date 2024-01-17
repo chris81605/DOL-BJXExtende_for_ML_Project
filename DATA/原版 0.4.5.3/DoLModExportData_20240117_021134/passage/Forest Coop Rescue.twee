@@ -1,0 +1,165 @@
+:: Forest Coop Rescue []
+<<effects>><<set $rescued++>>
+<<if $phase is 0 or $phase is 2>>
+	你听到一声枪响，子弹落在了这两个人的脚边。与此同时，一只?gwylanItem撞上了<<person1>><<persons>>的脸。他们惊恐地后退并逃进了森林。
+<<elseif $phase is 1 or $phase is 3>>
+	你听到一声枪响，子弹落在了这只<<beasttype>>附近。与此同时，一只?gwylanItem撞上了<<beasttype>>的身体。<<bHe>>惊恐地后退并逃进了森林。
+<<else>>
+	你听到一声枪响，子弹擦过了这只<<beasttype>>。与此同时，一只?gwylanItem撞上了<<beasttype>>的身体。<<bHe>>惊恐地后退并逃进了水中。
+<</if>>
+<br><br>
+
+<<if $edenCagedEscape>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<edenCagedCoopSave>>
+<<elseif $gwylan_eden_coop gte 4>>
+	<<set $gwylan_eden_coop++>>
+
+	当<<nnpc_he "Eden">>从森林中走出来时，"好枪法，"伊甸说道。
+	<br><br>
+
+	"但我不这么认为，"格威岚回答道，从另一侧的树林里走了出来。"除非你的目标是<<if $phase is 4>>水<<else>>泥土<</if>>。"伊甸哼了一声，差点笑了出来。
+	<br><br>
+
+	<<if $gwylan_eden_coop is 5>>
+		你微笑了一下。以前伊甸总是对格威岚持怀疑态度，而格威岚则总是害怕伊甸。看到他们相处得很好，这感觉真是太好了。
+		<<trauma -12>><<ltrauma>>
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_aborted is 1>>
+		<<set $gwylan_aborted to 0>>
+		格威岚皱了皱眉头。"嘿，你为什么要攻击<<phim>>？你们闹矛盾了吗？"
+		<br><br>
+
+		伊甸叹了口气，交叉着<<nnpc_his "Eden">>的手臂。"<<pShe>>需要学会服从我。"格威岚似乎对这个答案不太满意，但没有再深究。
+		<br><br>
+
+	<<elseif $gwylan_aborted is 2>>
+		<<set $gwylan_aborted to 0>>
+		<<nnpc_He "Gwylan">>无法与你对视。"抱歉之前没有救你，但我不想惹毛那个alpha。我不想让整个狼群来敲我的门。"
+		<br><br>
+
+		"等等，你被那个头狼攻击了？那只黑色的？"伊甸怒吼。"如果那东西再敢动你一根脚趾头，我就要狩猎自己一个漂亮的黑色地毯了。"
+		<br><br>
+	<</if>>
+
+	"好了，再见了，"格威岚说着，<<if $phase isnot 4>>收拾好<<nnpc_his "Gwylan">>的物品，<</if>>向<<nnpc_his "Gwylan">>的商店所在方向走去。伊甸留下来，检查一下你是否安好。
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		<<slimePunishmentForest>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<forestCabinReturnLinks>>
+<<elseif $gwylan_eden_coop gte 1>>
+	<<set $gwylan_eden_coop++>>
+
+	伊甸和格威岚从森林小路的两侧走出来。伊甸怀疑地盯着格威岚，但<<nnpc_he "Eden">>认为<<nnpc_him "Gwylan">>并不构成威胁。
+	<br><br>
+
+	"我们两个都在附近真是太好了，"格威岚说着，左右踱步。伊甸没有回应。
+	<<if $gwylan_aborted is 1>>
+		<<set $gwylan_aborted to 0>>
+		格威岚皱了皱眉头。"嘿，你为什么要攻击<<phim>>？你们闹矛盾了吗？"
+		<br><br>
+
+		伊甸叹了口气，交叉着<<nnpc_his "Eden">>的手臂。"<<pShe>>需要学会服从我。"格威岚似乎对这个答案不太满意，但没有再深究。
+
+	<<elseif $gwylan_aborted is 2>>
+		<<set $gwylan_aborted to 0>>
+		<<nnpc_He "Gwylan">>转向你，揉了揉<<nnpc_his "Gwylan">>的脖子。"抱歉之前没有救你，但我不想惹毛那个头狼。我不想让整个狼群来敲我的门。"
+		<br><br>
+
+		"等等，你被那个头狼攻击了？那只黑色的？"伊甸怒吼。"如果那东西再敢动你一根脚趾头，我就要狩猎自己一个漂亮的黑色地毯了。"
+	<</if>>
+	<br><br>
+
+	沉默了一会儿后，格威岚<<if $phase isnot 4>>收拾好<<nnpc_his "Gwylan">>的物品，然后<</if>>默默地向<<nnpc_his "Gwylan">>的商店方向走去。伊甸留下来，确认你是否安好。
+
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		<<slimePunishmentForest>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<forestCabinReturnLinks>>
+<<else>>
+	<<set $gwylan_aborted to 0>><<set $gwylan_eden_coop to 1>><<silently>><<nnpc_gendery "Gwylan">><</silently>>
+	<<set _Gwylan to ($forest_shop_intro is 1 or $gwylan_rescue is 1 ? "Gwylan" : "这" + _text_output)>>
+
+	伊甸从树林里走出来。"你没事吧？"<<nnpc_he "Eden">>问道。"还好我能在这——"
+	<br><br>
+	<<if _Gwylan is "Gwylan">>
+		<<nnpc_Hes "Eden">>被突然从树林冲出来的格威岚打断了。
+	<<else>>
+		<<nnpc_Hes "Eden">>的话被一个从树林中冲出来的灰褐色头发的<<nnpc_gendery "Gwylan">>打断了。
+	<</if>>
+	伊甸放下<<nnpc_his "Eden">>的步枪，指着<<nnpc_him "Gwylan">>。
+	<br><br>
+
+	"等等！"<<= _Gwylan is "Gwylan" ? "格威岚" : _Gwylan>>举起<<nnpc_his "Gwylan">>的双手，放下<<nnpc_he "Gwylan">>手里的?gwylanItem。"我是你们的盟友！我是来救<<phim>>的！"
+	<br><br>
+
+	伊甸没有放下<<nnpc_his "Eden">>的枪。"我为什么要相信你？"<<nnpc_He "Eden">>将手指放在扳机上。
+	<<stress 3>><<gstress>>
+	<br><br>
+
+	"真的，我说的是真的！"<<= _Gwylan.replace("Gwylan","格威岚")>>朝你那边瞥了一眼，然后又看向伊甸。"我在城镇入口处经营一家商店，当我听到<<phim>>尖叫时，我正在盘点货物。
+	<<if $gwylan_rescue is 1>>我以前救过<<phim>>，<<pshes>>是我的朋友。<<else>><<if $forest_shop_intro is 1>><<pShes>>是我以前的客人。<</if>>我想救<<phim>>。<</if>>”
+	<br><br>
+
+	<<if _Gwylan is "Gwylan">>
+		伊甸看向你，确认了一下。你点了点头，<span class="green"><<nnpc_he "Eden">>放下了<<nnpc_his "Eden">>的枪</span>。"好吧。但是别想耍什么花招。"
+		<br><br>
+
+		"我不会的，"格威岚说道。"我得回商店了，现在我知道<<pshes>>安全了。"
+	<<else>>
+		伊甸皱了皱眉头，然后<span class="green">放下了<<nnpc_his "Eden">>的枪</span>。
+		"好吧。但是别想耍什么花招。"
+		<br><br>
+
+		<<= _Gwylan.replace("Gwylan","格威岚")>>松了一口气，也放下了<<nnpc_his "Gwylan">>的手。<<nnpc_He "Gwylan">>转向你。<<nnpc_He "Gwylan">>看起来和你差不多年龄，有着灰褐色的头发和雀斑。"我比看起来年龄要大，"<<nnpc_he "Gwylan">>好像在读你的心思一样说道。"我叫格威岚，很高兴认识你！"
+		<br><br>
+
+		"我在森林外围有一家商店，你不会错过的，"<<nnpc_he "Gwylan">>说道。"我卖——"<<nnpc_he "Gwylan">>停了一下。"我祖<<print ($pronoun is "m" ? "父" : "母")>>卖——"又停了一下。"我卖些小玩意儿。那些你在普通商店里找不到的东西。我自己也不知道库存里有什么！"<<nnpc_He "Gwylan">>听起来很自豪。伊甸哼了一声。
+	<</if>>
+	<br><br>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">>开始走开，但停下来转身。"顺便说一下，"<<nnpc_he "Gwylan">>说道。"我能听到你们是因为你们离我的商店够近。<span class="gold">如果你们走得比湖的起点还远，我就听不到你们了。</span>记住这一点。"
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			<br><br>
+
+			"至于我，"伊甸说道，"我碰巧在附近。<span class="gold">我可能并不总是在你身边，但我应该能在森林的任何地方救你。</span>如果你遇到危险，喊一声。即使在湖的那边。"
+		<</if>>
+
+	<<elseif $eden_rescue isnot 1>>
+		<<set $eden_rescue to 1>>
+		当格威岚转身离开时，伊甸拍了拍你的肩膀。"我之所以能听到你们，是因为我碰巧在附近，"<<nnpc_he "Eden">>说道。"<span class="gold">我可能并不总是在你身边，但我应该能在森林的任何地方救你。</span>如果你遇到麻烦，喊一声。"
+		<br><br>
+	<</if>>
+
+	说完这些，格威岚朝<<nnpc_his "Gwylan">>商店的方向走去，抛下了被丢弃的货物。伊甸留下来，确认你是否安好。
+
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		<<slimePunishmentForest>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<forestCabinReturnLinks>>
+<</if>>

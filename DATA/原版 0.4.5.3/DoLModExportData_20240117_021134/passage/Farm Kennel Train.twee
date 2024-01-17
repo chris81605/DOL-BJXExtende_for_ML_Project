@@ -1,0 +1,37 @@
+:: Farm Kennel Train []
+<<effects>>
+
+你正设法让<<beastsplural>>集合好来训练。
+
+<<if $farm.beasts.dogs gte 20>>
+	他们服从了你的命令，渴望得到你的认可。
+	<br><br>
+<<elseif $farm.beasts.dogs gte 5>>
+	他们没有抱怨地服从了。
+	<br><br>
+<<elseif $farm.beasts.dogs gte -5>>
+	他们有点不情愿，但还是服从了。
+	<br><br>
+<<elseif $farm.beasts.dogs gte -20>>
+	他们看起来很警惕你。
+	<br><br>
+<<else>>
+	他们对你咆哮。
+	<<if $monster is 1>>
+		"入侵者！" 其中一只咆哮着。
+		<br>
+		"一个玩物！" 另一只说道。其他的表示赞同。
+	<</if>>
+	他们毫无疑问对你缺少尊敬。
+	<br><br>
+<</if>>
+
+你想尝试怎样的训练？
+<br><br>
+
+<<link [[严格|Farm Kennel Train Strict]]>><<stress 12>><<tiredness 12>><<farm_dogs 3>><</link>><<gstress>><<ggtiredness>><<gggrespect>>
+<br>
+<<link [[轻度|Farm Kennel Train Mild]]>><<stress 6>><<tiredness 6>><<farm_dogs 2>><</link>><<gstress>><<gtiredness>><<ggrespect>>
+<br>
+<<link [[杂耍|Farm Kennel Train Easy]]>><<farm_dogs 1>><</link>><<grespect>>
+<br>

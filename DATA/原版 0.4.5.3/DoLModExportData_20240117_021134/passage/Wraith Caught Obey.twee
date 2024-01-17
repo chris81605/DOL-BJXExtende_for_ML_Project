@@ -1,0 +1,40 @@
+:: Wraith Caught Obey []
+<<effects>>
+祂以诡异的动作移动，在空中留下虚影。一股温暖的力量在你的头脑中积聚。你毫无抵抗地跪倒在地。
+<br><br>
+<<generateWraith 1 true>>
+<<initWraith "arms" "abomination">>
+<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+	一双苍白的手抓住你的头。
+	<<if $wraith.gen is "arms">>
+		接着是更多的手。你抬起头，看到<<his>>的背后出现了好几条手臂。
+	<<else>>
+		有东西在你的腿和胳膊上滑来滑去。
+	<</if>>
+	"<span class="wraith">和我一起溺死吧。</span>"
+<<else>>
+	一只苍白的手抬起你的下巴。当你看着<<his>>的双眼时，你的大脑一片空白。
+	<<if $wraith.gen is "arms">>
+		许多支手臂从<<his>>的背后伸出。
+	<<else>>
+		有东西在你的腿和胳膊上滑来滑去。
+	<</if>>
+	"<span class="wraith">就像一个提线木偶。</span>"
+<</if>>
+<br><br>
+<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+	<<set $enemyanger -= 20>>
+	<<link [[继续|Wraith Caught]]>><</link>>
+<<else>>
+	人影从下往上开始迅速消散为白雾。你的嘴惊讶地张着。你什么都感觉不到。
+	<br><br>
+	雾流进你的嘴里，你的整个身体都感到非常的寒冷和僵硬。人影消失了。
+	<<if $location is "lake_ruin">>
+		你沉进水里，你感觉不到自己的手臂。
+	<<else>>
+		你站了起来，但感觉不到你的腿。
+	<</if>>
+	<br><br>
+	<<link [[继续|Wraith Snatched Intro]]>><<endcombat>><<endWraith>><<wraithPossess>><</link>>
+<</if>>
+<br>

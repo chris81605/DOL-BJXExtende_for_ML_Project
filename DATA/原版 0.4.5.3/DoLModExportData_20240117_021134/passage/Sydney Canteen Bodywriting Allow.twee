@@ -1,0 +1,24 @@
+:: Sydney Canteen Bodywriting Allow []
+<<run statusCheck("Sydney")>>
+悉尼的笔移到你的胳膊上，
+<<if !$skin.right_shoulder.pen>>
+	在你的右肩草草写下几笔。现在上面写着: <<if $sydneyromance is 1>><<bodywriting_npc_sydney right_shoulder "pen">><<else>><<bodywriting_npc_sydney_friendly right_shoulder "pen">><</if>>
+<<elseif $skin.right_shoulder.pen is "pen" or $skin.right_shoulder.pen is "lipstick" or $skin.right_shoulder.pen is "mud">>
+	<<he>>擦掉你原有的<<tattoo right_shoulder>>，草草写下自个儿的。<<bodywriting_clear right_shoulder>>现在你的右肩被写上了: <<if $sydneyromance is 1>><<bodywriting_npc_sydney right_shoulder "pen">><<else>><<bodywriting_npc_sydney_friendly right_shoulder "pen">><</if>>
+<<elseif !$skin.left_shoulder.pen>>
+	在你的左肩草草写下几笔。现在上面写着: <<if $sydneyromance is 1>><<bodywriting_npc_sydney left_shoulder "pen">><<else>><<bodywriting_npc_sydney_friendly left_shoulder "pen">><</if>>
+<<elseif $skin.left_shoulder.pen is "pen" or $skin.left_shoulder.pen is "lipstick" or $skin.left_shoulder.pen is "mud">>
+	<<he>>擦掉你原有的<<tattoo left_shoulder>>，草草写下自个儿的。<<bodywriting_clear left_shoulder>>现在你的右肩被写上了: <<if $sydneyromance is 1>><<bodywriting_npc_sydney left_shoulder "pen">><<else>><<bodywriting_npc_sydney_friendly left_shoulder "pen">><</if>>
+<<else>>
+	但一见到你的<<tattoo right_shoulder>>，<<he>>微微皱起了眉头。悉尼试着把它擦掉，但没成功。"或许得下次了。"
+<</if>>
+<br><br>
+<<He>>继续埋头处理堆积的工作了。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了。谢谢你一直陪着我。"<<He>>收捡好图书，快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+	凯拉尔从食堂的另一端看过来。
+	<<gksuspicion>><<npcincr Kylar rage 1>>
+	<br><br>
+<</if>>
+<<link [[继续|Canteen]]>><<endevent>><</link>>
+<br>

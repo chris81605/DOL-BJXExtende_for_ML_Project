@@ -1,0 +1,65 @@
+:: Kylar Walk In The Park 2 []
+<<set $outside to 1>><<effects>><<run statusCheck("Kylar")>>
+<<if $phase is 1>>
+	<<if _kylarStatus.includes("Rage")>>
+		<<if $speech_attitude is "meek">>
+			"你这样抓着我的手臂，弄得我有点疼，可以握住我的手吗？"你轻声问道。
+		<<elseif $speech_attitude is "bratty">>
+			"放松点，我的手臂都快要没有知觉了，"你轻轻拉了拉凯拉尔，然后伸出你的手。
+		<<else>>
+			"你不想牵手吗？"你说，试图掩盖凯拉尔紧握带来的疼痛。
+		<</if>>
+		<<He>>松开你的手臂，但很快就用同样的力度握住了你的手。
+	<<elseif _kylarStatus.includes("Sus")>>
+		你抓住凯拉尔的手，捏了捏。一开始<<He>>似乎很惊讶，但很快就把你的手指紧紧地锁住了。
+	<<else>>
+		你轻轻捏了捏凯拉尔的手，<<He>>看向你，露出了一个灿烂的笑容。
+	<</if>>
+	<<takeHandholdingVirginity "Kylar" "romantic">>
+	<<npcincr Kylar rage -1>><<lksuspicion>>
+	<br><br>
+<</if>>
+你们两个继续散步。
+<<if _kylarStatus.includes("Rage")>>
+	凯拉尔向每一个过路人挥手，同时把你拉得更近。<<he>>非常亢奋。
+<<elseif _kylarStatus.includes("Sus")>>
+	每当看到你瞥一眼路人时，<<he>>就会紧张起来。
+<<else>>
+	<<if $phase is 1>>
+		凯拉尔握着你的手，似乎很开心。
+	<<else>>
+		你们走路的过程中，凯拉尔慢慢靠得越来越近。
+	<</if>>
+<</if>>
+<<if $kylar.fountain is 1>>
+	最后，你们回到了喷泉。
+<<else>>
+	最后，你们到达了公园的喷泉。
+<</if>>
+<<if Time.season is "winter">>
+	<<if !$kylarSeen.includes("fountainWinter")>>
+		<<set $kylarSeen.pushUnique("fountainWinter")>>
+		凯拉尔停在原地，凝视着喷泉。<<He>>似乎被眼前的景象迷住了，源源不断的水流和寒冷的温度致使喷泉的大部分被冻结，形成比你的手臂还要粗的冰柱，长度至少是它们的两倍。在中心附近，仍有一些水还在流淌。
+		"它太漂亮了，这是我见过的最棒的东西！"<<He>>瞥了你一眼，"呃……嗯，第二棒的东西。"
+	<</if>>
+	大部分地方都被冰覆盖，但偶尔会有一些未结冰的水域。
+<</if>>
+<<if !$kylarSeen.includes("fountainIntro")>>
+	你注意到有什么东西在水中闪闪发光。仔细一看，似乎是一些硬币。
+<</if>>
+<br><br>
+
+<<if $money gte 10>>
+	<<link [[扔硬币 (£0.10)|Kylar Fountain Wish]]>><<set $money -= 10>><<trauma -3>><<set $kylar.fountainCoin to 1>><</link>><<ltrauma>>
+	<br>
+<</if>>
+<<link [[从喷泉里拿一枚硬币再扔进去|Kylar Fountain Wish]]>><<set $kylar.fountainCoin to 0>><</link>>
+<br>
+<<if $kylar.fountain is 1>>
+	<<link [[坐在喷泉旁|Kylar Walk In The Park End]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续走|Kylar Walk In The Park End]]>><</link>>
+	<br>
+<</if>>
+<br>

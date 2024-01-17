@@ -1,0 +1,49 @@
+:: Maths Whitney Read []
+<<effects>>
+
+你打开纸团，看到了一段潦草的话。
+<br><br>
+
+<<if $rng gte 51>>
+	<<if $whitneypantiescheck is 1>>
+		<i>"你没穿<<if $player.gender_appearance is "f">>内裤<<else>>内衣<</if>>，对吧？给我看看。"</i>
+	<<elseif $whitneypantiescheck is 2>>
+		<i>"你穿了内衣，对吧？给我看看。"</i>
+	<<else>>
+		<i>"给我看看你的<<if $player.gender_appearance is "f">>内裤<<else>>内衣<</if>>，骚货。"</i>
+	<</if>>
+	<br><br>
+
+	<<if $whitneypantiescheck gte 1>>
+		<<if !$worn.under_lower.type.includes("naked") and ($whitneypantiescheck is 1 or $worn.under_lower.gender isnot "f")>>
+			<span class="pink">惠特尼如果知道你无视了<<his>>要求肯定会不高兴的。</span>
+			<br><br>
+
+			<<set $skulduggerydifficulty to 300>>
+			<<link [[试着欺骗惠特尼|Maths Whitney Undies Trick]]>><</link>><<skulduggerydifficulty>>
+			<br>
+		<</if>>
+	<</if>>
+
+	<<link [[展示|Maths Whitney Undies Show]]>><</link>><<exhibitionist1>>
+	<br>
+
+	<<link [[无视|Maths Whitney Undies Ignore]]>><</link>>
+	<br>
+
+<<else>>
+	<i>"我的骚货表现如何？"</i>
+	<br><br>
+
+	<<link [[礼貌地回复|Maths Whitney Respond]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[挑逗地回复|Maths Whitney Respond]]>><<set $phase to 1>><<npcincr Whitney lust 1>><</link>><<promiscuous1>><<glust>>
+	<br>
+	<<link [[积极地回应|Maths Whitney Respond]]>><<set $phase to 2>><<def 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[把纸团扔回去|Maths Whitney Throw]]>><</link>>
+	<br>
+	<<link [[扔掉它|Maths Whitney Bin]]>><</link>>
+	<br>
+<</if>>
+<br><br>

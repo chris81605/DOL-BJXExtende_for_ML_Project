@@ -1,0 +1,76 @@
+:: Bog []
+<<set $location to "bog">><<set $outside to 1>><<effects>>
+
+你身处森林与荒原间的沼泽中。
+<<if $bogwater gte 1>>
+	<<water>><<set _bogmod to 1.5>>
+	水浅浅的，可以站在里面。
+<<else>>
+	你站在木走道上，不至于陷入泥潭。
+<</if>>
+<<switch $weather>>
+	<<case "clear" "overcast">>
+		<<switch Time.dayState>>
+			<<case "dawn">>
+				晨光熹微，透过林木投下旖旎的光线。
+			<<case "day">>
+				强烈的阳光穿透树冠。
+			<<case "dusk">>
+				走道上舞动着奇异的光影，又经由水面反射。
+			<<case "night">>
+				<<if isBloodmoon()>>
+					停滞的水将红光反射到树冠上。
+				<<else>>
+					停滞的水反射的些许月光正好为你照亮。
+				<</if>>
+		<</switch>>
+		东边能远远望见一座石塔。
+	<<case "rain">>
+		雨水穿过厚重的树冠落下来，打在路上，很有节奏地滴答作响。
+	<<case "snow">>
+		树冠承住了大部分雪片，形成了一片超现实<<if isBloodmoon()>>红<<else>>白<</if>>毯。
+<</switch>>
+<<if $bogdepth is 4>>
+	岩壁挡住了回森林的路。<span class="red">没有向上的路了。</span>
+<<elseif $bogdepth is 1>>
+	林木稀疏，从这里可以看到荒原。
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasmbog>>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutbog>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $eventskip is 0>>
+		<<rng>>
+		<<if $danger gte (9900 - ($allure * _bogmod))>>
+			<<eventbog>>
+		<<else>>
+			<<eventbogsafe>>
+		<</if>>
+	<<else>>
+		<<if $bogwater gte 1>>
+			<<link [[拖着身子回到走道上|Bog]]>><<set $bogwater to 0>><<set $eventskip to 1>><</link>>
+			<br>
+		<<else>>
+			沿着走道前进
+			<br>
+			<<if $bogdepth lte 3>>
+				<<foresticon>><<link [[向森林西行 (0:15)|Bog]]>><<set $bogdepth += 1>><<pass 15>><</link>>
+				<br>
+			<</if>>
+			<<if $bogdepth gte 2>>
+				<<mooricon>><<link [[向荒原东行 (0:15)|Bog]]>><<set $bogdepth -= 1>><<pass 15>><</link>>
+				<br>
+			<<elseif $bogdepth lte 1>>
+				<<mooricon>><<link [[向荒原东行 (0:15)|Moor]]>><<set $bogdepth to 0>><<set $bogwater to 0>><<set $moor to 85>><<set $eventskip to 1>><<pass 15>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

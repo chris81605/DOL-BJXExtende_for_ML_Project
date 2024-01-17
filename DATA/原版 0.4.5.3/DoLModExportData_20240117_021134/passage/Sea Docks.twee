@@ -1,0 +1,55 @@
+:: Sea Docks []
+<<location "seadocks">><<water>><<effects>>
+你在码头附近的海里游泳，在海滩的东边。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		黑暗的海水被雨水冲击着。
+	<<elseif $weather is "snow">>
+		黑暗的水吞噬着你周围的雪。
+	<<else>>
+		水是黑的，是不祥的预兆。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		暴雨使地面摇晃不定。
+	<<elseif $weather is "snow">>
+		码头上熙熙攘攘，工人们裹得暖暖的，以抵御严寒。
+	<<else>>
+		码头上熙熙攘攘，水面平静而清澈。
+	<</if>>
+<</if>>
+<br><br>
+<<if $seaswim is 1>>
+	<<set $seaswim to 0>>
+	你花了一些时间游泳。
+	<<physique 3>><<swimmingskilluse>>
+	<br><br>
+<</if>>
+<<if $exposed gte 1>>
+	你把你的<<lewdness>>隐藏在水下。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventssea>>
+	<<else>>
+		<<if $earSlime.forcedCommando isnot undefined and $worn.under_lower.name isnot "naked">>
+			<span class="red">你耳朵里的史莱姆拒绝让你穿着泳装爬上码头。</span>
+		<<else>>
+			<<docksicon>><<link [[爬上码头 (0:02)|Mer Street]]>><<pass 2>><</link>>
+		<</if>>
+		<br>
+		<<swimicon "back">><<link [[练习游泳 (0:30)|Sea Docks]]>><<pass 30>><<stress -6>><<tiredness 6>><<set $seaswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>>
+		<br>
+		<<swimicon>><<link [[游向外海 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea to 0>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+		<br><br>
+		<<seabeach>><<swimmingdifficultytext0>>
+		<br>
+		<<seacliffs>><<swimmingdifficulty 1 100>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

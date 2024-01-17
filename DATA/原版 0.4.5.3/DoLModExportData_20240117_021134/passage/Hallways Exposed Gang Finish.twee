@@ -1,0 +1,66 @@
+:: Hallways Exposed Gang Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<endcombat>>
+	"这里怎么吵吵囔囔的？" 一个低沉的声音响起。是多伦。
+	<<npc Doren>><<person1>>
+	学生们突然行动起来，他们放弃了他们原先的计划。匆匆忙忙地离开了。
+	<br><br>
+
+	<<clotheson>>
+	多伦一看到你就停在了原地，立马移开<<his>>的视线了。
+	<br><br>
+
+	<<link [[继续|Hallways Exposed Doren]]>><<set $phase to 0>><</link>>
+	<br><br>
+<<elseif $enemyhealth lte 0>>
+	学生们纷纷后退，给了你一个你一直等待的机会。<<tearful>>你冲过拐角，躲进了一个维修柜，迅速关上门，背靠着门倒在了地上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $finish is 1>>
+	学生们把空间留给了你，有些人比其他人更不情愿。
+	<br><br>
+	<<tearful>>你走开了。到了拐角处，你的从容不迫被一种发麻的恐惧所替代。你躲进一个维修柜，关上它，背靠着门坐了下来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<set $rescued += 1>>
+	<<endcombat>>
+	<<if $rescue gte 2>>
+		从走廊尽头传来的喊叫使得学生们开始逃离。你也想这么做的时候不知道被谁抓住了，你一回头发现自己正与惠特尼对个正着，<<nnpc_He "Whitney">>看起来很生气。<<status 1>><<gcool>>
+		<br>
+		"这他妈的发生了什么？"<<nnpc_he "Whitney">>质问道，"是你——"
+		<br><br>
+
+		一个低沉的声音打断了<<nnpc_him "Whitney">>。"那骚动是怎么回事？"多伦问道。
+		<<npc Doren>><<person1>>
+		<<His>>瞟了你一眼后，惠特尼皱起了眉毛。"放开<<phim>>，<<nnpc_lass "Whitney">>。"
+		<br><br>
+
+		惠特尼瞪了眼多伦，讥讽道："随便吧，你这<<if $pronoun is "m">>狼人<<else>>多毛的老拖把<</if>>。你来处理<<phim>>。"<<nnpc_He "Whitney">>把你猛地推向多伦，而后者本能地退了半步。<<nnpc_He "Whitney">>头也不回地离开了。
+		<<clotheson>>
+
+		<<link [[继续|Hallways Exposed Doren]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		"这里怎么吵吵囔囔的？" 一个低沉的声音响起。是多伦。
+		<<npc Doren>><<person1>>
+		学生们突然行动起来，他们放弃了他们原先的计划。匆匆忙忙地离开了。
+		<br><br>
+
+		<<clotheson>>
+		多伦一看到你就停在了原地，立马移开<<his>>的视线了。
+		<br><br>
+
+		<<link [[继续|Hallways Exposed Doren]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+<</if>>

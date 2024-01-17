@@ -1,0 +1,91 @@
+:: English Play Late Role []
+<<schooleffects>><<effects>>
+<<unset $englishPlayLate>>
+你打算报名参演
+<<switch $phase>>
+	<<case 1>>
+		卡斯，那位爱上了富家子弟泰勒的年轻乞丐。
+		<<set $englishPlayRoles to {
+			Player: "Cass",
+			Kylar: "Taylor",
+			Sydney: "Sterling",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: true,
+			SydneyCount: 0
+		}>>
+	<<case 2>>
+		泰勒，那位爱上了年轻乞丐的富家子弟。
+		<<set $englishPlayRoles to {
+			Player: "Taylor",
+			Kylar: "Sterling",
+			Sydney: "Cass",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: true,
+			SydneyCount: 0
+		}>>
+	<<case 3>>
+		<<set _playPronoun to ($player.gender_appearance is "m" ? "先生" : "女士")>>
+		斯特林<<print _playPronoun>>，泰勒富有的家长，反对泰勒跟卡斯的恋情。
+		<<set $englishPlayRoles to {
+			Player: "Sterling",
+			Kylar: "Taylor",
+			Sydney: "Cass",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: true,
+			SydneyCount: 0
+		}>>
+<</switch>>
+<<if C.npc.Kylar.state is "prison">>
+	<<set $englishPlayRoles.Kylar to "none">>
+<</if>>
+<br><br>
+
+<<if $englishPlayRoles.Kylar isnot "none">>
+	<<set $englishPlayRoles.KylarKnown to true>>
+	<<run statusCheck("Kylar")>>
+	<<npc Kylar>><<person1>>
+	你一放下签名的笔，就有个人一把将它拿走，在你的名字下面签了名。那是凯拉尔，你之前甚至没看到<<him>>在教室里。
+	<<if _kylarStatus.includes("Rage")>>
+		<<He>>深吸了一口气，然后看向了你。"这样我们就可以有更多时间在一起了，不是吗？"<<He>>朝你靠了过来。"<span class="gold">我会在外面的老地方</span>。我们应该马上就开始排练。"
+	<<else>>
+		<<He>>把笔放回原处，对你露出紧张的微笑，"我觉得这会很有趣。我会……<span class="gold">在后操场</span>。我们该开始排练了。"
+	<</if>>
+	<br><br>
+
+	凯拉尔看起来因为语文教室里的人数众多而感到不安，尤其有几个学生正直直地盯着<<him>>。<<He>>后退了一步，然后尽可能安静地离开了教室。
+	<br><br>
+	<<endevent>><<npc Sydney>><<person1>>
+
+	"你就是我的全部动力，"另一个声音说道。你转过身来，看到悉尼正在走进。"我本来一直在犹豫要不要报名，但现在只剩下最后一个名额了。如果你和凯拉尔都报名了，那么……"
+	<br><br>
+
+	<<He>>拿出了一支红色的马克笔，把名字签在了同一页纸上，还在旁边画了个笑脸。"如果你想排练的话，<span class="gold">我每天放学后都会在这里。</span>我们应该把凯拉尔也叫上！"
+	<br><br>
+
+	你拿起一本排练手册，低头看向里面的内容。<span class="blue">凯拉尔决定扮演<<print $englishPlayRoles.Kylar.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒")>>，悉尼决定扮演<<print $englishPlayRoles.Sydney.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒")>>。</span>
+<<else>>
+	<<npc Sydney>><<person1>>
+	<<if $sydneyromance is 1>>
+		一双手悄悄靠近，遮住了你的眼睛，吓了你一跳。"猜猜我是谁？"一个声音笑着问道，你马上就认了是谁。你挣脱开来，转身看向了悉尼。
+	<<else>>
+		"你就是我的全部动力，"另一个声音说道。你转过身来，看到悉尼正在靠近。
+	<</if>>
+	"我本来一直在犹豫要不要报名参加，不过现在只剩下最后一个名额了。如果你也报名了，那么……"
+	<br><br>
+
+	<<He>>拿出了一支红色的马克笔，把名字签在了同一页纸上，还在旁边画了个笑脸。"如果你想排练的话，<span class="gold">我每天放学后都会在这里。</span>"
+	<br><br>
+
+	你拿起一本排练手册，低头看向里面的内容。<span class="blue">悉尼决定扮演<<print $englishPlayRoles.Sydney.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒")>>。</span>
+<</if>>
+<br><br>
+
+<span class="gold">话剧演出已添加到日志中。你可以自己练习台词，也可以和你的搭档一起练习，以获得更好的效果。</span>
+<br><br>
+
+<<endevent>>
+<<link [[继续|English Classroom]]>><<set $eventskip to 1>><</link>>
+<br>

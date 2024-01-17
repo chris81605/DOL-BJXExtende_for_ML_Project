@@ -1,0 +1,37 @@
+:: Danube House Sneak Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+
+	<<if $footdisable is "f">>
+		"我最好用脚，"<<he>>说："你多半会很脏。"
+		<br><br>
+		<<if $NPCList[0].vagina isnot "none">>
+			<<set $NPCList[0].vagina to "footjob">>
+		<<elseif $NPCList[0].penis isnot "none">>
+			<<set $NPCList[0].penis to "footjob">>
+		<</if>>
+		<<if $player.penisExist and (!$player.vaginaExist or random(1, 2) is 2)>>
+			<<set $penisuse to "feet">><<set $speechpenisfoot to 1>>
+		<<else>>
+			<<set $vaginause to "feet">><<set $speechvaginafoot to 1>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Danube House Sneak Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Danube House Sneak Molestation]]>><</link>></span><<nexttext>>
+<</if>>

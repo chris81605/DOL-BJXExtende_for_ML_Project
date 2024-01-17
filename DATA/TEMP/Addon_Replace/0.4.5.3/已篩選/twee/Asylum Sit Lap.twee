@@ -1,0 +1,21 @@
+:: Asylum Sit Lap []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+你坐到医生的腿上。<<He>>用一只手搂着你的腰。
+<<promiscuity1>>
+"今天我想谈谈接吻的事情，"<<he>>说道。"这是一种正常健康的行为。随时随地和任何人接吻都没有关系。"<<he>>靠近了。"亲我一下。"
+<br><br>
+<<link [[亲吻脸颊|Asylum Sit Kiss]]>><<suspicion -1>><<awareness -1>><</link>><<promiscuous1>><<lsuspicion>><<lawareness>>
+<br>
+<<if $promiscuity gte 15>>
+	<<link [[亲吻嘴|Asylum Sit Kiss Mouth]]>><<suspicion -5>><<awareness -10>><<npcincr Harper love 1>><</link>><<promiscuous2>><<llsuspicion>><<llawareness>>
+	<br>
+	<<set $skulduggerydifficulty to (700 + ($suspicion * 6))>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<elseif $asylumkeycard isnot 1>>
+	    /* 北极星模组 */
+		<<link [[偷走钥匙卡|Asylum Sit Steal]]>><<set $skulduggeryhands to 1>><</link>><<promiscuous2>><<skulduggerydifficulty>> <<note "低怀疑下将更加容易" "italic">>
+		/* 北极星 */
+		<br>
+	<</if>>
+<</if>>
+<<link [[拒绝|Asylum Sit Refuse]]>><<suspicion 1>><<stress 3>><</link>><<gsuspicion>><<gstress>>

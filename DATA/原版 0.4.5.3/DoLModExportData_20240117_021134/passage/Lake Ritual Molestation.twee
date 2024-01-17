@@ -1,0 +1,33 @@
+:: Lake Ritual Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $consensual to 0>>
+	<<neutral 1>>
+	<<controlloss>>
+	<<molested>>
+	<<maninit>>
+	<<npcidlegenitals>>
+	<<set $enemyarousalmax /= 2>>
+	<<set $enemyarousal /= 2>>
+	<<if isLoveInterest("Eden") and !$edenCagedEscape and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+		<<set $phase2 to 1>>
+	<<elseif $wraith.state and $wraithIntro and $hallucinations gte 2>>
+		<<enable_rescue>>
+		<<set $phase2 to 2>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Lake Ritual Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Lake Ritual Molestation]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,75 @@
+:: Temple Confess Self []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>><<sydneySchedule>>
+<<set $confessionsDone = ($confessionsDone || 0) + 1>>
+<<if C.npc.Jordan.init is 1 and Time.dayState isnot "night" and Time.dayState isnot "dusk" and $daily.jordanMissing isnot 1 and $rng lte 15>>
+	<<set $attendant to "Jordan">>
+	<<npc Jordan>><<person1>>
+<<elseif C.npc.Sydney.init is 1 and $sydney.rank isnot "initiate" and _sydney_location is "temple" and $rng lte 30>>
+	<<set $attendant to "Sydney">>
+	<<npc Sydney>><<person1>>
+<<elseif (Math.floor($world_corruption_soft / 4) + random(1, 30)) gte $rng>>
+	<<set $attendant to "Confessor">>
+	<<generateConfessor 1>><<person1>>
+<<else>>
+	<<set $attendant to "Other">>
+	<<generateTemple 1>><<person1>>
+<</if>>
+你走进了隔间右侧，关上身后沉重的大门。低头是一座朴素的长椅，抬头则是一层层厚重的木条，遍布符号，将你和另一侧隔开，一座金属百叶窗在其下方。
+角落中，你看见了露出的泡沫隔音层——无论你们在这说了什么，外面的人都听不见。头顶一侧还有一个小架子，上面叠了一堆毛巾。
+<br><br>
+
+不一会儿，你听见另一扇门被人所打开，一个身影坐在了另一侧。“嚓”的一声响起，似乎有什么东西被擦燃，熏香的味道随之飘散而来。
+你听到了一个<<personsimple>>的声音。
+"欢迎你，孩子。坦露你内心深处的罪孽，祈求主的赦免，"<<He>>的语调非同寻常，尽量掩饰平时的声线。
+<br><br>
+
+
+<<link [[忏悔你的疑虑|Temple Confess Self Doubt]]>><<set $confession to "doubt">><<stress -12>><<awareness -5>><</link>><<llstress>><<lawareness>>
+<br>
+<<link [[忏悔你的引诱|Temple Confess Self Temptation]]>><<set $confession to "temptation">><<arousal 20>><<awareness 3>><</link>><<garousal>><<gawareness>>
+<br>
+<<if $promiscuity gte 15>>
+	<<link [[忏悔你的淫乱|Temple Confess Self Promiscuity]]>><<set $confession to "promiscuity">><<control -25>><</link>> <<note "- 淫乱" "green">> <<llcontrol>><<gggtrauma>>
+	<br>
+<</if>>
+<<if $exhibitionism gte 15>>
+	<<link [[忏悔你的赤裸|Temple Confess Self Exhibitionism]]>><<set $confession to "exhibitionism">><<control -25>><</link>> <<note "- 暴露癖" "green">> <<llcontrol>><<gggtrauma>>
+	<br>
+<</if>>
+<<if $deviancy gte 15>>
+	<<link [[忏悔你的癖好|Temple Confess Self Deviancy]]>><<set $confession to "deviancy">><<control -25>><</link>> <<note "- 异种癖" "green">> <<llcontrol>><<gggtrauma>>
+	<br>
+<</if>>
+<<if $purity lte 700 or $demon gte 6>>
+	<<link [[忏悔你的不洁|Temple Confess Self Purity]]>><<set $confession to "purity">><</link>><<gpurity>>
+	<br>
+<</if>>
+<<if $loveInterest.primary isnot "None" and $loveInterest.secondary isnot "None">>
+	<<link [[忏悔你的不忠|Temple Confess Self Cheating]]>><<set $confession to "cheating">><<trauma -6>><<stress 12>><<awareness -10>><</link>><<ltrauma>><<ggstress>><<llawareness>>
+	<br>
+<</if>>
+<<if $player.virginity.temple isnot true and $temple_rank isnot "prospective" and $temple_rank isnot undefined>>
+	<<link [[忏悔你的破誓|Temple Confess Self Vow]]>><<set $confession to "vow">><</link>><<dangerousText>>
+	<br>
+<</if>>
+/*
+ *	<<if crimeSumCurrent() gte 1000>>
+ *		<<link [[Confess your crimes|Temple Confess Self Crime]]>><<set $confession to "crime">><<stress -24>><</link>><<lllstress>>
+ *		<br>
+ *	<</if>>
+ *	<<if $jordanSin>>
+ *		<<link [[Confess to spying on Jordan|Temple Confess Self Jordan]]>><<set $confession to "Jordan">><</link>>
+ *		<br>
+ *	<</if>>
+ *	<<if $exposed gte 2>>
+ *		<<link [[Confess that you're naked|Temple Confess Self Naked]]>><<set $confession to "naked">><</link>>
+ *		<br>
+ *	<<elseif $exposed gte 1>>
+ *		<<link [[Confess that you're exposed|Temple Confess Self Exposed]]>><<set $confession to "exposed">><</link>>
+ *		<br>
+ *	<</if>>
+ *	<<if $goocount + $semencount gte 10>>
+ *		<<link [[Confess that you're covered in lewd fluids|Temple Confess Self Goo]]>><<set $confession to "goo">><</link>>
+ *		<br>
+ *	<</if>>
+*/

@@ -1,0 +1,18 @@
+:: Pharmacy Select Custom Lenses []
+"给，"<<he>>将一个平板递给你说道，"你可以使用调色板来选择你喜欢的任何颜色，在你选定之后，我会为你下订单的。"
+<br><br><br>
+<div id="picker"></div>
+<<set _color_lenses_temp>> <!-- used inside colorWheelContactLenses() -->
+<<run colorWheelContactLenses()>>
+<br><br>
+<<link [[选购这个|Pharmacy Order Custom Lenses]]>>
+	<<set $money -= 50000>>
+	<<set $custom_lenses_already_ordered to 1>>
+	<<run $lenses_ordered.push([window.colorNamer(_color_lenses_temp[0].hexString), Time.monthDay.toString() + Time.month + Time.year.toString(), [_color_lenses_temp[0].hexString, _color_lenses_temp[0].hsl["l"] / 500]])>>
+	<<if $pharmacy_order_colours is 2>>
+		<<set $money -= 45000>>
+		<<run $lenses_ordered.push([window.colorNamer(_color_lenses_temp[1].hexString), Time.monthDay.toString() + Time.month + Time.year.toString(), [_color_lenses_temp[1].hexString, _color_lenses_temp[1].hsl["l"] / 500]])>>
+	<</if>>
+<</link>>
+<br>
+<<link [[离开|Pharmacy]]>><</link>>

@@ -1,0 +1,226 @@
+:: Pub Fame Favour []
+<<effects>>
+
+<<if $pubfame.goal.includes("Raise") and ($fame[$pubfame.target] gte 2000 or $pubfame.target is "pregnancy" and $fame.pregnancy gte playerNormalPregnancyTotal() *100)>>
+	<<set _failed to 1>>
+	米奇摇了摇头。"<span class="teal">那对你没什么好处。</span>在<<fameProse $pubfame.target>>方面，你已经声名远扬到人尽皆知的地步，没有什么提升的意义了。重新选其他的吧。"
+
+<<elseif $pubfame.goal.includes("Lower") and $fame[$pubfame.target] lte 0>>
+	<<set _failed to 1>>
+	米奇摇了摇头。"<span class="teal">那对你没什么好处。</span>在<<fameProse $pubfame.target>>方面，已经完全没有人知道你了。再试图降低也没什么意义。重新选其他的吧。"
+
+<<elseif $pubfame.goal.includes("Raise") and $fame[$pubfame.target] lt 30>>
+	<<set _failed to 1>>
+	米奇摇了摇头。"<span class="red">抱歉。</span>我要这么做的话，你得再出名一些。我现在手头的材料还不足。"对方耸了耸肩。"如果你至少达到<span class="teal">鲜为人知</span>的程度，我就能帮上忙。重新选一个吧。"
+
+<<elseif $pubfame.goal.includes("temp") and $fameDecayTimer[$pubfame.target] gte 1>>
+	<<set _failed to 1>>
+	米奇摇了摇头。"<span class="red">抱歉。</span>我最近刚刚改变过你在<<fameProse $pubfame.target>>界的名声。再操纵传言的话可能会适得其反。在这一点上我无能为力。"对方耸了耸肩。"如果你想的话，可以现在就永久性地<<if $pubfame.goal.includes("Lower")>>降低<<else>>提高<</if>>它。但是暂时的调整还不行。重新选一个吧。"
+	<br><br>
+
+	<span class="gold">你现在可以再次战术改变你的<<fameProse $pubfame.target>>名声了
+	<<if $fameDecayTimer[$pubfame.goal] gt 1>>在<<number $fameDecayTimer[$pubfame.goal]>>时<<else>>明天<</if>>。</span>
+
+<<elseif $pubfame.goal.includes("Raise") and ["sex","rape","bestiality","exhibitionism"].includes($pubfame.target)>>
+	米奇眨了眨眼。"你想要我提高你在<<fameProse $pubfame.target>>界的名声？那只会对你不利。"他（她）耸了耸肩。"你说了算。没什么难的，所以<span class="green">你欠我一个小人情。</span>"
+
+<<elseif $pubfame.goal.includes("Lower") and ["scrap","good","business","social","pimp"].includes($pubfame.target)>>
+	米奇眨了眨眼。"你想要我降低你在<<fameProse $pubfame.target>>界的名声？那只会对你不利。"对方耸了耸肩。"你说了算。没什么难的，所以<span class="green">你欠我一个小人情。</span>"
+
+<<elseif $pubfame.goal.includes("Raise") and $pubfame.target is "prostitution">>
+	米奇扬起了眉毛。"你想让我提高你在<<fameProse $pubfame.target>>界的名声？你是想涨价吗？"对方耸了耸肩，"你说了算。没什么难的，所以<span class="green">你欠我一个小人情。</span>"
+
+<<elseif $pubfame.goal.includes("Raise") and ["pregnancy", "impreg"].includes($pubfame.target)>>
+	米奇扬起了眉毛。"你想让我提高你在<<fameProse $pubfame.target>>界的名声？你就这么渴望有个家？"对方迟疑了一下，"抱歉，我没有恶意。这应该没什么难的，所以<span class="green">你欠我一个小人情。</span>"
+
+<<elseif $pubfame.goal.includes("Lower") and $pubfame.target is "model">>
+	米奇扬起了眉毛。"你想让我降低你在<<fameProse $pubfame.target>>界的名气？成名的负担太重了？"对方耸耸肩，"你说了算。应该没什么难的，所以<span class="green">你欠我一个小人情。</span>"
+
+<<elseif $pubfame.goal is "permRaise" and $pubfame.target is "scrap">>
+	米奇嘶地吸了口气。"永久提高你在<<fameProse $pubfame.target>>界的名气……这有些困难，但也不是不可以。<span class="pink">作为回报，我需要你帮我一个大忙。</span>希望你不要介意。"
+
+<<elseif $pubfame.goal is "permLower" and $pubfame.target is "exhibitionism">>
+	米奇嘶地吸了口气。"永久降低你在<<fameProse $pubfame.target>>界的名气……这有些困难，但也不是不可以。<span class="pink">作为回报，我需要你帮我一个大忙。</span>希望你不要介意。"
+
+<<elseif $pubfame.goal is "permLower" and ["sex","prostitution","rape","bestiality", "pregnancy"].includes($pubfame.target)>>
+	"永久降低你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇看着你的眼睛。"这会有点困难，所以<span class="purple">你欠我个大人情。</span>希望你别介意。"
+
+<<elseif $pubfame.goal is "permRaise" and ["good","business","social","model","pimp"].includes($pubfame.target)>>
+	"永久提升你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇看着你的眼睛。"这会有点困难，所以<span class="purple">你欠我个大人情。</span>希望你别介意。"
+
+<<elseif $pubfame.goal is "tempRaise" and $pubfame.target is "scrap">>
+	"暂时提升你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇看着你的眼睛。"这会有点困难，所以<span class="purple">你欠我个大人情。</span>希望你别介意。"
+
+<<elseif $pubfame.goal is "tempLower" and $pubfame.target is "exhibitionism">>
+	"暂时降低你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇看着你的眼睛。"这会有点困难，所以<span class="purple">你欠我个大人情。</span>希望你别介意。"
+
+<<elseif $pubfame.goal.includes("Raise")>>
+	"暂时提升你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇点了点头，"<span class="blue">我想我知道要让你去干什么了。</span>"
+
+<<elseif $pubfame.goal.includes("Lower")>>
+	"暂时降低你的<<fameProse $pubfame.target>>名声吗，明白了。"米奇点了点头，"<span class="blue">我想我知道要让你去干什么了。</span>"
+
+<<else>> <!-- all conditions should be met in the above if statements -->
+	<<set _failed to 1>>
+	"呃……"米奇皱起了眉头。"抱歉，我不确定你是什么意思。帮不到你，重新选一个吧。"<span class="black"><i>(这是个发生在goal "<<print $pubfame.goal>>" 和 target "<<print $pubfame.target>>"的bug，请通知Vrelnir（作者）)</i></span>
+<</if>>
+<br><br>
+
+<<if _failed isnot 1>>
+	<<unset $pubfameTemp>><<unset $pubfameLower>><<unset $pubfameTarget>>
+	<<pubfameDifficulty>>
+	<<set $pubfame[$pubfame.task] to {}>>
+	<<switch $pubfame.task>>
+		<<case "river">>
+			"你认识瑞沃吗？学校的数学老师。检查<<nnpc_him "River">>，确保<<nnpc_hes "River">>状态良好。不要告诉<<nnpc_him "River">>关于我的事，只告诉我<<nnpc_he "River">>怎么样。"米奇揉了揉自己的胳膊。"<<nnpc_He "River">>曾经帮助过我。我关心的是<<nnpc_him "River">>。"
+			<<if $soup_kitchen_known isnot 1 and !Time.schoolTerm>>
+				<<set $soup_kitchen_known to 1>>
+				<br><br>
+
+				"你可以在神殿旁边的施粥所找到<<nnpc_him "River">>，"米奇补充道。"如果学校放假，你可以去那里。<span class="gold"><<ampm 18 00>>到<<ampm 21 00>>之间</span>。"
+				<br><br>
+
+				<span class="gold">你发现了狼街上的施粥所。</span>
+			<</if>>
+
+		<<case "gwylan">>
+			"有一个雪花玻璃球，它的底部有一个重要的代码。"米奇交叉着手臂。"是的，我很严肃。这条联络方式没有别的东西可以写。而且他们很着急。找到雪花玻璃球并把它带给我。<span @class="$forest_shop_intro isnot 1 ? 'gold' : ''">在森林的外围有一家商店，</span>它很有可能就在那里。那地方收集任何东西。"
+
+		<<case "temple">>
+			"我在破解一个废弃账户，需要一串密码。"米奇说，"那密码至少由64个随机字符组成，他们真带点被害妄想。暴力破解行不通。我认为他们把密码留在了一本书里，那本书就在狼街的神殿里。我进不去，但你可以。明白了吗？很好。我认为那本书与建筑有关。"
+			<<if $temple_rank is undefined or $temple_rank is "prospective">>
+				<br><br>
+
+				"<span class="gold">如果你不是神殿里的人，那就让领头的<<nnpc_title "Jordan">>帮帮忙。</span>"米奇补充道，"<<nnpc_his "Jordan">>的名字是约旦。<<nnpc_Hes "Jordan">>会帮你的。"
+			<</if>>
+
+		<<case "office">>
+			米奇消失在门后，过了一会儿拿着一个巴掌大的信封出来了。"我需要你把这个送到别处。"米奇说道，"商业街上的办公大楼，15层高的那栋，就是那儿。把信交给经理，别说谁送的，只告诉他们把信拿到地下室，他们会懂的。"
+			<<if $officejobintro isnot 1>>
+				<br><br>
+				"如果你不是那儿的工作人员，"米奇补充说，"那就把信交给问讯亭，或者类似的地方。那边会把信放到合适的地方的。"
+			<</if>>
+
+		<<case "wren">>
+			"听说过走私者伦恩吗？我需要和<<nnpc_Hes "Wren">>聊一聊。需要你传个消息。" 米奇递给你一个马尼拉纸信封。"把这个交给<<nnpc_him "Wren">>，就说是老熟人给的。兰德里认识伦恩，但不能让兰德里做这事。我不想让伦恩发现我和兰德里有关联。"
+
+			<<if !$pubfame.seen.includes("oldman")>>
+				<<set $pubfame.seen.pushUnique("oldman")>>
+				<br><br>
+
+				"那老熟人是谁？"你问。
+				<br><br>
+
+				"假身份而已。我只是不想把身份暴露给<<nnpc_him "Wren">>。"
+			<</if>>
+
+			<<if $wren_intro is undefined>>
+				<br><br>
+				"<span class="gold"><<nnpc_He "Wren">>住在雷米庄园里。</span>"米奇补充说，"就在镇外的荒原上。你应该可以避开雷米<<nnpc_himself "Remy">>进去的。能避开最好，不然就有点麻烦了。
+				<<if $catsuit_found isnot true>>或许能在码头找到伦恩，在深夜的时候。<</if>>
+				我就知道这么多。"
+			<</if>>
+
+		<<case "hospital">>
+			"我需要医院的钥匙卡。"米奇说。"不是我用，兰德里要用。我欠<<him>>个人情。<<He>>帮过我，我也得报答<<He>>。"
+			<br><br>
+
+			<<if $rng % 3 is 0>>
+				"每当米奇想吃炸鱼薯条的时候，我就给米奇买，"兰德里招呼服务员到桌旁。"这就是米奇欠我的全部。"
+				<br><br>
+
+				米奇的脸腾的一下变红，清了清嗓子。"医院钥匙卡。进去，开偷，出来。"米奇冷静下来。"你可以从接待员身上弄一个。
+			<<else>>
+				米奇看了你一眼。"进医院，偷钥匙卡，出医院。你可以从接待员身上弄一个
+			<</if>>
+			<span @class="$hospitalintro isnot 1 ? 'gold' : ''">哈珀医生<<nnpc_he "Harper">>这个人有点问题。</span>但还好，你不一定非得跟<<nnpc_him "Harper">>打交道。"
+
+		<<case "morgan">>
+			"很遗憾，"米奇说道，"我需要一个U盘，但很遗憾的是，它在下水道里。"米奇摇了摇头。"不需要你费心去找，<span @class="$sewersintro isnot 1 ? 'gold' : ''">下水道里还有别人，</span><<nnpc_Hes "Morgan">>可能已经找到U盘了。可以让<<nnpc_him "Morgan">>把U盘给你，或者想办法从<<nnpc_him "Morgan">>那儿拿走，怎么都行。我真的很抱歉。"
+			<<if $sewersintro isnot 1>>
+				<br><br>
+
+				米奇盯着你脸上的表情。"不是普通的下水道，"米奇解释说，"是更下面的旧下水道。可以从主污水管网过去。"
+			<</if>>
+
+		<<case "niki">>
+			<<generatev3>><<person3>><<set _modelHair to ["black","black","brown","brown","red","blue","purple"]>>
+			<<if $pronoun is "f">>
+				<<set _modelHair.push("blonde","blonde")>>
+			<<else>>
+				<<set _modelHair.push("blond","blond","no")>>
+			<</if>>
+			<<set $pubfame.niki.hair to _modelHair.pluck()>>
+			"你进过尼奇的工作室。"米奇说，"尼奇有几张我想销毁的照片。不是我的，是委托人的。以前缺钱拍的，现在后悔了。一个<span class="gold"><<if $pubfame.niki.hair is "no">>光头的<<else>>留着<<print setup.colourName($pubfame.niki.hair.replace("blonde","金色"))>>头发的<</if>><<person>>。</span>找到目标，销毁目标，方式随意。"米奇顿了顿，又补充道，"是指照片，不是指<<personsimple>>。"
+			<<saveNPC 2 "pubfame_model">><<clearsinglenpc 2>>
+
+		<<case "bailey">>
+			米奇叹了口气。"很抱歉让你承担这个任务，但我需要你再次黑进<<nnpc_he "Bailey">>的电脑里。我需要确保贝利没有记住我，并将我添加到某个列表中。"对方递给你一个USB驱动器。"和上次一样。等到<<nnpc_hes "Bailey">>在使用电脑时，分散<<nnpc_him "Bailey">>的注意力，然后插上这个。你知道他有多危险，别被抓住了。"声音停顿了一下。"请，不要被抓住。"
+
+		<<case "briar">>
+			"布莱尔，"米奇咂舌，"一个讨厌的家伙，但<<nnpc_he "Briar">>知道很多事情，重要的事情。"对方递给你一个USB驱动器。"去妓院。趁着<<nnpc_his "Briar">>的电脑开着的时候，用这个黑进去，我在找一些东西。插进去，等一会儿，然后拔出来离开。别被抓住了，<<nnpc_Hes "Briar">>是个无情的家伙。"
+			<br><br>
+
+			米奇想了一会儿。"想完成目标的话，需要令其分心，或者干脆利落地脱身。最好两者兼具。"
+			<<if $brothelknown isnot 1>>
+				<<set $brothelknown to 1>>
+				<br><br>
+
+				米奇盯着你脸上的表情。"你不认识布莱尔，是不是？<<nnpc_He "Briar">>就在这条路上开了个妓院。要小心<<nnpc_him "Briar">>。虽然坏不过贝利，但仍然是个坏蛋。" 米奇摸了摸下巴。"不过<<nnpc_He "Briar">>可以给你搞张假身份证，毕竟贝利扣着你的证件。也许对你有用，考虑考虑。"
+				<br><br>
+
+				<span class="gold">你现在可以进入丰收街的妓院了。</span>
+			<</if>>
+
+		<<case "remy">>
+			<<set $pubfame.remy.password to [
+				["田地里","森林里","公园里","院子里","荒原里","花园里"][random(5)],
+				["日落","日出","黎明","午夜","晌午","黄昏"][random(5)],
+				["时","时分","时刻","前","后","期间"][random(5)]
+			]>>
+			<<if $rng is 1>>
+				<<set $pubfame.remy.password[1] to "血月">><<set $pubfame.remy.password[2] to "之下">>
+			<</if>>
+			<<set $pubfame.remy.attempts to 0>>
+			"你认识雷米吗？"米奇问，"<span @class="$ridingschoolintro is undefined ? 'gold' : ''"><<nnpc_He "Remy">>在农村有一所骑术学校</span>，兰德里的一个联系人会在那里。你问他们花在哪里开，他们会说<span class="gold"><<pubfameRemyPassword>></span>。明白了吗？"
+			<br><br>
+
+			看到你点头，对方继续说道。"跟他们会面，告诉他们是老熟人派你来的。取回包裹，把它带回给我。如果他们没有给你包裹，告诉我。别只是不去，然后说你没拿到包裹。我会知道的。"
+			<br><br>
+
+			<<if !$pubfame.seen.includes("oldman")>>
+				<<set $pubfame.seen.pushUnique("oldman")>>
+				"那老熟人是谁？"你问。
+				<br><br>
+
+				"假身份。我只是不想把身份暴露给他们。"
+				<br><br>
+			<</if>>
+
+			米奇严肃地看着你。"小心点。如果他们和雷米在一起，他们可能很危险。雷米是个麻烦人物。不要让他们欺骗你。<span class="gold"><<pubfameRemyPassword 0 "cap">></span>。"
+
+		<<case "compound">>
+			<<set $pubfame.compound.cameras to []>>
+			米奇走进那扇门。过了一会，米奇拿着四块像是石头一样的东西出来了。"这些是摄像机。"米奇解释道。米奇敲了敲一处颜色稍有不同的位置，你才看出来那是一个隐藏摄像头。"结构紧凑，技术尖端。把它们设置在工厂四处。麋鹿街上那个，沿着路往下走就是。每个建筑里放一个，中间院子里也放一个。"
+			<br><br>
+
+			米奇把伪装摄像机交给你。虽然看起来像石头，但却出乎意料的轻。"别一次装完，"米奇说，"一次装完也行，但不是非这么干不可。要是他们发现你了，把剩下的留着以后装。"
+
+			<<if $compoundcard isnot 2>>
+				<br><br>
+				<<set $compoundcard to 1>>
+				米奇递给你一张奇怪的卡片，然后又藏到门后。"如果要进去，"米奇说道，"这张卡会给你权限。"米奇打量着你。"别被抓住了，他们的拷问方式可不文明。"
+			<</if>>
+	<</switch>>
+	<br><br>
+
+	<<link [[接受|Pub Fame Accept]]>><<set $pubfame.status to "accepted">><</link>>
+	<br>
+	<<link [[拒绝|Pub Fame Decline]]>><<set $pubfame.status to "finished">><<set $phase to 0>><</link>>
+
+<<else>>
+	<<pubfameOptions>>
+	<br><br>
+
+	<<link [[回去找兰德里|Pub Landry]]>><<set $phase to 1>><</link>>
+<</if>>

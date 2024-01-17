@@ -1,0 +1,110 @@
+:: Courtyard Herm Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	他们三人都瘫倒在地，毫无力气了。
+	<br><br>
+	<<tearful>>你走开了。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<courtyard>>
+
+<<elseif $enemyhealth lte 0>>
+	他们被你的凶残所震慑，远离了你。
+	<br><br>
+	<<tearful>>你走开了。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<courtyard>>
+
+<<elseif $alarm is 1 and $rescue is 1>><<set $rescued += 1>>
+
+	"现在马上停下，"一个强有力的声音说道。西里斯从员工室的窗户里探出身来。
+	<br>
+	"是<<pShe>>先——"
+	<br>
+	"我不会听你们解释，"西里斯继续说道，"去见礼顿，现在就去。"
+	<br>
+	恶霸们面面相觑，但还是照他们被吩咐的去做。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Sirris>><<person1>>
+	<<if $exposed gte 1>>
+		西里斯拿出一条毛巾递给你，望向别处。你尽可能快地裹住了自己。
+		<br><br>
+		<<towelup>>
+	<</if>>
+
+	<<if $schoolrep.crossdress gte 5>>
+		"你没事吧？"你穿好衣服后，西里斯问道，"别让他们接近你，"<<he>>笑着说，"你没有做错任何事。"<<ltrauma>><<trauma -6>><<lstress>><<stress -6>>
+	<<else>>
+		"你没事吧？"你穿好衣服后，西里斯问道，"别让他们接近你，"<<he>>笑着说，"你看起来没什么问题。"<<ltrauma>><<trauma -6>><<lstress>><<stress -6>>
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<courtyard>>
+<<else>>
+	你倒在地上，伤得无法动弹。<<fameexhibitionism 20>>
+	<br><br>
+
+	<<if $exposed gte 2>>
+		他们站在你边上，盯着你裸露的私处。
+		<br>
+		<<if $schoolrep.crossdress gte 5>>
+			"这是真的，"<<person1>><<person>>喊道，"这是一个变装变态！"
+		<<else>>
+			"这是真的，"<<person1>><<person>>喊道，"这是一个怪胎！"
+		<</if>>
+		<br>
+		"来，让我拍张照片。"
+		<br><br>
+		他们把手机摄像头对准你。你无助地躺着，因此他们想拍多少张照片就拍多少张。
+		<br><br>
+		三人等到满意了之后，扬长而去。
+	<<else>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				<<person1>><<person>>在你身边蹲下来，抓住你裙子的下摆，向上提起。<span class="pink">你的<<genitals 1>>露了出来。</span>
+			<<else>>
+				<<person1>><<person>>在你身边蹲下来，向上提起你裙子的下摆。<<He>>拉开你的$worn.under_lower.cn_name_cap，<span class="pink">露出你的<<genitals 1>>。</span>
+			<</if>>
+		<<elseif $worn.lower.set isnot $worn.upper.set>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				<<person1>><<person>>在你身边蹲下来，抓住你的$worn.lower.cn_name_cap，然后把它脱下来，<span class="pink">你的<<genitals 1>>露了出来。</span>
+			<<else>>
+				<<person1>><<person>>在你身边蹲下来，脱掉了你的$worn.lower.cn_name_cap，<<He>>拉开你的内裤，<span class="pink">露出你的<<genitals 1>>。</span>
+			<</if>>
+		<<else>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				<<person1>><<person>>在你身边蹲下来，开始把你的$worn.upper.cn_name_cap从你身上扯下来，<span class="pink">露出你的<<undertop>>和<<genitals 1>>。</span>
+			<<else>>
+				<<person1>><<person>>在你身边蹲下来，开始把你的$worn.upper.cn_name_cap从你身上扯下来，<span class="pink">露出你的<<undertop>>和$worn.under_lower.cn_name_cap。</span>然后<<He>>拉开你的内裤，<span class="pink">露出你的<<genitals 1>>。</span>
+			<</if>>
+		<</if>>
+		<br><br>
+		他们站在你边上，盯着你裸露的私处。
+		<br>
+		<<if $schoolrep.crossdress gte 5>>
+			"这是真的，"<<person1>><<person>>喊道，"这是一个变装变态！"
+		<<else>>
+			"这是真的，"<<person1>><<person>>喊道，"这是一个怪胎！"
+		<</if>>
+		<br>
+		"来，让我拍张照片。"
+		<br><br>
+		他们把手机摄像头对准你。你无助地躺着，因此他们想拍多少张照片就拍多少张。
+		<br><br>
+		三人等到满意了之后，扬长而去。
+	<</if>>
+	<br><br>
+	<<tearful>>你摇摇晃晃地站了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<courtyard>>
+
+<</if>>

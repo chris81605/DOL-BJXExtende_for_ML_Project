@@ -1,0 +1,41 @@
+:: Castle []
+<<set $location to "castle">><<effects>>
+
+你在待在一座城堡废墟的院子里，即便它已被废弃且一半已没入土中，但它的废墟依旧耸立在你周围。
+<<if $weather is "rain">>
+	水流汇聚成小溪顺着被雨水冲刷过的排水沟潺潺而下。
+<<elseif $weather is "snow">>
+	雪花飘落在城垛上。
+<</if>>
+<br><br>
+
+
+<<if $treasure_map is 1>>
+	<span class="gold">你找到的藏宝图指引你来到这里。</span>
+	<br><br>
+	<<getouticon "dig">><<link [[挖宝 (2:00)|Castle Treasure]]>><<pass 120>><<unset $treasure_map>><<tiredness 6>><</link>><<gtiredness>>
+	<br>
+<</if>>
+/* 北极星模组 */
+<<if !$options.bjx_animal and ($harpy gte 6 and $syndromebird is 1 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $syndromebird is 1 and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled" and $syndromebird is 1)>>
+/* 北极星 */
+	<<glideicon>><<link [[飞向最高的塔 (0:02)|Castle Fly]]>><</link>><<flight_text>>
+	<br>
+<<elseif $syndromebird is 1>>
+	<<npc "Great Hawk">>
+	你的<<beasttype>>应该可以带你回家。
+	<<endevent>>
+	<br><br>
+	<<glideicon>><<link [[呼唤|Castle Call]]>><</link>>
+	<br>
+<</if>>
+/* 北极星模组 */
+<<link [[奇怪的书|Castle Demon Book]]>><</link>>
+<br>
+<<if $options.bjx_eventTF and $slime gt 0 and $slime isnot 3>>
+    <<link [[隐秘水沟 (0:05)|Pure Pool]]>><<pass 5>><</link>>
+    <br>
+<</if>>
+/* 北极星 */
+<<getouticon>><<link [[离开|Moor]]>><<set $moor to 100>><</link>>
+<br>

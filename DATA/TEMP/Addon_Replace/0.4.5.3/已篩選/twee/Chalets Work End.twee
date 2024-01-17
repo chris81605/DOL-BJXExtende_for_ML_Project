@@ -1,0 +1,109 @@
+:: Chalets Work End []
+<<effects>>
+<<endevent>>
+你沿着沙滩木板路走，走到小岛和海岸之间的沙滩上。
+/* 北极星模组 */
+<<if Time.dayState isnot "night" and (Time.weekDay is 1 or Time.weekDay is 7)>>
+/* 北极星 */
+    <<if $exposed gte 1>>
+        <<covered>>
+        <<if random(1, 2) is 2>>
+马群在远处疾驰，后面有一辆汽车正在追赶这些马儿。他们一定是在拍电影。
+            <br><br>
+你走到一半的时候，<span class="pink">马群突然向你的方向飞奔而来。</span>它们的速度越来越快，而且周围没有任何可以躲藏的地方。
+            <br><br>
+
+<<link [[跑！|Chalets Work End Run]]>><</link>>
+            <br>
+<<link [[把你的身体埋在沙子里|Chalets Work End Bury]]>><</link>>
+            <br>
+        <<else>>
+马群在远处疾驰，后面有一辆汽车正在追赶这些马儿。<<covered>>幸运的是，他们之间保持着一定的距离。
+            <br><br>
+
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+你到达了对岸。
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <<else>>
+        <<if random(1, 2) is 2>>
+马群在远处疾驰，后面有一辆汽车正在追赶这些马儿。他们一定是在拍电影。
+            <br><br>
+
+当你已经走到一半的时候，<span class="purple">马群突然向你的方向飞奔而来。</span>它们的速度越来越快，而且周围没有任何可以躲藏的地方。
+            <br><br>
+
+<<link [[跑！|Chalets Work End Clothed Run]]>><</link>>
+            <br>
+<<link [[卧倒在地|Chalets Work End Drop]]>><<stress 6>><</link>><<gstress>>
+            <br>
+        <<else>>
+马群在远处疾驰，后面有一辆汽车正在追赶这些马儿。<<covered>>幸运的是，他们之间保持着一定的距离，直到你到达对岸。
+            <br><br>
+
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+你到达了对岸。
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <</if>>
+<<else>>
+    <<if $exposed gte 1>>
+        <<covered>>
+        <<if random(1, 2) is 2>>
+你穿越空旷的沙滩，尽管你独自一人远离任何可能的窥探，但在这个开阔的地方，你还是感到很危险。
+            <br><br>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+你到达了对岸。
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <<else>>
+            <<generatey1>><<generatey2>><<generatey3>><<person1>>
+你穿越空旷的沙滩，尽管你独自一人远离任何可能的窥探，但在这个开阔的地方，你还是感到很危险。
+            <br><br>
+远处的岸边出现了三个人影。<span class="purple">看起来这三个人正在向这边走来。</span>
+            <br><br>
+<<link [[继续前进|Chalets Work End Group Keep]]>><<stress 12>><</link>><<ggstress>>
+            <br>
+<<link [[朝另一个方向走 (0:05)|Chalets Work End Group Walk]]>><<pass 5>><</link>>
+            <br>
+        <</if>>
+    <<else>>
+        <<if random(1, 2) is 2>>
+你穿过空旷的沙滩，一阵寒风吹过你的脸庞。
+            <br><br>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+你到达了对岸。
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <<else>>
+            <<if $hallucinations gte 2>>
+你穿过空旷的沙地。海鸥在你头顶盘旋。它们似乎在跟着你。<<gstress>><<stress 6>>
+                <br><br>
+            <<else>>
+你穿过空旷的沙滩，海鸥在头顶鸣叫。
+                <br><br>
+            <</if>>
+            <<if $chalets_bags gte 1>>
+                <<chalets_fall_events>>
+            <<else>>
+你到达了对岸。
+                <br><br>
+                <<chalets_end_link>>
+            <</if>>
+        <</if>>
+    <</if>>
+<</if>>

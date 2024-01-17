@@ -1,0 +1,76 @@
+:: Sydney Temple Punish Intro Forget []
+<<effects>><<run statusCheck("Sydney")>>
+<<npc "Sydney">><<person1>>
+<<effects>>
+<<if $speech_attitude is "meek">>
+	"这，这不是我的错！悉尼，拜托了，求求你，求你不要告诉他们！"
+<<elseif $speech_attitude is "bratty">>
+	"该死的，悉尼。请你一定要保密。"
+<<else>>
+	"我很抱歉，悉尼。请不要告诉其他人。"
+<</if>>
+<br><br>
+
+<<if $templePromised is "Sydney">>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼双手抱胸，只是淡淡地瞥了你一眼。"所以呢？"<<he>>别过头，"我猜我们都要被处罚——他们迟早会在月度检查中抓住我们的。"
+		<br><br>
+
+		<<He>>思考了一会儿，不停地用手指抓挠着头发。"行吧，但我希望你能为自己负责。"
+		<br><br>
+
+		<<he>>沉默地离开了，避免着和你视线接触。
+		<br><br>
+
+		<<link [[继续|Temple]]>><<endevent>><<set $daily.sydney.punish to 1>><</link>>
+		<br>
+	<<else>>
+		<<His>>的双拳紧握着，脚下的步伐格外地沉重。<<he>>一把拉过你，猛地抓住你的肩膀。"你……竟然敢……敢在告诉我你违背了我们神圣的誓约之后，要求我背叛我们的信仰？！"愤怒的泪水从<<his>>的脸上滑落。
+		"不！"<<he>>的手臂在颤抖，"我们会面对我们的惩罚……我，和你。亲爱的，这是我们能够再次成为一体的唯一方式。" <<npcincr Sydney love -5>><<llove>>
+		<br><br>
+
+		<<He>>松开了手，然后摇响了忏悔室的铃铛。"结束了，我希望你做好了准备。我会宽恕你，等我们一同受罚之后……就快了。"
+		<br><br>
+
+		<<generate2>><<person2>><<generate3>><<generate4>>一名<<priest>>从一扇标有红色十字架的门里走出，两侧还跟随着一众<<monks>>。
+		<br><br>
+		一个<<priest>>从长袍里拿出了口球。"为了赎罪，你们必须证明你们之间的羁绊依旧牢固。请不要动。"
+		<br><br>
+
+		悉尼站在了你的身侧。
+		<br><br>
+
+		<<link [[抓紧悉尼|Sydney Temple Punish Intro 2]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br>
+		<<link [[推开悉尼|Sydney Temple Punish Intro 2]]>><<set $phase to 2>><<npcincr Sydney love -5>><</link>><<lllove>>
+		<br>
+	<</if>>
+<<else>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼双手抱胸，只是淡淡地瞥了你一眼。"我猜现在受罚还是以后受惩罚都没什么区别……"<<he>>焦躁地抓扯着头发，"……行。神呐，我现在真想冲着你大喊，你竟然敢，告诉我。"<<He>>咬紧了牙齿。
+		<br><br>
+
+		"我想你，能为自己的所做负责。只是……给我点时间。我需要一个人待会儿。"<<He>>一言不发地离开了，避免与你视线相触。
+		<br><br>
+
+		<<link [[继续|Temple]]>><<endevent>><<set $daily.sydney.punish to 1>><</link>>
+		<br>
+	<<else>>
+		<<His>>的双拳紧握着，脚下的步伐格外地沉重。<<he>>一把拉过你，猛地抓住你的肩膀。"你……竟然敢……敢在告诉我你违背了我们神圣的誓约之后，要求我背叛我们的信仰……我对你的信任？！"愤怒的泪水从<<his>>的脸上滑落，打湿了<<he>>的衣襟。
+		"不！"<<he>>的手臂在颤抖，"你需要面对处罚，亲爱的。" <<npcincr Sydney love -5>><<llove>>
+		<br><br>
+
+		<<He>>松开了手，然后摇响了忏悔室的铃铛。"结束了。我希望你做好了准备，我会宽恕你，在一切之后……就快了。"
+		<br><br>
+
+		<<endevent>><<generateConfessor 1>><<person1>><<generateConfessor 2>><<generateConfessor 3>>
+		一位<<monk>>从一个带有红十字标志的门中走出来，旁边还跟着其他两个人。一人向悉尼保证，他们会轻柔地对待你。
+		<br><br>
+
+		悉尼擦了擦<<his>>的脸，然后离开了房间，这时一个<<monk>>笑了。"为了赎罪，你必须做一件事，不要动。"
+		<br><br>
+
+		<<link [[继续|Temple Arcade Submit]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

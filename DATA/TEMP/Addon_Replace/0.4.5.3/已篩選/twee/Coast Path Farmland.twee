@@ -1,0 +1,34 @@
+:: Coast Path Farmland []
+<<location "coastpath">><<effects>>
+
+你位于农田北边的沿海小径上，在一处面向大海的悬崖上方。
+
+<<cliff_top_desc>>
+
+<br><br>
+
+<<walkicon "west">><<link [[沿海岸向西行走 (2:00)|Coast Path West]]>><<pass 120>><</link>>
+<br>
+<<if !$plants_known.includes("cabbage")>>
+	<<icon "tending/cabbage.png">> <<link [[搜索种子 (0:30)|Coast Path Cabbage]]>><<pass 30>><<tending 6>><<set $plants_known.push("cabbage")>><</link>><<gtending>>
+	<br>
+<</if>>
+<<if currentSkillValue('athletics') gte 300 and ($weather is "clear" or $weather is "overcast") and !$worn.feet.type.includes("heels")>>
+	<<runicon  "west">><<link [[沿海岸向西慢跑 (1:30)|Coast Path West]]>><<pass 90>><<tiredness 2>><<set $speed to "jog">><</link>><<athleticsdifficulty 250 700>><<gtiredness>>
+	<br>
+	<<if currentSkillValue('athletics') gte 700>>
+		<<runicon "west">><<link [[沿海岸向西奔跑 (1:00)|Coast Path West]]>><<pass 60>><<tiredness 5>><<set $speed to "run">><</link>><<athleticsdifficulty 650 1000>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>
+/* 北极星模组 */
+<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+/* 北极星 */
+	<<flight_time_check 20>>
+	<<glideicon "west">><<print '<<link [[往西翱翔 ('+_hoursPassed+':'+ (_minutesPassed lt 10 ? "0" : "") + _minutesPassed + ')|Coast Path West]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<pass _flightTime>><<set $speed to "fly">><</link>>'>><<flight_text>><<gtiredness>>
+	<br>
+<</if>>
+
+<br>
+<<farmicon "meadow">><<link [[进入草地 (0:30)|Meadow]]>><<pass 30>><</link>>
+<br>

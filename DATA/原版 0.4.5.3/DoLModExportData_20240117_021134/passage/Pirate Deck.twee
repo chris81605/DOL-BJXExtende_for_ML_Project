@@ -1,0 +1,136 @@
+:: Pirate Deck []
+<<location "seapirates">><<set $outside to 1>><<effects>><<getTarget true>>
+
+你在海盗船的甲板上。
+<<if Time.dayState is "night">>
+	<<if isBloodmoon()>>
+		红色的月光反射在波浪上，整片海看起来就像酒红色。
+	<</if>>
+	<<if $weather is "rain" or $weather is "snow">>
+		寒冷的雨夹雪打在你的脸上。
+	<<elseif $weather is "clear">>
+		在月光下你能看得很清楚。
+	<<else>>
+		风有把你刮走的危险。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain" or $weather is "snow">>
+		汹涌的海浪在黎明的阳光下闪烁。
+	<<elseif $weather is "clear">>
+		黎明照亮了地平线。
+	<<else>>
+		海浪在黎明的阳光下闪闪发光。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain" or $weather is "snow">>
+		夕阳映出四面八方的暴雨。
+	<<elseif $weather is "clear">>
+		太阳在地平线上下落。
+	<<else>>
+		太阳落在地平线上，黑暗威胁着吞噬世界。
+	<</if>>
+<<else>>
+	<<if $weather is "rain" or $weather is "snow">>
+		大雨倾盆。
+	<<elseif $weather is "clear">>
+		太阳下山了。
+	<<else>>
+		风吹得你眯着眼。
+	<</if>>
+<</if>>
+<<if $exposed gte 1>>
+	你躲到一些木箱后面，掩盖着你未着寸缕的狀態。
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpirates>>
+<<elseif (Time.dayState is "dawn" or Time.dayState is "day") and $pirate_journey lte 1>>
+	<<npc "Zephyr">><<person1>>
+	“是陆地！”桅上瞭望台上有一个声音大喊。泽菲尔到甲板的一侧举起<<his>>的望远镜。你不需要望远镜就能看到海岸线，海滩的斜坡通向一片树林。很近。你不知为何直到现在才有人发现它的存在。
+	<br><br>
+	在泽菲尔的命令下，船员们匆匆忙忙地开始行动中。“那里，”泽菲尔大喊着，大步走到舵手面前。“绕着那边走。他们有可供停泊的地方，你应该明白的。”
+	<br><br>
+	<<if $exposed gte 1>>
+		“然后给这个荡妇衣服！”
+		<br><br>
+	<</if>>
+	<<link [[继续|Pirate End]]>><<towelup>><<unset $pirate_journey>><</link>>
+	<br>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $pirate_rank gte 1>>
+		<<set _allure to ($allure / 2)>>
+	<<else>>
+		<<set _allure to $allure>>
+	<</if>>
+	<<if ($danger gte (9900 - _allure) or $eventforced) and $eventskip is 0>>
+		<<events_pirate_deck>>
+	<<elseif $pirate_rank is 0 and $pirate_status gte 90>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		你听到一声令人担忧的爆裂声。你并不是唯一一个注意到的人。很多双眼睛一同望向了一个坐在桅杆瞭望台上的<<person>>。
+		<br><br>
+		又是一声脆响，桅杆瞭望台崩塌成了木头碎片。<<person>>从高空坠落，<<he>>抓住了桅杆，但桅杆也跟着断裂了。<<He>>一头栽入了海中。
+		<br><br>
+		<<link [[跳水救人|Pirate Rank Dive]]>><</link>>
+		<br>
+		<<link [[让泽菲尔来|Pirate Rank Get]]>><</link>>
+		<br>
+	<<elseif Time.hour gte 12 and Time.hour lte 18 and $pirate_attack is undefined>>
+		“所有人！”泽菲尔大吼着，收起<<nnpc_his "Zephyr">>的望远镜。“进入备战状态！”
+		<br><br>
+		海盗们从船舱中冲出，迅速投入行动。
+		<br><br>
+		<<link [[继续|Pirate Attack]]>><<set $pirate_attack to 1>><</link>>
+		<br>
+	<<elseif random(1, 4) is 4 and $exposed lte 0 and $eventskip is 0>>
+		<<pirate_mate_work deck>>
+	<<else>>
+
+		<<if $nextPassageCheck is "Wraith Snatched Pirate Railing">>
+			<span class="nextLink"><<link [[栏杆。|Wraith Snatched Pirate Railing]]>><</link>></span>
+		<<elseif $pirate_rank lte 0>>
+			<<link [[靠在栏杆上|Pirate Railing]]>><</link>>
+			<br>
+		<</if>>
+
+		<<if Time.dayState is "dawn">>
+			<<link [[观赏日出 (1:00)|Pirate Dawn]]>><<pass 60>><<stress -6>><</link>><<lstress>>
+			<br><br>
+		<<elseif Time.dayState is "dusk">>
+			<<link [[观赏日落 (1:00)|Pirate Dusk]]>><<pass 60>><<stress -6>><</link>><<lstress>>
+			<br><br>
+		<</if>>
+
+		<<if $possessed>>
+		<<elseif Time.dayState isnot "night">>
+			泽菲尔船长透过望远镜观察。
+			<br>
+			<<if $exposed gte 1>>
+				<<link [[向泽菲尔请求衣物|Pirate Clothes]]>><</link>><<difficulty 67>>
+				<br>
+			<<else>>
+				<<link [[走近|Pirate Zephyr]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			泽菲尔船长安坐在<<nnpc_his "Zephyr">>的房间裡。
+			<br>
+			<<if $exposed gte 1>>
+				<<link [[向泽菲尔请求衣物|Pirate Clothes]]>><</link>><<difficulty 67>>
+				<br>
+			<</if>>
+		<</if>>
+		<br>
+
+		<<link [[船舱 (0:01)|Pirate Cabin]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+/*A girl in a white sundress swabs the deck with a skip, her long brown hair jumping with each movement. "Oops," she says when she sees you. "You're not supposed to be here yet. Let me help. Whoosh!" She bonks your head with the broom. The world spins.
+<br><br>
+<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>*/
+
+<<set $eventskip to 0>>

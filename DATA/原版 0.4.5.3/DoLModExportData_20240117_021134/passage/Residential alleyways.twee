@@ -1,0 +1,135 @@
+:: Residential alleyways []
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "residential">><<getTarget true>>
+你在住宅区的一条小巷里。
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		许多人正冒着大雨前进。
+	<<elseif $weather is "snow">>
+		雪地上满是脚印。
+	<<else>>
+		周围有很多人。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		人们在雨中匆忙地赶路。
+	<<elseif $weather is "snow">>
+		雪地上已经被踏出一条可以行走的道路了。
+	<<else>>
+		你听到周围有声音。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		雨水正让排水沟超负荷工作中。
+	<<elseif $weather is "snow">>
+		积雪覆盖住了屋顶。
+	<<else>>
+		你听到狗在叫。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		人们正冒着雨去上班或者赶路。
+	<<elseif $weather is "snow">>
+		人们正冒着严寒去上班或者赶路。
+	<<else>>
+		周围已经有很多行人和正在骑自行车的人。
+	<</if>>
+<</if>>
+你家就在附近。
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "alley">>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutalley>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<elseif $town_projects.thicket is 1>>
+		<<set $town_projects.thicket to 2>>
+		你走过一个小而密集的树丛，它曾经是一个休闲区，但因长期以来一直被忽视，现在它长满了荆棘杂草。虽然人们每天都会经过这里，但没有谁在乎这里。
+		<br><br>
+		你要保持距离，荆棘正随风摇曳着，那些巨大的棘刺看起来很锋利。不过在你看见其顶端有着一些多汁的树莓，但那太高了，你上不去。不过它们让你想起水烟店水池下面的眼睛。<span class="green">你突然有了一个想法。</span>如果得到适当的维护，这里可能是一个让人放松的地方。
+		<br><br>
+		<i>你可以在市政厅查询灌木丛的情况。</i>
+		<br><br>
+
+		<<link [[继续|Residential alleyways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+
+	<<elseif $town_projects.thicket is 3>>
+		<<set $town_projects.thicket to 4>>
+		<<generate1>><<person1>>
+		你走近那片灌木丛，它不再显得那么杂乱无章了，不仅树枝已经被修剪过了，而且野生荆棘也被砍得差不多了。
+		<br><br>
+
+		在靠近中间的地方有一张长椅，附近有一块牌子，上面写着感谢你的话。一个<<person>>正坐在椅子上吃着三明治。
+		<br><br>
+		<<earnFeat "Concrete Woodland">>
+		<<link [[继续|Residential alleyways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "residential">>
+			<br>
+		<</if>>
+		可访问地点
+		<br>
+		<<if $exposed gte 1>>
+			<<homeicon>><<link [[回家 (0:02)->Home Fence]]>><<if $daily.fenceClimb isnot 1>><<set $daily.fenceClimb to 1>><<transform cat 1>><</if>><<pass 2>><</link>>
+			<br>
+		<<else>>
+			<<homeicon>><<link [[回家 (0:02)->Garden]]>><<if $daily.fenceClimb isnot 1>><<set $daily.fenceClimb to 1>><<transform cat 1>><</if>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		/*<<link [[Scavenge (1:00)|Residential Scavenge]]>><<pass 60>><<housekeeping 100>><</link>><<ghousekeeping 100>>
+		<br>*/
+		<<if $town_projects.thicket gte 4>>
+			<<foresticon "bush">><<link [[灌木丛 (0:01)|Residential Thicket]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<<if $cat gte 6 and Time.dayState is "night">>
+			<<ind>><<link [[喵喵喵 (0:30)|Residential Meow]]>><<pass 30>><<stress -3>><</link>><<cat>><<lstress>>
+			<br>
+		<</if>>
+		<<if Time.dayState isnot "night">>
+			<<if $exposed gte 2>>
+				<<if $exhibitionism gte 75>>
+					<<connudatusicon>><<link [[横穿康努达塔斯街 (0:05)|Road Ex]]>><</link>><<if $daily.ex.road is undefined>><<exhibitionist5>><</if>>
+					<br>
+				<</if>>
+			<<elseif $exposed is 1>>
+				<<if $exhibitionism gte 35>>
+					<<connudatusicon>><<link [[横穿康努达塔斯街 (0:05)|Road Ex]]>><</link>><<if $daily.ex.road is undefined>><<exhibitionist3>><</if>>
+					<br>
+				<</if>>
+			<</if>>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "其他区域<br>">><<hideDisplay>>
+			<<domus>>
+			<<barb>>
+			<<danube>>
+			<<connudatus>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<commercial>>
+		<</if>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "residential">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

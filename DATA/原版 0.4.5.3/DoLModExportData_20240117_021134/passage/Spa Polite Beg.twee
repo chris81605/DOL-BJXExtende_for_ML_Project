@@ -1,0 +1,35 @@
+:: Spa Polite Beg []
+<<effects>>
+
+你握住<<his>>的手臂。
+
+<<if $speech_attitude is "meek">>
+	"求……求求你<<sir>>，" 你恳求道，"我真的很需要钱。"
+<<elseif $speech_attitude is "bratty">>
+	"来吧，"你说道，"我真的很需要钱。"
+<<else>>
+	"请重新考虑，"你说，"我需要钱。"
+<</if>>
+<br><br>
+
+<<if $submissive gte 1500 or $dissociation gte 1>>
+	<span class="sub">你的话语影响了<<him>>。</span><<He>>在离开前给你<<moneyGain 100>>。
+	<<ltrauma>><<trauma -6>>
+<<elseif $rng gte 91>>
+	<<He>>看了你一眼，然后在离开之前递给你<<moneyGain 100>>。
+	<<ltrauma>><<trauma -6>>
+<<elseif $rng gte 71>>
+	<<He>>看了你一眼，然后在离开前递给你<<moneyGain 60>>。
+	<<ltrauma>><<trauma -6>>
+<<elseif $rng gte 51>>
+	<<He>>看了你一眼，然后在离开之前递给你<<moneyGain 30>>。
+	<<ltrauma>><<trauma -6>>
+<<elseif $rng gte 31>>
+	<<He>>看了你一眼，然后在离开之前递给你<<moneyGain 10>>。
+	<<ltrauma>><<trauma -6>>
+<<else>>
+	<<He>>甩开你的胳膊，继续一言不发。<<gtrauma>><<trauma 6>>
+<</if>>
+<br><br>
+
+<<spa_end>>

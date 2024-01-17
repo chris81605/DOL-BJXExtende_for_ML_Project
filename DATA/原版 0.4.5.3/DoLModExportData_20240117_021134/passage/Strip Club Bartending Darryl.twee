@@ -1,0 +1,36 @@
+:: Strip Club Bartending Darryl []
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<if $phase is 0>>
+
+你完成了达里尔的命令，但除此之外，你没有再去搭理<<him>>。在过了一会儿后，<<he>>沉默的起身离开，给并你留下了一笔小费。
+
+<<elseif $phase is 1>>
+<<npcincr Darryl love 2>>
+你轻轻地询问发生了什么，<<if $NPCName[$NPCNameList.indexOf("Darryl")].love lte 30>>达里尔似乎很惊讶，<<he>>抬头看了看你，然后又看向了<<his>>的饮料。"没什么，不过谢谢你的关心，对不起，我得回去工作了。"<<else>>达里尔笑了笑，但你在<<his>>的眼睛里看到了一抹悲伤的神采："我很好，只是一些我必须处理的事情。不过，谢谢你的关心。"<</if>><<He>>站起身来准备要离开。
+<</if>>
+
+<<tipreceive>>
+<br><br>
+
+<<if $rng gte 81>>
+
+<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+
+<<else>>
+
+然而，在<<he>>离开之前，坐在<<him>>身边的客人抓住了<<him>>的腰，并开始<<endevent>><<generate1>><<person1>>用<<his>>的手在达里尔的身上到处摸索起来。
+<br><br>
+
+你看了眼保安，但那些家伙正忙着处理俱乐部另一边的争吵，而达里尔虽然有些心烦意乱，却没有试图反抗，只是低声说道："请不要这样子。"
+<br><br>
+
+<<link [[不要多管闲事|Strip Club Bartending Darryl Molest]]>><</link>>
+<br>
+	<<if $promiscuity gte 35>>
+<<link [[勾引那个色狼以此来拯救达里尔|Strip Club Bartending Molestation]]>><<set $timer to 10>><<set $molestationstart to 1>><</link>><<promiscuous3>>
+<br>
+	<</if>>
+<<link [[攻击那个色狼的头部以此来拯救达里尔|Strip Club Bartending Molestation]]>><<set $timer to 10>><<set $phase to 1>><<attackstat>><<set $molestationstart to 1>><</link>>
+
+<</if>>

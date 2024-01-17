@@ -1,0 +1,36 @@
+:: Bondage Domus []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+你感觉脚下是人行道，并听到<<if Time.hour gte 7 && Time.hour lte 20>>附近有汽车和行人。<<else>>偶尔有汽车在附近行驶。<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">在你的头上的破旧眼罩化作了几片，让你重获自由。</span>你眯起眼睛迎着光线。
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondagewest>>
+	<<else>>
+		<<link [[朝着机器的声音跑去 (0:05)|Bondage Run]]>><<set $bus to "residential">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[朝着大海的声音跑去 (0:05)|Bondage Run]]>><<set $bus to "barb">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[逃离城镇的喧嚣 (0:05)|Bondage Run]]>><<set $bus to "danube">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[隐藏 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

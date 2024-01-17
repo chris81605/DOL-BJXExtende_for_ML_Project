@@ -1,0 +1,22 @@
+:: Wraith Run []
+<<effects>>
+毫不犹豫的，你<<if $phase is 1>>跳了出来。<</if>>血液在上涌，你疯了似的开始狂奔。你身后传来了恐怖的尖叫，而且离你，越来越接近。
+<br><br>
+你听到一声刺耳的抽打。一条苍白的触手从排水格栅中伸出来，试图缠绕住你的双腿。
+<<if $athleticsSuccess>>
+	<span class="green">还好你反应过来躲过了这次突袭。</span>你头也不回地继续奔跑，尖叫声渐渐消失了。
+	<br><br>
+	你奋力跑向一个街角，开始大口地喘气……祂很可能不会那么容易放弃。
+	<br><br>
+	<<set $wraith.hunt -= 2>>
+	<<exitWraith>>
+<<else>>
+	你试图跳过去，<span class="red">但你失败了。</span>你被缠住吊了起来，胃里翻涌着恶心的晕眩感。
+	<br><br>
+	一张苍白的脸出现在了你的面前。
+	<<generateWraith>><<initWraith "abomination">>
+	<<startWraith>>
+	<br><br>
+	<<link [[继续|Wraith Caught]]>><<set $wraith.exit to "town">><</link>>
+	<br>
+<</if>>

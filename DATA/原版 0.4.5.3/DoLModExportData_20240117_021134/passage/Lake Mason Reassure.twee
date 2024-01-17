@@ -1,0 +1,38 @@
+:: Lake Mason Reassure []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"别，别担心，"你说道，"我会小心的。"
+<<elseif $speech_attitude is "bratty">>
+	"我可以自己照顾自己，"你说道，"冰下面比在上面要暖和。"
+<<else>>
+	"别担心我，"你说道，"我会小心的。"
+<</if>>
+<br><br>
+<<if $swimmingSuccess>>
+	<<set $mason_ice_lake to 2>>
+	梅森看了你一会儿，<span class="green">然后无奈地叹了口气。</span>
+
+	<<if $worn.upper.type.includes("diving") and $worn.lower.type.includes("diving")>>
+		"至少你穿好装备了，"<<he>>说道，"还是记得小心一点，好吗？"
+	<<else>>
+		"至少得穿好装备才行，"<<he>>说道，"镇里有卖潜水装备。"
+	<</if>>
+	<<He>>在冰洞上方摆动<<his>>的腿，然后跳到冰洞下面。<<glove>><<npcincr Mason love 1>>
+	<br><br>
+
+	<<link [[继续|Lake Depths Ice]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	梅森看了你一会儿，<span class="red">然后摇了摇头。</span>
+	<<if $worn.upper.type.includes("diving") and $worn.lower.type.includes("diving")>>
+		"虽然你穿好了装备，"<<he>>说道，"但冰下还是很危险。"
+	<<else>>
+		"你连合适的潜水装备都没有，"<<he>>说道，"你会冻死的。"
+	<</if>>
+	<<He>>在冰洞上方摆动<<his>>的腿，然后跳到冰洞下面。<<llove>><<npcincr Mason love -1>>
+	<br><br>
+
+	<<link [[继续|Lake Depths Ice]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

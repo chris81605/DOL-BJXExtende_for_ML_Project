@@ -1,0 +1,43 @@
+:: Manor Lab Clean []
+<<effects>>
+
+设备很坚固，虽然有点过时。凯拉尔用其中一些来制作防狼喷雾，但是清理工作做得不好，到处都是灰尘。
+<br><br>
+
+你拿一瓶外用酒精，开始工作。从大烧杯的外部开始。
+<<if currentSkillValue("science") gte random(1, 1000)>>
+	<span class="green">你放下擦干净的烧杯，</span>接着去清洗其他更复杂的仪器。
+<<else>>
+	<span class="red">你几乎把它从桌子上摔下来，</span>
+	<<if $exposed gte 1>>
+		好在及时接住了。<<gstress>><<stress 6>>
+	<<else>>
+		你的衣服沾上了一点腐蚀性液体。
+		<<set $worn.upper.integrity -= 10>>
+		<<set $worn.lower.integrity -= 10>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 80>>
+	实验室比你来的时候干净多了，这应该能帮到凯拉尔。
+<<elseif $kylar_parents_trust gte 60>>
+	你把墙壁擦干净。它们被一种薄片状的橙色物质还有黑焦油似的什么粘液覆盖，也许更糟。
+<<elseif $kylar_parents_trust gte 40>>
+	你从铜蒸馏器里舀出化学污泥。这台蒸馏器看起来像个古董，但太重了，搬不动。
+<<elseif $kylar_parents_trust gte 20>>
+	你清理掉散落在地上的一些纸，把它们放到橱柜里。上面写着复杂的化学式，你不确定它们是否依旧有用。
+<<else>>
+	你清理了一些散落在地上的纸。上面覆盖着厚厚的血红色化学污渍。你希望它们只是化学污渍。<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">庄园比你来的时候整洁多了。你应该去凯拉尔的房间找<<nnpc_his "Kylar">>。</span>
+	<br><br>
+<</if>>
+
+<<link [[继续|Manor Lab]]>><</link>>
+<br>

@@ -1,0 +1,128 @@
+:: Named NPC Stalk Select []
+<<set $location to "town">><<set $bus to "domus">><<set $outside to 1>><<effects>>
+
+<<if $phase is 1>>
+	<<if $enemyno gte 2>>
+		<<person1>>You hear footsteps behind you, from more than one person. <span class="blue">You feel followed.</span>
+		<br><br>
+
+		<<link [[Next|Street Stalk Group]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<person1>>You hear footsteps behind you. <span class="blue">You feel followed.</span>
+		<br><br>
+
+		<<link [[Next|Street Stalk]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $stalkTestNPC>>
+		<<if $stalkTestNPC is "Ivory Wraith">>
+			<<generateWraith 1>>
+		<<else>>
+			<<npc $stalkTestNPC>>
+		<</if>>
+		<<set $NPCList[0].skills to {athletics: random(1, 1000), security: random(1, 1000)}>>
+		<<unset $stalkTestNPC>>
+	<</if>>
+
+	<<if $enemyno gte 1>>
+		<<person1>>
+		<<if $NPCList[0].fullDescription is "Ivory Wraith">>
+			<span class="red">You are being hunted by <span class="wraith">the Ivory Wraith.</span></span>
+		<<else>>
+			<span class="red">You are being hunted by <<print $npc[$npcrow.indexOf(0)]>>.</span>
+		<</if>>
+		<br><br>
+
+		<<His>> athletics skill is <span class="gold"><<print $NPCList[0].skills.athletics>></span>.
+		<br>
+		<<His>> security skill is <span class="gold"><<print $NPCList[0].skills.security>></span>.
+		<br><br>
+	<</if>>
+
+	<<if $enemyno is 2>>
+		<span class="teal"><<He>> will be accompanied by a <<person2>><<person>>.</span>
+		<<person1>>
+		<br><br>
+	<<elseif $enemyno gte 3>>
+		<<He>> will be accompanied by
+		<<switch $enemyno>>
+			<<case 6>><span class="pink">five</span>
+			<<case 5>><span class="purple">four</span>
+			<<case 4>><span class="blue">three</span>
+			<<case 3>><span class="lblue">two</span>
+		<</switch>>
+		others.
+		<br><br>
+	<</if>>
+	<<if $NPCList[0].fullDescription is "Ivory Wraith">>
+		<span class="blue">You can't add any NPCs to accompany the Wraith.</span>
+		<br>
+		<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		<<switch $enemyno>>
+			<<case 6>>
+				<span class="blue">You can't add any more NPCs.</span>
+				<br><br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+			<<case 5>>
+				<<link [[Add another unnamed NPC|Named NPC Stalk Select]]>><<generate6>><</link>>
+				<br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+			<<case 4>>
+				<<link [[Add another unnamed NPC|Named NPC Stalk Select]]>><<generate5>><</link>>
+				<br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+			<<case 3>>
+				<<link [[Add another unnamed NPC|Named NPC Stalk Select]]>><<generate4>><</link>>
+				<br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+			<<case 2>>
+				<<link [[Add another unnamed NPC|Named NPC Stalk Select]]>><<generate3>><</link>>
+				<br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+			<<case 1>>
+				<<link [[Add an unnamed NPC|Named NPC Stalk Select]]>><<generate2>><</link>>
+				<br>
+				<<link [[Start test|Named NPC Stalk Select]]>><<set $phase to 1>><</link>>
+				<br>
+		<</switch>>
+	<</if>>
+	<<if $enemyno is 0>>
+		Choose a named NPC.
+		<br><br>
+
+		<<link [[Avery|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Avery">><</link>>
+		<br>
+		<<link [[Bailey|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Bailey">><</link>>
+		<br>
+		<<link [[Briar|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Briar">><</link>>
+		<br>
+		<<link [[Eden|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Eden">><</link>>
+		<br>
+		<<link [[Harper|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Harper">><</link>>
+		<br>
+		<<link [[Kylar|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Kylar">><</link>>
+		<br>
+		<<link [[Leighton|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Leighton">><</link>>
+		<br>
+		<<link [[Morgan|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Morgan">><</link>>
+		<br>
+		<<link [[Whitney|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Whitney">><</link>>
+		<br>
+		<<link [[Wraith|Named NPC Stalk Select]]>><<set $stalkTestNPC to "Ivory Wraith">><</link>>
+		<br>
+		<<link [[Someone else|Named NPC Stalk Select]]>><<set $stalkTestNPC to either("Alex","Charlie","Darryl","Doren","Gwylan","Jordan","Landry","Mason","Niki","Quinn","Remy","River","Robin","Sam","Sirris","Sydney","Wren", "Zephyr")>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[Restart|Named NPC Stalk Select]]>><<endevent>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

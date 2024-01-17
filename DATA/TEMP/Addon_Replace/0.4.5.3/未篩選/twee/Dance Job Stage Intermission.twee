@@ -1,0 +1,47 @@
+:: Dance Job Stage Intermission []
+<<effects>>
+
+<<pass 30>>
+
+<<dance_job_text>>
+
+<<if $timeStamp gte $dance_job_time>>
+	<<loadNPC 0 "dance_job_stage">><<person1>>
+	你听到一阵餐具敲击玻璃杯的声音。
+	<<if maleChance() gte 100>>
+		"先生们，"
+	<<elseif maleChance() lte 0>>
+		"女士们，"
+	<<else>>
+		"女士们，先生们，"
+	<</if>>
+	房间另一侧的一个声音响起。是带你进来的那个<<person>>。客人们都转过头面向<<him>>。"感谢诸位拨冗前来共度良宵。虽然这场盛宴已接近尾声，但也无需苦恼，我们还为您准备了一场压轴好戏。"
+	<br><br>
+	<<endevent>>
+	<<beastNEWinit 1 horse>><<person1>>
+	你听到一阵隆隆声。戴着面具的人们不约而同地转过身，这次朝向主入口那扇宽大的门。一匹<<beasttype>>从中穿出，拉着一个镶着青铜条带的轮式玻璃舱。
+	<br><br>
+
+	<<link [[继续|Dance Job Stage Horse End]]>><</link>>
+	<br>
+<<elseif $dance_job_interest lte 0>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>一名<<person>>走到你面前。"可惜，原先的舞者……来不了了，"<<he>>说道。其他人从你身旁靠近，把你困在了中间。"我们这位新舞者可没之前那位优雅。"
+	<br>
+	"也许还有其他用处，"你身边的<<person2>><<person>>说道，同时抚摸着你的手臂。
+	<br>
+	有人从后面把身体压在你身上。
+	<br><br>
+
+	<<link [[继续|Dance Job Stage End Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	在他们想让你再次登台前，你还有一些时间。身着正装带着假面的宾客们觥筹交错，谈笑风生。
+	<br><br>
+
+	<<link [[闲聊|Dance Job Stage Schmooze]]>><</link>><<englishdifficulty 400 1000>>
+	<br>
+	<<link [[与仆人聊天|Dance Job Stage Chat]]>><<set $dance_job_stage_explore += 150>><<stress -6>><</link>><<lstress>><<note "- 搜查难度" "green">>
+	<br>
+	<<set $skulduggerydifficulty to 1000 - $dance_job_stage_explore>>
+	<<link [[探索庄园|Dance Job Stage Explore]]>><</link>><<skulduggerydifficulty>>
+<</if>>

@@ -1,0 +1,79 @@
+:: Robin Hug Break []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].love gte 80 and $robinhugbreak gte 1>>
+	你紧紧抓住罗宾，几乎把<<him>>推到床上，你呜咽着大声哭泣。
+	<br><br>
+
+	"怎、怎么了？"罗宾大叫出来，看样子是被你吓到了。
+	"哦，不，又出事了，是不是？"<<He>>拥抱你，尽自己最大的努力安慰着你，你对着<<his>>尽情倾诉了自己所遭遇的一切。
+	<br><br>
+
+	"真是太糟糕了！"罗宾一脸严肃地说，"我们真的得告诉其他人！"
+	罗宾试图安慰你，脸上带着困惑的表情。
+	<br><br><br><br>
+	<<robinhug>>
+
+<<elseif $NPCName[$NPCNameList.indexOf("Robin")].love gte 80>>
+	<<set $robinhugbreak to 1>>
+	你紧紧抓住罗宾，几乎把<<him>>推到床上，你呜咽着大声哭泣。
+	<br><br>
+
+	"怎、怎么了？"罗宾大叫出来，看样子是被你吓到了。
+	<<He>>双臂抱住你，看起来极其恐慌，不知道要对你宣泄的情感做出怎样的反应。
+	<br><br>
+
+	"太、太可怕了！"罗宾一脸惊恐地回应道，"这……我们得告诉其他人！"
+	<<he>>边说着，边抚摸你的后背，继续给出更多关于如何处理问题的安慰性承诺。
+	<br><br>
+	<<robinhug>>
+
+<<elseif $NPCName[$NPCNameList.indexOf("Robin")].love gte 40 and $robinhugbreak gte 1>>
+	你紧紧抓住罗宾，几乎把<<him>>推到床上，你呜咽着大声哭泣。
+	<br><br>
+
+	"怎、怎么了！？"罗宾大叫出来，看样子是被你吓到了。"又发生什么了吗！究竟怎么回事！？"
+	<<He>>也抱住了你，尽自己最大的努力安慰着你，你对着<<his>>尽情倾诉了自己所遭遇的一切。
+	<br><br>
+
+	"真是太糟糕了！"罗宾说着，看起来很严肃，"我们得告诉其他人！"
+	罗宾试图安慰你，脸上带着困惑的表情。
+	<br><br>
+	<<robinhug>>
+
+<<elseif $NPCName[$NPCNameList.indexOf("Robin")].love gte 40 or $robinbaileyhelp gte 1>>
+	<<set $robinhugbreak to 1>>
+	你紧紧抓住罗宾，几乎把<<him>>推到床上，你呜咽着大声哭泣。
+	<br><br>
+
+	"怎、怎么了？"罗宾大叫出来，看样子是被你吓到了。
+	<<He>>用<<his>>的双臂抱住你，不安地环顾房间，但<<he>>并没有打断你。
+	<<He>>试着安慰你，你含着眼泪努力将一切倾诉了出来。
+	<br><br>
+
+	"太、太可怕了！"罗宾一脸惊恐地回应道，"这……我们得告诉其他人！"
+	<<He>>试图从你怀里挣脱，但你紧紧地抓住了<<him>>。渐渐地，<<he>>冷静下来，默默地待着，直到你哭完。
+	<br><br>
+	<<robinhug>>
+
+<<else>>
+	<<set $robinhugbreak to 1>>
+	你紧紧抓住罗宾，几乎把<<him>>推到床上，你呜咽着哭泣。
+	<br><br>
+
+	"怎、怎么了？"罗宾大叫出来，看样子是被你吓到了。
+	你对向<<him>>展现出现在的样子感到很羞耻，但你经历了太多太多，再也没有办法承受住了。
+	<br><br>
+
+	罗宾从你怀里挣脱，站了起来。"在这儿等、等着！我去找人来帮忙！"
+	说完，<<he>>就跑出房间，你留在原地，仿佛感觉自己被抛弃了。
+	你明明因为信任<<him>>才愿意展示你脆弱的一面，现在<<hes>>却可能要把贝利带到这里，来目睹你现在的样子。
+	<br><br>
+
+	<<link [[留下|Robin Hug Break 2]]>><<set $phase to 1>><<trauma 6>><<stress 6>><<npcincr Robin love 1>><</link>><<gtrauma>><<gstress>><<glove>>
+	<br>
+	<<link [[回自己的房间 (0:05)|Robin Hug Break 2]]>><<pass 5>><<set $phase to 2>><<npcincr Robin love -1>><</link>><<llove>>
+	<br>
+	<<link [[逃跑|Robin Hug Break 2]]>><<set $phase to 0>><<npcincr Robin love -1>><</link>><<llove>>
+	<br>
+<</if>>

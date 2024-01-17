@@ -1,0 +1,32 @@
+:: Docks Slave Station []
+<<set $outside to 0>><<set $location to "town">><<dockeffects>><<effects>>
+
+你把<<person>>带到了丰收街的火车站。<<He>>走得离你很近，时不时撞上你。车站里人头攒动，墙上有一张国家地图，上面突出显示着铁路路线。
+<br><br>
+
+<<He>>指着地图上某一个小镇露出了微笑。你仔细看了看，和<<his>>校服上的校徽一致。"你家在那里吗？"你问。<<He>>只是微笑着，没有回答你。
+<br><br>
+
+你买好了票，带<<he>>走上了月台。火车到站了。
+<<set $money -= 10000>>
+<<person>>似乎很紧张。
+<br><br>
+
+
+<<if $money gte 10000>>
+	<<link [[什么也不给|Docks Slave Station 2]]>><<famegood 5>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[给£100|Docks Slave Station 2]]>><<set $dockslavemoney to 100>><<set $money -= 10000>><<famegood 10>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	<<link [[挥手告别|Docks Slave Station 2]]>><<famegood 5>><<set $phase to 0>><</link>>
+	<br>
+<</if>>
+<<if $money gte 30000>>
+	<<link [[给£300|Docks Slave Station 2]]>><<set $dockslavemoney to 300>><<set $money -= 30000>><<famegood 30>><<set $phase to 2>><</link>>
+	<br>
+<</if>>
+<<if $money gte 100000>>
+	<<link [[给£1000|Docks Slave Station 2]]>><<set $dockslavemoney to 1000>><<set $money -= 100000>><<famegood 50>><<set $phase to 3>><</link>>
+	<br>
+<</if>>

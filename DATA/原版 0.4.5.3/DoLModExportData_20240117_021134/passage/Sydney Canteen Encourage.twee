@@ -1,0 +1,50 @@
+:: Sydney Canteen Encourage []
+<<run statusCheck("Sydney")>>
+<<if $speech_attitude is "meek">>
+	"那个，你的眼镜很重要。"你紧张地压低了声音。
+<<elseif $speech_attitude is "bratty">>
+	"最好照<<person2>><<he>>说的做，你需要你的眼镜。"你压低了声音。
+<<else>>
+	"别让<<person2>><<him>>把你的眼镜踩碎了。"你摇了摇头。
+<</if>>
+<br><br><<person1>>
+
+<<if $corruptionRollover is 1>>
+	悉尼皱眉沉思。过了一会儿，<<he>>才漫不经心地
+<<elseif _sydneyStatus.includes("corrupt")>>
+	悉尼耸耸肩，然后随意地
+<<else>>
+	悉尼环顾四周。在短暂犹豫过后，<<he>>才羞怯地
+<</if>>
+<<npcUndressText $NPCName[$NPCNameList.indexOf("Sydney")] "lower" "self">>。
+<<if _sydneyStatus.includes("corrupt")>>
+	<span class="lewd"><<He>>没穿任何内衣。</span>
+	<<if _sydneyChastity and !$sydneyChastityKnown>>
+		<<set $sydneyChastityKnown to 1>>
+		<span class="lewd">你看见一条贞操带系在了<<his>>的腰上。</span> "好了，你现在知道我那肮脏的小秘密了。"
+	<<elseif _sydneyChastity>>
+		贞操带是唯一遮挡<<him>>下体的东西。
+	<<else>>
+		<<his>>的<<sydneyGenitals>>在你面前一览无遗。
+	<</if>>
+<<else>>
+	你和<<person2>><<person>>短短瞥到一眼<<nnpc_his "Sydney">>的内裤。
+<</if>>
+<<promiscuity1>>
+<<person2>><<person>>有些吃惊地笑了。"好吧，一言为定。谢谢你给我看。"<<He>>捡起了眼镜，把它还给悉尼之后就离开了。<<person1>>
+<br><br>
+<<if $corruptionRollover is 1>>
+	悉尼坐回去继续吃饭。"我的眼镜得救了，"<<he>>喃喃道，"而且……你也赞成这样做。"<<He>>咽下一口食物，朝你笑笑。"那就是罪恶吗……意外的……方便呢。<span class="lewd">真是开了眼界。</span>"<<He>>吃完了午饭。
+<<elseif _sydneyStatus.includes("corrupt")>>
+	悉尼坐回去继续吃饭，就像什么也没发生过。
+<<else>>
+	悉尼坐回去继续吃饭，尽量避开你的眼神。
+<</if>>
+<<if $sydneyromance is 1>>
+	"<<if $corruptionRollover is 1>>当然，我仍然<<else>>我<</if>>希望你是唯一一个能看见那个的人。"
+<</if>>
+<<unset $corruptionRollover>>
+<<He>>打了个哈欠。"我得回图书馆了，谢谢你陪我。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+<br><br>
+<<link [[继续|Canteen]]>><<endevent>><</link>>
+<br>

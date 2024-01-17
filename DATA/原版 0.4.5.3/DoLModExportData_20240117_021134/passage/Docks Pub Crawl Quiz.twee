@@ -1,0 +1,89 @@
+:: Docks Pub Crawl Quiz []
+<<set $outside to 0>><<set $location to "pub">><<dockeffects>><<effects>>
+
+<<if $phase is 0>><<set $phase += 1>>
+	第一个问题类别<<dockpubquiz>>
+<<elseif $phase is 1>><<set $phase += 1>>
+	第二个问题类别<<dockpubquiz>>
+<<elseif $phase is 2>><<set $phase += 1>>
+	第三个问题类别<<dockpubquiz>>
+<<elseif $phase is 3>><<set $phase += 1>>
+	第四个问题类别<<dockpubquiz>>
+<<elseif $phase is 4>><<set $phase += 1>>
+	第五个问题类别<<dockpubquiz>>
+<<else>>
+
+	<<if $dockquizhome gt $dockquizaway>>
+
+		"胜方是，"老板宣布，"码头工人队！"你和你的同事们欢呼着，一起锤着桌子，直到酒吧老板劝你们安静下来。
+		<br><br>
+		<<earnFeat "Pub Crawl Victors">>
+		<<if $dockquiz is "money">>
+			水手们一点也不服气。"肯定有黑幕，"<<person>>说着，但他们还是老老实实把钱交了出来。你获得了<<moneyGain 60>>。
+			<<set $money += 6000>>
+			<br><br>
+
+			你和你的同事们喝完了免费的酒，心情愉快地离开了。
+			<<lstress>><<stress -6>>
+			<br><br>
+
+			<<dockpuboptions>>
+		<<elseif $dockquiz is "body">>
+			水手们一点也不服气。"肯定有黑幕，"<<person>>说着，但他们还是老老实实把钱交了出来。
+			<br><br>
+
+			<<link [[独吞|Docks Pub Crawl Take]]>><<dockstatus -1>><</link>><<lcool>>
+			<br>
+			<<link [[与同事们共享|Docks Pub Crawl Share]]>><<dockstatus 1>><</link>><<gcool>>
+			<br>
+		<<else>>
+
+			水手们一点也不服气。"肯定有黑幕，"<<person>>说着。
+			<br><br>
+
+			你和你的同事们喝完了免费的酒，心情愉快地离开了。
+			<<lstress>><<stress -6>>
+			<br><br>
+
+			<<dockpuboptions>>
+
+		<</if>>
+
+	<<elseif $dockquizhome is $dockquizaway>>
+		"比赛的结果是，"老板宣布，"平局！"大家似乎都不开心。
+		<br><br>
+		你和同事们不久就离开了。
+		<<if $dockquiz is "money">><<set $money += 6000>><</if>>
+		<br><br>
+		<<dockpuboptions>>
+	<<else>>
+		"胜方是，"老板宣布，"水手队！"他们欢呼着，笑着，直到酒吧老板劝他们安静下来。
+		<br><br>
+		<<if $dockquiz is "money">>
+			他们拿走了钱。"抱歉了各位，"<<person>>说。"早知如此何必来惹我们呢。"
+			<<lcool>><<dockstatus -1>>
+			<br><br>
+			你和同事们一起郁闷地离开了。
+			<<lstress>><<stress -6>>
+			<br><br>
+			<<dockpuboptions>>
+		<<elseif $dockquiz is "body">>
+			<<person>>看着你，招招手示意你过来。陪着<<His>>的其他水手们用饥渴的眼光盯着你。"该付赌注了，"<<he>>说。"给我滚过来。"
+			<br><br>
+			<<link [[走过去|Docks Pub Crawl Gangbang]]>><<set $sexstart to 1>><</link>>
+			<br>
+			<<if $rng gte 81>>
+				<<refuseicon>><<link [[拒绝|Docks Pub Crawl Fight]]>><<dockstatus -1>><</link>><<lcool>>
+				<br>
+			<<else>>
+				<<refuseicon>><<link [[拒绝|Docks Pub Crawl Gangbang Refuse]]>><<dockstatus -1>><</link>><<lcool>>
+				<br>
+			<</if>>
+		<<else>>
+			你和同事们一起郁闷地离开了。
+			<<lstress>><<stress -6>>
+			<br><br>
+			<<dockpuboptions>>
+		<</if>>
+	<</if>>
+<</if>>

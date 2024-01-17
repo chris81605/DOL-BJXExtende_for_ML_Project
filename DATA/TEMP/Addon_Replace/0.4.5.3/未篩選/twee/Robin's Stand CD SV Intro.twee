@@ -1,0 +1,29 @@
+:: Robin's Stand CD SV Intro []
+<<set _uniqueoptions to true>>
+<<robinroom>>
+
+<<if Time.season is "winter">>
+	<<set _stand to "热巧克力摊位">>
+	<<set _inLocation to "公园">>
+<<else>>
+	<<set _stand to "柠檬水摊">>
+	<<set _inLocation to "沙滩">>
+<</if>>
+罗宾看了看挂钟，叹了口气。"我得把_stand摆好。"
+<<He>>缓慢起身。"我要换衣服了，如果你等下要见我的话，去_inLocation找我。"
+<br><br>
+
+<<if _robin.lovestage gte 5>>
+	<<link [[询问发生了什么事|Robin's Stand CD Explain Full]]>><<npcincr Robin love 3>><</link>><<gglove>>
+<<else>>
+	<<link [[询问发生了什么事|Robin's Stand CD Explain Demo]]>><</link>>
+<</if>>
+<br>
+<<if Time.season is "winter">>
+	<<link [[帮罗宾搭摊子 (0:30)|Robin Chocolate Set]]>><<pass 30>><<npcincr Robin love 1>><</link>><<glove>>
+<<else>>
+	<<link [[帮罗宾搭摊子 (0:30)|Robin's Lemonade Set]]>><<pass 30>><<npcincr Robin love 1>><</link>><<glove>>
+<</if>>
+<br>
+<<link [[离开|Orphanage]]>><<set $fromRobinRoom to true>><<endevent>><</link>>
+<br>

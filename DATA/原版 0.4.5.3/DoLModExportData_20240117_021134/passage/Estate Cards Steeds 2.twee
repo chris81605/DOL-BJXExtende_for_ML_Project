@@ -1,0 +1,116 @@
+:: Estate Cards Steeds 2 []
+<<effects>>
+
+<<if $monsterchance gte 1 and $hallucinations gte 1 or $monsterchance gte 1 and $monsterhallucinations is "f" or $bestialitydisable is "t">>
+	<<if beastMaleChance() is 100>>
+		<<set _estate_cards_monsters to "bulls">>
+	<<elseif beastMaleChance() is 0>>
+		<<set _estate_cards_monsters to "cows">>
+	<<else>>
+		<<set _estate_cards_monsters to "both">>
+	<</if>>
+<<else>>
+	<<set _estate_cards_monsters to "beasts">>
+<</if>>
+
+<<if Time.dayState is "day" and Time.hour gte 12>>
+	伦恩带着一群人进了一个大谷仓。你们继续经过它，沿着一条泥路通向栅栏里的一扇门。那边是一片封闭的田野。
+	你看着
+	<<switch _estate_cards_monsters>>
+	<<case "bulls">>
+		牛男孩们在吃草，半人马在河边饮水。
+		<br><br>
+	<<case "cows">>
+		牛女孩们在吃草，半人马在河边饮水。
+		<br><br>
+	<<case "both">>
+		牛男孩和牛女孩们在吃草，半人马在河边饮水。
+		<br><br>
+		<<if random(1, 2) is 2>>
+			<<set _estate_cards_centaur to "m">>
+		<<else>>
+			<<set _estate_cards_centaur to "f">>
+		<</if>>
+	<<default>>
+		牛在吃草，马在喝水。
+		<br><br>
+	<</switch>>
+
+	"你们在这里等着，"伦恩说，然后大步往前走。
+	<<if $estate.cards.wren_top is 0 or $estate.cards.wren_bottoms is 0 or $estate.cards.wren_under_top is 0 or $estate.cards.wren_under_bottoms is 0>>
+		<<He>>和一个害羞的护卫说了几句话，然后穿过田野，从外面的篮子里拿了一个苹果。
+	<<else>>
+		<<He>>和一个护卫说了几句话，然后穿过田野，从外面的篮子里拿了一个苹果。
+	<</if>>
+	<<switch _estate_cards_monsters>>
+	<<case "bulls">>
+		<<He>>走过吃草的牛男孩们身边，走向半人马。其中一匹马看向<<him>>。他的脸上带着警惕的表情。
+		<br><br>
+
+		伦恩在说话前咬了一口苹果。你听不清<<his>>的话，但半人马的回答更清晰。"像牛一样？！"他吼道。"再敢说一句话，我就把你踩在泥里。"
+		<br><br>
+
+		伦恩转过身，把苹果核扔过<<his>>的肩膀。半人马保持冷静，即使苹果核从他的胸前弹开，但他的目光一直跟着伦恩，直到<<his>>的身影消失。
+		<br><br>
+	<<case "cows">>
+		<<He>>走过吃草的牛女孩们身边，走向半人马。其中一匹马看向<<him>>。她的脸上带着警惕的表情。
+		<br><br>
+
+		伦恩在说话前咬了一口苹果。你听不清<<his>>的话，但半人马的回答更清晰。"像牛一样？！"她吼道。"再敢说一句话，我就把你踩在泥里。"
+		<br><br>
+
+		伦恩转过身，把苹果核扔过<<his>>的肩膀。半人马保持冷静，即使苹果核从她的胸前弹开，但她的目光一直跟着伦恩，直到<<his>>的身影消失。
+		<br><br>
+	<<case "both">>
+		<<He>>走过吃草的牛男孩和牛女孩们身边，走向半人马。其中一匹马看向<<him>>。<<if _estate_cards_centaur is "m">>他<<else>>她<</if>>的脸上带着警惕的表情。
+		<br><br>
+
+		伦恩在说话前咬了一口苹果。你听不清<<his>>的话，但半人马的回答更清晰。"你说我像牛？！"<<if _estate_cards_centaur is "m">>他<<else>>她<</if>>吼道，"再敢说一句话，我就把你踩在泥里。"
+		<br><br>
+
+		伦恩转过身，把苹果核扔过<<his>>的肩膀。半人马保持冷静，即使苹果核从<<if _estate_cards_centaur is "m">>他的<<else>>她的<</if>>胸前弹开，但<<if _estate_cards_centaur is "m">>他<<else>>她<</if>>的目光一直跟着伦恩，直到<<his>>的身影消失。
+		<br><br>
+	<<default>>
+		<<He>>走过吃草的牛身边，走向马群。其中一匹马看向<<him>>。
+		<br><br>
+
+		伦恩在说话前咬了一口苹果。你听不清<<his>>说的话，但这匹马发出嘶鸣，并跺着地面作为回应。
+		<br><br>
+
+		伦恩转过身，把苹果核扔过<<his>>的肩膀。它从马背上弹回来。其他人在踱步，好像很紧张。
+		<br><br>
+	<</switch>>
+
+<<else>>
+	伦恩带领同伴们沿着一条小路穿过一片小树林。你们出现在一座石头建筑旁。这是一个马厩。
+
+	<<switch _estate_cards_monsters>>
+	<<case "bulls" "cows" "both">>
+		半人马在一些隔间里盯着你们。
+		<br><br>
+	<<default>>
+		马在马厩里看着
+		<br><br>
+	<</switch>>
+
+	伦恩大摇大摆地走到最近的一只面前。"谁是一匹好马啊？"<<he>>模仿雷米的语气。"是你，给我安静地待在笼子里，我相信你很快就会被释放的，当你的主人这样说的时候。"
+	<br><br>
+	<<switch _estate_cards_monsters>>
+	<<case "bulls" "cows" "both">>
+		半人马咆哮着向伦恩扑去，伦恩及时后退。"哦，"伦恩继续说道。"有人脾气很不好啊，苹果没你的份了。"<<He>>回到你和<<his>>的同伴身边。
+		<br><br>
+	<<default>>
+		马哼了一声想咬到伦恩身上，伦恩及时后退。"哦，"伦恩继续说道。"有人脾气很不好啊，苹果没你的份了。"<<He>>回到你和<<his>>的同伴身边。
+		<br><br>
+	<</switch>>
+
+
+<</if>>
+
+<<if $cow gte 6>>
+	雷米的马群很骄傲，认为自己几乎可以与雷米的人类仆人相提并论，至少地位肯定比牛高。雷米会发现他们不合作的一段时间。
+	<br><br>
+<</if>>
+
+<<link [[继续|Estate Cards Return]]>><</link>>
+<br>

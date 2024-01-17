@@ -1,0 +1,81 @@
+:: Farm Kennel []
+<<set $outside to 0>><<effects>>
+<<beastNEWinit 1 dog>>
+<<if $kennel_intro isnot true>>
+	<<set $kennel_intro to true>>
+	你来到狗窝。<<beastsplural>>的气味环绕着你。<<if $farm.kennel gte 1>>你可以训练他们来保卫农场。<</if>>
+	<br><br>
+	<<if $wolfgirl gte 5>>
+		第一只<<beasttype>>很快便注意到了你。不一会，整个狗窝都向你看去。他们翘着脑袋，仔细观察着你的尾巴，似乎不知道怎么做，直到一声犬吠认同你。<<ggrespect>><<farm_dogs 3>>
+		<br><br>
+
+		<<kennel_intro>>
+		<br><br>
+
+	<<elseif $cat gte 5>>
+		这些<<beastsplural>>很快便注意到了你。你猫一样的气味出卖了你。他们似乎很激动了。这气味让他们躁动起来。你呼噜呼噜地叫着，但没什么用。<<llrespect>><<farm_dogs -3>>
+		<br><br>
+
+		<<kennel_intro>>
+		<br><br>
+	<<elseif $harpy gte 5>>
+		他们仔细观察着你的翅膀，然后退开了。你让他们想起了一些可怕的事情。<<lrespect>><<farm_dogs -1>>
+		<br><br>
+
+		<<kennel_intro>>
+		<br><br>
+	<<elseif $cow gte 5>>
+		<<if $lactating is 1 and $milk_amount gte 30>>
+			他们鼻子抽动着，因为闻到了你的牛奶味，这让他们感到安心。他们已经习惯了牛的存在。<<ggrespect>><<farm_dogs 3>>
+		<<else>>
+			狗群几乎没注意到你的存在，毕竟他们已经习惯了牛在附近。<<grespect>><<farm_dogs 1>>
+		<</if>>
+		<br><br>
+
+		<<kennel_intro>>
+		<br><br>
+	<<elseif $fox gte 5>>
+		很快，第一个<<beasttype>>就注意到了你。你的狐狸味一定暴露了你的存在。它们在检查你的尾巴时歪着头，似乎不知道该怎么做，然后才会发出迟疑的赞同。<<ggrespect>><<farm_dogs 1>>
+		<br><br>
+
+		<<kennel_intro>>
+		<br><br>
+
+	<<else>>
+
+		一只<<beasttype>>抬起头来。很快，整个狗窝都看向了你。
+
+		<<kennel_intro>>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Farm Kennel]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你在狗窝里。
+	<<if $farm.beasts.dogs gte 20>>
+		这些<<beastsplural>>在摇着尾巴等待你的指示。
+	<<elseif $farm.beasts.dogs gte 5>>
+		这些<<beastsplural>>在等待着你的指示。
+	<<elseif $farm.beasts.dogs gte -5>>
+		这些<<beastsplural>>无视了你。
+	<<elseif $farm.beasts.dogs gte -20>>
+		一只<<beasttype>>向你咆哮。
+	<<else>>
+		这些<<beastsplural>>不加掩饰，充满欲望地看向你。
+	<</if>>
+	<<if $farm.kennel gte 1>>一面墙上摆放着训练用具。<</if>>
+	<br><br>
+
+	<<if $farm.kennel gte 1>>
+		<<ind>><<link [[训练 (1:00)|Farm Kennel Train]]>><<set $farm_kennel to 1>><<pass 60>><</link>>
+		<br>
+	<</if>>
+	<<ind>><<link [[奖励|Farm Kennel Treats]]>><</link>>
+	<br>
+	<<ind>><<link [[玩耍|Farm Kennel Play]]>><<set $farm_kennel to 1>><</link>>
+	<br>
+	<<getouticon>><<link [[离开|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

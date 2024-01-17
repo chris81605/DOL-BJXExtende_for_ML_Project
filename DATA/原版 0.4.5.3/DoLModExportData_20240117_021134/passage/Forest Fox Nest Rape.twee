@@ -1,0 +1,27 @@
+:: Forest Fox Nest Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $NPCList[0].stance to "top">><<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red"><<bHe>>对着你尖叫，盖过了你的尖叫声。</span>'>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Fox Nest Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Fox Nest Rape]]>><</link>></span><<nexttext>>
+<</if>>

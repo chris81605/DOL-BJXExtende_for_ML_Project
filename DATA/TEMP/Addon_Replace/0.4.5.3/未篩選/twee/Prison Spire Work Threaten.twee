@@ -1,0 +1,42 @@
+:: Prison Spire Work Threaten []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	<<gagged_speech "是、是别人叫我这么做的，">>你弱弱地说，<<gagged_speech "请不要阻止我。">>
+<<elseif $speech_attitude is "bratty">>
+	<<gagged_speech "滚蛋，">>你生气地说，<<gagged_speech "不然我就打断你的脆骨头。">>
+<<else>>
+	<<gagged_speech "我忙着呢，">>你不耐烦地说，<<gagged_speech "别挡我的路。">>
+<</if>>
+<br><br>
+<<if $physiqueSuccess>>
+	<<beasttype>>上下打量着你，<span class="green">然后飞回了灯塔。</span>
+	<br><br>
+	<<endevent>>
+	"干得漂亮，"一回到小屋，<<generate_anxious_guard 0>><<anxious_guard 0>>立马开口说道。
+	<<if $prison.anxious gte 60>>
+		"你可以留几颗牙齿，但别告诉其他人。"<<prison_teeth_text 2>><<prison_teeth 2>>
+	<</if>>
+	<<lsuspicion>><<prison_guards -1>>
+	<br><br>
+<<else>>
+	<<beasttype>>上下打量着你，<span class="red">然后向你走近。</span>
+	<<if $monster is 1>>
+		"也许我该把你扔进大海，"<<bhe>>说道，"你看起来够轻的。"
+	<</if>>
+	<br><br>
+
+	<<bHe>>拍打翅膀朝你飞来，撞向你的胸部把你打至跪地。<<gstress>><<gpain>><<stress 6>><<pain 4>>
+	<br><br>
+
+	<<if $monster is 1>>
+		在你挣扎着站起来时，<<bHe>>把散落一地的牙齿收集起来，然后飞回了灯塔。
+	<<else>>
+		<<bHe>>用喙叼起每一颗散落的牙齿，吞下肚子，又去找下一颗。就在你踉踉跄跄地站起身时，<<bHe>>飞回了灯塔。
+	<</if>>
+	<<gsuspicion>><<prison_guards 1>>
+	<br><br>
+
+<</if>>
+
+<<prison_spire_options>>

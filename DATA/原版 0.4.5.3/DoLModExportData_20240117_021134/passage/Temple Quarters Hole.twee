@@ -1,0 +1,56 @@
+:: Temple Quarters Hole []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<if $rng gte 81 or ($museumAntiques.antiques.antiquebrassstatuette isnot "found" and $museumAntiques.antiques.antiquebrassstatuette isnot "talk" and $museumAntiques.antiques.antiquebrassstatuette isnot "museum")>>
+	你伸手进去，摸到了尖锐的东西。你收回你的手。
+	<<gpain>><<pain 4>><<gstress>><<stress 6>>
+	<br><br>
+	你又伸手进去，这一次更加小心翼翼，随后你的手指裹住了某个冰凉坚硬的东西。你把它拿出来放在光下打量。<span class="gold">这是一个黄铜小雕像，</span>它被雕成了鹰的形状。你发现你的手原来是抓住了它的喙。
+	<br><br>
+	它看起来很老旧。
+	<<set $antiquemoney += 120>><<museumAntiqueStatus "antiquebrassstatuette" "found">>
+	<br><br>
+	<<link [[继续|Temple Quarters]]>><</link>>
+	<br>
+<<elseif $rng gte 61 or $stone_pendant_found is undefined>>
+	你伸手进去。这个洞很深。你正面躺着，在床下晃动，让你的手臂能进一步伸进洞里。
+	<br><br>
+	<<if $stone_pendant_found is undefined>><<set $stone_pendant_found to 1>>
+		你的手指碰到了一个冰凉坚硬的物体。你把它拉出来，找到了一小块<span class="green">形似古老宗教符号的石头。</span>它系在一圈绳子上。
+		<<if $worn.neck.cursed is 1>>
+			你把它收起来，继续履行你的职责。
+			<<generalSend "wardrobe" "neck" 5>>
+		<<else>>
+			你把它戴在你的脖子上。<<neckwear 5>>
+		<</if>>
+		<br><br>
+	<<elseif random(1, 100) gte 51>>
+		你的手指拂过布料。你拉出一个小袋子。里面是<<moneyGain 20>>。
+		<br><br>
+	<<else>>
+		<span class="red">有什么东西抓住了你的手腕。</span>你用力甩开手臂，挣脱了它的钳制，闪身离开了洞口。
+		<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+	<</if>>
+	<<link [[继续|Temple Quarters]]>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	你伸手进去，却发现只有灰尘。
+	<br><br>
+	<<link [[继续|Temple Quarters]]>><</link>>
+	<br>
+<<elseif $rng gte 21>>
+	你伸手进去，摸到了尖锐的东西。你收回你的手。
+	<<gpain>><<pain 4>><<gstress>><<stress 6>>
+	<br><br>
+	这次你再次伸手进去，手指小心翼翼地抓住了一些冰凉坚硬的东西。你把它拿到光下打量。
+	<br><br>
+	它只是一块破碎的灰色石头，锋利的边缘朝着上方。
+	<br><br>
+	<<link [[继续|Temple Quarters]]>><</link>>
+	<br>
+<<else>>
+	你伸手探进去，摸到了一些柔软的东西。你试图抓住它，但它突然蠕动起来，扭动着离开了。
+	<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<link [[继续|Temple Quarters]]>><</link>>
+<</if>>

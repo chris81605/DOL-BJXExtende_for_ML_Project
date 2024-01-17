@@ -1,0 +1,31 @@
+:: Police Community End []
+<<set $location to "police_station">><<effects>>
+
+你回到警察局。
+
+<<generatePolice 1>><<person1>>
+<<if $community_service lte 0>>
+	<<unset $community_service>>
+	<<unset $commuity_service_done>>
+	接待处的警察在你出去的路上拦住了你。<span class="gold">"看起来你已经偿还了对社会的债务，"</span><<he>>说道。"祝贺你。"
+	<<earnFeat "Social Contract">>
+<<else>>
+	接待处的警官在你离开时候记下了你的名字。
+	<<if $community_service gte 2>>
+		"看起来你还有<span class="pink">$community_service</span>天，"<<he>>说道。"明天一定要来。"
+	<<else>>
+		"看起来你差不多完成了，"<<he>>说道。"只剩下<span class="purple">一天</span>了。一定要来。"
+	<</if>>
+<</if>>
+<br><br>
+
+
+<<if $exposed gte 1>>
+	<<link [[索要一些东西来盖住|Police Station Cover]]>><</link>>
+	<br>
+	<<link [[离开|Barb Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Police Station]]>><</link>>
+	<br>
+<</if>>

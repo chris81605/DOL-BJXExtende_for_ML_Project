@@ -1,0 +1,31 @@
+:: Bathroom []
+<<set $outside to 0>><<set $location to "home">><<effects>><<set $bus to "orphanage_bathroom">>
+你正待在浴室里。
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passouthome>>
+	<<exit>>
+<</if>>
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<set _clothed = ![V.worn.upper.name, V.worn.lower.name, V.worn.under_upper.name, V.worn.under_lower.name, V.worn.over_upper.name, V.worn.over_lower.name].every(x => x == 'naked')>>
+	<<bathroomicon "bath">><<link [[(_clothed ? "穿着衣服" : "") + "洗澡 " + "(0:30)"->Bath]]>><<water>><<pass 30>><<stress -6>><<set $hygiene to 0>><</link>><<lstress>>
+<<else>>
+	<<bathroomicon "bath">><<link [[洗澡 (0:30)->Bath]]>><<strip>><<pass 30>><<stress -6>><<set $hygiene to 0>><</link>><<lstress>>
+<</if>>
+<br>
+<!-- Check if there's any hair-->
+<<if $pbdisable is "f" and ($pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2)>>
+	<<bathroomicon "shave">><<link [[修剪阴毛->Shave]]>><</link>>
+	<br>
+<</if>>
+<<pregnancyTest "Bedroom">>
+<br>
+
+<<bedicon>><<link [[卧室 (0:01)->Bedroom]]>><<pass 1>><</link>>
+<br>
+<<robinroom_link>>
+<br>
+<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+<br>
+<<home_outside>>

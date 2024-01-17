@@ -1,0 +1,52 @@
+:: Anthill 
+<<if $sandmound is 1>>
+    <<set $outdoors to 1>><<effects>>
+    你看到沙地上有一个深洞的洞口，它一直延伸到黑暗中，看不到尽头。
+<<elseif $sandmound is 2>>
+    <<set $outdoors to 0>><<effects>>
+    你在蚁穴的入口处，响亮的嘎吱声从蚁穴深处回荡。
+<<elseif $sandmound is 3>>
+    <<set $outdoors to 0>><<effects>>
+    你在蚁穴的入口处，你感觉自己已经走了一半路程。隧道四通八达，看不到尽头。
+<<elseif $sandmound is 4>>
+    <<set $outdoors to 0>><<effects>>
+    你在蚁穴的深处，蠕动和嘎吱的声音环绕着你。隧道的数量进一步增加。
+<<elseif $sandmound is 5>>
+    <<set $outdoors to 0>><<effects>>
+    你到达蚁穴底部，在一个巨大的简陋大门后面，你感觉到了某种令人难以抗拒的东西。
+<</if>>
+<br><br>
+
+<<if $sandmound is 2 and $guard1 is 0>>
+    在你爬往更深的地方时，一名卫兵捕捉到了你的气味，并靠近准备战斗。
+    <br><br>
+    <<link [[做好战斗准备|Ant Guard 1]]>><<beastNEWinit 1 ant>><<set $molestationstart to 1>><</link>>
+    <br>
+<<elseif $sandmound is 3 and $guard2 is 0>>
+	在你爬往更深的地方时，又一队卫兵捕捉到了你的气味，并靠近准备战斗。
+    <br><br>
+    <<link [[做好战斗准备|Ant Guard 2]]>><<beastNEWinit 3 ant>><<set $molestationstart to 1>><</link>>
+    <br>
+<<elseif $sandmound is 4 and $guard3 is 0>>
+    在你爬往更深的地方时，一个高大的卫兵捕捉到了你的气味，并靠近准备战斗。
+    <br><br>
+    <<link [[做好战斗准备|Ant Guard 3]]>><<beastNEWinit 1 ant>><<set $molestationstart to 1>><</link>>
+    <br>
+<<else>>
+    <<if $sandmound is 1>>
+        <<link [[离开 (0:05)|Seasons Island]]>><<pass 5>><<set $guard1 to 0>><<set $guard2 to 0>><<set $guard3 to 0>><<set $islanddistance to 10>><</link>>
+        <br>
+    <</if>>
+    <<if $sandmound is 5>>
+        <<link [[进入 (0:05)|Ant Colony Shrine]]>><<pass 5>><</link>>
+        <br>
+    <</if>>
+    <<if $sandmound gt 1>>
+        <<link [[往上攀爬 (0:10)|Anthill]]>><<pass 10>><<set $sandmound -= 1>><</link>>
+        <br>
+    <</if>>
+    <<if $sandmound lt 5>>
+        <<link [[深入探索 (0:05)|Anthill]]>><<pass 5>><<set $sandmound += 1>><</link>>
+        <br>
+    <</if>>
+<</if>>

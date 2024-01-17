@@ -1,0 +1,62 @@
+:: Beach Abduction Dog []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<if $phase is 0>>
+		你试图逃跑，但<<person2>><<person>>抓住皮带，帮助<<person3>><<person>>把你拉到地上。在你还没来得及恢复之前，<<person2>><<person>>已经释放了<<beasttype>>。<<bHe>>跳到你身上把你压住了。
+		<<set $NPCList[0].stance to "top">><<set $head to "grappled">>
+		<br><br>
+		<<def 1>>
+	<<elseif $phase is 1>>
+		你试图保持冷静，却让自己离野兽更近了。<<person2>><<person>>松开了向你扑来的<<beasttype>>。
+		<br><br>
+		<<sub 1>>
+	<</if>>
+	<<set $phase to 2>>
+<</if>>
+<<effects>>
+<<if $phase is 2>>
+	<<set $phase to 1>>
+	两人坐在沙滩上观看。
+	<br><br>
+<<else>>
+	<<if $orgasmdown gte 1 and $phase is 1>><<set $phase to 0>>
+		"我真不敢相信，"<<person2>><<person>>高兴地叫道，"你居然是被<<if $monster is 1>>一个<<beasttype>><<else>>一个动物<</if>>强奸后回来的。这太棒了。"你觉得很丢脸。
+		<<trauma 6>><<famebestiality 20>>
+	<<else>>
+		<<person2>><<person>>和<<person3>><<person>>正在欣赏演出。
+	<</if>>
+	<br><br>
+<</if>>
+<<effectsman>>
+<<alarmstate>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续|Beach Abduction Dog Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Beach Abduction Dog Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续|Beach Abduction Dog]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Beach Abduction Dog Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Beach Abduction Dog Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Beach Abduction Dog]]>><</link>></span><<nexttext>>
+<</if>>

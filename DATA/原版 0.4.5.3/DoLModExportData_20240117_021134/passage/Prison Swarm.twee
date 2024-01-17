@@ -1,0 +1,26 @@
+:: Prison Swarm []
+<<effects>>
+
+<<if $molestationstart is 1>><<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+
+	<<set $enemytype to "swarm">>
+
+
+	<<swarminit "slimes" "史莱姆" "向你移动" "包围着你" "击退" 4 2>>
+	<<set $timer to 8>>
+<</if>>
+
+<<swarmeffects>>
+
+<<swarm>>
+
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Prison Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Prison Swarm]]>><</link>></span><<nexttext>>
+<</if>>

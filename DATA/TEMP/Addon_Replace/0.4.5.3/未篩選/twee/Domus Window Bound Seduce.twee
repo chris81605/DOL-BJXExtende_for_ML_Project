@@ -1,0 +1,37 @@
+:: Domus Window Bound Seduce []
+<<effects>>
+
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $speech_attitude is "meek">>
+	"你看起来很舒服，”你说，“介意我仔细检查一下这些结吗？"
+<<elseif $speech_attitude is "bratty">>
+	"一切都系好并且准备好了，”你说。“我不是那个幸运儿吗？"
+<<else>>
+	"有人不想让你四处闲逛，”你说。“但是如果我把你占为己有，他们也很难责怪你，不是吗？"
+<</if>>
+<br><br>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<person>>蠕动着，"我没有办法，"<span class="green"><<he>>诱人地呻吟。</span>
+	<br><br>
+
+	<<link [[继续|Domus Window Bound Seduce Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<generatep2>>
+	"你是谁？！"<<he>>大喊，使劲对抗着束缚，"救命！有入侵者！"<span class="red"><<Hes>>很想逃跑。</span>
+	<br><br>
+	你听到房间外地板在脚步声下嘎吱作响。"亲爱的，怎么了？"<<person2>><<personsimple>>的声音响起。"我让你等太久了吗？"你在被发现之前就从窗户逃走了。
+	<br><br>
+
+	<<link [[继续|Domus Street]]>><<endevent>><</link>>
+	<br>
+<</if>>

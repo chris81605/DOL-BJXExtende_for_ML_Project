@@ -1,0 +1,53 @@
+:: Pound Punishment Beast End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Punishment Beast]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Punishment Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Punishment Beast]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Punishment Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<else>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃走了。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		满足后<<beasttype>>离开了。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		感觉到你的麻烦比你的价值还多，野兽们都逃跑了。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		野兽让你筋疲力尽，瑟瑟发抖。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		野兽让你筋疲力尽，瑟瑟发抖。
+	<</if>>
+	<br><br>
+	<<tearful>>你挂在那里，锁在刑台上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<generate1>><<person1>>
+	脚步声接近。<<person>>说："活该，"他放开了你。"和其他人一起走，去吧，快走！"
+	<br><br>
+	<<pound_punishment_links>>
+	<br>
+<</if>>

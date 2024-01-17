@@ -1,0 +1,16 @@
+:: Manor Kylar []
+<<effects>><<set $bus to "kylarmanor">>
+
+<<run statusCheck("Kylar")>>
+
+<<npc Kylar>><<person1>>
+当你走近时，凯拉尔本能地将打开的那些窗口关闭，然后将椅子转过来面对你。
+<br><br>
+<<kylaroptions>>
+<<if $kylar_parents_trust gte 100 and $kylar_manor_secret is undefined>>
+	<<link [[告诉凯拉尔庄园已经清扫干净了|Manor Kylar Secret]]>><<set $kylar_manor_secret to 1>><</link>>
+	<br>
+<<elseif $kylar_parents_trust gte 1 and $kylar_manor_secret is undefined>>
+	<<link [[谈谈庄园的状况|Manor Kylar Word]]>><</link>>
+	<br>
+<</if>>

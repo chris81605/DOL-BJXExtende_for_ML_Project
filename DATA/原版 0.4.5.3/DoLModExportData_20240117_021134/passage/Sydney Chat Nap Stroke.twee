@@ -1,0 +1,45 @@
+:: Sydney Chat Nap Stroke []
+<<effects>><<set _kylar to statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+你坐回悉尼的椅子里。<<he>><<if ["early","morning","first","second"].includes($schoolstate)>>懒懒地<<else>>顺从地<</if>>跟到你面前，最后跪了下去，脑袋搁在你的大腿上。你伸手，手指轻轻滑过<<his>><<npcHairColour "Sydney">>的长发。你原本还担心跪着会不舒服，但<<he>>一声满足的轻叹打消了你的顾虑。没一会儿，<<hes>>便沉沉睡去。
+<br><br>
+<<if _kylar.state is "active" and _kylarStatus.includes("Rage") and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+	<<pass 5>>
+	你和悉尼就这样待了几分钟，直到嘣的一声巨响划破了图书馆的寂静。你扫视一圈，看到凯拉尔的一本字典掉在了地上，悉尼嘟哝着爬起来。"不好意思……"<<He>>回到柜台，眉头蹙起。其他学生也该干嘛干嘛去了。
+	<br><br>
+
+	悉尼闷闷地咬着牙。你突然注意到凯拉尔看了过来，嘴角疯狂上扬。<<nnpc_He "Kylar">>遇上你的目光，又迅速别开了。
+	<<stress 6>><<npcincr Kylar rage 3>><<gstress>><<ggksuspicion>>
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	<<pass 30>>
+	你和悉尼就这么呆着。你温柔地抚摸着<<his>>的长发，而<<him>>脸上挂着笑，平稳地呼吸着。平时工作这么辛苦，<<he>>也该好好休息一下了。
+	<br><br>
+
+	<<if $rng gte 51>>
+		<<generatey2>><<person2>>
+		一个<<person>>走向柜台。<<he>>四处张望了一番，看到了在你腿上睡着的悉尼，于是<<print either("轻笑着","朝你比了个手指枪","脸红着","失望地叹了口气，","<<if $rng gte 81>>做了个擦汗的动作，<<else>>翻了个白眼，<</if>>把书咚地一声扔在了柜台上<<set _book to 1>>")>>头也不回地离开了。
+		<br><br>
+		<<person1>>
+	<</if>>
+	过了一会儿，悉尼从你的腿上离开。<<He>>伸着懒腰，打了个哈欠。"谢啦宝贝。"<<he>>揉了揉眼睛，上前抱住了你<<if _sydneyStatus.includes("corrupt")>>，手不老实地向下摸去<<elseif _sydneyStatus.includes("Lust")>>，从脖子一直红到了耳根<</if>>。
+	<br><br>
+
+	<<if _book is 1>>
+		<<He>>看到柜台上的那本书。"哈……刚才有人来过吗？"
+		<<if $rng gte 81>>
+			<<He>>翻看着出租记录，嘶了一声。"逾期了！人还跑掉了！"<<He>>痛苦地哀嚎着，"只能等<<person2>><<him>>下次再来……"
+		<<else>>
+			<<He>>翻看着出租记录，欣慰地笑了。"如果<<person2>><<him>>下次再来，我会好好感谢<<he>>按时归还的。"
+		<</if>>
+		<br><br>
+		<<person1>>
+	<</if>>
+
+	<<if _kylar.state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+		凯拉尔从图书馆的另一边瞪了过来。<<ggksuspicion>><<npcincr Kylar rage 3>>
+		<br><br>
+	<</if>>
+	<<endevent>><<npc "Sydney">><<person1>>
+	<<sydneyOptions>>
+<</if>>

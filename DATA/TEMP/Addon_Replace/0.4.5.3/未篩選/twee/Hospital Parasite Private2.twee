@@ -1,0 +1,122 @@
+:: Hospital Parasite Private2 []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+<<if ($parasite_procedure.includes("all") and ($parasite.breasts.name is "parasite" or $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite"))>>
+	<<if $parasite.breasts.name is "parasite">>
+		<<set $earSlime.defyCooldown += 12>>
+	<</if>>
+	<<if $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite">>
+		<<set $earSlime.defyCooldown += 12>>
+	<</if>>
+<<else>>
+	<<if $parasite_procedure.includes("clit") and $parasite.clit.name is "parasite">>
+		<<set $earSlime.defyCooldown += 12>>
+	<<elseif $parasite_procedure.includes("penis") and $parasite.penis.name is "parasite">>
+		<<set $earSlime.defyCooldown += 12>>
+	<<elseif $parasite_procedure.includes("breasts") and $parasite.breasts.name is "parasite">>
+		<<set $earSlime.defyCooldown += 12>>
+	<</if>>
+<</if>>
+
+<<arousal 4000 "genitals">>
+<<if $arousal gte $arousalmax>><<orgasm>><<hospitalparasite>><</if>>
+
+电脉冲强度增加了，这显然不是他们说的那种"刺痛"。你的<<genitals 1>>首当其冲，比你身体的其他部位反应更激烈。
+<br><br>
+
+<<arousal 4000 "genitals">>
+<<if $arousal gte $arousalmax>><<orgasm>><<hospitalparasite>><</if>>
+
+<<if $parasite_procedure.includes("all")>>
+	<<if $parasite.clit.name isnot undefined and $parasite.nipples.name isnot undefined and $parasite.clit.name isnot "parasite">><<set _parasite_procedure to 1>>
+		终于，依附在你<<nipples>>和阴蒂上的生物开始有了反应。他们爱抚你的动作越来越激烈，最终他们放弃吸附在你身上并掉了下来。哈珀立即用戴着手套的手把它们捡起来，放在一个小容器里。
+		<br><br>
+	<<elseif $parasite.penis.name isnot undefined and $parasite.nipples.name isnot undefined and $parasite.penis.name isnot "parasite">><<set _parasite_procedure to 1>>
+		终于，依附在你<<nipples>>和阴茎上的生物开始有了反应。他们爱抚你的动作越来越激烈，最终他们放弃吸附在你身上并掉了下来。哈珀立即用戴着手套的手把它们捡起来，放在一个小容器里。
+		<br><br>
+	<<elseif $parasite.clit.name isnot undefined>><<set _parasite_procedure to 1>>
+		<<if $parasite.clit.name is "parasite">>
+			终于，吸在你阴蒂上的寄生阴茎开始有了反应——它慢慢变得苍白，开始疲软与松碎。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+		<<else>>
+			终于，吸附在你阴蒂上的东西开始有了反应——它越发激烈地蹂躏着你的小穴，最后脱落了下来。哈珀立即用手套把它捡起，将其放入一个小型容器之中。
+		<</if>>
+		<br><br>
+	<<elseif $parasite.penis.name isnot undefined>><<set _parasite_procedure to 1>>
+		<<if $parasite.penis.name is "parasite">>
+			终于，吸附在你阴茎上的寄生物开始有了反应——它慢慢变得苍白，开始分解与脱落。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+		<<else>>
+			终于，吸附在你阴茎上的东西开始有了反应——它越发激烈地蹂躏着你的柱身，最后脱落了下来。哈珀立即用手套把它捡起，将其放入一个小型容器之中。
+		<</if>>
+	<<elseif $parasite.nipples.name isnot undefined>><<set _parasite_procedure to 1>>
+		终于，吸附在你乳头上的东西开始有了反应——它们越发激烈地蹂躏着你的胸脯，最后脱落了下来。哈珀立即用手套捡起，将其放入一个小型容器之中。
+		<br><br>
+	<<elseif $parasite.breasts.name isnot undefined>><<set _parasite_procedure to 1>>
+		<<if $parasite.breasts.name is "parasite">>
+			终于，吸附在你胸前的寄生物开始有了反应——它慢慢变得苍白，开始分解与脱落。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+		<<else>>
+			终于，吸附在你胸前的东西开始有了反应——它越发激烈地蹂躏着你的胸脯，最后脱落了下来。哈珀立即用手套拾起，将其放入一个小型容器之中。
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<if $parasite.bottom.name isnot undefined>>
+		<<if _parasite_procedure is 1>>
+			依附在你<<bottom>>上的东西也是如此，和其他寄生物一样，哈珀把它装进了罐子里。
+		<<else>>
+			终于，吸附在你<<bottom>>上的东西开始有了反应——它们越发激烈地蹂躏着你的屁股，最后脱落了下来。哈珀立即用手套捡起，将其放入一个小型容器之中。
+			<br><br>
+		<</if>>
+	<</if>><<set _parasite_procedure to 1>>
+	<<removeparasite clit>>
+	<<removeparasite penis>>
+	<<removeparasite nipples>>
+	<<removeparasite bottom>>
+	<<removeparasite breasts>>
+<<elseif $parasite_procedure.includes("clit")>>
+	<<if $parasite.clit.name is "parasite">>
+		终于，吸在你阴蒂上的寄生阴茎开始有了反应——它慢慢变得苍白，开始疲软与松碎。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+	<<else>>
+		终于，吸附在你阴蒂上的东西开始有了反应——它越发激烈地蹂躏着你的小穴，最后脱落了下来。哈珀立即用手套把它捡起，将其放入一个小型容器之中。
+	<</if>>
+	<<removeparasite clit>>
+	<br><br>
+<<elseif $parasite_procedure.includes("penis")>>
+	<<if $parasite.penis.name is "parasite">>
+		终于，吸附在你阴茎上的寄生物开始有了反应——它慢慢变得苍白，开始分解与脱落。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+	<<else>>
+		终于，吸附在你阴茎上的东西开始有了反应——它越发激烈地蹂躏着你的柱身，最后脱落了下来。哈珀立即用手套把它捡起，将其放入一个小型容器之中。
+	<</if>>
+	<<removeparasite penis>>
+	<br><br>
+<<elseif $parasite_procedure.includes("nipples")>>
+	<<removeparasite nipples>>
+	终于，吸附在你乳头上的东西开始有了反应——它们越发激烈地蹂躏着你的胸脯，最后脱落了下来。哈珀立即用手套捡起，将其放入一个小型容器之中。
+	<br><br>
+<<elseif $parasite_procedure.includes("bottom")>>
+	<<removeparasite bottom>>
+	终于，吸附在你<<bottom>>上的东西开始有了反应——它们越发激烈地蹂躏着你的屁股，最后脱落了下来。哈珀立即用手套捡起，将其放入一个小型容器之中。
+	<br><br>
+<<elseif $parasite_procedure.includes("breasts")>>
+	<<if $parasite.breasts.name is "parasite">>
+		终于，吸附在你胸前的寄生物开始有了反应——它慢慢变得苍白，开始分解与脱落。哈珀立即用手套捏取一份样本，将其放入一个小型容器之中。
+	<<else>>
+		终于，吸附在你胸前的东西开始有了反应——它越发激烈地蹂躏着你的胸脯，最后脱落了下来。哈珀立即用手套拾起，将其放入一个小型容器之中。
+	<</if>>
+	<<removeparasite breasts>>
+	<br><br>
+<</if>>
+<<unset $parasite_precedure>>
+
+<<arousal 4000>>
+<<if $arousal gte $arousalmax>><<orgasm>><<hospitalparasite>><</if>>
+
+<<person1>><<He>>关掉机器，电脉冲马上就停下了，只留下轻微的刺痛。<<He>>从你身上取下电极片，解开带子。“都做完了！”<<He>>笑着说。“你可以穿衣服了。"
+<br><br>
+<<pass 10>>
+你出去的时候，<<He>>帮你把门打开。"保重。"
+<br><br>
+<<endevent>>
+<<clotheson>>
+
+<<link [[继续|Hospital Foyer]]>><</link>>
+<br><br>

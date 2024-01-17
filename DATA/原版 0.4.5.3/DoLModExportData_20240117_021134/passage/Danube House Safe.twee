@@ -1,0 +1,15 @@
+:: Danube House Safe []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">><<set $lock to 600>>
+保险箱看起来很贵，好像里面可能有重要的东西。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<link [[闯入 (0:05)|Danube House Safe Open]]>><<pass 5>><<crimeUp 1 "thievery">><</link>><<crime "thievery">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<link [[离开|Danube Street]]>><</link>>
+<br>

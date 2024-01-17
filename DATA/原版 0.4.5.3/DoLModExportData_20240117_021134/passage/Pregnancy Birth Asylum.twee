@@ -1,0 +1,25 @@
+:: Pregnancy Birth Asylum []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $first_birth to !$pregnancyStats.humanToysUnlocked>>
+<<npc "Harper">><<person1>>
+<<setKnowsAboutPregnancy "pc" "Harper">>
+
+你在病床上醒来，周围有几个模糊的身影在走动着。其中一个身影靠近了一些，你看清了<<his>>的面容，是哈珀医生。"请不要惊慌，你羊水破了。你还在精神病院里。"
+<br><br>
+
+<<if $exposed lt 2>>
+	"请脱衣服，"医生说道。
+<<else>>
+	"请深呼吸，"医生说道。
+<</if>>
+<<if playerChastity("hidden")>>
+	<<He>>注意到你的<<print $worn.genitals.cn_name_cap>>，随后打开一个齐胸高的柜子，取出了一把像是个巨型老虎钳一样的工具。"我们需要移除这个装置。不会痛的。"
+	<br><br>
+	<<He>>用钳子夹住你的<<print $worn.genitals.cn_name_cap>>，并按下手柄上的按钮。你听到钳子发出嗡嗡声，<span class="pink">剪开了你的<<print $worn.genitals.cn_name_cap>>。</span>
+	<<set $worn.genitals.type.push("broken")>>
+<</if>>
+<br><br>
+<<wash>><<undress "asylum_birth">><<upperwear 87 "pink">>
+
+<<link [[继续|Pregnancy Birth Asylum 2]]>><</link>>
+<br>

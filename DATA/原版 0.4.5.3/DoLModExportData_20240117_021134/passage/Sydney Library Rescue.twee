@@ -1,0 +1,105 @@
+:: Sydney Library Rescue []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $sydneySeen is undefined>>
+	<<npc "Sydney">><<person1>>
+	<<set $sydneySeen.pushUnique("libRescue")>><<set $sydneyFirstSeen to "libRescue">>
+	当你恢复意识时，你发现自己躺在小隔间的一张长椅上。你认出头顶是图书馆的天花板。
+	一张帘子将入口挡住了。
+	<<if $exposed gte 1>>
+		你被毛巾包裹着。
+		<<towelup>>
+		<<set $exposedTemp to 1>>
+	<</if>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		原本的绑带也被解开了。
+		<<unbind>>
+		<<set _boundTemp to 1>>
+	<</if>>
+	<br><br>
+	你听见帘外响起了人声。"不……不行。这间更衣室会被占用一段时间——不，你不可以进去！因为已经有人了！"过了一会儿，帘子被拉开，一个扎起<<npcHairColour "Sydney">>马尾的<<personsimple>>背对着你走了进来。
+	<<He>>转身，惊觉你已经醒来，吓得眼镜差点从琥珀色眸子上掉了下来。是悉尼，一个以纯洁品性和工作认真而闻名的学生。<<his>>的胸前还挂着一个十字架。
+	<br><br>
+	"你终于醒了！我很高兴。
+	<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+		<<set $sydneySeen.pushUnique("initiate")>>
+		<<if $temple_rank is "initiate">>
+			你是神殿的见习教徒，对吧？
+		<<else>>
+			你是神殿里的<<temple_title>>，对吧？
+		<</if>>
+	<</if>>
+	我在外面发现你的时候，你已经毫无生气了。护士又到处都找不到，我想你可能会受伤，
+	<<if $exposedTemp is 1>>
+		你还全身赤裸，
+	<</if>>
+	<<if _boundTemp is 1>>
+		你还被绑了起来，
+	<</if>>
+	所以，所以……"<<he>>停下来歇了口气，"我把你带到这儿了，我不知道除此之外还能做什么……你还好吗？"
+	<br><br>
+	<<link [[感谢|Sydney Library Rescue Intro 2]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<link [[调情|Sydney Library Rescue Intro 2]]>><<set $phase to 2>><<npcincr Sydney purity -2>><</link>><<lspurity>><<promiscuous1>>
+	<br>
+<<else>>
+	<<npc "Sydney">><<person1>><<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+	<<set $sydneySeen.pushUnique("libRescue")>>
+	<<if $sydneySeen.includes("library")>>
+		当你恢复意识时，你发现自己躺在图书馆售衣处的更衣室里。
+	<<else>>
+		当你恢复意识时，你发现自己躺在小隔间的一张长椅上。你认出头顶是图书馆的天花板。
+		一张帘子将入口挡住了。
+	<</if>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		原本的绑带也被解开了。
+		<<unbind>>
+	<</if>>
+	<<if $sydneyromance is 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			你的脑袋枕在一个温暖柔软的怀里。一只手轻轻抚着你的头发。是悉尼，将你抱在<<his>>的大腿上。<<stress -12>><<llstress>>
+			<br><br>
+			"你真知道怎么样能把我吓死，"<<he>>俯视着你，声音在晃。"要是你出了什么事，我该怎么办？"
+		<<else>>
+			<<if $exposed gte 1>>
+				你被毛巾包裹着。
+				<<towelup>>
+				<<set $exposedTemp to 1>>
+			<</if>>
+			你感觉有人埋在你的肩头。视线下移，你看见几缕<<npcHairColour "Sydney">>的头发。原来是悉尼正靠着你。<<stress -12>><<llstress>>
+			<br><br>
+			<<He>>打了个哈欠，眼皮一颤，睁开了眼睛。"你醒了！我发现你的时候都要吓死了，我……"<<his>>声音嘶哑。"我吓了一大跳，但没人来帮忙。"
+		<</if>>
+		<br><br>
+		<<He>>舒展了身子。"我不想离开你，就算以防万一吧……你现在好点了吗？"
+		<br><br>
+	<<else>>
+		<<if $exposed gte 1>>
+			你被毛巾包裹着。
+			<<towelup>>
+			<<set $exposedTemp to 1>>
+		<</if>>
+		帘外响起悉尼的声音。"不……不行。这间更衣室会被占用一段时间。不，你不可以进去！因为已经有人了！"过了一会儿，帘子被拉开，<<he>>背对你走了进来。
+		<<He>>转身见你醒来，被吓了一跳。
+		<br><br>
+		"你醒了！我很高兴。我在外面发现你的时候，你已经失去了意识。护士又到处都找不到，我想你可能会受伤，
+		<<if $exposedTemp is 1>>
+			你还全身赤裸，
+		<</if>>
+		<<if _boundTemp is 1>>
+			你还被绑了起来，
+		<</if>>
+		所以，所以……"<<he>>停下来歇了口气，"我把你带到这儿了，我不知道除此之外还能做什么……你还好吗？"
+		<br><br>
+	<</if>>
+	<<link [[感谢悉尼|Sydney Library Rescue 2]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<if $sydneyromance is 1>>
+		<<link [[报答悉尼|Sydney Library Rescue Reward]]>><</link>><<promiscuous1>><<sydneyWarning corrupt>>
+		<br>
+		<<link [[休息 (0:30)|Sydney Library Rescue Rest]]>><<pass 30>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><<tiredness -3>><</link>><<glove>><<glust>><<ltiredness>>
+		<br>
+	<<else>>
+		<<link [[调情|Sydney Library Rescue 2]]>><<set $phase to 2>><<npcincr Sydney lust 1>><</link>><<glust>><<promiscuous1>>
+		<br>
+	<</if>>
+<</if>>

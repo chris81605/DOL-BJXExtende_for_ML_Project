@@ -1,0 +1,36 @@
+:: Science Terrarium Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $phase is 1>>
+		<<set $timer to 6>><<npcstrip>><<enable_rescue>>
+	<<elseif $phase is 2>>
+		<<set $timer to 12>><<npcstrip>><<enable_rescue>>
+	<<elseif $phase is 3>>
+		<<set $timer to 18>><<npcstrip>><<set $rescue to 0>>
+	<<elseif $phase is 4>>
+		<<set $timer to 24>><<set $rescue to 0>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<if $rescue is 0 and $alarm is 1>><<set $alarm to 0>>
+	<span class="red">西里斯听不见你的声音，因为其他学生的声音太吵闹了！</span>
+	<br><br>
+<</if>>
+
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Science Terrarium Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Science Terrarium Molestation]]>><</link>></span><<nexttext>>
+<</if>>

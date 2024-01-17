@@ -1,0 +1,27 @@
+:: Garden Stem Tentacles []
+<<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+
+	<<tentaclestart 4 15 "shoot" "vine" true>>
+	<<set $timer to 15>>
+<</if>>
+
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2) or $timer lte 1>>
+	<span id="next"><<link [[继续|Garden Stem Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Garden Stem Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

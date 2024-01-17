@@ -1,0 +1,26 @@
+:: Farm Breakfast Tea 2 []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+你泡了两杯茶。不加糖，只给艾利克斯那杯加了些牛奶，因为<<he>>喜欢这种口味。
+<br><br>
+"干杯，"当你将杯子递给<<he>>时，<<him>>说道。
+
+<<if _alex.lust gte 30>>
+	<<He>>在你转身离开时拍了一下你的<<bottom>>。
+	<br><br>
+
+	<<link [[生气|Farm Breakfast Tea Angry]]>><<npcincr Alex love -1>><<npcincr Alex dom -1>><<stress -6>><</link>><<llove>><<ldom>><<lstress>>
+	<br>
+	<<link [[无视|Farm Cottage]]>><<npcincr Alex dom 1>><<endevent>><</link>><<gdom>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[煽动|Farm Breakfast Tea 2 Goad]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous2>><<ggdom>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>

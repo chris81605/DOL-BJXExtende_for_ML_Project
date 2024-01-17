@@ -1,0 +1,47 @@
+:: Stall []
+<<set $outside to 0>><<effects>>
+
+<<stall_inventory>>
+<br><br>
+
+<<stall_chance>>
+<br><br>
+
+<<for _r to 0; _r lt 4; _r++>>
+	<<if $attractiveness + $fame.business + currentSkillValue('tending') + ($plant_inventory.length * 100) + ($stall_rejected * 10) gte random(1, 10000)>>
+		<<set _stall_attention to 1>>
+	<</if>>
+<</for>>
+
+<<if Time.dayState is "night">>
+	一位行政人员来到这里，宣布市场的营业时间已经结束。
+	<br><br>
+
+	街上的霓虹灯陆续亮了起来，现在这条街上开始经营"其他"的东西了。你打包好你的东西离开了。
+	<br><br>
+
+	<<connudatusicon>><<link [[离开|Connudatus Street]]>><<endevent>><<endstall>><<clotheson>><</link>>
+	<br>
+<<elseif _inventory_found isnot 1>>
+	你已经没东西卖了，继续守摊子也没意义了。
+	<br><br>
+
+	<<connudatusicon>><<link [[离开|Connudatus Street]]>><<endevent>><<endstall>><<clotheson>><</link>>
+	<br>
+<<elseif _stall_attention is 1>>
+	<<eventsstall>>
+<<else>>
+	<<if $rng gte 81>>
+		有几个人投来了目光，但并没有吸引来真正的顾客。
+	<<elseif $rng gte 61>>
+		没有人靠近你的摊位，你看了看周围，旁边的摊位也都无人问津。
+	<<elseif $rng gte 41>>
+		现在似乎没人有兴趣。
+	<<elseif $rng gte 21>>
+		人们从货物边匆匆走过，看都没看一眼。
+	<<else>>
+		你没能吸引注意。
+	<</if>>
+	<br><br>
+	<<stall_actions>>
+<</if>>

@@ -1,0 +1,126 @@
+:: Rent First Robin Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<set $enemyno to 1>>
+	<<set $head to "grappled">>
+	<<set $leftarm to "grappled">><<set $rightarm to "grappled">><<set $NPCList[0].lefthand to "arms">><<set $NPCList[0].righthand to "arms">>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+<<effects>><<effectsman>>
+<br>
+<<person1>>
+<<if $combatPhase is "talk">>
+	<<switch $timer>>
+		<<case 4>>
+			贝利盯着你。
+		<<case 3>>
+			贝利转身离开。
+		<<case 2>>
+			贝利走出大厅，在拐了个弯后就看不见身影了。
+		<<case 1>>
+			你听到贝利说了些什么，<span class="purple">接着传来<<nnpc_gendery "Robin">>的尖叫声</span>。
+		<<default>>
+			贝利从走廊出来，<span class="red">手里抓着罗宾的头发，将<<nnpc_his "Robin">>拖了出来</span>。
+			<<set $combatPhase to "Robin">><<set $timer to 2>><<set $baileySpoke to 0>>
+	<</switch>>
+	<br>
+	<span class="red"><<person2>><<person>>和<<person3>><<person>>按住了你。</span>
+<<elseif $combatPhase is "Robin">>
+	<<if $timer gte 1>>
+		<<switch $baileySpoke>>
+			<<case 2>>
+				<<if $speechplead is 1 or $speechapologiseno is 1 or $speechscream is 1 or $speechdemand is 1>>
+					"省点力气，"贝利说道，"如果你真的想救<<nnpc_him 'Robin'>>的话，现在交钱还不算晚。"
+				<<else>>
+					"我早就告诉过你了，"贝利说，"把我的钱给我——否则我会想尽办法从你身上榨取价值。"
+				<</if>>
+			<<case 1>>
+				<<if $speechplead is 1 or $speechapologiseno is 1>>
+					贝利翻了个白眼。"如果你按时付钱给我，也许你现在就不会在这哭泣了。"
+					<<set $baileySpoke++>>
+				<<elseif $speechscream is 1 or $speechdemand is 1>>
+					"你以为你光喊就能说服我？"贝利冷笑道。
+					<<set $baileySpoke++>>
+				<<else>>
+					"如果你还没准备好还债，那你为什么要背负这个孤儿的债务，"贝利冷笑道。
+				<</if>>
+			<<default>>
+				<<if $speechplead is 1 or $speechapologiseno is 1>>
+					贝利对着你不屑地笑了。"哦，现在你后悔了？那么后果呢？"
+					<<set $baileySpoke++>>
+				<<elseif $speechscream is 1 or $speechdemand is 1>>
+					"闭嘴，"贝利冲你吼道，"你没有付你的钱，所以要让<<nnpc_he 'Robin'>>来支付。"
+					<<set $baileySpoke++>>
+				<<else>>
+					"你看到了吗？"贝利看着罗宾说道，"<<pShe>>没有付自己的钱，所以将会由你来支付。"
+				<</if>>
+		<</switch>>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20 or $NPCName[$NPCNameList.indexOf("Robin")].dom lte 30>>
+			<<print either("罗宾眼中含泪地盯着你。","罗宾抽泣着。","罗宾无力地在贝利的手中挣扎。","罗宾向你伸出手。")>>
+		<<else>>
+			<<print either("罗宾一副勇敢的表情。","罗宾紧咬着牙。","罗宾在贝利的手中挣扎。","罗宾几乎要挣开了贝利的手。")>>
+		<</if>>
+	<<else>>
+		"你想让<<nnpc_him 'Robin'>>安全吗？"贝利问道，"那你就给我保证，从现在开始会付钱给我。"
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 1 or $NPCName[$NPCNameList.indexOf("Robin")].dom lte 30>>
+			罗宾哽咽着。
+		<<else>>
+			罗宾摇了摇头。
+		<</if>>
+		<<set $combatPhase to "pay">><<set $timer to 2>>
+	<</if>>
+	<br>
+	<span class="red"><<person2>><<person>>和<<person3>><<person>>按住了你。</span>
+<<elseif $combatPhase is "pay">>
+	<<if $speechpay is 1>>
+		"这就对了，"贝利冷笑道，"有那么难吗？"<<He>>对<<his>>的打手们做了个手势，他们松开了你的手臂。
+		<<set _fin to 1>>
+	<<elseif $speechpay is -1>>
+		"好吧，那还真是遗憾，"贝利冷笑道，"但我今天可以网开一面，现在你仍然可以拯救<<nnpc_him 'Robin'>>。不过，你得站着不动。"
+		<br>
+		罗宾拼命地摇了摇头。
+		<<set $combatPhase to "still">><<set $timer to 2>>
+	<<elseif $timer is 1>>
+		贝利假装看了一下<<his>>的手表。"我是个很忙的<<personsimple>>。如果你不<i>付钱</i>，那我就走了。"
+		<br>
+		<span class="red"><<person2>><<person>>和<<person3>><<person>>按住了你。</span>
+	<<else>>
+		"我受够了，"贝利嘲笑道，"如果你不想为<<nnpc_him 'Robin'>>付钱，你一开始就不应该浪费我的时间。"
+		<<set $finish to 1>><<set _fin to 1>>
+	<</if>>
+<<elseif $combatPhase is "still">>
+	<<if _defiance is undefined>>
+		"很好，"贝利说完后，<<He>>对着抓着你胳膊的打手点了点头，然后这些家伙将你拖出了孤儿院。
+		<br><br>
+		<span class="red">你被带出去的时候，罗宾哭喊地叫着你的名字。</span>
+		<<set _fin to 1>>
+	<<elseif $timer is 1>>
+		"你没听到吗？"贝利咆哮道，"如果你不想让<<nnpc_him 'Robin'>>惹上麻烦，那就<i>停止挣扎</i>。不要动！"
+		<br>
+		<span class="red"><<person2>><<person>>和<<person3>><<person>>死死地抓住你。</span><<person2>><<persons>>握得更紧了。
+	<<else>>
+		贝利皱眉。"我没什么时间。如果你不想为<<nnpc_him "Robin">>付钱，你一开始就不应该浪费我的时间。"
+		<<set $finish to 1>><<set _fin to 1>>
+	<</if>>
+<</if>>
+<br><br>
+<<if _fin isnot 1>>
+	<<actionsman>>
+<</if>>
+
+<<if $combatPhase is "pay" and $speechpay is 1>>
+	<span id="next"><<link [[继续|Rent First Robin Fight Finish]]>><<endevent>><<set $phase to "pay">><</link>></span><<nexttext>>
+<<elseif $combatPhase is "still" and _defiance is undefined>>
+	<span id="next"><<link [[继续|Rent First Robin Fight Finish]]>><<endevent>><<set $phase to "still">><</link>></span><<nexttext>>
+<<elseif $finish is 1>>
+	<span id="next"><<link [[继续|Rent First Robin Fight Finish]]>><<endevent>><<set $phase to "finish">><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Rent First Robin Fight]]>><</link>></span><<nexttext>>
+<</if>>
+<<turnend>>

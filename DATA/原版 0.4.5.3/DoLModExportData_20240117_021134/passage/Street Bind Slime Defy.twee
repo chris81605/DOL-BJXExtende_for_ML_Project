@@ -1,0 +1,49 @@
+:: Street Bind Slime Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身离开<<person>>，无视史莱姆的命令的同时加快脚步。你感到一阵剧痛，这是史莱姆对你反抗的教训，然而，<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身离开<<person>>，无视史莱姆的命令的同时加快脚步。你感到一阵剧痛，这是史莱姆对你反抗的教训，然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它迫使你朝着相反的方向前进，<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你转身离开<<person>>，随之感到一阵剧痛，这是史莱姆对你反抗的教训。它试图强迫你停下来，<span class="red">而你无法</span>抵抗它的影响。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	你遵从史莱姆的催促，接近了<<person>>。
+	<br><br>
+
+	"你、你能用那根绳子从背后捆住我的胳膊吗？"你问。
+	<br><br>
+	<<if $fame.exhibitionism gte 500>>
+		<<He>>再次看了你一眼，露出坏笑，抓起绳子。"当然，我很乐意帮助把你这样的骚货捆起来。"<<He>>将你的胳膊紧紧绑在背后，色眯眯地欣赏了一会儿<<his>>的成果，然后离开了。
+	<<else>>
+		<<He>>看了看你，又看了看绳子。"不知道你为什么想让我这么干，但，当然我能帮忙。"<<he>>抓起绳子，小心地捆起你的胳膊，"希望你确定想被这么干，在这种镇子上被捆起来可一点都不安全。"
+	<</if>>
+	<<if $worn.handheld.name isnot "naked">><span class="red">你不能这样拿着$worn.handheld.cn_name_cap！</span>你被迫扔下它，耳中史莱姆满足了。<</if>>
+	<<bind>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+<<else>>
+	你转身离开<<person>>，无视史莱姆的命令的同时加快脚步。你感到一阵剧痛，这是史莱姆对你反抗的教训，你感觉它迫使你朝着相反的方向前进，<span class="green">但它失败了</span>。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

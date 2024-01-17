@@ -1,0 +1,33 @@
+:: Street Car Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 40>>
+	<<set $tipmod to 2>><<tipset>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<neutral 1>>
+	<<maninit>>
+	<<molested>>
+	<<set $tipmod to 2>><<tipset>>
+<</if>>
+<<if $phase is 10 and $stealtarget isnot "" and $street_car_police isnot true>>
+	<<set $street_car_police to true>>
+	在搜索<<his>>的<<wallet>>时，你的手擦过<span class="red">一个警徽。</span>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyarousal lt $enemyarousalmax and $enemyhealth gt 0 and $finish isnot 1>>
+	<span id="next"><<link [[继续|Street Car Sex]]>><</link>></span><<nexttext>>
+<<elseif $phase is 10>>
+	<span id="next"><<link [[继续|Street Car Sex Police]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Car Sex Finish]]>><</link>></span><<nexttext>>
+<</if>>

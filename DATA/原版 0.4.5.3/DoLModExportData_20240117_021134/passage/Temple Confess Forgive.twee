@@ -1,0 +1,217 @@
+:: Temple Confess Forgive []
+<<temple_effects>><<effects>>
+
+<<if $attendant isnot "no_sin_generic" and $attendant isnot "sydney_promised">>
+	<<if $angel gte 6 or ($confessionsTaken gte 10 and $grace gte 25)>>
+		你站起身，拿起十字架抵在木条墙上。
+		"我以言辞宽恕你，但你也必须用实际行动宽恕自己。"你自信地说。
+	<<elseif $speech_attitude is "meek">>
+		"我-我以言辞宽恕你，"你的声音非常的平和，"但你也必须用实际行动宽恕自己。"
+	<<elseif $speech_attitude is "bratty">>
+		"你被宽恕了，"你的声音非常的平和，"但你也需要宽恕自己。"
+	<<else>>
+		"你被宽恕了，"你的声音非常的平和，"但你也必须用实际行动去宽恕自己。"
+	<</if>>
+<</if>>
+
+<<switch $attendant>>
+	<<case "corrupt_1">>
+		<br><br>
+
+		"宽、宽恕？我不……我不需要宽恕！这、这根本不会有任何用！"
+		<br><br>
+
+		<<He>>歇斯底里地从忏悔室跑了出去。<<grace -2>><<lgrace>>
+	<<case "corrupt_2">>
+		<br><br>
+
+		"你……宽恕我？即便我有这么多可怕的想法？嗯……好吧。希望你的宽恕足以阻止我的堕落。"
+		<br><br>
+
+		<<He>>离开了忏悔室，似乎对你的宣判并不信服。<<grace -2>><<lgrace>>
+	<<case "corrupt_3" "corrupt_6">>
+		<br><br>
+
+		"宽恕……所以我什么错都没有是吗？谢、谢谢你，<<sister>>！希望这种糟糕的感觉能够消失掉……"
+		<br><br>
+
+		<<He>>离开了忏悔室，似乎比之前精神多了。<<trauma -3>><<ltrauma>><<awareness -3>><<lawareness>>
+	<<case "corrupt_4">>
+		<br><br>
+
+		"我……我不需要宽恕！我需要的是帮助！如果你也帮不了我……"
+		<br><br>
+
+		<<He>>站起身，匆匆离开了忏悔室。<<grace -2>><<lgrace>>
+	<<case "corrupt_5" "corrupt_5_fake">>
+		<br><br>
+
+		"宽恕？你是不是脑子有问题？算了吧，你只是在浪费我的时间。我会在下次轮到更合格的告解员值班时再来的。"
+		<br><br>
+
+		<<He>>忿忿地离开了隔间。<<grace -2>><<lgrace>>
+	<<case "corrupt_7">>
+		<br><br>
+
+		"你要……宽恕像我这样的罪人？我真的不太确定自己是要感激还是难过。谢……谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<trauma -3>><<ltrauma>><<awareness -3>><<lawareness>><<grace -2>><<lgrace>>
+	<<case "corrupt_8">>
+		<br><br>
+
+		<<He>>沉默了一会儿。"宽恕你自己。请宽恕你自己。请宽恕你自己。请宽恕你自己。"
+		<br><br>
+
+		<<He>>不断重复着口中的话，离开了隔间。你听见<<his>>的声音逐渐远去。<<stress 3>><<gstress>>
+	<<case "corrupt_9">>
+		<br><br>
+
+		"噢，好可爱啊！你不确定要如何宣判，对吗？"<<He>>咯咯笑起来，"睁开你的眼睛吧，<<sister>>，<span class="red">有些罪是无法被宽恕的。</span>"
+		<br><br>
+
+		<<He>>离开的时候没有再说什么。<<awareness 1>><<gawareness>>
+	<<case "sinner_1">>
+		"如果你们的行为是双方自愿的，你就仍能获得救赎。在将来请记得克制你自己。"
+		<br><br>
+
+		"当、当然，<<sister>>。谢谢你！"<<He>>离开了告解室。<<grace 1>><<ggrace>>
+	<<case "sinner_2">>
+		"你是一个成熟的人，不应该拥有如此低级的冲动。"
+		<br><br>
+
+		<<Hes>>沉默了一会儿，"该、该死，我感觉很糟，呃……抱歉，为我所做出的忏悔。"<<He>>离开了隔间。<<grace 1>><<ggrace>>
+	<<case "sinner_3">>
+		"神殿是你意志的所在，请不要让色欲掌控你的人生。"
+		<br><br>
+
+		"我明白了，<<sister>>。谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+	<<case "sinner_4" "sinner_5">>
+		"学业非常重要，用心一点吧。"
+		<<if $lessonmissed gte 25>>
+			你尽力无视了话中的嘲讽。
+		<</if>>
+		<br><br>
+
+		"太逊了。你听起来简直像我<<if $malechance is 100>>爸<<else>>妈<</if>>。但……可能正因如此，你是对的。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+	<<case "sinner_6" "sinner_7">>
+		"主会谅解的。世界可能很残酷，但你已经尽了自己最大的努力。"
+		<br><br>
+
+		<<Hes>>沉默了一会儿。"谢谢，我好像感觉好些了。"<<He>>离开了隔间。
+	<<case "sinner_8">>
+		"只要你打算和你的伴侣陪伴终身，你的罪就尚可商榷。"
+		<br><br>
+
+		"我……没想到会是这种结果。你似乎确实明白了我说的话。也许只是我对这个地方有所误解。谢谢你。"<<He>>离开了隔间。<<grace 1>><<ggrace>>
+	<<case "sinner_9">>
+		"你是无罪的，但记住不要让一时的痴迷蛊惑你自己。"
+		<br><br>
+
+		"我明白了！谢谢你，<<sister>>。"<<grace 1>><<ggrace>>
+	<<case "sinner_10">>
+		<<if Time.month is 10 and $NPCList[0].penis is 0 and random(1,50) is 1>>
+			"万圣节快乐。"
+		<<else>>
+			"虽然……你的罪并不寻常，但它还不算严重。节制你的欲望。"
+		<</if>>
+		<br><br>
+
+		"我可能需要再来一次，但还是谢谢你。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+	<<case "sinner_criminal_1">>
+		<br><br>
+
+		"谢谢你，<<sister>>。"<<He>>欢快地离开了隔间。
+	<<case "sinner_criminal_2">>
+		<br><br>
+
+		"谢谢，但我不认为你的谅解对我有用。"<<He>>一刻也不停留地离开了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_silent">>
+		<br><br>
+
+		<<He>>什么也没说，只是沉默地离开了隔间。
+	<<case "sinner_orphan_1">>
+		"坚强一点，我们同舟共济，患难与共……照顾好其他的孩子。"
+		<br><br>
+
+		"你是怎么……？坚强……唔，我要坚强起来！我可以做到的！"<<He>>拖沓着离开了隔间。<<grace 1>><<ggrace>><<hope 2>><<ghope>>
+	<<case "sinner_orphan_2">>
+		"坚强一点，我们同舟共济，患难与共……照顾好其他的孩子。"
+		<br><br>
+
+		"坚强？我……我需要依靠这个来活下去……？"<<He>>顿了顿，"我……我可以的，我一定可以的！我可以办得到的。谢谢你，<<sister>>。"<<He>>拖沓着走出了隔间。<<grace 1>><<ggrace>><<hope 1>><<ghope>><<reb -1>><<lreb>>
+	<<case "sinner_panty_thief">>
+		"你的动机是亵渎的，但还不算过分有害。"
+		<br><br>
+
+		"这和我……预想的不一样。谢谢！"<<He>>离开了隔间，似乎比之前精神多了。<<grace -1>><<lgrace>>
+	<<case "sinner_pregnant">>
+		"对你所爱的人忠贞，你们的爱会帮你度过面对的所有难关。"
+		<br><br>
+
+		一阵沉默。然后又过了一小会儿，你听见另一面传来啜泣声。"谢、谢谢你，<<sister>>。真的非常感谢你！"如果不是<<he>>在另一侧，<<he>>可能就会当场拥抱你了。<<He>>哭着离开了忏悔室。<<grace 2>><<ggrace>><<trauma -6>><<ltrauma>>
+	<<case "sinner_generic_forgive">>
+		"为了你所爱的人，保持坚强。"
+		<br><br>
+
+		"我明白了，谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+	<<case "sinner_generic_repent" "sinner_generic_rapist">>
+		<br><br>
+
+		"我根本不配任何宽恕。我……这根本是个错误。"<<He>>离开了隔间。<<grace -2>><<lgrace>>
+	<<case "no_sin_generic">>
+		<<if $speech_attitude is "meek">>
+			"这，这不是罪行，"你说。
+		<<elseif $speech_attitude is "bratty">>
+			"不是罪行，"你坦白地说。
+		<<else>>
+			"这并不是圣典所描述的罪行之一。我很肯定你是无罪的。"你说。
+		<</if>>
+		<br><br>
+
+		<<He>>释然地舒了一口气。"谢谢你，<<sister>>！"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+	<<case "temple_1" "temple_2" "temple_3">>
+		"记住，我们团体内的兄弟姐妹是你真正的家人。"
+		<br><br>
+
+		"当然，谢谢你，<<sister>>。"<<He>>离开了忏悔室。
+	<<case "temple_4" "temple_generic">>
+		<br><br>
+
+		"我……我被宽恕了？啊……谢、谢谢你，<<sister>>！"<<He>>离开了忏悔室。<<grace -2>><<lgrace>>
+	<<case "temple_5">>
+		<br><br>
+
+		"我是来赎罪的，<<sister>>，我想要的并不是宽恕。我之后会再来的……"<<He>>离开了忏悔室。<<grace -2>><<lgrace>>
+	<<case "temple_6">>
+		<br><br>
+
+		"啊，谢谢你，真的非常感谢，<<sister>>！我保证不会再犯下罪行了！"<<He>>离开了忏悔室。<<grace -2>><<lgrace>><<stress -12>><<llstress>>
+	<<case "sydney_promised">>
+		"如果你们已经被誓言所绑定，那你就没有犯下任何罪。你们神圣的仪式给了你们特许的例外。"
+		<br><br>
+
+		你听见另一个人松了口气。"谢谢你，<<sister>>。我真的很需要这样的安慰。"<<He>>走出了忏悔室。<<grace 1>><<ggrace>><<arousal 20>><<garousal>>
+	<<case "sydney_romance">>
+		"你已经保持了真诚和信仰如此长的时间，还信守了自己的承诺，你并没有太大的罪过。"
+		<br><br>
+
+		你听见另一个人松了口气。"谢谢你，<<sister>>。"<<He>>走出了忏悔室。<<npcincr "Sydney" lust 1>><<npcincr "Sydney" purity -1>><<gslust>><<lspurity>>
+	<<case "sydney_love">>
+		"如果你的感情是纯洁的，那你就是无罪的。"
+		<br><br>
+
+		你听见一声释然的叹息。"谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>><<npcincr "Sydney" love 3>><<glove "Sydney">>
+	<<case "winter">>
+		"在这样脆弱的状况下很难坚定自己的思想，也许你可以和这位学生谈谈。"
+		<br><br>
+
+		"谢谢你慷慨的劝导，<<sister>>。"<<He>>慢慢走出了隔间。<<grace 1>><<ggrace>>
+	<<default>>
+	<br><br>
+
+	"谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+<</switch>>
+<br><br>
+
+<<if !_noOptions>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<</if>>

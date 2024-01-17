@@ -1,0 +1,45 @@
+:: Farm Cattle Out []
+<<effects>>
+
+你打开牛棚的门，把<<farm_text_many cattle>>从围栏里释放出来。它们无需指令就小跑着到田野里去了。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $worn.over_upper.name isnot "naked">>
+	<<set $worn.over_upper.integrity -= 10>>
+	<<if $worn.over_upper.integrity lte 0>>
+		当一头牛经过时，<<farm_his cattle>>的角挂住了你的$worn.over_upper.cn_name_cap，<span class="pink">把它从你身上扯了下来。</span>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>><<farm_text cattle>>走开了，破烂的布料在<<farm_his cattle>>脸上晃来晃去。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<<else>>
+		当一头牛经过时，<<farm_he cattle>>的角挂住了你的$worn.over_upper.cn_name_cap，它磨损得更严重了。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $danger gte (9900 - $allure) and $worn.upper.name isnot "naked">>
+	<<set $worn.upper.integrity -= 10>>
+	<<if $worn.upper.integrity lte 0>>
+		当一头牛经过时，<<farm_he cattle>>的角挂住了你的$worn.upper.cn_name_cap，<span class="pink">把它从你身上扯了下来。</span>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>><<farm_text cattle>>走开了，破烂的布料在<<farm_his cattle>>脸上晃来晃去。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<<else>>
+		当一头牛经过时，<<farm_he cattle>>的角挂住了你的$worn.upper.cn_name_cap，它磨损得更严重了。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

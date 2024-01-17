@@ -1,0 +1,29 @@
+:: Pound Work Feed Soothe []
+<<effects>>
+
+<<if $tendingSuccess>>
+	你蹲在<<beasttype 1>>旁，摸了摸<<bhis 1>>耳朵。"你会让你的朋友也吃点吗？"你问道，"为了我好吗？"
+	<br><br>
+	<<if $monster is 1>>
+		<span class="green"><<beasttype 1>>醉心于你的抚摸，</span>给<<beasttype 0>>让出了位置。<<bHe 1>>甚至保护它免受<<pound_text>>的影响，允许<<beasttype 0>>吃的<<bhis 0>>饱饱的。<<bHe 0>>向你感激地笑了。
+	<<else>>
+		<span class="green">你用手安抚着<<beasttype 1>>，</span>同时让<<beasttype 0>>在<<bhim 1>>旁边吃食。<<bHe 0>>尽情吃饱后满意地趴了下来。
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+<<else>>
+	你蹲在<<beasttype 1>>旁边，<span class="red">但<<bhe 1>>发出警告声把你赶走。</span>其他成员发出一阵笑声。<<lpound_status>><<pound_status -1>><<if $tending lt 400>><<tending 1>><<gtending>><</if>>
+	<br><br>
+<</if>>
+
+
+你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+<br><br>
+
+<<if Time.hour gte $closinghour>>
+	<<link [[继续|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,117 @@
+:: Docks Pub Crawl Contest []
+<<set $outside to 0>><<set $location to "pub">><<dockeffects>><<effects>>
+
+<<if $phase is 0>><<set $phase += 1>>
+	<<if $speech_attitude is "meek">>
+		"你搞错了，"你说。所有人都看向你。"我跟你打赌，我酒量比你还大。"
+	<<elseif $speech_attitude is "bratty">>
+		你笑了起来。所有人都看向你。"你还是担心你自己吧，"你对<<person>>说。"一个小时之内我就能把你干倒。"
+	<<else>>
+		"我是没问题，"你说。所有人都看向你。"其实我比你还能喝。"
+	<</if>>
+	<br><br>
+
+	<<generate2>><<person2>><<person>>用手肘戳了戳<<person1>><<person>>。"这人想和你拼酒呢。"<<person2>><<he>>说道。<<person1>><<person>>叹了口气，坐在了你面前的座位上，其他人则凑过来围观你们俩。大家十分感兴趣，表示愿意为你们买单。
+	<br><br>
+
+	<<link [[继续|Docks Pub Crawl Contest]]>><</link>>
+	<br>
+
+<<elseif $phase is 1>><<set $phase += 1>>
+
+	<<generate3>><<person3>>酒保拿着两个酒杯走了过来。"苏格兰威士忌。"<<he>>说。"刚开始先让你们悠着点。"
+	<br><br>
+
+	<<if $dockpubcount gte 4>>
+		<<person1>>"我觉得这也用不了多久，"<<person>>说。"我们已经喝了好几杯了。"
+		<br><br>
+	<</if>>
+
+	<<link [[喝酒|Docks Pub Crawl Contest]]>><<alcohol 180>><</link>>
+	<br>
+	<<link [[停止|Docks Pub Crawl Contest Stop]]>><<dockstatus -1>><</link>><<lcool>>
+	<br>
+
+<<elseif $phase is 2>><<set $phase += 1>>
+
+	你喝下了苏格兰威士忌，围观群众欢呼着。烈酒灼烧着你的喉咙。
+	<br><br>
+
+	<<person1>><<person>>咳了两声。"退出也没关系哦，"<<he>>说。"我可是千杯不倒，我可不想回头把你扛回家。"
+	<br><br>
+
+	<<person3>>酒保又拿来了两个酒杯。"伏特加，"<<he>>说。"不过我觉得应该比你们平时喝的要烈。"
+	<br><br>
+
+	<<link [[喝酒|Docks Pub Crawl Contest]]>><<alcohol 180>><</link>>
+	<br>
+	<<link [[停止|Docks Pub Crawl Contest Stop]]>><<dockstatus -1>><</link>><<lcool>>
+	<br>
+
+<<elseif $phase is 3>><<set $phase += 1>>
+
+	你喝下了伏特加，围观群众再次欢呼着。你感到有些恶心。
+	<br><br>
+
+	"太难喝了，"<<person1>><<person>>。"这么难喝的玩意我都陪你喝，说明我确实认真了。"
+	<br><br>
+
+	<<person3>>酒保回到桌前，手中拿着另外两个酒杯。"苦艾酒，"<<he>>说。"本地产的。前阵子这玩意还违法呢。"
+	<br><br>
+
+	<<person1>><<person>>接过酒杯，杯酒下肚，<<he>>身子有些摇晃。
+	<br><br>
+
+	<<link [[喝酒|Docks Pub Crawl Contest]]>><<alcohol 120>><<hallucinogen 120>><</link>>
+	<br>
+	<<link [[停止|Docks Pub Crawl Contest Stop]]>><<dockstatus -1>><</link>><<lcool>>
+	<br>
+
+<<elseif $phase is 4>><<set $phase += 1>>
+
+	你喝下了苦艾酒，忍住了干呕的冲动。<<person1>><<person>>没忍住干呕了起来，却并没有吐出来。<<He>>什么也没说。
+	<br><br>
+
+	酒保又拿着两个酒杯走了过来，酒杯里的酒水鲜艳多彩。"本地特产，"<<he>>微笑着说。"菜单上都不写的那种。"
+	<br><br>
+
+	<<link [[喝酒|Docks Pub Crawl Contest]]>><<alcohol 120>><<drugs 120>><<arousal 1800>><</link>><<ggarousal>>
+	<br>
+	<<link [[停止|Docks Pub Crawl Contest Stop]]>><<dockstatus -1>><</link>><<lcool>>
+	<br>
+
+<<else>>
+
+	你喝下了这杯五颜六色的酒。酒甜甜的，让你感到一丝温暖。
+	<br><br>
+
+	<<person1>><<person>>举起了酒杯。"我发——"<<he>>打了个嗝。"我发过誓的，再也不喝这玩意了。"<<He>>把酒杯放回了桌子上。"你赢了。"观众的欢呼声达到了高潮。有人举起了你的胳膊，有人拍打着你的背。"行了，"<<person>>继续说着。"我要撒尿去了。"
+	<<gcool>><<dockstatus 1>>
+	<br><br>
+	<<earnFeat "Under the Table">>
+	<<if $arousal gte $arousalmax>>
+
+		你体内的温暖积蓄着，积蓄着，直到你浑身都开始颤抖。你已经到极限了。
+		<br><br>
+
+		<<orgasm>>
+		<br><br>
+
+		你当着所有同事的面倒下了，扭动着，呻吟着。你的同事们都震惊了。等<<person>>回来时，你也控制住了自己。<<He>>摇了摇头。
+		<br><br>
+
+		你酩酊大醉，满脸通红，和其他码头工人们一起离开了酒吧。他们并没有说到刚刚发生的事情，但大家脸上都挂着心照不宣的微笑。
+		<br><br>
+
+		<<dockpuboptions>>
+
+	<<else>>
+
+		你的同事们喝完了酒，<<person>>也回来了，你们便一起离开了酒吧。
+		<br><br>
+
+		<<dockpuboptions>>
+
+	<</if>>
+
+<</if>>

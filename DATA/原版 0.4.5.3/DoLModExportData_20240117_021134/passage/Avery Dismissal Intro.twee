@@ -1,0 +1,31 @@
+:: Avery Dismissal Intro []
+<<effects>>
+<<if $phase is 1>>
+	你躲到附近的小巷里等着，但艾弗里并没有停下。你跑出去，发现那里有一辆
+<<else>>
+	汽车从你身边经过，但是它没有停下来。你看到一个
+<</if>>
+<<if $averyLastApp>>
+	<<generateNPC 2 t $averyLastApp>>
+<<else>>
+	<<generateNPC 2 t $player.gender_appearance>>
+<</if>>
+<<person2>><<person>>坐在前座。
+<<if $phase is 2>>
+	艾弗里一边和<<him>>说话<<person1>><<his>>一边看路。<<he>>可能是看到你了，但是<<he>>没有任何特别的反应。
+<</if>>
+<<saveNPC 1 avery_sidepiece>>
+<<set $averyPub to 1>>
+<<if $bus is "harvest">>
+	他们慢慢停下，<span class="blue">步行穿过一条条街道和一个个酒吧。</span>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	从方向判断，他们正向<span class="blue">丰收街移动。</span>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

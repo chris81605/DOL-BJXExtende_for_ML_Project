@@ -1,0 +1,37 @@
+:: Library Exposed Molestation Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"感谢我的仁慈吧，"<<he>>嗤笑了一声，"倘若告发，他们会把你这样的<<girl>>生吞活剥。"<<He>>吹着口哨离开了图书馆。
+	<br><br>
+
+	<<tearful>>你挣扎着站了起来。
+	<br><br>
+	<<if $libraryStudyEarSlime and $rapeavoid is 0 and $stress gte 1000>>
+		<span class="green">你脑中的史莱姆正安抚着你。</span><<if $stress gte 5000>><<lllstress>><<else>><<llstress>><</if>><<stress `$stress / -200`>>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|School Library]]>><</link>>/*Point links wherever you want the player to end up*/
+<<elseif $enemyhealth lte 0>>
+	<<He>>跌跌撞撞地离开你，摸索着找寻<<his>>的警棍，但它掉在了地上。"操，"<<he>>骂了一句，之后跑出了图书馆。
+	<br><br>
+
+	<<tearful>><<he>>的脚步声逐渐远去了。
+	<br><br>
+	<<if $libraryStudyEarSlime>>
+		<span class="red">你觉得脑子里的史莱姆在惩罚你，因为你违抗了它的命令。</span>
+		<<pain 12>><<stress 12>><<trauma 18>><<ggpain>><<ggtrauma>><<ggstress>><<set $earSlime.defyCooldown += 4>>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|School Library]]>><</link>>
+<</if>>
+<<unset $libraryStudyEarSlime>>

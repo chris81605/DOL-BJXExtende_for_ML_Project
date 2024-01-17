@@ -1,0 +1,48 @@
+:: Sydney Temple Pure Pass []
+<<effects>>
+<<unset $temple_evaluation>>
+约旦将你带到悉尼的房间。<<person1>><<He>>一见到你，便兴奋地从座位上跳了起来。"怎么样？我们……? "
+<br><br>
+"是的，我的孩子们，我在此向你们二位表示祝贺，你们通过了。在神殿所有兄弟姐妹的见证下，你们的结合将会得到主的认可。主教将会立马知晓，你们的戒指也已经在准备了。"
+<br><br>
+悉尼飞扑而来，用尽全身力气抱住你，几乎要把你推倒。你听见几声轻微的抽泣，你的眼眶也湿润了。<<trauma -24>><<llltrauma>>
+<br><br>
+约旦笑了笑。"在等待戒指期间，我会为你们准备好仪式。现在请脱掉所有衣物。"悉尼有些迟疑，但跟在你后头脱了衣服。<<npcincr Sydney lust 1>><<gslust>>
+<br><br>
+<<person2>>
+<<if $phase2 is 1>>
+	你的贞操带已经被拆掉，于是<<he>>走向了悉尼。
+<<elseif playerChastity() and $worn.genitals.origin is "temple">>
+	<<He>>从斗篷里拿出一个不详的刀片，然后跪在了你的面前。瞬间，你的贞操带哐当落地，<<genitals 1>>
+	<<if $player.penisExist and $player.vaginaExist>>
+		是
+	<<else>>
+		是
+	<</if>>
+	再次脆弱地暴露在了空气中。<<He>>站起身来，随后走向了悉尼。
+	<br><br>
+	<<set $worn.genitals.type.push("broken")>>
+	<<genitalsruined>>
+	<<if $vaginalchastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴道中脱落。</span>
+		<br>
+		<<set $vaginalchastityparasite to 0>>
+	<</if>>
+	<<if $penilechastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $penilechastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴茎上脱落下来。</span>
+		<br>
+		<<set $penilechastityparasite to 0>>
+	<</if>>
+	<<if $analchastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $analchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的肛门掉了出来。</span>
+		<br>
+		<<set $analchastityparasite to 0>>
+	<</if>>
+	<<if playerChastity("anus")>><<set $worn.genitals.anal_shield to 0>><</if>>
+<<else>>
+	<<He>>转向了悉尼。
+<</if>>
+<br><br>
+<<undress "ritual">>
+<<link [[继续|Sydney Temple Pure Ritual]]>><</link>>
+<br>

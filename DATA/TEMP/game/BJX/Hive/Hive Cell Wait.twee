@@ -1,0 +1,31 @@
+:: Hive Cell Wait 
+<<set $outside to 0>><<set $location to "hive">><<effects>>
+<<cleareventpool>>
+<<addinlineevent "hivecell_nothing">>
+	<<if $bee gte 6>>
+		"起来了。"一群护卫靠近了你的牢房。蜂后想见你。
+		<br><br>
+		<<link [[继续|Throne Job Assignment]]>><</link>>
+	<<else>>
+        时间，随着日晷之影流逝着，什么事都没有发生。
+		<br><br>
+		<<link [[继续|Hive Cell]]>><<endevent>><</link>>
+	<</if>>
+<</addinlineevent>>
+<<addinlineevent "hivecell_offerhoney" 0.5>>
+	<<beastNEWinit 1 bee>>
+	一只<<beasttype>>停下来望向你。"猎人们怎么这么对你，肚子饿了么，你想来点蜂蜜吗？"
+	<br><br>
+	<<link [[接受|Cell Honey Accept]]>><</link>>
+	<br>
+	<<link [[拒绝|Cell Honey Refuse]]>><</link>>
+<</addinlineevent>>
+<<addinlineevent "hivecell_offersex" 0.5>>
+	<<beastNEWinit 1 bee>>
+	一只<<beasttype>>走向你。"我很抱歉猎人们这么对你，你想和我玩一玩，来放松一下吗？"
+	<br><br>
+	<<link [[接受|Cell Sex Accept]]>><</link>>
+	<br>
+	<<link [[拒绝|Cell Sex Refuse]]>><</link>>
+<</addinlineevent>>
+<<runeventpool>>

@@ -1,0 +1,233 @@
+:: Widgets Wound [widget]
+<<widget "beastwound">>
+	<<set $enemywounded += 1>>
+	<<set $active_enemy += 1>>
+	<!-- Index beasts -->
+
+	<<switch $active_enemy>>
+	<<case 0>>
+		<<set $enemyarousal to $enemyarousal1>>
+		<<set $enemyanger to $enemyanger1>>
+		<<set $enemyhealth to $enemyhealth1>>
+		<<set $enemytrust to $enemytrust1>>
+	<<case 1>>
+		<<set $enemyarousal to $enemyarousal2>>
+		<<set $enemyanger to $enemyanger2>>
+		<<set $enemyhealth to $enemyhealth2>>
+		<<set $enemytrust to $enemytrust2>>
+	<<case 2>>
+		<<set $enemyarousal to $enemyarousal3>>
+		<<set $enemyanger to $enemyanger3>>
+		<<set $enemyhealth to $enemyhealth3>>
+		<<set $enemytrust to $enemytrust3>>
+	<<case 3>>
+		<<set $enemyarousal to $enemyarousal4>>
+		<<set $enemyanger to $enemyanger4>>
+		<<set $enemyhealth to $enemyhealth4>>
+		<<set $enemytrust to $enemytrust4>>
+	<<case 4>>
+		<<set $enemyarousal to $enemyarousal5>>
+		<<set $enemyanger to $enemyanger5>>
+		<<set $enemyhealth to $enemyhealth5>>
+		<<set $enemytrust to $enemytrust5>>
+	<<case 5>><!-- Should be unused case -->
+		<<set $enemyarousal to $enemyarousal6>>
+		<<set $enemyanger to $enemyanger6>>
+		<<set $enemyhealth to $enemyhealth6>>
+		<<set $enemytrust to $enemytrust6>>
+	<<default>>
+		<span class="red">ERROR: Beastwound index error</span>
+	<</switch>>
+
+	<<if $player.vaginaExist>>
+		<<set $vaginause to 0>>
+		<<set $vaginastate to 0>>
+	<</if>>
+
+	<<if playerHasStrapon() or $player.penisExist>>
+		<<set $penisuse to 0>>
+		<<set $penisstate to 0>>
+	<</if>>
+
+	<<set $mouthuse to 0>>
+	<<set $anususe to 0>>
+	<<unset $neckuse>>
+
+	<<if $worn.face.type.includes("gag")>>
+		<<set $mouthuse to "gagged">>
+	<</if>>
+
+	<<set $thighuse to 0>>
+	<<set $bottomuse to 0>>
+	<<set $feetuse to 0>>
+	<<if $leftarm isnot "bound" and $position isnot "wall">>
+		<<set $leftarm to 0>>
+	<</if>>
+	<<if $rightarm isnot "bound" and $position isnot "wall">>
+		<<set $rightarm to 0>>
+	<</if>>
+	<<set $chestuse to 0>>
+	<<set $cheststate to 0>>
+	<<if $head isnot "bound" and $position isnot "wall">>
+		<<set $head to 0>>
+	<</if>>
+	<<set $anusstate to 0>>
+	<<set $mouthstate to 0>>
+
+	<<set $leftaction to 0>>
+	<<set $rightaction to 0>>
+	<<set $vaginaaction to 0>>
+	<<set $anusaction to 0>>
+	<<set $thighaction to 0>>
+	<<set $cheekaction to 0>>
+	<<set $feetaction to 0>>
+	<<set $mouthaction to 0>>
+
+	<<set $rapeavoid to 1>>
+<</widget>>
+
+<<widget "genericCondomEjaculation">>
+	<<He>>射在了避孕套里。
+	<<rng>>
+	<<if $rng gte 96 and $npc[$npcrow.indexOf(_nn)] isnot "Robin" and !$npcSub>>
+		<<if $consensual is 1>>
+			<<if $player.virginity.kiss is true or random(0,100) gte 60>>
+				<<He>>淫笑着将<<his>>$NPCList[_nn].penisdesc上的避孕套摘下，将它拉开，任由其中的精液流满<<his>>的手。过了一会<<he>>将<<his>>精液润滑的手指插入你的嘴巴。只有你<<if $ejactrait is 1>>渴望地<<else>>胆怯地<</if>>舔干净后<<he>>才勉强满意。
+			<<else>>
+				<<He>>坏笑着将$NPCList[_nn].penisdesc上的避孕套摘下，全部倒进了<<his>>嘴里。过了一会，<<he>>把嘴唇贴了上来，将全部的精液含入你的口中——直到你<<if $ejactrait is 1>>急切地吞下所有。<<else>>勉强地吞下所有。<</if>>
+			<</if>>
+		<<else>>
+			<<He>>将<<his>>$NPCList[_nn].penisdesc上的避孕套摘下，强行将它拉开的末端放入你的嘴里，笑着看你<<if $ejactrait is 1>>喝下精液<<else>>咳嗽吐出<</if>>。
+		<</if>>
+		<<oralejacstat>><<ejacstat>><<cumswallow `$NPCList[_nn].type` null `npcSemenMod($NPCList[_nn].penissize)`>>
+	<</if>>
+	<br><br>
+	/*Addition npc comments*/
+<</widget>>
+
+/* Takes NPC type to calculate volume of ejaculation to be swallowed or number to represent volume in ml. and updates stat */
+<<widget "cumswallow">>
+	<<set _ejaculation_volume to 0>>
+
+	<<set _ejaculation_type to (_args[0] ? _args[0] : "human")>>
+
+	<<if _args[1]>>
+		<<set _ejaculation_volume to _args[1]>>
+	<<else>>
+		<<if _ejaculation_type is "human">>
+			<<set _ejaculation_volume to random(5, 99)>>
+		<<elseif ["wolf", "dog", "fox"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(5, 100)>>
+		<<elseif ["centaur", "horse", "bull", "cow"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(25, 250)>>
+		<<elseif ["boar", "pig"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(50, 300)>>
+		<<elseif ["bear"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(25, 300)>>
+		<<elseif ["cat"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(1, 15)>>
+		<<elseif ["dolphin", "creature", "hawk", "harpy", "lizard"].some(type => _ejaculation_type.includes(type))>>
+			<<set _ejaculation_volume to random(20, 150)>>
+		<<else>>
+			<<set _ejaculation_volume to random(3, 100)>>
+		<</if>>
+	<</if>>
+	<<switch _args[2]>>
+		<<case "tiny">><<set _ejaculation_volume to Math.ceil(_ejaculation_volume / 40)>>
+		<<case "large">><<set _ejaculation_volume to Math.ceil(_ejaculation_volume * 1.5)>>
+	<</switch>>
+
+	<<if _args[2] is "knotted">>
+		<<if _ejaculation_type is "human" or $bestialitydisable is "t">>
+			<<semenswallowedstat _ejaculation_volume>>
+		<<else>>
+			<<animalsemenswallowedstat _ejaculation_volume>>
+		<</if>>
+		<<set $hunger -= 200>>
+		<<set $thirst -= 200>>
+		<<bodyliquid "mouth" "semen" 1>>
+	<<elseif $mouthaction is "ejacspit">>
+		你把精液吐出来。
+	<<elseif _ejaculation_type is "pc">>
+		<<if $awareness gte 200>>
+			<<if _ejaculation_volume lte 10>>
+				<span class="lewd">你一口将你的精液吞下，<<if $ejactrait gte 1>>失望于<<else>>感谢<</if>>只有一点点的量。</span>
+			<<elseif _ejaculation_volume lte 30>>
+				<span class="lewd">
+					<<if $ejactrait gte 1>>
+						你吞下你的精液，享受你自己的味道。
+					<<else>>
+						你咽下你的爱液。
+					<</if>>
+				</span>
+			<<elseif _ejaculation_volume lte 100>>
+				<span class="lewd">你鼓着脸吞下自己的精液，大声地咽了好几次。当你全部吞下后<<if $ejactrait gte 1>>满意地<<else>>如释重负地<</if>>你叹了口气。</span>
+			<<else>>
+				<span class="lewd">你尽可能地吞下你的巨量精液，努力接住这庞大的量。<<if $ejactrait gte 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>你把双手托在下巴下面，接住溢出来的那份，不想让任何精液浪费掉。<<else>>精液溢了出来，流到你的下巴和脖子上。<</if>></span>
+			<</if>>
+		<<else>>
+			<span class="red"><<print either("当你挣扎着", "当你强迫自己")>>咽下自己的精液时，眼泪从你的脸颊划过。</span>
+			<<if $ejactrait is 1>>
+				你咬住舌头不让自己舔嘴唇。<<lstress>><<stress -10>>
+			<<else>>
+				<<gstress>><<stress 10>>
+			<</if>>
+		<</if>>
+		<<semenswallowedstat _ejaculation_volume>>
+		<<set $hunger -= 200>>
+		<<set $thirst -= 200>>
+		<<bodyliquid "mouth" "semen" 1>>
+	<<else>>
+		<<if $consensual is 0 and _ejaculation_volume gte 3>>
+			<span class="red"><<print either("当你挣扎着", "当你强迫自己")>>咽下时，眼泪从你的脸颊划过。</span>
+			<<if $ejactrait is 1>>
+				你咬住舌头不让自己舔嘴唇。<<garousal>><<arousal 600>>
+			<<else>>
+				<<gstress>><<stress 10>>
+				/*Prevents gstress from being displayed twice*/
+				<<set _ejacStressDisplay to true>>
+			<</if>>
+			<<if _ejaculation_type is "human" or $bestialitydisable is "t">>
+				<<semenswallowedstat _ejaculation_volume>>
+			<<else>>
+				<<animalsemenswallowedstat _ejaculation_volume>>
+			<</if>>
+		<<else>>
+			<<if _ejaculation_volume lt 3>>
+				<span class="lewd">你有些<<if $ejactrait gte 1>>失望<<else>>惊讶<</if>>。精液的量太少了，没尝出什么味道。</span>
+			<<elseif _ejaculation_volume lte 10>>
+				<span class="lewd">你一口将精液吞下，<<if $ejactrait gte 1>>失望<<else>>庆幸<</if>>的是，量非常少。</span>
+			<<elseif _ejaculation_volume lte 30>>
+				<span class="lewd">
+					<<if $ejactrait gte 1>>
+						你吞下精液，享受着它<<print either("强烈，且苦涩的", "微甜，且绵密的", "刺鼻又咸腥的")>>味道。
+					<<else>>
+						你把精液吞了下去。
+					<</if>>
+				</span>
+			<<elseif _ejaculation_volume lte 100>>
+				<span class="lewd">你鼓着脸吞下精液，大声地咽了好几次。当你全部吞下后<<if $ejactrait gte 1>>满意地<<else>>如释重负地<</if>>叹了口气。</span>
+			<<else>>
+				<span class="lewd">你尽可能地吞下你的巨量精液，努力接住这庞大的量。<<if $ejactrait gte 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>你把双手托在下巴下面，接住溢出来的那份，不想让任何精液浪费掉。<<else>>精液溢了出来，流到你的下巴和脖子上。<</if>></span>
+			<</if>>
+			<<if $mouthaction is 'ejacswallow'>>
+				<<if _ejaculation_type is "human" or $bestialitydisable is "t">>
+					<<semenswallowedstat _ejaculation_volume>>
+				<<else>>
+					<<animalsemenswallowedstat _ejaculation_volume>>
+				<</if>>
+			<<else>>
+				<<set _ejaculation_volume to Math.floor(_ejaculation_volume/3)>>
+				<<if _ejaculation_type is "human" or $bestialitydisable is "t">>
+					<<semenswallowedstat _ejaculation_volume>>
+				<<else>>
+					<<animalsemenswallowedstat _ejaculation_volume>>
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<set $hunger -= 200>>
+		<<set $thirst -= 200>>
+		<<bodyliquid "mouth" "semen" 1>>
+	<</if>>
+<</widget>>

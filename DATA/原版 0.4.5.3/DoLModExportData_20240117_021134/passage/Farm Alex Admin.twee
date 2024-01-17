@@ -1,0 +1,41 @@
+:: Farm Alex Admin []
+<<effects>>
+
+你拉了一把椅子过来，帮助艾利克斯一起处理业务。
+<<if $rng gte 3>>
+	<<He>>正和镇上的一个客户交谈着。客户听起来对农场的
+	<<print either("牛奶", "鸡蛋", "松露", "农产品", "产出", "谷物", "水果", "蔬菜", "作物")>>质量感到满意。
+<<elseif $rng gte 2>>
+	<<He>>正和你们的一个供应商交谈，试图谈判出一个更好的交易条件。
+<<else>>
+	<<He>>给你列出了农场的开支流水。
+<</if>>
+<br><br>
+
+<<if currentSkillValue('maths') gte random(1, 1000)>>
+	<<if $rng gte 3>>
+		<span class="green">你说服艾利克斯提高每<<print either("品脱", "加仑", "公斤", "克", "分量", "盒", "蒲式耳", "吨")>>的价格。</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"你反应很快，"<<he>>朝你笑了笑，"谢谢你的帮助。"
+	<<elseif $rng gte 2>>
+		你在艾利克斯的垃圾邮件文件夹中发现了一封来自另一家公司的电子邮件，这家公司提供了更好的交易条件。你向艾利克斯展示了这封邮件，<span class="green"><<he>>将其作为了谈判筹码。</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"我可能应该更经常地检查我的电子邮件。"<<he>>笑着说道。
+	<<else>>
+		<span class="green">你发现了一些可以节省开支的地方。</span><<farm_yield 3>><<ggfarm>>
+		<br><br>
+
+		"每一分钱都很重要，"<<he>>拍了拍你的背说道，"干得好。"
+	<</if>>
+<<else>>
+	桌子上一团糟，<<his>>的笔记本电脑里的内容也很乱。你开始整理东西。<<mathsskill 2>><<ggmaths>>
+	<br><br>
+
+	"不管怎样，还是谢谢你，" 艾利克斯把电话靠近自己的脸说道，"抱歉。你说什么来着？"
+<</if>>
+<br><br>
+
+<<link [[继续|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>

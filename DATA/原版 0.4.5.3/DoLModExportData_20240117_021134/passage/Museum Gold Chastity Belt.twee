@@ -1,0 +1,26 @@
+:: Museum Gold Chastity Belt []
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+<<set $winterHint to "notGiven">>
+<<if $museumAntiqueJournalHints.includes("antiquegoldchastitybelt")>>
+<<run $museumAntiqueJournalHints.delete("antiquegoldchastitybelt")>>
+<</if>>
+
+<<npc Winter>><<person1>>
+<<if $worn.genitals.origin is "Underwater Temple" and $gold_chastity_held isnot true>>
+	<<strip>>
+	你告诉温特你找到了一个金质贞操带，而且打算自己穿着了。"真有意思，你能把衣服脱了给我看看吗？"<<he>>说道。
+	<br><br>
+	你脱下衣服让<<him>>检查贞操带。
+<<else>>
+	温特抓住了黄金贞操带。
+<</if>>
+
+"这东西年代已久，"<<he>>说道。"上面刻有宗教铭文。也许是某个司祭在仪式或祭典上穿过的。"
+<<if $worn.genitals.origin is "Underwater Temple" and $gold_chastity_held isnot true>>
+	<br>
+	"让我拍几张特写照片，"<<he>>说着拿出了一个小相机。"当然，我可以先把仿制品展出去。下次记得别把它锁自己身上了。"
+<</if>>
+<br><br>
+<<unset $gold_chastity_held>>
+
+<<link [[继续|Museum]]>><<endevent>><<clotheson>><</link>>

@@ -1,0 +1,72 @@
+:: Cafe Pancakes []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+
+<<if $daily.earSlimeOceanBreezeCafeEat>>
+	你决定听从耳中史莱姆，接着
+<<else>>
+	你
+<</if>>
+<<if $weather is "rain">>
+	坐了下来，点了一份松饼。很快煎饼就端了上来，还送了一杯咖啡。
+	这比你在孤儿院吃过的任何东西都好吃。你凝望着窗外下着雨的街道，感觉很惬意。
+	<br><br>
+<<elseif $weather is "snow">>
+	坐了下来，点了一份松饼。很快煎饼就端了上来，还送了一杯咖啡。
+	这比你在孤儿院吃过的任何东西都好吃。你向窗外白雪皑皑的街道看去，感觉很惬意。
+	<br><br>
+<<else>>
+	坐了下来，点了一份松饼。很快煎饼就端了上来，还送了一杯咖啡。
+	这比你在孤儿院吃过的任何东西都好吃。你望向大海，享受着海风。
+	<br><br>
+<</if>>
+
+<<rng 10>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $rng gte 6>>
+	<<endevent>>
+	你注意到咖啡馆另一边有一名<<generate1>><<person1>><<person>>正盯着你看。
+	你突然意识到自己无意识的张开了双腿，那个人正想要一窥你裙下的风光。
+	<<if $worn.under_lower.exposed>>
+		你想起自己没穿内裤。
+		<<arousal 500>><<garousal>>
+	<</if>>
+	<br><br>
+	/* check if we meet the basic requirements to expose ourselves */
+	<<if $exhibitionism gte 15>>
+		/* show our options depending on our possession of panties */
+		<<if $worn.under_lower.exposed>>
+			<<if $exhibitionism gte 75>>
+				<<link [[张开双腿并向他们抛媚眼|Cafe Exhibitionism Legs Part Pantiless Wink]]>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<if $exhibitionism gte 55>>
+				<<link [[张开双腿并假装没看见|Cafe Exhibitionism Legs Part Pantiless]]>><</link>><<exhibitionist4>>
+				<br>
+				<<link [[无视变态并赶紧吃完|Ocean Breeze]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+			<<if $exhibitionism lte 54>>
+				你闭上了双腿，不让<<he>>继续看下去。
+				你一边继续吃着可口的松饼，一边不由自主地想象着张开双腿
+				把一切都暴露在<<his>>窥探的双眼前会是什么感觉。
+				<<arousal 15>><<garousal>>
+				<br><br>
+				<<link [[吃完|Ocean Breeze]]>><<endevent>><</link>>
+			<</if>>
+		<<else>>
+			<<link [[假装没发现并张开双腿|Cafe Exhibitionism Legs Part]]>><</link>><<exhibitionist2>>
+			<br>
+			<<link [[无视变态并赶紧吃完|Ocean Breeze]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		/* we don't, so shut your legs you dirty normie */
+		你阖上了双腿，不想让那个变态继续看下去。
+		<<stress 5>><<gstress>>
+		<br><br>
+		<<link [[无视变态并赶紧吃完|Ocean Breeze]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	<<CafeExhibitionismLegsPartNormalTerminate>>
+<</if>>

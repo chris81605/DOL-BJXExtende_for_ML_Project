@@ -1,0 +1,26 @@
+:: Forest Bully Climb []
+你用尽全力抓住两根绳子，把自己拉上上面的树枝。随着一阵突然的释放，你全身的重量不再压在你的胯下。
+<br><br>
+<<if $athleticsSuccess>>
+	你不顾手臂酸痛咬着牙把自己拉上了树冠，整个人都摊在了树枝上。终于，你得以把自己从你同学们的陷阱里释放出来。你抓紧时间爬下去，回到小路上。
+	<br><br>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+
+<<elseif $worn.under_lower.integrity gte 21>>
+	你开始向上爬，但刚爬到半路，你的手臂就开始颤抖。你掌心一松，掉下去一小段距离，但很快就被$worn.under_lower.cn_name_cap挂住。你的<<print ($player.ballsExist ? "睾丸" : "阴唇")>>被$worn.under_lower.cn_name_cap勒得更紧了，让你愈发痛苦。<<gpain>><<ggstress>><<pain 25>><<stress 50>>
+	<br><br>
+	当抽插停止的时候，你听到布料的啪啪爆裂声，这说明你的内衣被磨损得更糟。<<set $worn.under_lower.integrity -= 20>>
+	<br><br>
+	仍然被困在空中，你需要再试一次或者呼救。
+	<br><br>
+	<<link [[爬|Forest Bully Climb]]>><</link>>
+	<br>
+	<<link [[呼救|Forest Bully Help]]>><</link>>
+
+<<else>>
+	你开始向上爬，但刚爬到半路，你的手臂就开始颤抖。你掌心一松，掉下去一小段距离，但很快就被$worn.under_lower.cn_name_cap挂住。你的<<print ($player.ballsExist ? "睾丸" : "阴唇")>>被$worn.under_lower.cn_name_cap勒得更紧了，让你愈发痛苦。<<gpain>><<ggstress>><<pain 25>><<stress 50>>
+	<br><br>
+	一阵布料撕扯绷裂的声音过后，你总算跌到了小路上。过了一会儿，你站起身来继续前进，绳子上还绑着你$worn.under_lower.cn_name_cap的残片。<<underlowerruined>>
+	<br><br>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>

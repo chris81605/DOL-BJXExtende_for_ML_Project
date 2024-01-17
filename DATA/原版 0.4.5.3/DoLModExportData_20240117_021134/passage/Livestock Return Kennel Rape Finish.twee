@@ -1,0 +1,69 @@
+:: Livestock Return Kennel Rape Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Return Kennel Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，畏惧着。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Return Kennel Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Return Kennel Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Return Kennel Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+		感觉袭击你要付出的代价太多，<<beastsplural>>呜呜叫着躲在雷米后面，雷米皱着眉头靠近你。
+		<br>
+		<<tearful>>你振作起来。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Remy>><<person1>>
+
+		<<He>>抓住你的皮带，把你拉起来，懒得解开你的项圈。它拉紧你的喉咙，让你咳嗽和呕吐，因为雷米把你的脸靠近<<hers>>的脸。
+		<br>
+		"这只是我对像你这样顽固的野兽的训练方式之一而已，"<<he>>吼道，"乖乖当一头温顺快乐的小奶牛，否则有你好瞧的。"
+		<br><br>
+
+		<<link [[点头|Livestock Return Kennel End]]>><<set $phase to 0>><<sub 1>><<transform cow 1>><<livestock_obey 1>><<npcincr Remy love 1>><<npcincr Remy dom 1>><</link>><<gobey>>
+		<br>
+		<<link [[吐唾沫|Livestock Return Kennel End]]>><<set $phase to 1>><<def 1>><<livestock_obey -5>><<npcincr Remy love -1>><<npcincr Remy dom -1>><</link>><<llobey>>
+		<br>
+	<<else>>
+		最后一只<<beasttype>>从你身上下来，把你留在草地上。你精疲力尽，瑟瑟发抖，人群中响起了一阵小小的掌声。雷米微笑着走过来。
+		<br>
+		<<tearful>>你振作起来。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Remy>><<person1>>
+
+		雷米蹲在你身边，用力拉着你脖子上的项圈，把你的脸凑近<<hers>>。
+		<br>
+		"我很抱歉，其实我也不想那样对你，但是不受点儿教训你学不会乖乖听话，"<<he>>对你低声耳语，"从现在开始，你会乖乖当一头温顺快乐的小奶牛，对吗？"
+		<br><br>
+
+		<<link [[点头|Livestock Return Kennel End]]>><<set $phase to 0>><<sub 1>><<transform cow 1>><<livestock_obey 1>><<npcincr Remy love 1>><<npcincr Remy dom 1>><</link>><<gobey>>
+		<br>
+		<<link [[吐唾沫|Livestock Return Kennel End]]>><<set $phase to 1>><<def 1>><<livestock_obey -5>><<npcincr Remy love -1>><<npcincr Remy dom -1>><</link>><<llobey>>
+		<br>
+	<</if>>
+<</if>>

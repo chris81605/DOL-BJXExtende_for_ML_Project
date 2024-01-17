@@ -1,0 +1,90 @@
+:: Prison Cell []
+<<set $outside to 0>><<location "prison">><<effects>><<effects_prison>><<set $bus to "cell">>
+
+你正待在你的牢房里，一张床放在角落里，另一边放着一个柜子。一扇铁门阻隔了你通往外界的通道，毕竟这里没有隐私可言。
+<<if $prison.poster is "man">>
+	一面墙上挂着一张画着性感男士的海报。
+<<elseif $prison.poster is "woman">>
+	一面墙上挂着一张画着性感女士的海报。
+<<elseif $prison.poster is "puppy">>
+	一面墙上挂着一张画着可爱小狗的海报。
+<</if>>
+<br><br>
+<<if Time.hour is 20 and $prison.evening isnot 1>>
+	锁门的声音在走廊里回响。
+	<br><br>
+	<<set $prison.evening to 1>>
+<<elseif $prison.schedule is "lockdown">>
+	门被锁上了。
+	<br><br>
+<</if>>
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "prisonCell">>
+<<elseif $prison.schedule is "hunt" and $prison.morning isnot 1>>
+	<<set $prison.schedule to "wake">>
+	<<generate_methodical_guard 0>><<person1>>
+	灯光嗡嗡作响，牢门推开时发出的响动回荡在耳边。一名<<personsimple "normal">>的声音响彻大厅。"点名。"你看到其他囚犯排起了队伍。
+	<br><br>
+
+	<<link [[排队|Prison Cell Role]]>><<cell_trouble -1>><</link>>
+	<br>
+	<<link [[拒绝|Prison Cell Refuse]]>><<prison_guards 1>><<prison_inmates 1>><<pain 4>><<cell_trouble 1>><</link>><<gpain>><<gsuspicion>><<grespect>>
+	<br>
+	<<set $prison.morning to 1>>
+<<else>>
+
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<undobindingsicon>><<link [[解除束缚 (0:10)|Prison Cell]]>><<set $unbind to 1>><<pass 10>><<arm_unbind>><</link>>
+		<br><br>
+	<</if>>
+	<<if $prison.poster and !$prison.tunnel>>
+		<<furnitureicon "poster.png">><<link [[检查你的海报|Prison Poster]]>><<set $prison.tunnel to 1>><</link>>
+		<br>
+	<<elseif $prison.tunnel is 1 and $prison.hammer is 1>>
+		<<furnitureicon "poster.png">><<link [[摸索海报后面的墙|Prison Poster 2]]>><<set $prison.tunnel to 2>><</link>>
+		<br>
+	<<elseif $prison.tunnel gte 120 and $prison.schedule is "lockdown">>
+		<<investigateicon>><<link [[检查通道|Prison Tunnel]]>><</link>>
+		<br>
+	<<elseif $prison.tunnel gte 2 and $prison.schedule is "lockdown">>
+		<<getouticon "dig">><<link [[挖掘通道|Prison Tunnel]]>><</link>>
+		<br>
+	<</if>>
+	<<if $prison.schedule is "revolt">>
+		<span class="blue">太吵了，根本睡不着。</span>
+		<br>
+	<<else>>
+		<<listsleepoutfits "prison bed">>
+		<<bedicon>><<link [[脱光并爬到床上|Prison Bed]]>><<undressSleep "prison bed">><</link>>
+		<br>
+	<</if>>
+	<<roomoptions>>
+	<<if $prison.schedule isnot "lockdown" and !$worn.face.type.includes("blindfold")>>
+		<<prisonicon "plaque">><<link [[铭牌|Prison Plaque]]>><</link>>
+		<br>
+	<</if>>
+	<<wardrobeicon>><<link [[衣柜|Prison Wardrobe]]>><</link>>
+	<br>
+	<<if $prison.mirror gte 1>>
+		<<mirroricon>><<link [[镜子|Prison Mirror]]>><<preMirror>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $prison.schedule isnot "lockdown">>
+		<<getouticon>><<link [[离开|Prison Walkway]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[设置|Prison Settings]]>><</link>>
+	<br>
+
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

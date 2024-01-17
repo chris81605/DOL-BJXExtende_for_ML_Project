@@ -1,0 +1,58 @@
+:: Cliff Street Prisoner Escape Blag []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+/* unlikely to pass, but needs some dice roll here. With high eloquence & skulduggery, you get up to an ~8% chance of really dumb cops */
+<<rng 1000>>
+<<if currentSkillValue('skulduggery') gte $rng>>/* chance rises with skul*/
+	<<rng 600 1200>> /* Rises from 0% to ~67% as $english rises from 600 to 1000 */
+	<<if currentSkillValue('english') gte $rng>><<set _eloquent to true>><<else>><<set _eloquent to false>><</if>>
+	<<rng>> /* fixed at 10% - would need 3 pretty dumb cops */
+	<<if $rng gte 91>><<set _dumb_cops to true>><<else>><<set _dumb_cops to false>><</if>>
+	<<if _dumb_cops and _eloquent>><<set _blag to true>><<else>><<set _blag to false>><</if>>
+<<else>>
+	<<set _blag to false>>
+<</if>>
+<<if _blag is true>>
+	"事实上，"你满是自信地说道。"我就该在这里，是署长派我来的，让我来测试这些绑带的质量，这些东西偷工减料地令人震惊，究竟有多少人从这逃走了？"
+	<br><br>
+	"呃——我不知道，我想——"<<person2>><<person>>困惑地说道。
+	<br><br>
+	"你不知道？好吧，我已经听够这样的废话了，"你喊道，"我要在发生任何事情之前把这个人送回局里。还有，这把锁的锁孔是被堵住了吗？我的钥匙插不进里面了。"
+	<br><br>
+	"哦，是的，是的，这个锁确实有点，"那个<<person4>><<person>>说道："你必须——"
+	<br><br>
+	"你不介意吧？"
+	<br><br>
+	"当然，当然。"
+	<br><br>
+	当这些警察为你释放囚犯，并让你俩在无人陪伴的情况下向车站走去时，你简直无法相信发生的这一切，当你二人离开视线后，你们就一起消失在了一条小巷当中。
+	<br><br>
+	<<if $pillory_tenant.special.name is "Leighton">>
+		"那太令人讨厌了，我是被陷害的，"<<the_pillory_person>>激烈地说道，"但谢谢你把我救出来。"
+		<<npcincr Leighton love 10>>
+	<<elseif $pillory_tenant.special.name is "Whitney">>
+		"谢……谢了，"<<the_pillory_person>>皱起眉头说道，"我要去找那个陷害我的混蛋。"
+		<<npcincr Whitney love 5>>
+	<<else>>
+		"谢谢你，"<<the_pillory_person>>恳切地说道，"那真是太可怕了，你真的帮了我个大忙。"
+	<</if>>
+	<<clear_pillory>>
+	<<endevent>><<famegood 15>>
+	<br><br>
+	<<link [[继续|Commercial alleyways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	"事实上，"你满是自信地说道。"我就该在这里，是署长派我来的，让我来测试这些绑带的质量，这些东西偷工——"
+	<br><br>
+	"不不，"那个<<person2>><<person>>摇了摇头，"不对。"
+	<br><br>
+	"听着，警官，我在这——"
+	<br><br>
+	"不，我们才不会买账。"
+	<br><br>
+	"这又是'冒充警察罪'吗？"那个<<person3>><<person>>问道。"或者是——"
+	<br><br>
+	"目前而言，这真的不重要。"那个<<person2>><<person>>紧盯着你说道，"重要的是，这个年轻的<<lass>>已经过于执迷不悟了。
+	<<text_pillory_release_fail_strip>>
+	<<link [[继续|Cliff Street Prisoner Escape Fail 3]]>><<set $phase to 10>><</link>>
+	<br>
+<</if>>

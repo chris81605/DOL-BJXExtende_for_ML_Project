@@ -1,0 +1,24 @@
+:: Moor Passage Swim 2 []
+<<effects>><<rngWraith 1>>
+
+面对无法逾越的黑暗，你转身游回微光点亮的岸边。你仔细搜索，直到找到另一个出口。这个出口向上延伸，带你回到了<<daylight>>下。
+<br><br>
+
+你仔细查看戒指，一颗黑色宝石被一些看起来像是葡萄的雕刻花纹所包围。戒指本身是黄金制成的，一些收藏家可能愿意付钱收购它。
+<br><br>
+
+<<if _wraithEvent>>
+	<<generateWraith 1>><<initWraith>><<rainWraith>>
+	"<span class="wraith">盗墓者。</span>"
+	<br><br>
+	你猛地转过身，面向那个声音，一个美丽的苍白身影正漂浮在水面上。<<Hes>>赤身裸体，<<if ["haunt", "despair"].includes($wraith.state)>>抓挠着自己的脖子。<<else>>只有脖子上戴着一条美丽的镶有蓝色宝石的白色项链。<</if>><<if $wraith.seen gte 3>>你立刻试图逃跑。<<else>>你慢慢向后退去。<</if>>一条半透明的触手缠住了你的腿，把你提了起来，然后把你扔到了地面上。
+	<br><br>
+	你一时间感到呼吸困难。<<pain 4>><<gpain>>
+	<br><br>
+	<<startWraith>>
+	<br><br>
+	<<link [[继续|Wraith Moor Ring]]>><</link>>
+<<else>>
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+<</if>>
+<br>

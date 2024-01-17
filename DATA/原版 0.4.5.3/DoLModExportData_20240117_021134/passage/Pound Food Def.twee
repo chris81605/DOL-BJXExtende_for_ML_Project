@@ -1,0 +1,25 @@
+:: Pound Food Def []
+<<effects>>
+
+你加入了争抢食物的混战中，把<<pound_text>>推到了一边。
+
+<<if $pound.status gte 60>>
+	几声咆哮就能让其它狗远离你的碗。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<link [[继续|Pound Food Event]]>><</link>>
+	<br>
+<<else>>
+	<<beastNEWinit 1 dog>>一只<<beasttype>>被激怒了，在你想吃东西的时候它不断咬着你进行骚扰。
+	<br><br>
+
+
+	<<link [[退让|Pound Food Back]]>><<sub 1>><<stress -6>><<pound_status -3>><</link>><<lpound_status>><<lstress>>
+	<br>
+	<<link [[无视|Pound Food Ignore]]>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<if $wolfgirl gte 6>>
+		<<link [[咆哮|Pound Food Growl]]>><<def 1>><<pound_status 3>><<transform wolf 1>><</link>><<wolfgirl>><<gpound_status>>
+		<br>
+	<</if>>
+<</if>>

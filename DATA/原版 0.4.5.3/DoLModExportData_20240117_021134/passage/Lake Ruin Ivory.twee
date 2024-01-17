@@ -1,0 +1,31 @@
+:: Lake Ruin Ivory []
+<<effects>>
+你把项链从底座上拿起来，它看起来工艺相当精湛，你能感觉到它对某个人非常重要。
+<br><br>
+<<if C.npc["Ivory Wraith"].init is 1>>
+	<<set C.npc["Ivory Wraith"].lust to 20>>
+<</if>>
+<<if isBloodmoon()>>
+	你突然听到周围墙壁的撞击声。<<if $wraith.seen gte 1>>一个熟悉的<<else>>一个陌生的<</if>>声音在叫喊，感觉好像有什么东西在抓住你的胳膊和腿。你本能地挣扎着将自己向后推入水中。<<trauma 12>><<ggtrauma>>
+	<br><br>
+	几秒钟后，声音消失了，让你感到恐惧。
+	<<if $wraith.hunt>>
+		恐惧慢慢消退，你再也感觉不到追逐你的存在。<span class="blue"><i>在下一个血月之前，你是安全的。</i></span>
+		<br><br>
+	<</if>>
+	<<if $wraith>>
+		<<set $wraith.state to "">>
+		<<clearWraith>>
+		<<set $wraithSkip to true>>
+	<</if>>
+	<<tearful>>你离开房间。
+<<elseif $wraith.state>>
+	当你看着蓝宝石中的反射时，你感到一阵恐惧。你的脸色苍白。<<stress 6>><<gstress>>
+	<br><br>
+	你决定不再逗留，手持项链离开了房间。
+<<else>>
+	你可以在蓝色宝石中看到自己的倒影。它会卖个好价钱的。
+<</if>>
+<br><br>
+<<link [[继续|Lake Ruin Deep]]>><</link>>
+<br>

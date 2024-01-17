@@ -1,0 +1,20 @@
+:: Moor Broccoli []
+<<effects>>
+
+你摇动花朵，试图收集种子，
+<<if $tendingSuccess>>
+	<span class="green">你很快就收集到了足够的种子。</span><<set $plants_known.push("broccoli")>>
+	<br><br>
+
+	<span class="gold">你现在可以种植<<icon "tending/broccoli.png">>西兰花了。</span>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<span class="red">但是你失败了。</span><<gtending>><<tending 2>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

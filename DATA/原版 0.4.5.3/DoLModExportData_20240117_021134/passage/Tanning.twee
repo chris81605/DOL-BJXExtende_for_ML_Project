@@ -1,0 +1,83 @@
+:: Tanning []
+<!-- Tanning runs level 0 (pink) to 600 (dark tanned), 1 unit represents 1 minute sunbathing on beach-->
+<<location "beach">>
+
+<<if Time.season is "summer">>
+	<<switch random(1, 6)>>
+	<<case 1 2>>
+		你躺在烈日下的海滩上。阳光浸透你的皮肤，你的思绪飘忽不定。
+		<br><br>
+		你感到温暖。
+		<<stress -6>><<lstress>><<gggtanned>><<tanned 120 "tanLines">>
+		<br><br>
+	<<case 3 4>>
+		你躺在海滩上。海浪翻涌着，一遍又一遍地拍打着沿岸，轻柔地触碰着你的脚心。阳光格外温暖，浪花闪耀着，海被染成了金色。
+		<br><br>
+		你感到温暖。
+		<<stress -6>><<lstress>><<gggtanned>><<tanned 120 "tanLines">>
+		<br><br>
+	<<case 5 6>>
+		你躺在海滩上，享受着片刻的安宁。海浪冲刷着沿岸，远处有小孩子在嬉戏打闹，还有音乐声。
+		<br><br>
+		你感到温暖。
+		<<stress -6>><<lstress>><<gggtanned>><<tanned 120 "tanLines">>
+		<br><br>
+	<</switch>>
+<<elseif Time.season is "winter">>
+	<<switch random(1, 6)>>
+	<<case 1 2>>
+		你躺在海滩上晒太阳，凉风轻抚着你。
+		<br><br>
+		你身体颤抖。
+		<<stress 6>><<gstress>><<gtanned>><<tanned 20 "tanLines">>
+		<br><br>
+	<<case 3 4>>
+		你躺在海滩上。在寒风中，你几乎感觉不到太阳。
+		<br><br>
+		你身体颤抖。
+		<<stress 6>><<gstress>><<gtanned>><<tanned 20 "tanLines">>
+		<br><br>
+	<<case 5 6>>
+		你们躺在海滩上。海浪翻涌着，一遍又一遍地拍打着沿岸，轻柔地触碰着你的脚心……有点冷。
+		<br><br>
+		你身体颤抖。
+		<<stress 6>><<gstress>><<gtanned>><<tanned 20 "tanLines">>
+		<br><br>
+	<</switch>>
+<<else>>
+	<<switch random(1, 6)>>
+	<<case 1 2>>
+		你躺在海滩上，享受着温和的日光，思绪逐渐向远方飘去。
+		<br><br>
+		你感到焕然一新。
+		<<stress -6>><<lstress>><<ggtanned>><<tanned 60 "tanLines">>
+		<br><br>
+	<<case 3 4>>
+		你们躺在海滩上。海浪翻涌着，一遍又一遍地拍打着沿岸，轻柔地触碰着你的脚心。阳光格外温暖，浪花闪耀着，海被染成了金色。
+		<br><br>
+		你感到焕然一新。
+		<<stress -6>><<lstress>><<ggtanned>><<tanned 60 "tanLines">>
+		<br><br>
+	<<case 5 6>>
+		你躺在海滩上，享受着片刻的安宁。海浪冲刷着沿岸，远处有小孩子在嬉戏打闹，还有音乐声。
+		<br><br>
+		你感到焕然一新。
+		<<stress -6>><<lstress>><<ggtanned>><<tanned 60 "tanLines">>
+		<br><br>
+	<</switch>>
+<</if>>
+你有着<<skincolourtext>>
+<br><br>
+
+<<rng>>
+<<set $eventcheck to random(1, 10000)>>
+<<if $eventcheck gte (9900 - ($allure)) and $rng gte 91>>
+	<<endevent>>
+	<<link [[继续|Whitney Beach Sunbathing]]>><<set $eventskip to 1>><</link>>
+<<elseif $rng gte 81>>
+	<<endevent>>
+	<<link [[继续|Sunbathing Sabotage]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<endevent>>
+	<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+<</if>>

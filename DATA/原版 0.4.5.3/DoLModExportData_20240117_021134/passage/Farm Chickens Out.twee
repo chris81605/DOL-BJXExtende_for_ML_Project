@@ -1,0 +1,41 @@
+:: Farm Chickens Out []
+<<effects>>
+
+你把鸡从鸡笼里放出来，然后进去打扫。笼子足够大，人可以站进去，鸡活动的室外区域周围有一圈铁丝栅栏。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<!-- Modified for Beast People -->
+	<<farm_gen dog>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $farm_work.dog.monster is true>>
+			<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals monster>>
+		<<else>>
+			<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals beast>>
+		<</if>>
+		你听到身后有动静，还没来得及转身，就有东西从背后扑了上来。你双膝跪地，紧紧抓住铁丝栅栏以获得支撑。
+		<br><br>
+		<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+			你感到有东西在拽你的手腕。几只鸡从铁丝的缝隙里探出了它们的喙，正在扯你的袖子。你的手臂被卡住了。
+			<br><br>
+			<<bindtemp>>
+			<<set $phase to 1>>
+		<<else>>
+			<<set $phase to 0>>
+		<</if>>
+		<<link [[继续|Farm Coop Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你听到身后的咔哒声。风把门吹关上了。现在门卡住了，你设法把它拉开，然后立马意识到自己可能需要呼救。<<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

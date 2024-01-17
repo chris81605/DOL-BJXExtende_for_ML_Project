@@ -1,0 +1,29 @@
+:: Hospital Arrest Run []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+你转身跑出医院。
+<<gathletics>><<athletics 1>><<physique>>
+<br><br>
+<<if $athleticsSuccess>>
+	<<rng>>
+	<<if $rng gte 81>>
+		警察紧跟在你身后，你穿过街道与小巷一路狂奔，但他们依旧不依不饶。在<span class="green">成功</span>地甩开警察一段距离后，你发现自己拐进了死胡同。
+		<br><br>
+		<<endevent>>
+		当你正准备束手就擒的时候，附近墙角处的一个小窗口打开了。你不知道里面有什么，但不钻进去的话就只能直面警察。
+		<br><br>
+		<<link [[钻进窗口|Hospital Arrest Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[向警察自首|Hospital Arrest Surrender]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		警察紧跟在你身后，你穿过街道与小巷一路狂奔，这些酒囊饭袋根本追不上你的脚步。你<span class="green">成功</span>逃脱了。
+		<br><br>
+		<<link [[继续|Industrial alleyways]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你试图逃离医院，但<span class="red">没能</span>跑得过警察。你被警察按倒在地在地。
+	<br><br>
+	<<link [[继续|Hospital Arrest Journey]]>><</link>>
+	<br>
+<</if>>

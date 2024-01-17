@@ -1,0 +1,77 @@
+:: Farm Tending Sex Finish []
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<person>>靠到了<<farm_fence>>上。"谢谢，<<girl>>，"<<he>>挣扎着站起来，"你是个好床伴。"
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你离开了围栏边。<<person>>离开农场。
+	<<else>>
+		<<tearful>>你爬回<<farm_fence>>内。<<person>>离开了农场。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<<elseif $enemyhealth lte 0>>
+	<<person>>转身逃跑。
+	<<if $farm.wall gte 4>>
+		<<He>>退离了围栏。
+	<<else>>
+		<<He>>从<<farm_fence>>翻了出去，
+	<</if>>
+	<<he>>逃跑了，同时害怕地回头看了你一眼。
+	<br><br>
+	<<tearful>>你拍去身上的灰尘。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<<set $rescued += 1>>
+	"我来了！"是艾利克斯。<<person>>转身从<<he>>来的方向逃跑了。
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你从围栏边退开。
+	<<else>>
+		<<tearful>>你爬回<<farm_fence>>内。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Alex>><<person1>>
+
+	艾利克斯赶到了。"别再让我在这里逮到你了，"艾利克斯在闯入者身后喊道，那家伙已经跑出一段路了。
+	<br><br>
+
+	"太不尊重人了，"<<he>>嘟囔着。
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<covered>><<He>>红着脸看向了别处，好像刚刚才注意到你的穿着。"我给你找点什么遮着。"<<garousal>><<towelup>>
+		<br><br>
+
+		<<He>>很快拿着毛巾回来了，然后继续回到工作中。
+	<<else>>
+		"我得回去工作了。"
+	<</if>>
+	<<gdom>><<npcincr Alex dom 1>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<destination_farm>>
+<<else>>
+	"你玩我呢？"<<person>>说着，从墙边走开了。
+	<br><br>
+	<<if $farm.wall gte 4>>
+		<<tearful>>你从围栏边退开。
+	<<else>>
+		<<tearful>>你爬回<<farm_fence>>内。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<</if>>

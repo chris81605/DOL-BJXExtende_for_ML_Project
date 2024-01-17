@@ -1,0 +1,117 @@
+:: Pharmacy Encounter Sex Finish []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set $daily.pharm.sexFinished to true>>
+
+<<capture $pharmacyItem>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"哇！"<<he>>喘着气，然后挣扎着站起身并靠在柜台上。<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+
+	<<He>>深吸一口气，然后整理好衣服，回到了柜台前面。
+	<br>
+	<<if !$pharmacyItem.type.includes("reduction") or $player.penissize lt 3>>
+		<<set $pharmacyItem.price /= 2>>
+		"我想你已经赢得了一个折扣，亲爱的，你可以用<<printmoney $pharmacyItem.price true>>来购买这些药。"
+		<br>
+		"请再来吧，"<<he>>眨了眨眼睛。
+		<br><br>
+
+		<<endcombat>>
+		<<if $money gte $pharmacyItem.price>>
+			<<link [["花" + _printmoney + "购买" + $pharmacyItem.cn_name|Pharmacy]]>>
+				<<set $eventskip to 1>><<set $daily.pharm.sexResult to "buy">>
+				<<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 14>><<boughtOnce>>
+			<</link>>
+		<<else>>
+			<span class="purple">你没有那么多钱。</span>
+		<</if>>
+	<<else>>
+		<<set $pharmacyItem to setup.pharmacyItems["penis_blocker"]>>
+		"对不起，亲爱的。在你用你那性感的鸡巴对我做了这些事之后，我不能再卖给你这些缩小药了，我做不到，我想让它保持现在这样的大小。"
+		<br>
+		"我可以用折扣价卖给你生长阻断剂，"<<he>>笑着说道。
+		<br><br>
+
+		<<endcombat>>
+		<<if $money gte $pharmacyItem.price>>
+			<<formatmoney $pharmacyItem.price>>
+			<<link [["花" + _printmoney + "购买生长阻断剂"|Pharmacy]]>>
+				<<set $eventskip to 1>><<set $daily.pharm.sexResult to "buy">>
+				<<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills["penis blocker"].owned += 14>><<boughtOnce>>
+			<</link>>
+		<<else>>
+			<span class="purple">你没有那么多钱。</span>
+		<</if>>
+	<</if>>
+	<br>
+	<<link [[不买|Pharmacy]]>><<set $eventskip to 1>><<set $daily.pharm.sexResult to "dontBuy">><</link>>
+
+<<elseif $enemyhealth lte 0>>
+	<<personsimple>>摔到了地上，摸着自己的伤口。<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	你看向柜台，看到你想购买的<<print $pharmacyItem.cn_name>>药丸。
+	<br><br>
+
+	<<set $daily.pharm.closed to true>>
+	<<clearNPC "pharmNurse">>
+	<<link [[在护士拿走药片之前偷走药片|Hospital Foyer]]>>
+		<<set $eventskip to 1>>
+		<<crimeUp $pharmacyItem.price "thievery">><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 14>><<boughtOnce>>
+	<</link>><<crime "thievery">>
+	<br>
+	<<link [[直接离开|Hospital Foyer]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $finish is 1>>
+	<<set $daily.pharm.sexResult to "embarrassed">>
+	<<switch $phase>>
+		<<case "chastity">>
+			尴尬的是，你站起来时说不出话。
+			<<clotheson>><<endcombat>>
+
+		<<case "tiny">>
+			脸因极度窘迫而红了，你站了起来。<<clotheson>>
+			护士看都不看你一眼。
+			<br><br>
+			<<endcombat>>
+
+		<<case "small">>
+			你尴尬地站了起来。<<clotheson>>
+			"别忘了吃药，" 护士说道。<<if $pharmacyItem.type.includes("growth")>>"你需要他们。"<</if>>
+			<br><br>
+			<<endcombat>>
+
+			<<if $money gte $pharmacyItem.price>>
+				<<formatmoney $pharmacyItem.price>>
+				<<link [["支付" + _printmoney + "买" + $pharmacyItem.cn_name|Pharmacy]]>>
+					<<set $eventskip to 1>>
+					<<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 14>><<boughtOnce>>
+				<</link>>
+				<br>
+			<<else>>
+				<span class="purple">你没有那么多钱。</span>
+			<</if>>
+
+		<<default>>
+			<!-- Is this for error catching? I don't think it should be able to happen. -->
+			当<<personsimple>>站起来整理<<his>>的衣服时，<<he>>看起来很沮丧。<<He>>回到书柜前，拿起<<his>>的书。
+			<br>
+			<<clotheson>><<endcombat>>
+	<</switch>>
+
+	<<link [[离开|Hospital Foyer]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<br><br>
+	<<link [[继续|Hospital Foyer]]>><<endevent>><<set $eventskip to 1>><</link>>
+<</if>>
+<</capture>>
+
+<<unset $pharmacyItem>>
+<<unset $exposedPrev>>

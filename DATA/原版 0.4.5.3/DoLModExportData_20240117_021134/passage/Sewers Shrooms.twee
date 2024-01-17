@@ -1,0 +1,39 @@
+:: Sewers Shrooms []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersshrooms">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。这里的墙壁和地板都长满了真菌。有些蘑菇比你还大。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if !$weekly.sewers.antiqueDildo>>
+	一个奇怪的古董从几个蘑菇后面闪闪发光。你得挤过去才能够到。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if !$weekly.sewers.antiqueDildo>>
+		<<ind>><<link [[拿走古董|Sewers Dildo]]>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Sewers Mud">>
+		<<sewericon "mud">><span class="nextLink"><<link [[泥泞的隧道l (0:05)|Sewers Mud]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "mud">><<link [[泥泞的隧道 (0:05)|Sewers Mud]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

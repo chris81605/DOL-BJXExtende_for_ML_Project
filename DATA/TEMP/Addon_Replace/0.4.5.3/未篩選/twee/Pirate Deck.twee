@@ -1,0 +1,64 @@
+:: Pirate Deck []
+<<location "seapirates">><<set $outside to 1>><<effects>>
+
+你在海盗船的甲板上。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain" or $weather is "snow">>
+		寒冷的雨夹雪打在你的脸上。
+	<<elseif $weather is "clear">>
+		在月光下你能看得很清楚。
+	<<else>>
+		风有把你刮走的危险。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain" or $weather is "snow">>
+		汹涌的海浪在黎明的阳光下闪烁。
+	<<elseif $weather is "clear">>
+		黎明照亮了地平线。
+	<<else>>
+		海浪在黎明的阳光下闪闪发光。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain" or $weather is "snow">>
+		夕阳映出四面八方的暴雨。
+	<<elseif $weather is "clear">>
+		太阳在地平线上下落。
+	<<else>>
+		太阳落在地平线上，黑暗威胁着吞噬世界。
+	<</if>>
+<<else>>
+	<<if $weather is "rain" or $weather is "snow">>
+		大雨倾盆。
+	<<elseif $weather is "clear">>
+		太阳下山了。
+	<<else>>
+		风吹得你眯着眼。
+	<</if>>
+<</if>>
+<br><br>
+/*
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpirates>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<events_pirates_deck>>
+	<<else>>
+
+		<<if Time.dayState isnot "night">>
+			Captain Zephyr peers through a telescope.
+			<br>
+			<<link [[Approach|Pirate Zephyr]]>><</link>>
+			<br>
+		<</if>>
+		<br><br>
+
+		<<link [[Cabin (0:01)|Pirate Cabin]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+*/
+一个穿着白色太阳裙的女孩用毛巾擦拭甲板，她的棕色长发随着动作而不断跳动。"哎呀，"她看到你时说，"你不应该还在这儿的，让我来帮忙，呼！"她用扫帚敲了一下你的头。一阵天旋地转。
+<br><br>
+<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>

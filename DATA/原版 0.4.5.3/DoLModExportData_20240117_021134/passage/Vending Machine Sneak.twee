@@ -1,0 +1,17 @@
+:: Vending Machine Sneak []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $weekly.theft.vendingMachine[$changingRoomGender] to true>>
+<<set $tip to random(1, 3) * 2000>>
+<<set _condomsStolen to $daily.vendingMachine[$changingRoomGender] ? 0 : either(0, 0, 0, 0, 2, 2, 2, 4)>>
+你灵巧地打开自动售货机，数着里面的钱。里面有<<printmoney $tip>>。
+<<if _condomsStolen>>这里还有 _condomsStolen 个避孕套。<</if>>
+<br><br>
+<<if $skulduggery lt 500>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+<<link [[拿走|$currentToiletReturn]]>><<set $money += $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
+<br>
+<<link [[留下它们|$currentToiletReturn]]>><</link>>

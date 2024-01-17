@@ -1,0 +1,42 @@
+:: Pirate Rope Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	这对
+	<br><br>
+	<<tearful>>你缓了过来。
+	<br><br>
+    <<if random(1, 2) gte 2>>
+        “我记得我们说过要放<<phim>>下来。”<<person2>><<person>>道。
+        <br><br>
+        “我们在上头的时候说过很多蠢话。”那位 <<person1>><<person>>回应。
+        <br><br>
+
+        <<link [[恳求他们放你下来|Pirate Rope Rape Demand]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+        <br>
+        <<link [[保持沉默|Pirate Rope Rape Silent]]>><</link>>
+        <br>
+    <<else>>
+        那个<<person2>><<person>>用力拉了另一条绳子，整个绳络变得松动，让你能够自行挣脱出来。
+        <br><br>
+        <<unbind>>
+        <<clotheson>>
+        <<endcombat>>
+        <<link [[继续|Pirate Deck]]>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+
+<<elseif $enemyhealth lte 0>>
+	你的双腿活动范围有限，但你仍将绳子踢了起来，缠绕在<<person1>><<person>>和<<person2>><<person>>周围。他们拉开了乱成一团的绳子，释放自己的同时也释放了你。
+    <br><br>
+    旁观的船员觉得这非常有趣。<<ggrespect>><<pirate_status 3>>
+	<br><br>
+	<<tearful>>你爬了起来。
+	<br><br>
+    <<unbind>>
+	<<clotheson>>
+	<<endcombat>>
+
+    <<link [[继续|Pirate Deck]]>><<set $eventskip to 1>><</link>>
+    <br>
+<</if>>

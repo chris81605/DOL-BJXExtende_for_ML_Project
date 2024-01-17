@@ -1,0 +1,36 @@
+:: Catacombs Squeeze []
+<<effects>>
+
+你把手臂伸进缺口，四处摸索，直到找到可以抓住的东西，然后把自己拉进去。
+<br><br>
+<<if $physiquesize lte random(6000, 16000)>>
+	这需要一点扭动，<span class="green">但你设法把自己拉出来，</span>从瓦砾的另一边爬下来。<<small_text>>
+<<else>>
+	<span class="red">差距没有你想象的那么大。</span>你设法到达另一边，
+	<<if $worn.upper.name isnot "naked">>
+		<<set $worn.upper.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.lower.name isnot "naked">>
+		<<set $worn.lower.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.under_upper.name isnot "naked">>
+		<<set $worn.under_upper.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if $worn.under_lower.name isnot "naked">>
+		<<set $worn.under_lower.integrity -= 20>>
+		<<set _clothes_torn to true>>
+	<</if>>
+	<<if _clothes_torn is true>>
+		你听见了衣服撕裂的声音。
+		<<integritycheck>>
+		<<exposure>>
+	<<else>>
+		但受了几处擦伤。<<gpain>><<pain 6>><<gstress>><<stress 6>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<destination_catacombs skip>>

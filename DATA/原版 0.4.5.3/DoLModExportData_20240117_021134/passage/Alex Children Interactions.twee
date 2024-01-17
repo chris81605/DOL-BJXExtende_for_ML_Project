@@ -1,0 +1,52 @@
+:: Alex Children Interactions [widget]
+<<widget "alex_baby_interactions">>
+	<<npc "Alex">>
+	<<childSelectRandom "alex_cottage">>
+
+	<<switch random(1,5)>>
+		<<case 1>>
+			你看见艾利克斯正抱着<<childname>>待在田里，向<<childhim>>介绍着不同的植物和农作物。<<childname>>好奇地看着它们。<<lstress>><<stress -6>>
+			<br><br>
+			
+			<<link [[继续|Farm Work]]>><<endevent>><<set $daily.farmBabyInteraction to 1>><</link>>
+
+		<<case 2>>
+			你看见艾利克斯试图和<<childname>>玩耍，但<<childhe>>似乎被艾利克斯身旁飞舞的蝴蝶吸引了注意。
+			<br><br>
+			
+			<<link [[继续|Farm Work]]>><<endevent>><<set $daily.farmBabyInteraction to 1>><</link>>
+
+		<<case 3>>
+			你看见艾利克斯躺在田地里，怀里抱着安静熟睡的<<childname>>。
+			<br><br>
+			
+			<<link [[继续|Farm Work]]>><<endevent>><<set $daily.farmBabyInteraction to 1>><</link>>
+
+
+		<<case 4>>
+			你看见艾利克斯抱着<<childname>>站在鸡笼旁，向<<childhim>>介绍着笼子里的鸡。突然，一只鸡大声叫起来，吓得<<childname>>开始哇哇大哭。
+			<br><br>
+
+			<<link [[安抚 (0:01)|Alex Children Interactions Chicken]]>><<set $phase to 1>><<pass 1>><</link>>
+			<br>
+			<<link [[交给艾利克斯就行 (0:01)|Alex Children Interactions Chicken]]>><<set $phase to 2>><<pass 1>><</link>>
+
+		<<case 5>>
+			<<if C.npc.Alex.gender is "f">>
+				你看见艾利克斯抱着<<childname>>坐在树下，<<his>>的胸部露在外面。<<hes>>大概正在给<<childname>>喂奶。
+				<br><br>
+
+				<<link [[在一旁看着 (0:10)|Alex Children Interactions Breastfeed]]>><</link>>
+				<br>
+				<<link [[不去打扰艾利克斯 (0:01)|Farm Work]]>><<endevent>><<set $daily.farmBabyInteraction to 1>><</link>>
+
+			<<else>>
+				你看见艾利克斯试图和<<childname>>玩耍，但<<childhe>>似乎被艾利克斯身旁飞舞的蝴蝶吸引了注意。
+				<br><br>
+			
+				<<link [[继续|Farm Work]]>><<endevent>><<set $daily.farmBabyInteraction to 1>><</link>>
+			<</if>>
+		
+	<</switch>>
+
+<</widget>>

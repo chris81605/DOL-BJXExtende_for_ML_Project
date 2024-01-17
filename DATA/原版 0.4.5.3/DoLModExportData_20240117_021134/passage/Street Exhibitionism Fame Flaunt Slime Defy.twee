@@ -1,0 +1,76 @@
+:: Street Exhibitionism Fame Flaunt Slime Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你无视了史莱姆的指令，感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你试图无视史莱姆的指令，史莱姆试图控制你的意志，你感到一阵剧痛，这是史莱姆对你反抗的教训。不过，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉到它试图强迫你表演，<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+
+	<<streetExhibitionismFameShamed>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+	<<unset $earSlimeForcedExposure>>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你试图无视史莱姆的指令，<span class="red">但史莱姆压倒了你的意志。</span>它强迫你
+	<<switch $earSlimeForcedExposure>>
+		<<case "flaunt">>同意他们。
+		<<case "flashSkirt1" "flashSkirt2" "flashSkirt3">>把身体暴露给他们。
+		<<case "flashBottom1" "flashBottom2" "flashBottom3">>把屁股暴露给他们。
+		<<case "flashBreasts1" "flashBreasts2">>将胸部暴露给他们。
+	<</switch>>
+	<<ggwillpower>><<willpower 1>>
+	<br><br>
+
+	<<link [[继续|Street Exhibitionism Fame Flaunt]]>>
+		<<switch $earSlimeForcedExposure>>
+			<<case "flaunt">><<set $flaunt_type to 'words'>><<set $flaunt_part to 'none'>>
+			<<case "flashSkirt1" "flashSkirt2" "flashSkirt3">>
+				<<set $flaunt_type to 'skirt'>>
+				<<if $earSlimeForcedExposure.includes("1")>>
+					<<set $flaunt_part to 'genitals'>>
+				<<elseif $earSlimeForcedExposure.includes("2")>>
+					<<set $flaunt_part to 'chastity'>>
+				<<else>>
+					<<set $flaunt_part to 'lowerunderwear'>>
+				<</if>>
+			<<case "flashBottom1" "flashBottom2" "flashBottom3">>
+				<<set $flaunt_type to 'moon'>>
+				<<if $earSlimeForcedExposure.includes("1")>>
+					<<set $flaunt_part to 'bottom'>>
+				<<elseif $earSlimeForcedExposure.includes("2")>>
+					<<set $flaunt_part to 'chastity'>>
+				<<else>>
+					<<set $flaunt_part to 'lowerunderwear'>>
+				<</if>>
+			<<case "flashBreasts1" "flashBreasts2">>
+				<<set $flaunt_type to 'top'>>
+				<<if $earSlimeForcedExposure.includes("1")>>
+					<<set $flaunt_part to 'breasts'>>
+				<<else>>
+					<<set $flaunt_part to 'upperunderwear'>>
+				<</if>>
+		<</switch>><</link>>
+	<br>
+<<else>>
+	你试图无视史莱姆的指令，史莱姆试图控制你的意志<span class="green">但你抵抗住了影响。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<streetExhibitionismFameShamed>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+
+	<<unset $earSlimeForcedExposure>>
+<</if>>

@@ -1,0 +1,54 @@
+:: PillCollectionSecondDose []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+置警告标识于不顾，你过量服用了激素药物。
+<br>
+<<run window.onSecondDoseTakenSetVars()>>
+<<set _result to random(0, 100)>>
+<<if _result gte 80 + _risk>>
+	<<set $timePassed to 2>>尽管触犯了警告，看起来并没有发生什么。
+<<elseif _result gte 70 + _risk>>
+	<<set $timePassed to 2>>你感到<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>有些奇怪，但几分钟后就好转了。
+<<elseif _result gte 60 + _risk>>
+	<<set $timePassed to 10>>你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>感到一阵暖意，在大约十分钟后恢复了正常。
+	<<garousal>><<arousal 500>>
+<<elseif _result gte 40 + _risk>>
+	<<set $timePassed to 20>>你突然感到你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>冷热交加，在这股强烈的感觉消退之前，你无法专注于任何事情。
+	<<garousal>><<gpain>><<pain 3>><<arousal 2000>>
+<<elseif _result gte 5 + _risk>>
+	<<set $timePassed to 30>>
+	<<switch _pillAmountOfCategoriesUsed>>
+		<<case 1>>
+			你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>感到一阵尖锐的痛感。
+		<<case 2>>
+			你感觉到<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>传来一阵剧痛，随后你的<<print _secondaryPill.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>也传来一阵剧痛<<pain 12>><<set $timePassed += 30>>。
+		<<case 3>>
+			你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>感到一阵疼痛，紧接着，你的<<print ($pillCat is "breast" ? "胸部和臀部" : ($pillCat is "penis" ? "胸部和臀部" : "胸部和阴茎"))>>传来另一阵疼痛<<pain 12>><<set $timePassed += 30>>。
+	<</switch>>
+	<<gpain>><<pain 12>>
+	<br><br>
+	这需要一些时间，但你逐渐感到好转。
+<<else>>
+	<<set $timePassed to random(120, 420)>>
+	<<switch _pillAmountOfCategoriesUsed>>
+		<<case 1>>
+			你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>感到一阵剧痛。这阵剧痛完全没有停下的迹象，直至你昏倒在地。
+		<<case 2>>
+			你感觉到<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>传来一阵剧痛，随后你的<<print _secondaryPill.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>也传来一阵剧痛<<pain 12>><<set $timePassed += 30>>。疼痛一直在加剧，直至你因此而昏倒。
+		<<case 3>>
+			你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>感到一阵疼痛，紧接着，你的<<print ($pillCat is "breast" ? "阴茎和臀部" : ($pillCat is "penis" ? "胸部和臀部" : "胸部和阴茎"))>>传来另一阵疼痛<<pain 12>><<set $timePassed += 30>>。而且疼痛一直在加剧，直至你因此而昏迷。
+	<</switch>>
+	<<ggstress>><<gtrauma>><<gpain>>
+	<<set $pain += 400>><<pain 1>><<set $stress += 4000>><<trauma 100>>
+	<<set _passout to true>>
+<</if>>
+
+<<set _hoursPassed to Math.floor($timePassed / 60)>>
+<<set _minutesPassed to $timePassed - (_hoursPassed * 60)>>
+
+<br><br>
+<<if _passout is true>>
+	<<link [[继续|PillCollectionPassOut]]>><<pass $timePassed>><</link>>
+<<else>>
+	<<print '<<link [[继续 ('+_hoursPassed+':'+ (_minutesPassed lt 10 ? "0" : "") + _minutesPassed + ')|PillCollection]]>><<unset $pillCat>><<pass $timePassed>><<unset $timePassed>><</link>>'>>
+<</if>>

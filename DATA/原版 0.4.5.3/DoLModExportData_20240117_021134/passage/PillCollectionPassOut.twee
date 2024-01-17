@@ -1,0 +1,49 @@
+:: PillCollectionPassOut []
+<<set $outside to 0>><<effects>>
+<<set _pills to $sexStats.pills>>
+<<set $pain += 300>><<pain 1>>
+你在剧烈的疼痛中醒来，你想知道发生了什么事情。在缓了好一会之后，你轻轻地触摸了下你的<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>，随即你就因为无法忍受的疼痛而叫了出来。最后你还是选择躺平，直到你觉得身体没有什么问题后再起来。
+
+<br><br>
+你起床后看了看时间，发现距离你吃下那颗药丸<<if $timePassed gt 240>>已经过了很多<<else>>只过了数<</if>>小时。
+
+<<set _change to random(100, 500)>>
+<<if _change gte 200>>
+	你检查了一下<<print $pillCat.replace("breast","胸部").replace("bottom","臀部").replace("penis","肉棒")>>，认为<<print ($pillCat is "breast" ? "它们" : "它")>>可能发生了些变化。
+<</if>>
+<<if $pillCat is "breast">>
+	<<if _pills.lastTaken[$pillCat] is "growth">>
+		<<set $breastgrowthtimer -= _change>>
+	<<else>>
+		<<set $breastgrowthtimer += _change>>
+	<</if>>
+<<elseif $pillCat is "penis">>
+	<<if _pills.lastTaken[$pillCat] is "growth">>
+		<<set $penisgrowthtimer -= _change>>
+		<<set $sexStats.pills.pills["penis growth"].overdose += 5>>
+	<<else>>
+		<<set $penisgrowthtimer += _change>>
+		<<set $sexStats.pills.pills["penis reduction"].overdose += 5>>
+	<</if>>
+<<else>>
+	<<if _pills.lastTaken[$pillCat] is "growth">>
+		<<set $bottomgrowthtimer -= _change>>
+	<<else>>
+		<<set $bottomgrowthtimer += _change>>
+	<</if>>
+<</if>>
+<<if $mouthsensitivity lt 4>>
+	<<set $mouthsensitivity += 0.25>>
+<</if>>
+<<if $breastsensitivity lt 4>>
+	<<set $breastsensitivity += 0.25>>
+<</if>>
+<<if $bottomsensitivity lt 4>>
+	<<set $bottomsensitivity += 0.25>>
+<</if>>
+<<if $genitalsensitivity lt 4>>
+	<<set $genitalsensitivity += 0.25>>
+<</if>>
+<<clamp>>
+<br><br>
+<<link [[继续 (1:00)|PillCollection]]>><<unset $pillCat>><<pass 60>><<unset $timePassed>><</link>>

@@ -1,0 +1,78 @@
+:: Pirate Search Open []
+<<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+    锁咔嗒一声开了，你从里面找到了一些信用卡和珠宝。看样子这些都是某个海盗藏起来赃物，也许是为了不被其他人发现。拿着被盗的东西可能会给你带来麻烦。
+    <br><br>
+
+    <<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+        <<skulduggeryskilluse>>
+    <<else>>
+        <span class="blue">这太简单了，你什么都没学到。</span>
+        <br><br>
+    <</if>>
+
+    <<if $rng gte 81>>
+        对销赃人来说，它可能值<span class="gold">£80</span>。
+        <br><br>
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $blackmoney += 80>><<crimeUp 80 "thievery">><</link>><<crime "thievery">>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 61>>
+        对销赃人来说，它可能值<span class="gold">£60</span>。
+        <br><br>
+
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $blackmoney += 60>><<crimeUp 60 "thievery">><</link>><<crime "thievery">>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 41>>
+        对销赃人来说，它可能值<span class="gold">£40</span>。
+        <br><br>
+
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $blackmoney += 40>><<crimeUp 40 "thievery">><</link>><<crime "thievery">>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 21>>
+        对销赃人来说，它可能值<span class="gold">£20</span>。
+        <br><br>
+
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $blackmoney += 20>><<crimeUp 20 "thievery">><</link>><<crime "thievery">>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<else>>
+        仔细查看后，你没发现什么特别的东西。里面有个鼓囊囊的女士钱包，但包里装的都是化妆品。然而，你还是发现了5磅。
+        <br><br>
+
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $money += 500>><<crimeUp 5 "thievery">><</link>><<crime "thievery">>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <</if>>
+
+
+<<else>>
+
+	你听见锁发出咔嚓一声。现在你已经不能打开它了。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Pirate Bilge]]>><</link>>
+	<br>
+
+<</if>>

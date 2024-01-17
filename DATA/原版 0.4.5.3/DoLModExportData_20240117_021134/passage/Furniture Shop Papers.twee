@@ -1,0 +1,129 @@
+:: Furniture Shop Papers []
+<<run Furniture.in('bedroom')>>
+你走到糊墙用纸的角落。预制海报和墙纸的样品正在展示中。如果你额外付费，就可以印制一个定制图案。<i>定制图案是区分大小写的！</i>
+<br><br>
+
+<<set _availablePosters to {
+	"牛女孩"	: "cowgirl",
+	"猫咪"		: "cat",
+	"小狗"		: "puppy"
+}>>
+
+<<set _posterCost to Furniture.setPrice(Furniture.get('poster', true).cost)>>
+<<if Time.dayState is "night" and Time.hour isnot 21 and !$weekly.theft.furnitureShop>>
+	<<listbox "_chosenPoster" autoselect>>
+		<<optionsfrom _availablePosters>>
+	<</listbox>>
+	<<link [[盗窃|Furniture Shop Papers]]>>
+		<<run Furniture.set('poster', 'poster', {
+			name	: _chosenPoster,
+			nameCap	: _chosenPoster.toUpperFirst()
+		})>>
+		<<crimeUp 5 "petty">>
+	<</link>><<gcrime "petty">>
+	<br>
+<<elseif Time.dayState is "night">>
+	<span class="purple">你已经从商店里偷了东西。</span>你应该等一等再拿别的东西。
+	<br>
+<<elseif $money gte _posterCost>>
+	选择一个预制海报:
+	<br>
+	<<listbox "_chosenPoster" autoselect>>
+		<<optionsfrom _availablePosters>>
+	<</listbox>>
+	<<link [['购买 (£' + _posterCost / 100 + ')'|Furniture Shop Papers]]>>
+		<<set $money -= _posterCost>>
+		<<run Furniture.set('poster', 'poster', {
+			name	: _chosenPoster,
+			nameCap	: _chosenPoster.toUpperFirst()
+		})>>
+	<</link>>
+	<br><br>
+	<<if $money gte _posterCost * 2>>
+		要求定制海报图案:
+		<br>
+		<<textbox "_chosenPosterCustom" "">>
+		<<link [['购买 (£' + _posterCost / 50 + ')'|Furniture Shop Papers]]>>
+			<<set $money -= _posterCost * 2>>
+			<<if _chosenPosterCustom is "" or _chosenPosterCustom is undefined>><<set _chosenPosterCustom to "custom design">><</if>>
+			<<set _normalisedName to Util.escape(_chosenPosterCustom).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>>
+			<<run Furniture.set('poster', 'poster', {
+				name	: _normalisedName,
+				nameCap	: _normalisedName.toUpperFirst()
+			})>>
+		<</link>>
+		<br>
+	<</if>>
+
+	<br>
+<<else>>
+	你买不起海报。
+	<br>
+<</if>>
+<br><br>
+
+<<set _availableWallpapers to {
+	"藤蔓"			: "vines",
+	"触手"		: "tentacles",
+	"纯白"	: "plainwhite",
+	"波浪白"		: "wavywhite",
+	"牛女孩"		: "cowgirls",
+	"心"		: "hearts",
+	"树木"			: "trees",
+	"十字架"		: "crosses"
+}>>
+
+<<set _wallpaperCost to Furniture.setPrice(Furniture.get('wallpaper', true).cost)>>
+<<if Time.dayState is "night" and Time.hour isnot 21 and !$weekly.theft.furnitureShop>>
+	<<listbox "_chosenWallpaper" autoselect>>
+		<<optionsfrom _availableWallpapers>>
+	<</listbox>>
+	<br>
+	<<link [[盗窃|Furniture Shop Papers]]>>
+		<<run Furniture.set('wallpaper', 'wallpaper', {
+			name	: _chosenWallpaper,
+			nameCap	: _chosenWallpaper.toUpperFirst()
+		})>>
+		<<crimeUp 5 "petty">>
+	<</link>><<gcrime "petty">>
+	<br>
+<<elseif $money gte _wallpaperCost>>
+	选择一个预制墙纸:
+	<br>
+	<<listbox "_chosenWallpaper" autoselect>>
+		<<optionsfrom _availableWallpapers>>
+	<</listbox>>
+	<<link [['购买 (£' + _wallpaperCost / 100 + ')'|Furniture Shop Papers]]>>
+		<<set $money -= _wallpaperCost>>
+		<<run Furniture.set('wallpaper', 'wallpaper', {
+			name	: _chosenWallpaper,
+			nameCap	: _chosenWallpaper.toUpperFirst()
+		})>>
+	<</link>>
+	<br>
+	<br>
+	<<if $money gte _wallpaperCost * 2>>
+		要求定制墙纸图案:
+		<br>
+		<<textbox "_chosenWallpaperCustom" "">>
+		<<link [['购买 (£' + _wallpaperCost / 50 + ')'|Furniture Shop Papers]]>>
+			<<set $money -= _wallpaperCost * 2>>
+			<<if _chosenWallpaperCustom is "" or _chosenWallpaperCustom is undefined>><<set _chosenWallpaperCustom to "custom design">><</if>>
+			<<set _normalisedName to Util.escape(_chosenWallpaperCustom).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>>
+			<<run Furniture.set('wallpaper', 'wallpaper', {
+				name	: _normalisedName,
+				nameCap	: _normalisedName.toUpperFirst()
+			})>>
+		<</link>>
+		<br>
+		<br>
+	<</if>>
+	<br>
+<<else>>
+	你买不起新墙纸。
+	<br>
+	<br>
+<</if>>
+
+<<getouticon>><<link [[回去|Furniture Shop]]>><</link>>
+<br>

@@ -1,0 +1,44 @@
+:: Farm Shopping End []
+<<effects>>
+
+<<endevent>>
+<<npc Alex>><<person1>>
+你到达了农场，遇见了在院子里的艾利克斯。
+<br><br>
+
+<<if $exposed gte 1>>
+	<<He>>脸红了，别过头去。"你，你的——"<<he>>吞吞吐吐，"算了。"<<He>>接过了篮子。<<if $farm_naked isnot 1>><<towelup>><</if>>
+	<br><br>
+	<<if $farm_naked isnot 1>>
+		<<He>>进入农舍，拿出了一些毛巾。<<He>>没有看你，把毛巾扔给了你，然后转身回到了建筑里。
+		<br><br>
+	<</if>>
+
+	<<link [[把钱给艾利克斯|Farm Shopping Give]]>><<trauma -6>><<npcincr Alex dom -1>><<npcincr Alex love 1>><</link>><<ldom>><<glove>><<ltrauma>>
+	<br>
+	<<link [[留下钱|Farm Shopping Keep]]>><<set $money += $farm_work.shopping_money>><</link>>
+	<br>
+<<elseif $pain gte 60>>
+	"谢谢，"<<he>>接过篮子说道。<<He>>注意到了你的眼泪，犹豫了一下，又开口问道，"发生了什么？"
+	<br><br>
+
+	<<link [[崩溃 (0:20)|Farm Shopping Break]]>><<pass 20>><<pain -20>><<trauma -18>><<stress -18>><<npcincr Alex dom 5>><</link>><<ggdom>><<lllpain>><<lltrauma>><<llstress>>
+	<br>
+	<<link [[说你没事|Farm Shopping Okay]]>><<stress 6>><</link>><<gstress>>
+	<br>
+<<else>>
+	"谢谢，"<<he>>接过篮子说道。<<he>>转身走向农舍。
+	<br><br>
+
+	<<if $alexBooze>>
+		<<alexBoozeShopping>>
+
+	<<else>>
+		<<link [[把钱给艾利克斯|Farm Shopping Give]]>><<trauma -6>><<npcincr Alex dom -1>><<npcincr Alex love 1>><</link>><<ldom>><<glove>><<ltrauma>>
+		<br>
+		<<link [[留下钱|Farm Shopping Keep]]>><<set $money += $farm_work.shopping_money>><</link>>
+		<br>
+
+	<</if>>
+<</if>>
+<br><br>

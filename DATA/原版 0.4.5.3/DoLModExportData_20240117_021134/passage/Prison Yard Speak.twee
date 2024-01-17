@@ -1,0 +1,37 @@
+:: Prison Yard Speak []
+<<effects>>
+
+<<generate_veteran_guard 0>><<person1>>
+<<generate2>>
+<<if $prison.veteran gte 60 and !$NPCList[0].name_known>>
+	<<generatep3 0>>
+	你发现<<veteran_guard 0>>正在检查<<his>>掌中的东西。看到你走近时，<<he>>握住了手掌。<<He>>全神贯注，起初没有注意到你。<<he>>也没有注意到<<person2>><<person>>向<<person1>><<him>>后退。
+	<br><br>
+	碰撞是偶然的，但<<veteran_guard 0>>伸手拿起警棍，对<<person2>><<persons>>的腹部进行了惩罚性的一击。棍子从<<person1>><<his>>手中滑落，落在草地上。
+	<br><br>
+
+	<<link [[捡起来|Prison Yard Locket]]>><</link>>
+	<br>
+<<else>>
+	<<generate3>>
+	你走近了<<veteran_guard 0>>。
+
+	尽管<<his>>的举止有些粗鲁，但是<<He>>看起来很乐于聊天。
+	<br><br>
+
+	<<if $rng gte 81>>
+		一个<<person2>><<person>>尝试爬墙。<<veteran_guard 0 cap>><<person1>>看起来并不担心。"你这次会成功的。"<<he>>笑着说，"加油吧。"
+	<<elseif $rng gte 61>>
+		你跟着<<he>>在院子里走来走去的，只有在用<<person1>><<his>>的警棍殴打<<person2>><<person>>的时候会停下来。
+	<<elseif $rng gte 41>>
+		<<He>>斜眼看着<<person2>><<person>>做深蹲。
+	<<elseif $rng gte 21>>
+		"他们认为只要他们能爬过这堵墙我们就允许他们离开，"<<he>>笑着抬头看了看塔尖，"但是这并不取决于我们。"
+	<<else>>
+		<<He>>停下了并制止了<<person2>><<person>>和<<person3>><<person>>之间的斗殴。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Prison Yard]]>><<endevent>><</link>>
+	<br>
+<</if>>

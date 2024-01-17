@@ -1,0 +1,55 @@
+:: Eden Massage []
+<<effects>>
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+<<if !$daily.eden.salveUse and $salve gte 1 and Time.hour isnot 0>>
+	<<set $daily.eden.salveUse to 1>>
+	<<set $salve -= 1>>
+	你把一罐药膏带到壁炉前，在你的手上抹了一些。
+<</if>>
+<<switch $daily.eden.massage>>
+	<<case 0>>
+		你的注意力集中在伊甸的小腿上。小腿因劳累而绷紧着，你努力帮忙按摩，以释放肌肉的紧张。
+	<<case 1>>
+		伊甸的肩膀紧绷着，你决定把注意力集中在那里。
+	<<case 2>>
+		你慢慢往下按摩，你注意到<<his>>的肩胛骨和<<his>>的肩膀一样紧绷。你小心翼翼地按摩纾解肌肉的僵硬死结。
+	<<case 3>>
+		你用手推拿着伊甸粗壮的手臂上紧绷的肌肉。当你替<<his>>缓解每日积攒的压力时，你感到<<his>>的肌肉放松了下来。
+	<<case 4>>
+		沿着伊甸强壮的手臂向后移动，你来到<<his>>的上背部。在这里，你开始用指关节沿着粗糙的肌肉勤奋而坚定地进行按摩动作。
+	<<case 5>>
+		最后，你到达了伊甸下背部的核心部位。<<his>>的大部分举重力量来自这里，你简单又温柔地摸索了一下这个区域，发现正如预料的那样，<<his>>的众多肌肉都紧张得打结了。
+		<<his>>皮肤下的肌肉和<<he>>一样顽固，你发现为了解开它们，自己正在进行一场激烈的战斗。
+		你的手指深深地挖着，揉着，直到<<his>>的肌肉轻轻地松开，你听到伊甸在满足中发出一声低沉又放松的呻吟。
+	<<default>>
+		/* something went wrong, probably the var got unset in the middle of event, happens at midnight */
+		<<if currentSkillValue("handskill") gte 800>>即使你拥有惊人的技术，<</if>>结束之后，你仍然感觉双手很疲劳。<<tiredness 12>><<gtiredness>>
+		<<set $daily.eden.massage to 5>>
+<</switch>>
+<br><br>
+<<if Time.hour isnot 0>>
+	<<if $daily.eden.massage isnot 5>>
+		<<edenicon "salve">><<link [[继续按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage += 1>><</link>><<glove>><<gglust>>
+	<</if>>
+	<br>
+	<<if Time.days % 2 is 0>>
+		<<if $eden_shoot gte 1>>
+			<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+			<br>
+		<<else>>
+			<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<trauma -3>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[停止按摩|Cabin Eden Actions]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

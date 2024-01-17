@@ -1,0 +1,50 @@
+:: Tattoo Parlour []
+<<set $outside to 0>><<effects>><<set $lock to 0>>
+
+你在纹身店内。这里的纹身师可以把任何图案变成你身上的纹身。他们这里也有提供几款纹身设计。花费<<printmoney 50000>>。
+<br><br>
+
+<<if Time.dayState is "night">>
+	你独自待在黑暗中。
+	<br><br>
+<<elseif $exposed gte 1>>
+	你藏在橱柜里以保护自尊。
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	<<passoutshop>>
+<<else>>
+	<<if Time.hour is 21>>
+		现在要关门了。保安正把大家赶到外面。<<if $exposed gte 1>>你意识到如果保安发现你穿成这样，你会有多大风险时，你内心感到了恐慌。<</if>>
+		<br><br>
+
+		<<if $exposed lte 0>>
+			<<highicon>><<link [[出去|High Street]]>><</link>>
+			<br>
+		<<else>>
+			<<ind>><<link [["躲起来直到关门 (1:00)"|Tattoo Parlour]]>><<pass 1 hour>><</link>>
+		<</if>>
+	<<else>>
+
+		<<if Time.dayState is "night" and Time.hour isnot $closinghour and !$weekly.theft.tattooParlour>>
+			<<shopicon "register">><<link [[检查收银机|Tattoo Parlour Register]]>><</link>>
+			<br>
+		<</if>>
+
+		<<if $exposed lte 1 and Time.dayState isnot "night" and Time.hour isnot 21>>
+			<<if $money lt 50000>>
+				你没钱纹身。
+				<br>
+			<<else>>
+				<<shopicon "tattoo">><<link [[纹身|Tattoo Choice]]>><</link>>
+				<br>
+				<<shopicon "tattoo">><<link [[将身体涂鸦纹在身上|Tattoo Bodywriting Choice]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<br>
+		<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

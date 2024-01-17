@@ -1,0 +1,39 @@
+:: Hospital Paternity Test Done []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set _father to getPregnancyObject().fetus[0].father>>
+<<set _pregnancy to getPregnancyObject()>>
+
+你在你失去意识的同一个房间醒来，没有感到任何不同。
+<br><br>
+
+哈珀走进了房间。"鉴定成功了，"<<he>>说着递给你报告。
+<br><br>
+
+你看了看这张纸。你是母亲，
+
+<<if $paternityTestNPC is "Alex">>
+	<<run delete C.npc.Alex.pregnancy.sample>>
+
+	<<if _father is "Alex">>
+		<<set _pregnancy.potentialFathers to [{type: _pregnancy.type, source: _pregnancy.fetus[0].father}]>>
+		<<set C.npc.Alex.pregnancy.test to true>>
+		<span class="lewd">而艾利克斯是父亲。</span>
+
+	<<else>>
+		<<set _pregnancy.potentialFathers to _pregnancy.potentialFathers.filter(father => father.source isnot $paternityTestNPC)>>
+		<span class="red">但艾利克斯不是父亲</span>。
+
+	<</if>>
+
+<</if>>
+
+剩下的文档你都看不懂。
+<br><br>
+
+<<He>>检查了一下<<his>>的笔记板。"你可以立即离开了，保重。"<<He>>让你穿衣服离开了。
+<br><br>
+
+<<endevent>>
+
+<<link [[继续|Hospital Foyer]]>><<clotheson>><<unset $paternityTestNPC>><</link>>
+<br>

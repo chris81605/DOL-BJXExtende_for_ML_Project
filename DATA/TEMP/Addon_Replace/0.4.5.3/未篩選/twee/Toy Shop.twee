@@ -1,0 +1,68 @@
+:: Toy Shop []
+<<set $outside to 0>><<effects>><<set $lock to 0>>
+
+<<if $player.inventory.childrenToys is undefined>>
+	<<set $player.inventory.childrenToys to []>>
+<</if>>
+<<if !$storedChildrenToys>><<set $storedChildrenToys to {}>><</if>>
+
+你在玩具店里。从地板到天花板摆满了各种各样的玩具在你的面前，许多都在它们自己的盒子里，其他的则是准备好供人玩的。
+<<if $pregnancyStats.humanToysUnlocked>>
+	身在此处，你不禁想到了你的孩子。
+<</if>>
+<<if random(0,200) gt 199 and Time.dayState isnot "night">>
+	<br><br>
+	你发现有个小孩开着辆小汽车四处兜风。
+	<<if !$daily.seenVrelcar>>
+		<<set $daily.seenVrelcar to true>>
+		<<trauma -60>><<lltrauma>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if Time.dayState is "night">>
+	你独自待在黑暗中。
+	<br><br>
+<<elseif $exposed gte 1>>
+	你藏在橱柜里以保护自尊。
+	<br><br>
+<</if>>
+
+<<if $stress gte 10000>>
+	<<passoutshop>>
+<<else>>
+	<<if Time.hour is 21>>
+		现在要关门了。保安正把大家赶到外面。<<if $exposed gte 1>>你意识到如果保安发现你穿成这样，你会有多大风险时，你内心感到了恐慌。<</if>>
+		<br><br>
+
+		<<if $exposed lte 0>>
+			<<highicon>><<link [[出去|High Street]]>><</link>>
+			<br>
+		<<else>>
+			<<link [["躲到结束 (1:00)"|Toy Shop]]>><<pass 1 hour>><</link>>
+		<</if>>
+	<<else>>
+
+		<<if Time.dayState is "night" and Time.hour isnot $closinghour and !$weekly.theft.toyShop>>
+			<<shopicon "register">><<link [[检查收银机|Toy Shop Register]]>><</link>>
+			<br><br>
+		<</if>>
+
+		<<toySelection>>
+		<<if $exposed lte 1 and Time.dayState isnot "night" and Time.hour isnot 21>>
+			<<if $pregnancyStats.humanToysUnlocked>>
+				/*Baby Toys*/
+				<<icon "childToys/babyrattle.png">><<link [[婴儿摇铃|Toy Shop Item]]>><<set $selectedToy to clone(_toySelection["babyRattle"])>><</link>>
+				<br>
+				<<icon "childToys/toycar.png">><<link [[玩具汽车|Toy Shop Item]]>><<set $selectedToy to clone(_toySelection["toyCar"])>><</link>>
+				<br>
+				<<icon "childToys/dummy.png">><<link [[玩具娃娃|Toy Shop Item]]>><<set $selectedToy to clone(_toySelection["dummy"])>><</link>>
+				<br>
+				<<icon "childToys/toybear.png">><<link [[泰迪熊|Toy Shop Item]]>><<set $selectedToy to clone(_toySelection["teddyBear"])>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

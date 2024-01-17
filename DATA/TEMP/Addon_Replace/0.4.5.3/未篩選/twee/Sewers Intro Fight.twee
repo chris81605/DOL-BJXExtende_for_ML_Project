@@ -1,0 +1,39 @@
+:: Sewers Intro Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<set $timer to 10>>
+	"你竟敢拒绝我，”<<he>>咆哮道。
+	<br><br>
+	<<set $enemyhealthmax += 100>><<set $enemyhealth += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $timer is 9>>
+	"不要拒绝我！"
+<<elseif $timer is 7>>
+	"这是为了你好。"
+<<elseif $timer is 5>>
+	"其他学生会对你产生不好的影响。"
+<<elseif $timer is 3>>
+	"你以前明明就很听话！"
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Sewers Intro Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sewers Intro Fight]]>><</link>></span><<nexttext>>
+<</if>>

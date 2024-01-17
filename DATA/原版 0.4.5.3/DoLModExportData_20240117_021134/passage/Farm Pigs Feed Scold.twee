@@ -1,0 +1,28 @@
+:: Farm Pigs Feed Scold []
+<<effects>>
+
+<<if $tendingSuccess>>
+
+	"下去！"你训斥道，<span class="green">你的声音坚定而有力。</span><<farm_text pig>>放开了你，回到了饲料槽旁。<<farm_pigs 1>><<grespect>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<else>>
+
+	"下，下去！"你喊道，<span class="red">但你的声音在颤抖，</span>
+
+	<<set $worn.lower.integrity -= 50>>
+	<<if $worn.lower.integrity lte 0>>
+		<<farm_text pig>>把$worn.lower.cn_name_cap从你身上扯下，让你的<<undies>>暴露在空气中。<<farm_He pig>>跑进畜栏中，炫耀着自己的战利品。
+		<<integritycheck no_text>><<exposure>>
+	<<else>>
+		<<farm_text pig>>撕下了一大块布料。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

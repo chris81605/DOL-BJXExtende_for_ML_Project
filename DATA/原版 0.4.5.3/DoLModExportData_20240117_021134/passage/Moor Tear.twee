@@ -1,0 +1,49 @@
+:: Moor Tear []
+<<effects>>
+
+你从荆棘丛中挣脱出来。
+<<if $phase is 1>>
+	<<set $worn.upper.integrity -= 10>>
+	<<if $worn.upper.integrity lte 0>>
+		<span class="pink">你移动的时候，你的$worn.upper.cn_name_cap被撕裂了。</span>残破的布条还挂在荆棘上。
+		<br><br>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>>
+	<<else>>
+		你的$worn.upper.cn_name_cap被磨损得更厉害了。
+	<</if>>
+<<elseif $phase is 2>>
+	<<set $worn.under_upper.integrity -= 10>>
+	<<if $worn.under_upper.integrity lte 0>>
+		<span class="pink">你移动的时候，你的$worn.under_upper.cn_name_cap被撕裂了。</span>残破的布条还挂在荆棘上。
+		<br><br>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>>
+	<<else>>
+		你的$worn.under_upper.cn_name_cap被磨损得更厉害了。
+	<</if>>
+<<elseif $phase is 3>>
+	<<set $worn.lower.integrity -= 10>>
+	<<if $worn.lower.integrity lte 0>>
+		<span class="pink">你移动的时候，你的$worn.lower.cn_name_cap被撕裂了。</span>残破的布条还挂在荆棘上。
+		<br><br>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>>
+	<<else>>
+		你的$worn.lower.cn_name_cap已经磨损得很厉害了。
+	<</if>>
+<<else>>
+	<<set $worn.under_lower.integrity -= 10>>
+	<<if $worn.under_lower.integrity lte 0>>
+		<span class="pink">你移动的时候，你的$worn.under_lower.cn_name_cap被撕裂了。</span>残破的布条还挂在荆棘上。
+		<br><br>
+		<<integritycheck no_text>><<exposure>>
+		<<covered>>
+	<<else>>
+		你的$worn.under_lower.cn_name_cap被磨损得更厉害了。
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+<br>

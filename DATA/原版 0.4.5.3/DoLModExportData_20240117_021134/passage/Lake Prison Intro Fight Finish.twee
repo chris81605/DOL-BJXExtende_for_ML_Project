@@ -1,0 +1,103 @@
+:: Lake Prison Intro Fight Finish []
+<<effects>>
+<<if !$wraithCount>>
+	<<set $wraithCount to 0>>
+<</if>>
+<<if !$wraithMax>>
+	<<set $wraithCount to 0>>
+	<<set $wraithMax to 2>>
+	<<if C.npc["Ivory Wraith"].lust gt 10>>
+		<<set $wraithMax++>>
+	<</if>>
+	<<if $tentacledisable is "t">>
+		<<set $wraithMax -->>
+	<</if>>
+<</if>>
+<<if $wraith.type is "man" and $enemyhealth lte 0>>
+	当<<he>>踉踉跄跄地后退时，<<person>>震惊地低头看着你。
+	<<if $wraith.gen is "abomination">>
+		那些触手无力地掉落在地上，化为一股粉色的雾气。
+	<<elseif $wraith.gen is "arms">>
+		<<His>>多余的手臂向后折叠。
+	<</if>>
+	一声可怕的尖叫划破空气，让你跪下。祂掐住你的脖子，将你提了起来。
+	<<if $worn.neck.cursed is 1>>
+		一道光芒闪出，伴随着深沉的呻吟声，你的$worn.neck.cn_name_cap消失了。
+		<<set $worn.neck.type.push("broken")>>
+		<<neckruined>>
+	<</if>>
+	<br><br>
+	你被拖着推入了菌群中心旁边的笼子里。那个笼子没有门。身影变得更加透明，并开始消失。"<span class="wraith">我要先恢复一下，你等着吧。</span>"祂在一道光中消失了。
+	<br><br>
+	<<tearful>>你环顾四周，试图确定祂是不是真的离开了。
+	<<set $wraith.defeated++>>
+	<<set $wraithPrison.timer to 120>>
+	<<set $wraithPrison.state to "recovering">>
+	<<clotheson>>
+	<<endcombat>>
+	<<endWraith>>
+	<br><br>
+	<<link [[继续|Lake Ruin Prison]]>><<unset $wraithParasite>><</link>>
+	<br>
+<<elseif $enemyarousal gte $enemyarousalmax or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax or $wraithCount gte 5>>
+		<<kissWraith>>
+		<br><br>
+		<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$wraithParasite and !$noEarSlime>>
+			<<set $wraithParasite to true>>
+			祂把史莱姆放到你的
+			<<if $parasite.left_ear.name is undefined>>
+				左耳里，<span class="lewd">它在里面扭动着。</span>
+				<<parasite left_ear slime>>
+			<<elseif $parasite.right_ear.name is undefined>>
+				右耳里，<span class="lewd">它在里面扭动着。</span>
+				<<parasite right_ear slime>>
+			<</if>>
+			<br><br>
+			你在人影的控制下浑身颤抖。你感到异常兴奋，特别是祂像这样压在你身上。起初只是一点点的感觉。然后它越来越强烈，直到<span class="lewd">一种压倒性的情欲笼罩了你。</span>
+			<br><br>
+			<<if !$earSlime.corruption>>
+				<i>在"属性"选项栏中出现了一个新的堕落条。</i>
+				<br><br>
+			<</if>>
+			祂对你的控制松开了。<<if $wraith.state is "haunt">>你喘不过气来，<</if>>你听到周围的耳语。<span class="lewd">内部的某些东西迫使你把自己献给苍白的人影。</span>你以某种方式知道顺从这种冲动会感觉更好，而违抗会很痛苦。
+			<br><br>
+		<</if>>
+		祂突然把你提了起来，开始带着你走。你无力抗拒。
+		你被关进了一个破旧的笼子里，就在菌群中心的旁边。那个笼子没有门。
+		<<if $wraith.state is "haunt">>
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">我将打开你的思想，然后我会向你展示。然后你会。归还。它。回来。</span>"
+			<<else>>
+				"<span class="wraith">再次开始崩溃了，难道不是很美好吗？</span>"
+			<</if>>
+		<<elseif $wraith.state is "despair">>
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">帮我找到它。看看我所看到的。留下来。</span>"
+			<<else>>
+				"<span class="wraith">再次。再次。崩溃。堕落到何方？</span>"
+			<</if>>			
+		<</if>>
+		<<if $worn.neck.cursed is 1>>
+			祂把手放在你的$worn.neck.cn_name_cap上。一道光芒闪过，随着深沉的呻吟声，金属消失了。
+			<<set $worn.neck.type.push("broken")>>
+			<<neckruined>>
+		<</if>>
+		祂从牢房里飘出去，不见了。<<tearful>>你环顾四周，试图想出一种逃脱的方法。人影已经不在这里了。
+		<<set $wraithPrison.timer to 60>>
+		<<set $wraithPrison.state to "recovering">>
+		<<clotheson>>
+		<<endcombat>>
+		<<endWraith>>
+		<br><br>
+		<<link [[继续|Lake Ruin Prison]]>><<unset $wraithParasite>><</link>>
+		<br>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[继续|Lake Prison Intro Fight]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

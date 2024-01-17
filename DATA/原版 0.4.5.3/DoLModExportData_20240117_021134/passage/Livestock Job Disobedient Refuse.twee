@@ -1,0 +1,26 @@
+:: Livestock Job Disobedient Refuse []
+<<effects>>
+
+一个农场工人走上前来，
+
+<<if currentSkillValue('danceskill') gte 1000>>
+	试图用鱼竿的末端戳你。你躲开它，鱼竿又戳了过来。在几次袭击之后你被戳中了，吓得你跳了起来。
+<<elseif currentSkillValue('danceskill') gte 600>>
+	试图用鱼竿的末端戳你。你躲开它，但是第二次戳过来的时候你被戳中了，你吓得跳了起来。
+<<else>>
+	然后用鱼竿的末端戳你，吓得你跳了起来。
+<</if>>
+
+<<if $livestock_muzzle is 1>>
+	雷米冲上前，把皮带夹在你的项圈上。<<He>>还<span class="purple">在你从休克中恢复过来之前，在你的脸上系上了一个口套。</span><<facewear 23>><<He>>试图把你拉在<<him>>后面。
+<<else>>
+	雷米冲上前，把皮带夹在你的项圈上。<<He>>试图把你拉在<<him>>后面。
+<</if>>
+<br><br>
+
+<<if $leftarm isnot "bound" or $rightarm isnot "bound">>
+	<<link [[扇耳光|Livestock Job Disobedient Slap]]>><<npcincr Remy love -1>><<npcincr Remy dom -1>><<pain 6>><<trauma -6>><<stress -6>><</link>><<gpain>><<ltrauma>><<lstress>>
+	<br>
+<</if>>
+<<link [[乖乖过去|Livestock Job]]>><<npcincr Remy dom 1>><</link>>
+<br>

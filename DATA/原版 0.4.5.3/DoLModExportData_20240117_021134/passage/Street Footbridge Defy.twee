@@ -1,0 +1,33 @@
+:: Street Footbridge Defy []
+<<effects>>
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你从桥边走开，感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你从桥边走开。然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>它试图强迫你转身返回桥边，<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 2>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 4>>
+	<</if>>
+	史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强迫你转身走过桥。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+	<<link [[继续|Street Footbridge Cross]]>><</link>>
+	<br>
+
+<<else>>
+	史莱姆试图维持对你的控制，<span class="green">但你的反抗成功了，</span>你从桥边走开了。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+<</if>>

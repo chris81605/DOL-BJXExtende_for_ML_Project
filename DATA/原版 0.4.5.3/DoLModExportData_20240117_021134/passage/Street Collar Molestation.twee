@@ -1,0 +1,32 @@
+:: Street Collar Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<if $phase is 1>>
+		<!-- save the dog npc for after combat and shift the human npcs down one index -->
+		<<saveNPC 0 street_collar_dog>>
+		<<set $NPCList[0] to clone($NPCList[1])>>
+		<<set $NPCList[1] to clone($NPCList[2])>>
+		<<clearsinglenpc 2>>
+		<<maninit>>
+		他们看起来十分吃惊，被你的拒绝激怒了。"你要知道你现在的位置，"<<person2>><<person>>攥起拳头说着。
+		<br><br>
+		<<set $enemyanger += 100>>
+	<<else>>
+		<<maninit>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend or ($phase is 1 and $pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Street Collar Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Collar Molestation]]>><</link>></span><<nexttext>>
+<</if>>

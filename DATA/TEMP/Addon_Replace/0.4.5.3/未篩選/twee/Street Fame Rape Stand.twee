@@ -1,0 +1,120 @@
+:: Street Fame Rape Stand []
+<<set $outside to 1>><<effects>><<rng>>
+那个人影越来越近了。
+<<if $fame.rape gte ($rng * 2) and $rng gte 15>>
+	<<person1>><<He>>盯着你的脸看了一会儿，然后向着你的身后点了点头，"是<<phim>>，"<<he>>说道。
+	<br><br>
+	另一个人从后面抓住你的肩膀。
+	<br><br>
+	<<link [[继续|Street Fame Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<set _possibleFames to []>>
+	<<if $fame.scrap gte ($rng * 5)>>
+		<<set _possibleFames.push("scrap")>>
+	<</if>>
+	<<if $fame.good gte ($rng * 5)>>
+		<<set _possibleFames.push("good")>>
+	<</if>>
+	<<if $fame.business gte ($rng * 5)>>
+		<<set _possibleFames.push("business")>>
+	<</if>>
+	<<if $fame.social gte ($rng * 5)>>
+		<<set _possibleFames.push("social")>>
+	<</if>>
+	<<if $fame.model gte ($rng * 5)>>
+		<<set _possibleFames.push("model")>>
+	<</if>>
+	<<if _possibleFames.length is 0>>
+		<<set _fameSelected to "none">>
+	<<else>>
+		<<set _fameSelected to _possibleFames.random()>>
+	<</if>>
+	<<if _fameSelected is "none">>
+		<<person1>><<He>>盯着你的脸看了一会儿，对着你的身后摇了摇头。"不是<<phim>>，"<<he>>在说完之后与另一个人直接离开了。
+		<<gstress>><<stress 6>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		你原地站住，并闭上眼睛做最坏的打算。但这两人并没有更进一步。
+		"你不就是那个<<girl>>吗？
+		<<switch _fameSelected>>
+			<<case "scrap">>
+				<span class = "green">那个猛踢强奸犯屁股的人？</span>" 那个<<person1>><<person>>一边说着一边摘下<<he>>的头罩。
+				<br><br>
+				<<if $speech_attitude is "meek">>
+					"是，是吧，当我被欺负的时候我也是会反击的，"你低声嘟囔道。
+				<<elseif $speech_attitude is "bratty">>
+					"听起来像是我会做的事，" 你傲慢地说道。
+				<<else>>
+					"摆在我面前的选择没有那么多，我别无选择。”你说道。
+				<</if>>
+				<br><br>
+				"我知道！"那个<<person2>><<person>>从你后面把手放在了你肩膀上。
+				这二人向你请教自卫技巧，他们认真倾听你的话语，并愿意吸收你的每一句智慧之言。你说完后，他们感谢你为他们上了宝贵的一课，与你握手告别。
+				<br><br>
+			<<case "good">>
+				<span class = "green">那个一直在帮助大家的那个人？</span>" 那个<<person1>><<person>>一边说着一边摘下<<he>>的头罩。
+				<br><br>
+				<<if $speech_attitude is "meek">>
+					"我，额，如果你需要帮助的话，我也会帮你的，"你小声嘀咕道。
+				<<elseif $speech_attitude is "bratty">>
+					"那又怎样？帮人也犯法么？"你不屑地说道。
+				<<else>>
+					"我只是做了我力所能及的事情，" 你回答道。
+				<</if>>
+				<br><br>
+				"我知道！"那个<<person2>><<person>>从你后面把手放在了你肩膀上。
+				这二人告诉你，你曾经帮助过他们的一位朋友。在做了这么多善事之后，你甚至不记得做过这件事，但也不排除可能是你忘记了。在他们感谢你所做的一切后便与你握手告别了。
+				<br><br>
+			<<case "business">>
+				<span class = "green">那个最有抱负的企业家？</span>" 那个<<person1>><<person>>一边说着一边摘下<<he>>的头罩。
+				<br><br>
+				<<if $speech_attitude is "meek">>
+					"用这个词来称呼我这样的人太过了，"你小声回应道。
+				<<elseif $speech_attitude is "bratty">>
+					"没错，就是我，"你骄傲地说道。
+				<<else>>
+					"这太夸张了，我想我还不能自称为企业家，" 你说。
+				<</if>>
+				<br><br>
+				"我知道！"那个<<person2>><<person>>从你后面把手放在了你肩膀上。
+				这二人向你提供如何在你的业务领域获得更高利润的建议，虽然他们说的大部分都是常识，但你还是礼貌地听他们说完。在说完之后，他们祝你好运并与你握手告别。
+				<br><br>
+			<<case "social">>
+				<span class = "green">那个在各个聚会上的名流？</span>" 那个<<person1>><<person>>一边说着一边摘下<<he>>的头罩。
+				<br><br>
+				<<if $speech_attitude is "meek">>
+					"我……也许我拜访过一两个聚会，"你嘀咕道。
+				<<elseif $speech_attitude is "bratty">>
+					"对不起，我现在不想被拍照，"你高傲地说道。
+				<<else>>
+					"我确实时不时会去聚会看看，"你说道。
+				<</if>>
+				<br><br>
+				"我知道！"那个<<person2>><<person>>从你后面把手放在了你肩膀上。
+				这二人与你扯起了上流社会云云，虽然你记得其中几个人的名字，但由于你从未在意过幕后的政治与权谋，所以你基本上就是在点头微笑。在聊完之后，这二人与你握手告别。
+				<br><br>
+			<<case "model">>
+				<span class = "green">那个在<<if $fame.model gte 1000>>杂志广告<<else>>城中的广告海报<</if>>上的模特？</span>"那个<<person1>><<person>>一边说着一边摘下<<he>>的头罩。
+				<br><br>
+				<<if $speech_attitude is "meek">>
+					"那……也，也许是的……"你盯着脚嘟囔着。
+				<<elseif $speech_attitude is "bratty">>
+					"当然，我可上镜了。"你略微有点骄傲地说道。
+				<<else>>
+					"我想，之前确实拍过几张照片，"你说道。
+				<</if>>
+				<br><br>
+				"我知道！"那个<<person2>><<person>>从你后面把手放在了你肩膀上。
+				这二人欣赏着你的外表，向你请教怎样才能成为模特。他们专心地听着你能给的少数几个建议，愿意吸收你的每一句智慧之言。你结束后，他们感谢你为他们上了宝贵的一课，与你握手告别。
+				<br><br>
+			<<default>>
+		<</switch>>
+		你感到释然和高兴。似乎你的名声比你想象得要好。<<stress -6>><<trauma -12>><<lstress>><<ltrauma>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</if>>

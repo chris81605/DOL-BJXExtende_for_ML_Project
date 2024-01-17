@@ -1,0 +1,25 @@
+:: Moor Tentacles []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+
+	<<tentaclestart 6 15 "root" "vine" true>>
+
+<</if>>
+
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[继续|Moor Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Moor Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

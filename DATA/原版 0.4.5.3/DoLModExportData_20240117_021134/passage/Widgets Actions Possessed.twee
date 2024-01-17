@@ -1,0 +1,137 @@
+:: Widgets Actions Possessed [widget]
+<<widget "actionspossessed">>
+	<<if !$leftactiondefault>>
+		<<set $leftactiondefault to "leftacceptW">>
+	<</if>>
+	<<if !$rightactiondefault>>
+		<<set $rightactiondefault to "rightacceptW">>
+	<</if>>
+	<<if !$feetactiondefault>>
+		<<set $feetactiondefault to "feetacceptW">>
+	<</if>>
+	<<if !$mouthactiondefault>>
+		<<set $mouthactiondefault to "mouthacceptW">>
+	<</if>>
+	<<if $leftarm is 0>>
+		你的左臂自由了，<span class="pink">但无法控制自如。</span>
+		<br>
+		<<if $leftactiondefault is "leftacceptW">>
+			| <label><span class="wraith">接受</span> <<radiobutton "$leftaction" "leftacceptW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">接受</span> <<radiobutton "$leftaction" "leftacceptW">></label>
+		<</if>>
+		<<if $leftactiondefault is "leftresistW">>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$leftaction" "leftresistW" checked>></label>
+		<<else>>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$leftaction" "leftresistW">></label>
+		<</if>>
+		<br>
+	<<elseif $leftarm is "grappled">>
+		你的左臂在他们的控制下不由自主地扭动。
+		<br>
+		<<set $leftactiondefault to ["leftacceptW","leftstruggleW"].includes($leftactiondefault) ? "leftstruggleW" : "leftstillW">>
+		<<if $leftactiondefault is "leftstruggleW">>
+			| <label><span class="wraith">挣扎</span> <<radiobutton "$leftaction" "leftstruggleW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">挣扎</span> <<radiobutton "$leftaction" "leftstruggleW">></label>
+		<</if>>
+		<<if $leftactiondefault is "leftstillW">>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$leftaction" "leftstillW" checked>></label>
+		<<else>>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$leftaction" "leftstillW">></label>
+		<</if>>
+		<br>
+	<<elseif $leftarm is "bound">>
+		你的右臂在他们的掌握下，不由自主地扭动着。
+		<br>
+	<</if>>
+
+	<<if $rightarm is 0>>
+		<br>
+		你的右臂是自由的，<span class="pink">但无法控制自如。</span>
+		<br>
+		<<if $rightactiondefault is "rightacceptW">>
+			| <label><span class="wraith">接受</span> <<radiobutton "$rightaction" "rightacceptW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">接受</span> <<radiobutton "$rightaction" "rightacceptW">></label>
+		<</if>>
+		<<if $rightactiondefault is "rightresistW">>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$rightaction" "rightresistW" checked>></label>
+		<<else>>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$rightaction" "rightresistW">></label>
+		<</if>>
+		<br>
+	<<elseif $rightarm is "grappled">>
+		<br>
+		你的右臂在他们的掌握下，不由自主地扭动着。
+		<br>
+		<<set $rightactiondefault to ["rightacceptW","rightstruggleW"].includes($rightactiondefault) ? "rightstruggleW" : "rightstillW">>
+		<<if $rightactiondefault is "rightstruggleW">>
+			| <label><span class="wraith">挣扎</span> <<radiobutton "$rightaction" "rightstruggleW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">挣扎</span> <<radiobutton "$rightaction" "rightstruggleW">></label>
+		<</if>>
+		<<if $rightactiondefault is "rightstillW">>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$rightaction" "rightstillW" checked>></label>
+		<<else>>
+			| <label><span class="brat">将其固定不动</span> <<radiobutton "$rightaction" "rightstillW">></label>
+		<</if>>
+		<br>
+	<<elseif $rightarm is "bound">>
+		<br>
+		你的右臂不由自主地在其范围内扭动。
+		<br>
+	<</if>>
+
+	<<if $feetuse is 0>>
+		<br>
+		你的腿自由了，<span class="pink">但是你没有知觉</span>。
+		<br>
+		<<if $feetactiondefault is "feetacceptW">>
+			| <label><span class="wraith">接受</span> <<radiobutton "$feetaction" "feetacceptW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">接受</span> <<radiobutton "$feetaction" "feetacceptW">></label>
+		<</if>>
+		<<if $feetactiondefault is "feetresistW">>
+			| <label><span class="brat">让他们保持不动</span> <<radiobutton "$feetaction" "feetresistW" checked>></label>
+		<<else>>
+			| <label><span class="brat">让他们保持不动</span> <<radiobutton "$feetaction" "feetresistW">></label>
+		<</if>>
+		<br>
+	<<elseif $feetuse is "bound">>
+		<br>
+		你的脚在他们的掌握下，不由自主地扭动着。
+		<br>
+	<</if>>
+
+	<<if $mouthuse is 0>>
+		<br>
+		你的嘴自由了，<span class="pink">但是不熟悉的话从你的嘴里说出来</span>。
+		<br>
+		<<if $mouthactiondefault is "mouthacceptW">>
+			| <label><span class="wraith">接受</span> <<radiobutton "$mouthaction" "mouthacceptW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">接受</span> <<radiobutton "$mouthaction" "mouthacceptW">></label>
+		<</if>>
+		<<if $mouthactiondefault is "mouthresistW">>
+			| <label><span class="brat">闭上你的嘴</span> <<radiobutton "$mouthaction" "mouthresistW" checked>></label>
+		<<else>>
+			| <label><span class="brat">闭上你的嘴</span> <<radiobutton "$mouthaction" "mouthresistW">></label>
+		<</if>>
+	<<elseif $mouthuse is "lefthand" or $mouthuse is "righthand">>
+		<br>
+		你的嘴被堵住了，堵住了你心中涌出的话语。
+		<br>
+		<<set $mouthactiondefault to ["mouthacceptW","handbiteW"].includes($mouthactiondefault) ? "handbiteW" : "handcloseW">>
+		<<if $mouthactiondefault is "handbiteW">>
+			| <label><span class="wraith">咬</span> <<radiobutton "$mouthaction" "handbiteW" checked>></label>
+		<<else>>
+			| <label><span class="wraith">咬</span> <<radiobutton "$mouthaction" "handbiteW">></label>
+		<</if>>
+		<<if $mouthactiondefault is "handcloseW">>
+			| <label><span class="brat">闭上你的嘴</span> <<radiobutton "$mouthaction" "handcloseW" checked>></label>
+		<<else>>
+			| <label><span class="brat">闭上你的嘴</span> <<radiobutton "$mouthaction" "handcloseW">></label>
+		<</if>>
+	<</if>>
+<</widget>>

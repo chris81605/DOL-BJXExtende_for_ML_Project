@@ -1,0 +1,69 @@
+:: Photo Model 2 []
+<<effects>>
+<<endevent>>
+你穿上了那件$worn.upper.cn_name_cap，然后从屏风后面走了出来。
+<<if random(1, 2) is 2 and $fame.model gte 100>>
+	<!-- Audience generation -->
+	<<set _maxAudience to Math.clamp(Math.floor($fame.model / 100), 0, 6)>> <!-- 1 for 100, 6 for 600 or higher, etc -->
+	<<if $photo.audienceSize lt _maxAudience and $photo.timesWithThisAudienceSize gte 2>>
+		<<set $photo.audienceSize += 1>>
+		<<set $photo.timesWithThisAudienceSize to 0>>
+	<</if>>
+	<!-- Incrase audience size if we've had the previous audience size AT LEAST twice (and we've enough fame) -->
+	<<set $photo.timesWithThisAudienceSize += 1>> <!-- Increase the number of times we've had this audience size -->
+	<<for _audienceGenIndex to 1; _audienceGenIndex lte $photo.audienceSize; _audienceGenIndex++>>
+		<<generateNPC _audienceGenIndex>>
+	<</for>>
+	<!-- Generate the needed number of audience members, and texts for them -->
+
+	<!-- Adding new lines is as simple as inputting it into the right group below. End your line with a , for better diffs handling -->
+	<!-- Lines below will be picked from at random per audience encounter -->
+	<<set _audienceText to [
+		[
+			"" /* audience size zero, no text */
+		], [ /* Audience size 1 strings */
+			"有一个<<person1>><<person>>坐在工作室的一侧，<<He>>看见你之后朝你笑了笑。",
+			"一个<<person1>><<person>>坐在工作室的一侧，<<His>>用一种略带惊悚的笑容盯着你看。",
+		], [ /* Audience size 2 strings */
+			"一个<<person2>><<person>>和<<person1>><<person>>正坐在工作室的一侧聊着天，在看见你之后，二人停下了对话，并毫不避讳地在你身上瞟来瞟去。",
+			"一个<<person2>><<person>>和<<person1>><<person>>正坐在工作室的另一侧看着你聊着天，你注意到那个<<person>>小声笑了起来。",
+		], [ /* Audience size 3 strings */
+			"<<EnumeratedGroup>>正坐在一边看着你，那个坐在正中间的<<person1>><<person>>咧嘴笑了起来。",
+			"<<EnumeratedGroup>>正坐在一边看着你，其中一个<<person1>><<person>>当着众人的面对你抛了个媚眼。",
+		], [ /* Audience size 4 strings */
+			"<<EnumeratedGroup>>正坐在一边看着你，其中一个<<person1>><<person>>一边梳理着<<his>>的头发一边盯着你的<<bottom>>。",
+			"<<EnumeratedGroup>>正坐在一边看着你，而其中一个<<person1>><<person>>正在啜饮一杯葡萄酒。",
+		], [ /* Audience size 5 strings */
+			"<<EnumeratedGroup>>正坐在一边聊天，其中的一个<<person1>><<person>>一边聊天一边盯着你看。",
+			"<<EnumeratedGroup>>正坐在一旁聊天，其中的一个<<person1>><<person>>无视<<his>>旁边的人，死死地盯着你看。",
+		], [ /* Audience size 6 strings */
+			"<<EnumeratedGroup>>正坐在一旁看着你的拍摄，其中一个<<person1>><<person>>虽然正与<<person1>><<him>>旁边的那个<<person2>><<person>>聊天，但其目光一直聚焦在你的身上。",
+			"<<EnumeratedGroup>>正坐在一边看着你，其中一个<<person1>><<person>>舔了舔<<his>>的嘴唇。",
+		],
+	].select($photo.audienceSize).random()>>
+
+	<<print _audienceText>>
+
+	<<if $photo.audienceSize is 1 and $photo.timesWithThisAudienceSize is 1>>
+		<!-- First time we've seen an audience -->
+		<br><br>
+		尼奇在调整三角架相机时抬起头来说道："在拍摄时有时会有业内其他人观看，"<<nnpc_he "Niki">>接着说道："这很正常，你每次都可以得到每人<span class="gold">£50</span>的额外收入。当你变得更出名时，人们就会有更多的兴趣。"
+	<</if>>
+
+	<br><br>
+	<<link [[允许观众存在|Photo Model 3]]>><<set $photo.money += ( 50 * $photo.audienceSize )>><</link>>
+	<br>
+	<<link [[拒绝有观众观看|Photo Model Refuse]]>><<npcincr Niki love -1>><</link>><<llove "Niki">>
+	<br>
+<<else>>
+	你看见尼奇正在调整一个三角架相机，"差不多可以了，"<<nnpc_He "Niki">>瞥了一眼你的穿着，"好了。"<<nnpc_He "Niki">>在说完之后离开三脚架相机，转而从桌子上拿起了另一台相机。
+	<br><br>
+
+	<<nnpc_He "Niki">>将相机准备好，并要求你摆出一些特定的姿势。
+	<br><br>
+
+	<<link [[遵守动作要求|Photo Model 3]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[加入自己的风格|Photo Model 3]]>><<set $phase to 1>><</link>>
+	<br>
+<</if>>

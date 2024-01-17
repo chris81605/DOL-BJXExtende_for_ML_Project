@@ -1,0 +1,79 @@
+:: Dance []
+<<effects>>
+
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<danceinit>>
+	<<set $dancing to 1>>
+	<<set $audience to 25>>
+	<<set $venuemod to 1>>
+	<<set $dancelocation to "party">>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1))>>
+	你不能在穿着如此暴露的情况下跳舞。
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+	<<unset $corruptionDancing>>
+	<<link [[继续|Brothel]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is "private">>
+	<<if $corruptionDancing is 2>>
+		史莱姆希望你和更多人共享快乐的时光。
+	<<elseif $promiscuity gte 35>>
+		<<link [[包间|Brothel Private]]>><<set $phase to 0>><<set $enemyno to 1>><<set $enemynomax to 1>><<unset $corruptionDancing>><</link>><<promiscuous3>>
+	<<elseif $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[包间|Brothel Private]]>><<set $phase to 0>><<set $enemyno to 1>><<set $enemynomax to 1>><<unset $corruptionDancing>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is "rape">>
+	<<link [[继续|Brothel Dance Rape]]>><<set $molestationstart to 1>><<unset $corruptionDancing>><</link>>
+<<elseif $danceevent is "leighton">>
+	<<if $corruptionDancing is 2>>
+		史莱姆希望你和更多人共享快乐的时光。
+	<<elseif $promiscuity gte 35>>
+		<<link [[包间|Leighton Private]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is "robin">>
+	<<if $corruptionDancing is 2>>
+		史莱姆希望你和更多人共享快乐的时光。
+	<<else>>
+		<<link [[包间|Robin Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+
+<<elseif $danceevent is 0>>
+	<<if $corruptionDancing isnot undefined>>
+		你耳中的史莱姆在逼迫着你。
+	<<elseif $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[逃跑|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[逃跑|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<else>>
+		<<link [[停止|Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+<</if>>
+/*More simple setup below */
+<<if $danceevent is "rape">>
+	<<link [[继续|Beach Party Dance Rape]]>><<set $molestationstart to 1>><</link>>
+<<elseif $danceevent is "finish">>
+	<<link [[继续|Beach Party]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[逃走|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[逃走|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<else>>
+		<<link [[停止|Beach Party]]>><<clotheson>><<endevent>><</link>>
+	<</if>>
+<</if>>

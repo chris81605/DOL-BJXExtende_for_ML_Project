@@ -1,0 +1,51 @@
+:: Street Bully Undies []
+<<set $outside to 1>><<effects>>
+
+<<if $phase is 1>>
+	你知道接下来会发生什么，
+	<<if $speech_attitude is "meek">>
+		但恐惧攫住了你，让你动弹不得。
+	<<elseif $speech_attitude is "bratty">>
+		但自我保护的本能控制了你。
+	<<else>>
+		但你还是要好好考虑挑起争端的后果。
+	<</if>>
+<<else>>
+	你没法把惠特尼的手从你的<<print $worn.under_lower.cn_name_cap>>上移开。
+<</if>>
+<<His>>的手指弯曲，然后快速地开始了动作。
+<br><br>
+
+你感到你<<if $player.ballsExist>>睾丸<<else>>阴唇<</if>>间<<print $worn.under_lower.cn_name_cap>>的布料被突然拉紧，一阵剧痛冲击着你的<<genitals>>。
+<<if $speech_attitude is "meek">>
+	你发出尖叫。<<His>>的朋友们大笑起来。
+<<elseif $speech_attitude is "bratty">>
+	你咬紧牙关，绝不让他们看到想看的反应。
+<<else>>
+	你喘着气。<<His>>的朋友们嘲笑着你。
+<</if>>
+<br><br>
+
+<<set _whitStreetUndies to $worn.under_lower.cn_name_cap>>
+<<set $worn.under_lower.integrity -= 30>>
+<<integritycheck>>
+<<exposure>>
+
+<<if !$worn.under_lower.type.includes("naked")>>
+	惠特尼松开手，似乎满足于你所受的折磨。你倒在地上。<<He>>笑着跨过你。你挣扎着站起来。
+	<<if $whitneypantiescheck is 2 and $worn.under_lower.gender is "f">>
+		"内裤？我们又不是在学校里。”<<He>>靠得很近。“还是说，你穿成这样是为了好玩？"
+	<</if>>
+<<else>>
+	"谢谢你的纪念品，”惠特尼笑着，当着你的面挥舞着你那件残破的<<print _whitStreetUndies>>。
+	<<if $whitneypantiescheck is 2 and $worn.under_lower.gender is "f">>
+		"内裤？我们又不是在学校里。”<<He>>靠得很近。“还是说，你穿成这样是为了好玩？"
+	<</if>>
+	<<He>>把你摔在地上，在你把它们抢回来之前就跑掉了。
+	<<trauma 4>><<stress 4>><<gtrauma>><<gstress>>
+<</if>>
+<<npcincr Whitney lust 5>><<glust>>
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>

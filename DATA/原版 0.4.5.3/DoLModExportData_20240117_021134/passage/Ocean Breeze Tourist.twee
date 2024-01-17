@@ -1,0 +1,127 @@
+:: Ocean Breeze Tourist []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+<<set $tip to 0>> /*Ensure tip is 0 so that nothing can be carried over from anything else*/
+<<if ($rapestat + $beastrapestat + $tentaclerapestat) gt 0>>
+	<<if $phase is 1>>
+		你点头。
+		<br>
+		"感觉如何？"<<he>>邪笑着问。
+		<br>
+		<<if $trauma gte ($traumamax / 5) * 4>>
+			你用毫无起伏的空洞声音描述着你的经历，用医学描述一般准确的语言将每一个细节都解释得一清二楚。你平静的叙述，身体轻微的颤抖，
+			如同深渊一般空洞的眼神，让<<fullGroup>>都感到不安。
+			他们目送着你离开了。
+			<br>
+			"哇，这都给玩坏了？"
+			<br>
+			"是咯，"你听见<<person1>><<person>>紧张地笑了两声，"估计算是副作用吧。"
+			<<set $tip += 400>>
+		<<elseif $speech_attitude is "meek">>
+			你向他们描述着你所遭到的虐待与不堪，描述得极其细致，以求能满足他们病态的好奇。
+			<<if currentSkillValue('english') gte 400>>
+				你的描述开放、流利而又准确，他们显然十分感兴趣。
+				<<set $tip += 1000>>
+			<<else>>
+				你的话语并不能引起他们的共情，他们很快就失去了兴趣。
+				<<set $tip += 200>>
+			<</if>>
+		<<elseif $rapetrait gte 1>>
+			"当时觉得很难受，"你说道。"现在也很难受，但……我可能已经习惯了吧。"
+			<br>
+			<<He>>看向了自己的朋友。"我说什么来着？"
+			<<set $tip += 200>>
+		<<elseif $submissive lte 500>>
+			你拿起了桌上摆着的一个大号的圆柱型胡椒研磨器，在手上掂量了一会。
+			<br>
+			你猛地把研磨器拍在桌子上，引得<<his>>直直盯着你。"真的想知道？"
+			<br>
+			<<if $rng % 2>>
+				<<He>>被你吓了一大跳，恐惧地摇着头。
+			<<else>>
+				他们紧张地笑了两声。
+			<</if>>
+			<br>
+			"谅你也不敢。"你离开了。
+		<<elseif $speech_attitude is "bratty">>
+			"很难过。准备好点单了吗？还是准备好滚蛋了？"
+			<br>
+			他们点了单。
+		<<else>>
+			"抱歉。这段经历太难受了，我不想聊。"
+			<br>
+			接下来几分钟他们都在骚扰你，想要问出细节。
+			<<gstress>><<stress 2>>
+		<</if>>
+	<<elseif $phase is 2>>
+		你摇了摇头。
+		<br>
+		<<if $fame.rape gte 800>>
+			旁边一名顾客笑了起来。"是哦！
+			<<if $player.gender_appearance isnot $player.gender>>
+				'<<pShes>>都出了名了！
+			<<else>>
+				<<Hes>>都出了名了！
+			<</if>>
+			大半个镇子的人都上过这辆公交车。"
+			<br>
+			你转身离开，而其他顾客已经开始给他们看照片了。
+		<<elseif $beauty lte ($beautymax / 7) * 2>>
+			"好吧，这只是例子没选好。谁想费这个劲强暴<<pher>>呢？我是说镇子上所有'漂亮的'人都被强奸过。"
+			<br>
+			你转身离开，任他们继续讨论。
+		<<else>>
+			"啊对对对，我才不信呢。"<<he>>邪恶地笑着。
+			<br>
+			你转身离开，任他们继续讨论。
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $phase is 1>>
+		你点头。
+		<br>
+		"感觉如何？"<<he>>邪笑着问。
+		<br>
+		<<if $speech_attitude is "meek">>
+			你胡编乱造出了一些遭受虐待和不堪的故事，希望能满足他们病态的好奇。
+			<<if currentSkillValue('english') gte 400>>
+				你的描述流利而有说服力。他们听得很感兴趣。
+				<<set $tip += 500>>
+			<<else>>
+				你的语言空洞，编的故事根本说不通。他们很快就失去了兴趣。
+			<</if>>
+		<<else>>
+			"抱歉，"你和他们说道。"我不喜欢聊这个话题。"
+			<br>
+			接下来的几分钟里他们都缠着你，想要问出细节。
+			<<gstress>><<stress 2>>
+		<</if>>
+	<<elseif $phase is 2>>
+		你摇了摇头。
+		<br>
+		<<if $beauty lte ($beautymax / 7) * 2>>
+			"好吧，这只是例子没选好。谁想费这个劲强暴<<pher>>呢？我是说镇子上所有'漂亮的'人都被强奸过。"
+			<br>
+			你转身离开，任他们继续讨论。
+		<<else>>
+			"啊对对对，我才不信呢。"<<he>>邪恶地笑着。
+			<br>
+			你转身离开，任他们继续讨论。
+		<</if>>
+	<</if>>
+<</if>>
+<<if $phase is 3>>
+	你拒绝回答他们的问题。他们最终还是点了单。
+<</if>>
+<br><br>
+剩下的工作时间里无事发生。
+<<if $tip gt 0>>
+	<<set $tip += 500>>
+	有人给了你一笔小费。
+	<<tipreceive>><<pass 1 hour>>
+	<br><br>
+<<else>>
+	你赚到了<<moneyGain 5>>。
+	<<pass 1 hour>>
+	<br><br>
+<</if>>
+<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>

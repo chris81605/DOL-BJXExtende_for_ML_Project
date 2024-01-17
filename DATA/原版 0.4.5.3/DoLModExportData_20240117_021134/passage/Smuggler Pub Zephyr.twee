@@ -1,0 +1,31 @@
+:: Smuggler Pub Zephyr []
+<<effects>>
+
+<<npc "Zephyr">><<person1>>
+你坐在泽菲尔的桌旁。“嘿，如果这不是我的老朋友，”<<he>>说。“想不想到我的船上来一趟旅行？”
+<br><br>
+<<if $pirate_rank gte 1>>
+	<<link [[登船|Pirate Smuggler Entrance]]>><</link>>
+	<br>
+<<else>>
+	“只需<span class="gold">£15000</span>，你就可以享受头等舱。或者你可以免费乘坐二等舱。一种更廉价的选择！”
+	<br><br>
+	“哦，”<<he>>补充说。“还有一件事。<span class="pink">这次行程不会太短。</span> 我估计到岛上需要一周的时间，而且谁能知道你会在那儿待多久呢。在出发前确保你已经处理好你的私人事务。”
+	<br><br>
+	<<if $money gte 1500000>>
+		<<link [[乘坐头等舱 (£15000)|Pirate Smuggler Entrance]]>><<set $phase to 1>><<set $money -= 1500000>><<set $pirate_rank to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你的钱不足以支付头等舱的价钱。</span>
+		<br>
+	<</if>>
+	<<if $pirate_rank is 0>>
+		<<link [[乘坐二等舱|Pirate Smuggler Entrance]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[乘坐二等舱|Pirate Smuggler Entrance]]>><<set $phase to 1>><<set $pirate_rank to 0>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<link [[离开|Smuggler Pub]]>><</link>>
+<br>

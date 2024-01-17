@@ -1,0 +1,27 @@
+:: Forest Pale Slime Struggle []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "pale slime">>
+	<<if $wraith.state is "haunt">>
+		<<struggle_creatures 3 2>>
+	<<else>>
+		<<struggle_creatures 2 1>>
+	<</if>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<struggle>>
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Forest Pale Slime Struggle End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Forest Pale Slime Struggle]]>><</link>></span>
+	<br>
+<</if>>

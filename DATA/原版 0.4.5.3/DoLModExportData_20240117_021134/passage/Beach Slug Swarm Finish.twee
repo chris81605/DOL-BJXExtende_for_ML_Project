@@ -1,0 +1,38 @@
+:: Beach Slug Swarm Finish []
+<<effects>>
+<<if $stress gte $stressmax>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<slug_end>>
+	<<link [[继续|Passout Beach]]>><<pass 1 hour>><</link>>
+<<elseif $pursuit gte 3>>
+	巨型蛞蝓滑入池中，扬起粘液的浪潮，把你推到了岸边。
+	<br><br>
+	<<endcombat>>
+	<<clotheson>>
+	<<slug_caught>>
+<<else>>
+	<<tearful>>你将自己从粘液中拖了出来。在你踉跄着站起来时，一些蛞蝓从你身上掉了下来。
+	<br><br>
+
+	巨型蛞蝓毫不减速地从粘液中滑动着前行。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Beach Slug]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

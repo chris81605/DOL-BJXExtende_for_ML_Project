@@ -1,0 +1,41 @@
+:: Kylar Canteen Stay []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 95>>
+	凯拉尔很安静，只有在告诉你身后有东西的时候才会开口，但你回头却什么也没看到。
+	<br><br>
+
+	你吃完了自己的食物。"我去教室里等着，"罗宾在你放下餐具时说，"我不喜欢迟到。"<<He>>拥抱了你。
+	<br><br>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	<span class="red">你站起来时，踉跄了几步。</span>你感到头晕目眩。"你还好吗？"凯拉尔的声音似乎是从浓雾中传来的一样，"你需要护士。"<<He>>用手臂搂住你的肩膀，带着你走向门口。你很快就失去了意识。
+	<br><br>
+	<<link [[继续|Kylar Basement]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	罗宾试图让凯拉尔参与对话，但每当<<endevent>><<npc Robin>><<person1>><<him>>试图说话时都会被凯拉尔打断。
+	<br><br>
+
+	<<if $rng gte 51>>
+		凯拉尔试图亲吻你。
+		<br><br>
+
+		<<link [[亲吻凯拉尔|Kylar Canteen Kiss]]>><<npcincr Kylar love 5>><<npcincr Kylar rage -5>><<status -10>><</link>><<lcool>><<kissvirginitywarning>><<NPCvirginitywarning "Kylar" "kiss">>
+		<br>
+		<<link [[亲吻罗宾|Kylar Canteen Robin]]>><<npcincr Robin love 1>><<npcincr Kylar love -5>><<npcincr Kylar rage 5>><</link>>
+		<br>
+		<<link [[拒绝|Kylar Canteen Refuse]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>>
+		<br>
+		<<endevent>>
+
+	<<else>>
+		你吃完了自己的食物。"我去教室里等着，"罗宾在你放下餐具时说，"我不喜欢迟到。"<<He>>拥抱了你。凯拉尔怒视着<<him>>，但<<he>>丝毫没有注意到。
+		<br><br>
+
+		<<endevent>>
+		<<link [[继续|Canteen]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

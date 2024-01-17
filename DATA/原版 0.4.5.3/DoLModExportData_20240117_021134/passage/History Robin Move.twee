@@ -1,0 +1,36 @@
+:: History Robin Move []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"不，不好意思，"你说，"我打算坐在那儿。你可，可以移一下吗？"
+<<elseif $speech_attitude is "bratty">>
+	“我坐这的，”你说。
+<<else>>
+	“我本来要坐在这儿的，”你说，“你介意移一下吗？”
+<</if>>
+<br><br>
+
+<<if random(1, $coolmax) gt $cool>>
+	“不，”<<person2>><<person>>冷笑着，“你想怎样？”
+	<<if $submissive lte 500>>
+		你握紧拳头。
+	<</if>>
+	其他学生转身观看。
+	<br><br>
+
+	<<link [[去找别的座位|History Robin New]]>><</link>>
+	<br>
+	<<if $submissive gte 1500>>
+		<<link [[恳求|History Robin Beg]]>><<sub 1>><</link>><<submissivetext>>
+		<br>
+	<</if>>
+	<<if $submissive lte 500>>
+		<<link [[暴力解决|History Robin Fight]]>><<def 1>><</link>><<defianttext>>
+		<br>
+	<</if>>
+<<else>>
+	<<person2>><<person>>点了点头。"没问题。"<<He>>抓住<<his>>的包，去找另一个座位。
+	<br><br>
+	<<link [[继续|History Lesson]]>><<set $robinhistory to "seat">><<endevent>><</link>>
+	<br>
+<</if>>

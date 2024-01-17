@@ -1,0 +1,30 @@
+:: Trash Compare Forced Strip []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $outside to 1>><<effects>>
+
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	<<set $enemyanger to 50>><<set $enemytrust to -50>><<set $noBodyWriting to true>>
+
+	"你要信守诺言，"<<person1>><<person>>说，"不管你愿不愿意。"
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
+	<span id="next"><<link [[继续|Trash Compare Combat Loss]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0 or $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Trash Compare Combat Win]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Trash Compare Forced Strip]]>><</link>></span><<nexttext>>
+<</if>>

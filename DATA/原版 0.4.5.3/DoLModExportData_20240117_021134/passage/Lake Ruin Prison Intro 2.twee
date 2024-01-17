@@ -1,0 +1,105 @@
+:: Lake Ruin Prison Intro 2 []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+
+你听到身后石头的刮擦声。经过一段时间，你向前倒下，用手着地。<span class="blue">你离开了水中。</span>这里有一个大气囊，空气中弥漫着紫色的雾气。你爬上最后一段楼梯。
+<br><br>
+<<if $wraithPrison>>
+	你回到了水下监狱。
+<<else>>
+	当你到达顶部时，你看到了光芒的源头。你处于一个巨大的石头房间中，被巨大的发光紫色地衣覆盖着。它沿着墙壁蜿蜒而行，偶尔跟随着错综复杂的雕刻图案。
+	你周围都是一组组大笼子，其中许多已经生锈了。你在其中一个笼子里发现了一套镣铐。另一个笼子似乎是地衣群的中心，大部分都被覆盖了。
+	<br><br>
+<</if>>
+你因剧痛而弯下腰。一条苍白、半透明的手臂从你的胸口伸了出来，紧接着又出现了另一条。当它们离开你的身体时，你被迫向后仰倒。<<pain 10>><<ggpain>>
+<br><br>
+<<endWraith>>
+<<generateWraith 1 true>>
+你倒在冰冷的石头地板上，感官正逐渐恢复。你呛咳着呕出了水。你深吸一口气，尝到空气中令人作呕的甜味。<<hallucinogen 40>><<gghallucinogens>>
+<br><br>
+<<if !$wraithIntro>>
+	<<set $wraithIntro to true>>
+	你面前飘浮着一个美丽的苍白色身影。
+	<<if $wraith.state is "haunt">>
+		祂的眼睛带着愤怒的红色，祂紧紧地抓住自己布着伤痕的脖子。
+		<br><br>
+		"<span class="wraith">永远被封印。就像一个小偷应该的那样。</span>"
+		<br><br>
+		祂抓住你的脖子，并轻易地将你推倒在地。祂飘落下来，压在你身上，开始对你的脖子施加压力。<span class="red">你不能呼吸了！</span>
+	<<elseif $wraith.state is "despair">>
+		祂用疲惫、悲惨的红色眼睛注视着你，同时抓住自己遍布伤痕的、裸露的脖子。
+		<br><br>
+		"<span class="wraith">你看到我的项链了吗……?</span>"
+		<br><br>
+		祂轻轻地把手放在你的脖子上，将你压住。祂飘落下来，停在你身上。
+	<<else>>
+		祂赤裸着，脖子上戴着一条象牙项链，上面镶着巨大的蓝宝石。祂用好奇的蓝色眼睛看着你，用手托起你的下巴。你感觉很冷。
+		<br><br>
+		"<span class="wraith">沐浴在无暇之中，我们将变得美丽。</span>"
+		<br><br>
+		祂轻轻地把手放在你的脖子上，将你压住。祂飘落下来，停在你身上。
+	<</if>>
+<<else>>
+	苍白的身影飘在你面前。
+	<<if $wraith.state is "haunt">>
+		<<if $wraithPrison and $wraithPrison.vision>>
+			怨灵将祂的爪子放在了你的胸口上。你可以感受到一股苦涩的寒意从整个身体传来，你感到整个房间在旋转，最终你倒在了地上。
+			<br><br>
+			"<span class="wraith">你明白了吗，小偷？不要让我再说一遍。</span>"
+		<<else>>
+			怨灵先是抓住了自己受伤的脖子，然后轻松地将你推倒在地。祂漂浮下来，骑在你的身上，用手抓住了你的脖子。<span class="red">你不能呼吸了！</span>
+			<br><br>
+			"<span class="wraith">想从死人那里偷东西，那你就得付出死亡的代价。</span>"
+		<</if>>
+	<<elseif $wraith.state is "despair">>
+		<<if $wraithPrison and $wraithPrison.vision>>
+			怨灵将祂的爪子放在了你的胸口上。你可以感受到一股苦涩的寒意从整个身体传来，你感到整个房间在旋转，最终你倒在了地上。
+			<br><br>
+			"<span class="wraith">我找不到它了。没有项链真的太冷了。你能让我温暖起来吗，<<pcpetname "Wraith">>？</span>"
+		<<else>>
+			怨灵先是抓住了自己裸露的脖子，然后轻轻地把你推倒在地。祂漂浮下来，骑在你的身上，然后静止下来。
+			<br><br>
+			"<span class="wraith">没有项链真的太冷了。你能让我温暖起来吗，<<pcpetname "Wraith">>？</span>"
+		<</if>>
+	<<else>>
+		祂的手指勾着项链，然后把你推着躺在地上。祂飘落下来，停在你身上。
+		<br><br>
+		"<span class="wraith">欢迎回家，<<pcpetname "Wraith">>。</span>"
+	<</if>>
+<</if>>
+祂紧盯着你的身体，让你的身体虚弱无力，无法反应。
+<<if C.npc["Ivory Wraith"].lust gte 12 and $wraith.state is "haunt">>
+	祂的脸上出现了一个残忍、嗜虐的微笑。
+<<else>>
+	祂犹豫了一会儿，考虑着自己的下一步行动。
+<</if>>
+<<if !$wraithPrison>>
+	<br><br>
+	<<link [[恳求|Lake Prison Intro 3]]>><<set $phase to 1>><<sub 1>><</link>>
+	<br>
+	<<link [[挣扎|Lake Prison Intro 3]]>><<set $phase to 2>><<def 1>><</link>>
+	<br>
+<<else>>
+	<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$noEarSlime>>
+		祂举起一侧的手臂，一个漩涡状的紫色圆盘在空中出现。祂伸手进去，拿出一团扭动的红色物质。一个活的史莱姆。祂将它放到你的耳边。
+		<br><br>
+		<<link [[挣扎|Lake Prison Slime Resist]]>><</link>>
+		<br>
+		<<link [[保持不动|Lake Prison Slime]]>><</link>>
+	<<else>>
+		<<initWraith "abomination">>
+		<<startWraith>>
+		<br><br>
+		<<link [[继续|Lake Prison Intro Fight]]>><</link>>
+	<</if>>
+<</if>>
+<br>
+<<if !$wraithPrison>>
+	<<set $wraithPrison to {timer: 0, timePassed: 0, search: 0, state: "present", possession: false, masturbation: false}>>
+<<else>>
+	<<set $wraithPrison.timer to 0>>
+	<<set $wraithPrison.timePassed to 0>>
+	<<set $wraithPrison.search to 0>>
+	<<set $wraithPrison.state to "present">>
+	<<set $wraithPrison.possession to false>>
+	<<set $wraithPrison.masturbation to false>>
+<</if>>

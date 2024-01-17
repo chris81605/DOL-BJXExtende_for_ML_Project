@@ -1,0 +1,99 @@
+:: Lake Pots []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_deep">><<underwater>><<effects>><<lakeeffects>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<else>>
+	<<if $rng gte 81>>
+		你伸手进了一个罐子里，找到了一个小的象牙盒。它被一把青铜锁密封着。
+		<br><br>
+		<<if $historytrait gte 4>>
+			盒子本身非常古老，一定很有价值。
+			<br><br>
+			<<ind>><<link [[带走盒子|Lake Ruin Deep]]>><<set $antiquemoney += 20>><<museumAntiqueStatus "antiquebox" "found">><</link>>
+			<br>
+		<</if>>
+		<<set $skulduggerydifficulty to 300>>
+		<<templeicon "chastity release">><<link [[打开|Lake Ruin Box]]>><<wateraction>><</link>><<skulduggerydifficulty>><<loxygen>>
+		<br>
+		<<if $lakeruinkey is 1>>
+			<<lakeicon "key">><<link [[使用青铜钥匙|Lake Ruin Door]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<if $lakeruinkey is 2>>
+			<<swimicon>><<link [[游向基座室|Lake Ruin Plinth]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<br>
+		<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<<elseif $rng gte 78 and $swarmdisable is "f">>
+		你伸手进了一个罐子里，发现一群小鱼涌出来，围绕着你。
+		<br><br>
+		<<link [[继续|Lake Swarm]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<elseif $rng gte 51>>
+		你伸手进了一个罐子里，底部有紫色的粉末。你的探索扰乱了它，它在你的手臂周围旋转。你浑身热了起来。
+		<<gstress>><<stress `$swarmdisable is "t" and $rng gte 78 ? 6 : 3`>><<garousal>><<arousal 600>>
+		<br><br>
+		<<if $lakeruinkey is 1>>
+			<<lakeicon "key">><<link [[使用青铜钥匙|Lake Ruin Door]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<if $lakeruinkey is 2>>
+			<<swimicon>><<link [[游向基座室|Lake Ruin Plinth]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<br>
+		<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<<elseif $rng gte 41 and $lakeruinkey is undefined>>
+		你伸手进一个罐子里，找到了一个腐烂的青铜钥匙。
+		<br><br>
+		<<set $lakeruinkey to 1>>
+		<<lakeicon "key">><<link [[用青铜钥匙打开门|Lake Ruin Door]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<if $lakeruinkey is 2>>
+			<<swimicon>><<link [[游向基座室|Lake Ruin Plinth]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<br>
+		<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你伸手进一个罐子里，发现里面全是破陶瓷。
+		<<elseif $rng gte 61>>
+			你伸手进一个罐子里，里面有东西突然咬住了你。你及时把手拿开了，但是危险很近。
+			<<gstress>><<stress 3>>
+		<<elseif $rng gte 41>>
+			你伸手进一个罐子里，里面全是泥巴。
+		<<elseif $rng gte 21>>
+			你伸手进一个罐子里，里面全是小石子。
+		<<else>>
+			你伸手进一个罐子里，里面什么也没有。
+		<</if>>
+		<br><br>
+		<<if $lakeruinkey is 1>>
+			<<lakeicon "key">><<link [[使用青铜钥匙|Lake Ruin Door]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<if $lakeruinkey is 2>>
+			<<swimicon>><<link [[游向基座室|Lake Ruin Plinth]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+		<br>
+		<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+<</if>>

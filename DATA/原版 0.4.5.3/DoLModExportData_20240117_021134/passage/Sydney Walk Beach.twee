@@ -1,0 +1,71 @@
+:: Sydney Walk Beach []
+<<set $outside to 0>><<if $location is "school">><<schooleffects>><</if>><<effects>><<run statusCheck("Sydney")>><<set _sydneyPray to true>>
+<<if $speech_attitude is "meek">>
+	"去海滩怎么样？"你提议道。
+<<elseif $speech_attitude is "bratty">>
+	"我想我们可以去海滩玩一天。"你提议道。
+<<else>>
+	"我们可以去海滩找点乐子，"你提议道。
+<</if>>
+<br><br>
+<<if $location is "school">>
+	<<if Time.weekDay is 6>>
+		<<He>>很是兴奋，但随即皱起了眉头。"我必须在周五帮助我的<<sydneymum>>，所以我想我们没有足够的时间。抱歉。"
+		<<set _walk to false>>
+	<<else>>
+		<<if $schoolstate is "afternoon">>
+			<<His>>的眼睛亮了起来，"听起来不错！"
+			<<set _walk to true>>
+		<<else>>
+			<<His>>的脸亮了起来，"听起来不错！不过我们不能离开学校这么久，所以放学后怎么样？"
+			<<set _walk to false>>
+		<</if>>
+	<</if>>
+<<elseif $location is "temple">>
+	<<if Time.weekDay is 1 and Time.hour lte 12 and $daily.massAttended isnot 1>>
+		"我很想去，但能不能等到弥撒结束之后？"
+		<<set _walk to false>>
+	<<elseif Time.hour lte 8>>
+		"现……现在去海滩有点早，不是吗？"<<He>>打了个哈欠。
+	<<elseif Time.hour gte 17>>
+		"现在去海滩有点晚了，不是吗？"<<set _walk to false>>
+	<<elseif _sydneyStatus.includes("corrupt")>>
+		"啊~当然，我能看到你穿着性感的泳衣吗？"<<set _walk to true>>
+	<<elseif $temple_rank is undefined or $temple_rank is "prospective">>
+		悉尼看起来很兴奋。"当然！请让我告诉约旦<<nnpc_brother "Jordan">>。"<<He>>跑着离开，几分钟后便回来了。"可以了。"<<set _walk to true>>
+	<<elseif $temple_garden gte 100 and $temple_quarters gte 100>>
+		"神殿现在挺好的，我也应当休息一下了。我们走吧！"<<set _walk to true>>
+	<<elseif $temple_garden gte 100>>
+		"花园已经被打理得很完美了，我想他们会让我休息一下的。"<<set _walk to true>>
+	<<elseif $temple_quarters gte 100>>
+		"宿舍已经整理得很干净了，我想他们会让我休息一下。"<<set _walk to true>>
+	<<elseif $temple_garden gte 50 or $temple_quarters gte 50>>
+		<<He>>似乎有些犹豫不决。"这里还有很多工作要做，但是……休息一下应该不会有问题。"<<set _walk to true>>
+	<<else>>
+		<<He>>悲伤地摇了摇头。"这里有太多事情要去处理，抱歉。"<<set _walk to false>>
+	<</if>>
+<</if>>
+<<if _walk is true>>
+	<<if $location is "school">>
+		<<set $exit to "library">><<set $location to "town">>
+		悉尼收拾好东西，告诉图书管理员<<hes>>要提早离开。在一切准备就绪后，<<He>>对你笑了笑，<<if $sydneyromance is 1>>轻轻地牵起你的手，带着你离开了<<else>>和你一起离开了<</if>>。
+		<br><br>
+		<<if $weather is "rain" or $weather is "snow">>
+			<<He>>在出去之前从储物柜拿了把伞。
+		<</if>>
+		你们穿过公园，走到海星街。
+	<<elseif $location is "temple">>
+		<<set $exit to "temple">><<set $location to "town">>
+		悉尼挥手告别了一群<<monks>>，<<if $sydneyromance is 1>>然后牵起你的手，和你一起离开<<else>>和你一起离开<</if>>。
+		<br><br>
+		<<if $weather is "rain" or $weather is "snow">>
+			<<He>>在出去前拿了把伞。
+		<</if>>
+		走到海星街不需要很长时间。
+	<</if>>
+	<br><br>
+	<<link [[继续|Sydney Beach Start]]>><<set $daily.sydney.walk to true>><<pass 25>><</link>>
+<<else>>
+	<br><br>
+	<<sydneyOptions>>
+<</if>>

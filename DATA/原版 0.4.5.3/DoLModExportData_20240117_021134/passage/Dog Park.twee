@@ -1,0 +1,40 @@
+:: Dog Park []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastNEWinit 1 dog>>
+	<<beastCombatInit>>
+	当你醒来时，你发现自己正被一个奇怪的<<beasttype>>试着拖进灌木丛的后面。
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate 1>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<br><br>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续->Dog Park Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[继续->Dog Park Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续->Dog Park]]>><</link>></span><<nexttext>>
+	<</if>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Dog Park Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Dog Park Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Dog Park]]>><</link>></span><<nexttext>>
+<</if>>

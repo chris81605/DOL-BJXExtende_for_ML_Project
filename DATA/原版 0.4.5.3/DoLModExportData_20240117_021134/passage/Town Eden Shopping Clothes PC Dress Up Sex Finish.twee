@@ -1,0 +1,49 @@
+:: Town Eden Shopping Clothes PC Dress Up Sex Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<npcincr Eden lust -20>><<npcincr Eden love 1>>
+
+	"真他妈需要这个。"<<He>>一边紧紧拥抱着你，一边从高潮的余韵中恢复过来。
+	<br><br>
+
+	<<He>>轻抚着你的头发，然后穿好了衣服。
+<<elseif $enemyhealth lte 0>>
+	伊甸向后蹒跚着，撞在了墙上。<<He>>怒视着你，但并没有攻击你。
+	<<llove>><<npcincr Eden love -1>>
+	<br><br>
+	<<tearful>>你拾起你的衣服。
+	<<storeon "basket" "delete">>
+<<elseif $finish is 1>>
+	<<He>>从你身上抽离开来，看起来非常沮丧。
+	<br><br>
+
+	<<He>>穿好衣服，但仍然偶尔向你投来饥渴的眼神。
+	<<storeon "basket" "delete">>
+<<else>>
+	<<set $rescued += 1>>
+	"里面还好吗？"外面传来一个声音。
+	<br><br>
+	伊甸松开了你，走出了试衣帘。你听到了一声尖叫。伊甸回来了，怒视着你。"走了。"<<llove>><<npcincr Eden love -1>>
+	<<storeon "basket" "delete">>
+<</if>>
+<br><br>
+
+<<storeon "basket" "check">>
+<<if _store_check is 1>>
+	<<storeon "basket">>
+	<<clotheson>>
+
+	伊甸比你穿得更快，然后穿过试衣帘消失了。你走出来时，发现<<him>>正在给内衣付款。
+	<br><br>
+<<else>>
+	<<clotheson>>
+<</if>>
+
+<br><br>
+
+<<endcombat>>
+
+
+<<link [[继续|Town Eden Shopping Finish]]>><<npc Eden>><<person1>><</link>>

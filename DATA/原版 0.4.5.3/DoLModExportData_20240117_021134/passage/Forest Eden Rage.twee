@@ -1,0 +1,45 @@
+:: Forest Eden Rage []
+<<set $outside to 1>><<set $location to "forest">><<effects>>
+
+<<if $phase is 1>>
+	伊甸是对的。你离开太久了。你可能无法挣脱。
+	<br><br>
+
+	<<He>>没有松开抓握，但当你们穿过森林的时候，<<he>>开始放松对你的控制。
+<<else>>
+	担心伊甸为你准备的事情，你用力拉扯。
+	<<if $physiqueSuccess>>
+		<<He>>抵抗着，用警告的眼神看着你。经过一番拉扯，<span class="green"><<his>>的抓握松了，你得以溜出去，并开始全速奔跑。</span>你的手臂有些疼痛，但你忽略了这种感觉。<<pain 2>><<gpain>>
+		<br><br>
+
+		伊甸紧追不舍，在几分钟内紧紧跟在你的后面。当你拉开距离时，<<He>>向你喊叫，愤怒的情绪明显可见。
+		<br><br>
+
+		几分钟后，<<his>>的声音渐渐消失，直到完全消失。
+		<br>
+		你已经脱离险境，但你知道伊甸已经在跟踪你了。<span class="red">有什么东西在追捕你。</span>
+		<<set $foresthunt to 1>>
+		<<set $edenCagedEscape to true>>
+	<<else>>
+		<<His>>的抓握依旧紧紧地抓住你，几乎要折断你的骨头。<span class="red">你无法挣脱。</span>伊甸沉默地怒视着你，同时拉近你的距离。
+		<br><br>
+
+		<<He>>把你拖向小屋，你呼喊求救，但没有人回应。<<trauma 3>><<gtrauma>>
+		<<set $phase to 1>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $phase is 1>>
+	<<set $outside to 0>><<set $location to "cabin">>
+	你被拉进小屋。伊甸在你身后砰地关上门。一切都和你离开的时候一样。除了睡觉区域附近的笼子。
+	<br><br>
+
+	<<link [[挣扎|Eden Caged Intro]]>><<set $phase to 0>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[顺从|Eden Caged Intro]]>><<set $phase to 1>><<sub 1>><<stress 6>><<npcincr Eden dom 1>><</link>><<gstress>><<gdom>>
+	<br>
+<<else>>
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

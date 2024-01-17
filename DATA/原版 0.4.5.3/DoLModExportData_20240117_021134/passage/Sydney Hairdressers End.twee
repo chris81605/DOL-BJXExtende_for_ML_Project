@@ -1,0 +1,28 @@
+:: Sydney Hairdressers End []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+<<npc "Sydney">><<person1>>
+<<if $sydneyHairDone>>
+	<<set $sydneyHairChangedComment to true>>
+	你从座位上跳了起来，等不及想看看悉尼的新发型。理发师递给<<him>>一面镜子，
+	<<if !$sydneySeen.includes("hairchange")>>
+		<<set $sydneySeen.pushUnique("hairchange")>>
+		<<His>>的眼睛睁大了。"它看起来……"<<he>>停顿了一下，从各个角度检查<<his>>的<<if $sydneyDye>><<npcHairColour "Sydney">><</if>>头发。
+		<br><br>
+		"我很喜欢，非常喜欢！"<<He>>突然站起身，直直地拥向你。<<npcincr Sydney love 5>><<gglove>>
+	<<else>>
+		看着<<npcHairColour "Sydney">>头发<<if $sydneyDye and _text_output is "strawberry blond">>恢复到了自然的颜色<</if>>，悉尼笑了起来。
+		"谢谢你带我来这儿，我从来没有失望过。"<<npcincr Sydney love 1>><<glove>>
+	<</if>>
+	<br><br>
+	<<if $sydneyStyle>><<if $sydney.hair is "ponytail">><<He>>摸了摸刚剪过和拉直的马尾。<<else>><<He>>将<<his>>的头发拨到左眼。<</if>><</if>>
+	<<if $playerHairDone>>
+		"你的看起来也很不错！很有品味。"
+	<</if>>
+<<else>>
+	当你从座位上站起来时，悉尼冲你笑了笑。"真的很好看！也许下次可以把我理一下。"
+<</if>>
+<<unset $sydneyDye>><<unset $sydneyDyeRemove>><<unset $sydneyHairDone>><<unset $sydneyStyle>><<unset $playerHairDone>>
+你们两个回到购物中心。
+<br><br>
+<<link [[继续 (0:01)|Sydney Shopping Centre]]>><</link>>
+<br>

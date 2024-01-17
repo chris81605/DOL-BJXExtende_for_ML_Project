@@ -1,0 +1,33 @@
+:: Sydney Beach []
+<<location "beach">><<effects>>
+你和悉尼正在沙滩上。
+<<if Time.hour gte 20>>
+	夕阳被浪潮吞没，消失在了海岸线上，<<He>>伸了个懒腰。"今天真的很开心，是时候回去了。"你们回到了更衣间。
+	<br><br>
+	<<link [[继续|Sydney Beach Changing Room Leave]]>><<pass 25>><</link>>
+<<else>>
+	<<if $weather is "clear">>
+		海滩上一片欢声笑语。孩子们建起沙堡，在水中玩耍，他们的父母则沐浴在阳光下，互相聊着家常。远处有一群学生正在打排球。
+	<<else>>
+		云层驱散了大多数原本打算前来的游客，但依旧有人在海岸上随着海潮漫步。
+	<</if>>
+	<br><br>
+	<<if $worn.under_lower.type.includes("swim") and ($worn.under_upper.type.includes("swim") or $worn.under_upper.type.includes("naked")) or ($worn.upper.type.includes("swim") or $worn.upper.type.includes("naked")) and ($worn.lower.type.includes("swim") or $worn.lower.type.includes("naked"))>>
+		<<link [[去游泳 (0:02)|Sydney Beach Swim]]>><<pass 2>><</link>>
+		<br>
+		<<link [[晒日光浴 (1:00)|Sydney Beach Tanning]]>><<pass 60>><<npcincr Sydney love 1>><</link>><<llstress>><<glove>>
+		<br>
+	<<else>>
+		<span class="pink">你穿着不适合游泳或晒日光浴的衣服。</span>
+		<br>
+	<</if>>
+	<<link [[在沙滩上漫步 (0:30)|Sydney Beach Walk]]>><<pass 30>><<athletics 1>><<stress -6>><<npcincr Sydney love 1>><</link>><<gtiredness>><<gathletics>><<lstress>><<glove>>
+	<br>
+	<<if $weather is "clear" and Time.dayState isnot "night" and $exposed lte 0>>
+		<<link [[打排球|Sydney Beach Volleyball]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[换上衣服并离开沙滩|Sydney Beach Changing Room Leave]]>><<pass 25>><</link>>
+	<br>
+<</if>>

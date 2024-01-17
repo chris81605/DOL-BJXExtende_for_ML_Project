@@ -1,0 +1,9 @@
+:: Fix Clothes []
+你的衣服已经修复好了。
+<br><br>
+<<set _equip to setup.clothingLayer.all>>
+<<for _i to 0; _i lt _equip.length; _i++>>
+	<<set $worn[_equip[_i]].integrity = clothingData(_equip[_i],$worn[_equip[_i]],'integrity_max')>>
+<</for>>
+
+<<link [[返回|Tailor Shop]]>><<endevent>><</link>>

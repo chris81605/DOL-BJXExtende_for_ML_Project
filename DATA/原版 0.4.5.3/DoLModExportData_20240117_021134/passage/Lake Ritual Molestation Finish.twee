@@ -1,0 +1,72 @@
+:: Lake Ritual Molestation Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	他们退后，不想成为下一个被攻击的人。他们彼此耳语片刻，然后消失在森林里。
+	<br><br>
+
+	你挣扎着摆脱束缚。你感觉到它们变得松动，很快就断了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<pass 20>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<<if $phase2 is 2>>
+		<<set $wraith.seen++>>
+		你听到自己的尖叫声在树林中回荡。那群人退后，寻找声源。他们都安静了下来。片刻后，你看到黑暗中闪现出<<wraithEyes>>光。<<rainWraith true>>
+		<br><br>
+
+		其中一位<<person1>><<monks>>被看不见的力量向后推出，撞到一棵树上。屑片随着<<his>>跌落在地。其余的人都捂着头，试图堵住耳朵。你什么也听不到。
+		<br><br>
+
+		另一位<<monk>>试图逃跑。你看到一条长长的半透明的肢体缠绕着<<his>>的腿，将<<him>>无助地抬起到空中。幽灵般的形状在空中舞动，逐渐变成了苍白的人形。
+		<br><br>
+
+		"<span class="wraith">沉默的怜悯已经离开了你。</span>"
+		<br><br>
+
+		当那个人张开嘴巴时，一声刺耳的尖叫声充斥了你的耳朵。由于你被束缚住，无法阻止它。<<stress 24>><<trauma 24>><<gggstress>><<gggtrauma>>
+		<br><br>
+
+		<<link [[继续|Lake Ritual Molestation Finish 2]]>><</link>>
+	<<else>>
+		你听到一声枪响，一颗子弹落在那群人的脚边。他们退后，彼此耳语片刻，然后消失在森林里。
+		<br><br>
+
+		<<clotheson>>
+		<<unbind>>
+		<<endcombat>>
+		伊甸出现了，砍断了你的绑缚，帮助你恢复自己。<<nnpc_he "Eden">>咒骂道，"该死，你还好吗？"
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周。<<nnpc_he "Eden">>说："我们一定陷得太深了。"
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<link [[回到小屋 (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[告别|Lake Shore]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<<ejaculation>>
+	<<person1>><<person>>结结巴巴地说："仪式完成了，我们可以回到神殿了。"他们消失在森林中，没有解开你的束缚。
+	<br><br>
+
+	你挣扎着摆脱束缚。你感觉到它们变得松动，很快就断了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<pass 20>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<</if>>
+<br>
+<<set $stress -= 1000>>

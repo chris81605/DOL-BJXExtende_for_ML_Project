@@ -1,0 +1,42 @@
+:: Danube Spiders []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+
+	你试图把蛛网拉开，但你的手被缠住了。
+	你想要把手抽出来，但扭动的过程使你身体其余部分也缠绕了起来，让你悬在了空中。
+	你的挣扎导致一个卵囊从高处掉了下来。
+	它摔在木地板上裂了开来，从里面爬出了成千上万只鲜活的小蜘蛛，它们开始爬向困住你的网。
+	<br><br>
+
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "spiders" "蜘蛛" "爬行着" "破开" "稳定" 1 9>>
+	<<set $timer to 30>>
+<</if>>
+
+<<if $timer gte 25>>
+	蛛网顶上的旧木板发出吱吱的响声。如果再这样下去会塌的。
+<<elseif $timer gte 20>>
+	碎片从天花板上脱落。
+<<elseif $timer gte 10>>
+	木头还在不断地裂开。
+<<elseif $timer gte 1>>
+	木制天花板发出令人害怕的咯吱声。
+<<else>>
+	一根木梁从天花板上折断，蛛网翻滚着落在了地上。
+<</if>>
+<br><br>
+
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Danube Spiders Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Danube Spiders]]>><</link>></span><<nexttext>>
+<</if>>

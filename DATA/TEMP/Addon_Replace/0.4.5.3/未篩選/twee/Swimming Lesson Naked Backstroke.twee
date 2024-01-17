@@ -1,0 +1,81 @@
+:: Swimming Lesson Naked Backstroke []
+<<set $outside to 0>><<set $location to "pool">><<schooleffects>><<water>><<effects>>
+
+你对课程教授的内容不感兴趣，而是选择练习仰泳。
+<<swimmingskilluse>>
+<br><br>
+当同学们看到你全裸着仰泳，向上展示着你的<<if playerBellyVisible()>>怀孕肚<<if $player.penisExist and $player.vaginaExist>>，<<else>>和<</if>><</if>><<genitals>>时，都忍不住惊叹起来。
+<<exhibitionism5>>
+
+梅森似乎对你选择的自由活动很不满意。
+<<if $player.penisExist>>
+	<<if $player.vaginaExist>>
+		一些男孩和女孩惊叹地盯着你独特的性器。
+	<<elseif $player.penissize lte 0>>
+		一些女孩看到这一幕，咯咯笑了起来，还有几个坏笑着。<<incgpenisinsecurity>>
+	<<elseif $player.penissize is 4>>
+		一些女孩看到这一幕后咯咯直笑，而几个男孩则皱起眉头。
+		<<if random(1,5) gte 4>>
+			有几个男孩的目光相比于其他人多停留了一会儿。
+		<</if>>
+		<<incgpenisinsecurity>>
+	<<else>>
+		一些学生的目光在你的裸体上稍作停留，而有几个女孩在看到这一幕后咯咯笑了起来。
+	<</if>>
+<<else>>
+	一些男孩看到这一幕后咯咯笑了起来，而几个女孩则皱起眉头。
+	<<if random(1,5) gte 4>>
+		有几个女孩的目光相比于其他人更多停留了一会儿。
+	<</if>>
+<</if>>
+<br><br>
+
+<<status 1>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	<<if $swimall is 1>>
+		当下课的铃声响起时，你爬出了游泳池。尽管每个人都是赤身裸体的状态，但似乎没有人关心这个。只有梅森会在每个学生经过的时候递上毛巾并尽量避免目光接触。
+		<br><br>
+	<<elseif $exposed gte 1>>
+		当下课的铃声响起时，你继续待在泳池中以等待其他学生的离开，但有一些学生依旧徘徊不前。
+		毫无疑问，那些家伙希望在你爬出来的时候能看到独特的风景线，但梅森把那些家伙都赶走了，以此来为你留下一些隐私。
+		<br><br>
+	<<elseif $exposed lte 0>>
+		当下课的铃声响起时，你爬出了游泳池。
+		<br><br>
+	<</if>>
+	<<if $exposed lte 0>>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+		<br>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<maleicon>><<link [[拿一条毛巾裹住身体并进入男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+		<br>
+		<<femaleicon>><<link [[拿一条毛巾裹住身体并进入女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - ($allure / 2))>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<<elseif $exposed lte 0>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - ($allure / 10))>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<</if>>
+<</if>>

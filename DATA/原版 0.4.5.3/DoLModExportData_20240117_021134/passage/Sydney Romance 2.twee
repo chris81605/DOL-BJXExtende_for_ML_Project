@@ -1,0 +1,37 @@
+:: Sydney Romance 2 []
+<<effects>><<run statusCheck("Sydney")>>
+"我一直被约旦<<nnpc_brother "Jordan">>所教导，淫念是最危险的罪恶。我无法辨别何处是爱的尽头，何处是欲的起点……我不能……我不知道。抱歉。
+<<if $purity lte 500 or $demon gte 6>>
+	关于你的一切，都是神殿教导我要去恐惧和回避的东西……
+	<<if _sydneyStatus.includes("corrupt")>>
+		而我爱这种感觉。
+	<<else>>
+		但每当我看见你，仿佛就忘了周身的一切。
+	<</if>>
+<<elseif $purity gte 1000 or $angel gte 6>>
+	你是我们所敬仰的无暇的存在，
+	<<if _sydneyStatus.includes("corrupt") or _sydneyStatus.includes("Lust")>>
+		但是无端的嫉妒折磨着我，恶欲淫念时刻想让我把你弄脏……
+	<<else>>
+		你是我前进的动力……或许正是那种渴慕让我有了这样的念头。
+	<</if>>
+<<else>>
+	他们从来不会让我面对这些。他们只会教我去恐惧，去回避，去忘掉我身边的一切……我好怕，好怕。
+<</if>>
+我到底该怎么办……"你看见眼泪开始在<<his>>的眼眶里打转。
+<<if ($genderknown.includes("Sydney") and $player.gender is $NPCName[$NPCNameList.indexOf("Sydney")].pronoun) or (!$genderknown.includes("Sydney") and $player.gender_appearance is $NPCName[$NPCNameList.indexOf("Sydney")].pronoun)>>
+	<br><br>
+	"更不用说，其实……其实我们都是<<personsimple>>。我在以前甚至都没有考虑过这种事，但……我不认为这有什么关系。" 你发现<<him>>又脸红了。
+<</if>>
+<br><br>
+"我真是自私又低劣，把自己的心事强加于你……请原谅我。
+<<if !$sydneySeen.includes("initiate")>>
+	我有对神殿的誓约，和我产生关系将会是你莫大的负担。我很克制地表达自己的爱慕，我也确信你想要的比我能给的更多。"
+<<else>>
+	我们有着对神殿的誓约，所以我不愿让你面临违约的风险。"
+<</if>>
+<br><br>
+<<link [[接受并回应这份感情|Sydney Romance Accept]]>><<npcincr Sydney love 5>><<npcincr Sydney purity -2>><</link>><<gglove>><<lspurity>>
+<br>
+<<link [[仍然做朋友|Sydney Friendzone]]>><<npcincr Sydney purity 2>><</link>><<gspurity>>
+<br>

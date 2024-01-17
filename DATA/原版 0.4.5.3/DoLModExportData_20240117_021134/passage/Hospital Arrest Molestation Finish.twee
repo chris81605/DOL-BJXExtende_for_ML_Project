@@ -1,0 +1,29 @@
+:: Hospital Arrest Molestation Finish []
+<<if $enemyhealth lte 0>>
+	他们从你身边退开，对你的力量感到惊讶。<<tearful>>你打开窗户，在他们能够阻止你之前逃离。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Industrial alleyways]]>><<set $stress -= 1000>><<set $eventskip to 1>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<if $phase is 1>>
+		<<ejaculation "short">>
+		第二次的高潮几乎让他们累瘫了，你趁机从门口逃脱。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[继续|Industrial alleyways]]>><<set $stress -= 1000>><<set $eventskip to 1>><</link>>
+	<<else>>
+		<<ejaculation>>
+		<<person2>>"<<pShe>>应该有点价值，"<<person>>说，"像个乖乖的'小玩具'一样跟我们走。"<<He>>抓住你的手臂，试图把你拽进更深处。
+		<br><br>
+		<<link [[乖乖过去|Underground Intro]]>><</link>>
+		<br>
+		<<link [[反抗|Hospital Arrest Molestation]]>><<set $phase to 1>><<set $enemyanger += 120>><<set $enemytrust -= 40>><<set $enemyarousal to 0>><</link>>
+	<</if>>
+<<elseif $phase is 1>>
+	你伤得太重，无法继续战斗。<<person1>><<person>>和<<person2>><<person>>把你瘫软的身体拖进更深处。
+	<br><br>
+	<<link [[继续|Underground Intro]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

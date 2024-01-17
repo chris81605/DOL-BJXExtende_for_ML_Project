@@ -1,0 +1,80 @@
+:: Lake Ruin Plinth []
+<<set $outside to 0>><<set $location to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+你深入了湖泊废墟，身处一个小房间里，有一个矮柱。
+<<if $museumAntiques.antiques.antiqueivorynecklace is "notFound">>
+	一条象牙项链放在上面。项链上镶有蓝色的宝石。
+<</if>>
+<<set _leave to 1>>
+<<set _bmoon to isBloodmoon()>>
+<<set _parasite to ($parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime")>>
+<<if _bmoon>>
+	/* Display these on every blood moon entry */
+	<<if $wraith.hunt>>
+		你感觉到追踪你的存在停了下来。<span class="blue">祂无法进入这里。</span>
+		<<set $wraith.hunt to 0>><<set $foresthunt to 0>><<set $wraith.timer += 5>>
+	<</if>>
+	红月光从天花板的裂缝中过滤下来。虽然不多，但光线照在矮柱上，看起来很耀眼。
+	<<if $moonEvent and !_parasite and $worn.genitals.name is "gold chastity belt">>
+		/* Moon event if no parasites and has gold cb */
+		<<unset $moonEvent>><<set $worn.genitals.integrity *= 0.5>><<control 50>>
+		你被矮柱吸引了，感觉到一种奇怪的平静。
+		<<gggcontrol>><br><br>
+		<<set $phase to 1>>
+	<</if>>
+<</if>>
+<<if _bmoon and _parasite>>
+	/* Clear the possibility of the other moon event, but this event can be revisited if it is skipped */
+	<<unset $moonEvent>>
+	你感觉到祂在拉扯你。
+	<br><br>
+
+	<<link [[坐在矮柱上|Lake Ruin Sit]]>><</link>>
+	<br>
+<<elseif $tentacledisable is "f" and $hallucinations gte 2 and !_bmoon>>
+	你环顾空荡荡的房间。除了底座<<if $museumAntiques.antiques.antiqueivorynecklace is "notFound">>和项链<</if>>之外，你什么都看不到，但你听到了微弱的滑行声。<span class="blue">有东西在看着你。</span>
+	<br><br>
+
+	<<link [[摸索|Lake Ruin Deep Offer]]>><<loxygen>><</link>>
+	<br>
+/* 北极星模组 */
+<<elseif $tentacledisable is "f" and _bmoon and $phase isnot 1 and $museumAntiques.antiques.antiqueivorynecklace isnot "notFound" and $slime gt 0>>
+	<br><br>
+	你感觉水在你周围搅动，当你环顾四周时，水搅动得越来越强烈了。在红色月光的微弱照射下，触手从黑暗中伸出。<span class="red">其中两条试图缠住你的脚踝，但无法抓住。</span>
+	<br><br>
+
+	<<link [[触碰|Lake Ruin Sit]]>><</link>>
+	<br>
+/* 北极星 */
+<<elseif $tentacledisable is "f" and _bmoon and $phase isnot 1 and $museumAntiques.antiques.antiqueivorynecklace isnot "notFound">>
+	<<set _leave to 0>>
+	<br><br>
+	你感觉到水在你周围激动不安地翻腾着，当你四处张望时，水变得越来越不安。在暗处，被红色月光微弱照亮的地方，触手突然挥动着。<span class="red">其中两根缠绕在你的脚踝上，开始将你拉往房间深处！</span>
+	<br><br>
+
+	<<link [[顺从|Lake Ruin Deep NonConsentacles]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[逃脱|Lake Ruin Deep Consentacles Leave]]>><<loxygen>><</link>><<swimmingdifficulty 600 1200>>
+	<br>
+<<elseif _bmoon>>
+	你周围的水异常安静，死一般的寂静，房间只有微弱的红色光芒照亮。
+	<br><br>
+	/* 北极星模组 */
+	<<if $slime gt 0>>
+    	<span class="green">你感觉底座对你有股奇怪的吸引力……</span>
+    	<br><br>
+    	<<link [[触碰|Lake Ruin Sit]]>><</link>>
+    	<br><br>
+	<</if>>
+	/* 北极星 */
+<<else>>
+	在黑暗的房间里，水随着你的动作摇摆。
+	<br><br>
+<</if>>
+<<if _leave>>
+	<<if $museumAntiques.antiques.antiqueivorynecklace is "notFound">>
+		<<link [[拿走项链|Lake Ruin Ivory]]>><<set $antiquemoney += 2000>><<museumAntiqueStatus "antiqueivorynecklace" "found">><<set $necklaceThief to "player">><</link>>
+		<br>
+	<</if>>
+	<<link [[离开|Lake Ruin Deep]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

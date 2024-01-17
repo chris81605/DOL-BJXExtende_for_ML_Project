@@ -1,0 +1,110 @@
+:: Pharmacy []
+<<unset $pharmacyItem>>
+<<if $daily.pharm.closed>>
+	门上挂着一个 "关闭 "的标志，你拉了拉门，门是锁着的。
+	<br><br>
+
+	<<link [[离开|Hospital Foyer]]>><</link>>
+<<else>>
+	<<set $outside to 0>><<set $location to "hospital">><<effects>>
+	<<endevent>>
+	你正在医院的药房内。
+
+	<<if "pharmNurse" in $per_npc>>
+		<<loadNPC 0 "pharmNurse">><<person1>>
+		<<if $daily.pharm.seductionResult is "fail">>
+			<br>
+			"嘿，你回来了。"<<person>>和你打了个招呼，然后又将注意力集中到了<<his>>的书上。
+		<<elseif $daily.pharm.seductionResult is "pass">>
+			<<if $daily.pharm.sexResult is "buy">>
+				柜台后的<<person>>瞥了你一眼，然后又将注意力集中在了<<his>>的书上，不过你还是注意到了<<his>>的脸色有些泛红。
+			<<elseif $daily.pharm.sexResult is "embarrassed">>
+				收银台前的<<person>>瞥了你一眼，然后笑一下，在笑完之后，<<his>>又将注意力集中到了<<his>>的书上。
+			<<else>>
+				收银台前的<<person>>瞥了你一眼，然后又将注意力集中在了<<his>>的书上。
+			<</if>>
+		<<else>>
+			收银台前的<<person>>瞥了你一眼，然后又将注意力集中在了<<his>>的书上。
+		<</if>>
+	<<else>>
+		<<generateRole 0 0 "护士">><<person1>>
+		<<saveNPC 0 "pharmNurse">>
+		一个$description<<male>>护士正坐在收银台边上看书。
+	<</if>>
+	<br>
+	<<if $brothelVending and $brothelVending.status is "set" and $condomLvl gte 1 and !($brothelVending.products % 2)>>
+		<br>
+		<<link [[询问如何批量购买避孕套 (0:15)|Pharmacy Buy Condoms in Bulk]]>><<pass 15>><</link>>
+		<br><br>
+	<</if>>
+	看着架子上的物品，你注意到几个让你很感兴趣的物品。
+	<br><br>
+
+	<<if $player.penisExist>>
+		阴茎增强药：
+		<br>
+		<<pillicon "penisReduce">><<link [[一板（14粒）阴茎缩短剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["penis_reduction"]>><</link>>
+		<br>
+		<<pillicon "penisEnlarge">><<link [[一板（14粒）阴茎生长剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["penis_growth"]>><</link>>
+		<br>
+		<<pillicon "penisBlock">><<link [[一板（14粒）阴茎维持剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["penis_blocker"]>><</link>>
+		<br><br>
+	<</if>>
+
+	丰胸药：
+	<br>
+	<<pillicon "breastReduce">><<link [[一板（14粒）缩胸剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["breast_reduction"]>><</link>>
+	<br>
+	<<pillicon "breastEnlarge">><<link [[一板（14粒）丰胸剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["breast_growth"]>><</link>>
+	<br>
+	<<pillicon "breastBlock">><<link [[一板（14粒）胸部维持剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["breast_blocker"]>><</link>>
+	<br><br>
+
+	丰臀药：
+	<br>
+	<<pillicon "bottomReduce">><<link [[一板（14粒）瘦臀剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["bottom_reduction"]>><</link>>
+	<br>
+	<<pillicon "bottomEnlarge">><<link [[一板（14粒）丰臀剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["bottom_growth"]>><</link>>
+	<br>
+	<<pillicon "bottomBlock">><<link [[一板（14粒）臀部维持剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["bottom_blocker"]>><</link>>
+	<br><br>
+
+	寄生虫预防药：
+	<br>
+	<<procedureicon "parasite">><<link [[一管抗寄生虫药膏|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["Anti-Parasite Cream"]>><</link>>
+	<br><br>
+
+	家庭计划:
+	<br>
+	<<sextoysicon "pump">><<link [[挤奶器|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["breast_pump"]>><</link>>
+	<br>
+	<<pregnancytesticon>><<link [[一盒（2根）验孕棒|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["pregnancy_test"]>><</link>>
+	<br>
+	<<pillicon "fertility">><<link [[一盒（14颗）排卵促发剂|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["fertility_pills"]>><</link>>
+	<br><br>
+
+	避孕药：
+	<br>
+	<<if $brothelVending and $brothelVending.status is "set" and $brothelVending.products % 2 and $brothelVending.condomsToRefill gte 10 and $condomLvl gte 1>>
+		<<condomicon>><<link [[为妓院买避孕套 (0:10)|Pharmacy Buy Condoms in Bulk]]>><<pass 10>><</link>>
+		<br>
+	<</if>>
+	<<if $condomLvl gte 1>>
+		<<condomicon>><<link [[每包3个避孕套|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["condoms"]>><</link>>
+		<br>
+	<</if>>
+	<<pillicon "contraceptive">><<link [[一板（14粒）避孕药|Pharmacy Sale]]>><<set $pharmacyItem to setup.pharmacyItems["contraceptive_pills"]>><</link>>
+	<br>
+	<<pillicon "morningAfter">><<link [[要求提供事后避孕药|Pharmacy Morning After pill]]>><<set $pharmacyItem to setup.pharmacyItems["Morning_After_pill"]>><</link>>
+	<br><br>
+
+	隐形眼镜:
+	<br>
+	<<cosmeticsicon "contacts">><<link [[看一下隐形眼镜的款式|Pharmacy Lenses]]>><</link>>
+	<<if !($daily.pharm.impatient gte 3) and $lenses_ordered.length gt 0>>
+		<br>
+		<<cosmeticsicon "contacts">><<link [[询问定制的隐形眼镜是否已送达|Pharmacy Ask If Lenses Delivered]]>><</link>>
+	<</if>>
+	<br><br>
+	<<getouticon>><<link [[返回大厅|Hospital Foyer]]>><<endevent>><</link>>
+<</if>>

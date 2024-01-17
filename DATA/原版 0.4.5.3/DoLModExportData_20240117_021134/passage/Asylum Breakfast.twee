@@ -1,0 +1,39 @@
+:: Asylum Breakfast []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+你和其他病人一起享用早餐。
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	你的手臂被绑住了，
+	<<if $asylumstatus gte 66>>
+		旁边的一个病人主动喂你吃饭。
+		<br>
+		"在这种地方就该互相帮助。"
+		<br>
+	<<elseif $asylumstatus gte 33>>
+		只能把脸埋进盘子里吃。
+	<<else>>
+		只能把脸埋进盘子里吃。
+		附近的一个人<<print either("抓住你的头，把你的脸按到食物上。","做着鬼脸模仿你的吃相。","指着你笑。","对你吃香肠的样子开着黄腔。")>>
+		其他人哈哈大笑。
+	<</if>>
+<</if>>
+饭菜很好吃，让你感到温暖和快乐。不仅仅是你，其他病人似乎也活跃交流了起来。
+<br><br>
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "asylumCafe">>
+<<elseif $exposed is 2>>
+	你的<<lewdness>>吸引了所有人的注意。
+	<<exhibitionism5>>
+<<elseif $exposed is 1>>
+	你的<<lewdness>>吸引了所有人的注意。
+	<<exhibitionism3>>
+<<elseif $asylumstatus gte 80>>
+	其他病人似乎很愿意和你聊天。
+<<elseif $asylumstatus gte 60>>
+	附近几个病人和你一起边吃早餐边聊天。
+<<elseif $asylumstatus gte 40>>
+	离你最近的病人不情不愿地和你交谈。
+<<else>>
+	然而，你试图搭话时，得到的只有无情的沉默。
+<</if>>
+<br>
+<<asylumevents>>

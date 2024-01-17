@@ -1,0 +1,101 @@
+:: Dilapidated Shop []
+<<set $outside to 0>><<set $location to "dilapidated_shop">><<effects>>
+<<getadultshopstate>>
+<<run statusCheck("Sydney")>>
+<<if $adultshopstate is "sydney" and Time.weekDay is 6>>
+	<<if $adultshopintro isnot 1>>
+		<<set $adultshopintro to 1>>
+		<<unset $adultshopintrosirris>>
+		<<if $NPCName[$NPCNameList.indexOf("Sirris")].init isnot 1>>
+			你经过一家破旧的商店。窗户用木板封住了，但门是开着的。有人提着板条箱走了出来——是西里斯。<<npc Sirris>><<person1>><<He>>看到你看起来很惊讶。
+			<br><br>
+			"学年开始以来就没见过你了，我还以为你转校了……不说那些，欢迎来到我未完成的商店。"西里斯说着，把箱子放在脚边，伸手进去拿了些什么东西。"刚开始还只是兴趣使然，但我一个朋友告诉我这些东西会很有市场。"
+			<br><br>"
+		<<else>>
+			<<npc Sirris>>
+			<<person1>>
+
+			你经过一家破旧的商店。窗户用木板封住了，但门是开着的。一个<<personsimple>>拿着板条箱走出来。是西里斯。<<He>>一看到你就笑了。
+			<br><br>
+
+			"欢迎来到我未完成的商店。"西里斯说着，把箱子放在脚边，伸手进去拿了些什么东西。"刚开始还只是兴趣使然，但我一个朋友告诉我这些东西会很有市场。"
+			<br><br>
+		<</if>>
+		<<He>>拿出了一根粗壮的紫色物品，<span class="purple">外形形似一根阴茎。</span>"不该在外面拿着这玩意张扬的。"<<he>>摇了摇头，把它扔回了箱子里。"你可以来帮我整理商店，一个小时付你£20。"
+		<br><br>
+		"我已经有一个帮手了。"<<he>>补充道，"悉尼！"
+		<br><br>
+
+		<<link [[继续|Dilapidated Shop Intro]]>><</link>>
+		<br>
+	<<else>>
+		<<npc Sirris>>
+		<<npc Sydney 2>>
+		<<person2>>
+		你进入了西里斯的商店。
+		<<if $adultshopprogress gte 18>>
+			货架空空如也，地面还需要打扫，但商店似乎已经快准备完毕了。
+		<<elseif $adultshopprogress gte 14>>
+			堆得高高的箱子靠着剥落的墙壁。
+		<<elseif $adultshopprogress gte 7>>
+			木制货架，螺丝，以及其他的家具组件散落一地。
+		<<else>>
+			一架扶梯上挂着一桶油漆。
+		<</if>>
+		悉尼从后面的房间里出来了。
+		<<if $sydneyromance is 1>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"你好啊，"<<he>>说着，亲了亲你的脸颊。"来帮忙的吗？"
+			<<else>>
+				"<<sydneymum>>让你来帮忙真是太好了。"<<he>>害羞地低下了头，"如果是别人的话就要尴尬死了。"
+			<</if>>
+		<<else>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"你好啊，"<<he>>笑了笑，"来帮忙的吗？"
+			<<else>>
+				<<He>>害羞地微笑着，"你是来帮忙的吗？"
+			<</if>>
+		<</if>>
+		<br><br>
+		<i>无论你是否帮忙，成人用品店都会开门，但如果你帮忙的话进度会更快。一旦竣工，你就可以从商店买东西了，小镇的其他人也会来买。</i>
+		<br><br>
+		<<link [[帮忙 (1:00)|Dilapidated Help]]>><<set $adultshopprogress += 1>><<set $adultshopcontribution += 1>><<set $adultshophelped to 1>><<pass 60>><<npcincr Sirris love 1>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br>
+		<<if $cheatdisable is "f">>
+			<<link [[小心翼翼地帮助|Dilapidated Help]]>><<set $adultshopprogress += 8>><<set $adultshopcontribution += 8>><<set $adultshophelped to 1>><<pass 60>><<npcincr Sirris love 1>><<npcincr Sydney love 1>><</link>><<glove>><i>增加商店进度，才能解锁下一层事件。</i> <i>作弊。</i><!-- Appears even with blind stats enabled. Intentional -->
+		<</if>>
+		<br>
+		<<link [[离开|Elk Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你路过了一家破败的商店。窗户被木板钉死了，你从木板间的缝隙向内窥觑，发现地上到处都是色情杂志和VHS视频磁带。
+	<br><br>
+
+	<<link [[离开|Elk Street]]>><</link>>
+	<br>
+	<<if $debug is 1>>
+		<br>
+		<i>Debug.对悉尼数据的更改在事件结束后依然有效。</i>
+		<br><br>
+		成人用品店准备进度:$adultshopprogress<br>
+		<<link [[将进度改为0|$passage]]>><<set $adultshopprogress to 0>><</link>>
+		<br>
+		<<link [[将进度改为8|$passage]]>><<set $adultshopprogress to 8>><</link>>
+		<br>
+		<<link [[将进度改为15|$passage]]>><<set $adultshopprogress to 15>><</link>>
+		<br><br>
+		<<link [[帮忙装修商店|Dilapidated Help]]>><<npc Sirris>><<npc Sydney 2>><<person2>><<set $adultshopprogress += 1>><<set $adultshopcontribution += 1>><<set $adultshophelped to 1>><<pass 60>><<npcincr Sirris love 1>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br><br>
+		<<link [[开业典礼 悉尼纯洁状态|Adult Shop Opening]]>><<npc Sydney>><<person1>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Sydney")].purity to 100>><<set $NPCName[$NPCNameList.indexOf("Sydney")].corruption to 0>><</link>>
+		<br>
+		<<link [[开业典礼 悉尼中立状态|Adult Shop Opening]]>><<npc Sydney>><<person1>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Sydney")].purity to 0>><<set $NPCName[$NPCNameList.indexOf("Sydney")].corruption to 0>><</link>>
+		<br>
+		<<link [[开业典礼 悉尼腐化状态|Adult Shop Opening]]>><<npc Sydney>><<person1>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Sydney")].purity to 0>><<set $NPCName[$NPCNameList.indexOf("Sydney")].corruption to 100>><</link>>
+		<br><br>
+	<</if>>
+	<<if $cheatdisable is "f" or $debug is 1>>
+		<<link [[开商店的锁|Elk Street]]>><<set $adultshopunlocked to true>><</link>> | <i>作弊选项</i> <!-- Appears even with blind stats enabled. Intentional -->
+		<br>
+	<</if>>
+<</if>>

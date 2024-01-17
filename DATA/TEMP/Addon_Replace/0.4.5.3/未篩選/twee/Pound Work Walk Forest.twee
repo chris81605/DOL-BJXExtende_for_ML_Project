@@ -1,0 +1,42 @@
+:: Pound Work Walk Forest []
+<<set $outside to 1>><<location "forest">><<effects>>
+
+<<if $phase is 1>>
+	你领着
+<<else>>
+	你被迫跟着
+<</if>>
+<<beastsplural>>穿过镇上的街道。一些行人远远地绕开了你的狗群，不过也有一些停下来摸了摸它们。
+<br><br>
+
+你们来到了森林。你依然拴着<<beastsplural>>，在这里迷路可能会很危险，即使离小镇并不远。
+<br><br>
+
+<<if random(1, 2) and ($bestialitydisable is "f" or $monster is 1)>>
+	其中一只<<beasttype 0>>嗅闻着一朵粉色的花。
+	<<if $tending gte 600>>
+		<span class="green">你认识它，</span><span class="purple">并且你知道它很危险。</span>
+		<br><br>
+
+		<<link [[让狗离开|Pound Work Walk Forest Call]]>><</link>><<tendingdifficulty 600 1000>>
+		<br>
+		<<link [[接受|Pound Work Walk Forest Allow]]>><</link>>
+		<br>
+	<<else>>
+		<span class="red">你不认识它。</span>
+		<br><br>
+
+		<<link [[继续|Pound Work Walk Forest Allow]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	 你沿着一条蜿蜒在森林边缘的小路前进。它们经常停下来嗅一嗅灌木丛和树底。远离蘑菇和奇形怪状的花。当道路重新出现在街道上时，他们已经相当疲惫了。
+	 <br><br>
+
+	 你把它们带回收容所，放回笼子里。
+	 <br><br>
+
+	 你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	 <<link [[继续|Pound]]>><<endevent>><</link>>
+	 <br>
+<</if>>

@@ -1,0 +1,39 @@
+:: Underground Robin Hunt Dog Finish []
+<<location "forest">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<undergroundRobinTopic "hunt" "undiscussed">>
+	<<beastejaculation>>
+
+	<<beasttype 0>>快乐地吠叫。“好狗，”<<person2>><<person>>说。当<<he>>抓住你的皮带，把你拉起来时，人群之间窃窃私语。
+	<<if !$worn.feet.type.includes("shackle")>>
+		你的脚裸再次被冰冷的枷锁所铐住了。
+		<<shackle_feet>>
+	<</if>>
+	“我希望其他人也和我们一样，能和猎物玩得开心。”
+	<br><br>
+
+	附近响起了一声尖叫，人群冲出去调查，留下那个<<person>>把你拖回地牢，回到你的牢房。罗宾很快就倒下了。
+	<<undergroundReturnToCell>>
+
+<<elseif $enemyhealth lte 0>>
+	<<beasttype 0>>呜咽着逃跑了。<<tearful>>你爬了起来。
+	<<if _robin.dom gte 70>>
+		罗宾推开了<<if $rng gte 51>>一个$robinBeast<<else>>攻击<<nnpc_him "Robin">>的<<person2>><<person>><</if>>并抓住了你的手，
+	<<else>>
+		你把<<if $rng gte 51>>一个$robinBeast<<else>><<person2>><<person>><</if>>从罗宾身边推开，然后抓住<<nnpc_his "Robin">>的手，
+	<</if>>
+	你们一起逃跑。<<person2>><<person>>试图阻止你们，但你们躲开了<<him>>并逃进了森林。
+	<br><br>
+
+	<<undergroundEscapeForestRobin>>
+
+<<else>>
+	罗宾推开了<<if $rng gte 51>>一个$robinBeast<<else>>攻击<<nnpc_him "Robin">>的<<person2>><<person>><</if>>，并在抓住你的手之前踢开了<<beasttype 0>>。
+	你们一起逃跑。<<person2>><<person>>试图阻止你们，但你们躲开了<<him>>并逃进了森林。
+	<br><br>
+
+	<<undergroundEscapeForestRobin>>
+<</if>>
+<<unset $robinBeast>>

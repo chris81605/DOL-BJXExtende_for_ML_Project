@@ -1,0 +1,64 @@
+:: Prison Laundry Work Challenge []
+<<effects>>
+
+
+<<He>>先摇骰子。
+
+<<set _die_1 to random(1, 6)>>
+<<set _die_2 to random(1, 6)>>
+
+<div id="die_text">
+	<span id="die_1">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+	+
+	<span id="die_2">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+	<br>
+	=
+	<br>
+	<span id="die_result">
+
+	</span>
+	<span id="prison_list_result">
+
+	</span>
+</div>
+
+<<timed 1s>>
+	<<replace "#die_1">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_' + _die_1 + '.png'">
+	<<else>>
+		_die_1
+	<</if>>
+	<</replace>>
+<</timed>>
+<<timed 2s>>
+	<<replace "#die_2">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_' + _die_2 + '.png'">
+	<<else>>
+		_die_2
+	<</if>>
+	<</replace>>
+<</timed>>
+
+
+<<set $relaxed_roll to (_die_1 + _die_2)>>
+<<timed 3s>>
+	<span id="die_text"><<print $relaxed_roll>></span>
+	<br><br>
+<</timed>>
+
+<<link [[继续|Prison Laundry Work Challenge 2]]>><</link>>
+<br>

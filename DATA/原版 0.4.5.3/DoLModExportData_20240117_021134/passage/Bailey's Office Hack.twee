@@ -1,0 +1,52 @@
+:: Bailey's Office Hack []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set $hacker_tasks.pushUnique("bailey")>>
+
+<<rng>>
+<<if $pronoun is "m">>"先生，"<<else>>"贝利小姐，"<</if>>
+<<if $rng gte 67>>
+	你大喊。"花园里有个<<personsimple>>想把一个孤儿拖走！"
+	<br>
+	贝利冷笑了一声，大步走出办公室，朝花园的方向走去。
+<<elseif $rng gte 33>>
+	你小声说。"有个奇怪的<<personsimple>>在后窗那边偷看。太吓人了。"
+	<br>
+	贝利冷笑了一声，大步走出办公室。
+	<br>
+	<<He>>大步地朝着宿舍方向走去。
+<<else>>
+	你喘气。"外面有个<<personsimple>>在喊这个地方应该关闭。那我们住哪里？"
+	<br>
+	贝利皱着眉头，大步走出办公室。
+<</if>>
+<br><br>
+
+<<skulduggerycheck>>
+<br><br>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">贝利离开的时间足够长，你成功安装设备并逃脱了。</span>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<if $hacker_tasks.length gte 2>>
+		<span class="green">你已经完成了黑客的任务，也许该和兰德里谈一谈了。</span>
+		<br><br>
+	<</if>>
+	<<link [[继续|Orphanage]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	你成功安装了设备，但当你转身想逃走时，<span class="red">怒视着你的贝利拦在了门口</span>。
+	<br>
+	"为什么你们这些小笨蛋都喜欢浪费我的时间？"
+	<br>
+	<<He>>抓住你的手臂。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Bailey Beating]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<</if>>

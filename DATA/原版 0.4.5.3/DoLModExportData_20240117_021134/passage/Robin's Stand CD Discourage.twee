@@ -1,0 +1,43 @@
+:: Robin's Stand CD Discourage []
+<<set $outside to 1>><<set $location to (Time.season is "winter" ? "park" : "beach")>><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+	<<set _robin.cdstanddenial to 1>>
+
+	<<if $speech_attitude is "meek">>
+		"也许现在这个对你来说还为时过早……" 你一边抱着<<him>>，一边说道。
+	<<elseif $speech_attitude is "bratty">>
+		"我们以后可以再试一次的。" 你拍了拍<<him>>的背，"没有必要着急。"
+	<<else>>
+		"当你想再试的时候，我会在你身边的。"你仍然拥抱着<<him>>。
+	<</if>>
+
+	<<if _robin.dom gte 60>>
+		罗宾好像有些失落，但是<<hes>>并没有表现出来。"下一次一定会有机会的。"<<He>>从拥抱中离开。
+		"我想我应该换回去了，"<<he>>说道，"我带了一套衣服来摊位上，以防这种情况发生。"
+	<<else>>
+		罗宾点点头，"我想这并不紧急。"<<he>>的声音里逐渐回复了一些活力。
+		"我想我应该换回去了。我带了一套衣服来摊位上，以防这种情况发生。"
+	<</if>>
+	<br><br>
+
+	<<set _clothes to (Time.season is "winter" ? (_robin.pronoun is "m" ? "maleWarm1" : "femaleWarm1") : (_robin.pronoun is "m" ? "maleTown1" : "femaleTown1"))>>
+	<<npcClothesType _robin _clothes>>
+	罗宾离开了一会儿，回来时穿着一套<<npcClothesText _robin "both">>。
+	一看到你，<<his>>的皱眉就恢复成了微笑。"我们继续来卖<<print (Time.season is "winter" ? "热巧克力" : "柠檬水")>>吧。"
+	<br><br>
+
+	你们继续一起经营摊位。幸运的是，剩下的顾客都很友善。
+	<br><br>
+
+	<<endevent>>
+	<<if Time.season is "winter">>
+		<<link [[提供帮助 (0:30)|Robin Chocolate Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Park]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[提供帮助 (0:30)|Robin's Lemonade Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Beach]]>><</link>>
+		<br>
+	<</if>>

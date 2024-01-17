@@ -1,0 +1,99 @@
+:: Bondage Dog Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+<<beastejaculation>>
+
+完事后，<<beasttype>>留你在地上瑟瑟发抖。
+<br><br>
+	<<if $rescue is 0>>
+		<<tearful>>你试着辨认方向。但找不到拿着相机的人的任何痕迹。<<famebestiality 10>>
+	<<else>>
+		<<tearful>>你试着弄清自己在哪里。你希望没人看见你。
+	<</if>>
+	<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<set $eventskip to 1>>
+<<destinationbondage>>
+
+<<elseif $enemyhealth lte 0>>
+
+<<beasttype>>呜咽着逃走了。
+<br><br>
+	<<if $rescue is 0>>
+		<<tearful>>你试着弄清自己在哪里。那个拿着相机的人已经不见踪影。
+	<<else>>
+		<<tearful>>你试着弄清自己在哪里。你希望没人看见刚刚的事情。
+	<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<set $eventskip to 1>>
+<<destinationbondage>>
+
+<<else>>
+	<<if $rapeavoid is 0>>
+		你听到有脚步声在靠近。你在惊慌中努力从<<beasttype>>处脱身，但它把你摁在原地。
+		<br><br>
+
+		"看看我们找到了什么。" 有个声音说道。"一个在大街上被<<bred>>的骚货。"
+		<br><br>
+		<<if $worn.face.type.includes("gag")>>
+			你戴着塞嘴布口齿不清地讲话，想要请求帮助。你不清楚这有没有起到效果。
+			<br><br>
+
+			"把我的相机拿出来。" 那个声音继续道。"我相信你不会违抗的。很好。"
+			<br><br>
+		<<else>>
+			<<if $speech_attitude is "meek">>
+				"请，请帮帮我，"你说。
+			<<elseif $speech_attitude is "bratty">>
+				"要么帮忙，" 你说，"要么滚。"
+			<<else>>
+				"请帮帮我。" 你说。
+			<</if>>
+		<br><br>
+
+		"你说什么？" 那个声音问道。"你身上那只<<beasttype>>操你的动静太大了。不过别担心，我带着相机呢，说不定我发出去后就知道了。"
+		<br><br>
+		<</if>>
+
+		<<link [[继续|Bondage Dog Rape]]>><<set $rescue to 0>><</link>>
+		<br>
+	<<else>>
+		"走开！" 那个声音喊道。脚步声越来越近，<<beasttype>>从你身边离开了。
+		<br><br>
+
+		<<endcombat>>
+		<<clotheson>>
+		<<generate1>><<person1>>
+		<<if $rng gte 51 and Time.dayState isnot "night" or $rng gte 76>>
+			<<set $rescued += 1>>
+			有人伸手把你拉起来，"你还好吗？"<<person>>问道。
+			<<blindfoldremove>>
+
+			<<He>>确认你没受伤后便继续赶路去了。
+			<<lpain>><<pain -6>>
+			<br><br>
+
+			<<endevent>>
+			<<destinationeventend>>
+
+		<<else>>
+			<span class="red">你的尖叫引来了更危险的东西。</span>
+			<br><br>
+			你正打算起身，一个<<person>>把你压在身下。"别动，<<girl>>，"<<he>>说。"你还欠我呢，是我从那个混蛋那儿把你救出来的。"
+			<br><br>
+
+			<<link [[继续|Bondage Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+
+		<</if>>
+	<</if>>
+<</if>>

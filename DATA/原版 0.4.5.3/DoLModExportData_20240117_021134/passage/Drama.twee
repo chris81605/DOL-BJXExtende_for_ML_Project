@@ -1,0 +1,30 @@
+:: Drama []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generateNPC 1 a m m 17>><<person1>>
+	<<set $enemyno = 1>><<set $enemynomax = 1>>
+	<<maninit>>
+	<<set $crossdressing to 0>>
+	<<set $NPCList[0].insecurity to "weak">>
+	<<set $NPCList[0].fullDescription to "劳尔">>
+	/*Reduce enemy's Health to half, so he can be defeated in battle*/
+	<<set $enemyhealthmax to 100 * $enemyno>>
+	<<set $enemyhealth to 100 * $enemyno>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Drama Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Drama]]>><</link>></span><<nexttext>>
+<</if>>

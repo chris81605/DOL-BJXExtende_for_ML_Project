@@ -1,0 +1,36 @@
+:: Trash Gate Enter []
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+大门被一把重型挂锁给锁住了。
+<br><br>
+
+<<if $robinmissing is "landfill" and $robinmistknown>>
+	你仔细检查了一下挂锁，它并没有被锁上，看来是有人想让你到这里来。
+	<br><br>
+
+	<<getinicon>><<link [[进入|Trash]]>><<set $trash to 0>><</link>>
+	<br>
+<<else>>
+	<<set $lock to 800>>
+	<<if $trash_key is 1>>
+		<span class="green">它看起来与你找到的钥匙完美匹配。</span>
+		<br><br>
+
+		<<lakeicon "key">><<link [[使用钥匙(0:05)|Trash Enter]]>><<set $trash_unlocked to 1>><<pass 5>><</link>>
+		<br>
+	<<elseif currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">这把锁看起来很容易被撬开。</span>
+		<br><br>
+
+		<<lockpickicon>><<link [[撬锁(0:05)|Trash Lock Enter]]>><<pass 5>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+		<br>
+	<<else>>
+		<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+		<br><br>
+		<span class="blue"><i>一定有一把钥匙可以打开这个锁，但你不知道在哪里可以找到它。</i></span>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<elkicon>><<link [[离开|Elk Street]]>><</link>>
+<br>

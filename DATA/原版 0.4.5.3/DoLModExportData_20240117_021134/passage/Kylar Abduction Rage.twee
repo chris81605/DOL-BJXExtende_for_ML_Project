@@ -1,0 +1,50 @@
+:: Kylar Abduction Rage []
+<<effects>>
+
+<<He>>从你身边慌忙离开，不断地往后退，直到<<his>>的背撞到墙上。"什，什……什么，"<<he>>浑身颤抖，"我都做了些什么？"<<He>>跪着爬向了你，当<<he>>看到你还留有意识时，<<he>>松了一口气。
+<br><br>
+"我，我……对不起，<<kylar_pet_name>>。请，请原谅我！"<<He>>支支吾吾地站起身来，试图把你和你的椅子扶起，<<his>>有些语无伦次。<<He>>用后背推着它，用整个身体支撑着，才勉强把椅子扶正。
+<br><br>
+<<He>>跪了下来，眼神闪躲，好像很害怕与你对视。"我愿意为你做任何事，只是，请，请原谅我。"
+<br><br>
+
+<<if $kylar_abduction_stupid is 1>>
+	<<link [[指责凯拉尔在侮辱你的智商|Kylar Abduction Stupid]]>><<unset $kylar_abduction_stupid>><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes isnot "formal">>
+	<<link [[要求凯拉尔穿正式一点|Kylar Abduction Formal]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "formal">><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes isnot "goth">>
+	<<link [[要求凯拉尔穿上哥特风的服装|Kylar Abduction Goth]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "goth">><</link>>
+	<br>
+<</if>>
+<<if $kylar_clothes is "formal" or $kylar_clothes is "goth" or $kylar_clothes is "swimsuit">>
+	<<link [[对凯拉尔说穿随意点儿就行|Kylar Abduction Normal]]>><<set $kylar_clothes_init to 1>><<unset $kylar_clothes>><</link>>
+	<br>
+<</if>>
+<<if $kylar_abduction_grass is 1>>
+	<<link [[让凯拉尔去割草 (1:00)|Kylar Abduction Grass]]>><<pass 60>><<set $kylar_abduction_grass to 2>><</link>><<note "对知道你的位置有所帮助" "green">>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].dom lte 90>>
+	<<link [[要求凯拉尔向你认真道歉|Kylar Abduction Kneel]]>><</link>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].dom lte 80>>
+	<<link [[让凯拉尔给你跳一支舞|Kylar Abduction Dance]]>><</link>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].dom lte 60 and $kylar_clothes isnot "swimsuit">>
+	<<link [[让凯拉尔换一身泳装|Kylar Abduction Swimsuit]]>><<set $kylar_clothes_init to 1>><<set $kylar_clothes to "swimsuit">><</link>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].dom lte 30 and $footdisable is "f">>
+	<<link [[要求凯拉尔低头亲吻你的脚尖|Kylar Abduction Feet]]>><</link>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].dom lte 0>>
+	<<link [[让凯拉尔放你走|Kylar Abduction Release]]>><</link>><<note "逃出地下室" "gold">>
+	<br>
+<</if>>

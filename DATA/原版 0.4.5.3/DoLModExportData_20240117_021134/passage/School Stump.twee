@@ -1,0 +1,20 @@
+:: School Stump []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $schoolstate is "lunch" or $schoolstate is "morning" or $schoolstate is "afternoon">>
+	你向后靠在树桩上，闭上眼睛，听着庭院里学生的低语。
+<<else>>
+	你向后靠在树桩上，闭上眼睛，听着鸟儿的啁啾声。
+<</if>>
+<br><br>
+
+<<if $danger gte (9900 - $allure)>>
+	<<eventsschoolstump>>
+<<else>>
+	<<if $schoolstate isnot "late">>
+		<<link [[继续休息 (0:10)|School Stump]]>><<pass 10>><<stress -1>><<tiredness -1>><</link>><<ltiredness>><<lstress>>
+		<br>
+	<</if>>
+	<<link [[停止|School Rear Courtyard]]>><</link>>
+	<br>
+<</if>>

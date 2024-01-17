@@ -1,0 +1,56 @@
+:: English Play Rehearse Kylar []
+<<schooleffects>><<effects>><<set $bus to "rehearsal">>
+<<run statusCheck("Kylar")>>
+
+<<switch $englishPlayRoles.KylarCount>>
+	<<case 0>>
+		你朗诵着你的台词，然后等凯拉尔的念白。<<He>>看上去不需要什么帮助，也许是整个剧本本身就不是很长，<<He>>把自己的台词念得十分到位。
+		<br><br>
+
+		"能跟你一起表演，我实在是太激动了！我们肯定会让他们大吃一惊的，走着瞧。"
+	<<case 1>>
+		你和凯拉尔一起排练。当你念台词的时候，<<he>>则试着尽量和你保持眼神接触。终于直到<<he>>自己的部分开始，<<he>>配合着老练的手势念出了自己的台词，口音也模仿得相当到位。
+		<br><br>
+		你对那充满热情的表演扬起了眉毛。"别，别笑好吗？"<<he>>表演完后，紧张地说道。
+	<<case 2>>
+		你开始和凯拉尔一起排练。你在说台词时频繁地口吃，经过一番挣扎，你还是念出了正确的台词。但当轮到凯拉尔的时候，<<he>>看起来有些困惑，时而改变台词顺序，时而疑惑地看着剧本。
+		<br><br>
+
+		……原来是你们把剧本给搞混了。因为这件蠢事，你和凯拉尔开怀大笑。
+	<<case 3>>
+		<<switch $englishPlayRoles.Player>>
+			<<case "Cass">>
+				你和凯拉尔一起排练。你对<<him>>朗诵了一段极富感情与诗意的段落。<<he>>看起来有些紧张，四处乱瞥，眼神闪躲。你疑惑地盯着<<him>>，这让<<he>>很快回过神来。
+				<br><br>
+
+				"抱，抱歉，"<<he>>支支吾吾地说道，"但是听你在我面前念那、那样的台词，实在是……"<<his>>脸红了，又回到了恍惚的状态。
+			<<case "Taylor">>
+				你和凯拉尔一起排练。一切都进展的很顺利，直到你开始排练爱情戏部分。因为另一个演员并不在场，你只能和假想的人演对手戏。在你表演时，凯拉尔一直双手抱胸，紧皱眉头。
+				<br><br>
+
+				"另一个角色应该是我才对，"<<he>>咬牙切齿地低声说道，但很快又冷静了下来。"我，我肯定会比<<nnpc_him "Sydney">>做得更好，绝对。"
+			<<case "Sterling">>
+				你和凯拉尔开始排练。大概在排练到一半的时候，凯拉尔突然停下了。你问<<him>>怎么了，<<he>>叹了一口气。
+				<br><br>
+
+				"我、我只是不想对<<nnpc_him "Sydney">>说出那样的话，"<<he>>摇了摇头，用手捂住了嘴。"我、我知道这只是一部戏，但还是很尴尬，你明白吗？"<<he>>又叹了口气，"如果是你就好了……"
+		<</switch>>
+	<<default>>
+		<<playLinePool>>
+		你打开你的剧本，开始和凯拉尔练习表演。
+		<br>
+		"<<print _englishPlayLinePool[$englishPlayRoles.Player].pluck()>>"
+		<br>
+		...
+		<br>
+		"<<print _englishPlayLinePool[$englishPlayRoles.Kylar].pluck()>>"
+		<br>
+<</switch>>
+<<set $englishPlayReadiness += 10>><<playReadiness>>
+<<set $englishPlayRoles.KylarCount += 1>>
+<br><br>
+
+当你们排练完的时候，学校已经要关门了。你跟凯拉尔一起离开了学校。
+<br><br>
+
+<<kylaroptions "notext">>

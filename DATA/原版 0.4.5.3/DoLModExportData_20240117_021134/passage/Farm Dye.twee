@@ -1,0 +1,20 @@
+:: Farm Dye []
+<<effects>>
+
+<<set _ownedColours = $makeup.owned.hairdye.filter(x => x.count > 0)>>
+<<if _ownedColours.length == 0>>
+	你没有染发剂，也许你应该去化妆品店买上一些。
+	<br>
+<<else>>
+	你想染成什么颜色？<br>
+	<<set _choice = _ownedColours[0].colour>>
+	<<for _i, _item range _ownedColours>>
+		<label><span class="grey-shadow"><span @class="'hair-' + _item.colour.replace(/ /g, '-')"><span class="colour-hair"><span style="color:#FD6064;"><<hairmapcolourtext _item.colour>></span></span></span></span>&nbsp;<<print '<<radiobutton "_choice" "'+_item.colour+'" ' + (_choice is _item.colour ? "checked" : "") + '>>'>></label>
+		&nbsp;x&nbsp;_item.count |
+	<</for>>
+
+	<br><br>
+	<<link [[用选定的颜色给阴毛染色 (0:30)|Farm dye pubic hair Finish]]>><<pass 30>><<set $makeup.owned.hairdye.find(x => x.colour == _choice).count -= 1>><<set $makeup.pbcolour = _choice>><</link>>
+<</if>>
+<br>
+<<link [[返回|Farm Shave]]>><</link>>

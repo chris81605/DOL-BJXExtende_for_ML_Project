@@ -1,0 +1,28 @@
+:: Livestock Slime Field Grass Extreme Eat []
+<<effects>>
+<<if Time.hour lt 19>>
+	你用手和膝盖爬行，用牙齿寻找并拔起<<if $cow gte 3>>美味的<</if>>草。
+
+	<<switch Time.hour>>
+		<<case 12>><<if $random(0,100) gte 50>>你认为有什么东西想引起你的注意，但当你开始咀嚼草的时候，这种想法就消失了。<</if>>
+		<<case 10 14 17>>你发出哞叫。
+		<<case 18>>你打了个哈欠<<if $random(0,100) gte 50>>，想知道你什么时候才能睡一会儿，但当你开始嚼草的时候，这种想法就消失了<</if>>。
+	<</switch>>
+
+	<br><br>
+	<<link [[吃草……|Livestock Slime Field Grass Extreme Eat]]>><<pass 60>><<livestock_obey 1>><<transform cow 1>><<hunger -400>><</link>>
+<<else>>
+	<<npc Remy>><<person1>>
+	你<span class="green">从恍惚状态中挣脱出来，</span>有人使劲拉着你的皮带，是雷米。“很好！”<<He>>叹了口气：“早些时候有份工作给你，<<girl>>，但我没能引起你的注意，你一直都在埋着头吃草。"
+	<br><br>
+	<<if $cow gte 6>>
+		大脑一片混沌，你茫然地对着<<him>>哞叫。
+	<<else>>
+		你大脑一片混沌，用一种困惑的表情看着<<him>>。当你意识到你一整天都在用手和膝盖做什么时，你脸红了。
+	<</if>>
+	<br><br>
+	"好吧，没关系，"<<he>>说着把你拉向谷仓，"时间不早了，我们去挤牛奶吧。"
+
+	<br><br>
+	<<link [[继续|Livestock Milking Obey]]>><</link>>
+<</if>>

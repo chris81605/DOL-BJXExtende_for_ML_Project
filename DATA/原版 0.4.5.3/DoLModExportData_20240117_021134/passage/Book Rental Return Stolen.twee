@@ -1,0 +1,47 @@
+:: Book Rental Return Stolen []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>><<run statusCheck("Sydney")>>
+你归还了偷来的
+<<if $phase is 6>>
+	<<if $per_npc.pinch isnot undefined>>
+		《林奇<<if $per_npc.pinch.pronoun is "m">>先生<<else>>女士<</if>>的圣诞追寻之旅》一书的副本
+		<<clearNPC pinch>>
+	<<else>>
+		那本橄榄色的书。
+	<</if>>
+<<elseif $phase is 5>>
+	《劳尔与珍妮特》一书的副本。
+<<else>>
+	<<print $studyBooks.stolen.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>教材。
+<</if>>
+<<if _sydney_location is "library">>
+	<<if $bookStolenKnown isnot undefined>>
+		<<switch $bookStolenKnown>>
+			<<case 1>>
+				"那是……！"当你把书递过去时，悉尼显得很吃惊。"你找到它了！"你还没来得及回话，悉尼就从柜台那边把你拉到了<<nnpc_He "Sydney">>的怀抱里。
+				"我很害怕礼顿<<nnpc_Title "Leighton">>的戒尺，谢谢你救了我<<if _sydneyStatus.includes("corrupt")>>的屁股<<else>>，让我免受皮肉之苦<</if>>。"<<npcincr Sydney love 5>><<gglove>>
+			<<case 2>>
+				<<set $recentReturnTimer to 14>>
+				"那本书被登记为被盗。这是你第二次退回这种东西了……"悉尼好像突然明白了什么，<<nnpc_He "Sydney">>猛地站起身来，皱着眉头看着你。"我很失望，但是谢谢你把它还给我，也谢谢你如此诚实。"<<bookCriminal>>
+			<<default>>
+				<<set $recentReturnTimer to 14>>
+				悉尼看起来快要哭出来了。"你为什么要一直这样做？！你知道<<nnpc_title "Leighton">>会让我为这一切负责的，你知道的，是不是？"<<npcincr Sydney love -10>><<lllove>>
+		<</switch>>
+		<<set $bookStolenKnown += 1>>
+		<<unset $sydneyStolenKnown>>
+	<<else>>
+		悉尼疑惑地看着你。"那本书从来没有被借出过，你是在地上捡到的吗？"
+	<</if>>
+	<<set $studyBooks.stolen to "none">>
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	<<set $bookStolenAbsent to 1>>
+	<<set $studyBooks.stolen to "none">>
+	<<unset $sydneyStolenKnown>>
+	<br><br>
+	<<bookRentalOptions>>
+	<br>
+	<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

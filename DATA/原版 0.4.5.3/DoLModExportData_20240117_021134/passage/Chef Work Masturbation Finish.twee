@@ -1,0 +1,75 @@
+:: Chef Work Masturbation Finish []
+<<effects>>
+<<set _temp_timer to $timer>>
+<<endmasturbation>>
+<<endcombat>>
+<<clothesontowel>>
+<<if !$chef_event>>
+	<<set $chef_event to 0>>
+<</if>>
+<<set $chef_event += 20>>
+
+<<npc Sam>><<person1>>
+
+<<if $masturbation_fluid gte 30>>
+	<<if _temp_timer lte 10>>
+		萨姆闯了进来，你几乎没有来得及遮掩自己，<<He>>皱起眉头，说道："只是检查一下你的情况，"
+		<br><br>
+		你向<<him>>保证一切都在掌控之中后，<<he>>点点头。<<He>>虽然回到了前厅，但却让厨房的门保持敞开。
+		<<gsuspicion>><<set $chef_sus += 5>>
+		<br><br>
+	<</if>>
+
+	<<set _buns_sold to Math.floor(($masturbation_fluid / 30))>>
+	你把液体加入混合物中，搅拌出一批新的奶油。你有足够的材料来做<<number _buns_sold>>个小面包。
+	<br><br>
+	当你完成奶油时，萨姆闻着味走了过来，<<He>>俯身靠近它们，然后闭上眼睛嗅了嗅。
+
+	<<if _buns_sold gte 30>>
+		"太棒了，"<<he>>在说着的同时敬畏地凝视着面前的奶油，"这应该已经够了，干得好！"
+	<<elseif _buns_sold gte 20>>
+		"了不起，"<<he>>说着的同时兴奋地舔了舔嘴唇，"真是辛苦你了，但我们的客户会很高兴的。"
+	<<elseif _buns_sold gte 10>>
+		"太棒了，"<<he>>说，舔着<<his>>的嘴唇。"干得好。我们的客户会很高兴。"
+	<<elseif _buns_sold gte 4>>
+		"太棒了，"<<he>>说，舔着<<his>>的嘴唇。"很好的一批货。我们的客户会很高兴。"
+	<<elseif _buns_sold gte 3>>
+		"太棒了，"<<he>>说，舔着<<his>>的嘴唇。"这三个客户会很高兴。"
+	<<elseif _buns_sold gte 2>>
+		"太棒了，"<<he>>说，舔着<<his>>的嘴唇。"遗憾的是，只有俩个。我们的客户可能需要抽签。"
+	<<else>>
+		"太棒了，"<<he>>说，"遗憾的是只有一个，我希望他们不要打起来！"
+	<</if>>
+	<br><br>
+
+	<<He>>拿着一些面包走进了咖啡馆，当<<he>>出现在众人面前时，你听到人群里爆发出一阵欢呼声。
+	<br><br>
+
+	<<sellbuns>>
+
+<<else>>
+	<<if _temp_timer lte 10>>
+		萨姆闯了进来，你几乎没有来得及遮掩自己，<<He>>皱起眉头，说道："只是检查一下你的情况，"
+		<br><br>
+		你向<<him>>保证一切都在掌控之中后，<<he>>点点头。<<He>>虽然回到了前厅，但却让厨房的门保持敞开。
+		<<gsuspicion>><<set $chef_sus += 5>>
+		<br><br>
+	<</if>>
+
+	你用萨姆的食谱制作了没有特殊配料的小面包。一位服务员过来把新鲜的批次收走了。
+	<br><br>
+	当萨姆进入厨房时，你正在打扫卫生。
+	"今天不卖小面包，"<<he>>泄气地说道。"它们没有你的好东西那样的味道。我不想逼你，但我知道你可以做得更好。"
+	<br><br>
+
+	"当然，"<<he>>继续说道。"这是你应得的。"<<He>>交给你<<moneyGain 10>>。
+	<br><br>
+
+<</if>>
+
+<<pass 50>>
+
+<<endevent>>
+
+<<link [[继续|Ocean Breeze]]>><</link>>
+<br>

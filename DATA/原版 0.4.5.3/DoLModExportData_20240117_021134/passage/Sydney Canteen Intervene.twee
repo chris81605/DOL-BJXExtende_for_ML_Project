@@ -1,0 +1,36 @@
+:: Sydney Canteen Intervene []
+<<run statusCheck("Sydney")>>
+<<if $speech_attitude is "meek">>
+	"等，等等！<<person1>><<He>>很需要眼镜！"
+<<elseif $speech_attitude is "bratty">>
+	你逼近<<person2>><<person>>的脸。"你敢踩碎这个，我就打烂你。"
+<<else>>
+	你上前一步双手抱胸，"把眼镜还回来。"
+<</if>>
+<<if _sydneyStatus.includes("corrupt")>>
+	<br><br>
+	悉尼抓住间隙，一把将<<person2>><<person>>推开，捡起了眼镜。在<<person2>><<person>>找着方向之前，<<person1>><<He>>迅速抽出红色记号笔，在那人的额头上写下了"<span class="teal">婊子</span>"。<<person2>>
+	<br><br>
+	用餐的其他学生注意到了骚动，开始哄堂大笑了起来。<<He>>忍住眼泪，迅速逃离了现场。<<status 1>><<gcool>><<person1>>
+	<br><br>
+	<<if $sydneyromance is 1>>
+		悉尼轻轻环住你的胳膊。"谢啦宝贝。"<<He>>在你的脸上印下一吻。<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+	<<else>>
+		悉尼拍了拍你的背。"谢谢。其实我可以自己解决，但被人关心的感觉真好。我定会报答这份好意。"
+	<</if>>
+	你俩坐回去吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了，谢谢你一直陪着我。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+	<br><br>
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	悉尼躲在你身后，没有眼镜的<<person1>><<his>>很难看清任何东西。
+	<br><br>
+	"哦呀，教会的悉尼找了个<<girlfriend>>。这样的话，你最好现在就开始祈祷吧。"<<person2>><<His>>握紧了拳头，准备向你攻击。
+	<br><br>
+	<<saveNPC 1 canteen_bully>>
+	<<endevent>>
+	<<loadNPC 0 canteen_bully>>
+	<<clearNPC canteen_bully>>
+	<<link [[继续|Sydney Canteen Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<</if>>

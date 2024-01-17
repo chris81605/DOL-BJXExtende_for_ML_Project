@@ -1,0 +1,40 @@
+:: Sydney Shopping Glasses []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+<<set $daily.sydney.shopGlasses to true>>
+你抵达购物中心的上层，悉尼紧紧地跟在你的后面。
+<<if $sydneySeen.includes("glasses")>>
+	你认识验光师，这节省了不少时间。
+<<else>>
+	<<set $sydneySeen.pushUnique("glasses")>>
+	你们花了好几分钟才能找到验光师在哪儿。<<pass 3>>
+<</if>>
+<br><br>
+悉尼似乎认出了在柜台工作的人<<if $phase is 1>>，<<he>>把<<his>>的<<sydneyGlasses>>放在一边<</if>>，报告自己的眼睛情况。你环顾四周，柜台上摆满了眼镜的旋转台，旁边还有一个装满各种隐形眼镜的柜子。
+<br><br>
+<<if $phase is 1>>
+	<<link [[给悉尼买眼镜 (£15)|Sydney Shopping Buy Glasses]]>><<set $money -= 1500>><</link>>
+	<br>
+	<<if $money gte 5000>>
+		<<link [[给悉尼买隐形眼镜 (£50)|Sydney Shopping Buy Contacts]]>><<set $money -= 5000>><</link>>
+		<br>
+	<<else>>
+		<span class="purple">你买不起隐形眼镜。</span>
+	<</if>>
+<<elseif $money gte 1500>>
+	<<link [[给悉尼买新眼镜 (£15 0:10)|Sydney Shopping Buy Glasses]]>><<pass 10>><<set $money -= 1500>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<if $money gte 5000>>
+		<<link [[给悉尼买隐形眼镜 (£50 0:10)|Sydney Shopping Buy Contacts]]>><<pass 10>><<set $money -= 5000>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br>
+	<<else>>
+		<span class="purple">你买不起隐形眼镜。</span>
+	<</if>>
+	<br>
+	<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<pass 1>><</link>>
+	<br>
+<<else>>
+	<span class="purple">你买不起任何东西。</span>
+	<br>
+	<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<pass 1>><</link>>
+	<br>
+<</if>>

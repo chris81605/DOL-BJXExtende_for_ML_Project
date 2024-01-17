@@ -1,0 +1,16 @@
+:: Pharmacy Ask If Lenses Delivered []
+<<if $daily.pharm.impatient is 1>>
+	"您好，请问有什——"<<he>>看清是你就拧起眉头，"你别以为我忘了上次那茬。让我去取货然后转头就走，这好吗？这不好！"
+	<br>你道歉，然后<<he>>然后去检查你的包裹是否到达。
+<<elseif $daily.pharm.impatient is 2>>
+	"看看这个小贼，" 护士面露狰狞地说道，"现在出去，你已经浪费足够多我的时间了，如果你玩完了你的小把戏，那就明天再来试试吧！"
+	<<set $daily.pharm.impatient to 3>>
+<<else>>
+	"您好，有什么需……"<<he>>停顿了一下，"哦，您是那位订购隐形眼镜的客人。<<if $player.gender_appearance is "m">>靓仔<<else>>靓女<</if>>稍等一下，我去看看货有没有到。"你看着<<he>>走进了身后的房间里。
+<</if>>
+<br><br>
+<<if !($daily.pharm.impatient gte 2)>>
+	<<link [[等待 (0:15)|Pharmacy Ask If Lenses Delivered 2]]>><<set $daily.pharm.impatient to 0>><<pass 15>><</link>>
+	<br>
+<</if>>
+<<link [[离开|Pharmacy]]>><<set $daily.pharm.impatient to ($daily.pharm.impatient + 1) || 1>><</link>>

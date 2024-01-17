@@ -1,0 +1,35 @@
+:: Widgets Office Streak [widget]
+<<widget "officestreakactions">>
+	<br><br>
+	<<if $stairDistance lte 2>>
+		你可以看到楼梯，离你现在的位置只有几条过道。
+	<<elseif $stairDistance lte 4>>
+		楼梯离你有好几条通道，但它们仍然可能是比电梯更好的选择。
+	<<else>>
+		楼梯看不见了。
+	<</if>>
+	<br><br>
+	<<link [[冒险乘电梯 (0:01)|Office Lift]]>><<pass 1>><</link>>
+	<br>
+	<<link [[小心地走向楼梯 (0:05)|Office Streak Stairs]]>><<pass 5>><<set $streakSpeed to 1>><</link>>
+	<br>
+	<<link [[快速前往楼梯 (0:01)|Office Streak Stairs]]>><<pass 1>><<set $streakSpeed to 2>><</link>>
+	<br>
+	<<if $clothesCheck gte 1>>
+		<<link [[试着找件衣服穿 (0:05)|Office Streak Search]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "officestreakhide">>
+	<<rng>>
+	<<if $rng gte 76>>
+		在一株大盆栽的后面。有两个人从你身边走过，似乎没有注意到你。
+	<<elseif $rng gte 51>>
+		在复印机后面。有人走过来开始复印，但没有注意到你就走开了。
+	<<elseif $rng gte 26>>
+		在一张空桌子下面。有人走过来放下一个大箱子，然后走开了。
+	<<else>>
+		在饮水机后面。靠在它上面，你感觉到塑料底座贴在你的<<exposedupper>>上，凉凉的。
+	<</if>>
+<</widget>>

@@ -1,0 +1,36 @@
+:: Bird Tower Rope Escape []
+<<effects>>
+
+你将绳索的一端绑在一个向上撬的石头上，并将另一端抛向边缘。它差不多能够到达底部，这就够了。
+<br><br>
+
+<<if $syndromebird isnot 1>>
+	<<set $bird.rope to 1>>
+<</if>>
+
+<<if $bird.state is "home" and $syndromebird isnot 1>>
+	<<npc "Great Hawk">>
+	你看了一眼<<beasttype>>，<<bHe>>没有注意到你。你用双手抓住绳索，转身，沿着塔壁缓慢地往下滑落。
+	<br><br>
+	你距离地面只有最后几英尺的距离，你松开绳子，落在了城堡庭院里。
+
+	<<if $bird.activity isnot "sleep">>
+		<<set $moor_hunt to 9>>
+
+		<span class="red">你听到了一声可怕的尖叫。</span><<beasttype>>没有多久就发现你逃走了。
+	<<elseif $bird.activity is "sleep" and $rng lte 70>>
+		<<set $moor_hunt to 9>>
+
+		<span class="red">你听到了一声可怕的尖叫。</span><<beasttype>>没有多久就发现你逃走了。
+	<</if>>
+
+	<br><br>
+
+	<<endevent>>
+
+<<else>>
+	你用双手抓住绳索，转身，沿着塔壁缓慢地往下滑落。你距离地面只有最后几英尺的距离，你松开绳子，落在了城堡庭院里。
+	<br><br>
+<</if>>
+<<link [[继续|Castle]]>><<set $moor to 100>><</link>>
+<br>

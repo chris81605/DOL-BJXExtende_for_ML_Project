@@ -1,0 +1,24 @@
+:: Vending Machine Smash []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $weekly.theft.vendingMachine[$changingRoomGender] to true>>
+<<set $tip to random(0, 3) * 2000>>
+<<set _condomsStolen to $daily.vendingMachine[$changingRoomGender] ? 0 : either(0, 0, 0, 0, 2, 2, 2, 4)>>
+<<if $physiqueSuccess>>
+	<<if $tip is 0>>
+		<<if _condomsStolen is 0>>
+			你一直踢着机器，直到咔嚓一声传来。锁坏了，门也开了。你在里面搜索了一番，才发现里面是空的。
+		<<else>>
+			你一直踢着机器，直到咔嚓一声传来。锁坏了，门也开了。你看向里面。里面没有钱，但你找到了 _condomsStolen 个避孕套。
+			<br><br>
+			<<link [[拿起并离开|$currentToiletReturn]]>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
+		<</if>>
+	<<else>>
+		你一直踢着机器，直到咔嚓一声传来。锁坏了，门也开了。你往里面一看，发现了<<printmoney $tip>><<if _condomsStolen>>，还有 _condomsStolen 个避孕套<</if>>。
+		<br><br>
+		<<link [[拿起并离开|$currentToiletReturn]]>><<set $money += $tip>><<gcondoms _condomsStolen>><<crimeUp `$tip / 100 + _condomsStolen * 10` "petty">><</link>><<crime "petty">>
+	<</if>>
+<<else>>
+	你一直踢着机器，直到咔嚓一声传来。你试着开门，但锁卡住了。最终，你还是放弃了，决定改天再试。
+<</if>>
+<br>
+<<link [[离开|$currentToiletReturn]]>><</link>>

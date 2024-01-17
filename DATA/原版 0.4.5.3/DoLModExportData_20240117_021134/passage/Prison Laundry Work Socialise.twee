@@ -1,0 +1,64 @@
+:: Prison Laundry Work Socialise []
+<<effects>>
+你和其他囚犯聊天。<<generate_relaxed_guard 0>><<generate2>><<person2>><<relaxed_guard 0 cap>>似乎并不在意。
+<br><br>
+
+<<rng 10>>
+<<switch $rng>>
+	<<case 1>>
+		"这些衣服是从哪里来的？"一个<<person>>喃喃自语，"没完没了的。"
+	<<case 2>>
+		"都不需要太多守卫，"一个<<person>>说道，拍了拍<<his>>的项圈，"他们会说是让我们接受了纪律处分。"
+	<<case 3>>
+		"有一次，有只鸟给了我一颗牙齿，"一个<<person>>说道，"就像是一份礼物。我没在开玩笑。"
+	<<case 4>>
+		<<if $prison.shock is 1>>
+			"我刚到的时候，他们用项圈电击过我一次，"一个<<person>>说道，"那可真不好受。"
+		<<else>>
+			"你觉得我们能拿下他们吗？"一个<<person>>低声问道，"那些守卫。他们再也不能电击我们了。"
+		<</if>>
+	<<case 5>>
+		"等下次那个走私的人来的时候，"一个<<person>>说，"我要买双新鞋。"
+	<<case 6>>
+		"虽然有些棘手，"一个<<person>>说道，"但总有出路的。"<<gskulduggery>><<skulduggery 1>>
+	<<case 7>>
+		"院子里的那扇大门，"一个<<person>>说道，"我曾看到有人从那里进来过。你可以看到另一边的海滩。如果他们让我们去游泳就好了。我们哪儿也去不了。"
+	<<case 8>>
+		"我告诉你，"一个<<person>>说道，"这些墙很难搞。"
+	<<case 9>>
+		"最好低调点，"一个<<person>>说道，"话是这样说，不过尽管试试引起注意吧，你会更早醒悟的。"
+	<<default>>
+
+<</switch>>
+<<endevent>>
+<br><br>
+<<rng 3>>
+<<switch $rng>>
+	<<case 1>>
+		<<generate_relaxed_guard 0>><<generate2>><<person2>><<person>>把手放在你的<<bottom>>上。
+		<br><br>
+		<<link [[忍受|Prison Laundry Work Endure]]>><<trauma 6>><<stress 6>><<arousal 600 "bottom">><</link>><<gtrauma>><<gstress>><<garousal>>
+		<br>
+		<<link [[推开|Prison Laundry Work Shove]]>><<prison_inmates 1>><<prison_guards -1>><</link>><<gsuspicion>><<grespect>>
+		<br>
+		<<link [[捏回去|Prison Laundry Work Squeeze]]>><<prison_inmates 1>><<gattention prison>><</link>><<promiscuous1>><<prison_attention 1>><<grespect>>
+		<br>
+	<<case 2>>
+		他们喜欢你的玩笑。<<grespect>><<prison_inmates 1>>
+		<br><br>
+
+		<<prison_laundry_options>>
+	<<case 3>>
+		<<generate1>><<generate2>><<person1>>
+		几个囚犯交换故事，吹嘘他们的壮举。
+		<br><br>
+
+		<<link [[编点什么|Prison Laundry Work Brag]]>><</link>><<englishdifficulty 1 1000>>
+		<br>
+		<<if $fame.scrap gte 400>>
+			<<link [[讲述你的英勇事迹|Prison Laundry Work Daring]]>><</link>><<note "战斗知名度" "green">>
+			<br>
+		<</if>>
+		<<link [[无视|Prison Laundry Work Chat Ignore]]>><</link>>
+		<br>
+<</switch>>

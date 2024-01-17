@@ -1,0 +1,58 @@
+:: Farm Assault Pick Bailey []
+<<effects>>
+
+
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+
+		<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+			你躲在阴影里跟踪着入侵者，等待着机会。
+		<<else>>
+			你躲在阴影里跟踪着入侵者，等待着机会。
+		<</if>>
+		<br><br>
+
+		<<skulduggerycheck>>
+		<<if $skulduggerysuccess is 1>>
+
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<span class="green">你找到了一个。</span><<generate1>><<person1>><<person>>跟<<his>>伙伴们离得太远。你从黑暗中冲出，击中了<<His>>的头。<<He>>瘫倒在地，失去了意识。
+				<br><br>
+				<<endevent>>
+				<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+			<<else>>
+				<span class="green">你找到了一个。</span><<generate1>><<person1>><<person>>站得离树篱太近。你从黑暗中冲出，击中了<<His>>的头。<<He>>瘫倒在地，失去了意识。
+				<br><br>
+				<<endevent>>
+				<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+			<</if>>
+			<br><br>
+
+			<<skulduggeryuse>>
+
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+
+		<<else>>
+			<<generate1>>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<generate2>>
+				<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+					<<generate3>>
+				<</if>>
+				<<person1>><<person>>位置离得其他人太远，你开始行动，偷偷接近。你从黑暗中冲出，<span class="red">然而<<person>>转身抓住了你的手臂。</span>
+				<br><br>
+				"找到那个<<girl>>了，"<<he>>一边甩开你一边说道，你听见了背后的脚步声。
+				<br><br>
+			<<else>>
+				你躲在阴影里跟踪着入侵者，等待着机会。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Farm Assault Fight Bailey]]>><<set $fightstart to 1>><</link>>
+			<br>
+
+		<</if>>
+	<</if>>
+<</for>>

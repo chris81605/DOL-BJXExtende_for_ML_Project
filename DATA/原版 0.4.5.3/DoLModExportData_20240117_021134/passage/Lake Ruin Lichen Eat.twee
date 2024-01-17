@@ -1,0 +1,55 @@
+:: Lake Ruin Lichen Eat []
+<<effects>>
+<<if $phaseWraith is 1>>
+	你闭上眼，任由这一切发生。祂的味道很奇怪。你立刻感到一股压力在你的脑海中积聚。
+	<br><br>
+	这个身影飘近你。祂的<<wraithEyes>>眼中开始旋转着形状。你感觉身体开始放松。
+	<br><br>
+	一段时间后，祂离开了。祂点了点头，然后沉入地下。
+	<<endevent>>
+	<<set $wraithPrison.timer to 30>>
+	<<set $wraithPrison.state to "recovering">>
+	<br><br>
+	<<link [[继续|Lake Ruin Prison]]>><</link>>
+	<br>
+<<elseif $phaseWraith is 2>>
+	你将它吐出来，闭上嘴，尽力假装吞咽了一口。它的味道很奇怪，你一定要确保没有真的吞下去。
+	<br><br>
+	这个身影飘近你。祂的<<wraithEyes>>眼中开始旋转着形状。
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<span class="green">你意识到祂试图做什么。</span>你让手臂放松下来，强迫自己盯着它看。这并不难。事实上，很难移开目光。
+		<br><br>
+		过了一会儿，祂就离开了。祂点点头，然后沉入地下。你等了一会儿，把苔藓吐了出来。
+		<<skulduggeryuse>>
+		<<endevent>>
+		<<set $wraithPrison.timer to 30>>
+		<<set $wraithPrison.state to "recovering">>
+		<br><br>
+		<<link [[继续|Lake Ruin Prison]]>><</link>>
+		<br>
+	<<else>>
+		你退后，闭上眼睛。
+		<br><br>
+		<<if C.npc["Ivory Wraith"].lust gte 12 and !playerIsPregnant()>>
+			<span class="red">你的肚子被踢了一脚。</span>你立刻把苔藓吐出来，开始咳嗽。<<pain 10>><<trauma 12>><<gtrauma>><<ggpain>>
+		<<else>>
+			你立刻感觉到自己被推回到了墙上。你睁开眼睛，吐出口中的地衣。祂看着你，复杂的表情中混合着愤怒与悔恨。
+			<br><br>
+			"<span class="wraith">你宁可受苦吗？很好。</span>"
+		<</if>>
+		<br><br>
+		你感觉祂掐住了你的脖子。
+		<br><br>
+		<<skulduggeryuse>>
+		<<initWraith "man">><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+		<<link [[继续|Lake Ruin Prison Rape]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	祂松开你的时候，你把嘴里的地衣吐了出来。你立刻被掐住了脖子。
+	<br><br>
+	<<initWraith "abomination">><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+	<<link [[继续|Lake Ruin Prison Rape]]>><</link>>
+	<br>
+<</if>>

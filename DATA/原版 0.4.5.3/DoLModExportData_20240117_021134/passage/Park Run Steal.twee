@@ -1,0 +1,31 @@
+:: Park Run Steal []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+
+<<if $speech_attitude is "meek">>
+"哦，被人欣赏的感觉真好，"你说道，"我可以和你拍一张么？"
+<<elseif $speech_attitude is "bratty">>
+"太业余了，"你嘲讽道，"把它给我，我会抓拍到我最好的那一面。"
+<<else>>
+"给我相机，"你扬起嘴角，"我想到个‘不错的’主意。"
+<</if>>
+你把你的手伸了出来。
+
+<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>><<set $blackmoney += 20>>
+	<span class="green"><<He>>把相机递给了你。</span>你若有所思地看了一眼相机，然后在对着那个家伙做了个鬼脸后立刻逃之夭夭。"哎！"<<he>>在你身后喊道，但当<<hes>>站起来的时候，你早就跑远了。你看了看手里的相机，估计能卖£20。
+	<br><br>
+
+		<<skulduggeryuse>>
+
+	<<else>>
+	<span class="red">"不错的尝试。"<<he>>说道。</span><<He>>在你离开的时候对着你的<<bottom>>拍了一张照片。
+	<br><br>
+	<<fameexhibitionism 10>>
+
+		<<skulduggeryuse>>
+
+	<</if>>
+
+<<endevent>>
+<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+<br>

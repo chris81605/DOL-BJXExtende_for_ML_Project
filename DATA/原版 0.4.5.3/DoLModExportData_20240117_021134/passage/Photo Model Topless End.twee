@@ -1,0 +1,32 @@
+:: Photo Model Topless End []
+<<effects>>
+
+<<famemodel 20 "pic">>
+<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+<<storeon "photo">>
+当你穿戴整齐走出来后，尼奇正在清点你的酬金，一想到刚才的事，你脸上的红晕根本无法消散。
+<<if $enemyno gte 2>>
+	你的观众们对你嗤之以鼻，但你尽力无视这些家伙。
+<<elseif $enemyno is 1>>
+	那个<<person>>对你笑了笑，但你尽力去无视<<him>>。
+<</if>>
+你这次赚了<<moneyGain $photo.money>>。
+<br><br>
+<<if $photo.pubfame>>
+	<<if $phase is 1>>
+		"你做得很好，"<<nnpc_he "Niki">>说道。"这是我们交易的其余部分。"<<nnpc_He "Niki">>递给你的照片，已经从相框中取出。"一旦打印出来，我会把它换成你的。如果你愿意的话，我想下周再拍一次。"
+		<br><br>
+		<<pubfameComplete "niki" 0 true>>
+	<<else>>
+		"你做得很好，"<<nnpc_he "Niki">>说道。"<span class="red">我不能给你照片。</span>但是下周再来，我们看看你那时是否准备好了。"
+	<</if>>
+<<else>>
+	"你做得很好，"<<nnpc_he "Niki">>说道："我想下周可以再拍一次。"
+<</if>>
+<br><br>
+
+在钱到手之后，你离开了摄影工作室。
+<br><br>
+
+<<link [[继续|Nightingale Street]]>><<photo_end>><</link>>
+<br>

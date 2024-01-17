@@ -1,0 +1,23 @@
+:: Passout bus []
+你把自己逼得太紧了。
+<br><br>
+<<passout>>
+<<set $safebus to 0>>
+<<set $dangerbus to 0>>
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>><<set $dangerbus to random(1, 2)>><</if>>
+<<if $danger lt (9900 - $allure)>><<set $safebus to random(1, 2)>><</if>>
+<<if $dangerbus eq 1>>
+	<<link [[苏醒|Stripped Bus]]>><</link>>
+<<elseif $dangerbus eq 2>>
+	<<link [[苏醒|Molestation bus]]>>
+		<<set $molestationstart to 1>>
+	<</link>>
+<</if>>
+<<if $safebus eq 1>>
+	<<link [[苏醒|Stranger rescue bus]]>><</link>>
+<<elseif $safebus eq 2>>
+	<<ambulance>>
+<</if>>
+<<pass 1 hour>>
+<<trauma 6>><<set $stress -= 2000>>

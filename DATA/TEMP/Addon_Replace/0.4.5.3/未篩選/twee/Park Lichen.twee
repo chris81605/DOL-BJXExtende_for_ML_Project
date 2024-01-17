@@ -1,0 +1,20 @@
+:: Park Lichen []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+你走近公园中间的雕像。它被白色地衣所覆盖。
+
+<<if $NPCName[$NPCNameList.indexOf("Avery")].init is 1>>
+	你从石头上剥取了一些。
+	<br><br>
+	<<set $sciencelichenpark to 1>>
+	<<link [[离开|Park]]>><</link>>
+	<br>
+<<else>>
+	你可以为了你的科学项目收集一些，但你太矮了，就连雕像的基座都比你高。
+	<br><br>
+	<<link [[爬上去 (0:30)|Park Lichen Climb]]>><<pass 30>><<set $sciencelichenpark to 1>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+	<<link [[寻求帮助 (0:30)|Park Lichen Help]]>><<set $sciencelichenpark to 1>><<pass 30>><</link>>
+	<br>
+	<<link [[离开|Park]]>><</link>>
+	<br>
+<</if>>

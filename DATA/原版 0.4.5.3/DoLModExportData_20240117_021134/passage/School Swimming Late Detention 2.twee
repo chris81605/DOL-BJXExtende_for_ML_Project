@@ -1,0 +1,43 @@
+:: School Swimming Late Detention 2 []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 2 and $danceSuccess>>
+	你快速地挣开梅森的手，在其他学生之间穿梭。梅森在追，但你
+	成功躲进了附近的一个维修壁柜。
+	<br><br>
+
+	<<link [[继续 (0:10)|Hallways]]>><<pass 10>><</link>>
+<<elseif $phase is 2 and $athleticsSuccess>>
+	你猛地一震，摆脱了梅森的控制并跳到了其他学生之间。虽然梅森开始追赶你，但你
+	成功躲进了附近的一个维修壁柜。
+	<br><br>
+
+	<<link [[继续 (0:10)|Hallways]]>><<pass 10>><</link>>
+<<else>>
+	<<if $phase is 2>>
+		你尝试挣脱，但梅森抓得太紧了。<<gpain>><<pain 4>>
+		<br><br>
+	<</if>>
+
+	你在走廊上，站在礼顿的办公室门前。<<pass 2>>
+
+	<<if Time.hour gte 15>>
+		刚下课，走廊上挤满了学生。
+	<<else>>
+		你可以听到各个教室门后的说话声，有些课程刚刚结束，学生们正涌出教室。
+	<</if>>
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+	<<if $carried.upper.name isnot "naked" or $carried.lower.name isnot "naked">> <!-- Detention scene doesn't account for you being naked, put the towel back on if you took it off -->
+		你刚把毛巾遮好
+		<<silently>><<clotheson>><</silently>>
+	<</if>>
+	梅森就打开了校长办公室的门把你推了进去。<!-- Mason would accompany you but "School Detention" assumes you're alone -->
+	<br><br>
+
+	<<link [[进入|School Detention]]>><</link>>
+	<br>
+	<<if $phase is 1 and $feetuse isnot "bound">>
+		<<link [[逃跑|School Swimming Late Detention 2]]>><<endevent>><<set $phase to 2>><</link>><<athleticsdifficulty 200 800>>
+	<</if>>
+<</if>>

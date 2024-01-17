@@ -1,0 +1,39 @@
+:: Forest Pitcher Break []
+<<effects>>
+
+<<bodyliquid "thigh" "nectar">>
+<<bodyliquid "feet" "nectar">>
+<<bodyliquid "chest" "nectar">>
+<<bodyliquid "bottom" "nectar">>
+<<bodyliquid "tummy" "nectar">>
+
+<<if $physiqueSuccess>>
+	你摸索着找到一个稳固的立足之地，然后猛击这棵植物的壁。<span class="green">你感觉到它有所松动。</span>你再次猛击，然后又猛击。从上面滴落下更多的黏液，但你仍然继续攻击。
+	<br><br>
+
+	<<if !$worn.over_upper.type.includes("naked") or !$worn.over_lower.type.includes("naked") or!$worn.upper.type.includes("naked") or !$worn.lower.type.includes("naked") or !$worn.under_lower.type.includes("naked") or !$worn.under_upper.type.includes("naked")>>
+		<span class="pink">黏液溶解了你的衣服，让它感觉变得更加宽松。</span>
+
+		<<set $worn.over_upper.integrity -= 50>>
+		<<set $worn.over_lower.integrity -= 50>>
+		<<set $worn.upper.integrity -= 50>>
+		<<set $worn.lower.integrity -= 50>>
+		<<set $worn.under_upper.integrity -= 50>>
+		<<set $worn.under_lower.integrity -= 50>>
+
+		<<integritycheck>><<exposure>>
+		<br><br>
+	<</if>>
+
+	就在你的拳头破开植物壁的时候，一些东西缠住了你的脚踝。你挣脱了它，撕开了足以让你通过的缺口。更多的藤蔓开始活动，但是它们太慢了。你逃到了树林中。
+	<br><br>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你猛击这棵植物的壁，<span class="red">但它毫不让步。</span>你再次尝试，希望找到一些薄弱的地方，但是一根粗壮的藤蔓从黏液中升起，抓住了你的腰，将你拉回到液体中。
+	<br><br>
+
+	<<link [[继续|Forest Pitcher Resist]]>><</link>>
+	<br>
+<</if>>

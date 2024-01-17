@@ -1,0 +1,71 @@
+:: Moor Box 2 []
+<<effects>>
+
+<<if $exposed gte 2>>
+	"我很高兴它能回到主人身边，"那个<<person>>说道："但我想得到一些回报，
+
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		我看着你跑过了荒原，现在我要你面对着我走过来，让我看看你的<<if $player.gender_appearance is "m">>阴茎<<else>>小穴<</if>>。"
+		<br><br>
+	<<else>>
+		放开你的胳膊，我想看看你的<<if $player.gender_appearance is "m">>阴茎<<else>>小穴<</if>>。"
+		<br><br>
+	<</if>>
+
+	<<if $exhibitionism gte 55>>
+		<<link [[遵从|Moor Box Naked]]>><</link>><<exhibitionist4>>
+		<br>
+	<<else>>
+		<span class="blue">你的暴露癖还不足以让你做这件事。</span><i>也许，如果你穿上<<his>>的衣服，要求会更合理一些。</i>
+		<br><br>
+	<</if>>
+	<<link [[离开|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+	"我很高兴它能回到它主人身边，"那个<<person>>说道："但我想得到一些回报，我要你的内裤。"
+	<br>
+
+	<<if $speech_attitude is "meek">>
+		"我，我的内裤？"你问道。
+		<br>
+		那个<<person>>点点头，说道："你应该听清我说的话了。"
+		<br><br>
+	<<elseif $speech_attitude is "bratty">>
+		"先告诉我你是在哪里找到这个盒子的，"你说道："我怎么知道你有没有拿走里面的东西。"
+		<br>
+		"我是发现了它，但我打不开它。相信我，我试过了。"
+		<br><br>
+	<<else>>
+		"你想要我的内裤吗？"你问道。
+		<br>
+		那个<<person>>点点头，说道："你应该听清我说的话了。"
+		<br><br>
+	<</if>>
+
+	<<if $worn.under_lower.name is "naked">>
+		<<link [[说你什么也没穿|Moor Box No Undies]]>><</link>>
+		<br>
+	<<elseif $worn.lower.type.includes("naked")>>
+		<<if $exhibitionism gte 75>>
+			<<link [[脱掉它们|Moor Box Undies]]>><</link>><<exhibitionist5>>
+			<br>
+		<<else>>
+			把你的<<underbottoms>>交给<<him>>的话，将使你没东西遮盖自己。<span class="blue">你的露出癖还不足以让你做这件事。</span>
+		<</if>>
+	<<elseif $worn.upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.gender is "f")>>
+		<<if $exhibitionism gte 55>>
+			<<link [[脱掉它们|Moor Box Undies]]>><</link>><<exhibitionist4>>
+			<br>
+		<<else>>
+			把你的$worn.under_upper.cn_name_cap交给<<him>>的话，将使你没有东西可以遮盖自己。<span class="blue">你的暴露癖还不足以让你做这件事。</span>
+			<br><br>
+		<</if>>
+	<<else>>
+		<<link [[脱掉它们|Moor Box Undies]]>><</link>><<exhibitionist1>>
+		<br>
+	<</if>>
+	<<link [[离开|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+
+<</if>>

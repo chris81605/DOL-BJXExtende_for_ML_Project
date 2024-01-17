@@ -1,0 +1,35 @@
+:: Prison Pimp Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<set $prison_pimp_serviced += 1>>
+	<<ejaculation>><<set $forcedprostitutionstat += 1>><<fameprostitution 3>>
+	他们临走时给守卫付了钱。<<tearful>>你振作起来。
+<<else>>
+	他们吃痛退开，不想冒着你失控的风险，在离开时拒绝向守卫付钱。<<tearful>>你振作起来。
+<</if>>
+
+<br><br>
+<<endcombat>>
+
+<<set $prison_pimp -= 1>>
+
+<<if $prison_pimp lte 0>>
+	<<link [[继续|Prison Pimp End]]>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	你再也承受不住了。你失去了意识。
+	<br><br>
+
+	<<link [[继续|Passout Prison Pimp]]>><</link>>
+	<br>
+<<else>>
+	<<generate1>><<generate2>><<generate3>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<npcClothesType $NPCList[_i] "town">>
+	<</for>>
+	一个<<fullGroup>>进来了，他们已经迫不及待想要找点乐子了。
+	<br><br>
+
+	<<link [[继续|Prison Pimp Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

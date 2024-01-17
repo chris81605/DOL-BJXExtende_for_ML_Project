@@ -1,0 +1,32 @@
+:: Pharmacy Bought Condoms in Bulk []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set _partial to Math.min($condomsBought, 50)>>
+<<condomsPrice _partial>>
+<<formatmoney _price>>
+"好的，$condomsBought包三包装的避孕套。"<<He>>准备好包装，放在一个<<if $condomsBought lte 25>>小<</if>>纸箱里，同时出声计算总数。"这些是_partial个，每个£60，_printmoney。
+<<condomsPrice $condomsBought>>
+<<if $condomsBought gt 50>>
+	<<set _partial to Math.min($condomsBought - 50, 50)>>
+	<<set _price2 to _partial * 6000 * .98>>
+	<<formatmoney _price2>>
+	再加上_partial个，每个£60，和2%的折扣，_printmoney。
+	<<if $condomsBought gt 100>>
+		<<set _partial to $condomsBought - 100>>
+		<<set _price2 to _partial * 6000 * .95>>
+		<<formatmoney _price2>>
+		然后是_partial个，每个£60，再减去 5%，_printmoney。
+	<</if>>
+	一共是<<printmoney _price>>。
+<</if>>
+我会把这些送出去。感谢您的购买。"
+<br><br>
+你算好钱，把钱交给<<him>>。
+<br><br>
+<<set $money -= _price>>
+<<set $brothelVending.condoms += $condomsBought>>
+<<set $brothelVending.condomsToRefill -= $condomsBought>>
+<<set $brothelVending.weeksEmpty to 0>>
+<<set $weekly.brothelVMCondoms to true>>
+<<unset $condomsBought>>
+<<earnFeat "Brothel Provider">>
+<<link [[继续|Pharmacy]]>><</link>>

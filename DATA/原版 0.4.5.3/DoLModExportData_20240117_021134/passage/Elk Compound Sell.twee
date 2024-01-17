@@ -1,0 +1,22 @@
+:: Elk Compound Sell []
+<<effects>>
+
+你提供了
+<<if $phials_held gte 2>>
+	一些春药。
+<<else>>
+	春药。
+<</if>>
+那个<<person>>沉默地检查着，在确认无误之后，<<his>>随意地从外套里掏出一捆现金交给你。随后又将门给关上了。
+<br><br>
+
+<<set $money += ($phials_held * 100000)>>
+<span class="gold">你这次赚了 £<<print ($phials_held * 1000)>>。</span>
+<br><br>
+<<world_corruption "soft" $phials_held>>
+<<set $stat_aphrodisiacs_sold += $phials_held>>
+<<set $phials_held to 0>>
+<<earnFeat "Dealing">>
+
+<<link [[继续|Elk Compound]]>><<endevent>><</link>>
+<br>

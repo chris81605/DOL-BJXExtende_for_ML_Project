@@ -1,0 +1,33 @@
+:: Street Bully Orphan Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+
+	<<if $phase is 1>>
+		你在飞身扑向惠特尼，抓住了<<he>>，你们一起摔倒在地。<<person2>><<person>>想要趁机逃跑，但是惠特尼的一个朋友抓住了<<him>>。
+		<br><br>
+		<<saveNPC 1 whit_bully_victim>>
+		<<endevent>>
+		<<npc Whitney>><<person1>>
+	<</if>>
+
+	<<maninit>>
+	<<npcidlegenitals>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<set $audienceforceteen to 1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Street Bully Orphan Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Bully Orphan Fight]]>><</link>></span><<nexttext>>
+<</if>>

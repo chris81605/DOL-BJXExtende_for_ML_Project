@@ -1,0 +1,41 @@
+:: Pregnancy Birth Wolf Cave 1 []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+<<switch $phase>>
+	<<case 0>>
+		你轻轻地推开黑狼。<<bHe>>对你咆哮，最后带着嘲笑离开了。
+		<br><br>
+		你躺在冰冷的地上，徒劳地试图在你的宫缩中找到一些安慰。随着时间的推移，你的呼吸变得越来越重，当你继续用力时，疼痛变得太过强烈，你无法忍受。视线变得一片漆黑。
+		<<set $phase to 1>>
+	<<case 1>>
+		你辗转反侧，试图找到一个舒服的位置，但没有成功。黑狼注意到了，站起来向你靠近。<<bHe>>躺在你身后，让你背靠着<<bHe>>休息，减轻你的疼痛。<<bHe>>给了你令人安心的支持。
+		<br><br>
+		你的呼吸越来越重，你的宫缩越来越难以忍受。当你继续分娩的时候，疼痛变得太过剧烈，你无法忍受。视线变得一片漆黑。
+		<<set $phase to 0>>
+	<<case 2 3>>
+		<<set $phase to $phase is 2 ? 1 : 2>>
+		你辗转反侧，试图找到一个舒服的位置，但没有成功。
+		<br><br>
+		你的呼吸越来越重，你的宫缩越来越难以忍受。当你继续分娩的时候，疼痛变得太过剧烈，你无法忍受。视线变得一片漆黑。
+<</switch>>
+<br><br>
+
+<<link [["继续 (0"+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"|Pregnancy Birth Wolf Cave 2]]>><<playerPrebirth>><</link>>

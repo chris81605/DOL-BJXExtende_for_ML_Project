@@ -1,0 +1,20 @@
+:: Temple Mass Demon []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>><<sydneySchedule>>
+<<npc Jordan>><<person1>>你坐到长椅的末端，约旦在读圣经。<<His>>话语充满暴力和指责。
+<<if $sydneySeen is undefined or !$sydneySeen.includes("mass")>>
+	<<sydneyMass>>
+<<else>>
+	<br><br>
+	你被叫到前面去领圣餐。你跪在约旦面前，但其他<<if $pronoun is "m">>修士<<else>>修女<</if>>拒绝看你。面包尝起来就像灰烬。酒就像血一样。
+	<<if playerBellyVisible() or knowsAboutPregnancy("pc", "Jordan")>>
+	<<else>>
+		<<alcohol 15>>
+	<</if>>
+	<br><br>
+	<<sydneyMass>>
+	约旦以祈祷结束。
+	<br><br>
+<</if>>
+<<endevent>>
+<<link [[继续|Temple]]>><</link>>
+<br>

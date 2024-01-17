@@ -1,0 +1,40 @@
+:: Temple Vigil 7 []
+<<effects>><<set $body_temperature to "cold">>
+
+其中一名见习教徒——一个<<person4>><<person>>——试图挤进人群中央。不知是谁推攘了<<him>>一下，摩擦随即演化成了一场争执。为避免被误伤，见习教徒们四处散开。正当时，一股极冷的狂风席卷而来。
+<br><br>
+
+被眼前的暴力所震惊，为失去的暖意而叹惜，受新至的寒流之侵袭，重重打击下，多数见习教徒崩溃了。
+<br><br>
+
+<<if (currentSkillValue('willpower') / 10) gte ($pain + random(0, 10))>>
+	他们放弃了守夜，打破了沉寂，呼喊着求救，并跑入了黑暗之中。<span class="green">不过，你并不是他们中的一员。</span>
+	只有不到三分之一的人还留在这里。<<person2>><<person>>紧握着<<his>>的十字架，而<<person3>><<person>>则默默地念着另一段祷文。悉尼轻轻地触碰了你一下，试图无声地确认你还在那里。你回应般地轻触了<<person6>><<him>>一下。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<templeicon "trialcontinue">><<link [[抱在一起 (2:00)|Temple Vigil 8]]>><<pass 120>><<pain 12>><</link>><<ggpain>>
+	<br>
+	<<templeicon "trialbail">><<link [[放弃守夜|Temple Vigil Abandon]]>><<set $weekly.trialFailed to "cold">><</link>>
+	<br>
+<<else>>
+	他们放弃了守夜，打破了沉寂，呼喊着求救，并跑入了黑暗之中。
+	<<if $sydneyromance is 1 and (currentSkillValue('willpower') / 10) gte (($pain - 10) + random(0, 10))>>
+		<span class="red">你开始想要加入他们。</span>然而，就在那转身的那一瞬，有人抓住你的手腕，将你拉了回来。是悉尼。<span class="green">腕间多出的温暖，给了你继续下去的勇气，</span>再多坚持一小会儿。
+		<br><br>
+
+		只有不到三分之一的人还留在这里。<<person2>><<person>>紧握着<<his>>的十字架，而<<person3>><<person>>则默默地念着另一段祷文。悉尼紧紧地抱住你，你回应般地用麻木而颤抖的双臂环住了<<person6>><<him>>。<<His>>的肌肤冰冷，但冷不过这无情的漫漫寒夜。
+		<<gwillpower>><<willpower 1>>
+		<br><br>
+		<<templeicon "trialcontinue">><<link [[抱在一起 (2:00)|Temple Vigil 8]]>><<pass 120>><<pain 8>><</link>><<gpain>>
+		<br>
+		<<templeicon "trialbail">><<link [[放弃守夜|Temple Vigil Abandon]]>><<set $weekly.trialFailed to "cold">><</link>>
+		<br>
+	<<else>>
+		<span class="red">你在他们之中。</span>你从守夜之地抽身，跑入夜幕中，扑向了约旦等待着的怀抱。
+		<<ggwillpower>><<willpower 10>>
+		<br><br>
+
+		<<link [[继续|Temple Vigil End]]>><<set $weekly.trialFailed to "cold">><</link>>
+		<br>
+	<</if>>
+<</if>>

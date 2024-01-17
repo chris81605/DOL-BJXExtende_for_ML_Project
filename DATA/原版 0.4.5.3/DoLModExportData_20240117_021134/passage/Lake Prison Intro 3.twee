@@ -1,0 +1,42 @@
+:: Lake Prison Intro 3 []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"请，请不要伤害我，"你说道。
+	<<elseif $speech_attitude is "bratty">>
+		"不管你是谁，请离我远点！"你说道。
+	<<else>>
+		"求求你，我错了，别伤害我！"你说道。
+	<</if>>
+	<br><br>
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">一个小偷不配得到怜悯。"</span>祂更用力地掐住你的脖子，无视你的恳求。<<pain 8>><<gpain>>
+	<<elseif $wraith.state is "despair">>
+		"<span class="wraith">你拿走了它？你这个，小偷……</span>" 祂沉痛的皱眉，接着掐住了你的脖子。<<pain 4>><<gpain>>
+	<<else>>
+		"<span class="wraith">我保证能让你得到无尽的快乐，这还不够吗？</span>"祂咯咯笑着，然后掐住了你的脖子。<<pain 4>><<gpain>>
+	<</if>>
+<<else>>
+	你试图把祂的手从你身上扯开，但无济于事。祂望着你微笑。
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">挣扎吧，这只会让你更快地沉没。</span>"
+	<<elseif $wraith.state is "despair">>
+		"<span class="wraith">你拿走了它？你这个，小偷……</span>"
+	<<else>>
+		"<span class="wraith">省省你的力气吧。你会需要它的。</span>"
+	<</if>>
+<</if>>
+<br><br>
+<<if $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and !$noEarSlime>>
+	祂举起一侧的手臂，一个漩涡状的紫色圆盘在空中出现。祂伸手进去，拿出一团扭动的红色物质。一个活的史莱姆。祂将它放到你的耳边。
+	<br><br>
+	<<link [[挣扎|Lake Prison Slime Resist]]>><</link>>
+	<br>
+	<<link [[保持不动|Lake Prison Slime]]>><</link>>
+<<else>>
+	<<initWraith "abomination">>
+	<<startWraith>>
+	<br><br>
+	<<link [[继续|Lake Prison Intro Fight]]>><</link>>
+<</if>>
+<br>

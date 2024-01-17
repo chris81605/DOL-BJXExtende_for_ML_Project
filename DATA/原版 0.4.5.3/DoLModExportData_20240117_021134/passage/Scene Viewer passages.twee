@@ -1,0 +1,19 @@
+:: Scene Viewer passages []
+<<switch $sceneViewSwitch>>
+	<<case "halloweenwhitney">><<halloweenwhitney>>
+	<<case "halloweenkylar">><<halloweenkylar>>
+	<<case "AlexFarmWorkStage3">><<farmVisitor>>
+	<<case "AlexFarmWorkStage4">><<farmStage4>>
+	<<case "AlexFarmWorkStage5">><<farmStage5>>
+	<<case "AlexFarmWorkStage6">><<farmStage6>>
+	<<case "schoolBully">><<schoolbully>>
+	<<default>>
+		场景查看器发生了一个错误： <<print $replayScene.name>>. 请提交报告。
+		<br><br>
+		<<set _exitpassage to clone($replayScene.exitpassage)>>
+		<<unset $replayScene>>
+		<<unfreezePlayerStats>>
+		<<link [[后退|_exitpassage]]>>
+		<</link>>
+<</switch>>
+<<unset $sceneViewSwitch>>

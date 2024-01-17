@@ -1,0 +1,145 @@
+:: Robin Trick Hall []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc Robin>><<person1>>
+<<set _robin to statusCheck("Robin")>>
+<<set _costume to getHalloweenCostume()>>
+<<if $halloween_robin_costume is "witch">>
+	你走向罗宾，<<He>>从女巫帽的帽檐下偷看你。
+	<<if _robin.pronoun isnot "f">>
+		<<His>>的头发挂在帽檐上，身上的裙子勾勒出女性的轮廓。要不是你认识<<him>>，你绝不会猜到<<he>>是个男孩。
+	<</if>>
+<<elseif $halloween_robin_costume is "vampire">>
+	你接近罗宾。<<He>>透过吸血鬼的衣领偷看你。
+	<<if _robin.pronoun isnot "m">>
+		<<His>>的头发消失在高领中，看起来比原先短得多，斗篷则隐藏了<<his>>女性的曲线。要不是你认识<<him>>，你绝不会猜到<<he>>是个女孩。
+	<</if>>
+<<elseif $halloween_robin_costume is "ghost">>
+	你接近罗宾。<<He>>透过床单上粗糙的破洞偷看你。
+	<<if _robin.pronoun is "f" and _robin.breastsize gte 5>>
+		床单挂在罗宾的_robin.breastsdesc上，在<<his>>胸部周围的织物上形成一个帐篷。
+	<</if>>
+<<else>> <!-- if you don't already know robin is wearing the ghost costume -->
+	你走近那个穿着临时幽灵服装的人。
+	<<if _robin.pronoun is "f" and _robin.breastsize gte 5>>
+		床单挂在_robin.breastsdesc上，在胸部周围的织物上形成一个帐篷。
+	<</if>>
+	床单下的人转向你，一双眼睛从床单上粗糙的破洞里探出头来。是罗宾。
+	<<set $halloween_robin_costume to "ghost">>
+<</if>>
+<<if $halloween_robin_costume is (_robin.pronoun is "f" ? "vampire" : "witch")>>
+	<<set _robin.cdstart to _robin.cdstart or "halloween">> /* if it's undefined, set it to "halloween" */
+	<<set _robin.crossdress to _robin.crossdress or 1>>
+<</if>>
+<br><br>
+
+<<set _readyToLeave to true>>
+<<if _costume is "none">>
+	"我们要去要糖，"<<he>>说，"你愿意和我们一起去吗？你还需要一套服装，不然就会显得融不进氛围了。"
+	<br><br>
+
+	<i>也许你的衣柜里有什么东西。</i>
+	<<set _readyToLeave to false>>
+
+<<elseif _costume is $halloween_robin_costume>>
+	<<He>>看了看你的衣服，然后又看了看<<his>>自己的。在意识到你们一样的衣服后，<<He>>倒吸了一口气。“我们的服装很相配！”<<he>>兴奋地跳了起来，这突然的动作吓到了其他孤儿。“对不起，大家。”<<He>>转身对着你。“你要和我们一起去玩不给糖就捣蛋吗？我们可以扮演双胞胎
+	<<if _costume is "witch">>
+		女巫。<<if $worn.head.name isnot "witch hat">>别忘了戴上你的帽子。<</if>>"
+	<<else>>
+		<<print _costume>>。"
+	<</if>>
+<<elseif _costume is "mummy" and $robinSeen.includes("hospitalMummy")>>
+	<<He>>盯着你的万圣节装扮看了一会儿，像是突然想起了什么事情，眨眨眼后向你微笑。“我喜欢你这身装扮，”<<he>>说，“你要跟我们一起去玩不给糖就捣蛋吗？”<!-- Robin is remembering the events of "Robin Hospital 2" -->
+<<elseif _costume is "sailor" and $robinPunishments.includes("docks")>>
+	<<He>>看到了你的水手服装，有那么一瞬间，恐慌闪过<<his>>的眼中，暴露了<<him>>的不安。“哦，是你。”<<he>>犹豫了一下。“我喜欢你的服装。你要和我们一起去玩不给糖就捣蛋吗？”
+<<else>>
+	<<He>>看着你的衣服。
+	<<switch _costume>>
+		<<case "vampire">>
+			“我喜欢你的服装，”<<he>>转向孤儿们说，“我希望<<pshe>>不要吸我的血！”孤儿们笑了。<<He>>转身对着你。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "witch">>
+			“我喜欢你的服装，”<<he>>转向孤儿们说，“我希望<<pshe>>不要把我变成蝾螈！”孤儿们笑了。<<He>>转身对着你。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "scarecrow">>
+			“我喜欢你的服装，”<<he>>说，“你要和我们一起去玩不给糖就捣蛋吗？你可以让乌鸦远离我们的糖果！”
+		<<case "gothic">>
+			“我喜欢你的服装，”<<he>>说，“太花哨了！你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "nun">>
+			“我喜欢你的服装，”<<he>>说，“修女也能变得非常可怕。<<if (_tf.angelHalo and _tf.angelWings) or (_tf.fallenAngelHalo and _tf.fallenAngelWings)>>翅膀和光环的搭配很特殊很神奇。<</if>>你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "maid">>
+			“我喜欢你的服装，”<<he>>说，“女仆很可爱。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "karate">>
+			“我喜欢你的服装，”<<he>>说，“你可以保护我们免受忍者的伤害！你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "monk">>
+			“我喜欢你的服装，”<<he>>说，“这长袍看起来是真的。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "football">>
+			“我喜欢你的服装，”<<he>>说，“你会成为下一个足球明星！你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "christmas">>
+			“我喜欢你的服装，”<<he>>说，“现在还不是圣诞节，但没关系。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "belly dancer">>
+			“我喜欢你的服装，”<<he>>说，“太有异国情调了。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "cowboy">>
+			“我喜欢你的服装，”<<he>>说，“你再拿个套索就和真的牛仔差不多了！你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "cheerleader">>
+			“我喜欢你的服装，”<<he>>说，“你要和我们一起去玩不给糖就捣蛋吗？你可以在我们拿糖果的时候给我们加油！”
+		<<case "cow onesie">>
+			“我喜欢你的服装，”<<he>>说，“你产下的牛奶一定很好喝吧？”<<He>>似乎没有意识到刚说的话有多下流。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "mummy">>
+			“我喜欢你的服装，”<<he>>说，“它看起来有点脆弱，但仍然令人毛骨悚然。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "prison">>
+			“我喜欢你的服装，”<<he>>说，“所以他们为什么把你关在这里？”<<He>>压低嗓子补充道，然后笑了。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "sailor">>
+			“我喜欢你的服装，”<<he>>说，“不好意思，我们其余的人都是旱鸭子！你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "skeleton">>
+			“我喜欢你的服装，”<<he>>说，“你得多吃点！你都只剩骨头了！”<<He>>咯咯笑着补充道。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "futuresuit">>
+			“我喜欢你的服装，”<<he>>说，“我希望未来人类还会过万圣节。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "eyepatch">>
+			"我喜欢你的服装——嘎哦，伙计！"<<He>>咯咯地笑着，"你要和我们一起去玩不给糖就捣蛋吗？"
+		<<case "nurse">>
+			"我喜欢你的服装，"<<he>>说，"让我想起了学校的护士。你愿意和我们一起去玩不给糖就捣蛋吗？"
+		<<case "rags">>
+			"我喜欢你的服装，"<<he>>说，"你是在扮演一个乞丐吗？我知道那是什么感觉。"<<He>>紧张地笑了笑。"你要和我们一起去玩不给糖就捣蛋吗？"
+		<<case "medical eyepatch">>
+			"我喜欢你的服装，"<<he>>说，"你应该不是真的受伤了吧？你要和我们一起去玩不给糖就捣蛋吗？"
+		<<case "gasmask">>
+			"我喜欢你的服装，"<<he>>说，"看起来你已经准备好迎接世界末日了。就像那个新游戏一样！你要和我们一起去玩不给糖就捣蛋吗？"
+
+		<!-- TF-related lines -->
+		<<case "harpy TF">>
+			“我喜欢你的服装，”<<he>>说，“我希望你不要在我们结束之前飞走。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "angel TF">>
+			“我喜欢你的服装，”<<he>>说，“这个光环看起来真的浮在空中。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "wolf TF">>
+			“我喜欢你的服装，”<<he>>说，“这对耳朵跟真的一样。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "fallen angel TF">>
+			“我喜欢你的服装，”<<he>>说，“你头顶上好像真的有破碎的光环在飘浮。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "demon TF">>
+			“我喜欢你的服装，”<<he>>说，“但是你的尾巴应该不会掉下来吧？要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "cat TF">>
+			“我喜欢你的服装，”<<he>>说，“我真的好想摸摸你。你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "cow TF">>
+			“我喜欢你的服装，”<<he>>说，“你产下的牛奶一定很好喝吧？”<<He>>似乎没有意识到刚说的话有多下流。“你要和我们一起去玩不给糖就捣蛋吗？”
+		<<case "fox TF">>
+			“我喜欢你的服装，”<<he>>说。
+			<<if $worn.head.name is "spirit mask">>
+				“这个面具和你的狐狸耳朵很配。
+			<<else>>
+				“这条尾巴看起来好蓬松！
+			<</if>>
+			你要和我们一起去玩不给糖就捣蛋吗？”
+		<!-- Misc lines -->
+		<<default>>
+			“我喜欢你的服装，”<<he>>说，“我不知道你扮演的是什么，但是这身装扮好特别！你要和我们一起去玩不给糖就捣蛋吗？”
+
+	<</switch>>
+<</if>>
+<br><br>
+
+<<if _readyToLeave>>
+	<<foodicon "halloween">><<link [[去玩不给糖就捣蛋 (3:00)|Robin Trick 1]]>><<pass 30>><</link>>
+	<br>
+<<else>>
+	<<ind>><<link [[随便拼凑点东西|Robin Trick Mummy]]>><</link>>
+	<br>
+<</if>>
+<<getouticon>><<link [[离开|Orphanage]]>><<endevent>><</link>>
+<br>

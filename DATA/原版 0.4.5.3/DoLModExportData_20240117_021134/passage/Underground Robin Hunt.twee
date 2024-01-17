@@ -1,0 +1,79 @@
+:: Underground Robin Hunt []
+<<location "forest">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+枪响了，你和罗宾开始逃跑。
+<br><br>
+
+你刚走到树下，第二声枪响了。
+
+<<if $athleticsSuccess>>
+	<<pass 5>>
+	你尽可能快地逃跑。你听到<<victimgirls>>一个个的被抓住，森林中尖叫声不断响起。
+	<<if _robin.dom gte 70>>
+		你继续冲刺，罗宾跟在你身后。你摔倒了，<<nnpc_he "Robin">>抓住你的胳膊继续跑。
+		<br><br>
+
+		最后你们俩气喘吁吁地靠在一棵树上。你只能听到自己的心跳，罗宾的喘气声和风吹过树叶的沙沙声。
+		<br><br>
+
+		罗宾含泪对你微笑。“我们逃走了。”<<nnpc_He "Robin">>紧紧地抱着你。“我们逃走了！”
+		<br><br>
+
+		<<endevent>><<dungeonescape>>
+
+		<<link [[继续|Underground Robin Escape Orphanage]]>><<set $phase to 1>><<unset $robinBeast>><</link>>
+	<<else>>
+		<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>>
+			<span class="red">罗宾大声哭泣，一个<<beasttype 0>>抓住了<<nnpc_him "Robin">>。</span>你迅速转身冲向<<beasttype 0>>，<<beasttype 0>>转身看向你。
+			<br><br>
+
+			“我们出现了一个英雄啊，”当<<person>>赶上来时，你听到<<he>>说。<<He>>不是一个人，很多人都跟在<<him>>后面。“你知道英雄通常会有怎样的下场吗？”人群在你周围围成一圈。
+			<br><br>
+
+			<<link [[继续|Underground Robin Hunt Dog]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+		<<else>>
+			<span class="red">罗宾被<<person>>抓住时大哭起来。</span>你迅速转身冲过去，那个<<person>>转身看向了你。
+			<br><br>
+
+			“真勇敢，”那个<<person>>笑着说，又是一些人追了上来。“我一直想毁掉一个英雄。”
+			<br><br>
+
+			<<saveNPC 1 "underground_hunt_1">>
+			<<endevent>>
+			<<loadNPC 0 "underground_hunt_1">>
+			<<clearNPC "underground_hunt_1">>
+
+			<<link [[继续|Underground Robin Hunt Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for BeastPeople -->
+		你尽可能快地逃跑。你听到<<victimgirls>>一个个的被抓住，森林中尖叫声不断响起。
+		你听到有什么在你背后的草地上跑过来，随后感觉有<<print ($monster is 1 ? "手" : "爪子")>>把你摁倒在地。
+		那只<<beasttype 0>>开始摆动<<if $NPCList[0].penis isnot "none">>，你感觉到<<bhis 0>>的肉棒在戳着你的<<bottom>><</if>>。
+		<br><br>
+
+		“看起来<<bhe 0>>很喜欢你，”你听到追上来的<<person>>说。<<He>>不是一个人，有很多人跟在<<him>>身后。
+		“只有这样<<bhe 0>>才能随心所欲地对待<<bhis 0>>的猎物。”人群围成一圈，包围着你。
+		<br><br>
+
+		<<link [[继续|Underground Robin Hunt Dog]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你尽可能快地逃跑。你听到<<victimgirls>>一个个的被抓住，森林中尖叫声不断响起。
+		你听到有什么东西在你身后奔跑，下一秒，你被摁倒在地。
+		<br><br>
+
+		"抓到你了！"<<person>>说，又是一些人追了上来。"现在该猎人享受猎物了。"
+		<br><br>
+
+		<<saveNPC 1 "underground_hunt_1">>
+		<<endevent>>
+		<<loadNPC 0 "underground_hunt_1">>
+		<<clearNPC "underground_hunt_1">>
+
+		<<link [[继续|Underground Robin Hunt Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

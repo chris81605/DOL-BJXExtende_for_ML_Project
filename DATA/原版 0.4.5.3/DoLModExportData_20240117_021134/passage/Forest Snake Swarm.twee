@@ -1,0 +1,21 @@
+:: Forest Snake Swarm []
+<<location "forest">><<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "snakes" "蛇" "蜿蜒前进" "滑行着" "阻止" 10 0>>
+	<<set $timer to 20>>
+<</if>>
+
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Forest Snake Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Snake Swarm]]>><</link>></span><<nexttext>>
+<</if>>

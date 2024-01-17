@@ -1,0 +1,65 @@
+:: Spa Tired Steal []
+<<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<earnFeat "Idle Hands">>
+	<<switch $phase>>
+	<<case 0>>
+		<span class="green">你从<<persons>>身上取下<<if $pronoun is "f">>项链<<else>>链子<</if>>，</span>把它藏起来了。
+		<<set $blackmoney += 80>><<crimeUp 80 "thievery">>
+	<<case 1>>
+		<span class="green">你从<<persons>>手指上取下戒指，</span>把它藏起来了。
+		<<set $blackmoney += 50>><<crimeUp 50 "thievery">>
+	<<case 2>>
+		<span class="green">你解开手表，</span>把它藏起来了。
+		<<set $blackmoney += 3000>><<crimeUp 3000 "thievery">>
+	<</switch>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	你继续工作到结束，
+
+	<<if $spa.behaviour is "sophisticated">>
+		你轻推了一下把<<person>>弄醒了。"谢谢惠顾，"你说。<<He>>昏昏沉沉地环顾四周。"希望您喜欢我们的服务。"
+	<<elseif $spa.behaviour is "cute">>
+		你轻推了一下把<<person>>弄醒了。"起来吧懒虫，"你说。<<He>>昏昏沉沉地环顾四周。"希望您喜欢我的服务。"
+	<<else>>
+		你抚摸<<person>>直到<<he>>醒来。"按摩结束了，"你低声说道。"希望你能满意。"
+	<</if>>
+	<br><br>
+
+	<<He>>点点头，半醒着，爬了起来。你把目光移开，递给<<his>>毛巾。<<tipreceive>><<pass 50>>
+	<br><br>
+
+	<<spa_end>>
+
+<<else>>
+
+	<<switch $phase>>
+	<<case 0>>
+		<span class="red">在<<he>>动弹的时候，你的手指轻触到了<<persons>>的脖子。</span>
+	<<case 1>>
+		<span class="red">在<<he>>动弹的时候，你的手指轻触到了<<persons>>的手指。</span>
+	<<case 2>>
+		<span class="red">在<<he>>动弹的时候，你的手指轻触到了<<persons>>的手腕。</span>
+	<</switch>>
+	<<He>>怀疑地回头看你一眼，并且不再打瞌睡了。<<body_tip hand 0.1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	你继续工作，直到结束。
+
+	<<if $spa.behaviour is "sophisticated">>
+		你轻推了一下把<<person>>弄醒了。"谢谢惠顾，"你说。<<He>>昏昏沉沉地环顾四周。"希望您喜欢我们的服务。"
+	<<else>>
+		你轻推了一下把<<person>>弄醒了。"起来吧懒虫，"你说。<<He>>昏昏沉沉地环顾四周。"希望您喜欢我的服务。"
+	<</if>>
+	<<tipreceive>><<pass 50>>
+	<br><br>
+
+	<<spa_end>>
+
+<</if>>

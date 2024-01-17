@@ -1,0 +1,51 @@
+:: Canteen Lunch Robin End []
+<<schooleffects>><<effects>><<sydneySchedule>>
+
+<<if $sydneyromance is 1 and _sydney_location is "library" and $schoolstate is "lunch" and Time.minute lte 35 and random(1, 100) gte 50>>
+	/* Checks if _sydney_location is "library" instead of "canteen" because it's impossible for it to be "canteen" given the time passed from eating with Robin */
+	你边吃边和罗宾聊天。悉尼正站在食堂角落，抱着<<nnpc_his "Sydney">>的书快步走向图书馆。<<nnpc_He "Sydney">>突然在你的桌边停下，倾身亲了一口你的脸颊，差点把书掉在了桌上。<<arousal 50>><<garousal>>
+	<br><br>
+	<<if $robinnote is 1 and $robinromance isnot 1>>
+		罗宾的话噎在了嗓子里，"悉尼很适合你，我为你感到高兴。"<<Hes>>微笑着，但你在<<his>>的声音中捕捉到了一丝悲伤。
+		你边吃边和<<him>>聊天，尽量避开着悉尼的话题。
+	<<elseif $robinromance is 1>>
+		罗宾的话噎在了嗓子里，<<his>>呆呆地盯着悉尼，而悉尼已经赶去图书馆了。
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+			<<He>>不高兴地撅起嘴，然后在悉尼刚刚吻过的地方同样亲了一下，"我做得更好。"
+		<<else>>
+			"为什么……刚才是怎么回事？"<<He>>皱了皱眉头。
+		<</if>>
+		你边吃边和<<him>>聊天，尽量避开着悉尼的话题。
+	<<else>>
+		罗宾的话噎在了嗓子里，反应过来后玩味地推了你一下，"看来有人交到<<nnpc_girlfriend "Sydney">>了嘛！悉尼很适合你，我为你感到高兴。"
+		你和罗宾边吃饭边聊着悉尼，气氛十分愉快。
+	<</if>>
+	"我去教室里等着，"在你吃完之后，罗宾笑了笑。"我不喜欢迟到。"<<He>>给了你一个拥抱。
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+		凯拉尔在食堂对面看着。
+		<<if $robinromance is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50 and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 60>>
+			罗宾一走，<<nnpc_he "Kylar">>就气势汹汹地走到你的桌子前，一把抓住你的脸，在同一位置粗暴地吻了下去。"你不需要他们，"<<nnpc_he "Kylar">>嘶哑着嗓音说，"他们中的任何一个。你只需要我。"<<nnpc_He "Kylar">>又粗暴地吻了你另一侧的脸颊，然后走开了。
+		<</if>>
+		<<ggksuspicion>><<npcincr Kylar rage 3>>
+		<br><br>
+	<</if>>
+	<<endevent>>
+
+	<<link [[继续|Canteen]]>><</link>>
+	<br>
+<<else>>
+	你和罗宾边吃边愉快地聊天。"我去教室里等着，"你吃完后<<he>>说，"我不喜欢迟到。"<<He>>拥抱了你。
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+		凯拉尔在食堂对面看着。
+		<<gksuspicion>><<npcincr Kylar rage 1>>
+		<br><br>
+	<</if>>
+	<<endevent>>
+
+	<<link [[继续|Canteen]]>><</link>>
+	<br>
+<</if>>

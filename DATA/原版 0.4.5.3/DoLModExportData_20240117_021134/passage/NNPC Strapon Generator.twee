@@ -1,0 +1,62 @@
+:: NNPC Strapon Generator []
+The lights flash on. You find yourself in a strange chamber, completely smooth and featureless.
+There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters.
+A large, opaque tube reaches to the ceiling, The words <span class="blue">CUSTOM CONSTRUCT</span> are labelled on the front.
+<br>
+
+<<set _nnpcOptions to $NPCName.filter(npc => npc.penis === "none")>>
+<<set _nnpcOptions to _nnpcOptions.map(npc => npc.nam)>>
+
+A terminal is attached to the tube.
+
+<<if _nnpcOptions.length gte 1>>
+	Its screen is a monochrome green. You look at the prompts. The first one surprises you. It's a list of the names of people you recognise, how peculiar...
+	<br><br>
+	<i>Please select the construct's model.</i>
+	<br>
+
+
+	<<listbox "_npcNameSelect" autoselect>>
+		<<optionsfrom _nnpcOptions>>
+	<</listbox>>
+	<br><br>
+
+	<i>Please design the construct's strap-on.</i>
+	<br>
+	<<set _straponSize to 3>>
+	<span id="straponOptions">
+	<<straponGeneratorOptions>>
+	</span>
+
+	<<button "<i>Randomise</i>">>
+		<<set _straponSize to [2,3,4].random()>>
+		<<set _straponColour to ["black","red","pink","purple","fleshy","blue","green"].random()>>
+		<<set _straponShape to ["dildo","penis","beaded dildo","horse cock","knotted cock","tentacle","dolphin cock","studded cock","fist dildo"].random()>>
+		<<set _straponModifier to ["","","floppy","transparent","sparkly"].random()>>
+		<<replace "#straponOptions">><<straponGeneratorOptions>><</replace>>
+	<</button>>
+	<br><br>
+
+	Having selected the desired options, your finger hovers over the "Create" button. You really have no idea what this strange device is about to do...
+	<br><br>
+
+	<<link [[Create Construct|NNPC Strapon Generator Sex]]>>
+		<<npc _npcNameSelect>><<npcexpose>><<person1>>
+		<<generateNewStrapon _straponSize _straponColour _straponShape _straponModifier>>
+		<<npcstrapon 0>>
+		<<setNPCStrapon $NPCList[0] _newStrapon>>
+		<<set $sexstart to 1>>
+	<</link>>
+	<br><br>
+
+<<else>>
+	Its screen is a solid red colour, and it displays a message.
+	<br><br>
+	<span class="red"><i>Subject has no compatible candidates for construct in memory.</i></span>
+	<br>
+	<span class="red"><i>No actions available at this time.</i></span>
+	<br><br>
+
+<</if>>
+
+<<link [[Back home|Bedroom]]>><</link>>

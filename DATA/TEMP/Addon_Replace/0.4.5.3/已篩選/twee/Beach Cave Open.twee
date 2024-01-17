@@ -1,0 +1,17 @@
+:: Beach Cave Open []
+<<effects>>
+
+你打开了箱子，里面闪烁着银光。是一个指南针，看起来很有价值。博物馆馆长会知道更多关于它的信息。
+<<set $antiquemoney += 2200>><<museumAntiqueStatus "antiquesilvercompass" "found">>
+<br><br>
+<<set $pursuit += 1>>
+<<if $museumAntiques.antiques.antiqueleathermap isnot "found" and $museumAntiques.antiques.antiqueleathermap isnot "talk" and $museumAntiques.antiques.antiqueleathermap isnot "museum">>
+	<<set $skulduggerydifficulty to 700>>
+	/* 北极星模组 */
+	<<caveicon "treasure">><<link [[更仔细地检查箱子|Beach Cave Examine]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+	/* 北极星 */
+	<br>
+<</if>>
+
+<<getouticon>><<link [[离开|Beach Cave]]>><<set $eventskip to 1>><</link>>
+<br>

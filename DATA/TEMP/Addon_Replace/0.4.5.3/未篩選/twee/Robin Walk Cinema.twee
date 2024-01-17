@@ -1,0 +1,62 @@
+:: Robin Walk Cinema []
+<<set _robin to statusCheck("Robin")>>
+
+<<if $speech_attitude is "meek">>
+	"你想去电影院吗？"你问道。
+<<elseif $speech_attitude is "bratty">>
+	"让我们看一部电影吧！"你这样说道。
+<<else>>
+	"想去看电影么？"你问道。
+<</if>>
+<br><br>
+<<if Time.hour lt 12 and (Time.schoolDay or Time.isWeekEnd())>>
+	<<effects>>
+	<<His>>的眼神一下子亮了起来，但<<he>>看了看墙上的时钟，然后惋惜地说："抱歉，我需要尽快做好准备。晚上我应该没问题。"
+	<br><br>
+	<<robinoptions>>
+<<else>>
+	<<set $outside to 0>><<set $location to "town">><<effects>>
+	<<set $daily.robin.cinema to 1>>
+	<!-- note: changes to _robin *will* affect $NPCName[$NPCNameList.indexOf("Robin")] -->
+	<!-- does not use the new NPC clothes system completely, needs Robin crosdressing events to better determine when Robin will crossdress -->
+	<<if _robin.outfits isnot undefined>>
+		<<if _robin.outfits.length gt 0 and _robin.outfits.some(x => x.includes("robinGift"))>>
+			<<set _robinOutfits to clone(_robin.outfits)>>
+			<<set _robinOutfits to _robinOutfits.filter(x => x.includes("robinGift")).random()>>
+			<<npcClothesName _robin _robinOutfits>><<npcClothesName $NPCList[0] _robin.clothes.set>>
+		<</if>>
+	<</if>>
+	<<set $daily.robin.walk to 2>><<set $money -= 1500>>
+	<<if (["robinGiftTuxedo", "robinGiftShirt"].includes(_robin.clothes.set) and _robin.pronoun is "m") or (["robinGiftSundress", "robinGiftGown"].includes(_robin.clothes.set) and _robin.pronoun is "f") or ["robinGiftKimono"].includes(_robin.clothes.set)>>
+		<<His>>的眼睛亮了，直接跳了起来。"我先去换衣服，"<<he>>边说边脱下<<his>>的<<print setup.npcClothesSets.find(item => item.name === _robin.clothes.set).clothes.upper.desc>>。
+		<<if $robinromance is 1>>
+			<<He>>看着你脸红了，"我不介意你看着我换衣服的。"<<glust>><<npcincr Robin lust 1>>
+		<<else>>
+			<<He>>像是想到了什么，脸红了起来。"你能转过去一下吗？"
+		<</if>>
+		<br><br>
+	<<elseif ((["robinGiftTuxedo", "robinGiftShirt"].includes(_robin.clothes.set) and _robin.pronoun is "f") or (["robinGiftSundress", "robinGiftGown"].includes(_robin.clothes.set) and _robin.pronoun is "m"))
+	and $robinromance is 1 and _robin.crossdress gte 5>>
+		<<His>>的眼睛亮了，直接跳了起来。"我先去换衣服，"<<he>>边说边脱下<<his>>的<<print setup.npcClothesSets.find(item => item.name === _robin.clothes.set).clothes.upper.desc>>。
+		"不知道会不会有人认出我。"<<He>>看向你，脸红了，"如果你想看我换衣服的话就看吧，我不介意。"<<glust>><<npcincr Robin lust 1>>
+		<br><br>
+	<<else>>
+		<<His>>激动得跳了起来，<<he>>的眼神里也满是兴奋的闪光。
+	<</if>>
+	"我们要去看什么呢？"<<he>>问道，你注意到<<His>>的笑容稍有动摇，"我希望没有什么可怕的东西。"
+	<br><br>
+
+	<<if $robinromance is 1>>
+		你们牵着手来到商业街，电影院就矗立在购物中心的旁边，现在正在同步放映三部电影。
+		<br><br>
+	<<else>>
+		你们一起来到商业街，电影院就矗立在购物中心的旁边，现在正在同步放映三部电影。
+		<br><br>
+	<</if>>
+	<<link [[超级英雄电影 (1:30)|Robin Cinema Superhero]]>><<pass 90>><<stress -12>><</link>><<lstress>>
+	<br>
+	<<link [[浪漫电影 (1:30)|Robin Cinema Romance]]>><<pass 90>><<stress -12>><</link>><<lstress>>
+	<br>
+	<<link [[恐怖电影 (1:30)|Robin Cinema Horror]]>><<pass 90>><<stress 6>><</link>><<gstress>>
+	<br>
+<</if>>

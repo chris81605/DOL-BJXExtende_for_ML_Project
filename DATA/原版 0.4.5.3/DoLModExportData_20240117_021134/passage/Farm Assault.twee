@@ -1,0 +1,108 @@
+:: Farm Assault []
+<<set $outside to 1>><<set $location to "alex_farm">><<effects>>
+<<farm_work_update>>
+<<if $farm_assault.movement is "field">>
+	你低姿前进，匆忙穿过农场。
+<<elseif $farm_assault.movement is "tower">>
+	你尽可能放低身段，向瞭望塔的方向跑去。
+<<elseif $farm_assault.movement is "climb">>
+	你爬上瞭望塔。楼梯在你的脚下嘎吱作响。
+<<elseif $farm_assault.movement is "wait">>
+	你在阴影中等待，观察着入侵者的动向。
+<<elseif $farm_assault.movement is "struggle">>
+	<<if $farm_assault.bindings lte 0>>
+		你试图挣脱身上的绑带。<span class="green">它们松动了。</span>
+		<<if $worn.face.type.includes("gag")>>你把嘴上的东西扯了下来。<</if>>
+		<<if $farm_assault.alex is "bound">>
+			<<npc Alex>><<person1>>
+			你找到了不远处的艾利克斯，撕开了<<his>>嘴上的胶布，帮<<his>>松了绑。"一帮混蛋，"<<he>>站起来，"我们没时间可以浪费了。"
+			<<set $farm_assault.bindings_alex to 0>>
+			<<set $farm_assault.alex to "patrol">>
+			<<endevent>>
+		<</if>>
+		<<farm_assault_unbind>>
+	<<else>>
+		你试图挣脱身上的绑带。<span class="teal">它们似乎变松了一些。</span>
+	<</if>>
+<<else>>
+	你保持警惕，观察着入侵者的动向。
+<</if>>
+<<set $farm_assault.movement to "none">>
+<br><br>
+
+<<farm_assault_progress>>
+
+<<farm_assault_alex>>
+
+<<if _smoke>>
+	<span class="red">风中传来了物品燃烧的气味。</span>
+	<br><br>
+<</if>>
+
+<<if $farm_assault.tower is "manned" or $farm_assault.tower is "attacked" or _guard_won is true or _guard_lost is true>>
+	<<farm_assault_info guard>>
+<<elseif $farm_assault.tower is "defeated">>
+	<span class="red">$farm.tower_guard被击败了，在当前的入侵结束前将无法提供帮助。</span>
+	<br><br>
+<</if>>
+
+<<if $bus is "tower_top">>
+	<<farm_assault_info>>
+<</if>>
+
+<<if _dogs_status is "victorious">>
+	<span class="green">你听见猎犬们胜利的嚎叫声。</span>
+	<br><br>
+<<elseif _dogs_status is "defeated">>
+	<span class="red">你听见猎犬们惊慌失措的叫声。</span>
+	<br><br>
+<</if>>
+
+<<if $farm_destroyed is true>>
+	<<farm_assault_unbind>>
+	<<if $fields_damaged is 0>>
+		<span class="purple">由于无地可烧，暴徒们撤出了农田。</span><<lcontrol>><<gtrauma>><<control -10>><<trauma 6>>
+		<br><br>
+		<<npc Remy>><<person1>>
+		雷米在山头上观察着整个过程。<<He>>掉转马头，转身离开。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Farm Assault Victory]]>><</link>>
+		<br>
+	<<else>>
+		<span class="red">暴徒们的任务完成了，他们撤出了农田，只留下了一片被燃烧殆尽的废墟。</span>
+		<<lllcontrol>><<gggtrauma>><<control -50>><<trauma 24>>
+		<<world_corruption "soft" 15>>
+		<br><br>
+		<<npc Remy>><<person1>>
+		雷米在山头上观察着整个过程。<<He>>掉转马头，转身离开。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Farm Assault Defeat]]>><</link>>
+		<br>
+	<</if>>
+<<elseif _farm_assault_active isnot true>>
+	<<farm_assault_unbind>>
+	<span class="green">暴徒们丢盔弃甲，逃离了农场。</span>
+	<<if $fields_damaged gte 2>>
+		<span class="pink">他们设法点燃了<<number $fields_damaged>>块农田。</span><<llcontrol>><<ggtrauma>><<control -25>><<trauma 12>>
+	<<elseif $fields_damaged gte 1>>
+		<span class="blue">他们只点燃了一块农田。</span><<lcontrol>><<gtrauma>><<control -10>><<trauma 6>>
+	<<else>>
+		<span class="green">他们没能破坏哪怕一块农田。</span><<ggcontrol>><<lltrauma>><<control 25>><<trauma -25>>
+		<<if $farm_stage gte 12>>
+			<<earnFeat "Heroic Victory">>
+		<</if>>
+	<</if>>
+	<br><br>
+	<<npc Remy>><<person1>>
+	雷米在山头上观察着整个过程。<<He>>掉转马头，转身离开。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Farm Assault Victory]]>><</link>>
+	<br>
+<<else>>
+
+	<<farm_assault_actions>>
+
+<</if>>

@@ -1,0 +1,44 @@
+:: School Passout []
+<<sydneySchedule>>
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "school">>
+<<elseif _sydney_location is "library" and ($NPCName[$NPCNameList.indexOf("Sydney")].init isnot 1 or ($sydneySeen and !$sydneySeen.includes("libRescue")) or $rng gte 20)>>
+	<<pass 1 hour>>
+	你昏迷了一段时间，然后听到一声短促的喘息声，感觉自己被举起，然后又重新陷入昏迷。
+	<br><br>
+	<<trauma 6>><<set $stress -= 2000>>
+	<<link [[继续|Sydney Library Rescue]]>><</link>>
+<<else>>
+	<<pass 1 hour>>
+	你昏迷了一段时间。
+	<br><br>
+	<<set $danger to random(1, 10000)>>
+
+	<<if $danger gte (9900 - $allure)>>
+		<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+			<<if $rng gte 81>>
+				<<link [[继续|School Passout Exhibit]]>><<upperruined>><<lowerruined>><<underruined>><</link>>
+			<<elseif $rng gte 1>>
+				<<link [[继续|School Passout Rape]]>><<set $molestationstart to 1>><</link>>
+			<</if>>
+		<<else>>
+			<<if $rng gte 51>>
+				<<link [[继续|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
+			<<elseif $rng gte 1>>
+				<<link [[继续|School Passout Gang Rape]]>><<set $molestationstart to 1>><</link>>
+			<</if>>
+		<</if>>
+		<<trauma 6>><<set $stress -= 2000>>
+	<<else>>
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 96 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+			<<link [[醒来|Kylar Basement]]>><<pass 1 hour>><</link>>
+			<br>
+		<<elseif Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+			<<link [[继续|School Passout Infirmary]]>><</link>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+		<<trauma 6>><<set $stress -= 2000>>
+	<</if>>
+<</if>>

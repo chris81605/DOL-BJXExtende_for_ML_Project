@@ -1,0 +1,42 @@
+:: School Infirmary Ask Painkiller []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我，我感觉不舒服，"你目光低垂，"请给我一些东西来帮助减轻疼痛，好吗？"
+<<elseif $speech_attitude is "bratty">>
+	"你看不到我现在很痛吗？"你非常不耐烦，"我需要吃药或其他东西来减轻痛苦。"
+<<else>>
+	"好痛，有什么能够帮助我减轻痛苦吗？"你问道。
+<</if>>
+<br><br>
+
+<<if $daily.infirmaryPainkiller is 1>>
+	"还痛吗？但我已经给你开过药了。"<<He>>摇了摇<<his>>的头，"抱歉，<<girl>>，我不能再给你继续开药了。"
+	<br><br>
+
+	<<school_infirmary_options>>
+<<else>>
+	护士招手让你走近点，于是你过去了。<<He>>把椅子转过来面对你，用手托住你的下巴，摆动你的头，把你从头到脚都检查了一遍。
+	<br><br>
+
+	<<if $pain gte 40>>
+		<<He>>皱着眉点了点头，"确实，看得出来你吃了不少苦。"
+		<br><br>
+
+		<<He>>走到柜子前，柜子"咔嚓"一声打开了。<<He>>四处翻找，直到拿出一个玻璃小瓶。<<He>>把瓶子打开，用手晃了晃，一颗白色的药丸落入<<his>>的掌心。
+		<br><br>
+
+		"这应该会减轻你的痛苦……不过，你可能会感到有点恍惚，你能接受吗？"
+		<br><br>
+
+		<<link [[吃药|School Infirmary Painkiller Take]]>><<tiredness 18>><<pain -20>><<set $daily.infirmaryPainkiller to 1>><</link>><<lllpain>><<ggtiredness>>
+		<br>
+		<<link [[拒绝|School Infirmary Painkiller Decline]]>><</link>>
+		<br>
+	<<else>>
+		<<He>>皱了皱眉头。"可你看起来不挺正常的嘛。"你张开嘴想反对，但<<he>>不屑地抱着手，"当你真的难受再过来吧，吃药太多对身体不好。"
+		<br><br>
+
+		<<school_infirmary_options>>
+	<</if>>
+<</if>>

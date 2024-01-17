@@ -1,0 +1,78 @@
+:: Sewers Ask []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<if $speech_attitude is "meek">>
+	"那……那个，摩根？”你举起手问道。“我在寻找一些东西，你能帮我一下吗？"
+<<elseif $speech_attitude is "bratty">>
+	"嘿，老<<if $pronoun is "f">>女人<<else>>男人<</if>>，”你说，“帮我做点事。"
+<<else>>
+	"嘿，摩根，”你说，“你能帮我在这儿找找东西吗？"
+<</if>>
+<br><br>
+
+<<if Time.hour is 9 or Time.hour is 12 or Time.hour is 15 or Time.hour is 20>>
+	摩根看起来有些烦躁，但点了点头。“好吧，我们的课程可以推迟一会儿，你需要什么，<<charles>>？"
+<<else>>
+	摩根点了点头。“当然，<<charles>>，<<mummy>>还能为你做些什么呢？"
+<</if>>
+<br><br>
+
+<<if $pubfame.seen.includes("morganDrive")>>
+	你记得上次搜寻的经历，于是决定直接进入主题。“你有没有在这里看到过一个U盘？"
+	<br><br>
+
+	摩根在自己的衣服里翻找了一番，然后从口袋里拿出了一样东西。“就在几天前，我在南边那个长满霉菌的通道里找到的！这个U盘应该是你要找的东西。但是为什么，<<charles>>？"
+<<else>>
+	<<set $pubfame.seen.pushUnique("morganDrive")>>
+	你皱起眉头，试图想出一种让摩根能够理解的方式来描述U盘。“它很小，是方形的，一端有一个小小的金属部分。非金属部分可能是塑料制成的，比其他部分稍微厚一——"
+	<br><br>
+
+	摩根笑着打断了你。“哦，那个啊！”<<He>>从口袋里掏出了一样东西。“如果你要找的是这个32GB的U盘，你早就应该说了啊。"
+	<br><br>
+
+	你瞪大了眼睛。“你知道U盘是什么？"
+
+	"真是的……<<charles>>。”摩根严肃地看着你，然后把U盘转了一面，让你看到了上面写着的<i>“32GB U盘”</i>的标签。“我识字，知道怎么读，亲爱的。你不应该这样小瞧<<mummy>>。”<<He>>严肃的表情逐渐缓和。“不过……你要拿它干什么？"
+<</if>>
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"那个……”你满怀希望地看着<<him>>。“我能拿走它吗？"
+<<elseif $speech_attitude is "bratty">>
+	"是的，我需要它，”你说，“给我。"
+<<else>>
+	"既然你不需要它，能给我吗？”你问。
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Morgan")].love gte 10>>
+	摩根笑了起来。“<span class="green">当然，<<charles>>！</span>我的东西就是你的东西，而且我也用不上它。这玩意儿太短了，不能当茶匙。”<<He>>把U盘给了你，轻轻地握住了你的手。
+	<br><br>
+	<<pubfameComplete "morgan">>
+
+	<<if !$daily.morgan.sex>>
+		摩根朝你微笑。“<<charles>>，我已经帮你忙了，你不觉得你应该为我做些什么吗？我教育过你吧？人要有礼貌，懂得感恩。”<<He>>向你伸出手。
+		<br><br>
+
+		<<link [["允许" + $NPCList[0].pronouns.him|Sewers Rape]]>><<trauma 6>><<npcincr Morgan love 1>><<set $phase to 1>><<set $molestationstart to 1>><</link>><<gtrauma>><<glove>>
+		<br>
+		<<link [["推开" + $NPCList[0].pronouns.him |Sewers Ask Refuse]]>><<npcincr Morgan love -5>><</link>><<lllove>>
+	<<else>>
+		摩根对你微笑。“走吧，你还有很多家务事要做呢。"
+		<br><br>
+		<<link [[继续|Sewers Morgan]]>><</link>>
+	<</if>>
+
+<<else>>
+	摩根咂嘴。“<span class="red"><<charles>>，你拿这个蠢玩意儿有什么用？</span>你应该关注更重要的事情。”<<He>>转过身背对着你。
+	<<if Time.hour is 9 or Time.hour is 12 or Time.hour is 15 or Time.hour is 20>>
+		"现在让我们继续上课，好吗？"
+	<<else>>
+		"走吧，你还有很多家务要做呢。"
+	<</if>>
+	<br><br>
+
+	<span class="purple">如果摩根更喜欢你，<<he>>也许会信任你，把U盘交给你。</span><span class="blue">当然，得到东西的方法从不只有一种。</span>
+	<br><br>
+
+	<<link [[继续|Sewers Morgan]]>><</link>>
+<</if>>

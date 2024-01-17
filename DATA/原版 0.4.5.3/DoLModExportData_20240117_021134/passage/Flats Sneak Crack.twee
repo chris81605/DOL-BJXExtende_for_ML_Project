@@ -1,0 +1,43 @@
+:: Flats Sneak Crack []
+<<effects>>
+
+你把耳朵贴在保险柜上，听着转动转盘的时候发出的细微声音。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">保险箱打开了，</span>你取出里面的东西。有<span class="gold">£120</span>。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[拿走|Flats]]>><<moneyGain 120>><<crimeUp 120 "thievery">><<endevent>><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<span class="red">你听到流水停了。</span>你还没来得及逃出卧室，一个<<person>>就从浴室里走了出来，<<he>>只穿着一件还在滴水的浴袍。
+	<br><br>
+
+	"你想偷我的东西？"<<he>>说，"该好好给你上一课了。"
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Flats Sneak Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<</if>>

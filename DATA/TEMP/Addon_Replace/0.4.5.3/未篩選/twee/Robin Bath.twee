@@ -1,0 +1,54 @@
+:: Robin Bath []
+<<effects>><<npc Robin>><<set $robinBathKnown to true>>
+
+<<if C.npc.Robin.trauma gte 40>>
+	你把浴室的门打开。
+	<<if $robin_injured>>
+		你看到了躺在浴缸里一动不动的罗宾。<<He>>转过头双眼无神地看着你。你可以看到<<his>>身上遍布的淤青和抓痕。
+		<<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[询问发生了什么|Robin Bath Trauma Ask]]>><</link>>
+	<<else>>
+		你看到了在浴缸里惊慌失措的罗宾。在门开的时候<<he>>紧张地看着你，但是在发现是你的时候<<he>>放松了下来。你可以看到<<his>>身上的瘀伤和抓痕正在愈合。
+		<br><br>
+
+		<<link [[我来帮你洗吧 (0:30)|Robin Bath Trauma]]>><<pass 30>><<npcincr Robin trauma -3>><</link>><<lrtrauma>>
+	<</if>>
+<<else>>
+	你打开浴室门，看到罗宾正在浴缸里洗澡。
+	<<if $robinromance is 1>>
+		<<He>>转过身大叫，但在看到是你后，<<He>>明显放松了下来。<<He>>微笑着向你挥手。
+		<br><br>
+
+		<<link [[留下来看 (0:30)|Robin Bath Watch]]>><<pass 30>><<arousal 600>><<npcincr Robin lust 1>><</link>><<garousal>><<glust>>
+		<<if $exhibitionism gte 15 and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+			<br>
+			<<link [[说想一起洗 (0:30)|Robin Bath Join]]>><<pass 30>><<npcincr Robin lust 3>><</link>><<exhibitionist2>><<gglust>>
+		<</if>>
+	<<elseif C.npc.Robin.love gte 60>>
+		<<He>>大叫，但在看到是你后，<<He>>很快就放松了下来。"你能……给我几分钟吗？我洗完就会马上回房间了。"
+		<br><br>
+
+		<<link [[留下来看 (0:30)|Robin Bath Watch]]>><<pass 30>><<arousal 600>><<npcincr Robin dom -1>><<pass 5>><</link>><<garousal>><<ldom>>
+		<<if $exhibitionism gte 15 and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+			<br>
+			<<link [[说想一起洗 (0:30)|Robin Bath Join]]>><<pass 30>><<npcincr Robin lust 3>><</link>><<exhibitionist2>><<gglust>>
+		<</if>>
+	<<else>>
+		<<He>>转过身来大叫，"请、请离开！"
+		<br><br>
+
+		<<link [[留下来看|Robin Bath Watch]]>><<arousal 600>><<npcincr Robin love -1>><<npcincr Robin dom -1>><</link>><<garousal>><<llove>><<ldom>>
+	<</if>>
+<</if>>
+<br>
+<<link [[离开|Orphanage]]>>
+	<<endevent>>
+	<<if C.npc.Robin.trauma gte 40>>
+		<<stress 6>><<npcincr Robin confidence -1>>
+	<</if>>
+<</link>>
+<<if C.npc.Robin.trauma gte 40>>
+	<<gstress>><<ldom>>
+<</if>>

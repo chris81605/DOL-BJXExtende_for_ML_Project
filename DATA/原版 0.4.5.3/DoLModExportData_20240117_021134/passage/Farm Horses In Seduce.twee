@@ -1,0 +1,72 @@
+:: Farm Horses In Seduce []
+<<effects>>
+
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+你走进隔间的另一端，靠在墙上，摆出交配的姿势。
+<<deviancy2>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<span class="green">奏效了。</span><<farm_text horse>>小跑着走过来，让你抓住缰绳，把它拉住。
+	<br><br>
+
+	<<set $danger to random(1, 10000)>>
+	<<if $danger gte (9900 - $allure)>>
+		当你走回入口时，<<farm_he horse>>突然袭击了你，<<farm_He horse>>冲着你奔跑过来，迫使你跳到一边躲避。你最后被甩到了马厩之间的围栏上。
+		<br><br>
+
+		在你爬起来前，<<farm_text horse>>将<<farm_his horse>>的前腿移到你的两侧，开始磨蹭你的<<bottom>>。
+		<<if $farm_work.horse.genitals is "vagina">>
+			<<farm_He horse>>压着你，似乎在确立统治地位。
+			<br><br>
+
+			<<link [[忍耐|Farm Horses In Endure]]>><<trauma 6>><<stress 6>><<farm_horses -1>><</link>><<gtrauma>><<gstress>><<lrespect>>
+			<br>
+			<<if $deviancy gte 55>>
+				<<link [[磨蹭回去|Farm Horses In Bottom]]>><<bottomstat>><<bottomskill 5>><</link>><<deviant4>><<gbottomskill>>
+				<br>
+			<</if>>
+		<<else>>
+			你感觉到<<farm_his horse>>巨大的阴茎已经勃起，挤到你的大腿之间。<<farm_He horse>>压着你，好像试图确立统治地位。
+			<br><br>
+
+			<<link [[忍耐|Farm Horses In Endure]]>><<trauma 6>><<stress 6>><<farm_horses -1>><<thighejacstat>><<ejacstat>><</link>><<gtrauma>><<gstress>><<lrespect>>
+			<br>
+			<<if $deviancy gte 55>>
+				<<link [[磨蹭回去|Farm Horses In Thigh]]>><<thighstat>><<thighejacstat>><<ejacstat>><<thighskill 5>><</link>><<deviant4>><<gthighskill>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+
+		你离开马厩，关上身后的门。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+
+	<span class="red"><<farm_text horse>>不为所动，</span>仍然固执己见。你试着拉它，从后面推它，用胡萝卜引诱它，但都没用。<<lrespect>><<farm_horses -1>><<pass 20>><<farm_count 20>>
+	<br><br>
+
+	你被远处令人毛骨悚然的尖叫声打断了。
+	<<if $farm_work.horse.monster is true>>
+		<<farm_text horse>>慌忙跑进<<farm_his horse>>的马厩。你在<<farm_him horse>>后面关上了门。其它半人马笑了起来，但声音中带着一丝不安。
+	<<else>>
+		<<farm_text horse>>慌忙跑进<<farm_his horse>>的马厩。你在<<farm_him horse>>后面关上了门。其它马则躲进了圈舍的更深处。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

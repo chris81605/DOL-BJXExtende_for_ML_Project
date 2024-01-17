@@ -1,0 +1,100 @@
+:: English Play Watch []
+<<effects>>
+
+<<if !$englishPlayWatch>>
+	<<set $englishPlayWatch to 0>>
+<</if>>
+<<set $englishPlayWatch ++>>
+<<switch $englishPlayWatch>>
+	<<case 1>>
+		<<randomPlay>>
+		<<if $englishPlayRoles.Player is "none" and !$englishPlaySydneyWatch and Time.hour lte 20>>
+			<br><br>
+			悉尼的演出就在下一场。
+		<</if>>
+	<<case 2>>
+		<<if $englishPlayRoles.Player is "none" and !$englishPlaySydneyWatch>>
+			<<set $englishPlaySydneyWatch to true>>
+			<<npc Sydney>><<person1>><<run statusCheck("Sydney")>>
+			悉尼参演了一部戏剧，那是关于一个乞丐跟一个富二代相爱的故事，这让那个富二代的父母很不高兴。
+			<br><br>
+
+			<<He>>扮演乞丐的角色，然后
+			<<if _sydneyStatus.includes("corrupt")>>
+				当<<he>>脱离剧本的时候，其他演员不知所措。
+				<<if $pregnancyspeechdisable is "f">>
+					<<if C.npc.Sydney.gender is "m">>
+						<<He>>当着<<he>>父母的面，大声地宣布了<<him>>怀孕了。
+					<<else>>
+						<<He>>当着<<he>>父母的面，大声地宣布了富二代让<<him>>怀孕了。
+					<</if>>
+				<<else>>
+					<<He>>大声地宣布，<<he>>跟<<his>>情人已经私奔并结合在一起了。
+				<</if>>
+				观众们为这一意料之外的转折欢呼喝彩着。其他演员花了一点时间反应过来，也跟着演了下去。
+				<br><br>
+
+				<<if $sydneyromance is 1 and isLoveInterest("Sydney")>>
+					你知道这只是为了表演，但当悉尼亲上了另一个演员的脸颊时，你不禁嫉妒了起来。
+				<<else>>
+					你情不自禁地被这展示逗乐了。
+				<</if>>
+			<<else>>
+				坚持剧本，尽<<him>>最大的努力去把情感和优雅融入角色。
+				一切如你所料，富二代的父母最终还是同意了这段关系。另一个演员在演出的最后亲了悉尼的脸颊一下，悉尼的脸变红了起来。
+				<br><br>
+
+				<<if $sydneyromance is 1 and isLoveInterest("Sydney")>>
+					你知道这只是表演，但你忍不住对这样的演出感到嫉妒。
+				<<else>>
+					悉尼的尴尬让你忍俊不禁。
+				<</if>>
+			<</if>>
+		<<else>>
+			<<randomPlay>>
+		<</if>>
+	<<case 3>>
+		<<randomPlay>>
+		<<if !$englishPlayRobinWatch and C.npc.Robin.init is 1 and getRobinLocation() is "englishPlay" and Time.hour lte 20>>
+			<br><br>
+			罗宾的演出在下一场。
+		<</if>>
+	<<case 4>>
+		<<if !$englishPlayRobinWatch and C.npc.Robin.init is 1 and getRobinLocation() is "englishPlay">>
+			<<set $englishPlayRobinWatch to true>>
+			<<npc Robin>><<person1>>
+				罗宾参与了一个演出，讲述了未来一场虚构战争中的圣诞日休战故事。<<He>>扮演了一棵圣诞树。
+				<br><br>
+
+				罗宾的角色第一个死了，你很佩服<<him>>极其逼真的树木死亡音效。
+		<<else>>
+			<<randomPlay>>
+		<</if>>
+	<<default>>
+		<<randomPlay>>
+<</switch>>
+<<endevent>>
+<br><br>
+
+<<if Time.hour gte 21>>
+	随着演出结束，学生开始鞠躬谢幕，而大部分观众已经逐渐起身离开。喝彩与嘈杂的人声充斥着大厅。
+	<br><br>
+
+	<<if C.npc.Robin.init is 1 and $robinmissing is 0 and $englishPlayRobinWatch>>
+		<<link [[跟罗宾一起走 (0:10)|English Play Leave Robin]]>><<englishplayfinish>><<pass 1>><<npcincr Robin love 2>><</link>><<glove "Robin">>
+		<br>
+	<</if>>
+	<<if $englishPlayRoles.Player isnot "none" or $englishPlaySydneyWatch>>
+		<<link [[等待悉尼 (0:10)|English Play Wait Sydney]]>><<englishplayfinish>><<pass 1>><<npcincr Sydney love 2>><</link>><<glove "Sydney">>
+		<br>
+	<</if>>
+	<<link [[跟其他学生一起离开 (0:10)|English Play Leave Students]]>><<englishplayfinish>><<status 5>><<pass 10>><</link>><<ggcool>>
+	<br><br>
+	<<link [[独自离开 (0:01)|Cliff Street]]>><<englishplayfinish>><<pass 1>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<link [[观看更多演出 (0:20)|English Play Watch]]>><<trauma -2>><<tiredness 2>><<status 1>><<pass 20>><</link>><<ltrauma>><<gtiredness>><<gcool>>
+	<br><br>
+	<<link [[离开市政厅 (0:01)|Cliff Street]]>><<englishplayfinish>><<pass 1>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,401 @@
+:: Widgets Vore [widget]
+<<widget "vore">>
+	<<rng>>
+	<<if $vorestage is 1>>
+		你的大腿被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴紧紧咬住，小腿和脚只能任凭它探出的舌头摆布。
+		<<neutral 4>>
+	<<elseif $vorestage is 2>>
+		你的腰被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴紧紧咬住，你脆弱的身体只能任凭它滑溜溜的舌头摆布。
+		<<neutral 2 "genitals">><<neutral 2 "bottom">>
+	<<elseif $vorestage is 3>>
+		你的胸口被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴紧紧咬住，身体只能任凭它黏糊糊的舌头摆布。
+		<<neutral 2 "breasts">><<neutral 3 "genitals">><<neutral 3 "bottom">>
+	<<elseif $vorestage is 4>>
+		你的肩膀被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>紧紧咬住，身体只能任由它的舌头摆布。
+		<<neutral 3 "breasts">><<neutral 4 "genitals">><<neutral 4 "bottom">>
+	<<elseif $vorestage is 5>>
+		你的整个身体都在<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴里，它黏糊糊的舌头压住了你的全身。
+		<<neutral 4 "breasts">><<neutral 5 "genitals">><<neutral 5 "bottom">>
+	<<elseif $vorestage is 6>>
+		你在<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的食道中，被内壁的吞咽动作推动着前进。
+		<<neutral 5 "breasts">><<neutral 6 "genitals">><<neutral 6 "bottom">>
+	<<elseif $vorestage is 7>>
+		你在<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的胃里，艰难地在黏糊糊的液体上仰头。
+		<<neutral 6 "breasts">><<neutral 7 "genitals">><<neutral 7 "bottom">>
+	<</if>>
+	<<if $vorestage is 1>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂按住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="blue">但起不到什么作用。</span>你往深处滑去，直到它把你吞到腰腹。
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="blue">但起不到什么作用。</span>你往深处滑去，直到它把你吞到腰腹。
+			<<else>>
+				<span class="blue">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你。你滑到它嘴里的更深处，直到它把你吞到腰腹。
+			<</if>>
+			<<if $voretrait gte 1 and random(1, 3) is 3>>
+				你因这种感觉而颤抖。<<arousal 100>>
+			<</if>>
+		<</if>>
+	<<elseif $vorestage is 2>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 1>>
+		<<elseif $worn.lower.integrity lte 0>>
+			<<set $worn.lower.integrity -= 1>>
+		<<elseif $worn.under_lower.integrity lte 0>>
+			<<set $worn.under_lower.integrity -= 1>>
+		<</if>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂按住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="purple">但这还不够。</span>你往深处滑去，直到它吞没你的胸部。
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="purple">但起不到什么作用。</span>你往深处滑去，直到它吞没你的胸部。
+			<<else>>
+				<span class="purple">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你。你往深处滑去，直到它吞没你的胸部。
+			<</if>>
+		<</if>>
+	<<elseif $vorestage is 3>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 1>>
+		<<elseif $worn.lower.integrity gt 0>>
+			<<set $worn.lower.integrity -= 1>>
+		<<elseif $worn.under_lower.integrity gt 0>>
+			<<set $worn.under_lower.integrity -= 1>>
+		<</if>>
+		<<if $worn.over_upper.integrity gt 0>>
+			<<set $worn.over_upper.integrity -= 1>>
+		<<elseif $worn.upper.integrity gt 0>>
+			<<set $worn.upper.integrity -= 1>>
+		<<elseif $worn.under_upper.integrity gt 0>>
+			<<set $worn.under_upper.integrity -= 1>>
+		<</if>>
+		<<set $worn.upper.integrity -= 1>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂按住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你往深处滑去，直到它吞到你的脖子。
+			<<elseif $vorestruggle is 1>>
+				你用一只手压住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你往深处滑去，直到它吞到你的脖子。
+			<<else>>
+				<span class="pink">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你。你往深处滑去，直到它吞到你的脖子。
+			<</if>>
+		<</if>>
+	<<elseif $vorestage is 4>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 1>>
+		<<elseif $worn.lower.integrity gt 0>>
+			<<set $worn.lower.integrity -= 1>>
+		<<elseif $worn.under_lower.integrity gt 0>>
+			<<set $worn.under_lower.integrity -= 1>>
+		<</if>>
+		<<if $worn.over_upper.integrity gt 0>>
+			<<set $worn.over_upper.integrity -= 1>>
+		<<elseif $worn.upper.integrity gt 0>>
+			<<set $worn.upper.integrity -= 1>>
+		<<elseif $worn.under_upper.integrity gt 0>>
+			<<set $worn.under_upper.integrity -= 1>>
+		<</if>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你身体被彻底吞没，它的嘴唇在你身后合上。
+			<<elseif $vorestruggle is 1>>
+				你一只手撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你身体被彻底吞没，它的嘴唇在你身后合上。
+			<<else>>
+				<span class="pink">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你。你身体被彻底吞没，它的嘴唇在你身后合上。
+			<</if>>
+		<</if>>
+	<<elseif $vorestage is 5>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 1>>
+		<<elseif $worn.lower.integrity gt 0>>
+			<<set $worn.lower.integrity -= 1>>
+		<<elseif $worn.under_lower.integrity gt 0>>
+			<<set $worn.under_lower.integrity -= 1>>
+		<</if>>
+		<<if $worn.over_upper.integrity gt 0>>
+			<<set $worn.over_upper.integrity -= 1>>
+		<<elseif $worn.upper.integrity gt 0>>
+			<<set $worn.upper.integrity -= 1>>
+		<<elseif $worn.under_upper.integrity gt 0>>
+			<<set $worn.under_upper.integrity -= 1>>
+		<</if>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>嘴的内侧，<span class="pink">但起不到什么作用。</span>你滑入它的食道。
+			<<elseif $vorestruggle is 1>>
+				你一只手撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你滑入它的食道。
+			<<else>>
+				<span class="pink">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，你滑入它的食道。
+			<</if>>
+		<</if>>
+	<<elseif $vorestage is 6>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 1>>
+		<<elseif $worn.lower.integrity gt 0>>
+			<<set $worn.lower.integrity -= 1>>
+		<<elseif $worn.under_lower.integrity gt 0>>
+			<<set $worn.under_lower.integrity -= 1>>
+		<</if>>
+		<<if $worn.over_upper.integrity gt 0>>
+			<<set $worn.over_upper.integrity -= 1>>
+		<<elseif $worn.upper.integrity gt 0>>
+			<<set $worn.upper.integrity -= 1>>
+		<<elseif $worn.under_upper.integrity gt 0>>
+			<<set $worn.under_upper.integrity -= 1>>
+		<</if>>
+		<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
+			<<if $vorestruggle is 2>>
+				你用双臂抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<elseif $vorestruggle is 1>>
+				你用一只手抓紧<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴内侧，<span class="green">防止它进一步吞噬你。</span>
+			<<else>>
+				没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你，<span class="green">但它并没有抓到你的破绽。</span>
+			<</if>>
+		<<else>>
+			<<set $vorestomach to 0>>
+			<<set $vorestage += 1>>
+			<<if $vorestruggle is 2>>
+				你用双臂撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你向深处滑去，来到了一个肉壁的腔室。
+				<<if $leftarm is "trapped">><<set $leftarm to 0>><</if>><<if $rightarm is "trapped">><<set $rightarm to 0>><<swallowed>><</if>>
+			<<elseif $vorestruggle is 1>>
+				你用一只手撑住<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴，<span class="pink">但起不到什么作用。</span>你向深处滑去，来到了一个肉壁的腔室。
+				<<if $leftarm is "trapped">><<set $leftarm to 0>><</if>><<if $rightarm is "trapped">><<set $rightarm to 0>><<swallowed>><</if>>
+			<<else>>
+				<span class="pink">你非常无助，</span>没有什么可以阻止<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>进一步吞噬你。你向深处滑去，来到了一个肉壁的腔室。
+				<<if $leftarm is "trapped">><<set $leftarm to 0>><</if>><<if $rightarm is "trapped">><<set $rightarm to 0>><</if>><<swallowed>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $worn.over_lower.integrity gt 0>>
+			<<set $worn.over_lower.integrity -= 5>>
+		<</if>>
+		<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte clothingData('over_lower',$worn.over_lower,'integrity_max') / 5) and $worn.lower.integrity gt 0>>
+			<<set $worn.upper.integrity -= 5>>
+		<</if>>
+		<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte clothingData('over_lower',$worn.over_lower,'integrity_max') / 5)
+			and ($worn.lower.name is "naked" or $worn.lower.integrity lte clothingData('lower',$worn.lower,'integrity_max') / 5) and $worn.under_lower.integrity gt 0>>
+			<<set $worn.under_lower.integrity -= 5>>
+		<</if>>
+		<<if $worn.over_upper.integrity gt 0>>
+			<<set $worn.over_upper.integrity -= 5>>
+		<</if>>
+		<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte clothingData('over_upper',$worn.over_upper,'integrity_max') / 5) and $worn.upper.integrity gt 0>>
+			<<set $worn.upper.integrity -= 5>>
+		<</if>>
+		<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte clothingData('over_upper',$worn.over_upper,'integrity_max') / 5) and
+			($worn.upper.name is "naked" or $worn.upper.integrity lte clothingData('upper',$worn.upper,'integrity_max') / 5) and $worn.under_upper.integrity gt 0>>
+			<<set $worn.under_upper.integrity -= 5>>
+		<</if>>
+	<</if>>
+	<br><br>
+	<<set $vorestruggle to 0>>
+	<<rng>>
+	<<if $vorestage is 1>>
+		<<if $rng gte 66>>
+			你感觉到<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>在舔你的脚。
+			<<neutral 5>>
+		<<elseif $rng gte 33>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头从嘴里伸出，舔舐你的大腿内侧。
+			<<neutral 5 "genitals">>
+		<<else>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头从嘴里伸出，舔舐你的屁股。
+			<<neutral 5 "anus">>
+		<</if>>
+	<<elseif $vorestage is 2>>
+		<<if $rng gte 66>>
+			你感觉到<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>在舔你的屁股。
+			<<neutral 5 "anus">>
+		<<elseif $rng gte 33>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>轻轻地<<groin "舔着">>。
+			<<neutral 10 "genitals">>
+		<<else>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头缠绕在你的骨盆上，沿着你的大腿上下磨蹭。
+			<<neutral 5 "genitals">>
+		<</if>>
+	<<elseif $vorestage is 3>>
+		<<if $rng gte 66>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头把你的身体压在它的上颚上。
+			<<neutral 5>>
+		<<elseif $rng gte 33>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>轻轻地<<groin "刺激">>。
+			<<neutral 10 "genitals">>
+		<<else>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头舔弄着你的大腿内侧。
+			<<neutral 5 "genitals">>
+		<</if>>
+	<<elseif $vorestage is 4>>
+		<<if $rng gte 66>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌尖沿着你的身体舔舐。
+			<<neutral 5>>
+		<<elseif $rng gte 33>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>轻轻地<<groin "刺激">>。
+			<<neutral 10 "genitals">>
+		<<else>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌头舔弄着你的大腿内侧。
+			<<neutral 10 "genitals">>
+		<</if>>
+	<<elseif $vorestage is 5>>
+		<<if $rng gte 66>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的舌尖沿着你的身体舔舐。
+			<<neutral 10>>
+		<<elseif $rng gte 33>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>用舌头缠住你的身体。
+			<<neutral 10>>
+		<<else>>
+			<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>用舌尖<<groin "轻弹">>。
+			<<neutral 15 "genitals">>
+		<</if>>
+	<<elseif $vorestage is 6>>
+		<<if $rng gte 81 and $leftarm is 0>>
+			食道侧面的凹槽在你的左臂周围收缩，将其困住。
+			<<set $leftarm to "trapped">><<set $lefttarget to "vore">><<neutral 10>>
+		<<elseif $rng gte 61 and $rightarm is 0>>
+			食道侧面的凹槽在你的右臂周围收缩，将其困住。
+			<<set $rightarm to "trapped">><<set $righttarget to "vore">><<neutral 10>>
+		<<elseif $rng gte 41>>
+			食道收紧你的整个身体，将你固定在原位。
+			<<neutral 10>>
+		<<elseif $rng gte 21>>
+			管子一侧的阀门被打开，一股温暖，粘稠的液体从中涌出，将你包裹其中。
+			<<neutral 15>>
+		<<elseif $rng gte 1>>
+			食道的两侧推着你，让你沿着食道滑动。
+			<<neutral 15>>
+		<</if>>
+	<<elseif $vorestage is 7>>
+		<<if $rng gte 81 and $rightarm is 0>>
+			肉室侧面的凹槽在你的右臂周围收缩，将其困住。
+			<<set $rightarm to "trapped">><<set $righttarget to "vore">><<neutral 15>>
+		<<elseif $rng gte 61>>
+			更多的液体从肉室的侧面喷出，将你包裹在粘稠的液体中。
+			<<neutral 15>><<outergoo>>
+		<<elseif $rng gte 41 and $leftarm is 0>>
+			肉室侧面的凹槽在你的左臂周围收缩，将其困住。
+			<<set $leftarm to "trapped">><<set $lefttarget to "vore">><<neutral 15>>
+		<<elseif $rng gte 21>>
+			肉室以柔和的节奏脉动。
+			<<neutral 15>>
+		<<elseif $rng gte 1>>
+			整个肉室都在脉动，摩擦着你。
+			<<neutral 20>>
+		<</if>>
+		<<if $vorestomach is 0>>
+			<<set $vorestomach to 1>>
+			<span class="blue">肉墙把你包围住了。</span>
+		<<elseif $vorestomach is 1>>
+			<<set $vorestomach to 2>>
+			<span class="purple">肉墙把你包围住了。</span>
+		<<elseif $vorestomach is 2>>
+			<<set $vorestomach to 3>>
+			<span class="pink">肉墙在你周围合拢，挤压你的身体并夺走你的呼吸。</span>
+		<<elseif $vorestomach is 3>>
+			<<set $vorestomach to 4>>
+			<span class="red">肉墙在你周围合拢。你很快就完全无法移动。</span>
+		<<else>>
+			<<set $vorestomach to 5>>
+			<span class="red">肉墙在你周围合拢。世界开始褪色。</span>
+		<</if>>
+	<</if>>
+	<br><br>
+	<<rng>>
+	<<if $vorestage lte 5>>
+		<<if $rng gte 75>>
+			<<set $vorestrength to random(0, 0)>>
+			<span class="lblue"><<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>似乎满足于品尝你的味道，目前是这样。</span>
+		<<elseif $rng gte 50>>
+			<<set $vorestrength to random(-5000, 10000)>>
+			<span class="blue"><<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>满怀期待地流着口水。</span>
+		<<elseif $rng gte 25>>
+			<<set $vorestrength to random(-5000, 20000)>>
+			<span class="purple"><<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>准备把你吞进去。</span>
+		<<elseif $rng gte 1>>
+			<<set $vorestrength to random(1, 20000)>>
+			<span class="pink"><<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>准备吞噬你。</span>
+		<</if>>
+		<br><br>
+	<<else>>
+		<<if $rng gte 75>>
+			<<set $vorestrength to random(0, 0)>>
+		<<elseif $rng gte 50>>
+			<<set $vorestrength to random(-5000, 10000)>>
+		<<elseif $rng gte 25>>
+			<<set $vorestrength to random(-5000, 20000)>>
+		<<elseif $rng gte 1>>
+			<<set $vorestrength to random(1, 20000)>>
+		<</if>>
+	<</if>>
+	<<if $voretrait gte 1>>
+		<<set $vorestrength -= 2500>>
+	<</if>>
+	<<if $panicattacks gte 1 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0 and _panicchecked isnot true>>
+		<<rng>>
+		<<if $rng is 100>>
+			<<set $panicparalysis to 5>>
+		<</if>>
+		<<set _panicchecked to true>>
+	<</if>>
+	<<if $panicattacks gte 2 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0 and _paniccheckedviolence isnot true>>
+		<<rng>>
+		<<if $rng is 100>>
+			<<set $panicviolence to 3>>
+		<</if>>
+		<<set _paniccheckedviolence to true>>
+	<</if>>
+	<<if $arousal gte $arousalmax and $orgasmdown lte 0>>
+		<<orgasm>>
+	<</if>>
+<</widget>>
+
+<<widget "swallowedstat">>
+	<<set $swallowedstat += 1>>
+<</widget>>
+
+<<widget "swallowed">>
+	<<if $swallowed isnot 1>>
+		<<set $swallowed to 1>>
+		<<swallowedstat>>
+	<</if>>
+<</widget>>

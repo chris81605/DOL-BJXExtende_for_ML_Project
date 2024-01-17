@@ -1,0 +1,20 @@
+:: Tentacle Plains Ear Slime Defy []
+<<effects>>
+
+<<if $earSlime.corruption + $earSlime.growth gte (currentSkillValue('willpower') / 5)>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 12>>
+	<</if>>
+	史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强迫你走向豆荚。<<if !$earSlime.pod>>恐惧感正在急速爬升。<<else>>你无法抑制地发颤。<</if>>你无法阻止自己爬进去豆荚里。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+	<<link [[继续|Tentacle Plains Ear Slime 2]]>><</link>>
+<<else>>
+	<<set $earSlime.defyCooldown += 6>>
+	史莱姆试图维持对你的控制，<span class="green">但你抵抗住了</span>，并设法回到你进入触手平原的地方。
+	<<gwillpower>><<willpower 1>>
+	
+	<br><br>
+	<<link [[继续|Tentacle Plains]]>><<endevent>><</link>>
+	<br>
+<</if>>

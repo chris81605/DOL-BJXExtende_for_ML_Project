@@ -1,0 +1,36 @@
+:: Island Sleep Skulk []
+<<effects>>
+
+<<if $phase is 1>>
+	<<person1>><<person>>、<<person2>><<person>>和<<person3>><<person>>进入了视野。此时你已经从睡觉的地方溜走，潜藏于树丛间，继续观察这帮人。
+<<else>>
+	<<person1>><<person>>、<<person2>><<person>>、<<person3>><<person>>和<<person4>><<person>>进入了视野。此时你已经从睡觉的地方溜走，潜藏于树丛间，继续观察这帮人。
+<</if>>
+<<if $rng gte $island_roll>>
+	<span class="green">他们完全没注意到你</span>，不知道他们会去哪。
+	<br><br>
+
+	<<link [[继续|Island]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $islander_language gte 100>>
+		他们窃窃私语。
+		<br>
+		"你觉得那是迷失之人吗？"
+		<br>
+		“嘘，别被发现了。”
+		<br>
+		“是它！”<<person1>><<person>>指着你的方位喊："在这儿！"
+	<<elseif $islander_language gte 50>>
+		他们低声交谈着，一边在拨开树丛，一边互相交流。<<person2>><<person>><span class="red">指着你喊了起来。</span>
+	<<else>>
+		他们用一种难以理解的语言窃窃私语，并扫视着地面，好像在寻找着什么。<<person2>><<person>><span class="red">指着你大叫。</span>
+	<</if>>
+	<br><br>
+
+	<<link [[战斗|Island Sleep Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[屈服 (0:30)|Island Sleep Submit]]>><</link>>
+	<br>
+<</if>>
+<<unset $island_roll>>

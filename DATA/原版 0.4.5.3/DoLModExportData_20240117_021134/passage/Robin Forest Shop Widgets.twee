@@ -1,0 +1,35 @@
+:: Robin Forest Shop Widgets [widget]
+<<widget "robinForestCostumePose">>
+	<<He>>转身对着镜子然后
+	<<switch $forest_costume.name>>
+		<<case "witch">>转动着旋开裙子。
+		<<case "vampire">>摆出了一个威胁的姿势。
+	<</switch>>
+<</widget>>
+
+<<widget "robinForestCostumeBuy">>
+	<<if $money gte 8000>>
+		<<link [[给罗宾买套化装服 (£80)|Robin Forest Costume Buy]]>><<npcincr Robin love 3>><<set $money -= 8000>><<set $halloween_robin_costume to $forest_costume.name>><<set $forest_costume.bought to true>><</link>><<gglove>>
+		<br>
+	<<else>>
+		你没有足够的钱买化装服。(£80)
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "robinForestCostumeOptions">>
+	<<if !$forest_costume.bought>>
+		<<if _args[0] isnot "witch">>
+			<<link [[让罗宾试试女巫化装服|Robin Forest Costume]]>><<set $phase to "witch">><</link>>
+			<br>
+		<</if>>
+		<<if _args[0] isnot "vampire">>
+			<<link [[让罗宾试试吸血鬼化装服|Robin Forest Costume]]>><<set $phase to "vampire">><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[继续购物|Forest Shop]]>><</link>>
+	<br>
+	<<link [[和罗宾一起走回家 (0:10)|Robin Forest Shop Home]]>><<pass 10>><</link>>
+	<br>
+<</widget>>

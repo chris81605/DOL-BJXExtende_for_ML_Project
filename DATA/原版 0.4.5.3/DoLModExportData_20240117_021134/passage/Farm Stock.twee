@@ -1,0 +1,52 @@
+:: Farm Stock []
+<<effects>>
+
+你检查了农场的库存。艾利克斯将通过出售农产品满足农场的协议，并支付日常开支。多余的农产品会保存在冰箱里，供你拿去城里卖。
+<br><br>
+
+无人认领的农产品会慢慢过期。
+<br><br>
+
+松露: $farm.stock.truffles
+<br>
+<<if $farm.stock.truffles gte 1>>
+	<<set _farm_stocked to true>>
+	<<tendingicon "truffles">><<link [[拿取|Farm Stock]]>><<tending_give truffle $farm.stock.truffles>><<set $farm.stock.truffles to 0>><</link>>
+	<br>
+<</if>>
+<br>
+鸡蛋: $farm.stock.eggs
+<br>
+<<if $farm.stock.eggs gte 1>>
+	<<set _farm_stocked to true>>
+	<<tendingicon "eggs">><<link [[拿取|Farm Stock]]>><<tending_give chicken_egg $farm.stock.eggs>><<set $farm.stock.eggs to 0>><</link>>
+	<br>
+<</if>>
+<br>
+瓶装牛奶: $farm.stock.milk
+<br>
+<<if $farm.stock.milk gte 1>>
+	<<set _farm_stocked to true>>
+	<<tendingicon "milk">><<link [[拿取|Farm Stock]]>><<tending_give bottle_of_milk $farm.stock.milk>><<set $farm.stock.milk to 0>><</link>>
+	<br>
+<</if>>
+<br>
+
+<<if _farm_stocked is true>>
+	<<tendingicon>>
+	<<link [[拿取全部|Farm Cottage]]>>
+		<<if $farm.stock.truffles gte 1>>
+			<<tending_give truffle $farm.stock.truffles>><<set $farm.stock.truffles to 0>>
+		<</if>>
+		<<if $farm.stock.eggs gte 1>>
+			<<tending_give chicken_egg $farm.stock.eggs>><<set $farm.stock.eggs to 0>>
+		<</if>>
+		<<if $farm.stock.milk gte 1>>
+			<<tending_give bottle_of_milk $farm.stock.milk>><<set $farm.stock.milk to 0>>
+		<</if>>
+	<</link>>
+	<br>
+<</if>>
+
+<<getouticon>><<link [[离开|Farm Cottage]]>><</link>>
+<br>

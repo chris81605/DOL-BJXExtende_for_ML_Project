@@ -1,0 +1,21 @@
+:: Sydney Library Break []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $sydneySeen.includes("breakdown") or $sydneySeen.includes("persecute") or $sydneySeen.includes("punch")>>
+	你抬头看见悉尼那微笑的脸庞。<span class="red">愤怒如潮水般涌来——那种熟悉的感觉。再一次。</span>
+	<br><br>
+	愤恨的泪水涌上眼眶，<<He>>注意到了你。"你看起来很苍白。你还好吗？"
+<<else>>
+	你抬头看见悉尼正对着你微笑。<span class="red">一种不可名状的愤怒突然吞噬了你。</span>为什么你不能像<<him>>一样？有一套坚定的道德准则，<<if $sydneySeen.includes("parent")>>一个那么爱<<him>>的家人，<</if>>一个在镇上平静的生活。愤怒灼烧着你，让你捏紧双拳，指节发白。<<he>>哪来的权力微笑？<<he>>又干了什么来轻而易举的去获取那些你永远无法得到的幸福？
+	<br><br>
+	愤恨的泪水涌上眼眶，<<He>>注意到了你。"发生什么事了？你还好吗？"
+<</if>>
+<br><br>
+
+<<link [[崩溃大哭|Sydney Library Break 2]]>><<set $phase to 1>><<npcincr Sydney lust -1>><<npcincr Sydney purity -5>><<tearup>><</link>><<lslust>><<llspurity>><<sydneyWarning>>
+<br>
+<<link [[找悉尼的麻烦|Sydney Library Break 2]]>><<set $phase to 2>><<stress -12>><<trauma -6>><</link>><<lstress>><<ltrauma>><<if !$sydneySeen.includes("persecute")>><<note "- 好感？" "red">><</if>>
+<br>
+<<if $submissive lte 500 or $trauma gte ($traumamax / 10) * 7>>
+	<<link [[殴打悉尼|Sydney Library Punch]]>><<npcincr Sydney lust 1>><<stress -36>><</link>><<lllstress>><<if !$sydneySeen.includes("punch")>><<note "- 好感？" "red">><<else>><<glust>><</if>><<if $submissive lte 500>><<defianttext>><</if>>
+	<br>
+<</if>>

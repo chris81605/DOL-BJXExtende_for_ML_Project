@@ -1,0 +1,96 @@
+:: Brothel Dressing Room []
+<<effects>><<set $outside to 0>><<set $location to "brothel">>
+
+你在妓院的更衣室里。室内有几面镜子，正被做发型和化妆的工作人员们占据着。
+<br><br>
+
+<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+	<<undobindingsicon>><<link [[解除束缚 (0:10)|Brothel Dressing Room]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+	<br><br>
+<</if>>
+
+<<if $brothelVending>>
+	<<if $brothelVending.status is "asked" or $brothelVending.status is "sold">>
+		<<condomicon "machine">><span class="gold">你可以在购物中心购买一台自动售货机，并在此放置。</span>
+		<br><br>
+	<<elseif $brothelVending.status is "bought">>
+		<<condomicon "machine">> <<link [[安装自动售货机 (0:30)|Brothel Dressing Room]]>><<set $brothelVending.status to "set">><<set $weekly.brothelVMCollect to true>><<pass 30>><</link>>
+		<br><br>
+	<<elseif $brothelVending.status is "set" and $brothelVending.weeksEmpty lt 4>>
+		<<if !($brothelVending.products % 2) and $condomLvl gte 1>>
+			<<condomicon>>你可以跟<span class="gold">药房的护士</span>谈谈分销避孕套的事情。
+			<br><br>
+		<</if>>
+		<<if $brothelVending.products lt 2 and $adultshopunlocked>>
+			<<sextoysicon "lube">>你可以跟<span class="gold">西里斯</span>谈谈关于分销润滑液的事情。
+			<br><br>
+		<</if>>
+		<<if $brothelVending.products>>
+			你检查了自动售卖机的库存。
+			<<if $brothelVending.products % 2>>
+				<<if $brothelVending.condoms lte 1>>
+					避孕套库存是<span class="red">空的。</span>你可以在药房买到。
+					<br><br>
+				<<else>>
+					<<if $brothelVending.condoms gte 200>>
+						避孕套库存是<span class="green">满的。</span>
+					<<else>>
+						<<set $brothelVending.condomsToRefill to 200 - $brothelVending.condoms>>
+						还剩下<<number $brothelVending.condoms>>袋避孕套。还能装<<number $brothelVending.condomsToRefill>>个3袋装。你可以在药房买到。
+					<</if>>
+					<br>
+					你把3袋装避孕套的价格设置成了£80，在药房的进货价是£60。
+					<br>
+					<<condomicon>><<link [[买避孕套 (£80)|Brothel Vending Machine Buy]]>><<set $phase to 1>><</link>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<if $brothelVending.products gte 2>>
+				<<if $brothelVending.lube lte 1>>
+					润滑液库存是空的，你可以在成人商店买到它们。
+					<br><br>
+				<<else>>
+					<<if $brothelVending.lube gte 200>>
+						润滑液库存是<span class="green">满的。</span>
+					<<else>>
+						<<set $brothelVending.lubeToRefill to 200 - $brothelVending.lube>>
+						还剩下<<number $brothelVending.lube>>瓶润滑液。还能放下<<number $brothelVending.lubeToRefill>>瓶润滑液。你可以在成人商店买到它们。
+					<</if>>
+					<br>
+					你将润滑液售价设置成£30，在成人商店的进货价是£20。
+					<br>
+					<<sextoysicon "lube">><<link [[购买润滑液 (£30)|Brothel Vending Machine Buy]]>><<set $phase to 2>><</link>>
+					<br><br>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<wardrobeicon>><<link [[衣柜|Brothel Wardrobe]]>><</link>>
+<br>
+<<if playerHasSexToys()>>
+	<<sextoysicon>><<link [[性玩具|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+	<br>
+<</if>>
+<<mirroricon>><<link [[镜子|Brothel Mirror]]>><<preMirror>><</link>>
+<br><br>
+
+<<if isPubfameTaskAccepted("briar") and $pubfame.briar.distract isnot 2>>
+	你注意到一个舞者正在将衣物装进手提箱里。
+	<br>
+	<<getinicon>><<link [[接近|Brothel Distraction]]>><</link>>
+	<br><br>
+<</if>>
+
+<<getouticon>><<link [[回到俱乐部 (0:01)|Brothel]]>><<pass 1>><</link>>
+<br><br>
+<<link [[设置|Settings]]>><<set $settingsExitPassage to "Brothel Dressing Room">><</link>>
+<br>
+<<attitudesControlCheck>>
+<<if $attitudesControl.showGoldLink is true>>
+	<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+<<else>>
+	<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+<</if>>
+<br><br>

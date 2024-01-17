@@ -1,0 +1,30 @@
+:: Forest Bear Box Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<beastNEWinit 1 bear>>
+	<<beastCombatInit>><<set $enemytrust -= 40>><<set $enemyanger += 40>><<set $enemyhealthmax to 400>><<set $enemyhealth to 400>>
+	你偷偷溜进了山洞。在黑暗中摸索了一会儿之后，你看到光亮照在什么东西上。是那个黑盒子。
+	拿着盒子，你转身正要离开山洞，但突然，有什么东西从黑暗中浮现。你刚转过身，<<bhe>>就下落到你身上。
+	<<set $pubtask2 to 1>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Bear Box Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Bear Box Molestation]]>><</link>></span><<nexttext>>
+<</if>>

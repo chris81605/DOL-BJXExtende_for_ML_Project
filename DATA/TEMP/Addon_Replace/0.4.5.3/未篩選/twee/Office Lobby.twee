@@ -1,0 +1,34 @@
+:: Office Lobby []
+<<location "office_building">><<effects>>
+这幢大楼里有各种公司的办公室。你在大厅。
+<<if $stress gte $stressmax>>
+	<br><br>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "office">>
+	<<else>>
+		<<officepassout>>
+	<</if>>
+<<else>>
+	房间中央有一个大的锦鲤池，在安全服务台的前面。它后面是四台玻璃电梯，通往楼上。
+	<br>
+	<<if Time.isWeekEnd()>>
+		现在是周末，所以除了保安人员、管理人员和一些周末战士外，大楼基本是空的。
+	<<elseif Time.dayState is "day">>
+		大厅里充满了各种办公室职员的忙碌。
+	<<elseif Time.dayState is "dusk">>
+		虽然大堂并非完全空无一人，但大多数员工都已经下班了。
+	<<elseif Time.dayState is "dawn">>
+		员工们正成群结队地进入大厅，开始他们的工作日，排队等电梯。
+	<<elseif Time.dayState is "night">>
+		大厅里空荡荡的，除了巡逻的保安。
+	<</if>>
+	<<if Time.isWeekEnd()>>
+		<<officeafterhours>>
+	<<elseif Time.hour gte 6 && Time.hour lte 21>>
+		<<officebusinesshours>>
+	<<else>>
+		<<officeafterhours>>
+	<</if>>
+	<br><br>
+	<<highicon>><<link [[出去|High Street]]>><</link>>
+<</if>>

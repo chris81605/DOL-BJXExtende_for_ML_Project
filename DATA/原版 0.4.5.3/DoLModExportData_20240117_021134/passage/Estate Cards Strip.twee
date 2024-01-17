@@ -1,0 +1,565 @@
+:: Estate Cards Strip []
+<<effects>>
+
+<<switch $estate.cards.desire>>
+<<case "over_upper">>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	<<if $worn.over_upper.set is $worn.over_lower.set>>
+		张开你的$worn.over_upper.cn_name_cap，
+		<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+			<<if $worn.under_upper.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
+				<span class="pink">露出你的裸体。</span>伦恩和<<his>>的朋友们大吃一惊。一个<<person2>><<person>>吐出了<<his>>的饮料。<<person1>>有人吹了个口哨。
+				<br><br>
+				<<cards_naked_cover>>
+				伦恩只是微笑着，欣赏着眼前的景象。
+				<br><br>
+			<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
+				<span class="purple">暴露了你的<<breasts>>。</span>有人笑了起来。"你这个下流<<girl>>，"伦恩笑着说道。
+				<br><br>
+
+				<<cards_top_cover>>
+
+			<<elseif $worn.under_lower.type.includes("naked")>>
+				<span class="pink">暴露了你的<<genitals>>和<<bottom>>。</span>一个<<person2>><<person>>吐出了<<his>>的饮料。<<person1>>"原来你是那种<<girl>>啊？"伦恩咧嘴一笑，"我就知道。"
+				<br><br>
+
+				<<cards_bottom_cover>>
+			<<else>>
+				<span class="blue">露出你的内衣。</span>房间里响起了欢呼声。
+				<br><br>
+				<<cards_underwear_cover>>
+			<</if>>
+		<<elseif $worn.upper.type.includes("naked")>>
+			脱掉你的$worn.over_upper，
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
+				<<set $estate.cards.exposure to 4>>
+				<span class="purple">暴露了你的<<breasts>>。</span>"我就知道，"一个<<person2>><<person>>说道，"这个荡妇已经半裸了。"
+				<br><br>
+
+				伦恩只是咧嘴一笑，眼含欲望地看着你。
+				<br><br>
+
+				<<cards_top_cover>>
+			<<else>>
+				<<set $estate.cards.exposure to 3>>
+				<span class="blue">暴露了你穿着的$worn.under_upper.cn_name_cap。</span>"那个很快也会归我，"伦恩一边喝着饮料，一边说着。
+				<br><br>
+
+				<<cards_bra_cover>>
+			<</if>>
+		<<elseif $worn.lower.type.includes("naked")>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				<<set $estate.cards.exposure to 5>>
+				<span class="pink">暴露了你的<<genitals>>和<<bottom>>。</span>房间里响起了惊讶的笑声。"像这样走来走去，"一个<<person2>><<person>>笑着说道，"这个荡妇简直就是在邀请强奸。"
+				<br><br>
+				<<person1>>伦恩眼含欲望地看着你，甚至忘了开口。
+				<br><br>
+
+				<<cards_bottom_cover>>
+			<<else>>
+				<<set $estate.cards.exposure to 3>>
+				<span class="blue">露出你的内衣。</span>房间里响起了惊讶的笑声，"别骗人了，"伦恩说道，"你就是想脱。"
+				<br><br>
+
+				<<cards_underwear_cover>>
+			<</if>>
+		<<else>>
+			把<<overupperit>>放在桌子上。
+		<</if>>
+		一个<<person6>><<person>>抓起你丢弃的衣服，将<<overupperit>>扔给了伦恩。<<person1>>
+		<<card_clothes_lost "over_upper">>
+		<<card_clothes_lost "over_lower">>
+	<<else>>
+		脱掉你的$worn.over_upper.cn_name_cap，
+		<<if $worn.upper.type.includes("naked")>>
+			<<if $worn.under_upper.type.includes("naked") and ($player.gender is "f" or $player.gender_appearance is "f")>>
+				<<set $estate.cards.exposure to 4>>
+				<span class="purple">暴露了你的<<breasts>>。</span>他们看到你已经赤裸上身，欢呼声响起。伦恩眼含欲望地看着你。
+				<br><br>
+
+				<<cards_top_cover>>
+			<<elseif $player.gender is "f" or $player.gender_appearance is "f">>
+				<<set $estate.cards.exposure to 3>>
+				<span class="blue">露出你的$worn.under_upper.cn_name_cap。</span>"穿得不多嘛，"伦恩说道，"我当然没意见。"
+				<br><br>
+
+				<<cards_underwear_cover>>
+			<</if>>
+		<<else>>
+			把<<overupperit>>放在桌子上。
+		<</if>>
+		一个<<person6>><<person>>抓起你丢弃的衣服，将<<overupperit>>扔给了伦恩。<<person1>>
+		<<card_clothes_lost "over_upper">>
+	<</if>>
+<<case "over_lower">>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	脱掉你的$worn.over_lower.cn_name_cap，
+	<<if $worn.lower.type.includes("naked")>>
+		<<if $worn.under_lower.type.includes("naked")>>
+			<<set $estate.cards.exposure to 5>>
+			<span class="pink">暴露了你的<<genitals>>和<<bottom>>。</span>房间里响起了惊讶的欢呼声。"真他妈的好看，"一个<<person3>><<person>>说道。伦恩靠在椅背上，带着放松的表情，眼含欲望地看着你。
+			<br><br>
+
+			<<cards_bottom_cover>>
+		<<else>>
+			<<set $estate.cards.exposure to 3>>
+			<span class="blue">暴露了你的内衣。</span>房间里响起了欢呼声，"希望你出去回到荒原的时候不会太冷，"伦恩咧嘴一笑地说道。
+			<br><br>
+			<<cards_bottom_cover>>
+		<</if>>
+	<<else>>
+		把<<overlowerit>>放在桌子上。
+	<</if>>
+	一个<<person6>><<person>>抓起你脱掉的衣服，将<<overlowerit>>扔给了伦恩。<<person1>>
+	<<card_clothes_lost "over_lower">>
+<<case "upper">>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	<<if $worn.upper.set is $worn.lower.set>>
+		脱掉你的$worn.upper.cn_name_cap，
+		<<if $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+			<<set $estate.cards.exposure to 5>>
+			<span class="pink">暴露了你的裸体。</span>一个<<person3>><<person>>吐出了<<his>>的饮料。有人吹了个口哨。伦恩咧嘴一笑。"没有内衣？"<<person1>><<He>>笑得很得意，"那也没关系。"
+			<br><br>
+
+			<<cards_naked_cover>>
+		<<elseif $worn.under_upper.type.includes("naked") and ($player.gender is "f" and $player.gender_appearance is "f")>>
+			<<set $estate.cards.exposure to 4>>
+			<span class="purple">暴露了你的<<breasts>>。</span>房间里响起了欢呼声。伦恩向前倾身，更近距离地观察。"我就知道你不戴胸罩，"<<he>>说道。
+			<br><br>
+			<<cards_top_cover>>
+		<<elseif $worn.under_lower.type.includes("naked")>>
+			<<set $estate.cards.exposure to 5>>
+			<span class="pink">暴露了你的<<genitals>>和<<bottom>>。</span>一个<<person3>><<person>>惊讶得洒出了<<his>>的饮料，其他人则色眯眯地盯着你。"没有内衣？"伦恩问道，"你很大胆嘛。"
+			<br><br>
+
+			<<cards_bottom_cover>>
+		<<else>>
+			<span class="blue">暴露了你的内衣。</span>"不错，"伦恩把双臂抱在胸前，"你的内衣很快就会是我的。"<<His>>的朋友们表示赞同。
+			<br><br>
+
+			<<cards_underwear_cover>>
+		<</if>>
+		一个<<person5>><<person>>抓起你脱掉的<<dress>>，将<<upperit>>扔给了伦恩。<<person1>>
+		<<card_clothes_lost "upper">><<card_clothes_lost "lower">>
+	<<else>>
+		脱掉你的$worn.upper.cn_name_cap，
+		<<if $worn.under_upper.type.includes("naked") and ($player.gender_appearance is "f" or $player.gender is "f")>>
+			<<set $estate.cards.exposure to 4>>
+			<span class="purple">暴露了你的<<breasts>>。</span>房间里响起了欢呼声。"没有穿胸罩？"伦恩沉思着，"早该猜到了。"
+			<br><br>
+
+			<<cards_top_cover>>
+		<<else>>
+			然后把<<upperit>>放到桌子上。
+		<</if>>
+		一个<<person5>><<person>>抓起你脱掉的<<dress>>，将<<upperit>>扔给了伦恩。<<person1>>
+		<<card_clothes_lost "upper">>
+	<</if>>
+<<case "lower">>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	拉下$worn.lower.cn_name_cap，
+	<<if $worn.under_lower.name is "naked">>
+		<<set $estate.cards.exposure to 5>>
+		<span class="pink">暴露了你的<<genitals>>和<<bottom>>。</span>"没有<<if $player.gender_appearance is "f">>内裤<<else>>内裤<</if>>！"伦恩宣布道。<<His>>的朋友们欢呼着，靠上前更仔细地观察。
+		<br><br>
+
+		<<cards_bottom_cover>>
+	<<else>>
+		把它放在桌子上。
+	<</if>>
+	一个<<person4>><<person>>抓起你脱掉的<<skirt>>，将<<lowerit>>扔给了伦恩。<<person1>>
+	<<card_clothes_lost "lower">>
+<<case "under_upper">>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	脱掉你的$worn.under_upper.cn_name_cap，
+	<<set $estate.cards.exposure to 5>>
+	<span class="pink">露出你的<<breasts>>。</span>
+	<<card_clothes_lost "under_upper">>
+	<<exposure>>
+	<<if $player.gender_appearance is "f" or $player.breastsize gte 5>>
+
+	<</if>>
+	一个<<person6>><<person>>抢过你脱掉的<<bra>>，把<<underupperit>>扔给伦恩。<<person1>>
+	<<card_clothes_lost "under_upper">>
+<<case "under_lower">>
+	伦恩期待地敲打桌子，<<his>>的朋友们也加入进来。"脱！！脱！！脱！！"
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	<<set $estate.cards.exposure to 5>>
+
+
+	<span class="pink">把$worn.under_lower.cn_name_cap顺着腿脱下去，露出了你的<<genitals>>和<<bottom>>。</span>
+	<br><br>
+
+	欢呼声震撼了整个房间。你把剩下的衣服扔在桌子上。
+	一个<<person3>><<person>>抓起<<underlowerit>>，将<<underlowerit>>扔给了伦恩。<<person1>>
+	<<card_clothes_lost "under_lower">>
+<<case "legs">>
+	<<set $estate.cards.exposure to 0>>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	在伦恩和<<his>>的朋友们的注视下，把你的$worn.legs.cn_name_cap从腿上扯下来。你把<<legsit>>放在桌子上。一个<<person4>><<person>>抢过<<legsit>>，把<<legsit>>扔给伦恩。<<person1>>
+	<<card_clothes_lost "legs">>
+
+<<case "hands">>
+	<<set $estate.cards.exposure to 0>>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	脱掉$worn.hands.cn_name_cap，把<<handsit>>放在桌子上。一个<<person3>><<person>>抢过<<handsit>>，把<<handsit>>扔给伦恩。<<person1>>
+	<<card_clothes_lost "hands">>
+
+<<case "feet">>
+	<<set $estate.cards.exposure to 0>>
+	<<if $phase is 1>>
+		<<flaunting>>你
+	<<else>>
+		你
+	<</if>>
+	脱掉$worn.feet.cn_name_cap，并将<<feetit>>放在桌子上。一个<<person2>><<person>>抢过<<feetit>>，把<<feetit>>扔给伦恩。<<person1>>
+	<<card_clothes_lost "feet">>
+
+<<case "twirl">>
+	<<set $estate.cards.lust += 1>>
+	<<if $phase is 1>>
+		<<flaunting>>你把椅子从桌边推开，站起来。
+		<<if $hairlength gte 700>>
+			你撩起你的头发，原地旋转，让每个旁观者从各个角度看到你。
+		<<else>>
+			你在原地转圈，让每个旁观者从各个角度看到你。
+		<</if>>
+	<<else>>
+		你把椅子从桌边推开，站起来。你将双臂贴在身侧，暴露出你的<<if $player.gender_appearance is "f">><<breasts>>和<</if>><<genitals>>。你在原地旋转，让每个旁观者从各个角度看到你。
+	<</if>>
+	<br><br>
+
+	伦恩和<<his>>的朋友们在一旁大饱眼福。
+<<case "bend">>
+	<<set $estate.cards.lust += 1>>
+	<<if $phase is 1>>
+		<<flaunting>>你转身爬上椅子。你把<<bottom>>伸出，扭动着。你知道他们可以从这个角度看到你的<<genitals 1>>。
+	<<else>>
+		你转身爬上椅子。你因为撅起了<<bottom>>感到有些不自在。你紧闭双腿，但他们也许可以从这个角度看到你的<<genitals 1>>。
+	<</if>>
+	房间里的人围到了伦恩旁边，想要看得更清楚。
+<<case "chest_grope">>
+	<<set $estate.cards.lust += 1>>
+	<<set _wren_action to "arouse">>
+	伦恩继续侵犯你的胸部，你的<<breasts>>任由<<his>>的手指摆布。
+<<case "bottom_grope">>
+	<<set $estate.cards.lust += 1>>
+	<<set _wren_action to "arouse">>
+	伦恩继续侵犯你的<<bottom>>。
+<<case "pussy_grope">>
+	<<set $estate.cards.lust += 1>>
+	<<set _wren_action to "arouse">>
+	伦恩继续侵犯你的<<pussy>>。
+<<case "penis_grope">>
+	<<set $estate.cards.lust += 1>>
+	<<set _wren_action to "arouse">>
+	伦恩继续侵犯你的<<penis>>。
+<<case "kiss">>
+	<<set $estate.cards.lust += 1>>
+	<<set _wren_action to "arouse">>
+	<<if $phase is 1>>
+		你身体前倾，<<oraltext>>把舌头伸到伦恩的嘴唇之间。
+		<<if currentSkillValue("oralskill") gte random(400, 1000)>>
+			<<set $estate.cards.lust += 2>>
+			<span class="green">你出其不意地抓住了<<him>>，</span>卸下了<<his>>的防备。你感觉到<<him>>放松了下来，<<he>>似乎顺从了你的引导。
+		<<else>>
+			<span class="red"><<He>>更用力地回吻你，</span>抓住你的脸颊，<<he>>侵入你的嘴作为回应。
+		<</if>>
+	<<else>>
+		伦恩吻你，吮吸你的上唇，然后把舌头塞进你嘴里。
+	<</if>>
+	<<takeKissVirginity "Wren" "consensual">>
+<<case "pc_lap">>
+	<<set $estate.cards.position to $estate.cards.desire>>
+	<<set $estate.cards.state to "ride">>
+	<<he>>跨过你的身体，面朝你，一只胳膊搭在你的肩膀上。
+	<<if $phase is 1>>
+		你把手放在<<his>>的屁股上，把<<him>>拉到你的胯部。
+	<</if>>
+	"这样我们就看不到对方的牌了。"
+	<br><br>
+
+	"我们会继续玩下去，"<<he>>继续说道，<span class="blue">"直到你高潮。</span>怎么样？"
+<<case "penile">>
+	<<set $estate.cards.position to $estate.cards.desire>>
+	<<set $estate.cards.state to "ride">>
+	<<if $phase is 1>>
+		<<if $speech_attitude is "meek">>
+			"温、温柔点，"你说道。
+		<<elseif $speech_attitude is "bratty">>
+			"我没有很多时间，"你说道，"给我滚过来。"
+		<<else>>
+			"我很乐意让一个可爱的<<nnpc_gendery "Wren">>做所有的工作，"你说道。
+		<</if>>
+
+	<</if>>
+	伦恩跨过你的身体，面朝你，一只胳膊搭在你的肩膀上。"这样我们就看不到对方的牌了。"
+	<br><br>
+
+	<span class="purple"><<He>>用<<his>>的胯部摩擦你的<<penis>>。</span>"感觉到了吗？"
+	<<cards_lap_clothes_intro>>
+	<<He>>把你的肉棒握在<<his>>的手里，<span class="pink">并按在<<his>>的入口处。</span>
+	<br><br>
+
+	"别担心，"<<he>>说道，"我不会就这样插进去的。<span class="purple">我要让你先高潮。</span><span class="pink">然后再享用你的鸡巴。</span>我会收下每一滴精液，骑着你直到我满意为止。"
+<<case "wren_lap">>
+	<<set $estate.cards.position to $estate.cards.desire>>
+	<<set $estate.cards.state to "ride">>
+	<<if $phase is 1>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过桌子，用手搂着伦恩的脖子，面对着<<him>>坐到了<<his>>大腿上。"好主意，"<<he>>说道，"这样我们就看不到对方的牌了。"
+
+	<<else>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过了桌子，伦恩抓住了你的腰，把你按坐在<<his>>腿上说道，"这样我们就看不到对方的牌了。"
+	<</if>>
+	<br><br>
+
+	"我们会继续玩下去，"<<he>>继续说道，<span class="blue">"直到你高潮。</span>怎么样？"
+<<case "vaginal">>
+	<<set $estate.cards.position to $estate.cards.desire>>
+	<<set $estate.cards.state to "ride">>
+	<<if $phase is 1>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过桌子，用手搂着伦恩的脖子，面对着<<him>>坐到了<<his>>大腿上。"好主意，"<<he>>说道，"这样我们就看不到对方的牌了。"
+
+	<<else>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过了桌子，伦恩抓住了你的腰，把你按坐在<<his>>腿上。"这样我们就看不到对方的牌了。"
+	<</if>>
+	<br><br>
+	<span class="purple">你感觉有一根坚挺的硬物压在了你的<<pussy>>上。</span> "感觉到了吗？"
+	<<cards_lap_clothes_intro>>
+	<br><br>
+
+	"别担心，"<<he>>说道，"我不会就这样干你的。<span class="purple">我会先让你高潮。</span><span class="pink">然后再享用你的小穴。"</span>
+<<case "anal">>
+	<<set $estate.cards.position to $estate.cards.desire>>
+	<<set $estate.cards.state to "ride">>
+	<<if $phase is 1>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过桌子，用手搂着伦恩的脖子，面对着<<him>>坐到了<<his>>大腿上。"好主意，"<<he>>说道，"这样我们就看不到对方的牌了。"
+
+	<<else>>
+		你忍受着伦恩和<<his>>朋友们热切的眼神，从座位上站了起来。你走过了桌子，伦恩抓住了你的腰，把你按坐在<<his>>腿上。"这样我们就看不到对方的牌了。"
+	<</if>>
+	<br><br>
+	<span class="pink">你感觉有一根坚挺的硬物压在了你的<<bottom>>上。</span> "感觉到了吗？"
+	<<cards_lap_clothes_intro>>
+	<br><br>
+
+	"别担心，"<<he>>说道，"我不会就这样干你的。<span class="purple">我会先让你高潮。</span><span class="pink">然后再享用你的屁股。"</span>
+
+<</switch>>
+
+<<if $phase is 1>>
+	<<switch $estate.cards.degree>>
+	<<case "exhibitionism3">>
+		<<exhibitionism3>>
+	<<case "exhibitionism4">>
+		<<exhibitionism4>>
+	<<case "exhibitionism5">>
+		<<exhibitionism5>>
+	<<case "promiscuity2">>
+		<<promiscuity2>>
+	<<default>>
+		<<promiscuity1>>
+	<</switch>>
+<<else>>
+	<br><br>
+<</if>>
+
+<<if _wren_action is "arouse">>
+	<<if $willpowerSuccess>>
+		<span class="green">你设法保持了冷静，</span>避免伦恩进一步让你性奋，虽然是暂时的。
+	<<else>>
+		你试图保持冷静，<span class="red">然而伦恩的技术跟耐久都太好了。</span><<ggarousal>><<gwillpower>><<willpower 3>>
+		<<arousal 1500>>
+	<</if>>
+
+
+	<br><br>
+	<<cards_arousal_check>>
+<</if>>
+
+<<blackjackPostGameThrowTips>>
+
+
+<<if _cards_orgasm is true and $estate.cards.lust gte 10>>
+	<<switch $estate.cards.position>>
+	<<case "penile">>
+		伦恩的身体因快感而颤抖着，<<his>>用<<his>>的身体顶住你的<<penis>>。<span class="pink"><<He>>尝试用下体吞下你的肉棒，</span><span class="green">然而失败了，</span>你的肉棒擦过了<<his>>的阴蒂。<span class="green">这一下给了太多的快感。</span><<He>>搂着你的脖子，大叫出声，身体在高潮中痉挛。
+	<<case "vaginal">>
+		伦恩的身体因快感而颤抖着，<<he>>用<<his>>的<<print $NPCList[0].penisdesc>>抵住你的<<pussy>>。<span class="pink"><<He>>尝试插入你，</span><span class="green">然而失败了，</span><<his>>的肉棒擦过了你的小腹。<span class="green">这一下给了太多的快感。</span><<He>>抓着你的屁股，一边摩擦一边在你的肚子上射精了。
+		<<bodyliquid "tummy" "semen">>
+	<<case "anal">>
+		伦恩的身体因快感而颤抖着，<<he>>用<<his>>的<<print $NPCList[0].penisdesc>>抵住你的<<bottom>>。<span class="pink"><<He>>尝试插入你，</span><span class="green">然而失败了，</span><<his>>的肉棒滑进了你的股间。<span class="green">这一下给了太多的快感。</span><<He>>用力抓着你的屁股，一边摩擦一边射精了。
+		<<bodyliquid "bottom" "semen">>
+	<<case "pc_lap">>
+		伦恩用手搂着你的脖子，同时身体在高潮中痉挛着。
+	<<default>>
+		伦恩在高潮的痉挛中大叫着，同时不断往前推动<<his>>的胯下。
+	<</switch>>
+	<<earnFeat "Playing with Fire">>
+	<br><br>
+
+	<<link [[继续|Estate Cards Orgasm]]>><</link>>
+	<br>
+<<elseif _cards_orgasm is true>>
+	<<if $estate.cards.position isnot "wren_lap">>
+		<<link [[继续|Estate Cards Sex]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Estate Cards Sex Safe]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $estate.cards.lust gte 10>>
+	伦恩的身体在快感中颤抖着。尽管<<him>>在一直逗弄着你，但你忍住了，而<<his>>的身体达到了极限。
+	<<switch $estate.cards.position>>
+		<<case "penile">>
+			伦恩用手搂着你的脖子，大叫着在高潮中痉挛。
+		<<case "vaginal">>
+			<<He>>抓着你的屁股，一边摩擦一边射在了你的肚子上。
+		<<case "anal">>
+			<<he>>抓住你的臀部，一边摩擦一边射精。
+		<<case "pc_lap">>
+			<<He>>大声呻吟着，身体在高潮的快感中阵阵抽搐。
+		<<default>>
+			<<his>>大声呻吟着，在高潮中猛烈地扭动<<his>>的臀部。
+	<</switch>>
+	<<earnFeat "Playing with Fire">>
+	<br><br>
+	<<link [[继续|Estate Cards Orgasm]]>><</link>>
+	<br>
+<<else>>
+	<<rng>>
+	<<if $worn.over_lower.name isnot "naked">>
+		<<if $rng gte 81>>
+			"我已经想好接下来要什么了，"伦恩说道。
+		<<elseif $rng gte 61>>
+			"你快输了，<<girl>>，"伦恩说道。
+		<<elseif $rng gte 41>>
+			"你认为<<pshe>>能坚持多久？"伦恩问房间里的人。
+		<<elseif $rng gte 21>>
+			"还没完，"伦恩说道。
+		<<else>>
+			"我们才刚刚开始，"伦恩说道。
+		<</if>>
+	<<elseif $worn.upper.name isnot "naked">>
+		<<if $rng gte 81>>
+			"我很快就会让你脱光衣服，"伦恩说道。
+		<<elseif $rng gte 61>>
+			"还有谁想知道<<pshe>>下面的样子？"伦恩问道。
+		<<elseif $rng gte 41>>
+			<<if $player.gender_appearance is "m">>
+				"我想知道你下面穿着什么没，"伦恩说道。
+			<<else>>
+				"希望你穿了胸罩，"伦恩说道。
+			<</if>>
+		<<elseif $rng gte 21>>
+			"我就喜欢这种未知感，"伦恩说道。
+		<<else>>
+			<<if $player.perceived_breastsize gte 7>>
+				"你觉得<<pher>>的胸部和看起来一样大吗？"伦恩笑着说道。
+			<<else>>
+				"我打赌你不穿上衣也很好看，"伦恩得意地笑着说道。
+			<</if>>
+		<</if>>
+	<<elseif $worn.lower.name isnot "naked">>
+		<<if $rng gte 81>>
+			"我已经想好接下来要什么了，"伦恩说道。
+		<<elseif $rng gte 61>>
+			"你认为<<pshe>>能坚持多久？"伦恩问房间里的人。
+		<<elseif $rng gte 41>>
+			<<if $player.gender_appearance is "m">>
+				"你是穿着四角裤还是三角裤？我马上就要知道了，"伦恩说道。
+			<<else>>
+				"你穿内裤了吗？我马上就知道了，"伦恩说道。
+			<</if>>
+		<<elseif $rng gte 21>>
+			"我想知道<<pshe>>穿的是什么样的内衣，"伦恩说道。
+		<<else>>
+			"觉得冷吗？"伦恩问道。
+		<</if>>
+	<<elseif $worn.under_upper.name isnot "naked">>
+		<<if $rng gte 81>>
+			"想继续吗？你马上就要脱光了，"伦恩说道。
+		<<elseif $rng gte 61>>
+			"再这样下去，你会一丝不挂的，"伦恩说道。
+		<<elseif $rng gte 41>>
+			"我想你知道我接下来会要什么，"伦恩说道。
+		<<elseif $rng gte 21>>
+			"你确定要继续吗？"伦恩问道。
+		<<else>>
+			"我敢打赌，你穿这么少的衣服，回家路上一定很有趣。"伦恩说道。
+		<</if>>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		<<if $rng gte 81>>
+			"你已经没剩什么可脱的了，"伦恩说道。
+		<<elseif $rng gte 61>>
+			"趁你还留有一丝尊严，现在放弃也不丢人。"伦恩说道。
+		<<elseif $rng gte 41>>
+			"你离全裸只有一步之遥，"伦恩说道。
+		<<elseif $rng gte 21>>
+			"你知道接下来会发生什么吗？"伦恩问道。
+		<<else>>
+			"你马上就要全裸了，"伦恩说道。
+		<</if>>
+	<<else>>
+		<<if $rng gte 91>>
+			"你还有其它很多方法可以羞辱你自己，"伦恩说道。
+		<<elseif $rng gte 81>>
+			"如果你不打算结束游戏，那我也不会结束。"伦恩得意地笑着说道。
+		<<elseif $rng gte 71>>
+			"想继续吗？你也许可以付出一些更特别的代价。"伦恩说道。
+		<<elseif $rng gte 61>>
+			"接下来我该让<<phim>>做什么呢？"伦恩说道。
+		<<elseif $rng gte 51>>
+			"还没完，"伦恩说道。
+		<<elseif $rng gte 41>>
+			"我想想，"伦恩说道。
+		<<elseif $rng gte 31>>
+			"让我想想，"伦恩说道。
+		<<elseif $rng gte 21>>
+			伦恩摸了摸<<his>>的下巴。
+		<<elseif $rng gte 11>>
+			伦恩在沉思中轻敲桌子。
+		<<else>>
+			伦恩在看你。
+		<</if>>
+		<<set _cards_naked to true>>
+	<</if>>
+
+
+	<<estate_cards_bet>>
+	<br><br>
+	<<cards_play_options>>
+<</if>>

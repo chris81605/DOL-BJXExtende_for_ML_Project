@@ -1,0 +1,208 @@
+:: Sewers Morgan []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<if $stress gte $stressmax>>
+	你再也承受不住。你昏倒了。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+
+<<elseif Time.hour lte 7>>
+	<<set $sewersSleepSex to 0>>
+	摩根打了个哈欠，伸了个懒腰，然后倒在一堆毛毯上。<<He>>开始打起了鼾。
+	<br><br>
+
+	现在可能是你逃跑的机会。
+	<<if isPubfameTaskAccepted("morgan")>>
+		你也可以利用这段时间在摩根身上找U盘。
+	<</if>>
+	<br><br>
+
+	<<link [[睡觉|Sewers Sleep]]>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<set $skulduggerydifficulty to 600>>
+		<<link [[在摩根身上找东西|Sewers Search]]>><</link>><<skulduggerydifficulty>>
+		<br>
+	<</if>>
+	<<link [[逃脱|Sewers Escape Night]]>><</link>>
+	<br>
+
+<<elseif Time.hour is 18 and !$daily.morgan.feeding>>
+	摩根盯着你笑。
+	<br><br>
+
+	<<link [[继续|Sewers Feeding]]>><</link>>
+	<br>
+
+<<elseif Time.hour is 9 and !$daily.morgan.history>>
+	“时间到了，亲爱的，”摩根说道。“对于我们这样的人来说，了解生活中的美好事物非常重要。让我给你讲讲我们家族的历史吧。”摩根唠叨着、咕哝着，讲述着<<he>>所谓的家族史。
+	<br><br>
+
+	<<link [[集中注意力 (1:00)|Sewers History]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<note "+ 历史？" "blue">>
+	<br>
+	<<link [[做白日梦 (1:00)|Sewers History Daydream]]>><<pass 60>><</link>>
+	<br>
+	<<link [[休息 (1:00)|Sewers History Resist]]>><<pass 60>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif Time.hour is 12 and !$daily.morgan.maths>>
+	“数学，”摩根说道。“我最喜欢的科目。”<<He>>舔了舔嘴唇，递给你一张旧收据让你填写。
+	<br><br>
+
+	<<link [[集中注意力 (1:00)|Sewers Maths]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<note "+ 数学？" "blue">>
+	<br>
+	<<link [[做白日梦 (1:00)|Sewers Maths Daydream]]>><<pass 60>><</link>>
+	<br>
+	<<link [[休息 (1:00)|Sewers Maths Resist]]>><<pass 60>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif Time.hour is 15 and !$daily.morgan.english>>
+	“现在注意了，”摩根说，“你一定能变成个优秀的社会名流。”
+	<br><br>
+
+	<<link [[集中注意力 (1:00)|Sewers English]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<note "+ 语文？" "blue">>
+	<br>
+	<<link [[做白日梦 (1:00)|Sewers English Daydream]]>><<pass 60>><</link>>
+	<br>
+	<<link [[休息 (1:00)|Sewers English Resist]]>><<pass 60>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif Time.hour is 17 and !$daily.morgan.science>>
+	“仔细听着，<<charles>>，”摩根说，“这很重要。”<<He>>告诉你在旧下水道食物的营养价值。
+	<br><br>
+
+	<<link [[集中注意力 (1:00)|Sewers Science]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<note "+ 科学？" "blue">>
+	<br>
+	<<link [[做白日梦 (1:00)|Sewers Science Daydream]]>><<pass 60>><</link>>
+	<br>
+	<<link [[休息 (1:00)|Sewers Science Resist]]>><<pass 60>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif Time.hour is 20 and !$daily.morgan.sex>>
+	<<if $exposed gte 2>>
+		“是、是时候了，”摩根说，“学习不能只局限于书本，为了全方位发展，乖乖躺下。”
+		<br><br>
+
+		<<link [[躺下|Sewers Sex Ed]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<set $daily.morgan.sex to 1>><</link>><<gtrauma>><<gstress>><<glove>>
+		<br>
+	<<else>>
+		“是、是时候了，”摩根说，“学习不能只局限于书本，为了全方位发展，乖乖脱掉衣服躺下。”
+		<br><br>
+
+		<<link [[脱掉衣服躺下|Sewers Sex Ed]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<set $daily.morgan.sex to 1>><</link>><<gtrauma>><<gstress>><<glove>>
+		<br>
+	<</if>>
+
+	<<link [[拒绝|Sewers Sex Ed Refuse]]>><<npcincr Morgan love -1>><<set $daily.morgan.sex to 1>><</link>><<llove>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $rng gte 91 and $worn.neck.collared is 1>>
+	"<<charles>>，"摩根说道，“你脖子上那是什么？我可以帮你取下来。”<<He>>拿出一个夹子、一瓶润滑剂和一根撬棍。“不要害怕，过来吧，<<girl>>。”
+	<br><br>
+
+	<<link [[同意|Sewers Collar]]>><<set $worn.neck.cursed to 0>><<neckruined>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
+	<<link [[拒绝|Sewers Collar Refuse]]>><</link>>
+	<br>
+
+<<elseif $rng gte 81 and $worn.feet.type.includes("shackle")>>
+	“<<charles>>，你的脚！”摩根惊呼道。“像这样被锁住很危险。如果你跌进水里怎么办？”<<He>>拿出一个茶盘和一个螺丝刀。“<<Mummy>>会帮你把这些可怕的东西拆掉的。”
+	<br><br>
+
+	<<link [[同意|Sewers Shackles]]>><<remove_shackle>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
+	<<link [[拒绝|Sewers Collar Refuse]]>><</link>>
+	<br>
+
+<<elseif $rng gte 71 and ($leftarm is "bound" or $rightarm is "bound")>>
+	“你是怎么变成那样的，<<charles>>？”摩根戳了戳你的绑带。“你不该乱玩儿绳子，你会伤到自己的。”<<He>>拿出一把生锈的园艺剪刀。“别害羞，让<<mummy>>帮你剪掉。”
+	<br><br>
+
+	<<link [[同意|Sewers Bindings]]>><<unbind>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
+	<<link [[拒绝|Sewers Collar Refuse]]>><</link>>
+	<br>
+
+<<elseif $rng gte 51>>
+	“我要烤烤饼，”摩根一边说，一边抓着几只老鼠的尾巴。“你先去烧热水。”
+	<br><br>
+
+	<<link [[帮忙 (1:00)|Sewers Scones]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<pass 60>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[拒绝|Sewers Spank]]>><<set $molestationstart to 1>><<npcincr Morgan love -1>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $rng gte 41>>
+	摩根提供了一些建议。"不要光着上身在这里游泳，"<<he>>的表情十分的严肃，"这里的水有一些恶心的寄生物。"
+	<br><br>
+
+	<<He>>背对着你。“帮我在这些古董中搜寻一下，”<<he>>边翻找边说，“别做个坏<<girl>>，来帮忙。”
+	<br><br>
+
+	<<link [[帮忙 (1:00)|Sewers Rummage]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<pass 60>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[拒绝|Sewers Spank]]>><<set $molestationstart to 1>><<npcincr Morgan love -1>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $rng gte 31>>
+	“<<charles>>，”摩根犹豫了一下。“自从我们重逢以来，亲爱的，我一直想给你。”<<He>>递给你一件完好无损的<<if $player.gender_appearance is "m">>衬衫和短裤<<else>>夏日连衣裙<</if>>。“这是你原来最喜欢的衣服，你，你会为我穿上它吗？”
+	<br><br>
+
+	<<set $phase to ($player.gender_appearance is "m" ? 0 : 1)>>
+	<<link [[穿|Sewers Outfit]]>><</link>>
+	<br>
+	<<link [[拒绝|Sewers Outfit Refuse]]>><</link>>
+	<br>
+
+<<elseif $rng gte 21>>
+	“亲爱的，你在学校的成绩怎么样？”摩根问道。“<<mummy>>的课有帮助吗？”
+	<br><br>
+
+	<<link [[告诉摩根|Sewers Review]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[说谎|Sewers Review]]>><<set $phase to 1>><</link>><<englishdifficulty 1 1000>>
+	<br>
+	<<link [[拒绝回答|Sewers Spank]]>><<set $molestationstart to 1>><<npcincr Morgan love -1>><</link>>
+
+<<else>>
+	“帮我在这些古董中搜寻一下，”<<he>>边翻找边说，“别做个坏<<girl>>，来帮忙。”
+	<br><br>
+
+	<<link [[帮忙 (1:00)|Sewers Rummage]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<pass 60>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[拒绝|Sewers Spank]]>><<set $molestationstart to 1>><<npcincr Morgan love -1>><</link>>
+	<br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<link [[向摩根要U盘|Sewers Ask]]>><</link>>
+		<br>
+	<</if>>
+
+<</if>>

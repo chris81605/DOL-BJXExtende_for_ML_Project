@@ -1,0 +1,49 @@
+:: Lake Boar Rape Finish []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	满意后，<<beasttype>>返回到树旁的窝里。
+	<br><br>
+
+	<<tearful>>你爬起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<elseif $enemyhealth lte 0>>
+	<<beasttype>>尖叫着逃进树林。
+	<br><br>
+
+	<<tearful>>你爬起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $eventskip to 1>>
+	<<destinationlake>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	你听到附近响起枪声，一颗子弹落在<<beasttype>>的脚下。它惊恐地后退并逃进树林。
+	<br><br>
+
+	伊甸出现并帮助你收拾自己。<<nnpc_he "Eden">>咕哝道："该死的野猪。你还好吗？"
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<if $gwylan_eden_coop gte 1>>
+		伊甸环顾四周。<<nnpc_he "Eden">>说："我们一定陷得太深了。"
+		<br><br>
+	<</if>>
+
+	<<if $eden_rescue isnot 1>>
+		<<set $eden_rescue to 1>>
+		伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+		<br><br>
+	<</if>>
+
+	<<link [[回到小屋 (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+	<br>
+	<<link [[告别|Lake Shore]]>><<endevent>><</link>>
+<</if>>

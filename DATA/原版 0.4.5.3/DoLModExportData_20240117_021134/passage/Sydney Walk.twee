@@ -1,0 +1,69 @@
+:: Sydney Walk []
+<<set $outside to 0>><<if $location is "school">><<schooleffects>><</if>><<effects>><<set _sydneyPray to true>>
+<<endevent>><<npc "Sydney">><<person1>>
+<<if $sydney.glasses.includes("broken")>>
+	"也许你需要换副眼镜了，跟我来。"<<if $sydneyromance is 1>>你拽着<<him>>的胳膊把<<him>>一把拉起。<<else>>你示意悉尼赶紧站起来。<</if>>
+	<br><br>
+	<<if $location is "school">>
+		<<set $exit to "library">>
+		<<switch $schoolstate>>
+			<<case "early" "morning" "first">>
+				"现在？我还有一个镜片没坏。<<if $sydneyScience>>如果我们迟到了，我希望<<sydneymum>>不要责怪我们。<</if>>"
+			<<case "second" "third" "fourth" "fifth">>
+				"现在？你不是应该在上课吗？我不想让你惹上麻烦，可是……"
+			<<default>>
+				"谢谢你，我现在都分不清东西的远近了。"
+		<</switch>>
+		<<if $sydney.glasses is "playerbroken">>当<<He>>跌跌撞撞地摸索着"离开"标志的时候，你有一丝内疚。<<else>>过了一会儿，<<He>>终于找到了"离"标志，并将它放在了租借柜台上。<</if>>
+		<br><br>
+		<<if $weather is "rain" or $weather is "snow">>
+			<<He>>在出去之前从储物柜拿了把伞。
+		<</if>>
+		你们穿过公园，来到了购物中心。
+	<<elseif $location is "temple">>
+		<<set $exit to "temple">>
+		<<if Time.weekDay is 1 and Time.hour gte 10 and Time.hour lte 12 and $daily.massAttended isnot 1>>
+			"谢谢你，尽管我讨厌在弥撒中缺席，但我真的很开心。陪你对我来说更加重要。"
+		<<else>>
+			"谢谢你，我现在都分不清东西的远近了。"
+		<</if>>
+		悉尼挥手告别了一群<<monks>>，你们两个离开了。
+		<br><br>
+		<<if $weather is "rain" or $weather is "snow">>
+			<<He>>在出去前拿了把伞。
+		<</if>>
+		你们很快就到了商业街，毕竟路程很短。
+	<</if>>
+	<<set $location to "town">>
+	<<He>>轻轻地抓住你的手臂。
+	<br><br>
+	<<link [[继续|Sydney Shopping Glasses]]>><<set $phase to 1>><<set $daily.sydney.walk to true>><<set $daily.school.scienceExcused to true>><<pass 15>><</link>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"想一起出去吗？"你问道。
+	<<elseif $speech_attitude is "bratty">>
+		"我们出去溜达溜达吧！"你满怀希望地看着悉尼。
+	<<else>>
+		"你看起来需要找个地方休息一下，呼吸点新鲜空气，"你提议道。
+	<</if>>
+	<br><br>
+	<<if $location is "school" and $detention gte 1 and $daily.school.detentionAttended isnot 1 and $headnodetention isnot 1 and $pillory_tenant.special.name isnot "Leighton">>
+		<<He>>兴奋了起来，但转而眉头紧锁。"礼顿<<nnpc_title "Leighton">>说你被留堂，你现在不能离开，抱歉。"
+		<br>
+	<<else>>
+		<<He>>立马兴奋了起来。"你想去哪儿？"
+		<br><br>
+		<<highicon>><<link [[购物中心 (0:15+)|Sydney Walk Shopping]]>><</link>>
+		<br>
+		<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 50>>
+			<<starfishicon>><<link [[海滩 (0:50+)|Sydney Walk Beach]]>><</link>>
+			<br>
+		<</if>>
+		<<if $sydneyromance is 1 and $sydneySeen.includes("corruptroom")>>
+			<<link [[神殿祈祷室|Sydney Walk Prayer Room]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<br>
+	<<sydneyOptions>>
+<</if>>

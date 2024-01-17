@@ -1,0 +1,55 @@
+:: Farm Road 4 []
+<<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad4">>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你走进更深的乡村。这条路向上弯，顶着一座小山，从树林里出来。大海在地平线上向你问候。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你往城里走。周围的乡村变得不那么荒凉，但更多的是丘陵。你为一座小山加冕，海在地平线上向你问候。<<physique 3>>
+<<else>>
+	你在连接城镇和周围农田的公路上。你在一座小山上，可以看到地平线上的大海。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		一股强风掠过山顶，差点把你吹倒。
+
+		<<if $worn.head.name isnot "naked" and (!$worn.head.outfitSecondary or !$worn.head.outfitSecondary.includes("upper"))>>
+			它从你的头上抢走了$worn.head.cn_name_cap！<<headstrip>>
+			<br><br>
+
+			<<link [[追逐|Farm Road Chase]]>><</link>>
+			<br>
+			<<link [[离开它|Farm Road Leave]]>><</link>>
+			<br>
+		<<else>>
+			<br><br>
+
+			<<destinationfarmroad>>
+		<</if>>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<roadicon>><<link [[走进乡村 (0:30)|Farm Road 5]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+	<<roadicon>><<link [[朝小镇走 (0:30)|Farm Road 3]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

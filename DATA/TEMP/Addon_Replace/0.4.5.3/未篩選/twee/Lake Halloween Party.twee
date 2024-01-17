@@ -1,0 +1,60 @@
+:: Lake Halloween Party []
+<<set $outside to 1>><<set $location to "lake">><<effects>>
+
+<<if $phase is 0>>
+	你坐到了篝火旁边，被吵闹的年轻人包围着。
+	<<if $cool gte 240>>
+		他们欢呼着欢迎了你，醉醺醺地跌跌撞撞着为你让出了一个座位。
+	<<elseif $cool gte 120>>
+		他们热情地欢迎了你。你怀疑这多少是因为酒精的关系。
+	<<else>>
+		没有人理你，甚至没人来找你麻烦。也许他们在昏暗的灯光下没有认出你。或者他们只是喝得太醉了。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if playerAwareTheyArePregnant()>>
+	你坐下来和其他人在月光下聊天，但你拒绝了任何饮料。
+<<else>>
+	你坐下来，和其他人在月光下聊天、喝酒。
+<</if>>
+其他人试图用鬼故事来娱乐自己。
+<<generatey1>><<person1>>
+<<switch random(1, 5)>>
+	<<case 5>>这些鬼故事并不是很吓人，但一个<<person>>在结束时依旧害怕地颤抖着。
+	<<case 4>>一个<<person>>声称湖本身就是闹鬼的。其他人不屑地嘲笑了<<him>>。
+	<<case 3>>这些鬼故事并不是很吓人。大多数乐趣来自于其他人对讲故事者的调侃。
+	<<case 2>>一个<<persons>>的故事让整个派对爆发出巨大的笑声。<<He>>喝下一整杯啤酒以掩饰尴尬。
+	<<case 1>>其中一个人为了逗乐，弄哭了一个<<person>>。<<He>>抽泣着退到树林里，引来身后更多笑声。
+<</switch>>
+<<endevent>>
+<br><br>
+
+<<if $syndromewolves is 1 and !$halloweenWolves>><<set $halloweenWolves to 1>>
+	派对突然被树林里的一声尖叫所打断。一声嚎叫，紧接着是咒骂，然后是痛苦的哀嚎声。
+	<br><br>
+
+	<<link [[调查|Lake Halloween Wolves Investigate]]>><</link>>
+	<br>
+	<<link [[原地不动|Lake Halloween Wolves Ignore]]>><</link>>
+	<br>
+<<elseif Time.monthDay isnot 31>>
+	天色渐晚，森林的阴影拉得越来越长。人们开始准备返回城镇。没有人想被留下独自上路。
+	<br><br>
+
+	<<if $exposed lte 0>>
+		<<link [[和他们一起走 (0:30)|Lake Return Journey]]>><<set $foresthunt to 0>><<pass 30>><</link>>
+		<br>
+	<</if>>
+	<<link [[留下|Lake Shore]]>><</link>>
+	<br>
+<<else>>
+	<<if playerAwareTheyArePregnant()>>
+		<<link [[继续派对 (0:10)|Lake Halloween Party]]>><<set $phase to 1>><<stress -4>><<status 1>><<pass 10>><</link>><<lstress>><<gcool>>
+	<<else>>
+		<<link [[继续派对 (0:10)|Lake Halloween Party]]>><<set $phase to 1>><<stress -4>><<alcohol 20>><<status 1>><<pass 10>><</link>><<lstress>><<gcool>><<galcohol>>
+	<</if>>
+	<br>
+	<<link [[离开|Lake Shore]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

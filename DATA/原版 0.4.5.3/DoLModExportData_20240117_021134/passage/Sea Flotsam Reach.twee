@@ -1,0 +1,16 @@
+:: Sea Flotsam Reach []
+<<water>><<effects>>
+
+你将手伸入海藻中，
+
+<<if $rng gte 51 or ($museumAntiques.antiques.antiquecoppercompass isnot "found" and $museumAntiques.antiques.antiquecoppercompass isnot "talk" and $museumAntiques.antiques.antiquecoppercompass isnot "museum")>>
+	用手抓住一个又冷又硬的东西。这是一个指南针，其上的玻璃满是污垢，但里面的指针仍然指向北方。也许有人会对这个感兴趣。
+	<<set $antiquemoney += 50>><<museumAntiqueStatus "antiquecoppercompass" "found">>
+	<br><br>
+	<<destinationeventend>>
+<<else>>
+	但在一阵剧烈的针刺般的疼痛中，你收回了手指。一只螃蟹用钳子夹住了你的手指，吊在你的手上。
+	<<gstress>><<gpain>><<pain 6>><<stress 6>>
+	<br><br>
+	<<destinationeventend>>
+<</if>>

@@ -1,0 +1,61 @@
+:: History Lesson Socialise []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $robinhistory is "seat" and $daily.robin.historyChat isnot 1>>
+	<<set $daily.robin.historyChat to 1>>
+	<<npc Robin>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20>>
+		你试着攀谈，但<<hes>>沉迷学习无法自拔。
+	<<elseif $robinromance is 1>>
+		你试着和罗宾搭讪。<<He>>正专心上课，但却在桌子下推了推你的手。你将手指缠绕在<<his>>的指尖，<<he>>以轻捏回应。
+	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].love gte 50>>
+		你试着和罗宾搭讪。<<He>>点头回应，偶尔对你微笑，不过<<hes>>似乎对学习更上心。
+	<<else>>
+		你试着和罗宾搭讪。<<He>>在你说话的时候点了点头，不过<<hes>>似乎对学习更上心。
+	<</if>>
+	<<endevent>>
+<<else>>
+	<<if $cool gte ($coolmax / 5 * 2)>>
+		你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。你很快就成为了大家关注的焦点。
+	<<elseif $cool gte ($coolmax / 5)>>
+		你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。
+	<<else>>
+		你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。大多数人不想理你。
+	<</if>>
+<</if>>
+<br><br>
+
+<<status 1>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	下课铃响起，课程结束了。你
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		拿上你的外套然后
+	<</if>>
+	离开了教室。
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[继续|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[继续|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure * 2))>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>

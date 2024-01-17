@@ -1,0 +1,59 @@
+:: Moor Fox Dodge []
+<<effects>>
+<<if $danceSuccess>>
+	你优雅地俯身并滚到一边，正好及时避开从后面扑向你的东西。
+	<br><br>
+
+	<<if $monster is 1>>
+		你站起来的时候，看清楚了攻击你的东西：一个<<beasttype>>，
+		<<if $NPCList[0].traits.includes("territorial")>>
+			<<bhis>>红褐色的三角耳下，精致的五官恼火地拧成一团。<<bhim>>懊恼地摆动着背后的尾巴。"你动作真快，<<foxnickname>>。不过，下次我一定会抓到你的。"<<bhe>>一边说，一边逃回了灌木丛中。
+		<<elseif $NPCList[0].traits.includes("clumsy")>>
+			从<<bhis>>失败的扑击中挣扎着恢复过来。<<bhim>>懊恼地扫着背后的尾巴。"又没扑中！"<<bHe>>逃回石楠丛中。
+		<<else>>
+			精致的五官下的表情牢牢锁定在你身上。<<bHis>>的耳朵扑棱了一下，然后一言不发地飞快钻回了灌木丛中。
+		<</if>>
+	<<else>>
+		你站起来的时候，你看清了攻击你的家伙：一个巨大的<<beasttype>>，从头部到毛茸茸的尾巴都覆盖着红棕色的毛。<<bHe>>对你叫了几声，然后逃回了灌木丛。
+	<</if>>
+	<br><br>
+
+	你松了一口气，掸了掸身上的灰尘，继续你的旅程。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你试图躲开，但是
+	<<if $worn.feet.type.includes("heels")>>
+		却一脚踩进了一片软泥地，失去了平衡。你的脚踝扭伤了。
+	<<else>>
+		却一下摔倒在了地上。
+	<</if>>
+	<<pain 4>><<gpain>>
+	<br><br>
+
+	有东西从背后把你扑倒了，它用它的重量把你压在下面。你转过头去，看清了自己背上的东西：
+	<<if $monster is 1>>
+		<<if $NPCList[0].traits.includes("territorial")>>
+			一只<<beasttype>>，正对着你得意地笑着。"还不够快，<<foxnickname>>，现在你是我的了。"
+		<<elseif $NPCList[0].traits.includes("clumsy")>>
+			一只<<beasttype>>看起来和你一样惊讶。"我抓到了？我抓到了！！"<<bHe>>举起双臂欢呼，"你现在是我的了！"
+		<<else>>
+			一只<<beasttype>>朝你露出得意的坏笑。"抓到你了！现在乖一点，我们要找点乐子了。"
+		<</if>>
+	<<else>>
+		一只巨大的<<beasttype>>，全身覆盖着红棕色的毛皮。它对着你发出威胁性的叫声。
+	<</if>>
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[继续|Moor Fox Rape]]>><<set $molestationstart to 1>><<set $position to "doggy">><<set $NPCList[0].stance to "top">><</link>>
+	<<else>>
+		经过短暂的挣扎，你设法爬起来逃走了。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Moor]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+<</if>>

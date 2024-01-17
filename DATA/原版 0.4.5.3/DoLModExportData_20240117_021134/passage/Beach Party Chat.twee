@@ -1,0 +1,82 @@
+:: Beach Party Chat []
+<<location "beach">><<effects>>
+
+<<if $phase is 0>>
+	你加入谈话。
+	<<if $allure gte 3000>>
+		你很快就成为了关注的焦点。
+	<<elseif $allure gte 2000>>
+		你很容易吸引眼球。
+	<<elseif $allure gte 1000>>
+		当你说话时，人们会承认你，但除此之外，他们不会打扰你。
+	<<else>>
+		虽然你很严肃，但人们总是在谈论你，好像没有意识到你的存在。
+	<</if>>
+	<<if Time.dayState isnot "night">>
+		太阳从地平线升起，剩下的学生回家了。
+		<br><br>
+
+		<<link [[继续|Beach]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<br><br>
+		<<set $eventcheck to random(1, 10000)>>
+		<<if $eventcheck gte (9900 - ($allure))>>
+			<<generatey1>><<person1>>一个<<person>>坐在你旁边，递给你一杯饮料。
+			<br><br>
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+			<<else>>
+				<<link [[喝 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<alcohol 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+			<</if>>
+			<br>
+			<<link [[只是聊天 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+			<<link [[离开|Beach]]>><<endevent>><</link>>
+			<br><br>
+		<<else>>
+			<<link [[继续 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+			<<link [[离开|Beach]]>><<endevent>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $rng gte 21>>
+		你喜欢和<<person>>交谈。<<He>>却在?admires你的身体，<<He>>以为你没注意到。
+		<br><br>
+		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+			<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+		<<else>>
+			<<link [[喝 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<alcohol 60>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+		<</if>>
+		<br>
+		<<link [[只是聊天 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<set $phase to 1>><<status 1>><</link>><<gcool>><<lstress>>
+		<br>
+		<<link [[离开|Beach]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		你享受和<<person>>的交谈。<<He>>靠过来小声说："你想去个私密的地方吗？"
+		<br><br>
+
+		<<link [[好|Beach Party Sex]]>><<set $phase to 0>><<set $sexstart to 1>><</link>><<promiscuous1>>
+		<br>
+
+		<<link [[不要|Beach Party Chat]]>><<set $phase to 2>><<status 1>><</link>><<gcool>>
+		<br><br>
+	<</if>>
+<<elseif $phase is 2>>
+	<<if $rng gte 11>><<set $phase to 0>>
+		<<He>>很失望，但礼貌地说再见，然后离开去别处看。
+		<br><br>
+		<<link [[继续 (0:10)|Beach Party Chat]]>><<pass 10>><<stress -2>><<status 1>><<endevent>><</link>><<gcool>><<lstress>>
+		<br>
+		<<link [[离开|Beach]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		<<He>>掐着你的脖子，"你这样不太礼貌。我觉得你需要上一课。"<<He>>让你站起来，开始强迫你离开小组的其他人。
+		<br><br>
+		<<link [[继续|Beach Party Rape]]>><<set $molestationstart to 1>><<set $timer to 10>><</link>>
+		<br><br>
+	<</if>>
+<</if>>

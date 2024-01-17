@@ -1,0 +1,251 @@
+:: School Pool []
+<<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
+
+<<set _masonCanUnlock to playerChastity() and $worn.genitals.origin is "Winter" and C.npc.Mason.chastityKeyCarried and !$weekly.masonChastityRemovalDeclined and !$daily.masonChastityRemovalDeclined
+	and getVisibleClothesList().find(o => o === V.worn.genitals) and (C.npc.Mason.love gte 10 or C.npc.Mason.lust gte 15)>>
+<<if Time.minute lt 45>>
+	<<classRoomEarSlime "swimming">>
+<</if>>
+<<if $poolroomstate is "own">>
+	<<if Time.minute gte 45>>
+		<<if $daily.school.attended.swimming>>
+			你走进游泳馆。
+			<br><br>
+			游泳课刚刚结束，一些出来较晚的家伙们正在往更衣室走，而梅森正在收拾那些被遗落的毛巾。
+			<br><br>
+			<<if $exposed lte 0>>
+				<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+				<br>
+				<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+			<<elseif $exposed gte 1>>
+				<<maleicon>><<link [[拿一条毛巾裹住身体并进入男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+				<br>
+				<<femaleicon>><<link [[拿一条毛巾裹住身体并进入女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+			<</if>>
+		<<else>>
+			<<include "School Swimming Late">>
+			<<set $daily.school.swimmingLate to true>><!-- still a missed lesson -->
+		<</if>>
+	<<elseif $exposed gte 2 and $swimall is 1>>
+		<<npc Mason>><<person1>>
+		<<if $daily.school.attended.swimming>>
+			你重新加入了游泳课。
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+		<<elseif Time.minute lte 5>>
+			你走进游泳馆。
+			梅森正站在泳池边，那遮住了<<his>>的大部分身体，虽然<<he>>试图鼓励学生们做伸展运动，但班里的其他人选择了直接入水。
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+
+		<<else>>
+			你走进游泳馆。
+
+			梅森和全班同学已经在泳池中了。
+			<<if $daily.school.swimmingExcused>>
+				<<run delete $daily.school.swimmingExcused>>
+				"你在这里啊，"<<he>>在说着的同时对你招了招手。"别担心，我不会处罚你的，快进来吧！"
+			<<else>>
+				"你能加入我们真是太好了！"<<he>>在说着的同时对你招手。
+				<<gdelinquency>><<detention 1>>
+			<</if>>
+			<br><br>
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				你在梅森继续上课的时候爬进了泳池中。
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+	<<elseif $exposed gte 2 and $swimall isnot 1>>
+		<<npc Mason>><<person1>>
+		<<schoolpoolexposed>>
+		<<if $exhibitionism gte 75 and $swimall isnot 1>>
+			<<link [[要求裸体游泳|School Pool Ask Naked]]>><<fameexhibitionism 15>><<endevent>><<set $swimnudecounter += 1>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+	<<elseif $swimall is 1>>
+		<<npc Mason>><<person1>>
+		<<if $daily.school.attended.swimming>>
+			你重新加入了游泳课。
+			<<schoolpoolmasoncheck>>
+			<br>
+		<<else>>
+			你走进游泳馆。
+			梅森站在泳池边，鼓励学生们在等待其他同学时进行一下热身。
+		<</if>>
+
+		<<if $exposed gte 2>>
+			<br>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				<br><br>
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+		<<else>>
+			<br><br>
+			<<He>>瞪着你。"你瞧，多亏了某人的壮举，如果你不全裸的话我没法允许你进入泳池。"
+			<br><br>
+			<<link [[裸泳|Swimming Lesson]]>><<schoolpoolundress>><<endevent>><</link>>
+		<</if>>
+	<<elseif ($worn.under_lower.type.includes("swim") or $worn.lower.type.includes("swim"))
+	and ($worn.under_upper.type.includes("swim") or $worn.upper.type.includes("swim") or ($worn.under_upper.type.includes("naked") and $worn.upper.type.includes("naked") and ($player.gender_appearance is "m" or $daily.swimCrossdressPermission)))
+	and (($worn.upper.type.includes("naked") or $worn.upper.type.includes("swim")) and ($worn.lower.type.includes("naked") or $worn.lower.type.includes("swim")))>>
+		<<npc Mason>><<person1>>
+		<<if $daily.school.attended.swimming>>
+			你重新加入了游泳课。
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+		<<elseif Time.minute lte 5>>
+			你走进游泳馆。
+			梅森站在泳池边，鼓励学生们在等待其他同学时进行一下热身。
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			你走进游泳馆。
+
+			梅森和全班同学已经在泳池中了。
+			<<if $daily.school.swimmingExcused>>
+				<<run delete $daily.school.swimmingExcused>>
+				"你在这里啊，"<<he>>在说着的同时对你招了招手。"别担心，我不会处罚你的，快进来吧！"
+			<<else>>
+				"你能加入我们真是太好了！"<<he>>在说着的同时对你招手。
+				<<gdelinquency>><<detention 1>>
+			<</if>>
+			<br><br>
+			<<schoolpoolmasoncheck>>
+			<<if _masonCanUnlock>>
+				<<include "Mason Chastity Prompt">>
+			<<else>>
+				你在梅森继续上课的时候爬进了泳池中。
+				<br><br>
+
+				<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+	<<else>>
+		你走进游泳馆。
+		<<npc Mason>><<person1>>
+		<<if $daily.school.swimmingExcused>>
+			"你已经被原谅了，但你仍然需要穿上衣服才能出去。
+		<<else>>
+			"你不能穿成这样游泳！
+		<</if>>
+		<<if _masonCanUnlock>>
+			<<include "Mason Chastity Prompt">>
+		<<else>>
+			去换衣服。"
+			<br><br>
+
+			<<if $exhibitionism gte 75 and $swimall isnot 1>>
+				<<link [[要求裸体游泳|School Pool Ask Naked]]>><<fameexhibitionism 15>><<endevent>><<set $swimnudecounter += 1>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<if $player.gender is "f" or ($player.gender is "h" and $player.gender_appearance is "f")>>
+				<<if !$daily.swimCrossdressPermission>>
+					<<link [[说你只有一件男孩的泳衣|School Pool Wrong]]>><</link>>
+					<br>
+				<</if>>
+				<<link [[说你没有东西可换|School Pool Spare]]>><</link>>
+				<br>
+			<<else>>
+				<<if !$daily.swimCrossdressPermission>>
+					<<if ($worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked")) and
+					($worn.lower.type.includes("swim") or ($worn.lower.type.includes("naked") and $worn.under_lower.type.includes("swim")))>>
+						<<link [[说你只有一件男孩的泳衣|School Pool Wrong]]>><<set $phase to 1>><</link>>
+					<<else>>
+						<<link [[说你只有一件女孩的泳衣|School Pool Wrong]]>><</link>>
+					<</if>>
+					<br>
+				<</if>>
+				<<link [[说你没有东西可换|School Pool Spare]]>><</link>>
+				<br>
+			<</if>>
+			<br>
+			<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><<endevent>><</link>>
+			<br>
+			<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><<endevent>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+
+<<elseif $poolroomstate is "other">>
+	<<if $exposed gte 1>>
+		<<npc Mason>><<person1>>
+		<<schoolpoolexposed>>
+	<<else>>
+		你走进游泳馆。
+		<<if $daily.school.swimmingInterrupted is 1>>
+			<<npc Mason>><<person1>>你走进游泳馆，梅森停下了动作并直勾勾地看向你。"我有一节课要教。
+			不要再打扰我们了。"<<He>>在说完之后指向了出口。
+			<<gdelinquency>>
+			<br><br>
+			<<detention 1>>
+
+			<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><<endevent>><</link>>
+			<br>
+			<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<npc Mason>><<person1>>
+			当你走进泳池室，梅森停下了动作并对你笑了笑。"你是迷路了吗？还是说你有什么事要告诉我？"
+			看来你已经打断了上课。
+			<br><br>
+			<<set $daily.school.swimmingInterrupted to 1>>
+
+			<<link [[道歉|Swimming Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+			<br>
+			<<if $trauma gte 1>>
+				<<link [[嘲笑|Swimming Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<<else>><!-- $poolroomstate is "empty" -->
+	你正待在游泳馆里，这里充满了氯气的味道。
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptySwimClassroom">>
+	<</if>>
+
+	<<exhibitionclassroom>>
+
+	<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><<endevent>><</link>>
+	<br>
+	<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><<endevent>><</link>>
+	<br>
+<</if>>

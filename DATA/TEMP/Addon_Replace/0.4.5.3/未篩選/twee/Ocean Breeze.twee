@@ -1,0 +1,223 @@
+:: Ocean Breeze []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+你在海风咖啡馆。
+<<if $openinghours is 1>>
+	<<if $weather is "clear">>
+		大部分位子都是空的。
+	<<elseif $weather is "overcast">>
+		咖啡馆里人很多，尽管刮着大风，还是有人坐在外面。
+	<<elseif $weather is "rain">>
+		因为下雨，所以没有人坐在外面，咖啡馆里很拥挤。
+	<<elseif $weather is "snow">>
+		因为天寒地冻，所以没有人坐在外面，咖啡馆里显得很拥挤。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutshop>>
+
+<<elseif $openinghours is 1 and $exposed lt 1 and $bunstat gte 50 and $chef_state is 1>>
+	<<set $chef_state to 2>><<set $bun_value to 10000>>
+	<<npc Sam>><<person1>>
+	萨姆走近你，用毛巾擦拭<<his>>的手，满面春风。
+	"我已经做了一个决定，"<<he>>说道："我想保持这些小面包的价格，但我们已经吸引了足够的客户兴趣。"
+	<<He>>拿出一本假日小册子，打开其中一页，上面写着小镇的广告。
+	有一张咖啡馆的照片，上面有一个标题，说他们的面包品质是"世界一流"。
+	<br><br>
+
+	"世界一流！" 萨姆喜形于色。
+	"我决定把价格提高到<span class="gold">£100</span>。毕竟我们的供应有限，无法满足目前的需求。"
+	<br><br>
+
+	<<He>>哼着歌，回到工作岗位上。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Ocean Breeze]]>><</link>>
+	<br>
+
+<<elseif $openinghours is 1 and $exposed lt 1 and $bunstat gte 200 and $chef_state is 2>>
+	<<set $chef_state to 3>>
+	<<npc Sam>><<person1>>
+	萨姆靠近你。
+	"我在一个聚会上，"<<he>>说道。
+	"也可能是我喝多了，但是我应该听见了有人在讨论我们的小面包。
+	人们对它的制作方式感到十分好奇，但当我告诉人们我并不知道如何制作，是一个新厨师负责的时候，那些家伙更加好奇了。
+	我认为你正在创造一项神话，一项以你为传说的神话。"
+	<br><br>
+	"无论怎样，"<<he>>继续说道，
+	"这让我想到，我想我可以在我们的广告中使用你的形象。
+	也许我们可以重新设计建筑物的正面招牌，公正的人们自然会知道谁该享受这样的待遇。"
+	<br><br>
+	"我愿意把你的分红增加到<span class="gold">30%</span>，"<<he>>在打扫着一张空出的桌子时补充道，"每卖出一个小面包都会给你分红。"
+	<br><br>"我已经在与一位专业摄影师交涉了，请仔细考虑一下，然后告诉我你的想法。"
+	<br><br>
+
+	<<endevent>>
+
+	<<link [[继续|Ocean Breeze]]>><</link>>
+	<br>
+
+<<elseif $openinghours is 1 and $exposed lt 1 and $chef_state is 5>>
+	<<set $chef_state to 6>>
+	<<npc Sam>>萨姆向你走来，"摄影师把照片送过来了，"<<he>>说道。
+	"它们太棒了！新广告看起来很棒，就和之前说好的一样，从现在开始，每卖出一个小面包，你都会得到<span class="gold">30%</span>的分红。"
+	<<set $bun_cut to 0.3>>
+	<br><br>
+
+	萨姆哼着小曲回去工作了。
+	<br><br>
+	<<endevent>>
+
+	<<link [[继续|Ocean Breeze]]>><</link>>
+	<br><br>
+
+<<elseif $openinghours is 1 and $exposed lt 1 and $bunstat gte 400 and $chef_state is 6>>
+	<<set $chef_state to 7>>
+	<<set $chef_rework to 37>>
+	<<npc Sam>><<person1>>
+	萨姆顶着一副比平时更严肃的面孔走向你。"我做了一个决定，"<<he>>说道。
+	"小面包是我们的招牌菜品，但人们对我们的其他菜品也比以前更感兴趣了。
+	你可能已经注意到了，即使人们知道主厨并不在这栋楼里，仍然会在这排队等待吃饭。"
+	<br><br>
+	"所以我已经将隔壁的房子买了下来，"<<he>>继续说道。
+	"一个大咖啡馆，我打算把这几栋建筑合并，做成一个巨大的咖啡馆。一个能容纳我们所有顾客的咖啡馆，我一想到这个就兴奋不已！"
+	<br><br>
+	<span class="pink">"我们需要关门一个月，"</span><<he>>补充道。
+	"我知道这很不幸，但毕竟要改变的地方太多了，当它完成时，我们会有一个盛大的开幕活动，到时候将会由你来致辞。"
+	<br><br>
+	"我们会在一个星期内准备关门，我不想让你感到手足无措，所以等我们结束之后，你可以过来看看，我们会讨论开幕式的活动。"
+	<br><br>
+	<<He>>回到了工作岗位上。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Ocean Breeze]]>><</link>>
+	<br>
+
+<<else>>
+	<<if Time.hour is $closinghour>>
+		关店时间到了，萨姆正在清场。
+		<<if $exposed gte 1>>
+			当你意识到穿成这样你会有多暴露时，你感到一阵恐慌。
+		<</if>>
+		<br><br>
+
+	<<elseif $openinghours is 0>>
+		你独自待在黑暗之中。
+		<br><br>
+
+	<<elseif $exposed gte 1>>
+		你藏在桌子下以保护自尊。
+		<br><br>
+
+	<</if>>
+
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "cafe">>
+	<</if>>
+
+	<<if $openinghours is 1 and $exposed lt 1 and $oceanbreezejob isnot 1>>
+		<<if $oceanbreezejoboffer is 1>>
+			<<ind>><<link [[询求工作|Ocean Breeze Ask Again]]>><</link>>
+			<br>
+		<<else>>
+			<<ind>><<link [[询求工作|Ocean Breeze Ask]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+	<<if $openinghours is 1 and $exposed lt 1 and $oceanbreezejob is 1>>
+		<<if $chef_state is 0>>
+			<<ind>><<link [[接受工作机会|Chef Work Accept]]>><</link>>
+			<br>
+		<<elseif $chef_state gte 1>>
+			<<ind>><<link [[当厨师 (1:00)|Chef Work]]>><</link>>
+			<br>
+		<</if>>
+		<<if $chef_state is 3>>
+			<<ind>><<link [["接受萨姆的提议"|Chef Photographer]]>><</link>>
+			<br>
+		<</if>>
+		<<if $player.gender_appearance is "m">>
+			<<ind>><<link [[当服务员 (1:00)|Ocean Breeze Work]]>><<set $tablesservedstat += random(10,30)>><</link>>
+			<br>
+		<<else>>
+			<<ind>><<link [[当服务员 (1:00)|Ocean Breeze Work]]>><<set $tablesservedstat += random(10,30)>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+<<if $openinghours is 1 and $exposed lt 1 and $daily.cafeEaten isnot 1>>
+
+	<<if $money gte 200>>
+		<<foodicon "coffee">><<link [[买咖啡 (0:02 £2)|Cafe Coffee]]>>
+			<<set $daily.cafeEaten to 1>><<set $money -= 200>><<stress -3>><<tiredness -4>><<pass 2>>
+		<</link>><<lstress>><<ltiredness>>
+		<br>
+	<</if>>
+	<<if $money gte 700>>
+		<<foodicon "beerbottle">>
+		<<if Time.season is "winter">>
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">当你知道自己怀有身孕时，你就不能再喝冬酿麦酒了。</span>
+			<<else>>
+				<<link [[买冬季麦芽酒 (0:10 £7)|Cafe Winter Ale]]>><<set $daily.cafeEaten to 1>><<set $money -= 700>><<stress -6>><<alcohol 100>><<pass 10>><</link>><<lstress>><<galcohol>>
+			<</if>>
+			<br>
+		<<elseif Time.season is "spring">>
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">当你知道自己怀有身孕时，你就不能再喝果酒了。</span>
+			<<else>>
+				<<link [[买水果麦芽酒 (0:10 £7)|Cafe Spring Ale]]>><<set $daily.cafeEaten to 1>><<set $money -= 700>><<stress -6>><<alcohol 60>><<pass 10>><</link>><<lstress>><<galcohol>>
+			<</if>>
+			<br>
+		<<elseif Time.season is "summer">>
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">当你知道自己怀有身孕时，你就不能再喝仙地酒了。</span>
+			<<else>>
+				<<link [[买鲜啤酒 (0:10 £7)|Cafe Summer Ale]]>><<set $daily.cafeEaten to 1>><<set $money -= 700>><<stress -6>><<alcohol 40>><<pass 10>><</link>><<lstress>><<galcohol>>
+			<</if>>
+			<br>
+		<<else>>
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">当你知道自己怀有身孕时，你就不能再喝秋酿麦酒了。</span>
+			<<else>>
+				<<link [[买秋艾酒 (0:10 £7)|Cafe Autumn Ale]]>><<set $daily.cafeEaten to 1>><<set $money -= 700>><<stress -6>><<alcohol 80>><<pass 10>><</link>><<lstress>><<galcohol>>
+			<</if>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $money gte 300>>
+		<<if ndef $milkshake>><<set $milkshake to 0>><</if>>
+		<<if $milkshake lt 2>>
+			<<foodicon "milkshake">><<link [[购买奶昔并带走 (0:02 £3)|Ocean Breeze]]>><<set $money -= 300>> <<set $milkshake +=1>> <<pass 2>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $money gte 500>>
+		<<foodicon "fruitsalad">>
+		<<link [[买水果沙拉 (0:20 £5)|Cafe Fruit Salad]]>><<set $daily.cafeEaten to 1>><<set $money -= 500>><<stress -6>><<pass 20>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<if $money gte 1000>>
+		<<foodicon "pancakes">>
+		<<link [[买松饼 (0:20 £10)|Cafe Pancakes]]>><<set $daily.cafeEaten to 1>><<set $money -= 1000>><<tiredness -6>><<pass 20>><</link>><<ltiredness>>
+		<br>
+	<</if>>
+	<<if $money gte 5000>>
+		<<foodicon "creambun">>
+		<<link [[购买豪华奶油面包 (0:20 £50)|Cafe Cream Bun]]>><<set $daily.cafeEaten to 1>><<transform cat 1>><<set $money -= 5000>><<pass 20>><<stress -18>><</link>><<llstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $openinghours is 0 and Time.hour isnot $closinghour and !$weekly.theft.oceanBreeze>>
+	<<shopicon "register">><<link [[检查收银机|Ocean Breeze Register]]>><</link>>
+	<br>
+<</if>>
+
+<br>
+<<clifficon>><<link [[离开|Cliff Street]]>><</link>>
+<br><br>
+
+<</if>>

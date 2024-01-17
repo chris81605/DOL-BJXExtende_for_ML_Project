@@ -1,0 +1,41 @@
+:: Sydney Shopping Buy Glasses []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+你给悉尼买了一副新眼镜。
+<<switch $sydney.glasses>>
+	<<case "broken">>
+		<<He>>将<<his>>的<<sydneyGlasses>>推给柜台工作人员。"我会想念这些东西的。"<<He>>微笑着看着你。
+		<<if $sydneyromance is 1>>"至少这些新的会让我想起你。"<<else>>"谢谢你，你本来不需要为我做这些的。"<</if>>
+	<<case "playerbroken">>
+		<<He>>将<<his>>的<<sydneyGlasses>>推给柜台工作人员。"我会想念这些东西的。"<<He>>微笑着看着你。
+		"请不要再弄坏了，好吗？"<<he>>俏皮地推了推你，你内疚地低下了头。
+	<<case "glasses">>
+		"你确定吗？我现在的这些都很好。"
+		<br><br>
+		<<if $sydneyromance is 1>>
+			"我觉得你戴这副会很可爱。"你推了推<<he>>，<<He>>脸红了。
+			<br><br>
+			"既然你都说了，那好吧。"
+		<<else>>
+			"我觉得这双更适合你，"你指了指柜台，<<He>>歪了歪头。
+			<br><br>
+			"嗯……行，谢谢你。"
+		<</if>>
+	<<case "playerbought">>
+		"真的可以吗？你是第一个愿意给我买这个的人，真的是越看它越喜欢了呢。"
+		<br><br>
+		<<if $sydneyromance is 1>>
+			"我改主意了，这些更可爱，"你推了<<he>>一把，<<He>>脸红了。
+			<br><br>
+			"既然你都说了，那好吧。"
+		<<else>>
+			"稍微改变一下也无妨，"你提议道。<<He>>歪了歪头。
+			<br><br>
+			"嗯……行，谢谢你。"
+		<</if>>
+	<<case "contacts">>
+		"我想我的确怀念戴眼镜的时候，谢谢你！"<<He>>把<<his>>的旧眼镜推给在柜台工作的人。
+<</switch>>
+验光师用新眼镜给悉尼做了一个快速的视力测试。一切进展顺利，你们俩回到了购物中心。<<trauma -3>><<ltrauma>><<npcincr Sydney love 1>><<glove>>
+<br><br>
+<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<pass 1>><<set $sydney.glasses to "playerbought">><</link>>
+<br>

@@ -1,0 +1,63 @@
+:: Livestock Milking End []
+<<effects>>
+<<pass 180>>
+<<endevent>>
+<<npc Remy>><<person1>>
+你瘫坐在铺满稻草的地板上，气喘吁吁。紧接着，雷米站在挤奶机前。<<He>>检查着你身上的玻璃罐。
+<br><br>
+<<if $livestock_milk is undefined>><<set $livestock_milk to 0>><</if>>
+<<if $livestock_semen is undefined>><<set $livestock_semen to 0>><</if>>
+<<set $fluid_forced_stat += ($livestock_milk + $livestock_semen)>>
+<<if $livestock_milk + $livestock_semen gte 5000>><<earnFeat "Pride of the Farm">>
+<<npcincr Remy love 3>>"非凡的生产力，"<<he>>敬畏地盯着面前的<span class="green">大量</span>白色液体说道。"不可能还有其他<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>能产这么多奶了。"
+<<gglove>>
+<<elseif $livestock_milk + $livestock_semen gte 3000>>
+<<npcincr Remy love 2>>"你是个好<<girl>>，"<<he>>盯着面前<span class="teal">大量的</span>白色液体说道。"唯一麻烦的是，"<<he>>微笑道，"搬起来可能有点重。"
+<<glove>>
+<<elseif $livestock_milk + $livestock_semen gte 1000>>
+<<npcincr Remy love 1>>"有了这样的产品，"<<he>>看着<<him>>面前的<span class="lblue">大量</span>白色液体说道。"你会是我们族群中最有价值的成员之一。"
+<<glove>>
+<<elseif $livestock_milk + $livestock_semen gte 500>>
+	"很好，"<<he>>看着<<him>>面前<span class="blue">适量</span>的白色液体说道。"你是我们族群中宝贵的一员。"
+<<elseif $livestock_milk + $livestock_semen gte 300>>
+	"很好，"<<him>>看着<span class="purple">少量的</span>白色液体说道。"不过，我认为你还能做得更好。"
+<<elseif $livestock_milk + $livestock_semen gte 100>>
+	"对于<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>来说很少，"<<he>>看着<<him>>面前的<span class="pink">少量</span>白色液体。"但总比什么都没有强。"
+<<elseif $livestock_milk + $livestock_semen gte 1>>
+	"也太少了，"<<he>>叹了口气，看着面前<span class="red">只有几滴的</span>白色液体。"还要继续努力增加产量才行。"
+<<else>>
+	"一滴都没出来？"<<he>>叹了口气。"别担心，你未来还是有希望成为一头优秀的奶牛的。"
+<</if>>
+<<He>>打开大门，半跪在你身边，把一只手搭在你的肩膀上。这种治疗让你的身体变得非常敏感，甚至你的脊椎都在发抖。
+<br><br>
+
+<<if $breastfeedingdisable is "f">>
+	<<if $player.penisExist and !playerChastity("penis")>>
+		<<He>>伸手到你的身体下面，扯掉了固定在你下体的玻璃泵。这刺激差点让你直接高潮。然后<<He>>又拔下了你<<breasts>>上的泵。
+	<<else>>
+		<<He>>把手伸到你的下方，将吸在你<<breasts>>周围的泵猛地拽开。这几乎足以把你送上高潮。
+	<</if>>
+<<else>>
+	<<He>>把手伸到你的下面，将吸在你<<penis>>周围的泵猛地拽开。这几乎足以把你送上高潮。
+<</if>>
+
+<<if $livestock_obey gte 80>>
+	"你真是个好<<girl>>，"<<he>>说着挠了挠你的耳后。"该睡觉了。"<<He>>站起来向大门走去。到了门口，<<He>>转过身，微笑着关上了笼子。
+<<elseif $livestock_obey gte 20>>
+	<<He>>用<<his>>的手指勾住你的项圈，然后把你猛的拉近。"今晚你要做一个好<<girl>>，好吗？"<<he>>在你耳边低语。"不要把其他牛吵醒哦。"<<He>>放开你，站起身走向大门。它砰的一声关上了。
+<<else>>
+	<<He>>抓住你的耳朵，把你拉近。"该睡觉了。最好别让我听到你一夜没睡。明白吗？"<<He>>松开你，站起来，不等你回答就向牢门走去。
+<</if>>
+<br><br>
+
+雷米和农场工人把牛从机器里放了出来。他们离开时关了灯，让谷仓陷入一片黑暗。
+<br><br>
+
+<<endevent>>
+
+<<unset $livestock_semen>>
+<<unset $livestock_milk>>
+<<unbind>>
+
+<<link [[继续|Livestock Cell]]>><</link>>
+<br>

@@ -1,0 +1,44 @@
+:: Prison Soar []
+<<effects>>
+
+<<beastNEWinit 2 hawk>><<person1>>
+你又跑又跳，让风抓住你的翅膀。你飞了起来。
+
+
+<<if $prison.schedule is "revolt">>
+	<<beastsplural>>忙于镇压暴动以至于没有注意到你。<span class="green">没有什么能够阻止你逃跑了。</span>
+	<br><br>
+
+	<<link [[逃离 (0:30)|Prison Soar Escape]]>><<tiredness 12>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>><<ggtiredness>>
+	<br>
+	<<link [[着陆|Prison Spire]]>><<endevent>><</link>>
+	<br>
+<<elseif $prison.watchers_friend gte 2>>
+	两个<<beastsplural>>和你一起飞了一会儿。
+	<<if $monster is 1>>
+		"一路平安，"其中一个在风中喊道。
+	<<else>>
+
+	<</if>>
+	然后他们两个都转过身，回到了塔尖。
+	<span class="green">没有什么能阻止你逃跑了。</span>
+	<br><br>
+
+	<<link [[逃离 (0:30)|Prison Soar Escape]]>><<tiredness 12>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>><<ggtiredness>>
+	<br>
+	<<link [[着陆|Prison Spire]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<span class="red">两个<<beastsplural>>在你的身后飞。</span>你躲开了其中一个，但是另一个用爪子抓住了你的肩膀。<<He>>抓着你回到了塔尖。<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>>
+	<br><br>
+	<<if $monster is 1>>
+		"我们在看着，"<<bhe>>警告道，"别忘了。"<<bHe>>回到了灯塔。
+	<<else>>
+		<<bHe>>尖啸着警告，然后便回到了灯塔。
+	<</if>>
+	如果你不分散<<beastsplural>>的注意力或者成为它们的朋友，那么你就不可能飞走。
+	<br><br>
+
+	<<link [[继续|Prison Spire]]>><</link>>
+	<br>
+<</if>>

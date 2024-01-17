@@ -1,0 +1,53 @@
+:: Farm Tending []
+<<effects>>
+
+<<if $weather is "rain">>
+	你顶着雨，搜寻入侵的杂草，在它们扼杀庄稼之前把它们连根挖起。
+<<elseif $weather is "clear">>
+	<<if $rng gte 51>>
+		<<if Time.dayState is "night">>
+		星星在你头顶闪烁，你搜寻着入侵的杂草，在它们扼杀庄稼之前把它们连根挖起。
+		<<else>>
+		太阳炙烤着地面，你搜寻着入侵的杂草，在它们扼杀庄稼之前把它们连根挖起。
+		<</if>>
+	<<else>>
+		<<if Time.dayState is "night">>
+		星星在你头顶闪烁，你为地里的庄稼浇着水。
+		<<else>>
+		太阳炙烤着地面，你为地里的庄稼浇着水。
+		<</if>>
+	<</if>>
+<<elseif $weather is "snow">>
+	你忍受着寒冷，寻找入侵的杂草，在它们扼杀庄稼之前把它们连根挖起。
+<<else>>
+	<<if $rng gte 51>>
+		你寻找着入侵的杂草，在它们扼杀庄稼之前把它们连根挖起。
+	<<else>>
+		你为地里的庄稼浇着水。
+	<</if>>
+<</if>>
+<<if currentSkillValue('tending') gte 200>>
+	你同时检查了农作物是否有虫害或病害。
+<<else>>
+	你同时检查了农作物是否有虫害。
+<</if>>
+<<tendingdifficulty 1 1000 true>>
+<<if $tendingSuccess>>
+	这是一项艰苦的工作，<span class="green">但你做得很好。</span><<set $farm_work.tending += 1>>
+<<else>>
+	这是一项艰苦的工作，但你还是取得了成果。
+<</if>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "alexFarmTendingAlone">>
+<</if>>
+
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<<farm_tending_events>>
+<<else>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

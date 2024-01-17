@@ -1,0 +1,29 @@
+:: Wolf Cave Hunt Do nothing []
+<<effects>>
+
+不想参与战斗，你去寻找更容易的食物。几米外有一棵苹果树，你可以吃到。你在觅食时发现一只兔子被猎人的陷阱夹住了。
+<br><br>
+<<if $wolfpackharmony + $wolfpackferocity gte $rng>>
+	这只鹿做了最后的逃跑尝试，越过你朝一根原木跳去，<span class="green">，但在它能成功之前被一只<<wolf_cave_singular>>抓住了</span>。
+	<br><br>
+	狼群兴奋地嚎叫起来。钓到的鱼很多，今晚肯定都吃饱了。
+	<br><br>
+	饥肠辘辘，你的目光四处游荡。最后落在一棵低矮的苹果树上，果实成熟可口。
+	<<endevent>>
+
+	<<set $huntstate to "success">>
+	<<wolfhuntevents>>
+<<else>>
+	鹿做了最后一次逃跑的尝试，跳过你跳到木头上。一只<<wolf_cave_singular>>跟在后面，但是就在鹿跑到另一边的时候，倒下的树断成了两半。
+	<br><br>
+	<<if $wolfpackleader gte 1>>
+		狼群开始攻击你，咆哮着撕咬你的皮肤。一些年长的<<wolf_cave_plural>>因为你站在那里什么都不做而惩罚你。
+		"<<print ["黑狼真的值得吗？", "它们很弱。"][random(0,1)]>>"
+		<br><br>
+	<</if>>
+	它们很快就离开了你，你仍然渴望食物。你吃得很好，抓着小兔子给黑狼吃。
+	<<endevent>>
+
+	<<set $huntstate to "failure">>
+	<<wolfhuntevents>>
+<</if>>

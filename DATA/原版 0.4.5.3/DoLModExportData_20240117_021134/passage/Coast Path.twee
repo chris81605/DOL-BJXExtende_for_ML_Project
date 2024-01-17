@@ -1,0 +1,35 @@
+:: Coast Path []
+<<location "coastpath">><<effects>>
+
+你位于镇子东边的沿海小径上，在一处面向大海的悬崖上方。
+
+<<cliff_top_desc>>
+
+没了风的侵扰，白玫瑰花丛在这里茁壮成长。
+<br><br>
+
+<<if !$plants_known.includes("white_rose")>>
+	<<icon "tending/white_rose.png">> <<link [[搜索种子 (0:30)|Coast Path White Rose]]>><<pass 30>><<pain 6>><<tending 6>><<set $plants_known.push("white_rose")>><</link>><<gpain>><<gtending>>
+	<br>
+<</if>>
+<<if $historytrait gte 3>>
+	<<walkicon>><<link [[沿海岸向东走 (2:00)|Coast Path East]]>><<pass 120>><</link>>
+	<br>
+	<<if currentSkillValue('athletics') gte 300 and ($weather is "clear" or $weather is "overcast") and !$worn.feet.type.includes("heels")>>
+		<<runicon>><<link [[沿海岸向东慢跑 (1:30)|Coast Path East]]>><<pass 90>><<tiredness 2>><<set $speed to "jog">><</link>><<athleticsdifficulty 250 700>><<gtiredness>>
+		<br>
+		<<if currentSkillValue('athletics') gte 700>>
+			<<runicon>><<link [[沿海岸向东奔跑 (1:00)|Coast Path East]]>><<pass 60>><<tiredness 5>><<set $speed to "run">><</link>><<athleticsdifficulty 650 1000>><<gtiredness>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $harpy gte 6 and $birdFly gte 1>>
+		<br>
+		<<flight_time_check 20>>
+		<<glideicon>><<print '<<link [[往东翱翔 ('+_hoursPassed+':'+ (_minutesPassed lt 10 ? "0" : "") + _minutesPassed + ')|Coast Path East]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<pass _flightTime>><<set $speed to "fly">><</link>>'>><<flight_text>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<entertownicon>><<link [[进入小镇 (0:30)|Mer Street]]>><<pass 30>><</link>>
+<br>

@@ -1,0 +1,75 @@
+:: Rent Robin Fight Finish []
+<<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">><<set $baileydefeatedlewd += 1>><<set $baileydefeatedchain += 1>><<earnFeat "Bailey's Trouble Maker">>
+
+	<<person1>>旁观的一个孤儿咯咯地笑。贝利转身寻找笑声来源，但另一个家伙在<<him>>身后放声大笑。
+	很快，整个房间都充满了笑声。<<He>>回头看着你。"你会为此付出代价的，"<<he>>在说完之后冲出了房间。
+	<br><br>
+
+	<<if $baileydefeatedchain gte 2>>
+		<<person2>><<person>>跟着<<person1>><<him>>溜走了。
+		<br><br>
+	<</if>>
+	你走到罗宾身边，解开了<<nnpc_his "Robin">>身上的捆绑，<<nnpc_He "Robin">>给了你一个热烈的拥抱。"谢谢你，我的英雄！"<<nnpc_he "Robin">>在你的<<if _robin.lust gte 60>>嘴唇上<<else>>脸颊上<</if>>啄了一下后，起身离开了这里。
+	<br><br>
+
+	孤儿们为你击败暴君而欢呼。但<<He>>一定会回来的，就像坏人总是会再次出现，你在内心暗暗想道。
+	<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Bedroom]]>><</link>>
+<<elseif $enemyhealth lte 0>>
+	<<set $baileydefeated += 1>><<set $baileydefeatedchain += 1>>
+
+	<<person1>><<He>>后退了几步，护着瘀伤，对你的攻击性感到惊讶。
+	<<He>>注意到大厅周围的人群。"你会为此付出代价的。记好了。"在撂下狠话后，<<He>>冲了出去。
+	<br><br>
+
+	<<if $baileydefeatedchain gte 2>>
+		<<person2>><<person>>跟着<<person1>><<him>>溜走了。
+		<br><br>
+	<</if>>
+	你走到罗宾身边，解开了<<nnpc_his "Robin">>身上的绳索，<<nnpc_He "Robin">>给了你一个热烈的拥抱。"谢谢你，我的英雄！"
+	<br><br>
+
+	<<if _robin.lust gte 60>>
+		罗宾在你的嘴唇上轻轻一啄，然后才转身离开。
+	<<else>>
+		罗宾在你的脸颊上轻轻一啄，然后才转身离开。
+	<</if>>
+	<br><br>
+
+	贝利的离开让旁观的孤儿们如释重负，他们为你击败暴君而欢呼。但<<He>>一定会回来的，就像坏蛋总是会再次现身，你在内心暗暗想道。
+	<<greb>><<ghope>><<reb 1>><<hope 1>><<ltrauma>><<lstress>><<trauma -6>><<stress -12>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Bedroom]]>><</link>>
+
+<<else>>
+	<<set $baileydefeatedchain to 0>>
+	<<set $baileyRefusedToPay to 0>>
+	<<unset $bailey_encroach>>
+
+
+	你倒在地上，因为受伤而动弹不得。
+	罗宾挣扎着，直到贝利重重地击中了<<nnpc_him "Robin">>的头部。这让<<nnpc_He "Robin">>直接倒在了你身边。
+	<<lreb>><<reb -1>>
+	<br><br>
+
+	<<set $upperoff to 0>>
+	<<set $loweroff to 0>>
+	<<set $underloweroff to 0>>
+	<<set $underupperoff to 0>>
+	<<endcombat>>
+
+	<<link [[继续|Rent Intro]]>><<endevent>><<set $phase to 1>><</link>>
+<</if>>

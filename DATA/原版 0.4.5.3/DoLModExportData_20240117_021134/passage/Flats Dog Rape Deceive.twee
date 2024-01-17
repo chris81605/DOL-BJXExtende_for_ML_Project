@@ -1,0 +1,39 @@
+:: Flats Dog Rape Deceive []
+<<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	你死死地盯着那个<<person>>的眼睛，然后张开嘴。<<He>>急切地放下手机，脱掉了<<his>>的<<print setup.npcClothesSets.find(item => item.name === $NPCList[0].clothes.set).clothes.lower.desc>>。你猛地一推，<<him>>失去平衡倒在了地上，你快速跑向门口。
+	<br><br>
+	"下贱的流浪狗！"<<he>>大叫着，被<<his>>脱了一半的衣服绊倒了。你跑下楼梯，绕过一个拐角。你听到<<his>>的脚步声在你身后响起，<span class="green">但<<he>>错过了你的藏身之处。</span>
+	<br><br>
+	你删掉了手机上的黄色视频，然后开始思考怎么处理它。它也许值点钱。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [["把它放在" + $NPCList[0].pronouns.he + "能找到的地方"|Flats]]>><<pass 60>><<famegood 1>><<endevent>><</link>>
+	<br>
+	<<link [[留在身上|Flats]]>><<pass 60>><<set $blackmoney += 50>><<endevent>><</link>>
+	<br>
+<<else>>
+	你张开嘴，假装同意了<<person>>的威胁。<<he>>着急地放下手机然后脱掉了<<his>>的<<print setup.npcClothesSets.find(item => item.name === $NPCList[0].clothes.set).clothes.lower.desc>>。你想抢走手机，<span class="red">但是被<<he>>抓住了手腕。</span>
+	<br><br>
+	"别着急，荡妇。"<<He>>抓住你的后脑勺，把你拉向<<his>>的腹股沟。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Flats Dog Rape Oral]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

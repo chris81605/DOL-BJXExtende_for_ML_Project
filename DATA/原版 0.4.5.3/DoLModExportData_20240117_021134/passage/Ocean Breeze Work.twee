@@ -1,0 +1,384 @@
+:: Ocean Breeze Work []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+<<set $NPCName[$NPCNameList.indexOf("Sam")].love = Math.clamp($NPCName[$NPCNameList.indexOf("Sam")].love, -50, 50)>>
+<<rng 111>>
+<<if $rng gte 101>>
+	萨姆让你把盘子里的食物端到一大桌客人面前。
+	<br><br>
+	<<link [[分几次端|Ocean Breeze Plates]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[一次全端出去|Ocean Breeze Plates]]>><<set $phase to 1>><</link>><<dancedifficulty 200 800>>
+<<elseif $rng gte 81 and $weather isnot "rain" and $weather isnot "snow">>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			在你为咖啡馆外面的桌位服务时，一阵强风从海上吹来，吹起了你的裙子并向所有看着的人暴露出你的<<undies>>。
+			<<undiestrauma>>
+			<br><br>
+
+			<<if !$worn.under_lower.type.includes("naked")>>
+				<<link [[保持这个姿态|Ocean Breeze Own]]>><<set $phase to 0>><</link>><<exhibitionist1>>
+				<br>
+			<<elseif $exhibitionism gte 35>>
+				<<link [[保持这个姿态|Ocean Breeze Own]]>><<set $phase to 1>><</link>><<exhibitionist3>>
+				<br>
+			<</if>>
+			<<link [[遮挡自己|Ocean Breeze Cover]]>><</link>>
+			<<if !$worn.under_lower.type.includes("naked")>>
+				<<fameexhibitionism 5>>
+			<<else>>
+				<<fameexhibitionism 10>>
+			<</if>>
+		<<else>>
+			在你为咖啡馆外的桌位服务时，一阵和风从海上吹来，轻柔地抚摸着你的皮肤。
+			<<lstress>><<stress -4>>
+			<br><br>
+
+			剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+			<<pass 1 hour>>
+			<br><br>
+
+			<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+		<</if>>
+	<<else>>
+		你轮班的大部分时间都用来服务外面的桌子和俯瞰大海。
+		<br><br>
+
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 81>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if playerBellyVisible() and $lactating is 1 and $breastfeedingdisable is "f">>
+		<<generate1>><<generate2>><<person1>>
+		一个声音在呼唤你。"喂，<<if $player.gender_appearance is "m">>服务员<<else>>服务员<</if>>！"你听到咖啡馆角落里传来的声音。你走近桌子，找到了那个叫你的<<person>>，<<him>>正怒视着你。还有一个<<person2>><<person>>坐在<<him>>旁边。
+		<br><br>
+
+		"我要了一个豪华奶油面包，结果得到了这个！"<<person1>><<person>>说："你管这叫豪华？上面几乎没有奶油！我花了£50买这个！你们是他妈的都傻了还是尿都倒流进脑子里了？"<<He>>大吼，迫使你在试图转移视线时听下去。
+		<br><br>
+
+		<<person2>><<person>>在朋友的言语攻击中保持沉默，但眼睛一直紧盯着你的胸部。"等等，你怀孕了是不是？"<<he>>问道，然后打断了朋友的长篇大论。"你的乳房一定涨得很厉害吧，你为什么不在面包上加上你自己的特色呢？这样我的朋友说不定就不会再抱怨了？"<<person1>><<person>>冷静下来，似乎对这个提议很满意。
+		<br><br>
+
+		<<if $milk_amount gte 1>>
+			<<link [[同意|Ocean Breeze Pregnant Milk Accept]]>><<npcincr Sam love 2>><</link>><<glove>><<promiscuous1>>
+			<br>
+		<<else>>
+			<span class = "pink">你剩下的奶水不够了。</span>
+			<br>
+		<</if>>
+		<<link [[拒绝|Ocean Breeze Pregnant Milk Refuse]]>><</link>>
+		<br>
+
+	<<elseif $danger gte (9900 - $allure)>>
+		<<generate1>><<person1>>你服务了一位点了个小面包的<<person>>。<<He>>舔舐着奶油。"那真棒，"<<he>>喘息道。
+		<<He>>从桌边拉出一把椅子并把盘子放到它前方，说道："请坐下尝尝吧，我请客。"此刻的咖啡馆并不是很忙。
+		<br><br>
+
+		<<link [[坐|Ocean Breeze Sit]]>><</link>>
+		<br>
+		<<link [[拒绝|Ocean Breeze Sit Refuse]]>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<person1>>你服务了一位点了个小面包的<<person>>。<<He>>在紧盯着你的同时吮舔起了面包里的奶油。
+		<br><br>
+
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 71>>
+	<<generate1>><<person1>>一位<<person>>闭眼向后仰头，独坐桌旁。
+	<<if $awareness gte 400>>
+		<<generates2>>从那神情来看，<<hes>>很可能正在享受口交，而<<hes>>也几乎没有试图去隐藏它。
+		在缜密的观察后，你发现一个<<person2>><<person>>正藏在桌子下面
+		<<print either("轻轻地","热切地","精力充沛地","性感地","笨拙地","有力地","尽职地","娴熟地")>>
+		<<person1>>
+		<<if $NPCList[0].penis isnot "none">>
+			吮吸着<<personsimple>>。
+		<<else>>
+			舔着<<personsimple>>。
+		<</if>>
+		<<garousal>><<arousal 200>>
+	<<elseif $awareness gte 200>>
+		<<if $weather is "clear">>
+			<<He>>看起来像是要从日光浴中获得性快感了。
+		<<else>>
+			如果不是那有节奏的蠕动，你几乎要觉得<<he>>都睡着了。
+		<</if>>
+		有一次，<<he>>以一种近乎高潮了的姿态颤抖。
+	<<else>>
+		<<if $weather is "clear">>
+			真是美好的一天，<<hes>>
+		<<else>>
+			<<Hes>>
+		<</if>>
+		可能打瞌睡了。
+	<</if>>
+
+	<br><br>
+	剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+	<<pass 1 hour>>
+	<br><br>
+
+	<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+
+<<elseif $rng gte 61>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<generate1>><<generate2>>你服务了一对年轻人，一个<<fullGroup>>。
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				当你转身离开时，<<person1>><<person>>掀起你$worn.lower.cn_name_cap的下摆，向咖啡馆里的客人展示你裸露的<<bottom>>。
+				"没穿内衣？"<<he>>难以置信地说道。"你就是个荡妇吧？"
+				<<fameexhibitionism 10>><<stress 6>><<arousal 600>><<gstress>><<garousal>>
+				<br><br>
+
+				<<link [[生气|Ocean Breeze Angry]]>><</link>>
+				<br>
+				<<link [[无视|Ocean Breeze Ignore]]>><<trauma 6>><<stress 6>><<set $phase to 2>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<<else>>
+				当你转身离开时，<<person1>><<person>>掀起你$worn.lower.cn_name_cap的下摆，向咖啡馆展示你的$worn.under_lower.cn_name_cap。
+				<<He>>和<<person2>><<person>>都笑了，吸引了更多注意力到你身上。
+				<<fameexhibitionism 1>><<stress 3>><<arousal 300>><<gstress>><<garousal>>
+				<br><br>
+
+				<<link [[生气|Ocean Breeze Angry]]>><</link>>
+				<br>
+				<<link [[无视|Ocean Breeze Ignore]]>><<trauma 3>><<stress 3>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $worn.under_lower.type.includes("naked")>>
+				当你转身离开时，<<person1>><<person>>从后方扯下你的$worn.lower.cn_name_cap，向咖啡馆里的客人展示你裸露的<<bottom>>。
+				"没穿内衣！"<<he>>不相信地说："我打赌你现在后悔了。"
+				<<fameexhibitionism 5>><<stress 3>><<arousal 300>><<gstress>><<garousal>>
+				<br><br>
+
+				<<link [[生气|Ocean Breeze Angry]]>><</link>>
+				<br>
+				<<link [[无视|Ocean Breeze Ignore]]>><<trauma 3>><<stress 3>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<<else>>
+				当你转身离开时，<<person1>><<person>>从后方扯下你的$worn.lower.cn_name_cap，向咖啡馆展示你的$worn.under_lower.cn_name_cap。
+				<<fameexhibitionism 1>><<stress 2>><<arousal 200>><<gstress>><<garousal>>
+				<br><br>
+
+				<<link [[生气|Ocean Breeze Angry]]>><</link>>
+				<br>
+				<<link [[无视|Ocean Breeze Ignore]]>><<trauma 2>><<stress 2>><<set $phase to 0>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<generate1>><<generate2>>你服务了一对年轻人，一个<<fullGroup>>。
+		你认为你发现了<<person1>><<person>>正在打量着你，但那家伙并没有说些什么。
+		<br><br>
+
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $rng gte 51>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	几个游客坐在你负责的其中一张桌子旁。
+	<<if $danger gte (9900 - $allure)>>
+		<<generate1>><<generate2>>
+		<<person1>>你听到那个<<person>>用沙哑的声音告知<<person2>><<person>>关于这个小镇的情况。
+		<br>
+		<<person1>>"我发誓，"<<he>>说道。"这镇子是我们这样的人的梦想。你可以做你想做的任何事。没人会阻止你的。"
+		<br>
+		"是不是连警察都不会——"
+		<br>
+		"警察？他们比谁都坏！给他们点钱，搞不好就能让他们帮你扣下一个<<girl>>。"
+		<br>
+		"哇哦，谁都行？不论是——"
+		<br>
+		"所有人。嘿，"<<he>>看向你。"你。<<if playerBellyVisible()>>你怀孕了。<<elseif $beauty gte($beautymax / 7) * 2>>你很可爱。<</if>>你已经被人强奸过了，对吧？"
+		<br><br>
+
+		<<if ($rapestat + $beastrapestat + $tentaclerapestat) gt 0>>
+			<<link [[点头|Ocean Breeze Tourist]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[否认(撒谎)|Ocean Breeze Tourist]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[拒绝回答|Ocean Breeze Tourist]]>><<set $phase to 3>><</link>>
+			<br>
+		<<else>>
+			<<link [[点头(撒谎)|Ocean Breeze Tourist]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[否认|Ocean Breeze Tourist]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[拒绝回答|Ocean Breeze Tourist]]>><<set $phase to 3>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		那两人详细谈论了
+		<<print either(
+			"海滩","冲浪","博物馆","男孩","女孩","食物","新闻",
+			"生命的最终意义","下周末的计划","政治局势"
+		)>>。
+		<br><br>
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 41>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+
+	<<generate1>><<person1>>一个<<person>>在进入咖啡馆后，独自找了个角落坐了下来。
+	<<if $danger gte (9900 - $allure)>>
+		<<He>>一直在偷瞄你，但当你去为<<his>>点菜时，<<he>>只要求一杯白水。
+		当你转身离开时，<<he>>抓住了你的手腕。
+		"你不会正好也在菜单上吧？"<<He>>笑着说道。
+		"和我找个安静的地方一起玩玩怎么样？我会让你不虚此行。"<<He>>在说着的同时轻敲了一下<<his>>的<<wallet>>。
+		<<His>>肯定不是请你过去喝咖啡的。
+		<br><br>
+		<<if $promiscuity gte 15>>
+			<<link [[接受提议|Ocean Breeze Whore]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+			<br>
+		<<elseif $uncomfortable.prostituting is false>>
+			<<His>>的提议让你感到反感，但你真的很需要钱。
+			<br><br>
+			<<link [[勉强接受提议|Ocean Breeze Whore]]>><<set $desperateaction to 1>><<set $sexstart to 1>><</link>><<promiscuous2>>
+			<br>
+		<<else>>
+			你还没有淫乱到可以接受这样的提议。
+			<br><br>
+		<</if>>
+		<<link [[拒绝|Ocean Breeze Whore Refuse]]>><</link>>
+	<<else>>
+		<<He>>一直在偷瞄你，但当你去为<<his>>点菜时，<<he>>却一直避免与你目光相接。
+		<br><br>
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 31>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<generateRole 0 0 "服务员/女服务员">><<person1>>
+		你走出厨房时，一个<<person>>与你相撞，手里的热汤全都洒在了你的
+		<<if $worn.upper.type.includes("naked")>>胸部<<else>>$worn.upper.cn_name_cap上。<</if>>
+		"我很抱歉，"<<he>>说着的同时伸手，伸手去拿一条毛巾，而顾客们则转过身来观看。
+		<br><br>
+
+		<<link [[无视|Ocean Breeze Soup Ignore]]>><<npcincr Sam love 2>><<stress 6>><<pain 20>><</link>><<glove>><<gpain>><<gstress>>
+		<br>
+		<<link [[面对那些顾客|Ocean Breeze Soup Confront]]>><<npcincr Sam love -1>><<stress -6>><<trauma -6>><</link>><<llove>><<ltrauma>><<lstress>>
+		<br>
+		<<if !$worn.upper.type.includes("naked")>>
+			<<if $player.gender_appearance is "m" and $player.breastsize lte 2>>
+				<<link [[脱掉上身衣物|Ocean Breeze Remove]]>><<npcincr Sam love 2>><</link>><<glove>>
+				<br>
+			<<elseif $exhibitionism gte 55>>
+				<<link [[脱掉上身衣物|Ocean Breeze Remove Lewd]]>><<npcincr Sam love 2>><</link>><<glove>><<exhibitionist4>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<generateRole 0 0 "服务员/女服务员">><<person1>>
+		当你离开厨房时，一个<<person>>差点就撞上你了。
+		<br><br>
+
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 21>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<generate1>><<generate2>><<generate3>><<generate4>>
+		一大群人进入咖啡馆，并占据了几张桌子。
+		你试图为这群人点菜，但坐在首位的那个<<person1>><<person>>打断了你。
+		"今天是我的生日，你知道的，来点特别的怎么样？"<<He>>毫不避讳地窥视着你的身体，"想爬到桌子上给我们跳个舞吗？"
+		<br><br>
+
+		<<link [[为其跳舞|Ocean Breeze Dance]]>>
+			<<danceinit>><<set $dancing to 1>><<set $audience to 4>><<set $venuemod to 2>><<set $timer to 12>><<set $dancelocation to "cafe">>
+		<</link>><<exhibitionist1>><<gstress>><<gtiredness>>
+		<br><br>
+
+		<<link [[拒绝|Ocean Breeze Dance Refuse]]>><</link>>
+	<<else>>
+		一大群人进入咖啡馆，并占据了几张桌子，幸运的是那些家伙并没有来找你的麻烦。
+		<br><br>
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $rng gte 11 and $chef_state is undefined>>
+	<<npc Sam>><<person1>>萨姆慌慌忙忙地从厨房冲了出来。
+
+	<<if $NPCName[$NPCNameList.indexOf("Sam")].love gte 10>>
+		<<He>>朝你这方向瞥了一眼，<span class="green">然后便匆匆跑了过来。</span>
+		"我遇到了一点麻烦，"<<he>>说道。
+		"我们的厨师又闹脾气了，我需要有人来帮忙应付一下。别担心，这并不难，而且我会付你双倍工资，所以你愿意帮我吗？"
+		<br><br>
+
+		<<link [[接受|Chef Help]]>><<npcincr Sam love 2>><</link>><<glove>>
+		<br>
+		<<link [[拒绝|Ocean Breeze Chef Refuse]]>><<npcincr Sam love -1>><</link>><<llove>>
+		<br>
+
+	<<else>>
+		<<He>>朝你这方向瞥了一眼，<span class="red">然后又看向了别处。</span>
+		<<He>>走向另一名服务员，并为那家伙提供更高的薪酬，以此来让其在这个轮班上替补一次厨师。
+		<i>如果<<he>>更喜欢你的话，也许萨姆会愿意给你一个机会。</i>
+		<br><br>
+
+		剩下的轮班时间平安无事的度过了，你赚取了<<moneyGain 5>>。
+		<<pass 1 hour>>
+		<br><br>
+
+		<<link [[继续|Ocean Breeze]]>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	<<rng>>
+	<!-- Modified for Monster People -->
+	<<beastNEWinit 1 dog>>
+	<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>>
+		萨姆让你把一些垃圾丢到咖啡馆旁边的垃圾箱里。然而，在垃圾箱旁边有一只流浪<<beasttype>>，它在你走近时对你咆哮了起来。
+		<br><br>
+
+		<<link [[坚持完成任务|Ocean Breeze Dumpster Dog]]>><<stress 6>><</link>><<gstress>>
+		<br>
+		<<link [[忘掉这个任务，回去干活吧|Ocean Breeze Dumpster Refuse]]>><</link>>
+	<<else>>
+		<<endevent>>
+		<<generate1>><<generate2>>
+		萨姆让你把一些垃圾丢到咖啡馆旁边的垃圾箱里。
+		然而，在垃圾箱旁正待着一群<<fullGroup>>，那些家伙看起来就不好惹。
+		<br><br>
+
+		<<link [[坚持完成任务|Ocean Breeze Dumpster]]>><<stress 6>><</link>><<gstress>>
+		<br>
+		<<link [[忘掉这个任务，回去干活吧|Ocean Breeze Dumpster Refuse]]>><</link>>
+	<</if>>
+
+<</if>>

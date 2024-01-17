@@ -1,0 +1,188 @@
+:: Adult Shop Event Widgets [widget]
+<<widget "sydneyEvent1AnalBeads">>
+	<<npc "Sydney">><<person1>>
+	<<run statusCheck("Sydney")>>
+
+	<<if _sydneyStatus.includes("corrupt")>>
+		有什么东西在抽打你的<<bottom>>。
+		<<if $awarelevel gte 1>>
+			你转过身，发现悉尼手中把玩着一串肛珠。"抓到你了~"<<npcincr Sydney lust 1>><<gslust>>
+			<br><br>
+
+			<<if !$sydneyAnalRosary and random(0,2) is 2>>
+				<<He>>看着手里的肛珠，笑容非常奇怪。"也许我可以戴着这玩意去神殿，就当是念珠了。"<<He>>把肛珠环绕在脖子上，向你展示，"那些愚蠢的<<monks_and_nuns>>们肯定看不出来差别——要不要赌赌？"
+				<br><br>
+
+				你不知道<<he>>是不是认真的。
+				<br><br>
+
+				<<link [[怂恿|Adult Shop Sydney Rosary]]>><<set $phase to 1>><<npcincr Sydney purity -3>><</link>><<llspurity>>
+				<br>
+				<<link [[劝阻|Adult Shop Sydney Rosary]]>><<set $phase to 0>><<npcincr Sydney purity 1>><</link>><<gspurity>>
+				<br>
+			<<else>>
+				<<link [[继续|Adult Shop]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你转过身，发现悉尼正微笑着把玩着一串肛珠。
+			<<if $speech_attitude is "meek">>
+				你好奇地歪了歪头。"我从没见过这样的东西。"
+			<<elseif $speech_attitude is "bratty">>
+				你皱起眉头，"那特么是啥玩意儿？"
+			<<else>>
+				你困惑地看着<<he>>，"那是什么？"
+			<</if>>
+			<br><br>
+
+			悉尼的笑容消失了，"你在逗我，
+			<<if !$sydneySeen.includes("corruptBeads")>>
+				你真不知道这是什么？"
+			<<else>>
+				这就忘了？"
+			<</if>>
+			<<if $analdisable is "t">>
+				<<He>>叹息着揉了揉你的头发，"你也太纯了，你真的应该开阔你的视野。"<<He>>捏了捏你的<<bottom>>，然后笑了起来。"也许我可以帮忙。"<<arousal 100 "bottom">><<awareness 1>><<npcincr Sydney lust 1>><<garousal>><<gawareness>><<gslust>>
+				<br><br>
+
+				<<link [[继续|Adult Shop]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<He>>翻了个白眼。
+				<<if !$sydneySeen.includes("corruptBeads")>>
+					<<set $sydneySeen.pushUnique("corruptBeads")>>
+					"我还以为我已经算纯洁的了。"
+				<<else>>
+					"那这次看好了啊。"
+				<</if>>
+				<br><br>
+
+				<<if $sydneyromance is 1>>
+					<<He>>抓住你的肩膀，将你转过身去，把你推到了一堆纸箱上。
+					<br><br>
+
+					"<<sydneyMum>>说，实践出真知。"<<He>>把手放在你的腰腹上。"现在，弯下腰。"
+					<br><br>
+
+					<<if $promiscuity gte 15>>
+						<<link [[弯腰|Adult Shop Sydney Beads Sex]]>><<set $sexstart to 1>><<npcincr Sydney purity -1>><</link>><<promiscuous2>><<lspurity>>
+					<<else>>
+						<span class="blue">你不够淫乱，无法做出如此色情的行为。</span>
+					<</if>>
+					<br>
+					<<link [[拒绝|Adult Shop Sydney Beads Refuse]]>><<npcincr Sydney love -1>><<npcincr Sydney purity 1>><</link>><<llove>><<gspurity>>
+					<br>
+				<<else>>
+					<<He>>让你坐在一堆纸箱旁。"好好听着，你还有很多要学。"
+					<br><br>
+
+					<<He>>详细地向你解释了这些珠子是什么，怎么用，以及塞哪里。<<His>>的解说既详尽又专业，你听着感觉就像上课一样。
+					<br><br>
+
+					"要是有问题就问，"<<he>>压低了声音，"我很愿意给你实际演示一下。"<<arousal 100>><<awareness 1>><<npcincr Sydney lust 1>><<garousal>><<gawareness>><<gslust>>
+					<br><br>
+
+					<<link [[继续|Adult Shop]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		你的身后传来悉尼轻柔的笑声。你转过头，发现<<him>>
+		<<if !$sydneySeen.includes("pureBeads")>>
+			正窥探着一个纸箱。
+			<br><br>
+
+			"太好笑了。<<sydneyMum>>肯定是把我的东西和<<nnpc_hers "Sirris">>弄混了。我记得上次我们这儿还不卖念珠的。"
+			<br><br>
+
+			<<if $awarelevel gte 1>>
+				<<he>>把所谓的"念珠"从盒子里拿了出来，你的脸唰的一下变红了。<span class="lewd">那是一串肛珠。</span>悉尼一脸单纯地看着手中的珠子，对你露出了天真的微笑。
+				<br><br>
+
+				<<link [[告诉悉尼念珠的真相|Adult Shop Sydney Pure Beads]]>><<set $phase to 2>><<npcincr Sydney lust 1>><<npcincr Sydney purity -2>><</link>><<glust>><<lspurity>>
+				<br>
+				<<link [[默不作声|Adult Shop Sydney Pure Beads]]>><<set $phase to 0>><</link>>
+				<br>
+			<<else>>
+				<<He>>反复盘弄着手中的这个"不明物体"。这串"念珠"的珠子比你见过的所有念珠都要大上一倍，上面也没有吊坠。
+				<br><br>
+
+				<<link [[问西里斯这是什么 (0:05)|Adult Shop Sydney Pure Beads]]>><<set $phase to 1>><<pass 5>><<npcincr Sydney purity -2>><</link>>
+				<br>
+				<<link [[不管了，放回去|Adult Shop Sydney Pure Beads]]>><<set $phase to 0>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			正盯着一串肛珠。
+			<br><br>
+
+			"还念珠，"<<he>>自顾自地笑了笑，"我真有那么天真吗？"<<npcincr Sydney purity -1>><<lspurity>>
+			<br><br>
+			你赚到了<<adultShopWage>><<moneyGain _wage>>。
+			<br><br>
+			<<link [[继续|Adult Shop]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "sydneyEvent2CuffedSydney">>
+	<<npc Sydney>><<person1>>
+	<<run statusCheck("Sydney")>>
+
+	你听到后室传出了某人痛苦的叫喊声。
+	<<if $sydneyromance is 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			"<<phim>>到底在干什么……？"
+		<<elseif _sydneyStatus.includes("pure")>>
+			"我就知道这样不行，要是<<sydneyMum>>发现我怎么办？"
+		<<else>>
+			"我手酸了……"
+		<</if>>
+	<<else>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			"他妈的！你怎么……"
+		<<elseif _sydneyStatus.includes("pure")>>
+			"哦天哪……快点儿过来吧……"
+		<<else>>
+			"糟了，我该不该叫人帮忙呢……？"
+		<</if>>
+	<</if>>
+	<br><br>
+
+	声音很微弱，但你听出来是悉尼。
+	<br><br>
+
+	<<link [[调查 (0:02)|Adult Shop Sydney Cuffs]]>><<pass 2>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[无视|Adult Shop Sydney Cuffs]]>><<set $phase to 0>><</link>>
+	<br>
+<</widget>>
+
+<<widget "sydneyEvent3HumblePeddlerofHonestWares">>
+	<<npc Sydney>><<generateAdultShopCustomer 2>><<person2>>
+
+	你听见悉尼在和一名<<person>>就一些假阳具讨价还价。
+	<br><br>
+
+	<<link [[仔细听|Adult Shop Sydney Bartering]]>><</link>>
+	<br>
+	<<link [[无视|Adult Shop Sydney Bartering Ignore]]>><<endevent>><</link>>
+	<br>
+<</widget>>
+
+<<widget "sydneyEvent4Backrooms">>
+	<<npc Sydney>><<set $adultshopclerkworking to 1>><<set $daily.sydney.adultshop to true>><<effects>><<run statusCheck("Sydney")>>
+	悉尼走了过来。
+	<br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		"先别管柜台了呗，"<<he>>调戏般地抓住你的手，"我这需要帮忙补货。"
+	<<else>>
+		"我需要你帮忙补货。我要拿架子顶上的东西，但太高了我够不着。"
+	<</if>>
+	<br><br>
+	<<link [[跟随悉尼|Sydney Backroom Intro]]>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<link [[拒绝|Sydney Backroom Refuse Work]]>><<npcincr Sydney love -5>><</link>><<lllove>>
+<</widget>>

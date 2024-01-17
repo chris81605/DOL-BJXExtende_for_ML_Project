@@ -1,0 +1,96 @@
+:: Pillory Pen []
+<<effects>>
+
+<<person>>接近你，
+<<if $phase is 1>>
+	<<his>>的记号笔准备好了。
+	<<set _pen to "marker">>
+<<else>>
+	<<his>>的笔已经准备好了。
+	<<set _pen to "pen">>
+<</if>>
+<br><br>
+<<rng 10>>
+<<set _hasWritten = true>>
+<<if $rng gte 10 and $worn.lower.anus_exposed gte 1 and $worn.over_lower.anus_exposed gte 1 and $worn.under_lower.anus_exposed gte 1 and !$skin.left_bottom.pen>>
+	<<He>>绕到你的身后，在你的<<bottom>>上写了些什么。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "left_bottom" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "left_bottom" _pen>>
+	<</if>>
+<<elseif $rng gte 9 and $worn.lower.anus_exposed gte 1 and $worn.over_lower.anus_exposed gte 1 and $worn.under_lower.anus_exposed gte 1 and !$skin.right_bottom.pen>>
+	<<He>>绕到你的身后，在你的<<bottom>>上写了些什么。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "right_bottom" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "right_bottom" _pen>>
+	<</if>>
+<<elseif $rng gte 8 and ($worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) and ($worn.over_lower.type.includes("naked") or setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1) and !$skin.left_thigh.pen>>
+	<<He>>绕到你的身后，在你的左大腿上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "left_thigh" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "left_thigh" _pen>>
+	<</if>>
+<<elseif $rng gte 7 and ($worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) and ($worn.over_lower.type.includes("naked") or setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1) and !$skin.right_thigh.pen>>
+	<<He>>绕到你的身后，在你的右大腿上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "right_thigh" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "right_thigh" _pen>>
+	<</if>>
+<<elseif $rng gte 6 and $worn.upper.open is 1 and $worn.under_upper.open is 1 and $worn.over_upper.open is 1 and !$skin.left_shoulder.pen>>
+	<<He>>停在你面前，在你的左肩上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "left_shoulder" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "left_shoulder" _pen>>
+	<</if>>
+<<elseif $rng gte 5 and $worn.upper.open is 1 and $worn.under_upper.open is 1 and $worn.over_upper.open is 1 and !$skin.right_shoulder.pen>>
+	<<He>>停在你面前，在你的右肩上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "right_shoulder" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "right_shoulder" _pen>>
+	<</if>>
+<<elseif $rng gte 4 and $worn.upper.open is 1 and $worn.under_upper.open is 1 and $worn.over_upper.open is 1 and !$skin.breasts.pen>>
+	<<He>>停在你面前，在你的<<breasts>>上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "breasts" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "breasts" _pen>>
+	<</if>>
+<<elseif $rng gte 3 and !$worn.face.type.includes("mask") and !$skin.left_cheek.pen>>
+	<<He>>停在你面前，在你的左脸颊上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "left_cheek" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "left_cheek" _pen>>
+	<</if>>
+<<elseif $rng gte 2 and !$worn.face.type.includes("mask") and !$skin.right_cheek.pen>>
+	<<He>>停在你面前，在你的右脸颊上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "right_cheek" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "right_cheek" _pen>>
+	<</if>>
+<<elseif !$skin.forehead.pen>>
+		<<He>>停在你面前，在你的额头上写字。
+	<<if random(1, 2) is 2>>
+		<<bodywriting_criminal "forehead" _pen>>
+	<<else>>
+		<<bodywriting_npc_normal "forehead" _pen>>
+	<</if>>
+<<else>>
+	<<He>>绕着你转了几圈，<span class="lblue">突然又决定不在你身上写什么了。</span><<He>>取而代之，给了你的<<bottom>>一记猛烈的拍打。<<gtrauma>><<gstress>><<gpain>><<stress 6>><<trauma 6>><<pain 4>>
+	<<set _hasWritten = false>>
+<</if>>
+<br><br>
+
+<<He>>退后一步<<if _hasWritten>>欣赏<<his>>的作品<</if>>，然后回到不断变多的观众面前。
+<br><br>
+
+
+<<link [[继续 (1:00)|Pillory]]>><<endevent>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+<br>

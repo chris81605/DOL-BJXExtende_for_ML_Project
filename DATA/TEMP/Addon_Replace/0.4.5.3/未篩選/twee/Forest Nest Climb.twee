@@ -1,0 +1,124 @@
+:: Forest Nest Climb []
+<<effects>>
+你开始攀爬这棵树，向巢穴的方向攀升。你爬到了一半的高度，然后差点滑下来。
+<<if $athleticsSuccess>>
+	<<unset $athleticsSuccess>>
+	<span class="green">你设法稳住了自己。</span>
+	<br><br>
+
+	你继续攀爬，爬到了巢穴所在的大树枝上，保持平衡。
+	<<if currentSkillValue('tending') gte 150>>
+		通过快速计数，你看到<span class="blue"><<number $forest_nest.eggs>></span>个活鸟蛋<<if $forest_nest.eggs gt 1>><</if>>，但是你需要单独计算它们才能确定准确的数量。
+		<br><br>
+
+		<<link [[爬下去挑选蛋|Forest Nest Search Eggs]]>><</link>><<tendingdifficulty 100 500>>
+		<br>
+		<<link [[爬下去并试图引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+		<br>
+	<<else>>
+		<span class="blue">你需要更高的护理技能来识别哪些蛋可以出售。在那之前，你可以试着引诱狐狸为你做这件事，如果你认为你可以把蛋拿回来的话……</span>
+		<br><br>
+
+		<<link [[爬下去并试图引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+		<br>
+	<</if>>
+	<<link [[爬下去直接离开|Forest]]>><<endevent>><<unset $forest_nest>><</link>>
+	<br>
+<<else>>
+	<<if $rng gte 50>>
+		<<set $forest_nest.eggs -= 4>>
+		你设法稳住了自己，但是在这个过程中引起了很大的骚动。树摇晃了起来，<span class="red">巢穴掉了下来</span>，蛋清从枝条间流淌出来。
+		<br><br>
+
+		你爬下树来，检查巢穴。
+		<<if $forest_nest.eggs lte 0>>
+			<span class="red">你遇到的是一滩浆糊。</span>看来你不够小心。
+			<br><br>
+
+			<<if $forest_nest.fox isnot 3>>
+				现在这个味道一定会吸引狐狸。
+				<br><br>
+			<</if>>
+
+			<<if $forest_nest.fox is 2 and !$NPCList[0].traits.includesAny("cowardly","clumsy")>>
+				<<link [[等待狐狸|Forest Nest Ambushed]]>><</link>>
+				<br>
+			<<else>>
+				<<link [[等待狐狸|Forest Nest Hide]]>><<set $phase to 1>><</link>>
+				<br>
+			<</if>>
+		<<elseif currentSkillValue('tending') gte 150>>
+			通过快速计数，你看到<span class="blue"><<number $forest_nest.eggs>></span>个活鸟蛋<<if $forest_nest.eggs gt 1>><</if>>，但是你需要单独计算它们才能确定准确的数量。
+			<br><br>
+
+			<<link [[捡蛋|Forest Nest Search Eggs]]>><</link>><<tendingdifficulty 100 500>>
+			<br>
+			<<link [[尝试引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+			<br>
+		<<else>>
+			<span class="blue">你需要更高的护理技能来识别哪些蛋可以出售。在那之前，你可以试着引诱狐狸为你做这件事，如果你认为你可以把蛋拿回来的话……</span>
+			<br><br>
+
+			<<link [[尝试引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+			<br>
+		<</if>>
+		<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		一根树枝在你的重压下断裂，你跌倒了<span class="red"></span>。
+		<<if $forest_nest.fox is 2 and $NPCList[0].traits.includes("friendly")>>
+			<<if $monster is 1>>
+				你准备好与地面碰撞，但你的着陆比你想象的要软得多。你睁开眼睛。
+				<br><br>
+
+				你在一个<<beasttype>>怀里。<<bHe>>抓住了你，然后<<bhe>>笑了。
+				<br><br>
+
+				"太危险了，你该这样做。"<<bHe>>轻轻地把你放下，然后毫不费力地爬上了树。<<bHe>>抓住了整个鸟巢，然后跳了下来。
+				<br><br>
+
+				"你看！想和我分享吗？"<<bHis>>的尾巴在摇。
+			<<else>>
+				大地并不仁慈。<<gstress>><<stress 6>><<gpain>><<pain 8>>
+				<br><br>
+
+				当你慢慢睁开眼睛时，你感觉到一股温暖的气息吹在你的脸上。有一个<<beasttype>>坐在你上面。<<bHe>>好奇地歪着<<bhis>>的头。
+				<br><br>
+
+				过了一会儿，<<bhe>>跳上树，嘴里叼着一枚蛋，然后跳下来，把它放在你旁边。
+				<<if $forest_nest.eggs gt 1>>
+					<<bHe>>重复了几次，很快就放了一堆。
+				<</if>>
+				<br><br>
+
+				<<bHe>>用头撞了撞你，坐在蛋堆旁边，期待地看着你。
+			<</if>>
+			<br><br>
+
+			<<if $fox gte 6>>
+				<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress -4>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress 2>><</link>><<gstress>>
+				<br>
+			<</if>>
+			<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+			<br>
+		<<else>>
+			你在下来的路上撞到了几根树枝，地面并不友好。<<gstress>><<stress 6>><<gpain>><<pain 8>>
+			<br><br>
+
+			这么多树枝断了，你无法再尝试攀登了。
+			<br><br>
+
+			<<link [[把巢拆掉|Forest Nest Throw]]>><<set $forest_nest.eggs -= 4>><<set $forest_nest.type to 3>><</link>><<note "蛋减少" "red">>
+			<br>
+			<<if $forest_nest.fox is 3>>
+				<<link [[藏起来等待 (0:05)|Forest Nest Hide]]>><<unset $athleticsSuccess>><<set $forest_nest.eggs -= 2>><<pass 5>><</link>><<note "蛋减少" "red">>
+				<br>
+			<</if>>
+			<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

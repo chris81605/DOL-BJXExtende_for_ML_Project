@@ -1,0 +1,30 @@
+:: Yoga Classes Start 2 []
+<<effects>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<set _pregnancyDailyEvent to dailyPregnancyEvent()>>
+<<if Array.isArray(_pregnancyDailyEvent)>>
+<<set _pregnancyDailyEvent to _pregnancyDailyEvent[random(0, _pregnancyDailyEvent.length - 1)]>>
+<</if>>
+<<tiredness 4>><<set $dancestage += 1>><<stress -6>><<wearandtear "dance">><<physique 2>><<pass 20>>
+/* 北极星模组 */
+<<willpower 4>>
+/* 北极星 */
+<<if !$daily.yogaWillpower>><<set $daily.yogaWillpower to 1>><<willpower 4>><</if>>
+<<if ["tired"].includes(_event) and $dancestage gte 3>>
+	在课程快要结束时，查里告诉大家仰卧在垫子上。你们按照指示躺下，<<nnpc_he "Charlie">>带领你们进行指导性的冥想，"现在闭上你的眼睛，"查里轻声说道。<<nnpc_he "Charlie">>的声音在播放的舒缓音乐下几乎听不清了。"让你的身体变得柔软且放松，现在沉入地板，放空……" 也许之后查里还说了些什么，但你也听不见了，因为你依旧渐渐地进入梦乡了。
+	<br><br>
+	一只手温柔地搭在你的肩膀上，把你带回了现实。你昏昏沉沉地环顾四周，看到学生们一边卷起瑜伽垫离开舞蹈室，一边叽叽喳喳地聊着天。
+	<br><br>
+	"在这个环节睡着是很正常的，"查里笑着说道，"但现在是时候该离开了。"<<nnpc_He "Charlie">>听起来有些抱歉，<<nnpc_he "Charlie">>向你伸出一只手帮助你站起来。"你和你的小家伙应该去休息一下。"<<nnpc_He "Charlie">>在你离开时为你打开门。
+	<<ltiredness>><<glove>><<tiredness -12>><<npcincr Charlie love 1>>
+	<br><br>
+	<<link [[继续|Dance Studio Changing Room]]>><<set $money -= 2200>><<if $exposed gte 2>><<clotheson>><</if>><<endevent>><</link>>
+<<elseif $dancestage gte 3>>
+	这节课的其余时间无事发生。
+	<br><br>
+	<<link [[继续|Dance Studio Changing Room]]>><<set $money -= 2200>><<if $exposed gte 2>><<clotheson>><</if>><<endevent>><</link>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<yogalewd>>
+<<else>>
+	<<yogalessons>>
+<</if>>

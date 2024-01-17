@@ -1,0 +1,32 @@
+:: Stall Sell Push []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"你喜欢<span class="green"><<print setup.plants[$stall_expensive].plural>></span>吗？"你拿起一个问道。
+<<elseif $speech_attitude is "bratty">>
+	"不要小看<span class="green"><<print setup.plants[$stall_expensive].plural>></span>，"你说，并拿起一个展示。
+<<else>>
+	"我能向你介绍<span class="green"><<print setup.plants[$stall_expensive].plural>></span>吗？"你问道，并拿起一个展示。
+<</if>>
+<br><br>
+
+<<if $enemytrust gte -50>>
+	<<if setup.plants[$stall_plant].special.includes("large")>>
+		<<set $stall_amount to 1>>
+	<<elseif $stall_amount gte $plants[$stall_plant].amount>>
+		<<set $stall_amount to clone($plants[$stall_plant].amount)>>
+	<</if>>
+	<<set $stall_cost to Math.round(clone(setup.plants[$stall_plant].plant_cost))>>
+
+	<<He>>看了看你的产品。"看起来确实不错。<span class="green"><<stall_amount>></span>怎么卖？"
+	<br><br>
+	<<stall_trust>>
+	<br><br>
+
+	<<stall_sell_actions>>
+<<else>>
+	<<He>>置若罔闻，没有理你。
+	<br><br>
+
+	<<stall_actions>>
+<</if>>

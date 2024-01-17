@@ -1,0 +1,70 @@
+:: Widgets Kennel [widget]
+<<widget "kennel_intro">>
+	<<if $farm.beasts.dogs gte 5>>
+		他们似乎很满意你在附近。
+	<<elseif $farm.beasts.dogs gte -5>>
+		他们容忍了你的存在，大多数在认出你后就移开了目光。
+	<<elseif $farm.beasts.dogs gte -20>>
+		<span class="pink">你感觉在这里并不受欢迎。</span>
+	<<else>>
+		<<bhe>>试图拱你的腿，你把<<bhe>>推开了。<span class="red">你并不被尊重。</span>
+	<</if>>
+<</widget>>
+
+<<widget "kennel_treats">>
+	<<if _args[0]>>
+		<<set $kennel_treats += _args[0]>>
+		<<if $kennel_treats lt 0>>
+			<<set $kennel_treats to 0>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "kennel_treat_options">>
+	<<if $kennel_treats gte 20>>
+		<<ind>><<link [[喂所有的狗 (20)|Farm Kennel Treats All]]>><<farm_dogs 3>><<kennel_treats -20>><</link>><<ggrespect>>
+		<br>
+	<</if>>
+	<<if $kennel_treats gte 10>>
+		<<ind>><<link [[喂一半的狗 (10)|Farm Kennel Treats Half]]>><<farm_dogs 2>><<kennel_treats -10>><</link>><<grespect>>
+		<br>
+	<</if>>
+	<<if $kennel_treats gte 5>>
+		<<ind>><<link [[喂一些狗 (5)|Farm Kennel Treats Some]]>><<farm_dogs 1>><<kennel_treats -5>><</link>><<grespect>>
+		<br>
+	<</if>>
+	<<if $kennel_treats gte 1>>
+		<<ind>><<link [[喂一只狗|Farm Kennel Treats One]]>><<kennel_treats -1>><</link>>
+		<br>
+	<<else>>
+		狗零食用完了。
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</widget>>
+
+<<widget "kennel_play_options">>
+	<<link [[玩'捡回来' (1:00)|Farm Kennel Play Fetch]]>><<tiredness 6>><<farm_dogs 3>><<pass 60>><</link>><<ggrespect>>
+	<br>
+	<<link [[比赛 (1:00)|Farm Kennel Play Race]]>><<athletics 6>><<tiredness 6>><<pass 60>><</link>><<gathletics>>
+	<br>
+	<<if $farm.beasts.dogs gte -5>>
+		<<if $deviancy gte 35>>
+			<<link [[特殊的'玩耍' (1:00)|Farm Kennel Play Lewd]]>><<pass 60>><</link>><<deviant3>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $farm.beasts.dogs gte 5>>
+		<<if $deviancy gte 75>>
+			<<link [[玩特别的'游戏' (1:00)|Farm Kennel Play Gang]]>><<pass 60>><</link>><<deviant5>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $farm.beasts.dogs gte 20>>
+		<<if $deviancy gte 75>>
+			<<link [[作为一只狗加入狗群 (1:00)|Farm Kennel Play Member]]>><<pass 60>><</link>><<deviant5>><<grespect>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>

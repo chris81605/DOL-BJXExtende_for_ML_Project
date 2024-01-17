@@ -1,0 +1,26 @@
+:: Livestock Field Gang []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $livestock_horse gte 2 and Time.hour gte 12>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+<span id="next"><<link [[继续|Livestock Field Gang Finish]]>><</link>></span><<nexttext>>
+<<else>>
+<span id="next"><<link [[继续|Livestock Field Gang]]>><</link>></span><<nexttext>>
+<</if>>

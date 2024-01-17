@@ -1,0 +1,32 @@
+:: Tailor Monthly Discard []
+"当然，<<if $player.gender_appearance is "m">>先生<<else>>女士<</if>>。我们会让人把箱子送来。当你准备好要卖掉的时候，就把它装起来。请记住，我们不允许退回任何物品。我们也只会接收我们可以修复和转售的物品。"
+<br><br>
+
+<<set _value to 0>>
+<<for _label, _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<if setup.clothes[_label][clothesIndex(_label,_items[_i])].shop.length is 0>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitSecondary isnot undefined>>
+			<<continue>>
+		<</if>>
+		/* 北极星模组 */
+		<<set _value += Math.floor(getClothingCost(_items[_i],_label) * (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max')) / 3)>>
+	    /* 北极星 */
+	<</for>>
+<</for>>
+你认为在拿回押金后，目前能为你赚<<printmoney `_value + 5000`>>。
+
+<br><br>
+<<if $money gte 5000>>
+	<<shopicon "tailor">><<link [[确认购买并支付定金£50|Tailor Monthly Driver]]>>
+		<<set $money -= 5000>>
+		<<set $tailorMonthlyService to "discard">>
+	<</link>>
+<<else>>
+	你付不起定金。
+	<br>
+<</if>>
+<br>
+<<getouticon>><<link [[退出销售|Tailor Shop]]>><<endevent>><</link>>

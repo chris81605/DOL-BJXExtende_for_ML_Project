@@ -1,0 +1,82 @@
+:: Dance Job Ask []
+<<effects>>
+
+<<npc Charlie>><<person1>>
+接待员让你进入舞蹈室，你发现查里站在<<his>>的班级前面。<<He>>告诉他们<<he>>马上就回来。
+<br><br>
+
+<<if $weekly.danceJob is "docks">>
+	"你准备好去码头工作了吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[接受|Dance Job Docks]]>><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
+	<br>
+	<<if $jordan_ritual_dance gte 1>>
+		<<askicon>><<link [["询问是否有在多瑙河街的工作"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<br>
+	<<elseif $charlie_breakdown gte 1>>
+		<<askicon>><<link [[问一下有没有高风险高回报的工作 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $weekly.danceJob is "party">>
+	"你准备好聚会的工作了吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[接受|Dance Job Party]]>><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
+	<br>
+	<<if $jordan_ritual_dance gte 1>>
+		<<askicon>>	<<link [["询问是否有在多瑙河街的工作"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<br>
+	<<elseif $charlie_breakdown gte 1>>
+		<<askicon>><<link [[问一下有没有高风险高回报的工作 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+<<elseif $weekly.danceJob is "stage">>
+	"你准备好化装舞会的工作了吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[接受|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
+	<br>
+<<else>>
+
+	你告诉<<him>>你在找工作。"很好！"<<he>>答道。"我这儿刚好有份差事需要人手。
+
+	<<if $NPCName[$NPCNameList.indexOf("Charlie")].love gte 20>>
+		<<set $weekly.danceJob to "party">>
+	<<elseif $NPCName[$NPCNameList.indexOf("Charlie")].love gte 0>>
+		<<set $weekly.danceJob to "party">>
+	<<else>>
+		<<set $weekly.danceJob to "stage">>
+	<</if>>
+
+	<<if $weekly.danceJob is "party">>
+		我的一个朋友想在宅邸街举办一个聚会，他们希望聚会上能有些娱乐活动——当然都些简单的活儿。他们人都不错，你应该会很安全的。你只需要工作几个小时就能拿到£300，怎么样？"
+		<br><br>
+
+		<<link [[接受工作 (3:00)|Dance Job Party]]>><<set $weekly.danceJob to "party">><<dance_job_init 180 70>><</link>>
+		<br>
+	<<elseif $weekly.danceJob is "docks">>
+		一群学生在梅尔街租了一栋楼准备举办聚会。他们需要有人来活跃气氛。应该很安全。"<<He>>的语气有些不太确定，"你只用干几个小时就能拿到£700。怎么样？"
+		<br><br>
+
+		<<link [[接受工作 (3:00)|Dance Job Docks]]>><<set $weekly.danceJob to "docks">><<dance_job_init 180 50>><</link>>
+		<br>
+	<<else>>
+		多瑙河街上的一家高级俱乐部正在寻找娱乐活动。"<<He>>犹豫了一下，"我认为他们值得信赖，但你要保持警惕。你只需要工作几个小时就能得到£2000，这报酬不算低了。怎么样？"
+		<br><br>
+		<<link [[接受工作 (3:00)|Dance Job Stage]]>><<set $weekly.danceJob to "stage">><<dance_job_init 180 20>><</link>>
+		<br>
+	<</if>>
+
+	<<if $jordan_ritual_dance gte 1 and $weekly.danceJob isnot "stage">>
+		<<askicon>><<link [["询问是否有在多瑙河街庄园里的工作 (3:00)"|Dance Job Stage Ask]]>><<set $phase to 1>><</link>>
+		<br>
+	<<elseif $charlie_breakdown gte 1 and $weekly.danceJob isnot "stage">>
+		<<askicon>><<link [[问一下有没有高风险高回报的工作 (3:00)|Dance Job Stage Ask]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+
+<</if>>
+<<refuseicon>><<link [[拒绝|Dance Job Refuse]]>><</link>>
+<br>

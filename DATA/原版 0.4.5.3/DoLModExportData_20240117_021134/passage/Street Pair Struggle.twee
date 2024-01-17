@@ -1,0 +1,26 @@
+:: Street Pair Struggle []
+<<effects>>
+你挣扎着试图摆脱<<persons>>的控制，一边踢<<his>>的腿一边扭动身体想要脱离。
+
+<<if $physiqueSuccess>><<famescrap 2>>
+
+	<<if $physiquesize lte 10000>>
+		<<Hes>>比你强壮，但你的脚还是狠狠地踢中了目标。随着一声痛苦的嚎叫，<span class="green"><<he>>松开了抓着你的手。</span>街上几个行人朝这里张望。<<He>>溜进了小巷。
+	<<else>>
+		随着一声痛苦的嚎叫，<span class="green"><<he>>松开了<<his>>的手。</span>街上几个行人朝这里张望。<<He>>溜进了小巷。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+
+	<<if $physiquesize lte 10000>>
+		<<Hes>>比你强壮得多，<span class="red">你无法摆脱<<Hes>>的控制。</span><<He>>成功地将你扭送进了小巷，<<his>>的朋友在那等着。<<gpain>><<pain 6>>
+	<<else>>
+		<span class="red">你无法摆脱<<He>>的控制。</span><<He>>成功地将你扭送进了小巷，<<his>>的朋友在那等着。
+		<<gpain>><<pain 6>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Street Pair]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

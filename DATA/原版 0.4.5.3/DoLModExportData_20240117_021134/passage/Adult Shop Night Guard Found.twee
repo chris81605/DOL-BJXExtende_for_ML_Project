@@ -1,0 +1,35 @@
+:: Adult Shop Night Guard Found []
+<<effects>>
+<<generate1>><<person1>>
+<<set $adultShop.banCount++>>
+<<set $adultShop.spotted to false>>
+在保证自己尽可能安静地关好门之后，你一个回头，惊讶地
+发现一个<<person>>正面对着你。在你反应过来之前，<<He>>摁住了你的肩膀。
+<br><br>
+"看看我们抓到了什么？一只小老鼠，想来偷点大人的玩具？"<<he>>用
+不以为然的语气说道，"我会把这里的情况告诉这家店主。"
+<br><br>
+<<He>>拿出了手机，看起来是要打给西里斯。
+<<if $adultShop.ban gt 0>>
+	<<set $adultShop.banExtension to true>>
+	<<set $adultShop.ban += 7>>
+	"啊哈！所以你已经有禁令了，"<<he>>好笑地看着你，"他们确实有一个相当严格的禁令政策，
+	所以你要进去还要在等一段时间喽。"
+<<else>>
+	<<if $adultShop.banCount lt 4>>
+		<<set $adultShop.ban to 7>>
+	<<elseif $adultShop.banCount lt 8>>
+		<<set $adultShop.ban to 10>>
+	<<else>>
+		<<set $adultShop.ban to 14>>
+	<</if>>
+	"行吧，"<<he>>耸耸肩，"好吧，你将在相当长的一段时间内都不能进入这里，
+	希望这能给你一个教训。"
+<</if>>
+<br><br>
+"现在跟着我，我会陪同你离开这里。你很幸运，我没有直接把你带到市长那地方。"
+<<tryOnReset>>
+<br><br>
+<<link [[逃跑|Adult Shop Night Guard Found Run]]>><</link>><<athleticsdifficulty 500>>
+<br>
+<<link [[跟随保安|Adult Shop Night Guard Found Follow]]>><</link>>

@@ -1,0 +1,113 @@
+:: Pound Work []
+<<effects>>
+
+<<if $pound.progress is 1>>
+	<<set $pound.progress to 2>>
+	<<beastNEWinit 1 dog>>
+	<<saveNPC 0 "black_dog">>
+	<<generate2>><<person2>><<generate3>>
+	这并不是一个小机构，员工比你想象的要多。一个<<person>>紧张地拿着项圈靠近一个被阴影笼罩的笼子。笼子的周围没有其他东西。<<He>>一听到低沉的咆哮声就僵住了。
+	<br><br>
+	"那个<span class="purple">野兽</span>残暴地袭击了<<bhis 0>>的主人，" 一个<<person3>><<person>>说道，停在你身边，<<his>>双臂交叉。"现在主人想要报复。不过首先我们需要教育一下这只狗，让它乖乖服从。现在连给它套上项圈都没人做得到。"
+	<br><br>
+	<<person2>><<person>>逃出了笼子，砰地一声关上了<<he>>身后的门。<<He>>拿着一半的项圈，剩下的已经被撕碎了。"我不会接近它，"<<person3>><<person>>笑着说。
+	<br><br>
+	<<link [[继续|Pound Work]]>><<endevent>><</link>>
+	<br>
+<<elseif $pound.progress is 2 and $pound.status gte 10>>
+	<<set $pound.progress to 3>>
+	<<beastNEWinit 1 dog>>
+	<<generate2>><<person2>>
+	你听到一声呜咽。一个<<person>>站在其中一个<<beasttype 0>>的笼子边上，用皮带抽打<<bhim 0>>。<<beasttype 0>>试图保护<<bhimself 0>>。
+	<br><br>
+
+	<<link [[干涉|Pound Work Intervene]]>><<pound_status 3>><<stress 6>><</link>><<gstress>><<ggpound_status>><<gstray_happiness>>
+	<br>
+	<<link [[无视|Pound Work Intervene Ignore]]>><</link>>
+	<br>
+<<else>>
+	<<if $slimePoundIgnored>>
+		你无视史莱姆的要求,选择工作方式。
+		<<unset $slimePoundIgnored>>
+		<br><br>
+		<<stray_happiness_text>>
+	<<elseif $slimePoundDefy>>
+		<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+			<<set $earSlime.defyCooldown += 2>>
+			史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强迫你顺遂它的心意。
+			<<ggwillpower>><<willpower 1>>
+			<br><br>
+			<<earSlimePoundLinks>>
+		<<else>>
+			你试图无视史莱姆的指令，继续前进。它试着强迫你以特殊形式工作，<span class="green">但失败了</span>。
+			<br><br>
+			<<stray_happiness_text>>
+			<<unset $slimePoundDefy>>
+			<<unset $slimePoundTask>>
+		<</if>>
+	<<else>>
+		<<generate1>><<person1>>
+		其他员工各忙各的。一个<<person>>进入大楼另一边的一扇金属门，然后顺带着把门锁上。
+		<<endevent>>
+		<br><br>
+		<<stray_happiness_text>>
+	<</if>>
+	<<if $slimePoundDefy>>
+		<<unset $slimePoundDefy>>
+	<<elseif !$daily.earSlimePoundTask and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,100) gte 75>>
+		<br><br>
+		<<set $daily.earSlimePoundTask to true>>
+		<<set _slimePoundTask to ["打扫"]>>
+		<<if $pound.status gte 10>><<run _slimePoundTask.push("喂")>><</if>>
+		<<if $pound.status gte 20>><<run _slimePoundTask.push("刷")>><</if>>
+		<<if $pound.status gte 40>><<run _slimePoundTask.push("洗")>><</if>>
+		<<if $pound.status gte 60>><<run _slimePoundTask.push("遛")>><</if>>
+		<<set $slimePoundTask to _slimePoundTask.random()>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">你感受到脑海中的史莱姆命令你<<print $slimePoundTask.toLowerCase()>>
+		<<if $slimePoundTask is "打扫">>
+			地面。
+		<<else>>
+			狗狗。
+		<</if>>
+		</span>它承诺如果你遵守的话，就给予你奖励<<if $earSlime.startedThreats>>，如果你不遵守的话，就要承担相应的后果<</if>>。
+		<br><br>
+		<<earSlimePoundLinks "Obey">>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[违抗|Pound Work]]>><<set $slimePoundDefy to true>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[无视|Pound Work]]>><<unset $slimePoundTask>><<set $slimePoundIgnored to true>><</link>>
+		<</if>>
+	<<else>>
+		<br><br>
+		<<link [[扫地 (£5)|Pound Work Sweep]]>><<if !$pound.tasks.includes("sweep")>><<stray_happiness 1>><<set $pound.tasks.push("sweep")>><</if>><<set $pound.money to 5>><</link>><<if !$pound.tasks.includes("sweep")>><<gstray_happiness>><</if>>
+		<br>
+		<<if $pound.status gte 10>>
+			<<link [[喂食 (£8)|Pound Work Feed]]>><<set $pound.tasks.push("feed")>><<set $pound.money to 8>><</link>><<if !$pound.tasks.includes("feed")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"><<pound_text>>对你不够尊重，不让你靠近他们，即便你带着食物。</span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 20>>
+			<<link [[刷毛 (£10)|Pound Work Brush]]>><<if !$pound.tasks.includes("brush")>><<stray_happiness 1>><<set $pound.tasks.push("brush")>><</if>><<set $pound.money to 10>><</link>><<if !$pound.tasks.includes("brush")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"><<pound_text>>对你不够尊重，不让你带着刷子接近他们。</span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 40>>
+			<<link [[清洗 (£12)|Pound Work Wash]]>><<if !$pound.tasks.includes("wash")>><<stray_happiness 1>><<set $pound.tasks.push("wash")>><</if>><<set $pound.money to 12>><</link>><<if !$pound.tasks.includes("wash")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"><<pound_text>>对你不够尊重，不让你拎着一桶水靠近他们。</span>
+		<</if>>
+		<br>
+		<<if $pound.status gte 60>>
+			<<link [[散步 (£15)|Pound Work Walk]]>><<if !$pound.tasks.includes("walk")>><<stray_happiness 1>><<set $pound.tasks.push("walk")>><</if>><<set $pound.money to 15>><</link>><<if !$pound.tasks.includes("walk")>><<gstray_happiness>><</if>>
+		<<else>>
+			<span class="blue"><<pound_text>>对你不够尊重，不让你用皮带靠近他们。</span>
+		<</if>>
+	<</if>>
+	<br>
+
+	<<getouticon>><<link [[离开|Pound ]]>><</link>>
+	<br>
+<</if>>

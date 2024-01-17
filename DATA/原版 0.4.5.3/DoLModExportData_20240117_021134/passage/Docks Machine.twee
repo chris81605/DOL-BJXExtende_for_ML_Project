@@ -1,0 +1,47 @@
+:: Docks Machine []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 10>><<set $machine_ammo to 8>>
+	<<if $player.vaginaExist and $analdisable is "f">>
+		<<machine_init vaginal arm_chains>>
+		<<set $machine.vaginal.armed to 1>>
+	<<elseif $player.vaginaExist>>
+		<<machine_init vaginal arm_chains>>
+		<<set $machine.vaginal.armed to 1>>
+	<<else>>
+		<<machine_init anal arm_chains>>
+		<<set $machine.anal.armed to 1>>
+	<</if>>
+	<<set $timer to 10>>
+<</if>>
+
+<<effects>>
+
+<<if $timer gte 7>>
+	警报响了。
+<<elseif $timer gte 4>>
+	<span class="purple">你听到一阵喊叫声。</span>
+<<elseif $timer gte 2>>
+	<span class="pink">你听到脚步声越来越近。</span>
+<<else>>
+	<span class="red">保安很近了！</span>
+<</if>>
+<br><br>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+
+
+<br><br>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1 or $timer lte 0>>
+	<span id="next"><<link [[继续|Docks Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Docks Machine]]>><</link>></span><<nexttext>>
+<</if>>
+<br>

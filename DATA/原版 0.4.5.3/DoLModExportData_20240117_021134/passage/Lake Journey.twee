@@ -1,0 +1,49 @@
+:: Lake Journey []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $cool gte 160>>
+	他们很愿意让你一起。他们围着你转，争取你的注意。每个人都知道森林很危险，但在一群人中应该是安全的。
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		你们平安无事地到达了湖边。
+		<br><br>
+
+		<<link [[继续|Lake Shore]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $cool gte 40>>
+	这些人很高兴你能一起来，你一边旅行一边聊天，以此来确保和每个人都有所接触。每个人都知道森林很危险，但在一群人中应该是安全的。
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		你们平安无事地到达了湖边。
+		<br><br>
+
+		<<link [[继续|Lake Shore]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	他们相互看着对方，对你的请求咧着嘴笑了起来，但他们没有拒绝你。每个人都知道森林很危险，但在一群人中应该是安全的。
+	<<status 1>><<gcool>>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<lakejourney>>
+	<<else>>
+		当你接近湖边时，有人从后面推了你一下。你摔倒在地。大伙儿笑了，把你单独留在了森林里。
+		<<gtrauma>><<gstress>><<trauma 3>><<stress 3>>
+		<br><br>
+
+		<<link [[继续|Forest]]>><<set $forest to 30>><</link>>
+		<br>
+	<</if>>
+<</if>>

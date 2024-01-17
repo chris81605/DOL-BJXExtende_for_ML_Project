@@ -1,0 +1,33 @@
+:: Prison Scarred Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<scarred_inmate 0 cap>>倒在床上，把<<his>>的前臂搁在脸上。<<glove>><<prison_rep scarred 1>>
+	<br><br>
+	<<tearful>>你逃出了牢房。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Prison Walkway]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<scarred_inmate 0 cap>>踉跄后退，绊倒在<<his>>的床上。<<llove>><<prison_rep scarred -1>><<grespect>><<prison_inmates 1>>
+	<br><br>
+	<<tearful>>你逃出了牢房。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Prison Walkway]]>><</link>>
+	<br>
+
+<<else>>
+	你重伤倒地，无法继续战斗。<<scarred_inmate 0 cap>>用你的皮带稳住你，把你拉出牢房。
+	<br><br>
+	<<endcombat>>
+	<<link [[继续|Prison Scarred Walk]]>><<generate_scarred_inmate 0>><<person1>><</link>>
+	<br>
+
+<</if>>
+
+<<set $daily.prison.scarredDone to true>>

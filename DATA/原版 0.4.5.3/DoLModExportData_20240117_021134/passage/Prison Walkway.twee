@@ -1,0 +1,81 @@
+:: Prison Walkway []
+<<set $outside to 0>><<effects>><<effects_prison>><<set $bus to "walkway">>
+
+你现在位于牢房外的金属走道上，在牢房区的顶部。有一处楼梯通向底楼。
+<br><br>
+<<if Time.hour is 20>>
+	你听到警铃响起。"禁闭时间，"<<generate_veteran_guard 0>><<veteran_guard 0>>喊道，"回到你们的牢房。"
+	<br><br>
+	你和其他囚犯混在一起。
+	<br><br>
+	<<link [[继续|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<else>>
+	<<if $prison.schedule is "wake">>
+		其他囚犯摇摇晃晃地走向淋浴间。
+		<br><br>
+	<<elseif $prison.schedule is "free time">>
+		很多囚犯躺在床上休息。
+		<br><br>
+	<<elseif $prison.schedule is "lockdown">>
+		你听到了鼾声。
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			你的牢房在角落里。
+			<br>
+
+			<<prisonicon "cell">><<link [[你的牢房|Prison Cell]]>><</link>>
+			<br><br>
+
+			<<if $prison.attention_level gte 1 and !$prison.protection and $prison.schedule is "free time">>
+				<<if !$prison.protection>>
+					<<if !$daily.prison.scarredDone>>
+						<<generate_scarred_inmate 0>><<person1>>
+						<<scarred_inmate 0 capo>>的牢房比大多数牢房都要简陋。几乎无人居住。
+						<<endevent>>
+						<br>
+						<<prisonicon "cell">><<link [[简朴的牢房|Prison Scarred]]>><</link>>
+						<br><br>
+					<</if>>
+					/*
+					<<generate_tattooed_inmate 0>><<person1>>
+					The walls of <<tattooed_inmate 0 apo>> cell, as well as parts of the ceiling, are decorated with pornography.
+					<<endevent>>
+					<br>
+					<<prisonicon "cell">><<link [[Porn-decorated cell|Prison Tattooed]]>><</link>>
+					<br><br>
+					*/
+				<</if>>
+			<</if>>
+			塔楼对面有一扇厚重的木门。一个褪色的绿色十字架点缀其间，上面画着一个银色十字架。
+			<br>
+			<<if $prison.schedule is "lockdown">>
+				<span class="blue">医疗室的大门紧锁。</span>
+				<br><br>
+			<<else>>
+				<<prisonicon "medical">><<link [[医务室|Prison Medical]]>><</link>>
+				<br><br>
+			<</if>>
+			阶梯围绕着中央塔楼蜿蜒而上。
+			<br>
+			<<link [[下楼|Prison Block]]>><</link>>
+			<br><br>
+			<<prison_map walkway>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>

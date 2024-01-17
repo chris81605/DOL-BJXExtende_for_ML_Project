@@ -1,0 +1,36 @@
+:: Underground Cell Sneak []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+没有锁能阻止你。你打开门，蹑手蹑脚地走过毛绒地毯，偷偷溜了出去。你听到前方的笑声和音乐。
+你从拐角处瞥了一眼，看到了
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "dungeon">>
+	惠特尼
+<<else>>
+	一个<<persony>>
+<</if>>
+在一群<<people>>的注视下，在舞台上被残忍地操。
+除了舞台，所有的灯都关掉了，房间的边缘一片黑暗。
+<br><br>
+
+<<if $undergroundbrothel.robin>>
+	<<set _robin to statusCheck("Robin")>><<npc "Robin">><<person1>>
+	你溜回罗宾的牢房。幸运的是，这边没有锁。
+	<<if _robin.dom lte 20 or _robin.trauma gte 70>>
+		罗宾畏缩着把头扭开，好像以为要被打了，
+	<<else>>
+		罗宾倒吸一口凉气，缩在角落里，
+	<</if>>
+	但是当<<he>>看到是你的时候，<<his>>的脸上满是宽慰。你把手指举到唇边，但<<he>>似乎已经知道该安静了。
+	<br><br>
+<</if>>
+
+你溜进房间，绕到一边。没人注意到你。你走到另一边，爬上楼梯，出现在森林里。
+<br><br>
+
+<<dungeonescape>>
+
+<<if _robin>>
+	<<link [[继续|Underground Robin Escape Orphanage]]>><<set $phase to 0>><<set $stress -= 1000>><</link>>
+<<else>>
+	<<link [[继续|Forest]]>><<set $forest to 40>><<set $stress -= 1000>><</link>>
+<</if>>

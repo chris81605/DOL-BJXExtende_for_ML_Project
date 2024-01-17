@@ -1,0 +1,42 @@
+:: School Infirmary Kylar Refuse []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<run statusCheck("Kylar")>>
+
+
+<<if _kylarStatus.includes("Rage")>>
+	凯拉尔眯起了眼睛，<<He>>走近了一步，你背靠着墙。"来吧，"<<he>>又重复了一遍，"我们出去走走吧。"<<stress 2>><<gstress>>
+	<br><br>
+
+	你
+	<<if $speech_attitude is "meek">>
+		俯视
+	<<elseif $speech_attitude is "bratty">>
+		叉着手
+	<<else>>
+		紧张地咽了口口水
+	<</if>>
+	并告诉<<him>>
+	<<if $schoolstate is "afternoon">>
+		你现在很忙。
+	<<else>>
+		你不能逃课。
+	<</if>>
+	凯拉尔没有说什么。<<He>>把手伸进<<his>>的口袋，但在听到楼上的脚步声后停了下来。<<He>>嘟囔着什么，然后窜到走廊上。
+	<br><br>
+
+	你迅速向另一个方向跑去。
+<<elseif _kylarStatus.includes("Sus")>>
+	凯拉尔撅着嘴，但还是冷静了下来。"好吧，"<<he>>说，声音异常苦涩。"也许下次吧。"
+	<br><br>
+
+	<<He>>在走廊上走来走去，向你投来奇怪的目光。
+<<else>>
+	凯拉尔笑，笑容很是紧张。"那，那好吧，"<<he>>说，"也许下次吧。"
+	<br><br>
+
+	<<He>>低头看着地面，消失在走廊尽头。
+<</if>>
+<br><br>
+
+<<link [[离开|Hallways]]>><<endevent>><<infirmary_excused>><</link>>
+<br>

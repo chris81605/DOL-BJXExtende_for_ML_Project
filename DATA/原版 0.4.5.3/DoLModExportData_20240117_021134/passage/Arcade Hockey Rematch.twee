@@ -1,0 +1,81 @@
+:: Arcade Hockey Rematch []
+<<effects>>
+
+<<if $arcadeHockey.player_lost>>
+	<<arcade_player_lost>>
+	<<fameexhibitionism 1>>
+<<else>>
+	<<arcade_player_win>>
+<</if>>
+
+<<if $arcadeHockey.npc_underwearless>>
+
+	<<He>>毫不羞赧，挺立在人群面前。
+	<br><br>
+
+	"打得好，看来是我技不如人啊。你是可以就这样让我光着身子，但如果你把衣服还给我的话，我就帮你口，你说呢？"
+	<br><br>
+
+	<<if $exhibitionism gte 75>>
+		<<link [[接受|Arcade Hockey Accept]]>><<arousal 600>><<exhibitionism5>><</link>><<garousal>><<exhibitionist5>>
+		<br>
+	<<else>>
+		<span class="purple">你还不够淫荡，无法与他人公然交媾。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[让对方继续全裸|Arcade Hockey Let]]>><<set $phase to 1>><</link>>
+	<br>
+
+<<elseif $exposed gte 2>>
+	<<fameexhibitionism 4>>
+
+	你完全裸着身子，并被游戏厅人群团团包围，人群正尽情拍照录像，你在冷风中颤抖，感觉尴尬极了。
+	<br><br>
+
+	"你好像不太好受欸，"你的对手说 "我们可以就让你继续这个样子，全身光溜溜的，回到充满恶意的浩瀚世界中；又或者，我可以把衣服还给你，你只要躺在这张桌上让我操就好啰？"
+	<br><br>
+
+	<<if $exhibitionism gte 75>>
+		<<link [[同意|Arcade Hockey Sex]]>><<set $sexstart to 1>><<fameexhibitionism 2>><<exhibitionism5>><<exhibitionist5>><</link>><<exhibitionist5>>
+		<br>
+	<<else>>
+		<span class="purple">你还不够淫荡，无法与他人公然交媾。</span>
+		<br><br>
+
+	<</if>>
+	<<link [[拒绝|Arcade Hockey Let]]>><<set $phase to 0>><</link>>
+	<br>
+
+<<else>>
+
+	"还要继续吗？"<<he>>问道。
+	<br><br>
+
+	<<arcade_npc_bet>>
+	<br><br>
+
+	<<arcade_player_bet>>
+	<br><br>
+
+	<<if $exhibitionism gte $arcadeHockey.exhibitionismNeeded>>
+		<<set _lvl to $arcadeHockey.exhibitionismNeededLvl>> <!-- declaring this variable just to keep the following line readable -->
+		<<if $arcadeHockey.exhibitionismNeeded is 0>>
+			<<link [[同意|Arcade Hockey Play]]>><<set $phase to 1>><</link>>
+		<<else>>
+			<<link [[同意|Arcade Hockey Play]]>><<set $phase to 1>><<exhibitionismN _lvl>><</link>><<exhibitionist _lvl>>
+		<</if>>
+		<<skill_difficulty `currentSkillValue("handskill")` "手部技巧" -450 1100>>
+		<br>
+
+		<<link [[拒绝|Arcade Hockey Decline 2]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		<span class="purple">你还不够淫荡，无法承受公开暴露身体的风险。</span>
+		<br><br>
+
+		<<link [[拒绝|Arcade Hockey Decline 2]]>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+
+<</if>>

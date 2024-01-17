@@ -1,0 +1,35 @@
+:: Sea Dolphins Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<beastTrainGenerate>>
+
+	<<set $water to 1>>
+	<!-- <<set $claws to 0>> -->
+	<<if $phase isnot 1>>
+		<<if Time.dayState isnot "night" and $location is "beach">>
+			<<enable_rescue>>
+		<</if>>
+		你在<<= $NPCList[0].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>的肚子上抚摸得越来越远。它们接受了暗示，兴奋地游到你身边。
+		<br>
+		<<deviancy3>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sea Dolphins Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Dolphins Sex]]>><</link>></span><<nexttext>>
+<</if>>

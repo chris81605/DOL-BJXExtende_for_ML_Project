@@ -1,0 +1,20 @@
+:: Farm Alex Climb []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+你从艾利克斯边上挪开。
+<<if _alex.dom gte random(1, 50)>>
+	<<He>>用一只胳膊揽住你的腰，将你固定住，然后用身体压向你。"想让我更粗暴些吗？"<<he>>低声说，"我没问题。"<<gstress>><<glust>><<stress 6>><<npcincr Alex lust 1>>
+	<br><br>
+
+	<<link [[挣脱|Farm Alex Climb 2]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[顺从|Farm Alex Allow]]>><<sub 1>><<npcincr Alex dom 3>><</link>><<promiscuous1>><<ggdom>>
+	<br>
+<<else>>
+	你从床上爬起来的时候<<He>>没有阻止你，"随便你咯，"<<He>>翻过了身去说道。
+	<br><br>
+
+	<<link [[继续|Farm Alex Bedroom]]>><<endevent>><<storeon "farm alex bed" "check">><<if _store_check is 1>><<storeon "farm alex bed">><<set $wardrobe_location to "alexFarm">><<wardrobeSelection>><</if>><</link>>
+	<br>
+<</if>>

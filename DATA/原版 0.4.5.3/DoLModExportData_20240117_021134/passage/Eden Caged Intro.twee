@@ -1,0 +1,68 @@
+:: Eden Caged Intro []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $phase is 1>>
+	即使接下来发生的事情明显是不愉快的，你也选择了屈服。
+	<br><br>
+
+	"哦，所以你现在表现得很好？" 伊甸吐口水。"真是他妈的好时机，不是吗？当你知道你无法逃脱时，表现得很好。"
+<<elseif $phase is 0>>
+	<<if $physiqueSuccess>>
+		知道即将展开的惩罚，你将脚后跟踩在地板上并后退。伊甸，现在你回到家后更加自信，好不容易挣开了<<his>>的束缚，你自由了。
+		<br><br>
+
+		在<<he>>可以转身冲刺之前，你冲向门口，几乎将它从铰链上扯下来，然后冲进了森林里。伊甸就在你身后，<<he>>追赶着沉重的脚步声。
+		<br><br>
+
+		在树林之间穿梭，你成功摆脱了伊甸对你的监视，几分钟后你完全甩掉了<<him>>。<<pass 10>>
+		<br><br>
+
+		"我总是会再抓住你的！我一直都是这样的！"伊甸从后面大喊着。你没有在意，一直跑到肺部灼热难忍，最终停了下来。<<stress 6>><<tiredness 3>><<gstress>><<gtiredness>>
+		<br>
+		即使你独自一人，一股熟悉的寒意仍然沿着你的脊梁骨升起。<span class="red">有什么东西在追逐你。</span>
+		<<set $edenCagedEscape to true>>
+		<<set $edenforesthunt to 1>>
+		<<set $foresthunt to 1>>
+	<<else>>
+		意识到即将降临在自己身上的惩罚，你把脚根深深地插在地板里拼命挣扎。伊甸已经受够了你的抗拒，伊甸用手背打了你一巴掌。<<pain 4>><<gpain>>
+		<br><br>
+
+		"我受够了你像个小屁孩一样的表现。很明显你需要被提醒你的职责，"<<he>>咆哮着。
+		<<set $phase to 1>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $phase gte 1>>
+	<<nnpc_title "Eden">>抓住你的脖子，剥掉你的衣服，然后把你强行关进笼子里。一把沉重的挂锁锁住了大门。
+	<<ruined>>
+	<br><br>
+
+	"好好表现，我会放你出去，"伊甸警告说道。<<He>>让你一个人呆着，然后
+	<<if Time.hour lte 6>>/* bedtime */
+		走向床边。很快，<<Hes>>就像一盏熄灭的灯一样睡着了。
+	<<elseif Time.hour lte 8>>/* breakfast */
+		跺着脚去厨房准备早餐。
+	<<elseif Time.hour lte 16>>/* out hunting */
+		怒气冲冲地出去了。
+	<<elseif Time.hour lte 18>>/* bathtime */
+		离开去洗澡。
+	<<elseif Time.hour lte 22>>/* dinnertime */
+		跺着脚去厨房准备晚餐。
+	<<else>>/* bedtime */
+		走向床边。很快，<<Hes>>就像一盏熄灭的灯一样睡着了。
+	<</if>>
+	<<unset $edenCagedEscape>>
+	<<set $NPCName[$NPCNameList.indexOf("Eden")].trust to 0>>
+	<<set $edenCaged to {}>>
+	<<set $edenCaged.escape to 0>>
+	<<set $edenCaged.days to 0>>
+	<br><br>
+
+	<<link [[继续|Eden Caged]]>><<set $phase to 0>><</link>>
+	<br>
+<<else>>
+	<<set $forest to random(50, 75)>>
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

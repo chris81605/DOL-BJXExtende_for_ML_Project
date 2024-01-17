@@ -1,0 +1,70 @@
+:: Bus []
+<<set $outside to 0>><<effects>>
+
+你上了公共汽车。票价为£1。
+<br><br>
+<<if $money gte 100>>
+
+住宅区
+<br>
+
+<<domusicon>><<link [[在宅邸街下车(家)|Bus seat]]>><<set $bus to "domus">><<set $money -= 100>><</link>>
+<br>
+
+<<barbicon>><<link [[在倒钩街 (舞蹈教室)下车|Bus seat]]>><<set $bus to "barb">><<set $money -= 100>><</link>>
+<br>
+
+<<danubeicon>><<link [[在多瑙河街 (富人区)下车|Bus seat]]>><<set $bus to "danube">><<set $money -= 100>><</link>>
+<br>
+
+<<wolficon>><<link [[在狼街(神殿)下车|Bus seat]]>><<set $bus to "wolf">><<set $money -= 100>><</link>>
+<br><br>
+商业区
+<br>
+
+<<highicon>><<link [[在商业街(购物中心)下车|Bus seat]]>><<set $bus to "high">><<set $money -= 100>><</link>>
+<br>
+
+<<connudatusicon>><<link [[ 在康努达塔斯街 (会所)下车|Bus seat]]>><<set $bus to "connudatus">><<set $money -= 100>><</link>>
+<br>
+
+<<clifficon>><<link [[在峭壁街 (咖啡馆)下车|Bus seat]]>><<set $bus to "cliff">><<set $money -= 100>><</link>>
+<br>
+
+<<nightingaleicon>><<link [[在南丁格尔街(医院)下车 |Bus seat]]>><<set $bus to "nightingale">><<set $money -= 100>><</link>>
+<br>
+
+<<starfishicon>><<link [[在海星街 (海滩)下车|Bus seat]]>><<set $bus to "starfish">><<set $money -= 100>><</link>>
+<br>
+
+<<oxfordicon>><<link [[在牛津街(学校)下车|Bus seat]]>><<set $bus to "oxford">><<set $money -= 100>><</link>>
+<br><br>
+工业区
+<br>
+
+<<elkicon>><<link [[在麋鹿街下车|Bus seat]]>><<set $bus to "elk">><<set $money -= 100>><</link>>
+<br>
+
+<<mericon>><<link [[在梅尔街(码头)下车|Bus seat]]>><<set $bus to "mer">><<set $money -= 100>><</link>>
+<br>
+
+<<harvesticon>><<link [[在丰收街(酒吧)下车|Bus seat]]>><<set $bus to "harvest">><<set $money -= 100>><</link>>
+<br><br>
+
+<<if $town_projects.road gte 4>>
+	森林
+	<br>
+	<<lakeicon>><<link [[买一张去湖边的票|Bus seat]]>><<set $bus to "lakebus">><<set $money -= 100>><</link>>
+	<br><br>
+<</if>>
+
+<<else>>
+
+你没钱支付车费。
+<br><br>
+
+<</if>>
+
+下车
+<br>
+<<getouticon>><<destination>>

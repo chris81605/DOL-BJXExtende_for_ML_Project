@@ -1,0 +1,69 @@
+:: Forest Nest Ambushed []
+<<effects>>
+你等了好像很长时间，但没有看到任何接近的动静。
+<br><br>
+
+直到你听到身后传来急促的脚步声。你及时转过身来，但
+<<if $monster is 1>>
+	被一只裸体的<<beasttype>>扑倒了。
+<<else>>
+	被一团橙色的毛茸茸撞得摇摇欲坠。
+<</if>>
+<span class="red">一定已经有一只<<beasttype>>在附近了</span>，而你的行为暴露了你的位置！
+<br><br>
+
+<<if $NPCList[0].traits.includesAny("territorial","clever")>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			<<bHe>>得意地跨坐在你身上，双臂交叉。"真是笨拙。你太容易暴露了，<<foxnickname>>。"
+			<br><br>
+
+			<<bHe>>舒展身体，毫不掩饰地展示着自己的身材。"你需要学习一下如何保持低调。"
+		<<else>>
+			<<bHe>>对你嗖嗖作响，把你压在下面。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+		<br>
+	<<else>>
+		你从<<bhim>>的身下挣扎着逃脱了。<<beastescape>>
+		<br><br>
+		<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $monster is 1>>
+		<<bHe>>闻了一下你，然后咯咯笑了起来，<span class="green">轻抚了一下你的头</span>。"你在尝试什么？你真是个有趣的家伙。"
+		<br><br>
+
+		<<bHe>>从你身上下来，走到巢穴旁边，仔细检查了一下。
+		<<if $forest_nest.eggs lte 0>>
+			"它们都坏了。没办法留下来。想要分享吗？"<<bHe>>拍了拍<<bhim>>旁边的地面。
+		<<else>>
+			"还剩下一些。想要分享吗？"<<bHe>>把一个放进<<bhis>>的嘴里，拍了拍<<bhim>>旁边的地面。
+		<</if>>
+	<<else>>
+		<<bHe>>闻了一下你，然后<span class="green">舔了一下你的脸</span>。<<bHis>>的舌头让你感到有些痒痒的。
+		<br><br>
+
+		<<bHe>>从你身上下来，优雅地走到巢穴旁边。<<bHe>>仔细检查了一下巢穴，然后抬头回看，
+		<<if $forest_nest.eggs lte 0>>
+			鼻子上蹭了一些蛋黄。
+		<<else>>
+			嘴里叼着一个鸟蛋。
+		<</if>>
+		<<bHe>>似乎想和你分享。
+	<</if>>
+	<br><br>
+
+	<<if $fox gte 6>>
+		<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress -4>><</link>><<lstress>>
+		<br>
+	<<else>>
+		<<link [[吃一个|Forest Nest Share]]>><<transform fox 1>><<stress 2>><</link>><<gstress>>
+		<br>
+	<</if>>
+	<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

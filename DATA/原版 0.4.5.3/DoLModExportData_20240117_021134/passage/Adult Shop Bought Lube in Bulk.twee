@@ -1,0 +1,32 @@
+:: Adult Shop Bought Lube in Bulk []
+<<effects>>
+<<set _partial to Math.min($lubeBought, 50)>>
+<<lubePrice _partial>>
+<<formatmoney _price>>
+"嗯，孩子，让我们清点一下……一共$lubeBought瓶润滑剂，"<<nnpc_he Sirris>>小心翼翼地把商品放进纸箱里。"一共_partial单位，单价£20，算上2%折扣，总共_printmoney。
+<<lubePrice $lubeBought>>
+<<if $lubeBought gt 50>>
+	<<set _partial to Math.min($lubeBought - 50, 100)>>
+	<<set _price2 to _partial * 2000 * .95>>
+	<<formatmoney _price2>>
+	再加上_partial单位，单价£20，算上5%折扣，_printmoney。
+	<<if $lubeBought gt 150>>
+		<<set _partial to $lubeBought - 150>>
+		<<set _price2 to _partial * 2000 * .92>>
+		<<formatmoney _price2>>
+		还有_partial单位，单价£20，折扣8%，_printmoney。
+	<</if>>
+	好了，一共是<<printmoney _price>>。
+<</if>>
+我会亲自盯着把它立刻送往妓院，谢谢你照顾我的生意。"
+<br><br>
+你数了数钱，把它递给了西里斯。
+<br><br>
+<<set $money -= _price>>
+<<set $brothelVending.lube += $lubeBought>>
+<<set $brothelVending.lubeToRefill -= $lubeBought>>
+<<set $brothelVending.weeksEmpty to 0>>
+<<set $weekly.brothelVMLube to true>>
+<<unset $lubeBought>>
+<<earnFeat "Brothel Provider">>
+<<link [[继续|Adult Shop]]>><</link>>

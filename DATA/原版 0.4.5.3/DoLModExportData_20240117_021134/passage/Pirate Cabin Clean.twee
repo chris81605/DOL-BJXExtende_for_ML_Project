@@ -1,0 +1,33 @@
+:: Pirate Cabin Clean []
+<<effects>>
+
+<<if currentSkillValue('housekeeping') gte 1000>>
+	当你打扫舱室时，海盗们为你让开了道。你整理了床铺，修补并缝合了衣物，所有的灰尘和垃圾都被清理掉了。
+	<br><br>
+	你离开前，将其打扫得纤尘不染。<<lstress>><<stress -6>>
+	<br><br>
+<<elseif currentSkillValue('housekeeping') gte 600>>
+	你打扫了舱室，留下井然有序的环境。一些海盗看起来想要骚扰你，但其他人警告他们离开，不希望他们干扰这件好事。
+	<br><br>
+<<elseif currentSkillValue('housekeeping') gte 200>>
+	你跟在海盗们后面打扫，捡起垃圾，更换他们铺位上的床单。
+	<br><br>
+	<<generateRole 0 0 "pirate">><<person1>>
+	<<if random(1, 2) is 2>>
+		你抓到了一个<<person>>在你钻进柜子底下时偷看你的<<bottom>>，但<<he>>在和你眼神交会的时候移开了视线。
+		<br><br>
+	<<else>>
+		一位<<person>>在你钻进橱柜底下时拍了你的<<bottom>>一下。<<gpain>><<pain 1>><<gstress>><<stress 1>>
+		<br><br>
+	<</if>>
+<<else>>
+	你开始捡起海盗们留下的垃圾。当他们注意到时，他们故意制造更多纸屑，并当着你的面丢下。他们把这当作消遣玩了一阵子，直到他们没有更多的点心可以浪费。
+	<br><br>
+
+	无论如何，当你完成工作时，舱室看起来确实整洁了一些。<<ghousekeeping>><<housekeeping 2>>
+	<br><br>
+<</if>>
+<br><br>
+
+<<link [[继续|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

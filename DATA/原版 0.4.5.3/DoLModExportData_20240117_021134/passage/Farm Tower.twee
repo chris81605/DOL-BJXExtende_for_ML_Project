@@ -1,0 +1,31 @@
+:: Farm Tower []
+<<effects>>
+
+你爬上了瞭望塔。
+<<if $farm.tower_guard>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+
+
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<print $NPCList[0].name>>放下了烟。"有什么要我帮忙的吗？"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<print $NPCList[0].name>>冲你笑了笑。"有什么事吗？"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<<print $NPCList[0].name>>朝你点点头。"有麻烦了吗？"
+	<<else>>
+		<<print $NPCList[0].name>>色眯眯地打量着你。"什么风把我们的美人吹到这儿来了？"
+	<</if>>
+	<br><br>
+
+	安保技能：<<guard_skill_text "tower">>
+	<br>
+	薪水：<<printmoney $farm.tower_guard_wage>>
+	<br><br>
+
+	<<farm_guard_pay>>
+<<else>>
+	荒原一直延伸到地平线的远方，另一面则是无尽的大海。
+	<br><br>
+<</if>>
+<<getouticon>><<link [[离开|Farm Fields]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

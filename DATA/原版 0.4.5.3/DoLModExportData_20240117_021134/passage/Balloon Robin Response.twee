@@ -1,0 +1,32 @@
+:: Balloon Robin Response []
+<<if $phase is 0>>
+	<<set _lemonade to Time.season is "winter" ? "热巧克力" : "柠檬水">>
+	你告诉罗宾<<he>>没什么好担心的。那位摊主不是在卖_lemonade，两者所吸引的客群不同。
+	<br><br>
+	“我猜你说得对，”罗宾说。<<He>>看了一眼<<print Time.season is "winter" ? "海滩的方向" : "那个摊位">>。“<<person1>><<Hes>>在卖爆米花，对吧？也许如果人们口渴了，<<he>>会把他们引过来给我，”<<person2>><<he>>说，听起来<<print C.npc.Robin.trauma gte 40 ? "像是在试图说服<<himself>>相信不可能的事情" : "充满希望">>。
+	<br><br>
+	你鼓励地点了点头。<span class="blue">也许如果你买一些爆米花，可以说服摊主帮助罗宾。</span>
+	<br><br>
+	你们俩简短地聊了一会儿天。最后，罗宾说<<he>>需要回到<<his>>的摊位上。
+	<br>
+	<<if C.npc.Robin.trauma gte 40>>
+		<<He>>缓步走开，<<his>>的目光紧盯着地面。
+	<<else>>
+		<<He>>微笑着向你挥手道别。
+	<</if>>
+<<else>>
+	你不回话。沉默尴尬地在你们之间蔓延。罗宾有些坐立难安。
+	<br><br>
+	“是的，”好半晌，<<person2>><<he>>才说道。“我想也许我应该要担点心。”
+	<<if C.npc.Robin.trauma gte 40>>
+		<<He>>叹了口气，没精打采地望着摊位。“好吧，我应该回去继续工作了。”<<He>>蹒跚而去，<<his>>的目光始终盯着地面。
+	<<else>>
+		<<He>>叹了口气，有那么一瞬间看起来神色沮丧，但马上又恢复到<<his>>平常无忧无虑的样子。“那么，你能做些什么呢？我会继续努力工作的。”<<He>>微笑着挥手道别。
+	<</if>>
+<</if>>
+<<set $balloonStand.robin.status to "help needed">>
+<br><br>
+<<switch $location>>
+	<<case "park">><<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<<default>><<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>

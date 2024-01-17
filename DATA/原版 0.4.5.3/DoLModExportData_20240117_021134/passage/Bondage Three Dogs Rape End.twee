@@ -1,0 +1,98 @@
+:: Bondage Three Dogs Rape End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Three Dogs Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，不敢再上前。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		心满意足后，这条狗离开了，另一只迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Three Dogs Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemyejaculated gte 1>><<famebestiality 1>>
+		<<beastsplural>>看起来满足了。狗主人笑了起来。"真是个合格的<<bitch>>。这儿有几块钱，给你这样的狗婊子正合适。"
+		<br><br>
+		你获得了<span class="gold">£5。</span>
+		<br><br>
+	<<else>>
+		<<beastsplural>>把后面牵着绳的主人一直往前拽。
+		<br><br>
+	<</if>>
+	<<if $rescue is 0>>
+		你听到观众们讥笑着走开了，没有人过来帮你。
+		<<gtrauma>><<trauma 6>><<famebestiality 30>>
+		<br><br>
+	<</if>>
+
+	<<tearful>>你试着确定自己的方位。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<set $eventskip to 1>>
+	<<destinationbondage>>
+<<else>>
+	<<if $rng gte 51 and Time.dayState isnot "night" or $rng gte 76>>
+		<<set $rescued += 1>>
+		<<silently>><<beastsplural>><<set _beastspluraltext to _text_output>><</silently>>
+		<<endcombat>>
+		"别碰那<<girl>>，" 你听见有人大喊。有人把_beastspluraltext 从你身上拖开。你听见它们被拽走了。
+		<br><br>
+		/* clearing up ghost dogs for old saves */
+		<<if $per_npc.three_dogs>>
+			<<clearNPC three_dogs>>
+		<</if>>
+		<<generate1>><<person1>>
+
+		脚步声接近了。一只手拽下你的眼罩。"别怕。"那个声音说道，"我找到你了。"
+		<<blindfoldremove>>
+
+		"太糟糕了，"<<he>>说。
+		<<if $exposed gte 1>><<He>>为你裹上毛巾。<<towelup>><</if>>
+		"我不想显得管太多，但你真的没事吗？"
+		<br><br>
+
+		<<He>>确认你没受伤后便继续去赶路了。
+		<<lpain>><<pain -6>>
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+
+	<<else>><<set $rescue to 0>>
+		<span class="red">你的尖叫声引来了更可怕的东西。</span>
+		<br><br>
+		你听到一阵来自四面八方的笑声。"你为什么来这里？" 一个声音问道。它们听起来在笑。
+		<br><br>
+		"就让<<beastsplural>>泻泻火吧。" 狗主人说道。
+		<br><br>
+		"我们可以看着吗？" 第三个声音说。
+		<br><br>
+		"好好地。"
+		<br><br>
+		你不知道附近有多少人，但听起来不少。
+		<<gtrauma>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Bondage Three Dogs Rape]]>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

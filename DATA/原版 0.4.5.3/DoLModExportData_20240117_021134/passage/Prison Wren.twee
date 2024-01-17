@@ -1,0 +1,95 @@
+:: Prison Wren []
+<<effects>>
+
+<<npc "Wren">><<person1>>
+伦恩对你笑了笑："如果你有牙齿的话，你可以来找我，我有一些来自外面的好东西。"
+<br><br>
+
+<span class="gold">你有<<number $prison.teeth>>颗鲨鱼牙齿。</span>
+<br><br>
+
+<<ind>><<link [[挑选服装|Prison Wren Clothes]]>><</link>>
+<br><br>
+
+<<if !$prison.hammer>>
+	小锤子: 20颗牙齿
+	<br>
+	<<if $prison.teeth gte 20>>
+		<<ind>><<link [[交换|Prison Wren Hammer]]>><<prison_teeth -20>><<set $prison.hammer to 1>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.mirror isnot 1>>
+	镜子: 30颗牙齿
+	<br>
+	<<if $prison.teeth gte 30>>
+		<<ind>><<link [[交换|Prison Wren Mirror]]>><<prison_teeth -30>><<set $prison.mirror to 1>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.code isnot 1>>
+	医务室锁的密码: 50颗牙齿
+	<br>
+	<<if $prison.teeth gte 50>>
+		<<ind>><<link [[交换|Prison Wren Code]]>><<prison_teeth -50>><<set $prison.code to 1>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.poster isnot "man">>
+	性感男士的海报: 50颗牙齿
+	<br>
+	<<if $prison.teeth gte 50>>
+		<<ind>><<link [[交换|Prison Wren Poster]]>><<set $poster_choice to "man">><<set $phase to 0>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.poster isnot "woman">>
+	性感女士的海报: 50颗牙齿
+	<br>
+	<<if $prison.teeth gte 50>>
+		<<link [[交换|Prison Wren Poster]]>><<set $poster_choice to "woman">><<set $phase to 0>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.poster isnot "puppy">>
+	可爱小狗的海报: 50颗牙齿
+	<br>
+	<<if $prison.teeth gte 50>>
+		<<ind>><<link [[交换|Prison Wren Poster]]>><<set $poster_choice to "puppy">><<set $phase to 0>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if !$prison.rope>>
+	绳子: 100颗牙齿
+	<br>
+	<<if $prison.teeth gte 100>>
+		<<ind>><<link [[交换|Prison Wren Rope]]>><<prison_teeth -100>><<set $prison.rope to 1>><</link>>
+	<<else>>
+		<span class="blue">你需要更多的牙齿。</span>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $prison.yard_key is 1 and $prison.yard_door is 1>>
+	你的大铁钥匙已经没有用了，伦恩想要用200颗牙齿来交换它。
+	<br>
+	<<ind>><<link [[出售|Prison Wren Yard Key]]>><<set $prison.yard_key to 0>><<prison_teeth 200>><</link>>
+	<br><br>
+<</if>>
+
+<<askicon>><<link [[询问有关逃生的问题|Prison Wren Ask]]>><</link>>
+<br><br>
+
+<<getouticon>><<link [[离开|Prison Yard]]>><<endevent>><</link>>
+<br>

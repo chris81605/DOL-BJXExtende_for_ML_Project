@@ -1,0 +1,50 @@
+:: Street Tentacle Run []
+<<set $outside to 1>><<effects>>
+你从触手处抽离，希望能甩掉它。
+<<if $worn.over_lower.name is "naked">>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and !$worn.under_lower.type.includes("naked") and !playerChastity()>>
+		<<set $worn.under_lower.integrity -= 30>>
+		<<if $worn.under_lower.integrity lte 0>>
+			它将$worn.under_lower.cn_name_cap扯下，抓住你损坏的衣物退回下水道中。
+			<br><br>
+			在你身处于马路中间时，你突然意识到你并没有穿任何内裤。你赶忙将双手按在你的两腿之间来压住你的$worn.lower.cn_name_cap。
+			<br><br>
+			<<underlowerruined>><<exposure>>
+			<<destinationeventend>>
+		<<else>>
+			它退回到下水道的深处，虽然你的$worn.under_lower.cn_name_cap被扯坏了，但还是能穿。
+			<br><br>
+			<<destinationeventend>>
+		<</if>>
+	<<else>>
+		<<set $worn.lower.integrity -= 30>>
+		<<if $worn.lower.integrity lte 0>>
+			它一边拽着从你的$worn.lower.cn_name_cap上扯下的布料一边退回到下水道当中。
+			<br><br>
+			你被无情地抛弃在了街道中央。<<covered>>
+			<br><br>
+			<<lowerruined>><<exposure>>
+			<<destinationeventend>>
+		<<else>>
+			它退回到下水道的深处，虽然你的$worn.lower.cn_name_cap被扯坏了，但还是能穿。
+			<br><br>
+			<<destinationeventend>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<set $worn.over_lower.integrity -= 30>>
+	<<if $worn.over_lower.integrity gt 0>>
+		它退回到下水道的深处，虽然你的$worn.over_lower.cn_name_cap被扯坏了，但还是能穿。
+		<br><br>
+		<<destinationeventend>>
+	<<else>>
+		它一边拽着从你的$worn.over_lower.cn_name_cap上扯下的布料一边退回到下水道当中。
+		<br><br>
+		<<overlowerruined>><<exposure>>
+		<<destinationeventend>>
+		<<if $worn.lower.exposed gte 1>>
+			你被无情地抛弃在了街道中央。<<covered>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,50 @@
+:: Bird Tower Perch []
+<<effects>><<npc "Great Hawk">>
+<<bird_schedule>>
+<<if $bird.activity is "bathe" and $bird.state is "home" and $birdPerch isnot undefined>>
+	<<unset $birdPerch>>
+	<<if $monster is 1>>
+		<<beasttype>>站起身，向你伸出手。"是时候去洗干净了，来吧。"
+	<<else>>
+		<<beasttype>>抖动着<<bhis>>的翅膀，从栖木上往退下，向雨水池走去。
+	<</if>>
+	<br><br>
+	<<link [[跟上 (0:30)|Bird Tower Bathe Bird]]>><<bird_pass 30>><<endevent>><<set $phase to 1>><</link>><<if $monster is 1>><<handholdingvirginitywarning>><<NPCvirginitywarning "Great Hawk" "handholding">><</if>><br>
+	<<link [[留下|Bird Tower Perch]]>><<endevent>><</link>><br>
+<<elseif ($bird.activity is "sing" or $bird.activity is "groom") and $bird.state is "home">>
+	<<if $birdPerch is undefined>>
+		<<set $birdPerch to 1>>
+		你来到栖木上的<<beasttype>>旁边。
+		<<if $syndromebird isnot 1>>
+			<<bird_greeting>>
+			<<bHe>>张开翅膀，但你不确定<<bhe>>是什么意思。
+			<<if $bird.activity is "sing" and $bird.state is "home">>
+				过了一会儿，<<bhis>>收回翅膀，继续着自己的歌声。
+			<<else>>
+				过了一会儿，<<bhis>>收回翅膀，继续梳理自己的羽毛。
+			<</if>>
+			<br><br>
+		<<else>>
+			<<bird_greeting>>
+			<<if $monster is 1>>
+				<<bHe>>展开翅膀，邀请你坐在<<bhis>>的大腿上。
+			<<else>>
+				<<bHe>>展开翅膀，替你挡住高处的风。
+			<</if>>
+			<br><br>
+		<</if>>
+	<<elseif $birdBask is 0>>
+		<<unset $birdBask>>
+		<<beasttype>>移开自己的翅膀，让你站起来。
+		<br><br>
+	<<else>>
+		你在<<beasttypes>>的栖木上。<<bHe>>对着天空歌唱。荒原在你面前延展开来。
+		<br><br>
+	<</if>>
+	<<bird_perch_options>>
+
+<<else>>
+	你站在<<beasttypes>>的栖木上，荒原在你面前延展开来。
+	<br><br>
+	<<bird_perch_options>>
+<</if>>

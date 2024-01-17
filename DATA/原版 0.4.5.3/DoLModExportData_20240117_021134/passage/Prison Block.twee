@@ -1,0 +1,73 @@
+:: Prison Block []
+<<set $outside to 0>><<effects>><<effects_prison>><<set $bus to "cell_block">>
+
+你现在位于牢房区的底部。这里有楼梯通往上面的走道，还有大厅通往监狱的其他地方。
+<br><br>
+
+<<if Time.hour is 20>>
+	你听到警铃响起。"禁闭时间，"<<generate_veteran_guard 0>><<veteran_guard 0>>喊道，"回到你们的牢房。"
+	<br><br>
+	你和其他囚犯混在一起。
+	<br><br>
+	<<link [[继续|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<else>>
+	<<if $prison.schedule is "wake">>
+		其他囚犯摇摇晃晃地走向淋浴间。
+		<br><br>
+	<<elseif $prison.schedule is "free time">>
+		很多囚犯躺在床上休息。
+		<br><br>
+	<<elseif $prison.schedule is "lockdown">>
+		你听到了鼾声。
+		<br><br>
+	<<else>>
+
+	<</if>>
+
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			区域的一端有着一扇双开门，门上挂着几个牌子。一个写着"淋浴"。另一块写着"禁止性行为"。
+			<<if $prison.schedule is "wake">>
+				<span class="lblue">蒸汽喷涌而出。</span>
+			<</if>>
+			<br>
+			<<bathroomicon "shower">><<link [[沐浴间|Prison Shower]]>><</link>>
+			<br><br>
+			另一扇门周围弥漫着淡淡的化学气味。靠近的牢房都空着，金属已经变形和腐蚀。
+			<br>
+			<<prisonicon "laundry">><<link [[洗衣房|Prison Laundry]]>><</link>>
+			<br><br>
+
+			<<if $prison.kylar is "active" and !$prison_kylar_cell and ($prison.schedule is "free time" or $prison.schedule is "yard")>>
+				<<npc Kylar>><<person1>>
+				凯拉尔坐在<<his>>牢房的床上，对腿上的东西发牢骚。
+				<<endevent>>
+				<br>
+				<<prisonicon "cell">><<link [[凯拉尔的牢房|Prison Kylar]]>><</link>>
+				<br><br>
+			<</if>>
+
+			一条走廊通向远方，朝着日光。
+			<br>
+			<<getouticon>><<link [[外面|Prison Yard]]>><</link>>
+			<br><br>
+			楼梯环绕着中央塔楼。你从这处进入。
+			<br>
+			<<stairsicon "up">><<link [[爬楼梯去你的牢房|Prison Walkway]]>><</link>>
+			<br><br>
+
+			<<prison_map block>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>

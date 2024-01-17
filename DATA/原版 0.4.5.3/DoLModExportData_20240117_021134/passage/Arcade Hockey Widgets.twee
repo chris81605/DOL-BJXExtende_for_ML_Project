@@ -1,0 +1,132 @@
+:: Arcade Hockey Widgets [widget]
+<<widget "arcade_npc_bet">>
+
+	<<if $arcadeHockey.npc_clothes.upper.name isnot "naked">>
+		"如果你赢了，我就脱了我的<<npcClothesText $NPCList[0] "upper">>。"<<he>>说。
+
+	<<elseif $arcadeHockey.npc_clothes.lower.name isnot "naked">>
+		<<if $arcadeHockey.player_count_win is 0>>
+			"如果你赢了，我就脱了我的<<npcClothesText $NPCList[0] "lower">>，"<<he>>说。
+		<<else>>
+			"接下来是我的<<npcClothesText $NPCList[0] "lower">>，"<<he>>说，"你要是赢了我就脱。"
+		<</if>>
+
+	<<elseif !$arcadeHockey.npc_braless and $NPCList[0].pronoun is "f">>
+		"接着是胸罩，"<<he>>说，"如果你赢了，我就露奶子给所有人看，"<<He>>看起来对此丝毫不介意的样子。
+		<<if $NPCList[0].breastsize gte 4>>实际上，<<he>>甚至扯了几下<<his>>胸罩的绑带，令<<his>>的<<npcChest>>弹跳舞动着。<</if>>
+
+	<<else>>
+		<<He>>伸手拉着<<his>>内裤的绑带，"我也只剩这个了。"<<he>>说。
+		<<if $NPCList[0].penis isnot "none">>
+			你能看见<<his>><<npcPenis>>的轮廓，随<<his>>动作摇摆着。
+		<<else>>
+			当<<he>>朝<<himself>>拉紧它时，你能看见<<his>><<npcVagina>>的形状。
+		<</if>>
+		<br><br>
+
+		"你要是赢了，我也会脱了它们。"
+	<</if>>
+
+<</widget>>
+
+<<widget "arcade_player_bet">>
+	<<if !$worn.upper.type.includes("naked")>>
+		<<set $arcadeHockey.player_bet to "upper">>
+		<<set $arcadeHockey.exhibitionismNeeded to 0>><<set $arcadeHockey.exhibitionismNeededLvl to 0>>
+
+	<<elseif $player.breastsize gte 3 and !$worn.under_upper.type.includes("naked")>>
+		<<set $arcadeHockey.player_bet to "under_upper">>
+		<<set $arcadeHockey.exhibitionismNeeded to 35>><<set $arcadeHockey.exhibitionismNeededLvl to 3>>
+
+	<<elseif !$worn.lower.type.includes("naked")>>
+		<<set $arcadeHockey.player_bet to "lower">>
+		<<set $arcadeHockey.exhibitionismNeeded to 15>><<set $arcadeHockey.exhibitionismNeededLvl to 2>>
+
+	<<elseif !$worn.under_lower.type.includes("naked")>>
+		<<set $arcadeHockey.player_bet to "under_lower">>
+		<<set $arcadeHockey.exhibitionismNeeded to 55>><<set $arcadeHockey.exhibitionismNeededLvl to 4>>
+	<</if>>
+
+	<span class="blue">"但要是你输了，你就要脱了你的<<print $worn[$arcadeHockey.player_bet].name.cn_name_cap>>。"</span>
+	<br>
+	<<if $arcadeHockey.player_bet is "upper" and $player.breastsize gte 3 and $worn.under_upper.type.includes("naked")>>
+		<i><span class="red">没了胸罩，你要是输了就得把胸部露给人群看了。</span></i>
+		<<set $arcadeHockey.exhibitionismNeeded to 35>><<set $arcadeHockey.exhibitionismNeededLvl to 3>>
+
+	<<elseif $arcadeHockey.player_bet is "lower" and $worn.under_lower.type.includes("naked")>>
+		<i><span class="red">没了内裤，你要是输了就得把<<genitals>>露给人群看了。</span></i>
+		<<set $arcadeHockey.exhibitionismNeeded to 55>><<set $arcadeHockey.exhibitionismNeededLvl to 4>>
+	<</if>>
+
+<</widget>>
+
+<<widget "arcade_player_win">>
+
+	<<if $arcadeHockey.npc_clothes.upper.name isnot "naked">>
+		"好吧，你得说话算话。"<<He>><<npcUndressText $NPCList[0] "upper" "self">>，<<if $NPCList[0].pronoun is "f">>露出<<his>>的胸罩<<else>><<npcRevealText $NPCList[0] "upper">><</if>>。
+		<<garousal>><<arousal 600>>
+		<<set $arcadeHockey.npc_clothes.upper.name to "naked">>
+
+	<<elseif $arcadeHockey.npc_clothes.lower.name isnot "naked">>
+		"好，来吧！"<<he>>丝毫不犹豫或尴尬，<<npcUndressText $NPCList[0] "lower" "self">>并穿着<<his>>内裤傲然挺立。
+		<<ggarousal>><<arousal 800>>
+		<<set $arcadeHockey.npc_clothes.lower.name to "naked">>
+
+	<<elseif !$arcadeHockey.npc_braless>>
+		<<he>>毫不在意地将手伸到<<his>>背后，解开了<<his>>的胸罩，<<He>>放下双臂，让胸罩自然落到地板上，露出<<his>>的<<npcChest>>。即便人群全神贯注地盯着<<his>>的胸部，<<He>>也完全不遮不掩。
+		<<ggarousal>><<arousal 800>>
+		<<set $arcadeHockey.npc_braless to true>>
+	<<else>>
+		人群欢呼着，了解到了等等要发生什么事，你的对手耸耸肩。
+		<br><br>
+
+		"好吧，愿赌服输。"
+		<br><br>
+
+		<<he>>毫不犹豫，抓着<<his>>的内裤向下拉，<<he>>扭动几下，把内裤踢到一旁，并以不同角度，向观众展现着<<himself>>。即便<<hes>>输了，观众依旧对<<he>>的表演给予鼓励。
+		<<ggarousal>><<arousal 800>>
+		<<set $arcadeHockey.npc_underwearless to true>>
+	<</if>>
+	<br><br>
+
+<</widget>>
+
+<<widget "arcade_player_lost">>
+	<<switch $arcadeHockey.player_bet>>
+		<<case "upper">>
+			<<if $player.breastsize lte 2 or !$worn.under_upper.type.includes("naked")>>
+				你拉起你的<<top>>，<<upperstrip>>暴露出你的<<exposedupper>>。你可以感觉到从桌子过来的空气在你裸露的皮肤上流动。
+
+			<<elseif $player.breastsize gte 3 and $worn.under_upper.type.includes("naked")>>
+			<<upperstrip>>
+				你在上衣里面并没有穿胸罩，你脸红着拉下上衣，露出你的<<breasts>>。
+				<br><br>
+
+				所有人看见你突然露出的胸部时，都惊呼出声。曲棍球桌喷出的气流吹过你的胸口，让你起了一阵鸡皮疙瘩，乳头也随之硬了起来。
+			<</if>>
+
+		<<case "under_upper">>
+			群众期待地看着你脱掉<<undertop>>，露出了胸部。
+
+			<<if $player.breastsize gte 3>>
+				<br><br>
+
+				冷风让你起了鸡皮疙瘩，乳头也硬了起来。所有人的视线还有几架相机，都对着你的<<breasts>>，你马上伸出一隻手臂遮着，另一手则握着击球器。
+			<</if>>
+			<<underupperstrip>>
+
+		<<case "lower">>
+			<<if $worn.under_lower.type.includes("naked")>>
+				你犹豫片刻，慢慢拉下你的<<bottoms>>，人群似乎很高兴看到你没穿贴身衣物。
+			<<else>>
+				你脱下你的<<bottoms>>，露出你的<<underbottoms>>，你一脚将衣物踢到一旁。现在只剩下<<underbottoms>>能捍卫你仅剩的矜持。
+			<</if>>
+			<<lowerstrip>>
+		<<case "under_lower">>
+			人群期待地鼓噪着，你做足心理准备，手指伸入<<underbottoms>>的绑带，接着迅速脱掉它们，把衣物踢到一旁。
+			<<underlowerstrip>>
+	<</switch>>
+	<<exposure>>
+	<br><br>
+
+<</widget>>

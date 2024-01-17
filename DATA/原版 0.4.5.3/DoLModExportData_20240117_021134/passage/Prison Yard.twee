@@ -1,0 +1,169 @@
+:: Prison Yard []
+<<set $location to "prison">><<set $bus to "yard">><<set $outside to 1>><<effects>><<effects_prison>>
+
+你在监狱院子里。院子很宽敞，但周围的围墙高到了不合理的程度，而且墙壁似乎向墙内有所弧度的弯曲。
+<br><br>
+
+<<if $prison.schedule is "yard">>
+	囚犯们有的在举重，有的在互相交流。<<generate_veteran_guard 0>>而<<veteran_guard 0 cap>>目光严厉地注视着囚犯们。<<endevent>>
+	<br><br>
+<<elseif $prison.schedule is "revolt">>
+	<<beastNEWinit 6 hawk>>
+	当<<beastsplural>>飞过头顶的时候，阴影从草上掠过。囚犯们成群结队地跑过院子，或者躲在阴影里。有些被捕获并带上了天空。你不确定他们被带到了哪里。
+	<<endevent>>
+	<br><br>
+<</if>>
+<<if Time.hour is 20>>
+	你听到警铃响起。"禁闭时间，"<<generate_veteran_guard 0>><<veteran_guard 0>>喊道，"回到你们的牢房。"
+	<br><br>
+	你和其他囚犯混在一起。
+	<br><br>
+	<<link [[继续|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	<<passout_prison>>
+<<elseif $prison_wren_intro is 1 and $prison.schedule is "yard">>
+	<<if $wren_seen is "cards">>
+		<<npc "Wren">><<person1>>
+		"在这里见到你，我的心情很复杂，"一个年轻的<<if $pronoun is "m">>短发男人<<else>>头发齐肩的女人<</if>>说道。<span class="gold">是伦恩。</span>
+		<br><br>
+
+		"很遗憾你没能偷偷溜走，也许我们可以对彼此有所帮助。"
+		<br><br>
+		<<link [[继续|Prison Wren Intro Met]]>><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+		<br>
+	<<elseif $wren_seen is "catsuit">>
+		<<npc "Wren">><<person1>>
+		"在这里见到你，我的心情很复杂，"一个年轻的<<if $pronoun is "m">>短发男人<<else>>头发齐肩的女人<</if>>说道。<span class="gold">是伦恩。</span>
+		<br><br>
+
+		"很遗憾你没能蒙混过关，也许我们可以对彼此有所帮助。"
+		<br><br>
+
+		<<link [[继续|Prison Wren Intro Met]]>><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+		<br>
+	<<elseif $wren_seen is "winter">>
+		<<npc "Wren">><<person1>>
+		"在这里见到你，我的心情很复杂，"一个年轻的<<if $pronoun is "m">>短发男人<<else>>头发齐肩的女人<</if>>说道。<span class="gold">是伦恩。</span>
+		<br><br>
+
+		"老温特的委托是违法的那种吗？也许我们对彼此会有用。"
+		<br><br>
+
+		<<link [[继续|Prison Wren Intro Met]]>><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+		<br>		
+	<<else>>
+		<<npc "Wren">><<person1>>
+		"新来的？"一个年轻的<<if $pronoun is "m">>短发男人问，<<else>>留着齐肩长发的女人<</if>>说道。"正是我喜欢的类型。"<<He>>穿着囚服，但似乎与其他囚犯不同，更加自由。
+		<br><br>
+
+		<<link [[继续|Prison Wren Intro]]>><<unset $prison_wren_intro>><<set $wren_seen to "prison">><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $prison.schedule isnot "lockdown" and $prison.attention gte 100>>
+		<<events_prison_attention>>
+	<<else>>
+		<<if $prison.schedule isnot "lockdown" and $eventskip isnot 1>>
+			<<events_prison>>
+		<</if>>
+		<<if $prison_event_trigger>>
+			<<events_prison_triggered>>
+		<<else>>
+			<<if $prison.schedule is "yard" and !$daily.prison.veteranGreet and $prison.veteran gte 15>>
+				<<prison_guard_greet veteran>>
+			<<elseif $prison.schedule is "yard" and random(1, 5) is 5 and $eventskip isnot 1>>
+				<<prison_guard_watch veteran>>
+			<<else>>
+				<<if $prison.schedule isnot "revolt">>
+					<<if $worn.feet.type.includes("shackle")>>
+						<span class="blue">你的双腿被束缚，无法奔跑。</span>
+						<br>
+					<<else>>
+						<<prisonicon "run">><<link [[跑 (0:30)|Prison Yard Run]]>><<endevent>><<tiredness 6>><<athletics 6>><<pass 30>><</link>><<gathletics>><<gphysique>>
+						<br>
+					<</if>>
+					<<if $leftarm is "bound" or $rightarm is "bound">>
+						<span class="blue">你的双臂被绑住，无法举重。</span>
+						<br>
+					<<else>>
+						<<prisonicon "lift">><<link [[举重 (0:30)|Prison Yard Exercise]]>><<endevent>><<pass 30>><<tiredness 6>><</link>><<gtiredness>><<ggphysique>>
+						<br>
+					<</if>>
+				<</if>>
+				<<if $prison.schedule is "yard">>
+					<<if $worn.face.type.includes("gag")>>
+						<span class="blue">你的嘴巴被塞住，无法和守卫或囚犯说话。</span>
+						<br>
+					<<else>>
+						<<socialiseicon>><<link [[跟守卫说话 (0:30)|Prison Yard Speak]]>><<pass 30>><<prison_rep veteran 1>><<endevent>><</link>><<glove>>
+						<br>
+						<<link [[与囚犯调情 (0:30)|Prison Yard Flirt]]>><<set $phase to 0>><<pass 30>><<prison_hope 1>><<endevent>><</link>><<promiscuous1>><<ghope>>
+						<br>
+						<<if $promiscuity gte 15>>
+							<<link [[淫荡地与囚犯调情 (0:30)|Prison Yard Flirt]]>><<set $phase to 1>><<pass 30>><<prison_reb 1>><<endevent>><</link>><<promiscuous2>><<greb>>
+							<br>
+						<</if>>
+					<</if>>
+				<</if>>
+				<<if $prison.schedule is "yard" and Time.weekDay is 6>>
+					<br>
+					<<npc Wren>><<person1>>
+					<span class="teal">伦恩靠在墙上。</span>守卫似乎对<<him>>视而不见。
+					<br>
+
+					<<socialiseicon>><<link [[跟伦恩说话|Prison Wren]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+				<br>
+				地面缓缓倾斜，通向一扇宽大的门。空气中弥漫着陈腐食物的味道。
+				<br>
+				<<prisonicon "canteen">><<link [[食堂|Prison Canteen]]>><<endevent>><</link>>
+				<br><br>
+
+				墙壁突出，形成一座高塔，比监狱的其他部分要高得多。底部有一扇金属门。
+				<br>
+				<<if $prison.job is "spire">>
+					<<link [[攀登尖塔 (0:05)|Prison Spire]]>><<tiredness 6>><<pass 5>><</link>><<gtiredness>>
+					<br>
+					<<if $prison.schedule isnot "revolt">>
+						<<if $prison.rope is 1>>
+							<br>
+							你可以把绳子从尖塔底部的洞里放下去。
+							<br>
+							<<link [[使用绳子|Prison Spire Rope]]>><<set $prison.rope to 2>><</link>>
+							<br>
+						<<elseif $prison.rope is 2>>
+							<<link [[从尖塔上下去 (0:05)|Prison Spire Descend]]>><<tiredness 6>><<pass 5>><</link>><<gtiredness>>
+							<br>
+						<<else>>
+							<br>
+							在尖塔底部有一个深洞。
+							<br>
+							<<link [[望向洞里|Prison Spire Hole]]>><</link>>
+							<br>
+						<</if>>
+					<</if>>
+				<<else>>
+					<span class="blue">你在尖塔里不受信任。</span>
+					<br>
+				<</if>>
+				<br>
+				这里有一小块遮挡视线的地方。一扇上锁的大门与周围的石头融为一体。
+				<br>
+				<<if $prison.yard_door is 1>>
+					<<prisonicon "door">><<link [[偷偷溜到海滩 (0:01)|Prison Beach]]>><<endevent>><<pass 1>><</link>>
+					<br>
+				<<else>>
+					<<prisonicon "door">><<link [[大门|Prison Yard Door]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+				<br>
+				<<link [[牢房区域|Prison Block]]>><<endevent>><</link>>
+				<br>
+				<<prison_map yard>>
+			<</if>>
+		<</if>>
+		<<set $eventskip to 0>>
+	<</if>>
+<</if>>

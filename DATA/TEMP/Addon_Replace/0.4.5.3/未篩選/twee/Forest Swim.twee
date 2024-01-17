@@ -1,0 +1,99 @@
+:: Forest Swim []
+<<location "forest">><<water>><<effects>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - ($allure * $forestmod)) and $eventskip is 0>>
+	<!-- Modified for monster people -->
+	<<beastNEWinit 1 lizard>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		一只巨大的<<beasttype>>从水中翘起！
+		<br><br>
+
+		<<link [[继续|Forest Swim Molestation]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		一只巨大的蜥蜴从水中翘起，嘴里抓住了你！你设法挣脱出来，但并没有毫发无损。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Forest Swim]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<swimmingdifficulty 1 600 true>>
+	<<if $swimmingSuccess>>
+		急流撕扯着你。
+		<<set $stripintegrity to 20>><<set $stripobject to "礁石">><<stripobject>>
+		尽管如此，你还是<span class="green">成功地</span>游了过去。
+		<br><br>
+
+		<<rng>>
+		<<if $wraith.hunt and isBloodmoon() and $danger gte (7900 - ($allure * $forestmod))>>
+			当你爬上岸时，感觉到你的脚卡在了什么东西上。
+			<<if $slimedisable is "f">>
+				你低头看到有一只苍白的史莱姆黏在你身上，而且还有更多的史莱姆从河里冒出来了。<<rainWraith true>>
+				<br><br>
+
+				河流的远处，你看到一个穿着苍白长袍的人物走近。那个人举起手，史莱姆们扑向你！
+				<br><br>
+
+				<<link [[继续|Forest Pale Slime Struggle]]>><<set $struggle_start to 1>><<set $phase to 1>><</link>>
+			<<else>>
+				它猛烈地拉着你的腿，试图把你拉回到河里！你勉强设法脱身。你回头看到一个苍白的身影消失在一棵树后面。<<trauma 12>><<pain 6>><<stress 12>><<gtrauma>><<gpain>><<gstress>>
+				<br><br>
+
+				<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<else>>
+			<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
+				<<if $worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+					当你爬上岸时，你感到屁股上有一种刺痛感。你摸了一下<<bottom>>，发现有一种奇怪的柔软生物黏在那里。它吸着你的一块皮肤，让那里很暖和。
+					<<garousal>><<arousal 600 "bottom">>
+					<br><br>
+
+					你使劲拉它，但它却不动。你需要帮助才能把它拿掉。
+					<<parasite bottom urchin>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		急流撕扯着你。
+		<<set $stripintegrity to 20>><<set $stripobject to "礁石">><<stripobject>>
+		水流太猛烈了，你<span class="red">未能成功</span>游过河流，而是被冲走，被带得越来越深入森林。
+		<br><br>
+
+		<<rng>>
+		<<if $wraith.hunt and isBloodmoon()>>
+			当你爬上岸时，感觉到你的脚卡在了什么东西上。
+			<<if $slimedisable is "f">>
+				你低头看到有一只苍白的史莱姆黏在你身上，而且还有更多的史莱姆从河里冒出来了。<<rainWraith true>>
+				<br><br>
+
+				河流的远处，你看到一个穿着苍白长袍的人物走近。那个人举起手，史莱姆们扑向你！
+				<br><br>
+
+				<<link [[继续|Forest Pale Slime Struggle]]>><<set $forest += 20>><<set $struggle_start to 1>><<set $phase to 2>><</link>>
+			<<else>>
+				它猛烈地拉着你的腿，试图把你拉回到河里！你勉强设法脱身。你回头看到一个苍白的身影消失在一棵树后面。<<trauma 12>><<pain 6>><<stress 12>><<gtrauma>><<gpain>><<gstress>>
+				<br><br>
+
+				<<link [[继续|Forest]]>><<set $forest += 20>><</link>>
+			<</if>>
+		<<else>>
+			<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
+				<<if $worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+					当你爬上岸时，你感到屁股上有一种刺痛感。你摸了一下<<bottom>>，发现有一种奇怪的柔软生物黏在那里。它吸着你的一块皮肤，让那里很暖和。
+					<<garousal>><<arousal 600 "bottom">>
+					<br><br>
+
+					你使劲拉它，但它却不动。你需要帮助才能把它拿掉。
+					<<parasite bottom urchin>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[继续|Forest]]>><<set $forest += 20>><</link>>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

@@ -1,0 +1,57 @@
+:: Sea Dolphins Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Sea Dolphins]]>><</link>>
+		<br>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Sea Dolphins Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Sea Dolphins]]>><</link>>
+		<br>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Sea Dolphins Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃进了黑暗的大海中。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		那个<<beasttype>>留你漂浮在水上。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		感觉到你的麻烦比你的价值大，<<beastsplural>>逃进了大海。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		<<beastsplural>>让你精疲力尽，在水中瑟瑟发抖。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		<<beastsplural>>让你精疲力尽，在水中瑟瑟发抖。
+	<</if>>
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+	哨声响起，惊动了<<beastsplural>>。一个救生员坐着小船向你跑来。这些<<beastsplural>>发出叽叽喳喳的声音，然后从岸边逃走。看到他们离开，救生员回到了海滩。
+	<br><br>
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

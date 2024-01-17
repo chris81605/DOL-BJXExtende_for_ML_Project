@@ -1,0 +1,51 @@
+:: Maths Whitney Shirt Expose []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你把手滑到了惠特尼的背后。
+<<set _whitney to $NPCName[$NPCNameList.indexOf("Whitney")]>>
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">你熟练并迅速地解开了<<his>>的<<if $pronoun is "m">>皮带<<else>>胸罩<</if>>。</span>
+	<<promiscuity2>>
+	<<skulduggeryuse>>
+	<<if $pronoun is "m">>
+		<<run npcMakeNaked($NPCList[0], "lower")>>
+		你顺利地把<<his>>的裤子拉了下来，让它滑落到地板上。<span class="lewd"><<Hes>>没穿内裤。</span>
+		<<if _whitney.penis isnot "none">>
+			<<if _whitney.penissize lte 1>>
+				看到<<his>>的<<print _whitney.penisdesc>>之后你笑了起来。
+			<<elseif _whitney.penissize is 2>>
+				全班的人都呆呆地看着<<his>>的<<print _whitney.penisdesc>>。
+			<<else>>
+				当看到<<his>>的<<print _whitney.penisdesc>>之后，全班都在兴奋地窃窃私语着。
+			<</if>>
+		<<else>>
+			全班人都呆呆地看着<<his>>露出的小穴。
+		<</if>>
+	<<else>>
+		<<run npcMakeNaked($NPCList[0], "upper")>>
+		你悄悄地解开了胸罩然后拿走了它，<span class="lewd"><<his>><<print _whitney.breastsdesc>>露了出来。</span>班里的一些人面红耳赤地背过身去，另一些人直勾勾地看着。
+	<</if>>
+	瑞沃看了一眼，瘫倒在了<<nnpc_his "River">>的讲台前。
+	<br><br>
+
+	<<link [[嘲笑|Maths Whitney Shirt Expose Taunt]]>><<npcincr Whitney dom -3>><<npcincr Whitney lust 10>><</link>><<lldom>><<glust>>
+	<br>
+	<<link [[保持沉默|Maths Whitney Shirt Expose Silent]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">当你的手指摸到<<him>>裸露的皮肤时，你感觉到<<him>>紧张了起来。</span>
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<He>>把手从你的$worn.upper.cn_name_cap移到你的肩膀上，然后把你推到了桌子上。
+	<br><br>
+
+	"你就这么想把皮肤露出来吗？"<<he>>笑道，"我无所谓。"
+	<br><br>
+
+	<<run npcMakeNaked($NPCList[0], "upper")>>
+
+	<<link [[继续|Maths Whitney Shirt Forced]]>><<set $molestationstart to 1>><<set $whitneyShirtRiver to "awake">><</link>>
+	<br>
+<</if>>

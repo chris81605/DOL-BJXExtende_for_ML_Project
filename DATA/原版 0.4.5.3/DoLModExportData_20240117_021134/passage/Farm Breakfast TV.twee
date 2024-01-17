@@ -1,0 +1,73 @@
+:: Farm Breakfast TV []
+<<effects>>
+
+<<if $daily.alex.spank and $pain gte 20>>
+	<<He>>看到你的眼泪，似乎有些后悔，<<he>>用一只手擦干你的眼泪，另一只手轻轻地拍着你的背。
+	<<He>>给了你些笨拙的安慰，你可以看出<<hes>>在尽自己最大的努力。你感觉稍微好些了。<<pain -10>><<lpain>>
+	<br><br>
+<</if>>
+<<if $rng gte 91>>
+	你们在看一部自然纪录片，里面播放着生活在自然栖息地的?animals。艾利克斯似乎很感兴趣。<<He>>
+	<<print either("不时在某些场景替你遮住眼睛", "身体前倾仔细地看着", "不时与你分享一些动物的小贴士")>>。
+<<elseif $rng gte 81>>
+	你们看了电视广告。它<<print either("看着很奇怪", "的内容看起来极其奢侈浮夸", "并不符合你的年龄层", "显然是为更成熟的观众准备的")>>。
+	<<switch random(1, 3)>>
+		<<case 1>>
+			"太疯狂了，"<<he>>说道，"现在人们卖的都是些什么东西。"
+		<<case 2>>
+			"得了吧，谁会上当啊？"<<He>>困惑地指着屏幕。
+		<<case 3>>
+			"我的<<sister_npc>>买过一次，" <<he>>咯咯笑着，"不过已经坏掉了。"
+	<</switch>>
+<<elseif $rng gte 71>>
+	你们看了新闻。内容是<<print either("某位名人的生日", "天气相关的事", "本地采风", "对当地人的采访")>>。艾利克斯没有特别抱怨什么。
+<<elseif $rng gte 61>>
+	你看了一场重播的体育比赛。尽管已经知道比赛的结果，艾利克斯还是<<if random(1,2) is 1>>在<<his>>支持的球队进球时大声欢呼。<<else>>在最后为失败的结果而懊恼。<</if>>
+<<elseif $rng gte 51>>
+	你看了一部外国情景喜剧。艾利克斯对着重播的情节抱怨着。"<<print either("我有个伏笔没注意到，", "我以为是新的一集呢，", "又是这个，")>>"<<he>>叹气说道。
+<<elseif $rng gte 41>>
+	你们看了一部戏剧。艾利克斯的眼睛飘向窗外。
+	<<if $weather is "rain">>
+		"天气不太好啊。"<<he>>咕哝道。
+	<<elseif $weather is "snow">>
+		<<if $christmas is 1 and Time.monthDay is 25>>
+			"正好赶上圣诞节。"<<he>>说道。
+		<<else>>
+			<<if random(1,2) is 1>>"一定记得裹好自己，"<<he>>说。<<else>>"希望你准备好了铲子，"<<he>>笑着说，然后叹了口气，"一想到要铲雪，我的背就开始痛了。"<</if>>
+		<</if>>
+	<<elseif $weather is "overcast">>
+		"雾蒙蒙的，还是老样子。"<<he>>说道。
+	<<else>>
+		"我发誓……"<<he>>的声音逐渐减弱。
+	<</if>>
+<<elseif $rng gte 31>>
+	你们想看点什么，音量有些小，艾利克斯把它调大，然后在某个动作场景中又把音量调小。"我讨厌这种情节，"<<he>>说道。
+<<elseif $rng gte 21>>
+	你们看了个动画节目。艾利克斯<<print either("怀念地瞪大了眼睛", "感到有些无聊", "对着搞笑情节大笑")>>。你和<<his>>有同感。
+<<elseif $rng gte 11>>
+	艾利克斯捏了捏你的手臂，指了指电视屏幕，灿烂地笑着。"我已经看过无数次了，但这个部分总是让我着迷。"你稍微打起了精神。
+<<else>>
+	艾利克斯翻遍了频道，但你们找不到喜欢的节目。"这个时间没什么好节目，"<<he>>耸耸肩。
+<</if>>
+<br><br>
+
+
+<<if Time.hour gte 6>>
+	<<He>>看了一眼墙上的钟。"该工作了。回头见，"<<he>>边说边站起来朝门口走去。
+	<br><br>
+
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<elseif $alex_countdown is undefined>>
+	<<link [[继续看 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[拥抱艾利克斯 (0:20)|Farm Breakfast Cuddle]]>><<npcincr Alex love 1>><<pass 20>><</link>><<glove>>
+	<br>
+	<<link [[停止|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续看 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[停止|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>

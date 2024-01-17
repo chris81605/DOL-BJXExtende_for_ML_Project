@@ -1,0 +1,94 @@
+:: Flats Hookah []
+<<effects>>
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+    <<set _noWake to true>>
+	<<pregnancyWatersBrokenPassout "hookah">>
+<<else>>
+    <<if $hookah_state is 3>>
+你在你的水烟馆里。水烟机位于房间中央，被坐垫环绕着。
+        <br><br>
+
+        <<hookah_juice>>
+
+        <<if $hookah.juice gte 1>>
+            <<if $daily.hookah is 1>>
+<span class="red">有人警告过你，每天吸烟超过一小时很危险。</span>
+                <br>
+                <<if random(1, 2) is 2>>
+<<link [[无论如何都要抽 (1:00)|Flats Hookah Smoke]]>><<set $hookah.juice -= 1>><<hallucinogen 60>><</link>>
+                    <br>
+                <<else>>
+<<link [[无论如何都要抽 (1:00)|Flats Hookah Smoke Danger]]>><<set $hookah.juice -= 1>><<hallucinogen 60>><</link>>
+                    <br>
+                <</if>>
+            <<else>>
+<<link [[抽烟 (1:00)|Flats Hookah Smoke]]>><<set $hookah.juice -= 1>><<set $daily.hookah to 1>><<hallucinogen 60>><</link>>
+                <br>
+            <</if>>
+            <<if $exposed lte 0>>
+<<link [[吸引顾客 (1:00)|Flats Hookah Work]]>><<set $hookah.juice -= 1>><<hallucinogen 60>><</link>>
+                <br>
+            <</if>>
+        <</if>>
+<<link [[离开|Flats]]>><</link>>
+        <br>
+    <<elseif $hookah_state is 2>>
+你在你的水烟馆里。水烟管倒在地板上，但香的味道依然存在。
+        <br><br>
+
+<<link [[打扫 (3:00)|Flats Hookah Clean]]>><<set $hookah_state to 3>><<pass 180>><</link>>
+        <br>
+<<link [[离开|Flats]]>><</link>>
+        <br>
+    <<elseif $hookah_state is undefined>>
+        <<set $hookah_state to 1>>
+        <<generate1>><<person1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+你推开门往里看。五个人躺在天鹅绒垫子上，他们围着一个水烟管。这气味令人陶醉。
+        <br><br>
+一个<<person1>><<person>>从隔壁房间进来，<<his>>的手里拿着一个碗和一把钳子。<<He>>从容器中夹起一个蠕动的东西，把它放在水烟管里。
+        <br><br>
+"啊哈，"<<he>>注意到了你。<<he>>转身时，你听到了一阵叮当声。一副小眼镜架在<<his>>的鼻尖上。"新客人，水烟一小时£50。"
+        <br><br>
+"没有两个人有相同的经历，"<<he>>补充道，好像在预测一个问题。"恐怕这种物质本身必须保密。"
+        <<if playerBellyVisible()>>
+<<He>>低头看着你的<<bellyDescription "pc">>。"别担心，这东西很安全。我是说，对你的孩子来说很安全。"
+        <</if>>
+        <br><br>
+<span class="gold">你发现了水烟馆。</span>
+        <br><br>
+        <<saveNPC 0 "hookah">>
+<<link [[离开|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <<else>>
+        <<loadNPC 0 "hookah">><<person1>>
+水烟馆和你记忆中的不太一样，但你闻到了一股熟悉的香味，这有助于你找到它。水烟馆前门开着，里面闪着紫光。你把它推开，往里面看。
+        <br><br>
+        <<if $rng gte 81>>
+戴眼镜的水烟<<hookah_master>>坐在其中一个靠垫上，<<himself>>正在读报纸。
+        <<elseif $rng gte 61>>
+戴眼镜的水烟<<hookah_master>>跪在一个柜子前，在里面翻找。
+        <<elseif $rng gte 41>>
+戴眼镜的水烟<<hookah_master>>正在清洗烟斗。
+        <<elseif $rng gte 21>>
+戴眼镜的水烟<<hookah_master>>靠在窗户上，看着<<if $weather is "rain">>下雨<<elseif $weather is "snow">>下雪<<else>>的街道。<</if>>
+        <<else>>
+戴眼镜的水烟<<hookah_master>>坐在凳子上喝茶。
+        <</if>>
+        <br><br>
+        <<if $daily.hookah is 1>>
+<<He>>看着你。"我们不会让客人每天花超过一个小时在水烟上，"<<he>>说。"这是为了你的安全。"
+            <br><br>
+        <<else>>
+<<He>>看着你。"水烟一小时£50。"
+            <br><br>
+        <</if>>
+
+        <<if $money gte 5000 and $daily.hookah is undefined>>
+<<link [[吸烟 (1:00)|Flats Hookah Smoke]]>><<set $daily.hookah to 1>><<set $money -= 5000>><</link>>
+            <br>
+        <</if>>
+<<link [[离开|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+<</if>>

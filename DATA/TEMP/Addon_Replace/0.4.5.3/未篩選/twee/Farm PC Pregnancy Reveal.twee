@@ -1,0 +1,173 @@
+:: Farm PC Pregnancy Reveal []
+<<effects>><<npc "Alex">>
+
+ <<if $phase isnot 3>>
+    <<if $location is "alex_cottage">>
+你坐到了艾利克斯旁边。
+
+    <<else>>
+你伸手抓住了艾利克斯的胳膊。
+
+    <</if>>
+
+	<<if C.npc.Alex.pregnancy.test is true>>
+		你向艾利克斯展示了亲子鉴定结果。<<He>>瞬间呆住了<<if $farm_stage gte 7 and $alex_countdown is undefined>>，但你注意到<<his>>的脸上逐渐升起了笑容<<else>>。<</if>>
+        <br><br>
+
+	<<else>>
+		"嘿，有时间吗？我有点东西想给你看看。"
+		<br><br>
+
+		<<He>>好奇地瞥了你一眼，把注意力转了过来。"当然，"<<he>>说，"怎么了？"
+		<br><br>
+
+	<</if>>
+
+<</if>>
+
+<<if C.npc.Alex.pregnancy.test isnot true and $farm_stage gte 7 and $alex_countdown is undefined>>
+	<<setKnowsAboutPregnancy "pc" "Alex">><<setTalkedAboutPregnancy "pc" "Alex">><<set C.npc.Alex.pregnancy.knowledge to true>>
+
+    <<if playerBellySize() gte 7>>
+        <<if $phase is 3>>
+你们俩在沙发上坐了下来。叹了口气，<<if !$worn.upper.type.includes("naked")>>你掀起自己的衬衫，<<else>>你<</if>>抚摸着自己的肚子，<<his>>也看向了你的肚子。
+            <br><br>
+
+"你知道吗，这其实是你的，"你说。
+            <br><br>
+
+        <<else>>
+你显得有些犹豫。"我只是觉得，直接让你看到会更容易开口……"<<if !$worn.upper.type.includes("naked")>>你掀起自己的上衣，<<else>>你<</if>>抚摸着自己的肚子，<<his>>也看向了你的肚子。
+            <br><br>
+
+        <</if>>
+
+<<he>>从你身边拉开距离，仔细端详起你的肚子。"你可花了不少时间才告诉我这个消息，不是吗？"<<he>>讽刺道。
+        <br><br>
+
+"只是一直没找到好时机，"你回答道。
+        <br><br>
+
+"没关系，我不介意。我很高兴你终于还是告诉我了！"
+        <br><br>
+
+    <<else>>
+你向<<him>>展示了你的验孕结果。<<He>>瞬间呆住了，但你注意到<<his>>的脸上逐渐升起了笑容。
+        <br>
+
+"哇哦，"<<he>>出声打破了沉默，"我实在是没想到。"
+		<br>
+
+		<<He>>把你拉入了一个拥抱。
+
+        <<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+"我们自己的小家庭！妈妈会很自豪的。"
+
+        <<else>>
+"看来我们的小家庭又要扩大了。不知道妈妈会怎么看呢。"
+
+        <</if>>
+        <br><br>
+
+<<he>>从你身边拉开距离，举起使用过的验孕棒仔细端详。"说真的，你居然用这个你尿过的小道具来向我宣布这个消息？"<<he>>打趣道。
+        <br><br>
+
+"呃……对不起，"你露出一个羞怯的笑容。
+        <br>
+
+<<He>>也对着你笑了。"没关系，我不介意。我好歹是个种地的，没那么神经脆弱。"
+        <br><br>
+
+    <</if>>
+
+<<else>>
+
+    <<if C.npc.Alex.pregnancy.knowledge isnot true>>
+		<<setKnowsAboutPregnancy "pc" "Alex">><<setTalkedAboutPregnancy "pc" "Alex">><<set C.npc.Alex.pregnancy.knowledge to true>>
+
+        <<if playerBellySize() gte 7>>
+            <<if $phase is 3>>
+叹了口气，<<if !$worn.upper.type.includes("naked")>>你掀起自己的上衣，<<else>>你<</if>>抚摸着自己的肚子，<<his>>也看向了你的肚子。
+
+"你知道吗，这其实是你的，"你说。
+
+            <<else>>
+你显得有些犹豫。"我只是觉得，直接让你看到会更容易开口……"<<if !$worn.upper.type.includes("naked")>>你掀起自己的上衣，<<else>>你<</if>>抚摸着自己的肚子，<<his>>也看向了你的肚子。
+                <br><br>
+
+            <</if>>
+
+        <<else>>
+你的手指颤抖着，向<<him>>递过去你的验孕结果。
+
+        <</if>>
+        <br><br>
+
+    <</if>>
+
+    <<if C.npc.Alex.pregnancy.test is true>>
+		<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+			"哇哦，"<<he>>出声打破了沉默，"我实在是没想到。"
+			<br>
+
+			<<He>>把你拉入了一个拥抱。
+
+			<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+				"我们自己的小家庭！妈妈会很自豪的。"
+
+			<<else>>
+				"看来我们的小家庭又要扩大了。不知道妈妈会怎么看呢。"
+
+			<</if>>
+			<br><br>
+
+			<<he>>从你身边拉开距离，举起亲子鉴定结果仔细端详。"对不起，我还怀疑过你。"<<he>>说。
+			<br><br>
+
+			"没关系，我不介意，"你说着，露出一个羞怯的笑容。
+			<br><br>
+
+		<<else>>
+			"哇哦，"<<he>>开口打破了沉默。
+
+			<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+				"我实在是没想到，"<<He>>停顿了一会儿。
+
+			<<else>>
+				"看来我们……又大意了……"<<He>>停顿了一会儿。
+			<</if>>
+			<br>
+
+			"我们去小屋吧？"艾利克斯把你带到了小屋。
+			<br><br>
+
+		<</if>>
+
+    <<else>>
+		<<set C.npc.Alex.pregnancy.sample to true>>
+
+<<He>><<if $farm_work.alex is "relax">>站起身，<</if>>愣在了原地，"等、等等，伙伴，你确定？"<<he>>问。
+        <br><br>
+
+你张开嘴想要说什么，但<<he>>打断了你。"好吧……给你……"<<He>>拔下一缕头发。"先去做个亲子鉴定再来谈吧。我只是还不太能相信你说的话。"
+        <br><br>
+
+<span class="blue">只有拿到亲子鉴定结果，你才能说服艾利克斯<<hes>>是孩子的爸爸。镇上的医院可以提供鉴定。</span>
+        <br><br>
+
+        <<if $farm_work.alex is "relax">>
+<<link [[继续|Farm Work]]>><<endevent>><<unset $farm_relax_drink>><<set $farm_work.alex to "still">><</link>>
+
+        <<else>>
+<<link [[继续|Farm Work]]>><<endevent>><</link>>
+
+        <</if>>
+
+    <</if>>
+
+<</if>>
+
+<<if ($farm_stage gte 7 and $alex_countdown is undefined) or C.npc.Alex.pregnancy.test is true>>
+	<<link [[继续|Farm PC Pregnancy Reveal 2]]>><<run delete C.npc.Alex.pregnancy.test>><</link>>
+
+<</if>>

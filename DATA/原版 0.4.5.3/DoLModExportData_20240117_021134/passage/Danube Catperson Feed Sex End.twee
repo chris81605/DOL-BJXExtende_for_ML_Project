@@ -1,0 +1,78 @@
+:: Danube Catperson Feed Sex End []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>吃痛退开，但另一个家伙正跃跃欲试。
+		<<combatTrainAdvance>>
+		<<set $danubecathappiness -= 1>>
+		<br><br>
+		<<link [[继续|Danube Catperson Feed Sex]]>><</link>>
+		<br>
+	<<else>>
+		<<beasttype>>吃痛退开，畏惧着。
+		<<combatTrainAdvance>>
+		<<set $danubecathappiness -= 1>>
+		<br><br>
+
+		<<link [[继续|Danube Catperson Feed Sex End]]>><<set $finish to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		心满意足后，这只<<beasttype>>离开了，
+		<<combatTrainAdvance>>
+		下一个跃跃欲试。
+		<<set $danubecathappiness += 1>>
+		<br><br>
+
+		<<link [[继续|Danube Catperson Feed Sex]]>><</link>>
+		<br>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<<set $danubecathappiness += 1>>
+		<br><br>
+
+		<<link [[继续|Danube Catperson Feed Sex End]]>><<set $finish to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<set _consensual to $consensual>>
+
+	<<if $enemywounded is 0 and $enemyejaculated gte 2>>
+		当他们爬出厨房时，这<<beasttype>>朝你踢出<<bhis>>的<<if $monster isnot 1>>后<</if>>腿。你被独自留在瓷砖上发抖。
+		<br><br>
+
+		<<tearful>>你挣扎着站了起来。
+	<<elseif $enemywounded is 1 and $enemyejaculated is 1>>
+		这<<beasttype>>在另一只身后做着掩护。<<bHe>>发出嘶嘶声，这对野兽撤退了，留下你一个人。
+		<br><br>
+
+		<<tearful>>你挣扎着站了起来。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		<<beastsplural>>发出嘶嘶声撤退，争先恐后地逃跑。
+		<br><br>
+
+		<<tearful>>你匆匆走出厨房。
+	<<else>>
+		<<beasttype>>看起来很生气。<<bHe>>向你徘徊，但被另一个人打了一巴掌。一场打斗爆发了。
+		<br><br>
+
+		<<tearful>>你趁他们分心的时候溜出厨房。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if _consensual is 1>>
+		<<link [[继续|Danube Catperson Sofa]]>><<pass 60>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Danube Catperson Flee]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

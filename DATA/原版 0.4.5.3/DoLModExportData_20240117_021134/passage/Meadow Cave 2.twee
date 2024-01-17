@@ -1,0 +1,53 @@
+:: Meadow Cave 2 []
+<<effects>>
+<<earnFeat "Cornered Rogue">>
+<<loadNPC 0 "meadow_fox">><<clearNPC "meadow_fox">>
+<<set $pronoun to $NPCList[0].pronoun>>
+你的眼睛被水吸引住了，过了好一会儿才注意到<<beasttype>>。<<bHe>>盯着你，你的衣服在<<bhis>>脚边。<<bHe>>偷偷地瞥了一眼入口。
+<br><br>
+
+<<if $monster is 1>>
+
+	<<if $museumAntiques.antiques.antiquestonetalisman isnot "found" and $museumAntiques.antiques.antiquestonetalisman isnot "talk" and $museumAntiques.antiques.antiquestonetalisman isnot "museum">>
+		"对、对不起，"<<bhe>>害怕地说道。"我没想到你会跟着我来这里。"<<bhis>>扫视四周，然后竖起耳朵。"这样吧！"<<bhe>>继续说道，"如果你不伤害我，我就给你一件礼物。"<<bHe>>掀起你的衣服，它们下面是另一块石头，一块雕刻有花纹的石头。它看起来很难以理解的精巧，博物馆馆长也许知道它的价值。
+		<br><br>
+		"我在这个山洞里找到的。这个可以吗？"
+		<br><br>
+
+		<<link [[接受|Meadow Cave Accept]]>><</link>>
+		<br>
+	<<else>>
+		"对、对不起，"<<bhe>>害怕地说道，"我没想到你会跟着我到这里来。"<<bHe>>环顾四周。"请不要伤害我。"
+		<br><br>
+		<<link [[原谅|Meadow Cave Accept]]>><</link>>
+		<br>
+	<</if>>
+
+	<<if $fox gte 3>>
+		<<link [[表现自己|Meadow Cave Sex]]>><<set $sexstart to 1>><</link>><<deviant1>><<fox>>
+		<br>
+	<<elseif $deviancy gte 55>>
+		<<link [[表现自己|Meadow Cave Sex]]>><<set $sexstart to 1>><</link>><<deviant4>>
+		<br>
+	<</if>>
+	<<if $submissive lte 500 and $deviancy gte 15>>
+		<<link [[惩罚|Meadow Cave Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<deviant2>><<defianttext>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+<<else>>
+	它看起来很抱歉，还把你的衣服往你身上推了推。
+	<<if $museumAntiques.antiques.antiquestonetalisman isnot "found" and $museumAntiques.antiques.antiquestonetalisman isnot "talk" and $museumAntiques.antiques.antiquestonetalisman isnot "museum">>
+		一块奇怪的石头放在你的衣服上。上面刻了些字，博物馆馆长可能会收购这种东西。
+	<</if>>
+	<br><br>
+
+	<<link [[原谅|Meadow Cave Accept]]>><</link>>
+	<br>
+	<<if $fox gte 3>>
+		<<link [[表现自己|Meadow Cave Sex]]>><<set $sexstart to 1>><</link>><<deviant1>><<fox>>
+		<br>
+	<<elseif $deviancy gte 55>>
+		<<link [[表现自己|Meadow Cave Sex]]>><<set $sexstart to 1>><</link>><<deviant4>>
+		<br>
+	<</if>>
+<</if>>

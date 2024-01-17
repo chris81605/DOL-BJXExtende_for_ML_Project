@@ -1,0 +1,27 @@
+:: Hive Pollen Collection 2 Sex 
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<set $enemytrust += 20>>
+	<<deviancy2>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<beast $enemyno>>
+<<stateman>>
+<<actionsman>>
+
+<<if $finish is 1>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Sex]]>><</link>></span><<nexttext>>
+<</if>>

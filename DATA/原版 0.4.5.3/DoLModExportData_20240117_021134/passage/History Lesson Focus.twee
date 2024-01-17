@@ -1,0 +1,40 @@
+:: History Lesson Focus []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你专注于听讲和学习知识。
+<<if $robinhistory is "seat">>
+	罗宾很乐意帮忙。
+<</if>>
+这并不是一件容易的事，但你觉得自己正在进步。
+<br><br>
+
+<<towelup>>
+
+<<advancelesson>>
+<<historyskill _lesson_progress>>
+<<stress _lesson_progress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	下课铃响起，课程结束了。你
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		拿上你的外套然后
+	<</if>>
+	离开了教室。
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[继续|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[继续|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - $allure)>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>

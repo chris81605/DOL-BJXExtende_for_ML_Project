@@ -1,0 +1,34 @@
+:: Stolen Clothing Shop Result []
+<<effects>>
+<<ShowUnderEquip "over">>
+<<ShowUnderEquip "normal">>
+<<if currentSkillValue('skulduggery') lt 100>>
+	一个保安看守着入口。没有其他出口，所以你只能在离开前把东西都放了回去。
+	<<clothingReset>>
+<<else>>
+	<<rng>>
+	<<if crimeSumCurrent() gte 50000 or (crimeSumCurrent() gte 40000 and $rng * 20 gte currentSkillValue('skulduggery')) or (crimeSumCurrent() gte 25000 and $rng * 10 gte currentSkillValue('skulduggery'))
+	or (crimeSumCurrent() gte 10000 and $rng * 5 gte currentSkillValue('skulduggery'))>>
+		<<generateSecurity 1>><<person1>>
+		一名保安看着入口处，当你试图走过去时，<<he>>阻止了你。
+		<br><br>
+		"所以，我一直在盯着你，"<<he>>继续说，"这次我放你走，但你要
+		被禁止进入这里一段时间。希望这能帮助你了解为何你不应该偷窃衣物。"
+		<<if $clothingShop.banCount lt 4>>
+			<<set $clothingShop.ban to 7>>
+		<<elseif $clothingShop.banCount lt 8>>
+			<<set $clothingShop.ban to 10>>
+		<<else>>
+			<<set $clothingShop.ban to 14>>
+		<</if>>
+		<<crime "thievery">>
+		<<set $clothingShop.banCount++>>
+	<<else>>
+		一名保安看着入口处，但你漫步而过，没有引起怀疑。
+		<<crime "thievery">>
+	<</if>>
+	<<set _crime to ($tryOn.value / 100)>>
+	<<crimeUp _crime "thievery">>
+<</if>>
+<br><br>
+<<link [[继续|Shopping Centre Top]]>><<set $tryOn.autoReset to true>><<endevent>><</link>>

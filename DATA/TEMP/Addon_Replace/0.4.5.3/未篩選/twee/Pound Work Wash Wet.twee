@@ -1,0 +1,30 @@
+:: Pound Work Wash Wet []
+<<effects>>
+
+<<if $danceSuccess>>
+	你继续擦洗着<<beasttype>>，在<<bhe>>朝你泼水时向后一躲，<span class="green">你没有被弄湿。</span>
+	<br><br>
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<link [[继续|Pound]]>><<endevent>><</link>>
+<<else>>
+	你继续擦洗着<<beasttype>>。<span class="red">突然</span>，<<bhe>>开始抖毛，<span class="red">把你弄的湿透。</span><<gstress>><<stress 6>>
+	<br><br>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>><<beasttype>>无辜地侧着<<bhis>>的脑袋。
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[继续|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

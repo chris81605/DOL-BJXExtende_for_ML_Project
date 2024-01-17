@@ -1,0 +1,66 @@
+:: School Infirmary Kylar Walk []
+<<set $outside to 1>><<schooleffects>><<effects>><<run statusCheck("Kylar")>>
+
+<<if $phase is 1>>
+	你拉住凯拉尔的手臂，然后抓住<<his>>的手，<<he>>也回握了过来。
+	<<takeHandholdingVirginity "Kylar" "romantic">>
+	你瞥了一眼<<him>>。<<Hes>>也在看你，但之后笑了。
+	<br><br>
+<</if>>
+
+<<if Time.hour gte 17>>
+	你们没有离学校太远，而是选择在牛津街安静地散步。过了一会儿，凯拉尔检查了一下<<his>>的手表。
+	<br><br>
+
+	"对，对不起，我得走了。"<<He>>放下你的手，匆匆走过一个角落，把你独自留在学校外面。
+	<br><br>
+
+	<<link [[继续|Oxford Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $schoolstate is "afternoon">>
+	<<if ["rain","snow"].includes($weather)>>
+		<<set $location to "arcade">><<set $bus to "starfish">>
+		凯拉尔带领你穿过小镇，从小巷中走来避<<print $weather.replace("rain","雨").replace("snow","雪")>>。你们很快就到了拱廊。
+		<br><br>
+
+		"我喜欢这里，"<<he>>说，"没有人会打扰。"
+		<br><br>
+
+		你被拉进街机厅，穿过熙熙攘攘的顾客，来到房间角落里的一个不起眼的街机旁。凯拉尔把一枚硬币放进插槽。
+		<br><br>
+
+		<<kylaroptions>>
+	<<else>>
+		<<set $location to "park">><<set $bus to "park">>
+		你和凯拉尔沉默着散了一会儿步。你们很快就到了公园。
+		<br><br>
+
+		"我喜欢来这里避开所有人，"<<he>>说。<<He>>拉了一下你的胳膊，"来吧。"
+		<br><br>
+
+		<<He>>把你带到一个长椅上，你们两个人在那里坐下来。<<He>>将脑袋靠在你的肩膀上。
+		<br><br>
+
+		<<kylaroptions>>
+	<</if>>
+<<else>>
+	你们没有离学校太远，而是选择在牛津街安静地散步。过了一会儿，凯拉尔检查了一下<<his>>的手表。
+	<br><br>
+
+	"我们应该回去了。"<<He>>看起来很悲伤，"我希望我们能永远待在一起……"
+	<br><br>
+
+	<<He>>在离开时
+	<<if _kylarStatus.includes("Rage")>>
+		一边喘着气一边嘀咕着
+	<<elseif _kylarStatus.includes("Sus")>>
+		盯向身后
+	<<else>>
+		朝你挥手
+	<</if>>
+	，然后消失在了前门外。
+	<br><br>
+
+	<<link [[继续|School Front Courtyard]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

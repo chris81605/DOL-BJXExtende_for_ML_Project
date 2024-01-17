@@ -1,0 +1,43 @@
+:: Sewers Shackle Pick []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<effects>>
+你蹲下来试着开锁。
+<br><br>
+<<if $sewerschasedstep gt 0>>
+	<<skulduggerycheck>>
+<</if>>
+<<if $sewerschasedstep lte 0>>
+	<<npc Morgan>><<person1>>“哦，你这个可怜的小东西。看看你现在的样子，”摩根从阴影中走了出来。<<He>>在你的脚镣底部拧上一根别针，把你放了出来。“<<charles>>，不要再给我添麻烦了。”<<He>>抓住你的手臂用力拉。
+	<br><br>
+	<<set $sewerschased to 0>>
+	<<link [[乖乖过去|Sewers Return]]>><</link>>
+	<br>
+	<<link [[战斗|Sewers Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<<elseif $skulduggerysuccess is 1>>
+	你解开镣铐，然后逃跑。
+	<br><br>
+	<<skulduggeryuse>>
+
+	你听到了摩根的尖叫声，紧接着是金属的撞击声。
+	<br><br>
+	<<set $sewerschased to 0>>
+	<<destinationsewers>>
+<<else>>
+	你的手指在压力下翻弄着。<<morganhunt>>
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<link [[反抗|Sewers Shackle Struggle]]>><</link>>
+	<<if $phase is 1>>
+		<<physiquedifficulty 6000 16000>>
+	<<elseif $phase gte 2>>
+		<<physiquedifficulty 1 10000>>
+	<<else>>
+		<<physiquedifficulty 10000 20000>>
+	<</if>>
+	<br>
+	<<set $skulduggerydifficulty to 600>>
+	<<link [[撬锁|Sewers Shackle Pick]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>

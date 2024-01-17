@@ -1,0 +1,296 @@
+:: Widgets Pub Fame [widget]
+<<widget "pubfameChange">>
+	<<set $_goal to _args[0]>>
+	<<set $_fame to _args[1]>>
+	<!-- Formula: a random number between 80 and 150, plus a second number between 5 and 50.
+	This second number is higher if fame is low and it's being raised, OR if fame is high and it's being lowered.
+	The number is negative if fame is being lowered.
+	Finally, the number is 20% higher if the change is temporary. -->
+	<<set $_fameChange to random(80,150)>>
+	<<if $_goal.includes("Lower")>>
+		<<set $_fameChange += (Math.round(Math.sqrt($fame[$_fame])) + 5)>>
+		<<set $_fameChange *= -1>>
+	<<else>>
+		<<set $_fameChange += (Math.round(Math.sqrt($fame[$_fame]) - 50) * -1)>>
+	<</if>>
+	<<if $_goal.includes("temp")>>
+		<<set $_fameChange to Math.round($_fameChange * 1.2)>>
+	<</if>>
+
+	<<if $fame[$_fame] + $_fameChange gt 2000>>
+		<<set $_fameChange to 2000 - $fame[$_fame]>>
+	<<elseif $fame[$_fame] + $_fameChange lt 0>>
+		<<set $_fameChange to $fame[$_fame] * -1>>
+	<</if>>
+
+	<<set $fame[$_fame] += $_fameChange>>
+
+	<<if $_goal.includes("temp")>>
+		<<set $fameDecay[$_fame] to $_fameChange / 14>>
+		<<set $fameDecayTimer[$_fame] to 14>>
+	<<else>>
+		<<set $fameDecayTimer[$_fame] to 0>>
+	<</if>>
+<</widget>>
+
+<<widget "pubfameComplete">>
+	<<set $_task to _args[0]>>
+	<<if _args[1]>>
+		<<set $_modifier to _args[1]>>
+	<</if>>
+
+	<<if isPubfameTaskAccepted($_task)>>
+		<<set $pubfame.status to "done">>
+		<span class="gold"><<switch $pubfame.task>>
+			<<case "river">>
+				瑞沃看起来还不错。
+			<<case "gwylan">>
+				你拿到了雪花玻璃球。
+			<<case "temple">>
+				你拿到了记载密码的书。
+			<<case "office">>
+				你把信送去办公大楼。
+			<<case "wren">>
+				你给了伦恩这封信。
+			<<case "hospital">>
+				<<if $_modifier is "asylum">>
+					<<set $_report to true>><<set $pubfame.detail to "asylum">>
+					这不是米奇需要的卡，但你觉得米奇还是会喜欢它的。一旦你离开这里，就可以回来汇报你已经完成了任务。
+				<<elseif $_modifier is "asylumEarly">>
+					<<set $_report to true>><<set $pubfame.detail to "asylum">>
+					你还拿着从精神病院得到的卡。这不是米奇需要的卡，但你觉得米奇还是会喜欢它。一旦你离开这里，就可以回来汇报你已经完成了任务。
+				<<else>>
+					你<<if $_modifier is "steal">>偷到了<<else>>拥有<</if>>钥匙卡。
+				<</if>>
+			<<case "niki">>
+				<<run delete $photo.pubfame>>
+				已获得联络人的照片。
+			<<case "morgan">>
+				<<if $_modifier is "steal">>
+					你拿到了一个奇怪的U盘，这一定是你在找的那个。
+				<<else>>
+					你有了USB。
+				<</if>>
+			<<case "bailey">>
+				<<set $_report to true>>
+				<<if $_modifier is "list">>
+					你把米奇从列表中移除了。你可以过去汇报你已经完成了任务。
+				<<elseif $_modifier is "clear">>
+					你删掉了包含米奇在内的列表，你可以过去汇报你已经完成了任务，<span class="purple">但你担心贝利为了报复会做出什么事。</span>
+				<<else>>
+					米奇在贝利的电脑上无处可寻了。你可以过去汇报你已经完成了任务。
+				<</if>>
+			<<case "briar">>
+				<<if $_modifier is "failure">>
+					<<set $_report to true>>
+					你为了米奇骇入了布莱尔的电脑，<span class="red">但这很难让人放下心来。</span>
+				<<elseif $_modifier is "punish">>
+					<<set $_report to true>>
+					你为了米奇骇入了布莱尔的电脑，<span class="purple">但你觉得布莱尔从此以后都不乐意在妓院看见你人了。</span>
+				<<else>>
+					你骇入了布莱尔的电脑。
+				<</if>>
+			<<case "remy">>
+				<<set $_report to true>>
+				<<if $_modifier is "betray">>
+					联络人没有给你包裹。你仍应向米奇汇报你已经完成了任务，<span class="purple">但这不是你目前主要关心的问题。</span>
+					<<set $pubfame.detail to "remyBetray">>
+				<<else>>
+					你拿到了包裹。你可以向米奇汇报你已经完成了任务。
+				<</if>>
+			<<case "compound">>
+				四个摄像头全部设置完成。
+			<<default>>
+				<<set $_report to true>>
+				你觉得很有成就感，虽然不知道为什么。你可以向'米奇'报告他的忙已经帮完了吧，你猜。<span class="black"><i>(This is a bug that happened on "<<print $passage>>" with task "<<print $pubfame.task>>", please inform Vrelnir.)</i></span>
+		<</switch>>
+		<<if !$_report>>
+			你可以向'米奇'汇报你已经完成了任务。
+		<</if>></span>
+		<<if !$combat and !_args[2]>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "pubfameOptions">>
+	<<set $pubfame.tasklist to []>>
+	<<set $pubfameTemp to $pubfameTemp isnot undefined ? $pubfameTemp : true>>
+	<<set $pubfameLower to $pubfameLower isnot undefined ? $pubfameLower : true>>
+	<<set _pubfameOptions to {
+		"淫乱知名度": "sex",
+		"卖淫知名度": "prostitution",
+		"强奸知名度": "rape",
+		"兽交知名度": "bestiality",
+		"露出知名度": "exhibitionism",
+		"战斗知名度": "scrap",
+		"善良知名度": "good",
+		"商业知名度": "business",
+		"社交知名度": "social"
+		/* "Pimp fame": "pimp" */
+	}>>
+	<<if $photo_known gte 2>>
+		<<set _pubfameOptions["模特知名度"] to "model">>
+	<</if>>
+	<<if playerNormalPregnancyTotal() gt 0>>
+		<<set _pubfameOptions["怀孕知名度"] to "pregnancy">>
+	<</if>>
+
+	<label><<radiobutton "$pubfameTemp" true autocheck>>临时</label> |
+	<label><<radiobutton "$pubfameTemp" false autocheck>>永久</label>
+	<br><br>
+
+	<label><<radiobutton "$pubfameLower" true autocheck>>降低</label> |
+	<label><<radiobutton "$pubfameLower" false autocheck>>提高</label>
+	<br><br>
+
+	<<listbox "$pubfameTarget" autoselect>>
+		<<optionsfrom _pubfameOptions>>
+	<</listbox>>
+	<br><br>
+
+	<<link [[确认|Pub Fame Favour]]>>
+		<<set $pubfame.goal to $pubfameTemp is true ? "temp" : "perm">>
+		<<set $pubfame.goal += $pubfameLower is true ? "Lower" : "Raise">>
+		<<set $pubfame.target to $pubfameTarget>>
+	<</link>>
+<</widget>>
+
+<<widget "pubfameDifficulty">>
+	<<if ($pubfame.goal.includes("Raise") and ["sex","prostitution","rape","bestiality","exhibitionism","pregnancy"].includes($pubfame.target))
+	or ($pubfame.goal.includes("Lower") and ["scrap","good","business","social","model","pimp"].includes($pubfame.target))>>
+		<<set _difficulty to 0>>
+
+	<<elseif ($pubfame.goal is "permRaise" and $pubfame.target is "scrap")
+	or ($pubfame.goal is "permLower" and $pubfame.target is "exhibitionism")>>
+		<<set _difficulty to 3>>
+
+	<<elseif ($pubfame.goal is "permLower" and ["sex","prostitution","rape","bestiality","pregnancy"].includes($pubfame.target))
+	or ($pubfame.goal is "permRaise" and ["good","business","social","model","pimp"].includes($pubfame.target))
+	or ($pubfame.goal is "tempRaise" and $pubfame.target is "scrap")
+	or ($pubfame.goal is "tempLower" and $pubfame.target is "exhibitionism")>>
+		<<set _difficulty to 2>>
+
+	<<else>>
+		<<set _difficulty to 1>>
+	<</if>>
+
+	<<if _difficulty is 0 or _difficulty is 1>>
+		<<set $pubfame.tasklist.pushUnique(
+			"river",
+			"gwylan",
+			"temple",
+			"office"
+		)>>
+	<</if>>
+	<<if _difficulty is 1 or _difficulty is 2>>
+		<<set $pubfame.tasklist.pushUnique(
+			"wren",
+			"hospital",
+			"morgan"
+		)>>
+		<<if $photo_known gte 2>>
+			<<set $pubfame.tasklist.pushUnique("niki")>>
+		<</if>>
+	<</if>>
+	<<if _difficulty is 2 or _difficulty is 3>>
+		<<set $pubfame.tasklist.pushUnique(
+			"bailey",
+			"briar",
+			"remy",
+			"compound"
+		)>>
+	<</if>>
+
+	<<if $pubfame.tasklist.includes($pubfame.history)>>
+		<<set $pubfame.tasklist.delete($pubfame.history)>>
+	<</if>>
+
+	<<set $pubfame.task to $pubfame.tasklist[random(1,$pubfame.tasklist.length)-1]>>
+<</widget>>
+
+<<widget "generateMickey">>
+	<<if _args[0] is undefined>>
+		<<set _m to 1>>
+	<<else>>
+		<<set _m to _args[0]>>
+	<</if>>
+	<<set _n to (_m - 1)>>
+	<<if !$per_npc or !$per_npc.hacker>>
+		<<set _strapIgnore to true>>
+		<<generateNPC _m t>>
+		<<set $NPCList[_n].role to "hacker">>
+		<<set $NPCList[_n].fullDescription to `'米奇'`>>
+		<<set $NPCList[_n].insecurity to "skill">>
+		<<set $NPCList[_n].lactation to 0>>
+		/* unused for now, reserved in case there will be content involving their "true" identity */
+		<<set $mickeyPronoun to $NPCList[_n].pronoun>><<set $NPCList[_n].pronoun to "t">>
+		<<set $mickeyName to $NPCList[_n].name>><<set $NPCList[_n].name to `'Mickey'`>>
+		<<generatePronouns $NPCList[_n]>>
+		<<set $NPCList[_n].traits to ["brooding", "watchful", "skulduggerous"]>>
+		<<set $NPCList[_n].skills to {security:980,athletics:150}>>
+		<<saveNPC _n "hacker">>
+	<<else>>
+		<<loadNPC _n "hacker">>
+	<</if>>
+	<!-- <<npcClothesType $NPCList[_n] "coldHoodie">> -->
+<</widget>>
+
+<<widget "pubfameRemyPassword">><<silently>>
+	<!-- almost: two of the words will be correct; one will be wrong -->
+	<!-- wrong: at least one of the words will be wrong; the others may or may not be correct -->
+	<!-- default: all three words are correct -->
+
+	<<if $pubfame and $pubfame.task is "remy">>
+		<<set _text_output to "在">>
+		<<set $_wrong to random(0,2)>>
+		<<set $_possible to [
+			["田地里","森林里","公园里","院子里","荒原里","花园里"],
+			["日落","日出","黎明","午夜","晌午","黄昏"],
+			["时","时分","时刻","前","后","期间"]
+		]>>
+
+		<<switch _args[0]>>
+			<<case "almost">>
+				<<if $pubfame.remy.password[2] is "the blood moon">>
+					<<set $_possible[0].delete($pubfame.remy.password[0])>>
+					<<set $_result to [
+						$_possible[0][random(4)],
+						$pubfame.remy.password[1],
+						$pubfame.remy.password[2]
+					]>>
+				<<else>>
+					<<set $_result to clone($pubfame.remy.password)>>
+				<</if>>
+			<<case "wrong">>
+				<<set $_result to [
+					$_possible[0][random(5)],
+					$_possible[1][random(5)],
+					$_possible[2][random(5)]
+				]>>
+			<<default>>
+				<<set $_result to clone($pubfame.remy.password)>>
+				<<set $_correct to true>>
+		<</switch>>
+
+		<<if !$_correct and $_result[0] is $pubfame.remy.password[0] and $_result[1] is $pubfame.remy.password[1] and $_result[2] is $pubfame.remy.password[2]>>
+			<!-- I don't know why, but just checking if the arrays themselves are the same doesn't work. -->
+			<<set $_possible[$_wrong].delete($_result[$_wrong])>>
+			<<set $_result[$_wrong] to $_possible[$_wrong][random(4)]>>
+		<</if>>
+
+		<<set _text_output += $_result[0] + ", " + $_result[1].replace("under","血月") + "" + $_result[2].replace("the blood moon","之下")>>
+		<<if _args[1] is "cap">><<capitalise>><</if>>
+	<<else>>
+		<<set _text_output to "<span class='black'><i>pubfameRemyPassword widget was called on passage $passage when Remy task is not active. Please inform Vrelnir.</i></span>">>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "pubfameReset">>
+	<<run delete $pubfame[$pubfame.task]>>
+	<<run delete $pubfame.target>>
+	<<run delete $pubfame.goal>>
+	<<run delete $pubfame.task>>
+	<<run delete $pubfame.detail>>
+	<<set $pubfame.status to "finished">>
+<</widget>>

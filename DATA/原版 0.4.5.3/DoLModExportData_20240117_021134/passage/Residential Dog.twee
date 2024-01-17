@@ -1,0 +1,115 @@
+:: Residential Dog []
+<<effects>>
+<<if $noise is 2 and $combat is 0>>
+	<span class="red">年轻人大喊着，想确认<<beasttype>>如此激动的原因。如果你不采取行动，他们很快就会找到你！</span>
+	<br><br>
+<</if>>
+<<if $timer is 1 and $combat is 0>>
+	你听到了年轻人离开小巷的脚步声。
+	<<if $combat is 0>>
+		你偷看一眼，发现他们确实不见了。当你离开时，<<beasttype>>看起来很沮丧。
+		<br><br>
+		<<endevent>>
+		<<residentialeventend>>
+	<<else>>
+		你试图偷看一眼，但<<beasttype>>将你摔倒在地。
+		<br><br>
+		<<set $rescue to 0>>
+		<<link [[继续|Residential Dog]]>><</link>><<nexttext>>
+	<</if>>
+	<br><br>
+<<elseif $noise gte 3>>
+	这几个人受够了吵闹，他们走了过来。
+	<br><br>
+	<<link [[继续|Residential Dog Alarm]]>><</link>><<nexttext>>
+<<else>>
+	<<switch $phase>>
+		<<case 1>>
+			<<bHe>>继续吠叫。你担心这种情况继续下去，你的同学可能会发现你。
+			<br><br>
+			<<link [[悄悄地叫它闭嘴|Residential Dog]]>><<set $noise += 1>><</link>>
+			<br>
+			<!-- Modified for Beast People -->
+			<<link [[抚摸它的头|Residential Dog]]>><<set $phase to 2>><</link>>
+			<br><br>
+		<<case 2>>
+			<<bHe>>在你的触摸下安静下来，绕着一个小圈跑，然后径直走向你。你注意到<<bhis>>的私处已蓄势待发了。<<bHe>>期待地看着你。
+			<br><br>
+			<<link [[一直抚摸它的头|Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
+			<br>
+			<span class="sub"><<link [[把它的生殖器拿在手里|Residential Dog]]>><<handskilluse>><<handstat>><<set $phase to 4>><</link>></span>
+			<br><br>
+		<<case 3>>
+			你继续抚摸<<bhis>>的头，但<<bhe>>似乎不高兴，又叫了起来。
+			<br><br>
+			<<link [[一直抚摸它的头|Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
+			<br>
+			<<link [[把它的生殖器拿在手里|Residential Dog]]>><<set $phase to 4>><<handskilluse>><<handstat>><</link>>
+			<br><br>
+		<<case 4>>
+			<<set $molestationstart to 1>><<set $phase to 6>>
+			你把生殖器拿在手里。<<bHe>>开始撞你的手指。
+			<br><br>
+			<<link [[继续|Residential Dog]]>><</link>><<nexttext>>
+			<br><br>
+		<<case 5>>
+			<<set $phase to 6>>
+			<<beasttype>>仍然激动，跳到你的身上。
+			你的束缚让你无法保持直立。你脸朝下摔倒了。<<gpain>>
+			<br><br>
+			当你重新获得方向时，你注意到<<beasttype>>准备从你身后骑上。
+			<br><br>
+			<<if $deviancy gte 35>>
+				<<link [["刺激" + $NPCList[0].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")|Residential Dog]]>><<set $sexstart to 1>><<deviancy3>><</link>><<deviant3>>
+				<br>
+			<</if>>
+			<<link [[忍受|Residential Dog]]>><<set $molestationstart to 1>><<set $noHand to 1>><</link>>
+		<<case 6>>
+			<<if $sexstart is 1>>
+				<<set $sexstart to 0>>
+				<<consensual>>
+				<<set $consensual to 1>>
+				<<neutral 1>>
+				<<beastCombatInit>>
+				<<npc_attempt_sex>>
+			<<elseif $molestationstart is 1>>
+				<<set $molestationstart to 0>>
+				<<controlloss>>
+				<<violence 1>>
+				<<neutral 1>>
+				<<molested>>
+				<<beastCombatInit>>
+				<<if $noHand is 1>><<unset $noHand>><<else>><<npchand>><</if>>
+			<</if>>
+			<<if $timer gte 1>><<enable_rescue>><</if>>
+			<<effectsman>>
+			<<alarmstate>>
+			<br>
+			<<beast $enemyno>>
+			<br><br>
+			<<stateman>>
+			<br><br>
+			<<actionsman>>
+
+			<<if $alarm is 1>>
+				<<if $rescue is 1>>
+					<span id="next"><<link [[继续->Residential Dog Alarm]]>><</link>></span><<nexttext>>
+				<<else>>
+					<<set $alarm to 0>>
+					<<if $enemyarousal gte $enemyarousalmax>>
+						<span id="next"><<link [[继续->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
+					<<elseif $enemyhealth lte 0>>
+						<span id="next"><<link [[继续->Residential Dog Escape]]>><</link>></span><<nexttext>>
+					<<else>>
+						<span id="next"><<link [[继续->Residential Dog]]>><</link>></span><<nexttext>>
+					<</if>>
+				<</if>>
+			<<elseif $enemyarousal gte $enemyarousalmax>>
+				<span id="next"><<link [[继续->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
+			<<elseif $enemyhealth lte 0>>
+				<span id="next"><<link [[继续->Residential Dog Escape]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续->Residential Dog]]>><</link>></span><<nexttext>>
+			<</if>>
+	<</switch>>
+<</if>>

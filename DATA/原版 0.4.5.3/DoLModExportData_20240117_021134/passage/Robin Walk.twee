@@ -1,0 +1,36 @@
+:: Robin Walk []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<if $speech_attitude is "meek">>
+	"你想去散步吗？"你问。
+<<elseif $speech_attitude is "bratty">>
+	"是时候出去锻炼锻炼了，"你提议。
+<<else>>
+	"我们去散会步吧，"你提议。
+<</if>>
+<br><br>
+<<if C.npc.Robin.trauma gte 40>>
+	罗宾微笑着点了点头。
+	<br><br>
+<<else>>
+	"好主意，"罗宾说，"那么你想去哪里呢？"
+	<br><br>
+<</if>>
+<<if !$daily.robin.walk>>
+	<<foresticon>><<link [[去森林 (0:30)|Robin Forest]]>><<pass 30>><<set $daily.robin.walk to 1>><</link>>
+	<br>
+<</if>>
+<<if C.npc.Robin.love gte 20 and $money gte 1500 and !$daily.robin.cinema>>
+	<<socialiseicon "cinema">><<link [[电影院 (£15 2:00)|Robin Walk Cinema]]>><<if Time.hour lt 12 and (Time.schoolDay or Time.isWeekEnd())>><<pass 15>><</if>><</link>>
+	<br>
+<</if>>
+<<if $halloween_robin is 1 and $halloween_robin_costume is "ghost" and !(Time.monthDay is 31 and Time.hour gte 16)>>
+	<!-- SANITY: Intentional mismatch between stated time and actual time. Extra time is passed later on in the event -->
+	<<if !$robin_forest_visited>>
+		<<foodicon "halloween">><<link [[去买万圣节服装 (0:30)|Robin Forest Shop]]>><<pass 10>><</link>>
+	<<else>>
+		<<foodicon "halloween">><<link [[去买万圣节服装 (0:20)|Robin Forest Shop]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+<</if>>
+<br>
+<<robinoptions>>

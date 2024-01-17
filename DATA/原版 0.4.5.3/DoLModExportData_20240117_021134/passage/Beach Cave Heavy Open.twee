@@ -1,0 +1,39 @@
+:: Beach Cave Heavy Open []
+<<effects>>
+
+
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你对这个年代的锁并不陌生，<span class="green">打开它对你而言轻而易举。</span>你掀开了盖子。
+	<br><br>
+	里面装满了水，
+	<<if random(1, 3) is 3 and $cave gte 15>>
+		你发现了一把弯刀的残骸，已经锈蚀得无法修复了。它值不了多少钱，但它的旁边还有一把银质匕首。博物馆馆长会对它们感兴趣的。
+		<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquerustedcutlass" "found">>
+		<<set $antiquemoney += 240>><<museumAntiqueStatus "antiquesilverdagger" "found">>
+	<<else>>
+		你发现了一把弯刀的残骸，已经锈蚀得无法修复了。它值不了多少钱，但是博物馆馆长依旧会对它感兴趣的。
+		<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquerustedcutlass" "found">>
+	<</if>>
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<endevent>>
+	<<beach_cave_caught>>
+
+<<else>>
+
+	这个锁很老，但看起来很古怪并坚固。你摆弄了一会儿，<span class="red">直到你听到啪的一声。</span>现在它根本开不了了。
+	<br><br>
+
+	这个箱子太笨重了，不能随身携带，所以你把它留在了水里。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Beach Cave]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<</if>>

@@ -1,0 +1,112 @@
+:: School Infirmary Ask Bed []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我可以在这里打个盹吗？"你问，"我觉得很累……"
+<<elseif $speech_attitude is "bratty">>
+	你走近其中一张床，把窗帘拉开。"我是来睡觉的。"
+<<else>>
+	"我可以在这里打个盹吗？"你问。
+<</if>>
+<br><br>
+
+<<if ["first","second","third","fourth","fifth"].includes($schoolstate)>>
+	<<if $daily.infirmaryBed is 1>>
+		护士摇了摇<<his>>的头。"如果我让你再待下去，礼顿会砍掉我的脑袋。"<<He>>转身离开，"你只能硬着头皮坚持到底了，亲爱的，抱歉。"
+		<br><br>
+
+		<<school_infirmary_options>>
+	<<else>>
+		护士从<<his>>的桌子上站起来，走到你身边。<<He>>用手托住你的下巴，把你的头往上仰。<<He>>微微眯上<<his>>的眼睛，盯着你，仔细观察你的表情。
+		<br><br>
+
+		<<if $tiredness gte (C.tiredness.max / 5) * 3>>
+			最终，<<he>>从你的身边走过并叹了一口气。"你们这些人应该在晚上睡觉，而不是开派对。好吧，看出来你们已经很累了。"<<He>>看了一眼<<his>>的手表。"我会在半小时之后叫醒你，这应该会让你在上学的时候感觉好一点。"
+			<br><br>
+
+			<<link [[接受 (0:30)|School Infirmary Bed]]>><<set $phase to 1>><</link>><<ltiredness>><<gdelinquency>>
+			<br>
+			<<link [[拒绝|School Infirmary Bed Decline]]>><</link>>
+			<br>
+		<<else>>
+			最后，<<he>>从你身边走过，摇了摇<<his>>的头。"你看起来并不累。看起来更像是你在为逃课找借口。"
+			<br><br>
+
+			<<He>>坐回<<his>>的办公桌，耸了耸<<his>>肩，无视你的抗议。"在你惹上更多的麻烦之前回去上课，别再浪费我的时间了。"
+			<br><br>
+
+			<<school_infirmary_options>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $schoolstate is "morning">>
+	"你已经累了？"护士不相信地问道，"你昨晚睡了吗？"
+	<br><br>
+
+	<<He>>开始教训你，但很快就叹息着放弃了。<<He>>瞥了一眼手表。
+	<br><br>
+
+	<<if Time.hour is 8 and Time.minute gte 30>>
+		"快要上课了，对吧？如果你那时候还是感觉浑身精疲力尽的话，你可以过来找我。但我是不会允许你在上课前就跑过来睡觉的，这位年轻的<<if $player.gender_appearance is "m">>先生<<else>>女士<</if>>，你听明白了么？"
+		<br><br>
+
+		<<He>>回去继续工作，语气并没有任何周旋的余地。
+		<br><br>
+
+		<<school_infirmary_options>>
+		<br>
+	<<else>>
+		"我再给你三十分钟，今天应该够了。"
+		<br><br>
+
+		<<link [[接受 (0:30)|School Infirmary Bed]]>><<set $phase to 0>><</link>><<ltiredness>>
+		<br>
+		<<link [[拒绝|School Infirmary Bed Decline]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $schoolstate is "lunch">>
+	护士看着<<his>>的手表，
+	<<if Time.minute gte 30>>
+		皱了皱眉，"你上课会迟到的。"
+		<<if $daily.infirmaryBed is 1>>
+			<<He>>瞪了你一眼。"我今天已经破例了，现在只能靠你自己抗，<<girl>>。"
+			<br><br>
+
+			<<school_infirmary_options>>
+		<<else>>
+			<<He>>看向了你，"别动。"
+			<br><br>
+
+			护士从<<his>>的桌子上站起来，走到你身边。<<He>>用手托住你的下巴，把你的头往上仰。<<He>>微微眯上<<his>>的眼睛，深深地凝视着你。
+			<br><br>
+
+			<<if $tiredness gte (C.tiredness.max / 5) * 3>>
+				最终，<<he>>从你的身边走过并叹了一口气。"你们这些人应该在晚上睡觉，而不是开派对。好吧，看出来你们已经很累了。"<<He>>看了一眼<<his>>的手表。"我会在半小时之后叫醒你，这应该会让你在上学的时候感觉好一点。"
+				<br><br>
+
+				<<link [[接受 (0:30)|School Infirmary Bed]]>><<set $phase to 1>><</link>><<ltiredness>><<gdelinquency>>
+				<br>
+				<<link [[拒绝|School Infirmary Bed Decline]]>><</link>>
+				<br>
+			<<else>>
+				最后，<<he>>从你身边走过，摇了摇<<his>>的头。"你看起来并不累，倒是更像你在为逃课找借口。"<<He>>坐回<<his>>的办公桌，耸了耸<<his>>的肩膀，驳回你的抗议。"自己去准备上课吧，别再浪费我的时间了。"
+				<br><br>
+
+				<<school_infirmary_options>>
+			<</if>>
+		<</if>>
+	<<else>>
+		并点了点头，"好吧，我会在半小时之后叫醒你。"
+		<br><br>
+
+		<<link [[接受 (0:30)|School Infirmary Bed]]>><<set $phase to 0>><</link>><<ltiredness>>
+		<br>
+		<<link [[拒绝|School Infirmary Bed Decline]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	护士翻了个白眼。"这不是一个日托所。如果你需要休息就回家去吧。"<<He>>回到<<his>>的工作，摇了摇头。
+	<br><br>
+
+	<<school_infirmary_options>>
+<</if>>

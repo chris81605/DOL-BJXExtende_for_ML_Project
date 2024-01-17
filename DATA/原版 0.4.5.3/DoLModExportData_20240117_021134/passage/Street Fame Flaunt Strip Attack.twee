@@ -1,0 +1,48 @@
+:: Street Fame Flaunt Strip Attack []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<set $enemyno to 1>><<set $enemynomax to 1>>
+	<<maninit>><<set $enemyanger += 150>><<set $enemytrust -= 150>>
+	<<rng>>
+	<<if $rng lte 50>>
+		<<npcstripall>>
+	<<else>>
+		<<npcgrapplestripall>>
+	<</if>>
+	<<npcidlegenitals>>
+	<br><br>
+	"哦，对的，我们会发现你到底有多喜欢暴露！"<<person1>><<person>>得意地笑。
+
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>
+		<i>在白天袭击你是鲁莽的行为。如果你发出尖叫，可能会有人过来帮忙。</i>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[继续|Street Fame Flaunt Alarm]]>><</link>></span><<nexttext>>
+<<else>>
+	<<if $worn.upper.name is "naked" and $worn.lower.name is "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+		<span id="next"><<link [[继续->Street Fame Flaunt Strip Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Street Fame Flaunt Ejac]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Street Fame Flaunt Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Street Fame Flaunt Strip Attack]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<</if>>

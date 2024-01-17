@@ -1,0 +1,294 @@
+:: Widgets Connudatus [widget]
+<<widget "connudatus">>
+	<<if $nextPassageCheck is "Connudatus Street">>
+		<<add_link "<span class='nextLink'><<connudatusicon>><<link [[康努达塔斯街 (0:05) (俱乐部)|Connudatus Street]]>><<pass 5>><</link>></span><br>">>
+	<<else>>
+		<<add_link "<<connudatusicon>><<link [[康努达塔斯街 (0:05) (俱乐部)|Connudatus Street]]>><<pass 5>><</link>><br>">>
+	<</if>>
+	<<hideDisplay true>>
+<</widget>>
+
+<<widget "connudatusquick">>
+	<<connudatusicon>><<link [[康努达塔斯街|Connudatus Street]]>><</link>>
+<</widget>>
+
+<<widget "connudatuseventend">>
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "connudatuswallet">>
+	你找到找一个安静的地方，打开<<wallet>>。
+
+	<<rng>>
+	<<if $rng gte 91>>
+
+		你没有找到太多东西，只有一些零钱，价值<<moneyGainDisplay 2 true true>>。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 81>>
+
+		你没有找到太多东西，只有一些零钱，价值<<moneyGainDisplay 3 true true>>。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 71>>
+
+		你发现<<moneyGainDisplay 8 true true>>藏在一个暗格中。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 61>>
+
+		你找到了一张黑色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 8>><<crimeUp 8 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 51>>
+
+		你发现有<<moneyGainDisplay 15 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 41>>
+
+		你找到了一张银色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 15>><<crimeUp 15 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 31>>
+
+		你发现有<<moneyGainDisplay 25 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 21>>
+
+		你翻到一张金色信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 25>><<crimeUp 25 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 11>>
+
+		你找到了一张白金信用卡。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<set $blackmoney += 50>><<crimeUp 50 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<<else>>
+
+		你发现有<<moneyGainDisplay 50 true true>>藏在里面。
+		<br><br>
+
+		<<link [[拿走|Connudatus Street]]>><<crimeUp `_money_gain / 100` "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+		<br>
+		<<link [[离开它|Connudatus Street]]>><</link>>
+		<br>
+
+	<</if>>
+<</widget>>
+
+<<widget "connudatusMarketsStatusEvents">>
+	<<switch random(1,9)>>
+		<<case 1>>
+			你在货摊间穿行时，停在了一个贩卖品种丰富的鲜花的摊位前。它们甜蜜的气味使你冷静下来，安抚了你的情绪。<<lstress>><<stress -6>>
+
+		<<case 2>>
+			你在货摊间穿行时，经过了一个贩卖品种丰富的新鲜鱼的摊位。
+			<<if $cat gte 6 or $wolfgirl gte 6 or $fox gte 6>>
+
+				<<if $cat gte 6>>
+					<<set _transformation to "cat">>
+				<<elseif $wolfgirl gte 6>>
+					<<set _transformation to "wolf">>
+				<<else>>
+					<<set _transformation to "fox">>
+				<</if>>
+
+				你内在的_transformation对气味产生了反应，你流出了一点口水。<<lstress>><<stress -6>>
+
+			<<else>>
+				你加快了脚步，试着远离它们令人不舒服的味道。<<gstress>><<stress 6>>
+			<</if>>
+
+		<<case 3>>
+			你经过了一个摊位，摊位的摊主和顾客似乎正进行着激烈的讨论。经过几轮拉扯，摊主让步了，将东西卖给了顾客。看样子某人获得了折扣。<<lstress>><<stress -6>>
+
+		<<case 4>>
+			你经过了一个摊位，一个乞丐似乎正乞求施舍。然而，摊主并不乐意，最终大喊着让乞丐滚开了。<<gstress>><<stress 6>>
+
+		<<case 5>>
+			你停在一个摊位前，浏览着商品。旁边有个盘子，上面摆着切成片的试吃苹果。你拿了一片，味道吃起来清甜可口。<<lstress>><<stress -6>>
+
+		<<case 6>>
+			你停在一个摊位前，浏览着商品。突然，你感觉到有人抓了你的屁股。你转过身想要说些什么，但那个人已经不见了。<<gstress>><<stress 6>>
+
+		<<case 7>>
+			你在市集间穿行，你注意到地上躺着一张钞票。你弯下身把它捡了起来，这是一张<<printmoney 500>>的钞票。<<lstress>><<stress -6>>
+
+		<<case 8>>
+			你在市集间穿行，你注意到地上躺着一张钞票。你弯下身把它捡了起来，这才意识到这是一张假钞。有人拍了一下你的屁股，你转过身，只来得及捕捉到罪魁祸首逃跑的背影。<<gstress>><<stress 6>>
+
+		<<case 9>>
+			<<generate1>><<person1>>
+
+			你在市集间穿行，品种丰富的商品令你眼花缭乱。有人撞了一下你，你摔在地上。对方并没有停下或是向你道歉，而是继续跑着离开了。你重新起身，一个<<person1>><<person>>经过你身边，一边大喊着类似"抓贼啊"的话，一边向前跑去。<<gstress>><<stress 6>>
+
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Connudatus Street]]>><<pass 15>><<endevent>><</link>>
+<</widget>>
+
+<<widget "connudatusMarketsProductsEvents">>
+	<<if $loft_river is 1 and $rng gte 80>>
+		你停在了一个贩卖品种丰富的蔬菜的摊位前。你不由地想，孤儿院的孤儿们真的需要能够摄入更多的维他命。
+		<br><br>
+
+		<<if $money gte 15000>>
+			<<ind>><<link [[采购些蔬菜送去家里 (£150)|Connudatus Street]]>><<set $money -= 15000>><<hope 1>><<famegood 1>><<pass 15>><<endevent>><</link>><<ghope>>
+
+		<<else>>
+			<<ind>><span class="blue">你支付不起这些。</span>
+
+		<</if>>
+
+	<<else>>
+		<<switch random(1,5)>>
+			<<case 1>>
+				你停在了一个贩卖品种丰富的园艺装备的摊位前。一开始，你没发现什么特别的东西，但你很快注意到了藏在其它商品底部的一小袋肥料。价格是<<printmoney 100000>>。
+				<br><br>
+
+				<<if $money gte 100000>>
+					<<gardenicon "fertiliser">><<link [[买 (£1000)|Connudatus Street]]>><<set $fertiliser.current += 1>><<set $money -= 100000>><<pass 15>><<endevent>><</link>>
+
+				<<else>>
+					<<ind>><span class="blue">你支付不起这些。</span>
+
+				<</if>>
+
+			<<case 2>>
+				你停在了一个贩卖品种丰富的农产品的摊位前。在摊位的侧边，你留意到有几瓶摆放的牛奶。你似乎能以<<printmoney 10000>>的价格买到 3 瓶。
+				<br><br>
+
+				<<if $money gte 10000>>
+					<<tendingicon "milk">><<link [[买下它 (£100)|Connudatus Street]]>><<tending_give bottle_of_milk 3>><<set $money -= 10000>><<pass 15>><<endevent>><</link>>
+
+				<<else>>
+					<<ind>><span class="blue">你支付不起这些。</span>
+
+				<</if>>
+
+			<<case 3>>
+				<<set _change to random(100,500)>>
+
+				你注意到一个摊位的摊主正在后面整理东西。柜台上有一些零钱。如果你想的话，也许你可以顺走一些。
+				<br><br>
+
+				<<crimeicon "mark">><<link [[偷零钱|Connudatus Street]]>><<crimeUp 1 "petty">><<set $money += _change>><<pass 15>><<endevent>><</link>><<crime "petty">>
+
+			<<case 4>>
+				你注意到一个摊位前摆放着一些蛋，桌子上立着一个牌子写着"马上回来"。如果你想的话，也许你能偷走些蛋。
+				<br><br>
+
+				<<tendingicon "eggs">><<link [[偷蛋|Connudatus Street]]>><<crimeUp 1 "petty">><<tending_give chicken_egg 3>><<transform fox 1>><<pass 15>><<endevent>><</link>><<crime "petty">>
+
+			<<case 5>>
+				你停在一个贩卖品种丰富的手工制衣物的摊位前。这些衣物并不完全符合你的品位，但其中一些还是吸引了你的注意。
+				<br><br>
+
+				<<if $money gte 500>>
+					<<shopicon "tailor">><<link [[买草帽 (£5)|Connudatus Street]]>><<headwear 17>><<set $money -= 500>><<pass 15>><<endevent>><</link>>
+					<br>
+
+
+					<<if $daily.corruptionSlimeClothes and setup.clothes.upper[38].reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 500)>>
+						<<ind>><span class="red">你耳朵里的史莱姆不允许你买色织格子裙。</span>
+						<br>
+					<<elseif $earSlime.forcedDressing and $earSlime.forcedDressing.days gt 0 and setup.clothes.upper[38].gender isnot $earSlime.forcedDressing.type and setup.clothes.upper[38].gender isnot 'n'>>
+						<<ind>><span class="red">你耳朵里的史莱姆不允许你试穿或购买色织格子裙，它只允许你穿更<<print $earSlime.forcedDressing.type is "f" ? "女性化" : "男性化">>的衣服。</span>
+						<br>
+					<<elseif $money gte 1500>>
+						<<shopicon "tailor">><<link [[买色织格子裙 (£15)|Connudatus Street]]>><<upperwear 38>><<set $money -= 1500>><<pass 15>><<endevent>><</link>>
+						<br>
+					<<else>>
+						<<ind>><span class="blue">你负担不起色织格子裙。</span>
+						<br>
+					<</if>>
+
+					<<if $daily.corruptionSlimeClothes and setup.clothes.upper[33].reveal lt Math.clamp($daily.corruptionSlimeClothes, 0, 500)>>
+						<<ind>><span class="red">你耳朵里的史莱姆不允许你买格子衬衫。</span>
+						<br>
+					<<elseif $earSlime.forcedDressing and $earSlime.forcedDressing.days gt 0 and setup.clothes.upper[33].gender isnot $earSlime.forcedDressing.type and setup.clothes.upper[38].gender isnot 'n'>>
+						<<ind>><span class="red">你耳朵里的史莱姆不允许你试穿或购买格子衬衫，它只允许你穿更<<print $earSlime.forcedDressing.type is "f" ? "女性化" : "男性化">>的衣服。</span>
+						<br>
+					<<elseif $money gte 3000>>
+						<<shopicon "tailor">><<link [[买格子衬衫 (£30)|Connudatus Street]]>><<upperwear 33>><<set $money -= 3000>><<pass 15>><<endevent>><</link>>
+						<br>
+					<<else>>
+						<<ind>><span class="blue">你负担不起格子衬衫。</span>
+						<br>
+					<</if>>
+
+				<<else>>
+					<<ind>><span class="blue">你支付不起这里的任何商品。</span>
+
+				<</if>>
+
+		<</switch>>
+
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Connudatus Street]]>><<pass 15>><<endevent>><</link>>
+
+<</widget>>
+
+<<widget "connudatusMarketsLewdEvents">>
+	<<generate1>><<person1>>
+
+	你停在一个摊位前，浏览着商品。突然，你感到一只手落在你的屁股上。你向后看去，发现一个<<person>>正站在你后面。<<He>>微笑着。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[回应|Connudatus Markets Hook Up]]>><<set $phase to 2>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+
+	<<link [[远离|Connudatus Markets Hook Up]]>><<set $phase to 1>><</link>>
+
+<</widget>>

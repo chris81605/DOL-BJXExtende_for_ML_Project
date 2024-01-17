@@ -1,0 +1,32 @@
+:: Eden Recaptured Resist Normal []
+<<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyhealth to 600>>
+	<<set $enemyhealthmax to 600>>
+	<<set $enemyanger += 200>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1>>
+	<<gwylanRescueFail "hunter">>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Eden Recaptured Resist Normal Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Eden Recaptured Resist Normal]]>><</link>></span><<nexttext>>
+<</if>>

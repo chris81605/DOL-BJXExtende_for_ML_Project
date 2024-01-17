@@ -1,0 +1,30 @@
+:: Beach Heel Walk []
+<<pass 30>><<location "beach">><<effects>>
+
+你沿着海岸走。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		漫步时，大雨淋湿了你。
+	<<elseif $weather is "clear">>
+		海浪的声音充满你的感官。
+	<<elseif $weather is "overcast">>
+		夜晚凉爽，让你很放松。
+	<<elseif $weather is "snow">>
+		当你漫步时，黑雪吹向你。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		倾盆大雨弄湿了沙地。
+	<<elseif $weather is "clear">>
+		太阳太热了，你开始感到疲劳。
+		<<tiredness 3>><<gtiredness>>
+	<<elseif $weather is "overcast">>
+		凉爽的天气适合散步。
+	<<elseif $weather is "snow">>
+		当你漫步时，雪花吹向你。
+	<</if>>
+<</if>>
+<<tiredness 3>><<stress -5>>
+<br><br>
+
+<<link [[继续|Beach]]>><</link>>

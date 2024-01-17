@@ -1,0 +1,71 @@
+:: StreetEx4 Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<set $enemyno to 2>><<set $enemynomax to 2>>
+	<<if $phase is 1>>
+		<<maninit>><<set $enemyanger += 150>><<set $enemytrust -= 50>>
+		<br><br>
+		"给我上！"<<person3>><<person>>喊道。
+		<<set $leftarm to "grappled">><<set $rightarm to "grappled">>
+	<<elseif $phase is 0>>
+		<<maninit>>
+		<br><br>
+		"好棒的礼物！"<<person1>><<person>>说道。"比另一个好太多了。"
+	<</if>>
+
+<</if>>
+<<if $phase is 1>>
+	<<set _coinflip to random(0,1)>><<rng>><<person3>>
+	<br>
+	<<if $orgasmdown gte 1>>
+		<<if _coinflip>>"看，<<girl>>，这没那么糟，你第一个高潮吧。"<<else>>"我觉得<<pshe>>喜欢这个！"<</if>><<person>>喊道。
+	<<elseif $rng lte 35 and $enemyanger gte ($enemyangermax / 5) * 4>>
+		<<if _coinflip>>"<<pShes>>让你看起来像SB一样。你能接受？"<<else>>"某人欠缺棍棒教育了！"<</if>><<person>>喊道。
+	<<elseif $rng gte 66 and $pain gte 80>>
+		<<if _coinflip>>"我想你已经把<<phim>>弄坏了！"<<else>>"<<pShes>>装哭罢了！给<<phim>>上上强度。"<</if>><<person>>喊道。
+	<<elseif $rng gte 66 and $pain gte 40>>
+		<<if _coinflip>>"你还没能玩坏<<phim>>！<<pShes>>把你当废物！"<<else>>"<<pShes>>这纯纯假哭！猛猛干<<phim>>。"<</if>><<person>>喊道。
+	<<elseif ($vaginastate is "penetrated" or $anusstate is "penetrated") and $mouthstate is "penetrated">>
+		<<if _coinflip>>"串烧！"<<else>>"几乎窒息！"<</if>><<person>>喊道。
+	<<elseif $vaginastate is "imminent" or $penisstate is "imminent">>
+		<<if $angel gte 4>>"我想一个天使就要坠落了！"<<elseif $rng>>"干死<<phim>>。"<<else>>"别折腾了，去肏<<phim>>。"<</if>><<person>>喊道。
+	<<elseif $mouthstate is "imminent" or $mouthstate is "entrance">>
+		<<if _coinflip>>"<<pShe>>想尝尝。给<<phim>>尝尝。"<<else>>"张大嘴巴！"<</if>><<person>>喊道。
+	<<elseif $anusstate is "imminent">>
+		"我不知道你以前有没有被走过后门，<<if $rng>>这可能会有点疼！"<<else>>但这问题马上就可以见分晓了！"<</if>><<person>>喊道。
+	<<elseif $mouthstate is "penetrated">>
+		<<if _coinflip>>"我认为<<pshes>>想尝试说点什么！"<<else>>"深喉<<phim>>，立刻！"<</if>><<person>>喊道。
+	<<else>>
+		那个<<person>>专注地看着。
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate 1>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->StreetEx4 Ejac]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->StreetEx4 Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->StreetEx4 Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->StreetEx4 Ejac]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->StreetEx4 Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->StreetEx4 Rape]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,38 @@
+:: Possessed Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<if $opponent is 1>>
+		<<generate1>><<person1>>
+		<<catcall>> A <<person>> reaches for you.
+		<br><br>
+		Your body is made to laugh. "<span class="wraith">Those who interrupt ghosts shall join them.</span>"
+	<<elseif $opponent is 2>>
+		<<npc Sydney>><<person1>>
+		Sydney freezes in front of you. "Oh, no. Beloved, something's wrong, I can feel it."
+		<br><br>
+		Your body is made to laugh. "<span class="wraith">False. Everything is right in the world.</span>"
+	<</if>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next" class="nextWraith"><<link [[HEALTH|Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next" class="nextWraith"><<link [[ORGASM|Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif _controlRegain is 1>>
+	<span id="next" class="nextWraith"><<link [[CONTROL|Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next" class="nextWraith"><<link [[Next|Possessed Fight]]>><</link>></span><<nexttext>>
+<</if>>

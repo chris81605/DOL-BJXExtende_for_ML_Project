@@ -1,0 +1,44 @@
+:: Prison Laundry Work Play []
+<<effects>>
+
+<<if $prison.relaxed gte 60 and $NPCList[0].name_known isnot 1>>
+	"嗯……"<<relaxed_guard 0>>说道，"我应该还没好好自我介绍过。
+	<<set $NPCList[0].name_known to 1>>
+	<<save_relaxed_guard>>
+	我是<<relaxed_guard 0>>。不要告诉眼睛仔我和你有私交。"<<He>>把骰子在两手间弹来弹去。
+<</if>>
+
+"要不要玩点怡情的？"<<he>>问，"你赢了，我就让你放松一个小时。但如果我赢了，"<<he>>停顿了一下，
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	"你就当我的脚凳吧。你现在也没别的用处了。"
+	<<set $phase to 2>>
+<<else>>
+	<<if $worn.face.type.includes("gag")>>
+		<<rng 2>>
+	<<else>>
+		<<rng 3>>
+	<</if>>
+	<<switch $rng>>
+		<<case 1>>
+			"你要手脚并用，用嘴叼着洗好的衣服。"
+			<<set $phase to 1>>
+		<<case 2>>
+			"你就当我的脚凳吧。上头不让闲着，别的也整不了。"
+			<<set $phase to 2>>
+		<<case 3>>
+			<<if $NPCList[0].penis isnot "none">>
+				"帮我口交。"
+			<<else>>
+				"舔我下面。"
+			<</if>>
+			<<set $phase to 3>>
+	<</switch>>
+<</if>>
+<br><br>
+
+
+<<link [[接受挑战|Prison Laundry Work Challenge]]>><<prison_work 1>><<prison_rep relaxed 3>><</link>><<gglove>>
+<br>
+<<link [[平常应付|Prison Laundry Work Normal]]>><<prison_work 1>><</link>>
+<br>

@@ -1,0 +1,30 @@
+:: Moor Vehicle Defeat 5 []
+<<effects>>
+
+你不得不跑了起来，
+<<if $athleticsSuccess>>
+	<span class="green">但你成功跟上了。</span><<physique 6>>
+	<br><br>
+	<<person1>><<person>>对你的持久力欢呼起来。<<person2>><<person>>朝窗外瞥了一眼。<<He>>看上去很惊讶。
+	<br><br>
+	每当车辆遇到颠簸时，你的手臂都会被拽一下。另一端的绳子情况更糟，它逐渐被磨损，直到<span class="green">突然断裂</span>。<<tearful>>你抓住机会，跑进了石楠丛中。
+	<br><br>
+
+	<<person1>><<person>>大喊着，想要追上来，却掉进了沟里。
+	<br><br>
+
+	<<endevent>>
+	<<clearNPC moor_pair_1>>
+	<<clearNPC moor_pair_2>>
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<span class="red">最后踉跄着摔倒在地上。</span>车子拽着你在地上拖行。<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>><<physique 6>>
+	<br><br>
+
+	他们停了下来。
+	<br><br>
+
+	<<link [[继续|Moor Vehicle End]]>><</link>>
+	<br>
+<</if>>

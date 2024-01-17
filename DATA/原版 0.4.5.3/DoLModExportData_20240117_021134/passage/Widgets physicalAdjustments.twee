@@ -1,0 +1,285 @@
+:: Widgets physicalAdjustments [widget]
+<<widget "physicalAdjustments">>
+	/*Breasts*/
+	<<switch $sexStats.pills.mostTaken["breast"]>>
+		<<case "growth">>
+			<<set _breastMulti to 1 + (2.25 * $sexStats.pills["pills"]["breast growth"].doseTaken)>>
+		<<case "reduction">>
+			<<set _breastMulti to -1 + (-2.25 * $sexStats.pills["pills"]["breast reduction"].doseTaken)>>
+		<<case "blocker">>
+			<<set _breastMulti to 0>>
+		<<default>>
+			<<set _breastMulti to 1>>
+	<</switch>>
+	<<if _breastMulti isnot 0>>
+		<<switch $player.gender>>
+		<<case "m">>
+			<<set _breastMulti -= 1>>
+		<<case "f" "h">>
+			<<set _breastMulti += (Math.clamp($sexStats.creampie.self.vagina * 2, 0, 50) / 100)>>
+		<</switch>>
+
+		<<if $earSlime.focus is "pregnancy" and $earSlime.growth gte 75>>
+			<<set _breastMulti += 3>>
+		<<elseif $earSlime.focus is "impregnation" and $earSlime.growth gte 75>>
+			<<set _breastMulti -= 3>>
+		<</if>>
+
+		<<set _breastMulti += (Math.clamp($sexStats.breasts.playedWith, 0, 500) / 250)>>
+
+		<<set _breastMulti += Math.clamp($sexStats.anus.pregnancy.fetus.length / 10,0,0.5)>>
+		<<set _breastMulti += Math.clamp($sexStats.vagina.pregnancy.fetus.length / 10,0,0.5)>>
+
+		<<if $purity gte 990>>
+			<<set _breastMulti -= 1>>
+		<</if>>
+
+		<<if $cow gte 1>>
+			<<set _breastMulti += 1>>
+		<</if>>
+
+		<<set _purityBoost to (_breastMulti lt 0 ? 1 + ($purity / 1000) : 1 + ((1000 - $purity) / 1000))>>
+		<<set $breastgrowthtimer -= _breastMulti * 25 * _purityBoost>>
+
+		<<if $parasite.nipples.name is "urchin">>
+			<<set $breastgrowthtimer -= 300>>
+		<</if>>
+		<<if $parasite.nipples.name is "slime">>
+			<<set $breastgrowthtimer += 300>>
+		<</if>>
+
+		<<if $breastgrowthtimer lte 0 and $player.breastsize lt $breastsizemax>>
+			<<set $player.breastsize += 1>>
+			<<set $breastgrowthtimer += 700>>
+			<<set $breastgrowthmessage to $player.breastsize>><<set $effectsmessage to 1>>
+		<<elseif $breastgrowthtimer gte 1000 and $player.breastsize gt $breastsizemin>>
+			<<set $player.breastsize -= 1>>
+			<<set $breastgrowthtimer -= 700>>
+			<<set $breastshrinkmessage to $player.breastsize>><<set $effectsmessage to 1>>
+		<</if>>
+
+		<<set $breastgrowthtimer to Math.clamp($breastgrowthtimer, 0, 1000)>>
+
+	<</if>>
+	<<set $player.breastsize to Math.clamp($player.breastsize, 0, 12)>>
+
+	/*Penis*/
+	<<if $sexStats.pills["pills"]["penis growth"].overdose gt 0>>
+		<<set $sexStats.pills["pills"]["penis growth"].overdose to Math.clamp($sexStats.pills["pills"]["penis growth"].overdose - 1, 0, 100)>>
+	<</if>>
+	<<if $sexStats.pills["pills"]["penis reduction"].overdose gt 0>>
+		<<set $sexStats.pills["pills"]["penis reduction"].overdose to Math.clamp($sexStats.pills["pills"]["penis reduction"].overdose - 1, 0, 100)>>
+	<</if>>
+
+	<<switch $sexStats.pills.mostTaken["penis"]>>
+		<<case "growth">>
+			<<set _penisMulti to 1 + (2.25 * $sexStats.pills["pills"]["penis growth"].doseTaken)>>
+			<<set $sexStats.pills["pills"]["penis growth"].overdose += $sexStats.pills["pills"]["penis growth"].doseTaken>>
+		<<case "reduction">>
+			<<set _penisMulti to -1 + (-2.25 * $sexStats.pills["pills"]["penis reduction"].doseTaken)>>
+			<<set $sexStats.pills["pills"]["penis reduction"].overdose += $sexStats.pills["pills"]["penis reduction"].doseTaken>>
+		<<case "blocker">>
+			<<set _penisMulti to 0>>
+		<<default>>
+			<<set _penisMulti to 1>>
+	<</switch>>
+
+	<<if $player.penisExist and _penisMulti isnot 0>>
+		<<set _totalReduction to ($sexStats.creampie.self.anus + $sexStats.creampie.self.mouth) * 2>>
+		<<set _totalIncrease to ($sexStats.creampie.npc.anus + $sexStats.creampie.npc.mouth + $sexStats.creampie.npc.vagina) * 2>>
+
+		<<if $cow gte 6>>
+			<<set _penisMulti += 1>>
+		<</if>>
+
+		<<if $earSlime.focus is "pregnancy" and $earSlime.growth gte 100>>
+			<<set _penisMulti -= 3>>
+		<<elseif $earSlime.focus is "impregnation" and $earSlime.growth gte 100>>
+			<<set _penisMulti += 3>>
+		<</if>>
+
+		<<if _penisMulti gt 1>>
+			<<set _totalIncrease += 10>>
+			<<set _totalIncrease *= _penisMulti>>
+		<<elseif _penisMulti lt 0>>
+			<<set _totalReduction += 10>>
+			<<set _totalReduction *= _penisMulti * -1>>
+		<</if>>
+		<<set _totalChange to _totalIncrease - _totalReduction>>
+		<<set _purityBoost to (_totalChange lt 0 ? 2 + ($purity / 500) : 2 + ((1000 - $purity) / 500))>>
+		<<set $penisgrowthtimer -= _purityBoost * _totalChange>>
+
+		<<set $penisgrowthtimer -= $sexStats.pills["pills"]["penis growth"].overdose>>
+		<<set $penisgrowthtimer += $sexStats.pills["pills"]["penis reduction"].overdose>>
+
+		<<if $player.penissize lt 0>>
+			<<set $penisgrowthtimer -= 50>>
+		<</if>>
+
+		<<if $parasite.penis.name is "urchin">>
+			<<set $penisgrowthtimer -= 250>>
+			<<set $sexStats.pills["pills"]["penis growth"].overdose += random(1,2)>>
+		<</if>>
+		<<if $parasite.penis.name is "slime">>
+			<<set $penisgrowthtimer += 250>>
+			<<set $sexStats.pills["pills"]["penis reduction"].overdose += random(1,2)>>
+		<</if>>
+		<<set _overdose to $sexStats.pills["pills"]["penis growth"].overdose - $sexStats.pills["pills"]["penis reduction"].overdose>>
+
+		<<if $earSlime.focus is "impregnation" and $earSlime.growth gte 100 and _overdose lt 20>>
+			<<set _overdose to 20>>
+		<<elseif $worn.genitals.type.includes("shrinking")>>
+			<<set _overdose to -20>>
+			<<if $penisgrowthtimer lte 100>>
+				<<set $penisgrowthtimer to 100>>
+			<</if>>
+			<<set $penisgrowthtimer += 100>>
+		<</if>>
+
+		/* The $player.gender isnot "f" is to specifically block the parasite penis from shrinking below tiny */
+		<<if $penisgrowthtimer lte 0 and $player.penissize lt $penissizemax and $player.penissize gte -1>>
+			<<set $player.penissize += 1>>
+			<<set $penisgrowthtimer += 700>>
+			<<set $penisgrowthmessage to $player.penissize>><<set $effectsmessage to 1>>
+		<<elseif $penisgrowthtimer lte -400 and $player.penissize lt $penissizemax and $player.penissize is -2 and _overdose gte 20>>
+			<<set $player.penissize += 1>>
+			<<set $penisgrowthtimer += 1100>>
+			<<set $penisgrowthmessage to $player.penissize>><<set $effectsmessage to 1>>
+		<<elseif $penisgrowthtimer gte 1000 and $player.penissize gt 0>>
+			<<set $player.penissize -= 1>>
+			<<set $penisgrowthtimer -= 700>>
+			<<set $penisshrinkmessage to $player.penissize>><<set $effectsmessage to 1>>
+		<<elseif $penisgrowthtimer gte 1200 and $player.penissize is 0 and $player.penissize gt $penissizemin and $player.gender isnot "f">>
+			<<set $player.penissize -= 1>>
+			<<set $penisgrowthtimer -= 1000>>
+			<<set $penisshrinkmessage to $player.penissize>><<set $effectsmessage to 1>>
+		<<elseif $penisgrowthtimer gte 1500 and $player.penissize is -1 and $player.penissize gt $penissizemin and _overdose lte -20 and $player.gender isnot "f">>
+			<<set $player.penissize -= 1>>
+			<<set $penisgrowthtimer -= 1300>>
+			<<set $penisshrinkmessage to $player.penissize>><<set $effectsmessage to 1>>
+		<</if>>
+		<<set $penisgrowthtimer to Math.clamp($penisgrowthtimer, 0, 1000)>>
+
+	<</if>>
+	<<set $player.penissize to Math.clamp($player.penissize, -2, 4)>>
+
+	/*Bottom*/
+	<<switch $sexStats.pills.mostTaken["bottom"]>>
+		<<case "growth">>
+			<<set _bottomMulti to 1 + (2.25 * $sexStats.pills["pills"]["bottom growth"].doseTaken)>>
+		<<case "reduction">>
+			<<set _bottomMulti to -1 + (-2.25 * $sexStats.pills["pills"]["bottom reduction"].doseTaken)>>
+		<<case "blocker">>
+			<<set _bottomMulti to 0>>
+		<<default>>
+			<<set _bottomMulti to 1>>
+	<</switch>>
+	<<if _bottomMulti isnot 0>>
+		<<set _totalReduction to $workouts /4>>
+		<<set _totalIncrease to $sexStats.creampie.self.anus * 2>>
+
+		<<set _bottomMulti += (500 - $purity) / 500>>
+
+		<<if $cow gte 6>>
+			<<set _bottomMulti += 1>>
+		<</if>>
+
+		<<if _bottomMulti gt 1>>
+			<<set _totalIncrease += 10>>
+			<<set _totalIncrease *= _bottomMulti>>
+		<<elseif _bottomMulti lt 0>>
+			<<set _totalReduction += 10>>
+			<<set _totalReduction *= _bottomMulti * -1>>
+		<</if>>
+		<<set _totalChange to _totalIncrease - _totalReduction>>
+		<<set _purityBoost to (_totalChange lt 0 ? 2 + ($purity / 500) : 2 + ((1000 - $purity) / 500))>>
+		<<set $bottomgrowthtimer -= _purityBoost * _totalChange>>
+
+		<<if $parasite.bottom.name is "urchin">>
+			<<set $bottomgrowthtimer -= 300>>
+		<</if>>
+		<<if $parasite.bottom.name is "slime">>
+			<<set $bottomgrowthtimer += 300>>
+		<</if>>
+
+		<<if $bottomgrowthtimer lte 0 and $player.bottomsize lt $bottomsizemax>>
+			<<set $player.bottomsize += 1>>
+			<<set $bottomgrowthtimer += 700>>
+			<<set $bottomgrowthmessage to $player.bottomsize>><<set $effectsmessage to 1>>
+		<<elseif $bottomgrowthtimer gte 1000 and $player.bottomsize gt $bottomsizemin>>
+			<<set $player.bottomsize -= 1>>
+			<<set $bottomgrowthtimer -= 700>>
+			<<set $bottomshrinkmessage to $player.bottomsize>><<set $effectsmessage to 1>>
+		<</if>>
+
+		<<set $bottomgrowthtimer to Math.clamp($bottomgrowthtimer, 0, 1000)>>
+	<</if>>
+	<<set $player.bottomsize to Math.clamp($player.bottomsize, 0, 8)>>
+	/*Resetting of values*/
+
+	<<set $sexStats.creampie.npc.anus to 0>>
+	<<set $sexStats.creampie.npc.mouth to 0>>
+	<<set $sexStats.creampie.npc.vagina to 0>>
+	<!-- <<set $sexStats.creampie.npc.tentacle to 0>> -->
+	<!-- <<set $sexStats.creampie.npc.penis to 0>> -->
+	<!-- IMPORTANT NOTE: If you uncomment the above sections,
+	find a section in backComp widget labeled: v0.3.11.4 creampie.npc.penis and tentacle fix
+	And REMOVE it or comment it out -->
+	<<set $sexStats.creampie.self.anus to 0>>
+	<<set $sexStats.creampie.self.mouth to 0>>
+	<<set $sexStats.creampie.self.vagina to 0>>
+	<<set $sexStats.breasts.playedWith to 0>>
+	<<set $workouts to 0>>
+
+	/* pills related */
+
+	<<run resetAllDoseTaken()>>
+	<<autoTakePillCheck>>
+
+	/************************************/
+<</widget>>
+
+<<widget "autoTakePillCheck">>
+	<<if !$statFreeze && $sexStats && $sexStats.pills && $pillsTakenOn != (Time.monthDay.toString() + Time.month + Time.year.toString())>>
+		<<set _pills to $sexStats.pills>>
+		<<if $molestationstart isnot 1 and $combat is 0 and (["home", "alex_cottage", "asylum", "prison"].includes($location) or ($location is "cabin" and $syndromeeden gte 1) or ($location is "temple" and V.wardrobes.temple.unlocked) or ($location is "seapirates" and V.wardrobes.pirate.unlocked))>> <!-- Eden Syndrome is 0 or 1, but could be higher in the future. -->
+			<<set _keys to Object.keys(_pills.lastTaken)>> /* "lastTaken" will induce you in error here, it's only to retrieve the pills type list*/
+			<<for _i, _key range _keys>>
+				<<run determineAutoTakePill(_key)>>
+				<<if _autoTakeDetermined != null and _pills.pills[_autoTakeDetermined].owned > 0>>
+					/*Prevent pills from being taken if the player has already taken a dose, aloowing them to either take more than intended, or to bypass the overdose effects*/
+					<<if !_pills.pills[_autoTakeDetermined].doseTaken>>
+						<<set _pills.pills[_autoTakeDetermined].owned-->>
+						<<if _autoTakeDetermined is "Hair Growth Formula">>
+							<<set _pills.pills[_autoTakeDetermined].doseTaken += 3>>
+							<<set $hairGrowthApplied to true>>
+							<<if _pills.pills[_autoTakeDetermined].owned == 0>>
+								<<set _pills.pills[_autoTakeDetermined].autoTake to false>>
+								<<set $hairGrowthAppliedLast to true>>
+							<</if>>
+						<<else>>
+							<<set $pillsconsumed++>> /* to keep track of overall pill consumption (stats) */
+							<<set _pills.pills[_autoTakeDetermined].doseTaken += 1>>
+							<<run redetermineMostTaken(0, 0, _autoTakeDetermined)>>
+							<<run setLastTaken(null, null, _autoTakeDetermined)>>
+							<<set $pillsTaken to true>>
+							<<set $pillsTakenOn to (Time.monthDay.toString() + Time.month + Time.year.toString())>>
+							<<if _pills.pills[_autoTakeDetermined].owned == 0>>
+								<<set _pills.pills[_autoTakeDetermined].autoTake to false>>
+								<<set $pillsTakenLast to true>>
+							<</if>>
+						<</if>>
+						<<set $effectsmessage to 1>>
+					<</if>>
+				<<elseif _autoTakeDetermined != null>>
+					<<set _pills.pills[_autoTakeDetermined].autoTake to false>>
+					<<set _pills.pills[_autoTakeDetermined].doseTaken to 0>>
+					<<set _pills.lastTaken[_key] to ''>>
+					<<set _pills.mostTaken[_key] to ''>>
+				<</if>>
+			<</for>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+/*<<playWithBreasts>>*/

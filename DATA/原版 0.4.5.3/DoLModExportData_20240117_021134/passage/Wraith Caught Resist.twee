@@ -1,0 +1,48 @@
+:: Wraith Caught Resist []
+<<effects>>
+<<if $willpowerSuccess is 1>>
+	你试着把目光从苍白的身影上移开，费了很大的力气你转过身去。<span class="green">铃声停止了，你的双腿恢复了感觉。</span>即使背对着祂，你仍然能感觉到祂就在你身后。
+	<br><br>
+	当你再回头的时候祂不见了。笑声在你的耳边回响。
+	<<switch $location>>
+		<<case "town" "park" "alley">>
+			街上仍然空无一人，昏沉的红灯照射在你身上，你还没有完全清醒过来。
+			<br><br>
+		<<case "forest" "lake">>
+			森林变得安静。你可以清楚地看到树木的影子，红色的月亮把一切都覆盖在一片红光中。你还没有完全清醒过来。
+		<<case "sewers">>
+			下水道还是空的，空气冷得让人不舒服。你还没有清醒过来。
+	<</switch>>
+	<br><br>
+	<<set $wraith.hunt to 6>>
+	<<set $wraith.evaded++>>
+	<<exitWraith>>
+<<else>>
+	即使你闭着眼睛，<span class="red">你也还是可以看到祂。</span>祂的手臂以诡异的动作移动，在空中留下残影。你的整个身体都麻木了。<<willpower 3>><<gwillpower>>
+	<br><br>
+	<<generateWraith 1 true>>
+	<<initWraith "abomination">>
+	<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+		一双苍白的手抓住你的头。
+		<<if $wraith.gen is "arms">>
+			接着是更多的手。你抬起头，看到<<his>>的背后出现了好几条手臂。
+		<<else>>
+			有东西在你的腿和胳膊上滑来滑去。
+		<</if>>
+		"<span class="wraith">这样扭动下去，你只会淹死得更快。</span>"
+		<br><br>
+		<<link [[继续|Wraith Caught]]>><</link>>
+		<br>
+	<<else>>
+		一只苍白的手抬起你的下巴。当你看着<<his>>的双眼时，你的大脑一片空白。
+		<<if $wraith.gen is "arms">>
+			许多支手臂从<<his>>的背后伸出。
+		<<else>>
+			有东西在你的腿和胳膊上滑来滑去。苍白的触手已经完全包围了你。
+		<</if>>
+		"<span class="wraith">你会学会的。</span>"
+		<br><br>
+		<<link [[继续|Wraith Caught]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,41 @@
+:: Temple Garden Exposed []
+<<set $outside to 1>><<set $location to "temple">><<temple_effects>><<effects>>
+你在树篱间压低身子，每到一个拐角都先偷偷观察一下再快速冲过去。你知道他们有时会在这里晾晒衣物。
+<<if $weather is "rain">>
+	也许他们在附近存放了一些避雨的东西。
+<<elseif $weather is "snow">>
+	也许他们在附近的雪地里储存了一些东西。
+<</if>>
+<br><br>
+<<rng>>
+<<beastNEWinit 1 wolf>>
+<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	你觉得你听到身后有什么声音。
+	<<if $syndromewolves is 1>>
+		一个<<beasttype>>从树篱下走出来，嘴里叼着一捆布。
+		<<if $monster is 1>>
+			"遮住。身体不是给肮脏的人类看的。"
+		<</if>>
+		<<bHe>>在你旁边扔下一些毛巾，然后迅速跑回森林。
+		<br><br>
+		<<towelup>>
+		<<link [[继续|Temple Garden]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		一只<<beasttype>>从树篱下钻了出来。<<bHe>>猛地扑到你身上。
+		<br><br>
+		<<link [[继续|Temple Garden Wolf]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<endevent>>
+	<<generate1>><<generate2>>
+	你看到一件挂在晾衣绳上的修女长袍<<if $weather is "rain">>正被匆忙从雨中移出<<elseif $weather is "snow">>正被匆忙从雪中移出<<else>>在一片花丛之上<</if>>。同一根晾衣线上还挂着一些毛巾，离得更近一些。附近有<<fullGroup>>，穿着修道服，正在护理花坛，他们背对着你。
+	<br><br>
+	<<set $skulduggerydifficulty to 700>>
+	<<link [[偷长袍|Temple Garden Habit]]>><<set $skulduggerydifficulty to 700>><<crimeUp 50 "thievery">><</link>><<skulduggerydifficulty>><<crime "thievery">>
+	<br>
+	<<set $skulduggerydifficulty to 300>>
+	<<link [[偷走毛巾|Temple Garden Towels]]>><<set $skulduggerydifficulty to 300>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>

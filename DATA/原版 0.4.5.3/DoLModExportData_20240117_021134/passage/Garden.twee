@@ -1,0 +1,186 @@
+:: Garden []
+<<set $outside to 1>><<set $location to "home">><<home_effects>><<effects>>
+你在孤儿院后面的花园里。
+<br><br>
+<<if $mason_pond is 3>>
+	花园的一部分已经被封锁起来了。
+	<<if Time.dayState is "night">>
+		<<if $mason_pond_timer gte 7>>
+			他们计划在后面挖的洞在黑暗中可能很危险。
+		<<elseif $mason_pond_timer gte 4>>
+			他们在后面挖的洞可能在黑暗中可能很危险。
+		<<elseif $mason_pond_timer gte 1>>
+			他们在后面挖的洞可能在黑暗中可能很危险。
+		<<else>>
+			虽然在黑暗中很难分辨，但是泉水池确实已经完成了。
+		<</if>>
+	<<else>>
+		<<if $weather is "rain">>
+			<<if $mason_pond_timer gte 7>>
+				雨天阻碍了工程的开展。
+			<<elseif $mason_pond_timer gte 4>>
+				地上的洞暂时被放弃，等待雨过天晴。
+			<<elseif $mason_pond_timer gte 1>>
+				泉水池已经初见雏形了，而工人们一定快把泉眼打通了。至于现在，那个池子满是雨水。
+			<</if>>
+		<<elseif $weather is "snow">>
+			<<if $mason_pond_timer gte 7>>
+				雪天阻碍了工程的开展。
+			<<elseif $mason_pond_timer gte 4>>
+				只有等到雪停之后，喷泉水池才会继续施工。
+			<<elseif $mason_pond_timer gte 1>>
+				泉水池已经初见雏形了，而工人们已经快打到泉眼了。至于现在，那个池子里满是积雪。
+			<</if>>
+		<<else>>
+			<<if $mason_pond_timer gte 6>>
+				几个工人正在卖力工作。
+			<<elseif $mason_pond_timer gte 3>>
+				水池看起来已经很深了，但工人们仍在继续向下挖。
+			<<elseif $mason_pond_timer gte 1>>
+				泉水池已经初见雏形，工人们一定快把泉眼打通了。
+			<</if>>
+		<</if>>
+	<</if>>
+	<br><br>
+<<elseif $mason_pond is 4 and Time.dayState isnot "night">>
+	<<set $mason_pond to 5>>
+	你听到了水花飞溅与嬉戏打闹的声音。泉水池已经竣工了，一些孤儿已经大胆地开始享受着水池的乐趣。他们坐在水池边，一边将脚泡进水中，一边朝对方泼着水。
+	<br><br>
+	孤儿们看见你时都欢呼了起来。
+	<<lltrauma>><<trauma -18>><<llstress>><<stress -18>><<ggghope>><<hope 9>>
+	<br><br>
+	<<if $garden_flowers_intro is 1>>
+		<<unset $garden_flowers_intro>>
+		<<plots_init garden 3 earth 1 small>>
+	<</if>>
+	<<add_plot garden water 1 small>>
+	一些水流过邻近的土壤，最后向花坛流去。<span class="gold">你可以在那里种一些东西，毕竟有些植物喜水。</span>
+	<br><br>
+<</if>>
+<<if $alex_greenhouse is 1>>
+	<<if Time.dayState is "night">>
+		<<if $alex_greenhouse_timer gte 6>>
+			那一片地已经挖好了，它将会成为温室的地基。
+		<<elseif $alex_greenhouse_timer gte 3>>
+			温室地基已经打好了。
+		<<elseif $alex_greenhouse_timer gte 1>>
+			温室已经初具雏形，现在它还缺少玻璃。
+		<<else>>
+			温室看起来已经竣工了。
+		<</if>>
+	<<else>>
+		<<if $weather is "rain">>
+			<<if $alex_greenhouse_timer gte 6>>
+				地面已经挖好了，但是工人要等到雨停了才会继续施工。
+			<<elseif $alex_greenhouse_timer gte 3>>
+				地基大致已经挖好了，但是工人要等到雨停了才会继续施工。
+			<<elseif $alex_greenhouse_timer gte 1>>
+				温室目前看起来还缺少一些玻璃，但是工人要等到雨停才会施工。
+			<<else>>
+				温室看起来已经竣工了。
+			<</if>>
+		<<elseif $weather is "snow">>
+			<<if $alex_greenhouse_timer gte 6>>
+				地面已经挖好了，但是工人要等到雪停了才会继续施工。
+			<<elseif $alex_greenhouse_timer gte 3>>
+				地面已经挖好了，但是工人要等到雪停了才会继续施工。
+			<<elseif $alex_greenhouse_timer gte 1>>
+				温室目前看起来还缺少一些温室玻璃，但是工人要等到雪停才会继续施工。
+			<<else>>
+				温室看起来已经竣工了。
+			<</if>>
+		<<else>>
+			<<if $alex_greenhouse_timer gte 6>>
+				工人们正在为温室的地基挖掘相应的空间。
+			<<elseif $alex_greenhouse_timer gte 3>>
+				工人们正在铺设温室地基。
+			<<elseif $alex_greenhouse_timer gte 1>>
+				工人们正在为温室安装玻璃。
+			<<else>>
+				温室看起来已经竣工了。
+			<</if>>
+		<</if>>
+	<</if>>
+<br><br>
+<<elseif $alex_greenhouse is 2>>
+	<<set $alex_greenhouse to 3>>
+	玻璃上闪烁着金斑。温室已经准备就绪，为下面的花圃遮风挡雨。
+	<br><br>
+	<span class="gold">你现在可以在一年中的任何季节种植你想要的植物。</span>
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passouthome>>
+<<elseif $exposed gte 1 and Time.hour lt 22 and Time.hour gt 6>>
+	<<exhibitionismgarden>>
+	你无法忍受有人看到你这副模样，你赶忙跑回卧室中。
+	<br><br>
+	<<link [[继续|Bedroom]]>><</link>>
+<<elseif !$weekly.gardenVoyeur and Time.dayState is "night" and $rng gte 81>>
+
+<<set $weekly.gardenVoyeur to true>>
+
+当你偷偷穿过花园时，你听到从黑暗的角落里传来奇怪的、低沉的声音。
+<br><br>
+
+<<link [[调查|Garden Voyeurism Investigate]]>><</link>>
+<br>
+<<link [[忽略|Garden Voyeurism Ignore]]>><</link>>
+<<else>>
+
+	<<if Time.hour gte 7 and Time.hour lt 20 and $weather is "rain">>
+		一些孤儿正在嬉戏打闹。
+		<br><br>
+	<</if>>
+
+	<<if $alex_greenhouse gte 3>>
+		<<gardenicon "flower">><<link [[温室|Garden Flowers]]>><</link>>
+		<br>
+	<<else>>
+		<<gardenicon "flower">><<link [[花坛|Garden Flowers]]>><</link>>
+		<br>
+	<</if>>
+
+	<<if $weather is "clear" and Time.dayState is "day">>
+		<<baskicon>><<link [[晒太阳 (0:10)|Bask]]>><<pass 10>><<tanned 10>><<set $stress -= 20>><</link>><<lstress>><<gtanned>>
+		<br>
+	<</if>>
+
+	<<if $exposed gte 2>>
+		<<if Time.dayState is "night">>
+			<<if $exhibitionism gte 55>>
+				<<fenceicon>><<link [[爬过栅栏 (0:05)|Garden Fence Naked Night]]>><<pass 5>><</link>><<if $daily.ex.fence isnot 1>><<exhibitionist4>><</if>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $exhibitionism gte 75>>
+				<<fenceicon>><<link [[爬过栅栏 (0:05)|Garden Fence Naked Day]]>><<pass 5>><</link>><<if $daily.ex.fence isnot 1>><<exhibitionist5>><</if>>
+				<br>
+			<</if>>
+		<</if>>
+	<<elseif $exposed gte 1>>
+		<<if Time.dayState is "night">>
+			<<if $exhibitionism gte 15>>
+				<<fenceicon>><<link [[爬过栅栏 (0:05)|Garden Fence Undies Night]]>><<pass 5>><</link>><<if $daily.ex.fence isnot 1>><<exhibitionist2>><</if>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $exhibitionism gte 35>>
+				<<fenceicon>><<link [[爬过栅栏 (0:05)|Garden Fence Undies Day]]>><<pass 5>><</link>><<if $daily.ex.fence isnot 1>><<exhibitionist3>><</if>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $tutorial is 0 and $debug is 0>>
+			<<fenceicon>><<link [[爬过栅栏 (0:01)|Domus Street]]>><<pass 1>><</link>>
+			<br>
+		<<else>>
+			<<fenceicon>><<link [[爬过栅栏 (0:01)|Residential alleyways]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+	<<main_hall_icon>><<link [[大厅 (0:01)->Orphanage]]>><<pass 1>><</link>>
+	<br>
+
+<</if>>

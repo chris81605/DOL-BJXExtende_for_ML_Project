@@ -1,0 +1,38 @@
+:: Churchyard []
+<<location "churchyard">><<set $outside to 1>><<effects>>
+
+你正待在老教堂的院子里，在附近的山丘上有一座隐约可见的破旧庄园，而在这周围全都是石头废墟和墓穴。
+
+<<if Time.dayState is "night">>
+	<<if isBloodmoon()>>
+		坟墓在红色的月光下投影出令人不安的阴影。
+	<<else>>
+		<<if $weather is "clear">>
+			月光投下的影子似乎在移动。
+		<<elseif $weather is "rain">>
+			雨点打在石头上的声音淹没了其他的一切。
+		<<elseif $weather is "snow">>
+			雪落在墓碑上。
+		<<else>>
+			你小心注意着不被绊倒。
+		<</if>>
+	<</if>>
+<<elseif Time.dayState is "day">>
+	鸟儿们在雕像和墓穴入口处的拱门上筑起了巢。
+<<elseif Time.dayState is "dawn">>
+	清晨的阳光从树梢上飘然而下。
+<<else>>
+	在夕阳的余晖下，树木的阴影被无限延伸。
+<</if>>
+<br><br>
+
+<<foresticon "churchyard">><<link [[墓穴|Churchyard Catacombs Lock]]>><</link>>
+<br>
+/* 北极星模组 */
+<<if $demonbookread is 1 and Time.dayState is "night">>
+    <<link [[召唤仪式|Demon Start]]>><</link>>
+    <br>
+<</if>>
+/* 北极星 */
+<<foresticon>><<link [[进入森林|Forest]]>><<endevent>><<set $forest to 10>><</link>>
+<br>

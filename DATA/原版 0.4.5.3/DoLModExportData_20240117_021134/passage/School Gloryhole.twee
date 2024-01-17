@@ -1,0 +1,83 @@
+:: School Gloryhole []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 1>><<set $phase to 0>>
+	你潦草地在牌子写上"口交服务，<<printmoney $school_gloryhole_price true>>"然后便将它贴到了孔洞上方的墙壁一侧。现在你只要待在后面并静静等待就好。
+<<else>>
+	你在墙后的空隙中调整你的位置，准备迎接你的下一位顾客。
+<</if>>
+<br><br>
+
+<<switch $schoolstate>>
+<<case "morning" "lunch" "afternoon">>
+	<span class="green">学生们正在外面的走廊里走来走去。</span>
+	<<set _busy to 40>>
+<<case "first" "second" "third" "fourth" "fifth">>
+	一些学生握着学生证在大厅里走来走去。
+	<<set _busy to 1>>
+<<default>>
+	<span class="red">走廊里一片寂静。</span>
+	<<set _busy to 0>>
+<</switch>>
+<br><br>
+
+<!-- Set event probability based on hallway business, sex fame, oral skill, and price -->
+<<set _prob to (_busy + $fame.sex/50 + currentSkillValue("oralskill")/25 - 2*($school_gloryhole_price/100))>>
+<<if _busy is 0>><<set _prob to 0>><</if>>
+<<set _prob to Math.clamp(_prob, 0, 100)>>
+<<set _rnd to random(0, 100)>>
+
+<<if _prob gte 91>>
+	外面传来互相推挤的声音。大厅里有几个人正兴高采烈地交谈着。<span class="green">也许你应该提高收费标准……</span>
+	<br><br>
+<<elseif _prob lte 20>>
+	<<if _busy lte 1>>
+		前厅很是安静。<span class="red">也许你该换个时间营业……</span>
+		<br><br>
+	<<else>>
+		你听到外面传来许多质疑的窃笑。<span class="red">也许你该降低收费标准……</span>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<if _busy gte 1>>
+	<<switch random(3)>>
+	<<case 0>><!-- 25% chance to happen. -->
+		你听到外面突然一阵骚动，然后是一个声音传来，"这里发生什么事了？"<span class="pink">校门卫伸出手将你拽了出来。</span>
+		<br><br>
+		<<if $historytrait gte 2 and $schooldrainintro is 1>>
+			<<link [[从秘密下水道逃走！(0:02)|School Drain]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<link [[被抓！|School Gloryhole Janitor Catch]]>><<stress 1>><</link>><<gstress>>
+	<<default>>
+		<<if _rnd lte _prob>>
+			<<generatec1>><<person1>>
+			有脚步声逐渐靠近，随后是咯咯的笑声。不一会，
+			<<if $NPCList[0].penis isnot "none">>
+			一根$NPCList[0].penisdesc伸了过来。
+			<<else>>
+			一个小穴出现在了洞口。
+			<</if>>
+			<br><br>
+			<<link [[开始工作|School Gloryhole Sex]]>><<pass 5>><<set $sexstart to 1>><<tiredness 3>><</link>><<gtiredness>>
+			<br>
+			<<link [[溜出去 (0:05)|Hallways]]>><<pass 5>><<unset $desperateaction>><<endevent>><</link>>
+			<br>
+		<<else>>
+			外面传来阵阵脚步声，有人在相互交谈着什么，但没人接近洞口。
+			<br><br>
+			<<link [[等待 (0:10)|School Gloryhole]]>><<pass 10>><</link>>
+			<br>
+			<<link [[溜出去 (0:05)|Hallways]]>><<pass 5>><<unset $desperateaction>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</switch>>
+<<else>>
+	当你坐在洞后面时，你只能听见一片寂静。
+	<br><br>
+	<<link [[等待 (0:10)|School Gloryhole]]>><<pass 10>><</link>>
+	<br>
+	<<link [[溜出去 (0:05)|Hallways]]>><<pass 5>><<unset $desperateaction>><<endevent>><</link>>
+	<br>
+<</if>>

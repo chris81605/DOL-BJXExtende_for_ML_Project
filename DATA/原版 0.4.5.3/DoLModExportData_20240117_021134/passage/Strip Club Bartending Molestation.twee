@@ -1,0 +1,36 @@
+:: Strip Club Bartending Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $phase is 0>>
+		你让自己侧坐在柜台上，咬着下唇，用一种迷离的眼神盯着那个色狼的眼睛。幸运的是，这达到了你希望的效果。<<He>>离开达里尔并扑向你，你们两个都从柜台上翻了下去。
+		<<promiscuity3>>
+		<<set $enemyarousal += 200>>
+	<<else>>
+		你抓起一个玻璃杯，并用它砸狠狠地砸在那个色狼的头上，虽然冲击的力量使<<him>>离开了达里尔，但<<he>>却愤怒地转向你。<<he>>怒发冲冠，冲过柜台，将你撞倒在地。
+		<br><br>
+		<<set $enemyhealth -= 100>><<set $enemyanger += 100>><<set $NPCList[0].lefthand to "throat">><<set $NPCList[0].righthand to "throat">><<set $neckuse to "hand">>
+	<</if>>
+<</if>>
+<<if $timer gte 1>>
+	你仍能听到柜台另一边传来的打斗声。
+	<br><br>
+<<else>>
+	<<enable_rescue>>
+	虽然由于柜台的阻挡，导致你看不到另一边的情况，但你认为斗争已经停止了。
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $timer gte 1 and $enemyarousal lte $enemyarousalmax and $enemyhealth gte 0>>
+	<span id="next"><<link [[继续|Strip Club Bartending Molestation]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Strip Club Bartending Molestation Finish]]>><</link>></span><<nexttext>>
+<</if>>

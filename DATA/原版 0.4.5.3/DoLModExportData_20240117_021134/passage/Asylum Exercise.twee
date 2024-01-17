@@ -1,0 +1,66 @@
+:: Asylum Exercise []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "asylumOutside">>
+<<elseif $NPCName[$NPCNameList.indexOf("Eden")].love gte 100 and ($edenfreedom is 1 and $edendays gte 2 and !$daily.eden.asylumRescue and $eden_asylum_fence isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2) or ($edenfreedom gte 2 and $edendays gte 8 and !$daily.eden.asylumRescue and $eden_asylum_fence isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound" and $trauma lte $traumamax / 2)>>
+	<<set $eden_asylum_fence to 1>>
+	<<set $daily.eden.asylumRescue to 1>>
+	你发现树林中有动静，有一个潜伏着的身影慢慢接近。<span class="green">原来是伊甸。</span>
+	<br><br>
+
+	<<npc Eden>><<person1>>
+	你慢跑到围栏边，倚着它喘息着。伊甸看到你的身影，顿时变得激动了起来，从草丛里冲了出来，来到你面前。
+	<br><br>
+	<<He>>伸手穿过铁栅栏，握住了你的手。"我要分散他们的注意力，"<<he>>说道，"几分钟后大楼另一侧会发出爆炸声，趁这时候爬过围栏，我就带你一起回小屋，明白了吗？"<<takeHandholdingVirginity "Eden" "romantic">>
+	<br><br>
+
+	<<getinicon>><<link [[同意|Eden Distraction Plan]]>><</link>>
+	<br>
+	<<refuseicon>><<link [[拒绝|Eden Distraction Refuse]]>><</link>>
+	<br>
+<<elseif $exposed is 2>>
+	<<flaunting>>你在精神病院空地上跑步。保安紧盯着你，并且当你跑到围栏附近的时候会警告你。
+	<<athletics 3>><<physique 3>>
+	<br><br>
+	你的<<lewdness>>吸引了所有人的注意。
+	<<exhibitionism5>>
+	<<asylumevents>>
+<<elseif $exposed is 1>>
+	<<flaunting>>你在精神病院空地上跑步。保安紧盯着你，并且当你跑到围栏附近的时候会警告你。
+	<<athletics 3>><<physique 3>>
+	<br><br>
+	你的<<lewdness>>吸引了所有人的注意。
+	<<exhibitionism3>>
+	<<asylumevents>>
+<<else>>
+	<<if $leftarm is "bound" and $rightarm is "bound" and $worn.upper.name is "straightjacket">>
+		尽管穿着拘束服，你还是坚持在精神病院空地上跑来跑去。
+		<<if currentSkillValue('danceskill') + currentSkillValue('athletics') gte 1600>>
+			凭借你敏捷的运动能力，你利用这个机会好好训练了一下。
+			<<athletics 2>><<physique 5>>
+		<<elseif currentSkillValue('danceskill') + currentSkillValue('athletics') gte 1100>>
+			凭借你熟练的动作，你还是能够达到训练效果。
+			<<athletics 2>><<physique 4>>
+		<<elseif currentSkillValue('danceskill') + currentSkillValue('athletics') gte 650>>
+			这非常难，但多亏了你那还尚可的敏捷性和运动能力，你仍然能够获得些许锻炼。
+			<<athletics 2>><<physique 2>>
+		<<else>>
+			你<<print either("马上就","很快就")>>
+			<<if random(0,1)>>被树根绊倒，脸着地滑出去好远。
+			<<else>>被一块石头绊到，失去平衡，头狠狠地撞在了树上。你被撞得眼冒金星，倒在了地上。
+			<</if>>
+			有几个人拍手叫好。<<gpain>><<pain 6>><br>
+			最终有人把你扶了起来。你根本没锻炼到什么。
+			<<athletics 3>>
+		<</if>><br><br>
+		保安像看猴一样戏谑地看着你，但当你离围栏太近时，他们还是会警告你。
+		<br><br>
+		<<asylumevents>>
+	<<else>>
+		你在精神病院空地上跑步。保安紧盯着你，并且当你跑到围栏附近的时候会警告你。
+		<<athletics 3>><<physique 3>>
+		<br><br>
+		<<asylumevents>>
+	<</if>>
+	<br><br>
+<</if>>

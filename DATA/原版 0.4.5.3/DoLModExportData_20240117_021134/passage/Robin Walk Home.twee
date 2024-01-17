@@ -1,0 +1,123 @@
+:: Robin Walk Home []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<npc Robin>><<person1>>你跑向罗宾。
+
+<<if $robinReunionScene is "dungeon">>
+	<<unset $robinReunionScene>><<set $robinPostMortem to true>>
+	你轻拍了一下<<his>>的肩膀<<if _robin.trauma gte 40>>，<<him>>吓得大叫了一声<</if>>。<<He>>转过身，在看到是你之后瞬间屏住了呼吸，然后立即扑进了你的怀中。
+	<br>
+	"你还活着！"罗宾激动地尖叫，"我……我还以为你再也回不来了！我真的……"
+	<br><br>
+
+	过了一会儿罗宾才平静下来。"我们回家后再讨论这个问题吧，"<<he>>说，"当、当然，等你愿意的时候。走吧。"
+	<br><br>
+
+	你们一起走回了孤儿院，罗宾一直都紧紧地跟在你身边。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+<<elseif $robinReunionScene is "dungeonRobin">>
+	<<unset $robinReunionScene>>
+	你轻拍了一下<<his>>的肩膀<<if _robin.trauma gte 40>>，<<him>>吓得大叫了一声<</if>>。<<He>>转过身，在看到是你之后瞬间屏住了呼吸，然后立即扑进了你的怀中。
+	<br>
+	"你回来了！" 罗宾尖叫着喊道，"我……希望那些家伙没有对你做更多可怕的事情……"
+	<br><br>
+
+	终于，罗宾稍微平静下来。"太好了，你自由了，"<<he>>温柔地对你微笑，“我们一起回家吧。”
+	<br><br>
+
+	你们一起走回了孤儿院，罗宾一直都紧紧地跟在你身边。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+<<elseif $robinReunionScene is "asylum">>
+	<<unset $robinReunionScene>>
+	你轻拍了一下<<his>>的肩膀<<if _robin.trauma gte 40>>，罗宾吓得大叫了一声<</if>>，<<He>>转过身，在看到是你之后瞬间屏住了呼吸。<<He>>看起来很惊喜。
+	<br><br>
+
+	<<if _robin.trauma gte 40>>
+		"嗨，"<<he>>轻声说。"我以为医生把你带走了，如果我知道你要回、回来的话，我一定会为你准备一些东西的。"罗宾哆嗦着说道。
+	<<else>>
+		"哦，嘿！"<<he>>笑着说。"我以为你会在医生那里待一段时间的，如果我知道你会回来的话，我一定会为你准备一些东西的。"罗宾解释道。
+	<</if>>
+	<br><br>
+
+	你摇摇头，告诉<<him>>，那些人的目的并不是帮助你，所以你提前 "出院 "了。罗宾虽然看起来很困惑，但还是点了点头，然后给了你一个拥抱。
+	<br>
+
+	<<if _robin.trauma gte 40>>
+		"嗯……我很高兴能再见到你，"<<he>>喃喃地说，然后紧紧地抱住了你。
+	<<else>>
+		"那个……我很高兴你回到了我身边。我希望你感觉好些了，"<<he>>说。
+	<</if>>
+	"来吧，我们回家吧。"
+	<br><br>
+
+	你们两个一起回了孤儿院。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+<<elseif $robinromance is 1>>
+	<<He>>拥抱了你。"我们能牵手吗？"<<he>>说。<<takeHandholdingVirginity "Robin" "romantic">>
+	<br><br>
+
+	你们一起走回孤儿院。
+
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+
+<<elseif $weather is "rain">>
+	<<if _robin.trauma gte 80>>
+		<<He>>站在雨中，任雨水将自己打湿。<<He>>看到你时，露出一丝微弱的笑容。"嘿……嗨，"湿掉的头发遮住了<<he>>的一半眼睛。<<if $worn.handheld.type.includes("rainproof")>>你立刻用你的$worn.handheld.cn_name_cap盖住了<<him>>。<<He>>给了你一个感激的小小的笑容。<</if>>
+		<br><br>
+
+		你们一起走回孤儿院，<<if $robin_injured>>依旧有些一瘸一拐的，你放慢了自己的脚步，让<<him>>能够跟上你。<</if>><<He>>一路上一直沉默着，每当有其他人经过你们身边时，<<He>>都会紧紧贴着你。
+		<<lrtrauma>><<npcincr Robin trauma -2>>
+	<<elseif $worn.handheld.type.includes("rainproof")>>
+		罗宾看见你的$worn.handheld.cn_name_cap后露出微笑。"很高兴你能不被淋湿，"<<he>>说，"我可不愿意你生病。"
+		<br><br>
+
+		你们走回孤儿院的路上，你的伞无意中撞了罗宾的伞一下，<<him>>咯咯笑起来。
+		<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+		<<dry>>
+	<<else>>
+		<<He>>撑起一把伞，使你们两个人都能待在伞下，"不知道为什么，我就是知道你又忘带了，"<<he>>温柔地笑着说道。<<if $worn.head.type.includes("rainproof") or $worn.over_upper.type.includes("rainproof")>>"虽然至少你这样不会被淋湿，但你还是应该考虑一下带一把伞。"<</if>>
+		<br><br>
+
+		<<if $worn.head.type.includes("rainproof")>>你的$worn.head.name和伞让<<elseif $worn.over_upper.type.includes("rainproof")>>你的$worn.over_upper.cn_name_cap和伞让<<else>>罗宾的伞让<</if>>你保持着不被淋湿，你们两人一起朝孤儿院走去。
+		<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+		<<dry>>
+	<</if>>
+	<br><br>
+
+<<else>>
+
+	<<if _robin.trauma gte 80>>
+		当<<He>>看到你时，<<he>>对你笑了笑，"嘿……嗨，"<<he>>说道。
+		<br><br>
+
+		你们一起走回孤儿院，<<if $robin_injured>>依旧有些一瘸一拐的，你放慢了自己的脚步，让<<him>>能够跟上你。<</if>><<He>>一路上一直沉默着，每当有其他人经过你们身边时，<<He>>都会紧紧贴着你。
+		<<lrtrauma>><<npcincr Robin trauma -1>>
+		<br><br>
+
+	<<elseif _robin.trauma gte 40>>
+		当<<He>>看到你时，露出了微笑。"嘿，"<<he>>说道，"你在这儿真的太好了，一个人走回家总感觉不太安全。"
+		<br><br>
+
+		你们一起走回了孤儿院，虽然你们中途聊了几句，但只要有其他人经过你们身边，<<he>>就会紧张并陷入沉默。
+		<<lrtrauma>><<npcincr Robin trauma -1>>
+		<br><br>
+
+	<<else>>
+		<<He>>看到你时，露出了微笑。"嘿，"<<he>>说道，"很高兴你来了，我不太喜欢一个人走回家。"
+		<br><br>
+
+		你们两个在回孤儿院路上聊着天。
+		<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+		<br><br>
+
+	<</if>>
+<</if>>
+<<npcincr Robin love 1>>
+<<endevent>>
+<<link [[继续|Orphanage]]>><</link>>
+<br>

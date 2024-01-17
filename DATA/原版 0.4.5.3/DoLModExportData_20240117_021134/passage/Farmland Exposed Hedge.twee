@@ -1,0 +1,21 @@
+:: Farmland Exposed Hedge []
+<<effects>>
+
+你推开树枝，挤了进去。它们在你身后合上，把你遮挡在视野之外。你听到车子从大路上驶过。
+<br><br>
+
+<<if ($hallucinations gte 2 or $backgroundTraits.includes("plantlover")) and random(1, 2) is 2>>
+	你等了一会儿，然后继续艰难地前进。突然，<span class="red">你感到脚踝被一只东西夹住了。</span>然后是另一只。藤蔓从树篱间伸展出来，逐渐将你包围。
+	<br><br>
+
+	<<link [[安抚|Farmland Exposed Soothe]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+	<<link [[忍耐|Farmland Exposed Tentacles]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你等了一会儿，然后从树篱间挤了出来。
+	<br><br>
+
+	<<link [[继续|Farmland]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

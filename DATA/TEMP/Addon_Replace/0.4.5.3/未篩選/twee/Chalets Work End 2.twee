@@ -1,0 +1,43 @@
+:: Chalets Work End 2 []
+<<location "town">><<effects>>
+
+<<if $chalets_bags gte 1>>
+    <<if $exposed gte 1>>
+你回到了办公室，<<covered>>你有<<if $chalets_bags is 1>>一个装满垃圾的袋子<<else>>装满垃圾的袋子<</if>>，但是如果你想得到报酬，就必须以现在的状态去找管理员，不过也许里面有什么东西可以掩盖一下。
+        <br><br>
+
+<<link [[进去|Chalets Work End Succeed Ask]]>><<stress 12>><</link>><<ggstress>>
+        <br>
+<<link [[丢掉垃圾并离开|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <<else>>
+        <<loadNPC 0 "chalets_manager">><<person1>>
+你走进办公室。那个<<person>>抬起头来说道："工作做完了么？好极了，这是你的报酬。"
+        <br><br>
+
+        <<if Time.weekDay is 1 or Time.weekDay is 7>>
+你赚到了<<moneyGain `$chalets_bags * 15`>>。
+        <<else>>
+你赚到了<<moneyGain `$chalets_bags * 10`>>。
+        <</if>>
+        <br><br>
+<<link [[离开|Starfish Street]]>><<chalets_end>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $exposed gte 1>>
+你回到办公室，<<covered>>你打扫小木屋的任务失败了，所以你不会得到报酬，但也许经理会给你一些东西用来遮掩。
+        <br><br>
+
+<<link [[索要一两件衣物|Chalets Work End Failed Ask]]>><<stress 12>><</link>><<ggstress>>
+        <br>
+<<link [[离开|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <<else>>
+你回到办公室，但你清理小屋的任务失败了，所以你不会得到报酬。
+        <br><br>
+
+<<link [[继续|Starfish Street]]>><<chalets_end>><</link>>
+        <br>
+    <</if>>
+<</if>>

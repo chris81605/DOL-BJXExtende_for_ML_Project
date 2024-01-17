@@ -1,0 +1,216 @@
+:: Beach []
+<<location "beach">><<effects>>
+你在海滩上。
+<<if Time.dayState is "day">>
+	<<if $weather is "clear">>
+		这里挤满了游客，孩子们搭沙堡，在水里玩耍，而他们的父母则在阳光下晒太阳。一群学生在打排球。
+	<<elseif $weather is "overcast">>
+		乌云驱散了大部分游客，但仍有人沿着水边散步。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩几乎没有人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		大雪使大部分人远离海滩，但猛烈的海浪吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "clear">>
+		这是慢跑者的热门目的地，有些人还带着狗。一些家庭正在设置防风衣。一群学生在打排球。
+	<<elseif $weather is "overcast">>
+		这是慢跑者的热门目的地，有些人还带着狗。雾挡住了你看大海的视线。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩几乎没有人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		大雪使大部分人远离海滩，但猛烈的海浪吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "clear">>
+		太阳落山时，家家户户都在离开。一群学生在打排球。
+	<<elseif $weather is "overcast">>
+		这里几乎没有人，但有些人沿着水边散步。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩几乎没有人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		大雪使大部分人远离海滩，但猛烈的海浪吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "clear">>
+		除了一群围在火堆旁喝酒的学生外，这里似乎空无一人。
+	<<elseif $weather is "overcast">>
+		这里似乎没什么人气。
+	<<elseif $weather is "rain">>
+		这里似乎没什么人气。
+	<<elseif $weather is "snow">>
+		这里似乎没什么人气。
+	<</if>>
+<</if>>
+你可以去游泳，但一定要穿着得体。
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "beach">>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmbeach>>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<run statusCheck("Robin")>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventsbeach>>
+	<<elseif $robinReunionScene isnot undefined and _robin_location is "beach" and $exposed lte 0>>
+		<<npc Robin>><<person1>>
+		<<if $robinReunionScene is "dungeon">>
+			<<unset $robinReunionScene>><<set $robinPostMortem to true>>
+			你看到罗宾站在<<his>>的柠檬水摊后面。当<<he>>看到你的时候，<<he>>张大了嘴，然后向你冲过来。
+			<br><br>
+
+			"不敢相信！"<<he>>尖叫着把头埋在你的胸前，"我……我以为你永远离开了！我们得回家再谈。等你准备好了再说。"
+			<br><br>
+
+			你被带回到<<his>>的小摊。上面放着你们俩的小照片。<<He>>把它收起来。
+			<br>
+			<<He>>给你调了一杯柠檬水，然后打发你走了。
+			<br>
+			"别忘了以后来找我，"<<he>>带着担心的表情说道，"如果你需要谈一谈的话，我总是会在这里等你。"
+			<br><br>
+
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<elseif $robinReunionScene is "dungeonRobin">>
+			<<unset $robinReunionScene>>
+			你看到罗宾站在<<his>>的柠檬水摊后面。当<<he>>看到你的时候，<<he>>张大了嘴，然后向你冲过来。
+			<br><br>
+
+			"你居然成功了！"<<he>>尖叫着，同时<<he>>把<<himself>>埋在你的胸口。"当你被夺走的时候，我都不知道我该做些什么。"
+			<br><br>
+
+			你被带回到<<his>>的小摊。上面放着你们俩的小照片。<<He>>把它收起来。
+			<br>
+			<<He>>给你调了一杯柠檬水，然后打发你走了。
+			<br>
+			"别忘了以后来找我，"<<he>>带着担心的表情说道，" 不要忘记，我总在这里等你。"
+			<br><br>
+
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<elseif $robinReunionScene is "asylum">>
+			<<unset $robinReunionScene>>
+			你看到罗宾站在<<his>>的柠檬水摊后面。
+
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				<<He>>难以置信地盯着你。
+				<br><br>
+
+				"嗨，"当你走近时，<<he>>平静地说道。"我以为医生把你带走了。如果我知道你会回、回来，我一定会给你买些东西的。"罗宾的声音颤抖着。
+			<<else>>
+				当看到你的时候，<<He>>兴奋地向你招手。
+				<br><br>
+
+				"嗨，你出院了！"你靠近时，<<he>>向你打招呼，"我以为你会在医生那里待一段时间，早知道你要回来，我就给你提前准备点东西了。"罗宾解释道。
+			<</if>>
+			<br><br>
+
+			摇摇头，告诉<<him>>，那些人的目的并不是帮助你，所以你提前 "出院 "了。罗宾虽然看起来很困惑，但还是点了点头，然后给了你一个拥抱。
+			<br>
+
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				"好吧……很高兴你至少自由了，"<<he>>小声说着，同时紧紧地抱住了你。
+			<<else>>
+				"好吧，再次看到你我很高兴！我希望你感觉更好些了。"
+			<</if>>
+			<br>
+			你们两人稍稍的谈了一会。最终，罗宾说<<he>>需要回到<<his>>那里了。
+
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+				<<He>>缓慢地拖着脚步走了。<<his>>眼神如同粘在了地上一样。
+			<<else>>
+				<<He>>笑着与你挥手道别。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<<else>>
+			你在罗宾的柠檬水摊看到了<<his>>。<<His>>的眼睛掠过你，但<<he>>没有盯着你看。就好像<<he>>根本不认识你。
+			<br><br>
+
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 0 and _robin_location is "beach" and $exposed lte 0>>
+		<<set $robindebt to 0>><<set $robindebtlimit to 5>>
+		<<npc Robin>><<person1>>你看到一个熟悉的人在海滩上的小摊上工作。<<Hes>>也注意到了你。"嗨！我是罗宾。"<<He>>是孤儿院的另一个居民。<<He>>总是很尊敬你，尽管你们年龄差不多。<<He>>在清洗玻璃水罐时示意你过去。<<He>>放下它，在你靠近时拥抱你。
+		<br><br>
+		<<if Time.days is 0>>
+			"我今天起得很早，所以今天早上没有看到你。记住，<span class="gold">你可以随时来我的房间找我</span>。今晚我有东西要给你看，我太兴奋了！"<<He>>看着你身后，注意到有顾客正在走近。"我得回去工作了。如果你愿意的话，欢迎你留下来帮忙。我一会儿要去购物中心取惊喜，所以不管怎样，我希望以后能见到你！"<<He>>回到<<He>>的摊位后的位置。
+		<<else>>
+			"很久没有在孤儿院里见到你了。我们一定不能忘了彼此。记住，<span class="gold">你可以随时来我的房间找我</span>。我一直在等着给你展示些东西，我太激动了！"<<He>>看向你身后，注意到有顾客正在走近。"我得回去干活了，你要是愿意的话，可以留下来帮帮我。"<<He>>回到摊子后面的位置。
+		<</if>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $exposed lte 0>>
+			<<if $scienceproject is "ongoing" and $sciencephallusknown is 1 and $sciencephallus lt 10 and Time.dayState isnot "night" and $weather isnot "rain" and $weather isnot "snow" and $exposed lte 0>>
+				<<ind>><<link [[寻找性器测量项目的参与者 (0:15)|Beach Phallus]]>><<pass 15>><</link>>
+				<br>
+			<</if>>
+			<<swimicon>><<link [[去游泳 (0:02)|Sea Beach]]>><<pass 2>><</link>>
+			<br>
+		<<elseif Time.dayState is "night">>
+			<<swimicon>><<link [[去游泳 (0:02)|Sea Beach]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if Time.dayState is "day" and $weather is "clear">>
+			<<if $worn.under_lower.type.includes("swim") and ($worn.under_upper.type.includes("swim") or $worn.under_upper.type.includes("naked")) and ($worn.upper.type.includes("swim") or $worn.upper.type.includes("naked")) and ($worn.lower.type.includes("swim") or $worn.lower.type.includes("naked"))>>
+				<<baskicon>><<link [[日光浴 (1:00)|Tanning]]>><<pass 60>><</link>><<lstress>>
+				<br>
+			<</if>>
+			<<if $milkshake gte 1 and $exposed lte 0>>
+				<<foodicon "milkshake">><<link [[喝奶昔 (0:10)|Beach Milkshake]]>><<pass 10>><<set $milkshake -= 1>><<stress -5>><</link>><<lstress>>
+				<br>
+			<</if>>
+		<</if>>
+		<<changingroomicon>><<link [[更衣室|Changing Room]]>><</link>>
+		<br>
+		<<if $exposed lte 0>>
+			<<if _robin_location is "beach">>
+				<<robinicon "lemonade">><<link [[罗宾的柠檬水摊|Robin's Lemonade]]>><</link>>
+				<br>
+			<</if>>
+			<<if $leftleg is "bound" or $rightleg is "bound">>
+				<<set $_boundType to ($leftleg is "bound" ? ($rightleg is "bound" ? "双腿" : "你的左腿") : "你的右腿")>>
+				你不能在$_boundType被绑住的情况下去跑步。
+			<<elseif $worn.feet.type.includes("heels")>>
+				<<walkicon>><<link [[穿高跟鞋散步 (0:30)|Beach Heel Walk]]>><</link>><<gtiredness>><<lstress>>
+			<<else>>
+				<<runicon>><<link [[跑步 (0:30)|Beach Run]]>><<athletics 3>><</link>><<gtiredness>><<gathletics>><<lstress>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if $weather is "clear" and Time.dayState is "night" and $exposed lte 0>>
+			<<socialiseicon "party">><<link [[派对|Beach Party]]>><</link>>
+			<br>
+		<</if>>
+		<<if $weather is "clear" and Time.dayState isnot "night" and $exposed lte 0>>
+			<<socialiseicon "volleyball">><<link [[排球|Beach Volleyball]]>><</link>>
+			<br>
+			<<if $exhibitionism gte 75 and $daily.beachStrip isnot 1>>
+				<<stripicon>><<link [[脱衣 (0:20)|Beach Strip]]>><<pass 20>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "旅行<br>">><<hideDisplay>>
+			<<cliff>>
+			<br>
+			<<starfish>>
+			<br>
+		<</if>>
+		<<displayLinks>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

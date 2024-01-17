@@ -1,0 +1,37 @@
+:: Moor Cats Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>
+	<<if $phase is 1>>
+		<<if $NPCList[0].penis isnot "none">>
+			你继续跪在地上，<<beasttype 0>>骑上了你。
+			<<set $position to "doggy">><<set $NPCList[0].stance to "top">>
+		<<else>>
+			<<beasttype 0>>把你翻过来，然后骑到了你身上。
+			<<set $position to "missionary">><<set $NPCList[0].stance to "top">>
+		<</if>>
+	<<else>>
+		你把<<beasttype 0>>从身上踢开。<<bHe 0>>发出嘶嘶声。
+		<<set $enemyanger += 30>><<set $enemyhealth -= 100>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Moor Cats Rape End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Moor Cats Rape]]>><</link>></span><<nexttext>>
+<</if>>

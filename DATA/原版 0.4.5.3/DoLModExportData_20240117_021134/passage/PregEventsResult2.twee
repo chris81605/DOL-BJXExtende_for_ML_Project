@@ -1,0 +1,52 @@
+:: PregEventsResult2 []
+<<set $outside to 0>><<set $location to $container.lastLocation>><<effects>>
+<<set _pregnancy to $sexStats[$giveBirthLocation or "anus"].pregnancy>>
+
+<<switch $pregChoice>>
+<<case "ReplaceSelected">>
+	<<for _i to 0; _i lt $pregResult.length;_i++>>
+		<<if $checkboxResult[$pregResult[_i]] is true>>
+			<<if $parasiteReplaceArray.length gt 0>>
+				<<moveCreature $pregResult[_i] "replace" $parasiteReplaceArray[0] $giveBirthLocation>>
+				<<run $parasiteReplaceArray.deleteAt(0)>>
+			<<else>>
+				<<moveCreature $pregResult[_i] "container" undefined $giveBirthLocation>>
+			<</if>>
+		<<elseif $checkboxResult[$pregResult[_i]] is false>>
+			<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
+		<</if>>
+	<</for>>
+	你决定留下<<number $parasiteSelectionCount>>个<<if $pregnancyStats.namesParasitesChild is true>>你的孩子<<else>>寄生物<</if>>，并将<<if $parasiteSelectionCount isnot 1>>它们<<else>>它<</if>>放入你的<<print $container[$phase].name>>以作为替代，同时准备将剩下的全都交给哈珀医生。
+	<br><br>
+<<case "KeepSelected">>
+	<<for _i to 0; _i lt $pregResult.length;_i++>>
+		<<if $checkboxResult[$pregResult[_i]] is true>>
+			<<moveCreature $pregResult[_i] "container" undefined $giveBirthLocation>>
+		<<elseif $checkboxResult[$pregResult[_i]] is false>>
+			<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
+		<</if>>
+	<</for>>
+	你决定留下<<number $parasiteSelectionCount>>个<<if $pregnancyStats.namesParasitesChild is true>>你的孩子<<else>>寄生物<</if>>，把<<if $parasiteSelectionCount isnot 1>>它们<<else>>它<</if>>放在你的<<print $container[$phase].name>>中，同时准备把剩下的全都交给哈珀医生。
+	<br><br>
+<<case "keepAll">>
+	<<for _i to 0; _i lt $pregResult.length;_i++>>
+		<<moveCreature $pregResult[_i] "container" undefined $giveBirthLocation>>
+	<</for>>
+	你决定留下所有的<<if $pregnancyStats.namesParasitesChild is true>>孩子<<else>>寄生物<</if>>，并将它们放在你的<<print $container[$phase].name>>中。
+	<br><br>
+<<case "sellAll">>
+	<<for _i to 0; _i lt $pregResult.length;_i++>>
+		<<moveCreature $pregResult[_i] "portable" undefined $giveBirthLocation>>
+	<</for>>
+	你决定卖掉所有的<<if $pregnancyStats.namesParasitesChild is true>>孩子<<else>>寄生物<</if>>，并准备把它们带到哈珀医生那里。
+	<br><br>
+<</switch>>
+
+<<clearToDeleteParasiteFetus>>
+
+<<link [[继续|Containers]]>>
+	<<unset $pregChoice>><<unset $pregResult>>
+	<<unset $checkboxResult>><<unset $checkboxReplace>>
+	<<unset $parasiteSelectionCount>><<unset $parasiteReplaceArray>>
+	<<unset $giveBirthLocation>>
+<</link>>

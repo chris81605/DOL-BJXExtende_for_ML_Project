@@ -1,0 +1,66 @@
+:: Livestock Field Dig []
+<<effects>>
+
+<<if $livestock_dig gte 25 or $livestock_dig gte 24 and $physiquesize lte 12000 or $livestock_dig gte 23 and $physiquesize lte 10000 or $livestock_dig gte 22 and $physiquesize lte 6000>>
+	你爬进你的隧道，开始挖掘。你把一块大石头拉出来，土就塌在你的头上。你把它刷到一边，瞥见上面的日光。
+	<br><br>
+
+	你偷看你的头顶。你在栅栏的另一边。你可以逃走，尽管你还在乡下，雷米很快就会注意到你的失踪。可能会很危险。
+
+<<elseif $livestock_dig gte 20>>
+	你爬进你的隧道，开始挖掘。你认为最远的一端可能在篱笆的另一边下面，然后开始向上弯曲。
+<<elseif $livestock_dig gte 12>>
+	这个洞现在更像是隧道了。你掉进里面，开始挖掘，露出地面，把泥土撒在草丛中。你很小心不让人看见。
+<<elseif $livestock_dig gte 6>>
+	你跪在草地上，身子伸进洞里，现在深得可以装下半个身子。你移走更多的土，把它弯向篱笆。
+<<elseif $livestock_dig gte 1>>
+	你蹲在草地上开始工作。你希望你的动作看起来像只是在吃草。你加深和扩大这个洞。
+<<else>>
+	农场工人有时会在周围巡逻，所以你选择了一个离篱笆有点远的地方，那里的高草会挡住你的行动。你开始挖掘。地面很硬，只有你的手作为挖掘工具，它很累很慢，但是你一点一点地把泥土移到一边。
+	<br><br>
+
+	一个小时过去了。你已经挖了一个洞。它太薄太浅，但只要努力就会成功。
+
+<</if>>
+<br><br>
+
+<<if $livestock_dig gte 25>>
+	<<getouticon "hole">><<link [[逃跑|Livestock Dig Escape]]>><</link>>
+	<br>
+	<<refuseicon>><<link [[等待|Livestock Field]]>><</link>>
+	<br>
+<<elseif $livestock_dig gte 24 and $physiquesize lte 12000 or $livestock_dig gte 23 and $physiquesize lte 10000 or $livestock_dig gte 22 and $physiquesize lte 6000>>
+	<<getouticon "hole">><<link [[逃跑|Livestock Dig Escape]]>><</link>><<small_text>>
+	<br>
+	<<refuseicon>><<link [[等待|Livestock Field]]>><</link>>
+	<br>
+<<else>>
+	<<if $rng gte 51>>
+		<<livestock_overhear>>
+
+		<<link [[继续|Livestock Field]]>><</link>>
+		<br>
+	<<elseif $rng gte 31>>
+		<<generate1>><<person1>>
+		"你在下面干什么？"篱笆上有个声音说道。
+		<br><br>
+
+		<<if $cow gte 6>>
+			<<link [[学牛叫|Livestock Field Dig Moo]]>><<livestock_obey 1>><<transform cow 1>><</link>><<gobey>>
+			<br>
+		<<else>>
+			<<link [[假装是头牛|Livestock Field Dig Moo]]>><<livestock_obey 1>><<transform cow 1>><</link>><<gobey>>
+			<br>
+		<</if>>
+		<<link [[转移话题|Livestock Field Dig Distract]]>><</link>><<exhibitionist1>>
+		<br>
+		<<link [[侮辱|Livestock Field Dig Insult]]>><<livestock_obey -1>><<stress -6>><</link>><<lobey>><<lstress>>
+		<br>
+		<<link [[不管他继续挖|Livestock Field Dig Keep]]>><<livestock_obey -1>><</link>><<lobey>>
+		<br>
+	<<else>>
+
+	<<link [[继续|Livestock Field]]>><</link>>
+	<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,125 @@
+:: Maths Classroom []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $schoolstate is "second">>
+	<!-- Note: until we separate the NPC introductions out of the <<npc>> widget, we must pay attention to where we use <<npc River>> in this passage. -->
+	<!-- It would save several lines to simply put it here, but we can't. -->
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<outfitChecks>>
+		/*Check for when the pc is only wearing an overcoat*/
+		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+			当你要去挂你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，你才想起你下面是裸露的。
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
+			当你要去挂你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，你才想起你下面只穿了泳衣。
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
+			当你要去挂你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，你才想起你下面只穿了内衣。
+		<</if>>
+		<br><br>
+		<<npc River>><<person1>>
+		你匆匆看了<<him>>一眼，瑞沃眯起了眼睛，“你不能不穿制服就来听我的课。自己去见校长。"
+		<br><br>
+		<<pubfameComplete "river">>
+		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
+		<br><br> good starting point for when you can go to class naked-->
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<elseif $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound">>
+		<<if $daily.school.attended.maths>>
+			你重新加入了数学课，
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				并把外套挂在了教室的后面
+				<<undressOverClothes "mathsClassroom">>
+			<</if>>
+			坐到了你的位置上。
+		<<elseif Time.minute lte 5>>
+			你走进数学教室。
+			<<npc River>><<person1>>
+			瑞沃在教室的前面做着上课的准备，座位也逐渐坐满了。
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				<<undressOverClothes "mathsClassroom">>
+				你把外套挂在教室的后面，然后就座。
+			<</if>>
+		<<else>>
+			你走进数学教室。
+			<<npc River>><<person1>>
+			瑞沃在讲到一半时停了下来，凝视着你。
+			<<if $daily.school.mathsExcused>>
+				<<run delete $daily.school.mathsExcused>>
+				"请坐，努力跟上。"<<He>>没有提到你的迟到。
+			<<else>>
+				"你迟到了。也许留一次堂能让你以后不再迟到。"
+				<<gdelinquency>>
+				<<detention 1>>
+			<</if>>
+			<br><br>
+			你
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				把外套挂在教室的后面，然后
+				<<undressOverClothes "mathsClassroom">>
+			<</if>>
+			找了个位置坐下，瑞沃也继续上课。
+		<</if>>
+		<br><br>
+
+		<<pubfameComplete "river">>
+		<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+		<<npc River>><<person1>>
+		当瑞沃看见你被绑起来的<<boundBodyParts>>时，<<he>>的眼睛眯了起来。
+		"又来一个。听着，不管你在玩什么愚蠢的游戏，都得停止了。你不能这样被绑着进来。自己去见校长。"
+		<br><br>
+
+		<<pubfameComplete "river">>
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		<<npc River>><<person1>>
+		当你进来时，瑞沃眯起了眼睛。"你不穿制服就不能来上我的课。自己去见校长。"
+		<br><br>
+
+		<<pubfameComplete "river">>
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<</if>>
+<<elseif $schoollesson is 1>>
+	<<npc River>><<person1>>
+	<<if $daily.school.mathsInterrupted is 1>>
+		你进入数学教室。瑞沃突然停止授课，用眼神示意你出去。"又是你？出去。"<<He>>在你身后重重地关上门。
+		<<detention 1>><<gdelinquency>>
+		<br><br>
+
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<<else>>
+		<<set $daily.school.mathsInterrupted to 1>>
+		你进入数学教室。瑞沃突然停止讲课然后看向你。"有什么事情吗？" 看起来你打断了课程。
+		<br><br>
+		<<pubfameComplete "river">>
+
+		<<link [[道歉|Maths Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+		<br>
+		<<if $trauma gte 1>>
+			<<link [[嘲弄|Maths Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	你在数学教室里。墙上挂满了图表。
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
+	<<storeon "mathsClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "mathsClassroom">>
+		你把外套拿到教室后面去。
+		<br><br>
+	<</if>>
+
+	<<exhibitionclassroom>>
+
+	<<emptyClassroomMasturbationIntro>>
+
+	<<link [[离开房间 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>

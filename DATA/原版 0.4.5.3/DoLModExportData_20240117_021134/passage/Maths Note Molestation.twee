@@ -1,0 +1,29 @@
+:: Maths Note Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<enableSchoolRescue "Whitney" "Leighton" "delinquency">>
+	<<if $phase is 1>>
+		<<npcstrip>><<set $timer to 15>>
+	<<elseif $phase is 2>>
+		<<hand_gag 0 left>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没人过来帮你。很有可能是因为他们觉得你自己就是个不良学生。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer is 1>>
+	<span id="next"><<link [[继续|Maths Note Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Maths Note Molestation]]>><</link>></span><<nexttext>>
+<</if>>

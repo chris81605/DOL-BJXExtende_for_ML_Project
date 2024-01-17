@@ -1,0 +1,29 @@
+:: Office Stairwell Rest []
+<<effects>>
+你决定在继续下降前休息一下。
+<br>
+<<if $rng gte 90 - $officeFloor>>
+	当你喘口气的时候，你听到有人走近楼梯间的门。
+	<br>
+	"是啊，老板说台阶上有个裸奔者。我现在要去检查一下，"你听到一个保安在收音机里对某人说。
+	<br><br>
+	<span class="red">如果警卫看到你，你会有麻烦的！</span>
+	<br><br>
+	<<if $officeFloor lt 5>>
+		<<link [[直接跑到大厅 (0:05)|Office Lobby]]>><<pass 5>><<tiredness 5>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		<<link [[跑下楼|Office Stairwell Run Down]]>><<tiredness 5>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+	<<if $officeFloor lt 10>>
+		<<link [[跑上楼|Office Stairwell Run Up]]>><<tiredness 8>><</link>><<ggtiredness>>
+		<br>
+	<</if>>
+	<<link [[躲在门后|Office Stairwell Hide]]>><</link>>
+	<br>
+<<else>>
+	休息了几分钟后，你决定在别人进入楼梯井之前继续。
+	<br><br>
+	<<link [[继续|Office Stairwell]]>><</link>>
+<</if>>

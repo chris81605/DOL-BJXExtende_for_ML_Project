@@ -1,0 +1,193 @@
+:: Widgets Cafe [widget]
+<<widget "eventschef">>
+<<cleareventpool>>
+<<if $chef_state gte 9 and $breastfeedingdisable is "f" and $lactating is 1>>
+	<<addinlineevent "chef_coffee" 0.7>>
+	你刚准备把面团放进烤箱，<<npc Sam>><<person1>>萨姆突然冲进来。"你还没开始吧？"你回答<<him>>还没有开始做奶油。"太好了，我需要你煮点咖啡。我知道你不怎么做这个，但有几个外国贵族来访。"
+	<br><br>
+
+	你问他们为什么只想要喝的。"哦，他们也点了小面包，只是……我已经承诺他们的所有餐饮都由你负责，包括饮料……"<<he>>略带歉意地说。"很抱歉突然给你添麻烦，但我相信为他们制作几杯饮料对你来说应该不成问题。"
+	<br><br>
+
+	看起来也没别的选择了，你告诉<<him>>你来做。"太好了！别担心，我们并非要你当熟练的咖啡师。更重要的是，它们是由我们的星级厨师制作的。"
+	<br><br>
+
+	在你准备煮咖啡时，<span class="lewd">一个下流的想法在你脑海里浮现。</span>也许你可以在咖啡加点"秘方"。
+	<br><br>
+	<<link [[正常煮咖啡|Cafe Coffee Creation]]>><<endevent>><</link>>
+	<br>
+	<<link [[加你的秘方|Cafe Coffee Lewd]]>><<endevent>><</link>><<promiscuous2>>
+	<br>
+	<</addinlineevent>>
+<</if>>
+<<addinlineevent "chef_thief" 0.7>>
+		<<generatey1>><<person1>>
+		你听见后门传来了异响。
+		<<if random(1, 1000) gte $skulduggery>>
+			你转头去看，<span class="red">但什么异常也没发现。</span>
+			<br><br>
+			<<endevent>>
+
+			<<chefwork>>
+		<<else>>
+			为了不引起别人的注意，你只是匆匆瞥了一眼。最开始一切正常，<span class="green">但随后你发现桌子下面伸出一只手，</span>一把抓住了一个面包。
+			<br><br>
+			<<link [[干涉|Chef Thief Intervene]]>><</link>>
+			<br>
+			<<link [[忽视|Chef Thief Ignore]]>><</link>>
+			<br>
+		<</if>>
+		<</addinlineevent>>
+<<addinlineevent "chef_chat" 0.7>>
+		<<npc Sam>><<person1>>萨姆进来查看你的情况。你们最后只是聊了几分钟，随后主室里传来的一声巨响吸引了<<his>>注意力。
+		<<lstress>><<stress -6>><<ltrauma>><<trauma -6>>
+		<br><br>
+
+		<<endevent>>
+
+		<<chefwork>>
+<</addinlineevent>>
+<<addinlineevent "chef_rape" 0.7>>
+		<<generate1>><<person1>>
+		后门打开了，一位<<person>>背身走进房，身上还扛着一大袋面粉。<<He>>把面粉放在地上，从<<his>>的口袋里掏出一本笔记本。"能签个名吗？"<<he>>拿着笔记本说道。
+		<br><br>
+
+		<<if random(1, 100) gte 61>>
+			你伸出手要签字，这时<<he>>抓住了你的手臂，将你拉近。
+			<br><br>
+
+			<<link [[继续|Chef Work Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			你在纸上签字。<<He>>向你道谢，接着从<<he>>过来的路上离开了。
+			<br><br>
+
+			<<endevent>>
+
+			<<chefwork>>
+		<</if>>
+<</addinlineevent>>
+<<addinlineevent "chef_tear" 0.7>>
+		<<if random(1, 100) gte 51 and !$worn.upper.type.includes("naked") or !$worn.over_upper.type.includes("naked")>>
+			<<if !$worn.over_upper.type.includes("naked")>>
+				<<set $worn.over_upper.integrity -= 5>>
+				你的$worn.over_upper.cn_name_cap被一个拐角给勾住撕裂了。
+				<br><br>
+				<<if $worn.over_upper.integrity lte 0>>
+					<span class="red">破旧的织物成片散落在你周围。</span>
+					<<integritycheck>><<exposure>>
+					<<if $exposed gte 1>>
+						你用一条毛巾遮住了身体。<<towelup>>
+					<</if>>
+				<</if>>
+				<br><br>
+			<<elseif $worn.upper.type.includes("naked")>>
+				你的$worn.upper.cn_name_cap被一个拐角给勾住了。然而它就是为了防止这种事故发生而设计的，所以<span class="green">它依旧完好无损。</span>
+				<br><br>
+			<<else>>
+				<<set $worn.upper.integrity -= 5>>
+				你的$worn.upper.cn_name_cap被一个拐角给勾住撕裂了。
+				<br><br>
+				<<if $worn.upper.integrity lte 0>>
+					<span class="red">破旧的织物成片散落在你周围。</span>
+					<<integritycheck>><<exposure>>
+					<<if $exposed gte 1>>
+						你用一条毛巾遮住了身体。<<towelup>>
+					<</if>>
+				<</if>>
+				<br><br>
+			<</if>>
+		<<else>>
+			<<if !$worn.over_lower.type.includes("naked")>>
+				<<set $worn.over_lower.integrity -= 5>>
+				你的$worn.over_lower.cn_name_cap被一个拐角给勾住撕裂了。
+				<br><br>
+				<<if $worn.over_lower.integrity lte 0>>
+					<span class="red">破旧的织物成片散落在你周围。</span>
+					<<integritycheck>><<exposure>>
+					<<if $exposed gte 1>>
+						你用一条毛巾遮住了身体。<<towelup>>
+					<</if>>
+				<</if>>
+				<br><br>
+			<<elseif $worn.lower.type.includes("naked")>>
+				你的$worn.lower.cn_name_cap被一个拐角给勾住了。然而它就是为了防止这种事故发生而设计的，所以<span class="green">它依旧完好无损。</span>
+				<br><br>
+			<<else>>
+				<<set $worn.lower.integrity -= 5>>
+				你的$worn.lower.cn_name_cap被一个拐角给勾住撕裂了。
+				<br><br>
+				<<if $worn.lower.integrity lte 0>>
+					<span class="red">破旧的织物成片散落在你周围。</span>
+					<<integritycheck>><<exposure>>
+					<<if $exposed gte 1>>
+						你用一条毛巾遮住了身体。<<towelup>>
+						<br><br>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+
+	<<chefwork>>
+<</addinlineevent>>
+<<addinlineevent "chef_spill" 0.7>>
+		<<if $NPCName[$NPCNameList.indexOf("Sam")].love gte 30>>
+			你弄洒了一点。但萨姆彷彿能未卜先知，感应到出了事故，就突然现身，帮你清完了现场。
+		<<else>>
+			你弄洒了一点，并不得不分神清理。
+			<<gstress>><<stress 6>>
+		<</if>>
+		<br><br>
+
+		<<chefwork>>
+<</addinlineevent>>
+<<addinlineevent "chef_consistency" 0.7>>
+		要达到恰到好处的稠度有点难，但你还是均衡混合了原料。
+		<br><br>
+
+		<<chefwork>>
+<</addinlineevent>>
+<<runeventpool>>
+<</widget>>
+
+<<widget "chefwork">>
+	做好的面团已经放入烤箱，是时候制作奶油了。
+	<br><br>
+
+	<<if $chef_job is "special">>
+		<<link [[继续|Chef Work Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Chef Work Regular]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "sellbuns">>
+	<<set _bun_money to (1000 + (($bun_value * $bun_cut) * _buns_sold))>>
+	卖出的面包: _buns_sold
+	<br>
+	面包售价: £<<print ($bun_value / 100)>>
+	<br>
+	你的分红:<<print ($bun_cut * 100)>>%
+	<br>
+	劳动报酬: £10
+	<br>
+	总收入:<span class="gold">£<<print (_bun_money / 100)>></span>
+	<<set $money += _bun_money>>
+	<<set $bunstat += _buns_sold>>
+	<br>
+	怀疑：
+	<div class="meter">
+		<<set $percent=Math.floor(($chef_sus / 100)*100)>>
+		<<print '<div class="redbar" style="width:' + $percent + '%"></div>'>>
+	</div>
+	<br><br>
+	<<if $options.images is 1>>
+		<<set _buns_sold to Math.clamp(_buns_sold, 0, 200)>>
+		<<for _i to 0; _i lt _buns_sold; _i++>>
+			<<icon "food_creambun.png">>
+		<</for>>
+		<br><br>
+	<</if>>
+<</widget>>

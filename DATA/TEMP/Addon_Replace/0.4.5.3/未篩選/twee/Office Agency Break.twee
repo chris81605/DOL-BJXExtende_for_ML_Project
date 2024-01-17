@@ -1,0 +1,60 @@
+:: Office Agency Break []
+<<effects>>
+<<if $rng gte 81>>
+	当你在休息室舒适的椅子上休息时，三个服务员，一个<<generatey1>><<person1>><<person>>，一个<<generatey2>><<person2>><<person>>和一个<<generatey3>><<person3>><<person>>向你走来。
+	<br>
+	"你坐在我最喜欢的椅子上，"<<person1>><<person>>站在你旁边说。"滚开。"
+	<br><br>
+	<<link [[服从|Office Agency Chair Comply]]>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<link [[拒绝|Office Agency Chair Refuse]]>><</link>>
+<<else>>
+	<<if $rng gte 71>>
+		<<generatey1>><<person1>>你花时间和一个<<person1>><<person>>聊天。<<He>>抱怨一些客户的辱骂。
+	<<elseif $rng gte 61>>
+		一个<<generatey1>><<person1>><<person>>走进休息室，<<he>>分享从秘书那里收到的饼干。
+	<<elseif $rng gte 51>>
+		<<generatey1>><<person1>>
+		<<if $pronoun is "f">>
+			一个<<person1>><<person>>跑进休息室，盖着<<his>>的乳房，<<his>>残破的裙子挂在<<his>>的腰上。
+			<br>
+			"愚蠢的碎纸机把我所有的衣服都吃了！他们需要摆脱那个怪物。"<<He>>用毛巾裹住<<his>>的胸部，然后冲出去。
+		<<else>>
+			一个<<person1>><<person>>跑进休息室，光着膀子，<<his>>残破的裤子挂在<<his>>的腰上。
+			<br>
+			"愚蠢的碎纸机把我所有的衣服都吃了！他们需要摆脱那个怪物。"<<He>>把毛巾裹在<<his>>的腰上，然后怒气冲冲地出去了。
+		<</if>>
+	<<elseif $rng gte 41>>
+		两个临时工，<<generatey1>><<person1>><<person>>和<<generateyp2>><<person2>><<person>>，进来并开始亲热，不知道你的存在。
+		<<arousal 600>><<garousal>>
+		<br><br>
+		几秒钟后，<<person2>><<person>>注意到你，在给<<person2>><<him>>穿衣服之前，拦住了<<person1>><<him>>。两人站起来，害羞地走出客厅。
+	<<elseif $rng gte 31>>
+		两个临时工，<<generatey1>><<person1>><<person>>和<<generateyp2>><<person2>><<person>>在走过时争吵。
+		<br><br>
+		"这不值得，"<<person1>><<person>>说。"楼层越高，每个人就变得越变态。14号那天我被人舔了！"
+		<br>
+		"忽略它就行了，"<<person2>><<person>>回复道。"高层的小费要高得多。"
+		<br>
+		"再多的小费也买不来你我的安全。"
+		<br><br>
+		他们走到听不见的地方。
+	<<else>>
+		你一个人在休息室放松，而其他临时工则在公司办公室进进出出，忙着完成各种任务。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<if Time.hour gte 6 and Time.hour lte 21>>
+		<<link [[接受任务 (1:00)|Office Assignment Start]]>><</link>>
+		<br>
+		<<link [[继续休息 (0:10)|Office Agency Break]]>><<stress -3>><<tiredness -3>><<pass 10>><</link>><<ltiredness>><<lstress>>
+		<br>
+		<<link [[$per_npc.manager.name + "的办公室"|Office Agency Manager]]>><</link>>
+		<br>
+	<<else>>
+		一名保安进入休息室，引导大家到大厅。这座大楼不对公众开放。
+		<br><br>
+	<</if>>
+	<<link [[返回大厅 (0:01)|Office Lobby]]>><<pass 1>><</link>>
+<</if>>

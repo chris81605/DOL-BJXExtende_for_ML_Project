@@ -1,0 +1,196 @@
+:: Farm Cottage []
+<<set $location to "alex_cottage">><<set $outside to 0>><<effects>>
+<<farm_work_update>>
+<<if $slimeFarmNakedStored is true>>
+	你将衣服穿好。
+	<<storeon "farmHidingSpot">>
+	<<exposure>>
+	<<unset $slimeFarmNakedStored>>
+<</if>>
+<<if $farm_stage gte 7>><<unset $farm_naked>><</if>>
+
+你在艾利克斯的小屋里，一楼的布局很紧凑，也很舒适。有间架设了现代电器的厨房，里面有张小桌子。客厅里面摆设着沙发和扶手椅。
+<br><br>
+
+<!-- Flavor text of Alex coming down, going up, or being upstairs -->
+<<if Time.hour is 21 and $alex_to_bed is undefined>>
+	<<set $alex_to_bed to 1>>
+	<<npc Alex>><<person1>>
+	艾利克斯上楼进入<<his>>的房间，楼梯在<<his>>脚下嘎吱作响。
+	<<endevent>>
+	<br><br>
+<<elseif Time.hour gte 21 or Time.hour lte 4>>
+	你听到楼上艾利克斯的鼾声。
+	<br><br>
+<<elseif Time.hour is 5 and ($alex_bed is "player" or $alex_bed is undefined)>>
+	<<set $alex_bed to "none">><<npc Alex>><<person1>>
+	楼梯嘎吱作响，你看到艾利克斯从楼上下来。<<covered>>"我去准备早饭。"<<he>>说着，走进了厨房。
+	<<if $exposed gte 1>>
+		<<He>>经过时，假装没有偷看。<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<<endevent>>
+	<br><br>
+<<elseif $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	你听到楼上传来艾利克斯和人通电话的声音。
+	<br><br>
+<</if>>
+
+<!-- Main options of available actions -->
+
+<<if $farm.build_finished.includes("nursery")>>
+	<<run $farm.build_finished.delete("nursery")>>
+	<<set C.npc.Alex.pregnancy.nursery to true>>
+	<<unset $cottage_nursery_prep>>
+
+	一间新的育儿室建好了。<span class="gold">你和艾利克斯的孩子现在可以住在农场了。</span>
+	<br><br>
+	<<link [[继续|Farm Cottage]]>><</link>>
+
+<<elseif playerIsPregnant() and playerBellyVisible() and !talkedAboutPregnancy("pc","Alex")>>
+	<<npc "Alex">>
+	<<setTalkedAboutPregnancy "pc" "Alex">>
+	<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+		你发现艾利克斯正惊恐地盯着你的肚子。"你……你怀孕了？！你一点也没跟我说过……"
+
+		<<if getPregnancyObject().potentialFathers.length gte 2 or !getPregnancyObject().potentialFathers.find(s => s.source === "Alex")>>
+			<<He>>听起来很沮丧。
+			<br><br>
+
+			"好、好吧，如果你在干农活的时候感觉不舒服，随时可以休息，"<<he>>说。
+			<br><br>
+
+			<<link [[继续|Farm Work]]>><<endevent>><</link>>
+
+		<<else>>
+			<br><br>
+			<<He>>看着你，似乎在等着你的回应。
+
+			"我是说……请坐吧。可以吗？"艾利克斯说。
+			<br><br>
+
+			<<link [[继续|Farm PC Pregnancy Reveal]]>><<set $phase to 3>><</link>>
+
+		<</if>>
+
+	<<else>>
+		你发现艾利克斯正盯着你的肚子。"哦，怀孕了？如果干农活太累的话，就休息吧。我无所谓，"<<he>>说。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<<elseif npcPregnancyEnding("Alex")>>
+	<<npc "Alex">>
+	"擦，操……"你听到艾利克斯的喊声，冲了过去。
+	<br>
+
+	"没事吧？"你靠近了<<him>>，发现<<his>>大腿间正流下液体。
+	<br>
+
+	"应该来了，"<<he>>说。
+	<br><br>
+
+	你感到心脏怦怦直跳，比往常更快。"我要把你带到医院吗？"你问。<<gstress>><<stress 6>>
+	<br><br>
+
+	"不，没事的。我不喜欢那种地方。你可以叫本地医生来吗？"<<He>>说着从口袋里拿出手机，递给你。
+	<br><br>
+
+	<<link [[继续|Farm Alex Birth]]>><</link>>
+
+<<elseif isPlayerNonparasitePregnancyEnding() and getPregnancyObject().fetus[0].father is "Alex">>
+	<<pcFarmBirth>>
+
+<<elseif npcIsPregnant("Alex") and !talkedAboutPregnancy("Alex","pc") and npcBellySize("Alex") gte 1>>
+	<<alex_cottage_pregnancy_reveal>>
+
+<<elseif ($farm_countdown lte 0 or $farm_countdown is undefined) and ($renttime lte -2 or ($renttime lte 0 and Time.hour gte 4 and Time.hour lte 21))>>
+	<<unset $farm_countdown>><<unset $baileyReunionScene>>
+	<span class="red">你听到有人敲门。</span>
+	<br><br>
+
+	<<if Time.hour gte 21 or Time.hour lte 4>>
+		艾利克斯在楼上动来动去的。
+		<br><br>
+
+		<<link [[去应门|Farm Cottage Bailey]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[让艾利克斯去应门|Farm Cottage Bailey]]>><<set $phase to 1>><</link>>
+		<br>
+
+	<<elseif Time.hour is 5>>
+		艾利克斯十分担忧地看了你一眼。
+		<br><br>
+
+		<<link [[去应门|Farm Cottage Bailey]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[让艾利克斯去应门|Farm Cottage Bailey]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[去应门|Farm Cottage Bailey]]>><<set $phase to 2>><</link>>
+		<br>
+		<<link [[让艾利克斯去应门|Farm Cottage Bailey]]>><<set $phase to 3>><</link>>
+		<br>
+	<</if>>
+<<elseif $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21>>
+	<<npc Alex>><<person1>>
+	艾利克斯冲下楼梯。<span class="red">"<<nnpc_Hes Remy>>来了，"</span><<he>>说，"我们能做到的，去做好准备，我去
+	<<if $farm.tower_guard>>
+		提醒一下$farm.tower_guard。"
+	<<else>>
+		看看能不能定位到他们的位置。"
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+	<br>
+<<elseif Time.hour is 5 and $alex_breakfast is undefined>>
+	<<foodicon "pancakes">><<link [[帮艾利克斯准备早饭 (0:20)|Farm Breakfast Make]]>><<set $alex_breakfast to 1>><<pass 20>><<npcincr Alex love 1>><<stress -6>><<tiredness -6>><</link>><<glove>><<lstress>><<ltiredness>>
+	<br>
+	<<foodicon "eat">><<link [[吃早餐 (0:20)|Farm Breakfast Eat]]>><<set $alex_breakfast to 1>><<pass 20>><<stress -12>><<tiredness -6>><</link>><<llstress>><<ltiredness>>
+	<br>
+	<<farm_cottage_options>>
+<<elseif Time.hour is 5>>
+	艾利克斯坐在客厅里，正在看电视。
+	<br><br>
+
+	<<npc Alex>><<person1>>
+	<<if $alex_tea is undefined>>
+		<<set $alex_tea to 1>>
+		<<if Time.days % 2 is 0>>
+			<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte 1>>
+				"我想喝杯茶，"<<he>>说，"介意去烧壶水吗？"
+				<br><br>
+
+				<<link [[沏一杯茶 (0:05)|Farm Breakfast Tea]]>><<npcincr Alex love 1>><<pass 5>><</link>><<glove>>
+				<br>
+				<<link [[沏两杯茶 (0:05)|Farm Breakfast Tea 2]]>><<npcincr Alex love 1>><<pass 5>><<stress -6>><</link>><<glove>><<lstress>>
+				<br>
+				<<link [[拒绝|Farm Breakfast Tea Refuse]]>><<npcincr Alex dom -1>><<npcincr Alex love -1>><</link>><<llove>><<ldom>>
+				<br>
+			<<else>>
+				"我想喝杯茶，"<<he>>边说边站起身，"你要来一杯吗？"
+				<br><br>
+
+				<<link [[接受 (0:05)|Farm Breakfast Tea Receive]]>><<pass 5>><<stress -6>><</link>><<lstress>>
+				<br>
+				<<link [[谢绝|Farm Cottage]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<farm_cottage_tv_options>>
+			<<farm_cottage_options>>
+		<</if>>
+	<<else>>
+		<<farm_cottage_tv_options>>
+		<<farm_cottage_options>>
+	<</if>>
+<<else>>
+	<<farm_cottage_options>>
+<</if>>

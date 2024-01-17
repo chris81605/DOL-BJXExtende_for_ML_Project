@@ -1,0 +1,41 @@
+:: Moor Abduction Walk Loosen []
+<<effects>>
+
+
+你磨破自己的拘束，希望没人注意到。
+<<set $moor_binding -= 1>>
+<<if $moor_binding lte 0>>
+	<span class="green">你的束缚变得松动了。</span>现在你应该可以挣脱束缚，但你需要选择合适的时机。
+	<br><br>
+<<else>>
+	<span class="lblue">你的束缚被稍微磨损了些。</span>
+	<br><br>
+<</if>>
+
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">没有人注意到你的小动作。</span>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+
+<<else>>
+
+	<<if random(1, 2) is 2>>
+		<span class="red">一只手重重拍在你的后脑勺上。</span>"别乱动，"一个<<generate1>><<person1>><<person>>说道。"你要去的地方，由我们说了算。"<<gpain>><<gstress>><<stress 6>><<pain 4>>
+		<br><br>
+	<<else>>
+		<span class="red">"别再乱动！"</span>你身后一个声音大喊。"除非你想挨打。"<<ggstress>><<stress 12>>
+		<br><br>
+	<</if>>
+
+	<<skulduggeryuse>>
+
+
+<</if>>
+
+<<link [[继续|Moor Abduction Walk]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,56 @@
+:: Robin's Lemonade Flirt []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<!-- I feel like this can be turned into a function -->
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<<promiscuity2>>
+
+<<if $seductionrating gte $seductionrequired>>
+	你决定表现得更加大胆，开始与潜在客户调情，用魅力解除他们的防备。当你回到罗宾身边时，那里排着长队。<<He>>对你微笑。
+	<br><br>
+	"我不知道你是怎么做到的，但是谢谢你。"<<He>>亲吻你的脸颊。
+	<<glove>><<npcincr Robin love 1>><<ltrauma>><<lstress>><<trauma -3>><<stress -6>><<set $robinmoney += 5>>
+	<br><br>
+	<<endevent>>
+	<<lemonade_stand_options>>
+<<else>>
+	<<generate2>><<person2>>
+	你施展魅力，但还是没人对你感兴趣。你回到了罗宾身边。<<person1>><<Hes>>正在和一个<<person2>><<person>>交谈。
+	<br><br>
+		<<if _robin.trauma gte 40>>
+		"如果可以的话，请给我一镑。"
+		<br><br>
+
+		"给，"<<person>>没有立刻离开，"你有兴趣多赚一点儿吗？我就喜欢害羞的类型。"
+		<br><br>
+
+		罗宾睁大了眼睛。"不！不，不用了。"<<person1>><<He>>深吸一口气，试着递给<<person2>><<person>>柠檬水，但是
+		<<person1>><<his>>手滑了。柠檬水溅了一桌子，还溅到了<<person2>><<personsimple>>的鞋子上。
+		<br><br>
+
+		"喂！小心点儿，小子！"<<person2>><<person>>生气道。罗宾瑟缩了一下，无助地用手捂住了自己的脸。<<person1>>
+		<br><br>
+
+		当<<person2>><<person>>怒气冲冲地离开时，罗宾注意到了你。<<person1>><<He>>轻轻抽噎着，但还是努力对你露出了一个微笑，"谢谢你的帮助。"
+	<<else>>
+		"请给我一镑。"
+		<br><br>
+
+		"谢谢，"<<person>>把手撑在柠檬摊上，"你有兴趣多赚一点儿吗？我知道一个安静的地方。"
+		<br><br>
+
+		罗宾看起来很困惑。"但是我需要把我的摊位放在一个热闹的地方，人们才能看到它。不过还是谢谢你的建议。"
+		<br><br>
+
+		"没事儿，"<<person>>叹了口气，"算了，算了吧。"
+		<br><br>
+
+		当<<person>>离开时，罗宾注意到了你。<<person1>>"生意好转了很多。"<<he>>笑着说，"谢谢你。"
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<lemonade_stand_options>>
+<</if>>

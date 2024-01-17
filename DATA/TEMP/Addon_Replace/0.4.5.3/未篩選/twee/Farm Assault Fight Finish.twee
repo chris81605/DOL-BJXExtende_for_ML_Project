@@ -1,0 +1,59 @@
+:: Farm Assault Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemynomax gte 2>>
+		雷米的打手们太过茫然跟疲惫，无法继续入侵。<span class="green">他们摇摇晃晃地离开了田地。</span>
+	<<else>>
+		那个<<person1>><<person>>太过茫然跟疲惫，无法继续入侵，<span class="green">摇摇晃晃地离开了田地。</span>
+	<</if>>
+	<br><br>
+	<<tearful>>你准备着下一步行动。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		<span class="green">雷米的打手们逃离了田地，</span>他们忧心忡忡地回头看着你，确认你没有在追赶他们。
+	<<else>>
+		<span class="green">那个<<person1>><<person>>逃离了田地，</span><<he>>忧心忡忡地回头看着你，确认你没有在追赶他们。
+	<</if>>
+	<br><br>
+	<<tearful>>你准备着下一步行动。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+
+<<else>>
+	你摔倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+	<<person1>><<person>>在你身旁蹲下，<span class="purple">然后抓住了你的<<breasts>>。</span>"真可惜我还有工作要做。"<<he>>说道。
+	<br><br>
+	你无法阻止<<him>>把你的手脚都绑在一起，并堵住你的嘴。"之后见<<girl>>。"
+	<br><br>
+	<<tearful>>你在绳索中挣扎着。虽然很困难，不过应该还是可以挣脱的。
+	<br><br>
+	<<endcombat>>
+	<<set $farm_assault.bindings to 3>>
+	<<bind>>
+	<<facewear 23>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+
+<</if>>

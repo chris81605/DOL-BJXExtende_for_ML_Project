@@ -1,0 +1,37 @@
+:: Whitney Park Whore Fight Finish []
+<<effects>>
+<<if $pain gte 100 and $willpowerpain is 0>>
+	<<set $phase to 1>>
+	你瘫倒在地，伤得动弹不得。
+	<br><br>
+
+	惠特尼拽着你的头发把你拖到那些人的面前，然后把你扔在他们面前的地上。
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $phase to 1>>
+	之前那两人一听到你的喊声就冲了过来。惠特尼得意地笑着，把你推向了那些人。
+<<elseif $enemyhealth lte 0>>
+	<<set $phase to 0>>
+	你将惠特尼从身边推开。
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<set $phase to 0>>
+	<<ejaculation>>
+	惠特尼被你推开，看起来晕头转向。
+<</if>>
+
+<<if $phase is 0>> <!-- Victory -->
+	<<clearNPC "park_whore1">><<clearNPC "park_whore2">>
+	随着一声喊叫，<<he>>跌到了<<if $weather is "snow">>雪<<else>>泥<</if>>中。<<tearful>>你们之间拉开了一些距离。当你回头看的时候，惠特尼已经离开了。
+	<<npcincr Whitney dom -1>><<ldom>>
+	<br><br>
+	<<endcombat>><<clotheson>>
+	<<whitneyexit>>
+<<else>> <!-- Defeat -->
+	<<endevent>><<loadNPC 0 "park_whore1">><<loadNPC 1 "park_whore2">>
+	"想要那个荡妇吗？"惠特尼皱着眉头，"每个人£100。"<<tearful>>惠特尼一张一张数着<<person1>><<person>>给<<nnpc_him "Whitney">>的钱，你被从惠特尼身边拖走了。
+	<br><br>
+
+	"你最好安静点，好好享受这一切。"<<person2>><<person>>说着，把你拖进一条小巷里。
+	<br><br>
+
+	<<link [[继续|Whitney Park Whore Sex]]>><<set $daily.whitney.parkWhore to "paid">><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+<</if>>

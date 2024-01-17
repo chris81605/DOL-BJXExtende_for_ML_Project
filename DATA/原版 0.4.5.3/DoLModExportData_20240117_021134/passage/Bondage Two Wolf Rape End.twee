@@ -1,0 +1,57 @@
+:: Bondage Two Wolf Rape End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Two Wolf Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，不敢再上前。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Two Wolf Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃走了。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		心满意足后，<<beasttype>>离开了。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		<<beastsplural>>觉得你带来的麻烦甚过你的价值，于是跑走了。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		<<beastsplural>>把浑身发抖、筋疲力尽的你扔在泥土地上。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		<<beastsplural>>把浑身发抖、筋疲力尽的你扔在泥土地上。
+	<</if>>
+	<br><br>
+	<<tearful>>你试着确定自己的方位。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationbondage>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescue to 0>>
+	"那边的人都还好——" 你听见有人说话，但被<<beasttype>>的嚎叫声打断。
+	<br><br>
+	"操、操！" 那个声音继续说道。"别吃我！" 你听见他们逃跑时急促的脚步声。<<beastsplural>>对目前的成果很满意，没有要去追的打算。
+	<br><br>
+
+	<<link [[继续|Bondage Two Wolf Rape]]>><</link>>
+	<br>
+
+<</if>>

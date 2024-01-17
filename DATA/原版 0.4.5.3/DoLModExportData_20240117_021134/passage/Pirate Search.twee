@@ -1,0 +1,71 @@
+:: Pirate Search []
+<<effects>>
+
+在晚上的这个时间点，来到底舱的海盗并不多。你在角落里四处搜寻，寻找着有趣的或可能值钱的东西。
+<br><br>
+<<if $rng gte 51>>
+    <<rng 100>>
+    <<if $rng gte 81>>
+        你找到了一个装满老旧的杖的桶。大部分杖都破破烂烂的，其中只有一个值得引起注意。你试图把它抽出来，却无意中拔出了一把剑。看样子这是一件古董。
+        <br><br>
+        <<link [[拿上它|Pirate Bilge]]>><<set $antiquemoney += 50>><<museumAntiqueStatus "antiqueswordcane" "found">><</link>>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 61>>
+        你找到了一个旧的巧克力罐头，里面还有一些巧克力，看样子还能吃，但这些巧克力放的时间已经很长了，不会很好吃的。
+        <br><br>
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $antiquemoney += 25>><<museumAntiqueStatus "antiquechocolate" "found">><</link>>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 41>>
+        你找到了一个旧的茶罐，上面落满了灰尘。里面没有茶叶，但你能闻到残余的香气。对收藏家来说它可能会有点价值。
+        <br><br>
+
+        <<link [[拿上它|Pirate Bilge]]>><<set $antiquemoney += 20>><<museumAntiqueStatus "antiqueteacaddy" "found">><</link>>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<elseif $rng gte 21>>
+        你找到了一个小小的木制雕塑，它被放在一个架子上。木头的状态看起来有些老旧，它的设计似乎有些不同寻常。你不确定它是来自哪里的，但对收藏家来说它可能会有点价值。
+        <br><br>
+        <<link [[拿上它|Pirate Bilge]]>><<set $antiquemoney += 15>><<museumAntiqueStatus "antiquewoodenfigurine" "found">><</link>>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <<else>>
+        你听到脚下清脆的声响，你踢到了一枚铜戒指。这枚戒指看起来并没有特别引人注目，但它的一侧有着一些雕刻，也许对收藏家来说它可能会有点价值。
+        <br><br>
+        <<link [[拿上它|Pirate Bilge]]>><<set $antiquemoney += 5>><<museumAntiqueStatus "antiquecopperring" "found">><</link>>
+        <br>
+        <<link [[离开|Pirate Bilge]]>><</link>>
+        <br>
+    <</if>>
+<<elseif $rng gte 61>>
+    你发现了一个锁起来的箱子。没有钥匙，但也许你能尝试撬锁。
+    <br><br>
+    <<set $skulduggerydifficulty to 400>>
+    <<link [[打开|Pirate Search Open]]>><</link>><<skulduggerydifficulty>>
+    <br>
+    <<link [[离开|Pirate Bilge]]>><</link>>
+    <br>
+
+<<elseif $rng gte 41>>
+    你听见咔嗒一声，从你的脚下传来。<<gstress>><<stress 6>>
+    <br><br>
+    <<link [[继续|Pirate Bilge]]>><</link>>
+    <br>
+<<elseif $rng gte 21>>
+    一阵风拂过你的头发，就像是有人打开了窗户，或者一扇通往外面的门。空气裹挟着船上潮湿的气味，但也带着海的清新。
+    <br><br>
+
+    <<link [[继续|Pirate Bilge]]>><</link>>
+    <br>
+<<else>>
+    光线从头顶的地板间渗透下来。当有人从上面经过时，影子闪动着，木头发出嘎吱的声音。
+    <br><br>
+    <<link [[继续|Pirate Bilge]]>><</link>>
+    <br>
+<</if>>

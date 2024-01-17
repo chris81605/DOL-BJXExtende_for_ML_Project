@@ -1,0 +1,38 @@
+:: Clearing Spring []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+<<strip>>
+
+<<if $phase lte 0>>
+	崖壁环绕着泉水池，为你提供了小小的隐私。你脱掉衣服，溜进清凉的水中，仰躺下来，闭上眼睛，放松着自己的身心。
+<<else>>
+	仰躺下来，闭上眼睛，放松着自己的身心。
+<</if>>
+<<wash>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 26 and ((Time.hour gt 6 and Time.hour lt 11) or Time.hour gt 14)>>
+	<<npc Eden>><<person1>>
+	你被一声口哨惊扰了。你警觉地睁开眼睛，看见伊甸正站在泉水边。<<covered>>"我一直懒得清理这里，"<<he>>边脱衣服边说，"太费功夫了，但我很高兴你跟我的想法不一样。"<<He>>跳了进来，溅了你一身水花。
+	<<npcexpose>>
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].dom gte 75>>
+		<<He>>出现在你身后，把你拉进<<his>>的怀里。"你还可以为我做点别的事。"<<He>>一只手向下，开始逗弄你的<<genitals>>。
+	<<else>>
+		<<He>>出现在你身后，把你拉进<<his>>的怀里。"你还可以为我做点别的事。"<<He>>开始舔弄你的脸颊。
+	<</if>>
+	<br><br>
+
+	<<link [[推开|Clearing Spring Push]]>><<npcincr Eden love -3>><<npcincr Eden dom -1>><</link>><<lllove>><<ldom>>
+	<br>
+	<<link [[让伊甸拥有你|Clearing Spring Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<promiscuous1>><<gdom>><<glove>>
+	<br>
+<<else>>
+	<<ind>><<link [[留在泉水 (0:30)|Clearing Spring]]>><<pass 30>><<stress -6>><<set $phase to 1>><</link>><<lstress>>
+	<br>
+	<<ind>><<link [[自慰|Clearing Spring Masturbation]]>><<set $masturbationstart to 1>><</link>>
+	<br>
+	<<getouticon>><<link [[出去|Eden Clearing]]>><<endevent>><<clotheson>><</link>>
+<</if>>

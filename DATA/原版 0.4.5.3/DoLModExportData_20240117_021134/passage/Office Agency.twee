@@ -1,0 +1,15 @@
+:: Office Agency []
+<<location "office_building">><<effects>>
+<<if Time.hour gte 6 and Time.hour lte 21>>
+	你正待在临时工任务发放处，其他的临时工们正在接受和执行各种任务。
+	<br><br>
+	<<assignmenticon>><<link [[接受任务|Office Assignment Start]]>><</link>>
+	<br>
+	<<couchicon>><<link [[在休息室休息 (0:10)|Office Agency Break]]>><<stress -3>><<tiredness -3>><<pass 10>><</link>><<ltiredness>><<lstress>>
+	<br>
+	<<officeicon>><<link [[$per_npc.manager.name + "的办公室"|Office Agency Manager]]>><</link>>
+<<else>>
+	临时工任务发放处的门锁了起来，门上有一个牌子，上面写着"早上<<ampm 6>>开门"。
+<</if>>
+<br><br>
+<<getouticon>><<link [[回大厅 (0:01)|Office Lobby]]>><<pass 1>><</link>>

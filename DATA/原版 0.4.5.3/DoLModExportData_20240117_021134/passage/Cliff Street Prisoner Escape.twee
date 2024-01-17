@@ -1,0 +1,35 @@
+:: Cliff Street Prisoner Escape []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<get_pillory_npc>><<person1>> /* if anyone can think of a better escape scenario, feel free to add it */
+在你熟练的技巧下，锁很快就被打开了，而附近的人群却毫不知情。<br>
+"配合我，" 你小声说道，"当我们离开人群的时候，一起朝小巷走去。"
+<br><br>
+"好了，快起来吧，罪犯。"你一边叫着一边拿开颈手枷的固定装置，随后把<<the_pillory_person>>扶了起来。
+
+<<if ($pillory_tenant.lowerexposed + $pillory_tenant.upperexposed) gte 1>>
+	<<if $pillory_tenant.person.pronoun is "f">>
+		"来吧，这不是一个奶子展会，没有人想看到这一切，把这些衣服整理好……很好。
+	<<else>>
+		"你是个放荡的家伙吗？把它盖起来！没有人想看到这个，把这些衣服整理一下……很好。
+	<</if>>
+<<else>>
+	"怎么了？你在那里很开心吗？是想在那里过夜么？
+<</if>>
+你知道警察局在哪里，赶紧走吧。"
+<br><br>
+当离开人群的视线后，你们就一起消失在一条小巷当中。
+<br><br>
+<<if $pillory_tenant.special.name is "Leighton">>
+	"那太令人讨厌了，我是被陷害的，"<<the_pillory_person>>激烈地说道，"但谢谢你把我救出来。"
+	<<npcincr Leighton love 10>>
+<<elseif $pillory_tenant.special.name is "Whitney">>
+	"谢……谢了，"<<the_pillory_person>>皱起眉头说道，"我要去找那个陷害我的混蛋。"
+	<<npcincr Whitney love 5>>
+<<else>>
+	"谢谢你，"<<the_pillory_person>>恳切地说道，"那真是太可怕了，你真的帮了我个大忙。"
+<</if>>
+<<clear_pillory>>
+<<endevent>><<famegood 15>>
+<br><br>
+<<link [[继续|Commercial alleyways]]>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,23 @@
+:: Temple Garden Wolf []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<if Time.dayState isnot "night">><<enable_rescue>><</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[继续|Temple Garden Wolf Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Temple Garden Wolf]]>><</link>></span><<nexttext>>
+<</if>>

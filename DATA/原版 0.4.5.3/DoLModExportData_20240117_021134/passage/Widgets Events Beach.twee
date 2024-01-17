@@ -1,0 +1,33 @@
+:: Widgets Events Beach [widget]
+<<widget "eventsbeach">>
+	<<set $dangerevent to random(1, 100)>>
+	<<if Time.dayState is "night">>
+		<<if $dangerevent lte 15>>
+			<<beachnight1>>
+		<<elseif $dangerevent lte 30>>
+			<<beachnight2>>
+		<<elseif $dangerevent lte 100>>
+			<<beachday4>>
+		<</if>>
+	<<elseif $exposed gte 1>>
+		<<if $dangerevent lte 80>>
+			<<beachex1>>
+		<<elseif $dangerevent lte 100>>
+			<<beachex2>>
+		<</if>>
+	<<else>>
+		<<if $dangerevent lte 10>>
+			<<beachday1>>
+		<<elseif $dangerevent lte 20 and !$worn.lower.type.includes("naked")>>
+			<<beachday2>>
+		<<elseif $dangerevent lte 50>>
+			<<beachday3>>
+		<<elseif $dangerevent lte 70>>
+			<<beachday4>>
+		<<elseif $dangerevent lte 90>>
+			<<beachday5>>
+		<<elseif $dangerevent lte 100>>
+			<<beachday6>>
+		<</if>>
+	<</if>>
+<</widget>>

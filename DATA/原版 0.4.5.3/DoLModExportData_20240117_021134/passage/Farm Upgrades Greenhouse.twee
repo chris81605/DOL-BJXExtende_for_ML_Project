@@ -1,0 +1,41 @@
+:: Farm Upgrades Greenhouse []
+<<effects>>
+
+你展开了那张纸。细节被划掉了，但看起来是一个温室的计划。
+
+<<if $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12)>>
+	<<npc Alex>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].love gte 80>>
+		艾利克斯接过纸，叹了口气。"我本来想，建一个温室可能对我来说更容易一些，"<<he>>说道，"只是作为爱好简单种些草药和花卉。我画了所有的计划，但我大概没有时间。"
+		<br><br>
+
+		看起来它很适合建在孤儿院的花园里。你可以同时建造温室和扩建农场。
+		<br><br>
+
+		<<if $money gte 1000000>>
+			<<link [[建造 (£10000)|Farm Upgrades Greenhouse 2]]>><<set $alex_greenhouse to 1>><<set $alex_greenhouse_timer to 7>><<set $money -= 1000000>><</link>>
+			<br>
+		<<else>>
+			你没有足够的钱来建造温室。
+			<br>
+		<</if>>
+
+		<<link [[返回|Farm Upgrades]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		艾利克斯抢过纸来，嗤之以鼻。<span class="red">"这不重要，"</span><<he>>说着，又把纸揉成了一团。"我只是在浪费时间罢了。"
+		<br><br>
+		如果<<He>>与你更亲密，也许<<he>>会更愿意告诉你点什么。
+		<br><br>
+
+		<<link [[继续|Farm Upgrades]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<npc Alex>><<person1>>
+	<span class="lblue">下次艾利克斯在这里做行政工作时，可以问问<<him>>这件事情。</span>
+	<br><br>
+
+	<<link [[继续|Farm Upgrades]]>><<endevent>><</link>>
+	<br>
+<</if>>

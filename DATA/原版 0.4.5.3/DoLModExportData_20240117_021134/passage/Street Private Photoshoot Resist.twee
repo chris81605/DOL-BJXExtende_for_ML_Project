@@ -1,0 +1,29 @@
+:: Street Private Photoshoot Resist []
+<<effects>>
+
+<<if $willpowerSuccess>>
+	<<set $trance to 0>>
+	你试图无视淫秽的念头，<span class="green">并努力摆脱这种影响。</span>
+	<br><br>
+	<<if $phase is 3>>
+		<<link [[继续|Street Private Photoshoot Alley]]>><<set $phase to 4>><</link>>
+	<<else>>
+		<<link [[继续|Street Private Photoshoot End]]>><<set $phase to 1>><</link>>
+	<</if>>
+	<br>
+<<else>>
+	你试图无视淫秽的念头，<span class="red">但就是不能强迫你的身体服从。</span>就好像它有了自己的思想。<<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+	<br><br>
+	<<if $trance is 0>>
+		<<set $trance to 1>><<hypnotised 1>>
+	<</if>>
+	<<switch $phase>>
+		<<case 0 1>>
+			<<link [[继续|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 2>><</link>>
+		<<case 2>>
+			<<link [[继续|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 3>><</link>>
+		<<case 3>>
+			<<link [[继续|Street Private Photoshoot Sex]]>><<set $phase to 1>><</link>>
+	<</switch>>
+	<br>
+<</if>>

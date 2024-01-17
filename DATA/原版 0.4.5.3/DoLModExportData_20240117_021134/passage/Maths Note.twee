@@ -1,0 +1,37 @@
+:: Maths Note []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 1>>
+	你拆开封条，打开信封。里面有一个便条，写着校长电脑的用户名与密码。它可能会十分有用，但是篡改它也很可能给你带来麻烦。
+	<<set $headpasswordknown to 1>>
+	<br><br>
+	<<endevent>>
+<</if>>
+
+你平安无事地带去了便条，但在回班的路上被一群不良少年堵住了。
+
+<<if $cool lt ($coolmax / 10) and $mathsnote gte 2>>
+	<<generatey1>><<generatey2>><<generatey3>><<generatey4>>
+
+	他们一开始从口头戏弄你，但很快就变成了身体上的。
+	<br><br>
+
+	<<link [[继续|Maths Note Molestation]]>><<set $molestationstart to 1>><<set $phase to 2>><</link>>
+	<br>
+<<elseif $cool lt ($coolmax / 5) and $mathsnote gte 1>><<set $mathsnote to 2>>
+	<<generatey1>><<generatey2>><<generatey3>><<generatey4>>
+
+	他们一开始从口头戏弄你，但很快就变成了身体上的。
+	<br><br>
+
+	<<link [[继续|Maths Note Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	<<set $mathsnote to 1>>
+	他们挑逗你，但幸运的是并不太过分。你到达了教室。
+	<<gtrauma>><<gstress>><<trauma 2>><<stress 2>>
+	<br><br>
+
+	<<link [[继续|Maths Lesson]]>><</link>>
+	<br>
+<</if>>

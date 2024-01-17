@@ -1,0 +1,577 @@
+:: Sydney Chat []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+<<rng>>
+<<if !$sydneyChatState>>
+	<<set $sydneyChatState to 1>>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 5 and $rng gte 92 and ($schoolstate isnot "early" and $schoolstate isnot "late") and !$daily.sydney.studentInteract>>
+	<<set $daily.sydney.studentInteract to true>>
+	你和悉尼聊了一会天。
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].init is 1 and $schoolstate isnot "second" and $rng gte 98>>
+		<<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "dungeon">>
+			<<he>>开始翻阅起一些文件——似乎是租赁的记录。过了一会儿，<<His>>的目光停在惠特尼的名字上。
+			<br><br>
+			"非常遗憾……这已经逾期了，你认为<<nnpc_him "Whitney">>是遭遇到了什么么？我曾见过有相关的寻人启事……"<<He>>看起来有些惆怅，"每个人都应有被宽恕的机会，即使是<<nnpc_him "Whitney">>这样的人。我祈祷<<nnpc_he "Whitney">>能有机会得到救赎。"
+		<<else>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<if $sydneyWhitneyBook is undefined>>
+					<<set $sydneyWhitneyBook to 1>>
+					你们的对话被一个走近柜台的学生打断了——是惠特尼。惠特尼嬉皮笑脸地拿着一本破损的数学课本，悉尼面孔瞬间浮现出惊骇的神色。
+					<br><br>
+
+					"你不仅未按时归还书籍，甚至还将它损坏了！这简直不可原谅！"悉尼猛地站了起来，然后以惊人的勇气和力量将<<nnpc_him "Whitney">>拉了过去，惠特尼则满脸惊讶地看向悉尼。<<He>>乘机揭开防水记号笔的笔帽，在惠特尼挣扎开之前，在其额头上潦草地写下了"<span class="red">毁书者 >:(</span>"直到书写完毕，<<nnpc_He "Whitney">>才勉强推开悉尼。
+					<br><br>
+					"你这个神经病！你是想挨揍吗？"<<nnpc_He "Whitney">>试图伸手去抓悉尼，不过当<<nnpc_he "Whitney">>看到你时便停了下来，"哦，我都忘了，是你把<<him>>给宠坏了。"
+					<<if $whitneyromance is 1>>
+						<<nnpc_He "Whitney">>笑了。"是时候好好管教一番了，你们不值得我浪费时间。"
+					<<else>>
+						<<nnpc_He "Whitney">>冷笑了起来。"你们两个混蛋在一起天生一对。"
+					<</if>>
+					惠特尼向悉尼摆了摆手中那根未点燃的香烟，做出一个吐烟的动作。悉尼握紧了拳头，厌恶地退后了半步。<<nnpc_He "Whitney">>放声大笑，什么话也没说便直接离开了。
+					<br><br>
+					"你需要在今天放学前向<<nnpc_title "Leighton">>报备这个问题！" 悉尼朝着<<nnpc_him "Whitney">>远去的背影大喊，吼声打破了周围的宁静，其他学生都惊讶地看向了<<he>>。<<He>>似乎并没太在意，只是微笑着挽起<<his>>的双臂，继续工作去了。
+				<<elseif $sydneyWhitneyBook is 1>>
+					<<set $sydneyWhitneyBook to 2>>
+					你们的对话被一个走进柜台的学生打断了——是惠特尼。<<nnpc_he "Whitney">>拿着一本破烂的数学教材，满脸烦躁。悉尼看了，沮丧地叹气。
+					<br><br>
+					
+					"逾期了，书的情况比上次还糟。不能接受。"悉尼拔开笔帽，把记号笔举到惠特尼额前。突然，惠特尼猛地把书甩到柜台上，一把拽住悉尼的手腕。两人角力了一会儿，惠特尼翻进柜台里。
+					<br><br>
+
+					<<nnpc_He "Whitney">>揪住悉尼的领子，提起<<him>>往后急推。悉尼被重重地砸到书柜上。<span class="lewd"><<him>>漏出一声短暂的喘息，</span>然后迅速地反应过来用手捂住了嘴。
+					<br><br>
+
+					悉尼和惠特尼都呆住了。悉尼的脸涨得通红，惠特尼难以置信地盯着<<him>>。两人回过头看你，又看向对方。过了良久，其他学生也张望过来。"操。" 惠特尼骂了一句，放开悉尼，一言不发地走了。
+					<br><br>
+
+					你帮悉尼站定。<<He>>抹了把脸，咳嗽了起来。你俩很久都没说一句话。<<npcincr Sydney lust 1>><<gslust>>
+				<<else>>
+					你们的对话被一个走进柜台的学生打断了——是惠特尼，手里拿着一本数学教材。<<nnpc_He "Whitney">>猛地把书推到悉尼面前。"续租。"
+					<br><br>
+
+					悉尼迅速翻看了教材的内页，"书还算完好，续租需要£20。"
+					<br><br>
+
+					惠特尼将一张皱巴巴的£20扔在柜台上，一把夺过悉尼手上的教材，转头离去。悉尼叹了口气。
+					<br><br>
+
+					<<if random(1,100) is 1>>
+						"该死！这他妈是一张假钞。"
+					<<else>>
+						"<<nnpc_Hes "Whitney">>真的很会折腾人。"
+					<</if>>
+				<</if>>
+			<<else>>
+				你们的对话被一个走近柜台的学生打断了——是惠特尼。惠特尼嬉皮笑脸地拿着一本破损的数学课本，悉尼面孔瞬间浮现出惊骇的神色。
+				<br><br>
+
+				"那，那本书……已经逾期了，而且……" 看得出<<Hes>>十分紧张，洁白光滑的额头上都渗出了汗液。除了惠特尼之外，几乎所有人都看向了这边。
+				<br>
+				"所以呢？"惠特尼猛然靠近，狞笑着。悉尼急忙后退，身体颤抖了起来。
+				<br>
+				"所以……你知，知道规矩的……"悉尼打开一只红色的记号笔，僵硬地举到惠特尼面前。突然，<<nnpc_He "Whitney">>猛的把拳头挥向悉尼。悉尼吓得后退几步，记号笔都掉在了地上。
+				<br><br>
+				惠特尼瞪了一眼，开始放声大笑<<if $sydney.glasses is "glasses" or $sydney.glasses is "playerbought">>。<<nnpc_he "Whitney">>伸手拿起了悉尼的眼镜，<span class="red">弹出其中一个镜片，在地上狠狠地踩了一脚，</span>随后把它扔了回去<<set $sydney.glasses to "broken">><</if>>。<br>"一定要告诉你的<<if $NPCName[$NPCNameList.indexOf("Sirris")].pronoun is "m">>爸爸<<else>>妈妈<</if>>，你这个拍马屁的小绵羊。"<br>惠特尼把教科书扔在了柜台上，其响声之大让其他同学都被吓了一跳。"谢谢这支免费的笔，"<<nnpc_he "Whitney">>啐了口唾沫，拿走了记号笔，之后便转身离开，没有再说任何一句话。
+				<br><br>
+				你看到泪水在悉尼的眼中涌起，但<<he>>用袖子擦干了。"我……我永远不会因为别人的苦难责怪他们……而且……很明显，<<nnpc_hes "Whitney">>经历了很多。"<<He>>伸手到柜台下面打开一个完全装满了红色记号笔的抽屉，拿出一支新的。
+			<</if>>
+		<</if>>
+	<<elseif $NPCName[$NPCNameList.indexOf("Kylar")].init is 1 and $schoolstate isnot "third" and $rng gte 95 and !$daily.kylar.leightonPunch>>
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "prison">>
+			一段时间后，<<he>>开始搜寻一些文件——似乎是租赁记录。<<His>>的眼睛停留在凯拉尔的名字上。
+			<br><br>
+			"逾期了。"<<He>>叹了口气，"没什么可说的。警察忙着安抚面包店的老板，因为<<nnpc_he "Kylar">>偷了东西，没有时间找回<<nnpc_he "Kylar">>借的最后一本书。<<nnpc_title "Leighton">>会生气的……"
+			<br><br>
+			你注意到悉尼的声音在颤。"我非常担心，我希望自己能做点什么。"
+		<<else>>
+			<<set $daily.sydney.kylarBook to true>>
+			你们被一名学生打断了——是凯拉尔。凯拉尔的手里拿着一本语文教科书和£20。"我要续租，拜托了。"
+			<br><br>
+			悉尼点了点头，接过书。"谢谢你准时归——"<<his>>的神情突然变得非常严肃，翻阅并仔细检查了书页。"折页就算了，你还在边角涂鸦？再一次？"悉尼翻开书，露出一面画满肖像的书页，<<He>>似乎没注意到，其中一个肖像与你有些相似。凯拉尔羞愧地低下了头，<<nnpc_his "Kylar">>向前迈了一步，撩开头发露出了额头。
+			<br><br>
+			悉尼揭开红色记号笔的盖子，用另一只手撩开凯拉尔的刘海，在<<nnpc_He "Kylar">>的额头上写下"<span class="purple">图书罪人 >:(</span>"。<<nnpc_He "Kylar">>花了会儿时间理了理头发，然后把钱放在柜台上，朝你挥了挥手，再次拿着课本离开了。
+			<br><br>
+			"<<nnpc_He "Kylar">>真的需要改掉爱涂鸦的毛病。"你难以置信地盯着悉尼看了一会儿，但是<<hes>>已经回去工作了。
+		<</if>>
+	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $schoolstate isnot "fourth" and $rng gte 92>>
+		<<if $robinmissing isnot 0>>
+			过了一会儿，<<he>>翻找出一些纸张——似乎是出租记录。<<His>>的视线落在了罗宾的名字上。
+			<br><br>
+			"太不像<<nnpc_him "Robin">>了……<<nnpc_Hes "Robin">>以前从来不会逾期。希望<<nnpc_hes "Robin">>一切安好……"
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 60>>
+			你们被一名学生打断了——是罗宾，手里拿着一本历史教材。<<nnpc_He "Robin">>沉默地将书放在柜台上，仿佛没有注意到你在这儿。
+			<br><br>
+			悉尼眉头微皱，有些担心的样子。"罗宾，这次怎么逾期了。你平时很准时的，一切都还好吗？"
+			<br><br>
+			罗宾默不作声。悉尼摇了摇头，叹了口气。"抱歉，但你知道规矩。"<<He>>拔开笔帽，把记号笔举到罗宾额头上。就在笔尖接触皮肤的一瞬间，<span class="red">罗宾惊叫了一声，</span>开始胡乱地挥舞手臂，呼吸急促，惊慌失措。悉尼看向了你，祈求提供帮助。
+			<<stress 3>><<gstress>>
+			<br><br>
+			……罗宾还需要一点时间。你轻轻把悉尼的手推开，上前拍抚着罗宾的背，最终<<nnpc_He "Robin">>冷静了下来。<<nnpc_He "Robin">>无言地拥住你，静悄悄地离开了。
+			<br><br>
+			"可怜的孩子，"悉尼喃喃自语着，"你知道罗宾到底发生什么了吗？<<nnpc_Hes "Robin">>平时不会这样。"
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20>>
+			你们被一名学生打断了——是罗宾，手里拿着一本历史教材。<<nnpc_He "Robin">>见到你们，露出了微笑。"嗨！我来还一下书。"说着，<<nnpc_He "Robin">>移开了视线。
+			<br><br>
+			悉尼眉头微皱，有些担心的样子。"罗宾，这次怎么逾期了。你平时很准时的，一切都还好吗？"
+			<br><br>
+			"抱歉，我忘记了。"罗宾小声地喃喃自语着，然后俯下了身子。
+			<br><br>
+			"唔。"悉尼思索了一会儿才拔开笔帽，在罗宾额前写下了"<span class="purple">图书罪人 >:(</span>"。<<nnpc_He "Robin">>看上去有点沮丧，但很快就开心地和你们聊起了天。离开的时候，罗宾向你们挥手告别。<<stress -3>><<lstress>>
+		<<elseif $robinaverybeat is 1 and !$sydneySeen.includes("robinbook")>>
+			<<set $sydneySeen.pushUnique("robinbook")>>
+			你被一名学生打断了——是罗宾，手里拿着一本历史教材。<<nnpc_He "Robin">>见到你们，扬起笑容。"嗨！我来还一下书。"
+			<br><br>
+			悉尼眼前一亮。"我总是可以信赖你的准时，罗宾。请保持——" 悉尼的表情僵住了。<<He>>摩挲着书角，上面有些发卷了。"有损坏。"
+			<br><br>
+			罗宾羞愧地低下头。"我……可能是我用书包当武器来对付某个老家伙的时候……那个混蛋居然把手放在<<phim>>的身上。"<<nnpc_He "Robin">>指向你，你点头确认。
+			<br><br>
+			"听上去很高尚，但恕我不接受任何理由……你知道规矩。"罗宾俯身，悉尼拔开笔帽，写下了"<span class="purple">图书罪人 >:(</span>"。<<nnpc_He "Robin">>看上去有点气恼，但很快就开心地和你们聊起了天。离开的时候，罗宾向你们挥手告别。<<stress -3>><<lstress>>
+		<<else>>
+			你被一名学生打断了——是罗宾，手里拿着一本历史教材。<<nnpc_He "Robin">>见到你们，扬起笑容。"嗨！我来还一下书。"
+			<br><br>
+			悉尼眼前一亮。"我总是可以信赖你的准时，罗宾。请保持你的完美记录。"<br><br>你们三人聊了会儿天。离开的时候，罗宾向你们挥手告别。<<stress -3>><<lstress>>
+		<</if>>
+	<<else>>
+		你们的对话被走近柜台的一个<<generatey2>><<person2>><<person>>打断了。<<He>>来还一本<<print either("科学", "数学", "语文", "历史")>>书。
+		<<if $rng gte 95>>
+			"逾期了。你知道规矩。"<<person>>叹了口气，弯下身子。悉尼拔开一只红色耐久性记号笔的笔帽，在<<his>>的额头上写下"<span class="purple">图书罪人>:(</span>"。<<He>>灰溜溜地走开了。
+		<<else>>
+			"感谢你按时归还！"<<person>>不发一言地离开了。悉尼皱了皱眉。
+		<</if>>
+		<<endevent>><<npc "Sydney">><<person1>>
+	<</if>>
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 10 and $sydneyChatState is 1 and $sydneyromance isnot 1>>
+	<<set $sydneyChatState to 2>><<set $sydneyFlirt to 1>><<set _noOptions to 1>>
+	你向悉尼搭话，设法引起<<his>>的注意。<br>"介意我问你一个问题吗？"你点了点头。<br>"其他一些学生会给我讲好笑的事，但我不是很懂他们在说什么。他们还一直朝我挤眉弄眼，有个人甚至想拉我去一个隐密的地方。
+	<<if maleChance($pronoun) gte random(1, 100)>>
+		他
+	<<else>>
+		她
+	<</if>>
+	人很好，但你也知道的，我不能擅离职守，你说呢？我该怎么办才好？"
+	<br><br>
+	<<link [[安慰|Sydney Chat Comfort]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<link [[调情|Sydney Chat Comfort]]>><<set $phase to 2>><<npcincr Sydney purity -2>><</link>><<llspurity>>
+	<br>
+	<<link [[无视|Sydney Chat Comfort]]>><<set $phase to 3>><</link>>
+	<br>
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 10 and $sydneyChatState is 2 and $sydneyromance isnot 1>>
+	<<set $sydneyChatState to 3>>
+	你和悉尼一起聊天。"我不该在工作时闲聊，但是……"<<He>>把书推到一边，然后看向你。这是<<hes>>第一次与你进行完全的眼神交流。"我想，我可以休息会儿。"
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 25 and $sydneyChatState is 3 and $sydneyromance isnot 1>>
+	<<set $sydneyChatState to 4>>
+	你和悉尼聊了会儿天。"从未有人如此用心去了解我，至少很久没有过了……谢谢你。"<<He>>把十字架举到唇边，烙下一吻，然后抵在你的额前。"<<print either("愿主与你同在","愿你幸福")>>。"<<if $demon gte 6>><br><br>……骗人。你避开了<<he>>的视线，轻轻地摇了摇头。<<stress 6>><<gstress>><<else>><br><br>……也许吧。你静静地看着<<he>>，不知为何有些感伤。<<trauma -3>><<ltrauma>><</if>>
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 40 and !["early","first","late"].includes($schoolstate) and !$daily.sydney.SirrisLibrary and $rng gte 88>>
+	<<set $daily.sydney.SirrisLibrary to true>>
+	你和悉尼聊了一会天。
+	<<if !$sydneySeen.includes("Sirris")>>
+		<<set $sydneySeen.pushUnique("Sirris")>>
+		一个声音打断了你们。"我想我看到了我的小Syd。"……听起来是西里斯。<<endevent>><<npc "Sirris">><<person1>>
+		<br><br>
+		悉尼的脸红了，躲避着<<him>>的目光。"我说过的，不要在学校里这么喊我。"悉尼撅起了嘴。
+		<br><br>
+		西里斯哈哈大笑。"啊，是的，对……"<<he>>揉了揉悉尼的头，"我记得你这么说过，小Syd。"悉尼的嘴撅得更高了。
+		<<sydneySirrisResemble>>
+		悉尼看看你，又看看西里斯。<<nnpc_He "Sydney">>开始收拾<<nnpc_him "Sydney">>旁边的柜台，试图显得不那么尴尬。
+		<br><br>
+		"所以你来这儿干嘛？"悉尼双手抱胸。
+		<br>
+		"我就想看看你在干什么，" 西里斯有些尴尬地摆了摆手，"真的那么难为情吗？"
+		<br>
+		"不，但是——"
+		<br>
+		"差点没注意到你也在这，"西里斯一边说，一边打量着你。不知为何，<<he>>刚才似乎忽略了你的存在，就好像这里除了<<him>>和悉尼周围就没有别人了。"我希望你能好好完成你的课业，我也很高兴看见悉尼在班外交到朋友，
+		<<if $delinquency lt 400>>
+			特别是像你这样的好学生。"
+		<<else>>
+			即便是你这样……emmm……欠佳的。"
+		<</if>>
+		<br><br>
+		<<He>>突然靠近你，煞有介事地叹了口气。"<<nnpc_He "Sydney">>有时也挺麻烦的。"<<He>>朝悉尼意味深长地笑了笑，"是吧？"
+		<br>
+		<<if _sydneyStatus.includes("corrupt")>>
+			"那……那只是……有的时候。"悉尼脸红了。
+		<<else>>
+			"没，没那回事！"悉尼双手抱胸，在你面前大喊道。
+		<</if>>
+		<br>
+		西里斯笑了起来。"不管怎么说，<<nnpc_he "Sydney">>是个好孩子。不要把自己逼太紧了，悉尼，稍微休息一下不会耽误什么。"悉尼点了点头，西里斯露出了微笑。"好了，你们该干嘛干嘛去吧，"<<he>>说着，准备离开。<<if $schoolstate is "afternoon">>"你应该也要收工了，放学见！"<<else>>"你们两个，不要上课迟到了！"<</if>>
+	<<else>>
+		<<endevent>><<npc "Sirris">><<person1>>
+		西里斯在柜台旁停下，向悉尼挥了挥手。"就是想趁着休息的空挡来看看你。"<<he>>对悉尼笑了笑，"怎么样，一切都还顺利么？"
+		<<if $sydney.glasses.includes("broken")>>
+			<<His>>注意到了悉尼破碎的眼镜，瞬间变了脸色，沉声质问道："谁。" 悉尼只是默不作声。西里斯皱了皱眉，抚慰了<<nnpc_him "Sydney">>好一会。
+			<br><br>
+			<<He>>转过身来面对着你。"让我来麻烦一个学生可能有些不合适。但是，你有时间的话，能陪悉尼去一趟购物中心吗？<<nnpc_He "Sydney">>不戴眼镜几乎看不清任何东西。<<if $schoolstate is "morning">>我也允许你因此在我的课上迟到。<</if>>"<<He>>没有给你回答的机会。
+		<<elseif $sydney.glasses is "contacts" and !$sydneySeen.includes("contacts")>>
+			<<set $sydneySeen.pushUnique("contacts")>>
+			<<He>>顿住了。"悉尼，你的眼镜呢？"
+			<br>
+			悉尼凑过去，指了指自己的眼睛。"<<pShe>>给我配了副隐形眼镜！这样就方便多了呢。"
+			<br>
+			西里斯笑了。"确实，你现在看起来更可爱了。"<<He>>又转过头来，向你赞许地点了点头。
+		<<elseif $sydneyHairChangedComment>>
+			西里斯对你们笑笑，当注意到悉尼的头发时，<<he>>的眼睛亮了起来。
+				<<if $NPCName[$NPCNameList.indexOf("Sydney")].hairColour isnot "strawberryblond">>
+					"你染发了！看上去真漂亮！我以前也染过，所以可以帮你好好打理。" 西里斯走近柜台边，端详着悉尼的头发。
+					<<if $sydney.hair isnot "ponytail">>
+						"你也把头发放下来了！这样看起来亲切多了，亲爱的。"
+					<</if>>
+				<<elseif $sydney.hair isnot "ponytail">>
+					"你把头发放下来了！现在看起来自然多了。"
+				<</if>>
+				<<Hes>>很惊喜的样子，转头便看向了你。"我猜也有你的一份功劳吧？"
+			<<unset $sydneyHairChangedComment>>
+		<</if>>
+		<br><br>
+		<<print either("两人聊了一会儿天。", "西里斯帮悉尼照看了一会儿柜台。", "当<<he>>注意到没人看向这边时，西里斯一把将悉尼抱进了怀里。")>>
+		<<sydneySirrisResemble>>
+		在此之后，悉尼看起来精神状态好了一些，但仍然感到有些尴尬。
+		<br><br>
+		西里斯注意到了挂在墙上的钟。"差点把时间搞忘了！"<<he>>惊呼了起来，"我不能陪你了。放学见！"
+	<</if>>
+	<<endevent>><<npc "Sydney">><<person1>>
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 10>>
+	<<if !$daily.sydney.clothesWarn and (!$worn.upper.type.includes("school") or !$worn.lower.type.includes("school"))>>
+		<<set $daily.sydney.clothesWarn to true>>
+		你和悉尼聊着天。<br>"你没穿校服，你知道的，"<<He>>左顾右盼一番，"礼顿<<nnpc_title "Leighton">>的规矩很灵活，那我也可以为我喜欢的人打个折。"
+	<<else>>
+		<<if $sydneyromance is 1>>
+			<<set _sydneyChats to 16>>
+		<<else>>
+			<<set _sydneyChats to 12>>
+		<</if>>
+		<<switch random(1, _sydneyChats)>>
+			<<case 1>>
+				你和悉尼聊了一会天。
+				<<if $sydneySeen.includes("initiate")>>
+					<<if $purity lte 500 or $demon gte 6>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							<<He>>对你笑了笑，"啊~堕落的罪人，所有同修都知道了，但我没想过去劝你改变自己。"
+						<<else>>
+							<<He>>笑了笑，眼里满是期许。"神殿的人告诉我你误入了歧途，但回头永远都不算晚……黑暗总是向着光明旅行，不是吗？"
+						<</if>>
+					<<elseif $purity gte 1000 or $angel gte 6>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							<<He>>微笑地看着你。"拜你所赐，我也受到了沾染。你本是我们圣洁的指引，但你却带我走向了堕落……不过我没有介意啦，意思是该轮到我来把你拉下去了！"<<He>>给了你一个wink。
+						<<else>>
+							<<He>>给了你一个灿烂的微笑。"很多人仰慕着你，尤其是神殿的大家。他们把你视作希望与圣洁的象征，一个特别的存在。"<<His>>脸红了，"包，包括我在内。"
+						<</if>>
+					<<else>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							<<He>>脸上挂着笑。"你玷污了我，你还记得吧。我应该找时间来好好回报你。"
+						<<else>>
+							<<He>>静静地笑了。"永远不要停下你的脚步，去追随圣光……'但义人的路好像黎明的光，越照越明，直到日午'。送给你的箴言。"
+						<</if>>
+					<</if>>
+				<<else>>
+					<<if $purity lte 500 or $demon gte 6>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							<<He>>微笑地看着你。"你带我见识了世上的许多罪恶，真的是很刺激呢~"
+						<<else>>
+							<<He>>耐心地笑了笑，"等到我们迷失了，我们才会开始了解自己——"<<He>>紧紧握住胸口的十字架，"天堂或许很远，但依旧可以触碰得到天空……我希望你愿意让我陪你一起走下去。"
+						<</if>>
+					<<elseif $purity gte 1000 or $angel gte 6>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							<<He>>笑了笑，"你带我见识了这世上的许多罪恶，而你却在这里，纯洁如一。或许该轮到我来玷污你了~"
+						<<else>>
+							<<He>>微笑地看着你，"你全身都笼罩着圣洁的光辉……或许你可以和我加入神殿。"
+						<</if>>
+					<<else>>
+						<<He>>微笑地看着你，"也许你有空可以和我一起去神殿看看。"
+					<</if>>
+				<</if>>
+			<<case 2>>
+				你和悉尼正聊着天。"哦，呃。"<<he>>猛地抽回柜台下的手，"为什么柜台下面会粘着口香糖？会有人就为了干这种无聊事情偷偷溜进这里吗？"<<he>>用袖子擦了擦手，脸上带着厌恶的表情。
+			<<case 3>>
+				你和悉尼聊着天。"你有听到过关于多伦的传闻吗？"<<he>>压低了声音，"有人认为<<nnpc_hes "Doren">>是狼人。"
+				<<if _sydneyStatus.includes("corrupt")>>
+					<<He>>咯咯笑了起来。"我好想亲眼看看。想象一下<<nnpc_him "Doren">>跳上讲台嗷叫的样子，那会很搞笑吧？"
+					<<if $kylarenglish gte 1>>
+						<br><br>
+						你回想起<<nnpc_he "Doren">>刚才在语文课上的行为，现在想来还挺好笑的。
+					<</if>>
+				<<else>>
+					<<He>>摇了摇头。"多伦是一位十分可敬的老师，我不知道是什么让人们散播这种可怕的谣言。"
+				<</if>>
+			<<case 4>>
+				你和悉尼聊了一会天。
+				<<if $worn.face.type.includes("glasses") and $sydney.glasses isnot "contacts">>
+					"介意跟我交换一下眼镜吗？"<<he>>对你笑了笑，"我单纯的想试试看。"
+					<<if _sydneyStatus.includes("corrupt")>>
+						<br><br>
+						没等你回答，悉尼便抬手摘掉你的$worn.face.cn_name_cap，又把<<his>>自己的递给你。<<his>>缓缓戴上。"唔，一片模糊，不过意料之中。"<<He>>把自己的眼镜拿了回去，又亲自把你的帮你戴上——但戴得有些歪了，需要你扶一扶。
+					<<else>>
+						<<set _noOptions to 1>>
+						<br><br>
+						<<link [[接受|Sydney Chat Glasses Accept]]>><</link>>
+						<br>
+						<<link [[拒绝|Sydney Chat Glasses Refuse]]>><</link>>
+					<</if>>
+				<<elseif $worn.face.type.includes("glasses") and $sydney.glasses is "contacts">>
+					"记得我戴着眼镜的时候吗？"<<he>>看向你鼻梁上的眼镜，"不用经常更换它们确实方便了许多。"
+				<<elseif $worn.face.type.includes("cool")>>
+					<<if _sydneyStatus.includes("pure")>>
+						<<He>>看着你的$worn.face.cn_name_cap皱了皱眉。"你在学校不能穿这些。"
+						<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 40>>
+							<<He>>把手伸到了你的面前，但很快又收了回去。"我就警告你一下吧，但请不要戴这些了……不过你为什么要这样打扮？"
+						<<else>>
+							<span class="blue"><<He>>从你脸上摘下了$worn.face.cn_name_cap。</span>"我会把它送去你的储物柜。"<<he>>说着，把你的东西放进了盒子中。"你可以待会儿再把它们拿走……所以你为什么要戴着它们呢？"
+							<<facesend `clothesIndex('face',$worn.face)` wardrobe $worn.face.colour $worn.face.accessory_colour>>
+							<<set $worn.face to clone(setup.clothes.face[0])>>
+						<</if>>
+					<<elseif _sydneyStatus.includes("corrupt")>>
+						<<He>>看着你的$worn.face.cn_name_cap咧嘴一笑。"看起来不错。但一些老师可能会很反感这个，小心点。"
+					<<else>>
+						<<He>>看着你的$worn.face.cn_name_cap，皱了皱眉。"你不应该在学校穿这个。"<<He>>想了一会儿，然后摇了摇头。"我尊重你的喜好，但请不要在这里穿……所以你为什么要戴着它们呢？"
+					<</if>>
+					<<npcincr Sydney purity -1>><<lspurity>>
+				<<else>>
+					<<if $sydney.glasses is "contacts">>
+						<<He>>用力揩了揩眼睛。"噢，完蛋，好像有灰落到我的隐形眼镜上。"<<He>>摘下镜片，眯起眼看了好一会儿，然后叹着气把它们戴了回去。"不用给我拿什么清洁剂……等我回家自己清理好了。"
+					<<else>>
+						<<He>>摘下<<sydneyGlasses>>，拿了块布将它擦拭干净。"有点灰了，会看不大清楚东西。"
+						<<if $sydney.glasses is "playerbroken">>
+							<<He>>顿了顿，"嗯，不过是相较于平时来说。" 你心虚地别开眼。
+						<<elseif $sydney.glasses is "broken">>
+							<<He>>顿了顿，"嗯，不过是相较于平时来说。"
+						<</if>>
+					<</if>>
+				<</if>>
+			<<case 5>>
+				<<if !$daily.sydney.writing>>
+					<<set $daily.sydney.writing to true>><<set _noOptions to 1>>
+					<<if $schoolstate is "early" or $schoolstate is "morning">>
+						你准备和悉尼说话，但发现<<hes>>抄着抄着科学笔记就开始犯困了。<<his>>手里的笔往下掉，划过书页，<span class="purple">杵在了你的胳膊上。</span>
+						<br><br>
+						<<link [["叫醒" + $NPCList[0].pronouns.him|Sydney Library Bodywriting Stop]]>><</link>>
+						<br>
+					<<else>>
+						你和悉尼愉快地聊着天。<<He>>拿出一支笔，<<if $worn.upper.name isnot "naked">>撸起你的袖子<<else>>指着你的手臂<</if>>问道："可以吗？"
+						<br><br>
+						<<link [[推开|Sydney Library Bodywriting Stop]]>><</link>>
+						<br>
+					<</if>>
+					<<if $bodywritingLvl gte 1>>
+						<<link [[允许|Sydney Library Bodywriting Allow]]>><<npcincr Sydney lust 1>><</link>><<gslust>><<gbodywriting>>
+						<br>
+					<<else>>
+						<span class="purple">别人在你身上涂写会让你感到不适。</span>
+					<</if>>
+				<<else>>
+					你和悉尼聊了会儿天，<<He>>和你说话的时候一直摁着笔。
+				<</if>>
+			<<case 6>>
+				你和悉尼聊着天。"我是老师的<<daughter>>这件事让很多学生不爽。
+				<<print either("我不得不承认，有时候这确实对他们来说是不公平的", "但这并不意味着我有什么特殊待遇", "但家里的每个工作空间都堆满了一堆又一堆的作业，所以我的生活并没有变得更轻松")>>。"
+			<<case 7>>
+				你和悉尼聊了一会天。
+				<<if _sydneyStatus.includes("corrupt")>>
+					"我同情梅森，人们看<<nnpc_him "Mason">>的眼神我可太熟悉了。"
+				<<else>>
+					"梅森会收到很多奇怪的眼神，就和我一样……我想知道为什么？"
+				<</if>>
+			<<case 8>>
+				你和悉尼聊了一会天。
+				<<if _sydneyStatus.includes("corrupt")>>
+					"这里存在很多关于温特不好的谣言……听说所有的贞操带都在<<nnpc_he "Winter">>那儿，感觉不会是为了什么单纯的目的。"<<He>>咯咯地笑了起来。
+				<<else>>
+					"我听到其他学生谈论温特，他们说<<nnpc_his "Winter">>囤了很多拘束器械。我想知道<<nnpc_hes "Winter">>是不是也是信教的，有这么多贞操器具……"
+				<</if>>
+			<<case 9>>
+				你和悉尼聊着天。"我真希望能上瑞沃的课。<<nnpc_Hes "River">>帮了神殿很多。"
+			<<case 10>>
+				你和悉尼聊着天。<<He>>从还书箱里取出一本书来，递到你的面前。"你看过这本书么？"
+				<br><br>
+				<<if $edenBook is 1 and random(1,5) is 1>>
+					你认出这本书，伊甸曾给你读过。<br>你点点头，悉尼似乎很开心。"有品。那你喜不喜欢<<print either ("父亲的秘密阁楼","猛犬逐凶","大树挡恶徒","撬锁女仆")>>的部分？"
+				<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and random(1,5) is 2>>
+					你认出它是罗宾书架上的一套系列丛书，于是告诉了悉尼，<<He>>饶有兴趣地嗯了一声。"下次我要去问问<<nnpc_him "Robin">>。"
+				<<elseif currentSkillValue('english') gte random(1,1200)>>
+					你认出这是一本<<print either("现象级言情小说","悬疑小说","流行的冒险小说","有意思的末日小说")>>，于是点点头，悉尼似乎很开心。"有品。那你喜不喜欢<<print either ("父亲的秘密阁楼","猛犬逐凶","大树挡恶徒","撬锁女仆")>>的部分？"
+				<<else>>
+					它对你来说有些陌生，于是你诚实地摇摇头。悉尼看上去有些失望，但很快抬起头来。"那我们可以找时间一起看了，我很喜欢其中<<print either ("父亲揭露了","恶犬冲向","大树倒下，挡住了","门锁被")>>——哎呀，抱歉，不能剧透！"
+				<</if>>
+			<<case 11>>
+				你和悉尼聊着天。<<He>>甩了甩头，应该是想把环绕在耳旁的小虫赶走。但<<his>>的<<npcHairColour "Sydney">><<if $sydney.hair is "ponytail">>马尾<<else>>头发<</if>>不小心扫在了你的脸上。虽然完全不疼，但还是把你吓了一跳。悉尼接下来有好几分钟<<if _sydneyStatus.includes("corrupt")>>都在嘲笑你<<else>>都在为吓到你而道歉<</if>>。
+			<<case 12>>
+				你和悉尼聊了一会天。
+				<<if !$daily.sydney.pendant and (["holy", "dark", "eerie"].includes($worn.neck.type)) or $worn.neck.name is "scarf" or $worn.neck.name is "collar" or $worn.head.name is "feathered hair clip">>
+					<<set $daily.sydney.pendant to true>>
+					<<if $worn.head.name is "feathered hair clip" and random(1, 2) is 1>>
+						<<His>>的眼睛落在你不同寻常的发饰上。"哇，居然是真皮的！非常漂亮。"<<He>>伸出手指，抚过着发饰的边缘……<<He>>不由自主地连着你的头发一起摸了好一会儿。
+					<<else>>
+						<<switch $worn.neck.name>>
+							<<case "holy pendant" "holy stole">>
+								<<He>>看着你脖子上的十字架，朝你露出了微笑。
+								<<if _sydneyStatus.includes("corrupt")>>
+									"尽管经历了那么多事，我仍会时刻戴着它……它对我而言意味着很多。"
+								<<else>>
+									"戴着它有没有让你感觉安心多了？"
+								<</if>>
+								<<He>>摩挲着自己的十字架。<<npcincr Sydney love 1>><<glove>>
+							<<case "stone pendant">>
+								<<He>>饶有兴趣地看着你的石质吊坠。"这不是标准形制，但……我想我在哪儿见过。" <<npcincr Sydney love 1>><<glove>>
+							<<case "dark pendant">>
+								<<He>>突然不说话，沉默了很久。你看向<<him>>，发现<<he>>正呆滞地盯着你的暗黑吊坠。你打了个响指，<<he>>突然开始大喘，双手捂嘴，显得异常紧张。"抱歉，我肯定是太累了。"<<npcincr Sydney purity -2>><<lspurity>>
+							<<case "cat bell collar" "cow bell">>
+								<<if ["early","morning","first","second"].includes($schoolstate)>>
+									你发现<<him>>在犯困，于是拨了拨你的$worn.neck.cn_name_cap。铃声很响，足以让<<him>>惊醒。"谢啦。好可爱的项圈，我在<<sydneymum>>新商店的包裹里看到过很多次。"
+								<<else>>
+									你听见一声铃响。悉尼拨了拨你的$worn.neck.cn_name_cap。"好可爱的项圈，我在<<sydneymum>>新商店的包裹里看到过很多次。"
+								<</if>>
+							<<case "spiked collar" "spiked collar with leash">>
+								悉尼瞥了一眼你的柳钉项圈。"它们看上去……有点危险。甚至可以说……凶险
+								<<if $speech_attitude is "meek">>
+									，相比之下你就显得很温柔了。"
+								<<elseif $speech_attitude is "bratty">>
+									。很配你，我是说你戴着很好看。"
+								<<else>>
+									，我不知道如何评价。"
+								<</if>>
+							<<case "scarf">>
+								<<if ["early","morning","first","second"].includes($schoolstate)>>
+									你感觉脖子被拽住了，悉尼心不在焉地玩着你围巾的尾巴。
+								<<else>>
+									你感觉到围巾从肩膀上被拿走了。当你伸手去抓时，却发现它又被重新系在了你的身上。"你之前系错了，"
+								<</if>>
+								<<if $sydneyromance is 1>>
+									<<He>>揪住你围巾的流苏，把你给拽了过来。吻伴随着笑声随之落在了你的脸颊上。"抓住你了。" <<npcincr Sydney lust 1>><<glust>>
+								<<else>>
+									<<He>>轻轻地笑了起来。
+								<</if>>
+							<<case "collar">>
+								你感觉脖子被拽住了。悉尼拉着你项圈上的链子，看起来很好奇。
+								<<if _sydneyStatus.includes("corrupt") and $sydneyromance is 1>>
+									<<He>>坏笑地把你拉过去，在你脸上亲了一口。"真是个乖<<girl>>，"<<he>>伏在了你的耳边，压低了声音。"我的乖<<girl>>。"
+									<<npcincr Sydney lust 2>><<npcincr Sydney purity -2>><<gslust>><<lspurity>>
+								<<else>>
+									"你为什么要戴这个？"<<if _sydneyStatus.includes("Lust")>><<he>>的脸唰的一下变红了，<<else>><<he>>满脸不解，<</if>>用手扯了扯你的狗链。"你取得下来吗？呃……"
+									<<npcincr Sydney lust 1>><<npcincr Sydney purity -2>><<gslust>><<lspurity>>
+								<</if>>
+							<<default>>
+						<</switch>>
+					<</if>>
+				<<else>>
+					<<He>>不时摩挲着胸前的十字架。
+				<</if>>
+			<<case 13>>
+				<<if $templePromised is "Sydney">>
+					你和悉尼聊了会儿天。<<He>>抚摸着手上的戒指，然后笑了起来。<<trauma -12>><<lltrauma>>
+				<<else>>
+					你和悉尼聊着天，<<He>>认真地倾听着。
+				<</if>>
+			<<case 14>>
+				你和悉尼聊了一会天。
+				<<if ["early","morning","first","second"].includes($schoolstate) and $rng gte 71 and !$daily.sydney.kissFail>>
+					<<set $daily.sydney.kissFail to true>>
+					<<He>>俯身来吻你的脸颊，但从旁边错过，一头撞在了柜台上。"嗷，"<<he>>哀嚎了起来<<if $sydney.glasses isnot "contacts">>哀嚎着扶了扶脸上的<<sydneyGlasses>><</if>>，"额，刚才好尴尬……我可以再来一次吗？"
+				<<else>>
+					<<He>>吻过你的脸颊，咯咯地笑了起来<<if _sydneyStatus.includes("corrupt")>>，然后扳过你的脸，亲上了另一边的脸颊<</if>>。
+					<<if $daily.sydney.kissFail>>
+						"这次别出岔子。"<<he>>悄悄地对自己说道。
+					<<else>>
+						<<if _sydneyStatus.includes("corrupt")>>
+							"我喜欢这样碰你，"<<he>>在你耳边压低了声音，"让我想把你全身都尝一遍。"
+						<<else>>
+							"每次亲你我都会头晕目眩。"<<he>>在你耳边悄声说道。
+						<</if>>
+					<</if>>
+					<<npcincr Sydney lust 1>><<glust>><<arousal 200>><<garousal>>
+					<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+						<br><br>
+						凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+					<</if>>
+				<</if>>
+			<<case 15>>
+				<<set _noOptions to 1>>
+				你和悉尼聊了一会天。
+				<<if ["early","morning","first","second"].includes($schoolstate)>>
+					<<He>>靠了过来，几乎要瘫倒在你的怀里。
+					<<if _sydneyStatus.includes("corrupt")>>
+						"别动，"<<he>>低声呢喃着，"让我打个盹。"
+					<<else>>
+						"如果我在你怀里睡着了，希望你不要介意。"<<he>>打了个哈欠。
+					<</if>>
+				<<else>>
+					悉尼突然拥住你。"你好暖和，"<<he>>轻声地咕哝着，"也很舒服。"<<He>>假装打了个哈欠，然后依偎进你的怀里。
+				<</if>>
+				<br><br>
+				<<link [[轻抚头发 (0:30)|Sydney Chat Nap Stroke]]>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><</link>><<glove>><<glust>>
+				<br>
+				<<link [[推开|Sydney Chat Nap Push]]>><<npcincr Sydney love -1>><</link>><<llove>>
+			<<case 16>>
+				你和悉尼聊着天。<<He>>摸上你的头发<<if ($sydney.hair is "ponytail" and ($hairtype is "ponytail" or $hairtype is "flat ponytail")) or ($haircolour is $NPCName[$NPCNameList.indexOf("Sydney")].hairColour and $hairfringecolour is $NPCName[$NPCNameList.indexOf("Sydney")].hairColour)>>。"我们一样诶！"<<he>>兴奋地说道<</if>>，手指滑过你的发丝。
+				<br><br>
+				<<if $harpy gte 4 and $transformationParts.bird.plumage isnot "hidden" and random(1, 2) is 1>>
+					<<His>>的手轻轻抚下，直至碰到你的羽毛——<<He>>睁大了双眼，一脸不可思议地看着你。<<if $rng is 1>>"这是一种巨鹰的羽毛，我好像在哪里见过……"<<else>>"这，这些是……"<</if>><<He>>似乎想起来什么，但很快镇定了下来。
+					<br><br>
+				<<elseif $angel gte 4 and $transformationParts.angel.halo isnot "hidden">>
+					<<His>>的眼睛微微睁大，你看见你的光环倒映在<<his>>的<<if $sydney.glasses isnot "contacts">><<sydneyGlasses>>上<<else>>瞳孔里<</if>>。<<He>>眨巴着眼睛，拿手揉脸，但是倒影随之消失了。"我好像看到了……"<<He>>摇摇头，看起来<<if _sydneyStatus.includes("corrupt")>>有些抵触<<else>>有些眩晕<</if>>。<<npcincr Sydney purity 2>><<gspurity>>
+					<br><br>
+				<<elseif $fallenangel gte 2 and $transformationParts.fallenAngel.halo isnot "hidden">>
+					<<His>>的眼睛微微睁大，你看见你破碎的光环倒映在<<his>>的<<if $sydney.glasses isnot "contacts">><<sydneyGlasses>>上<<else>>瞳孔里<</if>>。<<He>>眨巴着眼睛，拿手揉脸，但是倒影随之消失了。"我好像看到了……"<<He>>摇摇头，看起来<<if _sydneyStatus.includes("corrupt")>>有些内疚<<else>>有些悲伤<</if>>。<<npcincr Sydney purity -2>><<lspurity>>
+					<br><br>
+				<<elseif $demon gte 2 and $transformationParts.demon.horns isnot "hidden">>
+					<<His>>的眼睛微微睁大，你看见你的双角倒映在<<his>>的<<if $sydney.glasses isnot "contacts">><<sydneyGlasses>>上<<else>>瞳孔里<</if>>。<<He>>眨巴着眼睛，拿手揉脸，但是倒影随之消失了。"我感觉我看到了……"<<He>>摇摇头，看上去<<if _sydneyStatus.includes("corrupt")>>有些兴奋<<else>>有些恍惚<</if>>。<<npcincr Sydney purity -2>><<lspurity>>
+					<br><br>
+				<<elseif $cow gte 2 and $transformationParts.cow.horns isnot "hidden">>
+					<<He>>的目光停在你头顶的双角上。"我在<<sydneymum>>新店里拆箱的时候看到过这些道具，"<<he>>思考了一番，"我想知道它们是拿来干什么用的……还有，他们居然准许你在这儿戴？！"
+					<br><br>
+				<<elseif ($wolfgirl gte 4 and $transformationParts.wolf.ears isnot "hidden") or ($cat gte 4 and $transformationParts.cat.ears isnot "hidden") or ($fox gte 4 and $transformationParts.fox.ears isnot "hidden")>>
+					<<He>>的目光停在你的<<if $wolfgirl gte 4>>狼<<elseif $fox gt 4>>狐<<else>>猫<</if>>耳上。"我在<<sydneymum>>新店里拆箱的时候看到过这些道具，"<<he>>说道："我想知道它们是拿来干什么用的……还有，他们居然准你在这儿戴？！"
+					<br><br>
+				/* 北极星模组 */
+				<<elseif ($dragon gte 1 and $transformationParts.dragon.eyes isnot "disabled")>>
+					<<He>>看着你的眼睛，"我以前没有见过这种的隐形眼镜。"
+					<br><br>
+				/* 北极星 */
+				<</if>>
+				过了一会儿，悉尼才放下手。"你的头发好软。"<<he>>笑了起来。<<if $sydneySeen.includes("hairchange")>>"我很高兴你也让我换了个发型。"<</if>>
+			<<default>>
+				你和悉尼聊天。没有发生特别的事情。（这是一个占位符。）
+		<</switch>>
+	<</if>>
+<<else>>
+	<<if !$daily.sydney.clothesWarn and (!$worn.upper.type.includes("school") or !$worn.lower.type.includes("school"))>>
+		<<set $daily.sydney.clothesWarn to true>>
+		你试着和悉尼搭话。<<He>>拿笔指了指你。"你要一件校服，对吧？尽管开口就是了，我会带你去更衣室。"
+	<<else>>
+		<<switch random(1, 8)>>
+			<<case 1>>
+				你试着和悉尼搭话。<<He>>似乎在听
+				<<if $schoolstate is "early" or $schoolstate is "morning">>
+					，一直努力地保持着清醒。
+				<<else>>
+					，但看上去依旧沉浸在工作之中。
+				<</if>>
+			<<case 2>>
+				你试着和悉尼搭话。"三天逾期，十六次违规，得和<<nnpc_title "Leighton">>说说了……抱歉，你在说什么？"
+			<<case 3>>
+				你试着和悉尼搭话。<<He>>焦虑地摩挲着胸前的十字架。
+			<<case 4>>
+				你试着和悉尼搭话。话刚说到一半，<<he>>便重重地在纸上盖了一章。<br>"抱歉。你刚才在说什么？"
+			<<case 5>>
+				你试着和悉尼闲聊。<<He>>大部分时间只是静静地听着。
+			<<case 6>>
+				你和悉尼聊着天，<<He>>为刚才没能注意听你讲话而道歉。
+			<<case 7>>
+				你和悉尼聊着天，但一个<<generatey2>><<person2>><<person>>突然靠近了柜台——<<He>>是来还一本<<print either("科学", "数学", "语文", "历史")>>教材的。
+					<<if $rng gte 50>>
+						"逾期了。你知道规矩。"<<person>>叹了口气，弯下身子。悉尼拔开一只红色耐久性记号笔的笔帽，在<<his>>的额头上写下"<span class="purple">图书罪人>:(</span>"。<<He>>灰溜溜地走开了。
+					<<else>>
+						"感谢你按时归还！"<<person>>不发一言地离开了。悉尼皱了皱眉。
+					<</if>>
+				<<endevent>><<npc "Sydney">><<person1>>
+			<<case 8>>
+				你试着和悉尼搭话，但一个<<generatey2>><<person2>><<person>>走近了柜台——<<He>>要了一件新校服衬衫。
+				"请走这边。" 悉尼领着<<him>>到了拐角。过了一会儿，<<nnpc_he "Sydney">>回来了。<<person>>离开图书馆，给身边的朋友展示着自己的新校服。
+				<<endevent>><<npc "Sydney">><<person1>>
+		<</switch>>
+	<</if>>
+<</if>>
+<<if _noOptions isnot 1>>
+	<br><br>
+	<<sydneyOptions>>
+<</if>>

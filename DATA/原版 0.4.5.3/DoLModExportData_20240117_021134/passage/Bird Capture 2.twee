@@ -1,0 +1,42 @@
+:: Bird Capture 2 []
+<<effects>>
+
+
+<<if $bird.state is undefined>>
+你环顾四周的圆形房间。小骨头散落在地上。除了破碎的墙，没有出路。有一个巨大的水池，由破碎的砖石堆成，水池是露天的，里面充满了雨水。在房间的另一边，崖壁的旁边有一个巢，是用小木棍和小树枝做的。你看到房间后面有一扇很大的木制活板门，但它被生锈的铁锁封住了。
+<br><br>
+	<<bird_init>>
+	<<set $hunger to 1800>>
+	<<if $monster is 1>>
+		哈比站在你和出口之间。<<bHis>>巨大的翅膀从肩膀上伸展开来。<<bHe>>看着你。
+		<br><br>
+		"我是巨鹰，"<<bhe>>说着，伸展开一边的翅膀。"我找到了自己的<<wife>>。"
+		<br><br>
+	<<else>>
+		巨鹰站在你和出口之间，<<bhis>>深色的眼睛注视着你。
+	<</if>>
+<<else>>
+	你回到了塔顶的圆形房间。小骨头仍然散落在地上。<<beasttype>>看着你。
+<</if>>
+<br><br>
+
+<<if ($leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound")>>
+	<<bHe>>好奇地看着你身上的束缚，突然向你猛地伸出爪子。你吓得缩成一团，但当你睁开眼低头看时，<span class="green">你脚上的绑带已经碎成布条了。</span>
+	<<unbind>>
+	<br><br>
+<</if>>
+
+
+<<set $bird.state to "hunting">>
+<<set $bird.timer to 20>>
+
+
+
+<<link [[求饶|Bird Capture Say]]>><<sub 1>><<bird_stockholm 1>><</link>><<gbirdstockholm>>
+<br>
+<<if $leftarm isnot "bound" or $rightarm isnot "bound">>
+	<<link [[击打|Bird Capture Punch]]>><<def 1>><<npcincr "Great Hawk" love -1>><<npcincr "Great Hawk" dom -1>><</link>><<ldom>><<llove>>
+	<br>
+<</if>>
+<<link [[等待|Bird Capture Wait]]>><</link>>
+<br>

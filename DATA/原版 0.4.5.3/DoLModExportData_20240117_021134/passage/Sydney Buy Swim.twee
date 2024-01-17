@@ -1,0 +1,171 @@
+:: Sydney Buy Swim []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>><<run statusCheck("Sydney")>>
+<<switch $select>>
+	<<case "school">>
+		你为悉尼挑选了适合学校的泳装。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<if $sydneyromance is 1>>
+				"虽然款式有些无聊，但是……好吧，没问题。如果只有你一个人能够欣赏，那可能会更好。"
+				<<set _accept to true>>
+			<<else>>
+				悉尼皱了皱眉，"这有点无聊，不是吗？我很感激你的提议，不过，恕我拒绝。"
+				<br><br>
+			<</if>>
+		<<else>>
+			悉尼笑了笑，"尽管可能有些太露了，但我还是很喜欢的。"
+			<<set _accept to true>>
+		<</if>>
+	<<case "normal">>
+		你把<<if $pronoun is "m">>沙滩裤<<else>>普通比基尼<</if>>递给悉尼。
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼笑了笑。
+			<<if $sydney.swim is "lewd">>
+				"好吧，我会想念这些性感穿着的。"
+			<<else>>
+				"我终于可以显露本色了，啊~真好。"
+			<</if>>
+		<<else>>
+			悉尼紧张地笑了笑，"这在学校是不合适的，但是……穿着性感又无妨。"
+		<</if>>
+		<<set _accept to true>>
+	<<case "lewd">>
+		你把<<if $pronoun is "m">>速干泳裤<<else>>暴露式比基尼<</if>>递给悉尼。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>的表情非常欠揍。"我敢打赌，你一定等着看我穿这样的衣服很久了！当然，我可以纵容你罪恶的思想，或者说为什么不呢？"
+			<<set _accept to true>>
+		<<else>>
+			<<if $sydneyromance is 1 or _sydneyStatus.includes("Lust")>>
+				<<His>>的脸唰地一下变红了。"这……这有点……它的布料那么少，那么暴露，而且……"<<He>>吞吞吐吐地组织着语言，"这……这真的可以穿这个吗？"你花了很长时间去向悉尼担保。
+				<<set _accept to true>>
+			<<else>>
+				<<His>>的脸瞬间变红。"我——我不能穿这个！太暴露了！很抱歉，我做不到。"
+			<</if>>
+		<</if>>
+	<<case "crossdress">>
+		你把<<if $pronoun is "m">>普通比基尼<<else>>沙滩裤<</if>>递给悉尼。
+		<<if $daily.sydney.convince>>
+			"我依然不会去穿的！"悉尼提高了音量，对你撇了撇嘴。
+		<<elseif $pronoun is "m">>
+			<<if $NPCName[$NPCNameList.indexOf("Sydney")].penissize gte 3>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					<<He>>一脸震惊地看着你递来的衣服。"对不起，但是……呃，我某些地方有些……太内个了。"<<He>>把裤子提了提，"不过谢谢你。"
+				<<else>>
+					<<His>>的脸唰地一下变红了。"那、那是给女孩子的！每个人都会看到我的……那个……这实在太……对不起，我做不到。"
+				<</if>>
+			<<else>>
+				<<if $sydneySeen.includes("swimcross")>>
+					<<His>>闪过一瞬红晕，但还是点了点头。
+					<<set _accept to true>>
+				<<elseif _sydneyStatus.includes("corrupt")>>
+					当你拿着比基尼时，<<him>>的眼睛睁大了。"你在开玩笑对吧？一定是……天，你居然是认真的。"
+					<br><br>
+					<<if $sydneyromance is 1 or _sydneyStatus.includes("Lust")>>
+						<<He>>甚至真的思考了一会儿。"你知道吗？我确实想试试。但公平起见，你也必须要穿。"
+						<<set _accept to true>>
+					<<else>>
+						<<He>>甚至真的思考了一会儿。"感觉挺不错的，但是……我不知道，我有些抗拒。"
+						<<set _convince to true>>
+					<</if>>
+				<<else>>
+					当你拿着比基尼时，<<He>>咽了口口水。"可是，那是给女孩子的！我不能……我不能穿那个。我……能，能能……吗？"
+					<<if $sydneyromance is 1 or _sydneyStatus.includes("Lust")>>
+						<<He>>思索了片刻。"如……如果这是你想让我穿的，那我穿。"<<He>>害羞地捂住了脸。
+						<<set _accept to true>>
+					<<else>>
+						<<He>>皱着眉思索了一会儿，"不……不。不不不，绝对不可以。"
+						<<set _convince to true>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $NPCName[$NPCNameList.indexOf("Sydney")].breastsize gte 4>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					<<He>>一脸震惊地看着你递来的衣服。"对不起，但是……呃，我某些地方有些……太内个了。"<<He>>把<<his>>的<<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>软软的弹起。"虽然很刺激。"
+				<<else>>
+					<<His>>的脸唰的一下子变红了，"我不能光着上身！每个人都会看到我的……它们太……对不起，我们不能这样。"
+				<</if>>
+			<<else>>
+				<<if $sydneySeen.includes("swimcross")>>
+					<<His>>闪过一瞬红晕，但还是点了点头。
+					<<set _accept to true>>
+				<<elseif _sydneyStatus.includes("corrupt")>>
+					当你拿着沙滩裤时，<<him>>的眼睛猛地睁大了。"你在开玩笑对吧？一定是……天，你居然是认真的。"
+					<br><br>
+					<<if $sydneyromance is 1 or _sydneyStatus.includes("Lust")>>
+						<<He>>甚至真的思考了一会儿。"你知道吗？我确实想试试。但公平起见，你也必须要穿。"
+						<<set _accept to true>>
+					<<else>>
+						<<He>>甚至真的思考了一会儿。"听起来很刺激，但是……我不知道，我不是很喜欢光着上身。"
+						<<set _convince to true>>
+					<</if>>
+				<<else>>
+					当你举起沙滩裤时，<<His>>的眼睛猛地睁大了。"但，但是，那是给男孩子穿的！我不能……我不能穿那个。我……我真的可以……吗？"
+					<<if $sydneyromance is 1 or _sydneyStatus.includes("Lust")>>
+						<<He>>甚至真的思考了一会儿。"如果……如果这是你想让我穿的，我穿。"<<He>>用手捂住了脸。
+						<<set _accept to true>>
+					<<else>>
+						<<He>>甚至真的思考了一会儿。"不……不。不不不，绝对不行。"
+						<<set _convince to true>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+<</switch>>
+<<if _accept>>
+	<<trauma -3>><<npcincr Sydney love 1>><<ltrauma>><<glove>>
+	<<switch $select>>
+		<<case "school">>
+			<<if $pronoun is "m">>
+				<<set $money -= 8000>>
+			<<else>>
+				<<set $money -= 2500>>
+			<</if>>
+			<<npcincr Sydney purity 2>><<gspurity>>
+		<<case "normal">>
+			<<if $pronoun is "m">>
+				<<set $money -= 3500>>
+			<<else>>
+				<<set $money -= 4000>>
+			<</if>>
+		<<case "lewd">>
+			<<if $pronoun is "m">>
+				<<set $money -= 2500>>
+			<<else>>
+				<<set $money -= 4800>>
+			<</if>>
+			<<npcincr Sydney lust 1>><<gslust>><<npcincr Sydney purity -2>><<lspurity>>
+		<<case "crossdress">>
+			<<if $pronoun is "m">>
+				<<set $money -= 4000>>
+			<<else>>
+				<<set $money -= 3500>>
+			<</if>>
+			<<npcincr Sydney lust 3>><<ggslust>><<npcincr Sydney purity -5>><<llspurity>>
+	<</switch>>
+	<<set $sydney.swim to $select>>
+<</if>>
+<br><br>
+<<if _accept>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<He>>接过了衣服，
+	<<else>>
+		你把衣服递给<<him>>，<<He>>小心翼翼地接过，
+	<</if>>
+	然后朝更衣室走去。
+	<br><br>
+	<<link [[等待 (0:05)|Sydney Shopping Swim Wait]]>><<pass 5>><</link>>
+	<br>
+	<<link [[偷看悉尼 (0:05)|Sydney Shopping Swim Peek]]>><<npcincr Sydney lust 1>><<pass 5>><</link>><<glust>><<promiscuous1>>
+	<br>
+	<<if $promiscuity gte 35>>
+		<<link [[靠近悉尼|Sydney Shopping Swim Enter]]>><<npcincr Sydney lust 1>><</link>><<glust>><<promiscuous3>><<sydneyWarning corrupt>>
+		<br>
+	<</if>>
+<<else>>
+	<<if _convince and !$daily.sydney.convince>>
+		<<link [[说服悉尼|Sydney Shopping Swim Convince]]>><</link>><<promiscuous1>>
+		<br>
+	<</if>>
+	<<link [[继续|Sydney Shopping Swim]]>><<unset $select>><</link>>
+	<br>
+<</if>>

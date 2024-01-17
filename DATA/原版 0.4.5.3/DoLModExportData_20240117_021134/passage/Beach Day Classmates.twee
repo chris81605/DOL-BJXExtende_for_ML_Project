@@ -1,0 +1,40 @@
+:: Beach Day Classmates []
+<<effects>>
+<<if $phase is 0>>
+	当你的四个同学走进你的时候，你停下来并对他们挥手。
+	<br><br>
+	<<if $cool gte 160>>
+		他们跑了过来，表示非常兴奋能在学校外面遇到你，他们和你拍了一些自拍照并且大笑，在他们去干别的事情之前他们基本上度过了一段美好时光。<<gcool>><<lstress>><<status 5>><<stress -3>>
+		<br><br>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 51>>
+			他们跑了过来，把你抓到沙滩上。每个人都分别抓着你的四肢往水里拖。等到水够深的时候就直接把你头朝下扔进了海里，弄得你从头到脚都湿透了。他们哈哈大笑着离开，边走边聊着天。<<lcool>><<gstress>><<status -5>><<stress 10>>
+			<br><br>
+			<<link [[继续|Sea Beach]]>><<set $eventskip to 1>><</link>>
+		<<else>>
+			他们直接从你身边跑过，甚至都没多看你一眼。你瞥了眼身后，看见他们边笑边和他们的朋友开玩笑，那是一个<<generatey1>><<person1>><<person>>。你感觉冲他们招手这事做得有点蠢。
+			<br><br>
+			<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+		<</if>>
+	<</if>>
+<<else>>
+	由于不确定他们的意图，你只好逃之夭夭。
+
+	<<if $athleticsSuccess>>
+		<span class="green">你的同学根本就跟不上你的速度。</span>当他们明显处于下风时，他们直接放弃追逐，转而去做自己的事了。
+		<br><br>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+	<<elseif $cool gte 160>>
+		<span class="green">他们没来跟着你。</span>你放慢了脚步，继续前进。
+		<br><br>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><</link>>
+	<<else>>
+		你试着逃跑，<span class="red">但你的同学跑得比你更快。</span>他们跑来，将你按进了沙中。每个人都抓住了你的一肢，架着你往水里走去。
+		<br><br>
+		等到水够深了，他们就把你头朝下扔进海里，让你全身湿透。他们哈哈大笑着离开，边走边聊。<<lcool>><<gstress>><<status -5>><<stress 10>>
+		<br><br>
+		<<link [[继续|Sea Beach]]>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</if>>

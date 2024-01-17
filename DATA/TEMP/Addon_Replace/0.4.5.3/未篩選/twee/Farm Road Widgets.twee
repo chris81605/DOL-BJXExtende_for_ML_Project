@@ -1,0 +1,251 @@
+:: Farm Road Widgets [widget]
+<<widget "hitchhike">>
+	<<rng>>
+	<<if $exposed gt 1>>
+		你听到一辆车靠近。<<covered>>你隐藏
+		<<if $rng gte 81>>
+			在灌木丛后面
+		<<elseif $rng gte 61>>
+			在沟里
+		<<elseif $rng gte 41>>
+			在树后面
+		<<elseif $rng gte 21>>
+			在岩石后面
+		<<else>>
+			在小树林里
+		<</if>>
+		在路边直到它经过。<<gstress>><<stress 6>>
+		<br><br>
+		<<destinationfarmroad>>
+	<<else>>
+		<<cleareventpool>>
+		<<addevent "hitchike_1">>
+		<<addevent "hitchike_2">>
+		<<addevent "hitchike_3">>
+		<<addevent "hitchike_4">>
+		<<addevent "hitchike_5">>
+		<<addevent "hitchike_6">>
+		<<addevent "hitchike_7">>
+		<<addevent "hitchike_8" 0.5>>
+		<<addevent "hitchike_9">>
+		<<runeventpool>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_1">>
+	<<generate1>><<person1>>
+	一辆车停在你身边。车窗降了下来，里面坐着一个<<person>>。
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"要搭便车吗？"<<he>>说。
+	<<if $exposed gte 1>>
+		<<He>>要么不在乎你的穿着状况，要么掩饰得很好。
+	<</if>>
+	"你往哪边走？"
+
+	<br><br>
+
+	<<entertownicon>><<link [[去镇上|Farm Hitchhike Ask]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [[去农场|Farm Hitchhike Ask]]>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[走开|Farm Hitchhike Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchike_2">>
+	<<generate1>><<person1>>
+	一辆车停在你身边。车窗降了下来，里面坐着一个<<person>>。
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"我看你在那里需要帮助，<<girl>>，"<<he>>说。"我会带你去你想去的地方。"<<He>>打开车门。"但你得让我觉得值得，跪下。"
+	<br><br>
+
+	<<if $promiscuity gte 55>>
+		<<link [[下跪|Farm Hitchhike Kneel]]>><</link>><<promiscuous4>>
+		<br>
+	<</if>>
+	<<if $exposed gte 1 and random(1, 2) is 2>>
+		<<link [[拒绝|Farm Hitchhike Kneel Refuse 2]]>><</link>>
+	<<else>>
+		<<link [[拒绝|Farm Hitchhike Kneel Refuse]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_3">>
+	<<generate1>><<person1>>
+	一辆车停在你身边。车窗降了下来，里面坐着一个<<person>>。
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"你一个人在这里干什么？"<<he>>带着狡黠的微笑问道。
+	<<if $exposed gte 1>>"你还穿成这样！你真是个勇敢的<<girl>>。"<</if>>
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<entertownicon>><<link [[说你要去镇上|Farm Hitchhike Exposed Undies]]>><<set $phase to 1>><</link>>
+		<br>
+		<<farmicon "barn">><<link [[说你要去农场|Farm Hitchhike Exposed Undies]]>><<set $phase to 2>><</link>>
+	<<else>>
+		<<entertownicon>><<link [[说你要去镇上|Farm Hitchhike Exposed]]>><<set $phase to 1>><</link>>
+		<br>
+		<<farmicon "barn">><<link [[说你要去农场|Farm Hitchhike Exposed]]>><<set $phase to 2>><</link>>
+	<</if>>
+	<br>
+	<<refuseicon>><<link [[走开|Farm Hitchhike Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchike_4">>
+	<<generate1>><<generate2>><<person1>>
+	一辆车停在你身边。车窗降了下来，里面坐着一个<<person>>。一个<<person2>><<person>>靠在<<person1>><<him>>身边。
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+	<<person2>>
+	<<if $player.gender_appearance is "m">>
+		"帅哥，"
+	<<else>>
+		"可爱的<<girl>>，"
+	<</if>>
+	<<he>>说。"我们送你一程。不如你告诉我们你要去哪？你可以坐在我们中间。"
+	<br><br>
+
+	<<entertownicon>><<link [["接受并说你要去镇上 (0:15)"|Farm Hitchhike Pair]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["接受并说你要去农场 (0:15)"|Farm Hitchhike Pair]]>><<set $phase to 2>><</link>>
+	<br>
+	<<if $exposed gte 1 and random(1, 2) is 2>>
+		<<refuseicon>><<link [[拒绝|Farm Hitchhike Pair Refuse 2]]>><</link>>
+	<<else>>
+		<<refuseicon>><<link [[拒绝|Farm Hitchhike Pair Refuse]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "hitchike_5">>
+	<<generate1>>
+	不一会儿，一辆车就出现在地平线上。司机注意到你后把车停在了路边。车窗摇了下来。
+	<br><br>
+	"要搭便车吗？"司机，一个<<person1>><<person>>问道。
+	<br><br>
+	<<entertownicon>><<link [["接受并说你要去镇上 (0:15)"|Farm Hitchhike Accept]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["接受并说你要去农场 (0:15)"|Farm Hitchhike Accept]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[拒绝|Farm Hitchhike Decline]]>><<pass 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_6">>
+	<<generate1>>
+	一辆车停在你旁边。里面的<<person1>><<person>>摇下车窗向你搭话道，"嘿，你要去哪里？"
+
+	<br><br>
+	<<entertownicon>><<link [["说你要去镇上 (0:15)"|Farm Hitchhike Cost Accept]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [["说你要去农场 (0:15)"|Farm Hitchhike Cost Accept]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[拒绝|Farm Hitchhike Cost Decline]]>><<pass 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_7">>
+	你听到了靠近的引擎声，一辆汽车在弯道上疾驰而过，驶过一个深坑。
+	<br><br>
+	<span class="teal">冷水溅得你浑身都是，把你的衣服都淋湿了。</span><<stress 5>><<gstress>>
+	<br><br>
+	<<wet_all>>
+	<<destinationfarmroad>>
+<</widget>>
+
+<<widget "hitchike_8">>
+	<<generate1>><<generate2>><<generate3>>
+	一辆车停在你旁边。一群<<fullGroup>>下车。
+	<br><br>
+
+	"一个人吗？"<<person1>><<person>>讥笑着站到了你身后。其他两人也靠近过来。"很好。你最好配合一下。这里可没人能救你。"<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[跑|Farm Hitchhike Run]]>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+	<<link [[站在原地|Farm Hitchhike Rape]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "hitchike_9">>
+	<<generate1>><<person1>>
+	一辆老旧的卡车停在路边，车上坐着坐着一位<<person>>。
+	<<if $exposed gte 1>><<covered>><</if>>
+	<br><br>
+
+	"嘿，这儿呢，想去哪儿？"<<he>>摁了摁鸣笛
+
+	<<if $exposed gte 1>>
+		<<He>>简短地上下打量了你一番，但并没有说些什么。
+	<</if>>
+	"你往哪边走？"
+
+	<br><br>
+
+	<<entertownicon>><<link [[去镇上|Farm Hitchhike Assistant]]>><<set $phase to 1>><</link>>
+	<br>
+	<<farmicon "barn">><<link [[去农场|Farm Hitchhike Assistant]]>><<set $phase to 2>><</link>>
+	<br>
+	<<refuseicon>><<link [[走开|Farm Hitchhike Assistant Refuse]]>><</link>>
+<</widget>>
+
+<<widget "hitchhike_journey">>
+	<<pass 15>>
+	<<if $phase is 1>>
+		当<<person>>开车时，你凝视着窗外，看着群山滚滚而过。<<He>>沿着小路走了一条奇怪的路线，但还是出现在了丰收街。你从车里爬出来，然后<<he>>开车走了。
+		<br><br>
+		<<endcombat>>
+		<<link [[继续|Harvest Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		当<<person>>开车时，你凝视着窗外，看着群山滚滚而过。<<He>>沿着小路走了一条奇怪的路线，但还是出现在了农田里。你从车里爬出来，然后<<he>>开车走了。
+		<br><br>
+		<<endcombat>>
+		<<link [[继续|Farmland]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "hitchhike_journey_nude">>
+	<<pass 15>>
+	<<if $phase is 1>>
+		在剩下的旅程中，<<He>>一直抓着你的衣服，直到你们到达镇子上<<He>>才松开了手。
+		<br><br>
+		<<He>>饶有兴趣地看着你在车里费力地穿衣服。"最好快点，"<<he>>笑着说。"会有人看见你的。"
+		<br><br>
+		你一下车，<<He>>就立刻开走了。
+		<br><br>
+		<<link [[继续|Harvest Street]]>><<clotheson>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		在剩下的旅程中，<<He>>一直抓着你的衣服，直到到达了农田才松手。
+		<<He>>饶有兴趣地看着你在车里费力地穿衣服。"最好快点，"<<he>>笑着说。"会有人看见你的。"
+		<br><br>
+		你一下车，<<He>>就立刻开走了。
+		<br><br>
+		<<link [[继续|Farmland]]>><<clotheson>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "passoutfarmroad">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "farmroad">>
+	<<else>>
+		<<passout>>
+		你把自己逼得太紧了，你昏过去了。
+		<br><br>
+		<<set $danger to random(1, 10000)>>
+		<<if $danger gte (9900 - $allure)>>
+			<<if $location is "farm" or $location is "alex_farm" or $location is "alex_cottage">>
+				<<link [[继续|Farm Abduction wake]]>><<pass 5>><<set $stress -= 2000>><</link>>
+			<<else>>
+				<<link [[继续|Moor Abduction Wake]]>><<pass 60>><<set $stress -= 2000>><<set $moor to 50>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<</if>>
+<</widget>>

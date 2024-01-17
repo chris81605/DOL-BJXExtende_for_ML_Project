@@ -1,0 +1,46 @@
+:: Prison Laundry []
+<<set $bus to "laundry">><<set $outside to 0>><<effects>><<effects_prison>>
+
+你现在所在的位置是洗衣房。墙壁的一部分是原石。粗大的管道从粗糙的表面延伸出来，形成不规则的图案。
+<<if $prison.schedule is "work">>
+	囚犯们在整理衣物，大型机器隆隆作响。
+	<br><br>
+	<<generate_relaxed_guard 0>><<relaxed_guard 0 cap>>坐在一张矮桌旁的凳上，凝视着房间的另一边，心不在焉地掷着骰子。
+	<<endevent>>
+	<br><br>
+<<else>>
+	机器仍在运转。
+	<br><br>
+<</if>>
+
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "prisonLaundry">>
+<<elseif Time.hour is 20>>
+	你听到铃声响起。"禁闭时间，"<<generate_relaxed_guard 0>><<relaxed_guard 0>>喊道，"回你们的牢房去。"
+	<br><br>
+	你和其他囚犯混在一起。
+	<br><br>
+	<<link [[继续|Prison Cell]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if !$daily.prison.prisonRelaxedGreet and $prison.relaxed gte 15 and $prison.schedule is "work">>
+		<<prison_guard_greet relaxed>>
+	<<elseif random(1, 5) is 5 and $eventskip isnot 1 and $prison.schedule is "work">>
+		<<prison_guard_watch relaxed>>
+	<<else>>
+		<<if $prison.schedule is "work">>
+			<<if $prison.job is "laundry">>
+				<<link [[工作|Prison Laundry Work]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<span class="blue">你将在别处劳动。</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<link [[离开|Prison Block]]>><</link>>
+		<br>
+
+		<<prison_map laundry>>
+	<</if>>
+<</if>>

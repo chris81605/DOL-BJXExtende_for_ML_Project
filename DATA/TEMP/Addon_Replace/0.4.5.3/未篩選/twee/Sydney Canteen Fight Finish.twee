@@ -1,0 +1,83 @@
+:: Sydney Canteen Fight Finish []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<run statusCheck("Sydney")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	聚在周围的学生哄堂大笑起来。<<His>>涨红着脸，迅速逃离了食堂。<<npcincr Sydney purity -2>><<lspurity>>
+	<br><br>
+
+	<<endevent>><<npc "Sydney">><<person1>>
+
+	悉尼轻轻环住你的腰肢。"没必要那样，但……谢谢你，"<<he>>笑了笑，"没人真正为了我挺身而出……你是第一个……但，为什么？"你感觉你的脸颊发烫。在把眼镜递给<<his>>，你很快吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了。真的谢谢你。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	"啊！你他妈疯了！"<<he>>尖叫了起来。很多学生纷纷过来看戏，开始哄堂大笑。那人迅速地逃离了食堂，连饭都没有吃。<<tearful>>你骄傲地挺立在原地。
+	<<ltrauma>><<lstress>><<gcool>><<trauma -6>><<stress -12>><<status 1>>
+	<br><br>
+
+	<<endevent>><<npc "Sydney">><<person1>>
+
+	悉尼攥住你的胳膊。"你没必要那样，但……谢谢你，"<<he>>笑了笑，" 没人真正为了我挺身而出……你是第一个……但，为什么？"你把眼镜递给<<he>>，然后很快吃完了午饭。<br>你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了。真的谢谢你。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	就在你以为自己孤立无援的时候，<<person1>><<person>>突然被
+	<<print either(
+		"一罐汽水砸倒在地。",
+		"一个空托盘砸倒在地。",
+		"一本数学教材砸倒在地。",
+		"一盒牛奶砸倒在地。",
+		"吃了一半的糕点砸倒在地。",
+		"一团土豆泥砸倒在地。"
+	)>>
+	"喂！谁扔的？"<<he>>生气地站起身，揉着脑袋转了过去。当<<him>>看到惠特尼和<<nnpc_his "Whitney">>的手下站在原地放声大笑的时候，<<His>>的愤怒瞬间被恐慌所取代，迅速地跑出了食堂。<<status 1>><<gcool>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc "Sydney">><<person1>>
+
+	悉尼把你扶了起来。
+	"奇怪。"<<he>>喃喃自语着。
+	<<if _sydneyStatus.includes("pure")>>
+		"惠特尼从没这么……乐于助人过，"<<He>>满怀希望地笑了，"你觉不觉得<<nnpc_hes "Whitney">>终于洗心革面了？"
+	<<else>>
+		"<<nnpc_he "Whitney">>什么时候开始关心别人了？"<<He>>紧张地看你一眼，"希望<<nnpc_he "Whitney">>不会找你讨要什么报酬
+		<<if $sydneyromance is 1>>
+			……安全起见你最好少跟<<nnpc_He "Whitney">>接触。"
+		<<else>>
+			。你会小心的，对吧？"
+		<</if>>
+	<</if>>
+	<br><br>
+
+	你把眼镜递给<<he>>，然后很快吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了，注意安全。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+
+	<<endevent>>
+<<else>>
+	你倒在地上，因为受伤了失去了战斗能力。"这就对了，"<<person1>><<person>>啐了一口，"跪下膜拜然后祈祷吧，或许你那废物朋友还会继续喜欢你。"所有人哄堂大笑起来，<span class="red"><<he>>抬起脚，镜片和镜框连着一起破碎了。</span><<He>>大摇大摆地离开了食堂，笑声仍回荡在过道里。
+	<<lcool>><<status -10>><<set $sydney.glasses to "broken">>
+	<br><br>
+
+	<<endevent>><<npc "Sydney">><<person1>>
+
+	悉尼跌跌撞撞地向你跑来。"你没事吧？！你为什么要那样做！只是一副眼镜，不值得你为之受伤！" 你看见泪水在<<his>>的眼眶里打转。"如果你真的出事，我不会原谅自己的。你没必要那样，但……谢谢你，"<<he>>捧起你的双手，"没人真正为了我挺身而出，你是第一个。"
+	<br><br>
+	你把破碎的眼镜递给<<his>>，然后很快地吃完了午饭。尽管眼镜碎了，<<hes>>还是朝你微笑。"我要回图书馆了，真的谢谢你。"<<He>>快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+	<<ltrauma>><<lstress>><<trauma -2>><<stress -4>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[继续|Canteen]]>><</link>>
+<br>

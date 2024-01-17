@@ -1,0 +1,22 @@
+:: Farm Ride Charge []
+<<effects>>
+
+<<if currentSkillValue("thighskill") gte random(1, 1200)>>
+	你用膝盖引导马离开沟渠，<span class="green">你的引导使<<bhim>>平静下来。</span>
+	<<if $monster is 1>>
+		"对不起，"<<bhe>>说道。"我表现得像个小马驹。谢谢你。"
+	<</if>>
+	<<ggrespect>><<farm_horses 3>>
+	<br><br>
+<<else>>
+	你拉住缰绳，试图把它从沟里引开。<span class="red"><<bHe>>不喜欢你的干涉。</span>
+	<<if $monster is 1>>
+		"不要考验我的耐心，"<<bhe>>说道。"别以为我不会把你扔下去。"
+		<br><br>
+	<<else>>
+		<<bHe>>在继续赶路之前，后腿一蹬，威胁要把你甩下去。<<llrespect>><<farm_horses -3>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<destination_farm_ride>>

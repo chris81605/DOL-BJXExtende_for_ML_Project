@@ -1,0 +1,29 @@
+:: Street Stalk Group Run []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<stalk_init>>
+	<<stalk_run>>
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<if $audience_active>>
+	<<audience>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $stalk_end>>
+	<span id="next"><<link [[继续|Street Stalk Group Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Stalk Group Run]]>><</link>></span><<nexttext>>
+<</if>>

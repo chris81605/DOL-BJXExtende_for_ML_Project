@@ -1,0 +1,133 @@
+:: Elk Compound []
+<<set $outside to 1>><<set $location to "compound">><<effects>>
+你正待在麋鹿街的大院里，这里有三座被铁围栏圈住的红砖建筑，而在大门口则有安保人员在来回巡逻着。
+<<if $compoundalarm gte 1>>
+	<span class="red">你现在属于非法入侵。</span>
+<</if>>
+<br><br>
+<<if $compoundcard isnot 2>>
+	<span class="gold">你发现了麋鹿街的复合加工厂。</span>
+	<<earnFeat "Illicit Science">>
+	<br><br>
+	<<set $compoundcard to 2>>
+<</if>>
+<<if $compoundalarm gte 1>>
+	<<set $daily.compoundState to 1>>
+<</if>>
+<<if $compoundalarm is undefined>>
+	<<set $compoundalarm to 0>>
+<</if>>
+<<if $compoundalarm is 0>>
+	<span class="green">现在的安全戒备等级很低，保安们都在放松。</span>
+<<elseif $compoundalarm is 1>>
+	<span class="lblue">保安们像是察觉到了什么，他们现在正在戒备。</span>
+<<elseif $compoundalarm is 2>>
+	<span class="purple">保安们意识到了入侵者的存在，正在加大巡逻的力度。</span>
+<<else>>
+	<span class="red">最高警戒状态已启用。</span>
+<</if>>
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passoutcompound>>
+<<elseif $hallucinations gte 2 and $wraithCompoundEvent is true and !(isPubfameTaskAccepted("compound") and $pubfame.compound.cameras.length is 0)>>
+	<<unset $wraithCompoundEvent>>
+	<<generateWraith 1 true>><<person1>><<hallucinogen 15>>
+	<<if !$wraith.will>>
+		<<set $wraith.will to random(1300, 1700)>>
+	<</if>>
+	工厂突然陷入寂静，你环顾四周，深深地吸了一口气，但感觉喘不上气。<<rainWraith true>>
+	<br><br>
+
+	你的耳朵开始嗡嗡作响，<<print $weather.replace("rain","雨").replace("snow","雪")>>中有什么正在成型。一个美丽的苍白的身影漂浮在地面上，穿着半透明的白色长袍，在风中飘动。祂的眼睛闪烁着明亮的<<wraithEyes>>光。
+	<br><br>
+
+	<<if $wraith.state is "haunt" or $wraith.offspring is "dead">>
+		<<if $wraith.state is "haunt">>
+			祂愤怒地抓着自己的脖子，怒视着你。"<span class="wraith">可恶的小偷，你在这里如鱼得水。</span>"
+		<<else>>
+			祂怒视着你。"<span class="wraith">屠夫中的屠夫，罪人中的罪人，你在这儿如鱼得水。</span>"
+		<</if>>
+		祂沉默了几秒钟。
+		<br><br>
+
+		<<if $wraith.offspring is "sold">>
+			"<span class="wraith">还是说你听到了你的孩子在呼唤你？</span>"
+			<br><br>
+		<</if>>
+
+		突然，祂转过身去看地面上的什么东西，或者可能是透过地面看。祂看起来很激动。你想后退一步，祂却扭过头来盯着你看。"<span class="wraith">我的敌人的敌人，一个工具。</span>"只是一瞬间，祂突然出现在了你面前。诡异的图案开始在祂的眼中旋转，你的身体开始不由自主地放松。
+		<br><br>
+
+		<<link [[屈服|Elk Compound Wraith Give]]>><<endevent>><</link>>
+	<<else>>
+		祂一开始似乎没有注意到你。祂看起来很激动。祂盯着地面，或者可能透过地面，在注意到你后祂转过了身来。"<span class="wraith"><<pcPetname "Wraith">>。</span>"
+		<br><br>
+
+		祂看着你，然后向你飘来。"<span class="wraith">你不和他们站在一边是因为不喜欢他们吗？<<if $wraith.offspring is "sold">>你听到我们孩子的哭喊了吗？<</if>></span>"祂来到你身边伸出一只手，手掌张开。"<span class="wraith">把你身体的控制权借给我。</span>"诡异的图案开始在祂的眼中旋转，你的身体开始不由自主地放松。
+		<br><br>
+
+		<<link [[握住祂的手|Elk Compound Wraith Give]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+
+	<<link [[抵抗|Elk Compound Wraith Resist]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger lte (3000 * $compoundalarm) and $eventskip isnot 1>>
+		<!-- Modified for Beast People -->
+		<<if $rng gte 51>>
+			<<beastNEWinit 1 dog>>
+			一只<<beasttype>>向你飞奔而来，<<bHe>>在跑到距你大约几英尺的地方停了下来并向你狂吠。
+			<br><br>
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				<<if $deviancy gte 15>>
+					<<link [[试图让它冷静下来|Elk Compound Bestiality]]>><<set $sexstart to 1>><</link>><<deviant2>>
+					<br>
+				<</if>>
+				<<link [[战斗|Elk Compound Bestiality]]>><<set $molestationstart to 1>><</link>>
+				<br>
+				<<link [[逃出大院|Elk Compound Run]]>><<crimeUp 30 "trespassing">><</link>><<athleticsdifficulty 1 1000>><<crime "trespassing">>
+				<br>
+			<<else>>
+				<<link [[逃出大院|Elk Compound Run]]>><<crimeUp 30 "trespassing">><<set $athleticsSuccess to true>><</link>><<crime "trespassing">>
+				<br>
+			<</if>>
+		<<else>>
+			一只手突然搭在了你的肩膀上，<<generateSecurity 1>><<person1>>"好了，小家伙。游戏结束了。"<<he>>在你面前挥动着警棍。"我在外面发现<<phim>>了，"<<he>>对着对讲机说道说道。"好吧，在那之前我会让<<phim>>留在这里。"
+			<br><br>
+
+			<<if $compoundbluff is 1>>
+				<span class="pink">虚张声势已经不会再奏效了。</span>
+				<br>
+			<<else>>
+				<<set $skulduggerydifficulty to 600>>
+				<<link [[虚张声势|Elk Compound Bluff]]>><</link>><<skulduggerydifficulty>>
+				<br>
+			<</if>>
+			<<link [[战斗|Elk Compound Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+			<<link [[等待|Elk Compound Underground]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the courtyard")>>
+			<<link [[放下相机|Elk Compound Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.unshift("the courtyard")>><</link>><<gsecurity>>
+			<br><br>
+		<</if>>
+		<<if $compoundpipes isnot 1 or isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with storage tanks")>>
+			<<link [[调查外面有储油罐的建筑|Elk Compound Pipes]]>><</link>>
+			<br>
+		<</if>>
+		<<if $compoundsmoke isnot 1 or isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with smokestacks")>>
+			<<link [[调查带有烟囱的建筑|Elk Compound Smoke]]>><</link>>
+			<br>
+		<</if>>
+		<<if $compoundcentre isnot 1 or $phials_held gte 1 or isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the central building")>>
+			<<link [[调查中央建筑|Elk Compound Central]]>><</link>>
+			<br>
+		<</if>>
+		<<link [[爬上围墙到安全的地方|Elk Compound Climb]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

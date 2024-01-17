@@ -1,0 +1,17 @@
+:: Bailey Office Alex Children Fee []
+<<effects>>
+
+<<set _babies_fee to childrenCountBetweenParents("pc", "Alex")*1000>>
+
+"每个孩子都要付我<<printmoney 100000>>，而且你只能带走你和那个可笑的农夫生下的孩子，"<<he>>说着，然后回到自己的工作中。
+<br><br>
+
+<<if $money gte _babies_fee>>
+<<link [['付钱 (£' + _babies_fee  + ')'|Bailey Office Alex Children Fee 2]]>><<set $money -= _babies_fee*10>><</link>>
+
+<<else>>
+<i>你付不起费用。</i>
+<</if>>
+<br>
+
+<<link [[离开|Orphanage]]>><<endevent>><</link>>

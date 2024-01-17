@@ -1,0 +1,27 @@
+:: Farm Tending Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<if $farm.wall gte 4>>
+		<<npcfence>>
+	<</if>>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Tending Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Tending Sex]]>><</link>></span><<nexttext>>
+<</if>>

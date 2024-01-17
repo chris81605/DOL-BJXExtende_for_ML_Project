@@ -1,0 +1,663 @@
+:: Widgets Events English [widget]
+<<widget "eventsenglish">>
+	<<if $halloween is 1 and $kylarenglishstate is "active" and $halloween_kylar is undefined>>
+		<<npc Kylar>><<person1>>
+		<<if Time.monthDay is 31>>
+			凯拉尔靠了过来，低声说道："今天晚上<span class="gold"><<ampm 21 00>></span>在公园等着我，我想给你看一些东西。"
+		<<else>>
+			凯拉尔靠了过来，低声说道："万圣节晚上<span class="gold"><<ampm 21 00>></span>在公园等着我，我想给你看一些东西。"
+		<</if>>
+		<br><br>
+
+		余下的课程中，<<He>>脸上一直挂着幸福的笑容。
+		<<set $halloween_kylar to 1>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 91 and $goocount + $semencount gte 10>>
+		<<npc Doren>><<person1>>
+		多伦在你桌旁停了下来。"你闻起来……好奇怪，"<<he>>皱起眉头，"就好像……"
+		<br><br>
+
+		<<generates2>><<person2>>一个<<person>>打断了<<person1>><<him>>。"老师，<<pShe>>闻起来像精液。"全班人一下子都吃吃笑了起来。
+		<br><br>
+		<<person1>>
+
+		<<if $promiscuity gte 35>>
+			<<link [[顺势承认|English Events Own]]>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+		<<link [[羞愧地盯着地板|English Events Stare]]>><<trauma 6>><<stress 6>><<status -10>><<npcincr Doren love 1>><</link>><<gtrauma>><<gstress>><<lcool>>
+		<br>
+
+	<<elseif $rng gte 91 and $nectarcount gte 5>>
+		<<npc Doren>><<person1>>
+		多伦在你桌旁停了下来。"你闻起来……好奇怪，"<<he>>说道，"是香水？还是古龙水？"
+		<br><br>
+
+		<<generates2>><<person2>>一个<<person>>打断了<<person1>><<him>>。"<<pShe>>闻起来很香，老师。真的很甜。"一些学生嗅着空气，自言自语。
+		<br><br>
+
+		<<person1>>多伦摇了摇头。"你们就喜欢这些花里胡哨的……"说完便回去教<<his>>的课了。有些学生把桌子挪得离你更近一些，要么是为了闻你身上的花蜜，要么只是为了满足他们的好奇心。
+		<<if $kylarenglishstate is "active">>
+			凯拉尔看起来对他们很恼火，但很明显，<<nnpc_he "Kylar">>也喜欢你的味道。<<npcincr Kylar lust 1>><<npcincr Kylar rage 1>><<glust>><<gksuspicion>>
+		<</if>>
+		<<status 1>><<gcool>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+
+	<<elseif $rng gte 81>>
+		<<set $_genitals_exposed to ($worn.under_lower.type.includes("naked") and !playerChastity("hidden"))>>
+		<<set $_seat_glued to ($cool lt 40)>>
+		当你起身交作业时，
+		<<if $_seat_glued>>
+			<<set $worn.lower.integrity -= 30>>
+			<<if $worn.lower.integrity lte 0>>
+				你的$worn.lower.cn_name_cap从你的身上扯下来了！
+				你惊恐地向下看去，只见几片衣料被粘在了椅子上。有人把胶水涂在了你的座位上！
+			<<else>>
+				你的$worn.lower.cn_name_cap被<<print ($worn.lower.plural ? "撕开了" : "扯开了")>>。有人在你的座位上涂了胶水！
+				幸运的是，你的$worn.lower.cn_name_cap依旧坚挺地活着，尽管它毫无疑问已经磨损得不成样子了。
+			<</if>>
+		<<else>>
+			<<set $worn.lower.integrity -= 10>>
+			<<if $worn.lower.integrity lte 0>>
+				你的$worn.lower.cn_name_cap<<print ($worn.lower.plural ? "勾在了" : "挂在了")>>你课桌的边角上，你感觉它好像被<<print ($worn.lower.plural ? "扯下" : "撕下")>>来了！
+				你惊恐地向下看去，只见几片残存的衣料正挂在桌角上。
+			<<else>>
+				你的$worn.lower.cn_name_cap<<print ($worn.lower.plural ? "勾在了" : "挂在了")>>你课桌的边角上，你感觉它好像被<<print ($worn.lower.plural ? "扯开" : "撕开")>>了！
+				幸运的是，你的$worn.lower.cn_name_cap依旧坚挺地活着，尽管它看起来有些糟糕。
+			<</if>>
+		<</if>>
+
+		<<if $worn.lower.integrity lte 0>>
+			你尽可能快地遮住暴露在外的<<undies>>，但有那么一瞬间你还是完全暴露在众人面前。
+			多伦拿着毛巾向你冲来，而你的脸因羞愧而涨得通红。
+
+			<<if $_genitals_exposed>>
+				<<stress 12>><<trauma 12>><<ggstress>><<ggtrauma>>
+
+				<<if $player.gender isnot $player.gender_appearance>>
+					<br><br>
+					<<if $schoolrep.crossdress gte 3 or $schoolrep.herm gte 3>>
+						其他的学生对你所处的窘境<<print ($_seat_glued ? "看起来很是满足" : "放声笑了起来")>>。
+						当多伦忙着帮你时，你无意中听到了几声窃窃私语，
+						并能分辨出一些<<print ($player.penisExist and $player.vaginaExist ? "你的生殖器" : "你的异装")>>。他们看到了，他们知道谣言是真的。
+					<<else>>
+						当多伦忙着帮你的时候，其他学生都倒抽了一口凉气，随后教室里充满了窃窃私语。
+						你能被看出一些<<print ($player.penisExist and $player.vaginaExist ? "你的生殖器" : "你的异装")>>了，他们看到过了。
+					<</if>>
+					<<schoolrep_naked>>
+				<</if>>
+
+				<<set $genderknown.pushUnique("Doren")>>
+			<<else>>
+				<!-- Nothing happens if the player's genitals aren't exposed -->
+				<<stress 6>><<trauma 6>><<gstress>><<gtrauma>>
+			<</if>>
+
+			<<if $kylarenglishstate is "active" or $kylarenglishstate is "watching">>
+				<br><br>
+
+				凯拉尔虽然移开了视线，但<<nnpc_he "Kylar">>一定看得十分清楚，因为<<nnpc_he "Kylar">>的脸已经涨得通红了。<<npcincr Kylar lust 1>><<glust>>
+				<<if $_genitals_exposed>>
+					<<set $genderknown.pushUnique("Kylar")>>
+				<</if>>
+			<</if>>
+		<</if>>
+		<br><br>
+		<<integritycheck>>
+		<<link [[继续|English Lesson]]>><<towelup>><</link>>
+		<br>
+
+	<<elseif $rng gte 71 and $kylarenglishstate is "active">>
+
+		<<npc Kylar>><<person1>>多伦叫凯拉尔叫到教室前面来背诵<<his>>写的诗。这是一首情诗，而且内容是关于你的。<<He>>看起来很高兴能在大家面前分享这首诗。
+		<<status -10>><<lcool>>
+		<br><br>
+
+		<<if $player.penisExist and $genderknown.includes("Kylar")>>
+			但当<<nnpc_he "Kylar">>读到你拥有着巨大的肉棒时，你的脸一下子烧了起来。<<status 1>><<gcool>>
+			<br><br>
+		<</if>>
+
+		几个学生咯咯笑着盯过来，一个<<generates2>><<person2>><<person>>挪了一下<<his>>的座位，以保持你们之间的距离。
+		<br><br>
+		<<person1>>
+
+		凯拉尔满面微笑着重新坐了下来，对自己所造成的尴尬浑然不觉。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|English Lesson]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 61>>
+		<<if currentSkillValue('english') gte 500>>
+			<<npc Doren>><<person1>>多伦走近你的桌子说道："你应该知道这次的材料了吧？正好我有个信要捎到外楼门卫那，其他同学都还要看材料，就你去吧。"<<He>>递给你一张纸条，上面是一份剧场道具的清单。"塞到门缝里就行了。"
+			<br><br>
+			<<endevent>>
+
+			<<if $outbuildingvisited is 1>>
+				你来到了那只<<print $outbuildingBeast>>攻击你的那座楼前。如果你慢慢来，小心点，大概就不会有上次那种情况了，不过你会错过一些课程。
+				<br><br>
+
+				<<link [[谨慎一点|English Outbuilding]]>><<set $phase to 0>><<detention 1>><</link>><<gdelinquency>>
+				<br>
+				<<link [[冒险一点|English Outbuilding]]>><<set $phase to 1>><</link>>
+				<br>
+			<<else>>
+				<<set $outbuildingvisited to 1>>
+				<<beastNEWinit 1 dog>><<set $outbuildingBeast to $NPCList[0].type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>
+				你前往学校后面的外楼，并按照指示将纸条塞到门下。你转身正打算离开，却发现一只<<beasttype>>正呲着牙向你走来。
+				<br><br>
+
+				<<if $monster is 1 or $bestialitydisable is "f">>
+					<<link [[继续|English Outbuilding Molestation]]>><<set $molestationstart to 1>><</link>>
+					<br>
+				<<else>>
+					你设法逃回了教室，但并非毫发无损。<<beastescape>>
+					<br><br>
+					<<integritycheck>><<towelup>>
+
+					<<link [[继续|English Lesson]]>><<endevent>><</link>>
+				<</if>>
+				<!-- Modified for Beast People -->
+			<</if>>
+
+		<<else>>
+			多伦对你的进步特别感兴趣，没有给你放松的机会。
+			<<gstress>><<genglish>><<stress 2>><<englishskill>>
+			<br><br>
+
+			<<link [[继续|English Lesson]]>><</link>>
+		<</if>>
+
+	<<elseif $rng gte 51>>
+		<<npc Doren>><<person1>>多伦让全班大声朗读这节课的课文。每个学生需要从书中读一段。多伦坐在前面，一边听一边选择下一位朗读者。
+		你旁边的一个学生读完了一个段落。现在多伦点到了你。
+		<br><br>
+
+		<<if $trauma gte (($traumamax / 5) * 3)>>
+			但你最近压力太大了，你忘了带书！<<gstress>><<stress 4>>
+		<<elseif $delinquency gte 666>>
+			<<he>>还真指望你像这些书呆子一样读书？你连书都不带。
+		<<elseif $tiredness gte (C.tiredness.max / 5) * 3>>
+			但你太累了，把书忘在储物柜里了。
+		<<else>>
+			但是你今天忘记带书了。
+		<</if>>
+		<br><br>
+
+		<<link [[告诉多伦你没带书|English Read Passage]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[向同学求助|English Read Passage]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[试着编点什么吧|English Read Passage]]>><<set $phase to 2>><</link>>
+		<br>
+		<<if $speech_attitude is "bratty" or $delinquency gte 400>><<link [[拒绝朗读|English Read Passage]]>><<set $phase to 3>><</link>><br><</if>>
+
+	<<elseif $rng gte 41>>
+		<<if $delinquency gte 400>>
+			<<npc Doren>><<person1>>为了减少课堂上的骚动，多伦将那些难管的学生分开，其中包括你<<if $kylarenglishstate is "active">>和凯拉尔<</if>>。<<He>><<endevent>>让你坐在一个安静的<<generates1>><<person1>><<person>>旁边，这家伙从来不惹麻烦。
+			<br><br>
+
+			没过几分钟，<<persons>>的笔滚落到了地板上。<<He>>伸手去捡，却将另一只手悄悄放上你的大腿，倾身向你说道："没有人会相信你的。"说完便用手在你的大腿上游走了起来。
+
+			<<if $kylarenglishstate is "active">>
+				直到凯拉尔抓住<<his>>的手腕，把<<him>>拽了过去。
+				<br><br>
+				<<endevent>>
+				<<npc Kylar>><<person1>>"是我的，"凯拉尔低声说道，亮了一下口袋里的刀，将一切争论扼杀于摇篮之中。
+				<br><br>
+
+				<<endevent>>
+
+				<<link [[继续|English Lesson]]>><</link>>
+
+			<<else>>
+				<<He>>坐回了原位，但没有停下手上的骚扰。
+				<br><br>
+
+				<<link [[寻求帮助|English Event2]]>><<detention 1>><</link>><<gdelinquency>>
+				<br>
+				<<link [[默默忍受|English Event2 Molest]]>><<stress 4>><<trauma 4>><</link>><<gstress>><<gtrauma>>
+				<br>
+			<</if>>
+		<<elseif $kylarenglishstate is "active">>
+			几个不良少年盯上了你，其中一人试图摸上来，但被凯拉尔的眼神吓住了。
+			<br><br>
+
+			<<link [[继续|English Lesson]]>><</link>>
+			<br>
+		<<else>>
+			几个不良少年盯上了你，趁老师不注意，偷偷抚弄了起来。
+			<<gtrauma>><<gstress>><<trauma 2>><<stress 2>>
+			<br><br>
+
+			<<link [[继续|English Lesson]]>><</link>>
+		<</if>>
+	<<elseif $rng gte 21>>
+		多伦要求你在黑板上做语法演示。当你走到教室前面时，一只脚伸到你的前面，把你绊倒了。
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			<<if $worn.under_lower.name is "naked" or $worn.under_lower.anus_exposed is 1>>
+				你跪倒在地，裙摆随之飘起，在全班同学面前露出了你光溜溜的屁股。在同学们的口哨和嘲笑声中，你挣扎着站起来，满脸通红。
+				<<stress 3>><<trauma 3>><<gstress>><<gtrauma>>
+				<br><br>
+			<<else>>
+				你跪倒在地，裙摆随之飘起，在全班同学面前露出了你的$worn.under_lower.cn_name_cap。在同学们的口哨和嘲笑声中，你挣扎着站起来，满脸通红。
+				<<stress 1>><<trauma 1>><<gstress>><<gtrauma>>
+				<br><br>
+			<</if>>
+		<<else>>
+			你向前跪倒在地。在同学们的嘲笑声中，你挣扎着站了起来。<<stress 1>><<gstress>>
+			<br><br>
+		<</if>>
+		<<link [[继续|English Lesson]]>><</link>>
+	<<else>>
+		<<generates1>><<person1>>一阵微风吹进教室，拂起你的发丝，将一个<<person1>><<persons>>的纸从<<his>>桌上吹落，正好落在了你旁边的地板上。当<<He>>走过来弯腰捡纸时，屁股几乎怼到了你的脸上。
+		<br><br>
+		<<if $promiscuity gte 15>>
+			<<link [[掐一把|English Events Pinch]]>><</link>><<promiscuous2>>
+			<br>
+		<</if>>
+		<<link [[移开目光|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "eventsenglishsafe">>
+	<<if $englishPlay is "none" and Time.monthName is "November" and Time.monthDay gte 7 and C.npc.Kylar.init is 1 and C.npc.Sydney.init is 1>>
+		<<set $englishPlay to "ongoing">><<set $englishPlayDays to (14 + (7 - Time.weekDay))>>
+		<<englishplaystart>>
+
+		<<npc Doren>><<person1>>
+		"好了，大家好好看好好听，"多伦说道，命令所有的学生保持安静。
+		<br><br>
+
+		"大家都知道，圣诞节马上就要到了，我们想用一场小表演给这个学期收尾，让每个人都过个好节。我已经联系上了我曾经合作过的一家戏剧公司，我们的<<nnpc_Title "Leighton">>也给我们亮了绿灯，让我们安排一系列可以表演的戏剧。"
+		<br><br>
+
+		"我们不会让大家强制参加，但我们鼓励大家踊跃参加。而且，我相信你们的父母会很乐意看到你们上台表演，"<<he>>咯咯地笑着，"感兴趣的话，就过来把名字写在这张纸上。"<<He>>把一张表格放在<<his>>的桌子上。
+		<br><br>
+
+		<<if $kylarenglishstate is "watching">>
+			凯拉尔专注地看着你，好像在等着看你对多伦的声明的反应。
+			<br><br>
+		<<elseif $kylarenglishstate is "active">>
+			凯拉尔将<<nnpc_his "Kylar">>的手放在你背上。"听起来很有趣，"<<nnpc_he "Kylar">>小声说道，"我们可以试试吗？"
+			<br><br>
+		<</if>>
+
+		<<link [[走近多伦的桌子|English Play Intro Accept]]>><</link>>
+		<br>
+		<<link [[继续坐着|English Play Intro Ignore]]>><</link>>
+		<br>
+
+	<<elseif $halloween is 1 and $kylarenglishstate is "active" and $halloween_kylar is undefined>>
+		<<npc Kylar>><<person1>>
+		<<if Time.monthDay is 31>>
+			凯拉尔靠了过来，低声说道："今天晚上<span class="gold"><<ampm 21 00>></span>在公园等着我，我想给你看一些东西。"
+		<<else>>
+			凯拉尔靠了过来，低声说道："万圣节晚上<span class="gold"><<ampm 21 00>></span>在公园等着我，我想给你看一些东西。"
+		<</if>>
+		<br><br>
+
+		余下的课程中，<<He>>脸上一直挂着幸福的笑容。
+		<<set $halloween_kylar to 1>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 91>>
+		<<npc Doren>><<person1>>
+		多伦要求全班注意。<br><br>
+		<<if Time.days % 42 gte 39>> /* every 6 weeks: day 39-41, 80-83, ... */
+			"这<<print either("个主题","篇文章","本书","个话剧")>>快讲完了，"<<he>>说道。"是时候结束了。考试会考到，大家复习一下吧。"
+			<br><br>
+			全班分成小组复习主题，而多伦则在小组之间提问和回答问题。
+			<<if currentSkillValue('english') lte 300>><br><br>你们小组陷入了困难，所以多伦多花了些时间辅导你们。<<genglish>><<englishskill>><br><br>
+			<<elseif currentSkillValue('english') gte 700>>多伦听了你的小组一会儿，点头微笑。<br><br>"干得不错！继续保持。"<<lstress>><<stress -6>><br><br>
+			<</if>>
+		<<elseif Time.days % 42 lte 2>> /* every 6 weeks: day 1-2, 42-44, ... */
+			"同学们，听好了，"<<he>>说道，"我们正在开始一个新的主题。<<print either("这个主题很有趣。我想你们会喜欢的。","这个模块是我最喜欢的模块之一。我真的希望你们也喜欢它。","这个主题很难——我不想撒谎——但值得学习。你们可以从中学到很多东西。")>>"
+			<br><br>
+			多伦概述了即将讲解的内容。
+			<<if currentSkillValue('english') lte 200>><<print either("但你听不懂。","但你一个字也没听懂。","你尝试用心去听，但什么也没有听进去。")>><<gstress>><<stress 6>>
+			<br><br>
+			<<elseif currentSkillValue('english') gte 600>>看起来很<<print either("有趣。","好玩。","不一样，但是很棒。")>><<lstress>><<stress -6>><br><br>
+			<<else>>看起来不错。
+			<</if>>
+		<<else>>
+			<<generates2>><<generateyp3>>
+			<<if $rng % 3 == 0>>
+				<<set _has_feelings_towards to either("明显是喜欢<<person>>","明显热衷于<<person>>","明显对<<person>>有性欲","明显是在垂涎<<person>>","公然与<<person>>调情")>>
+				<<set _causing_a_consequence to either("使场面更加尴尬了。","使场面更可爱了。","给场面增添了性意味。")>>
+				<<set _hilarity_ensues to either('一个学生起哄道："开个房吧！"','一些学生开始拿他们开玩笑。')>>
+			<<elseif $rng % 3 == 1>>
+				<<set _has_feelings_towards to either("显然很藐视<<person>>","根本受不了<<person>>","讨厌<<person>>")>>
+				<<set _causing_a_consequence to either("使场面更难看了。","使场面更紧张了。","使整个场面很迷惑。")>>
+				<<set _hilarity_ensues to either('观众在尴尬的寂静中看着。','几个学生觉得这样很好笑。','房间里一阵尴尬的安静。')>>
+			<<else>>
+				<<set _has_feelings_towards to "与<<person>>很有默契">>
+				<<set _causing_a_consequence to "表演者很好地再现了这一场景。">>
+				<<set _hilarity_ensues to either("绝大多数同学认真观看。","整个教室很有兴趣地观看。","大多数学生看了，但也有少数人低头在书上乱涂乱画。")>>
+			<</if>>
+			多伦让一个<<person2>><<person>>和一个<<person3>><<person>>上台展示，在多伦的指导下，表演你们正在学的课文中的一个重要场景。
+			<<person>><<person2>>_has_feelings_towards，_causing_a_consequence<br>
+			_hilarity_ensues
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 81>>
+		<<npc Doren>><<person1>>
+		<<if $rng % 3 == 0>>
+			学生们轮流背诵一首诗的诗句。多伦有时会亲自背诵一节，<<his>>那响亮的声音吸引着全班的注意力。
+		<<elseif $rng % 3 == 1>>
+			学生们轮流表演了一出戏剧的各个场景。多伦鼓励大家尽量还原角色，在一些重要对白中<<his>>甚至自己参与进来，热情地念着台词。
+		<<else>>
+			多伦扮演你们在学的课本里中的大反派，同学们则需要扮演警官，轮流问问题，让多伦符合人设地回答。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 71>>
+		<<if Time.season is "summer" and $weather isnot "rain">>
+			<<npc Doren>><<person1>>
+			一只黄蜂从窗户飞进来，落在一个学生的书上，他吓得尖叫起来。多伦伸手安抚他。<br>
+			"别管它，"<<he>>说道，"它很快就会走掉的。"<br>
+			它<<if $rng % 2 == 0>>蜇了一个学生<<else>>开始在房间里飞来飞去<</if>>，班级陷入混乱。
+			<<if $kylarenglishstate is "active">>突然，它朝你飞来，但凯拉尔跳了出来，护在你面前。<</if>>
+			<br><br>
+			最后多伦把它赶走了，课又可以继续了。
+		<<elseif Time.season is "summer">>
+			<<npc Doren>><<person1>>
+			"诗歌，"多伦说道，"从自然界中寻找灵感。"
+			<br>
+			"看外面的暴风雨，"<<he>>说道，"那些阴沉的云。咆哮的雷声。花点时间回想一下你的所见、所思、所感。有点明白了吗？"<br>
+			几秒钟过去了，然后是隆隆的雷声。<br>
+			"原始而兽性的自然之怒，"多伦咧嘴一笑，"现在记下它。当然，要用形容词，但也不要忽视动词。"<br>
+			你写了下来。
+		<<elseif Time.season is "winter">>
+			<<if $rng % 3 == 0>>
+				<<generates1>><<person1>>
+				窗户关不上，外面的冷风吹进来了。一个学生的手指被冻得发青。<br>
+				多伦派了一个<<person>>去找管理员。
+				<br><br>
+				课堂继续，学生们不停地打寒颤。
+			<<else>>
+				<<generates1>><<person1>>
+				暖气调得太高了，房间里非常热。一名学生抱怨感到头晕。<br>
+				多伦派了一个<<person>>去找管理员。
+				<br><br>
+				当多伦继续讲课时，全班同学都在流汗，用书本扇风。
+			<</if>>
+		<<else>>
+			<<npc Doren>><<person1>>
+			"诗歌，"多伦说道，"从自然界中寻找灵感。"
+			<br>
+			<<if Time.season is "spring">>
+				<<He>>从公园里带来了一些花。一个学生开始打喷嚏。
+			<<elseif Time.season is "autumn">>
+				<<He>>带来了公园里各种颜色的落叶。
+			<</if>>
+			<br><br>
+
+			"看这些，"<<he>>说道，"花点时间回想一下你的所见、所思、所感，然后写下来。"<br>
+			你写了下来。
+		<</if>>
+		<br><br>
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 61>>
+		多伦让全班同学分成几个小组。
+
+		<<if $kylarenglishstate is "active">>
+			没有人愿意和凯拉尔组队，所以只能你们两人组成一队。<<endevent>><<npc Kylar>><<person1>><<He>>看起来异常开心。
+			<<glove>><<npcincr Kylar love 1>>
+		<<elseif $cool gte 160>>
+			同学们争着挤到你面前，都希望和你一组。
+			<<lstress>><<ltrauma>><<stress -4>><<trauma -2>>
+		<<elseif $cool lt 40>>
+			没有人愿意和你一组，所以你独自坐在角落里。不过多伦却因此而给了你额外的关注。
+			<<gtrauma>><<gstress>><<genglish>><<trauma 2>><<stress 2>><<englishskill>>
+		<<else>>
+			你加入了一个小组，你们合作完成了一个小活动。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 51 and $kylarenglishstate is "active" and $rng % 5 == 0>> /* If Kylar is active, Kylar event will win 80% of the time. */
+		<<npc Doren>><<person1>>多伦走向你这里。"你还好吗，<<lass>>？"<<he>>在问着的同时瞥了一眼凯拉尔——<<nnpc_his "Kylar">>正全神贯注地在素描本上画着你的素描。
+		<br><br>
+
+		<<link [[摇头|English Kylar Moved]]>><</link>>
+		<br>
+		<<link [[点头|English Kylar Nod]]>><</link>>
+		<br>
+	<<elseif $rng gte 51 and Time.minute lte 40>> /* first session only, mostly only runs when Kylar inactive */
+		多伦从后面的储物柜里拿东西，惊讶地发现
+		<<generates1>><<generateyp2>>一个<<person1>><<person>>和一个<<person2>><<person>>
+		<<if $awarelevel gte 1>>
+			<<if $purity gte ((1000/7) * 5)>>
+				在里面<<print either("鬼混在一起","暧昧地互动","粗暴地爱抚彼此")>>
+			<<else>>
+				在里面<<print either("相互拉扯","做龌龊事","纠缠一起","互相作乐")>>
+			<</if>>。
+		<<else>>
+			<<if $rng%2 == 0>>
+				在里面玩耍。
+				<br><br>
+
+				真奇怪，这么小的地方能玩什么游戏？也许他们在打架——看看他们那副汗流浃背，衣衫不整的样子。
+				<br><br>
+			<<else>>
+				躲在里面。
+				<br><br>
+
+				真奇怪。为什么会有人躲在储物间里？他们俩看起来都满头大汗，衣衫不整。也许他们在吵架。
+				<br><br>
+			<</if>>
+		<</if>>
+		多伦命令他们回到座位上。有人吹起了口哨。
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		<<npc Doren>><<person1>>多伦走到你旁边并询问你进展如何。
+		<br><br>
+
+		<<link [[寻求帮助|English Event1]]>><<set $phase to 1>><<stress 2>><<englishskill>><</link>><<gstress>><<genglish>>
+		<br>
+		<<link [[说你没事|English Event1]]>><<set $phase to 0>><</link>>
+		<br>
+	<<elseif $rng gte 31>>
+		<<npc Doren>><<person1>>
+		多伦让几个学生表演你们正在学习的戏剧中的一个场景。<br>
+		<<if $rng gte 38>>
+			他们故意搞怪，把角色演绎得很滑稽，让同学们哈哈大笑。多伦翻了个白眼，但是也笑了。<br>
+			这很有趣。<<lstress>>
+		<<elseif $rng gte 34>>
+			他们表演得非常出色，让同学们身临其境。<br>
+			<<if currentSkillValue('english') lt 700>>你从中学到了点东西。<<genglish>><<else>>你很喜欢这个表演。<</if>>
+		<<else>>
+			他们只是呆板地念出书中的台词。<br>
+			在拖延太多时间前，多伦巧妙地让课堂继续进行下去了。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 21>>
+		多伦
+		<<if $rng % 5 == 0>>
+			在白板上讲解语法规则。
+		<<elseif $rng % 5 == 1>>
+			讲解了修辞和有说服力的语言。
+		<<elseif $rng % 5 == 2>>
+			讲解了不同的词汇和措辞——亲身告诉你，熟练运用词汇对沟通是多么有用。
+		<<elseif $rng % 5 == 3>>
+			讲解了肢体语言和声音技巧。<br>
+			"有时候，重要的不是说什么，而是怎么说。"
+		<<else>>
+			讲解了不同的幽默技巧——举例说明如何用幽默来缓解紧张局势，削弱辩论对手，或者仅仅是为了喜剧效果。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<npc Doren>><<person1>>
+		<<if $rng % 2 == 0>>
+			多伦发下习题册，让同学们完成练习。<<He>>并不介意同学们在学习时相互交谈，班里的气氛因此很是活跃。
+		<<else>>
+			多伦给每个人十分钟写一首打油诗。
+			<<if currentSkillValue('english') gte 400>>
+				<<if $promiscuity gte 65>>
+					你写了一首<<print either("污秽","肮脏","下流","淫秽")>>到令人大跌眼镜的打油诗，讲的是一个来自<<print either("因奇贝尔","格伦里丁","纳茨福德")>>的狡猾<<girl>>。<br>
+					当你读到最后一行的时候，几个学生都笑了。多伦吓了一跳，并迅速转向下一个学生。
+					<<gcool>><<status 1>>
+				<<elseif $promiscuity gte 35>>
+					你写了一首<<print either("粗俗的","色情的","淫秽的")>>
+					<<if $exhibitionism gte 33>>
+						打油诗，讲的是一个对衣服过敏的<<girl>>。
+					<<elseif $masochism_level gte 2>>
+						打油诗，讲的是班克的一个调皮<<girl>>（这家伙非常需要打屁股）。
+					<<elseif $arousal gte (($arousalmax / 5) * 3)>>
+						打油诗，讲的是威克的一个<<girl>>。
+					<<elseif $skulduggery gte 500>>
+						打油诗，讲的是基尔马诺克的一个好色的年轻盗贼。
+					<<else>>
+						打油诗。
+					<</if>><br>
+					当你读出来的时候，几个学生都笑了。
+				<<else>>
+					你写了一首
+					<<if $skulduggery gte 500>>
+						打油诗，讲的是一个小偷偷了一块宝石。
+					<<elseif $exhibitionism gte 33>>
+						打油诗，讲的是一个<<girl>>丢失了<<pher>>的衣服。
+					<<elseif $money lte 50000>>
+						打油诗，讲的是一个孤儿<<girl>>赢了很多钱。<br>
+						你希望这个孤儿是你。
+					<<else>>
+						合格的打油诗。
+					<</if>><br>
+					<<if currentSkillValue('english') gte 600>>
+						多伦赞许地<<print either("微笑","点了点头")>>，然后走向下一个学生。
+					<<else>>
+						多伦点了点头，随即走向下一个学生。
+					<</if>>
+				<</if>>
+			<<else>>
+				你绞尽脑汁，还是没能完成。<br>
+				其他一些学生写了些有趣的打油诗。
+			<</if>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "englishstart">>
+	<<endevent>>
+	<<set _kylar to statusCheck("Kylar")>>
+
+	<<if _kylar.state is "active">>
+		<<if $kylarenglish is 0>>
+			<<set $kylarenglishstate to "watching">>
+			<<npc Kylar>><<person1>>当你入座时，你感觉到凯拉尔在盯着你看，但每当你看向<<he>>时，<<him>>就会转过头去。
+			<br><br>
+
+			<<if _kylar.love gte 30>>
+				椅子腿刮过地面的声音陆陆续续响起。凯拉尔趿拉着鞋穿过教室，把书本紧贴在胸前，死死盯着你身边的空座位。<<He>>差点就坐下了。突然，一个<<generatey2>><<person2>><<person>>把<<person1>><<him>>推到一边，自己坐了下来。<<person2>>
+				<<if _kylar.love lt 60>>
+					凯拉尔瞪了一眼那个<<person>>，但还是一言不发地回到了<<person1>><<his>>原来的座位。
+					<br><br>
+				<<else>>
+					<<He>>看都不看凯拉尔一眼。
+					<br><br>
+
+					一声尖叫突然打断了课堂。<<person1>>只见凯拉尔拿着一把<span class="red">刀</span>站在那里。透过乌黑的刘海，<<his>>死死盯着<<person2>><<person>>。<<person2>><<person>>惊恐地向后退去，却撞倒了身后的桌子，重重摔在地上。而其他学生也在跌跌撞撞地争相向门口挤去。
+					<br><br>
+
+					<<npc Doren 3>><<person3>>
+					多伦跳上自己的桌子，怒吼一声。尖叫声与争吵声戛然而止。凯拉尔丢下了刀。每个人都盯着多伦，<<his>>跳下来，把掉落在地的武器收了起来。<<He>>抓住凯拉尔的手臂。"你真是个大麻烦，"<<he>>说道，"来吧，我们不要耽误太久的课。"<<person1>>你目送着凯拉尔被带出教室，只看见<<he>>一直低着头。
+					<br><br>
+
+					门砰的一声关上，片刻之后，全班爆发出紧张的笑声。多伦很快回来了，而凯拉尔没有。学生们缠着<<person3>><<him>>八卦，但<<he>>一个字都不说。
+					<br><br>
+					<<if $loveInterest.primary is "None">>
+						<<set $loveInterest.primary to "Kylar">>
+						<span class="gold">凯拉尔现在是你的爱人了！虽然你自己都不确定自己有没有同意这件事。</span>
+						<br><br>
+					<<else>>
+						<span class="gold">你现在可以将凯拉尔称作是你的爱人了！虽然你自己都不确定自己有没有同意这件事。<br>你可以在"态度"菜单中改变你的爱情对象。</span>
+						<br><br>
+					<</if>>
+
+					<<set $kylarenglish to 1>>
+					<<set $kylarenglishstate to "absent">>
+				<</if>>
+			<</if>>
+		<<elseif $kylarenglish is 1>>
+			<<if _kylar.love gte 60>>
+				<<set $kylarenglish to 2>><<set $kylarenglishstate to "active">>
+
+				<<npc Kylar>><<person1>>当你入座的时候，你感觉到凯拉尔正看着你。<<He>>站起来穿过教室，眼睛死死盯着你旁边的座位。
+				没有人阻止<<him>>。
+				<<His>>喘着粗气坐下了。
+				<br><br>
+
+				<<set $_specialOptions to true>>
+				<<link [[坐在其他地方|English Kylar Move]]>><<npcincr Kylar love -5>><</link>><<lllove>>
+				<br>
+				<<link [[继续坐着|English Lesson]]>><<endevent>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><</link>><<glove>><<lksuspicion>>
+				<br>
+			<<else>>
+				<<set $kylarenglishstate to "absent">>
+			<</if>>
+
+		<<elseif $kylarenglish is 2>>
+			<<if _kylar.love gte 60>>
+				<<set $kylarenglishstate to "active">>
+
+				<<npc Kylar>><<person1>>当你入座的时候，你感觉到凯拉尔正看着你。<<He>>站起来穿过教室，眼睛死死盯着你旁边的座位。
+				<<His>>喘着粗气坐下了。
+				<br><br>
+
+				<<set $_specialOptions to true>>
+				<<link [[坐在其他地方|English Kylar Move]]>><<npcincr Kylar love -5>><</link>><<lllove>>
+				<br>
+				<<link [[继续坐着|English Lesson]]>><<endevent>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><</link>><<glove>><<lksuspicion>>
+				<br>
+
+			<<else>>
+				<<set $kylarenglishstate to "watching">>
+
+				<<npc Kylar>><<person1>>当你入座时，你感觉到凯拉尔在盯着你看，但每当你看向<<he>>时，<<him>>就会转过头去。
+				<br><br>
+			<</if>>
+		<<else>>
+			<<set $kylarenglish to 0>><<set $kylarenglishstate to "watching">>
+			你发现凯拉尔正独自坐在后面的角落里。<<nnpc_He "Kylar">>碰上了你的目光，红着脸看向了别处。
+			<br><br>
+		<</if>>
+	<<else>>
+		<<set $kylarenglishstate to "absent">>
+	<</if>>
+
+	<<if !$_specialOptions>>
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>

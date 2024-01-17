@@ -1,0 +1,90 @@
+:: Sydney Backroom Lifted Fall []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>>
+
+悉尼难受的呻吟着，挣扎着坐了起来。
+<<if _sydneyStatus.includes("corrupt")>>
+	"操，我的腿折了……"
+	<br><br>
+
+	<<He>>的声音逐渐变小，脸上露出了奇怪的笑容。
+<<else>>
+	"你没事吧？有没有……"
+	<br><br>
+
+	<<He>>的声音逐渐变小，眼睛猛地睁大。
+<</if>>
+
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	<<Hes>>正直直盯着你的裙底，
+	<<if !$worn.under_lower.type.includes("naked")>>
+		目光聚集在你的<<print $worn.under_lower.cn_name_cap>>上。
+		<<npcincr Sydney lust 3>><<gslust>>
+	<<else>>
+		<span class="lewd">你毫无遮挡的<<genitals>>暴露在<<his>>的视线里。</span>
+		<<npcincr Sydney lust 5>><<npcincr Sydney purity -3>><<gslust>><<lspurity>>
+	<</if>>
+<<else>>
+	<<His>>紧紧地盯着你快贴到<<his>>脸上的裆部。
+	<<npcincr Sydney lust 3>><<gslust>>
+<</if>>
+<br><br>
+
+<<if $sydneyromance is 1 and _sydneyStatus.includes("Lust")>>
+	<<switch _sydneyStatus>>
+		<<case "corruptLust">>
+			"嗯……事出必有因。"<<he>>轻笑着
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				温柔地叉开你的双腿，俯身凑了过来。
+			<<else>>
+				把你的<<print $worn.lower.cn_name_cap>>脱到了大腿膝盖，俯身凑了过来。
+			<</if>>
+			<span class="lewd">你的<<genitals>>感受到了<<his>>呼出的气息。</span>
+			<br><br>
+
+			<<link [[放任|Sydney Backroom Lift Sex]]>><<set $phase to 1>><<set $sexstart to 1>><<npcincr Sydney purity -1>><</link>><<promiscuous1>><<lspurity>><<sydneyWarning>>
+			<br>
+			<<link [[站起来|Sydney Backroom Lifted Up]]>><<npcincr Sydney love -1>><<npcincr Sydney purity 1>><</link>><<llove>><<gspurity>>
+			<br>
+		<<case "pureLust">>
+			"对不起！"<<he>>惊叫道，"我不是故意偷看的！"<<He>>遮住自己的眼睛，但并没有推开你。
+			<br><br>
+
+			<<if $promiscuity gte 35>>
+				<<link [["让" + $NPCList[0].pronouns.him + "继续"|Sydney Backroom Lifted Encourage]]>><<npcincr Sydney purity -1>><</link>><<promiscuous3>><<lspurity>><<sydneyWarning>>
+			<<else>>
+				<span class="blue">你不够淫乱，无法趁机占<<his>>的便宜。</span>
+			<</if>>
+			<br>
+			<<link [[站起来|Sydney Backroom Lifted Up]]>><</link>>
+			<br>
+		<<default>>
+			"抱，抱歉，"<<he>>嘟囔着把头转过去，但还是忍不住偷瞟。
+			<br><br>
+			<<if $promiscuity gte 35>>
+				<<link [["让" + $NPCList[0].pronouns.him + "继续"|Sydney Backroom Lifted Encourage]]>><<npcincr Sydney purity -1>><</link>><<promiscuous3>><<lspurity>><<sydneyWarning>>
+			<<else>>
+				<span class="blue">你不够淫乱，无法趁机占<<his>>的便宜。</span>
+			<</if>>
+			<br>
+			<<link [[站起来|Sydney Backroom Lifted Up]]>><</link>>
+			<br>
+	<</switch>>
+<<elseif _sydneyStatus.includes("corrupt")>>
+	"风景不错，"<<he>>笑了笑，又吃痛叫了一声。"值不值得摔这么一跤就另说了，嗷。"
+	<br><br>
+
+	<<He>>用腿轻轻地把你翻了个面，你们互相帮助着站了起来。
+	<br><br>
+
+	<<link [[继续|Sydney Backroom Lift End]]>><</link>>
+	<br>
+<<else>>
+	<<He>>尖叫着把你推开，把你撞到了附近的架子上。<<pain 1>><<gpain>>
+	<br><br>
+
+	<<His>>因尴尬变得不知所措，连滚带爬地蹭到了你的身边，结结巴巴地开始道歉。
+	<br><br>
+
+	<<link [[继续|Sydney Backroom Lift End]]>><</link>>
+	<br>
+<</if>>

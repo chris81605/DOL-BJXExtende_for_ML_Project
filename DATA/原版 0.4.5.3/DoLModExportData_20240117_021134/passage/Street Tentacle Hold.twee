@@ -1,0 +1,34 @@
+:: Street Tentacle Hold []
+<<set $outside to 1>><<effects>>
+<<physiquedifficulty 5000 16000 true>>
+<<if $physiqueSuccess>>
+	<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.name is "naked") or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.name is "naked")) and !$worn.under_lower.type.includes("naked")>>
+		触手到处乱窜，你捂住你的<<allBottoms>>。<span class="green">触手放弃将你当做目标</span>，同时退回了下水道。
+		<<gstress>><<stress 1>>
+		<br><br>
+		<<destinationeventend>>
+	<<else>>
+		触手到处乱窜，你捂住你的$worn.lower.cn_name_cap。<span class="green">触手放弃将你当做目标</span>，同时退回了下水道。
+		<<gstress>><<stress 1>>
+		<br><br>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.name is "naked") or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.name is "naked")) and !$worn.under_lower.type.includes("naked")>>
+		触手到处乱窜，你捂住你的$worn.under_lower.cn_name_cap。<span class="red">触手把你捂着的衣服撕到裂开</span>，并拽着撕下来的布料，撤退回下水道当中。
+		<<gtrauma>><<gstress>><<stress 6>><<trauma 6>>
+		<br><br>
+		在你身处于马路中间时，你突然意识到你并没有穿任何内裤。你赶忙将双手按在你的两腿之间来压住你的$worn.lower.cn_name_cap。
+		<br><br>
+		<<underlowerruined>><<exposure>>
+		<<destinationeventend>>
+	<<else>>
+		触手到处乱窜，你捂住你的<<allBottoms>>。<span class="red">触手把你捂着的衣服撕到裂开</span>，并拽着撕下来的布料，撤退回下水道当中。
+		<<gtrauma>><<gstress>><<stress 6>><<trauma 6>>
+		<br><br>
+		你被无情地抛弃在了街道中央。<<covered>>
+		<br><br>
+		<<overlowerruined>><<lowerruined>><<exposure>>
+		<<destinationeventend>>
+	<</if>>
+<</if>>

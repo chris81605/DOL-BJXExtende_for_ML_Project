@@ -1,0 +1,44 @@
+:: Manor Kylar Room []
+<<set $outside to 0>><<location "kylarmanor">><<effects>>
+
+你正待在凯拉尔的卧室里。桌上的电脑在持续运转着，与之相连接的显示器有足足六个。此之外还有一张大床，上面铺着许多床单和枕头。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		雨敲打着天窗，传来啪嗒啪嗒的声音。
+	<<elseif $weather is "clear">>
+		月光透过天窗照射了进来。
+	<<else>>
+		天窗那里黑漆漆的，什么都看不见。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		雨敲打着天窗，传来啪嗒啪嗒的声音。
+	<<elseif $weather is "clear">>
+		阳光透过天窗倾泻下来。
+	<<else>>
+		透过天窗，你可以看见天空上的云彩。
+	<</if>>
+<</if>>
+<br><br>
+
+<<set _kylar to statusCheck("Kylar")>>
+<<if _kylar.state isnot "prison">>
+	<<if Time.hour gte 18>>
+		凯拉尔坐在<<nnpc_his "Kylar">>的电脑前。
+		<br><br>
+
+		<<link [[靠近凯拉尔|Manor Kylar]]>><</link>>
+		<br>
+	<<elseif Time.hour lte 6>>
+		凯拉尔以一个随意的角度躺在<<nnpc_his "Kylar">>的床上，那些床单被杂乱的裹扎在<<nnpc_him "Kylar">>的身上。
+		<br><br>
+	<</if>>
+
+	<<if $kylar_sleep_abduction is undefined>>
+		<<link [[睡觉|Manor Sleep Abduction]]>><<set $kylar_sleep_abduction to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<<link [[离开 (0:01)|Manor Hall]]>><<pass 1>><</link>>
+<br>

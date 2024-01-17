@@ -1,0 +1,52 @@
+:: Empty Classroom Strip []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你走到教室的中央，你感觉到
+<<if $player.penisExist and $player.vaginaExist>>
+	你的肉棒已经硬了，而且你的阴户也开始湿润了，
+<<elseif $player.penisExist>>
+	你的鸡巴已经硬起来了，
+<<elseif $player.vaginaExist>>
+	你的小穴已经湿透了，
+<</if>>
+你很期待接下来要做的事。
+<br><br>
+
+你一件件褪去身上的衣服并任由其滑落在地，半响，你便以完全裸露的姿态出现在了空教室内。<<clothesstrip>>
+<br><br>
+
+<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+	如此寂静的场合只会让你更加胆大妄为，尽管学校可能没什么人了，但依旧会有值班的保安在大楼里巡逻。
+	有那么一瞬间，你在想如果你被保安抓住了会怎样。而这种想法只会让你更加兴奋。
+	<br><br>
+<<else>>
+	走廊里的声音提醒着你这有多危险，但这只会让你更加兴奋。
+	<<if $arousal gte 10000>>
+		你开始想象，如果有人抓住你的话，他们会怎么对待你，光是这个想法就把你推向了绝境。
+		<<orgasm>>
+	<<elseif $arousal gte 9000>>
+		你开始想象，如果有人抓住你的话，他们会怎么对待你，光是这个想法就让你感到绝望。
+		<br><br>
+	<<else>>
+		当你开始想象有人抓住你并做些什么的时候，你不禁打了个寒颤。
+		<br><br>
+	<</if>>
+<</if>>
+
+你在想是否应该继续下去。
+<<set _exhibLevel to (Time.dayState is "night" ? 3 : 4)>>
+<<if $exhibitionism gte (Time.dayState is "night" ? 35 : 55)>>
+	<<if $exhibitionism lt 55>> <!-- if exhibitionism gte 35 and lt 55 and it's not night -->
+		<span class="blue">在晚上做这件事让你更有信心。</span>
+	<</if>>
+	<br><br>
+
+	<<link [[自慰|Empty Classroom Masturbation]]>><<set $masturbationstart to 1>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+	<br>
+<<else>>
+	<span class="blue">不过，你的暴露癖还不足以让你做这件事。</span><<if $exhibitionism gte 35>>你应该可以等到晚上再来。<</if>>
+	<br><br>
+
+<</if>>
+<<link [[穿上衣服并离开 (0:01)|Hallways]]>><<pass 1>><<clotheson>><<set $eventskip to 1>><</link>>
+<br>

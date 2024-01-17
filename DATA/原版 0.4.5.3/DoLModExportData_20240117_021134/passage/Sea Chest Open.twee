@@ -1,0 +1,36 @@
+:: Sea Chest Open []
+<<effects>>
+
+你打开了锁，里面的宝藏呈现在你的眼前。各种被盗的珠宝，还是干燥的状态。
+<<if $rng gte 100>>
+	那些看起来像真的钻石一样，这对销赃者来说很有价值。
+	<<set $blackmoney += 1200>>
+<<elseif $rng gte 51>>
+	它们可能对一个销赃人来说有还一点价值。
+	<<set $blackmoney += 300>>
+<<else>>
+	它们可能对于销赃人来说可能有一定的价值。
+	<<set $blackmoney += 50>>
+<</if>>
+<br><br>
+
+<<if $museumAntiques.antiques.antiquecoralring isnot "found" and $museumAntiques.antiques.antiquecoralring isnot "talk" and $museumAntiques.antiques.antiquecoralring isnot "museum">>
+	<<set $antiquemoney += 800>><<museumAntiqueStatus "antiquecoralring" "found">>
+	还有一枚镶满珊瑚的戒指。它有些庸俗，看起来像金子做的，但因年代久远而褪色。这枚戒指应该放在博物馆里。
+	<br><br>
+<</if>>
+
+<<if $skulduggery lt 700>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<<pirate_watch 1>>
+海风刮过你的头发。<span class="blue">你打了个寒颤。</span>
+<br><br>
+
+你回到了水中。
+<br><br>
+
+<<link [[继续|Sea]]>><<set $eventskip to 1>><</link>>
+<br>

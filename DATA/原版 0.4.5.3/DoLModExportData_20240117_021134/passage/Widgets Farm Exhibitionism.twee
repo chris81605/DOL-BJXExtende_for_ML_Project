@@ -1,0 +1,56 @@
+:: Widgets Farm Exhibitionism [widget]
+<<widget "events_farm_exhibitionism">>
+	<<rng 3>>
+	<<switch $rng>>
+		<<case 1>>
+			你躲在一捆干草后面保护自己的尊严，观察着前面的路，想要确保周围是安全的。
+			<br><br>
+
+			你看到一辆拖拉机隆隆驶来。
+
+			<<if random(1, 2) is 2>>
+				你躲得更低，听着它驶过，直到声音消失才从藏身之处出来。
+				<br><br>
+
+				<<link [[继续|Farmland]]>><<set $eventskip to 1>><</link>>
+				<br>
+			<<else>>
+				<br><br>
+				你继续压低身体，听着拖拉机逐渐驶近。<span class="purple">它停在了附近，</span>你屏住呼吸片刻，直到<span class="pink">干草堆突然开始颤动。</span>你抬头一看，拖拉机的起重机已经抓住了干草的顶部，你的藏身之处马上会被挪走，你即将暴露在外！
+
+
+				<<if $leftarm is "bound" and $rightarm is "bound">>
+					<span class="blue">由于你的手臂被绑着，你只能逃跑。</span>
+					<br><br>
+				<<else>>
+					你可以逃跑，但司机会看到你。
+					<br><br>
+					<<link [[紧紧抓住干草|Farmland Exposed Cling]]>><</link>>
+					<br>
+				<</if>>
+				<<link [[跑|Farmland Exposed Run]]>><<trauma 6>><<stress 6>><<fameexhibitionism 1>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<</if>>
+		<<case 2>>
+			<<beastNEWinit 3 pig>><<generate4>><<person4>>
+			前方传来一阵脚步声。一群<<beastsplural>>绕过拐角，朝你走来。它们对你裸露的身体毫不关心，但你听到一个<<personsimple>>在它们后面喊叫。你要被别人看见了。<<covered>>
+			<br><br>
+
+			<<link [[朝反方向跑|Farmland Exposed Sprint]]>><</link>><<athleticsdifficulty 200 1200>>
+			<br>
+			<<link [[躲在牛群里|Farmland Exposed Hide]]>><</link>>
+			<br>
+		<<case 3>>
+			你听到前方有汽车的声音。它越来越近了。<<covered>>
+			<br><br>
+
+			道路两侧都是茂密的灌木丛。
+			<br><br>
+
+			<<link [[挤进灌木丛里|Farmland Exposed Hedge]]>><<pain 8>><</link>><<ggpain>>
+			<br>
+			<<link [[继续走|Farmland Exposed Walk]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+			<br>
+
+	<</switch>>
+<</widget>>

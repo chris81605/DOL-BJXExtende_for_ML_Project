@@ -1,0 +1,71 @@
+:: Stim Dealer Steal []
+<<effects>>
+
+<<if $mathsstimcaught isnot 1>>
+	你等待一群学生接近毒贩，然后混进他们中间，以便接近目标。其他学生困惑地瞥了你几眼，但毒贩的注意力被分散了，没有注意到你不是他们中的一员。趁着他们进行交易时，你偷偷把手伸进毒贩的外套里。
+	<br><br>
+
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>><<set $mathsstim += 1>><<set $mathsstimstolen += 1>>
+		你抓紧手中的一包药片，屏住呼吸，包装随着指尖的轻微摩擦发出声响。毒贩仍浑然不觉。你在附近逗留了足够久的时间以避免过早离开引起任何的怀疑，然后溜进了另一群行人中，偷来的药片被你安全地藏了起来。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<endevent>>
+		<<link [[继续|Oxford Street]]>><</link>>
+		<br>
+	<<else>>
+		<<set $mathsstimcaught to 1>>
+		毒贩瞥了你一眼，然后把你用力推开。其他学生都不明所以，但毒贩眯缝着的双目仍锁定在你的身上，露出了一个恶意的冷笑。
+		<br><br>
+
+		"你犯了一个大错。"<<he>>说道。<<He>>望向其他学生，"你们其他人都听好了，第一个让<<phim>>发出尖叫的人免单。赶紧的，趁我还没改变主意。"
+		<br><br>
+
+		其他学生转头看向你，权衡着他们的选择。趁着他们犹豫的时间，你突然跑起来逃了出去，但你确信事情还没有结束。从现在起，这里的毒贩会一直关注你。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<endevent>>
+		<<link [[继续|Oxford Street]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	毒贩们正在找你，所以你必须更加小心。你等待一个学生接近毒贩，保持着距离远远观察。毒贩离开时，你跟在后面。在毒贩下一次拐进一个小巷时，你追了上去准备行动。
+	<br><br>
+
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>><<set $mathsstim += 1>><<set $mathsstimstolen += 1>>
+		你把手伸进毒贩外套，抓起一包药片就跑。你没时间去确认是否有人注意到你，任何迟疑都是灾难性的。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<endevent>>
+		<<link [[继续|Oxford Street]]>><</link>>
+		<br>
+	<<else>>
+		<<set $mathsstimcaught to 1>><<generate2>><<generate3>>
+		但是你刚转过一个拐角就不得不停下来。毒贩就站在那，面朝着你，浑身肌肉发达。你转身逃跑，但回来的路被更多长相粗糙的人挡住了。
+		<br><br>
+
+		"我们听说了你的一切，"毒贩冷笑道。"是时候给你上一课了。"
+		<br><br>
+
+		毒贩手下的暴徒们向你逼近。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<link [[乖乖过去|Maths Abduction]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[尖叫|Maths Abduction]]>><<set $phase to 1>><</link>>
+		<br>
+		<<if $submissive gte 1500>>
+			<<link [[求饶|Maths Beg]]>><<sub 1>><</link>><<submissivetext>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,206 @@
+:: Balloon Widgets [widget]
+<<widget "stallShop-text">>
+	<<set _popcorn to $balloonStand.robin.status is "sabotaged" ? "爆米花和<<print Time.season is 'winter' ? '热巧克力' : '柠檬水'>>" : "爆米花">>
+
+	<<if (getRobinLocation() is "beach")>>
+		<<if $balloonStand.robin.status is "sabotaged">>
+			<<set _robinText to "顾客们在你周围零零散散地聚集起来。路对面，罗宾正饱受骚扰，竭尽全力想吸引人们来到<<nnpc_his Robin>>的摊位。">>
+		<<elseif $balloonStand.robin.status is "helped">>
+			<<set _robinText to "对面，罗宾的生意比平时要好。<<nnpc_He Robin>>注意到你的视线，朝你招了招手。">>
+		<<else>>
+			<<set _robinText to "对面，罗宾正和一位独身一人的顾客说话。<<nnpc_He Robin>>注意到你的视线，试探性地朝你笑了笑。">>
+		<</if>>
+	<<elseif $robinmissing isnot 0>>
+		<<if $balloonStand.robin.status is "sabotaged">>
+			<<set _robinText to "顾客围着你转。你瞥了一眼罗宾平时摆摊的地方，不禁想为<<nnpc_his Robin>>的缺席负责。">>
+		<<elseif $balloonStand.robin.status is "helped">>
+			<<set _robinText to "那个<<personsimple>>开始给又一个想喝饮料的顾客指路到罗宾的摊子。<<He>>很快就发现了罗宾并不在，有些沮丧地纠正了<<himself>>。">>
+		<<else>>
+			<<set _robinText to "你瞥了一眼罗宾平时摆摊的地方。">>
+		<</if>>
+	<<elseif $balloonStand.robin.status is "sabotaged">>
+		<<set _robinText to "顾客围着你转。">>
+	<<else>>
+		<<set _robinText to "">>
+	<</if>>
+
+	<<if $phase is "firstcustomer">>
+		“太好了！”那位<<person>>高兴地拍了拍<<his>>的手。“你想要什么？”
+	<<elseif $balloonStand.freeDrink>>
+		“嘿，你！”那位<<person1>><<person>>快速地向你露出一个微笑。“再次感谢你的生意点子。我已经看到了来客量在增加。这里，给你一杯免费的饮料，正如我所承诺的。”<<set $balloonStand.freeDrink to false>>
+	<<else>>
+		当你浏览<<his>>摊位时，那位<<person>>向你<<print $balloonStand.owner is "angry" ? "皱起了眉头" : "面带微笑">>。空气中弥漫着新鲜_popcorn的香味。<<print _robinText>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "stallShop-main">>
+	<<if $balloonStand.freeDrink>>
+		<<set $balloonStand.freeDrink to false>>
+		<<switch Time.season>>
+			<<case "winter" "autumn">><<set _cold to "热">><<wearProp "mug">>
+			<<default>><<set _cold to "冰">><<wearProp "lemonade">>
+		<</switch>>
+
+		“嘿，你！”那位<<person1>><<person>>快速地向你露出一个微笑。“再次感谢你的生意点子。我已经看到了来客量在增加。这里，给你一杯免费的饮料，正如我所承诺的。”
+		<br><br>
+
+		<<switch _cold>>
+			<<case "热">>你小心地啜饮，以免烫伤你的舌头。这款<<seasonal_beverage>>味道浓郁<<print Time.season is "winter" ? "且奶香醇厚" : "并带有香料味">>。
+			<<case "冰">>你抿了一口。这款_cold<<seasonal_beverage>><<print Time.season is "spring" ? "果味宜人" : "有点酸">>且令人神清气爽。
+		<</switch>>
+		<<stress -9>><<lstress>>
+		<br><br>
+
+		你和摊主小聊了一会儿天，直到一个顾客打断了你们。你感谢了<<him>>提供的免费饮料，然后离开。
+		<br><br>
+
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+
+	<<else>>
+		<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>><<unset $tempDisable>>
+		<<set $outside to 0>><<effects>>
+		<<set $shopName = "stall">>
+		<<stallShop-text>>
+
+		<div id="tryonstats-div"><<tryOnStats>></div>
+		<<unset $shopListStartCount>>
+		<<unset $clothes_choice>>
+		<<set $shopPage = 0>>
+
+		<div id="warmth-description" class="hidden">
+			<<warmthscale>>
+			<<warmth_description>>
+		</div>
+
+		<<gifticon "balloons">><<link "查看商品">><<replace "#clothingShop-div">><<AllShop>><</replace>><<set $phase to 0>><</link>>
+		<<run linkifyDivs('.button-back-to-shop')>>
+		<<if ndef $popcorn>><<set $popcorn to 0>><</if>>
+		<<if ndef $daily.ex.popcorn >><<set $daily.ex.popcorn to 0>><</if>>
+		<<if $popcorn gte 3>>
+			<br>
+			<span class="blue">你一次只能携带三份<<foodicon "popcorn">>爆米花。</span>
+		<<elseif $money gte 600 and $daily.ex.popcorn lt 3>>
+			<br>
+			<<foodicon "popcorn">><<link [[买爆米花 (0:02 £6)|Balloon Purchase]]>><<set $money -= 600>><<set $phase to "popcorn">><<pass 2>><</link>>
+		<</if>>
+		<<if $balloonStand.robin.status is "sabotaged" and $money gte 300 and !($daily.ex.balloonDrink gte 3)>>
+			<<switch Time.season>>
+				<<case "winter">><<set _drink to "hotcocoa">><<set _phase to "hot drink">>
+				<<case "spring">><<set _drink to "strawberrylemonade">><<set _phase to "cold drink">>
+				<<case "summer">><<set _drink to "lemonade">><<set _phase to "cold drink">>
+				<<default>><<set _drink to "hotcider">><<set _phase to "hot drink">>
+			<</switch>>
+			<br>
+			<<foodicon _drink>><<link [[买点喝的 (0:02 £3)|Balloon Purchase]]>><<set $money -= 300>><<set $phase to _phase>><<pass 2>><</link>>
+		<</if>>
+		<<if $balloonStand.robin.status is "convince" and !$daily.ex.balloonConvince>>
+			<br>
+			<<socialiseicon>><<link [[说服摊主和罗宾合作|Balloon Convince]]>><<set $phase to "persuade">><</link>><<englishdifficulty 1 1000>>
+		<</if>>
+		<br><br>
+		<<if $tryOn.value gt 0>>
+			<<if $tryOn.value lt $money>>
+				<<sendItemsToDropdown>>
+				<<shopicon "register">><<link "购买">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+				<br>
+				<<wardrobeicon>><<link "买完送到衣柜">>
+					<<buyTryOnClothes "wardrobe">>
+					<<updatesidebarmoney>>
+					<<updatewarmthscale>>
+					<<updatewarmthdescription>>
+					<<updatesidebarimg>>
+					<<updatesidebardescription>>
+					<<updateallure>>
+					<<updatetryonstats>>
+					<<updateclothingshop>>
+					<<run updateMoment()>>
+				<</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<getouticon>><<link [[离开|Beach]]>><<shopClothingFilterReset>><<set $tryOn.autoReset to true>><<endevent>><</link>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "balloonRobinHelped">>
+	<<set _boyfriend to ($robinromance ? "<<person2>><<= $pronoun is 'm' ? '男' : '女'>>朋友" : "朋友")>>
+
+	“你要么是<<print $robinromance ? "真的很爱<<person2>><<him>>" : "一个非常好的朋友">>，要么你真的相信<<person2>><<his>>的商品质量。无论哪种情况，我都接受。行，我们达成协议。我会把我的顾客介绍到你_boyfriend的摊位，如果<<he>>愿意把想吃东西的顾客指引到我这儿来的话。”
+
+	<<set $robin.moneyModifier += 50>>
+	<<set $balloonStand.robin.status to "helped">>
+	<<set $robin.timer.customer to 5>> /*Give Robin a few days to notice the effects on their stall*/
+<</widget>>
+
+<<widget "balloonRobinSabotaged">>
+	<<set $robin.moneyModifier -= 50>>
+	<<set $balloonStand.robin.status to "sabotaged">>
+	<<set $balloonStand.owner to _args[0] or "friendly">>
+	<<set $robin.timer.customer to 5>> /*Give Robin a few days to notice the effects on their stall*/
+	<<set $daily.ex.balloonDrink to 3>> /*So the balloon owner doesn't start selling lemonade three seconds after*/
+<</widget>>
+
+<<widget "balloonRobinGrateful">>
+	<<set _boyfriend to ($robinromance ? "<<person2>><<= $pronoun is 'm' ? '男' : '女'>>朋友" : "最好的朋友")>>
+	<<set _lemonade to Time.season is "winter" ? "热巧克力" : "柠檬水">>
+	<<set _stall to Time.season is "winter" ? "<<person1>>海滩上有个<<personsimple>>" : "<<person1>>那边那个<<personsimple>>">>
+
+	罗宾目瞪口呆了片刻。“你……是为了我才这么做的？”
+	<br><br>
+	“当然，”你说，“你可是我的_boyfriend。”
+	<br><br>
+	罗宾看了你一会儿，然后把<<person2>><<his>>的手臂搂在你的脖子上并且
+	<<if $robinromance is 1>>
+		吻了你。<<takeKissVirginity "Robin" "loveInterest">> <<He>>轻喘了一声才放开了你，看上去有些惊慌失措。
+	<<else>>
+		紧紧地抱着你，力道大到让你感到些许疼痛。<<He>>先放开了你，激动得说不出话来。
+	<</if>>
+	<<his>>的眼中带泪，<<he>>轻声说：“谢谢你。你为我做了这么多……没有你我该怎么办？”<<He>><<print $robinromance is 1 ? "温柔地" : "再次">>拥抱你，你们就这样静静地待了一段时间。
+	<br><br>
+	“打扰一下，”一位<<generate3>><<person3>><<person>>打断了你们俩的拥抱。“<<print _stall>>告诉我你在卖_lemonade？我可以买一些吗？”
+	<<if $location isnot "park">>
+		<br><br>
+		你看了一眼气球摊位。那位<<person>>对你抛了个媚眼。
+		<br><br>
+	<</if>>
+	“啊，当然！”罗宾说。“我现在就给你做，<<person3>><<sir>>！”<<person2>><<He>>向你投去最后一个感激的微笑，然后<<himself>>忙碌了起来，制作着_lemonade。<<ggglove "Robin">><<llrtrauma>><<npcincr Robin trauma -10>><<npcincr Robin love 10>>
+	<br><br>
+	一种温暖的感觉充满了你的内心。你看着罗宾帮助顾客，然后向<<him>>告别。在你离开之前，<<He>>用口型向你默默地传达了最后一次充满感激的“谢谢”。<<famegood 5>><<stress -3>><<trauma -3>><<lstress>><<ltrauma>>
+<</widget>>
+
+<<widget "balloonRobinAngryHelp">>
+	“我没事。我现在不需要<<print ["angry", "appeased"].includes($balloonStand.owner) ? "更多来自于你的" : "你的">>帮助。”罗宾局促不安地动了动。“你介意让我一个人静一会儿吗？”很明显<<hes>>还是<<npcHurt "robin">>。
+	<br><br>
+	<<endevent>>
+<</widget>>
+
+<<widget "balloonRobinAngryPurchase">>
+	“感谢你的购买，”<<he>>说。看起来<<He>>对于之前冷淡的态度感到抱歉，当<<he>>把钱放在柜台下时<<his>>的表情变得柔和。
+<</widget>>
+
+<<widget "balloonRobinTalk">>
+	<<if $balloonStand.robin.status is "helped" and $balloonStand.robin.talked is false and $robin.timer.customer is 0>>
+		<br><br>
+		“我不知道你有没有注意到，但我最近的顾客数量增加了很多！”尽管<<He>>有点手忙脚乱，却看起来很高兴，。“我不知道是什么原因，但是……哇哦！”
+	<<elseif $balloonStand.robin.status is "sabotaged" and $balloonStand.robin.talked is false and $robin.timer.customer is 0>>
+		<br><br>
+		“你知道的，我最近的顾客并不多。”<<His>>愁云满面。“那个摊位<<print getRobinLocation() is "beach" ? "在那边开始卖柠檬水了" : "原先在海滩上卖爆米花和气球，转为做<<seasonal_beverage>>的生意了">>……”<<He>>叹了口气。“我真希望知道为什么。”
+	<</if>>
+<</widget>>
+
+<<widget "balloonRobinIntro">>
+	<<loadNPC 0 "stall_owner">><<npc Robin 2>><<person2>>
+	<<set _lemonade to Time.season is "winter" ? "热巧克力" : "柠檬水">>
+
+	你看到罗宾站在<<his>>的_lemonade摊位后面。当<<he>>注意到你时，<<he>>离开摊位并且
+	<<if C.npc.Robin.trauma gte 40>>
+		走向你。“嘿，”<<he>>嘟囔着。“你有……<<print Time.season is "winter" ? "听说海滩上的那个摊位了吗" : "看到那边的摊位了吗">>？卖气球和爆米花的那个。本来要吸引顾客就已经够难的了。我应该为此担忧吗？”
+	<<else>>
+		向你靠了过来。“嘿，很高兴在这里见到你！我希望你稍后能来我的摊位。”罗宾咬着<<his>>的嘴唇。“你看到那个在<<print Time.season is "winter" ? "海滩上" : "这里">>开设的其他摊位了吗？我应该为此担忧吗？我不想让我的顾客被爆米花分心！”
+	<</if>>
+	<br><br>
+	<<link [[安抚罗宾|Balloon Robin Response]]>><<set $phase to 0>><</link>><br>
+	<<link [[保持沉默|Balloon Robin Response]]>><<set $phase to 1>><</link>>
+<</widget>>

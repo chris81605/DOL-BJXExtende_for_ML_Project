@@ -1,0 +1,42 @@
+:: Clearing Spring Masturbation []
+<<effects>><<set _enableSexToys to true>>
+
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+	你躺下来，让你的手随意摆动。
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+
+<<if (!$edenpush and $danger gte (9900 - $allure) and (between(Time.hour, 6, 11) or Time.hour gt 14)) or $edenpush is 2>>
+	<<if $edenpush is 2>><<unset $edenpush>><</if>>
+
+	<<npc Eden>><<person1>>不知什么时候起，你觉得你的手被别人抓住了。
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].dom gte 75>>
+		让我来，”伊甸说，当<<he>>引导你的手臂离开的方式和
+		<<if $player.penisExist>>
+			<<his>>用手揉搓着你的<<penis>>。
+		<<elseif $player.vaginaExist>>
+			<<his>>用手指揉搓着<<clit>>。
+		<</if>>
+	<<else>>
+		"让我来。"伊甸说，<<he>>把你的手臂拨开，并将<<his>>的手顺势放到你的大腿上。
+	<</if>>
+	<br><br>
+
+	<<link [[推开|Clearing Spring Masturbation Push]]>><<npcincr Eden love -1>><<npcincr Eden dom -1>><</link>>
+	<br>
+	<<link [[扑身进伊甸|Clearing Spring Masturbation Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<promiscuous1>>
+	<br>
+
+<<else>>
+
+	<<masturbationeffects>>
+	<<masturbationactions>>
+	<<masturbationControls "edenPush">>
+<</if>>

@@ -1,0 +1,35 @@
+:: Prison Scarred Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $NPCList[0].penis isnot "none">>
+		<<set $NPCList[0].penis to 0>>
+	<<else>>
+		<<set $NPCList[0].vagina to 0>>
+	<</if>>
+	<<set $position to "doggy">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1>>
+	<<set $alarm to 0>>
+	另一个囚犯前来调查你的哭声，<span class="purple">但在看到<<scarred_inmate 0>>后便离开了。</span>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Prison Scarred Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Prison Scarred Rape]]>><</link>></span><<nexttext>>
+<</if>>

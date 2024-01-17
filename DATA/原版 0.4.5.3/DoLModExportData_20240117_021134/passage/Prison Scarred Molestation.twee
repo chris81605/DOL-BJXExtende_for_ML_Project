@@ -1,0 +1,49 @@
+:: Prison Scarred Molestation []
+<<effects>>
+<<bind>>
+你转过身去，扶住牢房的栏杆，<<His>>的手在<<he>>捆住你时动作快得几乎看不清，只花了几秒时间。"等的就是这个。"<<he>>说，
+<<if $worn.lower.name is "naked">>
+	<<if $worn.under_lower.name is "naked">>
+		边用手抚摸你的<<bottom>>。
+	<<else>>
+		边拉下了你的$worn.under_lower.cn_name_cap。
+	<</if>>
+<<else>>
+	<<if $worn.under_lower.name is "naked">>
+		边拉下了你的$worn.lower.cn_name_cap。
+	<<else>>
+		边拉下了你的$worn.lower.cn_name_cap和$worn.under_lower.cn_name_cap。
+	<</if>>
+<</if>>
+<<if playerChastity()>>
+	<<He>>抓住了你的$worn.genitals.cn_name_cap，拉扯着。
+	<br><br>
+	"操，"<<he>>边说着，用力扯到连上面的金属都深深地陷进你的皮肤里。"我怎么才能把这玩意弄下来？"<<gpain>><<pain 4>>
+	<br><br>
+	<<set $worn.genitals.integrity -= 100>>
+	<br><br>
+	<<if $worn.genitals.integrity lte 0>>
+		<<He>>从一块松动的石头后面取来了各种工具，一把螺丝刀、一把锤子，还有把钳子。<<He>>一点不带手软，<span class="red">设法用钳子把金属钳掉。</span>
+		<br><br>
+		<<set $worn.genitals.type.push("broken")>>
+		<<genitalsruined>>
+		<<He>>满意地拍拍你的屁股，然后蹲到你身后。
+		<br><br>
+
+		<<link [[继续|Prison Scarred Molestation 2]]>><</link>>
+		<br>
+	<<else>>
+		<<He>>从一块松动的石头后面取来了各种工具，一把螺丝刀、一把锤子，还有把钳子。<<He>>的动作并不温柔，但没有一个管用。<<He>>在解开<<his>>的细绳之前，先狠狠地打了你的屁股。"走吧。"<<ggpain>><<ggtrauma>><<ggstress>><<pain 8>><<stress 12>><<trauma 12>>
+		<<prison_unbind>>
+		<br><br>
+		<span class="green">你获得了<<scarred_inmate 0 apo>>的保护。</span><<set $prison.protection to "scarred">>
+		<br><br>
+		<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<br><br>
+
+	<<link [[继续|Prison Scarred Molestation 2]]>><</link>>
+	<br>
+<</if>>

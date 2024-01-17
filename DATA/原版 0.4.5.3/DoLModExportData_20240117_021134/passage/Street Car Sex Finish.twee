@@ -1,0 +1,46 @@
+:: Street Car Sex Finish []
+<<set $outside to 0>><<effects>>
+<<unset $street_car_police>>
+<<if $consensual is 1>>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<ejaculation>><<set $prostitutionstat += 1>><<fameprostitution 1>>
+		"这是你的钱，婊子。"<<He>>扔给你一沓钞票，然后爬回了驾驶座。"<<if $fame.prostitution gte 200>>那么你这婊子<<else>>那么你<</if>>想去哪儿吗？"
+		<br><br>
+		<<tipreceive>>
+	<<else>>
+		"很好，我希望你没有想要得到任何东西。"<<He>>将你从车里推出，开着车走了。<<tearful>>你挣扎着站了起来。
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<ejaculation>><<fameprostitution 1>><<set $prostitutionstat += 1>>
+		"这是你的报酬，婊子，"<<He>>往你身上丢了些钱后便爬回到了驾驶座上。<<tearful>>你下车然后听到<<him>>开走了。
+		<br><br>
+		<<tipreceive>>
+	<<elseif $finish is 1>>
+		"很好，我希望你没有想要得到任何东西。"<<He>>将你从车里推出，开着车走了。<<tearful>>你挣扎着站了起来。
+		<br><br>
+	<<else>>
+		你成功将<<person>>击退，获得了逃跑的时间。<<tearful>>你离开车子，逃进小巷里。
+		<br><br>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if ($consensual is 1) and ($enemyarousal gte $enemyarousalmax)>>
+	/*  Have to save pronoun for next passage, where it get unset or if PC decideds to leave, advantaged of not having to move endcombat text to next passage. */
+	<<set $npcpronountemp to $pronoun >>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[载我一程|Street Car Sex Dropoff]]>><<set $pronoun to $npcpronountemp>> <<unset $npcpronountemp>> <</link>>
+	<br>
+	<<set _leave to $bus.toUpperFirst()>>
+	<<if $bus isnot "park">>
+		<<set _leave += ($location is "alley" ? " alleyways" : " Street")>>
+	<</if>>
+	<<link [[离开车子|_leave]]>><<unset $npcpronountemp>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

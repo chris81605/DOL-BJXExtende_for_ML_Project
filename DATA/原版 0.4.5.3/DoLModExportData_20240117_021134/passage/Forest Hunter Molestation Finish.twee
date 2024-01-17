@@ -1,0 +1,32 @@
+:: Forest Hunter Molestation Finish []
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<ejaculation>>
+	<<if $hunterintro is 1>>
+		伊甸<<if $enemyanger gte ($enemyangermax / 5) * 2>>怒视着你，低吼道，<<else>>对你嘲笑着说，<</if>>"我知道我能再次捉住你。来吧，我带你回家。"
+	<<else>>
+		<<if $enemyanger gte 20>>
+			猎人咧嘴一笑。"你真有劲头，我喜欢这样的。"
+		<<else>>
+			猎人笑了。"你是个温和的人，不是吗？我最好带上你，把你一个人留在这里是不行的。"
+		<</if>>
+	<</if>>
+	<<He>>从<<his>>的袋子中拿出了一段绳子。你会被绑起来的！
+	<br><br>
+
+	<<link [[不要挣扎|Forest Hunter Intro]]>><<clotheson>><<endcombat>><</link>>
+	<br>
+	<<link [[反抗|Forest Hunter Resist Molestation]]>><<set $enemyanger += 200>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>><<set $foresthunt to 0>>
+	尽管<<his>>的力量很强，但你还是设法挣脱开了束缚。你找到机会，<<tearful>>你逃进了森林。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

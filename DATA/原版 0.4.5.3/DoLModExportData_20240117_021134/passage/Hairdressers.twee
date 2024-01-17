@@ -1,0 +1,62 @@
+:: Hairdressers []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>>
+你在理发店里。这里出售各种美发产品。你还可以剪发或染发。
+<<if Time.dayState is "night">>
+	你独自待在黑暗中。
+<<elseif $exposed gte 1>>
+	你藏在橱柜里以保护自尊。
+<<else>>
+	有个空位可坐。
+<</if>>
+<<if $hairgelBottles is undefined>>
+	<<set $hairgelBottles to 0>>
+<</if>>
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passoutshop>>
+<<else>>
+	<<if Time.hour is 21>>
+		现在要关门了。保安正把大家赶到外面。
+		<<if $exposed gte 1>>
+			你意识到如果保安发现你穿成这样，你会有多大风险时，你内心感到了恐慌。
+		<</if>>
+		<br><br>
+		<<if $exposed lte 0>>
+			<<highicon>><<link [[出去|High Street]]>><</link>>
+			<br>
+		<<else>>
+			<<ind>><<link [["躲起来直到关门 (1:00)"|Hairdressers]]>><<pass 1 hour>><</link>>
+		<</if>>
+	<<else>>
+		<<if Time.dayState is "night" and Time.hour isnot $closinghour>>
+			<<hairdressericon "gel">><<link [[偷一瓶发胶|$passage]]>><<crimeUp `8 / 100` "petty">><<set $hairgelBottles += 1>><</link>><<crime "petty">>
+			<br>
+			<<hairdressericon "hairspray">><<link [[偷一瓶生发配方|$passage]]>><<crimeUp `50 / 100` "petty">><<set $sexStats.pills.pills["Hair Growth Formula"].owned++>><<set $sexStats.pills.boughtOnce to true>><</link>><<crime "petty">>
+			<br>
+			<<if !$weekly.theft.hairDressers>>
+				<<shopicon "register">><<link [[检查收银机|Hairdressers Register]]>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<if $exposed lte 1 and Time.dayState isnot "night" and Time.hour isnot 21>>
+			<<if $money gte 800>>
+				<<hairdressericon "gel">> <<link [[购买发胶 (£8)|Hairdressers Gel]]>><<set $money -= 800>><<set $hairgelBottles += 1>><</link>>
+				<br>
+			<<else>>
+				<<hairdressericon "gel">> <span class="blue">你买不起发胶。</span>
+				<br>
+			<</if>>
+			<<if $money gte 5000>>
+				<<hairdressericon "hairspray">> <<link [[购买生发配方 (£50)|Hairdressers Gel]]>><<set $money -= 5000>><<set $sexStats.pills.pills["Hair Growth Formula"].owned += 3>><<set $sexStats.pills.boughtOnce to true>><<set $phase to 1>><</link>>
+				<br>
+			<<else>>
+				<<hairdressericon "hairspray">> <span class="blue">你买不起发胶。</span>
+				<br>
+			<</if>>
+			<<hairdressericon "chair">><<link [[坐下|Hairdressers Seat]]>><</link>>
+			<br><br>
+		<</if>>
+		<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

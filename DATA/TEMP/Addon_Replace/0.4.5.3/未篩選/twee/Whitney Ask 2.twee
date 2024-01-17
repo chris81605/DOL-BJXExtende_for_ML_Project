@@ -1,0 +1,70 @@
+:: Whitney Ask 2 []
+<<set $outside to 0>><<pass 20>><<effects>>
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"这大概也没什么大不了的……"你低声说着，环顾四周，确保没有人在看。
+	<<elseif $speech_attitude is "bratty">>
+		"是啊，真是一群白痴，"你说。
+	<<else>>
+		"如果他们想要这些东西，他们是不会扔掉的，"你说。
+	<</if>>
+	你把手伸进<<if Time.season is "winter">>冰冷的<</if>>水里摸索，寻找面额较大的硬币。你得到了<<if $kylarSeen.includes("fountainIntro")>><<moneyGain 6 true true>><<else>><<moneyGain 3 true true>><</if>>。
+	<br><br>
+	惠特尼把手从水里抽了出来，<<print either("骄傲", "失望", "恼火", "茫然")>>地看着<<his>>的战利品。
+	<<He>>
+	<<if $worn.over_upper.name isnot "naked">>
+		用你的$worn.over_upper.cn_name_cap擦了擦手。
+	<<elseif $worn.upper.name isnot "naked">>
+		用你的$worn.upper.cn_name_cap擦了擦手。
+	<<elseif $worn.under_upper.name isnot "naked">>
+		用你的$worn.under_upper.cn_name_cap擦了擦手。
+	<<else>>
+		在你的胸上抹了抹手。
+	<</if>>
+<<elseif $phase is 1>>
+	你看着惠特尼从喷泉里偷硬币。
+	<<if $speech_attitude is "meek">>
+		"……没有回答我的问题……"你轻声说。
+	<<elseif $speech_attitude is "bratty">>
+		"我在问你话呢，你的耳朵也他妈被香烟堵住了吗？"你不满地问道。
+	<<else>>
+		"你就这么无视了我问的问题？"你说。
+	<</if>>
+	<br><br>
+	惠特尼当即回头给了你一个中指，然后把另一只手从水里抽了出来。<<he>>甩了甩手上的水滴，<<print either("骄傲", "失望", "恼火", "茫然")>>地看着<<he>>的收获。
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"喂，偷东西是不对的！"你说道<<if crimeSumCurrent("thievery","petty") gte 1000>>，同时努力不去想你自己曾经的盗窃行为<</if>>。
+	<<elseif $speech_attitude is "bratty">>
+		"即使对你来说，从喷泉里偷东西也太低级了，"你嘲弄道。
+	<<else>>
+		"这样做不对，"你说道<<if crimeSumCurrent("thievery","petty") gte 1000>>，同时努力不去想你自己曾经的盗窃行为<</if>>。
+	<</if>>
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"偷东西是不对的！"
+	<<elseif $speech_attitude is "bratty">>
+		"从喷泉里偷东西太低级了！"
+	<<else>>
+		"这是不对的！"
+	<</if>>
+	<<he>>用嘲讽的语气回答。"妈的真扫兴！"<<He>>停下来看了你一会儿，然后把<<he>>捡起来的几枚硬币扔回喷泉里。
+<</if>>
+<br><br>
+你们两个走回树下的长凳。<<He>>又点了一支烟，陷入了沉默。<<set $weatherCN to $weather.replace("rain","雨").replace("snow","雪")>>
+<br><br>
+<<if $whitneyromance is 1>>
+	"<<print either(
+		"这小镇真是烂透了，",
+		"偶尔一个人独处真好，",
+		"我真的很喜欢这$weatherCN，",
+		"除非我知道会惹毛别人，否则我是不会在室内吸烟的，",
+		"需要从噪音污染中休息一下，"
+	)>>"<<he>>说，"这就是给你的回答。"
+	<br><br>
+	<<whitneyoptions>>
+<<else>>
+	"管好你自己的事，荡妇，"<<he>>终于回答，"别再烦我了。"<<He>>把<<his>>的香烟扔进了喷泉，然后走开了，把你一个人留在树下。
+	<br><br>
+	<<whitneyexit>>
+<</if>>

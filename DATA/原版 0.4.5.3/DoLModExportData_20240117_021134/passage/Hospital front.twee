@@ -1,0 +1,27 @@
+:: Hospital front []
+<<set $outside to 1>><<set $location to "hospital">><<effects>>
+
+你站在全天开放的医院的前面。
+<<if $companion is "Robinrent">>
+	罗宾紧紧地拥抱着你。"谢谢你救了我，"<<nnpc_he "Robin">>说。"我想我要回家了。我需要休息一下。"
+	罗宾向你挥手告别，然后开始往家走。
+	<<unset $companion>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passouthospital>>
+<<else>>
+	<<if $exposed gte 1>>
+		你躲在入口外的灌木丛中。如果你把握好时间，你应该能够进入而不被发现。
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "hospital">>
+	<</if>>
+
+	<<getinicon>><<link [[进入医院门厅 (0:01)->Hospital Foyer]]>><<pass 1>><</link>>
+	<br>
+	<<entertownicon>><<link [[南丁格尔街 (0:01)->Nightingale Street]]>><<pass 1>><</link>>
+	<br>
+<</if>>

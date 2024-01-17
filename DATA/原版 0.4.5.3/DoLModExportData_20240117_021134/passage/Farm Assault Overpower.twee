@@ -1,0 +1,22 @@
+:: Farm Assault Overpower []
+<<effects>>
+
+<<generate1>><<person1>>你冲向单独行动的入侵者，一个<<person>>。艾利克斯在周围巡逻着。
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+			<<He>>转过身面对着你。艾利克斯从后面冲向<<him>>。<<person>>转身挥拳，但这让<<his>>对你暴露出了弱点。你一拳打在<<him>>的头上，<<him>>被你打倒在地。<<glove>><<npcincr Alex love 1>>
+			<br><br>
+
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<He>>转过身来面对你。<<He>>完全没注意到袭来的艾利克斯。<<He>>被打得瘫倒在地。<<glove>><<npcincr Alex love 1>>
+			<br><br>
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+		<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+	<</if>>
+<</for>>

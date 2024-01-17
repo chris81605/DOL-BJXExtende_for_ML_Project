@@ -1,0 +1,41 @@
+:: Domus Shy Seduce []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<set $parentNPC to clone($NPCList[0])>>
+<<set $shyNPC to clone($NPCList[1])>>
+<<endevent>><<generates1>><<set $NPCList[0] to clone($shyNPC)>>/*endevent is required to stop BOTH npcs turning up for sexy time. pers1 is now shynpc*/
+你进入房间，发现一个<<person1>><<person>>坐在一张大桌子旁。<<He>>抬头看着你。困惑掠过<<his>>的脸。
+<br>
+"你，你在做什么？"
+<br>
+当你接近<<him>>时，你把手指放在嘴唇上，眼睛里充满了欲望。
+<br><br>
+
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+<</if>>
+<<seductionskilluse>>
+<br>
+利用你的诱惑力，你抚摸<<his>>的脖子，亲吻<<him>>，同时用你的手暗示性地擦过你的身体。你诱人地爬上<<print either("桌子","沙发","椅子")>>，向<<him>>招手来加入你。
+<br><br>
+
+<<if $seductionrating gte $seductionrequired>>
+	你毫不费力地勾引了那个<<person>>。<<He>>急切地加入你。
+	<br><br>
+	<<link [[继续|Domus Shy Sex]]>><<set $sexstart to 1>><</link>>
+<<else>>
+	<<generate2>><<set $NPCList[1] to clone($parentNPC)>>
+	"救命！"<<he>>尖叫着。<<person2>>"<<if $pronoun is "m">>爸爸！<<else>>妈妈！<</if>>这里有个怪人在家具上爬！"
+	<br>
+	<<person>>出现了，把你带出了房子。
+	<br><br>
+
+	"谢谢你的努力，"<<he>>透过关闭的门叹息道。
+	<br><br>
+
+	<<link [[继续|Domus Street]]>><<unset $parentNPC>><<unset $shyNPC>><<endevent>><</link>>
+<</if>>
+<br>

@@ -1,0 +1,56 @@
+:: Brothel Show Bukkake Aggressive []
+<<effects>>
+
+<<if $brothel_show_flirt is 1>>
+	<<set $brothel_show_flirt to 0>>
+	<<set $seductiondifficulty to 6000>>
+<<else>>
+	<<set $seductiondifficulty to 10000>>
+<</if>>
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<set $brothel_show_security += 2>>
+你周围的冲突让一个邪恶的仪式成为可能。
+<<if $rng gte 67>>
+	当你占据他们的注意力并将他们的意识吸引到自己身上时，<<people>>颤抖着，瞬间完全处于你的支配之下。只需要一瞬间。
+	<br><br>
+<<elseif $rng gte 33>>
+	一股邪恶的能量充盈着你，溢出了出来，流过舞台，进入那些正在自慰的<<people>>身体内。他们颤抖着，陷入了可怕的狂喜之中。
+	<br><br>
+<<else>>
+	你放任内心的恶魔气息膨胀，短暂的瞬间，你不再是在舞台上，而是置身于一场久远的战斗之中。
+	<br><br>
+	幽灵般的触手从过去涌现而出。顾客们看不见它们，但他们能感受到它们，摸索和挤压着，穿透的不仅仅是肉体。
+	<br><br>
+<</if>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<set $brothel_show_crazed += 1>>
+	<<brothel_bukkake>>
+	<br><br>
+	顾客们在你周围倒下。下一批人围绕着保安涌过来，为了赶到你这里，他们急忙地踢开了上一批人。
+	<br><br>
+	<<link [[继续|Brothel Show Bukkake]]>><</link>>
+	<br>
+<<else>>
+
+	<<brothel_bukkake>>
+	<br><br>
+
+	保安们把顾客们赶了出去，而新的一群人则争相成为下一个。
+	<br><br>
+
+	<<endevent>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+
+	<<link [[继续|Brothel Show Bukkake]]>><</link>>
+	<br>
+
+<</if>>

@@ -1,0 +1,38 @@
+:: Domus House Prisoner []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<set _risk to 10>><<set $resc to 1>><<generateyv1>><<person1>>
+你打开了门闩。门后你发现一个<<person>>，<<His>>像狗一样蜷缩着，赤裸裸地睡在光秃秃的地板上，身上布满了伤痕和淤斑。
+<<He>>发出了鼻息声，两眼中带有狂乱，正盯视着你。
+<br>
+<<if currentSkillValue('english') gte (350+$rng)>>
+	你谨慎地组织自己的语言，<span class="green">你说服<<him>>你是友好的</span>，是来救<<him>>的。<<He>>抬起头朝你微笑。
+<<elseif $purity gte (750 + $rng)>>
+	不知怎的感觉到你散发出的纯净，<span class="green"><<he>>信任你</span>，相信你不会伤害<<him>>，<<He>>朝你微笑。
+<<else>>
+	你目不转睛地盯着，无言以对。毫无预兆地<<he>>突然嚎叫着蜷缩在地窖里。你需要几分钟的时间来安抚<<him>>，并让<<him>>相信你的友善。
+	<br><br>
+	<span class="red">你希望没人听到。</span>
+	<<set _risk += 35>>
+<</if>>
+<br><br>
+
+<<rng>>
+你领着<<him>>从房间走出来，把床上的毛巾递给<<him>>，<<He>>遮掩住<<himself>>的身体。你们一起轻手轻脚地爬上台阶，打开了活板门。<<famegood 2>>
+<br><br>
+<<if $rng gt _risk>>
+	楼上的房间仍然仍然空无一人，寂静无声。你们一起逃离了这所房子。
+	<br><br>
+	获得自由后，<<person>>哭着感谢你挽救<<his>>的生命。你挥手微笑着，看着<<he>>一瘸一拐地向多瑙河街走去。
+	<br>
+	你现在感觉很好。
+	<<lstress>><<ltrauma>><<gcontrol>><<stress -2>><<trauma -4>><<control 10>>
+	<br><br>
+	<<endevent>>
+	<<link [[离开|Domus Street]]>><<unset $resc>><</link>>
+<<else>>
+	上面的房间看起来是空的。<span class="red">在你要爬出去时一只手突然抓住了你。</span>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Domus House Dungeon Rape]]>><<set $molestationstart to 1>><</link>>/*End event clears out prisoner before combat*/
+<</if>>
+<br>

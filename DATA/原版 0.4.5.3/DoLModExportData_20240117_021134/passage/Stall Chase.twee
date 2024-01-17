@@ -1,0 +1,53 @@
+:: Stall Chase []
+<<effects>>
+
+你追着<<person1>><<person>>穿越商场。
+<<if $athleticsSuccess>>
+	<<if $rng gte 81>>
+		<span class="green">你跟上了<<him>>，</span>紧追不舍，进入一个小巷子。这是个死胡同。
+		<br><br>
+
+		<<He>>转身，并向你猛冲过来。
+		<br><br>
+
+		<<link [[继续|Stall Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		<span class="green">你跟上了<<him>>，</span>紧追不舍，进入一个小巷子。这是个死胡同。
+		<br><br>
+
+		<<He>>转过身来看向你，眼睛左忽右闪，寻找能跑的地方。<<He>>把<<print setup.plants[$stall_expensive].plural>>扔向空中，趁此机会爬上墙头，而你选择接住。
+		<br><br>
+
+		你回到你的摊位。
+		<br><br>
+
+		<<stall_actions>>
+	<<else>>
+		<<set $stallThiefPartner to maleChance($pronoun) gte random(1, 100) ? "男友" : "女友">>
+		<span class="green">你跟上了<<him>>，</span>紧追不舍，进入一个小巷子。这是个死胡同。
+		<br><br>
+
+		"对，对不起，"<<he>>拿出<<print setup.plants[$stall_expensive].plural>>，低着头不敢看你，"我是想把它送给我的<<print $stallThiefPartner>>，但是我买不起。我知道我做得不对。"
+		<br><br>
+
+		<<link [[让对方拿走|Stall Keep]]>><</link>>
+		<br>
+		<<socialiseicon "angry">><<link [[斥责|Stall Scold]]>><</link>>
+		<br>
+		<<link [[保持沉默|Stall Silent]]>><</link>>
+		<br>
+		<<if currentSkillValue('skulduggery') gte 300>>
+			<<link [[提供建议|Stall Pointers]]>><<trauma -6>><</link>><<ltrauma>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<span class="red"><<Hes>>太快了，</span>你追不上。
+	<br><br>
+
+	你空手回到你的摊位。
+	<br><br>
+	<<set $plants[$stall_expensive].amount -= 1>>
+	<<stall_actions>>
+<</if>>

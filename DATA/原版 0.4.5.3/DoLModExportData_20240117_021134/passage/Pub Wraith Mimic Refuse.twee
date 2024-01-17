@@ -1,0 +1,38 @@
+:: Pub Wraith Mimic Refuse []
+<<location "forest">><<effects>>
+你猛烈地摇着头。<<He>>以一种诡异的姿势僵在了原地，嘴角扭曲成一个渗人的微笑。你的心跳加快了，<<His>>的皮肤越来越苍白，就在你的眼前。
+<br><br>
+<<if isBloodmoon()>>
+	"<span class="wraith"><<pcPetname "Wraith">>，你从来没有选择。</span>"
+	<<if $wraith.seen gte 3>>
+		你马上就能认出那是一直跟着你的苍白生物。
+	<<elseif $wraith.seen gte 1>>
+		<<His>>苍白的脸看起来十分的眼熟。
+	<</if>>
+	<<He>>笑了，"<span class="wraith">我能感觉到你急促的心跳，放弃吧。</span>"
+	<<endevent>><<generateWraith 1 true>>
+	<<initWraith>><<rainWraith true>>
+	<br><br>
+
+	<<switch $wraith.gen>>
+		<<case "man">>
+			<<He>>朝天举起<<his>>的手，然后一股看不见的力量把你推到地上。
+		<<case "tentacles" "abomination" "slimetentacles">>
+			你觉得有东西顺着你的腿往上滑。你低头一看，一团苍白的触手包围着你！
+		<<case "slime">>
+			<<He>>朝天举起了<<his>>的手，然后一团闪闪发光的紫色物出现在你的上方。一群苍白起伏的泥状物跳了出来！
+		<<case "arms">>
+			狂躁的笑容掠过<<his>>的脸庞，另外几对手臂从<<his>>的背后伸出，每一对手臂都以奇怪的方式做着手势。
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Wraith Caught]]>><<set $wraith.exit to "forest">><</link>>
+	<br>
+<<else>>
+	"<span class="wraith">聪明。</span>"声音好像是从你的周围传来的。你的双眼开始变得模糊。当视线再一次聚焦之时，<<hes>>消失了。你惶恐地环顾四周，但什么也没有。<<stress 6>><<gstress>><<trauma 12>><<ggtrauma>>
+	<br><br>
+	现在，任何轻微的动静都会使你汗毛竖起。你的呼吸变得愈发的急促，你的血液在上身，腿不住地颤抖着——你跑了起来，远离那个让你不安的地方。
+	<br><br>
+	<<link [[继续|Forest]]>><<set $forest to 0>><<endevent>><</link>>
+	<br>
+<</if>>

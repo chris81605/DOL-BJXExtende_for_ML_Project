@@ -1,0 +1,55 @@
+:: Sydney Beach Swimsuit []
+<<effects>><<run statusCheck("Sydney")>><<set $outside to 1>>
+你从更衣室里走了出来，等待着悉尼穿好<<nnpc_he "Sydney">>的衣物。
+<<switch $sydney.swim>>
+	<<case "school" "normal">>
+		不久后，<<He>>离开了隔间，换上了<<he>>的<<sydneySwimwear>>。
+	<<case "lewd">>
+		过了一会儿，<<He>>从隔间里走了出来，身上穿着<<sydneySwimwear>>。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>似乎对这种暴露感到兴奋。
+		<<else>>
+			<<He>>一开始还小心翼翼地遮挡住自己，但渐渐变得不那么拘谨了。
+		<</if>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+	<<case "crossdress">>
+		<<if ($pronoun is "m" and $NPCName[$NPCNameList.indexOf("Sydney")].penissize gte 3) or ($pronoun is "f" and $NPCName[$NPCNameList.indexOf("Sydney")].breastsize gte 4)>>
+			在过了好一会之后，<<he>>仍然没有出来，你只好敲敲门。门打开了一条缝，悉尼将头探了出来。
+			<br><br>
+			"对不起，我不能穿你给我买的，它不合适，我……"<<he>>顿了顿，"那个太大了。"你点头表示理解。<<set $sydney.swim to "school">><<set $swimChange to 1>>
+			又过了几分钟，<<he>>终于离开了更衣室，穿着<<his>>的<<sydneySwimwear>>。
+		<<else>>
+			<<if !$sydneySeen.includes("swimcross")>>
+				<<set $sydneySeen.pushUnique("swimcross")>>
+				出于无聊，你开始数地上的沙子。不知道过了多久，更衣间门缓缓打开，悉尼穿着<<sydneySwimwear>>出来了。
+				<<he>>用一只手臂去遮挡<<He>>裸露的胸口，十字架还在前面晃荡着。"我真不敢相信我会穿上它……"悉尼避开了你的视线，身子微微地颤抖着。
+				<br><br>
+				你不禁笑了起来。"你看起来真的很可爱，我想每个人都会被你折服的。"<<He>>也跟着笑了。
+			<<else>>
+				最后，<<he>>穿着<<his>>的<<sydneySwimwear>>走了出来。
+				<<if _sydneyStatus.includes("corrupt")>>
+					<<He>>似乎对这种暴露感到兴奋，<<if $pronoun is "f">>毫不羞涩地展示着<<he>><<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>。<<else>>满足于自己女孩子似的穿着。<</if>>
+				<<else>>
+					<<He>>害羞地遮住<<He>>裸露的胸口。
+				<</if>>
+			<</if>>
+			<<if $NPCName[$NPCNameList.indexOf("Sydney")].crossdress is undefined>>
+				<<set $NPCName[$NPCNameList.indexOf("Sydney")].crossdress to 1>>
+			<<else>>
+				<<set $NPCName[$NPCNameList.indexOf("Sydney")].crossdress += 1>>
+			<</if>>
+			<<npcincr Sydney purity -2>><<lspurity>>
+		<</if>>
+<</switch>>
+<br><br>
+<<if $worn.under_lower.type.includes("swim") and ($worn.under_upper.type.includes("swim") or $worn.under_upper.type.includes("naked")) and ($worn.upper.type.includes("swim") or $worn.upper.type.includes("naked")) and ($worn.lower.type.includes("swim") or $worn.lower.type.includes("naked"))>>
+	/* Say Nothing */
+	<<if $sydney.swim is "crossdress" and $genderknown.includes("Sydney") and $player.gender isnot $player.gender_appearance>>
+		<<He>>注意到你为自己挑选的衣服，咯咯地笑了起来。"至少我有个伴，嗯？" <<npcincr Sydney love 1>><<glove>>
+	<</if>>
+<<else>>
+	<<He>>打量着你的穿着，似乎很困惑。"不打算去游泳吗？"
+<</if>>
+你们俩开始在海滩上漫步。
+<br><br>
+<<link [[继续|Sydney Beach]]>><</link>>

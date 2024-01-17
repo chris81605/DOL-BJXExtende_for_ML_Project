@@ -1,0 +1,18 @@
+:: Docks Sneak Start []
+<<effects>><<set $lock to 400>>
+<<generateSecurity 1>><<person1>>
+你看到一个保安在门口，把<<his>>的脚放在<<his>>的桌子上，玩着<<his>>的手机。
+<br><br>
+尽管<<his>>有些心不在焉的，但如果你试图靠近的话，你还是会被发现。你还注意到在<<he>>旁边有一扇被锁起来的小门。
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<lockpickicon>><<link [[闯入 (0:05)|Docks Sneak Pick]]>><<pass 5>><<crimeUp 5 "trespassing">><<endevent>><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span>
+	<<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<getouticon>><<link [[离开|Docks]]>><<endevent>><<set $bus to "mer">><</link>>
+<br>

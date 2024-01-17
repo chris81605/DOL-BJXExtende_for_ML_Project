@@ -1,0 +1,27 @@
+:: Flats Superintendent []
+<<effects>>
+
+<<loadNPC 0 "flats_superintendent">><<person1>>
+你走进主管办公室，
+<<if $flats_superintendent is 2>>
+    <<set $flats_superintendent to 3>>
+发现房间是空的。一只杯子倒在一边，茶洒了一桌子。一件外套躺在地板上。一股淡淡的香在空气中徘徊。
+    <br><br>
+<<else>>
+发现<<him>>坐在<<his>>的桌旁。听到了门口的动静<<He>>抬起了头。
+    <br><br>
+"找到水烟店了吗？"
+    <br><br>
+    <<if $hookah_state gte 1>>
+        <<if $hookah_state gte 2>>
+<<link [[说你已经找到了，也知道去那里的路 (0:01)|Flats Superintendent Found Quick]]>><<set $flats_superintendent to 2>><<pass 1>><</link>>
+            <br>
+        <<else>>
+<<link [[说你已经找到了，也知道去那里的路 (0:20)|Flats Superintendent Found]]>><<set $flats_superintendent to 2>><<pass 20>><</link>>
+            <br>
+        <</if>>
+    <</if>>
+<</if>>
+
+<<link [[离开|Flats]]>><<endevent>><</link>>
+<br>

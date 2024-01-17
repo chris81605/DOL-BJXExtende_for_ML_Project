@@ -1,0 +1,115 @@
+:: English Play Act One Script []
+<<effects>><<run statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		<<if $englishPlayReadiness gte 70>>
+			"当镇上的人从我身边经过时，我被视为是一无所有的人。没错，我确实在这个世界上不拥有什么。但是，只要我还拥有着你，泰勒，我的挚爱，我就别无所求。"
+			<br>
+			<span class="green">你巧妙地说着浪漫的台词，并自己给它加上了更多的词汇与感情表达。</span>观众们为你喝彩。<<set $englishPlayApproval += 30>><<ggapproval>>
+			<br><br>
+
+			<<if $englishPlayKylarReplace>>
+				<<person2>><<persons>>的脸刷地变红了。<<He>>没有预料到是这种程度的表演，然后试图结结巴巴地把台词念出你的水平。
+				<br>
+				"我最亲爱的卡斯。就算你跟我的社会地位天差地别，但我却感觉与你无比接近。没有你，世上所有的财富都与粪土无异。"
+			<<else>>
+				凯拉尔的脸刷地变得通红，<<person2>>结巴了一会儿才想起自己是在演戏。<<npcincr Kylar rage -2>><<lksuspicion>>
+				<br>
+				"我……我最亲爱的卡斯，就算你跟我的社会地位天差地别，但我却感觉与你无比接……接近。没有你，世上所有的财富都与粪土无异。"
+			<</if>>
+		<<elseif $englishPlayReadiness gte 26>>
+			"我在这世上不拥有什么，但只要我还有你，泰勒，我别无所求。"
+			<br>
+			<span class="teal">你成功地念出了浪漫的对白。</span><<set $englishPlayApproval += 20>><<gapproval>>
+			<br><br>
+			<<if $englishPlayKylarReplace>>
+				<<person2>><<person>>以同样的方式回应。
+				<br>
+				"我最亲爱的卡斯。就算你跟我的社会地位天差地别，但我却感觉与你无比接近。没有你，世上所有的财富都与粪土无异。"
+			<<else>>
+				凯拉尔被你的话陶醉，渴望地看了你一会儿。<<person2>><<person>>花了点时间才想起来<<He>>还有个角色要扮演。
+				<br>
+				"我……我最亲爱的卡斯，就算你跟我的社会地位天差地别，但我却感觉与你无比接……接近。没有你，世上所有的财富都与粪土无异。"
+			<</if>>
+		<<else>>
+			"我，额……我没什么要说的……我的意思是，我没什么东西，但是，我……很高兴来到这里？"
+			<br>
+			<span class="red">你忘记了台词。</span>观众们并不买账。<<set $englishPlayApproval += 10>><<lapproval>><<stress 6>><<trauma 12>><<gstress>><<ggtrauma>>
+			<br><br>
+			<<if $englishPlayKylarReplace>>
+				<<person2>><<person>>在回应之前，沮丧地叹了口气。
+				<br>
+				"我最亲爱的卡斯。就算你跟我的社会地位天差地别，但我却感觉与你无比接近。没有你，世上所有的财富都与粪土无异。"
+			<<else>>
+				你的失败让凯拉尔握紧了拳头。<<person2>><<person>>似乎在认为这是在针对<<He>>。<<npcincr Kylar rage 1>><<gksuspicion>>
+				<br>
+				"我……我最亲爱的卡斯，你为什么这么紧张？我真的有那么难以信任吗？"
+			<</if>>
+		<</if>>
+		<br><br>
+
+		演出在卡斯跟泰勒成功私奔后继续进行着。当你在跟泰勒一起在月色下享用圣诞晚餐时，斯特林<<sterlingTitle>>闯了进来，为这一幕落下了帷幕。
+	<<case "Taylor">>
+		"我在这世上不拥有什么，但只要我还有你，泰勒，我别无所求。"
+		<<if _sydneyStatus.includes("corrupt")>>
+			"你不愿意把自己献给我吗？"悉尼说着，出人意料地把你拉近了，"还是我必须乞求？"<span class="lewd">剧本上可没有这段。</span>
+		<<else>>
+			悉尼轻轻地牵着你的手，说道。
+		<</if>>
+		<br><br>
+
+		<<if $englishPlayReadiness gte 70>>
+			"我最亲爱的卡斯。就算我们之间的阶级跟身份是如此的遥远，但你仍是我最宝贵的财宝。是我在沙土里淘出的黄金。"
+			<span class="green">你巧妙地念出了浪漫的台词，并给它加上了更多的词汇与情感表达。</span>观众们为你喝彩。<<set $englishPlayApproval += 30>><<ggapproval>>
+			<br><br>
+
+			<<if _sydneyStatus.includes("corrupt")>>
+				就算是在<<person1>><<his>>即兴表演之后，悉尼还是对你的演技吃了一惊。
+			<<else>>
+				悉尼难掩<<person1>><<his>>的脸红。
+			<</if>>
+			<<npcincr Sydney lust 2>><<gslust>>
+			<br><br>
+
+		<<elseif $englishPlayReadiness gte 26>>
+			"我最亲爱的卡斯。就算你跟我的社会地位天差地别，但我却感觉与你无比接近。没有你，世上所有的财富都与粪土无异。"
+			<br>
+			<span class="teal">你成功地念出了浪漫的对白。</span><<set $englishPlayApproval += 20>><<gapproval>>
+			<br><br>
+
+		<<else>>
+			"嘿，额……没问题，苏……嗯，卡斯。穷人也很可爱。"
+			<span class="red">你忘记了台词。</span>观众们并不买账。<<set $englishPlayApproval += 10>><<lapproval>><<stress 6>><<trauma 12>><<gstress>><<ggtrauma>>
+			<br><br>
+
+			悉尼茫然地看了你一会，然后试图加快演出进程。
+		<</if>>
+		演出在卡斯跟泰勒成功私奔后继续进行着。当你在跟卡斯一起在月色下享用圣诞晚餐时，你的<<sterlingFather>>，斯特林<<sterlingTitle>>闯了进来，为这一幕落下了帷幕。
+	<<case "Sterling">>
+		<<if $englishPlayReadiness gte 70>>
+			在入场前，你仔细听着，并等待悉尼念完台词。
+			<br>
+			"泰勒……我把你养这么大不是为了让你这样。我不能容忍我的家人被乞丐玷污！"你大喊着，冲上舞台，气势汹汹地撞开门。
+			<br>
+			<span class="green">你巧妙地念出了独白，并给它加上了更多的词汇与情感表达。</span>观众们为你喝彩。<<set $englishPlayApproval += 30>><<ggapproval>>
+		<<elseif $englishPlayReadiness gte 26>>
+			在入场前，你仔细听着，并等待悉尼念完台词。
+			<br>
+			"泰勒……我对你这么好，你居然打算跟一个泥腿子私奔？我绝不会容忍的！"你朝自己喊道，大步走上舞台，冲进门里。
+			<br>
+			<span class="teal">你成功地念出了独白。</span><<set $englishPlayApproval += 20>><<gapproval>>
+		<<else>>
+			你尴尬地走到了舞台上正在对话的卡斯和泰勒之间。他们停了一下，然后假装没看到你。
+			"泰勒，我把……不是……嗯。和这个简单的农民在一起，你玷污了……"你试图压过他们说话的声音直到说服他们。
+			<br>
+			<span class="red">你的入场和独白都搞砸了，</span>观众们并不买账。<<set $englishPlayApproval += 10>><<lapproval>><<stress 6>><<trauma 12>><<gstress>><<ggtrauma>>
+		<</if>>
+		<br><br>
+
+		这一幕在卡斯跟泰勒一起在月色下享用圣诞晚餐时结束了。
+<</switch>>
+<br><br>
+
+<<link [[第二幕|English Play Act Two]]>><<pass 5>><</link>>
+<br>

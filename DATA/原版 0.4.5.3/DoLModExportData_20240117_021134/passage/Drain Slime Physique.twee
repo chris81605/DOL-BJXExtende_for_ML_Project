@@ -1,0 +1,38 @@
+:: Drain Slime Physique []
+<<effects>>
+
+<<if $physiqueSuccess>>
+	你把手伸过肩膀，把手指伸进史莱姆温暖的团块里，然后拉。它很抗拒，用更大的力量粘在你身上，<span class="green">你把它全部剥掉了。</span>这力道使它飞过走道，溅到墙上，消失在另一个排水沟里。
+	<br><br>
+	<<destinationstormdrain>>
+<<else>>
+	你把手伸过肩膀，把手指伸进史莱姆温暖的团块里，然后拉。它很抗拒，用更大的力量粘在你身上，<span class="red">并缠住你的手。</span>
+	<br><br>
+
+	当你挣扎的时候，史莱姆覆盖了你的背部，
+	<<if !$worn.upper.type.includes("naked")>>
+		<span class="pink">伴随着嘶嘶声，你的<<print $worn.upper.cn_name_cap>>被融化了。</span>
+		<<set $worn.upper.integrity -= 1000>>
+		<<integritycheck>>
+		<<exposure>>
+		<br><br>
+	<<elseif !$worn.under_upper.type.includes("naked")>>
+		<span class="pink">伴随着嘶嘶声，你的<<print $worn.under_upper.cn_name_cap>>被融化了。</span>
+		<<set $worn.under_upper.integrity -= 1000>>
+		<<integritycheck>>
+		<<exposure>>
+		<br><br>
+	<<else>>
+		你的皮肤很痒。<<garousal>><<arousal 600>>
+		<br><br>
+	<</if>>
+
+	<<link [[把它扯下来|Drain Slime Physique 2]]>><</link>><<physiquedifficulty 1 30000>>
+	<br>
+	<<link [[等待机会|Drain Slime Watch]]>><<arousal 1800>><</link>><<ggarousal>>
+	<br>
+	<<if !$worn.under_upper.type.includes("naked")>>
+		<<link [[牺牲你的上衣|Drain Slime Sacrifice Under]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

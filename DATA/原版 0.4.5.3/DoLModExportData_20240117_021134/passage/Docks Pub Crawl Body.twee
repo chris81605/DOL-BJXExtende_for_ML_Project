@@ -1,0 +1,45 @@
+:: Docks Pub Crawl Body []
+<<set $outside to 0>><<set $location to "pub">><<dockeffects>><<effects>>
+
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"我，我赌我的身体，"你说，"如果够的话。"
+<<elseif $speech_attitude is "bratty">>
+	这回轮到你表示不屑了。"就这？"你说，"行吧。我赌我的身体。你们要是赢了，我就随你们摆布。"
+<<else>>
+	"我不赌钱，"你说，"你们要是赢了，我就任你们玩。"
+<</if>>
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	水手们对视着，兴奋了起来。"免费的酒水，"<<person>>说，"还有免费的妓。今晚是走大运了。"
+	<br><br>
+
+	"接着做梦去吧。"你的一名同事说着。同事们似乎很开心，毕竟输了也没损失。
+	<br><br>
+
+	酒吧老板来到了角落的一个麦克风前，准备问出第一个问题。
+	<br><br>
+	<<set $dockquiz to "body">>
+	<<link [[继续|Docks Pub Crawl Quiz]]>><<set $phase to 0>><<set $dockquizhome to 0>><<set $dockquizaway to 0>><</link>>
+	<br>
+
+<<else>>
+
+	"不行，"<<person>>说，"这钱够我们找个更好的妓了。"<<person2>>坐在旁边的<<person>>似乎很沮丧，还在打量着你。<<person1>>
+	<br><br>
+
+	<<if $money gte 6000>>
+		<<link [[跟注 (£60)|Docks Pub Crawl Bet]]>><<set $money -= 6000>><</link>>
+		<br>
+	<</if>>
+	<<link [[不加注|Docks Pub Crawl Quiz Refuse]]>><</link>>
+	<br>
+
+<</if>>

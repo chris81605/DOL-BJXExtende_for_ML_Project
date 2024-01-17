@@ -1,0 +1,27 @@
+:: Hallways High Delinquency Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+	<<enableSchoolRescue "Whitney">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没人过来救你。很有可能是因为他们觉得你本身就是混混。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal gte $enemyarousalmax or $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Hallways High Delinquency Molestation Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue gte 1>>
+	<span id="next"><<link [[继续|Whitney Rescue]]>><<set $whitneyRescueExit to "hallways">><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hallways High Delinquency Molestation]]>><</link>></span><<nexttext>>
+<</if>>

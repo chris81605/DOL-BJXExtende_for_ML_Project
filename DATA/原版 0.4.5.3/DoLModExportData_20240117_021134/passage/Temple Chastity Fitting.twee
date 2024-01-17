@@ -1,0 +1,46 @@
+:: Temple Chastity Fitting []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<He>>带领你离开主厅，进入一个小房间。"请脱衣服，我马上回来。" 你脱掉衣服，希望房间能暖和些。这让人尴尬，但一切都是值得的。不久，<<He>>回来了，手里拿着一个金属贞操带和贞操笼。
+<br><br>
+<<if playerIsPregnant() and playerBellySize() gte 8>>
+	<<setKnowsAboutPregnancy "pc" "Jordan">>
+	<<He>>看到你的肚子时停顿了一下。"你……有孩子了？很抱歉，我们不能为怀孕的人提供贞操带。这不安全。"
+
+	<<if $player.penisExist>>
+		<<He>>瞥了一眼你的<<penis>>。"你可以戴上这个贞操笼，固定在你的<<penisSimple>>底部，但它无法从肛交中保护你。"
+		<br><br>
+		<<link [[请求戴贞操笼|Temple Male Chastity Fitting]]>><<genitalswear 2>><</link>>
+		<br>
+		<<link [[拿回你的钱|Temple]]>><<set $money += 8000>><<endevent>><</link>>
+	<<else>>
+		<br><br>
+		<<He>>把钱还给你。<<set $money += 8000>>
+		<br><br>
+		<<clotheson>>
+		<<link [[继续|Temple]]>><<endevent>><</link>>
+	<</if>>
+<<elseif $player.gender isnot "m">>
+	<<he>>一言不发，只是把贞操笼放到一边，然后把贞操带围在你的腰间。你听到一个响亮的咔嚓声，然后约旦退后一步欣赏<<his>>的杰作。
+	<br><br>
+	你低头检查了一下，并没有想象中那样紧或不舒服。你把手伸入贞操带检查有没有戴好，但伸不进去。你双手向下按压贞操带，但它纹丝不动。
+	<br><br>
+	<<genitalswear 1>>
+	"一切顺利，"<<he>>很满意，"如有问题，请来找我。"<<He>>离开房间，让你独自待在里面。
+	<br><br>
+	<<set $worn.genitals.origin to "temple">>
+	<<clotheson>>
+	<<link [[继续|Temple]]>><<endevent>><</link>>
+<<else>>
+	<<He>>问，"由于你的<<genitals 2>>，你有两种选择。你可以戴上这个贞操笼，并将其固定在你的<<penisSimple>>底部，然而，它无法保护你于肛交。"
+	<br><br>
+	在给你一个仔细观察的机会后，<<he>>继续说道，"你的另一个选择是这个贞操带，它可以保护你的<<genitals 2>>，同时还能装上一个护肛板来防止肛交。它既能避免摩擦，也能轻柔地固定阳具。虽然这是保护你的最佳方式，但别人可能会误认为你是女孩。"
+	<br><br>
+
+	<<link [[请求戴贞操笼|Temple Male Chastity Fitting]]>><<genitalswear 2>><</link>>
+	<br>
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		你知道自己莫名其妙地怀孕了，不能取下贞操带。
+	<<else>>
+		<<link [[请求带贞操带|Temple Male Chastity Fitting]]>><<genitalswear 1>><</link>>
+	<</if>>
+<</if>>

@@ -1,0 +1,36 @@
+:: Forest Wolf []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<forestRescueSetup>>
+	<<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 2>>
+	<span id="next"><<link [[继续|Forest Coop Rescue]]>><<set $phase to 1>><</link>></span><<nexttext>>
+<<elseif _combatend>>
+	<span id="next"><<link [[继续|Forest Wolf Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Wolf]]>><</link>></span><<nexttext>>
+<</if>>

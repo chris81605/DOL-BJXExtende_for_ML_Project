@@ -1,0 +1,42 @@
+:: Mason Chastity Grab []
+<<effects>>
+
+趁梅森还没失去勇气，你抓住<<his>>的手拉到你的<<genitals>>上。<<takeHandholdingVirginity "Mason">>
+<br><br>
+
+<<if C.npc.Mason.love gte 20 or C.npc.Mason.lust gte 25>>
+	<<set _part to $player.penisExist and $player.vaginaExist ? ["penis","pussy"].random() : $player.penisExist ? "penis" : "pussy">>
+	<<He>>恐慌起来，想把手抽回去，但你抓得太紧了。
+	当<<his>>的手指突然碰到你的<<genitals 2>>时，<<his>>挣扎的动作停了下来，但手却还是在颤抖着。
+	你温柔地把<<his>>颤抖的手引导到你的<<if _part is "pussy">>小穴<<else>>肉棒<</if>>上。梅森瞪大了眼睛，跟随着你的引导
+	<<if _part is "pussy">>探索着你的小穴。
+	<<else>>抓着你的肉棒。<</if>>
+	<<he>>怯生生地移动手指，缓慢地开始
+	<<if _part is "pussy">>摩擦你的小穴。
+	<<else>>抚摸你的肉棒。<</if>>
+	<<npcincr Mason lust 5>><<gglust>><<npcincr Mason love -2>><<llove>><<npcincr Mason dom -1>><<arousal 1800 _part>><<ggarousal>>
+	<br><br>
+
+	<<if $arousal gte $arousalmax>>
+		<<orgasm>>
+		一股快乐的浪潮席卷了你的身体，你颤抖起来<<if !$femaleclimax and !_deniedOrgasm>>，淫液喷射到了梅森手上<</if>>。
+		然而，<<He>>并没有立刻移开手，而是继续给予你一段时间的快乐才离开。
+		<br><br>
+
+		梅森看着手掌，然后对上了你的眼神。<<He>>立刻转过身去。"我们不应该那么做的。"
+	<<else>>
+		梅森继续
+		<<if _part is "pussy">>摩擦你的小穴
+		<<else>>抚摸你的肉棒<</if>>
+		一段时间，才最终抽开手。<<He>>对上了你的眼神，然后立刻转过身去。"我们不应该那么做的。"
+	<</if>>
+<<else>>
+	<<He>>慌张起来，把手从你的抓握中抽回去。梅森怒视着你，张开嘴想要抗议，但<<his>>想了想，又红着脸转过身去了。<<npcincr Mason lust 1>><<glust>><<npcincr Mason love -1>><<llove>><<gdom>><<npcincr Mason dom 1>>
+<</if>>
+<br><br>
+
+<<if $location is "pool">>
+	<<link [[回到课堂|Swimming Lesson]]>><<endevent>><</link>>
+<<else>>
+	<<mason_actions>>
+<</if>>

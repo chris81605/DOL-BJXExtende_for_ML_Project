@@ -1,0 +1,21 @@
+:: Farm Alex Bed []
+<<set $bus to "farm_alex_room">><<effects>>
+
+<<if Time.dayState is "night" and $alex_bed is undefined>>
+	你依偎在艾利克斯身边。
+<<else>>
+	你偎在被窝里。
+	<<if $alex_bed isnot "player" and $earSlime.corruption gte (currentSkillValue('willpower') / 20) and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) + $earSlime.defyCooldown and !$earSlime.eventTimer and !$earSlime.event>>
+		<<set $slimeBedExit to "Farm Alex Bed">>
+		<<set $slimeBedroomExit to "Farm Alex Bedroom">>
+		<<slimeNoSleep>>
+		<<set _skip to true>>
+	<</if>>
+<</if>>
+<<if $wraith.state and $wraithPrison and ($moonstate is "evening" or $moonstate is _nightstate)>>
+	你感到焦虑，你的目光向镜子移去。
+<</if>>
+<br><br>
+<<if !_skip>>
+	<<farm_sleep_options>>
+<</if>>

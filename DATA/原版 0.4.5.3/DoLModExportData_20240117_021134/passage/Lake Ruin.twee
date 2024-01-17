@@ -1,0 +1,30 @@
+:: Lake Ruin []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+你正待在湖底的水下废墟中，荧光的紫色地衣覆盖在古老的墙壁上。
+<<if $wraithPrison or $sciencelichenlake is 1 or $scienceproject is "won" or $scienceproject is "done">>
+	在一处较为平坦的墙壁处，一个奇怪的符文正在闪烁着光芒。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif wraithCanHunt() and $wraith.state and $wraith.hunt is 0 and $wraith.timer gte random(0, 10) and !$possessed>>
+	<<wHunt "lake">>
+<<else>>
+	<<if $sciencelichenknown is 1 and $sciencelichenlake isnot 1 and $scienceproject is "ongoing">>
+		<<scienceicon "purple lichen">><<link [[把地衣加到科学项目中|Lake Lichen]]>><<set $sciencelichenlake to 1>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Ruin Prison Intro">>
+		<<investigateicon>><span class="nextLink"><<link [[视察符文|Lake Ruin Prison Intro]]>><<wateraction>><</link>><<loxygen>></span>
+		<br>
+	<<elseif $wraithPrison or $sciencelichenlake is 1 or $scienceproject is "won" or $scienceproject is "done">>
+		<<investigateicon>><<link [[视察符文|Lake Ruin Symbol]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<swimicon "down">><<link [[游向深处|Lake Ruin Deep]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+	<<swimicon "up">><<link [[游向水面|Lake Underwater]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+<</if>>

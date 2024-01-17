@@ -1,0 +1,35 @@
+:: Elk Compound Central []
+<<set $outside to 1>><<set $location to "compound">><<effects>><<set $lock to 300>>
+这扇门正紧锁着。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<link [[闯入 (0:05)|Elk Compound Interior]]>><<pass 5>><<crimeUp 30 "trespassing">><</link>><<ggcrime "trespassing">><<gsecurity>>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span>
+	<<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<if $phials_held gte 1>>
+	<<if $compoundalarm gte 1>>
+		<span class="blue">你需要等到保安们放松警戒之后才能继续。</span>
+		<br>
+	<<else>>
+		<<link [[按响门铃|Elk Compound Central Ring]]>><</link>>
+		<br>
+	<</if>>
+
+<</if>>
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Elk Compound Interior]]>><<set $ghostIn to true>><<pass 1>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<link [[离开|Elk Compound]]>><</link>>
+<br>

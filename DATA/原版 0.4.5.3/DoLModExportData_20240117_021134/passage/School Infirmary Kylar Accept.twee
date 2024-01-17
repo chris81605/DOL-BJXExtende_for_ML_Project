@@ -1,0 +1,42 @@
+:: School Infirmary Kylar Accept []
+<<set $outside to 1>><<set $location to "town">><<schooleffects>><<effects>>
+<<run statusCheck("Kylar")>>
+
+<<if $speech_attitude is "meek">>
+	你笑了笑。"我很乐意——"
+<<elseif $speech_attitude is "bratty">>
+	你耸耸肩。"应该可以——"
+<<else>>
+	你点了点头。"是的，我们开——"
+<</if>>
+<br><br>
+
+你还没说完，凯拉尔就拉着你的胳膊开始往走廊走。你仍然晕乎乎的，所以<<he>>几乎是拖着你走。你跌跌撞撞地跟上。
+<br><br>
+
+<<if _kylarStatus.includes("MaxRage")>>
+	当<<he>>带你穿过小镇时，<<he>>抓住你的臂膀，让你吃痛。<<He>>看起来随时准备爆发。路人纷纷避让，向你们投来关切的目光。<<stress 6>><<gstress>>
+<<elseif _kylarStatus.includes("Rage")>>
+	当<<he>>带你穿过小镇时，<<he>>抓住你的臂膀，这很痛。<<His>>眼睛紧张地在街上扫视。"人太多了，"<<he>>自言自语。<<He>>把你拉到小巷之间，避开路人的目光。<<stress 4>><<gstress>>
+<<elseif _kylarStatus.includes("Sus")>>
+	<<Hes>>很高兴地与你同行，但对路人异常紧张。<<He>>在小声嘀咕着什么，你听不清。<<stress 2>><<gstress>>
+<<else>>
+	<<Hes>>很高兴和你一起走，在你走路时蹭着你的胳膊。
+	<br><br>
+
+	有那么一下，<<his>>的手开始下滑，靠近你的手。你感到<<his>>的手指拂过你的手掌。<<He>>喘着粗气，缩回了手臂，低声说着抱歉。
+	<br><br>
+
+	<<set _kylarWalkHandhold to true>>
+	<<link [[握住凯拉尔的手|School Infirmary Kylar Walk]]>><<set $phase to 1>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<npcincr Kylar rage -3>><</link>><<glove>><<glust>><<lksuspicion>><<handholdingvirginitywarning>><<NPCvirginitywarning "Kylar" "handholding">>
+	<br>
+	<<link [[继续走|School Infirmary Kylar Walk]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>
+
+<<if !_kylarWalkHandhold>>
+	<br><br>
+
+	<<link [[继续|School Infirmary Kylar Walk]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

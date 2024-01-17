@@ -1,0 +1,28 @@
+:: English Play Wait Sydney []
+<<effects>><<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+<<npc Sydney>><<person1>>
+你等待着悉尼。你最后在人群里找到了<<him>>。<<He>>看上去也在找着你，你冲<<him>>挥手。
+<br><br>
+
+<<He>><<if _sydneyStatus.includes("corrupt")>>迅速地<<else>>笨拙地<</if>>穿过了人群。
+"很高兴我不是唯一一个坚持看到最后的人，你喜欢其他的戏剧吗？
+<<if _sydneyStatus.includes("corrupt")>>
+	真不敢相信其他演员们的性欲究竟有多强，但我敢肯定，其它的一些学生脑子里想的肯定也是那个。”
+<<else>>
+	我真替多伦感到难过，得对付那么多的熊孩子和……异教徒。”
+<</if>>
+<br><br>
+
+<<link [[交谈|English Play Leave Sydney]]>><<set $phase to 1>><<npcincr Sydney love 1>><</link>><<glove>>
+<br>
+<<if _sydneyStatus.includes("corrupt")>>
+	<<link [[赞美|English Play Leave Sydney]]>><<set $phase to 2>><<npcincr Sydney love 1>><<npcincr Sydney purity -5>><</link>><<glove>><<llspurity>>
+	<br>
+<<else>>
+	<<link [[赞美|English Play Leave Sydney]]>><<set $phase to 2>><<npcincr Sydney love 1>><<npcincr Sydney purity 5>><</link>><<glove>><<ggspurity>>
+	<br>
+<</if>>
+<<if $sydneyromance is 1>>
+	<<link [[拉悉尼到后台|English Play Backstage Sydney Pull]]>><<npcincr Sydney purity -2>><<npcincr Sydney lust 5>><</link>><<lspurity>><<gslust>><<promiscuous1>><<sydneyWarning>>
+	<br>
+<</if>>

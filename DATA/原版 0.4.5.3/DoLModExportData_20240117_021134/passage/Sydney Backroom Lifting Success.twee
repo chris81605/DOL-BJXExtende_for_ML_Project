@@ -1,0 +1,30 @@
+:: Sydney Backroom Lifting Success []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>>
+
+<<if _sydneyStatus.includes("corrupt")>>
+	悉尼把箱子夹在腋下。
+	<<if $NPCList[0].penis isnot "none">>
+		"谢谢你……举我上去。"<<He>>把一只拇指插进<<his>>的<<print setup.npcClothesSets.find(item => item.name === $NPCList[0].clothes.set).clothes["lower"].desc>>里。你被<<his>>双腿之间的突起吸引了注意，<<He>>向你眨了眨眼。
+	<<elseif ($genderknown.includes("Sydney") and $player.penisExist) or (!$genderknown.includes("Sydney") and $player.gender_appearance is "m")>>
+		"谢谢你举我上去。"<<He>>瞟了一眼你的胯下，坏笑了起来。"看来不止我一个呢。"
+	<<else>>
+		"下面好看吗？"<<He>>瞟了一眼你的胯下，坏笑了起来。"可能我该拿个小心地滑的标志放这里了。"
+	<</if>>
+	<<npcincr Sydney love 3>><<glove>><<npcincr Sydney lust 1>><<glust>>
+<<else>>
+	悉尼开心地笑了起来。"你力气真大！谢谢你帮忙。"
+	<<if $sydneyromance is 1>>
+		<<He>>试着去亲你一口，但箱子十分碍事，于是你倾身靠向了<<him>>。
+	<<else>>
+		<<He>>靠了过来，想拥抱你，但因为箱子碍事没能抱成。<<He>>只好将就一下，尴尬地把头靠在你的肩上。
+	<</if>>
+	<<npcincr Sydney love 3>><<glove>>
+<</if>>
+<br><br>
+<<if $adultshopclerkworking>>
+	<<unset $adultshopclerkworking>>
+	剩下的工作时间里，你一边和悉尼聊天一边补货。你赚到了<<adultShopWage>><<moneyGain _wage>>。<<npcincr Sirris love 1>><<glove "Sirris">>
+<br><br>
+<</if>>
+<<link [[返回|Adult Shop]]>><<endevent>><</link>>
+<br>

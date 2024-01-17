@@ -1,0 +1,32 @@
+:: Temple Vigil 5 []
+<<effects>><<set $body_temperature to "cold">>
+
+你赤身裸体地与其他见习教徒围成一圈。在一片黑暗中，只有镇上的声响与噪杂的车流表明你并非独自一人。即使如此，在重重阴影的压迫下，这些声音也显得无比渺小。
+<br><br>
+
+随着时间流逝，你的身体开始哆嗦，牙齿不住打颤。风越来越大。
+<<switch Time.season>>
+	<<case "spring" "autumn">>
+		寒冷舔舐着你，其势却似烈焰。
+	<<case "winter">>
+		冬季凛冽的寒风让你喘不过气来。
+	<<case "summer">>
+		这对一个夏夜而言，冷得有点不自然了。
+<</switch>>
+
+<<if (currentSkillValue('willpower') / 10) gte ($pain + random(0, 10))>>
+	<span class="green">你仍伫立原地，你的战栗即是对寒夜的强烈反抗。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<templeicon "trialcontinue">><<link [[抱团取暖 (2:00)|Temple Vigil 6]]>><<pass 120>><<pain 10>><</link>><<gpain>>
+	<br>
+	<<templeicon "trialbail">><<link [[放弃守夜|Temple Vigil Abandon]]>><<set $weekly.trialFailed to "cold">><</link>>
+	<br>
+<<else>>
+	<span class="red">你再也承受不住了。</span>你从守夜之地抽身，跑入夜幕中，扑向了约旦等待着的怀抱。
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+
+	<<link [[继续|Temple Vigil End]]>><<set $weekly.trialFailed to "cold">><</link>>
+	<br>
+<</if>>

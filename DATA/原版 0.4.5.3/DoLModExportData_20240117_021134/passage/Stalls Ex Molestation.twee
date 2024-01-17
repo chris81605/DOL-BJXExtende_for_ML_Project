@@ -1,0 +1,39 @@
+:: Stalls Ex Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcoral>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate 1>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[继续->Stalls Ex Caught]]>><<set $phase to 1>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Stalls Ex Molestation Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Stalls Ex Molestation Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Stalls Ex Molestation]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Stalls Ex Molestation Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Stalls Ex Molestation Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Stalls Ex Molestation]]>><</link>></span><<nexttext>>
+<</if>>

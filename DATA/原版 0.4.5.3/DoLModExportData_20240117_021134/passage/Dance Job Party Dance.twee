@@ -1,0 +1,44 @@
+:: Dance Job Party Dance []
+<<effects>>
+
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	<<danceinit>>
+	<<set $dancing to 1>>
+	<<set $audience to 25>>
+	<<set $venuemod to 1>>
+	<<set $dancelocation to "party">>
+	<<set $timer to 15>>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")))>>
+	你不可能在如此暴露的情况下继续跳舞。
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<</if>>
+
+
+<<if $danceevent is "finish">>
+	<<link [[继续|Dance Job Party Stop]]>><<endevent>><</link>>
+<<elseif $danceevent is "dancepull">>
+	<<link [[继续|Dance Job Party Arousal]]>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1>>
+		<<runicon>><<link [[逃走|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and !$worn.under_lower.type.includes("dance")>>
+		<<runicon>><<link [[逃走|Dance Job Party Change]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $timer lte 1>>
+		<<link [[结束|Dance Job Party Timeout]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[停止|Dance Job Party Stop]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

@@ -1,0 +1,88 @@
+:: Police Community Graffiti 2 []
+<<effects>>
+<<pass 20>>
+<<if $police_graffiti gte 3 and random(1, 2) is 2 and $fame.rape gte 100>>
+	<<if $police_graffiti is 3>>
+		<<set $police_graffiti to 4>>
+	<</if>>
+	<<generate2>><<person2>>
+	一个<<person>>进入小巷，与警察聊天。他们俩都在盯着你。
+	<br><br>
+	<<if currentSkillValue('skulduggery') gte 400>>
+		<span class="green">你注意到<<person2>><<person>>递给警官一些钞票，</span>他们便都走开了。
+	<<else>>
+		他们俩一起走了过来。
+	<</if>>
+	那个警官拿着一副手铐，"伸出你的手<<girl>>，"<<person1>><<he>>说道："这位好市民希望你在里面帮忙。手铐只是一种预防措施。"<<person2>><<person>>笑了笑。
+	<br><br>
+
+	<<link [[伸出你的双手|Police Community Graffiti Hold]]>><<sub 1>><</link>>
+	<br>
+	<<link [[拒绝|Police Community Graffiti Hold Refuse]]>><<def 1>><</link>>
+	<br>
+	<<if currentSkillValue('skulduggery') gte 400 and $awareness gte 200>>
+		<<link [[控告|Police Community Graffiti Accuse]]>><<def 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $police_graffiti gte 2 and random(1, 2) is 2>>
+	<<if $police_graffiti is 2>>
+		<<set $police_graffiti to 3>>
+	<</if>>
+	<<generate2>><<generatev3>><<person2>>
+	一个<<person>>进入小巷，与警察聊天。他们俩都盯着在你身边工作的<<person3>><<person>>。<<He>>向他们投去偷偷摸摸的目光。
+	<br><br>
+	<<if currentSkillValue('skulduggery') gte 400>>
+		<span class="green">你注意到<<person2>><<person>>递给警官一些钞票，</span>他们便都走开了。他们在<<person3>><<person>>身边停下，拿出了一副手铐。
+	<<else>>
+		他们走过去在<<person>>身边停下，那个警官拿着一副手铐。
+	<</if>>
+	<br><br>
+	"把手伸出来，"<<he>>命令道。<<person3>><<person>>被戴上了手铐，<<him>>低下头看着自己的脚。"别那么沮丧，你只是要来……帮助这位好市民而已。手铐只是一种预防措施。"
+	<br><br>
+
+	<<if currentSkillValue('skulduggery') gte 400 and $awareness gte 200>>
+		<<link [[干涉|Police Community Graffiti Intervene]]>><<famegood 10>><</link>>
+		<br>
+		<<link [[继续工作|Police Community Graffiti Intervene Work]]>><</link>>
+		<br>
+	<<else>>
+		那个<<person2>><<person>>抓住<<person3>><<person>>的手铐，带领<<him>>通过一段石阶进入大楼。
+		<br><br>
+
+		<<link [[继续|Police Community Graffiti End]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $police_graffiti gte 1 and random(1, 2) is 2>>
+	<<if $police_graffiti is 1>>
+		<<set $police_graffiti to 2>>
+	<</if>>
+	<<generate2>><<person2>>
+	一个<<person>>进入小巷，与警察聊了起来。
+	<br><br>
+	<<if $bodywritingLvl gte 2>>
+		他们接近你。"你应该休息一下，"警官说："这位是这家机构的老板。<<Hes>>同意帮助你康复。"
+		<br><br>
+		"过来<<girl>>，"<<person>>说着<span class="pink">掀开了一个永久记号笔的笔盖。</span>
+		<br><br>
+
+		<<link [[按要求执行|Police Community Graffiti Pen]]>><<sub 1>><</link>><<if !$worn.face.type.includes("mask")>><<gbodywriting>><</if>>
+		<br>
+		<<link [[拒绝|Police Community Graffiti Refuse]]>><<def 1>><</link>>
+		<br>
+	<<else>>
+		他们没有走近。
+		<br><br>
+
+		<<link [[继续|Police Community Graffiti End]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $police_graffiti is undefined>>
+		<<set $police_graffiti to 1>>
+	<</if>>
+	<<generate2>><<person2>>
+	一个<<person>>走进巷子，和警察聊天。<<He>>在你工作时向你抛媚眼，但没有靠近。
+	<br><br>
+	<<link [[继续|Police Community Graffiti End]]>><</link>>
+	<br>
+<</if>>

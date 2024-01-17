@@ -1,0 +1,45 @@
+:: Eden Prey No []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我……我不知道……"你喃喃自语，避开了伊甸的目光。"也许以后再说吧？"
+<<elseif $speech_attitude is "bratty">>
+	"绝对不行。"你告诉<<him>>，双臂交叉在胸前。"我可不是一个性玩具。"
+<<else>>
+	"我现在不想这样做，"你说道。
+<</if>>
+<br><br>
+
+<<if ($NPCName[$NPCNameList.indexOf("Eden")].lust + $NPCName[$NPCNameList.indexOf("Eden")].dom) gte random(70, 170)>>
+	<<set $edenPreyForced to true>>
+	伊甸握紧拳头，摇了摇头。"胡说，你会喜欢的。"<<his>>用手推着你<<if $phase is 0>>走出门<<else>>离开小屋<</if>>，<<his>>的手放在你的背上，强迫你前进。你回头看到伊甸正在伸手拿枪。恐惧充斥着你的身体，你试图挣脱开伊甸的手。
+	<br>
+	伊甸沮丧地叹了口气，用<<his>>的靴子踩在你的<<bottom>>上，猛地一脚把你踢得摇摇晃晃<<if $phase is 0>>走出门<<else>>跪在地上<</if>>。"走，"<<he>>命令道，枪口顶在你的背上。你按照<<his>>的命令行动，走到了空地的边缘停下来。
+	<br><br>
+
+	"<<if !$edenPrey>>你是猎物<<else>>你知道规矩<</if>>，"<<he>>开始说道。"当我开枪的时候，我希望你像生命取决于此一样逃跑。如果你被抓住了……"<<He>>停了一下，笑着说道。"我就会和你玩得开心。"你回头看着<<him>>，<<Hes>>藏着什么东西在<<his>>的背后。
+	<br>
+	"转过身来，"<<he>>命令道。
+	<br><br>
+
+	你按照指示转过身去。一声巨响在你身后响起，打破了森林的宁静，提示你开始奔跑。
+	<br><br>
+
+	<<if !$edenPrey>><<set $edenPrey to 1>><</if>>
+	<<link [[跑！|Eden Prey Chase]]>><<set $phase to 0>><</link>><<athleticsdifficulty 200 1200>>
+	<br>
+	<<link [[故意被抓|Eden Prey Chase]]>><<set $phase to 1>><<control 25>><<npcincr Eden lust 1>><<npcincr Eden dom 5>><</link>><<ggcontrol>><<glust>><<ggdom>>
+	<br>
+<<else>>
+	伊甸握紧了拳头，但还是妥协了。"好吧，"<<he>>说道。"我会<<if $player.virginity.penile is true and $player.virginity.vaginal is true>>占有我的东西<<else>>利用你<</if>>，不管怎样。记住是谁在这里照顾你的。"
+	<br>
+	<<He>>离开了你，<<if $phase is 1>>生气地狠狠踩着脚步走进森林里<<else>>冲出屋子，狠狠地关上门<<him>>的身后<</if>>。
+	<br><br>
+
+	<<if $phase is 0>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+<</if>>

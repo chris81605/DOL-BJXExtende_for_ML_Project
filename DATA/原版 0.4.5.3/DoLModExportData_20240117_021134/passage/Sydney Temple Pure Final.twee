@@ -1,0 +1,30 @@
+:: Sydney Temple Pure Final []
+<<effects>>
+约旦离开了桌子。
+<<if $phase is 1>>
+	"诚实是一种重要的美德，谢谢你。"<<set $jordanScore += 10>>
+<<else>>
+	"诚实是一种重要的美德，我很失望你们有人撒了慌。"<<set $jordanScore -= 10>>
+<</if>>
+<br><br>
+<<if $jordanScore gte 60>>
+	"我不会怀疑你们对待这份承诺的诚意了，恭喜。<span class="green">你们都通过了</span><<if $phase isnot 1>>，尽管最后撒了谎<</if>>。"
+	<br><br>
+	<<link [[继续|Sydney Temple Pure Pass]]>><</link>>
+	<br>
+<<elseif $jordanScore gte 40>>
+	“你确实做出了非常大的贡献，这一点有目共睹。然而，我仍然对你的真正动机表示怀疑，因此我将进行一次非计划的贞洁测验，如果你依然纯洁无瑕，你将通过这次评估。否则……<span class="blue">你将被净化，并可在一个月后再次参与这次评估。</span>”
+	<br><br>
+	<<link [[允许检验|Sydney Temple Pure Test]]>><</link>>
+	<br>
+	<<link [[拒绝检验|Sydney Temple Pure Test Refuse]]>><</link>>
+	<br>
+	<<link [[坦白你不纯洁了|Sydney Temple Pure Test Admission]]>><</link>>
+	<br>
+<<else>>
+	"很遗憾，<span class="red">你没有通过此次评估。</span>根据你的近期状况，我无法真心地让你们结合。<span class="blue">但是，你被允许在下个月再次进行评估。</span>"
+	<br><br>
+	<<link [[继续|Sydney Temple Pure Fail]]>><</link>>
+	<br>
+<</if>>
+<<unset $jordanScore>><<unset $answer>>

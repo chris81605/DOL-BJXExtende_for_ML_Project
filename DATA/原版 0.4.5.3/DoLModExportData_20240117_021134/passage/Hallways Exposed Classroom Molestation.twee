@@ -1,0 +1,31 @@
+:: Hallways Exposed Classroom Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<generatey1>><<generatey2>><<generatey3>><<generatey4>><<maninit>>
+	<<enableSchoolRescue "Whitney" "delinquency">>
+
+	一组四个学生进入房间。他们停下来看了你一会儿，然后决定要对你做其他的事。
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没人过来救你。很有可能是因为他们觉得你本身就是混混。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+
+<<if $alarm is 1 and $rescue gte 2>>
+	<span id="next"><<link [[继续|Whitney Rescue]]>><<set $whitneyRescueExit to "classroom">><</link>></span><<nexttext>>
+<<elseif _combatend>>
+	<span id="next"><<link [[继续|Hallways Exposed Classroom Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hallways Exposed Classroom Molestation]]>><</link>></span><<nexttext>>
+<</if>>

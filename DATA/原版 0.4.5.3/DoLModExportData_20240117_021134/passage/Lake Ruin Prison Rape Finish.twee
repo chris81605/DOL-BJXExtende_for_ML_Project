@@ -1,0 +1,58 @@
+:: Lake Ruin Prison Rape Finish []
+<<effects>>
+<<if !$wraithCount>>
+	<<set $wraithCount to 0>>
+<</if>>
+<<if !$wraithMax>>
+	<<set $wraithCount to 0>>
+	<<set $wraithMax to 1>>
+	<<if C.npc["Ivory Wraith"].lust gt 10>>
+		<<set $wraithMax++>>
+	<</if>>
+	<<if $tentacledisable is "t">>
+		<<set $wraithMax -->>
+	<</if>>
+<</if>>
+<<if $wraith.type is "man" and $enemyhealth lte 0>>
+	当<<he>>踉踉跄跄地后退时，<<person>>震惊地低头看着你。
+	<<if $wraith.gen is "abomination">>
+		那些触手无力地掉落在地上，化为一股粉色的雾气。
+	<<elseif $wraith.gen is "arms">>
+		<<His>>多余的手臂向后折叠。
+	<</if>>
+	<<His>>的头向后仰，随着一声在你脑海中不断萦绕着的短促尖叫声响起，<<he>>消失无踪。你的耳朵嗡鸣不已，祂的声音在你周围回荡。"<span class="wraith">很好，继续挣扎吧。</span>"
+	<br><br>
+	<<tearful>>你环顾四周，试图确认<<hes>>是不是真的离开了。
+	<<set $wraith.defeated++>>
+	<<set $wraithPrison.timer to 120>>
+	<<set $wraithPrison.state to "recovering">>
+	<<clotheson>>
+	<<endcombat>>
+	<<endWraith>>
+	<br><br>
+	<<link [[继续|Lake Ruin Prison]]>><</link>>
+	<br>
+<<elseif $enemyarousal gte $enemyarousalmax or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax>>
+		<<kissWraith>>
+		<br><br>
+		<<He>>停了下来，沉入地面中。<<His>>的笑声回荡在你周围。
+		<br><br>
+		<<tearful>>你环顾四周，想知道下一次攻击什么时候会来。
+		<<set $wraithPrison.timer to 60>>
+		<<set $wraithPrison.state to "recovering">>
+		<<clotheson>>
+		<<endcombat>>
+		<<endWraith>>
+		<br><br>
+		<<link [[继续|Lake Ruin Prison]]>><</link>>
+		<br>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[继续|Lake Ruin Prison Rape]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

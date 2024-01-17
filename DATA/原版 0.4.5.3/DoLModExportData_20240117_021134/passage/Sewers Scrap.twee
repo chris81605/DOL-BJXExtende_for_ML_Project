@@ -1,0 +1,37 @@
+:: Sewers Scrap []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersscrap">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。隧道里到处都是金属废料。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>><<set _hideOption to true>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
+		<<sewericon "scrap">><<link [[躲在废墟下|Sewers Scrap Hide]]>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Sewers Residential">>
+		<<sewericon "main">><span class="nextLink"><<link [[满是垃圾的隧道 (0:05)|Sewers Residential]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "main">><<link [[满是垃圾的隧道 (0:05)|Sewers Residential]]>><<pass 5>><</link>>
+	<</if>>
+	<br>
+	<<ind>><<link [[塞满雕塑的水管 (0:05)|Sewers Workshop]]>><<pass 5>><</link>>
+	<br><br>
+<</if>>

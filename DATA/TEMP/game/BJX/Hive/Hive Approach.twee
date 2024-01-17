@@ -1,0 +1,33 @@
+:: Hive Approach 
+<<set $outside to 1>><<set $location to "hive">><<effects>><<set $hivestage to 0>>
+<<if $stress gte 10000 and $hivemember is 1>>
+	<<passouthive>>
+<<elseif $stress gte 10000 and $hivemember is 0>>
+	<<passoutforest>>
+<<else>>
+	<<if $hivemember is 1>>
+		守卫认出了你，没有阻止你进去。 
+		<br><br>
+		<<link [[进入蜂巢|Hive Corridor]]>><</link>>
+		<br>
+		<<link [[离开|Hive Entrance]]>><</link>>
+		<br>
+	<<elseif $bee gte 6>>
+		"小蜂崽子，停下。"它们嗅了嗅你，若有所思。"你闻起来不像是其它蜂巢的，你是野生的？"
+		<br><br>
+		<<link [[说你是野生的|Hive Entrance Accepted]]>><</link>>
+		<br>
+		<<link [[说你是来自其它蜂巢的|Hive Entrance Rejected]]>><</link>>
+		<br>
+	<<else>>
+		<<if ($monsterchance gte random(1, 100) and ($hallucinations gte 1 or $monsterhallucinations is "f")) or ($bestialitydisable is "t")>>
+			<<beastNEWinit 2 wasp>>
+			"人类止步。"它们发出威胁的嗡鸣。 
+		<<else>>
+			它们发出愤怒的嗡鸣，把你赶出蜂巢。 
+		<</if>>
+		<br><br>
+		<<link [[继续|Hive Entrance]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

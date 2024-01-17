@@ -1,0 +1,48 @@
+:: The Farm []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<beastTrainGenerate 5 `["pig","cat","dog","pig","creature"]`>>
+	<<beastNEWinit 1 dog>>
+		You stumble from the woods onto the verge of a steep cliff. Losing your balance <span class="red">you tip over the edge, tumbling to the bottom.</span>
+		<br><br>
+		When you recover, you find yourself in the main yard of a small farm. You are stunned to see several animals dancing around you... singing...
+		<br><br>
+		<span class="green">Old McDonalds rape-y farm
+		<br>
+		E-I-E-I-O
+		<br>
+		And on this farm we found a whore
+		<br>
+		E-I-E-I-O</span>
+		<br><br>
+		<span class="red">They stop singing and advance on you</span>
+		<br>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+DEBUG BEAST EVENT: Enemy current of $enemynomax (1 - 6): $enemyno
+<br>
+<span class="green">DEBUG: Enemy #: Gen Pro Type Monster Stance PP Vag</span>
+<br>
+<<for _ii = 0; _ii < $enemynomax; _ii++>>
+	DEBUG: _ii: $NPCList[_ii].gender $NPCList[_ii].pronoun $NPCList[_ii].type $NPCList[_ii].monster $NPCList[_ii].stance $NPCList[_ii].penis $NPCList[_ii].vagina
+	<br>
+<</for>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|The Farm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|The Farm]]>><</link>></span><<nexttext>>
+<</if>>

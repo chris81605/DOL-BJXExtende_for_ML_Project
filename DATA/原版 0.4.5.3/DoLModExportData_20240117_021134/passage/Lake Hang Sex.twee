@@ -1,0 +1,35 @@
+:: Lake Hang Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<promiscuity2>>
+<</if>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $consensual to 0>>
+	<<neutral 1>>
+	<<controlloss>>
+	<<molested>>
+	<<maninit>>
+	<<hand_gag 0 left>>
+	<<if isLoveInterest("Eden") and !$edenCagedEscape and $location is "lake" and random(1,2) is 2>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Lake Hang Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Lake Hang Sex]]>><</link>></span><<nexttext>>
+<</if>>

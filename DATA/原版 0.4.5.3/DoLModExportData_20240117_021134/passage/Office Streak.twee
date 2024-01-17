@@ -1,0 +1,27 @@
+:: Office Streak []
+<<location "office_building">><<effects>>
+<<set $stairDistance to random(3,6)>>
+<<set $clothesCheck to 1>>
+你在<<checkfloor>>上。你躲进一个空的隔间，希望没人能看到你的<<lewdness>>。
+<<if $stress gte $stressmax>>
+	<br><br>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "office">>
+	<<else>>
+		<<officepassout>>
+	<</if>>
+<<else>>
+	电梯很近，但被人看见的风险很高。
+	<br>
+	你可以走楼梯，但那样你就得跑过繁忙的办公室楼层。如果你小心的话，你应该能在不被人发现的情况下爬到楼梯上。
+	<br>
+	不过，最好还是先找件东西盖住自己。
+	<br><br>
+	<<link [[冒险搭乘电梯 (0:01)|Office Lift]]>><<pass 1>><</link>><<ggstress>>
+	<br>
+	<<link [[小心地走向楼梯 (0:05)|Office Streak Stairs]]>><<pass 5>><<set $streakSpeed to 1>><</link>>
+	<br>
+	<<link [[快速前往楼梯 (0:01)|Office Streak Stairs]]>><<pass 1>><<set $streakSpeed to 2>><</link>><<gharass>>
+	<br>
+	<<link [[试着找件衣服穿 (0:05)|Office Streak Search]]>><<pass 5>><</link>>
+<</if>>

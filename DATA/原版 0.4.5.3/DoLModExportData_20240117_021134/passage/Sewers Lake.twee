@@ -1,0 +1,50 @@
+:: Sewers Lake []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerslake">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在一个洞穴里，靠近旧阴沟，旁边有一池水。水池一直延伸到黑暗中。
+<<if $hallucinations gte 2>>
+	你看到有东西在移动，在你意识的边缘，但你不能专注于它们。你一转身就忘了。
+<</if>>
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if !$weekly.sewers.antiqueCrystal>>
+	一块粗糙的水晶被冲到岸边。
+	<br><br>
+<</if>>
+<<if $sewersspray isnot 1>>
+	一个奇怪的圆柱体躺在岸边，被一只手套抓着。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if $sewersspray isnot 1>>
+		<<peppersprayicon>><<link [[拿走防狼喷雾罐|Sewers Lake Cylinder]]>><<set $sewersspray to 1>><<set $spraymax += 1>><<spray 5>><</link>><<gspraymax>>
+		<br>
+	<</if>>
+	<<if !$weekly.sewers.antiqueCrystal>>
+		<<antiqueicon "pink crystal">><<link [[拿走粉水晶|Sewers Lake]]>><<arousal 600>><<set $weekly.sewers.antiqueCrystal to true>><<set $antiquemoney += 200>><<museumAntiqueStatus "antiquecrystal" "found">><</link>><<garousal>>
+		<br><br>
+	<</if>>
+	<<if $nextPassageCheck is "Sewers Waterfall">>
+		<<sewericon "waterfall">><span class="nextLink"><<link [[潮湿的隧道 (0:05)|Sewers Waterfall]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "waterfall">><<link [[潮湿的隧道 (0:05)|Sewers Waterfall]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

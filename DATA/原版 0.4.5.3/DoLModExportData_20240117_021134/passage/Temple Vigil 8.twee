@@ -1,0 +1,39 @@
+:: Temple Vigil 8 []
+<<effects>><<set $body_temperature to "cold">>
+
+你们四人一组，抱团取暖，赤裸的手臂相互环绕着。因为缺少衣物而产生的羞耻与尴尬，统统被抛诸脑后。在透骨的寒意中，没人有余力考虑这些感受。
+<br><br>
+
+<<if $wolfgirl gte 6>>
+	你的耳朵竖了起来。你听到一阵微风传来的低语。这些话让人难以理解，但却深深地扎根在你心中，引起你原始的恐惧。<<wolfgirl>>
+<<elseif $cat gte 6>>
+	你的耳朵竖了起来。你听到一阵微风传来的低语。这些话让人难以理解，但却深深地扎根在你心中，引起你原始的恐惧。<<cat>>
+<<elseif $fox gte 6>>
+	你的耳朵竖了起来。你听到一阵微风传来的低语。这些话让人难以理解，但却深深地扎根在你心中，引起你原始的恐惧。<<fox>>
+<<else>>
+	仿佛被某种新的恐怖所震悚，<<person3>><<person>>停止了祷告。悉尼捂住<<person6>>耳朵，大声地喘着气。而后你也听到了。微风中传来诡异的低语。你无法理解这些话语，但它们却引起了某种原始的恐惧。
+<</if>>
+<br><br>
+
+重要之物，岌岌可危。珍贵之物，摇摇欲坠。立于此处，险象四伏。亟需援助，不论何人。
+<br><br>
+
+其他见习教徒似有同感，纷纷哭喊着冲出人群，逃离了这个守夜之地。
+
+<<if (currentSkillValue('willpower') / 10) gte ($pain + random(0, 10))>>
+	恐惧支配着你，<span class="green">但若仅仅是恐惧，还无法摧垮你的信念。</span>你和<<person2>><<person>>、<<person3>><<person>>还有悉尼挤在一起。现在只剩你们了。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	<<templeicon "trialcontinue">><<link [[抵抗黑夜 (2:00)|Temple Vigil 9]]>><<pass 120>><<pain 8>><</link>><<ggpain>>
+	<br>
+	<<templeicon "trialbail">><<link [[放弃守夜|Temple Vigil Abandon]]>><<set $weekly.trialFailed to "whisper">><</link>>
+	<br>
+<<else>>
+	<span class="red">你跟着他们逃跑。</span>恐惧支配着你，更何况，你绝对不想孤身一人。
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+
+	<<link [[继续|Temple Vigil End]]>><<set $weekly.trialFailed to "whisper">><</link>>
+	<br>
+<</if>>

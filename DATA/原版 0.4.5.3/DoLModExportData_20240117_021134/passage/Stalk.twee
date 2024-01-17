@@ -1,0 +1,29 @@
+:: Stalk []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<stalk_init>>
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>/*Remove if rescue is impossible*/
+	<</if>>
+	<<set $location to "town">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<if $audience_active>>
+	<<audience>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $stalk_end>>
+	<span id="next"><<link [[继续|Stalk Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Stalk]]>><</link>></span><<nexttext>>
+<</if>>

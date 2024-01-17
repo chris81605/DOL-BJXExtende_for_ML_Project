@@ -1,0 +1,72 @@
+:: Park Streak Kylar 2 []
+<<effects>>
+<<person1>>
+<<if $phase is 0>>
+	<!-- this manual code is ugly as sin, but it'll do until a proper function for giving the PC an NPC's clothes is made -->
+	<<switch $NPCList[0].clothes.upper.name>>
+		<<case "school shirt">><<upperwear 5>>
+		<<case "t-shirt">><<upperwear 4>>
+		<<case "sundress top">><<upperwear 1>>
+		<<case "hoodie">><<upperwear 77>>
+	<</switch>>
+	<<switch $NPCList[0].clothes.lower.name>>
+		<<case "school shorts">><<lowerwear 6>>
+		<<case "school skirt">><<lowerwear 7>>
+		<<case "shorts">><<lowerwear 5>>
+		<<case "sweatpants">><<lowerwear 67>>
+	<</switch>>
+	你决定按<<he>>说的做。慢慢地穿上凯拉尔给你的衣服，尽量不做大动作，尽力避免刺激到<<he>>。
+	<br><br>
+	当你穿好衣服后，凯拉尔的神情马上就变了。<<He>>擦了擦眼角的泪水，扔下了刀，然后把你拉进了<<his>>怀抱里。
+	<br><br>
+	"记住，你是我的，"<<he>>边说边紧紧地抱着你，"你不能让任何人看到你那样。你的全部都是我的。"
+	<<npcincr Kylar love 5>><<gglove>>
+	<br><br>
+	最后<<he>>从你身边挤开，跑走了。你看着<<him>><<if $kylarSeen.includes("commando")>>全裸<<else>>只穿着<<his>>的内裤<</if>>离开了公园。
+	<br><br>
+	<<eventParkStreakEnd>>
+<<elseif $phase is 1>>
+	<<switch $NPCList[0].clothes.upper.name>>
+		<<case "school shirt">><<upperwear 5>>
+		<<case "t-shirt">><<upperwear 4>>
+		<<case "sundress top">><<upperwear 1>>
+		<<case "hoodie">><<upperwear 77>>
+	<</switch>>
+	<<switch $NPCList[0].clothes.lower.name>>
+		<<case "school shorts">><<lowerwear 6>>
+		<<case "school skirt">><<lowerwear 7>>
+		<<case "shorts">><<lowerwear 5>>
+		<<case "sweatpants">><<lowerwear 67>>
+	<</switch>>
+	你默许了并把衣服穿好，将自己的身体掩盖起来。凯拉尔冷静下来，给了你一个充满侵略性的拥抱。
+	<br>
+	"你需要保护自己，"<<he>>说，"你的一切都是我的，我不允许别人和我一样能看到你的身体。"
+	<br>
+	<<he>>接着转身跑开了，你看着<<him>><<if $kylarSeen.includes("commando")>>全身一丝不挂<<else>>只穿着贴身衣物<</if>>离开了公园。
+	<<npcincr Kylar love 5>><<gglove>>
+	<br><br>
+	<<eventParkStreakEnd>>
+<<elseif $phase is 2>>
+	你把衣服推回凯拉尔的怀里。"谢谢，"你说，"但我还没结束呢。"
+	<br><br>
+	<<if C.npc.Kylar.rage gte 60>>
+		你的话让凯拉尔僵在了原地。<<He>>突然退了一步，低着头一动不动地站着。突然，<<he>>不知道从哪里掏出一把刀向你扑来，把你按倒在地。
+		<br><br>
+		"你，你说什么，我的挚爱？"<<he>>问道，脸上阴晴不定，看不出情绪，"我只是想给你最好的，你是知道这一点的对吧？所以我再说一遍。给，我，穿，好。"<<npcincr Kylar rage 3>><<gksuspicion>>
+		<br><br>
+		<<link [[乖乖穿上|Park Streak Kylar 2]]>><<pass 2>><<set $phase to 0>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[反击|Park Streak Kylar Fight]]>><<set $molestationstart to 1>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<if $promiscuity gte 15>>
+			<<link [[色诱|Park Streak Kylar Seduce]]>><</link>><<promiscuous2>>
+		<</if>>
+	<<else>>
+		凯拉尔看起来心烦意乱。在<<he>>继续和你肢体接触之前，你已经一溜烟从灌木丛中跑回了公园。你可以听到凯拉尔在你身后尖叫，但<<he>>并没有追你。
+		<<npcincr Kylar love -1>><<llove>><<npcincr Kylar rage 1>><<gksuspicion>>
+		<br><br>
+		你平安地跑回了厕所。你深呼吸着平息自己的脉搏。<<ltrauma>><<lstress>><<trauma -5>><<stress -5>>
+		<br><br>
+		<<eventParkStreakEnd>>
+	<</if>>
+<</if>>

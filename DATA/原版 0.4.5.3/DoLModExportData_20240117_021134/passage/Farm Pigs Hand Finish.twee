@@ -1,0 +1,64 @@
+:: Farm Pigs Hand Finish []
+<<effects>>
+
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	心满意足后，<<farm_text pig>>一路小跑进了畜栏。
+	<br><br>
+
+	<<tearful>>你关上了门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	你的恐吓奏效了，<<farm_text pig>>回到了地上，匆匆跑进了畜栏。<<grespect>><<farm_pigs 1>>
+	<br><br>
+
+	<<tearful>>你关上了门。
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	"我来了！"听到艾利克斯的声音后，<<farm_text pig>>丢下你，匆匆跑进了畜栏。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Alex>><<person1>>
+
+	艾利克斯冲进了猪圈，把手伸向了你。<<tearful>>你在<<his>>的帮助下站了起来。"如果有猪太淘气了，不要害怕去训它们，"艾利克斯一边说，一边关上了畜栏，"一般使劲吼一句就能解决问题。"<<gdom>><<npcincr Alex dom 1>>
+	<br><br>
+
+	确保你没事后，艾利克斯回去继续工作。
+	<br><Br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+
+	<<farm_text pig>>怒气冲冲地跑进了畜栏。<<lrespect>><<farm_pigs -1>>
+	<br><br>
+
+	<<tearful>>你关上了门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

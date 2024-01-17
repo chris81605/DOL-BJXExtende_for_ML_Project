@@ -1,0 +1,68 @@
+:: Wolf Cave Black Wolf Finish []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<if $phase is 3 and $orgasmcurrent is 0 and $NPCList[0].vagina is "penis">>
+		<<set _forcedOrgasm to true>>
+		<<set $orgasmdown to 3>>
+	<</if>>
+	<<beastejaculation>><<wolfpacktrust>>
+	<br>
+
+	<<if _forcedOrgasm>>
+		尽管已经达到了高潮，但黑狼仍在继续取悦你的<<penis>>。
+		<<set $penisuse to "othervagina">>
+		<<orgasm>>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<beastNEWinit 2 wolf>>
+	黑狼冷静下来了。其他<<beastsplural>>看起来很感激，松了口气。
+	<<gharmony>>
+	<br><br>
+	<<endevent>>
+
+	<<tearful>>你爬起来，站住脚跟。
+	<br><br>
+
+	<<destinationwolfcave>>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<if $wolfpackleader is 1>>
+		黑狼一瘸一拐地离开你。族群看起来松了口气。
+		<<gharmony>>
+	<br><br>
+
+	<<else>>
+		整个狼群都在看着，看着黑狼翻起<<bhis>>后背，露出肚子表示臣服。
+		<br><br>
+
+		<<tearful>>你嚎叫起来。其他<<wolf_cave_plural>>跟着你一同嚎叫着。
+		<<if $monster is 1>>
+			黑狼说道。"你……很强。比黑狼更强。我知道当时带着你是正确的。"
+		<</if>>
+		黑狼一瘸一拐地离开去护理<<bhis>>的伤口了。<span class="gold">你现在便可以带领族群打猎了。</span>
+		<<set $wolfpackleader to 1>><<earnFeat "Head of the Pack">>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<<else>>
+	黑狼不再打扰你，但继续去冲着其他狼咬和嘶吼了。
+	<<lharmony>>
+	<br><br>
+
+	<<tearful>>你爬起来，站住脚跟。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>

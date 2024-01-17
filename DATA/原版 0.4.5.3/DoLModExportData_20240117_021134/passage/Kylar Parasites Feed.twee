@@ -1,0 +1,41 @@
+:: Kylar Parasites Feed []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _container to $container[$location]>>
+
+似乎没有什么不对劲——直到你仔细查看了<<print ($pregnancyStats.namesParasitesChild is true ? "你的孩子们" : "寄生物们")>>。
+<br><br>
+你在<<print _container.name>>附近发现了一张小纸条，上面写着字母"K"。
+
+<<if _container.deadCreatures is 0>>
+	似乎有人一直在偷偷照顾它们。
+	<br><br>
+	你应该小心，下次你可能不会再得到帮助。
+	<<set _container.kylarDelay to 7>>
+	<<set _container.kylarFed to false>>
+	<<set _container.daysSinceFed to 0>>
+<<else>>
+	好像有人在帮你照顾他们。可是这些照顾有限，它们还是死在了水箱里。
+	<br><br>
+	你把它们埋了。
+	<<ggtrauma>>
+	<<set _traumaMulti to ($pregnancyStats.namesParasitesChild is true ? 2 : 1)>>
+	<<trauma `30 * _traumaMulti * _container.deadCreatures`>>
+	<<if $wraith.state and $wraithShow>>
+		<<if !$wraithAngerCount>>
+			<<set $wraithAngerCount to 1>>
+		<</if>>
+		<<set _wraithRage to ($wraithAngerCount * 2)>>
+		<<unset $wraithShow>>
+		<<unset $wraithAngerCount>>
+		你感觉到有什么东西悄无声息地从后面抓住了你的脖子。
+		<br><br>
+		"<span class="wraith">不可原谅。你很快也会加入<<if _container.count isnot 1>>它们<<else>>它<</if>>。</span>"<<stress 12>><<trauma 12>><<ggstress>><<ggtrauma>>
+		<br><br>
+		你转过身来，什么都没有。<<gobsession _wraithRage>>
+		<br><br>
+	<</if>>
+<</if>>
+<br><br>
+<<endevent>>
+<<link [[继续|Containers]]>><<set _container.deadCreatures to 0>><</link>>
+<br>

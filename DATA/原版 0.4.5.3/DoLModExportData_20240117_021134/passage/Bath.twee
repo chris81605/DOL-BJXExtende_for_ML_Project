@@ -1,0 +1,133 @@
+:: Bath []
+<<effects>><<set $location to "home">><<set $outside to 0>>
+<<run statusCheck("Kylar")>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if getRobinLocation() is "bath" and C.npc.Robin.trauma lt 40 and $halloween isnot 1>>
+	<<set $daily.robin.bath to true>><<npc Robin>>
+
+	当你进入浴室时，你听到了来自走廊的脚步声，门被推开了，
+	<<if $exhibitionism lte 55>>
+		你迅速地遮住了你暴露在外的<<breasts>>和<<genitals>>，当你注意到是罗宾之后，你放松了紧绷的神经。
+	<<else>>
+		你看见罗宾走了进来。
+	<</if>>
+	<<if $robinromance is 1>>
+		<<if C.npc.Robin.dom gte 60>>
+			"哦，我没想到有人会在这里，"<<he>>说道："你介意我和你一块洗吗？"<<Hes>>在询问的时候就已经开始脱衣服了。
+			<br><br>
+
+			<<link [[`让${$NPCList[0].pronouns.him}加入`|Bath Robin Join 2]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[拒绝|Bath Robin Join 2]]>><<npcincr Robin dom -1>><<set $phase to 0>><</link>><<ldom>>
+		<<else>>
+			"哦，对不起，我没想到有人会在这里。"<<He>>说着的同时转身离开："我一会儿再来。"
+			<br><br>
+
+			<<link [[继续洗澡|Bath]]>><<endevent>><</link>>
+			<<if $promiscuity gte 15>>
+				<br>
+				<<link [[要求帮忙搓澡|Bath Robin Help]]>><<npcincr Robin lust 1>><<npcincr Robin love 1>><<stress -6>><</link>><<promiscuous2>><<glust>><<glove>><<lstress>>
+				<br>
+				<<link [[要求一块洗|Bath Robin Join]]>><<npcincr Robin lust 1>><<npcincr Robin dom 1>><</link>><<promiscuous2>><<glust>><<gdom>>
+			<</if>>
+		<</if>>
+	<<else>>
+		"我很抱歉！"<<He>>迅速地捂住<<his>>的眼睛，然后试图伸手去抓出口的门把手。
+		<br><br>
+
+		<<link [[继续洗澡|Bath]]>><<endevent>><</link>>
+		<<if $exhibitionism gte 15>>
+			<br>
+			<<link [[挑逗|Bath Robin Tease]]>><<npcincr Robin lust 1>><</link>><<exhibitionist2>><<glust>>
+		<</if>>
+		<<if $promiscuity gte 15 and C.npc.Robin.love gte 60>>
+			<br>
+			<<link [[要求帮忙搓澡|Bath Robin Help]]>><<npcincr Robin lust 1>><<npcincr Robin love 1>><<stress -6>><</link>><<promiscuous2>><<glust>><<glove>><<lstress>>
+		<</if>>
+	<</if>>
+<<elseif $danger gte (9900 - $allure / 3) and $hallucinations gte 2 and $slimedisable is "f" and $controlled is 0>>
+	你洗得干干净净。<<wash>>
+	<br><br>
+
+	当你拔掉塞子排水时，你感觉到有什么东西在你的<<genitals>>周围。你往两腿之间看去，并没有看到任何异常。然而当你试图站起来时，半透明的触手从水中升起并将你拉了回去。
+	<br><br>
+
+	<<link [[继续|Bath Slime]]>><<set $molestationstart to 1>><</link>>
+<<elseif ($danger gte (9900 - $allure / 2) and $rng gte 30 and Time.dayState isnot "night") or _DEBUGTIMEBOIS is 1>>
+	<<generatey1>><<generatey2>><<generatey3>><<fameexhibitionism 3>>
+	你洗得干干净净。<<wash>>
+	<br><br>
+
+	当你拔开塞子排水时，你听到走廊里有脚步声。脚步声在门外停了下来，随后门被打开了。一个<<fullGroup>>闯了进来。
+	<br><br>
+	<<rng>>
+	<<if $rng gte 51>>
+		<<if $exhibitionism gte 75 and $uncomfortable.nude is false>>
+			你惊讶地大叫，却毫不遮掩自己的<<lewdness>>。那几个人睁大眼睛看着你，惊讶于你竟然毫不遮掩你的身体。那个<<person1>><<person>>咧嘴一笑，然后将身后的门关上了。
+		<<else>>
+			<<if $leftarm is "bound" and $rightarm is "bound">>
+				你试图遮掩你的<<lewdness>>，但<span class="red">你的手臂被绑住了</span>，你无法遮掩你自己。你感到十分的尴尬，你的脸涨得通红。<<stress 6>>那几个人瞪大眼睛看着你，随后那个<<person1>><<person>>咧嘴一笑，关上了门。
+			<<else>>
+				你急忙遮掩住你的<<lewdness>>，那几个人睁大眼睛看着你，其中那个<<person1>><<person>>咧嘴一笑，将身后的门关上了。
+			<</if>>
+		<</if>>
+			<br><br>
+
+		<<person2>><<person>>的脸涨得通红。"对，对不起，"<<he>>说，但<<his>>并没有将目光从你身上移开。"我们不知道你在这里。"
+		<br><br>
+		<<link [[尖叫|Bath Scream]]>><</link>>
+		<br>
+		<<link [[要求他们离开|Bath Ask]]>><</link>>
+		<br>
+		<<if $exhibitionism gte 75>>
+			<<link [[让他们观看 (0:05)|Bath Watch]]>><<pass 5>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+		<<if $promiscuity gte 75>>
+			<<link [[刺激|Bath Sex]]>><<set $sexstart to 1>><</link>><<promiscuous5>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $exhibitionism gte 75 and $uncomfortable.nude is false>>
+			你惊讶地大叫，却毫不遮掩自己的<<lewdness>>。那几个人睁大眼睛看着你，惊讶于你竟然毫不遮掩你的身体。那个<<person1>><<person>>咧嘴一笑，然后将身后的门关上了。
+		<<else>>
+			<<if $leftarm is "bound" and $rightarm is "bound">>
+				你试图遮掩你的<<lewdness>>，但<span class="red">你的手臂被绑住了</span>，你无法遮掩你自己。你感到十分的尴尬，你的脸涨得通红。<<stress 6>>那几个人瞪大眼睛看着你，随后那个<<person1>><<person>>咧嘴一笑，关上了门。
+			<<else>>
+				你急忙遮掩住你的<<lewdness>>，那几个人睁大眼睛看着你，其中那个<<person1>><<person>>咧嘴一笑，将身后的门关上了。
+			<</if>>
+		<</if>>
+
+		<<if $player.penisExist and ($player.penissize lte 1 or $player.penissize is 4) and random(0,9) gte 6>>
+			<<telltalepenissize>>
+			<br><br>
+		<<else>>
+			<<stress 6>><<trauma 6>>
+			<<gtrauma>><<gstress>>
+			<br><br>
+		<</if>>
+
+		<<link [[结束->Bath Finish]]>><</link>>
+		<<endevent>>
+	<</if>>
+
+<<elseif C.npc.Kylar.init is 1 and C.npc.Kylar.state isnot "prison" and $weekly.kylarBathroom isnot 1 and $rng gte 70 and (Time.dayState is "dusk" or Time.dayState is "night") and _kylarStatus.includes("Love") and _kylarStatus.includes("Lust") and $kylarenglish is 1 and $kylarBodywriting is 1>>
+	<<unset $kylarBodywriting>>
+    <<set $weekly.kylarBathroom to 1>>
+    <<npc Kylar>><<person1>>
+
+    你滑入温暖的水中，并开始闭目养神。<br><br>
+    你听到附近的窗户被打开了，是凯拉尔。<<He>>正努力着想要挤进来。<br><br>
+    <<He>>冲过来，对你关切地说道："嘘！别、别吓坏了！我只是想帮忙！我只是想帮忙，"<<he>>说道。
+    <br><br>
+    <<link [[接受凯拉尔的帮助|Kylar Bath Help]]>><<npcincr Kylar love 1>><</link>><<glove>>
+    <br>
+    <<link [[推开凯拉尔|Kylar Bath Shove]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 3>><</link>><<llove>><<gksuspicion>>
+<<else>>
+你洗得干干净净。<<wash>>
+<br><br>
+
+<<getouticon>><<link [[出去->Bath Finish]]>><</link>>
+<br>
+<<ind>><<link [[自慰|Bath Masturbation]]>><<set $masturbationstart to 1>><</link>>
+<</if>>

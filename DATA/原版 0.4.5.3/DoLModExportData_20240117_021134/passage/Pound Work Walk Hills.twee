@@ -1,0 +1,40 @@
+:: Pound Work Walk Hills []
+<<set $outside to 1>><<location "moor">><<effects>>
+
+<<if $phase is 1>>
+	你领着
+<<else>>
+	你被迫跟着
+<</if>>
+<<beastsplural>>来到小镇西边，跟着小路穿过住宅区地郊外，来到它后面蜿蜒的山丘。这里有点冷，不过随着你爬着山，风也十分轻快与舒爽。
+<br><br>
+
+<<if random(1, 2) is 2>>
+	<<beastsplural>>兴致勃勃，不让它们跑散可不是一件易事。
+	<<if $deviancy gte 75 and ($monster is 1 or $bestialitydisable is "f")>>
+		<span class="lewd">一个下流的想法在你脑海里浮现。</span>你在这里孤身一人，也没有人能看到你。你知道一种能让<<beastsplural>>疲惫的方法。
+		<br><br>
+
+		<<link [[诱惑|Pound Work Walk Sex]]>><<set $sexstart to 1>><</link>><<deviant5>>
+		<br>
+		<<link [[继续走|Pound Work Walk Hills 2]]>><</link>>
+		<br>
+	<<else>>
+		<br><br>
+		<<link [[继续|Pound Work Walk Hills 2]]>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	你从石拱门下经过。离镇子这么近的地方没有多少遗迹，那些遗迹已经破败不堪，碑文已经褪色或者完全被擦掉了。
+	<br><br>
+	<<if currentSkillValue("history") gte 1000>>
+		<<link [[尝试阅读一串铭文|Pound Work Walk Hills Read]]>><</link>><<willpowerdifficulty 600 1000>>
+		<br>
+	<<else>>
+		<<link [[尝试阅读一串铭文|Pound Work Walk Hills Read 2]]>><<historyskill 3 "no_star">><</link>><<ghistory>>
+		<br>
+	<</if>>
+	<<link [[只管享受散步|Pound Work Walk Hills 2]]>><<stress -6>><</link>><<lstress>>
+	<br>
+<</if>>

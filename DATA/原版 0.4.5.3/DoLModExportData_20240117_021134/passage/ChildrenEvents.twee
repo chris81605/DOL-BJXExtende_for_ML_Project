@@ -1,0 +1,96 @@
+:: ChildrenEvents [widget]
+/*args[0] - location, args[1] - passageExit*/
+<<widget "childrenEvents">>
+	<<if _args[0]>>
+		<<getChildrenIds `{location: _args[0]}`>>
+		<<if _childrenIds.length gt 0>>
+			<<set _singleEvents to true>>
+		<</if>>
+		<<getSameBirthChildrenIds _args[0] 2>>
+		<<if Object.keys(_birthChildrenIds).length gt 0>>
+			<<set _multipleEvents to true>>
+		<</if>>
+		<<set _keys to Object.keys(_birthChildrenIds)>>
+		<<set $childPassageExit to _args[1]>>
+		<<switch _args[0]>>
+			<<case "test">>
+				/*Examples of how to add events*/
+				<<if _singleEvents is true and (_multipleEvents is false or random(0,100) gt 40)>>
+					<<addevent `"testSingles " + _childrenIds[random(0,_childrenIds.length - 1)]`>>
+				<<elseif _multipleEvents is true>>
+					<<set _args to _birthChildrenIds[_keys[random(0,_keys.length - 1)]]>>
+					<<addevent "testMultiple _args">>
+				<</if>>
+			<<case "wolf_cave">>
+				<<if _singleEvents is true and (_multipleEvents is false or random(0,100) gt 40)>>
+					<<addevent `"wolfCaveSingles " + _childrenIds[random(0,_childrenIds.length - 1)]`>>
+				<<elseif _multipleEvents is true>>
+					<<set _args to _birthChildrenIds[_keys[random(0,_keys.length - 1)]]>>
+					/*<<addevent "wolfCaveMultiple _args">>*/
+				<</if>>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "testSingles">>
+	<<if _args[0]>>
+		<<childSelect _args[0]>>
+		<<switch random(0,0)>>
+			<<case 0>>
+				你看见你的孩子<<childname>>正躺在那里看着你，在看见是你之后，<<childname>>便向你这边伸出了胳膊。
+				<br><br>
+				在把<<childhim>>抱起来之后，<<childhe>><<childgiggles>>，随后还试图伸手去抓你的脸。
+				<br><br>
+				<<if $lactating is 1 and $breastfeedingdisable is "f" and $milk_amount gte 1>>>
+					<<link [[母乳喂奶 (0:30)|childBreastFeed]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+					<br>
+				<</if>>
+				<<link [[抱抱 (0:30)|childCuddle]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[和孩子说话 (0:30)|childTalk]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[逗着玩 (0:30)|childPlay]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[洗澡 (0:30)|childBathe]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+		<</switch>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "testMultiple">>
+	<<if _args[0]>>
+		<<set $childrenIds to _args[0]>>
+		<<switch random(0,0)>>
+			<<case 0>>
+				你看见你的孩子<<childrenNames $childrenIds>>正一起安稳睡在小床上，每个孩子的睡相都是那么平稳，那么令人安心。
+				<br><br>
+				<<link [[观察一会 (0:30)|childCotWatch]]>><<pass 30>><<set $phase to 1>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[小憩一下 (0:30)|childCotWatch]]>><<pass 30>><<set $phase to 2>><</link>><<lstress>><<ltiredness>>
+		<</switch>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "wolfCaveSingles">>
+	<<if _args[0]>>
+		<<childSelect _args[0]>>
+		<<switch random(0,0)>>
+			<<case 0>>
+				你看见你的<<childtype>><<childname>>正躺在<<wolf_cave_singular>>睡觉的地方，在看见你之后，那些孩子们将<<childhands>>朝你这边伸了过来。
+				<br><br>
+				在把<<childhim>>抱起来之后，<<childhe>><<childgiggles>>，随后还试图伸手去抓你的脸。
+				<br><br>
+				<<if $lactating is 1 and $breastfeedingdisable is "f" and $milk_amount gte 1>>
+					<<link [[母乳喂奶 (0:30)|childBreastFeed]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+					<br>
+				<</if>>
+				<<link [[抱抱 (0:30)|childCuddle]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[和孩子说话 (0:30)|childTalk]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+				<br>
+				<<link [[逗着玩 (0:30)|childPlay]]>><<pass 30>><</link>><<lstress>><<ltrauma>>
+		<</switch>>
+	<</if>>
+	<br>
+<</widget>>

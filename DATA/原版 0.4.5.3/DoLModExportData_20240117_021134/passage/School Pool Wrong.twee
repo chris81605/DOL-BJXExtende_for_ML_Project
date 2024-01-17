@@ -1,0 +1,56 @@
+:: School Pool Wrong []
+<<set $outside to 0>><<set $location to "pool">><<set $daily.swimCrossdressPermission to true>><<set _alreadyWearing to false>><<schooleffects>><<effects>>
+
+你说话的声音很小，所以只有老师才能听到你说的话。
+
+<<if $player.gender is "f" or ($player.gender is "h" and $player.gender_appearance is "f") or $phase is 1>>
+	<<if $player.gender_appearance is "f" or $genderknown.includes("Mason") or $phase is 1>>
+		<<set $phase to 0>>
+		"老师，我只有一​​条男孩的短裤。"
+		<br><br>
+		<<He>>的脸一下子红了起来。"哦，那，那总比没有好。
+		<<if ($worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked")) and
+			($worn.lower.type.includes("swim") or ($worn.lower.type.includes("naked") and $worn.under_lower.type.includes("swim")))>>
+			去吧。" 你回到了班上的其他同学中。<<set _alreadyWearing to true>>
+		<<else>>
+			去换衣服吧。"<<He>>转身投入到了课堂当中。
+		<</if>>
+		<br><br>
+	<<else>>
+		"老师，我只有一​​条男孩的短裤。"
+		<br><br>
+		<<He>>茫然地看着你。"我没看到……"随后，<<He>>才意识到是因为<<his>>那张略显稚嫩的脸，这也让<<He>>一下子脸红了起来。
+		"哦，那总比没有好，而且你穿成男孩也不像是有什么问题。
+		<<if ($worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked")) and
+			($worn.lower.type.includes("swim") or ($worn.lower.type.includes("naked") and $worn.under_lower.type.includes("swim")))>>
+			去吧。" 你回到了班上的其他同学中。<<set _alreadyWearing to true>>
+		<<else>>
+			去换衣服吧。"<<He>>转身投入到了课堂当中。
+		<</if>>
+		<<set $genderknown.pushUnique("Mason")>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $player.gender_appearance is "m" or $genderknown.includes("Mason")>>
+		"老师，我只有一套女生的衣服。"
+		<br><br>
+		<<He>>的脸一下子红了起来。"哦，那总比没有好。去换衣服吧。"<<He>>转身投入到了课堂当中。
+		<br><br>
+	<<else>>
+		"老师，我只有一套女生的衣服。"
+		<br><br>
+		<<He>>茫然地看着你。"我没看到……"随后，<<He>>才意识到是因为<<his>>那张略显稚嫩的脸，这也让<<He>>一下子脸红了起来。
+		"哦，那总比没有好，而且你穿成女孩也不像是有什么问题。去换衣服吧。"<<He>>转身投入到了课堂当中。
+		<<set $genderknown.pushUnique("Mason")>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<if _alreadyWearing>>
+	<<link [[继续|Swimming Lesson]]>><<endevent>><</link>>
+<<else>>
+	<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><<endevent>><</link>>
+	<br>
+	<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><<endevent>><</link>>
+	<br>
+<</if>>

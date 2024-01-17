@@ -1,0 +1,35 @@
+:: Robin Pillory Distractions []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<if !$robinPillory.distractions>>
+	<<set $robinPillory.distractions to []>>
+<</if>>
+
+你想办法分散人群对罗宾的注意力。
+<br><br>
+
+<<if !$robinPillory.distractions.includes("speech")>>
+	<<link [[让人们为自己的行为感到羞愧 (1:00)|Robin Pillory Speech]]>><<pass 60>><</link>><<englishdifficulty 1 600>>
+	<br>
+<</if>>
+<<if !$robinPillory.distractions.includes("fruit")>>
+	<<link [[抓住水果 (1:00)|Robin Pillory Fruit]]>><<pass 60>><</link>><<dancedifficulty 1 600>>
+	<br>
+<</if>>
+<<if $money gte 20000 and !$robinPillory.distractions.includes("money")>>
+	<<link [[用钱分散注意力 (1:00 £200)|Robin Pillory Money]]>><<set $money -= 20000>><<pass 60>><</link>>
+	<br>
+<</if>>
+<<if !$robinPillory.distractions.includes("crime")>>
+	<<link [[制造骚乱 (1:00)|Robin Pillory Crime]]>><<pass 60>><<crimeUp 100 "destruction">><</link>><<gcrime "destruction">>
+	<br>
+<</if>>
+<<if $money gte 2000 and !$robinPillory.distractions.includes("flower")>>
+	<<link [[使罗宾失去吸引力 (1:00 £20)|Robin Pillory Flower]]>><<pass 60>><</link>><<tendingdifficulty 1 600>>
+	<br>
+<</if>>
+<<if Time.hour lte 22>>
+	<<link [[返回|Robin Pillory Watch]]>><</link>>
+<<else>>
+	<<link [[返回|Robin Pillory Failure]]>><</link>>
+<</if>>
+<br>

@@ -1,0 +1,82 @@
+:: Pub Journey []
+<<location "forest">><<effects>><<set $forest to 0>>
+
+<<if $drunk gt 0>>
+	<<if $rng gte 51 and !isBloodmoon()>>
+
+		<<set $location to "town">>
+
+		你和<<him>>一道走路。<<He>>得不止一次地抓住你的肩膀来稳住你，但你最终还是爬进了<<his>>车后座。这场旅程并没有花很长时间。"这里是你家吧？"<<he>>问道。"我没资格多嘴但你以后应该更小心点。总有些野兽渴望狩猎你这样可爱的<<girls>>。"<<He>>帮着你来到前门，等到确认你安全进屋后才返回<<his>>的车里。
+		<br><br>
+
+		<<link [[继续|Orphanage]]>><<endevent>><</link>>
+		<br>
+
+	<<else>>
+		<<rngWraith>>
+		<<if _wraithEvent and $wraith.state is "haunt">>
+			<<set _hallucinogenAmount to (C.npc["Ivory Wraith"].lust * 15)>><<set _drugAmount to 140 + (C.npc["Ivory Wraith"].lust * 12)>>
+			你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗粉色的药丸给你看。"你会喜欢的。我保证。"
+			<br><br>
+
+			<<link [[吃下去|Pub Wraith Mimic Hallucinogen]]>><<hallucinogen _hallucinogenAmount>><<drugs _drugAmount>><</link>>
+			<br>
+			<<if $hallucinations gte 1>>
+				<<link [[拒绝|Pub Wraith Mimic Refuse]]>><</link>>
+			<<else>>
+				<<link [[拒绝|Pub Pill Refuse]]>><</link>>
+			<</if>>
+			<br>
+		<<elseif $cow isnot 6 or random(1, 2) is 2>>
+			你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗粉色的药丸给你看。"你会喜欢的。我保证。"
+			<br><br>
+
+			<<link [[吃药|Pub Pill]]>><<drugs 180>><</link>>
+			<br>
+			<<link [[拒绝|Pub Pill Refuse]]>><</link>>
+			<br>
+		<<else>>
+			你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗白色的药丸给你看。"你会喜欢的。我保证。"
+			<br><br>
+
+			<<link [[吃药|Pub White Pill]]>><<drugs 180>><</link>>
+			<br>
+			<<link [[拒绝|Pub White Pill Refuse]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<rngWraith>>
+	<<if _wraithEvent and $wraith.state is "haunt">>
+		<<set _hallucinogenAmount to 200 + (C.npc["Ivory Wraith"].lust * 4)>><<set _drugAmount to 140 + (C.npc["Ivory Wraith"].lust * 4)>>
+		你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗粉色的药丸给你看。"你会喜欢的。我保证。"
+		<br><br>
+
+		<<link [[吃下去|Pub Wraith Mimic Hallucinogen]]>><<hallucinogen _hallucinogenAmount>><<drugs _drugAmount>><</link>>
+		<br>
+		<<if $hallucinations gte 1>>
+			<<link [[拒绝|Pub Wraith Mimic Refuse]]>><</link>>
+		<<else>>
+			<<link [[拒绝|Pub Pill Refuse]]>><</link>>
+		<</if>>
+		<br>
+	<<elseif $cow isnot 6 or random(1, 2) is 2>>
+		你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗粉色的药丸给你看。"你会喜欢的。我保证。"
+		<br><br>
+
+		<<link [[吃药|Pub Pill]]>><<drugs 180>><</link>>
+		<br>
+		<<link [[拒绝|Pub Pill Refuse]]>><</link>>
+		<br>
+	<<else>>
+		你和<<him>>一起消失在森林里。不久后<<he>>转向你。"我一直很喜欢这片森林，"<<he>>说，"我有东西给你。"<<He>>伸出手，展示一颗白色的药丸给你看。"你会喜欢的。我保证。"
+		<br><br>
+
+		<<link [[吃药|Pub White Pill]]>><<drugs 180>><</link>>
+		<br>
+		<<link [[拒绝|Pub White Pill Refuse]]>><</link>>
+		<br>
+
+	<</if>>
+
+<</if>>

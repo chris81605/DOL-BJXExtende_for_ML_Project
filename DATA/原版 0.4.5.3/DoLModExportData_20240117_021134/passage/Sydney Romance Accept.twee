@@ -1,0 +1,43 @@
+:: Sydney Romance Accept []
+<<effects>>
+<<if $sydneyFriendZoned>>
+	<<unset $sydneyFriendZoned>>
+	<<set $sydneySeen.pushUnique("friendzone")>>
+	<<if $speech_attitude is "meek">>
+		你害羞地看向了别处。"我……我想了想……我改变主意了。我对你有同样的感觉。"
+	<<elseif $speech_attitude is "bratty">>
+		你把双手搭在<<if $location is "school">>柜台<<else>>长椅<</if>>上，身体倾向悉尼。"我改变主意了，Syd。我想要你。"
+	<<else>>
+		你侧身靠<<if $location is "school">>上柜台<<else>>上长椅<</if>>，向悉尼伸出了一只手。"我考虑清楚了，我认为我准备好了——我们在一起吧。"
+	<</if>>
+	<br><br>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		你羞怯地埋下了头。"我……我对你有同样的感觉——我想试一试。"
+	<<elseif $speech_attitude is "bratty">>
+		你把手搭在腰上。"你变得更自信了，真好。我想我们可以试一试。"
+	<<else>>
+		你倚在柜台上，向<<him>>眨眨眼。"到底会怎么样我们也不知道，除非试一试。我也喜欢你，我们在一起吧。"
+	<</if>>
+	<br><br>
+<</if>>
+<<He>>愣了一下，然后对你露出了微笑。"你确定？你知道我们不能……" 你握住<<him>>的双手，打断了<<his>>接下来要说的话。<<takeHandholdingVirginity "Sydney" "romantic">>
+<br><br>
+你在<<his>>脸上印下一吻。"我也是。"你不知道<<his>>到底多激动，但你可以看见<<him>>在微微颤抖。
+<br><br>
+"我爱你，"<<he>>的眼神在闪烁，"我想这已经过了很久，很久——就感觉……像是梦一样。<<sydneyMum>>从没想过我会爱上像你这样的人。我希望<<nnpc_hes "Sirris">>会开心，能和你在一起是我这辈子最幸福的事！"<<He>>紧紧抱住你，你也不禁回拥。
+<br><br>
+<<if $loveInterest.primary is "None">>
+	<<set $loveInterest.primary to "Sydney">>
+	<span class = "gold">悉尼现在是你的爱人了！你会守护<<him>>的贞洁，还是和<<him>>一同堕落？</span>
+<<else>>
+	<span class = "gold">你现在可以将悉尼称作是你的爱人了！你会守护<<him>>的贞洁，还是和<<him>>一同堕落下去？<br>你可以在"态度"菜单栏中改变你的恋爱对象。</span>
+<</if>>
+<<set $sydneyromance to 1>>
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+	<span class="red">凯拉尔在图书馆的另一边惊恐地看着你们。</span><<gggksuspicion>><<npcincr Kylar rage 10>>
+	<br><br>
+<</if>>
+<<link [[继续|Sydney Romance 3]]>><</link>>
+<br>

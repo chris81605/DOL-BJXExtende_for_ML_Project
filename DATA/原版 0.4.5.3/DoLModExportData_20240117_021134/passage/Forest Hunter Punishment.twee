@@ -1,0 +1,25 @@
+:: Forest Hunter Punishment []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcspank>><<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemyanger += 200>>
+	<<if $phase is 1>>
+		<<npcoral>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $enemyanger lte 0>>
+	<span id="next"><<link [[继续|Forest Hunter Punishment Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Hunter Punishment]]>><</link>></span><<nexttext>>
+<</if>>

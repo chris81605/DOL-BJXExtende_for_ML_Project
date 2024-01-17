@@ -1,0 +1,58 @@
+:: School Vending Machine Widget [widget]
+<<widget "schoolVendingMachine">>
+	<<if $changingRoomGender is "boys">>
+		<<set $currentToiletReturn to "School Boy's Toilets">>
+	<<else>>
+		<<set $currentToiletReturn to "School Girl's Toilets">>
+	<</if>>
+	<<if $weekly.theft.vendingMachine is undefined>>
+		<<set $weekly.theft.vendingMachine to {}>>
+	<</if>>
+	<<if $daily.vendingMachine is undefined>>
+		<<set $daily.vendingMachine to {}>>
+	<</if>>
+	<br>
+	这里有个售卖避孕套的自动售货机。由青年部提供补贴。
+	<br>
+	<<if !$brothelVending>>
+		<<if $brotheljob and $fame.business gte 100>>
+			<<set $brothelVending to {status: "idea", products: 0, condoms: 0, lube: 0, condomsSold: 0, lubeSold: 0, condomsToRefill: 0, lubeToRefill: 0, weeksRent: 0, weeksEmpty: 0}>>
+			/* $brothelVending.status
+			idea - 1 PC has had the idea but not talked to Briar
+			asked - 2 Talked with Briar But not bought the machine
+			bought 2 - 4 Bought the vending machine but not installed it
+			sold - Briar sold the machine since it was empty for so long
+			set 3 - 8 Installed the vending machine
+			BITS of $brothelVending.products
+			bit 0 - 1 Talked to the pharmacy nurse about reselling condoms
+			bit 1 - 2 Talked to Sirris about selling lube */
+			<br>
+			看见自动售货机，<span class="pink">一个想法跃上心头</span>。你认为在妓院的更衣室里设置一台自动售货机可能是个好主意，这样工作人员就可以为他们的工作购买润滑液或其他有用物品。<span class="gold">你决定要和布莱尔谈谈这个问题。</span>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if $weekly.theft.vendingMachine[$changingRoomGender]>>
+		自动售货机坏掉了。
+		<br>
+	<<elseif $daily.vendingMachine[$changingRoomGender]>>
+		一个红标显示着："缺货"。
+		<br>
+		<<if !Time.schoolTime>>
+			<<condomicon "machine">><<link [[洗劫|Vending Machine Rob]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $money gte 2000>>
+			<<condomicon "machine">><<link [[买避孕套 (2包 £20)|Vending Machine Buy]]>><</link>>
+			<br>
+		<<else>>
+			你付不起钱。
+			<br>
+		<</if>>
+		<<if !Time.schoolTime>>
+			<<condomicon "machine">><<link [[洗劫|Vending Machine Rob]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<br>
+<</widget>>

@@ -1,0 +1,63 @@
+:: Robin Pillory Lockpick []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<set _robin to statusCheck("Robin")>>
+<<npc Robin>><<person1>>
+<<set $robinPillory.distracted to 0>>
+
+你开始撬把罗宾锁在颈手枷上的锁。
+<<skulduggerycheck>>
+<br><br>
+
+<<if $skulduggerysuccess is 1>>
+	咔哒一声，<span class="green">锁开了。</span>人群并没有察觉到你的动作。
+	<<set $robinPillory.locks -= 1>>
+	<br><br>
+	<<if $robinPillory.locks gte 1>>
+		<<if $robinPillory.danger lte 3>>
+			<<if _robin.dom gte 70>>
+				"谢谢。我就知道我可以依靠你……"罗宾说着，给了你一个虚弱的微笑。
+			<<else>>
+				"求你了，快一点儿！"罗宾说着，身体依旧在发抖。
+			<</if>>
+		<<elseif $robinPillory.danger lte 7>>
+			"谢谢你，"罗宾虚弱地说。
+		<<elseif $robinPillory.danger lte 11>>
+			罗宾想说点什么，但这些不成句的音节淹没在了<<his>>的啜泣声中。
+		<<else>>
+			罗宾好像没注意到你的存在。你希望现在还不算太晚。
+		<</if>>
+	<<else>>
+		当最后一把锁被解开时，你打开了颈手枷。
+		<br><br>
+
+		<<if $robinPillory.danger lte 3>>
+			<<him>>对你微笑，眼里充满了泪水。"我以为我死定了。"
+		<<elseif $robinPillory.danger lte 7>>
+			罗宾紧紧地拥抱你，"我们回家吧……"
+		<<elseif $robinPillory.danger lte 11>>
+			罗宾呜咽着紧紧抱着你。<<He>>不想放手。
+		<<else>>
+			你摇晃着罗宾的身体，<<him>>终于认出了你。你一言不发地把<<him>>的手臂挽到肩膀上，开始向安全的地方移动。
+		<</if>>
+		<br><br>
+
+		一个<<generate2>><<person2>><<person>>指着你们两个。"嘿！<<pShes>>把那个贱人放出来了！"罗宾在你身后，你一把紧紧抓住<<person1>><<his>>的手，开始逃跑。
+	<</if>>
+<<else>>
+	就在你觉得自己快要成功时，你听到一个声音对你大喊大叫。<span class="red">"嘿，<<pshes>>打算把<<him>>弄出来！"</span>
+	你立刻停下动作，把工具藏了起来。
+	<<stress 10>><<ggstress>>
+	<br><br>
+
+	你退开藏了起来，但人群似乎更激动了。你得等一会儿才能安全地再试一次。
+<</if>>
+<<set $robinPillory.lockpicked to 1>>
+<br><br>
+
+<<if $robinPillory.locks is 0>>
+	<<link [[继续|Robin Pillory Escape]]>><<set $molestationstart to 1>><<endevent>><</link>>
+<<elseif Time.hour lte 22>>
+	<<link [[继续|Robin Pillory Watch]]>><<endevent>><</link>>
+<<else>>
+	<<link [[继续|Robin Pillory Failure]]>><<endevent>><</link>>
+<</if>>

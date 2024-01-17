@@ -1,0 +1,61 @@
+:: Hospital Penis Reduction []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+<<generate1>><<person1>>
+接待员在<<his>>的电脑上敲了几下，指示你在等候室里坐下来。
+<br><br>
+<<endevent>>
+
+<<harper_intro>>
+<<if $worn.genitals.type.includes("shrinking")>>
+	"这通常只是一个简单的过程……"<<He>>从<<his>>的办公桌抽屉里拿出一张阴茎尺寸表。"但是，我实际上无法判断你的尺寸。"
+    <br><br>
+	<<if $worn.genitals.name is "chastity parasite">>
+		经过仔细检查后，<<he>>继续说，"您应该先把你阴茎上的寄生虫移除，恐怕我们没有工具来处理这么小的装置。"
+	<<else>>
+		经过仔细检查后，<<he>>继续说，"你应该把<<print $worn.genitals.cn_name_cap>>解锁并去掉。恐怕我们没有工具来处理这么小的装置。"
+	<</if>>
+	<br>
+<<else>>
+	"这是一场非常简单的手术。"<<He>>从桌子上拿出一张阴茎大小的图表。"你大约在这里。"<<He>>指着
+	<<switch $player.penissize>>
+		<<case 4>>顶部那个
+		<<case -1>>底部那个
+		<<default>>一个
+	<</switch>>
+	标写着<span class="lewd">"<<print ($player.penissize is 2 ? "平均长度的" : "<<penissize>>")>>阴茎"</span>的图片。
+	<br><br>
+
+	"缩小一个尺寸的阴茎需要花费£2000，在此基础上每缩小一个尺寸还要花费£2000。"
+	<br><br>
+
+	<<if $player.penissize gte 4>>
+		<<set _penis4 to Math.round(($player.penissize - 3) * 200000)>>
+		<<procedureicon "penis reduce">><<link [[阴茎缩减|Hospital Penis Reduction 2]]>><<set $phase to 3>><</link>> | <<printmoney _penis4>>
+		<br>
+	<</if>>
+	<<if $player.penissize gte 3>>
+		<<set _penis3 to Math.round(($player.penissize - 2) * 200000)>>
+		<<procedureicon "penis reduce">><<link [[阴茎缩减|Hospital Penis Reduction 2]]>><<set $phase to 2>><</link>> | <<printmoney _penis3>>
+		<br>
+	<</if>>
+	<<if $player.penissize gte 2>>
+		<<set _penis2 to Math.round(($player.penissize - 1) * 200000)>>
+		<<procedureicon "penis reduce">><<link [[阴茎缩减|Hospital Penis Reduction 2]]>><<set $phase to 1>><</link>> | <<printmoney _penis2>>
+		<br>
+	<</if>>
+	<<if $player.penissize gte 1>>
+		<<set _penis1 to Math.round(($player.penissize) * 200000)>>
+		<<procedureicon "penis reduce">><<link [[阴茎缩减|Hospital Penis Reduction 2]]>><<set $phase to 0>><</link>> | <<printmoney _penis1>>
+		<br>
+	<</if>>
+	<<if $player.penissize gte 0 and $penissizemin lt 0>>
+		<<set _penis0 to Math.round(($player.penissize + 1) * 200000)>>
+		<<procedureicon "penis reduce">><<link [[阴茎缩减|Hospital Penis Reduction 2]]>><<set $phase to -1>><</link>> | <<printmoney _penis0>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+
+<<getouticon>><<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<br>

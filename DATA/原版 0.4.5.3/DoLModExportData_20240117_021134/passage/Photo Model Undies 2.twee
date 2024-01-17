@@ -1,0 +1,42 @@
+:: Photo Model Undies 2 []
+<<effects>>
+
+<<if $photo.pubfame>>
+	尼奇检查了录像。"只剩下一点点了。如果你能把$worn.under_lower.cn_name_cap脱掉，我们就搞定了，你就能拿到你的照片了。"
+<<else>>
+	尼奇检查了一下三角相机的录像。"我能请你脱掉那些$worn.under_lower.cn_name_cap吗？"<<nnpc_he "Niki">>头也不抬，直接问道，"你的酬金会额外增加<span class="gold">£500</span>，另外会额外占用你30分钟的时间。"
+<</if>>
+
+<br><br>
+<<if $enemyno gte 2>>
+	你的观众们都老实地坐在座位上。
+	<br><br>
+<<elseif $enemyno is 1>>
+	那个<<person>>正坐在<<his>>的座位上。
+	<br><br>
+<</if>>
+
+<<if $photo.blackmail is 1>>
+	这听起来并不比那个<<person>>用来勒索你的证据好多少。
+	<br><br>
+<<elseif $photo.blackmail is 2>>
+	坐在尼奇后面的那个<<person>>掏出手机，并将屏幕朝向你。<span class="pink">你将目光从镜头处移开。</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+<</if>>
+
+<<link [[拒绝|Photo Model Topless Refuse]]>><<set $photo.refused += 1>><</link>>
+<br>
+<<if $exhibitionism gte 75>>
+	<<link [[接受|Photo Model Nude]]>><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $uncomfortable.prostituting is false>>
+	<<link [[接受|Photo Model Nude]]>><<set $desperateaction to 1>><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $photo.blackmail gte 1>>
+	<<link [[接受|Photo Model Nude]]>><<trauma 12>><<stress 12>><<set $phase to 1>><</link>><<ggtrauma>><<ggstress>><<glove "Niki">>
+<<elseif $photo.pubfame>>
+	<<link [[接受|Photo Model Nude]]>><<set $desperateaction to "你需要那张照片">><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<elseif $earSlime.event.includes("在镇上当模特时一丝不挂")>>
+	<<link [[接受|Photo Model Nude]]>><<set $desperateaction to "你需要裸露自己">><<set $phase to 0>><</link>><<exhibitionist5>><<glove "Niki">>
+<<else>>
+	<span class="blue">你没有那么淫荡和绝望。</span>
+<</if>>
+<br>

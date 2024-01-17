@@ -1,0 +1,372 @@
+:: Widgets Changing Room [widget]
+<<widget "changingRoom">>
+	<<set _studentsKnow to ($schoolrep.crossdress gte 4 and $changingroomstate is "own") or ($schoolrep.crossdress gte 5 and $changingroomstate isnot "empty")>>
+	<<set _seenGender to (_studentsKnow ? $player.gender : $player.gender_appearance)>> <!-- If they know you crossdress, then they won't judge you by appearance -->
+	<<set _changingRoomGenderType to ($changingRoomGender is "girls" ? "f" : "m")>>
+	<<set _playerGenderAppearance to (_seenGender is _changingRoomGenderType ? "same" : "other")>>
+	<<set _uncomfortable to ($backgroundTraits.includes("crossdresser") and $player.gender is _changingRoomGenderType)>>
+	<<set _justChangedClothes to ["School Pool Wardrobe", "School Boy Changing Room", "School Girl Changing Room"].includes($passagePrev)>>
+	<<if $changingRoomGender is "girls">>
+		<<set _chance to 100 - maleChance()>>
+		<<set _playerGenitals to $player.vaginaExist and !$player.penisExist ? "same" : "other">>
+	<<else>>
+		<<set _chance to maleChance()>>
+		<<set _playerGenitals to !$player.vaginaExist and $player.penisExist ? "same" : "other">>
+	<</if>>
+	<<outfitChecks>>
+
+	<<if _playerGenderAppearance is "same">>
+		<<if $changingroomstate isnot "empty">>
+			里面全是各种赤身裸体的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>。
+			<<if $changingRoomGender is "boys">>
+				<!-- TODO: Add events for girls and for possible herm reveals. Also, add more boys events too if you feel like it. -->
+				<<eventsSchoolChangingRoomsBoys>>
+			<</if>>
+			<<if !_nomessage>>
+				<<if $player.gender is "m" and $changingRoomGender is "girls" and playerBellyVisible()>>
+					因为你的<<print playerAwareTheyArePregnant() ? "怀孕" : "高高隆起的孕肚">>，没有哪个家伙再多看你一眼，所以没有人意识到你是个<<gender>>。<<if $NudeGenderDC isnot -1 and !_uncomfortable>>这让你感觉非常刺激。<</if>>
+				<<elseif $changingRoomGender is "boys" and playerBellyVisible()>>
+					一些<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>不自在地看着你<<print playerAwareTheyArePregnant() ? "的孕肚" : "似乎怀孕的肚子">>。这显然让他们认为你是个女孩。<<gstress>>
+				<<elseif $player.penisExist and $player.vaginaExist>>
+					<<if $changingRoomGender is "boys">><<generatesm1>><<else>><<generatesf1>><</if>><<person1>>
+					<<switch $schoolrep.herm>>
+						<<case 0>>没有人会多看你一眼，也没有发现你是扶她。
+						<<case 1>>一个<<person>>瞥了眼你的胯部。<<He>>悄悄地对<<his>>的朋友说了些什么，后者<<print either ("不相信地", "怀疑地", "将信将疑地", "翻着白眼", "笑着")>>摇了摇头。<span class="purple">关于你生殖器的流言开始流传了。</span>
+						<<case 2>>一个<<person>>瞥了眼你的胯部。<<He>>悄悄地对<<his>>的朋友说了些什么，后者<<print either ("摇了摇<<his>>的头，看起来不太相信", "似乎相信了", "若有所思地点了点头", "小心翼翼地看着你", "窃笑起来")>>。<span class="purple">关于你生殖器的流言开始流传了。</span>
+						<<case 3>>有些人看了一眼你的胯部。其中少数人<<print either("指着你对自己的朋友窃窃私语", "作出了粗俗的手势", "一直盯着你看，你感觉很不舒服", "看起来好像要说些什么，但还是没说", "围绕你裤子里的东西问一些冒犯的问题")>>。<span class="pink"><<print $changingRoomGender is "boys" ? "他们" : "她们">>曾经听说过流言。</span>
+						<<case 4>>有些人看了一眼你的胯部。一个<<person>>在你往柜子那边走时指着你<<print either("笑起来", "讲了个粗俗的笑话", "用手肘碰了碰<<his>>的朋友", "嘲笑起来")>>。<span class="pink"><<print $changingRoomGender is "boys" ? "他们" : "她们">>曾经听说过流言。</span>
+						<<case 5>>许多人看到了你的胯部，明目张胆地指着你窃窃私语着。一小部分人在你去柜子那边的路上路过<<print $changingRoomGender is "boys" ? "他们" : "她们">>时<<print either("冷嘲热讽着", "笑着", "奚落着你", "嘲笑你", "对你喝倒彩")>>。<span class="red"><<print $changingRoomGender is "boys" ? "他们" : "她们">>曾经听说过流言，而且你怀疑其他所有人也都听说过了。</span>
+					<</switch>>
+					<<endevent>>
+				<<elseif $player.gender isnot $player.gender_appearance and $NudeGenderDC isnot -1>>
+					<<if $schoolrep.crossdress is 3>>
+						有些<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>浑身不自在地看着你，而其他人的眼睛则直勾勾地盯着你看。<span class="pink">他们怀疑你是异装癖的传言是真的。</span> <<gstress>>
+					<<elseif $schoolrep.crossdress lt 3>>
+						没人再多看你一眼，没人意识到你是个<<gender>>。
+						<<if $backgroundTraits.includes("crossdresser") and $player.gender isnot _changingRoomGenderType>>
+							<<if !$daily.school.changingRoomStressRelief>>
+								<span class="green">你舒服了。</span><<lstress>><<stress -3>><<set $daily.school.changingRoomStressRelief to true>>
+							<<else>>
+								你舒服了。
+							<</if>>
+						<<elseif !_uncomfortable>>
+							你感觉好刺激。
+						<</if>>
+					<</if>>
+				<</if>>
+				<<changingRoomFeelings 0>>
+				<br><br>
+			<</if>>
+		<<elseif $poolroomstate isnot "empty">>
+			更衣室目前空无一人，但你可以听到游泳池传来的声音。<<if $poolroomstate is "own">>游泳课已经开始了。<</if>>
+			<<changingRoomFeelings 1>>
+			<br><br>
+			<<schoolPoolSwap>>
+			<<raidLockers>>
+		<<else>>
+			这里空无一人。
+			<<changingRoomFeelings 2>>
+			<br><br>
+		<</if>>
+		<<schoolChangingRoomLinks>>
+	<<elseif _justChangedClothes and $changingroomstate isnot "empty">>
+		里面全是各种赤身裸体的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>。
+		<br><br>
+		<<if $NudeGenderDC isnot -1>>
+			<<if _bottomless and _playerGenitals is "other">>
+				<!-- TODO: Write something better for this. -->
+				从这里，人们看不见你的<<genitals>>。
+			<<elseif _topless and $changingRoomGender is "boys" and ($player.breastsize gte 4 or $lactating is 1)>>
+				<<if $player.breastsize gte 9>>
+					许多<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>公然注视着你袒露的<<breasts>>。他们还相信你是男生，但<<if maleChance("f") gt 0>>你隆起的胸部让他们感觉很尴尬<<else>>现在他们很困惑<</if>>。
+				<<elseif $player.breastsize gte 4>>
+					你听到一些<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>低声议论你裸露的<<breasts>>。他们认为你的胸部看起来很女性化。
+				<<else>>
+					你听到一些<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>低声议论你裸露的<<breasts>>。
+				<</if>>
+				<<if $lactating is 1>>
+					他们中的一人径直向你走来。"嘿，你的乳头是怎么回事？那是乳汁吗？"
+				<</if>>
+			<<elseif _topless and $changingRoomGender is "girls" and $player.breastsize lte 2>>
+				你无意中听到一些<<if $changingRoomGender is "girls">>女孩<<else>>男孩<</if>>低声议论你裸露的<<breasts>>。其中一个人直接对你说话。
+				"操，我还没有<<print either("看过", "谈过", "睡过", "操过")>>奶子比你更大的男孩。"
+				他们没有意识到你真的是个<<girl>>。
+			<<else>>
+				一个<<print $changingRoomGender is "boys" ? "男孩" : "女孩">><<print either("疑惑地", "好奇地", "奇怪地", "沉思着")>>看着你。
+				"喔哦，你穿这衣服看起来<<print either("真", "有点", "几乎就", "")>>像个<<girl>>。"
+			<</if>>
+			<br><br>
+		<</if>>
+		<<schoolChangingRoomLinks>>
+	<<else>>
+		<<if $changingroomstate isnot "empty">>
+			<<if $exposed gte 2 and _chance isnot 0>>
+				你正待在角落里偷偷观察着，在这你可以看到那些正在换衣服的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>。如果你就这样进去的话，一定会被<<print $changingRoomGender is "boys" ? "他们" : "她们">>发现。
+				<br><br>
+				<<ind>><<link [[观察 (0:05)|School Changing Room Watch]]>><<pass 5>><</link>><<promiscuous1>>
+				<br>
+				<<if $exhibitionism gte 35>>
+					<<ind>><<link [[自慰 (0:01)|School Changing Room Masturbation]]>><<pass 1>><<set $masturbationstart to 1>><</link>><<exhibitionist3>>
+					<br>
+				<</if>>
+				<<if $exhibitionism gte 75>>
+					<<ind>><<link [[进入 (0:05)|School Changing Room Exhibitionism]]>><<pass 5>><<detention 3>><</link>><<gdelinquency>><<exhibitionist5>>
+					<br>
+				<</if>>
+				<<ind>><<link [[离开|School Pool Entrance]]>><</link>>
+			<<elseif $daily.school.changingRoomEntered is Time.hour and _chance isnot 0>>
+				<<if $changingRoomGender is "boys">><<generatesm1>><<else>><<generatesf1>><</if>><<person1>>
+				<<if $player.gender_appearance isnot _changingRoomGenderType and $NudeGenderDC isnot -1>>
+					这里全是各种赤身裸体的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>，而<<print $changingRoomGender is "boys" ? "他们" : "她们">>将你认成了<<girl>>，所以在你进门的时候匆匆遮掩住重要部位。大家看起来很生气。<<person>>丢下<<his>>的包并向你走来。"你这个变态！"<<he>>说道："你不能一直待在这里。"<<He>>抓住你的手臂。
+				<<else>>
+					这里全是各种赤身裸体的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>，所以在你一进门的时候就匆匆遮掩住重要部位。大家看起来很生气。<<person>>丢下<<his>>的包并向你走来。"你这个变态！"<<he>>说道："你不能一直待在这里。"<<He>>抓住你的手臂。
+				<</if>>
+				<<detention 3>><<gdelinquency>>
+				<br><br>
+				<<ind>><<link [[试图逃离|School Changing Room Escape]]>><</link>><<physiquedifficulty 4000 14000>>
+				<br>
+				<<ind>><<link [[调情|School Changing Room Flirt]]>><</link>><<promiscuous1>>
+				<br>
+				<<ind>><<link [[道歉|School Changing Room Apologise]]>><</link>>
+			<<else>>
+				<<set $daily.school.changingRoomEntered to Time.hour>>
+				<<if $player.gender_appearance isnot _changingRoomGenderType and $NudeGenderDC isnot -1>>
+					里面全是正在换衣服的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>，而<<print $changingRoomGender is "boys" ? "他们" : "她们">>将你当成了一个<<girl>>，在你进门时所有人都赶紧遮住了自己的重要部位。许多人似乎都尴尬到不行，但也有部分人愤怒地将你赶了出去。
+				<<else>>
+					里面全是各种赤身裸体的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>，所以大家在你进门的时候都试图遮挡重要部位。许多人因此而尴尬得要死，但也有部分人表现得十分愤怒并将你赶了出去。
+				<</if>>
+				<<detention 3>><<gdelinquency>>
+				<br><br>
+				<<ind>><<link [[继续|School Pool Entrance]]>><</link>>
+			<</if>>
+		<<elseif $poolroomstate isnot "empty">>
+			更衣室目前空无一人，但你可以听到游泳池传来的声音。<<if $poolroomstate is "own">>游泳课已经开始了。<</if>>
+			<<changingRoomFeelings 1>>
+			<br><br>
+			<<raidLockers>>
+			<<schoolChangingRoomLinks>>
+		<<else>>
+			这里空无一人。
+			<<changingRoomFeelings 2>>
+			<br><br>
+			<<schoolChangingRoomLinks>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolChangingRoomLinks">>
+	<<if $exposed gte 2 and $exhibitionism gte 75 and $poolroomstate isnot "empty">>
+		<<swimmingicon>><<link [[进入游泳馆|School Pool]]>><</link>><<if $swimall isnot 1>><<gdelinquency>><</if>>
+	<<elseif $exposed gte 2 and $swimall isnot 1 and $poolroomstate isnot "empty">>
+		<span class="pink">你不能在穿得这么暴露的情况下进入游泳池！</span>
+	<<else>>
+		<<swimmingicon>><<link [[进入游泳馆|School Pool]]>><</link>>
+	<</if>>
+	<br>
+	<<if $exhibitionism lte 75 and $exposed gte 1>>
+		<span class="pink">你不能在穿得这么暴露的情况下出去！</span>
+	<<elseif $exposed gte 1>>
+		<<getouticon>><<link [[离开|School Pool Entrance Exhibitionism]]>><</link>>
+	<<else>>
+		<<getouticon>><<link [[离开|School Pool Entrance]]>><</link>>
+	<</if>>
+	<<schoolpoolclothes _store_location>>
+	<<lockericon>><<link [[储物柜|School Pool Wardrobe]]>><<set $wardrobe_location to "schoolBoys">><</link>>
+<</widget>>
+
+<<widget "destination_pool">>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy Changing Room]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|School Girl Changing Room]]>><<endevent>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "changingRoomFeelings">>
+	<<if _uncomfortable>>
+		<br><br>
+		<<switch _args[0]>>
+			<<case 1>>即使独自一人，待在<<print $changingRoomGender is "boys" ? "男" : "女">>更衣室里也让你感觉<span class="red">不太舒服。</span>
+			<<case 2>>即便如此，待在<<print $changingRoomGender is "boys" ? "男" : "女">>更衣室里也让你感觉<span class="red">不太舒服。</span>
+			<<default>>身处<<print $changingRoomGender is "boys" ? "男" : "女">>更衣室，你感觉<span class="red">不太舒服。</span>
+		<</switch>><<gstress>><<stress 1>>
+	<<elseif $NudeGenderDC isnot -1 and _playerGenderAppearance is "other">>
+		/* Intentional lack of br */
+		<<switch _args[0]>>
+			<<case 1>>即使只身一人在此，你也觉得自己是如此下流，担心被抓到现行。
+			<<case 2>>即便如此，待在这就让你感到很刺激。
+			<<default>> /* Intentional blank, this one is handled outside the widget */
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsSchoolChangingRoomsBoys">>
+	<<rng>>
+	<<if $poolroomstate is "own" and $rng gte 80 and $worn.under_lower.name is "naked" and ($worn.lower.name is "naked" or $worn.lower.name.includes("towel"))>>
+		<<rng>>
+		<<if $worn.lower.name.includes("towel")>>
+			<<if $rng gte 50 and $player.penisExist>>
+				<br><br>
+				你的一个同学把你的毛巾从你的屁股上扯下来，而你的手放在一边，在你的同学面前暴露了你的<<genitals>>。
+				<<lowerstrip>>
+				<<if $player.penissize is 4>>
+					更衣室里爆发出一阵笑声，你匆忙把自己遮挡住，几个学生对你的<<EZbig>><<EZpenis>>发表粗鄙的评论。
+				<<elseif $player.penissize lte 1>>
+					更衣室里的众人对你暴露的<<EZsmall>><<genitals>>大笑起来。其中一个男孩说<<Penisremarkquote>>，你把你的手挡在你的<<EZsmall>><<EZpenis>>上，心中非常羞愧。
+					<<status -5>><<lcool>>
+				<<else>>
+					更衣室里爆发出一阵笑声，你匆忙把自己遮挡住，一些学生对你的<<EZpenis>>发表粗鄙的评论。
+				<</if>>
+				<<incgpenisinsecurity>><<trauma 5>><<gtrauma>>
+				<<set _nomessage to 1>>
+			<</if>>
+		<<else>> /* $worn.lower.name is "naked" */
+			<<if $rng gte 75 and $player.penisExist>>
+				<br><br>
+				你的一个同学抓住你的双臂，把你的胳膊拽到背后，大声喊着让大家看。
+				<<if $player.penissize is 4>>
+					更衣室里爆发出一阵哄笑，几个学生对你的<<EZbig>><<genitals>>发表了粗鲁的评论。
+					<br><br>
+
+					玩够了，男孩让你离开，教室里又恢复了原样。你仍然能听到学生们在窃窃私语，谈论你不寻常的体型。
+				<<elseif $player.penissize lte 1>>
+					更衣室里爆发出一阵笑声，因为你刚刚露出了<<EZsmall>><<genitals>>。
+					<br><br>
+
+					<<Penisremarkquote>>其中一个男孩说道，然后松开了你的胳膊，你赶紧羞愧地用手紧紧捂住<<EZsmall>><<EZpenis>>。
+					<<status -5>><<lcool>>
+				<<else>>
+					更衣室里爆发出一阵哄笑，几个学生对你的<<genitals>>发表了粗鲁的评论。
+					<br><br>
+
+					玩够了，男孩让你离开，房间又恢复了原样。
+				<</if>>
+				<<trauma 5>><<gtrauma>><<incgpenisinsecurity>>
+			<<else>>
+				<br><br>
+				其中一个男孩用毛巾抽打你赤裸的后背，接着更衣室里爆发出一阵笑声。"如果你不希望我们把你的屁股拿来练习用，你最好<<print ["遮好它", "穿好衣服", "拿东西遮住", "穿点什么", "穿上你的衣服"].pluck()>>。"那个男孩说道。
+				<<pain 2>><<gpain>>
+			<</if>>
+			<<set _nomessage to 1>>
+		<</if>>
+		<<if _nomessage>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolPoolSwap">>
+	<<if $schoolrep.crossdress gte 1 and !$weekly.schoolPoolSwap and currentSkillValue('skulduggery') gte 400>>
+		<br>
+		<<if Time.minute lte 40>>
+			<span class="lblue">你突然想到一个主意。</span>也许你可以分散你作为变装者的名声。
+			<br>
+			<<link [[把男生和女生的衣服交换 (0:20)|School Changing Swap]]>><<schoolrep crossdress -1>><<pass 20>><<detention 12>><<set $weekly.schoolPoolSwap to true>><</link>><<ggdelinquency>>
+			<br>
+		<<else>>
+			<span class="lblue">你突然想到一个主意。</span>也许你可以分散你作为变装者的名声。
+			<br>
+			你偷看了一下游泳池，这堂课很快就要结束了，你需要更多的时间来准备。
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "raidLockers">>
+	<<if $panty_thief gte 1>>
+		<<if $daily.lockerMason is 2>>
+			<span class="blue">梅森一直在探头确认情况，今天你将不能再搜刮任何储物柜了。</span>
+			<br>
+		<<elseif Time.minute lte 47>>
+			<<ind>><<link [[检查一个锁柜 (0:10)|School Changing Room Locker]]>><<pass 10>><<arousal 600>><</link>><<garousal>>
+			<br>
+		<<else>>
+			<span class="blue">这堂课很快就要结束了，已经没有时间去搜刮储物柜了。</span>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolpoolclothesreset">>
+	<<storereturn _args[0]>>
+	<<wardrobeSelection true>>
+	<<wearoutfit>>
+<</widget>>
+
+<<widget "schoolpoolclothes">>
+	<<if $wearoutfittext isnot undefined>>
+		<br><br>
+		<span class="purple">
+		<<switch $wearoutfittext>>
+			<<case 1>>
+				你从长椅上拿起你的衣服，小心翼翼地把它们穿上。
+			<<case 2>>
+				你把衣服放进你的储物柜。
+			<<default>>
+				你换上了<<print $wearoutfittext>>。
+		<</switch>>
+		</span>
+		<<unset $wearoutfittext>>
+	<</if>>
+	<<storeon _args[0] "check">>
+	<<if _store_check is 1>>
+		<<set _clothes to clothingInStorage(_args[0])>>
+		<<if _clothes.length gt 0>>
+			<br><br>
+			<<if _clothes.length gt 2>>
+				你的衣服整齐地堆放在储物柜旁边。
+				<br>
+			<<elseif _clothes.length is 2>>
+				你的_clothes[0].cn_name_cap和_clothes[1].cn_name_cap放在锁柜边的长椅上。
+				<br>
+			<<else>>
+				你的_clothes[0].cn_name_cap放在锁柜边的长椅上。
+				<br>
+			<</if>>
+			<<dressasyouwereicon>><<link [[穿上|$passage]]>><<storeload _args[0]>><<set $eventskip to 1>><<set $wearoutfittext to 1>><</link>>
+			<br>
+			<<lockericon "put in">><<link [[收起来|$passage]]>><<storeon _args[0] "return">><<set $eventskip to 1>><<set $wearoutfittext to 2>><</link>>
+		<</if>>
+	<</if>>
+	<br><br>
+	//游泳套装://
+	<br>
+	<<listswimoutfits $wardrobe_location _args[0] true>>
+	<br>
+	//日常套装://
+	<br>
+	<<listoutfitsPassage $wardrobe_location _args[0] true>>
+	<br>
+	<<temperature>>
+<</widget>>
+
+<<widget "schoolpoolundress">>
+	<<set _store_location to "school pool">>
+	<<if $player.gender_appearance is "m">>
+		<<set _store_location += " boys">>
+		<<set $schoolpoolundress to "男">>
+	<<else>>
+		<<set _store_location += " girls">>
+		<<set $schoolpoolundress to "女">>
+	<</if>>
+	<<if clothingInStorage(_store_location).length is 0>>
+		<<storesave _store_location>>
+	<<else>>
+		<<strip>>
+		<<returnCarried>>
+		<<set $schoolpoolundress to "wardrobe">>
+	<</if>>
+<</widget>>
+
+<<widget "schoolclothesreset">>
+	<<storeon "school pool boys" "return">>
+	<<storeon "school pool girls" "return">>
+<</widget>>
+
+<<widget "enterChangingRoomLink">>
+	<<if _args[0] is "m">>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+	<<else>>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+	<</if>>
+<</widget>>

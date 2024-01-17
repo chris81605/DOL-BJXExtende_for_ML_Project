@@ -1,0 +1,18 @@
+:: Brothel Escort Job Accept 2 []
+<<effects>>
+
+<<set $brothel_escortjob to {}>>
+
+<<script>>
+	const date = new DateTime(Time.date);
+	date.addDays(random(1,7));
+	date.addHours(random(0,23));
+	V.brothel_escortjob.date = date.timeStamp;
+<</script>>
+
+<<set _date to new DateTime($brothel_escortjob.date)>>
+
+"我会安排的。一个司机会在<span class="gold">_date.weekDayName</span><span class="gold"><<ampm _date.hour>></span>到我的单位前接你，"布莱尔说。"你最好准时出现，记住：我希望你能有最佳表现。"
+<br><br>
+
+<<link [[继续|Brothel]]>><<endevent>><<set $brothel_escortjob.accept to true>><</link>>

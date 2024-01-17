@@ -1,0 +1,41 @@
+:: Park Streak []
+<<effects>>
+你裸身藏于厕所门后面，悄悄地探头向外面公园看去。
+<<switch $weather>>
+	<<case "clear">>
+		公园里都是来享受好天气的人。有些在慢跑，另一些在野餐、遛狗、买冰淇淋，还有些则坐在长椅上。
+		<br>
+		你会被很多人看见。
+		<<fameexhibitionism 15>>
+	<<case "overcast">>
+		尽管天空灰蒙蒙的，但公园还是人头攒动。有些在慢跑，有些在长椅上读书，还而有些则只是路过。
+		<br>
+		你会被很多人看见。
+		<<fameexhibitionism 10>>
+	<<case "rain">>
+		虽然下着倾盆大雨，但公园里依然有人。有几个带着雨伞的人路过，有些在遛狗，甚至还有个人在抽烟。
+		<br>
+		你会被几个人看见。
+		<<fameexhibitionism 5>>
+	<<case "snow">>
+		<<generate1>><<person1>>
+		公园里挤满了享受雪景的人们。你看到有人在打雪仗、堆雪人，有人在遛狗，甚至还有个<<person>>在慢跑。
+		<<endevent>>
+		<br>
+		你会被几个人看见。
+		<<fameexhibitionism 5>>
+<</switch>>
+<<if isInPark("kylar")>>
+	<br>
+	你看见凯拉尔坐在树下，在<<nnpc_his "Kylar">>素描簿上画画。
+<</if>>
+<<if isInPark("whitney")>>
+	<br>
+	你看见惠特尼站在伞下。
+<</if>>
+<<if isInPark("robin")>>
+	<br>
+	你看到了罗宾的热巧克力摊子。
+<</if>>
+<br><br>
+<<link [[继续|Park Streak 2]]>><<pass 10>><</link>>

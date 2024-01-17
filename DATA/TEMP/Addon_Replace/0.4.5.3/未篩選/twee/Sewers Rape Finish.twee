@@ -1,0 +1,52 @@
+:: Sewers Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $phase is 1>>
+		摩根倾身亲了亲你的脸颊。“<<charles>>……真是了不起。你的成绩一定有A+。"
+	<<elseif $phase is 2>>
+		"亲爱的，还有提高的余地，”<<he>>低声说，“但是已经很不错了。”<<He>>吻了吻你的额头。
+	<<elseif $phase is 3>>
+		<<set _linkSkip to true>>
+		摩根笑着轻抚你的脸颊。“只要你需要我，<<charles>>，我永远都会满足你的需求。”<<He>>又打起了盹。
+		<<tearful>>你挣脱了<<his>>的控制。现在可能是你逃脱的机会。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Morgan>><<person1>>
+		<<link [[睡觉|Sewers Sleep]]>><</link>>
+		<br>
+		<br>
+		<<link [[逃脱|Sewers Escape Night]]>><</link>>
+		<br>
+	<<else>>
+		"你真是个坏<<girl>>，”<<he>>说道。“这么挑衅你的<<if $pronoun is "m">>父亲<<else>>母亲<</if>>。"
+	<</if>>
+
+	<<if !_linkSkip>>
+		<br><br>
+		<<tearful>>你在<<his>>的控制中挣扎。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Morgan>><<person1>>
+		<<link [[继续|Sewers Morgan]]>><</link>>
+	<</if>>
+<<else>>
+	你推开摩根，躲开<<his>>紧紧抓住你的手，跌跌撞撞地站了起来。
+	<br><br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		<<his>>的口袋里掉出了一样东西，掉在地上发出了清脆的撞击声。<span class="green">你抓住它，发现那是那个U盘。</span><<tearful>>你抓住U盘逃进另一个隧道里，<<his>>的怒吼声一直追赶在你身后。
+		<br><br>
+		<<pubfameComplete "morgan">>
+	<<else>>
+		<<tearful>>你逃进另一个隧道里，<<his>>的怒吼声一直追赶在你身后。
+	<</if>>
+	<br><br>
+	<<set $sewerschased to 1>>
+	<<set $sewerschasedstep to 3>>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Sewers Escape]]>><</link>>
+<</if>>

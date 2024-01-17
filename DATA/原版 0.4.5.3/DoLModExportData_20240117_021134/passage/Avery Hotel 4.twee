@@ -1,0 +1,28 @@
+:: Avery Hotel 4 []
+<<effects>>
+你滑进热水浴缸，泡在温暖的水中。<<stress -6>><<lstress>><<wash>>
+<br><br>
+漫无目的的闲谈，内容基本上都是有关艾弗里的一周。在很长一段时间里，你们都满足于安静地享受温暖。一段时间后，<<he>>问起你课程进展如何。
+<br><br>
+<<if $flashbackschoolready is 1 and $controlled is 0>>
+	<<set $flashbackschoolready to 0>>
+	<<flashbackschool>>
+	艾弗里摇了你一下，你从中解脱出来了。"嘿！怎么了，<<pcpetname "Avery">>？你怎么了？"
+	<br><br>
+	你告诉了<<him>>这件事，不是想做什么，但话就是不停地涌出来。<<he>>紧紧抱住你，<<his>>的表情变得非常灰暗。
+	<<npcincr Avery love 1>><<set $endear -=10>><<npcincr Avery rage -20>><<glove>><<lendear>><<lllarage>>
+	<br><br>
+	"也许我们可以早点去床上休息，我刚好有一种办法能让你忘掉烦恼。"<<He>>从热水浴缸里出来，然后伸手也把你拉了出来。
+	<br><br>
+	<<link [[继续|Avery Hotel Trauma]]>><<clotheson>><</link>>
+
+<<else>>
+	<<link [[告诉|Avery Hotel Chat]]>><<stress 6>><</link>><<gstress>><<note "+ 好感？" "green">>
+	<br>
+	<<link [[不回答|Avery Hotel No Chat]]>><<npcincr Avery love -1>><</link>><<llove>>
+	<br>
+	<<if $trauma gte ($traumamax / 7) * 1 or $stress gte ($stressmax / 7) * 1>>
+		<<link [[抱怨|Avery Hotel Stress Chat]]>><<stress -12>><<trauma -12>><<set $endear -=10>><<npcincr Avery rage -5>><</link>><<llstress>><<lltrauma>><<lendear>><<larage>>
+	<</if>>
+<</if>>
+<br><br>

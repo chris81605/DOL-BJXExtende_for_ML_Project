@@ -1,0 +1,248 @@
+:: Clothes Testing [exitCheckBypass]
+<h3>角色查看器</h3>
+/*Old Variables*/
+<<unset $characterViewerControls>>
+<<unset $debugClothesEquipped>>
+<<unset $debugClothesEquippedIntegrity>>
+<<unset $debugBodyState>>
+<<unset $debugSelectedColors>>
+<<unset $debugSkinColor>>
+/*End*/
+<<if $options.images is 1>>
+	<<if $characterViewer is undefined>>
+		<<set $characterViewer to {}>>
+		<<set $characterViewer.clothesEquipped to {
+			head:0,
+			face:0,
+			neck:0,
+			hands:0,
+			upper:0,
+			lower:0,
+			under_upper:0,
+			under_lower:0,
+			legs:0,
+			feet:0,
+			genitals:0,
+		}>>
+		<<set $characterViewer.clothesIntegrity to {
+			head:"full",
+			face:"full",
+			neck:"full",
+			hands:"full",
+			upper:"full",
+			lower:"full",
+			under_upper:"full",
+			under_lower:"full",
+			legs:"full",
+			feet:"full",
+			genitals:"full",
+		}>>
+		<<set $characterViewer.bodyState to {
+			show_face: true,
+			freckles: false,
+			trauma: false,
+			blink: true,
+			eyes_half: false,
+			eyes_bloodshot: false,
+			hairStage: "none",
+			hairType: "default",
+			fringeType: "default",
+			fringeStage: "short",
+			fringePosition: "back",
+			breastSize: 0,
+			penisSize: "none",
+			penisVirgin: "virgin",
+			ballsExist: true,
+			bellySize: 0,
+			vaginaCum: 0,
+			anusCum: 0,
+			mouthCum: 0,
+			bodytype: 0,
+			rightArmCovering: false,
+			leftArmCovering: false,
+			angelHalo:"hidden",
+			angelWings:"hidden",
+			angelWingsLeftType:"idle",
+			angelWingsRightType:"idle",
+			angelWingsLayer:"front",
+			fallenAngelHalo:"hidden",
+			fallenAngelWings:"hidden",
+			fallenAngelWingsLeftType:"idle",
+			fallenAngelWingsRightType:"idle",
+			fallenAngelWingsLayer:"front",
+			demonHorns:"hidden",
+			demonHornsLayer:"back",
+			demonTail:"hidden",
+			demonTailType:"idle",
+			demonTailLayer:"front",
+			demonWings:"hidden",
+			demonWingsType:"idle",
+			demonWingsLayer:"front",
+			wolfEars:"hidden",
+			wolfTail:"hidden",
+			wolfTailLayer:"front",
+			wolfPits:"hidden",
+			wolfPubes:"hidden",
+			catEars:"hidden",
+			catTail:"hidden",
+			catTailLayer:"front",
+			catTailType:"idle",
+			cowHorns:"hidden",
+			cowHornsLayer:"back",
+			cowEars:"hidden",
+			cowTail:"hidden",
+			cowTailLayer:"front",
+			birdEyes:"hidden",
+			birdMalar:"hidden",
+			birdPlumage:"hidden",
+			birdPubes:"hidden",
+			birdWings:"hidden",
+			birdWingsLeftType:"idle",
+			birdWingsRightType:"idle",
+			birdWingsLayer:"front",
+			birdTail:"hidden",
+			birdTailLayer:"front",
+			foxEars:"hidden",
+			foxTail:"hidden",
+			foxTailLayer:"front",
+			foxCheeks:"hidden",
+		}>>
+		<<set $characterViewer.colours to {
+			hair: "red",
+			fringe: "red",
+			eyesl: "purple",
+			eyesr: "purple",
+			head:["Range", "Range"],
+			face:["Range", "Range"],
+			neck:["Range", "Range"],
+			hands:["Range", "Range"],
+			upper:["Range", "Range"],
+			lower:["Range", "Range"],
+			under_upper:["Range", "Range"],
+			under_lower:["Range", "Range"],
+			legs:["Range", "Range"],
+			feet:["Range", "Range"],
+			genitals:["Range", "Range"],
+		}>>
+		<<set $characterViewer.skinColour to {
+			style:"",
+			type: "light",
+			range: 0,
+		}>>
+		<<set $characterViewer.controls to {
+			charactersToShow: 1,
+			page: "body",
+			animations: true,
+			autoRefresh: true,
+			expand: false,
+		}>>
+	<</if>>
+	<<if $tempCharacterViewerControls>>
+		<<set $characterViewer.controls to clone($tempCharacterViewerControls)>>
+		<<unset $tempCharacterViewerControls>>
+	<</if>>
+	<<if !_clothes>>
+		<<clothesTestingGenerateClothes>>
+	<</if>>
+	<div id="images">
+		<<clothesTestingImageGenerateAll>>
+	</div>
+	<div style="clear:both;"></div>
+	<<if !$characterViewer.controls.autoRefresh>>
+		<br>
+		<<link "刷新图像">><<clothesTestingImageUpdate>><</link>>
+		<br>
+	<</if>>
+	<div id="controlsNav">
+		<br>
+		<<link "身体">>
+			<<set $characterViewer.controls.page to "body">>
+			<<removeclass "#controls-body" "hidden">>
+			<<addclass "#controls-face" "hidden">>
+			<<addclass "#controls-transformations" "hidden">>
+			<<addclass "#controls-clothes" "hidden">>
+			<<addclass "#controls-export" "hidden">>
+		<</link>> |
+		<<link "脸部">>
+			<<set $characterViewer.controls.page to "face">>
+			<<addclass "#controls-body" "hidden">>
+			<<removeclass "#controls-face" "hidden">>
+			<<addclass "#controls-transformations" "hidden">>
+			<<addclass "#controls-clothes" "hidden">>
+			<<addclass "#controls-export" "hidden">>
+		<</link>> |
+		<<link "转化">>
+			<<set $characterViewer.controls.page to "transformations">>
+			<<addclass "#controls-body" "hidden">>
+			<<addclass "#controls-face" "hidden">>
+			<<removeclass "#controls-transformations" "hidden">>
+			<<addclass "#controls-clothes" "hidden">>
+			<<addclass "#controls-export" "hidden">>
+		<</link>> |
+		<<link "衣物">>
+			<<set $characterViewer.controls.page to "clothes">>
+			<<addclass "#controls-body" "hidden">>
+			<<addclass "#controls-face" "hidden">>
+			<<addclass "#controls-transformations" "hidden">>
+			<<removeclass "#controls-clothes" "hidden">>
+			<<addclass "#controls-export" "hidden">>
+		<</link>> |
+		<<link "导出/设置">>
+			<<set $characterViewer.controls.page to "export">>
+			<<addclass "#controls-body" "hidden">>
+			<<addclass "#controls-face" "hidden">>
+			<<addclass "#controls-transformations" "hidden">>
+			<<addclass "#controls-clothes" "hidden">>
+			<<removeclass "#controls-export" "hidden">>
+		<</link>> |
+		<br>
+	</div>
+	<br>
+	<div id="controls" class="no-numberify">
+		<div id="controls-body" @class="$characterViewer.controls.page is 'body' ? '' : 'hidden'">
+			<<clothesTestingBodyControls>>
+		</div>
+		<div id="controls-face" @class="$characterViewer.controls.page is 'face' ? '' : 'hidden'">
+			<<clothesTestingFaceControls>>
+		</div>
+		<div id="controls-transformations" @class="$characterViewer.controls.page is 'transformations' ? '' : 'hidden'">
+			<<clothesTestingTransformationsControls>>
+		</div>
+		<div id="controls-clothes" @class="$characterViewer.controls.page is 'clothes' ? '' : 'hidden'">
+			<<characterViewerModelClothesControls>>
+		</div>
+	</div>
+	<div id="controls-export" @class="$characterViewer.controls.page is 'export' ? '' : 'hidden'">
+		<div class="no-numberify"><<characterViewerModelExportControls>></div>
+	</div>
+	<br>
+	<<link [[保存模板|$passage]]>><</link>>
+	<br><br>
+	<<link [[重置角色|$passage]]>>
+		<<set $tempCharacterViewerControls to clone($characterViewer.controls)>>
+		<<unset $characterViewer>>
+	<</link>> |
+	<<link [[重置全部|$passage]]>>
+		<<unset $characterViewer>>
+	<</link>>
+	<<if $characterViewer.controls.autoRefresh>>
+		<<run $(() =>
+			$('#controls input, #controls select').on('input change', e => wikifier('<<clothesTestingImageUpdate>>'))
+		)>>
+	<</if>>
+	<<if $characterViewer.controls.expand>>
+		<<addclass "#passages" "debugPassages">>
+	<</if>>
+<<else>>
+	图像显示已禁用
+<</if>>
+
+<br><br>
+<<link [[返回|$lastPassage]]>>
+	<<unset $characterViewer>>
+	<<unset $lastPassage>>
+	<<removeclass "#passages" "debugPassages">>
+	<<set $options.tanImgEnabled to clone($gameTanImgSetting)>>
+	<<unset $gameTanImgSetting>>
+	<<tanned 0 "ignoreCoverage">>
+<</link>>

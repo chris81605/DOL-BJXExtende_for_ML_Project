@@ -1,0 +1,167 @@
+:: Widgets Avery [widget]
+<<widget "streetavery">>
+	<<if $NPCName[$NPCNameList.indexOf("Avery")].init isnot 1>>
+		<<npc Avery>><<initnpc Avery>><<generate2>><<generate3>>一个<<person2>><<person>>拦住了你。你试着绕过<<him>>，但是<<he>>挡住了你的路。"像你这样的<<girl>>怎么一个人在路上走啊？"<<he>>笑嘻嘻地说，"你会受伤的。"<<He>>抓住你的手臂想要把你拉走，直到一个<<nnpc_gender "Avery">>轻轻拍了拍<<him>>的肩膀。
+		<br><br>
+
+		"滚，"新来的人说。"现在。"
+		<br><br>
+
+		<<person>>回头瞪了一会儿，然后低下头，松开手臂，走开了。
+		<br><br>
+
+		<<endevent>><<npc Avery>><<person1>>
+		新来的人看向你。"你没事吧？"<<he>>问道，"我叫艾弗里。"<<He>>犹豫了一下。"虽然有点唐突，但你想喝一杯吗？我知道一个可爱的小地方。"
+		<br><br>
+
+		<<link [[同意 (0:30)|Park Lichen Accept]]>><<pass 30>><</link>>
+		<br>
+		<<link [[拒绝|Park Lichen Refuse]]>><</link>>
+		<br>
+	<<elseif $NPCName[$NPCNameList.indexOf("Avery")].rage gte 96 and $averyragerevealed is 1>>
+		<<npc Avery>><<person1>>
+		你走在街上，时不时小心翼翼地四处看。果然，你很快就看到一辆熟悉的车向你驶来。是艾弗里。
+		<br><br>
+		<<link [[躲在小巷里|Avery Dismissal Intro]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[待在原地不动|Avery Dismissal Intro]]>><<set $phase to 2>><</link>>
+		<br>
+	<<elseif $averydatemissed is 1>><<set $averydatemissed to 0>>
+		<<if $NPCName[$NPCNameList.indexOf("Avery")].rage gte random(20, 100)>><<set $averyragerevealed to 1>>
+
+			<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>从里面探出了身子，是艾弗里。"你放了我鸽子，"<<He>>打开车门，生气地瞪着你。"让我像个傻瓜一样白等了一个小时，进去！"
+			<<gggarage>><<npcincr Avery rage 15>>
+			<br><br>
+
+			<<getinicon>><<link [[进入|Street Avery Rape Drive]]>><<npcincr Avery rage -5>><</link>><<larage>>
+			<br>
+			<<ind>><<link [[道歉|Street Avery Car Apologise]]>><</link>>
+			<br>
+			<<refuseicon>><<link [[拒绝|Street Avery Refuse]]>><</link>><<gggarage>><<lllove>>
+			<br>
+
+		<<else>>
+			<<if $avery_location is 2>>
+				<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我还没有原谅你放我鸽子。那个房间可不便宜，”<<he>>说。“也许你可以补偿我。我可以再订一个房间。怎么样？"
+				<<ggarage>><<npcincr Avery rage 10>>
+
+			<<elseif $avery_location is 1>>
+				<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我还没有原谅你放我鸽子，”<<he>>说。“也许你可以补偿我。今晚还有个派对。怎么样？"
+				<<ggarage>><<npcincr Avery rage 10>>
+
+			<<else>>
+				<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我还没有原谅你放我鸽子，”<<he>>说。“也许你可以补偿我。我已经订了另一张桌子。怎么样？"
+				<<ggarage>><<npcincr Avery rage 10>>
+			<</if>>
+			<br><br>
+
+			<<link [[好|Street Avery Yes]]>><<npcincr Avery love 1>><</link>><<glove>>
+			<br>
+			<<link [[道歉|Street Avery Apologise]]>><</link>>
+			<br>
+			<<link [[不|Street Avery No]]>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<llove>><<garage>>
+			<br>
+		<</if>>
+	<<else>>
+
+		<<if $avery_location is 2>>
+			<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我一直想着能不能遇到你，”<<he>>笑着说。“我今晚为了……生意，要订一个二人间。你愿意陪我吗？"
+		<<elseif $avery_location is 1>>
+			<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我一直想见你，”<<he>>笑着说。“我被邀请参加今晚的聚会。我可以带个舞伴去。怎么样？"
+		<<else>>
+			<<npc Avery>><<person1>>一辆车在你旁边停了下来。一个<<nnpc_gender "Avery">>探出身子。是艾弗里。“我一直想见你，”<<he>>笑着说。“今晚能让我带你出去吃饭吗？我已经订了一张桌子。"
+		<</if>>
+		<br><br>
+
+		<<link [[好|Street Avery Yes]]>><<npcincr Avery love 1>><</link>><<glove>>
+		<br>
+		<<link [[不|Street Avery No]]>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<llove>><<garage>>
+		<br>
+
+	<</if>>
+<</widget>>
+
+<<widget "averyscore">>
+	<<set $NPCName[$NPCNameList.indexOf("Avery")].love = Math.clamp($NPCName[$NPCNameList.indexOf("Avery")].love, 0, 100)>>
+	<<set $NPCName[$NPCNameList.indexOf("Avery")].rage = Math.clamp($NPCName[$NPCNameList.indexOf("Avery")].rage, 0, 100)>>
+
+	<<set $endear = Math.clamp($endear, 0, 100)>>
+
+	<span class="gold">艾弗里的印象</span>
+	<br>
+
+	好感:
+
+	<<if $NPCName[$NPCNameList.indexOf("Avery")].love gte 100>>
+		<span class="green">S</span>
+	<<elseif $NPCName[$NPCNameList.indexOf("Avery")].love gte 80>>
+		<span class="teal">A</span>
+	<<elseif $NPCName[$NPCNameList.indexOf("Avery")].love gte 60>>
+		<span class="lblue">B</span>
+	<<elseif $NPCName[$NPCNameList.indexOf("Avery")].love gte 40>>
+		<span class="blue">C</span>
+	<<elseif $NPCName[$NPCNameList.indexOf("Avery")].love gte 20>>
+		<span class="purple">D</span>
+	<<else>>
+		<span class="pink">F</span>
+	<</if>>
+	<br>
+	亲密度：
+
+	<<if $endear gte 80>>
+		<span class="green">S</span>
+	<<elseif $endear gte 50>>
+		<span class="teal">A</span>
+	<<elseif $endear gte 40>>
+		<span class="lblue">B</span>
+	<<elseif $endear gte 30>>
+		<span class="blue">C</span>
+	<<elseif $endear gte 10>>
+		<span class="purple">D</span>
+	<<else>>
+		<span class="pink">F</span>
+	<</if>>
+	<br>
+	<hr>
+	<br>
+	<<if $dateCount.Avery is 3>>
+		<<if $loveInterest.primary is "None">>
+			<<set $loveInterest.primary to "Avery">>
+			<span class = "gold">艾弗里现在是你的爱人了！你感觉你在这个世界上的地位变高了一些。</span>
+			<br><br>
+		<<else>>
+			<span class = "gold">你现在可以将艾弗里称作是你的爱人了！你觉得自己在这个社会上的地位变得更高了。<br>你可以在"态度"菜单中改变你的爱慕对象。</span>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<!-- Dismisses Avery, cleans up anything unneeded and gives the dismissal message. -->
+<<widget "dismissAvery">>
+	<<npcset Avery state "dismissed">>
+	<<unset $averyPub>>
+	<<unset $avery_location>>
+	<<unset $averyCrimeTracker>>
+	<<unset $averydate>>
+	<<unset $averydateattended>>
+	<<unset $averydatedone>>
+	<<unset $averyschoolpickup>>
+	<<set $averyDismissalSceneWait to 1>>
+	<<if $loveInterest.primary is "Avery">>
+		<<if $loveInterest.secondary isnot "None">>
+			<<set $loveInterest.primary to $loveInterest.secondary>>
+			<<set $loveInterest.secondary to "None">>
+		<<else>>
+			<<set $loveInterest.primary to "None">>
+		<</if>>
+		<span class = "red">艾弗里不再是你的爱人了。</span>
+	<<elseif $loveInterest.secondary is "Avery">>
+		<<set $loveInterest.secondary to "None">>
+		<span class = "red">艾弗里不再是你的爱人了。</span>
+	<<elseif $dateCount.Avery gte 3>>
+		<span class = "red">艾弗里不再是你的爱人了。</span>
+	<<else>>
+		<span class = "red">艾弗里离开了。</span>
+	<</if>>
+	<br><br>
+<</widget>>

@@ -1,0 +1,48 @@
+:: Library Rental Counter []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>>
+<<if $counterApproach is 1>>
+	<<unset $counterApproach>>
+	<<set _counterApproach to 1>>
+	你靠近租借柜台。
+<<elseif $schoolShopAction is undefined>>
+	你现在在图书馆的租借柜台。
+<</if>>
+<<switch _sydney_location>>
+	<<case "library">>
+		<<sydneyLibrary>>
+	<<case "science">>
+		前面挂着一块牌子。<span class="blue">"正在上课"</span>
+		<br><br>
+		<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<case "canteen">>
+		前面挂着一块牌子。<span class="blue">"在食堂"</span>
+		<br><br>
+		<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<case "class">>
+		前面挂着一块牌子。<span class="blue">"正在上课"</span>
+		<br><br>
+		<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<default>>
+		<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late" and _counterApproach is 1>>
+			没有人在那里。你按下铃铛，没有人回应。
+			<<if Time.hour lt 8 and $sydneyLate is 1 and $sydneySeen and $sydneySeen.includes("library")>>
+				看来悉尼<<if $sydneySeen.includes("science")>>又<</if>>迟到了。
+			<</if>>
+		<</if>>
+		<<if !Time.schoolDay or $schoolstate is "early" or $schoolstate is "late">>
+			<br><br>
+			<<bookRentalOptions>>
+		<</if>>
+		<<if !$weekly.theft.schoolLibraryMoney>>
+			<br>
+			<<shopicon "register">><<link [[检查收银机|School Library Register]]>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<getouticon>><<link [[离开|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+<</switch>>

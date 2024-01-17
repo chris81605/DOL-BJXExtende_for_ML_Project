@@ -1,0 +1,45 @@
+:: Moor Abduction Sleep []
+<<effects>>
+
+
+<<if Time.hour lte 6>>
+	<<set _sleep_hour to 6 - Time.hour>>
+<<elseif Time.hour is 23>>
+	<<set _sleep_hour to 7>>
+<<elseif Time.hour is 22>>
+	<<set _sleep_hour to 8>>
+<<else>>
+	<<set _sleep_hour to 9>>
+<</if>>
+
+<<for _s to 0; _s lt _sleep_hour; _s++>>
+	<<if $sleeptrouble is 1 and $controlled is 0>>
+		<<set $tiredness -= 200>>
+	<<else>>
+		<<set $tiredness -= 250>>
+	<</if>>
+	<<pass 1 hour>>
+	<<if $nightmares gte 1 and $controlled is 0>>
+		<<stress 6>>
+	<</if>>
+<</for>>
+<br><br>
+
+你躺在地上，闭上眼睛。
+
+<<if $nightmares gte 1 and $controlled is 0>>
+	你的梦境被噩梦般的生物所折磨，在黑暗中嘶嘶作响，追捕你。你很快就被外面嘈杂的活动吵醒了。
+	<br><br>
+<<else>>
+	附近的嘶嘶声不绝于耳，你很难入睡，但你一定是服药过量了。你很快就被外面嘈杂的活动吵醒了。
+	<br><br>
+<</if>>
+
+一个<<generate1>><<person1>><<person>>走进帐篷，蹲在你的锁链后面。在其他人从防水布下面搬出笼子的时候，<<He>>正在摆弄着你的绑缚。
+<br><br>
+
+你一获得自由，就被推了出去。他们很快就把营地拆了。他们把你推进开始穿越荒原的队伍中。
+<br><br>
+
+<<link [[继续|Moor Abduction Walk]]>><<endevent>><</link>>
+<br>

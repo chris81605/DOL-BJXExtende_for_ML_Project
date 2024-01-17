@@ -1,0 +1,45 @@
+:: Lake Ruin Prison Rape []
+<<effects>>
+<<if $struggle_start is 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $player.penisExist>>
+		<<set $struggle.penis.creature to "pale slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "pale slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemytype to $wraith.type>>
+<</if>>
+
+<<effectsWraith>>
+
+<<switch $wraith.type>>
+	<<case "man">>
+		<<if _combatend>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "tentacles">>
+		<<if $tentacles.active lte ($tentacles.max / 2)>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<<case "slime">>
+		<<if $struggle.done gte $struggle.number>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续|Lake Ruin Prison Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+<</switch>>
+<br>

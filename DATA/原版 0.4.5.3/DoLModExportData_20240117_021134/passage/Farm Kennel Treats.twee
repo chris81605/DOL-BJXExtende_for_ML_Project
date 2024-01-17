@@ -1,0 +1,43 @@
+:: Farm Kennel Treats []
+<<effects>>
+
+你打开隔壁房间上锁的柜子，发现了一包狗零食。
+
+<<if !$kennel_treats>>
+	里面是空的。你可以在镇上的宠物店买更多零食。
+	<br><br>
+
+	<<link [[继续|Farm Kennel]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<set $farm_kennel to 1>>
+	你带着它去找<<beastsplural>>。
+
+	<<if $farm.beasts.dogs gte 20>>
+		他们兴致勃勃地围着你。你不需要用零食来吸引他们的注意。
+		<br><br>
+
+		<<kennel_treat_options>>
+	<<elseif $farm.beasts.dogs gte 5>>
+		他们充满活力地围着你。零食的气味吸引住了他们。
+		<br><br>
+
+		<<kennel_treat_options>>
+	<<elseif $farm.beasts.dogs gte -5>>
+		他们围着你。
+		<br><br>
+
+		<<kennel_treat_options>>
+	<<elseif $farm.beasts.dogs gte -20>>
+		他们可能不尊重你，但对零食的渴望使他们暂时忘了这码事。他们容忍了你的存在。
+		<br><br>
+
+		<<kennel_treat_options>>
+	<<else>>
+		他们冲向你，完全不理会你的想法和指示。他们只是想吃零食。
+		<br><br>
+
+		<<link [[继续|Farm Kennel Fight]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

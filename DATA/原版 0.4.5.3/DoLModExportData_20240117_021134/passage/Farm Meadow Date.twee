@@ -1,0 +1,41 @@
+:: Farm Meadow Date []
+<<effects>><<npc "Alex">>
+
+<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
+	<<if maleChance() lt random(1, 100)>>
+		<<set $steed to "female">>
+	<<else>>
+		<<set $steed to "male">>
+	<</if>>
+<<else>>
+	<<if beastMaleChance() lt random(1, 100)>>
+		<<set $steed to "mare">>
+	<<else>>
+		<<set $steed to "stallion">>
+	<</if>>
+<</if>>
+
+"没错，我确实想去散一下步。"
+<br><Br>
+
+"你知道吗，骑马可比单纯走路有意思多了。"艾利克斯一边说着一边站了起来。
+<br><br>
+
+<<He>>从马厩中牵出两匹<<steed_text>>。
+
+<<if $alex_meadow_date isnot 1>>
+    "你以前有骑过马吗？如果你是第一次骑马的话，我可以教你。"<<he>>说道。
+    <br><br>
+<</if>>
+
+<<if $alex_meadow_date isnot 1>>
+    "首先先骑上去，把你的左脚放在马镫上，然后用另一只脚跨过马背骑上去！"
+    <br><br>
+
+<<else>>
+    "你以前骑过马，所以你应该知道该怎么骑，是吧？"艾利克斯朝你眨了眨眼，"小心别掉下去了。"
+    <br><br>
+
+<</if>>
+
+<<link [[跟艾利克斯一起骑马|Farm Meadow Date 2]]>><<thighskill 5>><</link>><<skill_difficulty `currentSkillValue("thighskill")` "腿部技巧" 1 200>>

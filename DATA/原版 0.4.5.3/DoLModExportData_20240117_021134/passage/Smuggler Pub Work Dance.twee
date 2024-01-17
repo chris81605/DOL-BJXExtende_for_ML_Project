@@ -1,0 +1,41 @@
+:: Smuggler Pub Work Dance []
+<<effects>>
+
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<danceinit>>
+	<<set $dancing to 1>>
+	<<set $venuemod to 3>>
+	<<set $dancelocation to "smuggler_pub">>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1))>>
+	在如此暴露的情况下，你不可能毫不介意地继续跳舞。
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	在如此暴露的情况下，你不可能毫不介意地继续跳舞！你面红耳赤地逃离了现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	在如此暴露的情况下，你不可能毫不介意地继续跳舞！你面红耳赤地逃离了现场。
+	<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+	<<unset $corruptionDancing>>
+	<<link [[继续|Smuggler Pub]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is "rape">>
+	<<link [[继续|Smuggler Pub Work Dance Rape]]>><<set $molestationstart to 1>><<unset $corruptionDancing>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $corruptionDancing isnot undefined>>
+		你耳中的史莱姆在逼迫着你。
+	<<elseif $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[逃离|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[逃离|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<else>>
+		<<link [[停止|Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+<</if>>

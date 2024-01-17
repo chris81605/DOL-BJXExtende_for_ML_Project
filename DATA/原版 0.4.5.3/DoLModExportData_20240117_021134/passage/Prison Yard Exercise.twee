@@ -1,0 +1,26 @@
+:: Prison Yard Exercise []
+<<effects>>
+
+你先是热身了一会，然后过去开始举杠铃。很快你就肌肉酸痛。<<physique 12>>
+<br><br>
+
+<<if random(1, 4) is 4 and $prison.schedule is "yard">>
+	<<generate1>><<person1>>
+	一个<<person>>走到你附近，把手放在你的杠铃杠子下。"继续，"<<he>>说，"给我拼尽全力！"
+	<br><br>
+
+	<<link [[全力以赴|Prison Yard Give]]>><<tiredness 6>><</link>><<gtiredness>><<ggphysique>>
+	<br>
+	<<link [["叫" + $NPCList[0].pronouns.him + "滚开"|Prison Yard Tell]]>><</link>>
+	<br>
+<<elseif $physique gte 15000 and $prison.schedule is "yard">>
+	没有人能举的比你还重。
+	<br><br>
+	<<link [[显摆一下|Prison Yard Show]]>><</link>><<physiquedifficulty 10000 20000>>
+	<br>
+	<<link [[停止|Prison Yard]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Prison Yard]]>><</link>>
+	<br>
+<</if>>

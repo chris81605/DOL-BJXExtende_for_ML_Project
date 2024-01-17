@@ -1,0 +1,69 @@
+:: Farm Assault Alex Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemynomax gte 2>>
+		雷米的打手们太过茫然跟疲惫，无法继续入侵。<span class="green">他们摇摇晃晃地离开了田地。</span>
+	<<else>>
+		那个<<person1>><<person>>太过茫然跟疲惫，无法继续入侵。<span class="green"><<He>>摇摇晃晃地离开了田地。</span>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>
+	<<tearful>>你冲过去给艾利克斯帮忙。当你赶到的时候，你见到<<him>>把入侵者赶跑了。<<He>>汗流浃背得意洋洋地转向你道，"我们教训了他们一顿。"你不觉得<<he>>有意识到你是怎么制服你的目标的。
+	<br><br>
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		<span class="green">雷米的打手们逃离了田地，</span>他们忧心忡忡地回头看着你，确认你没有在追赶他们。
+	<<else>>
+		<span class="green">那个<<person1>><<person>>逃离了田地，</span><<he>>忧心忡忡地回头看着你，确认你没有在追赶他们。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>
+	<<tearful>>你冲过去给艾利克斯帮忙。当你赶到的时候，你见到<<him>>把入侵者赶跑了。<<He>>汗流浃背得意洋洋地转向你道，"我们教训了他们一顿。不过没时间休息了，继续吧。"
+	<br><br>
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<else>>
+	你摔倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+	那个<<person1>><<person>>在你身旁蹲下，<span class="purple">然后抓住了你<<breasts>>。</span>"真可惜我还有工作要做。"<<he>>说道，拿出了一段绳子。<<gstress>><<stress 6>>
+	<br><br>
+
+	"离<<phim>>远点！"艾利克斯喊道，冲了过去把另一个入侵者扔在了泥里。
+	<br><br>
+	艾利克斯在那个<<person>>站起了前撞倒了<<he>>，把你扶了起来。<<tearful>>你一瘸一拐地走着，艾利克斯在旁边扶着你。
+	<<endcombat>>
+	<<clotheson>>
+	<<npc Alex>><<person1>>
+	"这太危险了，"艾利克斯在安全地藏起来后说道，"如果需要的话你可以坐在这。"入侵者们大概因为他们自己的伤势，并没有追上来。<<ggdom>><<npcincr Alex dom 1>>
+	<br><br>
+
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+		<</if>>
+	<</for>>
+<</if>>

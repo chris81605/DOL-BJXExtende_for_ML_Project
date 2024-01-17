@@ -1,0 +1,51 @@
+:: Farm Horses In Encourage []
+<<effects>>
+
+<<if $tendingSuccess>>
+	你温柔地鼓励<<farm_text horse>>，<span class="green">它很听话。</span>你把它后面的隔间门关上。<<grespect>><<farm_horses 1>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+	你试图鼓励<<farm_text horse>>，<span class="red">但它仍然很固执。</span>你试着拉它，从后面推它，用胡萝卜引诱它，但都没用。<<lrespect>><<farm_horses -1>><<pass 20>><<farm_count 20>>
+	<br><br>
+	<<if $farm.beasts.horses lte -5 and $rng gte 51 and $horsedisable is "f" and ($bestialitydisable is "f" or ($farm_work.horse.monster_roll is true and ($hallucinations gte 1 or $monsterhallucinations is "f")))>><!-- Modified for Beast People -->
+		你站在马厩里，试图哄<<farm_him horse>>进去，这时<<farm_he horse>>突然袭击了你，冲着你奔跑过来，迫使你跳到一边躲避。你最后被甩到了马厩之间的围栏上。
+		<br><br>
+
+		在你爬起来前，<<farm_text horse>>将<<farm_his horse>>的前腿移到你的两侧，开始磨蹭你的<<bottom>>。
+		<<if $farm_work.horse.genitals is "vagina">>
+			<<farm_He horse>>压着你，似乎在确立统治地位。
+			<br><br>
+
+			<<link [[忍耐|Farm Horses In Endure]]>><<trauma 6>><<stress 6>><<farm_horses -1>><</link>><<gtrauma>><<gstress>><<lrespect>>
+			<br>
+			<<if $deviancy gte 55>>
+				<<link [[磨蹭回去|Farm Horses In Bottom]]>><<bottomstat>><<bottomskill 5>><</link>><<deviant4>><<gbottomskill>>
+				<br>
+			<</if>>
+		<<else>>
+			你感觉到<<farm_his horse>>巨大的阴茎已经勃起，挤到你的大腿之间。<<farm_He horse>>压着你，好像试图确立统治地位。
+			<br><br>
+
+			<<link [[忍耐|Farm Horses In Endure]]>><<trauma 6>><<stress 6>><<farm_horses -1>><<thighejacstat>><<ejacstat>><</link>><<gtrauma>><<gstress>><<lrespect>>
+			<br>
+			<<if $deviancy gte 55>>
+				<<link [[磨蹭回去|Farm Horses In Thigh]]>><<thighstat>><<thighejacstat>><<ejacstat>><<thighskill 5>><</link>><<deviant4>><<gthighskill>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		你靠在墙边，试图想出解决方法，这时你听到远处传来一声刺骨的尖叫。
+		<<if $farm_work.horse.monster is true>>
+			<<farm_text horse>>慌忙跑进<<farm_his horse>>的马厩。你在<<farm_him horse>>后面关上了门。其它半人马笑了起来，但声音中带着一丝不安。
+		<<else>>
+			<<farm_text horse>>慌忙跑进<<farm_his horse>>的马厩。你在<<farm_him horse>>后面关上了门。其它马则躲进了圈舍的更深处。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

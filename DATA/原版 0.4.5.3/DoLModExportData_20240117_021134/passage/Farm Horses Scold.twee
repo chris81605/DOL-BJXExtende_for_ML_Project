@@ -1,0 +1,30 @@
+:: Farm Horses Scold []
+<<effects>>
+
+<<if $farm.beasts.horses lte -20>>
+	<<tendingdifficulty 1 1200 true>>
+<<else>>
+	<<tendingdifficulty 1 800 true>>
+<</if>>
+<<if $tendingSuccess>>
+	"坏马，"你训斥道，<span class="green">你的声音坚定而有力。</span>"老老实实到田野里去跟其它马待在一起，我可不会给你第二次机会。"<<grespect>><<farm_horses 1>>
+	<br><br>
+
+	<<if $farm_work.horse.monster is true>>
+		半人马瞥了瞥你身后的马群，不屑地撇了撇嘴，然后转身跟它的同类一起奔向了田野。你在它们身后关上了大门。
+		<br><br>
+	<<else>>
+		马摇了摇头，转身跟它的同类一起奔向了田野。你在它们身后关上了大门。
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+	"坏、坏马，"你结结巴巴地说，<span class="red">你的声音在颤抖。</span>"去、去田野里去，嘘。"<<lrespect>><<farm_horses -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<link [[继续|Farm Horses Endure]]>><</link>>
+	<br>
+
+<</if>>

@@ -1,0 +1,40 @@
+:: Hallways Catcall Flirt []
+<<effects>>
+
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+	你掀起你的$worn.lower.cn_name_cap的下摆，差一点就露出了你的<<undies>>。
+	<<if $speech_attitude is "meek">>
+		"你觉得我可爱吗？"你问道。
+	<<elseif $speech_attitude is "bratty">>
+		"你们都在聊天，"你说。
+	<<else>>
+		"你看起来也不错，"你说道。
+	<</if>>
+<<else>>
+	你倚在储物柜边上。
+	<<if $speech_attitude is "meek">>
+		"你觉得我可爱吗？"你问道。
+	<<elseif $speech_attitude is "bratty">>
+		"聊得很热闹嘛，"你说，"不是吗？"
+	<<else>>
+		"你看起来也不错，"你说道。
+	<</if>>
+<</if>>
+<<promiscuity1>>
+
+<<if $rng gte 51>>
+	<<person>>被你吓了一跳，结结巴巴的说不出话来。<<He>>转身跑掉了。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<person>>盯着你的身体，向你走来。“我们换个地方吧，”<<he>>说。<<His>>的意图很明确。
+	<br><br>
+
+	<<link [[拒绝|Hallways Cupboard Refuse]]>><</link>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[接受|Hallways Cupboard Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<</if>>

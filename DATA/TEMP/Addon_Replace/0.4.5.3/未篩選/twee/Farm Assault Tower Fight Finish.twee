@@ -1,0 +1,133 @@
+:: Farm Assault Tower Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemynomax gte 2>>
+		打手们摇摇晃晃地离开了你，他们需要喘口气，不过看起来还能继续战斗。直到$farm.tower_guard把<<his>>一个同伙扔下了塔楼。他们转过身去跑下了楼梯。
+	<<else>>
+		<<He>>摇摇晃晃地离开了你，<<He>>需要喘口气，不过看起来还能继续战斗。直到$farm.tower_guard把<<his>>一个同伙扔下了塔楼。<<He>>转过身去跑下了楼梯。
+	<</if>>
+	<br><br>
+	<<tearful>>你靠着栏杆休息着。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"真是奇怪的战斗方式，"$farm.tower_guard说道，"不过管用就行。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"我有些朋友想从事性工作，"$farm.tower_guard说道，"他们能从你身上学到很多。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"这也是一种方式，"$farm.tower_guard说道，"我不评判，我们都有自己的生存方式。"
+	<<else>>
+		"真希望你也能这样教训我，" $farm.tower_guard笑道。
+	<</if>>
+	<<gstress>><<stress 6>>
+	<<endevent>>
+	<br><br>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+	<<set $farm_assault.tower to "manned">>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		你把<<person1>><<person>>从塔楼上拍了下来。$farm.tower_guard's 对手也跟着下去了。<<person2>><<person>>转身逃跑了，差不多是摔下了楼梯。
+	<<else>>
+		你把<<person1>><<person>>从塔楼上拍了下来。$farm.tower_guard's 对手也跟着下去了。
+	<</if>>
+	<br><br>
+	<<tearful>>你靠在栏杆上休息着。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"就是要，不，是只能这样打，"$farm.tower_guard笑道，"我们也会继续把下一批打包带走的。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"这都有点好玩了，"$farm.tower_guard笑道，"大概下次我们就要满头大汗了。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"工作完成，不过可能会有更多的敌人，"$farm.tower_guard说道，"感谢帮助。"
+	<<else>>
+		$farm.tower_guard伸出手来击掌，"我们做到了，"<<he>>说道："或许你之后会奖励我一下？正如一个<<if $pronoun is "m">>男孩<<else>>女孩<</if>>所梦想的那样。"
+	<</if>>
+	<br><br>
+	<<endevent>>
+
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+	<<set $farm_assault.tower to "manned">>
+
+<<else>>
+	你摔到了栏杆上，因为受伤了失去了战斗能力。
+	<<if $enemynomax gte 2>>
+		打手们把他们的注意力转移到了$farm.tower_guard身上，冲了过去帮助他们的同伙。
+	<<else>>
+		那个<<person1>><<person>>把<<his>>注意力转移到了$farm.tower_guard身上，冲了过去帮助<<his>>的同伙。
+	<</if>>
+	<br><br>
+	<<endcombat>>
+
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			他们一直挣扎，直到
+			<<if $farm.tower_guard_skill gte random(1, ($farm_assault.teams[_assault_keys[_s]].number * 500))>>
+				$farm.tower_guard<span class="green">把一名袭击者扔下了塔楼。</span>
+				<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+					另一个打手转身逃下了楼梯。
+				<<else>>
+					其他打手转身逃下了楼梯。
+				<</if>>
+				<br><br>
+				$farm.tower_guard帮你站了起来。
+
+				<<if $NPCList[0].traits.includes("relaxed")>>
+					"你还好吗？"<<he>>问道，"需要的话就在这休息下吧。我会让艾利克斯了解情况的。"
+				<<elseif $NPCList[0].traits.includes("sociable")>>
+					"稍微休息下吧，"<<he>>说道，"希望其他人在我分心的时候没整出什么事情来。"
+				<<elseif $NPCList[0].traits.includes("brooding")>>
+					"别太冒险了，"<<he>>说道，"注意安全。"
+				<<else>>
+					"你看起来不太妙，"<<he>>说道，"还好附近没其他变态来占你便宜。除了我，不过我是你员工。"
+				<</if>>
+				<br><br>
+				<<tearful>>你爬下了楼梯。
+				<br><br>
+				<<set $farm_assault.tower to "manned">>
+				<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+			<<else>>
+				<<farm_assault_thugs>><span class="red">制服了$farm.tower_guard，然后把<<him>>从塔上踢了下来。</span>
+				<br><br>
+
+				<<tearful>>你爬了起来，下了塔楼。
+				<br><br>
+				<<set $farm_assault.teams[_assault_keys[_s]].location to $farm_assault.no.pluck()>>
+				<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+				<<set $farm_assault.tower to "defeated">>
+			<</if>>
+		<</if>>
+	<</for>>
+
+	<<clotheson>>
+
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

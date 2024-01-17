@@ -1,0 +1,62 @@
+:: Livestock Field Gang Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	农场工人一起向大门走去，留下你躺在草地上。
+	<br><br>
+	<<tearful>>你踉跄着站起身来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Livestock Field]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	农场工人被你的凶狠吓了一跳，纷纷退后。他们站着不动，站成一排面对你。
+	<br><br>
+
+	<<link [[承担责任|Livestock Field Gang Charge]]>><<def 1>><</link>>
+	<br>
+	<<link [[盯着|Livestock Field Gang Stare]]>><</link>>
+	<br>
+
+
+<<else>>
+	<<set $rescued += 1>>
+	<<earnFeat "Equine Rescue">>
+	你听到了马蹄声。<<person1>><<person>>向上看。"该死的！"<<he>>边喊边从你身边退后。其他人也跟着走，把你一个人留在草地上。
+	<br><br>
+	<!-- Modified for Monster People -->
+	<<if ($monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
+		<<if maleChance() lt random(1, 100)>>
+			马蹄声越来越大，不一会儿你就被半人马包围了。其中两匹把农场工人们赶出了田地，他们在你周围围成了一个保护圈。
+			<br><br>
+			<<person4>><<person>>是最后一个通过大门的人，<<he>>匆忙地关上了门。靠近你的一匹身材健硕的半人马仰起头笑。"没花多少时间。"
+			<br><br>
+			看到你安全了，半人马回到了他们的领地。
+			<br><br>
+		<<else>>
+			马蹄声越来越大，不一会儿你就被半人马包围了。其中两匹把农场工人们赶出了田地，他们在你周围围成了一个保护圈。
+			<br><br>
+			<<person4>><<person>>是最后一个通过大门的人，<<he>>匆忙地关上了门。靠近你的一匹腰身挺直的半人马仰起头笑。"没花多少时间。"
+			<br><br>
+			看到你安全了，半人马回到了他们的领地。
+			<br><br>
+		<</if>>
+	<<else>>
+		马蹄声越来越大，不一会儿你就被马匹们包围了。其中两匹把农场工人们赶出了田地，其他大部分的马都围在你身边，形成了一个保护圈。
+		<br><br>
+		<<person4>><<person>>是最后一个通过大门的人，<<he>>匆忙地关上了门。
+		<br><br>
+		看到你安全了，马回到了它们的领地。
+		<br><br>
+	<</if>>
+	<br><br>
+	<<tearful>>你站了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Livestock Field]]>><</link>>
+	<br>
+
+<</if>>

@@ -1,0 +1,97 @@
+:: Tentacle Forest Stream []
+<<set $bus to "tentacle_forest_stream">><<effects>>
+
+你在触手森林里，在一条湍急的溪流旁边。你看不到底部，奇怪的、像鼻涕虫一样的生物从水面上跳下来。它冲下空地边缘的瀑布，然后消失了
+<br><br>
+
+<<tentacle_forest_safe_orgasm>>
+<<tentacle_forest_time>>
+<br><br>
+
+<<if $tentacle_forest_time gte 60>>
+    <<tentacle_forest_end_scene>>
+<<elseif $town_projects.bridge gte 5>>
+
+    <<if $slugdisable is "f">>
+        桥等着你过。不过，跳跃的蛞蝓可能是个问题。
+        <br><br>
+        <<if $tentacle_forest_time gte 60>>
+            <<tentacle_forest_end_scene>>
+        <<elseif $stress gte $stressmax>>
+            <<tentacle_forest_stress_scene>>
+        <<elseif $arousal gte 10000 and !$tentacle_forest_lurker.includes("defeated")>>
+            <<tentacle_forest_orgasm_scene>>
+        <<else>>
+            <<if $tentacle_forest_stream is undefined>>
+                <<set $tentacle_forest_stream to 5>>
+            <</if>>
+            <<switch $tentacle_forest_stream>>
+                <<case 5>>
+                    <span class="pink">溪流中到处都是跳跃的蛞蝓。</span>
+                <<case 4>>
+                    <span class="purple">溪流中仍然充满跳跃的蛞蝓。</span>
+                <<case 3>>
+                    <span class="blue">你的努力减少了数量，但仍有许多蛞蝓从地表跃出。</span>
+                <<case 2>>
+                    <span class="lblue">溪流比你发现它时明显空了很多，但仍有几条蛞蝓从水面四处喷涌而出。</span>
+                <<case 1>>
+                    <span class="teal">溪流几乎清澈，除了偶尔出现的孤独蛞蝓。</span>
+                <<default>>
+                    <span class="green">溪流中没有蛞蝓。</span>
+            <</switch>>
+            <br><br>
+            <<if $tentacle_forest_stream gte 1>>
+                <<link [[从岸边抓一些鼻涕虫，让走路更安全 (0:05)|Tentacle Forest Stream Catch]]>><<tentacle_forest_pass 5>><</link>><<tendingdifficulty 1 400>>
+                <br>
+            <</if>>
+            <<set _stream_difficulty to 300 * $tentacle_forest_stream>>
+            <<link [[尽可能快地穿过去 (0:05)|Tentacle Forest Stream Fast]]>><<tentacle_forest_pass 5>><</link>><<athleticsdifficulty 1 _stream_difficulty>><<note "向森林深处移动" "lblue">>
+            <br>
+            <<link [[缓慢行走，准备抵挡任何迎面而来的蛞蝓 (0:05)|Tentacle Forest Stream Slow]]>><<tentacle_forest_pass 5>><</link>><<willpowerdifficulty 1 _stream_difficulty>><<note "向森林深处移动" "lblue">>
+            <br><br>
+            <<if $footdisable is "f">>
+                一些较肥的蛞蝓被冲上岸，挣扎着回到溪流中。
+                <br>
+                <<link [[踩在它们身上 (0:15)|Tentacle Forest Feet]]>><<tentacle_forest_pass 15>><</link>><<note "+ 脚部技能？" "blue">>
+                <br><br>
+            <</if>>
+            <<link [[回到起点 (0:05)|Tentacle Forest]]>><<tentacle_forest_pass 5>><</link>>
+            <br>
+        <</if>>
+     <<else>>
+        然而，你需要非常缓慢地前行，否则就可能被冲走。
+        <br><br>
+
+        <<link [[通过|Tentacle Forest Stream Safe]]>><<tentacle_forest_pass 20>><<arousal 2000>><</link>><<ggarousal>>
+        <br><br>
+        <<if $footdisable is "f">>
+            一些较肥的蛞蝓被冲上岸，挣扎着回到溪流中。
+            <br>
+            <<link [[踩在它们身上 (0:15)|Tentacle Forest Feet]]>><<tentacle_forest_pass 15>><</link>><<note "+ 脚部技能？" "blue">>
+            <br><br>
+        <</if>>
+        <<link [[回到起点 (0:05)|Tentacle Forest]]>><<tentacle_forest_pass 5>><</link>>
+        <br>
+    <</if>>
+<<elseif $town_projects.bridge is 4>>
+    <<set $town_projects.bridge to 5>>
+    一座桥出现在水下，连接着被毁坏的柱子。它建得很低，水冲过它，过桥仍然很困难，<span class="green">但现在可以了。</span>
+    <br><br>
+
+    <<link [[继续|Tentacle Forest Stream]]>><</link>>
+    <br>
+<<else>>
+    <<if $town_projects.bridge is undefined>>
+        <<set $town_projects.bridge to 1>>
+    <</if>>
+    两边的两根柱子表明这里曾经有一座桥，但现在已经不复存在了。你将一根松散的触手踢入翻腾的水中。它立即被拖入水中，并且不会重新浮出水面。<span class="blue">现在</span>不可能过去了。
+    <br><br>
+    <<if $footdisable is "f">>
+        一些较肥的蛞蝓被冲上岸，挣扎着回到溪流中。
+        <br>
+        <<link [[踩在它们身上 (0:15)|Tentacle Forest Feet]]>><<tentacle_forest_pass 15>><</link>><<note "+ 脚部技能？" "blue">>
+        <br><br>
+    <</if>>
+    <<link [[回头|Tentacle Forest]]>><</link>>
+    <br>
+<</if>>

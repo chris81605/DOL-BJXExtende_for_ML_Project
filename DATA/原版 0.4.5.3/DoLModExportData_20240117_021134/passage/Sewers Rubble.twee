@@ -1,0 +1,37 @@
+:: Sewers Rubble []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersrubble">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。这条隧道到处都是碎石。这些石头不同于构成墙壁和地板的石头。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>><<set _hideOption to true>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if _hideOption>>
+		<<sewericon "rubble">><<link [[躲在碎石后面|Sewers Rubble Hide]]>><</link>>
+		<br>
+	<</if>>
+	<<sewericon "ruins">><<link [[荒废的隧道 (0:05)|Sewers Ruins]]>><<pass 5>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Sewers Industrial">>
+		<<sewericon "main">><span class="nextLink"><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "main">><<link [[充满碎石的隧道 (0:05)|Sewers Industrial]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

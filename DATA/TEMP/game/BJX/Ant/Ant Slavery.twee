@@ -1,0 +1,23 @@
+:: Ant Slavery 
+<<set $rng to random(1,3)>>
+<<if $stress gte $stressmax>>
+    你再也承受不住了，你昏了过去。
+    <br><br>
+    <<link [[继续|Ant Passout]]>><<passout>><</link>>
+<<elseif $exposed gte 1>>
+    <<covered>>隔壁房间里有一堆碎布，有些大的可以穿。
+    <br><br>
+    <<ragup>>
+    <<link [[继续|Ant Slavery]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<elseif $rng is 3 and $eventskip isnot 1>>
+    <<beastNEWinit 1 ant>>
+    一只<<beasttype>>试图骑在你身上。
+    <br><br>
+    <<link [[保持沉默|Colony Ant]]>><<set $sexstart to 1>><<stress 6>><</link>><<gstress>>
+    <br>
+    <<link [[拉开距离|Colony Ant Rape]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+    <<link [[打扫卫生 (1:00)|Ant Colony Clean]]>><<pass 60>><</link>>
+    <br>
+    <<link [[寻找逃生之路 (1:00)|Ant Colony Dig]]>><<pass 60>><</link>>
+<</if>>

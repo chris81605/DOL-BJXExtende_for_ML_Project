@@ -1,0 +1,39 @@
+:: Asylum Study []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+你在满是灰尘的图书馆里读旧教科书。大部分知识应该都还没过期。
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	你的手臂被绑住了，
+	<<if $asylumstatus gte 60>>
+		旁边的一个病人主动帮你翻页。
+	<<else>>
+		只好用鼻子翻页。
+	<</if>>
+<<elseif $asylumstatus gte 80>>
+	其他病人向你打招呼，在自己的桌上腾出空间让给你。
+<<elseif $asylumstatus gte 60>>
+	几个附近的病人微笑或点头致意。
+<</if>>
+<br><br>
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "asylumLibrary">>
+<<else>>
+	<<if $exposed is 2>>
+		你的<<lewdness>>吸引了所有人的注意。
+		<<exhibitionism5>>
+	<<elseif $exposed is 1>>
+		你的<<lewdness>>吸引了所有人的注意。
+		<<exhibitionism3>>
+	<<else>>
+	<</if>>
+	<<if $rng gte 81>>
+		<<generateDoctor 1>><<person1>>一个身穿护工服的<<person>>停在你身边。"需要帮助吗？"<<he>>问道。
+		<br><br>
+		<<link [[接受|Asylum Study Help]]>><<schoolskill>><</link>><<gschool>>
+		<br>
+		<<link [[拒绝|Asylum]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<asylumevents>>
+	<</if>>
+<</if>>

@@ -1,0 +1,77 @@
+:: Elk Compound Honest []
+<<set $outside to 0>><<set $location to "compound">><<effects>>
+<<if isPubfameTaskAccepted("compound")>>
+	<<if $compoundhonest is 1>>
+		"我在做某人给我的任务，" 你说，回避着问题。
+		<br><br>
+		<<He>>盯着一个你只能看到背面的显示屏，然后伸手转动了一个表盘。那些连接在你身上的垫片传来舒缓的波浪感，这种感受愉悦着你身体的每一寸肌肤。"这不是很好么？你看，这应该并没有你想的那么糟糕吧，不是吗？那么现在，告诉我你为什么会在这里？"
+	<<elseif $compoundhonest is 2>>
+		<<if $pubfame.compound.cameras.length gte 1>>
+			"我在放置摄像头，"你说道。"它们看起来像石头。在<<print formatList($pubfame.compound.cameras, "和", true,"、").replace("the courtyard","庭院").replace("the building with storage tanks","有储罐的建筑").replace("the building with smoke stacks","有烟囱的建筑").replace("the central building","中心建筑")>>里面有一个。"
+		<<else>>
+			"我本来要放摄像机的，"你说，"但我还没来得及放下，就被抓了。"
+		<</if>>
+		<br><br>
+		<<He>>写下了一些东西，然后再次调整了旋钮，你再次被舒缓的波浪所包围。"你提到了一个任务，"<<he>>说道。"是什么样的任务？"
+	<<elseif $compoundhonest is 3>>
+		<<if $pubfame.goal.includes("Lower")>>
+			"我不想那么出名，"你说道。"降低我的<<fameProse $pubfame.target>>名声。"
+			<br><br>
+			<<if $fame[$pubfame.target] gte 400>>
+				<<He>>点了点头。
+				<<if ["sex","prostitution","rape","bestiality","scrap"].includes($pubfame.target)>>
+					"<<underworld_nickname>>,
+				<<else>>
+					"<<overworld_nickname>>,
+				<</if>>
+				然后呢？听起来很合理。”
+			<<else>>
+				<<He>>斜眼看你。"我不确定你是否需要，但我不在乎。"
+			<</if>>
+		<<else>>
+			"我想更出名，"你说道。"为了提高我的<<fameProse $pubfame.target>>名声。"
+			<br><br>
+			<<if $fame[$pubfame.target] gte 400>>
+				<<He>>扬起一边眉毛。
+				<<if ["sex","prostitution","rape","bestiality","scrap"].includes($pubfame.target)>>
+					"<<underworld_nickname>>,
+				<<else>>
+					"<<overworld_nickname>>,
+				<</if>>
+				然后呢？你已经很有名了。”
+			<<else>>
+				<<He>>斜眼看你。"我不认识你。你绝对需要它。"
+			<</if>>
+		<</if>>
+		<<He>>再次转动表盘，你又一次被爱抚的浪潮冲击。"你回避了我的第一个问题。你为谁工作？谁在操控你的名誉？"
+	<<elseif $compoundhonest is 4>>
+		"酒吧里的人，"你说道。"一个黑客。兰德里认识的。"
+		<br><br>
+		<<He>>微笑着转动表盘，给你的身体带来舒缓的涟漪。"现在我们有所进展。那个黑客到底是谁？"<span class="red">如果你再次诚实，<<he>>就会得到需要的一切情报，米奇就会有麻烦了。</span>
+	<<else>>
+		"我不知道真名，"你说道。"但是他们都叫米奇。"你看向别处，感到羞愧。
+	<</if>>
+<<else>>
+	<<if $compoundhonest is 1>>
+		"我不为任何人工作，"你说道。"我是孤身一人来到这的。"
+		<br><br>
+		<<He>>盯着一个你只能看到背面的显示屏，然后伸手转动了一个表盘。那些连接在你身上的垫片传来舒缓的波浪感，这种感受愉悦着你身体的每一寸肌肤。"这不是很好么？你看，这应该并没有你想的那么糟糕吧，不是吗？那么现在，告诉我你为什么会在这里？"
+	<<elseif $compoundhonest is 2>>
+		"我<<if $blackmoney is 0>>在车上偷窃的时候被困住了。它把我带到了这里<<else>>我是来偷东西的。<</if>>，" 你回答道。"<<if $blackmoney is 0>>老实说吧<<else>>都是为了钱<</if>>。"
+		<br><br>
+		<<He>>再次转动表盘，那种舒服的感觉加大了。"现在，"<<he>>继续问道，"你刚刚是<<if $blackmoney is 0>>打算偷什么<<else>>偷了些什么<</if>>？"
+	<<elseif $compoundhonest is 3>>
+		"<<if $blackmoney is 0>>钱<<else>>我偷到过钱<</if>>，或者能卖的值钱东西，"你说道。
+		<br><br>
+		<<He>>再次转动表盘，你又一次被那舒服的感觉冲击了全身。"你在哪里卖东西？"
+	<<elseif $compoundhonest is 4>>
+		"<<if $produce_sold gte 1 or $pubintro is 1>>我<<if $produce_sold gte 1>>在康努达塔斯街租的摊位上卖花，<</if>><<if $produce_sold gte 1 and $pubintro is 1>>还有<</if>><<if $pubintro is 1>>卖在丰收街上偷的东西，<</if>><<else>>我从来没有卖过任何东西<</if>>"你说道。<<if $chef_state gte 1>>"我<<if $produce_sold gte 1 and $pubintro is 1>>还<</if>>做过糕点，"你补充道。<</if>><<if $prostitutionstat gte 1 or $forcedprostitutionstat gte 1>>"……<<if $produce_sold gte 1 or $pubintro is 1 or $chef_state gte 1>>而且<</if>>我还出卖过肉体，"你小声嘟囔着<<if $forcedprostitutionstat gte 1>>，"有时还是被逼的。"<</if>><<else>>。<</if>>
+		<br><br>
+		<<He>><<if !$pubintro>>看上去并不感兴趣，<</if>>再次转动了表盘，舒适的感觉再次涌遍你的躯体。"<<if $pubintro is 1>>你把赃物卖给谁？<<else>>都交代清楚了？<</if>>"<span class="red">如果你再老实交代的话，<<he>>便会获得想要你说的所有信息。</span>
+	<<else>>
+		"我<<if $pubintro is 1>>把赃物卖给兰德里<<else>>都交代完了<</if>>，"你<<if $pubintro is 1 or $prostitutionstat gte 1 or $forcedprostitutionstat gte 1>>十分羞愧<<else>>说<</if>>。
+	<</if>>
+<</if>>
+<br><br>
+
+<<compoundoptions>>

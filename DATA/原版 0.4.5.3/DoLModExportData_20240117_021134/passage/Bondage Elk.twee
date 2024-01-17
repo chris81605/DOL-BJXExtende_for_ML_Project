@@ -1,0 +1,38 @@
+:: Bondage Elk []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "elk">>
+
+你听到附近有重型卡车的隆隆声，且闻到了刺鼻的化学品气味。
+<br><br>
+
+<<if $exposed gte 1>>
+	<<covered>>
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>><<set $phase to 0>>
+	<<passoutstreet>>
+<<elseif !$worn.face.type.includes("blindfold")>>
+	<span class="green">在你的头上的破旧眼罩化作了几片，让你重获自由。</span>你眯起眼睛迎着光线。
+	<<ltrauma>><<lllstress>><<trauma -6>><<stress -24>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip isnot 1 or $phase is 1>><<set $phase to 0>>
+		<<eventsbondageeast>>
+	<<else>>
+		<<link [[朝着机器的声音跑去 (0:05)|Bondage Run]]>><<set $bus to "harvest">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[朝着大海的声音跑去 (0:05)|Bondage Run]]>><<set $bus to "industrial">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[朝着车流的声音跑去 (0:05)|Bondage Run]]>><<set $bus to "oxford">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[逃离城镇的喧嚣 (0:05)|Bondage Run]]>><<set $bus to "nightingale">><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+		<<link [[隐藏 (0:05)|Bondage Hide]]>><<pass 5>><<stress 3>><</link>><<gstress>>
+		<br>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

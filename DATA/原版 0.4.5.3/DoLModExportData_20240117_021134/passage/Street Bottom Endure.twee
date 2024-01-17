@@ -1,0 +1,35 @@
+:: Street Bottom Endure []
+<<effects>>
+
+你让<<person>>随心所欲地抚摸<<he>>的<<bottom>>。<<He>>充分发挥主观能动性，对你进行了几分钟的调戏。你尽量不去想路人是怎么看你的。
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	尽管抚摸的方式粗暴且具有侵犯性，但你还是感到体内渐渐热起来。你已经到了无法回头的地步。
+	<<orgasm>>
+
+	"你是不是刚刚在街上被人玩弄下体而高潮了？"<<he>>问道。"妈的，你真是个<<slut>><<if playerBellyVisible()>>，不过我想你的肚子已经说明了这一点<</if>>。"
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<He>>把手移向你的私处，接着说："要不我们去那边小巷子里找点乐子呗。"
+		<br><br>
+		<<if $promiscuity gte 15>>
+			<<link [["跟" + ($pronoun is "m"? "他": "她") + "走" |Street Bottom Accept]]>><</link>><<promiscuous2>>
+		<</if>>
+		<br>
+		<<link [[挣扎|Street Bottom Struggle]]>><<def 1>><</link>><<physiquedifficulty>>
+	<<else>>
+		当你的颤抖渐止时，<<He>>给了你一巴掌。"我就知道你会喜欢的。"另外<<He>>还掐了你一下。
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	<<He>>终于放你走了。"我就知道你会喜欢的，"<<he>>说，临走时<<he>>掐了你屁股一下以示鼓励。
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

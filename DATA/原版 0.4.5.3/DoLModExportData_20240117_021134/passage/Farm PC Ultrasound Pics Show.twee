@@ -1,0 +1,50 @@
+:: Farm PC Ultrasound Pics Show []
+<<effects>><<npc "Alex">><<person1>>
+
+<<if !C.npc.Alex.pregnancy.ultraSoundWallPic>>
+	<<set C.npc.Alex.pregnancy.ultraSoundWallPic to true>>
+<</if>>
+
+<<run delete C.npc.Alex.pregnancy.ultraSoundPics>>
+
+"嗨，"你开口搭话，靠向了艾利克斯，"我有东西要给你看。"
+<br><br>
+
+艾利克斯好奇地瞥了你一眼，"好啊，是什么？"
+<br><br>
+
+你拿起哈珀给你的B超影像，递给<<him>>。<<He>>似乎对自己看见的东西难以理解。
+<br><br>
+
+<<if $speech_attitude is "bratty">>
+    "你没搞错吧？"你叹了口气，"这是我们的<<if getPregnancyObject().fetus.length is 1>>孩子<<else>>孩子们<</if>>，笨蛋。"
+
+<<elseif $speech_attitude is "meek">>
+    "对、对不起，我应该解释一下的，这是我们的<<if getPregnancyObject().fetus.length is 1>>孩子<<else>>孩子们<</if>>，"
+
+<<else>>
+    "你不明白吗？这是我们的<<if getPregnancyObject().fetus.length is 1>>孩子<<else>>孩子们<</if>>，"
+<</if>>
+
+你说着。
+<br><br>
+
+"啊，"<<he>>反应过来，又看了一下照片，"我还以为是什么外星人呢，"<<he>>开玩笑道。
+<br><br>
+
+你轻轻锤了一下<<him>>的肩膀。"开玩笑的，"<<he>>解释道，然后抱住了你，"谢谢你给我看这个。很高兴知道我们的<<if getPregnancyObject().fetus.length is 1>>孩子<<else>>孩子们<</if>>长得又漂亮又健康。"
+<br><br>
+
+艾利克斯抱了你一会儿，你们享受着这段与彼此在一起的时光。<<He>>吻了你一下，然后放开了你，"你觉得我们要不要把这个挂在哪里？"
+<br><br>
+
+<<if $location is "alex_cottage">>
+	<<if Time.hour gte 5 and Time.hour lte 6>>
+		<<link [[继续|Farm Cottage]]>><<pass 5>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Farm Alex Bedroom]]>><<pass 5>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	<<link [[继续|Farm Work]]>><<pass 5>><<endevent>><</link>>
+<</if>>

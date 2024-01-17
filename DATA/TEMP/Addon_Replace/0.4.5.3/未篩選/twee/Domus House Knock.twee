@@ -1,0 +1,175 @@
+:: Domus House Knock []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+你走到其中一户人家，敲了敲门。
+<br><br>
+
+<<if $rng gte 96>><!-- Modified for Beast People -->
+	<<beastNEWinit 1 dog>>
+
+	你听到一声吠叫。一只<<beasttype>>从狗窝里窜出来，朝你跑来。<<bHis>>链条绷得紧紧的，让<<bhim>>没法再靠近。
+	<<if $monster is 1>>
+		"敌人！敌人！朋友？"
+	<</if>>
+	<br><br>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[挑逗|Domus House Tease]]>><<transform cat 2>><</link>><<deviant1>>
+		<br>
+	<</if>>
+	<<link [[忽略|Domus House Ignore]]>><</link>>
+	<br>
+
+<<elseif $rng gte 91>><!-- Modified for Beast People -->
+	<<beastNEWinit 1 dog>>
+
+	你听到一声咆哮。一只<<beasttype>>从狗窝里朝你走过来。
+	<<if $monster is 1>>
+		"没人在家，快点离开吧。"
+	<</if>>
+	<br><br>
+
+	<<link [[爱抚它|Domus Entrance Pet]]>><</link>>
+	<br>
+	<<link [[跑|Domus Entrance Run]]>><<transform cat 1>><</link>>
+	<br>
+
+<<elseif $rng gte 76>> /*~15%*/
+	没有回应。
+	<br><br>
+
+	<<link [[闯入|Domus House Lock]]>><</link>>
+	<br>
+	<<link [[去下一家 (0:02)|Domus House Knock]]>><<pass 2>><</link>>
+	<br>
+	<<link [[停止|Domus Street]]>><</link>>
+	<br>
+
+<<elseif $rng gte 66>> /*10%*/
+	<<generate1>><<person1>>
+	一个<<person>>打开了门。"你不——"<<he>>停顿了一下，"你是来做人体模特的吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[点头|Domus Model Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 56>> /*10%*/
+	<<generate1>><<person1>>
+	一个<<person>>打开了门，<<He>>对你眨眨眼："你好？"
+	<br>
+	有人在后面的房间里欢呼。
+	<br><br>
+
+	<<link [[询求工作|Domus Errand Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 51>> /*5%*/
+	<<generate1>><<person1>>
+	一个<<person>>打开了门。"你好？有什么事吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[询求工作|Domus Shy Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 41>>
+	<<generate1>><<person1>>
+	一个<<person>>打开了门。"有什么事吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[询求工作|Domus Gutters Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 31>>
+	<<generate1>><<person1>>
+	一个<<person>>打开了门。"你想做什么？"<<he>>问道。
+	<br><br>
+
+	<<link [[询求工作|Domus Lounge Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 26>>
+	<<generate1>><<person1>>
+	一个<<person1>><<person>>打开了门。<<He>>似乎很生气。“什么事？"
+	<br><br>
+
+	<<link [[询求工作|Domus Tech Support Intro]]>><</link>>
+	<br>
+	<<link [["说你记错地址了然后离开"|Domus Street]]>><<endevent>><</link>>
+
+<<elseif $rng gte 21>>
+	<<generate1>><<person1>>
+	一个<<person>>打开了门。"哦，你真可爱。"<<he>>说道，"我能为你做点什么吗？"
+	<br><br>
+
+	<<link [[询求工作|Domus Delivery Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 16>>
+	<<generate1>><<person1>>
+	你敲了敲门。一个<<person>>打开了门。
+	<br><br>
+
+	"这是最后一次了，你的钱我马上，等等。你不是我的债主。"<<He>>说道。<<He>>看起来很疲惫，<<his>>的衣服简直一团糟。
+	<br><br>
+
+	你好像听到了后面的房间传来微弱的低语声。
+	<br><br>
+
+	<<link [[询求工作|Domus Babysitting Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+
+<<elseif $rng gte 11>>
+	<<generate1>><<generatep2>><<person1>>
+	一个<<person>>打开了门。"您好？"<<he>>说。
+	<br><br>
+
+	你还没来得及回应，一个<<person2>><<person>>就喊道："是谁？"<<his>>头埋在报纸里。
+	<br><br>
+
+	<<if $fame.prostitution gte 600 and $rng%2>>
+		"是贝利家的那条狗，"这名<<person1>><<person>>说。
+		<br><br>
+		<<if $rng % 4>>
+			"行吧……你一下子就能认出<<phim>>，说明……"
+		<<else>>
+			"噢！就瞟一眼的事，你还能不认识你的狗吗？"
+		<</if>>
+		<br><br>
+
+		"闭嘴，"<<he>>翻了个白眼，然后转向你，"你是？"
+	<<elseif $fame.exhibitionism gte 600 and $rng%2>>
+		"是孤儿院里的那个暴露狂<<girl>>。" <<person1>><<person>>说。
+	<<else>>
+		"只是一个 <<girl>>。"<<person1>><<person>>说。
+	<</if>>
+	<br><br>
+
+	<<link [[询求工作|Domus Painting Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+
+<<else>>
+	<<generatey1>><<person1>>
+	一个<<person>>打开了门。"你好呀！"<<he>>说。
+	<br><br>
+
+	<<link [[询求工作|Domus Homework Intro]]>><</link>>
+	<br>
+	<<link [[说你敲错门了，然后离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

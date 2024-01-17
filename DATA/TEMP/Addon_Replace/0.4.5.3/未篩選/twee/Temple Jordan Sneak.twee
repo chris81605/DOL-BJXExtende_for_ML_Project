@@ -1,0 +1,31 @@
+:: Temple Jordan Sneak []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+你踮着脚尖走向门口。
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">在水声和他们自己的声音掩护下，他们听不到你的声音。你吱呀一声打开门，步入一条阴暗的石板走廊。</span>
+	<br><br>
+	<<skulduggeryuse>>
+	<<pass 10>>
+	你发现自己身处迷宫般的大厅和楼梯之中。有很多木门，但都锁着。最后你终于找到了一扇可以打开的门。你走了过去，进入了主厅。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Temple]]>><</link>>
+	<br>
+<<else>>
+	你的脚踢到一块奇怪的金属板，<span class="red">它在地板上划出哗啦啦的声音。</span>
+	<br><br>
+	<<skulduggeryuse>>
+	<<endevent>>
+	<<npc Jordan>><<person1>>浴帘被拉开了。约旦向外瞥了一眼，然后尖叫起来。
+	<<llgrace>><<grace -5>>
+	<br><br>
+	<<link [[跑|Temple Jordan Run]]>><</link>><<athleticsdifficulty 1 1400>>
+	<br>
+	<<link [[道歉|Temple Jordan Apologise]]>><<grace 1>><</link>><<ggrace>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[调情|Temple Jordan Flirt]]>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<</if>>

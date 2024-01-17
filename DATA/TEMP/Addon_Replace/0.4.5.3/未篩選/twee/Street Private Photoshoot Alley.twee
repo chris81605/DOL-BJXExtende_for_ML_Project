@@ -1,0 +1,281 @@
+:: Street Private Photoshoot Alley []
+<<set $outside to 1>><<effects>>
+
+<<switch $phase>>
+	<<case 0>> /* accepted private photoshoot */
+		<<set $tipmod to 0>>
+		<<if $speech_attitude is "meek">>
+			你点头表示同意，然后跟随<<person>>来到附近的一条安静小巷。
+		<<elseif $speech_attitude is "bratty">>
+			"行吧，我可以抽出几分钟时间，"你说。你把<<person>>带到附近的一条安静小巷。
+		<<else>>
+			你同意了，然后和<<person>>一起在附近找了一条安静的小巷。
+		<</if>>
+		<br><br>
+		/* common block with phase 1, adjust together. tbd, todo: break out of the switch and reuse? */
+		在接下来的几分钟里，当<<he>>拍下一张又一张照片时，你们摆出练习过的姿势。你还不时眨眨眼睛，露出诱人的微笑。<<person>>兴高采烈。
+		<br><br>
+		<<if $hypnosis gt 0 and random(0, 100) lt 10 + $hypnosis and $hypnosisdisable is "f">>
+			<span class="blue">你感觉到自己的意识发生了变化，就像进入了一种恍惚状态。</span>一道淫荡的念头在你脑海中闪现。
+			<br><br>
+			<<link [[赤裸着上身摆姿势 (0:05)|Street Private Photoshoot Alley]]>><<set $phase to 2>><<set $trance to 1>><<hypnotised 1>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+			<br>
+			<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1000 + ($hypnosis * 100)`>>
+			<br>
+		<<else>>
+			<<if $exhibitionism gte 55>>
+				<<His>>的钦佩之情激励着你。这不是你能常常体验到的，而你想要更多。一个淫荡的念头闪过你的脑海。
+				<br><br>
+				<<link [[赤裸着上身摆姿势 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 2>><</link>><<exhibitionist4>>
+				<br>
+			<</if>>
+			<<link [[终止拍摄|Street Private Photoshoot End]]>><<set $phase to 1>><</link>>
+			<br>
+		<</if>>
+		/* common block end */
+	<<case 1>> /* demanded money for private photoshoot */
+		<<set $tipmod to 0>>
+		<<if $speech_attitude is "meek">>
+			你带着歉意的告诉<<person>>，你想要<<he>>补偿你付出的时间。
+		<<elseif $speech_attitude is "bratty">>
+			"行吧，但我可不是免费干活的。"你告诉<<person>>。
+		<<else>>
+			你告诉<<person>>，拍摄你的照片通常都是有偿的。
+		<</if>>
+		<<His>>的笑容动摇了。"噢，我以为你会不一样呢，"<<he>>的语气中流露遗憾的意味。
+		<br><br>
+		<<if random(0, 10000) lt $fame.model + $seductionskill + $allure>>
+			<<set $tipmod += 0.25>>
+			<<His>>的微笑很快又回来了。"但我能理解。"<<he>>点了点头，"你说得对，这是你的工作，你值得这份报酬。好吧，我付钱给你。"
+			<br><br>
+			<<if $speech_attitude is "meek">>
+				你跟着<<person>>来到附近一条僻静的小巷。
+			<<elseif $speech_attitude is "bratty">>
+				你把<<person>>领到附近一条僻静的小巷。
+			<<else>>
+				你和<<person>>一起，找到了附近一条僻静的小巷。
+			<</if>>
+			/* common block with phase 0, adjust together. tbd, todo: break out of the switch and reuse? */
+			在接下来的几分钟里，当<<he>>拍下一张又一张照片时，你们摆出练习过的姿势。你还不时眨眨眼睛，露出诱人的微笑。<<person>>兴高采烈。
+			<br><br>
+			<<if $hypnosis gt 0 and random(0, 100) lt 10 + $hypnosis and $hypnosisdisable is "f">>
+				<span class="blue">你感觉到自己的意识发生了变化，就像进入了一种恍惚状态。</span>一道淫荡的念头在你脑海中闪现。
+				<br><br>
+				<<link [[坦胸露乳摆造型 (0:05)|Street Private Photoshoot Alley]]>><<set $phase to 2>><<set $trance to 1>><<hypnotised 1>><<pass 5>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+				<br>
+				<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1000 + ($hypnosis * 100)`>>
+				<br>
+			<<else>>
+				<<if $exhibitionism gte 55>>
+					<<His>>的钦佩之情激励着你。这不是你能常常体验到的，而你想要更多。一个淫荡的念头闪过你的脑海。
+					<br><br>
+					<<link [[赤裸着上身摆姿势 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 2>><</link>><<exhibitionist4>>
+					<br>
+				<</if>>
+				<<link [[终止拍摄|Street Private Photoshoot End]]>><<set $phase to 1>><</link>>
+				<br>
+			<</if>>
+			/* common block end */
+		<<else>>
+			<<He>>在那站了一会儿，默默地思考着你的请求。随后，<<he>>皱起了眉头。
+			<br><br>
+			"你和其他人一样，" 这不是个疑问句，"不过是另一个贪婪的妓女，装出一副和蔼可亲的模样，勾引<<pher>>的粉丝上钩。当然，你骗不了我。"
+			<br><br>
+			<<person>>转身就走，冲了出去，<<his>>的咆哮声越来越大，越来越失常。你今天可能失去了一个粉丝。<<gstress>><<stress 6>>
+			<br><br>
+			<<endevent>>
+			<<destinationeventend>>
+			<br>
+		<</if>>
+	<<case 2>> /* posing topless */
+		<<exhibitionism4>>
+		<<if $tipmod gt 0>>
+			<<set $tipmod += 0.25>>
+		<</if>>
+		<<outfitChecks>>
+		<<set _clothing_strip_sequence to 0>>
+		<<if $worn.upper.exposed lte 1>>
+			<<if _middleOutfit is true>>
+				<<flaunting>>你笨手笨脚地脱掉你的$worn.upper.cn_name_cap，露出你的<<undertop>>和<<undies>>。
+			<<else>>
+				<<flaunting>>你脱下你的$worn.upper.cn_name_cap，露出你的<<undertop>>。
+			<</if>>
+			<<set _clothing_strip_sequence += 1>><<upperstrip>><<exposure>>
+		<</if>>
+		<<if $worn.under_upper.exposed lte 0>>
+			<<if _underOutfit is true>>
+				<<if _clothing_strip_sequence is 0>>
+					<<flaunting>>你笨手笨脚地脱掉你的$worn.under_upper.cn_name_cap，露出你的<<breasts>>和<<genitals>>。
+				<<elseif _clothing_strip_sequence is 1>>
+					接下来是你的$worn.under_upper.cn_name_cap，露出你的<<breasts>>和<<genitals>>。
+				<<else>>
+					最后，你脱下你的$worn.under_upper.cn_name_cap，露出你的<<breasts>>和<<genitals>>。
+				<</if>>
+			<<else>>
+				<<if _clothing_strip_sequence is 0>>
+					<<flaunting>>你脱下你的$worn.under_upper.cn_name_cap，露出你的<<breasts>>。
+				<<elseif _clothing_strip_sequence is 1>>
+					紧接着是$worn.under_upper.cn_name_cap，你<<breasts>>就这样暴露了出来。
+				<<else>>
+					<<if $worn.under_lower.exposed lte 0>>
+						你的$worn.under_upper.cn_name_cap紧随其后，露出你的<<breasts>>。
+					<<else>>
+						最后，你脱下你的$worn.under_upper.cn_name_cap，露出你的<<breasts>>。
+					<</if>>
+				<</if>>
+			<</if>>
+			<<set _clothing_strip_sequence += 1>><<underupperstrip>><<exposure>>
+		<</if>>
+		你感到自己的乳头因为暴露而变硬挺。<<arousal 300>><<garousal>>
+		<br><br>
+		这场出人意料的表演让<<persons>>的下巴都掉了下来。
+		<<if $trance is 0>>
+			你腼腆地把双手交叉在胸前，对<<him>>微笑，<<his>>也因此而恢复了理智。
+		<<else>>
+			看到你在大庭广众之下依然镇定自若，<<he>>恢复了<<his>>的理智。
+		<</if>>
+		<<He>>开始拍摄更多的照片，同时对你狂热地表达着赞美。
+		<br><br>
+		<<if $trance gte 1>>
+			<span class="blue">你的脑海中除了舒服的事什么也不想去想。</span>你感觉增长的冲动使你越来越淫荡了。
+			<br><br>
+			<<link [[一丝不挂摆造型 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 3>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+			<br>
+			<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1500 + ($hypnosis * 100)`>>
+			<br>
+		<<elseif $hypnosis gt 0 and random(0, 100) lt 10 + $hypnosis and $hypnosisdisable is "f">>
+			<span class="blue">你感到自己的意识发生了某种变化，好像进入了一种催眠状态。</span>一个极其淫荡的想法突然出现在你脑海中。
+			<br><br>
+			<<link [[不着片缕摆造型 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 3>><<set $trance to 1>><<hypnotised 1>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+			<br>
+			<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1000 + ($hypnosis * 100)`>>
+			<br>
+		<<else>>
+			<<if $exhibitionism gte 75>>
+				公开场合暴露和大量关注目光让你感到魂不守舍。甚至欲火焚身。你渴求得到更多。
+				<br><br>
+				<<link [[赤身裸体摆造型 (0:05)|Street Private Photoshoot Alley]]>><<pass 5>><<set $phase to 3>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<link [[终止拍摄|Street Private Photoshoot End]]>><<set $phase to 1>><</link>>
+			<br>
+		<</if>>
+	<<case 3>> /* posing nude */
+		<<exhibitionism5>>
+		<<if $tipmod gt 0>>
+			<<set $tipmod += 0.25>>
+		<</if>>
+
+		跟随脑海中的节奏摇摆，你摇曳着接近<<person>><<if $worn.feet.name isnot "naked">>，招摇地甩掉自己的<<print $worn.feet.cn_name_cap>><</if>>。你舞动到<<him>>的面前，把手搭在了肩上。你轻轻地将<<him>>推倒，致使<<his>>在你面前跪下。虽然有些莫名其妙，但<<he>>最终向你低下了头。<<if $trance is 1>><<He>>似乎也渐渐地开始着迷了。<</if>>
+		<br><br>
+		<<feetstrip>>
+		<<outfitChecks>>
+		<<set _clothing_strip_sequence to 0>>
+		<<if $worn.lower.exposed lte 1>>
+			<<if _clothing_strip_sequence is 0>>
+				<<flaunting>>你脱下你的$worn.lower.cn_name_cap，露出你的<<undies>>。
+			<<else>>
+				接下来是$worn.lower.cn_name_cap，露出你的<<undies>>。
+			<</if>>
+			<<set _clothing_strip_sequence += 1>><<lowerstrip>><<exposure>>
+		<</if>>
+		<<if $worn.under_lower.exposed lte 0>>
+			<<if _clothing_strip_sequence is 0>>
+				<<flaunting>>你拉下你的$worn.under_lower.cn_name_cap，露出你的<<genitals>>。
+			<<elseif _clothing_strip_sequence is 1>>
+				接下来是$worn.under_lower.cn_name_cap，展示你的<<genitals>>。
+			<<else>>
+				最后，你脱下你的$worn.under_lower.cn_name_cap，露出你的<<genitals>>。
+			<</if>>
+			<<set _clothing_strip_sequence += 1>><<underlowerstrip>><<exposure>>
+		<</if>>
+		<<if $worn.legs.name isnot "naked">>
+			你仍然穿着你的$worn.legs.cn_name_cap，但不知为何你的暴露感更加强烈了。<<arousal 350>><<garousal>>
+		<<else>>
+			你一丝不挂、不着片缕，刺激感使你鸡皮疙瘩都起来了。<<arousal 300>><<garousal>>
+		<</if>>
+		<br><br>
+		<<person>>急促地喘着气。<<He>>抓住你的大腿，以稳住<<himself>>。<<He>>不停眨眼，抬起头陶醉地望着你。<<he>>的手抖得厉害没法继续拍照，但<<his>>显然有更急迫的需求。<<His>>的嘴动了几下，但没有出声。
+		<br><br>
+		然后，像归根的落叶一样，<<person>>颤抖着被你吸引过来。<<He>>的目光从未移开，直到<<his>>嘴唇亲吻到你的皮肤，就在你的肚脐上方。一瞬间，<<he>>退缩了，<<him>>可能觉得会被你推开。但并没有。
+		<<if $trance gte 1>>
+			你被动而顺从地站在原地，这让<<his>>的嘴唇不忍离去。
+		<<else>>
+			在肾上腺素的刺激下，你一边抚摸<<personsimple>>的头发，一边让<<his>>的嘴逗留于此。你感觉自己完全掌控了一切，性感而有力。
+		<</if>>
+		<br><br>
+		<<if random(0, 10000) lt $fame.model + $seductionskill + $allure>>
+			<<person>>向后撤身。<<He>>再次直视你的双眼，传来询问的目光，并从跪地爬起，开始脱下<<his>>的<<npcClothesText $NPCList[0] "lower">>。<<His>>的意图很明确。
+			<br><br>
+			<<if $trance gte 1>>
+				<span class="blue">一种熟悉的、明显的热量从你的下体爆发，并蔓延至全身。</span>你无法抗拒这种感觉。你非常想要吧？
+				<br><br>
+				<<link [[这样会变舒服的|Street Private Photoshoot Sex]]>><<set $phase to 0>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+				<br>
+				<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1500 + ($hypnosis * 100)`>>
+				<br>
+			<<elseif $hypnosis gt 0 and random(0, 100) lt 10 + $hypnosis and $hypnosisdisable is "f">>
+				<span class="blue">你感到不对劲，意识开始恍惚。</span>无言的声音催促你屈服。
+				<br><br>
+				<<link [[这样会变舒服的|Street Private Photoshoot Sex]]>><<set $phase to 0>><<set $trance to 1>><<hypnotised 1>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+				<br>
+				<<link [[反抗|Street Private Photoshoot Resist]]>><</link>><<willpowerdifficulty 1 `1000 + ($hypnosis * 100)`>>
+				<br>
+			<<else>>
+				<<if $promiscuity gte 35>>
+					<<link [[接受|Street Private Photoshoot Sex]]>><<set $phase to 0>><</link>><<promiscuous3>>
+					<br>
+				<<else>>
+					<span class="pink">你不够淫荡去接受它。</span>
+					<br><br>
+				<</if>>
+				<<link [[拒绝|Street Private Photoshoot Alley]]>><<set $phase to 4>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<person>>向后退去。"谢谢你，"<<he>>说道。
+			<<if $tipmod gt 0>>
+				<<tipset>>
+				"请原谅我说过的话。毕竟，你真的很特别。"<<He>>递给你一把钞票，然后离开了小巷。<<tipreceive>>
+			<<else>>
+				"你真的很特别，我会终生铭记。"<<He>>离开了小巷。
+			<</if>>
+			<br><br>
+			<<if $trance gte 1>>
+				<<set $trance to 0>>
+				<span class="blue">你脑海中无言的声音瞬间平息了下来。</span>
+				<br><br>
+			<</if>>
+			<<clotheson>>
+			<<endevent>>
+			<<destinationeventend>>
+			<br>
+		<</if>>
+	<<case 4>> /* sex refusal attempt */
+		<<if $speech_attitude is "meek">>
+			"等，等等！"你摇摇头，后退一步。"对不起，我没打算这样的……我不能。"
+		<<elseif $speech_attitude is "bratty">>
+			"诶，等等。"你举起手，示意<<person>>停下来。"我觉得你的想法可能有点问题。"你对<<him>>说。
+		<<else>>
+			你告诉<<person>>你不会和刚认识的人在大庭广众下发生性关系。
+		<</if>>
+		<br><br>
+		<<person>>停顿了下。
+		<<if random(0, 10000) lt $allure * ($tipmod + 0.25)>>
+			"你在和我开玩笑，对吗？"<<he>>问。<<He>>摇了摇头。"你这是在和我玩火。你不能告诉我你什么时候不想要，什么时候——"<<he>>声音越来越小，直至抓住你的胳膊。
+			<br><br>
+			<<link [[继续|Street Private Photoshoot Sex]]>><<set $phase to 2>><</link>>
+			<br>
+		<<else>>
+			<<He>>在那里楞了一会儿，似乎很矛盾。最后，<<he>>点了点头，服从了你的意愿。<<His>>垂头丧气。
+			<br><br>
+			<<link [[继续|Street Private Photoshoot End]]>><<set $phase to 0>><</link>>
+			<br>
+		<</if>>
+	<<default>>
+		ERROR：事件 Street Private Photoshoot Alley 调用了意外阶段 ($phase)
+		<br><br>
+		<<link [[继续|Street Private Photoshoot End]]>>set $phase to 0<</link>>
+		<br>
+<</switch>>
+<br>

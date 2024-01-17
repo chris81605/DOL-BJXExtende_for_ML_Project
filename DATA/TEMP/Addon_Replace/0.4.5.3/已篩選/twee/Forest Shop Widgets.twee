@@ -1,0 +1,176 @@
+:: Forest Shop Widgets [widget]
+<<widget "forestShop-intro">>
+	<<npc Gwylan>><<person1>>
+	你走进这座奇怪的建筑。室内光线很暗，显得有些阴森。房间四周摆满了货架，高高的架子上陈列着各式各样的物品。
+	<br><br>
+
+	一阵刮擦声打破了宁静，随后伴着砰的一声，一个灰褐色的<<personsimple>>拿着梯子出现在最近的过道尽头。
+	<<if $gwylan_rescue is 1>>
+		是格威岚。
+		<br><br>
+		"你来啦！"
+	<<else>>
+		<br><br>
+		"一位顾客！"
+	<</if>>
+	<<he>>说完之后放下梯子走了过来，在随意地用围裙擦了擦手后，<<his>>继续说道："欢迎光临我的店铺。"
+
+	<<if $gwylan_rescue is 1 and $gwylan_aborted gte 1>>
+		<br><br>
+		<<gwylanRescueApologyShop "Intro">>
+		<<set $gwylan_aborted to 0>>
+	<<elseif $gwylan_rescue isnot 1>>
+		<br><br>
+
+		<<He>>看起来和你差不多大，头发灰褐色，有点雀斑。"我比我看起来要大很多，"<<he>>突然开口道，仿佛读懂了你的心思。"我是格威岚。"<<He>>握住你的手，然后用力地晃了晃。"很高兴见到你，我售卖……"<<he>>停顿了一下。"我的祖<<print ($pronoun is "m" ? "父" : "母")>>售卖……嗯……我这里卖一些小玩意，一些你在正常商店里找不到的东西，甚至连我自己都不知道是什么的东西！"<<He>>满是骄傲地说道。
+		<br><br>
+
+		"我希望你能找到你喜欢的东西，"<<he>>在说完之后把梯子捡了回来。"但找不到也不要担心，我的祖<<print ($pronoun is "m" ? "父" : "母")>>说这里的东西会躲着那些不是真心想购买它们的人。"<<He>>笑了笑:"我相信这一点。"
+	<</if>>
+	<br><br>
+	<<link [[继续|Forest Shop]]>><<endevent>><</link>>
+	<br>
+<</widget>>
+
+<<widget "forestShop-text">>
+	你在森林商店里。商店里光线很暗，显得有些阴森。房间四周摆满了货架，高高的架子上陈列着各式各样的物品。大多数都是些没什么用的小商品，但其中也有些商品让你感兴趣。
+	<br><br>
+	<<if $gwylan_aborted gte 1>>
+		<<gwylanRescueApologyShop>>
+		<<set $gwylan_aborted to 0>>
+	<<else>>
+		你听到格威岚在幽暗中的踱步声。
+	<</if>>
+	<<if $robin_in_forest_shop>>
+		罗宾正忙着欣赏衣服。
+		<<if !$halloween_robin_costume or $halloween_robin_costume is "ghost">>
+			<br><br>
+
+			<<link [[跟罗宾聊天|Robin Forest Costume Intro]]>><<forestShop-leave>><<clothingReset>><</link>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "forestShop-leave">>
+	<<shopClothingFilterReset>><<unset $clothes_choice>><<ShowUnderEquip "normal">><<ShowUnderEquip "over">>
+	<<set $tryOn.autoReset to true>><<set $eventskip to 1>><<unset $tempDisable>>
+<</widget>>
+
+<<widget "forestShop-main">>
+	<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+	<<set $shopName = "forest">>
+	<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>>
+	<<specialClothesUpdate>>
+	<<if $forest_shop_intro isnot 1>>
+		<<set $forest_shop_intro to 1>>
+		<<forestShop-intro>>
+	<<else>>
+		<<forestShop-text>>
+		<br><br>
+
+		<div id="tryonstats-div"><<tryOnStats>></div>
+		<<unset $shopListStartCount>>
+		<<unset $clothes_choice>>
+		<<set $shopPage = 0>>
+
+		<span>保暖度:</span>
+		<<warmthscale>>
+		<div id="warmth-description">
+			<<warmth_description>>
+		</div>
+		<br><br>
+
+		<<if $christmas_gift_robin is undefined and $christmas is 1 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
+			<<checkforloveinterests>>
+			<<if isLoveInterest("Robin")>><<gifticon "love">><<else>><<gifticon "christmas">><</if>><<link [[为罗宾找一份礼物 (0:10)|Forest Christmas Robin]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if isPubfameTaskAccepted("gwylan")>>
+			<<if $pubfame.gwylan.snowglobe isnot 1>>
+				<<ind>><<link [[寻找雪花玻璃球 (0:20)|Forest Snowglobe]]>><<pass 20>><</link>>
+			<<elseif $money gte 2000>>
+				<<ind>><<link [[购买雪花玻璃球 (£20)|Forest Snowglobe Buy]]>><<set $money -= 2000>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<clothingcategoryicon "all">>
+		<<link "查看全部">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
+		<br><br>
+		/* 北极星模组 */
+		<<if $options.bjx_clothes>>
+    		<<clothingcategoryicon "overoutfit">>
+    		<<link "走近磨毛屏风后">><<replace "#clothingShop-div">><<OverOutfitShop>><</replace>><</link>>
+    		<br>
+    		<<clothingcategoryicon "overupper">>
+    		<<link "走近阔叶门帘后">><<replace "#clothingShop-div">><<OverUpperShop>><</replace>><</link>>
+    		<br>
+    		<<clothingcategoryicon "overlower">>
+    		<<link "浏览藤蔓木箱里">><<replace "#clothingShop-div">><<OverLowerShop>><</replace>><</link>>
+    		<br>
+    		<<clothingcategoryicon "overhead">>
+    		<<link "浏览黄铜质排钩">><<replace "#clothingShop-div">><<OverHeadShop>><</replace>><</link>>
+    		<br>
+    	<</if>>
+		/* 北极星 */
+		<<clothingcategoryicon "outfit">>
+		<<link "望向暗色帷幕后">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "upper">>
+		<<link "看向古董衣橱内">><<replace "#clothingShop-div">><<TopShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "lower">>
+		<<link "看奇怪的熨衣板">><<replace "#clothingShop-div">><<BottomShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "underoutfit">>
+		<<link "查看腐烂的厨柜">><<replace "#clothingShop-div">><<UnderOutfitShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "underupper">>
+		<<link "查看生锈的衣架">><<replace "#clothingShop-div">><<UnderTopShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "underlower">>
+		<<link "看看昏暗的抽屉">><<replace "#clothingShop-div">><<UnderBottomShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "head">>
+		<<link "查看细长的帽架">><<replace "#clothingShop-div">><<HeadShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "face">>
+		<<link "查看曲折的墙壁">><<replace "#clothingShop-div">><<FaceShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "neck">>
+		<<link "查看闪着光的盒子">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "hand">>
+		<<link "查看倾斜的梳妆台">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "legs">>
+		<<link "查看破旧的袋子">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
+		<br>
+		<<clothingcategoryicon "feet">>
+		<<link "查看腐烂的架子">><<replace "#clothingShop-div">><<FeetShop>><</replace>><</link>>
+		<br><br>
+		<<run linkifyDivs('.button-back-to-shop')>>
+
+		<<if $tryOn.value gt 0 and $tryOn.value lt $money>>
+			<<sendItemsToDropdown>>
+			<<link "买衣服">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+			<br>
+			<<link "买下衣服并送到衣柜中">>
+				<<buyTryOnClothes "wardrobe">>
+				<<updatesidebarmoney>>
+				<<updatesidebarimg>>
+				<<updatesidebardescription>>
+				<<updateallure>>
+				<<updatewarmthscale>>
+				<<updatewarmthdescription>>
+				<<updateclothingshop>>
+			<</link>>
+			<br>
+		<<elseif $tryOn.value is 0>>
+			<<if $robin_in_forest_shop>>
+				<<getouticon>><<link [[和罗宾离开 (0:10)|Robin Forest Shop Home]]>><<endnpc "Gwylan">><<forestShop-leave>><<pass 10>><</link>>
+			<<else>>
+				<<getouticon>><<link [[离开|Forest]]>><<endnpc "Gwylan">><<forestShop-leave>><</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

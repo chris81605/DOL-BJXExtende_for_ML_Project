@@ -1,0 +1,24 @@
+:: Lake Underwater Ice Smash []
+<<underwater>><<effects>>
+
+<<if $physiqueSuccess>>
+	你用你的<<if $leftarm is "bound" and $rightarm is "bound">>脚<<else>>拳头<</if>>用力砸向冰面。<span class="green">你听到了冰面开始裂开的声音。</span>你不断地敲打，你的力量也因缺氧的恐慌而增强，你成功设法敲开了一个足够大的洞，以便于你爬出去。
+	<br><br>
+	<<earnFeat "Under the Ice">>
+	你成功将自己挪到了湖面上。
+	<br><br>
+	<<set $location to "lake">>
+	<<set $lake_ice_broken to 2>>
+	<<link [[继续|Lake Depths Ice]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你用你的<<if $leftarm is "bound" and $rightarm is "bound">>脚<<else>>拳头<</if>>用力砸向冰面。<span class="red">但它并没有要裂开的迹象</span>。
+	<br><br>
+
+	<<link [[继续尝试|Lake Underwater Ice Smash]]>><<wateraction>><<pain 4>><</link>><<physiquedifficulty 1 $physiquemax>><<loxygen>><<gpain>>
+	<br>
+	<<link [[保持镇静，寻找洞口|Lake Underwater Ice Calm]]>><<wateraction>><</link>><<willpowerdifficulty 1 $willpowermax>><<loxygen>>
+	<br>
+	<<link [[向下游|Lake Underwater]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+<</if>>

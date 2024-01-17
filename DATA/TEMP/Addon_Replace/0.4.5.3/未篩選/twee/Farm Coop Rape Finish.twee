@@ -1,0 +1,80 @@
+:: Farm Coop Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+		心满意足地，<<farm_text dog>>放开了你，跟着鸡群离开了鸡笼。
+		<<unbind>>
+	<<else>>
+		心满意足地，<<farm_text dog>>离开了鸡笼，留下你瘫倒在原地。
+	<</if>>
+	<<lrespect>><<farm_dogs -1>>
+	<br><br>
+
+	<<tearful>>你结束了在鸡笼的工作。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+		<<farm_text dog>>掉头逃窜，鸡群跟了上去，放开了你的手臂。
+		<<unbind>>
+	<<else>>
+		当你设法站起来时，那只<<farm_text dog>>转身就跑。
+	<</if>>
+
+	<<tearful>>你结束了在鸡笼的工作。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<else>><<set $rescued += 1>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>
+	"我来了！"是艾利克斯。在听到<<his>>的声音后，那只<<farm_text dog>>向后退了一步。
+
+
+	<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img is 1>>
+		鸡群也随之后退。
+		<<unbind>>
+	<<else>>
+	<</if>>
+	<br><br>
+
+	<<tearful>>你站了起来，这时艾利克斯来到了鸡舍的入口处。“坏狗！”<<he>>抓着它的项圈说道，“你今天的晚饭没了。”<<farm_text dog>>的耳朵耷拉了下来。<<lrespect>><<farm_dogs -1>>
+	<br><br>
+
+	<<clotheson>>
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		艾利克斯抓来一条毛巾，让你遮住身体。
+	<</if>>
+	"抱歉，"<<he>>说，"这些狗有点精力过剩了，幸好我听到了你的声音。"<<gdom>><<npcincr Alex dom 1>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+		<<if $farm_naked isnot 1>>
+			<<towelup>>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[感谢艾利克斯|Farm Coop Thank]]>><<npcincr Alex dom 1>><<npcincr Alex love 1>><</link>><<gdom>><<glove>>
+	<br>
+	<<link [[生气|Farm Coop Angry]]>><<npcincr Alex dom -1>><<npcincr Alex love -1>><</link>><<llove>><<ldom>>
+	<br>
+	<<link [[一言不发|Farm Coop Silent]]>><</link>>
+	<br>
+
+<</if>>

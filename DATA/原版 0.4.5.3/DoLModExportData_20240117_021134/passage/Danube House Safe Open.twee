@@ -1,0 +1,23 @@
+:: Danube House Safe Open []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+<<if $skulduggery lt 700>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+<<if $rng gte 10>>
+	你成功地打开了保险箱，发现里面有<<moneyGainDisplay 60 true true>>。
+	<br><br>
+	<<link [[拿走|Danube Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Danube Street]]>><</link>>
+	<br>
+<<else>>
+	你成功地打开了保险箱，发现里面有一件看起来很昂贵的珠宝。
+	<br><br>
+	<<link [[拿走|Danube Street]]>><<set $blackmoney += 200>><<crimeUp 200 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Danube Street]]>><</link>>
+	<br>
+<</if>>

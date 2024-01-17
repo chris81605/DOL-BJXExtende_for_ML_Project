@@ -1,0 +1,64 @@
+:: Adult Shop Sydney Bartering []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>>
+<<run statusCheck("Sydney")>>
+
+你向悉尼和<<person>>走去。随着你走近，你发现他们争吵的内容并不是价格。
+<br><br>
+
+<<if _sydneyStatus.includes("corrupt")>>
+	"不骗你，"悉尼小声地说着，"那个小玩意怎么满足得了你嘛。"
+	<br>
+	"我才不信哩，"<<person>>瞪着悉尼，也压低声音说着。"大号的那么贵。"
+	<br>
+	悉尼耸了耸肩。"好吧，不过你过会就知道后悔了。"
+	<br><br>
+
+	<<link [[鼓励悉尼|Adult Shop Sydney Bartering 2]]>><<set $phase to 3>><<npcincr Sydney purity -1>><</link>><<lspurity>>
+	<br>
+	<<link [[袖手旁观|Adult Shop Sydney Bartering 2]]>><<set $phase to 2>><</link>>
+	<br>
+<<else>>
+	"你确定能受得了……那个？"悉尼咬了咬嘴唇，<<person1>>"要不试试小点——"
+	<br>
+	<<if random(1,5) is 1>>
+		"不是我用的，"<<person2>><<person>>打断了悉尼，"是我<<spouse>>用的。"
+		<br>
+		悉尼停了下来。"那你确定你<<print _text_output>>能受得了——"
+		<br>
+		<<person>><<print either("拿起一根假阳具顶着悉尼的胸口","拿着一根假阳具指着悉尼，怒目圆睁")>>。"少管我的私人生活，小兔崽子。"
+	<<elseif $NPCList[0].vagina isnot "none">>
+		"骂谁不经操呢？"<<person2>><<person>>回头骂道。
+		<br>
+		悉尼咽了口口水。"当，当然不，<<sir>>。但是这个太——"
+		<br>
+		"那就别他妈多管闲事。"
+	<<else>>
+		"你觉得我0力不够？"<<person2>><<person>>回头骂道。
+		<br>
+		悉尼咽了口口水。"我，我没有，<<sir>>，我只是——"
+		<br>
+		"那就别他妈多管闲事。"
+	<</if>>
+	<br><br>
+
+	这场争执虽然完全倾向一方，但仍然激烈。最后，
+	<<switch random(2)>>
+		<<case 2>>
+			<<person>>没有听劝，还是买了超大号的假阳具。
+		<<case 1>>
+			<<person>>屈服了，买了个小一点的。
+		<<default>>
+			<<person>>气愤地冲出了店里。
+	<</switch>>
+	悉尼留在原地，一脸震惊。
+	<br><br>
+
+	<<person1>>
+	"不可能的，"<<he>>嚅嗫着，"那么大，肯定没人能全部塞进去的。肯定……没有吧？"<<He>>看向你，满脸的不适。
+	<br><br>
+
+	<<link [[同意|Adult Shop Sydney Bartering 2]]>><<set $phase to 1>><<npcincr Sydney purity 1>><</link>><<gspurity>>
+	<br>
+	<<link [[不同意|Adult Shop Sydney Bartering 2]]>><<set $phase to 0>><<npcincr Sydney purity -1>><<npcincr Sydney lust 1>><</link>><<lspurity>><<glust>>
+	<br>
+<</if>>

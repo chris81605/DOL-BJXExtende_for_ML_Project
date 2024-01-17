@@ -1,0 +1,37 @@
+:: Farm Assault Wraith Fight []
+<<effects>>
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $rescue to 0>>
+	<<set $enemytype to $wraith.type>>
+	<<set $wraith.exit to "farm_assault">>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<set $timer to 12 - $farm_assault.teams[_assault_keys[$farm_assault.wraith]].field_progress - Math.floor(C.npc["Ivory Wraith"].lust/4)>>
+<</if>>
+<<set $enemyanger += 10>>
+
+<<if $phase is 1>>
+	<<if $timer gte 8>>
+		<span class="lblue">黏液稀薄地扩散开来。</span>
+	<<elseif $timer gte 6>>
+		<span class="blue">黏液扩散开来。</span>
+	<<elseif $timer gte 4>>
+		<span class="purple">黏液进一步扩散。</span>
+	<<elseif $timer gte 2>>
+		<span class="pink">黏液几乎覆盖了整个田地。</span>
+	<<else>>
+		<span class="red">黏液覆盖了每一寸。</span>
+	<</if>>
+<</if>>
+
+<<effectsWraith>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0) or ($timer lte 0 and $phase is 1)>>
+	<span id="next"><<link [[继续|Farm Assault Wraith Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Assault Wraith Fight]]>><</link>></span><<nexttext>>
+<</if>>

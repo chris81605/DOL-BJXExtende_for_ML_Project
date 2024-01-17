@@ -1,0 +1,43 @@
+:: Docks Dog []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<if $dock_dog is "girl">>
+		<<if $dgchance gte random(1, 100)>>
+			<<beastNEWinit 1 dog f penis monster>>
+		<<else>>
+			<<beastNEWinit 1 dog f vagina monster>>
+		<</if>>
+	<<elseif $dock_dog is "boy">>
+		<<if $cbchance gte random(1, 100)>>
+			<<beastNEWinit 1 dog m vagina monster>>
+		<<else>>
+			<<beastNEWinit 1 dog m penis monster>>
+		<</if>>
+	<<elseif $dock_dog is "dog">>
+		<<beastNEWinit 1 dog m penis beast>>
+	<<else>>
+		<<beastNEWinit 1 dog f vagina beast>>
+	<</if>>
+	<<beastCombatInit>>
+	<<set $timer to 10>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Docks Dog Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Docks Dog]]>><</link>></span><<nexttext>>
+<</if>>

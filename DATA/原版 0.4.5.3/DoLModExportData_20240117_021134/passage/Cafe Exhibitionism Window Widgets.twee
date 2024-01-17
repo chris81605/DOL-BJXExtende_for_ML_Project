@@ -1,0 +1,28 @@
+:: Cafe Exhibitionism Window Widgets [widget]
+<<widget "cafecoffeeflasharousal">>
+	在公共场合向这么多陌生人像这样展示你的<<undies>>，你感到
+	<<if ($worn.under_lower.exposed and $uncomfortable.nude is true) or (!$worn.under_lower.exposed and $uncomfortable.underwear is true)>>
+		非常尴尬，但撇开这<<print ["尴尬", "羞耻", "脆弱", "暴露"].pluck()>>的感觉，你内心深处还是渴望更多。
+	<<else>>
+		<<print ["很激动", "很兴奋", "浑身燥热", "非常兴奋", "欲火中烧", "很淫荡"].pluck()>>。
+		<<if $assertiveaction is "trauma">>你真是太涩情了。<<trauma -2>><<ltrauma>><</if>>
+	<</if>>
+
+	<<switch $phase>>
+		<<case 0>> <<arousal 0>>
+		<<case 1>> <<arousal 100>>
+		<<case 2>> <<arousal 200>>
+		<<case 3>> <<arousal 300>>
+		<<case 4>> <<arousal 100>>
+	<</switch>>
+
+	<<if $phase isnot 4>>
+		<<if $worn.under_lower.exposed>>
+			<<exhibitionism4>>
+		<<else>>
+			<<exhibitionism3>>
+		<</if>>
+	<<else>>
+		<br><br>
+	<</if>>
+<</widget>>

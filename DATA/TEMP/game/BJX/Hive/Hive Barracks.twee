@@ -1,0 +1,42 @@
+:: Hive Barracks 
+<<set $outside to 0>><<set $location to "hive">><<effects>><<set $hivestage to 2>>
+<<roomoptions>>
+你在一个大房间里，墙上遍布着用于睡觉的六边形孔。 
+<<if Time.dayState is "dusk">>
+	房间里熙熙攘攘，蜜蜂们正准备为明天的辛劳养精蓄锐。
+<</if>>
+<br><br>
+
+<<if $unbind is 1>>
+	<<set $unbind to 0>>
+	你在桌子上摩擦束缚你的绑带。这需要水磨工夫，但最终它断裂开来。
+	<br><br>
+<</if>>
+<<if $stress gte 10000>>
+	<<passouthive>>
+<<else>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		<<link [[解开你的束缚 (0:10)|Hive Barracks]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+		<br>
+	<</if>>
+    <<if $arousal gte 2000 and !$worn.genitals.type.includes("chastity") and $homemasturbationtest is 1>>
+	    <<link [[自慰 (0:05)|Hive Masturbation]]>><<pass 5>><<set $masturbationstart to 1>><</link>>
+		<br>
+    <</if>>
+	<<if Time.dayState is "dusk">>
+		<<link [[放松 (0:30)|Hive Barracks Relax]]>><<pass 30>><<endevent>><</link>>
+		<br>
+	<</if>>
+	<<link [[进入你的舱室|Hive Pod]]>><</link>>
+	<br>
+    <<link [[走廊|Hive Corridor]]>><<endevent>><</link>>
+    <br>
+    <<link [[设置|Hive Settings]]>><<endevent>><</link>>
+    <br>
+    <<attitudesControlCheck>>
+    <<if $attitudesControl.showGoldLink is true>>
+	    <span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>  </span><span class="red">!!</span>
+    <<else>>
+	    <<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+    <</if>>
+<</if>>

@@ -1,0 +1,64 @@
+:: Adult Shop Sydney Cuffs []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>>
+<<run statusCheck("Sydney")>>
+
+<<if $phase is 1>>
+	你走进了后面的房间，看到了悉尼正处于一个极其尴尬的姿势——
+	<<if $sydneyromance is 1>>
+		<<His>>的双手举过头顶，被一副粉色的毛绒手铐拷在一个货架上。
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>看见你，露出了微笑。"我只是在测试产品，"<<he>>解释着，想要动一动，但根本动不了多少。"嗯，很结实。"<<He>>移开了视线。
+			<br>
+			"肯定是把钥匙掉了。"你在房间的另一边找到了钥匙，悉尼耸耸肩。"哦，看来你要帮我解开了……"<<his>>暗示性的眨眨眼，"对吧？"
+		<<else>>
+			<<He>>盯着地板，脸上带着一抹害羞的微笑。"我真是太粗心了。我在测试产品，然后……就这样了……钥匙也弄掉了……"你在<<his>>脚边发现了钥匙。
+			<br>
+			<<He>>盯着你，眼神中充满了饥渴。"我，我现在已经是任人随意摆布的状态了……"
+		<</if>>
+		<br><br>
+
+		<<link [[顺着演下去|Adult Shop Sydney Cuffed Sex]]>><<set $sexstart to 1>><<npcincr Sydney purity -1>><</link>><<promiscuous1>><<lspurity>>
+		<br>
+		<<link [["直接帮" + $NPCList[0].pronouns.him + "解开"|Adult Shop Sydney Cuffs Free]]>><<set $phase to 1>><<npcincr Sydney purity 1>><</link>><<gspurity>>
+		<br>
+	<<else>>
+		<<His>>的双手摆在身前，被一副粉色的毛绒手铐拷在一个货架上。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>回头看了一眼，哀嚎了一声。
+			<br><br>
+
+			"说出来你可能不信，这纯属意外。快过来帮忙，别傻站在那流口水了。"
+		<<else>>
+			<<his>>正背对着你，但你不用看就知道<<hes>>的脸肯定涨得通红。
+			<br><br>
+
+			"我就随便玩了玩，然后把钥匙弄掉了，然后就……"<<He>>可怜巴巴地看了你一眼，"求你帮个忙好吗？"
+		<</if>>
+		<br><br>
+
+		<<link [[挑逗|Adult Shop Sydney Cuffs Tease]]>><<if $sydneyromance isnot 1>><<npcincr Sydney love -1>><</if>><<npcincr Sydney lust 1>><<npcincr Sydney purity -1>><</link>><<if $sydneyromance isnot 1>><<llove>><</if>><<gslust>><<lspurity>>
+		<br>
+		<<link [["解开" + $NPCList[0].pronouns.him|Adult Shop Sydney Cuffs Free]]>><<set $phase to 0>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+<<else>>
+	你觉得悉尼可以自己搞定自己惹出的麻烦。正如你所想，<<he>>不一会就从后面的房间里出来了，看上去安然无恙。
+	<br><br>
+
+	<<if $sydneyromance is 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>一脸不爽，把那副粉色毛绒手铐丢向你。"你真是个榆木脑袋，知道吗？"<<He>>推开你走了，留下原地懵逼的你。
+		<<else>>
+			<<He>>撅着嘴走了过来。"你人呢？我就那么……"<<He>>戛然而止，红了脸。"我就那么，呃，一个人干了所有的活。嗯，就这样。"
+		<</if>>
+	<<else>>
+		<<He>>揉了揉手腕。"抱歉，我……"<<He>>尴尬地咳了咳，"我就只是在测试产品。没什么大事。"
+	<</if>>
+	<br><br>
+	剩下的工作时间里无事发生。
+	你赚到了<<adultShopWage>><<moneyGain _wage>>。<<npcincr Sirris love 1>><<glove "Sirris">>
+	<br><br>
+	<<link [[返回|Adult Shop]]>><<endevent>><</link>>
+<</if>>

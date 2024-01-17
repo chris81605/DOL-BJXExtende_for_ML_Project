@@ -1,0 +1,87 @@
+:: Mines Guards []
+<<effects>>
+
+你在老矿区的员工室里。警卫们进进出出，有些在玩牌，有些翘着腿坐在电视机前。
+<br><br>
+
+<<mines_suspicion_text>>
+<br><br>
+<<if $stress gte $stressmax>>
+    这一切对你来说冲击太大，你昏了过去。
+    <br><br>
+    <<link [[继续|Mines Passout]]>><<passout>><</link>>
+    <br>
+<<elseif $exposed gte 1>>
+    <<covered>>隔壁的房间里有一堆布片。有些大到可以穿在身上。
+    <br><br>
+    <<ragup>>
+
+    <<link [[继续|Mines Guards]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<<elseif random(1, 3) is 3 and $eventskip isnot 1>>
+    <<if $rng gte 81>>
+        <<generate1>><<person1>>
+        一个<<person>>把<<his>>的手臂放在你的腰上，试图把你引向一个无人的房间。
+        <br><br>
+
+        <<link [[乖乖过去|Mines Guards Room]]>><<stress 6>><</link>><<gstress>>
+        <br>
+        <<link [[推开|Mines Guards Refuse]]>><</link>><<difficulty `100 - $mines_suspicion`>> <i>难度随着怀疑增加。</i>
+        <br>
+
+    <<elseif $rng gte 61>>
+        <<generate1>><<person1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+        你注意到一个<<person>>在盯着你。<<He>>迎着你的目光，咧嘴一笑，大摇大摆地走过来，从口袋里拿出一条长绳。其他人转过身来看戏。
+        <br><br>
+        "伸出你的手腕，"<<he>>说。<<He>>在等待，希望你能顺从。
+        <br><br>
+
+        <<link [[伸出你的手腕|Mines Guards Bondage]]>><</link>>
+        <br>
+        <<link [[推开|Mines Guards Refuse]]>><</link>><<difficulty `100 - $mines_suspicion`>> <i>难度随着怀疑增加。</i>
+        <br>
+    <<elseif $rng gte 41>>
+        <<generate1>><<person1>>
+        一个<<person>>搂着你的肩膀，把你引向一桌早已等候多时的同事。"爬上桌子，"<<he>>说。"我们想更好地看看你。"
+        <br><br>
+
+        <<link [[爬上去|Mines Guards Climb]]>><<mines_suspicion -5>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<lsuspicion>>
+        <br>
+        <<link [[推开|Mines Guards Refuse]]>><</link>><<difficulty `100 - $mines_suspicion`>> <i>难度随着怀疑增加。</i>
+        <br>
+    <<elseif $rng gte 21 and !playerBellyVisible()>>
+        <<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+        一个<<person>>搂着你的腰，试图把你拉向一张坐着<<his>>同事的桌子，那里有<<person2>><<person>>和一壶啤酒。
+        <br><br>
+        "投喂时间，"那个<<person1>><<person>>说。<<He>>试图将一个漏斗塞进你的嘴里。
+        <br><br>
+        <<link [[容忍|Mines Guards Beer]]>><<trauma 6>><<set $drunk += 180>><</link>><<gtrauma>>
+        <br>
+        <<link [[推开|Mines Guards Refuse]]>><</link>><<difficulty `100 - $mines_suspicion`>> <i>难度随着怀疑增加。</i>
+        <br>
+
+    <<else>>
+        <<generate1>><<person1>>
+        一个<<person>>向你搭讪，用一只手从后面搂住你的腰，另一只手勾住你的脖子。<<He>>把你拉过来强行亲吻。
+        <br><br>
+
+        <<link [[容忍|Mines Guards Kiss]]>><<trauma 6>><<stress 6>><</link>><<kissvirginitywarning>><<gtrauma>><<gstress>>
+        <br>
+        <<link [[推开|Mines Guards Refuse]]>><</link>><<difficulty `100 - $mines_suspicion`>> <i>难度随着怀疑增加。</i>
+        <br>
+    <</if>>
+<<else>>
+
+    <<edenicon "broom">><<link [[打扫 (1:00)|Mines Guards Clean]]>><<pass 60>><<mines_suspicion -10>><</link>><<llsuspicion>>
+    <br>
+    <<if $mines_guards_dig is 0>>
+        <<investigateicon>><<link [[寻找办法逃跑 (1:00)|Mines Guards Dig]]>><<pass 60>><<mines_suspicion 5>><</link>><<gsuspicion>>
+        <br>
+    <<else>>
+        <<getouticon "dig">><<link [[挖 (1:00)|Mines Guards Dig]]>><<pass 60>><<mines_suspicion 5>><</link>><<gsuspicion>>
+        <br>
+    <</if>>
+
+<</if>>
+
+<<set $eventskip to 0>>

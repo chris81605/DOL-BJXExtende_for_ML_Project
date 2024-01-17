@@ -1,0 +1,74 @@
+:: Underground Intro []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<if $phase is 1>>
+	/* endevent was called before setting phase to 1, regen all npcs */
+	<<set _withRobin to 1>>
+	<<set _robin to statusCheck("Robin")>>
+	<<npc Robin 1>><<generate2>><<generate3>><<generate4>>
+<</if>>
+
+<<if _withRobin>>
+	你和罗宾被拖进一扇门下了一段楼梯。你听到了水流的声音。
+	在底部，<<person2>><<person>>打开手电筒，露出一条通向黑暗的古老石头走廊。
+	<br><br>
+
+	走了一会儿，你来到一扇金属门前。<<person2>><<person>>敲门，应声的是靠近顶部的一个薄开口。
+	门迅速关上，门打开了。
+	<br><br>
+
+	你被逼进门跪在
+	<<person4>><<person>>面前，那个人蹲下抓住你的脖子。
+	<<He>>转动你的头检查你的左脸，然后是右脸，接着强迫你张开嘴，看你的口腔。
+	"<<pShe>>就行了，"<<he>>说着站了起来。<<He>>然后看着罗宾，也做了同样的事情，然后在火炬光下狡猾地笑了笑。
+	<<person1>>"<<He>>会受欢迎的，我敢说。"
+<<else>>
+	你被拖进一扇门，走下一段台阶。你听到了水流的声音。
+	在底部，<<person>>打开手电筒，露出一条通向黑暗的古老石头走廊。
+	<<pass 15>>
+	<br><br>
+
+	走了一会儿，你来到一扇金属门前。
+	<<person2>><<person>>敲门，应声的是靠近顶部的一个薄开口。门迅速关上，门打开了。
+	<br><br>
+
+	<<endcombat>>
+	<<generate1>><<person1>>
+	你被迫穿过门，跪在一个<<person>>面前，<<he>>蹲下来抓住你的脖子。
+	<<He>>转动你的头检查你的左脸，然后是右脸，接着强迫你张开嘴，看你的口腔。
+	"<<pShe>>合格了，"<<he>>说着站了起来。
+<</if>>
+<br><br>
+
+<<if $worn.neck.collared isnot 1>>
+	<<neckwear 21>>
+	你的脖子只有短暂的放松。有人在你被拽起来拉走之前，用坚硬冰冷的东西把它包裹起来。
+<<else>>
+	<<attach_leash>>
+	有人在你的项圈上系上链子，强行将你拽起身，然后把你拉开了。
+<</if>>
+<<if !$worn.feet.type.includes("shackle")>>
+	你感到冰冷的金属夹住了你的脚踝。
+	<<shackle_feet>>
+<</if>>
+<<if _withRobin>>
+	<br><br>
+	<<if _robin.dom gte 70>>
+		罗宾一声不吭，在昏暗的灯光下你可以看到<<his>>的眼里充满了决心。
+		<br><br>
+
+		"很多人都喜欢需要被调教的类型，”<<person4>><<person>>夹住罗宾的脚踝时笑着说。
+	<<else>>
+		罗宾呜咽起来。“习惯它吧，”<<person4>><<person>>说，“你永远不能离开这个地方。"
+	<</if>>
+	<br><br>
+
+	一个<<person3>><<person>>一手牵着你皮带的另一端，另一只手牵着罗宾。<<He>>带着你们走向房间尽头的一扇门。
+<<else>>
+	<<generate2>><<person2>>
+	一个<<person>>控制着你的缰绳。<<He>>带你走向房间尽头的一扇门。
+<</if>>
+<br><br>
+
+<<stealclothes>>
+<<link [[继续|Underground Intro2]]>><</link>>
+<br>

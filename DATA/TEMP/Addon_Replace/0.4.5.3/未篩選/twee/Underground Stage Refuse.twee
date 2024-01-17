@@ -1,0 +1,28 @@
+:: Underground Stage Refuse []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+<<if $speech_attitude is "meek">>
+	你顺从地盯着自己的脚，但拒绝了他们的要求。
+<<elseif $speech_attitude is "bratty">>
+	你反抗地盯着人群，拒绝了他们的要求。
+<<else>>
+	尽管很害怕，你还是拒绝了他们的要求。
+<</if>>
+
+人群开始发出嘘声。一个<<generate1>><<person1>><<person>>跑到了舞台上。“请接受我们的道歉，”<<he>>拾起连在你项圈上的皮带说道。
+
+<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	<<endevent>>
+	<<beastNEWinit 1 pig>>
+	"我们将为大家带来一场特别表演，来取代原先的安排。”一个金属百叶窗在你身后打开，露出了一只巨大的<<beasttype>>。
+	<br><br>
+
+	<<link [[继续|Underground Stage Pig]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	"我们将为您表演如何惩罚这个傲慢的<<bitch>>，来替代我们原先的安排。"
+	<br><br>
+
+	<<link [[继续|Underground Stage Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+	<br>
+<</if>>

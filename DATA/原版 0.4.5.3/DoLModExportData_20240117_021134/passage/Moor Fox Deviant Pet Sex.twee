@@ -1,0 +1,47 @@
+:: Moor Fox Deviant Pet Sex []
+<<effects>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<if $monster is 1>>
+		<<if $speech_attitude is "meek">>
+			"我——我也想舒服起来，"你在<<bhis>>的耳边低语。
+		<<elseif $speech_attitude is "bratty">>
+			"我希望你打算还我这个人情。"你在<<bhis>>的耳边低语。
+		<<else>>
+			"我们做点更好的事怎么样？"你在<<bhis>>的耳边低语。
+		<</if>>
+		<br><br>
+
+		<<if $NPCList[0].traits.includes("cowardly")>>
+			<<beasttypes>>惊讶地鼓起尾巴。"和……和我……一起……？"在<<bhe>>提出抗议之前，你把一条腿从<<bhim>>身上迈了过去。
+		<<else>>
+			<<beasttype>>笑起来，"我就等着你这么说呢。"
+		<</if>>
+	<<else>>
+		你把一条腿跨过狐狸的下半身。当狐狸意识到你的意图时，它期待地尖叫起来。
+	<</if>>
+	<<deviancy4>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red"><<bHe>>直接冲着你发出尖叫，将你的尖叫声淹没。</span>'>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Moor Fox Deviant Pet Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Moor Fox Deviant Pet Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,59 @@
+:: Docks Examine Valuables []
+<<effects>>
+
+<<skul_dock_init>>
+
+你在货物中仔细观察着。值钱的东西很多，但你要找的是小到可以揣进口袋的东西。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+
+	<br><br>
+
+	<<skul_dock_contents gold>>
+	<<if !_dock_location and $catsuit_found isnot true>>
+		<<skul_dock_contents equipment>>
+	<</if>>
+	<<if !_dock_location>>
+		<<skul_dock_contents aphrodisiacs>>
+	<</if>>
+	<<if !_dock_location>>
+		<<skul_dock_contents electronics>>
+	<</if>>
+	<<if !_dock_location and currentSkillValue('tending') gte 400>>
+		<<skul_dock_contents fertiliser>>
+	<</if>>
+
+	<<if _dock_contents is "gold">>
+		<<skul_dock_location _dock_location>>的一个集装箱里有一根金条。<span class="green">这玩意可以在黑市上卖出去。</span>你默默记住了它的位置。
+	<<elseif _dock_contents is "aphrodisiacs">>
+		本地的一家公司正在运送一些特殊货物，现在存放在<<skul_dock_location _dock_location>>。<span class="teal">这玩意可以在黑市上卖出去。</span>你默默记住了它的位置。
+	<<elseif _dock_contents is "electronics">>
+		<<skul_dock_location _dock_location>>附近有一个集装箱里装满了货物，其中有着昂贵的电子产品。<span class="lblue">这玩意可以在黑市上卖出去。</span>你默默记住了它的位置。
+	<<elseif _dock_contents is "fertiliser">>
+		<<skul_dock_location _dock_location>>附近有一个集装箱里，装满了似乎是肥料的东西。<span class="lblue">你可能用得着。</span>你默默记住了它的位置。
+	<<elseif _dock_contents is "equipment">>
+		在<<skul_dock_location _dock_location>>附近有一个装满了特种装备的集装箱。<span class="teal">你可能用得上。</span>你默默记住了它的位置。
+	<<elseif !_dock_contents>>
+		你没找到什么有用的东西。知道没什么好东西也好。
+		<<set _skul_dock_keys to Object.keys($skul_dock)>>
+		<<for _i to 0; _i lt _skul_dock_keys.length; _i++>>
+			<<set $skul_dock[_skul_dock_keys[_i]].state to "known">>
+		<</for>>
+	<</if>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+<<else>>
+
+	监管者拍了一下你的背。虽然你看上去没有在做什么小偷小摸的勾当，但你仍然被吓得从座位上跳了起来。一会肯定要被人笑话了。<<lcool>><<dockstatus -1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+<</if>>
+
+<<dockoptions>>

@@ -1,0 +1,39 @@
+:: Pirate Scum Bilge Search []
+<<effects>>
+
+你朝着水声和剪影的源头走去。光线流转，轮廓随之移动，仿佛在引导你去某个地方。
+<<if $willpowerSuccess>>
+    突然其来的一声咆哮撼动了整艘船，<span class="green">但你保持了冷静</span>。
+    <br><br>
+
+    <<if random(1, 10) is 10 and $tentacledisable is "f" and $hallucinations gte 2>>
+        你走过一个拐角，发现船壁上有一个传送门，水被某种看不见的力量给挡在了外面。
+        <br><br>
+        水流突然涌了上来，从你身上轻拂而过。而后水流吞没了一切。
+        <br><br>
+        <<link [[继续|Pirate Scum Bilge Tentacles]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <<else>>
+        <<generateRole 0 0 "pirate">><<person1>>
+        你绕过一个空木桶，发现一个<<person>>靠在椅子上。<<Hes>>一边唆着面一边玩着打火机，当他看到你时显得很惊讶。
+        <br><br>
+
+        <<link [[继续|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    突然其来的一声咆哮撼动了整艘船，<span class="red">恐慌涌上心头。</span>你失去了控制。<<ggstress>><<stress 12>><<gwillpower>><<willpower 2>>
+    <br><br>
+
+
+    <<if $rng gte 67>>
+        <<link [[跑|Pirate Scum Bilge Run]]>><</link>>
+		<br>
+    <<elseif $rng gte 33>>
+        <<link [[躲藏|Pirate Scum Bilge Hide]]>><<pass 5>><</link>>
+		<br>
+    <<else>>
+        <<link [[尖叫|Pirate Scum Bilge Scream]]>><</link>>
+		<br>
+    <</if>>
+<</if>>

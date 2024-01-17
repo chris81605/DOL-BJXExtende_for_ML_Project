@@ -1,0 +1,38 @@
+:: Spa Lewd Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+	<<if $daily.spaEvent isnot "party">>
+		<<enable_rescue>>
+	<</if>>
+	<<set $enemyarousal to ($enemyarousalmax * 0.9)>>
+	<<if $phase is 1>>
+		<<npc_attempt_sex>>
+	<</if>>
+	<<prop table>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue isnot 1>>
+	<span class="pink">你的哭声被聚会的喧嚣淹没了。</span>
+	<<set $alarm to 0>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Spa Lewd Rape]]>><</link>></span><<nexttext>>
+<</if>>

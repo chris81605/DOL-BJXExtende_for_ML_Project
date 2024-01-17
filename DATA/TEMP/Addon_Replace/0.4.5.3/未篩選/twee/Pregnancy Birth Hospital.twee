@@ -1,0 +1,49 @@
+:: Pregnancy Birth Hospital []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set $first_birth to !$pregnancyStats.humanToysUnlocked>>
+<<npc "Harper">><<person1>>
+<<setKnowsAboutPregnancy "pc" "Harper">>
+<<if $hospitalintro is 0>>
+	<<set $hospitalintro to 1>>
+	<<if $phase is 1>>
+		你在医院的病床上醒来。几个模糊的身影走来走去。其中一个靠得更近，<<his>>看起来好像是个成年人<<personsimple>>，"我是哈珀医生。"<<he>>把金色的刘海从眼睛上撩开，"请不要惊慌，你的羊水破了，你在医院。"<<He>>看起来很年轻，不超过25岁。
+		<br><br>
+	<<else>>
+		接待员点点头，“请坐，医生马上就来。"
+		<br><br>
+		你不需要等太久，一个穿得像个医生的年轻人<<personsimple>>过来，“我是哈珀医生”<<he>>说。从<<his>>的眼睛旁边拂过<<his>>金色的刘海。“我们给你准备了一张床，这边走。"
+		<br><br>
+		<<He>>带你穿过医院，来到产房的一个房间。助产士在床边调整机器。
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $phase is 1>>
+		你在医院的病床上醒来。几个模糊的身影在四周移动。一个人靠得更近，<<his>>看起来像是哈珀医生。"请不要惊慌，你的羊水破了，你现在在医院。"
+		<br><br>
+	<<else>>
+		接待员点点头，“请坐，医生马上就来。"
+		<br><br>
+		哈珀医生很快就到了。“我们为你准备了一张床，这边请。"
+		<br><br>
+		<<He>>带你穿过医院，来到产房的一个房间。助产士在床边调整机器。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $exposed lt 2 and $phase isnot 1>>
+	"请脱衣服，”医生说道。
+<<else>>
+	"请深呼吸，”医生说道。
+<</if>>
+<<if playerChastity("hidden")>>
+	<<He>>注意到你的<<print $worn.genitals.cn_name_cap>>，随后打开一个齐胸高的柜子，取出了一把像是个巨型老虎钳一样的工具。"我们需要把那东西取下来。<<if $phase isnot 1>>请躺下。<</if>>不会痛的。"
+	<br><br>
+	<<if $phase isnot 1>>你躺下。天花板被刷成白色。你的头顶吊着一台风扇。<</if>><<He>>用钳子夹住你的<<print $worn.genitals.cn_name_cap>>，并按下手柄上的按钮。你听到工具内部发出嗡嗡声，<span class="pink">他们夹断了金属。</span>
+	<<set $worn.genitals.type.push("broken")>>
+<<elseif $phase isnot 1>>
+	"然后躺下。”你照做了。天花板是纯白色的。在你的正上方有一个风扇。
+<</if>>
+<br><br>
+<<wash>><<undress "hospital_birth">><<upperwear 87 "teal">>
+
+<<link [[继续|Pregnancy Birth Hospital 2]]>><</link>>
+<br>

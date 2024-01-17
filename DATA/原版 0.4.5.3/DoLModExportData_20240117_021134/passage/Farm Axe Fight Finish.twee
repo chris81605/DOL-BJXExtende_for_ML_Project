@@ -1,0 +1,72 @@
+:: Farm Axe Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	他们躺在草地上，暂时没有力气了。<<tearful>>你抓住了机会，抓住其中一把斧子，把它拔了出来。
+	<br><br>
+	高潮让他们精疲力竭，而对手现在又挥舞着斧头，两人决定转身逃跑。/*<<llaggro>><<farm_aggro -5>>*/
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<earnFeat "Farm Protector">>
+	<<person1>><<person>>掉进了沟里。<<person2>><<person>>拿起<<his>>的斧头，但你往<<his>>的小腿一踢，把<<him>>推到<<his>>同事身上。
+	<br><br>
+	<<tearful>>你站稳脚跟。准备应对他们的反击。然而实际情况相反，他们爬上了沟的另一边，随后跑掉。/*<<llaggro>><<farm_aggro -5>>*/
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Work]]>><</link>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>
+	"我来了！"是艾利克斯。两人朝<<his>>声音的方向瞥了一眼，对着
+	<<if $farm.wall gte 3>>
+		围栏
+	<<elseif $farm.wall gte 1>>
+		墙
+	<<else>>
+		围栏
+	<</if>>
+	更用力地砍下去，希望造成更大的破坏。<<farm_aggro 5>><<farm_fence_damage 1>><<gaggro>>
+	<br><br>
+
+	"你们这些人渣，"艾利克斯边说着，冲了过去，那两人转身逃跑，"我他妈逮到你们就拿你们喂我的猪！"
+	<br><br>
+	<<clotheson>>
+	"幸好你在附近，"<<he>>看着受损的地方说道，"我们应该能够修复这个问题。"<<He>>摘下帽子，擦去额头上的汗。<<npcincr Alex dom 1>><<npcincr Alex love 1>><<gdom>><<glove>>
+	<br><br>
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<covered>><<He>>注意到你的穿着，脸红了。"我、我给你拿几条毛巾，"<<he>>说道。
+		<br><br>
+
+		你跟着<<him>>回到农舍，<<he>>递给你一些毛巾。<<towelup>><<gdom>><<glust>><<npcincr Alex lust 1>><<npcincr Alex dom 1>>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	你被疼痛压垮，瘫倒在地。两人拿起斧子继续工作，直到一排
+	<<if $farm.wall gte 3>>
+		跟牛一样宽的围栏变成了废铁。
+	<<elseif $farm.wall gte 1>>
+		跟牛一样宽的围栏变成了碎石。
+	<<else>>
+		跟牛一样宽的围栏变成了碎片。
+	<</if>>
+
+	<br><br>
+	工作完成后，两人大摇大摆地离开了农场。<<ggaggro>><<farm_aggro 10>><<farm_fence_damage 3>>
+	<br><br>
+	<<tearful>>你挣扎着站了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Farm Work]]>><</link>>
+<</if>>

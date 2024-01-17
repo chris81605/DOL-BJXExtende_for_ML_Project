@@ -1,0 +1,22 @@
+:: Prison Intro Hose 2 []
+<<effects>>
+
+"你是144号囚犯，"<<person4>><<methodical_guard 3>>说着，把一捆衣服塞进你的怀里。
+<<if $worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+	"A区牢房。满刑后你就能重获自由。"
+	<br><br>
+	他们不给你晾干的机会，就把你塞进另一扇铁门里。
+<<else>>
+	"A区牢房，满刑后你就能拿回你的东西。"
+	<br><br>
+	他们不给你穿衣服的机会，就把你塞进另一扇铁门里。
+<</if>>
+<br><br>
+
+<<if $prison and between(Time.hour, 8, 17)>>
+	<<set $prison.work_check to 1>>
+	<<set $prison.hours_worked to Time.hour - 7>>
+<</if>>
+
+<<link [[继续|Prison Intro Walk]]>><</link>>
+<br>

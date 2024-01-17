@@ -1,0 +1,38 @@
+:: Pound Food Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<if $phase is 1>>
+		你摆出一个顺从的姿势，邀请<<beasttype>>进入你的身体。
+	<<else>>
+		你碰了碰<<beasttype>>的鼻子。它后退，准备进攻。
+		<<set $enemyanger += 100>>
+	<</if>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<npc_attempt_sex>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Pound Food Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Pound Food Rape]]>><</link>></span><<nexttext>>
+<</if>>

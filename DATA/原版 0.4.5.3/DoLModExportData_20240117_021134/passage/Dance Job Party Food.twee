@@ -1,0 +1,37 @@
+:: Dance Job Party Food []
+<<effects>>
+
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你为孤儿们藏了一些食物。<span class="green">人们太过忙碌没有注意到你的行为。</span><<ghope>><<hope 1>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+
+<<else>>
+
+	你为孤儿们藏了一些食物。当你离开桌子时，<<generate1>><<person1>><span class="red">你撞到了<<person>>。食物撒了一地。</span>
+	<br><br>
+	大家打趣地说你一定是饿坏了。<<linterest>><<dance_job_interest -5>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+
+<</if>>
+
+<<link [[继续|Dance Job Party Intermission End]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,60 @@
+:: Tentacle Forest Flowers []
+<<set $bus to "tentacle_forest_flowers">><<effects>>
+
+你在触手森林里，在一片开满肉质花朵的空地上。花瓣总是面向你，紧随其后。如果你靠得太近，它们会喷出紫色的雾气。
+<br><br>
+
+<<tentacle_forest_safe_orgasm>>
+<<tentacle_forest_time>>
+<br><br>
+
+<<if $tentacle_forest_time gte 60>>
+    <<tentacle_forest_end_scene>>
+<<elseif $town_projects.road gte 5>>
+    一条路穿过空地，提供最安全的穿越路线。
+    <br><br>
+    <<if $tentacle_forest_time gte 60>>
+        <<tentacle_forest_end_scene>>
+    <<elseif $stress gte $stressmax>>
+        <<tentacle_forest_stress_scene>>
+    <<elseif $arousal gte 10000 and !$tentacle_forest_lurker.includes("defeated")>>
+        <<tentacle_forest_orgasm_scene>>
+    <<else>>
+        <<link [[跑 (0:05)|Tentacle Forest Flowers Run]]>><<tentacle_forest_pass 5>><</link>><<willpowerdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br>
+        <<link [[边唱歌边穿过 (0:05)|Tentacle Forest Flowers Sing]]>><<tentacle_forest_pass 5>><</link>><<tendingdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br><br>
+
+        藤蔓挂在空地的边缘，滴下甜得令人作呕的花蜜。
+        <<if $backgroundTraits.includes("plantlover") and $nectar_timer lte 14>>
+            你闻了闻，皱起了眉头。这不是你上瘾的花蜜，不能满足你的渴望。
+        <</if>>
+        <br>
+        <<link [[吮吸 (0:15)|Tentacle Forest Oral]]>><<tentacle_forest_pass 15>><</link>><<note "+ 口部技巧？" "blue">>
+        <br><br>
+        <<link [[回到起点 (0:05)|Tentacle Forest]]>><<tentacle_forest_pass 5>><</link>>
+        <br>
+    <</if>>
+<<elseif $town_projects.road gte 4>>
+    <<set $town_projects.road to 5>>
+    出现了一条由厚厚的粉红色玻璃砖砌成的道路，将空地的一侧连接到另一侧。阴霾笼罩着它，<span class="green">但现在应该可以穿越了。</span>
+    <br><br>
+    <<link [[继续|Tentacle Forest Flowers]]>><</link>>
+    <br>
+<<else>>
+    只是一丝芳香就让你头晕目眩，而且距离太远，无法屏住呼吸。<span class="blue">你需要找到另一个解决办法。</span>
+    <<if $town_projects.road is undefined>>
+        <<set $town_projects.road to 1>>
+    <</if>>
+    <br><br>
+
+    藤蔓挂在空地的边缘，滴下甜得令人作呕的花蜜。
+    <<if $backgroundTraits.includes("plantlover") and $nectar_timer lte 14>>
+        你闻了闻，皱起了眉头。这不是你上瘾的花蜜，不能满足你的渴望。
+    <</if>>
+    <br>
+    <<link [[吮吸 (0:15)|Tentacle Forest Oral]]>><<tentacle_forest_pass 15>><</link>><<note "+ 口部技巧？" "blue">>
+    <br><br>
+    <<link [[回头|Tentacle Forest]]>><</link>>
+    <br>
+<</if>>

@@ -1,0 +1,23 @@
+:: Tentacle Forest Prison []
+<<set $bus to "tentacle_forest_prison">><<effects>>
+
+咔嗒一声，门开了锁。你把它拉开，并做好准备防止酸风把你吹倒。
+<br><br>
+
+你进入隧道，沐浴在紫色的光芒中。其他走廊从这条走廊引出，它们的墙壁上蚀刻着奇怪的符号。
+<br><br>
+
+<<if $tentacle_forest_time gte 60>>
+    <<tentacle_forest_end_scene>>
+<<elseif $stress gte $stressmax>>
+    <<tentacle_forest_stress_scene>>
+<<elseif $arousal gte 10000 and !$tentacle_forest_lurker.includes("defeated")>>
+    <<tentacle_forest_orgasm_scene>>
+<<else>>
+    <<if $analdisable is "f">>
+        <<link [[破译 (0:15)|Tentacle Forest Anal]]>><<tentacle_forest_pass 15>><</link>><<note "+ 后庭技巧？" "blue">>
+        <br>
+    <</if>>
+    <<link [[回到起点|Tentacle Forest]]>><</link>>
+    <br>
+<</if>>

@@ -1,0 +1,77 @@
+:: Forest Fox Chase Eden []
+<<effects>>
+<<npc Eden>><<person1>>
+你就这样被挂了一段时间。任何解放自己的尝试都会遭遇不同程度的失败。很快，你听到有人走近。
+<br><br>
+
+毫无征兆地，绳子松开，把你抛回地面。你摇摇晃晃地站着。
+<<if $edenCagedEscape>>
+	一只手抓住你的后颈。"我告诉过你我会再找到你的，不是吗？"是伊甸。
+	<br><br>
+
+	<<He>>把你压在一棵树上，愤怒的情绪在<<his>>的眼中一闪而过。
+	<br><br>
+
+	<<link [[反抗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[试着逃离|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[屈服 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif $syndromeeden is 1 and (($edenfreedom isnot 2 and $edendays gte 7) or ($edenfreedom gte 2 and $edendays gte 21))>>
+	一只手抓住你的后颈。"你他妈的去哪儿了？"一个<<personsimple>>咆哮道。是伊甸。"我担心死了！"
+	<br><br>
+
+	在你说话之前，伊甸开始把你拖走。"我也不想听你的辩解。"<<He>>轻蔑地朝城镇方向瞥了一眼。"不管怎样，我都能知道你在干什么。我们回家后情况不会很好。"
+	<br><br>
+
+	<<link [[反抗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[试着逃离|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[屈服 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif $edenfreedom gte 2 and $edendays gte 8>>
+	一只手臂从后面搂住你的脖子，一只手压在你的后脑勺上。你听到了一个<<personsimple>>的声音。"我一直在到处找你。"是伊甸。"来吧，我们回家吧。"
+	<br><br>
+
+	<<if $asphyxiaLvl gte 3>>
+		<<link [[抵抗|Eden Recaptured Resist]]>><<set $fightstart to 1>><</link>>
+	<<else>>
+		<<link [[抵抗|Eden Recaptured Resist Normal]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+	<br>
+	<<link [[去小屋 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+	<br>
+<<elseif $edenfreedom is 1 and $edendays gte 2>>
+	一只手臂从后面搂住你的脖子，一只手压在你的后脑勺上。你听到了一个<<personsimple>>的声音。"我一直在到处找你。"是伊甸。"来吧，我们回家吧。"
+	<br><br>
+
+	<<link [[抵抗|Eden Recaptured Resist]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[去小屋 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+	<br>
+<<elseif $edenfreedom gte 1>>
+	<<rng>>
+	<<if Time.dayState isnot "night">>
+		"那些陷阱是为动物准备的，"你听到一个声音说道。是伊甸。"我以为你是那只该死的狐狸。你应该看路。"
+	<<else>>
+		<<if $rng gte 51>>
+			一道亮光射进你的眼睛，模糊了你的视线。你把胳膊举到面前。"这里什么都看不见，"一个声音说道。是伊甸。<<He>>把火炬对准你。"你这个时候在外面干什么？"
+		<<else>>
+			一只手臂从后面搂住你的脖子，一只手压在你的后脑勺上。你挣扎，行凶者释放了你。"对不起，"一个声音说道。是伊甸。"我以为是狐狸绊倒了陷阱，有人偷走了它。"
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<forestCabinReturnLinks>>
+<<else>>
+	一颗子弹呼啸而过，击中了你面前的一棵树。你用胳膊挡住脸，摇摇晃晃地向后走。你听到了一个<<personsimple>>的声音。"我现在抓到你了，你这该死的狐狸——"<<he>>看到你停顿了一下。
+	<br><br>
+
+	"看来我抓住了更好的东西。不要动。"一个又冷又硬的东西压在你的背上。
+	<br><br>
+
+	<<link [[继续|Forest Hunter Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

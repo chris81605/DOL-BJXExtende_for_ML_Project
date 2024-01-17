@@ -1,0 +1,70 @@
+:: Avery Hotel Early End []
+<<effects>>
+<<endevent>><<npc Avery>><<person1>>
+<<averyscore>>
+<<if $endear gte 60 or $phase is 2>>
+    /* 北极星模组 */
+	<<set $money += ((($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1)) * 100)>>
+	<<He>>微笑着点点头，递给你一叠现金<span class="gold">£<<print (($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1))>></span>。"你应该给自己买点好东西，我请客。"
+	/* 北极星 */
+	<br><br>
+	<<He>>再次牵着你的手，带你走出套房，来到大堂。你们花了几分钟办完退房手续，随后你们两个便到了回孤儿院的路上。<<He>>似乎对你的表现很满意。
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+		你穿上放在后座上的外套。
+		<br><br>
+	<</if>>
+	<<He>>让你在宅邸街下车，在下车前你们聊了一会儿天，<<he>>再次表达了对你的喜爱。
+	<br><br>
+	<<link [[继续|Domus Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $endear gte 30>>
+    /* 北极星模组 */
+	<<set $money += ((($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1)) * 100)>>
+	<<He>>点点头，拿出了一叠钱<span class="gold">£<<print (($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1))>></span>。
+	/* 北极星 */
+	<br><br>
+	<<He>>再次牵着你的手，带你走出套房，来到大堂。你们花了几分钟办完退房手续，随后你们两个便到了回孤儿院的路上，"我希望你下次能在这里过夜。"
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+		你穿上放在后座上的外套。
+		<br><br>
+	<</if>>
+	艾弗里让你在宅邸街下车，在原地停了片刻后<<He>>就开车离开了。
+	<br><br>
+	<<link [[继续|Domus Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $endear gte 0>>
+	<<set $money += (($NPCName[$NPCNameList.indexOf("Avery")].love * 1 + $endear * 1 + 10) * 100)>>
+	<<He>>皱起眉头。"你该庆幸，你没在公众场合表现成这样。"<<He>>拿出了一叠现金给你，一共<span class="red">£<<print ($NPCName[$NPCNameList.indexOf("Avery")].love * 1 + $endear * 1 + 10)>></span>。
+	<br><br>
+	<<He>>抓住你的手，把你拽出套房，你在路上不小心绊了一下。<<He>>花了几分钟办完退房手续，但很快你们两个就在去孤儿院的路上了。"下次我会重新考虑一下这种私人安排的。"
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+		你穿上放在后座上的外套。
+		<br><br>
+	<</if>>
+	艾弗里让你在宅邸街下车，在原地停了片刻后<<He>>就开车离开了。
+	<br><br>
+	<<link [[继续|Domus Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<set $money += (($NPCName[$NPCNameList.indexOf("Avery")].love * 1 + $endear * 1 + 10) * 100)>>
+	"难以置信。"<<He>>快速地一些钱塞到你手里。还没等你数清楚，你就被推进玄关，身后的门咔哒一声关上了。
+	<br><br>
+	很容易就能找到回电梯的路，在下到大堂后，你一个人离开旅馆，踏入商业街的冰冷空气中。你数了数钱，一共有<span class="red">£<<print ($NPCName[$NPCNameList.indexOf("Avery")].love * 1 + $endear * 1 + 10)>></span>。
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar" "delete">>
+	<</if>>
+	<<link [[继续|High Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+<br><br>

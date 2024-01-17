@@ -1,0 +1,33 @@
+:: Sea Dolphins []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>
+	<<set $water to 1>>
+	<!-- <<set $claws to 0>> -->
+	<<if Time.dayState isnot "night" and $location is "beach">>
+		<<enable_rescue>>
+	<</if>>
+	<<if $bus isnot "sea">>
+		<span class="pink"><<beastsplural>>把你推到了海里。</span>
+	<</if>>
+	<<location "sea">>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sea Dolphins Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Dolphins]]>><</link>></span><<nexttext>>
+<</if>>

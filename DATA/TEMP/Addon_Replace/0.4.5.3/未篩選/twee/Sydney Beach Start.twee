@@ -1,0 +1,30 @@
+:: Sydney Beach Start []
+<<location "promenade">><<effects>>
+<<set $dateCount.Total++>><<set $dateCount.Sydney++>>
+你和悉尼一起来到了沙滩。
+<<if $weather is "rain" or $weather is "snow">>
+	由于<<print $weather.replace("rain","雨").replace("snow","雪")>>的原因，海岸上人烟稀少，只留下一批冲浪者为汹涌的波涛所痴迷。你们决定留在长廊，向外看着大海。
+	<br><br>
+	你看着波涛涌起，悉尼默默地为你撑伞。<<if $weather is "rain">>雨水滴落，<</if>>海潮浅浅地褪去，你享受着短暂的安宁。<<stress -12>><<llstress>>
+	<br><br>
+	海浪向你们拍来。如果你们依旧站着的话，它会溅过长廊，把你们全都淋湿。
+	<br><br>
+	<<link [[拉着悉尼躲避浪潮|Sydney Beach Promenade Move]]>><<npcincr Sydney love 1>><</link>><<glove>>
+	<br>
+	<<link [[自己躲开让悉尼被浸湿|Sydney Beach Promenade Soak]]>><<npcincr Sydney lust 1>><</link>><<glust>>
+	<br>
+	<<if $exhibitionism gte 35 and ((!$worn.upper.type.includes("swim") and !$worn.upper.type.includes("naked") and !$worn.under_upper.type.includes("swim") and !$worn.under_upper.type.includes("naked")) or (!$worn.lower.type.includes("swim") and !$worn.lower.type.includes("naked") and !$worn.under_lower.type.includes("swim") and !$worn.under_lower.type.includes("naked")))>>
+		<<link [[让海浪冲刷你们|Sydney Beach Promenade Soak Both]]>><<npcincr Sydney lust 3>><<npcincr Sydney purity -2>><</link>><<ggslust>><<lspurity>><<exhibitionist3>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $weather is "overcast">>
+		云层驱散了大多数原本打算前来的游客，但依旧有人在海岸上随着海潮漫步。
+	<<else>>
+		海滩上一片欢声笑语。孩子们建起沙堡，在水中玩耍，他们的父母则沐浴在阳光下，互相聊着家常。远处有一群学生正在打排球。
+	<</if>>
+	悉尼深吸一口气，享受着咸咸的海风。你们俩朝更衣室走去。
+	<br><br>
+	<<link [[继续 (0:05)|Sydney Beach Changing Room]]>><<pass 5>><</link>>
+	<br>
+<</if>>

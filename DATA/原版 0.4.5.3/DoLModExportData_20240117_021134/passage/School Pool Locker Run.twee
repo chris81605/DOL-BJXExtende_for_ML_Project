@@ -1,0 +1,48 @@
+:: School Pool Locker Run []
+<<effects>>
+
+<<if $athleticsSuccess>>
+	你冲出储物柜，奔向出口。"站住！"你听到梅森在追赶，<span class="green">但是<<he>>光着湿漉漉的脚没法跑得太快。</span>你跑进走廊，然后躲在楼梯底下。你认为<<he>>应该没看清你的脸。
+	<br><br>
+
+	过了一会儿，礼顿从办公室里出来，差点撞到这位游泳老师。
+	<br><br>
+	<<if C.npc.Mason.pronoun is C.npc.Leighton.pronoun and (maleChance(C.npc.Mason.pronoun) is (C.npc.Mason.pronoun is "m" ? 0 : 100))>>
+		"你看到有学生跑过去了吗？" 梅森问道。
+		<br>
+		"没有，" 礼顿回道，"你把地板都弄湿了。"
+		<br>
+		"抱、抱歉，"梅森急忙跑回泳池。
+		<br><br>
+	<<else>>
+		<<if $pronoun is "m">>
+			"有没有一个学生——"梅森问道。<<He>>注意到了礼顿色眯眯的视线，意识到了什么，接着立刻用手盖住了<<his>>的泳裤，就好像<<he>>现在是裸体的一样。
+		<<else>>
+			"有没有一个学生——"梅森问道。<<He>>注意到了礼顿色眯眯的视线，意识到了什么，接着立刻用手盖住了<<his>>的泳衣，就好像<<he>>现在是裸体的一样。
+		<</if>>
+		"我，啊，很抱歉打扰你，<<print (C.npc.Leighton.pronoun is "f" ? "女士" : "先生")>>。"校长在梅森匆匆跑回泳池时色眯眯地看着<<he>>的屁股。
+		<br><br>
+	<</if>>
+	你等到礼顿消失在拐角处，才回了更衣室。
+	<br><br>
+	<<endevent>>
+	<<destination_pool>>
+<<else>>
+	你冲出储物柜，奔向出口。"站住！"你听到梅森在追赶，虽然<<he>>光着湿漉漉的脚，但还是<span class="red">跑得很快。</span><span class="red"><<He>>在出口位置堵住了你。</span>
+	<br><br>
+
+	你冲向<<him>>，但<<he>>用结实的双臂抓住了你。"抓到你了，"<<he>>喘息着，"传奇般的内裤盗贼。你想怎么为自己辩解呢？"<<ggdelinquency>><<detention 6>>
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<covered>><<He>>注意到你的着装和你们间的距离，后退了几步，红着脸挪开了视线。<<glust>><<npcincr Mason lust 5>>
+		<br><br>
+	<</if>>
+
+	<<link [[道歉|School Pool Locker Apologise]]>><<sub 1>><<detention -1>><</link>><<ldelinquency>>
+	<br>
+	<<link [[争辩|School Pool Locker Argue]]>><<def 1>><</link>>
+	<br>
+	<<link [[沉默|School Pool Locker Nothing]]>><</link>>
+	<br>
+<</if>>

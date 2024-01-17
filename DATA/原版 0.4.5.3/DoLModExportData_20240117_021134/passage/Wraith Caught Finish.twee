@@ -1,0 +1,120 @@
+:: Wraith Caught Finish []
+<<effects>>
+<<if !$wraithCount>>
+	<<if C.npc["Ivory Wraith"].lust lte 10>>
+		<<set $wraithCount to 1>><<set $wraithMax to 1>>
+	<<else>>
+		<<set $wraithCount to 0>>
+		<<set $wraithMax to 3>>
+		<<if $wraith.offspring is "dead">>
+			<<set $wraithMax++>>
+		<</if>>
+		<<if $tentacledisable is "t">>
+			<<set $wraithMax -->>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $wraith.type is "man" and $enemyhealth lte 0>>
+	<<if $location is "lake_ruin">>
+		当<<he>>踉踉跄跄地后退时，那个人震惊地低头看着你。
+		<<if $wraith.gen is "abomination">>
+			触手毫无生气地掉进黑暗的水中。
+		<<elseif $wraith.gen is "arms">>
+			<<His>>额外的触手折回来。
+		<</if>>
+		<<His>>骤然别过头去，然后消散在虚无之中，只在你脑中留下一声简短刺耳的啸叫。湖水涌流回填，封堵了水下的空间，你在湍流中挣扎着。你的耳边嗡嗡作响，似有哂笑回荡。"<span class="wraith">最后的呼吸了。</span>"
+		<br><br>
+		<<tearful>>你努力整肃以待。
+	<<else>>
+		<<person>>边后退边震惊地低头看着你。
+		<<if $wraith.gen is "abomination">>
+			触手毫无生气地落在地上，消散了，变成了粉红色的薄雾。
+		<<elseif $wraith.gen is "arms">>
+			<<His>>额外的触手折回来。
+		<</if>>
+		<<His>>的脑袋猛地一缩，随着你脑海中回荡的一声短暂的尖叫<<he>>消散在虚无之中。你的大脑嗡嗡作响，你听到了诡异的笑声。"<span class="wraith">我无处不在。你永远逃不出我的手心。</span>"
+		<br><br>
+		<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+	<</if>>
+	<<set $wraith.defeated++>>
+	<<set $wraith.timer to -30>>
+	<<set $wraith.hunt to 0>>
+	<<clotheson>>
+	<<endcombat>>
+	<<exitWraith>>
+<<elseif $enemyarousal gte $enemyarousalmax or $pain gte 100 and $willpowerpain is 0 or ($wraith.type is "tentacles" and $tentacles.active lte ($tentacles.max / 2)) or ($wraith.type is "slime" and $struggle.done gte $struggle.number)>>
+	<<set $wraithCount++>>
+	<<ejacW>>
+	<<if $wraithCount gte $wraithMax>>
+		<<kissWraith "stress">>
+		<br><br>
+		<<if $moonstate is "morning" and Time.hour gte 6>>
+			<<He>>从你身边飘走，冷笑着看着太阳升起的天空。"<span class="wraith">唉，时光飞逝。别担心，<<pcpetname "Wraith">>，我们很快就将再会。</span>"
+			<br><br>
+			<<His>>四散的光辉渐渐地暗淡，最后融化在了奔涌不息的水流里。
+			恐惧慢慢地过去了。<span class="blue"><i>你安全了——至少在下一个血月之前。</i></span>
+			<br><br>
+			<<tearful>>你站起身，希望是真的结束了。
+			<<set $wraith.hunt to 0>>
+			<<clotheson>>
+			<<endcombat>>
+			<<exitWraith>>
+			<<clearWraith>>
+		<<elseif $pain gte 100 or $stress gte $stressmax>>
+			<<set $wraith.hunt to 0>>
+			<<if $pain gte 100>>
+				<span class="red">你伤痕累累而无法反抗。</span>
+			<<else>>
+				一切太过沉重，你的精神再也无法承受。
+			<</if>>
+			人影从下往上开始迅速消散为白雾。你的嘴惊讶地张着。你什么都感觉不到。
+			<br><br>
+			雾流进你的嘴里，你的整个身体都感到非常的寒冷和僵硬。人影消失了。
+			<<if $location is "lake_ruin">>
+				你沉进水里，你感觉不到自己的手臂。
+			<<else>>
+				你站了起来，但感觉不到你的腿。
+			<</if>>
+			<br><br>
+			<<link [[继续|Wraith Snatched Intro]]>><<endWraith>><<clotheson>><<endcombat>><<wraithPossess>><</link>>
+			<br>
+		<<elseif $wraith.state is "haunt" or $wraith.offspring is "dead">>
+			"<span class="wraith">你的意志力很强大，但你早晚会向我屈服，或者迎来崩溃。</span>"
+			<br><br>
+			<<if $location is "lake_ruin">>
+				随着一阵炫目的闪光，<<he>>消失了。你感到水中仍充盈着淫猥的能量，<<his>>笑声在你的耳边回荡。
+				<br><br>
+				<<tearful>>你努力整肃以待。
+			<<else>>
+				当<<He>>消失在水流中时，<<he>>停下来向你行了一个贵族式的鞠躬礼，<<his>>的笑声回荡在你的耳际。
+				<br><br>
+				<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+			<</if>>
+			<<set $wraith.timer -= 20>>
+			<<set $wraith.hunt to 0>>
+			<<clotheson>>
+			<<endcombat>>
+			<<exitWraith>>
+		<<else>>
+			<<if $location is "lake_ruin">>
+				随着一阵炫目的闪光，<<he>>消失了。你感到水中仍充盈着淫猥的能量，<<his>>笑声在你的耳边回荡。"<span class="wraith">如此深不见底的欲望，我很喜欢你。</span>"
+				<br><br>
+				<<tearful>>你努力整肃以待。
+			<<else>>
+				当<<He>>消失在水流中时，<<he>>停下来向你行了一个贵族式的鞠躬礼，<<his>>的笑声回荡在你的耳际。"<span class="wraith">如此深不见底的欲望，我很喜欢你。</span>"
+				<br><br>
+				<<tearful>>你环顾四周，试图确定<<hes>>是不是真的离开了。
+			<</if>>
+			<<set $wraith.timer -= 20>>
+			<<set $wraith.hunt to 0>>
+			<<clotheson>>
+			<<endcombat>>
+			<<exitWraith>>
+		<</if>>
+	<<else>>
+		<<continueWraith>>
+		<br><br>
+		<<link [[继续|Wraith Caught]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

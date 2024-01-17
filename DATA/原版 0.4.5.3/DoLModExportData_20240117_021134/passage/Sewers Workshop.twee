@@ -1,0 +1,41 @@
+:: Sewers Workshop []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersworkshop">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。你被扭曲成雕塑样子的金属废料包围。工具中包含了几个表。其中一面墙上有一个向下延伸的滑槽。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if !$weekly.sewers.antiqueWatch>>
+	你听到一声微弱的滴答声。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if !$weekly.sewers.antiqueWatch>>
+		<<crimeicon "safe">><<link [[调查滴滴声|Sewers Ticking]]>><</link>>
+		<br><br>
+	<</if>>
+	<<if $nextPassageCheck is "Sewers Scrap">>
+		<<sewericon "scrap">><span class="nextLink"><<link [[充满废料的隧道 (0:05)|Sewers Scrap]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "scrap">><<link [[充满废料的隧道 (0:05)|Sewers Scrap]]>><<pass 5>><</link>>
+	<</if>>
+	<br>
+	<<getouticon "hole">><<link [[滑入滑道|Sewers Chute]]>><</link>>
+	<br><br>
+<</if>>

@@ -1,0 +1,52 @@
+:: Strip Club Private Dance Sex []
+<<if $molestationstart is 1>>
+<<set $molestationstart to 0>>
+<<controlloss>>
+<<violence 1>>
+<<neutral 1>>
+<<molested>>
+
+<<maninit>>
+<<enable_rescue>>
+	<<if $phase is 1>>
+<<set $NPCList[0].lefthand to "arms">>
+<<set $leftarm to "grappled">>
+<<set $rightarm to "grappled">>
+<<hand_gag 0 right>>
+	<<elseif $phase is 5>>
+<<set $enemyanger += 40>>
+	<</if>>
+
+<<elseif $sexstart is 1>>
+<<set $sexstart to 0>>
+<<set $consensual to 1>>
+<<neutral 1>>
+
+<<maninit>>
+<<enable_rescue>>
+<<set $enemytrust += 40>>
+	<<if $phase is 2>>
+"这最好值得我花的钱，"<<he>>说道。
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+	<<if $phase is 1>>
+"这最好值得我花的钱，"<<he>>说道。
+	<<else>>
+<<set $enemytrust += 40>>
+	<</if>>
+
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal lte $enemyarousalmax and $enemyhealth gte 0 and $alarm lte 0 and $finish is 0>>
+	<span id="next"><<link [[继续|Strip Club Private Dance Sex]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Strip Club Private Dance Sex Finish]]>><</link>></span><<nexttext>>
+<</if>>

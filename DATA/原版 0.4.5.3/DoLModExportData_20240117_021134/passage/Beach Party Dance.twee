@@ -1,0 +1,27 @@
+:: Beach Party Dance []
+<<location "beach">><<effects>>
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	你不可能在这么暴露的情况下继续跳舞！你红着脸逃离现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	你不可能在这么暴露的情况下继续跳舞！你红着脸逃离现场。
+	<br><br>
+<</if>>
+
+<<if $danceevent is "rape">>
+	<<link [[继续|Beach Party Dance Rape]]>><<set $molestationstart to 1>><</link>>
+<<elseif $danceevent is "finish">>
+	<<link [[继续|Beach Party]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[离开|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[离开|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<else>>
+		<<link [[停止|Beach Party]]>><<clotheson>><<endevent>><</link>>
+	<</if>>
+<</if>>

@@ -1,0 +1,51 @@
+:: Asylum Fake Treatment Refuse []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<set $phase to 1>>
+你拒绝跟他们走，想要离开。
+<<if $physiqueSuccess>>
+	<<person2>><<person>>试图抓住你，<span class="green">你推开了<<him>>，逃进一群病人中。</span>
+	<br><br>
+	护工们似乎不愿在其他
+	<<if $asylumstatus gte 20>>
+		<<if $asylumstatus gte 75>>
+			病人面前闹事。其他病人把你围在中间，保护着你。<<suspicion 2>>护工们
+		<<else>>
+			患者面前闹事，<<suspicion 1>>
+		<</if>>
+		皱着眉走开了。<<gsuspicion>>
+		<br><br>
+		<<link [[继续|Asylum]]>><</link>>
+	<<else>>
+		病人面前闹事，但<span class="red">其他病人都避开了你，把你暴露在他们面前。</span>
+		<<if $speech_attitude is "bratty">>
+			你想再钻回人群中，但被一名病人绊了一跤，摔了个四脚朝天。
+		<</if>>
+		<<person2>><<person>>和<<person1>><<person>>一起抓住你，把你带到一扇标有"仅限员工"的门前，
+		那里有更多待命的护工。
+		<br>
+		他们打开门，带你进入一个明亮但空无一物的房间。其中一面墙上有一面大镜子。
+		<br><br>
+		<<link [[继续|Asylum Fake Treatment]]>><</link>>
+	<</if>>
+	<br>
+<<elseif $asylumstatus gte 75>>
+	<span class="red"><<person2>><<person>>抓住你，将你扑倒在地。</span>
+	<<person>>正打算擒住你，<span class="green">突然只听一声大喊，<<he>>被人抬起来扔了出去。</span>
+	病人们聚集在你身边。<<person1>><<person>>也被吓退了。
+	<br>
+	僵持一会后，<<person>>瞪了你一眼，然后离开了。<<suspicion 2>><<gsuspicion>>
+	<br><br>
+	其他病人微笑着点点头，拍拍你的肩膀，然后就回去做自己的事了。
+	<br><br>
+	<<link [[继续|Asylum]]>><</link>>
+	<br>
+<<else>>
+	<span class="red"><<person2>><<person>>抓住你，将你扑倒在地。</span>
+	你还没来得及反应，就被<<he>>狠狠地擒住了双手，两人把你带到了一个标着"仅限员工"的门口。
+	那里有更多待命的护工。<<gpain>><<pain 2>>
+	<br>
+	他们打开门，带你进入一个明亮但空无一物的房间。其中一面墙上有一面大镜子。
+	<br><br>
+	<<link [[继续|Asylum Fake Treatment]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,106 @@
+:: Bird Tower Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+
+	<<if $wraith.nightmare is 2 and isBloodmoon()>>
+		<<sleepeffects>>
+		你梦见一个美丽的身影。祂披着白色的外衣，站在红色的月亮之下。祂向你张开双臂，做出欢迎的姿态。当你走近时，你能感受到祂的目光正穿过你的大脑。
+		<br><br>
+		祂被树木环绕，所有的树木都向内弯曲，漂浮在湖面上。周围的一切突然开始移动，你发现自己正浮在湖底的一个巨大的废墟上。你感到难以呼吸。
+		<br><br>
+		你慢慢睁开眼睛，从床上缓慢地起身。<<if $bird.activity is "sleep">>你小心翼翼地不想吵醒巨鹰。<</if>>你的耳朵嗡嗡作响。
+		<br><br>
+		<<wraithPossess "tower">>
+		<span class="nextLink"><<link [[散步|Bird Tower]]>><<rainWraith>><</link>></span>
+		<br>
+	<<else>>
+
+		<<wakingEffects $sleepHoursTotal>>
+		<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+			你睡得很安稳，但你现在有些许不舒服。
+			<br><br>
+		<<elseif $nightmares gte 1 and $controlled is 0>>
+			你<<if _wakingEffect>>梦见了<<else>>梦到自己被<</if>>一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+		<<else>>
+			<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte ($arousalmax / 10) * 9>>
+				你的睡眠被淫秽的梦境<<if _wakingEffect>>打断<<else>>所困扰<</if>>。
+				<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+				<<arousal `100 * $sleepHoursTotal`>>
+				<<if $arousal gte $arousalmax>>
+					它们把你推向了高潮的顶点。
+					<<orgasm>><<set _orgasm to true>>
+				<<else>>
+					<br><br>
+				<</if>>
+			<<elseif !_wakingEffect>>
+				你睡得很香。
+				<br><br>
+			<<else>>
+				<br><br>
+			<</if>>
+		<</if>>
+
+		<<sleepeffects>>
+
+		<<if $bird.syndrome gte 15 and $syndromebird isnot 1>>
+			<<npc "Great Hawk">>
+			你醒来了，身体感到温暖而舒适。<<beasttype>>坐在你身旁，闭着眼睛，用<<bhis>>的翅膀保护着你免受周围一切的袭扰。
+			<br><br>
+			<span class="red">这不是<<bhis>>的错。<<bHe>>只是想要一个伴侣。
+			<br>
+			你获得了斯德哥尔摩综合症：
+			<<if $monster is 1>>
+				哈比
+			<<else>>
+				巨鹰
+			<</if>>
+			特质。</span>
+			<br><br>
+			<<if $loveInterest.primary is "None">>
+				<<set $loveInterest.primary to "Great Hawk">>
+				<span class = "gold">巨鹰现在是你的爱人了！这不是你所期望的找到配偶的方式，但你依然感到振奋。</span>
+				<br><br>
+			<<else>>
+				<span class = "gold">你现在可以将巨鹰称作是你的爱人了！这不是你所期望的找到配偶的方式，但你依然感到振奋。<br>可以在"态度"菜单中改变你的爱情对象。</span>
+				<br><br>
+			<</if>>
+			<<set $syndromebird to 1>>
+			<<set $bird.syndrome to undefined>>
+			<<link [[继续|Bird Tower]]>><<endevent>><</link>>
+			<br>
+		<<elseif _sleepinterrupt>>
+			<<if $bird.state is "hunting">>
+				<<npc "Great Hawk">>
+				<<if $monster is 1>>
+					你慢慢地醒来，听到了哈比的声音。"<<Wife>>？"
+					<br><br>
+				<<else>>
+					<<beasttype>>轻轻地推醒了你。
+				<</if>>
+				<<bird_hunt_return>>
+			<<else>>
+				<<npc "Great Hawk">>
+				<<if $monster is 1>>
+					你感受到一对巨大的温暖的翅膀环抱着你。是<<beasttype>>。
+				<<else>>
+					<<beasttype>>拍打着翅膀，试图骑上你。
+				<</if>>
+				<br><br>
+
+				<<link [[顺其自然|Bird Tower Sleep Sex]]>><<set $sexstart to 1>><<transform bird 1>><<npcincr "Great Hawk" love 1>><<npcincr "Great Hawk" dom 1>><<bird_stockholm 1>><</link>><<deviant1>><<gbirdstockholm>><<glove>><<gdom>>
+				<br>
+				<<link [[推开|Bird Tower Sleep Push]]>><<npcincr "Great Hawk" dom -1>><<def 1>><</link>><<ldom>>
+				<br>
+			<</if>>
+		<<else>>
+			<br><br>
+
+			<<link [[从巢里爬出来|Bird Tower]]>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,261 @@
+:: Widgets Dance Actions [widget]
+<<widget "danceactions">>
+	<<exposure>>
+	<<if $danceevent is 0>>
+		<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1 and ($corruptionDancing is undefined or $dancelocation isnot "brothel")>>
+			<!--
+				No dancing if:
+				Under 75 exhib, fully exposed, not forced, (not at brothel or not corrupt dance)
+			-->
+		<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and ($corruptionDancing is undefined or $dancelocation isnot "brothel") and !$worn.under_lower.type.includes("dance")>>
+			<!--
+				No dancing if:
+				Under 35 exhib, half exposed, not forced,
+				not wearing dance clothes, (not at brothel or not corrupt Dancing)
+			-->
+		<<else>>
+			<!-- Generate "dance near" boxes -->
+			<<if $audience gte 1>>
+				<<for $_audienceMemberIndex to 0; $_audienceMemberIndex lt $enemyno; $_audienceMemberIndex++>> <!-- For each audience member 1-6 -->
+					<<personselect $_audienceMemberIndex>>
+					<div class="dance_box"><label>
+						<<if $NPCList[$_audienceMemberIndex].masturbating gte 1>>
+							<<if $NPCList[$_audienceMemberIndex].traits.includes("relaxed") and _danceaction is "sophisticated">>
+								<span class="pink">那<<person>>自慰着。</span>
+							<<elseif $NPCList[$_audienceMemberIndex].traits.includes("sociable") and _danceaction is "cool">>
+								<span class="pink">那<<person>>自慰着。</span>
+							<<elseif $NPCList[$_audienceMemberIndex].traits.includes("brooding") and _danceaction is "sensual">>
+								<span class="pink">那<<person>>自慰着。</span>
+							<<elseif $NPCList[$_audienceMemberIndex].traits.includes("lecher") and _danceaction is "sexual">>
+								<span class="pink">那<<person>>自慰着。</span>
+							<<else>>
+								那<<person>>自慰着。
+							<</if>>
+							<<dance_npc_masturbation_chance $_audienceMemberIndex>>
+						<<else>>
+							那<<person>>在看着。
+						<</if>>
+						<<capture $_audienceMemberIndex>>
+							| 靠近<<him>>跳舞。<<radiobutton "$dance_place" $_audienceMemberIndex autocheck>>
+						<</capture>>
+					</label></div>
+					<br>
+				<</for>>
+				<br>
+			<</if>>
+			<!-- Generate general dance actions -->
+			<<if $danceactiondefault is "cool">>
+				<label>帅气的舞步（0：01）<<radiobutton "$danceaction" "cool" checked>></label> |
+			<<elseif $danceactiondefault is 0>>
+				<label>帅气的舞步（0：01）<<radiobutton "$danceaction" "cool" checked>></label> |
+			<<else>>
+				<label>帅气的舞步（0：01）<<radiobutton "$danceaction" "cool">></label> |
+			<</if>>
+			<br>
+			<<if $danceactiondefault is "sophisticated">>
+				<label>熟练的舞步（0：01）<<radiobutton "$danceaction" "sophisticated" checked>></label> |
+			<<else>>
+				<label>熟练的舞步（0：01）<<radiobutton "$danceaction" "sophisticated">></label> |
+			<</if>>
+			<br>
+			<<if $danceactiondefault is "seductive">>
+				<label><span class="meek">诱人的舞步</span> (0: 01)<<combatexhibitionist1>> <<radiobutton "$danceaction" "seductive" checked>></label> |
+			<<else>>
+				<label><span class="meek">诱人的舞步</span> (0: 01) <<combatexhibitionist1>> <<radiobutton "$danceaction" "seductive">></label> |
+			<</if>>
+			<br>
+			<<if $exhibitionism gte 15>>
+				<<if $danceactiondefault is "sexual">>
+					<label><span class="sub">带性暗示的舞步</span> （0：01）<<combatexhibitionist2>> <<radiobutton "$danceaction" "sexual" checked>></label> |
+				<<else>>
+					<label><span class="sub">带性暗示的舞步</span> （0：01） <<combatexhibitionist2>> <<radiobutton "$danceaction" "sexual">></label> |
+				<</if>>
+				<br>
+			<</if>>
+			<<goocount>>
+			<<if $cat gte 6 and $liquidoutsidecount gte 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
+				<<if $danceactiondefault is "groom">>
+					<label><span class="sub">舔毛</span> (0:01) <span class="blue">猫</span><<radiobutton "$danceaction" "groom" checked>></label> |
+				<<else>>
+					<label><span class="sub">擦洗</span> (0:01) <span class="blue">猫</span> <<radiobutton "$danceaction" "groom">></label> |
+				<</if>>
+			<</if>>
+			<!-- Generate stripping dance actions -->
+			<<dancestripactions>>
+			<br><br>
+			<<link [[继续|$passage]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $danceevent is "vip">>
+		<<link [[顺从|$passage]]>><<set $danceaction to "vipallow">><</link>>
+		<br>
+		<<link [[推开|$passage]]>><<set $danceaction to "vippush">><</link>>
+		<br>
+	<<elseif $danceevent is "darryl">>
+		<<link [[安抚|$passage]]>><<set $danceaction to "darrylreassure">><<npcincr Darryl love 1>><</link>><<glove>>
+		<br>
+		<<link [[把达里尔拉上舞台|$passage]]>><<set $danceaction to "darrylpull">><</link>>
+		<br>
+	<<elseif $danceevent is "briar">>
+		<<link [[对布莱尔眨眨眼|$passage]]>><<set $danceaction to "briarwink">><<npcincr Briar love 1>><</link>><<glove>>
+		<br>
+		<<if $promiscuity gte 35>>
+			<<link [[调戏布莱尔|$passage]]>><<set $danceaction to "briarseduce">><</link>><<promiscuous3>>
+			<br>
+		<<else>>
+			<span class="blue">调戏布莱尔的想法突然出现在你的脑海里，然而你还不够淫乱。</span>
+			<br>
+		<</if>>
+	<<elseif $danceevent is "strippertrouble">>
+		<<link [[帮助他们|$passage]]>><<set $danceaction to "stripperhelp">><</link>>
+		<br>
+		<<link [[无视|$passage]]>><<set $danceaction to "stripperignore">><</link>>
+		<br>
+	<<elseif $danceevent is "note">>
+		<<link [[处理|$passage]]>><<set $danceaction to "noteapproach">><</link>>
+		<br>
+		<<link [[无视|$passage]]>><<set $danceaction to "noteignore">><</link>>
+		<br>
+	<<elseif $danceevent is "rape">>
+	    /* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧地躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+            <br>
+        <</if>>
+        /* 北极星 */
+	<<elseif $danceevent is "molest">>
+		<<link [[让他们摸一下|$passage]]>><<set $danceaction to "cop">><</link>>
+		<br>
+		<<if $dancelocation is "brothel" and $corruptionDancing isnot undefined>>
+			你耳朵里的史莱姆不让你结束表演。
+		<<elseif $dancelocation isnot "underground" and $dancelocation isnot "smuggler_forced">>
+			<<link [["太危险了，是时候结束表演了"|$passage]]>><<set $danceaction to "finish">><</link>>
+			<br>
+		<</if>>
+	<<elseif $danceevent is "skirtstrip">>
+	    /* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "skirtstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "skirtsurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "overlowerstrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "overlowerstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "overlowersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "lowerstrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "lowerstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "lowersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "overupperstrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "overupperstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "overuppersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "upperstrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "upperstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "uppersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "understrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "understruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "undersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "underupperstrip">>
+		/* 北极星模组 */
+	    <<if $options.bjx_animal and $cat gte 6>>
+            <<link [[灵巧闪身躲开|$passage]]>><<set $danceevent to 0>><</link>><<cat>>
+		    <br>
+		<</if>>
+		/* 北极星 */
+		<<link [[争抢你的衣服|$passage]]>><<set $danceaction to "underupperstruggle">><</link>>
+		<br>
+		<<link [[交出你的衣服|$passage]]>><<set $danceaction to "underuppersurrender">><</link>>
+		<br>
+	<<elseif $danceevent is "private" and $dancelocation isnot "underground">>
+		<<link [[无视|$passage]]>><<set $danceaction to "privaterefuse">><</link>>
+		<br>
+	<<elseif $danceevent is "leighton">>
+		<<link [[无视|$passage]]>><<set $weekly.leightonDanceRefused to true>><</link>>
+		<br>
+	<<elseif $danceevent is "robin">>
+		<<link [[无视|$passage]]>><<set $danceaction to "robinignore">><<npcincr Robin love -5>><<npcincr Robin dom -20>><</link>>
+		<br>
+	<<elseif $danceevent is "drink">>
+		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+			<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+			<br>
+		<<else>>
+			<<link [[喝|$passage]]>><<set $danceaction to "drink">><</link>><<dancedifficulty 1 `800 + $drunk`>>
+			<br>
+			<<link [[小心翼翼地喝|$passage]]>><<set $danceaction to "drink_careful">><</link>>
+			<br>
+		<</if>>
+		<<link [[无视|$passage]]>><<set $danceaction to "drink_ignore">><</link>>
+		<br>
+	<<elseif $danceevent is "light">>
+		<<if $exhibitionism gte 75>>
+			<<link [[炫耀|$passage]]>><<set $danceaction to "light_flaunt">><</link>><<ginterest>>
+			<br>
+		<</if>>
+		<<if $forceddance is 1>>
+			<<link [[遮住你自己|$passage]]>><<set $danceaction to "light_cover">><</link>>
+			<br>
+		<</if>>
+	<<elseif $danceevent is "corruptionDance">>
+		<<if $promiscuity gte 75 and $submissive gte 1900>>
+			<<link [[心甘情愿地服从 |$passage]]>>
+				<<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>>
+				<<set $corruptionResult to "submit">><<set $danceaction to "corruptionResult">>
+			<</link>><<promiscuous5>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+			<br>
+		<</if>>
+		<<link [[服从|$passage]]>>
+			<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>>
+			<<set $corruptionResult to "obey">><<set $danceaction to "corruptionResult">>
+		<</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[违抗|$passage]]>>
+			<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>>
+			<<set $corruptionResult to "defy">><<set $danceaction to "corruptionResult">>
+		<</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<</if>>
+<</widget>>

@@ -1,0 +1,28 @@
+:: Pirate Railing Dive Day []
+<<effects>>
+
+<<water>>
+你爬上了栏杆，一把跳入了海中。
+<br><br>
+
+<<npc Zephyr>><<person1>>
+你还没浮出水面就听到了喊叫声。泽菲尔靠在栏杆上。“你在水里干什么？”泽菲尔问。“你们两个，去跟着<<phim>>。”
+<br><br>
+<<endevent>>
+<<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<person1>>
+一位<<person>>跟<<person2>><<person>>跟着你跳下了水。
+
+你拼命地游，偶尔回头看看后方。
+<<if $swimmingSuccess>>
+	<span class="green">你逐渐拉开了与他们的距离，不久便在浪潮间丢失了他们的行踪。</span>
+	<br><br>
+	海盗船返过头来寻找你，但船转向需要在海面上画一个长弧。你随意朝着一个方向游，让船几乎没有找到你的可能性。
+	<br><br>
+	<<link [[继续|Sea]]>><<endevent>><<set $sea to 80>><</link>>
+	<br>
+<<else>>
+	然而，<span class="red">他们很快就追上了你，</span>将你的手臂扭到背后。
+	<br><br>
+	<<link [[继续|Pirate Railing Dive Caught]]>><</link>>
+	<br>
+<</if>>

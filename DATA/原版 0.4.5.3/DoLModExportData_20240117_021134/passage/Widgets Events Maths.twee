@@ -1,0 +1,600 @@
+:: Widgets Events Maths [widget]
+<<widget "eventsmaths">>
+	<<cleareventpool>>
+
+	<<if  (($wolfgirl gte 4 and $transformationParts.wolf.ears isnot "hidden") or ($cat gte 4 and $transformationParts.cat.ears isnot "hidden") or ($fox gte 4 and $transformationParts.fox.ears isnot "hidden"))>>
+		<<addinlineevent "mathsTFears">>
+			<<npc River>><<person1>>瑞沃在班级里踱来踱去，然后在你桌前停下了脚步。
+			<<if $riverbite isnot 1>>
+				<<set $riverbite to 1>>
+				"那个头巾是违反学校规定的，"<<he>>说，抓住你的一只<<if $wolfgirl gte 4>>狼<<elseif $fox gte 4>>狐狸<<else>>猫<</if>>耳朵。
+			<<else>>
+				"你还戴着那个愚蠢的发带？"<<he>>说道。"我想我说得很清楚了。"<<He>>抓了一只你的<<if $wolfgirl gte 4>>狼<<elseif $fox gte 4>>狐狸<<else>>猫<</if>>耳朵。
+			<</if>>
+			<<He>>扯得你很痛。<<gpain>><<gstress>><<pain 2>><<stress 1>>
+			<br><br>
+
+			<<link [[咬|Maths Event Bite]]>><<npcincr River dom -1>><<npcincr River love -1>><<detention 6>><<stress -12>><<trauma -6>><<def 3>><</link>><<ggdelinquency>><<ltrauma>><<lstress>>
+			<br>
+			<<link [[忍耐|Maths Event Endure]]>><<npcincr River dom 1>><<stress 6>><<trauma 6>><<pain 5>><<sub 2>><</link>><<gpain>><<gtrauma>><<gstress>>
+			<br>
+		<</addinlineevent>>
+	<</if>>
+	<<if $fame.exhibitionism gte 500 and $delinquency gte 500 and $mathrulerin is 0 and $worn.genitals.name isnot "chastity belt">>
+		<<addinlineevent "mathsTheRulerScene" 0>>
+			<!-- Note: This event is effectively in quarantine and cannot be reached in-game. Don't make it reachable and don't edit the event or its associated passages. -->
+			<<npc River>><<person1>>
+			你听到瑞沃的手机正在嗡嗡作响，<<he>>没有去看手机，只是说到<<he>>需要离开教室几分钟，一会就会回来。
+			<br>
+			<<He>>在离开的时候留下来一些有关方程的题目来让学生先行解答。
+			<br><br>
+			当你再也听不到<<his>>的脚步声后，一个女孩拿起一把尺子站了起来。
+			<br>
+			"嘿，你。" 她望着你说道。
+			<br>
+			"我听说你喜欢展示自己的身体，那让我们现在来玩个小游戏，怎么样？"她继续说道："当然，是在全班同学面前。"
+			<br>
+			"我打赌你可以将这把尺子插入你的<<if $player.gender_appearance is "m">>菊穴<<else>>小穴<</if>>。如果你这样做的话，我会给你 £40。"
+			<br><br>
+
+			<<link [[接受打赌|Maths Ruler]]>><<set $phase to 1>><<status 10>><<if $player.gender_appearance is "m">><<arousal 1500 "anus">><<else>><<arousal 1500 "pussy">><</if>><<set $mathrulerin to 1>><</link>><<exhibitionist5>><<fameexhibitionism 3>><<garousal>>
+			<br>
+			<<link [[拒绝|Maths Ruler]]>><<stress 2>><<set $phase to 2>><<status -10>><<set $mathrulerin to 1>><</link>><<gstress>>
+			<br>
+		<</addinlineevent>>
+	<</if>>
+
+	<<if $whitneymaths is "active" or $whitneymaths is "seat">>
+		<<addinlineevent "mathsWhitneyShirt">>
+			<<npc Whitney>><<person1>>
+			"太热了，"惠特尼自顾自地说着，同时将衬衫扯过头顶脱了下来，
+			<<if $pronoun is "f">>
+				露出遮盖$NPCList[0].breastsdesc的白色胸罩。
+			<<else>>
+				露出赤裸的胸部。
+			<</if>>
+			"好多了。" 有人咯咯笑了起来。
+			<br><br>
+
+			<<if !$worn.upper.type.includes("naked") and $whitneymaths is "seat">>
+				<<He>>转身面向你的同时抓住了你$worn.upper.cn_name_cap的下摆。"让我来帮你，"<<he>>说着的同时试图把它拉起来。
+				<br><br>
+
+				<<if $player.gender isnot "m" or $player.gender_appearance isnot "m">>
+					你的脸涨得通红。<<if $worn.under_upper.type.includes("naked")>>因为你的下面没有穿任何东西！<</if>>
+					<br><br>
+
+					<<if !$worn.under_upper.type.includes("naked") or $exhibitionism gte 15>>
+						<<link [[允许|Maths Whitney Shirt Allow]]>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><<npcincr Whitney lust 1>><<detention 4>><</link>><<exhibitionist `($worn.under_upper.type.includes("naked") ? 3 : 1)`>><<gdelinquency>><<glove>><<gdom>><<glust>>
+						<br>
+					<</if>>
+				<<else>>
+					<<link [[允许|Maths Whitney Shirt Allow]]>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><<npcincr Whitney lust 1>><<detention 4>><</link>><<gdelinquency>><<glove>><<gdom>><<glust>>
+					<br>
+				<</if>>
+				<<link [[抵抗|Maths Whitney Shirt Resist]]>><<stress 6>><</link>><<gstress>>
+				<br>
+				<<if $promiscuity gte 15>>
+					<<set $skulduggerydifficulty to 300>>
+					<<link [[`进一步暴露${$NPCList[0].pronouns.him}`|Maths Whitney Shirt Expose]]>><<def 1>><<npcincr Whitney lust 5>><<npcincr Whitney dom -1>><</link>><<skulduggerydifficulty>><<promiscuous2>><<ldom>><<glust>>
+					<br>
+				<</if>>
+			<<else>>
+				<<npc River 2>><<person2>>
+				瑞沃转身查看笑声来源，看到惠特尼没穿校服衬衫，<<he>>差点晕倒，只能靠讲台稳住身子。"穿上你的衬衫，"<<he>>费力说道，"给我出、出去！"
+				<br><br>
+
+				惠特尼翻了个白眼，但还是站了起来。<<person1>><<he>>没选择穿衬衫，而是把衬衫挂在肩上，大摇大摆地离开了教室。
+				<br><br>
+
+				<<set $whitneymaths to "sent">>
+
+				<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<</addinlineevent>>
+	<</if>>
+	<<if $whitneymaths is "active">>
+		<<addinlineevent "mathsWhitneyPen">>
+			<<npc Whitney>><<person1>><<generateyv2>>
+			一支笔砸到了你的头上，是惠特尼。<<He>>虽然正躺在自己的座位上，但是<<his>>正在从邻近的<<person2>><<persons>>的铅笔盒里翻找更多的文具来扔向你。那个<<person>>太胆小了，不敢阻止<<person1>><<him>>。
+			<br><br>
+
+			<<link [[容忍|Maths Whitney Tolerate]]>><<stress 6>><</link>><<gstress>>
+			<br>
+			<<link [[报告老师|Maths Whitney River]]>><<npcincr Whitney love -1>><<status -10>><</link>><<lcool>><<llove>>
+			<br>
+			<<link [[报复|Maths Whitney Retaliate]]>><<def 1>><<detention 1>><<trauma -6>><</link>><<gdelinquency>><<ltrauma>>
+			<br>
+		<</addinlineevent>><<addinlineevent "mathsWhitneyProtractor">>
+			瑞沃正在黑板上板书方程式，而惠特尼则乘机强迫你身后的那个<<generatey1>><<person1>><<person>>起开，在<<his>>被惠特尼赶跑之后，惠特尼坐到了这空出来的位置上。
+			<br><br>
+
+			<<endevent>><<npc Whitney>><<person1>>
+
+			有什么东西正在戳你的腰。你转过头看去，惠特尼虽然脸上一副天真无邪的笑容坐在后面，但<<his>>手上的圆规证明了就是这家伙干的好事。你回过头来的时候，<<he>>又戳了你一下。<<gpain>><<pain 6>>
+			<br><br>
+
+			<<link [[默默忍受|Maths Whitney Protractor Endure]]>><<stress 6>><<pain 6>><</link>><<gstress>><<gpain>>
+			<br>
+			<<link [[报告老师|Maths Whitney Protractor Tell]]>><<status -10>><<mathsskill 6>><<npcincr Whitney love -1>><</link>><<llove>><<lcool>><<gmaths>>
+			<br>
+			<<link [[报复|Maths Whitney Protractor Retaliate]]>><<detention 4>><<status 1>><<npcincr Whitney dom -1>><</link>><<gdelinquency>><<ldom>><<gcool>>
+			<br>
+		<</addinlineevent>><<addinlineevent "mathsWhitneyPaperBall">>
+			瑞沃布置了一些方程式给全班求解后，便开始了处理文书工作。
+			<br><br>
+
+			<<npc Whitney>><<person1>>
+			一个皱巴巴的纸团从你头上弹开。你转身看去，是惠特尼和其他几个坏学生。当看到你转头时，这些家伙笑了起来。
+			<br><br>
+
+			<<link [[阅读纸条|Maths Whitney Read]]>><</link>>
+			<br>
+			<<link [[把它扔回去|Maths Whitney Throw]]>><<def 1>><</link>>
+			<br>
+			<<link [[把它扔进垃圾箱|Maths Whitney Bin]]>><</link>>
+			<br>
+		<</addinlineevent>>
+	<<elseif $whitneymaths is "seat">>
+		<<addinlineevent "mathsWhitneyOral">>
+			<<npc Whitney>><<person1>>
+			惠特尼靠得很近，<<his>>在说话的时候，<<he>>呼出的气时刻刺挠着你的耳朵。
+			"我的<<if $NPCName[$NPCNameList.indexOf("Whitney")].penis isnot "none">>肉棒<<else>>小穴<</if>>需要你来侍奉，"<<he>>低声说道。"做一个好<<girlfriend>>，钻到桌子底下去。"
+			<br><br>
+
+			<<link [[勉强服从|Maths Whitney Oral]]>><<set $phase to 0>><<trauma 6>><<stress 6>><<npcincr Whitney dom 1>><<sub 1>><<set $molestationstart to 1>><</link>><<gtrauma>><<gstress>><<gdom>>
+			<br>
+			<<if $promiscuity gte 55>>
+				<<link [[热情服从|Maths Whitney Oral]]>><<set $phase to 1>><<npcincr Whitney dom 1>><<sub 1>><<set $sexstart to 1>><</link>><<promiscuous4>><<gdom>>
+				<br>
+			<</if>>
+			<<if $whitneyromance is 1>>
+				<<link [[欣然服从|Maths Whitney Oral]]>><<set $phase to 2>><<trauma 6>><<npcincr Whitney dom 1>><<npcincr Whitney love 1>><<sub 1>><<set $sexstart to 1>><</link>><<promiscuous1>><<gtrauma>><<glove>><<gdom>>
+				<br>
+			<</if>>
+			<<link [[拒绝|Maths Whitney Oral Refuse]]>><<stress 6>><<npcincr Whitney dom -1>><</link>><<gstress>><<ldom>>
+		<</addinlineevent>><<addinlineevent "mathsWhitneyJealous">>
+			你听到教室外面传来了叫喊声，瑞沃离开教室前去调查原因。
+			<br><br>
+
+			<<npc Whitney>><<generatey2>>
+			"你是在盯着我的<<girlfriend>>么？" 惠特尼在你身边说道。<<person1>><<Hes>>瞪向你身后的那个<<person2>><<person>>。
+			<br>
+			"不、不……我没有……"<<person>>回答道。但惠特尼很明显没有被说服。<<person1>><<He>>一下子站了起来，冲到<<person2>><<persons>>的桌子前，然后一把揪住<<him>>的衣领。
+			<br>
+			"<<pShes>>是我的，你这<<person2>><<if $pronoun is "m">>变态<<else>>骚货<</if>>，"<<person1>><<he>>嘶吼道，"现在，我将确保你能牢牢记住这点。"
+			<br><br>
+
+			<<person2>><<person>>看起来有些<<print either("惊恐","蔑视","愤怒","害怕","疑惑")>>。
+			<br><br>
+
+			<<link [[看戏|Maths Whitney Watch]]>><<npcincr Whitney dom 1>><</link>><<gdom>>
+			<br>
+			<<link [[干涉|Maths Whitney Intervene]]>><<famegood 10>><<npcincr Whitney dom -1>><<trauma -6>><</link>><<ldom>><<ltrauma>>
+			<br>
+			<<link [[怂恿|Maths Whitney Encourage]]>><<npcincr Whitney love 1>><<detention 3>><</link>><<glove>><<gdelinquency>>
+			<br>
+		<</addinlineevent>><<addinlineevent "mathsWhitneyMakeout">>
+			瑞沃布置了一些方程式给全班求解后，便开始了处理文书工作。
+			<br><br>
+
+			<<npc Whitney>><<person1>>
+			惠特尼百无聊赖地靠在座位上，感到无聊的<<his>>将手伸向你的脑袋，然后便用手指捻动起了你的头发。
+			<br><br>
+
+			<<link [[亲热|Maths Whitney Makeout]]>><<npcincr Whitney love 1>><</link>><<glove>>
+			<br>
+			<<link [[继续认真上课|Maths Whitney Work]]>><<mathsskill 1>><</link>><<gmaths>>
+			<br>
+		<</addinlineevent>>
+		<<if $arousal gte 8000 and $daily.whitney.mathsGrope isnot 1>>
+			<<addinlineevent "mathsWhitneyGrope" 5>>
+				<<set $daily.whitney.mathsGrope to 1>>
+				<<npc "Whitney" 1>><<npc "River" 2>>
+				瑞沃开始解释几个数学概念，并在白板上演示等式，<<person2>><<he>>也这样做。
+				<br><br>
+
+				惠特尼靠在你身边，而瑞沃转过身去。"嘿，荡妇，你看起来有点压抑，"<<person1>><<he>>低语。
+				<<He>>隔着你的$worn.lower.cn_name_cap摸索着。"我赌我能让你当着整班人的面叫出声。"<<arousal 300 "genitals">><<garousal>>
+				<br><br>
+
+				<<link [[顺其自然|Maths Whitney Grope Allow]]>><</link>><<gggarousal>>
+				<br>
+				<<link [[否认|Maths Whitney Grope Deny]]>><<stress 6>><<npcincr Whitney love -1>><</link>><<gstress>><<llove>>
+				<br>
+				<<if $speech_attitude is "bratty">>
+					<<link [[报复|Maths Whitney Grope Retaliate]]>><<npcincr Whitney dom -1>><</link>><<ldom>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 600>>
+					<br>
+				<</if>>
+			<</addinlineevent>>
+		<</if>>
+	<<else>>
+		<<addinlineevent "mathsEvent1">>
+			瑞沃布置了一些方程式给全班求解后，便开始了处理文书工作。
+			<br><br>
+
+			少数坏学生利用这个机会骚扰你。
+			<br><br>
+
+			<<link [[告诉他们停下来|Maths Event1]]>><<detention 2>><</link>><<gdelinquency>>
+			<br>
+			<<link [[忍受|Maths Event1]]>><<stress 2>><<set $phase to 1>><</link>><<gstress>>
+			<br>
+		<</addinlineevent>>
+	<</if>>
+
+	<<addinlineevent "mathsLowerLiftTease">>
+		<<npc River>><<generates2>>
+		瑞沃让你到讲台旁的白板上解方程。
+
+		<<set $_skirt to setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt>>
+		一个<<person2>><<person>>趁你在白板上解题，伸出尺子<<print $_skirt is 1 ? "掀起了你的裙子" : "猛地扯下了你的$worn.lower.cn_name_cap">>！
+		<br><br>
+		<<if $worn.under_lower.type.includes("naked")>>
+			当他们看到你没有穿内裤时，全班爆发出一阵欢呼。
+			<<if $_skirt is 1 and $panicattacks gte 1 and random(1, 2) is 2 and $controlled is 0>>
+				你需要回击，把尺子打掉，<span class="red">但你的身体在这样羞愧的情况下僵住了。</span>
+				当你想知道班上会有什么可怕的事情等着你时，你的思绪开始模糊起来了。
+				<br><br>
+				你听到他们喋喋不休，但你无法理解这些话，只听到手机摄像头对准拍摄你的<<bottom>>和<<if $player.penisExist>>变硬的<</if>><<genitals>>的咔嚓声。
+				<br><br>
+
+				瑞沃转过身来，<<person1>><<his>>看起来有些生气。但是那个家伙抢在瑞沃发火之前喊了出来："老师，<<pshes>>没有穿内裤！"
+				<br><br>
+
+				当瑞沃看向你时，全班开始哄堂大笑。瑞沃没有说话，只是静静地靠在讲台边上。
+				直到笑声逐渐变小之后，瑞沃才开口道："你违反了校规，现在把它弄好并回到你的座位上去，快点！"
+				<br><br>
+				瑞沃的怒吼使你从那种尴尬僵麻的状态中回过神来，你稍微整理了一下你的$worn.lower.cn_name_cap，然后乖乖地回到了座位。
+				<<gtrauma>><<gstress>><<gdelinquency>><<gcool>><<trauma 6>><<stress 6>><<detention 4>><<status 1>>
+			<<else>>
+				你飞快地将尺子拍掉，强烈的羞耻感涌上心头，你满脸通红地快速地整理了一下你的$worn.lower.cn_name_cap。瑞沃转过身来，想要看看是什么引起了骚动。
+				当瑞沃看到拿着尺子的<<person>>后，<<person1>><<he>>看起来有些生气。但那个家伙却抢在瑞沃发火之前喊了出来："但是，老师，<<pshes>>没有穿内裤！"
+				<br><br>
+
+				全班又爆发出一阵喝彩声，瑞沃看向你问道："这是真的吗？你知道的，这是违反校规。去坐下吧。"
+				<<gtrauma>><<gstress>><<gdelinquency>><<gcool>><<trauma 2>><<stress `($_skirt is 1 ? 2 : 4)`>><<detention 2>><<status 1>>
+
+				<<if $whitneymaths is "active" or $whitneymaths is "seat">>
+					<br><br>
+
+					惠特尼得意地笑着。
+				<</if>>
+			<</if>>
+		<<else>>
+			你推开尺子，整理好你的$worn.lower.cn_name_cap，但还是没来得及，全班都看到了你的<<print ($worn.under_lower.anus_exposed is 1 ? "光屁股" : $worn.under_lower.cn_name_cap)>>。
+			<<gtrauma>><<gstress>><<trauma 1>><<stress `($_skirt is 1 ? 1 : 2)`>>
+
+			<<if $whitneymaths is "active" and ($whitneypantiescheck is 1 or ($whitneypantiescheck is 2 and $worn.under_lower.gender isnot "f"))>>
+				<br><br>
+
+				惠特尼瞪了你一眼，但并没有说什么。这还没有结束。
+				<<set $whitneypantiesmaths to "seen">>
+			<</if>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+	<</addinlineevent>><<addinlineevent "mathsMessageDelivery">>
+		<<rng>>
+		<<npc River>><<person1>>
+
+		瑞沃站在你的桌子旁边说道："我需要你帮我把一封信交给校长。"<<He>>在说着的同时递给你一个密封的信封。
+		<br><br>
+
+		你离开了教室。
+		<br><br>
+		<<endevent>>
+		<<link [[打开信封|Maths Note]]>><<detention 6>><<set $phase to 1>><</link>><<ggdelinquency>>
+		<br>
+		<<link [[只要交信就行了|Maths Note]]>><</link>>
+		<br>
+	<</addinlineevent>><<addinlineevent "mathsPartnerStudy">>
+		<<rng>>
+		<<if currentSkillValue('maths') lte 499>>
+			<<generates1>><<person1>>
+			瑞沃安排了一个勤奋的<<person>>来帮助你学习。
+			<<if $cool gte (($coolmax / 5) * 2)>>
+				<<He>>很乐意提供帮助，你对教材的理解也会加深。<<lstress>><<stress -4>><<gmaths>><<mathsskill>>
+			<<elseif $cool gte ($coolmax / 5)>>
+				<<He>>似乎对这一安排并不特别满意，但你确实学到了一些东西。<<gmaths>><<mathsskill>>
+			<<else>>
+				但<<He>>显然很不好意思和你在一起;<<he>>从不看你，也很少说话。你没有学到任何东西。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<generates1>>
+			由于你在这门课上的优异成绩，瑞沃让你和一个成绩不太好的<<person1>><<person>>坐在一起，并让你多帮帮对方。
+			<<if $rng gt 40>>
+				那个<<person>>对这种安排一点也不满意，在你试图向其提供帮助不过几分钟后，你感到一只手在摸你的屁股。
+				<br><br>
+
+				<<if $eventsmaths4 is 1 and $rng gte 71>>
+					<<link [[忽视|Maths Event3]]>><<trauma 2>><<stress 2>><<arousal 200 "bottom">><<set $phase to 3>><</link>><<gtrauma>><<gstress>><<garousal>>
+				<<else>>
+					<<set $eventsmaths4 to 1>>
+					<<link [[忽视|Maths Event3]]>><<trauma 2>><<stress 2>><<arousal 200 "bottom">><<set $phase to 2>><</link>><<gtrauma>><<gstress>><<garousal>>
+				<</if>>
+				<br>
+				<<link [[挪开|Maths Event3]]>><<detention 2>><<set $phase to 1>><</link>><<gdelinquency>>
+				<br>
+				<<if $whitneymaths is "seat">>
+					<<link [[告诉惠特尼|Maths Event3 Whitney]]>><<npcincr Whitney dom 1>><</link>><<gdom "Whitney">>
+					<br>
+				<</if>>
+			<<else>>
+				那个<<person>>对这个安排一点也不满意，但其听了你的话，没有发生任何意外。
+				<br><br>
+
+				<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</addinlineevent>><<addinlineevent "mathsPenThrow">>
+		<<npc River>><<person1>><<generates2>>
+		当瑞沃背过去的时候，有人朝<<his>>的背上扔了一支笔。<<He>>停止了讲课并慢慢地转过身来。<<person2>>坐在你后面的那个<<person>>指着你。"<<pShe>>丢的！"
+		<br><br>
+		<<if $delinquency gte 400>>
+			<<if $whitneymaths is "seat">>
+				瑞沃看着你。"我就知道会是你，在外面等着。" 你知道争辩是没有用的，所以你站起身准备离开。<<gstress>><<stress 2>>
+				<br><br>
+
+				惠特尼站在你身边。"坐下。"瑞沃说道，但惠特尼没有理会<<person1>><<him>>，然后其直接离开了教室。
+			<<else>>
+				瑞沃看着你。"我就知道会是你，在外面等着。" 你知道争辩是没有用的，所以你站起身离开。<<gstress>><<stress 2>>
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Maths Event4]]>><<endevent>><</link>>
+		<<else>>
+			瑞沃没有被<<person2>><<person>>所迷惑，然后叫那几个家伙出去。
+			<br><br>
+
+			<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+		<</if>>
+	<</addinlineevent>>
+
+	<<runeventpool>>
+<</widget>>
+
+<<widget "eventsmathssafe">>
+	<<if $mathsproject is "none" and Time.days gte 23 and $scienceprojectdays isnot (21 + (7 - Time.weekDay))>>
+		<<set $mathsproject to "ongoing">><<set $mathsprojectdays to (21 + (7 - Time.weekDay))>>
+		<<mathsprojectstart>>
+		<<npc River>><<person1>><<generatey2>>"大家听着，"瑞沃大声说着，好像是要宣布什么东西。<<He>>敲了敲讲台，"坐在后面的也都听好——我今天为你们准备了一些特别的。现在，我们要为你们这个年级的学生举行一次年度比赛。" 这句话瞬间就吸引了前面那个<<person2>><<person>>的注意，<<He>>一下子把自己的腰挺了起来。
+		<<if $whitneymaths is "active" or $whitneymaths is "seat">>
+			惠特尼对此不那么感兴趣，<<nnpc_his "Whitney">>正躺在自己的座位上，脸被一本打开的教科书盖住。
+		<</if>>
+		<br><br>
+
+		"你们有几个星期的时间来准备竞赛，"瑞沃继续说着，同时<<person1>><<he>>开始分发小册子。"谁能提供最精妙的答案，谁就能够胜出。我们并不指望有人能找到正确答案，毕竟这并不是重点。"<<He>>将一本黑白的小册子放在你面前。你打开它，发现它有些难以理解。
+		<br><br>
+
+		<<person2>><<persons>>将手举了起来，"你有什么问题么？" 瑞沃问道。
+		<br><br>
+
+		"您还没有讲到这里，"那个<<person>>用颤巍巍的语气说道。你随之松了一口气，看来不是只有你一个人看不懂。
+		<br><br>
+
+		瑞沃笑了起来，"不错，看得很仔细，"<<person1>><<he>>继续说道："你们都将在同一起跑线上，哪怕你在之前没有怎么听课。参加全凭自愿——虽然冠军会获得奖励，但不要因此耽误了你的学业。"
+		<br><br>
+
+		<<He>>把最后一本小册子分发出去后补充道："这个问题是为这次比赛专门编写的，所以不要以为你能在哪里找到正确答案，同时也不要向你的父母求助。"<<he>>在说这话的同时尽量避免向你这边看来。"我们是能够分辨出来的。最后，比赛将在市政厅举行，届时将对你们进行评判。祝好运。"
+		<br><br>
+
+		<span class="gold">日志中增加了数学竞赛。</span>
+		<br><br>
+
+		<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+	<<else>>
+		<<cleareventpool>>
+
+		<<set $_linkskip to false>>
+		<<addinlineevent "mathsSafe1">>
+			<<npc River>><<person1>>
+			瑞沃在布置了一些方程式给全班同学求解后，便开始处理起了文书工作。
+
+			<<if $whitneymaths is "seat" or $whitneymaths is "active">>
+				就连惠特尼都在保持安静，尽管<<nnpc_he "Whitney">>可能只是在睡觉。
+			<<else>>
+				甚至坏学生们也都保持安静，小心翼翼地避开瑞沃的注意。
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe2">>
+			<<generates1>><<generates2>><<person1>><<set _coinflip to random(0,1)>>
+			瑞沃指派一名表现出色的学生，让那个<<person>>来为坐在你附近的一名坏学生提供帮助。
+			<br><br>
+			<<rng>>
+			<<if $rng % 3 is 0>>
+				进展十分顺利。两个学生之间相处得很好，似乎二人都因这种安排而受益匪浅。
+			<<else>>
+				这是一场灾难。那个坏学生，也就是那个<<person2>><<person>>，看起来十分讨厌<<person1>><<persons>>的帮助，很快便开始欺负起了<<him>>。你用眼角的余光看去，事件正在不断激化，并逐渐失去控制。
+				<<if _coinflip>>
+					在事情发展到一定程度之前，瑞沃要求结束互助。
+				<<else>>
+					当<<person1>><<person>>的尖叫声响起时，瑞沃前来调查。
+					<<if $rng % 2>>
+						瑞沃把肇事者赶了出去。
+					<<else>>
+						不知何故，<<person1>><<person>>最终被指责并被留校。
+					<</if>>
+				<</if>>
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe3">>
+			瑞沃在黑板上演示着方程式，并偶尔点名提问那些<<nnpc_he "River">>认为没有注意听课的学生。
+
+		<</addinlineevent>><<addinlineevent "mathsSafe4">>
+			<<if $whitneymaths is "seat" or $whitneymaths is "active">>
+				惠特尼诱使一个<<generatey1>><<person1>><<person>>将一支笔扔到瑞沃的背上。结果这个<<person>>在一番争吵后被请出了教室。
+			<<else>>
+				班上有人把一支笔扔到了瑞沃的背上，在一番争吵过后，惹事的家伙被送出了教室，课堂继续上课。
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe5">>
+			<<npc River>><<person1>>
+			瑞沃在白板上演示方程式，偶尔会问问题，挑那些<<he>>认为不专心的学生的毛病。这一次，<<he>>选了你。
+			<br><br>
+
+			<<if currentSkillValue('maths') gte 500>>
+				你知道答案，但是正确回答这么难的问题会让其他学生觉得你很奇怪。
+				<br><br>
+
+				<<set $_linkskip to true>>
+				<<link [[回答|Maths Event2]]>><<status -10>><</link>><<lcool>>
+				<br>
+				<<link [[假装答不上来|Maths Event2]]>><<detention 2>><<stress 2>><<set $phase to 1>><</link>><<gstress>><<gdelinquency>>
+			<<else>>
+				这个问题很难，超出了你目前的知识水平，所以你告诉<<him>>你不知道答案。
+				<br><br>
+
+				"也是，你当然不会知道。" 幸运的是，<<he>>并没有继续絮叨下去，而是开始继续讲课。
+				<<stress 20>><<ggstress>>
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe6">>
+
+			你被叫到前面回答一个问题。你从容地走上前去，在黑板上写下了你的答案。瑞沃似乎对这个答案很是满意。在回到座位坐下之后，你感到臀部传来一阵剧痛。你站起身来并向后伸手摸去，感觉到一根大头针正卡在你的<<bottom>>上。
+			<<pain 2>><<stress 6>><<gpain>><<gstress>>
+			<br><br>
+
+			你把它拿开，坐回去。
+			<<if $whitneymaths is "active">>
+				你听到惠特尼在背后笑出了声。
+			<<elseif $whitneymaths is "seat">>
+				惠特尼脸上挂着事不关己的微笑。
+			<<else>>
+				你听到一群痞子在背后笑出了声。
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe7">>
+
+			班里正在上三角函数课，瑞沃正巡视着在练习册上填写着的学生。
+			<<if $whitneymaths is "seat">>
+				惠特尼和另一个学生开始了一场秘密战争。他们用圆规刺伤对方。
+			<<elseif $whitneymaths is "active">>
+				惠特尼和其他不良少年偷偷地用指南针戳来戳去。
+			<<else>>
+				一些学生偷偷摸摸地用圆规尖互相戳对方。
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe8">>
+			全班学生都在学习几何学，然后填写练习题。瑞沃在教室里来回转悠，时不时提出某些人的错误。
+
+		<</addinlineevent>><<addinlineevent "mathsSafe9">>
+			<<generates1>><<generates2>>
+			一个<<person1>><<person>>被叫到教室前面来在黑板上解一个方程式。而当<<he>>正在书写时，一个<<person2>><<person>>俯身向前，用一把尺子将不知情的<<person1>><<personsimple>>的内裤亮给了全班人看。
+			<<if ($rng % 4) is 0>>
+				然而，事实证明，这个<<person>>没有穿任何内裤——欢呼声在教室里爆发出来，同时被羞辱的这个<<personsimple>>和那个拿着尺子的<<person2>><<person>>都获得了留校的奖励。
+			<<else>>
+				<<personsimple>>拍掉了尺子，而瑞沃用尖锐的目光盯着<<person2>><<person>>。
+				<br><br>
+				课堂还在继续。
+			<</if>>
+
+		<</addinlineevent>><<addinlineevent "mathsSafe10">>
+			瑞沃在黑板上演示方程式，然后分发习题册供全班完成。
+
+		<</addinlineevent>>
+
+		<<runeventpool>>
+
+		<<if !$_linkskip>>
+			<br><br>
+
+			<<link [[继续|Maths Lesson]]>><<endevent>><</link>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "mathsWhitneyAttendChance">>
+	<<if !$whitneymaths or $whitneymaths is "absent">>
+		<<if C.npc.Whitney.state is "active" and Time.minute lte 40>>
+			<<set _wearingSkirt to (clothingData('lower', $worn.lower, "skirt") is 1)>>
+			<<set _whitneyMadAtSkirt to $whitneyskirtcheck is 1 and $forcedcrossdressingdisable is "f" and (!_wearingSkirt or $worn.lower.reveal lte 200)>>
+
+			<<if !$whitneymaths>>
+				<!-- Whitney attending Maths class for the first time during the game -->
+				<<npc Whitney 1>><<person1>>
+				惠特尼大摇大摆地走了进来。"你决定来上课了啊，"瑞沃说着，同时指着前面的一个空座位："坐在那里，把你的衬衫给我塞进去。"
+				<br><br>
+
+				<<set $whitneyskirtmaths to _whitneyMadAtSkirt>>
+
+				<<if $whitneyromance is 1>>
+					<<set $whitneymaths to "seat">>
+					惠特尼翻了个白眼，
+					<<if _whitneyMadAtSkirt>>但在看到你的$worn.lower.cn_name_cap后，<<he>>瞪了你一眼，<</if>>
+					转而坐在你身旁的座位上。
+				<<else>>
+					<<set $whitneymaths to "active">>
+					惠特尼翻了个白眼，
+					<<if _whitneyMadAtSkirt>>但在看到你的$worn.lower.cn_name_cap后，<<he>>瞪了你一眼，<</if>>
+					转而坐在后面的座位上。
+				<</if>>
+				<<He>>坐下来时只把衬衫前襟塞进了<<his>>的<<npcClothesText $NPCList[0] "lower">>。
+				<<endevent>>
+				<br><br>
+			<<else>>
+				<<set $_whitney_maths_chance to ((C.npc.Whitney.love / 3) + (C.npc.Whitney.dom * 3) + (C.npc.Whitney.lust / 3))>>
+				<<set $_whitney_tardy_modifier to (Time.minute lte 20 ? Time.minute : -Time.minute + 40) - 10>>
+				<!-- whitney_tardy_modifier starts out negative, becomes positive at 10 minutes late, peaks at 20 minutes late, and hits negative again at 30 minutes late -->
+				<<set $_whitney_maths_chance += $_whitney_tardy_modifier>>
+
+				<<if random(1, 100) lte $_whitney_maths_chance>>
+					<<npc Whitney 1>><<person1>>
+					<<set $whitneyskirtmaths to _whitneyMadAtSkirt>>
+					<<if $whitneyromance is 1>>
+						<<set $whitneymaths to "seat">>
+						惠特尼走进教室。<<He>>把你旁边的<<generatey2>><<person2>><<person>>一把推开，自己坐了过来<<if _whitneyMadAtSkirt>>，随后看到你的$worn.lower.cn_name_cap，瞪了你一眼<</if>>。
+					<<else>>
+						<<set $whitneymaths to "active">>
+						惠特尼走进教室。<<if _whitneyMadAtSkirt>>看见你的$worn.lower.cn_name_cap后，<<He>>瞪了你一眼，<</if>><<He>>在你后面找了个座位坐下。
+					<</if>>
+					<<endevent>>
+					<br><br>
+				<<elseif $whitneymaths isnot undefined>>
+					<!-- if whitney HAS attended class before, but is not present now -->
+					<<set $whitneymaths to "absent">>
+				<</if>>
+			<</if>>
+		<<elseif $whitneymaths isnot undefined>>
+			<!-- if whitney HAS attended class before, but is unable to attend -->
+			<<set $whitneymaths to "absent">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "mathsLessonEnd">>
+	<<endevent>>
+	下课铃响起，课程结束了。你
+	<<storeon "mathsClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "mathsClassroom">>
+		拿上你的外套然后
+	<</if>>
+	离开了教室。
+	<br><br>
+
+	<<if $whitneymaths isnot undefined>>
+		<!-- set whitney's state to "absent" after the lesson ends so that we can use mathsWhitneyAttendChance to put them back in class on the next day -->
+		<!-- Note: if you want to know whether or not Whitney attended maths class, but class has already ended, you'll need to change how this system works. -->
+		<<set $whitneymaths to "absent">>
+	<</if>>
+
+	<<link [[继续|Hallways]]>><</link>>
+<</widget>>
+
+<<widget "mathsLessonEvent">>
+	<<set $_mod to _args[0] or 1>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure * $_mod))>> <!-- $_mod multiplies the effect that allure has on your odds of getting an unsafe event -->
+		<<eventsmaths>>
+	<<else>>
+		<<eventsmathssafe>>
+	<</if>>
+<</widget>>

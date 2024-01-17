@@ -1,0 +1,56 @@
+:: Farm Pigs Feed []
+<<effects>>
+
+<<if currentSkillValue('physique') gte 16000>>
+	你把饲料倒进了几个桶里，拖着桶穿过田地。这些桶很重，<span class="green">但对于你这样强壮的人而言并不算什么问题。</span><<set $farm_work.pigs_fed += 1>><<physique 2>>
+	<br><br>
+<<else>>
+	你把饲料倒进了几个桶里，拖着桶穿过田地。到达猪圈的时候，你的手臂已经有些酸痛了。<<physique 2>>
+	<br><br>
+<</if>>
+
+
+
+你把桶里的饲料倒进槽里。
+
+<<if $farm_work.pigs_fed gte 6>>
+	<<farm_text_many pig>>狼吞虎咽地吃着饲料，吃完之后<span class="green">它们躺倒在地，非常满足。</span>
+<<else>>
+	<span class="blue"><<farm_text_many pig>>猛吞着饲料，看起来它们还是很饿。</span>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $worn.lower.name isnot "naked" and ($bestialitydisable is "f" or $farm_work.pig.monster is true)>>
+<!-- Modified for Monster People -->
+	<<if $farm.beasts.pigs lte -20 and $rng gte 51>>
+		<<if $farm_work.pig.monster is true>>
+			当你从槽边转身离开时，感觉到头发被什么东西勾住了。原来是一只<<farm_text pig>>把头伸过了栅栏。"你还有其他任务呢，"<<farm_he pig>>说着，试图把你拖到栅栏里。
+		<<else>>
+			当你从槽边转身离开时，感觉到头发被什么东西勾住了。原来是一只<<farm_text pig>>把头伸过了栅栏。它试图把你拖到栅栏里。
+		<</if>>
+		<br><br>
+
+		<<link [[训斥|Farm Pigs Feed Extreme Scold]]>><</link>><<tendingdifficulty 1 1100>>
+		<br>
+		<<link [[呼救|Farm Pigs Feed Extreme Help]]>><<npcincr Alex dom 1>><<farm_pigs -1>><</link>><<gdom "Alex">><<lrespect>>
+		<br>
+	<<else>>
+		<<if $farm_work.pig.monster is true>>
+			当你转身离开食槽时，有东西抓住了你的$worn.lower.cn_name_cap。是一只<<farm_text pig>>，它正把头伸出栅栏，用嘴叼着你的衣服。
+		<<else>>
+			当你转身离开食槽时，有东西抓住了你的$worn.lower.cn_name_cap。是一只<<farm_text pig>>，它正把它的鼻子伸出栅栏，用嘴叼着你的衣服。
+		<</if>>
+		<br><br>
+
+		<<link [[训斥|Farm Pigs Feed Scold]]>><</link>><<tendingdifficulty 1 600>>
+		<br>
+		<<link [[呼救|Farm Pigs Feed Help]]>><<npcincr Alex dom 1>><<farm_pigs -1>><</link>><<gdom "Alex">><<lrespect>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

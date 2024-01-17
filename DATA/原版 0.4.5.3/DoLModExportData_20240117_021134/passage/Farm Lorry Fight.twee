@@ -1,0 +1,25 @@
+:: Farm Lorry Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+<</if>>
+
+你能听见一旁的艾利克斯正陷入抗争，不过你无暇分散注意。
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Farm Lorry Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Lorry Fight]]>><</link>></span><<nexttext>>
+<</if>>

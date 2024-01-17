@@ -1,0 +1,50 @@
+:: Farm Road 6 []
+<<set $outside to 1>><<set $location to "farm">><<effects>><<set $bus to "farmroad6">>
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你向乡村深处走去。土地变得更绿，更有组织，被树篱分割成独立的田地。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你朝镇上走去。道路两侧仍有田地。<<physique 3>>
+<<else>>
+	你走在连接城镇和周围农田的路上。道路两侧都是田地。
+<</if>>
+<br><br>
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		<<beastNEWinit 1 cow>><<person1>>
+		<!-- Modified for monster people -->
+		<<if $monster is 1>>
+			一个有着奶牛耳朵、牛犄角和牛尾的赤裸<<print ($pronoun is "f" ? "女孩" : "男孩")>>停下吃草并走到了<<bhis>>的牧场周围的栅栏跟前。<<bHe>>对你哞哞叫。
+			<br><br>
+		<<else>>
+			一个<<beasttype>>停止吃草，走到它田地周围的栅栏前。它对你哞哞叫。
+			<br><br>
+		<</if>>
+		<<link [[爱抚|Farm Road Pet]]>><<stress -6>><</link>><<lstress>>
+		<br>
+		<<link [[无视|Farm Road 6]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<farmicon>><<link [[进入农田 (0:05)|Farmland]]>><<pass 5>><</link>>
+	<br>
+	<<roadicon>><<link [[朝小镇走 (0:30)|Farm Road 5]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+<</if>>
+<<set $eventskip to 0>>

@@ -1,0 +1,35 @@
+:: Farm Breakfast Receive Oral []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	艾利克斯在你面前跪下，把手放在自己的大腿上，和你对视着。
+	<<maninit>>
+	<<if $player.penisExist and $player.vaginaExist>>
+		<<if random(1, 2) is 2 and !playerChastity("cage")>>
+			<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+		<<else>>
+			<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+		<</if>>
+	<<elseif $player.penisExist and !playerChastity("cage")>>
+		<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+	<<else>>
+		<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+	<</if>>
+	<<set $enemytrust += 100>><<promiscuity4>>
+	<<set $NPCList[0].location.head to "genitals">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $orgasmdown gte 1>>
+	<span id="next"><<link [[继续|Farm Breakfast Receive Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Breakfast Receive Oral]]>><</link>></span><<nexttext>>
+<</if>>

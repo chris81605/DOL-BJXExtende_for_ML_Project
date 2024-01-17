@@ -1,0 +1,47 @@
+:: Connudatus Street Bench []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $rng gte 61>>
+	你走到长椅后面，伸手从座位上拿起<<wallet>>。
+	<<stress 6>><<gstress>>
+	<<if $worn.upper.type.includes("naked") and $worn.over_upper.type.includes("naked")>>
+		那个<<person>>试图抓住你，但你甩开了<<him>>，跑到了安全的地方。
+		<br><br>
+	<<elseif !$worn.over_upper.type.includes("naked")>>
+		那个<<person>>抓住了你的$worn.over_upper.cn_name_cap。
+		<<set $worn.over_upper.integrity -= 10>>
+		<<if $worn.over_upper.integrity lte 0>>
+			你挣脱了<<him>>的手，但你的衣服在<<his>>的掌握中被撕裂了。<<integritycheck>><<exposure>><<if $exposed gte 1>><<covered>><</if>>你跑到了安全的地方。
+		<<else>>
+			你挣脱了<<him>>的手，但你听到你的$worn.upper.cn_name_cap被撕裂了一点。你跑到了安全的地方。
+		<</if>>
+		<br><br>
+	<<else>>
+		那个<<person>>抓住了你的$worn.upper.cn_name_cap。
+		<<set $worn.upper.integrity -= 10>>
+		<<if $worn.upper.integrity lte 0>>
+			你挣脱了<<him>>的手，但你的衣服在<<his>>的掌握中被撕裂了。<<integritycheck>><<exposure>><<covered>>你跑到了安全的地方。
+		<<else>>
+			你挣脱了<<him>>的手，但你听到你的$worn.upper.cn_name_cap被撕裂了一点。你跑到了安全的地方。
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $skulduggery lte 300>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">你无法在这样简单的目标身上学到任何东西。</span>
+	<</if>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<<else>>
+	你走到长椅后面，伸手过去取出<<wallet>>，那个<<person>>甚至没有注意到。
+	<br><br>
+	<<if $skulduggery lte 300>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">你无法在这样简单的目标身上学到任何东西。</span>
+	<</if>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>

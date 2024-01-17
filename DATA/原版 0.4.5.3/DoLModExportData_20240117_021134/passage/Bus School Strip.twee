@@ -1,0 +1,27 @@
+:: Bus School Strip []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcstrip>><<npcidlegenitals>>
+	<<set $timer to 15>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>因为你的风评不好，所以没人帮你。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($timer lte 1) or
+	($worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")) or
+	($worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and playerChastity())
+>>
+	<span id="next"><<link [[继续|Bus School Strip Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bus School Strip]]>><</link>></span><<nexttext>>
+<</if>>

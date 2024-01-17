@@ -1,0 +1,22 @@
+:: Farm Assault Intercept Wraith []
+<<effects>><<set _assault_keys to Object.keys($farm_assault.teams)>>
+
+<<if !$wraithIntro>>
+	<<set $wraithIntro to true>>
+	你冲向陌生人，祂美丽而又苍白。祂穿着半透明的白袍，有着一头飘逸的银发。祂用愤怒的红眼睛看着你，手还在抓着自己的脖子。一种奇怪的、黏糊糊的物质在祂的脚边蠕动，祂走过的所有地方都会留下同样的粘液。
+<<elseif !$wraith.seenFarm>>
+	你冲向陌生人，祂转过身来看着你咯咯地笑。<span class="red">祂的肤色是可怕的、熟悉的苍白。</span>一种奇怪的、黏糊糊的物质在祂脚边，祂经过的所有地方都留下了同样的痕迹。
+<<else>>
+	你冲向苍白的身影。祂转过身来看着你咯咯地笑。一种奇怪的、黏糊糊的物质在祂脚边，祂经过的所有地方都留下了同样的痕迹。
+<</if>>
+<br><br>
+
+"<span class="wraith">以牙还牙，以眼还眼，<<pcPetname "Wraith">>。</span>"
+<br><br>
+
+<<generateWraith 1 true>>
+<<initWraith "man" "arms" "abomination">><<startWraith>><<set $wraith.seenFarm to true>>
+余烬在<<his>>的手指上发出噼啪声。<span class="red">黏液开始自行在田间扩散。</span>
+<br><br>
+
+<<link [[继续|Farm Assault Wraith Fight]]>><<set $fightstart to 1>><<set $phase to 1>><</link>>

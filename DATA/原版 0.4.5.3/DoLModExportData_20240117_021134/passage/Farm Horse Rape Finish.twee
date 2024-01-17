@@ -1,0 +1,83 @@
+:: Farm Horse Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	<<if $farm_work.horse.monster is true>>
+		"别忘了，"半人马走开的时候说，"你只是个玩具而已。"它们跑进了田野。
+	<<else>>
+		马群跑进了田野。
+	<</if>>
+	<<lrespect>><<farm_horses -1>><<gfarm>><<farm_yield 1>><<set $farm_work.horses_satisfied += 1>>
+	<br><br>
+
+	<<tearful>>你站了起来，关上了门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	<<if $farm_work.horse.monster is true>>
+		半人马后退了几步。"怎么了？" 另一匹轻笑道，"你驾驭不住这人类<<girl>>吗？"
+		<br><br>
+
+		"你不怕那你怎么不自己试试，"半人马回答道，"反正我刚好渴了。"说完跑向原野，另一匹紧随其后。
+	<<else>>
+		马离开了你，向原野跑去。另一匹紧随其后。
+	<</if>>
+	<<grespect>><<farm_horses 1>>
+	<br><br>
+
+	<<tearful>>你站了起来，关上了门。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<else>><<set $rescued += 1>>
+
+
+	"我来了！"是艾利克斯。
+	<<if $farm_work.horse.monster is true>>
+		听到声音后，半人马后退了一步。"操，"<<farm_he horse>>随马群一起跑向田野，"<<farm_him horse>>来了！"
+	<<else>>
+		听到声音后，马后退了一步，随马群一起跑向田野。
+	<</if>>
+	<<lrespect>><<gdom>><<farm_horses -1>><<npcincr Alex dom 1>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Alex>><<person1>>
+	艾利克斯来到马厩，沿着小路匆匆跑来。"你没事吧？"<<he>>关切地看着你，"失去控制的马群可是很危险的。"
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<He>>帮你起身，并递给你几条毛巾。
+	<<else>>
+		<<He>>帮你起身。
+	<</if>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<tearful>>你关上大门。"可以的话，把马厩的活留给我，"艾利克斯补充道，"猪群会更听话些，尽管它们有时很犟。"
+	<br><br>
+
+	<<He>>回去继续工作。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

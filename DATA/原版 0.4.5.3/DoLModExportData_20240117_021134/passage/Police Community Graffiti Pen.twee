@@ -1,0 +1,65 @@
+:: Police Community Graffiti Pen []
+<<effects>>
+
+你走近了。<<person2>>
+<<if !$skin.left_cheek.pen>>
+	<<set $phase to 0>>
+	<<if $worn.face.type.includes("mask")>>
+		"摘下你的面罩，"警官要求。
+		<br><br>
+
+		<<link [[脱下它|Police Community Graffiti Take]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>><<gbodywriting>>
+		<br>
+		<<link [[拒绝|Police Community Graffiti Refuse]]>><<def 1>><</link>>
+		<br>
+	<<else>>
+		<<person>>写在你的左脸颊上。<<bodywriting_criminal "left_cheek" marker>>
+		<br><br>
+		警察微笑着看着。"现在感谢这位好市民帮你还债。"
+		<br><br>
+
+		<<link [[感谢|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<br>
+		<<link [[乖乖回去工作|Police Community Graffiti Work]]>><<def 1>><</link>>
+		<br>
+	<</if>>
+<<elseif !$skin.right_cheek.pen>>
+	<<set $phase to 1>>
+	<<if $worn.face.type.includes("mask")>>
+		"摘下你的面罩，"警官要求。
+		<br><br>
+
+		<<link [[脱下它|Police Community Graffiti Take]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>><<gbodywriting>>
+		<br>
+		<<link [[拒绝|Police Community Graffiti Refuse]]>><<def 1>><</link>>
+		<br>
+	<<else>>
+		<<person>>写在你的右脸颊上。<<bodywriting_criminal "right_cheek" marker>>
+		<br><br>
+		警察微笑着看着。"现在感谢这位好市民帮你还债。"
+		<br><br>
+
+		<<link [[感谢|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<br>
+		<<link [[乖乖回去工作|Police Community Graffiti Work]]>><<def 1>><</link>>
+		<br>
+	<</if>>
+<<elseif !$skin.forehead.pen>>
+		<<person>>写在你的额头上。<<bodywriting_criminal "forehead" marker>>
+		<br><br>
+		警察微笑着看着。"现在感谢这位好市民帮你还债。"
+		<br><br>
+
+		<<link [[感谢|Police Community Graffiti Thank]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+		<br>
+		<<link [[乖乖回去工作|Police Community Graffiti Work]]>><<def 1>><</link>>
+		<br>
+<<else>>
+	"啊，"<<person>>说道。"已经有字了。我可不想毁了别人的手艺。"<<He>>把笔收起来。"下次吧。"
+	<br><br>
+	"你听到<<him>>说的话了，"警官说道，"回去工作吧。"
+	<br><br>
+
+	<<link [[继续|Police Community Graffiti End]]>><</link>>
+	<br>
+<</if>>

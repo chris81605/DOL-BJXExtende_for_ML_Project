@@ -1,0 +1,138 @@
+:: Street Tentacle Sex []
+<!-- This scene assumes the player is wearing a type of skirt but no underwear, and that $phase is set to what the tentacle found under the skirt: -->
+<!-- $phase 0: anus -->
+<!-- $phase 1: pussy -->
+<!-- $phase 2: penis -->
+
+<<if $sexstart is 1>>
+	<!-- These variables keep track of anal and vaginal ejaculation. They are used at the end of the scene. -->
+	<<set $street_tantacle_ejac_vagina to false>>
+	<<set $street_tantacle_ejac_anus to false>>
+	<<if $phase is 0>>
+		你让触手接触你的菊穴。
+		当它摩擦和挑逗你的阴道时，你感到欲火焚身。
+		<<arousal 3>><<deviancy5>>
+	<<elseif $phase is 1>>
+		你让触手接触你的<<pussy>>。
+		当它摩擦和挑逗你的<<clit>>时，你感到欲火焚身。
+		<<arousal 600 "genitals">><<deviancy5>>
+	<<elseif $phase is 2>>
+		你让触手接触你的<<penis>>。
+		当它开始缠绕在你的阴茎上时，你感到欲火焚身。
+		<<arousal 3 "genitals">><<deviancy5>>
+	<</if>>
+
+	<<set $sexstart to 0>>
+	<<set $enemytype to "tentacles">>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $enemytrust += 100>>
+	<<rng>>
+	<<if $rng lte 20>>
+		<!-- 20% chance of weak tentacle -->
+		<<tentaclestart 1 4>>
+	<<elseif $rng lte 40>>
+		<!-- 20% chance of strong tentacle -->
+		<<tentaclestart 1 20>>
+	<<else>>
+		<!-- 60% chance of above medium strength tentacle -->
+		<<tentaclestart 1 10>>
+	<</if>>
+
+	<!-- overwrite the random tentacle -->
+	<<set $position to "doggy">>
+	<<set _tentacle to $tentacles[0]>>
+	<<set _tentacle.size to random(1, 2)>>
+	<<rng>>
+	<<if $rng gte 95>>
+		<!-- 5% chance of impregnating tentacle -->
+		<<set _tentacle.size to 3>>
+		<<set _tentacle.baby to "tentacle">>
+	<<else>>
+		<<set _tentacle.baby to 0>>
+	<</if>>
+	<<if _tentacle.size is 3>>
+		<<set _tentacle.desc to "粗壮的">>
+		<<set _tentacle.fullDesc to "粗壮的触手">>
+		<<set _tentacle.type to "tentacle">>
+	<<elseif _tentacle.size is 1>>
+		<<set _tentacle.desc to "细小的">>
+		<<set _tentacle.fullDesc to "细小的触手">>
+		<<set _tentacle.type to "tentacle">>
+	<<else>>
+		<<set _tentacle.desc to "黏滑的">>
+		<<set _tentacle.fullDesc to "黏滑的触手">>
+		<<set _tentacle.type to "tentacle">>
+	<</if>>
+
+	<!-- Make tentacle start at the target body part -->
+	<<if $phase is 0>>
+		<<set $anususe to "tentaclerub">><<set $anusstate to "tentaclerub">><<set _tentacle.head to "anusrub">><<set $anustarget to "tentacles">>
+	<<elseif $phase is 1>>
+		<<set $vaginause to "tentaclerub">><<set $thighuse to "tentaclerub">><<set _tentacle.head to "vaginarub">><<set $vaginatarget to "tentacles">>
+	<<elseif $phase is 2>>
+		<<set $penisuse to "tentaclerub">><<set $thighuse to "tentaclerub">><<set _tentacle.head to "penisrub">><<set $penistarget to "tentacles">>
+	<</if>>
+	<<set _tentacle.shaft to "thighs">>
+<</if>>
+
+<<statetentacles>>
+<<if $tentacles.active gte 1>>
+	<<effects>>
+	<<effectstentacles>>
+	<<tentacles>>
+
+	<!-- Show a flavour text for this specific scene, depending on if the action is going on underneath your skirt or not. -->
+
+	<<if $tentacles[0].head is "vaginadeep" or $tentacles[0].head is "anusdeep" or $tentacles[0].head is "penisdeep" or $tentacles[0].head is "anus" or $tentacles[0].head is "vagina" or $tentacles[0].head is "penis">>
+		你站在街道中央，努力使自己表现得正常。
+		你希望没有人注意到你的<<allBottoms>>你正在被触手操。
+	<<else>>
+		你正待在街道中央，尝试表现得正常。
+		你希望没人注意到$tentacles[0].fullDesc在<<allBottoms>>下面干什么。
+	<</if>>
+	<br><br>
+
+	<<actionstentacles>>
+	<br>
+
+	<!-- keep track of ejaculation inside you during this scene -->
+	<<set $street_tantacle_ejac_vagina to $street_tantacle_ejac_vagina or $tentacles[0].head is "vaginadeep" or $vaginafucked is 1>>
+	<<set $street_tantacle_ejac_anus to $street_tantacle_ejac_anus or $tentacles[0].head is "anusdeep">>
+
+	<span id="next"><<link [[继续|Street Tentacle Sex]]>><</link>></span><<nexttext>>
+<<else>>
+	磨损后，粘糊糊的触手沿着你的腿<<slithers>>而下，消失在打开的井口里。
+	<br><br>
+	<<set $street_tantacle_ejac_vagina to $street_tantacle_ejac_vagina or $tentacles[0].head is "vaginadeep" or $vaginafucked is 1>>
+	<<set $street_tantacle_ejac_anus to $street_tantacle_ejac_anus or $tentacles[0].head is "anusdeep">>
+	<<if $street_tantacle_ejac_vagina>>
+		你感到一种令人愉悦的温暖从你的子宫深处蔓延出来。
+		<br>
+		你不由自主地呻吟出来，尽管你还在街中央。你脸红地环顾四周，但似乎并没有人注意到你。
+		<<stress 2>><<trauma 2>><<gtrauma>><<gstress>>
+		<br><br>
+	<<elseif $street_tantacle_ejac_anus>>
+		你感到一种令人愉悦的温暖从你的肠道里蔓延开来。
+		<br>
+		你不由自主地呻吟出来，尽管你还在街中央。你脸红地环顾四周，但似乎并没有人注意到你。
+		<<stress 2>><<trauma 2>><<gtrauma>><<gstress>>
+		<br><br>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<unset $street_tantacle_ejac_vagina>>
+	<<unset $street_tantacle_ejac_anus>>
+	<<set $outside to 1>><<set $location to "town">><<effects>>
+	<<tearful>>你花了一点时间振作起来。
+	<br><br>
+	就在你要你离开时，更多的几根触手从下水道冒出，缠绕住你的四肢和腰，将你拉入地下。事实证明你还是太重了，即使它们的一起用力都无法承受，于是你在黑暗中坠落了几英尺。
+	<br><br>
+	你的跌倒被一些黏滑柔软的东西打断了。在你的眼睛适应黑暗之前，它带着触手逃走了。你在排水沟里，周围都是偷来的衣服和手袋。
+	<br><br>
+	<<set $eventskip to 1>>
+	<<link [[寻找贵重物品 (0:10)|Street Tentacle Search]]>><<pass 10>><</link>>
+	<br>
+	<<destinationdrain>>
+<</if>>

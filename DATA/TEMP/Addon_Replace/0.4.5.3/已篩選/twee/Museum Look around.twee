@@ -1,0 +1,56 @@
+:: Museum Look around []
+<<set $outside to 0>>
+<<museumAntiqueText>>
+<<npc Winter>><<person1>>
+你环顾了一圈博物馆。每个基座上都有一个凹槽，仿佛在等待着特定的某物。
+<br><br>
+<<if $museumAntiques.museumCount is 0>>
+	博物馆空无一物。
+<<elseif $museumAntiques.museumCount lt $museumAntiques.maxCount / 3>>
+	博物馆几乎空空如也。
+<<elseif $museumAntiques.museumCount lt $museumAntiques.maxCount / 2>>
+	博物馆看起来比之前好多了。
+<<elseif $museumAntiques.museumCount lt $museumAntiques.maxCount / 1.5>>
+	博物馆里的藏品不多不少。
+<<elseif $museumAntiques.museumCount lt $museumAntiques.maxCount / 1.25>>
+	博物馆里的藏品有很多。
+<<elseif $museumAntiques.museumCount lt $museumAntiques.maxCount>>
+	博物馆里的藏品非常丰富。
+<<elseif $museumAntiques.museumCount is $museumAntiques.maxCount>>
+	每个位置都摆满了藏品。
+<</if>>
+<br><br>
+
+<<set _possibleHints to []>>
+<ul>
+<<for _labelM, _valueM range $museumAntiques.antiques>>
+	<<switch _valueM>>
+	    /* 北极星模组 */
+	    <<case "take">><li><<print _museumAntiqueText[_labelM].name>>被你带走了。</li>
+	    /* 北极星 */
+		<<case "museum">><li><<print _museumAntiqueText[_labelM].museum>></li>
+		<<case "stolen">><li><<print _museumAntiqueText[_labelM].stolen>></li>
+		<<case "recovered">><li><<print _museumAntiqueText[_labelM].recovered>></li>
+		<<case "found" "talk">><li>也许你应该把<<print _museumAntiqueText[_labelM].name>>给温特看看。</li>
+		<<case "notFound">><li>空空如也。<<run _possibleHints.push(_labelM)>></li>
+	<</switch>>
+<</for>>
+</ul>
+
+<<if _possibleHints.length gt 0>>
+	<<if $winterHint is "notGiven">>
+		<<set $winterHint to _possibleHints[random(0,_possibleHints.length - 1)]>>
+		正当你四下张望时，温特出现了。
+		<br><br>
+		<<print _museumAntiqueText[$winterHint].hint>>
+		<<if $museumAntiqueJournalHints is undefined>>
+			<<set $museumAntiqueJournalHints to []>>
+		<</if>>
+		<<run $museumAntiqueJournalHints.delete($winterHint)>>
+		<<run $museumAntiqueJournalHints.push($winterHint)>>
+		<br>
+	<</if>>
+<</if>>
+
+<br>
+<<link [[回到门口|Museum]]>><<endevent>><</link>>

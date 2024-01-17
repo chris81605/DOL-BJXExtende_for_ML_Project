@@ -1,0 +1,104 @@
+:: Police Community Clean Sex Finish []
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<ejaculation>>
+	<<if $phase is 1>>
+		"这些垃圾都是你的了，"<<person>>笑着说道。"这些也是。"<<He>>递给你<<moneyGain 50>>。<<fameprostitution 5>>
+	<<else>>
+		"这些垃圾归你了，"<<person>>笑着说道："我能捡到更多。"
+	<</if>>
+	<br><br>
+
+	<<if $police_trash gte 3 and random(1, 2) is 2>>
+		<<clotheson>>
+		<<endcombat>>
+		<<generate1>><<generate2>><<generate3>>
+		你想回到队伍中，但是<<fullGroup>>挡住了你的去路。"我们是在交易吗？"<<person1>><<person>>说道，"我想我们敬爱的警官听到这事可不会太高兴。"<<He>>向前迈出一步。"也许你也应该让我们尝尝你的滋味，我们就保持安静。"
+		<br><br>
+
+		<<link [[接受|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[尖叫|Police Community Clean Rape Scream]]>><</link>>
+		<br>
+	<<else>>
+		<<clotheson>>
+		<<endcombat>>
+		<<if $police_trash is 2>>
+			<<set $police_trash to 3>>
+		<</if>>
+		<<tearful>>你回到了队伍中。警察没有注意到你。
+		<br><br>
+
+		<<loadNPC 0 "community_police">>
+		<<loadNPC 1 "community_criminal">>
+		<<person1>>
+		<<clearNPC "community_police">>
+		<<clearNPC "community_criminal">>
+
+		<<link [[继续|Police Community Clean Work]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	你把<<person>>推向垃圾箱。<<tearful>>你在<<he>>能报复你之前回到了大街上。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<loadNPC 0 "community_police">>
+	<<loadNPC 1 "community_criminal">>
+	<<person1>>
+	<<clearNPC "community_police">>
+	<<clearNPC "community_criminal">>
+	你继续收集着你手边的垃圾。警察什么也没注意到。<<gtiredness>><<gstress>><<tiredness 6>><<stress 6>>
+	<br><br>
+	<<link [[继续|Police Community Clean Work]]>><</link>>
+	<br>
+<<elseif $rescue is 1 and $alarm is 1>>
+	"你们这些畜生就不能听话一个小时吗？"在你的哭喊声中，警官赶到了，抓住<<person>>的项圈，并且把<<him>>推回大街之上。<<tearful>>你跟了上去。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<loadNPC 0 "community_police">>
+	<<loadNPC 1 "community_criminal">>
+	<<person1>>
+	<<clearNPC "community_police">>
+	<<clearNPC "community_criminal">>
+	你刚出来就看到<<person1>><<person>>把<<person2>><<person>>推入了货车后面，无视<<his>>的抗议。于是你顺走了<<his>>那无人看管的垃圾袋。
+	<br><br>
+	<<person1>>
+
+	<<link [[继续|Police Community Clean Work]]>><</link>>
+	<br>
+<<else>>
+	"该死的婊子，"那个<<person>>骂道，"这样色诱别人迟早会害你被强奸。"<<He>>回到街上。
+
+	<<if $police_trash gte 3 and random(1, 2) is 2>>
+		<<clotheson>>
+		<<endcombat>>
+		<<generate1>><<generate2>><<generate3>>
+		你想回到队伍中，但是<<fullGroup>>挡住了你的去路。"我们是在交易吗？"<<person1>><<person>>说道，"我想我们敬爱的警官听到这事可不会太高兴。"<<He>>向前迈出一步。"也许你也应该让我们尝尝你的滋味，我们就保持安静。"
+		<br><br>
+
+		<<link [[接受|Police Community Clean Rape Accept]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[尖叫|Police Community Clean Rape Scream]]>><<set $rescued to 1>><</link>>
+		<br>
+	<<else>>
+
+		<<tearful>>你照做。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<loadNPC 0 "community_police">>
+		<<loadNPC 1 "community_criminal">>
+		<<person1>>
+		<<clearNPC "community_police">>
+		<<clearNPC "community_criminal">>
+		你继续收集着你手边的垃圾。警察什么也没注意到。<<gtiredness>><<gstress>><<tiredness 6>><<stress 6>>
+		<br><br>
+		<<link [[继续|Police Community Clean Work]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,29 @@
+:: Kylar Walk In The Park End []
+<<set $outside to 1>><<effects>><<set $phase to 0>><<run statusCheck("Kylar")>>
+<<if $kylar.fountain is 0>>
+	你和凯拉尔一起走回长椅。
+<<else>>
+	凯拉尔坐在喷泉的边缘。
+<</if>>
+<<if _kylarStatus.includes("Rage")>>
+	<<He>>拉着你的手让你和<<him>>坐在一起。"很……很有趣，"你说。凯拉尔环顾四周，突然，<<he>>抓住你的肩膀亲吻了你的嘴唇。
+	<<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+	<br><br>
+	<<if _npcKissVirginTemp>>
+		<<link [[回吻|Kylar Walk In The Park End 2]]>><<set $phase to 10>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<npcincr Kylar rage -1>><</link>><<glove>><<glust>><<lksuspicion>>
+	<<else>>
+		<<link [[回吻|Kylar Walk In The Park End 2]]>><<set $phase to 1>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<npcincr Kylar rage -1>><</link>><<glove>><<glust>><<lksuspicion>>
+	<</if>>
+	<br>
+	<<link [[推开|Kylar Walk In The Park End 2]]>><<set $phase to 2>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>><<llove>><<gksuspicion>>
+<<else>>
+	<<if _kylarStatus.includes("Sus")>>
+		你坐在<<him>>旁边，"很有趣，"你说。<<He>>看起来很开心。
+	<<else>>
+		你坐在<<him>>旁边。"很有趣，我们下次还可以再过来，"你说。<<He>>看起来欣喜若狂。
+	<</if>>
+	<br><br>
+
+	<<kylaroptions>>
+<</if>>
+<br>

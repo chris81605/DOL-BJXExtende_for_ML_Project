@@ -1,0 +1,23 @@
+:: Farmers Centre Produce Sale []
+<<person>>打开笔记本电脑。"你有什么想卖的？"
+<br><br>
+<i>销售收入可以在每天中午收取，更高的商业声誉将有助于工厂更快地销售产品。</i>
+<br><br>
+<<set $farmersProduce.toSell to {}>>
+<<set _plant_keys to Object.keys($plants)>>
+<<set _plantItems to {}>>
+<<if _plant_keys.length gte 1>>
+	<<for _i to 0; _i lt _plant_keys.length; _i++>>
+		<<if ["produce","vegetable","fruit","shroom"].includes(setup.plants[_plant_keys[_i]].type)>>
+			<<set _plantItems[_plant_keys[_i]] to clone($plants[_plant_keys[_i]])>>
+		<</if>>
+	<</for>>
+	<div id="produceDisplay">
+		<<produceDisplay>>
+	</div>
+<<else>>
+	你没有农产品。
+	<br><br>
+<</if>>
+<br><br>
+<<getouticon>><<link [[离开|Farmers Centre]]>><<set $farmersProduce.toSell to {}>><</link>>

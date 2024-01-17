@@ -1,0 +1,155 @@
+:: Asylum Cell []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "asylum">>
+<<elseif $daily.eden.distract gte 1 and Time.hour is 21 and $daily.eden.distract isnot 4>>
+	<<npc Eden>><<person1>>
+	一声震耳欲聋的爆炸巨响从远处传来，病人们顿时陷入恐慌，保安们也赶忙去调查爆炸。
+	<br><br>
+	你趁机赶紧爬上旁边的围栏。爬到一半的时候，你回头瞥了一眼。
+	<<if $daily.eden.distract is 2>>
+		这附近的保安已经全部被调走了，<span class="green">警卫塔的探照灯似乎也坏了。</span>你翻过围栏，不一会儿就碰到了伊甸。<<He>>抓住你的胳膊，带你回到了<<He>>的小屋。
+		<br><br>
+		<<link [[继续|Eden Asylum Rescue]]>><</link>>
+	<<else>>
+		这附近的保安已经全部被调走了，<span class="red">但警卫塔的探照灯还亮着。</span>一束强光打在你身上，你本能地用手遮光。你听到一声哨响，随后你的肩膀传来一阵剧痛。你失去了意识，随后落在了地上。
+		<br><br>
+		<<link [[继续|Eden Asylum Fail]]>><<pass 30>><</link>>
+	<</if>>
+<<elseif $asylumstate is "sleep">>
+	门是锁着的，现在是你的睡觉时间。
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[床|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		铃声响彻房间，你睡不着。
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		伊甸应该在看。你可以把毛巾扔到你的窗户上以示你的位置。
+		<br>
+		<<towelicon>><<link [[扔出毛巾|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。你的手臂被束缚着，无法使用它。
+		<br>
+	<<else>>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。
+		<br>
+		<<asylumicon "wardrobe">><<link [[打开|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[离开|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[设置|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<<elseif Time.hour is 6>>
+	建筑里响起了警报声。
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[床|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		铃声响彻房间，你睡不着。
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		伊甸应该在看。你可以把毛巾扔到你的窗户上以示你的位置。
+		<br>
+		<<towelicon>><<link [[扔出毛巾|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。你的手臂被束缚着，无法使用它。
+		<br>
+	<<else>>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。
+		<br>
+		<<asylumicon  "wardrobe">><<link [[打开|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[离开|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[设置|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<<else>>
+	你在精神病院的病房里，病房的墙壁和地板铺有垫子，高处有一扇窗户。
+	<br><br>
+	<<roomoptions>>
+	<<if Time.hour isnot 6>>
+		<<asylumicon  "bed">><<link [[床|Asylum Bed]]>><</link>>
+		<br><br>
+	<<else>>
+		铃声响彻房间，你睡不着。
+		<br><br>
+	<</if>>
+	<<if $eden_asylum_window is 1 and Time.hour gte 22>>
+		伊甸应该在看。你可以把毛巾扔到你的窗户上以示你的位置。
+		<br>
+		<<towelicon>><<link [[扔出毛巾|Eden Towel Throw]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。你的手臂被束缚着，无法使用它。
+		<br>
+	<<else>>
+		从墙上突出一个装有你衣服的柜子，棱角都包裹着棉垫。
+		<br>
+		<<asylumicon  "wardrobe">><<link [[打开|Asylum Wardrobe]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<if Time.weekDay is 1 and $daily.massAttended isnot 1>>
+		<<if $fallenangel gte 2>>
+			<<link [[祈祷 (1:00)|Asylum Pray Fallen Angel]]>><<purity 63>><<pass 60>><<stress 10>><<set $daily.massAttended to 1>><</link>><<gggpurity>><<gstress>>
+		<<elseif $angel gte 6>>
+			<<link [[祈祷 (1:00)|Asylum Pray Angel]]>><<purity 10>><<pass 60>><<stress -10>><<set $daily.massAttended to 1>><</link>><<gpurity>><<lstress>>
+		<<elseif $demon gte 6>>
+			<<link [[深思 (1:00)|Asylum Pray Demon]]>><<purity -10>><<pass 60>><<stress 10>><<set $daily.massAttended to 1>><</link>><<lpurity>><<gstress>>
+		<<else>>
+			<<link [[祈祷 (1:00)|Asylum Pray]]>><<purity 10>><<pass 60>><<stress -10>><<set $daily.massAttended to 1>><</link>><<gpurity>><<lstress>>
+		<</if>>
+	<</if>>
+	<br>
+	<<if $asylumstate isnot "sleep">>
+		<<getouticon>><<link [[离开|Asylum]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[设置|Asylum Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

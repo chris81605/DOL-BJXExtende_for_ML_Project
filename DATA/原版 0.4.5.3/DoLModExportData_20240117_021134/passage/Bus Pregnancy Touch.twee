@@ -1,0 +1,42 @@
+:: Bus Pregnancy Touch []
+<<effects>>
+你给<<person>>一个耐心的微笑，然后轻拍了一下你的肚子。
+<<if $speech_attitude is "meek">>
+	"没关系，你、你可以摸，"你说道。
+<<elseif $speech_attitude is "bratty">>
+	"我知道你想感受它。来吧，"你说道。
+<<else>>
+	"没关系，你能感受一下，"你说道。
+<</if>>
+<br><br>
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $rng gte 90>>
+	"一直想干一个怀孕的<<girl>>，"<<he>>平静地说道。你很快扭过头去。<<stress 3>><<gstress>>
+<<else>>
+	<<set _pregnancy to getPregnancyObject()>>
+	<<His>>的眼睛亮了起来，<<he>>轻轻地把手放在你的肚子上。
+	<<if between(Math.clamp(_pregnancy.timer / _pregnancy.timerEnd), 0.7, 1)>>
+		你感觉你的<<pregnancyBabyText 'pc'>>轻踢。<<He>>也感觉到了。<<He>>带着微笑凝视。
+	<<else>>
+		<<He>>上下摩擦，微笑着凝视。
+	<</if>>
+	<<trauma -3>><<ltrauma>>
+	<br><br>
+	你花了一些时间闲聊。
+	<<if (($Pronoun is "m" and maleChance($Pronoun) is 100) or ($Pronoun is "f" and maleChance($Pronoun) is 0)) isnot 100 and $npcPregnancyDisable is "f" and $rng gte 65>>
+		"我的<<if $NPCList[0].pronoun is "f">>丈夫<<else>>妻子<</if>>和我也想要一个孩子。你今天给了我一点希望。"
+	<<else>>
+		<<switch random(1,5)>>
+			<<case 1>>"我相信你会是个好妈妈的。"
+			<<case 2>>"在这个小镇抚养孩子不容易，但我相信你能做到。"
+			<<case 3>>"购物中心有一家儿童玩具店，你应该去看看。"
+			<<case 4>>"你看起来很棒，一定要挺起你的下巴！"
+			<<default>>"恭喜你，祝你好运！"
+		<</switch>>
+	<</if>>
+	<<He>>站起来，在离开前给你最后一个微笑。
+<</if>>
+<br><br>
+你坐的巴士到达了目的地。
+<<destination5>>
+<<endevent>>

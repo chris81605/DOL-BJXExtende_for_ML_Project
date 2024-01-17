@@ -1,0 +1,82 @@
+:: Forest Wolf2 Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>吃痛退开，但另一个家伙正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Forest Wolf2]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，畏惧着。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Forest Wolf2 Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		心满意足之后，<<beasttype>>离开了，轮到了<<print $combatTrain.beastTypes[1].replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>。
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Forest Wolf2]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Forest Wolf2 Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	你听到附近传来一声枪响，一颗子弹落在<<beasttype>>附近。<<bHe>>惊恐地后退并逃进了森林里，另一只紧跟在身后。
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		伊甸出现了，帮助你整理自己。"该死的狼，"<<nnpc_he "Eden">>嘟囔道。"你还好吗？"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周片刻。"我们可能已经涉险过深，超出了那个店主的能力范围，"<<nnpc_he "Eden">>说道。
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<forestCabinReturnLinks>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttype>>呜咽着逃进了树林的阴影中。
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		<<beasttype>>离开了你躺着草坪上。
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		感觉你带来的麻烦大于好处，<<beastsplural>>在树林间逃走了。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		<<beastsplural>>让你筋疲力尽，并在草地上颤抖不已。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		<<beastsplural>>让你筋疲力尽，并在草地上颤抖不已。
+	<</if>>
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

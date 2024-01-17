@@ -1,0 +1,56 @@
+:: Underground Robin Dice Intro 3 []
+<<effects>>
+
+<<if $uDice1 lte 3 and $uDice2 lte 3>>
+	观众对你的低点数报以嘘声和嘲笑，还有一些人往舞台上扔垃圾。
+	<<if $uDice1 + $uDice2 lte 4>>
+		"该死的！”一位特别沮丧的观众喊道。
+	<</if>>
+<<elseif $uDice1 gte 4 and $uDice2 gte 4>>
+	人群因大点数而兴奋地欢呼起来。
+	<<if $uDice1 + $uDice2 gte 10>>
+		一些人开始跺脚。
+	<</if>>
+<<elseif $uDice1 gte 5 and $uDice2 lte 2 or $uDice1 lte 2 and $uDice2 gte 5>>
+	人群看到差异巨大的数字发出“哇”的惊叹声。
+<<else>>
+	看到结果，人群窃窃私语。
+<</if>>
+<br><br>
+
+<<person>>向前走了几步。
+<<set $diceAnnouncer to _text_output>>
+<<endevent>>
+
+<<if $uDice1 is $uDice2>>
+	"决定了，”$diceAnnouncer宣布。“没有考虑的余地。"
+	<<for _d to 1; _d lte $uDice1; _d++>>
+		<<generateNPC _d>>
+	<</for>>
+	<<person1>>
+	<<if $uDice1 is 1>>
+		观众中有两个人爬上了舞台。第一个<<person>>接近你，第二个向罗宾走去。
+	<<else>>
+		观众中两组<<number $uDice1>>的人爬上了舞台。第一组<<fullGroup>>接近你，而第二组向罗宾走去。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Underground Robin Dice Molestation]]>><<set $robinDice to $playerDice to $uDice1>><<set $molestationstart to 1>><</link>>
+<<else>>
+	"现在，来做决定吧，”$diceAnnouncer对你说，“你要<<number $uDice1>>还是<<number $uDice2>>？你不选的那个数字就归你朋友了。"
+	<br><br>
+
+	你注意到观众在向你投来淫荡的目光，你非常紧张。$diceAnnouncer让你选择有多少人攻击你，有多少人攻击罗宾。你考虑过逃跑，但是有太多的眼睛盯着你。罗宾看起来很害怕。
+	<br><br>
+
+	<<silently>><<number $uDice1>><<set _option1 to _text_output>><<number $uDice2>><<set _option2 to _text_output>><</silently>>
+	<<link [["选" + _option1|Underground Robin Dice Intro 4]]>>
+		<<set $playerDice to $uDice1>><<set $robinDice to $uDice2>>
+		<<if $uDice1 gt $uDice2>><<stress 6>><<else>><<npcincr Robin love -1>><</if>>
+	<</link>><<if $uDice1 gt $uDice2>><<gstress>><<else>><<llove>><</if>>
+	<br>
+	<<link [["选" + _option2|Underground Robin Dice Intro 4]]>>
+		<<set $playerDice to $uDice2>><<set $robinDice to $uDice1>>
+		<<if $uDice2 gt $uDice1>><<stress 6>><<else>><<npcincr Robin love -1>><</if>>
+	<</link>><<if $uDice2 gt $uDice1>><<gstress>><<else>><<llove>><</if>>
+<</if>>

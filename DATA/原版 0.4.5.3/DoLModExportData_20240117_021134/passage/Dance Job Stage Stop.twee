@@ -1,0 +1,36 @@
+:: Dance Job Stage Stop []
+<<effects>>
+
+你低着头。
+
+<<if $audienceexcitement gte 60>>
+	<span class="green">观众们欢呼雀跃。</span><<gginterest>><<dance_job_interest 10>>
+<<elseif $audienceexcitement gte 40>>
+	<span class="blue">观众们漫不经心地鼓掌。</span>
+<<else>>
+	<span class="red">观众们发出阵阵嘘声。</span><<llinterest>><<dance_job_interest -10>>
+<</if>>
+<br><br>
+
+<<if $dance_job_stage is 1>>
+	<<set $dance_job_stage to 2>>
+	聚光灯暗下来，显露出台下众多观众，
+
+	<<if maleChance() gte 100>>
+		那些男人身着正装。大多数人都脱掉了外套，露出了衬衫和马甲。
+	<<elseif maleChance() lte 0>>
+		那些女人身着正装。大多数都穿得高雅得体，但也有一些人不吝于炫耀自己的大腿和乳沟。
+	<<else>>
+		那些男男女女身着正装。男人们都脱掉了外套，露出了衬衫和马甲。一些女观众则选择炫耀自己的大腿和乳沟。
+	<</if>>
+	他们都戴着面具。
+	<br><br>
+<<else>>
+	聚光灯暗下来，台下众多观众再次显露了身形。
+<</if>>
+
+你从舞台上走了下来。
+<br><br>
+
+<<link [[继续|Dance Job Stage Intermission]]>><<endevent>><</link>>
+<br>

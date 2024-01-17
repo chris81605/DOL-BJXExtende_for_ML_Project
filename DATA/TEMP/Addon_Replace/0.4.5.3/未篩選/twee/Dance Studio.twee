@@ -1,0 +1,98 @@
+:: Dance Studio []
+<<set $outside to 0>><<set $location to "dance_studio">><<effects>>
+你在舞蹈室里。在这里，你可以付费学习如何提高舞蹈技巧。他们还提供高跟鞋教程和瑜伽课程。指导老师据说拥有专业的背景。学费一课时£12。
+<br><br>
+<<set _store_location to "dance_studio">>
+<<if $stress gte $stressmax>>
+	<<passoutshop>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "danceStudio">>
+	<</if>>
+	<<if Time.hour is $closinghour>>
+		现在是关门时间，接待员正在清场。<<if $exposed gte 1>>一想到自己这副样子可能会被人看到，你心里就不由得一紧。<</if>>
+		<br>
+		<<storeon _store_location "check">>
+		<<if _store_check is 1>>
+			<br>
+			你突然想起来衣服貌似落在了更衣室里面。
+			<br>
+			<<link [[在离开前穿好衣服|Barb Street]]>><<storeload _store_location>><</link>>
+			<br>
+		<</if>>
+	<<elseif $openinghours is 0>>
+		你独自一人在黑暗中。
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<if $uncomfortable.nude is false>>
+			你正藏在衣柜里。你并不在意其他人看到你暴露的样子，但这次你选择待着不动。
+		<<else>>
+			你藏在橱柜里以保护自尊。
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $openinghours is 1 and $exposed lt 1>>
+		<<if $dance_job_intro>>
+			<<if $weekly.danceJob is "done">>
+				<span class="blue">下周查里会给你另一项工作。</span>
+				<br>
+			<<else>>
+				<<askicon>><<link [[询求工作|Dance Job Ask]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $exposed lt 1>>
+			<<if $money gte 1200>>
+				<<if $danceskill gte 800 and $dance_job_intro is undefined and $dancestudiointro gte 1>>
+					<<ind>><<link [[上舞蹈课 (£12 1:00)|Dancing Lesson Job Intro]]>><</link>><<gtiredness>><<note "+ + 舞蹈技能" "green">>
+					<br>
+				<<else>>
+					<<ind>><<link [[上舞蹈课 (£12 1:00)|Dancing Lesson]]>><<set $phase to 0>><<set $money -= 1200>><<set $dancestage to 0>><</link>><<gtiredness>><<note "+ + 舞蹈技能" "green">>
+					<br>
+				<</if>>
+			<<else>>
+				<span class="blue">你付不起舞蹈课的钱。</span>
+				<br>
+			<</if>>
+		<</if>>
+		<<if (Time.weekDay is 3 or Time.weekDay is 5) and $worn.feet.type.includes("heels")>>
+			<<if $money gte 1200 and $exposed lt 1>>
+				<<heelsicon>><<link [[上一节高跟鞋课 (£12 0:30)|Heel Lesson]]>><<set $phase to 0>><<set $money -= 1200>><<pass 30>><</link>><<gtiredness>><<gfeetskill>>
+				<br>
+			<</if>>
+		<<else>>
+			<<askicon>><<link [[询问高跟鞋课|Heel Lesson Inquiry]]>><</link>>
+			<br>
+		<</if>>
+		<<if (Time.weekDay is 2 or Time.weekDay is 4 or Time.weekDay is 6)>>
+			<<if $money gte 2200>>
+				<<ind>><<link [[上瑜伽课 (£22 1:00)|Yoga Classes Change Room]]>><</link>><<gtiredness>><<llstress>><<if !$daily.yogaWillpower>><<gwillpower>><<else>>| 你今天不能增加意志了<</if>>
+			<</if>>
+			<br>
+		<<else>>
+			<<askicon>><<link [[询问瑜伽课|Yoga Classes Inquire]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if Time.hour isnot $closinghour>>
+		<<shopicon "clothing">><<link [[更衣室|Dance Studio Changing Room]]>><</link>>
+		<br>
+	<</if>>
+	<<if $openinghours is 0 and Time.hour isnot $closinghour and !$weekly.theft.danceStudio>>
+		<<shopicon "register">><<link [[检查收银机|Dance Studio Register]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<storeon _store_location "check">>
+	<<if _store_check is 1 and ($worn.upper.name is "naked" or $worn.lower.name is "naked") and $exposed is 1>>
+		你把衣服留在了更衣室里，你的<span class="lewd"><<lewdness>></span>在这里没什么大碍，但去外面的话就显得太暴露了。
+		<br><br>
+		<<if $exhibitionism gte 15>>
+			<<getouticon>><<link [[还是出去吧|Dance Studio Outside Exhibitionism]]>><</link>><<if $daily.ex.studio isnot 1>><<exhibitionist2>><</if>>
+			<br>
+		<</if>>
+	<<else>>
+		<<barbicon>><<link [[离开|Barb Street]]>><</link>>
+		<br><br>
+	<</if>>
+<</if>>

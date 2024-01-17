@@ -1,0 +1,38 @@
+:: Brothel Raid Arrest Sex []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 100>><<promiscuity5>>
+	你挑逗地向他们微笑着。
+	<br><br>
+	"如果你们能行行好放我走，"你说，"我会让你们好人有好报的。"
+	<br><br>
+
+	<<person1>>"行吧，"<<person>>说道。
+	<br><br>
+	<<if crimeSumCurrent() gte 4500>>
+		<<person2>>"这货很狡猾，"<<person>>说道。"先给<<phim>>拷上，免得<<pshe>>耍什么花招。"
+		<br><br>
+		"好。"
+		<<set $leftarm to "bound">><<set $rightarm to "bound">>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Brothel Raid Arrest Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Raid Arrest Sex]]>><</link>></span><<nexttext>>
+<</if>>

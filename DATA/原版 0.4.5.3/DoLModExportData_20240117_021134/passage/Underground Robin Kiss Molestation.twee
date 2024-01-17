@@ -1,0 +1,73 @@
+:: Underground Robin Kiss Molestation []
+<<set _robin to statusCheck("Robin")>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemyno to 2>><<set $enemynomax to 2>><<maninit>><<npcexpose>>
+	<<set $enemyhealth to $NPCList[0].health>><<set $enemyhealthmax to $enemyhealth>>
+	<<npc_attempt_sex>>
+	<<set $fightTargets to [0]>><<set $robinDungeonKiss to true>><<set $robinFucked to false>>
+	<<set $kissTurns to 0>>
+	<<set $position to "doggy">>
+	<<set $NPCList[0].lefthand to "hair">>
+	<<set $NPCList[1].lefthand to "idle">><<set $NPCList[1].righthand to "idle">>
+	<<if $NPCList[1].penis isnot "none">><<set $NPCList[1].penis to "idle">><</if>>
+	<<if $NPCList[1].vagina isnot "none">><<set $NPCList[1].vagina to "idle">><</if>>
+	<<set $NPCList[1].location.head to "head">><<set $NPCList[1].mouth to "kiss">>
+	<<set $mouthstate to "kiss">><<set $mouthuse to "kiss">><<set $mouthtarget to 0>><<set $head to "bound">>
+	<<if _robin.dom gte 80 and _robin.trauma lte 20>>
+		<<set $timer to 6>>
+	<<elseif _robin.dom gte 60 and _robin.trauma lte 40>>
+		<<set $timer to 5>>
+	<<elseif _robin.dom gte 40 and _robin.trauma lte 60>>
+		<<set $timer to 4>>
+	<<else>>
+		<<set $timer to 3>>
+	<</if>>
+	<<set $turnCount to 0>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+<<set $turnCount++>>
+
+<<person4>><<person>>
+<<if $timer % 3 is 0 or random(1,4) is 4>>
+	把镜头凑近
+	<<print either(
+		"你和罗宾的脸。",
+		"你和罗宾的脸。",
+		"你的<<breasts>>。",
+		"你的<<bottom>>。",
+		"你的<<genitals>>。",
+		"罗宾的" +_robin.breastsdesc + "。",
+		"罗宾的下体。",
+		"罗宾的<<nnpc_genitals \"Robin\">>。",
+	)>>
+<<else>>
+	继续拍摄。
+<</if>>
+<<if $face isnot "covered">>
+	<<fameexhibitionism 1>><<famerape 1>>
+<</if>>
+<<if $timer is 0>>
+	<<set $timer to 3>>
+<</if>>
+<<set $speechdisable to 0>>
+<br><br>
+
+<<if $enemyno lte 1>>
+	<<set $enemyhealthmax to 1>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Underground Robin Kiss Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Robin Kiss Molestation]]>><</link>></span><<nexttext>>
+<</if>>

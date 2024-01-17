@@ -1,0 +1,55 @@
+:: Sydney Leighton Frame []
+<<schooleffects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"我……好像之前看到惠特尼拿着一本书走了，"你装作沉思的样子，"<<nnpc_He "Whitney">>当时看上去就像准备揣着书溜走一样。"
+<<elseif $speech_attitude is "bratty">>
+	"如果你想找人怪罪，你还是把目光放在惠特尼身上吧，" 你摇了摇头，"<<nnpc_He "Whitney">>天天偷东西。"
+<<else>>
+	"是惠特尼干的，"你言之凿凿，"想想这家伙干的事，一点也不惊讶。"
+<</if>>
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "dungeon">>
+	礼顿双手抱胸。"那个学生已经是记录在案的失踪人员了，<span class="red">根本不可能是<<nnpc_he "Whitney">>干的。</span>也就是说，你撒谎了。"说着，礼顿抓住你的手臂，"看来你们俩都得挨收拾了。"
+	<<nnpc_He "Leighton">>拔高音量："请所有人立即离开图书馆。有两个学生将要在此受罚。"你听见一阵嘈杂，周围学生纷纷收拾好东西，陆陆续续地离开了图书馆。
+	<br><br>
+	<<link [[继续|Sydney Leighton Spank]]>><</link>>
+	<br>
+<<elseif $delinquency gte 400>>
+	礼顿双手抱胸。"我承认，惠特尼名声很坏，但<span class="red">你也好不到哪儿去，</span>所以我不会听取你的说辞。没有证据就指控他人的人，就该受到惩罚。"礼顿抓住你的手臂，"看来你们俩都得挨收拾。"
+	<<nnpc_He "Leighton">>拔高音量："请所有人立即离开图书馆。有两个学生将要在此受罚。"你听见一阵嘈杂，周围学生纷纷收拾好东西，陆陆续续地离开了图书馆。
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<link [[继续|Sydney Leighton Spank]]>><</link>>
+	<br>
+<<else>>
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<<set $whitneyLibraryFramed to 1>> /* currently unused */
+		礼顿摩挲着下巴。"我想我可以去调查一下，这确实不是什么稀奇的事……行，偷着乐吧，悉尼。你同学帮你解决了一个大麻烦。"
+		<br><br>
+		<<skulduggeryuse>>
+
+		礼顿走了，没再废话一句。悉尼轻轻挽上你的胳膊。"你救了我，我希望惠特尼不会来找你麻烦。"
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+			凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+		<</if>>
+		<br><br>
+		<<if $sydneyLeightonPlayerGuilty is 1>>
+			<<link [[承认偷窃|Sydney Leighton Aftermath]]>><<npcincr Sydney love 3>><<set $phase to 1>><</link>><<gglove>>
+			<br>
+		<</if>>
+		<<link [[安慰悉尼|Sydney Leighton Aftermath]]>><<set $phase to 2>><<npcincr Sydney love 3>><</link>><<gglove>> <<handholdingvirginitywarning>><<NPCvirginitywarning "Sydney" "handholding">>
+		<br>
+		<<link [[调戏悉尼|Sydney Leighton Aftermath]]>><<set $phase to 3>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><</link>><<glove>><<glust>>
+		<br>
+	<<else>>
+		礼顿抱起双臂。"你根本没有证据，对吧？没有证据就指控他人的人，就该受到惩罚。"礼顿抓住你的手臂，"看来你们俩都得挨收拾。"
+		<<nnpc_He "Leighton">>拔高音量："请所有人立即离开图书馆。有两个学生将要在此受罚。"你听见一阵嘈杂，周围学生纷纷收拾好东西，陆陆续续地离开了图书馆。
+		<br><br>
+		<<skulduggeryuse>>
+
+		<<link [[继续|Sydney Leighton Spank]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

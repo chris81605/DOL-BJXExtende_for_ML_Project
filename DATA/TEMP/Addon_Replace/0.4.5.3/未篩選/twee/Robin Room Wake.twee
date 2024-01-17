@@ -1,0 +1,73 @@
+:: Robin Room Wake []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<npc Robin>><<person1>>
+<<set _robin to statusCheck("Robin")>>
+<!-- Phase 0: Robin's still asleep / Phase 1: Robin wakes up with the player / Phase 2: Robin's already awake / Phase 3: Robin is not present -->
+<<if $phase is 3>>
+	<<storeon "bed">>
+	你一个人在罗宾的房间里。
+	<br><br>
+
+	<<link [[离开|Orphanage]]>><<endevent>><</link>>
+	<br>
+<<elseif Time.hour lte 5 or Time.hour gte 21>>
+	你在罗宾醒之前便醒来了。
+	<br><br>
+
+	<<link [[继续睡觉|Robin Bed]]>><<endevent>><<set $wear_outfit to "none">><</link>>
+	<br>
+	<<link [[离开|Orphanage]]>><<endevent>><<storeon "bed">><</link>>
+<<else>>
+	<<storeon "bed">>
+	<<if $phase is 0>> <!-- player wakes up before robin -->
+		<<if $rng gte 75>>
+			<<if _robin.trauma gte 50>>
+				罗宾在睡梦中紧紧地抱着你，<<his>>的脸上出了一层冷汗。你一动<<He>>就醒了过来，睡眼朦胧地对你微笑。
+				"有你在，我觉得一切都会好起来的。"
+			<<else>>
+				罗宾抱着你入睡。你一动<<He>>就醒了过来，睡眼朦胧地对你微笑。"早上好……"<<he>>打了个哈欠。
+			<</if>>
+		<<elseif $rng gte 50>>
+			你温柔地叫醒罗宾，<<he>>哼哼着慢慢地从床上爬了起来。"早上好……"<<he>>打了个哈欠。
+		<<elseif $rng gte 25>>
+			罗宾在睡梦中流口水。你轻轻地叫醒<<him>>并递给<<him>>一张纸巾。"嗯？哦！谢谢你，"<<he>>红着脸颊说。
+		<<else>>
+			<<if _robin.trauma gte 50>>
+				罗宾在睡梦中哭泣。你叫醒了<<him>>。<<He>>睁大眼睛猛地惊醒，但看到你后，又平静了下来。
+			<<else>>
+				你试着叫醒罗宾。<<He>>不情愿地睁开<<his>>的眼睛，但当<<he>>看到你时，<<he>>笑了。
+			<</if>>
+		<</if>>
+	<<elseif $phase is 1>> <!-- robin waking up at the same time as the player -->
+		<<if $rng gte 75>>
+			罗宾昏昏沉沉地为一天做好了准备，偶尔会喃喃地同你说些随意的话题。
+		<<elseif $rng gte 50>>
+			罗宾爬下床，看样子还没完全醒来。
+		<<elseif $rng gte 25>>
+			罗宾打了个哈欠，然后翻身，当<<him>>看到你回头看<<him>>时，<<his>>睡眼惺忪的脸上露出了笑容。"我很高兴你在这里，"<<he>>说。
+		<<else>>
+			罗宾嘴里发出模糊的哼哼声，嘟囔着<<if Time.schoolDay>>家庭作业的事<<else>>一天的计划<</if>>。
+		<</if>>
+	<<else>> <!-- robin awake before player -->
+		<<if $rng gte 75>>
+			罗宾在床上吃三明治。"哦，你要来点儿吗？"<<He>>分了你一半。
+		<<elseif $rng gte 50>>
+			<<if $robinconsole is 1>>
+				罗宾玩着一款紧张刺激的电子游戏。<<He>>试图和你交谈，但是<<He>>玩游戏太专心了，每个话题都无法好好进行下去。
+			<<else>>
+				罗宾读了一本青少年小说。"它没我想象的那么好，"<<he>>说。
+			<</if>>
+		<<elseif $rng gte 25>>
+			罗宾看着<<his>>的衣柜。"你说我该买件新衣服吗？"<<He>>问，"我在考虑要不要买顶帽子。"
+		<<else>>
+			<<if _robin.trauma gte 50>>
+				罗宾看起来像是哭了。"没什么，真的，"<<he>>向你保证。
+			<<else>>
+				罗宾随意地踢着腿。"你今天想做点儿什么吗？"
+			<</if>>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<robinoptions>>
+<</if>>

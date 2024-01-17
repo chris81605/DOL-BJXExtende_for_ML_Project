@@ -1,0 +1,334 @@
+:: Widgets Museum [widget]
+/* 北极星模组 */
+<<widget "museumdonate">>
+    <<for _labelM, _valueM range $museumAntiques.antiques>>
+		<<museumAntiqueStatus _labelM "talk">>
+	<</for>>
+	<<if $worn.neck.name is "ivory necklace">>
+        <<neckstrip>>
+    <</if>>
+<</widget>>
+
+<<widget "museumtake">>
+	<<if $money gte 500000 and $museumAntiques.antiques.antiqueliquor is "museum">>
+		<<link [[带走无尽酒瓶 (£5000)|Museum Take]]>><<set $money -= 500000>><<museumAntiqueStatus "antiqueliquor" "take">><<npcincr Winter love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+	<<if $money gte 500000 and $museumAntiques.antiques.antiquegreed is "museum">>
+		<<link [[带走贪婪之杯 (£5000)|Museum Take]]>><<set $money -= 500000>><<museumAntiqueStatus "antiquegreed" "take">><<npcincr Winter love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+	<<if $money gte 700000 and $museumAntiques.antiques.antiquemushroom is "museum">>
+		<<link [[带走蘑菇神像 (£7000)|Museum Take]]>><<set $money -= 700000>><<museumAntiqueStatus "antiquemushroom" "take">><<npcincr Winter love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+	<<if $money gte 800000 and $museumAntiques.antiques.antiquescroll is "museum">>
+		<<link [[带走言灵卷轴 (£8000)|Museum Take]]>><<set $money -= 800000>><<museumAntiqueStatus "antiquescroll" "take">><<npcincr Winter love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+	<<if $money gte 1000000 and $museumAntiques.antiques.antiquebell is "museum">>
+		<<link [[带走恐惧铃铛 (£10000)|Museum Take]]>><<set $money -= 1000000>><<museumAntiqueStatus "antiquebell" "take">><<npcincr Winter love -1>><</link>><<llove>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "museumreturn">>
+	<<if $museumAntiques.antiques.antiqueliquor is "take">>
+		<<link [[归还无尽酒瓶 (£5000)|Museum Return]]>><<set $money += 500000>><<museumAntiqueStatus "antiqueliquor" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegreed is "take">>
+		<<link [[归还贪婪之杯 (£5000)|Museum Return]]>><<set $money += 500000>><<museumAntiqueStatus "antiquegreed" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquemushroom is "take">>
+		<<link [[归还蘑菇神像 (£7000)|Museum Return]]>><<set $money += 700000>><<museumAntiqueStatus "antiquemushroom" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquescroll is "take">>
+		<<link [[归还言灵卷轴 (£8000)|Museum Return]]>><<set $money += 800000>><<museumAntiqueStatus "antiquescroll" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquebell is "take">>
+		<<link [[归还恐惧铃铛 (£10000)|Museum Return]]>><<set $money += 1000000>><<museumAntiqueStatus "antiquebell" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+<</widget>>
+/* 北极星 */
+
+<<widget "museumtalk">>
+	<<if $museumAntiques.antiques.antiquebox is "talk">>
+		<<link [[问问盒子的事|Museum Box]]>><<museumAntiqueStatus "antiquebox" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilverring is "talk">>
+		<<link [[问问银戒指的事|Museum Silver Ring]]>><<museumAntiqueStatus "antiquesilverring" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegoldnecklace is "talk">>
+		<<link [[问问金项链的事|Museum Gold Necklace]]>><<museumAntiqueStatus "antiquegoldnecklace" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegoldchastitybelt is "talk">>
+		<<link [[问问金质贞操锁的事|Museum Gold Chastity Belt]]>><<museumAntiqueStatus "antiquegoldchastitybelt" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueivorynecklace is "talk">>
+		<<link [[问问象牙项链的事|Museum Ivory Necklace]]>><<museumAntiqueStatus "antiqueivorynecklace" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecrystal is "talk">>
+		<<link [[问问水晶的事|Museum Crystal]]>><<museumAntiqueStatus "antiquecrystal" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquehorn is "talk">>
+		<<link [[问问号角的事|Museum Horn]]>><<museumAntiqueStatus "antiquehorn" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquewatch is "talk">>
+		<<link [[问问手表的事|Museum Watch]]>><<museumAntiqueStatus "antiquewatch" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquedildo is "talk">>
+		<<link [[问问奇怪物件的事|Museum Dildo]]>><<museumAntiqueStatus "antiquedildo" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecandlestick is "talk">>
+		<<link [[问问长蜡烛的事|Museum Candlestick]]>><<museumAntiqueStatus "antiquecandlestick" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueforestarrow is "talk">>
+		<<link [[问问箭头的事|Museum Arrow]]>><<museumAntiqueStatus "antiqueforestarrow" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueforestdagger is "talk">>
+		<<link [[问问匕首的事|Museum Dagger]]>><<museumAntiqueStatus "antiqueforestdagger" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueforestgem is "talk">>
+		<<link [[问问宝石的事|Museum Gem]]>><<museumAntiqueStatus "antiqueforestgem" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilverbrooch is "talk">>
+		<<link [[问问银饰针的事|Museum Silver Brooch]]>><<museumAntiqueStatus "antiquesilverbrooch" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquetrashcup is "talk">>
+		<<link [[问问酒杯的事|Museum Cup]]>><<museumAntiqueStatus "antiquetrashcup" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquetrashburner is "talk">>
+		<<link [[问问香薰炉的事|Museum Burner]]>><<museumAntiqueStatus "antiquetrashburner" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquebrassstatuette is "talk">>
+		<<link [[问问黄铜小雕像的事|Museum Brass Statuette]]>><<museumAntiqueStatus "antiquebrassstatuette" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecoppercompass is "talk">>
+		<<link [[问问铜质指南针的事|Museum Copper Compass]]>><<museumAntiqueStatus "antiquecoppercompass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegrenade is "talk">>
+		<<link [[问问手榴弹的事|Museum Grenade]]>><<museumAntiqueStatus "antiquegrenade" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquestonetalisman is "talk">>
+		<<link [[问问石质护身符的事|Museum Stone Talisman]]>><<museumAntiqueStatus "antiquestonetalisman" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilvermask is "talk">>
+		<<link [[问问银质面具的事|Museum Silver Mask]]>><<museumAntiqueStatus "antiquesilvermask" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquediamond is "talk">>
+		<<link [[问问钻石的事|Museum Diamond]]>><<museumAntiqueStatus "antiquediamond" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilvercompass is "talk">>
+		<<link [[问问银质指南针的事|Museum Silver Compass]]>><<museumAntiqueStatus "antiquesilvercompass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilverdagger is "talk">>
+		<<link [[问问银质匕首的事|Museum Silver Dagger]]>><<museumAntiqueStatus "antiquesilverdagger" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquerustedcutlass is "talk">>
+		<<link [[问问锈迹斑斑的弯刀的事|Museum Rusted Cutlass]]>><<museumAntiqueStatus "antiquerustedcutlass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecutlass is "talk">>
+		<<link [[问问弯刀的事|Museum Cutlass]]>><<museumAntiqueStatus "antiquecutlass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueleathermap is "talk">>
+		<<link [[问问皮质地图的事|Museum Leather Map]]>><<museumAntiqueStatus "antiqueleathermap" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	/* 北极星模组 */
+	<<if $museumAntiques.antiques.antiquebell is "talk">>
+		<<link [[询问恐惧铃铛的情况|Museum Bell]]>><<museumAntiqueStatus "antiquebell" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	/* 北极星 */
+	<<if $museumAntiques.antiques.antiquebullet is "talk">>
+		<<link [[问问子弹的事|Museum Bullet]]>><<museumAntiqueStatus "antiquebullet" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueshell is "talk">>
+		<<link [[问问炮弹的事|Museum Shell]]>><<museumAntiqueStatus "antiqueshell" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegoldring is "talk">>
+		<<link [[问问金戒指的事|Museum Gold Ring]]>><<museumAntiqueStatus "antiquegoldring" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegoldbrooch is "talk">>
+		<<link [[问问金饰针的事|Museum Gold Brooch]]>><<museumAntiqueStatus "antiquegoldbrooch" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecoralring is "talk">>
+		<<link [[问问珊瑚戒指的事|Museum Coral Ring]]>><<museumAntiqueStatus "antiquecoralring" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquecoppercoin is "talk">>
+		<<link [[问问铜币的事|Museum Copper Coin]]>><<museumAntiqueStatus "antiquecoppercoin" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilvercoin is "talk">>
+		<<link [[问问银币的事|Museum Silver Coin]]>><<museumAntiqueStatus "antiquesilvercoin" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquegoldcoin is "talk">>
+		<<link [[问问金币的事|Museum Gold Coin]]>><<museumAntiqueStatus "antiquegoldcoin" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilverblade is "talk">>
+		<<link [[问问银质长刀的事|Museum Silver Blade]]>><<museumAntiqueStatus "antiquesilverblade" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquestrangefetish is "talk">>
+		<<link [[问问奇怪的雕像的事|Museum Strange Fetish]]>><<museumAntiqueStatus "antiquestrangefetish" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueivorystatuette is "talk">>
+		<<link [[问问象牙小雕像的事|Museum Ivory Statuette]]>><<museumAntiqueStatus "antiqueivorystatuette" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilvergoblet is "talk">>
+		<<link [[问问银质高脚杯的事|Museum Silver Goblet]]>><<museumAntiqueStatus "antiquesilvergoblet" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquesilvercrown is "talk">>
+		<<link [[问问银质王冠的事|Museum Silver Crown]]>><<museumAntiqueStatus "antiquesilvercrown" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquewhitecrystal is "talk">>
+		<<link [[问问白水晶的事|Museum White Crystal]]>><<museumAntiqueStatus "antiquewhitecrystal" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquehourglass is "talk">>
+		<<link [[问问刻有铭文的沙漏的事|Museum Hourglass]]>><<museumAntiqueStatus "antiquehourglass" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueminesign is "talk">>
+		<<link [[问问贝利标志的事|Museum Mine Sign]]>><<museumAntiqueStatus "antiqueminesign" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueobsidiandisc is "talk">>
+		<<link [[问问黑曜石圆盘的事|Museum Obsidian Disc]]>><<museumAntiqueStatus "antiqueobsidiandisc" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquewoodenmask is "talk">>
+		<<link [[问问木制面具的事|Museum Wooden Mask]]>><<museumAntiqueStatus "antiquewoodenmask" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiquetrilobitefossil is "talk">>
+		<<link [[问问三叶虫化石的事|Museum Trilobite Fossil]]>><<museumAntiqueStatus "antiquetrilobitefossil" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $museumAntiques.antiques.antiqueislandarrow is "talk">>
+		<<link [[问问岛民之箭的事|Museum Island Arrow]]>><<museumAntiqueStatus "antiqueislandarrow" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+		<br>
+	<</if>>
+	/* 北极星模组 */
+	<<if $options.bjx_antiques>>
+    	<<if $museumAntiques.antiques.antiqueliquor is "talk">>
+    		<<link [[询问古董酒的情况|Museum Antique Liquor]]>><<museumAntiqueStatus "antiqueliquor" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebogplate is "talk">>
+    		<<link [[询问博格板的情况|Museum Bog Plate]]>><<museumAntiqueStatus "antiquebogplate" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebogbone is "talk">>
+    		<<link [[询问沼泽骨的情况|Museum Bog Bone]]>><<museumAntiqueStatus "antiquebogbone" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebogtool is "talk">>
+    		<<link [[询问有关沼泽工具的信息|Museum Bog Tool]]>><<museumAntiqueStatus "antiquebogtool" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebunkertablet is "talk">>
+    		<<link [[询问碉堡石碑的情况|Museum Bunker Tablet]]>><<museumAntiqueStatus "antiquebunkertablet" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebunkertag is "talk">>
+    		<<link [[询问掩体标签的情况|Museum Bunker Tag]]>><<museumAntiqueStatus "antiquebunkertag" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquecannonball is "talk">>
+    		<<link [[询问炮弹的情况|Museum Cannonball]]>><<museumAntiqueStatus "antiquecannonball" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquearttablet is "talk">>
+    		<<link [[询问艺术石碑的情况|Museum Art Tablet]]>><<museumAntiqueStatus "antiquearttablet" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiqueterracottastatue is "talk">>
+    		<<link [[询问有关兵马俑雕像的信息|Museum Terracotta Statue]]>><<museumAntiqueStatus "antiqueterracottastatue" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiqueredvial is "talk">>
+    		<<link [[询问红色小瓶的情况|Museum Red Vial]]>><<museumAntiqueStatus "antiqueredvial" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquetribemask is "talk">>
+    		<<link [[询问有关部落面具的情况|Museum Tribal Mask]]>><<museumAntiqueStatus "antiquetribemask" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiqueebonystatuette is "talk">>
+    		<<link [[询问黑檀木雕像的情况|Museum Ebony Statue]]>><<museumAntiqueStatus "antiqueebonystatuette" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiqueglacierplant is "talk">>
+    		<<link [[询问冰川植物的信息|Museum Glacier Plant]]>><<museumAntiqueStatus "antiqueglacierplant" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquebullion is "talk">>
+    		<<link [[询问古旧金条的情况|Museum Bullion]]>><<museumAntiqueStatus "antiquebullion" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquereal is "talk">>
+    		<<link [[询问原始硬币的信息|Museum Real]]>><<museumAntiqueStatus "antiquereal" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiqueindigo is "talk">>
+    		<<link [[询问靛蓝染料的情况|Museum Indigo]]>><<museumAntiqueStatus "antiqueindigo" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquescroll is "talk">>
+    		<<link [[询问言灵卷轴的信息|Museum Antique Scroll]]>><<museumAntiqueStatus "antiquescroll" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquemushroom is "talk">>
+    		<<link [[询问蘑菇神像的信息|Museum Antique Mushroom]]>><<museumAntiqueStatus "antiquemushroom" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    	<<if $museumAntiques.antiques.antiquegreed is "talk">>
+    		<<link [[向温特展示贪婪之杯|Museum Antique Greed Cup]]>><<museumAntiqueStatus "antiquegreed" "museum">><<npcincr Winter love 1>><</link>><<glove>>
+    		<br>
+    	<</if>>
+    <</if>>
+	/* 北极星 */
+<</widget>>

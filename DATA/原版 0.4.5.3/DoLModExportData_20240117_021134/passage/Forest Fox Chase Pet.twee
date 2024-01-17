@@ -1,0 +1,84 @@
+:: Forest Fox Chase Pet []
+<<effects>>
+你轻轻地触摸<<beasttypes>><<if $monster is 1>>毛发<<else>>皮毛<</if>>。它非常柔软。你开始抚摸<<bhim>>。<<stress -8>><<llstress>>
+<br><br>
+
+<<if $tendingSuccess>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<set $phase to 2>>
+		<<bHe>>僵住了，但过了一会儿，<span class="green"><<bhis>>的腿开始乱踢</span>。
+		<<if $monster is 1>>
+			<<bHe>>开始呜咽。"这……这太丢脸了……请……"<<bhis>>尾巴摇得很快。你开始宠爱它。<<bHe>>高兴地呻吟着，再也抑制不住了。
+		<<else>>
+			<<bHe>>开始呜咽，但<<bhis>>的尾巴也开始摇摆。
+		<</if>>
+		<<if $monster is 1>>
+			<br><br>
+
+			"该死的……不要……你……敢……停止……"
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<set $phase to 2>>
+		<span class="green"><<bHe>>立即开始呜呜叫</span>。
+		<<if $monster is 1>>
+			<<bHe>>停顿了一会儿，盯着你看。"你不错。我喜欢你。"
+		<<else>>
+			<<bHe>>发出一声低低的吱吱声，好像要你继续。
+		<</if>>
+		你给<<bhis>>的肚子揉了揉，<<bhis>>的尾巴高兴地摇了摇。
+	<<elseif $NPCList[0].traits.includes("clumsy")>>
+		<<set $phase to 2>>
+		<<bHe>>退缩了，<span class="green">但也开始呜呜叫</span>。
+		<br><br>
+
+		<<if $monster is 1>>
+			"你……真的只是想摸摸我吗？"
+		<<else>>
+			<<bHe>>心满意足地叫了一声。
+		<</if>>
+		你趁机揉了揉<<bhis>>的肚子。<<bHe>>立即放松下来，并且<<bhis>>的腿开始踢动。
+	<<else>>
+		<<bHe>>退缩了，<span class="green">但在你的触摸下迅速放松</span>。
+		<<if $monster is 1>>
+			<<bHe>>脸红。"这就是你想要的吗？我……不介意……"
+		<<else>>
+			<<bHe>>用好奇的眼神看着你。
+		<</if>>
+		你给<<bhis>>的尾巴更多的关注，轻轻地抚摸它，抚平它。
+		<<if $monster is 1>>
+			"嘿，别闹了！"<<bHe>>看起来有些心烦意乱，但还是保持着微笑。
+		<<else>>
+			你的注意力让<<bhim>>发出呼噜声。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $deviancy gte 15 and ($bestialitydisable is "f" or $monster is 1)>>
+		<<link [[采用交配姿势|Forest Fox Nest Mate]]>><<set $phase to 3>><</link>><<deviant2>>
+		<br>
+	<<else>>
+		<span class="blue">你的异种癖还不够，没办法做出进一步的行动。</span>
+		<br>
+	<</if>>
+	<<link [["让"+ $NPCList[0].pronouns.him +"走"|Forest Fox Let Go]]>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<bHe>>愣了一会儿，<span class="red">才咬了你的胳膊</span>。你把胳膊抽了出来。<<stress 8>><<pain 8>><<ggstress>><<ggpain>>
+		<br><br>
+
+		当你后退时，<<bHe>>将<<bhimself>>从你的掌控中解放出来，然后<<bhe>>跳开了。
+		<<if $monster is 1>>
+			"我还想要更多的，你真无聊，"<<bhe>>在<<bhe>>逃跑时嘲笑道。
+		<</if>>
+	<<else>>
+		<span class="red"><<beasttypes>>蓬起尾巴</span>，咆哮起来。<<stress 4>><<gstress>>
+		<br><br>
+
+		你释放了<<bhim>>，不想被咬。<<bHe>>没有浪费时间翻身飞奔而去。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+	<br>
+<</if>>

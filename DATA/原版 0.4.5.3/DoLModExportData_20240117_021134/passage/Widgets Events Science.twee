@@ -1,0 +1,315 @@
+:: Widgets Events Science [widget]
+<<widget "eventsscience">>
+	<<if $rng gte 91 and ($player.gender_appearance is "m" and $worn.legs.name is "girl's gym socks" or $player.gender_appearance is "f" and $worn.legs.name is "boy's gym socks")>>
+		一个<<generates1>><<person1>><<person>>盯着你的脚。
+		<<if $worn.legs.name is "girl's gym socks">>
+			"你干嘛穿着女生的袜子？"<<he>>拔高了音量，"这样好看吗？"
+		<<else>>
+			"你干嘛穿着男生的袜子？"<<he>>拔高了音量，"你认为这样打扮就会让人们忘记你是个荡妇吗？"
+		<</if>>
+		<<His>>的朋友开始大笑。
+		<br><br>
+
+		<<link [[踹他们|Science Kick]]>><<stress -12>><<trauma -6>><<detention 3>><</link>><<gdelinquency>><<ltrauma>><<lstress>>
+		<br>
+		<<link [[无视|Science Lesson]]>><<stress 6>><<trauma 6>><<endevent>><</link>><<gtrauma>><<gstress>>
+		<br>
+
+	<<elseif $rng gte 81>>
+		班里正在用化学品进行实验。
+		<br><br>
+
+		一个<<generates1>><<person1>><<person>>把酸液溅到了你的衣服上！
+		"对不起，我被绊了一下。"<<he>><<print either("假声笑了笑","假声笑了笑","假声笑了笑","倒吸了一口冷气","有些惊慌失措")>>。
+		<br><br>
+
+		<<set $worn.upper.integrity -= 20>>
+		<<set $worn.lower.integrity -= 20>>
+		<<set $worn.under_lower.integrity -= 20>>
+
+		<<integritycheck no_text>>
+		<<exposure>>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+			它不是一种很强的酸性物质，但你的衣服磨损了很多。
+		<<else>>
+			酸正在腐蚀你的衣服，你的裸体暴露在了全班面前！在西里斯拿着毛巾冲过来之前，你极尽全力遮掩着你的<<lewdness>>。
+			<<if $exhibitionismaction is "excited">>
+				你向全班展示着你<<nudity>>。
+			<<else>>
+				虽然你试图遮掩你裸露在外的部分，但你缓慢的动作暴露出了你的真实想法。
+			<</if>>
+			<<if $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+				<<schoolrep_naked>>
+			<</if>>
+			<<towelup>>
+
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Science Lesson]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 61>>
+		<<npc Sirris>><<person1>>西里斯把你请到了讲台。
+		<br><br>
+
+		<<link [[继续|Science Event3]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 41>>
+		学生们被要求在房间边缘的玻璃柜周围排好队。而你则乘机观察其中所包含的植物，并尝试识别其间的物种。
+		<br><br>
+
+		<<link [[继续|Science Terrarium]]>><</link>>
+		<br>
+
+	<<elseif $rng gte 21>>
+		一群坏学生决定找你的麻烦。
+		<br><br>
+
+		<<link [[向老师寻求帮助|Science Pick]]>><<status -10>><</link>><<lcool>>
+		<br>
+		<<link [[默默忍受|Science Pick]]>><<set $phase to 1>><<stress 2>><<trauma 2>><</link>><<gtrauma>><<gstress>>
+		<br>
+
+	<<else>>
+		西里斯要求每两个人分成一组。
+		<br><br>
+		<<rng>>
+
+		<<if $cool gte 80>>
+			你找到一个组员，今天要解剖<<print either("一颗羊眼球","一只昆虫","一条蠕虫","一只青蛙")>>。
+			<br><br>
+
+			<<link [[专注于解剖|Science Dissection]]>><<scienceskill>><</link>><<gscience>>
+			<br>
+			<<link [[和你的组员开玩笑|Science Dissection]]>><<trauma -1>><<stress -2>><<status 1>><<set $phase to 1>><</link>><<ltrauma>><<lstress>><<gcool>>
+			<br>
+		<<else>>
+			其他学生都对你避之不及，你根本找不到愿意和你组队的人。西里斯拿着一个塑料盒子到了教室，当<<nnpc_he "Sirris">>看到你孤身一人时，便走过来与你说话。
+			<br><br>
+
+			"我有一份特别的工作要给你。学校门口的传达室里还有一个像这样的盒子，你能把它带到这里来吗？"
+			<br><br>
+
+			传达室那里没有上锁，你在翻找一番后终于找到了你要找的盒子。它真的很重！你几乎举不起来，但你还是设法将它带了回去。
+			<<physique>>
+			<br><br>
+			<<if $rng gte 21>>
+				当你回到教室时，班上的其他同学都在忙着解剖青蛙。而你没有组员，只能一个人待着。
+				<<gscience>><<scienceskill>>
+				<br><br>
+
+				<<link [[继续|Science Lesson]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<generatey1>><<generatey2>><<generatey3>>
+				你经过了三个在走廊里抽烟的坏学生。由于箱子挡住了你的视线，你并没有看到他们。莫名其妙的，他们开始在大厅里追你。
+
+				<<person1>>一个<<person>>抓住你$worn.lower.cn_name_cap的下摆并试图将它们扯下来！
+
+				<<if $worn.under_lower.type.includes("naked")>>
+					<span class="lewd">一想到你里面什么都没穿，一阵恐慌席卷了你！</span>
+				<</if>>
+				<br><br>
+
+				"<<pshes>>一定会很有意思，"<<person2>><<person>>和<<person3>><<person>>朝你走了过来。
+				<br><br>
+
+				你双手拿着盒子，根本腾不出手来。你必须弯下腰才能把盒子放下而不弄坏里面的东西，但你感觉如果弯腰的话可能更容易被袭击。
+				<br><br>
+
+				<<link [[别管盒子了，自己要紧|Science Dissection]]>><<set $phase to 2>><<detention 2>><</link>><<gdelinquency>>
+				<br>
+				<<link [[默默忍受|Science Dissection]]>><<set $phase to 3>><<stress 2>><<trauma 2>><</link>><<gtrauma>><<gstress>>
+				<br>
+				<<link [[弯下腰并将盒子轻轻地放下|Science Dissection]]>><<set $phase to 4>><</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eventssciencesafe">>
+	<<if $condomLvl isnot 0 and !$scienceCondomIntro>>
+		<<set $scienceCondomIntro to true>>
+		<<npc Sirris>><<person1>>
+		西里斯拿着一大堆小盒子走到全班同学面前。"我敢肯定，一些父母还没和你们说起这些。或者，你们中有些人像我<<if C.npc.Sydney.pronoun is "m">>儿子<<else>>女儿<</if>>一样，认为自己会终身禁欲。"
+		<<He>>开始把小盒子发给前排的同学，并依次往后传。你听到一些同学检查完盒子后笑了起来，但其他人表现得极为尴尬。
+		<br><br>
+
+		"这些是避孕套。你们正处于生命的黄金时期，荷尔蒙激增，所以需要随时随地带着这些东西。它们不仅能减少意外怀孕，还能让你保持干净。"西里斯从<<his>>桌子底下拿出一个巨大的、形状明显的水果。
+		<br><br>
+
+		"戴上它们非常简单。在这里撕开包装纸，靠在顶端，然后卷下来。不过，不要把这部分推下去。这就是所谓的储层尖端，它可以防止任何液体泄漏。"西里斯把避孕套套在那水果上的动作似乎让一些学生脸红了。<<arousal 200>><<garousal>>
+		<br><br>
+
+		"我不指望你们中的任何一个人保持禁欲，但我希望你们保持安全。到时候一定要用这些。我自掏腰包买的，所以最好别让我看到它们没开封就丢在垃圾桶里。如果你用完了，<span class="gold">你可以在南丁格尔街的医院药房买更多的。</span>"你低头看了看那盒避孕套。<<awarenessup 200 5>><<gcondoms 3>>
+		<br><br>
+
+		<i>避孕套可以阻止淫秽液体，防止意外受精，从内到外保持身体清洁。这也将有助于减轻纯洁损失，并抑制性奋增长。然而，避孕套有极小的概率破裂，尤其是在激烈的性交中。结合自控能发挥最佳效果。</i>
+		<<endevent>>
+	<<elseif $scienceproject is "none" and Time.days gte 2 and $mathsprojectdays isnot (21 + (7 - Time.weekDay))>>
+		<<set $scienceproject to "ongoing">><<set $scienceprojectdays to (21 + (7 - Time.weekDay))>>
+		<<scienceprojectstart>>
+		"科学博览会将在几周后举行，"西里斯宣布道，"展会是自愿参加的，但这是一个学习与实践相结合的好机会。这次的主题是当地的原生动植物，我为你们每个人都准备好了一个研究课题，但如果你们想的话，也可以自己找一个研究项目。"
+		<br><br>
+		西里斯要求全班同学将课本翻到第$rng页，然后开始在教室里走动着分发卡片。发给你的卡片上写着："地衣在城镇的分布范围很广，探讨不同环境下地衣的生长状况？"下面罗列了一些供你参考的不同种类的地衣，最后还有一句话："进入私人领地前记得征求同意！"
+		<<set $sciencelichenknown to 1>>
+		<br><br>
+		西里斯回到了讲台。"展览会将在星期六的市政厅举行，我希望你们都能到场——即便你们没有准备研究项目。"
+		<br><br>
+		<span class="gold">科学项目被添加到日志中。</span>
+
+		<<if $sciencephallusknown isnot 1 and $promiscuity gte 35>>
+			<br><br>
+			<<set $sciencephallusknown to 1>>
+			在其他学生还在讨论想法时，一个淫秽的想法出现在你的脑海中。<span class="gold">你已经构思了"本地性器调查"的科学项目。</span>
+		<</if>>
+
+	<<elseif $rng gte 81>>
+		西里斯要求全班同学将课本翻到$rng页。
+		<<if $worn.handheld.name isnot "naked" and !$worn.handheld.type.includes("bookbag")>>
+			你发现忘带书包了，但为时已晚。
+			<<if $NPCName[$NPCNameList.indexOf("Sirris")].love gte 10>>
+			西里斯温和地责备了你，但递给你一本备用教科书。"这次我就放过你了，不过下次要准备好。"
+			<<else>>
+				西里斯摇了摇<<his>>的头。"抱歉，但你下次需要充分准备，"<<he>>一边告诫一边递给你一本备用教科书。<<detention 1>><<gdelinquency>>
+			<</if>>
+		<<else>>
+			不过教室里的气氛很是轻松吵闹，大多数的学生情愿浪费时间聊天，也不愿去阅读课文。
+		<</if>>
+	<<elseif $rng gte 71>>
+		西里斯播放了一段关于<<print either("自然","空间","磁场","电子","化学键","爱因斯坦","科学方法的先驱","艾萨克·牛顿","核聚变","酶的作用","DNA")>>的简短视频。课堂上弥漫着悠闲的气氛。大多数学生都在认真观看，但也有很多人在聊天。
+	<<elseif $rng gte 61>>
+		班上的同学正在进行着关于化学品的实验，你小心着不让任何东西洒出来。
+	<<elseif $rng gte 51>>
+		<<generates1>><<person1>>
+		班里正在用化学品进行实验。
+		<<if random(1)>>
+			一个<<person>>不小心将化学品洒在<<his>>的衣服上。
+		<<else>>
+			一个<<person>><<print (random(1,5) is 1 ? "意外" : "'意外'")>>将化学品洒在<<generates2>><<person2>><<persons>>的衣服上。
+		<</if>>
+		你看到<<personsimple>>惊慌失措地从教室里逃了出来，<<his>>的衣服正在一点一点地溶解！
+		<<endevent>>
+	<<elseif $rng gte 41>>
+		一些坏学生挑衅其中的一个好学生，西里斯把肇事者全都轰到了教室的对面。
+	<<elseif $rng gte 31>>
+		西里斯放了一段关于人类生殖的视频。
+		<<if Time.days gte 25 and $rng % 3 is 0>>/*1 in 3 chance, and won't happen too early*/
+			<br><br>
+			它看起来根本不像是一部教育片——形象且有些生动过头了。说实话，这玩意就是一盘14分钟的家庭性爱录像带。唯一的"教育性"就是西里斯时不时地暂停视频，以此让学生指出哪些身体部位是被舔、被抚摸、被吸、被咬或被插入的。
+			虽然视频里没有任何人露脸，但你开始怀疑其中的某个参与者就是西里斯本人。
+			<br>
+			全班同学都在全神贯注地看着，直到这对夫妇气喘吁吁地达到高潮。
+			<<garousal>><<arousal 200>>
+			<br><br>
+			"我知道这太露骨了，"西里斯说道，"但是好的科学家从来不会忌讳。人类也是动物，而这只是观察动物行为。我们不仅要书面了解事实和术语，更要了解什么是真正的性行为，以及它看起来是什么样子。"
+			<<awarenessup 200 1>>
+		<<else>>
+			它专注于科普教育，涉及了性健康、性病、<<if $pregnancyspeechdisable is "f">>怀孕、<</if>>避孕和同意性行为。
+			它展示了一些器官和细胞的标注示意图，以此介绍性行为的基本机制。
+			<<awarenessup 100 1>>
+			<br><br>
+			教室里洋溢着懒散悠闲的气氛，大多数学生都在聊天，只有一部分人在观看，即使是在观看的这批人也没有几个真的对它感兴趣。
+			<<if playerBellyVisible() and $pregnancyspeechdisable is "f">>你不断被提醒着你目前所处的境况，以及你体内孕育的宝贵生命。<<lstress>><<stress -10>><</if>>
+		<</if>>
+	<<elseif $rng gte 21>>
+		<<npc Sirris>><<person1>>
+		西里斯向全班同学提出了一个问题。你认为你知道答案。
+		<br><br>
+		<<set _uniqueoptions to true>>
+		<<link [[举手|Science Event1]]>><<set $phase to 1>><<stress 1>><<scienceskill 1>><</link>><<gstress>><<gscience>>
+		<br>
+		<<link [[低头|Science Event1]]>><</link>>
+		<br>
+	<<elseif $rng gte 11>>
+		<<if $player.gender_appearance is "m">><<generatesf1>><<else>><<generatesm1>><</if>>
+		西里斯环视了一下教室，随后在瞥了你一眼后，让一个<<person1>><<personsimple>>到教室的讲台上去。
+		<br><br>
+		西里斯对<<person>>笑了笑。
+		<<rng>>
+		<<if $scienceprogression gte 2>>
+			<<He>>看起来很紧张，"这部分课程是关于人体解剖学的，所以我需要你脱掉你的衣服。嗯，是所有的衣服。不过不要感到尴尬，这对这门课很重要。"
+			<br><br>
+			<<if $rng lte 35>>
+				<<set $_studentLeaves to true>>
+			<<else>>
+				<<personsimple>><<print either("兴奋地同意", "高兴地同意", "漫不经心地同意", "勉强同意", "<<he>>看起来很想哭，但还是点头同意", "含泪同意")>>了。
+				<<He>>脱光了衣服，这立即勾起了全班同学的注意力。老师讲解指出<<person>>身上对应的解剖部位，而<<his>>就那样光着身子站在前面。
+				<<if $scienceprogression gte 3>>
+					随后，西里斯示意<<him>>爬到桌子上，并让<<his>>张开双腿。西里斯<<if $NPCList[0].penis isnot "none">>举起<<personsimple>>的阴茎<<else>>拿出了窥阴器<</if>>，让那些本就兴奋的学生们看得更清楚了。
+					<<if $scienceprogression gte 4>>
+						终于，局面开始失控了。当有些学生开始亲自探索"人体的奥秘"时，<<person>>放声尖叫起来。终于恢复秩序后，
+					<</if>>
+				<</if>>
+				西里斯结束了讲解，在请<<person>>穿上衣服后便让其坐回了原位。
+				<br><br>
+
+				虽然你为那个<<person>>感到难过，但这绝对使这节课更加有趣了。你认为你从中学到了一些东西。
+				<<gscience>><<scienceskill>>
+			<</if>>
+		<<elseif $scienceprogression gte 1>>
+			"我需要你在我讲解这部分的时候脱下衣服。别担心，你想的话，你可以留着你的内裤。"
+			<br><br>
+			<<if $rng lte 25>>
+				<<set $_studentLeaves to true>>
+			<<elseif $rng lte 35>>
+				<<set $_studentNotWearingUnderwear to true>>
+			<<else>>
+				<<personsimple>><<print either("兴奋地同意", "高兴地同意", "漫不经心地同意", "勉强同意", "<<he>>看起来很想哭，但还是点头同意", "含泪同意")>>了。
+				<<He>>脱掉了<<his>>的内裤，这立即吸引了全班的注意力。
+				西里斯继续讲课，指着<<persons>>身体的各个部分并解释起各种功能。
+				西里斯很快就结束了演示，请<<person>>穿好衣服并坐回原位后，开始继续讲课。
+				<br><br>
+
+				虽然你为那个<<person>>感到些许难过，但这绝对使这节课更加有趣了。你认为你从中学到了一些东西。
+				<<gscience>><<scienceskill>>
+			<</if>>
+		<<else>>
+			"别担心，我们不会做什么有侵犯性质的事情的。"
+			<br><br>
+			在接下来的几分钟里，西里斯讲到了各种骨骼和器官，并在讲解的同时指着<<persons>>身体的对应位置，这确实很有意思。
+			<<gscience>><<scienceskill>>
+		<</if>>
+
+		<<if $_studentNotWearingUnderwear>>
+			<<personsimple>>对西里斯低声说了几句话。
+			<br><br>
+			西里斯的脸一下子涨得通红，随后马上让<<person>>坐回原位。"那个，我又想了一下。同学们，那个，呃……这次，这次我们将用解剖图，"西里斯说道，"它们……更详细清楚。"
+		<<elseif $_studentLeaves>>
+			<<print either(
+				"那个<<personsimple>>直接跑出了房间，没有再回来。",
+				"<<personsimple>>带着平静的表情默默地离开了房间。",
+				"<<personsimple>>带着担忧的表情说到自己想去一下卫生间，随后在将桌子上属于自己的东西拿走后便离开了。直到最后<<He>>也没有回来。"
+			)>>
+			<br><br>
+			"我想我们将不得不用旧的解剖图来做演示了，"西里斯继续说道，"对不起，同学们。"
+		<</if>>
+		<<endevent>>
+	<<else>>
+		<<if $dissociation gte 1>>
+			<<npc Sirris>><<person1>>西里斯走向你并问道："有什么问题么？你看起来有些……不太好。"
+			<br><br>
+
+			<<link [[我很好|Science Event2]]>><</link>>
+			<br>
+			<<link [[放声痛哭|Science Event2]]>><<set $phase to 1>><</link>>
+			<br>
+		<<else>>
+			西里斯走近你并问道："有什么需要我帮你讲解的吗？"
+			<br><br>
+
+			<<link [[是的|Science Event2]]>><<set $phase to 2>><<scienceskill 1>><</link>><<gscience>>
+			<br>
+			<<link [[没有|Science Event2]]>><<set $phase to 3>><</link>>
+			<br>
+		<</if>>
+		<<set _uniqueoptions to true>>
+	<</if>>
+
+	<<if !_uniqueoptions>>
+		<br><br>
+		<<link [[继续|Science Lesson]]>><</link>>
+	<</if>>
+<</widget>>

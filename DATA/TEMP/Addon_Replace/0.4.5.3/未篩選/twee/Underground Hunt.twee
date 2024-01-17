@@ -1,0 +1,46 @@
+:: Underground Hunt []
+<<location "forest">><<effects>>
+
+枪声响起了，你开始逃跑。
+<br><br>
+
+当第二声枪声响起的时候，你刚跑到树下。你听到<<victimgirls>>随着被抓住而发出的一声声惨叫。
+
+<<if $athleticsSuccess>>
+	<<rng>>
+	最后你的精疲力尽，倒在了一棵树下。除了自己的心跳声，跟风吹过树叶的声音之外，你已经什么都听不见了。
+	你走开了。
+	<<pass 5>>
+	<br><br>
+
+	<<endevent>>
+	<<dungeonescape>>
+
+	<<link [[继续|Forest]]>><<set $forest to 1>><</link>>
+<<else>>
+	<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for BeastPeople -->
+		你听到有什么在你背后的草地上跑过来，随后感觉有<<print ($monster is 1 ? "手" : "爪子")>>把你摁倒趴在地。
+		那只<<beasttype 0>>开始抽动起来<<if $NPCList[0].penis isnot "none">>，你感觉到<<bhis 0>>的肉棒在戳着你的<<bottom>><</if>>。
+		<br><br>
+
+		"看起来<<bhe 0>>很喜欢你，”你听到<<person>><<he>>追上来说道。<<He>>不是一个人，有很多人跟在<<him>>身后。
+		"只有这样<<bhe 0>>才能随心所欲地对待<<bhis 0>>的猎物。”人群围成一圈，包围着你。
+		<br><br>
+
+		<<link [[继续|Underground Hunt Dog]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		你尽可能快地逃走。你听到<<victimgirls>>随着被抓住，一声接着一声的尖叫。
+		你听到有什么东西在你身后奔跑，下一秒，你被摁倒在地。
+		<br><br>
+
+		"抓到你了！"那个<<person>>说道。一些人气喘吁吁地跟了上来，"现在该猎人享受猎物了。"
+		<br><br>
+
+		<<saveNPC 1 "underground_hunt_1">>
+		<<endevent>>
+		<<loadNPC 0 "underground_hunt_1">>
+		<<clearNPC "underground_hunt_1">>
+
+		<<link [[继续|Underground Hunt Molestation]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<</if>>

@@ -1,0 +1,73 @@
+:: Wolf Cave Hunt []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $wolfpacktrust gte 18 or $wolfpackleader gte 1>>
+	<<if playerIsPregnant() and playerBellySize() gte 15>>
+		<<set _pregnancy to getPregnancyObject()>>
+		<<npc "Black Wolf">>
+		你试图跟随那些<<wolf_cave_plural>>，但黑狼转过身来，闻了闻你的肚子周围，似乎在寻找什么。
+		<<if $monster is 1>>
+			"待在这里！看好孩子。保护好你的肚子。"
+			<<if _pregnancy.type is "wolf" and _pregnancy.potentialFathers.find(father => father.source === "Black Wolf")>>
+				<<bhe>>在骄傲地看着你的肚子。<<set $blackWolfPregnancyHunt to true>>
+			<</if>>
+		<<else>>
+			<<bHe>>
+			<<if _pregnancy.type is "wolf" and _pregnancy.potentialFathers.find(father => father.source === "Black Wolf")>>
+				看起来比一般人更贴心，而且很明显<<set $blackWolfPregnancyHunt to true>>
+			<</if>>
+			希望你和年轻的<<wolf_cave_plural>>呆在一起，保护你和你日渐变大的肚子。
+		<</if>>
+		<br><br>
+		<<endevent>>
+
+		你看着它们穿过树林离开。
+		<br><br>
+
+		<<destinationwolfcave>>
+	<<elseif $blackWolfNotHunting>>
+		<<npc "Black Wolf">>
+		黑狼坐在石头上，注视着一切，<<bhis>>鼓胀的肚子也呈现在你的视野中。
+		<<endevent>>
+		<br><br>
+		<<if $wolfpackleader gte 1>>
+			当成员们兴奋地互相咬来咬去时，狼群开始吠叫。但目前还没有人开始跑步。它们都在看着你。
+		<<else>>
+			狼群中的成员为谁来领导狩猎而咆哮和撕咬。
+		<</if>>
+		<<set $outside to 1>>
+		<br><br>
+		<<link [[带头 (0:15)|Wolf Cave Hunt No Black Wolf Start]]>><<set $phase to 1>><<pass 15>><</link>>
+		<br>
+		<<link [[移开视线 (0:30)|Wolf Cave Hunt No Black Wolf Start]]>><<pass 30>><</link>>
+	<<else>>
+		<<set $dateCount.BlackWolfHunts++>>
+
+		你跟随着那些<<wolf_cave_plural>>穿过树林离开。它们没有阻止你。
+		<br><br>
+		<<set $outside to 1>>
+		离狼穴不远的地方，它们开始奔跑。它们移动得很快，很难跟上。
+		<<gathletics>><<athletics 6>><<physique 6>>
+		<br><br>
+
+		<<wolfhuntevents>>
+	<</if>>
+<<else>>
+	你试图跟随<<wolf_cave_plural>>，但黑狼转身向你咆哮。
+	<<npc "Black Wolf">>
+	<<if $monster is 1>>
+		"留下来！看着年轻的孩子们。建立信任。"
+	<<else>>
+		<<bHe>>想让你留在这里照看年轻的<<wolf_cave_plural>>。
+	<</if>>
+	<br><br>
+	<<endevent>>
+
+	你看着它们穿过树林离开。
+	<br><br>
+
+	<i>如果它们更信任你，它们可能会愿意让你加入。</i>
+	<br><br>
+
+	<<destinationwolfcave>>
+<</if>>

@@ -1,0 +1,36 @@
+:: Bully Parasite Fight Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	当你的敌人在走廊地板上痛苦地呜咽时，你沉浸在胜利的快感中。有观众欣赏着你的战斗力，这当然不会伤害你的自尊和名誉。
+	<<status 15>><<ggcool>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<tearful>>你让惠特尼和<<person1>><<his>>朋友们在地板上大喘气。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+
+<<else>>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
+		把你剥光之后，那帮人有所收敛，但还没完。
+	<<else>>
+		在把你打得服服帖帖之后，这帮人有所收敛，但他们对你的惩罚还远没有结束。
+	<</if>>
+	<br><br>
+
+	<<endcombat>>
+
+	<<npc Whitney>><<person1>>
+	<<WhitneyParasite>>
+<</if>>

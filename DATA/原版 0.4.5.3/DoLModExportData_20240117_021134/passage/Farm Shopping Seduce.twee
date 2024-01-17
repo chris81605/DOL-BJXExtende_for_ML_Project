@@ -1,0 +1,43 @@
+:: Farm Shopping Seduce []
+<<effects>>
+
+<<set $seductiondifficulty to 2000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+你把身子压在柜台上。"在外面等我，"你低声说，"在商店后面。"
+<<promiscuity1>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<<person>>瞥了一眼窗外，<span class="green">点了点头。</span><<He>>消失在<<him>>身后的一扇门里。
+	<br><br>
+
+	你拿起篮子，从前门离开，漫步回到农场。
+	<br><br>
+
+	<<link [[继续|Farm Shopping End]]>><</link>>
+	<br>
+
+<<else>>
+
+	"像狗一样在外面？"<<person>>笑了，"<span class="red">不可能。</span>到柜台上去。"
+	<br><br>
+
+	<<link [[用钱支付|Farm Shopping Pay]]>><</link>>
+	<br>
+	<<link [[抢了就跑|Farm Shopping Steal]]>><<crimeUp 50 "thievery">><</link>><<crime "thievery">><<athleticsdifficulty 1 600>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[用你的身体支付|Farm Shopping Prostitution]]>><</link>><<promiscuous2>>
+		<br>
+	<<elseif $uncomfortable.prostituting is false>>
+		<<link [[用你的身体支付|Farm Shopping Prostitution]]>><<set $desperateaction to 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<</if>>

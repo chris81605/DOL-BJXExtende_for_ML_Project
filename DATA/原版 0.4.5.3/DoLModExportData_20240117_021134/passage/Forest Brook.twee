@@ -1,0 +1,23 @@
+:: Forest Brook []
+<<location "forest">><<effects>>
+你小心地沿着从湖延伸而出的小溪行走。溪岸被茂密的叶子遮挡，你不得不摇摇晃晃地沿着陡峭的溪岸行走。
+<br><br>
+
+一部分的地势陡然下降，一块有着较大高低落差的岩石下方通向下游。继续前进将无法回头。
+<br><br>
+
+<<lakeicon "waterfall">><<link [[朝湖泊逆流而行 (0:30)|Lake Waterfall]]>><<pass 30>><<tiredness 6>><</link>><<gtiredness>>
+<br>
+
+<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and $exhibitionism gte 35>>
+	<span class="red">你耳朵里的史莱姆拒绝让你穿着泳装离开。</span>
+<<else>>
+	<<if $bogProgress gte 1>>
+		<<foresticon "bog">><<link [[朝沼泽顺流而行 (0:30)|Bog Intro]]>><<pass 30>><<tiredness 6>><<set $forest to 0>><</link>><<note "单行道" "red">><<gtiredness>>
+	<<else>>
+		<<askicon>><<link [[探索下游 (0:30)|Bog Intro]]>><<pass 30>><<tiredness 6>><<set $forest to 0>><</link>><<note "单行道" "red">><<gtiredness>>
+	<</if>>
+	<br><br>
+	<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><<set $forest to 80>><</link>>
+<</if>>
+<br>

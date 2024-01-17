@@ -1,0 +1,25 @@
+:: Catacombs Compound Plunder []
+<<effects>>
+
+你打开旧的保险箱，避开由此产生的尘埃云。
+
+<<if $rng gte 81>>
+	<<if $worn.face.type.includes("blindfold")>>
+		它们可以用来给火炬加料，<span class="pink">但是你看不见。</span>
+	<<else>>
+		然而，你运气不好，尽管你确实找到了一些旧破布。你把它们加进了火炬里。<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	保险箱一个个的全都空无一物，直到你瞥见一道的黄色金属的闪光。那是一枚金币，虽然被时间腐蚀了，但毫无疑问仍然贵重。一位久逝君主的脸庞正凝视着你。
+	<<set $antiquemoney += 100>><<museumAntiqueStatus "antiquegoldcoin" "found">><<crimeUp 100 "thievery">>
+<<else>>
+	你发现一枚银币，埋在被毁坏的碎片下面。
+	<<set $antiquemoney += 20>><<museumAntiqueStatus "antiquesilvercoin" "found">><<crimeUp 20 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>

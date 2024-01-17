@@ -1,0 +1,70 @@
+:: Pub Fame []
+<<effects>>
+
+<<if $phase isnot 1>>
+	<<generateMickey 2>>
+	兰德里四下张望了一下，然后朝后面一扇门的方向点了点头。你敲了敲门，"是我。"
+	<br><br>
+
+	'米奇'打开了一条门缝，
+<</if>>
+<<if $pubfame.status is "done">>
+	<<if $pubfame.detail is "briarWindow">>
+		<<set $pubfame.detail to 0>>
+		"你他妈是从那扇窗户里跳出去的？"
+	<<elseif $pubfame.detail is "hiding">>
+		<<set $pubfame.detail to 0>>
+		"哦，是你啊。"对方盯着你看了几秒钟。"我可没因为你告诉他们我的事而生气，"你感觉米奇说话时心口不一。"算了，你照我说的做了吗？"
+	<<else>>
+		<<if $phase is 1>>
+			"还有别的事吗？"
+		<<else>>
+			"你照我说的做了吗？"
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[告诉米奇都结束了|Pub Fame Done]]>><<set $pub_task_stat++>><</link>>
+<<elseif $pubfame.status is "accepted">>
+	<<if $pubfame.detail is "hiding">>
+		<<set $pubfame.detail to 0>>
+		"哦，是你啊。"对方盯着你看了几秒钟。"我可没因为你告诉他们我的事而生气，"你感觉米奇说话时心口不一。"算了，你照我说的做了吗？"
+	<<else>>
+		"你照我说的做了吗？"
+	<</if>>
+	<br><br>
+
+	<<link [[请求提醒一下|Pub Fame Remind]]>><</link>>
+	<br>
+	<<link [[放弃差事|Pub Fame Decline]]>><<set $phase to 1>><</link>>
+<<else>>
+	<<if $pubfame.detail is "hiding">>
+		"哦，是你啊。"对方盯着你看了几秒钟。"我可没因为你告诉他们我的事而生气，"你感觉米奇说话时心口不一。"算了，你想干嘛？"
+	<<else>>
+		<<set _hello to [
+			"想喝点什么？",
+			"需要我做些什么？",
+			"那么，你来这里干嘛？",
+			"选仔细点，我可没那么有空。",
+			"跟往常一样？抱歉，是我想说这句话。",
+			"兰德里，我的要求是整整12分钟——哦，是你啊。\"米奇挠了挠头。\"没听见你来。"
+		]>>
+		<<if $phase isnot 1>>
+			<<set _hello.pushUnique(
+				"嗨。",
+				"很高兴又见到你。",
+				"我想你了。\"米奇顿了下。\"忘了我刚才说的。"
+			)>>
+		<</if>>
+		<<silently>>
+			<<overworld_nickname>><<if !_text_output.includes("某个孤儿")>><<set _hello.pushUnique("再次欢迎，<span class='teal'><<overworld_nickname>></span>。")>><</if>>
+			<<if $fame.scrap gte 400>><<set _hello.pushUnique("又见面了，<span class='pink'><<underworld_nickname>></span>。")>><</if>>
+		<</silently>>
+		"<<print _hello.random()>>"
+	<</if>>
+	<br><br>
+	<<pubfameOptions>>
+<</if>>
+<br><br>
+
+<<link [[回到兰德里那|Pub Landry]]>><<unset $pubfameTemp>><<unset $pubfameLower>><<unset $pubfameTarget>><<set $phase to 1>><</link>>

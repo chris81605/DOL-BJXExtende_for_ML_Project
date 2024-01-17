@@ -1,0 +1,26 @@
+:: Catacombs Normal Plunder []
+<<effects>>
+
+你在地下墓穴里寻找战利品，在角落和缝隙里寻找，踢开保险箱，在尘土飞扬的内部翻找。
+
+<<if $rng gte 81>>
+	你运气不好，虽然你找到了一些破布碎片。
+	<<if $worn.face.type.includes("blindfold")>>
+		它们可以用来给火炬加料，<span class="pink">但是你看不见。</span>
+	<<else>>
+		你把它们加进了火炬里。<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	你没有运气，直到你遇到一个保险箱，它的锁仍然完好无损。你把原始的设计做得很快。里面是一把失去光泽的银刃。不管它的刀柄是什么，它早就腐烂了。它也许值点钱。
+	<<set $antiquemoney += 60>><<museumAntiqueStatus "antiquesilverblade" "found">><<crimeUp 60 "thievery">>
+<<else>>
+	你发现了一枚铜币，它的表面受到腐蚀，上面的文字已经无法辨认。即便如此，博物馆馆长仍可能会买下它。
+	<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquecoppercoin" "found">><<crimeUp 10 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>

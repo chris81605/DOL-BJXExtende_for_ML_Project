@@ -1,0 +1,50 @@
+:: Farm Kennel Train Mild []
+<<effects>>
+
+你搞了个简易的跑酷。你的目的是让<<beastsplural>>在没有你的帮助下完成它。
+
+<<if $farm.beasts.dogs gte 5>>
+
+	它们充满活力地遵从了你的命令，为了得到你的注意，它们更加地努力了。
+	<br><br>
+
+	<<link [[收尾|Farm Work]]>><<endevent>><</link>>
+	<br>
+	<<if $deviancy gte 35>>
+		<<link [[奖励做的最好的|Farm Kennel Train Mild One]]>><<handskill 6>><</link>><<deviant3>><<ghandskill>>
+		<br>
+	<</if>>
+	<<if $deviancy gte 75>>
+		<<link [[奖励它们全部|Farm Kennel Train Mild All]]>><<farm_dogs 3>><</link>><<deviant5>><<ggrespect>>
+		<br>
+	<</if>>
+
+
+<<elseif $farm.beasts.dogs gte -5>>
+
+	它们毫无热情地服从了你的命令，但训练很顺利。<<grespect>><<farm_dogs 1>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $farm.beasts.dogs gte -20>>
+
+	然而，毫无疑问，它们有自己的想法。它们不会直接无视你的命令，但很多的都无视了你设置的障碍。你大喊着你的指令，有点效果，但是有限。最好还是别管剩下的这些"坏孩子"了。
+	<br><br>
+
+	<<link [[管教他们|Farm Kennel Train Mild Discipline]]>><</link>>
+	<br>
+	<<link [[收尾|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+
+<<else>>
+	然而，毫无疑问，它们有不同的想法。它们走过了障碍物，无视了你设置的圈子。
+	<br><br>
+
+	<<link [[放弃|Farm Work]]>><<endevent>><</link>>
+	<br>
+	<<link [[大声叫喊|Farm Kennel Train Mild Yell]]>><</link>><<tendingdifficulty 1 1000>>
+	<br>
+<</if>>

@@ -1,0 +1,45 @@
+:: Plantperson Test Sex []
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>><<set $consensual to 1>>
+		<<neutral 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<</if>>
+	<<generatePlant1>><<person1>>
+	<<maninit "plant">><<npcexpose>>
+	<<if $location is "forest">>
+		<<enable_rescue>>
+	<</if>>
+	<<set $enemyarousalmax to 800>>
+	<<set _randomtentacles to random(6, 10)>>
+	<<makeAbomination _randomtentacles 10 "vine" "vine" true>>
+	"Hi there!" A <<person>> pops up in front of you, <<plant_details>> strewn through <<his>> hair because you're in the $location and it's <<print Time.season>>. "You're cute! I'm gonna fuck you with my vines!"
+	<br>
+	A bunch of vines pop out of the ground.
+<</if>>
+<<effects>>
+<<effectsabomination>><<abomination>>
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if $finish is 1>>
+	<span id="next"><<link [[FINISH|Plantperson Test Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[HEALTH|Plantperson Test Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[ORGASM|Plantperson Test Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[RESCUE|Plantperson Test Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Plantperson Test Sex]]>><</link>></span><<nexttext>>
+<</if>>
+<br>
+<<link [[Emergency exit|Plantperson Test Sex Finish]]>><<set $finish to 1>><</link>>
+<br><br><br><br>

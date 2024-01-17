@@ -1,0 +1,129 @@
+:: Brothel []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<unset $corruptionDancing>>
+
+<<if $brothelshowdata.intro is true>>
+	<<set $brothelshowdata.intro to 1>>
+<</if>>
+
+你在妓院里，拥挤的房间里点缀着几个舞台，员工们看起来很慌乱，像劳累过度的样子。
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passoutshop>>
+<<elseif $briarPunishment gte 1>>
+	<<set $briarPunishReason to "default">>
+	<<npc Briar>><<generate2>><<generate3>><<person1>>
+	布莱尔冲向你，<<his>>的两个打手挡在入口处。"我很惊讶你居然还敢回来，"<<he>>说道。"别以为我会对你所做的事情放过你。"<<He>>向<<his>>的打手点了点头，然后前走来。如果你想逃跑，现在是你唯一的机会。不过他们一共有三个人。<<person1>>
+	<br><br>
+	<<link [[跟他们走|Brothel Punishment 2]]>><</link>>
+	<br>
+	<<link [[反抗|Brothel Punishment Fight]]>><<set $fightstart to 1>><<def 3>><</link>>
+	<br>
+
+<<elseif $brothelshowdata.missed>>
+	<<set $brothelshowdata.missed to false>><<npcincr Briar love -1>>
+	<<npc Briar>><<generate2>><<generate3>><<person1>>布莱尔怒气冲冲的带着<<his>>两个手下向你冲了过来。"你去哪里了？"<<he>>问道。"顾客们很期待这场演出，你必须支付我的损失，"<<he>>向你伸出了<<his>>手。"£1000，现在就给我。"
+	<br><br>
+	<<if $money gte 100000>>
+		<<link [[支付 (£1000)|Brothel Pay]]>><<npcincr Briar dom 1>><<set $money -= 100000>><<sub 1>><</link>>
+		<br>
+	<</if>>
+	<<link [["说你钱不够"|Brothel Pay Refuse]]>><</link>>
+	<br>
+	<<link [[拒绝|Brothel Pay Refuse]]>><<npcincr Briar dom -1>><<def 1>><</link>>
+	<br>
+
+<<elseif $brothel_escortjob and ($brothel_escortjob.missed is true or $brothel_escortjob.escape is true)>>
+	<<unset $brothel_escortjob>><<npcincr Briar love -1>>
+	<<npc Briar>><<generate2>><<generate3>><<person1>>布莱尔跟两个打手气势汹汹地挡住了入口。“你之前在哪儿？”他问道，“我的客人来光顾我是因为他们觉得能看到他们期待的。安抚他们可花了我不少代价，不过你会还给我的不是吗？”<<He>>伸出举手，“<<printmoney 200000>>，就现在。”
+	<br><br>
+
+	<<if $money gte 200000>>
+		<<link [[付钱 (£2000)|Brothel Pay]]>><<npcincr Briar dom 1>><<set $money -= 200000>><<sub 1>><</link>>
+		<br>
+	<</if>>
+	<<link [["说你钱不够"|Brothel Pay Refuse]]>><</link>>
+	<br>
+	<<link [[拒绝|Brothel Pay Refuse]]>><<npcincr Briar dom -1>><<def 1>><</link>>
+	<br>
+
+<<elseif $NPCName[$NPCNameList.indexOf("Leighton")].init is 1 and $leightonbrothel is undefined and $brotheljob is 1 and Time.weekDay gte 6 and $pillory_tenant.special.name isnot "Leighton">><<set $leightonbrothel to 1>>
+	<<npc Leighton>><<person1>>
+	"你看起来像我的一个学生，"你右边的一个有趣的声音说。是礼顿。
+	<<if playerBellyVisible()>>
+		"我还说你怎么把肚子搞大了，"<<he>>接着说着，"原来你在这种地方干活啊。"
+	<</if>>
+	<<He>>独自一人坐在沙发上，伸展双臂，靠在椅背上。
+	<br><br>
+
+	"我就知道你是那种人，你的老板是我朋友，"<<he>>说道。<<He>>从<<his>>口袋里掏出一沓现金，拍了拍<<him>>旁边的座位。"你最好能让我满意。"
+	<br><br>
+
+	<<link [[坐下 (0:05)|Brothel Leighton Sit]]>><<npcincr Leighton love 1>><<npcincr Leighton dom 1>><<pass 5>><</link>>
+	<br>
+	<<link [[生气|Brothel Leighton Angry]]>><<npcincr Leighton love -1>><<npcincr Leighton dom -1>><<def 1>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[拒绝|Brothel Leighton Refuse]]>><</link>>
+	<br>
+
+<<else>>
+
+<<if $exposed gte 1>>
+	尽管你不是唯一一个穿着如此淫荡的人，但你还是觉得自己很暴露。
+	<br><br>
+<</if>>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "brothel">>
+<</if>>
+
+<<if $brotheljob is 1 and $fame.prostitution gte 30 and not $brothelshowdata.intro>>
+	<<generate1>><<person1>>看门的<<person>>把手放在你的肩膀上。<span class="gold">"老板要见你。"</span><<endevent>>
+	<br><br>
+
+<<elseif $brotheljob is 1 and $fame.prostitution gte 200 and $brothelshowdata.intro is 1>>
+	<<generate1>><<person1>>那个<<person>>守卫把手搭在了你的肩膀上，<span class="gold">"老板想跟你再见一面。"</span><<endevent>>
+	<br><br>
+<</if>>
+
+<<if $brotheljob is 1>>
+
+<<stripclubicon>><<link [[成为一名舞者|Brothel Dance]]>><<set $dancestart to 1>><<stress -4>><<tiredness 4>><</link>><<lstress>><<gtiredness>>
+<br>
+	<<if $brothelshowdata.intro>>
+		<<brothelicon "stage">><<link [[走到舞台后面|Brothel Stage]]>><</link>>
+		<br>
+	<</if>>
+	<<if $weekly.leightonDanceRefused and $headblackmailed is 1 and $pillory_tenant.special.name isnot "Leighton">>
+		<<icon "adultclothing.png">><<link [[更衣室 (0:01)|Leighton Club Ignore]]>><<pass 1>><<set $weekly.leightonDanceRefused to false>><</link>>
+		<br>
+	<<else>>
+		<<icon "adultclothing.png">><<link [[更衣室 (0:01)|Brothel Dressing Room]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<stairsicon "down">><<link [[地下室 (0:01)|Brothel Basement]]>><<pass 1>><</link>>
+	<br>
+	<<bathroomicon "shower">><<link [[浴室和淋浴间 (0:01)|Brothel Bathroom]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+
+<<officeicon>><<link [[布莱尔的办公室 (0:03)|Briar's Office]]>><<pass 3>><</link>>
+<br><br>
+	<<if $exposed lte 0>>
+		<<harvesticon>><<link [[离开 (0:01)|Harvest Street]]>><<pass 1>><</link>>
+		<br>
+	<<elseif $exposed gte 2 and $exhibitionism gte 75 and Time.dayState isnot "night">>
+		<<harvesticon>><<link [[离开 (0:01)|Brothel Leave Naked Day]]>><<pass 1>><</link>><<if $daily.ex.brothel isnot 1>><<exhibitionist5>><</if>>
+		<br>
+	<<elseif $exposed gte 2 and $exhibitionism gte 55 and Time.dayState is "night">>
+		<<harvesticon>><<link [[离开 (0:01)|Brothel Leave Naked]]>><<pass 1>><</link>><<if $daily.ex.brothel isnot 1>><<exhibitionist4>><</if>>
+		<br>
+	<<elseif $exposed is 1 and $exhibitionism gte 35 and Time.dayState isnot "night">>
+		<<harvesticon>><<link [[离开 (0:01)|Brothel Leave Undies Day]]>><<pass 1>><</link>><<if $daily.ex.brothel isnot 1>><<exhibitionist3>><</if>>
+		<br>
+	<<elseif $exposed is 1 and $exhibitionism gte 15 and Time.dayState is "night">>
+		<<harvesticon>><<link [[离开 (0:01)|Brothel Leave Undies]]>><<pass 1>><</link>><<if $daily.ex.brothel isnot 1>><<exhibitionist2>><</if>>
+		<br>
+	<</if>>
+
+<</if>>

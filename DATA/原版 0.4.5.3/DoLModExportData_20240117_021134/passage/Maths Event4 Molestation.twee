@@ -1,0 +1,27 @@
+:: Maths Event4 Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>>
+	<<enableSchoolRescue "Whitney">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没有人来帮你。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0 or $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Maths Event4 Molestation Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue gte 1>>
+	<span id="next"><<link [[继续|Whitney Rescue]]>><<set $whitneyRescueSpecial to "mathsSent">><<set $whitneyRescueExit to "hallways">><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Maths Event4 Molestation]]>><</link>></span><<nexttext>>
+<</if>>

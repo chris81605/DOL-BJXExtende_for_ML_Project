@@ -1,0 +1,98 @@
+:: Office Meeting Pet Ignore []
+<<effects>>
+<<set $meetingPhase++>>
+<<set $mAttention -= 1>>
+<<set $assaultEnergy -= random(1,10)>>
+<<if $assaultEnergy gte 1>>
+	<<if $worn.lower.name isnot "naked">>
+		你忽略了<<beasttype 0>>拉扯你$worn.lower.cn_name_cap的动作，并尝试将注意力集中在会议上。
+		<br>
+		<<if $meetingPhase lte 1>>
+			<<beasttype 0>>把你的$worn.lower.cn_name_cap拉到你的膝盖上。
+		<<elseif $meetingPhase lte 2>>
+			在没有任何阻力的情况下，<<beasttype 0>>把你的$worn.lower.cn_name_cap拉到了你的脚踝。
+		<<else>>
+			<<beasttype 0>>把你的$worn.lower.cn_name_cap从你的腿上拉了下来。
+			<<lowerundress "meeting_room">>
+			<br>
+			<<if $worn.under_lower.name isnot "naked">>
+				<<beasttype 0>>回来了，咬住了你的$worn.under_lower.cn_name_cap开始撕扯。
+			<<else>>
+				<<beasttype 0>>回来了，开始温柔地舔你的<<genitals>>！
+			<</if>>
+			<<set $meetingPhase to 0>>
+		<</if>>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		你试图忽略<<beasttype 0>>，专注于会议，但是现在更困难的是<<bhe 0>>开始撕扯起了你的$worn.under_lower.cn_name_cap。
+		<br>
+		<<if $meetingPhase lte 1>>
+			<<beasttype 0>>轻轻地把你的$worn.under_lower.cn_name_cap拉到你的膝盖上，露出你的<<genitals>>。
+		<<elseif $meetingPhase lte 2>>
+			<<beasttype 0>>将$worn.under_lower.cn_name_cap脱到你的脚踝处。
+		<<else>>
+			<<beasttype 0>>急切地把$worn.under_lower.cn_name_cap从你的腿上扯了下来，把衣服放在桌子底下，然后再回到你裸露的胯部，舔你的<<genitals>>!
+			<<underlowerundress "meeting_room">>
+			<<set $meetingPhase to 0>>
+		<</if>>
+	<<else>>
+		<<set $aGrowth to (100 + $deviancy) * $meetingPhase>>
+		<<arousal $aGrowth>>
+		<<if $arousal gte $arousalmax>>
+			<<beasttype 0>>无情的舔舐已经把你逼到崩溃的边缘。
+			<<orgasm>>
+			<<set $meetingOrgasm to 1>>
+			<br>
+			痉挛时，你不小心把笔从桌子上扔了出去，纸到处乱飞。
+			<br>
+			<<if $player.penisExist>>
+				你的精液溅到桌下，
+			<<else>>
+				你的汁液从你的<<pussy>>溅到地板上，
+			<</if>>
+			<<beasttype 0>>贪婪地舔了起来。你瘫倒在座位上，筋疲力尽。
+			<br>
+			大家都注意到你的异常，整个房间立刻安静下来。
+			<br><br>
+			<<link [[继续|Office Meeting Pet Discovered]]>><</link>>
+		<<elseif $arousal gte ($arousalmax / 5) * 4>>
+			你咬着手害怕发出声音，同时用另一只手继续记笔记。
+			<br>
+			<<if $player.penisExist>>
+				<<beasttype 0>>继续舔你的<<penis>>，你感觉你的肉棒现在简直硬得像石头一样。
+				<<if $player.vaginaExist>>
+					<<bHe 0>>一边舔你的<<penis>>，一边舔你汁水横流的<<bottom>>。
+				<</if>>
+			<<else>>
+				<<beasttype 0>>舔食着从你的<<pussy>>中漏出的汁液，没舔掉的则
+				<<if $worn.legs.name is "naked">>
+					滴在你光着的腿上。
+				<<else>>
+					浸湿了你的$worn.legs.cn_name_cap。
+				<</if>>
+			<</if>>
+			<<garousal>>
+		<<elseif $arousal gte ($arousalmax / 5) * 3>>
+			你喘着粗气，你的记录速度减慢了，你努力忽略放肆的<<beasttype 0>>，<<bhis 0>>长长的舌头一直在舔你裸露的<<genitals>>。
+			<br>
+			<<if $player.penisExist>>
+				<<beasttype 0>>品尝着你<<penis>>顶端溢出的先走汁。
+				<<if $player.vaginaExist>>
+					<<bhe 0>>继续攻击着你的<<penis>>，你<<pussy>>的液体开始聚集在你的<<bottom>>周围。
+				<</if>>
+			<<else>>
+				<<beasttype 0>>继续舔你的<<pussy>>。你的大腿湿透了，因为你的爱液和<<bhis 0>>的唾液混合在一起。
+			<</if>>
+			<<garousal>>
+		<<else>>
+			你努力忽略放肆的<<beasttype 0>>把注意力集中在会议上，<<bhis 0>>长长的舌头一直在舔你的<<genitals>>。尽管你努力了，你体内的热度还是在不断地往上升。<<garousal>>
+		<</if>>
+	<</if>>
+	<<if $meetingOrgasm lte 0>>
+		<<meetingattention>>
+		<<meetingpetactions>>
+	<</if>>
+<<else>>
+	<<beasttype 0>>似乎很无聊，<<bhis 0>>回到了主人身边，你松了口气。
+	<br><br>
+	<<link [[继续|Office Meeting End]]>><</link>>
+<</if>>

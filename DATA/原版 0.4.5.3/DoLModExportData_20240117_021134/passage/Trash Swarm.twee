@@ -1,0 +1,25 @@
+:: Trash Swarm []
+<<set $outside to 1>><<set $location to "landfill">><<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "maggots" "蛆虫" "在蠕动" "蠕动着" "阻止" 2 6>>
+
+	<<set $timer to 10>>
+<</if>>
+
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Trash Swarm Finish]]>><</link>></span><<nexttext>>
+<<elseif $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Trash Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Trash Swarm]]>><</link>></span><<nexttext>>
+<</if>>

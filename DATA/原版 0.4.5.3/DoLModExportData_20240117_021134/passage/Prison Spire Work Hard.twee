@@ -1,0 +1,54 @@
+:: Prison Spire Work Hard []
+<<set $outside to 0>><<effects>>
+
+<<generate_anxious_guard 0>><<person1>><<anxious_guard 0 cap>>待在更安全的小屋内，希望你能完成更危险的工作。
+<<endevent>>
+<br><br>
+<<rng 5>>
+<<switch $rng>>
+	<<case 1>>
+		<<beastNEWinit 5 "hawk">>
+		你用双手拎着一篮子鱼。<<beastsplural>>像雕塑一样看着你，直到篮筐触地。你转身就跑，身后这些野兽开始疯狂地觅食。<<gstress>><<prison_birds 1>><<prison_birds_text>>
+		<br><br>
+
+		<<prison_spire_options>>
+	<<case 2>>
+		<<beastNEWinit 5 "hawk">><<person1>>
+		灯塔周围的地面上散落着小宝石。也就是鲨鱼牙齿。你应该收集这些。
+		<br><br>
+		<<set $skulduggerydifficulty to 800>>
+		<<link [[偷摸行事|Prison Spire Work Hard Sneak]]>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<link [[快速行事|Prison Spire Work Hard Quick]]>><</link>><<athleticsdifficulty 800>>
+		<br>
+	<<case 3>>
+		<<generate_anxious_guard 0>><<person1>>
+		<<set $hawk_loot to either("雪茄", "酒瓶", "小刀", "手机", "糖果袋")>>
+		"违禁品，"<<anxious_guard 0>>指着一只独自坐在塔边的<<endevent>><<beastNEWinit 1 "hawk">><<person1>><<beasttype>>说道。
+		<<if $monster is 1>>
+			<<bHe>>手里拿着个$hawk_loot。
+		<<else>>
+			<<bHe>>喙里叼着个$hawk_loot。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Prison Spire Work Get]]>><</link>>
+		<br>
+	<<case 4>>
+		<<beastNEWinit 2 "hawk">><<person1>>
+		<<beastsplural>>在塔和海洋之间穿梭，寻找漂流木碎片带到灯塔顶端。木头时不时被立即抛弃，扔在平台的地板上四分五裂。
+		<br><br>
+		你在它们身后清扫着。它们太忙了，理都不理你。
+		<br><br>
+		<<prison_spire_options>>
+	<<default>>
+		<<generate_anxious_guard 0>><<person1>>
+		"现在不需要做什么，"<<anxious_guard 0>>说道，"帮我把风就行了。"
+		<br><br>
+
+		<<socialiseicon>><<link [[聊天|Prison Spire Work Chat 2]]>><<prison_rep anxious 1>><</link>><<glove>>
+		<br>
+		<<investigateicon>><<link [[寻找牙齿|Prison Spire Work Search]]>><</link>><<difficulty 70>>
+		<br>
+		<<daydreamicon>><<link [[做白日梦|Prison Spire Work Daydream]]>><<stress -6>><</link>><<lstress>>
+<</switch>>

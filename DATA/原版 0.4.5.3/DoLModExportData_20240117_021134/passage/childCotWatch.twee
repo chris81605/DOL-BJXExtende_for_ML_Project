@@ -1,0 +1,25 @@
+:: childCotWatch []
+<<if $phase is 1>>
+	你待在<<childname>>的边上，就这样静静地看着<<childhim>>睡觉。
+	<<set _rng to random(1, 4)>>
+	<<switch _rng>>
+		<<case 1>>
+			你的视线被<<childhis>>那随着轻柔的呼吸上下起伏的胸膛迷住了。
+		<<case 2>>
+			你回过神的时候发现你正在轻抚<<childhis>>的头顶。
+		<<case 3>>
+			<<childHe>>张开嘴打了一个大大的哈欠，随后随意地伸了个懒腰。<<lstress>><<stress -6>>
+		<<default>>
+			<<childHe>>突然皱起眉头，嘴唇也在一张一合，仿佛是做了个噩梦。<<gstress>><<stress 6>>
+	<</switch>>
+	<br><br>
+<<elseif $phase is 2>>
+	<<childSelect `$childrenIds[random(0,$childrenIds.length - 1)]`>>
+	你决定打一个盹，然后便躺在了你孩子旁边的床上。
+	<br><br>
+	当你醒来的时候，你感觉手指上貌似缠着什么东西。看来是当你还在睡觉的时候，<<childname>>用那<<childhand>>接触到你了。
+	<br><br>
+<</if>>
+
+
+<<link [[继续|$childPassageExit]]>><<unset $childPassageExit>><<endevent>><</link>>

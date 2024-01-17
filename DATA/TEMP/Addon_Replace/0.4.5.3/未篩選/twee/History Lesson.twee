@@ -1,0 +1,61 @@
+:: History Lesson []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.history to true>>
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	<<npc Winter>><<person1>>
+	"是时候证明你用过功读书了，"温特说着，把一叠试卷册放在<<his>>的桌子上。"排好队。任何在我下令之前开始做题的人都会受到惩罚。"<<gstress>><<stress 6>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Winter">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<exam history>>
+	<br><br>
+	你回到你的桌子前，等待温特的指令。"开始。"
+	<br><br>
+
+	<<endevent>>
+	<<exam_cheat history>>
+	<<link [[集中精力|History Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+	<br>
+	<<link [[试图放松|History Exam]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[作弊|History Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+	<br>
+<<else>>
+	<<if Time.minute lte 5>>
+		历史课开始了，你打算怎么表现？
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		历史课还在继续，你打算怎么表现？
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Winter">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<historyicon>><<link [[专注课程|History Lesson Focus]]>><</link>><<gstress>><<ghistory>>
+	<br>
+	<<socialiseicon>><<link [[与同学们社交|History Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[做白日梦|History Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 75>>
+		<<if $robinhistory is "seat">>
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+				<<ind>><<link [[自慰|History Lesson Masturbate Robin]]>><</link>>
+				<br>
+			<<else>>
+				<<ind>><<link [[自慰|History Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+		<<else>>
+			<<ind>><<link [[自慰|History Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

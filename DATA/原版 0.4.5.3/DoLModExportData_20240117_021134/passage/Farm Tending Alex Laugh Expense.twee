@@ -1,0 +1,75 @@
+:: Farm Tending Alex Laugh Expense []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+<<if $speech_attitude is "meek">>
+	你站在艾利克斯身边笑出了声。
+<<elseif $speech_attitude is "bratty">>
+	你站在艾利克斯身边发出了一阵大笑，听起来甚至有些失控。
+<<else>>
+	你站在艾利克斯身边哈哈大笑。
+<</if>>
+<br><br>
+
+<<if _alex.dom gte 10>>
+	"随你高兴吧，"<<he>>双臂交叉，讽刺地看着你，"反正你闲得很。"
+<<elseif _alex.dom lte -10>>
+	"有必要'热情'到这种程度吗？你给我记着，"<<he>>讽刺地说道。
+<<else>>
+	"你还要一直笑吗？"<<he>>说道，"真是谢谢你了。"<<Hes>>讽刺地说道。
+<</if>>
+<br><br>
+
+<<if _alex.dom gte 10>>
+	<<if currentSkillValue('athletics') gte 800 or currentSkillValue('danceskill') gte 800>>
+		<<He>>试图抓住你的脚踝，<span class="green">但你轻松地躲开了<<his>>的手</span>，而且你笑得更加开心了。
+		<<He>>一言不发地躺倒在地上。<<npcincr Alex dom -3>><<lldom>>
+		<br><br>
+
+		你没做任何反省。但过了一会儿，你还是帮<<him>>站起来，然后继续工作。
+		<br><br>
+
+		<<destination_farm>>
+	<<else>>
+		<<He>>抓住你的脚踝，<span class="pink">把你一起拉到了<<if $weather is "snow" or $weather is "rain">>泥里<<else>>地上<</if>>。</span>
+		<br><br>
+
+		<<if _alex.lust gte 10>>
+			"哎呀！你现在也许可以补偿我了，"<<he>>笑着把一只手放在你的大腿上。那只手向你的<<genitals>>移动。<<gtrauma>><<garousal>><<trauma 6>><<arousal 600 "genitals">>
+			<br><br>
+
+			<<link [[生气|Farm Tending Alex Lewd Angry]]>><<trauma -6>><<npcincr Alex love -1>><<npcincr Alex dom -1>><</link>><<llove>><<ldom>><<ltrauma>>
+			<br>
+			<<link [[忍耐|Farm Tending Alex Endure]]>><</link>>
+			<br>
+			<<if $promiscuity gte 15>>
+				<<link [[摸索回去|Farm Tending Alex Grope]]>><<npcincr Alex lust 1>><</link>><<promiscuous2>><<glust>>
+				<br>
+			<</if>>
+		<<else>>
+			你没有做任何反省，而<<his>>自己则发出了满意的大笑。你们站起来，双双回到了工作中。
+			<br><br>
+
+			<<destination_farm>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		<<He>>站起身，抹着身上的泥巴，试图把泥巴全擦掉。但<<He>>没能完全擦干净，这让你更加开心。看到<<his>>浑身是泥的样子，你笑得更欢了。
+		<<He>>瞪了你一眼，但随后和你一起笑了起来。"走吧，让我们回到工作中。我晚点再洗我的衣服。"
+		<br><br>
+
+		你有些气喘吁吁，但还是回到了工作中。
+		<br><br>
+
+		<<destination_farm>>
+	<<else>>
+		<<He>>就这样一动不动，凝视着上面的天空。"不得不承认，待在这里也不错。"
+		<br><br>
+
+		<<link [[坐下|Farm Tending Alex Sit]]>><</link>>
+		<br>
+		<<link [[回去工作|Farm Tending Alex Back]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

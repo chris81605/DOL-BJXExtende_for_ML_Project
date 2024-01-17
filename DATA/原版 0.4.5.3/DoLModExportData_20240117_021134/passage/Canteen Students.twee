@@ -1,0 +1,32 @@
+:: Canteen Students []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<generatey1>>
+<<if $rng gte 51>>
+	你靠近那些学生。其中一个<<person1>><<person>>狐疑地抬头看着你。"你想要干什么？"
+	<br><br>
+
+	<<link [[调情|Canteen Students Flirt]]>><</link>><<promiscuous1>>
+	<br>
+
+	<<link [[离开|Canteen]]>><<endevent>><</link>>
+<<else>>
+	你靠近那些学生。他们似乎没兴趣和你说话。"滚开，你这白痴。"一个<<person1>><<person>>轻蔑地看着你。
+	<br><br>
+	<<endevent>>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		<<set $daily.school.canteenApproach to 1>>
+		<<generatey1>>当你转身离开时，一个<<person1>><<person>>把手搭在了你的肩膀上。
+		"我有个更好的主意，"<<he>>咧开了嘴，"为啥不给我们看看你的<<print ($player.gender_appearance is "m" ? "鸡巴" : "骚穴")>>？"
+		在其他人的哄笑声中，那个<<person>>把你压到了地上。
+		<br><br>
+
+		<<link [[继续|Canteen Students Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<set $daily.school.canteenApproach to 1>>
+		<<link [[继续|Canteen]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

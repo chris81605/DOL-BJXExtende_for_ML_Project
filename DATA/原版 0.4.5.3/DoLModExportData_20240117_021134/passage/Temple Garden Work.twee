@@ -1,0 +1,182 @@
+:: Temple Garden Work []
+<<set $outside to 1>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $rng gte 81>>
+你询问司祭花园周围还需要做什么工作，他安排你去修剪一排树篱。于是你领了一把园艺剪准备开始工作。
+<br><br>
+	<<if $danger gte (9900 - $allure) and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+		<<tending_text>>虽然很辛苦，但你把东西收拾得很整齐。<<physique 6>>
+		<br><br>
+		你的手腕被一根野蛮生长的树枝卡住了，你试图用另一只手剪断它。但当你刚伸出手想要解放自己时，那只手也卡住了。你感觉有什么东西缠住了你的脚踝。一股力量拉住你的脚，把你拽到了树篱里。
+		<br><br>
+		你发现自己被悬挂在树枝上，缠绕在你身上的蔓藤把你高高举起。更多的枝条从四面八方涌出。
+		<br><br>
+
+		<<link [[奋力挣扎|Temple Garden Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[安抚|Temple Garden Soothe]]>><</link>><<tendingdifficulty 1 1200>>
+		<br>
+	<<else>>
+		<<tending_text>>虽然很辛苦，但你把东西收拾得很整齐。<<physique 6>>
+		<br><br>
+		<<link [[继续|Temple Garden]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 61>>
+	你询问司祭花园周围还需要做什么工作，他安排你去给花圃除草。于是你在花圃边蹲下，开始拔草。
+	<br><br>
+	<<beastNEWinit 1 wolf>>
+	<<if $danger gte (9900 - $allure) and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+		<<tending_text>>你的手很脏，汗珠顺着你的脸颊滑落，但当你完成工作时，花儿有了更多的空间。<<physique 6>>
+		<br><br>
+			<<if $syndromewolves is 1>>
+				你听到身后传来的脚步声，你转过身，一个<<beasttype>>跳到你身上，<<bHe>>不停地舔着你的脸。你不禁笑了起来。
+				<<if $monster is 1>>
+					"闻到了<<ppackbrother>>的味道，来看看，要回家么？族群想念你。"
+				<</if>>
+				<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+				<br><br>
+				你看着<<bhe>>回到了森林。
+				<br><br>
+
+				<<link [[继续|Temple Garden]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				你听到你身后的脚步声。你转过身，一只<<beasttype>>迎面扑来。
+				<br><br>
+				<<link [[继续|Temple Garden Work Wolf]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<</if>>
+	<<else>>
+		<<tending_text>>你的手很脏，汗珠顺着你的脸颊滑落，但当你完成工作时，花儿有了更多的空间。<<physique 6>>
+		<br><br>
+
+		<<link [[继续|Temple Garden]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 41>>
+你询问司祭花园周围还需要做什么工作，他安排你去神殿附近的果树上摘水果。
+<br><br>
+	<<if $danger gte (9900 - $allure)>>
+		手里拿着篮子，你爬上梯子开始采摘<<print either("柠檬", "青柠", "苹果", "橙子", "香梨")>>。<<tending_text>>采集水果的过程很有趣，尽管有的时候你得尽力伸长胳膊才能到摘到那些长得太高的水果。<<physique 6>><<lstress>><<stress -6>>
+		<br><br>
+
+		<<generateTemple 1>><<person1>>
+		"需要帮忙吗？"一个<<monk>>在你身后问道。不等你回答，<<he>>就爬上了梯子。顶端的空间不大。<<He>>抓住你的臀部来稳定<<himself>>。<<if $NPCList[0].penis isnot "none">><span class="lewd">你感觉到<<his>>的袍子下鼓起的那坨硬物紧贴在你的<<bottom>>上摩擦。</span><</if>>
+		<br><br>
+
+		<<link [[推开|Temple Garden Shove]]>><<trauma -6>><<stress -6>><<grace -5 monk>><</link>><<llgrace monk>><<ltrauma>><<lstress>>
+		<br>
+		<<link [[忍耐|Temple Garden Put]]>><<grace 1 monk>><</link>><<ggrace monk>>
+		<br>
+	<<else>>
+		手里拿着篮子，你爬上梯子开始采摘<<print either("柠檬", "酸橙", "苹果", "橙子", "香梨")>>。采集水果的过程很有趣，尽管有的时候你得尽力伸长胳膊才能到摘到那些长得太高的水果。<<physique 6>><<lstress>><<stress -6>>
+		<br><br>
+
+		<<link [[继续|Temple Garden]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 21>>
+你询问司祭花园周围还需要做什么工作，他安排你去维护树篱花园迷宫里的篝火。
+<br><br>
+
+	<<rng>>
+	<<if $rng gte 81>>
+		<<npc Jordan>><<generate2>><<generatey3>><<person2>>
+		你把煤铲到火坑里，一个<<monk>>在修剪空地周围树篱的时候一直盯着你。<<physique 6>>
+		<br><br>
+
+		<<tending_text>>这没花多少时间。你刚做完，约旦就从神殿赶来了，身边还带着另一个<<person3>><<person>>。
+		<br><br>
+
+		约旦对旁边的<<person2>><<monk>>低语了一些什么，<<he>>微笑着对你说道："继续铲，这个人正在尝试接受试炼。"你继续工作，向火坑里铲更多的煤，而那个<<monk>>则用一对风箱来加大火焰。
+		<br><br>
+
+		<<monk>>抓起一把铲子，开始把煤炭铺成薄薄的一层。你也学着一起铲煤。你们很快就把煤床铺好了。那个<<person3>><<person>>忐忑不安地看着你们。
+		<br><br>
+
+		约旦向<<him>>做了简单的解释，然后<<he>>就踩上了炭火。
+
+		<<rng>>
+		<<if $rng gte 91>>
+			<<He>>快步走过去，坚定的表情随着脚步而变得紧张，但最终还是踉踉跄跄地走到另一边，然后坐在地上检查起自己的双脚。<<person2>><<person>>欢呼起来，你也不由得为<<person3>><<he>>喝起了彩。
+			<<ltrauma>><<trauma -6>>
+			<br><br>
+			约旦引导那个通过试炼的<<person3>><<person>>回到神殿，一边解释着成为见习教徒的职责。
+		<<elseif $rng gte 71>>
+			<<He>>快要走到另一端的时候，疼痛最终还是打倒了<<him>>。随后，<<person1>><<he>>引导着<<person3>><<him>>返回了神殿，约旦在一旁说了些安慰的话。
+		<<elseif $rng gte 51>>
+			<<He>>在迈出第二步之后便因疼痛跳开了。随后，<<person1>><<he>>引导着<<person3>><<him>>返回了神殿，约旦在一旁说了些安慰的话。
+		<<else>>
+			<<He>>刚把脚抬上去便因为疼痛而退缩，<<person2>><<person>>直接笑了出来，而<<person1>><<he>>引导着<<person3>><<him>>返回了神殿，约旦在一旁说了些安慰的话。
+		<</if>>
+		<br><br>
+
+		<<endevent>>
+
+		<<link [[继续|Temple Garden]]>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<person1>>
+		你把煤铲到火坑里，一个<<monk>>在修剪空地周围树篱的时候一直盯着你。<<physique 6>>
+		<br><br>
+		<<tending_text>>这并不需要多长时间，但那个<<monk>>要求你帮忙清理之前审判剩下的煤渣，这需要更长的时间。
+		<br><br>
+
+		<<endevent>>
+
+		<<link [[继续|Temple Garden]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+<<generateTemple 1>><<person1>>
+你询问司祭花园周围还需要做什么工作，他安排你去协助<<monk>>照料森林边缘的作物。
+<br><br>
+你发现<<him>>正在照看一排作物，那是一排生机盎然的啤酒花藤蔓。
+	<<rng>>
+	<<if $rng gte 81>>
+		<<He>>让你在植物上寻找螨虫。<<tending_text>>
+	<<elseif $rng gte 61>>
+		<<He>>让你检查植物是否有霉变。<<tending_text>>
+	<<elseif $rng gte 41>>
+		<<He>>让你清除土壤中的杂草。<<tending_text>>
+	<<elseif $rng gte 21>>
+		<<He>>让你清除土壤中的杂草。<<tending_text>>
+	<<else>>
+		<<He>>让你收获成熟的植物。<<tending_text>>
+	<</if>>
+	<<physique 6>>
+	<br><br>
+
+	<<if playerBellyVisible()>>
+		"干得好，"<<he>>看你完成任务赞许道，"你虽然状态不佳，还是完美完成了工作，实在令人钦佩。"
+		<br><br>
+		<<He>>坐下来，环顾四周，然后从椅子下面拿出一个瓶子和一个杯子。<<He>>往杯子里倒入了某种棕色液体。
+		<br><br>
+		"我们把这些酿成啤酒，"<<he>>继续说道，指了指葡萄藤。"这让神殿有了一笔不错的副业收入。我们其实不应该喝酒，但是给那些在田里劳作的人一点小酒是没问题的。你孩子出生后，你应该也来尝尝。"
+		<br><br>
+		<<endevent>>
+
+		<<link [[继续|Temple Garden]]>><</link>>
+		<br>
+	<<else>>
+		"干得好，"在你完成之后，<<He>>坐下来环顾四周，然后从<<he>>的椅子下面拿出一个瓶子和两个杯子并将瓶子里的一种棕色的液体倒入杯中。
+		<br><br>
+		"来喝一杯怎么样？我们把这些东西酿成啤酒。"<<he>>继续说道，手指向啤酒花，"这让神殿有了个不错的副业收入。尽管我们确实不应该喝酒，但给那些在田间劳作的人们提供点小酒也是在允许范围内的。"<<He>>递给你一个杯子，"来吧，就当我请你。"
+		<br><br>
+
+		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+			<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+		<<else>>
+			<<if $danger gte (9900 - $allure) and $grace lt 0 or $danger gte (9900 - $allure) and random(1, 10) is 10>>
+				<<link [[喝一杯|Temple Drink Drugged]]>><<alcohol 180>><<drugs 180>><</link>>
+			<<else>>
+				<<link [[喝一杯|Temple Drink]]>><<alcohol 180>><</link>>
+			<</if>>
+		<</if>>
+		<br>
+		<<link [[拒绝|Temple Drink Refuse]]>><<grace -1>><</link>><<lgrace>>
+		<br>
+	<</if>>
+<</if>>

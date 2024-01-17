@@ -1,0 +1,21 @@
+:: Wolf Rival Flee []
+<<effects>>
+
+<<endevent>><<beastNEWinit 1 wolf>>
+你不想参与随后的打斗，所以你密切关注着野兽，寻找逃跑的机会。战斗一爆发，你就转身逃跑。一个<<beasttype>>注意到你试图逃跑并开始追赶你。
+<br><br>
+<<if $athleticsSuccess>>
+	<<clearNPC rival_wolf>>
+	你尽你的腿能跑多快，<span class="green">和<<beasttype>>很快就看不见你了</span>。甩掉追赶你的人后，你花了几分钟来喘口气。
+	<br><br>
+	<<link [[继续|Forest]]>><<endevent>><<set $forest to 60>><</link>>
+<<else>>
+	你的腿能跑多快就跑多快，<span class="red">但是你被<<beasttype>></span>超过了。<<bHe>>把你撞倒在地。
+	<br><br>
+
+	<<if $monster is 1>>
+		"胆小鬼想逃跑？"<<bHe>>咆哮，"要教训教训！"
+		<br><br>
+	<</if>>
+	<<link [[继续|Wolf Rival Molestation]]>><<set $molestationstart to 1>><</link>>
+<</if>>

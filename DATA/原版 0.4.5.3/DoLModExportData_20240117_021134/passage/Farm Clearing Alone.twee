@@ -1,0 +1,63 @@
+:: Farm Clearing Alone []
+<<effects>>
+
+<<if $weather is "rain">>
+	你忍受着雨水，清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+<<elseif $weather is "clear">>
+	<<if Time.dayState is "night">>
+	星星在夜空中闪烁，你清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+	<<else>>
+	太阳炙烤着地面，你清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+	<</if>>
+<<elseif $weather is "snow">>
+	你忍受着寒冷，清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+<<else>>
+	你清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+<</if>>
+<<if $rng gte 51>>
+	有些植物的根扎得很深，需要往下多挖一些才能全部拽出。
+<</if>>
+
+/* inexplicably, these strings were written assuming working at night. No idea why? Built new ones, but keeping these to reuse if we introduce sneaky night working or somesuch...
+<<set _rng to random(1, 6)>>
+<<if _rng is 1>>
+	You faintly hear a wet sound coming from the moor, but you can't see much in the darkness. <<gstress>><<stress 3>>
+<<elseif _rng is 2>>
+	You think you see a pair of eyes staring at you in the dark, but they're gone before you can get a better look. <<gstress>><<stress 6>>
+<<elseif _rng gte 3>>
+	You trip over something in the dark. <<pain 5>> <<gpain>>
+<</if>>
+*/
+
+<<set _rng to random(1, 6)>>
+<<if _rng is 1>>
+	你隐约听到从荒原里传来一种潮湿的声音。但当你望向那边的时候，你没能看到是什么发出了那种声音。<<gstress>><<stress 3>>
+<<elseif _rng is 2>>
+	<br><br>
+	你有一种不舒服的感觉，好像有什么东西在看着你。你环顾四周，但什么也没有。<<gstress>><<stress 6>>
+<<elseif _rng gte 3>>
+	<br><br>
+	你被一堆荆棘绊倒，砰地一声摔倒在地。<<pain 5>><<gpain>>
+<</if>>
+
+<<if $farm.clearing gte 50>>
+	你取得了一些进展，<span class="blue">但还有很长的路要走。没有艾利克斯，这项工作进行得很慢。</span>
+<<elseif $farm.clearing gte 10>>
+	你取得了一些进展。<span class="lblue">这片田地的大部分已经清理完毕了，但没有艾利克斯，这项工作进行得很慢。</span>
+<<elseif $farm.clearing gte 1>>
+	你取得了一些进展。<span class="teal">这片田地几乎被清理干净了，但没有艾利克斯，这项工作进行得很慢。</span>
+<<else>>
+	你取得了不错的进展，<span class="green">最后的杂草被清理干净了！</span>
+<</if>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "alexFarmTendingAlone">>
+<</if>>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure * 1.5)>>
+	<<farm_tending_events>>
+<<else>>
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

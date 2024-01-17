@@ -1,0 +1,28 @@
+:: Underground Tattoo Machine []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 15>><<set $machine_ammo to 3>>
+	<<machine_init tattoo arm_chains leg_chains>>
+	<<set $machine.tattoo.armed to 1>>
+	<<prop rails table neck_shackle>>
+	<<set $bodywriting_special to "dungeon">>
+<</if>>
+
+<<effects>>
+
+抓住你的人看着这一切，好像已经习以为常了。
+<br><br>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1>>
+	<span id="next"><<link [[继续|Underground Tattoo Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Tattoo Machine]]>><</link>></span><<nexttext>>
+<</if>>

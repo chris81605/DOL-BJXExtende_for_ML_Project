@@ -1,0 +1,51 @@
+:: Moor Fox Stand []
+<<effects>>
+<<if $physiqueSuccess>>
+	<<if $monster is 1>>
+		你转身面对袭击者，站稳脚步，举起双臂做出防御姿势，正好及时拦截了一个从灌木丛中向你扑来的<<if $NPCList[0].skincolour is "black">>乌黑色<<else>>灰白色<</if>>模糊身影。
+		你用胳膊抱住它，转身把它扔向一边，它摔到了几米之外的地上。
+	<<else>>
+		你转身面对袭击者，站稳脚步，举起双臂做出防御姿势，正好及时拦截了一个从灌木丛中向你扑来的红棕色模糊身影。
+		你用胳膊抱住它，转身把它扔向一边，它摔到了几米之外的地上。
+	<</if>>
+	那是一只<<beasttype>>，现在你终于有机会仔细打量<<bhim>>了——<<bhis>>摇摇晃晃地爬起来，逃回了灌木丛中。
+	<br><br>
+
+	你松了一口气，掸了掸身上的灰尘，继续你的旅程。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<if $monster is 1>>
+		你转身面对袭击者，站稳脚步，举起双臂做出防御姿势，正好及时拦截了一个从灌木丛中向你扑来的<<if $NPCList[0].skincolour is "black">>乌黑色<<else>>灰白色<</if>>模糊身影。
+		你试图抓住那个影子来偏转它的攻击，但是你的反应不够快。在它猛烈的撞击下你失去了平衡，一下栽倒在森林的地上。
+		<br><br>
+
+		你睁开眼睛，看清了面前的袭击者：一只<<beasttype>>。
+		<<if $NPCList[0].traits.includes("territorial")>>
+			"不错的尝试，但你现在的位置正合我意。"<<bhe>>低吼着。
+		<<elseif $NPCList[0].traits.includes("clumsy")>>
+			<<bHe>>看起来和你一样惊讶。"成功了？"<<bHe>>胜利地举起<<bhis>>的手臂，"你现在是我的了！"
+		<<else>>
+			"抓到你了！给我乖一点，我们要找点乐子了。"
+		<</if>>
+	<<else>>
+		你转身面对袭击者，站稳脚步，举起双臂做出防御姿势，正好及时拦截了一个从灌木丛中向你扑来的红棕色模糊身影。
+		你试图抓住那个影子来偏转它的攻击，但是你的反应不够快。在它猛烈的撞击下你失去了平衡，一下栽倒在森林的地上。
+		<br><br>
+
+		你睁开眼睛，看清了面前的袭击者：一只巨大的<<beasttype>>，<<bHe>>正冲你嚎叫着。
+	<</if>>
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[继续|Moor Fox Rape]]>><<set $molestationstart to 1>><<set $position to "doggy">><<set $NPCList[0].stance to "top">><</link>>
+	<<else>>
+		经过短暂的挣扎，你设法爬起来逃走了。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Moor]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+<</if>>

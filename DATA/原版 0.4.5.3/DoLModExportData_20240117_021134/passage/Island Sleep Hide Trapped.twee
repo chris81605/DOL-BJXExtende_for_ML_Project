@@ -1,0 +1,36 @@
+:: Island Sleep Hide Trapped []
+<<effects>>
+
+你匍匐在地上阴暗地爬行，试图远离脚步声。<<person1>><<person>>也像你一样趴着前进，非常谨慎，兴许是怕踩了别的陷阱。
+<br><br>
+
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<He>>在附近逗留了一下，然后就走了，<span class="green">看都不看你一眼。</span>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，并没有磨练到你的技巧。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Island]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He>>环顾四周，<span class="red">发现了你。</span>./*<<gcamp_concealment>>*/<<set $island.hide -= 3>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，并没有磨练到你的技巧。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Island Sleep Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<</if>>

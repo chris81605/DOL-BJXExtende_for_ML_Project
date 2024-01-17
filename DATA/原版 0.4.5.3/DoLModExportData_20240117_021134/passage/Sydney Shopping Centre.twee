@@ -1,0 +1,47 @@
+:: Sydney Shopping Centre []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>><<sydneySchedule>>
+你和悉尼在购物中心的主层，那里人山人海。<<if $sydneyromance is 1>>你和<<him>>紧紧地贴在一起，以免走散找不到人。<</if>>
+<br><br>
+<<if Time.schoolDay and $sydneyScience and ((Time.hour is 8 and Time.minute gte 44) or Time.hour is 9)>>
+	<<He>>看向一个电子显示屏。"我们该走了，科学课要迟到了！"
+	<br><br>
+	<<link [[离开 (0:15)|Sydney Shopping Leave]]>><<pass 15>><</link>>
+<<elseif _sydney_location is "shop" and Time.hour gte 17>>
+	<<He>>看向一个电子显示屏。"我已经迟了，我得去帮我的<<sydneymum>>做点事。谢谢你陪我！我真的很开心。"
+	<<if $sydneyromance is 1>><<He>>在离开购物中心之前亲了你的脸颊，然后挥手向你道别。<<else>><<He>>在离开购物中心之前笑了笑，然后挥手向你道别。<</if>>
+	<br><br>
+	<<link [[继续|Shopping Centre]]>><<unset $exit>><<endevent>><<set $eventskip to 1>><</link>>
+<<elseif Time.hour gte 21>>
+	<<He>>看向一个电子显示屏。"快打烊了，我真的该回家了。谢谢你陪我！我真的很开心。"
+	<<if $sydneyromance is 1>><<He>>在离开购物中心之前亲了你的脸颊，然后挥手向你道别。<<else>><<He>>在离开购物中心之前笑了笑，然后挥手向你道别。<</if>>
+	<br><br>
+	<<link [[继续|Shopping Centre]]>><<unset $exit>><<endevent>><<set $eventskip to 1>><</link>>
+<<elseif $phase is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].love lt 30>>
+	"我们现在……可能要回去了。"
+	<br><br>
+	<<link [[离开购物中心 (0:15)|Sydney Shopping Leave]]>><<pass 15>><</link>>
+	<br>
+<<else>>
+	<<if $phase is 1>>
+		<<set $phase to 0>>
+		<<He>>看了看表。"我想……我们已经到这儿了，如果你不想走，我们可以再多呆一会儿。"
+	<<else>>
+		"<<print either("这里的人总是很多。", "所以，我们要看什么呢？", "就算什么都不买，和你在一起也很开心。", "人群让我有点焦虑。")>>"
+	<</if>>
+	<br><br>
+	<<if !$daily.sydney.shopGlasses>>
+		<<clothingcategoryicon "face">> <<link [[验光师 (0:01)|Sydney Shopping Glasses]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<if !$daily.sydney.shopHair>>
+		<<hairdressericon>><<link [[理发师 (0:01)|Sydney Shopping Hairdressers]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<if !$daily.sydney.shopSwim and $NPCName[$NPCNameList.indexOf("Sydney")].love gte 50>>
+		<<clothingcategoryicon "underoutfit">><<link [[泳衣店 (0:01)|Sydney Shopping Swim]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<link [[离开购物中心 (0:15)|Sydney Shopping Leave]]>><<pass 15>><</link>>
+	<br>
+<</if>>

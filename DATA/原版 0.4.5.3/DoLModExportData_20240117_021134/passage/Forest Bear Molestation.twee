@@ -1,0 +1,41 @@
+:: Forest Bear Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<beastCombatInit>><<set $enemytrust -= 40>><<set $enemyanger += 40>><<set $enemyhealthmax to 400>><<set $enemyhealth to 400>><<set $enemyarousalmax to 1000>>
+	你继续沿着路走。没走多远，就听到身后传来一声吼叫。
+	<<if $monster is 1>>
+		"嘎嘣脆的小点心！"
+	<</if>>
+	<br><br>
+
+	<<if isLoveInterest("Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Bear Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Bear Molestation]]>><</link>></span><<nexttext>>
+<</if>>

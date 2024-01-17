@@ -1,0 +1,33 @@
+:: Farm Dogs Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<if $farm_work.dog.monster is true>>
+		<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals monster>>
+	<<else>>
+		<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals beast>>
+	<</if>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Dogs Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Dogs Rape]]>><</link>></span><<nexttext>>
+<</if>>

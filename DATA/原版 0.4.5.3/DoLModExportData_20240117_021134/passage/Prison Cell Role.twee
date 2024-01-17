@@ -1,0 +1,231 @@
+:: Prison Cell Role []
+<<set $bus to "walkway">><<effects>><<effects_prison>>
+
+
+<<if $prison_kylar_timer gte 1>>
+	<<set $prison_kylar_timer -= 1>>
+<</if>>
+
+你站在牢房外，等待<<methodical_guard 0>>读出每个数字。
+<br><br>
+"……144号囚犯。"
+<br>
+<<if $worn.face.type.includes("gag")>>
+	"呜呜！"你呜叫着，囚犯们笑了出来。<<lrespect>><<prison_inmates -1>>
+<<else>>
+	"在这。"你回应道。
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "prison" and $prison.kylar is 0 and $prison_kylar_timer lte 0>>
+	<<set $prison.kylar to "active">>
+	<<unset $prison_kylar_timer>>
+	<<endevent>>
+	<<addNNPCOutfit "Kylar" "prisonJumpsuit">>
+	<<npc Kylar>><<person1>>
+	<<generate_methodical_guard 1>>
+	<<generate_veteran_guard 2>>
+	<<person2>><<He>>再次开口，但被楼下某处的敲门声打断。你透过脚下的走廊看到<<veteran_guard 2>>正推着一个小个子前进。
+	<br><br>
+	最后一推，把<<person1>><<his>>推得踉踉跄跄，这新来者就这么摔了个狗啃泥。<<He>>慌忙站起来，把头发从脸上撩开。<span class="gold">那是凯拉尔。</span>
+	<br><br>
+
+	<<link [[继续|Prison Kylar Intro]]>><</link>>
+	<br>
+<<elseif $prison.active_punishments.includes("free use") and $worn.neck.name isnot "free use collar" and $worn.neck.name isnot "free use collar with leash">>
+	"你的项圈呢？"<<he>>问你，"你最好给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("nude") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	"你不应该是裸着的吗？"<<he>>问道，"你给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("blindfold") and !$worn.face.type.includes("blindfold")>>
+	"你的眼罩呢？"<<he>>问你，"你最好给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("topless") and ($worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked")>>
+	"你应该光着上身的，"<<he>>说，"你给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("bottomless") and ($worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	"你应该光着下身的，"<<he>>说，"你给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("leash") and $worn.neck.collared isnot 1>>
+	"你的项圈呢？"<<he>>问你，"你跟我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("underwear") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked")>>
+	"这看起来不像内衣，"<<he>>说道，"你给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("cuffs") and !$worn.feet.type.includes("shackle")>>
+	"你的镣铐呢？"<<he>>问你，"你给我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("gag") and !$worn.face.type.includes("gag")>>
+	"你的口球呢？"<<he>>问你，"你跟我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.active_punishments.includes("bindings") and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+	"你的胳膊本该捆着的，"<<he>>说道，"你跟我过来。"
+	<br><br>
+	<<prison_repunishment_options>>
+<<elseif $prison.time lte 0>>
+	空气短暂的凝固了一下。<span class="green">"你的刑期已满，"</span><<he>>说完，便把簿册扣上，"跟我来。"
+	<br><br>
+
+	<<link [[继续|Prison End]]>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+<<elseif $prison.hours_worked lt 9>>
+	空气短暂的凝固了一下。<span class="red">"你没有达到工作配额，"</span><<he>>说完，便把簿册扣上，"跟我来。"
+	<br><br>
+
+	<<link [[乖乖过去|Prison Punishment]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+	<<link [[拒绝|Prison Cell Punishment Refuse]]>><</link>>
+	<br>
+<<elseif $prison_punished_days lte 0 and $prison.active_punishments.length gte 1>>
+	<<set $prison.hours_worked to 0>>
+	空气短暂的凝固了一下。
+	<<if $prison.active_punishments.length gte 2>>
+		<span class="teal">"我想我们可以解除对你的一项惩罚了，"</span><<he>>说着，将簿册扣上。
+	<<else>>
+		<span class="teal">"我想我们可以解除对你的惩罚了，"</span><<he>>说着，将簿册扣上。
+	<</if>>
+	<<set $prison_punished_days to 2>>
+	<<set _rng to random(0, ($prison.active_punishments.length - 1))>>
+	<<set _punishment to $prison.active_punishments[_rng]>>
+	<<switch _punishment>>
+		<<case "free use">>
+			<<set $prison.active_punishments.delete("free use")>>
+			<<He>>沿着走道走着，从口袋里摸出一把钥匙。
+			<br><br>
+
+			<<link [[继续|Prison Remove Free Use]]>><</link>>
+			<br>
+		<<case "nude">>
+			<<set $prison.active_punishments.delete("nude")>>
+			<<if random(1, 2) is 2>>
+				<<set $prison.active_punishments.delete("topless")>>
+				"你可以继续穿衣服了，<span class="pink">不过只能穿内衣，而且目前必须保持下身裸露的状态。"</span>
+				<br><br>
+			<<else>>
+				<<set $prison.active_punishments.delete("bottomless")>>
+				"你可以继续穿衣服了，<span class="pink">不过只能穿内衣，而且目前必须保持上身裸露的状态。"</span>
+				<br><br>
+			<</if>>
+			<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "blindfold">>
+			<<set $prison.active_punishments.delete("blindfold")>>
+			走廊随着你的走近向后移动。
+			<br><br>
+
+			<<link [[继续|Prison Remove Blindfold]]>><</link>>
+			<br>
+		<<case "topless">>
+			<<set $prison.active_punishments.delete("topless")>>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"你可以穿上胸罩或背心，但不能再多了。<span class="pink">从腰部以下保持裸体。"</span>
+					<br><br>
+				<<else>>
+					"你可以继续穿着上衣，<span class="pink">但从腰部往下还得是裸着的。</span>
+					<br><br>
+				<</if>>
+			<<else>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"你可以用胸罩或背心遮住胸部，<span class="pink">但暂时不能有衬衫之类的东西。"</span>
+				<<else>>
+					<span class="green">"你可以重新好好穿衣服了。"</span>这促使其他囚犯再次目不转睛地盯着你看。
+				<</if>>
+				<br><br>
+			<</if>>
+			<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "leash">>
+			<<set $prison.active_punishments.delete("leash")>>
+			<<He>>一边向你走来，一边从口袋里掏出一把钳子。
+			<br><br>
+			<<link [[继续|Prison Remove Leash]]>><</link>>
+			<br>
+		<<case "underwear">>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if random(1, 2) is 2>>
+					<<set $prison.active_punishments.delete("topless")>>
+					"你可以继续穿衣服了，<span class="pink">不过只能穿内衣，而且目前必须保持下身裸露的状态。"</span>
+					<br><br>
+				<<else>>
+					<<set $prison.active_punishments.delete("bottomless")>>
+					"你可以继续穿衣服了，<span class="pink">不过只能穿内衣，而且目前必须保持上身裸露的状态。"</span>
+					<br><br>
+				<</if>>
+			<<else>>
+				<<set $prison.active_punishments.delete("underwear")>>
+				<<if $prison.active_punishments.includes("topless")>>
+					"你可以继续穿裤子了，<span class="pink">不过目前还得保持胸部裸露。"</span>
+					<br><br>
+				<<elseif $prison.active_punishments.includes("bottomless")>>
+					"你可以继续穿上衣了。<span class="pink">但你从腰部往下还得是裸着的。"</span>
+					<br><br>
+				<<else>>
+					<span class="green">"你可以重新好好穿衣服了。"</span>这促使其他囚犯再次目不转睛地盯着你看。
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "cuffs">>
+			<<set $prison.active_punishments.delete("cuffs")>>
+			<<He>>一边向你走来，一边从<<his>>的口袋里掏出一把钥匙。
+			<br><br>
+
+			<<link [[继续|Prison Remove Cuffs]]>><</link>>
+			<br>
+		<<case "bottomless">>
+			<<set $prison.active_punishments.delete("bottomless")>>
+			<<if $prison.active_punishments.includes("nude")>>
+				<<set $prison.active_punishments.delete("nude")>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"你可以继续穿内衣了，<span class="pink">但必须保持上身赤裸。"</span>
+				<<else>>
+					"你可以继续穿裤子了，<span class="pink">但必须保持上身赤裸。"</span>
+				<</if>>
+				<br><br>
+			<<else>>
+				<<if $prison.active_punishments.includes("underwear")>>
+					"你可以继续穿底裤了，<span class="pink">但衬衫之类的目前还是不能穿。"</span>
+				<<else>>
+					<span class="green">"你可以重新好好穿衣服了。"</span>这促使其他囚犯再次目不转睛地盯着你看。
+				<</if>>
+				<br><br>
+			<</if>>
+			<<link [[继续|Prison Walkway]]>><<endevent>><</link>>
+			<br>
+		<<case "gag">>
+			<<set $prison.active_punishments.delete("gag")>>
+			<<He>>走近。"反正你能说话，那我的工作也就轻松多了。"
+			<br><br>
+
+			<<link [[继续|Prison Remove Gag]]>><</link>>
+			<br>
+		<<default>>
+			<<set $prison.active_punishments.delete("bindings")>>
+			<<he>>走了过来，走廊随之向后移动。"你腾出双臂的话才更有用处。"
+			<br><br>
+
+			<<link [[继续|Prison Remove Bindings]]>><</link>>
+			<br>
+	<</switch>>
+<<else>>
+	<<methodical_guard 0 cap>>合上簿册，一扇高大的门在大厅的另一端打开，囚犯们向大门走去。
+	<br><br>
+
+	<<link [[继续|Prison Walkway]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+	<br>
+
+<</if>>

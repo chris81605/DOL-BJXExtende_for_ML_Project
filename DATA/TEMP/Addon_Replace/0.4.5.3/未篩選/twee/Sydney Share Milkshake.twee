@@ -1,0 +1,28 @@
+:: Sydney Share Milkshake []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+
+你拿出奶昔，放在租借柜台上。
+
+<<switch $schoolstate>>
+	<<case "early" "morning" "first" "second" "third">>
+		<<His>>疲惫的双眼微微睁大。"看起来甜的可怕。"你刚准备拿回去，<<he>>又开口道，"而且正好可以让我保持清醒。谢了！"<<npcincr Sydney love 1>><<glove>>
+	<<case "lunch" "fourth">>
+		<<He>>眼前一亮。"你给我带了这个？你真好！我一般不会带食物或饮料到图书馆，但是……"
+	<<default>>
+		<<He>>眼前一亮。"等我以后回想起来我做了什么，我会疯掉的。"<<He>>摸着下巴，夸张地喃喃自语，<<if _sydneyStatus.includes("corrupt")>>"去他的。"<<else>>"不过现在不用操心。"<</if>>
+<</switch>>
+<br><br>
+
+"我想我们可以一起喝。"你说道。<<He>>对你微笑。
+<br><br>
+<<if _sydneyStatus.includes("corrupt")>>
+	"你好会啊！"你们在接下来的十五分钟里一直聊着天。悉尼大口吃下了最后一勺，在嘴边比了个V的手势，吐出舌头给你看上面的奶油。<<he>>闭上了嘴，然后咽了下去，你们俩都咯咯地笑了起来。<<arousal 100>><<garousal>>
+<<else>>
+	"这……"<<his>>的脸红了。"真是有情调！"你和<<him>>在接下来的十五分钟里一边聊着天，一边喝完了奶昔。<<He>>小心翼翼地不让甜品弄脏书籍，看起来非常开心。
+<</if>>
+<br><br>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+	凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+	<br><br>
+<</if>>
+<<sydneyOptions>>

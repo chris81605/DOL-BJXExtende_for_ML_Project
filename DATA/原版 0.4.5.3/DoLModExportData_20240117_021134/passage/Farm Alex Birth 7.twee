@@ -1,0 +1,41 @@
+:: Farm Alex Birth 7 []
+<<effects>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+    你点点头，走向了小屋的育儿室。
+	<br>
+
+    你将<<if $alexBabiesCount gte 2>>新生儿们放进摇篮中，孩子们很快入睡了<<else>>新生儿放进摇篮中，孩子很快就入睡了<</if>>。
+	<br>
+
+    你在育儿室待了一会儿，确保<<if $alexBabiesCount gte 2>>孩子们<<else>>孩子<</if>>能睡得舒适又温暖。
+	<br><br>
+
+<</if>>
+
+<<if (pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1) or C.npc.Alex.pregnancy.nursery isnot true>>
+	<span class="red">听见门口传来敲门声。</span>也许是哈珀忘了什么。
+	<br><br>
+
+	你走下楼梯打开门，是<span class="red">贝利</span>。你不禁打了个寒颤，不知道是不是哈珀叫来的<<nnpc_him "Bailey">>。
+	<br>
+
+	<<nnpc_He "Bailey">>盯着你，"我们彼此应该都清楚我为什么在这儿，"<<nnpc_he "Bailey">>说。
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1>>
+		"你该不会真以为你能在这里养个孩子吧？"<<nnpc_he "Bailey">>说。
+		<br><br>
+
+	<<else>>
+		"你是个粗心的小混蛋，你知道吗？你害我大老远开车过来，就因为你不知道去承担自己的责任，反而把麻烦越搞越多，"<<he>>说。
+		<br><br>
+
+	<</if>>
+
+	<<link [[继续|Farm Alex Birth 8]]>><</link>>
+
+<<else>>
+	<<link [[继续|Farm Cottage]]>><<unset $alex_baby_count>><</link>>
+
+<</if>>

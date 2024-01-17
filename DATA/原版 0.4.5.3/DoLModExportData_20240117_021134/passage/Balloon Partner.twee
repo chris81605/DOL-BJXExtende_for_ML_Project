@@ -1,0 +1,45 @@
+:: Balloon Partner []
+<<effects>>
+<<npc Robin 2>><<person2>>
+<<set _boyfriend to ($robinromance ? "<<person2>><<= $pronoun is 'm' ? '男' : '女'>>朋友" : "朋友")>>
+
+<<switch $phase>>
+	<<case "help">>
+		<<if getRobinLocation() is "beach">>
+			“我_boyfriend在那边卖柠檬水。”你朝罗宾的柠檬水摊位点头示意。“非常好喝。我觉得你的顾客在吃了你的爆米花后会想来一杯清凉的饮料。”
+		<<else>>
+			"<<print Time.season is "winter" ? "等到天气不那么冷的时候，" : "<<Hes>>现在不在那里，但是">>我_boyfriend周末会在那边卖柠檬水。你可能见过<<him>>。"你朝罗宾通常摆摊的地方点了点头。"<<print Time.season is "winter" ? "现在是冬天，<<hes>>在公园里卖热可可。" : "味道真的很好。">>我觉得在吃了你的爆米花之后喝上一杯会很合适。"
+		<</if>>
+		<br><br>
+		那位<<person1>><<person>>歪着脑袋，<<his>>仔细思量着。“我之前试过<<person2>><<hers>>的柠檬水，”<<person1>><<he>>说。“基本上就是糖水。我不是在拒绝你，但你想说服我的话得更努力一点，让我相信和你的小_boyfriend合作不是个糟糕的主意。”
+		<br><br>
+		<<link [[劝说|Balloon Convince]]>><<set $phase to "persuade">><</link>><<englishdifficulty 1 1000>><br>
+		<<if $promiscuity gte 55>>
+			<<link [[诱惑|Balloon Convince]]>><<set $phase to "seduce">><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<if $money gte 30000>>
+			<<link [[贿赂 (£300)|Balloon Convince]]>><<set $phase to "bribe">><<set $money -= 30000>><</link>>
+		<</if>>
+
+	<<case "sabotage">>
+		“你有没有考虑过在卖爆米花的同时贩卖饮料？”你问。
+		<br><br>
+		<<person1>><<person>>一边擦拭着<<his>>的摊位，一边不置可否地哼了一声。“就像你<<print getRobinLocation() is "beach" ? "在那边" : Time.season is "winter" ? "在公园卖热巧克力的" : "卖柠檬水的">>的伙伴？”<<He>>神秘兮兮地靠近你。“我之前试过<<person2>><<his>>的柠檬水。<<Hes>>糖放得有点多，而且真该花钱搞个像样的榨汁机。”
+		<br><br>
+		 那<<person1>><<He>>重新站直了身。“你的伙伴定价多少？”<<he>>沉思着，望向<<print getRobinLocation() is "beach" ? "罗宾的摊位" : "罗宾平时的摊位">>。“£1？这样赚不了几个钱。但谁知道呢，也许一点友好的竞争能帮<<person2>><<him>>带来些生意。”<<person1>><<person>>轻声笑了笑。“我已经在想季节性菜单了。秋天的苹果酒，春天的草莓柠檬水之类的……这会很有趣。明天过来看看，怎么样？我请你喝一杯。”<<set $balloonStand.freeDrink to true>>
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			“你人真是太好了，<<sir>>。”你对<<him>>抿嘴一笑。“谢谢你。”
+		<<elseif $speech_attitude is "bratty">>
+			“当然，请算上我。”你露齿而笑。“我永远不会去拒绝免费赠品。”
+		<<else>>
+			“我非常乐意。”你微笑。“谢谢你。”
+		<</if>>
+		<br><br>
+		“不过别指望我会经常请客。我还得在这讨生活呢，”<<he>>挤挤眼说道。“你知道，你很机灵，<<girl>>。继续保持，总有一天你会成为一位出色的商业大亨。”<<stress -6>><<lstress>>
+
+		<<balloonRobinSabotaged>>
+		<br><br>
+		<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>

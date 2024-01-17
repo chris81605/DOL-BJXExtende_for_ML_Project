@@ -1,0 +1,29 @@
+:: Sell Children []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+哈珀医生走到<<his>>的办公室门前，把门锁上。<<He>>坐回去。“你今天给我带了什么？”<<he>>问道。
+<br><br>
+你把<<he>>给你的小盒子拿出来给<<He>>。<<he>>看了看里面的内容物，似乎很满意。<<his>>从桌面下拿出另一个更大的容器，把里面的东西拿出来后<<He>>再将容器递给你。然后<<He>>打开抽屉，点了<<moneyGain $container.portable.value>>的金额。<<He>>把钱交给你。
+<br><br>
+“社区会感谢你的，”<<he>>说道。
+<br><br>
+<<set _paleAmount to 0>>
+<<for _i to 0; _i lt $container.portable.creatures.length; _i++>>
+	<<if $container.portable.creatures[_i].creature.includes("Pale")>>
+		<<set _wraithMessage to true>>
+		<<set _paleAmount++>>
+	<</if>>
+<</for>>
+<<if $wraith.state and _wraithMessage is true>>
+	<<set $wraith.offspring to "sold">>
+	<<set $wraithCompoundChance to ($wraithCompoundChance ? $wraithCompoundChance += 10 : 10)>>
+	<<if $wraithAngerCooldown>>
+		<<set $wraithAngerCooldown += (15 * _wraithAmount)>>
+	<<else>>
+		<<set $wraithAngerCooldown to (15 * _wraithAmount)>>
+	<</if>>
+	看着你那苍白的孩子<<if _paleAmount gt 1>>们<</if>>离开你触手能及的范围时，你突然感觉到了一种恐惧和遗憾。<<gobsession _wraithAmount>>
+	<br><br>
+<</if>>
+<<set $container.portable.value to 0>>
+<<set $container.portable.creatures to []>>
+<<link [[继续|Pregnancy Discussion]]>><</link>>

@@ -1,0 +1,70 @@
+:: Lake Fishing Rock []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 50>><<set $bus to "lakefishingrock">>
+<<if Time.season is "winter">>
+	<<if $laketeenspresent is 1>>
+		你在钓鱼岩上。在湖的另一边，你看到一些人。
+	<<elseif Time.dayState is "night">>
+		你在钓鱼岩上。黑暗的水在冰下涟漪。
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你在钓鱼岩上。虽然附近的树林让人有不详的预感，但这里很平静。
+	<<else>>
+		你在垂钓岩上。从这里可以清楚地看到整个湖泊。
+	<</if>>
+	<<if $weather is "snow">>
+		雪沉积在冰上。
+	<<else>>
+		冰面显得非常寂静。
+	<</if>>
+<<else>>
+	<<if $laketeenspresent is 1>>
+		你在钓鱼岩上。你可以看到湖的另一边有人。鱼儿溅起水花以捕食昆虫。虽然附近的树林让人有不详的预感，但这里很平静。
+	<<elseif Time.dayState is "night">>
+		你在钓鱼岩上。看不见的黑水潺潺。
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你在钓鱼岩上。鱼儿溅起水花以捕食昆虫。虽然附近的树林让人有不详的预感，但这里很平静。
+	<<else>>
+		你在钓鱼岩上。从这里你可以清楚地看到整个湖泊。你可以看到鱼在水中游泳。
+	<</if>>
+	<<if $weather is "rain">>
+		雨打在湖面上，水波荡漾。
+	<<else>>
+		水面显得非常平静。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<if $exhibitionism gte 75>>
+		你低下身子，躲在树丛中。你真的很想展示你的<<lewdness>>，但你克制自己没有这么做。
+	<<else>>
+		你低下身子，躲在树丛中，以免被看到你的<<lewdness>>。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<lakeicon "meditate">><<link [[冥想|Lake Meditate]]>><<set $phase to 1>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Lake Waterfall">>
+		<<lakeicon>><span class="nextLink"><<link [[湖边|Lake Waterfall]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon "waterfall">><<link [[北上到瀑布 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon "campfire">><<link [[南下到营地 (0:20)|Lake Campsite]]>><<pass 20>><</link>>
+	<br><br>
+
+	<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><</link>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

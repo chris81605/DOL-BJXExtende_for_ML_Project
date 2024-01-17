@@ -1,0 +1,70 @@
+:: Farm Assault Threaten []
+<<effects>>
+
+你向开阔的地带进发。
+<<if $speech_attitude is "meek">>
+	"我、我不会被欺负的，"你说道，"马上停下，不然你会后悔的。"
+<<elseif $speech_attitude is "bratty">>
+	"滚出我的地盘，"你说道，"不然我就把你喂猪。"
+<<else>>
+	"如果你现在就离开，"你说道，"我不会追击。"
+<</if>>
+<br><br>
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<generate1>><<person1>>
+				<span class="red">入侵者们笑了起来。</span>
+				<<if $fame.scrap gte 400>>
+					"<span class="pink"><<underworld_nickname>></span>，" 一个<<person>>说道，"很可怕，但我们身后有更可怕的。"
+				<<else>>
+					"很可怕，"一个<<person>>说道，"但我们背后又更可怕的。"
+				<</if>>
+				他们继续强行进入着。
+			<<else>>
+				<<generate1>><<person1>>
+				<span class="red"><<person>>笑了。</span>
+				<<if $fame.scrap gte 400>>
+					"<span class="pink"><<underworld_nickname>></span>，"<<he>>说道，"很可怕，但我们身后有更可怕的。"
+				<<else>>
+					"很可怕，"<<he>>说道，"但我们背后有更可怕的。"
+				<</if>>
+				<<He>>继续强行传入着。
+			<</if>>
+		<<elseif $fame.scrap gte random(200, 1000)>>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<generate1>><<person1>><<generate2>>
+				入侵者们相互看了一眼。
+				<br>
+				"这是他们叫做<span class="pink"><<underworld_nickname>></span>的那个吗？"一个<<person>>问道。
+				<br>
+				"对，这就是为什么报酬那么好。"一个<<person2>><<person>>回应道。
+				<br>
+				"我拿钱可不是为了屁股被踢烂的，我不干了。"<span class="green">他们转过身去，跑了。</span>
+
+				<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+			<<else>>
+				<<generate1>><<person1>>
+				入侵者，<<person>>盯着你道："我只是收钱来清理一些田地，我不想惹麻烦。"<span class="green"><<He>>转过身去，跑了。</span>
+
+				<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+			<</if>>
+		<<else>>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<generate1>><<person1>><<generate2>>
+				入侵者们相互看了一眼，<span class="red">然后笑了。</span>"这<<girl>>觉得<<pshe>>很强硬啊，"一个<<person>>说道，"就是马上要上一场艰难的课了。"
+				<br><br>
+				他们继续强行进入着。
+			<<else>>
+				<<generate1>><<person1>>
+				<span class="red">入侵者们笑了，</span>"你算哪根葱啊？"<<he>>说道，"我只看到一个马上就要被教训一顿的<<girl>>。"<<He>>继续闯入。
+			<</if>>
+		<</if>>
+	<</if>>
+<</for>>
+<br><br>
+
+<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+<br>

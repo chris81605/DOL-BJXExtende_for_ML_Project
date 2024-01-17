@@ -1,0 +1,29 @@
+:: Park Ex Dog Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>
+	<</if>>
+	<<beastNEWinit 1 dog>>
+	<<beastCombatInit>>
+	一只流浪的<<beasttype>>低吼着。看到你站在那里不动，<<bhe>>开始向你靠近。
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Park Ex Dog Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Park Ex Dog Molestation]]>><</link>></span><<nexttext>>
+<</if>>

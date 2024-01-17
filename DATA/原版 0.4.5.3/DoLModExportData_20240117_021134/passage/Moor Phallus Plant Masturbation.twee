@@ -1,0 +1,33 @@
+:: Moor Phallus Plant Masturbation []
+<<effects>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+
+	你靠近植物，无法抑制你的欲望。你忍耐不住要用它来高潮了，现在，马上。<<garousal>><<arousal 600>>
+	<br><br>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+
+<<if $corruptionMasturbation>>
+	<span class="red">你耳朵里的史莱姆不让你停下。</span>
+<</if>>
+<div id="masturbationButtons">
+	<<if $masturbationorgasm gte 3 and ($anususe is "mpenisflowerpenetrate" or $vaginause is "mpenisflowerpenetrate" or $mouth is "mpenisflowersuck")>>
+		<div id="next"><<link [[继续|$passage + " Finish"]]>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next"><<link [[继续|$passage]]>><</link>><<nexttext>></div>
+	<</if>>
+	<<if ($anususe is "mpenisflowerpenetrate" or $vaginause is "mpenisflowerpenetrate" or $mouth is "mpenisflowersuck")>>
+		<div class="red">你无法停下。</div>
+	<<elseif $corruptionMasturbation isnot true and random(0,3) gt $orgasmcurrent and $earSlime.corruption gt (currentSkillValue('willpower') / 10)>>
+		<div id="stop"><<link [[停下|$passage]]>><<set $corruptionMasturbation to true>><</link>></div>
+	<<elseif $corruptionMasturbation isnot true>>
+		<div id="stop"><<link [[停下|$passage + " Finish"]]>><<set $finish to 1>><</link>></div>
+	<<else>>
+		<div id="noStop">停不下来</div>
+	<</if>>
+</div>
+<br><br><br><br><br>

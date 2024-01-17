@@ -1,0 +1,98 @@
+:: Temple Confess Self Doubt []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>><<rngWraith>>
+
+<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+	"宽恕我，<<sister_npc>>，为我的疑虑。"
+	<<if $temple_rank is "initiate">>
+		你向<<him>>告解了你作为见习教徒的疑虑。
+	<<else>>
+		你向<<him>>告解了你所有的怀疑和不安——尤其你身处如此的地位。
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"原谅我，原谅我做出的恶行。"
+	<<elseif $speech_attitude is "bratty">>
+		"是的，我是肮脏的罪人。"
+	<<else>>
+		"原谅我，我犯下了罪过。"
+	<</if>>
+	你向<<him>>告解了你对神殿还有神殿信仰的怀疑。
+<</if>>
+
+<<if _wraithEvent and $wraithIntro>>
+	<<pass 30>>
+	<br><br>
+	<<if $world_corruption_soft gte 100>>
+		"<span class="wraith">你是对的，<<pcpetname "Wraith">>，</span>"
+	<<else>>
+		"<span class="wraith">你对此有什么怀疑的，<<pcpetname "Wraith">>？</span>"
+	<</if>>
+	<<if C.npc["Ivory Wraith"].love gte 10>>
+		一道声音在左侧响起。你霎时惊起，直向右去，紧紧抵住木条。一个苍白的身影正坐在你身旁，单手撑着脑袋，<<wraithEyes>>色的眼睛半睁半闭。<<stress 6>><<gstress>>
+	<<else>>
+		一道熟悉的声音从另一侧响起。那个身影盯住你，<<wraithEyes>>色的眼睛仿佛将你穿透。苍白的面孔在木条前浮现，仿佛它未曾存在于此。<<stress 18>><<ggstress>>
+	<</if>>
+	<br><br>
+
+	<<if $world_corruption_soft gte 100 and $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+		"<span class="wraith">净化者在衰微，满是洞孔的器皿终将盛水。</span>"
+
+		像是展示着什么，水开使慢慢地淹没隔间。你爬到长椅上，站了起来。
+		一双冰冷的手从身后环住你。你应该为此而感到惊恐，但你却异常得冷静——即便水面没过你的头顶。
+		<br><br>
+
+		"<span class="wraith">一切终将沉入水底，徙步于激流之中，我们仍能浮起。</span>"
+		<br><br>
+
+		你看见了海洋。有什么东西在海平面上乘浪而来。你吸了口气，海水随之涌入。
+		<br><br>
+
+		一只手拂过你的面庞。你眨了眨眼睛，发现自己躺在长椅上。那些水，那个人影，都已经消失不见了。对侧的门仍开着。
+	<<else>>
+		<<if $world_corruption_soft gte 100>>
+			"<span class="wraith">你仍盲目，你仍目盲，你仍无知，你仍无料。真相。</span>"
+			苍白的双手捧住你的脸。
+			<<if $wraith.state is "haunt">>
+				"<span class="wraith">忏悔。</span>"
+			<<else>>
+				"<span class="wraith">睁开眼睛。</span>"
+			<</if>>
+		<<elseif $wraith.state is "haunt">>
+			"<span class="wraith">你是否怀疑自己，只因你从我身边窃取？</span>"
+			苍白的双手捧住你的脸。"<span class="wraith">忏悔。</span>"
+		<<else>>
+			"<span class="wraith">世界还会变得更糟。</span>"
+			苍白的双手捧住你的脸。"<span class="wraith">不要被他们溺死。</span>"
+		<</if>>
+		<br><br>
+
+		你听到如同流水的声音响起，身影随之迅速褪去。对侧的门仍开着。
+	<</if>>
+	<br><br>
+
+	<<link [[离开|Temple]]>><<endconfession>><</link>>
+	<br>
+<<else>>
+	<<He>>自始至终倾听你的告解，一言不发，直到你结束。
+	<br><br>
+
+	<<switch $attendant>>
+		<<case "Jordan">>
+			"怀疑是灵修最大的试炼，每个人都会经历考验——但疑虑终是缥缈的，信仰则永恒的坚定。"<<He>>的声音端庄而高昂。
+		<<case "Sydney">>
+			"怀疑只是自我破坏。永远记住，你在怀疑之上，" <<He>>听起来满怀希望，明显是想要帮助你。
+		<<case "Confessor">>
+			<<He>>轻笑一声，然后老练却厌倦地开了口。
+			<<if $temple_confessor_intro and ($temple_rank is "monk" or $temple_rank is "priest")>>
+				"我们每个人都有怀疑，<<sister>>。但我们是将这小镇与地狱区别开来的唯一屏障了。我们需要比怀疑更刚强。"
+			<<else>>
+				"每个人都会怀疑，孩子。我们怎么不会怀疑呢？世界如此败坏，满是疮痍。如此多的疮痍。我们只能尽我所能，修复它们。"
+			<</if>>
+		<<default>>
+			"怀疑不会成就我们。从脑中驱逐怀疑，你会原谅自己的。"
+	<</switch>>
+	<br><br>
+
+	<<link [[继续|Temple Confess Self End]]>><</link>>
+	<br>
+<</if>>

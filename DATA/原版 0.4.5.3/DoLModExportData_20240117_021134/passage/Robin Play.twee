@@ -1,0 +1,51 @@
+:: Robin Play []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<!-- robin cdquest 1 event -->
+<<if $rng gte 85 and _robin.cdquest is 1 and _robin.crossdressing gte 2 and !$daily.robin.cdevent and _robin.trauma lte 20>>
+	你们一起玩了一个双人游戏，就在马上要通关的时候，有人敲门。
+	<br><br>
+
+	罗宾依旧穿着<<his>>的
+	<<if _robin.pronoun is "f">>
+		<<npcClothesText _robin "upper">>和束胸衣，
+	<<else>>
+		<<npcClothesText _robin "upper">>,
+	<</if>>
+	罗宾满脸通红地问道："这看起来很糟糕，对吧？"
+	<br><br>
+	<<link [[让罗宾去回应|Robin CD Door Answer]]>><</link>>
+	<br>
+	<<link [[告诉罗宾不要去管|Robin CD Door Ignore]]>><</link>>
+	<br>
+<<elseif $rng gte 81>>
+	你和<<him>>一起玩了一个合作游戏。
+	<<lstress>><<stress -6>>
+	<br><br>
+	<<robinoptions>>
+<<elseif $rng gte 61>>
+	你和<<him>>一起玩了一个游戏，<<He>>完完全全的碾压着你。
+	<br><br>
+	<<link [[从容地接受失败|Robin Play Grace]]>><<npcincr Robin love 1>><<npcincr Robin dom 1>><<stress 3>><</link>><<glove>><<gdom>><<gstress>>
+	<br>
+	<<link [[寻找借口|Robin Play Excuses]]>><<npcincr Robin love -1>><</link>><<llove>>
+	<br>
+<<elseif $rng gte 41>>
+	你和<<him>>玩了一个游戏，虽然你轻松取得了胜利，但<<He>>似乎有些不太高兴了。
+	<br><br>
+	<<link [[为罗宾加油|Robin Play Cheer]]>><<npcincr Robin love 1>><</link>><<glove>>
+	<br>
+	<<link [[挑逗|Robin Play Tease]]>><<npcincr Robin dom 1>><<npcincr Robin love -1>><</link>><<llove>>
+	<br>
+<<elseif $rng gte 21>>
+	你们一起玩一个游戏，从结果来看是平局。<<he>>看起来有些不服气，"下次我一定会赢过你！"
+	<br><br>
+	<<robinoptions>>
+<<else>>
+	你和<<him>>又玩了几局，胜利的天平正逐渐向<<He>>倾倒。
+	<br><br>
+	<<link [[挠痒痒攻击|Robin Play Tickle]]>><<npcincr Robin dom -1>><<npcincr Robin lust 1>><</link>><<glust>><<ldom>>
+	<br>
+	<<link [[公正竞争|Robin Play Fair]]>><</link>>
+	<br>
+<</if>>

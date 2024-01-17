@@ -1,0 +1,32 @@
+:: Farm Dogs Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<if $farm_work.dog.monster is true>>
+		<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals monster>>
+	<<else>>
+		<<beastNEWinit 1 dog $farm_work.dog.gender $farm_work.dog.genitals beast>>
+	<</if>>
+	<<beastCombatInit>>
+	<<set $NPCList[0].stance to "top">>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Dogs Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Dogs Sex]]>><</link>></span><<nexttext>>
+<</if>>

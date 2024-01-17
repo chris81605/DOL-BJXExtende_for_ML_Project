@@ -1,0 +1,404 @@
+:: Widgets Actions Left Hand [widget]
+<<widget "leftdefault">>
+	<<if $lefttarget isnot "self" and $punishmentposition isnot "gloryhole">>
+		<<set _leftaction["抚摸"] to "leftchest">>
+		<<if $consensual isnot 1 and ($fightTargets is undefined or $fightTargets.includes($lefttarget))>>
+			<<set _leftaction["击打"] to "lefthit">>
+		<</if>>
+	<</if>>
+	<<if $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+		<<set _leftaction["别在身后"] to "behind">>
+		<<leftcoverface>>
+	<</if>>
+<</widget>>
+
+<<widget "leftcoverface">>
+	<<set _leftaction["遮住你的脸"] to "leftcoverface">>
+<</widget>>
+
+<<widget "leftcamerapose">>
+	<<if $audiencecamera1 isnot 0>>
+		<<set _leftaction["摆姿势拍照"] to "leftcamerapose">>
+	<</if>>
+<</widget>>
+
+<<widget "lefthandpull">>
+	<<if $lefttarget isnot "self">>
+		<<if ($NPCList[$lefttarget].lefthand and $NPCList[$lefttarget].lefthand.startsWith("penis"))
+		or ($NPCList[$lefttarget].righthand and $NPCList[$lefttarget].righthand.startsWith("penis"))>>
+			<<set _leftaction["把" + $NPCList[$lefttarget].pronouns.his + "的手从你的阴茎上移开"] to "handpullpenis">>
+		<</if>>
+
+		<<if ($NPCList[$lefttarget].lefthand and $NPCList[$lefttarget].lefthand.startsWith("vagina"))
+		or ($NPCList[$lefttarget].righthand and $NPCList[$lefttarget].righthand.startsWith("vagina"))>>
+			<<set _leftaction["把" + $NPCList[$lefttarget].pronouns.his + "的手从你的小穴移开"] to "handpullvagina">>
+		<</if>>
+
+		<<if ($NPCList[$lefttarget].lefthand and $NPCList[$lefttarget].lefthand.startsWith("anus"))
+		or ($NPCList[$lefttarget].righthand and $NPCList[$lefttarget].righthand.startsWith("anus"))>>
+			<<set _leftaction["把" + $NPCList[$lefttarget].pronouns.his + "的手从你的肛门处移开"] to "handpullanus">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftgrabnew">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $_target.penis is 0>>
+			<<set $_penis to (npcHasStrapon($lefttarget) ? "穿戴式假阳具" : "肉棒")>>
+			<<if $consensual is 1 and ($enemytype is "man" ? $promiscuity : $deviancy) lte 34 and !$promiscuityIgnore>>
+			<!-- Do Nothing -->
+			<<else>>
+				<<if $_target.chastity.penis.includes("chastity")>>
+					<<set _leftaction["隔着" + $_target.pronouns.his + "的" + $_target.chastity.penis.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "挑逗" + $_target.pronouns.his + "的" + $_penis] to "leftgrab">>
+				<<else>>
+					<<set _leftaction["抓住" + $_target.pronouns.his + "的" + $_penis] to "leftgrab">>
+				<</if>>
+			<</if>>
+			<<if $_target.chastity.penis.includes("chastity")>>
+				<<set _leftaction["隔着" + $_target.pronouns.his + "的" + $_target.chastity.penis.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "抚摸" + $_target.pronouns.his + "的" + $_penis] to "leftstroke">>
+			<<else>>
+				<<set _leftaction["抚摸"+ $_target.pronouns.his + "的" + $_penis] to "leftstroke">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftplaynew">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $consensual is 1 and ($enemytype is "man" ? $promiscuity : $deviancy) lte 34 and !$promiscuityIgnore>>
+			<!-- Do Nothing -->
+		<<else>>
+			<<if $_target.vagina is 0>>
+				<<if $_target.chastity.vagina.includes("chastity")>>
+					<<set _leftaction["隔着" + $_target.pronouns.his  + $_target.chastity.vagina.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "玩弄" + $_target.pronouns.his + "的小穴"] to "leftplay">>
+				<<else>>
+					<<set _leftaction["玩弄" + $_target.pronouns.his + "的小穴"] to "leftplay">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftclothesnew">>
+	<<if $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+		<<if $worn.over_upper.state is setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_base and $worn.over_upper.state_top is setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_top_base and !$worn.over_upper.type.includes("naked")>>
+			<<set _leftaction["拉开身上的"+$worn.over_upper.cn_name_cap] to "over_upper">>
+		<</if>>
+
+		<<if $worn.upper.state is setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_base and $worn.upper.state_top is setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_top_base and !$worn.upper.type.includes("naked")>>
+			<<set _leftaction["拉开身上的"+$worn.upper.cn_name_cap] to "upper">>
+		<</if>>
+
+		<<if $worn.under_upper.state is setup.clothes.under_upper[clothesIndex('under_upper', $worn.under_upper)].state_base and $worn.under_upper.state_top is setup.clothes.under_upper[clothesIndex('under_upper', $worn.under_upper)].state_top_base and !$worn.under_upper.type.includes("naked")>>
+			<<set _leftaction["拉开身上的"+$worn.under_upper.cn_name_cap] to "under_upper">>
+		<</if>>
+
+		<<if $worn.over_lower.state is setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].state_base and setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt isnot 1 and !$worn.over_lower.type.includes("naked")>>
+			<<set _leftaction["拉开身上的"+$worn.over_lower.cn_name_cap] to "over_lower">>
+		<<elseif setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.over_lower.skirt_down is 1>>
+			<<set _leftaction["拉开身上的"+$worn.over_lower.cn_name_cap] to "over_lower">>
+		<</if>>
+
+		<<if $worn.lower.state is setup.clothes.lower[clothesIndex('lower', $worn.lower)].state_base and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt isnot 1 and !$worn.lower.type.includes("naked")>>
+			<<set _leftaction["拉开身上的"+$worn.lower.cn_name_cap] to "lower">>
+		<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.lower.skirt_down is 1>>
+			<<set _leftaction["拉开身上的"+$worn.lower.cn_name_cap] to "lower">>
+		<</if>>
+
+		<<if $worn.under_lower.state is setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].state_base and !$worn.under_lower.type.includes("naked") and !($penisstate isnot 0 and playerHasStrapon())>>
+			<<if $worn.lower.state isnot setup.clothes.lower[clothesIndex('lower', $worn.lower)].state_base or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 or $worn.lower.type.includes("naked")>>
+				<<set _leftaction["拉开身上的"+$worn.under_lower.cn_name_cap] to "under_lower">>
+			<</if>>
+		<</if>>
+
+		<<if $worn.under_lower.state is setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].state_base and !$worn.under_lower.type.includes("naked") and !playerHasStrapon()>>
+			<<if $worn.lower.state isnot setup.clothes.lower[clothesIndex('lower', $worn.lower)].state_base or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 or $worn.lower.type.includes("naked")>>
+				<<set _leftaction["将你的"+$worn.under_lower.cn_name_cap+"拉到一边"] to "under_lower_to_the_side">>
+			<</if>>
+		<</if>>
+
+		<<if $worn.face.state is setup.clothes.face[clothesIndex('face', $worn.face)].state_base and !$worn.face.type.includes("naked") and $worn.face.type.includes("mask")>>
+				<<set _leftaction["拉开身上的"+$worn.face.cn_name_cap] to "mask">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+/* 北极星模组 */
+<<widget "leftantiques">>
+    <<if $options.bjx_antiques>>
+    	<<if $consensual isnot 1 and ($museumAntiques.antiques.antiquebell is "found" or $museumAntiques.antiques.antiquebell is "take")>>
+    		<<set _leftaction["摇响恐惧铃铛"] to "antiquebell">>
+    	<</if>>
+    	<<if !$mushroomsatisfy and $museumAntiques.antiques.antiquemushroom is "found" or $museumAntiques.antiques.antiquemushroom is "take">>
+    		<<set _leftaction["抚摸蘑菇神像"] to "antiquemushroom">>
+    	<</if>>
+    	<<if $consensual isnot 1 and $worn.neck.name is "ivory necklace">>
+    		<<set _leftaction["触摸象牙项链"] to "antiqueivorynecklace">>
+    	<</if>>
+	<</if>>
+<</widget>>
+/* 北极星 */
+
+<<widget "leftspraynew">>
+	<<if $lefttarget isnot "self">>
+		<<if $consensual isnot 1 and $spray gte 1 and $NPCList.some(npc => npc.health >= 0 && (!$fightTargets || $fightTargets.includes(npc.index)))>>
+			<<set _leftaction["防狼喷雾"] to "spray">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftstealnew">>
+	<<if $lefttarget isnot "self" and !($stealtarget.includes($lefttarget))>>
+		<<if (currentSkillValue('skulduggery') gte 200 or $easySteal is 1) and $enemytype is "man" and $abomination isnot 1 and !($npcrow.includes($lefttarget)) and $water isnot 1 and $punishmentposition isnot "gloryhole">>
+			/* 北极星模组 */
+			<<set $skulduggerydifficulty to (1000 - ($enemyarousal / $enemyarousalmax * 400) - $skulduggery - $enemytrust + $enemyanger - ($options.bjx_stealhand ? $handskill / 5 : 0)) * $stealdifficulty>>
+			/* 北极星 */
+			<<if $easySteal is 1>><<set $skulduggerydifficulty to 0>><</if>>
+			/*Missing <<skulduggerydifficulty>><<combatcrime>>*/
+			<<if !isNaN($lefttarget) and $NPCList[$lefttarget] and $NPCList[$lefttarget].clothes and $NPCList[$lefttarget].clothes.set is "naked">>
+			<<elseif $stealstateleft is undefined>>
+				<<set _leftaction["偷窃"] to "steal">>
+			<<elseif $stealstateleft is 2>>
+				<<set _leftaction["拿走" + $NPCList[$lefttarget].pronouns.his + "的财物"] to "steal">>
+			<<else>>
+				<<set _leftaction["继续偷窃"] to "steal">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftpenwhacknew">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $_target.lefthand and ($_target.lefthand is "pen" or $_target.lefthand.startsWith("pen_")) or $_target.righthand and ($_target.righthand is "pen" or $_target.righthand.startsWith("pen_"))>>
+			<<set _leftaction["把书写工具拍开"] to "penwhack">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftshacklewhack">>
+	<<if $lefttarget isnot "self">>
+		<<if $NPCList[$lefttarget].lefthand is "shackle_entrance" or $NPCList[$lefttarget].lefthand is "shackle_imminent" or $NPCList[$lefttarget].righthand is "shackle_entrance" or $NPCList[$lefttarget].righthand is "shackle_imminent">>
+			<<set _leftaction["把镣铐拍开"] to "shacklewhack">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "lefthypnosiswhack">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $_target.lefthand and ($_target.lefthand is "hypnosis" or $_target.lefthand.startsWith("hypnosis_")) or $_target.righthand and ($_target.righthand is "hypnosis" or $_target.righthand.startsWith("hypnosis_"))>>
+			<<set _leftaction["把催眠仪器拍开"] to "hypnosiswhack">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftdildowhack">>
+	<<if $lefttarget isnot "self">>
+		<<if $NPCList[$lefttarget].lefthand is "dildo" or $NPCList[$lefttarget].righthand is "dildo">>
+			<<if getSexToysofType("all").includes($NPCList[$lefttarget].lefttool)>>
+				<<set _leftaction["把"+ $NPCList[$lefttarget].lefttool.replace("dildo","假阳具").replace("length of anal beads","肛门拉珠").replace("riding crop","马鞭").replace("flog","皮鞭").replace("stroker","飞机杯").replace("vibrator","震动棒").replace("bullet vibe","子弹型跳蛋").replace("pendant","吊坠").replace("marker","记号笔").replace("mud","泥").replace("pen","笔").replace("lipstick","口红") +"拍开"] to "dildowhack">>
+			<<elseif getSexToysofType("all").includes($NPCList[$lefttarget].righttool)>>
+				<<set _leftaction["把"+ $NPCList[$lefttarget].righttool.replace("dildo","假阳具").replace("length of anal beads","肛门拉珠").replace("riding crop","马鞭").replace("flog","皮鞭").replace("stroker","飞机杯").replace("vibrator","震动棒").replace("bullet vibe","子弹型跳蛋").replace("pendant","吊坠").replace("marker","记号笔").replace("mud","泥").replace("pen","笔").replace("lipstick","口红") +"拍开"] to "dildowhack">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftFixAndCoverActions">>
+	<<if ($worn.lower.vagina_exposed is 1 and $worn.under_lower.vagina_exposed is 1) or $leftactiondefault is "leftcovervaginalewd">>
+		<<if $NPCList[0].state is "stalk" and $NPCList[0].legs isnot "run">>
+			<<if $vaginause is "cover">>
+				<<if $leftactiondefault is "leftcovervaginalewd" or $rightactiondefault is "rightcovervaginalewd">>
+					<<set _leftaction["继续玩弄你的小穴"] to "leftcovervaginalewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的小穴"] to "leftcovervaginameek">>
+				<</if>>
+			<<elseif $vaginause is 0>>
+				<<set _leftaction["遮住你的小穴"] to "leftcovervaginameek">>
+			<</if>>
+		<<elseif $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1 or $NPCList[0].state is "stalk">>
+			<<if $vaginause is "cover">>
+				<<if $leftactiondefault is "leftcovervaginalewd" or $rightactiondefault is "rightcovervaginalewd">>
+					<<set _leftaction["继续玩弄你的小穴"] to "leftcovervaginalewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的小穴"] to "leftcovervagina">>
+				<</if>>
+			<<elseif $vaginause is 0>>
+				<<set _leftaction["遮住你的小穴"] to "leftcovervagina">>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if ($worn.lower.vagina_exposed is 1 and $worn.under_lower.vagina_exposed is 1) or $leftactiondefault is "leftcoverpenislewd">>
+		<<set _penis to playerHasStrapon() ? "假阳具" : (playerChastity("penis") ? $worn.genitals.cn_name_cap : "肉棒")>>
+		<<set _straponDisplaced to (!playerHasStrapon() && $worn.under_lower.type.includes("strap-on"))>>
+		<<if $NPCList[0].state is "stalk" and $NPCList[0].legs isnot "run">>
+			<<if $penisuse is "cover">>
+				<<if $leftactiondefault is "leftcoverpenislewd" or $rightactiondefault is "rightcoverpenislewd">>
+					<<set _leftaction["继续玩弄你的" + _penis] to "leftcoverpenislewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的" + _penis] to "leftcoverpenismeek">>
+				<</if>>
+			<<elseif $penisuse is 0>>
+				<<if !_straponDisplaced>>
+					<<set _leftaction["遮住你的" + _penis] to "leftcoverpenismeek">>
+				<</if>>
+			<</if>>
+		<<elseif $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1 or $NPCList[0].state is "stalk">>
+			<<if $penisuse is "cover">>
+				<<if $leftactiondefault is "leftcoverpenislewd" or $rightactiondefault is "rightcoverpenislewd">>
+					<<set _leftaction["继续玩弄你的" + _penis] to "leftcoverpenislewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的" + _penis] to "leftcoverpenis">>
+				<</if>>
+			<<elseif $penisuse is 0>>
+				<<if !_straponDisplaced>>
+					<<set _leftaction["遮住你的" + _penis] to "leftcoverpenis">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if ($worn.lower.anus_exposed is 1 and $worn.under_lower.anus_exposed is 1) or $leftactiondefault is "leftcoveranuslewd">>
+		<<if $NPCList[0].state is "stalk" and $NPCList[0].legs isnot "run">>
+			<<if $anususe is "cover">>
+				<<if $leftactiondefault is "leftcoveranuslewd" or $rightactiondefault is "rightcoveranuslewd">>
+					<<set _leftaction["继续玩弄你的屁股"] to "leftcoveranuslewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的菊穴"] to "leftcoveranusmeek">>
+				<</if>>
+			<<else>>
+				<<set _leftaction["遮住你的菊穴"] to "leftcoveranusmeek">>
+			<</if>>
+		<<elseif $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1 or $NPCList[0].state is "stalk">>
+			<<if $anususe is "cover">>
+				<<if $leftactiondefault is "leftcoveranuslewd" or $rightactiondefault is "rightcoveranuslewd">>
+					<<set _leftaction["继续玩弄你的屁股"] to "leftcoveranuslewd">>
+				<<else>>
+					<<set _leftaction["继续遮住你的菊穴"] to "leftcoveranus">>
+				<</if>>
+			<<else>>
+				<<set _leftaction["遮住你的菊穴"] to "leftcoveranus">>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+		<<if $worn.under_lower.name isnot "naked">>
+			<<if $worn.under_lower.state is "thighs" or $worn.under_lower.state is "knees" or $worn.under_lower.state is "ankles">>
+				<<set _leftaction["撩起身上的" + $worn.under_lower.cn_name_cap] to "leftunderpull">>
+			<</if>>
+		<</if>>
+
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+			<<if $worn.lower.skirt_down is 0>>
+				<<if $worn.lower.state is "waist">>
+					<<set _leftaction["用身上的" + $worn.lower.cn_name_cap+ "遮住你的胯部"] to "leftskirtpull">>
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<if $worn.lower.name isnot "naked">>
+			<<if $worn.upper.set is $worn.lower.set>>
+				<<if $worn.lower.state isnot setup.clothes.lower[clothesIndex('lower', $worn.lower)].state_base and $worn.upper.state is setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_base and $worn.upper.state_top is setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_top_base>>
+					<<set _leftaction["整理好穿着的" + $worn.lower.cn_name_cap] to "leftlowerpull">>
+				<</if>>
+			<<elseif $worn.lower.state isnot setup.clothes.lower[clothesIndex('lower', $worn.lower)].state_base>>
+				<<set _leftaction["整理好穿着的" + $worn.lower.cn_name_cap] to "leftlowerpull">>
+			<</if>>
+		<</if>>
+
+		<<if $worn.over_lower.name isnot "naked">>
+			<<if $worn.over_upper.set is $worn.over_lower.set>>
+				<<if $worn.over_lower.state isnot setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].state_base and $worn.over_upper.state is setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_base and $worn.over_upper.state_top is setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_top_base>>
+					<<set _leftaction["整理好穿着的" + $worn.over_lower.cn_name_cap] to "leftoverlowerpull">>
+				<</if>>
+			<<elseif $worn.over_lower.state isnot setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].state_base>>
+				<<set _leftaction["整理好穿着的" + $worn.over_lower.cn_name_cap] to "leftoverlowerpull">>
+			<</if>>
+		<</if>>
+
+
+		<<if $worn.upper.name isnot "naked">>
+			<<if $worn.upper.state isnot setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_base or $worn.upper.state_top isnot setup.clothes.upper[clothesIndex('upper', $worn.upper)].state_top_base>>
+				<<set _leftaction["整理好穿着的" + $worn.upper.cn_name_cap] to "leftupperpull">>
+			<</if>>
+		<</if>>
+
+		<<if $worn.over_upper.name isnot "naked">>
+			<<if $worn.over_upper.state isnot setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_base or $worn.over_upper.state_top isnot setup.clothes.over_upper[clothesIndex('over_upper', $worn.over_upper)].state_top_base>>
+				<<set _leftaction["整理好穿着的" + $worn.over_upper.cn_name_cap] to "leftoverupperpull">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftchoke">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $_target.lefthand is "throat" or $_target.righthand is "throat">>
+			<<if $consensual == 1>>
+				<<set _leftaction["把" + $_target.pronouns.his + "的手按在你的脖子上"] to "keepchoke">>
+				<<set _leftaction["把" + $_target.pronouns.his + "的手从你的脖子上拿开"] to "stopchoke">>
+			<<else>>
+				<<set _leftaction["把" + $_target.pronouns.his + "的手从你的脖子上拽开"] to "stopchokenoncon">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftCondom">>
+	<<if $lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1>>
+		<<if !["othermouthentrance","othermouthimminent","othermouth","penetrated","otheranus"].includes($penisstate) and $player.penisExist and $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1 and !playerChastity("penis")>>
+			<<if !$player.condom and $condoms gt 0 and $parasite.penis.name is undefined>>
+				<<set _leftaction["带上避孕套 (剩余" + $condoms + "个)"] to "peniscondom">>
+			<</if>>
+			<<if $player.condom>>
+				<<set _leftaction["脱掉戴着的避孕套"] to "penisremovecondom">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftNPCCondom">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if wearingCondom($lefttarget)>>
+			<<if ($consensual is 0 and ($enemytype is "man" ? $promiscuity : $deviancy) lte 94) and playerPregnancyPossibleWith($_target)>>
+				<!-- Do Nothing -->
+			<<else>>
+				<<set _leftaction["摘掉" +  $_target.pronouns.his + "的避孕套"] to "npcremovecondom">>
+			<</if>>
+		<<elseif $prayerRoom or $NPCList[$lefttarget].fullDescription is "Ivory Wraith">>
+			<!-- Do Nothing -->
+		<<elseif !$_target.condom and $condoms gte 1 and ($_target.condomCanGive or $condomlvl is 1)>>
+			<<set _leftaction["给" +  $_target.pronouns.him + "一个避孕套 (剩余" + $condoms + "个)"] to "npcgivecondom">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "leftUndressOther">>
+	<<if $lefttarget isnot "self">>
+		<<set $_target to $NPCList[$lefttarget]>>
+		<<if $_target.penis is "clothed" or $_target.vagina is "clothed" or $_target.chest is "clothed">>
+			<<if ($consensual is 1 and ($enemytype is "man" ? $promiscuity : $deviancy) lte 14 and !$promiscuityIgnore) or $punishmentposition is "gloryhole">>
+				<!-- Do Nothing -->
+			<<else>>
+				<<set _leftaction["脱掉："] to "leftUndressOther">>
+				<<set _undressLeftTargets to {"不做什么":"rest"}>>
+				<<set $_doText to ($consensual isnot 1 ? "试图" : "")>>
+				<<if $_target.penis is "clothed" or $_target.vagina is "clothed">>
+					<<silently>><<npcUndressText $NPCList[$lefttarget] "lower">><</silently>>
+					<<set _undressLeftTargets[($_doText + _actionText + "" + $_target.pronouns.his + "的" + setup.npcClothesSets.find(item => item.name === $_target.clothes.set).clothes.lower.desc)] to "lower">>
+				<</if>>
+				<<if $_target.chest is "clothed">>
+					<<silently>><<npcUndressText $NPCList[$lefttarget] "upper">><</silently>>
+					<<set _undressLeftTargets[($_doText + _actionText + "" + $_target.pronouns.his + "的" + setup.npcClothesSets.find(item => item.name === $_target.clothes.set).clothes.upper.desc)] to "upper">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

@@ -1,0 +1,41 @@
+:: Pharmacy Ask If Lenses Delivered 2 []
+<<set _received to 0>>
+<<set _tmp_length to clone($lenses_ordered.length)>>
+<<for _i = 0; _i < $lenses_ordered.length; _i++>>
+	<<if Time.monthDay.toString() + Time.month + Time.year.toString() != $lenses_ordered[_i][1]>>
+		<<set _received += 1>>
+		<<set _spaced_colour_name = window.colorNameTranslate($lenses_ordered[_i][0], "spaced name")>>
+		<<run $makeup.owned.custom_eyelenses.push(clone($lenses_ordered[_i][0]))>>
+		<<run $custom_eyecolours.push({
+			variable: $lenses_ordered[_i][0],
+			name: _spaced_colour_name,
+			name_cap: _spaced_colour_name.toUpperFirst(),
+			csstext: $lenses_ordered[_i][0],
+			natural: false,
+			lens: true,
+			canvasfilter: {
+				blend: $lenses_ordered[_i][2][0],
+				brightness: +$lenses_ordered[_i][2][1]
+			}
+		})>>
+		<<run $lenses_ordered.deleteAt(_i)>>
+		<<run _i-->>
+	<</if>>
+<</for>>
+<<if _received > 0>>
+	<<run window.initCustomLenses()>>	/* push custom eyelenses inside setup.colours.eyes */
+	<<if _received isnot _tmp_length>>
+		<<He>>在过了一会之后气喘吁吁地跑了回来："我们收到了<<if _received > 1>><<print _received>><</if>>你订购的隐形眼镜，但是其他的<<print (_tmp_length - _received == 1) ? '一个' : _tmp_length - _received>>东西只有你明天再来看看吧，"<<he>>在说着的同时把一个小包裹递给你。
+	<<else>>
+		你看到护士从房间拿着一个小包裹回来了，"您的眼镜。"<<he>>说着将东西递给了你。
+		<br>
+		"有任何问题的话都可以回来找我们解决哦，小<<if $player.gender_appearance is "m">>靓仔<<else>>靓女<</if>>。"
+	<</if>>
+	<br><br>
+
+	<span class="gold">你拿起隐形眼镜的包裹。</span>
+<<else>>
+	过了一会儿，<<he>>两手空空地回来了："不好意思，亲爱的。你定制的隐形眼镜还没到，明天应该就到了。"
+<</if>>
+<br><br>
+<<getouticon>><<link [[离开|Pharmacy]]>><</link>>

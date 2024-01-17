@@ -1,0 +1,59 @@
+:: Forest Plant Sex Finish []
+<<location "forest">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<if $phase is 1>>
+		<<ejaculation "short">>
+	<<else>>
+		<<ejaculation>>
+	<</if>>
+	"这很有趣！"<<person>>得意洋洋地说道。"我希望更多的人类像你一样。"
+	<br><br>
+
+	<<He>>从地上爬起来，拍掉了藤蔓上的灰尘。"如果你再来这个区域，记得联系我！我很想再来一次！"<<He>>离开了，<<his>>的藤蔓在身后晃动着。
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $enemyhealth lte 0>>
+	<<person>>向后退了一步，警惕地看着你。"哎呀，这有点过分了，你不觉得吗？我只是想让我们感觉好一些。"<<His>>的所有藤蔓都从你身边缩了回去。
+	<br><br>
+
+	<<He>>揉了揉自己的藤蔓，皱起了眉头。"好吧，如果你再来这个区域，记得联系我。如果你情绪好起来，也许我们可以继续之前的事！"<<He>>离开了，<<his>>的藤蔓跟着软弱地晃动着。
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	你听到了一声近在咫尺的枪响，一颗子弹落在了<<persons>>的脚边。"该死，"<<he>>嘶声力竭地说道。"是<<nnpc_title "Eden">>。该死。该死的。唔嗯！"<<He>>抓住你的脸，在你的脸颊上亲了一下，然后从你身边飞快地离开。"再见！我走了！"
+	<<bodyliquid "face" "goo">>
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		就在<<person>>缩回藤蔓，消失在森林中的时候，伊甸出现了。<<nnpc_He "Eden">>帮助你重新恢复自己。"该死的远足者，"<<nnpc_he "Eden">>嘟囔着。"你没事吧？"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周片刻。"我们可能已经涉险过深，超出了那个店主的能力范围，"<<nnpc_he "Eden">>说道。
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<forestCabinReturnLinks>>
+	<</if>>
+<</if>>

@@ -1,0 +1,94 @@
+:: Lake Waterfall []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+<<if Time.season is "winter">>
+	<<if Time.dayState is "night">>
+		你在瀑布处。月光下，水幕如同一道银帘。
+	<<else>>
+		你在瀑布处。它通过冰面的狭缝向湖中注入水流。
+	<</if>>
+	<<if $weather is "snow">>
+		雪花飘落在水面上。
+	<<else>>
+		冰面显得非常寂静。
+	<</if>>
+<<else>>
+	<<if $laketeenspresent is 1>>
+		你在瀑布处。一些学生在瀑布中玩耍，其他人则坐在上方的池塘里。
+	<<elseif Time.dayState is "night">>
+		你在瀑布处。月光下，水幕如同一道银帘。
+	<<else>>
+		你在瀑布处。水从岩石上的池塘中流下，带来了一股清新的雾气。
+	<</if>>
+	<<if $weather is "rain">>
+		雨打在湖面上，水波荡漾，仿佛有了生命一样。
+	<<else>>
+		水面显得非常平静。
+	<</if>>
+<</if>>
+
+<br><br>
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<if $exhibitionism gte 75>>
+		你低下身子，躲在树丛中。你真的很想展示你的<<lewdness>>，但你克制了自己，没有这么做。
+	<<else>>
+		你低下身子，躲在树丛中，以免你<<lewdness>>被看到。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<elseif !$brookIntro and $historytrait gte 4 and $sciencetrait gte 2 and $tending gte 200 and !$possessed>>
+	<<set $brookIntro to 1>>
+	你让自己静静地听了一会儿水声。好奇心占了上风。你看着瀑布，然后跟随着流淌的小溪。水流的变化不大但确实是在逐渐变弱，直至消失在几乎难以通行的茂密植被中。<span class="green">几乎。</span>
+	<br><br>
+
+	你回想起你的科学课和历史课。这是湖泊的一个分流。它向东流向荒原，而不是向北流向海洋。所有的河流都有终点，这条河流肯定是急剧下降至森林和荒野之间的沼泽中。
+	<br><br>
+
+	<span class="gold">如果小心点的话，你可以沿着小溪的水道深入森林，最终进入沼泽和荒野。</span> <span class="red">但这将是一次单程旅行。</span>
+	<br><br>
+
+	<<link [[继续|Lake Waterfall]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<if $pregnancyStats.parasiteDoctorEvents gte 2>>
+		<<investigateicon>><<containersLink>>
+	<</if>>
+	<<if $mason_count gte 2 and Time.season isnot "winter">>
+		<<lakeicon "pond">><<link [[梅森的池塘 (0:05)|Mason Pond]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Shore">>
+		<<lakeicon>><span class="nextLink"><<link [[湖边|Lake Shore]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon>><<link [[北上到岸边 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon "fishing">><<link [[南至钓鱼岩 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<br>
+	<<if $brookIntro gte 1>>
+		<<if $worn.feet.type.includes("heels")>>
+			<span class="red">你不可能穿着高跟鞋越过小溪。</span>
+		<<else>>
+			<<foresticon "river">><<link [[东向小溪 (0:30)|Forest Brook]]>><<pass 30>><<tiredness 4>><</link>><<gtiredness>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked") and $exhibitionism gte 35>>
+		<span class="red">你耳朵里的史莱姆拒绝让你穿着泳装离开。</span>
+	<<else>>
+		<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

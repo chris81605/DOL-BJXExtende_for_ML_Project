@@ -1,0 +1,74 @@
+:: Robin Pillory Escape End []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<person1>>
+<<if $stalk_end is "confront">>
+	<<if $feetaction is "confront">>
+		<<if $speech_attitude is "meek">>
+			"我能做到，"你安慰自己，"罗宾，注意安全，好吗？"你转身面对那些追赶的人。
+		<<elseif $speech_attitude is "bratty">>
+			"继续跑！别害怕，我会追上你的。"在转向那些人之前，你给了罗宾一个微笑。
+		<<else>>
+			"罗宾，继续跑，不要停，就这样跑回家！"你一边说着，转向了追赶你们的人群。
+		<</if>>
+	<<else>>
+		<<if !$stalk_assess>>一双手从背后抓住你<<else>><<person1>><<person>>从背后抓住你<</if>>。
+		<br><br>
+
+		你让罗宾继续跑。
+	<</if>>
+	<br><br>
+
+	<<if _robin.dom gte 70>>
+		"不要。"罗宾的双手紧握成拳头，"我不想再做别人的负担了。"罗宾转身和你一起面对他们。
+		<br><br>
+
+		<<person1>><<person>>瞪着你。"你为什么要放了<<person2>><<him>>，你这个婊子！我还没上过<<him>>呢！！"
+		<<person1>><<He>>粗暴地摇晃你。"至少那个荡妇还知道不该继续逃跑，"<<he>>对着在你身边发抖的罗宾微笑。
+		"我们去喝点酒怎么——"
+		<br><br>
+
+		<<him>>还没来得及有进一步的动作，罗宾就朝<<him>>肚子重重打了一拳。然后罗宾抓住你的手，在<<person1>><<person>>痛苦地后退时逃跑了。
+		<br><br>
+
+		<<link [[继续|Robin Pillory Escape Orphanage]]>><<endcombat>><<set $phase to 1>><</link>>
+	<<else>>
+		罗宾犹豫地点点头，朝孤儿院跑去。
+		<br><br>
+
+		罗宾安全了，你松了一口气。
+		<br><br>
+
+		<<person1>><<person>>瞪着你。"你为什么要放了<<person2>><<him>>，你这个婊子！我还没上过<<him>>呢！！"
+		<<person1>><<He>>粗暴地摇晃着你。"至少我还能陪你找点乐子。"<<He>>色眯眯地盯着你。
+		<<saveNPC 0 "robin_stalk">>
+		<<endcombat>>
+		<<loadNPC 0 "robin_stalk">>
+		<<clearNPC "robin_stalk">>
+		<br><br>
+
+		<<link [[继续|Robin Pillory Escape Sex]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<<elseif $stalk_end is "hide">>
+	你们从藏身之处现身。<<if $stalk_assess>><<person1>><<person>><<else>>跟踪你们的人<</if>>已经不见踪影。
+	<<tearful>>你转向罗宾。<<person2>><<He>>紧紧拥抱了你。
+	<br><br>
+
+	"他们走了吗？"罗宾瞥了一眼身后。
+	<br><br>
+
+	你点点头，抓住罗宾的手继续一起往孤儿院走。
+	<br><br>
+
+	<<link [[继续|Robin Pillory Escape Orphanage]]>><<endcombat>><<set $phase to 1>><</link>>
+<<else>>
+	罗宾在你们摆脱掉追赶的人时松了一口气。
+	"我需要……休息几秒钟，"<<person2>><<he>>气喘吁吁地说。
+	<br><br>
+
+	让罗宾稍微休息了几分钟后，你握住<<him>>的手，把<<him>>带回了孤儿院。<<takeHandholdingVirginity "Robin" "romantic">>
+	<br><br>
+
+	<<link [[继续|Robin Pillory Escape Orphanage]]>><<endcombat>><<set $phase to 1>><</link>>
+<</if>>

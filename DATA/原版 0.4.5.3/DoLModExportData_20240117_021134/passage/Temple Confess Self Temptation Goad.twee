@@ -1,0 +1,117 @@
+:: Temple Confess Self Temptation Goad []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+	<<if $temple_rank is "initiate">>
+		"作为一个见习教徒，这么说很难为情，但……如果我说我从你身上感受到诱惑怎么办呢，<<sister_npc>>？"
+	<<else>>
+		"亲爱的<<sister_npc>>，如果我说我正从你身上感受到诱惑怎么办呢？"
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"我……如果我正从你身上感受到诱惑怎么办呢？"
+	<<elseif $speech_attitude is "bratty">>
+		"如果我说，光是听着你的声音，我就燥热起来忍受不住了呢？"
+	<<else>>
+		"如果我说我现在就从你身上感受到诱惑怎么办呢？"
+	<</if>>
+<</if>>
+<<promiscuity3>>
+
+<<switch $attendant>>
+	<<case "Jordan">>
+		沉默良久，<<he>>平静地说道："恐怕你不是第一个这么跟我说的人了。但我谨守我的誓约。<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>你也应当将誓约铭记在心中。<<else>>我建议你也立下誓约。<</if>>"
+		<br><br>
+
+		你们就这么尴尬地坐了一会儿。<<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Temple Confess Self End]]>><</link>>
+		<br>
+	<<case "Sydney">>
+		<<run statusCheck("Sydney")>>
+		<<if $sydneyromance gte 1>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"哦不，不好意思了，我已经<<if $templePromised is "Sydney">>有誓约<<else>>有人<</if>>了，"<<he>>随意地回复道，"还有别的事吗？"
+				<br><br>
+
+				<<He>>没再说一句话就离开了，你都来不及回复。
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+				<br>
+			<<else>>
+				对面传来一声惊慌的吸气。"我，我已经<<if $templePromised is "Sydney">>有誓约<<else>>有人<</if>>了！而且你不应该想这种……那个……啊啊，对不起，我说不出口！"
+				<br><br>
+
+				<<He>>慌慌张张地离开了隔间，只剩你一人待在这里。<<npcincr Sydney purity -1>><<lspurity>>
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"在忏悔室里搞这出，你怕不是脑子有坑，"<<he>>随意地回复道，"你真是来这忏悔的？还是单纯闲得过来骚扰？"
+				<br><br>
+
+				<<He>>没再说一句话就离开了，你都来不及回复。
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+				<br>
+			<<else>>
+				对面传来一声惊慌的吸气。"我……我很抱歉诱惑了你。我不是故意的。我会忏悔的。"你听到<<him>>开始下跪祈祷。
+				<br><br>
+
+				过了一会儿，<<he>>站起身来。"我很抱歉，我很抱歉，我很……哦，不。"<<He>>迅速离开了隔间，只剩你一人待在这里。<<npcincr Sydney purity -1>><<lspurity>>
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<<case "Confessor">>
+		<<He>>哼了一声，明显对你不屑。"我可不像你，我从不会屈从诱惑。你别想在这里好过，罪人，你无法动摇我。"
+		<br><br>
+
+		<<He>>站起身来打开了门，一言不发地离开了。<<grace -2 "monk">><<lgrace "monk">>
+		<br><br>
+
+		<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+		<br>
+	<<default>>
+		<<set $seductiondifficulty to (4000 - ($world_corruption_soft * 10))>>
+		<<seductioncheck>>
+		<br><br>
+		<<if $seductionskill lt 1000>>
+			<span class="gold">你对自己的诱惑力更有信心了。</span>
+			<br><br>
+		<</if>>
+		<<seductionskilluse>>
+		<<if $seductionrating gte $seductionrequired>>
+			<<if $temple_rank is undefined or $temple_rank is "prospective">>
+				"那……那我也没办法了。我会帮助你度过诱惑的试探，脱离罪恶。请在我面前俯下。"
+			<<elseif $temple_rank is "initiate">>
+				"那……那只能由我来管教你了，见习教徒。请在我面前俯下，你的罪将得赦免。"
+			<<else>>
+				"帮……帮一位<<sister>>度过诱惑的试探，我只能在所不辞了。我们很快就会回到光明的道路上的。"
+			<</if>>
+			<br><br>
+
+			小金属百叶窗开了起来。
+			<br><br>
+
+			<<link [[跪下|Temple Confess Self Sex]]>><<set $sexstart to 1>><</link>>
+			<br>
+		<<else>>
+			"恐怕我要拒绝你了。屈从于这样的原始冲动，对你我都没有好处。希望你能找回自我。"
+			<br><br>
+
+			<<He>>离开了，只留你一人在此，内心蠢蠢欲动。<<grace -2 "monk">><<lgrace "monk">>
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+			<br>
+		<</if>>
+<</switch>>

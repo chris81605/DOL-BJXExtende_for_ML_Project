@@ -1,0 +1,33 @@
+:: Stall Masturbation []
+<<effects>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+	<<set $mouth to "disabled">>
+	你蹲在你的摊位后面。在一个热闹的公共场所，周围车水马龙，但你躲在视野之外。大概。你开始抚摸自己。
+	<<if $daily.ex.stall isnot 1>>
+		<<set $daily.ex.stall to 1>>
+		<<if $exhibitionism lte 60>>
+			<<set $daily.ex.stall to 1>>
+		<</if>>
+		<<exhibitionism3>>
+	<<else>>
+		<br><br>
+	<</if>>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+
+<<if $corruptionMasturbation>>
+	<span class="red">你耳朵里的史莱姆不让你停下。</span>
+<</if>>
+<div id="masturbationButtons">
+	<<if $attractiveness + $fame.business + currentSkillValue('tending') + ($stall_rejected * 10) gte random(1, 300000)>>
+		<div id="next"><<link [[继续|$passage + " Finish"]]>><<set $phase to 1>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next"><<link [[继续|$passage]]>><</link>><<nexttext>></div>
+	<</if>>
+	<<masturbationStopControls>>
+</div>
+<br><br><br><br><br>

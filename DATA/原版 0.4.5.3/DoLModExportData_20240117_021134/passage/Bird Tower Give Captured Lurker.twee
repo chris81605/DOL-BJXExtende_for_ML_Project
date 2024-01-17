@@ -1,0 +1,34 @@
+:: Bird Tower Give Captured Lurker []
+<<npc "Great Hawk">><<person1>>
+<<if ndef $bird_lurkers>><<set $bird_lurkers to 0>><</if>>
+<<run $bird_lurkers += $lurkers_held>>
+<<if $speech_attitude is "meek">>
+	"我给你带了一些东西，"你说，"希望你能喜欢。"
+<<elseif $speech_attitude is "bratty">>
+	"有给你的东西，"你说，"不用谢我。"
+<<else>>
+	"我给你带了礼物，"你说，"希望你能喜欢。"
+<</if>>
+你把装在网里的潜伏者交给你的<<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>伙伴<</if>>。<<glove>>
+<br><br>
+<<if $monster is 1>>
+	<<beasttype>>显得非常激动。
+	<br><br>
+	"<<Wife>>为我去打猎了吗？"<<bhe>>问，"<<Wife>>非常慷慨，也非常强壮。"<<bHe>>向前跳了一下，以几乎足以撕碎潜伏者的力度用爪子抓住了它。过了一小会儿，<<bhe>>放开了已经一动不动的潜伏者。<<bHe>>打开网，开始进食。
+	<br><br>
+	咬了几口之后，<<bhe>>停下动作看向你。
+	<br><br>
+	"<<Wife>>也该吃点，"<<bhe>>递向你，"一起庆祝<<if $bird_lurkers eq $lurkers_held>>你的第一次<<else>>这次出色的<</if>>狩猎。"
+<<else>>
+	<<beasttype>>发出一声振奋的高鸣，向前跳了一步，按住潜伏者，用<<bhis>>的爪子死死挤压它。<<bHe>>随后扒开网，从已经一动不动的潜伏者身上撕下一大块肉。
+	<br><br>
+	稍微吃了几口后，<<beasttype>>抬起进食中的脑袋，轻轻往后跳了一步。<<bHe>>稍微歪着头，看看你，又看看潜伏者，露出期待的眼神。
+<</if>>
+<br><br>
+<<set $lurkers_held to 0>>
+<<link "接受<<bhis>>的分享" "Bird Tower Give Captured Lurker Accept">><<npcincr "Great Hawk" love 1>><<npcincr "Great Hawk" dom 1>><<stress -16>><</link>> <<llstress>><<glove>><<gdom>>
+<br>
+<<link [[拒绝|Bird Tower Give Captured Lurker Refuse]]>>
+<<npcincr "Great Hawk" dom -1>>
+<</link>> <<ldom>>
+<br>

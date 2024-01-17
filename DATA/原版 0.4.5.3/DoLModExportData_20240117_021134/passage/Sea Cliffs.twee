@@ -1,0 +1,57 @@
+:: Sea Cliffs []
+<<location "seacliffs">><<water>><<effects>>
+你在码头东边的悬崖底下的海里游泳。一个巨大的下水道出口在你的上方，形成了一个瀑布。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		黑暗的海水被雨水冲击着。
+	<<elseif $weather is "snow">>
+		黑色的水吞噬了雪。
+	<<else>>
+		水是黑的，是不祥的预兆。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		暴雨使地面摇晃不定。
+	<<elseif $weather is "snow">>
+		雪天下的水是平静的。
+	<<else>>
+		海水平静而清澈。
+	<</if>>
+<</if>>
+<br><br>
+<<if $seaswim is 1>>
+	<<set $seaswim to 0>>
+	你花了一些时间游泳。
+	<<physique 3>><<swimmingskilluse>>
+	<br><br>
+<</if>>
+<<if $exposed gte 1>>
+	你把你的<<lewdness>>隐藏在水下。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventssea>>
+	<<else>>
+		<<swimmingdifficulty 1 100 true>>
+		<<if $swimmingSuccess>>
+			<span class="green">你成功游过逆潮。</span>
+			<br><br>
+			<<swimicon "back">><<link [[练习游泳 (0:30)|Sea Cliffs]]>><<pass 30>><<stress -6>><<tiredness 6>><<set $seaswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>><<swimmingdifficulty 1 100>>
+			<br>
+			<<swimicon>><<link [[游向外海 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea to 0>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+			<br><br>
+			<<seadocks>><<swimmingdifficultytext0>>
+			<br>
+		<<else>>
+			你尝试逆流而上，但<span class="red">水流对你来说太强了。</span>你被冲到海里去。
+			<br><br>
+			<<link [[继续|Sea]]>><<set $sea to 0>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

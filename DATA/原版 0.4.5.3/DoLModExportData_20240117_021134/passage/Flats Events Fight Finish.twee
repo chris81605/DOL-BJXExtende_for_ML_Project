@@ -1,0 +1,44 @@
+:: Flats Events Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	他们已经筋疲力尽，无法阻止你逃跑。
+	<br><br>
+	<<tearful>>你跑上楼梯，随便找了个角落躲起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+    <<link [[继续|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+
+<<elseif $enemyhealth lte 0>>
+	三人离开了你。"神经不正常的<<bitch>>，"<<person1>><<person>>啐了一口。他们走开了。
+    <<famescrap 3>>
+	<br><br>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+    <<link [[继续|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<<elseif $rescue is 1>>
+    <<generate4>><<person4>>
+    <span class="teal">走廊的门打开了，</span>一个<<person>>探出<<his>>的头。"又是你们这些该死的孩子，"<<he>>说。"快滚，不然我叫警察了。"
+    <br><br>
+    <<person1>><<person>>给你一个嘲讽的眼神，三人离开了你。
+    <br><br>
+    <<clotheson>>
+    <<endcombat>>
+
+    <<link [[继续|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<<else>>
+	<<tearful>>你摔倒在地，因为受伤了失去了战斗能力。
+	<br><br>
+    <<person1>><<person>>抓住你的头发，把你拽到膝盖上。
+    <br><br>
+    <<link [[继续|Flats Events Knees]]>><</link>>
+    <br>
+<</if>>

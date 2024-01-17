@@ -1,0 +1,41 @@
+:: Sea Beach Molestation Finish []
+<<effects>>
+<<if $finish is 1>>
+	<<person>>环顾四周寻找其他人来骚扰。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $enemyhealth lte 0>>
+	<<effects>>
+	<<He>>向后落入水中。当<<he>>恢复过来时，你已经消失在人群中。<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+		<<he>>满意地踢了你一脚，然后游走了。
+		<<violence 3>>
+		<br><br>
+	<<elseif $enemyanger gte 1>>
+		<<he>>一言不发，只留你在水上漂浮。
+		<br><br>
+	<<else>>
+		<<he>>微笑着亲吻你的脸颊。<<He>>留着你漂浮在水面。
+		<br><br>
+	<</if>>
+	<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+	哨声响起，惊动了<<person>>。一名救生员在一条小船上向你冲来。<<person>>给了你一个愤怒的表情，但没有再大惊小怪地离开了。救生员见<<him>>离开，转身返回海滩。<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

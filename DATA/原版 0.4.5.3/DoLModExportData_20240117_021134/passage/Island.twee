@@ -1,0 +1,198 @@
+:: Island []
+<<location "island">><<set $outside to 1>><<effects>>
+
+<<hunger_description>>
+<br><br>
+<<if $island.home is "rocky_hillock">>
+	你正在一个陌生的小岛上，在岩石山顶的营地里。你可以清楚地看到周围的环境。
+<<elseif $island.home is "waterfall">>
+	你在一个陌生的小岛上，在瀑布顶端的营地里。河水从附近的树林中流出。
+<<elseif $island.home is "gulch">>
+	你在一个陌生的小岛上，在峡谷中的营地里。岩石和树木在你头顶若隐若现。
+<</if>>
+<br><br>
+
+<<if $island_simple_decor_message is 1>><<unset $island_simple_decor_message>>
+	你进入营地，目光落到<<print $island[$island.home].decoration>>，稍微打起精神。<<lstress>><<stress -1>>
+	<br>
+<<elseif $island_basic_decor_message is 1>><<unset $island_basic_decor_message>>
+	你进入营地，目光扫过<<print $island[$island.home].decoration>>和其它装饰，精神为之一振。<<lstress>><<stress -2>>
+	<br>
+<<elseif $island_advanced_decor_message is 1>>
+	你进入营地，目光扫过<<print $island[$island.home].decoration>>和其它装饰，精神为之大振。<<lstress>><<stress -3>><<unset $island_advanced_decor_message>>
+	<br>
+<</if>>
+<<if $island_bird_message is 1>><<unset $island_bird_message>>
+	<span class="teal">一只来访的鸟儿为你捎来核桃。</span><<gwalnut>><<set $island.walnut += 1>>
+	<br>
+<</if>>
+<br>
+
+<<if $leftarm is "bound" or $rightarm is "bound">>
+	<<unbind>>
+	<span class="lblue">你用锋利的石子撕开束缚。</span>
+	<br><br>
+<</if>>
+
+
+<<if $stress gte $stressmax>>
+	你再也承受不住，晕过去了。
+	<br><br>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "island">>
+	<<else>>
+		<<link [[继续|Island Passout]]>><<trauma 6>><<passout>><<island_pass 60>><</link>>
+		<br>
+	<</if>>
+<<elseif $hunger gte 2000>>
+	你饿极了。饥饿侵噬腐蚀抓挠着你的肠胃。你清楚地知道，再也不会有下一顿了，这让你坠入绝望的深渊。
+	<br><br>
+
+	你忽视了一切危险，在岛上游荡，试图找到哪怕一丁点吃食。
+	<br><br>
+
+	<<link [[继续 (0:30)|Island Hunger]]>><<pass 30>><</link>><br>
+<<else>>
+
+你要探索哪里？
+<br>
+<label>营地附近<<radiobutton "$island.explore" "none" autocheck>></label>
+<<if $island.explore_locations.includes("shore")>>
+	<label>| 更容易找到食物的海岸 <<radiobutton "$island.explore" "shore" autocheck>></label>
+<</if>>
+<<if $island.explore_locations.includes("wood")>>
+	<label>| 郁郁葱葱的林地，更容易找到木材<<radiobutton "$island.explore" "wood" autocheck>></label>
+<</if>>
+<<if $island.explore_locations.includes("battleground")>>
+	<label>| 更容易遇到土著的战场 <<radiobutton "$island.explore" "battleground" autocheck>></label>
+<</if>>
+<<if $island.explore_locations.includes("plain")>>
+	<label>| 平原地区，可能会有古董 <<radiobutton "$island.explore" "plain" autocheck>></label>
+<</if>>
+<br>
+<<islandicon "explore">><<link [[探索 (1:00)|Island Explore]]>><<island_pass 60>><<set $island.explore_count += 1>><<physique 6>><</link>><<gphysique>>
+<br><br>
+
+<<if $island.walnut gte 1 or $island.walnut_dried gte 1>>
+	你有
+	<<if $island.walnut + $island.walnut_dried is 1>>
+		一把
+	<<else>>
+		<<number `$island.walnut + $island.walnut_dried`>>把
+	<</if>>
+	储存好的核桃。其中有<<Number $island.walnut_dried>>把已经风干，更有营养。<span class="black">(译注：新鲜的核桃才更有营养)</span>
+	<br>
+	<<if $island.walnut gte 1>>
+		<<islandicon "nuts">><<link [[吃一把生核桃|Island Walnut Eat]]>><<set $island.walnut-->><<hunger -200>><</link>><<lhunger>>
+		<br>
+	<</if>>
+	<<if $island.walnut_dried gte 1>>
+		<<islandicon "nuts">><<link [[吃一把干核桃 (0:05)|Island Walnut Eat Dried]]>><<set $island.walnut_dried-->><<island_pass 5>><<hunger -400>><</link>><<llhunger>>
+		<br>
+	<</if>>
+	<br>
+<</if>>
+
+	家具：
+	<<if $island[$island.home].trap is "simple">>
+		<span class="blue">简易</span>陷阱 |
+	<<elseif $island[$island.home].trap is "basic">>
+		<span class="lblue">基础</span>陷阱 |
+	<<elseif $island[$island.home].trap is "advanced">>
+		<span class="teal">高级</span>陷阱 |
+	<</if>>
+	<<if $island[$island.home].curtains is "simple">>
+		<span class="blue">简易</span>帷幔 |
+	<<elseif $island[$island.home].curtains is "basic">>
+		<span class="lblue">基础</span>帷幔 |
+	<<elseif $island[$island.home].curtains is "advanced">>
+		<span class="teal">高级</span>帷幔 |
+	<</if>>
+	<<if $island[$island.home].decor is "simple">>
+		<span class="blue">精简</span>风格<<print $island[$island.home].decoration>> |
+	<<elseif $island[$island.home].decor is "basic">>
+		<span class="lblue">朴素</span>风格<<print $island[$island.home].decoration>> |
+	<<elseif $island[$island.home].decor is "advanced">>
+		<span class="teal">豪华</span>风格<<print $island[$island.home].decoration>> |
+	<</if>>
+	<<if $island[$island.home].bird_feeder is "simple">>
+		<span class="blue">简易</span>喂鸟器 |
+	<<elseif $island[$island.home].bird_feeder is "basic">>
+		<span class="lblue">基础</span>喂鸟器 |
+	<<elseif $island[$island.home].bird_feeder is "advanced">>
+		<span class="teal">高级</span>喂鸟器 |
+	<</if>>
+	<<if $island[$island.home].chair is "simple">>
+		<span class="blue">凳子</span> |
+	<<elseif $island[$island.home].chair is "basic">>
+		<span class="lblue">椅子</span> |
+	<<elseif $island[$island.home].chair is "advanced">>
+		<span class="teal">王座</span> |
+	<</if>>
+	<<if $island[$island.home].camouflage is "simple">>
+		<span class="blue">简易</span>伪装 |
+	<<elseif $island[$island.home].camouflage is "basic">>
+		<span class="lblue">基础</span>伪装 |
+	<<elseif $island[$island.home].camouflage is "advanced">>
+		<span class="teal">高级</span>伪装 |
+	<</if>>
+	<br>
+	<<if $island[$island.home].space is 0>>
+		家具摆不下了。
+		<br>
+	<</if>>
+	<<edenicon "fix">><<link [[建造|Island Build]]>><</link>>
+	<br>
+	<br>
+	<<if $drugged gte 1>>
+		<span class="pink">你发觉内心深处有一股淫荡的雾霭。</span>
+		<br>
+		<<ind>><<link [[自慰|Island Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+	<<elseif $arousal gte ($arousalmax / 2)>>
+		你性欲来了。
+		<br>
+		<<ind>><<link [[自慰|Island Masturbation]]>><<set $masturbationstart to 1>><</link>>
+		<br>
+	<</if>>
+	<<beachicon>><<link [[清洗 (0:10)|Island]]>><<island_pass 10>><<wash>><</link>>
+	<br>
+	<<mirroricon>><<link [[看着倒影|Island Mirror]]>><<preMirror>><</link>>
+	<br>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<foresticon "bush">><<link [[用植物和小树枝做一件上衣 (0:20)|Island Clothes]]>><<set $phase to 1>><<island_pass 20>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<foresticon "bush">><<link [[用植物和小树枝做一条裙子 (0:20)|Island Clothes]]>><<set $phase to 2>><<island_pass 20>><</link>>
+		<br>
+	<</if>>
+
+
+
+	<<bedicon "zzz">><<link [[睡觉|Island Bed]]>><</link>>
+	<br>
+	<br>
+
+	<<if $island.explore_locations.includes("castle")>>
+		<<mooricon "tower">><<link [[步行前往城堡 (0:20)|Island Castle]]>><<island_pass 20>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.face.name is "islander mask">>
+		<<islandicon "mask">><<link [[储存面具|Island]]>><<set $island.mask_stored to 1>><<faceruined true>><</link>>
+		<br>
+	<<elseif $island.mask_stored is 1>>
+		<<islandicon "mask">><<link [[取回面具|Island]]>><<set $island.mask_stored to undefined>><<facewear 38>><</link>>
+		<br>
+	<</if>>
+	<<if $debug is 1>>
+		<<ind>><<link [[获取木材|$passage]]>><<set $island.wood += 100>><</link>> (debug)
+		<br>
+	<</if>>
+<</if>>

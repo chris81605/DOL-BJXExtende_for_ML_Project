@@ -1,0 +1,37 @@
+:: Toy Shop Item []
+你看了看<<print $selectedToy.name_lower>>的收藏品。它们每个要花<span class="gold"><<print $selectedToy.costDisplay>></span>。
+<br><br>
+<<if $selectedToy.options>>
+	<<set _numberOnHand to {}>>
+	<<for _i to 0; _i lt $player.inventory.childrenToys.length; _i++>>
+		<<if $player.inventory.childrenToys[_i].set is $selectedToy.set>>
+			<<if _numberOnHand[$player.inventory.childrenToys[_i].name] is undefined>>
+				<<set _numberOnHand[$player.inventory.childrenToys[_i].name] to 1>>
+			<<else>>
+				<<set _numberOnHand[$player.inventory.childrenToys[_i].name]++>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<<for _i to 0; _i lt $selectedToy.options.length; _i++>>
+		<label>
+			<<radiobutton "$selectedToy.selectedOption" _i autocheck>>
+			<span @class="$selectedToy.options[_i].colour">
+				<<print $selectedToy.options[_i].optionsName>>
+				(<<print (_numberOnHand[$selectedToy.options[_i].name] is undefined ? 0 : _numberOnHand[$selectedToy.options[_i].name])>>)
+			</span>
+		</label> |
+	<</for>>
+	<br><br>
+<</if>>
+
+<<if $player.inventory.childrenToys.length gte 5>>
+	你每次携带的玩具不能超过5件。
+	<br><br>
+<<elseif $selectedToy.cost lte $money>>
+	<<link [[购买|Toy Shop]]>><<buyToy>><</link>>
+	<br>
+<<else>>
+	你买不起这个玩具。
+<</if>>
+
+<<link [[不买|Toy Shop]]>><<unset $selectedToy>><</link>>

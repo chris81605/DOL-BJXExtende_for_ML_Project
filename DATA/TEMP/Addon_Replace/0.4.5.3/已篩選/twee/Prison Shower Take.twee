@@ -1,0 +1,28 @@
+:: Prison Shower Take []
+<<effects>>
+
+你步入淋浴间。这里没有隐私，几十个人挤在生锈的水龙头下，衣不蔽体。庆幸点吧，至少这里还有肥皂。
+<br><br>
+/* 北极星模组 */
+<<if $options.bjx_eventTF and $slime gt 0>>
+    <span class='red'>你忍受着皮肤上的刺痛。</span>
+    <br><br>
+    <<violence 20>>
+<</if>>
+/* 北极星 */
+<<wash>>
+<<if random(1, 9) is 9>>
+	没人有心思看你洗澡……直到你把肥皂挤得太用力了。你眼睁睁的看着它在空中划出了一道美丽的弧线。
+	<br><br>
+
+	<<link [[抓住|Prison Shower Catch]]>><</link>><<dancedifficulty 1 1000>>
+	<br>
+	<<link [[算了|Prison Shower]]>><<clotheson>><<prison_inmates -1>><</link>><<lrespect>>
+	<br>
+<<else>>
+	你洗澡的时候没人看你。
+	<br><br>
+
+	<<link [[继续|Prison Shower]]>><<clotheson>><</link>>
+	<br>
+<</if>>

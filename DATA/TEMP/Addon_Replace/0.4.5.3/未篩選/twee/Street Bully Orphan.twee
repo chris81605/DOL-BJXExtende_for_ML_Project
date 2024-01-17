@@ -1,0 +1,106 @@
+:: Street Bully Orphan []
+<<set $outside to 1>><<effects>>
+
+<<if $phase is 3>>
+	<<person1>>
+	<<if $speech_attitude is "meek">>
+		你拽住惠特尼的袖子。<<He>>怒视着转过身来。但在看到你时，<<His>>的表情柔软下来。
+		<br><br>
+
+		"不公平，”你喃喃地说，“你只应该欺负我。"
+	<<elseif $speech_attitude is "bratty">>
+		你抓住惠特尼的肩膀，让<<him>>转过身。起初，<<his>>的眼睛因震惊而睁得大大的。当<<He>>看到你时，<<he>>咧嘴笑了出来。
+		<br><br>
+
+		"你和那个废物玩什么？”你说道，“你的<<if $player.gender_appearance is "m">>男朋友<<else>>女朋友<</if>>在这呢。"
+	<<else>>
+		你轻拍惠特尼的肩膀。<<He>>怒视着转过身来。但当<<His>>看到你时，<<he>>眉毛一挑。
+		<br><br>
+
+		"你要是继续和我的朋友鬼混，”你说，“搞不好我就要吃醋了。"
+	<</if>>
+	<<promiscuity1>>
+
+	惠特尼笑了。“看来你可以脱身了，”<<he>>对<<person2>><<person>>说，“之后记得感谢我的<<girl>>。<<pShes>>现在得做些“工作”了。”<<person1>><<He>>推开<<person2>><<person>>，<<him>>虽然害怕但也得以安全地跑出了巷子。<<hope 3>><<gghope>>
+	<br><br>
+
+	你在刚刚<<persons>>在的位置那被推到墙上。惠特尼舔了舔<<person1>><<his>>的嘴唇，“要你做的“工作”有很多。"
+	<br><br>
+
+	<<endevent>>
+	<<npc Whitney>><<person1>>
+
+	<<link [[继续|Street Bully Orphan Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	<<if $speech_attitude is "meek">>
+		你昂首阔步走向惠特尼，双手放在背后。“看起来很有趣，”你咯咯笑着说，“下轮换我来可以吗？"
+	<<elseif $speech_attitude is "bratty">>
+		你清清喉咙。“呃，你们好？"
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			你及时介入了。
+		<<else>>
+			你双手叉腰，及时介入进去。
+		<</if>>
+		"我在这儿呢。"
+	<<else>>
+		你轻拍惠特尼的肩膀。“来吧，”你靠在墙上，暧昧地轻声说道，“你知道你真正想要的是谁。"
+	<</if>>
+	<<promiscuity3>>
+
+	<<set $seductiondifficulty to 4000 - ($NPCName[$NPCNameList.indexOf("Whitney")].lust * 50)>>
+	<<seductioncheck>>
+	<br><br>
+	<<if $seductionskill lt 1000>>
+		<span class="gold">你对自己的诱惑力更有信心了。</span>
+		<br><br>
+	<</if>>
+	<<seductionskilluse>>
+
+	<<if $seductionrating gte $seductionrequired>>
+		<span class="green"><<person1>><<He>>失去了对<<person2>><<person>>的所有兴趣，</span>把<<him>>推到一边，向你走来。<<person>>害怕地跑开了。<<hope 3>><<gghope>>
+		<br><br>
+
+		你在刚刚<<persons>>的位置被推到墙上。“我真笨，”惠特尼说。“好东西就在这儿，却要去追一个次流骚货。"
+		<br><br>
+
+		<<endevent>>
+		<<npc Whitney>><<person1>>
+
+		<<link [[继续|Street Bully Orphan Sex]]>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		"别担心，”<<person1>><<he>>笑着说。“你迟早会有机会的。”<span class="red"><<He>>转身回到<<person2>><<person>>面前。</span>
+		<br><br>
+
+		<<link [[战斗|Street Bully Orphan Fight]]>><<set $phase to 1>><<set $fightstart to 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+		<br>
+		<<link [[离开|Street Bully Orphan]]>><<set $phase to 0>><<sub 1>><<trauma 10>><<stress 6>><<hope -3>><<npcincr Whitney dom 1>><</link>><<ggtrauma>><<gstress>><<llhope>><<gdom>>
+		<br>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		你走到惠特尼面前，双腿颤抖。“请不要找<<him>>的麻烦，”你结结巴巴地说。“<<Hes>>是我的朋友。"
+	<<elseif $speech_attitude is "bratty">>
+		你双臂交叉走向惠特尼。“放<<him>>走，”你要求。“你不知道你惹毛了谁。"
+	<<else>>
+		你走向惠特尼。“放了我的朋友，”你说。
+	<</if>>
+	<br><br>
+
+	惠特尼冷笑着转向你。“你来抓这边，”<<person1>><<he>>对<<generatey3>><<person3>><<person>>说，后者控制住<<person2>><<person>>。当惠特尼向你靠近时，其他人围在了周围。
+	<br><br>
+
+	<<saveNPC 1 whit_bully_victim>>
+	<<endevent>>
+	<<npc Whitney>><<person1>>
+
+	<<link [[继续|Street Bully Orphan Fight]]>><<set $phase to 0>><<set $fightstart to 1>><</link>>
+	<br>
+<<else>>
+	对于<<person2>><<person>>，你无能为力。你继续走。一声尖叫在你身后回响。你加快脚步。
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

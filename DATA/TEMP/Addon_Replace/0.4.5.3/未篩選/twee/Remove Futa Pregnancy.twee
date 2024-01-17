@@ -1,0 +1,74 @@
+:: Remove Futa Pregnancy []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<set _aPregnancy to $sexStats.anus.pregnancy>>
+<<if _aPregnancy.type is "parasite">>
+	<<for _i to 0; _i lt _aPregnancy.fetus.length; _i++>>
+		<<if _aPregnancy.fetus[_i] isnot undefined>>
+			<<if _aPregnancy.fetus[_i].stats.gender is "Hermaphrodite">>
+				<<set _analFuta to true>>
+				<<moveCreature _i "destroy" undefined "anus">>
+				<<set _aPregnancy.motherStatus to 1>>
+				<<break>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<<clearToDeleteParasiteFetus>>
+	<<for _i to 0; _i lt _aPregnancy.fetus.length; _i++>>
+		<<if _aPregnancy.fetus[_i] isnot undefined and _i >= maxParasites("anus")>>
+				<<set _analFutaOther to true>>
+				<<moveCreature _i "destroy" undefined "anus">>
+		<</if>>
+	<</for>>
+	<<clearToDeleteParasiteFetus>>
+<</if>>
+
+<<set _vPregnancy to $sexStats.vagina.pregnancy>>
+<<if _vPregnancy.type is "parasite" and !playerChastity("hidden")>>
+	<<for _i to 0; _i lt _vPregnancy.fetus.length; _i++>>
+		<<if _vPregnancy.fetus[_i] isnot undefined>>
+			<<if _vPregnancy.fetus[_i].stats.gender is "Hermaphrodite">>
+				<<set _vaginaFuta to true>>
+				<<moveCreature _i "destroy" undefined "vagina">>
+				<<set _vPregnancy.motherStatus to 1>>
+				<<break>>
+			<</if>>
+		<</if>>
+	<</for>>
+	<<clearToDeleteParasiteFetus>>
+	<<for _i to 0; _i lt _vPregnancy.fetus.length; _i++>>
+		<<if _vPregnancy.fetus[_i] isnot undefined and _i >= maxParasites("vagina")>>
+				<<set _vaginaFutaOther to true>>
+				<<moveCreature _i "destroy" undefined "vagina">>
+		<</if>>
+	<</for>>
+	<<clearToDeleteParasiteFetus>>
+<</if>>
+
+"请脱掉衣服，躺在桌子上，”<<he>>拉着一只乳胶手套说，“不用害羞。”<<He>>转过身，在抽屉里翻找。
+<br><br>
+
+你<<nervously>>脱掉衣服，而<<his>>却背对着你。你躺在手术台上，在意着自己的<<lewdness>>。<<His>>面无表情，医生抓住你的双腿，把它们抬起，按在你的肩膀上，然后用带子将它们绑起。
+<br><br>
+
+"如果你静止不动的话会更容易些。”<<he>>肯定地说道，<<he>>绑住你的手腕，这让你几乎不能动弹。
+<br><br>
+
+<<if _anusFuta && playerChastity("anus")>>
+	<<He>>检查了你的$worn.under_lower.cn_name_cap，然后从<<his>>的外套里拿出一个奇怪的金属装置。<<He>>轻轻一敲，你的护肛板就松开了。"等一切结束后我再还给你。"<<he>>说。
+	<br><br>
+<</if>>
+
+<<He>>打开另一个抽屉，拿出一根一端带有圆球的光滑白色圆棒。<<He>>将末端顶在你的<<bottom>>上。"放轻松，<<if playerBellyVisible() and !_vaginaFuta>>不会伤到宝宝的，<</if>>"<<he>>说。它就像被润滑过一样，无痛地插了进去。哈珀扭动一下另一端，你感觉到它在你的体内震动着。
+<<garousal>><<arousal 1200 "bottom">>
+<br><br>
+
+随着脉冲强度的增加，哈珀目不转睛地盯着你的<<bottom>>。就在你快要支撑不住的时候，<<he>>缓缓地抽了出来。寄生物<<if $pregnancyStats.namesParasitesChild is true>>婴儿<</if>>被包裹在末端<<if _analFutaOther or _vaginaFutaOther>>旁一处更小的末端里<</if>>。<<He>>把它放进一个不透明的容器中封好。
+<<if _vaginaFuta and _anusFuta>>
+	<<He>>重复了所做的步骤，更多的寄生物被裹出和封好。
+<</if>>
+<br><br>
+
+"都弄好了，"<<he>>边说边解开带子。在你穿衣服时，<<He>>转身离去。
+<br><br>
+<<link [[继续|Pregnancy Discussion]]>><<unset $futaCheck>><</link>>

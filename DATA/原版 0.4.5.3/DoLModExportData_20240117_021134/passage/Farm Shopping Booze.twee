@@ -1,0 +1,30 @@
+:: Farm Shopping Booze []
+<<effects>>
+
+<<if $alexBooze is "noBooze">>
+	<<if C.npc.Alex.dom gte 20>>
+		你紧紧抓住<<his>>的肩膀。<<He>>试图把你甩掉，但你很坚持。你生气了，把剩下的钱扔在了<<him>>身上。
+		<br><br>
+
+		"不要表现得像个不听话的小鬼一样。我只是在为你好。"
+		<br><br>
+
+		你转过身去的时候，<<he>>自言自语地嘟哝了什么。<<He>>听起来似乎有些内疚。<<lstress>><<ldom>><<stress -6>><<npcincr "Alex" dom -1>>
+
+	<<elseif ($alexBooze is "noBooze" and C.npc.Alex.dom lte 20) or $alexBooze is "noID">>
+		你把你的手放在艾利克斯的肩膀上。<<He>>瞥了你一眼，然后又瞥了一眼你张开的手中剩下的钱。"这是酒的钱。"你说。
+		<br><br>
+
+		<<He>>点点头。"谢谢。"<<He>>转过身去，你好像听见<<him>>嘟哝着说了类似抱歉的话。<<lstress>><<stress -6>>
+	<</if>>
+
+<<else>>
+	你抓住艾利克斯的肩膀。<<He>>也看向你。你抓住<<his>>的手，把钱放了上去。"这是剩下的钱。"
+	<br><br>
+
+	艾利克斯的表情稍微舒缓下来，<<he>>吻了你的脸颊。<<glove>><<npcincr "Alex" love 1>>
+
+<</if>>
+<br><br>
+
+<<link [[继续|Farm Work]]>><<unset $alexBooze>><<endevent>><</link>>

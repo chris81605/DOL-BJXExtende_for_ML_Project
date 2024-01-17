@@ -1,0 +1,30 @@
+:: Moor Vore Finish []
+<<effects>>
+<<if $stress gte $stressmax or $vorestomach gte 5>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<passout_moor>>
+<<else>>
+	<<tearful>>你把自己从裂缝中拉了出来。
+	<<if $tentacledisable is "f" and $hallucinations gte 1 and $enemytype is "tentacles">>
+		两根触手在你后面摸索，但你设法翻到了安全的地方。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

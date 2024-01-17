@@ -1,0 +1,42 @@
+:: Flats Lecherous []
+<<effects>>
+
+你进入公寓，看到了一片混乱的景象。阳台的门被几个空的威士忌瓶撑开。空啤酒罐、比萨盒和其他垃圾散落在桌子上。还有一个瓶子被打碎了，碎玻璃散落在地上。
+<br><br>
+
+"是一个很有趣的夜晚，"<<person>>自豪地说。"我去烧壶水。"
+<br><br>
+
+你清理了碎玻璃，把瓶子拿去回收，然后把其他垃圾扔掉了。
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	当你擦拭栏杆时，那个<<person>>走到阳台上，<<his>>靠在你的身边，把手臂放在你的两侧。"从这里看风景很不错，"<<he>>说着将<<his>>的下体顶在了你的<<bottom>>上。
+	<<if $NPCList[0].penissize gte 2>>
+		<span class="lewd">你透过衣服感受到了<<his>>的<<npcPenis>>。</span>
+	<</if>>
+	<<gtrauma>><<trauma 6>><<gstress>><<stress 6>><<garousal>><<arousal 600>>
+	<br><br>
+	虽然从这里可以看到城镇的许多景色，从码头到森林，但现在很难欣赏。
+	<br><br>
+
+	<<link [[生气|Flats Lecherous Angry]]>><<def 1>><<trauma -6>><<stress 6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[忍受|Flats Lecherous Endure]]>><<sub 1>><<trauma 6>><<arousal 600>><</link>><<gtrauma>><<garousal>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[要钱|Flats Lecherous Rub]]>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<<else>>
+	当你完成清理后，阳台变得一尘不染，比派对前更加干净了。那个<<person>>拿着一杯茶走出来，伸了个懒腰。
+	<br><br>
+
+	"好多了，"<<he>>说。"来，这是你的报酬。"你获得了<<moneyGain 10>>。
+	<br><br>
+
+	你把杯里的茶喝完，走到外面。
+	<br><br>
+
+	<<link [[继续|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>

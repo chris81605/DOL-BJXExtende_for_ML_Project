@@ -1,0 +1,43 @@
+:: Pregnancy Birth Prison 2 []
+<<effects>>
+
+<<methodical_guard 0 cap>>给你戴上一个面罩。你感到意识逐渐模糊。
+<br><br>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+
+<<switch playerNormalPregnancyType()>>
+	<<case "human">>
+		<<methodical_guard 0 capo>>的声音在雾中飘过，"运气很好，孩子的位置很正常，头快出来了。我需要你配合……"
+		<br><br>
+
+		时间似乎快速加速和减速，疼痛加剧。你听到"呼吸"和"用力"这些词很多次，尽力配合着做。
+		<br><br>
+
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Prison 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+	<<case "wolf">>
+		<<methodical_guard 0 capo>>的声音从雾中传来。"不敢相信，生下来的居然不是人类。严格按照我的指示行事……"
+		<br><br>
+
+		时间似乎快速加速和减速，疼痛加剧。你听到"呼吸"和"用力"这些词很多次，尽力配合着做。
+		<br><br>
+
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Prison Wolf]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+<</switch>>

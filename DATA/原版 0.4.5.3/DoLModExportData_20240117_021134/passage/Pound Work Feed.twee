@@ -1,0 +1,33 @@
+:: Pound Work Feed []
+<<effects>>
+<<if $slimePoundTask>>你遵从了史莱姆让你做某个特定工作的命令。<<unset $slimePoundTask>><</if>>
+在一群急切的<<pound_text>>被从笼子里放出来之前，你在后院给碗里加满了水。
+<br><br>
+
+<<if random(1, 2) is 2>>
+	他们蜂拥而至，无视你和其他工作人员。
+	<<beastNEWinit 2 dog>>
+	一只憔悴的<<beasttype 0>>试着挤开<<bhis 0>>，但它实在太虚弱了。另一只<<beasttype 1>>推<<bhim 0>>到一旁。<<bHe 0>>落败，躺了下来。
+	<br><br>
+
+	<<link [[让他们公平竞争|Pound Work Feed Soothe]]>><</link>><<tendingdifficulty 1 400>>
+	<br>
+	<<link [[安抚|Pound Work Feed Comfort]]>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+	<br>
+	<<link [[什么都不做|Pound Work Feed Nothing]]>><</link>>
+	<br>
+<<else>>
+	他们一会儿就狼吞虎咽地吃完了食物，而且似乎很感激你亲自为他们准备的盛宴。<<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

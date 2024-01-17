@@ -1,0 +1,61 @@
+:: Prison Repunishment []
+<<effects>>
+
+<<He>>将你领进中央塔楼底部一间昏暗的房间内。
+<br><br>
+
+<<if $prison.active_punishments.includes("free use") and $worn.neck.name isnot "free use collar" and $worn.neck.name isnot "free use collar with leash">>
+	<<leash 20>>
+	<<if $prison.active_punishments.includes("leash")>>
+		<<attach_leash>>
+	<</if>>
+	你的新项圈和上次的一样怪异。
+<<elseif $prison.active_punishments.includes("nude") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	<<clothesruined>>
+	<<He>>从口袋里掏出一把刀，抓住你的衣服，粗暴地将其撕开。<<covered>>
+	<br><br>
+<<elseif $prison.active_punishments.includes("blindfold") and !$worn.face.type.includes("blindfold")>>
+	<<if $worn.face.name is "gag">>
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+		<<facewear 6>>
+	<<else>>
+		<<facewear 5>>
+	<</if>>
+	<<He>>把眼罩套在你的头上，系牢。
+<<elseif $prison.active_punishments.includes("topless") and ($worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked")>>
+	<<upperruined>><<underupperruined>>
+	<<He>>从口袋里掏出一把刀，抓住你的衣服，粗暴地将其撕开。<<covered>>
+	<br><br>
+<<elseif $prison.active_punishments.includes("bottomless") and ($worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked")>>
+	<<lowerruined>><<underlowerruined>>
+	<<He>>从口袋里掏出一把刀，抓住你的衣服，粗暴地将其撕开。<<covered>>
+	<br><br>
+<<elseif $prison.active_punishments.includes("leash") and $worn.neck.collared isnot 1 and $worn.neck.type isnot "naked">>
+	<<He>>把皮带系在你的$worn.neck.cn_name_cap上。
+	<<attach_leash>>
+<<elseif $prison.active_punishments.includes("underwear") and ($worn.upper.name isnot "naked" or $worn.lower.name isnot "naked")>>
+	<<upperruined>><<lowerruined>>
+	<<He>>从口袋里掏出一把刀，抓住你的衣服，粗暴地将其撕开。<<covered>>
+	<br><br>
+<<elseif $prison.active_punishments.includes("cuffs") and !$worn.feet.type.includes("shackle")>>
+	<<feetwear 26>>
+	<<He>>用冰冷的金属拷住你的脚踝，它与一个沉重的金属球相连。
+<<elseif $prison.active_punishments.includes("gag") and !$worn.face.type.includes("gag")>>
+	<<if $worn.face.name is "blindfold">>
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+		<<facewear 6>>
+	<<else>>
+		<<facewear 4>>
+	<</if>>
+	<<He>>把口球塞进你的嘴里，然后把它紧紧地绑在你的头上。
+<<elseif $prison.active_punishments.includes("bindings") and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+	<<He>>把你的双臂紧紧地捆在背后。
+	<<bind>>
+<</if>>
+
+"瞧，从现在开始，你得遵守着规则了，"<<he>>补充道，"也许你还需要额外的'提醒'。"
+<br><br>
+<<link [[继续|Prison Punishment]]>><<endevent>><</link>>
+<br>

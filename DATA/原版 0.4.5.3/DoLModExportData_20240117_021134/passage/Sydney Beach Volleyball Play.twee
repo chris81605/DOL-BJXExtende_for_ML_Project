@@ -1,0 +1,102 @@
+:: Sydney Beach Volleyball Play []
+<<location "beach">><<effects>><<run statusCheck("Sydney")>>
+学生们为你们的加入而欢呼，尤其是<<person2>><<person>>。
+<br><br>
+<<physique 3>>
+<<set $eventcheck to random(1, 10000)>>
+<<if $eventcheck gte (9900 - ($allure))>>
+	<<if $rng gte 51>>
+		<<if $worn.lower.type.includes("naked")>>
+			你太过专注于对方的队伍，完全没有注意到会有内鬼。一双手抓住了你$worn.under_lower.cn_name_cap的边缘。
+		<<else>>
+			你太过专注于对方的队伍，完全没有注意到会有内鬼。一双手抓住了你$worn.lower.cn_name_cap的边缘。
+		<</if>>
+		<<if $sydneyromance is 1 and ((($worn.under_lower.name is "naked" or $worn.lower.name is "naked") and $uncomfortable.nude is true) or $uncomfortable.underwear is true)>>
+			悉尼瞬间反应了过来，紧紧地掐住了袭击者的胳膊。尽管<<person1>><<He>>与那人有明显的体型差距，但仍然把手甩了开来。<<person2>>
+			<br><br>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"除了我，谁都不许碰。"
+			<<else>>
+				"欲望是最危险的罪孽。放规矩点，不然你陪我一起出去。"
+			<</if>>
+			悉尼放开了<<person2>><<person>>，而<<person2>><<He>>向后退了一步。
+			<br><br>
+			"对不起，我不知道这是你的<<girlfriend>>，<<sydneyBeachGender>>。"
+			<<if $sydney.swim is "crossdress">>
+				悉尼似乎对被称为<<sydneyBeachGender>>感到吃惊，但并没有太在乎。
+			<</if>>
+		<<else>>
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set isnot $worn.upper.set>>
+				在你做出反应之前，那个人已经把它完全拉到了你的膝盖上，<<person2>>
+			<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 0 and $worn.lower.set is $worn.upper.set>>
+				在你做出反应之前，那个人已经把它拉到了一边，<<person2>>
+			<<else>>
+				在你做出反应之前，那个人已经把它撩起来了，<<person2>>
+			<</if>>
+			<<if $worn.under_lower.name is "naked" or $worn.lower.name is "naked">>
+				<<if $uncomfortable.nude is false>>
+					你的<<genitals>>瞬间一览无遗。人群哄笑着做着下流的手势，你却感到内心一阵躁动。
+					<br><br>
+					你整理衣服，故意放慢动作。<<if _sydneyStatus.includes("corrupt")>>悉尼在一旁调戏地欢呼着吹着口哨。<<else>>悉尼则惊慌失措地捂住了<<person1>><<his>>的眼睛。<</if>>
+					<<garousal>><<arousal 300>><<npcincr Sydney lust 1>><<gslust>><<npcincr Sydney purity -2>><<lspurity>>
+				<<else>>
+					你的<<genitals>>瞬间一览无遗。人群哄笑着做着下流的手势，你的脸涨得通红，努力保卫着自己的尊严。悉尼则狠狠地瞪着其他人，为你打掩护。
+					<<garousal>><<gstress>><<gtrauma>><<arousal 300>><<stress 3>><<trauma 3>><<npcincr Sydney lust 1>><<gslust>><<npcincr Sydney purity -2>><<lspurity>>
+				<</if>>
+			<<else>>
+				<<if $uncomfortable.underwear is false>>
+					你的$worn.under_lower.cn_name_cap瞬间一览无遗。人群开始笑了起来，<<if _sydneyStatus.includes("corrupt")>>你和悉尼也笑了<<else>>你也笑了，悉尼则尴尬地捂住了眼睛，双脸涨得通红。比起其他人，<<person1>><<he>>似乎有些反应过度了<</if>>。只是一个$worn.under_lower.cn_name_cap而已，你不会觉得尴尬的。
+					<<gcool>><<status 5>><<garousal>><<gstress>><<npcincr Sydney lust 1>><<glust>>
+				<<else>>
+					你的$worn.under_lower.cn_name_cap瞬间一览无遗。人群哄笑着做着下流的手势，你的脸涨得通红，努力保卫着自己的尊严。悉尼则狠狠地瞪着其他人，给你打掩护。
+					<<lcool>><<status -10>><<garousal>><<gstress>><<gtrauma>><<arousal 100>><<stress 1>><<trauma 1>><<npcincr Sydney lust 1>><<glust>>
+				<</if>>
+			<</if>>
+		<</if>>
+		<br><br>
+	<<else>>
+		<<if $topless is 1 and $rng gte 15>>
+			在比赛进行到一半的时候，球撞上了你裸露的胸部，把你撞倒在地。
+			<<if $player.breastsize gte 2>>
+				<br>
+				那真的很痛。
+				<<pain 1>><<gpain>>
+				<br><br>
+			<</if>>
+			悉尼冲到你的身边，把你扶了起来。这很尴尬，但你很快恢复了状态。
+			<br><br>
+		<<else>>
+			在比赛进行到一半的时候，球撞上了悉尼的<<person1>><<if ($pronoun is "m" and ["normal", "lewd"].includes($sydney.swim)) or ($pronoun is "f" and $sydney.swim is "crossdress")>>裸露的<</if>>胸部，把<<his>>的十字架给撞了下来。<<He>>爬着把它从沙子里捡起。
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<if ["glasses", "playerbought"].includes($sydney.glasses)>>"幸好我的眼镜没有摔坏！"<</if>><<He>>笑着跳回站立的姿势，迅速抓起球，然后猛地把球朝着罪魁祸首——一个<<person3>><<person>>扔了回去。<<person1>><<He>>瞄准了对方的脸，实施了精准的打击。大家笑着看着那个<<person3>><<person>>痛苦地蜷缩在地。
+			<<else>>
+				你冲到悉尼的身边，帮助<<him>>站了起来。你轻轻拍了拍<<he>>的衣服，<<if $sydneyromance is 1>><<he>>却抓住你的手俯身吻上了你的脸颊。其他学生激动地尖叫着。<<stress -3>><<lstress>><<trauma -3>><<ltrauma>><<status 5>><<gcool>><<else>><<he>>对着你笑了笑。<</if>>
+			<</if>>
+			<br><br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<switch random(1, 5)>>
+		<<case 1>>
+			你们俩都玩得很开心。
+		<<case 2>>
+			你和悉尼凭借着团队合作轻松地获胜。
+		<<case 3>>
+			悉尼的动作比你想象的还要快上许多。<<person1>><<He>>把球打给你，你再把球打过网，又是一分。
+		<<case 4>>
+			悉尼换了几轮队伍，你们俩之间的竞争很是激烈。
+		<<case 5>>
+			在一场特别激烈的比赛中，悉尼的十字架猛地一挥，打到了身旁一个人的脸。<<person1>><<He>>吃痛退下。
+	<</switch>>
+	<br><br>
+<</if>>
+<<if Time.hour gte 20>>
+	悉尼拽着你的胳膊。"时间不早了，我们该走了。"其他学生似乎很失望，但他们挥手向你们道别。
+	<br><br>
+	<<link [[继续|Sydney Beach Changing Room Leave]]>><<pass 25>><<endevent>><<npc "Sydney">><<person1>><</link>>
+<<else>>
+	<<link [[再玩一局 (0:30)|Sydney Beach Volleyball Play]]>><<pass 30>><<stress -12>><<tiredness 6>><<status 1>><<athletics 3>><<npcincr Sydney love 1>><</link>><<gcool>><<gathletics>><<llstress>><<gtiredness>><<glove>>
+	<br>
+	<<link [[停止|Sydney Beach]]>><<endevent>><<npc "Sydney">><<person1>><</link>>
+	<br><br>
+<</if>>

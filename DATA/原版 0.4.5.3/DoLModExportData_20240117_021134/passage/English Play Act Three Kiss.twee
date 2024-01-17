@@ -1,0 +1,93 @@
+:: English Play Act Three Kiss []
+<<effects>><<run statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		<<if $englishPlayKylarReplace>>
+			<<if $phase is 1>>
+				你选择适可而止，脸颊上的一吻已经足够了。<<person2>><<person>>似乎对你表达的感情感到高兴，<span class="teal">观众们似乎也是这么想的。</span><<set $englishPlayApproval += 10>><<gapproval>>
+			<<else>>
+				你靠近<<person1>>，以便给观众献上他们所期待的吻。"噢，操，真是太好了。"<<person2>><<person>>说道。拉近距离让你亲上，<span class="green">去得到观众的认可。</span>
+				<<He>>从你的吻中解脱出来之后，给了你一记响亮的耳光。
+				<<takeKissVirginity $NPCList[1] "consensual">>
+				<<set $englishPlayApproval += 20>><<ggapproval>>
+			<</if>>
+		<<else>>
+			<<if $phase is 1>>
+				你选择适可而止，脸颊上的一吻已经足够了。凯拉尔似乎对你表达的感情感到高兴，<span class="teal">观众们似乎也是这么想的。</span><<set $englishPlayApproval += 10>><<gapproval>>
+			<<else>>
+				<<if _kylarStatus.includes("Love")>>
+					你觉得试试给观众们一场真正的表演了，从凯拉尔的眼神判断，<<person2>><<he>>也是这么想的。你转过来，向观众们展示你跟凯拉尔嘴唇的贴合。<<He>>变得更加大胆，把<<his>>舌头伸进了你的嘴里。这种状态一直持续到了你不能坚持为止。观众们兴奋地呐喊着。<span class="green">他们似乎在享受着每一秒。</span>
+				<<else>>
+					凯拉尔决定亲你的脸颊，但当<<person2>><<him>>准备亲到你脸上的时候，你突然把脸转了过来，亲上了<<his>>嘴唇。<<he>>一开始被震惊到了，不过很快就适应了起来。<<He>>慢慢地把你推开，是为了闭上<<his>>眼睛重新吻你一遍。<span class="green">观众们打出了响亮的喝彩声。</span>他们能看出来这不是演戏。
+				<</if>>
+				<<takeKissVirginity "Kylar" `($kylarenglish gte 1?"loveInterest":"romantic")`>>
+				<<if _npcKissVirginTemp>>
+					<br><br>
+					"那，那是我的初吻，"<<he>>的声音很低，眼神在闪烁。"比梦还要美好。"
+				<</if>>
+				<<set $englishPlayApproval += 20>><<ggapproval>>
+			<</if>>
+		<</if>>
+	<<case "Taylor">>
+		<<if $phase is 1>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				悉尼满怀期待地看着你。你径直走上前去，在<<person1>><<his>>脸颊上亲了一口。<<He>>无声地笑着让你抱了一会。"你欠我一个真的吻。"<span class="teal">观众们都为这温馨的一幕陶醉不已。</span>
+			<<elseif $sydneyromance is 1>>
+				突如其来的安静让悉尼有些紧张。你利用这个机会拉近跟<<person1>><<his>>距离，在<<his>>脸颊上亲了一下。<<He>>用手环抱着你，愉悦而急促地喘息着。你把<<him>>紧紧地抱在怀里一段时间。<span class="teal">观众们都为这温馨的一幕陶醉不已。</span>虽然你们的行为纯洁无瑕，但在这么多人的注视下，足以让悉尼脸红。
+			<<else>>
+				突如其来的安静让悉尼有些紧张。你利用这个机会拉近跟<<person1>><<his>>距离，在<<his>>脸颊上亲了一下。悉尼被震惊得一时忘记了呼吸。你把<<him>>紧紧地抱在怀里一段时间。<span class="teal">观众们都为这温馨的一幕陶醉不已。</span>虽然你们的行为纯洁无瑕，但在这么多人的注视下，足以让悉尼脸红。
+			<</if>>
+			<<set $englishPlayApproval += 10>><<gapproval>>
+		<<else>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				悉尼搂住了你的腰，把你拉了过来。"过来这里，我的爱人。"<<person1>><<He>>向前倾身吻了上来。你们的嘴唇相接，随后<<he>>变得更加大胆起来。<<He>>将舌头探进你的嘴里，与你的舌头缠绵在了一起，完全无视了<span class="green">正看着你们欢呼的观众。</span><<He>>一直吻到满足为止，"我想我可以习惯更频繁的上台表演。"<<he>>低声说道。
+			<<else>>
+				悉尼在你面前坐立不安。"所以……我们要——"你直接把<<person1>><<him>>拉近，吻上了<<his>>嘴唇来打断<<him>>。当你们的嘴唇相触时，<<he>>惊讶地瞪大了双眼。<span class="green">观众欢呼倾注着。</span>你满足之后，悉尼退了一步尝试去理解刚才发生了什么。<<his>>的脸红程度代替<<him>>说明了<<him>>有多享受。
+			<</if>>
+			<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+			<<if _npcKissVirginTemp>>
+				<br><br>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"也是我难忘的第一次。"<<he>>低声说道。
+				<<else>>
+					"那是我的初吻，"<<he>>低声对你说道，"而大家都看到了……"<<he>>害羞地微笑着看向别处。
+				<</if>>
+				<<npcincr Sydney love 10>><<gglove "Sydney">>
+			<</if>>
+			<<set $englishPlayApproval += 20>><<ggapproval>>
+		<</if>>
+	<<case "Sterling">>
+		你对悉尼快速地点了下头。<<person1>><<He>>领会到了暗示，抓住了机会。
+		<br><br>
+
+		悉尼深吸了一口气，快步走到<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>身边，
+		<<if _sydneyStatus.includes("corrupt") and C.npc.Sydney.virginity.kiss isnot true and (C.npc.Kylar.virginity.kiss isnot true or $englishPlayKylarReplace)>>
+			抓住了<<person2>><<his>>的衣服。悉尼豁了出去，亲上了<<him>>的嘴唇。
+			<br><br>
+
+			<span class="green">观众们为他们喝彩。</span>
+			<<if $englishPlayKylarReplace>>
+				<<person2>><<person>>完全被震惊到了，不过还是挺高兴的。
+			<<else>>
+				<span class="red">凯拉尔看起来极其厌恶跟恐惧。</span>
+			<</if>>
+		<<else>>
+			然后给<<person2>><<his>>脸颊上亲了一下，让<<him>>吃了一惊。
+			<br><br>
+
+			<span class="green">观众们为他们喝彩</span>，
+			<<if $englishPlayKylarReplace>>
+				<<person2>><<person>>看上去很满意，不过显然渴求更进一步。
+			<<else>>
+				然而凯拉尔似乎完全被吓坏了。
+			<</if>>
+		<</if>>
+		<<set $englishPlayApproval += 20>><<gapproval>>
+<</switch>>
+<br><br>
+
+演出结束了，唯一剩下的就是演员登台致谢了。
+<br><br>
+
+<<link [[谢幕|English Play Curtain Call]]>><<pass 5>><</link>>
+<br>

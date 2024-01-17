@@ -1,0 +1,65 @@
+:: Farm Assault Tower Defend []
+<<effects>>
+
+你来到了瞭望塔的底部。你已经听到了顶上的打斗声，楼梯在你爬上去的时候吱吱作响。
+<br><br>
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		你冲过去发现<<farm_assault_thugs>>在围攻着$farm.tower_guard。
+		<<endevent>>
+		<<loadNPC 0 "farm_tower_guard">><<person1>>
+
+		<<if $NPCList[0].traits.includes("relaxed")>>
+			"来啊，"<<he>>虽然被逼入死角，但仍然挑衅地说道，"有本事就上。"
+		<<elseif $NPCList[0].traits.includes("sociable")>>
+			"我处理过比你们厉害得多的，"<<he>>说道，"上啊，看看会发生什么。"
+		<<elseif $NPCList[0].traits.includes("brooding")>>
+			"是时候赚钱了，"<<he>>啐了一口道。
+		<<else>>
+			"今晚我很受欢迎啊，"<<he>>笑道，"每个人都来找我跳舞。"
+		<</if>>
+		<<endevent>>
+		<br><br>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+				<<generate1>><<generate2>><<person1>><<set $skulduggerydifficulty to 1200>>
+				三个打手小心翼翼地靠近着，没注意到你。
+			<<elseif $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+				<<generate1>><<person1>><<set $skulduggerydifficulty to 1000>>
+				三个打手小心翼翼地靠近着，没注意到你。
+			<<else>>
+				<<generate1>><<person1>><<set $skulduggerydifficulty to 600>>
+				那个打手，一个<<person>>，小心翼翼地靠近着，没注意到你。
+			<</if>>
+			<br><br>
+			<<if $skulduggerydifficulty gte 1>>
+				<<link [[冲锋|Farm Assault Charge Bailey]]>><</link>>
+				<br>
+			<</if>>
+			<<link [[偷袭|Farm Assault Sneak Bailey]]>><</link>><<skulduggerydifficulty>>
+			<br>
+		<<else>>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+				<<generate1>><<generate2>><<person1>><<set $skulduggerydifficulty to 800>>
+				三个打手说笑着走进着，毫无戒备，没注意到你。
+			<<elseif $farm_assault.teams[_assault_keys[_s]].number gte 2>><<set $skulduggerydifficulty to 600>>
+				<<generate1>><<person1>>
+				三个打手说笑着走进着，毫无戒备，没注意到你。
+			<<else>><<set $skulduggerydifficulty to 0>>
+				<<generate1>><<person1>>
+				那个打手，一个<<person>>，小心翼翼地靠近着，没注意到你。
+			<</if>>
+			<br><br>
+			<<if $skulduggerydifficulty gte 1>>
+				<<link [[冲锋|Farm Assault Tower Charge]]>><</link>>
+				<br>
+			<</if>>
+			<<link [[偷袭|Farm Assault Sneak]]>><</link>><<skulduggerydifficulty>>
+			<br>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<link [[爬下去|Farm Assault]]>><<endevent>><</link>>
+<br>

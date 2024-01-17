@@ -1,0 +1,29 @@
+:: Office Stairwell []
+<<location "office_building">><<effects>><<exposure>>
+你在<<checkfloor>>的楼梯间里。除了空调风扇的吹风声，楼梯间什么声音也没有。
+<br><br>
+由于楼梯间的门是从里面锁上的，唯一的出口在大厅，<<number $officeFloor>>下面的楼层。
+
+<<if $stress gte $stressmax>>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "office">>
+	<<else>>
+		<<officepassout>>
+	<</if>>
+<<else>>
+	<br><br>
+	<<link [[休息 (0:05)|Office Stairwell Rest]]>><<pass 5>><<tiredness -2>><</link>><<ltiredness>>
+	<br>
+	<<if $officeFloor gt 10>>
+		<<link [[下降10层楼 (0:08)|Office Stairwell Descend]]>><<pass 8>><<tiredness 10>><<set $stairSpeed to 10>><</link>><<ggtiredness>>
+		<br>
+	<</if>>
+	<<if $officeFloor gt 5>>
+		<<link [[下降5层楼 (0:05)|Office Stairwell Descend]]>><<pass 5>><<tiredness 5>><<set $stairSpeed to 5>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+	<<if $officeFloor lte 5>>
+		<<link [[下降到大厅 (0:05)|Office Lobby]]>><<pass 5>><<tiredness 5>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+<</if>>

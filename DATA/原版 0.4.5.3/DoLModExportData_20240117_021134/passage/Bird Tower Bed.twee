@@ -1,0 +1,30 @@
+:: Bird Tower Bed []
+<<effects>>
+
+<<if $syndromebird is 1 or $harpy gte 6>>
+	你躺在鸟巢里<<if $bird.activity is "sleep" and $bird.state is "home">><<npc "Great Hawk">><<set $bedGuest to "Great Hawk">>，和<<beasttype>>在一起<</if>>。
+<<else>>
+	你躺在巢里。很难适应。
+<</if>>
+<<endevent>>
+<<if $wraith.state and $wraithPrison and $bird.mirror is 1 and ($moonstate is "evening" or $moonstate is _nightstate)>>
+	你感到焦虑，你的目光向镜子移去。
+<</if>>
+<br><br>
+
+<<if $syndromebird is 1 and $bird.activity is "sleep" and $bird.state is "home" and !$bird.satisfied>>
+	<<link [[淫荡地摩擦|Bird Tower Nest Rub]]>><<transform bird 1>><<npcincr "Great Hawk" love 1>><<npcincr "Great Hawk" dom -1>><<set $phase to 1>><</link>><<glove>><<npc "Great Hawk">><<person1>><<ldom>><<endevent>><<deviant1>>
+	<br>
+	<<if $deviancy gte 55>>
+		<<link [[为做爱而醒来|Bird Tower Nest Rub]]>><<transform bird 1>><<npcincr "Great Hawk" love 3>><<npcincr "Great Hawk" dom 1>><<set $phase to 2>><</link>><<gglove>><<gdom "Great Hawk">><<deviant4>>
+		<br>
+	<</if>>
+	<br>
+<<endevent>>
+<</if>>
+
+<<nightmareCheck "Bird Tower Sleep">>
+
+<<generateSleepLinks "Bird Tower Sleep">>
+<<link [[爬下床|Bird Tower]]>><<loadTempHairStyle>><<unset $bedGuest>><</link>>
+<br><br>

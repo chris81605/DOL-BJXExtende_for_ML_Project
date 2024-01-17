@@ -1,0 +1,49 @@
+:: Farm Alex Admin Oral []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>><<npcoral>><<set $NPCList[0].mouth to "none">>
+	<<set $enemytrust += 100>>
+<</if>>
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+艾利克斯继续通电话，试图保持自己声音的稳定。
+<<switch random(1, 6)>>
+	<<case 1>>
+		<<if _alex.penis isnot "none" or $player.penisExist>>
+			"你、你不会失望的……我们出货量很大的。"
+		<<else>>
+			"毫、毫无疑问……我们办事很靠谱的。"
+		<</if>>
+	<<case 2>>
+		<<if $player.penisExist>>
+			"我，我要挨操。妈，妈的，我想说的是我需要含艾草的有机肥！"
+		<<elseif _alex.penis isnot "none">>
+			"我，我要操死……啊对对，草饲，喂牛用的。"
+		<<else>>
+			"我，我们已经繁殖过很多次了。是，是的，我是指繁殖动物！"
+		<</if>>
+	<<case 3>>
+		"繁，繁殖是……啊啊……我们的专长之一……"
+	<<case 4>>
+		"认，认证，纯天然，绝无虚假……"
+	<<case 5>>
+		"你，你会对我们的质量满意的……我向你保证。"
+	<<case 6>>
+		"<<print either( "我、我会回复你的", "你、你在其他任何地方都找不到替代品", "你、你可以……协商……订购所有产品")>>……"
+<</switch>>
+
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Alex Admin Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Alex Admin Oral]]>><</link>></span><<nexttext>>
+<</if>>

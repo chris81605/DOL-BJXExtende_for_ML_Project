@@ -1,0 +1,42 @@
+:: School Infirmary []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if Time.schoolDay and !["early","late"].includes($schoolstate)>>
+	<<if $per_npc.school_nurse>>
+		你待在校医务室里，柜子里陈列着药品和医疗用品。目前床位都是空着的。
+		<br><br>
+
+		<<if $phase is 1>>
+			护士在<<his>>的日志上记录着，时不时停下来撇你一眼。
+		<<else>>
+			<<loadNPC 0 school_nurse>><<person1>>
+			护士停止写<<his>>的日志，抬头看着你。"有什么我可以帮助你的吗？"
+			<<set $phase to 1>>
+		<</if>>
+	<<else>>
+		<<generate1>><<saveNPC 0 school_nurse>>
+		你进入学校的医务室。里面的情况和你记忆中的一样。它小而干净，两旁的柜子里装满了药品和医疗用品。房间后面有几张床，掩在窗帘后面。身体不适的学生会来这里休息。
+		<br><br>
+
+		护士，一个<<person1>><<person>>坐在<<his>>的桌子前写着<<his>>的日志。当<<he>>听到你进来的时候，<<He>>停下来抬头看着你。“需要帮助吗？”
+	<</if>>
+	<br><br>
+
+	<<school_infirmary_options>>
+<<else>>
+	你独自待在学校的医务室里，柜子里陈列着药品和医疗用品。
+	<br>
+	这些床都是空的，但显然睡进去并不是个很好的主意，而且被抓到会有大麻烦。
+	<br><br>
+
+	<<if $weekly.theft.infirmaryDrugs is "stolen">>
+		<span class="blue">你已经偷了一些药品，你应该等它补完货再继续拿别的。</span>
+	<<elseif $weekly.theft.infirmaryDrugs is "failed">>
+		<span class="purple">柜子上的锁坏了。在修好之前，你无法闯入。</span>
+	<<else>>
+		<<schoolicon "infirmary">><<link [[翻箱倒柜|School Infirmary Drugs]]>><</link>>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Hallways]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,79 @@
+:: Monster Tower []
+<<set $bus to "elk">><<set $outside to 0>><<effects>>
+
+<<if $enemyno is 0>>
+	<<loadNPC 0 tower_creature>>
+<</if>>
+
+<<set $tower_sleep -= 10>>
+你在麋鹿街附近的建筑中，一个<<if $NPCList[0].monster is "monster">>奇怪且可怕的<<if $NPCList[0].gender is "m">>男孩<<else>>女孩<</if>><<else>>奇怪的怪物<</if>>的巢穴里。一个敞开的大洞占据着一侧墙面。
+<br><br>
+<<if $stress gte $stressmax>>
+	<<link [[继续|Passout Monster Tower]]>><</link>>
+	<br>
+<<elseif $eventskip isnot 1 and $rng gte $tower_sleep>>
+	<<tower_creature_text>>在熟睡中苏醒过来。你在<<bhe>>醒来之前窜回之前的角落里。
+	<br><br>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+		在你成功回去之前，<span class="red">什么东西抓住了你的脚。</span>你被拖回床垫上，<<tower_creature_text>>的身影笼罩着你。<<bHe>>咆哮了一声。
+		<br><br>
+		<<link [[继续|Monster Tower Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你刚好成功返回。<<tower_creature_text>>从床上哼哼唧唧地起身。<<bHe>>蹒跚地走向你。
+		<br><br>
+		<<link [[继续|Monster Tower Wake]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<tower_creature_text>>在破旧不堪的床垫上沉睡着。
+	<<if $tower_sleep gte 90>>
+		<span class="teal"><<bHe>>大声地打着呼噜。</span>
+	<<elseif $tower_sleep gte 75>>
+		<span class="lblue"><<bHe>>打着呼噜。</span>
+	<<elseif $tower_sleep gte 60>>
+		<span class="blue"><<bHe>>打着呼噜，偶尔拍打着空气。</span>
+	<<elseif $tower_sleep gte 45>>
+		<span class="purple"><<bHe>>在睡梦中伸展身体。</span>
+	<<elseif $tower_sleep gte 30>>
+		<<if $NPCList[0].monster is "monster">>
+			<span class="pink"><<bHe>>打着哈欠，并挠了挠<<bhis>>的<<print either("肚皮","身侧","头","脸","腿","背","屁股")>>。</span>
+		<<else>>
+			<span class="pink"><<bHe>>在睡梦中嚎叫着。</span>
+		<</if>>
+	<<else>>
+		<span class="red"><<bHis>>双眼睁开<<bhe>>在睡觉之前<<if $NPCList[0].monster is "monster">>坐起身起来<<else>>站起身起来<</if>>。</span>
+	<</if>>
+	<<set $tower_sleep -= 15>>
+	<br><br>
+	<<if $tower_view isnot 1>>
+		<<link [[向洞外看去|Monster Tower View]]>><<set $tower_view to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $tower_sheet gte 12>>
+			<<link [[逃离 (1:00)|Monster Tower Escape]]>><<pass 60>><</link>>
+			<br>
+		<<else>>
+			<<link [[制作床单绳索 (1:00)|Monster Tower Sheet]]>><<pass 60>><</link>>
+			<br>
+		<</if>>
+		/* 北极星模组 */
+		<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+		/* 北极星 */
+			<<link [[飞向安全位置 (0:02)|Monster Tower Fly]]>><<pass 2>><</link>><<flight_text>>
+			<br>
+		<</if>>
+		<<if $exposed gte 1>>
+			<<link [[藏起自己 (0:15)|Monster Tower Cover]]>><<pass 15>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[安抚野兽 (1:00)|Monster Tower Calm]]>><<pass 60>><<set $tower_sleep to 115>><</link>>
+	<br>
+	<<if $deviancy gte 15>>
+		<<link [[淫荡地安抚野兽|Monster Tower Sex]]>><<set $sexstart to 1>><</link>><<deviant2>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

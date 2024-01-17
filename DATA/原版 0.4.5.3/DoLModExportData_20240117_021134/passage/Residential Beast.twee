@@ -1,0 +1,31 @@
+:: Residential Beast []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<if $phase is 0>>
+		你放开了<<beasttype>>的脸，然后伸了个懒腰。<<if $monster is 1>>"这对我来说足够好了，"<<bhe>>坚定地说道。<</if>>这就是<<bhe>>所需要的暗示，<<bHe>>扑向了你。
+		<<deviancy2>>
+	<<else>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+		<<npc_attempt_sex>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Residential Beast Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Residential Beast]]>><</link>></span><<nexttext>>
+<</if>>

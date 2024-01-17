@@ -1,0 +1,90 @@
+:: Pound []
+<<set $outside to 0>><<location "pound">><<effects>>
+
+<<if $pound is undefined>>
+	<<pound_init>>
+<</if>>
+你在海星街的流浪狗收留所里。流浪的<<pound_text>>挤满了笼子。
+<<if $stress gte $stressmax>>
+	<br><br>
+
+	<<passoutshop>>
+<<elseif Time.hour is $closinghour>>
+	现在是关门时间，这里的工作人员正准备离开。
+	<<if $exposed gte 1>>
+		当你意识到，你穿着的衣服是如此暴露时，你不由得心头一紧。
+	<</if>>
+	<br><br>
+	<<starfishicon>><<link [[离开|Starfish Street]]>><<endevent>><</link>>
+	<br>
+	<<link [[藏起来 (1:00)|Pound]]>><<pass 60>><</link>>
+	<br>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "pound">>
+	<</if>>
+	<<if $openinghours is 0>>
+		你独自待在黑暗之中。
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<if $uncomfortable.nude is false>>
+		你正躲在一个橱柜里，虽然你并不在意其他人看到你暴露的样子，但这次你选择待着不动。
+		<<else>>
+		你藏在橱柜里以保护自尊。
+		<</if>>
+		<br><br>
+	<</if>>
+	<br>
+	<<stray_happiness_text>>
+	<br>
+	<<beastNEWinit 1 dog>>
+	一只<<beasttype>>正透过栅栏看着你。
+	<br>
+	<<if $openinghours is 0 and Time.hour isnot $closinghour>>
+		<<if $deviancy gte 15 and $pound.sneak is 0 and ($bestialitydisable is "f" or $monster is 1)>>
+			<<ind>><<link [[挑逗 (0:05)|Pound Tease]]>><<pass 5>><<set $pound.sneak to 1>><<arousal 600>><</link>><<deviant2>><<garousal>>
+			<br>
+		<</if>>
+		<<if $pound.progress is 4>>
+			<<ind>><<link [[释放黑狗|Pound Free]]>><<set $pound.progress to 5>><</link>><<dangerousText>>
+			<br>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $openinghours is 1 and $exposed lt 1>>
+		员工们都在忙着手头上的事情。
+		<<if Time.hour gte 18>>
+			一些人站在后院里聊天，看起来无所事事。
+		<<elseif Time.hour gte 14>>
+			一对衣着光鲜的夫妇正在后院查看那一排<<pound_text>>，并考虑收养其中一只。
+		<<elseif Time.hour gte 10>>
+			一些<<pound_text>>被允许在后院里自由活动。
+		<<else>>
+
+		<</if>>
+		<br>
+		<<if $pound.progress is 0>>
+			<<askicon>><<link [[询求工作|Pound Ask]]>><<set $pound.progress to 1>><<endevent>><</link>>
+			<br><br>
+		<<else>>
+			<<ind>><<link [[工作 (1:00)|Pound Work]]>><<endevent>><</link>>
+			<br><br>
+		<</if>>
+
+		<<if $pound.progress lte 3>>
+		阴影中有个笼子，时不时会传来低沉的咆哮声。
+		<br>
+			<<if $pound.progress gte 2 and $pound.status gte 100>>
+				<<wolfcaveicon "black dog">><<link [[接近那个野兽|Pound Work Brute]]>><<endevent>><</link>><<tendingdifficulty 1 1000>>
+				<br><br>
+			<<else>>
+				<span class="blue">你不会去靠近的。</span>
+				<br><br>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<starfishicon>><<link [[离开|Starfish Street]]>><<endevent>><</link>>
+	<br><br>
+<</if>>

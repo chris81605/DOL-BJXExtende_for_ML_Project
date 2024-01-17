@@ -1,0 +1,67 @@
+:: Sydney Backroom Lifting Roll []
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>>
+
+你翻身仰面朝上，悉尼依旧压在你上边。<<He>>下意识转过头去。
+<<if $speech_attitude is "meek">>
+	你抚摸着<<his>>的大腿。
+	<br><br>
+
+	"你好像累了，"你调戏道，"要不要坐下呢？"
+<<elseif $speech_attitude is "bratty">>
+	你抓住<<his>>的大腿，不让<<him>>乱动。
+	<br><br>
+
+	"别急，"你笑了起来，"我还没完呢。"
+<<else>>
+	你把你的手放在了<<his>>的屁股上。
+	<br><br>
+
+	"想去哪？"你咯咯笑了起来，"我才刚开始舒服呢。"
+<</if>>
+<<promiscuity4>>
+
+<<if _sydneyStatus.includes("corrupt")>>
+	/* This part is outdated and should be inaccessible - see "Sydney Backroom Lifting Lick" instead */
+	<<He>>轻轻地笑了起来。"你就这么饥渴吗？"<<He>>骑在你的脸上，<span class="lewd">把你的嘴对准了<<his>>的<<sydneyGenitals>>。</span>"好了亲爱的，来表示你的歉意吧。"
+	<br><br>
+
+	<<link [[继续|Sydney Backroom Lift Sex]]>><<set $phase to 0>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<set $seductiondifficulty to 8000 - (($NPCName[$NPCNameList.indexOf("Sydney")].love + $NPCName[$NPCNameList.indexOf("Sydney")].lust) * 15) - $NPCName[$NPCNameList.indexOf("Sydney")].purity>>
+	<<seductioncheck>>
+	<br><br>
+	<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+
+	<<if $seductionrating gte $seductionrequired>>
+		<<His>>跪着向你爬了过来，嘴唇不住地颤抖着。
+		<<if $pronoun is "f">>
+			<<He>>抓住裙边，把你的头套在了<<his>>的裙子里。<<His>>通红的脸消失在了你的视线里，取而代之的是一片漆黑。你的头上传来布料摩擦的声音。
+			<br><br>
+
+			<<if $NPCList[0].penis isnot "none">>
+				<span class="lewd">有什么硬硬的东西插进了你的嘴唇里。</span>
+			<<else>>
+				<span class="lewd">有什么热热的东西搭在了你的嘴上。</span>
+			<</if>>
+		<<else>>
+			<<his>>颤抖着将手插在腰间，脱下裤子，<span class="lewd">露出了<<his>>的<<sydneyGenitals>>。</span>
+			<br><br>
+
+			<<He>>调整了一下位置，把裆部对准了你的嘴。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Sydney Backroom Lift Sex]]>><<set $phase to 0>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		悉尼瞪大着眼睛盯着你，然后赶忙爬了起来。<<he>>嘟囔着甩手，嚷着要回去继续工作，但眼睛却直直盯着地面。
+		<br><br>
+
+		<<sydneySexFail>>
+		<br><br>
+
+		<<link [[继续|Sydney Backroom Lift End]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

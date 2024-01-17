@@ -1,0 +1,37 @@
+:: Forest Wolf2 []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<beastTrainGenerate>><<set $enemytrust -= 40>>
+	<<if isLoveInterest("Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Wolf2 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Wolf2]]>><</link>></span><<nexttext>>
+<</if>>

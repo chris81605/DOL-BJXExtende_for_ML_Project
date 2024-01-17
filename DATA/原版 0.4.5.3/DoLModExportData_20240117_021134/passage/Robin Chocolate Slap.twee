@@ -1,0 +1,27 @@
+:: Robin Chocolate Slap []
+<<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+你把盘子扔到空中，转了个身，直接打了<<person>>一耳光。<<He>>在结冰的地面上失去平衡，屁股狠狠地摔在了地上。<<ltrauma>><<trauma -6>>
+<br><br>
+<<if $danceSuccess>>
+	你转了个圈，<span class="green">并接住托盘，</span>杯子里的东西没有洒出来。<<lstress>><<stress -6>>
+<<else>>
+	你试图抓住托盘，<span class="red">但是你太慢了。</span>它哗啦一声掉在了地上，把热巧克力洒在了雪地里。<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<person1>>
+你回到罗宾的身边，<<him>>冲你露出一个微笑。
+<<if _robin.trauma gte 40>>
+	<<He>>在你放下托盘的一刻拥抱了你。"谢谢你。"
+<<else>>
+	"生意好多了，"<<he>>说道，"谢谢你。"
+<</if>>
+<br><br>
+
+<<if !$danceSuccess>>
+	<<link [[承认你弄撒了巧克力|Robin Chocolate Confess]]>><<npcincr Robin dom 1>><</link>><<gdom>>
+	<br>
+<</if>>
+<<robinChocolateOfferHelp>>

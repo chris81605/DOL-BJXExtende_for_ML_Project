@@ -1,0 +1,61 @@
+:: Science Exam []
+<<schooleffects>><<effects>>
+
+<<set _time_temp to (59 - Time.minute)>>
+<<pass _time_temp>>
+
+<<npc Sirris>><<person1>>
+
+<<switch $phase>>
+	<<case 0>>
+		你专注于考试，尽你所能地不去理会其他学生的书写和抱怨声。
+	<<case 1>>
+		你深吸一口气，试着不让压力影响你的发挥。
+	<<case 2 3 5>>
+		<<if $phase is 5>>
+			<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+				<<skulduggerycheck>><<set _cheating to true>>
+				史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强行让你想方设法在考试中作弊。
+			<<else>>
+				你试着无视史莱姆的命令，专心考试。你能感受到它尝试迫使你作弊<span class="green">但是失败了，</span>然而，它仍然会分散你的注意力。<<set $exam_chance -= 5>><<passPercent -5>>
+			<</if>>
+		<<else>>
+			<<skulduggerycheck>><<set _cheating to true>>
+			<<if $phase is 3>>你遵从了史莱姆的命令，想办法在考试中作弊。<</if>>
+		<</if>>
+
+		<<if _cheating>>
+			你望向西里斯，此时的<<Hes>>没有看向教室，反倒专心欣赏起了窗外风光。看来你可以借鉴一下你的同桌。
+			<<if $skulduggerysuccess is 1>>
+				前提是要足够谨慎。<span class="green">你依此知道了一些难题的答案。</span>
+				<<set $exam_chance += 10>><<passPercent 10>>
+			<<else>>
+				前提是，
+				<br><br>
+				<span class="red">"专心答题，"</span>西里斯看着你说道。看来<<he>>并不像表面上那么心不在焉。
+				<<gstress>><<stress 6>><<set $exam_chance -= 10>><<passPercent -10>><<ggdelinquency>><<detention 5>>
+			<</if>>
+			<br><br>
+
+			<<skulduggeryuse true>>
+		<</if>>
+	<<case 4>>
+		你尽力无视史莱姆的命令，也尽可能地不去理会其他学生的书写声和抱怨。
+<</switch>>
+<br><br>
+
+西里斯时不时看一眼<<his>>手表。“时间到，”<<he>>说。“我希望你们感觉还行。”一些学生还在奋笔疾书，但西里斯在教室里穿行，很快收齐了卷子。
+<br><br>
+
+西里斯改卷的时候大家终于可以讲话了，之前的平静被愈加嘈杂的说话声所取代……虽然有些人因为太过紧张而说不出话。
+<br><br>
+
+铃响了。西里斯站在门旁，微笑着，把卷子递回给经过的学生。<<He>>递出了你的卷子。
+<<exam_result "science">>
+<br><br>
+
+你融入走廊中的一群学生之间。
+<br><br>
+
+<<link [[继续|Hallways]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,38 @@
+:: Pregnancy Discussion []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<if $firstOption is undefined>><<set $firstOption to true>><</if>>
+
+<<if $firstOption is true>>
+	<<npc Harper>><<person1>>你没有等太久，哈珀医生从<<his>>的办公室招呼你过去。你进入<<his>>的办公室并坐下。
+	<br><br>
+
+	“我能帮你什么？”<<he>>问道。
+	<br><br>
+<<else>>
+	你在哈珀医生的办公室里。“还有什么我能帮你的吗？”<<he>>问道。
+	<br><br>
+<</if>>
+
+<<if $pregnancyStats.parasiteDoctorEvents gte 2 and $container.portable.value gt 0>>
+	<<if $pregnancyStats.namesParasitesChild is true>>
+		<<link [[卖掉你携带着的孩子 (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
+		<br>
+	<<else>>
+		<<link [[卖掉你携带着的寄生物 (0:05)|Sell Children]]>><<pass 5>><<set $firstOption to false>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if $pregnancyStats.parasiteDoctorEvents is 3>>
+	<<link [[咨询腹中的肿大感 (0:10)|Pregnancy Futa Introduction]]>><<pass 10>><<set $firstOption to false>><</link>>
+	<br>
+<</if>>
+<<if $pregnancyStats.parasiteDoctorEvents gte 4 and ($sexStats.anus.pregnancy.motherStatus is 2 or ($sexStats.vagina.pregnancy.motherStatus is 2 and !$worn.genitals.type.includes("hidden")))>>
+	<<link [[咨询关于清除雌雄同体寄生物 (0:30)|Remove Futa Pregnancy]]>><<pass 30>><<set $futaCheck to true>><<set $firstOption to false>><</link>>
+	<br>
+<</if>>
+<<if $pregnancyStats.parasiteTypesSeen.length gte 4 and $pregnancyStats.parasiteBook is 1>>
+	<<link [[咨询寄生物的相关的信息 (0:05)|Harper Parasite Book]]>><<pass 5>><<set $firstOption to false>><</link>>
+	<br>
+<</if>>
+
+<<link [[回到门厅|Hospital Foyer]]>><<endevent>><<unset $firstOption>><</link>>

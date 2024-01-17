@@ -1,0 +1,120 @@
+:: Lake Underwater []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lakeunderwater">><<underwater>><<effects>><<lakeeffects>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif wraithCanHunt() and $wraith.state and $wraith.hunt is 0 and $wraith.timer gte random(0, 10) and !$possessed>>
+	<<wHunt "lake">>
+<<else>>
+	<<if Time.season is "winter">>
+		你在湖底。你在水晶天花板下游泳，在高大的杂草之间。
+		<<if Time.dayState is "night">>
+			<<if $weather is "snow">>
+				冰面上漆黑一片。
+			<<elseif $weather is "clear">>
+				苍白的月光洒落了下来。
+			<<else>>
+				冰是黑色的。
+			<</if>>
+		<<else>>
+			<<if $weather is "snow">>
+				冰是白色的。
+			<<elseif $weather is "clear">>
+				阳光穿透而下。
+			<<else>>
+				冰面被黯淡的灰色所笼罩着。
+			<</if>>
+		<</if>>
+	<<else>>
+		你正处于湖的正下方，在那如水晶般的湖面下的高大水草间游着泳。
+		<<if Time.dayState is "night">>
+			<<if $weather is "rain">>
+				你正处于湖的正下方，在那黑暗淤泥上的高大水草间游着泳。
+			<<elseif $weather is "clear">>
+				植物在月光下闪烁着光芒。
+			<<else>>
+				水是黑色的。
+			<</if>>
+		<<else>>
+			<<if $weather is "rain">>
+				水面上漆黑一片，这使落在其中的雨滴更显黯淡。
+			<<elseif $weather is "clear">>
+				阳光刺破了阴霾。
+			<<else>>
+				水很暗。
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if !Time.schoolDay and $weather is "snow" and Time.dayState is "day" and $mason_ice_lake gte 1>>
+		透过那些植物，你看见了梅森的身影。
+	<</if>>
+	<br><br>
+	<<if !Time.schoolDay and $weather is "snow" and Time.dayState is "day" and $mason_ice_lake is undefined>>
+		<<set $mason_ice_lake to 1>>
+		<<npc Mason>><<person1>>
+		黑暗中隐约出现一个轮廓，一条强壮的手臂突然紧紧地抓住了你，在与结实肌肉紧贴了一会之后，你回到了光明当中。
+		<br><br>
+
+		在你被推到冰面上后，那个身影也接着爬了上来。是梅森，正穿着潜水服的梅森。
+
+		<<if $exposed gte 1>>
+			<<He>>从岸边的一个袋子里拿出一条毛巾，然后把它裹在了你的身上。
+			<<towelup>>
+		<</if>>
+		虽然<<He>>在那里直打冷颤，但<<He>>看起来似乎更关心你有没有问题。
+		<br><br>
+
+		"你不该在每年的这个时候潜水，"<<he>>说道："这是很危险的。"
+		<br><br>
+
+		<<link [[安慰|Lake Mason Reassure]]>><</link>><<swimmingdifficulty 600 1000>>
+		<br>
+		<<link [[感谢|Lake Mason Thank]]>><<npcincr Mason love 1>><</link>><<glove>>
+		<br>
+		<<link [[生气|Lake Mason Angry]]>><<def 1>><<npcincr Mason love -1>><</link>><<llove>>
+		<br>
+	<<elseif !Time.schoolDay and $weather is "snow" and Time.dayState is "day" and $mason_ice_lake is 1 and random(1, 5) is 5>>
+		<<npc Mason>><<person1>>
+		梅森发现了你，并朝你的方向加速而来。<<He>>抱起你朝着光亮的地方踢去，你被带回了冰面上。
+		<br><br>
+
+		<<if $exposed gte 1>>
+			<<He>>从岸边的一个袋子里拿出一条毛巾，然后把它裹在了你的身上。
+			<<towelup>>
+		<</if>>
+		虽然<<He>>在那里直打冷颤，但<<He>>看起来似乎更关心你有没有问题。
+		<br><br>
+		"我欣赏你急切的心情，"<<he>>说道，"但我说的是真的，这确实很危险，我不能让学生单独去那里。"
+		<br><br>
+
+		<<link [[安慰|Lake Mason Reassure]]>><</link>><<swimmingdifficulty 600 1000>>
+		<br>
+		<<link [[感谢|Lake Mason Thank]]>><</link>>
+		<br>
+		<<link [[生气|Lake Mason Angry]]>><</link>>
+		<br>
+	<<else>>
+		<<if $nextPassageCheck is "Lake Ruin">>
+			<<swimicon>><span class="nextLink"><<link [[在废墟中游泳|Lake Ruin]]>><<wateraction>><</link>><<loxygen>></span>
+		<<else>>
+			<<swimicon>><<link [[在废墟中游泳|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+		<</if>>
+		<br><br>
+		<<if !Time.schoolDay and $weather is "snow" and Time.dayState is "day">>
+			<<set $lake_ice_broken to 1>>
+		<</if>>
+		<<if Time.season is "winter">>
+			<<if $lake_ice_broken is undefined>>
+				<<swimicon "up">><<link [[游向水面|Lake Underwater Ice]]>><</link>>
+				<br>
+			<<else>>
+				<<swimicon "up">><<link [[游向水面|Lake Depths Ice]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<swimicon "up">><<link [[游向水面|Lake Depths]]>><<set $lakesurface to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

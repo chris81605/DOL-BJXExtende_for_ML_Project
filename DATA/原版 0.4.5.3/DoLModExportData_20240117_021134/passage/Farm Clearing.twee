@@ -1,0 +1,44 @@
+:: Farm Clearing []
+<<effects>>
+
+<<if $weather is "rain">>
+	你忍受着雨水，帮助艾利克斯清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+<<elseif $weather is "clear">>
+	<<if Time.dayState is "night">>
+	星星在你的头顶上闪烁，你帮助艾利克斯清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+	<<else>>
+	太阳炙烤着地面，你和艾利克斯奋力除草，将它们连根挖起，腾出用来耕作的土壤。
+	<</if>>
+<<elseif $weather is "snow">>
+	寒风中，你和艾利克斯奋力除草，将它们连根挖起，腾出用来耕作的土壤。
+<<else>>
+	你帮助艾利克斯清除入侵的杂草，将它们连根挖起，腾出用来耕作的土壤。
+<</if>>
+<<if $rng gte 51>>
+	除了杂草外，田地中还长出了一些小树，艾利克斯坚持要在附近的树林中为它们找一个新家。
+<<else>>
+	有些植物的根扎得很深，需要往下多挖一些才能全部拽出。
+<</if>>
+<br><br>
+
+<<if $farm.clearing gte 50>>
+	你取得了很好的进展，<span class="blue">但还有很长的路要走。</span>
+<<elseif $farm.clearing gte 10>>
+	你取得了很好的进展。<span class="lblue">这片田地的大部分已经清理完毕了。</span>
+<<elseif $farm.clearing gte 1>>
+	你取得了很好的进展。<span class="teal">这片田地几乎被清理干净了。</span>
+<<else>>
+	你取得了不错的进展，<span class="green">最后的杂草被清理干净了！</span>
+<</if>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "alexFarmTending">>
+<</if>>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<<farm_tending_alex_events>>
+<<else>>
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

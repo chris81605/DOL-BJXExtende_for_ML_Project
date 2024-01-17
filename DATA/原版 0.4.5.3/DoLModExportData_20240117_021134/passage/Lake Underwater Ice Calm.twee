@@ -1,0 +1,26 @@
+:: Lake Underwater Ice Calm []
+<<underwater>><<effects>>
+
+<<if $willpowerSuccess>>
+	你无法通过呼吸来集中自己的注意力，但你可以感觉到周围的水流。冰不会永远是固体的，快没有时间了。
+	<br><br>
+	在冷静下来之后，你看到了出口，就在离你不远的地方。你游过去，推着冻住的冰盖。<span class="green">你轻轻地碰了它一下，它就碎掉了。</span>
+	<br><br>
+	<<earnFeat "Under the Ice">>
+	你成功将自己挪到了湖面上。
+	<br><br>
+	<<set $location to "lake">>
+	<<set $lake_ice_broken to 2>>
+	<<link [[继续|Lake Depths Ice]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你通常会通过深呼吸来保持平静，但你现在甚至都无法那么做。<span class="red">在这种疯狂的状态下，</span>你将自己贴到了冰面上，<span class="red">几乎溺于恍惚与绝望。</span><<gtrauma>><<trauma 6>><<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	<<link [[砸开|Lake Underwater Ice Smash]]>><<wateraction>><<pain 4>><</link>><<physiquedifficulty 1 $physiquemax>><<loxygen>><<gpain>>
+	<br>
+	<<link [[继续尝试|Lake Underwater Ice Calm]]>><<wateraction>><</link>><<willpowerdifficulty 1 $willpowermax>><<loxygen>>
+	<br>
+	<<link [[向下游|Lake Underwater]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+<</if>>

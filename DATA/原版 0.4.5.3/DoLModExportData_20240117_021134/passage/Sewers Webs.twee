@@ -1,0 +1,39 @@
+:: Sewers Webs []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewerswebs">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。墙上挂满了巨大的蜘蛛网。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if !$weekly.sewers.antiqueCandlestick>>
+	一根古董长蜡烛就悬挂在其中一张网上。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<if !$weekly.sewers.antiqueCandlestick>>
+		<<antiqueicon "candlestick">><<link [[拿起烛台|Sewers Candlestick]]>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Sewers Wood">>
+		<<sewericon "wood">><span class="nextLink"><<link [[满是木头的隧道 (0:05)|Sewers Wood]]>><<pass 5>><</link>></span>
+	<<else>>
+		<<sewericon "wood">><<link [[满是木头的隧道 (0:05)|Sewers Wood]]>><<pass 5>><</link>>
+	<</if>>
+	<br><br>
+<</if>>

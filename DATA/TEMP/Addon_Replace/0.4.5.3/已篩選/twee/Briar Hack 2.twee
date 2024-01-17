@@ -1,0 +1,92 @@
+:: Briar Hack 2 []
+<<effects>>
+
+<<if $pubfame.briar.distract is 2>>
+	过了一段时间后，你拔出U盘。不管它在做什么，你都希望它完成了。
+	<br><br>
+
+	<<if $pubfame.briar.escape is 2>>
+		你走到窗前，爬上梯子。你关上窗户，爬下来，把梯子从楼里移开。布莱尔不会知道你做了什么。
+		<br><br>
+
+		<<person2>><<person>>从附近的一辆车里向你挥手，然后把车开出城外。
+		<br><br>
+
+		<<pubfameComplete "briar">>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+	<<elseif $cat gte 6>>
+		<<set $pubfame.detail to "briarWindow">>
+		你走到窗边翻了出去，抓住把手将它缓缓合上，然后轻盈地落到地上。布莱尔不会知道你做了什么。
+		<br><br>
+
+		<<person2>><<person>>从附近的一辆车里向你挥手，然后把车开出城外。
+		<br><br>
+
+		<<pubfameComplete "briar">>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+	<<else>>
+		<<set $briarPunishment to 3>>
+		你走下楼梯，出现在妓院的主厅里。舞者们正慢慢回到舞台上，顾客们在酒吧里喋喋不休。你注意到其中一扇窗户正在更换。
+		<br><br>
+
+		布莱尔站在窗边，注意到了你。你在<<he>>问任何问题之前就跑出去了。
+		<<npcincr Briar love -3>><<lllove>>
+		<br><br>
+
+		<<person2>><<person>>从附近的一辆车里向你挥手，然后把车开出城外。
+		<br><br>
+
+		<<pubfameComplete "briar" "punish">>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<span class="red">"我就知道你在做这个。"</span>布莱尔漫步回到办公室，保镖跟在<<him>>身后站成一排。你数不清有多少。"我有一种感觉，没有警察突袭。不过，我不想假设。它把你和我都变成了傻瓜。"<<He>>喝了一口<<his>>的酒。"当然，在我看来，这里唯一的混蛋就是你。"
+	<<npcincr Briar love -3>><<lllove>>
+	<br><br>
+
+	你迅速从笔记本电脑上拔出U盘，布莱尔笑了。"我一点也不在乎你刚才做了什么。但让我恼火的是你竟然以为自己能逃脱惩罚。这可不好。"
+	<br><br>
+
+	<<if $pubfame.briar.escape is 2>>
+		<<set $briarPunishment to 5>>
+		保镖向你逼近，你跑向窗口。"有好几层楼高呢，"<<he>>笑着说道。"尽管去吧，直接跳下去，摔得四分五裂说不定比我原本的想法更好。"
+		<br><br>
+
+		你推开窗户，赶紧爬下梯子。布莱尔喘着气跑向窗户，但你已经到达了底部，而且在<<he>>或任何保镖爬下来之前拆掉了梯子。"你会遭报应的，"<<he>>在关上窗户之前朝下喊道。
+		<br><br>
+
+		<<pubfameComplete "briar" "punish">>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+	<<elseif $cat gte 6>>
+		<<set $briarPunishment to 5>><<set $pubfame.detail to "briarWindow">>
+		保镖向你逼近，你跑向窗口。"有好几层楼高呢，"<<he>>笑着说道。"尽管去吧，直接跳下去，摔得四分五裂说不定比我原本的想法更好。"
+		<br><br>
+
+		你推开窗户敏捷地跳了出去。你双脚着地，几乎没有发出声音。你抬起头来看向窗口，布莱尔目瞪口呆，表情很快变得扭曲。"你会遭报应的！"<<he>>在关上窗户之前吼道。
+		<br><br>
+
+		<<pubfameComplete "briar" "punish">>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+	<<else>>
+		保镖向你逼近，你跑向窗口。"有好几层楼高呢，"<<he>>笑着说道。"尽管去吧，直接跳下去，摔得四分五裂说不定比我原本的想法更好。"
+		/* 北极星模组 */
+		<<if !$options.bjx_animal and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" or $transformationParts.dragon.wings isnot "disabled" or $transformationParts.angel.wings isnot "disabled" or $transformationParts.fallenAngel.wings isnot "disabled" or $transformationParts.demon.wings isnot "disabled" or $transformationParts.bee.wings isnot "disabled")>>
+		/* 北极星 */
+			地面很远，但不够远。翅膀无法减缓下降速度，让你安全着陆。
+		<</if>>
+		<br><br>
+
+		你试图反击抵抗那些保镖，但他们不断地涌来。最终，其中一人得手了，将你打倒在地。其余的人一拥而上。
+		<<pain 40>><<trauma 6>><<ggpain>><<gtrauma>>
+		<br><br>
+
+		<<pubfameComplete "briar" "failure">>
+
+		<<link [[继续|Briar Hack Fail]]>><<pass 10>><</link>>
+	<</if>>
+<</if>>

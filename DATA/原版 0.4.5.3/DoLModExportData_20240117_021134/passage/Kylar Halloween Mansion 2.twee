@@ -1,0 +1,40 @@
+:: Kylar Halloween Mansion 2 []
+<<effects>>
+
+你跟着凯拉尔进入黑暗的地下室，经过几个葡萄酒架。它们大多是空的，尽管也有一些摆着空瓶子。
+<br><br>
+
+"还剩一个！"凯拉尔惊呼道。"我就知道我们会找到东西的。"<<He>>把手电筒对着最底层的架子，上面放着一个装满的瓶子。
+<br><br>
+
+凯拉尔提起它，从<<his>>的口袋里拿出一个开瓶器。<<He>>毫不犹豫地打开，把它递给你。"你、你先来。"
+<br><br>
+
+标签上是一种奇怪的紫色水果。
+
+<<if currentSkillValue('history') gte 500>>
+	<span class="green">你想起温特在历史课上讲过的一个故事。</span>这个小镇曾经酿造过一种葡萄酒，他们声称这是<span class="lewd">一种爱情魔药。</span>随着时间的流逝这配方已经失传了，这剩下的一瓶酒应该很值钱。
+	<br><br>
+
+	你肯定凯拉尔也知道这一点。
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+		<<link [[无论如何都要喝|Kylar Halloween Known Drink]]>><<alcohol 60>><<drugs 60>><<hallucinogen 60>><</link>>
+	<</if>>
+	<br>
+	<<link [[拒绝|Kylar Halloween Unknown Refuse]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[生气|Kylar Halloween Known Angry]]>><</link>>
+	<br>
+<<else>>
+	它看起来很熟悉，<span class="red">但你就是想不起来。</span>闻起来很香。
+	<br><br>
+
+	<<link [[喝|Kylar Halloween Unknown Drink]]>><<alcohol 60>><<drugs 60>><<hallucinogen 60>><</link>>
+	<br>
+	<<link [[拒绝|Kylar Halloween Unknown Refuse]]>><<set $phase to 0>><<npcincr Kylar love -1>><</link>><<llove>>
+	<br>
+<</if>>

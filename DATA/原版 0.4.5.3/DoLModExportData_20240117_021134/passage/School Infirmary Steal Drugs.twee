@@ -1,0 +1,43 @@
+:: School Infirmary Steal Drugs []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">你轻而易举地打开了橱柜，</span>扫视了一下里面的情况，看看有没有什么值得拿的东西。
+	<br><br>
+
+	<<if ($sciencetrait gte 3 and random(1, 5) is 5) or random(1, 10) is 10>>
+		你的眼睛被一个粉红色的玻璃瓶所吸引，它藏在架子的后面，没有标签。这些药丸看起来不像是你以前见过的任何药丸。
+		<<set $blackmoney += 300>><<crimeUp 300 "thievery">>
+	<<elseif $sciencetrait gte 2 and random(1, 10) gte 6>>
+		顶层架子上的一个瓶子吸引了你的目光，它并不引人注目，但你认出了这些药物的致幻特性。黑市上的人可能会感兴趣。
+		<<set $blackmoney += 300>><<crimeUp 300 "thievery">>
+	<<elseif $sciencetrait gte 1 and random(1, 10) gte 6>>
+		你拿起一盒专门治过敏的药。不是你在药店能买到的那种，可能有人愿意买它们。
+		<<set $blackmoney += 200>><<crimeUp 200 "thievery">>
+	<<elseif $sciencetrait gte 1>>
+		你拿起了几瓶知名品牌的高品质止痛药，可能有人会愿意为它们付钱。
+		<<set $blackmoney += 150>><<crimeUp 150 "thievery">>
+	<<else>>
+		你对大多数产品都不熟悉，所以你随意地抓了一把药，可能有人会愿意买下它们。
+		<<set $blackmoney += 100>><<crimeUp 100 "thievery">>
+	<</if>>
+	<br><br>
+
+	你对你的收获感到满意，在咔嚓一声后，柜门被你关上了。
+	<<set $weekly.theft.infirmaryDrugs to "stolen">>
+<<else>>
+	你试着撬开橱柜，<span class="red">但这锁显然对你来说太难了。</span>更糟糕的是，你听到了机械内部的咔嚓声。肯定是你弄坏了某处。<<stress 2>><<gstress>><<crimeUp 50 "destruction">><<crime "destruction">>
+	<<set $weekly.theft.infirmaryDrugs to "failed">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这太简单了，你什么都没学到。</span>
+	<br><br>
+<</if>>
+
+<<link [[继续|School Infirmary]]>><</link>>
+<br>

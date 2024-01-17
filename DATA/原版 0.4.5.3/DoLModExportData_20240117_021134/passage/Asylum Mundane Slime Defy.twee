@@ -1,0 +1,26 @@
+:: Asylum Mundane Slime Defy []
+<<asylumeffects>><<effects>>
+
+<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<set $earSlime.defyCooldown += 2>>
+	史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强迫你<<print $asylumEarSlimeEvent[0]>>。
+	<<ggwillpower>><<willpower 1>>
+	<br><br>
+	<<set _nextPassage to $asylumEarSlimeEvent[1]>>
+	<<link [[继续|_nextPassage]]>>
+		<<if ($exposed is 1 and $exhibitionism lt 35) or ($exposed is 2 and $exhibitionism lt 75)>>
+			<<set $desperateaction to "耳中史莱姆命令你这么做">>
+		<</if>>
+		<<switch $asylumEarSlimeEvent[1]>>
+			<<case "Asylum Breakfast">><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>>
+			<<case "Asylum Exercise">><<tiredness 3>><<stress -6>><<pass 30>>
+			<<case "Asylum Socialise">><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>>
+			<<case "Asylum Study">><<pass 50>><<schoolskill>>
+		<</switch>>
+		<<unset $asylumEarSlimeEvent>>
+	<</link>>
+<<else>>
+	你试图无视史莱姆的指令，继续前进。它试图强迫你<<print $asylumEarSlimeEvent[0]>>，<span class="green">但失败了</span>。
+	<br><br>
+	<<link [[继续|Asylum]]>><<unset $asylumEarSlimeEvent>><</link>>
+<</if>>

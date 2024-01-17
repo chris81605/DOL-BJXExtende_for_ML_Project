@@ -1,0 +1,27 @@
+:: School Library Register []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+一台标准款式的收银机正摆在那里，你试着拉了一下，它锁得很紧。
+<br><br>
+<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">那把锁看起来很容易被撬开，</span>但图书馆里人太多了，所以无论如何都不能冒这个险。
+	<<else>>
+		<span class="red">这把锁看起来超出了你的能力范围。</span>
+		<<skulduggeryrequired>>
+		<br>
+		图书馆里人很多，所以无论如何都不能冒这个险。
+	<</if>>
+<br><br>
+<<else>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">这把锁看起来很容易被撬开。</span>
+		<br><br>
+		<<link [[撬开它 (0:10)|School Library Register Sneak]]>><<pass 10>><<crimeUp 5 "thievery">><</link>><<crime "thievery">>
+		<br>
+	<<else>>
+		<span class="red">这把锁看起来超出了你的能力范围。</span>
+		<<skulduggeryrequired>>
+		<br><br>
+	<</if>>
+<</if>>
+<<link [[继续|Library Rental Counter]]>><<endevent>><<set $eventskip to 1>><</link>>

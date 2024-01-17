@@ -1,0 +1,39 @@
+:: Farm Horses Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<if $farm_work.horse.monster is true>>
+		<<beastNEWinit 1 horse $farm_work.horse.gender $farm_work.horse.genitals monster>>
+	<<else>>
+		<<beastNEWinit 1 horse $farm_work.horse.gender $farm_work.horse.genitals beast>>
+	<</if>>
+	<<beastCombatInit>>
+
+	<<set $NPCList[0].stance to "top">>
+	<<if $farm_work.horse.genitals is "penis">>
+		<<set $position to "doggy">>
+	<<else>>
+		<<set $position to "missionary">>
+	<</if>>
+	<<set $position_lock to 1>>
+	<<prop haybale>>
+	<<farm_trust horses>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Horses Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Horses Sex]]>><</link>></span><<nexttext>>
+<</if>>

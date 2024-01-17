@@ -1,0 +1,39 @@
+:: Eden Freedom []
+<<effects>>
+
+<!-- <<npc Eden>><<person1>> -->"你为什么要离开呢？"<<he>>向你发问，"你想要的一切我都能给你。"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"但、但如果我离开镇子太久，"你说道，"人们会来这里找我的。"
+<<elseif $speech_attitude is "bratty">>
+	"你以为没人会注意到我不在了吗？"你说，"他们会来这里找我的。"
+<<else>>
+	"如果我一直不去上学，"你说道，"人们会开始找我的。"
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 20>><<set $edenfreedom to 1>><<set $edenshopping to 0>><<set $edendays to 0>>
+	<<He>>看起来很矛盾。"希望你一直待在这里可能确实有些要求太高了。好吧，你可以回城里去。不过一定要让你的小屁股回到这里。<span class="gold">如果你离开超过一天，我会很担心的。</span>这样我就不得不去找你了。"
+	<br><br>
+
+	<<link [[拥抱|Eden Freedom 2]]>><<set $phase to 0>><<npcincr Eden love 1>><</link>><<glove>>
+	<br>
+	<<link [[点头|Eden Freedom 2]]>><<set $phase to 1>><</link>>
+	<br>
+
+<<else>>
+	<<He>>摇了摇头。"他们不会找到我们的。我熟悉这片树林，必要时我会保护我的东西。"
+	<br><br>
+
+	<i>如果<<he>>更喜欢你的话，<<he>>可能会更愿意满足你的要求。</i>
+	<br><br>
+
+	<<if $bus is "edenclearing">>
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<br>
+	<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+	<</if>>
+<</if>>

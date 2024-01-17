@@ -1,0 +1,43 @@
+:: Sea Slime Dolphins Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身游离海豚。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身游离海豚。史莱姆试图控制你的意志，你感到一阵剧痛，这是史莱姆对你反抗的教训。不过，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它试图驱使你回去，<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $deviancy gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你试图转身游离海豚，<span class="red">但史莱姆压倒了你的意志。</span>它迫使你转身<<if $exposted gte 2>>并脱光衣物<</if>>，向它们献上你赤裸的私处。你挑逗地扭动着身体。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+	<<clothesstrip>>
+
+	其中一个开始蹭你，另外两个则阻止你逃离。
+	<br><br>
+
+	<<link [[继续|Sea Dolphins]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你转身游离海豚。史莱姆试图控制你的意志，<span class="green">但你成功地抵制了它的影响。</span>海豚没有追来。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+
+	史莱姆还之以一阵剧痛。
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+	<br>
+<</if>>

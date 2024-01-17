@@ -1,0 +1,257 @@
+:: Estate Blackjack Win []
+<<effects>>
+<<blackjackEnd "win">>
+<<blackjackStart "Blackjack Finish">>
+
+<<estate_chaos_bar>>
+<br><br>
+<<blackjackResultText true>>
+<<blackjackPostGameBettingResult true>>
+
+<<switch $estate.cards.daring>>
+<<case 0>>
+	伦恩摊开<<his>>的双手，"我是个守信用的<<personsimple>>，"<<he>>说道，"说你的要求吧。"
+<<case 1>>
+	伦恩用手指划过桌面。"别害羞，"<<he>>说道，"说说你想要什么好处。"
+<<case 2>>
+	伦恩不寻常地盯着你的牌看。"很好，"<<he>>说道，"说说你想要什么好处。"
+<<case 3>>
+	伦恩又瞥了一眼牌。"那你想提什么要求呢？"<<he>>问道，"说出来吧。"
+<<case 4>>
+	伦恩靠到了椅背上。"你又赢了一场，"<<he>>说道，"说说你想要什么好处。"
+<<case 5>>
+	伦恩抱着手臂。"还不错，"<<he>>说道，"说说你想要什么好处。"
+<<case 6>>
+	伦恩向前倾身。"不要犹豫，"<<he>>说道，"说说你想要什么好处。"
+<<case 7>>
+	伦恩嘴角露出一丝微笑。"愿赌服输，"<<he>>说道，"说你的要求。"
+<<case 8>>
+	伦恩笑了。"那么这次又会是什么呢？"<<he>>问道，"说你的要求。"
+<<case 9>>
+	伦恩笑了。"不知道<<pshe>>正在酝酿什么鬼点子，"<<he>>说道，"说你的要求。"
+<<case 10>>
+	伦恩笑了。"不用对我客气，"<<he>>说道，"说你的要求。"
+<<default>>
+	伦恩笑了。"那你想让谁死？"<<he>>问道，"只是开个玩笑，说你的要求吧。"
+<</switch>>
+<<ldom>><<npcincr Wren dom -1>>
+<br><br>
+
+<<if $estate.cards.daring is 0>>
+	<i>尽管<<his>>同意为你做什么，你知道<<he>>不会愿意做出太过分的举动。至少在刚开始的时候不会。你需要从简单的要求开始。</i>
+	<br><br>
+<</if>>
+
+<<switch $estate.cards.daring>>
+<<case 0>>
+	<span class="red">伦恩对你得意地微笑。</span>
+<<case 1>>
+	<span class="pink">伦恩看起来很谨慎。</span>
+<<case 2>>
+	<span class="pink">伦恩看起来很警惕。</span>
+<<case 3>>
+	<span class="purple">伦恩看起来很放松。</span>
+<<case 4>>
+	<span class="purple">伦恩看起来很自在。</span>
+<<case 5>>
+	<span class="blue">伦恩看起来很愉悦。</span>
+<<case 6>>
+	<span class="blue">伦恩看起来很开心。</span>
+<<case 7>>
+	<span class="lblue">伦恩看起来很有冒险精神。</span>
+<<case 8>>
+	<span class="lblue">伦恩看起来很大胆。</span>
+<<case 9>>
+	<span class="teal">伦恩看起来很勇敢。</span>
+<<case 10>>
+	<span class="teal">伦恩看起来很无畏。</span>
+<<default>>
+	<span class="green">伦恩无所畏惧。</span>
+<</switch>>
+<br><br>
+
+你想要什么？
+<br><br>
+
+<<link [[喝一杯威士忌|Estate Cards Whisky]]>><<set $estate.cards.daring += 1>><</link>><<gdaring>>
+<br>
+
+<<set _favoursRemaining to 0>>
+
+<<if $estate.cards.kiss isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 1>>
+		<<link [[亲吻同伴|Estate Cards Kiss]]>><<set $estate.cards.daring += 2>><<set $estate.cards.kiss to 1>><<arousal 600 "mouth">><</link>><<ggdaring>><<garousal>>
+		<br>
+	<<else>>
+		<span class="blue">亲吻同伴：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.steeds isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 3>>
+		<<link [[惊动马群 (0:10)|Estate Cards Steeds]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.steeds to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">惊动马群：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.rumour isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 3>>
+		<<link [[散布谣言 (0:10)|Estate Cards Rumour]]>><<pass 10>><<estate_chaos 10>><<set $estate.cards.rumour to 1>><<set $estate.cards.daring -= 1>><</link>><<gchaos>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">散布谣言：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.wren_top is 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 3>>
+		<<link [[脱光上衣|Estate Cards Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<br>
+	<<else>>
+		<span class="blue">脱光上衣：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.weapons isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 5>>
+		<<link [[把雷米的武器藏起来 (0:10)|Estate Cards Weapons]]>><<pass 10>><<farm_aggro -5>><<set $estate.cards.weapons to 1>><<set $estate.cards.daring -= 1>><</link>><<laggro>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">把雷米的武器藏起来：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.wren_bottoms is 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 5>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<<link [[脱掉裙子|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<<else>>
+			<<link [[脱掉裤子|Estate Cards Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<</if>>
+		<br>
+	<<else>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<span class="blue">脱掉裙子：需要更大的勇气。</span>
+		<<else>>
+			<span class="blue">脱掉裤子：需要更大的勇气。</span>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.cars isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 7>>
+		<<link [[让雷米的车不能发动 (0:10)|Estate Cards Cars]]>><<pass 10>><<farm_aggro -15>><<set $estate.cards.cars to 1>><<set $estate.cards.daring -= 1>><</link>><<llaggro>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">让雷米的车不能发动：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.window isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 7>>
+		<<link [[砸破庄园的窗户 (0:10)|Estate Cards Window]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.window to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">砸破庄园的窗户：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.wren_top isnot 1 and $estate.cards.wren_under_top is 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 7>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<<link [[脱掉胸罩|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<<else>>
+			<<link [[脱掉背心|Estate Cards Under Top]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_top to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<</if>>
+		<br>
+	<<else>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<span class="blue">脱掉胸罩：需要更大的勇气。</span>
+		<<else>>
+			<span class="blue">脱掉背心：需要更大的勇气。</span>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.cattle isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 9>>
+		<<link [[把牛放出去 (0:10)|Estate Cards Cattle]]>><<pass 10>><<estate_chaos 20>><<set $estate.cards.cattle to 1>><<set $estate.cards.daring -= 1>><</link>><<ggchaos>><<ldaring>>
+		<br>
+	<<else>>
+		<span class="blue">把牛放出去：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.wren_bottoms isnot 1 and $estate.cards.wren_under_bottoms is 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 9>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<<link [[脱下内裤|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<<else>>
+			<<link [[脱下三角裤|Estate Cards Under Bottoms]]>><<set $estate.cards.daring += 2>><<set $estate.cards.wren_under_bottoms to 0>><<arousal 600>><</link>><<ggdaring>><<garousal>>
+		<</if>>
+		<br>
+	<<else>>
+		<<if $NPCName[$NPCNameList.indexOf("Wren")].pronoun is "f">>
+			<span class="blue">脱下内裤：需要更多的勇气。</span>
+		<<else>>
+			<span class="blue">脱下三角裤：需要更大的勇气。</span>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if $estate.cards.fire isnot 1>>
+	<<set _favoursRemaining += 1>>
+	<<if $estate.cards.daring gte 11>>
+		<<link [[点火 (0:10)|Estate Cards Fire]]>><<pass 10>><<farm_aggro -30>><<estate_chaos 50>><<set $estate.cards.fire to 1>><</link>><<garousal>><<lllaggro>><<gggchaos>>
+		<br>
+	<<elseif _favoursRemaining is 1>>
+		<!-- if this is the very last favour remaining, but daring is low - we let the player know about this option,
+		     so that they realize they've mismanaged the daring and need to increase it again so that they can get all favours
+			 we do not show this option if they haven't gotten all other favours first, though
+		-->
+		<span class="blue">点火：需要更大的勇气。</span>
+		<br>
+	<</if>>
+<</if>>
+
+
+<!-- we could allow the player to announce victory earlier, too, but it makes sense to require ALL dares to be completed -->
+<!-- we could also ignore the ones where we get Wren to get more daring with no actual benefit for us
+     since PC doesn't particularly care about Wren's state of undress
+	 however, I figured I'll count them too since Wren being undressed definitely plays a role in them feeling defeated when the PC leaves  -->
+<<if _favoursRemaining is 0>>
+	<i>你意识到已经没有其它要求可提了，你可以通过宣布胜利来结束游戏。</i>
+	<<if $estate.cards.confiscatedClothes and $estate.cards.confiscatedClothes.length gt 0>>
+		<br>
+		<span class="gold">伦恩可能会觉得很挫败，考虑把你的衣服还给你。</span>
+	<</if>>
+	<br>
+	<<link [[宣布你的胜利|Estate Cards Player Victory]]>><<npcincr Wren dom -5>><</link>><<lldom>>
+	<br>
+<<else>>
+	<span class="blue">宣布你的胜利：需要先提出过其它所有要求。</span>
+<</if>>

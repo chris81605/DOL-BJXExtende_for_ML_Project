@@ -1,0 +1,28 @@
+:: Photo Examine Ask []
+<<effects>><<person1>>
+<<if !$pubfame.niki.money>>
+	<<set $pubfame.niki.money to random(12,25)*10000>>
+<</if>>
+
+<<if $speech_attitude is "meek">>
+	你点了点尼奇的肩膀，<<he>>转过身来看向你："对不起，"你小声问道："你可以把这张照片给我么？"
+<<elseif $speech_attitude is "bratty">>
+	你清了清嗓子，尼奇转过身来看向你，"我想要从你手中拿走这个，"你说着的同时指了指那张照片。
+<<else>>
+	你清了清嗓子，尼奇转过身来看向你，"这张照片出售么，"你说着的同时指了指那张照片。
+<</if>>
+<br><br>
+
+尼奇凑近照片审视了一会儿。"<<printmoney $pubfame.niki.money "red">>。我很喜欢这个，它的颜色与墙壁的其他部分搭配得很好。<<if ["red","blue","purple"].includes($pubfame.niki.hair)>>特别是<<print setup.colourName($pubfame.niki.hair.replace("blonde","金色"))>>的泼辣。<</if>>还有，<span class="gold">这是<<person2>><<he>>拍的最后一张</span>。"
+<br><br>
+
+<<if $money gte $pubfame.niki.money>>
+	<<link [["买下它 (" + _printmoney + ")"|Photo Examine Buy]]>><<set $money -= $pubfame.niki.money>><</link>>
+<<else>>
+	<span class="purple">你的钱不够。</span>
+<</if>>
+<br>
+<<link [[询问其他的支付手段|Photo Examine Barter]]>><</link>>
+<br><br>
+
+<<link [[$photo.pubfame ? "放回去" : "返回"|Photo]]>><<endevent>><</link>>

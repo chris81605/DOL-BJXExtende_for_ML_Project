@@ -1,0 +1,47 @@
+:: Eden Prey Chase []
+<<set $outside to 1>><<set $location to "forest">><<effects>>
+
+<<if $phase is 1>>
+	当伊甸开始追赶你时，你迅速跑入灌木丛中并躲了起来。脚步声就徘徊在不远的地方，你用叶子遮掩着自己，开始思考起怎样结束这场闹剧。你四处张望着，前方有一个巨大的树根。你灵机一动，故意将脚卡入其中的缝隙，挨着树根栽倒在了地上。伊甸立刻发现了你的动静，匆匆赶了过来。
+	<br><br>
+
+	你感觉到自己的手腕被绳子反绑在背部。你的眼睛四处乱看，<span class="meek">直到一个闪闪发光的红色球形口塞被塞进你的嘴里。</span>你发出一声<<if $speech_attitude is "meek">>呜咽<<elseif $speech_attitude is "bratty">>咆哮<<else>>喘息<</if>>作为回应。一块布缠住了你的眼睛，绑在你的头上，遮蔽了你的视野。伊甸把你按在地上，你只能无助地扭动着身体。
+	<<bind>><<facewear 6>>
+	<br><br>
+
+	"嗯，嗯，看来我找到了一个无助的猎物，"伊甸嘲弄着你。"把你留在这里是不够的。"<<He>>把你扛起来，背在了<<his>>肩上。
+	<br>
+	被捆绑起来，丧失了感官的你只能等待和预测伊甸对你会做些什么。
+	<br><br>
+
+	<<link [[继续|Eden Prey Caught]]>><</link>>
+	<br>
+<<else>>
+	<<if $athleticsSuccess>>
+		在伊甸追逐你的时候，你疾步进入了灌木丛中。森林中的曲折转弯让你有自由去躲避<<him>>。尽管<<nnpc_title "Eden">>拥有惊人的追踪技巧，<span class="green">但你敏捷的脚步和坚持不懈的精神保持着<<his>>的紧张。</span>你可以感觉到伊甸试图伸手触摸你，但<<his>>的手指只是轻轻擦过你的皮肤。<<stress 2>><<gstress>>
+		<br><br>
+
+		经过漫长的时间，你终于甩掉了<<him>>。你的肌肉因为努力而燃烧起来。<<physique 2>><<tiredness 12>><<npcincr Eden dom -5>><<gtiredness>><<lldom>>
+		<br><br>
+
+		<<set $forest to random(50, 100)>>
+		<<set $edenPreyEscaped to true>>
+		<<unset $edenPreyForced>>
+		<<link [[继续|Forest]]>><<endevent>><</link>>
+	<<else>>
+		当伊甸追逐你时，你疾步进入了灌木丛中。森林中的曲折转弯让你有自由去躲避<<him>>。然而，<span class="red">你无法摆脱<<nnpc_title "Eden">>的追击。</span>尽管你尽力逃跑，但你听到<<his>>沉重的呼吸声就在你身后。当你的最后一丝力气耗尽时，你被扑倒在地。<<pain 1>><<tiredness 12>><<npcincr Eden dom 5>><<gpain>><<gtiredness>><<ggdom>>
+		<br><br>
+
+		你感觉到自己的手腕被绳子反绑在背部。你的眼睛四处乱看，<span class="meek">直到一个闪闪发光的红色球形口塞被塞进你的嘴里。</span>你发出一声<<if $speech_attitude is "meek">>呜咽<<elseif $speech_attitude is "bratty">>咆哮<<else>>喘息<</if>>作为回应。一块布缠住了你的眼睛，绑在你的头上，遮蔽了你的视野。伊甸把你按在地上，你只能无助地扭动着身体。
+		<<bind>><<facewear 6>>
+		<br><br>
+
+		"嗯，嗯，看来我找到了一些无助的猎物，"伊甸嘲弄着你。"把你留在这里是不够的。"<<He>>把你扛起来，背在了<<his>>肩上。
+		<br>
+		被捆绑起来，丧失了感官的你只能等待和预测伊甸对你会做些什么。
+		<br><br>
+
+		<<link [[继续|Eden Prey Caught]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

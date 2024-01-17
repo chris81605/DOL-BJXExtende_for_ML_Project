@@ -1,0 +1,45 @@
+:: Sewers Residential []
+<<effects>><<set $location to "sewers">><<set $outside to 0>><<set $bus to "sewersresidential">><<getTarget true>>
+<<set $sewersevent -= 1>>
+你在旧下水道里。一条运河从旁边流过，穿过一个金属栅栏消失了。水流穿过天花板的缝隙，带着垃圾流入河流。水流看起来很平缓。
+<<wPersist>><<wHunt "sewers">>
+<br><br>
+<<if $sewerschased is 1>>
+	有一架梯子通往镇上的排水系统，但梯子缩回去了，够不着。
+	<br><br>
+<<else>>
+	有一架梯子通往镇上的排水系统，但梯子缩回去了，够不着。
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	这一切对你来说冲击太大，你昏了过去。
+	<br><br>
+	<<sewersend>>
+	<<sewerspassout>>
+<<elseif $sewerschased is 1 and $sewerschasedstep lte 0>>
+	<<morgancaught>>
+<<elseif ($sewersevent lte 0 or $wraith.hunt and $eventforced) and $sewerschased isnot 1 and $eventskip is 0>>
+	<<eventssewers>>
+<<else>>
+	<<set $eventskip to 0>>
+	<<if $sewerschased is 1 and $sewerschasedstep gte 0>>
+		<<morganhunt>>
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "sewers" `($sewerschased is 1 ? true : false)`>>
+	<</if>>
+	<<sewericon "scrap">><<link [[充满废料的隧道 (0:05)|Sewers Scrap]]>><<pass 5>><</link>>
+	<br>
+	<<sewericon "wood">><<link [[满是木头的隧道 (0:05)|Sewers Wood]]>><<pass 5>><</link>>
+	<br><br>
+	<<swimicon "back">><<link [[逆流而游行 (0:05)|Sewers Residential Swim]]>><<pass 5>><<tiredness 1>><</link>><<swimmingdifficulty 1 200>><<gtiredness>>
+	<br><br>
+	<<if $nextPassageCheck is "Sewers Possessed">>
+		<<laddericon>><span class="nextLink"><<link [[爬出去|Sewers Possessed]]>><<pass 4>><</link>></span>
+		<br>
+	<<elseif $sewerschased isnot 1>>
+		<<laddericon>><<link [[爬出下水道|Residential Drain]]>><<sewersend>><</link>>
+		<br>
+	<</if>>
+<</if>>

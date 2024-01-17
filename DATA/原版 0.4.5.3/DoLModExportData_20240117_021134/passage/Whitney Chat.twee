@@ -1,0 +1,107 @@
+:: Whitney Chat []
+<<set $outside to 0>><<effects>>
+<<set _whitney to statusCheck("Whitney")>>
+<<if !$daily.whitney.parkWhore and (_whitney.dom - 5 gte _whitney.love or _whitney.dom gte 20) and random(1,10) is 10>>
+	<<set $daily.whitney.parkWhore to true>>
+	<<generate2>><<generate3>>
+	<<saveNPC 1 "park_whore1">><<saveNPC 2 "park_whore2">>
+	你试着和惠特尼说话，但却感受到了背后的视线。你环顾四周，直到你发现一个<<person2>><<person>>和<<person3>><<person>>正在公园另一端的一棵树下不怀好意地看着你。
+	<br><br>
+	"嘿，"惠特尼说着，用胳膊肘推了推你，并指着那两个人。"知道那是什么吗？"
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"嗯……"你不好意思地咧嘴一笑，"一对幸福的情侣？"
+	<<elseif $speech_attitude is "bratty">>
+		"一对变态的傻瓜，"你冷哼。
+	<<else>>
+		"一对情侣在散步？"你问。
+	<</if>>
+	<br><br>
+	惠特尼得意地笑着说。<span class="pink">"是钱。"</span>在你意识到之前，你的手臂已经被<<person1>><<his>>抓住了，你被拉向了那两个路人。
+	<br><br>
+	<<link [[顺其自然|Whitney Park Whore]]>><<stress 6>><<npcincr Whitney dom 1>><</link>><<gdom>><<gstress>>
+	<br>
+	<<link [[战斗|Whitney Park Whore Fight]]>><<set $fightstart to 1>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove "Whitney">><<ldom>>
+	<<if $submissive gte 1500>>
+		<br>
+		<<link [["恳求" + $NPCList[0].pronouns.him + "别这样"|Whitney Park Whore Beg]]>><<sub 3>><<npcincr Whitney dom 3>><<npcincr Whitney lust 1>><</link>><<ggdom>><<glust>><<submissivetext>>
+	<</if>>
+<<elseif $whitneyromance is 1>>
+	你和惠特尼说话。
+	<<if $rng gte 91>>
+		<<if $worn.face.type.includes("mask")>>
+			<<He>>看向你。"想躲着别人？那你可做得很糟糕，"<<he>>说着，摸向你的$worn.face.cn_name_cap。
+			"也许你本来就在期待被做点坏事，毕竟你可是来找我的。"<<He>>使劲揉乱了你的头发，然后才放开了你。
+			<br><br>
+		<<elseif $skin.left_cheek.special is "Whitney">>
+			<<He>>用<<his>>的拇指在你左脸颊的<<tattoo left_cheek>>上摩擦，"真好看。"
+		<<elseif $skin.right_cheek.special is "Whitney">>
+			<<He>>用<<his>>的拇指在你右脸颊的<<tattoo right_cheek>>上摩擦，"完美。"
+		<<elseif $skin.forehead.special is "Whitney">>
+			<<He>>用<<his>>的拇指在你额头的<<tattoo forehead>>上摩擦。"这样所有人就都能看到了。"
+		<<else>>
+			<<He>>靠近你，<<print $worn.handheld.type.includes("rainproof") ? "<<his>>的伞撞到了你的上面。<<He>>把你的伞轻轻推开，用一只胳膊挂在你肩上" : "确保你被<<his>>的伞遮住了">>。
+		<</if>>
+	<<elseif $rng gte 81>>
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].trauma lt 80 and Time.season is "winter">>
+			你发现<<his>>的目光飘向公园的另一边，
+			<<if Time.isWeekEnd() and Time.hour gte 9 and Time.hour lte 16>>
+				然后落在了罗宾的热巧克力摊上。"有时候我真想把那个碍眼的家伙扔掉，"<<he>>说。
+				"但<<nnpc_his "Robin">>的货真的很棒。"<<print playerBellyVisible() ? "<<He>>嚼着嘴里的口香糖" : "<<He>>又吸了一口手中的烟">>。
+				"如果你告诉<<nnpc_him "Robin">>我说过这话，就等着他们永远也找不到你的尸体吧。"
+			<<else>>
+				然后落在了罗宾经常摆热巧克力摊的位置上。"现在还挺想要一杯<<nnpc_his "Robin">>卖的那些东西的。"
+			<</if>>
+		<<elseif $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and Time.season is "winter">>
+			你看到<<his>>的目光飘向公园的另一边，罗宾曾经在那里设置<<nnpc_his "Robin">>的热巧克力摊位。<<his>>脸上的表情很难读懂。
+		<<else>>
+			"我一会儿会去酒吧，"<<he>>说，"你最好不要跟着我。"
+		<</if>>
+	<<elseif $rng gte 61>>
+		"你跟我在一起有些太自在了，"<<he>>的声音中藏着笑意。
+	<<elseif $rng gte 41>>
+		"讲真你有停下说话的时候吗？"<<he>>问道。你们之间沉默了一会儿。"这是个问题，不是请求，白痴！"
+		<<gstress>><<stress 1>>
+	<<elseif $rng gte 21>>
+		"再烦我，我就把你扔进喷泉里，"<<he>>一边说，一边<<print playerBellyVisible() ? "嚼着嘴里的口香糖" : "一边把你拽到身边">>，"我当然想看看你的衣服变透明了是什么样的。"
+	<<else>>
+		<<He>>保持沉默，但似乎在倾听。
+	<</if>>
+	<br><br>
+	<<whitneyoptions>>
+<<else>>
+	<<if $rng gte 65>>
+		<<athleticsdifficulty 650 1000 true>>
+		你还没反应过来，惠特尼就抓住了你，拖着你向喷泉跑去。
+		<<if $athleticsSuccess>>
+			然而，<span class="green">你稳住了自己，</span>设法阻止了<<him>>把你摁进水里。<<He>>徒劳地最后拽了你一下，然后放开了你。
+			<br><br>
+			"你真没意思。"<<He>>走回树下<<his>>原来待的位置。
+			<br><br>
+			<<whitneyoptions>>
+		<<else>>
+			你<span class="red">绊了一下，<<he>>把你推过水池边缘。</span>你掉了进去，<<if Time.season is "winter">>你的身体撞破了冰层，<</if>>整个人都湿透了。
+			<<water>>
+			<br><br>
+			"只有我跟你主动搭话的时候，你才能跟我讲话，蠢货。"<<He>>把你孤零零地留在喷泉里，笑着离开了公园。
+			<br><br>
+			<<whitneyexit>>
+		<</if>>
+	<<elseif $rng gte 50>>
+		你让惠特尼跟你说话。"你他妈凭什么觉得我想要？"
+		<br><br>
+		<<whitneyoptions>>
+	<<elseif $rng gte 40>>
+		你试着闲聊。<<He>>假装你不存在。
+		<br><br>
+		<<whitneyoptions>>
+	<<elseif $rng gte 20>>
+		你试着和惠特尼谈谈。<<He>>威胁地瞪着你。
+		<br><br>
+		<<whitneyoptions>>
+	<<else>>
+		你试着和惠特尼聊天，但是<<he>><<print playerBellyVisible() ? "嚼着口香糖" : "一直抽烟">>，一句话也不说。
+		<br><br>
+		<<whitneyoptions>>
+	<</if>>
+<</if>>

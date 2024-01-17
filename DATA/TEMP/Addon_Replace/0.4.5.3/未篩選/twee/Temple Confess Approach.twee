@@ -1,0 +1,31 @@
+:: Temple Confess Approach []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+你走进了大厅墙边的忏悔室。华丽的符号在中央装饰上舞蹈，向两侧沉重的木门游曳而去。
+右侧的门为忏悔者而开，在那里，人们忏悔自己的罪愆。左侧的门为司祭而开，在那里，他们也被称作"告解员"。一只小小的铜铃在中央空悬。
+<br><br>
+
+一道巨大的半环镶嵌在隔间周围。
+<br><br>
+
+<<if $exposed gte 1>>
+	你的心怦怦直跳，没有人看见你偷偷溜进来。
+	<br><br>
+<</if>>
+
+<<if $daily.confessed>>
+	<span class="purple">你今天已经忏悔了自己的罪孽。</span>
+	<br>
+<<else>>
+	<<link [[作为忏悔者进入 (0:30)|Temple Confess Self]]>><</link>>
+	<br>
+<</if>>
+<<if ($temple_rank is "monk" or $temple_rank is "priest")>>
+	<<link [[作为告解员进入|Temple Confess Start]]>><<set $phase to 1>><</link>> <<note "+ 恩典？" "green">>
+	<br>
+<<elseif $temple_rank is "initiate">>
+	<span class="purple">你要先在神殿晋级才能予他人聆听忏悔。</span>
+	<br>
+<</if>>
+<br>
+<<link [[离开|Temple]]>><<endevent>><</link>>
+<br>

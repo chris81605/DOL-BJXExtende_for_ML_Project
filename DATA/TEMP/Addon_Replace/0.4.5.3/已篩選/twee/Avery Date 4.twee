@@ -1,0 +1,27 @@
+:: Avery Date 4 []
+<<effects>>
+<<endevent>><<npc Avery>><<person1>>
+<<averyscore>>
+
+/* 北极星模组 */
+艾弗里开车送你回家。一回到孤儿院，<<he>>就打开鼓鼓的<<wallet>>拿出现金。<<He>>拿着<span class="gold">£<<print (($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1))>></span>。"你应该买点好东西，我请客。"
+/* 北极星 */
+<br><br>
+
+<<if $rng gte 51>>
+	你伸手去拿钱，但<<he>>却把钱从你身边拿走了。"首先，"<<he>>说，"我想多看看你，脱掉你的衣服。"
+	<br><br>
+
+	<<link [[脱|Avery Date Strip]]>><</link>>
+	<br>
+	<<link [[拒绝|Avery Date Refuse]]>><</link>>
+	<br>
+<<else>>
+	你伸手去拿钱，但<<he>>却把钱从你身边拿走了。"首先，"<<he>>说完，轻抚你的脸颊，然后向前倾身亲吻。
+	<br><br>
+
+	<<link [[亲吻|Avery Date Sex]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
+	<br>
+	<<link [[拒绝|Avery Date Refuse]]>><<npcincr Avery rage 5>><<npcincr Avery love -1>><</link>><<garage>><<llove>>
+	<br>
+<</if>>

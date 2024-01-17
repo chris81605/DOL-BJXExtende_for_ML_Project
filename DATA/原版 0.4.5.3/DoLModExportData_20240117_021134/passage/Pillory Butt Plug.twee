@@ -1,0 +1,49 @@
+:: Pillory Butt Plug []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<set _toys = $player.inventory.sextoys["butt plug"]>>
+<<set _toy = _toys[_toys.length - 1]>>
+<<set _mod = $phase ? 1 : 0.5>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "bratty">>
+		"想都别想，混蛋。"你冷笑了一声，直直地盯着<<personsimple>>。
+	<<elseif $speech_attitude is "meek">>
+		"请，请不要。"你猛烈地晃着头。
+	<<else>>
+		"不。"你直视着那人的眼睛。
+	<</if>>
+	<br><br>
+	<<if Math.abs($submissive - 1000) - 150 gte random(1, 850)>> <!-- Bonus for bratty or meek but not neutral -->
+		<<personsimple>>犹豫着看了看肛塞。"啊，忘了它吧。"<<he>>嘟囔着。<<He>>消失在人群中。
+		<<set _skipplug to true>>
+	<<else>>
+		<<personsimple>>嘲讽道："闭嘴，你这傻
+		<<if $player.gender_appearance is 'm'>>
+			屌。
+		<<else>>
+			逼。
+		<</if>>
+		你没资格告诉我该怎么做。" <<stress 2>>
+	<</if>>
+<<else>>
+	你要做好准备，迎接即将到来的一切。
+<</if>>
+<br><br>
+
+<<if _skipplug>>
+	<<run _toys.splice(-1,1)>>
+	<<if !_toys.length>>
+		<<run delete V.player.inventory.sextoys["butt plug"]>>
+	<</if>>
+<<else>>
+	<<He>>走到你面前，无视你的感受，猛地将肛塞插进你的<<bottom>>。你痛苦地大声哭喊。
+	一些观众显得既厌恶又惊讶，而另一些人则欲言又止。
+	<<person>>把肛塞留在你体内，然后愉悦地走开，看来很满意你痛苦的表现。
+	<<set _toy.state = "worn">><<set _toy.carried = true>><<set _toy.worn = true>><<set $worn["butt_plug"] = _toy>>
+	<<violence 50 _mod _mod _mod>><<bruise anus>>
+<</if>>
+<br><br>
+
+<<endevent>>
+<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+<br>

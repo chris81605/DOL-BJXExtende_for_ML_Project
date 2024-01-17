@@ -1,0 +1,43 @@
+:: Farm Horse Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<if $farm_work.horse.monster is true>>
+		<<beastNEWinit 1 horse $farm_work.horse.gender $farm_work.horse.genitals monster>>
+	<<else>>
+		<<beastNEWinit 1 horse $farm_work.horse.gender $farm_work.horse.genitals beast>>
+	<</if>>
+
+	<<beastCombatInit>>
+	<<set $NPCList[_n].stance to "top">>
+
+	<<if $farm_work.horse.genitals is "penis">>
+		<<set $position to "doggy">>
+	<<else>>
+		<<set $position to "missionary">>
+	<</if>>
+	<<set $position_lock to 1>>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<enable_rescue>>
+	<</if>>
+	<<farm_trust horses>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Horse Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Horse Rape]]>><</link>></span><<nexttext>>
+<</if>>

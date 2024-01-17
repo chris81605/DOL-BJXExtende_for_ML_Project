@@ -1,0 +1,19 @@
+:: Forest Nest Throw []
+<<effects>>
+你抓起一块石头，朝鸟巢扔去。它被撞松了，掉下来成了一堆乱七八糟的东西。你看到汁液和蛋黄从树枝里渗出来。
+<<if $harpy gte 6>><<stress 6>><<ggstress>><</if>>
+<br><br>
+
+<<if $forest_nest.fox isnot 3>>
+	如果你等得太久，肯定会引来狐狸。
+	<br><br>
+<</if>>
+
+<<link [[搜索巢|Forest Nest Search]]>><</link>>
+<br>
+<<if $forest_nest.fox is 2 and !$NPCList[0].traits.includesAny("cowardly","clumsy")>>
+	<<link [[等待狐狸 (0:20)|Forest Nest Ambushed]]>><</link>><<note "蛋减少" "red">>
+<<else>>
+	<<link [[等待狐狸 (0:20)|Forest Nest Hide]]>><<set $phase to 1>><<set $forest_nest.eggs -= 2>><<pass 20>><</link>><<note "蛋减少" "red">>
+<</if>>
+<br>

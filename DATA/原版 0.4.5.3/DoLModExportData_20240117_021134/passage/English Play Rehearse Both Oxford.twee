@@ -1,0 +1,50 @@
+:: English Play Rehearse Both Oxford []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "rehearsal">>
+<<run statusCheck("Sydney")>><<run statusCheck ("Kylar")>>
+
+你来到了牛津街，这里错落着各种各样的建筑物，不过最显眼的还是学校，
+<<if $weather is "rain">>
+	就算在下雨，这条街还是很热闹。
+<<elseif $weather is "snow">>
+	就算天气寒冷，街上还是很热闹。
+<<else>>
+	学生们在附近闲逛着。
+<</if>>
+<br><br>
+
+<<if $syndromekylar gte 1 and $sydneyromance is 1>>
+	凯拉尔和悉尼都看起来想对你说些什么，但都有些犹豫。过了一会，他们走了。
+	"我该回家了——"他们步调惊人的一致。
+	<br><br>
+
+	他们停下来互相凝视着，接着又走了几步，然后又停了下来。他们似乎不确定应该做些什么，你歪着头疑惑地看着他们。
+	<br><br>
+
+	凯拉尔看着你说道，"我……我们都住在同一条街。"
+	<br><br>
+
+	<<link [[跟他们一起走 (0:20)|English Play Both Walk]]>><<pass 20>><</link>>
+	<br>
+	<<link [[离开|Oxford Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	凯拉尔看了下<<his "Kylar">>的手表说道："我得走了。"<<He>>看上去还想说点什么，不过注意到悉尼正在看着自己后停住了。<<He>>转过身离开了。
+	<br><br>
+
+	悉尼推了推你。
+	<<if _sydneyStatus.includes("corrupt")>>
+		"我稍微有点担心<<him>>。我感觉我们应该跟着<<him>>，确保<<him>>平安回家。"
+	<<else>>
+		"我，我们应该……确保<<he>>能平安回家。"
+	<</if>>
+	<<person1>>
+	<br><br>
+
+	<<link [[跟凯拉尔一起走 (0:20)|English Play Kylar Walk]]>><<pass 20>><</link>>
+	<br>
+	<<set $skulduggerydifficulty to 600>>
+	<<link [[远远地跟着凯拉尔 (0:20)|English Play Kylar Follow]]>><<pass 20>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<link [[让凯拉尔离开|English Play Dont Follow]]>><</link>>
+	<br>
+<</if>>

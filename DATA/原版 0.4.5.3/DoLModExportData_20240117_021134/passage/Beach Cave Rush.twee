@@ -1,0 +1,48 @@
+:: Beach Cave Rush []
+<<effects>>
+
+你冲过裂缝，边走边溅起水来。
+
+<<if $athleticsSuccess>>
+	<span class="green">什么事都没发生。</span><<lstress>><<stress -6>>
+	<br><br>
+
+	<<link [[继续|Beach Cave]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<span class="red">你的脚被裂缝旁的一块岩石绊倒，</span>你滑进水里。
+	<br><br>
+
+	<<if $pursuit gte 6>>
+		<<if $bestialitydisable is "f" and $slugdisable is "f" and random(1, 2) is 2>>
+			<span class="red">一个形体从水中跃出。</span>它没有命中，降落在你身后的洞壁上。是一只巨大的蛞蝓。又有另一个向你游来。
+			<br><br>
+
+			<<link [[继续|Beach Cave Struggle]]>><<set $struggle_start to 1>><</link>>
+			<br>
+		<<else>>
+			<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+
+			一个身影从拐角走来。一个穿着潜水服的<<person>>。<<He>>盯着你，微笑着。另外两个人加入了<<him>>。
+			<br><br>
+			"像你这样可爱的<<lass>>在我们的洞里在做什么呢？"
+			<br>
+			"我觉得需要给<<pshe>>上一堂课。"
+			<br>
+			"别想着能逃到哪去，<<girl>>。"
+			<br><br>
+
+			他们走得更近了。你转过身，与一个<<person4>><<person>>面对面。另外两个人也在<<him>>的侧翼。你被包围了。
+			<br><br>
+
+			<<link [[继续|Beach Cave Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		你感觉你引到了什么存在的注意力。好像有什么在看着你。<<set $pursuit += 1>>
+		<br><br>
+
+		<<link [[继续|Beach Cave]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

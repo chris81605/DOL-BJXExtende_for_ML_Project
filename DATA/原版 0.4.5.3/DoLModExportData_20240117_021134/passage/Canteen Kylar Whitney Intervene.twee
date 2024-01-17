@@ -1,0 +1,39 @@
+:: Canteen Kylar Whitney Intervene []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<if $speech_attitude is "meek">>
+		你走到惠特尼身边，拽着<<his>>的衬衫，"霸凌是不对的。"
+	<<elseif $speech_attitude is "bratty">>
+		惠特尼转身正要揍你一拳，你抓住了<<he>>的手臂。"你对我做的这些破事儿已经够多了，"你说，"我不会让你也欺负我的朋友。"
+	<<else>>
+		"凯拉尔不是怪胎，"你说，"你打断了我们的正常聊天，这不公平。"你把自己夹在两者之间。
+	<</if>>
+	<br><br>
+	<<He>>把你推开。"想做英雄是吧？"惠特尼说，把凯拉尔摔倒在地，转过身面对你。"那就换你来挨揍。"
+	<br><br>
+
+	<<if $cool gte 240>><<enable_rescue>><</if>>
+	<<if $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>><<enable_rescue>><</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red">食堂太吵了，没有老师能听到你说话。</span>如果你更受欢迎，也许会有同学帮助你。'>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Canteen Kylar Whitney Intervene Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Canteen Kylar Whitney Intervene]]>><</link>></span><<nexttext>>
+<</if>>

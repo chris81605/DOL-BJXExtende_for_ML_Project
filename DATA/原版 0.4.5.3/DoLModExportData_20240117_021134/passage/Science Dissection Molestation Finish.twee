@@ -1,0 +1,119 @@
+:: Science Dissection Molestation Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	他们的发泄了兽欲，意识到他们所做的事情的严重性，并逃离了现场，以免被抓住。<<tearful>>你走向教室。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+	你回到教室，把你的货物安全无恙地送到了教室。班上其他同学都忙着解剖青蛙。没有搭档，你只能一个人把事情都做完。
+	<<gscience>><<scienceskill>>
+	<br><br>
+
+	<<link [[继续|Science Lesson]]>><</link>>
+<<elseif $enemyhealth lte 0>>
+
+	<<group>>退走了。"你等着吧，<<bitch>>。"他们离开你，试图掩盖他们的伤口。<<tearful>>你走向教室。
+	<br><br>
+
+	<<endcombat>>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+	你回到教室，把你的货物安全无恙地送到了教室。班上其他同学都忙着解剖青蛙。没有搭档，你只能一个人把事情都做完。
+	<<gscience>><<scienceskill>>
+	<br><br>
+
+	<<link [[继续|Science Lesson]]>><<endevent>><</link>>
+<<elseif $rescue gte 2 and $alarm is 1>><<set $rescued += 1>>
+	一个愤怒的声音从大厅那头传来。"放我的<<girl>>走。"是惠特尼，旁边是<<nnpc_his "Whitney">>的朋友们。骚扰你的人紧张了起来。<<status 1>><<gcool>>
+	<br><br>
+
+	<<group>>互相紧张地看了一眼，权衡他们的胜算。
+	<<if $delinquency lt 400 and $pillory_tenant.special.name isnot "Leighton">>
+		在他们做出决定之前，第二个声音打破了沉默，吓得他们开始逃跑。他们把你扔在地上。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		你抬起头，发现礼顿正在快速靠近，<<nnpc_his "Leighton">>的眼睛盯着惠特尼。
+		<<npc Leighton>><<endevent>>
+		"又是你，我就知道。"
+		<br><br>
+
+		"别碰我。你他妈的知道个P！"惠特尼抗议着被<<nnpc_hes "Whitney">>被拖到校长办公室。<<tearful>>你赶紧回到教室。
+		<br><br>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+		你回到教室，把你的货物安全无恙地送到了教室。班上其他同学都忙着解剖青蛙。没有搭档，你只能一个人把事情都做完。
+		<<gscience>><<scienceskill>>
+		<br><br>
+
+		<<link [[继续|Science Lesson]]>><</link>>
+		<br>
+	<<else>>
+		最后，<<person1>><<person>>将你推向惠特尼。"真不知道你在这个失败者身上看到了什么，"<<he>>嘲讽道。<<He>>悄悄地溜走了，<<his>>的伙伴也跟着溜走了。
+		<br><br>
+
+		惠特尼转了转<<nnpc_his "Whitney">>的眼睛。"虚张声势。"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+
+		<<link [[继续|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><<set $whitneyRescueSpecial to "scienceDissection">><</link>>
+		<br>
+	<</if>>
+<<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
+	<<endevent>><<npc Leighton>><<person1>>礼顿听到你的尖叫声，从拐角那边赶过来。<<group>>立马改变了行为，他们被迫回到<<his>>的办公室。<<tearful>>你回到教室。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+	你回到教室，把你的货物安全无恙地送到了教室。班上其他同学都忙着解剖青蛙。没有搭档，你只能一个人把事情都做完。
+	<<gscience>><<scienceskill>>
+	<br><br>
+
+	<<link [[继续|Science Lesson]]>><</link>>
+<<else>>
+
+	教室就在眼前，<<group>>跑了。在他们消失很久之后，你还能听到他们的笑声。<<tearful>>你振作起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			你绕道去了厕所，在别人看到你之前找了几条毛巾把自己盖起来。<<towelup>>
+		<</if>>
+
+	你回到教室，把你的货物安全无恙地送到了教室。班上其他同学都忙着解剖青蛙。没有搭档，你只能一个人把事情都做完。
+	<<gscience>><<scienceskill>>
+	<br><br>
+
+	<<link [[继续|Science Lesson]]>><</link>>
+<</if>>

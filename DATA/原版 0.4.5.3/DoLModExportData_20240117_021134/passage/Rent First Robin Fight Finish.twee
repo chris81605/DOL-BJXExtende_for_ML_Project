@@ -1,0 +1,62 @@
+:: Rent First Robin Fight Finish []
+<<effects>>
+<<unset $robinRentEvent>>
+<<set _robin to statusCheck("Robin")>>
+<<npc Robin 1>><<person1>>
+
+<<if $phase is "pay">>
+	贝利放开罗宾，罗宾跑过来抱住了你。<<He>>轻轻地抽泣着。
+	<br><br>
+	<<rentpay>>
+
+	贝利离开了，但罗宾依旧依偎在你身上。
+	<<if _robin.trauma gte 40>>
+		"我以，以为……"<<he>>哽咽着将你抱得更紧了。
+	<<else>>
+		"我以为我会失去你，"<<he>>过了许久才说道。
+	<</if>>
+	<br><br>
+
+	你轻轻握住<<his>>的手，随之在<<him>>的额头安慰地轻轻一吻。
+	<<takeHandholdingVirginity "Robin">>
+	<br><br>
+
+	罗宾努力让自己冷静下来，眼泪逐渐止住了。
+	<<if _robin.dom gte 30>>
+		"我得更坚强才行……"<<he>>在喘气时轻声说道，随后摇了摇<<his>>的头。
+	<</if>>
+	"谢谢你为我做的一切，"<<he>>说道。过了一会，<<He>>松开了胳膊，回到了<<his>>的房间。
+	<br><br>
+
+	<<robinRentUnsafeMessage>>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Orphanage]]>><</link>>
+<<elseif $phase is "still">>
+	打手们将你拖走时，你能听到罗宾在身后为你哭泣。当你离开孤儿院时，<<His>>的哭声越来越小直到最后消失了。你被拖到了贝利的面前。
+	<br><br>
+
+	<<npc Bailey 2>><<person2>>
+	"还钱有这么难吗？"贝利冷笑着，<<he>>套住了你的脑袋，绑住了你的手臂，"你救了你的小朋友。仅限这次。"
+	<br><br>
+
+	<<robinRentUnsafeMessage>>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Rent Intro]]>><</link>>
+<<else>>
+	<<robinPunishment "mansion">>
+	贝利拉着罗宾离开。你在打手们的控制下努力挣扎，但还是无法挣脱。
+	<br><br>
+
+	最终贝利回来了，并且开始嘲笑你。"既然我是个慷慨的人，所以这次将只是一个警告。把钱给我，否则<<he>>会付出代价的。"
+	<br><br>
+
+	<<robinRentUnsafeMessage>>
+
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Orphanage]]>><</link>>
+<</if>>

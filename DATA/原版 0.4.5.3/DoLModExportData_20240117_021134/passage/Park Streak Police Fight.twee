@@ -1,0 +1,24 @@
+:: Park Streak Police Fight []
+<<if $fightstart is 1>>
+	你停下来并做好准备，准备与警察搏斗。
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<crimeUp 300 "resisting">><<crimeUp 300 "assault">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>你尖叫出声，但没有人出面帮你对抗警察。</span>">>
+<<man>>
+<<stateman>>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Park Streak Police Fight Finish]]>><</link>></span>
+<<else>>
+	<span id="next"><<link [[继续|Park Streak Police Fight]]>><</link>></span>
+<</if>>

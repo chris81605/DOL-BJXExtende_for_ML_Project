@@ -1,0 +1,312 @@
+:: Cream Ex Widgets [widget]
+<<widget "cream_init">>
+	<<if $worn.over_upper.type.includes("naked") and $worn.upper.exposed gte 1>>
+		<<overupperwear 2>>
+	<</if>>
+	<<if $worn.over_lower.type.includes("naked") and $worn.lower.exposed gte 1>>
+		<<overlowerwear 2>>
+	<</if>>
+	<<set $walk_timer to 100>>
+<</widget>>
+
+<<widget "cream_end">>
+	<<if $worn.over_upper.name is "cream">>
+		<<overupperruined>>
+	<</if>>
+	<<if $worn.over_lower.name is "cream">>
+		<<overlowerruined>>
+	<</if>>
+	<<unset $walk_timer>>
+	<<unset $cream_warning>>
+<</widget>>
+
+<<widget "cream_description">>
+	<<if ($worn.over_upper.integrity gte 80 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 80 and $worn.over_lower.name is "cream")>>
+		<span class="lblue">你的身上覆盖着奶油。</span>
+	<<elseif ($worn.over_upper.integrity gte 60 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 60 and $worn.over_lower.name is "cream")>>
+		<span class="blue">奶油出现了裂缝，露出下面的皮肤。</span>
+	<<elseif ($worn.over_upper.integrity gte 40 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 40 and $worn.over_lower.name is "cream")>>
+		<span class="purple">越来越多的奶油从你的身体滴下，暴露出更多的皮肤。</span>
+	<<elseif ($worn.over_upper.integrity gte 10 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 10 and $worn.over_lower.name is "cream")>>
+		<span class="pink">奶油已经所剩无几了。你开始担心别人能看出你下面有多开放。</span>
+	<<else>>
+		<span class="red">现在奶油根本盖不住你的隐私部位了！</span>
+	<</if>>
+	<<if $walk_timer gte 80>>
+		<span class="pink">去公园还有很长的路要走。</span>
+	<<elseif $walk_timer gte 60>>
+		<span class="purple">你有了一些进展，但是去公园的路仍然很漫长。</span>
+	<<elseif $walk_timer gte 40>>
+		<span class="blue">去公园的路程只剩下一半了。</span>
+	<<elseif $walk_timer gte 20>>
+		<span class="lblue">你离公园很近了，但是你还有一小段路要走。</span>
+	<<elseif $walk_timer gte 1>>
+		<span class="teal">你马上就到公园了。</span>
+	<<else>>
+		<span class="green">你成功到达了公园！</span>
+	<</if>>
+<</widget>>
+
+<<widget "cream_walk">>
+	<<link [[快步走|Cream Ex Naked Walk Quick]]>><<endevent>><<set $walk_timer -= 20>><<cream_damage 15>><</link>><<gharass>>
+	<br>
+	<<link [[小心行走|Cream Ex Naked Walk Careful]]>><<endevent>><<set $walk_timer -= 12>><<cream_damage 15>><</link>>
+	<br>
+<</widget>>
+
+<<widget "cream_damage">>
+	<<if _args[0]>>
+		<<if $worn.over_upper.name is "cream">>
+			<<set $worn.over_upper.integrity -= _args[0]>>
+		<</if>>
+		<<if $worn.over_lower.name is "cream">>
+			<<set $worn.over_lower.integrity -= _args[0]>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "cream_events">>
+	<<rng 8>>
+	<<if $rng is 8>>
+		<<generatey1>><<person1>>你看见了一个<<person>>，那是你学校的同学。<<He>>咧嘴一笑，脸上浮现出了"我认得你"的表情。<<He>>之后飞快跑进了附近一家商店里。
+		<br><br>
+
+		其他围观者吸引了你的注意力，但好景不长，一串水柱从你的肩膀上方掠过。你转过身来，看到那个<<person>>正挥舞着水枪。<<He>>瞄准着你，脸上仍然带着笑意。
+		<br><br>
+
+		<<link [[跳|Cream Ex Naked Walk Jump]]>><</link>><<athleticsdifficulty 1 1000>>
+		<br>
+		<<link [[躲闪|Cream Ex Naked Walk Dodge]]>><</link>><<dancedifficulty 1 1000>>
+		<br>
+	<<elseif $rng is 7>>
+		<<beastNEWinit 1 dog>>
+		你听到一阵急促的脚步声。是一只<<beasttype>>跑过了人群，锁定了覆盖在你身上的奶油。<<bHis>>主人跑到它身后，努力地把<<bhim>>拉回去。
+		<br><br>
+		<<if $monster is 1 or $bestialitydisable is "f">>
+		<!-- Modified for Beast People -->
+			<<link [[安抚|Cream Ex Naked Walk Soothe]]>><</link>><<tendingdifficulty 1 1000>>
+			<br>
+			<<link [[跑|Cream Ex Naked Walk Run]]>><</link>>
+			<br>
+		<<else>>
+			你被迫跑起来以避免被舔到。主人设法将狗控制住，但你的动作使奶油松动了。
+			<<cream_damage 15>>
+			<br><br>
+			<<endevent>>
+			<<cream_walk>>
+		<</if>>
+	<<elseif $rng is 6>>
+		<<generate1>><<generate2>><<generate3>>
+		你路过一家受欢迎的商店。一群人沿着街道排队，每个人都转过身来观察你。其中一个<<person1>><<person>>和<<his>>朋友似乎对你格外着迷。你的脸羞得更红了。
+		<<ggarousal>><<arousal 1000>>
+		<br><br>
+		<<endevent>>
+		<<cream_walk>>
+	<<elseif $rng is 5>>
+		<<generate1>><<person1>>
+		当你经过时，一个<<person>>从人群中伸出手来。
+		<br><br>
+
+		<<link [[把那只手拍开|Cream Ex Naked Walk Smack]]>><<trauma -6>><<def 1>><<famescrap 10>><</link>><<ltrauma>>
+		<br>
+		<<link [[忍耐|Cream Ex Naked Walk Endure]]>><<arousal 2000>><<trauma 6>><<stress 6>><<sub 1>><</link>><<gtrauma>><<gstress>><<gggarousal>>
+		<br>
+	<<elseif $rng is 4>>
+		<<generatey1>><<generatey2>><<generatey3>>
+		一群学生从附近的一家服装店走出来。他们看到你时停了下来，满脸困惑。
+		<<garousal>><<arousal 500>><<gstress>><<stress 6>>
+		<br><br>
+		<<endevent>>
+
+		<<cream_walk>>
+	<<elseif $rng is 3>>
+		<<generate1>><<person1>>
+		一个<<person>>手持相机冲到你面前。
+		<br><br>
+
+		<<if $worn.under_lower.type.includes("naked")>>
+			<<link [[搔首弄姿|Cream Ex Naked Walk Pose]]>><<arousal 500>><</link>><<exhibitionist5>>
+		<<else>>
+			<<link [[简单做个姿势|Cream Ex Naked Walk Pose]]>><<arousal 500>><</link>><<exhibitionist3>>
+		<</if>>
+		<br>
+		<<if !$worn.face.type.includes("mask") and ($leftarm isnot "bound" or $rightarm isnot "bound")>>
+			<<link [[遮住你的脸|Cream Ex Naked Walk Cover]]>><<arousal 500>><</link>><<garousal>>
+			<br>
+		<</if>>
+		<<link [[在人群中甩掉他们|Cream Ex Naked Walk Lose]]>><</link>>
+		<br>
+	<<elseif $rng is 2>>
+		<<generate1>><<person1>>
+		有个<<person>>被你的出现吓得跌了一跤。
+		<br><br>
+
+		<<link [[扶他们起来|Cream Ex Naked Walk Help]]>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+		<<cream_walk>>
+	<<else>>
+		<<generate1>><<generate2>><<generate3>><<person1>>
+		一个<<person>>被欲望冲昏了头脑，从人群中冲了出来，<<His>>手向你抓去，却扑了个空，因为一个<<person2>><<person>>和一个<<person3>><<person>>一起把<<person1>><<he>>抓了回去。
+		<br><br>
+		好险。
+		<<garousal>><<arousal 500>><<stress 6>><<gstress>>
+		<br><br>
+		<<endevent>>
+		<<cream_walk>>
+	<</if>>
+<</widget>>
+
+<<widget "cream_audience">>
+	<<rng 5>>
+	你听到人群中的只言片语。
+	<<if ($worn.over_upper.integrity gte 60 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 60 and $worn.over_lower.name is "cream")>>
+		<<switch $rng>>
+			<<case 5>>
+				"我真想把<<phim>>舔个遍。"
+			<<case 4>>
+				"<<pShe>>是在给什么商店做宣传吗？"
+			<<case 3>>
+				"真可爱。"
+			<<case 2>>
+				"我可没想到会碰见这么一出。"
+			<<default>>
+				"真希望我手上有把勺子。"
+		<</switch>>
+	<<elseif ($worn.over_upper.integrity gte 10 and $worn.over_upper.name is "cream") or ($worn.over_lower.integrity gte 10 and $worn.over_lower.name is "cream")>>
+		<<switch $rng>>
+			<<case 5>>
+				"快过来，过了这个村没这个店了！"
+			<<case 4>>
+				"<<pShe>>看起来真美味。"
+			<<case 3>>
+				"真希望能用水果沾点<<pshe>>身上的奶油吃。"
+			<<case 2>>
+				"<<pShe>>下面肯定啥都没穿。"
+			<<default>>
+				"<<pShe>>是在宣传什么吗？"
+		<</switch>>
+	<<else>>
+		<<switch $rng>>
+			<<case 5>>
+				"真是个淫乱的<<girl>>啊！"
+			<<case 4>>
+				"<<pShe>>是不是什么都没穿啊？"
+			<<case 3>>
+				"我怎么就把相机落在家里了呢……"
+			<<case 2>>
+				"快来个人报警吧。"
+			<<default>>
+				"这些变态胆子越来越大了。"
+		<</switch>>
+	<</if>>
+	<<if $worn.over_lower.integrity lte 0 and $worn.over_lower.name is "cream" or $worn.over_upper.integrity lte 0 and $worn.over_upper.name is "cream">>
+		<<if $worn.over_lower.name is "cream">>
+			<<overlowerruined>>
+		<</if>>
+		<<if $worn.over_upper.name is "cream">>
+			<<overupperruined>>
+		<</if>>
+	<<elseif $worn.over_lower.integrity lte 10 and $worn.over_lower.name is "cream" or $worn.over_upper.integrity lte 10 and $worn.over_upper.name is "cream">>
+		<<if $cream_warning is undefined>>
+			<<set $cream_warning to 1>>
+			你低头看向盖在你身上的奶油，或者说，还剩下的那部分奶油。<span class="pink">现在你身上根本就没剩下多少奶油了。</span>如果你动作不快点，你就相当于直接在大街正中央赤身裸体了！
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "cream_arousal">>
+	你浑身上下仅有一层薄薄的奶油掩盖。<br>如此暴露地漫着步，立马就吸引到了一大片来自路人的目光。<<orgasm>>
+
+	人群向你靠近，而你腿一软，跪了下来。
+	<br>
+	"<<pshe>>刚刚是不是高潮了？"
+	<br>
+	"真不敢相信<<pshe>>居然这么淫乱。"
+	<br>
+	"我觉得谁来叫个救护车吧。"
+	<br><br>
+
+	你挣扎着站起来，在人群完全围住你之前继续前进。
+	<br><br>
+	<<if $walk_timer lte 0>>
+		<<cream_finish>>
+	<<else>>
+		<<cream_walk>>
+	<</if>>
+<</widget>>
+
+<<widget "cream_finish">>
+	街道一侧的建筑物给公园的植被让出了位置。因为马上就要到达你的目的地，你的步伐加快了。当最后一滴奶油滴落时，你冲出了街道。
+	<br><br>
+
+	有几个人尾随着你，但很快你就在如迷宫的茂林中把他们甩掉了。你蹲在一棵树下，大喘粗气。
+	<br><br>
+
+	<<cream_end>>
+
+	<<link [[继续|Park]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "cream_fail">>
+	<<if $exposed gte 2>>
+		<<fameexhibitionism 20>>
+	<<else>>
+		<<fameexhibitionism 40>>
+	<</if>>
+	<<if $leftarm isnot "bound" or $rightarm isnot "bound">>
+		你试着把剩余的奶油收拢在一起来让他们继续发挥作用，但是奶油已经完全不够遮挡你的身体了。
+	<</if>>
+	<span class="red">你现在正在大街正中央公然裸体露出。</span><<covered>>
+	<br><br>
+
+	人群围住了你，他们站得太密了，你根本挤不过去。越来越多的人来到这里，想知道到底出了什么事。
+	<br><br>
+
+	"这个<<girl>>的身子怎么露得这么多？难道<<pshe>>被谁袭击了？"
+	<br>
+	"我觉得<<pshes>>就只是个变态罢了。"
+	<br>
+	"我可啥都看见了。"
+	<br>
+	"我打赌<<pshe>>肯定很喜欢被视奸。"
+	<br>
+	"我跟你讲啊，现在的变态真是越来越大胆了。"
+	<br><br>
+
+	<<beastNEWinit 3 dog>>
+	<<if $exposed gte 2>>
+		<<if random(1, 2) is 2 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+			一只<<beasttype>>从人群中钻出，向你跑来。<<bHe>>扑了过来，把你撞倒在地，舔着你身上仅剩的一点奶油。更多的<<beasttype>>被气味所吸引，接踵而至。
+			<br><br>
+			这些<<beasttype>>们舔遍你的身体，你在它们的舔舐之下蠕动着。你可以试着站起来，但这样做会让你处于配种的姿势。众人看着，不知道该对这奇怪的景象作何反应。
+			<br><br>
+
+			<<link [[无论如何也要试着站起来|Cream Ex Dog Stand]]>><</link>>
+			<br>
+			<<link [[忍耐|Cream Ex Dog Endure]]>><<arousal 2000>><<stress 6>><<trauma 6>><</link>><<gggarousal>><<gtrauma>><<gstress>>
+			<br>
+
+		<<else>>
+			<<endevent>>
+			<<generate1>><<generate2>><<generate3>><<generate4>>
+			你蹲在地上，周围的人都色眯眯地盯着你，直到一个<<person1>><<person>>走过来。<<His>>脸上露出了残酷的笑容。其他人也学着<<his>>样子动了起来。
+			<br><br>
+
+			<<link [[继续|Cream Ex Naked Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<endevent>>
+		<<generate1>><<person1>>
+		你蹲在地上，周围的人都色眯眯地盯着你，直到一个<<person>>走过来，手里还拿着条毛巾。
+		<br><br>
+		你仍然很脆弱，但至少有了点遮羞布。你走到人群的边缘，起初你不确定他们是否会让你离开，但后来他们给你让出了一条通路。人群一路跟随着你，当到达公园时，你的步伐加快了，有些人尾随着你进去，但很快你就在如迷宫的茂林中把他们甩掉了。
+		<br><br>
+		<<cream_end>>
+		<<towelup>>
+		<<link [[继续|Park]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>

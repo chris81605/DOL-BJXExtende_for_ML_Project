@@ -1,0 +1,33 @@
+:: Catacombs Ridge []
+<<effects>><<set $bus to "ridge">>
+
+你在森林下面的地下墓穴里。有一堵被撕裂的墙，好像是什么猛兽干的，露出了一个黑暗的裂口。落差很陡，但还不是垂直。如果你小心点的话，你也能爬下来。
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs normal>>
+<<else>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Normal Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "south">><<link [[爬下去 (0:01)|Catacombs Mud Climb]]>><<pass 1>><</link>>
+	<br>
+	<<caveicon "east">><<link [[向东走  (0:10)|Catacombs Prison]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

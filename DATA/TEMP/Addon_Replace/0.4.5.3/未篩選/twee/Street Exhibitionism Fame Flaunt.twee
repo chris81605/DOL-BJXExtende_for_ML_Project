@@ -1,0 +1,248 @@
+:: Street Exhibitionism Fame Flaunt []
+<<set _stun_chance to 25>>
+<<set _like_chance to 50>>
+<<set _hate_chance to 25>>
+
+<<if $flaunt_type is "words">>
+	<<if $phase is 1>>
+		你直视那个<<person1>><<person>>的眼睛，然后回答说："谢谢！<<sayexhibproud>>"
+	<<elseif $phase is 2>>
+		你朝<<person1>><<person>>抛了个媚眼。
+	<<elseif $phase is 3>>
+		你露出微笑，然后说道："是的，就是我！<<sayexhibproud>>"
+	<<elseif $phase is 4>>
+		你微笑着，<<famesalute>>向着人群的方向走去。
+	<<elseif $phase is 5>>
+		你对<<person>>微笑，<<famesalute>>。
+	<<else>>
+		你<<famesalute>>。
+	<</if>>
+	<<set _stun_chance to 5>>
+	<<set _like_chance to 80>>
+	<<set _hate_chance to 15>>
+<<else>>
+	<<silently>>
+	<<set _revealed_thing to "错误">>
+	<<if $flaunt_type is "skirt">>
+		<<if $flaunt_part is "genitals">>
+			<<genitals>>
+			<<set _revealed_thing to _text_output>>
+		<<elseif $flaunt_part is "chastity">>
+			<<set _revealed_thing to $worn.genitals.cn_name_cap>>
+		<<elseif $flaunt_part is "lowerunderwear">>
+			<<set _revealed_thing to $worn.under_lower.cn_name_cap>>
+		<<else>>
+			<<script>>
+				throw "Error flaunt_part $flaunt_type $flaunt_part";
+			<</script>>
+		<</if>>
+	<<elseif $flaunt_type is "moon">>
+		<<if $flaunt_part is "bottom">>
+			<<bottom>>
+			<<set _revealed_thing to _text_output>>
+		<<elseif $flaunt_part is "chastity">>
+			<<set _revealed_thing to $worn.genitals.cn_name_cap>>
+		<<elseif $flaunt_part is "lowerunderwear">>
+			<<set _revealed_thing to $worn.under_lower.cn_name_cap>>
+		<<else>>
+			<<script>>
+				throw "Error flaunt_part $flaunt_type $flaunt_part";
+			<</script>>
+		<</if>>
+	<<elseif $flaunt_type is "top">>
+		<<if $flaunt_part is "breasts">>
+			<<breasts>>
+			<<set _revealed_thing to _text_output>>
+		<<elseif $flaunt_part is "upperunderwear">>
+			<<set _revealed_thing to $worn.under_upper.cn_name_cap>>
+		<<else>>
+			<<script>>
+				throw "Error flaunt_part $flaunt_type $flaunt_part";
+			<</script>>
+		<</if>>
+	<<else>>
+		<<script>>
+			throw "Error flaunt_type $flaunt_type $flaunt_part";
+		<</script>>
+	<</if>>
+
+	<<set _flaunt to "ERROR">>
+	<<set _exposing to "露出">>
+
+	<<if $flaunt_type is "skirt">>
+		<<set _flaunt to "掀起你的裙子">>
+
+		<<if $flaunt_part is "genitals">>
+			<<fameexhibitionism 50>><<exhibitionism5>><<arousal 300>>
+		<<elseif $flaunt_part is "chastity">>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 150>>
+		<<elseif $flaunt_part is "lowerunderwear">>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 150>>
+		<</if>>
+	<<elseif $flaunt_type is "moon">>
+		<<set _flaunt to "弯腰拉下你的">>
+		<<if $worn.over_lower.name isnot "naked">>
+			<<set _flaunt += "$worn.over_lower.cn_name_cap">>
+		<</if>>
+		<<if $worn.lower.name isnot "naked">>
+			<<if $worn.over_lower.name isnot "naked">>
+				<<set _flaunt += "和">>
+			<</if>>
+			<<set _flaunt += "$worn.lower.cn_name_cap">>
+		<</if>>
+		<<if $flaunt_part is "bottom">>
+			<<fameexhibitionism 30>><<exhibitionism5>><<arousal 300>>
+		<<elseif $flaunt_part is "chastity">>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 50>>
+		<<elseif $flaunt_part is "lowerunderwear">>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 50>>
+		<</if>>
+	<<elseif $flaunt_type is "top">>
+		<<set _flaunt to "拉开你的">>
+		<<if $worn.over_upper.name isnot "naked">>
+			<<set _flaunt += "$worn.over_upper.cn_name_cap">>
+		<</if>>
+		<<if $worn.upper.name isnot "naked">>
+			<<if $worn.over_upper.name isnot "naked">>
+				<<set _flaunt += "和">>
+			<</if>>
+			<<set _flaunt += "$worn.upper.cn_name_cap">>
+		<</if>>
+		<<set _exposing to "显露">>
+
+		<<if $flaunt_part is "breasts">>
+			<<if $player.gender_appearance is "m" and $player.breastsize lte 1>>
+			<<fameexhibitionism 15>><<exhibitionism2>><<arousal 100>>
+			<<else>>
+			<<fameexhibitionism 40>><<exhibitionism4>><<arousal 300>>
+			<</if>>
+		<<elseif $flaunt_part is "upperunderwear">>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 100>>
+		<<else>>
+			<<fameexhibitionism 5>> <<exhibitionism2>><<arousal 100>>
+		<</if>>
+	<<else>>
+		<<script>>
+			throw "Error flaunt flaunt_part $flaunt_type $flaunt_part";
+		<</script>>
+	<</if>>
+	<</silently>>
+
+	<<if $phase is 1>>
+		你_flaunt，让他们看一眼你的_revealed_thing。
+	<<elseif $phase is 2>>
+		你_flaunt，让<<person1>><<person>>和街上其他所有人瞥见你的_revealed_thing。
+	<<elseif $phase is 3>>
+		你微笑着回答道："是的，就是我……看！"然后_flaunt，让<<him>>好好看看你露出的_revealed_thing。
+	<<elseif $phase is 4>>
+		你微笑着，向人群的方向做了一个简短的_flaunt，_exposing你的_revealed_thing。
+	<<elseif $phase is 5>>
+		你对着<<person>>微笑，<<famesalute>>地，并_flaunt地向<<person1>><<person>>和街上的其他人炫耀你的_revealed_thing。
+	<<else>>
+		你简短地_flaunt，_exposing你的_revealed_thing。
+	<</if>>
+	<<garousal>>
+<</if>>
+<br><br>
+
+<<rng>>
+<<if $rng gte _like_chance + _hate_chance>>
+	<<if $phase is 1>>
+		<<person1>><<person>>和<<person2>><<person>>张大嘴巴盯着你看。
+		几秒钟后，<<person1>><<person>>回过神来，脸颊通红，<<he>>戳了戳<<his>>的朋友，催促道："快点，我们已经迟到了！"那两人匆匆离开了。
+	<<elseif $phase is 2>>
+		<<person1>><<person>>似乎太震惊了，无法作出反应。你洋洋得意地走开了。
+	<<elseif $phase is 3>>
+		当你走开时，<<person1>><<person>>目不转睛地盯着你的<<bottom>>，说不出话来。
+	<<elseif $phase is 4>>
+		窃窃私语戛然而止，你走开了，享受着突如其来的惊愕沉默。
+	<<elseif $phase is 5>>
+		那个<<person>>目瞪口呆。你骄傲地走开了。
+	<<else>>
+		你继续前行，脸上洋溢着自豪的笑容。
+	<</if>>
+	<<lstress>><<stress -6>>
+	<<set _punish_chance to 10>>
+<<elseif $rng gte _hate_chance>>
+	<<if $phase is 1>>
+		<<person2>><<person>>张大嘴巴盯着你看。
+		<<if $flaunt_type is "words">>
+			<<person1>><<person>>咧嘴一笑，指着<<his>>的朋友说："看样子<<he>>也想看你光着身子！"
+		<<else>>
+			<<person1>><<person>>朝<<his>>朋友咧嘴一笑："我跟你说过吧！<<pShes>>太漂亮了！"
+		<</if>>
+		<<He>>戳了戳<<his>>的朋友，说道："快点，我们已经迟到了！" 那两人一起匆匆离开了。
+	<<elseif $phase is 2>>
+		<<if $flaunt_type is "words">>
+			<<person1>><<person>>大喊："我就知道！你看起来太惊艳了！"你继续前进，脸上洋溢着自豪的笑容。
+		<<else>>
+			<<person1>><<person>>大喊："哈！谢谢你的提醒，<<girl>>！你看起来太惊艳了！" 你脸上洋溢着自豪的笑容，洋洋得意地走开了。
+		<</if>>
+	<<elseif $phase is 3>>
+		<<person1>><<person>>咧嘴笑着，毫不避讳地盯着你的身体看。当你昂首阔步地走开时，你感觉到有一股饥渴的眼神在盯着你的臀部。
+	<<elseif $phase is 4>>
+		人群中突然爆发出兴奋的议论声。那群人不停地瞥向你。当你走开时，你能听见这些家伙的讨论，"你看见了吗？""什么骚货！""太性感了！"
+	<<elseif $phase is 5>>
+		<<person>>朝<<his>>朋友咧嘴一笑，惊呼道："你看见了吗？<<pShes>>太不要脸了！"<<His>>的朋友回复说："要是你有这样的身材，你也会这样的吧？"你自豪地继续走着。
+	<<else>>
+		你继续前行，脸上洋溢着自豪的笑容。
+	<</if>>
+	<<lstress>><<stress -6>>
+	<<ltrauma>><<trauma -6>>
+	<<set _punish_chance to 0>>
+<<else>>
+	<<if $phase is 1>>
+		<<person2>><<person>>狠狠地瞪着你，然后大声吼道："你真不要脸！骚货！骚货！"
+		<<His>>的朋友拉着<<him>>走开，"快点，我们已经迟到了！"
+		在离开前，<<He>>继续狠狠地瞪着你，又吼了一声"骚货"，然后才离开。
+	<<elseif $phase is 2>>
+		<<person1>><<person>>大喊："肮脏的骚货！你一点羞耻心都没有吗？"你匆匆忙忙地离开了。
+	<<elseif $phase is 3>>
+		<<person1>><<person>>咆哮着对你说道，"你应该为自己感到羞耻！"当你匆忙地离开时，你感觉到<<him>>正瞪着你。
+	<<elseif $phase is 4>>
+		人群中突然爆发出愤怒的谩骂声。他们都朝你这里看来，高声咒骂。"贱货！""你太无耻了！""变态！"你赶紧离开了。
+	<<elseif $phase is 5>>
+		<<person>>朝<<his>>朋友咧嘴一笑，惊呼道："<<pShes>>太不要脸了！"<<His>>朋友瞪着你，大喊："你这个变态！"你赶紧快步走开了。
+	<<else>>
+		有人开始大喊："变态啊！"你赶紧快步离开。
+	<</if>>
+	<<gstress>><<stress 12>>
+	<<gtrauma>><<trauma 12>>
+	<<set _punish_chance to 40>>
+<</if>>
+
+<<rng>>
+<<if $rng lte _punish_chance>>
+	<br><br>
+	<<if $phase is 1>>
+		<<set _secNPC to clone($NPCList[1])>>
+		<<endevent>><<generate1>><<set $NPCList[0] to clone(_secNPC)>>
+		过了一会儿，你突然注意到<<person1>><<person>>就站在你身边。
+		利用你的困惑，<<he>>抓住了你，把你推进了附近的一条小巷。
+		<<He>>啐了一口："无耻的婊子！我要教训你！"
+	<<elseif $phase is 2>>
+		正当你注意到<<person1>><<person>>在跟踪你时，<<he>>抓住你，把你拖进了附近的小巷。
+		<<He>>怒吼："肮脏的婊子！我要给你个教训！"
+	<<elseif $phase is 3>>
+		太晚了，你注意到<<person1>><<person>>正在跟踪你。
+		在你来得及反应之前，<<he>>抓住了你，将你拖进了附近的一条小巷。
+		<<He>>抓住你，贴近你的耳朵，低声嘶哑地说："我要给你应得的惩罚！"
+	<<elseif $phase is 4>>
+		再过两个街区，你突然感觉到有人在偷偷接近你。
+		你转过身，正对上一张<<person1>><<person>>愤怒的脸。你认出<<him>>是那群人中的一员。
+		<br>
+		你还没来得及反应，<<he>>就把你推进了附近的一条小巷，并扑到你身上，叫喊道："我要给你点教训！"
+	<<elseif $phase is 5>>
+		你走了一小段路后，突然被<<person1>><<person>>拉进了一条小巷。
+		<<He>>把你按在墙上，粗鲁地说："我要让你见识一下我们对变态的处理方式！"
+	<<else>>
+		突然，<<person1>><<person>>把你推进了一条小巷。<<He>>把你按在墙上，粗鲁地说："我要让你见识一下我们对变态的处理方式！"
+	<</if>>
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<link [[继续|Street Exhibitionism Fame Flaunt Punish]]>><</link>>
+<<else>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

@@ -1,0 +1,35 @@
+:: Eden Shoot Rub []
+<<effects>>
+<<set $stat_shoot += random(5, 15)>>
+
+你的<<bottom>>蹭着伊甸。<<He>>的话开始变得结结巴巴，但还是尽量保持着镇静。你回头看着<<him>>，装出一副无辜的表情。
+
+<<if $NPCList[0].penis isnot "none">>
+	你感觉<<his>>的<<print $NPCList[0].penisdesc>>在布料下变硬了。
+<<else>>
+
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].lust gte 20>>
+	<<He>>把你手中的枪扔到草地上，然后把你扑倒在地。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<ind>><<link [[顺其自然|Eden Shoot Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><</link>><<promiscuous2>><<glove>>
+		<br>
+	<</if>>
+	<<refuseicon>><<link [[拒绝|Eden Shoot Sex Refuse]]>><<npcincr Eden love -3>><</link>><<lllove>>
+	<br>
+
+<<else>>
+	<<He>>没有做任何事情来阻止你，只是继续上课，就好像什么都没发生一样。但<<Hes>>开始变得有些心不在焉，尽管<<he>>假装并非如此。
+	<br><br>
+
+	<<if Time.hour isnot 0>>
+		<<edenicon "target">><<link [[继续练习 (0:30)|Eden Shoot]]>><<pass 30>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[进去|Eden Cabin]]>><<endevent>><</link>>
+
+<</if>>

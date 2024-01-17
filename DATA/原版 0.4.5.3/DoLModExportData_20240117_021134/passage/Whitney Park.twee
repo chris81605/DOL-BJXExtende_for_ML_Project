@@ -1,0 +1,67 @@
+:: Whitney Park []
+<<set $outside to 0>><<set $location to "park">><<effects>>
+<<rng>>
+<<npc Whitney>><<person1>>
+
+你靠近惠特尼，站到了树下躲避着<<print $weather.replace("rain","雨").replace("snow","雪")>>。
+<<if $whitneyReunionScene isnot undefined>>
+	<<unset $whitneyReunionScene>>
+	<<He>>一开始并没有注意到你。但当<<he>>注意到你的那刻，<<his>>的眼睛睁得大大的，香烟差点掉了下来。
+	<br><br>
+
+	<<He>>抓住你，把你推到树上，<<his>>眼中的震惊转为愤怒。"你在这儿啊，贱货，"惠特尼一脸愠怒地说，"怎么，你以为我最喜欢的小婊子不见了，我会不知道吗？" 你想要回应，但<<he>>突然把<<his>>的嘴唇贴了上来吻住你。<<takeKissVirginity "Whitney" "loveInterest">>
+	<br><br>
+
+	<<He>>把你拉了回来，手臂缠绕在你的腰上，同时扶住了你的后脑勺。<<He>>紧紧地靠向你，你的背不由地向后弯曲。
+	<br><br>
+
+	惠特尼怒视着你，<<his>>放在你背后的手现在是唯一支撑你的东西。你发誓，你真的在<<his>>眼中看见了些微泪光。但还未看清，<<he>>突然松开了手，让你摔到了地上。
+	<br><br>
+
+	惠特尼的呼吸变得更加沉重。半晌，<<He>>开口说道："只有……只有我可以绑架你，明白了吗？"<<He>>大步走出公园，没有再看你一眼。<<npcincr Whitney dom 3>><<stress 6>><<gstress>><<ggdom>>
+	<br><br>
+
+	<<endevent>>
+	<<whitneyexit>>
+<<elseif C.npc.Whitney.love gte 20 and $whitneyromance isnot 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state)>>
+	<<set $whitneyromance to 1>>
+	<<He>>突然抓住你，把你向后压向喷泉，<<print $weather.replace("rain","雨").replace("snow","雪")>>落在你的脸上。<<He>>看起来比平时更生气。
+	<br><br>
+	"愚蠢的荡妇，"<<he>>说着，压住你的力道让你几乎掉进喷泉里，"这是你自找的，别试图否认。"<<He>>把你拉起来，用令人惊讶的温柔吻住你。<<takeKissVirginity "Whitney" "loveInterest">>
+	<br><br>
+	"你现在是我的<<if $player.gender_appearance is "m">>男<<else>>女<</if>>朋友了。你最好心存感激。"<<He>>又吻了你一次，这次<<He>>咬了你的嘴唇。<<He>>抽身离去，头也不回地离开了公园。
+	<<npcincr Whitney lust 5>><<glust>>
+	<br>
+	<<takeKissVirginity "Whitney" "loveInterest">>
+	<br><br>
+
+	<<tearful>>你稳住了自己。
+	<<gstress>><<garousal>><<stress 6>><<arousal 600 "mouth">>
+	<br><br>
+
+	<<if $loveInterest.primary is "None">>
+		<<set $loveInterest.primary to "Whitney">>
+		<span class = "gold">惠特尼现在是你的爱人了！看来在这件事上你别无选择。</span>
+	<<else>>
+		<span class = "gold">你现在可以将惠特尼称作是你的爱人了！看来在这件事上你别无选择。
+		<br>
+		你可以在"态度"菜单中改变你的爱慕对象。</span>
+	<</if>>
+	<<endevent>>
+	<br><br>
+	<<whitneyexit>>
+<<elseif $whitney_smoke is undefined and $whitneyromance gte 1 and C.npc.Whitney.love gte 20 and !playerIsPregnant()>>
+	"我的<<girlfriend>>过得怎么样，嗯？"惠特尼用一只胳膊拦住你的肩膀，把你拉<<print $worn.handheld.type.includes("rainproof") ? "近" : "到<<his>>的伞下">>。<<He>>吸了口手中的烟，然后递向你，"想来点吗？"
+	<br><br>
+	<<link [[接受烟|Whitney Park Cigarette Smoke]]>><<set $phase to 0>><</link>><br>
+	<<link [[拒绝|Whitney Park Cigarette Smoke]]>><<set $phase to 1>><</link>>
+<<elseif $daily.whitney.text gte 3>>
+	<br><br>
+	"够了，我警告过你！"<<He>>合上<<his>>的伞，抓住你。
+	<br><br>
+	<<link [[继续|Whitney Park Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+<<else>>
+	<br><br>
+	<<whitneyoptions>>
+<</if>>

@@ -1,0 +1,47 @@
+:: Drain Water Lizard Finish []
+<<effects>>
+<<if $timer gte 30>>
+	<<set $bus to "residentialdrain">>
+<<elseif $timer gte 20>>
+	<<set $bus to "commercialdrain">>
+<<elseif $timer gte 10>>
+	<<set $bus to "industrialdrain">>
+<<else>>
+	<<set $bus to "drainexit">>
+<</if>>
+<<if $timer lte 0>>
+	水把你带到排水管的尽头。你试图抓住隧道的一边，但无济于事。你被带到户外，然后坠入了下面的大海。<<tearful>>你挣扎着浮出水面。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<seacliffseventend>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	满足后，<<beasttype>>对你失去了兴趣。
+	<br><br>
+	<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Drain Water]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<bHe>>呜咽着逃进了黑暗中。
+	<br><br>
+	<<tearful>>你振作起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Drain Water]]>><<set $eventskip to 1>><</link>>
+<</if>>

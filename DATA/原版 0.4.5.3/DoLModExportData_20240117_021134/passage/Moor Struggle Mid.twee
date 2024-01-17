@@ -1,0 +1,43 @@
+:: Moor Struggle Mid []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "lurker">>/*Creature species*/
+	<<struggle_creatures 1 2>>/*How many creatures will be involved, and their health.*/
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $phase is 1>>
+		<<set $struggle.mouth.creature to "lurker">><<set $mouthuse to "struggle">><<set $mouthstate to "struggle">><<set $struggle.enemy[0].location to "mouth">>
+	<</if>>
+	<<set $timer to 12>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<if $timer is 12>>
+	<<struggle_add 1 2>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">第二个生物从岩石上跳下来！</span>
+	<br><br>
+<<elseif $timer is 11>>
+	<<struggle_add 1 2>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">第三个生物从岩石上跳下来！</span>
+	<br><br>
+<<elseif $timer is 8 and random(1, 2) is 2>>
+	<<struggle_add 1 2>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">第四个生物从岩石上跳下来！</span>
+	<br><br>
+<</if>>
+
+<<struggle>>
+
+
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Moor Struggle Mid End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Moor Struggle Mid]]>><</link>></span>
+	<br>
+<</if>>

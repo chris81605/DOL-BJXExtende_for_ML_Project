@@ -1,0 +1,91 @@
+:: Office Shredder Mash []
+<<effects>>
+<<if $worn.lower.name isnot "naked" and clothingData("lower", $worn.lower, "skirt") is 1>>
+	<<if $rng gte 90>>
+		<<if $worn.lower.integrity lte 0>>
+			你按下停止和反转按钮，碎纸机停止了粉碎，但在它<span class="lewd">搅碎掉你$worn.lower.cn_name_cap</span>的最后一部分之前，碎纸机不会停止工作。
+			<br><br>
+			<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+			当你紧张地环顾房间时，你掩盖你的<<lewdness>>。
+		<<else>>
+			你按下停止和反转按钮，碎纸机停止了粉碎，在$worn.lower.cn_name_cap被进一步破坏之前，它被释放出来。
+			<br><br>
+			你紧张地环顾了一下房间。
+		<</if>>
+		<<exposure>>
+		<br><br>
+		<<link [[继续|Office Shredder End]]>><</link>>
+		<br>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.lower.integrity -= 10 * $phase>>
+		<<if $worn.lower.integrity lte 0>>
+			<<if $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+				<<if $worn.upper.set is $worn.lower.set>>
+					你狂按停止和反转按钮，但你的<<breasts>>依旧被粗暴地扯向碎纸机，而<span class="lewd">你的$worn.lower.cn_name_cap也逐渐消失在它的大嘴中。</span><<gpain>><<pain 5>>
+					<br><br>
+				<<else>>
+					你狂按停止和反转按钮，但它<span class="lewd">完全吞掉了你的$worn.lower.cn_name_cap，在布料撕成碎片时将你粗暴地拉倒在地。</span><<gpain>><<pain 5>>
+					<br><br>
+					更糟糕的是，你的$worn.upper.cn_name_cap现在被抓住了！
+					<<set $phase to 1>>
+				<</if>>
+				<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+				<<shredderactions "upper">>
+				<br>
+			<<else>>
+				你按下停止和反转按钮，碎纸机停止了粉碎，但在它<span class="lewd">搅碎掉你$worn.lower.cn_name_cap</span>的最后一部分之前，碎纸机不会停止工作。
+				<br><br>
+				<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+				当你紧张地环顾房间时，你掩盖你的<<lewdness>>。
+				<<exposure>>
+				<br><br>
+				<<link [[继续|Office Shredder End]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你狂按停止和反转按钮，但似乎没有任何效果。如饥似渴的机器吞噬了更多的$worn.lower.cn_name_cap，令你的<<genitals>>紧紧地贴在设备上！<<gpain>><<pain 5>>
+			<<shredderactions "lower">>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+	<<if $rng gte 90>>
+		<<if $worn.upper.integrity lte 0>>
+			你按下停止和反转按钮，碎纸机停止了粉碎，但在它<span class="lewd">搅碎掉你$worn.upper.cn_name_cap</span>的最后一部分之前，碎纸机不会停止工作。
+			<br><br>
+			<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+			当你紧张地环顾房间时，你掩盖你的<<lewdness>>。
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你按下停止和反转按钮，碎纸机停止了粉碎，在$worn.upper.cn_name_cap被进一步破坏之前，它被释放出来。
+			<br><br>
+			你紧张地环顾了一下房间。
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.upper.integrity -= 10 * $phase>>
+		<<if $worn.upper.integrity lte 0>>
+			<<if !$worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+				你按下停止和反转按钮，碎纸机停止了粉碎，但在它<span class="lewd">搅碎掉你$worn.upper.cn_name_cap</span>的最后一部分之前，碎纸机不会停止工作。
+				<br><br>
+				<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+				当你紧张地环顾房间时，你掩盖你的<<lewdness>>。
+				<br><br>
+				<<link [[继续|Office Shredder End]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你狂按停止和反转按钮，但似乎没有任何效果。贪婪的机器吞噬了更多的$worn.upper.cn_name_cap，将你的<<breasts>>紧紧地按在设备上！<<gpain>><<pain 5>>
+			<<shredderactions "upper">>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

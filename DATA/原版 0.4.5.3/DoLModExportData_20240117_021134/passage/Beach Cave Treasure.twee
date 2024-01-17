@@ -1,0 +1,23 @@
+:: Beach Cave Treasure []
+<<effects>>
+
+<<if $phase is 0>>
+	你走左边的通道。
+<<else>>
+	你走右边的通道。
+<</if>>
+<<set $phase to 0>>
+你发现了个没上锁的箱子，半藏在岩石的后面。
+
+<<if random(1, 2) is 2>>
+	你在里面找到了一把银制匕首。对博物馆馆长来说它会很宝贵。
+	<<set $antiquemoney += 240>><<museumAntiqueStatus "antiquesilverdagger" "found">>
+	<br><br>
+<<else>>
+	里面有一把锈迹斑斑的老旧弯刀。对博物馆馆长来说它可能有点价值。
+	<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquerustedcutlass" "found">>
+	<br><br>
+<</if>>
+
+<<endevent>>
+<<beach_cave_caught>>

@@ -1,0 +1,88 @@
+:: Pharmacy Buy Condoms in Bulk []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<if $brothelVending.products % 2>>
+	<<if $weekly.brothelVMCondoms>>
+		本周你已经为自动售货机里的避孕套进行了补货。
+		<br><br>
+		<<link [[返回|Pharmacy]]>><</link>>
+	<<elseif $brothelVending.condomsToRefill lt 10>>
+		你不需要给自动售货机里的避孕套补货。
+		<br><br>
+		<<link [[返回|Pharmacy]]>><</link>>
+	<<elseif $money lt 60000>>
+		你买不起避孕套来给自动售货机补货。
+		<br><br>
+		<<link [[返回|Pharmacy]]>><</link>>
+	<<else>>
+		你告诉护士所需的避孕套数量:
+		<br><br>
+		<<link [[买 10 包 (£600)|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to 10>><</link>>
+		<br>
+		<<if $brothelVending.condomsToRefill gte 25>>
+			<<if $money gte 25 * 6000>>
+				<<link [[买 25 包 (£1,500)|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to 25>><</link>>
+				<br>
+			<<else>>
+				你买不起 25 包。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.condomsToRefill gte 50>>
+			<<if $money gte 50 * 6000>>
+				<<link [[买 50 包 (£3,000)|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to 50>><</link>>
+				<br>
+			<<else>>
+				你买不起 50 包。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.condomsToRefill gte 100>>
+			<<condomsPrice 100>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买 100 包 (${_printmoney})`|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to 100>><</link>>
+				<br>
+			<<else>>
+				你买不起 100 包。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.condomsToRefill gte 150>>
+			<<condomsPrice 150>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买 150 包 (${_printmoney})`|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to 150>><</link>>
+				<br>
+			<<else>>
+				你买不起 150 包。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.condomsToRefill gte 11>>
+			<<condomsPrice $brothelVending.condomsToRefill>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买${$brothelVending.condomsToRefill}包 (${_printmoney})`|Pharmacy Bought Condoms in Bulk]]>><<set $condomsBought to $brothelVending.condomsToRefill>><</link>>
+				<br>
+			<<else>>
+				你买不起 $brothelVending.condomsToRefill 包。
+				<br>
+			<</if>>
+		<</if>>
+		<<link [["不买"|Pharmacy]]>><</link>>
+	<</if>>
+<<else>>
+	你向护士提及妓院里設贩卖机的主意，并要求<<him>>在你大量购买避孕套时给你一些折扣。
+	<br><br>
+	<<He>>露出一副不敢置信的表情，"你说的大量是多少？上百包？上千包？上万包？那你还是找个批发商吧。"
+	<br><br>
+	你答道贩卖机能装载 200 包，因此你打算以每 10 包为一单位进货。
+	<br><br>
+	"那可算不上大量啊，<<girl>>，低于 50 包的话我没法给你折扣，但从51包到100包，我能砍个2%的价格，超过100包，我会给你5%折扣，最多就这样。毕竟我的利润本来就不是很高啊，这地方的避孕套都很贵的，不过我可以再给个添头，帮你把你买来的避孕套送到妓院那里。"
+	<br><br>
+	<<set $brothelVending.products += 1>>
+	<<set $brothelVending.condomsToRefill to 200>>
+	<<link [[为妓院买避孕套 (0:10)|Pharmacy Buy Condoms in Bulk]]>><<pass 10>><</link>>
+	<br>
+	<<link [["不买"|Pharmacy]]>><</link>>
+<</if>>

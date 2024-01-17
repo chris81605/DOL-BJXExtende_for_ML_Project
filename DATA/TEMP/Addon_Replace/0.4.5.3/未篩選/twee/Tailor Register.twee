@@ -1,0 +1,15 @@
+:: Tailor Register []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+柜台上有一台普通收银机，锁得死死的。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<link [[撬开它 (0:10)|Tailor Register Sneak]]>><<pass 10>><<crimeUp 10 "thievery">><</link>><<crime "thievery">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<link [[离开|Tailor Shop]]>><</link>>
+<br>

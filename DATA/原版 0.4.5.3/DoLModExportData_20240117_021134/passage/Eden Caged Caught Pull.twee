@@ -1,0 +1,34 @@
+:: Eden Caged Caught Pull []
+<<effects>>
+
+担心伊甸为你准备的事情，你用力拉扯。
+<<if $physiqueSuccess>><<set $edenCagedEscape to true>>
+	<<He>>抵抗着，用警告的眼神看着你。经过一番拉扯，<span class="green"><<his>>的抓握松了，你得以溜出去，并开始全速奔跑。</span>你的手臂有些疼痛，但你忽略了这种感觉。<<pain 2>><<gpain>>
+	<br><br>
+
+	伊甸紧追不舍，在几分钟内紧紧跟在你的后面。当你拉开距离时，<<He>>向你喊叫，愤怒的情绪明显可见。
+	<br><br>
+
+	几分钟后，<<his>>的声音渐渐消失，直到完全消失。
+	<br><br>
+
+	<<if $location is "forest">>
+		你已经脱离险境，但你知道伊甸已经在跟踪你了。<span class="red">有什么东西在追捕你。</span>
+		<<set $foresthunt to 1>>
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	<<His>>的抓握依旧紧紧地抓住你，几乎要折断你的骨头。<span class="red">你无法挣脱。</span>伊甸沉默地怒视着你，同时紧紧地抓住你的手臂。<<pain 4>><<gpain>>
+	<br><br>
+
+	<<link [[反抗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[顺从 (0:30)|Eden Caged Caught]]>><<set $phase to 0>><<pass 30>><<stress 6>><<sub 1>><<npcincr Eden dom 1>><</link>><<gstress>><<gdom>>
+	<br>
+<</if>>

@@ -1,0 +1,20 @@
+:: Pirate Bilge []
+<<location "seapirates">><<set $outside to 0>><<effects>>
+
+
+你在船底，在海盗船的深处。墙壁吱吱作响，发出呻吟声。
+<br><br>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpirates>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<events_pirates_bilge>>
+	<<else>>
+
+
+	<<link [[船舱 (0:01|Pirate Bilge]]>><<pass 1>><</link>>
+	<br>
+
+	<</if>>
+<</if>>

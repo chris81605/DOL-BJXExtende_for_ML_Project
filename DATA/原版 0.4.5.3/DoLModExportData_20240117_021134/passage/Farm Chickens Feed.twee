@@ -1,0 +1,60 @@
+:: Farm Chickens Feed []
+<<effects>>
+
+你从院子旁边的货棚里取出一袋谷物，鸡群跟了上来。
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $exposed lte 0>>
+	<<if $worn.lower.outfitSecondary is undefined>>
+		<<set _broken to true>>
+	<<elseif $worn.lower.outfitSecondary[1] is "broken" or $worn.lower.outfitSecondary[1] is "split">>
+		<<set _broken to true>>
+	<</if>>
+	<<if _broken>>
+		其中一只跳起来，用它的喙咬住你的$worn.lower.cn_name_cap，<span class="purple">把它拽了下来，你的<<undies>>露了出来。</span>你弯下腰去想要抓住它，但这样一来这袋沉重的谷物就进入了鸡群的可及范围。其它鸡也开始拉你的$worn.lower.cn_name_cap。你听到织物撕裂的声音。<<gstress>><<stress 6>>
+		<br><br>
+		<<lowerstrip>>
+		<<link [[冒着风险夺回衣物|Farm Chickens Retrieve]]>><</link>><<difficulty 50>>
+		<br>
+		<<link [[引诱鸡远离你的衣物|Farm Chickens Leave]]>><</link>>
+		<br>
+
+		<<if $submissive lte 500>>
+			<<link [[生气地大吼|Farm Chickens Roar]]>><<def 1>><</link>><<defianttext>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $worn.lower.integrity -= 15>>
+		<<if $worn.lower.integrity lte 0>>
+			一只跳起来，用喙咬住你的$worn.lower.cn_name_cap。它在那里挂了一会儿，然后掉了下去，<span class="pink">你的$worn.lower.cn_name_cap还在它嘴里。</span>
+			<<integritycheck>><<exposure>><<gstress>><<stress 6>>
+			<br>
+			你想要把自己的<<lewdness>>遮起来，差点把谷物袋掉在地上，但周围没有其他人。
+			<br><br>
+			<<if $exposed gte 2 and $exhibitionism gte 15>>
+				<<link [[完成工作|Farm Chickens Finish]]>><</link>><<exhibitionist2>>
+				<br>
+			<<elseif $exposed is 1>>
+				<<link [[完成工作|Farm Chickens Finish]]>><</link>><<exhibitionist1>>
+				<br>
+			<</if>>
+			<<link [[找点东西盖住 (0:10)|Farm Chickens Cover]]>><<pass 10>><<farm_count 10>><</link>>
+			<br>
+		<<else>>
+			一只跳起来，用喙咬住你的$worn.lower.cn_name_cap。当你拽住它的时候，你听到它撕裂的声音。
+			<br><br>
+
+			你喂完鸡，把谷物袋放回棚子。
+			<br><br>
+
+			<<link [[继续|Farm Work]]>><</link>>
+			<br>
+		<</if>>
+
+	<</if>>
+<<else>>
+	你撒了一把谷物，鸡群分散开来。
+	<br><br>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

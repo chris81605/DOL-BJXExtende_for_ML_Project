@@ -1,0 +1,44 @@
+:: Cliff Street Prisoner Escape Fail 2 []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<if $phase is 0>> /* apologised */ <<set $phase to 9>>
+	"我很抱歉，"你平静地说道。
+	<br><br>
+	<<if crimeSumCurrent() gte 2000>>
+		"对不起，你这次要被捕了。"<<person3>><<person>>冷冷地说道。
+	<<else>>
+		"现在说这些已经太晚了，"那个<<person3>><<person>>说道，"犯罪行为必须得到惩罚，这是法律给予我们的义务。"
+	<</if>>
+	<br><br>
+	那个<<person2>><<persons>>的目光在你身上转了转。"看到一个如此年轻的<<lass>>如此执迷不悟让我很难过，但我相信万事万物总有一个原因。
+<<elseif $phase is 1>> /* punched */ <<set $phase to 10>>
+	"这是意图拒捕的攻击行为吗？"那个<<person3>><<person>>问道。"或者妨碍警察办案？"
+	<br><br>
+	"不过就目前而言，这真的不重要。"那个<<person2>><<persons>>上下打量着你说道，"重要的是，这个年轻的<<lass>>已经过于执迷不悟了。
+<<elseif $phase is 2>> /* tackled */ <<pass 5>><<set $phase to 11>>
+	当你回过神的时候，那个警察，那个<<person4>><<person>>给你上了镣铐，并正把你押送回峭壁街。<<gpain>><<pain 6>>
+	<br>
+	你试图与<<him>>交谈，但得到的只有无情的沉默。
+	<br><br>
+	几分钟后，你又回到了峭壁街的颈手枷处，重新面对那三个恼怒的警察。
+	<br>
+	"浪费警力资源？"<<person3>><<person>>问道，"你知道的，逃跑是另一种犯罪，对吗？或者说，逃避……"
+	<br><br>
+	"不过就目前而言，这真的不重要。"那个<<person2>><<persons>>上下打量着你说道，"重要的是，这个年轻的<<lass>>已经过于执迷不悟了。
+<<elseif $phase is 3>> /* surrendered */ <<pass 5>><<set $phase to 11>>
+	你还没来得及说些什么，那个警察就把你的胳膊锁住，开始把你押回峭壁街。<<gpain>><<pain 6>>
+	<br>
+	你试图与<<person4>><<him>>交谈，但得到的只有冷漠无声的回应。
+	<br><br>
+	几分钟后，你又回到了峭壁街的颈手枷处，重新面对那三个愤怒的警察。
+	<br>
+	"浪费警力资源？"<<person3>><<person>>问道，"你知道么——"
+	<br><br>
+	"算了吧。"那个<<person2>><<person>>扫视了你一下。"重要的是，这个年轻的<<lass>>已经过于执迷不悟了。
+<<else>> /* ?? */ <<set $phase to 10>>
+	你在外面呆了一会儿，不知道你做了什么，也不知道结果是什么。(错误：请报告)
+	<br><br>
+	"你有听到我说的话么，<<lass>>？" 那个<<person2>><<person>>皱眉道，"你似乎不太想配合啊？
+<</if>>
+<<text_pillory_release_fail_strip>>
+<<link [[继续|Cliff Street Prisoner Escape Fail 3]]>><</link>>
+<br>

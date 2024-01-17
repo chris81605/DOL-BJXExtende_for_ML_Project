@@ -1,0 +1,23 @@
+:: Sea Tentacles []
+/* 北极星模组 */
+<<if $molestationstart is 1>>
+/* 北极星 */
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<controlloss>>
+	<<molested>>
+	<<tentaclestart 8 15>>
+	<<set $tentacles[0].shaft to "waist">>
+<</if>>
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<statetentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[继续|Sea Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

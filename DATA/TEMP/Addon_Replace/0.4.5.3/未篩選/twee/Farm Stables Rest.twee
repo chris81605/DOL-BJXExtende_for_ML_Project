@@ -1,0 +1,23 @@
+:: Farm Stables Rest []
+<<set $outside to 0>><<effects>>
+
+你在马厩旁的吊床上放松身心。
+<<if $weather is "rain" or $weather is "snow">>你很高兴能有个可以遮<<print ($weather is "rain"?'雨':'雪')>>的地方。<</if>>
+
+<<if $rng gte 75 and Time.dayState isnot "night" and $NPCName[$NPCNameList.indexOf("Alex")].love gte 80 and $farm_work.alex isnot "still" and $alex_countdown is undefined and $farm_stage gte 7>>
+	你看到艾利克斯走了过来，向你招手。
+	"嘿，伙伴，"<<nnpc_he "Alex">>微笑着趴到了你的腿上，"只是想过来陪陪你。"
+	<br><br>
+
+	你斜倚着<<nnpc_him "Alex">>，享受着偶尔吹拂的微风。<<nnpc_He "Alex">>不情愿地站了起来，叹了口气。
+	"我该回去工作了。但真的忍不住想一直和你在一起。"
+<<elseif Time.dayState is "night">>
+	马睡着了，你此刻可以享受着周围的宁静。
+<<elseif $farm_work.horses_out is 1>>
+	马正在田野里奔跑，你此刻可以享受着周围的宁静。
+<<else>>
+	马正关在里面。你听到它们四处走动的动静。
+<</if>>
+<br><br>
+
+<<link [[继续|Farm Work]]>><</link>>

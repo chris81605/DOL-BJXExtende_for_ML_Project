@@ -1,0 +1,37 @@
+:: Cabin Leash Broken []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<npc Eden>><<person1>>
+过了一会儿，你听到伊甸动了一下。<<He>>翻了个身，亲了亲你的脸颊。"早上好。"<<He>>打了个哈欠，伸了个懒腰。"是时候吃早餐了。"<<He>>注意到你的狗绳断了。"哦，亲爱的，我还以为这些东西更结实。你真是个好<<girl>>，没有逃跑。"<<He>>俯身亲吻了你的额头，然后若有所思地看着断裂的狗绳。
+<<npcincr Eden trust 200>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].trust gte 100>>
+	"我认为再也没有必要把你拴着了。只要不要从我这里逃走就行了。呆在小屋和外面的空地上，那里很安全。"
+
+	<<if $syndromeeden is undefined>>
+		<<set $syndromeeden to 1>><<set $NPCName[$NPCNameList.indexOf("Eden")].lust to 0>><<set $edenshrooms to 0>><<set $edengarden to 0>><<set $edenspring to 0>><<set $wardrobes.edensCabin.unlocked to true>>
+		<br><br>
+
+		<span class="red"><i>伊甸并不是那么糟糕，<<hes>>只是孤独而已。在这片森林里独自生活肯定很难。</i>
+		<br>
+		你获得了"斯德哥尔摩综合症：伊甸"特质。</span>
+		<br><br>
+
+		<<if $loveInterest.primary is "None">>
+			<<set $loveInterest.primary to "Eden">>
+			<span class = "gold">伊甸现在是你的爱人！危险的感觉消失了，在这里你感到无与伦比的安全。</span>
+		<<else>>
+			<span class = "gold">你现在可以将伊甸称作是你的爱人了！危险的感觉消失了，在这里你感到无与伦比的安全。<br>你可以在"态度"菜单中改变你的爱情对象。</span>
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].trust gte 100>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Forest Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

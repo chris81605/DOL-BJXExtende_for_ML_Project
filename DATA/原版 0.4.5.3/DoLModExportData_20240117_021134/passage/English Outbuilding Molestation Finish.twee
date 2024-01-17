@@ -1,0 +1,46 @@
+:: English Outbuilding Molestation Finish []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $alarm is 1 and $rescue is 1>>
+	<<if $NPCList[0].stance is "top">>
+		<<set $rescued += 1>>
+		<<clothesontowel>>
+		<<saveNPC 0 english_dog>>
+		<<endcombat>>
+		<<loadNPC 0 english_dog>>
+		一个门卫从外楼里走了出来，想看看到底发生了什么，但当看到你正和一只<<beasttype>>交配时，目瞪口呆地愣在了原地。
+		<<generate2>><<person2>>
+		<<He>>从震惊中回过神来，把<<beasttype 0>>从你身上拖了下来。尴尬的氛围弥漫在你们之间，<<He>>只是一言不发地把那个动物锁回了狗窝，回到外楼。<<tearful>>你回到教室。
+
+		<<famebestiality 10>>
+		<br><br>
+		<<link [[继续|English Lesson]]>><<clearNPC english_dog>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<set $rescued += 1>>
+		<<clothesontowel>>
+		一个门卫从外楼里走了出来，想看看到底发生了什么。"坏<<beasttype>>！坏！"<<beasttype>>退了下去，垂下耳朵和尾巴。"我很抱歉，<<bhe>>只是有点太激动了，"门卫说着把<<beasttype>>赶回了<<bhis>>的犬舍，"你没事吧？"
+		<br><br>
+		<<endcombat>>
+		<<generate1>><<person1>>
+		<<He>>走回了外楼。<<tearful>>你回到了教室。
+
+		<br><br>
+		<<link [[继续|English Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	那只<<beasttype>>满意地哼了一声，然后把你丢在了草地上。<<tearful>>你独自振作起来，回到了教室。
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+	<<link [[继续|English Lesson]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	那只<<beasttype>>尖声叫了一下，夹着尾巴逃走了。<<tearful>>你独自振作起来，回到了教室。
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+	<<link [[继续|English Lesson]]>><</link>>
+	<br>
+<</if>>

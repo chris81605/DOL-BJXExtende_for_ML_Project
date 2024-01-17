@@ -1,0 +1,50 @@
+:: Robin Chocolate Purchase []
+<<effects>><<npc Robin>><<person1>>
+<<set $money -= 200>>
+
+"好的！一杯热巧克力，马上就来！"罗宾说着，转身去加热牛奶。
+<br><br>
+
+你将£2递过柜台交给<<him>>，等到热巧克力准备好后你接过了杯子。
+<br><br>
+
+<<if $robinpaid is 1 and $daily.robin.freeDrink isnot 1>>
+	<<set $daily.robin.freeDrink to 1>>
+	"我，我不能收你的钱……"<<He>>说着，把钱推回给了你，"你已经为我向贝利付款了。而且你知道的，反正我最后也会把这些钱给你的。"
+	<<set $money += 200>>
+
+<<elseif $robinpaid is 1>>
+	<<set $robinmoney += 2>>
+	"这……这次我不得不收下了。"<<He>>皱着眉头，低头看着钱，"我必须花钱购买可可粉和牛奶。即使我想，我也没办法一直请你喝。"
+
+<<else>>
+	<<set $robinmoney += 2>>
+	"谢谢您的购买！"<<He>>笑着说，把钱放在柜台下面的某个地方。
+
+<</if>>
+<br><br>
+
+你慢慢地端起杯子，一边啜饮热巧克力，一边用它温暖你的双手。
+<br><br>
+
+"<<print either(
+"……你有没有在晴朗的夜晚里注视过夜空？那里有那么多的星星……那么多像我们这样的世界……但是，现在可能有点太冷了。",
+"……你认为贝利有可能某天会消失吗？一定会有某个有权有势的人憎恨着<<nnpc_him Bailey>>，对吗？",
+"有的时候要让摊位运转起来是很困难的。但最终是值得的。")>>"
+<br><br>
+
+<<if Time.hour gte 17>>
+	"外面越来越冷了，"罗宾说，"不知道你能不能帮我把东西搬回家呢？"
+	<<endevent>>
+	<br><br>
+	<<link [[答应 (0:30)|Orphanage]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+	<br>
+	<<link [[拒绝|Park]]>><</link>>
+	<br>
+
+<<else>>
+	<<endevent>>
+
+	<<robinChocolateOfferHelp>>
+
+<</if>>

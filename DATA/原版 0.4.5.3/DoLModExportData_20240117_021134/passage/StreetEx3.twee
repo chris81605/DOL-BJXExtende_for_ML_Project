@@ -1,0 +1,66 @@
+:: StreetEx3 []
+<<set $outside to 1>>
+<<if $phase is 0>>
+	<<effects>>
+	你用尽全力奔跑。
+	<<gathletics>><<athletics 1>><<physique>>
+	<<if $monster isnot 1 and $bestialitydisable is "t">>
+		<!-- Modified for Beast People -->
+		你设法逃脱了，但并不是毫发无伤。
+		<<trauma 18>><<pain 10>><<set $stress += 400>><<set $worn.lower.integrity -= 20>><<set $worn.upper.integrity -= 20>><<set $worn.under_lower.integrity -= 20>><<bruise leftarm>><<bruise full>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<elseif $athleticsSuccess>>
+		你慢慢与<<beasttype>>拉开距离，<<bhe>>也最终放弃了追逐，你继续跑了一会以后停下来喘口气。
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		而且<<beasttype>>要快过你，<<bHe>>飞快地追上你，<<if $monster isnot 1>>咬<<else>>抓<</if>>住了你的胳膊，把你拖到地上。
+		<br><br>
+		<<pain 8>><<set $phase2 to 1>>
+		<<link [[继续|StreetEx3]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<br><br>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<<beastCombatInit>>
+		<<if $phase2 is 1>>
+			<<set $enemyanger += 120>>
+		<</if>>
+	<</if>>
+	<<effects>>
+	<<effectsman>>
+	<<alarmstate 1>>
+	<br>
+	<<beast $enemyno>>
+	<br><br>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
+
+	<<if $alarm is 1 and $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->StreetEx3 Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->StreetEx3 Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->StreetEx3]]>><</link>></span><<nexttext>>
+		<</if>>
+
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续->StreetEx3 Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[继续->StreetEx3 Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续->StreetEx3]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>

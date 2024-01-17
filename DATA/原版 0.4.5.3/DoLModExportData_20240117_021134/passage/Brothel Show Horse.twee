@@ -1,0 +1,34 @@
+:: Brothel Show Horse []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<farm_trust horses>>
+
+	<<set $NPCList[0].stance to "top">>
+	<<if $NPCList[0].penis isnot "none">>
+		<<set $position to "doggy">>
+	<<else>>
+		<<set $position to "missionary">>
+	<</if>>
+	<<set $position_lock to 1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<audience>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Brothel Show Horse Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Show Horse]]>><</link>></span><<nexttext>>
+<</if>>

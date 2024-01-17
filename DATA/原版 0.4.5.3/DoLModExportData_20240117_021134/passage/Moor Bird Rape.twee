@@ -1,0 +1,44 @@
+:: Moor Bird Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastNEWinit 1 creature>>
+	<<beastCombatInit>>
+	<<if $player.penisExist>>
+		<<set $position to "missionary">>
+	<<else>>
+		<<set $position to "doggy">>
+	<</if>>
+	<<set $NPCList[0].stance to "top">>
+	<<enable_rescue>>
+	<<set $timer to 10>>
+<</if>>
+
+<<if $timer gte 5>>
+	<span class="pink">那个恐怖的生物栖息在岩石上，扫视着地面。</span>
+<<elseif $timer is 4>>
+	<span class="purple">那个恐怖的生物观察着悬崖底部。它的眼睛几乎与你对视。</span>
+<<elseif $timer gte 1>>
+	<span class="blue">那个恐怖的生物正注视着悬崖底部。</span>
+<<else>>
+	<span class="blue">那恐怖的生物看起来很不耐烦。</span>
+<</if>>
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $orgasmdown gte 1 or ($pain gte 100 and $willpowerpain is 0) or $timer lte 0>>
+	<span id="next"><<link [[继续|Moor Bird Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Moor Bird Rape]]>><</link>></span><<nexttext>>
+<</if>>

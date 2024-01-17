@@ -1,0 +1,76 @@
+:: Arcade Hockey Play []
+<<effects>>
+<<set $difficulty to random(-450,1100)>><<set $arcadeHockey.player_lost to false>>
+
+你同意赌上你的<<print $worn[$arcadeHockey.player_bet].name.cn_name_cap>>。
+<br><br>
+<<if ($difficulty - currentSkillValue("handskill")) gte 800>>
+	<<set $arcadeHockey.player_count_lost += 1>><<set $arcadeHockey.player_lost to true>>
+
+	<span class="red">比赛几乎瞬间就结束了。</span>你表现得既笨拙又缓慢，在<<he>>打进最后一球并宣告胜利前，你哪怕是一分都没拿到。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<if $arcadeHockey.player_count_win + $arcadeHockey.player_count_lost is 1>>
+		"看来我会玩得很愉快。"<<he>>又咧嘴笑着说。
+	<<else>>
+		"也太简单了，你是不是故意放水啊？"<<he>>笑着问说 "不过你放不放我都没差啦。"
+	<</if>>
+<<elseif ($difficulty - currentSkillValue("handskill")) gte 400>>
+	<<set $arcadeHockey.player_count_lost += 1>><<set $arcadeHockey.player_lost to true>>
+
+	你在游戏上费尽全力，<<hes>>却显得游刃有余，很快你便露出败象。尽管你努力拿了两分，<span class="red">但<<he>>依旧不费吹灰之力，击败了你。</span><<gstress>><<stress 6>>
+	<br><br>
+
+	"要想赢我，你还是回去多练练吧。"<<he>>说道。
+
+<<elseif ($difficulty - currentSkillValue("handskill")) gte 100>>
+	<<set $arcadeHockey.player_count_lost += 1>><<set $arcadeHockey.player_lost to true>>
+
+	你们势均力敌，比赛拉锯了一阵子，你们双方都不发一语，全神贯注在赛事上，你取得优势，<<he>>扳回一城，胜机不断易手。
+	<br><br>
+
+	<span class="red">你最终失守了，球盘从侧面弹了过来，落入你的球槽里，</span>你的对手拿下了这局。
+	<br><br>
+
+	"打得好，"<<he>>说 "但还是我技高一筹。"
+
+<<elseif ($difficulty - currentSkillValue("handskill")) gte -100>>
+	<<set $arcadeHockey.player_count_win += 1>>
+
+	你们旗鼓相当，在双方奋斗下，球盘以惊人的速度，来回穿梭在球桌上。每当你得分，<<he>>马上又会挽回颓势，由于你们没人能拉开分数差距，比赛迟迟没有结束。
+	<br><br>
+
+	最后终于落到四分对四分的局面，你们都满头大汗，<span class="green">最后你看见一个防守缺口，并用力将球盘打进另一方的球槽内，</span>你拿下艰难的胜利。
+	<br><br>
+
+	"干！"<<he>>大叫道 "明明就差一点！"
+
+<<elseif ($difficulty - currentSkillValue("handskill")) gte -400>>
+	<<set $arcadeHockey.player_count_win += 1>>
+
+	你根本没费多少功夫就赢了，你一直都领先对手一些，并且总是泰然自若、处变不惊，<<hes>>则非常勉强才跟上你的动作，虽说<<He>>努力拿了两分，<span class="green">但你对此不屑一顾，拿下了第五分。</span><<lstress>><<stress -6>>
+	<br><br>
+
+	"操，"<<he>>说 "我大概是有点生疏了。"
+
+<<else>>
+	<<set $arcadeHockey.player_count_win += 1>>
+
+	你轻快地在球桌一端舞动，而你的对手则苦苦应战，看似连<<his>>的击球器都要拿不稳了，<span class="green">一眨眼的工夫，你就拿下五分结束了比赛。</span><<lstress>><<stress -6>>
+	<br><br>
+
+	<<if $arcadeHockey.player_count_win + $arcadeHockey.player_count_lost is 1>>
+		<<He>>黯然叹了口气 "你大概也不用担心比赛结果了。"
+	<<elseif ($difficulty - currentSkillValue("handskill")) lte -800 or random(0,1)>> <!-- NPC won't act like they threw the round if you beat them THAT badly -->
+		<<He>>低吼着，"操！我怎么一分都没有啊！"
+	<<else>>
+		出乎你的意料之外，<<He>>露出一个微笑 "唉呀！我输了。"
+		<br><br>
+
+		<<he>>看起来一副很想输掉的样子。
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[继续|Arcade Hockey Rematch]]>><</link>>
+<br>

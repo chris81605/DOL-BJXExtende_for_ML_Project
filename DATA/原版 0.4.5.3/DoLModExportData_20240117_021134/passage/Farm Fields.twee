@@ -1,0 +1,69 @@
+:: Farm Fields []
+<<set $outside to 1>><<set $bus to "farm_fields">><<effects>>
+<<farm_work_update>>
+<<plot_effects>>
+<<if $farm_fields_intro is 1>>
+	<<unset $farm_fields_intro>>
+	烧焦的味道在你看到他们之前就已经出现了。因为雷米的破坏，田地还是一片漆黑。门口有一袋马铃薯种子洒了一半。
+	<br><br>
+	<<set $plants_known.push("potato")>>
+	<span class="gold">你现在可以种植<<icon "tending/potato.png">>马铃薯</span>了。
+	<br>
+	<<set $plants_known.push("turnip")>>
+	<span class="gold">你现在可以种植<<icon "tending/turnip.png">>萝卜</span>了。
+	<br><br>
+<<else>>
+	你站在农田中。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21>>
+	<<npc Alex>><<person1>>
+	艾利克斯冲了过来，<span class="red">"雷米来了，"</span><<he>>接着说道，"我们可以做到的，去做好准备，我去
+	<<if $farm.tower_guard>>
+		提醒一下$farm.tower_guard。"
+	<<else>>
+		看看能不能定位到他们的位置。"
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 2>><</link>>
+	<br>
+<<elseif $danger gte (9900 - $allure) and $eventskip isnot 1>>
+	<<farm_tending_events>>
+<<else>>
+
+	<<if $farm.tower gte 1>>
+		<<if $farm.tower_guard>>
+			瞭望塔矗立于此。
+			<<loadNPC 0 "farm_tower_guard">><<person1>>
+			<<if $NPCList[0].traits.includes("relaxed")>>
+				<<print $NPCList[0].name>>倚靠在栏杆上。一道细烟从<<him>>嘴旁升起。
+			<<elseif $NPCList[0].traits.includes("sociable")>>
+				<<print $NPCList[0].name>>在塔上朝你挥了挥手。
+			<<elseif $NPCList[0].traits.includes("brooding")>>
+				你只能看到上面<<print $NPCList[0].name>>的一道剪影。
+			<<else>>
+				<<print $NPCList[0].name>>倚靠在栏杆上，注视着你。
+			<</if>>
+			<<endevent>>
+		<<else>>
+			瞭望塔矗立于此，但目前无人值守。
+		<</if>>
+		<br>
+		<<laddericon>><<link [[爬上去|Farm Tower]]>><</link>>
+		<br><br>
+	<</if>>
+	<<display_plot farm>>
+
+	<<getouticon>><<link [[离开 (0:05)|Farm Work]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

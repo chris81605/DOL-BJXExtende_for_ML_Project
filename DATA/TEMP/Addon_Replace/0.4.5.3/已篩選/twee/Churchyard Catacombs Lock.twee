@@ -1,0 +1,32 @@
+:: Churchyard Catacombs Lock []
+<<location "sepulchre">><<set $outside to 0>><<effects>>
+
+你走向墓穴，两座石像鬼的雕像正守卫着入口，不知为什么，你有一种被其盯着的感觉。而入口则被一个颇为现代化的锁锁住，这个锁与周围陈旧斑驳的石头显的有些格格不入。
+<br><br>
+
+<<set $lock to 500>>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		你认为你可以打开这个锁，<span class="blue">前提是你的双手没有被绑住。</span>
+		<br><br>
+	<<else>>
+		<span class="green">这把锁看起来很容易被撬开。</span>
+		<br><br>
+		<<lockpickicon>><<link [[撬开 (0:10)|Churchyard Catacombs Sneak]]>><<pass 10>><<crimeUp 1 "trespassing">><</link>><<crime "trespassing">>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Churchyard Catacombs Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<getouticon>><<link [[离开|Churchyard]]>><</link>>
+<br>

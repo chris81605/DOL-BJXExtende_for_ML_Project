@@ -1,0 +1,44 @@
+:: History Classroom Study []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<run statusCheck("Robin")>>
+<<if $robinhistory is "seat">>
+	你坐在罗宾身边读历史课本。
+<<else>>
+	你坐下来读历史课本。
+	<<if _robin_location is "school" and $daily.school.lunchEaten isnot 1>>
+		罗宾随后赶到，坐在你旁边的座位上。
+		<<set $robinhistory to "seat">>
+	<</if>>
+<</if>>
+<br><br>
+
+<<npc Winter>><<person1>>教室很快就坐满了，温特来上课了。
+<br><br>
+
+<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound" and $leftarm isnot "bound" and $feetuse isnot "bound">>
+	<<link [[继续|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	温特看着你被缚的四肢，"你得在上我的课之前妥善处理一下。自己去见校长。"
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	温特看着你的穿着。"你不会以为我没注意到吧。自己去见校长。"
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<</if>>
+
+<!-- option to study only appears at lunchtime and lasts until the next hour -->
+<<set _time_to_pass to 60 - Time.minute>>
+<<pass _time_to_pass>>
+<<schooleffects>>
+<!-- add stress every 5 minutes -->
+<<set _stress to Math.trunc(_time_to_pass / 5)>>
+<<stress _stress>>
+<!-- gain history skill with same efficiency as studying in the library -->
+<<set _history to _time_to_pass / 20>>
+<<historyskill _history>>

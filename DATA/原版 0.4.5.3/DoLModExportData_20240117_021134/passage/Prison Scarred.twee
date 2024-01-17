@@ -1,0 +1,53 @@
+:: Prison Scarred []
+<<effects>>
+<<endevent>><!-- Fully make sure no event failures prior can cause a failure here with NPC gen, because saveNPC of scarred_inmate occurs later. -->
+<<generate_scarred_inmate 0>><<person1>>
+你进入了<<scarred_inmate 0 apo>>的单人牢房。
+
+<<if $prison.scarred gte 60 and $NPCList[0].name_known isnot 1>>
+	<<He>>正坐在床上，用手埋着头。
+	<br><br>
+
+	<<link [[询问发生了什么事|Prison Scarred Ask]]>><</link>>
+	<br>
+	<<link [[离开|Prison Walkway]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<He>>看着你，舔了舔嘴唇。
+	<br><br>
+
+	<<switch $prison.scarred_level>>
+		<<case 0>>
+			"你能来这里很明智，"<<he>>说道。<<He>>靠过来，闻了闻。"嗯……味道真新鲜。"<<He>>把<<his>>的手伸向<<his>>的裤子，从那拽出一根长绳来。"转过去，扶着栏杆，<<bitch>>。"
+			<br><br>
+
+			<<link [[转过身，抓着栏杆|Prison Scarred Bars]]>><<set $prison.scarred_level to 1>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 1>>
+			"正是我想要看见的<<bitch>>，"<<he>>说着，把<<his>>的手伸向<<his>>的裤子，从那拽出一根长绳来。"转过去，扶着栏杆，<<bitch>>。"
+			<br><br>
+
+			<<link [[转过身，抓着栏杆|Prison Scarred Pair]]>><<set $prison.scarred_level to 2>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 2>>
+			"你，"<<he>>说着，从<<his>>床上起身，在<<his>>手上已经拿着一根长绳，"转过去，扶着栏杆，<<bitch>>。"
+			<br><br>
+
+			<<link [[转过身，抓着栏杆|Prison Scarred Molestation]]>><<set $prison.scarred_level to 3>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<case 3>>
+			"你，"<<he>>说着，从<<his>>床上起身，<<his>>手上已经拿着一根长绳，"转过去，<<bitch>>。"
+			<br><br>
+			<<link [[转过身|Prison Scarred Turn]]>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+		<<default>>
+			"正是我想要看见的<<bitch>>，"<<he>>说着，从<<his>>床上起身。<<his>>手上已经拿着一根长绳。"转过去，<<bitch>>。"
+			<br><br>
+
+			<<link [[转过身|Prison Scarred Turn]]>><<prison_rep scarred 5>><</link>><<gglove>>
+			<br>
+	<</switch>>
+
+	<<link [[拒绝|Prison Scarred Refuse]]>><</link>>
+	<br>
+<</if>>

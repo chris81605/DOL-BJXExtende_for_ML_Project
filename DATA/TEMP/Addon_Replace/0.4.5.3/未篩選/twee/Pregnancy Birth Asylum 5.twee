@@ -1,0 +1,57 @@
+:: Pregnancy Birth Asylum 5 []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+
+<<if $litter_size gte 2>><<childrenNames $bornChildrenIds>>躺在<<else>><<childname>>躺在<</if>>摇篮里，助产士帮你站起身来。
+
+<<if $first_birth or playerNormalPregnancyTotal() is 0>>
+	你站了起来，感觉自己的内脏往下掉了一下。<<he>>表示这是正常现象，不用担心。
+	<br><br>
+
+	虽然胯下仍然传来疼痛，但你走起路来比分娩之前舒服多了。原来肚子里没孩子走路这么轻松啊，你都快忘记这种感觉了。
+	<br><br>
+
+	助产士帮你穿好衣服。
+<<elseif between(playerNormalPregnancyTotal(), 1, 2)>>
+	你站了起来，感觉自己的内脏往下掉了一下。你记得上次分娩时也有这种感觉，知道这是正常的。
+	<br><br>
+
+	虽然胯下仍然传来疼痛，但你走起路来比分娩之前舒服多了。原来肚子里没孩子走路这么轻松啊，你都快忘记这种感觉了。
+	<br><br>
+
+	助产士帮你穿好衣服。
+<<elseif between(playerNormalPregnancyTotal(), 3, 7)>>
+	你站了起来，感觉自己的内脏往下掉了一下。你还是不习惯这种感觉。
+	<br><br>
+
+	很快你就又能走路了。还有点不适应，但比之前恢复得快多了。还是没怀孕的时候走路轻松。
+	<br><br>
+
+	助产士还是帮你穿好衣服。
+<<elseif between(playerNormalPregnancyTotal(), 8, 49)>>
+	你毫不费力地站了起来。怀孕前后已经基本感觉不到什么差别了，不过你确实感觉行动更灵敏了。
+	<br><br>
+
+	<<He>>惊艳于你的灵敏，只是象征性的扶了你一下。"很少有人能恢复得这么快的。你肯定很强壮吧！"
+	<br><br>
+
+	助产士还是帮你穿好衣服。
+<<elseif playerNormalPregnancyTotal() gte 50>>
+	你直接站了起来，感觉腹中空虚。你已经开始怀念怀孕的感觉了。
+	<br><br>
+
+	<<He>>目瞪口呆地看着你。你很快穿好衣服。
+	<br><br>
+
+	"你、你应该已经可以走了，"<<he>>说道。
+<</if>>
+<<if $innocencestate is 1 or $trauma lte $traumamax / 10>>
+	"哈珀医生已经办好了你的出院手续，你可以出院了。外面有人接你，应该是你<<if $NPCName[$NPCNameList.indexOf("Bailey")].pronoun is "f">>妈妈<<else>>爸爸<</if>>。"
+	<br><br>
+	<<removeBabyIntro "pc" "Bailey" $recentBirthId>>
+	<<link [[继续|Pregnancy Birth Asylum End]]>><<endevent>><<unset $recentBirthId>><</link>>
+<<else>>
+	"你的孩子将被送到孤儿院暂时照顾。当你治愈出院时，即可重新获得监护权。"
+	<br><br>
+	<<setBabyIntro "pc" "Bailey" $recentBirthId>>
+	<<link [[继续|Pregnancy Birth Asylum 6]]>><<endevent>><<unset $recentBirthId>><</link>>
+<</if>>

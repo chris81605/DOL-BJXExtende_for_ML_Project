@@ -1,0 +1,58 @@
+:: Avery Date Sex Finish []
+<<set $outside to 0>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+    /* 北极星模组 */
+	<<ejaculation>><<set $money += ((($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1)) * 100)>>
+    /* 北极星 */
+
+	"好<<girl>>，"<<he>>喘着气，笑着把现金交给你。
+	<<larage>><<npcincr Avery rage -5>><<glove>><<npcincr Avery love 3>>
+	<br><br>
+
+	<<tearful>>你从车里爬了出来。<<He>>在开车离开前看了你一会儿。
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Domus Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<He>>倒在方向盘上，让你有了机会。
+	/* 北极星模组 */
+	<<ggarage>><<npcincr Avery rage 10>><<set $money += ((($NPCName[$NPCNameList.indexOf("Avery")].love * 10 + $endear * 10 + 10) * ($options.bjx_averymoney ? 2 : 1)) * 100)>>
+	/* 北极星 */
+	<br><br>
+
+	<<tearful>>你抢过钱跑向孤儿院。<<He>>在你后面喊着什么，但没有追过来。你听到<<him>>开车走了。
+	<<ggarage>><<npcincr Avery rage 10>>
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Domus Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	"如你所愿，"<<he>>说着，把现金放回了<<his>>的<<wallet>>。
+	<br><br>
+
+	<<tearful>>你从车里爬了出来。<<He>>在开车离开前看了你一会儿。
+	<br><br>
+	<<storeon "averyCar" "check">>
+	<<if _store_check is 1>>
+		<<storeon "averyCar">>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Domus Street]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

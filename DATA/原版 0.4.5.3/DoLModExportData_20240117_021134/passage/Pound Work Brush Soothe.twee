@@ -1,0 +1,22 @@
+:: Pound Work Brush Soothe []
+<<effects>>
+
+<<if $tendingSuccess>>
+	你蹲下来，缓慢但自信地走向<<beasttype>>，抚摸着<<bhis>>的耳后。"乖，乖，" 你说： "我不会伤害你的，我保证。"
+	<br><br>
+	<<beasttype>>发出愤怒的喘息声，<span class="green">但还是让你继续梳毛。</span>当你梳完后，<<bHes>>躺在地上舒服地翘起腿来。<<gpound_status>><<lstress>><<pound_status 1>><<stress -6>>
+	<br><br>
+<<else>>
+	你一边用声音安抚一边接近，但每当<<beasttype>>发出愤怒的喘息，你就开始犹豫不前。你走近到可以梳毛的距离，<span class="red">但<<bhe>>做势要咬你的手。</span>不过当你开始梳毛后，这只生物温顺了许多。<<lpound_status>><<pound_status -1>><<if $tending lt 600>><<tending 1>><<gtending>><</if>>
+	<br><br>
+<</if>>
+
+你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+<br><br>
+<<if Time.hour gte $closinghour>>
+	<<link [[继续|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Pound Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

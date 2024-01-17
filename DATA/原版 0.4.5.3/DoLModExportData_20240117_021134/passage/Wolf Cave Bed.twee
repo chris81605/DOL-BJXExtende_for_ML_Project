@@ -1,0 +1,29 @@
+:: Wolf Cave Bed []
+<<effects>>
+<<if $wolfpackharmony gte 10>>
+	<<beastNEWinit 1 wolf>>
+	<<if $rng gte 51>>
+		<<if $wolfstate is "hunt">>
+			你找了个空地方躺下，闭上眼睛。当你躺在那里时，你感到温暖而毛茸茸的小身体在你周围移动。看起来小狼崽们看到你上床睡觉了，每当成狼离开，它们就会觉得和你在一起更安全。其中一只舔着你的脸，然后把<<bhis>>的头埋进你的头发里。
+			<br><br>
+			今晚你不会觉得冷，它们也不会孤单。<<lstress>><<ltrauma>><<stress -10>><<trauma -10>>
+		<<else>>
+			你找了个空地方躺下，闭上眼睛。躺在那里时，你感到一堵毛皮墙在你周围移动。似乎是<<wolf_cave_plural>>看到你上床睡觉，自己也困了。其中一个用鼻子在你的胳膊下面蹭<<bhis>>的头。
+			<br><br>
+			今晚你不会冷的。<<lstress>><<ltrauma>><<stress -6>><<trauma -6>>
+		<</if>>
+		<<set $wolfbed to 1>>
+	<<else>>
+		你依偎在<<beasttype>>的旁边取暖，闭上眼睛。
+	<</if>>
+	<<endevent>>
+<<else>>
+	你找了个空地方躺下，闭上眼睛。
+<</if>>
+<br><br>
+
+<<nightmareCheck "Wolf Cave Sleep">>
+
+<<generateSleepLinks "Wolf Cave Sleep">>
+<<link [[爬下床|Wolf Cave]]>><<set $wolfbed to 0>><<loadTempHairStyle>><</link>>
+<br><br>

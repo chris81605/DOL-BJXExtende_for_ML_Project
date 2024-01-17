@@ -1,0 +1,44 @@
+:: Prison Breakfast []
+<<effects>>
+<<pass 1>><<advancetohour>>
+
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<generate1>><<person1>>
+	你和其他囚犯一起排队。食柜后面的那个<<person>>将一碗稀粥装满之后，放在了你的头上。
+	<<if $worn.face.type.includes("gag")>>
+		里面有一根吸管，也许你可以通过口塞的空隙将其吐出去。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<if $worn.face.type.includes("gag")>>
+		<span class="blue">如果不是因为你戴着口塞的话，也许你就可以寻求帮助。</span>
+		<br>
+	<<else>>
+		<<link [[向别人求助|Prison Breakfast Help]]>><<prison_inmates -1>><</link>><<lrespect>>
+		<br>
+	<</if>>
+	<<link [[小心翼翼地找一个座位坐下|Prison Breakfast Careful]]>><</link>><<dancedifficulty 1 600>>
+	<br>
+<<else>>
+	你和其他囚犯一起排队，你拿到了一碗稀粥。
+	<<if $worn.face.type.includes("gag")>>
+		里面有一根吸管，也许你可以通过口塞的空隙将其吐出去。
+	<</if>>
+	<br><br>
+
+	你试图寻找一个空位。
+	<<if $prison.protection is "scarred">>
+		<<generate_scarred_inmate 0>><<scarred_inmate 0 cap>><<person1>>要求你坐在<<his>>的大腿上。
+		<br><br>
+
+		<<link [[坐在其大腿上|Prison Breakfast Scarred]]>><<prison_rep scarred 1>><<prison_attention 1>><</link>><<glove>><<gattention prison>>
+		<br>
+		<<link [[拒绝|Prison Breakfast Scarred Refuse]]>><<prison_inmates 1>><</link>><<grespect>>
+	<<else>>
+		<br><br>
+
+		<<link [[继续|Prison Breakfast Prayer]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

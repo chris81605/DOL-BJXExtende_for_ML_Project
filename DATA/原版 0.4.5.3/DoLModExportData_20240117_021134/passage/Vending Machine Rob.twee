@@ -1,0 +1,17 @@
+:: Vending Machine Rob []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $lock to 400>>
+你检查了自动贩卖机。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<lockpickicon>><<link [[撬开 (0:10)|Vending Machine Sneak]]>><<pass 10>><<crimeUp 1 "petty">><</link>><<crime "petty">>
+	<br>
+<<else>>
+	<span class="red">这把锁看上去超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br>
+<</if>>
+<<condomicon "machine">><<link [[砸碎它 (0:10)|Vending Machine Smash]]>><<pass 10>><<crimeUp 5 "destruction">><<crimeUp 5 "petty">><</link>><<physiquedifficulty>> <<crimes "destruction" "petty">>
+<br>
+<<getouticon>><<link [[回去|$currentToiletReturn]]>><</link>>

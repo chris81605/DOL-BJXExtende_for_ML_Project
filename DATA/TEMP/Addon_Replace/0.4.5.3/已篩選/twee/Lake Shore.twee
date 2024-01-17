@@ -1,0 +1,207 @@
+:: Lake Shore []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 30>><<set $bus to "lakeshore">><<wearoutfit>>
+
+<<if Time.season is "winter">>
+	<<if $laketeenspresent is 1>>
+	你正在待在上冻的森林湖岸边，学生们在附近闲逛着，一些其他人则在练习滑冰。
+	<<elseif Time.dayState is "night">>
+		<<if Time.isWeekEnd()>>
+		你正待在冰冻湖的岸边，你可以看到湖对岸营地的篝火散发着微弱的光芒。
+		<<else>>
+		你正待在冰冻湖的岸边，阴暗的湖水在下方沉寂着，你根本看不清它们下面的样子。
+		<</if>>
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你正在上冻的森林湖岸边，阳光照在冰面上反射出耀眼的光芒。
+	<<else>>
+		你正待在冰冻湖的岸边，你在冰面上看见你的倒影，如果你愿意的话，你可以走到泊船的那个地方。
+	<</if>>
+	<<if $weather is "snow">>
+		雪花飘落在水面上。
+	<<else>>
+		冰面显得非常寂静。
+	<</if>>
+<<else>>
+	<<if Time.hour gte 15 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>
+		你待在湖边，有几个人正在这里度过万圣节派对。
+	<<elseif $laketeenspresent is 1>>
+		你正待在湖边，有几个人在水里玩耍，你可以看到湖边上有着几个学生。
+	<<elseif Time.dayState is "night">>
+		<<if Time.isWeekEnd()>>
+			你正待在湖边，你可以看到湖对岸营地的篝火散发着微弱的光芒。
+		<<else>>
+			你正待在湖边，阴暗的湖水在下方沉寂着，你根本看不清它们下面的样子。
+		<</if>>
+	<<elseif Time.dayState is "dusk" or Time.dayState is "dawn">>
+		你正待在湖边，起伏的波浪拍打着沙子和岩石，对岸有一只熊正在吃鱼。
+	<<else>>
+		你正待在湖边，你可以看到你的倒影在湖面上，泊船的平台就静静地躺在那里。
+	<</if>>
+	<<if $weather is "rain">>
+		雨打在湖面上，水波荡漾。
+	<<else>>
+		水面显得非常平静。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	为了隐藏你的<<lewdness>>，你借着树木低姿前进。
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<elseif $town_projects.diving is 1 and $exposed lte 0>>
+	<<set $town_projects.diving to 2>>
+	<<npc Winter>><<person1>>
+	<<if $weather is "rain">>
+		你看到温特站在岸边，黑色伞下风吹着<<his>>灰色的头发。
+	<<else>>
+		你看到温特站在岸边，风吹着<<his>>灰色的头发。
+	<</if>>
+	<<He>>朝你这边瞥了一眼。
+	<<if Time.dayState is "night">>
+		"没想到这个时候还有人来，"<<he>>说道。
+	<<elseif Time.schoolDay and Time.hour gte 9 and Time.hour lt 15>>
+		"你不应该在学校里吗？"<<he>>问道，然后笑了笑。"我想你也可以问同样的问题。"
+	<<elseif Time.schoolDay>>
+		"我没想到会有人来，"<<he>>说道。
+	<<elseif Time.weekDay is 7 or Time.weekDay is 1>>
+		"别担心，"<<he>>说道。"我离博物馆不会太久的。"
+	<<else>>
+		"我没想到会有人来，"<<he>>说道。
+	<</if>>
+	<br><br>
+
+	<<He>>看向湖面。
+	<<if $winterlakeknown is 1>>
+		"你还记得我提到过水下的古老建筑吗？
+	<<else>>
+		"水下有古老的建筑。
+	<</if>>
+	古老的。有着丰富的文化遗产。我曾经为在这里建立一个工作站而写了计划，以便我可以进行调查。但是我的请求被无视了。"
+	<br><br>
+
+	<<He>>转向树林，朝城镇的方向。"不好意思，我说了很多废话。你要注意安全。"
+	<br><br>
+
+	<i>你可以在市政厅询问有关工作站的事情。</i>
+	<br><br>
+
+	<<link [[继续|Lake Shore]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $town_projects.diving is 3 and $exposed lte 0>>
+	<<set $town_projects.diving to 4>>
+	<<npc Winter>><<person1>>
+	你听到前方传来声音。几个人正在帐篷周围钉木钉。温特离他们有一段距离。<<He>>注意到了你，跑了过来。
+	<br><br>
+
+	"非常感谢，"<<he>>说着，握着你的手。"市长亲自打电话来了。说某个人为我的工作站提供了资金。"
+	<br><br>
+
+	<<earnFeat "Field Work">>
+	<<link [[继续|Lake Shore Diving]]>><</link>>
+	<br>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+
+	<<if clothingInStorage("lakeshore").length lt 1>>
+		你可以在一个岩石凹处存放你的衣服。
+		<br>
+	<</if>>
+	<<lakeclothes>>
+
+		湖面闪耀着你的倒影，
+		<<if isBloodmoon()>>
+			你淹没在血月的绯红中。
+		<<elseif Time.dayState is 'dawn'>>
+			黎明的余晖给你披上了一层琥珀色的光环。
+		<<elseif Time.dayState is 'day'>>
+			画面一尘不染，完美无瑕。
+		<<elseif Time.dayState is 'dusk'>>
+			夕阳的余晖给你披上了一层琥珀色的光环。
+		<<else>>
+			月光照亮了水面。
+		<</if>>
+		<br>
+		<<mirroricon>><<link [[检查你的倒影|Lake Shore Mirror]]>><<preMirror>><</link>>
+		<br><br>
+
+		<<if Time.hour gte 18 and $halloween is 1 and Time.monthDay is 31 and $halloween_lake is 1>>
+			<<socialiseicon "party">><<link [[加入派对 (0:10)|Lake Halloween Party]]>><<pass 10>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+		<<elseif $laketeenspresent is 1 and $exposed lte 0 and Time.hour isnot 20 and Time.season isnot "winter">>
+			<<socialiseicon>><<link [[与同学闲晃 (0:30)|Lake Hang]]>><<pass 30>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+			<br>
+		<</if>>
+		<<if Time.season is "winter">>
+			<<if $nextPassageCheck is "Lake Shallows Ice">>
+				<span class="nextLink"><<lakeicon>><<link [[走|Lake Shallows Ice]]>><<pass 2>><</link>></span>
+			<<else>>
+				<<lakeicon>><<link [[走到冰上 (0:02)|Lake Shallows Ice]]>><<pass 2>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			<<if $nextPassageCheck is "Lake Shallows">>
+				<span class="nextLink"><<swimicon>><<link [[游泳|Lake Shallows]]>><<pass 2>><</link>></span>
+			<<else>>
+				<<swimicon>><<link [[游泳 (0:02)|Lake Shallows]]>><<pass 2>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if $town_projects.diving gte 4>>
+			<<lakeicon "field office">><<link [[考古工作站 (0:02)|Lake Office]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		/* 北极星模组 */
+		<<if $town_projects.home isnot undefined>>
+			<<if $town_projects.home gte 3>>
+				<<domusicon>><<link [[湖边小屋 (0:02)|Lake House Outdoor]]>><<pass 2>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+			<<flywait>>
+		<</if>>
+		/* 北极星 */
+		<<if Time.season isnot "winter" and !isBloodmoon()>>
+			<<if $exposed gte 2>>
+				<<if $exhibitionism gte 75 and $laketeenspresent is 1>>
+					<<walkicon>><<link [[散步 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<arousal 1000>><<rng>><<set $phase to 2>><</link>><<exhibitionist5>><<garousal>><<lstress>>
+					<br>
+				<<elseif $exhibitionism gte 55 and $laketeenspresent isnot 1>>
+					<<walkicon>><<link [[散步 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<arousal 1000>><<rng>><<set $phase to 3>><</link>><<exhibitionist4>><<garousal>><<lstress>>
+					<br>
+				<</if>>
+			<<else>>
+				<<walkicon>><<link [[散步 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<set $phase to 1>><</link>><<lstress>>
+				<br>
+			<</if>>
+		<</if>>
+
+		<<if $debug is 1>>
+			<<ind>><<link [[向北走去消防坑 (0:10)|Lake Firepit]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $town_projects.road gte 4>>
+			<<busicon>><<link [[向北走去公交站|Lake Bus]]>><</link>>
+			<br>
+		<</if>>
+	<<if $nextPassageCheck is "Lake Waterfall">>
+		<span class="nextLink"><<lakeicon "waterfall">><<link [[南下去瀑布 (0:10)|Lake Waterfall]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon "waterfall">><<link [[南下去瀑布 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<</if>>
+	<br><br>
+
+	<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><</link>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

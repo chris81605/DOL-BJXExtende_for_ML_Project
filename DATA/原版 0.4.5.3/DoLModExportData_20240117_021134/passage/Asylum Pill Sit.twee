@@ -1,0 +1,42 @@
+:: Asylum Pill Sit []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $phase is 1>>
+	<<person>>把你推到椅子上，绑住你的四肢。"好了，"<<he>>说道。"施用药剂。"
+<<else>>
+	你坐了下来。哈珀把你的胳膊和腿捆住。"这只是预防措施，"<<he>>向你保证。
+<</if>>
+<br><br>
+<<person1>>
+哈珀戴上了口罩，打开了保险箱。其他人也跟着<<his>>带上了口罩。<<He>>拿出一个罐子，把它拿到你面前打开。紫色的烟雾从里面升起，闻起来很香甜。
+<br><br>
+<<pass 5>>
+<<if $wraith.state and $rng gte 50>>
+	你坐了几分钟。你头上的灯短暂地闪烁，但似乎没有人注意到。
+	<<if $weather isnot "rain" and $weather isnot "snow">>
+		你感觉听到了雨滴打在窗户上的声音，你看向窗户，上面却并没有雨滴。
+	<<else>>
+		你听到远处传来微弱的雷声，你的眼睛条件反射地望向窗户。
+	<</if>>
+	医生们看着你，记录着你的视线方向。
+	<br><br>
+	<<if ["haunt", "despair"].includes($wraith.state)>>
+		你回头看去，<<if $wraith.seen gte 1>>身体里的血仿佛被冻住了。一个熟悉的苍白身影从房间的角落里凝视着你，发光的<<wraithEyes>>眼睛露出笑意。<<stress 24>><<gggstress>><<trauma 6>><<gtrauma>><<else>>突然感到喘不过气。你看到一个苍白的身影在房间的角落里闪动，用明亮的<<wraithEyes>>眼睛直盯着你。<<stress 12>><<ggstress>><</if>>
+	<<else>>
+		你回头看去，房间角落里的一盏灯又闪烁了一下，随后有什么东西消失了。你开始耳鸣。你肯定看到了有东西……有人……在那里。祂看起来高大而苍白，戴着一条镶有深蓝色宝石的象牙项链。你觉得祂在向你招手，或者是在示意你靠近点。<<stress 12>><<ggstress>>
+	<</if>>
+	<br><br>
+	哈珀注意到了你的不适。"怎么了？你是不是看到了什么奇怪的东西？"<<he>>一开口，一切就迅速恢复了正常。
+	<br><br>
+	<<link [[告知|Asylum Pill Tell]]>><<awareness -5>><<stress -3>><</link>><<lawareness>><<lstress>>
+	<br>
+	<<link [[保持沉默|Asylum Pill Quiet]]>><<suspicion 1>><<awareness 5>><<stress 3>><</link>><<gsuspicion>><<gawareness>><<stress 3>>
+	<br>
+<<else>>
+	你坐了几分钟。医生看着你，好像在期待什么事情发生。"怎么样？"<<person2>><<person>>说道。"你看到什么奇怪的东西了吗？"你摇了摇头。
+	<br><br>
+	"密切关注<<phim>>，"哈珀说道。"我去叫下一个病人来。"<<He>>解开椅子上的带子。"谢谢你的合作。保重。"
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Asylum]]>><</link>>
+	<br>
+<</if>>

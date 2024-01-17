@@ -1,0 +1,34 @@
+:: Moor Bird Pool []
+<<npc "Great Hawk">>
+你深吸一口气，潜入水池。你透过水面向上看，<<beasttype>>在上空盘旋。<<water>><<effects>>
+<br><br>
+<<if $swimmingSuccess is 1>>
+	<span class="green">你试着屏住了呼吸。</span>
+	<<if $rng gte 21>>
+		<span class="blue"><<beasttype>>从空中俯冲下来，</span>落在池边。<<bHe>>扫视着四周，却只匆匆瞥了一眼你的藏身之处。
+		<br><br>
+
+		<<link [[隐藏起来 (0:01)|Moor Bird Pool 2]]>><<pass 1>><</link>><<swimmingdifficulty 1 500>>
+		<br>
+		<<link [[现身|Moor Bird Emerge]]>><</link>>
+		<br>
+	<<else>>
+		<<beasttype>>发出一声沮丧的尖叫，<span class="green">然后飞走了。</span>
+		<br><br>
+		<<unset $moor_hunt>>
+		你浮出水面，喘着气。
+		<br><br>
+
+		<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你极尽所能地等待着，<span class="red">但再也憋不住了。</span>你冒了出来，喘着粗气。
+	<br><br>
+
+	你刚刚缓过神，就听到又一声尖叫。<span class="red">这一次非常近。</span>你抬头一看，<<beasttype>>正在朝你俯冲，利爪张开。你想再度潜入水下，但已经太迟了。<<bHis>>的利爪抓住了你的肩膀。<<if $monster is 1>>"抓到你了。"<<bhe>>说，同时<<bhis>>背上的翅膀疯狂扇动。<</if>>你被带离了下方的水池。
+	<br><br>
+
+	<<link [[继续|Bird Capture]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,49 @@
+:: Prison Laundry Work Challenge 3 []
+<<effects>>
+
+<<if $relaxed_roll is $your_roll>>
+	"平局，"<<relaxed_guard 0>>说道，"再来一把？"
+	<br><br>
+	<<link [[再来一局|Prison Laundry Work Challenge]]>><<unset $relaxed_roll>><<unset $your_roll>><</link>>
+	<br>
+	<<link [[平常应付|Prison Laundry Work Normal]]>><<unset $relaxed_roll>><<unset $your_roll>><</link>>
+	<br>
+<<elseif $your_roll gte $relaxed_roll>>
+	<<prison_work 1>>
+	"你赢了，"<<relaxed_guard 0>>撇撇嘴，"随便你摸鱼，不过不要离开洗衣房。我会把你记为上工的。<span class="green">就当是多了一个小时的自由时间吧。</span>"
+	<br><br>
+
+	<<unset $relaxed_roll>>
+	<<unset $your_roll>>
+
+	<<prison_laundry_options>>
+
+<<else>>
+	"你输了，"<<relaxed_guard 0>>坏笑着说道。
+	<<switch $phase>>
+		<<case 1>>
+			"跪下来。"
+			<br><br>
+			接下来的一个小时里，你叼着衣服在洗衣机和桌子之间爬来爬去，效率低得要命。但这不是重点。
+			<br><br>
+			其他囚犯都被逗乐了。<<lrespect>><<prison_inmates -1>><<ggattention>><<prison_attention 3>><<gstress>><<garousal>><<stress 6>><<arousal 600>>
+			<br><br>
+			<<pass 1>><<advancetohour>>
+			<<prison_laundry_options>>
+		<<case 2>>
+			"跪下来。"
+			<br><br>
+			接下来的一个小时里，<<relaxed_guard 0 apo>>的脚一直放在你的背上。<<He>>看起来很开心。囚犯们也是。<<lrespect>><<prison_inmates -1>><<gattention prison>><<prison_attention 1>><<gstress>><<garousal>><<stress 6>><<arousal 600>>
+			<br><br>
+			<<pass 1>><<advancetohour>>
+			<<prison_laundry_options>>
+		<<default>>
+			"跪下来。"
+			<br><br>
+			<<He>>抓住你的后发，把你的脸拉向<<his>>的大腿根部。
+			<br><br>
+
+			<<link [[继续|Prison Laundry Oral]]>><<set $sexstart to 1>><</link>>
+			<br>
+	<</switch>>
+<</if>>

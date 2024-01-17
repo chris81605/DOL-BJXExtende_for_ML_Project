@@ -1,0 +1,267 @@
+:: Widgets School [widget]
+<<widget "schooleffects">>
+	<<if Time.schoolDay>>
+		<<if Time.hour lte 6>>
+			<<set $schoolstate to "early">><<set $schoollesson to 0>>
+		<<elseif Time.hour lte 8>>
+			<<set $schoolstate to "morning">><<set $schoollesson to 0>>
+		<<elseif Time.hour is 9>>
+			<<set $schoolstate to "first">><<set $schoollesson to 1>>
+		<<elseif Time.hour is 10>>
+			<<set $schoolstate to "second">><<set $schoollesson to 1>>
+		<<elseif Time.hour is 11>>
+			<<set $schoolstate to "third">><<set $schoollesson to 1>>
+		<<elseif Time.hour is 12>>
+			<<set $schoolstate to "lunch">><<set $schoollesson to 0>>
+		<<elseif Time.hour is 13>>
+			<<set $schoolstate to "fourth">><<set $schoollesson to 1>>
+		<<elseif Time.hour is 14>>
+			<<set $schoolstate to "fifth">><<set $schoollesson to 1>>
+		<<elseif Time.hour lte 16>>
+			<<set $schoolstate to "afternoon">><<set $schoollesson to 0>>
+		<<elseif Time.hour gte 17>>
+			<<set $schoolstate to "late">><<set $schoollesson to 0>>
+		<</if>>
+
+		<!-- changing room is in use a bit longer than school is in session. also include changing times before first, after fifth and during midday break -->
+		<<set $changingroomstate to "empty">>
+		<<if (Time.hour gt 8 or Time.hour is 8 and Time.minute gte 58) and (Time.hour lt 15 or Time.hour is 15 and Time.minute lte 4)>>
+			<<if Time.minute lte 4 or Time.minute gte 58>>
+				<<if Time.hour gte 14 and Time.minute gte 58>>
+					<<set $changingroomstate to "own">>
+				<<else>>
+					<<set $changingroomstate to "other">>
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<if $schoolpoolundress isnot undefined>>
+			<span class="yellow">你的衣服被移到了<<print $schoolpoolundress is "wardrobe" ? "衣柜" : $schoolpoolundress + "更衣室">>。</span>
+			<br>
+			<<unset $schoolpoolundress>>
+		<</if>>
+
+		<!-- pool room itself is in use during $schoolstate only -->
+		<<if $schoolstate is "fifth">>
+			<<set $poolroomstate to "own">>
+		<<elseif $schoollesson is 1>>
+			<<set $poolroomstate to "other">>
+		<<else>>
+			<<set $poolroomstate to "empty">>
+		<</if>>
+	<<else>>
+		<<if Time.hour lte 6>>
+			<<set $schoolstate to "earlynoschool">><<set $schoollesson to 0>>
+		<<elseif Time.hour gte 17>>
+			<<set $schoolstate to "daynoschool">><<set $schoollesson to 0>>
+		<<else>>
+			<<set $schoolstate to "latenoschool">><<set $schoollesson to 0>>
+		<</if>>
+		<<set $changingroomstate to "empty">>
+		<<set $poolroomstate to "empty">>
+	<</if>>
+<</widget>>
+
+<<widget "advancelesson">><!-- advances time during a lesson and sets $phase to 1 if the lesson has ended -->
+	<<set _time_left to 59 - Time.minute>>
+	<!-- the lesson ends at 59th minute to give time to walk to the next class -->
+	<<set _state to $schoolstate>>
+	<<schooleffects>>
+
+	<<if _state isnot $schoolstate>>
+		<!-- only happens if we somehow jumped into another lesson, abort! -->
+		<<set $phase to 1>>
+	<<elseif _time_left gte 23>>
+		<!-- make sure that there's at least a couple of minutes left for the next phase of a lesson -->
+		<<pass 20>>
+	<<else>>
+	<!-- end of the lesson -->
+		<<set $phase to 1>>
+		<<pass _time_left>>
+	<</if>>
+	<<schooleffects>>
+	<!-- an extra variable for use in adding learning points, stress, etc.
+		1 point per 5 minutes + 1 for being present at the end of the lesson -->
+	<<set _lesson_progress to (_time_left gte 20 ? 4 : Math.trunc(_time_left / 5)) + $phase>>
+<</widget>>
+
+<<widget "schoolperiod">>
+	<<if $exposed lte 0>>
+		<<if $schoolstate is "morning" or ($schoolstate is "first" and Time.minute lte 58)>>
+			<<scienceicon>><<link [[去上科学课 (0:01)|Science Classroom]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<<elseif $schoolstate is "first" or ($schoolstate is "second" and Time.minute lte 58)>>
+			<<mathicon>><<link [[去上数学课 (0:01)|Maths Classroom]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<<elseif $schoolstate is "second" or ($schoolstate is "third" and Time.minute lte 58)>>
+			<<englishicon>><<link [[去上语文课 (0:01)|English Classroom]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<<elseif $schoolstate is "third" or ($schoolstate is "lunch" and Time.minute lte 58)>>
+			<<foodicon "eat">><<link [[加入食堂的人群中 (0:01)|Canteen]]>><<pass 1>><</link>>
+			<br>
+			<<historyicon>><<link [[在历史教室等待 (0:01)|History Classroom]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<<elseif $schoolstate is "lunch" or ($schoolstate is "fourth" and Time.minute lte 58)>>
+			<<historyicon>><<link [[去上历史课 (0:01)|History Classroom]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<<elseif $schoolstate is "fourth" or ($schoolstate is "fifth" and Time.minute lte 58)>>
+			<<swimmingicon>><<link [[去上游泳课 (0:01)|School Pool Entrance]]>><<set $justEntered to true>><<pass 1>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolperiodtext">>
+	<<if $schoolstate is "morning">>
+		你的科学课将于<<ampm 9 00>>开始。
+		<br><br>
+	<<elseif $schoolstate is "first" and Time.minute lte 58>>
+		<span class="red">你的科学课在<<ampm 9 00>>开始！！！</span>
+		<br><br>
+	<<elseif $schoolstate is "first">>
+		你的数学课在<<ampm 10 00>>开始。
+		<br><br>
+	<<elseif $schoolstate is "second" and Time.minute lte 58>>
+		<span class="red">你的数学课在<<ampm 10 00>>开始！！！</span>
+		<br><br>
+	<<elseif $schoolstate is "second">>
+		你的语文课将于<<ampm 11 00>>开始。
+		<br><br>
+	<<elseif $schoolstate is "third" and Time.minute lte 58>>
+		<span class="red">你的语文课在<<ampm 11 00>>开始！！！</span>
+		<br><br>
+	<<elseif $schoolstate is "lunch">>
+		你的历史课将于<<ampm 13 00>>开始。
+		<br><br>
+	<<elseif $schoolstate is "fourth" and Time.minute lte 58>>
+		<span class="red">你的历史课在<<ampm 13 00>>开始！！！</span>
+		<br><br>
+	<<elseif $schoolstate is "fourth">>
+		你的游泳课将于<<ampm 14 00>>开始。
+		<br><br>
+	<<elseif $schoolstate is "fifth">>
+		<span class="red">你的游泳课在<<ampm 14 00>>开始！！！</span>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "classgrades">>
+	<<if $schoolstate is "morning" or ($schoolstate is "first" and Time.minute lte 58)>>
+		<<if $sciencetrait gte 4>>
+					你当前的科学成绩是<span class="green">A*</span>。你已经无法从这个课程中学到更多的东西了。
+				<<elseif $sciencetrait gte 3>>
+					你当前的科学成绩是<span class="teal">A</span>。你是最优秀的人之一，但你仍然可以取得更多的成就。
+				<<elseif $sciencetrait gte 2>>
+					你当前的科学成绩是<span class="lblue">B</span>。你的成绩不是最好的，但也不是最差的。
+				<<elseif $sciencetrait gte 1>>
+					你当前的科学成绩是<span class="blue">C</span>。你已经有了一些进步，但仍需要更多的学习。
+				<<elseif $sciencetrait gte 0>>
+					你当前的科学成绩是<span class="purple">D</span>。你还有很长的路要走。
+				<<else>>
+					你当前的科学成绩是<span class="red">F</span>。你是班上最差的学生。
+			<</if>>
+		<<elseif $schoolstate is "first" or ($schoolstate is "second" and Time.minute lte 58)>>
+		<<if $mathstrait gte 4>>
+					你当前的数学成绩是<span class="green">A*</span>。你已经无法从这个课程中学到更多的东西了。
+				<<elseif $mathstrait gte 3>>
+					你当前的数学成绩是<span class="teal">A</span>。你是最优秀的人之一，但你仍然可以取得更多的成就。
+				<<elseif $mathstrait gte 2>>
+					你当前的数学成绩是<span class="lblue">B</span>。你的成绩不是最好的，但也不是最差的。
+				<<elseif $mathstrait gte 1>>
+					你当前的数学成绩是<span class="blue">C</span>。你已经有了一些进步，但仍需要更多的学习。
+				<<elseif $mathstrait gte 0>>
+					你当前的数学成绩是<span class="purple">D</span>。你还有很长的路要走。
+				<<else>>
+					你当前的数学成绩是<span class="red">F</span>。你是班上最差的学生。
+			<</if>>
+		<<elseif $schoolstate is "second" or ($schoolstate is "third" and Time.minute lte 58)>>
+		<<if $englishtrait gte 4>>
+					你当前的语文成绩是<span class="green">A*</span>。你已经无法从这个课程中学到更多的东西了。
+				<<elseif $englishtrait gte 3>>
+					你当前的语文成绩是<span class="teal">A</span>。你是最优秀的人之一，但你仍然可以取得更多的成就。
+				<<elseif $englishtrait gte 2>>
+					你当前的语文成绩是<span class="lblue">B</span>。你的成绩不是最好的，但也不是最差的。
+				<<elseif $englishtrait gte 1>>
+					你当前的语文成绩是<span class="blue">C</span>。你已经有了一些进步，但仍需要更多的学习。
+				<<elseif $englishtrait gte 0>>
+					你当前的语文成绩是<span class="purple">D</span>。你还有很长的路要走。
+				<<else>>
+					你当前的语文成绩是<span class="red">F</span>。你是班上最差的学生。
+			<</if>>
+		<<elseif $schoolstate is "lunch" or ($schoolstate is "fourth" and Time.minute lte 58)>>
+		<<if $historytrait gte 4>>
+					你当前的历史成绩是<span class="green">A*</span>。你已经无法从这个课程中学到更多的东西了。
+				<<elseif $historytrait gte 3>>
+					你当前的历史成绩是<span class="teal">A</span>。你是最优秀的人之一，但你仍然可以取得更多的成就。
+				<<elseif $historytrait gte 2>>
+					你当前的历史成绩是<span class="lblue">B</span>。你的成绩不是最好的，但也不是最差的。
+				<<elseif $historytrait gte 1>>
+					你当前的历史成绩是<span class="blue">C</span>。你已经有了一些进步，但仍需要更多的学习。
+				<<elseif $historytrait gte 0>>
+					你当前的历史成绩是<span class="purple">D</span>。你还有很长的路要走。
+				<<else>>
+					你当前的历史成绩是<span class="red">F</span>。你是班上最差的学生。
+		<</if>>
+	<</if>>
+		<br><br>
+<</widget>>
+
+<<widget "exhibitorgasm">>
+	<<if $orgasmdown gte 1>><<set $orgasmdown to 0>>
+		<<if $orgasmcurrent lte 0>>
+		<<elseif $orgasmcurrent lte 1>>
+			你的身体在束缚下痉挛着达到了高潮。
+			<<if $enemyno gte 2>>
+				<<if $player.penisExist and $orgasmcount lte 23>>
+					两人的顿时兴奋了起来。"<<pShes>>高潮了！"<<person>>激动地大喊，同时往后退避你不断喷溢出液体的下体，敬畏地看着眼前的这一幕。
+				<<else>>
+					两人的顿时兴奋了起来。"<<pShes>>高潮了！"<<person>>激动地大喊。
+				<</if>>
+			<<else>>
+				<<if $player.penisExist and $orgasmcount lte 23>>
+				<<else>>
+				<</if>>
+			<</if>>
+		<<elseif $orgasmcurrent is 2>>
+			你的身体在束缚下痉挛着，再次达到了高潮。
+			<<if $enemyno gte 2>>
+				<<if $player.penisExist and $orgasmcount lte 23>>
+					"我第一次见有人能一口气射这么多发。"<<person>>感叹道。
+				<<else>>
+					"我第一次见有人能一口气射这么多发。"<<person>>感叹道。
+				<</if>>
+			<<else>>
+				<<if $player.penisExist and $orgasmcount lte 23>>
+				<<else>>
+				<</if>>
+			<</if>>
+		<<else>>
+		<</if>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "changingrooms">>
+	<<if $exposed gte 2>>
+		<<if $player.gender_appearance is "m">>
+			<<if $exhibitionism gte 75>>
+				<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+			<br>
+		<<else>>
+			<<if $exhibitionism gte 75>>
+				<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+			<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+		<br>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>

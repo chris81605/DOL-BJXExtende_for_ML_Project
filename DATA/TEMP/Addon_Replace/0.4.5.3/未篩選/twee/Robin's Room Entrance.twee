@@ -1,0 +1,108 @@
+:: Robin's Room Entrance []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $robindebt gte $robindebtlimit and $robindebtintro isnot 1 and $robinpaid isnot 1>>
+	<<set $robinconsole to 0>>
+	<<set $robineventnote to 1>>
+	<<set $robindebtintro to 1>>
+	<<robinPunishment "docks">>
+	你走到罗宾的房间门口，敲了敲门，但没有回应，门上也没有贴任何纸条。你往里面窥视，房间里空无一人。
+	<br><br>
+	一个<<npc Robin>><<generatec2>><<person2>><<person>>经过。你抓住了<<his>>的手臂。"罗宾平时都会在门上留纸条的，"你说，“发生什么事了吗？"
+	<br><br>
+	<<person>>的表情看起来充满了恐惧。"别……千万不要说是我告诉你的，"<<he>>说道，"罗宾付不起钱，贝利把<<person1>><<him>>带走了。"<<if $robindebtknown isnot 1>><span class="red">你想知道为什么罗宾从来没有告诉过你<<he>>必须给贝利钱这件事，然后意识到你自己也一直没告诉过罗宾。</span><</if>>
+	<br><br>
+	<<set $robindebtknown to 1>>
+	"我不确定，"<<person2>><<person>>说，"但是贝利好像有提到过<span class="gold">码头。</span>希望罗宾没事。" 你放开了<<person2>><<his>>的胳膊。
+	<br><br>
+	<<endevent>>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif $robinmissing isnot 0>>
+	你走到罗宾的房间门口，敲了敲门，但没有回应，门上也没有贴任何纸条。你往里面窥视，房间里空无一人。
+	<br><br>
+	<<if $robinmissing is "pillory" and !$robinPillory.known and Time.hour gte 7 and Time.hour lte 15>>
+		<<link [[离开|Robin Pillory Intro]]>><</link>>
+	<<else>>
+		<<link [[离开|Orphanage]]>><</link>>
+	<</if>>
+	<br>
+<<elseif $christmas_robin_lewd is 1>>
+	<<unset $christmas_robin_lewd>>
+	<<npc Robin>><<person1>>
+	罗宾的门上有张纸条。上面写着指定只有你可以进入。
+	<br><br>
+	你进去后发现罗宾正坐在床上。<<His>>的衣服不见了，身体上缠着包装纸和丝带。刚好够遮盖住<<his>>的隐秘部位，别的地方半遮半露的，非常诱人。
+	<br><br>
+	"我……我想给你一个惊喜，"罗宾的脸很红，但目光却一直没从你身上离开。
+	<br><br>
+
+	"你……想要来拆开我这份礼物吗？"<<ggarousal>><<arousal 600>>
+	<br><br>
+	<<link [[是的|Robin Unwrap]]>><</link>><<promiscuous1>>
+	<br>
+	<<link [[不要|Robin Unwrap No]]>><</link>>
+	<br>
+
+<<elseif _robin_location is "school">>
+	你走到罗宾的房间门口，门上有张纸条："去上学了！"
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif _robin_location is "sleep">>
+	你走到罗宾的房间门口，门上有张纸条："在睡觉！"
+	<<if _robin.lust gte 80 and $robinromance is 1 and between(Time.hour, 21, 23) and !$daily.robin.sleepMasturbate>>
+		<<set $daily.robin.sleepMasturbate to true>>
+		<span class="lewd">你注意到门微微打开了一道缝隙。</span>
+		<br><br>
+
+		<<link [[窥视一下|Robin Mischief]]>><</link>>
+		<br>
+		<<link [[关门|Robin Mischief Close]]>><</link>>
+	<<else>>
+		<br><br>
+
+		<<link [[离开|Orphanage]]>><</link>>
+	<</if>>
+	<br>
+	<<if $debug is 1>>
+		<<link [[等待罗宾 (调试)|$passage]]>><<passTimeUntil 7>><</link>>
+	<</if>>
+
+<<elseif _robin_location is "bath">>
+	<<set $robinBathKnown to true>>
+	你走到罗宾的房间门口，门上有张纸条："去洗澡了！"
+	<br><br>
+	<<link [[去浴室 (0:01)|Robin Bath]]>><</link>>
+	<br>
+	<<link [[离开|Orphanage]]>><</link>>
+<<elseif _robin_location is "beach">>
+	你走到罗宾的房间门口，门上有张纸条："出去卖柠檬水了！"
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif _robin_location is "park">>
+	你走到罗宾的房间门口，门上有张纸条："出去卖热巧克力了！"
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif _robin_location is "halloween">>
+	你走到罗宾的房间门口，门上有张纸条："出门过万圣节了！"
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif _robin_location is "englishPlay">>
+	你走到罗宾的房间门口，门上有张纸条："去参加学校演出了！"
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<elseif false /*$robin_kicked_out is true*/>>
+	你走到罗宾的房间门口，但罗宾现在不想见你。
+	<br><br>
+	<<link [[离开|Orphanage]]>><</link>>
+	<br>
+<<else>>
+	<<set _uniqueoptions to false>>
+	<<robinroom>>
+<</if>>

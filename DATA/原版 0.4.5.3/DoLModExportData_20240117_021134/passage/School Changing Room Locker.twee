@@ -1,0 +1,43 @@
+:: School Changing Room Locker []
+<<schooleffects>><<effects>>
+
+你成功地撬开了一个储物柜，并在里面翻找。
+
+<<if $skulduggery lt 100>>
+	<<skulduggeryskilluse>><<skulduggery 5>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+
+<<if $locker_suspicion is undefined>>
+	<<set $locker_suspicion to 0>>
+	<<set $panties_held to 0>>
+<</if>>
+
+<<set _colour to either("蓝色", "绿色", "红色", "黑色", "粉色", "紫色", "黄色", "白色", "橙色", "条纹", "波点")>>
+
+<<if $rng gte 11>>
+	<<if $changingRoomGender is "boys">>
+		<<set _apparelArr to ["panties", "briefs", "boxer shorts", "g-string", "boxer briefs", "swimshorts"]>>
+	<<else>>
+		<<set _apparelArr to ["boxer shorts", "boyshorts", "lace panties", "briefs", "thongs", "panties", "bikini bottoms"]>>
+	<</if>>
+	<<set _apparel to either(_apparelArr)>>
+	你找到了一条_colour的<<print _apparel.replace("lace panties","蕾丝内裤").replace("panties","内裤").replace("boxer briefs","四角裤").replace("briefs","三角裤").replace("boxer shorts","平角短裤").replace("g-string","丁字裤").replace("swimshorts","泳裤").replace("boyshorts","平角裤").replace("thongs","露臀内裤").replace("bikini bottoms","比基尼裤")>>。
+	<<if _apparel is _apparelArr[0]>>
+		你不知道这玩意为什么会在<<print ($changingRoomGender is "boys" ? "男生" : "女生")>>的储物柜里。
+	<<elseif _apparel is _apparelArr[_apparelArr.length]>>
+		肯定有人打算在放学后去游泳。
+	<</if>>
+	<br>
+	<<link [[拿走|School Pool Locker Take]]>><<crimeUp 10 "petty">><<locker_suspicion 1>><<set $panties_held += 1>><<set $stat_panties_stolen += 1>><</link>><<crime "petty">><<gsuspicion>>
+<<else>>
+	这里没找到内裤。柜子的主人想必今天下面没穿吧。<<garousal>><<arousal 600>>
+<</if>>
+<br><br>
+<<if $changingRoomGender is "boys">>
+	<<ind>><<link [[离开|School Boy Changing Room]]>><</link>>
+<<else>>
+	<<ind>><<link [[离开|School Girl Changing Room]]>><</link>>
+<</if>>

@@ -1,0 +1,43 @@
+:: Danube Catperson Payment []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+<<loadNPC 0 "danube_cat_owner">><<person1>>
+
+<<if $danubecathappiness isnot 0>>
+	<<set _catPay to (35 + ($danubecathappiness * 15))>>
+<</if>>
+
+你听到门外有声音。"我回来了！"是<<person>>。<<His>>的宠物围着<<him>>，
+<<if $danubecathappiness gte 1>>
+	高兴地咕噜着。
+	<br><br>
+
+	"你交新朋友了吗？"<<he>>轻语道，"你觉得<<pshe>>应该得到一点奖励，是吗？"
+	<br><br>
+
+	<<He>>递给你<<moneyGain _catPay>>。"额外一点，"当<<he>>领你出去时，<<he>>说道。"什么时候一定要回来。他们太喜欢你了！"
+<<elseif $danubecathappiness lte -1>>
+	嚎叫并嘶鸣着。
+	<br><br>
+
+	那<<person>>瞪着你。你还没来得及进来就被扔到外面了。
+	<br><br>
+
+	<<He>>将<<moneyGain _catPay>>扔到你的脚下，然后砰的一声关上了门。你门边听到了低沉的哭泣声。你拿了钱赶紧离开。
+<<else>>
+	不耐烦地叫嚷着。
+	<br><br>
+
+	"安静点，亲爱的。<<Mummy>>在家，"<<he>>喃喃着，跪下来照料这群小动物。
+	<br><br>
+
+	<<He>>把<<moneyGain 35>>放在一边，看都不看你一眼。你拿了钱就走。
+<</if>>
+<br><br>
+
+<<clearNPC "danube_cat_owner">>
+<<clearNPC "danube_cat_0">>
+<<clearNPC "danube_cat_1">>
+<<clearNPC "danube_cat_2">>
+
+<<link [[离开|Danube Street]]>><<unset $danubecathappiness>><<endevent>><</link>>
+<br>

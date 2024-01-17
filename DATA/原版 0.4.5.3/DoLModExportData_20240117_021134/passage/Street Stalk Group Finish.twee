@@ -1,0 +1,103 @@
+:: Street Stalk Group Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $combat_end_text>>
+		<<print $combat_end_text>>
+	<<elseif $enemyanger gte ($enemyangermax / 5) * 3>>
+		<<He>>把你扔到了人行道上。<<group>>大摇大摆地走开了。
+		<<violence 3>>
+		<br><br>
+	<<elseif $enemyanger gte 1>>
+		<<group>>一言不发地走开了。
+		<br><br>
+	<<else>>
+		<<group>>把你扔在了地上。
+		<br><br>
+	<</if>>
+	<<underlowersteal>>
+	<<tearful>>你站了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+
+<<elseif $enemyhealth lte 0>>
+	<<if Time.dayState isnot "night">>
+		<<group>>退缩了，给了你可乘之机。<<tearful>>你钻进了人群。
+		<br><br>
+	<<else>>
+		<<group>>退缩了，给了你可乘之机。<<tearful>>你逃到了暗处。
+		<br><br>
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<elseif $stalk_end is "escaped">>
+	你放慢脚步，<<tearful>>随后你继续前进。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+
+<<elseif $stalk_end is "passed">>
+	一行人走在前面。<<tearful>>你继续自己的行程。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+
+<<elseif $stalk_end is "hide">>
+	<<covered>><<tearful>>你离开藏身之处并继续自己的行程。
+	<br><br>
+
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+
+<<elseif $stalk_end is "outpaced">>/*Unnecessary if the PC can't become the pursuer */
+	<<if $exposed gte 1>>
+		<<switch $location>>
+		<<case alley>>
+			<<tearful>>你慢慢停了下来。<<covered>>周围一个人也没有，但这里仍然是公众场所。
+		<<case forest lake>>
+			<<tearful>>你慢慢地停了下来。<<covered>>现在周围一个人也没有，但你也不能确保在森林里不会撞见什么人。
+		<<case moor>>
+			<<tearful>>你慢慢停下了脚步。<<covered>>周围一个人也没有，但无论如何，在这么开阔的地方暴露身体都令人不安。
+		<<default>>
+			<<covered>><<tearful>>你钻进一条小巷，希望保护你的身体免受任何窥探。
+		<</switch>>
+	<<else>>
+		<<tearful>>你慢慢停下来。
+	<</if>>
+	<br><br>
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+	<br>
+<<else>>
+	<<set $rescued += 1>>
+	<<if $position is "stalk">>
+		几个人朝你这边看来。跟在你后面的<<group>>保持着距离。
+	<<else>>
+		<<group>>注意到你的喊声引起了几个人的注意，于是停止了侵犯，四散离开了。
+	<</if>>
+	<br><br>
+	<<tearful>>你继续自己的行程。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+
+<</if>>

@@ -1,0 +1,346 @@
+:: Pillory []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $pilloryaudience lte 1>>
+<<set $pilloryaudience to 1>>
+<</if>>
+
+你被卡在峭壁街的一处颈手枷上，就在市政厅的前面。
+
+<<if $pillorytime gte 1>>
+距刑满释放还有<<number $pillorytime>>个小时。
+<<else>>
+你已经到了被释放的时间。
+<</if>>
+
+<<if $pilloryaudience + $exposed is 1>>
+
+<span class="teal">有几个人会停下来看你，但大多数人只是瞥了一眼便回去忙自己的事了。</span>
+
+<<elseif $pilloryaudience + $exposed is 2>>
+
+<span class="lblue">你已经吸引了一小批围观者。</span>
+
+<<elseif $pilloryaudience + $exposed is 3>>
+
+<span class="blue">你已经吸引了越来越多的围观者。</span>
+
+<<elseif $pilloryaudience + $exposed is 4>>
+
+<span class="purple">一大群人聚集在你周围，而这又吸引了更多的人来看热闹。</span>
+
+<<elseif $pilloryaudience + $exposed is 5>>
+
+<span class="pink">一大群人聚集在你周围，这些人对你冷嘲热讽。</span>
+
+<<else>>
+
+<span class="red">一大群人聚集在你周围，人们对你冷嘲热讽，更有甚者丢来了垃圾。</span>
+
+<</if>>
+
+<<if $exposed gte 1>>
+
+你的<<lewdness>>正展示在众人面前，让你颜面尽失，你却无能为力。
+<<if $exposed gte 2>> <<trauma 1>><<gtrauma>><</if>>
+
+	<<if $exposed is 1>>
+		<<if $pilloryaudience is 1>>
+		<<fameexhibitionism 1>>
+		<<elseif $pilloryaudience is 2>>
+		<<fameexhibitionism 2>>
+		<<elseif $pilloryaudience is 3>>
+		<<fameexhibitionism 3>>
+		<<elseif $pilloryaudience is 4>>
+		<<fameexhibitionism 4>>
+		<<elseif $pilloryaudience is 5>>
+		<<fameexhibitionism 5>>
+		<<else>>
+		<<fameexhibitionism 10>>
+		<</if>>
+	<</if>>
+	<<if $exposed is 2>>
+		<<if $pilloryaudience is 1>>
+		<<fameexhibitionism 3>>
+		<<elseif $pilloryaudience is 2>>
+		<<fameexhibitionism 6>>
+		<<elseif $pilloryaudience is 3>>
+		<<fameexhibitionism 9>>
+		<<elseif $pilloryaudience is 4>>
+		<<fameexhibitionism 12>>
+		<<elseif $pilloryaudience is 5>>
+		<<fameexhibitionism 15>>
+		<<else>>
+		<<fameexhibitionism 30>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<if $exposed gte 1 and $pilloryaudience and random(0, 9) gte 7>>
+	一个人掏出<<print ["相机", "手机"].pluck()>>，然后拍了一张照片。
+	"<<print [
+		"现在你的<<undies>>可以一直露在外面给我们看了。",
+		"等不及上传这些艳照了。",
+		"等不及分享给朋友了。",
+		"如果你不想让别人拍你的<<undies>>，你就不该这么放荡。",
+		"如果你不想让别人拍你的<<undies>>，你就不应该违法。",
+		"哟，让大家拍下你的<<undies>>很尴尬么？",
+		"什么都遮不住的感觉是不是很尴尬啊？",
+		"如果你不想让别人拍到你的<<undies>>，你就不应该违法。",
+		"如果你不想让别人拍到你的<<undies>>的话，你就不该违法犯罪。",
+		"我敢打赌，<<pshes>>还享受着呢。",
+		"就这样暴露在外是不是很尴尬？真是太糟糕了。",
+		"这样暴露在外很尴尬吗？那可真糟糕呀，你这个罪犯。",
+		"我打赌<<pshe>>无论受到怎样的羞辱都会从中得到快感。",
+		"你喜欢我们拍下你的<<undies>>么？"
+	].pluck()>>"
+	<<if $exposed is 1>>
+		<<trauma 1>><<gtrauma>>
+	<<else>>
+		<<trauma 2>><<gtrauma>>
+	<</if>>
+	<<fameexhibitionism 10 "pic">>
+<</if>>
+<<if $exposed gte 2 and $pilloryaudience and $player.penisExist and random(0, 9) gte 7>><<pillorypeniscomment>><</if>>
+
+<br><br>
+
+<<if $pillorytime lte 0>>
+
+	一个穿着警察制服的<<generatePolice 1>><<person1>><<person>>走了过来，<<He>>取下你的脖子上的颈枷，然后解开了柱子上的锁，结束了这场刑罚。当警察开始驱散人群时，人群发出了失望的嘘声。
+	<br><br>
+	<<set $worn.neck.cursed to 0>><<neckruined>>
+	<<set $worn.neck.collaredpolice to 0>>
+	<<set $pilloryaudience to 0>>
+	<<unbind>>
+	<<clotheson>>
+	<<set $stress -= 1000>>
+	<<endevent>>
+	<<cliffeventend>>
+	<br>
+<<else>>
+
+	<<rng 5>>
+	<<if $pilloryaudience + $exposed + $rng gte 10>>
+	<<rng>>
+		<<beastNEWinit 1 dog>>
+		<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Monster People -->
+			你感觉到有什么东西拱了一下<<bottom>>，是一只<<beasttype>>正在好奇地嗅着你。
+			<br><br>
+
+			<<link [[继续|Pillory Dog]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			<<endevent>>
+			<<generate1>><<person1>>一个<<person>>直接走到颈手枷这里。
+			<br><br>
+
+			<<link [[继续|Pillory Molestation]]>><<set $molestationstart to 1>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+
+	<<elseif $pilloryaudience + $exposed + $rng gte 6>>
+	<<rng>>
+		<<if $rng gte 85>>
+			<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1>>
+				一个<<generate1>><<person1>><<person>>蹲在你的身边，并试图伸手去抓你的<<breasts>>。
+				<br><br>
+
+				<<link [[吐口水|Pillory Spit]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+				<br>
+				<<link [[保持不动|Pillory Chest]]>><<trauma 6>><<stress 6>><<arousal 600 "breasts">><</link>><<gtrauma>><<gstress>><<garousal>>
+				<br>
+
+			<<elseif $worn.upper.exposed gte 2 and $worn.under_upper.exposed lte 0>>
+				<<if $worn.under_upper.open is 1 or $worn.under_upper.set isnot $worn.under_lower.set>>
+					一个<<generate1>><<person1>><<person>>走了过来，然后直接抓住了你的$worn.under_upper.cn_name_cap。
+					<br><br>
+
+					<<link [[吐口水|Pillory Spit]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+					<br>
+					<<link [[保持不动|Pillory Under Upper]]>><<trauma 6>><<stress 6>><<arousal 600>><</link>><<gtrauma>><<gstress>><<garousal>>
+					<br>
+				<<else>>
+					一个<<generate1>><<person1>><<person>>拿着相机走了过来，在拍了几张照片后，<<He>>便回到了人群当中。<<gstress>><<stress 6>>
+					<br><br>
+
+					<<if $exposed gte 2>>
+						<<fameexhibitionism 2 "pic">>
+					<<elseif $exposed gte 1>>
+						<<fameexhibitionism 1 "pic">>
+					<</if>>
+					<<endevent>>
+					<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+					<br>
+				<</if>>
+			<<elseif $worn.upper.exposed lte 1>>
+				<<if $worn.under_upper.exposed lte 0 and ($worn.upper.open is 1 or $worn.upper.set isnot $worn.lower.set)>>
+					一个<<generate1>><<person1>><<person>>走了过来，然后直接抓住了你的$worn.upper.cn_name_cap。
+					<br><br>
+
+					<<link [[吐口水|Pillory Spit]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+					<br>
+					<<link [[保持不动|Pillory Upper]]>><<trauma 6>><<stress 6>><<arousal 600>><</link>><<gtrauma>><<gstress>><<garousal>>
+					<br>
+				<<else>>
+					一个<<generate1>><<person1>><<person>>拿着相机走了过来，在拍了几张照片后，<<He>>便回到了人群当中。<<gstress>><<stress 6>>
+					<br><br>
+
+					<<if $exposed gte 2>>
+						<<fameexhibitionism 2 "pic">>
+					<<elseif $exposed gte 1>>
+						<<fameexhibitionism 1 "pic">>
+					<</if>>
+					<<endevent>>
+					<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				一个<<generate1>><<person1>><<person>>拿着相机走了过来，在拍了几张照片后，<<He>>便回到了人群当中。<<gstress>><<stress 6>>
+				<br><br>
+
+				<<if $exposed gte 2>>
+					<<fameexhibitionism 2 "pic">>
+				<<elseif $exposed gte 1>>
+					<<fameexhibitionism 1 "pic">>
+				<</if>>
+				<<endevent>>
+				<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+				<br>
+			<</if>>
+		<<elseif $rng gte 60>>
+			<<rng>>
+			<<if $rng gte 96 and $toywhipdisable isnot 't' and $adultshopunlocked and $adultshopdegree >= 5 and 
+				($worn.lower.name isnot "naked" and $worn.lower.state is "waist") or ($worn.under_lower.name isnot "naked" and $worn.lower.state is "waist")>>
+				一个<<generate1>><<person1>><<person>>从人群中走出来，那人身着艳丽的马戏团指挥服。
+				<<He>>摘下帽子，向观众们致意，然后走到你身后展开手里的鞭子。每个人都兴致勃勃地注视着眼前的表演。
+				<br><br>
+
+				<<link [[闪避|Pillory Whip Master]]>><<set $phase to 1>><</link>><<skill_difficulty `currentSkillValue("danceskill")` "舞蹈" 1 1000>>
+				<br>
+				<<link [[做好准备|Pillory Whip Master]]>><<stress 6>><<trauma 6>><</link>><<gstress>><<gtrauma>>
+				<br>
+			<<elseif $rng gte 91 and $analdisable isnot 't' and $toydildodisable isnot 't' and $adultshopunlocked and $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1 and
+				!playerHasButtPlug() and countCarriedSextoys() lt 5 and $worn.genitals.anal_shield !== 1>>
+				<<run sexShopOnBuyClick(4, false, clone(setup.sextoys[4].colour_options).pluck(), false)>>
+				<<generate1>><<person1>>
+				一个<<person>>走出人群，手里拿着一个巨大无比的
+				<<print V.player.inventory.sextoys['butt plug'][V.player.inventory.sextoys['butt plug'].length - 1].colour>>
+				。<<He>>走到你身边，绕到了你后面。
+				<br><br>
+
+				<<link [[恐吓|Pillory Butt Plug]]>><<set $phase to 1>><</link>><<skill_difficulty `Math.abs($submissive - 1000)` "" 1 850>>
+				<br>
+				<<link [[做好准备|Pillory Butt Plug]]>><</link>>
+				<br>
+			<<elseif $worn.lower.skirt_down is 1>>
+				一个<<generate1>><<person1>><<person>>来到了你的身后，并抓住你的$worn.lower.cn_name_cap的下摆。
+				<br><br>
+
+				<<link [[踢这家伙|Pillory Kick]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+				<br>
+				<<link [[保持不动|Pillory Skirt]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<<elseif $worn.lower.exposed lte 1 and $worn.lower.set isnot "upperset" and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt isnot 1>>
+				一个<<generate1>><<person1>><<person>>来到了你的身后，并抓住你的$worn.lower.cn_name_cap的下摆。
+				<br><br>
+				<<link [[踢这家伙|Pillory Kick]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+				<br>
+				<<link [[保持不动|Pillory Lower]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+				<br>
+			<<elseif $worn.lower.exposed gte 2 and $worn.under_lower.exposed is 0>>
+				一个<<generate1>><<person1>><<person>>来到了你的身后，并抓住了你的$worn.under_lower.cn_name_cap的下摆。
+				<br><br>
+				<<link [[踢这家伙|Pillory Kick]]>><<stress -12>><<trauma -6>><<attackstat>><<set $pilloryaudience += 1>><</link>><<ltrauma>><<llstress>><<gattention>>
+				<br>
+				<<link [[保持不动|Pillory Under]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+				<br>
+
+			<<else>>
+
+				一个<<generate1>><<person1>><<person>>走到你身后，并对着你那暴露在外的<<bottom>>狠狠地来了一巴掌，围观的群众都欢呼了起来。
+				<<gtrauma>><<gstress>><<trauma 6>><<stress 6>><<pain 5>>
+				<br><br>
+
+				<<endevent>>
+				<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+				<br>
+
+			<</if>>
+		<<elseif $rng gte 50 and $analingusdisablegiving is "f">>
+			<<generate1>><<person1>>一个<<person>>走到你身边，脱下<<his>>的<<npcClothesText $NPCList[0] "lower">>，转过身，用屁股贴到了你脸上。
+			<br>
+			<<he>>冷笑着做出嘲弄。"<<print ["全咽下去！", "舔我的屁股！"].pluck()>>"
+			<br><br>
+
+			<<link [[死死地闭住你的嘴|Pillory Analingus]]>><<def 1>><<set $phase to 0>><</link>><<defianttext>>
+			<br>
+			<<link [[违心地舔|Pillory Analingus]]>><<trauma 6>><<set $phase to 1>><</link>><<gtrauma>>
+			<br>
+			<<if $promiscuity gte 35>>
+				<<link [[心甘情愿地舔|Pillory Analingus]]>><<arousal 600>><<set $phase to 2>><</link>><<promiscuous3>><<garousal>>
+			<</if>>
+
+		<<elseif $rng gte 30>>
+			<<generate1>><<person1>>一个<<person>>走近你，并将<<his>>的胯部压在你那无助的脸上。
+			<br><br>
+
+			<<link [[继续|Pillory Oral]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			附近的一辆巴士上下来一批人，其中的一些人加入了围观的人群。<span class="pink">人群变得更拥挤且更大胆。</span>
+			<br><br>
+
+			<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+			<br>
+		<</if>>
+	<<elseif $pilloryaudience + $exposed + $rng gte 3 and $bodywritingLvl gte 2>>
+		<<generate1>><<person1>>
+		<<if $rng gte 81>>
+			<<set $phase to 1>>
+			一个<<person>>走近你，<span class="pink">在拿出一支耐久性记号笔后，当着你的面将它的盖子打开了。</span>
+			<br><br>
+		<<else>>
+			<<set $phase to 0>>
+			一个<<person>>走近你，<span class="purple">并将一支笔的笔帽取掉了。</span>
+			<br><br>
+		<</if>>
+		<<link [[警告这些家伙|Pillory Pen Warn]]>><<set $pilloryaudience += 1>><</link>><<gattention>>
+		<br>
+		<<link [[忍耐|Pillory Pen]]>><</link>><<gbodywriting>>
+		<br>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 95 and $watersportsdisable is "f">>
+		<<generate1>><<person1>>一个<<person>>靠近你，<<npcUndressText $NPCList[0] "lower" "self">>，
+		<span class="purple"><<npcRevealText $NPCList[0] "lower">>。</span>
+		<br><br>
+		毫无任何预兆的，<<he>>开始在你的脸上撒尿，周围的群众们兴奋地围观着。<<ggtrauma>><<trauma 12>><<gstress>><<stress 6>><<urinestat>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+		<br>
+		<<elseif $rng gte 65>>
+		<<generatey1>><<generatey2>>一个<<person1>><<person>>对着<<his>>的旁边的那个<<person2>><<person>>说了些什么，随后那个家伙笑着从<<his>>的口袋里掏出一个水果。
+		<br><br>
+
+		<<link [[警告这些家伙|Pillory Warn]]>><<set $pilloryaudience += 1>><</link>><<gattention>>
+		<br>
+		<<link [[振作起来|Pillory Brace]]>><</link>>
+		<br>
+		<<elseif $rng gte 30>>
+		<<generate1>><<person1>>一个<<person>>用<<his>>的手机给你拍了一张照片。
+		<br><br>
+		<<endevent>>
+		<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+		<br>
+		<<else>>
+		附近的一辆巴士上下来一批人，其中的一些人加入了围观的人群。<span class="pink">人群变得更拥挤且更大胆。</span>
+		<br><br>
+
+		<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+		<br>
+		<</if>>
+	<</if>>
+
+<</if>>

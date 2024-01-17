@@ -1,0 +1,161 @@
+:: Tentacle Plains []
+<<location "tentworld">><<effects>>
+<<if $tentacleorgasmignore is undefined>><<set $tentacleorgasmignore to 0>><</if>>
+你在触手平原上。
+<<if $phase is 5>>
+	当你朝着它想要你去的方向前进时，你感觉到脑子里的史莱姆发出了奇怪的声音。从地面生长出的触手似乎都在避让你，而空气似乎也比先前更加清新。
+	<<if $tentacleorgasmignore is 0>><<set $tentacleorgasmignore to 1>><</if>>
+<<else>>
+	从地面生长出的触手伸向你的<<genitals>>，并爱抚着你的大腿和
+	他们可以到达的任何其他地方。空气是甜的。
+	<<drugs 10>><<ggarousal>><<arousal 1200>>
+<</if>>
+<br><br>
+<<switch $phase>>
+	<<case 1>>
+		你向北走。
+		<br><br>
+	<<case 2>>
+		你向南走。
+		<br><br>
+	<<case 3>>
+		你向东走。
+		<br><br>
+	<<case 4>>
+		你向西走。
+		<br><br>
+<</switch>>
+<<tentaclewolf>>
+<<set $phase to 0>>
+<<if $stress gte $stressmax>>
+	<<passouttentacleworld>>
+<<elseif $arousal gte $arousalmax and $eventskip isnot 1 and $tentacleorgasmignore lte 0>>
+	<<orgasm>>
+	充满活力，你周围的触手比平时飞得更高。他们缠住你的手臂，把你拖到地上。
+	<br><br>
+	<<link [[继续|Tentacle Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if $arousal gte $arousalmax and $tentacleorgasmignore gte 1>>
+		<<orgasm>><<set $tentacleorgasmignore -= 1>>
+		触手没有抓到你的破绽。
+		<br><br>
+	<</if>>
+	<<if $tentnorth is 0 and $tenteast is 0>>
+		<<if $tentacleEntrance is "mirror">>
+			你站在镜子前。
+			<br>
+			<<mirroricon "blood">><<link [[漫步|Tentacle Home Return]]>><</link>>
+		<<else>>
+			精神病院的门就在附近。
+			<br>
+			<<asylumicon "door">><<link [[返回精神病院|Tentacle Return]]>><</link>>
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $tentnorth is $tentportalnorth and $tenteast is $tentportaleast>>
+		<<if $wolfgirl gte 6 and $syndromewolves gte 1>>
+			你在远处看到另一扇门，与带你到这里的那扇门相似，被触手包围。门敞开着，森林就在另一边，你看到了逃脱的希望。突然，一个黑影模糊地闪过，开始对其中一根触手撕咬咆哮。
+			<br><br>
+			<<foresticon>><<link [[往门口跑|Tentacle Wolf Escape]]>><</link>>
+			<br><br>
+		<<else>>
+			一扇门在这里敞开着。那边是一片森林。
+			<br>
+			<<foresticon>><<link [[进入|Tentacle Escape]]>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if $tentnorth gte 5 or $tentnorth lte -5 or $tenteast gte 5 or $tenteast lte -5>>
+		平原一直延伸到地平线。你不想离开门太远。
+		<br><br>
+	<</if>>
+	<<if $tentnorth is 4 and $tenteast is 4 and $tentspray isnot 1>>
+		一道红光在齐胸高的空中盘旋，由细长的触手高高举起。
+		<br>
+		<<peppersprayicon>><<link [[触碰|Tentacle Plains Spray]]>><<set $spraymax += 1>><<set $tentspray to 1>><<spray 5>><</link>><<gspraymax>>
+		<br><br>
+	<</if>>
+	<<if numberOfEarSlime() gte 2 and $earSlime.growth gt 50 and $earSlime.focus isnot "none" and !$weekly.earSlimeTentaclePlains and $tentnorth lte 0 and $tenteast lte 1>>
+		<span class="red">你感觉到脑袋里的史莱姆似乎在驱使你面对一个特定的方向，好像它想要你朝着某个物体前进。</span>
+		<br>
+		<<if $tentnorth is -5 and $tenteast is -4>>
+			<<ind>><<link [[随着史莱姆的方向走 (0:10)|Tentacle Plains Ear Slime]]>><<pass 10>><</link>>
+		<<else>>
+			<<ind>><<link [[随着史莱姆的方向走 (0:10)|Tentacle Plains]]>>
+				<<pass 10>><<set $phase to 5>>
+				<<if $tenteast gte -3 and random(0,100) gte 50>>
+					<<set $tenteast -= 1>>
+				<<elseif $tenteast is -5 and random(0,100) gte 50>>
+					<<set $tenteast += 1>>
+				<<elseif $tentnorth gt -5>>
+					<<set $tentnorth -= 1>>
+				<<elseif $tenteast gte -3>>
+					<<set $tenteast -= 1>>
+				<<elseif $tenteast is -5>>
+					<<set $tenteast += 1>>
+				<</if>>
+			<</link>>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $tentnorth lt 5>>
+		<<tentacleicon "north">><<link [[向北 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tentnorth += 1>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $tentnorth gt -5>>
+		<<tentacleicon "south">><<link [[向南 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tentnorth -= 1>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $tenteast lt 5>>
+		<<tentacleicon "east">><<link [[向东 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tenteast += 1>><<set $phase to 3>><</link>>
+		<br>
+	<</if>>
+	<<if $tenteast gt -5>>
+		<<tentacleicon "west">><<link [[向西 (0:10)|Tentacle Plains]]>><<pass 10>><<set $tenteast -= 1>><<set $phase to 4>><</link>>
+		<br>
+	<</if>>
+	<<if $demon gte 6 and $tentacleadmire gte 1>>
+		<<ind>><<link [[献上自己|Tentacle Plains Admire]]>><</link>><<demon>>
+		<br>
+	<<elseif $demon gte 6>>
+		<<ind>><<link [[欣赏|Tentacle Plains Admire]]>><</link>><<demon>>
+		<br>
+	<</if>>
+	<<if $tentaclewolf gte 2>>
+		<<ind>><<link [[嚎叫|Tentacle Plains Howl]]>><<transform wolf 1>><</link>><<wolfgirl>>
+		<br>
+	<</if>>
+	<<if $angel gte 6 and $tentacleangel gte 2>>
+		<<ind>><<link [[抵抗|Tentacle Plains Resist]]>><</link>><<angel>>
+		<br>
+	<<elseif $angel gte 6>>
+		<<ind>><<link [[集中|Tentacle Plains Resist]]>><</link>><<angel>>
+		<br>
+	<</if>>
+	<<if $fallenangel gte 2>>
+		<<ind>><<link [[绝望|Tentacle Plains Despair]]>><</link>><<fallenangel>>
+		<br>
+	<</if>>
+	<<if $cat gte 6>>
+		<<ind>><<link [[突袭|Tentacle Plains Cat]]>><<transform cat 1>><</link>><<cat>>
+		<br>
+	<</if>>
+	<<if $cow gte 6 and $breastfeedingdisable is "f">>
+		<<ind>><<link [[让触手榨乳|Tentacle Cow Breasts]]>><<transform cow 1>><</link>><<cow>>
+		<br>
+	<</if>>
+	<<if $cow gte 6 and $player.penisExist and !playerChastity("penis")>>
+		<<ind>><<link [[让触手榨精|Tentacle Cow Penis]]>><<transform cow 1>><</link>><<cow>>
+		<br>
+	<</if>>
+	<<if $harpy gte 6>>
+		<<ind>><<link [[从高处俯瞰|Tentacle Bird]]>><<transform bird 1>><</link>><<flight_text>>
+		<br>
+	<</if>>
+	<<if $fox gte 6>>
+		<<ind>><<link [[寻找能偷的东西|Tentacle Plains Fox]]>><<transform fox 1>><</link>><<fox>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

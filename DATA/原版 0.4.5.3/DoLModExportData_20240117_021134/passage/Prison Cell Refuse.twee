@@ -1,0 +1,60 @@
+:: Prison Cell Refuse []
+<<effects>><<effects_prison>>
+
+<<if $prison.shock is 1>>
+	<<methodical_guard 0 cap>>叹了口气，然后把手伸进<<his>>的衬衫口袋。从你的颈部传来<span class="red">一阵穿遍你全身的可怕的震动。</span>虽然只持续了一会，但足以让你倒地抽搐。<<gtrauma>><<ggstress>><<gggpain>><<trauma 4>><<stress 4>><<pain 4>>
+	<br><br>
+
+	当<<methodical_guard 0>>把你铐起，拖出牢房时，你已经伤得无法反抗了。其他囚犯在你经过时取笑你，但听起来不算恶意。<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<<link [[继续|Prison Punishment]]>><<endevent>><<set $prison.hours_worked to 0>><</link>>
+<<else>>
+	<<if $prison.cell_trouble gte 5>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>><<generate_relaxed_guard 3>>
+		走道在<<methodical_guard 0 apo>>的脚下嘎嘎作响。<<Hes>>不是独自一人。"你就这么想逼我们拿你树榜样吗？"<<he>>的话中充斥着威胁，"我们确实会这么做的。"
+		<br><br>
+
+		<<He>>来到你的牢房，<<veteran_guard 1>>、<<anxious_guard 2>>和<<relaxed_guard 3>>紧随其后。他们解下了警棍。
+		<br><br>
+
+		<<link [[继续|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 4>>
+		<<generate_veteran_guard 1>><<generate_anxious_guard 2>>
+		走道在<<methodical_guard 0 apo>>的脚下嘎嘎作响。<<Hes>>不是独自一人。"你就这么想逼我们拿你树榜样吗？"<<he>>的话中充斥着威胁，"我们确实会这么做的。"
+		<br><br>
+
+		<<He>>来到你的牢房，<<veteran_guard 1>>和<<anxious_guard 2>>紧随其后。他们解下了警棍。
+		<br><br>
+
+		<<link [[继续|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 3>>
+		<<generate_veteran_guard 1>>
+		走道在<<methodical_guard 0 apo>>的脚下嘎嘎作响。<<Hes>>不是独自一人。"你就这么想逼我们拿你树榜样吗？"<<he>>的话中充斥着威胁，"我们确实会这么做的。"
+		<br><br>
+
+		<<He>>来到你的牢房，<<veteran_guard 1>>紧随其后。他们解下了警棍。
+		<br><br>
+
+		<<link [[继续|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<elseif $prison.cell_trouble gte 2>>
+		走道在<<methodical_guard 0 apo>>的脚下嘎嘎作响。"你最好真的生病了，"<<he>>警告道，"否则你会后悔的。"
+		<br><br>
+
+		<<He>>发现你懒洋洋地躺在床上，就从身边解下警棍。
+		<br><br>
+
+		<<link [[继续|Prison Cell Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		你仍待在牢房里。"144号，"<<methodical_guard 0>>厉声道，"马上离开你的牢房。"
+		<br><br>
+		<<link [[离开你的牢房|Prison Cell Role]]>><</link>>
+		<br>
+		<<link [[拒绝|Prison Cell Refuse]]>><<cell_trouble 1>><<prison_guards 1>><<prison_inmates 1>><</link>><<gsuspicion>><<grespect>>
+		<br>
+	<</if>>
+<</if>>

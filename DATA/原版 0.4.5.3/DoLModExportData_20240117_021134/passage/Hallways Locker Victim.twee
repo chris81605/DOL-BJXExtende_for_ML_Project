@@ -1,0 +1,71 @@
+:: Hallways Locker Victim []
+<<effects>>
+<<if $phase is 0>> /* Help */
+	<<generates1>><<person1>>
+	你花了一些时间去撬锁，但你最终还是成功了。<br>
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+		<br>
+	<</if>>
+	当门打开时，一个<<person>>满脸感激地从里面钻了出来："太谢谢你了！<<print either("里面真的太黑了！", "里面真的太挤了！", "我快憋不住尿了！", "里面有点太吓人了！", "欺凌者真可恶。")>>"
+	<br>
+	这个<<person>>给了你一个灿烂的笑容，然后跑开了。<<lstress>><<stress -2>>
+	<br><br>
+	<<link [[继续|Hallways]]>><<famegood 3>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 1>> /* Teacher */
+	你进入办公室，有个老师注意到了你。
+	<br>
+	<<if $delinquency gte 400>>
+		因为你在学校里的声誉，老师有些将信将疑，但你
+	<<else>>
+		你
+	<</if>>快速解释了一下现状，然后告诉老师正确的密码。
+	<br><br>
+	"感谢你让我了解这件事，"老师<<print either("热情地说道","微笑着说道","点着头说道","叹气着说道","挖苦地说道","皱着眉说道","舔着嘴唇说道","搓着手说道")>>。
+	"我会去处理的。"
+	<br><br>
+	<<link [[继续|Hallways]]>><<endevent>><<famegood 1>><<delinquency -1>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 2>> /* Extort money */
+	<<set _extort to either(500,500,500,500,1000,1000,1000,2000,2000,5000)>>
+	你靠近柜子，通过缝隙朝里边小声说话。<br>
+	"为了出来，你愿意给多少钱？"
+	<br><br>
+	"求你了。我真的得出来！我——"<br>
+	"对，我知道。"你打断道，"我是在问：为了能出来，你，愿意，给多少钱？"<br>
+	"多少？我是真的，哦！哦对。我懂。"
+	<br><br>
+	一张<<printmoney _extort>>纸币从柜子的边缘滑出。<br>
+	"那里。"
+	<br><br>
+	你花了一些时间去撬锁，但最终还是成功把那人放了出来。<br>
+	"谢谢你，把我救出来，大概吧。"
+	<br><br>
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这些锁对你来说太简单了，以至于你学不到什么新技巧。</span><br>
+	<</if>>
+	<br>
+	<<link [[继续|Hallways]]>><<set $money += _extort>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>> /* Ignore */
+	你离开。
+	<<if $delinquency gte 800 or $submissive lte 850>>
+		那些蠢到会把自己锁进柜子里的人已经没救了，自然淘汰吧。
+	<<elseif $delinquency gte 600>>
+		把那些人锁进柜子应该也是有原因的吧。
+	<<elseif $stress gte (($stressmax / 5) * 2)>>
+		咱还有自己的事要干。
+	<<elseif $speech_attitude is "meek">>
+		把他们锁进柜子的人可能还在周围。
+	<<elseif $cool gte 140>>
+		还是别去管书呆子了，让他们自生自灭吧。
+	<</if>>
+	<br><br>
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

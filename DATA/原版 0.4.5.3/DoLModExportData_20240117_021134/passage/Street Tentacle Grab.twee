@@ -1,0 +1,36 @@
+:: Street Tentacle Grab []
+<<set $outside to 1>><<effects>>
+<<physiquedifficulty 5000 16000 true>>
+你抓住触手，试着把它抓紧。<<deviancy1>>
+<<if $physiqueSuccess>>
+	它冲向你，<span class="green">速度不快，</span>在你意识到它在做什么之前，它把粘液喷到了你的手上。
+	<<bodyliquid "leftarm" "goo">><<bodyliquid "rightarm" "goo">>
+	<br><br>
+	粘糊糊的触手因疲惫缩了回去，这时又有几条触手从井口里钻了出来，缠住了你的四肢和腰部，把你拉到了地下。事实证明，即使它们合力托着，也支撑不了你的重量，于是你在黑暗中坠落了几英尺。
+	<br><br>
+	你的跌倒被一些黏滑柔软的东西打断了。在你的眼睛适应黑暗之前，它带着触手逃走了。你在排水沟里，周围都是偷来的衣服和手袋。
+	<br><br>
+	<<set $eventskip to 1>>
+	<<link [[寻找贵重物品 (0:10)|Street Tentacle Search]]>><<pass 10>><</link>>
+	<br>
+	<<destinationdrain>>
+<<else>>
+	<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.name is "naked") or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.name is "naked")) and !$worn.under_lower.type.includes("naked")>>
+		它在你的手中抽动着，<span class="red">它钻到你的腿下将你绊倒。</span>它将$worn.under_lower.cn_name_cap从你身上撕下，抓住你损坏的衣物退回下水道中。
+		<<gpain>><<pain 5>><<gtrauma>><<gstress>><<stress 6>><<trauma 6>>
+		<br><br>
+		在你身处于马路中间时，你突然意识到你并没有穿任何内裤。你赶忙将双手按在你的两腿之间来压住你的$worn.lower.cn_name_cap。
+		<br><br>
+		<<underlowerruined>><<exposure>>
+		<<destinationeventend>>
+	<<else>>
+		它在你的手中抽动着，<span class="red">它钻到你的腿下将你绊倒。</span>它将<<allBottoms>>从你身上撕下，抓住你损坏的衣物退回下水道中。
+		<<gpain>><<pain 5>><<gtrauma>><<gstress>><<stress 6>><<trauma 6>>
+		<br><br>
+		你被扒掉了下半身的衣服并留在街道中央。
+		<<covered>>
+		<br><br>
+		<<overlowerruined>><<lowerruined>><<exposure>>
+		<<destinationeventend>>
+	<</if>>
+<</if>>

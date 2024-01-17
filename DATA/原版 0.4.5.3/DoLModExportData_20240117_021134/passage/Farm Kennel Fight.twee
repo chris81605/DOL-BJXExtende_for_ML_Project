@@ -1,0 +1,29 @@
+:: Farm Kennel Fight []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $enemyanger += 200>>
+	<<set $enemytrust -= 50>>
+<</if>>
+
+其他的<<beastsplural>>观看着。
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Farm Kennel Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Kennel Fight]]>><</link>></span><<nexttext>>
+<</if>>

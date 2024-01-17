@@ -1,0 +1,35 @@
+:: Farm Axe Threaten []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"停，停下！"你说道，"不然我就叫警察了！"
+<<elseif $speech_attitude is "bratty">>
+	"放下斧头，"你说道，"或者等我把它塞进你的屁股。"
+<<else>>
+	"这是非法的，"你说道，"马上停下来，否则你会后悔的。"
+<</if>>
+<br><br>
+<<if $englishSuccess>>
+	两人互相看了看。<<person2>><<person>>先发言。"雷米确实说过——"
+	<br>
+	"不要把名字说出来，"<<person1>><<person>>警告道，并朝你的方向瞥了一眼。
+	<br>
+	"老板说过不要被人看见。"
+	<br>
+	"好吧，但现在我们已经被发现了，"<<He>>恶狠狠地盯着你，"我们走，但这还没完。"
+	<br><br>
+
+	这两人走开了，栅栏完好无损。/*<<llaggro>><<farm_aggro -10>>*/
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	两个人互相看了看对方，然后<span class="red">哈哈大笑起来。</span>"没问题，孩子，"<<person1>><<person>>说道，"等我们干完我们的工作我们就滚。"<span class="red">他们的斧子继续砍向农场围栏。</span><<farm_fence_damage 1>>
+	<br><br>
+
+	<<link [[呼唤艾利克斯|Farm Axe Alex]]>><<farm_aggro 5>><<npcincr Alex dom 1>><<npcincr Alex love 1>><<farm_fence_damage 1>><</link>><<gaggro>><<gdom "Alex">><<glove>>
+	<br>
+	<<link [[攻击|Farm Axe Attack]]>><<def 1>><</link>>
+	<br>
+<</if>>

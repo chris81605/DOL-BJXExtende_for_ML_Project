@@ -1,0 +1,44 @@
+:: Catacombs Chasm []
+<<effects>><<set $bus to "chasm">>
+
+你在森林地下的墓穴里。有一堵墙被撕开了，好像是什么猛兽干的，露出了一个黑色的大裂口。
+巨大的钟乳石从天花板悬挂而下。
+<<if $spiderdisable is "f">>
+	<span class="blue">黑暗中传出来一阵动静。</span>有东西正在盯着你。
+<<else>>
+	<span class="blue">你看到一阵微弱的闪光。</span>那里有什么东西。
+<</if>>
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs normal>>
+<<else>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Normal Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if $tending gte 500>>
+		<<askicon>><<link [[劝说|Catacombs Chasm Coax]]>><</link>><<note "护理" "green">>
+		<br>
+	<<else>>
+		<span class="blue">你的护理技巧太低了，没法把那东西哄出来。</span>
+		<br>
+	<</if>>
+	<<caveicon "west">><<link [[向西走 (0:10)|Catacombs Sarcophagi]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

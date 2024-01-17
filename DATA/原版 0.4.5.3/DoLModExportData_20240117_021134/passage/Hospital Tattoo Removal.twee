@@ -1,0 +1,24 @@
+:: Hospital Tattoo Removal []
+<<effects>>
+
+<<generate1>><<person1>>
+接待员在<<his>>的电脑上敲了几下，指示你在等候室里坐下来。
+<br><br>
+<<endevent>>
+
+<<harper_intro>>
+
+“所以你想去除纹身，”<<he>>说。“我们可以提供服务。手术费用为£3000，需要三个小时。”
+<br><br>
+
+<<if $money gte 300000>>
+	<<for _active_bodypart range setup.bodyparts>>
+		<<if $skin[_active_bodypart].pen is "tattoo">>
+			<<capture _active_bodypart>><<link [[去除|Hospital Tattoo Removal 2]]>><<pass 3 hours>><<set $money -= 300000>><<set $remove_tattoo to _active_bodypart>><</link>><</capture>><<bodypart _active_bodypart>>上的<<tattoo _active_bodypart>>。
+			<br>
+		<</if>>
+	<</for>>
+<br>
+<</if>>
+<<getouticon>><<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<br>

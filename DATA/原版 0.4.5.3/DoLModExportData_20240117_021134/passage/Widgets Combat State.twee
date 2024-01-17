@@ -1,0 +1,212 @@
+:: Widgets Combat State [widget]
+<<widget "combatstate">>
+	<<if _statechecked isnot true>>
+		<<if $gamemode is "soft">>
+			<<set $pain to 0>>
+		<</if>>
+		<<wetnessCalculate>>
+		<<if $orgasmdown gte 1>>
+			<<set $enemyarousal += 10>>
+			<span class="pink">你的身体因高潮袭来而不断地抽搐痉挛着，让你无法正常行动。</span>
+			<br>
+			<<disable>>
+			<<if $options.combatControls is "disabled" and $panicviolence lte 0 and $panicparalysis lte 0 and $trance lte 0>>
+				<<actionsorgasm>>
+			<</if>>
+		<</if>>
+
+		<<if $pain gte 100 and $willpowerpain is 0>>
+			<<set $enemyarousal += 10>>
+			<<if $possessed is true>>
+				<<if $orgasmdown lte 0>>
+					你无法承受更多的痛苦，<span class="red">但你的身体仍在抗争。</span>
+					<<trauma 12>><<ggtrauma>>
+					<br>
+				<</if>>
+			<<else>>
+				<span class="red">你伤得太重了，无法正常行动。</span>
+				<br>
+				<<disable>>
+				<<if $options.combatControls is "disabled" and $orgasmdown lte 0 and $panicviolence lte 0 and $panicparalysis lte 0 and $trance lte 0>>
+					<<actionspain>>
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<if $panicviolence gte 1 and !$possessed>>
+			<<set $enemyarousal += 10>>
+			<<if $position is "stalk">>
+				<span class="red">恐慌吞噬了你。你想要逃跑，逃离这个地方。</span>
+			<<else>>
+				<span class="red">你陷入恐慌，对任何侵犯你私人空间的事物疯狂地攻击着。</span>
+			<</if>>
+			<br>
+			<<defiance 10>><<set $panicviolence to $panicviolence - 1>><<disable>>
+		<</if>>
+
+		<<if $panicparalysis gte 1 and !$possessed>>
+			<<set $enemyarousal += 10>>
+			<<if $position is "stalk">>
+				<span class="red">你陷入恐慌。你的肌肉紧绷起来，让你无法动弹。</span>
+			<<else>>
+				<span class="red">你陷入恐慌。你的肌肉紧绷起来，让你无能为力。</span>
+			<</if>>
+			<br>
+			<<set $panicparalysis -= 1>><<disable>>
+		<</if>>
+
+		<<if $dissociation gte 2 and !$possessed>>
+			<<set $enemyarousal += 10>>
+			世界似乎与你脱离了联系……感觉就像梦一样。
+			<br>
+			<<disable>>
+			<<if $options.combatControls is "disabled" and $orgasmdown lte 0 and $panicviolence lte 0 and $panicparalysis lte 0 and $trance lte 0>>
+				<<if $pain lt 100 or $willpowerpain is undefined>>
+					<<actionsdissociation>>
+				<</if>>
+			<</if>>
+		<</if>>
+
+		<<if $trance gte 1>>
+			<<set $enemyarousal += 10>>
+			你被迷住了。
+			<br>
+			<<disable>>
+		<</if>>
+
+		<<if $possessed is true>>
+			<<if $orgasmdown lte 0>>
+				你的身体不再属于你自己。<<if $rng gte 96>><span class="fading">事实上，它从来都不是。</span><</if>>
+				<br>
+			<</if>>
+			<<disable>>
+			<<if $options.combatControls is "disabled" and $dissociation lte 1 and $orgasmdown lte 0 and $panicviolence lte 0 and $panicparalysis lte 0 and $trance lte 0>>
+				<<actionspossessed>>
+			<</if>>
+			/* Updates the control caption at the top of the screen to include any control gained through the rest of the passage */
+			<<run $(()=>{
+				Dynamic.render("control-caption")
+			})>>
+			/* Adds the condition for ending an encounter. */
+			<<if $control gte $controlmax>>
+				<<set _controlRegain to 1>>
+			<</if>>
+		<</if>>
+		<<set _statechecked to true>>
+	<</if>>
+<</widget>>
+
+<<widget "carryblock">>
+	<<if $orgasmdown gte 1>>
+		<<set $carryblock to "orgasm">>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<<set $carryblock to "pain">>
+	<<elseif $dissociation gte 2>>
+		<<set $carryblock to "dissociation">>
+	<<elseif $panicviolence gte 1>>
+		<<set $carryblock to 1>>
+	<<elseif $panicparalysis gte 1>>
+		<<set $carryblock to 1>>
+	<<elseif $trance gte 1>>
+		<<set $carryblock to 1>>
+	<<else>>
+		<<set $carryblock to 0>>
+	<</if>>
+<</widget>>
+
+<<widget "actioncarry">>
+	<<if $carryblock is 0>>
+		<<set $leftactioncarry to $leftactiondefault>>
+		<<set $rightactioncarry to $rightactiondefault>>
+		<<set $feetactioncarry to $feetactiondefault>>
+		<<set $mouthactioncarry to $mouthactiondefault>>
+		<<set $vaginaactioncarry to $vaginaactiondefault>>
+		<<set $penisactioncarry to $penisactiondefault>>
+		<<set $anusactioncarry to $anusactiondefault>>
+		<<set $thighactioncarry to $thighactiondefault>>
+		<<set $cheekactioncarry to $cheekactiondefault>>
+		<<set $chestactioncarry to $chestactiondefault>>
+	<<elseif $carryblock is "pain">>
+		<<set $leftactioncarrypain to $leftactiondefault>>
+		<<set $rightactioncarrypain to $rightactiondefault>>
+		<<set $feetactioncarrypain to $feetactiondefault>>
+		<<set $mouthactioncarrypain to $mouthactiondefault>>
+		<<set $vaginaactioncarrypain to $vaginaactiondefault>>
+		<<set $penisactioncarrypain to $penisactiondefault>>
+		<<set $anusactioncarrypain to $anusactiondefault>>
+		<<set $thighactioncarrypain to $thighactiondefault>>
+		<<set $cheekactioncarrypain to $cheekactiondefault>>
+		<<set $chestactioncarrypain to $chestactiondefault>>
+	<<elseif $carryblock is "orgasm">>
+		<<set $leftactioncarryorgasm to $leftactiondefault>>
+		<<set $rightactioncarryorgasm to $rightactiondefault>>
+		<<set $feetactioncarryorgasm to $feetactiondefault>>
+		<<set $mouthactioncarryorgasm to $mouthactiondefault>>
+		<<set $vaginaactioncarryorgasm to $vaginaactiondefault>>
+		<<set $penisactioncarryorgasm to $penisactiondefault>>
+		<<set $anusactioncarryorgasm to $anusactiondefault>>
+		<<set $thighactioncarryorgasm to $thighactiondefault>>
+		<<set $cheekactioncarryorgasm to $cheekactiondefault>>
+		<<set $chestactioncarryorgasm to $chestactiondefault>>
+	<<elseif $carryblock is "dissociation">>
+		<<set $leftactioncarrydissociation to $leftactiondefault>>
+		<<set $rightactioncarrydissociation to $rightactiondefault>>
+		<<set $feetactioncarrydissociation to $feetactiondefault>>
+		<<set $mouthactioncarrydissociation to $mouthactiondefault>>
+		<<set $vaginaactioncarrydissociation to $vaginaactiondefault>>
+		<<set $penisactioncarrydissociation to $penisactiondefault>>
+		<<set $anusactioncarrydissociation to $anusactiondefault>>
+		<<set $thighactioncarrydissociation to $thighactiondefault>>
+		<<set $cheekactioncarrydissociation to $cheekactiondefault>>
+		<<set $chestactioncarrydissociation to $chestactiondefault>>
+	<</if>>
+	<<set $carryblock to 0>>
+<</widget>>
+
+<<widget "actioncarrydrop">>
+	<<if $orgasmdown gte 1>>
+		<<set $leftactiondefault to $leftactioncarryorgasm>>
+		<<set $rightactiondefault to $rightactioncarryorgasm>>
+		<<set $feetactiondefault to $feetactioncarryorgasm>>
+		<<set $mouthactiondefault to $mouthactioncarryorgasm>>
+		<<set $vaginaactiondefault to $vaginaactioncarryorgasm>>
+		<<set $penisactiondefault to $penisactioncarryorgasm>>
+		<<set $anusactiondefault to $anusactioncarryorgasm>>
+		<<set $thighactiondefault to $thighactioncarryorgasm>>
+		<<set $cheekactiondefault to $cheekactioncarryorgasm>>
+		<<set $chestactiondefault to $chestactioncarryorgasm>>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<<set $leftactiondefault to $leftactioncarrypain>>
+		<<set $rightactiondefault to $rightactioncarrypain>>
+		<<set $feetactiondefault to $feetactioncarrypain>>
+		<<set $mouthactiondefault to $mouthactioncarrypain>>
+		<<set $vaginaactiondefault to $vaginaactioncarrypain>>
+		<<set $penisactiondefault to $penisactioncarrypain>>
+		<<set $anusactiondefault to $anusactioncarrypain>>
+		<<set $thighactiondefault to $thighactioncarrypain>>
+		<<set $cheekactiondefault to $cheekactioncarrypain>>
+		<<set $chestactiondefault to $chestactioncarrypain>>
+	<<elseif $dissociation gte 2>>
+		<<set $leftactiondefault to $leftactioncarrydissociation>>
+		<<set $rightactiondefault to $rightactioncarrydissociation>>
+		<<set $feetactiondefault to $feetactioncarrydissociation>>
+		<<set $mouthactiondefault to $mouthactioncarrydissociation>>
+		<<set $vaginaactiondefault to $vaginaactioncarrydissociation>>
+		<<set $penisactiondefault to $penisactioncarrydissociation>>
+		<<set $anusactiondefault to $anusactioncarrydissociation>>
+		<<set $thighactiondefault to $thighactioncarrydissociation>>
+		<<set $cheekactiondefault to $cheekactioncarrydissociation>>
+		<<set $chestactiondefault to $chestactioncarrydissociation>>
+	<<else>>
+		<<set $leftactiondefault to $leftactioncarry>>
+		<<set $rightactiondefault to $rightactioncarry>>
+		<<set $feetactiondefault to $feetactioncarry>>
+		<<set $mouthactiondefault to $mouthactioncarry>>
+		<<set $vaginaactiondefault to $vaginaactioncarry>>
+		<<set $penisactiondefault to $penisactioncarry>>
+		<<set $anusactiondefault to $anusactioncarry>>
+		<<set $thighactiondefault to $thighactioncarry>>
+		<<set $cheekactiondefault to $cheekactioncarry>>
+		<<set $chestactiondefault to $chestactioncarry>>
+	<</if>>
+<</widget>>

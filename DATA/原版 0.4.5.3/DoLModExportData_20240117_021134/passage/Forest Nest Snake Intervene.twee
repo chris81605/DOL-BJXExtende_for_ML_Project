@@ -1,0 +1,77 @@
+:: Forest Nest Snake Intervene []
+<<effects>>
+你没有浪费时间，直接从灌木丛中冲出。蛇转向你这个更有吸引力的目标，然后猛扑过去。
+<br><br>
+
+<<if $physiqueSuccess>>
+	<span class="green">你用手抓住它的下巴，不让它在你周围合拢。</span>你设法向前迈出一步，把它往后推，因为它开始自我折叠。
+	<br><br>
+
+	你感觉到它想要离开你。你跟着它移动，把它扔离轨道很远。它很快意识到你带来的麻烦超过了你的价值，然后退回到灌木丛中。
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			你感到有什么东西抓住了你的手臂。它是<<beasttype>>，并且<<bhe>>用鼻子蹭你，脸红。
+			<<if $NPCList[0].traits.includes("territorial")>>
+				"谢……谢。你，嗯……"<<bHe>>在原地移动了一会儿，"好吧，我就开门见山了。<span class="lewd">你太火辣了。请疯狂操我吧。就现在。</span>"
+			<<else>>
+				"你救了我！"<<bHe>>把你拉得更近。"你勇敢。还很漂亮。你会是个好伴侣的。"
+			<</if>>
+		<<else>>
+			你感到有什么东西拂过你，用鼻子蹭你。是<<beasttype>>。它似乎很感激。如此感激，以至于<<bhe>>采取了交配的姿势。
+		<</if>>
+		<br><br>
+
+		<<link [[接受|Forest Nest Snake Fox Sex]]>><<unset $forest_nest>><<set $sexstart to 1>><</link>><<deviant1>>
+		<br>
+		<<link [[拒绝|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		没有<<beasttype>>的身影。<<bHe>>在骚乱中明智地逃走了。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">你试着撑住它的嘴巴，但是你不够强壮。</span>它们猛烈地合在一起，你的动作足够快，避免被吞下，而不是被撞倒在地。<<gpain>><<pain 4>>
+	<br><br>
+
+	<<if $NPCList[0].traits.includes("territorial")>>
+		它慢慢地滑向你，嘶嘶作响。它想向你扑过来，但又停了下来。你看后面，看到<<beasttype>>
+		<<if $monster is 1>>
+			用双臂抓住蛇尾巴，用尽<<bhis>>的全身力气拉。
+		<<else>>
+			咬住蛇的尾巴，用<<bhis>>所有的力气拉。
+		<</if>>
+		<<bHe>>最后用力一拉，把蛇扔到一边。它退回到灌木丛中。
+		<br><br>
+
+		<<if $monster is 1>>
+			<<beasttype>>凝视着你，双臂交叉。"这太愚蠢了。那东西会把你整个吞下去的。"<<bHis>>的姿态软化了。"但是……谢谢。"<<bHe>>
+		<<else>>
+			<<beasttype>>
+		<</if>>
+		感激地看了你一眼，然后沿着来路离开了。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		你看到<<beasttype>>飞奔进了森林。你至少为它争取了逃跑的时间。
+		<<if $voredisable is "f">>
+			这条蛇似乎对丢了它的食物很生气，它再次张大嘴巴向你的嘴边爬去。
+			<br><br>
+
+			<<link [[继续|Forest Nest Snake Vore 2]]>><<endevent>><<unset $forest_nest>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			你站起来，尽可能快地跑。<<beastescape>>
+			<br><br>
+
+			<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

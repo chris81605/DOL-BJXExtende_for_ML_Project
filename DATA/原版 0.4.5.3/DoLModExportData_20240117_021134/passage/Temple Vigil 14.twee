@@ -1,0 +1,52 @@
+:: Temple Vigil 14 []
+<<effects>><<canvas-model-override "clear">>
+<<pass 60>>
+<<set $pain to 0>><<tiredness -20>><<stress -40>>
+<<if $phase is 2>>
+	当火焰无迹可寻，仅剩你脚边将熄的余烬时，耀日点亮了神殿之顶，圣洁的黎明驱散了黑夜。
+	<br><br>
+
+	三道钟声连鸣。约旦<<person1>>急匆匆地跑到你们跟前，将钟铃放下。一块温暖的布料盖在你和悉尼身上，遮住了你们的胴体。尽管烈焰熊熊，你却依然觉得很冷。是约旦和悉尼温暖了你。
+	<br><br>
+
+	“我就知道你能做到！”<<he>>庆贺道，“通常我们仅允许一位见习教徒通过试炼。但你们如若一体般进入了火场。这没有违背圣典。祝贺你们！”其余的<<monks_and_nuns>>们也围了上来，微笑着送上贺词，并用<<person6>><<if $player.gender_appearance is "m" and $pronoun is "m">>兄弟<<elseif $player.gender_appearance is "f" and $pronoun is "f">>姐妹<<else>>兄弟姐妹<</if>>来称呼你们。你还在晕头转向。
+	<br><br>
+
+	<<run statusCheck("Sydney")>>
+	<<person6>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼从布料下拱到你身边，和你贴了贴，然后将你抱住，以此表示感谢。
+	<<else>>
+		悉尼很快又陷入了赤裸的尴尬，但并没有试图离开你，反而感激地抱住了你。
+	<</if>>
+	"要是没有你陪着，我肯定做不到的。"<<npcincr Sydney love 10>><<gglove>><<arousal 10>><<garousal>>
+	<br><br>
+
+	<<set $grace to 0>>
+	<<set $temple_rank to "monk">>
+	<<set $sydney.rank to "monk">>
+	<<set $temple_monk_days to 0>>
+	<<set $wardrobes.temple.unlocked to true>>
+	<<earnFeat "Defy the Night">>
+
+	<<link [[继续|Temple Vigil 15 Sydney]]>><<clotheson>><<endevent>><</link>>
+	<br>
+<<else>>
+	当火焰无迹可寻，仅剩你脚边将熄的余烬时，耀日点亮了神殿之顶，圣洁的黎明驱散了黑夜。
+	<br><br>
+
+	三道钟声连鸣。约旦<<person1>>急匆匆地跑到你跟前，将钟铃放下。一块温暖的布料盖在你身上，遮住了你的胴体。尽管烈焰熊熊，你却依然觉得很冷。是约旦温暖了你。
+	<br><br>
+
+	“我就知道你能做到！”<<he>>庆贺道。其余的<<monks_and_nuns>>也围了上来，微笑着送上贺词，与你以<<sister>>相称。悉尼冲过来抱住你，结结巴巴地吐露着自己的自豪与幸福。<<person6>><<He>>似乎并不在意自己的失败，也不在意你的赤裸。你仍然头晕目眩。<<npcincr Sydney love 5>><<glove>>
+	<br><br>
+
+	<<set $grace to 0>>
+	<<set $temple_rank to "monk">>
+	<<set $temple_monk_days to 0>>
+	<<set $wardrobes.temple.unlocked to true>>
+	<<earnFeat "Defy the Night">>
+
+	<<link [[继续|Temple Vigil 15]]>><<clotheson>><<endevent>><</link>>
+	<br>
+<</if>>

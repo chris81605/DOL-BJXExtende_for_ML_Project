@@ -1,0 +1,53 @@
+:: Tentacle Cow Penis []
+<<location "tentworld">><<effects>>
+<<if $tentaclecow is undefined>>
+	<<set $tentaclecow to 1>>
+	你认为你知道满足触手的方法。
+<<else>>
+	你准备满足触手的饥渴。
+<</if>>
+你四肢着地，它们开始爬上你的腿。
+<<if $worn.lower.name isnot "naked">>
+	<<if $feetuse is "bound">>
+		一对触手
+	<<else>>
+		你
+	<</if>>
+	脱掉了你的$worn.lower.cn_name_cap<<if $worn.under_lower.name isnot "naked">>和$worn.under_lower.cn_name_cap<<underlowerstrip>><</if>>。<<lowerstrip>>
+<<else>>
+	<<if $worn.under_lower.name isnot "naked">>
+		<<if $feetuse is "bound">>
+			一对触手
+		<<else>>
+			你
+		<</if>>
+		脱掉了你的$worn.under_lower.cn_name_cap。<<underlowerstrip>>
+	<</if>>
+<</if>>
+<<set $penisuse to "tentacle">><<set $tentaclePenis to "tentacle">>
+<<set _tentacles_semen to ($semen_amount / 2)>>
+你摆动你的<<bottom>>，将注意力吸引到你的<<penis>>。响应几乎是立即的。一条触手抓住你，开始吸吮。
+<br><br>
+你为这种感觉倒吸一口冷气。触手在吸吮时膨胀和收缩。<<arousal 10000>><<ggarousal>>
+<<orgasm>>
+<br><br>
+你的精液被吸走，触手松开你。在你做出反应之前，另一条触手取代了它。
+<<orgasm>>
+<br><br>
+
+<<semen_amount `-_tentacles_semen`>>
+<<set $semen_produced_stat += _tentacles_semen>>
+
+<<if _tentacles_semen gte 100>>
+	<<set $tentacleorgasmignore += 1>>
+	触手完全释放你并散开。<span class = "green">他们似乎很满意。你的下一次高潮可能不会那么危险。</span>
+<<else>>
+	触手不停吸吮。<span class = "red">它对你产生的精液量不满意。</span>最终，它的吸吮变得疼痛，迫使你把它拉下来。<<pain 10>><<gpain>>
+<</if>>
+
+<<purity -20>>
+<<clotheson>>
+<<endcombat>>
+
+<<link [[继续|Tentacle Plains]]>><<endevent>><</link>>
+<br>

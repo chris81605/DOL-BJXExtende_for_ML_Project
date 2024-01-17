@@ -1,0 +1,56 @@
+:: Eden Supplied 2 []
+<<effects>>
+<!-- <<npc Eden>><<person1>> -->
+<<if $phase is 0>>
+	"反正你的就是我的，"伊甸说道，"谢谢。"
+	<br><br>
+
+	<<if $bus is "edenclearing">>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<</if>>
+
+<<elseif $phase is 1>>
+	"听起来不错，"<<he>>把手伸进<<his>>的口袋里，"给你。"
+	<br><br>
+
+	你获得了<<moneyGain 50>>。
+	<br><br>
+
+	<<if $bus is "edenclearing">>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		"£200？"伊甸看起来很生气，"你被宰了。"<<He>>把手伸进<<his>>的口袋里。"不过只要不用我去，还是值的，给你。"
+		<br><br>
+
+		你获得了<<moneyGain 200>>。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<if $bus is "edenclearing">>
+			<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<<else>>
+			<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<</if>>
+
+	<<else>>
+		"我不会上当的，"伊甸说道，"你可以自掏腰包。"
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<if $bus is "edenclearing">>
+			<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<<else>>
+			<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<</if>>
+	<</if>>
+<</if>>

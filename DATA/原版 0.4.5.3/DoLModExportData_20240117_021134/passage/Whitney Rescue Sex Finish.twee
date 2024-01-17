@@ -1,0 +1,126 @@
+:: Whitney Rescue Sex Finish []
+<<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	惠特尼长舒一口气，靠到了
+	<<switch $whitneyRescueExit>>
+		<<case "canteen">>墙上。
+		<<case "courtyard">>栅栏上。
+		<<case "classroom">>桌子上。
+		<<default>>储物柜边上。
+	<</switch>>
+	<<npcincr Whitney lust -20>><<llust>>
+	<br><br>
+
+	<<if $whitneyRescueUniform>>
+		<<He>>把衣服扔到了你身上。"最好快点。你害我浪费了时间，可能会想再试一次。"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+
+		<<link [[继续|Whitney Rescue Exposed 2]]>><<set $phase to 2>><</link>>
+		<br>
+	<<else>>
+		<<He>>在你的屁股上拍了一下就把你打发走了。
+		<<print either(
+			`"别给自己惹上麻烦。"<<he>>笑着说，"我喜欢我的荡妇完好无损。"`,
+			`"注意安全，"<<he>>警告，"我不想让别人认为我的<<girl>>很容易下手。"`,
+			`"如果我抓到别人和你鬼混，我会狠狠揍他们一顿，"<<he>>说，"你也逃不掉。"`
+		)>>
+		<<stress 2>><<gstress>>
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<whitneyRescueEnd>>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	惠特尼踉跄后退。
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 15>>
+		"臭<<bitch>>，"<<he>>吼道，"看看下次我还救不救你。"
+	<<else>>
+		"你到底他妈想我做什么？"<<he>>叹了口气，"下次管好你他妈自己的事。"
+	<</if>>
+	<<npcincr Whitney dom -1>><<ldom>>
+	<br><br>
+
+	<<He>>怒气冲冲地离开了<<if $whitneyRescueUniform>>，留下的衣服堆在地板上<</if>>。<<if !$whitneyRescueAlone>><<his>>的朋友们看起来很困惑，跟着<<him>>离开了。<</if>><<tearful>>你整理好自己。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<if $whitneyRescueUniform>>
+		<<set _rng to random(1, 100)>>
+		<<if $worn.upper.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<upperwear 5>>
+				<<elseif _rng gte 20>>
+					<<upperwear 58>>
+				<<else>>
+					<<upperwear 37>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<upperwear 5>>
+				<<elseif _rng gte 40>>
+					<<upperwear 59>>
+				<<elseif _rng gte 20>>
+					<<upperwear 60>>
+				<<else>>
+					<<upperwear 5>>
+				<</if>>
+			<</if>>
+			<<set $worn.upper.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+		<<if $worn.lower.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<lowerwear 6>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 53>>
+				<<else>>
+					<<lowerwear 28>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<lowerwear 7>>
+				<<elseif _rng gte 40>>
+					<<lowerwear 54>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 56>>
+				<<else>>
+					<<lowerwear 26>>
+				<</if>>
+			<</if>>
+			<<set $worn.lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+	<</if>>
+
+	<<whitneyRescueEnd>>
+<<else>>
+	"无所谓，"<<he>>嘲笑道。
+	<<if $whitneyRescueUniform>>
+		"我猜你不需要这些。"
+		<br><br>
+
+		<<He>>怒气冲冲地离开，把衣服也带走了，留下你光着身子站在走廊中央。<<tearful>>你赶紧试图寻找能够遮掩的东西。
+	<<else>>
+		"反正我也不想要别人用过的东西。"
+		<br><br>
+
+		<<He>>愤然离去。<<if !$whitneyRescueAlone>><<his>>的朋友们困惑地跟了上去。<</if>><<tearful>>你整理好自己。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<whitneyRescueEnd>>
+<</if>>

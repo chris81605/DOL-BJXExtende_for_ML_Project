@@ -1,0 +1,114 @@
+:: School Lockers Sneak []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $rng gte 92 and $condomLvl gt 1>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	你发现一个避孕套藏在几本书后面。
+	<br><br>
+
+	<<link [[偷走|School Lockers Condom Steal]]>><<crimeUp 2 "petty">><</link>><<crime "petty">>
+	<br>
+	<<link [[弄坏|School Lockers Condom Sabotage]]>><<arousal 20>><<trauma -20>><</link>><<garousal>><<llltrauma>><<promiscuous1>>
+	<br>
+	<<link [[离开|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 78>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	你发现价值<<moneyGainDisplay 6 true true>>的硬币散落在各处。可能是用来坐公交车的。
+	<br><br>
+
+	<<link [[偷走|School Lockers]]>><<crimeUp 1 "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+	<br>
+	<<link [[离开|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 58>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	储物柜里没有你感兴趣的东西。到处都是钢笔和铅笔。
+	<br><br>
+
+	<<link [[离开|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 38>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	简单翻找一下，你就发现了<<moneyGainDisplay 30 true true>>。
+	<br><br>
+
+	<<link [[偷走|School Lockers]]>><<crimeUp 5 "petty">><<set $money += _money_gain>><</link>><<crime "petty">>
+	<br>
+	<<link [[离开|School Lockers]]>><</link>>
+	<br>
+<<elseif $rng gte 18>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	你翻遍了所有的东西，但没找到值钱的。
+	<br><br>
+
+	<<link [[离开|School Lockers]]>><</link>>
+	<br>
+<<else>>
+	你成功撬开了柜门。
+
+	<<if $skulduggery lt 100>>
+		<<skulduggeryskilluse>><<skulduggery 5>>
+	<<else>>
+		<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+	<</if>>
+	<br><br>
+
+	<<if !["early", "late", "earlynoschool", "latenoschool", "daynoschool"].includes($schoolstate)>>
+		<<generatey1>>你在翻找物品时，听到了身后传来的声音："嘿，那是我的柜子！"声音的主人是一个<<person1>><<person>>，看起来对你的入侵很生气。
+		<br><br>
+
+		<<link [[道歉|School Lockers Apology]]>><<status -10>><</link>><<lcool>>
+		<br>
+		<<link [[撒谎|School Lockers Lie]]>><<detention 3>><</link>><<gdelinquency>>
+		<br>
+		<<link [[打架|School Lockers Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		储物柜里没有你感兴趣的东西。到处都是钢笔和铅笔。
+		<br><br>
+
+		<<link [[离开|School Lockers]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

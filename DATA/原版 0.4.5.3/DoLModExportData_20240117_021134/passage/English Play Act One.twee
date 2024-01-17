@@ -1,0 +1,88 @@
+:: English Play Act One []
+<<effects>>
+<<set $englishPlayPronouns to {
+	Cass: "",
+	Taylor: "",
+	Sterling: ""
+}>>
+<<set $englishPlayPronouns[$englishPlayRoles.Player] to $player.gender_appearance>>
+<<set $englishPlayPronouns[$englishPlayRoles.Sydney] to C.npc.Sydney.pronoun>>
+
+<<npc Sydney 1>>
+<<if $englishPlayKylarReplace>>
+	<<loadNPC 1 actor_replacement>>
+	<<set $englishPlayPronouns[$englishPlayRoles.Kylar] to $NPCList[1].pronoun>>
+<<else>>
+	<<npc Kylar 2>>
+	<<set $englishPlayPronouns[$englishPlayRoles.Kylar] to C.npc.Kylar.pronoun>>
+<</if>>
+
+随着喝彩声逐渐逐渐平息，礼堂逐渐安静了下来，你开始介绍你的角色。
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		你以卡斯的视角向观众介绍自己。你居无定所，一贫如洗，唯一的亲人是卧病在床的母亲。但是当你遇到了名为泰勒的素有教养，心地善良的富二代之后，一切都向着最好的方向发展。然而，泰勒的<<sterlingFather>>，并不打算让你们得偿所愿。
+	<<case "Taylor">>
+		你以泰勒的视角向观众介绍自己。你是一个优秀的年轻人，一个强大的商业帝国的继承人。你从小就被教导着诚实以及忠诚的价值观。但当你遇到贫困的青年卡斯之后，你单调的生活发生了改变。尽管你跟他属于两个世界，但你还是被他所吸引住了。然而，你的<<sterlingFather>>，永远也不会允许你们两个在一起。
+	<<case "Sterling">>
+		你以斯特林<<sterlingTitle>>的视角向观众介绍自己。你是一个无情的商人，在镇上飞黄腾达，成了最富有的公民之一。尽管你在商业上有着坚韧的头脑，但对你来说没有什么是比家人更重要的了。你突然发现你舒适奢华的生活正在受到威胁，你的<<taylorSon>>泰勒，跟一个名叫卡斯的泥腿子<<cassBoy>>好上了。
+<</switch>>
+<br><br>
+
+悉尼和<<if $englishPlayKylarReplace>><<person2>><<person>><<else>>凯拉尔<</if>>介绍了他们的角色，分别是<<print $englishPlayRoles.Sydney.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒")>>和<<print $englishPlayRoles.Kylar.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒")>>。
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		演出从你跟泰勒在圣诞前夜准备私奔开始。
+		<br><br>
+
+		剧本要求进行一段浪漫的对话。
+		<<if $promiscuity gte 15>>
+			<span class="lewd">一个下流的想法在你脑海里浮现。</span>
+		<<else>>
+			<span class="blue">你还没淫乱到去偏离剧本。</span>
+		<</if>>
+		<br>
+		<<link [[按照剧本来|English Play Act One Script]]>><</link>>
+		<br>
+		<<if $promiscuity gte 15>>
+			<<if $englishPlayKylarReplace>>
+				<<link [[咸猪手|English Play Act One Break]]>><</link>><<promiscuous2>>
+			<<else>>
+				<<link [[咸猪手|English Play Act One Break]]>><<npcincr Kylar rage -3>><<npcincr Kylar lust 1>><</link>><<llksuspicion>><<glust "凯拉尔">><<promiscuous2>>
+			<</if>>
+		<</if>>
+		<br>
+	<<case "Taylor">>
+		演出开始时，你正在计划跟卡斯在圣诞前夜私奔。
+		<br><br>
+
+		剧本要求进行一段浪漫的对话。
+		<<if $promiscuity gte 15>>
+			<span class="lewd">一个下流的想法在你脑海里浮现。</span>
+		<<else>>
+			<span class="blue">你还没淫乱到去偏离剧本。</span>
+		<</if>>
+		<br>
+		<<link [[按照剧本来|English Play Act One Script]]>><</link>>
+		<br>
+		<<if $promiscuity gte 15>>
+			<<if $englishPlayKylarReplace>>
+				<<link [[咸猪手|English Play Act One Break]]>><</link>><<promiscuous2>>
+			<<else>>
+				<<link [[咸猪手|English Play Act One Break]]>><<npcincr Kylar rage 5>><<npcincr Sydney lust 2>><</link>><<ggksuspicion>><<gslust>><<promiscuous2>>
+			<</if>>
+		<</if>>
+		<br>
+	<<case "Sterling">>
+		表演从你听说你的<<taylorSon>>跟一个泥腿子<<cassBoy>>一起消失开始。
+		<br><br>
+
+		你现在正在后台，你能听见凯拉尔挣扎地对悉尼念诵浪漫的台词，然而悉尼不为所动。
+		<br><br>
+
+		剧本要求你在一段简短的独白后，冲进那对情侣的藏身处。
+		<br>
+		<<link [[按照剧本来|English Play Act One Script]]>><</link>>
+		<br>
+		<<link [[把门柱踢倒|English Play Act One Break]]>><</link>><<athleticsdifficulty 1 700>>
+		<br>
+<</switch>>

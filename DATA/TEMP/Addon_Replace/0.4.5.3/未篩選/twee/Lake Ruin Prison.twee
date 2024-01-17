@@ -1,0 +1,210 @@
+:: Lake Ruin Prison []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $wraith.exit to "lake_ruin">><<set $bus to "lake_ruin_prison">><<effects>>
+
+你被困在一个水下监狱中。粉色的雾气在空气中旋转。<<ghallucinogens>>
+<br><br>
+
+<<if $wraithPrison.state is "present">>
+	<<set _wraithEvent to true>>
+<</if>>
+
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<set $wraithPrison.state to "gone">>
+	<<endWraith>>
+	<<clearWraith>>
+	<<pregnancyWatersBrokenPassout "wraith">>
+<<elseif $moonstate is "morning" and Time.hour gte 6 and $wraithPrison.timePassed gte 120 and $wraithPrison.state isnot "gone">>
+	你看到那个身影靠近通往下面楼梯的地方。祂的身影忽明忽暗。
+	<br><br>
+	<<if $wraith.state is "haunt">>
+		<<if !$wraithPrison.vision>>
+			祂用着纯粹的愤怒和仇恨盯着你。祂尖叫着，开始在空中盘旋，抓着自己的赤裸脖子尖叫着。
+			<br><br>
+			祂突然消失了，然后在下一秒又出现在了你面前。祂用长长的爪子抓住了你的脖子，很快地将你拖到楼梯前，然后将你的头浸入水中。<<stress 24>><<pain 10>><<gpain>><<gstress>>
+			<br><br>
+			你再次被控制住了，祂愤恨地喊道："<span class="wraith">我会向你展示你的恶行。我会再次找到你，小偷。你的惩罚还没有受够。你还没有准备好！</span>"<<gobsession>>
+			<br><br>
+			祂的身影消失了，你将头从水中抬起，咳嗽着。<<tearful>>你站起来。楼梯底部的符文再次闪亮起来。
+		<<elseif C.npc["Ivory Wraith"].lust gte 12>>
+			祂愤怒地盯着你。祂咆哮着开始绕圈漂浮，祂用手抓住自己的脖子。
+			<br><br>
+			祂的身影忽隐忽现，很快又出现在了你面前。祂掐住你的脖子，祂的手又长又硬。你被压在墙上了。<<stress 12>><<pain 5>><<gpain>><<gstress>>
+			<br><br>
+			你在和祂斗争。祂发出低语，"<span class="wraith">你已经看到了。你寻求忏悔吗？更多。首先是更多的痛苦。</span>"
+			<br><br>
+			祂的身影消散，你从墙上滑了下来。<<tearful>>你站了起来，楼梯底部的符文再次发光。<<lobsession>>
+		<<else>>
+			祂忧心忡忡地盯着你，然后直接出现在你面前。祂抬起一只爪子，好像要打你，你本能地捂住脸。
+			<br><br>
+			但是祂没有伤害你，正好相反，你感觉到一种温柔的爱抚落在了你的脸颊上。你慢慢睁开眼睛，<span class="green">利爪不见了，取而代之的是苍白柔软的皮肤。你可以从祂的脸上看到一丝熟悉。</span>
+			<br><br>
+			"<span class="wraith">我们还在坠落，远未到达底部。但或许我们不需要到达底部。</span>"<<lobsession>>
+		<</if>>
+	<<elseif $wraith.state is "despair">>
+		<<if !$wraithPrison.vision>>
+			祂带着悔恨的表情看着你。祂尖叫着，开始绕着圈漂浮，祂抓着自己裸露空无一物的脖子哭泣。
+			<br><br>
+			祂突然消失了，但很快又在你的面前出现。祂伸手抓住了你的脖子，手指又长又尖。但祂突然停了下来，开始哭泣，并在你面前倒下。
+			<br><br>
+			"<span class="wraith">对不起。你还没有准备好。我们必须承受更多的痛苦。</span>"<<gobsession>>
+			<br><br>
+			祂突然向后消失，离开了你。楼梯底部的符文再次发出光芒。
+		<<elseif C.npc["Ivory Wraith"].lust gte 12>>
+			祂带着愤怒和懊悔的目光盯着你。祂咆哮着，开始绕着圈在空中漂浮，祂抓着自己光秃秃的脖子。
+			<br><br>
+			祂的身影忽隐忽现，很快又出现在了你面前。祂掐住你的脖子，祂的手又长又硬。你被压在墙上了。<<stress 12>><<pain 5>><<gpain>><<gstress>>
+			<br><br>
+			你挣扎着反抗祂。祂立刻放开你，祂的脸上露出了惊恐的表情。"<span class="wraith">对不起。不是你的错。不是你的错……</span>"<<lobsession>>
+			<br><br>
+			祂向后漂浮着离开了。你沿着墙滑落下来。<<tearful>>你站起来了。楼梯底部的符文再次发出光芒。
+		<<else>>
+			祂带着懊悔的表情看着你。祂突然消失不见，但很快又在你的面前出现。
+			<br><br>
+			"<span class="wraith">你看到了它。你看到了吗？你会帮助我吗？你会帮助我的。</span>"<<lobsession>>
+			<br><br>
+			祂突然向后漂浮，离开了你。楼梯底部的符文再次发出光芒。
+		<</if>>		
+	<<else>>
+		"<span class="wraith">我的时间已经结束了，但是下个血月你会再次回到这里。</span>"
+		<<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">>
+			祂咯咯笑着，你感受到脑内的史莱姆在蠕动着。"<span class="wraith">毕竟，这是唯一一处你可以摆脱寄生之苦的地方。</span>"
+		<</if>>
+	<</if>>
+	<br><br>
+	一股水流从楼梯里喷出，那个身影消失了。<span class="blue"><i>在下一个血月之前，你是安全的。</i></span>
+	<br><br>
+	<<set $wraithPrison.state to "gone">>
+	<<unset _wraithEvent>>
+	<<endWraith>>
+	<<clearWraith>>
+<</if>>
+<<if _wraithEvent is true>>
+	<<if ["haunt", "despair"].includes($wraith.state) and $trauma gte ($traumamax / 10) * 4 and $wraithPrison.timePassed gte 140>>
+		苍白的身影从地下出现。你感觉到自己的力气已经被吸干了。你被不可见的力量推到了一个牢房里，并被推到了鲜血苔藓的床上。
+		<br><br>		
+		<<if $wraith.state is "haunt">>
+			祂用冷漠的目光打量着你，并用有爪子的手抓住了你的脸颊。
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">你渴望真知，所以你从死者那里偷走了知识。我要让你体会与这座神殿的残骸一同下沉的绝望。当海浪啃噬你的骨头时，也许你的好奇心就能得到满足了。<<pcPetname "Wraith">>。<<pcPetname "Wraith">>。</span>"
+			<<else>>
+				"<span class="wraith">我们再次下去。<<pcPetname "Wraith">>。</span>"
+			<</if>>
+		<<else>>
+			祂用绝望的目光打量着你，并用有爪子的手抓住了你的脸颊。
+			<<if !$wraithPrison.vision>>
+				"<span class="wraith">你必须看到。你必须理解。你必须帮助我。它在哪里？<<pcPetname "Wraith">>。</span>"
+			<<else>>
+				"<span class="wraith">帮帮我，到哪里去了？<<pcPetname "Wraith">>。</span>"
+			<</if>>
+		<</if>>
+		<br><br>
+		祂抓了一把地衣，并将你的头扭向后。祂开始把碾碎的地衣放进你的嘴里。
+		<<if $wraithPrison.vision>>
+			你知道最好不要试图抵抗。
+		<<else>>
+			你试图吐出它，但你的身体不听使唤。
+		<</if>>
+		你的嘴里被塞满了开花的地衣，祂吻了你一下。
+		你绷紧身体，但很快，你感到一种奇怪的宽慰。<<takeKissVirginity "Ivory Wraith" "rape">>
+		<<stress -200>><<lllstress>><<trauma 36>><<gggtrauma>><<purity -50>><<lllpurity>><<physique_loss 16>><<llphysique>><<pain -15>><<llpain>>
+		<br><br>
+		一切在你周围旋转，只留下你和一个苍白的面孔在一片旋涡中。你的思维被燃烧着，心灵尖叫着想要释放。<<ggghallucinogens>>
+		<br><br>
+		你的视野变得扭曲，出现了你从未见过的变形。你的皮肤起波纹，像蜡烛融化一样。你从上方看着自己，被发光的地衣背光。你看着自己的手臂，发现它们异常苍白。
+		<br><br>
+		<span class="nextLink"><<link [[醒来|Schism]]>><</link>></span>
+		<br>
+	<<else>>
+		<<generateWraith 1>>
+		一个苍白的身影从地下冒出来。你被一股无形的力量拉向祂，祂打量了你一下。
+		<br><br>
+		<<if $wraith.state is "haunt">>
+			"<span class="wraith"><<print either(
+				"睁眼。",
+				"<<pcPetname \"Wraith\">>。",
+				"沉睡吧，为了真正的清醒。",
+				"你必须打开你的心灵，只有这样你才能面对惩罚。",
+				"你还没有准备好看到，小偷。我会让你准备好。",
+				"我会从你身上夺走一切，只有这样你才会明白。"
+			)>></span>"
+		<<elseif $wraith.state is "despair">>
+			"<span class="wraith"><<print either(
+				"好冷。",
+				"对不起。",
+				"你看到它了吗？",
+				"我们必须一起承受。",
+				"<<pcPetname \"Wraith\">>。",
+				"你是我拥有的一切。"
+			)>></span>"			
+		<<else>>
+			"<span class="wraith"><<print either(
+				"不要抗拒。",
+				"你不愿意屈服吗？",
+				"和我一起沉没，永远。",
+				"<<pcPetname \"Wraith\">>。",
+				"我已经在你的内心深处。",
+				"这就是你所拥有的一切。"
+			)>></span>"
+		<</if>>
+		<br><br>
+		<<if $rng gte 90>>
+			祂抓了一把粉红色的地衣，用另一只手抓住了你的脸，强迫你张开嘴。地衣在祂手中破碎，片片落入你的嘴中。
+			<br><br>
+			<<set $skulduggerydifficulty to 600>>
+			<<link [[接受|Lake Ruin Lichen Eat]]>><<trauma 100>><<stress -50>><<set $phaseWraith to 1>><<hallucinogen 220>><</link>><<gggtrauma>><<lllstress>><<gghallucinogens>>
+			<br>
+			<<link [[假装吃东西|Lake Ruin Lichen Eat]]>><<set $phaseWraith to 2>><</link>><<skulduggerydifficulty>>
+			<br>
+			<<link [[吐出来|Lake Ruin Lichen Eat]]>><<set $phaseWraith to 3>><</link>>
+			<br>
+		<<elseif $rng gte 70 and $wraithPrison.possession is false>>
+			<<if !$wraith.will>>
+				<<set $wraith.will to random(1300, 1700)>>
+			<</if>>
+			<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+			你感到祂试图进入你的身体。
+			<br><br>
+			<<link [[屈服|Lake Ruin Prison Possession]]>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><</if>><<sub 1>><</link>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+			<br>
+			<<link [[反抗|Lake Ruin Prison Possession Resist]]>><<set $phase to 1>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><</if>><<def 1>><</link>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>><</if>><<willpowerdifficulty 1 _wraithWill>>
+			<br>
+		<<elseif $rng gte 50 and !$wraithPrison.masturbation>>
+			<<if !$wraith.will>>
+				<<set $wraith.will to random(1300, 1700)>>
+			<</if>>
+			<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+			你感到祂试图进入你的身体。
+			<br><br>
+			<<link [[屈服|Lake Ruin Prison Masturbation Start]]>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><</if>><<sub 1>><</link>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+			<br>
+			<<link [[反抗|Lake Ruin Prison Masturbation Resist]]>><<set $phase to 1>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><</if>><<def 1>><</link>><<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>><</if>><<willpowerdifficulty 1 _wraithWill>>
+			<br>
+		<<else>>
+			<<initWraith>>
+			<<startWraith>>
+			<br><br>
+			<<link [[继续|Lake Ruin Prison Rape]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $wraithPrison.state is "gone">>
+	<<link [[进入水中|Lake Ruin Prison Leave]]>><<wraith_pass 2>><</link>>
+	<br>
+<<elseif !$wraithPrison.search>>
+	<<link [[寻找出路 (0:30)|Lake Ruin Prison Search]]>><<wraith_pass 30>><</link>>
+	<br>
+<<else>>
+	<<if $wraithPrison.search is 1>>
+		<<link [[检查笼子 (0:15)|Lake Ruin Prison Search]]>><<wraith_pass 15>><</link>>
+		<br>
+	<<elseif $wraithPrison.search is 2>>
+		<<link [[继续搜索 (0:30)|Lake Ruin Prison Search]]>><<wraith_pass 30>><</link>>
+		<br>
+	<<elseif $wraithPrison.search is 3>>
+		<<link [[游下楼梯|Lake Ruin Prison Search]]>><<wraith_pass 2>><</link>>
+		<br>
+	<</if>>
+	<<if $wraithPrison.search gte 2>>
+		<<link [[休息 (1:00)|Lake Ruin Prison Rest]]>><<wraith_pass 60>><<set $tiredness -= 500>><<trauma 50>><</link>><<ltiredness>><<ggtrauma>>
+	<</if>>
+<</if>>

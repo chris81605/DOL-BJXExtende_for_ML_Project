@@ -1,0 +1,80 @@
+:: Farm Barn Breasts 2 []
+<<effects>>
+
+机器继续着它罪恶的工作，更猛烈地吮吸着。你感到体内涌起一股暖流。<<arousal 10000>>
+<<orgasm>>
+<br>
+<<if $lactating is 1>>
+
+
+	乳汁从你的蓓蕾中流出，你的身体颤抖起来。你的液体被吸进机器，然后滴进一个玻璃罐里。
+	<br><br>
+
+	你保持双手和膝盖着地，两根吸筒一直连接在你的<<breasts>>上，直到机器吸完全部乳汁。
+
+	<<if $farm.barn gte 1>>
+		<<set $farm_breast_milk to ($milk_amount / 1.5)>>
+	<<else>>
+		<<set $farm_breast_milk to ($milk_amount / 2)>>
+	<</if>>
+	<<milk_amount `-$farm_breast_milk`>>
+	<<set $milk_produced_stat += Math.trunc($farm_breast_milk)>>
+
+	<<if $farm_breast_milk gte 3000>>
+		<span class="green">玻璃罐里的乳汁几乎要溢出来了。</span><<farmCatchChance 0.4>>
+	<<elseif $farm_breast_milk gte 2000>>
+		<span class="teal">玻璃罐里已经装满一半的乳汁。</span><<farmCatchChance 0.2>>
+	<<elseif $farm_breast_milk gte 1000>>
+		<span class="lblue">玻璃罐里已经装了大量的乳汁。</span><<farmCatchChance 0.1>>
+	<<elseif $farm_breast_milk gte 300>>
+		<span class="blue">玻璃罐里已经装有相当多的乳汁。</span><<farmCatchChance 0.05>>
+	<<else>>
+		<span class="purple">玻璃罐里只有一点点乳汁。</span><<farmCatchChance 0.01>>
+	<</if>>
+	<br><br>
+	<<if $farm_breast_milk gte 2000>>
+		<<set $farm_breast_milk to Math.trunc($farm_breast_milk / 1000)>>
+		<span class="gold">你已经装满了$farm_breast_milk瓶乳汁。</span>
+		<<tending_give bottle_of_breast_milk $farm_breast_milk>>
+	<<elseif $farm_breast_milk gte 1000>>
+		<<set $farm_breast_milk to Math.trunc($farm_breast_milk / 1000)>>
+		<span class="gold">你用乳汁装满了瓶子。</span>
+		<<tending_give bottle_of_breast_milk $farm_breast_milk>>
+	<<else>>
+		<<set $farm_breast_milk to Math.trunc($farm_breast_milk / 300)>>
+		<<if $farm_breast_milk lte 0>>
+			<<set $farm_breast_milk to 1>>
+		<</if>>
+		你的存量不够装满一瓶。你将其与牛奶混合。<<gfarm>>
+		<<farm_yield $farm_breast_milk>>
+	<</if>>
+	<br><br>
+
+	<<unset $farm_breast_milk>>
+	<<barn_img breasts>>
+<<else>>
+
+	你的<<breasts>>感觉更敏感了，但在机器停止工作前，你的乳头中没能流出任何乳汁。
+	<br><br>
+<</if>>
+
+<<if $farm.milking.dayMilking is true and Time.hour gte 7 and Time.hour lte 21 and $farm_end is undefined>>
+	你用颤抖的手取下吸筒，然后站了起来。
+	<<deviancy2>>
+
+	<<link [[继续 (0:30)|Farm Cattle Milk]]>><<pass 30>><<clotheson>><<machine_end>><</link>>
+	<br>
+<<elseif $farm.milking.caught is true and $farm.milking.alexNightEvent is false>>
+	<<set $farm.milking.alexNightEvent to true>>
+	<<set $farm.milking.dayMilking to true>>
+	你用颤抖的手取下吸筒。
+	<<deviancy2>>
+	<<link [[继续 (0:30)|Farm Barn Caught]]>><<pass 30>><<machine_end>><<endevent>><</link>>
+	<br>
+<<else>>
+	你用颤抖的手取下吸筒，然后站了起来。
+	<<deviancy2>>
+
+	<<link [[继续 (0:30)|Farm Barn]]>><<pass 30>><<clotheson>><<machine_end>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,62 @@
+:: Farm Saddle New []
+<<effects>>
+
+<<if $farm.steed>>
+	<<clearNPC "saddled_steed">>
+	<<set $farm.steed to 0>>
+<</if>>
+
+你给<<beasttype>>上鞍。
+<<if $farm.beasts.horses gte 20>>
+	<<if $monster is 1>>
+		"我很感激你的信任，"<<bhe>>低下<<bhis>>的头。"能伸伸腿真好。"
+	<<else>>
+		<<bHe>>舔你的肩膀。
+	<</if>>
+<<elseif $farm.beasts.horses gte 5>>
+	<<if $monster is 1>>
+		"如你所愿，"<<bhe>>说道。"别指望我能进入人类居住的蜂巢。气味太难闻了。"
+	<<else>>
+		<<bHe>>在你工作时保持被动。
+	<</if>>
+<<else>>
+	<<if $monster is 1>>
+		"小心，<<girl>>，"<<bhe>>说道。"不然我就骑你了。"
+	<<else>>
+		<<bHe>>咬你一口，但让你把话说完。
+	<</if>>
+<</if>>
+
+<br><br>
+
+<<if currentSkillValue("thighskill") gte 200>>
+	<<saveNPC 0 "saddled_steed">>
+	<<set $farm.steed to clone($NPCList[0].hair)>>
+	你爬到<<bhis>>的背上，鞭动<<bhim>>小跑。这股力量出乎你的意料，<span class="green">但你设法坚持住了。</span>当你绕着院子转时，风吹着你的头发。
+	<br><br>
+
+	<<if $farm.stable gte 1>>
+		<<farmicon "horse">><<link [[骑马到镇子 (0:15)|Farm Ride Town]]>><<tiredness 2>><<pass 15>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		<<farmicon "horse">><<link [[骑马到镇子 (0:30)|Farm Ride Town]]>><<tiredness 3>><<pass 30>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[下马|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你爬到<<bhis>>的背上，鞭动<<bhim>>小跑。<span class="red">这股力量把你从马鞍上震了起来。</span>
+
+	<<if $monster gte 1>>
+		半人马笑了。
+	<<else>>
+		马在嘶鸣。
+	<</if>>
+	<<gpain>><<pain 4>>
+	<br><br>
+	<i><span class="purple">D</span>大腿技能或更高要求。附近有一所骑术学校。</i>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

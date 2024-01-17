@@ -1,0 +1,71 @@
+:: Moor Fox Safe Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<if $monster is 1>>
+			<<bHe>>走到你的脚边，得意地看着你。"把这当作一份礼物吧。"
+		<<else>>
+			<<bHe>>看起来非常得意。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<if $monster is 1>>
+			<<bHe>>用鼻子蹭着你，"真好玩！"
+		<<else>>
+			<<bHe>>用鼻子蹭你的脸。
+		<</if>>
+		<<stress -3>><<lstress>><br>
+	<<else>>
+		<<if $monster is 1>>
+			<<bHe>>站起身来，"谢谢，也许现在我可以为自己找一位真正的伴侣了。"
+		<<else>>
+			<<bHe>>舔了舔你的脸。
+		<</if>>
+	<</if>>
+	<<bHe>>钻进了灌木丛。
+	<br><br>
+
+	<<tearful>>你站了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<if $monster is 1>>
+			<<bHe>>退缩了，冲你呲起牙。"你会后悔的。"
+		<<else>>
+			<<bHe>>从你身上滚开，沮丧地喘着气。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<if $monster is 1>>
+			"噢！噢！住手！"
+		<<else>>
+			<<bHe>>从你身上滚开。
+		<</if>>
+	<<else>>
+		<<if $monster is 1>>
+			<<bHe>>从你身边退开。"也许我还没有找伴侣的实力……"
+		<<else>>
+			<<bHe>>从你身上滚开。
+		<</if>>
+	<</if>>
+	<<beasttype>>呜咽着逃进了灌木丛中。
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<beasttype>>从你身边离开，钻入了树丛中。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

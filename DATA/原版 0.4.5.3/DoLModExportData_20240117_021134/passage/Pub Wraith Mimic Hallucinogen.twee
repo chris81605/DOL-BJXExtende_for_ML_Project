@@ -1,0 +1,33 @@
+:: Pub Wraith Mimic Hallucinogen []
+<<location "forest">><<effects>>
+你吞下药丸。一阵眩晕袭来，反常的暖意在你的身躯里扩散。一切都在旋转，周围的事物在拉伸变形。你的嘴里残留着奇怪的味道……等等，你刚刚吞下去的到底是什么？
+<br><br>
+你转向<<him>>，<<His>>的皮肤已经变成了赤裸裸的白色，惨白，没有生机。
+<<if $wraith.seen gte 3>>
+	你马上就能认出那是一直跟着你的苍白生物。
+<<elseif $wraith.seen gte 1>>
+	<<His>>苍白的脸庞看起来十分的眼熟。你本来应该感到恐慌的，可你没有，一种奇怪的感觉取代了恐惧。
+<</if>>
+<<He>>笑了，"<span class="wraith">我能感觉到你急促的心跳，放弃吧。</span>"
+<<endevent>><<generateWraith 1 true>>
+<<initWraith>><<rainWraith true>>
+<br><br>
+
+<<switch $wraith.gen>>
+	<<case "man">>
+		<<He>>朝天举起<<his>>的手，然后一股看不见的力量把你推到地上。
+	<<case "tentacles" "abomination" "slimetentacles">>
+		你觉得有东西顺着你的腿往上滑。你低头一看，一团苍白的触手包围着你！
+	<<case "slime">>
+		<<He>>朝天举起了<<his>>的手，然后一团闪闪发光的紫色物出现在你的上方。一群苍白起伏的泥状物跳了出来！
+	<<case "arms">>
+		狂躁的笑容掠过<<his>>的脸庞，另外几对手臂从<<his>>的背后伸出，每一对手臂都以奇怪的方式做着手势。
+<</switch>>
+<br><br>
+
+<<if isBloodmoon()>>
+	<<link [[继续|Wraith Caught]]>><<set $wraith.exit to "forest">><</link>>
+<<else>>
+	<<link [[继续|Pub Wraith Mimic Attack]]>><</link>>
+<</if>>
+<br>

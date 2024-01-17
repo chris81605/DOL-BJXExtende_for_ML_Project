@@ -1,0 +1,117 @@
+:: Asylum Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+	<<if _slimeWakeMasturbation is 1>>
+		<<set _masturbationExit to "Asylum Sleep">>
+		<<slimeWakeMasturbation>>
+	<<else>>
+		<<wakingEffects $sleepHoursTotal>>
+		<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+			你睡得很安稳，但你现在有些许不舒服。
+			<br><br>
+		<<elseif $nightmares gte 1 and $controlled is 0>>
+			你<<if _wakingEffect>>梦见了<<else>>梦到自己被<</if>>一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+		<<else>>
+			<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte ($arousalmax / 10) * 9>>
+				你的睡眠被淫秽的梦境<<if _wakingEffect>>打断<<else>>所困扰<</if>>。
+				<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+				<<arousal `100 * $sleepHoursTotal`>>
+				<<if $arousal gte $arousalmax>>
+					它们把你推向了高潮的顶点。
+					<<orgasm>>
+				<<else>>
+					<br><br>
+				<</if>>
+			<<elseif !_wakingEffect>>
+				你睡得很香。
+				<br><br>
+			<<else>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<sleepeffects>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<asylumeffects>>
+			<<pregnancyWatersBrokenPassout "asylum">>
+		<<elseif _sleepinterrupt>>
+			<<asylumeffects>>
+			<<if $rapewake is 1>>
+				<<set $rapewake to 0>>
+				<<generate1>><<generate2>><<person1>>
+				<<if _wakingEffect is "dryheaving">>
+					一个<<person>>揉着你的背。"感觉好点了吗？"<<he>>说道，"我和我的朋友为了保护你们这些疯子可是非常努力在工作啊，给我们点回报如何？"<<He>>摸了你一把。
+				<<else>>
+					一个<<person>>把你摇醒。"醒醒，醒醒，"<<he>>说道，"我和我的朋友为了保护你们这些疯子可是非常努力在工作啊，给我们点回报如何？"<<He>>摸了你一把。
+				<</if>>
+				<br><br>
+				<<link [[继续|Asylum Cell Rape]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<elseif $asylumstate is "firsttreatment" and $daily.asylumTreatment1 isnot 1>>
+				<<set $daily.asylumTreatment1 to 1>>
+				<<generate1>><<person1>>
+				<<if _wakingEffect is "dryheaving">>
+					一个<<person>>为你揉背，<<Hes>>是个护士。
+					<br><br>
+				<<else>>
+					一个<<person>>把你摇醒，<<Hes>>是个护士。
+					<br><br>
+				<</if>>
+				<<asylumoptions>>
+				"医生说该给你治疗了，"<<he>>说道。"跟我来吧。"
+				<br><br>
+				<<endevent>>
+				<<asylumtreatments>>
+			<<elseif $asylumstate is "secondtreatment" and $daily.asylumTreatment2 isnot 1>>
+				<<set $daily.asylumTreatment2 to 1>>
+				<<generate1>><<person1>>
+				<<if _wakingEffect is "dryheaving">>
+					一个<<person>>为你揉背，<<Hes>>是个护士。
+					<br><br>
+				<<else>>
+					一个<<person>>把你摇醒，<<Hes>>是个护士。
+					<br><br>
+				<</if>>
+				<<asylumoptions>>
+				"医生说该给你治疗了，"<<he>>说道。"跟我来吧。"
+				<br><br>
+				<<endevent>>
+				<<asylumtreatments>>
+			<<elseif $asylumstate is "assessment" and $daily.asylumAssessment isnot 1>>
+				<<set $daily.asylumAssessment to 1>>
+				<<generate1>><<person1>>
+				<<if _wakingEffect is "dryheaving">>
+					一个<<person>>为你揉背，<<Hes>>是个护士。
+					<br><br>
+				<<else>>
+					一个<<person>>把你摇醒，<<Hes>>是个护士。
+					<br><br>
+				<</if>>
+				<<asylumoptions>>
+				"医生说该给你进行精神评估了，"<<he>>说道。"跟我来吧。"
+				<br><br>
+				<<endevent>>
+				<<asylumassessment>>
+			<<else>>
+				<<if _wakingEffect is "dryheaving">>
+					响亮的嗡嗡声已经响了一会了。
+					<br><br>
+				<<else>>
+					一阵响亮的嗡嗡声把你吵醒了。
+					<br><br>
+				<</if>>
+				<br><br>
+				<<getouticon>><<link [[起床|Asylum Cell]]>><</link>>
+				<br><br>
+			<</if>>
+		<<else>>
+			<br><br>
+			<<getouticon>><<link [[起床|Asylum Cell]]>><</link>>
+			<br><br>
+		<</if>>
+		<<set $phase to 0>>
+	<</if>>
+<</if>>

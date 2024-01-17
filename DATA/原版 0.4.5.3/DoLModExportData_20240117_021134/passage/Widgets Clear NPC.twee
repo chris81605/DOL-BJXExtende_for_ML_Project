@@ -1,0 +1,28 @@
+:: Widgets Clear NPC [widget]
+<<widget "clearnpc">>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<if Object.keys($per_npc).includes($NPCList[_i].per)>>
+			<<updateNPC $NPCList[_i]>>
+		<</if>>
+		<<set $NPCList[_i] to clone(setup.baseNPC)>>
+		<<if $NPCList[_i].strapon isnot undefined>>
+			<<run delete $NPCList[_i].strapon>>
+		<</if>>
+	<</for>>
+
+	<<set $pronoun to 0>>
+
+	<<set $beastgenderoverride to 0>>
+
+	<<set $enemyno to 0>>
+	<<set $enemynomax to 0>>
+
+	<<set $combattype to 0>>
+	<!-- Clear the arrays but don't unset them. -->
+	<<set $npc.splice(0)>>
+	<<set $npcnum.splice(0)>>
+	<<set $npcrow.splice(0)>>
+	<<if $endeventerror is undefined>>
+		<<run EventSystem.clear()>>
+	<</if>>
+<</widget>>

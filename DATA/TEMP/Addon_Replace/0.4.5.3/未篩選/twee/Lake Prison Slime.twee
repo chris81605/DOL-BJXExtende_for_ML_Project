@@ -1,0 +1,30 @@
+:: Lake Prison Slime []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_prison">><<set $wraith.exit to "lake_ruin">><<effects>>
+<<set $wraithParasite to true>>
+祂把史莱姆放到你的
+<<if $parasite.left_ear.name is undefined>>
+	左耳里，<span class="lewd">它在里面扭动着。</span>
+	<<parasite left_ear slime>>
+<<elseif $parasite.right_ear.name is undefined>>
+	右耳里，<span class="lewd">它在里面扭动着。</span>
+	<<parasite right_ear slime>>
+<</if>>
+<br><br>
+你在祂的掌控中颤抖，感受到一种异样的兴奋感，尤其是当祂像这样骑在你身上的时候。一开始还只是一种小小的感觉，但那种诡异的兴奋感逐渐增长，直到<span class="lewd">一股压倒性的淫欲吞噬了你</span>。祂看起来很高兴。<<lobsession>>
+<br><br>
+<<if !$earSlime.corruption>>
+	<i>在"属性"选项栏中出现了一个新的堕落条。</i>
+	<br><br>
+<</if>>
+祂对你的控制松开了。<<if $wraith.state is "haunt">>你喘不过气来，<</if>>你听到周围的耳语。<span class="lewd">内部的某些东西迫使你把自己献给苍白的人影。</span>你以某种方式知道顺从这种冲动会感觉更好，而违抗会很痛苦。
+<<initWraith "abomination">>
+<<startWraith>>
+<br><br>
+<<if $promiscuity gte 55 and $submissive gte 1900>>
+	<<link [[顺从|Lake Prison Intro Fight]]>><<set $sexstart to 1>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+	<br>
+<</if>>
+<<link [[服从|Lake Prison Intro Fight]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 1>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+<br>
+<<link [[违抗|Lake Prison Intro Fight]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+<br>

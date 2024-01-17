@@ -1,0 +1,71 @@
+:: Farm PC Pregnancy Reveal Unknown []
+<<effects>><<npc "Alex">>
+<<set C.npc.Alex.pregnancy.knowledge to true>><<set C.npc.Alex.pregnancy.sample to true>>
+
+<<if $phase is 1>>
+
+	<<if playerBellySize() gte 7>>
+		你靠近艾利克斯，抓住<<his>>的手，放在了你的肚子上。
+
+	<<else>>
+		你靠近艾利克斯，抓住<<his>>的手，把你的验孕棒放在了上面。
+	<</if>>
+
+	<<if talkedAboutPregnancy("pc","Alex")>>
+		<<if $speech_attitude is "meek">>
+			"我……我觉得孩子是你的，"你说。
+		<<elseif $speech_attitude is "bratty">>
+			"看来孩子是你的，"你说。
+		<<else>>
+			"孩子应该是你的，"你说。
+		<</if>>
+
+	<<else>>
+		<<setTalkedAboutPregnancy "pc" "Alex">>
+		<<if $speech_attitude is "meek">>
+			"我……我怀孕了，我觉得是你的，"你说。
+		<<elseif $speech_attitude is "bratty">>
+			"你搞得我怀孕了，孩子肯定是你的，"你说。
+		<<else>>
+			"我怀孕了，孩子可能是你的，"你说。
+		<</if>>
+
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+	艾利克斯惊恐地看向你。"我……我的！？"
+	<br><br>
+
+你张开嘴想说些什么，但<<he>>打断了你。"那个……我只是……"<<He>>拔下一缕头发，"请去做个亲子鉴定吧，我只是还不太确定能不能相信你。"
+
+<<He>>叹了口气。"对不起，我是希望能确定孩子是我的。"
+	<br><br>
+
+<span class="blue">只有拿到亲子鉴定结果，你才能说服艾利克斯<<hes>>是孩子的爸爸。镇上的医院可以提供鉴定。</span>
+	<br><br>
+
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+
+	<<He>><<if $farm_work.alex is "relax">>站起身，<</if>>愣在了原地，"等、等等，伙伴，你确定？"<<he>>问。
+	<br><br>
+
+	你张开嘴想要说什么，但<<he>>打断了你。"好吧……给你……"<<He>>拔下一缕头发。"先去做个亲子鉴定再来谈吧。我只是还不太能相信你说的话。"
+	<br><br>
+
+	<span class="blue">只有拿到亲子鉴定结果，你才能说服艾利克斯<<hes>>是孩子的爸爸。镇上的医院可以提供鉴定。</span>
+	<br><br>
+
+	<<if $farm_work.alex is "relax">>
+		<<link [[继续|Farm Work]]>><<endevent>><<unset $farm_relax_drink>><<set $farm_work.alex to "still">><</link>>
+
+	<<else>>
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+
+	<</if>>
+
+<</if>>

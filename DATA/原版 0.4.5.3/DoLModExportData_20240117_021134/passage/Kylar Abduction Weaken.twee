@@ -1,0 +1,43 @@
+:: Kylar Abduction Weaken []
+<<effects>>
+
+你挣扎着想摆脱绑住你手腕的绳索的束缚。
+<<if $physique gte 15000>>
+	<span class="teal">你用力磨着绳子。</span>
+<<elseif $physique gte 10000>>
+	<span class="lblue"></span>
+<<elseif $physique gte 5000>>
+	<span class="blue"></span>
+<<else>>
+	<span class="purple"></span>
+<</if>>
+<<set $kylar_abduction_binds -= 1 + ($physique / 3000)>>
+<br><br>
+
+<<if $kylar_abduction_binds gte 80>>
+	<span class="pink">绳子松了一点儿，但还需要花更多时间。</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 60>>
+	<span class="purple">绳子比之前松了些，如果你的感觉没有欺骗你的话。</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 40>>
+	<span class="blue">绳子比之前松了些，这次你很确定。</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 20>>
+	<span class="lblue">绳子已经松到你可以活动你的手腕。</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<elseif $kylar_abduction_binds gte 1>>
+	<span class="teal">绳子没有再紧得难受了。</span>
+	<br><br>
+	<<kylar_abduction_return>>
+<<else>>
+	绳子已经很松了，要是你能把手扭到合适的方向就更好了。你调整着角度与动作，最后<span class="green">成功让你的手解脱了出来。</span><<unbind>>
+	<br><br>
+
+	<<link [[继续|Kylar Abduction Free]]>><</link>>
+	<br>
+<</if>>

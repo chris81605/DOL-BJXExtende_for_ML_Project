@@ -1,0 +1,71 @@
+:: Arcade []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+<<set $kylar.play to 0>>
+你位于海星街上的街机厅。
+
+<<if Time.dayState is "day" or Time.dayState is "dusk">>
+游戏和赌博机器的哔哔声充斥着这个地方。
+<<else>>
+游戏和赌博机器静静地立在原地。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax>>
+<<passoutarcade>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "arcade">>
+	<</if>>
+	<<if Time.hour is 21>>
+	现在是关门时间，保安正在清场。<<if $exposed gte 1>>一想到自己这副穿着可能会被保安看到，你心里就不由得一紧。<</if>>
+	<br><br>
+
+		<<if $exposed lte 0>>
+			<<starfishicon>><<link [[出去|Starfish Street]]>><</link>>
+			<br>
+		<<else>>
+			<<ind>><<link [[躲起来直到关门 (1:00)|Arcade]]>><<pass 1 hour>><</link>>
+		<</if>>
+	<<else>>
+
+		<<if Time.dayState is "night" or Time.dayState is "dawn">>
+		你只身一人站在黑暗中。
+		<br><br>
+		<<elseif $exposed gte 1>>
+		你藏在弹珠机后以保护自尊。
+		<br><br>
+		<</if>>
+		<<if $arousal gte $arousalmax>>
+			<<orgasmLocation "arcade">>
+		<</if>>
+		<<if $money gte 500 and (Time.dayState is "day" or Time.dayState is "dusk") and $exposed lte 0>>
+			<<ind>><<link [[游玩 (£5 0:20)|Arcade Play]]>><<set $money -= 500>><<pass 20>><<stress -2>><</link>><<lstress>>
+			<br>
+		<</if>>
+		<<if $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and Time.dayState is "day" and $kylarwatched isnot 1>>
+			<<if !Time.schoolTime and (Time.dayState is "day" or Time.dayState is "night")>>
+				<br>
+				你看到凯拉尔在一台机子前面玩。
+				<br>
+				<<ind>><<link [[接近|Kylar Arcade]]>><<set $kylar_text_trigger to true>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if ($tenyclusPlayCount is undefined or $tenyclusPlayCount is 0) and $hallucinations gte 1 and !$daily.tenyclusPlayed and $money gte 500 and (Time.dayState is "day" or Time.dayState is "dusk") and $exposed lte 0>>
+			<<set $tenyclusPlayCount to 0>><<set $daily.tenyclusPlayed to 0>>
+			<br>
+			你看到有台机器孤零零的立在角落。奇怪的是，似乎完全没人注意到它。
+			<br>
+			<<investigateicon>><<link [[检查孤零零的机子|Arcade Tenyclus Intro]]>><</link>>
+			<br>
+		<</if>>
+		<<if $tenyclusPlayCount gte 1 and $tenyclusPlayCount lt 7 and $hallucinations gte 1 and !$daily.tenyclusPlayed and (Time.dayState is "day" or Time.dayState is "dusk") and $exposed lte 0>>
+			<br>
+			你发现被遗忘在角落里的 "Tenyclus" 机台，似乎没有人注意到它。
+			<br>
+			<<arcadeicon>><<link [[玩Tenyclus|Arcade Tenyclus Play]]>><</link>>
+			<br>
+		<</if>>
+		<<starfishicon>><<link [[离开|Starfish Street]]>><</link>>
+		<br><br>
+	<</if>>
+<</if>>

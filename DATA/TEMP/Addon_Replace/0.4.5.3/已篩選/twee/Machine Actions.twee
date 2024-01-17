@@ -1,0 +1,267 @@
+:: Machine Actions [widget]
+<<widget "machine_actions">>
+	<<willpowerpain>>
+	<<willpowerorgasm>>
+	<<actioncarry>>
+	<<actioncarrydrop>>
+
+	<<combatstate>>
+	<<carryblock>>
+
+	<<if $trance lte 0 and $panicparalysis is 0 and $panicviolence is 0 and $options.combatControls isnot "disabled">>
+		<<generateActionsMachine>>
+	<</if>>
+
+	/* 北极星模组 */
+	<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0
+	and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined) and $options.combatControls is "disabled">>
+	/* 北极星 */
+
+	<<if $leftarm is 0>>
+		<br>
+		你的左臂是自由的。
+		<br>
+		<<if $machine.arm_chains>>
+			<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
+				<<if $leftactiondefault is "chain_struggle">>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$leftaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.tattoo>>
+			<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
+				<<if $leftactiondefault is "whack">>
+					| <label><span class="def">捶打那个纹身枪</span> <<radiobutton "$leftaction" "whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那个纹身枪</span> <<radiobutton "$leftaction" "whack">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.vaginal>>
+			<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
+				<<if $leftactiondefault is "vaginal_whack">>
+					| <label><span class="def">捶打那台炮机</span> <<radiobutton "$leftaction" "vaginal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那台炮机</span> <<radiobutton "$leftaction" "vaginal_whack">></label>
+				<</if>>
+				<<if $leftactiondefault is "vaginal_push">>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$leftaction" "vaginal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$leftaction" "vaginal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.anal>>
+			<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
+				<<if $leftactiondefault is "anal_whack">>
+					| <label><span class="def">捶打那台小炮机</span> <<radiobutton "$leftaction" "anal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那台小炮机</span> <<radiobutton "$leftaction" "anal_whack">></label>
+				<</if>>
+				<<if $leftactiondefault is "anal_push">>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$leftaction" "anal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$leftaction" "anal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $leftactiondefault is "rest">>
+			| <label>休息<<radiobutton "$leftaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$leftaction" "rest">></label>
+		<</if>>
+	<<elseif $leftarm is "mechgrappled">>
+		<br>
+		你的左臂被压住。
+		<br>
+		<<if $machine.arm_chains>>
+			<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
+				<<if $leftactiondefault is "chain_struggle">>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$leftaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$leftaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $leftactiondefault is "rest">>
+			| <label>休息<<radiobutton "$leftaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$leftaction" "rest">></label>
+		<</if>>
+	<<elseif $leftarm is "bound">>
+		<br>
+		你的左臂被绑住了。
+		<br>
+	<</if>>
+
+	<<if $rightarm is 0>>
+		<br>
+		你的右臂是自由的。
+		<br>
+		<<if $machine.arm_chains>>
+			<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
+				<<if $rightactiondefault is "chain_struggle">>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$rightaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.tattoo>>
+			<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
+				<<if $rightactiondefault is "whack">>
+					| <label><span class="def">捶打那个纹身枪</span> <<radiobutton "$rightaction" "whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那个纹身枪</span> <<radiobutton "$rightaction" "whack">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.vaginal>>
+			<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
+				<<if $rightactiondefault is "vaginal_whack">>
+					| <label><span class="def">捶打那台炮机</span> <<radiobutton "$rightaction" "vaginal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那台炮机</span> <<radiobutton "$rightaction" "vaginal_whack">></label>
+				<</if>>
+				<<if $rightactiondefault is "vaginal_push">>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$rightaction" "vaginal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$rightaction" "vaginal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.anal>>
+			<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
+				<<if $rightactiondefault is "anal_whack">>
+					| <label><span class="def">捶打那台小炮机</span> <<radiobutton "$rightaction" "anal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">捶打那台小炮机</span> <<radiobutton "$rightaction" "anal_whack">></label>
+				<</if>>
+				<<if $rightactiondefault is "anal_push">>
+					| <label><span class="brat">推开那台小炮机</span> <<radiobutton "$rightaction" "anal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台小炮机</span> <<radiobutton "$rightaction" "anal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $rightactiondefault is "rest">>
+			| <label>休息<<radiobutton "$rightaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$rightaction" "rest">></label>
+		<</if>>
+	<<elseif $rightarm is "mechgrappled">>
+		<br>
+		你的右臂被锁住了。
+		<br>
+		<<if $machine.arm_chains>>
+			<<if $machine.arm_chains.use isnot "inert" and $machine.arm_chains.use isnot "destroyed">>
+				<<if $rightactiondefault is "chain_struggle">>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$rightaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$rightaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $rightactiondefault is "rest">>
+			| <label>休息<<radiobutton "$rightaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$rightaction" "rest">></label>
+		<</if>>
+	<<elseif $rightarm is "bound">>
+		<br>
+		你的右臂被捆住了。
+		<br>
+	<</if>>
+
+	<<if $feetuse is 0>>
+		<br>
+		你的双腿是自由的。
+		<br>
+		<<if $machine.leg_chains>>
+			<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
+				<<if $feetactiondefault is "chain_struggle">>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉住链条</span> <<radiobutton "$feetaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.tattoo>>
+			<<if $machine.tattoo.use isnot "inert" and $machine.tattoo.use isnot "destroyed">>
+				<<if $feetactiondefault is "whack">>
+					| <label><span class="def">踢那个纹身枪</span> <<radiobutton "$feetaction" "whack" checked>></label>
+				<<else>>
+					| <label><span class="def">踢那个纹身枪</span> <<radiobutton "$feetaction" "whack">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.vaginal>>
+			<<if $machine.vaginal.use isnot "inert" and $machine.vaginal.use isnot "destroyed">>
+				<<if $feetactiondefault is "vaginal_whack">>
+					| <label><span class="def">踢那台炮机</span> <<radiobutton "$feetaction" "vaginal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">踢那台炮机</span> <<radiobutton "$feetaction" "vaginal_whack">></label>
+				<</if>>
+				<<if $feetactiondefault is "vaginal_push">>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$feetaction" "vaginal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台炮机</span> <<radiobutton "$feetaction" "vaginal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $machine.anal>>
+			<<if $machine.anal.use isnot "inert" and $machine.anal.use isnot "destroyed">>
+				<<if $feetactiondefault is "anal_whack">>
+					| <label><span class="def">踢那台小炮机</span> <<radiobutton "$feetaction" "anal_whack" checked>></label>
+				<<else>>
+					| <label><span class="def">踢那台小炮机</span> <<radiobutton "$feetaction" "anal_whack">></label>
+				<</if>>
+				<<if $feetactiondefault is "anal_push">>
+					| <label><span class="brat">推开那台小炮机</span> <<radiobutton "$feetaction" "anal_push" checked>></label>
+				<<else>>
+					| <label><span class="brat">推开那台小炮机</span> <<radiobutton "$feetaction" "anal_push">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $feetactiondefault is "rest">>
+			| <label>休息<<radiobutton "$feetaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$feetaction" "rest">></label>
+		<</if>>
+	<<elseif $feetuse is "mechgrappled">>
+		<br>
+		你的腿被绑住了。
+		<br>
+		<<if $machine.leg_chains>>
+			<<if $machine.leg_chains.use isnot "inert" and $machine.leg_chains.use isnot "destroyed">>
+				<<if $feetactiondefault is "chain_struggle">>
+					| <label><span class="def">拉扯链条</span> <<radiobutton "$feetaction" "chain_struggle" checked>></label>
+				<<else>>
+					| <label><span class="def">拉扯链条</span> <<radiobutton "$feetaction" "chain_struggle">></label>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $feetactiondefault is "rest">>
+			| <label>休息<<radiobutton "$feetaction" "rest" checked>></label>
+		<<else>>
+			| <label>休息<<radiobutton "$feetaction" "rest">></label>
+		<</if>>
+	<</if>>
+	<br>
+	<</if>>
+
+
+	<<if $options.images is 1 and $options.combatImages is 1>>
+		<br><br>
+		<<timed 100ms>>
+			<<combatimg>>
+			<br>
+		<</timed>>
+	<</if>>
+
+	<br><br>
+
+	<<setupMidOrgasm>>
+<</widget>>

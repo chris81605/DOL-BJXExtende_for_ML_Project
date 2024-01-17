@@ -1,0 +1,49 @@
+:: Moor Fox Call []
+<<effects>>
+<<if $NPCList[0].traits.includes("friendly")>>
+	<<set _tendingMin to 1>><<set _tendingMax to 300>>
+<<elseif $NPCList[0].traits.includes("territorial")>>
+	<<set _tendingMin to 200>><<set _tendingMax to 700>>
+<<else>>
+	<<set _tendingMin to 100>><<set _tendingMax to 600>>
+<</if>>
+
+<<if $speech_attitude is "meek">>
+	"有……有人在吗？"一边问着，回头看去。
+<<elseif $speech_attitude is "bratty">>
+	"你最好别再靠近了，"一边喊着，回头看去。
+<<else>>
+	"谁在那儿？"一边问着，回头看去。
+<</if>>
+<br><br>
+
+<<if $NPCList[0].traits.includes("territorial")>>
+	你没听到任何回应。突然，有什么东西猛地从背后撞了你一下！你被一下撞翻在地。
+	你睁开眼睛，看清了面前的袭击者：一只巨大的<<beasttype>>。
+	<br><br>
+
+	<<if $monster is 1>>
+		"你实在是太毫无防备了，我根本忍不住，"<<bhe>>嘲讽道。
+	<<else>>
+		<<bHe>>对你发出威胁的叫声。
+	<</if>>
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[继续|Moor Fox Rape]]>><<set $molestationstart to 1>><<set $position to "doggy">><<set $NPCList[0].stance to "top">><</link>>
+	<<else>>
+		经过短暂的挣扎，你设法爬起来逃走了。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Moor]]>><<endevent>><</link>>
+	<</if>>
+	<br>
+<<else>>
+	你没听到任何回应。你转过身去，马上明白了原因：一只巨大的<<beasttype>>正在几米外的灌木丛里偷看你。
+	<br><br>
+
+	<<link [[示意它过来|Moor Fox Beckon]]>><</link>><<tendingdifficulty _tendingMin _tendingMax>>
+	<br>
+	<<link [[喝退|Moor Fox Scare]]>><</link>>
+	<br>
+<</if>>

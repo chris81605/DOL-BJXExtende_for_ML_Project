@@ -1,0 +1,44 @@
+:: Mason Chastity Prompt []
+<!-- no effects, this is an alternative passage ending -->
+
+<<if $location is "pool">>
+	你步步紧逼，<<he>>只得红着脸指着你的$worn.genitals.cn_name_cap，
+<<else>>
+	<<he>>红着脸指着你的$worn.genitals.cn_name_cap，
+<</if>>
+<<if !C.npc.Mason.chastityRemovalDeclined>>
+	<<switch C.npc.Mason.chastityRemoved>>
+		<<case 0 undefined null>>
+			"你、你知道的，我有办法处理那个。"
+			说完又急忙补充道，"当然，如果你愿意的话。"
+		<<case 1>>
+			"又被罚戴上这个了？你又干了什么惹老温特生气了？嗯……我应该还是可以移除它的。"
+			停顿一下，<<He>>又急忙补充道，"当然，如果你愿意的话。"
+		<<default>>
+			"我搞不懂，你一天天都干了什么，才会次次被装上那个啊？老温特只会在我……"
+			<br><br>
+ 
+			梅森的脸变得更红了，你没想到世上还有人的脸能红到这种地步。随后<<he>>转移了话题，"没、没什么！重点是，如果你想要的话，我应该可以帮你移除。"
+	<</switch>>
+<<else>>
+	<<print [
+		'"你、你知道的，我有办法处理那个。需要的话告诉我，"',
+		'"我、我说的话还是算数的。如果你想弄掉那个，我可以帮忙。"',
+		'"如果你对那个东西改变主意了，就告诉我，"',
+	].random()>>梅森指着你的$worn.genitals.cn_name_cap说。
+<</if>>
+<br><br>
+
+
+<<link [[谢绝|Mason Chastity Decline]]>><<set C.npc.Mason.chastityRemovalDeclined to 1>><<set $daily.masonChastityRemovalDeclined to 1>><<set $weekly.masonChastityRemovalDeclined to 1>><</link>>
+<br>
+<<if C.npc.Mason.chastityKeyCarried is 1 or $exhibitionism lt 75>>
+	<<link [[提问|Mason Chastity Ask]]>><</link>>
+<<elseif $exhibitionism gte 75>>
+	<<link [[接受|Mason Chastity Accept]]>>
+		<<arousal 600>><<exhibitionism5>><<set C.npc.Mason.chastityRemovalDeclined to 0>><<run delete $daily.masonChastityRemovalDeclined>><<run delete $weekly.masonChastityRemovalDeclined>>
+	<</link>><<garousal>><<exhibitionist5>>
+<<else>>
+	<span class="purple">你还不够淫荡，没法让梅森帮你脱身上的东西。</span>
+<</if>>
+<br>

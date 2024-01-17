@@ -1,0 +1,40 @@
+:: Farm Yard []
+<<effects>>
+
+<<if $weather is "snow">>
+	你抓起一把铲子，开始铲院子里的雪。这是一项艰苦的工作，但你设法及时完成了。
+<<else>>
+	你拿起扫帚，开始扫院子里的落叶。这是一项艰苦的工作，但在将它们铲入堆肥之前，你还是成功将它们扫成了一堆。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $bestialitydisable is "f" and $lurkerdisable is "f">>
+		你刚完成手头的工作，突然有东西从<<if $weather is "snow">>雪<<else>>叶子<</if>>堆中跳了出来！<<gstress>><<stress 6>>
+		<br><br>
+		<<if $deviancy gte 55>>
+			<<link [[站着不动|Farm Yard Stand Still]]>><</link>><<deviant4>>
+			<br>
+		<</if>>
+		<<link [[躲闪|Farm Yard Dodge]]>><</link>><<dancedifficulty 1 1200>>
+		<br>
+		<<link [[用铲子敲它|Farm Yard Whack]]>><</link>><<physiquedifficulty 1 24000>>
+		<br>
+		<<link [[尖叫|Farm Yard Scream]]>><</link>><<gdom "Alex">>
+		<br>
+		<<if $farm_stage gte 10 and $lurkers_held lt 1>>
+			<<link [[投掷捕捉网|Farm Yard Hurl net]]>><</link>><<dancedifficulty 1 1200>><<athleticsdifficulty 0 1200>>
+			<br>
+		<</if>>
+	<<else>>
+		有东西从<<if $weather is "snow">>雪<<else>>树叶<</if>>堆里冲了出来，你吓了一跳。<<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

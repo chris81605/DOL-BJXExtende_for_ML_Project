@@ -1,0 +1,28 @@
+:: Sydney Peek Confront []
+<<schooleffects>><<effects>><<run statusCheck("Sydney")>><<set $corruptionEvent to 1>><<set $purityEvent to 1>>
+<<if $speech_attitude is "meek">>
+	"我……我刚才看到你在偷窥我。"你满脸通红。
+<<elseif $speech_attitude is "bratty">>
+	"所以，喜欢你看到的吗？"你双手抱胸。
+<<else>>
+	"我看见了……你自己清楚。你刚才偷瞄我。"你翻了个白眼。
+<</if>>
+<br><br>
+<<if $sydneyromance is 1>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<He>>抱起双臂，压下脸上的潮红。"对，你要怎样？"
+	<<else>>
+		<<He>>捂住脸。"对，对不起，但是你刚才那样——我的意思是，你看起来，就是说……"<<he>>慌张地摆着手，说话开始断断续续。
+	<</if>>
+<<else>>
+	<<He>>捂住脸。"我就是好奇……抱歉。"
+<</if>>
+<br><br>
+<<if $sydneyromance is 1>>
+	<<link [[寻欢|Sydney Peek Proposition]]>><<npcincr Sydney lust 1>><<npcincr Sydney purity -2>><</link>><<gslust>><<lspurity>><<promiscuous1>><<sydneyWarning>>
+	<br>
+<</if>>
+<<link [[数落|Sydney Peek Scold]]>><<npcincr Sydney purity 2>><</link>><<gspurity>><<sydneyWarning>>
+<br>
+<<link [[安抚|Sydney Peek Reassure]]>><<npcincr Sydney love 1>><</link>><<glove>>
+<br>

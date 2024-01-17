@@ -1,0 +1,27 @@
+:: Pillory Whip Master 2 []
+<<effects>>
+
+<<set _articles = []>>
+<<if $worn.lower.name isnot "naked" and $worn.lower.state is "waist">>
+	<<run _articles.push($worn.lower.name)>>
+	<<set _plural to $worn.lower.plural>>
+	<<lowerruined>>
+<</if>>
+<<if $worn.under_lower.name isnot "naked" and $worn.under_lower.state is "waist">>
+	<<run _articles.push($worn.under_lower.name)>>
+	<<set _plural to _plural || $worn.under_lower.plural>>
+	<<underlowerruined>>
+<</if>>
+在发出最后一击后，<<he>>迅速收回鞭子。周围的人群突然安静了下来。
+突然，你惊恐地发现自己的<span class="red"><<print _articles.join("和")>>
+<<if _plural>>掉落
+<<else>>掉落<</if>>
+到地上，被鞭子割成一片一片的丝带。</span>
+周围围观的人纷纷鼓掌、鼓掌。有几个人把钱扔进<<his>>帽子里。
+你的领班在你暴露在外的下半身前弯腰鞠了一躬，然后拾起<<his>>的钱就离开了。
+<<fameexhibitionism 7>><<stress 6>><<bruise bottom>>
+
+<br><br>
+<<endevent>>
+<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+<br>

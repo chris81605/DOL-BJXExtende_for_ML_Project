@@ -1,0 +1,87 @@
+:: Toy Shop Widgets [widget]
+<<widget "toySelection">>
+	<<set _toySelection to {
+		"babyRattle":
+			{
+				set:"baby rattles", name:"baby rattle", name_lower:"婴儿摇铃", cost:1000, costDisplay:"£10", selectedOption: 0, type:"human",
+				options: [
+					{"colour":"pink","name":"Pink baby rattle","name_lower":"粉色婴儿摇铃","optionsName":"粉色"},
+					{"colour":"blue","name":"Blue baby rattle","name_lower":"蓝色婴儿摇铃","optionsName":"蓝色"},
+					{"colour":"green","name":"Green baby rattle","name_lower":"绿色婴儿摇铃","optionsName":"绿色"},
+					{"colour":"red","name":"Red baby rattle","name_lower":"红色婴儿摇铃","optionsName":"红色"},
+					{"colour":"gold","name":"Yellow baby rattle","name_lower":"黄色婴儿摇铃","optionsName":"黄色"},
+				],
+
+			},
+		"teddyBear":
+			{
+				set:"teddy bears", name:"Teddy bear", name_lower: "泰迪熊", cost:4000, costDisplay:"£40", selectedOption: 0, type:"human",
+				options: [
+					{"colour":"white","name":"Teddy bear","name_lower":"泰迪熊","optionsName":"泰迪熊"},
+					{"colour":"blue","name":"Mr Teddy","name_lower":"泰迪先生","optionsName":"泰迪先生"},
+					{"colour":"pink","name":"Mrs Teddy","name_lower":"泰迪夫人","optionsName":"泰迪夫人"},
+					{"colour":"gold","name":"Clown","name_lower":"小丑","optionsName":"小丑"},
+					{"colour":"green","name":"Green Robot","name_lower":"绿色机器人","optionsName":"绿色机器人"},
+					{"colour":"red","name":"Red Robot","name_lower":"红色机器人","optionsName":"红色机器人"},
+					{"colour":"light-pink","name":"Baby Doll","name_lower":"婴儿娃娃","optionsName":"婴儿娃娃"},
+				],
+
+			},
+		"toyCar":
+			{
+				set:"toy cars", name:"Toy car", name_lower: "玩具车", cost:1500, costDisplay:"£15", selectedOption: 0, type:"human",
+				options: [
+					{"colour":"pink","name":"Pink mini toy car","name_lower":"粉色迷你玩具车","optionsName":"粉色迷你"},
+					{"colour":"blue","name":"Blue race toy car","name_lower":"蓝色玩具赛车","optionsName":"蓝色赛车"},
+					{"colour":"green","name":"Green race toy car","name_lower":"绿色玩具赛车","optionsName":"绿色赛车"},
+					{"colour":"red","name":"Hot rod toy car","name_lower":"热力棒玩具车","optionsName":"热棒车"},
+					{"colour":"white","name":"Limousine toy car","name_lower":"豪华玩具轿车","optionsName":"豪华轿车"},
+				],
+
+			},
+		"chewToy":
+			{
+				set:"chew toys", name:"chew toy", name_lower:"口嚼玩具", cost:1500, costDisplay:"£15", selectedOption: 0, type:"wolf",
+				options: [
+					{"colour":"grey","name":"Chew Bone","name_lower":"口嚼骨头","optionsName":"口嚼骨头"},
+					{"colour":"blue","name":"Chew Ball","name_lower":"口嚼球","optionsName":"口嚼球"},
+					{"colour":"white","name":"Squeaky Sheep","name_lower":"吱吱羊","optionsName":"吱吱羊"},
+					{"colour":"gold","name":"Squeaky Chicken","name_lower":"吱吱鸡","optionsName":"吱吱鸡"},
+					{"colour":"softbrown","name":"Rope","name_lower":"绳索","optionsName":"绳索"},
+				],
+
+			},
+		"dummy":
+			{
+				set:"dummies", name:"dummy", name_lower:"假人", cost:500, costDisplay:"£5", selectedOption: 0, type:"human",
+				options: [
+					{"colour":"pink","name":"Pink dummy","name_lower":"粉色假人","optionsName":"粉色"},
+					{"colour":"blue","name":"Blue dummy","name_lower":"蓝色假人","optionsName":"蓝色"},
+					{"colour":"green","name":"Green dummy","name_lower":"绿色假人","optionsName":"绿色"},
+					{"colour":"red","name":"Red dummy","name_lower":"红色假人","optionsName":"红色"},
+					{"colour":"gold","name":"Yellow dummy","name_lower":"黄色假人","optionsName":"黄色"},
+					{"colour":"white","name":"White dummy","name_lower":"白色假人","optionsName":"白色"},
+					{"colour":"white","name":"See through dummy","name_lower":"透明假人","optionsName":"透明"},
+				],
+
+			},
+	}>>
+<</widget>>
+
+<<widget "buyToy">>
+	<<set $money -= $selectedToy.cost>>
+	<<if $selectedToy.options>>
+		<<set _selectedOption to $selectedToy.selectedOption>>
+		<<if $selectedToy.options[_selectedOption].name>>
+			<<set $selectedToy.name to clone($selectedToy.options[_selectedOption].name)>>
+			<<set $selectedToy.name_lower to clone($selectedToy.options[_selectedOption].name_lower)>>
+		<</if>>
+		<<if $selectedToy.options[_selectedOption].colour>>
+			<<set $selectedToy.colour to clone($selectedToy.options[_selectedOption].colour)>>
+		<</if>>
+		<<run delete $selectedToy.selectedOption>>
+		<<run delete $selectedToy.options>>
+	<</if>>
+	<<run $player.inventory.childrenToys.push(clone($selectedToy))>>
+	<<unset $selectedToy>>
+<</widget>>

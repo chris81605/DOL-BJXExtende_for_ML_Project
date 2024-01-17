@@ -1,0 +1,38 @@
+:: Catacombs Compound []
+<<effects>><<set $bus to "compound">>
+
+你在森林下面的地下墓穴里。管道和电缆在头顶上振动，绕着半毁的柱子蜿蜒而行。
+<<if $museumAntiques.antiques.antiquewhitecrystal isnot "found" and $museumAntiques.antiques.antiquewhitecrystal isnot "talk" and $museumAntiques.antiques.antiquewhitecrystal isnot "museum">>
+	它们都朝同一个方向延伸，朝着一台嗡嗡作响的机器延伸过去。机器中心悬挂着一块发光的白色水晶。昏暗的光线投下长长的影子。
+<</if>>
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs compound>>
+<<else>>
+	<<if $museumAntiques.antiques.antiquewhitecrystal isnot "found" and $museumAntiques.antiques.antiquewhitecrystal isnot "talk" and $museumAntiques.antiques.antiquewhitecrystal isnot "museum">>
+		<<link [[接近水晶|Catacombs Crystal]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Compound Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "south">><<link [[向南走 (0:10)|Catacombs Statues]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

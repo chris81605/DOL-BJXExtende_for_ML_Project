@@ -1,0 +1,40 @@
+:: Beach Run []
+<<pass 30>><<location "beach">><<effects>>
+
+你沿着海岸跑。
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		海浪撞击的声音与暴雨的声音竞争。
+	<<elseif $weather is "clear">>
+		寒冷的夜风使你精神振奋。
+	<<elseif $weather is "overcast">>
+		凉爽的晚风吹在你的皮肤上感觉很舒服。
+	<<elseif $weather is "snow">>
+		<<if $body_temperature is "comfy">>
+			寒冷的夜风使你精神振奋。
+		<<else>>
+			你在冰冷的夜风中瑟瑟发抖。
+			<<gstress>><<stress 6>>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		当你在潮湿的沙滩上慢跑时，雨水袭击了你。
+	<<elseif $weather is "clear">>
+		强烈的阳光让你精疲力竭。
+		<<tiredness 6>><<gtiredness>>
+	<<elseif $weather is "overcast">>
+		凉爽的天气适合慢跑。
+	<<elseif $weather is "snow">>
+		<<if $body_temperature is "comfy">>
+			当你在潮湿的沙滩上慢跑时，落下的雪吹在你的脸上。
+		<<else>>
+			你在寒风中瑟瑟发抖。
+			<<gstress>><<stress 6>>
+		<</if>>
+	<</if>>
+<</if>>
+<<physique 3>><<tiredness 6>><<stress -6>>
+<br><br>
+
+<<link [[继续|Beach]]>><</link>>

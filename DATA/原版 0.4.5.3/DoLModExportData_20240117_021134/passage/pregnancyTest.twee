@@ -1,0 +1,62 @@
+:: pregnancyTest []
+<<effects>>
+<<set $pregnancyTest-->>
+<<switch $lastPassage>>
+	<<case "Bedroom">>
+		你使用了验孕棒，然后回到了自己的卧室。你把验孕棒放在床上，你自己则在房间紧张地来回踱步等待结果。
+	<<case "Eden Cabin">>
+		你在伊甸的浴室里使用了验孕棒，然后回到了主厅。你紧盯着手中的验孕棒，不敢移开视线，等待着它的结果。
+	<<case "Wolf Cave Clearing">>
+		你把验孕棒从狼群的视线中移开。你紧盯着手中的验孕棒，不敢移开视线，等待着它的结果。
+	<<case "Farm Shed">>
+		你使用了验孕棒。你盯着手中的验孕棒，不敢移开视线，紧张地等待它的结果。
+	<<default>>
+		你使用了验孕棒。你盯着手中的验孕棒，不敢移开视线，紧张地等待它的结果。
+<</switch>>
+包装上说要等3分钟，但你感觉仿佛已经等了一辈子。<<gstress>><<stress 3>>
+<br><br>
+<<set $pregnancyStats.pregnancyTestsTaken++>>
+<<if !$player.vaginaExist>>
+	<<set _pregnancyTest to $sexStats.anus.pregnancy>>
+	<<if _pregnancyTest.type is null or _pregnancyTest.type is "parasite" or _pregnancyTest.timer is 0 or (between(_pregnancyTest.timer, 0, 3) and random(0,100) gte 10) or (between(_pregnancyTest.timer, 3, 6) and random(0,100) gte 15)>>
+		<span class="green">是阴性。</span>想也知道怎么可能是阳性。
+	<<elseif _pregnancyTest.givenBirth >= 1>>
+		<span class="lewd">是阳性。</span>许多念头在你脑海里闪过，你坐下来，试图让自己振作起来。<<gstress>><<stress 3>><<garousal>><<arousal 100>>
+		<br><br>
+		<<if _pregnancyTest.potentialFathers.length is 1>>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
+			<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+		<<else>>
+			<span class="red">你不知道孩子的父亲是谁。</span>
+		<</if>>
+		<<set _pregnancyTest.awareOf to "pregnancyTest">>
+	<<else>>
+		<span class="lewd">是阳性。</span>有一瞬间你不知道自己是看见了幻觉还是疯了。许多念头在你脑海里闪过，你坐下来，试着让自己振作起来。<<ggstress>><<stress 10>><<ggarousal>><<arousal 200>>
+		<br><br>
+		<<if _pregnancyTest.potentialFathers.length is 1>>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
+			<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+		<<else>>
+			<span class="red">你不知道孩子的父亲是谁。</span>
+		<</if>>
+		<<set _pregnancyTest.awareOf to "pregnancyTest">>
+	<</if>>
+<<else>>
+	<<set _pregnancyTest to $sexStats.vagina.pregnancy>>
+	<<if _pregnancyTest.type is null or _pregnancyTest.type is "parasite" or _pregnancyTest.timer is 0 or (between(_pregnancyTest.timer, 0, 3) and random(0,100) gte 10) or (between(_pregnancyTest.timer, 3, 6) and random(0,100) gte 15)>>
+		<span class="green">是阴性。</span>
+	<<else>>
+		<span class="lewd">是阳性。</span>许多念头在你脑海里闪过，你坐下来，试图让自己振作起来。<<gstress>><<stress 3>><<garousal>><<arousal 100>>
+		<br><br>
+		<<if _pregnancyTest.potentialFathers.length is 1>>
+			<<set _fatherName to pregnancyNameCorrection(_pregnancyTest.potentialFathers[0].source)>>
+			<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+		<<else>>
+			<span class="red">你不知道孩子的父亲是谁。</span>
+		<</if>>
+		<<set _pregnancyTest.awareOf to "pregnancyTest">>
+	<</if>>
+<</if>>
+
+<br><br>
+<<link [[继续|$lastPassage]]>><<unset $lastPassage>><<set $eventskip to 1>><</link>>

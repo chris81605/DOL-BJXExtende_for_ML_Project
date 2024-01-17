@@ -1,0 +1,40 @@
+:: Whitney Pub Approach []
+<<set $outside to 0>><<set $location to "pub">><<effects>>
+<<npc Whitney>><<person1>>
+
+你接近那些小混混，他们的吵闹声变得更刺耳了。惠特尼不怀好意地看了你一眼，
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].love gte 10>>
+	随即咧嘴一笑。你还没来得及说什么，<<he>>就把你拉进了卡座里。
+	<br><br>
+
+	你一坐下，<<he>>就把<<his>>的手臂搭在了你的肩膀上。"你来得正是时候，荡妇。我们正在谈论你呢。"<<His>>的朋友们窃笑着。
+	<br><br>
+
+	<<he>>把<<his>>的啤酒递给你，酒杯叮当作响。"喝光它，"<<he>>说，"让我们看看你有多大能耐。"
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+		<<link [[喝 (0:05)|Whitney Pub Drink]]>><<pass 5>><<stress -6>><<alcohol 120>><<npcincr Whitney love 1>><<npcincr Whitney dom 1>><</link>><<lstress>><<galcohol>><<glove>><<gdom>>
+	<</if>>
+	<br>
+	<<link [[拒绝|Whitney Pub Refuse]]>><<npcincr Whitney dom -1>><<set $phase to 0>><</link>><<ldom>>
+	<br>
+<<else>>
+	然后和<<his>>的朋友们悄悄说了些什么。他们发出可疑的窃笑。
+	<br><br>
+
+	你还没来得及反应过来，<<his>>的手下就扑向你，抓住你的胳膊。惠特尼站起来，<span class="red">把手里的酒倒在了你的头上。</span><span class="lewd">酒浸透了你的衣服。</span>
+	<<water>><<stress 6>><<gstress>>
+	<br><br>
+
+	"滚开，你这垃圾，"<<he>>嘲笑道，"我们正享受我们的夜晚，没人邀请你。"
+	<br><br>
+
+	<<tearful>>你逃离了酒吧，身后传来阵阵笑声。
+	<br><br>
+
+	<<link [[继续|Pub]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,88 @@
+:: Bird Tower Sing []
+<<effects>><<npc "Great Hawk">>
+<<bird_schedule>>
+<<if ($bird.activity is "sing" or $bird.activity is "groom") and $bird.state is "home">>
+
+	<<transform bird 1>><<npcincr "Great Hawk" love 1>>
+	<<if $birdSingAbsent>>
+		<span class="teal"><<beasttype>>走来和你一起待在栖木上。</span>
+	<</if>>
+	<<if $birdSingIntro isnot 1>>
+		<<set $birdSingIntro to 1>>
+		你尽力模仿<<beasttypes>>的歌声。<<bHe>><<if $birdBask is 1>>低头<</if>>惊讶地看着你。
+		<<if $monster is 1>>
+			"你想和我一起唱歌吗？"<<bHe>>看起来很高兴。"我们的声音将主宰天空。"
+		<</if>>
+	<</if>>
+	<<switch random(1,3)>>
+		<<case 1>>
+			<<if $birdBask is 1>>
+				你加入了<<beasttypes>>，在<<bhis>>翅膀温柔的环抱下唱起歌。
+			<<else>>
+				你加入了<<beasttypes>>的歌声中。
+			<</if>>
+		<<case 2>>
+			<<if $birdBask is 1>>
+				你加入后，<<beasttype>>继续拥抱着你。
+			<<else>>
+				你仰起头，对着天空歌唱。
+			<</if>>
+		<<default>>
+			你从<<bhe>>停止的地方接上了<<beasttypes>>的歌曲。
+	<</switch>>
+	<<if $harpy gte 6 and $syndromebird is 1>>
+		<span class="green"><<print either(
+			"你们的声音合在一起，组成一首美妙的交响乐，响彻荒原。",
+			"你们俩谱写了一首值得载入史册的诗篇。",
+			"荒原周围的动物们都停下来欣赏你们美妙的歌声。",
+			"就连风似乎也屈从于你们的声音。"
+		)>></span><<trauma -6>><<ltrauma>>
+	<<elseif $harpy gte 4>>
+		<span class="blue"><<print either(
+			"你们的二重唱使任何听到的生物都心生畏惧。",
+			"你们两个用和谐的歌声向荒原问候。",
+			"你们的合唱让猎物们害怕得到处乱跑。"
+		)>></span>
+	<<elseif $harpy gte 2>>
+		<span class="pink"><<print either(
+			"每当你走调的时候，<<bHe>>都会重新把你引导回去。",
+			"你唱歌时，<<bHe>>给了你一个鼓励的和声。",
+			"你唱得不算最好的，但也不是最差的。<<bHis>>响亮的声音盖过了你的声音。"
+		)>></span>
+	<<else>>
+		<span class="red"><<print either(
+			"尽管你们的嗓音碰撞到一起时略显不协调，<<bHe>>的歌声并没有受到影响。",
+			"你的加入把<<bhis>>原本美妙的歌曲变成了不和谐的噪音。",
+			"你完全跟不上<<bhis>>的歌曲。"
+		)>></span>
+	<<glove>>
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<<else>>
+	<<if $harpy gte 6>>
+		<<if $syndromebird is 1 and $bird.state is "hunting">>
+			<span class="green">你唱了一首渴求<<if $monster is 1>><<nnpc_wife "Great Hawk">><<else>>伴侣<</if>>的美丽歌曲。</span>
+		<<elseif $syndromebird is 1>>
+			<span class="green">你唱了一首无与伦比的歌曲。</span>你可以隐约听到<<beasttype>>回应着你。<<stress -3>><<lstress>>
+		<<else>>
+			<span class="green">你的声音是完美无暇的，</span>但没有伴侣的伴唱，它听起来略显空虚。
+		<</if>>
+	<<elseif $harpy gte 4>>
+		<<if $syndromebird is 1>>
+			<span class="blue">你对着荒原唱歌，</span>渴望着伴侣的合唱。
+		<<else>>
+			<span class="blue">你对着天空歌唱。</span>没有得到任何回应。
+		<</if>>
+	<<elseif $harpy gte 2>>
+		<<if $syndromebird is 1>>
+			<span class="pink">你唱着歌，</span>意识到自己渴望着能有伴侣的协唱。
+		<<else>>
+			<span class="pink">你唱着歌。</span>你希望没有人听到。
+		<</if>>
+	<<else>>
+		你试着像鸟儿一样唱歌。<span class="red">你的歌一言难尽。</span>
+	<</if>>
+	<br><br>
+	<<bird_perch_options>>
+<</if>>

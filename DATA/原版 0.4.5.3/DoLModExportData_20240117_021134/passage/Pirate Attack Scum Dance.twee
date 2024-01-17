@@ -1,0 +1,37 @@
+:: Pirate Attack Scum Dance []
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+    <<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	<<danceinit>>
+	<<set $audience to 50>>
+	<<set $venuemod to 0>>
+	<<set $dancelocation to "pirate_cruise">>
+	<<set $forceddance to 1>>
+    <<set $timer to 8>>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+
+<<if $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		如此暴露很是让你感到羞耻，但你什么都做不了。
+		<br><br>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and !$worn.under_lower.type.includes("dance")>>
+		如此暴露很是让你感到羞耻，但你什么都做不了。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $timer lte 0>>
+    <<set $danceevent to "finish">>
+<<else>>
+    <<set $timer -= 1>>
+<</if>>
+
+<<danceactions>>
+
+
+<<if $danceevent is "finish">>
+    <<link [[继续|Pirate Attack Scum Dance Finish]]>><</link>>
+    <br>
+<</if>>

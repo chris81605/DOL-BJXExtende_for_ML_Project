@@ -1,0 +1,35 @@
+:: Sewers Spank []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<npcspank>><<set $enemyanger += 200>><<set $timer to 10>>
+	<<He>>扑向你，把你压在<<his>>的身下。
+	<br><br>
+<</if>>
+
+<<if $timer is 9>>
+	“<<mummy>>不是教过你了吗？说不的后果是什么？”
+<<elseif $timer is 7>>
+	“你竟敢不尊重我们的家族。”
+<<elseif $timer is 5>>
+	"<<Mummy>>只是想让你变得更好！"
+<<elseif $timer is 3>>
+	"这对我的伤害比对你的更大。"
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $enemyanger lte 40>>
+	<span id="next"><<link [[继续|Sewers Spank Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sewers Spank]]>><</link>></span><<nexttext>>
+<</if>>

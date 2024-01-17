@@ -1,0 +1,39 @@
+:: Robin Pillory Escape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<generate1>>
+	<<npc Robin 2>>
+
+	<<set $enemyno to 1>>
+	<<set $enemynomax to 1>>
+
+	<<maninit>>
+	<<stalk_init>>
+	<<stalk_run>>
+	<<set $combatgoal to "confront">>
+	<<set $NPCList[0].bold to 10000>>
+	紧紧抓住罗宾的手，你转身就跑。<span class="pink">你们正在被追赶。</span>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+<br><br>
+
+<<print either(
+	"罗宾紧紧抓住你的手。",
+	"罗宾回头看。",
+	"罗宾的手在颤抖。"
+)>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $stalk_end>>
+	<span id="next"><<link [[继续|Robin Pillory Escape End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Robin Pillory Escape]]>><</link>></span><<nexttext>>
+<</if>>

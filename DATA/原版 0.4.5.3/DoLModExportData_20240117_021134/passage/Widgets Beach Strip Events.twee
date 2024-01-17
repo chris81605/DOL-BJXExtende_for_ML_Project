@@ -1,0 +1,105 @@
+:: Widgets Beach Strip Events [widget]
+<<widget "beach_strip_events">>
+<<cleareventpool>>
+<<if $cool gte 160>>
+	<<addinlineevent "beach_strip_group_1" 0.5>>
+		<<generate1>><<person1>>
+		<<generate1>><<person1>>
+		<<fameexhibitionism 10>>
+
+		当你涉水而过时，你注意到一群与你年龄相仿的人正在盯着你看。你不知道他们的名字，但你认出他们是跟你同校的学生。你怀疑“海滩上裸奔的<<girl>><<if $player.penisExist and $player.vaginaExist>> <<schoolrep herm 1>>有一个与众不同的生殖器<</if>>”的事会被迅速传播。
+		<br><br>
+
+		一位<<person>>对你大喊，是救生员。“你需要穿点东西，”<<he>>说道。“这里可不是裸体海滩。”
+		<br><br>
+
+		还没等你反应过来，你就看到一群学生已经脱掉泳衣，朝水边跑去。
+		<br><br>
+
+		“你确定吗？”你说。
+		<br><br>
+
+		救生员转过身来看到你同学们正赤身裸体地走进水里。<<He>>困惑地盯着他们看，然后无力地吹响<<his>>的哨子。但所有人都无视了他。不久后，海滩上的其他人也脱掉他们的泳装开始晒日光浴。最终，救生员放弃了，<<his>>回到了岗位上。 
+		<br><br>
+
+		<<link [[继续|Beach Strip Group 2]]>><<endevent>><</link>>
+	<</addinlineevent>>
+	<<addinlineevent "beach_strip_party_1" 0.7>>
+		<<fameexhibitionism 10>>
+
+		你在海滩上完全赤裸，向在场的每个人展示自己的一切。你收获了许多欢呼及口哨声，甚至有几声愤怒的叫喊。大多数人都满足于公然地盯着你的裸体看。
+		<br><br>
+
+		您看到一个<<generatey1>><<person1>><<person>>正在与<<his>>的朋友交谈并用手指着您。他们正聚集在一块儿分享啤酒和点心。最终，那个<<person1>><<person>>站起身并向您走来。
+		<br><br>
+
+		“嘿，”当<<he>>在距离你只有几英尺远的地方时开口呼唤。
+		<br><br>
+
+		“嘿，”你回应着，压抑着想要遮掩自己的冲动。你在海滩上自豪地展示着自己，但在被人靠近时还是不免俗地感到有些局促不安。
+		<br><br>
+
+		“你看起来挺清凉的，”他说。“何不过来和我们一起喝点啤酒，吃点东西呢？”
+		<br><br>
+
+		你越过<<him>>看向<<his>>的朋友们。他们都满怀期待地看着你。你无法判断他们中是否有人怀有不良意图。 
+		<br><br>
+
+		<<link [[同意 (0:10)|Beach Strip Party Agree 1 ]]>><<pass 10>><</link>>
+		<br>
+		<<link [[拒绝|Beach Strip Party Decline]]>><</link>>
+	<</addinlineevent>>
+<</if>>
+<<addinlineevent "beach_strip_lifeguard" 0.7>>
+	哨音划破了空气。你转过身，看到一个救生员向你跑来。
+
+	<<generate1>><<person1>>
+
+	<<He>>停在你面前，但看向别处。"我很抱歉，但我需要你把衣服盖起来。这里不是裸体海滩。"
+	<br><br>
+
+	<<link [[遵守|Beach Strip Comply]]>><</link>>
+	<br>
+	<<link [[拒绝 (1:00)|Beach Strip Refuse]]>><<stress -12>><<trauma -6>><<crimeUp 50 "exposure">><<pass 1 hour>><</link>><<crime "exposure">><<ltrauma>><<lstress>>
+	<br>
+	<<if $promiscuity gte 15>>
+	<<link [[诱惑|Beach Strip Seduce]]>><</link>><<promiscuous2>>
+	<br>
+	<</if>>		
+<</addinlineevent>>
+<<addinlineevent "beach_strip_camera" 0.7>>
+	你漫步在沙滩上，溅起浪花。阳光温暖而轻柔地铺洒在你裸露的肌肤上。
+	<br><br>
+	<<generate1>><<person1>>
+	在海滩上稍微僻静点的地方，你经过一个<<person>>，<<his>>正忙着准备好那台看起来价值不菲的相机。
+
+	<br><br>
+	<<if $uncomfortable.nude is true>>
+		<<link [[绕道而行|Beach Strip End]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[走过去|Beach Strip Camera Snap]]>><<set $phase to 0>><</link>>
+	<br>
+	<<if $uncomfortable.nude is false>>
+		<<link [[停下摆pose|Beach Strip Camera Snap]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+		<br>
+		<<if $arousal gte $arousalmax / 2>>
+			<<link [[停下摆下流的pose|Beach Strip Camera Snap]]>><<set $phase to 2>><</link>><<exhibitionist5>><<promiscuous1>>
+		<br>
+		<</if>>
+	<</if>>	
+<</addinlineevent>>
+<<addinlineevent "beach_strip_next" 0.7>>
+	<<location "beach">><<effects>>
+	你跑过沙滩，溅起浪花。阳光温暖而轻柔地铺洒在你裸露的肌肤上。过了一会儿，天开始刮起了风来，冷得你直发抖。你决定先穿好衣服。总会有别的机会再来。
+	<br><br>
+	<<endevent>>
+	<<if $rng % 2 == 0>>
+    	<<link [[继续|Beach]]>><<clotheson>><</link>>
+	<<else>>
+		<<link [[继续|Beach Clothes Stolen 1]]>><</link>> 
+	<</if>>
+	<br>
+<</addinlineevent>>
+<<runeventpool>>
+<</widget>>

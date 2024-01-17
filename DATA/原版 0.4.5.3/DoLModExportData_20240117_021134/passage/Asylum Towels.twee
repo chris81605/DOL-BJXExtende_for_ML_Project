@@ -1,0 +1,56 @@
+:: Asylum Towels []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<generateDoctor 1>><<person1>><<set _towel to random(0,4)>>
+你偷偷地走到一个护士面前。"打扰一下，"你说道。
+<<if $worn.upper.name is "straightjacket" or $worn.lower.name is "straightjacket bottom">>
+	<<He>>转过身来，看到你破烂的夹克，
+	<<if ($beauty gte ($beautymax / 3) * 2) and _towel lte 1>>
+		坏笑了起来。<<covered>>"请给我几件衣服好吗？"
+		<br><br>
+		"不要，你太性感了。"<<He>>掏出一个手机。"我想看你跑去问别人的样子。"
+		<<fameexhibitionism 2 "pic">>
+	<<else>>
+		皱起眉头。<<covered>>"请给我几件衣服好吗？"
+		<br><br>
+		"你这是经历了什么？不，别说了，我不想知道。"<<He>>在写字板上做了个记录。"我得去通知医生。"<<set $suspicion += 1>><<gsuspicion>>
+		<br><br>
+		<<He>>脱下你的拘束服<<if $leftarm is "bound" and $rightarm is "bound">>，让你的双手脱离了束缚<</if>>。这种自由并没有持续太久，<<he>>马上就给你穿了一件新的。
+		<<bind>><<upperwear 35>><<lowerwear 38>><<fameexhibitionism 1>>
+	<</if>>
+<<elseif ($beauty gte ($beautymax / 3) * 2) and _towel lte 3>> /* 1 in 5 to skip beauty*/
+	<<if _towel is 0>> /*1 in 4 chance*/
+		<<He>>转过身来，看到你时明目张胆的露出了一脸淫笑。<<covered>>"请给我几件衣服好吗？"
+		<br><br>
+		"不要，你太性感了。"<<He>>掏出一个手机。"我想看你跑去问别人的样子。"
+		<<fameexhibitionism 2 "pic">>
+	<<else>>
+		<<He>>转过身来，看到你时明目张胆的露出了一脸淫笑。<<covered>>"请给我几件衣服好吗？"
+		<br><br>
+		"感觉有点可惜呢，不过行吧，"<<he>>点了点头，给你穿上了衣服。
+		<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+	<</if>>
+<<elseif $player.penissize gte 3>>
+	<<He>>转过身，看到你时露出了微笑。<<covered>>"请给我几件衣服好吗？"
+	<br><br>
+	"稍等，"<<he>>吹着口哨，掏出一部手机，抓拍了一张你的<<genitals>>的照片。
+	<<He>>对着屏幕点了点头，然后扔给你一件衣服。"这么好的风景，遮起来真是可惜。"
+	<<unbind>><<upperwear 87>><<fameexhibitionism 2 "pic">>
+<<elseif $player.breastsize gte 7>>
+	<<He>>转过身，看到你时露出了微笑。<<covered>>"请给我几件衣服好吗？"
+	<br><br>
+	"等一下，"<<he>>说着拿出手机，迅速对着你的<<breasts>>拍下照片。
+	<<He>>看着屏幕点点头，之后向你扔来一件衣服："这么好的风景，遮起来真是可惜。"
+	<<unbind>><<upperwear 87>><<fameexhibitionism 2 "pic">>
+<<elseif _towel gte 2>>
+	<<He>>转过身来，看到你这样子，却似乎完全不为所动。<<covered>>"能给我些衣服么？"
+	<br><br>
+	<<He>>点了点头，给了你一件病号服。
+	<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+<<else>>
+	<<He>>转过身看到了你，把手放到嘴边掩饰着笑意。<<covered>>"请给我几件衣服好吗？"
+	<br><br>
+	<<He>>点了点头，给了你一件病号服。
+	<<unbind>><<upperwear 87>><<fameexhibitionism 1>>
+<</if>><br><br><<unset _towel>>
+<<link [[继续|Asylum]]>><<endevent>><</link>>
+<br>

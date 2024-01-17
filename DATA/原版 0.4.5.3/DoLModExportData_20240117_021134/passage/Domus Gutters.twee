@@ -1,0 +1,79 @@
+:: Domus Gutters []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+你爬梯子上了屋顶，然后开始清理苔藓。
+<<pass 1 hour>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		在你开始工作约一小时后，你发现<<person>>站在你下方，手机摄像头对着你。
+		你一时困惑，然后意识到<<he>>看光了你的裙底。你伸出一只手遮在大腿之间。
+		"别害羞啊，"<<he>>笑着说。
+		<<if $worn.under_lower.type.includes("naked")>>
+			"你真是个下流的东西，不穿内裤就在这攀来爬去。"
+		<<elseif playerChastity()>>
+			"$worn.genitals.cn_name_cap不错，钥匙在谁那里呢？"
+		<<else>>
+			<<set $worn.under_lower.name_simple to setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].name_simple>>
+			"你那里有着一件漂亮的$worn.under_lower.cn_name_cap。"
+		<</if>>
+		<<He>>笑起来，走回了屋里。
+		<br><br>
+		<<pass 2 hour>>
+		排水沟一打扫干净，你就爬下来，找<<person>>结账。
+		你发现<<him>>在厨房里等你，一手拿着你的钱，一手拿着手机，整幅画面相当惹人怀疑。
+		<br><br>
+
+		"做个交易，"<<he>>说，"我让你删除这些照片，相应地，我们来个更亲密的接触如何。
+
+		<<if !playerChastity() and $worn.under_lower.vagina_exposed is 1>>
+			<<if $player.penisExist and $player.vaginaExist>>
+				你不希望别人知道你有两套'工具'，不是吗？"
+			<<elseif $player.gender_appearance isnot $player.gender>>
+				你不希望别人知道你喜欢打扮成<<print ($player.gender_appearance is "m" ? "男孩" : "女孩")>>，不是吗？"
+			<<else>>
+				我敢说肯定有很多变态喜欢看你的<<genitals>>。”
+			<</if>>
+		<<else>>
+			我敢说肯定有很多变态想要你的裙底照。”
+		<</if>>
+		<br><br>
+		<<link [[接受|Domus Gutters Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[拒绝胁迫|Domus Gutters Refuse]]>><</link>>
+		<br>
+
+	<<else>>
+		大约一小时后，一只鸟从附近的烟囱里飞了出来。你吓了一跳，滑倒了，差点从屋顶上掉下来。
+		<<gstress>><<stress 6>>
+		<br><br>
+
+		排水沟一打扫干净，你就爬下来，找<<person>>结算报酬。
+		"干得漂亮，"<<he>>说，注视着你的工作成果。"这是你的报酬，不会亏待你的。"
+		<br><br>
+		<<pass 2 hour>>
+
+		你赚到了<<moneyGain 25>>。
+		<br><br>
+
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+
+	<</if>>
+<<else>>
+
+	排水沟一打扫干净，你就爬下来，找<<person>>结算报酬。
+	"干得漂亮，"<<he>>说，注视着你的工作成果。"这是你的报酬，不会亏待你的。"
+	<br><br>
+	<<pass 2 hour>>
+
+	你赚到了<<moneyGain 25>>。
+	<br><br>
+
+	<<link [[继续|Domus Street]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

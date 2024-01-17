@@ -1,0 +1,47 @@
+:: Farm Tending Ignore []
+<<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"对、对不起，"你说道，"我有很多工作要做。"
+	<<elseif $speech_attitude is "bratty">>
+		"你没看见我很忙吗？"你说道。
+	<<else>>
+		"我不能，"你说道，"我有很多工作要做。"
+	<</if>>
+	你转身离开<<him>>。
+	<br><br>
+<<else>>
+	你无视了<<person>>。
+<</if>>
+
+
+<<if $rng gte 76>>
+	<<He>>焦躁不安起来。"什么？"<<he>>说道，"你觉得我配不上你吗？"
+	<<if $farm.wall gte 4>>
+		<<He>>开始爬上围栏，但在到达顶部时停了下来，<<he>>被带刺铁丝网挡住了。
+		<br><br>
+
+		"很好。就呆在你的小笼子里吧，<<bitch>>。"<<He>>气冲冲地离开了。<<gstress>><<stress 6>>
+		<br><br>
+
+		<<destination_farm>>
+	<<else>>
+		<<He>>翻过围栏，朝着你走来。<<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[反抗|Farm Tending Resist]]>><</link>>
+		<br>
+		<<link [[呼唤艾利克斯|Farm Tending Person Alex]]>><<npcincr Alex dom 1>><</link>><<gdom "Alex">>
+		<br>
+		<<if $submissive gte 1500>>
+			<<link [[道歉|Farm Tending Apologise]]>><<sub 1>><</link>><<submissivetext>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<He>>试图再次引起你的注意，但很快就放弃了。
+	<br><br>
+
+	<<destination_farm>>
+<</if>>

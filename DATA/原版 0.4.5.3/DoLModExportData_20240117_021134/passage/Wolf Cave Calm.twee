@@ -1,0 +1,50 @@
+:: Wolf Cave Calm []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	你走向黑狼，跪下来抚摸<<bhis>>的头部。<<bHe>>摇头把你甩开，然后向你展示了<<bhis>>的私处。
+	<<if $monster is 1>>
+		"生气。帮忙。<<print ((playerHeatMinArousal() and (V.player.vaginaExist or canBeMPregnant()) and V.NPCList[0].penis !== "none") ? '你准备好了。' : '')>><<print ((playerRutMinArousal() and $NPCList[0].vagina isnot "none") ? "我准备好了。" : '')>>"
+	<</if>>
+<br><br>
+
+<<link [[用手|Wolf Cave Black Wolf]]>><<set $sexstart to 1>><</link>><<deviant1>>
+<br>
+<<if $deviancy gte 55>>
+	<<link [[用嘴|Wolf Cave Black Wolf]]>><<set $phase to 1>><<set $sexstart to 1>><</link>><<deviant4>>
+	<br>
+<</if>>
+<<if $wolfgirl gte 6 and $deviancy gte 75>>
+	<<if playerAwareTheyAreInHeat() and $NPCList[0].penis isnot "none" and (($player.vaginaExist and !playerChastity("vagina")) or (canBeMPregnant() and !playerChastity("anus")))>>
+		<<link [[展示你的背后|Wolf Cave Black Wolf]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant5>><<wolfgirl>><<heat>>
+		<br>
+	<</if>>
+	<<if playerRutMinArousal() and $NPCList[0].vagina isnot "none" and !playerChastity("penis")>>
+		<<link [[顽皮地咬一口|Wolf Cave Black Wolf]]>><<set $phase to 3>><<set $sexstart to 1>><</link>><<deviant5>><<wolfgirl>><<rut>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<link [[拒绝|Wolf Cave Calm]]>><<set $phase to 1>><</link>>
+<br>
+
+<<elseif $phase is 1>>
+	<<if $monster is 1>>
+		"别试图挑战我。服从我！"
+	<</if>>
+	黑狼继续骚扰其他<<wolf_cave_plural>>，其他狼都惊慌地避开<<bhim>>。<<bHe>>冷静下来了，但其他的狼都很紧张。
+	<<lharmony>>
+	<br><br>
+
+	<<destinationwolfcave>>
+
+<<else>>
+	你直视黑狼，呲起牙来。<<bHis>>怒气从<<bhis>>脸上消失了片刻，但很快又浮上来了。<<bHe>>咆哮着冲向你。
+	<<if $monster is 1>>
+		"我是头狼。我要惩罚你。"
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Wolf Cave Challenge]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

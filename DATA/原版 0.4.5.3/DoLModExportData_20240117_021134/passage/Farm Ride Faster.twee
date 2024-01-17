@@ -1,0 +1,28 @@
+:: Farm Ride Faster []
+<<effects>>
+
+你鞭策你的<<beasttype>>狂奔。雷米的打手试图跟上，马蹄在后面隆隆作响。
+<<if currentSkillValue("thighskill") gte random(1, 1000)>>
+	<span class="green">没跟上。</span>你把他们远远抛在后面。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<destination_farm_ride>>
+<<else>>
+	<span class="red">你的马晃动着，</span>骑手追上你。一个骑在前面，他们把你围在树篱上，迫使你停下来。他们转过身来面对你。<<gstress>><<stress 6>>
+	<br><br>
+
+	"雷米派我们来的，"左边的<<person2>><<person>>说道。"为了确保你没事。一个<<girl>>独自骑马很危险。"<<gstress>><<stress 6>>
+	<br><br>
+
+	"我们会护送你走完剩下的路，"右边的<<person3>><<person>>补充道，"当然是收费业务，给我们<<printmoney 5000>>。"
+	<br><br>
+
+	<<if $money gte 5000>>
+		<<link [[付钱 (£50)|Farm Ride Pay]]>><<set $money -= 5000>><</link>>
+		<br>
+	<</if>>
+	<<link [[礼貌地拒绝|Farm Ride Polite]]>><<farm_aggro 1>><</link>><<gaggro>>
+	<br>
+	<<link [[生气地拒绝|Farm Ride Angry]]>><<farm_aggro 1>><</link>><<gaggro>>
+	<br>
+<</if>>

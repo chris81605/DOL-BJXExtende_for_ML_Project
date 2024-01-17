@@ -1,0 +1,41 @@
+:: Strip Club Goon Underplay []
+<<effects>>
+
+
+你向<<person>>介绍了达里尔的客户群和安全情况，但淡化了数字。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green"><<He>>似乎相信了。</span>
+	<<if $rng gte 81>>
+		"有意思。布莱尔听到这个会很高兴的。"
+	<<elseif $rng gte 61>>
+		"这么少？我还以为……算了。"
+	<<elseif $rng gte 41>>
+		"他们没有被抢劫是个奇迹。也许以后就不一定了。"
+	<<elseif $rng gte 21>>
+		"我想布莱尔会很高兴知道的。"
+	<<else>>
+		"布莱尔比我想象的更有统治力。"
+	<</if>>
+	<<He>>溜进一条小巷。
+	<<glove "Briar">>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry -= 1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<else>>
+
+	<<He>>冷笑着。<span class="red">你不认为<<he>>会买账。</span>
+	"我会让布莱尔知道的，"<<he>>说，然后溜进一条小巷。<<llove "Briar">>
+	<br><br>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry += 2>>
+	<<skulduggeryuse>>
+
+	<<link [[继续|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>

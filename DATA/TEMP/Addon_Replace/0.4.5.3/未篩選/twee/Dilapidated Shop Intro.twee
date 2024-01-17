@@ -1,0 +1,42 @@
+:: Dilapidated Shop Intro []
+<<effects>>
+<<if $sydneySeen is undefined>>
+	<<npc Sydney 2>>
+	<<set $sydneySeen.pushUnique("shop")>><<set $sydneyFirstSeen to "shop">>
+	<<person2>>
+	一名有着<<npcHairColour "Sydney">>马尾的<<personsimple>>从店里走了出来。是悉尼，一位以纯洁品性和恪守职责而闻名的学生。<<his>>的脖子上挂着一个十字架，眼镜背后是一双略显疲色的琥珀色眼睛。
+	<br><br>
+<<else>>
+	<<npc Sydney 2>>
+	<<set $sydneySeen.pushUnique("shop")>>
+	<<person2>>
+	悉尼从店里走了出来。
+<</if>>
+<<run statusCheck("Sydney")>>
+<<He>>朝你笑了笑。"嘿，"<<he>>挥了挥手，"你好啊，我在这里帮忙来着。"
+<br>
+"我问过你的同学你要不要来帮忙。"
+<br>
+<<if _sydneyStatus.includes("corrupt")>>
+	悉尼的微笑更灿烂了。"这里干活很有意思的，"<<he>>看了看周围，"我学到了好多东西。"
+	<br>
+	<<person1>>
+	西里斯点了点头。"肯定没什么不好意思的啦。"<<he>>笑了起来，"不过，还是<<phim>>自己说了算。"<<He>>回头转向你，"我们每个周五下午都会在这里，全部准备好要好几个星期。"
+	<br><br>
+<<elseif _sydneyStatus.includes("pure")>>
+	悉尼似乎十分尴尬。"我不想让<<phim>>看见——"
+	<br>
+	<<person1>>
+	西里斯笑了起来，悉尼默默闭上了嘴。"没什么不好意思的啦！"<<He>>回头转向你，"我们每个周五下午都会在这里，全部准备好要好几个星期。"
+	<br><br>
+<<else>>
+	悉尼皱了皱眉，"你确定吗？有些东西有点——"<<he>>犹豫了一下，"粗俗。"
+	<br>
+	<<person1>>
+	"粗俗？"西里斯笑着说，"没什么不好意思的啦。不过，还是<<phim>>自己说了算。"<<He>>回头转向你。"我们每个周五下午都会在这里，全部准备好要好几个星期。"
+	<br><br>
+<</if>>
+<<link [[帮忙 (1:00)|Dilapidated Help]]>><<set $adultshopprogress += 1>><<set $adultshopcontribution += 1>><<set $adultshophelped to 1>><<pass 60>><<npcincr Sirris love 1>><<npcincr Sydney love 1>><</link>><<glove>>
+<br>
+<<link [[离开|Elk Street]]>><<endevent>><</link>>
+<br>

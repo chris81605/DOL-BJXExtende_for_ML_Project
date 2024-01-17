@@ -1,0 +1,64 @@
+:: Farm Lorry Peek []
+<<effects>>
+
+你把箱子搬进厨房。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	你拿起一把刀，把透明胶带<span class="green">完整地</span>从箱子上划开，应该看不出来被开过的痕迹。
+	<br><br>
+
+	<<skulduggeryuse>>
+<<else>>
+	你拿起一把刀，把透明胶带从箱子上划开。<span class="red">它被撕得乱七八糟。</span>就算事后再去努力还原，艾利克斯肯定也能注意到有人动过手脚。<<lllove>><<npcincr Alex love -3>>
+	<br><br>
+
+	<<skulduggeryuse>>
+<</if>>
+
+你打开其中一个箱子，看了看里面。
+
+<<rng 5>>
+<<switch $rng>>
+<<case 1>>
+	里面有几袋酵母。你检查了另一个箱子，都是些相同的东西。
+<<case 2>>
+	里面是各种各样的种子。艾利克斯是想要增加作物种类吗？另一个箱子里有更多的种子。其中一些相当奇特。
+<<case 3>>
+	里面有各种各样当地杂货店不卖的杂货。第二个箱子里有更多相同的东西，你注意到箱子角落里藏着一些色情杂志。
+	<br><br>
+
+		<<if $fame.model gte 1000 and C.npc.Alex.lust gte 20>>
+
+			你认出其中一本杂志的封面是你全裸的样子。你的脸变红了。<<ggarousal>><<arousal 1200>>
+
+		<<elseif $fame.model gte 600 and C.npc.Alex.lust gte 20>>
+
+			你认出其中一本杂志的封面是你，只穿了内衣。你脸红了。<<garousal>><<arousal 600>>
+
+		<<elseif $fame.model gte 400 and C.npc.Alex.lust gte 20>>
+
+			你认出其中一本杂志的封面是你，上半身全裸。你脸红了。<<garousal>><<arousal 600>>
+
+		<<elseif $fame.model gte 200 and C.npc.Alex.lust gte 20>>
+
+			你注意到有一本杂志的封面是你。
+
+		<</if>>
+<<case 4>>
+	里面有各种各样当地杂货店不卖的杂货。第二个箱子里有更多相同的东西。
+<<case 5>>
+	<<if currentSkillValue('science') gte 700>>
+		这里有各种各样的金属和玻璃设备。量筒、试管和其它测量容器。比起农场，这些东西更像是会出现在实验室里。第二个箱子里有更多相同的东西。
+	<<else>>
+		这里有各种各样的金属和玻璃设备。量筒、试管和其它测量容器。你不确定这些是用来做什么的。第二个箱子里有更多相同的东西。
+	<</if>>
+<</switch>>
+<br><br>
+
+你关上箱子，尽可能地修复打开过的痕迹。
+<br><br>
+
+<<link [[继续|Farm Work]]>><</link>>
+<br>

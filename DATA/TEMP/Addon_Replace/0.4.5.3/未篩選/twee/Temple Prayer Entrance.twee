@@ -1,0 +1,28 @@
+:: Temple Prayer Entrance []
+<<temple_effects>><<effects>>
+<<generate1>><<person1>>
+你在祈祷室外面。一个脸色严厉的<<monk>>守在门外。
+<br><br>
+<<if $temple_garden gte 100 and $temple_quarters gte 100>>
+	<span class="green">"花园和宿舍都井井有条，"</span><<he>>说道，"你想的话可以进祈祷室了。"
+	<br><br>
+	<<templeicon "pray">><<link [[祷告 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<<elseif $temple_garden gte 100>>
+	"宿舍仍待改善，”<<he>>说道。“但<span class="green">花园已经收拾好了。</span>如果你想的话，你可以进入祈祷室了。"
+	<br><br>
+	<<templeicon "pray">><<link [[祷告 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<<elseif $temple_quarters gte 100>>
+	"花园仍待改善，"<<he>>说道，"但<span class="green">宿舍已经收拾好了。</span>如果你想的话，你可以进入祈祷室了。"
+	<br><br>
+	<<templeicon "pray">><<link [[祷告 (1:00)|Temple Prayer Enter]]>><</link>>
+	<br>
+<</if>>
+<<if $historytrait gte 3>>
+	<<templeicon "prayer room">><<link [[偷偷溜进去 (1:00)|Temple Prayer Sneak]]>><<endevent>><<grace -5>><</link>><<llgrace>><<note "历史" "blue">>
+	<br>
+<</if>>
+<br>
+<<getouticon>><<link [[离开|Temple]]>><<endevent>><</link>>
+<br>

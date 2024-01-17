@@ -1,0 +1,47 @@
+:: Temple Cloister Training []
+<<effects>><<set $outside to 0>>
+
+<<if Time.dayState isnot "night">>
+    <<generateTemple 1>>
+    <<generateTemple 2>>
+    <<person1>>
+你踏入一间训练室，发现<<monk desc>>正在同<<person2>><<monk desc>>切磋。房间后面有个武器架，上面摆放着威慑力很强的鞭子和短棍。
+    <br><br>
+<<else>>
+你进入其中一间训练室，是空的。与日间的繁忙不同，中央竞技场外一粒沙子都没有。房间后面有个武器架，上面摆着威慑力很强的鞭子和短棍。
+    <br><br>
+你可以白天在这里练习。
+    <br><br>
+<</if>>
+
+<<if Time.dayState isnot "night">>
+    <<if $temple_spar is 1>>
+<<link [[切磋|Temple Cloister Spar Fail]]>><</link>>
+        <br>
+    <<else>>
+        <<if $temple_weapon is "baton">>
+            <<if $prof.baton gte 1000>>
+<<link [[切磋 (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<gggrace bishop>>
+            <<else>>
+<<link [[切磋 (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <<elseif $temple_weapon is "whip">>
+            <<if $prof.whip gte 1000>>
+<<link [[切磋 (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<gggrace bishop>>
+            <<else>>
+<<link [[切磋 (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <</if>>
+        <br>
+    <</if>>
+<</if>>
+<<if $temple_weapon is "baton">>
+<<link [[把你的武器换成鞭子|Temple Training Whip]]>><<set $temple_weapon to "whip">><</link>>
+    <br>
+<<elseif $temple_weapon is "whip">>
+<<link [[把你的武器换成短棍|Temple Training Baton]]>><<set $temple_weapon to "baton">><</link>>
+    <br>
+<</if>>
+<br><br>
+<<link [[离开|Temple Cloister]]>><<endevent>><</link>>
+<br>

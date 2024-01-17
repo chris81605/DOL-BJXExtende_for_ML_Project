@@ -1,0 +1,52 @@
+:: Abduction Hospital Water Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Water]]>><</link>>
+	<<else>>
+		这个<<beasttype>>在痛苦和恐惧中退缩了。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		这些<<beastsplural>>消失在地表之下，走向一个未知的地方。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<tearful>>你在水流的帮助下，沿着隧道游下去。隧道倾斜，你向下冲去，出口处是一个雨水渠。
+		<<set $stress -= 1000>>
+		<br><br>
+
+		<<link [[继续|Drain Water]]>><<set $bus to "commercialdrain">><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Water]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		这些<<beastsplural>>消失在地表之下，走向一个未知的地方。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<tearful>>你在水流的帮助下，沿着隧道游下去。隧道倾斜，你向下冲去，出口处是一个雨水渠。
+		<<set $stress -= 1000>>
+		<br><br>
+
+		<<link [[继续|Drain Water]]>><<set $bus to "commercialdrain">><</link>>
+	<</if>>
+<</if>>

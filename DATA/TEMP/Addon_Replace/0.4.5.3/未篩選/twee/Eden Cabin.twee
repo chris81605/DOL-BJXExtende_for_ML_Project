@@ -1,0 +1,420 @@
+:: Eden Cabin []
+<<set $outside to 0>><<set $location to "cabin">><<effects>><<set $bus to "edencabin">><<getTarget true>>
+/* make sure that all links that lead here have <<endevent>> */
+<<npc Eden>><<person1>>
+
+你在伊甸的小屋里。
+
+<<if $edenpillow is 2>>
+	壁炉旁铺着地毯，上面摆着一些枕头。
+<</if>>
+<<if $edencushions is 2 and $edenloveseat is 9>>
+	旁边放着一张双人沙发。
+<</if>>
+<<if $edencurtains is 2>>
+	柔软的窗帘从窗户上垂下来。
+<</if>>
+<<if $edencoat is 2>>
+	衣帽架立在角落里。
+	<<if $edencoatjacket is 1 and $edenscarf is 1 and !(Time.hour gte 11 and Time.hour lte 14 and $daily.eden.hunting is 1)>>
+		上面挂着一件狩猎服和一条围巾。
+	<<elseif ($edenscarf is 1 and !(Time.hour gte 11 and Time.hour lte 14 and Time.season is "winter" and $daily.eden.hunting is 1))>>
+		上面挂着一条围巾。
+	<<elseif $edencoatjacket is 1 and !(Time.hour gte 11 and Time.hour lte 14 and $daily.eden.hunting is 1)>>
+		上面挂着一件狩猎服。
+	<</if>>
+<</if>>
+
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyWatersBrokenPassout "edencabin">>
+<<elseif $stress gte $stressmax and !$possessed>>
+	<br><br>
+
+	<<link [[你眼前一黑……|Eden Cabin Passout]]>><</link>>
+<<elseif $edenCagedEscape and Time.hour gte 0 and Time.hour lte 6 and !$possessed>>
+	你迈入小屋的门，走进室内，期待地屏住了呼吸。伊甸立刻从床上爬了起来，愤怒地一把掀开被子。"你终于爬回来了，是吗？真他妈及时啊。"
+	<br><br>
+
+	<<He>>在你开口说话之前抓住了你。然后，你看到了角落里的笼子。
+	<br><br>
+
+	<<link [[继续|Eden Caged Intro]]>><<set $phase to 2>><</link>>
+	<br>
+<<elseif ($edenfreedom is 2 and $edendays gte 8 and Time.hour gte 0 and Time.hour lte 6) or ($edenfreedom is 1 and $edendays gte 2 and Time.hour gte 0 and Time.hour lte 6) and !$possessed>>
+	<<set $edendays to 0>>
+	<<npcincr Eden love -2>>
+	你进去时发现伊甸已经睡着了。被开门的声音吵醒，<<he>>迅速从床上坐了起来，但当<<he>>看到你时，<<he>>稍稍放松下来。
+	掀开被子，<<he>>冲向你。
+	<<if $edenPreyEscaped>><<unset $edenPreyEscaped>>
+		"别以为我忘了我们的游戏。你不应该从我这里逃掉的，"<<he>>抱怨道，"你也不应该离开那么久。你他妈到底上哪儿去了？"
+	<<else>>
+		"你上哪儿去了？"<<he>>抓住你的肩膀，"我真的很担心你。"
+	<</if>>
+	<br><br>
+
+	<<link [[道歉|Eden Return Apologize]]>><<npcincr Eden love 1>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[解释|Eden Return Apologize]]>><<set $phase to 1>><</link>>
+<<elseif $edenPreyEscaped and Time.hour gte 0 and Time.hour lte 6 and !$possessed>><<unset $edenPreyEscaped>>
+	你进去时发现伊甸已经睡着了。被开门的声音吵醒，<<he>>迅速从床上坐了起来，迷糊地揉着<<his>>的眼睛。当<<he>>看到你时，<<his>>的表情变成了怒视。
+	<br><br>
+
+	"你不应该从我这里逃走，"<<he>>上下打量着你，"如果有必要，我会狠狠地操你。下次，你就会是我的。"
+	<br>
+	<<if $worn.neck.collared isnot 1 and $edenaskcollar isnot 1>>
+		<<He>>打了个哈欠，打算继续睡觉。但突然，<<his>>的眼睛睁开了，好像意识到了什么。
+		<br>
+		"你的项圈呢？"<<he>>声音里的担心越来越明显。<<He>>一把掀开被子，踏着重重的脚步向你走来。
+		<br><br>
+
+		<<if $edencollarremove is 1>>
+			<<link [[撒谎并再要一个|Eden Collar Ask]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+		<<else>>
+			<<link [[解释并再要一个|Eden Collar Ask]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+		<</if>>
+		<br>
+		<<link [[说你把它移走了|Eden Collar Remove]]>><</link>>
+		<br>
+	<<else>>
+		<<He>>走开了，打了个哈欠，然后翻了个身。<<his>>的鼾声很快充满了整个小屋。
+		<br><br>
+
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $worn.neck.collared isnot 1 and $edenaskcollar isnot 1 and Time.hour gte 0 and Time.hour lte 6 and !$possessed>>
+	你进去时发现伊甸已经睡着了。被开门的声音吵醒，<<he>>迅速从床上坐了起来，但当<<he>>看到你时，<<he>>稍稍放松下来。
+	<<He>>转身躺下，但当<<his>>的眼睛瞄到你的脖子时，<<He>>停了下来。
+	<br><br>
+
+	"你的项圈呢？"<<he>>问道，下了床朝你走来。
+	<br><br>
+
+	<<if $edencollarremove is 1>>
+		<<link [[撒谎并再要一个|Eden Collar Ask]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+	<<else>>
+		<<link [[解释并再要一个|Eden Collar Ask]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+	<</if>>
+	<br>
+	<<link [[说你把它移走了|Eden Collar Remove]]>><</link>>
+	<br>
+<<elseif ($exposed gte 2 and $exhibitionism lte 74 or $exposed gte 1 and $exhibitionism lte 54) and !isLoveInterest("Eden")>>
+	你不想让别人看到你这个样子！你冲到衣柜前。
+	<br><br>
+
+	<<link [[继续|Eden Wardrobe]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	<<if $exposed is 1 and $exhibitionism gte 55 or $exposed is 2 and $exhibitionism gte 75>>
+		<span class="lewd">当你的<<lewdness>>展示出来时，你感到了一种来自原始本能的快感。</span>
+	<<elseif $exposed is 1 or $exposed is 2>>
+		<span class="lewd">你<<lewdness>>让你很尴尬，虽然除了伊甸没人能看到你。</span>
+	<</if>>
+
+	<<if Time.dayState is "night">>
+		炉膛里燃烧着余烬。
+	<<elseif Time.dayState is "dawn">>
+
+	<<elseif Time.dayState is "dusk">>
+
+	<<else>>
+
+	<</if>>
+
+	<<if $weather is "clear">>
+
+	<<elseif $weather is "overcast">>
+
+	<<elseif $weather is "rain">>
+		<<if $edenroof gte 5>>
+			雨水倾泻在小屋的屋顶上，发出令人舒服的声音。
+		<<else>>
+			雨水滴穿木制天花板，啪嗒啪嗒地落在地上。
+		<</if>>
+	<<elseif $weather is "snow">>
+		雪落在窗台上。
+	<</if>>
+
+	<br><br>
+
+	<<if ($edenfreedom is 2 and $edendays lt 8) or ($edenfreedom is 1 and $edendays lt 2)>>
+		<<set $edendays to 0>>
+	<</if>>
+
+	<<if $possessed>>
+		<<if $nextPassageCheck is "Eden Clearing" and $worn.neck.collared is 1>>
+			你被项圈的链子拉紧了。你凝视着伊甸沉睡的身影，露出一丝嘲讽的笑。
+			<br><br>
+
+			你抓住项圈，开始拉动它。你感觉不到自己的手臂或手，但你知道你知道自己正用不可思议的力量拉扯着它。
+			<br><br>
+
+			又有几只手抓住了项圈，从四面八方拉扯着。过了一会儿，项圈终于撑不住了。在掉落的金属碎片落地之前，手接住了它们，把它们堆在伊甸的旁边。你得意地笑着。
+			<<set $forestleashed to 0>><<set $forestleashedwear to 0>><<set $worn.neck.cursed to 0>><<neckruined>>
+		<<else>>
+			伊甸睡得很熟。
+		<</if>>
+		<br><br>
+
+		<<if Time.monthName is "November" and $edenprepare is 1>>
+			<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+			<br><br>
+		<</if>>
+		<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+		<br><br>
+		<<if $nextPassageCheck is "Cabin Actions">>
+			<<bedicon "eden">><span class="nextLink"><<link [[查看睡觉的地方|Cabin Actions]]>><</link>></span>
+		<<else>>
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+		<</if>>
+		<br><br>
+		<<cabinothers>>
+
+	<<elseif Time.hour gte 0 and Time.hour lte 6>>
+		<<if $edenbed isnot 1 and Time.hour lte 2>><<set $edenbed to 1>>
+			伊甸离开你身边的同时伸展着身体。"已经很晚了，"<<he>>说着走向床铺，眼怀期待地看着你。
+			<br><br>
+
+			<<bedicon "eden">><<link [[跟伊甸走|Eden Cabin Bed]]>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+			<br>
+			<<wardrobeicon>><<link [[换上睡衣|Eden Night Wardrobe]]>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+			<br>
+			<<refuseicon>><<link [[留下|Eden Cabin]]>><<endevent>><</link>>
+			<br>
+
+		<<else>>
+			<<set $edenbed to 1>>
+			伊甸睡得很熟。
+			<br><br>
+
+			<<if Time.monthName is "November" and $edenprepare is 1>>
+				<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+				<br><br>
+			<</if>>
+			<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+			<br><br>
+
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+			<br><br>
+
+			<<cabinothers>>
+		<</if>>
+
+	<<elseif Time.hour lte 8>>
+		<<if $valentines is 1 and Time.monthDay is 14 and $daily.eden.breakfast isnot 1>>
+			<<if $daily.eden.breakfast isnot 1>>
+				<<set $daily.eden.breakfast to 1>>
+			<</if>>
+
+			<<set $valentines_eden_breakfast to 1>>
+			厨房用具的声音在小屋里叮当响起，把你从睡梦中唤醒。睁开眼睛，你看到缕缕晨光透过窗户射进来。你盯着眼前的光景发了一会儿呆，然后被食物的香气吸引了。
+			你很困惑，转过身想要向伊甸询问，但发现<<hes>>不在床上。你坐起来时正好看到<<him>>在摆桌子准备吃早饭。听到你的动静，<<he>>转过头来看着你。
+			<br><br>
+
+			"早上好，"<<he>>打招呼。<<Hes>>手里拿着两盘鸡蛋。
+			<br>
+			你掀开被子，摇摇晃晃地走过去，向<<him>>投去疑惑的一瞥。伊甸对你凌乱的状态笑了笑。
+			<br>
+			"今天是情人节，"<<he>>解释说，"所以我想我应该帮忙。"
+			<br><br>
+
+			你把目光转向食物。不需要给<<him>>做早餐已经很奇怪了，不需要分享一个盘子里的食物更让你觉得奇怪。但你还是觉得这个举动很甜蜜。你对<<him>>微笑以表示感激，然后坐到了桌子旁。
+			当你们两人吃东西的时候，你试图和<<him>>聊天。<<Hes>>大多数时候都很安静，但会在<<he>>能回答时尽量回应你。
+			<br><br>
+
+			<<if $valentines_eden_bought isnot 1>>
+				你想着是否有办法报答<<him>>。
+			<<elseif $valentines_eden_bought is 1>>
+				你想到你在购物中心给伊甸买的礼物。也许你晚些时候可以报答<<him>>。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+
+		<<elseif $daily.eden.breakfast isnot 1>>
+			<<if $daily.eden.breakfast isnot 1>>
+				<<set $daily.eden.breakfast to 1>>
+			<</if>>
+			伊甸躺在床上。"给我做早餐，"<<he>>说道。
+			<br><br>
+
+			<<foodicon "pancakes">><<link [[做平常的早餐 (0:20)|Eden Breakfast]]>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<pass 20>><<set $phase to 0>><<housekeeping 1 100>><</link>><<housekeepingdifficulty 1 100>><<gdom>>
+			<br>
+			<<if $housekeeping gte 100>>
+				<<foodicon "eat">><<link [[做创新的早餐 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 1>><</link>>
+				<br>
+				<<if $edengarden gte 3>>
+					<<tendingicon "carrots">><<link [[用种植圃里的蔬菜 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 3>><<npcincr Eden love 3>><</link>><<gglove>>
+					<br>
+				<</if>>
+				<<if $edenshrooms gte 3>>
+					<<tendingicon "mushrooms">><<link [[用木桶里的蘑菇 (0:20)|Eden Breakfast]]>><<pass 20>><<set $phase to 4>><<npcincr Eden lust 30>><</link>><<ggglust>>
+					<br>
+				<</if>>
+				<<refuseicon>><<link [[拒绝|Eden Breakfast]]>><<npcincr Eden love -1>><<npcincr Eden dom -1>><<set $phase to 2>><</link>><<ldom>><<llove>>
+				<br>
+			<<else>>
+				<span class="blue">你还不是一个熟练的管家，做不出更有创意的东西。</span>
+			<</if>>
+
+		<<else>>
+			伊甸正在为这一天做准备。
+			<br><br>
+
+			<<edenlust>>
+			<<if Time.monthName is "November" and $edenprepare is 1>>
+				<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+				<br><br>
+			<</if>>
+			<<getinicon>><<link [[靠近伊甸|Cabin Eden Actions]]>><</link>>
+			<br><br>
+
+			<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+			<br><br>
+
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+			<br><br>
+
+			<<cabinothers>>
+		<</if>>
+
+	<<elseif Time.hour lte 16>>
+		伊甸正在外面努力工作。
+		<br><br>
+
+		<<if Time.hour is 15 and $daily.eden.lunch isnot 1>>
+			<<if $housekeeping gte 100>>
+				伊甸在外狩猎了那么久，一定饿了。也许<<he>>会想要吃午饭。
+				<br>
+				<<foodicon "eat">><<link [[为伊甸做午餐 (0:30)|Eden Lunch]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $daily.eden.lunch to 1>><</link>>
+			<<else>>
+				伊甸狩猎了那么久，一定饿了。你想给<<him>>做午餐，<span class="blue">但缺乏做家务的信心。</span>
+			<</if>>
+			<br><br>
+		<</if>>
+		<<if Time.monthName is "November" and $edenprepare is 1>>
+			<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+			<br><br>
+		<</if>>
+		<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+		<br><br>
+
+		<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+		<br><br>
+
+		<<cabinothers>>
+
+	<<elseif Time.hour lte 17>>
+		<<if $valentines is 1 and Time.monthDay is 14 and $valentines_eden_bought is 1 and $daily.eden.bath isnot 1 and $valentines_eden_bath isnot 1>>
+			伊甸还在外面忙碌。现在你可以为<<him>>准备洗澡。
+			<br><br>
+
+			<<link [[放水洗澡|Eden Valentines Bath]]>><</link>>
+			<br>
+			<<link [[不放水洗澡|Eden Cabin]]>><<endevent>><<set $valentines_eden_bath to 1>><</link>>
+
+		<<elseif ($valentines isnot 1 and $daily.eden.bath isnot 1) or ($valentines is 1 and Time.monthDay isnot 14 and $daily.eden.bath isnot 1) or ($valentines is 1 and Time.monthDay is 14 and !$valentines_eden_bought and $daily.eden.bath isnot 1) or ($valentines is 1 and Time.monthDay is 14 and $valentines_eden_bath is 1 and $daily.eden.bath isnot 1)>>
+			<<if $daily.eden.bath isnot 1>>
+				<<set $daily.eden.bath to 1>>
+			<</if>>
+
+			伊甸放完洗澡水，开始脱衣服。"洗澡时间到了，"<<he>>说道，"来吧，趁水还热，赶紧进去。"
+			<br><br>
+
+			<<noClothingCheck>>
+			<<if _nude is false>>
+				<<link [[脱光衣服进去 (0:30)|Eden Bath]]>><<pass 30>><<npcincr Eden dom 1>><<npcincr Eden love 1>><<set $phase to 0>><<strip>><<set $edenClothes to true>><</link>><<gdom>><<glove>>
+			<<else>>
+				<<link [[进入 (0:30)|Eden Bath]]>><<pass 30>><<npcincr Eden dom 1>><<npcincr Eden love 1>><<set $phase to 0>><<strip>><</link>><<gdom>><<glove>>
+			<</if>>
+			<br>
+			<<link [[拒绝|Eden Bath]]>><<npcincr Eden dom -1>><<npcincr Eden love -1>><<set $phase to 1>><<set $edenjoin to 1>><</link>><<llove>><<ldom>>
+			<br>
+
+		<<else>>
+			伊甸正在浴缸里放松。
+			<br><br>
+
+			<<edenlust>>
+			<<if Time.monthName is "November" and $edenprepare is 1>>
+				<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+				<br><br>
+			<</if>>
+			<<getinicon>><<link [[靠近伊甸|Cabin Eden Actions]]>><</link>>
+			<br><br>
+			<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+			<br><br>
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+			<br><br>
+			<<cabinothers>>
+
+		<</if>>
+
+	<<elseif Time.hour lte 18 and Time.monthDay is 25 and $christmas_gift_eden_given is 1 and $eden_christmas_dinner isnot 1>>
+		伊甸正忙于收集食材，进行着做饭的准备。而你则在小屋里四处晃荡，时刻注意着<<his>>在做什么，希望能至少帮<<him>>一把。不过你的努力是徒劳的，因为<<he>>始终坚持由<<him>>自己来处理今晚的一切。而当<<he>>开始做饭的时候，那令人垂涎欲滴的香味瞬间就填满了整间小屋，这更增添了你对接下来的期待。
+		<br><br>
+
+		在漫长的等待之后，<<He>>将你喊到了桌旁。桌上摆着的两人份的美食，无论从视觉还是味觉上来说，都是一种享受。你转头看向伊甸，<<he>>虽然看起来有些疲惫，但脸上充满着自豪的神情。你相信这是伊甸长久以来在烹饪上最下功夫的一次。
+		<br><br>
+
+		<<link [[继续|Eden Christmas Meal 2]]>><<pass 20>><</link>>
+
+	<<elseif Time.hour lte 18 and $daily.eden.dinner isnot 1 and $NPCName[$NPCNameList.indexOf("Eden")].love gte 100>>
+		<<set $daily.eden.dinner to 1>>
+		伊甸做好饭后，开始摆桌子准备吃饭。"毕竟我要求你每天做早餐，"<<he>>说，"所以我帮忙做晚餐是公平的。"
+		<br><br>
+
+		<<link [[与伊甸共进晚餐 (0:20)|Eden Dinner]]>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<pass 20>><<set $phase to 1>><</link>><<glove>><<gdom>>
+		<br>
+		<<link [[不跟伊甸一起|Eden Dinner]]>><<npcincr Eden love -1>><<npcincr Eden dom -1>><<set $phase to 2>><</link>><<llove>><<ldom>>
+		<br>
+
+	<<else>>
+		<<if Time.days % 2 is 0>>
+			伊甸正在火炉旁擦枪。<span class="blue"><<He>>看起来有点孤单。</span>
+			<br><br>
+
+			<<edenlust>>
+			<<if Time.monthName is "November" and $edenprepare is 1>>
+				<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+				<br><br>
+			<</if>>
+			<<getinicon>><<link [[靠近伊甸|Cabin Eden Actions]]>><</link>>
+			<br><br>
+			<<if checkSextoysGift("Eden") and $NPCName[$NPCNameList.indexOf("Eden")].penis is "none" and checkIfNPCHasCategorySextoy("Eden","strap-on").length <= 5>>
+				<<sextoysicon "strap-on">><<link [[送给伊甸一个假阳具|Eden Gift Strap-on]]>><</link>>
+				<br><br>
+			<</if>>
+			<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+			<br><br>
+
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+			<br><br>
+
+			<<cabinothers>>
+
+		<<else>>
+			伊甸正在火旁看书。<span class="blue"><<He>>看起来有点孤单。</span>
+			<br><br>
+
+			<<edenlust>>
+			<<if Time.monthName is "November" and $edenprepare is 1>>
+				<<edenicon "fix">><<link [[修理小屋|Cabin Eden Prepare]]>><</link>>
+				<br><br>
+			<</if>>
+			<<getinicon>><<link [[靠近伊甸|Cabin Eden Actions]]>><</link>>
+			<br><br>
+			<<if checkSextoysGift("Eden") and $NPCName[$NPCNameList.indexOf("Eden")].penis is "none" and checkIfNPCHasCategorySextoy("Eden","strap-on").length <= 5>>
+				<<sextoysicon "strap-on">><<link [[送给伊甸一个假阳具|Eden Gift Strap-on]]>><</link>>
+				<br><br>
+			<</if>>
+			<<investigateicon>><<link [[看看小屋周围|Cabin House Actions]]>><</link>>
+			<br><br>
+
+			<<bedicon "eden">><<link [[查看睡觉的地方|Cabin Actions]]>><</link>>
+			<br><br>
+
+			<<cabinothers>>
+		<</if>>
+	<</if>>
+<</if>>

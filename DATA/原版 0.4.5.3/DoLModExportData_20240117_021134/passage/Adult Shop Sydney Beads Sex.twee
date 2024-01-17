@@ -1,0 +1,43 @@
+:: Adult Shop Sydney Beads Sex []
+<<run statusCheck("Sydney")>>
+<<if $sexstart is 1>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 600>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<set $enemyarousalmax += 100>>
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+	你弯下腰，诱惑般的扭动着屁股。悉尼轻笑着，把手掌贴在了你的股瓣上。
+	<<promiscuity2>>
+<</if>>
+
+<<set $enemyanger to -10>>
+<<effects>>
+<<effectsman>>
+
+<<if playerChastity("anus") and $worn.under_lower.anus_exposed is 1 and $worn.lower.anus_exposed is 1>>
+	<<set $finish to 1>>
+	<br>
+	悉尼看见你的护肛板，撇了撇嘴。"妈的，裤子都脱了就给我看这个。"<<He>>把肛珠丢到一边，给你<<bottom>>上轻轻来了一巴掌。<<violence 2>><<npcincr Sydney purity 1>><<gpain>><<gspurity>>
+	<br><br>
+<<else>>
+	<<man>>
+<</if>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $noanal is 1>>
+	<span id="next"><<link [[继续|Adult Shop Sydney Beads Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Adult Shop Sydney Beads Sex]]>><</link>></span><<nexttext>>
+<</if>>

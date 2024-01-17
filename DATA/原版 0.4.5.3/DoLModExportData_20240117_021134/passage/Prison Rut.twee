@@ -1,0 +1,29 @@
+:: Prison Rut []
+<<location "underground">><<set $outside to 0>><<effects>>
+
+你身处在监狱下方的发情窟中。
+<<if $rut gte 100>>
+	<span class="green">你撞见了一个大理石台阶。</span>当你的脚踏上台阶的时候，周围的黑暗开始退去，一个笼罩在粉红色雾气下的楼梯出现在你面前，你顺着楼梯爬到了顶层，发现了一个石箱，上面有着花纹装饰点缀，而在其正中间则是一只紧闭着的眼睛，你观察了一下，它看起来并没有上锁。
+		<br><br>
+
+		<<link [[打开|Prison Rut Chest]]>><</link>>
+		<br>
+<<elseif $stress gte $stressmax>>
+	<br><br>
+	<<passout_rut>>
+<<else>>
+	<<if $worn.face.type.includes("blindfold")>>
+		戴上眼罩的你什么都看不见，黑暗占据了你的视野。但你依旧能感受到潮湿的地面和墙壁，在你感觉到一阵微风吹来后，你察觉到你可能是在一个开放的空间里。
+		<br><br>
+
+		<<link [[踉跄着迎风走去 (0:10)|Prison Rut Walk]]>><<pass 10>><<hallucinogen 10>><<set $phase to 1>><<set $rut += 8>><</link>>
+		<br>
+	<<else>>
+		压抑的黑暗像雾一样笼罩着你，但你依旧可以看到几英尺远的地方。这里的地面是天然形成的岩石，踩在上面有一种湿漉漉的感觉。你突然感受到一阵微风吹来，就好像你是在一个开放的空间里一样。
+		<br><br>
+
+		<<link [[朝着微风走去 (0:10)|Prison Rut Walk]]>><<pass 10>><<hallucinogen 10>><<set $phase to 0>><<set $rut += 10>><</link>>
+		<br>
+	<</if>>
+	<<prison_map rut>>
+<</if>>

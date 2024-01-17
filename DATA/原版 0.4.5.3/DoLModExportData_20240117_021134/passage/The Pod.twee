@@ -1,0 +1,51 @@
+:: The Pod []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	You feel the room shake, then shift sideways. You find yourself in a featureless black room with a gang of $enemyno and an audience behind ropes. There is a sign on the wall that says <span class="orange">DEBUG</span> in bright orange letters, along with other statistics you don't understand.
+	<br><br>
+	<span class="red">The gang advances...</span>
+	<br><br>
+	<<controlloss>>
+	<br>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+
+<span class="orange">DEBUG GROUP:</span> <span class="red">TRST: $enemytrust HLTH: <<print Math.trunc($enemyhealth)>> : $enemyhealthmax AROSL: <<print Math.trunc($enemyarousal)>> : $enemyarousalmax ANGR: $enemyanger : $enemyangermax </span>
+<br>
+<span class="orange">DEBUG BROTHEL EVENT:</span> Enemy current of $enemynomax (1 - 6): $enemyno
+<br>
+<span class="green">DEBUG: Enemy #: Health Descr Gen Pro PP Vag Mouth LH RH Clothes</span>
+<br>
+<<for _ii = 0; _ii < $enemynomax; _ii++>>
+	DEBUG: _ii: <<print Math.trunc($NPCList[_ii].health)>> $NPCList[_ii].description $NPCList[_ii].gender $NPCList[_ii].pronoun $NPCList[_ii].penis $NPCList[_ii].vagina $NPCList[_ii].mouth $NPCList[_ii].lefthand $NPCList[_ii].righthand $NPCList[_ii].clothes.upper.name $NPCList[_ii].clothes.lower.name
+	<br>
+<</for>>
+DEBUG PC (P/V/A/M/LARM): $penisstate $vaginastate $anusstate $mouthstate $leftarm
+<br><br>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<<if ($enemyarousal gte $enemyarousalmax) or ($enemyhealth lte 0)>>
+			<span id="next"><<link [[Next->The Pod Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[Next->The Pod]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif ($enemyarousal gte $enemyarousalmax) or ($enemyhealth lte 0)>>
+	<span id="next"><<link [[Next->The Pod Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next->The Pod]]>><</link>></span><<nexttext>>
+<</if>>

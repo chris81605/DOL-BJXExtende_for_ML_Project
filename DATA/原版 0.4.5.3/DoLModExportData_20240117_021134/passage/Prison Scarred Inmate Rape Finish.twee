@@ -1,0 +1,36 @@
+:: Prison Scarred Inmate Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	其他人争先恐后，直到一声哨响划破喧嚣。
+	<br><br>
+	<<tearful>>你挣扎着站起身来。
+	<span class="green">你获得了<<scarred_inmate 0 apo>>的保护。</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<generate_veteran_guard 0>><<person1>>
+	"你扰乱了这个地方的和平与安宁，"<<veteran_guard 0>>说着，将手放在你的肩膀上，"你跟我来。"
+	<br><br>
+	<<link [[乖乖过去|Prison Punishment]]>><<endevent>><</link>>
+	<br>
+	<<link [[战斗|Prison Punishment Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<<else>>
+	人群纷纷后退，被你展现出的力量所震慑。<<gggrespect>><<prison_inmates 10>>
+	<br><br>
+	<<clotheson>>
+	<span class="green">你获得了<<scarred_inmate 0 apo>>的保护。</span><<set $prison.protection to "scarred">>
+	<br><br>
+	<<endcombat>>
+	<<tearful>>你找回了方向。你看见<<generate_scarred_inmate 0>><<person1>><<scarred_inmate 0>>躺在泥里。
+	<br><br>
+	<<link [["帮助" + $NPCList[0].pronouns.him|Prison Scarred Inmate Help]]>><<prison_rep scarred 3>><</link>><<gglove>><<gghope>><<prison_hope 3>>
+	<br>
+	<<link [[离开|Prison Yard]]>><<prison_inmates 3>><<endevent>><</link>><<ggrespect>>
+	<br>
+
+<</if>>

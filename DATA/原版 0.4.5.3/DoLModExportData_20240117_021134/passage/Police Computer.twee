@@ -1,0 +1,28 @@
+:: Police Computer []
+<<set $outside to 0>><<set $location to "police_station">><<effects>>
+<<if $phase is 0>>
+	你的密码已失效，它一定是被更改过了。
+	<span class="yellow">也许兰德里可以告诉你新密码。</span>
+<<elseif $phase is 1>>
+	你开始调查警察的电脑。
+	<<police_computer_action>>
+<<elseif $phase is 10>>
+	你从自己的记录中删除了一些罚罪记录，并随机更改了几个证据编号。
+<<elseif $phase is 11>>
+	完成安装的消息框弹出，软件已经开始生效。它应该会在接下来的几个小时内锁定一切。
+	<<set $police_hack to 4>>
+<<elseif $phase is 12>>
+	你把所有犯罪证据都转移到惠特尼的档案中。<span class="teal">从现在开始，你就是个良好市民了。</span>
+	<<set $police_hack to 4>><<set $framed to "whitney">><<earnFeat "Laughingstock">>
+<<elseif $phase is 13>>
+	你把所有犯罪证据都转移到礼顿的档案中。<span class="teal">从现在开始，你就是个良好市民了。</span>
+	<<set $police_hack to 4>><<set $framed to "leighton">><<earnFeat "Laughingstock">>
+<<else>>/*invalid phase*/
+	警方的数据已经开始更新。目前进度是3%，应该很快就能完成……
+	<br>
+	<<link [[等待 (12:00)|Police Back Office]]>><<pass 720>><</link>>(请勿等待！这是错误，请报告)<!-- Appears even with blind stats enabled. Intentional -->
+<</if>>
+
+<br><br>
+<<link [[离开|Police Back Office]]>><</link>>
+<br>

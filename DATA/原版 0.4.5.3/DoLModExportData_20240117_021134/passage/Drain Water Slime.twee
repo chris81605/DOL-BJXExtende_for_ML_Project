@@ -1,0 +1,61 @@
+:: Drain Water Slime []
+<<set $outside to 0>><<set $location to "drain">><<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "slimes" "史莱姆" "向你移动" "包围着你" "击退" 1 10>>
+	<<if $bus is "residentialdrain">>
+		<<set $timer to 40>>
+	<<elseif $bus is "commercialdrain">>
+		<<set $timer to 30>>
+	<<elseif $bus is "industrialdrain">>
+		<<set $timer to 20>>
+	<<else>>
+		<<set $timer to 10>>
+	<</if>>
+	<<set $water to 1>>
+	<<set $swimdistance to 10>>
+<</if>>
+<<if $bus is "drainexit">>
+	你看到了前面下水道的出口。如果你不尽快到达安全的地方，你就会被带到海里去！
+	<br><br>
+<</if>>
+<<swarmeffects>>
+<<set $swimdistance += 1>>
+<<if $swimdistance gte 20>><<set $swimdistance to 20>><</if>>
+水让你沿着隧道流得很远。
+<<if $swimdistancecheck is $swimdistance>>
+	你逆流而上，但水流太猛，无法前进。你需要使用双臂。
+<<elseif $swimdistancecheck gt $swimdistance>>
+	你与水流抗争，向安全的地方靠近。
+<<elseif $swimdistancecheck lt $swimdistance>>
+	你被带的离安全地带越来越远。
+<</if>>
+<<if $swimdistance gte 15>>
+	你被拖离了人行道。
+<<elseif $swimdistance gte 10>>
+	人行道离你有一段距离。
+<<elseif $swimdistance gte 5>>
+	人行道很近。
+<<elseif $swimdistance gte 2>>
+	人行道几乎触手可及。
+<<else>>
+	<span class="teal">人行道触手可及！</span>
+<</if>>
+<<set $swimdistancecheck to $swimdistance>>
+<br><br>
+<<swarm>>
+<<swarmactions>>
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Drain Water Slime Finish]]>><</link>></span><<nexttext>>
+<<elseif $timer lte 0>>
+	<span id="next"><<link [[继续|Drain Water Slime Finish]]>><</link>></span><<nexttext>>
+<<elseif $swimdistance lte 1>>
+	<span id="next"><<link [[继续|Drain Water Slime Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Drain Water Slime]]>><</link>></span><<nexttext>>
+<</if>>

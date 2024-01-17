@@ -1,0 +1,62 @@
+:: Farm Kennel Treats All []
+<<effects>>
+
+<<if $farm.beasts.dogs gte 20>>
+
+	这些<<beastsplural>>坐地笔直等着他们的零食。整齐划一。他们都大嘴张着要着食物。你一个个地喂他们。他们快速吃完之后，在你抚摸着他们时舔着你的手。
+	<br><br>
+
+	他们保持坐姿，顺从地望着你。
+	<br><br>
+
+	<<link [[拥抱|Farm Kennel Treats Hug]]>><<farm_dogs 1>><</link>><<grespect>>
+	<br>
+	<<if $deviancy gte 15>>
+		<<link [[诱惑|Farm Kennel Treats Seduce]]>><</link>><<deviant2>>
+	<</if>>
+	<br>
+	<<if $deviancy gte 35 and $lactating gte 1 and $milk_amount gte 30 and $breastfeedingdisable is "f">>
+		<<link [[用你的奶喂|Farm Kennel Treats Breastfeed]]>><<farm_dogs 3>><</link>><<deviant3>><<ggrespect>>
+		<br>
+	<</if>>
+	<br>
+
+<<elseif $farm.beasts.dogs gte 5>>
+	这些<<beastsplural>>围着你。没有一个捣乱。等待着你分发零食给他们，并快速吃完属于自己的那份。
+	<<if $monster is 1>>
+		一些狗会在你给他们零食时舔或蹭地表达感谢。
+	<<else>>
+		一些在你喂它们时温顺地叫着。
+	<</if>>
+	<br><br>
+
+	当你离开狗窝时，他们还在摇着尾巴地躺着。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $farm.beasts.dogs gte -5>>
+	这些<<beastsplural>>在你身边放松地待着。他们迫切地想吃零食，但因敬重你，他们耐心地等着。当你把零食喂给他们时，他们狼吞虎咽地吃完了。
+	<br><br>
+
+	当你走出狗窝，他们还在舔着嘴。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你有一大堆狗零食。你天女散花般把这些零食抛向<<beastsplural>>。他们狼吞虎咽地吃完了，还汪汪叫着，想要更多的食物，他们眼里闪烁着渴望的光芒。
+	<<if $monster is 1>>
+		他们想要更多的零食。
+	<<else>>
+		有两只靠近着，喉咙里发出咆哮的威胁声。
+	<</if>>
+	<br><br>
+
+	你连忙退后，设法在事态变得更糟前逃离这里。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

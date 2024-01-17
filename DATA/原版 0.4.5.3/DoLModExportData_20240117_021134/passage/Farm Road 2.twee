@@ -1,0 +1,44 @@
+:: Farm Road 2 []
+<<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad2">>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你走进更深的乡村。除了偶尔的庄园外，这里几乎没有建筑物。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你朝城里走去，偶尔会看到一座建筑，雄伟的庄园掩映在群山和树林之间。<<physique 3>>
+<<else>>
+	你在连接城镇和周围农田的道路上。几座庄园点缀在你周围的山丘上。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		一只狗从华丽的大门后面朝你吠叫。<<gstress>><<stress 6>>
+		<br><br>
+
+		<<destinationfarmroad>>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<roadicon>><<link [[走进乡村 (0:30)|Farm Road 3]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+	<<roadicon>><<link [[朝小镇走 (0:30)|Farm Road 1]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

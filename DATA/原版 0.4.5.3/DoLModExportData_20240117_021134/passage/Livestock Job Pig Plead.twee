@@ -1,0 +1,52 @@
+:: Livestock Job Pig Plead []
+<<effects>>
+
+
+<<if $worn.face.type.includes("gag")>>
+	你想乞求尼奇，尽管你戴着$worn.face.cn_name_cap除了发出呜呜声外什么都做不了。
+<<elseif $speech_attitude is "meek">>
+	"请救救我，"你对尼奇说道。"我不是奶牛。"
+<<elseif $speech_attitude is "bratty">>
+	"帮帮我，帮我远离这些疯子吧，"你说道。"不要和他们同流合污。"
+<<else>>
+	"请帮帮我，"你对尼奇说道。"他们不能这么对我。"
+<</if>>
+<<nnpc_His "Niki">>的眼睛与你的目光接触，但是<<nnpc_he "Niki">>心虚地移开了视线。
+
+
+<<if $NPCName[$NPCNameList.indexOf("Niki")].love gte 30>>
+	<br><br>
+	<<pass 60>>
+
+	尼奇完成了相机的设置，<span class="green">但似乎出现了什么问题。</span>
+	<br><br>
+
+	"没用的，"<<nnpc_he "Niki">>说道。"设备有问题，我们需要叫停。"<<nnpc_He "Niki">>又看了你一眼。
+	<<llove>><<npcincr Niki love -1>>
+	<br><br>
+
+	<<endevent>><<npc Remy>><<person1>>雷米皱着眉头，把你的皮带拉得更紧。"好，"<<he>>说道。"如果实在没办法，那就结束吧。"
+	<br><br>
+
+	<<He>>把你从谷仓拉出来，农场工人去帮助尼奇拆除布景。
+	<br><br>
+
+	<<link [[继续|Livestock Job Resist End]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<nnpc_He "Niki">>没有再看一眼。
+	<br><br>
+	<<pass 60>>
+
+	尼奇准备好了。<span class="red"><<nnpc_He "Niki">>伸出大拇指示意继续。</span>雷米把你拉到垫子上。<<if $farm_phase is 1>>第一头<</if>>猪接收到了提示。
+	<br><br>
+
+
+	<<if $farm_phase is 1>>
+		<<link [[继续|Livestock Job Pig Gang Rape]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		<<link [[继续|Livestock Job Pig Rape]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+	<br>
+
+<</if>>

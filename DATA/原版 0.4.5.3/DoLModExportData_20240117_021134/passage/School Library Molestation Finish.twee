@@ -1,0 +1,80 @@
+:: School Library Molestation Finish []
+<<if $enemyhealth lte 0>>
+	他们痛苦地退缩，眼中闪过一丝恐惧。"妈的神经病！"他们默默地离开了你。<<tearful>>你振作了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|School Library]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<person1>><<person>>看着<<person2>><<person>>。"我先来的，付钱！"
+	<br><br>
+
+	那<<person>>摇了摇头，"没门，我在你之前就高潮了。"
+	<br><br>
+
+	他们把瘫倒的你留在桌子上，争论的声音渐渐远去。<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|School Library]]>><</link>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+
+	<<endevent>>
+
+	图书管理员被你的尖叫声吓了一跳，急匆匆地前来调查。
+	<br><br>
+
+	这两个人立刻停止了攻击，从书架之间逃走了。
+
+	<<clotheson>>
+	<<endcombat>>
+	<<exposure>>
+	<<generate1>><<person1>>
+	<<if $exposed gte 1>>
+		<<He>>给你一些毛巾让你盖上。<<towelup>>
+	<</if>>
+	"你还好吗？"<<he>>关切地拍了拍你的肩膀。
+	<<if $stress gte $stressmax>>
+		然而，你的意识已经开始逐渐消散了。
+		<br><br>
+		<<endevent>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<pregnancyWatersBrokenPassout "schoolLibrarian">>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		你试图开口，但泪水淌过了脸颊。当你晕过去的时候，图书管理员紧紧地搂住了你。
+		<br><br>
+		<<endevent>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<pregnancyWatersBrokenPassout "schoolLibrarian">>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<<elseif $pain gte 20>>
+		<<tearful>>你含泪点头，向图书管理员挤出微笑。确定你没有受伤之后，<<he>>就回到了自己的岗位。
+		<<endevent>>
+		<br><br>
+		<<link [[继续|School Library]]>><</link>>
+	<<else>>
+		<<tearful>>你向脸红的图书管理员点头微笑。确定你没有受伤之后，<<he>>回到了自己的岗位。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|School Library]]>><</link>>
+	<</if>>
+<<elseif $timer lte 0>>
+	他们似乎感到厌倦了，他们自讨没趣地离开了你。<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|School Library]]>><</link>>
+<</if>>

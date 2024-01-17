@@ -1,0 +1,37 @@
+:: English Play Rehearse Sydney No Role []
+<<schooleffects>><<effects>><<set $bus to "rehearsal">>
+<<run statusCheck("Sydney")>>
+<<npc Sydney>><<person1>>
+
+<<switch $englishPlayRoles.SydneyCount>>
+	<<case 0>>
+		你打开剧本，与悉尼一起表演其中的一个片段。"谢谢你陪我排练。我之前请了其他一些见习教徒帮忙，不过我觉得他们并没有多大兴致。"<<he>>拿出了<<his>>的手册。
+		你帮助悉尼排练<<his>>的角色。由于这部剧比较短，双方的对白并不多。悉尼被一些文本分散了注意力，但仍然兴致高涨，热情地演绎着<<his>>的角色。
+		<br><br>
+
+		"我可能得把其中一些写在手上才能记得住……"
+	<<case 1>>
+		你拿起剧本，开始扮演斯特林。“我简直不敢相信！我的孩子，竟然被一个肮脏的乞丐给迷住了？我们立刻离开这个地方，泰勒，回家后给我解释清楚。”
+		<br><br>
+
+		悉尼羞涩地转过头去，"真不忍心在圣诞前夜看到这么令人心碎的争执……不，不太行，让我再试一遍……"
+	<<default>>
+		<<playLinePool>>
+		你打开剧本，帮助悉尼表演其中一个片段。
+		<<set _tempRole to (random(0,1) ? "Taylor" : "Sterling")>>
+		你开始扮演<<= _tempRole.replace("Taylor","泰勒").replace"Sterling","斯特林")>>。
+		<br>
+		"<<print _englishPlayLinePool[_tempRole].pluck()>>"
+		<br>
+		...
+		<br>
+		"<<print _englishPlayLinePool[$englishPlayRoles.Sydney].pluck()>>"
+		<br>
+<</switch>>
+<<set $englishPlayRoles.SydneyCount += 1>>
+<br><br>
+
+当你们排练完的时候，学校已经要关门了。你跟悉尼一起离开了学校。
+<br><br>
+
+<<sydneyOptionsLeave>>

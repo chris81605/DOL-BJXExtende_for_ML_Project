@@ -1,0 +1,29 @@
+:: Passout home []
+<<set $dangerhome to 0>>
+<<set $safehome to 0>>
+你将自己逼得太紧了。
+<br><br>
+<<passout>>
+
+<<set $danger to random(1, 10000)>>
+
+<<if $danger gte (9900 - $allure)>><<set $dangerhome to random(1, 100)>><</if>>
+
+<<if $danger lt (9900 - $allure)>><<set $safehome to random(1, 100)>><</if>>
+
+<<if $dangerhome gte 80>>
+	<<link [[醒来|Sold]]>><</link>>
+<<elseif $dangerhome gte 1>>
+	<<link [[醒来|Molestation]]>>
+		<<set $phase to 0>>
+		<<set $molestationstart to 1>>
+	<</link>>
+<</if>>
+
+<<if $safehome gte 1>>
+	<<link [[睡|Bailey Rescue]]>><</link>>
+<</if>>
+
+<<pass 1 hour>>
+<<set $stress -= 2000>>
+<<set $trauma +=10>>

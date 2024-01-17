@@ -1,0 +1,74 @@
+:: Bog Lost []
+<<effects>>
+你沿着
+<<switch $phase>>
+	<<case 0>>最后一条
+	<<case 1>>第一条
+	<<case 2>>第二条
+	<<case 3>>第三条
+	<<case 4>>第四条
+	<<case 5>>第五条
+	<<case 6>>第六条
+	<<case 7>>第七条
+	<<case 8>>第八条
+	<<case 9>>第九条
+<</switch>>
+路前进。
+
+<<rng>>
+<<if $boglost gte 5>>
+	<<pass 1 hour>><<pain 2>>
+	你跑着。你不停地跑。越来越多的路从你所在的路分岔出来，宛若树枝或是什么大得难以置信的鹿角叉。
+	<br><br>
+
+	<<link [[坚持到底 (?:??)|Bog Lost Follow]]>><</link>><<willpowerdifficulty 600 1000>>
+	<br>
+	<<link [[无视一切|Bog Lost Block]]>><<trauma 30>><</link>><<gggtrauma>>
+	<br>
+<<elseif $rng lte 15>>
+	这条路看起来很眼熟，即使身后那条看起来完全不一样。你觉得自己找到了正确的路。
+	<br><br>
+
+	<<link [[继续|Bog]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<switch $boglost>>
+		<<case 0>>你找不到来时的路了。
+		<<case 1>>你什么地标都不认识。<<stress 6>><<gstress>>
+		<<case 2>>你心跳加速。<<stress 12>><<ggstress>>
+		<<case 3>>你走过的树丛似乎在扭曲变形。你折回去，试图找到些能引路的东西。<<stress 12>><<ggstress>>
+		<<case 4>>你奔跑着，既无目的，亦无方向。似乎无一为真。<<stress 12>><<ggstress>><<trauma 12>><<ggtrauma>>
+	<</switch>>
+	<<set $boglost++>>
+	<br><br>
+
+	前方的岔路更多了。
+	<br><br>
+
+	<<link [[尝试回溯 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[沿着第一条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[沿着第二条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[沿着第三条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 3>><</link>>
+	<br>
+	<<link [[沿着第四条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 4>><</link>>
+	<br>
+	<<link [[沿着第五条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 5>><</link>>
+	<br>
+	<<if $boglost gte 2>>
+		<<link [[沿着第六条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 6>><</link>>
+		<br>
+		<<if $boglost gte 3>>
+			<<link [[沿着第七条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 7>><</link>>
+			<br>
+			<<if $boglost gte 4>>
+				<<link [[沿着第八条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 8>><</link>>
+				<br>
+				<<link [[沿着第九条路走 (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 9>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>

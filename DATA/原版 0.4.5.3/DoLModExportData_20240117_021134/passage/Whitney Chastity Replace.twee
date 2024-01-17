@@ -1,0 +1,33 @@
+:: Whitney Chastity Replace []
+<<effects>><<set $location to "park">>
+
+<<if $weekly.whitneyChastityReplace>>
+	<<He>>检查了一番$worn.genitals.cn_name_cap。"看起来磨损有些厉害，这些东西也不是树上长出来的，我可负担不起每次都替你换个新的。"
+	<br><br>
+<<else>>
+	<<set $weekly.whitneyChastityReplace to 1>>
+	<<if $worn.genitals.name is "naked">>
+		<<He>>皱起眉，"你为什么不在它坏之前让我帮你换掉呢？愚蠢的骚货。"
+		<br><br>
+		<<if $player.penissize is -2>>
+			<<set _cageIndex to 7>>
+			<<set _cageColor to "pink">>
+		<<elseif $player.penissize lte 0>>
+			<<set _cageIndex to 6>>
+			<<set _cageColor to "pink">>
+		<<else>>
+			<<set _cageIndex to 2>>
+		<</if>>
+		<<genitalswear _cageIndex _cageColor>>
+		<<set $worn.genitals.origin to "Whitney">>
+		你还没来得及说什么，<<he>>就把$worn.genitals.cn_name_cap装在了你的<<penis>>上，然后上锁。
+	<<else>>
+		<<He>>检查着你的$worn.genitals.cn_name_cap。"看起来有点磨损，最好给你换掉。"
+		<br><br>
+		<<He>>按着你的下半身打开了笼子。在你意识到之前，一声新的咔哒声响起。<<He>>轻轻拍了几下，"完成。"
+		<<set $worn.genitals.integrity to setup.clothes.genitals[clothesIndex('genitals',$worn.genitals)].integrity_max>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<whitneyoptions>>

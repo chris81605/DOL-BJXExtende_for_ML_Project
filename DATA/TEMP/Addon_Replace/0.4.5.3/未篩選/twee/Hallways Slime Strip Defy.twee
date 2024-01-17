@@ -1,0 +1,41 @@
+:: Hallways Slime Strip Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你离开了<<person>>。但是，<span class="red">它没有阻止你，因为你知道它会以其他方式惩罚你。</span>
+	<<else>>
+		你离开了<<person>>，但是，<span class="teal">它因为之前压制过你精神萎靡。</span>你觉得它尝试过，<span class="green">但失败了，</span>它没能强迫你脱光衣服。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	史莱姆试图维持对你的控制。<span class="red">它无视你的意愿，</span>强行让你面向<<person>>并脱光衣服。
+	<<ggwillpower>><<willpower 3>>
+	<br><br>
+
+	<<He>>目瞪口呆地盯着你脱下所有衣服，直到你赤身站在走廊中间。<<He>>环顾四周，好像在找人确认<<hes>>看到了什么。
+	<br><br>
+	<<He>>靠近了你，伸出手抚摸你的身体。你感觉到史莱姆在阻止你的行动。
+	<br><br>
+	<<person>>摸得更用力了。
+	<br><br>
+	<<link [[继续|Hallways Slime Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<<else>>
+	史莱姆试图继续控制你。<span class="green">但你反抗了它，</span>并挣脱了<<person>>。
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

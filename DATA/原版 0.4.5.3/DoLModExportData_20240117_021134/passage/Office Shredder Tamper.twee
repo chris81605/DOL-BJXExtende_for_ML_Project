@@ -1,0 +1,130 @@
+:: Office Shredder Tamper []
+<<effects>>
+<<skulduggerycheck>>
+<br>
+<<if $worn.lower.name isnot "naked" and clothingData("lower", $worn.lower, "skirt") is 1>>
+	<<if $skulduggerysuccess is 1>>
+		<<if $worn.lower.integrity lte 0>>
+			你找到了紧急控制的入口，并成功打开了它，但在碎纸机<span class="lewd">消耗掉你$worn.lower.cn_name_cap的剩余空间之前，你不能打开它！</span>
+			<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+			<br><br>
+			你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+			<br><br>
+			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+				<<skulduggeryskilluse>>
+			<<else>>
+				<span class="blue">这太简单了，你什么都没学到。</span>
+			<</if>>
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你找到了紧急控制的入口，成功地打开了它，迅速按下碎纸机的释放键。
+			<br><br>
+			在造成更多的伤害之前，你把你的$worn.lower.cn_name_cap的布料从碎纸机里拉出来。
+			<br><br>
+			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+				<<skulduggeryskilluse>>
+			<<else>>
+				<span class="blue">这太简单了，你什么都没学到。</span>
+				<br><br>
+			<</if>>
+
+			<<exposure>>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.lower.integrity -= 10 * $phase>>
+		<<if $worn.lower.integrity lte 0>>
+			<<if $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+				<<if $worn.upper.set is $worn.lower.set>>
+					你试图找到一种方法来关掉碎纸机，但你的<<breasts>>紧紧地贴在它身上，<span class="lewd">你的$worn.lower.cn_name_cap消失在它的嘴里。</span><<gpain>><<pain 5>>
+				<<else>>
+					你试图找到一种方法来关闭碎纸机，但是<span class="lewd">你的$worn.lower.cn_name_cap的最后一英寸从你的身体撕裂，使你失去平衡。</span><<gpain>><<pain 5>>
+					<br><br>
+					你错误地抓住碎纸机来支撑，你的$worn.upper.cn_name_cap的一部分滑进去了，现在也被搅烂了！
+					<<set $phase to 1>>
+				<</if>>
+				<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+				<<shredderactions "upper">>
+				<br>
+			<<else>>
+				你试图找到一种方法来关闭碎纸机，但是<span class="lewd">你的$worn.lower.cn_name_cap的最后一英寸从你的身体撕裂。</span>
+				<br><br>
+				你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+				<<lowerruined>><<clothesruinstat>><<set $loweroff to 0>>
+				<br><br>
+				<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+					<<skulduggeryskilluse>>
+				<<else>>
+					<span class="blue">这太简单了，你什么都没学到。</span>
+					<br><br>
+				<</if>>
+				<<exposure>>
+
+				<<link [[继续|Office Shredder End]]>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你试图找到一种方法来关掉碎纸机，但你的<<genitals>>紧紧地贴在它身上，你的$worn.lower.cn_name_cap消失在它的嘴里。<<gpain>><<pain 5>>
+			<<shredderactions "lower">>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $worn.upper.name isnot "naked" and (!$upperTucked or clothingData("upper", $worn.upper, "notuck") is 1)>>
+	<<if $skulduggerysuccess is 1>>
+		<<if $worn.lower.integrity lte 0>>
+			你找到了紧急控制的入口，并成功打开了它，但在碎纸机<span class="lewd">消耗掉你$worn.upper.cn_name_cap的剩余空间之前，你不能打开它！</span>
+			<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+			<br><br>
+			你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+			<<exposure>>
+			<br><br>
+			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+				<<skulduggeryskilluse>>
+			<<else>>
+				<span class="blue">这太简单了，你什么都没学到。</span>
+				<br><br>
+			<</if>>
+			<<exposure>>
+
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你找到了紧急控制的入口，成功地打开了它，迅速按下碎纸机的释放键。
+			<br><br>
+			在造成更多的伤害之前，你把你的$worn.upper.cn_name_cap的布料从碎纸机里拉出来。
+			<br><br>
+			<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+				<<skulduggeryskilluse>>
+			<<else>>
+				<span class="blue">这太简单了，你什么都没学到。</span>
+				<br><br>
+			<</if>>
+			<<exposure>>
+
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<set $phase++>>
+		<<set $worn.upper.integrity -= 10 * $phase>>
+		<<if $worn.upper.integrity lte 0>>
+			你试图找到一种方法来关掉碎纸机，但是当<span class="lewd">你的$worn.upper.cn_name_cap的碎片被从你身上扯下来放进碎纸机时，一声巨响回荡在整个房间。</span>
+			<br><br>
+			<<upperruined>><<clothesruinstat>><<set $upperoff to 0>>
+			你温顺地退了一步，紧张地环视着房间，遮掩着你的<<lewdness>>
+			<<exposure>>
+			<br><br>
+			<<link [[继续|Office Shredder End]]>><</link>>
+			<br>
+		<<else>>
+			你试图找到一种方法来关掉碎纸机，但你的<<breasts>>紧紧地贴在它身上，你的$worn.upper.cn_name_cap消失在它的嘴里。<<gpain>><<pain 5>>
+			<<shredderactions "upper">>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

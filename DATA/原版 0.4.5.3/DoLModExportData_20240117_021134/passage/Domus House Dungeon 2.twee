@@ -1,0 +1,23 @@
+:: Domus House Dungeon 2 []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<set _risk to 0>>
+<<if $phase is 0>>
+	<<set _risk to 10>>
+	你径直走向出口。
+<<elseif $phase is 1>>
+	<<set _risk to 25>>
+	你抓走尽可能多的设备，向出口走去。
+<</if>>
+<br><br>
+<<rng>>
+你打开活板门往外偷看。
+<<if $rng gt _risk>>
+	房间里空无一人，寂静无声。你从活板门爬上来，在关上门后悄悄逃离了这所房子。
+	<br><br>
+	<<link [[离开|Domus Street]]>><<unset $resc>><</link>>
+<<else>>
+	房间看起来空空如也。在爬出去时，<span class="red">有双手抓住了你。</span>
+	<br><br>
+	<<link [[继续|Domus House Dungeon Rape]]>><<set $molestationstart to 1>><</link>>
+<</if>>
+<br>

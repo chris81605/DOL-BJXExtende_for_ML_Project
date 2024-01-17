@@ -1,0 +1,44 @@
+:: Pound Work Wash Soothe []
+<<effects>>
+
+<<if $tendingSuccess>>
+	"没事的，" 你边走近边轻声说，"水很暖和，而且我保证，洗完后你会更舒服。"
+	<br><br>
+	<<if $monster is 1>>
+		<span class="green">"好，好的。"<<bhe>>说着<<bhis>>的情绪缓和了下来。</span>
+	<<else>>
+		<span class="green">你的语调安抚了<<bhis>>，</span><<bhe>>不再抗拒你的靠近。
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	你擦洗着<<bhim>>的全身。开始<<bHe>>并不喜欢水，但很快便适应了。你提着水桶离开笼子，让<<bhim>>在里面把水抖干。
+	<br><br>
+
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<link [[继续|Pound]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"别怕。" 你说道。你伸出手上的海绵给<<bhe>>看，告诉<<bhim>>没必要害怕，<span class="red">但<<bhe>>却退得更远了。</span><<gtending>><<tending 1>>
+	<br><br>
+
+	<<bHe>>最终还是肯洗澡了，但过程中一直在哀号挣扎。洗完澡后，<<bhe>>用力甩着身子，把身上的水甩到隔壁笼子的<<pound_text>>上。<span class="pink">你浑身湿透了。</span>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>><<beasttype>>无辜地侧着<<bhis>>的脑袋。
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[继续|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

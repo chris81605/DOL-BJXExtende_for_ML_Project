@@ -1,0 +1,42 @@
+:: Docks Hide []
+<<effects>>
+
+你试图撬开其中一个集装箱。
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">你成功地撬开了挂锁，</span>刚好来得及。你躲进集装箱，关上了门，等待着脚步声逐渐远去。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Docks Sneak]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+
+	<span class="red">你还在翻找着的时候，</span>一名<<person>>从转角处走了出来。<<He>>看到你十分吃惊，手中的手电筒掉在了地上。<<his>>伸手拿出对讲机，你见状，转过身开始逃跑。<<gsecurity>><<dock_security 1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+	<<athleticsdifficulty 1 1100 true>>
+	<<if $athleticsSuccess>>
+		保安在你身后追赶着你，<span class="green">但你成功甩掉了<<him>>。</span><<gtiredness>><<gstress>><<stress 6>><<tiredness 6>>
+		<br><br>
+
+		<<link [[继续|Docks Sneak]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		保安在身后追赶着你，<span class="red">逐渐赶了上来，</span>最终把你扑倒在了地上。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+		<br><br>
+
+		"抓住你了，"<<he>>说着，把你按在了地上。"支援很快就会来了。"<<He>>贴近了你。"不过，让我先爽一爽？"
+		<br><br>
+
+		<<link [[继续|Docks Sneak Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+
+
+<</if>>

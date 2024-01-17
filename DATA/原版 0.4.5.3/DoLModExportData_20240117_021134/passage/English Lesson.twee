@@ -1,0 +1,95 @@
+:: English Lesson []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.english to true>>
+
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	<<npc Doren>><<person1>>
+	"又到了每周的测验时间，"多伦宣布道，从<<his>>的桌子下面拿出一个装满试卷册的文件包。<<He>>在教室里走动着，把试卷分发到每个学生面前。"别紧张。我相信你们都会拿到好成绩的。"<<gstress>><<stress 6>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<exam english>>
+	<br><br>
+
+	学生们翻开第一页，教室里充满了纸张的沙沙声。多伦在过道里徘徊。
+	<br><br>
+	<<endevent>>
+	<<exam_cheat english>>
+	<<if !$daily.earSlimeCheatExam and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,200) gte 150 - $earSlime.corruption>>
+		<<set $daily.earSlimeCheatExam to true>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">你感觉到你脑袋里的史莱姆在命令你考试作弊。</span>它承诺如果你遵守的话，就给予你奖励<<if $earSlime.startedThreats>>，如果你不遵守的话，就要承担相应的后果<</if>>。
+		<br><br>
+		<<link [[服从|English Exam]]>><<set $phase to 4>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[违抗|English Exam]]>><<set $phase to 6>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[无视|English Exam]]>><<set $phase to 5>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[集中精力|English Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+		<br>
+		<<link [[试图放松|English Exam]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[作弊|English Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<if $kylarenglishstate is "active">>
+			<<link [[抄袭凯拉尔|English Exam]]>><<set $phase to 3>><<npcincr Kylar lust 3>><<set $exam_chance += 5>><</link>><<glust>><<passPercent 5>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $kylarenglishstate is "active">>
+
+	<<if Time.minute lte 5>>
+		语文课开始了，你打算怎么表现？
+		<br><br>
+	<<else>>
+		语文课还在继续，你打算怎么表现？
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[专注课程|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[与同学们社交|English Lesson Socialise]]>><</link>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[做白日梦|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 75>>
+		<<ind>><<link [[自慰|English Lesson Masturbate]]>><<set $masturbationstart to 1>><<npcincr Kylar lust 5>><</link>><<exhibitionist5>><<glust>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<if Time.minute lte 5>>
+		语文课开始了，你打算怎么表现？
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		语文课还在继续，你打算怎么表现？
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[专注课程|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[与同学们社交|English Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[做白日梦|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 55>>
+		<<ind>><<link [[自慰|English Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<</if>>

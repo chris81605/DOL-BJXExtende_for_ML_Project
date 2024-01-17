@@ -1,0 +1,52 @@
+:: Tentacle Forest Pool []
+<<set $bus to "tentacle_forest_pool">><<effects>>
+
+你在触手林中，在波光粼粼的水池旁。涟漪反射出彩虹般的色彩。
+<br><br>
+
+<<tentacle_forest_safe_orgasm>>
+<<tentacle_forest_time>>
+<br><br>
+
+<<if $tentacle_forest_time gte 60>>
+    <<tentacle_forest_end_scene>>
+<<elseif $town_projects.thicket gte 5>>
+    水很平静，但无数双眼睛盯着你看。你得小心点。
+    <br><br>
+    <<if $tentacle_forest_time gte 60>>
+        <<tentacle_forest_end_scene>>
+    <<elseif $stress gte $stressmax>>
+        <<tentacle_forest_stress_scene>>
+    <<elseif $arousal gte 10000 and !$tentacle_forest_lurker.includes("defeated")>>
+        <<tentacle_forest_orgasm_scene>>
+    <<else>>
+        <<link [[划船 (0:05)|Tentacle Forest Pool Focus]]>><<tentacle_forest_pass 5>><</link>><<willpowerdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br>
+        <<link [[游泳 (0:05)|Tentacle Forest Pool Swim]]>><<tentacle_forest_pass 5>><</link>><<swimmingdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br><br>
+        大片的睡莲叶漂浮在水池平静的边缘。它们似乎能够支撑你的体重。
+        <br>
+        <<link [[坐 (0:15)|Tentacle Forest Bottom]]>><<tentacle_forest_pass 15>><</link>><<note "+ 臀部技巧？" "blue">>
+        <br><br>
+        <<link [[回到起点 (0:05)|Tentacle Forest]]>><<tentacle_forest_pass 5>><</link>>
+        <br>
+    <</if>>
+<<elseif $town_projects.thicket gte 4>>
+    <<set $town_projects.thicket to 5>>
+    你凝视着游泳池。眼睛仍然在那里，但水是平静的，温柔的。<span class="green">现在应该可以通过了。</span>
+    <br><br>
+    <<link [[继续|Tentacle Forest Pool]]>><</link>>
+    <br>
+<<else>>
+    对岸还有一条路，但不游泳是没法过的。你凝视着水面。无数双眼睛注视着你的目光，水流汹涌。<span class="blue">你需要找到另一个解决方案。</span>
+    <<if $town_projects.thicket is undefined>>
+        <<set $town_projects.thicket to 1>>
+    <</if>>
+    <br><br>
+    大片的睡莲叶漂浮在水池平静的边缘。它们似乎能够支撑你的体重。
+    <br>
+    <<link [[坐 (0:15)|Tentacle Forest Bottom]]>><<tentacle_forest_pass 15>><</link>><<note "+ 臀部技巧？" "blue">>
+    <br><br>
+    <<link [[回头|Tentacle Forest]]>><</link>>
+    <br>
+<</if>>

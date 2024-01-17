@@ -1,0 +1,61 @@
+:: Sea Boat Dance 2 []
+<<effects>>
+
+你跳舞给这三个<<if $NPCList[0].pronoun is "f" and $NPCList[1].pronoun is "f" and $NPCList[2].pronoun is "f">>渔妇<<else>>渔夫<</if>>看。
+<<if currentSkillValue('danceskill') gte 800>>
+	你对自己的能力充满信心，你知道他们想看到什么。
+<<elseif currentSkillValue('danceskill') gte 400>>
+	你认为自己在这方面还不错，但还是希望他们的标准不要太高。
+<<elseif currentSkillValue('danceskill') gte 100>>
+	这绝不是你第一次跳舞，但现在情况很奇怪，你担心他们会不满意。
+<<else>>
+	你并不清楚自己现在在做什么，但你将尽力表现得优雅一些。你希望这样就足够了。
+<</if>>
+
+<<if $phase is 0>>
+	<<dancedifficulty 1 600 true>>
+<<elseif $phase is 1>>
+	<<dancedifficulty 1 600 true>>
+	当你暴露了身体时，他们不断发出欢呼声。你不确定自己是否能在保持尊严的同时做好跳舞的任务。
+<<else>>
+	<<dancedifficulty 1 1000 true>>
+	在跳舞同时隐藏身体很困难。你希望这种害羞对某些事情来说是值得的。
+<</if>>
+<<danceskilluse>>
+<br><br>
+
+<<if $danceSuccess>>
+	<<pass 5>>
+	<span class="green">你吸引了他们的注意力。</span>他们不止一次伸手抓取，但你总能优雅地避开。音乐停止时，他们大喊大叫，并要求再来一次。
+	<br><br>
+
+	<<covered>>
+	<<if $speech_attitude is "meek">>
+		"我，我可以给你跳舞，"你说，"请带我回到岸上。"
+	<<elseif $speech_attitude is "bratty">>
+		"我的工作已经结束了，"你说，"你最好遵守约定。"
+	<<else>>
+		"我已经给你跳完舞了，"你说，"正如我们约定的那样。"
+	<</if>>
+	<br><br>
+
+	"好吧，"船长回答，喝完了<<his>>的酒。
+	<br><br>
+
+	他们让你呆在舱内，然后给了你几条毛巾来擦干身体。你很快就回到了码头上。
+	<br><br>
+	<<tearful>>你从船上爬下来。
+	<br><br>
+	<<dry>><<exposure>><<towelup>><<pass 30>>
+
+	<<endevent>>
+	<<link [[继续|Docks]]>><</link>>
+	<br>
+
+<<else>>
+	不幸的是，你<span class="red">滑倒</span>在潮湿的地板上。"不要担心，<<girl>>，"<<person1>><<person>>在<<his>>船员们笑得前俯后仰时说，"我们会扶你起来。"
+	<br><br>
+
+	<<link [[继续|Sea Boat Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

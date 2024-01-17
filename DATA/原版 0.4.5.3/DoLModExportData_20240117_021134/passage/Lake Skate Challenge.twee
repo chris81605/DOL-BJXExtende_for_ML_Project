@@ -1,0 +1,26 @@
+:: Lake Skate Challenge []
+<<effects>>
+你追赶<<person>>。当<<he>>注意到你跟在后面时，<<He>>开始加速。
+<<if $danceSuccess>>
+
+	<<if currentSkillValue('danceskill') gte 600>>
+		你轻松跟上并<span class="green">超过了<<him>>。</span>你在超过去之后转身对其眨了眨眼。
+	<<else>>
+		在对胜利的渴望的驱使下，你设法跟上，<span class="green">甚至超越<<him>></span>。你旋转并眨眼。
+	<</if>>
+	<<gcool>><<status 1>>
+	<br><br>
+
+	<<link [[继续|Lake Shallows Ice]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if currentSkillValue('danceskill') gte 800>>
+		<<Hes>>很快，<span class="red">太快了。</span>意识到你追不上了，你慢慢停下来。<<lcool>><<status -10>>
+	<<else>>
+		在你急于追赶的过程中，<span class="red">你失去了平衡。</span>你四肢摊开在冰面上。<<gpain>><<gstress>><<lcool>><<pain 4>><<stress 6>><<status -1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Lake Shallows Ice]]>><<endevent>><</link>>
+	<br>
+<</if>>

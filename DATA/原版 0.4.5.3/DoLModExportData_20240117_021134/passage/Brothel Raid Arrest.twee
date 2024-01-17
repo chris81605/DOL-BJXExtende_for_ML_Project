@@ -1,0 +1,46 @@
+:: Brothel Raid Arrest []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+两名警察带着你走过妓院主厅，停在了一个侧门处。
+<<if crimeSumCurrent() lte 900>>
+	有人打开了门。
+	<br><br>
+	"你看上去像个好人，"他说道。"没必要被卷入这事里。走吧。"
+	<<set _bribe to 0>>
+<<elseif crimeSumCurrent() lte 2000>><<set _bribe to 800>>
+	一名警察把手放在了门把手上。
+	<br><br>
+	"我们知道你是谁，"她说道，"卷入这里面可就有大麻烦了，给我们捐£_bribe，我们就当没见过你。"
+<<elseif crimeSumCurrent() lte 4500>><<set _bribe to Math.trunc(crimeSumCurrent())>>
+	一名警察站在门前。
+	<br><br>
+	"被抓进去可没你好果子吃，"另一名警察说道。"如果有£_bribe的话，我们可能就会分心，把你留在这扇无人把守的门附近了。"
+<<else>>
+<br><br>
+	"哈！我们找你有一会了，这次你可逃不掉了。"
+	<<set _bribe to 500000>>
+<</if>>
+<br><br>
+<<if _bribe is 0>>
+	<<link [[离开|Brothel Raid Leave]]>><</link>>
+<<else>>
+	<<if _bribe lt 500000>>
+		<<if $money gte (_bribe * 100)>>
+			<<link [["贿赂 (£" + _bribe + ")"|Brothel Raid Leave]]>><<set $money -= (_bribe * 100)>><</link>>
+			<br>
+		<<else>>
+			<span class="red">你需要至少£_bribe才能贿赂警察们。</span>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $promiscuity gte 35>>
+		<<link [[用肉体交易|Brothel Raid Arrest Sex]]>><<set $sexstart to 1>><<generatePolice 1>><<generatePolice 2>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+
+	<<if $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[不情愿地用肉体交易|Brothel Raid Arrest Sex]]>><<set $sexstart to 1>><<generatePolice 1>><<generatePolice 2>><<set $desperateaction to 2>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [[接受逮捕|Brothel Raid Arrest 2]]>><</link>>
+<</if>>
+<br>

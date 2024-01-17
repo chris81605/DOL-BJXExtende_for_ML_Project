@@ -1,0 +1,52 @@
+:: Flats Dog []
+<<effects>>
+
+你进入公寓，那个<<person>>放开了狗绳，
+<<saveNPC 0 "flats_2">>
+<<endevent>>
+<<beastNEWinit 1 "dog">>
+一只<<beasttype>>汪汪叫着
+<br><br>
+
+被放了出来。<<bhe>>绕着你的腿跑了一圈，然后冲进了厨房。
+<br><br>
+
+你将倒下的桌子扶正，把灯放回原位并测试了一下，然后开始清理被撕碎的装饰物。沙发已经毁了，但你可以让房间看起来整洁一些。
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		你用一个垃圾袋装满碎布，然后蹲下来清理沙发下面的空间。沙发离地面有一定的高度，刚好可以放得下你的身体。
+		<br><br>
+		当你蹲下时，你感觉到有什么东西拱了一下你的下体。那只<<beasttype>>爬到了你身上。
+		<br><br>
+
+		<<link [[继续|Flats Dog Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你用了好几个垃圾袋，终于把房间打扫干净了。然而当你转身离开时，你发现那只<<beasttype>>正面对着你。<<bHe>>咆哮着，<span class="pink">然后扑了过来。</span>
+		<br><br>
+
+		你设法逃到了卧室的安全地带，但不是没有受伤。<<beastescape>>
+		<br><br>
+
+		<<endevent>>
+		<<loadNPC 0 "flats_2">>
+		<<clearNPC "flats_2">>
+		"坏狗！"<<person1>><<person>>生气地说道。你听到了一声沉闷的撞击声，然后是一声哀鸣，卧室的门打开了。"对不起，"<<he>>说。"这是你的报酬，还有一些小费，就当是给你的补偿吧。"你获得了<<moneyGain 15>>。
+		<br><br>
+		<<link [[继续|Flats]]>><<pass 60>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你工作时那只<<beasttype>>一直都带着好奇的表情盯着你。你用了好几个垃圾袋，终于把房间打扫干净了。
+	<<endevent>>
+	<<loadNPC 0 "flats_2">>
+	<<clearNPC "flats_2">>
+	"干得好，"<<person1>><<person>>说道。"这是你的报酬。"你获得了<<moneyGain 10>>。
+	<br><br>
+
+	<<link [[继续|Flats]]>><<pass 60>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,203 @@
+:: History Classroom []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<<if _robin_location is "school">>
+	<<set $robinhistory to "active">>
+<<else>>
+	<<set $robinhistory to "missing">>
+<</if>>
+<<if $schoolstate is "fourth">>
+	<<classRoomEarSlime "history">>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<outfitChecks>>
+		/*Check for when the pc is only wearing an overcoat*/
+		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+			你正要去挂上你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，才想起你下面什么都没穿。
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
+			你正要去挂上你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，你才想起你下面只穿了泳衣。
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
+			你正要去挂上你的<<if _middleOutfit>>$worn.over_upper.cn_name_cap<<else>>$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap<</if>>时，你才想起你下面只穿了内衣。
+		<</if>>
+		<br><br>
+		<<npc Winter>><<person1>>
+		在你短暂犹豫时，温特说话了。“你不会以为我没注意到吧。自己去见校长。”
+		<br><br>
+		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
+		<br><br> good starting point for when you can go to class naked-->
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<elseif $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound">>
+		<<if $daily.school.attended.history>>
+			你重新加入了历史课，
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				并把外套挂在了教室的后面
+				<<undressOverClothes "historyClassroom">>
+			<</if>>
+			坐到了你的座位上。
+			<br><br>
+			<<link [[继续|History Lesson]]>><<endevent>><</link>>
+			<br>
+		<<elseif Time.minute lte 5>>
+			你走进历史教室。
+			<<npc Winter>><<person1>>
+			温特在教室的前面做着上课的准备，座位也逐渐坐满了。
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				<<undressOverClothes "historyClassroom">>
+				你把外套挂在了教室的后面。
+			<</if>>
+			<<if _robin_location is "school">>
+				罗宾朝你招手，指了指紧挨着<<nnpc_him Robin>>的空座位。
+				<br><br>
+				<<if random(1, 2) is 2>>
+					<<endevent>>
+					<<npc Robin>><<generatey2>><<person2>>
+					你走了过去，但一个<<person>>在你到之前就坐了在那里。
+					<br><br>
+					<<if _robin.dom gte 20>>
+						"不好意思，"罗宾说道，"我的<<if $robinromance is 1>><<girlfriend>><<else>>朋友<</if>>已经占了这个位置。"
+						<br><br>
+						<<if random(1, 2) is 2>>
+							"我先来的，" 那个<<person2>><<person>>回道，并拒绝换座。
+							<br><br>
+
+							<<link [[叫那个学生让开|History Robin Move]]>><</link>>
+							<br>
+							<<link [[找一个新的座位|History Robin New]]>><</link>>
+							<br>
+						<<else>>
+							"好吧，"那个<<person2>><<person>>回道。<<He>>抓起<<his>>的书包站起来。你坐到了罗宾的边上。
+							<br><br>
+							<<link [[继续|History Lesson]]>><<endevent>><<set $robinhistory to "seat">><</link>>
+							<br>
+						<</if>>
+					<<else>>
+						<<person1>>
+						罗宾低下了<<his>>的头。
+						<br><br>
+
+						<<link [[叫那个学生让开|History Robin Move]]>><</link>>
+						<br>
+						<<link [[找一个新的座位|History Robin New]]>><</link>>
+						<br>
+					<</if>>
+				<<else>>
+					<<link [[继续|History Lesson]]>><<endevent>><<set $robinhistory to "seat">><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				<br><br>
+
+				<<link [[继续|History Lesson]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			你走进历史教室。
+			<<npc Winter>><<person1>>
+			温特在讲到一半时停了下来，看着你。
+			<<if $daily.school.historyExcused>>
+				<<run delete $daily.school.historyExcused>>
+				"我原谅你的迟到，"<<he>>平静地说着，并指向你的座位。
+			<<else>>
+				<<He>>敲了敲<<his>>的手表，指向你的座位。
+				<<gdelinquency>>
+				<<detention 1>>
+			<</if>>
+			<br><br>
+			你
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				把外套挂在教室的后面，然后
+				<<undressOverClothes "historyClassroom">>
+			<</if>>
+			坐在自己的座位上，温特也继续上课。
+			<br><br>
+
+			<<link [[继续|History Lesson]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+
+	<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+		温特看着你的束缚。"无论原因是什么，你都必须在进我的教室前解决这个问题。自己去见校长。"
+		<br><br>
+
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		<<npc Winter>><<person1>>
+		温特看着你的穿着。"你不会以为我没注意到吧。自己去见校长。"
+		<br><br>
+
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<</if>>
+<<elseif $schoolstate is "lunch">>
+	<<classRoomEarSlime "history">>
+	你走进历史教室。
+	<<if _robin_location is "school" and $daily.school.lunchEaten is 1>>
+		罗宾已经到了。
+		<<if _robin.trauma gte 20>>
+			<<nnpc_He Robin>>盯着窗外。
+		<<elseif $robinromance is 1>>
+			<<nnpc_He Robin>>笑着冲你挥挥手。
+		<<else>>
+			<<nnpc_He Robin>>笑着挥手。
+		<</if>>
+		<<set $robinhistory to "seat">>
+	<<else>>
+		其他人还没有到。
+	<</if>>
+	你可以利用多出来的时间学习。
+	<br><br>
+	<<classgrades>>
+
+	<<schoolperiodtext>>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<!-- Should be changed once naked classes are a thing -->
+		你不认为你能在穿着不得体的情况下学习。
+		<br>
+	<<elseif !$worn.handheld.type.includes("bookbag")>>
+		<span class="blue">没有书包，你没法学习。</span>
+		<br>
+	<<else>>
+		<<historyicon>><<link [[学习历史|History Classroom Study]]>><</link>><<gstress>><<ghistory>>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Hallways]]>><</link>>
+	<br>
+<<elseif $schoollesson is 1>>
+	<<if $daily.school.historyInterrupted is 1>>
+		<<npc Winter>><<person1>>你进入历史教室。温特突然停止讲课，朝你这边看了看。"你每打断我一次，其他学生就少了一次学习的机会。我得给你记留堂。"<<He>>把你带出了门。
+		<<gdelinquency>>
+		<br><br>
+		<<detention 1>>
+
+		<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<<else>>
+		<<npc Winter>><<person1>>你进入历史教室。温特突然停止讲课，朝你这边看了看。"你需要我做什么？"看来你打断了课堂。
+		<br><br>
+		<<set $daily.school.historyInterrupted to 1>>
+
+		<<link [[道歉|History Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+		<br>
+		<<if $trauma gte 1>>
+			<<link [[嘲笑|History Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	你在历史教室里。这里气氛烦闷。
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		你把外套挂到教室的后面。
+		<br><br>
+	<</if>>
+	<<exhibitionclassroom>>
+
+	<<emptyClassroomMasturbationIntro>>
+	<<link [[离开教室 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>

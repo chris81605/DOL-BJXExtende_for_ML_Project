@@ -1,0 +1,84 @@
+:: Underground Robin Dice Intro 2 []
+<<effects>>
+
+<<He>>掷下石头骰子。骰子们在舞台上滚动发出了刺耳的声音。
+<br><br>
+<<set $uDice1 to random(1, 6)>>
+<<set $uDice2 to random(1, 6)>>
+<<set _d1Color to ["","green","blue","red"][Math.ceil($uDice1/2)]>>
+<<set _d2Color to ["","green","blue","red"][Math.ceil($uDice2/2)]>>
+
+<div id="die_text">
+	<span id="die_1">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_stone_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+
+	<span id="die_2">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_stone_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+	<br>
+	=
+	<br>
+</div>
+
+<<timed 2s>>
+	<<replace "#die_1">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_stone_' + $uDice1 + '.png'">
+	<<else>>
+		$uDice1
+	<</if>>
+	<</replace>>
+<</timed>>
+<<timed 4s>>
+	<<replace "#die_2">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_stone_' + $uDice2 + '.png'">
+	<<else>>
+		$uDice2
+	<</if>>
+	<</replace>>
+<</timed>>
+
+<<timed 5s>>
+	<span id="die_text">
+		<<if $uDice1 is $uDice2>>
+			<<switch $uDice1>>
+				<<case 1>>
+					<span @class="_d1Color">两个一</span>
+				<<case 6>>
+					<span @class="_d1Color">两个六</span>
+				<<default>>
+					<span @class="_d1Color">两个<<number $uDice1>></span>
+			<</switch>>
+		<<else>>
+			<span @class="_d1Color"><<Number $uDice1>></span>和<span @class="_d2Color"><<number $uDice2>></span>
+		<</if>>
+	</span>
+	<<replace "#temp_br">>
+		<br>
+	<</replace>>
+<</timed>>
+
+<<timed 6s>>
+	<<replace "#temp_br">>
+		<br>
+		($uDice1, $uDice2)
+	<</replace>>
+<</timed>>
+
+<span id="temp_br">
+	<br><br>
+</span>
+<br><br>
+
+<<link [[继续|Underground Robin Dice Intro 3]]>><</link>>
+<br>

@@ -1,0 +1,171 @@
+:: Flats Sneak []
+<<effects>>
+
+/* 北极星模组 */
+<<if $ghostIn>>
+	你成功地穿门而入。
+<<else>>
+	你成功地撬开门锁，推门而入。
+<</if>>
+/* 北极星 */
+<<if $skulduggery lt 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+
+<<cleareventpool>>
+
+<<addinlineevent "flats_sneak_1" 1>>
+室内被柔和的粉红色灯光照亮。墙上装饰着色情照片，沙发有一个奇怪的弧度。它看起来像一件珍贵的古董，但太大了，无法搬动。
+	<br><br>
+	<<set _blackmoney to 0>>
+	<<set _rng to random(1, 5)>>
+	<<switch _rng>>
+		<<case 1>>
+			地板上有一本古董杂志。在黑市上可能值一些钱。<<set _blackmoney += 10>>
+		<<case 2>>
+			桌子旁边有张面值20的外国钞票。在黑市上可能值一些钱。<<set _blackmoney += 20>>
+		<<case 3>>
+			桌子旁边有一条珍珠项链。在黑市上可能值一些钱。<<set _blackmoney += 30>>
+		<<case 4>>
+			桌子旁边有一副金色袖扣。在黑市上可能值一些钱。<<set _blackmoney += 40>>
+		<<default>>
+			桌子旁边有一枚古董戒指。它有一个奇怪的蜂窝形状，但是它是真金制成的。在黑市上可能值一些钱。<<set _blackmoney += 80>>
+	<</switch>>
+	<br><br>
+
+	<<link [[拿走|Flats]]>><<set $blackmoney += _blackmoney>><<crimeUp _blackmoney "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Flats]]>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_2" 1>>
+	<<npcClothesType $NPCList[0] "worker">>
+	<<generate1>><<person1>><<npcClothesType $NPCList[0] "bathrobe">>
+	你听到水声。有人在淋浴。公寓里没有什么不寻常的地方，但你找不到任何贵重物品，直到你在卧室里发现了一个保险箱。它有一种老式的锁定机制，你应该能够破解，但可能需要一些时间。
+	<br><br>
+	你听到一个<<personsimple>>的声音，那个人在淋浴间里唱歌。
+	<br><br>
+
+	<<set $skulduggerydifficulty to 400>>
+	<<link [[破解|Flats Sneak Crack]]>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_3" 1>>
+	风从一扇敞开的门吹进来，吹向一个阳台。周围一个人也没有，但你不确定这能持续多久。
+	<br><br>
+
+	<<if $flats_vents_init is undefined>>
+		你调查了一下阳台。除了晾着的衣服什么也没有。一个相邻的阳台靠得足够近，可以爬过去。你不确定那个公寓通常是如何进入的。那边没有门。
+		<br><br>
+		<<link [[到另一边阳台上去|Flats Sneak Terrace]]>><</link>><<willpowerdifficulty 1 400>>
+		<br>
+		<<link [[调查这间公寓|Flats Sneak Investigate]]>><</link>>
+		<br>
+	<<else>>
+		你在公寓里搜寻贵重物品，在床垫下找到了<span class="gold">£30</span>。
+		<br><br>
+
+		<<link [[拿走|Flats]]>><<moneyGain 30>><<crimeUp 30 "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开此处|Flats]]>><</link>>
+		<br>
+	<</if>>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_4" 1>>
+	<<generate1>><<person1>>
+	你关上门，窗户上拉上了厚重的窗帘，房间变得很暗。你摸索着找到了灯开关。房间被照亮，你发现一个<<person>>坐在椅子上，一只猫躺在<<his>>的腿上。<<He>>正盯着你看。
+	<br><br>
+
+	"我没想到会有客人，"<<he>>说。"更不用说是个闯入者了。你有什么话要说吗？"你注意到了<<his>>手上戴着的昂贵手表，你努力移开了目光。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[勾引|Flats Sneak Seduce]]>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<link [[袭击|Flats Sneak Attack]]>><</link>>
+	<br>
+	<<link [[逃跑|Flats Sneak Run]]>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<if crimeSumCurrent() gte 500>>
+	<<addinlineevent "flats_sneak_5" 0.2>>
+		一个刺鼻的气味弥漫在空气中，但公寓看起来除此之外很正常。然而，当你走了两步，门后面的金属百叶窗突然关闭，发出巨大的噪音。警报响了起来。
+		<br><br>
+
+		"警方已被通知，"机械音宣布。"预计到达时间：五分钟。请等待。"
+		<br><br>
+
+		窗户没有被百叶窗关闭，但是你在很高的楼层。制作一条绳子至少需要几分钟时间。
+		<br><br>
+
+		<<set $flats_alarm_fabric to 0>>
+		<<set $flats_alarm_time to 5>>
+
+		<<flats_alarm_links>>
+
+	<</addinlineevent>>
+<</if>>
+
+<<addinlineevent "flats_sneak_6" 1>>
+	<<generate1>><<person1>>
+	一个<<person>>在沙发上打着鼾。你小心翼翼地走过去，寻找战利品。你在卧室里找到了一盒珠宝，虽然各方面都比较平平无奇，但在黑市上可能值一些钱。
+	<br><br>
+
+	<<link [[拿走|Flats Sneak Snore]]>><<set $blackmoney += 30>><<crimeUp 30 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_7" 1>>
+	<<generate1>><<person1>>
+	你闻到烤蔬菜的味道。一个<<person>>站在厨房里，一边打电话，一边望着窗外。
+	<br><br>
+
+	<<His>>的<<wallet>>就在离<<him>>不远的桌子上。里面有<span class="gold">£40</span>。
+	<br><br>
+
+	<<link [[拿走|Flats Sneak Wallet]]>><<moneyGain 40>><<crimeUp 40 "petty">><</link>><<crime "petty">>
+	<br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_8" 1>>
+	墙上挂着一把古董枪，但它被固定得太牢，无法带走。你四处搜寻，从抽屉里找到了<span class="gold">£20</span>。
+	<br><br>
+
+	<<link [[拿走|Flats]]>><<moneyGain 20>><<crimeUp 20 "petty">><</link>><<crime "petty">>
+	<br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_9" 1>>
+	一个岩浆灯在角落里发出柔和的光芒，照亮了老式的装饰。但是，你找不到太多可以带走的有价值物品，不过你在一个鞋盒里发现了一些珠宝首饰。
+	<br><br>
+
+	<<link [[拿走|Flats]]>><<set $blackmoney += 30>><<crimeUp 30 "petty">><</link>><<crime "petty">>
+	<br>
+	<<link [[离开|Flats]]>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "flats_sneak_10" 1>>
+	房间里空荡荡一片。甚至连灯和开关也都不见了，只有电线悬挂着。你需要去别的地方找找看。
+	<br><br>
+	<<link [[离开|Flats]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<runeventpool>>

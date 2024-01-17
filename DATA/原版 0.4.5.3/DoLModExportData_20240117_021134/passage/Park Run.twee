@@ -1,0 +1,104 @@
+:: Park Run []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+
+
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+	你穿过荒凉的公园。寒冷的雨水不断打在你的身上
+	<<elseif $weather is "snow">>
+	你在空无一人的公园里奔跑着，寒冷的夜风抚过你的肌肤。
+	<<else>>
+	你在空无一人的公园里奔跑着，凉爽的夜风轻抚过你的肌肤。
+	<</if>>
+	<<rng>>
+
+	<<if random(1, 100) gte 95 and $cow gte 6 and $livestock_intro isnot undefined and $hospitalintro>>
+		<<npc Harper>><<person1>>一个身影从黑暗中窜出，在揽住你的腰之后，<<He>>又把一块抹布压在了你的嘴上。"你这只逃跑的小畜生，"<<he>>开口道，"我会带你回家的。现在，冷静下来吧。"你听出了这个声音，是哈珀医生。
+		<br><br>
+
+		你突然感到一阵头晕目眩。
+		<br><br>
+
+
+		<<link [[奋力挣扎|Park Run Harper Struggle]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+		<br>
+		<<link [[顺从|Park Run Harper Give]]>><</link>>
+		<br>
+	<<elseif $rng gte 91>>
+		<<generate1>><<person1>>
+		你听到身后响起脚步声，便回头瞥了一眼。<<person>>在跟踪，<span class="pink">纠缠着你。</span>
+		<br><br>
+
+		<<link [[继续|Park Run Stalk]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 33>>/*2/3 of time, do nothing*/
+		<<elseif $rng gte 22>>
+			<br><br>
+			在其中一个厕所的入口处，一大队人正呆在那里。<<if $weather is "rain">>那些家伙们围绕在厕所的周围，看起来像是在避雨。<</if>>
+			<<if $awareness lte 100>>这很奇怪。你不知道为什么这么多<<if $rng % 2>>男人<<else>>女人<</if>>会为同一个厕所排队，而旁边的厕所空无一人。也许是有人弄脏了。
+			<br>
+			<<elseif $awareness lte 300>>你不需要任何详细信息，你甚至都不用去看都知道那里到底有着怎样的肮脏交易。
+			<br>
+			<<else>>看来有人在其中的某个隔间里开了一个寻欢洞。
+			<br>
+			<</if>>你跑过。
+		<<elseif $rng gte 11>>
+			<br><br>
+			在公园的一个偏僻的地方，你发现了一片空地，一大群人正<<if $weather is "rain">>半裸着站在雨中，<<elseif $weather is "snow">>半裸着站在寒风之中，<<else>>赤身裸体地围绕在一起，场面肃穆沉默。<</if>>你仔细看了看，他们的中间环绕着一个祭坛。
+			所有的目光都聚集在你身上。
+			<br>
+			你加快速度，打算快速跑离这里。
+		<<elseif $rng gte 6>>
+			<<generate1>><<person1>>
+			<br><br>
+			在一处僻静的<<if $weather is "rain">>公园凉亭内，有人正在那里躲雨。<<else>>草地上，有人正在那里歇息。<</if>>
+			<<if $awareness lte 100>>
+				你震惊地看到一个<<person>>正在人群中间与一个陌生人做爱，而其他人不仅在看，其中的某些人甚至自摸了起来。
+				<<gawareness>><<awareness 2>>
+			<<elseif $awareness lte 300>>
+				在中间，一个<<person>>正在与人群中的陌生人发生性关系，而周围的围观者正在投钱。
+			<<else>>
+				如果这里不是公园的话，你都会认为这里是妓院了。毕竟那里有一场非常标准的性爱表演，一个<<person>>正在与人群中的"幸运观众"，也就是一个托，发生性关系，而观众们则会把钱塞进帽子里，乞求成为下一个幸运对象。
+				<<if $brothelintro is 1>>你认出这位<<person>>是丰收街妓院的工作人员。<</if>>
+			<</if>>
+			<br><br>
+			你<<if $awareness lte 100>>匆匆地<</if>>跑过。<<endevent>> /*tidy up people generated in this fork*/
+		<<else>>
+			<br><br>
+			你听到附近传来一声尖锐的尖叫声，接着是低沉的哭声，于是你放慢脚步，小心地在四周查看起来。
+			由于阴影的存在，你无法分辨声音来自何处，这时后面某处传来了沉重的砰砰声。转过身去的同时，你突然被强烈的监视感惊到竖起脖子上的汗毛。
+			<br>
+			<<if $speech_attitude is "bratty">>
+				<<if $physique gte ($physiquesize / 7) * 4>>你确实很强壮，身材苗条而且无所畏惧，
+				<<else>>你肯定不是一个会在战斗中退缩的人，<</if>>
+				但你不是个傻逼，你不会独自一个人进入阴影处去调查一个'奇怪的声音'。
+				<br><br>
+				"不是。"
+				<br>
+				你继续跑。
+			<<else>>
+				你不是英雄，所以就算你想去帮忙，你也没有那个能力。
+				<br><br>
+				你跑开了。
+				<br><br>
+				反正可能也没什么，也许只是有人想吓唬一下你，这就是它的真相。
+			<</if>>
+		<</if>>
+	<<physique 3>>
+	<br><br>
+	<<link [[继续|Park]]>><</link>>
+	<br>
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+	你在公园里跑步，很少有人敢于冒雨前行。
+	<<else>>
+	你在公园里奔跑着，其他的跑步者向你挥手致意。
+	<</if>>
+	<<physique 3>>
+	<br><br>
+	<<link [[继续|Park]]>><</link>>
+	<br>
+<</if>>

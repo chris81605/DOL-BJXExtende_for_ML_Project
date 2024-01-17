@@ -1,0 +1,27 @@
+:: Farm Ride Grab 2 []
+<<effects>>
+
+<<if currentSkillValue("handskill") gte random(1, 1000)>>
+	<<earnFeat "Into the Sunset">>
+	<<person2>><<person>>再次向你的<<beasttype>>投掷套索，<span class="green">但你抓住了它，</span>并将<<person2>><<person>>从<<his>>的座位上拉了下来。<<He>>摔倒在地。
+	<br><br>
+	<span class="green">你已经控制了局面。</span>你策马向前，把雷米的打手远远甩在后面。<<lstress>><<stress -6>>
+	<br><br>
+	<<person1>>
+	<<destination_farm_ride>>
+<<else>>
+	<<person2>><<person>>再次向你的<<beasttype>>投掷套索。你想抓住它，但它绕在你的手腕上。<span class="red">骑手把你从马鞍上拉下来。</span><<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	你的马独自疾驰而去。这两个人追着它跑，把你扔在泥土里。<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>>你站了起来。
+	<br><br>
+
+	<<if $bus is "east">>
+		<<link [[继续|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

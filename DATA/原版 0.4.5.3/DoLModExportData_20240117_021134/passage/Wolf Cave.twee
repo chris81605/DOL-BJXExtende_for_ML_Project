@@ -1,0 +1,86 @@
+:: Wolf Cave []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>><<getTarget true>>
+
+<<set $wolfpackharmony = Math.clamp($wolfpackharmony, 0, 22)>>
+<<set $wolfpackferocity = Math.clamp($wolfpackferocity, 0, 22)>><<set $bus to "wolfcave">>
+你在狼洞里。洞顶垂得很低。从后面吹来一阵微风。
+<<if $exposed gte 1>>
+	<<wolf_cave_plural>>并不在意，但不管怎么说，裸体都是让人很尴尬的。
+<</if>>
+<<storeon "wolfcave" "check">>
+<<if _store_check is 1>>
+	你的衣服藏在一块石头后面。
+<</if>>
+<<if $wolfstate is "hunt">>
+	大部分狼都出去打猎了。
+<<else>>
+	<<if $weather is "rain">>
+		狼群躲着雨。
+	<<elseif $weather is "snow">>
+		狼群躲着雪。
+	<<else>>
+		狼群正在休息。
+	<</if>>
+	<<wolfcavestate>>
+<</if>>
+<br><br>
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyBirthWolfCave>>
+<<elseif npcPregnancyEnding("Black Wolf") and !$possessed and $wolfstate is "cave">>
+	<<pregnancyBirthBlackWolf>>
+<<elseif $wolfevent gte 1 and !$possessed>>
+	<<set $wolfevent to 0>>
+	<<wolfcaveselect>>
+<<else>>
+	<<if !$possessed>>
+		<<storeactions "wolfcave">>
+	<<else>>
+		<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+			你低头盯着你的绑带。你一拉，它们就散架了，无法遮挡住你。
+			<br><br>
+			<<unbind>>
+		<</if>>
+	<</if>>
+	<<if $wolfcavedig gte 13>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>>
+	<<elseif $wolfcavedig gte 12 and $physiquesize lte 12000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+	<<elseif $wolfcavedig gte 11 and $physiquesize lte 10000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+	<<elseif $wolfcavedig gte 10 and $physiquesize lte 6000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+	<<elseif $wolfcavedig gte 1>>
+		<<getouticon "dig">><<link [[在洞的后面挖 (1:00)|Forest Wolf Cave Dig]]>><<pass 1 hour>><<set $wolfcavedig += 1>><</link>>
+	<<else>>
+		<<investigateicon>><<link [[检查洞穴的后面|Forest Wolf Cave Examine]]>><<set $wolfcavedig to 1>><</link>>
+	<</if>>
+	<br>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		<<ind>><<link [[磨断身上的束缚|Wolf Cave Unbind]]>><</link>>
+		<br>
+	<</if>>
+	<!-- Modified for monster people -->
+	<<getChildrenIds `{location: $location}`>>
+	<<if _childrenIds.length gt 0 or $knowsAboutDen is 1>>
+		<<wolfcaveicon "pup">><<link [[幼崽窝|Pups Den]]>><</link>>
+		<br>
+	<</if>>
+	<<wolfcaveicon "sleep">><<link [[睡觉|Wolf Cave Bed]]>><</link>>
+	<br>
+	<<if $nextPassageCheck is "Wolf Cave Clearing">>
+		<span class="nextLink"><<link [[出去|Wolf Cave Clearing]]>><</link>></span>
+	<<else>>
+		<<getouticon>><<link [[出去|Wolf Cave Clearing]]>><</link>>
+	<</if>>
+	<br><br>
+	<<link [[设置|Wolf Cave Settings]]>><</link>>
+	<br>
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br><br>
+<</if>>
+<<storecleanup>>

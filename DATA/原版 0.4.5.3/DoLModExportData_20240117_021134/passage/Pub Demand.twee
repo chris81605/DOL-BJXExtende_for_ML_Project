@@ -1,0 +1,195 @@
+:: Pub Demand []
+<<effects>>
+
+<<def 1>>
+<<if $speech_attitude is "meek">>
+"你只需要给我付钱，" 你说，"然后你可以对我做任何你想做的事。"
+<<elseif $speech_attitude is "bratty">>
+"好了。现在付钱吧，"你说，"否则你什么也得不到。"
+<<else>>
+"只要给我钱，我们就可以开始了，"你说。
+<</if>>
+<<promiscuity3>>
+
+<<if $phase is 1>>
+
+<<set $seductiondifficulty to (7000 - $pubdrink)>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+<<elseif $phase is 2>>
+
+<<set $seductiondifficulty to (9000 - $pubdrink)>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+<<else>>
+
+<<set $seductiondifficulty to (12000 - $pubdrink)>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+<</if>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<<if $pubnpc is 1>>
+
+	"这就是我得到的？在我的车里嫖娼？"<<He>>叹了口气，"我会付钱给你的。我就说我被抢劫了。"
+	<br><br>
+
+	<<link [[继续|Pub Sex 1]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+	<<elseif $pubnpc is 2>>
+
+	<<He>>看起来很受伤。"哦，没想到你是妓。我以为你只是喜欢我，我真是个白痴。"<<He>>坐在床上。"我会雇用你的。但……但只是因为我不想无缘无故地把你拖到这里来。"<<He>>向你伸出手。
+	<br><br>
+
+<<link [[继续|Pub Sex 2]]>><<set $sexstart to 1>><</link>>
+<br>
+
+	<<elseif $pubnpc is 3>>
+
+	<<He>>拼命地在<<his>>口袋里翻找钱，把零钱拼凑起来。<<He>>把钱扔在地上，再一次冲了出去。
+	<br><br>
+
+	<<link [[继续|Pub Sex 3]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+	<<elseif $pubnpc is 4>>
+
+	"你真是个狡猾的人，"<<he>>说。"我会付钱给你的。但是我明确的警告你，并不是每个人都欣赏独立的妓。你要注意点自己了。"
+	<br><br>
+
+	<<link [[继续|Pub Sex 4]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+	<<else>>
+
+	<<He>>笑了。"所以这就是你的游戏。让一个<<personsimple>>热血沸腾，然后利用他们的弱点。我可以尊重这一点。"<<He>>把你拉近。"但我们要用我的方式来做这件事。"
+	<br><br>
+
+	<<link [[继续|Pub Sex 5]]>><<set $sexstart to 1>><</link>>
+	<br>
+
+	<</if>>
+
+<<else>>
+<<set $phase to 0>>
+
+	<<if $pubnpc is 1>>
+
+		<<if $rng gte 81>>
+
+		"那就是这样了？你接下来要勒索我吗？"<<Hes>>恼羞成怒。"既然你让我干不成想干的事，我就只好自己捞点好处了。"<<He>>抓着你的胳膊，把你拉近。
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[继续|Pub Sex 1]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+		<<else>>
+
+		"这就是我得到的？在我的车里嫖娼？"<<he>>说，"请离开吧，我需要考虑一下我的决定。走吧。"
+		<br><br>
+
+		<<link [[继续|Harvest Street]]>><<endevent>><</link>>
+
+		<</if>>
+
+	<<elseif $pubnpc is 2>>
+
+		<<if $rng gte 81>>
+
+		<<He>>看起来很受伤。"哦，没想到你是卖淫的，我以为你只是喜欢我，但你操纵了我。"<<His>>的拳头握紧了。"你认为我是个白痴，不是吗。我让你看看谁才是白痴。"<<He>>抓着你。
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[继续|Pub Sex 2]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+		<<else>>
+
+		<<He>>看起来很受伤。"哦，没想到你是卖淫的，我以为你只是喜欢我，我真是个白痴。"<<He>>坐在床上。"请在我父母回家之前离开。我不想让他们看到你。"
+		<br><br>
+
+		<<link [[继续|Danube Street]]>><<endevent>><</link>>
+
+		<</if>>
+
+	<<elseif $pubnpc is 3>>
+
+		<<if $rng gte 81>>
+
+		<<He>>掏空了<<his>>的口袋，但只发现了几根绳子的碎片。<<He>>还是向你冲了过来。
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[继续|Pub Sex 3]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+		<<else>>
+
+		<<He>>掏空了<<his>>的口袋，但只发现了几根绳子。<<He>>恳切地看着你。
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[怜悯地做爱|Pub Sex 3]]>><<set $sexstart to 1>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[离开|Park]]>><<endevent>><</link>>
+		<br>
+
+		<</if>>
+
+	<<elseif $pubnpc is 4>>
+
+		<<if $rng gte 81>>
+
+		"你是个狡猾的人，"<<he>>说。"但我认为你没有资格提出任何要求。"
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[继续|Pub Sex 4]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+		<<else>>
+
+		"你是个狡猾的人，"<<he>>说。"但我想我会随他去的。小心点。不是每个人都欣赏独立的妓。"
+		<br><br>
+
+		<<link [[离开|Forest]]>><<endevent>><</link>>
+		<br>
+
+		<</if>>
+
+	<<else>>
+
+		<<if $rng gte 81>>
+
+		<<He>>笑了。"所以这就是你的游戏。让一个<<personsimple>>热血沸腾，然后利用他们的弱点。但是你犯了一个错误，在我冷静下来之前我是不会离开的。"
+		<br><br>
+		<<set $phase to 0>>
+
+		<<link [[继续|Pub Sex 5]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+		<<else>>
+
+		<<He>>笑了。"所以这就是你的把戏？把一个<<personsimple>>搞得心烦意乱，然后趁机利用他们的弱点是么？我承认这方法对大多数人都很有效。不过我可不吃这一套，你要找就去找别的傻瓜来折磨吧。"
+		<br><br>
+
+		<<link [[离开|Pub]]>><<endevent>><</link>>
+		<br>
+
+		<</if>>
+
+	<</if>>
+
+<</if>>

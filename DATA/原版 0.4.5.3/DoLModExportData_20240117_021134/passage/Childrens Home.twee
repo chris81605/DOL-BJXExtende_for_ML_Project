@@ -1,0 +1,68 @@
+:: Childrens Home []
+<<effects>>
+<<getChildrenIds `{location: $location}`>>
+<<switch $location>>
+	<<case "home">>
+		你正待在孤儿院的育儿室里，周围散落的排放着一些摇篮和小床。
+	<<case "wolf_cave">>
+
+		<<switch Time.dayState>>
+			<<case "dawn">>
+				众多的幼崽们正在睡觉。
+			<<case "day">>
+				小狼的叫声、咆哮声和细微的嚎叫声在岩壁上回荡着。
+			<<case "dusk">>
+				大多数幼崽们已经安顿下来过夜了。
+			<<case "night">>
+				幼崽们都睡着了，现在的巢穴里一片寂静。
+		<</switch>>
+
+	<<case "alex_cottage">>
+		你在小屋的育儿室内。 
+
+		<<switch Time.dayState>>
+			<<case "dawn">>
+				清晨的鸟鸣抚慰着房间里的所有人。
+
+			<<case "day">>
+				隔着小屋的墙，能听见农场传来的声音。
+			
+			<<case "dusk">>
+				轻柔的微风吹起窗帘。
+
+			<<case "night">>
+				满室寂静。
+
+		<</switch>>
+
+<</switch>>
+<br><br>
+<<childViewerDisplay _childrenIds>>
+<br><br>
+<<if $player.inventory.childrenToys>>
+	<<if !$storedChildrenToys[$location]>><<set $storedChildrenToys[$location] to []>><</if>>
+	<<link [[存放儿童玩具|Childrens Home Toys]]>><</link>>
+	<br>
+<<else>>
+	你没有为你的孩子买任何玩具，你应该去一趟玩具店。
+	<br>
+<</if>>
+<<if $location is "home">>
+	<<if V.plants['baby_bottle_of_breast_milk'] and V.plants['baby_bottle_of_breast_milk'].amount gt 0>>
+		<<link [[捐赠奶瓶|Childrens Donate Milk]]>><</link>>
+		<<if $pregnancyStats.orphanageMilkBottles gt 0>>
+			(<span class="green"><<print $pregnancyStats.orphanageMilkBottles>></span>剩余瓶数)
+		<<else>>
+			(<span class="red"><<print $pregnancyStats.orphanageMilkBottles>></span>剩余瓶数)
+		<</if>>
+	<<else>>
+		你没有瓶装母乳可供捐赠。
+		<<if $pregnancyStats.orphanageMilkBottles gt 0>>
+			(<span class="green"><<print $pregnancyStats.orphanageMilkBottles>></span>剩余瓶数)
+		<<else>>
+			(<span class="red"><<print $pregnancyStats.orphanageMilkBottles>></span>剩余瓶数)
+		<</if>>
+	<</if>>
+	<br>
+<</if>>
+<<link [[返回|$exitPassage]]>><<unset $exitPassage>><</link>>

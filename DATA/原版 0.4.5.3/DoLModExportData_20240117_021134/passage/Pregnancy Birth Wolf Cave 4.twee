@@ -1,0 +1,67 @@
+:: Pregnancy Birth Wolf Cave 4 []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+给它们起了名字，你把孩子们召集起来。
+<br><br>
+
+<<if $monster is 1>>
+
+	<<if pregnancyCountBetweenParents("pc", "Black Wolf") gte 2 or $knowsAboutDen is 1>>
+		"来吧，"<<bhe>>说。"现在去看看小狼崽的窝。"当你把幼崽抱在怀里时，<<bhe>>就在你身边蹭，<<bhe>>带你穿过隧道来到幼崽的巢穴，在那里，新生的幼崽加入了狼群中其他幼崽的行列。
+		<br><br>
+
+	<<else>>
+		"来吧，"黑狼说。"我们去看看<<ppackbrother>>幼崽的巢穴。"当你把小狼崽抱在怀里时，<<bhe>>就在你身边蹭，<<bhe>>带你穿过隧道，来到另一个僻静的房间。这个洞穴似乎是狼群中所有幼崽和新生幼崽的家。你自己的孩子会被其他幼崽以及照顾他们的<<wolf_cave_plural>>所接纳。
+		<br><br>
+
+		<span class="gold">你现在可以进入幼崽的巢穴了。</span>
+		<br><br>
+
+		<<set $knowsAboutDen to 1>>
+
+	<</if>>
+
+<<else>>
+
+	<<if pregnancyCountBetweenParents("pc", "Black Wolf") gte 2 or $knowsAboutDen is 1>>
+		黑狼绕着你的身体转，把你赶到隧道入口。当你把幼崽抱在怀里时，<<bhe>>就在你身边蹭，带你穿过隧道来到幼崽的巢穴，在那里，新生的幼崽加入了狼群中其他幼崽的行列。
+
+	<<else>>
+		黑狼绕着你的身体转，把你赶到隧道入口。当你把小狼崽抱在怀里时，<<bhe>>就在你身边蹭，<<bhe>>带你穿过隧道，来到另一个僻静的房间。这个洞穴似乎是狼群中所有幼崽和新生幼崽的家。你自己的孩子会被其他幼崽以及照顾他们的<<wolf_cave_plural>>所接纳。
+		<br><br>
+
+		<span class="gold">你现在可以进入幼崽的巢穴了。</span>
+		<br><br>
+
+		<<set $knowsAboutDen to 1>>
+
+	<</if>>
+
+<</if>>
+
+<<if $syndromewolves isnot 1>>
+	<<if $bestialitydisable is "f">>
+		<span class="red"><i>当你生下自己的小狼崽后，你发现它们只是可爱的动物。</i>你获得了"斯德哥尔摩综合症:狼群"特质。</span>
+		<br><br>
+	<<else>>
+		<span class="red"><i>生下自己的幼崽后，你发现它们只是可爱的小怪物。</i>你获得了"斯德哥尔摩综合症:狼人"特质。</span>
+		<br><br>
+	<</if>>
+	<<if $loveInterest.primary is "None" and $deviancy gte 35>>
+		<<set $loveInterest.primary to "Black Wolf">>
+		<span class="gold">黑狼现在是你的爱人了！<<bHe>>似乎很高兴找到了伴侣。</span>
+	<<elseif $deviancy gte 35>>
+		<span class="gold">你现在可以将黑狼称作是你的爱人了！<<bHe>>似乎很高兴找到了伴侣。
+		<br>
+		你可以在"态度"菜单中改变你的爱情对象。</span>
+	<<else>>
+		<span class="blue">你不确定一个<<beasttype>>是否会成为一个好的爱情对象……</span>
+	<</if>>
+	<br><br>
+	<<set $syndromewolves to 1>>
+	<<set $wolfevent to 0>>
+	<<set $wolfstate to "cave">>
+	<<set $wolfpackferocity to 10>>
+	<<set $wolfpackharmony to 10>>
+<</if>>
+<<link [[继续|Wolf Cave]]>><<clotheson>><<set $eventskip to 1>><<set $wolfevent to 0>><<endevent>><</link>>

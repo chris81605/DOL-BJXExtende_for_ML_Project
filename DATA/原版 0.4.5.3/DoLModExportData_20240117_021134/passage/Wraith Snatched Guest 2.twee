@@ -1,0 +1,44 @@
+:: Wraith Snatched Guest 2 []
+<<pass 5>><<effects>><<getTarget>><<set $phase2 to 1>>
+<<if $willpowerSuccess>>
+	<span class="green">你努力挤出一口短呼气。</span>
+	<br><br>
+<</if>>
+<<if $location is "home">>
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		<<set _bedGuest to "Robin">>
+	<<else>>
+		<<set _bedGuest to "Kylar">>
+	<</if>>
+<<elseif $location is "cabin">>
+	<<set _bedGuest to "Eden">>
+<</if>>
+你把手放在<<nnpc_his _bedGuest>>的脸颊上，但你无法感受到它。你轻轻地抚摸着。
+<br><br>
+<<if $wraithBedSpeech>>
+	<<silently>><<speechWraith _bedGuest>><</silently>>
+	你用低沉的声音说道："<span class="wraith">_line1<<if $rng lte 10>>_line2<</if>></span>"
+	<br><br>
+
+	你慢慢地转身离开。
+<<else>>
+	<<if $tentacledisable is "f" and random(0, 1)>>
+		你听到一声微弱的声响。毯子在移动。你可以看到苍白的触手爬进你的视野，它们开始爬上床，爬到<<nnpc_him _bedGuest>>身上。
+		<br><br>
+		<<nnpc_He _bedGuest>>轻轻一动，所有触手都啪的一声消失了，无声无息。
+	<<else>>
+		另一只手轻轻触摸<<nnpc_him _bedGuest>>。然后另一只放到了<<nnpc_his _bedGuest>>的胸前。另一个开始抚摸<<nnpc_his _bedGuest>>的腹部。
+		<br><br>
+		<<nnpc_He _bedGuest>>轻轻一动，所有的手臂都啪的一声消失了，无声无息地消失在视线之外。
+	<</if>>
+	<br><br>
+	<<nnpc_He _bedGuest>>继续，你感觉不到自己的呼吸。
+<</if>>
+<br><br>
+<<switch $wraith.exit>>
+	<<case "home">>
+		<span class="nextLink"><<link [[离开|Bedroom]]>><</link>></span>
+	<<case "cabin">>
+		<span class="nextLink"><<link [[离开|Cabin Actions]]>><</link>></span>
+<</switch>>
+<br>

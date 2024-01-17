@@ -1,0 +1,31 @@
+:: Elk Compound Bluff []
+<<set $outside to 1>><<set $location to "compound">><<effects>>
+<<if $speech_attitude is "meek">>
+	"我——我——"你结结巴巴地说道："我不小心将我的球踢到了栅栏后面，我只是想将它拿回来。" 在说着的同时假装羞愧地低下了头。
+<<elseif $speech_attitude is "bratty">>
+	你转身面向<<him>>的同时双手叉腰。"你有事么？"你回应道："我有权利在这里，如果你还重视你的工作的话，那就不要再打扰我了。"
+<<else>>
+	"我在送东西，"你继续说道，"如果你不信的话，去问问你的老板。"
+<</if>>
+<br><br>
+<<skulduggeryuse>>
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<set $compoundbluff to 1>>
+	<<if $speech_attitude is "meek">>
+		<<He>>叹了口气。"愚蠢的<<girl>>，你应该明白的，不要去任何你所不了解的地方。现在去找你的球然后直接离开，好吗？"<span class="green">你点点头，然后就离开了。</span>
+	<<elseif $speech_attitude is "bratty">>
+		你的话明显让<<him>>有些害怕。"请等一下，"<<he>>回应道。"请让我和我的主管确认一下。"<<He>>转身离开去找对讲机进行询问，而这就是你想要的效果。<span class="green">你趁着<<his>>转身的时候偷偷溜走了。</span>
+	<<else>>
+		"那你真的不应该到处溜达，"<<he>>继续说道，"你要做的就是在忙完之后赶紧离开，这里可并不安全。"<span class="green">你点点头，然后离开了。</span>
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Elk Compound]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	"不错的尝试，但你别想跑。"<span class="red"><<He>>将你的胳膊抓得更紧了。</span>
+	<br><br>
+	<<link [[继续|Elk Compound Underground]]>><</link>>
+	<br>
+<</if>>

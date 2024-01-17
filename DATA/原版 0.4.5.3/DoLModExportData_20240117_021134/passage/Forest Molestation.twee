@@ -1,0 +1,35 @@
+:: Forest Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<generate1>><<generate2>><<maninit>>
+	一个<<fullGroup>>进入视野，<<person1>>当他们从你身边经过时，突然伸出手来抓住你！
+	<br><br>
+	<<forestRescueSetup>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 2>>
+	<span id="next"><<link [[继续|Forest Coop Rescue]]>><<set $phase to 0>><</link>></span><<nexttext>>
+<<elseif _combatend>>
+	<span id="next"><<link [[继续|Forest Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Molestation]]>><</link>></span><<nexttext>>
+<</if>>

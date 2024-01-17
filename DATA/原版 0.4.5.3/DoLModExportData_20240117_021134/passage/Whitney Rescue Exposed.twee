@@ -1,0 +1,37 @@
+:: Whitney Rescue Exposed []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+惠特尼拖着你穿过走廊直到你们到达一个储物柜前。路过的<<peopley>>直勾勾地看着你们，但<<he>>
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 15>>
+	恐吓地瞪了回去。
+<<else>>
+	丝毫不理会他们。
+<</if>>
+<br><br>
+
+<<He>>撬开柜子，伸到里面，拽出
+<<if $forcedcrossdressingdisable is "f">>
+	<<if random(1)>>
+		<<set $whitneyRescueUniform to "m">>
+		一件男孩的制服。
+	<<else>>
+		<<set $whitneyRescueUniform to "f">>
+		一件女孩的制服。
+	<</if>>
+<<else>>
+	<<set $whitneyRescueUniform to $player.gender_appearance>>
+<</if>>
+<<if $player.gender_appearance isnot $whitneyRescueUniform>>
+	<<He>>露出坏笑。
+	<<if $schoolrep.crossdress gte 3>>
+		"穿上这个你应该会有家的感觉。"
+	<<else>>
+		"总比什么都没有强。"
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[穿上|Whitney Rescue Exposed 2]]>><<set $phase to 1>><<npcincr Whitney dom 1>><</link>><<gdom>>
+<br>
+<<link [[拒绝|Whitney Rescue Exposed 2]]>><<set $phase to 0>><<npcincr Whitney dom -1>><<npcincr Whitney lust 10>><</link>><<ldom>><<gglust>>
+<br>

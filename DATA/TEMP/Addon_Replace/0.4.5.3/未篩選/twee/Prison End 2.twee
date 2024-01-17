@@ -1,0 +1,52 @@
+:: Prison End 2 []
+<<effects>>
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<methodical_guard 3 cap>>带你来到了塔楼中央。
+<<else>>
+	<<methodical_guard 3 cap>>拷住了你，然后带你来到了塔楼中央。
+<</if>>
+其他几个警卫都在那里候着。
+<br><br>
+
+<<if $prison.guards gte 80>>
+	"要是所有囚犯都像你这样就好了，"<<relaxed_guard 0>>叹了一口气。
+<<elseif $prison.guards gte 40>>
+	"这次给我乖点，"<<relaxed_guard 0>>耸耸肩。
+<<else>>
+	"我非常怀疑你很快又会给我们惹麻烦，"<<relaxed_guard 0>>叹了口气。
+<</if>>
+<br><br>
+
+<<methodical_guard 3 cap>><<person4>>坐在桌子后面，翻找着柜子上的文件。"恭喜你又成为了社会的公民，"<<he>>敲着手中的笔。
+
+<<if $prison.methodical_guard gte 80>>
+	"哦，呃……我很荣幸？"
+<<elseif $prison.methodical_guard gte 40>>
+	"谢谢你的合作。"
+<<else>>
+	<<He>>一言不发地把整理好的文件订在了一起。
+<</if>>
+<br><br>
+
+<<storeon "prison intro" check>>
+<<if _store_check is 1>>
+	"这是你的东西，"<<relaxed_guard 0>>捧起一堆你原先的衣服，然后把它们塞给了你。
+	<<storeon "prison intro">>
+	<<exposure>>
+	<<if $exposed gte 1>>
+		他们没有给你任何遮蔽你身子的东西就把你推倒了另一扇门前。
+	<<else>>
+		他们看着你穿衣，然后把你推到了另一扇门前。
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<relaxed_guard 0 cap>>没有给你任何遮蔽你身子的东西就把你推倒了另一扇门前。
+	<<else>>
+		<<relaxed_guard 0 cap>>推着你到了另一扇门前。
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[继续|Prison End 3]]>><</link>>
+<br>

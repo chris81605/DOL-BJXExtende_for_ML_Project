@@ -1,0 +1,35 @@
+:: Moor Bird Wake []
+<<effects>>
+
+<<if $syndromebird gte 1>>
+	<<npc "Great Hawk">>
+	你在一间石头房里醒来，一片羽毛覆盖着你。是一张翅膀。
+	<<if $monster is 1>>
+		<<beasttype>>在你身边鸣叫。
+	<<else>>
+		"很高兴你没事，"<<beasttype>>说，"我看到你睡过去了，非常危险。你要小心，累了的话就来巢这边。"
+	<</if>>
+	<br><br>
+
+	<<bHis>>的翅膀紧紧包围着你，一会后，才给予了你应有的自由空间。
+	<br><br>
+
+	<<if ($leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound")>>
+		<<bHe>>好奇地看着你身上的束缚，突然向你猛地伸出爪子。<span class="green">你身上的束缚碎成了布条。</span>
+		<<unbind>>
+		<br><br>
+	<</if>>
+
+	<<set $bird.timer to 60>>
+	<<set $bird.state to "home">>
+
+	<<link [[鹰塔|Bird Tower]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<npc "Great Hawk">>
+	风在你身边呼呼吹过，你感觉自己漂浮着。有一双爪子抓着你的肩膀。你正身处高空中。你抬头一看，一只<<beasttype>>抓着你，<<bhis>>的翅膀正拍打着。
+	<br><br>
+
+	<<link [[继续|Bird Capture]]>><</link>>
+	<br>
+<</if>>

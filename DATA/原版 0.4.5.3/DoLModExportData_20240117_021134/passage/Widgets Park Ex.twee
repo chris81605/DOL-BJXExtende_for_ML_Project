@@ -1,0 +1,41 @@
+:: Widgets Park Ex [widget]
+<<widget "parkex1">>
+	<<generate1>>你继续前进，并尽可能地将身体隐藏在灌木丛中。当你在一棵树旁窥探时，一双手臂从后面缠住你，并将你压倒在地。
+	<br><br>
+
+	<<set $molestationstart to 1>>
+
+	<span id="next"><<link [[继续->Park Woman]]>><</link>></span><<nexttext>>
+<</widget>>
+
+<<widget "parkex2">>
+	你听到身旁突然传来咆哮声。
+	<br><br>
+
+	<!-- Modified for Beast People -->
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if Time.dayState isnot "night">>
+		这里到处都是人，如果你跑起来的话，你一定会被看到的。
+		<br><br>
+		<</if>>
+		<<link [[跑|Park Ex Run]]>><</link>>
+		<br>
+		<<link [[留在原地|Park Ex Dog Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你转身逃跑，虽然你成功设法逃脱了，但衣服却更破了。<<beastescape>>
+		<br><br>
+
+		<<destinationeventend>>
+	<</if>>
+<</widget>>
+
+<<widget "parkex3">>
+	你来到河上的一座桥边，这座桥很长，如果有人在你过桥的时候来到这里的话，你将无处可躲。
+	<br><br>
+
+	<<link [[冒着风险过桥|Park Ex Bridge]]>><<stress 6>><</link>><<gstress>>
+	<br>
+	<<link [[游过去|Park Ex River]]>><</link>><<swimmingdifficulty 1 500>>
+	<br>
+<</widget>>

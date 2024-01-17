@@ -1,0 +1,28 @@
+:: Pharmacy Ask Custom Lenses []
+<<if $daily.pharm.impatient gt 2>>
+	"看看这个小贼，" 护士绷着脸说道，"现在出去，你已经浪费了我的时间了，如果你玩完了你的小把戏，那就明天再来试试吧！"
+	<br><br><<getouticon>><<link [[离开|Pharmacy Lenses]]>><</link>>
+<<else>>
+	<<if $custom_lenses_already_ordered is 1>>
+		"我希望你上次订购的那些东西能让你满意，"护士说道，"你知道价格的，<<printmoney 45000>>的眼镜费用，加上<<printmoney 5000>>的快递费。如果你为每只眼睛都挑选一种不同颜色的话，那么一共就是<<printmoney 95000>>"
+	<<else>>
+		"对现有的样子不满意么？"护士问道，
+		"我可以订购你选择的颜色，但这将使成本增加一倍。计算一下，<<printmoney 45000>>的眼镜费用，加上<<printmoney 5000>>的快递费。如果你为每只眼睛都挑选一种不同颜色的话，那么一共就是<<printmoney 95000>>。"
+	<</if>>
+	<br><br>
+	<<if $money gte 50000>>
+		<<ind>><<link [[自定义你的隐形眼镜瞳色|Pharmacy Select Custom Lenses]]>><<set $pharmacy_order_colours to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="purple">你买不起这个东西。</span>
+		<br>
+	<</if>>
+	<<if $money gte 95000>>
+		<<ind>><<link [[为你的双眼选择不同的瞳色|Pharmacy Select Custom Lenses]]>><<set $pharmacy_order_colours to 2>><</link>>
+		<br>
+	<<elseif $money gte 50000>>
+		<span style="color:#566a9b; cursor:pointer">为你的双眼选择不同的瞳色</span><span class="purple">你买不起这个东西。</span>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|Pharmacy Lenses]]>><</link>>
+<</if>>

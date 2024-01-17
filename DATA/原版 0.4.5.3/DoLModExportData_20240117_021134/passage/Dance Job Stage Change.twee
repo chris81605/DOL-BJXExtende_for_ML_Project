@@ -1,0 +1,45 @@
+:: Dance Job Stage Change []
+<<effects>>
+
+<<if $audienceexcitement gte 80>>
+	<span class="green">欢呼声萦绕着舞台。</span><<gginterest>><<dance_job_interest 10>>
+<<elseif $audienceexcitement gte 60>>
+	<span class="blue">舞台上充斥着嘲笑声。</span>
+<<else>>
+	<span class="red">台下传来阵阵嘘声。</span><<llinterest>><<dance_job_interest -10>>
+<</if>>
+<br><br>
+<<endevent "phaseless">>
+<<loadNPC 0 "dance_job_stage">><<person1>>
+你冲向了<<person>>。<<covered>>
+<br><br>
+
+"你还想去哪儿？"<<he>>问道。"有观众在等你。"
+<br>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"但，但是灯光，"你说，"在灯光下观众什么都看到了！"
+	<<elseif $speech_attitude is "bratty">>
+		“操！你快给我件衣服穿！”你说道。
+	<<else>>
+		“我才不要在灯光下出去，”你说道。“谁都能看到我现在一丝不挂的样子！”
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		“我，我不能这样出去！”你说道。
+	<<elseif $speech_attitude is "bratty">>
+		"我怎么能受这种羞辱！"你说道。
+	<<else>>
+		“我不会这样出去的！”你说。
+	<</if>>
+<</if>>
+<br>
+"那你别想要酬劳了，"<<person>>回答。"要么让开要么滚回去，我还得收拾这个烂摊子。"
+<br><br>
+
+
+<<link [[走回舞台|Dance Job Stage Exposed]]>><<trauma 12>><<stress 18>><<dance_job_interest 20>><</link>><<ggtrauma>><<gggstress>><<ggginterest>>
+<br>
+<<link [[离开|Dance Job Stage Leave]]>><<endevent>><</link>>
+<br>

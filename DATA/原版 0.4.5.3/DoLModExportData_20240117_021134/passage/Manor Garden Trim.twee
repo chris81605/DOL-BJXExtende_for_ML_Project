@@ -1,0 +1,41 @@
+:: Manor Garden Trim []
+<<effects>>
+
+你用一把大剪刀修剪花园周围荒凉的树篱。
+<<if $tendingSuccess>>
+	带刺的树枝缠绕扭曲，<span class="green">但你可以驯服它们。</span>
+	<br><br>
+<<else>>
+	带刺的树枝似乎在寻找你，
+	<<if $exposed gte 2>>
+		<span class="red">划伤了你的皮肤。</span><<gpain>><<pain 4>>
+	<<else>>
+		<span class="red">刮烂了你的衣服。</span>
+		<<set $worn.upper.integrity -= 10>>
+		<<set $worn.lower.integrity -= 10>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 80>>
+	你觉得你还没到老眼昏花的地步，但确实有一只手臂从树篱中伸出，帮助你切断了倒钩——可你转身的时候什么也没看到。
+<<elseif $kylar_parents_trust gte 60>>
+	当透过树枝隐约看到苍白的眼睛时，你的心咯噔了一下。或者，只是你神志不清？
+<<elseif $kylar_parents_trust gte 40>>
+	有歌曲的片段，从风中模糊地传来。
+<<elseif $kylar_parents_trust gte 20>>
+	你觉得你听到身后有什么声音——也许是风声。
+<<else>>
+	你打了个寒颤，看到有个身影从庄园二楼的窗户上一闪而过。<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">庄园比你来的时候整洁多了。你应该去凯拉尔的房间找<<nnpc_his "Kylar">>。</span>
+	<br><br>
+<</if>>
+
+<<link [[继续|Manor Garden]]>><</link>>
+<br>

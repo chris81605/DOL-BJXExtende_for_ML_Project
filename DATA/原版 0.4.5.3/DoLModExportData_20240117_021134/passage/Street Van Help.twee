@@ -1,0 +1,47 @@
+:: Street Van Help []
+<<effects>>
+
+你接受了<<persons>>的提议，开始帮<<him>>把箱子搬进屋里。
+
+<<if $rng gte 81>>
+	这些箱子里装满了水果，非常沉。
+<<elseif $rng gte 61>>
+	这些箱子里装满了蔬菜，非常沉。
+<<elseif $rng gte 41>>
+	这些箱子里装满了电子产品。
+<<elseif $rng gte 21>>
+	这些箱子里装满了洗漱用品。
+<<else>>
+	这些箱子里装满了衣服。
+<</if>>
+货车上的货物被陆续清理出来。<<physique 6>>
+<br><br>
+
+<<rng>>
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $rng gte 51 and $beauty gte ($beautymax * 0.8)>>
+	你正要从货车上搬走最后一个箱子，突然听到身后的车门砰地一声关上了。你试图打开车门，<span class="red">但车门已经从外面锁上了。</span><<gstress>><<stress 6>>
+	<br><br>
+
+	你检查面包车的前面，但一块金属板将你和驾驶位隔开。
+	<br><br>
+
+	引擎启动了。你随着面包车的移动而摇晃。
+	<br><br>
+
+	<<set $skulduggerydifficulty to 1100>>
+	<<link [[寻找逃跑路线|Street Van Search]]>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<link [[大力撞开车门|Street Van Bash]]>><</link>><<physiquedifficulty 1 22000>>
+	<br>
+	<<link [[顺其自然 (1:00)|Street Van Journey]]>><<pass 60>><</link>>
+	<br>
+<<else>>
+	"谢谢，"当你放下最后一个盒子时，<<person>>说，"你真是我的救命稻草。给你，你赚的每一分钱。"
+
+	<span class="gold">你赚到了£30。</span>
+	<<set $money += 3000>>
+	<br><br>
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

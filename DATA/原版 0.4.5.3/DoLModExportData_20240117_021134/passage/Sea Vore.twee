@@ -1,0 +1,44 @@
+:: Sea Vore []
+<<if $location isnot "sea">><<location "sea">><</if>><<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<molested>>
+	<<controlloss>>
+	<<if $tentacledisable is "f" and $hallucinations gte 1>>
+		<<set $enemytype to "tentacles">>
+		<<tentaclestart 2 15>>
+		<<set $tentacles[0].shaft to "leftarm">><<set $leftarm to "tentgrappled">><<set $lefttarget to "tentacles">>
+		<<set $tentacles[1].shaft to "rightarm">><<set $rightarm to "tentgrappled">><<set $righttarget to "tentacles">>
+		<span class="purple">一个$tentacles[0].fullDesc和$tentacles[1].fullDesc从中出现，抓住了你的手臂。</span>
+		<br><br>
+	<<else>>
+		<<set $enemytype to "vore">>
+	<</if>>
+	<<set $vorestage to 1>>
+	<<set $vorecreature to "whale">>
+	<<set $vorestrength to 1>><<set $position to "doggy">>
+	<<if $hallucinations gte 1>>
+		<<set $voretentacles to 1>>
+	<<else>>
+		<<set $voretentacles to 0>>
+	<</if>>
+	<<resetLastOptions>>
+	<<getCombatDefaultsType>>
+<</if>>
+<<if $tentacledisable is "f" and $hallucinations gte 1 and $enemytype is "tentacles">>
+	<<voreeffects>><<effectstentacles>>
+	<<vore>><<tentacles>>
+	<<statetentacles>>
+	<br><br>
+	<<actionsvorentacles>>
+<<else>>
+	<<voreeffects>>
+	<<vore>>
+	<<voreactions>>
+<</if>>
+<<if $stress gte $stressmax or $vorestage lte 0 or $vorestomach gte 5>>
+	<span id="next"><<link [[继续|Sea Vore Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Vore]]>><</link>></span><<nexttext>>
+<</if>>

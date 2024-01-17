@@ -1,0 +1,86 @@
+:: Monster Tower Wake []
+<<set $outside to 0>><<effects>>
+
+<<if $exposed gte 2>>
+	<<rng 2>>
+<<else>>
+	<<rng 3>>
+<</if>>
+
+<<tower_creature_text>>笨拙地朝你走来，停在你触手可及的地方。
+
+<<if $NPCList[0].monster is "monster">>
+	<<bHis>>强烈的目光让你感到不安。"需要更漂亮一些。"<<bhe>>吼叫道。
+<<else>>
+	你能感觉到<<bhis>>灼热的呼吸喷在你的脸上。<<bHe>>愤怒地哼了一声。
+<</if>>
+<br><br>
+
+<<switch $rng>>
+	<<case 1>>
+		<<bHis>>发光的眼睛上下审视着你身体的每一寸，直到<<bhis>>的目光被你身后的某样东西所吸引。
+		<br><br>
+
+		当<<bhe>>缩短了你们之间的距离时，你全身的血液仿佛瞬间凝固，但是<<bhim>>仅仅只是从你身边经过。<<bhe>>从堆里拿出一条项链，然后后退一步再次打量着你。过了一两分钟，<<bHe>>将项链戴在你头上，让它滑落到你的脖子上。
+		<br><br>
+
+		<<link [[保持不动 (1:00)|Monster Tower Decorate]]>><<pass 60>><<set $phase to 0>><<tiredness 12>><<pain 2>><<stress 18>><</link>><<ggtiredness>><<ggstress>><<gpain>>
+		<br>
+		<<link [[反抗|Monster Tower Decorate]]>><<set $phase to 1>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+	<<case 2>>
+		<<if $NPCList[0].monster is "monster">>
+			<<bHe>>抓住你的手腕，又抓起了一把周围散落的小饰品。
+		<<else>>
+			<<bHe>>用一条前腿环住你的腰，然后用嘴叼起尽可能多的饰品。
+		<</if>>
+		<br><br>
+
+		你毫无招架之力地被拖到<<bhis>>巢穴的一个角落里，那里有一根大管道悬挂在上方。<<bHe>>推开一些垃圾，露出了下面的排水格栅。你并不清楚<<bhis>>的意图，所能做的就是坐在<<bhis>>的宝藏堆里静静观望。
+		<br><br>
+
+		<<tower_creature_text>>拖着脚步走到一扇锈迹斑斑的阀门前，紧握住它。随着金属的吱吱呀呀的响声，阀门被打开了。滚烫的热水从管道中涌出。<<bHe>>伸出手探入到水流中，似乎是在测试水温。最后，<<bHe>>满意地点点头。
+		<br><br>
+
+		<<link [[继续|Monster Tower Clean]]>><</link>>
+		<br>
+	<<case 3>>
+		<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked">>
+			<<overupperruined>><<overlowerruined>>
+			<<bHe>>向你挥动爪子，只需一击，便把你的衣服从身上撕了下来。
+
+			<<if $worn.upper.name is "naked" or $worn.lower.name is "naked">>
+				<<if $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+					你只剩下内裤来保护自己免受<<tower_creature_text>>的窥视。
+				<<else>>
+					<span class="lewd">你就这样赤身裸体地站在<<tower_creature_text>>面前。</span>
+				<</if>>
+			<</if>>
+		<<elseif $worn.upper.name isnot "naked" or $worn.lower.name isnot "naked">>
+			<<upperruined>><<lowerruined>>
+			<<bHe>>向你挥动爪子，只需一击，便把你的衣服从身上扯了下来。
+
+			<<if $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+				你只剩下内裤来保护自己免受<<tower_creature_text>>的窥视。
+			<<else>>
+				<span class="lewd">你就这样赤身裸体地站在<<tower_creature_text>>面前。</span>
+			<</if>>
+		<<elseif $worn.under_upper.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+			<<underupperruined>><<underlowerruined>>
+			以精确的一击，<<bhe>>用带爪的指尖从你的下巴划至你的腹股沟处，把你的内裤从中间撕开。碎屑散漫地落在了地板上，<span class="lewd">这使你赤身裸体地站在<<tower_creature_text>>面前。</span>
+		<</if>>
+		<br><br>
+
+		<<if $NPCList[0].monster is "monster">>
+			"没有这些，更好，"<<bhe>>一边说，一边抖掉爪子上的布料碎屑。
+		<<else>>
+			<<bHe>>满意地哼了一声，然后抖掉爪子上的布料碎屑。
+		<</if>>
+		<br><br>
+
+		<<bHe>>蹒跚地走到床垫旁，继续沉睡，留下你在巢穴里的肆虐寒风中瑟瑟发抖。
+		<br><br>
+
+		<<link [[继续|Monster Tower]]>><<set $eventskip to 1>><<set $tower_sleep to 115>><</link>>
+		<br>
+<</switch>>

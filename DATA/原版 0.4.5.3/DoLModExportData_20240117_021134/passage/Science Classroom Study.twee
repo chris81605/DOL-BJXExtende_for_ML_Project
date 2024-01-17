@@ -1,0 +1,45 @@
+:: Science Classroom Study []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+	<<undressOverClothes "scienceClassroom">>
+	你把外套挂在教室后面，坐下来读科学课本。
+<<else>>
+	你坐下来读科学课本。
+<</if>>
+<br><br>
+
+<<npc Sirris>><<person1>>教室很快就坐满了，西里斯开始上课。
+<br><br>
+
+<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound" and $leftarm isnot "bound" and $feetuse isnot "bound">>
+
+	<<link [[继续|Science Lesson]]>><<endevent>><</link>>
+	<br>
+<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	西里斯注意到了你被绑住的<<if $rightarm is "bound" or $leftarm is "bound">>胳膊<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">>和<</if>><<if $feetuse is "bound">>腿<</if>>。"这是某种实验吗？结果看起来会十分危险。我不能让你做这种科学研究。请去找校长帮忙。"
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	当西里斯进来时，<<he>>看着你的衣服。"你的制服呢？你知道的，我不能在这样的情况下给你授课。校长可能有一些备用的制服。"
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<</if>>
+
+<<schooleffects>>
+<<set _time_to_pass to 60 - Time.minute>>
+<<if Time.hour is 7>>
+<!-- lesson starts at 9 -->
+	<<set _time_to_pass += 60>>
+<</if>>
+<<pass _time_to_pass>>
+<<schooleffects>>
+<!-- add stress every 5 minutes -->
+<<set _stress to Math.trunc(_time_to_pass / 5)>>
+<<stress _stress>>
+<!-- improve science grade with same efficiency as studying in the library -->
+<<set _science to _time_to_pass / 20>>
+<<scienceskill _science>>

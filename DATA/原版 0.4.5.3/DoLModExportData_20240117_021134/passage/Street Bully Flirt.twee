@@ -1,0 +1,51 @@
+:: Street Bully Flirt []
+<<set $outside to 1>><<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		你低下头，用脚轻推罐子。“一个人走路很孤单，”你抬头看了一眼惠特尼，“你可以陪陪我吗？”
+	<<elseif $speech_attitude is "bratty">>
+		你把罐子踢回给惠特尼。
+		<<if random(1, 5) gte 2>>
+			<<He>>勉强躲开了。
+		<<else>>
+			罐子打了在<<him>>的头上。
+		<</if>>
+		“你为什么不挪挪你的屁股，过来这边呢？”
+	<<else>>
+		“你在那儿看起来挺孤独的，”你轻声招呼，昂首阔步地走向惠特尼，“要个伴吗？”
+	<</if>>
+	<<promiscuity1>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].lust gte random(1, 100)>>
+		<<He>>沉思了会儿，然后踢开垃圾箱，向你走来。<<His>>的朋友跟在后面。
+		<br><br>
+
+		“反正我很无聊，”<<he>>笑了笑，“好吧，<<girl>>。我可以陪你玩一会儿。”
+		<br><br>
+
+		<<link [[继续|Street Bully Sex]]>><<set $phase to 1>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		“你真是贪得无厌，”<<he>>笑着评价道，向你扔了另一个罐子，这一回，罐子从你的<<if $player.breastsize is 0>>胸<<else>><<breasts>><</if>>上弹开来，“但是我现在没心情，你去找些别的骚货干吧。”
+		<br><br>
+
+		<<He>>向后靠，闭上眼睛，像是假装你不在。你决定不浪费你的时间，继续前行。
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		你勉强笑了笑，向惠特尼挥了挥手。<<He>>邪恶地望向你，但什么都没做。
+	<<elseif $speech_attitude is "bratty">>
+		你把惠特尼从肩膀上甩了下来。你听到<<him>>的笑声，但<<he>>没有追来。
+	<<else>>
+		你忽视了惠特尼，快步离开。<<He>>嘲笑着你，但是没有追赶。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

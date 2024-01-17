@@ -1,0 +1,44 @@
+:: Prison Shower []
+<<effects>><<effects_prison>><<set $bus to "shower">>
+
+你在监狱的淋浴室里。
+<<if $prison.schedule is "wake">>
+	囚犯们脱掉衣服，把衣服放在木凳上，然后进入淋浴间。你听到了流水声。
+	<<if $prison.kylar is "active">>
+		凯拉尔站在角落里，看着你。
+	<</if>>
+	<br><br>
+	<<generate_veteran_guard 0>><<person1>><<veteran_guard 0 cap>>踱步穿过房间。
+	<br><br>
+	<<endevent>>
+	<<if !$daily.prison.veteranGreet and $prison.veteran gte 15>>
+		<<prison_guard_greet veteran>>
+	<<elseif random(1, 5) is 5 and $eventskip isnot 1>>
+		<<prison_guard_watch veteran>>
+	<<elseif $worn.upper.name is "naked" and $worn.lower.name is "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+		<<bathroomicon "shower">><<link [[洗澡 (0:10)|Prison Shower Take]]>><<pass 10>><</link>>
+		<br>
+		<<getouticon>><<link [[离开|Prison Block]]>><</link>>
+		<br>
+	<<else>>
+		<<if $exhibitionism gte 15>>
+			<<stripicon>><<link [[公开脱衣 (0:10)|Prison Shower Open]]>><</link>>
+			<br>
+		<<else>>
+			<span class="blue">你无法忍受在众人面前脱衣。</span>
+			<br>
+		<</if>>
+		<<stripicon>><<link [[找个隐蔽点的地方脱衣 (0:10)|Prison Shower Private]]>><</link>>
+		<br>
+		<<getouticon>><<link [[离开|Prison Block]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	周围没人。守卫只会开一小时的水。
+	<br><br>
+
+	<<getouticon>><<link [[离开|Prison Block]]>><</link>>
+	<br>
+
+	<<set $eventskip to 0>>
+<</if>>

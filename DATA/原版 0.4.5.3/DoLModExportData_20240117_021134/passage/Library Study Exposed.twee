@@ -1,0 +1,72 @@
+:: Library Study Exposed []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<rngWraith 1>><<slimeEventEnd "study">>
+
+<<if $phase is 1>>
+	你坐了下来，开始专注地学习科学教材。即使周围没有人，就这样在校图书馆<<lewdness>>也能让你非常兴奋。你感到自己变得更加的警惕与专注了。
+	<<gscience>><<scienceskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 2>>
+	你坐了下来，开始专注地学习数学教材。即使周围没有人，就这样在校图书馆<<lewdness>>也能让你非常兴奋。你感到自己变得更加的警惕与专注了。
+	<<gmaths>><<mathsskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 3>>
+	你坐了下来，开始专注地学习语文教材。即使周围没有人，就这样在校图书馆<<lewdness>>也能让你非常兴奋。你感到自己变得更加的警惕与专注了。
+	<<genglish>><<englishskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 4>>
+	你坐了下来，开始专注地学习历史教材。即使周围没有人，就这样在校图书馆<<lewdness>>也能让你非常兴奋。你感到自己变得更加的警惕与专注了。
+	<<ghistory>><<historyskill>><<garousal>><<arousal 300>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - ($allure / 2))>>
+	<<if $rng gte 51>>
+		<<generate1>><<person1>>你摸索着把书放回书架，但它突然砸到了地上。"别又是一只猫，"一个声音在走廊上回响。你慌忙躲进了书架，透过书本向外张望。只见一个穿着保安制服的<<person>>走了进来。"谁在那里？"
+		<br><br>
+		<<if $earSlime.growth gte 200 - ($earSlime.promiscuity * 10) and $exposed gte 1>>
+			<span class="lewd">你感觉到脑中史莱姆在命令你暴露出来，并要求<<him>>强奸自己。</span><span class="red">它期望得到服从。</span>
+			<br><br>
+			<<link [[屈服|Library Study Exposed Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+			<br>
+			<<link [[反抗|Library Study Exposed Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<<else>>
+			<<if $exposed gte 2>>
+				<<if $exhibitionism gte 75>>
+					<<link [[显出身形|Library Study Show]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+					<br>
+				<</if>>
+			<<elseif $exposed is 1>>
+				<<if $exhibitionism gte 15>>
+					<<link [[显出身形|Library Study Show]]>><<set $phase to 1>><</link>><<exhibitionist2>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[保持隐蔽 (0:10)|Library Study Hide]]>><<stress 3>><<pass 10>><</link>><<gstress>>
+		<</if>>
+		<br>
+	<<elseif _wraithEvent>>
+		过了一段时间，你开始感到焦虑。你把教材放回书架上。
+		<br><br>
+		透过另一边的缝隙，你瞥见了一张苍白的脸。<<stress 12>><<ggstress>><<trauma 4>><<gtrauma>>
+		<br><br>
+		<<link [[继续|School Library]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<generate2>>一组<<fullGroup>>沿着窗外的街道晃晃悠悠地走了过来。如果他们看过来，一定会发现你的。
+
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 3>>
+			<span class="red">你知道耳中史莱姆不会允许你做除了冒险暴露身体以外的任何事。</span>
+			<br><br>
+			<<link [[继续|Library Study Risk]]>><</link>>
+		<<else>>
+			<br><br>
+			<<link [[冒险|Library Study Risk]]>><</link>>
+			<br>
+			<<link [[藏起来 (0:20)|Library Study Pair Hide]]>><<pass 20>><</link>>
+		<</if>>
+		<br>
+
+	<</if>>
+<<else>>
+	<<link [[继续|School Library]]>><<endevent>><</link>>
+	<br>
+<</if>>

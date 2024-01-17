@@ -1,0 +1,38 @@
+:: Clearing Mushrooms []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+虽然你确信在森林里会更容易找到蘑菇，但空地上也有很多适合蘑菇生长的区域。你在树桩的底部和空地边缘生长的大树上搜寻。
+<br><br>
+<<set $edenshrooms += 1>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $rng gte 81>>
+		<<transform wolf 3>>
+		一个小时后，你意识到自己已经收集了相当不少的蘑菇。伊甸应该会很高兴，但你却不知为何产生了一股烦躁的情绪。你希望自己收集的所有蘑菇都是安全的。
+		<br><br>
+
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		<<drugs 120>>
+		一个小时后，你发现自己收获颇丰。伊甸应该会很高兴，但你却感到有些头晕目眩。希望你收集的蘑菇都是安全的。
+		<br><br>
+
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<alcohol 120>>
+		一个小时后，你发现自己收获颇丰。伊甸应该会很高兴，但你却感到一种异样的温暖。希望你收集的蘑菇都是安全的。
+		<br><br>
+
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	一个小时后，你发现自己收获颇丰。伊甸应该会很高兴。
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<br>
+<</if>>

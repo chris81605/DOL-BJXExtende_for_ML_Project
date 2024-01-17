@@ -1,0 +1,62 @@
+:: Farm Guard Pay Seduce []
+<<effects>>
+
+<<if $NPCList[0].traits.includes("relaxed")>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	<<set $seductiondifficulty to 10000>>
+<<else>>
+	<<set $seductiondifficulty to 6000>>
+<</if>>
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $speech_attitude is "meek">>
+	"你，你确定没有别的付款方法了，钱之外的？"你小声说道。
+<<elseif $speech_attitude is "bratty">>
+	"我会好好地奖赏你的，"你把脸凑近，"当你躺在那的时候。"
+<<else>>
+	"我可以用另一种方式付款，"你小声说道。
+<</if>>
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<span class="green">"希望你值这个价，"</span><<print $NPCList[0].name>>叹了口气，"我居然在做这种事。"你拉过<<his>>的手，把<<him>>带到了牛棚里的一个隐蔽之处。
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<print $NPCList[0].name>>张嘴想要说些什么，<span class="green">但只发出了几声含糊不清的声音。</span>你拉过<<his>>的手，把<<him>>带到了牛棚里的一个隐蔽之处。
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="green">"仅限这一次，"</span><<print $NPCList[0].name>>叹了口气，"我知道你们都不容易。"你拉过<<his>>的手，把<<him>>带到了牛棚里的一个隐蔽之处。
+	<<else>>
+		<span class="green">"真不错，"</span><<print $NPCList[0].name>>说，"我们去那边的牛棚。"
+		<br><br>
+		你在后面找到了一个隐蔽的地方。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Guard Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<span class="red">"抱歉，"</span><<print $NPCList[0].name>>说，"你很可爱，但可爱不能当饭吃。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"你是个磨人的尤物，"<<print $NPCList[0].name>>说，<span class="red">"但如果我接受每一个这样的提议，我将会一贫如洗。"</span>
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="red">"没兴趣，"</span><<print $NPCList[0].name>>说，"出来卖的在镇上遍地都是。"
+	<<else>>
+		"十分诱人，"<<print $NPCList[0].name>>说，<span class="red">"但我的薪水足够我买来一打便宜的<<girls>>了</span>。抱歉。"
+	<</if>>
+	<br><br>
+	<<farm_guard_pay>>
+	<<link [[说你现在负担不起|Farm Guard Pay Refuse]]>><</link>><<lltrust>>
+	<br>
+
+<</if>>

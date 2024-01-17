@@ -1,0 +1,49 @@
+:: Avery School Pickup Accept []
+<<set $outside to 0>><<effects>>
+你上了艾弗里的车，<<he>>接着开车送你去孤儿院。
+<<if $averyCrimeTracker eq null>>
+	<<set _crimeEvent to true>>
+<<elseif $averyCrimeTracker gte 1000>>
+	<<set _crimeEvent to true>>
+<</if>>
+<<if crimeSumCurrent() gte 2000 and _crimeEvent is true and $NPCName[$NPCNameList.indexOf("Avery")].rage gte random(20, 100) and $averyragerevealed is 1>>
+	一开始，你们按照预期的路线走着，但突然，你们转到了倒钩街。
+	<br><br>
+
+	艾弗里把车停在警察局对面，你心里很不安，毕竟你有犯罪史。
+	<br><br>
+
+	"怎么了，<<pcpetname "Avery">>？”艾弗里严肃地说。“紧张吗？”两个巡警在拐角处走来走去。他们朝这边走来，他们会认出你吗？
+	<<if $averyCrimeTracker eq null>>
+		"我知道你一直在干些什么。"
+	<<else>>
+		"你触犯了法律。"
+	<</if>>
+	<<He>>继续说，"别否认。"警察拦下了一个长得很像你的<<girl>>。他们在询问<<phim>>。
+	"每个公民都有责任举报他们目睹的犯罪。"<<He>>看着你。"我可是守法公民，我最讨厌罪犯了。"<<He>>笑了。
+	<br><br>
+	<<set $averyCrimeTracker to 0>>
+
+	<<if $submissive gte 1500>>
+		<<link [[恳求|Avery School Pickup Plead]]>><<sub 1>><<npcincr Avery rage -5>><</link>><<larage>><<submissivetext>>
+		<br>
+	<</if>>
+	<<if $submissive lte 500>>
+		<<link [[威胁|Avery School Pickup Threaten]]>><<def 1>><<npcincr Avery rage 5>><</link>><<garage>><<defianttext>>
+		<br>
+	<</if>>
+	<<link [[尝试逃跑|Avery School Pickup Escape]]>><<npcincr Avery rage 5>><</link>><<athleticsdifficulty 1 1200>><<garage>>
+	<br>
+	<<link [[献身|Avery School Pickup Seduction]]>><</link>><<promiscuous1>>
+	<br>
+<<else>>
+	那条路好像是平时公交车走的路线。很快你们俩就到孤儿院了。
+
+	在解开安全带之前，你听到了艾弗里清了清<<his>>的嗓子，<<he>>将一只手搭到了你的肩膀上。"我把你平安带回家难道不该有点什么奖励吗，<<pcpetname "Avery">>？"<<He>>用手指轻点<<his>>的嘴唇。
+	<br><br>
+
+	<<link [[亲吻|Avery School Pickup Kiss]]>><<npcincr Avery love 1>><</link>><<glove>>
+	<br>
+	<<link [[直接离开|Avery School Pickup Leave]]>><</link>>
+	<br>
+<</if>>

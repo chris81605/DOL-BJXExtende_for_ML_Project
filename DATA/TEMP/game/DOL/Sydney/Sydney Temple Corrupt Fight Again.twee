@@ -1,0 +1,43 @@
+:: Sydney Temple Corrupt Fight Again 
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<set $enemyhealth += 200>>
+	<<npcidlegenitals>>
+	<<set $timer to 6>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+
+<<switch $timer>>
+	<<case 5>>
+		<span class="red">悉尼在那人手下挣扎。</span>
+	<<case 4>>
+		<span class="pink">悉尼成功将<<monk>>推开。</span>
+	<<case 3>>
+		<span class="purple">悉尼张惶四顾，寻找能打趴<<monk>>的武器。<<nnpc_His "Sydney">>的视线落在了一个粉色喷雾罐上。</span>
+	<<case 2>>
+		<span class="blue">悉尼捡起喷罐，慌忙按下。一阵粉色水雾直直喷射在<<monk>>的脸上。<<He>>踉跄后退，看起来迷失了方向。</span>
+	<<case 1>>
+		<span class="teal">悉尼冲向了你。</span>
+	<<case 0>>
+		<span class="green">悉尼将喷罐瞄准攻击你的<<monk>>。</span>
+<</switch>>
+<br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Sydney Temple Corrupt Fight Again Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sydney Temple Corrupt Fight Again]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,48 @@
+:: Possessed Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<br><br>
+	<<tearful>> you recover. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Fight again|Possessed Fight]]>><<endevent phaseless>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[Freshen up, then fight again|Possessed Fight]]>><<endevent phaseless>><<set $fightstart to 1>><<set $pain to 0>><<set $arousal to 0>><</link>><<lpain>><<larousal>>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $opponent is 1>>
+		The <<person>> falls back, and scrambles away.
+	<<elseif $opponent is 2>>
+		Sydney moans, slaps a hand over <<his>> mouth, and runs away.
+	<</if>>
+	<br><br>
+	<<tearful>> you recover. "<span class="wraith">Shall we dance again?</span>" your mouth is forced to ask.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Fight again|Possessed Fight]]>><<set $fightstart to 1>><<endevent phaseless>><</link>>
+	<br>
+	<<link [[Freshen up, then fight again|Possessed Fight]]>><<set $fightstart to 1>><<endevent phaseless>><<set $pain to 0>><<set $arousal to 0>><</link>><<lpain>><<larousal>>
+
+<<else>>
+	<<set $possessed to 0>>
+	You regain control in your body, and rip the pale figure out of your chest like you're pulling a rabbit out of a hat.
+	<<if $opponent is 1>>The <<person>>, justifiably terrified by this development, scrambles away.<</if>>
+	<br><br>
+	"<span class="wraith">Congratulations. You won.</span>" It pats you on the head, then vanishes in a torrent of water.
+	<<if $opponent is 2>>Sydney is nowhere to be seen.<</if>>
+	<br><br>
+	<<tearful>> you try to decide if you want to go again or not.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Fight again|Possessed Fight]]>><<set $possessed to true>><<set $control to 0>><<set $fightstart to 1>><<endevent phaseless>><</link>><<lllcontrol>><<note "+ Wraith" "wraith">>
+	<br>
+	<<link [[Freshen up, then fight again|Possessed Fight]]>><<set $possessed to true>><<set $control to 0>><<set $fightstart to 1>><<endevent phaseless>><<set $pain to 0>><<set $arousal to 0>><</link>><<lpain>><<larousal>><<lllcontrol>><<note "+ Wraith" "wraith">>
+	<br>
+	<<link [[Decision room|Possessed Fight Test]]>><<set $possessed to true>><<set $control to 0>><</link>><<lllcontrol>><<note "Also + Wraith" "wraith">>
+<</if>>
+<br><br>
+<<link [[Back home|Bedroom]]>><<set $possessed to 0>><<endevent>><<unset $opponent>><</link>>

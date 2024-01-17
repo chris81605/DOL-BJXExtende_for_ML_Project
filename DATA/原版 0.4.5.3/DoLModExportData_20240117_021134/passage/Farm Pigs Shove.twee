@@ -1,0 +1,37 @@
+:: Farm Pigs Shove []
+<<effects>>
+
+<<if $physiqueSuccess>>
+	<<if $farm_work.pig.monster is true>>
+		<span class="green">你把<<farm_text pig>>从你身上推开。</span><<farm_He pig>>踉跄退后，老老实实进了围栏。<<grespect>><<farm_pigs 1>>
+	<<else>>
+		<span class="green">你把这只猪从你身上推开。</span>它回到了地上，老老实实进了围栏。<<grespect>><<farm_pigs 1>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+	<<if $farm.beasts.pigs lte -5 and $rng gte 51>>
+		<<if $farm_work.pig.monster is true>>
+			你试着把<<farm_text pig>>从你身上推开，<span class="red">但<<farm_he pig>>推了回来，把你推倒在地。</span><<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<br><br>
+		<<else>>
+			你试着把猪从你身上推开，<span class="red">但它的重量压倒了你。</span><<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Farm Pigs Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $farm_work.pig.monster is true>>
+			你试着把<<farm_text pig>>从你身上推开，<span class="red">但<<farm_he pig>>抓住了你的双臂，把它们扭到了你的背上。</span><<farm_He pig>>在你背上拱了几下，很快就感到疲倦并放开了你。你离开猪圈，关上了畜栏。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<<else>>
+			你试着把猪从你身上推开，<span class="red">但是它太重了。</span>它在你背上拱了几下，很快就感到疲倦并放开了你。你离开猪圈，关上了畜栏。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

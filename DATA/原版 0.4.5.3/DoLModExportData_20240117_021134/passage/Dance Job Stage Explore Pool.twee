@@ -1,0 +1,37 @@
+:: Dance Job Stage Explore Pool []
+<<effects>>
+
+你溜过去翻找那些被他们丢弃的衣服，搜寻着珠宝首饰等能卖钱的东西。
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你从赃物中翻找出了<span class="gold">£500</span>，然后悄无声息地离开了。<<set $blackmoney += 500>><<crimeUp 500 "thievery">>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[离开|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<person1>><<person>>尖叫起来。<<crimeUp 100 "thievery">>你转身空着手跑回了楼梯。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[离开|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

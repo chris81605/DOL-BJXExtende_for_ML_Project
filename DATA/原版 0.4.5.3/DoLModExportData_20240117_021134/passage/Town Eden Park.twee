@@ -1,0 +1,151 @@
+:: Town Eden Park []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">><<set $edendays to 0>>
+
+你们到达公园。
+<<if Time.dayState is "dawn">>
+	这里的人很少，有些人在散步，也有人在慢跑，还有一些人正在遛狗。
+	伊甸尽可能地引导你远离人群和拥挤的地方。
+<<elseif Time.dayState is "day">>
+	<<if $weather is "rain">>
+		有几个人在这里散步，不时绕过散布在路上的水坑。
+		就连这么少的人群也让伊甸感到不舒服。
+	<<elseif $weather is "snow">>
+		有不少人穿着冬季衣服在外面遛狗或者慢跑。
+		伊甸尽可能地引导你远离人群和拥挤的地方。
+	<<else>>
+		许多人出来遛狗或慢跑，你听到院子里有孩子的声音。
+		伊甸尽可能地引导你远离人群和拥挤的地方。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	周围有很多人。学生们在院子里闲逛。
+	伊甸绕了一个大弯来避开院子，尽可能地引导你远离其他人。
+<<elseif Time.dayState is "night">>
+	周围没有人。伊甸放松下来了。
+<</if>>
+<br><br>
+
+<<set _scenes to [
+	"狗",
+	"牵手"
+]>>
+<<if $weather is "rain">>
+	<<set _scenes.push("rainShelter")>>
+<<elseif $weather is "clear" and Time.season is "summer" and ["day", "dusk"].includes(Time.dayState)>>
+	<<set _scenes.push("river")>>
+<</if>>
+
+<<switch _scenes.pluck()>>
+	<<case "handhold">>
+		你们一起漫步，直到来到一小片野花地。
+		伊甸指出那些<<hes>>最熟悉的品种。这些信息很有用。
+		<<if $tending lt 1000>>
+			<<tending 2>><<gtending>>
+		<<else>>
+			你感觉这些好像是你知道的知识，但你让伊甸说了下去。听<<him>>这么热情地讲述让你感到很愉快。
+		<</if>>
+		<br><br>
+
+		<<He>>牵起了你的手，把<<his>>的手指穿过你的手指间。
+		<<takeHandholdingVirginity "Eden" "romantic">>
+		<br><br>
+
+		"这个地方还不错，"<<he>>承认道，"只要没有其他人出现破坏它。"
+		<br><br>
+
+		你点了点头。你感到了<<his>>手的温暖，当你们一起走过花丛时，这种感觉既浪漫又平静。
+		<<stress -30>><<lstress>>
+		<br><br>
+
+		你们走了一会儿，直到重新回到了公园里。
+
+	<<case "dog">>
+		<<endevent>>
+		<<beastNEWinit 1 dog>>
+
+		一只巨大的<<beasttype>>从<<bhis>>主人那里挣脱开来，向你冲来。
+		<br><br>
+
+		<<if $monster is 1>>
+			"你闻起来好香啊！我来了！"<<bhe>>欢快地喊着，向你跳跃而来。
+			<br><br>
+		<</if>>
+
+		伊甸紧张起来，将你一把拽到了<<nnpc_him Eden>>身后，<<nnpc_his Eden>>的动作让你绊倒在地。<<beasttype>>跳过了你们两个，但又转过身来向你们靠近。伊甸挡在了你们之间。
+		<<nnpc_he Eden>>站在你面前时，你能清楚地看到<<nnpc_his Eden>>结实的臀部。
+		<<garousal>><<gstress>><<arousal 20>><<stress 10>>
+		<br><br>
+
+		<<if $monster is 1>>
+			"不肯分享吗？来吧，分享一下你的伴侣，"<<beasttype>>说着，稍微靠近了一些，"你也可以加入进来。"
+		<<else>>
+			<<beasttype>>低吼着，向你们靠近了一些。
+		<</if>>
+		<br><br>
+
+		伊甸发出不满的低吼。<<beasttype>>停在了原地。他们对峙了一会儿，然后<<beasttype>>向后退了一步。
+
+		<<if $monster is 1>>
+			"我下次再来找这个漂亮的人类<<girl>>，"<<bhe>>嘀咕着，悄悄溜走了。伊甸不屑地哼了一声。
+		<<else>>
+			<<bhe>>发出最后一声咆哮，掉头跑了。
+		<</if>>
+		<<ltrauma>><<trauma -5>>
+		<br><br>
+		<<endevent>>
+		<<npc Eden>>
+		伊甸转过身来，看向你。"该死的杂种，"<<He>>嘀咕着，拉着你起身。
+
+		<br><br>
+
+		<<if $speech_attitude is "meek">>
+			"谢谢你救了我，"你说道，"我很感激。"
+		<<elseif $speech_attitude is "bratty">>
+			"我可以照顾自己，"你说道，"但还是谢谢你的帮助。"
+		<<else>>
+			"谢谢你的帮助，"你说。
+		<</if>>
+		你拥抱了<<him>>。<<He>>紧紧地抱住你，过了一会儿才松开。
+		<br><br>
+
+		你们一起继续在公园里散步。
+
+	<<case "rainShelter">>
+		雨愈发猛烈地倾泻下来，你们匆忙躲到了一棵巨大树下的遮蔽处。让自己不至于被雨淋得太湿。
+		<br><br>
+
+		"这个给你，"伊甸说着，脱下<<his>>的夹克衫，披在你身上，"这样会暖和一点。"
+		<<He>>在给你穿上夹克衫的同时，顺势用一只手臂揽住了你，把你拉得更近。
+		<<garousal>><<ltrauma>><<lstress>><<arousal 20>><<trauma -2>><<stress -20>><<npcincr Eden dom 1>>
+		<br><br>
+
+		过了一会儿，雨渐渐地停了下来。你把夹克衫还给了伊甸。
+
+	<<case "river">>
+		你们到达了河岸。
+		<<if Time.dayState is "dusk">>
+			附近的桥边有一群学生聚在一起。
+		<<else>>
+			你们经过了几个家庭，他们正在开心地享受着好天气。
+		<</if>>
+		伊甸避开了他们。
+		<br><br>
+
+		你们找到了一张河边的隐蔽长椅。伊甸坐下来，把你拉到<<his>>腿上。<<He>>环抱着你，将你紧紧地搂在<<his>>
+
+		<<if $NPCList[0].breastsize gte 1>>
+			$NPCList[0].breastsdesc上。
+		<<else>>
+			健硕的胸肌上。
+		<</if>>
+		<<garousal>><<arousal 20>><<npcincr Eden lust 1>>
+		<br><br>
+
+		你们一起坐在河边放松。这里非常宁静。甚至连伊甸似乎也放松了一些。
+		<<lstress>><<ltrauma>><<stress -20>><<trauma -2>>
+		<br><br>
+<</switch>>
+<br><br>
+
+<<link [[比赛跑步|Town Eden Park Race]]>><</link>><<athleticsdifficulty 500 1250>>
+<br>
+<<link [[调情|Town Eden Park Flirt]]>><</link>><<promiscuous1>>

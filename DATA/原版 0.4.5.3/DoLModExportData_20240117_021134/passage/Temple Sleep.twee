@@ -1,0 +1,35 @@
+:: Temple Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+    <<wakingEffects $sleepHoursTotal>>
+    <<if $nightmares gte 1 and $controlled is 0>>
+        你梦见你被一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+    <<else>>
+        <<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+            你的睡眠被淫秽的梦所困扰。
+            <<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+            <<arousal `100 * $sleepHoursTotal`>>
+            <<if $arousal gte $arousalmax>>
+                它们把你推向了高潮的顶点。
+                <<orgasm>>
+            <</if>>
+        <<elseif !_wakingEffect>>
+            你睡得很香。
+            <br><br>
+        <</if>>
+    <</if>>
+    <<sleepeffects>>
+	<br><br>
+    <<set $wardrobe_location to "temple">>
+    <<wardrobeSelection true>>
+    <<radiooutfits>>
+
+    <br><br>
+    <<link [[起床|Temple Bunk]]>><</link>>
+    <br>
+   <<set $phase to 0>>
+<</if>>

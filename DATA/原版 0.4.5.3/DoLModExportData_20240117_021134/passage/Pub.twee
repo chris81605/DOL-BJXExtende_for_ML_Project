@@ -1,0 +1,124 @@
+:: Pub []
+<<set $outside to 0>><<set $location to "pub">><<effects>><<set $bus to "harvest">>
+
+<<if $exposed gte 1>>
+	你躲在手推车里以遮掩你的<<lewdness>>。幸运的是，每个人要么在忙自己的事，要么已经喝到烂醉如泥了。总而言之，现在没有任何人注意到你。
+	<br><br>
+
+	<<link [[寻找一些可以遮住你的东西|Pub Exposed]]>><</link>>
+	<br>
+	<<link [[从后面溜走|Industrial alleyways]]>><</link>>
+	<br>
+<<else>>
+	<<if $pubbooze is "herbal">>
+		<<set $pubbooze to 0>>
+		酒保为你倒了一杯当地生产的烈酒。当你喝下之后，你感觉整个世界都扭曲了起来。
+	<<elseif $pubbooze is "booze">>
+		<<set $pubbooze to 0>>
+		酒保为你倒了一杯便宜但却很受欢迎的饮料。
+	<<else>>
+		你走进酒吧，这里一如往常人来人往。
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "pub">>
+	<</if>>
+	<br><br>
+	<<if $averyPub is 1 and (Time.dayState is "day" or Time.dayState is "dusk")>>
+		<<npc Avery>><<person1>>
+		<<loadNPC 1 avery_sidepiece>><<person2>>
+		你保持低调姿态寻找着艾弗里。不一会，你就看见一个<<person>>正和艾弗里在吧台边聊得火热。
+		你认出了那个<span class="red"><<person>>是孤儿院的孤儿。</span>
+		<br><br>
+		艾弗里倾身将一只手放在<<his>>的大腿上，这让<<him>>紧张了起来。随后<<person>>突然站了起来，找了个借口后就朝厕所走了过去。
+		<br><br>
+		<<link [[去洗手间|Avery Dismissal Restroom]]>><</link>>
+		<br>
+		<<link [[去吧台边|Avery Dismissal Bar]]>><</link>>
+		<br>
+	<<elseif ($fame.bestiality gte 400 or $fame.rape gte 400 or $fame.prostitution gte 400 or $fame.sex gte 400 or $fame.exhibitionism gte 400) and !$pubfame>>
+		<<set $pubfame to {seen: [], tasksDone: []}>><<set $fameDecay to {}>><<set $fameDecayTimer to {}>>
+		<<generate1>><<person1>>
+		一只手从后面落在你的肩膀上。"你是个大忙人呢，"一个<<person>>在你耳边说道，你可以闻到这家伙满嘴的酒味，"别以为我不认识你，你在镇上可是大名鼎鼎呢。
+		<<if $fame.bestiality gte 400>>
+			不过没有看到一群狗在和你做爱真是让人有些惊讶。"
+		<<elseif $fame.sex gte 400 or $fame.rape gte 400 or $fame.prostitution gte 400>>
+			不过没有看到你在被粗暴强奸真是让人有些惊讶呢。"
+		<<else>>
+			看到你穿上衣服真是让人有些不适应呢。"
+		<</if>>
+		<<stress 3>><<gstress>>
+		<br><br>
+		<<His>>握紧了搭在你肩膀上的手，"我估计现在是时候让我来爽爽了。<<if $fame.prostitution gte 400>>希望你不介意我不付钱吧。<<elseif $fame.rape gte 400>>你喜欢被粗暴对待，是吗？虽然这是我听说的。<</if>>来吧，亲爱的。"
+		<br><br>
+		<<link [[继续|Pub Fame Intro]]>><</link>>
+	<<elseif $pubwhore gte 10 and $pubattack isnot 1>>
+		<<set $pubattack to 1>>
+		<span class="red">你突然被麻袋套住脑袋</span>，两双手臂从后面抓住了你，随后将你拖出酒吧并塞进货车里。
+		<br><br>
+		<<link [[继续|Brothel Punishment]]>><</link>>
+		<br>
+	<<elseif $pubwhore gte 20>>
+		<<set $pubwhore to 10>>
+		<<generate1>><<generate2>><<person1>>一个<<person>>将你推到墙上，一个<<person2>><<person>>站在<<person1>><<him>>旁边。酒吧里的工作人员和顾客都将目光移开。"<span class="red">是老板派我们来的，</span>"<<person1>><<person>>说道： "老板说你太不听话了，要我们将你带过去。"<<He>>瞥了一眼吧台。"还有，不要做无谓的挣扎和求救，没有人会帮助你的。"
+		<br><br>
+		<<if $money gte 50000>>
+			<<link [[贿赂 (£500)|Pub Accost]]>><<set $phase to 0>><</link>>
+			<br>
+		<</if>>
+		<<link [[反抗|Pub Accost Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+		<<link [[跟着去见老板|Pub Accost]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		<<askicon>><<link [[找兰德里|Pub Landry]]>><<endevent>><</link>>
+		<br>
+		<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+			<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+			<br>
+		<<else>>
+			<<if $money gte 1000>>
+				<<foodicon "beer">><<link [[喝酒 (£10 0:05)|Pub]]>><<endevent>><<set $money -= 1000>><<set $pubbooze to "booze">><<alcohol 120>><<pass 5>><</link>><<ggalcohol>>
+				<br>
+			<</if>>
+			<<if $money gte 2000>>
+				<<foodicon "beerbottle">><<link [[喝草药酒 (£20 0:05)|Pub]]>><<endevent>><<set $money -= 2000>><<set $pubbooze to "herbal">><<pass 5>><<alcohol 60>><<hallucinogen 20>><</link>><<galcohol>><<ghallucinogens>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $farm>>
+			<<if $farm.tower gte 1 and !$farm.tower_guard and $farm.tower_guard_can_hire>>
+				<<investigateicon>><<link [[为农场找守卫 (0:30)|Pub Guard]]>><<endevent>><<pass 30>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<br>
+		<<generate1>><<person1>>你看到一个<<person>>正独自坐在吧台那里。
+		<br>
+		<<brothelicon>><<link [[调情 (0:05)|Pub Flirt]]>><<pass 5>><<set $pubdrink to 0>><</link>><<promiscuous1>>
+		<br>
+		<<investigateicon>><<link [[找其他人 (0:01)|Pub]]>><<endevent>><<pass 1>><</link>>
+		<br>
+
+		<<if Time.weekDay is 1 and Time.hour gte 21 and C.npc.Whitney.state is "active">>
+			<br>
+			一些坏学生占据了一张桌子，将整个酒馆的气氛带到了狂欢之中。
+			<<if $weekly.whitneyPub>>
+				<span class="purple">你不应该进一步试图去激怒那些家伙。</span>
+			<<else>>
+				你看见惠特尼也坐在那些人中间。
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].love gte 10>>
+					<span class="teal"><<nnpc_He "Whitney">>坐在<<nnpc_his "Whitney">>的位置上看着你。</span>
+				<<else>>
+					<span class="blue">即使<<nnpc_he "Whitney">>看见你，<<nnpc_he "Whitney">>也不表现出什么。</span>
+				<</if>>
+				<br>
+				<<ind>><<link [[靠近|Whitney Pub Approach]]>><<endevent>><<set $weekly.whitneyPub to 1>><<set $phase to 0>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+
+		<br>
+		<<harvesticon>><<link [[离开|Harvest Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,62 @@
+:: Temple Garden Work Wolf Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<beasttype 0>>回到了森林。<<tearful>>你爬起身来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Garden]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	<<beasttype 0>>嗷嗷地哀鸣着，一瘸一拐地回到了森林里。<<tearful>>你爬起身来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Garden]]>><</link>>
+	<br>
+<<else>>
+	<<generate2>><<person2>>
+	<<beasttype 0>>的耳朵竖起来了。一会儿后，你自己也听到了。脚步声。
+	<br><br>
+	<<if $current_sex is 1>>
+		<<beasttype 0>>试图逃跑，但无法摆脱你。脚步声越来越近。你努力挣扎着想要离开，但是毫无用处。就在你们还黏在一起的时候，一个<<monk>>拐过了墙角。
+		<br><br>
+		<<if $exposed gte 1>>
+			<<He>>停下来凝视着你。<<covered>><<He>>试图说话，但找不到合适的词。<<He>>倚靠在日晷上稳住<<himself>>，然后<<beasttype 0>>终于挣脱束缚，跑向森林。
+			<br><br>
+			<<clotheson>>
+			"绝……"<<he>>勉强地说，停下来稳住<<himself>>，"绝对不可接受。主教将会听到这件事。"<<He>>从<<his>>的长袍里拿出一些毛巾，扔在你身上，然后愤怒地离开。
+			<<towelup>>
+			<br><br>
+		<<else>>
+			<<He>>停下来凝视着你。<<He>>试图说话，但找不到合适的词。<<He>>倚靠在日晷上稳住<<himself>>，然后<<beasttype 0>>终于挣脱束缚，跑向森林。
+			<<clotheson>>
+			<br><br>
+			"绝……"<<he>>勉强地说，停下来稳住<<himself>>，"绝对不可接受。主教将会听到这件事。"<<He>>转身走开了。
+			<br><br>
+		<</if>>
+		<<tearful>>你躲在了树篱后面。
+		<br><br>
+		<<endcombat>>
+		<<link [[继续|Temple Garden]]>><</link>>
+	<<else>>
+		<<if $exposed gte 1>>
+			这只<<beasttype 0>>朝着森林跑去，就在一位<<monk>>绕过篱笆的时候。
+			<br><br>
+			"哎呀，真是没想到。"<<he>>说，看着你。<<covered>><<clotheson>>
+			<<He>>避开<<his>>的目光，把手伸<<his>>进长袍下翻找。<<He>>拿出一些毛巾扔在你身上。然后<<He>>嘟囔着走开了。
+			<<llgrace>><<gtrauma>><<gstress>><<grace -5>><<trauma 6>><<stress 6>>
+			<<towelup>>
+			<br><br>
+		<<else>>
+			这只<<beasttype 0>>朝着森林跑去，就在一位<<monk>>绕过篱笆的时候。<<He>>看了你一眼，但没有意识到有什么不对劲。
+			<br><br>
+			<<clotheson>>
+		<</if>>
+		<<tearful>>你爬了起来。
+		<br><br>
+		<<endcombat>>
+		<<link [[继续|Temple Garden]]>><</link>>
+	<</if>>
+<</if>>

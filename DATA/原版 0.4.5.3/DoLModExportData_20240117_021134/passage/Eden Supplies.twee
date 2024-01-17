@@ -1,0 +1,25 @@
+:: Eden Supplies []
+<<effects>>
+
+<<set $edenshopping to 1>>
+你需要采购那些伊甸不能制造或不能没有的物品，主要包括工具和医药补给。
+<br><br>
+
+<<if !$edenradio and $money gte 2500>>
+	当你购物时，你的眼睛落在了一台简单的台式收音机上。它让你想起伊甸。在小木屋里没什么事可做，也许<<nnpc_he "Eden">>会很需要这个。
+	<br><br>
+
+	<<edenicon "radio">><<link [[购买 (£25)|Eden Radio Buy]]>><<set $money -= 2500>><</link>>
+	<br>
+	<<refuseicon>><<link [[不买|Eden Radio Don't Buy]]>><</link>>
+<<elseif $edenradio isnot 0 and !$edenraft and $money gte 4000>>
+	当你购物时，你的目光落在了一个充气筏上。它让你想起伊甸。也许你们可以在湖里一起用它。
+	<br><br>
+
+	<<ind>><<link [[购买 (£40)|Eden Raft Buy]]>><<set $money -= 4000>><</link>>
+	<br>
+	<<refuseicon>><<link [[不买|Eden Raft Don't Buy]]>><</link>>
+<<else>>
+	<<link [[继续|Shopping Centre]]>><</link>>
+<</if>>
+<br>

@@ -1,0 +1,149 @@
+:: Temple Confess Self Promiscuity []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+	"原谅我，<<sister_npc>>，我曾以诱惑试探他人。"
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"原谅我，原谅我做出的恶行。"
+	<<elseif $speech_attitude is "bratty">>
+		"是的，我是肮脏的罪人。"
+	<<else>>
+		"原谅我，我犯下了罪过。"
+	<</if>>
+<</if>>
+你细数你那些罪恶的引诱，还有下流的行为。
+<<if $promiscuity gte 75>>
+	<<if $promiscuity gte 95>>
+		你巨细无遗地描述这些事情，即便是最粗俗的细节也囊括其中，<<him>>无从插嘴。你有太多太多要说的了。如此多要忏悔。仿佛你的人生都只是围绕着这些行为。
+		<br><br>
+
+		结束之时，泪水流满了你的面颊。你祈求宽恕，因为你知道，你永远不会原谅你自己。<<tearup>>
+	<<else>>
+		你滔滔不绝地讲述起来。你不记得你已经多少次用你的身体做出罪恶的行为，只为得到自己想要的东西。
+		<br><br>
+
+		一股未曾有过的羞耻感从你内心涌起。你仿佛吃下了分辨善恶的果子，只觉得一阵恶心。
+	<</if>>
+	<br><br>
+
+	<<switch $attendant>>
+		<<case "Jordan">>
+			<<set $promiscuity -= 5>><<trauma 80>>
+			"我亲爱的孩子……"<<His>>的语气中满是抚慰，"你已经如此堕落，但仍未堕入渊底。没有人会被排除在救赎之外。"
+			<br><br>
+
+			<<He>>跪下把金属百叶窗开了起来。"把你的手放在我们中间，让我们同心祷告。"你顺从<<His>>的话，跪了下去，把手放在空隙之中。<<His>>紧握着你的手，十分温暖。
+			<br><br>
+
+			尽管隔着木条，你仍感觉你们离得很近很近。你继续忏悔，直到罪恶的重量终于从你肩上卸下。<<He>>向你讲述那些殉道者的故事，他们也曾亵渎神明，却浪子回头，罪得赦免。你不知道是怎么了，但结束之后，你感觉轻松了许多。
+			<br><br>
+
+			过了一会儿，你们彼此松开手站了起来。"请常回来，孩子。我们还有很长的路要走。务必保持信心。"
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+			<br>
+		<<case "Sydney">>
+			<<run statusCheck("Sydney")>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<set $promiscuity -= 3>><<trauma 80>>
+				"哇，要一次性把这些都倾诉出来真的很不容易……" <<He>>紧张地咳嗽，"好、好吧，承认自己的问题已经是了不起的一步了！你已经迈上了得到宽恕和纯洁的道路。"你听见<<him>>站了起来。
+				<br><br>
+
+				你能看到<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+				"一点一点进行改变，不要把自己的身体当成资源或物品。不要把它交给任何人。"<<he>>的话听起来相当真挚。
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End]]>><</link>>
+				<br>
+			<<else>>
+				<<set $promiscuity -= 4>><<trauma 80>>
+				沉默持续了很长时间。"你确实罪孽深重，"<<he>>终于开口了，"我想，你的忏悔不仅对你来说是一个考验，对我来说也是如此。我能宽恕像这样浸满罪恶的人吗？"
+				<br><br>
+
+				又是一阵沉默。过了一会儿，你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+				<br><br>
+
+				"我需要仔细考虑你说过的话。请常回来。"<<He>>匆匆离开小房间。<<npcincr Sydney purity -1>><<lspurity>>
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+				<br>
+			<</if>>
+		<<case "Confessor">>
+			沉默持续了很长时间。
+			<br><br>
+
+			"我明白了，你只是一个受害者，也许该被称为<span class="red">堕落者</span>。"你看见另一侧的身影跪了下来，"脱掉你的衣服，靠在忏悔的隔板前。我会承受你的堕落，你会被宽恕的。"
+			<br><br>
+
+			<<link [[遵从|Temple Confess Self Purge]]>><</link>>
+			<br>
+			<<link [[拒绝|Temple Confess Self Refuse]]>><</link>>
+			<br>
+		<<default>>
+			<<set $promiscuity -= 3>><<trauma 100>>
+			"如此多的罪孽，不用担心，就算是最深的罪人也可以进行忏悔。"你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+			<br><br>
+
+			"只有实际行动能将你领向救赎。你必须努力提升自己。尽管如此，你是个……很特别的例子。请常回来，我能感觉到你仍有许多需要忏悔。"
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+			<br>
+	<</switch>>
+<<else>>
+	<<if $promiscuity gte 55>>
+		<<set $promiscuity -= 2>><<trauma 50>>
+		你想说的太多了，你尽力抓紧时间一一倾诉。在一些关于你用身体谋生的尤其尴尬的话题上，你犹豫了，但最终还是把所有事情说了出来。
+	<<elseif $promiscuity gte 35>>
+		<<set $promiscuity -= 2>><<trauma 40>>
+		在谈到你的某些尤其大胆的行为时，你感到有些羞耻，但最终还是把所有事情说了出来。
+	<<else>>
+		<<set $promiscuity -= 1>><<trauma 30>>
+		你需要倾诉的内容并不多，等到你全部说完后，你感觉自己好了一些。
+	<</if>>
+	<br><br>
+
+	<<switch $attendant>>
+		<<case "Jordan">>
+			"你的身体是神的殿，孩子。你不应该那么轻易地让他人涉足。努力去发掘更多自己的价值吧。"
+			你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>说道。
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End]]>><</link>>
+			<br>
+		<<case "Sydney">>
+			<<run statusCheck("Sydney")>>
+			<<if _sydneyStatus.includes("corrupt")>>
+				"至少，你应该为你重要的人好好保管自己的身体，"<<he>>说，"努力去发掘更多自己的价值吧。"
+				你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End]]>><</link>>
+				<br>
+			<<else>>
+				"很抱歉听到你对自己的身体做了这些可怕的事情。但现在忏悔并不迟！"
+				你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+				<br><br>
+
+				<<link [[继续|Temple Confess Self End]]>><</link>>
+				<br>
+			<</if>>
+		<<case "Confessor">>
+			"你正在通往堕落的道路上，孩子。你必须在一切都太晚前忏悔。必须赶在这个镇子吞噬你之前。"
+			你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"作为你的告解员，我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End]]>><</link>>
+			<br>
+		<<default>>
+			"身体是神圣的，它们应当被奉献给我们最信赖的人，且只应奉献给他们。忏悔吧，孩子，化解这些罪孽。"
+			你听见<<him>>站了起来，<<his>>的身影拿出了一个十字架，抵在木条墙上。"我以我的语言宽恕你，但你也必须用实际行动宽恕自己。"<<he>>用像背诵一样的语调说道。
+			<br><br>
+
+			<<link [[继续|Temple Confess Self End]]>><</link>>
+			<br>
+	<</switch>>
+<</if>>

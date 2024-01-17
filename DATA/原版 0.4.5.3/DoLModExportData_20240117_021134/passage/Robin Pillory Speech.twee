@@ -1,0 +1,37 @@
+:: Robin Pillory Speech []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<npc Robin>><<person1>>
+
+你在人群注意力的中心走到了颈手枷前，
+<<if $speech_attitude is "meek">>
+	你咽下你的焦虑，开始为罗宾说话。"罗宾是无辜的！"你详细地描述了罗宾是多么善良的一个人。
+<<elseif $speech_attitude is "bratty">>
+	当你看着罗宾被虐待时，你的双手紧握成了拳头。你没有办法使用武力制止所有人，所以你决定用自己的语言。
+	"你们这些混蛋应该为自己感到羞愧！看看你们对<<him>>做了些什么！"你大声斥责围观群众。
+<<else>>
+	你试图用你的话来劝阻人群。
+	"罗宾没做错任何事！"你试图告诉人们这件事是完全错误的。
+<</if>>
+<br><br>
+
+<<if $englishSuccess>>
+	人群开始<span class="green">互相争吵，</span>虽然最终只有一部分人离开了。
+	<<set $robinPillory.distracted to 1>>
+	<br><br>
+
+	<span class="gold">人群分散了注意力，现在是你开锁的机会。</span>
+	<<set $robinPillory.distractions.push("speech")>>
+	<br><br>
+
+<<else>>
+	人们开始朝你们扔水果，<span class="red">你的话没有起到任何作用，</span>他们继续骚扰着罗宾。
+	<<pain 6>><<gstress>>
+	<br><br>
+
+<</if>>
+<<if Time.hour lte 22>>
+	<<link [[继续|Robin Pillory Watch]]>><</link>>
+<<else>>
+	<<link [[继续|Robin Pillory Failure]]>><</link>>
+<</if>>
+<br>

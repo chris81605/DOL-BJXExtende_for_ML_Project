@@ -1,0 +1,50 @@
+:: Moor Bird Fight Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	感到疲倦，<<beasttype>>飞上了天空。<span class="red"><<bHe>>在你头顶上盘旋。</span>
+	<br><br>
+	<<set $moor_hunt to 5>>
+
+	<<tearful>>你继续前进。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	你向后退，<<beasttype>>拍打着翅膀飞向空中。<<bHe>>俯冲到小丘后面，消失在你的视线之外。<span class="green">你现在没事了。</span>就目前而言。
+	<br><br>
+	<<unset $moor_hunt>>
+	<<tearful>>你继续前进。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+	你重伤倒地，无法继续战斗。
+	<br><br>
+
+	<<beasttype>>的爪子抓住你的肩膀。<<if $monster is 1>>"很有战斗的精神，我很喜欢，"<<bhe>>边说，背上的翅膀疯狂地扇动。<</if>>你被远远带离了地面。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc "Great Hawk">>
+
+	<<link [[继续|Bird Capture]]>><</link>>
+	<br>
+
+<</if>>

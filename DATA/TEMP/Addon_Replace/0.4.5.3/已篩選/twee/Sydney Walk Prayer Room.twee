@@ -1,0 +1,47 @@
+:: Sydney Walk Prayer Room []
+<<set $outside to 0>><<if $location is "school">><<schooleffects>><</if>><<effects>><<run statusCheck("Sydney")>><<set _sydneyPray to true>>
+<<if $speech_attitude is "meek">>
+	"我们可以……再去次祈祷室，"你的脸唰的一下变红了。
+<<elseif $speech_attitude is "bratty">>
+	"让我们再次玷污祈祷室吧，"你眨了眨眼。
+<<else>>
+	"我们可以再去祈祷室做一次，"你羞涩地别过脸。
+<</if>>
+<br><br>
+<<if _sydneyStatus.includes("corrupt")>>
+	<<if $location is "school">>
+		<<if Time.weekDay is 6>>
+			<<He>>很是兴奋，但随即皱起了眉头。"其他任何一天都行，但周五我必须去帮我的<<sydneymum>>，所以我想我们没有足够的时间。抱歉。"
+			<<set _walk to false>>
+		<<else>>
+			<<He>>看着你，然后咧嘴一笑，"啊~当然，我们今晚放学在神殿见面吧。"
+			<<set _walk to false>>
+		<</if>>
+	<<elseif $location is "temple">>
+		<<if Time.weekDay is 1 and Time.hour gte 10 and Time.hour lte 12 and $daily.massAttended isnot 1>>
+			<<He>>坏笑地看着你，"在弥撒时做？太罪恶了，我喜欢。"
+		<<else>>
+			<<His>>的脸颊微微染上了红晕，然后笑了起来。"是的，我想再和你一起堕落下去。"
+		<</if>>
+		<<set _walk to true>>
+	<</if>>
+<<else>>
+    /* 北极星模组 */
+    <<if $templePromised is "Sydney">>
+    	悉尼害羞地低下头。"好...好吧，既然你执意要求的话。毕竟...我们许下了承诺，这是我作为...你的伴侣，应尽的责任。"
+    	<<npcincr Sydney purity -5>>
+    	<<set _walk to true>>
+	<<else>>
+    	悉尼羞愧地低下头。"现在……我……我的状态不是很好——我的整个世界观都被颠覆了……我对这些事情感到很矛盾……我很抱歉。"
+    	<<set _walk to false>>
+    <</if>>
+	/* 北极星 */
+<</if>>
+<<if _walk is true>>
+	<<He>>牵着你的手，你们悄悄穿过神殿的大厅，朝着祈祷室的隐藏入口走去。<<takeHandholdingVirginity "Sydney" "romantic">>
+	<br><br>
+	<<link [[继续|Sydney Temple Prayer Room]]>><<set $daily.sydney.walk to true>><<pass 5>><</link>>
+<<else>>
+	<br><br>
+	<<sydneyOptions>>
+<</if>>

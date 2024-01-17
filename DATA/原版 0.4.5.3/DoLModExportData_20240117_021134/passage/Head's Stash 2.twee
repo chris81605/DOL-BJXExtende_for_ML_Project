@@ -1,0 +1,37 @@
+:: Head's Stash 2 []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你蹲在桌子下面，开始撬锁。
+<br><br>
+
+<<skulduggerycheck>>
+<br><br>
+<<if $skulduggerysuccess is 1>><<set $hacker_tasks.pushUnique("leighton")>>
+	这花了你不少时间，而且比你想象的要复杂得多。你正要放弃的时候，门突然松了。
+	你打开抽屉，发现了许多相机和镜头，以及一个装满存储卡的盒子。如此多的收藏品！
+	<br>
+	你把内存卡收进包里。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<if $hacker_tasks.length gte 2>>
+	<span class="green">你已经完成了黑客的任务，也许该和兰德里谈一谈了。</span>
+	<br><br>
+	<</if>>
+	<<link [[继续|Head's Office]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	你发现它远比你想象的要复杂。经过了近半个小时的毫无成果的捣鼓，你放弃了。
+	<span class="teal">你差不多找到了打开这把锁的感觉了，你可以尝试再开一次。</span>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<set $skulduggerydifficulty -= 200>>
+	<<link [[再次尝试 (0:30)|Head's Stash 2]]>><<pass 30>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<link [[放弃|Head's Office]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,56 @@
+:: Abduction Hospital Corridor Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Corridor Wolves]]>><</link>>
+	<<else>>
+		这个<<beasttype>>在痛苦和恐惧中退缩了。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+			<<beastsplural>>觉得你带来的麻烦甚过你的价值，于是跑走了。
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			<<beastsplural>>让你在金属地板上颤抖。
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			<<beastsplural>>让你在金属地板上颤抖。
+		<</if>>
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<passouthospital>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Corridor Wolves]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+			<<beastsplural>>觉得你带来的麻烦甚过你的价值，于是跑走了。
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			<<beastsplural>>让你在金属地板上颤抖。
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			<<beastsplural>>让你在金属地板上颤抖。
+		<</if>>
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<passouthospital>>
+	<</if>>
+<</if>>

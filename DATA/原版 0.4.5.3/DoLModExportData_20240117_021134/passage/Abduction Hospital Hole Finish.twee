@@ -1,0 +1,58 @@
+:: Abduction Hospital Hole Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		你在绝境中用脚挡住了<<beasttype>>，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Hole Wolves]]>><</link>>
+	<<else>>
+		你用脚挡住<<beasttype>>，它在痛苦和恐惧中退缩。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+			<<beastsplural>>觉得你带来的麻烦甚过你的价值，于是跑走了。
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			<<beastsplural>>让在墙上的你感觉筋疲力尽、瑟瑟发抖。
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			<<beastsplural>>让在墙上的你感觉筋疲力尽、瑟瑟发抖。
+		<</if>>
+		<br><br>
+
+		<<set $position to 0>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<passouthospital>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		在满足之后，<<beasttype>>离开了。另一只迎了上来，走到你身后准备开始享受。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Abduction Hospital Hole Wolves]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+			<<beastsplural>>觉得你带来的麻烦甚过你的价值，于是跑走了。
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			<<beastsplural>>让在墙上的你感觉筋疲力尽、瑟瑟发抖。
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			<<beastsplural>>让在墙上的你感觉筋疲力尽、瑟瑟发抖。
+		<</if>>
+		<br><br>
+
+		<<set $position to 0>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<passouthospital>>
+	<</if>>
+<</if>>

@@ -1,0 +1,36 @@
+:: Underground Robin Escape Stalk []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<location "forest">>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<generate1>><<generate2>><<generate3>>
+
+	<<maninit>>
+	<<stalk_init>>
+	<<stalk_run>>
+	<<set $combatgoal to "confront">>
+	<<set $NPCList[0].bold to 10000>>
+	你紧紧握住罗宾的手穿过森林。<span class="pink">有人在追你们。</span>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+<br><br>
+
+<<print either(
+	"罗宾紧紧握着你的手。",
+	"罗宾回头看。",
+	"罗宾的手在发抖。"
+)>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $stalk_end>>
+	<span id="next"><<link [[继续|Underground Robin Escape Stalk End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Robin Escape Stalk]]>><</link>></span><<nexttext>>
+<</if>>

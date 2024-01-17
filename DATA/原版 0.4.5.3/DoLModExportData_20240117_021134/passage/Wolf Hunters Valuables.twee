@@ -1,0 +1,50 @@
+:: Wolf Hunters Valuables []
+<<location "forest">><<effects>>
+<<set $wolfpackrob to 1>>
+
+<<if $speech_attitude is "meek">>
+	"把你们的钱和贵重物品都交出来，然后就离开，让我们安心地吃饭，"你说道。
+<<elseif $speech_attitude is "bratty">>
+	"你们的钱和贵重物品，"你说道。"在我把你喂给家人之前。"
+<<else>>
+	"你们的钱和贵重物品，"你说道。"快点，我不能永远阻止它们。"
+<</if>>
+狼群咆哮着。
+<br><br>
+
+他们从口袋里掏出钱，摘下珠宝。他们把所有东西都堆在脚下，然后被紧跟在他们后面的<<wolf_cave_plural>>从营地赶走。一旦人影消失了，它们就开始冲向鹿的尸体。
+<br><br>
+
+<<if $rng gte 96>>
+	你发现了<<moneyGain 200 true true>>现金，以及你认为非常有价值的各种小玩意。
+	<<set $blackmoney += 800>><<crimeUp 800 "thievery">>
+<<elseif $rng gte 51>>
+	你发现了<<moneyGain 50 true true>>现金，以及你认为很有价值的各种小玩意。
+	<<set $blackmoney += 50>><<crimeUp 50 "thievery">>
+<<else>>
+	你发现了<<moneyGain 20 true true>>现金，以及你认为非常有价值的各种小玩意。
+	<<set $blackmoney += 30>><<crimeUp 30 "thievery">>
+<</if>>
+
+<<endevent>>
+<<npc "Black Wolf">>
+黑狼留下了最好的部分给自己。你在猎人留下的袋子里翻找，找到一些更适合你的罐头食品。你坐在鹿旁边。
+<<stress -12>><<lstress>>
+<br><br>
+
+<<if $wolfpackspray isnot 1>><<set $wolfpackspray to 1>>
+	你在他们的东西中发现一个奇怪的圆柱体。它看起来像是防狼喷雾，但底部有一个暴露的计算机芯片。你把它放进去了。
+	<<gspraymax>><<set $spraymax += 1>><<spray 5>>
+	<br><br>
+	<span class="gold">你获得了额外的防狼喷雾。</span>
+	<br><br>
+<</if>>
+<<if $monster is 1>>
+	黑狼坐在你旁边，把手放在你的头上。"狩猎很成功。人类是顶级捕食者。有了你，我们可以做任何事情，<<ppackbrother>>。"
+<</if>>
+
+狼群慵懒地躺在那里，悠闲地享用食物。突然，一场小争斗爆发了，黑狼离开了<<bhis>>在鹿旁边的位置去平息争吵。
+<br><br>
+<<endevent>>
+
+<<wolfpackhuntoptions>>

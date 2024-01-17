@@ -1,0 +1,35 @@
+:: Elk Compound No Longer Possessed Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>><<set $apologised to 1>>
+	<<set $enemynomax to 1>>
+	<<set $timer to 5>>
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<if $timer is 1>>
+	另一个警卫倒下了，痛苦地呻吟着。苍白的身影飘到你的身边，用手指在你的额头上划出一个形状，<span class="green">这动作抚慰了你，让你充满活力。</span>
+	<<set $pain to 0>><<llpain>>
+	<<person1>>
+	<br><br>
+<<elseif $timer lte 0>>
+	苍白的身影抚慰了你的身体。
+	<<set $pain to 0>><<llpain>>
+	<br><br>
+<</if>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Elk Compound No Longer Possessed Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Elk Compound No Longer Possessed Fight]]>><</link>></span><<nexttext>>
+<</if>>

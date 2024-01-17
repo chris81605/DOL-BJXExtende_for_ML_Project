@@ -1,0 +1,100 @@
+:: Farm Assault Wraith Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<set _bind to 1>>
+	随着嘶嘶声，<span class="green">火焰熄灭了</span>。
+	<<ejaculation>>
+
+	"<span class="wraith">如此壮观的欲望。</span>"
+	<<kissWraith>>
+	<br><br>
+
+	<<if $wraith.gen is "arms">>
+		当你仍然摇摇晃晃的时候，<<his>>身后两只多出来的手臂中出现了一股半透明的、闪闪发光的能量。
+	<<else>>
+		当你还在摇摇晃晃的时候，<<he>>的身后又出现了两只手臂，两只手臂做出手势，它们之间有一股半透明的、闪闪发光的能量。
+	<</if>>
+	<<his>>的手像橡皮泥一样变长飞了出来，把你的手臂固定在你的身体两边。<<He>>轻轻抬腿踹上你的胸前，你整个人倒在了地上。
+	<br><br>
+
+	"<span class="wraith">煤渣刺耳的声音。扫干净剩下的煤，捂住耳朵。</span>"
+	<br><br>
+
+	<<He>>走开了，把你留在了泥土里。你不确定<<him>>是否离开了，但你看不见<<him>>的身影。<<tearful>>你与那股能量作斗争。它很薄，但很结实。
+	<br><br>
+
+	<<endcombat>>
+	<<exitWraith>>
+
+<<elseif $enemyhealth lte 0>>
+	那个身影惊恐地望着你，<<he>>踉踉跄跄地向后退去。随着一声嘶嘶声，<span class="green">余烬熄灭</span>。
+	<<if $wraith.gen is "abomination">>
+		触手毫无生气地掉进黑暗的水中。
+	<<elseif $wraith.gen is "arms">>
+		<<His>>额外的触手折回来。
+	<</if>>
+	<<His>>的头颅猛然向后仰去，随着一串凄厉的尖叫消失在虚无之中，这声音在你脑海中回荡不绝。你耳畔嗡嗡作响，仿佛听见了笑声。"<span class="wraith">你将收获你所播种的。</span>"
+	<br><br>
+
+	<<tearful>>你准备着下一步行动。
+	<br><br>
+
+	<<set $wraith.defeated++>>
+	<<clotheson>>
+	<<endcombat>>
+	<<exitWraith>>
+
+<<elseif $timer lte 0>>
+	<<set _torch to 1>>
+	白色幽灵从指尖轻弹出一个火星，落在覆盖着田野的黏液上。它蔓延开来，<span class="red">原野迸发出火焰。</span>你没有被烧伤，但原野在你眼前被点燃。你的心沉了下去。
+	<<control -10>><<stress 12>><<trauma 6>><<lcontrol>><<ggstress>><<gtrauma>>
+	<br><br>
+
+	"<span class="wraith">在你面前被撕开，会不会很疼？</span>"当你心烦意乱的时候，苍白的身影抓住了你的脸。
+	<<set $wraith.gen to "man">><<kissWraith>>
+	<br><br>
+
+	白色幽灵走开了，把你留在了泥土里。你不确定<<him>>是否离开了，但你看不见<<him>>的身影。<<tearful>>你计划着下一步行动。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<exitWraith>>
+
+<<else>>
+	<<set _bind to 1>><<set _torch to 1>>
+	你摔倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+
+	<<if $wraith.gen is "arms">>
+		苍白的人影将两只<<his>>多余的手紧握在一起，形成了一股半透明的、闪闪发光的能量。
+	<<else>>
+		白色幽灵长出了两条额外的手臂，形成了一股半透明的、闪闪发光的能量。
+	<</if>>
+	<<his>>的手像橡皮泥一样变长飞了出来，把你的手臂固定在你的身体两边。<<He>>轻轻抬腿踹上你的胸前，你整个人倒在了地上。
+	<br><br>
+
+	"<span class="wraith">煤渣刺耳的声音。扫干净剩下的煤，捂住耳朵。</span>"
+	<br><br>
+
+	白色幽灵从指尖轻弹出一个火星，落在覆盖着田野的黏液上。它蔓延开来，<span class="red">田野燃起熊熊火焰。</span>你没有被烧伤，但田野就在你眼前燃烧。你挣扎着，尖叫着。
+	<<control -10>><<stress 12>><<trauma 6>><<lcontrol>><<ggstress>><<gtrauma>>
+	<br><br>
+
+	白色幽灵走开了，把你留在了泥土里。你不确定<<him>>是否离开了，但你看不见<<him>>的身影。<<tearful>>你与那股能量作斗争。它很薄，但很结实。
+	<br><br>
+
+	<<endcombat>>
+	<<exitWraith>>
+<</if>>
+<br>
+
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<if _bind is 1>>
+	<<set $farm_assault.bindings to 6>>
+	<<bind>>
+<</if>>
+<<if _torch is 1>>
+	<<damage_farm "target" $farm_assault.teams[_assault_keys[$farm_assault.wraith]].location>>
+<</if>>
+<<set $farm_assault.teams[_assault_keys[$farm_assault.wraith]].location to "done">>

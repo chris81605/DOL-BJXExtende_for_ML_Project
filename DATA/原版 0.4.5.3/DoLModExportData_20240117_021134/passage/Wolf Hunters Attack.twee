@@ -1,0 +1,37 @@
+:: Wolf Hunters Attack []
+<<location "forest">><<effects>>
+<<generate1>><<generate2>><<generate3>>
+狼群在营地周围就位，然后从四面八方冲进来！
+<br><br>
+
+<<if $wolfpackharmony + $wolfpackferocity - 20 gte $rng>>
+
+	猎人反应很快，但速度不够快。一个<<person1>><<person>>伸手去拿<<his>>的枪，<<he>>把枪留在了<<he>>坐的地方，但为时已晚。黑狼猛扑过去，抓住<<his>>的手臂。
+	<br><br>
+
+	另一个<<wolf_cave_plural>>跟随黑狼的脚步。当它们背靠着猎人，把他们逼成一个紧密的圆圈时，你开始后退。
+	<br><br>
+
+	"这、这太疯狂了，"<<person>>结结巴巴地说道。
+	<br><br>
+	<<earnFeat "Top of the Food Chain">>
+	<<link [[索要贵重物品|Wolf Hunters Valuables]]>><</link>><<crime "thievery">>
+	<br>
+	<<link [[让他们走|Wolf Hunters Go]]>><</link>>
+	<br>
+
+<<else>>
+	猎人们迅速做出反应，他们拿起步枪向狼群开火。子弹呼啸着飞入树林。虽然没有受伤，但<<wolf_cave_plural>>仍然转身逃离，寻找安全之处。你跟着它们一起离开了那里。
+	<<lharmony>><<lferocity>>
+	<br><br>
+
+	<i>更高的和谐和凶猛增加了狩猎成功的机会。</i>
+	<br><br>
+
+	你又一次跑进森林，后面紧跟着狼群。一定有更容易被捕食的猎物。
+	<<gathletics>><<athletics 6>><<physique 6>>
+	<br><br>
+	<<endevent>>
+	<<set $bus to "wolfcaveclearing">>
+	<<wolfhuntevents>>
+<</if>>

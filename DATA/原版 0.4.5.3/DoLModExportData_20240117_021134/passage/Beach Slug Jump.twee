@@ -1,0 +1,31 @@
+:: Beach Slug Jump []
+<<effects>>
+
+<<if $athleticsSuccess>>
+	你奋力一跃，<span class="green">跳到了池子的另一边。</span>你继续跑着，而巨型蛞蝓毫不减速地从池子滑行着过去。
+	<br><br>
+
+	<<link [[继续|Beach Slug]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你跳了起来，<span class="red">但却跳进了粘液池中。</span>
+	<<drench "goo" 5>>
+	<br><br>
+	<<if $swarmdisable is "f">>
+		你设法让你的头部露了出来，但却感觉道有什么在皮肤上蠕动。
+		<br><br>
+
+		<<link [[继续|Beach Slug Swarm]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你设法将头露出水面，把自己拖到了对岸。巨大的蛞蝓紧随身后。<<gpursuit>><<set $pursuit += 1>>
+		<br><br>
+
+		<<if $pursuit gte 3>>
+			<<slug_caught>>
+		<<else>>
+			<<link [[继续|Beach Slug]]>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,20 @@
+:: Science Classroom Mock []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你坏笑了起来。"白大褂真是个好玩意儿，老师。毕竟它可以盖住某些'脏东西'。"坐着的学生们爆发出一阵笑声。
+<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $schoolstate is "second" and $sydneyScience isnot 1>>
+	<<run statusCheck("Sydney")>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		即使是悉尼也努力不让自己笑出声来。
+	<<else>>
+		悉尼的眼睛震惊地睁大了。
+	<</if>>
+	<<lspurity>>
+<</if>>
+<br><br>
+
+西里斯看起来愤怒了。"好吧。你知道的，我得把你的行为告诉校长。请，离开这里。"
+<<gdelinquency>>
+<br><br>
+<<detention 1>><<npcincr Sirris love -1>>
+<<link [[继续|Hallways]]>><<endevent>><</link>>

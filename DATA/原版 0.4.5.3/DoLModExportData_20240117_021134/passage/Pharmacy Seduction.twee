@@ -1,0 +1,39 @@
+:: Pharmacy Seduction []
+"你为什么不亲眼看看呢？"你凝视着<<his>>的眼睛说道。
+<br><br>
+
+<<set $seductiondifficulty to (8888 - ($rng * 20) - ($pharmacyItem.type.includes("growth") ? 500 : 1000))>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>><<promiscuity2>>
+
+<<if $seductionrating gte $seductionrequired>>
+	<<set $daily.pharm.seductionResult to "pass">>
+	<<He>>皱了下眉头，然后环顾了一下四周，在确保只有你独自一人之后。<<he>>脸红着将你带到了柜台后面。
+	<br>
+	<<He>>将你推到在墙上，然后<<his>>在蹲下之后，急忙将你的<<allBottomsUnderwear>>脱掉了。
+	<br><br>
+
+	<<set $sexstart to 1>>
+	<<link [[继续|Pharmacy Encounter Sex]]>><</link>>
+<<else>>
+	<<set $daily.pharm.seductionResult to "fail">>
+	在短暂的停顿之后，<<he>>直接大声笑了出来。<<ggstress>><<stress 23>>
+	<br>
+	"想得美，<<lass>>！"<<he>>说道。
+	<br>
+	"那么，你是刷卡还是现金呢？"
+	<br><br>
+
+	桌子上有一盒<<print $pharmacyItem.cn_name>>。
+	<br><br>
+
+	<<if $money gte $pharmacyItem.price>>
+		<<formatmoney $pharmacyItem.price>>
+		<<link [["支付" + _printmoney|Pharmacy Seduction End]]>><<set $phase to "pay">><</link>>
+	<<else>>
+		<span class="purple">你没有那么多钱。</span>
+	<</if>>
+	<br>
+	<<link [[算了|Pharmacy Seduction End]]>><<set $phase to "nevermind">><</link>>
+<</if>>

@@ -1,0 +1,61 @@
+:: Farm Woodland []
+<<set $outside to 1>><<set $location to "alex_farm">><<set $bus to "woodland">><<effects>>
+
+<<farm_work_update>>
+
+你在农场的林地里。
+
+<<if Time.dayState is "night">>
+	<<if $weather is "snow">>
+		雪压弯了头顶上的黑色树枝。
+	<<elseif $weather is "rain">>
+		树木遮挡着你免受冰冷的雨水侵袭。
+	<<else>>
+		寒冷的夜风在这里被有所削弱。
+	<</if>>
+<<else>>
+	<<if $weather is "snow">>
+		雪压弯了头顶上的树枝。
+	<<elseif $weather is "rain">>
+		树木遮挡着你，让你不至于被雨淋得太湿。
+	<<else>>
+		你被鸟儿的鸣叫声所包围。
+	<</if>>
+<</if>>
+<<if $farm_work.alex is "woodland">>
+	艾利克斯在清除枯木。
+<</if>>
+<br><br>
+
+<<if $stress gte 10000>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21>>
+	<<npc Alex>><<person1>>
+	艾利克斯冲了过来，<span class="red">"雷米来了，"</span><<he>>接着说道，"我们可以做到的，去做好准备，我去
+	<<if $farm.tower_guard>>
+		提醒一下$farm.tower_guard。"
+	<<else>>
+		看看能不能定位到他们的位置。"
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 2>><</link>>
+	<br>
+<<else>>
+	<<if $farm_work.alex is "woodland">>
+			<<link [[帮助艾利克斯照料林地 (0:20)|Farm Woodland Tend Alex]]>><<set $farm_work.woodland += 1>><<farm_count 20>><<pass 20>><<tending 2>><<tiredness 2>><<physique 2>><<set $farm_work.tending += 1>><</link>><<gtiredness>><<gtending>>
+			<br>
+	<<elseif $farm_work.woodland lt $farm.woodland>>
+		<<link [[照料林地 (0:20)|Farm Woodland Tend]]>><<set $farm_work.woodland += 1>><<farm_count 20>><<pass 20>><<tending 2>><<tiredness 2>><<physique 2>><<set $farm_work.tending += 1>><</link>><<gtiredness>><<gtending>>
+		<br>
+	<</if>>
+	<<if $farm_work.forage isnot 1 and $farm.woodland gte 2>>
+		<<link [[采集食物 (1:00)|Farm Woodland Forage]]>><<set $farm_work.forage to 1>><<pass 60>><</link>>
+		<br>
+	<</if>>
+	<<link [[离开 (0:05)|Farm Work]]>><<pass 5>><</link>>
+	<br>
+<</if>>

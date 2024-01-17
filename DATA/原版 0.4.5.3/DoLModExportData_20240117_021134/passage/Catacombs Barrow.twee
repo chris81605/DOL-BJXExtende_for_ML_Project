@@ -1,0 +1,42 @@
+:: Catacombs Barrow []
+<<effects>><<set $bus to "barrow">>
+
+你在森林下的地下墓穴里。石头上刻出了道道大沟。一座巨大的土丘耸立在他们的上方。
+<br><br>
+
+<<if $museumAntiques.antiques.antiquesilvercrown isnot "found" and $museumAntiques.antiques.antiquesilvercrown isnot "talk" and $museumAntiques.antiques.antiquesilvercrown isnot "museum">>
+	有一个小隧道，通向土丘。
+	<br><br>
+<</if>>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs barrow>>
+<<else>>
+	<<if $museumAntiques.antiques.antiquesilvercrown isnot "found" and $museumAntiques.antiques.antiquesilvercrown isnot "talk" and $museumAntiques.antiques.antiquesilvercrown isnot "museum">>
+		<<link [[进入土堆|Catacombs Crown]]>><</link>>
+		<br>
+	<</if>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Barrow Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "east">><<link [[向东走  (0:10)|Catacombs Stream]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+	<br>
+	<<caveicon "west">><<link [[向西走 (0:10)|Catacombs Masonry]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

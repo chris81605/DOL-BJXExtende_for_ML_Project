@@ -1,0 +1,149 @@
+:: Forest Fox Nest Pet []
+<<effects>>
+你轻轻地触摸<<beasttypes>>的尾巴。它非常柔软。你开始抚摸它。<<stress -8>><<llstress>>
+<br><br>
+
+<<if $tendingSuccess>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<set $phase to 2>>
+		<<bHe>>愣了一会儿，<span class="green">才无奈地翻了个身，肚皮朝天</span>。
+		<<if $monster is 1>>
+			"你在干什么？马上停止！啊——"<<bhe>>看起来很生气，但是当你继续揉<<bhis>>的肚子时，<<bhis>>苏醒的欲望背叛了<<bhim>>。
+		<<else>>
+			<<bHe>>试图咆哮，但当你揉<<bhis>>的肚子时，很快就变成了低沉的咕噜声。
+		<</if>>
+		<br><br>
+
+		<<bHis>>的腿心满意足地踢着。
+		<<if $monster is 1>>
+			"该死的……不要……你……敢……停止……"
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<span class="green"><<bHe>>立即翻身</span>，露出<<bhis>>的肚子。
+		<<if $monster is 1>>
+			<<bHe>>停顿了一会儿，盯着你看。"对，对不起。没办法。请继续前进。"
+		<<else>>
+			<<bHe>>发出一声低低的吱吱声，好像要你继续。
+		<</if>>
+		你给<<bhis>>的肚子揉了揉，<<bhis>>的尾巴高兴地摇了摇。
+	<<elseif $NPCList[0].traits.includes("clumsy")>>
+		<<set $phase to 2>>
+		<<bHe>>退缩了，以一种防御的姿态转向你。<<bHe>>试图猛扑过来，<span class="green">但最终被绊倒翻滚起飞而后四脚朝天落下</span>。
+		<br><br>
+
+		<<if $monster is 1>>
+			"不！不！"
+		<<else>>
+			<<bHe>>绝望地哭了。
+		<</if>>
+		你趁机揉了揉<<bhis>>的肚子。<<bHe>>立即放松下来，并且<<bhis>>的腿开始踢动。
+	<<else>>
+		<<bHe>>退缩了，<span class="green">但在你的触摸下迅速放松</span>。
+		<<if $monster is 1>>
+			<<bHe>>脸红。"你在干什么？"
+		<<else>>
+			<<bHe>>用好奇的眼神看着你。
+		<</if>>
+		你给<<bhis>>的尾巴更多的关注，轻轻地抚摸它，抚平它。<<bHe>>翻了个身。
+		<<if $monster is 1>>
+			"嘿，别闹了！"<<bHe>>看起来有些心烦意乱，但还是保持着微笑。
+		<<else>>
+			你的注意力让<<bhim>>发出呼噜声。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $phase isnot 1 and $phase2 isnot 1>>
+		趁<<bhes>>分心，你伸手从洞中取出蛋。<<tending_bird_eggs $forest_nest.eggs>><<set $phase2 to 1>>
+		<br><br>
+	<</if>>
+
+	<<if $deviancy gte 15 and ($bestialitydisable is "f" or $monster is 1)>>
+		<<link [[采用交配姿势|Forest Fox Nest Mate]]>><<set $phase to 2>><</link>><<deviant2>>
+		<br>
+	<<else>>
+		<span class="blue">你的异种癖还不够，没办法做出进一步的行动。</span>
+		<br>
+	<</if>>
+	<<link [["让"+ $NPCList[0].pronouns.him +"走"|Forest Fox Let Go]]>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<bHe>>愣了一会儿，<span class="red">然后转身咆哮</span>。
+		<<bHe>>马上扑向你，把你按在地上。
+		<br><br>
+
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<if $monster is 1>>
+				<<bHe>>得意地跨在你身上，双臂交叉在<<bhis>>裸着的<<print $NPCList[0].breastsdesc>>前。
+				<<if $fox gte 6>>
+					"这是我的地盘，小狐狸。我不会分享的。"<<bHe>>压低身子，你的脸几乎碰到<<bhis>>的胸口。"当然……如果你是我的伴侣，事情就会不同。"
+				<<elseif $cat gte 6>>
+					"傲慢的小猫咪。我应该给你一个教训。"
+				<<elseif $wolf gte 6>>
+					"这是我的地盘，无礼的小狼崽。这是对你们族群的警告。"
+				<<else>>
+					"这是我的地盘。但是……你很可爱。"
+				<</if>>
+				<<bHe>>低头伸展，后臀朝天。"我感觉很慷慨。"
+				<br><br>
+			<</if>>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<else>>
+			你把自己从<<bhim>>下面推出去，然后逃跑。<<beastescape>>
+			<br><br>
+
+			<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><</link>>
+			<br>
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<bHe>>立即摔倒，<span class="red">采取防御姿态</span>。
+		<<if $monster is 1>>
+			<<bHe>>停顿了一会儿，盯着你看。"你吓到我了。请走开。换做别的狐狸，就不会这么好心了。"
+		<<else>>
+			<<bHe>>发出一声咆哮，虽然不是很吓人。
+		<</if>>
+		<<bHe>>继续在鸟蛋上踢土，但不打断你的目光接触。
+		<br><br>
+
+		你决定不碰运气。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<elseif $NPCList[0].traits.includes("clumsy")>>
+		<<bHe>>退缩了，<span class="red">以防御姿态转向你</span>。
+		<br><br>
+		<<if $monster is 1>>
+			"别碰！"<<bHe>>威胁地吠叫。
+		<<else>>
+			<<bHe>>威胁地吠叫。
+		<</if>>
+		<<if $phase2 is 1>>
+			然而，<<bhe>>似乎又一次忘记了你的存在。<<bHe>>继续舔<<bhis>>黄色的尾巴。
+		<</if>>
+		<br><br>
+
+		你决定不碰运气。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<else>>
+		<span class="red"><<beasttypes>>尾巴直立并鼓起</span>。<<bHe>>采取防御姿态并对你咆哮。
+		<br><br>
+
+		<<if $monster is 1>>
+			"这些是我的。这是对你唯一的警告。走开。"
+		<<else>>
+			<<bHe>>慢慢靠近，发出威胁的吠叫。
+		<</if>>
+		你慢慢地后退。很明显<<bhe>>只想一个人待着，你答应了，回到了小路上。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<</if>>
+<</if>>

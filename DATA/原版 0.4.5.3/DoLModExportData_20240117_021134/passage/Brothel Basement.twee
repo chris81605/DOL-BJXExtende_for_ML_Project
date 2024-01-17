@@ -1,0 +1,32 @@
+:: Brothel Basement []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<if $brothel_basement_intro is undefined>>
+	<<set $brothel_basement_intro to 1>>
+	<<generate1>><<person1>>
+	一个<<person>>从附近的门里走了出来。<<He>>戴了一张黑色的面具，遮住了<<his>>上半张脸。
+	<br><br>
+	"你好像迷路了，"<<he>>笑着说。"这些房间是给员工的。"<<He>>指向了楼梯附近的一个标牌，上面写着<<printmoney $brothel_basement_price>>。
+	<<if $brothel_basement_price gte 2000>>
+		"今天价格贵一些。
+	<<else>>
+		"差不多就这个价钱。
+	<</if>>
+	虽然挣的比在台上少，但是你不会被认出来。"
+	<br><br>
+	<<link [[继续|Brothel Basement]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你在妓院的地下室。房间的一侧有一排小隔间，每个隔间里都有一个<<if $awareness gte 200>>寻欢洞<<else>>洞<</if>>。
+	<br><br>
+	楼梯旁的一块牌子上写着：<<printmoney $brothel_basement_price>>。
+	<br><br>
+	<<if $promiscuity gte 55>>
+		<<brothelicon "gloryhole">><<link [[占用一个房间 (0:10)|Brothel Gloryhole]]>><<pass 10>><<set $phase to 1>><</link>><<promiscuous4>>
+		<br>
+	<<else>>
+		<span class="lewd">你不够淫乱，不能在寻欢洞工作。</span>
+		<br><br>
+	<</if>>
+	<<getouticon>><<link [[离开|Brothel]]>><</link>>
+	<br>
+<</if>>

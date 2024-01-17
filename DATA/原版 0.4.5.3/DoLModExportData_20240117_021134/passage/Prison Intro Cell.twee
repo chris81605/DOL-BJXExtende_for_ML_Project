@@ -1,0 +1,48 @@
+:: Prison Intro Cell []
+<<effects>><<effects_prison>>
+
+<<if $prison.schedule is "lockdown">>
+	牢门咣当一声关上了。
+	<<if $prison_intro is undefined>>
+		"欢迎来到你的新家，"
+	<<else>>
+		"欢迎回来，"
+	<</if>>
+	<<person1>><<relaxed_guard 0>>对你说，"灯在<<ampm 6 00>>亮起。墙上有时间表。你识字的，对吧？"
+	<br><br>
+	<<if $prison_intro isnot 1>>
+		"肃静！"警卫边走边喊。一个脸上有一道参差不齐的伤疤的<<person5>><<personsimple "normal">>在<<his>>的牢房里盯着你。<<he>>舔了舔其中一根铁栏杆。
+	<<else>>
+		"肃静！"警卫边走边喊。<<person5>><<scarred_inmate 4 cap>>在<<his>>的牢房里盯着你。<<He>>舔了舔其中一根铁栏杆。
+	<</if>>
+	<br><br>
+
+	牢房几乎和你在孤儿院的房间一样小。墙上有一条参差不齐的裂缝，角落里则放着一张光秃秃的床垫。另一个角落有个橱柜，上面挂着一个牌子，上面写着"主在看着"，下面是日程表。但你还没来得及看，灯就灭了。
+	<br><br>
+<<else>>
+	牢门咣当一声关上了。
+	<<if $prison_intro is undefined>>
+		"欢迎来到你的新家，"
+	<<else>>
+		"欢迎回来，"
+	<</if>><<person1>><<relaxed_guard 0>>面无表情地往前走。"灯在<<ampm 6 00>>亮，墙上有时间表。你看得懂吧？"
+	<br><br>
+	<<if $prison_intro isnot 1>>
+		"肃静！"警卫边走边喊。一个脸上有一道参差不齐的伤疤的<<person5>><<personsimple "normal">>走了过来。<<he>>目不转睛地看了你一会儿，在离开前舔了口面前的栏杆。
+	<<else>>
+		"肃静！"警卫边走边喊。<<person5>><<scarred_inmate 4 cap>>走了过来。<<he>>目不转睛地看了你一会儿，在离开前舔了口面前的栏杆。
+	<</if>>
+	<br><br>
+
+	牢房几乎和你在孤儿院的房间一样小。墙上有一条参差不齐的裂缝，角落里则放着一张光秃秃的床垫。另一个角落有个橱柜，上面挂着一个牌子，上面写着"主在看着"，下面是日程表。
+	<br><br>
+<</if>>
+
+<<endcombat>>
+
+<<link [[继续|Prison Cell]]>>
+	<<set $prison.time to Math.trunc(crimeSumCurrent() / 250)>>
+	<<crimeClear "all">>
+	<<set $prison_intro to 1>>
+<</link>>
+<br>

@@ -1,0 +1,25 @@
+:: Prison Pimp End []
+<<effects>>
+
+<<generate_veteran_guard 0>><<person1>>
+<<veteran_guard 0 cap>>解开了你的手腕，把你从墙上拉了下来。
+<br><br>
+
+<<if $prison_pimp_serviced gte 2>>
+	<<set $prison.time -= $prison_pimp_serviced>>
+	<<He>>数着一沓钞票。"你小子挺能干的呀，"<<he>>舔了舔手指，"我会从你的刑期里减去<<number $prison_pimp_serviced>>天——现在赶紧去干活。"<<glove>><<prison_rep veteran 100>>
+<<elseif $prison_pimp_serviced is 1>>
+	<<set $prison.time -= 1>>
+	<<He>>数着一沓钞票。"你小子挺能干的呀，"<<he>>舔了舔手指，"我会从你的刑期里减去一天——现在赶紧去干活。"<<glove>><<prison_rep veteran 1>>
+<<else>>
+	<<He>>用警棍抽打着你的<<if playerBellySize(true) gte 8>>屁股<<else>>腹部<</if>>。"下次最好老实一点，"<<he>>咆哮着再次抽向了你，"你惹恼的可不止我一个——现在给我马上滚。"<<gpain>><<pain 4>>
+<</if>>
+<br><br>
+
+你爬上蜿蜒的楼梯，回到了狱区。<<veteran_guard 0 cap>>锁上了<<him>>身后的门。
+
+<<prison_unbind>>
+<br><br>
+
+<<link [[继续|Prison Block]]>><<unset $prison_pimp_serviced>><<unset $prison_pimp>><<endevent>><</link>>
+<br>

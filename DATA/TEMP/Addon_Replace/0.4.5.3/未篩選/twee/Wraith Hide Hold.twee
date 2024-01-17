@@ -1,0 +1,43 @@
+:: Wraith Hide Hold []
+<<effects>>
+你慢慢地深呼吸，然后开始屏气。希望祂听不到你。
+<<if $willpowerSuccess>>
+	白色的长袍飘过了<<if $location is "park">>灌木丛<<else>>垃圾箱<</if>>。没有任何声响，几乎是一瞬而过。
+	<br><br>
+	很长一段时间你都不敢动。你在等，但你不知道等多久。最后，你冒险看了一眼。
+	<br><br>
+	<<if $rng lte 15>>
+		<span class="red">一对发光的<<wraithEyes>>眼睛直直地盯着你，近在咫尺。</span>
+		你被猛烈地拉了出来，就这样摔在地上。<<pain 4>><<gpain>>
+		<br><br>
+		<<generateWraith 1 true>><<initWraith "abomination">>
+		<<startWraith>>
+		<br><br>
+		<<link [[继续|Wraith Caught]]>><</link>>
+		<br>
+	<<else>>
+		<span class="green">你没看到任何人。</span>你溜了出去，张望着看了最后一眼。你很安全，至少对现在而言。<<stress -3>><<lstress>>
+		<<set $wraith.hunt -= 2>>
+		<br><br>
+		<<exitWraith>>
+	<</if>>
+<<else>>
+	你试着不去想祂会怎样找到你。
+	<span class="red">一个<<if $parasite.left_ear.name is "slime" or $parasite.right_ear.name is "slime">>微笑<<else>>幻像<</if>>一样的东西突然浮现在了你的脑海。</span>
+	你的呼吸越来越重，你开始变得愈发的恐慌。<<stress 6>><<gstress>>
+	<br><br>
+	四周在变得模糊。你泪流满面，强忍住啜泣，呼吸声充斥着你的双耳。你愈发的不安，愈发的变得恐慌。<<stress 12>><<ggstress>>
+	<br><br>
+	就算你用手捂着嘴，声音还是那么大。你用力吸气，保持住。
+	<br><br>
+	你仍然能听到沉重的呼吸声。声音很低，听起来几乎像咯咯的笑声。就在你旁边。
+	<br><br>
+	你的全身因恐惧而麻木。你勉强转过头来，面对着一个苍白的面孔。你没有机会尖叫。
+	<br><br>
+	你被粗暴地扔出去。祂跟着你飘出去。
+	<<generateWraith 1 true>><<initWraith "abomination">>
+	<<startWraith>>
+	<br><br>
+	<<link [[继续|Wraith Caught]]>><</link>>
+	<br>
+<</if>>

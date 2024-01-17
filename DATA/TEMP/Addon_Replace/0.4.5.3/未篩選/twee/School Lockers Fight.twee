@@ -1,0 +1,31 @@
+:: School Lockers Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<enableSchoolRescue "Whitney">>
+	<<set $enemytrust -= 100>>
+	<<set $enemyhealthmax -= 100>>
+	<<set $enemyhealth -= 100>>
+	<<set $enemyanger += 100>>
+	<<npcidlegenitals>>
+	"哦，是的，"你说："那你想怎样？"<<He>>跑过来撞在你身上，你俩都摔倒在地。
+	<br><br>
+	<<set $timer to 10>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|School Lockers Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue gte 1>>
+	<span id="next"><<link [[继续|Whitney Rescue]]>><<set $whitneyRescueExit to "hallways">><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Lockers Fight]]>><</link>></span><<nexttext>>
+<</if>>

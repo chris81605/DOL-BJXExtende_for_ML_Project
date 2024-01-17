@@ -1,0 +1,260 @@
+:: Widgets Tentacle World [widget]
+<<widget "passouttentacleworld">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "tentacleworld">>
+	<<else>>
+		<<passout>>
+		<<link [[你眼前一黑……->Passout Tentacle World]]>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "tentacleworldintro">>
+	<<set $tentnorth to 0>>
+	<<set $tenteast to 0>>
+	<<if $rng gte 51>>
+		<<set $tentportalnorth to either(-5, -4, 4, 5)>>
+		<<set $tentportaleast to random(-5, 5)>>
+	<<else>>
+		<<set $tentportalnorth to random(-5, 5)>>
+		<<set $tentportaleast to either(-5, -4, 4, 5)>>
+	<</if>>
+<</widget>>
+
+<<widget "tentacleworldend">>
+	<<unset $tentacleadmire>>
+	<<unset $tentaclewolf>>
+	<<unset $tentacleangel>>
+	<<unset $tentaclefallenangel>>
+	<<unset $tentacleEntrance>>
+	<<unset $tentaclecat>>
+	<<unset $tentaclecow>>
+	<<unset $tentaclefox>>
+	<<unset $tentacleorgasmignore>>
+	<<unset $tentacle_forest_time>>
+	<<unset $tentacle_forest_stream>>
+	<<unset $tentacle_forest_lurker>>
+<</widget>>
+
+<<widget "tentacle_forest_safe_orgasm">>
+	<<if $arousal gte 10000 and $tentacle_forest_lurker.includes("defeated")>>
+		当感觉变得难以忍受时，你跪倒在地。<<orgasm>>
+		<br><br>
+		你挣扎着站起来。尽管处于脆弱状态，<span class="teal">没有什么可以攻击你。</span>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "tentacle_forest_end_scene">>
+<span class="blue">有某种东西向你袭来。</span>你感到了它的存在。时间足够让它通过。它绕着你盘旋，宣告了自己的降临。
+<br><br>
+<<set $bus to "barb">>
+<<link [[继续|Flats Hookah End]]>><<tentacleworldend>><</link>>
+<br>
+<</widget>>
+
+<<widget "tentacle_forest_orgasm_scene">>
+当感觉变得难以忍受时，你跪倒在地。<<orgasm>>
+<br><br>
+大地震动，破裂开来。触手突然冒出，以猛烈有力的姿态移动着，直指你。
+<br><br>
+
+他们在你的性高潮消退之前抓住你的四肢，把你拖到下面。
+<br><br>
+
+<<link [[继续|Tentacle Forest Orgasm]]>><</link>>
+<br>
+<</widget>>
+
+<<widget "tentacle_forest_stress_scene">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "tentacleforest">>
+	<<else>>
+		你把自己逼得太紧了，跪倒在地。
+		<br><br>
+		<span class="red">你脚下的地面开裂，几条触手出现。</span>它们抓住你的四肢，把你虚弱的身体拖到地下。
+		<br><br>
+
+		<<if $tentacle_forest_lurker.includes("defeated")>>
+			你落在森林下的洞穴里，坐在地上。<span class="red">奇怪的生物回来了</span>，蠕动着朝你靠近。
+		<<else>>
+			你坐在地上，周围是一滩浓稠的粉红色液体，周围是海绵状的墙壁。一个奇怪的生物向你蠕动。它没有明显的特征，除了一个巨大的胃。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Tentacle Forest Orgasm Defeat]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "tentaclewolf">>
+	<<if $wolfgirl gte 6 and $syndromewolves gte 1>>
+		<<if $tentaclewolf is undefined>>
+			<<set $tentaclewolf to 0>>
+			你听到远处传来微弱的声音，十分熟悉，但你说不上来到底是什么。它突破了这里的迷雾，让你回想起了森林。
+			<<lstress>><<larousal>><<stress -6>><<arousal -6>>
+			<br><br>
+		<<elseif $tentaclewolf is 0>>
+			<<set $tentaclewolf to 1>>
+			你又听到了那个声音。它从<<tentacledirection>>传来。
+			<<lstress>><<larousal>><<stress -6>><<arousal -6>>
+			<br><br>
+		<<elseif $tentaclewolf is 1>>
+			<<set $tentaclewolf to 2>>
+			熟悉的声音越来越响了。听起来像是嚎叫。它来自<<tentacledirection>>。
+			<<lstress>><<larousal>><<stress -6>><<arousal -6>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "tentacledirection">>
+	<<if $tentportalnorth gt $tentnorth>>
+		<<if $tentportaleast gt $tenteast>>
+			东北
+		<<elseif $tentportaleast lt $tenteast>>
+			西北
+		<<else>>
+			北方
+		<</if>>
+	<<elseif $tentportalnorth lt $tentnorth>>
+		<<if $tentportaleast gt $tenteast>>
+			东南
+		<<elseif $tentportaleast lt $tenteast>>
+			西南
+		<<else>>
+			南方
+		<</if>>
+	<<else>>
+		<<if $tentportaleast gt $tenteast>>
+			东方
+		<<elseif $tentportaleast lt $tenteast>>
+			西方
+		<<else>>
+			近在咫尺的地方
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "tentacle_forest_pass">>
+<<if _args[0]>>
+	<<pass _args[0]>>
+	<<set $tentacle_forest_time += _args[0]>>
+	<<set $tentacle_forest_time to Math.clamp($tentacle_forest_time, 0, 120)>>
+<</if>>
+<</widget>>
+
+<<widget "tentacle_forest_time">>
+剩余的森林时间：<<print (60 - $tentacle_forest_time)>>
+<</widget>>
+
+<<widget "destination_tentacle_forest">>
+<<switch $bus>>
+	<<case "tentacle_forest_main">>
+		<<link [[继续|Tentacle Forest]]>><</link>>
+		<br>
+	<<case "tentacle_forest_stream">>
+		<<link [[继续|Tentacle Forest Stream]]>><</link>>
+		<br>
+	<<case "tentacle_forest_flowers">>
+		<<link [[继续|Tentacle Forest Flowers]]>><</link>>
+		<br>
+	<<case "tentacle_forest_cliff">>
+		<<link [[继续|Tentacle Forest Cliff]]>><</link>>
+		<br>
+	<<case "tentacle_forest_pool">>
+		<<link [[继续|Tentacle Forest Pool]]>><</link>>
+		<br>
+	<<case "tentacle_forest_plants">>
+		<<link [[继续|Tentacle Forest Plants]]>><</link>>
+		<br>
+	<<case "tentacle_forest_door">>
+		<<link [[继续|Tentacle Forest Door]]>><</link>>
+		<br>
+	<<case "tentacle_forest_prison">>
+		<<link [[继续|Tentacle Forest Prison]]>><</link>>
+		<br>
+	<<default>>
+		<<link [[继续|Tentacle Forest]]>><</link>>
+		<br>
+	<</switch>>
+<</widget>>
+
+<<widget "tentacle_forest_events">>
+<<cleareventpool>>
+
+<<addinlineevent "tentacle_forest_1" 1>>
+	一条藤蔓般的触手从上方的树冠中伸出，划破空气，猛烈打击你的<<bottom>>。<<gpain>><<ggarousal>><<pain 4>><<arousal 1800>>
+	<br><br>
+
+	你突然被一股力量向前推进。
+
+	<<dancedifficulty 1 1000>>
+	<<if $danceSuccess>>
+		你差点被另一根触手绊倒，<span class="green">但设法站稳了。</span>
+		<br><br>
+
+		<<destination_tentacle_forest>>
+	<<else>>
+		<span class="red">你绊倒在另一个触手上</span>，它横在地面上。它缠绕在你的腰上，使你无法动弹，第一个触手开始沿着你的大腿蠕动。
+		<br><br>
+
+		<<if $player.penisExist>>
+			你感觉到你的<<genitals 1>>被轻弹了一下。触手在你的长度上上下滑动，以有节奏的方式挤压。
+		<<else>>
+			你感到阴唇被轻弹了一下。触手滑过你的皮肤，缠绕在你的阴蒂上，有节奏地挤压。
+		<</if>>
+		你把两条触手都拉开，让你站起来，但你无法阻止热量上升。<<gggarousal>><<arousal 3600>>
+		<br><br>
+
+		<<destination_tentacle_forest>>
+	<</if>>
+<</addinlineevent>>
+
+<<addinlineevent "tentacle_forest_2" 1>>
+	其中一个较大的触手上的孔打开，喷出浓浓的粉红色雾气。它让你感到头晕目眩。<<ggarousal>><<arousal 1800>>
+	<br><br>
+
+	<<destination_tentacle_forest>>
+<</addinlineevent>>
+
+<<addinlineevent "tentacle_forest_3" 1>>
+	你感到脚下有一种黏糊糊的感觉。你移动着脚步，看到一只大眼睛正盯着你。它眨着眼睛。眼睑变成了一对嘴唇。一声低语，你发现自己仰面躺着，凝视着头顶摇曳的触手。
+	<br><br>
+	你不记得说了什么。
+	<<if $awarness lt 600>>
+		<<gawareness>><<awareness 3>>
+	<<else>>
+		<<ggarousal>><<arousal 1800>>
+	<</if>>
+	<br><br>
+
+	<<destination_tentacle_forest>>
+<</addinlineevent>>
+
+<<addinlineevent "tentacle_forest_4" 1>>
+	一团光滑的黏糊糊的东西从上面掉下来。
+	<<random_goo>>
+	<br><br>
+
+	<<destination_tentacle_forest>>
+<</addinlineevent>>
+
+<<addinlineevent "tentacle_forest_5" 1>>
+	<<set _rng to random(1, 4)>>
+	<<switch _rng>>
+		<<case 1>>
+			你听到有人低声说出你的名字。
+		<<case 2>>
+			无数双眼睛睁开，四面八方到处都是凝视着你的眼睛。你眨眼，它们就不见了。
+		<<case 3>>
+			一阵颤抖震动了地面，一直传到巨大的触手上，把它们震得直到顶端。
+		<<default>>
+			你听到远处传来哀嚎声，诡异的声音此起彼伏。
+	<</switch>>
+	<<ggstress>><<stress 18>>
+	<br><br>
+	<<destination_tentacle_forest>>
+<</addinlineevent>>
+
+<<runeventpool>>
+<</widget>>

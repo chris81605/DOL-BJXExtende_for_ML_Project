@@ -1,0 +1,54 @@
+:: Island Sleep Hide 2 []
+<<effects>>
+
+你匍匐在地上阴暗地爬行，试图远离越来越近的声音。
+<<if $islander_language gte 100>>
+	那些声音越来越清晰了。
+	"你觉得那是迷失之人吗？"
+	<br>
+	"应该是了。这营地不一般。"
+<<elseif $islander_language gte 50>>
+	那些声音现在更清晰了，很明显他们在找你。
+<<else>>
+	现在，那些声音更加清晰，但你完全听不懂这门语言。
+<</if>>
+<br><br>
+
+<<if $phase is 1>>
+	你躺在阴影中，看着<<person>>和<<person2>><<person>>步入视野。每个人都戴着一个奇怪的鹿角面具。
+<<else>>
+	你躺在阴影中，看着<<person>>、<<person2>><<person>>和<<person3>><<person>>走来。每个人都戴着一张鹿角面具。
+<</if>>
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	他们在你睡觉的地方前停下，然后继续往前走，<span class="green">看都不看你一眼。</span>
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，并没有磨练到你的技巧。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Island]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	他们在你的藏身处前停下，互相看了看。<span class="red">然后<<person>>猛地扑向你</span>，将你摁倒。/*<<gcamp_concealment>>*/<<set $island.hide -= 3>>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，并没有磨练到你的技巧。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[战斗|Island Sleep Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[屈服 (0:30)|Island Sleep Submit]]>><</link>>
+	<br>
+
+<</if>>

@@ -1,0 +1,322 @@
+:: Widgets Actions Vagina [widget]
+<<widget "actionsvaginatopenis">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<for _j = $enemyno-1; _j gte _end; _j-->>
+		<<if $NPCList[_j].penis is 0>>
+			<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+			<!-- Do Nothing -->
+			<<elseif $NPCList[_j].stance isnot "topface">>
+				<<if $vaginaactiondefault is "vaginatopenis">>
+					| <label><span class="sub">跨坐在<<his>>的肉棒上</span> <<radiobutton "$vaginaaction" "vaginatopenis" checked>><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+				<<else>>
+					| <label><span class="sub">跨坐在<<his>>的肉棒上</span> <<radiobutton "$vaginaaction" "vaginatopenis">><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+				<</if>>
+				<<break>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</widget>>
+
+<<widget "actionsvaginatovagina">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<if !playerChastity("vagina")>>
+		<<for _j = $enemyno-1; _j gte _end; _j-->>
+			<<if $NPCList[_j].vagina is 0>>
+				<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+				<!-- Do Nothing -->
+				<<elseif $NPCList[_j].stance isnot "topface">>
+					<<if $vaginaactiondefault is "vaginatovagina">>
+						| <label><span class="sub">跨坐在<<his>>的小穴上</span> <<radiobutton "$vaginaaction" "vaginatovagina" checked>><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+					<<else>>
+						| <label><span class="sub">跨坐在<<his>>的阴部上</span> <<radiobutton "$vaginaaction" "vaginatovagina">><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+					<</if>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginatovaginafuck">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<if !playerChastity("vagina")>>
+		<<for _j = $enemyno-1; _j gte _end; _j-->>
+			<<if $NPCList[_j].vagina is "vaginaentrance" or $NPCList[_j].vagina is "vaginaimminent">>
+				<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+				<!-- Do Nothing -->
+				<<elseif $NPCList[_j].stance isnot "topface">>
+					<<if $vaginaactiondefault is "vaginatovaginafuck">>
+						| <label><span class="sub">把小穴压向对方</span> <<radiobutton "$vaginaaction" "vaginatovaginafuck" checked>><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+					<<else>>
+						| <label><span class="sub">把小穴压向对方</span> <<radiobutton "$vaginaaction" "vaginatovaginafuck">><<vaginaldifficulty>> <<combatpromiscuous5>></label>
+					<</if>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginatopenisnew">>
+	<<if $NPCList[$vaginatarget].penis is 0>>
+		<<if $consensual is 1 and ($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore>>
+		<!-- Do Nothing -->
+		<<elseif $NPCList[$vaginatarget].stance isnot "topface" and ($enemytype isnot "man" or ($NPCList[$vaginatarget].location.genitals is 0 and $NPCList[$vaginatarget].location.head isnot "genitals"))>>
+			<<if $NPCList[$vaginatarget].chastity.penis.includes("chastity")>>
+				<<set _vaginaaction["跨坐在" + $NPCList[$vaginatarget].pronouns.his + "的" + $NPCList[$vaginatarget].chastity.penis.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "上"] to "vaginatopenis">>
+			<<elseif npcHasStrapon($vaginatarget)>>
+				<<set _vaginaaction["跨坐在" + $NPCList[$vaginatarget].pronouns.his + "的假阳具上"] to "vaginatopenis">>
+			<<else>>
+				<<set _vaginaaction["跨坐在" + $NPCList[$vaginatarget].pronouns.his + "的肉棒上"] to "vaginatopenis">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginatovaginanew">>
+	<<if $NPCList[$vaginatarget].vagina is 0>>
+		<<if $consensual is 1 and ($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore>>
+		<!-- Do Nothing -->
+		<<elseif $NPCList[$vaginatarget].stance isnot "topface" and ($enemytype isnot "man" or ($NPCList[$vaginatarget].location.genitals is 0 and $NPCList[$vaginatarget].location.head isnot "genitals"))>>
+			<<if $NPCList[$vaginatarget].chastity.penis.includes("chastity")>>
+				<<set _vaginaaction["跨坐在" + $NPCList[$vaginatarget].pronouns.his + "的" + $NPCList[$vaginatarget].chastity.vagina.replace("chastity belt","贞操带").replace("chastity cage","贞操笼").replace("anal shield","护肛板") + "上"] to "vaginatovagina">>
+			<<else>>
+				<<set _vaginaaction["跨坐到" + $NPCList[$vaginatarget].pronouns.his + "的小穴上"] to "vaginatovagina">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginatovaginafucknew">>
+	<<if $NPCList[$vaginatarget].vagina is "vaginaentrance" or $NPCList[$vaginatarget].vagina is "vaginaimminent">>
+		<<if $consensual is 1 and (($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore) or $NPCList[$vaginatarget].chastity.vagina.includes("chastity")>>
+		<!-- Do Nothing -->
+		<<else>>
+			<<set _vaginaaction["将你的小穴压向" + $NPCList[$vaginatarget].pronouns.hers] to "vaginatovaginafuck">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginapenisfuck">>
+	<<if $combattype is "train">>
+		<<set _end to $enemyno-1>>
+	<<else>>
+		<<set _end to 0>>
+	<</if>>
+
+	<<if !playerChastity("vagina") and $worn.under_lower.vagina_exposed is 1 and $worn.lower.vagina_exposed is 1>>
+		<<for _j = $enemyno-1; _j gte _end; _j-->>
+			<<if $NPCList[_j].penis is "vaginaentrance" or $NPCList[_j].penis is "vaginaimminent">>
+				<<if $consensual is 1 and $promiscuity lte 74 and $enemytype is "man" or $consensual is 1 and $deviancy lte 74 and $enemytype isnot "man">>
+					<!-- Do Nothing -->
+				<<else>>
+					<<if $vaginaactiondefault is "vaginapenisfuck">>
+						| <label><span class="sub">容纳<<his>>的肉棒</span> <<radiobutton "$vaginaaction" "vaginapenisfuck" checked>> <<combatpromiscuous5>><<vaginalvirginitywarning>><<NPCvirginitywarning $NPCList[_j].fullDescription "penile">></label>
+					<<else>>
+						| <label><span class="sub">容纳<<his>>的肉棒</span> <<radiobutton "$vaginaaction" "vaginapenisfuck">> <<combatpromiscuous5>><<vaginalvirginitywarning>><<NPCvirginitywarning $NPCList[_j].fullDescription "penile">></label>
+					<</if>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginapenisfucknew">>
+	<<if !playerChastity("vagina") and $worn.under_lower.vagina_exposed is 1 and $worn.lower.vagina_exposed is 1>>
+		<<if $NPCList[$vaginatarget].penis is "vaginaentrance" or $NPCList[$vaginatarget].penis is "vaginaimminent">>
+			<<if $consensual is 1 and (($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore) or $NPCList[$vaginatarget].chastity.penis.includes("chastity")>>
+				<!-- Do Nothing -->
+			<<else>>
+				<<set _penis to (npcHasStrapon($vaginatarget) ? "穿戴式假阳具" : "肉棒")>>
+				<<set _vaginaaction["容纳"+$NPCList[$vaginatarget].pronouns.his+"的"+_penis] to "vaginapenisfuck">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+
+<<widget "actionsvaginaMouthEntrance">>
+	<<if $NPCList[$vaginatarget].mouth is "vaginaentrance">>
+		<<set _vaginaaction["将你的大腿压在" + $NPCList[$vaginatarget].pronouns.his + "的嘴巴上"] to "thighbay">>
+		<<set _vaginaaction["磨蹭" + $NPCList[$vaginatarget].pronouns.his + "的脸"] to "othermouthtease">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaVaginaImminent">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "othervaginarub">>
+	<<else>>
+		<<set _vaginaaction["磨蹭"] to "othervaginarub">>
+	<</if>>
+	<<if ($consensual is 0 or ($enemytype is "man" ? $promiscuity : $deviancy) gte 55 or $promiscuityIgnore) and currentSkillValue("vaginalskill") gte 800>>
+		<<set _vaginaaction["寸止"] to "tribedge">>
+	<</if>>
+	<<set _vaginaaction["拉开距离"] to "tribescape">>
+<</widget>>
+
+<<widget "actionsvaginaMouthImminent">>
+	<<if $NPCList[$vaginatarget].mouth is "vaginaimminent">>
+		<<set _vaginaaction["磨蹭" + $NPCList[$vaginatarget].pronouns.his + "的嘴唇"] to "othermouthrub">>
+		<<set _vaginaaction["拉开距离"] to "othermouthescape">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaMouthPenetrated">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "othermouthcooperate">>
+	<<else>>
+		<<set _vaginaaction["蹭动"] to "othermouthcooperate">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaPenisEntrance">>
+	<<actionsvaginapenisfucknew>>
+	<<if $consensual is 1 and ($promiscuity lte 54 and $enemytype is "man" or $deviancy lte 54 and $enemytype isnot "man") and !$promiscuityIgnore>>
+	<<else>>
+		<<if $thighuse is 0>>
+			<<set _vaginaaction["试着用大腿夹住"] to "penisthighs">>
+		<</if>>
+	<</if>>
+	<<if $anususe is 0 and !playerChastity("anus")>>
+		<<set _vaginaaction["提供菊穴替代"] to "penisanus">>
+	<</if>>
+	<<if $analdoubledisable is "f" and $awareness gt 300 and $anususe is "penis" and !playerChastity("anus")>>
+		<<if $NPCList[$anustarget].penissize gte 2 and !($consensual is 1 and ($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man") and !$promiscuityIgnore) and !["legLock","legLocked"].includes($feetuse)>>
+			<<set _vaginaaction["提供菊穴双插"] to "penisanusdouble">>
+		<</if>>
+	<</if>>
+	<<set _vaginaaction["挑逗顶端"] to "penistease">>
+	<<if $vaginaldoubledisable is "f" and _secondtarget is true and ($anususe is 0 or ($anususe isnot 0 and $anususe isnot "penisdouble")) and $awareness gte 300 and !["legLock","legLocked"].includes($feetuse)>>
+		<<if $npc.includes($NPCList[$vaginadoubletarget].fullDescription)>>
+			<<set _vaginaaction["跨坐在" + $NPCList[$vaginadoubletarget].fullDescription + "的" + $NPCList[$vaginadoubletarget].penisdesc + "上"] to "vaginatopenisdouble">>
+		<<else>>
+			<<set _vaginaaction["跨坐在" + $NPCList[$vaginadoubletarget].fullDescription + "的" + $NPCList[$vaginadoubletarget].penisdesc + "上"] to "vaginatopenisdouble">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaVaginaEntrance">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "othervaginarub">>
+	<<else>>
+		<<set _vaginaaction["磨蹭"] to "othervaginarub">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaPenisImminent">>
+	<<actionsvaginapenisfucknew>>
+	<<set _vaginaaction["磨蹭"] to "rub">>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("vaginalskill") gte 800>>
+		<<set _vaginaaction["寸止" + $NPCList[$vaginatarget].pronouns.him] to "penisEdging">>
+	<</if>>
+	<<set _vaginaaction["拉开距离"] to "escape">>
+<</widget>>
+
+<<widget "actionsvaginaPenisPenetrated">>
+	<<set _vaginaaction["接受"] to "take">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "cooperate">>
+	<<else>>
+		<<set _vaginaaction["性交"] to "cooperate">>
+	<</if>>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("vaginalskill") gte 800>>
+		<<set _vaginaaction["寸止" + $NPCList[$vaginatarget].pronouns.him] to "penisEdging">>
+	<</if>>
+	<<if !playerIsPregnant() and playerPregnancyPossibleWith($NPCList[$vaginatarget]) and $enemyarousal gte $enemyarousalmax and $demon gte 6 and $demonbuild gte 90>>
+		<<set _vaginaaction["强制授孕"] to "forceImpregnation">>
+	<</if>>
+	<<if $vaginaldoubledisable is "f" and _secondtarget is true and ($anususe is 0 or ($anususe isnot 0 and $anususe isnot "penisdouble")) and $awareness gte 300 and !["legLock","legLocked"].includes($feetuse)>>
+		<<if $npc.includes($NPCList[$vaginadoubletarget].fullDescription)>>
+			<<set _vaginaaction["跨坐在" + $NPCList[$vaginadoubletarget].fullDescription + "的" + $NPCList[$vaginadoubletarget].penisdesc + "上"] to "vaginatopenisdouble">>
+		<<else>>
+			<<set _vaginaaction["跨坐在" + $NPCList[$vaginadoubletarget].fullDescription + "的" + $NPCList[$vaginadoubletarget].penisdesc + "上"] to "vaginatopenisdouble">>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginaVagina">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "tribcooperate">>
+	<<else>>
+		<<set _vaginaaction["磨蹭"] to "tribcooperate">>
+	<</if>>
+	<<if ($consensual is 0 or ($enemytype is "man" ? $promiscuity : $deviancy) gte 55 or $promiscuityIgnore) and currentSkillValue("vaginalskill") gte 800>>
+		<<set _vaginaaction["寸止"] to "tribedge">>
+	<</if>>
+	<<set _vaginaaction["接受"] to "tribtake">>
+	<<set _vaginaaction["拉开距离"] to "tribescape">>
+<</widget>>
+
+<<widget "actionsTribRest">>
+	<<set _vaginaaction["休息"] to "tribrest">>
+<</widget>>
+
+<<widget "actionsvaginaPenisDoubleEntrance">>
+	<<actionsvaginapenisdoublefuck>>
+	<<if $consensual is 1 and ($promiscuity lte 54 and $enemytype is "man" or $deviancy lte 54 and $enemytype isnot "man") and !$promiscuityIgnore>>
+	<<else>>/*
+		<<if $thighuse is 0>>
+			<<set _vaginaaction["试着用大腿夹住"] to "penisthighs">>
+		<</if>>*/
+	<</if>>
+	<<if $anususe is 0 and !playerChastity("anus")>>
+		<<set _vaginaaction["提供菊穴替代"] to "penisanusdvp">>
+	<</if>>
+	<<set _vaginaaction["挑逗顶端"] to "penistease">>
+<</widget>>
+
+<<widget "actionsvaginaPenisDoubleImminent">>
+	<<actionsvaginapenisdoublefuck>>
+	<<set _vaginaaction["磨蹭"] to "rub">>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("vaginalskill") gte 800>>
+	<<set _vaginaaction["寸止" + $NPCList[$vaginatarget].pronouns.him] to "penisDoubleEdging">>
+	<</if>>
+	<<if $anususe is 0 and !playerChastity("anus")>>
+		<<set _vaginaaction["提供菊穴替代"] to "penisanusdvp">>
+	<</if>>
+	<<set _vaginaaction["拉开距离"] to "doubleescape">>
+<</widget>>
+
+<<widget "actionsvaginaPenisDoublePenetrated">>
+	<<set _vaginaaction["接受"] to "take">>
+	<<if $consensual is 0 or ($promiscuity lte 54 and $enemytype is "man" and !$promiscuityIgnore) or ($deviancy lte 54 and $enemytype isnot "man" and !$promiscuityIgnore)>>
+		<<set _vaginaaction["配合"] to "doublecooperate">>
+	<<else>>
+		<<set _vaginaaction["性交"] to "doublecooperate">>
+	<</if>>
+	<<if ($consensual is 0 or ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")) and currentSkillValue("vaginalskill") gte 800>>
+		<<set _vaginaaction["寸止" + $NPCList[$vaginatarget].pronouns.him] to "penisDoubleEdging">>
+	<</if>>
+<</widget>>
+
+<<widget "actionsvaginapenisdoublefuck">>
+	<<if !playerChastity("vagina") and $worn.under_lower.vagina_exposed is 1 and $worn.lower.vagina_exposed is 1 and $awareness gte 300>>
+		<<if $consensual is 1 and (($promiscuity lte 74 and $enemytype is "man" or $deviancy lte 74 and $enemytype isnot "man" and $awareness lt 300) and !$promiscuityIgnore) or $NPCList[$vaginatarget].chastity.penis.includes("chastity")>>
+			<!-- Do Nothing -->
+		<<else>>
+			<<if $NPCList[$vaginatarget].penis is "vaginadouble" or $NPCList[$vaginatarget].chastity.penis.includes("chastity")>>
+				<<set _vaginaaction["容纳"+$NPCList[$vaginadoubletarget].pronouns.his+"的"+$NPCList[$vaginadoubletarget].penisdesc] to "vaginapenisdoublefuck">>
+			<<elseif $NPCList[$vaginadoubletarget].penis is "vaginadouble" or $NPCList[$vaginadoubletarget].chastity.penis.includes("chastity")>>
+				<<set _vaginaaction["容纳"+$NPCList[$vaginatarget].pronouns.his+"的"+$NPCList[$vaginatarget].penisdesc] to "vaginapenisdoublefuck">>
+			<<elseif !($NPCList[$vaginatarget].chastity.penis.includes("chastity") and $NPCList[$vaginadoubletarget].chastity.penis.includes("chastity"))>>
+				<<set _vaginaaction["容纳他们的阴茎"] to "vaginapenisdoublefuck">>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

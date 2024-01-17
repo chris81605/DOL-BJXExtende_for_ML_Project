@@ -1,0 +1,35 @@
+:: Flats Hookah End []
+<<location "flats">><<set $outside to 0>><<effects>>
+
+<<storeon "hookah">>
+
+<<if $hookah_state gte 2>>
+    你在水烟馆醒来。你等待旋转平息，然后站起来。
+    <br><br>
+
+    <<link [[继续|Flats Hookah]]>><</link>>
+    <br>
+<<else>>
+    <<loadNPC 0 "hookah">><<person1>>
+    你在水烟馆醒来。"谢谢您的光临，"<<hookah_master>>苦笑道，"旅途还愉快吧？"
+    <br><br>
+
+    <<if $rng gte 81>>
+        "你最好不要在那里呆太久，"<<he>>把你扶了起来。"很少有人会犯不止一次的错误。"
+    <<elseif $rng gte 61>>
+        "不要告诉别人，"<<he>>边说边扶你站起来。"他们会告诉你这不是水烟的意义，但他们会嫉妒的。"
+    <<elseif $rng gte 41>>
+        "如果我是你，我会直接回家，"<<he>>边说边扶你站起来。"旅行往往会让人变得敏感。"
+    <<elseif $rng gte 21>>
+        "如果你在接下来的一个小时左右看到任何不寻常的事情，不要担心，"<<he>>边说边扶你站起来。"影响可能会持续一段时间。"
+    <<else>>
+        "在你离开之前让我看看外面，"<<he>>边说边扶你站起来。"只是为了确保周围没有混混或者打手。
+    <</if>>
+    <br><br>
+
+    <<He>>把<<his>>的眼镜推到<<his>>的鼻梁上，然后走到门口。
+    <br><br>
+
+    <<link [[继续|Flats]]>><<endevent>><<set $eventskip to 1>><</link>>
+    <br>
+<</if>>

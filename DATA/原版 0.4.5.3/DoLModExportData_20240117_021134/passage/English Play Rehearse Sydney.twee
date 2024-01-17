@@ -1,0 +1,78 @@
+:: English Play Rehearse Sydney []
+<<schooleffects>><<effects>><<set $bus to "rehearsal">>
+<<run statusCheck("Sydney")>>
+<<npc Sydney>><<person1>>
+
+<<switch $englishPlayRoles.SydneyCount>>
+	<<case 0>>
+		你打开排练手册，与悉尼一起出演剧本片段。"谢谢你。我之前请了其他见习教徒陪我练习，不过我觉得他们并没有多大兴致。"<<he>>拿出了<<his>>的手册。
+		你开始与悉尼排练台词。由于这部剧比较短，双方的对白并不多。悉尼被一些文本分散了注意力，但仍然兴致高涨，热情地演绎着<<his>>的角色。
+		<br><br>
+
+		"我可能得把其中一些写在手上才能记得住……"
+	<<case 1>>
+		<<switch $englishPlayRoles.Player>>
+			<<case "Cass">>
+				你开始与悉尼排练。“我简直不敢相信！我的孩子，竟然被一个肮脏的乞丐给迷住了？我们立刻离开这个地方，泰勒！回家后给我解释清楚。”悉尼读完了台词，但有些不自在。
+				<br><br>
+
+				悉尼把这句台词又重复了几遍。
+				<<if $englishtrait gte 3 or $submissive lte 500>>
+					你指点了<<him>>几句如何用居高临下的语气说话。
+				<<else>>
+					还有一个人不在，所以泰勒的台词被跳过了。
+				<</if>>
+			<<case "Sterling">>
+				你扮演斯特林。“我简直不敢相信！我的孩子，竟然被一个肮脏的乞丐给迷住了？我们立刻离开这个地方，泰勒！回家后给我解释清楚。”
+				<br><br>
+
+				悉尼羞涩地转过头去，"真不忍心在圣诞前夜看到这么令人心碎的争执……不，不太行，让我再试一遍……"
+			<<case "Taylor">>
+				<<set _playPronoun to (C.npc.Kylar.pronoun is "m" ? "父亲" : "母亲")>>
+				你扮演泰勒。"<<= _playPronoun>>，听着！我对卡斯的感觉绝非仅仅是一时兴起！我们注定要在一起！"你拉着悉尼的胳膊，强调这句台词。
+				<br><br>
+
+				悉尼羞涩地转过头去，"真不忍心在圣诞前夜看到这么令人心碎的争执……不，不太行，让我再试一遍……"
+		<</switch>>
+	<<case 2>>
+		你和悉尼开始排练，你们对表演自己的角色更加得心应手了。
+		<<if _sydneyStatus.includes("corrupt")>>
+			"这出戏本身有点……俗套，不过我喜欢它的寓意。我只是希望它能再戏剧化一点。比如，也许卡斯真的让泰勒怀孕了，斯特林被迫接受奉子成婚，仓促收场之类的。"
+			<br><br>
+
+			悉尼顿了顿，笑了起来。"想给多伦来个即兴表演吗？"
+		<<else>>
+			"很有意思，不是吗？我很高兴学校能有一些这样纯真的小表演，大家都能感受到圣诞快乐的氛围。"
+		<</if>>
+	<<case 3>>
+		你和悉尼一起排练。在说一句格外拗口的台词时，你咬到了舌头。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<He>>咯咯笑着。
+			<br><br>
+
+			"还好是我在这给你上私人课程，"<<he>>一边说一边忍不住笑道，"你最好努力一点，要不然我会好好惩罚你。"<<he>>吐了吐舌头，"开个玩笑，大部分。"说完，<<he>>朝你眨了眨眼。
+		<<else>>
+			<<he>>关切地看着你。
+			<br><br>
+
+			"你还好吗？"<<he>>朝你走来，捏着你的脸颊说："请小心一点！"
+		<</if>>
+	<<default>>
+		<<playLinePool>>
+		你打开剧本，开始和悉尼一起表演其中一个片段。
+		<br>
+		"<<print _englishPlayLinePool[$englishPlayRoles.Player].pluck()>>"
+		<br>
+		...
+		<br>
+		"<<print _englishPlayLinePool[$englishPlayRoles.Sydney].pluck()>>"
+		<br>
+<</switch>>
+<<set $englishPlayReadiness += 10>><<playReadiness>>
+<<set $englishPlayRoles.SydneyCount += 1>>
+<br><br>
+
+当你们排练完的时候，学校已经要关门了。你跟悉尼一起离开了学校。
+<br><br>
+
+<<sydneyOptionsLeave>>

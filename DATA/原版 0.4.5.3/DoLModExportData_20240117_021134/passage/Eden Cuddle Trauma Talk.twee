@@ -1,0 +1,35 @@
+:: Eden Cuddle Trauma Talk []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+你告诉伊甸你所遭遇过的创伤性事件。<<He>>一直把你抱在<<his>>的怀里。
+<br><br>
+
+<<if Time.hour isnot 0>>
+	<<if $trauma gte 500 and $edentraumaagree is 1>>
+		<<ind>><<link [[继续诉说你的创伤 (0:30)|Eden Cuddle Trauma Talk]]>><<trauma -6>><<stress -6>><<pass 30>><<npcincr Eden dom 1>><</link>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<ind>><<link [[和伊甸聊天|Eden Cuddle Talk]]>><<npcincr Eden love 1>><</link>>
+	<br>
+	<<ind>><<link [[依偎 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -6>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>><<lstress>>
+	<br>
+	<<if Time.days % 2 is 0>>
+		<<if $eden_shoot gte 1>>
+			<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+			<br>
+		<<else>>
+			<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<pass 30>><<trauma -3>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[站起来|Cabin Eden Actions]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

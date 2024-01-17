@@ -1,0 +1,325 @@
+:: Widgets Pirates [widget]
+<<widget "pirate_watch">>
+	<<if _args[0]>>
+		<<if $pirate_watch is undefined>>
+			<<set $pirate_watch to 0>>
+		<</if>>
+		<<set $pirate_watch += _args[0]>>
+		<<set $pirate_watch to Math.clamp($pirate_watch, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_status">>
+	<<if _args[0]>>
+		<<if $pirate_status is undefined>>
+			<<set $pirate_status to 0>>
+		<</if>>
+		<<if _args[1] is "scum" and $pirate_rank isnot 0 or _args[1] is "mate" and $pirate_rank isnot 1>>
+		<<else>>
+			<<set $pirate_status += _args[0]>>
+			<<set $pirate_status to Math.clamp($pirate_status, 0, 100)>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_clothes_up">>
+	<<if $pirate_rank gte 1>>
+		<<lowerwear 22>>
+		<<upperwear 40>>
+	<<else>>
+		<<if $player.gender is "f" or $player.gender is "m" and $forcedcrossdressingdisable is "f">>
+			<<lowerwear 114>>
+		<<else>>
+			<<lowerwear 31>>
+		<</if>>
+		<<upperwear 8>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_rescue">>
+	<<if $pirate_rank gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_attention">>
+	<<if _args[0]>>
+		<<set $pirate_attention += _args[0]>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_attack_init">>
+	<<set $pirate_attention to 0>>
+	<<set $pirate_time to 0>>
+<</widget>>
+
+<<widget "pirate_attack_end">>
+	<<unset $pirate_attention>>
+	<<unset $pirate_time>>
+<</widget>>
+
+<<widget "pirate_mate_work">>
+	<<if _args[0] is "deck">>
+		<<set $phase to 0>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		一位<<person>>把拖把塞到你手里。“别光站在那儿。快开始拖地。”
+		<br><br>
+
+		<<link [[擦拭甲板 (2:00)|Pirate Swab]]>><<endevent>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
+		<br>
+		<<link [[拒绝|Pirate Work Refuse]]>><</link>>
+		<br>
+	<<elseif _args[0] is "cabin">>
+		<<set $phase to 1>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		"看看这个破烂地方，" 一位<<person>>说道。<<He>>现在才似乎注意到你。“你，立刻给我接着打扫，不然我会让你的屁股趴伏在船头上。”
+		<br><br>
+
+		<<link [[打扫船舱 (2:00)|Pirate Cabin Clean]]>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
+		<br>
+		<<link [[拒绝|Pirate Work Refuse]]>><</link>>
+		<br>
+	<<elseif _args[0] is "bilge">>
+		<<set $phase to 2>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		“我们需要堵住一些漏洞，”一个<<person>>说着，走过一滩水坑。“就是你了。现在就动手。”
+		<br><br>
+
+		<<link [[堵住漏洞 (2:00)|Pirate Bilge Plug]]>><<pirate_status 1 "mate">><<pass 120>><<tiredness 6>><</link>><<gtiredness>><<grespect "mate">>
+		<br>
+		<<link [[拒绝|Pirate Work Refuse]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_mate_work_end_links">>
+	<<if $phase is 0>>
+		<<link [[继续|Pirate Deck]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<elseif $phase is 1>>
+		<<link [[继续|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "events_pirate_deck">>
+	<<cleareventpool>>
+	<<addinlineevent "pirate_scum_deck_1" 1>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		一个<<person>>靠了过来，并伸出双手去抚摸你的<<bottom>>，将你推到了栏杆上。“好屁股。”<<he>>说。“让我们来仔细瞧瞧。”<<He>>用单臂搂住你的腰，并试图把你翻转过来。<<gtrauma>><<garousal>><<trauma 6>><<arousal 6>>
+		<br><br>
+
+		<<link [[忍耐|Pirate Scum Deck Endure]]>><<sub 1>><</link>>
+		<br>
+		<<link [[拍开|Pirate Scum Deck Smack]]>><<def 1>><<pain 4>><<pirate_status 1 "scum">><</link>><<gpain>><<grespect "scum">>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_deck_2" 1>>
+		<<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<generateRole 2 0 "pirate">><<person1>>
+		一位<<person>>，<<person2>><<person>>，和<<person3>><<person>>来到你的身边，并挡住了你的去路。
+		<br><br>
+		“正是我们在寻找的人，”<<person1>>那个<<person>>说。“我的这位朋友需要练习<<his>>的系绳技巧。非常重要。”<<person2>>那个<<person>>咧嘴一笑，挥舞着一截绳子。“你何不就站在桅杆那边呢。”
+		<br><br>
+		<<link [[按吩咐做 (0:10)|Pirate Scum Deck Rope]]>><<sub 1>><<pass 10>><</link>>
+		<br>
+		<<link [[拒绝|Pirate Scum Deck Rope Refuse]]>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+		<br>
+		<<link [[主动向他们展示系绳子的诀窍 (0:10)|Pirate Scum Deck Rope Seduce]]>><<def 1>><<pass 10>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_deck_3" 1>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		<<if $drunk gte 1>>
+			一名<<person>>中断了他们清洁甲板的工作，用拖把往你脚下扫来。在你酒醉的状态下，你发现得太迟了。拖把绊住你的脚踝，让你跪在了地上。
+			<br><br>
+
+			那个<<person>>通过坐在你的背上来进一步羞辱你，迫使你的身子跪得更低。<<He>>对你的<<bottom>>拍了一下，作为了船员们的消遣。<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>>
+			<br><br>
+
+			<<link [[忍耐 (0:03)|Pirate Scum Deck Mop Endure]]>><<sub 1>><<pass 3>><</link>><<garousal>>
+			<br>
+			<<link [[威胁 (0:03)|Pirate Scum Deck Mop Threaten]]>><<def 1>><<pass 3>><<pain 4>><<stress 6>><<pirate_status 1 "scum">><</link>><<gpain>><<gstress>><<grespect "scum">>
+
+		<<else>>
+			一名<<person>>中断了他们清洁甲板的工作，用拖把扫向你的脚。
+			<<if currentSkillValue('danceskill') gte random(1, 800)>>
+				一个念头突然在你的脑海间闪过，当你<span class="green">跳过拖把</span>时。
+				<br><br>
+				<<link [[踢那个拖把|Pirate Scum Deck Mop Kick]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+				<br>
+				<<link [[优雅地落地|Pirate Scum Deck Mop Land]]>><<stress -6>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<span class="red">拖把绊住你的脚踝，</span>让你跪在了地上。
+				<br><br>
+
+				那个<<person>>通过坐在你的背上来进一步羞辱你，迫使你的身子跪得更低。<<He>>对你的<<bottom>>拍了一下，作为了船员们的消遣。<<gpain>><<gtrauma>><<gstress>><<pain 4>><<trauma 6>><<stress 6>>
+				<br><br>
+
+				<<link [[忍耐|Pirate Scum Deck Mop Endure]]>><<sub 1>><</link>><<garousal>>
+				<br>
+				<<link [[威胁|Pirate Scum Deck Mop Threaten]]>><<def 1>><<pain 4>><<stress 6>><<pirate_status 1 "scum">><</link>><<gpain>><<gstress>><<grespect "scum">>
+			<</if>>
+		<</if>>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_deck_4" 0.7>>
+		<<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<person1>>
+		<<person>>一边擦拭着，一边小声哼着水手号子。<<his>>有节奏地打扫着。大约一分钟后，一个<<person2>><<person>>加入了合唱。一个接着一个，更多的船员加入进来，到最后，船上差不多一半的人以奇怪的和谐唱起歌来，大家跟着节奏不时跺脚。
+		<br><br>
+
+		<<link [[加入|Pirate Scum Deck Shanty Join]]>><<stress -6>><</link>><<lstress>>
+		<br>
+		<<link [[领唱|Pirate Scum Deck Shanty Lead]]>><</link>><<if $harpy gte 6>><<harpy>><<else>><<englishdifficulty 1 1000>><</if>>
+		<br>
+		<<link [[无视|Pirate Scum Deck Shanty Ignore]]>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "events_pirate_cabin">>
+	<<cleareventpool>>
+	<<addinlineevent "pirate_scum_cabin_1" 1>>
+		<<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<generateRole 2 0 "pirate">><<person1>>
+		“嘿，”一个<<person>>对你喊道。<<Hes>>正与<<person2>><<person>>和<<person3>><<person>>坐在一起喝酒。“过来这里。给我们一个吻。”
+		<br><br>
+		<<link [[按吩咐做|Pirate Scum Cabin Kiss]]>><<sub 1>><</link>><<kissvirginitywarning>>
+		<br>
+		<<link [[无视|Pirate Scum Cabin Ignore]]>><</link>>
+		<br>
+		<<link [[辱骂|Pirate Scum Cabin Insult]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect>>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_cabin_2" 1>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		一个<<person>>把你按在了舱壁上。“我的铺位在那里，”<<he>>说着，指向舱壁的一个缺口。“我要好好教训你，奴工。”
+		<br><br>
+
+		<<link [[推开|Pirate Scum Cabin Shove]]>><<def 1>><<trauma -6>><<stress 6>><<pirate_status 1 "scum">><</link>><<gstress "scum">><<ltrauma>><<grespect "scum">>
+		<br>
+		<<link [[服从|Pirate Scum Cabin Go]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_cabin_3" 1>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		<<if $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
+			“好一个<<breasts>>，”一名<<person>>笑道，并从<<his>>的口袋里拿出手机。<<covered>>“让我们看得更清楚些。”<<gstress>><<stress 6>>
+			<br><br>
+
+			<<link [[拒绝|Pirate Scum Cabin Breast Refuse]]>><<def 1>><<pirate_status 1 "scum">><<pain 4>><</link>><<gpain>><<grespect "scum">>
+			<br>
+			<<link [[顺从|Pirate Scum Cabin Show]]>><<sub 1>><<pirate_status -1>><<gtrauma>><</link>><<lrespect>><<gtrauma>>
+			<br>
+		<<else>>
+			<<if $player.gender_appearance is "m">>
+				“脱掉你的上衣，”一个<<person>>说。“我想看看你的胸。”
+				<br><br>
+			<<else>>
+				“脱掉你的上衣，”一个<<person>>说。“我想看看你的胸。”
+			<</if>>
+			<br><br>
+
+			<<link [[拒绝|Pirate Scum Cabin Refuse]]>><<def 1>><<pirate_status 1 "scum">><</link>><<grespect "scum">>
+			<br>
+			<<set $skulduggerydifficulty to 600>>
+			<<link [[欺骗|Pirate Scum Cabin Trick]]>><<def 1>><</link>><<skulduggerydifficulty>>
+			<br>
+			<<link [[按吩咐做|Pirate Scum Cabin Bid]]>><<sub 1>><<pirate_status -1>><</link>><<lrespect>>
+			<br>
+		<</if>>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_cabin_4" 0.7>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		"喂，"一个<<person>>大喊着，冲你挥手。<<Hes>>正趴在一张桌上，紧紧抓着一个瓶子，就像抓着救生绳一样。"听着，<<lass>>。你肯定会想……会非常希望知道这个的。"
+		<br><br>
+
+		<<He>>试图从瓶子里喝一口，但瓶嘴完全偏离了<<his>>的嘴。"我是在酒吧听说的，"<<he>>咯咯笑起来，"一个海盗……算了，我换个说法……海盗最喜欢的字母是？"
+		<br><br>
+
+		<<link [[X!|Pirate Scum Cabin Letter]]>><<set $phase to "X">><</link>>
+		<br>
+		<<link [[R!|Pirate Scum Cabin Letter]]>><<set $phase to "R">><</link>>
+		<br>
+		<<link [[C!|Pirate Scum Cabin Letter]]>><<set $phase to "C">><</link>>
+		<br>
+		<<link [[I!|Pirate Scum Cabin Letter]]>><<set $phase to "I">><</link>>
+		<br>
+		<<link [[说你不知道|Pirate Scum Cabin Letter]]>><<set $phase to 0>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "events_pirate_bilge">>
+	<<cleareventpool>>
+	<<addinlineevent "pirate_scum_bilge_1" 1>>
+		<<generateRole 0 0 "pirate">><<generateRole 1 0 "pirate">><<person1>>
+		一位喝醉的<<person>>从阴影中摇摇晃晃地走出来，几乎用<<his>>的体重把你压倒。“多么漂亮的小东西，”<<he>>说，笨拙地试图摸你。<<gstress>><<stress 6>>
+		<br><br>
+		一个<<person2>><<person>>从后面踉踉跄跄地走出来，同样醉得不轻。
+		<br><br>
+		<<if $drunk gte 120>>
+			在喝醉的情况下，你太笨拙了以至于无法逃脱。
+			<br><br>
+
+			<<link [[继续|Pirate Scum Bilge Pair Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<else>>
+			<<link [[忍耐|Pirate Scum Bilge Endure]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>>
+			<br>
+			<<link [[推搡|Pirate Scum Bilge Shove]]>><<def 1>><<pirate_status 1 "scum">><<pain 4>><</link>><<gpain>><<grespect "scum">>
+			<br>
+		<</if>>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_bilge_2" 1>>
+		你听到微弱的水声，声音越来越大。不自然的剪影映在了墙上。你不确定光线是从哪里来的。突然间变得非常寒冷。
+		<br><br>
+
+		<<link [[跑|Pirate Scum Bilge Run]]>><</link>>
+		<br>
+		<<link [[躲藏 (0:05)|Pirate Scum Bilge Hide]]>><<pass 5>><</link>>
+		<br>
+		<<link [[尖叫|Pirate Scum Bilge Scream]]>><</link>>
+		<br>
+		<<link [[寻找噪音的源头|Pirate Scum Bilge Search]]>><</link>><<willpowerdifficulty 1 1000>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_bilge_3" 1>>
+		你听到周围萦绕着船发出的呻吟声。它使得船像是某种生物。<<gstress>><<stress 6>>
+		<br><br>
+		<<link [[继续|Pirate Bilge]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+
+	<<addinlineevent "pirate_scum_bilge_4" 0.7>>
+		<<generateRole 0 0 "pirate">><<person1>>
+		你看见一个<<person>>正在一个桶里翻找，应该是在整理存货。<<He>>一边工作，屁股一边摇晃着。
+		<br><br>
+
+		<<if $promiscuity gte 15>>
+			<<link [[拍|Pirate Scum Bilge Slap]]>><<pirate_status 1 "scum">><</link>><<promiscuous2>><<grespect "scum">>
+			<br>
+		<</if>>
+		<<link [[无视|Pirate Scum Bilge Slap Ignore]]>><</link>>
+	<</addinlineevent>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "passoutpirates">>
+	你把自己逼得太紧了，你眼前一黑。
+	<br><br>
+	<<link [[继续|Pirate Passout]]>><</link>>
+	<br>
+	<<pass 1 hour>>
+	<<trauma 6>><<passout>>
+<</widget>>

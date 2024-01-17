@@ -1,0 +1,88 @@
+:: Livestock Noise 2 []
+<<livestock_obey -5>>
+<<npc Remy>><<person1>>
+
+<<if $phase is 1>>
+	你的牛闸门打开了，农场工人冲进来束缚住你的手臂。雷米走了进来，一只手里拿着手帕，另一只手用一个瓶子往上倒了点东西。
+	<<if $speech_attitude is "meek">>
+		你惊恐万分，<<if $worn.face.type.includes("gag")>>隔着$worn.face.cn_name_cap<</if>><<if $cow gte 6>>哞哞叫着<<else>>求饶着<</if>>，但手帕捂住了你的嘴，你的叫喊声被压制了。
+	<<elseif $speech_attitude is "bratty">>
+		你挥舞着手臂，试图把头扭开，但当布压在你的嘴上时，你的抗议声被压制了。
+	<<else>>
+		你扭开脖子，但农场工人按住了你的头，把你的脸压在布上。
+	<</if>>
+	<br><br>
+	雷米看着你无声地挣扎。"你怎么回事？"<<His>>的绿色眼睛仿佛能洞穿你，与此同时，你感觉意识越来越朦胧，"你平时都是很乖的。"
+	<br><br>
+	你再也无法忍受，跪倒在地。雷米满意地离开了。
+	<br><br>
+	"把它放下让它休息吧。等着瞧吧，看看这种行为是否会成为一种习惯，"雷米指示道。你的双脚在地板上拖动，你被轻轻放在了干草堆上。
+	<br><br>
+	<<if $loveInterest.primary isnot "None">>
+		当黑暗笼罩你的视线时，你最后想到的是<<- $loveInterest.primary.replace("None","没有人").replace("Robin","罗宾").replace("Whitney","惠特尼").replace("Kylar","凯拉尔").replace("Eden","伊甸").replace("Avery","艾弗里").replace("Sydney","悉尼").replace("Alex","艾利克斯").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰")>>。你不知道自己还能不能再看到<<if $loveInterest.primary is "Black Wolf">>你的族群<<else>><<nnpc_him $loveInterest.primary>><</if>>。
+	<<else>>
+		黑暗笼罩着你的视线，直到你的意识消逝。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Livestock Sleep]]>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	你的牛闸打开了，农场工人们冲进来束缚住你的双臂。雷米走了进来，手中的鞭子松弛展开。
+	<<if $speech_attitude is "meek">>
+		你惊恐万分，<<if $worn.face.type.includes("gag")>>隔着$worn.face.cn_name_cap<</if>><<if $cow gte 6>>哞哞叫着<<else>>求饶着<</if>>，但鞭子抽到
+		<<if playerBellySize(true) gte 8>>
+			下体，你的哭喊声被打断了。<<He>>特别注意着，避开了你的<<bellyDescription "pc">>。
+		<<else>>
+			腹部，你的哭喊声被打断了。
+		<</if>>
+		你因疼痛<<if $cow gte 6>>哞哞叫着<<else>>抽着气<</if>>，雷米倾尽所有的愤怒惩罚着你。你低下头，泣不成声，每一次击打都会让你流下新的泪水。
+	<<elseif $speech_attitude is "bratty">>
+		你疯狂地挣扎，但无济于事。你的挣扎被接连打断着，雷米的鞭子抽在你的
+		<<if playerBellySize(true) gte 8>>
+			下体，你的哭喊声被打断了。<<He>>特别注意着，避开了你的<<bellyDescription "pc">>。
+		<<else>>
+			腹部，你的哭喊声被打断了。
+		<</if>>
+		这刺痛了你，你痛得大叫，加倍努力挣脱，但无济于事。
+		每当鞭子抽打在你裸露的皮肤上时，你只能咬紧牙关，低声呜咽。你努力维持着勇敢的表情，但眼泪还是止不住地流。
+	<<else>>
+		你几乎来不及反应，雷米的鞭子就抽在了你的
+		<<if playerBellySize(true) gte 8>>
+			下体，你的哭喊声被打断了。<<He>>特别注意着，避开了你的<<bellyDescription "pc">>。
+		<<else>>
+			腹部，你的哭喊声被打断了。
+		<</if>>
+		你<<if $worn.face.type.includes("gag")>>隔着$worn.face.cn_name_cap<</if>>哭喊出声，而你知道，这还远未结束。
+		你紧闭双眼，准备承受更多的痛苦，而雷米则施以鞭打，每一鞭都比上一鞭更加疼痛。每一次抽打，你都会<<if $cow gte 6>>哭喘<<else>>发出嘶声<</if>>，泪水顺着你的眼眶流下。
+	<</if>>
+	<<gggpain>><<pain 50>>
+	<br><br>
+	你再也承受不住，倒在了地上。农场工人们强迫你站起来，让你承受最后一击。
+	<<gpain>>
+	<br><br>
+	雷米折起<<his>>的鞭子，走近你。<<his>>用手托住你的下巴，你被迫望向<<his>>那亮闪闪的绿眼睛。"我警告过你了，"雷米斥责道，"我想你不会再去制造更多噪音了吧？"
+	<<if $speech_attitude is "meek">>
+		缺乏回应的力量，你只能恳求地盯着<<his>>的眼睛。
+		<br><br>
+		雷米似乎把你的沉默当成屈服了。"很好。把它放到床上，"雷米指示农场工人。
+	<<elseif $speech_attitude is "bratty">>
+		你把下巴从雷米的手里挣脱出来，这对<<him>>并不是一个满意的回答。
+		<br><br>
+		你的沉默对雷米来说已经足够了。"把它放到床上，"<<he>>指示农场工人。
+	<<else>>
+		你点点头。
+		<br><br>
+		"很好。把它放到床上，"雷米指示农场工人。
+	<</if>>
+	你痛苦地呻吟着，很快就被拖向一堆干草扔在上面。你蜷缩起来，揉搓着你刺痛的
+	<<if playerBellySize(true) gte 8>>
+		下体。
+	<<else>>
+		肚子。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Livestock Cell]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,22 @@
+:: Lake Office []
+<<set $outside to 0>><<effects>>
+
+你在湖边的考古办公室里。绿色的帐篷墙环绕着宽敞的室内。
+<<if Time.schoolDay and Time.hour gte 16 and Time.hour lte 20 or !Time.schoolDay and Time.hour gte 6 and Time.hour lte 20>>
+	<<npc Winter>><<person1>>
+	温特坐在桌前，专心致志地研究着。
+<</if>>
+<br><br>
+
+<<if (Time.schoolDay and Time.hour gte 16 and Time.hour lte 20 or !Time.schoolDay and Time.hour gte 6 and Time.hour lte 20)>>
+	<<if !$weekly.winterLakeTalk>>
+		<<askicon>><<link [[询问温特有关调研的事|Lake Office Ask]]>><</link>>
+		<br>
+	<</if>>
+	<<if $winterLakeTalk is 1 and $bogProgress is 1>>
+		<<ind>><<link [[告诉温特有关沼泽的事|Lake Office Ask Bog]]>><<npcincr Winter love 2>><</link>><<glove>>
+		<br>
+	<</if>>
+<</if>>
+<<getouticon>><<link [[离开|Lake Shore]]>><<endevent>><</link>>
+<br>

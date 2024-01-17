@@ -1,0 +1,37 @@
+:: English Lesson Focus []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $kylarenglishstate is "active">>
+	你专注于听讲和学习知识。虽然凯拉尔让你分心了，但你觉得自己正在进步。
+	<br><br>
+<<else>>
+	你专注于听讲和学习知识。这并不是一件容易的事，但你觉得自己正在进步。
+	<br><br>
+<</if>>
+
+<<towelup>>
+
+<<advancelesson>>
+<<englishskill _lesson_progress>>
+<<stress _lesson_progress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	下课铃响起，课程结束了。你
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		拿上你的外套然后
+	<</if>>
+	离开了教室。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - $allure)>>
+		<<eventsenglish>>
+	<<else>>
+		<<eventsenglishsafe>>
+	<</if>>
+<</if>>

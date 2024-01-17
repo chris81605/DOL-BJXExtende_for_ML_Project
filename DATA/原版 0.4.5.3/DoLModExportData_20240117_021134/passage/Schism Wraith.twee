@@ -1,0 +1,56 @@
+:: Schism Wraith []
+<<effects>><<canvas-model-override "mouth" "neutral">>
+有人下来了。
+<<if $necklaceThief is "player">>
+	是一个<<if $real_playergender is "m">>男孩<<else>>女孩<</if>>，<<= $real_playergender is "m" ? "他" : "她">>有着
+	<<set _colour to $real_haircolour>>
+	<<if $real_hairColourStyle == "gradient">>
+		双色的
+	<<elseif _colour in setup.colours.hair_map>>
+		<<print setup.colours.hair_map[_colour].name_cap>>的
+	<<else>>
+		_colour的
+	<</if>>
+	头发和
+	<<if $real_lefteyecolour isnot $real_righteyecolour>>
+		异瞳的
+	<<elseif $real_lefteyecolour>>
+		<<= setup.colourName($real_lefteyecolour)>>的
+	<<else>>
+		<<= setup.colourName($real_eyecolour)>>的
+	<</if>>
+	<<if $real_angel gte 4>>
+		眼睛，头上还有一个光环。
+	<<elseif $real_fallenangel gte 2>>
+		眼睛，头上还有一个破碎的光环。
+	<<elseif $real_demon gte 2>>
+		眼睛，头上还长着两只突出的角。
+	<<else>>
+		眼睛。
+	<</if>>
+	你尝试制止<<if $real_playergender is "m">>他<<else>>她<</if>>，但你失败了。
+	<br><br>
+
+	你大喊大叫。你尖叫。你哭泣。
+	<br><br>
+
+	<<if $real_playergender is "m">>他<<else>>她<</if>>进入基座室，你跟不上。你哀嚎，你抓挠墙壁，你搅动波涛。
+	<br><br>
+
+	<<if $real_playergender is "m">>他<<else>>她<</if>>拿走它。它从你脖子上消失了。
+<<else>>
+	一个人形的、没有特征的光滑物体，背上和脸上绑着一块沉重的金属。它在寻找着要偷窃的东西。
+	你试图阻止，但你做不到。
+	<br><br>
+
+	你大喊大叫。你尖叫。你哭泣。
+	<br><br>
+
+	它进入基座室，你跟不上。你哀嚎，你抓挠墙壁，你搅动波涛。
+	<br><br>
+
+	它拿走了项链。项链从你的脖子上消失了。
+<</if>>
+<br><br>
+<<link [[怨恨|Schism Wraith 2]]>><</link>>
+<br>

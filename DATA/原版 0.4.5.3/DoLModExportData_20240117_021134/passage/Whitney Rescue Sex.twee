@@ -1,0 +1,50 @@
+:: Whitney Rescue Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	你跪倒在地。惠特尼毫不犹豫地顺势抓住了你的后脑勺，强迫你抵住<<his>>的胯部。
+	<<promiscuity1>>
+
+	<<maninit>>
+	<<silently>><<npcoral>><</silently>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+
+	<<if $phase is 2>>
+		你把惠特尼推开，但是<<he>>抓住你，把你按在原地，眯起了眼睛。
+		<br><br>
+		"忘恩负义的小混蛋，"<<he>>咆哮道，"你需要弄清自己的位置。"
+		<<set $enemyanger += 80>><<set $enemytrust -= 80>>
+	<<elseif $phase is 1>>
+		争吵不会给你带来任何好处。你任凭惠特尼把你推倒在地。<<He>>立即抓住你的后脑勺，并强迫你贴到了<<his>>的胯部。
+		<<silently>><<npcoral>><</silently>>
+	<<else>>
+		你向惠特尼<<if $speech_attitude is "meek">>礼貌地<<elseif $speech_attitude is "bratty">>轻蔑地<<else>>敷衍地<</if>>说了句"谢谢"，然后将<<his>>的胳膊轻轻推开。<<His>>将你按在原地，眯起眼睛。
+		<br><br>
+		"这还没完，荡妇，"<<he>>咆哮道。
+		<<set $enemyanger += 40>><<set $enemytrust -= 40>>
+	<</if>>
+	<<molested>><<controlloss>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<if !$whitneyRescueAlone>>
+	<<audience>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Whitney Rescue Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Whitney Rescue Sex]]>><</link>></span><<nexttext>>
+<</if>>

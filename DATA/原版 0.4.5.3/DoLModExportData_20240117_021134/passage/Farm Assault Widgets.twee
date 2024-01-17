@@ -1,0 +1,821 @@
+:: Farm Assault Widgets [widget]
+<<widget "farm_assault_init">>
+	<<set $farm_assault to {}>>
+	<<set $farm_assault.no to [0, 1, 2, 3]>>
+	<<if $farm_stage gte 8>>
+		<<set $farm_assault.no.push(4)>>
+	<</if>>
+	<<if $farm_stage gte 9>>
+		<<set $farm_assault.no.push(5)>>
+	<</if>>
+	<<if $farm_stage gte 10>>
+		<<set $farm_assault.no.push(6)>>
+	<</if>>
+	<<if $farm_stage gte 11>>
+		<<set $farm_assault.no.push(7)>>
+	<</if>>
+	<<if $farm_stage gte 12>>
+		<<set $farm_assault.no.push(8)>>
+	<</if>>
+	<<set $farm_assault.teams to {}>>
+
+	<<if $farm_stage gte 12>>
+		<<set $farm_assault.teams.team_1 to {}>>
+		<<set $farm_assault.teams.team_2 to {}>>
+		<<set $farm_assault.teams.team_3 to {}>>
+		<<set $farm_assault.teams.team_4 to {}>>
+		<<set $farm_assault.teams.team_5 to {}>>
+		<<if $bailey_encroach>>
+			<<set $farm_assault.teams.team_6 to {}>>
+			<<set $farm_assault.teams.team_6.type to "bailey">>
+		<</if>>
+	<<elseif $farm_stage gte 10>>
+		<<set $farm_assault.teams.team_1 to {}>>
+		<<set $farm_assault.teams.team_2 to {}>>
+		<<set $farm_assault.teams.team_3 to {}>>
+		<<set $farm_assault.teams.team_4 to {}>>
+		<<if $bailey_encroach>>
+			<<set $farm_assault.teams.team_5 to {}>>
+			<<set $farm_assault.teams.team_5.type to "bailey">>
+		<</if>>
+	<<elseif $farm_stage gte 8>>
+		<<set $farm_assault.teams.team_1 to {}>>
+		<<set $farm_assault.teams.team_2 to {}>>
+		<<set $farm_assault.teams.team_3 to {}>>
+		<<if $bailey_encroach>>
+			<<set $farm_assault.teams.team_4 to {}>>
+			<<set $farm_assault.teams.team_4.type to "bailey">>
+		<</if>>
+	<<else>>
+		<<set $farm_assault.teams.team_1 to {}>>
+		<<set $farm_assault.teams.team_2 to {}>>
+		<<if $bailey_encroach>>
+			<<set $farm_assault.teams.team_3 to {}>>
+			<<set $farm_assault.teams.team_3.type to "bailey">>
+		<</if>>
+	<</if>>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<set $farm_assault.teams[_assault_keys[_s]].location to $farm_assault.no.pluck()>>
+		<<set $farm_assault.teams[_assault_keys[_s]].wall_progress to 0>>
+		<<set $farm_assault.teams[_assault_keys[_s]].field_progress to 0>>
+		<<set $farm_assault.teams[_assault_keys[_s]].number to 3>>
+		<<if $wraith.state is "haunt" and $farm_assault.wraith is undefined and $hallucinations gte 2 and random(1,15-Math.floor(C.npc["Ivory Wraith"].lust/5)) is 1>>
+			<<set $farm_assault.teams[_assault_keys[_s]].type to "wraith">>
+			<<set $farm_assault.teams[_assault_keys[_s]].number to 1>>
+			<<set $farm_assault.teams[_assault_keys[_s]].torched to 0>>
+			<<set $farm_assault.wraith to _s>>
+		<</if>>
+		<<if !$farm_assault.teams[_assault_keys[_s]].type>>
+			<<set $farm_assault.teams[_assault_keys[_s]].type to "remy">>
+		<</if>>
+	<</for>>
+	<<set $fields_damaged to 0>>
+	<<if $farm.kennel gte 1>>
+		<<set $farm_assault.dogs to 2>>
+	<<else>>
+		<<set $farm_assault.dogs to 1>>
+	<</if>>
+	<<set $farm_assault.dogs_state to "guarding">>
+	<<if $farm.tower_guard>>
+		<<set $farm_assault.tower to "manned">>
+	<<else>>
+		<<set $farm_assault.tower to "empty">>
+	<</if>>
+	<<set $farm_assault.alex to "patrol">>
+<</widget>>
+
+<<widget "farm_assault_end">>
+	<<unset $farm_assault>>
+	<<unset $fields_damaged>>
+	<<unset $farm_destroyed>>
+<</widget>>
+
+<<widget "farm_assault_progress">>
+	<<set $farm_assault_done to 0>>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $farm_assault.teams[_assault_keys[_s]].state is undefined>>
+			<<set $farm_assault.teams[_assault_keys[_s]].state to "wall">>
+		<</if>>
+		/*Fleeing checked before and after other actions. */
+		<<farm_assault_flight>>
+		<<if $farm_assault.teams[_assault_keys[_s]].location isnot "done">>
+			/*Assaulting the tower. */
+			<<if $farm_assault.teams[_assault_keys[_s]].location is "tower">>
+				<<if $farm_assault.teams[_assault_keys[_s]].state is "approach">>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "climb">>
+				<<elseif $farm_assault.teams[_assault_keys[_s]].state is "climb">>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "fight">>
+				<<elseif $farm_assault.teams[_assault_keys[_s]].state is "fight">>
+					<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+						<<if $farm.tower_guard_skill gte random(1, 2000)>>
+							<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+							<<if $farm_assault.teams[_assault_keys[_s]].number lte 0>>
+								<<set $farm_assault.tower to "manned">>
+							<</if>>
+							<<set _guard_won to true>>
+						<<else>>
+							<<set $farm_assault.tower to "defeated">>
+							<<set $farm_assault.teams[_assault_keys[_s]].location to $farm_assault.no.pluck()>>
+							<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+							<<set _guard_lost to true>>
+						<</if>>
+					<<else>>
+						<<if $farm.tower_guard_skill gte random(1, 1000)>>
+							<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+							<<if $farm_assault.teams[_assault_keys[_s]].number lte 0>>
+								<<set $farm_assault.tower to "manned">>
+							<</if>>
+							<<set _guard_won to true>>
+						<<else>>
+							<<set $farm_assault.tower to "defeated">>
+							<<set $farm_assault.teams[_assault_keys[_s]].location to $farm_assault.no.pluck()>>
+							<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+							<<set _guard_lost to true>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+			/*Successfully burning. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "celebrate">>
+				<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+				<<set $farm_assault.teams[_assault_keys[_s]].location to $farm_assault.no.pluck()>>
+				<<if $farm_assault.teams[_assault_keys[_s]].location is undefined or $farm_assault.teams[_assault_keys[_s]].torched gte Math.floor(C.npc["Ivory Wraith"].lust/4)>>
+					<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+				<</if>>
+			<</if>>
+			/*Burning a field. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "field">>
+				<<if $farm_assault.teams[_assault_keys[_s]].field_progress gte 4>>
+					<<set $farm_assault.teams[_assault_keys[_s]].field_progress to 0>>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "celebrate">>
+					<<set _smoke to true>>
+					<<damage_farm "target" $farm_assault.teams[_assault_keys[_s]].location>>
+					<<if $farm_assault.teams[_assault_keys[_s]].type is "wraith">>
+						<<set $farm_assault.teams[_assault_keys[_s]].torched++>>
+					<</if>>
+				<<else>>
+					<<set $farm_assault.teams[_assault_keys[_s]].field_progress++>>
+					<<if $farm_assault.teams[_assault_keys[_s]].type is "wraith" and random(0,1) is 1>>
+						<<set $farm_assault.teams[_assault_keys[_s]].field_progress++>>
+					<</if>>
+				<</if>>
+			<</if>>
+			/*Responding to hounds. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "dogs_recover">>
+				<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+					<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+					<<if $farm_assault.tower is "manned">>
+						<<set $farm_assault.no.push($farm_assault.teams[_assault_keys[_s]].location)>>/*Add their location back to the pool.*/
+						<<set $farm_assault.teams[_assault_keys[_s]].location to "tower">>
+						<<set $farm_assault.teams[_assault_keys[_s]].state to "approach">>
+						<<set $farm_assault.tower to "attacked">>
+					<<else>>
+						<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+					<</if>>
+				<<else>>
+					<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+				<</if>>
+				<<set $farm_assault.dogs -= 1>>
+				<<if $farm_assault.dogs gte 1>>
+					<<set $farm_assault.dogs_state to "guarding">>
+					<<set _dogs_status to "victorious">>
+				<<else>>
+					<<set $farm_assault.dogs_state to "defeated">>
+					<<set _dogs_status to "defeated">>
+				<</if>>
+				<<set $farm_assault.dogs_target to _assault_keys[_s]>>
+			<</if>>
+			/*Intercepted by hounds. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "dogs">>
+				<<set $farm_assault.teams[_assault_keys[_s]].state to "dogs_recover">>
+			<</if>>
+			/*Entering. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "entry">>
+				<<if $farm_assault.dogs gte 1 and $farm_assault.dogs_state is "guarding" and $farm_assault.teams[_assault_keys[_s]].type isnot "wraith">>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "dogs">>
+					<<set $farm_assault.dogs_state to "fighting">>
+				<<elseif ($farm_assault.teams[_assault_keys[_s]].type is "bailey" or random(1, 2) is 2) and $farm_assault.tower is "manned" and $farm_assault.teams[_assault_keys[_s]].type isnot "wraith">>
+					<<set $farm_assault.no.push($farm_assault.teams[_assault_keys[_s]].location)>>/*Add their location back to the pool.*/
+					<<set $farm_assault.teams[_assault_keys[_s]].location to "tower">>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "approach">>
+					<<set $farm_assault.tower to "attacked">>
+				<<else>>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "field">>
+				<</if>>
+			<</if>>
+			/*Breaking in. */
+			<<if $farm_assault.teams[_assault_keys[_s]].state is "wall">>
+				<<if $farm_assault.teams[_assault_keys[_s]].wall_progress gte $farm.wall>>
+					<<set $farm_assault.teams[_assault_keys[_s]].state to "entry">>
+					<<set $farm_assault.teams[_assault_keys[_s]].wall_progress to 0>>
+				<<else>>
+					<<if $farm_assault.teams[_assault_keys[_s]].type is "wraith">>
+						<<set $farm_assault.teams[_assault_keys[_s]].wall_progress to $farm.wall>>
+					<<elseif $farm.wall gte 4 and $farm_assault.teams[_assault_keys[_s]].type isnot "bailey">>
+						<<if random(1, 3) is 3>>
+							<<set $farm_assault.teams[_assault_keys[_s]].wall_progress++>>
+						<</if>>
+					<<elseif $farm.wall gte 3 and $farm_assault.teams[_assault_keys[_s]].type isnot "bailey">>
+						<<if random(1, 3) gte 2>>
+							<<set $farm_assault.teams[_assault_keys[_s]].wall_progress++>>
+						<</if>>
+					<<else>>
+						<<set $farm_assault.teams[_assault_keys[_s]].wall_progress++>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+		/*Fleeing. */
+		<<farm_assault_flight>>
+		/*Alex. */
+		<<if $farm_assault.alex is "patrol">>
+			<<if $farm_assault.teams[_assault_keys[_s]].location isnot "done" and $farm_assault.teams[_assault_keys[_s]].type isnot "wraith">>
+				<<set $farm_assault.alex to _assault_keys[_s]>>
+			<</if>>
+		<<elseif $farm_assault.alex is _assault_keys[_s]>>
+			<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+				<<if random(1, 100) gte 80>>
+					<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+					<<set _alex_success to true>>
+				<</if>>
+			<<else>>
+				<<if random(1, 100) gte 60>>
+					<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+					<<set _alex_success to true>>
+				<</if>>
+			<</if>>
+		<</if>>
+		/*Fleeing. */
+		<<farm_assault_flight>>
+	<</for>>
+<</widget>>
+
+<<widget "farm_assault_flight">>
+	<<if $farm_assault.teams[_assault_keys[_s]].number lte 0>>/*Flee if numbers reduced to 0.*/
+		<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<<if $farm_assault.alex is _assault_keys[_s]>>/*Alex patrols again. */
+			<<set $farm_assault.alex to "patrol">>
+		<</if>>
+	<</if>>
+	<<if $farm_assault.teams[_assault_keys[_s]].location isnot "done">>/*Assault ends when !_farm_assault_active.*/
+		<<set _farm_assault_active to true>>
+	<<elseif $farm_assault.teams[_assault_keys[_s]].location gte 0>>
+		<<set $farm_assault.no.push($farm_assault.teams[_assault_keys[_s]].location)>>/*Add their location back to the pool.*/
+		<<if $farm_assault.alex is _assault_keys[_s]>>/*Alex patrols again. */
+			<<set $farm_assault.alex to "patrol">>
+		<</if>>
+	<<elseif $farm_assault.alex is _assault_keys[_s] and $farm_assault.teams[_assault_keys[_s]].location is "done">>
+		<<set $farm_assault.alex to "patrol">>
+	<</if>>
+<</widget>>
+
+<<widget "farm_assault_info">>
+	<<if _args[0] is "guard">>
+		<<set _skill to $farm.tower_guard_skill>>
+	<<else>>
+		<<set _skill to 0>>
+	<</if>>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $farm_assault.teams[_assault_keys[_s]].location is "tower" and $farm_assault.teams[_assault_keys[_s]].state is "fight">>
+			<<set _fighting to true>>
+		<</if>>
+	<</for>>
+
+	<<if _fighting is true or _guard_won is true or _guard_lost is true>>
+		你的对讲机接收到另一个信号。<span class="red">你听到了一阵伴随着杂音的打斗声。</span>
+		<<if _guard_won is true>>
+			你凝视着瞭望塔。一个身影从塔顶摔下来。<span class="green">那不是$farm.tower_guard。</span>看起来他们制服了其中一个攻击者。
+		<<elseif _guard_lost is true>>
+			你凝视着瞭望塔。一个身影从塔顶摔下来。<span class="red">那是$farm.tower_guard。</span>你的守卫无法在后续的袭击中提供帮助了。
+		<</if>>
+		<br><br>
+	<<else>>
+		<<if _args[0] is "guard">>
+			你的对讲机接收到另一个信号，$farm.tower_guard让你得知敌人的活动情况:
+		<<else>>
+			你望向农场，试图发现敌人的动向:
+		<</if>>
+		<br>
+		<<set _assault_keys to Object.keys($farm_assault.teams)>>
+		<<for _s to 0; _s lt _assault_keys.length; _s++>>
+			<<if $farm_assault.teams[_assault_keys[_s]].type is "wraith">>
+				<<if $farm_assault.teams[_assault_keys[_s]].location is "done">>
+					<span class="green"><<farm_assault_thugs>>离开了，<<print $wraith.seenFarm ? "它" : "它们">>似乎失去了兴趣。</span>
+					<<if $wraith.seen gte 5 and !$farm_assault.wraithStress>>
+						<<stress -6>><<lstress>><<set $farm_assault.wraithStress to true>>
+					<</if>>
+				<<else>>
+					<<if _skill gte random(400, 1400) or !$wraith.seenFarm>>
+						<<switch $farm_assault.teams[_assault_keys[_s]].state>>
+						<<case wall>>
+							<<farm_assault_thugs>>正在<span class="purple">穿过<<print $farm.wall gte 3 ? "围栏" : "墙">></span>。
+						<<case entry>>
+							<<farm_assault_thugs>>正蹒跚着朝<<farm_assault_location>>走去。
+						<<case field>>
+							<<if $farm_assault.teams[_assault_keys[_s]].field_progress lte 1>>
+								<span class="blue"><<farm_assault_thugs>>进入了<<farm_assault_location>>。</span>
+							<<else>>
+								<span class="blue"><<farm_assault_thugs>>在<<farm_assault_location>>徘徊。</span>
+							<</if>>
+						<<case celebrate>>
+							<<farm_assault_thugs>>待在原地没动。<span class="red"><<farm_assault_location "cap">>着火了。</span>
+						<</switch>>
+					<<else>>
+						<<farm_assault_location>>似乎有些不对劲。
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $farm_assault.teams[_assault_keys[_s]].location is "done">>
+					<span class="green">一伙<<farm_assault_thugs>>正朝山丘溃退。</span>
+				<<elseif $farm_assault.teams[_assault_keys[_s]].state is "dogs">>
+					你听到了<<farm_assault_location>>里的狗叫声。
+				<<elseif $farm_assault.teams[_assault_keys[_s]].location is "tower">>
+					<<switch $farm_assault.teams[_assault_keys[_s]].state>>
+					<<case "approach">>
+						<span class="purple">一伙<<farm_assault_thugs>>正接近瞭望塔。</span>
+					<<case "climb">>
+						<span class="pink">一伙<<farm_assault_thugs>>正在登上瞭望塔。</span>
+					<</switch>>
+				<<else>>
+					<<if _skill gte random(1, 1000)>>
+						<<switch $farm_assault.teams[_assault_keys[_s]].state>>
+						<<case wall>>
+							一伙<<farm_assault_thugs>>正在
+							<<if $farm.wall gte 3>>
+								<span class="pink">穿过</span>在<<farm_assault_location>>的围栏。
+							<<else>>
+								攀爬着<<farm_assault_location>>附近的墙。
+							<</if>>
+						<<case entry>>
+							一伙<<farm_assault_thugs>>正冲进<<farm_assault_location>>。
+						<<case field>>
+						<<switch $farm_assault.teams[_assault_keys[_s]].field_progress>>
+						<<case 0>>
+								<span class="blue">一伙<<farm_assault_thugs>>正在进入<<farm_assault_location>>。</span>
+						<<case 1>>
+								<span class="purple">一伙<<farm_assault_thugs>>在<<farm_assault_location>>打开了汽油罐。</span>
+						<<case 2>>
+								<span class="pink">一伙<<farm_assault_thugs>>正在<<farm_assault_location>>浇洒汽油。</span>
+						<<case 3>>
+								<span class="red">一伙<<farm_assault_thugs>>在<<farm_assault_location>>点燃了火柴。</span>
+						<</switch>>
+						<<case celebrate>>
+							<span class="red">一伙<<farm_assault_thugs>>正在沉醉在田野燃烧的欢愉中。</span>
+						<</switch>>
+					<<else>>
+						<<farm_assault_location>>有动静。
+					<</if>>
+				<</if>>
+			<</if>>
+			<br>
+		<</for>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "farm_assault_alex">>
+	<<if _farm_assault_active isnot true or $farm_destroyed is true>>
+	<<elseif $farm_assault.alex is "bound">>
+		<<if $farm_assault.bindings_alex gte 1>>
+			<<set $farm_assault.bindings_alex -= 1>>
+		<<else>>
+			<<set $farm_assault.alex to "patrol">>
+		<</if>>
+	<<elseif $farm_assault.alex is "patrol">>
+		你的对讲机接收到了信号。"我正在寻找入侵者，" 艾利克斯说道。"只是汇报一下。"
+	<<else>>
+		<<set _assault_keys to Object.keys($farm_assault.teams)>>
+		<<for _s to 0; _s lt _assault_keys.length; _s++>>
+			<<if $bus is $farm_assault.teams[_assault_keys[_s]].location and $farm_assault.alex is _assault_keys[_s]>>
+				<span class="teal">艾利克斯蹲在你旁边。</span>"有什么计划吗？"
+			<<elseif $farm_assault.alex is _assault_keys[_s]>>
+				你的对讲机接收到了信号。"我正在<<farm_assault_location>><<print either("追赶","跟踪","追踪","追捕","袭击")>><<farm_assault_thugs>>，"艾利克斯压低声音说道。
+				<<if _alex_success>>
+					<<set _rng to random(1, 5)>>
+					<<switch _rng>>
+					<<case 1>>
+						<span class="green">"打晕了一个人。"</span>
+					<<case 2>>
+						<span class="green">"他们明天早上会感觉到的。"</span>
+					<<case 3>>
+						<span class="green">"不知道他们什么时候才会发现他们失去了一个同伴。"</span>
+					<<case 4>>
+						<span class="green">"打倒了一个暴徒。"</span>
+					<<default>>
+						<span class="green">"干掉了一个。"</span>
+					<</switch>>
+				<<else>>
+					<<set _rng to random(1, 5)>>
+					<<switch _rng>>
+					<<case 1>>
+						<span class="blue">"我无法独自搞定他们。"</span>
+					<<case 2>>
+						<span class="blue">"他们太警觉了。"</span>
+					<<case 3>>
+						<span class="blue">"我无法靠近他们。"</span>
+					<<case 4>>
+						<span class="blue">"还要继续等待机会。"</span>
+					<<default>>
+						<span class="blue">"我不会冒任何风险。"</span>
+					<</switch>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "farm_assault_location">><<silently>>
+	<<switch $farm_assault.teams[_assault_keys[_s]].location>>
+		<<case 0>>
+			<<set _text_output to "第一块农田">>
+		<<case 1>>
+			<<set _text_output to "第二块农田">>
+		<<case 2>>
+			<<set _text_output to "第三块农田">>
+		<<case 3>>
+			<<set _text_output to "第四块农田">>
+		<<case 4>>
+			<<set _text_output to "第五块农田">>
+		<<case 5>>
+			<<set _text_output to "第六块农田">>
+		<<case 6>>
+			<<set _text_output to "第七块农田">>
+		<<case 7>>
+			<<set _text_output to "第八块农田">>
+		<<case 8>>
+			<<set _text_output to "第九块农田">>
+		<<case tower>>
+			<<set _text_output to "瞭望塔">>
+		<<default>>
+			<<set _text_output to "农田">>
+	<</switch>>
+	<<if _args[0] is "cap">>
+		<<capitalise>>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "farm_assault_thugs">><<silently>>
+	<<switch $farm_assault.teams[_assault_keys[_s]].type>>
+		<<case "bailey">>
+			<<set _text_output to "<span class=\"red\">贝利的打手</span>">>
+		<<case "wraith">>
+			<<if $wraith.seenFarm>>
+				<<set _text_output to "<span class=\"wraith\">白色幽灵</span>">>
+			<<else>>
+				<<set _text_output to "<span class=\"black\">诡诈的陌生人</span>">>
+			<</if>>
+		<<default>>
+			<<set _text_output to "<span class=\"pink\">雷米的手下</span>">>
+	<</switch>>
+	<<if _args[0] is "cap">>
+		<<capitalise>>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "farm_assault_options">>
+	<<if !_noOptions>>
+		<<link [[等待 (0:05)|Farm Assault]]>><<pass 5>><<set $farm_assault.movement to "wait">><</link>>
+		<br>
+		<<if $bus is "tower" and _tower isnot "threatened" and $farm_assault.tower isnot "manned">>
+			<<link [[爬上瞭望塔 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to "tower_top">><<set $farm_assault.movement to "climb">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 0>>
+			<<link [[第一块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 0>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 1>>
+			<<link [[第二块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 1>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 2>>
+			<<link [[第三块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 2>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 3>>
+			<<link [[第四块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 3>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 4 and $farm_stage gte 8>>
+			<<link [[第五块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 4>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 5 and $farm_stage gte 9>>
+			<<link [[第六块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 5>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 6 and $farm_stage gte 10>>
+			<<link [[第七块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 6>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 7 and $farm_stage gte 11>>
+			<<link [[第八块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 7>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot 8 and $farm_stage gte 12>>
+			<<link [[第九块田 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to 8>><<set $farm_assault.movement to "field">><</link>>
+			<br>
+		<</if>>
+		<<if $bus isnot "tower" and $bus isnot "tower_top" and $farm.tower gte 1>>
+			<<link [[瞭望塔 (0:05)|Farm Assault]]>><<pass 5>><<set $bus to "tower">><<set $farm_assault.movement to "tower">><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "farm_assault_actions">>
+	<<switch $bus>>
+		<<case "tower">>
+			你隐约看到瞭望塔在你头上。
+		<<case 0>>
+			你在第一块田附近。
+		<<case 1>>
+			你在第二块田附近。
+		<<case 2>>
+			你在第三块田附近。
+		<<case 3>>
+			你在第四块田附近。
+		<<case 4>>
+			你在第五块田附近。
+		<<case 5>>
+			你在第六块田附近。
+		<<case 6>>
+			你在第七块田附近。
+		<<case 7>>
+			你在第八块田附近。
+		<<case 8>>
+			你在第九块田附近。
+	<</switch>>
+	<br>
+	<<if $farm_assault.bindings gte 1>>
+		你躺在地上，动躺不得。
+		<br><br>
+
+		<<link [[挣扎 (0:05)|Farm Assault]]>><<pass 5>><<set $farm_assault.bindings -= 1>><<set $farm_assault.movement to "struggle">><</link>>
+		<br>
+	<<else>>
+		<<set _assault_keys to Object.keys($farm_assault.teams)>>
+		<<for _s to 0; _s lt _assault_keys.length; _s++>>
+			<<set $_key to _assault_keys[_s]>>
+			<<set $_team to $farm_assault.teams[$_key]>>
+			<<set $_isBaileyTeam to $_team.type is "bailey">>
+			<<set $_isWraith to $_team.type is "wraith">>
+			<<if $bus is $_team.location>>
+				<<if $bus is "tower">>
+					<<if $_team.state is "approach">>
+						<span class="blue"><<farm_assault_thugs>>接近。</span>
+						<br><br>
+						<<farm_assault_attack_options>>
+					<<elseif $_team.state is "climb">>
+						<span class="purple">你看见<<farm_assault_thugs>>进入了塔中。</span>
+						<br><br>
+
+						<<link [[保卫瞭望塔 (0:05)|Farm Assault Tower Defend]]>><<pass 5>><</link>>
+						<br>
+					<<elseif $_team.state is "fight">>
+						<span class="pink">你听到$farm.tower_guard在塔顶上与<<farm_assault_thugs>>战斗着！</span>
+						<br><br>
+
+						<<link [[保卫瞭望塔 (0:05)|Farm Assault Tower Defend]]>><<pass 5>><</link>>
+						<br>
+					<</if>>
+				<<elseif $_team.state is "wall">>
+					<<if $_isWraith>>
+						你看到<<farm_assault_thugs>><span class="pink">正在通过<<print $farm.wall gte 3 ? "栅栏" : "墙">></span>。
+					<<else>>
+						<<if $farm.wall gte 3>>
+							你看见<<farm_assault_thugs>>正在锯断栅栏。
+						<<else>>
+							你看见<<farm_assault_thugs>>正在翻墙。
+						<</if>>
+						<<if $_team.number is 1>>
+							这里只有一个人。
+						<<else>>
+							他们有<<number $_team.number>>个人。
+						<</if>>
+					<</if>>
+					<<if $_isBaileyTeam>>
+						<span class="red">他们目的明确地移动着。</span>
+					<</if>>
+					<br>
+					<<if $farm_assault.alex is $_key>>
+						<<link [[跟艾利克斯一起扔石头 (0:05)|Farm Assault Rocks Alex]]>><<pass 5>><</link>>
+						<br>
+					<<else>>
+						<<set $_min to ($_isBaileyTeam ? 6000 : 1)>>
+						<<set $_max to ($_isBaileyTeam ? 20000 : 16000)>>
+						<<link [[扔石头 (0:05)|Farm Assault Rocks]]>><<pass 5>><</link>><<physiquedifficulty $_min $_max>>
+						<br>
+					<</if>>
+					<<set $_min to ($_isBaileyTeam ? 3000 : 200)>>
+					<<set $_max to ($_isBaileyTeam ? 3000 : 1000)>>
+					<<link [[威胁 (0:05)|Farm Assault Threaten]]>><<pass 5>><</link>><<skill_difficulty $fame.scrap "战斗知名度" $_min $_max>>
+					<br>
+				<<elseif $_team.state is "entry">>
+					<<if $_isBaileyTeam>>
+						<<if $_team.number gte 2>>
+							你看见<<number $_team.number>>个<<farm_assault_thugs>>正冲进农场。他们无视了你，直直地冲进田里。
+							<br>
+							<<farm_assault_attack_options>>
+						<<else>>
+							你看见其中一个<<farm_assault_thugs>>冲进了农场。
+							<br>
+							<<farm_assault_attack_options>>
+						<</if>>
+					<<elseif $_isWraith>>
+						<<set _noOptions to true>>
+						你看见<<farm_assault_thugs>>接近了你。
+						<<if !$wraithIntro>>
+							<<set $wraithIntro to true>>
+							那是一道美丽的苍白色身影，祂穿着半透明的白色长袍，正在用手抓着自己的脖子。祂用愤怒的赤红色眼睛盯着你。
+						<<elseif !$wraith.seenFarm>>
+							<span class="red">那张脸是你可怕而又熟悉的苍白。</span>
+						<<else>>
+							祂露出了可怕而熟悉的微笑。
+						<</if>>
+						祂走过的每一处地方，都留下了一道奇怪的黏糊糊的物质。
+						<<set $wraith.seenFarm to true>>
+						<br><br>
+
+						"<span class="wraith">淹没在烟雾中，被火焰吞噬吧。</span>"
+						<br><br>
+
+						<<if $farm_assault.alex is $_key>>
+							"我要回去看看。"艾利克斯低声说道。<span class="red">似乎完全没注意到苍白色的身影。<<nnpc_He "Alex">>压低身子离开了。</span>
+							<<set $farm_assault.alex to "patrol">>
+							<br><br>
+						<</if>>
+
+						<<generateWraith 1 true>>
+						<<initWraith "man" "arms" "abomination">><<startWraith>>
+						<br><br>
+
+						<<link [[继续|Farm Assault Wraith Fight]]>><<set $fightstart to 1>><</link>>
+					<<else>>
+						<<if $_team.number gte 2>>
+							你看见<<number $_team.number>>个<<farm_assault_thugs>>正冲进农场。他们无视了你，直直地冲进田里。
+							<br><br>
+
+							<<farm_assault_attack_options>>
+						<<else>>
+							你看见其中一个<<farm_assault_thugs>>冲进了农场。
+							<br><br>
+
+							<<farm_assault_attack_options>>
+						<</if>>
+					<</if>>
+				<<elseif $_team.state is "dogs">>
+					<span class="green">你的<<farm_text_many dog>>在黑暗中出现，并拖住了<<farm_assault_thugs>>！</span>
+					<br><br>
+				<<elseif $_team.state is "dogs_recover">>
+					<<if $_isBaileyTeam>>
+						<<if $_team.number gte 2>>
+							<<if $farm_assault.dogs gte 2>>
+								<<farm_assault_thugs>>看起来毫不惊慌，跟猎犬正面对抗着。第一只<<farm_text dog>>的脸被踢了个正着，呜咽着滚走了，但其他狗试图撕咬袭击者们的四肢。打手们甩开了它们——以浑身是血为代价。<<generate1>><<person1>><<person>>因为伤势太重，<span class="green">无法继续袭击农场，</span>一瘸一拐地离开了农场。
+								<br><br>
+							<<else>>
+								<<farm_assault_thugs>>看起来毫不惊慌，跟猎犬正面对抗着。第一只<<farm_text dog>>的<span class="red">脸被踢了个正着，</span>呜咽着滚走了，但其他狗试图撕咬袭击者的四肢。
+								<br><br>
+								打手们对着猎犬拳打脚踢，<span class="red">吓跑了它们，</span>但自己也变得浑身是血。<<generate1>><<person1>><<person>>因为伤势过重，<span class="green">无法继续袭击农场，</span>一瘸一拐地离开了。
+								<br><br>
+
+							<</if>>
+						<<else>>
+							<<if $farm_assault.dogs gte 2>>
+								<<generate1>><<person1>>
+								那个打手，一个<<person>>，试图吠回去吓跑猎犬。一只猎犬咆哮着扑了过去，用牙咬住了那<<persons>>的手臂。<<He>>把<<farm_text dog>>甩开了，但没办法继续袭击。<<He>>抓着自己的一只手臂，<span class="green">逃离了田地</span>。
+								<br><br>
+							<<else>>
+								<<generate1>><<person1>>
+								那个打手，一个<<person>>，试图吠回去吓跑猎犬。一只猎犬咆哮着扑了过去，用牙咬住了<<persons>>的手臂。<span class="red"><<he>>一拳打在了<<farm_text dog>>的鼻子上，</span>挣脱了撕咬，但无力再继续袭击。<<He>>抓着自己的一只手臂，<span class="green">逃离了田地</span>。
+								<br><br>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<if $_team.number gte 2>>
+							<<if $farm_assault.dogs gte 2>>
+								<<farm_assault_thugs>>惊慌失措地<span class="green">逃跑了。</span>猎犬们把他们一路追到<<farm_fence>>，在黑夜中胜利地咆哮着。
+							<<else>>
+								<<farm_assault_thugs>>惊慌失措地<span class="green">逃跑了。</span>猎犬们沉迷于追逐，<span class="red">追着他们直到被夜色吞没，</span>留下无人看守的农场。等它们回来的时候估计已经累到帮不上忙了。
+							<</if>>
+							<br><br>
+						<<else>>
+							<<generate1>><<person1>>
+							<<if $farm_assault.dogs gte 2>>
+								单独的<<person>>惊慌失措地<span class="green">逃跑了。</span>猎犬们把<<him>>一路追到<<farm_fence>>，在黑夜中胜利地咆哮着。
+							<<else>>
+								那个单独的<<person>>惊慌失措<span class="green">逃跑了。</span>猎犬们沉迷于追逐，<span class="red">追着<<him>>直到被夜色吞没，</span>留下无人看守的农场。等它们回来的时候估计已经累到帮不上忙了。
+							<</if>>
+							<br><br>
+						<</if>>
+					<</if>>
+					<<endevent>>
+					<<farm_assault_attack_options>>
+				<<elseif $_team.state is "field">>
+					<<if $_isWraith>>
+						你看见<<farm_assault_thugs>>在田地里游荡者。
+						<<if !$wraith.seenFarm>>
+							他们看上去完全没在干什么。
+						<<else>>
+							<span class="purple">怀疑他们在倾倒着可燃的粘液。</span>
+						<</if>>
+					<<else>>
+						<<if $_team.field_progress gte 4>>
+							<span class="pink">你看见<<farm_assault_thugs>>擦着了火柴！</span>
+						<<elseif $_team.field_progress gte 3>>
+							<span class="purple">你看见<<farm_assault_thugs>>用汽油浇灌着田地。</span>
+						<<elseif $_team.field_progress gte 2>>
+							<span class="blue">你看见<<farm_assault_thugs>>打开了油罐。</span>
+						<<else>>
+							<span class="lblue">你看见<<farm_assault_thugs>>在田地里徘徊着。</span>
+						<</if>>
+					<</if>>
+					<br>
+					<<farm_assault_attack_options>>
+				<</if>>
+			<</if>>
+		<</for>>
+
+		<br>
+
+		<<farm_assault_options>>
+	<</if>>
+<</widget>>
+
+<<widget "farm_assault_intruders">>
+	<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+		<<set _text_output to "入侵者">>
+	<<else>>
+		<<set _text_output to "入侵者">>
+	<</if>>
+	<<print _text_output>>
+<</widget>>
+
+<<widget "farm_assault_no">>
+	<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+		来势汹汹的
+	<<else>>
+		<<switch _s>>
+		<<case 0>>
+			第一批
+		<<case 1>>
+			第二批
+		<<case 2>>
+			第三批
+		<<case 3>>
+			第四批
+		<<case 4>>
+			第五批
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "farm_assault_unbind">>
+	<<unbind>>
+	<<set $farm_assault.bindings to 0>>
+	<<if $worn.face.type.includes("gag")>>
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+	<</if>>
+	<<clotheson>>
+<</widget>>
+
+<<widget "farm_assault_attack_options">>
+	<<if $farm_assault.alex is _assault_keys[_s]>>
+		<<if $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+			<<link [[跟艾利克斯一起解决一个 (0:05)|Farm Assault Pick Alex]]>><<pass 5>><</link>>
+			<br>
+			<<if $pain gte 100>>
+				<span class="red">你太痛了，没办法跟他们正面对抗。</span>
+			<<else>>
+				<<link [[跟艾利克斯一起冲锋 (0:05)|Farm Assault Charge]]>><<pass 5>><</link>>
+			<</if>>
+		<<elseif $farm_assault.teams[_assault_keys[_s]].number gte 1 and $farm_assault.teams[_assault_keys[_s]].location isnot "done" and $farm_assault.teams[_assault_keys[_s]].state isnot "dogs_recover">>
+			入侵者独自一人。
+			<br><br>
+			<<link [[制服|Farm Assault Overpower]]>><</link>>
+		<</if>>
+	<<elseif $pain gte 100>>
+		<span class="red">你太痛了，没办法跟他们正面对抗。</span>
+	<<else>>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+			<<link [[跟他们正面对抗 (0:05)|Farm Assault Intercept Bailey]]>><<pass 5>><</link>>
+			<br>
+			<<set $skulduggerydifficulty to 1000>>
+			<<link [[攻击其中一个 (0:05)|Farm Assault Pick Bailey]]>><<pass 5>><</link>><<skulduggerydifficulty>>
+		<<elseif $farm_assault.teams[_assault_keys[_s]].type is "wraith">>
+			<<set $_them to $wraith.seenFarm ? "祂" : "对方">>
+			<<link [["迎面和" + $_them + "战斗"|Farm Assault Intercept Wraith]]>><</link>>
+		<<else>>
+			<<link [[跟他们正面对抗 (0:05)|Farm Assault Intercept]]>><<pass 5>><</link>>
+			<br>
+			<<set $skulduggerydifficulty to 600>>
+			<<link [[攻击其中一个 (0:05)|Farm Assault Pick]]>><<pass 5>><</link>><<skulduggerydifficulty>>
+		<</if>>
+	<</if>>
+	<br>
+<</widget>>

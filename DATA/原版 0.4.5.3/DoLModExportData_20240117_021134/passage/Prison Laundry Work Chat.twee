@@ -1,0 +1,26 @@
+:: Prison Laundry Work Chat []
+<<effects>>
+
+<<generate_relaxed_guard 0>><<relaxed_guard 0 cap>><<person1>>你靠近时抬起头。"你应该在工作，"<<he>>说道，"但我可以无视这点，玩个游戏吗？"<<He>>在手中摇起了骰子。
+<br><br>
+
+<<link [[玩|Prison Laundry Work Play]]>><<set $daily.prison.prisonRelaxedSpoke to true>><<prison_rep relaxed 1>><</link>><<glove>>
+<br>
+<<if $prison_job_change is undefined>>
+	<<if $prison.guards gte 60>>
+		<<link [[申请在医务室工作|Prison Laundry Work Medical]]>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你没有得到足够的信任，不能在医务室工作。</span>
+		<br>
+	<</if>>
+	<<if $prison.guards gte 80>>
+		<<link [[申请在塔尖工作|Prison Laundry Work Spire]]>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你没有得到足够的信任，不被允许登上塔尖。</span>
+		<br>
+	<</if>>
+<</if>>
+<<link [[离开|Prison Laundry Work]]>><<endevent>><</link>>
+<br>

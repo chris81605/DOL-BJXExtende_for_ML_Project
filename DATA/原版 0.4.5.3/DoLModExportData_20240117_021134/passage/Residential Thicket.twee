@@ -1,0 +1,62 @@
+:: Residential Thicket []
+<<set $outside to 1>><<effects>>
+
+你正待在住宅区的灌木丛处。
+
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		一大滴特凉的水落在了你的脖子上。
+	<<elseif $weather is "snow">>
+		顶端的树枝被雪压低了身形。
+	<<else>>
+		树枝在凉爽的微风中挥舞着。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		雨水促使着人们离开。
+	<<elseif Time.season is "autumn">>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			学校的学生们正在采摘黑莓。
+		<<elseif Time.hour is 12>>
+			一对老夫妻正在一起采摘黑莓。
+		<<elseif Time.hour gte 9>>
+			每当微风吹起，树叶就会飘落到地面上。
+		<<else>>
+			你看到一只松鼠跑到了树上。
+		<</if>>
+	<<elseif $weather is "snow">>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			学校的学生们正在聊天，附近有几个堆好的雪人。
+		<<elseif Time.hour is 12>>
+			一对老夫妇坐在长椅上一起吃午饭，你不知道这对夫妇是怎么抵御严寒的。
+		<<else>>
+			你看到一只松鼠跑到了树上。
+		<</if>>
+	<<else>>
+		<<if Time.schoolDay and Time.hour gte 16>>
+			学校的学生们在树丛间聊着天。
+		<<elseif Time.hour is 12>>
+			一对老夫妇正在长椅上一起吃午饭。
+		<<else>>
+			你看到一只松鼠跑到了树上。
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $daily.thicketBlackberries isnot 1>>
+	<<icon "tending/blackberry.png">> <<link [[摘取黑莓 (0:20)|Residential Thicket Blackberries]]>><<pass 20>><<set $daily.thicketBlackberries to 1>><</link>><<tendingdifficulty 1 300>>
+	<br>
+<</if>>
+<<if $historytrait gte 2>>
+	<<if $thicket_tunnel_intro is 1>>
+		<<foresticon>><<link [[走秘密通道前往森林 (0:05)|Forest]]>><<pass 5>><<set $forest to 0>><<set $eventskip to 1>><<set $thicket_tunnel_intro to 1>><</link>>
+		<br>
+	<<else>>
+		<<foresticon>><<link [[走秘密通道前往森林 (0:05)|Residential Thicket Tunnel]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<getouticon>><<link [[离开 (0:01)|Residential alleyways]]>><<pass 1>><</link>>
+<br>

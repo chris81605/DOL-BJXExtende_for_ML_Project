@@ -1,0 +1,83 @@
+:: History Events Trick []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $speech_attitude is "bratty">>
+	你面无表情地盯着<<he>>。毫无征兆地，你把手突然伸进<<he>>手里拿着的那堆书里，把它们扔得到处都是。
+	<br><br>
+
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<br><br>
+		那<<person>>呆呆地站在散落的书本中间，这时温特走了进来。
+
+		"你在做什么？"温特在门口怒视着<<him>>，"把书捡起来，快点。"
+		<br><br>
+		"但是——"
+		<br><br>
+		"之后留校的时候去和校长解释吧。现在我要你把这些书发下去。"
+		<br><br>
+		其他学生在那个<<person>>捡着散落一地的书的时候朝你微笑着。
+		<<gcool>><<status 1>>
+		你在<<he>>把你的书递给你的时候甜甜地微笑着。
+		<<lstress>><<stress -1>>
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<link [[继续|History Lesson]]>><<endevent>><</link>>
+		<br>
+
+	<<else>>
+		<br><br>
+		"你在做什么？"温特在门口怒视着你，"把书捡起来，快点。"
+		<br><br>
+		"但是——"
+		<br><br>
+		"之后留校的时候去和校长解释吧。"
+		<<detention 2>><<stress 2>><<gstress>><<gdelinquency>>
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		<<link [[继续|History Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你指向<<him>>的背后。"我觉得礼顿看到了。"
+	<br><br>
+
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+
+		<br><br>
+		那个<<persons>>脸色苍白。
+		<br>
+		在<<he>>回头看向教室门口的时候，你从<<his>>手上的书堆顶上拿了另一本书。"谢谢。"
+		<br><br>
+		温特走进来时<<Hes>>还在震惊地目瞪口呆。
+		<br>
+		"你不小心弄掉了一本书，" 温特对<<him>>嘟囔着。"请你更小心点。"
+		<br>
+		<<person>>不得已蹲下身去拾起书本时整个班级充斥着窃笑和窃窃私语。
+		<<stress -2>><<lstress>>
+		<br>
+
+		<<skulduggeryuse>>
+
+		<<link [[继续|History Lesson]]>><<endevent>><</link>>
+		<br>
+
+	<<else>>
+		<br><br>
+		那个<<person>>嘲笑着说道。"你是在把我当做三岁小孩吗？你最好赶紧捡起你的书。"
+		<br>
+
+		<<skulduggeryuse>>
+
+		<<link [[捡起来|History Events Pick]]>><<trauma 2>><<stress 2>><<status -10>><</link>><<gtrauma>><<gstress>><<lcool>>
+		<br>
+		<<link [[离开它|History Events Leave]]>><<stress 2>><<detention 2>><</link>><<gdelinquency>><<gstress>>
+		<br>
+	<</if>>
+
+<</if>>

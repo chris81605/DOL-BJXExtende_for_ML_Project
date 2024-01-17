@@ -1,0 +1,43 @@
+:: Sydney Temple Pure 2 []
+<<effects>>
+<<set $jordanScore to 0>>
+<<if $sydneyFirstSeen is "mass" or $sydneyFirstSeen is "anguish">>
+	<<set $jordanScore += 10>>
+<</if>>
+<<npc "Jordan" 2>><<person2>><<generate3>><<person3>>
+"评估的重点会集中在你们之间的羁绊和对神殿的贡献上。"约旦一边解释，一边关上了身后的门。<<person2>><<He>>指引你们两人在一张华丽的桌前落了座，自己从斗篷里拿出一个小号笔记本。
+<<if $sydneySeen.includes("evaluation")>>
+	"你们已经回答过这些问题了，但因为这是一次全新的评估，所以我仍然会提同样的问题。"
+<<else>>
+	<<set $sydneySeen.pushUnique("evaluation")>>
+<</if>>
+<br><br>
+<<He>>开始询问你们对神殿的贡献。悉尼的回答似乎让约旦很满意，不一会儿<<He>>便转向了你，问了一些相同的问题。
+<br>
+<<if $grace gte 90>>
+	"你的奉献被我们铭记在心，这一点在过去已经得到了证明。<span class="green">你是我们信仰的骄傲，每个人都要你学习。</span>我完全相信你可以通过评估，但我们还是得走程序。"
+	<<set $jordanScore += 20>>
+<<elseif $grace gte 50>>
+	"<span class="teal">你一直是我们信仰中的杰出成员，</span>我相信你的话。"
+	<<set $jordanScore += 10>>
+<<elseif $grace gte 1>>
+	"<span class="lblue">你一直是我们信仰中的优良成员。</span>我认可你的贡献，但你仍需努力修炼自己。"
+	<<set $jordanScore += 5>>
+<<else>>
+	"<span class="red">我质疑你的贡献，</span>"<<he>>摇了摇头，"我们都知道你可以做得更好。"
+<</if>>
+<br><br>
+<<He>>从斗篷里拿出一枚小铃铛摇了几次。<<person3>>一位年长的<<monk>>进入房间，向约旦点点头。"请站直了。"那个<<monk>>走向了悉尼。
+<<He>>凑得非常近，仔细打量悉尼，尽管<<person1>><<he>>没表现出丝毫不适。<<person3>>
+<br>
+<<if $NPCName[$NPCNameList.indexOf("Sydney")].purity gte 90>>
+	"<span class="green">你和加入我们那天一样纯洁，</span>悉尼<<nnpc_brother "Sydney">>。请永远保持这样。"<<monk>>露出了微笑，朝悉尼点了点头。
+	<<set $jordanScore += 10>>
+<<else>>
+	"<span class="blue">我感觉你的纯洁有减损的趋势，</span>悉尼<<nnpc_brother "Sydney">>。要注意，别让你对这位<<temple_title>>的爱将你拉入堕落。"悉尼神情复杂地点了点头，姿态有些退缩。
+<</if>>
+<br><br>
+在评估完悉尼之后，那个<<monk>>转身走向了你。
+<br><br>
+<<link [[继续|Sydney Temple Pure 3]]>><</link>>
+<br>

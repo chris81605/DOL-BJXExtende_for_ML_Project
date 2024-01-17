@@ -1,0 +1,42 @@
+:: Beach Party Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<promiscuity1>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+	<<He>>静静地牵着你的手，带你离开人群。你走进沙丘，直到你再也听不见别人的谈话声，然后<<he>>转身拥抱你。
+	<br><br>
+<</if>>
+<<location "beach">><<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $finish is 1>>
+	<span id="next"><<link [[继续->Beach Party Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<<if $alarm is 1>>
+		<<if $rescue is 0>>
+			<<set $alarm to 0>>
+			<br><br>
+			<<if $enemyarousal gte $enemyarousalmax>>
+				<span id="next"><<link [[继续->Beach Party Sex Ejaculation]]>><</link>></span><<nexttext>>
+			<<elseif $enemyhealth lte 0>>
+				<span id="next"><<link [[继续->Beach Party Sex Escape]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续->Beach Party Sex]]>><</link>></span><<nexttext>>
+			<</if>>
+		<</if>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续->Beach Party Sex Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[继续->Beach Party Sex Escape]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续->Beach Party Sex]]>><</link>></span><<nexttext>>
+	<</if>>
+<</if>>

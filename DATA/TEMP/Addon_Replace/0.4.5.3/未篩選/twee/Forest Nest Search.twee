@@ -1,0 +1,31 @@
+:: Forest Nest Search []
+<<effects>>
+你走近鸟巢，往里面看。
+<<if $forest_nest.eggs lte 0>>
+	<span class="red">你遇到的是一滩浆糊。</span>看来你不够小心。
+	<br><br>
+
+	<<if $forest_nest.fox is 2 and !$NPCList[0].traits.includesAny("cowardly","clumsy")>>
+		<<link [[等待狐狸|Forest Nest Ambushed]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[等待狐狸|Forest Nest Hide]]>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif currentSkillValue('tending') gte 150>>
+	通过快速计数，你看到<span class="blue"><<number $forest_nest.eggs>></span>个活鸟蛋<<if $forest_nest.eggs gt 1>><</if>>，但是你需要单独计算它们才能确定准确的数量。
+	<br><br>
+
+	<<link [[捡蛋|Forest Nest Search Eggs]]>><</link>><<tendingdifficulty 100 500>>
+	<br>
+	<<link [[尝试引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+	<br>
+<<else>>
+	<span class="blue">你需要更高的护理技能来识别哪些蛋可以出售。在那之前，你可以试着引诱狐狸为你做这件事，如果你认为你可以把蛋拿回来的话……</span>
+	<br><br>
+
+	<<link [[尝试引诱狐狸 (0:05)|Forest Nest Bait]]>><<set $forest_nest.eggs -= 3>><<pass 5>><</link>><<note "蛋减少" "red">>
+	<br>
+<</if>>
+<<link [[离开|Forest]]>><<endevent>><<unset $forest_nest>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,52 @@
+:: Prison End []
+<<effects>>
+
+<<endevent>>
+<<generate_relaxed_guard 0>>
+<<generate_anxious_guard 1>>
+<<generate_veteran_guard 2>>
+<<generate_methodical_guard 3>>
+<<generate_scarred_inmate 4>>
+<<generate_tattooed_inmate 5>>
+
+
+<<if $prison.inmates gte 80>>
+	当你经过时，有些囚犯拍了拍你的后背。
+<<elseif $prison.inmates gte 40>>
+	其他囚犯各忙各的，对你不闻不问。
+<<else>>
+	在你经过时，其他囚犯都会瞪你一眼，但他们胆子还没有大到在守卫眼底动手动脚。
+<</if>>
+
+
+
+<<if $prison.scarred gte 80>>
+	<<if $prison.tattooed gte 80>>
+		<<scarred_inmate 4 cap>><<person5>>抓住了你的胳膊，把你拉到了<<him>>的身边。"我想念那可爱的身子，"<<he>>轻轻地拍了拍你，"不要在外面瞎搞，好不好。"
+		<br><br>
+		"放开我的<<girl>>，"<<tattooed_inmate 5>><<person6>>咆哮着，穿过过道赶了过来。<<He>>抓住你的另一只胳膊，试图把你拉开。
+		<br><br>
+		哨声刺破了大厅。<<methodical_guard 3 capo>>的目光在你们之间游移，然后释放了你。
+		<br><br>
+		"没有你我挺孤单的，"<<tattooed_inmate 5>><<person6>>轻声笑了笑，然后嗅了嗅你的头发。"玩得开心。"
+	<<else>>
+		<<scarred_inmate 4 cap>><<person5>>抓住了你的胳膊，把你拉到了<<him>>的身边。"我想念那可爱的身子，"<<he>>轻轻地拍了拍你，"不要在外面瞎搞，好不好。"
+		<br><br>
+		<<tattooed_inmate 5 cap>><<person6>>从对面的走廊注视着你，然后呲了呲牙。
+	<</if>>
+<<else>>
+	<<if $prison.tattooed gte 80>>
+		<<scarred_inmate 4 cap>>抓住了你的胳膊，但在看到<<tattooed_inmate 5>>朝这边走来时松开了你——他们互相凝视着。<<scarred_inmate 4 cap>>恨恨地咬了一口空气，然后回到了<<person5>><<his>>的牢房。
+		<br><br>
+		"没有你我挺孤单的，"<<tattooed_inmate 5>><<person6>>轻声笑了笑，然后嗅了嗅你的头发。"玩得开心。"
+	<<else>>
+		<<scarred_inmate 4 cap>>抓住了你的胳膊，但在<<methodical_guard 3>>用警棍敲打栏杆时松开了你。<<tattooed_inmate 5 cap>>则在远处看着这一切。"你会回来的，"<<person6>><<he>>做着口型，"我会等着。"
+	<</if>>
+<</if>>
+<br><br>
+
+
+
+
+<<link [[继续|Prison End 2]]>><</link>>
+<br>

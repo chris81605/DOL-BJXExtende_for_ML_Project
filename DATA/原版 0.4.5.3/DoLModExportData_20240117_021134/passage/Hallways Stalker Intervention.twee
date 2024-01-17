@@ -1,0 +1,225 @@
+:: Hallways Stalker Intervention []
+<<effects>>
+<<if $phase is 0>> /* Intervene */
+	<<person1>>你靠近这<<person>>。
+	<br>
+	<<if $speech_attitude is "meek">>
+		<<set _skulcheck_hi to random(400,700)>>
+		<<set _skulcheck_lo to random(100,300)>>
+		<<if $physique gte (($physiquesize / 7) * 5)>>
+			<<person2>>"请放开<<him>>，"你说，"这样做不好。"
+			<br><br>
+			这个<<person1>><<person>>瞪了你一眼，但又看了看你的体型和肌肉。
+			<br><br>
+			"呃，好吧，"<<he>>说，你的体型和反差的温柔让<<he>>有些困惑。"呃……对不起？"
+		<<elseif currentSkillValue('skulduggery') gte _skulcheck_hi>><<set _oops to either(500,500,500,500,1000,1000,1000,2000,2000)>>
+			<<he>>经过你时，你熟练地偷走了<<his>>的<<print either("手机","书","平板电脑")>>。
+			<br><br>
+			你靠近其他学生，先让<<him>>离开一段距离，然后大声叫<<him>>。<br>
+			"嘿，"你大喊，"嘿！嘿！你有东西掉了。"
+			<br><br>
+			你站在原地，等着<<him>>一路走回来。<br>
+			"我看到它掉出来了，"你骗<<him>>说，把东西在手里翻来翻去，但就是不还。"你得当心点啊。但还好，你运气不错。应该没摔坏。"
+			<br><br>
+			"谢谢啊，"<<he>>说着，同时伸出手。"能给我了吗？"
+			<br><br>
+			"我以为它肯定会被搞乱，"你说道。<br>
+			你远远看到<<person2>><<person>>拐了个弯，消失在视野之外。你把<<person1>><<person>>的财物拿出来。<br>
+			"这次一定要好好照顾它。"
+			<br><br>
+			"当然，谢谢。"<<he>>接过来。
+			<br><br>
+			随着<<person2>><<person>>的消失，<<person1>><<person>>似乎迷失了片刻。最后，<<he>>原路朝<<he>>来时的方向返回。<br>
+			利用某种方式，你同样也拿走了<<his>>口袋里的<<printmoney _oops>>。真不错。<<set $money += _oops>><<lstress>><<stress -2>>
+		<<elseif currentSkillValue('athletics') gte 500>>
+			当<<he>>经过时，你抢过<<his>>的包，朝相反的方向跑去。
+			<br><br>
+			"嘿！"<<he>>追了过来。
+			<br><br>
+			逃跑的过程中，你把<<his>>的包扔进了教师办公室，然后继续往院子里跑去。<br>
+			<<he>>现在不可能追上<<person2>><<person>>了。
+		<<elseif currentSkillValue('skulduggery') gte _skulcheck_lo>>
+			当<<he>>经过你身边时，你偷偷地打开<<his>>的包，并绊了<<him>>一下。<<him>>摔倒在地上，把<<his>>的物品散落一地。附近的一个学生笑了起来。
+			<br><br>
+			"哦，我的天呐，我 很 抱 歉！"你大声喊道，吸引了更多的注意力。"我帮你捡起来。不过为什么你的包是打开的？搞得你的东西掉得到处都是！"
+			<br><br>
+			<<He>>皱起眉头，但也红了脸，在越来越多的人面前感到尴尬。你开始帮忙捡东西。
+			<br><br>
+			"哦，天哪！"你边喊边伸出手。<<if $pronoun is "m">>"那是手电筒吗？！"<<else>>"那是验孕棒吗？！"<</if>>
+			<br><br>
+			"什么？！当然不是！"<<he>>满脸通红地说道，<<if $pronoun is "m">>"是手电筒！这只是个手电筒吧？"<<else>>"这就是个计算器！"<</if>>
+			<br><br>
+			在远处，你可以看到<<person2>><<person>>在一个拐角处转弯后消失了，所以你帮助<<person1>><<person>>打包完了。
+			<<he>>红着脸，低着头，冲了出去，<<his>>目标被遗忘在原地。<<lstress>><<stress -2>>
+		<<elseif $cool gte 120>><<generates3>><<generates4>>
+			<<person2>>"请放开<<him>>，"你说，"这样做不好。"
+			<br><br>
+			<<person1>><<person>>盯着你，抓住你的<<top>>。<br>
+			"是这样吗？好吧，管好你自己吧——"
+			<br><br>
+			"嘿！"你的一些朋友跑过来，在一个<<person3>><<person>>和一个<<person4>><<person>>的带领下，<<person1>><<person>>试图后退，但是<<person4>><<person>>抓住了<<person1>><<him>>的头发。
+			<br><br>
+			你的朋友们粗暴地审问<<him>>，直到<<person2>><<person>>安全离开很久之后。
+		<<elseif $delinquency lte 300>>
+			<<person2>>"请放开<<him>>，"你说，"这样做不好。"
+			<br><br>
+			<<person1>><<person>>盯着你，抓住你的<<top>>。<br>
+			"是这样吗？好吧，管好你自己吧——"
+			<br><br>
+			你大喊救命。<br>
+			这对你在学校的声誉并没有什么好处，但很快许多老师赶来了。<<lstress>><<stress -2>><<lcool>><<status -5>>
+			<br><br>
+			<<person>>后退了，你确信<<person2>><<person>>是逃走了。
+		<<else>><<pass 2>>
+			你夹在<<person1>><<person>>和<<his>>目标之间。
+			<br><br>
+			"请停止这样做，这是不对的。"
+			<br><br>
+			<<He>>上下打量你，然后向你扑来。
+			<<if $physique gte (($physiquesize / 7) * 3)>>你更加强壮，<<he>>无法控制你，你最终设法挣脱了束缚。
+			<<else>><<He>>更强壮、更卑鄙，很快就钳制住了你，并试图在你身上摸索。
+			<</if>>最终一位老师出现制止了行为，那个<<person2>><<person>>走远了。
+			<br><br>
+			<<person1>><<person>>皱着眉头走开了。至少你保住了<<person2>><<person>>。<<gpain>><<pain 3>>
+		<</if>>
+	<<elseif $speech_attitude is "bratty">>
+		<<person2>>"离<<him>>远点，变态，"你说，"给我走开。"
+		<br><br>
+		<<if $physique gte (($physiquesize / 7) * 5)>>
+			<<person1>><<person>>上下打量你。
+			<br><br>
+			"对不起，我没有别的意思。"<<person>>看向一边，"对不起。"
+			<br><br>
+			<<He>>走得很快，显然是被你的行为态度和体格给吓到了。<<gcool>><<status 1>>
+		<<elseif $delinquency gte 600>>
+			"妈的！"<<person1>><<person>>举起<<his>>双手，"我真很抱歉。我不知道<<person2>><<he>>和你是朋友。"
+			<br><br>
+			<<person1>><<person>>迅速逃开，显然是被你在学校的名声吓到了。<<gcool>><<status 1>>
+		<<elseif $cool gte 120>><<generates3>><<generates4>>
+			<<person1>><<person>>瞪了你一眼，<<his>>脸上露出扭曲的笑容。<br>
+			"好吧，当然可以，"<<he>>说着抓住你的<<top>>，把你拉过去。"那就你来代替吧。"
+			<br><br>
+			一只手扼住了<<his>>喉咙。<<His>>身体向后一靠，<<he>>被一个<<person3>><<person>>压在墙上。"放开<<phim>>，你个变态。"
+			<br><br>
+			你的一群朋友在你周围汇聚成一个保护罩。<br>
+			"该死的变态，"有时会和你一起吃午餐的<<person4>><<person>>说道，"想试试别的吗？"
+			<br><br>
+			<<person1>><<person>>跑开了，而你的朋友们围在你身边，确保你没事。<<llstress>><<stress -8>>
+		<<elseif $physique gte (($physiquesize / 7) * 3)>>
+			<<person1>><<person>>上下打量你，然后使劲推你，但你更用力地推了回去，把<<him>>推倒在地。
+			<br><br>
+			"想试试我吗？"你问。
+			<br><br>
+			<<person>>皱着眉头站起身，沿着走廊往回走。<<gcool>><<status 1>>
+		<<elseif (currentSkillValue('athletics') gte 500 or currentSkillValue('danceskill') gte 500)>>
+			<<person1>><<person>>上下打量你，然后试图抓住你。但你灵巧地躲开了。
+			<br><br>
+			"他妈的，住手！"<<He>>扑过去想抓住你，但你毫不费力地躲了过去，把<<him>>推到了墙上。<<He>>瘫倒在地。
+			<br><br>
+			"我可以跟你耗一整天，白痴。"你笑着说道。<<lstress>><<stress -4>>
+			<br><br>
+			<<person>>皱着眉头站身，沿着走廊往回走。
+		<<else>><<pass 1>>
+			<<person1>><<person>>上下打量你，然后抓住你。你们两个都不是很强壮，但是你们用阴招来弥补你们力量上的不足。你很容易就控制住了自己，马上就挣脱了开来。
+			<br><br>
+			到目前为止，<<person2>><<person>>早就消失了。
+			<br><br>
+			<<person1>><<person>>皱着眉头走开了。你发现自己脸上满是笑容。<<lstress>><<gpain>><<stress -4>><<pain 2>>
+		<</if>>
+	<<else>>
+		<<person2>>"住手，"你说，"离<<him>>远点。"
+		<br><br>
+		<<if $physique gte (($physiquesize / 7) * 5)>>
+			<<person1>><<person>>上下打量你。<br>
+			"对不起。我没有别的意思，"<<person>>低下了头，"我们很冷静。"
+			<br><br>
+			<<He>>猛地躲闪，显然被你吓了一跳。<<gcool>><<status 1>>
+		<<elseif $delinquency gte 600>>
+			"当然，"<<person1>><<person>>举起<<his>>双手。"我不知道<<person2>><<he>>是你的朋友。"
+			<br><br>
+			<<person1>><<person>>离开了，显然是被你在学校的名声吓到了。<<gcool>><<status 1>>
+		<<elseif $cool gte 120>><<generates3>><<generates4>>
+			<<person1>><<person>>看起来很困惑。<br>
+			"你为什么要干涉我们之间的爱？"<<he>>抓住你的<<top>>，把你拉过去，"那肯定是因为你想跟我试试了。"
+			<br><br>
+			你大叫着试图挣脱。
+			<br><br>
+			"来吧，来打一场，"<<he>>说道。"你能从打架中收获很多乐趣的。"
+			<br><br>
+			一只手扼住了<<his>>喉咙。<<He>>猛地往后一靠，被一个<<person3>><<person>>甩到墙上。<br>
+			"离<<phim>>他妈的远点，变态。"
+			<br><br>
+			你的一群朋友在你周围汇聚成一个保护罩。<br>
+			"该死的怪胎，"一个你认识的<<person4>><<person>>和你站到了一起，怒视着<<person1>><<person>>，"想尝点苦头吗？"<br>
+			<<person>>跑掉了，你的朋友们上前确认你没事。<<llstress>><<stress -8>>
+		<<elseif $physique gte (($physiquesize / 7) * 3)>>
+			<<person1>><<person>>上下打量了你，然后试图推开你，但你抓住了<<him>>。<br>
+			你们扭打了一会儿，但你更强大，最终压倒了<<him>>。
+			<br><br>
+			随着一声沮丧的哀嚎，<<person>>挣脱了你的束缚，不悦地瞪了你一眼，然后走开了。<<gpain>><<pain 2>><<gcool>><<status 1>>
+		<<elseif (currentSkillValue('athletics') gte 500 or currentSkillValue('danceskill') gte 500)>>
+			<<person1>><<person>>上下打量了你，然后试图抓住你。但你灵巧地躲开了。<br>
+			你笑了，"我们来跳舞吧。"
+			<br><br>
+			"他妈的，住手！"<<He>>扑过去想抓住你，但你毫不费力地躲了过去，<<he>>失去平衡，撞到墙上。<br>
+			周围有几个学生在看。<<person>>皱着眉头，做了一个短扑，但这次以与储物柜进行了一个亲密接触而结束。<br>
+			周围有些人在笑。<<gcool>><<status 2>>
+			<br><br>
+			泪流满面，受到羞辱，<<he>>站起来，沿着走廊跑开。你想感到难过，但忍不住笑出声来。<<llstress>><<stress -8>>
+		<<else>><<pass 1>>
+			<<person1>><<person>>上下打量着你，然后向你扑来。你们都不是很强壮，你们被卡住混战了一阵子，但你们最终挣脱了。
+			<br><br>
+			到现在为止，<<person2>><<person>>已经走远了，一群人正在观看。一位老师被人群吸引过来了。<br>
+			<<person1>><<person>>皱着眉头走开了。至少你保住了<<person2>><<person>>。<<gpain>><<pain 3>>
+		<</if>>
+	<</if>>
+	<br><br><<famegood 2>>
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 1>> /* Teacher */
+	你急忙提醒老师注意这种情况。
+	<br><br>
+	<<if $delinquency gte 800>>
+		"我不知道你们在玩什么游戏。"老师厉声说道，"但我不感兴趣。快离开这里。"
+		<br><br>
+		当你回来的时候，<<person1>><<person>>和<<person2>><<person>>已经离开了。
+		<br><br>
+		为什么每当你想做好事的时候，都会变成这样的结局？<<gstress>><<stress 2>><br>
+		在这个小镇，你只能依靠自己。<<gwillpower>><<willpower 1>>
+		<br><br>
+		<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<elseif $delinquency gte 400>>
+		鉴于你的名声，老师看起来很怀疑，但还是来帮忙了。
+		<br><br>
+		当你回来的时候，老师正在把<<person1>><<person>>送去走廊上。<<lstress>><<stress -2>><<famegood 1>>
+		<br><br>
+		<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		老师关切地听着，然后急忙跑去帮忙。
+		<br><br>
+		当你回来的时候，老师正在把<<person1>><<person>>带到走廊上。<<lstress>><<stress -2>><br>
+		老师对你竖起大拇指……<br><br>
+		……现在所有人都在看着你。<<lcool>><<status -5>><<famegood 2>>
+		<br><br>
+		<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>> /* Ignore */
+	你无视。
+	<<if $delinquency gte 800 or $submissive lte 850>>
+		人们需要学会照顾自己。
+	<<elseif $stress gte (($stressmax / 5) * 3)>>
+		你不觉得你今天可以承受更多的压力。
+	<<elseif $speech_attitude is "meek">>
+		如果你试图干预，<<person1>><<he>>可能会来找你。
+	<<elseif $physique lt ($physiquesize / 7) * 3>>
+		你又没强大到能阻止他们。
+	<<elseif $cool gte 140>>
+		<<person2>>在这样的学校里，<<person>>的朋友们肯定会帮助<<him>>的。
+	<</if>>
+	<br><br>
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

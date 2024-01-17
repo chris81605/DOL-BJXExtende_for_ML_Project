@@ -1,0 +1,52 @@
+:: Pregnancy Birth Hospital 2 []
+<<effects>>
+
+助产士在你的脸上戴上了口罩。你感觉到你的意识消失了。你周围出现了几个人影，他们的形状模糊不清。
+<br><br>
+
+<<set $litter_potention_fathers to getPregnancyObject().potentialFathers.length>>
+
+/*Alex variables*/
+<<if (getPregnancyObject().potentialFathers.length is 1 or getPregnancyObject().potentialFathers.length is undefined) and getPregnancyObject().fetus[0].father is "Alex">>
+	<<set $alex_pregnancy to {}>>
+	<<set $alex_pregnancy.knows to knowsAboutPregnancy("pc","Alex")>>
+	<<set $alex_pregnancy.talked to talkedAboutPregnancy("pc","Alex")>>
+	<<set $alex_pregnancy.source to getPregnancyObject().fetus[0].father>>
+
+<</if>>
+
+<<set _pregnancy to getPregnancyObject()>>
+<<if _pregnancy.totalBirthEvents gte 5>>
+	<<set _min to 15>>
+	<<set _max to 60>>
+<<elseif _pregnancy.totalBirthEvents gte 3>>
+	<<set _min to 30>>
+	<<set _max to 120>>
+<<else>>
+	<<set _min to 60>>
+	<<set _max to 180>>
+<</if>>
+
+<<set _max to Math.floor(_max * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+<<set _min to Math.floor(_min * (1 + Math.floor(_pregnancy.fetus.length * 0.2)))>>
+
+<<set _timeCalc to random(_min, _max)>>
+<<set _hours to Math.floor(_timeCalc / 60)>>
+<<set _minutes to _timeCalc % 60>>
+
+/* Note: Pregnancy species */
+<<switch playerNormalPregnancyType()>>
+	<<case "human">>
+		<<setKnowsAboutPregnancy "pc" "Bailey">>
+		一片朦胧中，你隐约听到了哈珀的声音。"正常人类<<if !$player.vaginaExist>>，非正常分娩<</if>>，但还是让其他人保持在线，以防万一……"
+		<br><br>
+
+		你感觉时间似乎扭曲了，时快时慢，只有疼痛在变得越来越剧烈。你不断听到"深呼吸"、"用力"之类的指令，每次你都尽力配合着。
+		<br><br>
+
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital 3]]>><<endevent>><<pass _timeCalc>><<playerPrebirth>><</link>>
+	<<case "wolf">>
+		一片朦胧中，你隐约听到了哈珀的声音。"不是人类。这是一次非常规分娩。严格按照我的指示行事……"
+		<br><br>
+		<<link [["继续 ("+_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")"| Pregnancy Birth Hospital Wolf]]>><<endevent>><<pass _timeCalc>><</link>>
+<</switch>>

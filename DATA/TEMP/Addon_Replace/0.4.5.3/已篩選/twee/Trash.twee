@@ -1,0 +1,139 @@
+:: Trash []
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+你正待在麋鹿街的垃圾填埋场里。
+<<if $trash gte 100>>
+	你正待在垃圾堆的深处，一台巨大的垃圾压缩机坐落在一片空地上，由几条传送带源源不断地将垃圾输送进去。
+<<elseif $trash gte 50>>
+	四周到处都是垃圾堆积起来的小山。
+<<elseif $trash gte 30>>
+	一些堆积起来的垃圾在你面前高高耸立着。
+<<elseif $trash gte 10>>
+	离街道越远，垃圾堆越高。
+<<else>>
+    /* 北极星模组 */
+	你正站在垃圾场的前门处，在这你可以看到另一边的麋鹿街。旁边的一块牌子上写着: "这片土地和其中的所有物品都是私人财产"。
+	<br><br>
+	<i>你听到附近有奇怪的声音...</i>
+	<br><br>
+		
+	<<if $dencounter is undefined>>
+		<<set $dencounter to 0>>
+	<</if>>
+
+	<<if $stress lt $stressmax and $eventskip is 1>>
+		在周围的垃圾堆里，你注意到有一堆特别结实的垃圾。
+		<br><br>
+		里面似乎有一块空地，地上铺着头发或布料。
+		<br><br>
+		<<if $dencounter is 0>>
+			你看到里面有什么东西，那是条纹尾巴吗？ 
+			<br><br>
+			<span class='lewd'>调查可能不是个好主意</span>，但你还是很好奇。
+			<br><br>
+		<<else>>
+			你以前来过这里，或者至少去过类似的地方。很难说，因为这里到处都是垃圾，但你可以肯定这是一个<span class='green'>浣熊窝。</span> 
+			<br><br>
+			考虑到你第一次进去时发生过的事，你正在犹豫是否要进入。
+			<br><br>
+			<<if $deviancy gte 15>>
+			    <span class='lewd'>不过，这次可能会有所不同，会更令人愉快。</span>
+			    <br><br>
+			<</if>>
+		<</if>>
+		<<link [[进入内部(0:03)|Trash Mammals]]>><<beastNEWinit 3 raccoon>><<pass 3>><</link>>
+		<br><br>
+	<</if>>
+	/* 北极星 */
+<</if>>
+
+<<if $robinmissing is "landfill" and $robinmistknown>>
+	<<print either(
+		"你呼喊罗宾的名字，没有任何回应。",
+		"你试图寻找罗宾的身影，但是没有任何收获。",
+		"你试图爬上附近的垃圾堆以获得更好的视野来寻找罗宾，可惜的是你并没有看见罗宾的身影。",
+		"你大声呼唤着罗宾的名字，声音回荡在整个垃圾场。"
+	)>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passouttrash>>
+<<elseif $arousal gte $arousalmax>>
+	你体内那股莫名的温暖感正在不断地增长，很快就超过了你所容忍的极限，你的双腿不受控制地弯了下去。<<orgasm>>
+
+	/* 北极星模组 */
+	<<if $rng gte 51 and $parasitedisable is "f" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is "f" and $hallucinations gte 1 and $slime is 0>>
+	/* 北极星 */
+		废墟里有什么东西被你的性高潮所吸引，它从一座垃圾堆的深处渗出，在硬化路面上蠕动着。你在它冲向你之前就看清了它是什么，一个活生生的史莱姆。它在你的背上来回跳跃着，然后它落到了你的脖子上。你试着伸手去抓住它，但它实在太快了。
+		<br><br>
+
+		<<if $parasite.left_ear.name is undefined>>
+			<span class="lewd">它蠕动着钻进了你的左耳，</span>很快就不见了踪影。
+			<<parasite left_ear slime>>
+		<<elseif $parasite.right_ear.name is undefined>>
+			<span class="lewd">它蠕动着钻进了你的右耳，</span>很快就不见了踪影。
+			<<parasite right_ear slime>>
+		<</if>>
+		<br><br>
+		<<tearful>>你站起身来，尽管你刚刚高潮过不久，但你的身体还是传来了一阵不自然的亢奋感，随后这种感觉愈演愈烈，直到<span class="lewd">一种超级强烈的淫荡欲望彻底压倒了你的理性。</span>
+		<br><br>
+		<<if !$earSlime.corruption>>
+			<i>在"属性"选项栏中出现了一个新的堕落条。</i>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Trash Slime]]>><</link>>
+		<br>
+	<<else>>
+		在这样的地方高潮！？<<llcontrol>><<gtrauma>><<trauma 6>><<control -25>>
+		<br><br>
+
+		<<link [[继续|Trash]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<eventstrash>>
+<<else>>
+
+	<<link [[寻找贵重物品 (1:00)|Trash Search]]>><<pass 60>><</link>><<crime "thievery">>
+	<br>
+
+	<<if $trash lte 0>>
+		<<if $trash_unlocked is 1>>
+			<<link [[麋鹿街 (0:10)|Elk Street]]>><<pass 10>><</link>>
+			<br>
+		<<else>>
+			<<if $trash_key is 1>>
+				<<link [[使用钥匙 (0:10)|Trash Leave]]>><<pass 10>><<set $trash_unlocked to 1>><</link>>
+				<br>
+			<<else>>
+				<<link [[试试这扇门 (0:05)|Trash Gate Leave]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		/* 北极星模组 */
+		<<if $NPCName[$NPCNameList.indexOf("凯西")].love gte 41 and Time.dayState is "day">>
+			你看到凯西在垃圾堆里翻找东西，偶尔会把什么放进口袋或扔掉。
+			<<link [[打招呼(0:05)|Casey Hello]]>><<pass 5>><</link>>
+		<</if>>
+		/* 北极星 */
+	<</if>>
+	<<if $trash gte 1>>
+		<<link [[朝有着车辆行驶声音的方向走去 (0:10)|Trash]]>><<pass 10>><<set $trash -= 10>><</link>>
+		<br>
+	<</if>>
+	<<if $trash lte 99>>
+		<<link [[朝着有着重型机械声音的方向走去 (0:10)|Trash]]>><<pass 10>><<set $trash += 10>><</link>>
+		<br>
+	<<elseif $trash gte 100 and $robinmissing is "landfill" and $robinmistknown>>
+		<<link [[朝着有着重型机械声音的方向走去 (0:10)|Robin Mist Intro]]>><<pass 10>><</link>>
+		<br>
+	/* 北极星模组 */
+	<<elseif $trash gte 100 and $bunker is "found">>
+		<<link [[进入活板门(0:02)|The Bunker Intro]]>><<set $eventskip to 1>><<pass 2>><</link>>
+	/* 北极星 */
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

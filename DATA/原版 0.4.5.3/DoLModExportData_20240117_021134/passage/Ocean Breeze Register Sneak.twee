@@ -1,0 +1,21 @@
+:: Ocean Breeze Register Sneak []
+<<set $outside to 0>><<effects>><<set $lock to 200>>
+<<set $weekly.theft.oceanBreeze to true>>
+<<set $tip to random(3000, 9000)>>
+你熟练打开了收银机，清点着里面的钱。
+这里有<<printmoney $tip>>。
+<br><br>
+<<if $skulduggery lt 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+<<if $rng gte 86>>
+	<<skulshopevents>>
+<<else>>
+	<<link [[拿走|Ocean Breeze]]>><<set $money += $tip>><<crimeUp `$tip / 100` "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[放弃它|Ocean Breeze]]>><</link>>
+	<br>
+<</if>>

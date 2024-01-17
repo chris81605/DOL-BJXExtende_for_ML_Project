@@ -1,0 +1,33 @@
+:: Catacombs Sarcophagi []
+<<effects>><<set $bus to "sarcophagi">>
+
+你在森林地下的墓穴里。石棺以夸张的角度从墙上伸出来，好像被一股巨大的力量从原来的位置上挤了出来。
+<br><br>
+
+<<catacombs_torch_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutcatacombs>>
+<<elseif $eventskip isnot 1>>
+	<<events_catacombs normal>>
+<<else>>
+	<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $lock to 500>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这里埋藏着财富。</span>
+			<br>
+			<<crimeicon "plunder">><<link [[掠夺 (0:30)|Catacombs Normal Plunder]]>><<pass 30>><<catacombs_torch -5>><</link>><<crime "thievery">><<ltorch>>
+			<br>
+		<<else>>
+			<span class="red">你缺乏在这里嗅出财富的技能。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<caveicon "east">><<link [[向东走  (0:10)|Catacombs Chasm]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>>
+	<br>
+	<<caveicon "west">><<link [[向西走 (0:10)|Catacombs]]>><<pass 10>><<catacombs_torch -5>><</link>><<ltorch>><<catacombs_exit_indicator>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

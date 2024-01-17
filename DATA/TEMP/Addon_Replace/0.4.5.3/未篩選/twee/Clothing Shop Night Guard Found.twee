@@ -1,0 +1,35 @@
+:: Clothing Shop Night Guard Found []
+<<effects>>
+<<generateSecurity 1>><<person1>>
+<<set $clothingShop.banCount++>>
+<<set $clothingShop.spotted to false>>
+在确保自己尽可能安静地关好商店的门之后，你回过头来，惊讶地
+发现一名保安正面对着你。在你反应过来要跑之前，<<He>>摁住了你的肩膀。
+<br><br>
+"看看我们抓到了什么？一只小老鼠，想偷走一些精美的服饰然后逃跑？"<<He>>带着
+不赞同的表情说道，"我会把这里的情况告诉这家店主。"
+<br><br>
+<<He>>拿出了手机，看起来是要打给这里的店主。
+<<if $clothingShop.ban gt 0>>
+	<<set $clothingShop.banExtension to true>>
+	<<set $clothingShop.ban += 7>>
+	"啊哈！所以你已经有禁令了，"他继续说，"他们确实有一个相当严格的禁令政策，
+	所以你要在这里购物还要一段时间喽。"
+<<else>>
+	<<if $clothingShop.banCount lt 4>>
+		<<set $clothingShop.ban to 7>>
+	<<elseif $clothingShop.banCount lt 8>>
+		<<set $clothingShop.ban to 10>>
+	<<else>>
+		<<set $clothingShop.ban to 14>>
+	<</if>>
+	"这样应该可以了，"<<he>>继续说，"好吧。你将在相当长的一段时间内都不能进入这个公共机构。
+	希望这能给你一个教训。"
+<</if>>
+<br><br>
+"现在跟着我，我会陪同你离开这里。你很幸运，我没有直接把你带到柱子上。"
+
+<br><br>
+<<link [[跑|Clothing Shop Night Guard Found Run]]>><</link>><<athleticsdifficulty 500>>
+<br>
+<<link [[跟着保安|Clothing Shop Night Guard Found Follow]]>><</link>>

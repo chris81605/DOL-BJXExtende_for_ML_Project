@@ -1,0 +1,101 @@
+:: Livestock Field Centaur Brush []
+<<effects>>
+
+<<if maleChance() lte 0>>
+	<<set _horse_gender to "f">>
+<<elseif maleChance() gte 100>>
+	<<set _horse_gender to "m">>
+<<else>>
+	<<set _horse_gender to "b">>
+<</if>>
+
+<<if $livestock_horse gte 2>>
+	你用手指梳理半人马的头发。他们争着轮到自己。他们试图让你抓他们的背，尽管那里几乎没有毛。
+<<else>>
+	你用手指梳理半人马的头发。他们很谨慎，但没有拒绝你。你感觉他们比表现出来的更享受。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $rng gte 51>>
+		<<rng>>
+		<<if $rng gte 51>>
+			<<if $livestock_horse_rescued is undefined>>
+				<<generate1>><<person1>>
+				一匹年长的半人马一瘸一拐地走过。与其他人不同，<<he>>无视了你。你看向<<his>>的腿。一片巨大的碎片卡在<<his>>腿上方的皮肤里，看上去就很疼。
+				<br><br>
+
+				"无视<<him>>吧，"另一匹半人马说道。"就是个脾气暴躁的混蛋。<<hers>>不让任何人靠近自己的伤口。就连雷米也不让靠近。"
+				<br><br>
+
+				<<link [[尝试帮忙|Livestock Field Centaur Help]]>><</link>><<tendingdifficulty 700 1000>>
+				<br>
+				<<link [[无视|Livestock Field]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<if $livestock_horse_rescued is "m">>
+					<<generatem1>>
+				<<else>>
+					<<generatef1>>
+				<</if>>
+				<<person1>>你帮助的那匹老年半人马疾驰而过，<<his>>那条康复的腿拼尽全力奔跑。<<He>>微笑着向你挥手。
+				<<ltrauma>><<trauma -6>>
+				<br><br>
+
+				<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+				<br>
+
+			<</if>>
+		<<else>>
+			<<generate1>><<person1>>"多可爱啊，"栅栏后面的一个声音说道。是一个<<person>>。<<Hes>>穿着农场工人的服装。"牛和马是最好的朋友。我应该拍下来，上传到网上说不定会有不错的点击量呢。"半人马对<<his>>嘲弄的语气怒不可遏，但什么也没说。
+			<br><br>
+
+			<<He>>咬了一口苹果。半人马渴望地盯着水果。"怎么了？"<<person>>问道。"厌倦了草？太糟糕了。没有甜美多汁的苹果给你们。"为了说明这一点，<<he>>把没吃过的苹果扔到离栅栏很远的地方。完全够不着。
+			<br><br>
+
+			农场工人走后，两匹年轻的半人马冲了过来。他们试图挤过缺口，但电围栏的电击疼痛阻止了他们。
+			<br><br>
+
+			<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if maleChance() lt random(1, 100)>>
+			一匹半人马似乎很沮丧。她对别人跺脚，态度粗鲁。
+			<br><br>
+
+			<!-- Modified for Monster People -->
+			<<if $horsedisable is "f" and (_horse_gender isnot "b" or $bestialitydisable is "f")>>
+				<<if $dgchance gte random(1, 100)>>
+					<<link [[看看她下面|Livestock Field Centaur Female]]>><</link>><<deviant1>>
+					<br>
+				<<else>>
+					<<link [[看看她下面|Livestock Field Centaur Female Vagina]]>><</link>><<deviant1>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[无视|Livestock Field]]>><</link>>
+			<br>
+		<<else>>
+			一匹半人马看起来很沮丧。他对别人跺脚，态度粗鲁。
+			<br><br>
+
+			<!-- Modified for Monster People -->
+			<<if $horsedisable is "f" and (_horse_gender isnot "b" or $bestialitydisable is "f")>>
+				<<if $cbchance gte random(1, 100)>>
+					<<link [[看看他下面|Livestock Field Centaur Male Vagina]]>><</link>><<deviant1>>
+					<br>
+				<<else>>
+					<<link [[看看他下面|Livestock Field Centaur Male]]>><</link>><<deviant1>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[无视|Livestock Field]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<link [[继续|Livestock Field]]>><</link>>
+	<br>
+<</if>>

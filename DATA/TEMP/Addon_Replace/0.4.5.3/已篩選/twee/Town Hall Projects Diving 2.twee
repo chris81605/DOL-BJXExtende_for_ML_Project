@@ -1,0 +1,39 @@
+:: Town Hall Projects Diving 2 []
+<<effects>>
+
+"很高兴见到像你这样的学生对我们的历史如此感兴趣……"奎恩一边带着你上楼，一边与你交谈。墙的表面是木质的，周围的装饰也非常复古。
+<br><br>
+
+/* 北极星模组 */
+<<if ($museumAntiques.antiques.antiqueivorynecklace is "talk" or $museumAntiques.antiques.antiqueivorynecklace is "museum") and $necklaceThief is "player">>
+/* 北极星 */
+<<his>>桌子旁边的基座上放着一个华丽的盒子。你很清楚地看到了里面的东西——<span class="blue">是一条镶着蓝色宝石的象牙项链</span>。
+    <br><br>
+<</if>>
+
+"那么，"奎恩坐在<<his>>桌子后的高背椅上，指向<<him>>前面的另一张椅子，"你想在湖边设立考古办公室？"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+"我，如果可以的话，"你应道。
+<<elseif $speech_attitude is "bratty">>
+"我确实是这么说的，"你确认道。
+<<else>>
+"就是这样，"你肯定道。
+<</if>>
+<br><br>
+
+"不得不说，我认为这是个好主意，"市长继续说着，"我知道博物馆那个老东西会抓着这次机会不放的。"<<He>>从桌子底下取出一瓶威士忌和两个玻璃杯。
+<<if playerBellyVisible()>>
+<<He>>似乎没有考虑到你的<<bellyDescription "pc">>。
+<</if>>
+<br><br>
+
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+<<else>>
+<<link [[干杯|Town Hall Projects Diving 3]]>><<set $phase to 1>><<set $drunk += 180>><</link>>
+<</if>>
+<br>
+<<link [[拒绝|Town Hall Projects Diving 3]]>><<set $phase to 0>><</link>>
+<br>

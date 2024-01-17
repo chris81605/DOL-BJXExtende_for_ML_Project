@@ -1,0 +1,35 @@
+:: Eden Hunt Snake Finish []
+<<effects>>
+<<set $trance to 0>>
+<<if $timer lte 0 or $vorestomach gte 5>>
+	<<if $vorestage gte 5>>
+		蛇的内壁被撕裂开了。伊甸站在那里，手中拿着刀，切开巨兽，直到你被释放。
+	<<else>>
+		蛇发出嘶嘶声，把你吐了出来。它在丛林中逃跑，留下一路鲜血。
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Eden>><<person1>>伊甸把刀插在地上，抓住你的胳膊。
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 80>>
+		<<He>>把你按在树上。"该死的蛇触碰了我的东西。"
+	<<else>>
+		<<He>>把你摁在<<his>>的膝盖上。"我差点就要抓住那只鹿了，"<<he>>说，"你他妈毁了这次狩猎。"<<llove>><<npcincr Eden love -1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Eden Hunt Punishment]]>><<set $molestationstart to 1>><</link>>
+<<else>>
+	<<tearful>>你从<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴里爬了出来。它认为你不适合作为它的一顿午餐，整条蛇很快消失在了丛林中。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Eden>><<person1>>
+	<<link [[继续|Eden Hunt 3]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>

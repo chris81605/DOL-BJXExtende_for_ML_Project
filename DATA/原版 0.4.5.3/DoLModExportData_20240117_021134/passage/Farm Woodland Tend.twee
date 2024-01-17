@@ -1,0 +1,46 @@
+:: Farm Woodland Tend []
+<<effects>>
+
+你清除枯木，修剪杂乱的树枝。
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $worn.upper.name isnot "naked" and random(1, 2) is 2>>
+		<<set $worn.upper.integrity -= 10>>
+		<<if $worn.upper.integrity lte 0>>
+			你的$worn.upper.cn_name_cap被一根树枝挂住，一阵风吹来，树枝开始不住地摇曳起来。<span class="pink">这力道撕裂了你的衣服，露出了你的<<undertop>>。</span>
+		<<else>>
+			你的$worn.upper.cn_name_cap被一根树枝挂住，它磨损得更严重了。
+		<</if>>
+	<<elseif $worn.lower.name isnot "naked">>
+		<<set $worn.lower.integrity -= 10>>
+		<<if $worn.lower.integrity lte 0>>
+			你的$worn.lower.cn_name_cap被一根树枝挂住，一阵风吹来，树枝开始不住地摇曳起来。<span class="pink">这力量撕裂了你的衣服，露出了你的<<undies>>。</span>
+		<<else>>
+			你的$worn.lower.cn_name_cap被一根树枝挂住，它磨损得更严重了。
+		<</if>>
+	<<elseif $worn.under_upper.name isnot "naked" and random(1, 2) is 2>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<if $worn.under_upper.integrity lte 0>>
+			你的$worn.under_upper.cn_name_cap被一根树枝挂住，一阵风吹来，树枝开始不住地摇曳起来。<span class="pink">这力量撕裂了你的衣服，露出了你的<<breasts>>。</span>
+		<<else>>
+			你的$worn.under_upper.cn_name_cap被一根树枝挂住，它磨损得更严重了。
+		<</if>>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		<<set $worn.under_lower.integrity -= 10>>
+		<<if $worn.under_lower.integrity lte 0>>
+			你的$worn.under_lower.cn_name_cap被一根树枝挂住，一阵风吹来，树枝开始不住地摇曳起来。<span class="pink">这力量撕裂了你的衣服，露出了你的<<genitals>>。</span>
+		<<else>>
+			你的$worn.under_lower.cn_name_cap被一根树枝挂住，它磨损得更严重了。
+		<</if>>
+	<<else>>
+		在你工作时，一阵强风刮过你的身体，刺痛了你的皮肤。<<gpain>><<pain 4>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Farm Woodland]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Farm Woodland]]>><</link>>
+	<br>
+<</if>>

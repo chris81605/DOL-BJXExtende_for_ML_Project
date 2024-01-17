@@ -1,0 +1,47 @@
+:: Livestock Passout 3 []
+<<effects>>
+
+你被带上楼梯，走到了
+<<if Time.dayState is "night">>
+	黑暗的天空下。
+<<elseif Time.dayState is "dusk">>
+	昏暗的天空下。
+<<elseif Time.dayState is "dawn">>
+	橙色的天空下。
+<<else>>
+	<<if $weather is "rain">>
+		雨中。
+	<<elseif $weather is "clear">>
+		阳光中。
+	<<elseif $weather is "snow">>
+		雪中。
+	<<else>>
+		夜色中。
+	<</if>>
+<</if>>
+<<if Time.hour lte 5 or Time.hour gte 18>>
+	雷米把你拉向大谷仓，把你送回牢房。
+	<<if $livestock_muzzle is 1 and !$worn.face.type.includes("gag")>>
+		<<He>>停了下来，在你脸上戴上了嘴套。<<facewear 23>>
+	<</if>>
+	<br><br>
+	大门在你身后哐当关上了。
+	<br><br>
+
+	<<link [[继续|Livestock Cell]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	雷米把你拉向牛场。
+	<<if $worn.face.type.includes("gag")>>
+		<<He>>停下来，脱掉了你的$worn.face.cn_name_cap。
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+	<</if>>
+	<br><br>
+
+	大门在你身后哐当关上了。
+	<br><br>
+
+	<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+	<br>
+<</if>>

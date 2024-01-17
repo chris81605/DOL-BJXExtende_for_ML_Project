@@ -1,0 +1,46 @@
+:: Street Stray Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<if $hallucinations gte 1 and $controlled is 0>>
+		<<willpowerdifficulty 1 1000 none>>
+		<<bHis>>的眼睛吸引了你的注意力，
+		<<if $willpowerSuccess>>
+			<span class="green">但你设法让自己摆脱控制。</span>
+		<<else>>
+			<span class="red">使你进入催眠状态。</span>
+			<<set $trance to 1>>
+			<<set $timer to 2>>
+		<</if>>
+	<</if>>
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+
+<<if $timer is 0>>
+	<<set $trance to 0>>
+	你从催眠状态中挣脱出来。
+	<br><br>
+<</if>>
+
+<<effectsman>>
+<br><br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Street Stray Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Street Stray Rape]]>><</link>></span><<nexttext>>
+<</if>>

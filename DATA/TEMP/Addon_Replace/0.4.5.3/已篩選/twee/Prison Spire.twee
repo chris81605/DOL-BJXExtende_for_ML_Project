@@ -1,0 +1,94 @@
+:: Prison Spire []
+<<set $bus to "spire">><<set $outside to 1>><<effects>><<effects_prison>>
+
+<<if $prison.spire_intro isnot 1>>
+	你敲得金属门铛铛作响。一台上面的监控摄像头转过来面向你。你听到机械的嗡嗡声，然后咔嗒一声。门开了，一股气流吹过。
+	<br><br>
+
+	里面除了一个盘旋的楼梯什么都没有，尽管向下的台阶很快就通向一个巨大的深坑。你决定爬上去。
+	<br><br>
+
+	<<link [[继续|Prison Spire Intro]]>><<set $prison.spire_intro to 1>><<set $prison.birds to 0>><</link>>
+	<br>
+<<else>>
+	<<beastNEWinit 5 "hawk">><<generate_anxious_guard 5>><<person1>>
+	你在塔尖顶上的小木屋里。
+	<<if $prison.schedule is "work">>
+		<<anxious_guard 5 cap>>坐在几个监控显示器前面，但是<<person6>><<his>>的眼看着外面的<<person1>><<beastsplural 0>>。
+	<<else>>
+		你通过窗户看着<<person1>><<beastsplural 0>>。
+	<</if>>
+	<<endevent>>
+	<br><br>
+	<<if Time.hour is 20>>
+		<<generate_anxious_guard 0>>
+		铃声响了起来。"禁闭时间，"<<anxious_guard 0>><<person1>>叹气道，"总算。回到你们的牢房。"
+		<br><br>
+		你在那个生物反应过来之前和<<anxious_guard 0>>一起跑向了楼梯。<<He>>带着你走下楼梯，穿过院子和其他囚室，进入了你的牢房。
+		<br><br>
+		<<link [[继续|Prison Cell]]>><<endevent>><</link>>
+		<br>
+	<<elseif $prison.birds gte 30 and !$prison.watchers_friend>>
+		<<beastNEWinit 6 hawk>><<person1>>
+		<<beastsplural>>静静看着你，然后其中一只伸出爪子，腾空而起。你吓了一跳，但是<<bhe>>抓住了你，把你提到了空中。
+		<br><br>
+		在其他几个的歌声中，<<bHe>>绕着灯塔飞了一圈，然后降落在灯塔顶上。
+		<br><br>
+
+		<<link [[继续|Prison Spire Beacon]]>><<set $prison.watchers_friend to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $prison.schedule is "work">>
+			<<if !$daily.prison.anxiousGreet and $prison.anxious gte 15>>
+				<<prison_guard_greet anxious>>
+			<<elseif random(1, 5) is 5 and $eventskip isnot 1>>
+				<<prison_guard_watch anxious>>
+			<<else>>
+				<<if $prison.birds gte 30>>
+					<span class="green">观察者们喜欢你。</span>
+				<<elseif $prison.birds gte 20>>
+					<span class="teal">观察者们觉得你很有用。</span>
+				<<elseif $prison.birds gte 10>>
+					<span class="lblue">观察者们认识你。</span>
+				<<else>>
+					<span class="blue">观察者们把你当做一块肉。</span>
+				<</if>>
+				<br><br>
+				<<if $prison.job is "spire">>
+					<<link [[工作|Prison Spire Work]]>><</link>>
+					<br>
+				<<else>>
+					<span class="blue">你将在别处劳动。</span>
+					<br>
+				<</if>>
+				<<if $prison.watchers_friend is 1 and $prison_egg is 1>>
+					<<link [[举起鸟蛋|Prison Spire Egg]]>><</link>>
+					<br>
+				<</if>>
+				/* 北极星模组 */
+				<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+				/* 北极星 */
+					<br>
+					你的翅膀和风都很强劲。你认为你可以从这里一路飞到大陆。
+					<br>
+					<<link [[飞回大陆|Prison Soar]]>><</link>>
+					<br><br>
+				<</if>>
+				<<link [[离开 (0:05)|Prison Yard]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			/* 北极星模组 */
+			<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+			/* 北极星 */
+				你的翅膀和风都很强劲。你认为你可以从这里一路飞到大陆。
+				<br>
+				<<link [[飞回大陆|Prison Soar]]>><</link>>
+				<br><br>
+			<</if>>
+			<<link [[离开 (0:05)|Prison Yard]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+		<<prison_map spire>>
+	<</if>>
+<</if>>

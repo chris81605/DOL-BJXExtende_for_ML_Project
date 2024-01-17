@@ -1,0 +1,28 @@
+:: School Detention Car Surprise Dog []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $position to "doggy">>
+	<<set $NPCList[0].stance to "top">>
+	<<set $enemyanger to 40>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+/* Leighton won't be too quick to save you */
+<<if $alarm is 1 and $rescue is 1 and random(0, 100) lt 33 or ($enemyarousal gte $enemyarousalmax) or ($enemyhealth lte 0)>>
+	<span id="next"><<link [[继续|School Detention Car Surprise Dog Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Detention Car Surprise Dog]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,112 @@
+:: Widgets Dance Studio [widget]
+<<widget "dancingclothes">>
+	<<wearoutfit>>
+	<<set _store_location to "dance_studio">>
+	<<set _earSlimeEnableDancewear to true>>
+
+	<<storeon _store_location "check">>
+	<<set _clothes to clothingInStorage(_store_location)>>
+	<<if $wearoutfittext isnot undefined>>
+		<<if $wearoutfittext and _clothes and _clothes.length>>
+			<<set _slots to _clothes.filter(item => setup.clothingLayer.torso.includes(item.slot))>>
+			<<set _arrayClothes to _slots.map(slot => slot.cn_name_cap)>>
+			<<set _them to "衣服">>
+			<<set _hooks to "挂钩">>
+			<<set _clothing to formatList(_arrayClothes)>>
+
+			<span class="purple">
+				你脱下<<print _clothing.replace("and","和").replace(",","、")>>，然后把_them挂在_hooks上。
+			</span>
+		<<else>>
+			<span class="purple">
+				你把你的衣服穿好。
+			</span>
+		<</if>>
+		<<unset $wearoutfittext>>
+	<</if>>
+	<<if _store_check is 1>>
+
+		<<if _clothes.length gt 0>>
+			<<if _clothes.length gt 2>>
+				你的衣服挂在墙上的衣钩上。
+				<br>
+			<<elseif _clothes.length is 2>>
+				你的_clothes[0].cn_name_cap和你的_clothes[1].cn_name_cap挂在墙上的衣钩上。
+				<br>
+			<<else>>
+				你的_clothes[0].cn_name_cap被挂在一个钩子上。
+				<br>
+			<</if>>
+			<<dressasyouwereicon>><<link [[换上自己的衣服|$passage]]>><<set $eventskip to 1>><<set $wearoutfittext to 2>><<storeload _store_location>><</link>>
+		<</if>>
+	<<else>>
+		你可以在这里穿上紧身衣或类似的舞蹈服。
+	<</if>>
+	<br>
+	<br>
+	<<if $worn.under_upper.type.includes("dance") and $worn.under_lower.type.includes("dance")
+		and setup.clothingLayer.torso_outer.some(slot => $worn[slot].name isnot "naked" and ($worn[slot].one_piece isnot 1 or $worn[slot].outfitSecondary is undefined))
+		and clothingInStorage(_store_location).length is 0
+	>>
+		<<link [[换上你的舞蹈服|$passage]]>>
+			<<if clothingInStorage(_store_location).length is 0>>
+					<<storesave _store_location>>
+					<<for _slot range setup.clothingLayer.all.except(setup.clothingLayer.torso_outer)>>
+						<<storeload _store_location _slot>>
+					<</for>>
+			<<else>>
+				<<for _slot range setup.clothingLayer.torso_outer>>
+					<<generalUndress _store_location _slot>>
+				<</for>>
+			<</if>>
+		<</link>>
+		<br>
+		<br>
+	<</if>>
+	<<if !$worn.under_upper.type.includes("dance") gt 0 or clothingInStorage(_store_location).length is 0>>
+		<<if $wardrobe.under_upper.filter(a => a.type.includes("dance")) lte 0>>
+			//你现在还没有适合跳舞的衣服//
+		<<else>>
+			//舞蹈服://
+			<br>
+			<<listdancingclothes _store_location>>
+			<<temperature>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "danceStudioIntro">>
+	/* Requires the name of the exit passage as an argument */
+	<<set $danceStudioIntroExit to _args[0]>>
+
+	<<set $dancestudiointro to 1>>
+	<<npc Charlie>><<person1>>
+	你付钱给领你进左边门的接待员，然后你进入了一个大房间，房间里铺着木板地板，墙上贴着镜子。已经有十几个人在里面了，很容易就能认出教官。<<he>>双手叉腰，站着向全班讲话，解释正确姿势的重要性。
+	<br><br>
+	门在你身后关上，提醒了<<him>>你的存在。<<He>>把翡翠般的眼睛转向你并微笑。"我们有了一个新学生！欢迎！"<<his>>有着短短的姜黄色头发和长着雀斑的脸，身上那套紧身套装彰显着<<his>>健美的身材。
+	<<if $pronoun is "m">>
+		你的目光情不自禁的被<<his>>裤子上阴茎的凸起所吸引。
+	<<elseif $pronoun is "f">>
+		<<if $NPCList[0].breastsize gte 5>>
+			<<him>>巨大的胸部紧贴着身体，整个人看起来很苗条。
+		<<elseif $NPCList[0].breastsize gte 3>>
+			<<him>>的胸部紧贴着躯干，使<<him>>轮廓看起来很纤细。
+		<<elseif $NPCList[0].breastsize gte 1>>
+			<<him>>的小胸平贴在躯干上，让<<him>>看起来很苗条。
+		<<else>>
+			<<His>>的平胸让<<him>>看起来很苗条。
+		<</if>>
+	<</if>>
+	<br><br>
+	或许<<him>>注意到了你的淫荡眼神，但是<<him>>什么都没有表现出来。你应该自我介绍，但如何介绍呢？
+	<br><br>
+
+	<<link [[胆怯|Dance Studio Introduction]]>><<npcincr Charlie love 20>><<set $phase to 1>><</link>><<ggglove>>
+	<br>
+	<<link [[自信|Dance Studio Introduction]]>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[轻浮|Dance Studio Introduction]]>><<npcincr Charlie love -10>><<stress -12>><<trauma -6>><<set $phase to 3>><</link>><<promiscuous1>><<lllove>><<lstress>><<ltrauma>>
+	<br>
+<</widget>>

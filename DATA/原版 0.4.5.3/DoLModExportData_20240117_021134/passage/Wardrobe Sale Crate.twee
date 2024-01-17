@@ -1,0 +1,32 @@
+:: Wardrobe Sale Crate []
+你准备好把你的
+<<if $crateContents is "all">>
+	衣服
+<<else>>
+	外套
+<</if>>
+装进箱子然后拿去卖掉了吗？在这之后最好去买点儿新衣服。
+<br><br>
+<<set _value to 0>>
+<<for _label, _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<if setup.clothes[_label][clothesIndex(_label,_items[_i])].shop.length is 0>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitSecondary isnot undefined>>
+			<<continue>>
+		<</if>>
+		<<if _items[_i].outfitPrimary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(getClothingCost(_items[_i], _label) * (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max')) / 3)>>
+	<</for>>
+<</for>>
+这会为你赚取<<printmoney `_value + 5000`>>。
+<br><br>
+<<link [[好的|Wardrobe Sale Crate Result]]>><</link>>
+<br>
+<<link [[算了|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>

@@ -1,0 +1,94 @@
+:: Temple Quarters Clean []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $rng gte 81>>
+	你拿起鸡毛掸子开始工作。<<generateTemple 1>><<person1>>你跪在床铺下并进行除尘，然后你试图踮起脚尖来够到衣柜的顶部。
+	<br><br>
+	<<if $danger gte (9900 - $allure)>>
+		当你俯身为一个架子除尘时，你感到有一双眼睛正盯着你的<<bottom>>。你向身后看去，一个<<monk>>正在床铺上一直死死盯着你。
+		<<gstress>><<stress 6>>
+		<br><br>
+		"你为什么停下来了？"<<he>>问道，"继续干活吧。"
+		<br><br>
+		<<link [[炫耀身体|Temple Quarters Flaunt]]>><<grace 1 monk>><</link>><<exhibitionist1>><<ggrace monk>>
+		<br>
+		<<link [[无视这家伙|Temple Quarters Ignore]]>><<grace 1 monk>><</link>><<ggrace monk>>
+		<br>
+		<<link [[发火|Temple Quarters Angry]]>><<grace -3>><<trauma -6>><<stress -6>><<def 1>><</link>><<llgrace>><<ltrauma>><<lstress>>
+		<br>
+	<<else>>
+		当你俯身为一个架子除尘时，你感到有一双眼睛正盯着你的<<bottom>>。你向身后看去，一个<<monk>>正在床铺上一直死死盯着你，当你看过去的时候，<<He>>将目光转向了别处。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Temple Quarters]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 61>>
+	你开始工作，为这些家伙整理床铺，你确信这是他们自己本该做的事情。
+	<br><br>
+	<<if $danger gte (9900 - $allure)>>
+		<<generateyTemple 1>><<person1>>
+		你看到<<if $temple_rank is "initiate">>另一名<<else>>一名<</if>>见习教徒正好奇地看着你。<<He>>小声地咳了几下，然后别开了视线，脸颊上泛起了一层红晕。
+		<br><br>
+		<<link [[调戏|Temple Quarters Flirt]]>><</link>><<promiscuous1>>
+		<br>
+		<<link [[无视|Temple Quarters]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你从房间的一头打扫到另外一头，然后转过头来欣赏起了你的杰作。
+		<br><br>
+		<<link [[继续|Temple Quarters]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 41>>
+	<<generateTemple 1>><<person1>>
+	你把所有的脏衣服收进篮子里，正要去洗衣房，一个路过的<<monk>>拦住了你。<<He>>的一只胳膊下夹着一捆卷轴。"亲爱的，"<<he>>说道，"我的一个卷轴滚到壁炉里去了，但我这老寒腿疼的厉害，能请你帮我捡回来吗？"<<He>>指着附近的一扇<<he>>门。你顺着<<he>>指着的方向看见了那个壁炉，炉口狭窄，你无法看到后面有什么。
+	<br><br>
+	<<if $danger gte (9900 - $allure)>>
+		<<link [[答应并去寻找卷轴|Temple Quarters Deception]]>><<grace 3 monk>><</link>><<gggrace monk>>
+		<br>
+	<<else>>
+		<<link [[答应并去寻找卷轴|Temple Quarters Scroll]]>><<grace 3 monk>><</link>><<gggrace monk>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Temple Quarters Refuse]]>><<grace -3 monk>><</link>><<llgrace monk>>
+<<elseif $rng gte 21>>
+	<<generateTemple 1>><<person1>>
+	你拿起扫帚，开始清扫工作。
+	<<if $danger gte (9900 - $allure)>>
+		在你工作的时候，一个<<monk>>与你擦身而过。当<<he>>经过时，<<He>>用<<his>>的手指在你的<<bottom>>上摸来摸去。
+		<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+		一分钟后，同一个<<monk>>又与你擦身而过，再次对你动手动脚。同一个<<monk>>在房间里来来回回地走动，一边假装忙碌，一边当着众人的面猥亵你。
+		<br><br>
+		<<link [[忍耐|Temple Quarters Endure]]>><<grace 3 monk>><<trauma 6>><<stress 6>><</link>><<gggrace monk>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[生气|Temple Quarters Harassed Anger]]>><<grace -3 monk>><<trauma -6>><<stress -6>><</link>><<llgrace monk>><<ltrauma>><<lstress>>
+		<br>
+		<<if $promiscuity gte 55>>
+			<<link [[扳回一城|Temple Quarters Even]]>><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+	<<else>>
+		你站在后面，欣赏你的手艺。一个旁观的<<monk>>赞许地点了点头。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Temple Quarters]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你把脏衣服收进篮子里。
+	<<if random(1, 100) gte 51>>
+		你正把手伸向床下，突然触到了一块松动的石头，露出了一个洞。里面太黑了，看不清。
+		<br><br>
+		<<link [[伸手进去|Temple Quarters Hole]]>><</link>>
+		<br>
+		<<link [[无视|Temple Quarters Hole Ignore]]>><</link>>
+		<br>
+	<<else>>
+		你发现奇形怪状的袜子被丢弃在各种各样的地方。床底下，衣柜上面，塞进墙壁的缝隙里。装了满满一篮子后，你把它搬到洗衣房。
+		<br><br>
+		<<link [[继续|Temple Quarters]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

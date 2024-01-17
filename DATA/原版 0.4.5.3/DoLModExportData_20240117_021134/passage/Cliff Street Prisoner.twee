@@ -1,0 +1,101 @@
+:: Cliff Street Prisoner []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<get_pillory_npc>><<person1>>
+<<if $phase is 0>>
+	附近有一盒腐烂的水果，你抓起一块在手里掂了掂。
+	<br>
+	你朝<<the_pillory_person>>扔了过去，
+	<<if $rng gte 75>>
+	<<set $pillory_tenant.fruit += 1>>
+		<span class="teal">这一下完美的打中了<<him>>的脸。</span><<His>>的表情看起来要多搞笑有多搞笑。
+		<<if currentSkillValue('physique') gte ($physiquesize / 7) * 4>>你在它背后用了很大的力气，它看上去一定很疼。<</if>>
+		<<llstress>><<stress -12>>
+		<br>
+		群众欢呼雀跃且笑声不断。
+	<<else>>
+		但没有投中。<<if currentSkillValue('physique') lte ($physiquesize / 7) * 3>>附近的一些人笑你太逊了。<</if>>
+	<</if>>
+<<elseif $phase is 1>>
+	你啜饮着<<the_pillory_person>>的屁股和腹股沟内的奶油，其他的围观群众惊叹不已。
+	<<famesex 20>>
+<<elseif $phase is 2>>
+<<set $pillory_tenant.spank += 1>><<control 10>><<stress -24>><<trauma -12>>
+	你<<print either("恶毒地","愤恨地","冷酷地","自以为是地","疯狂地")>>拍打着那个<<the_pillory_person>>的屁股。不知何故，
+	<<print either("这给你一种控制感和幸福感。","这给你带来越来越多的平静感。","这使你的心理阴影消退了一些。")>>
+	<br>
+	一些人在为你加油。
+<<elseif $phase is 3>><<control 10>><<stress -24>><<trauma -12>>
+	你来到<<the_pillory_person>>的后面，然后<<print either("顺利地","笨拙的","迅速地")>>
+	<<if $pronoun is "m">>
+		<<if $pillory_tenant.upperexposed lte 1>>
+			<<set $pillory_tenant.upperexposed to 2>>脱去了<<his>>的上衣，将<<his>>的胸部彻底暴露在了空气当中
+			<<if $pillory_tenant.lowerexposed lte 1>>然后<</if>>
+		<</if>>
+		<<if $pillory_tenant.lowerexposed lte 1>>拉下<<his>>的
+			<<if $pillory_tenant.lowerexposed is 0>>裤子并<</if>>
+			将内裤脱到地上，暴露出<<his>>的屁股和
+			<<if $pillory_tenant.person.gender is "m">>
+				$pillory_tenant.person.penisdesc
+			<<else>>
+				小穴
+			<</if>>
+			<<set $pillory_tenant.lowerexposed to 2>>
+		<</if>>
+	<<elseif $pronoun is "f">>
+		<<if $pillory_tenant.upperexposed lte 2>>
+			<<if $pillory_tenant.upperexposed lte 0>>扒下<<his>>的上衣<</if>>
+			脱掉了<<his>>的胸罩，使<<his>>的$pillory_tenant.person.breastsdesc
+			<<if $pillory_tenant.lowerexposed lte 1>>朝向所有人。毫不犹豫的，你接着<</if>>
+			<<set $pillory_tenant.upperexposed to 3>>
+		<</if>>
+		<<if $pillory_tenant.lowerexposed lte 1>>
+			<<if $pillory_tenant.lowerexposed lte 0>>撩起<<his>>的衬衫，把<<his>>的内裤拉到地上，
+			<<else>>拉下<<the_pillory_person>>的内裤到地板上，<</if>>
+			完全暴露了<<his>>的
+			<<if $pillory_tenant.person.gender is "m">>
+				$pillory_tenant.person.penisdesc
+			<<else>>
+				小穴
+			<</if>>
+			和屁股
+			<<set $pillory_tenant.lowerexposed to 2>>
+		<</if>>
+	<<else>> /* in case the game goes fully non binary */
+		撕掉了所有的衣服，使其完全暴露在外
+	<</if>>，展示给观看的人群。<<He>>震惊地大喊。
+	<br><br>
+
+	周围的某些观众<<print either("虽然在喘着粗气，但","在放声大笑，而","虽然在抱怨着，但","虽然沉默着，但","在吹着口哨，而","在嘲笑着，而","发出了淫秽的威胁声，而")>>更多的观众正在欢呼雀跃着。
+<<elseif $phase is 4>><<control 5>><<stress -20>><<trauma -4>><<set $pillory_tenant.broken += 1>>
+	你来到了那个家伙的后面，然后<<print either("无耻的","积极地","迅速地","报复性地","悄悄地")>>
+	抓住<<the_pillory_person>>的<<if $pronoun is "m">>内裤<<else>>女式内裤<</if>>并用力将其提了起来。
+	<br>
+	<<His>>发出震惊的尖叫声，这让你在跑开的时候不自禁地大笑了起来。当你重新回到人群中时，<<his>>那副苦涩的表情让你再次开怀大笑，
+	那家伙被锁在颈手枷上，甚至无法整理自己的衣服。<<He>>清楚这一点，那些围观的群众更清楚。
+	<br>
+	人群中的许多人似乎都在分享你所带来的快乐。
+<<elseif $phase is 5>><<stress 6>><<famegood 10>><<trauma -10>><<set $pillory_tenant.upperexposed to 0>><<set $pillory_tenant.lowerexposed to 0>>
+	当人们看到你走向颈手枷时，所有人都安静下来，<<The_pillory_person>>也警惕地看向了你。但当你开始为<<his>>整理起衣服时，<<his>>也放松了那紧绷的神经，
+	这也帮助其恢复了一点点尊严。
+	<br><br>
+	当观众们意识到你在做什么时，人群中的某些人发出了嘲笑声。还有人向你投掷东西，
+	<<if $rng % 3 == 0>>
+		<<athleticsdifficulty 0 500 f>>
+		<<if $athleticsSuccess>>
+			但你成功躲开了。
+		<<else>>
+			那些东西打在了你的<<print either("胸部。","脸上。","大腿上。","后脑勺上。","背上。")>><<gpain>><<pain 3>>
+		<</if>>
+	<<else>>
+		虽然你躲掉了一些，但也就只有一些了。
+	<</if>>
+	<br><br>
+	你快速把<<his>>的衣服放回了原处，然后迅速地离开了。<br><br>
+	你感觉到人群中投射来一些满是敌意的眼神，但你对自己的所作所为感觉良好。<<ltrauma>>
+<<else>>
+	你做了一些完全出乎意料的事情，很少有人能解释你做了什么，更少有人能解释是为了什么，也没有人愿意再谈起这件事。(错误：请报告)
+<</if>>
+<<endevent>>
+<br><br>
+<<link [[继续|Cliff Street Pillory]]>><</link>>
+<br>

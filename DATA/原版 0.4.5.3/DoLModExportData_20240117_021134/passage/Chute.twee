@@ -1,0 +1,43 @@
+:: Chute []
+<<set $outside to 0>><<effects>>
+你顺着滑道滑到公园。
+<br>
+<<if $worn.over_upper.name isnot "naked">>
+	<<set $worn.over_upper.integrity -= 20>>
+	<<set _damage to true>>
+<<elseif $worn.upper.name isnot "naked">>
+	<<set $worn.upper.integrity -= 20>>
+	<<set _damage to true>>
+<</if>>
+<<if $worn.over_lower.name isnot "naked">>
+	<<if $worn.lower.name isnot "naked">>
+		<<set $worn.lower.integrity -= 20>>
+	<</if>>
+	<<set $worn.over_lower.integrity -= 20>>
+	<<set _damage to true>>
+<<elseif $worn.lower.name isnot "naked">>
+	<<if $worn.under_lower.name isnot "naked">>
+		<<set $worn.under_lower.integrity -= 20>>
+	<</if>>
+	<<set $worn.lower.integrity -= 20>>
+	<<set _damage to true>>
+<</if>>
+<<if _damage>>
+	你的衣服被卡住了。
+	<br><br>
+<</if>>
+<<set $danger to random(1, 10000)>><<set $dangerchute to 0>>
+<<if $danger gte (9900 - ($allure * 3))>>
+	<<set $dangerchute to random(1)>>
+<</if>>
+<<if $dangerchute is 1>>
+	当滑道出口进入视野时，你才看到有人在滑道前面留下了一台水泥搅拌机！
+	<br><br>
+	<<link [[不惜一切代价躲开！|Molestation Chute]]>><<set $molestationstart to 1>><</link>>
+	<br>
+	<<link [[做防冲击姿势|Cement Mixer]]>><</link>>
+	<br><br>
+<<else>>
+	<<parkquick>>
+<</if>>
+<<set $dangerchute to 0>>

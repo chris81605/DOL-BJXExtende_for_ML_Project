@@ -1,0 +1,199 @@
+:: Farm Breakfast Cuddle []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+待在艾利克斯的一旁让你感觉很舒服。
+<<if $daily.alex.spank and $pain gte 20>>
+	<<He>>看到你的眼泪，似乎有些后悔，<<he>>用一只手擦干你的眼泪，另一只手轻轻地拍着你的背。
+	<<He>>给了你些笨拙的安慰，你可以看出<<hes>>在尽自己最大的努力。你感觉稍微好些了。<<pain -10>><<lpain>>
+	<br><br>
+<</if>>
+<<switch random(1, 10)>>
+	<<case 1>>
+		<<if _alex.dom gte 30>>
+			<<He>>把遥控器弄掉了，"操，"<<he>>说道，"能帮我捡一下吗？"你弯腰捡起遥控器，然后还给<<him>>。"谢谢。"<<He>>把目光从你身上移开，欲盖拟彰地吹着口哨。
+			<br><br>
+
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $exhibitionism gte 75>>
+				你突然意识到<<he>>是故意把遥控器掉在地上的，就是想偷看你的裙底。所以等<<he>>再次看你的时候，你故意把裙子掀了起来。
+				<<He>>避开了你的目光，傻笑起来，脸红得厉害。<<npcincr Alex lust 3>><<glust>>
+			<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				你慌了神，突然意识到<<he>>是故意把遥控器掉在地上的，就是想偷看你的裙底。你乱揉着<<his>>的头发，最后<<he>>终于承认了。<<stress 6>><<gstress>><<npcincr Alex lust 1>><<glust>>
+			<<else>>
+				<<He>>脸上露出大大的笑容，而你对此表示疑惑。"我看到了一些好东西，今天真是走运。"<<npcincr Alex lust 1>><<glust>>
+			<</if>>
+		<<elseif _alex.dom lte -30>>
+			遥控器掉了。"我来捡，"<<he>>说道。
+			<br><br>
+
+			<<he>>探出手的时候，你的目光停留在<<his>>健美的臀部上紧绷着的<<print (_alex.pronoun is "f" ? "平角裤" : "四角裤")>>上。
+			"被、被我逮着了，"艾利克斯脸红起来，指着你，缩起身体。<<npcincr Alex lust 1>><<glust>><<arousal 100>><<garousal>>
+		<<else>>
+			遥控器掉了。你们俩同时伸手去拿，然后你们的手碰在了一起。<<He>>忍不住笑出来，你也跟着笑了。
+		<</if>>
+	<<case 2>>
+		<<He>>抚摸你的头发，你们一起看着太阳升起。"实在是太美了，我认识一个跟它一样美的人。而且……<<pShes>>现在离我很近。"
+		<<he>>倾身吻你的脸颊，然后咧嘴笑了。"这样我就不用走得太远了。"
+	<<case 3>>
+		<<He>>翻看频道。正好翻到有部正在播放淫秽镜头的电影。<<He>>瞥了你一眼，但很快就换台了。<<npcincr Alex lust 1>><<glust>>
+		<<if Time.hour isnot 6>>
+		<br><br>
+			<<if $promiscuity gte 15>>
+				<<link [[调侃一下|Farm TV Tease]]>><<npcincr Alex lust 5>><<arousal 200>><</link>><<promiscuous1>><<glust>><<garousal>>
+				<br>
+			<</if>>
+			<<link [[问艾利克斯看到了什么|Farm TV Ask]]>><<npcincr Alex lust 3>><<arousal 100>><</link>><<glust>><<garousal>>
+		<</if>>
+	<<case 4>>
+		你们把额头相抵，趁着电视广告的时间，亲密地摩擦着彼此的鼻子。
+	<<case 5>>
+		你卷起<<his>>身上的<<npcClothesText _alex "upper">>，露出<<his>>结实的腹肌。你朝着它吹着热气，用你的脸摩擦<<He>>。<<he>>被蹭得大笑起来。<<npcincr Alex lust 1>><<glust>>
+	<<case 6>>
+		"又舒适又安静，"<<he>>一边拍打着靠枕，一边说道，"真希望我们能一整天都这样待在这里。"<<he>>抱着你，然后
+		<<if ($harpy gte 6 and $transformationParts.bird.wings isnot "hidden") or ($angel gte 6 and $transformationParts.angel.wings isnot "hidden") or ($demon gte 6 and $transformationParts.demon.wings isnot "hidden") or ($fallenangel gte 2 and $transformationParts.fallenAngel.wings isnot "hidden")>>
+			抚摸着你的翅膀。
+		<<elseif ($wolfgirl gte 3 and $transformationParts.wolf.ears isnot "hidden") or ($cat gte 4 and $transformationParts.cat.ears isnot "hidden") or ($cow gte 4 and $transformationParts.cow.ears isnot "hidden") or ($fox gte 4 and $transformationParts.fox.ears isnot "hidden")>>
+			抓揉你的耳朵。
+		<<elseif $wolfgirl gte 6 or $fox gte 6>>
+			揉你的肚子。
+		<<elseif $cat gte 6>>
+			抚摸你的头发。
+		<<elseif $cow gte 6>>
+			刮你的鼻子。
+		<<else>>
+			抚摸你的脸。
+		<</if>>
+		你们凝视着对方的眼睛，共同陷入此刻的宁静。
+	<<case 7>>
+
+		<<if C.npc.Alex.pregnancy.noBirthControl isnot true and ($playerPregnancyHumanDisable is "f" or $npcPregnancyDisable is "f") and (!npcIsPregnant("Alex") or !playerIsPregnant()) and C.npc.Alex.gender isnot $player.gender>>
+			<<set C.npc.Alex.pregnancy.noBirthControl to true>>
+		<</if>>
+
+		<<if (npcIsPregnant("Alex") or playerIsPregnant()) and C.npc.Alex.pregnancy.knowledge is true>>
+			"我们马上就要<<if childrenCountBetweenParents("Alex","pc") gte 1 or childrenCountBetweenParents("pc","Alex") gte 1>>扩大我们的家庭<<else>>有一个家庭<</if>>了，你感觉怎么样？"你把头靠在<<his>>的肩膀上。
+			<br><br>
+
+			<<He>>用胳膊搂着你，想了一会儿。
+			"说实话，我很紧张，到现在还感觉有点不真实。"
+			<br><br>
+
+			"那你开心吗？"你问。
+			<br><br>
+
+			"当然了，"<<He>>轻轻地撞了一下你的头，"我再开心不过了。"
+
+		<<elseif childrenCountBetweenParents("pc","Alex") gte 1 or childrenCountBetweenParents("Alex","pc") gte 1>>
+			"你现在对组建家庭怎么看？"你把头靠在<<his>>的肩膀上问道。
+			<br><br>
+
+			<<He>>用胳膊搂着你，想了一会儿。
+			"说实话，我从未想过这种事。至少没想到会这么快。"
+			<br><br>
+
+			"那你开心吗？"你问。
+			<br><br>
+
+			"当然了，"<<He>>轻轻地撞了一下你的头，<<if C.npc.Alex.pregnancy.nursery is true>>"我再开心不过了。"<<else>>"但我真的很想念我的小家伙们。"<</if>>
+
+		<<else>>
+			"你对组建家庭怎么看？"你把头靠在<<his>>的肩膀上问道。
+			<br><br>
+
+			<<He>>用胳膊搂着你，想了一会儿。
+			<<if ($genderknown.includes("Alex") and $player.gender is _alex.pronoun) or (!$genderknown.includes("Alex") and $player.gender_appearance is _alex.pronoun)>>
+				"我们可以领养，但是我听说很贵。而且我们已经忙得不可开交了，不知道我能不能成功戒酒。"<<He>>突然笑了，"如果这能让你开心，我愿意出十倍的钱。"
+			<<else>>
+				"说实话，我没有考虑过。不知道我能不能成功戒酒。但我不介意。如果它能让你快乐，难十倍的事我也能干，"<<he>>说道，微笑着看向你。
+			<</if>>
+			<br><br>
+
+			"如果我不想要孩子呢？"
+			<br><br>
+
+			"那你问我干嘛？"<<he>>轻轻地撞了一下你的头，"就像我说的，只要能让你开心就好了。"
+
+		<</if>>
+	<<case 8>>
+		你将手伸过<<his>>的肩膀，想要抢走遥控器。
+		<<if $bodysize is 3>>
+			<<He>>把遥控器举得很高，但你身高足够，还是轻松夺了过来。"操，我就知道，"<<he>>大笑出声。
+			<br><br>
+
+			你在<<he>>大笑的时候突然亲了上去，<<he>>的脸红了。<<takeKissVirginity "Alex" "loveInterest">>
+		<<elseif currentSkillValue('athletics') gte 800>>
+			<span class="green"><<His>>反应很快，但你的反应更快。</span>"你赢了，公平竞争。现在把遥控器还给我。"<<he>>把手臂放在胸前。
+			<br><br>
+
+			<<if $speech_attitude is "meek">>
+				"你、你生气了吗？" 你咯咯笑道，把胳膊靠向<<hers>>，"就算不看电视，你也可以看我。"
+			<<elseif $speech_attitude is "bratty">>
+				"我把你惹毛了吗？" 你调侃道，戳了一下<<his>>的鼻子，"你的主要娱乐来源应该是我才对嘛。"
+			<<else>>
+				"别生气啦，" 你把自己挤进<<his>>的臂弯和胸膛之间，"让我来当你的节目不好吗。"
+			<</if>>
+			<br><br>
+
+			<<His>>脸上的神情滑落，取而代之的是咧嘴微笑。"你说得太对了。" 不久之后，你们交换了一个俏皮的吻。<<takeKissVirginity "Alex" "loveInterest">>
+		<<else>>
+			<span class="red"><<He>>轻松地就把它拿开了。</span>你滑了一下，差点掉下沙发。"抓住你了。"<<he>>喊道，
+			<<if _alex.dom gte 30>>
+				一边抓住了你的<<bottom>>，把你拉到<<his>>的大腿上。"对不起，"<<he>>说，"我永远不会让我的<<girl>>摔下去的。"<<he>>的手开始沿着你的后背滑下去。
+			<<elseif _alex.dom lte -30>>
+				把你拉了回来。"吓我一跳，没事吧？"你点点头，<<he>>松了一口气，摩挲着你的背，"下次可以提前打个招呼嘛。"
+			<<else>>
+				把你拉了起来。"好险，对不起。"<<he>>伸出一只手搂住了你，一会儿之后，<<he>>开始笑起来。"不过我可不能就这么让你赢了啊。"
+			<</if>>
+			<br><br>
+
+			你靠向前，做出了一个吻的示意。<<he>>抓住了你的示意。你们彼此调皮地拉扯着与对方接吻，终于拉开距离的时候，艾利克斯脸上泛起了红晕。<<takeKissVirginity "Alex" "loveInterest">>
+		<</if>>
+	<<case 9>>
+		就在<<he>>准备站起来的时候，你用胳膊和腿牢牢锁住了<<him>>。
+		<br><br>
+
+		<<if _alex.dom gte 30>>
+			<<he>>用结实的双臂把你紧紧搂在怀里。"看来我们有同样的想法啊。"<<he>>笑起来。
+		<<elseif _alex.dom lte -30>>
+			"只是想舒服地躺一下而已，"<<he>>打了个哈欠，躺到了你的胸前，把你的胳膊环在自己身上。
+		<<else>>
+			"别担心，我哪儿也不去。"<<He>>给你一个温暖的微笑，把你拉进一个充满安全感的拥抱。
+		<</if>>
+	<<case 10>>
+		你用手游走过<<his>>的腿，然后紧紧抓住了<<his>>结实的大腿。<<npcincr Alex lust 1>><<glust>>
+		<br><br>
+
+		<<if $daily.alex.breakfastSex>>
+			"准备好要来第二轮吗？"<<he>>说着，红晕蔓延了<<his>>的脸，"你可真厉害，不过我得再要点时间热身才行。"
+		<<elseif _alex.dom gte 30>>
+			"敢这样诱惑我，你最好小心点，"<<he>>低声说，在你耳边吹气，"你不一定受得了后果。"
+		<<elseif _alex.dom lte -30>>
+			"你的小脑袋里在想些什么啊？"<<he>>的脸刷地一下红，含羞地笑着问道。
+		<<else>>
+			"你可以先稍事冷静一下，<<girl>>，"<<he>>暧昧地低声说道，抓住了你的手，"等会儿我们有的是时间来进行我们的游戏。"
+		<</if>>
+<</switch>>
+<br><br>
+
+<<if Time.hour gte 6>>
+	<<he>>瞥了一眼墙上的时钟，然后站起身来。"该去工作了，回头见。"<<he>>笑着，挥手告别。
+	<br><br>
+
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if C.npc.Alex.pregnancy.noBirthControl is true and C.npc.Alex.pregnancy.pills isnot "fertility">>
+		<<link [[询问关于要个孩子的话题|Farm Cottage Baby Request]]>><</link>>
+
+		<i><span class="blue">这会提高艾利克斯在下一次怀孕为止</span>的生育力。</i>
+		<br><br>
+
+	<</if>>
+
+	<<link [[继续拥抱 (0:20)|Farm Breakfast Cuddle]]>><<npcincr Alex love 1>><<pass 20>><</link>><<glove>>
+	<br>
+	<<link [[看电视 (0:20)|Farm Breakfast TV]]>><<pass 20>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[起身|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<</if>>

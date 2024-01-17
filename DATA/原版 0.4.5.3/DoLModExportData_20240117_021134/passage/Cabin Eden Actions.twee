@@ -1,0 +1,118 @@
+:: Cabin Eden Actions []
+<<effects>>
+伊甸瞥了你一眼。
+<br><br>
+
+<<if Time.hour gte 18 and Time.hour lte 23>>
+	<<if $edencushions is 2 and $edenloveseat is 9>>
+		<<couchicon>><<link [[依偎在双人沙发上 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
+		<br>
+	<<else>>
+		<<couchicon>><<link [[依偎 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if Time.days % 2 is 0>>
+		<<if $eden_shoot gte 1>>
+			<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+			<br>
+		<<else>>
+			<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<trauma -3>><<pass 30>><<npcincr Eden love 1>><<set $phase to 0>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<if $edenradiointro is 2>>
+		<<edenicon "radio">><<link [[邀请伊甸跳舞 (0:30)|Eden Dance]]>><<trauma -3>><<stress -3>><<danceskill 5>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><<set $phase to 0>><</link>><<glove>><<glust>><<ltrauma>><<lstress>><<gdanceskill>>
+		<br>
+	<</if>>
+	<<if $edenpillow is 2 and !$daily.eden.massage>>
+		<<edenicon "salve">><<link [[用药膏给伊甸按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage to 1>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $edenpillow is 2 and $daily.eden.massage is 1>>
+		<<edenicon "salve">><<link [[用药膏给伊甸按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage to 2>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $edenpillow is 2 and $daily.eden.massage is 2>>
+		<<edenicon "salve">><<link [[用药膏给伊甸按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage to 3>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $edenpillow is 2 and $daily.eden.massage is 3>>
+		<<edenicon "salve">><<link [[用药膏给伊甸按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage to 4>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $edenpillow is 2 and $daily.eden.massage is 4>>
+		<<edenicon "salve">><<link [[用药膏给伊甸按摩 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $daily.eden.massage to 5>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<br>
+<</if>>
+
+<<if !$edenfurniture>>
+	<<edenicon "rug">><<link [[问问伊甸你能不能买地毯和枕头|Eden Pillows]]>><</link>>
+	<br>
+<<elseif $edenfurniture is 1 and $edenpillow is 2>>
+	<<edenicon "curtains">><<link [[问问你能不能买窗帘和衣帽架|Eden Curtains]]>><</link>>
+	<br>
+<<elseif $edenfurniture gte 2 and !$edencoat and $edencurtains is 2>>
+	<<edenicon "coat stand">><<link [[要求制作大衣架 (3:00)|Eden Coat Stand]]>><<set $edencoat to 1>><<pass 3 hours>><</link>>
+	<br>
+<<elseif $edenfurniture is 2 and $edencurtains is 2 and $edencoat>>
+	<<couchicon>><<link [[请求制作双人沙发|Eden Loveseat]]>><</link>>
+	<br>
+<<elseif $edenfurniture is 3 and $edenloveseat lt 7>>
+	<<couchicon>><<link [[制作双人沙发 (3:00)|Eden Loveseat Work]]>><<pass 3 hours>><</link>>
+	<br>
+<</if>>
+<<if Time.hour is 17 and $edenjoin is 1>>
+	<<bathroomicon>><<link [[请求和伊甸一起洗澡 (0:30)|Eden Bath Join]]>><<npcincr Eden love 1>><<pass 30>><</link>><<glove>>
+	<br>
+<</if>>
+<<if $worn.neck.collared isnot 1 and $NPCName[$NPCNameList.indexOf("Eden")].dom gte 100>>
+	<<edenicon "collar">><<link [[向伊甸要个项圈|Eden Collar]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+	<br>
+<</if>>
+<<if $daily.eden.walk isnot 1>>
+	<<lakeicon>><<link [[让伊甸陪你去湖边|Eden Lake]]>><</link>>
+	<br>
+<</if>>
+<<if $daily.eden.search is undefined or $daily.eden.search lt ($NPCName[$NPCNameList.indexOf("Eden")].love / 40)>>
+	<<foresticon>><<link [[让伊甸帮忙搜寻森林 (0:30)|Eden Search]]>><<if $daily.eden.search is undefined>><<set $daily.eden.search to 1>><<else>><<set $daily.eden.search += 1>><</if>><</link>>
+	<br>
+<</if>>
+
+<<if Time.monthDay is 31 and $halloween_eden is 1 and $halloween_eden_bought is 1 and !$halloween_eden_candy_given>>
+	<<foodicon "sweets">><<link [[把篮子给伊甸|Eden Halloween]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $halloween_eden_candy_given to 1>><</link>>
+	<br>
+<</if>>
+
+<<if Time.monthDay is 25 and $christmas_gift_eden is 1 and $christmas_gift_eden_given isnot 1>>
+	<<gifticon "hunting">><<link [[把狩猎夹克给伊甸|Eden Jacket]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $christmas_gift_eden_given to 1>><<set $edencoatjacket to 1>><</link>>
+	<br>
+<</if>>
+
+<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+	<<undobindingsicon>><<link [[请求伊甸解开束缚 (0:01)|Eden Bindings]]>><<pass 1>><<unbind>><</link>>
+	<br>
+<</if>>
+
+<<if $edenfreedom is undefined>>
+	<<askicon>><<link [[要求回镇子的自由|Eden Freedom]]>><</link>>
+	<br>
+<</if>>
+<<if $edenfreedom is 1>>
+	<<askicon>><<link [[要求留在镇子的自由|Eden Freedom 3]]>><</link>>
+	<br>
+<</if>>
+<<if $edenshopping is 1>>
+	<<edenicon "supplies">><<link [[把补给品给伊甸|Eden Supplied]]>><</link>>
+	<br>
+<</if>>
+<<if $edenradiointro is 1>>
+	<<edenicon "radio">><<link [[把收音机给伊甸|Eden Radio Intro]]>><</link>>
+	<br>
+<</if>>
+<br>
+<<getouticon>><<link [[回去|Eden Cabin]]>><<endevent>><</link>>

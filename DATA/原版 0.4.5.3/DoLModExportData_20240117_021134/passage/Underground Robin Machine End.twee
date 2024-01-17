@@ -1,0 +1,38 @@
+:: Underground Robin Machine End []
+<<effects>>
+
+<<if ($anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1) and $robinFucked>>
+	当机器停下来时，人群鼓掌欢呼。
+<<else>>
+	机器停止运转时，人群发出嘘声。
+	<<if !$robinFucked>>
+		罗宾看起来如释重负。
+	<</if>>
+<</if>>
+$machineHandler放开了你和罗宾，并将你们带离舞台，拉回了你们的牢房。
+<<if $robinMachineSpeed is 3>>
+	罗宾不看你。
+<<elseif $robinMachineSpeed is 1>>
+	罗宾看了你一眼，然后迅速移开视线。
+<</if>>
+<br>
+
+<<machine_end>>
+
+<<switch $robinMachineSpeed>>
+	<<case 1>>
+		<<undergroundRobinTopic "machineLow" "undiscussed">>
+	<<case 2>>
+		<<undergroundRobinTopic "machineNormal" "undiscussed">>
+	<<case 3>>
+		<<undergroundRobinTopic "machineHigh" "priority">>
+	<<default>>
+		<<if $anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1>>
+			<<undergroundRobinTopic "machinePlayer" "undiscussed">>
+		<<else>>
+			<<undergroundRobinTopic "machineNone" "undiscussed">>
+		<</if>>
+<</switch>>
+<<unset $machineHandler>><<unset $robinFucked>><<unset $robinMachineSpeed>>
+
+<<undergroundReturnToCell>>

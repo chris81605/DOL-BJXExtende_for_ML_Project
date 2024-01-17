@@ -1,0 +1,142 @@
+:: Island Sleep []
+<<set _autosavehere to true>>
+<<effects>>
+
+<<sleep>><<effects>>
+<<sleepeffects>>
+
+<<if $island_wake_3 is 1>>
+	<<unset $island_wake_3>>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<generateRole 2 0 "islander">>
+	<<generateRole 3 0 "islander">>
+	<<person1>>
+	<<if $island[$island.home].trap is "simple" and random(1, 2) is 2 or $island[$island.home].trap is "basic" and random(1, 4) gte 2 or $island[$island.home].trap is "advanced">>
+		你被一声尖叫惊醒。你的陷阱抓到了什么。不过，还有另外三个声音朝这边传来。<<lcamp_concealment>><<set $island.hide += 1>>
+		<br><br>
+		<<endevent>>
+		<<generateRole 0 0 "islander">>
+		<<generateRole 1 0 "islander">>
+		<<generateRole 2 0 "islander">>
+		<<person1>>
+		<<link [[保护自己|Island Sleep Defend]]>><<set $phase to 1>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (13 * $island.hide)>>
+		<<link [[Skulk away|Island Sleep Skulk]]>><<set $phase to 1>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (800 + (50 * $island.hide))>>
+		<<link [[潜伏|Island Sleep Hide 3]]>><<set $phase to 1>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+	<<else>>
+		<<if $islander_language gte 100>>
+			你被一伙人的<span class="pink">大声</span>喊叫吵醒。
+			<br>
+			"我们知道你在里面！”一个<<personsimple>>的声音喊道。
+			<br>
+			另一个人说：“只要你能够投降，我们就对你从轻发落。"
+		<<elseif $islander_language gte 50>>
+			你被一伙人的<span class="pink">大声</span>喊叫吵醒。仔细一听，好像是在嘲讽你。
+		<<else>>
+			你被一伙人的<span class="pink">大声</span>喊叫吵醒。虽然完全听不懂，但声音越来越近了。
+		<</if>>
+		<<lcamp_concealment>><<set $island.hide += 1>>
+		<br><br>
+		<<link [[保护自己|Island Sleep Defend]]>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (12 * $island.hide)>>
+		<<link [[Skulk away|Island Sleep Skulk]]>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (700 + (50 * $island.hide))>>
+		<<link [[潜伏|Island Sleep Hide 3]]>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+		<br>
+	<</if>>
+<<elseif $island_wake_2 is 1>>
+	<<unset $island_wake_2>>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<generateRole 2 0 "islander">>
+	<<person1>>
+	<<if $island[$island.home].trap is "simple" and random(1, 2) is 2 or $island[$island.home].trap is "basic" and random(1, 4) gte 2 or $island[$island.home].trap is "advanced">>
+		你被<<personsimple>>的尖叫惊醒。看来陷阱看你困住了<<personsimple>>，但另有两道声音正在向这里靠近。<<lcamp_concealment>><<set $island.hide += 1>>
+		<<endevent>>
+		<<generateRole 0 0 "islander">>
+		<<generateRole 1 0 "islander">>
+		<<person1>>
+		<br><br>
+		<<link [[伏击|Island Sleep Ambush]]>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (6 * $island.hide)>>
+		<<link [[Slink away|Island Sleep Slink]]>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (300 + (50 * $island.hide))>>
+		<<link [[偷溜|Island Sleep Hide 2]]>><<set $phase to 1>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+	<<else>>
+		你被<span class="pink">一些动静</span>吵醒。是三个人在窃窃私语，而且越来越近了。<<lcamp_concealment>><<set $island.hide += 1>>
+		<br><br>
+
+		<<link [[伏击|Island Sleep Ambush]]>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (11 * $island.hide)>>
+		<<link [[Slink away|Island Sleep Slink]]>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (600 + (50 * $island.hide))>>
+		<<link [[偷溜|Island Sleep Hide 2]]>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+	<</if>>
+<<elseif $island_wake_1 is 1>>
+	<<unset $island_wake_1>>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<person1>>
+	<<if $island[$island.home].trap is "simple" and random(1, 2) is 2 or $island[$island.home].trap is "basic" and random(1, 4) gte 2 or $island[$island.home].trap is "advanced">>
+		你被<<person1>><<personsimple>>的尖叫声惊醒。看来有人踏入了你的陷阱。你还听到还有另外的声音在靠近，但听起来是孤身一人。<<lcamp_concealment>><<set $island.hide += 1>>
+		<<endevent>>
+		<<generateRole 0 0 "islander">>
+		<br><br>
+		<<link [[堂堂正正地决斗吧|Island Sleep Confront Trapped]]>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (5 * $island.hide)>>
+		<<link [[Remain motionless|Island Sleep Motionless Trapped]]>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (200 + (100 * $island.hide))>>
+		<<link [[按兵不动|Island Sleep Hide Trapped]]>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+	<<else>>
+		你从噩梦中惊醒，察觉到<span class="pink">一丝危险</span>。你听到一些窃窃私语。<<lcamp_concealment>><<set $island.hide += 1>>
+		<br><br>
+
+		<<link [[正大光明地直面低语之源|Island Sleep Confront]]>><<unset $island_roll>><</link>>
+		<br>
+		/*
+		<<set $island_roll to random(1, 100)>><<set $island_roll += (10 * $island.hide)>>
+		<<link [[Remain motionless|Island Sleep Motionless]]>><</link>><<difficulty $island_roll>>
+		<br>
+		*/
+		<<set $skulduggerydifficulty to (500 + (100 * $island.hide))>>
+		<<link [[藏起来|Island Sleep Hide]]>><<unset $island_roll>><</link>><<skulduggerydifficulty>>
+		<br>
+	<</if>>
+<<else>>
+	你睡得很香，
+	<<if Time.dayState is "night">>
+		然后在微风中缓缓苏醒。
+	<<else>>
+		然后在鸟鸣声中缓缓苏醒。
+	<</if>>
+		<br><br>
+	<<link [[继续|Island]]>><</link>>
+	<br>
+<</if>>

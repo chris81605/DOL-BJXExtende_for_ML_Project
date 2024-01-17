@@ -1,0 +1,47 @@
+:: Eden Dance []
+<<effects>>
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+<<if $phase is 0>>
+	你走到收音机前，转动转盘，寻找信号。当音乐开始播放时，你把伊甸拉到你身边，和<<him>>跳起舞来。
+<<else>>
+	当你们凝视对方的眼睛时，时间似乎过得飞快。
+<</if>>
+
+<<if $rng gte 81>>
+	<<He>>托着你的腰把你举起来在空中旋转，然后把你放回了地上。
+<<elseif $rng gte 61>>
+	你靠在伊甸的胸口，<<he>>把你拉得更近。<span class="green">在<<his>>坚实可靠的怀抱中，你感到非常安全。</span><<stress -1>><<trauma -1>><<lstress>><<ltrauma>>
+<<elseif $rng gte 41>>
+	<<He>>有几次差点踩到你的脚，自言自语地骂了几句。你对<<him>>微笑以示鼓励，<<he>>也以微笑回应。
+<<elseif $rng gte 21>>
+	在一个大胆的舞步中，<<he>>对你做了一个下沉步动作。你震惊地盯着<<him>>看了一会儿，然后<<he>>把你拉起来，继续跳舞，就像什么都没发生一样。
+<<else>>
+	当<<he>>把你绕着转的时候，你咯咯地笑了起来。虽然有点笨手笨脚，但<<he>>脸上带着微笑。
+<</if>>
+<br><br>
+<<if Time.hour isnot 0>>
+	<<edenicon "radio">><<link [[继续跳舞 (0:30)|Eden Dance]]>><<trauma -3>><<stress -3>><<danceskill 5>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><<set $phase to 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>><<gdanceskill>>
+	<br>
+		<<ind>><<link [[诱惑伊甸|Eden Dance Seduce]]>><<npcincr Eden lust 5>><<arousal 600>><</link>><<glust>><<garousal>>
+	<br>
+	<<if Time.days % 2 is 0>>
+		<<if $eden_shoot gte 1>>
+			<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+			<br>
+		<<else>>
+			<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<trauma -3>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[停止跳舞|Cabin Eden Actions]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,42 @@
+:: Island Defeat []
+<<effects>>
+
+<<if $enemyno is 6>>
+	<<clearsinglenpc 5>>
+<</if>>
+<<if $enemyno is 5>>
+	<<clearsinglenpc 4>>
+<</if>>
+<<if $enemyno is 4>>
+	<<clearsinglenpc 3>>
+<</if>>
+<<if $enemyno is 3>>
+	<<clearsinglenpc 2>>
+<</if>>
+
+<<person1>><<person>>折下一根树枝，开始掰掉小分叉，<<person2>><<person>>则解下一段绳子。
+<<if $worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked" or $worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked">>
+	他们只靠双手就剥光你的衣服，把你的手脚反绑在背后，然后把你捆在了棍子上。
+	<<clothesruined>>
+<<else>>
+	他们只靠双手把你的手脚反绑在背后，把你捆在棍子上。
+<</if>>
+<br><br>
+
+<<bind>><<legbind>><<island_pass 30>>
+他们各自用肩扛着树枝的一端，让你无助地坠在他们中间。他们扛着你，向前进发。<<set $island.hide to Math.clamp($island.hide, 0, 30)>>
+<br><br>
+<<if $island.defeat_intro is undefined>>
+
+	他们沿着一条奇怪的小路向小岛深处走去，时而穿过茂密的灌木丛，时而避开更开阔的道路，最后来到一条河边。河上横着一根木头，成了一座狭窄的独木桥。
+	<br><br>
+
+	<<link [[继续|Island Defeat 2]]>><<set $island.defeat_intro to 1>><</link>>
+	<br>
+<<else>>
+	他们深入小岛，沿着奇怪的小路来到废墟城堡。和你上次的记忆一样。一群人再一次跟着你走进去，你再一次被竖起来，暴露在聚集在一起的观众面前。<<gtrauma>><<trauma 6>><<gstress>><<stress 6>><<garousal>><<arousal 600>>
+	<br><br>
+
+	<<link [[继续|Island Defeat 5]]>><</link>>
+	<br>
+<</if>>

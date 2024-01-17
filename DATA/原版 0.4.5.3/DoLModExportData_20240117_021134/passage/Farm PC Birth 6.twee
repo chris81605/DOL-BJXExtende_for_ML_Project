@@ -1,0 +1,42 @@
+:: Farm PC Birth 6 []
+<<effects>>
+
+为你们的<<print $pcBabyCount > 1 ? "孩子们" : "孩子">>取名后，你看向艾利克斯。<<He>>对你取的名字赞许地点头。
+<br><br>
+
+哈珀收拾起<<nnpc_his "Harper">>的装备，走向门口。"你现在应该好好休息，暂时不要下床走动，你会没事的。"
+<br>
+
+"谢谢医生，我很感激，"艾利克斯说。
+<br>
+
+哈珀微笑着转身准备离开，同时从口袋里掏出<<nnpc_his "Harper">>的手机，好像是打算联系谁。
+<br><br>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+   "我先把<<print $pcBabyCount > 1 ? "小家伙们" : "小家伙">>带到新房间去，好吗？你现在应该睡一小会儿，"艾利克斯说。
+   <br>
+
+   <<He>>最后给了你一个大大的拥抱，然后带着你的<<print $pcBabyCount > 1 ? "宝宝们" : "宝宝">>走了。
+   <br><br>
+
+	虽然很累，但你还是一刻不停地想着你的孩子。孩子现在怎么样了呢，会不会太热……你一直想着这些，直到沉入梦乡。
+	<br><br>
+
+<<else>>
+    "该死……"艾利克斯说，"育儿室还没准备好……"<<his>>的表情舒缓下来。
+	<br><br>
+
+    <<He>>似乎不知所措。
+	<br><br>
+
+<</if>>
+
+<<if (pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex") is 1) or C.npc.Alex.pregnancy.nursery isnot true>>
+	<<link [[继续|Farm PC Birth 7]]>><</link>>
+
+<<else>>
+	<<link [[继续|Farm Cottage]]>><<endevent>><<unset $pcBabyCount>><</link>>
+
+
+<</if>>

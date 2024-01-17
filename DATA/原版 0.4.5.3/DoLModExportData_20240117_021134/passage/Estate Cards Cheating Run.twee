@@ -1,0 +1,30 @@
+:: Estate Cards Cheating Run []
+<<effects>>
+你转身就跑。
+<!-- estate ends 5 and 6 -->
+<<if $athleticsSuccess>>
+	<<if $wren_intro isnot undefined>>
+		<<set $estate_cards_end to "cheat_run">>
+	<</if>>
+
+	你听到了追赶的脚步声，但你拼命冲出了小屋，<span class="green">甩开了他们。</span>你跳进一个低处的坑里躲了起来。
+	<br><br>
+
+	<!-- estate end 5 -->
+	<!-- currently leads to the pot getting confiscated, perhaps we should have an alternative option for a higher risk escape (for a chance to grab your winnings) -->
+
+	<<card_pot_confiscated>>
+	<<estate_cards_finish>>
+
+	<<link [[继续|Estate]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你听见追赶的脚步声。就在你快要跑出门的时候，伦恩<span class="red">把你推倒在地。</span>
+	<br><br>
+	"抓到你了，"伦恩压在你身上，"好了，别反抗了。你会得到很好的照顾的——<<nnpc_he "Remy">>会好好教育你的。"
+	<br><br>
+
+	<!-- estate end 6. <<estate_end>> and <<endevent>> called within -->
+
+	<<blackjackCaughtCheatingSurrender>>
+<</if>>

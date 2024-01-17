@@ -1,0 +1,50 @@
+:: Lake Shallows Ice []
+<<effects>>
+
+<<set $outside to 1>><<set $location to "lake">><<set $bus to "lakeshallows">><<effects>><<lakeeffects>>
+<<if $laketeenspresent is 1>>
+	你站在上冻的森林湖上，附近的学生们正在练习滑冰。
+<<else>>
+	<<if $weather is "snow">>
+		你站在靠近岸边的冰湖上。雪覆盖着冰面，减轻了你的脚步声。
+	<<else>>
+		你独自站在靠近岸边的冰湖上。森林中充满了声音。
+	<</if>>
+<</if>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+	你看到荷花被困在冰中。
+<</if>>
+<br><br>
+
+<<if $laketeenspresent is 1 and $exposed gte 1>>
+	没有地方可以躲藏。<<covered>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
+	<<eventlakeice>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+
+	<<lakeicon "skate">><<link [[滑冰 (0:30)|Lake Skate]]>><<pass 30>><<tiredness 5>><<danceskill 5>><</link>><<gtiredness>><<gdanceskill>>
+	<br>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
+		<<icon "tending/lotus.png">> <<link [[寻找种子 (0:30)|Lake Lotus Ice]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Depths Ice">>
+		<<ind>><span class="nextLink"><<link [[更远 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<getinicon>><<link [[走得更远 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon>><<link [[岸边 (0:02)|Lake Shore]]>><<pass 2>><</link>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

@@ -1,0 +1,34 @@
+:: Tattoo Get []
+<<effects>>
+<<if $tattoo_bodypart and $tattoo_choice>>
+	<<set $tattoo_parlour to clone(setup.bodywriting[$tattoo_choice])>>
+	<<add_bodywriting $tattoo_bodypart $tattoo_choice tattoo>><<pass 60>><<set $money -= 50000>>
+	<<pain 6>>
+
+	<<tattoo_parlour>>
+
+	<<link [[继续|Tattoo Parlour]]>><</link>>
+	<br>
+<<elseif $tattoo_choice>>
+	<span class="blue">你必须选择想要纹身的部位。</span>
+	<br><br>
+
+	<<unset $tattoo_choice>>
+
+	<<link [[继续|Tattoo Choice]]>><</link>>
+	<br>
+<<elseif $tattoo_bodypart>>
+	<span class="blue">你必须选择想要纹的东西。</span>
+	<br><br>
+
+	<<unset $tattoo_bodypart>>
+
+	<<link [[继续|Tattoo Choice]]>><</link>>
+	<br>
+<<else>>
+	<span class="blue">你必须选择一个身体部位和图案。</span>
+	<br><br>
+
+	<<link [[继续|Tattoo Choice]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,32 @@
+:: Drain Struggle []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "slime">>
+	<<struggle_creatures 1 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $phase is 1>>
+		<<set $struggle.anus.creature to "slime">><<set $anususe to "struggle">><<set $anusstate to "struggle">><<set $struggle.enemy[0].location to "anus">>
+	<<elseif $player.penisExist>>
+		<<set $struggle.penis.creature to "slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<</if>>
+
+
+<<struggle>>
+
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Drain Struggle End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Drain Struggle]]>><</link>></span>
+	<br>
+<</if>>

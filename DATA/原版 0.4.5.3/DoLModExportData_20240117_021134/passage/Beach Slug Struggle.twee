@@ -1,0 +1,43 @@
+:: Beach Slug Struggle []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "slug">>
+	<<struggle_creatures 1 2>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<set $struggle.chest.creature to "slug">><<set $chestuse to "struggle">><<set $cheststate to "struggle">><<set $struggle.enemy[0].location to "chest">>
+	<<set $timer to 10>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<if $timer lte 0>>
+	<<set $pursuit += 1>>
+	<<set $timer to 0>>
+<<elseif $timer is 8 and random(1, 2) is 2>>
+	<<struggle_add 1 1>>
+	<span class="pink">又一只蛞蝓从粘液中跳出！</span>
+	<br><br>
+<</if>>
+
+<<slug_text>>
+<br><br>
+
+
+<<struggle>>
+
+
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Beach Slug Struggle End]]>><</link>></span>
+	<br>
+<<elseif $pursuit gte 3>>
+	<span id="next"><<link [[继续|Beach Slug Struggle End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Beach Slug Struggle]]>><</link>></span>
+	<br>
+<</if>>

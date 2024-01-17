@@ -1,0 +1,43 @@
+:: Olive Book Lew Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $pinchSpeech to 1>>
+	<<set $speechdisable to 1>>
+	<<hand_gag 0 left>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<if random(1, 4) is 1>>
+	<<He>><<print either("咯咯笑","窃窃私语","嘎嘎笑","嗤嗤笑","冷笑")>>道：
+	<<switch $pinchSpeech>>
+		<<case 1>>
+			"不要着急，我不是什么坏人。"
+		<<case 2>>
+			"没有人比我更好，你不同意吗？"
+		<<case 3>>
+			"我正在出汗，但我也会让你湿透透的。"
+		<<case 4>>
+			"你需要忘记吗？我还没弄完呢。"
+	<</switch>>
+	<<if $pinchSpeech lte 3>>
+		<<set $pinchSpeech += 1>>
+	<<else>>
+		<<set $pinchSpeech to 1>>
+	<</if>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Olive Book Lew Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Olive Book Lew Molestation]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,32 @@
+:: Office Agency Molest []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyanger += 60>>
+	<<set $NPCList[0].lefthand to "mouth">>
+	<<if $rng gte 75>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Office Agency Molest Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Office Agency Molest Escape]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<span id="next"><<link [[继续|Office Agency Molest Rescue]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Office Agency Molest]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,47 @@
+:: Dance Job Stage Dance []
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	<<npcClothesType $NPCList[0] "formal">><<npcClothesType $NPCList[1] "formal">><<npcClothesType $NPCList[2] "formal">>
+	<<npcClothesType $NPCList[3] "formal">><<npcClothesType $NPCList[4] "formal">><<npcClothesType $NPCList[5] "formal">>
+	<<danceinit>>
+	<<set $dancing to 1>>
+	<<set $audience to 50>>
+	<<set $venuemod to 3>>
+	<<set $dancelocation to "stage">>
+	<<if $dance_job_exposed gte 1>>
+		<<set $forceddance to 1>>
+	<</if>>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance"))) and $forceddance isnot 1>>
+	你不可能在如此暴露的情况下继续跳舞。
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2 and $forceddance isnot 1>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance") and $forceddance isnot 1>>
+	你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+	<br><br>
+<</if>>
+
+
+<<if $danceevent is "finish">>
+	<<link [[继续|Dance Job Stage Stop]]>><<clotheson>><</link>>
+<<elseif $danceevent is "rape">>
+	<<link [[继续|Dance Job Stage Rape]]>><<set $molestationstart to 1>><</link>>
+<<elseif $danceevent is "light" and $forceddance isnot 1>>
+	<<runicon>><<link [[逃离舞台|Dance Job Stage Change]]>><<clotheson>><<set $phase to 1>><</link>>
+	<br>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74 and $forceddance isnot 1>>
+		<<runicon>><<link [[逃离|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and $forceddance isnot 1 and !$worn.under_lower.type.includes("dance")>>
+		<<runicon>><<link [[逃离|Dance Job Stage Change]]>><<clotheson>><<set $phase to 0>><</link>>
+	<<else>>
+		<<runicon>><<link [[停止|Dance Job Stage Stop]]>><<clotheson>><</link>>
+	<</if>>
+<</if>>

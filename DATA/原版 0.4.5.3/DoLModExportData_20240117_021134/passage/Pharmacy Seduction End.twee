@@ -1,0 +1,17 @@
+:: Pharmacy Seduction End []
+<<switch $phase>>
+	<<case "nevermind">>
+		你转身离开了。
+		<br>
+		"嘿，"<<he>>说道："我不是故意让你难过的。"
+		<br><br>
+
+		<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>
+	<<case "pay">>
+		你在尴尬的沉默中交出了钱，然后带上了你买的药转身离开。
+		<br><br>
+
+		<<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 14>><<boughtOnce>>
+		<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>
+<</switch>>
+<<unset $pharmacyItem>>

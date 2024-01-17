@@ -1,0 +1,40 @@
+:: Forest Wolf Sex2 []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+
+	<<beastTrainGenerate>>
+	<<if $monster is 1 and $phase is 2>>
+		"<<pPackbrother>>在<<pheat>>吗？我会帮忙！"
+	<</if>>
+	<<set $NPCList[0].stance to "top">><<set $enemytrust -= 20>><<deviancy3>>
+
+	<<if isLoveInterest("Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Forest Wolf Sex2 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Wolf Sex2]]>><</link>></span><<nexttext>>
+<</if>>

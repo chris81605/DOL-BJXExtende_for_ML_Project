@@ -1,0 +1,61 @@
+:: School Library Harass []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 0>>
+	<<if $rng gte 81>>
+		<<person1>><<person>>和<<person2>><<person>>相视一笑。"<<pShe>>认为<<pshe>>可以无视我们。"一双手突然捂住了你的嘴。
+		<br><br>
+
+		<<link [[继续|School Library Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你无视他们的纠缠，直到他们自讨没趣地离开。
+		<br><br>
+
+		<<link [[继续|School Library]]>><<endevent>><</link>>
+	<</if>>
+<<elseif $phase is 1>>
+	<<generate3>><<person3>>你大声呼救。有几个人赶来查看，图书管理员也来了。<<He>>瞪着这两人。"又是你们两个，给我出去。"
+	<br>
+	<<person2>><<person>>抬高了音量，"我们只是在玩——"
+	<br>
+	但<<person2>><<he>>立马被打断了。"我，说，出，去！"肇事者低声咒骂着往门口走去，你现在终于清静了。
+	<br><br>
+
+	<<person3>>图书管理员转头看向你，关切地确认你是否安好。你点点头，<<he>>舒了一口气，回到了自己的岗位上。
+	<br><br>
+
+	<<link [[继续|School Library]]>><<endevent>><</link>>
+<<elseif $phase is 2>>
+	<<run statusCheck("Sydney")>>
+	你向悉尼呼救。<<person2>><<person>>发出一声嗤笑。"哦不，千万不要是悉尼，<<nnpc_he "Sydney">>会在我们身上写字的！我们该怎~么办啊？"这两个人开始大笑起来。
+	<br>
+	然而，当尺子"啪"的一声打在他们身上的时候，他们僵住了。那个<<person1>><<person>>痛苦地叫了起来。你转身看到悉尼愤怒的目光，尺子从<<person2>><<persons>>的头上猛地弹开。
+	<br>
+	"操！真他妈的痛啊！"
+	<br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼咧嘴一笑。"哦，真的吗？你认为<<nnpc_title "Leighton">>会相信谁？现在就滚，马上。"
+	<<else>>
+		悉尼瞪大了眼睛。"你们在图书馆里惹事生非，打扰其他人学习，是你们自己的问题。现在立刻离开。"
+	<</if>>
+	<br>
+	两人嘟囔着离开了图书馆，一边揉着他们刚刚被打痛的地方。你无意中听到<<person1>><<person>>嘴里还在骂骂咧咧："他妈的老师宝贝，信教的傻逼。"
+	<br><br>
+	<<if $sydneyromance is 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			当你转身时，悉尼抓住你，按着你的头给了你一个吻。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+			<br><br>
+			<<nnpc_He "Sydney">>片刻后拉开了距离。
+		<<else>>
+			你感觉到悉尼的手臂环绕着你。
+		<</if>>
+		"我希望他们没有伤害你。"你花了一些时间解释自己安好，但<<nnpc_he "Sydney">>似乎仍然犹豫离开你的身边。最终，<<nnpc_he "Sydney">>起身往租借柜台走去，路上不时地回头看你几眼。
+		<br><br>
+	<<else>>
+		"你还好么？"悉尼把手搭在了你的肩上。你点了点头，但<<nnpc_he "Sydney">>似乎仍然犹豫离开你的身边。最终，<<nnpc_his "Sydney">>起身往租借柜台走去，路上不时地回头看你几眼。
+		<br><br>
+	<</if>>
+
+	<<link [[继续|School Library]]>><<endevent>><</link>>
+<</if>>

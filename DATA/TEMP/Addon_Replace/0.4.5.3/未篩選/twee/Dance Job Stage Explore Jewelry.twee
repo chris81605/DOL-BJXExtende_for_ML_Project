@@ -1,0 +1,41 @@
+:: Dance Job Stage Explore Jewelry []
+<<effects>>
+
+项链手镯，戒指手表，全摆在那里任你偷取。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	你一个接一个地撬开锁，然后把手伸到玻璃下面，掠走值钱家当。那个<<person>>尚未醒来，你带着一大堆东西逃之夭夭。
+	<<set $blackmoney += 1000>><<crimeUp 1000 "thievery">>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	你慌慌急急地摆弄离你最近的锁，进而不慎触发了某些安全机制。<span class="red">警报声响起，惊醒了<<person>>。</span>
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	你朝着出口逃去，但还是被<<he>>看见了。<<crimeUp 200 "thievery">>
+	<br><br>
+
+	<<link [[继续|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

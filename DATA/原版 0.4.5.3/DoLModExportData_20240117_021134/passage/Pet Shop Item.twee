@@ -1,0 +1,22 @@
+:: Pet Shop Item []
+你看了看<<print $selectedToy.name_lower>>的收藏品。它们每个要花<span class="gold"><<print $selectedToy.costDisplay>></span>。
+<br><br>
+<<if $selectedToy.options>>
+	<<for _i to 0; _i lt $selectedToy.options.length; _i++>>
+		<label>
+			<<radiobutton "$selectedToy.selectedOption" _i autocheck>>
+			<span @class="$selectedToy.options[_i].colour"><<print $selectedToy.options[_i].optionsName>></span>
+		</label> |
+	<</for>>
+	<br><br>
+<</if>>
+
+<<if $player.inventory.childrenToys.length gte 5>>
+	你每次携带的玩具不能超过5件。
+<<elseif $selectedToy.cost lte $money>>
+	<<link [[买下|Pet Shop]]>><<buyToy>><</link>>
+<<else>>
+	你买不起这个玩具。
+<</if>>
+<br><br>
+<<link [[不买|Pet Shop]]>><<unset $selectedToy>><</link>>

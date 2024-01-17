@@ -1,0 +1,56 @@
+:: Riding School Lesson Hold []
+<<effects>>
+<<if !$worn.over_lower.type.includes("naked")>>
+	<<set _slot to "over_lower">>
+<<else>>
+	<<set _slot to "lower">>
+<</if>>
+你抓着马鞍不放。树枝拉紧你的<<print $worn[_slot].cn_name_cap>>，直到它被撕破。
+
+<<if !$worn.over_lower.type.includes("naked")>>
+	<<if $worn.lower.integrity lte 50>>
+		<<set $worn.over_lower.integrity -= 50>>
+		<<if $worn.lower.type.includes("naked")>>
+			你感到一阵微风，回头看了看。<span class="red">$worn.over_lower.cn_name_cap的残余部分挂在分支上。风把它刮进了树冠。</span>
+			<br><br>
+			<<covered>>似乎没有人注意到你的困境。<<gstress>><<stress 6>>
+			<br><br>
+			<<link [[寻找掩护|Riding School Lesson Ride]]>><</link>>
+			<br>
+			<<link [[找雷米帮忙|Riding School Lesson Ask]]>><<trauma 6>><<stress 6>><<npcincr Remy dom 1>><<fameexhibitionism 10>><</link>><<gtrauma>><<gstress>><<gdom>>
+			<br>
+		<<else>>
+			你听到一阵撕裂的声音，然后回头看。<span class="red">$worn.over_lower.cn_name_cap的残余部分挂在树枝上。风把它刮进了树冠。</span>
+			<br><br>
+
+			<<link [[继续|Riding School Lesson]]>><<endevent>><</link>>
+		<</if>>
+		<<integritycheck no_text>><<exposure>>
+	<<else>>
+		<<set $worn.over_lower.integrity -= 50>>
+		你的衣服破旧不堪，但你仍能骑在马鞍上。
+		<br><br>
+
+		<<link [[继续|Riding School Lesson]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $worn.lower.integrity lte 50>>
+	你感到一阵微风，回头看了看。<span class="red">$worn.lower.cn_name_cap的残片挂在树枝上。风把它刮进了树冠。</span>
+	<br><br>
+	<<set $worn.lower.integrity -= 50>><<integritycheck no_text>><<exposure>>
+
+	<<covered>>似乎没有人注意到你的困境。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[寻找掩护|Riding School Lesson Ride]]>><</link>>
+	<br>
+	<<link [[找雷米帮忙|Riding School Lesson Ask]]>><<trauma 6>><<stress 6>><<npcincr Remy dom 1>><<fameexhibitionism 10>><</link>><<gtrauma>><<gstress>><<gdom>>
+	<br>
+<<else>>
+	<<set $worn.lower.integrity -= 50>>
+	你的衣服破旧不堪，但你仍能骑在马鞍上。
+	<br><br>
+
+	<<link [[继续|Riding School Lesson]]>><<endevent>><</link>>
+	<br>
+<</if>>

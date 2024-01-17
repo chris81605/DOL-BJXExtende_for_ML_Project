@@ -1,0 +1,29 @@
+:: Hospital Wait []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set _autosavehere to true>>
+<<set _hour to clone(Time.hour)>>
+<<for _i to 0; _i lt 12; _i++>>
+	<<set _hour++>>
+	<<if _hour % 24 gte 6 and _hour % 24 lte 9>>
+		<<set _multi to _hour - Time.hour>>
+		<<pass `1 * _multi` hour>><<tiredness `-12 * _multi`>><<effects>>
+		<<break>>
+	<</if>>
+<</for>>
+
+护士让你留在候诊室直到太阳升起。
+<br><br>
+
+<<if $renttime lte 0>>
+	<<link [[继续|Hospital Rent]]>><<pass 10>><<endevent>><</link>>
+	<br>
+<<elseif crimeSumCurrent() gte 1000>>
+	<<link [[继续|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+	<br>
+<<elseif $baileyhospital lte 2>>
+	<<link [[继续->Hospital Journey Home]]>><<pass 10>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续->Hospital front]]>><<pass 10>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,25 @@
+:: Clearing Weeding Tentacles []
+<<set $outside to 1>><<set $location to "cabin">>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+	<<tentaclestart 4 15 "vine" "vine" true>>
+	<<set $tentacles[0].shaft to "leftarm">><<set $leftarm to "tentgrappled">><<set $lefttarget to "tentacles">>
+	<<set $tentacles[1].shaft to "rightarm">><<set $rightarm to "tentgrappled">><<set $righttarget to "tentacles">>
+	<<set $timer to 50>>
+<</if>>
+<<statetentacles>>
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[继续|Clearing Weeding Tentacles Finish]]>><</link>></span><<nexttext>>
+<<elseif $timer lte 0>>
+	<span id="next"><<link [[继续|Clearing Weeding Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Clearing Weeding Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

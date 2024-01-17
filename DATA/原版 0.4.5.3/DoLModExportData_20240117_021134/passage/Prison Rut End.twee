@@ -1,0 +1,40 @@
+:: Prison Rut End []
+<<effects>>
+
+<<generate_relaxed_guard 0>>
+<<generate_anxious_guard 1>>
+<<generate_veteran_guard 2>>
+<<generate_methodical_guard 3>>
+
+当警卫把你拖到顶部时，你紧紧抓住绳子。<<relaxed_guard 0 cap>>和<<anxious_guard 1>>稳住你，但不会让你走得更远，仿佛随时准备把你推回去。
+<br><br>
+
+<<methodical_guard 3 cap>>伸出<<person4>><<his>>的手。你把钻石交给<<him>>。<<He>>仔细研究了一番然后皱眉。"是真的钻石，"<<he>>说道。"放开<<phim>>。"
+<br><br>
+
+<<veteran_guard 2 cap>>双臂交叉，"非常令人印象深刻，"<<he>>说，"这不是谎言。"<<lllsuspicion>><<prison_guards 12>>
+<br>
+<<if $prison.active_punishments.length gte 1>>
+	<span class="green">"其他的处罚都撤销了，对吗？"</span>
+	<br>
+	<<methodical_guard 3 cap>>点头。
+	<<remove_punishments>>
+	<<if _punishments_removed is true>>
+		"我来搞定文件。把装置移除，然后领<<phim>>出去。"
+		<br><br>
+		其他三人拿着各种金属仪器走了过来，很快又让你取回了几分尊严。
+		<br><br>
+	<<else>>
+		"我来搞定文件。领<<phim>>出去。"
+		<br><br>
+	<</if>>
+<<else>>
+	<<methodical_guard 3 cap>>点头。"我来搞定文件。领<<phim>>出去。"
+<</if>>
+<br><br>
+
+<<set $prison.active_punishments to []>>
+<<remove_punishments>>
+
+<<endevent>>
+<<destination_prison_walkway>>

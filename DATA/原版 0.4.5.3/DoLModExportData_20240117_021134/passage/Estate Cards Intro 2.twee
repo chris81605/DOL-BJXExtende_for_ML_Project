@@ -1,0 +1,46 @@
+:: Estate Cards Intro 2 []
+<<effects>>
+
+<<blackjackStart "Blackjack Finish">>
+<<person1>>
+<<set $wren_seen to "cards">>
+<<if $wren_intro is undefined>>
+	<<set $wren_intro to true>>
+	你拉开一把椅子，坐在桌子旁边。"很好，"<<if $pronoun is "m">>金发男人<<else>>金发女人<</if>>说道。"<span class="gold">我叫伦恩。</span>现在，我们把这场游戏变得有趣点怎么样？"
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"如果……如果我赢了，"你说道，"你得帮我个忙。"
+	<<elseif $speech_attitude is "bratty">>
+		"我不要你的钱，"你说道，"如果我赢了，你要帮我做件事。"
+	<<else>>
+		"不需要钱，"你说道，"如果我赢了，你得帮我做件事。"
+	<</if>>
+
+	<br><br>
+	伦恩笑了。"我接受。但如果我赢了。"<<He>>停顿了一下。
+	<<estate_cards_bet>>
+<<else>>
+	你拉开一把椅子，坐在桌子旁边。"很好，"伦恩说道，"你赢了，我帮你一个忙。如果我赢了。"<<He>>停顿了一下。
+	<<estate_cards_bet>>
+	<<if $estatePersistent.stakesRaised>>
+		<<if $estate.cards.bettingEnabled>>
+			<br><br>
+			"你也可以继续加注，我会投注跟你相同的金额，我的朋友们也会下注一些钱。"伦恩说。
+		<<else>>
+			<br><br>
+			"这次你没跟我们打赌，"伦恩说道，"钱都花光了？"伦恩微笑着问道。
+		<</if>>
+	<</if>>
+
+	<<if $estatePersistent.newDeckTimer is 0 and $estatePersistent.markedCards.size gt 0>>
+		<br><br>
+		"哦，顺便说一下，"伦恩说道，"<span class="blue">我们已经替换了上一局的牌组。</span>虽然我相信你已经注意到了，"<<he>>脸上带着狡黠的微笑。
+		<<set $estatePersistent.markedCards to new Set()>>
+		<<set $estatePersistent.newDeckTimer to 3>>
+	<</if>>
+<</if>>
+<br><br>
+
+
+<<cards_play_options>>

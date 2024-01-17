@@ -1,0 +1,31 @@
+:: Robin Cinema Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<npcoral>>
+	<<if $player.penisExist and (!$player.vaginaExist or random(0, 1))>>
+		<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+	<<else>>
+		<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+	<</if>>
+	<<set $enemytrust += 500>><<set $speechdisable to 1>>
+	<<set $enemyarousalmax to 600>>
+	<<set $timer to 5>>
+<</if>>
+
+<<set $enemyanger to 0>>
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Robin Cinema Sex Fail]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Robin Cinema Sex]]>><</link>></span><<nexttext>>
+<</if>>

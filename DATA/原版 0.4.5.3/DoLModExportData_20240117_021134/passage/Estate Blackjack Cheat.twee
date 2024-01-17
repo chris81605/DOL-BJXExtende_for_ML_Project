@@ -1,0 +1,66 @@
+:: Estate Blackjack Cheat []
+<<effects>>
+<<switch $blackjack.cheatChoice>>
+<<case "mark">>
+	<<blackjackGetCanMarkCount>>
+	你放下手中的牌，假装在思考策略。
+	<<if _can_mark_count gt 1>>
+		然后，你又用目光检查起自己的牌，你的眼珠慢慢扫过每张牌，似乎在沉思，而实际上你在牌上做了一个独特的标记。
+	<<else>>
+		然后，你又用目光扫视起自己的牌，似乎在沉思，而实际上，你在其中一张牌上做了一个独特的标记。
+	<</if>>
+	<br><br>
+	<<skulduggerycheck>>
+	<!-- helping the player not make a guaranteed suicidal choice here, if they don't intend to -->
+
+	<<if $skulduggerysuccess is 1>>
+		<<set $blackjack.susRoseInThisRound to true>>
+		<<blackjackSuspicion `8+_can_mark_count*2` "caughtmarkingcardsuccess">>
+		<<if $estatePersistent.suspicion gte 100>>
+			<<set $skulduggerysuccess to 0>>
+		<</if>>
+	<</if>>
+
+	<<if $skulduggerysuccess is 1>>
+		人们注意到你在这回合花了很长时间，但似乎并没有人注意到你在牌上做了标记。
+		<<gsuspicion>>
+		<br><br>
+		<<skulduggeryuse>>
+
+		<<link [[继续|Estate Blackjack]]>><</link>>
+	<<else>>
+		<<if $estatePersistent.suspicion lt 100>>
+			<<blackjackSuspicion 10000 "caughtmarkingcardfail">>
+		<</if>>
+		<br><br>
+		<<if $estate.cards.state is "ride">>
+			突然，发牌员走近伦恩，低声说了些什么。之后，你听到伦恩<span class="red">咯咯笑了出来。</span>
+			<br>
+			<<skulduggeryuse>>
+			<br><br>
+			<<He>>把背后那只手伸出来，从你手中捏出一张牌，向你展示了你做的标记。
+			<br>
+		<<else>>
+			你一抬头，发现伦恩<span class="red">正盯着你的眼睛。</span>
+			<br>
+			<<skulduggeryuse>>
+			<br><br>
+			<<He>>拿走了你的牌，指着你刚刚做的标记。"幸好被我逮着了。"
+			<br>
+		<</if>>
+
+		"想在牌上做手脚，哼？以为我们不会注意到？"<<he>>说道，"啧啧，这可行不通。"
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			"对、对不起，这是个意外！"你说道。
+		<<elseif $speech_attitude is "bratty">>
+			"怪你的发牌人吧，牌又不是我弄坏的，"你说道。
+		<<else>>
+			"我什么都没做，"你说道。
+		<</if>>
+		<br><br>
+
+		<<blackjackCheatingCaught>>
+	<</if>>
+	<br><br>
+<</switch>>

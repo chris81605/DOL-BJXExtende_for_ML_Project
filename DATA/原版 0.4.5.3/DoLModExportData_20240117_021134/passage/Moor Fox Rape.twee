@@ -1,0 +1,27 @@
+:: Moor Fox Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+
+	<<set $NPCList[0].stance to "top">><<set $enemytrust -= 40>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate '<span class="red"><<bHe>>直接冲着你发出尖叫，将你的尖叫声淹没。</span>'>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Moor Fox Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Moor Fox Rape]]>><</link>></span><<nexttext>>
+<</if>>

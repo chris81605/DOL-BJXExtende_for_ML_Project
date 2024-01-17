@@ -1,0 +1,124 @@
+:: Farm Bedroom []
+<<set $outside to 0>><<effects>><<getTarget true>>
+<<farm_work_update>>
+你位于艾利克斯的小屋中自己的房间内。房间十分拥挤，但比你在孤儿院的房间要大。你的床对面立着一个衣柜。在可以俯瞰农场的窗户边上有一张书桌。
+<br><br>
+
+<<if $unbind is 1>>
+	<<unset $unbind>>
+	你解开了身上的绑带。
+	<br><br>
+<</if>>
+
+<<if $alex_bed is "player">>
+	艾利克斯躺在你的床上，打着呼噜。
+	<<if Time.hour is 5>>
+		<<set $alex_bed to "none">><<npc Alex>><<person1>>
+		<<He>>打了个哈欠，拉开了被单。<<covered>>"该去准备早饭了。"<<he>>说道。
+		<<if $daily.alex.bedOrgasm>>
+			<<if $exposed gte 2>>
+				艾利克斯匆忙地用毛巾擦了擦<<his>>的衣服，然后递给你一个干净的毛巾，移开了视线。
+				<br><br>
+				<<switch random(1, 3)>>
+					<<case 1>>
+						"你、你是变态吗？这是我刚换的衣服，"<<he>>通红着脸说道。
+					<<case 2>>
+						"某、某人真是给一天开了个好头啊，死变态。"<<Hes>>脸红了。
+					<<case 3>>
+						"谢，谢谢你的包叫醒服务，"<<he>>脸红了，"这可比公鸡打鸣厉害多了。"
+				<</switch>>
+			<<else>>
+				艾利克斯递过来一块毛巾，指了指你湿掉的位置，然后移开了目光。
+				<br><br>
+				<<switch random(1, 3)>>
+					<<case 1>>
+						<<He>>伸了个懒腰。"衣服我待会去洗，首先，先去吃饭。"
+					<<case 2>>
+						"做了个好梦啊，嗯？"<<he>>笑着拍了拍你的肩膀，"里面有我吗？"
+					<<case 3>>
+						"谢谢你的包叫醒服务，"<<he>>笑出了声，"这可比公鸡打鸣厉害多了。"
+				<</switch>>
+			<</if>>
+		<</if>>
+		<<if $exposed gte 1>>
+			<<He>>离开房间时，假装没有偷看你。<<glust>><<npcincr Alex lust 1>>
+		<<else>>
+			<<He>>离开了房间，你听到楼梯在<<his>>脚下嘎吱作响。
+		<</if>>
+		<<endevent>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutfarmroad>>
+<<elseif $farm_attack_timer is 0 and Time.hour gte 21 and !$possessed>>
+	<<npc Alex>><<person1>>
+	艾利克斯冲下楼梯。<span class="red">"<<nnpc_Hes Remy>>来了，"</span><<he>>说，"我们能做到的，去做好准备，我去
+	<<if $farm.tower_guard>>
+		提醒一下$farm.tower_guard。"
+	<<else>>
+		看看能不能定位到他们的位置。"
+	<</if>>
+	<br><br>
+
+	<<farm_assault_intro>>
+	<br><br>
+
+	<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+	<br>
+<<else>>
+	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+		<<if $possessed>>
+			你低头看了看身上的绑带。你轻轻一拉，几乎没有遇到任何阻力，它们就散开了。
+			<br><br>
+			<<unbind>>
+		<<else>>
+			<<link [[解除束缚 (0:10)|Farm Bedroom]]>><<set $unbind to 1>><<pass 10>><<unbind>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if !($earSlime.event and $earSlime.noSleep)>>
+		<<bedicon>><<link [[脱光并爬到床上|Farm Bed]]>><<undressSleep "Farm Bed">><</link>>
+		<br>
+		<<listsleepoutfits "Farm Bed">>
+		<<roomoptions>>
+
+		<<wardrobeicon>><<link [[衣柜|Farm Wardrobe]]>><</link>>
+		<br>
+	<<else>>
+		<br>
+		<<if $possessed>>
+			<span class="red">你脑袋里的史莱姆很安静。</span>
+		<<else>>
+			<<ind>><span class="red">史莱姆想要你在上床睡觉前<<print $earSlime.event>>。</span>
+		<</if>>
+		<br>
+	<</if>>
+	<<if playerHasSexToys()>>
+		<<sextoysicon>><<link [[性玩具|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Farm Mirror">>
+		<span class="nextLink"><<mirroricon>><<link [[镜子|Farm Mirror]]>><<preMirror>><</link>></span>
+	<<else>>
+		<<mirroricon>><<link [[镜子|Farm Mirror]]>><<preMirror>><</link>>
+	<</if>>
+	<br>
+	<br>
+	<<bedicon "yellow">><<link [[艾利克斯的房间 (0:01)|Farm Alex Bedroom]]>><<pass 1>><</link>>
+	<br>
+	<<main_hall_icon>><<link [[下楼 (0:01)|Farm Cottage]]>><<pass 1>><</link>>
+	<br>
+	<br>
+	<<link [[设置|Farm Settings]]>><</link>>
+	<br>
+
+	<<attitudesControlCheck>>
+	<<if $attitudesControl.showGoldLink is true>>
+		<span class="goldLink"><<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>></span><span class="red">!!</span>
+	<<else>>
+		<<link [[态度|Attitudes]]>><<set $attitudesExitPassage to $passage>><</link>>
+	<</if>>
+	<br>
+<</if>>

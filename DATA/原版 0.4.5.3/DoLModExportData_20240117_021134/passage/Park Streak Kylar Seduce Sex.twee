@@ -1,0 +1,40 @@
+:: Park Streak Kylar Seduce Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 50>>
+	<<set $kylarClothes to $NPCList[0].clothes>>
+	<<npcstrip>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $kylar.raped += 1>>
+	<<set $kylarClothes to $NPCList[0].clothes>>
+	<<npcstrip>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lt $enemyhealthmax>>
+	<<set $consensual to 0>>
+	<<set $enemytrust -= 50>>
+	<<violence 1>>
+	<<npcincr Kylar love -1>><<npcincr Kylar rage 1>><<gksuspicion>>
+<</if>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Park Streak Kylar Seduce Sex Finish]]>><</link>></span>
+<<else>>
+	<span id="next"><<link [[继续|Park Streak Kylar Seduce Sex]]>><</link>></span>
+<</if>>

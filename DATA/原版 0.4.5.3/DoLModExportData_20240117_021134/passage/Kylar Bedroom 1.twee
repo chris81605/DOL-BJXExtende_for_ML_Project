@@ -1,0 +1,20 @@
+:: Kylar Bedroom 1 []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+你卧室的门半掩着，你从缝隙向里瞥了一眼，似乎没有什么不对劲——直到你检查了自己的衣柜。
+
+<<set _stolen to $wardrobe.under_lower.filter(n => n.one_piece != 1 && !n.type.includes("swim")).pluck()>>
+
+<<if _stolen>>
+	<span class="red">你的_stolen.cn_name_cap不见了。</span>你在地上找了找，但一无所获。
+	<<set $wardrobe.under_lower.delete(_stolen)>>
+	<<set $kylarStolenUnderwear to _stolen>>
+	<!-- Note to future developers: you can now use $kylarStolenUnderwear to refer to the underwear that Kylar stole. -->
+<<else>>
+	你挂着的衣服显得很松散，像是有人把它们取下后又匆匆忙忙地挂回去了一样。
+<</if>>
+<<gstress>><<stress 3>>
+<br><br>
+
+<<link [[卧室|Bedroom]]>><</link>>
+<br>

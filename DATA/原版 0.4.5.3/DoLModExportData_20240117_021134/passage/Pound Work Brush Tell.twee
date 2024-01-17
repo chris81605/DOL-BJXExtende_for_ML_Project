@@ -1,0 +1,61 @@
+:: Pound Work Brush Tell []
+<<effects>>
+
+<<if $tendingSuccess>>
+	"走开，"你说道。"咻！"
+	<br><br>
+	<<if $monster is 1>>
+		"好耶！"这只<<beasttype>>回应道，放开了你的腿。"现在刷我吗？"
+	<<else>>
+		<<beasttype>>回应了你的声调，松开了你的腿。
+	<</if>>
+	<<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	<<bHe>>躺了下来，你梳着<<bhim>>的毛。<<bHis>>最后舒服到踢脚。
+	<br><br>
+
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	"停，停下，"你命令道，但你很难保持镇定，<span class="red">而这只<<beasttype>>完全忽略了你。</span>
+	<br><br>
+	你试着给<<bhim 0>>梳毛。在你挣扎的时候，<<beasttype>>抵达了高潮，在你的腿上留了道湿暖的印记。<<garousal>><<arousal 600>>
+	<br><br>
+	<<if $NPCList[0].penis isnot "none">>
+		<<bodyliquid "thigh" "semen">>
+	<<else>>
+		<<bodyliquid "thigh" "goo">>
+	<</if>>
+	<<if $arousal gte 10000>>
+		这太过刺激了。<<orgasm>>
+
+		你摔到了地上。同时<<beasttype>>并未满足，又或者是被现况驱使着陷入新的狂热中。痉挛消退前，<<bHe>>就已经骑到了你的身上。
+		<br><br>
+		<<link [[继续|Pound Work Brush Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		至少在你梳着<<bhim>>时，<<bHes>>冷静了下来。
+		<br><br>
+
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[继续|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

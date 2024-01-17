@@ -1,0 +1,40 @@
+:: Farm Coop Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+		<<beastCombatInit>>
+
+<<set $NPCList[0].stance to "top">><<set $position to "doggy">>
+<<if Time.hour lt 21 or Time.hour gt 4>>
+	<<enable_rescue>>
+<</if>>
+<<farm_trust dogs>>
+<</if>>
+
+<<if setup.clothes.upper[clothesIndex('upper', $worn.upper)].sleeve_img isnot 1 and ($leftarm is "bound" or $rightarm is "bound") and $phase is 1>>
+	鸡群把你袖子剩余的部分扯成碎片，<span class="lblue">放开了你的手臂。</span>
+	<<unbind>>
+	<br><br>
+<<elseif $phase is 1>>
+	鸡群控制住了你的手臂。
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Coop Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Coop Rape]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,45 @@
+:: Island Beach Vore []
+<<set $outside to 1>><<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<molested>>
+	<<controlloss>>
+
+	<<if $tentacledisable is "f" and $hallucinations gte 1>>
+		<<set $enemytype to "tentacles">>
+		<<tentaclestart 2 15>>
+		<<set $voretentacles to 1>>
+	<<else>>
+		<<set $enemytype to "vore">>
+		<<set $voretentacles to 0>>
+	<</if>>
+
+	<<set $vorestage to 1>>
+	<<set $vorecreature to "giant lurker">>
+	<<set $vorestrength to 1>><<set $position to "doggy">>
+	<<resetLastOptions>>
+	<<getCombatDefaultsType>>
+<</if>>
+
+<<if $tentacledisable is "f" and $hallucinations gte 1 and $enemytype is "tentacles">>
+	<<voreeffects>><<effectstentacles>>
+	<<vore>><<tentacles>>
+	<<statetentacles>>
+	<br><br>
+	<<actionsvorentacles>>
+<<else>>
+	<<voreeffects>>
+	<<vore>>
+	<<voreactions>>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Island Beach Vore Finish]]>><</link>></span><<nexttext>>
+<<elseif $vorestage lte 0>>
+	<span id="next"><<link [[继续|Island Beach Vore Finish]]>><</link>></span><<nexttext>>
+<<elseif $vorestomach gte 5>>
+	<span id="next"><<link [[继续|Island Beach Vore Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Island Beach Vore]]>><</link>></span><<nexttext>>
+<</if>>

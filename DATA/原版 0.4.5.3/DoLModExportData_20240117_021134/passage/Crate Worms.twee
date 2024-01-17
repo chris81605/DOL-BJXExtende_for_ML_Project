@@ -1,0 +1,33 @@
+:: Crate Worms []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "worms" "容器" "在摇晃" "破裂着" "稳定" 1 9>>
+	<<set $timer to 30>>
+<</if>>
+<<if $timer gte 25>>
+	整个货箱因车辆的行进而颠簸着。
+<<elseif $timer gte 20>>
+	车虽然停下了，但引擎并没有熄火。
+<<elseif $timer gte 10>>
+	整个货箱因车辆的行进而颠簸着，这还要持续多久呢？
+<<elseif $timer gte 1>>
+	车辆停下来并熄火了！然而上面的重压仍使货箱的盖子被死死锁住，他们很快就会搬走的，对吧？
+<<else>>
+	你听到箱顶的重物被人移开了！
+<</if>>
+<br><br>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Crate Worms Passout]]>><</link>></span><<nexttext>>
+<<elseif $timer lte 0>>
+	<span id="next"><<link [[继续|Crate Worms Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Crate Worms]]>><</link>></span><<nexttext>>
+<</if>>

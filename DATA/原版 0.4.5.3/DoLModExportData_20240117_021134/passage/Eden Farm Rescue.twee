@@ -1,0 +1,83 @@
+:: Eden Farm Rescue []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+<<set $edendays to 0>>
+来到树荫下后，你感到了一阵安全感，但在到达小屋之前你没有停下脚步。你一进去，伊甸就拥抱了你。
+<br><br>
+
+"我找遍了整个城镇，"<<he>>说道，"但是都找不到你。我太担心了。"
+<br><br>
+
+<<if $worn.face.type.includes("gag")>>
+	<<He>>把手伸到你的头后面，帮你解开$worn.face.cn_name_cap。
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+<<if $pain gte 10 or $edenwhip is 1>>
+	当伊甸碰到伤口时，你畏缩了一下。"你受伤了，"<<he>>意识到后，拉开距离观察着你。
+	<br><br>
+
+	<<if $edenwhip is 1>>
+		<<He>>被鞭子的痕迹吓到了。
+	<</if>>
+	<<if $skin.left_bottom.special is "cattle">>
+		<<he>>看着你的牛烙印皱起眉头。
+	<</if>>
+	<<He>>把你领到餐桌前，让你躺下。<<He>>在照顾你伤口的时候，看起来很内疚。<<He>>似乎因为你的伤感到很自责。
+	<<if $skin.left_bottom.special is "cattle">>
+		<<He>>将一种奇怪的液体涂到你的牛烙印上，墨水从你的皮肤上流了下来。
+		<<bodywriting_clear left_bottom>>
+	<</if>>
+	在完成这些之后，<<he>>给你拿来了一杯水和一些止痛药，你一口气将其服下。<<He>>拉了一把椅子在你面前坐下。
+	<<lllpain>><<lltrauma>><<llstress>><<trauma -20>><<pain -200>><<stress -20>>
+	<br><br>
+<</if>>
+
+<<if $skin.left_bottom.special is "cattle">>
+		伊甸看到你的牛烙印后皱起了眉头。<<His>>让你坐在餐桌旁，然后涂上一种奇怪的液体。墨水从你的皮肤上流了下来。
+		<<bodywriting_clear left_bottom>>
+<</if>>
+
+<<if ($edenwhip is 1 or $skin.left_bottom.special is "cattle")>>
+	"这是谁干的？"伊甸问道。
+	<br>
+	"雷米，"你说。
+		<<if $edenshoutrescue is 1>>
+			"那个被你往脸上揍了一拳的人。"
+			<br>
+			"那家伙？"<<he>>问道，"真该多给那家伙几下。"
+		<</if>>
+<<else>>
+	"发生什么事了？"<<he>>问你。
+<</if>>
+<br><br>
+
+你告诉<<him>>你是如何被带到雷米的农场的，并谈论你被迫忍受的羞辱。
+<<if ($edenwhip is 1)>>
+	你还详细说明当你拒绝服从命令的时候，雷米是如何虐待你的。
+<</if>>
+在你叙述自己遭遇的过程中，伊甸的脸逐渐在愤怒、内疚和恐惧中扭曲。当你说完后，<<he>>把拳头一下砸到了桌子上。
+<br><br>
+
+"混蛋，"<<he>>喊道，"我需要更多的子弹。"
+<br>
+你把手放在<<his>>的肩膀上让<<him>>冷静下来。"我现在安全了，"你说道，"这才是最重要的。"
+<br>
+<<He>>抓住你的手，把你拉进一个更温柔的拥抱。"你说得对，"<<he>>说道，"你现在安全了。"
+<br><br>
+
+你试着离开<<him>>，但是<<he>>紧紧地抱着你。"下次请多加小心。我不想让你再处于危险之中了。"
+<br><br>
+
+你告诉<<him>>你不能承诺任何事情，但你以后会尽量保证自己的安全。伊甸点了点头，站起身，看上去有些疲惫。
+<br><br>
+
+<<if $edenshoutrescue is 1>>
+	"等等，"你说道。你把离开牛棚前偷到的帽子拿出来给了伊甸。<<He>>看起来震惊了一会儿，然后笑了。
+	<br>
+	"看来我给你的奖励还不够。你帮我省了一趟购物之旅！"<<He>>亲吻你的脸颊表示感谢，然后离开了桌子。
+<</if>>
+<<set $edenshoutrescue to 0>>
+<<set $edenwhip to 0>>
+<br><br>
+
+<<link [[继续|Eden Cabin]]>><<endevent>><</link>>

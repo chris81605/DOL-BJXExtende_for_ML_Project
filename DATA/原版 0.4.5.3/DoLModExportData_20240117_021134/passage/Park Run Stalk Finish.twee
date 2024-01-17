@@ -1,0 +1,82 @@
+:: Park Run Stalk Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $combat_end_text>>
+		<<print $combat_end_text>>
+	<<else>>
+		<<person>>抽打你的<<bottom>>，然后让你躺在草地上。
+	<</if>>
+	<br><br>
+	<<tearful>>你爬起身来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	你把那个<<person>>打倒在草地上，让<<him>>躺在那里，然后你转身开始逃跑。
+	<br><br>
+	<<tearful>>你靠在一棵树上休息。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $stalk_end is "escaped">>
+	你把<<person>>抛在后面，然后放慢脚步。<<tearful>>找到一棵树靠在树上休息。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $stalk_end is "passed">>
+	你深吸一口气。<<tearful>>你靠在一棵树上休息。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $stalk_end is "hide">>
+	<<covered>><<tearful>>你离开藏身之处并继续自己的行程。
+	<br><br>
+
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<if $exposed gte 1>>
+		<<switch $location>>
+		<<case alley>>
+			<<tearful>>你放慢脚步停下来。<<covered>>周围没有人，但这仍然是一个公共场所。
+		<<case forest lake>>
+			<<tearful>>你放慢脚步停下来。<<covered>>现在周围没有人，但不知道你在树林里会遇到谁。
+		<<case moor>>
+			<<tearful>>你放慢脚步停下来。<<covered>>周围没有人，但在这样一个开放的地方赤身裸体，无论如何都是让人胆战心惊的。
+		<<case park>>
+		<<default>>
+			<<covered>><<tearful>>你躲在一棵树后面，希望能遮挡住你的身体，以免被人窥视。
+		<</switch>>
+	<<else>>
+		<<tearful>>你缓缓停下。
+	<</if>>
+	<br><br>
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<</if>>

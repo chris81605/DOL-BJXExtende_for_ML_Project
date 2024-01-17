@@ -1,0 +1,33 @@
+:: Sea Eels []
+<<if $location isnot "sea">><<location "sea">><</if>><<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "eels" "鳗鱼" "向你移动" "包围着你" "击退" 1 9>>
+
+	<<set $swimdistance to 15>>
+	<<set $water to 1>>
+<</if>>
+<<if $swimdistance gte 20>>
+	你需要开始向浮标游去！
+<<elseif $swimdistance gte 10>>
+	浮标还在很远的地方。
+<<elseif $swimdistance gte 5>>
+	你已经游过了距离浮标一半的路程。
+<<elseif $swimdistance gte 1>>
+	你就快到浮标处了。
+<<else>>
+	浮标就在咫尺之间！
+<</if>>
+<br><br>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+<<if $stress gte $stressmax or $swimdistance lte 0>>
+	<span id="next"><<link [[继续|Sea Eels Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Eels]]>><</link>></span><<nexttext>>
+<</if>>

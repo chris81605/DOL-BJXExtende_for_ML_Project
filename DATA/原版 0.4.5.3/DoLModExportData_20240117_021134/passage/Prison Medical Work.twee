@@ -1,0 +1,29 @@
+:: Prison Medical Work []
+<<effects>>
+<<generate_methodical_guard 0>><<person1>>
+<<if $prison.methodical gte 1 and $NPCList[0].name_known isnot 1>>
+	<<methodical_guard 0 cap>>哼了一声，示意知道你来了。但<<He>>也没更多时间好好示意。只听得<span class="red">一声巨响</span>，橱柜突然打开，一个黑影掠过房间。
+	<br><br>
+	"把门关上！"<<methodical_guard 0>>喊道。"关上！"
+	<br><br>
+	那个生物跳上<<methodical_guard 0 apo>>的桌子，留下散落一地的纸堆。
+	<br><br>
+
+	<<link [[抓住这个生物|Prison Medical Catch]]>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+	<<link [[看着|Prison Medical Watch]]>><</link>>
+	<br>
+<<elseif $prison.medical_intro is 1>>
+	<<methodical_guard 0 cap>>哼了一声，示意知道你来了。
+	<<endevent>>
+	<br><br>
+
+	<<prison_medical_options>>
+<<else>>
+	<<set $prison.medical_intro to 1>>
+	当你走近时，<<methodical_guard 0 cap>>用手戳了戳一个缠着绷带的病人的脚。病人痛得大叫。"活该，"<<methodical_guard 0>>说着，记下了一些东西。<<He>>注意到了你。"你想在这里工作？好吧。照我说的做，离橱柜远点。"
+	<<endevent>>
+	<br><br>
+
+	<<prison_medical_options>>
+<</if>>

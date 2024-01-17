@@ -1,0 +1,38 @@
+:: Office Meeting End []
+<<effects>>
+<<tiredness 3>>
+<<if $worn.lower.name isnot "naked">>
+	好像过了很久，会议开始结束了。你把完成的笔记交给<<person2>><<person>>审阅。
+	<br>
+	<<if currentSkillValue("english") gte 700>>
+		"看起来没什么问题。我们的合作伙伴将能够很好地利用这些。谢谢你！"
+		<<set $meetingTip += 5>>
+	<<elseif currentSkillValue("english") gte 400>>
+		"这些就行了。如果我们的合作伙伴有什么不明白的地方，我一定会告诉他们的。"
+		<<set $meetingTip += 3>>
+	<<else>>
+		"你是在动物园里学会写字的吗？你们的老师真该为你感到羞耻，我不能按照这些会议记录来工作。"
+		<<set $meetingTip++>>
+	<</if>>
+	<br>
+	<<tipset>><<He>>递给你一笔小费，然后走出房间。<<assignmenttip $meetingTip>>
+<<else>>
+	你设法在没有人意识到你的<<lewdness>>的情况下完成了剩下的会议。<<person2>><<person>>走到你面前，记下了完整的笔记，看着你慌张的样子。
+	<br><br>
+	<<if currentSkillValue("english") gte 700>>
+		"你看起来有点激动。我向你保证，这些笔记非常好。下次别那么辛苦了，好吗？"
+		<<set $meetingTip += 8>>
+	<<elseif $meetingTip gte 400>>
+		"看起来你在努力跟上会议进度。这些笔记足够了。谢谢。"
+		<<set $meetingTip += 3>>
+	<<else>>
+		"浪费了那么多精力，这就是你能想出的最好的办法吗？我想这就是你雇佣一个青少年来做一个成年人的工作所发生的事情。"
+		<<set $meetingTip += 0>>
+	<</if>>
+	<br>
+	<<tipset>><<He>>递给你一笔小费，然后走出房间。<<assignmenttip $meetingTip>>
+	<br><br>
+	你等房间完全清空后，再把你被脱走的衣服拿回来。
+	<<storeon "meeting_room">>
+<</if>>
+<<completeassignment>>

@@ -1,0 +1,31 @@
+:: Home Intervene Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<set $enemyno to 1>><<set $enemynomax to 1>><<maninit>>
+	<<set $enemyhealthmax += 200>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	你向贝利的小腿踢了一脚，但<<he>>躲开并把你绊倒了。然而，在<<he>>抓住你的破绽前，<<person2>><<person>>先跳到贝利的背上，并扯着<<person1>><<he>>的头发。贝利把<<person2>><<person>>甩到墙上，<<he>>在那摔成了一团。<<person1>>
+	<br><br><br><br>
+	<<set $phase to 1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+
+<<if $phase is 1>><<set $phase to 2>>
+	孤儿们被噪音所吸引，前来观战。
+	<br><br>
+<</if>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Home Intervene Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Home Intervene Fight]]>><</link>></span><<nexttext>>
+<</if>>

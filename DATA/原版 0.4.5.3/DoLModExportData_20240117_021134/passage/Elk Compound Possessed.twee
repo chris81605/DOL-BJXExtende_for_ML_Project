@@ -1,0 +1,38 @@
+:: Elk Compound Possessed []
+<<effects>>
+
+你正待在麋鹿街的大院里，这里有三座被铁围栏圈住的红砖建筑，大门口则由警卫把守着。
+<<if $compoundalarm gte 1>>
+	<span class="red">你现在属于非法入侵。</span>
+<</if>>
+<br><br>
+
+你<<wraithShamble>>向中央大楼走去，抵达了门口。你伸手去拉门把手，但它被锁住了。
+<br><br>
+
+<<if $compoundWraith is "willing">>
+	<<set $lock to 300>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">这把锁看起来很容易撬开。</span>你的手恢复了知觉。
+		<br><br>
+		<<lockpickicon>><<link [[闯入 (0:05)|Elk Compound Possessed 2]]>><<set $phase to 1>><<pass 5>><</link>>
+		<br>
+		<<ind>><<link [[交给苍白的身影处理|Elk Compound Possessed 2]]>><<set $phase to 2>><</link>><<gtrauma>>
+	<<else>>
+		<span class="red">这把锁看起来超出了你的能力范围。</span>
+		<<skulduggeryrequired>>
+		<br><br>
+
+		那个苍白的身影清了清嗓子，让你仍然向前走，像穿过果冻一样穿过了门。这种感觉非常奇怪。
+		<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		<span class="nextLink"><<link [[继续|Elk Compound Possessed 2]]>><<set $phase to 0>><</link>></span>
+	<</if>>
+<<else>>
+	苍白的身影让你仍然向前走，像穿过果冻一样穿过了门。这种感觉非常奇怪。
+	<<trauma 6>><<gtrauma>>
+	<br><br>
+
+	<span class="nextLink"><<link [[继续|Elk Compound Possessed 2]]>><<set $phase to 0>><</link>></span>
+<</if>>

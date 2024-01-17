@@ -1,0 +1,53 @@
+:: Farm Horses Out []
+<<effects>>
+
+你打开每个马厩，释放里面的<<farm_text_many horse>>。它们知道自己要去哪里，但你还是先把它们引到了小路上，再打开通往田野的大门。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure) and $horsedisable is "f">>
+<!-- Modified for Monster People -->
+	<<if $bestialitydisable is "f" or $farm_work.pig.monster is true>>
+		大多数马跑了出去，急切地想要伸展自己的腿，但也有一些马懒散地跟在后面。
+		<<if $farm_work.horse.monster is true>>
+			其中一匹挡在你面前，把你从门口推开。"我们不喜欢被关在圈舍里，"<<farm_he horse>>说道，一双有力的手从你背后抓住了你的肩膀，"你可以通过一些方式向我们道歉。"
+			<br><br>
+			后面的半人马用手抓着你的手臂，将它们固定在你的身体两侧，而前面的半人马则用手指沿着你的胸膛向下移动。<<gstress>><<stress 6>>
+			<br><br>
+
+			<<link [[训斥|Farm Horses Scold]]>><</link>><<tendingdifficulty 1 800>>
+			<br>
+			<<link [[呼唤艾利克斯|Farm Horses Alex]]>><<farm_horses -1>><<npcincr Alex dom 1>><</link>><<lrespect>><<gdom "Alex">>
+			<br>
+			<<link [[忍耐|Farm Horses Endure]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+			<br>
+		<<else>>
+			其中一只用鼻子把你从门口推开，而另一只则阻止你逃跑。<<gstress>><<stress 6>>
+			<br><br>
+
+			<<if $farm.beasts.horses lte -20>>
+				<<link [[训斥|Farm Horses Scold]]>><</link>><<tendingdifficulty 1 1200>>
+				<br>
+			<<else>>
+				<<link [[训斥|Farm Horses Scold]]>><</link>><<tendingdifficulty 1 800>>
+				<br>
+			<</if>>
+			<<link [[呼唤艾利克斯|Farm Horses Alex]]>><<farm_horses -1>><<npcincr Alex dom 1>><</link>><<lrespect>><<gdom "Alex">>
+			<br>
+			<<link [[忍耐|Farm Horses Endure]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+			<br>
+		<</if>>
+	<<else>>
+		它们跑了出去，急切地想要伸展自己的腿。其中一只在经过你时，推挤了你一下，把你撞倒在地。<<gpain>><<pain 4>><<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	它们跑了出去，急切地想要伸展自己的腿。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,56 @@
+:: Livestock Job Pig Gang Rape Finish []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Job Pig Gang Rape]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+
+		<<link [[继续|Livestock Job Pig Gang Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Job Pig Gang Rape]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Livestock Job Pig Gang Rape Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<else>>
+	"搞定了，"尼奇说着离开了镜头。
+	<br><br>
+	<<if $enemywounded gte 2 and $enemyejaculated is 0>>
+		<<beastsplural>>害怕地后退，没有得到他们想要的东西，但观众们似乎很开心。他们为这场战斗鼓掌。
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		在观众的掌声中，这些<<beastsplural>>让你精疲力竭，瑟瑟发抖。
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		在观众的掌声中，这些<<beastsplural>>让你精疲力竭，瑟瑟发抖。
+	<</if>>
+	<<if $enemyejaculated gte 1>>
+		<<famebestiality 30>>
+	<</if>>
+	<<if playerBellyVisible()>><<famepregnancy `Math.ceil(playerBellySize() / 10)`>><</if>>
+	<br><br>
+
+
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Remy>><<person1>>
+	<<tearful>>你被雷米拽着站了起来。"好<<girl>>，"<<he>>把你拉向出口，农场工人帮助尼奇拆除布景。"我们的顾客很喜欢。"
+	<br><br>
+
+	<<link [[继续|Livestock Job End]]>><<endevent>><</link>>
+<</if>>

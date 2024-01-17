@@ -1,0 +1,51 @@
+:: Industrial Ladder []
+<<effects>>
+
+你在小巷里找个能撑在布莱尔窗户下面的东西。
+<<if $rng gte 71>>
+	<<generate1>><<generate2>>
+	<span class="green">你发现一个梯子侧躺着。</span>一<<fullGroup>>坐在上面聊天。他们转过头来看着你。"你想要什么，<<girl>>？"
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我可以用一下那架梯子吗？"你问，"如果你们没在用它的话。"
+	<<elseif $speech_attitude is "bratty">>
+		"让开，"你挥舞着手臂说道。"我需要梯子。"
+	<<else>>
+		"我想要那个梯子，"你说道，"你们能挪一挪吗？"
+	<</if>>
+	<br><br>
+
+	"梯子？"<<person2>><<person>>问道。"那我们能得到什么好处？"
+	<br><br>
+
+	<<if $money gte 10000>>
+		<<link [[付钱让他们搬 (£100)|Industrial Ladder Pay]]>><<set $money -= 10000>><</link>>
+	<<else>>
+		<span class="blue">你认为你没有足够的钱来满足他们。</span>
+	<</if>>
+	<br>
+	<<if $promiscuity gte 35>>
+		<<link [[勾引|Industrial Ladder Seduce]]>><</link>><<promiscuous2>>
+	<<else>>
+		<span class="blue">你还没有淫乱到勾引他们的地步。</span>
+	<</if>>
+	<br>
+	<<if $submissive gte 1500>>
+		<<link [[恳求|Industrial Ladder Beg]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[离开|Industrial alleyways]]>><<endevent>><</link>>
+<<else>>
+	<span class="red">你找不到任何有用的东西。</span>
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>><<rng>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<link [[继续寻找|Industrial Ladder]]>><</link>>
+		<br>
+		<<link [[放弃|Industrial alleyways]]>><</link>>
+	<</if>>
+<</if>>

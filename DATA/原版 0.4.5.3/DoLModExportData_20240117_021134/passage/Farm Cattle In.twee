@@ -1,0 +1,32 @@
+:: Farm Cattle In []
+<<effects>>
+
+<<farm_text_many dog>>帮助你把<<farm_text_many cattle>>赶进了牛棚。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $farm.beasts.dogs gte 20>>
+		<<farm_text_many dog>>看起来焦躁不安，<span class="green">但你坚定的目光足以让它们保持专注。</span>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<<else>>
+		<<if $farm.beasts.cattle gte 20>>
+			<<farm_text_many dog>>看起来很激动。其中一只对着你咆哮并露出牙齿，<span class="green">直到一只<<farm_text cattle>>从牛群中跑出来，站在你和<<farm_text dog>>之间做出保护的姿态。</span>
+			<br><br>
+			狗没有继续打扰你。<<grespect>><<farm_dogs 1>>
+			<br><br>
+		<<else>>
+			<<farm_text_many dog>>似乎很激动，对着你和牛一起咆哮。<<gstress>><<stress 6>>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

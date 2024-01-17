@@ -1,0 +1,93 @@
+:: Pharmacy Encounter Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+
+	<<if $worn.lower.name isnot "naked">>
+		<<set $NPCList[0].lefthand to "lowerclothes">>
+		<<set $NPCList[0].righthand to "lowerclothes">>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		<<set $NPCList[0].lefthand to "underlowerclothes">>
+		<<set $NPCList[0].righthand to "underlowerclothes">>
+	<</if>>
+	<<set $NPCList[0].mouth to "penisentrance">>
+	<<set $NPCList[0].location.head to "genitals">>
+	<<npcidlegenitals>>
+	<<set $enemytrust += 100>>
+	<<set $position to "doggy">>
+	<br><br>
+<</if>>
+
+<<set $exposedPrev to $exposed>>
+<<effectsman>>
+<<man>>
+<<exposure>>
+
+<!-- Reaction to seeing penis for the first time during encounter -->
+<<if $exposed is 2 and $exposedPrev lt 2>> <!-- if penis was exposed just now -->
+	<<if playerChastity()>>
+		"这他妈的是什么？"<<he>>看着你的<<genitals>>，"这一点也不好笑！"
+		<br>
+		<<He>>沉默了片刻。
+		<br>
+		"我不想继续了，快滚吧。"
+		<br>
+		"多么令人失望，"<<he>>平静地补充道。
+		<<set $finish to 1>><<set $phase to "chastity">>
+	<<elseif $player.penissize lte 0>>
+		<<He>>的脸在你露出你的<<penis>>后便一下子僵住了。
+		<<if $player.penissize lte random(-2,1)>> <!-- More likely at smaller sizes; guaranteed at smallest, but never impossible -->
+			"他妈的什么鬼？你在开玩笑吗？这就是你想让我看到的么？"<<He>>笑了起来。
+			<br><br>
+
+			<<He>>在停了一会后说道："是的，我现在没有心情了。"
+			<<incggpenisinsecurity>>
+			<br><br>
+
+			<<He>>起身整理<<his>>的衣服，然后回到收银台和<<his>>书本前。
+			<<set $finish to 1>><<set $phase to "tiny">>
+		<<else>>
+			"哇，好可爱。"<<he>>笑了起来。
+			<<incggpenisinsecurity>>
+		<</if>>
+	<<elseif $player.penissize is 1>>
+		<<if $rng gte 70>>
+			当你掏出你的<<penis>>时，你听到了嘲笑声，但<<he>>什么也没说。
+		<<else>>
+			<<He>>在你掏出你的<<penis>>后愣了一下。"额，就这样？我还以为你的裤子里像是有什么特别的东西，"<<he>>说道。
+			<br><br>
+
+			"这并没有给我留下任何深刻印象，我有点失去了继续下去的欲望，多买点药，等你变大了再回来。"
+			<<incggpenisinsecurity>>
+			<br><br>
+
+			<<He>>起身整理<<his>>的衣服，然后回到收银台和<<his>>书本前。
+			<<set $finish to 1>><<set $phase to "small">>
+		<</if>>
+	<<elseif $player.penissize is 3>>
+		当你的<<penis>>漏出来时，你听到一阵惊讶的喘息声。
+		<br>
+		当你看向<<his>>的脸时，你发现<<his>>的眼睛都亮了起来。
+	<<elseif $player.penissize gte 4>>
+		"妈的，"当你的<<penis>>下垂时，你听到了喃喃低语。
+		<br>
+		你低下头看去，发现<<him>>正目瞪口呆地盯着你的肉棒。
+		<<if $insecurity_penis_big gte 1 and $acceptance_penis_big lte 999>>
+			<<acceptance "penis_big" 10>><<gacceptance>>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $finish isnot 1>>
+	<<stateman>>
+	<<actionsman>>
+<</if>>
+
+<<if _combatend or $finish is 1>>
+	<span id="next"><<link [[继续|Pharmacy Encounter Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Pharmacy Encounter Sex]]>><</link>></span><<nexttext>>
+<</if>>

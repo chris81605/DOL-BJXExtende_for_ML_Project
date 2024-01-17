@@ -1,0 +1,43 @@
+:: Bird Tower Perch Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<if $phase is 1>>
+		你快速转身，
+		<<if $monster is 1>>
+			你把<<beasttype>>推倒，并在<<bhis>>嘴唇上吻了一下。<<takeKissVirginity "Great Hawk" `($syndromebird is 1?"loveInterest":"romantic")`>>
+			<br><br>
+			<<bHis>>的翅膀紧紧地包裹着你。
+		<<else>>
+			这突然的举动让<<beasttype>>措手不及。
+		<</if>>
+		<<deviancy1>>
+	<<else>>
+		<<deviancy2>>
+	<</if>>
+	<<set $enemytrust += 200>>
+	<<set $enemyhealthmax to 600>>
+	<<set $enemyhealth to 600>>
+	<<if $monster isnot 1>>
+		<<set $position to "doggy">>
+		<<set $NPCList[0].stance to "top">>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Bird Tower Perch Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bird Tower Perch Sex]]>><</link>></span><<nexttext>>
+<</if>>

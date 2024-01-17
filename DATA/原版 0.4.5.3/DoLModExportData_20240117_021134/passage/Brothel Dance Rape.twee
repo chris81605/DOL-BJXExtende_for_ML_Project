@@ -1,0 +1,44 @@
+:: Brothel Dance Rape []
+<<if $corruptionDancing is 2>>
+	<<unset $corruptionDancing>>
+	<<set $molestationstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+<<elseif $molestationstart is 1>>
+	<<unset $corruptionDancing>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<br>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Brothel Dance Rape Finish]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Brothel Dance Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Brothel Dance Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Brothel Dance Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Brothel Dance Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Brothel Dance Rape]]>><</link>></span><<nexttext>>
+<</if>>

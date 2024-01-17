@@ -1,0 +1,34 @@
+:: Hospital Paternity Test []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+<<generate1>><<person1>>
+接待员在<<his>>的电脑上敲了几下，指示你在等候室里坐下来。
+<br><br>
+<<endevent>>
+
+<<harper_intro>>
+
+"过程很简单，我只需要一份你和可能的父亲的DNA样本。不过报告出来可能要等一段时间。"<<he>>说。
+<br><br>
+
+"价格是<<printmoney 500000>>。"
+<br><br>
+
+<<if $money gte 5000>>
+
+	<<procedureicon "paternity">>
+
+	<<if C.npc.Alex.pregnancy.sample is true>>
+		<<ind>><<link [[为艾利克斯检测 (1:00)|Hospital Paternity Test 2]]>><<set $money -= 500000>><<set $paternityTestNPC to "Alex">><</link>>
+		<br>
+
+	<</if>>
+
+<<else>>
+	<span class="blue">你的钱不够。</span>
+	<br>
+
+<</if>>
+
+<<getouticon>><<link [[离开|Hospital Foyer]]>><<endevent>><</link>>
+<br>

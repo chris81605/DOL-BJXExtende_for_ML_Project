@@ -1,0 +1,49 @@
+:: Farm Kennel Fight Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	你设法把这袋狗零食放在身边。其他的狗没有什么动作，至少现在是这样。
+	<br><br>
+
+	<<tearful>>你挣扎着站了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<if !$kennel_treats>>
+		<<link [[继续|Farm Work]]>><</link>>
+	<<else>>
+		<<beastNEWinit 1 dog>>
+		<<kennel_treat_options>>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+
+	这只<<beasttype>>畏缩着从你身边退开。其他的<<beasttype>>没有尝试做出其他动作。<<ggrespect>><<farm_dogs 1>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<if !$kennel_treats>>
+		<<link [[继续|Farm Work]]>><</link>>
+	<<else>>
+		<<beastNEWinit 1 dog>>
+		<<kennel_treat_options>>
+	<</if>>
+<<else>>
+
+	<<kennel_treats -100>>当你倒下时，<<beastsplural>>对你失去了兴趣。它们撕开食物袋，大快朵颐。<<llrespect>><<farm_dogs -3>>
+	<br><br>
+
+	<<tearful>>你在狗窝里踉踉跄跄地。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<</if>>

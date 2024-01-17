@@ -1,0 +1,41 @@
+:: Brothel Show Tentacles []
+<<effects>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<set $enemytype to "tentacles">>
+	<<neutral 1>>
+	<<tentaclestart 12 15 "tentacle" "metal">>
+<</if>>
+
+<<statetentacles>>
+<<effects>>
+<<effectstentacles>>
+
+<<if $phase is 0>>
+	眼睛适应了灯光后，你得以再次看清楚观众们。他们都穿着得体，大部分都坐在座位上。
+	<<set $phase to 1>>
+	<br><br>
+<<elseif $phase is 1 and ($penisfucked is 1 or $vaginafucked is 1 or $anusfucked is 1)>>
+	<<if $vaginafucked is 1>>
+		<<set _tentacle to $tentacleVagina>>
+	<<elseif $penisfucked is 1>>
+		<<set _tentacle to $tentaclePenis>>
+	<<else>>
+		<<set _tentacle to $tentacleAnus>>
+	<</if>>
+	观众在触手插入你时发出了一阵礼貌的欢呼。你听到了玻璃杯相碰的声音。
+	<<set $phase to 2>>
+	<br><br>
+<</if>>
+
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[继续|Brothel Show Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Show Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

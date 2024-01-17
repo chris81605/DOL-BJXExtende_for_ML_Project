@@ -1,0 +1,31 @@
+:: Maths Whitney Shirt Forced []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	当惠特尼压在你身上时，全班围成了一圈。
+	<<if $whitneyShirtRiver is "awake">>
+		在混乱的场面中，你隐约听到了瑞沃的声音。
+		<<set $timer to 10>>
+	<</if>>
+	<<controlloss>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or
+	($whitneyShirtRiver is "awake" and $timer lte 0) or
+	($worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked"))
+>>
+	<span id="next"><<link [[继续|Maths Whitney Shirt Forced Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Maths Whitney Shirt Forced]]>><</link>></span><<nexttext>>
+<</if>>

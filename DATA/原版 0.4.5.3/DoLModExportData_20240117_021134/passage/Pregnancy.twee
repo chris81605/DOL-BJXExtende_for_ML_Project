@@ -1,0 +1,276 @@
+:: Pregnancy [widget]
+<<widget "moveCreature">>
+	/*0 -> _pregnancy.fetus[_i] or location (any but portable)*/
+	/*1 -> Type*/
+	/*2 -> locationId*/
+	<<if _args[0] isnot null and _args[1]>>
+		<<set _portable to $container.portable>>
+		<<set _container to $container[$phase]>>
+		<<set $_pregnancy to $sexStats[_args[3] or "anus"].pregnancy>>
+
+		<<set _result to _args[1]>>
+		<<switch _args[0]>>
+			<<case 0 1 2 3>>
+				<!-- With a number as argument 0, it takes the parasite of that argument in your current pregnancy item -->
+				<<set _creature to clone($_pregnancy.fetus[_args[0]])>>
+			<<default>>
+				<!-- With a string as argument 0, it takes a parasite from the container matching the argument. Which parasite it takes corresponds to argument 2 -->
+				<!-- Currently only used when transferring parasites for selling in :: Containers, inside a for loop -->
+				<<if _args[2] isnot null>>
+					<<set _creature to clone($container[_args[0]].creatures[_args[2]])>>
+				<</if>>
+		<</switch>>
+
+		<<if _creature>>
+			<<if _result is "destroy">>
+				<!-- Simply gets rid of the parasite -->
+				<<set _creature to null>>
+				<<removeCreature _args[0] _args[2] _args[3]>>
+			<<elseif _result is "portable">>
+				<!-- Transfers the parasites for selling. The value of the parasite depends on its growth stat -->
+				<<set _portable.creatures.push(clone(_creature))>>
+				<<set _value to Math.floor(1000 / _creature.stats.growth)>>
+				<<set _portable.value += _value>>
+				<<removeCreature _args[0] _args[2] _args[3]>>
+			<<elseif _result is "replace" and _args[2] isnot null and _args[0] gte 0 and _args[0] lte 3>>
+				<!-- Replaces an existing parasite, for when you birth more than you can currently store -->
+				<!-- The replaced parasite gets transferred for selling -->
+				<<if _container.creatures[_i] isnot undefined>>
+					<<if _container.creatures[_i] isnot null>>
+						<<set _portable.creatures.push(clone(_container.creatures[_args[2]]))>>
+						<<set _value to Math.floor(1000 / _container.creatures[_args[2]].stats.growth)>>
+						<<set _portable.value += _value>>
+						<<set _container.creatures[_args[2]] to clone(_creature)>>
+						<<set _replaced to true>>
+					<</if>>
+				<</if>>
+				<<if _replaced isnot true>>
+					<<set _container.creatures[_args[2]] to clone(_creature)>>
+					<<set _container.count += 1>>
+				<</if>>
+				<<removeCreature _args[0] undefined _args[3]>>
+			<<elseif _result is "container">>
+				<!-- Keeps the parasite and moves it to the current container -->
+				<<set _moveTo to false>>
+				<<for _containerSlot to 0; _containerSlot lt _container.maxCount; _containerSlot++>>
+					<<if _container.creatures[_containerSlot] is undefined>>
+						<<set _moveTo to true>>
+					<<elseif _container.creatures[_containerSlot] is null>>
+						<<set _moveTo to true>>
+					<</if>>
+					<<if _moveTo is true>>
+						<<set $container[$phase].creatures[_containerSlot] to clone(_creature)>>
+						<<set $container[$phase].count += 1>>
+						<<removeCreature _args[0] _args[2] _args[3]>>
+						<<break>>
+					<</if>>
+				<</for>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "removeCreature">>
+	<<if _args[0] isnot null>>
+		<<set $_pregnancy to $sexStats[_args[2] or "anus"].pregnancy>>
+		<<switch _args[0]>>
+			<<case 0 1 2 3>>
+				<!-- With a number as argument 0, it removes the parasite of that argument in your current pregnancy item -->
+				<<set $_pregnancy.fetus[_args[0]].toDelete to true>>
+				<<set $_pregnancy.parasiteBirthEvents += 1>>
+				<<if $_pregnancy.motherStatus is 0 and $_pregnancy.parasiteBirthEvents gte 3>>
+					<<set $_pregnancy.motherStatus to 1>>
+				<</if>>
+			<<default>>
+				<!-- With a string as argument 0, it removes a parasite from the container matching the argument. Which parasite it takes corresponds to argument 1 -->
+				<<if _args[1] isnot null>>
+					<<set $container[_args[0]].creatures[_args[1]] to null>>
+					<<set $container[_args[0]].count -= 1>>
+				<</if>>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "clearToDeleteParasiteFetus">>
+	<<if $sexStats.anus.pregnancy.type is "parasite">>
+		<<run $sexStats.anus.pregnancy.fetus to $sexStats.anus.pregnancy.fetus.filter(child => child && !child.toDelete)>>
+		<<if $sexStats.anus.pregnancy.fetus.length is 0>>
+			<<set $sexStats.anus.pregnancy.type to null>>
+		<</if>>
+	<</if>>
+	<<if $sexStats.vagina.pregnancy.type is "parasite">>
+		<<run $sexStats.vagina.pregnancy.fetus to $sexStats.vagina.pregnancy.fetus.filter(child => child && !child.toDelete)>>
+		<<if $sexStats.vagina.pregnancy.fetus.length is 0>>
+			<<set $sexStats.vagina.pregnancy.type to null>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "menstruationCycleState">>
+	<<set $sexStats.vagina.menstruation.running to $player.vaginaExist or (!$player.vaginaExist and $skin and $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy") or ($earSlime and $earSlime.growth gte 100 and ["pregnancy", "mixed"].includes($earSlime.focus))>>
+<</widget>>
+
+<<widget "menstruationCycle">>
+	<<set _menstruation to $sexStats.vagina.menstruation>>
+	<<if _args[0] is "daily">>/*Daily cycle*/
+		<<set _menstruation.nonCycleRng.push(random(0,6))>>
+		<<set _menstruation.nonCycleRng.deleteAt(0)>>
+	<<elseif _args[0] is "overdose">>/*Daily cycle*/
+		<<set _menstruation.nonCycleRng[0] to 0>>
+	<</if>>
+
+	<<menstruationCycleState>>
+
+	<<if _menstruation.running is true>>
+		<<set [$_pregnancy, $_pregLocation] to getPregnancyObject("pc", true)>>
+		<<set _pills to $sexStats.pills>>
+		<<switch _menstruation.currentState>>
+			<<case "normal">>
+				<<if $harpy gte 6 and $harpyEggs and $sexStats[$_pregLocation].sperm.find(source => sorce.type is "hawk")>>
+					<<playerPregnancyHawkAttempt $_pregLocation>>
+					<<if $_pregnancy.type is "hawk">><<exit>><</if>>
+				<</if>>
+				<<if $cycledisable is "t">>
+					<<playerPregnancyAttempt `Math.pow(4,_menstruation.nonCycleRng[0])` $_pregLocation>>
+				<<elseif _menstruation.currentDay lt _menstruation.currentDaysMax>>
+					/*Continue the cycle again*/
+					<<if _menstruation.currentDay gte _menstruation.currentDaysMax / 2 and _menstruation.lastDaysMax isnot _menstruation.currentDaysMax>>
+					<</if>>
+					<<if _menstruation.currentDay lt _menstruation.stages[1]>>
+						/*Menstrual phase - period occurs right at the start of this part*/
+						<<if _pills.pills["fertility booster"].doseTaken gte 2>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy">>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if (_pills.pills["contraceptive"].doseTaken gte 1 and random(0,100) gte 50) or _pills.pills["contraceptive"].doseTaken gte 2>>
+						<<else>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+					<<elseif _menstruation.currentDay lt _menstruation.stages[2]>>
+						/*Follicular phase*/
+						<<if _pills.pills["fertility booster"].doseTaken gte 2 and _menstruation.currentDay lt _menstruation.stages[2]>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy" and _menstruation.currentDay lt _menstruation.stages[2]>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if _menstruation.currentDay lt _menstruation.stages[2]>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						/*Check for pregnancy at a reduced chance for a few days before*/
+						<<if _menstruation.currentDay gte _menstruation.stages[3] - 4>>
+							<<set $_multi = Math.clamp(Math.ceil(6 * (1 + _menstruation.stages[3] - _menstruation.currentDay)),6,30)>>
+							<<playerPregnancyAttempt $_multi $_pregLocation>>
+						<</if>>
+					<<elseif _menstruation.currentDay lt _menstruation.stages[3]>>
+						/*Ovulation phase*/
+						<<set _menstruation.currentDay += 0.5>>
+						<<set _menstruation.lastDaysMax to _menstruation.currentDaysMax>>
+
+						/*Check for pregnancy*/
+						<<playerPregnancyAttempt 3 $_pregLocation>>
+					<<else>>
+						/*Luteal phase*/
+						/*Check for pregnancy at a reduced chance for a few days after*/
+						<<if _menstruation.currentDay lte _menstruation.stages[3] + 4>>
+							<<set $_multi = Math.clamp(Math.ceil(6 * (1 + _menstruation.currentDay - _menstruation.stages[3])),6,30)>>
+							<<playerPregnancyAttempt $_multi $_pregLocation>>
+						<</if>>
+						<<if _pills.pills["fertility booster"].doseTaken gte 2>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy">>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if (_pills.pills["contraceptive"].doseTaken gte 1 and random(0,100) gte 50) or _pills.pills["contraceptive"].doseTaken gte 2>>
+						<<else>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+					<</if>>
+				<<else>>
+					/*Start the cycle again*/
+					<<restartMenstruationCycle>>
+					<<set _menstruation.periodEnabled to true>>
+				<</if>>
+			<<case "pregnant">>
+				/*To progress as normal so that the heat cycle and pregnancy risk still works as normal, will be reset in the recovering stage*/
+				<<if _menstruation.currentDay lt _menstruation.currentDaysMax>>
+					<<if (_pills.pills["contraceptive"].doseTaken gte 1 and random(0,100) gte 50) or _pills.pills["contraceptive"].doseTaken gte 2>>
+					<<else>>
+						<<set _menstruation.currentDay += 0.5>>
+					<</if>>
+					<<if _menstruation.currentDay lt _menstruation.currentDaysMax>>
+						<<if $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy">>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if _pills.pills["fertility booster"].doseTaken gte 2>>
+							<<set _menstruation.currentDay += 0.5>>
+						<</if>>
+						<<if _menstruation.currentDay gt _menstruation.currentDaysMax>>
+							<<set _menstruation.currentDay to _menstruation.currentDaysMax>>
+						<</if>>
+					<</if>>
+				<</if>>
+				/*To deal with an issues that occured when players cheated with the bugged 'Clear current pregnancy'*/
+				<<if !getPregnancyObject().type is null or getPregnancyObject().type is "parasite">>
+					<<restartMenstruationCycle>>
+					<<set _menstruation.currentState to "normal">>
+					<<set _menstruation.recoveryTime to null>>
+					<<set _menstruation.recoveryTimeStart to null>>
+					<<set _menstruation.recoveryStage to null>>
+				<</if>>
+			<<case "recovering">>
+				<<set _menstruation.recoveryTime -= 0.5>>
+				<<switch _pills.pills["fertility booster"].doseTaken>>
+					<<case 1>><<set _menstruation.recoveryTime -= 0.5>>
+					<<case 2 3 4>><<set _menstruation.recoveryTime -= 1>>
+				<</switch>>
+				<<if $skin.pubic.pen is "magic" and $skin.pubic.special is "pregnancy">>
+					<<set _menstruation.recoveryTime -= 0.5>>
+				<</if>>
+				<<if $_pregnancy.totalBirthEvents gt 2>>
+					<<set _menstruation.recoveryTime -= 0.5>>
+				<</if>>
+				<<set _menstruation.recoveryStage to Math.floor((1 - (_menstruation.recoveryTime / _menstruation.recoveryTimeStart))*5)>>
+				<<if _menstruation.recoveryTime lte 0>>
+					<<set $effectsmessage to 1>>
+					<<set $recovered_from_pregnancy to 1>>
+					/*Ready to give birth again*/
+					<<restartMenstruationCycle>>
+					<<set _menstruation.currentState to "normal">>
+					<<set _menstruation.recoveryTime to null>>
+					<<set _menstruation.recoveryTimeStart to null>>
+					<<set _menstruation.recoveryStage to null>>
+				<</if>>
+		<</switch>>
+	<</if>>
+	<<updateRecordedSperm "vagina" "pc" 0.5>>
+	<<updateRecordedSperm "anus" "pc" 0.5>>
+<</widget>>
+
+<<widget "rutCycle">>
+	<<if $player.penisExist and ($wolfgirl gte 2 or $cat gte 2 or $cow gte 2 or $fox gte 2)>>
+		<<if !$player.beastRut>>
+			<<set $player.beastRut to 0>>
+		<</if>>
+		<<set $_pills = $sexStats.pills.pills>>
+		<<if $wolfgirl gte 2>>
+			<<set $_changeReduction to $wolfbuild>>
+		<<elseif $cat gte 2>>
+			<<set $_changeReduction to $catbuild>>
+		<<elseif $cow gte 2>>
+			<<set $_changeReduction to $cowbuild>>
+		<<elseif $fox gte 2>>
+			<<set $_changeReduction to $foxbuild>>
+		<</if>>
+		<<set $player.beastRut += 1 + $_pills["fertility booster"].doseTaken>>
+
+		<<if $player.beastRut gte random(30 - Math.ceil($_changeReduction / 5), 120 - Math.clamp($_changeReduction, 0, 100)) or _args[0] or $_pills["fertility booster"].doseTaken gt 2>>
+			<<set $player.beastRut to 0>>
+		<</if>>
+	<<else>>
+		<<run delete $player.beastRut>>
+	<</if>>
+<</widget>>

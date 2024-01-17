@@ -1,0 +1,41 @@
+:: Underground Robin Escape Fight Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<person>>踉跄着后退，然后被树根绊倒了，摔在了攻击你的另外几个人身上。他们倒下的时候，你快速跑掉了。
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	他们停下来喘气，你趁机跑开了。
+<<else>>
+	<<set _defeat to true>>
+	你瘫倒在地，伤得动弹不得。
+	<br><br>
+
+	<<fullGroup>>在森林中拉着你，岩石和树根摩擦着你的脸。最终你发现自己又回到了地下。
+	<br><br>
+
+	他们来到罗宾的旧牢房，把你扔了进去。
+	<<if $undergroundbrothel.water gte 1>>
+		"你会屈服的，”<<he>>说。“继续反抗可没有好果子吃，为什么要为难自己呢？”<<He>>用力把门关上。
+	<<else>>
+		"那就这样了？”<<he>>失望地说。“很好，我们要看看没有水你还能有多固执。”<<He>>用力把门关上。
+		<<set $undergroundbrothel.water to 1>>
+	<</if>>
+	<br><br>
+
+	<<run delete $undergroundbrothel.robin>>
+	<<run delete $undergroundbrothel.robinSpoke>>
+	<<run delete $undergroundbrothel.robinTalk>>
+	<<run delete $undergroundbrothel.robinTopics>>
+	<<set $undergroundbrothel.robinGone to true>>
+
+	<<undergroundReturnToCell "Robin">>
+<</if>>
+<br><br>
+
+<<if !_defeat>>
+	<<tearful>>你哭着回到孤儿院。
+	<<endcombat>><<clotheson>>
+
+	<<link [[继续|Underground Robin Escape Orphanage]]>><<set $phase to 0>><</link>>
+<</if>>

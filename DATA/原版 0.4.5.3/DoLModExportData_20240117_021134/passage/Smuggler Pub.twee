@@ -1,0 +1,38 @@
+:: Smuggler Pub []
+<<set $location to "underground">><<set $outside to 0>><<effects>>
+
+你身处于一个藏身地底的走私者酒吧。在天然岩石周围搭建了木制平台和墙壁。这里挤满了人，一部分人正在狂欢，而另一部份人则比较警惕。
+<br><br>
+
+<<if $exposed gte 1>>
+	你躲在木墙后面，遮住了你的<<nudity>>。你透过木板之间的缝隙观察。
+	<br><br>
+<</if>>
+
+<<if $temple_spear_mission gte 1 and !$smuggler_pub_zephyr>>
+	<<npc "Zephyr">><<person1>>
+	<<generate2>><<person2>><span class="pink">一双强壮的胳膊把你从身后提了起来。</span>
+	<br><br>
+
+	<<link [[挣扎|Smuggler Pub Zephyr Struggle]]>><</link>><<physiquedifficulty 12000 16000>>
+	<br>
+	<<link [[等待|Smuggler Pub Zephyr Wait]]>><</link>>
+	<br>
+<<else>>
+	<<if $debug is 1>>
+		<<if $exposed lte 0>>
+			<<stripclubicon>><<link [[作为一名舞者工作|Smuggler Pub Work Dance]]>><<set $dancestart to 1>><<stress -4>><<tiredness 4>><</link>><<lstress>><<gtiredness>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $smuggler_pub_zephyr is 1>>
+		<<link [[与泽菲尔说话|Smuggler Pub Zephyr]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[进入下水道 (0:05)|Sewers Algae]]>><<pass 5>><<sewersstart>><</link>>
+	<br>
+	<<if $historytrait gte 4>>
+		<<link [[沿着隧道前往水洞 (0:05)|Beach Cave Pub Entrance]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

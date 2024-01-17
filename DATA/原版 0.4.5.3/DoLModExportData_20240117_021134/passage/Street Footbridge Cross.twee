@@ -1,0 +1,46 @@
+:: Street Footbridge Cross []
+<<effects>>
+
+<<if $phase>>
+	<<if $phase is 1>>
+		遵从史莱姆的要求，你从桥上走过，不敢往下看。
+	<<else>>
+		即便没有史莱姆的命令，你也决定从桥上走过，甚至不屑于往下看。
+	<</if>>
+	<<if $rng gte 81>>
+		令人惊讶的，没人冲你按喇叭，虽然你还是很在意是否有看见你如此暴露的样子。
+		<br><br>
+		你顺利到达另一边。
+	<<else>>
+		<<fameexhibitionism 1>>
+		你甚至都没走到一半，就听见下方传来一声刺耳的喇叭声。等到你快走到桥的尽头时，你下方的喇叭声已经响成了一片。
+		<br><br>
+		<<if $worn.under_lower.type.includes("naked") and !$uncomfortable.nude or !$uncomfortable.underwear>>
+			你继续往前走，你很清楚史莱姆可以阻止你做任何它不喜欢的事，它非常享受被关注的感觉。<<arousal 2000>><<ggarousal>>
+		<<elseif $phase is 1>>
+			你试着走得更快，但你发现自己除了脸红什么都做不到。<<arousal 500>><<garousal>>
+		<<else>>
+			你继续往前走，你很清楚史莱姆可以阻止你做任何它不喜欢的事。<<arousal 1000>><<ggarousal>>
+		<</if>>
+		<br><br>
+		<<if $arousal gte $arousalmax>>
+			<<fameexhibitionism 2>>
+			你所受到的关注显然已经超出了你的承受范围，你就这样在暴露的状态下高潮了。
+			<<orgasm>>
+		<</if>>
+		你成功到达了另一侧，然后继续前进。
+	<</if>>
+<<elseif $rng gte 81>>
+	你决定不管怎样都要从天桥上走，只希望没人抬头看。
+	<<generate1>><<person1>>
+	你刚走了一半，就听到一声刺耳的喇叭声从下方传来。你低头看去，发现一个<<person>>被堵在车流中。<<He>>透过天窗往上盯着，<span class="lewd">直接看到了你的裙底。</span><<He>>又按了一次喇叭。
+	<br><br>
+
+	你紧紧并拢双腿，两手捏住裙子使劲往腿间按，匆匆跑到桥的另一端。
+	<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+<<else>>
+	你决定不管怎样都要从天桥上走，只希望没人抬头看。你成功到达了另一边，平安无事。
+<</if>>
+<br><br>
+<<endevent>>
+<<destinationeventend>>

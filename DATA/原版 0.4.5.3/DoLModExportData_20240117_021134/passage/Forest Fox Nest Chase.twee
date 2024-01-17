@@ -1,0 +1,125 @@
+:: Forest Fox Nest Chase []
+<<effects>>
+<<beasttype>>跳到灌木丛后面，开始挖洞。你抓住机会向前冲。
+<br><br>
+
+<<bHe>>不会注意到你，直到你靠近。<<bHe>>开始跑。
+<<if $fox gte 6 or $athleticsSuccess>>
+	<<if $athleticsSuccess>>
+		<span class="green">但是你太快了。</span>你俯冲，抓住<<bhim>>，翻滚，直到<<bhes>>被你压在下面。
+	<<else>>
+		你跟在<<bhim>>后面蹦蹦跳跳，在树间飞奔<<bHe>>似乎很享受。最终你设法拉近了距离，扑向<<bhim>>，把<<bhim>>按在你的身下。
+	<</if>>
+	<br><br>
+
+	<<if $NPCList[0].traits.includes("cowardly")>>
+		<<set _tendingMin to 1>>
+		<<set _tendingMax to 500>>
+		<<if $monster is 1>>
+			<<bHe>>在你身下，呼吸沉重。"你……你想要什么？"
+		<<else>>
+			<<bHe>>在你身下喘息。<<bHe>>看起来很害怕。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("territorial")>>
+		<<set _tendingMin to 100>>
+		<<set _tendingMax to 600>>
+		<<if $monster is 1>>
+			<<bHe>>对你噘嘴，发出低沉的咆哮。"快……快点，做你想做的事吧。"
+		<<else>>
+			<<bHe>>发出低沉的咆哮。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<set _tendingMin to 1>>
+		<<set _tendingMax to 2>>
+		<<if $monster is 1>>
+			<<bHes>>在你下面笑。"真有趣！谢谢你的练习。"
+		<<else>>
+			<<bHe>>发出许多尖锐的吠叫，听起来几乎像笑声。
+		<</if>>
+	<<else>>
+		<<set _tendingMin to 1>>
+		<<set _tendingMax to 300>>
+		<<if $monster is 1>>
+			<<bHe>>在你下面呼吸沉重。"你快点儿。"
+		<<else>>
+			<<bHe>>在你身下喘息。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[抚摸|Forest Fox Chase Pet]]>><</link>><<tendingdifficulty _tendingMin _tendingMax>><<llstress>>
+	<br>
+	<<if $deviancy gte 15 and ($bestialitydisable is "f" or $monster is 1)>>
+		<<link [[采用交配姿势|Forest Fox Nest Mate]]>><<set $phase to 1>><</link>><<deviant2>>
+		<br>
+	<<else>>
+		<span class="blue">你的异种癖还不够，没办法做出进一步的行动。</span>
+		<br>
+	<</if>>
+	<<link [["让"+ $NPCList[0].pronouns.him +"走"|Forest Fox Let Go]]>><</link>>
+	<br>
+<<else>>
+	你设法拉近了你们之间的距离，<span class="red">但是<<bhes>>太灵活了。</span>
+	<br><br>
+
+	<<if $NPCList[0].traits.includes("territorial")>>
+		你在一大片灌木丛中看不到<<bhim>>。你环顾四周，听到了急促的脚步声。你转过身来，正好看到一道橙色的闪光将你撞倒。
+		<br><br>
+
+		同样的<<beasttype>>现在在你上面。
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<if $monster is 1>>
+				<<bHe>>按住你的双臂。
+				<<if $fox gte 6>>
+					"这是干什么？想找个轻松的伴侣吗，小狐狸？"
+				<<elseif $cat gte 6>>
+					<<if $NPCList[0].pronoun is "f" and $NPCList[0].breastsize gte 4 and $NPCList[0].lactation is 1>>
+						"想要得到一些奶水吗，小猫咪？"<<bHe>>把<<bhis>>的$NPCList[0].breastsdesc压在你身上，<<bhis>>的脸离你只有几英寸远。
+					<<else>>
+						"你离家还有点远吧，小猫？"
+					<</if>>
+				<<elseif $wolf gte 6>>
+					"寻找容易的猎物，小狼崽？你在这里不是捕食者。"
+				<<else>>
+					"你以为你能抓住我吗，肥羊？"
+				<</if>>
+				<<bHe>>伸展着身体，将<<bhis>>的后部抬起到空中。"你真幸运。我现在心情相当好。"
+			<<else>>
+				<<bHe>>朝你发出了一声尖叫，将你按在地上。
+			<</if>>
+			<br><br>
+
+			<<link [[继续|Forest Fox Nest Rape]]>><<set $molestationstart to 1>><<set $position to "missionary">><<set $NPCList[0].stance to "top">><</link>>
+			<br>
+		<<else>>
+			你把自己从<<bhim>>下面推出去，然后逃跑。<<beastescape>>
+			<br><br>
+
+			<<link [[继续|Forest]]>><<endevent>><<unset $forest_nest>><</link>>
+			<br>
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("clever")>>
+		你暂时看不见<<bhim>>，但在转了几个弯后，发现<<bhim>>正坐在灌木丛之间。你开始靠近，然后<<bhe>>慢慢后退。
+		<br><br>
+
+		你一直向前走，直到踩到一根树枝。你猝不及防，一根绳子缠住了你的右腿，把你吊到空中。它把你翻转过来，让你在附近的一棵树上晃来晃去。<<gstress>><<stress 6>>
+		<br><br>
+		<<if $monster is 1>>
+			<<beasttype>>嘲笑你，在地上打了个滚。"好好享受和猎人在一起的时光吧！"<<bHe>>跳开了。
+		<<else>>
+			<<beasttype>>对你发出一些嘲弄的吠叫。<<bHe>>跳开了。
+		<</if>>
+		<<endevent>>
+		<br><br>
+
+		<<link [[继续|Forest Fox Chase Eden]]>><<unset $forest_nest>><</link>>
+		<br>
+	<<else>>
+		<<set $forest += 15>><<set $forest = Math.clamp($forest, 21, 100)>>
+		你在一大片灌木丛中看不到<<bhim>>。没有任何<<bhim>>的迹象，你现在比你记忆中的更深入森林。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<</if>>
+<</if>>

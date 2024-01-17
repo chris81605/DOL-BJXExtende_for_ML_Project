@@ -1,0 +1,29 @@
+:: Robin Mist Fight []
+<<run statusCheck("Robin")>>
+<<if $molestationstart is 1>>
+	<<set $robinmist to 1>>
+	<<set $noBodyWriting to true>>
+	<<set $molestationstart to 0>>
+	<<npcexpose>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemyarousalmax *= 1.5>>
+	<<npc_attempt_sex>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<npcincr Robin trauma 2>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Robin Mist Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Robin Mist Fight]]>><</link>></span><<nexttext>>
+<</if>>

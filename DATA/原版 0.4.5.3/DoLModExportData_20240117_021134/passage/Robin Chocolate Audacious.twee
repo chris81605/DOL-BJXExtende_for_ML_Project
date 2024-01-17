@@ -1,0 +1,42 @@
+:: Robin Chocolate Audacious []
+<<effects>>
+
+不良少年们被你的突击惊呆了。他们聚拢起来进行防御。一个<<person2>><<person>>最先被打倒，一个雪球在<<his>>脸上砸了个粉碎，紧接着那人失去平衡滑倒了在冰上。<<His>>的朋友见状立即分散开来。
+<br><br>
+<<set _handMaxDifficulty to ($phase is 2 ? 2000 : 1200)>>
+<<if currentSkillValue("handskill") gte random(1, _handMaxDifficulty)>>
+	<<if $phase is 2>>
+		你没有太多弹药。<span class="green">可你弹无虚发。</span>
+	<<else>>
+		<span class="green">你提前准备好的弹药发挥了决定性作用。</span>
+	<</if>>
+	你不断发起攻击，对手根本无暇捏好自己的雪球。他们最终放弃了，退到了树后。<<lltrauma>><<trauma -6>>
+	<br><br>
+	<<earnFeat "Flurry">>
+	你回到满怀感激的罗宾身边，热巧克力摊的荣誉被捍卫了。<<gglove>><<npcincr Robin love 1>>
+<<else>>
+	你不断发起攻击，对手根本无暇捏好自己的雪球。<span class="red">但你的弹药用完了。</span>一旦雪球用尽，你不得不像你的对手那样慌张地临时捏起雪球。
+	<<if $phase is 0>>
+		你团好了一个新雪球，你的对手也准备好发起攻击了，他们瞄准了目标。
+		<br><br>
+
+		你集中起注意力，知道马上就将会有无数雪球从四周袭来。突然，<span class="green">后方飞来一个雪球</span>，它擦过你的肩膀，击中了<<person3>><<persons>>，在其脸上砸得粉碎。你向后望去，是罗宾！罗宾就站在那里，捧着一堆雪球，<<his>>脸上写满了决心。
+		<br><br>
+
+		你的对手们早已精疲力尽，来自罗宾的新增援击溃了他们。<<He>>用多出来的雪球把他们赶出了这里。
+		<br><br>
+		<<earnFeat "Flurry">>
+		你回到原来的位置上。你们捍卫了这座热巧克力小摊的荣誉。<<gdom>><<npcincr Robin dom 1>>
+	<<else>>
+		寡不敌众，你被一连串的雪球击中，倒在了地面。<<gstress>><<stress 6>><<gpain>><<pain 4>>
+		<br><br>
+		<<person1>>
+		罗宾吓得倒吸了一口气，冲了出去，用<<his>>的外套保护住你。<<he>>帮助你站稳脚跟，并把你拽到小摊后面。<<gdom>><<npcincr Robin dom 1>>
+		<br><br>
+
+		你们无奈地等着不良少年们对这里失去兴趣，直到这些不良少年们转而去骚扰其他人。
+	<</if>>
+<</if>>
+<br><br>
+
+<<robinChocolateOfferHelp>>

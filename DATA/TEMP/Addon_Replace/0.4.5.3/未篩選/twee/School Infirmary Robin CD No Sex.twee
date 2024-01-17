@@ -1,0 +1,62 @@
+:: School Infirmary Robin CD No Sex []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+	<<earnFeat "Robin's Song">>
+
+	<<if $phase is 1>>
+		<<if $speech_attitude is "meek">>
+			你犹豫地示意罗宾停下来。
+		<<elseif $speech_attitude is "bratty">>
+			"嘿，我想我们应该停下来，”你说着的同时把一只手放在<<his>>的肩膀上。
+		<<else>>
+			"我们能停下来吗？”你问罗宾。
+		<</if>>
+		<br><br>
+
+		<<if $robinCDI.whoOrgasmed is "robin">>
+			罗宾看起来有点难过，但还是点点头。“……好吧，我尊重你的意愿，”<<he>>说。
+		<<elseif $robinCDI.whoOrgasmed is "pc">>
+			"虽然我还有点不够……”<<He>>不满地哼了一声，语气听起来有些别扭。
+		<<else>>
+			"你确定吗？我们俩都还没有……”<<His>>的声音逐渐变小，但是最终还是点了点头。
+		<</if>>
+	<</if>>
+	你抱着罗宾，让<<him>>靠近你。你感觉到<<his>>的呼吸在你耳边。
+	<<if _robin.dom gte 40>>
+		罗宾也紧紧回抱住你。
+	<<else>>
+		过了一会儿，<<he>>在你的怀抱里逐渐放松下来。
+	<</if>>
+		<<if _robin.breastsize gte 4 and ($player.breastsize + _robin.breastsize) gte 6>> /* doesn't matter whose breasts are larger, if the combined size fills the gap */
+			你能感觉到罗宾的_robin.breastsdesc紧贴着
+			<<if $player.breastsize lte 1>>
+				你。
+			<<else>>
+				你自己的胸部。
+			<</if>>
+		<</if>>
+	<<he>>回抱住你，放松下来。
+	你轻轻地用指尖在<<his>>的背上划了一个圈。罗宾注意到了你的动作，你可以感觉到一颗心的轮廓被画在了你的身上。
+	<br><br>
+
+	罗宾最终从拥抱中分离出来，<<he>>深情地望着你。“我爱你，”<<he>>低声说，“谢谢你帮我做这一切，”<<he>>又给了你一个快速的拥抱。
+	"但我们最好在被人发现之前离开这里。”<<He>>站起来，抓起<<his>>的制服，尽可能地擦干净，然后重新穿好衣服。
+	<<if $schoolstate is "lunch">>
+		"还好我们还有时间，”<<he>>边说边朝门口走去。“我们一起进去吧。”<<he>>带着你回到历史教室。
+	<<elseif $schoolstate is "fourth">>
+		"啊！时间怎么会过得这么快？”罗宾有些恐慌，“迟到了，我们快走！”<<He>>拖着你快步冲了出去。
+	<<else>>
+		<!-- This should not happen it's a catch all -->
+		罗宾看了眼钟，然后又再次确认了眼，懊恼地咕哝起来，“哦，天哪，我怎么让事情拖到这么晚？”<<He>>叹了一口气，“我想我们应该离开这里，对吧？"
+		<<He>>紧紧地拥抱了你，然后离开了房间。
+	<</if>>
+	<br><br>
+
+	<<robinInfirmaryVariableCleanup>>
+
+	<<if $schoolstate is "lunch" or $schoolstate is "fourth">>
+		<<link [[继续|School History Robin CD Enter]]>><<endevent>><<clotheson>><<dontHideRevert>><</link>>
+	<<else>>
+		<<link [[继续|Hallways]]>><<endevent>><<clotheson>><<dontHideRevert>><</link>>
+	<</if>>
+	<br>

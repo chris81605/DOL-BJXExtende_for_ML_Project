@@ -1,0 +1,34 @@
+:: Pound Work Brush []
+<<effects>>
+
+<<beastNEWinit 1 dog>>
+手里拿着刷子，你进入其中一个笼子。
+
+<<if random(1, 2) is 2 and ($bestialitydisable is "f" or $monster is 1)>>
+	里面的<<beasttype>>是友好的。也许太友好了。
+	<<if $monster is 1>>
+		<<bHe>>搂住你的腰，蹭弄着你的大腿。
+	<<else>>
+		<<bHe>>用后腿撑起身体，蹭弄着你的大腿。
+	<</if>>
+	<br><br>
+
+	<<link [[叫它走开|Pound Work Brush Tell]]>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<if $deviancy gte 15>>
+		<<link [[接受|Pound Work Brush Allow]]>><</link>><<deviant2>>
+		<br>
+	<</if>>
+<<else>>
+	里面的<<beasttype>>用一声低吼迎接你。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[安慰|Pound Work Brush Soothe]]>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<link [[找只温顺的去刷毛|Pound Work Brush Find]]>><</link>>
+	<br>
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		<<link [[展现同类的姿态让它放松|Pound Work Brush Act]]>><</link>><<deviant1>>
+		<br>
+	<</if>>
+<</if>>

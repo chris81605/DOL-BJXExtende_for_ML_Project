@@ -1,0 +1,68 @@
+:: Hospital Keycard Receptionist []
+<<effects>>
+<<if !$per_npc.pubfame_receptionist>>
+	<<generate1>><<person1>>
+	<<saveNPC 0 "pubfame_receptionist">>
+	<<set $pubfame.hospital to {}>>
+<<else>>
+	<<loadNPC 0 "pubfame_receptionist">><<person1>>
+	<<set $pubfame.hospital.seen to 1>>
+<</if>>
+<<set $pubfame.hospital.active to 1>>
+
+你走到柜台那里。
+<<if $skulduggery gte 700>>
+	<<if $NPCList[0].skills.security gte 700>>
+		柜台前的<<person>>在注意到你后站了起来，并微笑着说道："我能为您提供什么帮助？"
+		<br>
+		<<if $pubfame.hospital.seen>>
+			<span class="pink">还是原来的<<person>>。</span>如果你想和别人打交道，你需要等待<<his>>的轮班结束。
+		<<else>>
+			<span class="pink"><<He>>似乎有些警觉，</span>看起来<<him>>并没有那么好骗。
+		<</if>>
+	<<elseif $NPCList[0].skills.security lte 300>>
+		柜台前的那个<<person>>叹了口气:"我能为您做些什么？"
+		<br>
+		<<if $pubfame.hospital.seen>>
+			<span class="green">还是原来的那个<<person>>。</span>如果你想愚弄<<him>>，你需要在<<his>>轮班结束之前采取行动。
+		<<else>>
+			<span class="green"><<He>>似乎心不在焉。</span>这就像从婴儿手里抢糖果一样。
+		<</if>>
+	<<else>>
+		桌子上的<<person>>一注意到你就抬起<<his>>的头。"我们能帮你什么忙？"
+		<br>
+		<<if $pubfame.hospital.seen>>
+			<span class="blue">还是原来的<<person>>。</span>
+		<<else>>
+			<span class="blue"><<He>>看起来没有起疑</span>，但是<<he>>看起来也不无聊。
+		<</if>>
+	<</if>>
+<<elseif $skulduggery gte 200>>
+	<<if $NPCList[0].skills.security gte 700>>
+		柜台前的<<person>>在注意到你后站了起来，并微笑着说道："我能为您提供什么帮助？"
+	<<elseif $NPCList[0].skills.security lte 300>>
+		柜台前的那个<<person>>叹了口气:"我能为您做些什么？"
+	<<else>>
+		桌子上的<<person>>一注意到你就抬起<<his>>的头。"我们能帮你什么忙？"
+	<</if>>
+<<else>>
+	前台的那个<<person>>说话了。"我们能帮你什么忙？"
+<</if>>
+<br><br>
+<<if $NPCList[0].skills.security gte 700>>
+	<<set $skulduggerydifficulty to 1000>>
+<<elseif $NPCList[0].skills.security lte 300>>
+	<<set $skulduggerydifficulty to 200>>
+<<else>>
+	<<set $skulduggerydifficulty to 500>>
+<</if>>
+
+<<if $promiscuity gte 35 and !$pubfame.hospital.seduce>>
+	<<link [[勾引|Hospital Keycard Seduce]]>><<set $pubfame.hospital.seduce to 1>><</link>><<promiscuous2>>
+	<br>
+<</if>>
+<<if !$pubfame.hospital.distract>>
+	<<link [[分散注意力|Hospital Keycard Distract]]>><<set $pubfame.hospital.distract to 1>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>
+<<link [[回去|Hospital Foyer]]>><<set $pubfame.hospital.active to 0>><<endevent>><</link>>

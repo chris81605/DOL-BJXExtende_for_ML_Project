@@ -1,0 +1,64 @@
+:: Sydney Robin's Lemonade []
+<<location "beach">><<effects>>
+<<run statusCheck("Sydney")>>
+<<set _robin to statusCheck("Robin")>>
+This passage should be unreachable. If you're seeing this, you've found a bug. Please report it to Vrelnir, and take this convenient portal to Starfish Street to escape.
+<<link [[继续|Starfish Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+<<npc "Robin" 2>><<person2>>
+<<if $robinlemonadeintro isnot 1>>
+	<<set $robinlemonadeintro to 1>>
+	罗宾正在打理着<<his>>的柠檬水摊。在看到你俩时，<<He>>朝你们挥了挥手。
+	<br><br>
+	"嘿，"罗宾看见了你们两个，朝你们挥了挥手。"很高兴见到你们，我想让你们尝尝我的柠檬水。"<<He>>娴熟地把水、柠檬汁和糖混合在一起，然后递给你。"免费的。"它很甜。罗宾也给悉尼递了一杯。
+	<br><br>
+	悉尼要了一杯柠檬水。"真的很好喝，罗宾。"
+	<br><br>
+<<elseif $sydney.swim is "crossdress" and !$sydneySeen.includes("lemonadecross")>>
+	<<set $sydneySeen.pushUnique("lemonadecross")>>
+	罗宾正站在水摊的后面，<<Hes>>正喝着一杯柠檬水。<<he>>一看到悉尼，就立马把水喷了出来。
+	"啊，悉，悉尼！你……穿，呃……"
+	<br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		"我知道。"悉尼面无表情地盯着罗宾。
+	<<else>>
+		悉尼的脸唰的一下红了，赶忙移开了视线。
+	<</if>>
+	<br><br>
+	<<if _robin.crossdress isnot undefined and _robin.cdquest is 0>>
+		"让我猜一猜，是<<pshe>>……"罗宾颤抖着指了指你。
+		<br>"是的。"悉尼<<if _sydneyStatus.includes("corrupt")>>一脸平静<<else>>的声音在颤<</if>>。
+		<br>"啊，"……一阵尴尬的停顿。"那个，<<pshe>>也让我……"罗宾慌张地盯着地面。"不，不管怎么样！我能为你们两个做些什么吗？"
+	<<elseif _robin.crossdressing is 2>>
+		<br>罗宾给了悉尼一个温暖的微笑。"过一段时间你就会习惯的，"<<person2>><<He>>指了指<<his>>自己的衣服。
+		<<if _sydneyStatus.includes("corrupt")>>
+			<br>"酷毙了。"
+			<<if _robin.dom gte 40>>
+				<br>罗宾倒了一杯柠檬水。"不管怎么样，你们要来一杯吗？"
+			<<else>>
+				<br>罗宾惊慌失措，说话也开始变得结巴了起来，"不，不管怎样，你们要，要来点柠檬水吗？"
+			<</if>>
+		<<else>>
+			在听到罗宾的话之后，悉尼似乎松了一口气。
+			<br><br>
+			"总之，你们两个想要点什么吗？"
+		<</if>>
+	<<else>>
+		"呃，至少挺……挺，呃，不错的？你没什么好害羞的。"
+		<<if _sydneyStatus.includes("corrupt")>>
+			<br>"谢谢，不了。"
+			<br>"啊！好，好！不管怎么说，我能为你们俩做些什么？"罗宾明显在流汗。
+		<<else>>
+			在听到罗宾的话之后，悉尼似乎松了一口气。
+			<br><br>
+			"总之，你们两个想要点什么吗？"
+		<</if>>
+	<</if>>
+<<else>>
+	罗宾正在打理着<<his>>的柠檬水摊。在看到你俩时，<<He>>向你们挥了挥手。
+	<br><br>
+<</if>>
+<<link [[帮忙 (0:30)|Sydney Robin's Lemonade Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+<br>
+<<link [[离开|Sydney Beach]]>><<endevent>><<npc "Sydney">><<person1>><</link>>
+<br>

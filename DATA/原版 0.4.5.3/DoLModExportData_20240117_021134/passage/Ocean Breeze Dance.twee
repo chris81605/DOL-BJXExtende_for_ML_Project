@@ -1,0 +1,26 @@
+:: Ocean Breeze Dance []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	你不可能在如此暴露的情况下继续跳舞！你的脸红了，逃离了现场。
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	你不可能在如此暴露的情况下继续跳舞！你的脸红了，逃离了现场。
+	<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+	<<link [[继续|Ocean Breeze]]>><<endevent>><<clotheson>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[逃走|Ocean Breeze Dance Stop]]>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[逃走|Ocean Breeze Dance Stop]]>><</link>>
+	<<else>>
+		<<link [[停止|Ocean Breeze Dance Stop]]>><</link>>
+	<</if>>
+<</if>>

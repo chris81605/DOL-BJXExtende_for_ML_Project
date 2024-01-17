@@ -1,0 +1,37 @@
+:: Demon Sex []
+<<effects>><<person1>>
+<<if $sexstart is 1>>
+	<span class="pink">Prepare yourself, mortal.</span>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 10000>>
+	<<set $ostart to $orgasmcount>><<set $oindex to 0>><<set $o to 0>>
+<</if>>
+/% DEBUG: $NPCList[0].penis $NPCList[0].vagina<br> %/
+/% DEBUG: ocount $orgasmcount $o $oindex $ostart <br> %/
+<<set $o to ($orgasmcount - $ostart)>>
+<<if $o gt $oindex>>
+	You have cum $o times. <span class="purple">The <<person>> grows in power as <<he>> drains you.
+	<<awareness -10>><<llawareness>></span>
+	<br>
+	<<set $oindex to $o>>
+<</if>>
+
+<<set $enemyanger to 0>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Demon Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Demon Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Demon Sex]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,79 @@
+:: Sydney Shopping Sex Finish []
+<<effects>><<run statusCheck("Sydney")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $corruptionRollover is 1>>
+		<<unset $corruptionRollover>>
+		"这，这也太疯狂了，"<<he>>喃喃道，"我好想……我好想再做一次。然后……一次又一次。"<<He>>直直盯着你。"<span class="lewd">这种感觉……我从未……</span>"
+	<<else>>
+		<<switch _sydneyStatus>>
+			<<case "pure" "pureLust">>
+				"真，真是……疯狂，"<<he>>喃喃道，"也很罪恶……"
+			<<case "corrupt" "corruptLust">>
+				"我很高兴我的爱有了回报。"<<he>>脸上的笑容有些欠揍。
+			<<default>>
+				"感觉真不错，但可能有人会听到，"<<he>>咯咯笑了起来。
+		<</switch>>
+	<</if>>
+	<<if _sydneyChastity and $sydneyChastityKnown>>
+		<<sydneyChastityMessage>><<npcincr Sydney lust 3>><<ggslust>>
+	<<else>>
+		<<npcincr Sydney lust -20>><<lllslust>>
+	<</if>>
+	<<npcincr Sydney purity -2>><<lspurity>>
+	<br>
+	<<sydneyFinish>>
+	<<tearful>>你站起身，尽管很不情愿，但悉尼还是从你的身上挪了开来。
+<<elseif $enemyhealth lte 0>>
+	<<if $corruptionRollover is 1>>
+		<<unset $corruptionRollover>>
+		悉尼漏出一丝痛苦的呻吟，然后迅速用手捂住了自己的嘴巴。"这、这真的……"<<He>>盯着你的眼睛。"我想我喜欢你这样粗暴地对待我。<span class="lewd">就像是一个新世界的大门打开了。</span>"
+	<<else>>
+		<<switch _sydneyStatus>>
+			<<case "pure" "pureLust">>
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					悉尼漏出一丝痛苦的呻吟，然后迅速用手捂住了自己的嘴巴。<<He>>羞愧地埋下了头，"已……已经够了……"
+				<<else>>
+					"喂，喂！不要了！求你！"悉尼迅速和你分开了。"那，那真的有点痛……我的意思是，我还是很喜欢的，但……"<<his>>脸红了，看向一边，"或……或许我们可以下次再做完……"
+				<</if>>
+			<<case "corrupt" "corruptLust">>
+				悉尼喘着粗气和你分开了，"我喜欢你粗暴地对我，"<<he>>说道，"不过，剩下的部分我们就等下次吧。"
+			<<default>>
+				"哎呀！行了，有点太痛了！"<<He>>迅速地和你分开了，"我想我们得就我的承受度订一套指导方案了……"
+		<</switch>>
+	<</if>>
+	<<npcincr Sydney lust 5>><<gglust>>
+	<br><br>
+	<<tearful>>你站了起来，悉尼也慢慢地起身。
+<<else>>
+	<<if $corruptionRollover is 1>>
+		<<unset $corruptionRollover>>
+		"停……停了？可是我们……"<<he>>看起来非常的失望，"我们可以……等下次吗？行吗？我……"<<He>>直直盯着你，"<span class="lewd">我感觉新世界的大门为我打开了。</span>我还想要。"
+	<<else>>
+		<<switch _sydneyStatus>>
+			<<case "pure" "pureLust">>
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					"不……不做了？但是我……我还……"<<he>>仍紧紧拥着你，话语开始变得断断续续，"好，好吧……"
+				<<else>>
+					悉尼紧张地看着你。"我没……做错什么，对吧？"
+				<</if>>
+			<<case "corrupt">>
+				悉尼撇了撇嘴，但还是和你分开了。"我们之后继续，"<<he>>捧住你的手，"拜托……？"
+			<<case "corruptLust">>
+				悉尼不满地咕哝着撅起嘴，"太扫兴了！但行吧，我们可以下次。"
+			<<default>>
+				"噢，行，我们停下。"<<He>>的眼里闪过一瞬失望，但还是笑了笑。
+		<</switch>>
+	<</if>>
+	<<npcincr Sydney lust 5>><<npcincr Sydney purity 2>><<gglust>><<gspurity>>
+	<br><br>
+	<<tearful>>你站了起来，悉尼也慢慢地起身。
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<npc "Sydney">><<person1>>
+
+<<link [[继续|Sydney Shopping Lock End]]>><</link>>
+<br>

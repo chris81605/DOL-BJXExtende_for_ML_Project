@@ -1,0 +1,58 @@
+:: Farm Shower []
+<<set $outside to 0>><<effects>>
+<<strip>>
+你脱掉衣服开始洗澡，直到洗得一干二净为止。<<wash>>
+/* 北极星模组 */
+<<if $slime gt 0 and $options.bjx_eventTF>>
+	<span class='red'>你忍受着刺痛。
+	<<violence 20>>
+	</span>
+<</if>>
+/* 北极星 */
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - ($allure / 2)) and Time.dayState isnot "night">>
+	<<npc Alex>><<person1>>
+	<<if random(1, 2) is 2>>
+		你听到门吱呀一声开了，光线透进来。<<covered>>是艾利克斯。<<He>>先看向别处，然后又将视线移回你身上，偷偷瞥着你。<<gstress>><<stress 6>>
+		<br><br>
+
+		"抱、抱歉，"<<he>>说道，"我不知道你在这里。"
+		<br><br>
+
+		<<link [[尖叫|Farm Shower Scream]]>><<npcincr Alex love -1>><<stress -6>><</link>><<llove>><<lstress>>
+		<br>
+		<<link [[让艾利克斯离开|Farm Shower Leave]]>><</link>>
+		<br>
+		<<if $exhibitionism gte 55>>
+			<<link [[让艾利克斯看着 (0:05)|Farm Shower Watch]]>><<npcincr Alex lust 5>><<pass 5>><</link>><<exhibitionist4>><<glust>>
+			<br>
+		<</if>>
+	<<else>>
+		你听到门吱呀一声开了，光线透进来。<<covered>>是艾利克斯。<<He>>先看向别处，然后又将视线移回你身上，偷偷瞥着你。<<gstress>><<stress 6>>
+		<br><br>
+
+		过了一会儿，<<He>>关上了门，恢复了你的隐私。
+		<<if $player.penisExist and ($player.penissize lte 1 or $player.penissize is 4) and random(0,9) gte 6>>
+			<<if $player.penissize lte 1>>
+				"也太<<EZsmall>>了，"<<he>>一边喃喃自语一边关上门。你低头看向自己的<<penis>>羞耻地脸红了。
+			<<elseif $player.penissize is 4>>
+				"也太<<EZbig>>了，"<<he>>一边喃喃自语一边关上门。你低头看向自己的<<penis>>羞耻地脸红了。
+			<</if>>
+
+			<<incgpenisinsecurity>>
+			<br><br>
+		<<else>>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Farm Work]]>><<clotheson>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[自慰|Farm Shower Masturbation]]>><<set $masturbationstart to 1>><</link>>
+	<br>
+	<<link [[离开|Farm Work]]>><<clotheson>><</link>>
+	<br>
+<</if>>

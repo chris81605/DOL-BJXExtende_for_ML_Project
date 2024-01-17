@@ -1,0 +1,63 @@
+:: Strip Club Bartending []
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+你开始工作，为顾客们提供高价的酒水和小吃。<<if $drinksservedstat is 0>>虽然你是新手，但幸运的是，其他员工很乐意教你。<<elseif $drinksservedstat lte 500>>你以前做过这份工作，但你的经验依旧不足，要依靠其他员工来确保你不会搞砸。<<elseif $drinksservedstat lte 10000>>你很擅长这份工作。<<else>>你简直就是调酒界的大师。<</if>>
+<br><br>
+
+<<if $bartendaction is "normal">>
+	你专注于工作，毕竟有足够多的顾客让你忙碌起来。
+	<br><br>
+<<elseif $bartendaction is "vip">>
+	你试图吸引VIP客户的注意，这些人相比于普通客户而言拥有更多的钱和影响力，但是相对的，保安并不热衷阻挠VIP客户，这也使得他们更加危险。
+	<br><br>
+	<<if $worn.lower.exposed lte 0 or $worn.upper.exposed lte 0>><<set $bartendaction to "normal">>
+		其中一个VIP客户，一个<<generate1>><<person1>><<person>>瞥了你一眼，<span class="purple">然后在轻蔑地笑了一下后，又看向了别处。</span><i>你需要脱掉内裤或类似的衣服来吸引他们的注意力，毕竟你有很多的竞争者。</i><<endevent>>
+		<br><br>
+	<<elseif $rng gte 96>>
+		<<if $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+		<<generate1>><<person1>>一个穿着兔女郎服装的服务员从柜台拿起一盘啤酒。<<He>>给你一个狡黠的眼神，然后俯下身子。你感觉到<<his>>的眼睛盯着你的<<nudity>>。"我想也是，"<<he>>说道，"柜台可能有些碍事，但其他人完全可以从你的举止中看出你腰部以下是赤裸的。"
+		<br><br>
+		"真是好想法，"<<he>>在挡住一个摸索的客户时接着说道，"这肯定会给你带来很多小费。"
+		<<endevent>>
+		<br><br>
+		<</if>>
+	<</if>>
+<<elseif $bartendaction is "listen">>
+	几个顾客坐在一起安静地讨论着什么，他们的声音被俱乐部内的噪音所淹没，你试图从中偷听到有用的信息。
+	<br><br>
+
+	<<if $rng gte 96>>
+		你无意中听到一个<<generate1>><<generate2>><<fullGroup>>在讨论他们之前的性事。<<if $awareness gte 400>>这听起来很普通。<<else>>这可能是你听错了。<span class="lewd"><i>这不是鱼缸该有的用途！</i></span> <<gawareness>><<awareness 1>><</if>><<endevent>>
+		<br><br>
+	<<elseif $rng gte 91>>
+		你无意中听到一个<<generate1>><<generate2>><<fullGroup>>在讨论他们之前的性爱活动。<<if $awareness gte 200>>这听起来很普通。<<else>>这可能是你听错了。<span class="lewd"><i>人们不会真的做这样的事！</i></span><<gawareness>><<awareness 1>><</if>><<endevent>>
+		<br><br>
+	<<elseif $rng gte 86>>
+		你无意中听到一个<<generate1>><<generate2>><<fullGroup>>在讨论他们之前的性爱活动。<<if $awareness gte 100>>这听起来很普通。<<else>>这可能是你听错了。<span class="lewd">他们不可能真的谈论把<i>那个</i>放在这样的地方吧！</span><<gawareness>><<awareness 1>><</if>><<endevent>>
+		<br><br>
+
+	<</if>>
+
+<</if>>
+
+<<set $drinksservedstat += random(20,120)>>
+
+<<set $tipmod to 0.2>><<tipset "serving">>
+<<set $tip += 500>>
+<<if $drinksservedstat gte 10000>>
+<<set $tip += 200>>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+<<eventsbartending>>
+<<elseif $bartendaction is "listen" and $rng gte 51>>
+<<eventsbartendinglisten>>
+<<else>>
+
+一些顾客盯着你看，但其中大多数人都被舞者吸引了注意力。<<tipreceive>>
+<br><br>
+
+<<link [[继续|Strip Club]]>><<endevent>><<pass 30>><</link>>
+
+<</if>>

@@ -1,0 +1,53 @@
+:: Pound Cage []
+<<location "pound">><<set $outside to 0>><<effects>>
+
+<<if !$pound.door>><<set $pound.door to 0>><</if>>
+
+你被囚禁在海星街的流浪狗收容所里。笼子里满是<<pound_text cap>>，你面前放着一碗水，但你除了冰冷的地板无处可睡。
+<br><br>
+
+<<pound_stats>>
+<br><br>
+
+<<if isPlayerNonparasitePregnancyEnding()>>
+	<<pregnancyWatersBrokenPassout "pound">>
+<<elseif Time.hour is 8>>
+	<<generate1>><<person1>>
+	<<person>>从一个笼子走到另一个笼子，释放了其中的<<pound_text>>。"喂食时间到了。"<<he>>说道。大厅的另一边有一扇门开着，那扇门通向外面。
+	<br><br>
+	<<He>>来到了你的笼子前。
+	<br><br>
+	<<link [[往外爬|Pound Food Crawl]]>><<sub 1>><</link>>
+	<br>
+	<<link [[打架|Pound Fight]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+<<elseif Time.hour is 12 and !$pound.compete>>
+	<<set $pound.compete to 1>>
+	<<generate1>><<person1>>
+	一个<<person>>停在你的笼子外面。"训练时间，"<<he>>边说边打开门，"你要好好表现。"
+	<br><br>
+
+	<<link [[往外爬|Pound Show Crawl]]>><<sub 1>><</link>>
+	<br>
+	<<link [[打架|Pound Fight]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+<<elseif Time.hour is 18>>
+	<<generate1>><<person1>>
+	<<person>>从一个笼子走到另一个笼子，释放了其中的<<pound_text>>。"喂食时间到了。"<<he>>说道。大厅的另一边有一扇门开着，那扇门通向外面。
+	<br><br>
+	<<He>>来到了你的笼子前。
+	<br><br>
+	<<link [[往外爬|Pound Food Crawl]]>><<sub 1>><</link>>
+	<br>
+	<<link [[打架|Pound Fight]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+<<else>>
+
+
+	<<link [[锻炼 (1:00)|Pound Exercise]]>><<pass 60>><<tiredness 6>><</link>><<gtiredness>>
+	<br>
+	<<link [[查看门|Pound Door]]>><</link>>
+	<br><br>
+	<<link [[睡觉|Pound Bed]]>><</link>>
+	<br>
+<</if>>

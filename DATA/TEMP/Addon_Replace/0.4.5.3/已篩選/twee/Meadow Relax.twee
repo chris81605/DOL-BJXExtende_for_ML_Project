@@ -1,0 +1,87 @@
+:: Meadow Relax []
+<<effects>>
+
+<<if $weather is "rain">><<set $outside to 0>>
+	你躺在了橡树下。得益于厚重树冠的庇护，周围的草还是干的。
+	<<if Time.dayState is "night">>
+		你看着陷入黑暗和宁静的牧场。
+	<<else>>
+		你看着蜜蜂在花朵间飞来飞去。
+	<</if>>
+<<elseif $weather is "clear">><<set $outside to 1>>
+	<<if Time.dayState is "night">>
+		你躺在草地上仰望头顶的夜空。
+	<<else>>
+		你躺在草地上看着蜜蜂在花间飞舞。
+	<</if>>
+<<else>><<set $outside to 1>>
+	你躺在草地上看着云朵飘过。
+<</if>>
+<<pass 60>>
+<br><br>
+
+<<if $rng gte 91>>
+	你睁开眼睛，是不知不觉打起了瞌睡吗？<<ltiredness>><<tiredness -6>>
+	<br><br>
+	<<if $exposed lte 1>>
+		<<clothesstrip>><<beastNEWinit 1 fox>>
+		你的身体感到一丝风的凉意，你往下一看，惊恐地发现自己的衣服不见了！
+		<br><br>
+
+		<<covered>>你躲在草丛中，观察着整片牧场。
+		<<if random(1, 2) is 2>>
+			有东西在草丛中匍匐移动，分开着草叶。当它到达林地交界处时，你看清楚了那是什么。
+			<!-- Modified for monster people -->
+			<<if $monster is 1>>
+				一只<<beasttype>>，用嘴里叼着你的衣服。<<bHe>>回头望向你，盯着你的眼睛看了会儿，然后消失在了树荫中。
+			<<else>>
+				一只狐狸，嘴里正叼着你的衣服。它消失在了树林中。
+			<</if>>
+			<br><br>
+
+			<<link [[追赶 (0:10)|Meadow Chase]]>><<pass 10>><</link>>
+			<br>
+			<<link [[无视|Meadow Ignore]]>><</link>>
+			<br>
+		<<else>>
+			你看到一个身影跑上了小山丘。
+			<!-- Modified for monster people -->
+			<<if $monster is 1>>
+				一只<<beasttype>>，用嘴里叼着你的衣服。<<bHe>>回头看了看你，盯着你的眼睛看了会儿，然后消失在了山脊后。
+			<<else>>
+				一只狐狸，嘴里正叼着你的衣服。它消失在山脊后。
+			<</if>>
+			<br><br>
+
+			<<link [[追赶 (0:10)|Meadow Chase Hill]]>><<pass 10>><</link>><<athleticsdifficulty 1 500>>
+			<br>
+			<<link [[无视|Meadow Ignore]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<link [[继续|Meadow]]>><</link>>
+		<br>
+	<</if>>
+/* 北极星模组 */
+<<elseif $rng gte 60>>
+	<<beastNEWinit 1 sheep>>
+	你感觉到一阵轻微的抚摸，将你从休息中唤醒。<<ltiredness>><<tiredness -6>>
+	<br><br>
+	在你睡觉的时候，一只柔软且毛茸茸的<<beasttype>>在你身上躺了下来。它带来的暖意感觉很好，对你的身体散发出舒适的感觉。<<lstress>><<stress -50>>
+	<<if $monster is 1>>
+		"哦，对不起。我吵醒你了吗？你看起来很冷，所以我靠近了点。"<<bHe>>偎依着你，那暖意是如此的舒缓，让你感觉身体进一步放松。<<bHe>>将你抱得更紧了些，低声说: "我好想和你交配。"
+	<</if>>
+	<br><br>
+	<<link [[抵抗|Meadow Sheep Resist]]>><</link>><<willpowerdifficulty 1 400>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[允许|Meadow Sheep Sex]]>><<set $sexstart to 1>><</link>><<deviant3>>
+	<</if>>
+/* 北极星 */
+<<else>>
+	世界似乎变得明亮了些。
+	<br><br>
+
+	<<link [[继续|Meadow]]>><</link>>
+	<br>
+<</if>>

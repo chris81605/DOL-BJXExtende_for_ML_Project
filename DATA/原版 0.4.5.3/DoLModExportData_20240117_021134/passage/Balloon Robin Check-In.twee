@@ -1,0 +1,81 @@
+:: Balloon Robin Check-In []
+<<effects>>
+<<loadNPC 0 "stall_owner">><<npc Robin 2>>
+<<set $balloonStand.robin.talked to true>>
+<<set $balloonStand.robin.knows to ($phase is "confess_helped" or $phase is "confess_sabotaged" ? true : false)>>
+<<set _lemonade to Time.season is "winter" ? "热巧克力" : "柠檬水">>
+<<set _botchedHelp to ["angry", "appeased"].includes($balloonStand.owner)>>
+
+<<switch $phase>>
+	<<case "confess_helped">>
+		<<if $speech_attitude is "meek">>
+			“或许，”你俏皮地说，“我大概知道是什么原因……”罗宾用惊讶的眼神看着你，你几乎忍不住笑出声。“你有个新的生意伙伴了！我请那个卖爆米花的<<person1>><<personsimple>>向你推荐<<his>>那边口渴了的顾客。<<He>>只希望你同样也能把有潜在顾客引导到<<his>>那里。”
+		<<elseif $speech_attitude is "bratty">>
+			“哦，我可以明确地告诉你为什么你的生意会这么火爆，”你笑容灿烂地说。罗宾瞪大双眼疑惑地看着你。“那是因为我太聪明了，我说服了那个卖爆米花的家伙把<<person1>><<his>>那边口渴了的顾客都指引过来这里。这边只需要把看起来饿了的人引导到<<him>>那里，你们就互不相欠了。”
+		<<else>>
+			“那个，”你给了罗宾一个微笑，才开始解释。“你知道那个卖爆米花的摊位吗？我说服了<<person1>> <<him>>把<<his>>那边口渴的客人送过来。<<He>>只是希望你偶尔也能把一些顾客引导到<<his>>那里。”
+		<</if>>
+		<br><br>
+		<<balloonRobinGrateful>>
+
+	<<case "confess_sabotaged">>
+		<<if _botchedHelp>>
+			你深吸了一口气，然后
+			<<if $speech_attitude is "meek">>
+				你从罗宾那里移开了视线。“呃，好吧……我想我大概，嗯，知道原因。你看，我试图说服那个卖爆米花的<<person1>><<personsimple>>把<<his>>口渴的顾客指引过来……但我却惹恼了<<him>>。我想<<he>>开始卖_lemonade是为了报复。”
+			<<elseif $speech_attitude is "bratty">>
+				你直视罗宾的眼睛。“我知道究竟发生了什么。是这样的，我试图说服那个卖爆米花的家伙把<<person1>> <<his>>口渴的顾客介绍给你。但我不小心惹恼了<<him>>，然后<<he>>开始卖_lemonade来作为反击。”
+			<<else>>
+				你对罗宾说。“我有个坏消息要告诉你。你知道那个卖爆米花的摊位吗？我试图说服<<person1>><<him>>把<<his>>口渴的顾客介绍给你，但没有成功。我惹恼了<<him>>，然后<<he>>选择卖<<his>>自己的柠檬水作为报复。”
+			<</if>>
+			<br><br>
+			罗宾看起来心情复杂。“所以是因为你，我才会失去顾客？”
+		<<else>>
+			你深吸了一口气，然后
+			<<if $speech_attitude is "meek">>
+				你从罗宾那里移开了视线。“呃，好吧……我想我大概，嗯，知道原因。
+			<<elseif $speech_attitude is "bratty">>
+				你直视罗宾的眼睛。“我知道究竟发生了什么
+			<<else>>
+				你对罗宾说。“我想我大概知道原因。
+			<</if>>
+			“那是因为我告诉那个经营气球摊位的<<person1>><<personsimple>>开始卖饮料。”
+			<br><br>
+			<<person2>><<print C.npc.Robin.trauma gte 20 ? "罗宾眼神空洞地盯着你" : C.npc.Robin.dom gte 50 ? "罗宾紧握住了<<his>>的拳头" : "罗宾的眼中涌现出泪花，但<<he>>眨了眨眼把它们憋了回去">>。<<He>>似乎不知道该说什么，好半晌才又开口。“你做了什么？”<<he>>低声说道。“你为什么要那样做？在没有我<<if $robinromance is 1>><<girlfriend>><<else>>最好的朋友<</if>>给竞争对手出主意的情况下赚钱已经够难了。我以为我们是在同一阵线上的。”
+		<</if>>
+
+	<<case "quiet_helped">>
+		你选择保持沉默。罗宾<<he>>並没有注意到你的沉默，<<his>>把兴奋的能量转移到了重新排列<<his>>的原料上。
+		<br><br>
+		“打扰一下，”一位<<generate3>><<person3>><<person>>打断了你的谈话。“<<print Time.season is "winter" ? "一个<<person1>><<personsimple>>在海滩上" : "那边那个<<person1>><<personsimple>>">>告诉我你在卖_lemonade？我可以买一些吗？”
+		<br><br>
+		罗宾的眼睛微微瞪大。“原来顾客都是从那里来的！”<<person2>><<he>>激动地小声对你说。“真是个好心的<<person1>><<print $pronoun is "m" ? "男士" : "女士">>……看来这个世界上还是有好人的！我也应该开始把我的顾客介绍给<<his>>。”罗宾开始为<<person3>><<person>>做_lemonade，<<person2>><<he>>一边做一边哼着歌。<<llrtrauma>><<npcincr Robin trauma -5>><<ggdom Robin>><<npcincr Robin dom 5>>
+		<br><br>
+		看着罗宾帮助顾客，你感到一道温暖的光芒充满了你的内心，就算他对你在其中所扮演的角色一无所知。无论是否得到公众的认可，做好事总是让人感觉很棒。<<stress -12>><<trauma -6>><<lstress>><<ltrauma>>
+
+	<<case "quiet_sabotaged">>
+		你决定什么也不说。罗宾不需要知道你的<<print ["angry", "appeased"].includes($balloonStand.owner) ? "在帮助<<him>>上经历的失败" : "背叛">>。罗宾不安地挪动着<<his>>的材料。“哦，好吧，”<<he>>最终叹了口气说。“我想我也没有其他办法了，只能继续努力工作。”
+		<br><br>
+		你们聊了一会儿，当你向<<him>>告别的时候，罗宾的心情似乎稍微好了一些。
+<</switch>>
+<br><br>
+<<if $phase is "confess_sabotaged">>
+	<<set $robin.hurtReason to "气球摊的情况">>
+	<<set $robin.timer.hurt to _botchedHelp ? 8 : 15>>
+	<<set _trauma to _botchedHelp ? 3 : 6>>
+	<<set _robin_trauma to _botchedHelp ? 2 : 15>>
+	<<set _robin_love to _botchedHelp ? -1 : -10>>
+
+	<<link [[道歉|Balloon Robin Check-In 2]]>><<set $phase to 0>><</link>><br>
+	<<capture _robin_trauma _robin_love>>
+		<<link [[吼叫|Balloon Robin Check-In 2]]>><<set $phase to 1>><<trauma -6>><<npcincr Robin trauma _robin_trauma>><<npcincr Robin love _robin_love>><<npcincr Robin dom -1>><</link>><<ltrauma>><<lstress>><<grtrauma>><<llove Robin>><<ldom Robin>><br>
+	<</capture>>
+	<<capture _trauma>>
+		<<link [[沉默|Balloon Robin Check-In 2]]>><<set $phase to 2>><<trauma _trauma>><</link>><<gtrauma>><<if !_botchedHelp>><<grtrauma>><</if>>
+	<</capture>>
+<<else>>
+	<<switch $location>>
+		<<case "park">><<link [[继续|Park]]>><<endevent>><</link>>
+		<<default>>	<<link [[继续|Beach]]>><<endevent>><</link>>
+	<</switch>>
+<</if>>

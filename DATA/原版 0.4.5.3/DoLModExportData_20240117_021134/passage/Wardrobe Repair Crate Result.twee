@@ -1,0 +1,67 @@
+:: Wardrobe Repair Crate Result []
+<<set $tailorMonthlyService to 7>>
+<<set $wardrobeRepair to {timeLeft: 1}>>
+<<set _equip to setup.clothingLayer.all>>
+<<set _value to 0>>
+<<for $_i to 0; $_i lt _equip.length; $_i++>>
+	<<set _toDelete to []>>
+	<<for $_j to 0; $_j lt $wardrobe[_equip[$_i]].length; $_j++>>
+		<<if $wardrobe[_equip[$_i]][$_j].integrity is clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max') and $wardrobe[_equip[$_i]][$_j].one_piece isnot "broken" and $crateContents is "damaged">>
+			<<continue>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitPrimary is undefined and $wardrobe[_equip[$_i]][$_j].outfitSecondary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(tailorClothingCost($wardrobe[_equip[$_i]][$_j],_equip[$_i]) * (1 - ($wardrobe[_equip[$_i]][$_j].integrity / clothingData(_equip[$_i],$wardrobe[_equip[$_i]][$_j],'integrity_max'))) * 1.25)>>
+
+		<<if $wardrobeRepair[_equip[$_i]] is undefined>>
+			<<set $wardrobeRepair[_equip[$_i]] to []>>
+		<</if>>
+		<<if $wardrobe[_equip[$_i]][$_j].outfitSecondary and $wardrobe[_equip[$_i]][$_j].one_piece is "broken">>
+			/* If a secondary part of an outfit is broken adds the primary part so the complete outfit will be repaired */
+			<<set _upperSlot to $wardrobe[_equip[$_i]][$_j].outfitSecondary[0]>>
+			<<set _upperItem to setup.clothes[_upperSlot].findIndex(x => x.name === setup.clothes[_equip[$_i]][clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])].outfitSecondary[1])>>
+			<<if $wardrobeRepair[_upperSlot] is undefined>>
+				<<set $wardrobeRepair[_upperSlot] to []>>
+			<</if>>
+			<<set _itemStats to [
+					clone(_upperItem),
+					clone($wardrobe[_equip[$_i]][$_j].colour),
+					clone($wardrobe[_equip[$_i]][$_j].colourCustom),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colour),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colourCustom),
+					false
+				]>>
+			<<run $wardrobeRepair[_upperSlot].push(clone(_itemStats))>>
+			<<run _toDelete.push(clone($_j))>>
+		<<else>>
+			<<set _splitted to ($wardrobe[_equip[$_i]][$_j].one_piece === "split" ? true : false)>>
+			<<set _itemStats to [
+					clone(clothesIndex(_equip[$_i],$wardrobe[_equip[$_i]][$_j])),
+					clone($wardrobe[_equip[$_i]][$_j].colour),
+					clone($wardrobe[_equip[$_i]][$_j].colourCustom),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colour),
+					clone($wardrobe[_equip[$_i]][$_j].accessory_colourCustom),
+					clone(_splitted)
+				]>>
+			<<run $wardrobeRepair[_equip[$_i]].push(clone(_itemStats))>>
+			<<run _toDelete.push(clone($_j))>>
+		<</if>>
+	<</for>>
+	<<for $_j to $wardrobe[_equip[$_i]].length; $_j gte 0; $_j-->>
+		<<if _toDelete.includes($_j)>>
+			<<run $wardrobe[_equip[$_i]].deleteAt($_j)>>
+		<</if>>
+	<</for>>
+<</for>>
+<<if _value gt 5000>>
+	<<set $money -= _value - 5000>>
+	司机将板条箱取走并收了你<<printmoney `_value - 5000`>>。
+<<else>>
+	司机把板条箱拿走了。
+<</if>>
+<br><br>
+<<link [[继续|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>

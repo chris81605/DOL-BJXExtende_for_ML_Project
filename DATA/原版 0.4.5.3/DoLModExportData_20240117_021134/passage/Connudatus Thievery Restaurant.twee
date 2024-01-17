@@ -1,0 +1,22 @@
+:: Connudatus Thievery Restaurant []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $skulduggery lte 300>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">你无法在这样简单的目标身上学到任何东西。</span>
+<</if>>
+<<person1>>你跪下来假装系鞋带，当你站起来时，你拿起那个人的<<wallet>>。
+<<if $rng gte 61>>
+	"那个<<pShes>>抢你的钱包！"那个<<person2>><<person>>看到了你，"看呐！"<<he>>喊道。
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<set $skulduggerydifficulty to 400>>
+	<<link [[跑|Connudatus Thievery Restaurant Run]]>><<crimeUp 30 "thievery">><<tiredness 12>><</link>><<crime "thievery">><<gtiredness>>
+	<br>
+	<<link [[糊弄过去|Connudatus Thievery Restaurant Bluff]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<<else>>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<</if>>

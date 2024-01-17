@@ -1,0 +1,28 @@
+:: Ant Guard 3 
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+    <<set $enemyhealth to 800>>
+    <<set $enemyhealthmax to 800>>
+    <<set $enemyanger += 50>>
+    <<set $enemytrust to -200>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Ant Guard 3 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Ant Guard 3]]>><</link>></span><<nexttext>>
+<</if>>

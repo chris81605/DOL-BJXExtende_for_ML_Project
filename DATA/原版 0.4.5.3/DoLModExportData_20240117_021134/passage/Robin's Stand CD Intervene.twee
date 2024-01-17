@@ -1,0 +1,123 @@
+:: Robin's Stand CD Intervene []
+<<set $outside to 1>><<set $location to (Time.season is "winter" ? "park" : "beach")>><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+	<<set _robin.crossdress to 4>>
+	<<set _robin.cdquest to 4>>
+
+	<<set _boyfriend to ($robinromance ? "<<person1>><<genderswap>><<= $pronoun is 'm' ? '男' : '女'>>朋友" : "最好的朋友")>>
+
+	<<if $speech_attitude is "meek">>
+		你迅速走到罗宾的身后支持<<person1>><<him>>。你把手放在<<his>>的肩膀上，<<he>>看向你，然后笑了笑。
+		你转向<<person2>><<person>>，用低沉的声音说道："别碰我_boyfriend。"
+	<<elseif $speech_attitude is "bratty">>
+		你走近<<person2>><<person>>。"喂！"你大声喊道，"别对我_boyfriend动手动脚！"
+	<<else>>
+		你插进两个人之间。"嗨，我是<<person1>><<genderswap>><<his>>的
+		<<print $robinromance ? "<<girlfriend>>" : "最好的朋友">>，你离<<him>>远一点。"
+	<</if>>
+	<br><br>
+
+	<!-- if robin is male, then while crossdressing, they appear female and npcs "expect" them to have a vagina -->
+	<<set _expectedPartFound to ((_robin.pronoun is "m" ? _robin.vagina : _robin.penis) isnot "none")>>
+	<<set _unexpectedPartFound to ((_robin.pronoun is "m" ? _robin.penis : _robin.vagina) isnot "none")>>
+
+	罗宾转过身来，惊讶地看着你。"你在这里！"<<person1>><<He>>看起来开心极了。
+	<<if _robin.dom gte 60>>
+		<<He>>转向<<person2>><<person>>。
+		"我只是想卖我的<<print (Time.season is "winter" ? "热巧克力" : "柠檬水")>>，如果你不打算买任何东西，可以离开吗？"
+		<br><br>
+
+		然而，<<person2>><<person>>的想法似乎没有被打消。"我喜欢猎物充满斗志的样子。"<<He>>说着，把手伸向罗宾的裆部。
+		在<<He>>得逞之前，罗宾就把<<He>>的手打开了。
+		<br><br>
+
+		"住手！"<<person1>><<He>>大喊，"请你最好离开。"
+		<br><br>
+
+		<<person2>><<person>>看向罗宾的裆部，然后
+		<<if _expectedPartFound and !_unexpectedPartFound>>
+			说道，"嘿，别太保守了。"<<He>>把手拿开了，"我只是想玩得开心点而已。"
+			<br><br>
+
+			"离开。"罗宾的声音颤抖着，但<<person2>><<person>>明白了罗宾的意思。
+			<br><br>
+
+			"好吧。"<<person2>><<person>>嗤笑着转身离开。
+		<<else>>
+			大喊，"你不是<<person1>><<genderswap>><<personsimple>>！你就是个<<print (_expectedPartFound ? "怪物" : "异装癖")>>！"
+			<<person2>><<He>>愤怒地走开了。
+		<</if>>
+		<br><br>
+
+		你将一只手轻轻放在<<person1>><<him>>的肩膀上，罗宾终于放松了拳头。
+		<<if $speech_attitude is "meek">>
+			"很高兴<<person2>><<hes>>终于走掉了。"你松了一口气，"罗宾，你还好吗？"
+		<<elseif $speech_attitude is "bratty">>
+			"那个混蛋只是在说胡话<<person2>>，"你揉着罗宾的肩膀说，"别理<<him>>。"
+		<<else>>
+			"还好<<person2>><<hes>>离开了。"你微笑着对罗宾说，"你还好吗？"
+		<</if>>
+		<br><br>
+
+		罗宾脸上的愤怒慢慢消失，表情迅速转变为了放松，然后是喜悦。<<person1>><<He>>紧紧地拥抱了你。
+		"你来帮我的忙了！而且你没有暴露我的身份。"<<He>>在你的耳边低语，"谢谢，这对我来说是个很大的鼓励。"
+		<<His>>的声音几乎听不见。"我感觉在你面前我可以做自己。"
+		<br><br>
+
+		你们分开彼此，继续一起经营摊位。幸运的是，其余的顾客都很友善。
+		<<npcincr Robin love 5>><<gglove>>
+	<<else>>
+		你感觉到罗宾的手碰到了你的背部。"如果你不打算买什么，请你离开好吗？"
+		<<He>>对着那个<<person2>><<personsimple>>转过身去。"我们需要吸引顾客。"
+		<br><br>
+
+		“不要这么害羞，”那个<<person2>><<person>>盯着罗宾说，“我相信我有办法打开你的心扉。”
+		那个<<personsimple>>把<<his>>的手缓缓移向你朋友的裤裆处，而罗宾则站在那里，全身僵硬动弹不得。
+		<br><br>
+
+		<<if $speech_attitude is "meek">>
+			你只能恐惧地看着那个<<person2>><<person>>肆无忌惮地摸索着罗宾的裆部。
+			结束后，你走向罗宾。"对不起。"你温柔地把<<person1>><<him>>紧紧地搂在怀里。
+		<<elseif $speech_attitude is "bratty">>
+			你把那个<<person2>><<person>>推开，但那人还是趁机摸了一把你的朋友。
+			"罗宾，你还好吗？"你轻轻地摇着罗宾，让<<person1>><<him>>从恍惚中清醒过来。
+		<<else>>
+			你走过去阻止那个<<person2>><<him>>，但是在你移开<<he>>的手之前，<<he>>还是抓住机会摸索了一番。
+			"你还好吗？"你低声对罗宾说，声音低到那个<<personsimple>>听不到。
+		<</if>>
+		<br><br>
+
+		罗宾仍然处于震惊状态，而那个<<person2>><<person>>则大声说道，
+		<<if _expectedPartFound and !_unexpectedPartFound>>
+			"嘿，你怎么回事？我只是想和你的朋友玩玩。"
+			<<person2>><<He>>瞪了你和罗宾一眼，然后愤怒地走开了。
+		<<else>>
+			"你不是<<person1>><<genderswap>><<personsimple>>！你是个<<print (_expectedPartFound ? "怪胎" : "异装癖")>>吗！"
+			<<person2>><<He>>给了你和罗宾一副充满厌恶的表情，然后怒气冲冲地离开了。
+		<</if>>
+		直到这时，罗宾才回过神来。
+		<br><br>
+
+		"好可怕。"过了好一会儿，<<person1>><<he>>才开了口，<<his>>的眼睛湿润了。
+		"很高兴有你在这里。我不知道<<person2>><<he>>想对我做什么，但肯定不是什么好事。"
+		罗宾拥抱了你一会儿，然后在你的耳边低语道，"而且你没有暴露我的身份，这对我来说是个很大的鼓励。"
+		<<person1>><<His>>的声音几乎听不见。"我感觉我能在你面前做自己。"
+		<br><br>
+
+		你们分开彼此，继续一起经营摊位。幸运的是，其余的顾客都很友善。
+		<<npcincr Robin love 5>><<gglove>>
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<if Time.season is "winter">>
+		<<link [[提供帮助 (0:30)|Robin Chocolate Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Park]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[提供帮助 (0:30)|Robin's Lemonade Help]]>><<npcincr Robin love 1>><<pass 30>><</link>><<glove>>
+		<br>
+		<<link [[离开|Beach]]>><</link>>
+		<br>
+	<</if>>

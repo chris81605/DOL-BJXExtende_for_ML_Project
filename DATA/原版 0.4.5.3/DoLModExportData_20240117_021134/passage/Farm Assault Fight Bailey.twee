@@ -1,0 +1,25 @@
+:: Farm Assault Fight Bailey []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	<<set $enemyhealthmax *= 1.3>>
+	<<set $enemyhealth *= 1.3>>
+	<<set $enemyarousalmax *= 1.3>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Farm Assault Fight Bailey Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Assault Fight Bailey]]>><</link>></span><<nexttext>>
+<</if>>

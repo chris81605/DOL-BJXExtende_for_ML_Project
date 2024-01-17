@@ -1,0 +1,32 @@
+:: Street Box Open []
+<<effects>>
+
+为避免引人耳目，你溜进附近的小巷，尝试把它打开。
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">你成功将它打开了。</span>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	里面是包括账目在内的装满文件的档案夹。它们属于一家本地公司。黑社会的人可能会对这个感兴趣。
+	<<set $blackmoney += 100>><<crimeUp 100 "thievery">>
+	<br><br>
+
+	<<destinationeventend>>
+
+<<else>>
+
+	尽管你很努力，<span class="red">但你想不出怎么打开它。</span>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[砸烂它|Street Box Smash]]>><<crimeUp 10 "destruction">><</link>><<physiquedifficulty>><<crime "destruction">>
+	<br>
+	<<link [[离开它|Street Box Stop]]>><</link>>
+	<br>
+
+<</if>>

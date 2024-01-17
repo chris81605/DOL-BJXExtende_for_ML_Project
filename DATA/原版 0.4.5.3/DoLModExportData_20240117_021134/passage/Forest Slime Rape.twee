@@ -1,0 +1,41 @@
+:: Forest Slime Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $noFinish to 1>>
+	<<maninit>>
+	<<forestRescueSetup>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $noFinish to 1>>
+	<<maninit>>
+	<<forestRescueSetup>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<forestRescueFail>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1 and $rescue is 2>>
+	<span id="next"><<link [[继续|Forest Coop Rescue]]>><<set $phase to 2>><</link>></span><<nexttext>>
+<<elseif _combatend>>
+	<span id="next"><<link [[继续|Forest Slime Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Slime Rape]]>><</link>></span><<nexttext>>
+<</if>>

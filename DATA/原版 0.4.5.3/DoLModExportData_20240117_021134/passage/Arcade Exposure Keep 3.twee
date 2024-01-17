@@ -1,0 +1,51 @@
+:: Arcade Exposure Keep 3 []
+<<effects>>
+
+<<if currentSkillValue("handskill") gte 400>>
+
+	就差一点：只要有人再吃一记，战斗就要结束了。
+	<br><br>
+
+	终于，你躲开一记上钩拳，并回以一套牛逼的连招。<span class="green"><<His>>的血量归零，</span>你获胜了。
+	<br><br>
+
+	人们欢呼起来。你做到了，你以分毫之差，击败了这位娴熟的玩家。你看着你的对手正暴跳如雷。
+
+	<<if $worn.under_lower.type.includes("chastity")>>
+		你的情绪实在太过高昂，甚至不在乎所有人都能看到你的贞操带。
+	<<else>>
+		你高昂的情绪持续了几秒钟，忘记了全游戏厅还能看见你的<<= setup.clothes.lower.find((e) => e.name is $arcadeExposure.lower).cn_name_cap>>。
+	<</if>>
+	<br><br>
+
+	<<if $exhibitionism gte 75>>
+		<<link [[炫耀|Arcade Exposure Flaunt]]>><</link>>
+		<br>
+	<</if>>
+
+	<<link [[穿好衣服|Arcade Exposure Fix]]>><<clotheson>><</link>>
+
+<<else>>
+
+	你就快打败<<him>>了，但<<he>>挥出一记完美的上钩拳，使你招架不及。<span class="red">你的血量归零，你的角色血流如注，一命呜呼。</span>
+	<br><br>
+
+	群众为你对手卫冕<<his>>第十三次欢呼，你看着<<he>>举起<<his>>的拳头耀武扬威，并转头看着你。
+	<br><br>
+
+	<<if $worn.under_lower.type.includes("chastity")>>
+		"看来你不仅人菜，而且还是个变态啊。"<<he>>嘲弄说。
+	<<else>>
+		"屁股不错喔，比起玩游戏，你还是多露露屁股吧。"
+		<br><br>
+
+		你意识到自己的屁股还露给整个游戏厅看，群众纷纷掏出手机对着你。
+	<</if>>
+	<br>
+
+	你整正衣冠，品尝到比单单走光更深刻的羞耻感。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[继续|Arcade]]>><<endevent>><<pass 10>><<clotheson>><<unset $arcadeExposure>><</link>>
+
+<</if>>

@@ -1,0 +1,20 @@
+:: Robin Mist Rescue []
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+<<set $robindebtevent to 0>>
+<<set $robinmissing to 0>>
+<<unset $robinmistknown>>
+<<set _robin to statusCheck("Robin")>>
+<<npc Robin>><<person1>>
+
+"对不起，真的非常对不起！你还好吧？"罗宾在哭泣，<<His>>仍然赤裸着身体。罗宾破碎的话语伴随着哭腔。
+"对、对不起，真的非常对不起……我知道我刚才做了什么……但是我控制不了……我真的没有办法……"<<He>>的眼泪不断从脸颊上滑落。
+<<if _robin.dom gte 50>>
+	"我应该保护你，而不是伤害你……"
+<<else>>
+	"我伤害了你……我永远无法原谅自己。"
+<</if>>
+<br><br>
+
+<<link [[原谅罗宾|Robin Mist Forgive]]>><<stress 10>><<npcincr Robin trauma -5>><</link>><<ggstress>><<llrtrauma>>
+<br>
+<<link [[沉默不语|Robin Mist Silence]]>><<stress -3>><<npcincr Robin trauma 3>><</link>><<lstress>><<grtrauma true>>

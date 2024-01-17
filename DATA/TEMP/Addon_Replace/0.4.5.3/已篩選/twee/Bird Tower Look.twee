@@ -1,0 +1,102 @@
+:: Bird Tower Look []
+<<effects>>
+
+你探头向下看，高空的风吹乱了你的头发。看来离下到地面还有很长的一段路要走。
+<br><br>
+
+你有<<number $bird.fabric>>块剩余的材料<<if $bird.fabric gt 1>><</if>>。
+<<if $syndromebird isnot 1>>
+	你可以撕掉自己的衣服来获取更多的材料。
+<</if>>
+<br>
+
+<<if $syndromebird isnot 1>>
+	<<if $worn.upper.name isnot "naked" and $worn.upper.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.upper.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<upperruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.name isnot "naked" and $worn.lower.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.lower.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<lowerruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.under_upper.name isnot "naked" and $worn.under_upper.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.under_upper.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<underupperruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.under_lower.name isnot "naked" and $worn.under_lower.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.under_lower.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<underlowerruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.over_upper.name isnot "naked" and $worn.over_upper.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.over_upper.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<overupperruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.over_lower.name isnot "naked" and $worn.over_lower.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.over_lower.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<overlowerruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.over_head.name isnot "naked" and $worn.over_head.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.over_head.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<overheadruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.head.name isnot "naked" and $worn.head.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.head.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<headruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.face.name isnot "naked" and $worn.face.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.face.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<faceruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.neck.name isnot "naked" and $worn.neck.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.neck.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<neckruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.hands.name isnot "naked" and $worn.hands.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.hands.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<handsruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.legs.name isnot "naked" and $worn.legs.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.legs.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<legsruined>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.feet.name isnot "naked" and $worn.feet.cursed isnot 1>>
+		你撕开了你的<<link [[$worn.feet.cn_name_cap|Bird Tower Rope Clothes]]>>，获得了一块额外的材料。<<set $bird.fabric += 1>><<feetruined>><</link>>
+		<br>
+	<</if>>
+	<br>
+<</if>>
+
+/* 北极星模组 */
+<<if !$options.bjx_animal and $harpy gte 6 or $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" or $transformationParts.dragon.wings isnot "disabled")>>
+	<!-- Redirects the player to the Perch, where flight can happen. Moved everything to widgets.twee in the "bird_fly_options" widget.-->
+	如果你有更好的起跳点，风可以让你飞得很远。<span class="blue">这个栖木也许是个完美的起跳点。</span>
+	<br><br>
+<<elseif !$options.bjx_animal and ($angel gte 6 or $demon gte 6 or $fallenangel gte 2) or $options.bjx_animal and ($transformationParts.angel.wings isnot "disabled" or $transformationParts.fallenAngel.wings isnot "disabled" or $transformationParts.demon.wings isnot "disabled" or $transformationParts.bee.wings isnot "disabled")>>
+	<<if $pain gte 20>>
+		你的翅膀应该会让你安稳落地，<span class="purple">但你伤得实在是太重了，无法冒着风险就这么跃下。</span>
+	<<else>>
+		如果你有更好的起跳点，你的翅膀可以让你降落。<span class="blue">这个栖木也许是个完美的起跳点。</span>
+	<</if>>
+<</if>>
+/* 北极星 */
+<br>
+<<if $bird.rope lt 7>>
+	<<if $bird.fabric gte 1>>
+		<<if $bird.rope is 0>>
+			<<link [[制作一条绳子 (0:30)|Bird Tower Rope]]>><<set $bird.fabric -= 1>><<set $bird.rope += 1>><<bird_pass 30>><</link>>
+			<br>
+		<<else>>
+			<<link [[制作一条绳子 (0:30)|Bird Tower Rope Add]]>><<set $bird.fabric -= 1>><<bird_pass 30>><<set $bird.rope += 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<span class="grey">需要更多的材料来制作绳子。</span>
+		<br><br>
+
+	<</if>>
+<<else>>
+	<<link [[逃脱 (0:05)|Bird Tower Rope Escape]]>><<bird_pass 5>><</link>>
+	<br>
+<</if>>
+<<link [[离开|Bird Tower]]>><</link>>
+<br>

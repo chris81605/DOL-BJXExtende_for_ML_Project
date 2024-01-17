@@ -1,0 +1,31 @@
+:: Prison Breakfast Careful []
+<<effects>>
+
+<<if $danceSuccess>>
+	你走到一个空着的座位，几个囚犯伸出腿试图绊倒你，<span class="green">但你努力保持住了平衡。</span>
+	<br><br>
+
+	<<link [[继续|Prison Breakfast Prayer]]>><</link>>
+	<br>
+<<else>>
+	你走到一个空着的座位。有个囚犯伸出腿试图绊倒你，<span class="red">你狠狠地摔在了地面上，</span>碗哐啷落地，里面的食物撒的到处都是。
+	<br><br>
+
+	<<if $worn.face.type.includes("gag")>>
+		<<generate_veteran_guard 0>><<person1>>
+		在你能站起来之前，你身后就传来了皮靴的声音。<<veteran_guard 0>>踩住你的背，笑了起来。"你弄脏了我们干净整洁的地板？这我可无法接受。"
+		<br><br>
+
+		<<link [[继续|Prison Breakfast Lick Refuse]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		<<generate_veteran_guard 0>><<person1>>
+		在你能站起来之前，你身后就传来了皮靴的声音。<<veteran_guard 0>>踩住你的背，笑了起来。"你弄脏了我们干净整洁的地板？这我可无法接受。把它们舔干净，快一点。"
+		<br><br>
+
+		<<link [[舔干净|Prison Breakfast Lick]]>><<prison_inmates -3>><<trauma 6>><</link>><<llrespect>><<gtrauma>>
+		<br>
+		<<link [[拒绝|Prison Breakfast Lick Refuse]]>><<prison_inmates 3>><<pain 8>><<trauma 12>><<stress 12>><<prison_guards -1>><</link>><<ggpain>><<ggtrauma>><<ggstress>><<gsuspicion>><<ggrespect>>
+		<br><br>
+	<</if>>
+<</if>>

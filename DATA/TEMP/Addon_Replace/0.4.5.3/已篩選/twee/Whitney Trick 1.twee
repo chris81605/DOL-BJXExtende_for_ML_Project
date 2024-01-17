@@ -1,0 +1,166 @@
+:: Whitney Trick 1 []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+你转过身来，和一个戴着可怕面具的<<person1>><<personsimple>>面对面。<<He>>和其他人一样穿着血淋淋的破衣服，但<<his>>角更大，身上大片的皮肤暴露在外，而且全都涂成了红色，腹部肌肉则用更深的颜色突出。
+<br><br>
+
+<<if $exposed gte 1>>
+	你感觉<<his>>望着你的下流服装，大饱了眼福。"很好，"<<he>>开口，是惠特尼。
+<<else>>
+	"看看这是谁呀～"<<he>>开口道，是惠特尼。
+<</if>>
+
+<<if $whitneyromance is 1>>
+	<<set $dateCount.Total++>><<set $dateCount.Whitney++>>
+	"我的<<girlfriend>>。”<<He>>走上前来，抓住你的后颈，将你拉入深吻。<<His>>的朋友再度尖叫，直到<<he>>和你分开为止。
+<</if>>
+
+<<set _costume to getHalloweenCostume()>>
+<<switch _costume>>
+	<<case "vampire">>
+		"我喜欢你的外套。
+		<<if $NPCList[0].penis isnot "none">>
+			我有东西可以让你吸出来，嗯哼？"
+		<<else>>
+			肯定很方便打理吧。"
+		<</if>>
+	<<case "witch">>
+		"我喜欢你的裙子。
+		<<if $NPCList[0].penis isnot "none">>
+			我敢打赌，你骑的可不止有飞天扫帚。"
+		<<else>>
+			不过味有点大。"
+		<</if>>
+	<<case "scarecrow">>
+		<<if $whitneyromance is 1>>
+			"我喜欢你的打扮。你是因为我把你的大脑操得神志不清了，所以想找个新脑袋吗？"
+		<<else>>
+			"我喜欢你的打扮。在你的大脑被操得一团糟之后，你就开始找新的脑子了？"
+		<</if>>
+	<<case "gothic">>
+		"<<print (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt ? "裙子" : "外套")>>不错。
+		<<if $NPCList[0].penis isnot "none">>
+			没想到你能把精液渍洗掉。"
+		<<else>>
+			你用自己换了多少钱才买下这套打扮的？"
+		<</if>>
+	<<case "nun">>
+		"我喜欢你的长袍，这让我很想操你。"
+	<<case "maid">>
+		"你要穿得这么像个女仆的话，有什么事都是你自找的。"
+	<<case "christmas">>
+		"搞错节日啦，白痴。"
+	<<case "cheerleader">>
+		"你是我私人的拉拉队队长，很好。"
+	<<case "prison">>
+		"我喜欢你的连体衣。我们可要好好闹一场。"
+	<<case "karate">>
+		<<He>>看着你的打扮。“你是想让自己看起来很硬汉吗？"
+	<<case "monk">>
+		"我喜欢你的长袍。不过，恐怕没人会相信你是独身主义者。"
+	<<case "football">>
+		<<He>>看着你的打扮。"你真的知道要怎么踢足球吗？"
+	<<case "belly dancer">>
+		"打扮很适合你，荡妇，待会儿你得给我们跳支舞看看。"
+	<<case "cowboy" "riding">>
+		<<if $NPCList[0].penis isnot "none">>
+			<<He>>看着你的打扮。"你经常骑马吗，荡妇？"<<He>>以猥亵的姿势抓着<<his>>的胯部。"我有东西让你待会儿骑。"
+		<<else>>
+			"不错的打扮，让我自己也想试试骑点什么了。"<<He>>笑了，"也许可以从你的脸开始。"
+		<</if>>
+	<<case "cow onesie">>
+		"多傻的打扮啊，为什么会有人穿乳房露在外面的衣服呢？"
+		<<if $worn.head.name is "cow onesie hood" and !$hoodDown>>
+			<<He>>抓住你的兜帽，拽了下来。<<set $hoodDown to 1>>
+			<<if $whitneyromance is 1>>
+				"好点了，它挡住了我看你脸的视线。"
+			<<else>>
+				"好不了多少，但它至少让我看到了点好东西。"
+			<</if>>
+		<</if>>
+	<<case "mummy">>
+		"不错的‘精液抹布’打扮，之后会派上用场的。"
+	<<case "sailor">>
+		"漂亮的打扮。
+		<<if $NPCList[0].penis isnot "none">>
+			你一定很喜欢咸味吧。"<<He>>以猥亵的姿势抓住<<his>>的胯部。"我有点东西想让你尝尝。"
+		<<else>>
+			我敢打赌，你已经习惯听命于人了。"
+		<</if>>
+	<<case "futuresuit">>
+		"看起来很容易撕嘛。"<<He>>笑着说。
+	<<case "rags">>
+		"一身破布还怪好看的。你就不能再多出去卖点，用那钱去买一套真正的服装吗？"
+	<<case "nurse">>
+		"性感的护士服装是吧？很经典嘛，"<<He>>用下流的姿势抓住自己的胯部，"过会儿有的是解剖让你学。"
+	<<case "gasmask">>
+		<<He>>用手弹了弹你的呼吸器。"不要以为这能帮你在关键时刻呼吸得更好，<<if $NPCList[0].penis isnot "none">>吃鸡骚货<<else>>吃逼狂魔<</if>>。"
+	<<case "medical eyepatch" "eyepatch">>
+		"你怎么了？被精液射进眼睛了？"
+
+	<!-- TF-related lines -->
+	<<case "angel TF">>
+		"我不知道你是怎么让那个光环呆在上面的。"
+	<<case "wolf TF">>
+		"我喜欢你的打扮，但是你是怎么把尾巴固定在身上的？"
+	<<case "fallen angel TF">>
+		"我不知道你是怎么让这些小东西呆在你头顶上的。"
+	<<case "demon TF">>
+		"不错的打扮，我印象很深刻哦。"
+	<<case "cat TF">>
+		"我喜欢你的打扮，我可能有玩意想让你舔哦。"
+	<<case "cow TF">>
+		<<if $player.gender_appearance is "f" or $player.breastsize gte 4>>
+			"我喜欢你的打扮，你奶子里有乳汁吗？"
+		<<else>>
+			"我喜欢你的打扮，希望你头上的东西不是全身唯一性感的玩意。"
+		<</if>>
+	<<case "harpy TF">>
+		"我喜欢你的服装，眼睛很漂亮。"
+		<<if $rng gte 91>>
+			<br><br>
+
+			"看看这对翅膀，"之前的<<person2>><<person>>开口说道。"颜色在初级飞羽、次级飞羽和三级飞羽以及小翼羽和肩羽之间的变换方式很微妙，但是很准确，你可以看到这些褶皱的去向。"<<He>>抓住了你一只翅膀，用手指非常轻柔地抚过它。"它们还很柔软，你用的是什么布料？我甚至可以感觉到次级飞羽在靠近尺骨的地方是怎么变化的，而且——"
+			<br><br>
+			惠特尼瞪着眼，突然用手把<<him>>推开。那个<<person>>清了清嗓子，发出了一声装模作样的尖叫。"该死的白痴，"惠特尼嘟囔道。
+			<<person1>>
+		<</if>>
+	<<case "fox TF">>
+		"我喜欢你的打扮。
+		<<if $worn.head.name is "spirit mask">>
+			挺傻的，但面具还算可爱。"
+		<<else>>
+			希望你不介意我拉你的尾巴。"
+		<</if>>
+	/* 北极星模组 */
+	<<case "bee TF">>
+		"我喜欢你的打扮，那跟毒刺看起来挺赞的。"
+	<<case "sheep TF">>
+	    "我喜欢你的打扮，你怎么扮得这么软乎乎的？"
+	/* 北极星 */
+
+	<!-- Misc lines -->
+	<<case "mixed">>
+		"我不知道你扮的是什么，但至少你打扮了。"
+	<<case "fully naked">>
+		你感觉<<his>>的眼睛探索着你裸露的每一寸皮肤。"我想不出更好的打扮了。"
+	<<case "exposed">>
+		"在万圣节打扮成一个骚货？不是很新颖，但我没什么意见。"
+	<<case "skeleton">>
+		<<if getSexesFromRandomGroup() gte SexTypes.BOTH or C.npc.Whitney.penis isnot "none">> <!-- if males are allowed / whitney has a penis -->
+			"打扮不错，荡妇，我猜你吃什么就是什么，"<<he>>看着你的服装笑着说。
+		<<else>>
+			"你需要多吃点，"<<he>>嘲笑着，戳了戳你的肋骨，"你太瘦了，荡妇。"
+		<</if>>
+	<<default>>
+		"你就不能打扮一下吗？"<<He>>环顾着<<his>>的朋友。"也许我们应该帮<<phim>>扮成一个骚货。" 手从四面八方伸过来，抓、拉、撕。你的衣服被撕成了碎片，使你在街上<span class="lewd">裸露着身体</span>。<<upperruined>><<lowerruined>><<underupperruined>><<underlowerruined>>
+<</switch>>
+<br><br>
+
+<<He>>在你身边挪着步子。"我们要去要糖，"<<he>>最终宣告道，"你也去。"
+<br><br>
+
+<<link [[点头 (2:00)|Whitney Trick 2]]>><<pass 15>><<npcincr Whitney love 1>><</link>><<glove>>
+<br>
+<<link [[拒绝 (0:05)|Whitney Trick Refuse]]>><<pass 5>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
+<br>

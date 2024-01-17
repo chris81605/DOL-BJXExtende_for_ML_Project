@@ -1,0 +1,51 @@
+:: School Swimming Late Detention []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你在学校走廊里。<<pass 2>>
+
+<<if Time.hour gte 15>>
+	下课了，走廊上都是放学的学生。
+<<else>>
+	你可以听到各个教室门后的说话声，有些课程刚刚结束，学生们正涌出教室。
+<</if>>
+<br><br>
+梅森紧紧抓住你，把你拖到礼顿的办公室。
+<br><br>
+
+<<if $exposed gte 1>>
+	你被引导绕过一个拐角，进入一条满是<<peopley>>的走廊。<<covered>>
+	边上的一个<<persony>>看着你<<if $exposed gte 2>>，一脸震惊的表情<<else>>窃笑着<</if>>。<<stress 1>>
+	其他人也有类似的反应。随着噪音越来越大，所有人都被引得转过头去看你。
+	<br><br>
+<<else>>
+	大多数学生忽视了你，但一个<<generatey1>><<person1>><<person>>指着你。"有人要去见礼顿了，"<<he>>对着
+	<<his>>的朋友低声说道。<<stress 1>>
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	<<link [[你眼前一黑……|School Passout]]>><<endevent>><</link>>
+<<else>>
+	<<link [[进去|School Swimming Late Detention 2]]>><<endevent>><<set $phase to 1>><</link>>
+	<br>
+	<<if $exposed gte 2 and $exhibitionism gte 75>>
+		<<link [[炫耀|School Swimming Late Detention Flaunt]]>><<endevent>><</link>><<exhibitionist5>>
+		<br>
+	<<elseif $exposed gte 1 and $exhibitionism gte 55>>
+		<<link [[炫耀|School Swimming Late Detention Flaunt]]>><<endevent>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+	<<if $exhibitionism gte 55 and ($rightarm isnot "bound" or $leftarm isnot "bound") and $exposed lt 2>>
+		<<checkdroptowel>>
+		<<if _exlevel gte 2>>
+			<<link [[脱下毛巾来诱惑|School Swimming Late Detention Flaunt]]>><<droptowel>><<endevent>><</link>><<exhibitionist5>>
+			<br>
+		<<elseif _exlevel>>
+			<<link [[脱下毛巾来诱惑|School Swimming Late Detention Flaunt]]>><<droptowel>><<endevent>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $feetuse isnot "bound">>
+		<<link [[逃跑|School Swimming Late Detention 2]]>><<endevent>><<set $phase to 2>><</link>><<athleticsdifficulty 100 600>>
+	<</if>>
+<</if>>

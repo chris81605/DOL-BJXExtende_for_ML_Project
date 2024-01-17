@@ -1,0 +1,67 @@
+:: Rocks []
+<<location "searocks">><<effects>>
+你在海滩西边的岩石上。随着潮汐的变化，大部分都被水覆盖了。这些石头把你藏起来，不让镇上的人看见。
+<br><br>
+在一块岩石上面有一个隐蔽的空间，在一个深水池的上面。
+<br>
+<<storeactions "beachrocks">>
+<<if $smuggler_location is "beach" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18>>
+	<<smugglerdifficultytext>>
+<</if>>
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你寻找一片又长又结实的海藻来做一件简易的衣服。你找到一些合适的标本，把它们绑在胸前。它很脆弱，很暴露，你不觉得你可以在不弄坏它的情况下把它拿下来，但总比什么都没有好。
+	<<plantupper>>
+	<br><br>
+	<<if $rng gte 91 and $parasite.nipples.name is undefined and $parasitedisable is "f">>
+		你的满足感被你的<<nipples>>上的一阵刺痛感打断了。震惊之下，你脱下上衣寻找罪魁祸首。两只小海胆粘在你的乳头上。他们按摩和吮吸你的乳头，好像试图哺乳。一点都不疼，但是那种感觉让你兴奋。为了摆脱他们的骚扰，你拉着他们，但是他们抓得太紧了。更重要的是，用任何力量去触摸它们都会使它们更强烈地吸吮。你需要帮助来移除它们。
+		<<parasite nipples urchin>><<garousal>><<arousal 600 "breasts">>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $phase is 2>>
+	<<set $phase to 0>>
+	你寻找一片又长又结实的海藻来做一件简易的衣服。你找到一些合适的标本，把它们绑在腰上。它很脆弱，很暴露，你不觉得你可以在不弄坏它的情况下把它拿下来，但总比什么都没有好。
+	<<plantlower>>
+	<br><br>
+	<<if $parasite.penis.name is "parasite" or $parasite.clit.name is "parasite">>
+		/* Prevents the 2 types of parasites from interacting */
+	<<elseif $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !playerChastity("penis")>>
+		你的满足感被你的<<penis>>上的一种刺痛感所打断。震惊之下，你掀起裙子寻找罪魁祸首。一只小海胆咬住了。它按摩和吮吸，好像试图护理。一点也不疼，但是这种感觉让你觉得很羞愧。你用力拉它，试图摆脱它的骚扰，但它紧紧抓住不放。更重要的是，用任何力量去触摸它都会使它吸得更强烈。你需要帮助来移除它。
+		<<parasite penis urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !playerChastity("hidden") and !$player.penisExist>>
+		你的满足感被你的<<pussy>>上的一种刺痛感所打断。震惊之下，你掀起裙子寻找罪魁祸首。一只小海胆咬住了你的阴蒂。它按摩和吮吸，好像试图护理。一点也不疼，但是这种感觉让你觉得很羞愧。你用力拉它，试图摆脱它的骚扰，但它紧紧抓住不放。更重要的是，用任何力量去触摸它都会使它吸得更强烈。你需要帮助来移除它。
+		<<parasite clit urchin>><<garousal>><<arousal 600 "genitals">>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<if $smuggler_location is "beach" and $smuggler_timer is 0 and Time.dayState is "night" and Time.hour gte 18>>
+		<<smugglerdifficultyactions>>
+		<br>
+	<</if>>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[用水草做上衣 (0:20)|Rocks]]>><<pass 20>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<beachicon "seaweed">><<link [[用水草做裙子 (0:20)|Rocks]]>><<pass 20>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<swimicon "down">><<link [[滑进池塘 (0:01)|Rocks Pool]]>><<pass 1>><</link>>
+	<br>
+	<br>
+	<<swimicon>><<link [[在海里游泳 (0:02)|Sea Rocks]]>><<pass 2>><</link>>
+	<br>
+<</if>>
+<<set $eventskip to 0>>
+<<storecleanup>>

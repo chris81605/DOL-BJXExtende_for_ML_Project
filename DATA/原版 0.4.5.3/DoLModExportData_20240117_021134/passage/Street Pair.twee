@@ -1,0 +1,44 @@
+:: Street Pair []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<if Time.dayState isnot "night">>
+		<<enable_rescue>>
+		<i>那些家伙竟敢在大白天袭击你，真是胆大妄为。要是你能大声喊叫，说不定会有人来救你。</i>
+		<br><br>
+	<</if>>
+	<<maninit>>
+	<<set $leftarm to "grappled">><<set $rightarm to "grappled">><<hand_gag 0 left>><<set $NPCList[0].righthand to "arms">>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate 1>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[继续|Street Pair Alarm]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Street Pair Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Street Pair Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Street Pair]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Street Pair Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Street Pair Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Street Pair]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,34 @@
+:: Lake Ruin Deep []
+<<set $outside to 0>><<set $location to "lake_ruin">><<set $bus to "lake_ruin_deep">><<underwater>><<effects>><<lakeeffects>>
+你正待在湖下废墟深处，大小不一的罐子摆满了整个房间，而在入口的对面有一扇古老的门矗立在那里。
+<<if $lakeruinkey isnot 2>>
+	它已经关闭了。
+<<else>>
+	打开了。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif wraithCanHunt() and $wraith.state and $wraith.hunt is 0 and $wraith.timer gte random(0, 10) and !$possessed>>
+	<<wHunt "lake">>
+<<else>>
+	<<if $lakeruinkey is 1>>
+		<<lakeicon "key">><<link [[使用青铜钥匙|Lake Ruin Door]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+	<<if $lakeruinkey is 2>>
+		<<swimicon>><<link [[游向基座室|Lake Ruin Plinth]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<br>
+	<<if $nextPassageCheck is "Lake Ruin">>
+		<<swimicon "up">><span class="nextLink"><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>></span>
+	<<else>>
+		<<swimicon "up">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+	<</if>>
+	<br>
+<</if>>

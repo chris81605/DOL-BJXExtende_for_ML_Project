@@ -1,0 +1,46 @@
+:: Farm Kennel Play []
+<<effects>>
+
+你决定和这些<<beastsplural>>玩点大的。
+
+<<if $farm.beasts.dogs gte 20>>
+	他们聚在你身边，摇着尾巴。毫无疑问，他们会服从你的指示。
+	<br><br>
+
+	你想怎么和他们玩？
+	<br><br>
+
+	<<kennel_play_options>>
+<<elseif $farm.beasts.dogs gte 5>>
+	他们兴致勃勃地摇着尾巴，聚在你身边。
+	<br><br>
+
+	你想怎么和他们玩？
+	<br><br>
+
+	<<kennel_play_options>>
+<<elseif $farm.beasts.dogs gte -5>>
+	他们围在你身边，但并不在乎你。
+	<br><br>
+
+	你想怎么和他们玩？
+	<br><br>
+
+	<<kennel_play_options>>
+<<elseif $farm.beasts.dogs gte -20 or random(1, 2) is 2>>
+	他们围在你身边，但似乎对你不太信任。
+	<br><br>
+
+	你想怎么和他们玩？
+	<br><br>
+
+	<<kennel_play_options>>
+<<else>>
+	不幸的是，他们想玩点其他更有趣的。他们扑倒了你。
+	<br><br>
+
+	<<endevent>>
+	<<beastNEWinit 6 dog>>
+	<<link [[继续|Farm Kennel Gang Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,24 @@
+:: Arcade Lock []
+<<set $outside to 0>><<set $location to "arcade">><<effects>><<set $lock to 300>>
+街机厅大门紧闭。一块霓虹标牌在一旁闪烁："营业时间：<span class="gold"><<ampm 9 00>></span>"
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<lockpickicon>><<link [[撬开 (0:10)|Arcade]]>><<pass 10>><<crimeUp 20 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Arcade]]>><<pass 1>><<set $ghostIn to true>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<getouticon>><<link [[离开|Starfish Street]]>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,134 @@
+:: Farm Fight []
+<<effects>>
+
+<<switch $farm_fight.action>>
+<<case "breasts" "chest">>
+	<<set $farm_fight.distraction to 2>>
+	你走到窗户前，
+	<<if $worn.over_upper.type.includes("naked") and $worn.upper.type.includes ("naked") and $worn.under_upper.type.includes("naked")>>
+		<span class="lewd">炫耀你的<<breasts>>。</span>
+	<<else>>
+		<span class="lewd">展示你的<<breasts>>。</span>
+	<</if>>
+	你同时还敲了敲窗户，但暴徒们已经从艾利克斯身上转移注意力了。
+	<br><br>
+
+	<<if $farm_fight.stage gte 5>>
+		<span class="green">艾利克斯挣脱了<<person6>><<persons>>的控制，</span>然后让<<nnpc_himself "Alex">>和那些虎视眈眈的暴徒拉开了距离。
+		<br><br>
+	<<else>>
+		<span class="green">他们太专注于你，没有注意到艾利克斯拉开了距离，准备<<person1>><<himself>>发动猛攻。</span>
+	<</if>>
+<<case "bottom">>
+	<<set $farm_fight.distraction to 2>>
+	你爬上窗前的一个板条箱，
+	<<if $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+		<span class="lewd">把你的<<bottom>>贴到窗口外。</span>
+	<<else>>
+		<span class="lewd">暴露你的<<bottom>>。</span>
+	<</if>>
+	这引起了暴徒们的注意。
+	<br><br>
+
+	<<if $farm_fight.stage gte 5>>
+		<span class="green">艾利克斯挣脱了<<person6>><<persons>>的控制，</span>然后让<<nnpc_himself "Alex">>和那些虎视眈眈的暴徒拉开了距离。
+		<br><br>
+	<<else>>
+		<span class="green">他们太专注于你，没有注意到艾利克斯拉开了距离，准备<<person1>><<himself>>发动猛攻。</span>
+	<</if>>
+<<case "penis" "vagina">>
+	<<set $farm_fight.distraction to 2>>
+	你爬上窗前的一个板条箱。
+	<<if $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+		<span class="lewd">你炫耀你的<<genitals>>。</span>
+	<<else>>
+		<span class="lewd">你暴露你的<<genitals>>。</span>
+	<</if>>
+	暴徒们放下手头的一切盯着你看。
+	<br><br>
+
+	<<if $farm_fight.stage gte 5>>
+		<span class="green">艾利克斯挣脱了<<person6>><<persons>>的控制，</span>然后让<<nnpc_himself "Alex">>和那些虎视眈眈的暴徒拉开了距离。
+		<br><br>
+	<<else>>
+		<span class="green">他们太专注于你，没有注意到艾利克斯拉开了距离，准备<<person1>><<himself>>发动猛攻。</span>
+	<</if>>
+<<case "hammer">>
+	<<physiquedifficulty 5000 15000 no_text>>
+	<<if $physiqueSuccess is 1>>
+		你用锤子敲打门。<span class="green">每一击都重重打在了木头上。</span>
+		<<set $farm_fight.door -= 2>>
+		<br><br>
+	<<else>>
+		你用锤子敲打门。<span class="red">你的每一击都没有什么影响，只是弹了回来。</span>
+		<br><br>
+		<<set $farm_fight.door -= 1>>
+	<</if>>
+	<<set $farm_fight.weapon to "hammer">>
+<<case "unscrew">>
+	在窗外正在发生攻击的情况下，你很难保持手稳，但你设法拆下了一个螺丝。
+	<br><br>
+	<<set $farm_fight.weapon to "screwdriver">>
+	<<set $farm_fight.screws -= 1>>
+<<case "science">>
+	<<if currentSkillValue('science') gte random(1, 700)>>
+		你检查了一下链锯，找到一个能打开的盖子。你打开了它，里面是空的。<span class="green">链锯需要燃料。</span>
+		<br><br>
+		<<set $farm_fight.chainsaw to 1>>
+	<<else>>
+		你再次拉动拉扣，但没有任何反应。也许你的方法不对？你仔细检查这台机器，小心着不碰到刀片，<span class="red">但没有发现任何问题。</span>
+		<br><br>
+	<</if>>
+<<case "refuel">>
+	你将汽油倒入链锯中，盖回盖子。
+	<<set $farm_fight.chainsaw to 2>>
+	<br><br>
+<<case "chainsaw">>
+	你拉动拉扣，链锯嗡嗡作响。你再拉了一次，锯齿咆哮着发动起来。<<person2>><<person>>向棚子投来了一个担忧的眼神。
+	<br><br>
+
+	你锯向木门时闭上了眼睛。很快木门就被链锯切割成了一堆碎片和破损的木条。
+	<br><br>
+	<<set $farm_fight.weapon to "chainsaw">>
+	<<set $farm_fight.door to 0>>
+<<case "bash">>
+	<<physiquedifficulty 10000 20000 no_text>>
+	<<if $physiqueSuccess is 1>>
+		你用拳头猛击门。<span class="green">你感到木头在你的攻击下裂开。</span>
+		<br><br>
+		<<set $farm_fight.door -= 2>>
+	<<else>>
+		你用拳头猛击门。<span class="red">每一击都使门发出嘎吱嘎吱的声音，但并没有变得更加脆弱。</span>
+		<br><br>
+		<<set $farm_fight.door -= 1>>
+	<</if>>
+	<<set $farm_fight.weapon to "fists">>
+<</switch>>
+<<set $farm_fight.action to 0>>
+
+
+<<if $farm_fight.screws lte 0>>
+	最后一个螺丝钉落地，门开了，只剩锁着的门栓还将它固定在框架上。<span class="red">烟味扑鼻而来。</span>
+	<br><br>
+	<<link [[继续|Farm Fight End]]>><</link>>
+	<br>
+<<elseif $farm_fight.door lte 0>>
+	<<if $farm_fight.weapon is "chainsaw">>
+		你踢开了剩下的木头，穿过门。
+		<br><br>
+	<<elseif $farm_fight.weapon is "hammer">>
+		最后一次猛击，你打碎了一块门板。你伸手穿过去，打开门锁，然后用脚踢开了门。<span class="red">烟味扑鼻而来。</span>
+		<br><br>
+	<<else>>
+		你最后一次猛击，你的拳头直接穿过了木头。你摸索着找到门栓，打开了门锁，然后用脚踢开了门。<span class="red">烟味扑鼻而来。</span>
+		<br><br>
+	<</if>>
+	<<link [[继续|Farm Fight End]]>><</link>>
+	<br>
+<<else>>
+	<<farm_fight_alex>>
+	<br><br>
+	<<farm_fight_door>>
+	<br><br>
+	<<farm_fight_options>>
+<</if>>

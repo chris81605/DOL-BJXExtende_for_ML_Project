@@ -1,0 +1,24 @@
+:: Adult Shop Approach Sirris []
+/*<<npc "Sirris">> clothes bug */
+/*Unfinished content. Removes binds etc but demonstrates this to the customers.*/
+<<effects>>
+看见你的到来，西里斯露出了微笑。
+<<if $adultshopclerk and $NPCName[$NPCNameList.indexOf("Sirris")].love gt 50>>
+	"干得不错。"<<nnpc_He Sirris>>拍了拍你的肩。
+<</if>>
+"你需要什么吗？"
+<br><br>
+<<if !$adultshopclerk>>
+	<<link [[询求工作|Adult Shop Approach Sirris Ask]]>><</link>>
+	<br>
+<</if>>
+<<if $brothelVending and $brothelVending.status is "set" and $brothelVending.weeksEmpty lt 4>>
+	<<if $brothelVending.products gte 2 and !$weekly.brothelVMLube and $brothelVending.lubeToRefill gte 10>>
+		<<link [[为妓院购买润滑液 (0:10)|Adult Shop Buy Lube in Bulk]]>><<pass 10>><</link>>
+		<br>
+	<<elseif $brothelVending.products lt 2>>
+		<<link [[询问批发润滑液 (0:15)|Adult Shop Buy Lube in Bulk]]>><<pass 15>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<link [[返回|Adult Shop]]>><</link>>

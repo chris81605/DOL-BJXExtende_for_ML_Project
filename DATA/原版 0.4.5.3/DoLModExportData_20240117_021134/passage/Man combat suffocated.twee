@@ -1,0 +1,82 @@
+:: Man combat suffocated []
+<<if $npc.includes("Sydney")>>
+	<<run statusCheck("Sydney")>>
+<</if>>
+<<if $npc.includes("Kylar")>>
+	<<run statusCheck("Kylar")>>
+<</if>>
+<<if $suffocationPhase lte 1>>
+	<span class='red'>你窒息了。</span><br>
+	你的视线模糊不清。
+	<<if $vaginastate is "penetrated" or $vaginastate is "othervagina" or $penisstate is "othervagina" or $penisstate is "otheranus" or $penisstate is "othermouth" or $anusstate is "penetrated" or $mouthstate is "penetrated">>
+		你最后一次痉挛抽搐，然后脱力了。你那软弱的身体继续被无情地操着。
+	<<else>>
+		你的身体最后一次痉挛，变得无力。
+	<</if>>
+	<<set $penisaction to 0>>
+	<<set $vaginaaction to 0>>
+	<<set $anusaction to 0>>
+	<<set $leftaction to 0>>
+	<<set $rightaction to 0>>
+	<<set $mouthaction to 0>>
+	<<set $thighaction to 0>>
+	<<set $cheekaction to 0>>
+	<<set $feetaction to 0>>
+	<<set $chestaction to 0>>
+	<<set $mockaction to "none">>
+	<<set $bodyaction to 0>>
+
+	<!-- Didn't use $NPCList[_n].righthand instead of .find() because once i've got a weird error
+	with $NPCList[_n] being undefined here. Perhaps, temporary _n expired? -->
+	<<set _npc = $NPCList.find(x => x.lefthand == "throat" || x.righthand == "throat")>>
+	<<if _npc isnot undefined>>
+		<<set _npc.righthand to 0>>
+		<<set _npc.lefthand to 0>>
+	<</if>>
+	<<set $neckuse to 0>>
+	<<set $enemyanger -= 70>>
+	<<set $suffocationPhase to 2>>
+	<br><br>
+	<<link [[继续|Man combat suffocated]]>><</link>>
+<<else>>
+	<span class="red">你失去知觉了。</span><br>
+	<!-- Simulate 30 seconds of sex while passed out -->
+	<<set _simTurns to 3>>
+	<<for _turn to 0; _turn lte _simTurns; _turn++>>
+		<<if _turn lt _simTurns>>
+			<div class="unconscious shimmering" hidden="">
+				<<if $enemytype is "man">>
+					<<man>>
+				<<else>>
+					<<beast $enemyno>><br>
+				<</if>>
+				<<integritycheck>>
+			</div>
+		<<else>>
+			<div class="fade-in" hidden="">
+				你长长地喘了一口气，恢复了知觉。你的身体还在被使用中。
+				<<oxygenrefresh>>
+				<<set $suffocating to 0>>
+				<<unset $suffocated>>
+				<<unset $suffocationPhase>>
+				<br><br>
+				<span id="next"><<link [[继续|$previousPassage]]>><</link>></span>
+			</div>
+		<</if>>
+	<</for>>
+	<<script>>
+		$(document).one(':passageend', function(ev) {
+			const targets = [ ...document.getElementsByClassName('unconscious'), ...document.getElementsByClassName('fade-in') ];
+			let delay = 1500;
+			targets.forEach(ele => {
+				if (ele instanceof HTMLElement) {
+					/* Element is prepared and ready to be unhidden, leave a 1.5 timeout per iteration */
+					setTimeout(() => {
+						ele.hidden = false;
+					}, delay);
+					delay += 1500;
+				}
+			});
+		});
+	<</script>>
+<</if>>

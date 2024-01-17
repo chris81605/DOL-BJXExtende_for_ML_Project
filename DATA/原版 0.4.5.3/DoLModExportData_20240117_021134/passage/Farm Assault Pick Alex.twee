@@ -1,0 +1,36 @@
+:: Farm Assault Pick Alex []
+<<effects>>
+你跟艾利克斯跟踪着入侵者，等待着其中一人走得太靠近黑暗的地方。
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $farm_assault.teams[_assault_keys[_s]].type is "bailey">>
+			<<generate1>><<person1>>
+			一个<<person>>，背对着树篱站着，似乎觉得那边不会有人来。
+			<br><br>
+			你从灌木丛中钻出进行袭击，但那个<<person>>转身抓住了你的手臂。<<He>>注意到艾利克斯的时候为时已晚，被一拳打倒在地。
+			<br><br>
+			艾利克斯抑制住了欢呼的冲动。
+			<br><br>
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			你不觉得他们会单独行动，直到艾利克斯在光亮中出现，嘲笑着他们，然后又重新消失在了高草丛中。
+			<br><br>
+			<<generate1>><<person1>>
+			<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+				有两个人冲了过去，留下了一个<<person>>在后面。
+			<<else>>
+				有一个人冲了上去，留下了一个<<person>>在后面。
+			<</if>>
+			你的机会来了。你蹑手蹑脚地跟在<<him>>后面，然后突击。<<He>>安静地倒在了地上。
+			<br><br>
+			你和艾利克斯汇合，计划着下一步行动。
+			<br><br>
+
+			<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+		<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+	<</if>>
+<</for>>

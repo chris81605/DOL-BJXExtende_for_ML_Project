@@ -1,0 +1,46 @@
+:: Science Dissection Molestation []
+<<if $molestationstart is 1>>
+	<<if $phase is 3>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+		<<maninit>><<npcstrip>><<set $timer to 20>>
+	<<elseif $phase is 4>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+		<<maninit>><<hand_gag 0 left>>
+	<</if>>
+	<<enableSchoolRescue "Whitney" "Leighton" "delinquency">>
+<</if>>
+
+<<effects>>
+
+<<if $timer gte 5>>
+	你继续向教室走去，尽量不去理会那些骚扰。
+	<br><br>
+<<elseif $timer gte 2>>
+	你继续朝教室走去，尽你所能无视骚扰。你几乎快到了。
+	<br><br>
+<<elseif $timer is 1>>
+	你看到教室就在前面。
+	<br><br>
+<</if>>
+
+<<effectsman>>
+<<alarmstate "<span class='red'>没人过来帮你。很有可能是因为他们觉得你自己就是个不良学生。</span>">>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($timer lte 1 and $phase is 3)>>
+	<span id="next"><<link [[继续|Science Dissection Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Science Dissection Molestation]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,86 @@
+:: Domus Window []
+<<effects>>
+
+你
+<<if $cat gte 6>>
+	以猫科动物的灵敏
+<<else>>
+	以恶魔的身法
+<</if>>
+爬上了
+
+<<if $rng gte 81>>
+	房子侧面的棚架。你试图通过窗户看向里面，但窗帘却是拉上的。
+	<<promiscuity2>>
+
+	<<if random(1, 2) is 2 or $daily.demonWindowOrphan is 1>>
+		<<getinicon>><<link [[进入|Domus Window Curtain]]>><</link>>
+		<br>
+	<<else>>
+		<<getinicon>><<link [[进入|Domus Window Orphan]]>><<set $daily.demonWindowOrphan to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 61>>
+	<<generate1>><<person1>>
+	房子左边靠着的一架梯子。你透过窗户，看到一个睡在床上的<<person>>。床和屋内装修都是这条街的典型风格。
+	<<promiscuity2>>
+
+	<<ind>><<link [[引诱|Domus Window Ladder Seduce]]>><</link>>
+	<br>
+	<<getouticon>><<link [[离开|Domus Window Ladder Leave]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	一个垃圾桶放在房子旁边，你尝试跳了上去，爬进了上面一扇开着的窗户。
+	<<promiscuity2>>
+	<<beastNEWinit 1 dog>>
+	你把自己拉过窗台，和一个<<beasttype>>面对面。
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<bHe>>舔你的脸。房间里没有别人。
+		<br><br>
+
+		<<if $deviancy gte 15>>
+			<<ind>><<link [[引诱|Domus Window Dog Seduce]]>><</link>><<deviant2>>
+			<br>
+		<</if>>
+		<<getouticon>><<link [[离开|Domus Window Dog Leave]]>><</link>>
+		<br>
+	<<else>>
+		<<bHe>>露出<<his>>的牙齿。你转身爬出窗外，掉到下面的草地上。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 21>>
+	一辆汽车停在开着的窗户前，你轻轻一跳，就够到了窗台。你费力地爬进去。
+	<<promiscuity2>>
+
+	<<generate1>><<person1>>
+	两个床头柜上放着几支蜡烛，照亮了房间。在它们之间是一个被捆绑、蒙着眼睛、绑在床上的<<person>>。<<He>>听到了你进来的声音抬头看。周围没有其他人。
+	<br><br>
+
+	<<ind>><<link [[引诱|Domus Window Bound Seduce]]>><</link>>
+	<br>
+	<<getouticon>><<link [[离开|Domus Window Bound Leave]]>><</link>>
+	<br>
+<<else>>
+	房子旁边长着的一棵树。你坐在一根粗树枝上，窥视着窗户里面。
+	<<promiscuity2>>
+
+	你看到一对伴侣在床上睡觉。
+	<<generate1>><<generatep2>>
+	一位<<person1>><<person>>，和一位<<person2>><<person>>。
+	<br><br>
+
+	<<ind>><<link [[引诱第一个|Domus Window Couple Seduce]]>><<set $phase to 0>><</link>>
+	<br>
+	<<person2>>
+	<<if $NPCList[1].pronoun is "m" and maleChance() gte 1 or $NPCList[1].pronoun is "f" and maleChance() lt 100>>
+		<<ind>><<link [[引诱第二个|Domus Window Couple Seduce]]>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|Domus Window Couple Leave]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,41 @@
+:: Bog Plant Suspended Sex []
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>><<set $consensual to 1>>
+		<<neutral 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<</if>>
+	<<maninit "plant">><<npcexpose>>
+	<<set $enemyarousalmax to 800>>
+	<<set _randomtentacles to random(10, 12)>>
+	<<makeAbomination _randomtentacles 8 "vine" "vine" true>>
+	<<set $tentacles[0].shaft to "tummy">>
+	<<if $player.breastsize gte 2 and $chestuse is 0>>
+		<<set $tentacles[1].shaft to "breasts">><<set $chestuse to "squeezed">>
+	<<else>>
+		<<set $tentacles[1].shaft to "chest">>
+	<</if>>
+	<<set $tentacles[2].shaft to "waist">>
+	<<set $tentacles[3].shaft to "neck">><<set $head to "grappled">>
+	<<set $tentacles[4].shaft to "leftleg">><<set $leftleg to "grappled">>
+	<<set $tentacles[5].shaft to "rightleg">><<set $rightleg to "grappled">><<set $feettarget to "tentacles">>
+<</if>>
+
+<<effects>>
+<<effectsabomination>>
+<<abomination>>
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if _combatend or $tentacles.active lte 3>>
+	<span id="next"><<link [[继续|Bog Plant Suspended Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bog Plant Suspended Sex]]>><</link>></span><<nexttext>>
+<</if>>

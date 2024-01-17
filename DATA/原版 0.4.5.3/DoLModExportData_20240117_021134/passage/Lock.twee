@@ -1,0 +1,25 @@
+:: Lock []
+<<set $lock to 300>>
+
+这扇门紧锁着。
+<br><br>
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+
+	<<lockpickicon>><<link [[闯入 (0:05)|Elk Compound Interior]]>><<pass 5>><<crimeUp 10 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+	<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+	<</if>>
+
+你成功地撬开锁并进到了楼内。
+<<set $compoundcentre to 1>><<set $compoundalarm += 1>>
+
+<<if $skulduggery lt 400>>
+<<skulduggeryskilluse>>
+<<else>>
+<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>

@@ -1,0 +1,32 @@
+:: Forest Snake []
+<<location "forest">><<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<molested>>
+	<<controlloss>>
+	<<set $enemytype to "vore">>
+	<<set $vorestage to 1>>
+	<<set $vorecreature to "snake">>
+	<<set $vorestrength to 1>><<set $position to "doggy">>
+	<<set $timer to 4>>
+	<<resetLastOptions>>
+	<<getCombatDefaultsType>>
+<</if>>
+
+<<if $timer is 1>>
+	<<set $trance to 0>>
+	你从眩晕状态中挣脱出来，意识到蛇正在试图吞噬你！
+<</if>>
+
+<<voreeffects>>
+<<vore>>
+<<voreactions>>
+
+<<if $vorestage gte 7>>
+	<span id="next"><<link [[继续|Forest Snake Finish]]>><</link>></span><<nexttext>>
+<<elseif $vorestage lte 0>>
+	<span id="next"><<link [[继续|Forest Snake Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Forest Snake]]>><</link>></span><<nexttext>>
+<</if>>

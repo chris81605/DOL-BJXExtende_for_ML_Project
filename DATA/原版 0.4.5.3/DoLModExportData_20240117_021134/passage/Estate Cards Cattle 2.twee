@@ -1,0 +1,85 @@
+:: Estate Cards Cattle 2 []
+<<effects>>
+
+<<if $monsterchance gte 1 and $hallucinations gte 1 or $monsterchance gte 1 and $monsterhallucinations is "f" or $bestialitydisable is "t">>
+	<<if beastMaleChance() is 100>>
+		<<set _estate_cards_monsters to "bulls">>
+	<<elseif beastMaleChance() is 0>>
+		<<set _estate_cards_monsters to "cows">>
+	<<else>>
+		<<set _estate_cards_monsters to "both">>
+	<</if>>
+<<else>>
+	<<if beastMaleChance() is 100>>
+		<<set _estate_cards_monsters to "beast_bulls">>
+	<<elseif beastMaleChance() is 0>>
+		<<set _estate_cards_monsters to "beast_cows">>
+	<<else>>
+		<<set _estate_cards_monsters to "beast_both">>
+	<</if>>
+<</if>>
+
+
+伦恩把同伴们领到了一个大谷仓。
+<<if Time.dayState is "day">>
+	你们继续经过它，沿着一条泥路通向栅栏里的一扇门。
+	<<switch _estate_cards_monsters>>
+	<<case "bulls">>
+		牛男孩们在远处的封闭田野里吃草。
+	<<case "cows">>
+		牛女孩们在远处的封闭田野里吃草。
+	<<case "both">>
+		牛男孩和女孩们在远处的封闭田野里吃草。
+	<<default>>
+		牛在远处围起来的田野里吃草。
+	<</switch>>
+	护卫看了看伦恩，又看了看你。<<covered>>
+	<br><br>
+
+	"雷米有事找你，"伦恩说，护卫听了这话后一下就紧张地坐直了。"最好不要让老板久等，接下来就由我们来接管这里吧。"
+	<br><br>
+
+	护卫跑开了。伦恩没有浪费时间，打开了大门。"奶牛们，"<<he>>说道。"你们自由了，去吧！"没有回应。
+	<br><br>
+	<<switch _estate_cards_monsters>>
+	<<case "bulls">>
+		这需要一些哄骗，但伦恩和<<his>>的朋友们想办法赶着牛男孩们通过了大门。
+	<<case "cows">>
+		这需要一些哄骗，但伦恩和<<his>>的朋友们想办法赶着牛女孩们通过了大门。
+	<<case "both">>
+		这需要一些哄骗，但伦恩和<<his>>的朋友们想办法赶着牛男孩和牛女孩们通过了大门。
+	<<default>>
+		这需要一些哄骗，但伦恩和<<his>>的朋友们想办法赶着牛们通过了大门。
+	<</switch>>
+	它们一出门就精力充沛，渴望探索新环境。
+	<br><br>
+
+<<else>>
+	<<He>>把门打开。两边都是牛圈，
+	<<switch _estate_cards_monsters>>
+	<<case "bulls">>
+		每个牛圈里都有一个牛男孩。
+	<<case "cows">>
+		每个牛圈里都有一个牛女孩。
+	<<case "both">>
+		每个牛圈里都有一个牛男孩或牛女孩。
+	<<case "beast_bulls">>
+		每个牛圈里都有一头公牛。
+	<<case "beast_cows">>
+		每个围栏里都有一头牛。
+	<<default>>
+		每个牛圈里都有一头公牛或母牛。
+	<</switch>>
+	<br><br>
+
+	伦恩走到一边，打开每扇门。这需要一些鼓励，但<<his>>的同事们设法把牛从他们的牛圈里哄出了前门。
+	<br><br>
+
+	它们一出门就精力充沛，渴望探索新环境。
+	<br><br>
+<</if>>
+
+"任务完成，"伦恩说，你之前经过的两个打手正在追赶其中一头逃出的牛。"这应该会让事情活跃起来。"<br><br>
+
+<<link [[继续|Estate Cards Return]]>><</link>>
+<br>

@@ -1,0 +1,46 @@
+:: Town Hall Projects Bridge []
+<<effects>>
+
+"这是交通部负责的，"接待员说道，"右边第三扇门。"
+<br><br>
+<<endevent>>
+<<generate1>><<person1>>
+你顺着引导进入一个宽敞的房间，一个<<person>>正朝向你站着，但<<his>>正低头专心研究着桌子上的蓝图。直到你关上门时，<<He>>才抬头看向你。
+<br><br>
+"我能帮你什么吗？"<<he>>在询问的同时用其他纸张盖住了蓝图。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "我——我想重建倒钩街上的桥，"你说道，"就是运河旁边那个。"
+<<elseif $speech_attitude is "bratty">>
+    "我来申请倒钩街上，那座桥的重建工程，"你说道，"运河上那座。"
+<<else>>
+    "我想重建倒钩街上的桥，"你说道，"就运河上的那个。"
+<</if>>
+<br><br>
+
+<<person1>><<person>>皱起眉头，随后问道："运河已经永久性的干涸了，那么建桥的意义在哪里？"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "这……这会让人们更安全，"你说道，"有一些流氓藏在下面的桥洞里。"
+<<elseif $speech_attitude is "bratty">>
+    "运河不安全，"你说道，"有些声名狼藉的家伙们潜伏在那里。"
+<<else>>
+    "通过运河会更安全，"你说道，"有些不那么友好的人藏在下面。"
+<</if>>
+<br><br>
+
+<<person>>耸耸肩，"小镇无法承受更多额外开支了，"<<he>>说道："如果你愿意支付一部分的费用的话，那么我就可以安排一下，这大概需要花一万……"<<he>>停顿了一下，"<span class="gold">£15000。"</span>
+<br><br>
+
+<<if $money gte 1500000>>
+    <<link [[支付造桥费用 (£15000)|Town Hall Projects Bridge Buy]]>><<set $money -= 1500000>><<set $town_projects.bridge to 3>><<hope 6>><</link>><<ggghope>>
+    <br>
+<<else>>
+    <span class="blue">你手头没有那么多钱。</span>
+    <br>
+<</if>>
+
+<<link [[离开|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

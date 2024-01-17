@@ -1,0 +1,69 @@
+:: Lake Ruin Prison Masturbation Finish 2 []
+<<effects>>
+<<set _semenLoss to ($semen_volume / 30 + 20) * -1>><<set _milkLoss to ($milk_volume / 30 + 20) * -1>>
+最终结束时，你像被割断了线的木偶一样倒在地上，舌头无助地垂在嘴边。苍白的身影退出了你的身体，微笑着看着你。
+<br><br>
+
+<<if $phase isnot "vagina">>
+	你感到完全而彻底的空虚，不止一种方式。那次高潮的强度已经
+	<span class="red">完全耗尽了你的
+	<<if $player.penisExist and ($lactating and $breastfeedingdisable is "f") and !$femaleclimax>>
+		精液和乳汁，
+		<<set $fluid_forced_stat += $semen_amount + $milk_amount>>
+		<<set $breastsensitivity += 0.5>><<set $genitalsensitivity += 0.5>>
+		<<semenvolume _semenLoss>><<milkvolume _milkLoss>><<set $semen_amount to 0>><<set $milk_amount to 0>>
+	<<elseif $player.penisExist and !$femaleclimax>>
+		精液，
+		<<set $fluid_forced_stat += $semen_amount>>
+		<<set $genitalsensitivity += 0.5>>
+		<<semenvolume _semenLoss>><<set $semen_amount to 0>>
+	<<else>>
+		乳汁，
+		<<set $fluid_forced_stat += $milk_amount>>
+		<<set $breastsensitivity += 0.5>>
+		<<milkvolume _milkLoss>><<set $milk_amount to 0>>
+	<</if>>
+	<<if $player.penisExist and $femaleclimax>>
+		/* Try to lower the semen volume anyway */
+		<<semenvolume _semenLoss>>
+	<</if>>
+	并降低了你的最大容量。</span>
+<<else>>
+	就像一块被拧干的抹布，你感觉到自己的精神正在一点一点地流失。
+	<<set $genitalsensitivity += 0.5>>
+<</if>>
+<span class="purple">你几乎无法思考，感觉比以前更敏感。</span>
+<<tiredness 20>><<purity -20>><<trauma 24>><<drugs 1000>><<ggtrauma>><<gtiredness>><<llpurity>><<gggdrugged>>
+<br>
+<<if $orgasmtrait is 1>>
+	你勉强能露出一个傻笑。那是你生命中最好的高潮。
+	<<stress -20>><<llstress>>
+	<br>
+<</if>>
+<br>
+
+<<pass 5>>
+<<silently>><<storeactions "wraith masturbation">><</silently>>
+<<if _temp_clothes_present is 1>>
+	<<tearful>>你在祂的注视下穿好衣服。
+	<<storeon "wraith masturbation">>
+<</if>>
+<<endmasturbation>>
+<<endcombat>><<generateWraith 1>>
+<<wraithExorcise true true>>
+
+<<if C.npc["Ivory Wraith"].lust gte 14>>
+	苍白的身影看着你微笑。"<span class="wraith">你已经消耗了自己，而剩下的也会由我索取。</span>"
+	<br><br>
+	<<initWraith>>
+	<<startWraith>>
+	<br><br>
+	<<link [[继续|Lake Ruin Prison Rape]]>><</link>>
+<<else>>
+	苍白的身影玩笑地笑了笑。"<span class="wraith">一百万次、两百万次、三百万次，更多更多。你会学会飞，学会摔倒。</span>"祂沉入地下。
+	<<endevent>>
+	<<set $wraithPrison.timer to 30>>
+	<<set $wraithPrison.state to "recovering">>
+	<br><br>
+	<<link [[继续|Lake Ruin Prison]]>><</link>>
+<</if>>

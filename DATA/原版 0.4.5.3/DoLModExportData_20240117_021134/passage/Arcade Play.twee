@@ -1,0 +1,169 @@
+:: Arcade Play []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	将双手绑在背后玩街机游戏，是<<print either("这样的棘手。", "跟预料之中一样的难。", "不出所料的难")>>
+	<<print either("你几乎立刻就输了。","在短短几秒钟内，你灰头土脸的幸存者就成了僵尸的食物。","在短短几秒钟内，你勇敢的士兵就成了外星人的食物。","在短短一分钟内，你勇敢的船员就成了鲨鱼的食物。")>>
+	<<if $rng lte 34>><<generatey1>><<person1>>附近的几个学生目睹了你的惨败。其中一个开始模仿你，<<print either("龇牙咧嘴，","摆出一副蠢样，","傻傻地")>>越过<<his>>的肩膀看着屏幕
+		与此同时，<<his>>把手背在背后，装出一副<<print either("用力靠近","扇动","拍打")>>手柄的样子。
+		<br>
+		<<his>>的死党们都觉得这很滑稽。
+		<br>
+		平心而论，你现在可能看起来<<print either("有点傻","蠢到家了","有点'特别'","像个他妈的神经病")>>。
+		<<lcool>><<status -5>>
+		<<endevent>>
+	<</if>>
+	<br><br>
+	<<if $money gte 500 and Time.dayState isnot "night">>
+		<<link [[坚持 (£5 0:03)|Arcade Play]]>><<set $money -= 500>><<pass 3>><<stress 2>><</link>><<gstress>>
+		<br>
+	<</if>>
+	<<link [[停止|Arcade]]>><</link>>
+	<br>
+<<else>>
+	<<rng 13>>
+	<<switch $rng>>
+		<<case 1 2>>
+			你开始玩射击游戏，消灭了无数<<print either("僵尸", "海盗", "外星人", "小兵", "犯罪分子", "异形")>>。
+			<br><br>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+				<<generatey1>><<person1>>
+				一个<<person>>走到你右边，投了币就开始一言不发地突突。
+				<br><br>
+
+				<<link [[继续游戏|Arcade Keep Playing]]>><</link>>
+				<br>
+				<<link [[夺过光枪|Arcade Shove]]>><<def 1>><<trauma -2>><</link>><<ltrauma>>
+				<br>
+				<<set $skulduggerydifficulty to 400>>
+				<<link [[盗窃|Arcade Steal]]>><<crimeUp 30 "petty">><</link>><<skulduggerydifficulty>><<gcrime "petty">>
+				<br>
+				<<link [[停止|Arcade]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<rng>>
+				<<if $rng gte 71>>
+					在愉悦的爆炸声中，你把最终BOSS的头都打飞了。
+					<<ltrauma>><<trauma -2>>
+				<<elseif $rng gte 31>>
+					你努力打到了大家都在抱怨的部分。你明白了它被吐槽的原因。
+				<<else>>
+					你发誓机台上这把枪不能正常瞄准。你对着敌人射来的导弹打出去，但却打在了敌人脸上。
+				<</if>>
+				<br><br>
+				<<arcadeEndLink>>
+			<</if>>
+		<<case 3 4>>
+			你玩的是一个快节奏的弹幕射击游戏。
+			<br><br>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+				<<generate1>><<person1>>一个<<person>>站在你身边看着你玩。<<He>>时不时向你提供一些不知道是否可行的技巧。
+				<br><br>
+				<<Hes>>站得非常近。
+				<br><br>
+				<<link [[停止|Arcade Watched Stop]]>><<stress 6>><</link>><<gstress>>
+				<br>
+				<<link [[继续游玩|Arcade Watched Play]]>><</link>>
+				<br>
+			<<else>>
+				<<rng>>
+				<<if $rng gte 71>>
+					你运气不错，在关键时刻拿到了重要道具，一波爆发取得胜利。
+					<<ltrauma>><<trauma -2>>
+				<<elseif $rng gte 31>>
+					这对你来说有点太快了，你在游戏中途被击落。
+				<<else>>
+					你差点儿就赢了，实在是最终BOSS太无解。
+				<</if>>
+				<br><br>
+				<<arcadeEndLink>>
+			<</if>>
+		<<case 5 6>>
+			你走到一个格斗游戏街机前，选择界面有四名角色，你要选谁呢？
+			<br><br>
+			<<link [[看起来像无赖的|Arcade fighting cabinet]]>><<set $arcadeCharacter to "villainous">><</link>>
+			<br>
+			<<link [[刺猬头|Arcade fighting cabinet]]>><<set $arcadeCharacter to "spiky hair">><</link>>
+			<br>
+			<<link [[不好好穿衣服的|Arcade fighting cabinet]]>><<set $arcadeCharacter to "scantily-clad">><</link>>
+			<br>
+			<<link [[筋肉人|Arcade fighting cabinet]]>><<set $arcadeCharacter to "muscular">><</link>>
+			<br>
+		<<case 7>>
+			<<generate1>><<person1>>
+			你在玩平台跳跃游戏。你成功地跳过一个敌人获得了能量。你听到一个<<person>>在背后大声嚷嚷，于是你转过头去看。
+			<br><br>
+			"你打得也太烂了！起开，让我来。"
+			<br><br>
+			<<if $speech_attitude is "bratty">>
+				<<link [[让他滚|Arcade Classmate Braggart]]>><<set $phase to 1>><</link>>
+				<br>
+			<</if>>
+			<<link [[默默退让|Arcade Classmate Braggart]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[充耳不闻|Arcade Classmate Braggart]]>><<set $phase to 3>><</link>>
+		<<case 8 9>>
+			<<generate1>><<person1>>
+			你走到一个太空主题的射击游戏机台前，坐到了"1号玩家"的位置。在你正准备开玩之际，一个<<person>>向你走来。一小群人聚集在<<him>>身后。看来这个玩家很受欢迎。
+			<br><br>
+			<<switch random(1,2)>>
+				<<case 1>>"菜鸡，有没有胆和我打一把，看看谁更牛逼？"那个<<person>>说着垃圾话。
+				<<case 2>>"我是这游戏的高手，要不要来切磋一把？"<<he>>将一枚游戏币放在了机柜上。
+			<</switch>>
+			<br><br>
+			<<link [[接受比赛|Arcade Popular Gamer]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[拒绝|Arcade Popular Gamer]]>><<set $phase to 2>><</link>>
+		<<case 10>>
+			<<generate1>><<person1>>
+			你在角落发现一台开放式街机。你投了一枚币，开始用大炮轰杀坏蛋。<<stress -5>><<lstress>>
+			<br><br>
+			你正要用巴祖卡火箭筒开火，屏幕忽然灭了。你走到这台街机后面，发现电源插头被拔掉了。
+			<br><br>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+				你把电源插头插回去，大概有人绊到了电线。你转身继续你的游戏，但发现一个<<person>>挡住了你的路。你还没来得及说话，<<he>>就抓住了你。
+				<br><br>
+				<<link [[继续|Arcade Watched Rape]]>><<set $molestationstart to 1>><</link>>
+			<<else>>
+				你把电源插头插回去，大概有人绊到了电线。你回去准备继续玩，结果发现游戏已经重置了。你不想重打一遍，便离开了。
+				<br><br>
+				<<arcadeEndLink>>
+			<</if>>
+		<<case 11>>
+			<<generate1>><<person1>>
+			你挑了个清版快打游戏，狂扁靠近的杂兵并把它们打飞。你玩的时候听到身后有声音，原来是一帮人在围观着一个玩经典游戏的<<person>>。
+			<br><br>
+			"哇！以这样的速度这样下去，<<Hes>>一定能打破最高分记录的！"一个围观者兴奋地喊着，"大家快来看！"
+			<br><br>
+			<<link [[参与围观|Arcade Watch High Score]]>><<set $phase to 1>><</link>>
+			<br>
+			<<link [[继续玩自己的|Arcade Watch High Score]]>><<endevent>><<set $phase to 2>><</link>>
+		<<case 12>>
+			<<generatey1>><<person1>>
+			你穿过游戏厅，正想找新游戏玩的时候，听见附近传来欢呼声。循着声音，你看到一些人围在一台格斗游戏机前。你靠近那里。
+			<br><br>
+
+			其中一方是个<<person>>，看上去自信满满、胜券在握；另一个玩家则像条败犬，放下了摇杆。
+			<br><br>
+
+			"这下连胜十二人了！"那<<person>>朝人群大喊，"有没有人要当第十三个啊！"
+			<br><br>
+
+			<<link [[接受他们的挑战 (0:10)|Arcade Exposure Accept]]>><</link>>
+			<br>
+			<<link [[无视|Arcade Exposure Ignore]]>><</link>>
+
+		<<case 13>>
+			<<generatey1>><<person1>>
+
+			你走近空气曲棍球桌，有个与你年龄相彷的<<person>>靠在其中一桌上，你靠近时<<He>>朝你搭话，"想玩几局吗？"<<he>>说道。
+			<br><br>
+
+			<<link [[同意|Arcade Hockey Agree]]>><</link>>
+			<br>
+			<<link [[拒绝|Arcade Hockey Decline]]>><<set $phase to 1>><</link>>
+	<</switch>>
+<</if>>

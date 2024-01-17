@@ -1,0 +1,41 @@
+:: Orphanage Ward Wraith Sing []
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>>
+<<getChildrenIds `{location:"home", father:"Ivory Wraith"}`>>
+<<set _childNumber to _childrenIds.length>>
+当你走过育儿室时，你好像听到了歌声。走近一听，像是一首被遗忘已久的摇篮曲。
+<br><br>
+
+你转过拐角，一个熟悉的苍白身影站在婴儿床中间。
+<<if _childNumber is 1>>
+	<<childSelect _childrenIds>>
+	把<<childname `_childrenIds`>>温柔地搂在臂弯里，轻声哼唱。<<childHe>>眯起眼睛睡着了。
+<<elseif _childNumber is 2 or _childNumber is 3>>
+	祂用几双手臂将<<childrenNames _childrenIds>>温柔地搂在怀里，轻声哼唱。孩子们都安静地睡着了。
+<<else>>
+	祂用数不清的手臂将<<childrenNames _childrenIds>>温柔地搂在怀里，轻声哼唱。孩子们都安静地睡着了。
+<</if>>
+<<if $storedChildrenToys and $storedChildrenToys[$location] and $storedChildrenToys[$location].length gt 0>>
+	<<set _wraithToy to $storedChildrenToys[$location].random().name_lower>>
+	<<A _wraithToy>>被连接其后的透明触手悬挂着，漂浮在空中。
+<</if>>
+<br><br>
+
+祂转向你，露出了一个微笑，并将手指放在嘴边，做出一个嘘声的手势，而后又小心翼翼地
+<<if _childNumber is 1>>
+	把<<childname `_childrenIds`>>放回<<childhis>>的小床中。
+<<elseif _childNumber is 2 or _childNumber is 3>>
+	把<<childrenNames _childrenIds>>放回到他们的小床中。
+<<else>>
+	将<<childrenNames _childrenIds>>放回他们格子的小床中，细致地确保每个孩子都在合适的位置上。额外的手臂折叠起来后消失了。
+<</if>>
+摇篮曲以一个舒缓的哼唱声结束，余音在你的耳畔回响着。<<tiredness 3>><<gtiredness>>
+<br><br>
+
+"<span class="wraith">美丽。如此美丽。请替我好好爱护<<if _childNumber is 1>><<childhim>><<else>>他们<</if>><<pcpetname "Wraith" "nice">>。拜托了。</span>"
+<br><br>
+
+一滴<<wraithEyes>>色的泪珠从它的眼眶滑落，祂的身影渐渐地消失了。
+<br><br>
+
+<<childicon "crib">><<link [[继续|Childrens Home]]>><</link>>
+<br>

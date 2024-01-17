@@ -1,0 +1,29 @@
+:: Wraith Sewers Struggle []
+<<effects>>
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "pale slime">>
+	<<struggle_creatures 1 2>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<unset $struggle_start>>
+	<<set $timer to 7>>
+<</if>>
+
+<<if $timer is 1>>
+	<<struggle_add 2 1>>
+	<span class="pink">又有两个史莱姆从天花板上掉了下来！</span>
+	<br><br>
+<</if>>
+
+<<struggle>>
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Wraith Sewers Struggle End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[继续|Wraith Sewers Struggle]]>><</link>></span>
+	<br>
+<</if>>

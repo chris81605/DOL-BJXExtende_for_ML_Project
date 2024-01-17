@@ -1,0 +1,47 @@
+:: Bird Tower Rainwater Pool []
+<<effects>><<set $outside to 0>>
+你坐在雨水池旁。
+<<npc "Great Hawk">>
+<<if $bird.state is "home">>
+	<<switch $bird.activity>>
+	<<case "sing">>
+		<<beasttype>>在塔的边缘唱歌。
+	<<case "bathe">>
+		<<print either(
+			"<<beasttype>>顽皮地向你泼水。",
+			"<<beasttype>>呼唤着你加入<<bhim>>。",
+			"<<beasttype>>继续洗澡。",
+			"<<beasttype>>抖掉翅膀上的水，然后朝你的方向泼了一些水。",
+		)>>
+	<<case "groom">>
+		<<beasttype>>坐在<<bhis>>的栖木上，清理着<<bhis>>的羽毛。
+	<<case "build">>
+		<<beasttype>>正在筑巢。
+	<<default>>
+		<<beasttype>>栖息在<<bhis>>的巢中。
+		<<set $birdSleep to 1>>
+	<</switch>>
+<<else>>
+	<<beasttype>>出去打猎了。
+<</if>>
+<<if $syndromebird is 1>>
+	<<storeon "birdtower" "check">>
+	<<if _store_check is 1>>
+		你的衣服被放在一块石板上。
+	<<else>>
+		附近有一块巨大的石板，你可以把衣服放在上面。
+	<</if>>
+	<br>
+	<<storeactions "birdtower">>
+<<else>>
+	<br><br>
+<</if>>
+<<endevent>>
+<<if $bird.activity is "bathe" and $bird.state is "home">>
+	<<link [[洗澡 (0:30)|Bird Tower Bathe Bird]]>><<bird_pass 30>><</link>>
+	<br>
+<<else>>
+	<<link [[洗澡 (0:30)|Bird Tower Bathe]]>><<bird_pass 30>><</link>>
+	<br>
+<</if>>
+<<link [[站起身|Bird Tower]]>><</link>>

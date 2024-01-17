@@ -1,0 +1,57 @@
+:: Farm Shave []
+<<effects>>
+<<dontHideForNow>><<shavestrip>>
+你脱了衣服然后看向你的<<genitals>>。
+<br>
+<<if $worn.genitals.name is "chastity belt" or $worn.genitals.name is "gold chastity belt">>
+贞操带紧贴着你的身体，似乎完全没办法用剃刀剃到阴毛。
+<br>
+<<link [[穿上衣服 ->Farm Shed]]>><<clotheson>><<dontHideRevert>><</link>>
+<br>
+<<else>>
+<<if $worn.genitals.name is "chastity cage">>
+你的阴茎被锁在了笼子里。剃掉周围的毛会有点麻烦，不过没什么大问题。
+<br>
+<</if>>
+<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>
+	<<link [[剃干净 (0:15)->Farm shave clean]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 2 or ($pbstrip is 1 and $pblevel gte 2)>>
+	<<link [[剃成条状 (0:15)->Farm shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "整洁的条纹">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 1>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 3 or ($pbstrip gte 2 and $pblevel gte 2)>>
+	<<link [[剃成心形 (0:15)->Farm shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "可爱的心形">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 2>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 4 or ($pbstrip gte 3 and $pblevel gte 2)>>
+	<<link [[剃成三角形 (0:15)->Farm shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "整洁的三角形">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 3>><</link>>
+	<br>
+<</if>>
+<<if $player.ballsExist is true>>
+	<<if $pblevel gte 2 or $pbstrip gte 1>>
+		<<link [[只刮小腹下部 (0:10)->Farm shave pubis]]>><<pass 10>><<arousal 50>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 0>><<if $pblevelballs is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+	<<if $pblevelballs gte 3>>
+		<<link [[只刮蛋蛋 (0:05)->Farm shave balls]]>><<pass 5>><<arousal 50>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<if $pblevel is 0 and $pbstrip is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if $pblevel gt 5 or $pblevelballs gt 5>>
+	<<link [[刮短 (0:10)->Farm shave trim]]>><<pass 10>><<arousal 100>>
+		<<if $pblevel gte 5>>
+			<<set $pblevel to 5>><<set $pbgrowth to 7>><<set $pbstrip to 0>>
+		<</if>>
+		<<if $pblevelballs gte 5>>
+			<<set $pblevelballs to 5>><<set $pbgrowthballs to 10>>
+		<</if>>
+	<</link>>
+	<br>
+<</if>>
+<<if $worn.genitals.name isnot "chastity belt">>
+	<<link [[给阴毛染色|Farm Dye]]>><</link>><br>
+<</if>>
+<<link [[什么也不刮|Farm Shed]]>><<clotheson>><<dontHideRevert>><</link>>
+<</if>>

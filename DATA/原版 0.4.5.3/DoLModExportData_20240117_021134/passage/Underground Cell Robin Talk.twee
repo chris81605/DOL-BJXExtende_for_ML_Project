@@ -1,0 +1,396 @@
+:: Underground Cell Robin Talk []
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<<npc Robin>>
+
+<<if $undergroundbrothel.robin>>
+	你走向连接你和罗宾的手的那个洞，你呼唤着<<person1>><<him>>。
+<</if>>
+<<switch $undergroundbrothel.robinTalk>>
+	<<case 0>> /* First interaction */
+		“你知道我们在哪儿吗？”罗宾问道。你可以听到<<him>>在向你移动。
+		<br><br>
+
+		“某种地下监狱，”你一边倒在墙上一边回答。
+		<br><br>
+
+		你听到罗宾在<<his>>的牢房里摸索。“一定有办法让我们离开这里……”
+		<<He>>站起身走来走去。"我不会让这种事情发生在<<print (_robin.dom gte 60 ? "你" : "我们")>>身上。"
+	<<case 6>> /* Sixth interaction. They'll have been here a while by this point. */
+		<<if $undergroundbrothel.escape is 0>>
+			罗宾回答说：“我还在想办法离开这个地方。不过如果他们能给我们点儿光线就好了。”
+		<<else>>
+			罗宾回答说：“我还在挖床垫下面的洞。他们肯定没发现，不然早就来想办法阻止我了。”在<<his>>的声音中有一丝希望。
+		<</if>>
+	<<default>>
+		<!-- select a random topic from robinTopics that is undiscussed. Priority topics always happen before undiscussed -->
+		<<set _topicList to Object.entries(V.undergroundbrothel.robinTopics)>>
+		<<if _topicList.filter(pair => pair[1] === "priority").length gte 1>>
+			<<set _topic to _topicList.filter(pair => pair[1] === "priority").random()[0]>>
+		<<elseif _topicList.filter(pair => pair[1] === "undiscussed").length gte 1>>
+			<<set _topic to _topicList.filter(pair => pair[1] === "undiscussed").random()[0]>>
+		<</if>>
+		<<if _topic>>
+			<<undergroundRobinTopic _topic>>
+		<</if>>
+		<<switch _topic>>
+			<<case "scared">>
+				“不可能……”罗宾的声音又低又虚弱。
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“你——你还好吧？”你把手靠在墙上。
+				<<elseif $speech_attitude is "bratty">>
+					“怎么了？他们对你做什么了吗？”你提高声音。
+				<<else>>
+					“罗宾？你还好吗？”你问。
+				<</if>>
+				<br><br>
+
+				<<if _robin.dom gte 70>>
+					“对不起，我只是，我一时不知所措，”罗宾颤抖地说。
+					“我一定要坚强。”<<He>>说这话似乎更多是为了给<<his>>自己打气。
+				<<else>>
+					“我不想死在这里。”你听到罗宾在抽泣。
+					<br><br>
+
+					<<if $speech_attitude is "meek">>
+						“不要放弃希望，我们一定会成功的，”你温柔地说。
+					<<elseif $speech_attitude is "bratty">>
+						“他们就是想让你这么想。他们想让你放弃，接受现实！”你的手撞到了墙上。
+					<<else>>
+						“别担心，我们会成功的，我保证！”你说。
+					<</if>>
+					<br><br>
+
+					“谢谢，谢谢你安慰我。”罗宾的啜泣声慢慢停止了。
+				<</if>>
+			<<case "touch">>
+				“我可以……摸摸你吗？”罗宾的声音在颤抖，“我想感受到真正的爱。”
+				<br><br>
+
+				你把手指伸进连接你们两人的小洞里。这是你唯一能做的了。很快，你感觉到有什么柔软的东西压在了上面。
+				过了一会儿，你感觉到罗宾温柔地亲吻了你的指尖，然后<<he>>推回了你的手指。
+				<br><br>
+
+				“谢谢……我比你想象的更需要它。”
+			<<case "dark">>
+				“在黑暗中走动真的很难习惯，”罗宾干巴巴地笑着说，“我喝水的时候总是被床垫绊倒。”
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我也是，感觉像是盲人一样，”你同情地说。
+				<<elseif $speech_attitude is "bratty">>
+					“他们不希望自己的商品在牢房里太舒服。”你双臂交叉。
+				<<else>>
+					“我和你处境相同，”你同情地说。
+				<</if>>
+				<br><br>
+
+				“等待久了，我们说不定会拥有夜视能力呢？或者是声呐！就像蝙蝠一样！”你能看出来罗宾正在努力想让你开心起来。
+			<<case "lonely">>
+				“那个……”罗宾听起来很沮丧。
+				<<if _robin.dom gte 60>>
+					“我真的好想念孤儿院里的那些小伙伴……不知道他们过得好不好……”
+					<br><br>
+
+					<<if $speech_attitude is "meek">>
+						“肯定会过得很好的，”你试着让<<him>>高兴起来。
+					<<elseif $speech_attitude is "bratty">>
+						“我们一定要离开这里回去看望他们，”你说。
+					<<else>>
+						“那我们就努力尽快回去见他们吧，”你说。
+					<</if>>
+					<br><br>
+
+					“你说得对，他们肯定不愿意看到我变成现在这样。我必须保持坚强，”罗宾的语气听起来更像<<his>>平常的自己。
+				<<else>>
+					“我很怀念和你在一起的时光，我真的好想回家。”
+					<br><br>
+
+					<<if $speech_attitude is "meek">>
+						“罗宾，不要失去希望。”你轻声说。
+					<<elseif $speech_attitude is "bratty">>
+						“不要被击垮了。我们会逃出去的，我保证！”你自信地说。
+					<<else>>
+						“我们会逃出去的，别担心。”你在黑暗中微笑。
+					<</if>>
+					<br><br>
+
+					“谢谢，”罗宾说，“如果只有我一个人，我一定撑不下去。”
+				<</if>>
+			<<case "cold">>
+				“那个……你还好吗？”<<he>>语气颤抖。
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“你——你还好吧？”你问。
+				<<elseif $speech_attitude is "bratty">>
+					“罗宾，你还好吗？”你离墙更近了。
+				<<else>>
+					“怎么了？”你问。
+				<</if>>
+				<br><br>
+
+				“我、我的衣服有些坏了，”罗宾回答，“不能御寒。”<<He>>在继续之前停顿了一下。
+				<<if _robin.dom gte 60>>
+					“别为我担心。就像我卖热巧克力一样！”
+				<<else>>
+					“我希望他们至少能把这些房间暖起来。”
+				<</if>>
+			<<case "tattoo">>
+				“你也被纹身了吗？”罗宾的声音有些紧张。“我是164号。”<<He>>的话语顿住了。
+				“我们能把纹身洗掉吗？<<print (_robin.trauma gte 70 ? "或许是" : "等什么时候")>>我们能出去的时候？我还是喜欢我自己的名字。”
+				<<He>>发出痛苦的笑声。
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我很抱歉你也要经历这些，”你的声音颤抖。
+				<<elseif $speech_attitude is "bratty">>
+					“那些该死的混蛋也给我纹身了，一定就在你之前。”你用手抚摸着刻在皮肤上的数字“163”。
+				<<else>>
+					“我是‘163’号。”你的声音空洞。
+				<</if>>
+			<<case "pig">>
+				<<if $bestialitydisable is "t" or $monsterchance gte 100>>
+					<<set _animals to "monsters">>
+				<<else>>
+					<<set _animals to "animals">>
+				<</if>>
+				"那个，"罗宾的语气听起来很乐观，但你可以感觉到<<hes>>是假装的。"你知道猪是最聪明的动物之一吗？
+				它们学东西很快，记忆力也很好。它们也很干净，虽然人们的刻板印象中猪就是全身泥巴，但是在我成长的过程中，我一直很喜欢它们。”
+				<br><br>
+
+				<<Hes>>沉默了几秒钟。“我觉得我不再喜欢猪了，”<<his>>的声音很虚弱。
+			<<case "dice">>
+				“我从来不知道骰子还能这么用，”罗宾<<if _robin.trauma gte 40>>声音颤抖<<else>>勉强笑了笑<</if>>，“这就是他们的游戏理念吗？”
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我也是，”你低声说。
+				<<elseif $speech_attitude is "bratty">>
+					“如果那些大骰子是用来给他们死亡倒计时的该多好，”你嘟哝道。
+				<<else>>
+					“这当然是个游戏，”你嘟哝道。“这地方就是这样。”
+				<</if>>
+				<br><br>
+
+				<<if _robin.trauma gte 70>>
+					“对他们来说，这是一场游戏，”罗宾重复道。<<He>>发出一声空洞的笑声。“现在也只是一场游戏结束了。”
+				<<else>>
+					“如果这是一款电子游戏就好了，”<<he>>说，“那我们就可以用激光剑和大炮反抗了。然后还可以用更多别的武器。”<<He>>听起来更开朗了，罗宾一定是又想家了。
+				<</if>>
+			<<case "tentacles">>
+				“我很抱歉你不得不那样做，”罗宾喃喃地说，“我是说把我弄下去。那些金属东西在攻击你。”
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我喜欢和你一起做，”你回答说，“只是……不是那样的方式。”
+				<<elseif $speech_attitude is "bratty">>
+					“这算不上什么惩罚，”你嗤之以鼻，“我是说，和我的<<nnpc_girlfriend "Robin">>做爱？他们觉得这会让我痛苦吗？”
+					<<if $trauma gte ($traumamax * 0.6)>>
+						你尽量不让自己的声音颤抖。尽管很痛苦，但你还是做到了。
+					<</if>>
+				<<else>>
+					“我很高兴他们没有伤害你，”你说。
+				<</if>>
+				<br><br>
+
+				罗宾沉默了几秒钟。“他们给我灌了一种又浓又酸的饮料。它让我身体麻木，又很冷……我对你对我做的事一点儿感觉都没有。”
+			<<case "machineHigh">>
+				<<set _noOptions to true>>
+				<<He>>顿了一会儿，才语气空洞地喃喃道：“好疼。”
+				<br><br>
+
+				你等着<<him>>继续，<<he>>无助地抽泣。“机器把我弄得很疼。又快又颠簸，我现在坐都坐不下来了。为什么？你为什么要让他们把我的翻过来？”罗宾的声音因泪水而变得哽咽。“你知道这会伤害我，对吧？为什么？”
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“对、对不起，”你低声说，你无法回答。
+				<<elseif $speech_attitude is "bratty">>
+					你想说点儿什么，但是什么都说不出口。
+				<<else>>
+					“我当时很害怕，”你平静地说。
+				<</if>>
+				<br><br>
+
+				“为什么？”罗宾继续说，<<his>>的声音提高了。“你知道那会伤害我的！太疼了！你为什么要那样对我？你怎么了？！”
+				<<stress 6>><<gstress>>
+				<br><br>
+
+				你哑口无言，“罗宾——”
+				<br><br>
+
+				“你说过要保护我的！”<<he>>冲你吐了口唾沫。“可是你看看你现在，你连你自己都保护不了！”
+				<<stress 12>><<trauma 12>><<ggstress>><<ggtrauma>>
+				<br><br>
+
+				<<link [[道歉|Underground Cell Robin Talk 2]]>><<stress 6>><<npcincr Robin love 1>><<npcincr Robin dom 1>><<set $phase to "machineHighApologise">><</link>><<gstress>><<glove>><<gdom>>
+				<br>
+				<<link [[保持沉默|Underground Cell Robin Talk 2]]>><<trauma -6>><<npcincr Robin dom -10>><<set $phase to "machineHighSilent">><</link>><<ltrauma>><<lldom>>
+			<<case "machineNormal">>
+				过了一会儿，罗宾用颤抖的声音开口，“那……那个……
+				<<if _robin.dom gte 50>>
+					你还好吧？”<<He>>安慰你。“我刚刚好像说得有点儿太过了。”
+				<<else>>
+					太伤人了……”<<he>>说的那些话让你的心都要碎了。<<He>>停顿了一下，然后继续问：“你还好吗？”
+				<</if>>
+				<br><br>
+
+				<<if $pain gte 60>>
+					<<if $speech_attitude is "meek">>
+						你放声大哭，这也是你们现在少有的能释放痛苦的方法了。
+					<<elseif $speech_attitude is "bratty">>
+						“……我没事，”你颤抖的声音泄露了你的真实情绪，泪水顺着你的脸颊流了下来。
+					<<else>>
+						“没，没事……”你的眼泪顺着脸颊流了下来。
+					<</if>>
+					<br><br>
+
+					罗宾一开始似乎很惊讶，但很快就恢复了以往的温和。“一切都会好起来的，我们要从这里逃出去，我们会获得自由，等我们成功逃离了，他们就再也无法伤害到我们。”
+					停了一会儿，<<he>>低声说：“我要变得足够强大，强大到可以让我们两个都安心的生活。”
+					<<pain -20>><<lpain>><<npcincr Robin dom 2>><<gdom>>
+				<<else>>
+					<<if $speech_attitude is "meek">>
+						“我会没事的，不过还是谢谢你的关心。”因为<<his>>的关心你的脸上情不自禁的露出了微笑。
+					<<elseif $speech_attitude is "bratty">>
+						"想打倒我可没那么简单！"你为罗宾装出一副勇敢的样子。
+					<<else>>
+						“嗯，我也很高兴你没事，”你说着，把背靠在阻拦在你们中间的墙壁上。
+					<</if>>
+					<br><br>
+
+					<<if _robin.trauma gte 70>>
+						罗宾抽泣着说：“太好了，一切都结束了。”
+					<<else>>
+						罗宾平静下来。“我们能挺过去的，肯定可以的。”
+					<</if>>
+				<</if>>
+			<<case "machineLow">>
+				“你还好吗？”罗宾几乎立刻回应，<<his>>的声音里清晰地流露出关切。
+				<<if _robin.dom gte 50>>
+					“我早该知道他们不会等我回答的，”<<he>>说。
+				<<else>>
+					“我很抱歉，我不知道他们不会等你回答，”<<he>>说。
+				<</if>>
+				“我能做些什么让你感觉好点吗？”罗宾试图安慰你。
+				<br><br>
+
+				<<if $pain gte 60>>
+					<<if $speech_attitude is "meek">>
+						“请握紧我的手。”你把手指伸进洞里，罗宾轻轻地抓住它。
+						<br><br>
+
+						“没事的。”<<He>>握着你的手指，在你开始哭泣的时候轻轻地揉搓它。“放心，一切都会好起来的。”
+					<<elseif $speech_attitude is "bratty">>
+						“我已经没事了。”你哽咽着说，但罗宾显然不相信。
+						<br><br>
+
+						“等我们出去后，我给你买些冰淇淋怎么样？”罗宾勉强打起精神，微笑着说。
+						“我请客。”
+					<<else>>
+						“我们还能回家吗？”你低喃。
+						<br><br>
+
+						当你轻声哭泣时，罗宾鼓励你说：“发泄出来吧。等我们回家后我一定会让你快乐起来，让你忘记这一切。”
+					<</if>>
+					<<pain -20>><<lpain>><<trauma -5>><<ltrauma>><<npcincr Robin dom 2>><<gdom>>
+				<<else>>
+					<<if $speech_attitude is "meek">>
+						“好，谢谢你。”你微微颤抖着说。
+					<<elseif $speech_attitude is "bratty">>
+						“不过是有点儿酸痛而已，没什么大不了的，我会活下去的，”你说。
+					<<else>>
+						“还好已经结束了……”你说。
+					<</if>>
+
+					“你没事就好，需要什么就告诉我，好吗？”罗宾听起来如释重负。
+				<</if>>
+			<<case "machinePlayer">>
+				“你还好吗？”罗宾几乎立刻回应，<<his>>的声音里清晰地流露出关切。
+				“我很高兴他们停下来了，如果能更早一点儿该多好……”<<He>>没有说完。
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					你靠着墙，有那么一瞬间，你仿佛能感觉到墙那边罗宾的温暖。
+					“我——我会没事的。谢谢你。”
+				<<elseif $speech_attitude is "bratty">>
+					“我只是很高兴他们没有伤害到你。”你摇了摇头，勉强挤出一个微笑。
+				<<else>>
+					“我真的没事，”你说着把手放在连接你们俩的墙上。“没有在欺骗你。”
+				<</if>>
+			<<case "machineNone">>
+				<<if _robin.trauma lte 40>>
+					“他们见识到我们的反抗了！”罗宾高兴地说，“也许他们下次折磨我们之前会多想想后果。”
+				<<else>>
+					“我很高兴我们安全了，那台机器造、造成的伤害我肯定承受不了。”罗宾听起来松了口气，但仍然很紧张。
+				<</if>>
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我很高兴我们都完好无损。那些机器太可怕了，”你松了一口气。
+				<<elseif $speech_attitude is "bratty">>
+					“这就是他们试图伤害我们的后果。”尽管如此，你还是觉得自己在微笑。
+				<<else>>
+					“我很高兴他们放弃了，我还担心他们会再试一次呢，”你笑着说。
+				<</if>>
+			<<case "kissBack">>
+				“谢谢你吻我，”<<he>>停顿了一会儿后说道。“我知道这听起来很奇怪，但是……它帮助我忽略了正在发生的事情，分散了我的注意力。”
+				<br><br>
+
+				<<if $speech_attitude is "meek">>
+					“我也应该感谢你，”你说。
+				<<elseif $speech_attitude is "bratty">>
+					“我应该做得更多，”你咬紧牙关说，“我讨厌他们。”
+				<<else>>
+					“这是我最起码能做的，”你说。
+				<</if>>
+			<<case "hunt">>
+				<<if _robin.dom gte 70>>
+					“我们就在那里，”<<he>>喃喃自语。“我们当时在森林里，我们本可以……”<<He>>叹了一口气。“我应该更坚强一点。那样我就能救你，我们就能离开这里了。”
+					<br><br>
+
+					<<if $speech_attitude is "meek">>
+						“你、你不需要保护我，”你平静地说。
+					<<elseif $speech_attitude is "bratty">>
+						“你不是唯一一个犯错的人，”你喃喃自语。
+					<<else>>
+						“不要责怪自己，”你说，“我们是一起的，我和你一样应该受到责备。”
+					<</if>>
+					<br><br>
+
+					罗宾沉默了几秒钟。“我们一定要离开这里。下次他们再让我们去到阳光下，我们就想办法逃走。”
+				<<else>>
+					“我很高兴能再次看到太阳，”<<he>>勉强打起精神。“还有小草。真的……太好了。”
+					<br><br>
+
+					<<if $speech_attitude is "meek">>
+						“是、是很温暖，”你试图高兴起来，但是很难保持希望。“我希望这地方能不这么冷。”
+					<<elseif $speech_attitude is "bratty">>
+						“比这个地方强，”你咕哝着，轻轻地踢着墙。“下面什么都看不见。希望他们至少能开一盏灯。”
+					<<else>>
+						“我希望我们能在外面多待一会儿，”你说。
+					<</if>>
+					<br><br>
+
+					“是的，”罗宾点点头。“我……”<<He>>的声音逐渐消失。“我希望我们能离开这里。”
+				<</if>>
+			<<default>>
+				<<Hes>>沉默了。“你还好吗？”
+				<br><br>
+
+				罗宾回答之前停顿了一下。
+				<<if _robin.trauma gte 70>>
+					“我们——我们必须离开这里……”罗宾的声音在颤抖。
+				<<else>>
+					“我没事，”<<he>>微弱地笑了笑。“我只需要打起精神来。”罗宾颤抖的声音和<<his>>的话不一致。
+				<</if>>
+				<<undergroundRobinTopicRefresh>>
+		<</switch>>
+<</switch>>
+<<set $undergroundbrothel.timepass to false>><<set $undergroundbrothel.robinTalk++>><<set $undergroundbrothel.robinSpoke to true>>
+<br><br>
+
+<<if !_noOptions>>
+	<<link [[继续|Underground Cell]]>><<endevent>><</link>>
+<</if>>

@@ -1,0 +1,65 @@
+:: Temple Join []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $temple_rank is "prospective">>
+	<<if $weekly.templeFire>>
+		"恐怕你每周只能尝试一次纯洁性试炼，"<<he>>说。
+	<<else>>
+		"你准备好了，我就准备审判，"<<he>>说。
+	<</if>>
+	<<if $templetest isnot "failed">>
+		"除非你愿意用另一种方式来证明你的纯洁性？"
+	<</if>>
+	<br><br>
+	<<if !$weekly.templeFire>>
+	<<templeicon "trial">><<link [[火焰测验 (1:00)|Temple Join Fire]]>><<set $phase to 0>><<pass 60>><<set $weekly.templeFire to true>><</link>>
+	<br>
+	<</if>>
+	<<if $templetest isnot "failed">>
+		<<templeicon "virginity">><<link [[贞洁测验|Temple Test]]>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<link [[离开|Temple]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $templetest isnot "failed">>
+		<<if $fame.good gte 0>>
+			约旦毫不眨眼地观察着你。"<<if $player.gender_appearance is "m">>兄弟会<<else>>姐妹会<</if>>仅限于处女和通过纯洁审判赎罪的人加入。"
+			<br><br>
+			<<templeicon "virginity">><<link [[贞洁测验|Temple Test]]>><<set $phase to 1>><</link>>
+			<br>
+			<<templeicon "trial">><<link [[询问测验的相关内容|Temple Trial Intro]]>><</link>>
+			<br>
+			<<getouticon>><<link [[离开|Temple]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			约旦毫不眨眼地观察着你。"<<if $player.gender_appearance is "m">>兄弟会<<else>>姐妹会<</if>>仅限于处女和通过纯洁审判赎罪的人加入。"
+			<br><br>
+			"您还需要拥有一定的善良声誉。我们所从事的工作非常重要，这需要人们信任我们。如果您在这里祈祷，您会经常看到有人拿着募捐盘四处募捐。慷慨解囊为慈善事业做贡献将是证明自己的好方法。"
+			<br><br>
+			"等你名声更响亮时再回来，我们到时候再讨论下一步吧。感谢你的关注。"<<He>>转身回到了祭坛。
+			<br><br>
+			<<endevent>>
+			<<link [[继续|Temple]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		"对不起，孩子，"约旦说道，"<<if $player.gender_appearance is "m">>兄弟会<<else>>姐妹会<</if>>仅限于处女和通过纯洁审判赎罪的人加入。"
+		<br><br>
+			<<if $fame.good gte 0>>
+				<<templeicon "trial">><<link [[询问测验的相关内容|Temple Trial Intro]]>><</link>>
+				<br>
+				<<getouticon>><<link [[离开|Temple]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				"您还需要拥有一定的善良声誉。我们所从事的工作非常重要，这需要人们信任我们。如果您在这里祈祷，您会经常看到有人拿着募捐盘四处募捐。慷慨解囊为慈善事业做贡献将是证明自己的好方法。"
+				<br><br>
+				"等你名声更响亮时再回来，我们到时候再讨论下一步吧。感谢你的关注。"<<He>>转身回到了祭坛。
+				<br><br>
+				<<endevent>>
+				<<link [[继续|Temple]]>><</link>>
+				<br>
+			<</if>>
+		<br><br>
+	<</if>>
+<</if>>

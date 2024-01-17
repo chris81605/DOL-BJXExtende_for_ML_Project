@@ -1,0 +1,69 @@
+:: Swimming Lesson Masturbate Finish []
+<<set $outside to 0>><<set $location to "pool">><<effects>>
+
+<<if $timer lte 0 and $orgasmdown gte 1>>
+	<<npc Mason>><<person1>>梅森让同学们在泳池的一边排好队。你仍在因高潮而颤抖，艰难地跟上。
+
+	<<clotheson>>
+
+	梅森发现你在水里瑟瑟发抖。<<He>>跃入水中，向你游来，把你抱在<<his>>怀里，然后放在池边。<<He>>之后也爬上来，靠近你。“你没事吧？”<<he>>问道。
+	<br><br>
+
+	<<link [[点头|Swimming Masturbate Nod]]>><</link>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[亲吻|Swimming Masturbate Kiss]]>><<status 1>><<detention 2>><</link>><<promiscuous2>><<gdelinquency>><<gcool>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $timer lte 0>>
+		梅森要求全班在游泳池的一边排好队。当你和其他学生都挤在一起的情况下，你是逃不掉的。
+	<<else>>
+		不想再冒险了，你停下来。你觉得没人注意到。
+	<</if>>
+	<br><br>
+	<<endmasturbation>>
+	<<clotheson>>
+	<<endcombat>>
+
+	在别人没有发现的情况下自慰的感觉令人着迷。你花了一些时间才平复好激动的心和通红的脸。
+	<br><br>
+
+	<<water>>
+	<<advancelesson>>
+
+	<<if $phase is 1>>
+		<<set $phase to 0>>
+		铃响了，这意味着课程结束了。你离开了教室。
+		<br><br>
+
+		<<if $exposed lte 0>>
+			<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+			<br>
+
+			<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+			<br><br>
+		<<elseif $exposed gte 1>>
+			<<maleicon>><<link [[拿几条毛巾进男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+			<br>
+			<<femaleicon>><<link [[拿几条毛巾进女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $exposed gte 1>>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (8900 - ($allure / 2))>>
+				<<eventsswimming>>
+			<<else>>
+				<<eventsswimmingsafe>>
+			<</if>>
+		<<elseif $exposed lte 0>>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (8900 - ($allure / 10))>>
+				<<eventsswimming>>
+			<<else>>
+				<<eventsswimmingsafe>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>

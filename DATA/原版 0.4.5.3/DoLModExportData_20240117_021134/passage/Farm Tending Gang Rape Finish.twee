@@ -1,0 +1,52 @@
+:: Farm Tending Gang Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	他们把你推到<<if $weather is "rain" or $weather is "snow">>泥里<<else>>地上<</if>>。"这要感谢你的老板，"<<person1>><<person>>说道，"去找<<nnpc_him Alex>>哭吧。"<<gaggro>><<farm_aggro 5>>
+	<br><br>
+	<<tearful>>你站起来。<<group>>翻过<<farm_fence>>离开了。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+
+<<elseif $enemyhealth lte 0>>
+	<<group>>退后两步，对你的攻击性感到惊讶。"没听说这儿还会反抗的，"<<person2>><<person>>看着<<person1>><<person>>说，"现在怎么办？"<<earnFeat "Farm Protector">>
+	<br><br>
+	"操，"<<he>>回答，"雷米会不高兴的。"<<He>>转身跑了。其他人跟了上去。
+	<br><br>
+	<<tearful>>你看着他们逃跑的背影。/*<<laggro>><<farm_aggro -5>>*/
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+
+<<else>>
+	<<set $rescued += 1>>
+	"我来了！"是艾利克斯。
+	<br><br>
+	"你本来应该捂住<<phim>>的嘴的，"<<person1>><<person>>说道，"雷米都教过我们怎么做了！"
+	<br><br>
+	<<group>>转身逃跑，一路上一直在争吵。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Alex>><<person1>>
+	艾利克斯赶到的时候，刚好看到了他们逃跑的背影。"我不想再在这里看到你们这些混蛋，"<<he>>喊道。
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<covered>><<He>>红着脸看向了别处，好像刚刚才注意到你的穿着。"我给你找点什么遮着。"<<garousal>><<towelup>>
+		<br><br>
+
+		一会儿之后，<<He>>拿了条毛巾过来，然后回去工作了。<<pass 1>>
+	<<else>>
+		<<He>>转向你。"你还好吗？没有我在地里干活可能会很危险。小心。"
+	<</if>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<destination_farm>>
+
+<</if>>

@@ -1,0 +1,25 @@
+:: Domus Window Orphan Intervene []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"有，有人玩得很开心啊，"你一边说，一边溜进视野。
+<<elseif $speech_attitude is "bratty">>
+	"有人玩得很开心啊，"你一边说，一边溜进视野。
+<<else>>
+	"看我发现了什么？"你一边说，一边溜进视野。
+<</if>>
+<br><br>
+
+<<person2>><<persons>>的眼睛睁开，<<person1>><<person>>的头转向你，丝毫没有受到干扰。"干什么？"<<he>>问，上下打量着你。"有什么好说的？我花了500块买了这个荡妇。我的钱值了。"
+<br><br>
+
+<<link [["为了" + $NPCList[1].pronouns.boy + "的自由战斗"|Domus Window Orphan Fight Start]]>><</link>>
+<br>
+<<link [["自愿取代" + $NPCList[1].pronouns.boy + "的位置"|Domus Window Orphan Offer]]>><<hope 1>><</link>><<ghope>>
+<br>
+<<link [["为了£500自愿加入" + $NPCList[1].pronouns.boy|Domus Window Orphan Join]]>><</link>>
+<br>
+<<if $money gte 50000>>
+	<<link [["买下" + $NPCList[1].pronouns.boy + "的自由 (£500)"|Domus Window Orphan Buy]]>><<set $money -= 50000>><<hope 1>><</link>><<ghope>>
+	<br>
+<</if>>

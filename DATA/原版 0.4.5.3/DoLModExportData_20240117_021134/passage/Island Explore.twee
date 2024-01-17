@@ -1,0 +1,149 @@
+:: Island Explore []
+<<set $outside to 1>><<effects>>
+
+<<if $island.explore is "shore">>
+	你沿着海岸走。岛上大部分地方似乎被悬崖环绕。风扫过你，任何方向都看不见陆地。
+	<br><br>
+	奇怪的生物偶尔会潜伏在海滩上，你要保持距离。
+	<br><br>
+<<elseif $island.explore is "wood">>
+	你漫步在郁郁葱葱的树林茂密低垂的树枝间，树枝在微风中扭动着。在某些地方，它们变得非常密集，形成了隧道，如同迷宫一般。
+	<br><br>
+<<elseif $island.explore is "battleground">>
+	你走过战场，踩过断了的箭，当你听到远处偶尔的哭声时，你停了下来。
+	<br><br>
+<<elseif $island.explore is "plain">>
+	你穿过平原，爬上不同的小丘，徜徉其间的峡谷，感觉就像是另一个世界，或者是另一个时间。
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>>
+<<if $island.explore_count gte 100 and !$island.explore_locations.includes("plain")>>
+	<<island_events_plain>>
+<<elseif $island.explore_count gte 55 and !$island.explore_locations.includes("bay")>>
+	<<island_events_bay>>
+<<elseif $island.explore_count gte 40 and !$island.explore_locations.includes("castle")>>
+	<<island_events_castle>>
+<<elseif $island.explore_count gte 25 and !$island.explore_locations.includes("battleground")>>
+	<<island_events_battleground>>
+<<elseif $island.explore_count gte 10 and  !$island.explore_locations.includes("wood")>>
+	<<island_events_wood>>
+<<elseif !$island.explore_locations.includes("shore")>>
+	<<island_events_shore>>
+<<elseif random(1, 2) is 2 and ($danger gte (9900 - $allure))>>
+
+	<<cleareventpool>>
+
+	<<addevent "island_events_snake" 1>>
+	<<addevent "island_events_trap" 1>>
+	<<addevent "island_events_mosquitoes" 1>>
+	<<addevent "island_events_hunted" 1>>
+	<<addevent "island_events_cat" 1>>
+	<<addevent "island_events_cat_2" 1>>
+	<<addevent "island_events_tear" 1>>
+	<<addevent "island_events_flower" 1>>
+	<<addevent "island_events_rope" 0.5>>
+	<<if $bestialitydisable is "f" and $slugdisable is "f">>
+		<<addevent "island_events_slugs" 0.5>>
+	<</if>>
+
+	<<if $island.explore is "battleground">>
+		<<addevent "island_events_duel" 1>>
+	<</if>>
+
+	<<runeventpool>>
+<<else>>
+	<<cleareventpool>>
+	<<addevent "island_events_plumeria" 1>>
+	<<if $island.home isnot "rocky_hillock">>
+		<<addevent "island_events_rocky" 1>>
+	<</if>>
+	<<if $island.home isnot "waterfall">>
+		<<addevent "island_events_waterfall" 1>>
+	<</if>>
+	<<if $island.home isnot "gulch">>
+		<<addevent "island_events_gulch" 1>>
+	<</if>>
+	<<addevent "island_events_birds" 1>>
+	<<addevent "island_events_pleasant_flower" 1>>
+	<<addevent "island_events_squirrel" 1>>
+
+	<<if $island.explore is "shore">>
+		<<if $island.home is "gulch">>
+			<<addevent "island_events_walnut" 1.4>>
+			<<addevent "island_events_walnut_2" 1.4>>
+			<<addevent "island_events_walnut_3" 0.6>>
+			<<if $fox gte 6>>
+				<<addevent "island_events_squirrel" 0.6>>
+			<</if>>
+		<<elseif $island.home is "waterfall">>
+			<<addevent "island_events_walnut" 1.8>>
+			<<addevent "island_events_walnut_2" 1.8>>
+			<<addevent "island_events_walnut_3" 0.9>>
+			<<if $fox gte 6>>
+				<<addevent "island_events_squirrel" 0.9>>
+			<</if>>
+		<<else>>
+			<<addevent "island_events_walnut" 2.6>>
+			<<addevent "island_events_walnut_2" 2.6>>
+			<<addevent "island_events_walnut_3" 1.3>>
+			<<if $fox gte 6>>
+				<<addevent "island_events_squirrel" 1.3>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $island.home is "gulch">>
+			<<addevent "island_events_walnut" 0.4>>
+			<<addevent "island_events_walnut_2" 0.4>>
+		<<elseif $island.home is "waterfall">>
+			<<addevent "island_events_walnut" 0.7>>
+			<<addevent "island_events_walnut_2" 0.7>>
+		<<else>>
+			<<addevent "island_events_walnut" 1>>
+			<<addevent "island_events_walnut_2" 1>>
+		<</if>>
+	<</if>>
+
+	<<if $island.explore is "wood">>
+		<<addevent "island_events_wood_1" 2.5>>
+		<<addevent "island_events_wood_2" 2>>
+		<<if $islander_language gte 100>>
+			<<addevent "island_events_wood_3" 3>>
+		<<elseif $islander_language gte 50>>
+			<<addevent "island_events_wood_3" 2>>
+		<<else>>
+			<<addevent "island_events_wood_3" 1>>
+		<</if>>
+		<<addevent "island_events_wood_4" 1>>
+	<<else>>
+		<<addevent "island_events_wood_1" 1>>
+		<<addevent "island_events_wood_2" 1>>
+		<<addevent "island_events_wood_3" 1>>
+	<</if>>
+
+	<<if $island.explore is "battleground">>
+		<<if $islander_language gte 50>>
+			<<addevent "island_events_wood_3" 1>>
+		<</if>>
+		<<addevent "island_events_overhear" 2>>
+		<<addevent "island_events_duel" 2>>
+		<<addevent "island_events_battle" 1>>
+		<<addevent "island_events_sing" 2>>
+	<<else>>
+		<<addevent "island_events_overhear" 1>>
+		<<addevent "island_events_duel" 1>>
+		<<addevent "island_events_sing" 1>>
+	<</if>>
+
+	<<if $island.explore is "plain">>
+		<<addevent "island_events_arrow" 2>>
+		<<addevent "island_events_broken_mask" 2>>
+		<<addevent "island_events_trilobite" 1>>
+	<<else>>
+		<<addevent "island_events_arrow" 1>>
+		<<addevent "island_events_broken_mask" 1>>
+	<</if>>
+
+	<<runeventpool>>
+
+<</if>>

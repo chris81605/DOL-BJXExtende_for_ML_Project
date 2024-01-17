@@ -1,0 +1,45 @@
+:: Pound Work Walk Road Close []
+<<effects>>
+
+你遮住自己的双眼，并将剩下的<<beastsplural>>拉到安全处，你听见车向你急转时，轮胎发出的尖鸣，你将剩下的<<beastsplural>>拉至安全处，但车却在擦身而过时挂住了你的
+<<if $rng gte 67 and $worn.upper.name isnot "naked" and $worn.lower.name isnot "naked">>
+	<<print $worn.upper.cn_name_cap>>
+	<<set $worn.upper.integrity -= 25>>
+	<<set $worn.lower.integrity -= 25>>
+<<elseif $rng gte 33 and $worn.upper.name isnot "naked">>
+	<<print $worn.upper.cn_name_cap>>
+	<<set $worn.upper.integrity -= 25>>
+<<else>>
+	<<print $worn.lower.cn_name_cap>>
+	<<set $worn.lower.integrity -= 25>>
+<</if>>
+<<integritycheck>>
+<br>
+。布料像旗子一样跟在汽车后面，司机按喇叭。
+<br><br>
+
+<<pass 60>>
+<<exposure>>
+你穿过田野之间的小径回到镇上，没有碰到任何人。
+<br><br>
+
+<<if $exposed gte 1>>
+	你躲在郊区的树丛中，眺望着远处的街道。前方的树林中有一些建筑物。<<tearful>>你低头看着自己的身体。<<covered>>
+	<br><br>
+
+	<<link [[寻求帮助|Pound Work Walk Ask]]>><</link>><<difficulty 50>>
+	<br>
+	<<if $deviancy gte 35>>
+		<<link [[藏在狗群中间|Pound Work Walk Hide]]>><</link>><<deviant3>>
+		<br>
+	<</if>>
+	<<if $exposed gte 2 and $exhibitionism gte 75>>
+		<<link [[随遇而安|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist5>>
+		<br>
+	<<elseif $exposed gte 1 and $exhibitionism gte 55>>
+		<<link [[随遇而安|Pound Work Walk Exhibitionism]]>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<<else>>
+	<<pound_walk_end>>
+<</if>>

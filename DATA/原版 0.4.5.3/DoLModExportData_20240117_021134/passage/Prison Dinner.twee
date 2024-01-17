@@ -1,0 +1,65 @@
+:: Prison Dinner []
+<<effects>>
+<<pass 1>><<advancetohour>>
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<<generate1>><<person1>>
+	你和其他囚犯一起排队。食柜后面的那个<<person>>将一碗蔬菜肉丁汤装满之后放在了你的头上。
+	<<if $worn.face.type.includes("gag")>>
+		里面有一根吸管，你也许可以把它插进你的嘴里——至少这对喝汤有很大的帮助。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<if $worn.face.type.includes("gag")>>
+		<span class="blue">如果不是因为你戴着口塞的话，也许你就可以寻求帮助。</span>
+		<br>
+	<<else>>
+		<<link [[向别人求助|Prison Breakfast Help]]>><<prison_inmates -1>><</link>><<lrespect>>
+		<br>
+	<</if>>
+	<<link [[小心翼翼地找一个座位坐下|Prison Breakfast Careful]]>><</link>><<dancedifficulty 1 600>>
+	<br>
+<<else>>
+	你和其他囚犯一起排队，得到了一碗蔬菜肉丁汤。
+	<<if $worn.face.type.includes("gag")>>
+		里面有一根吸管，你也许可以把它插进你的嘴里——至少这对喝汤有很大的帮助。
+	<</if>>
+	<br><br>
+	<<if $prison.kylar is "active">>
+		凯拉尔出现在你的身后，紧紧跟随着你。
+		<br><br>
+		<<npc Kylar>><<person1>>
+		<<link [["让" + $NPCList[0].pronouns.him + "坐在你身边"|Prison Dinner Kylar]]>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<prison_inmates -1>><</link>><<lrespect>><<glove>><<lksuspicion>>
+		<br>
+		<<link [[坚持要求单独坐着|Prison Dinner Kylar Refuse]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><<prison_inmates 1>><</link>><<llove>><<gksuspicion>><<grespect>>
+		<br>
+	<<elseif $rng gte 81>>
+		你找了个地方坐下，开始吃你的饭。
+		<br><br>
+		<<generate1>><<person1>>
+		"嘿，<<girl>>，"坐在你对面的那个<<person>>把<<He>>的胳膊搭在桌上，"来掰个手腕？"
+		<br><br>
+
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<span class="blue">你不能在手臂被捆绑的情况下去掰手腕。</span>
+		<<else>>
+			<<link [[掰一把手腕|Prison Dinner Wrestle]]>><</link>><<physiquedifficulty 2000 16000>>
+		<</if>>
+		<br>
+		<<link [[谢绝|Prison Dinner Wrestle Decline]]>><<prison_inmates -1>><</link>><<lrespect>>
+		<br>
+	<<elseif $rng gte 61>>
+		<<generate1>><<person1>>
+		"嘿，"一个<<person>>把<<his>>的托盘甩在你的面前，"这是老子的座位。"
+		<br><br>
+
+		<<link [[恐吓|Prison Dinner Threaten]]>><<prison_inmates 1>><</link>><<grespect>>
+		<br>
+		<<link [[换个位置|Prison Dinner Move]]>><<prison_inmates -1>><</link>><<lrespect>>
+		<br>
+	<<else>>
+		没人理会你。
+		<br><br>
+		<<link [[继续|Prison Breakfast Prayer]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

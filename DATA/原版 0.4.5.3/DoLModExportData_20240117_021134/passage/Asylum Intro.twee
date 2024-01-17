@@ -1,0 +1,61 @@
+:: Asylum Intro []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $gamemode is "hard" and $asylumintro is 0>>
+	<<set $asylumintro to 1>>
+	<<if $ironmanmode isnot true>><<set $gamemode to "normal">><</if>>
+	<span class="gold">你存活了<<print Time.days>>天。<<if $ironmanmode isnot true>>困难模式已禁用。<</if>></span>
+	<<set $hardmodedays to Time.days>>
+	<br><br>
+<</if>>
+<<if $asylumescaped is 1>>
+	<<set $asylumescaped to 0>>
+	<<set $suspicion to 80>><<set $asylumstatus to 40>><<set $asylumbound to 3>>
+<<else>>
+	<<set $suspicion to 20>><<set $asylumstatus to 0>><<set $asylumbound to 1>>
+<</if>>
+<<set $asylumkeycard to 0>>
+<<set $asylumdistracted to 0>>
+<<wash>>
+<<set $wardrobe_location to "asylum">>
+<<wardrobeSelection true>>
+<<if $asylumintro is 1>>
+	<<npc Harper>><<person1>>
+	<<bind>><<upperwear 35>>
+	你在一个纯白的房间的床上醒来。房间的墙壁和地板上都铺着软垫。哈珀医生站在你身边。
+	"你醒了，"<<he>>说着，在<<his>>的记录板上记下了什么东西。"欢迎回来。"你的胳膊被绑住了，"很遗憾上次治疗没成功，让你失望了，不会有下次了。"
+	<br><br>
+	<<He>>又低头看了看笔记本。“你还记得日程安排吗？<<ampm 22>>睡觉，在<<ampm 6>>吃早饭。你每天有两个疗程，分别在<<ampm 10>>和<<ampm 15>>。每天的<<ampm 20>>会对你进行评估。如果忘记了会有人提醒你的。"
+	<br><br>
+	<<He>>站起身来，向出口走去。"你可以在白天自由探索这栋楼。不要进入任何写着仅限员工的门，一定要谨遵医嘱。这都是为了你自己好。
+	<<if $asylumstate is "sleep">>
+		先回你的病房，天亮了再出来。”门关上了，咔哒一声锁上了。
+	<<else>>
+		"<<He>>走了，没有关上门。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Asylum Cell]]>><</link>>
+	<br>
+<<else>>
+	<<set $asylumintro to 1>>
+	<<npc Harper>><<person1>>
+	<<bind>><<upperwear 35>>
+	你在一个纯白的房间的床上醒来。房间的墙壁和地板上都铺着软垫。哈珀医生站在你身边。
+	<br><br>
+	"你醒了，"<<He>>在写字板上记下了什么东西。"不要紧张，在这里你会好起来的。"<<He>>在你身边蹲下，继续说道："我们在森林里的另一家医院里。"你发现自己的手臂被紧紧地绑在身前，动弹不得。"这是为了你自己的安全考虑，如果你表现好，过一两天就会给你松绑。"
+	<br><br>
+	<<He>>回头看了看<<his>>的笔记本。"来了这里就要遵守日程安排。<<ampm 22>>睡觉，在<<ampm 6>>吃早饭。你每天有两个疗程，分别在<<ampm 10>>和<<ampm 15>>。每天的<<ampm 20>>会对你进行评估。如果忘记了会有人提醒你的。"
+	<br><br>
+	<<He>>站起身来，向出口走去。"你可以在白天自由探索这栋楼。不要进入任何写着仅限员工的门，一定要谨遵医嘱。这都是为了你自己好。
+	<<if $asylumstate is "sleep">>
+		先回你的病房，天亮了再出来。”门关上了，咔哒一声锁上了。
+	<<else>>
+		"<<He>>走了，没有关上门。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<i>当你的创伤或意识降到一定程度时你就能出院，但也有其他方法可以逃离这里。</i>
+	<br><br>
+	<<link [[继续|Asylum Cell]]>><</link>>
+	<br>
+<</if>>

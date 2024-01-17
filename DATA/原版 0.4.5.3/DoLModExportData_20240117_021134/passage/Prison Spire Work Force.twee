@@ -1,0 +1,25 @@
+:: Prison Spire Work Force []
+<<effects>>
+
+你伸手拿到了$hawk_loot。
+<<if $monster is 1>>
+	那<<beasttype>>试着把它拉走，但你紧紧抓住它。
+<<else>>
+	那只<<beasttype>>用喙试图将它拉走，但你紧紧抓住它。
+<</if>>
+<<if random(1, 2) is 2>>
+	一番短暂的拉锯战后，<span class="green"><<bhe>>屈服了，</span>展开翅膀飞向天空。
+	<br><br>
+	<<endevent>>
+	<<generate_anxious_guard 0>>
+	你把$hawk_loot还给了<<anxious_guard 0>>。"真不知道你是怎么做到的，"<<he>>说道。<<glove>><<lsuspicion>><<prison_rep anxious 1>><<prison_guards 1>>
+	<br><br>
+	<<unset $hawk_loot>>
+	<<prison_spire_options>>
+<<else>>
+	一番短暂的拉锯战后，你设法占了上风。<<beasttype>>尖叫一声，<span class="red">然后扑向<<bhis>>的宝物。</span>
+	<br><br>
+
+	<<link [[继续|Prison Spire Work Fight]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

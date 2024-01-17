@@ -1,0 +1,27 @@
+:: Lake Depths Swarm Finish []
+<<effects>>
+<<if $stress gte $stressmax>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<passoutlake>>
+<<else>>
+	<<tearful>>你逃离了<<if $slimedisable is "f" and isBloodmoon()>>苍白史莱姆<<else>>鱼<</if>>群。它们没有追上来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Lake Depths]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

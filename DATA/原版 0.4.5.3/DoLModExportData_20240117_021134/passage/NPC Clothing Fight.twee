@@ -1,0 +1,52 @@
+:: NPC Clothing Fight []
+<<if $sexstart is 1>>
+	<<generateNPC 1 $npcOptions.type $npcOptions.pronoun $npcOptions.gender>><<person1>>
+	<<run npcEquipSet($NPCList[0], setup.npcClothesSets.find(n => n.name === $npcOptions.clothes))>>
+	<<unset $npcOptions>>
+
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	With a hiss of steam, the tube retracts to the ceiling. A figure walks out, a <<personsimple>>. You recognise <<him>> as the <<person>> you selected.
+	<br><br>
+
+	"Beginning sexual encounter," the <<person>> says in a flat tone, before <<his>> face morphs into a lascivious smile. <<catcall>>
+<<elseif $fightstart is 1>>
+	<<generateNPC 1 $npcOptions.type $npcOptions.pronoun $npcOptions.gender>><<person1>>
+	<<run npcEquipSet($NPCList[0], setup.npcClothesSets.find(n => n.name === $npcOptions.clothes))>>
+	<<unset $npcOptions>>
+
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+
+	<<maninit>>
+	With a hiss of steam, the tube retracts to the ceiling. A figure walks out, a <<personsimple>>. You recognise <<him>> as the <<person>> you selected.
+	<br><br>
+
+	"Beginning combat encounter," the <<person>> says in a flat tone, before <<his>> face morphs into an angry scowl. "Oh, you're in for it now!"
+<</if>>
+
+<<effects>>
+<<effectsman>><<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $finish is 1>>
+	<span id="next"><<link [[FINISH|NPC Clothing Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[HEALTH|NPC Clothing Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[ORGASM|NPC Clothing Fight Finish]]>><</link>></span><<nexttext>>
+<<elseif $pain gte 100 and $willpowerpain is 0>>
+	<span id="next"><<link [[PAIN|NPC Clothing Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|NPC Clothing Fight]]>><</link>></span><<nexttext>>
+<</if>>
+<br>
+<<link [[Emergency exit|NPC Clothing Fight Finish]]>><<set $finish to 1>><</link>>
+<br><br><br><br>

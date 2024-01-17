@@ -1,0 +1,38 @@
+:: Molestation bus []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<molestbusinit>>你感觉到有东西在触摸你的下体。当你睁开眼睛时，一只手紧紧捂住你的嘴，让你不能发出尖叫。
+	<br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>没有人来帮你。除了你们外，公车上没有其他人。</span>" 1>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[继续->Molestation bus Alarm]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Molestation bus Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Molestation bus Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Molestation bus]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Molestation bus Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Molestation bus Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Molestation bus]]>><</link>></span><<nexttext>>
+<</if>>

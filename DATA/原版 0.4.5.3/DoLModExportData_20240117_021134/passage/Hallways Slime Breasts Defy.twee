@@ -1,0 +1,44 @@
+:: Hallways Slime Breasts Defy []
+<<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你转身离开<<person>>。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你转身离开<<person>>。然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它迫使你转向<<person>>。<span class="green">但它失败了</span>。
+	<</if>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<if $exhibitionism gte 55 and $earSlime.growth lt 100>>
+		<<set $earSlime.defyCooldown += 4>>
+	<<else>>
+		<<set $earSlime.defyCooldown += 8>>
+	<</if>>
+	你转身离开<<person>>。然而，<span class="teal">它仍然因为之前对你强加控制而筋疲力尽。</span>你感觉它迫使你转向<<person>>，<span class="red">，而你无法</span>抵抗它的影响。
+	<<ggwillpower>><<willpower 3>>
+	<<if !$worn.upper.type.includes("naked")>>
+		你<<pullup>>你的$worn.upper.cn_name_cap。<<He>>目瞪口呆地看着你。“快，快来……”你说，"抚摸我。"
+	<<else>>
+		你挺起胸口。“抚，”你说，"抚摸我。"
+	<</if>>
+	<br><br>
+
+	那个<<person>>呆住了，难以相信<<his>>的眼睛。<<He>>环顾四周，然后伸出双手分别抓住了你的<<breasts>>。<<if !$worn.under_upper.type.includes("naked")>><<He>>隔着你的$worn.under_upper.cn_name_cap感觉到你已经有感觉了。<<else>><<He>>感受到你裸露的身体已经有感觉了。<</if>>
+	<br><br>
+
+	<<He>>更用力了。
+	<br><br>
+
+	<<link [[继续|Hallways Slime Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	史莱姆试图维持对你的控制，但你反抗了它，并且成功把自己从<<person>>手上挣脱出来。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

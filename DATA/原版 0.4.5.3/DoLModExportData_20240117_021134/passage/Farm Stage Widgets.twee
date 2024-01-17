@@ -1,0 +1,121 @@
+:: Farm Stage Widgets [widget]
+<<widget "farmVisitor">>
+	<<npc Alex>><<generate2>><<person2>>
+	"瞧瞧这是谁呀？"一个声音说道，你转身看去，一个<<person>>正倚靠在农田边缘的栅栏上，"艾利克斯为<<person1>><<himself>>找了一个助手，而且还是个可爱的小家伙。你为什么不把屁股挪过来让我好好瞧瞧呢？"
+	<br><br>
+
+	"滚开！"另一个声音说道。那是艾利克斯。<<He>>瞪着那个<<person2>><<person>>。"我告诉过你，如果你再闯进来，会有什么后果。"
+	<br>
+	<<person>>举起双手，但脸上没有露出恐惧的神情。"我可没闯进来。你瞧，<<if $pronoun is "f">>女孩们<<else>>男孩们<</if>>和我只是想知道你是否重新考虑了我们的提议。"
+	<br>
+	"我不需要你的帮助，"艾利克斯答道，站到了你的身边。
+	<br>
+	"你觉得有这个小镇<<girl>>就足够了吗？真有意思。"<<He>>转身沿着小路走来。
+	<br><br>
+
+	<<link [[继续|Farm Visitor]]>><<set $farm_stage to 3>><</link>>
+	<br>
+<</widget>>
+
+<<widget "farmStage4">>
+	<<npc Alex>><<person1>>
+	"我们做到了，"艾利克斯说道。<<He>>听起来很累，<<his>>的衣服破了，<<his>>的头发被汗水打湿，但是笑容却绽放在<<his>>的脸上。"我们清理了第二块田地。"
+	<br><br>
+
+	<<He>>带你去了那块田地，停在栅栏旁边。<<He>>示意你跟<<he>>一起坐下。"如果没有你在，我是不可能做到这一切的。"<<he>>说着，
+
+	<<if C.npc.Alex.pregnancy.selfKnowledge is true and npcIsPregnant("Alex") and talkedAboutPregnancy("Alex","pc")>>
+		从口袋里掏出了一个玻璃瓶，拿到嘴边。
+		<br><br>
+
+		你瞪了<<him>>一眼。
+		<br><br>
+
+		"对不起，"<<he>>一边说，一边把瓶子放到一边，"坏习惯。"
+		<br><br>
+
+		<<link [[继续|Farm Stage 4]]>><<set $phase to 1>><<set $farm_stage to 4>><<set $farm.clearing to 100>><</link>>
+
+	<<else>>
+		<<if playerBellyVisible()>>
+			<<He>>从口袋里又掏出一个瓶子，但看到你的<<bellyDescription "pc">>后，皱起了眉头。
+			<br><br>
+
+			<<link [[继续|Farm Stage 4]]>><<set $phase to 1>><<set $farm_stage to 4>><<set $farm.clearing to 100>><</link>>
+			<br>
+		<<else>>
+			<<He>>从口袋里掏出另一瓶，递给了你。
+			<br><br>
+
+			<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+				<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+			<<else>>
+				<<link [[喝|Farm Stage 4]]>><<set $phase to 0>><<stress -6>><<set $farm_stage to 4>><<set $farm.clearing to 100>><</link>><<lstress>>
+			<</if>>
+			<br>
+			<<link [[拒绝|Farm Stage 4]]>><<set $phase to 1>><<set $farm_stage to 4>><<set $farm.clearing to 100>><</link>>
+			<br>
+		<</if>>
+
+	<</if>>
+<</widget>>
+
+<<widget "farmStage5">>
+	<<npc Alex 1>><<npc Remy 2>><<person1>>
+	"完成了，"艾利克斯靠在农舍的墙上说道。"又有一块田地可以种植了。"<<He>>正伸手进口袋，但在听到小路上接近的马蹄声时，停下了动作。
+	<br><br>
+	<<person2>>
+	<<if $remy_seen is "livestock">>
+		一匹<<farm_text horse>>骑进了农场。在它的背上坐着雷米，<<if $pronoun is "m">><<his>>淡棕色的头发在微风中飘舞<<else>><<his>>淡棕色的头发被扎成一个整齐的发髻<</if>>。回忆起在<<his>>的农场受到的待遇，你十分紧张。然而，这一次<<his>>的眼中没有盛气凌人的恶意，<<his>>甚至没有认出你。
+		<br><br>
+		<<He>>下马，脱下手套。<<his>>朝你微笑，然后朝艾利克斯微笑。<<His>>的绿眼睛闪烁着光芒。
+		<br><br>
+		"很抱歉没事先通知，"<<he>>说道。"因为一直都联系不上你。我来是为了商谈生意的。"
+		<br><br>
+	<<elseif $remy_seen is "riding_school">>
+		一匹<<farm_text horse>>被骑进了农场。雷米坐在它的背上，<<His>>是附近骑术学校的老板。<<if $pronoun is "m">><<His>>淡棕色的头发在微风中飘动<<else>><<His>>淡棕色的头发被扎成一个整齐的发髻<</if>>。
+		<br><br>
+		<<He>>下马，脱下手套。<<his>>朝你微笑，然后朝艾利克斯微笑。<<His>>的绿眼睛闪烁着光芒。
+		<br><br>
+		"很抱歉没事先通知，"<<he>>说道。"因为一直都联系不上你。我来是为了商谈生意的。"
+		<br><br>
+	<<else>>
+		一匹<<farm_text horse>>踏进了农场。一个<<if $pronoun is "m">>长着淡棕色短发，发丝随着风飘扬的男人<<else>>系着整齐发髻的淡棕色头发女人<</if>>坐在<<farm_his horse>>背上。艾利克斯的笑容消失了。
+		<br><br>
+		<<personsimple>>下马，脱掉手套。<<He>>对你微笑。<<His>>的绿色眼睛闪闪发光。
+		<br><br>
+		"我想我们之前没见过，"<<he>>说着看向你。"我是雷米。经营着附近的骑术学校和自己的农场。"<<He>>转向艾利克斯。"很抱歉没有事先通知你，但我联系不上你。我是来商谈生意的。"
+		<br><br>
+
+	<</if>>
+	<<person1>>
+	艾利克斯看起来很矛盾，但最后<<him>>还是选择了礼貌点。"茶还是咖啡？"
+	<br><br>
+
+	<<link [[茶|Farm Stage 5]]>><<set $phase to 0>><<stress -6>><<set $farm_stage to 5>><<set $farm.clearing to 100>><</link>><<lstress>>
+	<br>
+	<<link [[咖啡|Farm Stage 5]]>><<set $phase to 1>><<tiredness -6>><<set $farm_stage to 5>><<set $farm.clearing to 100>><</link>><<ltiredness>>
+	<br>
+<</widget>>
+
+<<widget "farmStage6">>
+	<<npc Alex>><<person1>>你听到了快速的脚步声。你转过身，看到艾利克斯冲着你跑来。
+	<<if $weather is "rain" or $weather is "snow">>
+		尽管浑身是泥，<<Hes>>还是在微笑。
+	<<else>>
+		尽管荨麻粘在<<his>>的衣服上，<<Hes>>还是在微笑。
+	<</if>>
+	<br><br>
+
+	"完成了，"<<he>>说道。"最后一块田地。我们重建了农场。"
+	<br><br>
+
+	<<He>>斜靠在农舍的门廊上，抬头看着你。"我一个人可能应付不了，如果<<if $pronoun is "m">>爸爸<<else>>妈妈<</if>>知道这会有多么艰——"<<he>>转过头。"我想证明没有他们我也能做到这一步。现在我做到了。"
+	<br><br>
+
+	<<He>>站起来。"我得告诉他们这个消息，现在立刻。"<<He>>消失在农舍里。
+	<br><br>
+
+	<<link [[继续|Farm Stage 6]]>><<set $farm_stage to 6>><<set $farm.clearing to 100>><</link>>
+	<br>
+<</widget>>

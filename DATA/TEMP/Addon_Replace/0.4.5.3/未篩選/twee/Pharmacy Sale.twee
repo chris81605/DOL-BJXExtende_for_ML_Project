@@ -1,0 +1,82 @@
+:: Pharmacy Sale []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+那个<<person>>看了看你手中的<<print $pharmacyItem.cn_name>>，
+<<formatmoney $pharmacyItem.price>>
+<<switch $pharmacyItem.type>>
+	<<case "penis reduction">>
+		"这将收您_printmoney。<<if !$daily.pharm.seductionResult>>所以是它太大了？还是说你想让它变得更小？<</if>>"
+	<<case "penis growth">>
+		"这将收您_printmoney。<<if !$daily.pharm.seductionResult>>你认为你的太小了吗？<</if>>"
+	<<case "penis blocker">>
+		"这需要您支_printmoney。<<if !$daily.pharm.seductionResult>>我想知道你的那玩意到底有多大。<</if>>"
+	<<case "breast reduction">>
+		"这需要您支付_printmoney，请注意，效果可能会有差异。"
+	<<case "breast growth">>
+		"这需要您支付_printmoney，请注意，效果可能会有差异。"
+	<<case "breast blocker">>
+		"这需要您支付_printmoney。"
+	<<case "bottom reduction">>
+		"这需要您支付_printmoney，请注意，效果可能会有差异。"
+	<<case "bottom growth">>
+		"这需要您支付_printmoney，请注意，效果可能会有差异。"
+	<<case "bottom blocker">>
+		"这需要您支付_printmoney。"
+	<<case "Anti-Parasite Cream">>
+		"请支付_printmoney。这支药剂应该可以维持2周左右，这取决于你把它涂在哪里。"
+	<<case "Breast Pump">>
+		"这需要您支付_printmoney。"
+	<<case "condoms">>
+		"这需要您支付_printmoney。"<<He>>说着的同时看了你一眼。
+		<<if $player.gender_appearance is "m">>
+			"很高兴看到人们会采取安全措施，你女朋友真的很幸运。"
+		<</if>>
+	<<case "pregnancy test">>
+		"这需要您支付_printmoney。"<<He>>说着的同时看了你一眼。
+		<<if $player.gender_appearance is "m">>
+			"你女朋友很幸运。
+		<<else>>
+			"希望你能得到你想要的结果，
+		<</if>>
+		它们在受孕当天有些不准确，所以只要给它一些时间或在几天后再进行测试。"
+		<<if $pregnancyTest is undefined>><<set $pregnancyTest to 0>><</if>>
+	<<case "fertility booster">>
+		"这需要您支付_printmoney。"<<He>>说着的同时看了你一眼。
+		<<if $player.gender_appearance is "m">>
+			"想把你女朋友的肚子搞大？那祝你好运。
+		<<else>>
+			"哦，谁是那个幸运的父亲呢？
+			<!-- ^ This reads kinda weirdly -->
+		<</if>>
+		每天吃一片，试着保持着正常的作息吃药。"
+	<<case "contraceptive">>
+		"这需要您支付_printmoney。
+		<<if $player.gender_appearance is "m">>
+			很高兴看到人们会采取安全措施，你的女友很幸运。
+		<</if>>
+		每天吃一片，试着保持着正常的作息吃药，但你仍旧需要小心，最好的避孕方式只有禁欲。"
+	<<default>>
+		<<run throw new Error(`Missing pharmacyItem type! ${V.pharmacyItem.type}`)>>
+<</switch>>
+<br><br>
+
+<<if $money gte $pharmacyItem.price>>
+	<<if $pharmacyItem.type is "Breast Pump">>
+		<<link [[付钱|Pharmacy]]>><<run sexShopOnBuyClick(11, false)>><</link>>
+	<<elseif $pharmacyItem.type is "condoms">>
+		<<link [[付钱|Pharmacy]]>><<set $money -= $pharmacyItem.price>><<gcondoms 3>><</link>>
+	<<elseif $pharmacyItem.type is "pregnancy test">>
+		<<link [[交钱|Pharmacy]]>><<set $money -= $pharmacyItem.price>><<set $pregnancyTest += 2>><</link>>
+	<<elseif $pharmacyItem.type is "Anti-Parasite Cream">>
+		<<link [[付钱|Pharmacy]]>><<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 1>><<boughtOnce>><</link>>
+	<<else>>
+		<<link [[交钱|Pharmacy]]>><<set $money -= $pharmacyItem.price>><<set $sexStats.pills.pills[$pharmacyItem.type].owned += 14>><<boughtOnce>><</link>>
+	<</if>>
+<<else>>
+	<span class="purple">你没有那么多钱。</span>
+<</if>>
+<br>
+<<if $pharmacyItem.type.includes("penis") and $promiscuity gte 15 and !$daily.pharm.seductionResult>>
+	<<link [[魅惑|Pharmacy Seduction]]>><</link>><<seductiondifficulty>><<promiscuous2>>
+	<br>
+<</if>>
+<<link [[不购买|Pharmacy]]>><</link>>

@@ -1,0 +1,42 @@
+:: Museum Sell []
+<<set $outside to 0>><<set $location to "museum">><<effects>>
+
+<<npc Winter>><<person1>>
+<<if $phase is 1>><<set $phase to 0>>
+温特戴上手套，对物品进行鉴定。"啊哈，"<<he>>说。"这个面具。我很开心你决定把它交给我。"<<He>>把<<printmoney `$antiquemoney * 100`>>放在桌上。
+<<glove>><<npcincr Winter love 1>>
+<br><br>
+
+<<He>>把东西带进了后面的房间里。
+<br><br>
+
+<<elseif $antiquemoney gte 1000>>
+
+温特戴上手套，对货物进行鉴定。<<His>>的怀疑随着<<he>>的检查逐渐消失。“你从哪儿弄来的？”<<he>>问道。<<He>>并没有等待你的回答，而是直接把<<printmoney `$antiquemoney * 100`>>放在了桌子上。
+<<glove>><<npcincr Winter love 1>>
+<br><br>
+
+<<He>>把东西带进了后面的房间里。
+<br><br>
+<<elseif $antiquemoney gte 200>>
+
+温特戴上手套，对货物进行鉴定。“谢谢。”<<he>>说道，“你的捐献已被记录。”<<He>>把<<printmoney `$antiquemoney * 100`>>放在了桌子上。
+<br><br>
+
+<<He>>把东西带进了后面的房间里。
+<br><br>
+
+<<else>>
+温特戴上手套，对货物进行鉴定。二话不说，<<he>>就把<<printmoney `$antiquemoney * 100`>>放在了桌子上。
+<br><br>
+
+<<He>>把东西带进了后面的房间里。
+<br><br>
+
+<</if>>
+<<endevent>>
+
+<<set $money += ($antiquemoney * 100)>><<set $antiquemoneyhistory += $antiquemoney>><<set $antiquemoney to 0>>
+
+<<link [[继续|Museum]]>><</link>>
+<br>

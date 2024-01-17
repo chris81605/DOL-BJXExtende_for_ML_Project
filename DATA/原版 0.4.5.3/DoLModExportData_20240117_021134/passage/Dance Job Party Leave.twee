@@ -1,0 +1,48 @@
+:: Dance Job Party Leave []
+<<effects>>
+<<pass 10>>
+
+查里一直呆在外面，在<<nnpc_his Charlie>>汽车后备箱里翻找着。<<nnpc_He Charlie>>抬起头来。
+<br><br>
+"这是不可能的，"那个<<person>>说。"虽然这个<<girl>>很可爱。这不是<<pher>>的错。"<<He>>说着走回屋里。
+<br><br>
+<<endevent>><<npc Charlie>><<person1>>
+
+
+<<if $charlie_breakdown gte 1>>
+	"需要我送你回工作室吗？或者说，你呆在这里没问题？"
+	<br><br>
+
+	<<askicon>><<link [[要求搭车|Dance Job Party Lift]]>><</link>>
+	<br>
+	<<link [["表示你在这很好"|Dance Job Party Okay]]>><</link>>
+	<br>
+<<else>>
+
+	"发生什么事了么？" 查里问你。"一切还好吧？"
+	<br><br>
+
+	<<if $trauma gte $traumamax * 0.6>>
+		<<link [[痛哭起来|Dance Job Party Break]]>><<set $charlie_breakdown to 1>><<npcincr Charlie love 20>><<trauma -12>><<stress 12>><</link>><<ggstress>><<lltrauma>><<gglove>>
+		<br>
+		<<link [[一言不发|Dance Job Party Bottle]]>><</link>>
+		<br>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"我，我很好，"你结结巴巴地说。
+		<<elseif $speech_attitude is "bratty">>
+			"没什么问题，"你说道。
+		<<else>>
+			"我很好，"你说。
+		<</if>>
+		<br><br>
+
+		"需要我送你回工作室吗？或者说，你呆在这里没问题？"
+		<br><br>
+
+		<<link [[要求搭车|Dance Job Party Lift]]>><</link>>
+		<br>
+		<<link [["表示你在这很好"|Dance Job Party Okay]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

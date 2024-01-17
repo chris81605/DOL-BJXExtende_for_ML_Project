@@ -1,0 +1,40 @@
+:: Moor Abduction Tent []
+<<set $outside to 0>><<effects>>
+
+你独自一人在帐篷里，被一根埋在地里的铁链拴住。你可以听到外面的鼾声，以及附近防水布下发出的嘶嘶声。
+<br><br>
+<<moor_binding_text>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "remyAbduction">>
+	<<else>>
+		你再也承受不住，晕了过去。
+		<br><br>
+
+		<<passout>>
+		<<link [[继续|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
+		<br>
+	<</if>>
+<<elseif Time.dayState isnot "night">>
+	你听到外面有动静。一个<<generate1>><<person1>><<person>>走进帐篷，蹲在你的链条后面。<<He>>摆弄你的绑带，其他人从防水布下面把笼子抬了起来。
+	<br><br>
+
+	你一获得自由，就被推了出去。他们很快就把营地拆了。他们把你推进开始穿越荒原的队伍中。
+	<br><br>
+
+	<<link [[继续|Moor Abduction Walk]]>><<endevent>><</link>>
+	<br>
+<<else>>
+
+	<<if $moor_binding gte 1>>
+		<<link [[摩擦你的绑带 (1:00)|Moor Abduction Tent Loosen]]>><<pass 60>><</link>>
+		<br>
+	<<else>>
+		<<link [[逃脱|Moor Abduction Escape]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[睡觉|Moor Abduction Sleep]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,151 @@
+:: Trash Search []
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+你在成堆的垃圾当中寻找着有价值的东西。
+
+<br><br>
+
+
+
+<<if $trash_key isnot 1 and $trash_unlocked isnot 1>>
+	你找到一把大的铁钥匙，你想知道它是否能打开附近的什么东西。
+	<<set $trash_key to 1>>
+
+<<elseif $trash gte 100>>
+	<<if $brothel_machine_repair is 2>>
+		你注意到垃圾压缩机的底部有粉红色的光，你前去检查了一下，发现了一个小罐子。透过它侧面的那片玻璃，你看到里面那发亮的粉红色凝胶。<span class="gold">这一定是妓院那个性爱机器所需的燃料。</span>
+		<<set $brothel_machine_repair to 3>>
+	<<elseif $rng gte 80>>
+		你发现了一个看起来就很有年代感的香炉，这显然是一个古董。你不知道为什么有人会把它扔掉。
+		<<set $antiquemoney += 100>><<museumAntiqueStatus "antiquetrashburner" "found">><<crimeUp 100 "thievery">>
+
+	<<elseif $rng gte 60>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 100 true true>>。
+		<<elseif $rng gte 61>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 80 true true>>。
+		<<elseif $rng gte 41>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 60 true true>>。
+		<<elseif $rng gte 21>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 40 true true>>。
+		<<else>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 20 true true>>。
+		<</if>>
+	<<elseif $rng gte 30>>
+		垃圾发生了小规模的崩塌，<span class="red">露出一只凶恶的眼睛。</span>它的目光穿透了你，然后消失在山中。这一切发生得如此之快，以至于你可能认为自己是在幻想，但当你闭上眼睛时，它仍在那里注视着你。<<ghallucinogens>><<ggstress>><<set $hallucinogen += 90>><<stress 12>>
+	<<else>>
+		你没有找到任何东西。
+	<</if>>
+<<elseif $trash gte 50>>
+	<<if $rng gte 80>>
+		你发现了一个满满当当的信封，这里面装满了某人的个人信息。银行的详细资料，社会保险号码，等等私人信息。你想应该有人愿意为它付钱。
+		<<crimeUp 50 "thievery">><<set $blackmoney += 50>>
+
+		<br><br>
+	<<elseif $rng gte 60>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 50 true true>>。
+		<<elseif $rng gte 61>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 40 true true>>。
+		<<elseif $rng gte 41>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 30 true true>>。
+		<<elseif $rng gte 21>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 20 true true>>。
+		<<else>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 10 true true>>。
+		<</if>>
+	<<elseif $rng gte 30>>
+		你发现了一个被丢弃的容器，上面印有附近大院的标志。当它被你扰动时，容器内的化学反应完成了，将盖子推向天空，空气中弥漫着甜美的粉红色雾气。
+		<br><br>
+
+		你咳嗽着后退，<span class="pink">感觉到一股奇怪的温暖。</span><<gdrugged>><<garousal>><<arousal 600>><<set $drugged += 90>>
+	<<else>>
+		你没有找到任何东西。
+	<</if>>
+<<elseif $trash gte 30>>
+	<<if $rng gte 80>>
+		你找到一张银行卡，有人在扔掉它之前特意把它掰弯了，但你把它折回了原状。毕竟对懂行的人来说这玩意应该还是有价值的。
+		<<crimeUp 30 "thievery">><<set $blackmoney += 30>>
+
+		<br><br>
+	<<elseif $rng gte 60>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 40 true true>>。
+		<<elseif $rng gte 61>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 30 true true>>。
+		<<elseif $rng gte 41>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 20 true true>>。
+		<<elseif $rng gte 21>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 15 true true>>。
+		<<else>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 10 true true>>。
+		<</if>>
+	<<elseif $rng gte 30>>
+		你没有发现任何有趣的东西，除了一些奇怪的黏液。<<random_goo>>
+	<<else>>
+		你没有找到任何东西。
+	<</if>>
+<<elseif $trash gte 10>>
+	<<if $rng gte 80>>
+		你找到一个满是污渍的金属杯，在你把上面的污垢擦掉之后，杯子在你面前闪烁着耀眼的银色光泽，它看起来像是属于博物馆的东西。
+		<<set $antiquemoney += 50>><<museumAntiqueStatus "antiquetrashcup" "found">><<crimeUp 20 "thievery">>
+	<<elseif $rng gte 60>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 30 true true>>。
+		<<elseif $rng gte 61>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 25 true true>>。
+		<<elseif $rng gte 41>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 20 true true>>。
+		<<elseif $rng gte 21>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 15 true true>>。
+		<<else>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 10 true true>>。
+		<</if>>
+	<<elseif $rng gte 30>>
+		除了一本旧的、毫无价值的色情杂志，你什么都没找到。<<garousal>><<arousal 600>>
+	<<else>>
+		你没有找到任何东西。
+	<</if>>
+<<else>>
+	<<if $rng gte 80>>
+		你找到一个旧的，但还可以使用的手机，它看起来至少还值那么一点钱。
+		<<crimeUp 30 "thievery">><<set $blackmoney += 30>>
+		<i>也许在填埋场的更深处可以找到更大更好的贵重物品。</i>
+	<<elseif $rng gte 60>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 25 true true>>。
+		<<elseif $rng gte 61>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 20 true true>>。
+		<<elseif $rng gte 41>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 15 true true>>。
+		<<elseif $rng gte 21>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 10 true true>>。
+		<<else>>
+			你找到一个被丢弃的钱包，里面还有<<moneyGain 5 true true>>。
+		<</if>>
+	<<elseif $rng gte 30>>
+		你的手指碰到了尖锐的东西。<<gpain>><<pain 1>>
+	<<else>>
+		你没有找到任何东西。
+	<</if>>
+<</if>>
+<br><br>
+
+<<rng>>
+<<if $rng gte 91 and $exposed is 0>>
+	<<generatey1>><<generatey2>><<generatey3>><<generatey4>><<generatey5>><<generatey6>>
+	你听到远处传来的<<group>>的声音。
+	<br><br>
+	<<investigateicon>><<link [[调查|Trash Compare]]>><</link>>
+	<br>
+	<<link [[无视|Trash]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Trash]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,33 @@
+:: Maths Competition Enter []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">><<unbind>>
+	你的绑带松了。"你不能这样参加比赛，"瑞沃从后面说，然后急忙去帮助别人。
+	<br><br>
+<</if>>
+
+礼顿指示你和其他参赛者坐在前排。
+
+<<if C.npc.Whitney.state is "active" and C.npc.Whitney.init is 1>>
+	<<set $mathsprojectwhitney to 1>>
+	<<npc Whitney>><<person1>>然而，在你坐下之前，你感到有人的手放在你的<<bottom>>上。你向右转身面对罪魁祸首，但一只手绕过你的左肩，从你手中抢走了你的解决方案。那是惠特尼。
+	<br><br>
+
+	你想把它拿回去，但<<he>>把你推开了。"所以这就是你一直在做的事情，"<<he>>看着那张纸说。"真是浪费时间。也许我应该把它撕了。"
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[生气|Maths Competition Angry]]>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<br>
+	<<link [[乞求|Maths Competition Beg]]>><<npcincr Whitney dom 1>><<sub 1>><</link>><<gdom>>
+	<br>
+	<<link [[请求帮助|Maths Competition Help]]>><<npcincr Whitney love -1>><</link>><<llove>>
+	<br>
+
+<<else>>
+	你找了个位置坐下来，等着其他位置坐满。
+	<br><br>
+
+	<<link [[继续|Maths Competition Intro]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,59 @@
+:: Eden Cuddle []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>> */
+
+<<if $trauma gte 4500 and $edentraumaintro isnot 1>>
+	<<set $edentraumaintro to 1>>
+
+	壁炉里的余烬噼啪作响，在伊甸身上投下橙色的光芒。当你走近<<him>>时，木地板咯吱作响，<<he>>满怀期待地向你伸出手臂。
+	你依偎进<<his>>的怀里，<<he>>转向你，紧张起来。<<He>>短暂地把目光移开，似乎在组织语言想说些什么。
+	没过一会儿，<<he>>面向你。
+	<br><br>
+
+	"你还好吗？"<<he>>问道。
+	<br><br>
+
+	<<link [[点头|Eden Cuddle Trauma Nod]]>><</link>>
+	<br>
+	<<link [[诚实回答|Eden Cuddle Trauma Honest]]>><<set $edentraumaagree to 1>><<npcincr Eden dom 3>><</link>><<ggdom>>
+<<else>>
+	<<if $edencushions is 2 and $edenloveseat is 9>>
+		你和伊甸依偎在双人沙发上，看着火光。
+		<<trauma -5>><<stress -6>><<lltrauma>><<llstress>>
+	<<elseif $edenpillow is 2>>
+		你和伊甸依偎在枕头上，看着火光。
+		<<trauma -3>><<stress -3>><<ltrauma>><<lstress>>
+	<<else>>
+		你依偎着伊甸，<<he>>紧紧地抱着你。你们一起看着火光。
+	<</if>>
+	<br><br>
+
+	<<if Time.hour isnot 0>>
+		<<if $trauma gte 500 and $edentraumaagree is 1>>
+			<<socialiseicon>><<link [[诉说你的创伤 (0:30)|Eden Cuddle Trauma Talk]]>><<trauma -6>><<stress -6>><<pass 30>><<npcincr Eden dom 1>><</link>><<ltrauma>><<lstress>><<gdom>>
+			<br>
+		<</if>>
+		<<socialiseicon>><<link [[和伊甸交谈|Eden Cuddle Talk]]>><<npcincr Eden love 1>><</link>>
+		<br>
+		<<couchicon>><<link [[继续拥抱 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -6>><<pass 30>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>><<lstress>>
+		<br>
+		<<if Time.days % 2 is 0>>
+			<<if $eden_shoot gte 1>>
+				<<edenicon "target">><<link [[练习射击 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+				<br>
+			<<else>>
+				<<edenicon "target">><<link [[说你想学习射击 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<schoolicon "library">><<link [[让伊甸念给你听 (0:30)|Eden Read]]>><<pass 30>><<trauma -3>><<npcincr Eden love 1>><</link>><<glove>><<ltrauma>>
+			<br>
+		<</if>>
+		<<getouticon>><<link [[站起来|Cabin Eden Actions]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

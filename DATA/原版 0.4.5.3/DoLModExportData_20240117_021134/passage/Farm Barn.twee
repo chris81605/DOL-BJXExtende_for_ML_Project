@@ -1,0 +1,44 @@
+:: Farm Barn []
+<<set $outside to 0>><<effects>>
+<<farm_work_update>>
+你在牛棚里。周围回荡着<<farm_text_many cattle>>睡觉发出的声音。
+<<if $farm.barn gte 1>>
+	一台巨大，闪着指示灯的大型挤奶机位于中心位置。
+<<else>>
+	一台巨大的挤奶机位于中心位置。
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<else>>
+	<<if Time.hour gte 6 and Time.hour lte 20>>
+		太阳透过高处的窗户照射进来，<<farm_text_many cattle>>开始活动。你悄悄地从建筑物里溜了出去。
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<<else>>
+		<<if $deviancy gte 15>>
+			<<if $breastfeedingdisable is "f" and $milk_amount gte 1>>
+				<<link [[给自己榨乳 (0:30)|Farm Barn Breasts]]>>
+					<<if $cow gte 6>>
+						<<transform cow 1>>
+					<</if>>
+				<</link>><<deviant2>>
+				<br>
+			<</if>>
+			<<if $player.penisExist and $semen_amount gte 1 and !playerChastity("penis")>>
+				<<link [[给肉棒榨精 (0:30)|Farm Barn Penis]]>>
+					<<if $cow gte 6>>
+						<<transform cow 1>>
+					<</if>>
+				<</link>><<deviant2>>
+				<br>
+			<</if>>
+		<</if>>
+		<br>
+		<<getouticon>><<link [[离开|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

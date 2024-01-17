@@ -1,0 +1,134 @@
+:: Hospital Bed Examination []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<unbind>>
+<<if $worn.face.type.includes("gag") or $worn.face.type.includes("blindfold")>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+<<if $exposed gte 1>>
+	<<if $player.gender is "m" and $backgroundTraits.includes("crossdresser")>>
+		<<set $clothingselector to "f">><!-- PCs with Crossdresser trait are only PC type with a specific known clothing preference and can presumably ask for it here -->
+	<<elseif $player.gender is "f" and $backgroundTraits.includes("crossdresser")>>
+		<<set $clothingselector to "m">>
+	<<else>>
+		<<set $clothingselector to $player.gender_appearance>>
+	<</if>>
+	<<if $clothingselector is "m">>
+		<<underlowerwear 4>>
+		<<upperwear 4>>
+		<<lowerwear 5>>
+	<<else>>
+		<<upperwear 1>>
+		<<underlowerwear 1>>
+	<</if>>
+<</if>>
+
+<<if $trauma lte ($traumamax / 10) * 2>>
+	<<He>>温柔地询问你关于你的家庭生活、学校的情况以及你的健康状况等各种问题。<<He>>告诉你，据<<He>>所知，一切都还好，但你将来应该小心。
+	<br><br>
+	<<wash>>
+	一名护士帮助你站起来，很快你就可以出院了。
+	<br><br>
+
+	<<if Time.dayState is "night">>
+		外面很黑。也许你应该等到早上。
+		<br><br>
+
+		<<link [[等候 (0:10)|Hospital Wait]]>><<pass 10>><<endevent>><</link>><<ltiredness>>
+		<br>
+		<<if $renttime lte 0>>
+			<<link [[现在离开 (0:10)|Hospital Rent]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif crimeSumCurrent() gte 1000>>
+			<<link [[现在离开 (0:10)|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif $baileyhospital lte 2>>
+			<<link [[现在离开 (0:10)->Hospital Journey Home]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[现在离开 (0:10)->Hospital front]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $renttime lte 0>>
+			<<link [[继续 (0:10)|Hospital Rent]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif crimeSumCurrent() gte 1000>>
+			<<link [[继续 (0:10)|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif $baileyhospital lte 2>>
+			<<link [[继续 (0:10)->Hospital Journey Home]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续 (0:10)->Hospital front]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $trauma lt ($traumamax / 10) * 9>>
+	<<He>>关切地询问你有关你家庭生活、学校情况和身体状况的各种问题。不久之后，<<he>>召来一名护士，他们在房间角落里进行了简短的交谈。他们轻声交谈，不久后，护士点了点头离开了房间。
+	<br><br>
+
+	<<if $psych is 0>>
+		<span class="gold">医生告诉你每个<span class="gold">星期五</span>都要来医院找<<him>>接受治疗。</span>
+		<br><br>
+		<<set $psych to 1>><<unset $schoolPsych>>
+		<<wash>>
+		一名护士帮助你站起来，很快你就可以出院了。
+		<br><br>
+	<<else>>
+		医生提醒你在<span class="gold">星期五</span>来医院找<<him>>。
+		<br><br>
+		<<wash>>
+		一名护士帮助你站起来，很快你就可以出院了。
+		<br><br>
+	<</if>>
+
+	<<if Time.dayState is "night">>
+		外面很黑。也许你应该等到早上。
+		<br><br>
+
+		<<link [[等候 (0:10)|Hospital Wait]]>><<pass 10>><<endevent>><</link>><<ltiredness>>
+		<br>
+
+		<<if $renttime lte 0>>
+			<<link [[现在离开 (0:10)|Hospital Rent]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif crimeSumCurrent() gte 1000>>
+			<<link [[现在离开 (0:10)|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif $baileyhospital lte 2>>
+			<<link [[现在离开 (0:10)->Hospital Journey Home]]>><<pass 10>><<endevent>><</link>>
+		<br>
+		<<else>>
+			<<link [[现在离开 (0:10)->Hospital front]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<if $renttime lte 0>>
+			<<link [[继续 (0:10)|Hospital Rent]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif crimeSumCurrent() gte 1000>>
+			<<link [[继续 (0:10)|Hospital Arrest]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<elseif $baileyhospital lte 2>>
+			<<link [[继续 (0:10)->Hospital Journey Home]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续 (0:10)->Hospital front]]>><<pass 10>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<set $asylum to 1>><<set $psych to 1>><<unset $schoolPsych>>
+	<<He>>温柔地询问你关于你的家庭生活、学校的情况以及你的健康状况等各种问题。<<He>>的脸上逐渐浮现出一丝关切，但你不知道为什么。不久之后，<<He>>召来了一名护士，他们在房间的角落里进行了简短的谈话。他们低声说话，过了一会儿，护士点了点头，离开了房间。
+	<br><br>
+
+	护士让你和医生单独在一起，医生把一块布按在你的脸上。一阵阴霾笼罩着你。"一切都会好起来的，"你听到<<him>>在雾中说。两个模糊的身影进入房间。他们把你扶起来，引导你离开病床，一只手搭在你的肩膀上。哈珀医生紧随其后。
+	<br><br>
+
+	当你到了走廊上，另一个人影向你走来。哈珀挡住了他的去路。这个人影用贝利的声音喊着一些难以理解的东西。你身旁的两个人没有停下来。他们把你带到外面，进入一辆等候的货车后面。里面有一张小床。他们把你推到上面，你的最后一点意识也随之消失。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Asylum Intro]]>><<pass 120>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,457 @@
+:: Widgets Rent [widget]
+<<widget "rentdue">>
+	<<npc Bailey>><<person1>>
+	<<set $_robinWasInRoom to _args[0]>>
+
+	"是时候付钱了，"<<he>>说道。
+	<<if $baileydefeatedchain gte 3 or ($robinpaid is 1 and $robinromance gte 1 and $bus is "home" and $robinfirstrentfight isnot 1 and $renttime lte -14)>>
+		<<generateRole 1 0 "打手">><<generateRole 2 0 "打手">>
+		在<<person1>><<him>>的旁边还站着一个长相粗犷的<<person2>><<person>>和<<person3>><<person>>。
+		<<person2>><<person>>捏着<<his>>的指关节，而<<person3>><<person>>则挂着一副阴沉的笑脸。
+	<<elseif $baileydefeatedchain gte 1>>
+		<<generateRole 1 0 "打手">>
+		在<<person1>><<him>>的旁边站着一个长相粗犷的<<person2>><<person>>。
+		<<person2>><<He>>捏响<<his>>的指关节。
+	<</if>>
+
+	<<if $_robinWasInRoom is 1>>
+		<br><br>
+
+		你四处张望，但没看见罗宾。
+		<br><br>
+
+		"别费心了，<<nnpc_hes "Robin">>已经被我们 安 全 地保护起来了，"贝利冷笑道。
+	<</if>>
+
+	<<if $baileyOfficeSeduced is 1>>
+		<<unset $baileyOfficeSeduced>>
+		<<set $_rentSeduce to true>>
+	<</if>>
+	<br><br>
+
+	<<if $babyIntros and $babyIntros.Bailey and $babyIntros.Bailey.length gt 0>>
+		<<set _homeBabyRent to true>>
+		<<homeBabyIntro>>
+	<</if>>
+	<<babyRent>>
+	<<if $money gte $rentmoney + ($babyRent or 0)>>
+		<<link [[支付|Rent Pay]]>><<set $phase to $_robinWasInRoom>><</link>>
+		<br>
+		<<link [[拒绝|Rent Refuse]]>><<def 1>><</link>>
+		<br>
+		<<if $baileyseduced isnot 1>>
+			<<if $promiscuity gte 15>>
+				<<link [[诱惑|Rent Seduce]]>><<set $phase to ($_rentSeduce ? 1 : 0)>><<trauma 3>><</link>><<promiscuous2>><<gtrauma>>
+				<br>
+			<<elseif $uncomfortable.prostituting is false>>
+				<<link [[诱惑|Rent Seduce]]>><<set $phase to ($_rentSeduce ? 1 : 0)>><<trauma 12>><<set $desperateaction to 1>><</link>><<promiscuous2>><<ggtrauma>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<person1>>
+		<<if $speech_attitude is "bratty">>
+			你坚定地盯着<<him>>。"我没钱能给你，何况就算我真的有钱，你也要不到。"
+		<<elseif $speech_attitude is "meek">>
+			想到付不出钱的后果，你害怕地低下头。
+		<<else>>
+			"我没钱。"语罢，你开始担心起自己的下场。
+		<</if>>
+		<br><br>
+
+		<<rentnopay true>>
+	<</if>>
+	<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+<</widget>>
+
+<<widget "rentduerobin">>
+	<<set $_robinInRoom to _args[0]>>
+	<<npc Bailey>><<person1>>
+
+	"是时候付钱了，"<<he>>说道。
+	<<if $baileydefeatedchain gte 3>>
+		<<generateRole 1 0 "打手">><<generateRole 2 0 "打手">><<generateRole 3 0 "打手">>
+		在<<person1>><<him>>的旁边还站着一个长相粗犷的<<person2>><<person>>和<<person3>><<person>>。
+		<<if $_robinInRoom>>
+			在他们身后，一个<<person4>><<person>>拿着一根绳子走了进来，冲向了罗宾。罗宾试图反抗，却收效甚微。
+		<<else>>
+			第三人站在他们身后，那是个<<person4>><<person>>，<<him>>将双手被捆住的罗宾带进房来。
+		<</if>>
+		<<person2>><<person>>捏着<<his>>的指关节，而<<person3>><<person>>则挂着一副阴沉的笑脸。
+	<<elseif $baileydefeatedchain gte 1>>
+		<<generateRole 1 0 "打手">><<generateRole 2 0 "打手">>
+		在<<person1>><<him>>的旁边还站着一个长相粗犷的<<person2>><<person>>和<<person3>><<person>>。
+		<<if $_robinInRoom>>
+			<<person3>><<person>>拿着一段绳子向罗宾冲去。罗宾试图反抗，但收效甚微。
+			<<person2>><<person>>捏响<<his>>的指节。
+		<<else>>
+			<<person2>><<person>>捏响<<his>>的指关节，而<<person3>><<person>>咧嘴笑着，将罗宾带了进来。
+			看起来<<nnpc_his "Robin">>的双手被捆住了。
+		<</if>>
+	<<else>>
+		<<generateRole 1 0 "打手">>
+		在<<person1>><<him>>的旁边站着一个长相粗犷的<<person2>><<person>>。
+		<<if $_robinInRoom>>
+			<<person2>><<person>>拿着一段绳子向罗宾冲去。罗宾试图反抗，但收效甚微。
+		<<else>>
+			<<person2>><<person>>将罗宾带了进来。看起来<<nnpc_his "Robin">>的双手被捆住了。
+		<</if>>
+	<</if>>
+
+	<br><br>
+	<<if $baileyOfficeSeduced is 1>>
+		<<unset $baileyOfficeSeduced>>
+	<</if>>
+	<<if $babyIntros and $babyIntros.Bailey and $babyIntros.Bailey.length gt 0>>
+		<<set _homeBabyRent to true>>
+		<<homeBabyIntro>>
+	<</if>>
+	<<babyRent>>
+	<<if $money gte $rentmoney + ($babyRent or 0)>>
+		<<if $inRobinsRoom>>
+			<<link [[交钱|Rent Pay Robin]]>><<set $inRobinsRoom to true>><</link>>
+		<<else>>
+			<<link [[交钱|Rent Pay Robin]]>><</link>>
+		<</if>>
+		<br>
+		<<link [[拒绝|Rent Refuse Robin]]>><<def 1>><</link>>
+		<br>
+	<<else>>
+		<<set $baileypaychain to 0>>
+		<<if $speech_attitude is "bratty">>
+			你坚定地盯着<<him>>。"我没钱能给你，何况就算我真的有钱，你也要不到，别把罗宾牵扯进来。"
+		<<elseif $speech_attitude is "meek">>
+			想到付不出钱的后果，你害怕地低下头。"我对不起你，罗宾。"
+			<br><br>
+
+			"这……这不是你的错。"罗宾回应道。
+		<<else>>
+			"我没钱。"语罢，你开始担心起你们两个的下场。
+			<br><br>
+
+			罗宾看起来吓坏了。
+		<</if>>
+		<br><br>
+
+		"没关系，"<<he>>笑着说道。"我已经安排好了，我不知道他们对你们两个有什么打算，不过说实话，我并不在乎。"
+		<<He>>拿出一个眼罩和一条绳子，"别动。"
+		<br><br>
+
+		<<link [[顺从|Rent Intro]]>><<endevent>><<set $phase to 1>><</link>>
+		<br>
+		<<if $bus is "hospital">>
+			<<link [[反抗|Rent Hospital Fight Robin]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<<else>>
+			<<link [[反抗|Rent Robin Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<set $renttime to 7>><<set $rentday to Time.weekDay>>
+<</widget>>
+
+<<widget "rentnopay">>
+	<<set $baileypaychain to 0>>
+	<<set $_seduceAllowed to _args[0]>>
+	<<if $robinpaid is 1 and $robinromance is 1 and $bus is "home" and $robinfirstrentfight isnot 1 and ($baileydefeatedchain gte 3 or $renttime lte -14)>>
+		<<set $robinfirstrentfight to 1>>
+		贝利沉默了几秒钟，随后耸耸肩。"没关系，"<<nnpc_he "Bailey">>说道。
+		"我已经学会了，想直接从你这获利，根本是在作无用功。"
+		<br><br>
+
+		在贝利的暗示下，打手向你逼近。
+		<<person3>><<person>>向你抓来，虽然你堪堪躲过了<<his>>的攫取，但<<person2>><<person>>趁机抓住了你的手臂。
+		<<person3>><<person>>抓住你的另一只手臂，就这样，二人将你控制了起来。
+		<br><br>
+
+		<<link [[继续|Rent First Robin Fight]]>><<set $fightstart to 1>><<set $combatPhase to "talk">><<set $robinRentEvent to 1>><<set $timer to 5>><</link>>
+	<<else>>
+		<<person1>>
+		"没关系，"<<he>>笑着说道，"我已经安排好了，我不知道他们对你有什么打算，不过说实话，我并不在乎。"
+		<<He>>拿出一个眼罩和一条绳子，"别动。"
+		<br><br>
+
+		<<link [[顺从|Rent Intro]]>><<endevent>><</link>>
+		<br>
+		<<if $bus is "hospital">>
+			<<link [[反抗|Rent Hospital Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<<else>>
+			<<link [[反抗|Rent Fight]]>><<set $fightstart to 1>><</link>>
+			<br>
+		<</if>>
+		<<if $baileyseduced isnot 1 and $_seduceAllowed>>
+			<<if $promiscuity gte 15>>
+				<<link [[勾引|Rent Seduce]]>><<trauma 3>><</link>><<promiscuous2>><<gtrauma>>
+				<br>
+			<<elseif $uncomfortable.prostituting is false>>
+				<<link [[勾引|Rent Seduce]]>><<trauma 12>><<set $desperateaction to 1>><</link>><<promiscuous2>><<ggtrauma>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "babyRentDisplay">>
+<<babyRent true>><<if $babyRent>><<print _args[0]>><<printmoney $babyRent _args[2]>><<print _args[1]>><</if>>
+<</widget>>
+
+<<widget "babyRent">><<silently>>
+	<<set _skipReductions to _args[0]>>
+	<<set $_childrenRentCount to Object.values($children).reduce((prev, curr) => {
+		if(curr.location === "home") {
+			if(!(curr.localVariables.interactions >= 6)) {
+				if (!T.skipReductions) curr.localVariables.interactions = 0;
+				return prev + 1;
+			}
+			if (!T.skipReductions) curr.localVariables.interactions = 0;
+		}
+		return prev;
+	}, 0)>>
+	<<set $_milkRentReduction to Math.clamp(Math.floor($pregnancyStats.orphanageMilkBottles / 7), 0, Math.min(Math.floor($pregnancyStats.orphanageMilkBottles / 7), $_childrenRentCount))>>
+
+	<<set $_childrenRentCount -= $_milkRentReduction>>
+	<<if !_skipReductions>>
+		<<set $pregnancyStats.orphanageMilkBottles -= $_milkRentReduction * 7>>
+	<</if>>
+
+	<<set $babyRent to $_childrenRentCount * 10000>>
+<</silently>><</widget>>
+
+<<widget "rentmod">>
+	<<set $rentmoney to Math.floor($rentmoney * $rentmod)>>
+	<<if $robinpaid is 1>>
+		<<set $rentmoney *= 2>>
+	<</if>>
+<</widget>>
+
+<<widget "rentpay">>
+	<<set $money -= $rentmoney + ($babyRent or 0)>>
+	<<set $rentmoney to [10000,30000,50000,70000,100000,150000,200000][Math.clamp($rentstage,1,6)]>> <!-- note: clamping to 1 is intentional -->
+	<<rentmod>>
+
+	贝利从你手里夺过钱，开始清数。"很好，"<<nnpc_he "Bailey">>满意地说道，"你终于想通了。
+	<<if $rentstage is 1>>
+		下周我要<<printmoney $rentmoney "pink">><<babyRentDisplay "，如果你不照顾你的孩子，还要再加" "" "pink">>。你应该不会认为日子将会好起来吧？"
+	<<else>>
+		下周我要<<printmoney $rentmoney "pink">><<babyRentDisplay "，如果你不照顾你的孩子，还要再加" "" "pink">>。"
+	<</if>>
+	<br><br>
+
+	<<set $baileydefeatedchain to 0>>
+	<<set $baileypaychain to ($baileypaychain || 0) + 1>>
+	<<unset $bailey_encroach>>
+	<<set $rentstage += 1>>
+	<<if $robinpaid>>
+		<<npcincr Robin trauma -7>>
+	<</if>>
+<</widget>>
+
+<<widget "rentRobinPunishment">>
+	你走了很长一段时间，直到你感觉到草地的触感从脚下传来。一阵微风从你身边飘过，有一组脚步声逐渐逼近。
+
+	<<if !$robinPunishments.includes("docks") and $debug>>/* locked behind debug until further improvements */
+		<<generate2>><<generate3>>
+		"哦，<<nnpc_he "Robin">>太可爱了，真是完美的小旅伴，"一个陌生的<<person2>><<personsimple>>的声音说道。
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is $player.gender_appearance>>
+			你不知道他们说的是谁。
+		<</if>>
+
+		"交钱，"贝利命令道。
+		<br><br>
+
+		"真不敢相信，我们都要启航了，你还要我干这种事，"另一个<<person3>><<personsimple>>的声音响起。
+		<<robinPunishment "docks">>
+	<<else>>
+		"交钱，"贝利命令道。
+		<br><br>
+
+		除了衣服的沙沙声，没有人回应。
+		<br><br>
+
+		"给我拿来就对了。"贝利的声音听起来有些紧张。
+		<<robinPunishment "landfill">>
+	<</if>>
+	<br><br>
+
+	你听到纸张摩擦的沙沙声。
+	<<if _robin.dom gte 60>>
+		"放开我！"罗宾喊道，"<<pShe>>需要我，住手！"
+		<br><br>
+
+		距离渐渐拉长，罗宾的抗议声也慢慢淡出了。
+	<<else>>
+		"不，不要！"罗宾尖叫着。"放开我！"
+		<br><br>
+
+		罗宾的哭声渐渐消逝在远处。
+	<</if>>
+	而你被贝利拉到了别处。
+<</widget>>
+
+<<widget "rentEdenTrade">>
+	<<npc Eden>><<person1>>
+	你不会在那儿呆太久。
+	当<<if $syndromeeden gte 1>>熟悉<</if>><<personsimple>>的声音出现在你身边时，你的眼罩被扯掉了。
+
+	<<if $edenCagedEscape>>
+		"我警告过你，我会再次抓到你的！"当你被伊甸拽到地上的时候，<<he>>咆哮道，没有替你松绑。"你这次最好长长记性！"
+		<br><br>
+
+		你被粗暴地带着穿过树林，完全无力抵抗，直到你们到达小屋。"欢迎回家。"伊甸冷笑道。
+		<<He>>拖着你走向睡觉的地方，一个金属笼子在那迎接你。
+		<br><br>
+
+		<<link [[继续 (0:30)|Eden Caged Intro]]>><<pass 30>><<set $phase to 2>><</link>>
+		<br>
+	<<elseif $edenfreedom gte 2 and $edendays gte 8>>
+		"我相信你不会辜负我的信任，"伊甸在说着的同时切断了你身上的束缚。随后你一屁股倒在地上。
+		"都是因为你不听我的才会发生这种情况。这也是为了保护你。"<<He>>把你拉起来。"让我们回家吧。"
+		<br><br>
+
+		<<link [[继续 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+		<br>
+	<<elseif $edenfreedom is 1 and $edendays gte 2>>
+		"我相信你不会辜负我的信任，"伊甸在说着的同时切断了你身上的束缚。随后你一屁股倒在地上。
+		"都是因为你不听我的才会发生这种情况。这也是为了保护你。"<<He>>把你拉起来。"让我们回家吧。"
+		<br><br>
+
+		<<link [[继续 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+		<br>
+	<<elseif $edenfreedom gte 1>>
+		"我就知道事情会变成这样，这座小镇实在太危险了，"伊甸边说便解开了你的束缚，并在你要跌倒的时候抱住了你，"我们回家吧。"
+		<br><br>
+
+		<<He>>带着你回到<<his>>的小屋。
+		<br><br>
+		<<endevent>>
+		<<link [[继续 (0:30)|Eden Cabin]]>><<pass 30>><</link>>
+		<br>
+	<<else>>
+		<<if $hunterintro is 1>>
+			"我就知道我能把你找回来。"
+		<<else>>
+			"猎物这么无助可不太寻常，但我是无所谓的。"
+		<</if>>
+		<<He>>悄无声息地爬到你身上。
+		<br><br>
+
+		<<endevent>>
+
+		<<link [[继续|Forest Hunter Intro]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "homeBabyIntro">>
+	<<set _fatherEvent to !!$babyIntros.Bailey.find(child => child.mother !== "pc")>>
+	<<set _motherEvent to !!$babyIntros.Bailey.find(child => child.mother === "pc")>>
+	<<set $_newChildrenCount to $babyIntros.Bailey.reduce((prev, curr) => prev + curr.children, 0)>>
+	<<set _playerBornChildren to []>>
+	<<set _playerChildrenBirthLocations to []>>
+	<<set _playerFatheredChildren to []>>
+	<<set _birthIds to $babyIntros.Bailey.reduce((prev, curr) => {
+		prev.pushUnique(curr.mother + curr.birthId);
+		return prev;
+	}, [])>>
+	<<run Object.values($children).forEach(child => {
+		if(T.birthIds.includes(child.mother + child.birthId)){
+			if(child.mother === "pc"){
+				T.playerBornChildren.push(child.childId);
+				T.playerChildrenBirthLocations.pushUnique(child.birthLocation);
+			} else {
+				T.playerFatheredChildren.push(child.childId);
+			}
+			child.localVariables.interactionsTotal = 0;
+			child.localVariables.interactions = 7 - Math.clamp(V.renttime, 0, 7);
+		}
+	})>>
+	<<person1>>
+	<<if _homeBabyRent>>
+		"在我们开始之前，我有消息要告诉你。"<<He>>掏出一张纸，并回头看向你。
+	<<else>>
+		<<He>>掏出一张纸，并回头看向你。
+	<</if>>
+	<<if $babyIntros.Bailey.length gte 5>>
+		"你他妈的一直在忙，或者说在忙于性交，总之，我要恭喜你
+	<<else>>
+		"首先，恭喜你
+	<</if>>
+	<<if _fatherEvent and _motherEvent>>
+		<span class="lewd">成为了一名母亲，同时也是父亲</span>。<span class="green"><<childrenNames _playerBornChildren>>被从<<print formatList(_playerChildrenBirthLocations, "和", true,"、")>>安全送到了这里</span>。"
+	<<elseif _fatherEvent>>
+		<span class="lewd">当父亲了</span>。"
+	<<else>>
+		当母亲了。<span class="green"><<childrenNames _playerBornChildren>>已经被安全地从<<print formatList(_playerChildrenBirthLocations, "和", true,"、")>>送到了这里</span>。"
+	<</if>>
+	<<if _fatherEvent>>
+		<<earnFeat "First Fatherhood">>
+		<<set _impregFame to (_playerFatheredChildren.length * 5)>>
+		<<fameimpreg _impregFame>>
+		<br><<He>>回头看向那张纸。<br><br>
+		<<for _key, _value range $babyIntros.Bailey.filter(child => child.mother !== "pc")>>
+			<!--
+			<<set _childIds to []>>
+			<<run Object.values($children).forEach(child => {
+				if(child.mother === T.value.mother && child.birthId === T.value.birthId){T.childIds.push(child.childId)}
+			})>> -->
+			<<switch _value.children>>
+				<<case 1>><<set _childrenText to "一个小畜生">>
+				<<case 2>><<set _childrenText to "两个小畜生">>
+				<<default>><<set _childrenText to "三个小畜生">>
+			<</switch>>
+			<<if _continues>>
+				<br><<He>>继续。
+			<</if>>
+			<<if _value.mother is "Robin">>
+				"那个流浪儿突然抱来<<print _childrenText>>，并说孩子是你的。不过我相信<<nnpc_him "Robin">>说的是真的，毕竟你们两人总是黏在一起不是吗。"
+			<<elseif _value.mother is "Alex">>
+				<<if pregnancyCountBetweenParents("Alex","pc") is 1 or pregnancyCountBetweenParents("pc","Alex")>>
+					<<if C.npc.Alex.pregnancy.knowledge is true>>
+						"我听说你在外面搞大了一个小<<if $NPCName[$NPCNameList.indexOf("Alex")].pronoun is "f">>碧池<<else>>骚货<</if>>的肚子，然后小小拜访了一下，发现那个农场放不下你们那小崽子。我帮了你们一个忙，把你们生的那家伙带回了所属的地方，这里。"
+					
+					<<else>>
+						"我小小拜访了一下那个农场<<if $NPCName[$NPCNameList.indexOf("Alex")].pronoun is "f">>姑娘<<else>>小伙<</if>>。虽然你本该自己去的。总而言之，<<nnpc_he "Alex">>突然抱出<<print _childrenText>>，而我知道是你的。"
+
+					<</if>>
+
+				<<else>>
+					"你是个粗心的小混蛋，你知道吗？又让我大老远开车过去，就因为你不知道去承担自己的责任，反而把麻烦越搞越多，"<<he>>说。
+					<br><br>
+
+					"又是那个农村<<if $NPCName[$NPCNameList.indexOf("Alex")].pronoun is "f">>姑娘<<else>>小伙<</if>>的。"
+
+				<</if>>
+
+			<<elseif $NPCNameList.includes(_value.mother)>>
+				"一个叫<<= _value.mother.replace("Avery","艾弗里").replace("Bailey","贝利").replace("Briar","布莱尔").replace("Charlie","查里").replace("Darryl","达里尔").replace("Doren","多伦").replace("Eden","伊甸").replace("Gwylan","格威岚").replace("Harper","哈珀").replace("Jordan","约旦").replace("Kylar","凯拉尔").replace("Landry","兰德里").replace("Leighton","礼顿").replace("Mason","梅森").replace("Morgan","摩根").replace("River","瑞沃").replace("Robin","罗宾").replace("Sam","萨姆").replace("Sirris","西里斯").replace("Whitney","惠特尼").replace("Winter","温特").replace("Niki","尼奇").replace("Quinn","奎恩").replace("Remy","雷米").replace("Alex","艾利克斯").replace("Wren","伦恩").replace("Sydney","悉尼").replace("Taylor","泰勒").replace("Casey","凯西").replace("Ivory Wraith","象牙怨灵").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰").replace("Zephyr","泽菲尔")>>的人把<<print _childrenText>>放在了门口，同时还附有一张写有你名字的亲子鉴定，上面的鉴定结果与你匹配。"
+			<<else>>
+				"一个_value.mother把<<print _childrenText>>放在了门口，同时还附有一张写有你名字的亲子鉴定。"
+			<</if>>
+			<<set _continues to true>>
+		<</for>>
+	<</if>>
+	<br><br>
+
+	"孩子已经被放进看护室了。
+	<<set _knownPregnancyCount to knowsAboutChildrenTotal("pc","Bailey","home")>>
+	<<if _knownPregnancyCount is 1 or !$ward_unlocked>>
+		你要负责照顾自己的后代，"<<he>>说道，"如果要我帮忙的话，本周开始，每周都要额外再收<span class="red">£100</span>的抚养费。不准把他们带出育儿室，绝对不行。"
+	<<elseif _knownPregnancyCount lte 4>>
+		之前也和你说过了，你要负责照顾自己的后代，"<<he>>说道，"如果要我帮忙的话，每周每个都要额外再收<span class="red">£100</span>的抚养费。
+	<<else>>
+		你个不负责任的荡妇，"<<he>>说，"记住，如果要我帮忙照顾你的后代的话，每周每个都要额外再收<span class="red">£100</span>的抚养费。
+	<</if>>
+	<<if $baileydefeatedchain gte 3>>
+		你看到<<him>>一瞬间的冷笑。"我也不想把你的小逼崽子们送给别人养，但如果你再敢反抗我的话，就别想再见他们了。"
+	<<elseif _homeBabyRent>>
+		你看到<<his>>的脸上闪过片刻的柔和，但其转瞬即逝，以至于你觉得可能是你看错了，"如果你还奢望这能够照顾你的孩子的话，你就得按时付钱。"
+	<</if>>
+	<br><br>
+
+	<<if !$ward_unlocked>>
+		<span class="gold">你现在可以进入幼儿看护室以及育儿室了。</span>
+		<br><br>
+	<</if>>
+	<<set $ward_unlocked to true>><<run delete $babyIntros.Bailey>>
+<</widget>>

@@ -1,0 +1,24 @@
+:: Temple Mass []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>><<sydneySchedule>>
+<<npc Jordan>><<person1>>你在教堂的尽头坐下来，约旦正在读圣经。<<His>>悠扬的声音使你平静。
+<<if $sydneySeen is undefined or !$sydneySeen.includes("mass")>>
+	<<sydneyMass>>
+<<else>>
+	<br><br>
+	你被叫到前面领圣餐。你跪在约旦面前，其他<<if $pronoun is "m">>修士<<else>>修女<</if>>在一旁观看。<<He>>把一小块面包塞进你的嘴，并把一个杯子放在你的面前。
+	<<if playerBellyVisible() or knowsAboutPregnancy("pc", "Jordan")>>
+		<<He>>给了你一个安心的微笑。"这是一种替代品，不含酒精，"<<he>>低声说。你抿了一口甜甜的液体，为下一个人让路。
+	<<elseif playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<<setKnowsAboutPregnancy "pc" "Jordan">>
+		你用手捂住肚子并忧虑地看了约旦一眼。<<He>>似乎明白了什么，拿起另一个杯子。你抿了一口甘甜的饮料，然后为下一个人让路。你注意到嘴里的液体似乎不含酒精。
+	<<else>>
+		你喝了一口苦涩的液体，为后面的下一位让出了位置。<<alcohol 15>>
+	<</if>>
+	<br><br>
+	<<sydneyMass>>
+	约旦以祈祷结束。
+	<br><br>
+<</if>>
+<<endevent>>
+<<link [[继续|Temple]]>><</link>>
+<br>

@@ -1,0 +1,36 @@
+:: Stall Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+<<ejaculation "short">>
+那个<<person1>><<person>>躺在地上，气喘吁吁。<<print setup.plants[$stall_expensive].plural>>掉在了一旁。
+<br><br>
+<<tearful>>你把它捡起来回到了你的摊位。
+<br><br>
+<<clotheson>>
+<<endcombat>>
+
+<<stall_actions>>
+
+<<elseif $enemyhealth lte 0>>
+那个<<person1>><<person>>扔下<<print setup.plants[$stall_expensive].plural>>，头也不回地跑了。
+<<ltrauma>><<lstress>><<trauma -6>><<stress -6>>
+<br><br>
+<<tearful>>你把它捡起来回到了你的摊位。
+<br><br>
+<<clotheson>>
+<<endcombat>>
+
+<<stall_actions>>
+
+<<else>>
+你向后倒去，因为受伤了失去了战斗能力。那个<<person1>><<person>>抓住机会逃走了，你的<<print setup.plants[$stall_expensive].plural>>也被带走了。
+<<set $plants[$stall_expensive].amount -= 1>>
+<br><br>
+<<tearful>>你回到你的摊位。
+<br><br>
+<<clotheson>>
+<<endcombat>>
+
+<<stall_actions>>
+
+<</if>>

@@ -1,0 +1,36 @@
+:: Domus Shy Sex []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<person1>>
+	<<if $cool gte 160>>
+		"你……你是学校里最酷的<<girl>>。"
+	<<elseif $fame.sex gte 400>>
+		"我听说了你的事。我……我一直希望有一天会轮到我。"
+	<<elseif $beauty gte ($beautymax / 7) * 4>>
+		"但你是如此的性感。"
+	<<else>>
+		"你不是在胡闹？"
+	<</if>>
+	<<he>>说。"你……你真的想要我？"
+	<br>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Domus Shy Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Domus Shy Sex]]>><</link>></span><<nexttext>>
+<</if>>

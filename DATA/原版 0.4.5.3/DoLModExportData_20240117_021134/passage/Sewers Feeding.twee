@@ -1,0 +1,23 @@
+:: Sewers Feeding []
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+<<set $daily.morgan.feeding to 1>>
+<<if $breastfeedingdisable is "f" and $pronoun is "f">>
+	摩根解开腰带，从<<his>>那破烂、脏污得看不清原本颜色的袍子下露出<<his>>的胸膛。“来吧，亲爱的。我知道你已经长大了，但是这一直都是你的最爱。”
+	<br><br>
+
+	<<link [[喝|Sewers Breastfeed]]>><<breastfed>><<npcincr Morgan love 1>><<npcincr Morgan dom 1>><</link>>
+	<br>
+	<<link [[拒绝|Sewers Breastfeed Refuse]]>><<npcincr Morgan love -1>><<npcincr Morgan dom -1>><</link>><<llove>>
+	<br>
+<<else>>
+	“你一定很饿了，亲爱的，”摩根说，“我有东西给你吃。茶和司康。”<<He>>走到拐角处，在消失了一会儿后手里拿着一个篮子出现了。<<He>>把一篮子东西倒在了你面前，里面装着三只煮熟的老鼠和一个破碎的茶杯，茶杯里装着一种散发着臭味的不知名焦油状液体。<<if $NPCList[0].penis isnot "none">>不知道是不是看错了，那液体表面还飘着一层神秘的白色液体，这种地方会有奶盖吗？<</if>>
+	<br><br>
+
+	<<link [[吃|Sewers Rats]]>><<trauma 6>><<stress 6>><<npcincr Morgan love 1>><<npcincr Morgan dom 1>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<set $skulduggerydifficulty to 200>>
+	<<link [[假装吃了|Sewers Rats Pretend]]>><<npcincr Morgan love 1>><<npcincr Morgan dom -1>><</link>><<skulduggerydifficulty>><<glove>>
+	<br>
+	<<link [[拒绝|Sewers Spank]]>><<npcincr Morgan love -1>><<npcincr Morgan dom -1>><<set $molestationstart to 1>><</link>><<llove>>
+	<br>
+<</if>>

@@ -1,0 +1,50 @@
+:: Street Rainy Let []
+<<effects>>
+
+<<if $phase is 1>>
+
+	<<if $speech_attitude is "meek">>
+		"哦，"你回应道。"<<if isLoveInterest("Kylar")>>这不是第一次发生了……<<else>>没关系，你可以留着它们。<</if>>"
+		<br><br>
+	<<elseif $speech_attitude is "bratty">>
+		"无所谓，"你答道。"<<if isLoveInterest("Kylar")>>我都习惯了。<<else>>我会拼多多。<</if>>"
+		<br><br>
+	<<else>>
+		"算了，"你回答道，"<<if isLoveInterest("Kylar")>>这种事经常出现。<<else>>我一定是今天早上忘穿了。<</if>>"
+		<br><br>
+	<</if>>
+
+<<elseif $phase is 2>>
+	耸了耸肩，你把你丢掉的衣服穿上，包括
+	<<if $forcedcrossdressingdisable is "t">>
+		<<if $player.gender_appearance is "m">>男性内裤<<underlowerwear 28>><<else>>女性内裤<<underlowerwear 16>><</if>>。
+	<<else>>
+		<<if $NPCList[0].pronoun is "m">>男性内裤<<underlowerwear 28>><<else>>女性内裤<<underlowerwear 16>><</if>>。
+	<</if>>
+<<else>>
+
+	<<if $speech_attitude is "meek">>
+		"我还可以，"你回应道。"别担心……"
+		<br><br>
+	<<elseif $speech_attitude is "bratty">>
+		"我没事，"你回应道。"别担心。"
+		<br><br>
+	<<else>>
+		"我还好，"你回应道。"别担心。"
+		<br><br>
+	<</if>>
+
+<</if>>
+
+<<clotheson>>
+<<He>>在你把衣服穿好后，从你手中接回毛巾。你谢过<<him>>并走回到<<if $bus is "domus">>宅邸<<else>>多瑙河<</if>>街。
+<br><br>
+
+"这种天气不要在外面待太久！"<<he>>在你身后喊道。
+<br><br>
+
+<<if $bus is "domus">>
+	<<link [[继续|Domus Street]]>><<unset $rainyDayHarass>><<endevent>><</link>>
+<<else>>
+	<<link [[继续|Danube Street]]>><<unset $rainyDayHarass>><<endevent>><</link>>
+<</if>>

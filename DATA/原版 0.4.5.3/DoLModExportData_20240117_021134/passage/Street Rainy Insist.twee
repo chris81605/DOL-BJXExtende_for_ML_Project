@@ -1,0 +1,68 @@
+:: Street Rainy Insist []
+<<effects>>
+
+<<if $phase is 1>>
+
+	<<if $speech_attitude is "meek">>
+		"请把我的内衣还给我，"你说，"我知道你拿了……"
+		<br><br>
+	<<elseif $speech_attitude is "bratty">>
+		"还真是，引诱一个<<girl>>回家，只为偷偷帮<<pher>>保管内衣？"你冷笑道。"速度还我，在我极度愤怒之前。"
+		<br><br>
+	<<else>>
+		"偷一个孤儿的内衣？"你紧皱眉头。"纯纯的垃圾。"
+		<br><br>
+	<</if>>
+
+<<else>>
+
+	<<if $speech_attitude is "meek">>
+		"我很感激，但还是不麻烦你了。"你回应道。
+		<br><br>
+	<<elseif $speech_attitude is "bratty">>
+		"我很好，"你回应说。"我一般不穿陌生人的内衣。"
+		<br><br>
+	<<else>>
+		"谢谢但还是不用了，"你回应道。
+		<br><br>
+	<</if>>
+
+<</if>>
+
+<<if $englishSuccess>>
+
+	<<if $phase is 1>>
+
+		<<He>>再次消失在拐角处，不一会儿就带着你的<<= setup.clothes.under_lower.find((e) => e.name is $rainyDayHarass).cn_name_cap>>回来了。<span class="green">"非常对不起，"</span><<he>>一边道歉，一边把它交还给你。"和其他要洗的衣服混在一起了。"
+
+	<<else>>
+
+		<<He>>耸耸肩。<span class="green">"随你便。"</span>
+
+	<</if>>
+
+	<<clotheson>>
+
+	<<He>>在你把衣服穿好后，从你手中接回毛巾。你谢过<<him>>并走回到<<if $bus is "domus">>宅邸<<else>>多瑙河<</if>>街。
+	<br><br>
+
+	"这种天气不要在外面待太久！"<<he>>在你身后喊道。
+	<br><br>
+
+	<<if $bus is "domus">>
+		<<link [[继续|Domus Street]]>><<unset $rainyDayHarass>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Danube Street]]>><<unset $rainyDayHarass>><<endevent>><</link>>
+	<</if>>
+
+<<else>>
+
+	"你知道吗，有句谚语刚刚浮现在我脑海中。"<<he>>转过身来面对着你说道。
+	<br><br>
+
+	"获人赠马，勿看牙口。是不是很耳熟？"<span class="red"><<He>>猛扑向你！</span>
+	<br><br>
+
+	<<link [[继续|Street Rainy Sex]]>><<set $molestationstart to 1>><</link>>
+
+<</if>>

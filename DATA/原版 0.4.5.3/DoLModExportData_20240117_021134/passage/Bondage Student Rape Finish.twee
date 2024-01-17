@@ -1,0 +1,76 @@
+:: Bondage Student Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	学生们还在互相嬉笑着，就这么跑开了。
+	<<if $upperoff isnot 0 or $loweroff isnot 0 or $underupperoff isnot 0 or $underloweroff isnot 0>>
+	<<set $stealtextskip to 1>>
+	<<steal>>
+	他们把你脱下的衣服带走了。
+	<</if>>
+	<<clotheson>>
+	<<if $exposed gte 1>>
+		<<covered>>你一边听着，一边感受着凉爽的空气吹拂着你裸露的皮肤，试图弄清是否有人在注视着你。你无法判断。<<tearful>>你试图确定自己的方位。
+	<br><br>
+	<<else>>
+		<<tearful>>你试着确定自己的方位。
+		<br><br>
+	<</if>>
+
+	<<tearful>>你缓了过来。
+	<br><br>
+
+	<<endcombat>>
+
+	<<set $eventskip to 1>>
+	<<destinationbondage>>
+
+<<elseif $enemyhealth lte 0>>
+
+	当你开始反击时，他们的笑声戛然而止。一个人痛呼一声，踉跄后退，其他人也纷纷后退。
+	<br><br>
+
+	"去你的。"<<person1>><<person>>喊道。"反正也没谁会想看你的裸体。"
+	<br><br>
+
+	他们撤退了，嘲笑声透过他们痛苦的咕哝传来，试图挽回最后一点面子。
+	<br><br>
+
+	<<tearful>>你试着确定自己的方位。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<set $eventskip to 1>>
+	<<destinationbondage>>
+
+<<else>>
+	<<endevent>>
+	<<generate1>><<generate2>><<person1>>
+	"该死的臭小孩，"一个成熟的声音喊道，"离<<phim>>远点。"入侵的手收回了，你听到<<group>>的脚步声，他们跑开了。
+	<br><br>
+
+	<<clotheson>>
+	你听到其他的脚步声越来越近。
+
+	<<rng>>
+	<<if $rng gte 51 and Time.dayState isnot "night" or $rng gte 76>><<set $rescued += 1>>
+		"我要把眼罩摘下来，"你身边的<<personsimple>>说，"要解了。"
+		<<blindfoldremove>>
+
+		<<person>>对你微笑。<<person2>><<person>>站在<<person1>><<him>>身边，一脸关切。"如果不是亲眼所见，我真不敢相信会有这么残忍的事情存在。" 他们确认你没有受伤，然后继续他们的路程。
+		<<lpain>><<pain -6>>
+		<br><br>
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		<span class="red">你的尖叫声引来了更可怕的东西。</span>
+		<br><br>
+		"现在乌合之众都走了，"你前方的<<personsimple>>说道，"是时候享受我们的乐趣了。" 一双手抓住你的胳膊，把你拉站起来。对方的摸索比学生们更加猛烈。
+		<br><br>
+
+		<<link [[继续|Bondage Two Rape]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<</if>>

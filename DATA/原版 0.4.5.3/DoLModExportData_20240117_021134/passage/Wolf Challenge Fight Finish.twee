@@ -1,0 +1,44 @@
+:: Wolf Challenge Fight Finish []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	黑狼安静了下来。
+	<<if $monster is 1>>
+		<<bHe>>说道。"首领……聪明。或许有一天首领会用智慧来帮助族群……"<<bHe>>轻笑着走开了。
+	<<else>>
+		<<bHe>>给了你一个难以琢磨的表情，然后哼了一声走开了。
+	<</if>>
+	<br><br>
+
+	<<tearful>>你开始当空长嚎。其余的<<wolf_cave_plural>>也以长嚎应和。<span class="gold">你可以继续带领族群狩猎。</span>
+<<elseif $enemyhealth lte 0>>
+	黑狼退却了。被你所展示的力量震撼，<<bhe>>退回到洞穴里。
+	<<if $monster is 1>>
+		"首领并不软弱，"<<bhe>>说道。"或许有一天首领会用力量来帮助族群……"
+	<</if>>
+	<br><br>
+
+	<<tearful>>你开始当空长嚎。其余的<<wolf_cave_plural>>也以长嚎应和。<span class="gold">你可以继续带领族群狩猎。</span>
+<<else>>
+	<<set $wolfpackleader to 0>>
+	你很快就被对手的强大力量和凶猛所压倒。黑狼尝试<<if $monster is 1>>抓住<<else>>咬住<</if>>你的脖子，但你在<<bHe>>牢牢地抓住前设法挣脱了。你踉跄后退，脸朝下摔在了地上。
+	<br><br>
+	<<if $monster is 1>>
+		"<<pPackbrother>>更适合跟从，而非带领，"黑狼说着，甩动<<bhis>>的脑袋。"当<<ppackbrother>>变得更强大以后，再来试试看吧。"
+		<br><br>
+	<</if>>
+
+	<<bHe>>转过<<bhis>>的身子走进了洞穴。那些<<wolf_cave_plural>>也跟随着新首领的步伐进去了。
+	<br><br>
+
+	<span class="red">你不再能带领族群狩猎了。</span>
+	<<if $wolfpackpoisoned isnot 1>>
+		<i>黑狼非常强壮。但一定有什么办法可以让局面均势。</i>
+	<</if>>
+<</if>>
+<br>
+
+<<endcombat>><<clotheson>>
+<<destinationwolfcave>>

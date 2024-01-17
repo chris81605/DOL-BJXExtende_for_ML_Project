@@ -1,0 +1,80 @@
+:: Farm Dogs Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation knot>>
+
+
+
+	<<if _knotted is true>>
+		<<endcombat>>
+		你在田地正中央被狗的阴茎节牢牢固定住。
+		<br><br>
+
+		<<link [[继续|Farm Knotted]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		<<farm_text dog>>返回了犬舍，开始渴望地等待喂食。<<tearful>>你爬起身。
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+
+	<<farm_text dog>>转身逃回狗窝。<<grespect>><<farm_dogs 1>>
+	<br><br>
+
+	<<tearful>>你爬了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<elseif $finish is 1>>
+	急切地等待食物，<<farm_text dog>>返回了犬舍。
+	<br><br>
+
+	<<tearful>>你爬了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+
+<<else>>
+
+	<<set $rescued += 1>>
+	"我来了！"是艾利克斯。<<farm_text dog>>发出害怕的呜咽声往后退下，回到了它的狗窝。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Alex>><<person1>>
+	艾利克斯来到了现场。
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<He>>伸出手臂扶你起来。"那些狗是不是很烦人？"<<he>>笑着说道，"该教训它们的时候不要心软。我得回去工作了。"
+	<<else>>
+		<<His>>的眼睛徘徊在你<<lewdness>>上，脸红了起来，看向别处。"我、我给你拿几条毛巾。"
+		<br><br>
+		当<<He>>返回时，避免看向你的方向。<<He>>向你递出毛巾，"狗不是宠物，该教训它们的时候不要心软。"
+	<</if>>
+	<<gdom>><<npcincr Alex dom 1>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+	<<tearful>>你看着艾利克斯离开了田地。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

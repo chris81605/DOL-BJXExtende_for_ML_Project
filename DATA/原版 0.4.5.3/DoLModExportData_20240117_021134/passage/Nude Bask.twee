@@ -1,0 +1,29 @@
+:: Nude Bask []
+<<effects>>
+<<if $worn.upper.name isnot "naked">>你脱掉你的$worn.upper.cn_name_cap<<if $worn.lower.name isnot "naked" and $worn.upper.set isnot $worn.lower.set>>和你的$worn.lower.cn_name_cap<</if>>。<</if>>
+<br><br>
+<<upperstrip>><<lowerstrip>>
+让温暖的阳光直直照射在你裸露的皮肤上，这感觉真的棒极了。
+<br>
+<<exhibitionism1>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	当你睁开眼睛时，发现你的衣服并不在之前的地方。你焦急地环顾四周，但在任何地方都看不到它们。一定是有人拿走了他们，也许做这件事的人还在这附近。
+	<br><br>
+	<<link [[呼喊|Bask Call]]>><</link>>
+	<br>
+	<<link [[溜进去|Bask Sneak]]>><<set $upperoff to 0>><<set $loweroff to 0>><</link>>
+	<<exit>>
+<</if>>
+
+<<if Time.dayState is "day">>
+	<<link [[继续 (0:20)|Nude Bask]]>><<set $stress -= 40>><<pass 20>><<tanned 40 "tanLines">><</link>><<lstress>><<gtanned>>
+	<br>
+	<<link [[自慰|Nude Masturbation]]>><<set $masturbationstart to 1>><</link>>
+	<br>
+	<<link [[停止|Garden]]>><<clotheson>><</link>>
+<<else>>
+	太阳逐渐隐没在屋顶后面。
+	<br><br>
+	<<link [[穿好衣服|Garden]]>><<clotheson>><</link>>
+<</if>>

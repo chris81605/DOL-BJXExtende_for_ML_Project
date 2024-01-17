@@ -1,0 +1,195 @@
+:: Eden Breakfast []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Eden")].lust gte 26 and $daily.eden.breakfastLust isnot 1 and $phase lte 2>><<set $daily.eden.breakfastLust to 1>>
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].dom gte 75>>
+		在厨房里收集食材的时候，你感到一只手顺着你的身体滑向了你的<<genitals>>。伊甸在你的脖子上深情地亲吻着，然后把嘴唇贴到你的耳边。
+		"我改变主意了，"<<he>>说，"我想要的是你。"
+	<<else>>
+		当你在厨房里准备食材时，你感到有一双手滑到你的腰上。伊甸把<<his>>的嘴唇靠近你的耳边。"我改变主意了，"<<he>>说。
+		“我想要的是你。”
+	<</if>>
+	<br><br>
+
+	<<link [[拥抱伊甸|Eden Breakfast Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+	<br>
+	<<link [[推开伊甸|Eden Breakfast Push]]>><<npcincr Eden love -3>><<npcincr Eden dom -1>><</link>><<lllove>><<ldom>>
+	<br>
+<<elseif $phase is 0>>
+	你按伊甸喜欢的方式给<<he>>烹饪了蛋。<<He>>坐在桌边，你把食物放在<<him>>面前。
+
+	<<if Time.monthName is "November" and !$edenprepare>>
+		<<set $edenprepare to 1>>
+		<<set $edenwall to 0>>
+		<<set $edenchimney to 0>>
+		<<set $edenroof to 0>>
+		<<he>>伸手去拿盘子时，突然<<he>>转向你。"我正打算开始准备小屋过冬的事。"也许你可以帮忙。<<glove>><<npcincr Eden love 1>>
+	<<else>>
+		<<if $housekeepingSuccess>>
+			<span class="green"><<He>>一言不发地吃着东西。</span><<glove>><<npcincr Eden love 1>>
+		<<else>>
+			<<He>>第一口咬下去时<span class="red">皱了皱眉头</span>，但还是一言不发地吃下去了。<<ghousekeeping 100>><<housekeeping 1 100>>
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $valentines is 1 and !$valentines_eden>><<set $valentines_eden to 1>>
+		你和伊甸坐在一起时，突然想起情人节马上就要到了。也许你可以给伊甸买点东西来庆祝。
+		<br><br>
+	<<elseif $halloween is 1 and !$halloween_eden>><<set $halloween_eden to 1>>
+		你从小屋的窗户向外望去，注视着窗外秋天的景色。万圣节似乎马上就要到了。也许你可以给伊甸买些糖果来庆祝。
+		<br><br>
+	<</if>>
+
+	<<link [[要求对方说声谢谢|Eden Breakfast 2]]>><<npcincr Eden dom -1>><<def 1>><<set $phase to 1>><</link>><<ldom>>
+	<br>
+	<<link [[聊天|Eden Breakfast 2]]>><<trauma -6>><<stress -12>><<set $phase to 2>><</link>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[安静地坐着|Eden Breakfast 2]]>><<sub 1>><<set $phase to 3>><</link>>
+	<br>
+	<<if $promiscuity gte 55>>
+	<<link [[滑到桌子底下|Eden Table Seduction]]>><</link>><<promiscuous4>>
+	<br>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $rng gte 81>>
+	你没有按照<<he>>喜欢的方式烹饪蛋，而是稍微改变了一下手法，希望这种变化能带来点乐趣。
+	<<elseif $rng gte 61>>
+	你找到了一些肉干，也许可以用来和浆果一起做些甜点。
+	<<elseif $rng gte 41>>
+	你煮了一些美味的根茎类蔬菜。
+	<<elseif $rng gte 21>>
+	你找到了一些蘑菇，决定做一个煎蛋卷。
+	<<else>>
+	你觉得早餐吃浆果应该不错。
+	<</if>>
+
+	<<He>>坐在桌边，你把食物端到<<him>>面前。
+
+	<<if Time.monthName is "November" and !$edenprepare>>
+		<<set $edenprepare to 1>>
+		<<set $edenwall to 0>>
+		<<set $edenchimney to 0>>
+		<<set $edenroof to 0>>
+		当<<he>>伸手去拿盘子时，<<he>>转向你。"我正打算开始准备小屋过冬的事。"也许你能帮忙。
+	<<else>>
+		"我更喜欢每天都吃一样的，"<<he>>说着，但还是吃掉了眼前的食物。
+	<</if>>
+	<br><br>
+
+	<<if $valentines is 1 and !$valentines_eden>><<set $valentines_eden to 1>>
+		你和伊甸坐在一起时，突然想起情人节马上就要到了。也许你可以给伊甸买点东西来庆祝。
+	<br><br>
+	<<elseif $halloween is 1 and !$halloween_eden>><<set $halloween_eden to 1>>
+		你从小屋的窗户向外望去，注视着窗外秋天的景色。万圣节似乎马上就要到了。也许你可以给伊甸买些糖果来庆祝。
+		<br><br>
+	<</if>>
+
+	<<link [[要求对方说声谢谢|Eden Breakfast 2]]>><<npcincr Eden dom -1>><<def 1>><<set $phase to 1>><</link>><<ldom>>
+	<br>
+	<<link [[聊天|Eden Breakfast 2]]>><<trauma -6>><<stress -12>><<set $phase to 2>><</link>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[安静地坐着|Eden Breakfast 2]]>><<sub 1>><<set $phase to 3>><</link>>
+	<br>
+	<<if $promiscuity gte 55>>
+	<<link [[滑到桌子底下|Eden Table Seduction]]>><</link>><<promiscuous4>>
+	<br>
+	<</if>>
+<<elseif $phase is 2>>
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 1>>
+		"很好，"<<he>>说道，"那我就饿着吧。饿死了就怪你。"
+		<<if Time.monthName is "November" and !$edenprepare>>
+			<<set $edenprepare to 1>>
+			<<set $edenwall to 0>>
+			<<set $edenchimney to 0>>
+			<<set $edenroof to 0>>
+			<<He>>转头看向你。"顺便，我要开始准备小屋过冬的事了。"也许你能帮忙。
+		<<else>>
+			<<He>>继续咕哝着抱怨了一会儿。
+		<</if>>
+		<br><br>
+
+		<<if $valentines is 1 and !$valentines_eden>><<set $valentines_eden to 1>>
+			你突然想起情人节马上就要到了。也许你可以给伊甸买点东西来庆祝。
+			<br><br>
+		<<elseif $halloween is 1 and !$halloween_eden>><<set $halloween_eden to 1>>
+			你从小屋的窗户向外望去，注视着窗外秋天的景色。万圣节似乎马上就要到了。也许你可以给伊甸买些糖果来庆祝。
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		"这可不是在跟你商量，"<<he>>说着，起身向你走来，"看来得提醒一下你的地位了。"<<He>>抓住你，把你按在<<his>>的膝盖上。
+		<br><br>
+
+		<<link [[继续|Eden Cabin Punishment]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase is 3>>
+	花园里杂草已经清干净了，你得以收获了一些看起来很美味的蔬菜。<<He>>坐在桌边，你把食物放在<<him>>面前。
+
+	<<if Time.monthName is "November" and !$edenprepare>>
+		<<set $edenprepare to 1>>
+		<<set $edenwall to 0>>
+		<<set $edenchimney to 0>>
+		<<set $edenroof to 0>>
+		当<<he>>伸手去拿盘子时，<<he>>转向你。"我正打算开始准备小屋过冬的事。"也许你能帮忙。
+	<<else>>
+		<<He>>咬了一口，眼睛睁大。"这太好吃了！"<<he>>说道，"这些是从花园里摘来的？我没想到那片杂草丛生的地居然这么肥沃。"
+	<</if>>
+
+	<br><br>
+
+	<<if $valentines is 1 and !$valentines_eden>><<set $valentines_eden to 1>>
+		你和伊甸坐在一起时，突然想起情人节马上就要到了。也许你可以给伊甸买点东西来庆祝。
+		<br><br>
+	<<elseif $halloween is 1 and !$halloween_eden>><<set $halloween_eden to 1>>
+		你从小屋的窗户向外望去，注视着窗外秋天的景色。万圣节似乎马上就要到了。也许你可以给伊甸买些糖果来庆祝。
+		<br><br>
+	<</if>>
+
+	<<link [[要求对方说声谢谢|Eden Breakfast 2]]>><<npcincr Eden dom -1>><<def 1>><<set $phase to 1>><</link>><<ldom>>
+	<br>
+	<<link [[聊天|Eden Breakfast 2]]>><<trauma -6>><<stress -12>><<set $phase to 2>><</link>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[安静地坐着|Eden Breakfast 2]]>><<sub 1>><<set $phase to 3>><</link>>
+	<br>
+	<<if $promiscuity gte 55>>
+		<<link [[滑到桌子底下|Eden Table Seduction]]>><</link>><<promiscuous4>>
+		<br>
+	<</if>>
+<<elseif $phase is 4>>
+	囤了这么多蘑菇，你觉得早餐吃点也不错。你把蘑菇加到煎蛋卷中。<<He>>坐在桌边，你把食物端到<<him>>面前。
+
+	<<if Time.monthName is "November" and !$edenprepare>>
+		<<set $edenprepare to 1>>
+		<<set $edenwall to 0>>
+		<<set $edenchimney to 0>>
+		<<set $edenroof to 0>>
+		当<<he>>伸手去拿盘子时，<<he>>转向你。"我正打算开始准备小屋过冬的事。"也许你能帮忙。
+	<<else>>
+		"我更喜欢每天都吃一样的，"<<he>>说着，但还是吃掉了眼前的食物。
+	<</if>>
+	<br><br>
+
+	过了一会儿，<span class="lewd"><<his>>的脸开始发红。</span>"选蘑菇做菜要仔细，"<<he>>说道，"有些蘑菇有奇怪的效果。倒不是你做错了，味道还是不错的。"
+
+	<br><br>
+
+	<<if $halloween is 1 and !$halloween_eden>><<set $halloween_eden to 1>>
+		你从小屋的窗户向外望去，注视着窗外秋天的景色。万圣节似乎马上就要到了。也许你可以给伊甸买些糖果来庆祝。
+		<br><br>
+	<</if>>
+
+	<<link [[要求对方说声谢谢|Eden Breakfast 2]]>><<npcincr Eden dom -1>><<def 1>><<set $phase to 1>><</link>><<ldom>>
+	<br>
+	<<link [[聊天|Eden Breakfast 2]]>><<trauma -6>><<stress -12>><<set $phase to 2>><</link>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[安静地坐着|Eden Breakfast 2]]>><<sub 1>><<set $phase to 3>><</link>>
+	<br>
+	<<if $promiscuity gte 55>>
+		<<link [[滑到桌子底下|Eden Table Seduction]]>><</link>><<promiscuous4>>
+		<br>
+	<</if>>
+<</if>>

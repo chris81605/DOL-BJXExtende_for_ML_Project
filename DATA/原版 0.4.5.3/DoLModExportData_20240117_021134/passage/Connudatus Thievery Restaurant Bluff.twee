@@ -1,0 +1,27 @@
+:: Connudatus Thievery Restaurant Bluff []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+<<if $speech_attitude is "meek">>
+	"对不起！"你把<<person1>><<wallet>>放在桌子上，在他们之间来回看。"我的视力不是很好，我以为是我的。"
+<<elseif $speech_attitude is "bratty">>
+	"事实上，"你把<<person1>><<wallet>>放在桌子上，"我只是在把它还给你。有人把它拿走了，我追了过来。你不应该这样指责别人。"
+<<else>>
+	"我在这里工作，"你把<<person1>><<wallet>>放在桌子上。"让顾客把他们的贵重物品放在容易被取走的地方，这是违反公司政策的。你将来应该更加小心。"
+<</if>>
+<br><br>
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<person>>面向<<person2>><<person>>。"你总是闹出一场场的事情。"
+	<br><br>
+	"闹出事情？那我看到你被抢劫还是保持安静吧？"
+	<br><br>
+	<span class="green">你离开他们的争吵，带着<<person1>><<wallet>>离开了。</span>
+	<br><br>
+	<<connudatuswallet>>
+	<<endevent>>
+<<else>>
+	<span class="red">那个<<person>>拿起<<wallet>>收好了。</span>"好的，"<<he>>怀疑地看着你说。这次你只能空手而回了。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Connudatus Street]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,88 @@
+:: Temple Quarters []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+你在神殿二楼的神殿宿舍，这里是修士和修女的居住的地方。中央大厅周围有四个大房间。上下铺的床位让你想到了军营。
+<br><br>
+<<if Time.dayState is "night">>
+	这里的床铺上躺满了人，除了偶尔传来的呼噜声外一切都显得是那么宁静祥和。
+<<elseif Time.dayState is "day">>
+	见习教徒们正在努力进行着清扫工作。
+<<elseif Time.dayState is "dawn">>
+	修士和修女们已经起床了。
+<<elseif Time.dayState is "dusk">>
+	一些修士和修女正在做睡前的祷告。
+<</if>>
+<br><br>
+<<if $temple_quarters gte 100>>
+	宿舍里<span class="green">一尘不染，</span>没有比这更整洁和干净的地方了。
+<<elseif $temple_quarters gte 80>>
+	宿舍里<span class="teal">很是整洁，</span>尽管在一些边边角角依旧留有灰尘，不过无伤大雅。
+<<elseif $temple_quarters gte 60>>
+	宿舍里<span class="lblue">较为整洁，</span>尽管这并不是神职人员宿舍应有标准。
+<<elseif $temple_quarters gte 40>>
+	宿舍里<span class="blue">勉强算是整洁，</span>尽管大多数的衣服和物品都在它们所属的地方，但还是有改进的余地。
+<<elseif $temple_quarters gte 20>>
+	宿舍里<span class="purple">有些脏乱。</span>衣服被随意地堆砌在床边，看来房间需要好好地打扫一下了。
+<<elseif $temple_quarters gte 10>>
+	宿舍里<span class="pink">很是脏乱，</span>衣服和其他的什么东西随意地散落在满是灰尘的地板上。
+<<else>>
+	宿舍里<span class="red">极度脏乱，</span>床上杂乱一片，衣服从衣柜里溢出来，而且在其表面上还覆盖着一层厚厚的灰尘。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passouttemple>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<if $temple_rank is "monk">>
+			你藏在床铺下以保护自尊。
+			<br><br>
+
+			<<ind>><<link [[你的床铺|Temple Bunk]]>><</link>>
+			<br>
+		<<else>>
+			你藏在床铺下以保护自尊。
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $temple_rank is "monk">>
+			<<ind>><<link [[你的床铺|Temple Bunk]]>><</link>>
+			<br>
+		<</if>>
+		<<if Time.dayState is "night">>
+			如果你现在打扫的话，就会把人们吵醒。
+			<br><br>
+		<<elseif $temple_quarters gte 100>>
+			<span class="green">房间里十分整洁，今天在这不会再有更多的工作了。</span>
+			<br><br>
+		<<else>>
+			<<edenicon "broom">>
+			<<link [[打扫房间 (1:00)|Temple Quarters Clean]]>>
+				<<if currentSkillValue('housekeeping') gte 1500>>
+					<<set $temple_quarters += 9>>
+				<<elseif currentSkillValue('housekeeping') gte 1200>>
+					<<set $temple_quarters += 8>>
+				<<elseif currentSkillValue('housekeeping') gte 800>>
+					<<set $temple_quarters += 7>>
+				<<elseif currentSkillValue('housekeeping') gte 600>>
+					<<set $temple_quarters += 6>>
+				<<elseif currentSkillValue('housekeeping') gte 400>>
+					<<set $temple_quarters += 5>>
+				<<elseif currentSkillValue('housekeeping') gte 200>>
+					<<set $temple_quarters += 4>>
+				<<else>>
+					<<set $temple_quarters += 3>>
+				<</if>>
+			<<pass 60>><<grace 1 monk>><<housekeeping 1 1000>><</link>><<ghousekeeping>><<ggrace monk>> <i>家政技能会影响效率。</i>
+			<br>
+		<</if>>
+		<<if isPubfameTaskAccepted("temple")>>
+			<<schoolicon "library">><<link [[寻找书 (0:05)|Temple Quarters Book]]>><<set $pubfame.temple.chance to 0>><<pass 5>><</link>>
+		<</if>>
+	<</if>>
+	<br>
+	<<if $temple_cloister_progress gte 1>>
+		<<ind>><<link [[通往回廊的秘密通道 (0:01)|Temple Cloister]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[下楼 (0:01)|Temple]]>><<pass 1>><</link>>
+	<br>
+<</if>>

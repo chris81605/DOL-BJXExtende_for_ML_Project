@@ -1,0 +1,29 @@
+:: School Infirmary Cabinet []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+你走到其中一个玻璃柜前，架子上有无数的药片和各种药物的瓶子。
+<<if $skulduggery gte 100 and !$weekly.theft.infirmaryDrugs>>
+	<span class="blue">你独自一人时，也许能为自己偷拿点儿。</span>
+<</if>>
+<br><br>
+
+<<if $delinquency gte 200 or $weekly.theft.infirmaryDrugs>>
+	护士清嗓门的声音把你吓了一跳。<<He>>叉着手臂瞪着你，你只好低头从柜子前离开。
+	<br><br>
+
+	<<if $weekly.theft.infirmaryDrugs is "failed">>
+		"有些小混混试着闯了进来，还把锁搞坏了。"<<he>>解释道，"对不起，我有点烦躁。"<<stress 2>><<gstress>>
+	<<elseif $weekly.theft.infirmaryDrugs is "stolen">>
+		"有些小混混闯了进来，还拿走了一些药。"<<he>>怒道。"我不想再听<<nnpc_title "Leighton">>滔滔不绝地训斥我了，所以让你的手离那柜子远点。"
+	<<else>>
+		"想都别想，"<<he>>面无表情地警告道，"它被锁起来是有原因的。"
+	<</if>>
+	<br><br>
+
+	<<He>>继续工作，警惕地注视着你。
+<<else>>
+	你远离柜子，护士便不再关注你了。
+<</if>>
+<br><br>
+
+<<school_infirmary_options>>

@@ -1,0 +1,236 @@
+:: Cliff Street []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">><<getTarget true>>
+你正待在峭壁街，这里有几座市政建筑，其中就包括市政厅，从附近的海风咖啡馆可以直接看到大海。
+<<if $chef_state is 9 and Time.dayState isnot "night">>
+	在其奢华的门外已经排起了长龙。
+<<elseif $chef_state is 7 and $chef_rework lte 0>>
+	<span class="teal">新的建筑已经竣工了。</span>
+<<elseif $chef_state is 7 and $chef_rework lte 30>>
+	<span class="blue">它正被脚手架包围着，现场的建筑材料随处可见。</span>
+<<elseif $chef_state gte 2 and Time.dayState isnot "night">>
+	外面已经排起了长龙。
+<<elseif $oceanbreezejob isnot 1>>
+	窗户上的牌子上写着："招聘启事"。
+<</if>>
+有一条小路通往海滩。
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		海风从海面上呼啸而来。
+	<<elseif $weather is "snow">>
+		海风从海面上呼啸而来。
+	<<else>>
+		一阵轻柔的微风从海面上吹来。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		雨水从海上席卷而来。
+	<<elseif $weather is "snow">>
+		冰冷的海风从海面上呼啸而来。
+	<<else>>
+		街上车来车往，人们正开车上班。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		雨云从海上席卷而来，将那些走在下班回家路上的人们淋了个透心凉。
+	<<elseif $weather is "snow">>
+		冰冷的寒风从海上席卷而来，人们正顶着刺骨的严寒向家的方向赶去。
+	<<else>>
+		街上车来车往，人们正开车下班回家。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		大海在下方咆哮着。
+	<<elseif $weather is "snow">>
+		海水在下面潺潺流淌着。
+	<<else>>
+		街道一片漆黑寂静。只有大海的声音回荡于夜色中。
+	<</if>>
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "street">>
+	<<if $exposed is 1 and $topless is 0>>
+		<span class="lewd">在附近的海滩上穿这套衣服可能没什么问题，但在这里穿就显得过于太淫荡了！</span>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<if $robinmissing is "pillory">> <!-- Robin is in pillory, or is scheduled to be -->
+	<<if Time.hour lt 15>>
+		<<if $robinPillory.known is 1>>
+			罗宾将在今天的<<ampm 15 00>>被锁在颈手枷上。
+			<br><br>
+		<<else>>
+			颈手枷暂时是空的，但不管怎样，人群开始聚集在此。
+		<</if>>
+	<<else>>
+		你看到罗宾在颈手枷上，你不确定<<nnpc_he "Robin">>何时会被释放。
+		<<set $robinPillory.known to 1>> <!-- known means you know that robin is in the pillory -->
+		<br><br>
+	<</if>>
+<<else>>
+	<<if ndef $pillory_tenant>><<setup_pillory>><</if>>
+	<<if $pillory_tenant.exists is 1>> /* If someone is in pillory... */
+		<<if Time.days gt $pillory_tenant.endday>>/* If sentence finished before today. */
+			<<clear_pillory>>
+		<<elseif (Time.days is $pillory_tenant.endday)>>
+			<<if Time.hour gt $pillory_tenant.endhour>> /* If ended earlier today */
+				<<clear_pillory>>
+			<<elseif Time.hour is $pillory_tenant.endhour>> /* If ending now? */
+				<<end_npc_pillory>>
+			<<else>> /* Sentence ongoing. */
+				<<npc_pillory>>
+			<</if>>
+		<<else>> /* Sentence ongoing to tomorrow. */
+			<<npc_pillory>>
+		<</if>>
+	<<elseif $rng %10 is 0>> /* Pillory empty gives 10% chance of new person */
+		<<new_npc_pillory>>
+	<</if>>
+<</if>>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<elseif $chef_event gte random(1, 100) and $exposed lte 0 and !$possessed>>
+	<<rng>>
+	<<if $chef_sus gte 100>>
+		<<set $chef_sus to 30>>
+		<<generatePolice 1>><<person1>>一辆警车停在你身边，一个<<person>>从车上走了下来，"你有麻烦了<<girl>>，" <<he>>说道，"关于你的奶油生意，我们听到了一些令人不安的传闻，有关于你对健康和安全的蔑视。我们对此非常重视，所以我们需要做一些测试。"<<He>>说完之后打开了后方的车门。
+		<br><br>
+		"上车，"<<he>>说道，"你最好按我说的做。"
+		<br><br>
+
+		<<link [[上车|Chef Blackmail Car]]>><<sub 1>><</link>>
+		<br>
+		<<link [[拒绝|Chef Blackmail Car Refuse]]>><<crimeUp 3000 "resisting">><<def 1>><</link>><<crime "resisting">>
+	<<elseif $chef_sus gte 10 and $rng gte 51>>
+		<<generate1>><<person1>>"嘿，你，"一个声音在旁边响起，"你是厨师吧，"你转身看到一个<<person>>正靠在小巷边的墙上。"你的奶油不错，味道也很好，我想我大概知道它的成分。"<<He>>笑着说道，"你是个顽皮的家伙，我想你也不希望上面知道你做的事吧。"
+		<br><br>
+
+		<<link [[询问这家伙想要什么|Chef Blackmail Ask]]>><</link>>
+		<br>
+		<<link [[拒绝被勒索|Chef Blackmail Refuse]]>><<def 1>><<set $chef_sus += 10>><</link>><<ggsuspicion>>
+		<br>
+
+	<<else>>
+		<<generate1>><<person1>>一个<<person>>接近你。"我尝了你的面包，"<<he>>说道："奶油真的好好吃啊！简直就是珍馐！"<<His>>的眼睛忽然亮了起来，"这还有点儿！"在你反应过来前，<<he>>飞快地从你胳膊上刮了点儿没洗掉的奶油，又舔了一下。
+		<br><br>
+
+		"太好吃了，"<<he>>说道："但好像在哪……"<<he>>好像突然明白了什么，随即却摇了摇头道："不好意思，祝你厨运昌隆。"
+		<<gsuspicion>><<set $chef_sus += 2>>
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Cliff Street]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "cliff">>
+			<br>
+		<</if>>
+		可访问地点
+		<br>
+		<<if $scienceproject is "ongoing" and $scienceprojectdays is 0 and Time.dayState is "day" and $exposed lte 0>>
+			<<scienceicon>><<link [[参加科学博览会|Science Fair]]>><</link>>
+			<br>
+		<</if>>
+		<<if $mathsproject is "ongoing" and $mathsprojectdays is 0 and Time.dayState is "day" and $exposed lte 0>>
+			<<mathicon>><<link [[参加数学竞赛|Maths Competition]]>><</link>>
+			<br>
+		<</if>>
+		<<if $englishPlay is "ongoing" and $englishPlayDays is 0 and Time.hour gte 17 and Time.hour lt 21 and $exposed lte 0>>
+			<<englishicon>><<link [[参加舞台剧|English Play Attend]]>><</link>>
+			<br>
+		<</if>>
+		<<if $robinmissing is "pillory" and $exposed lte 0>>
+			<<if Time.hour gte 15 and Time.hour lte 22>>
+				<<pilloryicon>><<link [[观察颈手枷 (0:10)|Robin Pillory Watch]]>><<pass 10>><</link>>
+			<<elseif Time.hour gte 23>>
+				<<pilloryicon>><<link [[观察颈手枷 (0:10)|Robin Pillory Failure]]>><<pass 10>><</link>>
+			<</if>>
+			<br>
+		<<elseif $pillory_tenant.exists is 1 and $exposed lte 0>>
+			<<if Time.hour is ($pillory_tenant.endhour -1) and Time.minute gte 50>>
+				<span class="blue">一名警察试图驱散人群。</span>
+				<br>
+				<<pilloryicon>><<link [[观察 (0:10)|Cliff Street]]>><<pass 10>><</link>>
+				<br>				
+			<<else>>
+				<<pilloryicon>><<link [[观察颈手枷 (0:10)|Cliff Street Pillory]]>><<pass 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if Time.dayState is "night" and $exposed lte 0>>
+			<<townhallicon>><<link [[市长办公室 (0:01)|Town Hall Sneak]]>><</link>>
+			<br>
+		<<elseif $exposed lte 0>>
+			<<townhallicon>><<link [[市长办公室 (0:01)|Town Hall]]>><</link>>
+			<br>
+		<</if>>
+		<<beachicon>><<link [[海滩 (0:05)|Beach]]>><<pass 5>><</link>>
+		<br>
+		<<if $exhibitionismrun is "cliff" and $weather is "clear">>
+			<<ind>><<link [[脱掉衣服 (0:07)|Cliff Challenge]]>><</link>>
+			<br>
+		<</if>>
+		<<if $chef_state is 8 and Time.dayState is "dusk">>
+			<<cafeicon>><<link [[出席开幕活动 (5:00)|Chef Opening]]>><</link>>
+			<br>
+		<<elseif $chef_state is 7 and $chef_rework gte 1 and $chef_rework lte 30>>
+
+		<<elseif $chef_state is 7 and $chef_rework lte 0>>
+			<<if $exposed lte 0>>
+				<<cafeicon>><<link [[咖啡馆 (0:01)|Ocean Breeze Rework]]>><<pass 1>><</link>>
+				<br>
+			<</if>>
+		<<elseif $openinghours is 1>>
+			<<if $exposed lte 0>>
+				<<cafeicon>><<link [[咖啡馆 (0:01)|Ocean Breeze]]>><<pass 1>><</link>>
+				<br>
+			<<else>>
+			<</if>>
+		<<elseif Time.hour is $closinghour>>
+			<span class="blue">人们正在离开咖啡馆，</span>看起来已经是关店时间了。
+			<br>
+		<<else>>
+			<<cafeicon>><<link [[咖啡馆 (0:01)|Ocean Breeze Lock]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "其他区域<br>">><<hideDisplay>>
+			<<barb>>
+			<<starfish>>
+			<<connudatus>>
+			<<high>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			/* 北极星模组 */
+			<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+				<<flywait>>
+			<</if>>
+			/* 北极星 */
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+		<<commercial>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "cliff">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+<<set $chef_event to 0>>

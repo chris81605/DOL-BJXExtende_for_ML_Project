@@ -1,0 +1,19 @@
+:: Robin Cinema Closer []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].lust lte 19>>
+	你凑到罗宾身边，用胳膊搂住<<him>>。<<He>>向你微笑并靠得更近。
+	<br><br>
+<<else>>
+	你凑到罗宾身边，用胳膊搂住<<him>>。<<He>>微笑着倚向你，享受与你的每一寸接触。"我可以永远这样和你待在一起，"<<he>>轻轻说。
+	<br><br>
+<</if>>
+
+<<link [[认真观看 (0:15)|Robin Cinema Romance Watch]]>><<pass 15>><</link>>
+<br>
+<<link [[休息 (0:15)|Robin Cinema Rest]]>><<tiredness -1>><<pass 15>><<npcincr Robin lust 1>><</link>><<ltiredness>><<glust>>
+<br>
+<<if $NPCName[$NPCNameList.indexOf("Robin")].lust gte 20>>
+	<<link [[继续靠近|Robin Cinema Frisky]]>><<arousal 300>><</link>><<garousal>>
+	<br>
+<</if>>

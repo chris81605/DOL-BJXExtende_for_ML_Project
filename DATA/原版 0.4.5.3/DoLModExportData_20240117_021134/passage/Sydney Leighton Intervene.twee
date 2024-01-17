@@ -1,0 +1,47 @@
+:: Sydney Leighton Intervene []
+<<schooleffects>><<effects>><<run statusCheck("Sydney")>><<npc "Sydney">><<person1>>
+你径直走向租借柜台，礼顿和悉尼都注意了到你。
+<<if $speech_attitude is "meek">>
+	"你，你在对悉尼做什么？"你惊恐地看着礼顿。
+<<elseif $speech_attitude is "bratty">>
+	"放开<<him>>，你个混蛋。"你大喝。
+<<else>>
+	"老师和学生发生肢体接触不合适吧？"你抱起双臂，声音压得很低。
+<</if>>
+<br><br>
+礼顿放下悉尼的手臂，瞪了你一眼。悉尼朝你做了个谢谢的口型。
+<br><br>
+"这位同学负责图书馆的物品管理。因此，<span @class="$sydneyLeightonPlayerGuilty is 1 ? 'red' : ''">在物品失窃的事儿上，</span>如果没找到嫌疑人，就应由<<he>>承担责任。"
+<br><br>
+<<if _sydneyStatus.includes("corrupt")>>
+	"你走着瞧吧，等这事儿传到我<<sydneymum>>的耳朵里！"悉尼怒喝，但礼顿似乎毫不在意。
+	<br><br>
+	"<<nnpc_He "Sirris">>知道在这种严重的情况下你并不逃避纪律，你的威胁让你得到了更严厉的惩罚……去我的办公室。现在。"
+<<else>>
+	"不……不是我，我发誓！我每天都早早起来清点物品，我，我……" 悉尼快要哭出来了，话变得断断续续的。
+	<br><br>
+	"你知道规矩，悉尼。来我办公室。"
+<</if>>
+<br><br>
+悉尼泪汪汪地看向你，满眼恳求。
+<br><br>
+<<if $sydneyLeightonPlayerGuilty is 1>>
+	<<link [[承认偷窃的行为|Sydney Leighton Spank]]>><<set $phase to 1>><<delinquency 5>><</link>><<ggdelinquency>>
+	<br>
+<<else>>
+	<<link [[撒谎说你有责任|Sydney Leighton Spank]]>><<set $phase to 2>><</link>><<gdelinquency>>
+	<br>
+<</if>>
+<<link [[愿意代受部分惩罚|Sydney Leighton Spank]]>><<set $phase to 3>><<npcincr Sydney love 1>><<npcincr Sydney lust 3>><</link>><<promiscuous1>><<glove>><<ggslust>>
+<br>
+<<if $submissive lte 500>>
+	<<link [[给礼顿一拳|Sydney Leighton Punch]]>><<detention 24>><<famescrap 5>><<status 3>><<npcincr Sydney purity 2>><</link>><<gggdelinquency>><<gcool>><<gspurity>><<defianttext>>
+	<br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].init is 1>>
+	<<set $skulduggerydifficulty to 500>>
+	<<link [[栽赃惠特尼|Sydney Leighton Frame]]>><</link>><<skulduggerydifficulty>>
+	<br>
+<</if>>
+<<link [[什么也不做|Sydney Leighton Ignore]]>><<stress 12>><<npcincr Sydney love -5>><<npcincr Sydney purity -5>><<set $phase to 1>><</link>><<ggstress>><<lllove>><<llspurity>>
+<br>

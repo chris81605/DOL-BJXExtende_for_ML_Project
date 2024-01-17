@@ -1,0 +1,69 @@
+:: Lake Skate Drag []
+<<effects>>
+
+<<set $rescued += 1>>
+混混们将你拖离岸边更远的地方，讨论如何处理你，并威胁说如果你不配合就用他们的溜冰鞋踢你。
+<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+	你绝望地希望这只是一个空洞的威胁，因为他们抓住你的手臂阻止你保护你的<<pregnancyBabyText "pc">>免受任何打击。你试图自由地蠕动，但无济于事。
+<</if>>
+<<gtrauma>><<trauma 6>>
+<br><br>
+
+<<if $syndromeeden gte 1 and $rng gte 75>>
+	你听到一声枪响，遥远但清晰地穿过开阔的湖面。你听到子弹在空中发出哨声，然后<span class="red">砰的一声撞入附近的冰层</span>。
+	<br><br>
+	三人停下了脚步。"那是枪吗？"<<person3>><<person>>问。
+	<br><br>
+	第二声枪响回答。<span class="red">子弹落得更近了。</span>这次冰块爆炸了，碎片飞向空中。
+	<br><br>
+	"去他妈的，"<<person4>><<person>>呜咽道。<<He>>转身滑向<<he>>来时的方向。其他人紧随其后。
+	<br><br>
+	<<tearful>>你站起来。你朝子弹射来的方向望去，但看不到救你的人。他们可能潜伏在那条林线的任何地方。
+	<br><br>
+
+	<<endevent>>
+
+	<<link [[继续|Lake Depths Ice]]>><</link>>
+	<br>
+	<!-- Modified for Monster People -->
+<<elseif $syndromewolves gte 1 and $rng gte 50 and $wolfpacktrust gte 24>>
+	<<person3>>
+	"那是什么？"<<person>>说，指着冰面上的一个黑色形状。
+	<br><br>
+	<<person2>><<person>>凝视着它。"越来越近了，"<<he>>说，声音中流露出担忧。
+	<br><br>
+	第三个不良少年<<person4>><<person>>向后退了一步。<span class="red">"它，它是一只狼，"</span><<he>>结结巴巴地说道。三个人一动不动地站了一会儿，然后不止一次地滑倒，转身溜走。你一个人留在冰上。
+	<br><br>
+	<<endevent>><<npc "Black Wolf">>
+	你听到急促的脚步声，然后温暖的舌头舔了舔你的脸。是黑狼。<<lstress>><<stress -6>>
+	<br><br>
+	<<if $monster is 1>>
+		"人类。太粗鲁了。你属于狼。"<<bHe>>看着混混们逃跑的背影，然后转身走开了。<<bHe>>越过<<bhis>>的肩膀看着你。
+	<<else>>
+		<<bHe>>似乎对追逐小混混不感兴趣，而是原路返回。它停下来回头看。
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+
+	<<link [[去狼巢 (0:30)|Wolf Cave Clearing]]>><<pass 30>><</link>>
+	<br>
+	<<link [[留在湖边|Lake Depths Ice]]>><</link>>
+	<br>
+<<else>>
+
+	<span class="green">他们被一声喊叫打断了。</span>是<<person1>><<person>>，跟着穿过冰面。<<Hes>>并不孤单。
+	<br><br>
+
+	混混辱骂追捕者，但人多势众。他们溜走了，让你躺在冰上。
+	<br><br>
+
+	<<generatey5>>
+	<<tearful>>你站起来。<<person1>><<person>>和<<his>>的朋友来到你身边。他们都比<<him>>年长一些。说话的是<<person5>><<person>>。
+	<br><br>
+	"听说你救了我的<<person1>><<if $pronoun is "m">>弟弟<<else>>妹妹<</if>>，"<<person5>><<he>>说道。"你真是个好人，不好意思害你受了这些伤。"<<He>>继续去追混混们，其他朋友紧随其后。<<person1>><<person>>留在后面，给你一个害羞的微笑。一起回岸。<<gcool>><<status 1>>
+	<br><br>
+
+	<<link [[继续|Lake Shallows Ice]]>><<endevent>><</link>>
+	<br>
+<</if>>

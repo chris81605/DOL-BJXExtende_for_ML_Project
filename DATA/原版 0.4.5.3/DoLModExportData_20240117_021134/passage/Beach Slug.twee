@@ -1,0 +1,100 @@
+:: Beach Slug []
+<<effects>>
+<<set $pursuit = Math.clamp($pursuit, 0, 3)>>
+你跑着，蛞蝓跟在你的身后。
+<br><br>
+<<if $eventskip is 0>>
+	<<if $rng gte 76>>
+		你接近了一池粘液。你可以绕道走，但这会花费你宝贵的时间。
+		<br><br>
+		<<if $swarmdisable is "f">>
+			有什么在这表面下蠕动。
+			<br><br>
+		<</if>>
+		<<link [[跳过去|Beach Slug Jump]]>><</link>><<athleticsdifficulty 400 1100>>
+		<br>
+		<<link [[绕道|Beach Slug Run]]>><<set $pursuit += 1>><</link>><<gpursuit>>
+		<br>
+	<<elseif $rng gte 51>>
+		巨型蛞蝓支起身子，它蠕动颤抖着，大嘴张开，面朝你吐出一摊粘液。
+		<br><br>
+
+		来者在向你猛冲时撑开了身躯。是另一只蛞蝓。
+		<br><br>
+
+		<<link [[躲闪|Beach Slug Dodge]]>><</link>><<dancedifficulty 400 1100>>
+		<br>
+		<<link [[撑住|Beach Slug Brace]]>><<set $pursuit += 1>><</link>><<gpursuit>>
+		<br>
+	<<elseif $rng gte 26>>
+		巨型蛞蝓猛地撞在地面上。石头颤抖着，你摇摇晃晃地撞上了悬挂在顶部的粘稠薄膜。
+		<br><br>
+		<<physiquedifficulty 1 18000 true>>
+		<<if $physiqueSuccess>>
+			在蛞蝓靠得更近之前，<span class="green">你自己就挣脱开了。</span>
+			<br><br>
+		<<else>>
+			<span class="red">你挣扎着想要挣脱。</span>你成功了，但蛞蝓靠得越来越近。<<gpursuit>><<set $pursuit += 1>>
+			<br><br>
+		<</if>>
+		<<link [[继续|Beach Slug]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		前面的岩石地面比起寻常地面更加光滑。
+		<br><br>
+
+		<<link [[冲刺|Beach Slug Sprint]]>><</link>><<athleticsdifficulty 600 1200>>
+		<br>
+		<<link [[小心行事|Beach Slug Careful]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你到达了
+	<<if $cave_current is 1>>
+		充满地衣的隧道。
+	<<elseif $cave_current is 2>>
+		长满蘑菇的隧道。
+	<<elseif $cave_current is 3>>
+		黑暗的隧道。
+	<<else>>
+		水隧道。
+	<</if>>
+
+	<<if $cave_current is $cave_exit>>
+		<span class="green">它通向远离这处洞穴的地方！</span>
+	<<else>>
+		<span class="red">这是个死胡同！</span>你得去别处看看。
+	<</if>>
+	<br><br>
+	<<slug_text>>
+	<br><br>
+
+	<<if $pursuit gte 3>>
+		<<slug_caught>>
+	<<else>>
+		<<set $cave_seen.pushUnique($cave_current)>>
+		<<if $cave_current is $cave_exit>>
+			<<link [[逃脱|Beach Slug Escape]]>><</link>>
+			<br>
+		<</if>>
+
+		<<if $cave_current isnot 1>>
+			<<link [[跑向布满地衣的隧道|Beach Slug]]>><<set $cave_current to 1>><</link>> <<if $cave_seen.includes(1) and $cave_exit is 1>><<note "The exit is here" "green">><<elseif $cave_seen.includes(1)>><<note "(你已经看过这里了)">><</if>>
+			<br>
+		<</if>>
+		<<if $cave_current isnot 2>>
+			<<link [[跑向充满蘑菇的隧道|Beach Slug]]>><<set $cave_current to 2>><</link>> <<if $cave_seen.includes(2) and $cave_exit is 2>><<note "The exit is here" "green">><<elseif $cave_seen.includes(2)>><<note "(你已经看过这里了)">><</if>>
+			<br>
+		<</if>>
+		<<if $cave_current isnot 3>>
+			<<link [[跑向黑暗的隧道|Beach Slug]]>><<set $cave_current to 3>><</link>> <<if $cave_seen.includes(3) and $cave_exit is 3>><<note "The exit is here" "green">><<elseif $cave_seen.includes(3)>><<note "(你已经看过这里了)">><</if>>
+			<br>
+		<</if>>
+		<<if $cave_current isnot 4>>
+			<<link [[跑向渗水的隧道|Beach Slug]]>><<set $cave_current to 4>><</link>> <<if $cave_seen.includes(4) and $cave_exit is 4>><<note "The exit is here" "green">><<elseif $cave_seen.includes(4)>><<note "(你已经看过这里了)">><</if>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set $eventskip to 0>>

@@ -1,0 +1,26 @@
+:: Nightmare Eden []
+<<effects>><<nightmareStart "eden">><<set $location to "cabin">>
+
+<<generate1>><<npc "Eden" 2>><<person2>>
+<<set $NPCList[0] to clone($NPCList[1])>>
+<<set $NPCList[0].description to "shadowed">>
+<<set $NPCList[0].role to ($pronoun is "m" ? "man" : "woman")>>
+<<clearsinglenpc 1>><<person1>>
+
+你试图入睡，但这并不容易。你本该平稳的心跳骤然加速。你紧闭着双眼，却依然能洞悉一切，清晰得宛如白昼。
+<br><br>
+
+阴影攀附在小屋的角落内，它们伸出手臂，用那细长的手指抚摸着你。即使你身处于伊甸的保护之下，你依旧能感觉到它们的指甲正抚过你的皮肤。<<stress 6>><<gstress>>
+<br><br>
+
+<<if $nightmaresSeen.includes("eden")>>
+	有点不对劲，你曾见识过这个。<span class="purple">它并不是真实的存在。</span>
+	<br><br>
+
+	<<link [[醒醒|Nightmare Eden Wake]]>><<set $phase to 0>><</link>><<nightmareWakeDifficulty>>
+	<br>
+<</if>>
+<<link [[叫醒伊甸|Nightmare Eden 2]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[用床单盖住头|Nightmare Eden 2]]>><<set $phase to 1>><</link>>
+<br>

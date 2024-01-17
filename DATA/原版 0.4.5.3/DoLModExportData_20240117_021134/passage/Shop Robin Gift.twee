@@ -1,0 +1,42 @@
+:: Shop Robin Gift []
+<<effects>>
+
+你在商店间穿梭，寻找着罗宾会喜欢的东西。你找到了几件你认为有用的东西。
+<br><br>
+<<if $money gte 1500>>
+	<<gifticon "shirt">><<link [[实用的衬衫和短裤 (£15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "shirt_unwrapped">><<set $money -= 1500>><</link>> <<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f">><<note "可能需要说服罗宾，才能让罗宾穿上这个。" "italic">><</if>>
+	<br>
+	<<gifticon "sundress">><<link [[实用的太阳裙 (£15)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "sundress_unwrapped">><<set $money -= 1500>><</link>> <<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m">><<note "可能需要说服罗宾，才能让罗宾穿上这个。" "italic">><</if>>
+	<br>
+	<<if $money gte 14000>>
+		<<gifticon "kimono">><<link [[奇装异服的和服 (£140)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "kimono_unwrapped">><<set $money -= 14000>><</link>>
+		<br>
+	<<else>>
+		<<set _moreExotic to true>>
+	<</if>>
+	<<if $money gte 42000>>
+		<<gifticon "tuxedo">><<link [[奇装异服的燕尾服 (£420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "tuxedo_set_unwrapped">><<set $money -= 42000>><</link>> <<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "f">><<note "可能需要说服罗宾，才能让罗宾穿上这个。" "italic">><</if>>
+		<br>
+	<<else>>
+		<<set _moreExotic to true>>
+	<</if>>
+	<<if $money gte 42000>>
+		<<gifticon "gothic">><<link [[奇装异服的哥特长裙 (£420)|Shop Robin Christmas]]>><<set $christmas_gift_robin to "gothic_gown_unwrapped">><<set $money -= 42000>><</link>> <<if $NPCName[$NPCNameList.indexOf("Robin")].pronoun is "m">><<note "可能需要说服罗宾，才能让罗宾穿上这个。" "italic">><</if>>
+		<br>
+	<<else>>
+		<<set _moreExotic to true>>
+	<</if>>
+	<<if _moreExotic>>
+		<br>
+		还有其他更奇异的东西在卖，但你现在买不起。
+		<br>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>
+	<br>
+<<else>>
+	不幸的是，你现在什么都买不起。
+	<br><br>
+	<<link [[继续|Shopping Centre]]>><</link>>
+	<br>
+<</if>>

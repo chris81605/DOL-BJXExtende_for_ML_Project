@@ -1,0 +1,55 @@
+:: Temple Plate Steal []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+你把手放在捐款盘上，假装放了些东西。实际上，你悄悄地将一些硬币藏进了手心。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green"><<if $sydneyPresent>>悉尼和<<monk>>都没有注意到。<<else>>那个<<monk>>没有注意到。<</if>></span> "谢谢你，"<<he>>向你<<if $pronoun is "m">>微微鞠躬<<else>>屈膝行礼<</if>>。
+	<br><br>
+
+	<<skulduggeryuse>>
+	你得到了<<moneyGain 5 true true>>。
+	<br><br>
+
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+	<br>
+
+<<else>>
+
+	<<monk>>抓住你的手腕，啧啧道："真丢人。"<<if $sydneyPresent>>悉尼震惊地瞪着你。<<npcincr Sydney love -5>><<lllove>><</if>>
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"对不起，" 你说，眼睛望向地面。"我知道这是错的，但我真的需要它。"
+	<<elseif $speech_attitude is "bratty">>
+		你猛地把手抽回来，说道："这东西我比你更需要。"
+	<<else>>
+		"我很抱歉，"你说，"但我真的很需要它。"
+	<</if>>
+	<br><br>
+	<<He>>嘟囔着对年轻人的不满，然后<<he>>走开了。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<endevent>>
+	<<if $sydneyPresent>>
+		<<unset $sydneyPresent>><<set _sydneyPray to true>>
+		<<npc "Sydney">><<person1>>
+		<<sydneyOptions>>
+	<<else>>
+		<<prayoptions>>
+	<</if>>
+	<br>
+
+<</if>>

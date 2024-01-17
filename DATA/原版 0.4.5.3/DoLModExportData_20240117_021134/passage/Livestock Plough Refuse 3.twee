@@ -1,0 +1,34 @@
+:: Livestock Plough Refuse 3 []
+<<effects>>
+
+<!--<<if $edenwhip is 0>>
+	<<set $edenwhip to 1>>
+<</if>> -->
+
+雷米再次挥起鞭子。那坚硬的鞭子抽中你的背部时，你咬紧牙关，每一次的抽打都让你的身体感到疼痛。
+<<if $willpowerSuccess>>
+	<span class="green">你坚持了下来。</span>雷米喘着气收起了鞭子。"蠢货……"<<he>>喘着气，"上倒刺！"雇工们互相看了一眼，"快，让它好好尝尝教训！"
+	<<gwillpower>><<willpower 2>>
+	<br><br>
+
+	一个农场工人跑去了田外，雷米大步走到了你身边。<<He>>攥着你的下巴，抬起你的脑袋，"给我听着，你这头<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>。"<<he>>吐了口痰，"我搞定过比你更难对付的野兽，现在我说什么你就得做什么，否则当心我生气的后果。"
+	<br><br>
+
+	那个农场工人双手抱着一个木箱回来了。雷米打开它，从里面抽出了另一根鞭子。<<He>>把它展示在你面前。它和其他的鞭子很相似，只是上面布满了残忍的倒刺。
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	雷米回到了<<his>>的座位上。<<He>>把鞭子举过头，鞭子的下半截落在<<his>>的身后。
+	<br><br>
+
+	<<link [[拉|Livestock Plough]]>><<sub 1>><<pass 60>><<transform cow 1>><<npcincr Remy dom 1>><<tiredness 18>><</link>><<ggtiredness>>
+	<br>
+	<<link [[拒绝|Livestock Plough Refuse 4]]>><<def 1>><<npcincr Remy dom -1>><<pain 24>><</link>><<willpowerdifficulty 300 700>><<gggpain>>
+	<br>
+<<else>>
+	<span class="red">你承受不住了。</span>所有的坚强被击碎，你的身体不听使唤地垮掉了。
+	<<ggwillpower>><<willpower 12>>
+	<br><br>
+	<<link [[继续|Livestock Plough]]>><<pass 60>><<transform cow 1>><<npcincr Remy dom 1>><<tiredness 18>><</link>><<ggtiredness>>
+	<br>
+<</if>>

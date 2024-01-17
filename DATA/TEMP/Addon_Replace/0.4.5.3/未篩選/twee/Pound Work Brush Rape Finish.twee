@@ -1,0 +1,83 @@
+:: Pound Work Brush Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+<<beastejaculation knot>>
+	<<if _knotted>>
+		<<pass 5>>
+		<<beasttype>>试着挣脱<<bhis>>的<<print $NPCList[0].penisdesc>>，但没能成功。<<bHe>>转而回到<<bhis>>笼子的角落里，拖着你连带四肢随同在<<bhim>>的后边。<<bHe>>躺下入睡，留你一人躺在地上。<<lllpound_status>><<pound_status -10>>
+		<br><br>
+		<<tearful>>你试图使自己获得自由。
+		<br><br>
+			这花了你一段时间。实际上，这耗时如此之长，以至于当你听见靠近的脚步声时，仍在尝试开锁。<span class="red">有人来了。</span>
+			<br><br>
+			<<clotheson>>
+			<<endcombat>>
+			<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+			你抓住笼子的栅栏作为杠杆，但没有用。一个<<person>>走进视线范围，在看到你后停了下来。"大家快来！"<<he>>喊道。"来看看这个！"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+			<br><br>
+
+			<<link [[继续|Pound Assault Caught]]>><<set $phase to 1>><</link>>
+			<br>
+
+	<<else>>
+		<<beasttype>>回到<<bhis>>笼子的角落，躺下睡觉。<<tearful>>你将门关上。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<if $exposed gte 1>>
+			<<covered>><span class="pink">如果你像这样被人抓到，会让自己陷入危险的。</span>
+			<br><br>
+
+			<<link [[继续|Pound Exposed]]>><</link>>
+			<br>
+		<<else>>
+			你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+			<br><br>
+			<<link [[继续|Pound]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+
+
+<<elseif $enemyhealth lte 0>>
+
+	你把<<beasttype>>从你身旁推开。<<bHe>>呜咽着，缩回到角落里。
+	<br><br>
+
+	<<tearful>>你离开笼子。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+
+	<<if $exposed gte 1>>
+		<<covered>><span class="pink">如果你像这样被人抓到，会让自己陷入危险的。</span>
+		<br><br>
+
+		<<link [[继续|Pound Exposed]]>><</link>>
+		<br>
+	<<else>>
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+		<<link [[继续|Pound]]>><</link>>
+		<br>
+	<</if>>
+
+<<else>><<set $rescued += 1>>
+
+		你听到渐近的脚步声。<span class="red">有人来了，</span>被你的哭声所惊醒。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<generate1>><<person1>><<generate2>><<generate3>><<generate4>>
+		一个<<person>>走进你的视野，并在看见你时停了下来。"所有人！"<<he>>喊道，"都来看看这个！"<<ggtrauma>><<ggstress>><<famebestiality 4>>
+		<br><br>
+
+		<<link [[继续|Pound Assault Caught]]>><<set $phase to 0>><</link>>
+		<br>
+
+<</if>>

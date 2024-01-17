@@ -1,0 +1,96 @@
+:: Riding School []
+<<set $outside to 1>><<set $location to "riding_school">><<effects>>
+
+你来到雷米的骑术学校。马厩环绕着中央庭院。一间小办公室位于一侧。一条土路通向周围的乡村。课程费用为£25。
+<br><br>
+
+<<if Time.dayState isnot "night" and Time.hour isnot $closinghour>>
+	一些人在庭院里聊天，等待着下场课的开始。
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif Time.hour is $closinghour>>
+	关门的时间到了。马匹们被赶回马圈，游客们也在离开。<<if $exposed gte 1>>你偷偷溜走，趁还没有人看到你的<<lewdness>>。<</if>>
+	<br><br>
+
+	<<link [[继续|Farmland]]>><</link>>
+	<br>
+<<elseif Time.dayState is "night">>
+	<<if Time.hour isnot $closinghour and !$weekly.theft.ridingSchool>>
+		<<link [[检查办公楼|Riding School Register]]>><</link>>
+		<br>
+	<</if>>
+
+	<<link [[离开|Farmland]]>><</link>>
+	<br>
+<<else>>
+	<<if $ridingschoolintro is undefined>>
+		<<set $ridingschoolintro to 0>>
+		<<if $remy_seen is "livestock">>
+			<<npc Remy>><<person1>>一匹马小跑向你，上面坐着雷米，<<if $pronoun is "m">><<his>>淡棕色的头发在微风中飘舞<<else>><<his>>淡棕色的头发被扎成一个整齐的发髻<</if>>。你感到很紧张，回忆起在<<his>>的农场受到的待遇。然而，这一次<<his>>的眼中没有盛气凌人的恶意，甚至可以说没有认出你。
+			<br><br>
+
+			"欢迎来到我的骑术学校，"当马停下的时候，<<he>>说道。"我是雷米。我们提供骑马和护理马的课程。我希望我们能帮到你们。"
+			<br><br>
+
+			<<He>>鞭子一抽，让<<his>>马儿去小跑，然后骑走了。
+			<br><br>
+
+			<<link [[继续|Riding School]]>><<endevent>><</link>>
+			<br>
+		<<elseif $remy_seen is "farm">>
+			<<npc Remy>><<person1>>一匹马小跑向你。上面载着雷米，<<if $pronoun is "m">><<his>>淡棕色的头发在微风中飘扬<<else>><<his>>浅棕色的头发扎成一个整齐的发髻<</if>>。
+			<br><br>
+			"欢迎来到我的骑术学校，"当马停下的时候，<<he>>说道。"我很高兴你做到了。我们提供骑马和护理马的课程。我希望我们能帮到你们。"
+			<br><br>
+
+			<<He>>鞭子一抽，让<<his>>马儿去小跑，然后骑走了。
+			<br><br>
+
+			<<link [[继续|Riding School]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<npc Remy>><<person1>>一匹马小跑向你。上面坐着一个<<if $pronoun is "m">>长着淡棕色短发，发丝随着风飘扬的男人<<else>>系着整齐发髻的淡棕色头发女人<</if>>。
+			<br><br>
+
+			"欢迎来到我的骑术学校，"当马停下的时候，<<he>>说道。"我是雷米。我们提供骑马和护理马的课程。我希望我们能帮到你们。"
+			<br><br>
+
+			<<He>>鞭子一抽，让<<his>>马儿去小跑，然后骑走了。
+			<br><br>
+
+			<<link [[继续|Riding School]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+		<<set $remy_seen to "riding_school">>
+	<<elseif $remy_seen is "livestock">>
+		<<npc Remy>><<person1>>一匹马小跑向你，上面坐着雷米，<<if $pronoun is "m">><<his>>淡棕色的头发在微风中飘舞<<else>><<his>>淡棕色的头发被扎成一个整齐的发髻<</if>>。你感到很紧张，回忆起在<<his>>的农场受到的待遇。然而，这一次<<his>>的眼中没有盛气凌人的恶意，甚至可以说没有认出你。
+		<br><br>
+
+		"很高兴再次见到你，"当马停下的时候，<<he>>说道。"我希望我们能帮上忙。"
+		<br><br>
+
+		<<He>>鞭子一抽，让<<his>>马儿去小跑，然后骑走了。
+		<br><br>
+
+		<<link [[继续|Riding School]]>><<endevent>><</link>>
+		<br>
+		<<set $remy_seen to "riding_school">>
+	<<else>>
+
+		<<if $money gte 2500>>
+			<<link [[上马术课 (£25 1:00)|Riding School Lesson]]>><<set $riding_lesson to 0>><<set $money -= 2500>><<thighskill 18>><</link>><<gtiredness>><<gthighskill>>
+			<br>
+		<</if>>
+
+		<<if isPubfameTaskAccepted("remy")>>
+			<<link [[寻找兰德里的联系人 (0:20)|Riding School Contact]]>><<pass 20>><</link>>
+			<br>
+		<</if>>
+
+		<<link [[离开|Farmland]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

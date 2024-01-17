@@ -1,0 +1,29 @@
+:: Lake Vore Finish []
+<<water>><<effects>>
+<<if $stress gte $stressmax or $vorestomach gte 5>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<passoutlake>>
+<<else>>
+	<<tearful>>你从<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>> 的口中挣扎着爬出来。它又消失在深处了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Lake Depths]]>><</link>>
+	<br>
+<</if>>

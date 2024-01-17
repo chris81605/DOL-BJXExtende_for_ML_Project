@@ -1,0 +1,32 @@
+:: Domus Painting []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+<<person1>><<person>>把你带到二楼，进了一个小而空的房间。一罐油漆放在梯子上，旁边是一堆刷子，一个滚筒。
+<br><br>
+
+"这就是你要用到的全部工具，"<<he>>说，"我们就在楼下。"
+<br><br>
+
+<<pass 2 hours>>你开始粉刷房间。
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+
+	你刷完一堵墙，试着往后站，欣赏你的作品，但你感觉大腿上有一股拉力。往下一看，你的$worn.lower.cn_name_cap粘在墙上。你试图挣脱，但它还是粘在上面。
+	<br><br>
+
+	<<link [[再用力些|Domus Painting Force]]>><</link>>
+	<br>
+
+<<else>>
+
+	<<pass 4 hours>>几个小时的艰苦工作之后，你站回原处，以欣赏你刚完成的作品。
+	<br><br>
+
+	你赚到了<<moneyGain 50>>。
+	<br><br>
+
+	<<link [[继续|Domus Street]]>><<endevent>><</link>>
+	<br><br>
+
+<</if>>

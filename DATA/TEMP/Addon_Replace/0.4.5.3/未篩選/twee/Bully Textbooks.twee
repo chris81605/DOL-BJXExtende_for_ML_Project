@@ -1,0 +1,90 @@
+:: Bully Textbooks []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase gte 2>>
+	<<if $phase is 3>>
+		惠特尼把书扔在你背上。你因为疼痛嘶了口气。"他妈的快点，"<<he>>命令道，"除非你想再挨一下。"<<trauma 3>><<stress 3>><<gtrauma>><<gstress>>
+		<br><br>
+
+		你疼得站不起来，但你还是试着用手和膝盖跟在<<him>>后面爬行。这真的很丢人，但你没得选。
+	<<else>>
+		你
+		<<if $speech_attitude is "meek">>
+			低下头，
+		<<elseif $speech_attitude is "bratty">>
+			紧咬牙关，
+		<<else>>
+			无奈地叹了口气，
+		<</if>>
+		跟在了惠特尼后面。你很难保持背上书堆的平衡，更别提惠特尼还会不时停下来踢你一脚，要求你动作快点。
+	<</if>>
+	<br><br>
+
+	没过多久，你就听到了围观者们发出看热闹的声音。你一直低着头，尽量不去理会他们的笑声。然而这一点用都没有。<<trauma 6>><<stress 8>><<status -5>><<gtrauma>><<ggstress>><<lcool>>
+<<elseif $phase is 1>>
+	<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 15>>
+		<<set _whitneyCrawl to true>>
+		你试着站起来，但惠特尼把<<his>>的脚重重地踩在你的后脑勺上，把你的脸压在冰冷的瓷砖上。
+		<<if $whitneyromance is 1>>
+			<<pain 2>><<gpain>>
+		<<else>>
+			<<He>>磨着<<his>>的脚后跟。
+			<<pain 4>><<ggpain>>
+		<</if>>
+		<br><br>
+
+		"谁说你可以走路的？"
+		<<if $worn.neck.type.includes("leash")>>
+			<<He>>抓住你的链子，用力一拽。"做个好<<bitch>>，趴着别动。"<<npcincr Whitney lust 1>><<glust>>
+		<<else>>
+			<<he>>嘲讽地笑了。"不准起来，好好呆在你该待的地方。"
+		<</if>>
+		<br><br>
+
+		<<link [[爬|Bully Textbooks]]>><<set $phase to 2>><<trauma 6>><<stress 3>><<sub 1>><<npcincr Whitney dom 1>><</link>><<gtrauma>><<gstress>><<gdom>>
+		<br>
+		<<link [[战斗|Bully Fight]]>><<set $fightstart to 1>><<def 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+		<br>
+	<<else>>
+		<<if $whitneyromance is 1>>
+			惠特尼抓住你的衣领把你拉起来。<<He>>一路上大部分时间都搂着你的腰，抚摸着你的<<bottom>>。每捏一次都差点让你把书掉在地上，惠特尼对你这种反应感到很有趣。<<stress 2>><<arousal 500 "bottom">><<npcincr Whitney lust 1>><<gstress>><<garousal>><<glust>>
+		<<else>>
+			惠特尼他们不等你从地上爬起来，就启身离开走廊。你踉跄着爬起来跟了上去。一路上他们大部分人都仿佛当你不存在一样，只有惠特尼时不时回头撇你一眼，向你发号施令。
+		<</if>>
+	<</if>>
+<<else>>
+	你把书夹在腋下跟在队伍后面。
+	<<if $whitneyromance is 1>>
+		惠特尼并不介意你走在<<his>>身边，<<his>>搂着你的腰，把手放在你的<<bottom>>上。<<He>>一路上大部分时间都在抚摸你。每捏一次都差点让你把书掉在地上，惠特尼对你这种反应感到很有趣。<<stress 2>><<arousal 500 "bottom">><<npcincr Whitney lust 1>><<gstress>><<garousal>><<glust>>
+	<<else>>
+		惠特尼一路上基本都无视了你，只是时不时回头撇你一眼，向你发号施令。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if !_whitneyCrawl>>
+	你们停在了一个破旧的储物柜外面。惠特尼打开了它，<<if $phase gte 2>>从你背上<<else>>从你那里<</if>>一把拿走<<his>>的书，然后把它们扔到了里面。
+	<br><br>
+
+	<<if $whitneyromance is 1>>
+		你还没来得及离开，<<he>>就<<if $phase gte 2>>蹲了下来，<</if>>抓住了你的头发。你的身体被撞在了储物柜上。
+		<br><br>
+
+		<<he>>保持着抓住你头发的动作，向后拉，露出你的脖子。然后靠上来埋进你的脖子，开始以一种狂暴的热情舔弄和吮吸你。你在<<his>>的侵犯下扭动着身体。<<arousal 1000>><<npcincr Whitney lust 1>><<garousal>><<glust>>
+		<br><br>
+
+		<<He>>拉开距离，气喘吁吁。"这是对你的感谢，荡妇。"<<He>>看着你的脖子，笑了，"也留下了很好的印记。"<<he>>离开时拍拍你的脸颊，<<his>>朋友们的笑声在<<him>>身后回响。
+	<<else>>
+		"别担心，这次我不会把你塞进去的，"<<he>>笑着说，"我是不是很好？"
+		<br>
+		<<if $phase gte 2>>
+			<<He>>在离开时，踢中了你的<<if playerBellyVisible()>>鼻子<<else>>腹部<</if>>，将你击倒在地。<<pain 2>><<gpain>>
+		<<else>>
+			<<He>>推开你，消失在走廊里。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<</if>>

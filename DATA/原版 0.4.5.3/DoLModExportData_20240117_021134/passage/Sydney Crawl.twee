@@ -1,0 +1,67 @@
+:: Sydney Crawl []
+<<schooleffects>><<effects>><<run statusCheck("Sydney")>><<set $corruptionEvent to 1>>
+
+你双膝跪地，爬进柜台的下面。
+<<if _sydneyStatus.includes("corrupt")>>
+	悉尼咧嘴一笑。"我喜欢你的提议，你知道嘛？"
+	<br><br>
+
+	你坏笑着把<<his>>的膝盖分开，随后<<if $pronoun is "m">>扒下了<<his>>的裤子<<else>>撩起了<<his>>的裙子<</if>>。<<sydneyExpose>>
+	<<if _sydneyChastity is 1>>你可以透过<<his>>的贞操带看到<<hes>><<else>><<Hes>><</if>>已经<<if $NPCName[$NPCNameList.indexOf("Sydney")].gender is "m">>完全挺立的阴茎<<else>>湿透的小穴<</if>>。
+	<<npcincr Sydney purity -2>><<lspurity>>
+	<br>
+	<<promiscuity4>>
+
+	<<if ["early","late"].includes($schoolstate)>>
+		<!-- I'm not sure how necessary this is, since Sydney can't be in the library if $schoolstate is early or late. I'm hesitant to remove it, though. Worst case scenario, some lines can be salvaged for a different scene.-->
+		<<He>>环视一圈，图书馆今天异常空荡。于是<<his>>滑下椅子，也挤到了柜台下面。"只有我爽到的话也太不公平了。"<<he>>压低了声音，爬到了你身边，温柔地让你躺下，轻轻地压在了你身上。"但如果你很想品尝我的话，我也很乐意。"
+		<br><br>
+
+		<<He>>俯身吻上你的唇，你伸手圈住<<him>>的身侧。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+		<<sydneyLewd>>
+		<br><br>
+
+		<<link [[继续|Sydney Crawl Sex]]>><<set $sexstart to 1>><</link>>
+	<<else>>
+		<<He>>环视一圈，图书馆里人来人往。"别担心，我会保持安静的。我会是个乖<<personsimple>>。"<<He>>抚上你的脑袋，手指贴紧你的头发，慢慢把你引到<<his>>的<<sydneyGenitals short>>前。
+		<<sydneyLewd>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+		<br><br>
+
+		<<link [[继续|Sydney Crawl Oral]]>><<set $sexstart to 1>><</link>>
+	<</if>>
+<<else>>
+	<<if !["early","late"].includes($schoolstate)>>
+		<<set _modifier to 1.5>>
+	<<else>>
+		<<set _modifier to 1>>
+	<</if>>
+	悉尼皱眉，对你的举动感到困惑。"你这是在干什么？掉东西了么？"
+	<br><br>
+
+	你无视<<him>>的话，把<<his>>的膝盖分开，然后迅速地<<if $pronoun is "m">>扒下<<his>>的裤子<<else>>撩起<<his>>的裙子<</if>>。<<sydneyExpose>><<He>>惊叫一声。<<if _modifier is 1.5>>"在，在这里？现在？！但，但是这里是——"<<He>>焦虑地看着人来人往的图书馆。<<else>>"这，在这儿？你确定吗？"<</if>>
+	<<promiscuity4>>
+
+	<<set $seductiondifficulty to (6000 - (($NPCName[$NPCNameList.indexOf("Sydney")].love + $NPCName[$NPCNameList.indexOf("Sydney")].lust) * 15) - $NPCName[$NPCNameList.indexOf("Sydney")].purity) * _modifier>>
+	<<seductioncheck>>
+	<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><br><br><</if>>
+	<<seductionskilluse>>
+
+	<<if $seductionrating gte $seductionrequired>>
+		尽管很震惊，<span class="green">但<<he>>并没有出手制止你</span>。相反<<him>>别过了脸，呼吸变得急促了起来。
+		<<sydneyLewd>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+		<br><br>
+
+		<<link [[继续|Sydney Crawl Oral]]>><<set $sexstart to 1>><</link>>
+	<<else>>
+		"等，等等！我……我真不知道要干什么……我还……"<<He>>微微颤抖着。"你，你快从这儿出来。我……抱歉。"
+		<<sydneySexFail>>
+		<br><br>
+
+		你从柜台下爬出来，<<he>>则捋了会儿<<him>>的衣服。"对不起，我刚才只是还没有……准备好。"
+		<br><br>
+
+		<<sydneyOptions>>
+	<</if>>
+<</if>>

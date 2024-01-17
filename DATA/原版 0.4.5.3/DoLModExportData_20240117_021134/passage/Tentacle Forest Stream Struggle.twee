@@ -1,0 +1,33 @@
+:: Tentacle Forest Stream Struggle []
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "slug">>
+	<<struggle_creatures 2 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+    <<set $timer to 20>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<if $tentacle_forest_stream is 5 and $timer is 1 or $tentacle_forest_stream is 4 and $timer is 5 or $tentacle_forest_stream is 3 and $timer is 9 or $tentacle_forest_stream is 2 and $timer is 14 or $tentacle_forest_stream is 1 and $timer is 18>>
+	<<struggle_add 1 1>>/*Adds more creatures, with a specific health.*/
+	<span class="pink">另一个生物发动了攻击！</span>
+	<br><br>
+<</if>>
+
+<<struggle>>
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[继续|Tentacle Forest Stream Struggle End]]>><</link>></span>
+	<br>
+<<elseif $orgasmdown gte 1>>
+    <span id="next"><<link [[继续|Tentacle Forest Stream Struggle End 2]]>><</link>></span>
+    <br>
+<<else>>
+	<span id="next"><<link [[继续|Tentacle Forest Stream Struggle]]>><</link>></span>
+	<br>
+<</if>>

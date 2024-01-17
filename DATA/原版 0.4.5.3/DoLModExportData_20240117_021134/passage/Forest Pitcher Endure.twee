@@ -1,0 +1,44 @@
+:: Forest Pitcher Endure []
+<<effects>>
+<<drench "nectar" 2 "outside">><<drugs 180>>
+
+当温暖的黏液包裹着你时，任何关于危险的念头都消失了。
+<<if !$worn.upper.type.includes("naked") or !$worn.lower.type.includes("naked") or !$worn.under_lower.type.includes("naked") or !$worn.under_upper.type.includes("naked")>>
+	<span class="pink">你几乎没有注意到它正在溶解你的衣服。</span>
+	<<upperruined>><<lowerruined>><<underruined>><<underupperruined>>
+	<<exposure>>
+<</if>>
+<br><br>
+
+你感觉到黏滑的藤蔓缠绕着你的肢体和腰部，将你无力的身体提起到空中。更多的藤蔓出现了，热液体从它们的尖端滴落。它们在你的裸露皮肤上滑动，爬过你的<<breasts>>和<<genitals>>。
+<<if $slimeObey is true>>
+	黏液进一步奖励你，因为你按照指示做了。<<ltrauma>><<lstress>><<trauma -6>><<stress -24>><<unset $slimeObey>>
+<<else>>
+	<<ggtrauma>><<gggstress>><<trauma 12>><<stress 48>>
+<</if>>
+<<gggarousal>><<arousal 10000>>
+<br><br>
+
+你皮肤的刺痛感变得难以忍受。
+<<orgasm>>
+
+你无力地悬挂在空中，但藤蔓并没有停止它们的攻击。
+
+<<if $player.breastsize gte 3>>
+	两根藤蔓缠绕在你的<<breasts>>上，挤压着它们，而两根较细的藤蔓的尖端张开。它们附着在你的乳头上，并吸吮着。
+<<else>>
+	两根较细的藤蔓的尖端张开。它们附着在你的<<nipples>>上，并吸吮着。
+<</if>>
+
+<<if $milk_amount gte 1 and $breastfeedingdisable is "f" and $lactating gte 1>>
+	你感觉到你的胸部对这种感觉有反应，奶汁从你的乳头中流出。你仍然无助地悬挂着，被这棵植物吸吮着。
+	<<breastfeed 5>>
+
+<<elseif $breastfeedingdisable is "f">>
+	<<milkvolume 5>>
+<</if>>
+
+<<arousal 10000>>
+<<orgasm>>
+
+<<link [[继续|Forest Pitcher Endure 2]]>><</link>>

@@ -1,0 +1,98 @@
+:: Prison Punishment Roll []
+<<effects>>
+
+<span id="prison_list">
+	<<prison_list>>
+</span>
+
+<<set _die_1 to random(1, 6)>>
+<<set _die_2 to random(1, 6)>>
+
+<div id="die_text">
+	<span id="die_1">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+	+
+	<span id="die_2">
+		<<if $options.images is 1>>
+			<img src="img/misc/die_roll.gif">
+		<<else>>
+			?
+		<</if>>
+	</span>
+	<br>
+	=
+	<br>
+	<span id="die_result">
+
+	</span>
+	<span id="prison_list_result">
+
+	</span>
+</div>
+
+<<timed 2s>>
+	<<replace "#die_1">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_' + _die_1 + '.png'">
+	<<else>>
+		_die_1
+	<</if>>
+	<</replace>>
+<</timed>>
+<<timed 3s>>
+	<<replace "#die_2">>
+	<<if $options.images is 1>>
+		<img @src="'img/misc/die_' + _die_2 + '.png'">
+	<<else>>
+		_die_2
+	<</if>>
+	<</replace>>
+<</timed>>
+<<set $prison_punishment_number to _die_1 + _die_2>>
+<<switch $prison_punishment_number>>
+	<<case 2>>
+		<<set $prison_punishment to "free use">>
+	<<case 3>>
+		<<set $prison_punishment to "nude">>
+	<<case 4>>
+	<<set $prison_punishment to "blindfold">>
+	<<case 5>>
+		<<set $prison_punishment to "topless">>
+	<<case 6>>
+		<<set $prison_punishment to "leash">>
+	<<case 7>>
+		<<set $prison_punishment to "underwear">>
+	<<case 8>>
+		<<set $prison_punishment to "cuffs">>
+	<<case 9>>
+		<<set $prison_punishment to "bottomless">>
+	<<case 10>>
+		<<set $prison_punishment to "gag">>
+	<<case 11>>
+		<<set $prison_punishment to "bindings">>
+	<<default>>
+		<<set $prison_punishment to "rut">>
+<</switch>>
+<<timed 4s>>
+	<<replace "#die_result">>
+		<<print $prison_punishment_number>>
+	<</replace>>
+	<<replace "#prison_list">>
+		<<prison_list_dark>>
+	<</replace>>
+<</timed>>
+<<timed 5s>>
+	<<replace "#prison_list_result">>
+		| <<prison_list_result>>
+	<</replace>>
+<</timed>>
+
+<br><br>
+
+<<link [[继续|Prison Punishment 2]]>><</link>>
+<br>

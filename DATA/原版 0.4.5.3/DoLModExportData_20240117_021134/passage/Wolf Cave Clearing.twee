@@ -1,0 +1,144 @@
+:: Wolf Cave Clearing []
+<<set $outside to 1>><<set $location to "wolf_cave">><<effects>><<getTarget true>>
+<<set _bwmother to Object.values($children).find(child => child.mother === "Black Wolf" && child.location === "wolf_cave")>>
+
+<<set $wolfpackharmony = Math.clamp($wolfpackharmony, 0, 22)>>
+<<set $wolfpackferocity = Math.clamp($wolfpackferocity, 0, 22)>><<set $bus to "wolfcaveclearing">>
+你在狼洞外面的空地上，旁边流淌着一条小溪。
+<<if $exposed gte 1>>
+	<<wolf_cave_plural>>并不在意，但不管怎么说，裸体都是让人很尴尬的。
+<</if>>
+
+<<if $nextPassageCheck is "Wolf Cave Wash">>
+	一只<<beastNEWinit 1 wolf>><<beasttype>><<endevent>>好奇地向你走来。其他一些狼则保持距离。
+<<elseif $nextPassageCheck is "Forest">>
+	<<wolf_cave_plural>>对着你吠叫，试图包围你。
+<<elseif $wolfstate is "hunt">>
+	大部分狼都出去打猎了。
+<<else>>
+	<<if $weather is "rain">>
+		狼群躲着雨。
+	<<elseif $weather is "snow">>
+		狼群躲着雪。
+	<<else>>
+		狼群正在休息。
+	<</if>>
+	<<wolfcavestate>>
+<</if>>
+<<if $pound and $pound.progress is 5>>
+	<span class="blue">一个黑影潜伏在树丛中。</span>
+	<br>
+<</if>>
+<br><br>
+<<if $foresthunt gte 1>>
+	<span class="lblue">你在山洞里很安全。不管是什么在追捕你，最终都会无功而返。</span>
+	<br><br>
+	<<set $foresthunt to 0>>
+<</if>>
+<<if $wolfpatrolsent gte 3>>
+	<<unset $wolfpatrolsent>><<npc "Black Wolf">>
+	黑狼向你走来。<<bhis>>身上没有伤口，<<bhis>>的下巴上也没有伤口。
+	<<if $monster is 1>>
+		"没什么，"<<bhe>>咕哝着说道。"没有入侵者。"
+	<<else>>
+		当你<<if $wolfpackleader is 1>>送<<bhim>><<else>>看着<<bhim>>离开<</if>>去调查的时候，一定什么都没有。
+	<</if>>
+	<<bHe>>似乎很失望。
+	<br><br>
+	<<endevent>>
+<</if>>
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyBirthWolfCave>>
+<<elseif $wolfevent gte 1 and !$possessed>><<set $wolfevent to 0>>
+	<<wolfcaveselect>>
+<<else>>
+	<<if $halloweenWolves and $wolfstate is "cave">>
+		<span class="blue">你的注意力被吸引到洞穴外的一大群<<wolf_cave_plural>>身上。</span>
+		<br>
+		<<investigateicon>><<link [[调查|Wolf Halloween]]>><</link>>
+		<br><br>
+	<</if>>
+	<<wolfcaveicon "harmony">><<link [[玩耍 (1:00)|Wolf Cave Play]]>><<stress -12>><<pass 1 hour>><</link>><<lstress>>
+	<br>
+	<<if $pound and $pound.progress is 5>>
+		<<wolfcaveicon "black dog">><<link [[靠近黑影|Wolf Cave Dog Intro]]>><<set $pound.progress to 6>><<stress 6>><<trauma -6>><<control 25>><</link>><<gstress>><<ggcontrol>><<ltrauma>>
+		<br>
+	<<elseif $pound and $pound.progress is 6 and Time.dayState is "day" and $daily.wolfCaveDog is undefined>>
+		<<wolfcaveicon "black dog">><<link [[靠近黑狗|Wolf Cave Dog]]>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Wolf Cave Wash">>
+		<<wolfcaveicon "stream">><span class="nextLink"><<link [[水|Wolf Cave Wash]]>><</link>></span>
+	<<else>>
+		<<wolfcaveicon "stream">><<link [[在小溪里洗 (0:20)|Wolf Cave Wash]]>><<pass 20>><</link>>
+	<</if>>
+	<br>
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1
+	or $worn.upper.exposed gte 2 and $underupperwetstage gte 3
+	or $upperwetstage gte 3 and $worn.under_upper.exposed gte 1
+	or $upperwetstage gte 3 and $underupperwetstage gte 3>>
+		<<foresticon "bush">><<link [[用枝叶做上衣 (0:20)|Wolf Cave Plant]]>><<set $phase to 1>><<pass 20>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1
+	or $worn.lower.exposed gte 2 and $underlowerwetstage gte 3
+	or $lowerwetstage gte 3 and $worn.under_lower.exposed gte 1
+	or $lowerwetstage gte 3 and $underlowerwetstage gte 3>>
+		<<foresticon "bush">><<link [[用枝叶做裙子 (0:20)|Wolf Cave Plant]]>><<set $phase to 2>><<pass 20>><</link>>
+		<br>
+	<</if>>
+	<br>
+	小溪随着你的倒影荡漾，
+	<<if isBloodmoon()>>
+		你淹没在血月的绯红中。
+	<<elseif Time.dayState is 'dawn'>>
+		黎明的余晖给你披上了一层琥珀色的光环。
+	<<elseif Time.dayState is 'day'>>
+		画面一尘不染，完美无瑕。
+	<<elseif Time.dayState is 'dusk'>>
+		夕阳的余晖给你披上了一层琥珀色的光环。
+	<<else>>
+		月光照亮了水面。
+	<</if>>
+	<br>
+	<<mirroricon>><<link [[检查你的倒影|Wolf Cave Mirror]]>><<preMirror>><</link>>
+	<br>
+	<br>
+	小溪附近的土壤看起来不错，但几乎没有野生植物。
+	<br>
+	<<gardenicon "plot">><<link [[检查|Wolf Cave Plots]]>><</link>>
+	<br>
+	<<pregnancyTest "Wolf Cave Clearing">>
+	<br>
+	<<if $wolfstate is "cave" and npcPregnancyEnding("Black Wolf")>>
+	<<elseif _bwmother and ((Time.hour gte 8 and Time.hour lte 15) or (Time.hour gte 18 and Time.hour lte 21))>>
+		你看到黑狼在一块岩石旁休息，俯瞰着洞穴和周围的环境。
+		<br>
+		<<wolfcaveicon "bw">><<link [[靠近|Wolf Relax]]>><<npc "Black Wolf">><<set $phase to 1>><</link>>
+		<br><br>
+	<<elseif !_bwmother and $wolfstate is "cave" and Time.dayState isnot "night">>
+		你看到黑狼在一块岩石旁休息，俯瞰着洞穴和周围的环境。
+		<br>
+		<<wolfcaveicon "bw">><<link [[靠近|Wolf Relax]]>><<npc "Black Wolf">><<set $phase to 1>><</link>>
+		<br><br>
+	<<elseif $wolfstate is "cave" and $wolfcavepatrol is 1 and $wolfcavepatrolchance is 1 and Time.dayState is "night">>
+		黑狼在远离狼群的地方休息，视察着林地交界处，偶尔关注一下路过的成员。<span class="blue"><<nnpc_He "Black Wolf">>看起来有些躁动。</span>
+		<br>
+		<<wolfcaveicon "bw">><<link [[靠近|Wolf Patrol Intro]]>><<npc "Black Wolf">><</link>>
+		<br><br>
+	<</if>>
+	<<if $wolfstate is "cave" and Time.dayState isnot "night" and !["rain","snow"].includes($weather)>>
+		一些更强壮的<<wolf_cave_plural>>躺在空地周围，等待狩猎。它们看起来很无聊。
+		<br>
+		<<wolfcaveicon "bw">><<link [[挑战猎兽们 (0:20)|Wolf Cave Spar]]>><</link>><<gtiredness>><<gphysique>><<lstress>>
+		<br><br>
+	<</if>>
+	<<getinicon>><<link [[进去|Wolf Cave]]>><</link>>
+	<br><br>
+	<<if $nextPassageCheck is "Forest">>
+		<span class="nextLink"><<foresticon>><<link [[离开 (0:10)|Forest]]>><<pass 10>><<set $eventskip to 1>><<set $forest to 60>><</link>></span>
+	<<else>>
+		<<foresticon>><<link [[走进森林 (0:10)|Forest]]>><<pass 10>><<set $eventskip to 1>><<set $forest to 60>><</link>>
+	<</if>>
+	<br>
+<</if>>

@@ -1,0 +1,146 @@
+:: Estate Cards Oral 2 []
+<<effects>>
+
+<<if $estate.cards.oral gt 7>>
+	<<set $estate.cards.oral to 7>>
+<</if>>
+
+<<switch $estate.cards.oral>>
+<<case 2>>
+	<<person2>>
+<<case 3>>
+	<<person3>>
+<<case 4>>
+	<<person4>>
+<<case 5>>
+	<<person5>>
+<<default>>
+	<<person6>>
+<</switch>>
+
+<<if $estate.cards.oral lt 7>>
+
+	<<if $estate.cards.oral is 2>>
+		你爬向第一个打手——一个<<person>>。
+	<<elseif $estate.cards.oral is 6>>
+		你爬到最后一个打手——一个<<person>>脚边。
+	<<else>>
+		你爬向下一个打手——一个<<person>>。
+	<</if>>
+
+	<<rng>>
+	<<if $rng gte 86 - ($estate.cards.rim || 0) * 10 and $analingusdisablegiving is "f">>
+		<<He>>一只脚放上椅子，<<npcUndressText $NPCList[$estate.cards.oral-1] "lower" "self">>，向后靠上来，让你正对<<his>>的菊穴。
+		<br><br>
+
+		伦恩说过你必须用嘴。
+		<br><br>
+		<<link [[舔|Estate Cards Oral Anus]]>><<if $promiscuity lt 55>><<trauma 6>><<stress 6>><</if>><<arousal 600 "mouth">><</link>><<skill_difficulty `currentSkillValue("oralskill")` "口部技巧" 1 1000>>
+		<<if $promiscuity lt 55>>
+			<<gtrauma>><<gstress>>
+		<</if>>
+		<<garousal>>
+		<br>
+	<<else>>
+		<<if $pronoun is "f">>
+			你掀起<<his>>的裙子，
+		<<else>>
+			你拉开<<his>>的裤子拉链，
+		<</if>>
+		<<if $NPCList[($estate.cards.oral - 1)].penis isnot "none" and !npcHasStrapon($estate.cards.oral - 1)>>
+			掏出<<his>>的<<print $NPCList[($estate.cards.oral - 1)].penisdesc>>。
+			<br><br>
+
+			伦恩说过你必须用嘴。
+			<br><br>
+
+			<<link [[舔|Estate Cards Oral Penis]]>><<if $promiscuity lt 55>><<trauma 6>><<stress 6>><</if>><<arousal 600 "mouth">><</link>><<skill_difficulty `currentSkillValue("oralskill")` "口部技巧" 1 1000>>
+			<<if $promiscuity lt 55>>
+				<<gtrauma>><<gstress>>
+			<</if>>
+			<<garousal>>
+			<br>
+			<<if $ejactrait gte 1>>
+				<<if $exposed gte 2>>
+					<<link [[表演节目|Estate Cards Oral Penis Cumslut]]>><</link>><<ejacTrait>>
+					<<arousal 600>><<garousal>>
+				<<else>>
+					<!-- means PC won, lost at least one piece of clothing, refused the clothes rebuy offer, and is at least somewhat clothed -->
+					/* <span class="blue">You consider putting on a show, but you're too clothed for that.</span> */
+					<!-- "Why is that a problem?" you ask. "Because I'd have to add clothed variations for it, and I'm not promiscuous enough," said someone who is definitely not a cop. -->
+					/* <br><br> */
+				<</if>>
+			<</if>>
+		<<else>>
+			露出了<<his>>的小穴。
+			<br><br>
+
+			伦恩说过你必须用嘴。
+			<br><br>
+			<<link [[舔|Estate Cards Oral Vagina]]>><<if $promiscuity lt 55>><<trauma 6>><<stress 6>><</if>><<arousal 600 "mouth">><</link>><<skill_difficulty `currentSkillValue("oralskill")` "口部技巧" 1 1000>>
+			<<if $promiscuity lt 55>>
+				<<gtrauma>><<gstress>>
+			<</if>>
+			<<garousal>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<earnFeat "Trading Dignity">>
+	<<person1>>
+	所有人都被服务过了一遍，完成后你从桌子底下爬了出来。
+	<br><br>
+
+	<<if $estate.cards.clothesRebuyTerms>>
+		<<set _price to $estate.cards.clothesRebuyTerms.price>>
+
+		<<if _price gt 0>>
+			"一言为定，先给钱，"伦恩伸出手说道。
+			<br><br>
+
+			如果他们想抢劫你早就下手了。你递给伦恩<<printmoney `_price`>>。
+			<br><br>
+
+			<<set $money -= _price>>
+
+			伦恩把你的衣服扔给你，一脸满足地得意地笑着。
+			<br><br>
+		<<else>>
+			"成交，"伦恩满意地笑着说道。
+			<br><br>
+
+			<<He>>向<<his>>的一个打手点点头，那个人把你的衣服扔向你。
+			<br><br>
+		<</if>>
+
+		<<clotheson>>
+
+		<<set $estate_cards_end to "pc_won_and_oral">>
+		<!-- making sure to reset this, so that <<estate_cards_finish>> doesn't ruin the clothes -->
+		<<set $estate.cards.confiscatedClothes to []>>
+
+		"再见，"伦恩在你离开小屋时说道。
+		<br><br>
+
+		<<estate_cards_finish>>
+
+		<<link [[继续|Estate]]>><<endevent>><</link>>
+		<br>
+
+	<<else>>
+		"一言为定，"伦恩说着把毛巾扔给你。它很小。远远不够覆盖你的全身。
+		<br><br>
+		<<if $estate_cards_end isnot "sex">>
+			<<set $estate_cards_end to "oral">>
+		<</if>>
+
+		<<link [[把它包裹在胸前|Estate Cards Towel]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[把它包裹在腰上|Estate Cards Towel]]>><<set $phase to 1>><</link>>
+		<br>
+		<<if $estate.cards.wren_under_bottoms is 0>>
+			<<link [[把它包裹在伦恩腰上|Estate Cards Towel]]>><<set $phase to 2>><</link>><<glove>><<npcincr Wren love 1>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

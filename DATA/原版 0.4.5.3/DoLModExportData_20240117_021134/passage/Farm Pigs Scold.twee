@@ -1,0 +1,37 @@
+:: Farm Pigs Scold []
+<<effects>>
+
+<<if $tendingSuccess>>
+	<<if $farm_work.pig.monster is true>>
+		"嘘！"你训斥道，<span class="green">你的声音坚定而有力。</span><<farm_text pig>>释放了你，老老实实进了围栏。<<grespect>><<farm_pigs 1>>
+	<<else>>
+		"下去！"你训斥道，<span class="green">你的声音坚定而有力。</span>它回到了地上，老老实实进了围栏。<<grespect>><<farm_pigs 1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+	<<if $farm.beasts.pigs lt -5 and $rng gte 51>>
+		<<if $farm_work.pig.monster is true>>
+			"走、走开！"你喊道，但<span class="red">你的声音在颤抖，</span><<farm_text pig>>对你的话不予理会，把你拉倒在地。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<<else>>
+			"下、下去！"你喊道，但<span class="red">你的声音在颤抖，</span><<farm_text pig>>对你的话不予理会，把你拉倒在地。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Farm Pigs Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $farm_work.pig.monster is true>>
+			"走、走开！"你喊道，但<span class="red">你的声音在颤抖，</span><<farm_text pig>>对你的话不予理会。<<farm_He pig>>在你背上拱了几下，很快就感到疲倦并放开了你。你跟在<<farm_him pig>>的后面，关上了畜栏。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<<else>>
+			"下，下去！"你喊道，但<span class="red">你的声音在颤抖，</span>这只猪对你的话不予理会。它在你背上拱了几下，很快就感到疲倦并放开了你。你跟在它的后面，关上了畜栏。<<lrespect>><<farm_pigs -1>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

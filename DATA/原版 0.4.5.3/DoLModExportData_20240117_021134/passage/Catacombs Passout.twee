@@ -1,0 +1,46 @@
+:: Catacombs Passout []
+<<effects>>
+
+<<beastNEWinit 1 spider>>
+<<if $spiderdisable is "f">>
+	你醒来时头朝下，被一根粗丝线吊在天花板上。你扭动着，挣扎着。
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			"好吧，好吧，"一个声音从黑暗中低吟而出。<span class="red">一只<<beasttype>>跳入眼帘，用饥渴的眼睛审视着你的身体。</span>
+			<br><br>
+
+			"我没有多少访客。"<<bHe>>跟在后面，咯咯地笑着说。"我好饿。"<<bHe>>熟练地爬上蜘蛛网，并<<bHe>>停在你上面。<<bHe>>向前倾，用<<bhis>>的舌头在你的脸颊上留下舔痕。<<ggstress>><<stress 12>>
+			<br><br>
+
+			"别那么害怕，"<<bhe>>说，"我现在想的不是那种饭。但首先，让我们确保你不会挣扎。"
+		<<else>>
+			<span class="red">你听到黑暗中传来的啾啾声，看到了八只眼睛。</span>一只巨大的蜘蛛爬过石头，爬上墙，轻轻地爬到网上。<<ggstress>><<stress 12>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Catacombs Passout 2]]>><</link>>
+		<br>
+	<<else>>
+		<<bind>>
+		<<upperwear 104>>
+		<<facewear 5>>
+		<span class="red">你听到黑暗中有窃窃私语。</span>
+		<br><br>
+
+		<<endevent>>
+		你在疯狂的恐慌中挣扎。蜘蛛网一圈又一圈地旋转，直到把你从头到脚都包裹起来，最后绳子断了。你逃进了黑暗中。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Catacombs Ridge]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<bind>>
+	<<upperwear 104>>
+	<<facewear 5>>
+	你醒来时发现自己头朝下，脚踝被一根粗绳子吊在天花板上。你扭动着，挣扎着，把网弄松了，最后终于落了下去。<<pass 20>><<beastescape>>
+	<br><br>
+
+	<<endevent>>
+	<<destination_catacombs skip>>
+<</if>>

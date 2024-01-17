@@ -1,0 +1,34 @@
+:: Eden Roof []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+
+<<switch $edenroof>>
+	<<case 0>>
+		小屋的屋顶无人打理，有不少腐烂或损坏的瓦片，需要全部更换。
+		你看了看伊甸带来的梯子，准备爬上去。到了屋顶后，你拔出一些松动的瓦片扔到地上。
+	<<case 1>>
+		你把更多松动的瓦片拔了出来，用新的瓦片替换。虽然显得有些突兀，但它们至少可以挡住雨雪。接下来还有其它工作。
+	<<case 2>>
+		你拿起一把羊角锤。这里有一片被大树枝倒下后压坏的碎瓦。你把锤子敲进去，开始用锤角把凹陷的碎瓦翘出。
+		最终，你翘掉了最后的碎瓦，自豪地欣赏着自己的成果。
+	<<case 3>>
+		你开始修补屋顶上因瓦片凹陷而留下的洞。这相对是个简单的工作，但很费时间。
+	<<default>>
+		你在修补过的屋顶上铺上新的瓦片，一点一点的，你的工作终于完成了。你看着屋顶，惊讶于自己完成了这一切。
+<</switch>>
+<<physique 3>>
+<br><br>
+
+<<set $edenroof += 1>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 26 and ((Time.hour gt 6 and Time.hour lt 11) or Time.hour gt 14)>>
+	当你开始往下爬时，你感觉到梯子稍微晃了晃。往下看，你注意到伊甸正抓着梯子，帮忙稳住它。<<He>>向你点点头，看着你往下爬。
+	当你终于爬下来后，伊甸用胳膊搂住了你的腰，把你拉到<<his>>的胸前。"休息一下怎么样？"<<he>>问。
+	<br><br>
+
+	<<link [[亲吻伊甸|Eden Roof Sex]]>><<set $sexstart to 1>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<gdom>><<glove>>
+	<br>
+	<<link [[推开伊甸|Eden Roof Push]]>><<npcincr Eden love -3>><<npcincr Eden dom -1>><</link>><<ldom>><<lllove>>
+<<else>>
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+<</if>>
+<br>

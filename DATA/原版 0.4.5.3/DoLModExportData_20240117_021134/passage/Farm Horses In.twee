@@ -1,0 +1,28 @@
+:: Farm Horses In []
+<<effects>>
+
+你呼唤<<farm_text_many horse>>，并将它们带离田地。它们似乎很乐意离开。
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $danger gte (9900 - $allure)>>
+	你把它们锁在各自的隔间里过夜。轮到最后一匹时却遇到了阻碍，它坚持想留在外面。<<farm_He horse>>太大了，无法强行让它移动。
+	<br><br>
+
+	<<link [[鼓励|Farm Horses In Encourage]]>><</link>><<tendingdifficulty 1 800>>
+	<br>
+	<<link [[呼唤艾利克斯|Farm Horses In Alex]]>><<npcincr Alex dom 1>><<farm_horses -1>><</link>><<lrespect>><<gdom "Alex">>
+	<br>
+	<!-- Modified for Monster People -->
+	<<if $deviancy gte 15 and $horsedisable is "f" and ($bestialitydisable is "f" or $farm_work.horse.monster is true)>>
+		<<link [[诱惑|Farm Horses In Seduce]]>><</link>><<deviant2>>
+	<</if>>
+	<br>
+
+<<else>>
+	你把它们锁在各自的隔间里过夜。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

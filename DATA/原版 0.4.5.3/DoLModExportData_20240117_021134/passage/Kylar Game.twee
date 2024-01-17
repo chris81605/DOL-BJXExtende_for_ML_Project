@@ -1,0 +1,113 @@
+:: Kylar Game []
+<<set $outside to 0>><<effects>><<run statusCheck("Kylar")>>
+<<set $kylar_action to "game">>
+
+<<if $kylar.play isnot 1>>
+	<<if $speech_attitude is "meek">>
+		"我，我们一起玩游戏吧，"你说，"会很有趣的！"
+	<<elseif $speech_attitude is "bratty">>
+		"我肯定可以做得更好，"你说，"我也要玩。"
+	<<else>>
+		"它有多人模式，"你说，"要一起玩吗？"
+	<</if>>
+<<else>>
+	你问<<he>>要不要再玩一局。
+<</if>>
+<<set $kylar.play to 1>>
+<br><br>
+
+<<if _kylarStatus.includes("Love")>>
+	凯拉尔点点头，"我会付钱的，"
+<<else>>
+	凯拉尔移开视线，但点了点头。"我、我会付钱的，"<<he>>咕哝着。
+<</if>>
+<<if $rng gte 81>>
+	<<He>>消失在弹球机下面，带着一堆硬币重新出现。
+<<elseif $rng gte 61>>
+	<<He>>将<<his>>的耳朵贴在老虎机上，沿着机身上下摸索，很快便找到了正确的位置。<<he>>迅速地踹了一脚，你听到有东西在叮当作响，随后大量的硬币喷涌而出。
+<<elseif $rng gte 41>>
+	<<He>>走近老虎机前的游客，摸出<<if random(1, 2) is 1>>他<<else>>她<</if>>的钱包，从中拿出一些硬币，再把钱包放回原处。整个过程神不知鬼不觉。
+<<elseif $rng gte 21>>
+	<<He>>在每台机器上搜索被遗漏的硬币，直到找到足够的硬币进行游戏。
+<<else>>
+	<<He>>拍了拍推币器的前端，一把硬币掉了下来。
+<</if>>
+<br><br>
+
+<<rng>>
+<<if $rng gte 67>>
+	在一个合作类游戏中，你们用第一人称视角扮演着射击手。你们杀死了很多<<print either("僵尸", "海盗", "外星人", "士兵", "罪犯", "变种人")>>。
+	<<set $phase to 0>>
+<<elseif $rng gte 31>>
+	你们玩了一个合作类<<print either("射击游戏","横板过关游戏")>>。
+	<<set $phase to 0>>
+<<else>>
+	你在格斗游戏中选择了对战模式。
+	<<set $phase to 1>>
+<</if>>
+
+<<rng>>
+<<if $rng gte 81>>
+	<<generatey2>><<generatey3>>"呃，是凯拉尔，"你身后的一个<<person2>><<person>>指着街机游戏机，"下次再来玩的时候，记得提醒我别选那台。"<<His>>的朋友，一个<<person3>><<person>>哈哈笑出声。
+	<br><br>
+	凯拉尔假装没听到，但<<person1>><<his>>的游戏状态明显受到了影响。
+	<br><br>
+
+	<<link [[无视他们就好|Kylar Arcade Ignore]]>><</link>>
+	<br>
+	<<link [[生气|Kylar Arcade Angry]]>><<status -10>><<npcincr Kylar love 3>><</link>><<lcool>><<gglove>>
+	<br>
+<<elseif $rng gte 61>>
+	<<if $phase is 0>>
+		势均力敌，但你努力赢得了胜利。凯拉尔打得汗流浃背。
+		<br><br>
+		<<kylaroptions>>
+	<<else>>
+		凯拉尔和你都不熟悉这个游戏，但你拼尽全力最后取得了胜利。
+		<<ltrauma>><<trauma -2>>
+		<br><br>
+		<<kylaroptions>>
+	<</if>>
+<<elseif $rng gte 41>>
+	<<if $phase is 0>>
+		游戏很难，凯拉尔为了获胜非常拼命。
+		<br><br>
+		<<kylaroptions>>
+	<<else>>
+		你们最后吵吵闹闹的，差点儿打起来。
+		<br><br>
+		<<kylaroptions>>
+	<</if>>
+<<elseif $rng gte 21>>
+	<<if $phase is 0>>
+		你打得很好，但还是输掉了游戏。
+		<br><br>
+		<<kylaroptions>>
+	<<else>>
+		凯拉尔和你都不熟悉这款游戏，但<<he>>最后拼尽全力取得了胜利。
+		<br><br>
+		<<kylaroptions>>
+	<</if>>
+<<else>>
+	<<if _kylarStatus.includes("Love")>>
+		<<if $phase is 0>>
+			<<Hes>>真的很厉害。你根本跟不上，但<<he>>努力带着你一起，让你的游戏体验并没有多差。
+			<br><br>
+			<<kylaroptions>>
+		<<else>>
+			<<Hes>>打得非常好，很快就让你处于劣势。
+			<br><br>
+			<<link [[只是快乐地玩游戏|Kylar Fun]]>><<npcincr Kylar love 1>><</link>><<glove>>
+			<br>
+			<<link [[分散凯拉尔的注意力|Kylar Distract]]>><<npcincr Kylar lust 1>><</link>><<glust>><<promiscuous1>>
+			<br>
+		<</if>>
+	<<else>>
+		你之前看到的华丽炫技都消失了，<<His>>的手抖得很厉害。
+		<br><br>
+		<<link [[鼓励|Kylar Encourage]]>><<npcincr Kylar love 1>><</link>><<glove>>
+		<br>
+		<<link [[挑逗|Kylar Arcade Tease]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

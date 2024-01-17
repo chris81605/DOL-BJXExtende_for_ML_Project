@@ -1,0 +1,30 @@
+:: Balloon Consume []
+<<effects>>
+
+<<switch $phase>>
+	<<case "hot drink">>你小心地啜饮，以免烫伤你的舌头。这款<<seasonal_beverage>>味道浓郁<<print Time.season is "winter" ? "且口感绵密" : "并带有香料">>，你能感觉到压力正在消散。
+	<<case "cold drink">>你抿了一口。这款<<seasonal_beverage>><<print Time.season is "spring" ? "果味宜人" : "有点酸">>且令人神清气爽，你能感觉到压力正在消散。
+	<<case "popcorn" "park" "ask_eat">>你塞了一把爆米花进嘴里。它既有黄油香气又带着咸味，让你怀恋起去电影院的美好时光。
+	<<case "ask">>你在将爆米花放进口袋前将其袋口封好，以防爆米花会撒得到处都是。<<handheldon>>
+<</switch>>
+<br><br>
+<<if ["ask","ask_eat"].includes($phase)>>
+	“我一直想问，”<<person>>把<<his>>的手肘搁在摊位上，为了和你闲聊<<he>>倾身向前。“你觉得这爆米花怎么样？味道不错，对吧？”
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		“很好吃，<<sir>>，”你告诉<<him>>。“不过，嗯，稍微有点咸？”
+	<<elseif $speech_attitude is "bratty">>
+		“是啊，你手艺不错，这毋庸置疑。不过是有点咸了。让我有些口干舌燥。”你舔了舔嘴唇坦率地说。
+	<<else>>
+		“味道很好，没错。如果非要我说点什么的话，就是有点咸了。”
+	<</if>>
+	<br><br>
+	“盐分让人上瘾。这就是让他们成为回头客的诀窍，”<<he>>对你挤挤眼。“但听一点别的意见也不错。我总是乐于去改进。”
+	<br><br>
+	<<link [[提议让摊主和罗宾合作|Balloon Partner]]>><<set $phase to "help">><<handheldon>><</link>><br>
+	<<link [[提议摊主卖饮料|Balloon Partner]]>><<set $phase to "sabotage">><<handheldon>><</link>>
+<<elseif $phase is "park">>
+	<<link [[继续|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<else>>
+	<<link [[继续|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>

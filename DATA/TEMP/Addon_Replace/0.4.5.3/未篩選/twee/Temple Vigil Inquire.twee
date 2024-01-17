@@ -1,0 +1,42 @@
+:: Temple Vigil Inquire []
+<<effects>>
+<<npc "Jordan">><<person1>>
+<<if $temple_vigil_asked is undefined>>
+	"你想成为一名正式<<if $player.gender_appearance is "f">>修女<<else>>修士<</if>>吗？"约旦问道，"只有证明其拥有足够<span class="gold">恩典</span>的人，才足以承担这份责任。"
+	<br><br>
+	"即使你符合条件，还有另一项考验，"约旦继续说道，"你必须赤身裸体，在禁闭的修道院整宿守夜。这项传统古老而又严苛，因为不能让软弱者加入到我们之中。试炼是残酷的。"
+	<br><br>
+	"如果你是认真的，就在证明自己后再回来。试炼总是在<span class="gold">礼拜天晚上<<ampm 20>></span>开始，在那之前保证自己有充足的休息。" <<He>>转身离开。
+	<br><br>
+
+	<<link [[继续|Temple]]>><<endevent>><<set $temple_vigil_asked to 1>><</link>>
+	<br>
+<<elseif $weekly.templeVigil>>
+	"你每周只能测验一次，"约旦说，"时间会驱散你骨头里的寒气。"
+	<br><br>
+	<<link [[继续|Temple]]>><<endevent>><</link>>
+	<br>
+<<elseif $grace lt 100>>
+	"你还没能向我们证明你的<span class="gold">恩典</span>。"约旦说道，"好好履行见习教徒的职责，准备充分了再来吧。"
+	<br><br>
+	<<link [[继续|Temple]]>><<endevent>><</link>>
+	<br>
+<<elseif Time.weekDay isnot 1>>
+	"你来错日子了孩子。"约旦说道，"<span class="gold">礼拜天晚上<<ampm 20>></span>再来吧，守夜会持续一整夜。"
+	<br><br>
+	<<link [[继续|Temple]]>><<endevent>><<set $temple_vigil_asked to 1>><</link>>
+	<br>	
+<<elseif Time.hour isnot 20>>
+	"你来错时刻了孩子。"约旦说道，"<span class="gold">晚上<<ampm 20>></span>再来吧，守夜会持续一整夜。要好好休息。"
+	<br><br>
+	<<link [[继续|Temple]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"时间到了。"<<his>>的语气中带着一丝决然。"希望你已经充分休息过了。若你愿意，我便带你去守夜。只要你能熬过今晚，即可加入<<if $player.gender_appearance is "f">>成为我们的姐妹<<else>>成为我们的兄弟<</if>>。"
+	<br><br>
+
+	<<link [[开始试炼 (9:00)|Temple Vigil]]>><</link>>
+	<br>
+	<<link [[离开|Temple]]>><<endevent>><</link>>
+	<br>
+<</if>>

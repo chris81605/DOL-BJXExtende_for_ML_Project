@@ -1,0 +1,93 @@
+:: Photo []
+<<set $outside to 0>><<effects>>
+
+<<if $photo.niki_event is undefined and $NPCName[$NPCNameList.indexOf("Niki")].love gte 10 and $brothelintro gte 1>>
+	<<set $photo.niki_event to 1>>
+	<<npc Briar>><<person1>>
+	<<if $pronoun is "m">>
+		一个穿着露骨蓝色西装的<<personsimple>>从你身边经过。
+	<<else>>
+		一个穿着露骨红色礼裙的<<personsimple>>从你身边掠过。
+	<</if>>
+	是布莱尔。
+	<br><br>
+	"能在这看到你，我一点都不惊讶，"<<he>>靠在门框上看着你说道，尼奇抬起头，你注意到<<nnpc_his "Niki">>的眉头都快扭在一起了，布莱尔笑道："别担心，下周见。"
+	<br><br>
+
+	布莱尔继续赶<<his>>的路。
+	<br><br>
+
+	<<link [[继续|Photo]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<npc Niki>><<person1>>
+	你正待在南丁格尔街的摄影工作室里，尼奇坐在一张桌子后面，盯着电脑屏幕。各种
+
+	<<if $malevictimchance gte 100>>
+		男人的
+	<<elseif $malevictimchance lte 0>>
+		女人的
+	<<else>>
+		男人和女人的
+	<</if>>
+	照片贴满了<<him>>身后的墙，大多数都比较露骨，但都很有品位。
+	
+	<<if $fame.model gte 100 and $fame.model lt 400>>
+		<br>
+		<span class="purple">这是一张小一点的照片。</span>
+
+	<<elseif $fame.model gte 400 and $fame.model lt 1000>>
+		<br>
+		<span class="lblue">你曾见过它。</span>
+
+	<<elseif $fame.model gte 1000>>
+		<br>
+		<span class="green">你的全尺寸照片悬挂在正中间，向你微笑。</span>	
+
+		<<if $daily.photo is undefined >>
+			<<set $daily.photo to true>>
+			<<stress -3>><<lstress>>
+			<<trauma -3>><<ltrauma>>
+		<</if>>
+
+	<<elseif $fame.model gte 1000 and $daily.photo is true >>
+		<br>
+		<span class="green">你的全尺寸照片悬挂在正中间，向你微笑。</span>
+	<</if>>
+	<br><br>
+
+	<<if isPubfameTaskAccepted("niki")>>
+		<<if $pubfame.niki.examined>>
+			米奇的联络人的照片就挂在墙上。
+			<br>
+			<<ind>><<link [[盗取|Photo Examine Steal]]>><<loadNPC 1 "pubfame_model">><</link>>
+			<br>
+			<<askicon>><<link [[请求得到它|Photo Examine Ask]]>><<loadNPC 1 "pubfame_model">><</link>>
+		<<else>>
+			米奇的联系方式应该在照片墙的某处。
+			<br>
+			<<investigateicon>><<link [[检查 (0:05)|Photo Examine]]>><<pass 5>><<set $pubfame.niki.examined to true>><</link>>
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<if $photo.shoot is 1>>
+		<span class="blue">你这周已经当过模特了。</span>
+		<br>
+	<<else>>
+		<<ind>><<link [[当模特 (Up to 3:00)|Photo Model]]>><<set $photo.shoot to 1>><</link>><<exhibitionist1>>
+		<br>
+	<</if>>
+	/*
+	<<link [[Ask for other work|Photo Ask]]>><</link>>
+	<br>
+	<<if $photo.silly is "done">>
+		<<link [[Get paid for the silly outfit job|Photo Street Paid]]>><<set $photo.silly to "paid">><</link>>
+		<br>
+	<</if>>
+	*/
+	<<nightingaleicon>><<link [[离开|Nightingale Street]]>><<endevent>><</link>>
+	<br>
+
+	<<set $niki_seen to "photo">>
+<</if>>

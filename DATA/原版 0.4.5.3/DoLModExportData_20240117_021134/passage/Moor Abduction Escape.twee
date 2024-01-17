@@ -1,0 +1,20 @@
+:: Moor Abduction Escape []
+<<effects>><<set $lock to 700>>
+
+你挣脱绳子，站起来。大多数暴徒肯定都睡着了。你从帐篷入口偷看，看到一个守卫坐在一边，半睡半醒，周围都是空啤酒瓶。
+<br><br>
+
+你转身回到防水帆布下面，偷看下面。一堆堆的笼子，大部分都是关着锁着的。里面有动静。
+<br><br>
+
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这些锁看起来很容易撬开。</span>
+	<br><br>
+	<<link [[打开笼子 (0:20)|Moor Abduction Lock]]>><<pass 20>><<stress 6>><</link>><<gstress>>
+	<br>
+<<else>>
+	<span class="blue">这些锁看起来超出了你的能力。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<set $skulduggerydifficulty to 900>>
+<<link [[趁警卫不注意悄悄溜过|Moor Abduction Sneak]]>><</link>><<skulduggerydifficulty>>

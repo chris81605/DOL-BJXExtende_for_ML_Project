@@ -1,0 +1,35 @@
+:: Lake Ruin Prison Masturbation []
+<<effects>>
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+	<<set $leftarm to "possessed">><<set $rightarm to "possessed">><<set $mouth to "none">>
+	<<if $phase.includes("breast")>>
+		<<set $leftactiondefault to "mbreaststopW">>
+	<<elseif $phase is "penis">>
+		<<set $leftactiondefault to "mpenisstopW">>
+	<<else>>
+		<<set $leftactiondefault to "mvaginastopW">>
+	<</if>>
+	<<if $phase.includes("penis")>>
+		<<set $rightactiondefault to "mpenisstopW">>
+	<<elseif $phase is "breast">>
+		<<set $rightactiondefault to "mbreaststopW">>
+	<<else>>
+		<<set $rightactiondefault to "mvaginastopW">>
+	<</if>>
+<</if>>
+<<masturbationeffects>>
+你的身体异常炽热。<<arousal 600>><<garousal>>
+<br><br>
+<<masturbationactions>>
+
+<div id="masturbationButtons">
+	<<if $arousal gte $arousalmax or $control gte $controlmax>>
+		<div id="next" class="nextWraith"><<link [[继续|Lake Ruin Prison Masturbation Finish]]>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next" class="nextWraith"><<link [[继续|Lake Ruin Prison Masturbation]]>><</link>><<nexttext>></div>
+	<</if>>
+</div>
+<br><br><br><br><br>

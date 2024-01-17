@@ -1,0 +1,49 @@
+:: Street Box []
+<<set $outside to 1>><<effects>>
+
+你搬起箱子。
+<<if $rng gte 81>>
+	箱子很重。你轻轻拉开插销，盖子突然弹开，<span class="red">有什么东西跳出去了。</span>你被弹了个趔趄，你的<<bottom>>和地面来了个亲密接触。
+	<<gpain>><<gstress>><<pain 6>><<stress 6>>
+	<br><br>
+
+	不明生物钻进了附近的下水道，你只看见了一个尾巴。
+	<br><br>
+
+	<<destinationeventend>>
+<<elseif $rng gte 61>>
+	一把又大又结实的锁将它锁了起来。
+	<br><br>
+
+	<<set $skulduggerydifficulty to 400>>
+	/* 北极星模组 */
+	<<link [[尝试打开它 (0:05)|Street Box Open]]>><<pass 5>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime "thievery">>
+	/* 北极星 */
+	<br>
+	<<link [[离开它|Street Box Stop]]>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	你弹开箱子的插销。<span class="pink">一股紫色的雾气</span>从开口处喷出，让你忍不住打了个喷嚏，盒子也掉在了地上。你感觉身体发热。
+	<<drugs 120>><<garousal>><<arousal 1000>>
+	<br><br>
+
+	<<destinationeventend>>
+<<elseif $rng gte 21>>
+	你打开它。里面有<span class="gold">£50</span>。
+	<br><br>
+
+	<<link [[拿走它|Street Box Money]]>><<crimeUp 50 "thievery">><<set $money += 5000>><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开它|Street Box Stop]]>><</link>>
+	<br>
+<<else>>
+	你打开它，里面装满了土豆。
+	<br><br>
+
+	<<if $loft_river>>
+		<<link [[为孤儿院收下它|Street Box Potatoes]]>><<hope 1>><</link>><<ghope>>
+		<br>
+	<</if>>
+	<<link [[离开它|Street Box Stop]]>><</link>>
+	<br>
+<</if>>

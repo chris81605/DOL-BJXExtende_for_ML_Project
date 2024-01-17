@@ -1,0 +1,34 @@
+:: Forest Wolf Cave []
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if $eventskip is 0>>
+	<<eventwolfcave>>
+<<else>>
+	<<wolf_cave_plural>>封锁着你离开洞穴的去路。你的身后吹过一阵气流。
+	<br><br>
+	<<wolfcaveicon "sleep">><<link [[休息 (2:00)|Forest Wolf Cave Wait]]>><<set $tiredness -= 480>><<pass 2 hours>><</link>>
+	<br>
+
+	<<getouticon>><<link [[尝试逃跑|Forest Wolf Cave Escape]]>><</link>>
+	<br>
+	<<if $wolfcavedig gte 13>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>>
+		<br>
+	<<elseif $wolfcavedig gte 12 and $physiquesize lte 12000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+		<br>
+	<<elseif $wolfcavedig gte 11 and $physiquesize lte 10000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+		<br>
+	<<elseif $wolfcavedig gte 10 and $physiquesize lte 6000>>
+		<<getouticon "hole">><<link [[钻进洞里|Forest Wolf Cave Hole]]>><</link>><<small_text>>
+		<br>
+	<<elseif $wolfcavedig gte 1>>
+		<<getouticon "hole">><<link [[在洞的后面挖 (1:00)|Forest Wolf Cave Dig]]>><<pass 1 hour>><<set $wolfcavedig += 1>><</link>>
+		<br>
+	<<else>>
+		<<investigateicon>><<link [[检查洞穴的后面|Forest Wolf Cave Examine]]>><<set $wolfcavedig to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

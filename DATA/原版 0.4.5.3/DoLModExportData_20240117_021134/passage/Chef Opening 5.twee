@@ -1,0 +1,38 @@
+:: Chef Opening 5 []
+<<set $outside to 0>><<set $location to "cafe">><<effects>>
+
+豪华轿车驶近咖啡馆。你向窗外望去，看到一大群人聚集在咖啡馆入口上方的一幅巨幅画下面。
+是一张你的照片，你头戴厨师帽，面露微笑，把一大勺<<if $chef_picture is "lewd">>"奶油"<<else>>奶油<</if>>从胸口浇下。
+<br><br>
+
+<<if $chef_picture is "lewd">>
+	<span class="lewd">你清楚地记得奶油是什么做的，不由得脸红了起来。</span>
+	<<garousal>><<arousal 600>>
+	<br><br>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Avery")].state is "active">>
+	豪华轿车停了下来，一个服务员打开车门。迎接你们的是热烈的掌声。
+	<<llltrauma>><<trauma -24>>
+	<br><br>
+	你正走在红地毯上，一个身影出现在你身边。
+	<<npc Avery>><<person1>>是艾弗里。"我还不知道你是个小厨神呢，"<<he>>说着。"没想到还能看到你站在聚光灯下。"
+	<<He>>伸出<<his>>的手。"让我陪你进去。"
+	<br><br>
+	<<link [[牵起艾弗里的手|Chef Opening Avery Accept]]>><<set $chef_avery to true>><<npcincr Avery love 1>><</link>><<glove>>
+	<br>
+	<<link [[不牵艾弗里的手|Chef Opening Avery Refuse]]>><<set $chef_avery to false>><<npcincr Avery love -1>><<npcincr Avery rage 5>><</link>><<garage>><<llove>>
+	<br>
+<<else>>
+	豪华轿车停了下来，一个服务员打开车门。迎接你们的是热烈的掌声。
+	<<llltrauma>><<trauma -24>>
+	<br><br>
+	你走在红地毯上。你在其中认出了尼奇。
+	<<npc Sam>><<person1>>萨姆在门口和你会合了。<<his>>穿着<<if $pronoun is "m">>西装打着领带<<else>>一条红色礼服<</if>>。
+	<br><br>
+	"这简直就是梦想成真，"<<he>>说道。"感谢你帮我实现这一切。"<<He>>拥抱住你，台下观众的欢呼声更响亮了。
+	<<gglove>><<npcincr Sam love 3>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Chef Opening 6]]>><</link>>
+	<br>
+<</if>>

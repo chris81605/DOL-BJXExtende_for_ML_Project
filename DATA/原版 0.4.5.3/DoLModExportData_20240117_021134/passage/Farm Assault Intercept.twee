@@ -1,0 +1,24 @@
+:: Farm Assault Intercept []
+<<effects>>
+
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $farm_assault.teams[_assault_keys[_s]].number gte 3>>
+			<<generate1>><<generate2>><<generate3>>
+			你向着雷米的打手冲锋，一个<<fullGroup>>。他们站稳脚跟，准备面对你。
+			<br><br>
+		<<elseif $farm_assault.teams[_assault_keys[_s]].number gte 2>>
+			<<generate1>><<generate2>>
+			你向着雷米的打手冲锋，一个<<fullGroup>>。他们站稳脚跟，准备面对你。
+			<br><br>
+		<<else>>
+			<<generate1>>
+			你向着雷米的打手冲锋，一个<<person1>><<person>>。<<He>>似乎被你的大胆吓了一跳，不过当你接近的时候，<<he>>还是站稳了脚跟。
+			<br><br>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<link [[继续|Farm Assault Fight]]>><<set $fightstart to 1>><</link>>
+<br>

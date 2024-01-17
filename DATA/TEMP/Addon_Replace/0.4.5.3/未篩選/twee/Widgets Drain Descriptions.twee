@@ -1,0 +1,122 @@
+:: Widgets Drain Descriptions [widget]
+<<widget "draindescription">>
+	<<if $weather is "rain">>
+		水在中间的水道上流动着，几乎淹没了两侧的细长走道。
+	<<elseif $weather is "snow">>
+		水夹杂着大量的冰从中间的水道流过。
+	<<else>>
+		水在中间的水道处流着，在两侧各有一条细长的走道。
+	<</if>>
+	<<wHunt "drain">>
+	<br><br>
+	你可以从这里进入城镇的几个地方。
+	<br><br>
+	<<if isPubfameTaskAccepted("morgan")>>
+		'米奇'说USB在下水道的某个地方，那家伙认为<<if $sewersintro is 1>>那玩意在摩根手里。<<else>>那玩意一定在某个住在下水道的怪人手里。你注意到附近有个向下的梯子。<</if>>
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "drainlinks">>
+	<<if $stress gte $stressmax and !$possessed>>
+		<<passoutdrain>>1
+	<<else>>
+		<<rng>>
+		<<if ($weather is "rain" or $weather is "snow") and $rng gte 75 and $eventskip is 0>>
+			<<eventsdrain>>
+		<<elseif ($rng gte 92 or $eventforced) and $eventskip is 0>>
+			<<eventsdrain>>
+		<<else>>
+			<<if $arousal gte $arousalmax and $bus isnot "drainexit">>
+				<<orgasmLocation "sewers">>
+			<</if>>
+			<<switch $bus>>
+				<<case "industrialdrain">>
+					<<industrialdrainlinks>>
+				<<case "commercialdrain">>
+					<<commercialdrainlinks>>
+				<<case "residentialdrain">>
+					<<residentialdrainlinks>>
+				<<case "drainexit">>
+					<<drainexitlinks>>
+			<</switch>>
+		<</if>>
+		<<displayLinks>>
+	<</if>>
+<</widget>>
+
+<<widget "industrialdrainlinks">>
+	<<drainladderdownlink "industrial">>
+	<<commercialdrain>>
+	<br>
+	<<drainexit>>
+	<br>
+	<<if $exposed gte 1 and Time.dayState isnot "night">>
+	<<else>>
+		<<elk>>
+		<<mer>>
+		<<harvest>>
+	<</if>>
+	<br>
+	<<industrial>>
+<</widget>>
+
+<<widget "commercialdrainlinks">>
+	<<drainladderdownlink "commercial">>
+	<<residentialdrain>>
+	<br>
+	<<industrialdrain>>
+	<<if $exposed gte 1 and Time.dayState isnot "night">>
+	<<else>>
+		<<high>>
+		<<connudatus>>
+		<<cliff>>
+		<<nightingale>>
+		<<starfish>>
+		<<oxford>>
+	<</if>>
+	<br>
+	<<commercial>>
+	<<park>>
+	<br>
+	<<if $historytrait gte 2 and $schooldrainintro gte 1>>
+		<<schoolicon "building">><<link [[通往学校的密道 (0:02)|School Toilets]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "residentialdrainlinks">>
+	<<drainladderdownlink "residential">>
+	<<commercialdrain>>
+	<br>
+	<<if $exposed gte 1 and Time.dayState isnot "night">>
+	<<else>>
+		<<domus>>
+		<<barb>>
+		<<danube>>
+		<<wolf>>
+	<</if>>
+	<br>
+	<<residential>>
+<</widget>>
+
+<<widget "drainexitlinks">>
+	<<if $scienceproject is "ongoing" and $sciencelichendrain is 0>>
+		<<scienceicon "violet lichen">><<link [[检查地衣|Drain Lichen]]>><<set $sciencelichendrain to 1>><</link>>
+		<br>
+	<</if>>
+	<<industrialdrain>>
+	<br><br>
+<</widget>>
+
+<<widget "drainladderdownlink">>
+	<<if $sewersintro is 1>>
+		<<laddericon>>
+		<<set _dest to "Sewers " + _args[0].toLocaleUpperFirst()>>
+		<<link [[爬下去|_dest]]>> <<sewersstart>><<set $eventskip to 1>><</link>>
+		<br><br>
+	<<elseif $historytrait gte 1 or isPubfameTaskAccepted("morgan")>>
+		<<laddericon>><<link [[检查下行的梯子|Drain Ladder]]>><</link>>
+		<br><br>
+	<</if>>
+<</widget>>

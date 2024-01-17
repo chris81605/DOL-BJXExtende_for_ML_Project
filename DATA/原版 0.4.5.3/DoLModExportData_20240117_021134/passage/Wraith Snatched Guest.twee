@@ -1,0 +1,25 @@
+:: Wraith Snatched Guest []
+<<pass 10>><<effects>><<getTarget>>
+<<set $nextPassage to "Wraith Snatched Guest 2">>
+<<if $location is "home">>
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		<<set _bedGuest to "Robin">>
+	<<else>>
+		<<set _bedGuest to "Kylar">>
+	<</if>>
+<<elseif $location is "cabin">>
+	<<set _bedGuest to "Eden">>
+<</if>>
+你悄悄地靠近床。你盯着<<- _bedGuest.replace("Robin","罗宾").replace("Kylar","凯拉尔").replace("Eden","伊甸")>>，一动不动。
+<br><br>
+你仍然只专注于<<nnpc_him _bedGuest>>。你向<<nnpc_him _bedGuest>>伸出手。
+<br><br>
+<<link [[试着喊叫|Bedroom]]>><</link>>
+<br>
+<<if C.npc["Ivory Wraith"].lust gte random(12, 16) or !$wraithIntro>>
+	<span class="nextLink"><<link [[抓|Wraith Snatched Guest 2]]>><</link>></span>
+<<else>>
+	<<set $wraithBedSpeech to true>>
+	<span class="nextLink"><<link [[触碰|Wraith Snatched Guest 2]]>><</link>></span>
+<</if>>
+<br>

@@ -1,0 +1,44 @@
+:: Farm Meadow Date Clothes 2 []
+<<effects>>
+
+<<if $phase is 1>>
+	你穿上艾利克斯给你的衣服。
+	<br><br>
+
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<upperwear 33>>
+		<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte $npcdomhigh and $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+			<<lowerwear 31>>
+		<<elseif playerBellySize() gte 8>>
+			<<lowerwear 67>>
+		<<else>>
+			<<lowerwear 22>>
+		<</if>>
+	<<elseif $worn.upper.type.includes("naked")>>
+		<<upperwear 33>>
+	<<else>>
+		<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte $npcdomhigh and $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+			<<lowerwear 31>>
+		<<elseif playerBellySize() gte 8>>
+			<<lowerwear 67>>
+		<<else>>
+			<<lowerwear 22>>
+		<</if>>
+	<</if>>
+
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"没关系……真的。"你低声说，小心翼翼地把衣服交还给艾利克斯。
+	<<elseif $speech_attitude is "bratty">>
+		"拿回去吧，我没事。" 你把衣服扔回给艾利克斯。
+	<<else>>
+		"我这样就行。" 你把衣服递还给艾利克斯。
+	<</if>>
+	<br><br>
+
+	"你确定吗？"  艾利克斯的眉毛向上挑动了下，但<<he>>随后露出释然的表情。<<ldom>><<npcincr Alex dom -1>>
+	<br><br>
+
+<</if>>
+
+<<link [[继续|Farm Meadow Date 4]]>><</link>>

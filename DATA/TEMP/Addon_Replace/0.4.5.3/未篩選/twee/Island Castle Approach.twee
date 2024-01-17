@@ -1,0 +1,62 @@
+:: Island Castle Approach []
+<<effects>>
+
+<<generateRole 0 0 "islander">>
+<<generateRole 1 0 "islander">>
+<<person1>>
+你接近护卫——<<person>>和<<person2>><<person>>。
+<<if $worn.face.name is "islander mask">>
+	<span class="green">面具遮住了你的脸。</span>他们一动不动，直到你过桥到一半。
+	<br><br>
+	<<if $islander_language gte 100>>
+		"停停，"<<person1>><<person>>道。"谁允许你进来的？"<span class="green">你应该用他们的语言回答。</span>
+		<br><br>
+		<<link [[行为端庄|Island Castle Dignified]]>><</link>>
+		<br>
+		<<link [[表现可爱|Island Castle Cute]]>><</link>>
+		<br>
+	<<elseif $islander_language gte 50>>
+		<<person1>><<person>>问了你一个问题，<span class="red">但你无法理解<<him>>。</span>
+		<br><br>
+		<<link [[尝试进入|Island Castle Try]]>><<pain 4>><<stress 6>><</link>><<gpain>><<gstress>>
+		<br>
+		<<link [[离开|Island]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		这个<<person1>><<person>>用<<his>><span class="red">无法理解的话说了些什么。</span>
+		<br><br>
+		<<link [[尝试进入|Island Castle Try]]>><<pain 4>><<stress 6>><</link>><<gpain>><<gstress>>
+		<br>
+		<<link [[离开|Island]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">他们用长矛对准你。</span>
+	<<if $islander_language gte 100>>
+		"外来者！”那个<<person1>><<person>>大喊道：“清除！”<span class="green">你至少能听懂<<him>>说了什么。</span>你听到更多岛民赶了过来。你无法强行通过。
+		<br><br>
+
+		<i>如果你想要过去，就需要制作一个面具。</i>
+		<br><br>
+
+		<<link [[离开|Island]]>><</link>>
+		<br>
+	<<elseif $islander_language gte 50>>
+		这个<<person1>><<person>>对你大喊大叫，<span class="red">但你听不懂<<him>>在说什么。</span>你听到更多岛民赶了过来。你无法强行通过。
+		<br><br>
+
+		<i>如果你想要过去，就需要制作一个面具。</i>
+		<br><br>
+
+		<<link [[离开|Island]]>><</link>>
+		<br>
+	<<else>>
+		这个<<person1>><<person>>用<<his>><span class="red">那你无法理解的语音大喊大叫。</span>你听到更多岛民赶了过来。你无法强行通过。
+		<br><br>
+
+		<i>如果你想要过去，就需要制作一个面具。</i>
+		<br><br>
+		<<link [[离开|Island]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,104 @@
+:: Pub Flirt []
+<<set $outside to 0>><<set $location to "pub">><<effects>><<set $bus to "harvest">>
+
+你坐在那个<<person>>旁边，然后微笑着看向<<him>>。
+<<if $rng gte 81>>
+	<<set $pubnpc to 1>>
+	<<He>>微笑着回应，随后你和<<him>>聊了几分钟，你们二人的笑声非常大，同时你"不经意"间提到了自己是单身的状态。
+	<<promiscuity1>>
+
+	"我是一个已婚的<<personsimple>>，"<<he>>这样说着，不过听起来有一股淡淡的哀伤感。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+	<<link [[勾引 (0:01)|Pub Seduce]]>><<pass 1>><</link>><<promiscuous2>>
+	<br>
+		<<if $money gte 500>>
+	<<link [[请喝饮料 (0:20) (£5)|Pub Drink]]>><<set $money -= 500>><<pass 20>><<set $pubdrink to 2000>><</link>>
+	<br>
+		<</if>>
+	<</if>>
+	<<link [[告别|Pub]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 61>>
+	<<set $pubnpc to 2>>
+	<<He>>微笑着回应，随后你和<<him>>聊了几分钟，你们二人的笑声非常大，同时你"不经意"间提到了自己是单身的状态。
+	<br><br>
+	<<promiscuity1>>
+
+	"我也单身哎，"<<he>>说道。"我在等一个有缘之人。"
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[勾引 (0:01)|Pub Seduce]]>><<pass 1>><</link>><<promiscuous2>>
+		<br>
+		<<if $money gte 500>>
+			<<link [[请喝饮料 (0:20)(£5)|Pub Drink]]>><<pass 20>><<set $money -= 500>><<set $pubdrink to 2000>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[告别|Pub]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 41>>
+	<<set $pubnpc to 3>>
+	<<He>>看了你一眼，然后继续盯着<<his>>的杯子。尽管<<his>>看起来兴致缺缺，但你还是试着闲聊。随后你特别提到<<he>>看起来很是不错，而且你还是单身的状态。
+	<<promiscuity1>>
+
+	<<He>>什么都没说，甚至都没有抬头看，但你看出<<hes>>已经脸红了。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[勾引 (0:01)|Pub Seduce]]>><<pass 1>><</link>><<promiscuous2>>
+		<br>
+		<<if $money gte 500>>
+			<<link [[请喝饮料 (0:20)(£5)|Pub Drink]]>><<pass 20>><<set $money -= 500>><<set $pubdrink to 2000>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[告别|Pub]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $rng gte 21>>
+	<<set $pubnpc to 4>>
+	<<He>>看起来不知道该说些什么。你和<<him>>聊了几分钟，并确保"不经意"间提到了自己是单身的状态。<<He>>几乎一直沉默着，似乎很乐意让你来主导谈话。
+	<br><br>
+	<<promiscuity1>>
+
+	"我能请你喝一杯么？"<<he>>说道。
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[勾引 (0:01)|Pub Seduce]]>><<pass 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+		<<link [[接受 (0:20)|Pub Drink]]>><<alcohol 200>><<pass 20>><<set $pubdrink to 2000>><</link>><<ggalcohol>>
+	<</if>>
+	<br>
+	<<link [[告别|Pub]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	<<set $pubnpc to 5>>
+	<<He>>看了你一眼，然后继续盯着<<his>>的杯子。尽管<<his>>看起来兴致缺缺，但你还是试着闲聊。随后你特别提到<<he>>看起来很是不错，而且你还是单身的状态。
+	<<promiscuity1>>
+
+	<<He>>揉着<<his>>的太阳穴。"为什么你就不能让我安静会儿呢？滚远点。"
+	<br><br>
+
+	<<if $promiscuity gte 15>>
+		<<link [[勾引 (0:01)|Pub Seduce]]>><<pass 1>><</link>><<promiscuous2>>
+		<br>
+		<<if $money gte 500>>
+			<<link [[请喝饮料 (0:20)(£5)|Pub Drink]]>><<pass 20>><<set $money -= 500>><<set $pubdrink to 2000>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[告别|Pub]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

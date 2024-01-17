@@ -1,0 +1,32 @@
+:: Forest Pitcher Slime Defy []
+<<location "forest">><<effects>>
+
+<<if $earSlime.defyCooldown>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown++>>
+		你继续前行，违抗了史莱姆的指令。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你继续前行，违抗了史莱姆的指令。你感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="teal">它仍然因为之前强行压迫而疲惫不堪。</span>你被害怕自己走错路的担忧所困扰。天空被树冠遮住，很难判断方向。<span class="green">但是你专注于自己的道路，</span>很快就发现雾霾变薄了。头晕的感觉也消失了。<<willpower 1>><<gwillpower>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $earSlime.corruption gte (currentSkillValue('willpower') / 11)>><<set $earSlime.defyCooldown += 4>>
+	你试图违抗史莱姆的指示，<span class = "red">但它压倒了你的意志</span>，头晕的感觉没有消失。你被害怕自己走错路的担忧所困扰。天空被树冠遮住，很难判断方向。头晕的感觉变得更加强烈，让你越来越难以思考。<<willpower 3>><<gwillpower>>
+	<br><br>
+
+	你继续走着，雾霾变得更加浓郁，甚至可以在空气中品尝到它的味道。
+	<br><br>
+
+	你走到了一棵比你还要高且更加粗壮的大型植物前。它周围生长着藤蔓和花朵。从它顶部的一个开口处，不断冒出白色的尘埃。
+	<br><br>
+
+	<<link [[继续|Forest Pitcher]]>><</link>>
+<<else>>
+	你继续前行，违抗了史莱姆的指示。你被害怕自己走错路的担忧所困扰。天空被树冠遮住，很难判断方向。<span class="green">但是你专注于自己的道路，</span>很快就发现雾霾变薄了。头晕的感觉也消失了。<<willpower 1>><<gwillpower>>
+	<br><br>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

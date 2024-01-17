@@ -1,0 +1,26 @@
+:: Park Streak Kylar Fight []
+<<run statusCheck("Kylar")>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $kylar.raped += 1>>
+	你挥舞着手臂，打掉了凯拉尔手中的刀。在你逃脱之前，<<person1>><<he>>向你扑了过来。
+	<<set $kylarClothes to $NPCList[0].clothes>>
+	<<npcstrip>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Park Streak Kylar Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Park Streak Kylar Fight]]>><</link>></span><<nexttext>>
+<</if>>

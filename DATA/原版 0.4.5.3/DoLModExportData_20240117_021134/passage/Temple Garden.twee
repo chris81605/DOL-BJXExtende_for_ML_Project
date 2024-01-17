@@ -1,0 +1,77 @@
+:: Temple Garden []
+<<set $outside to 1>><<set $location to "temple">><<temple_effects>><<effects>>
+
+你在神殿的花园中。鲜花一排排地从神殿的正前方一直向外延伸，越靠近森林就越显得杂乱无章。神殿的边界与森林的起点已经不再清晰可辨。
+
+<<if Time.dayState is "day">>
+树木在风中摇曳。
+<<elseif Time.dayState is "dusk">>
+一缕缕阳光透过树枝，光影斑驳地洒地上。
+<<elseif Time.dayState is "dawn">>
+太阳挂在树帘上闪闪发光。
+<<elseif Time.dayState is "night">>
+来自神殿的灯光照亮了近处的树木。
+<</if>>
+<br><br>
+
+<<if $temple_garden gte 100>>
+花园<span class="green">非常美丽，</span>一排排树篱都修剪得格外整齐，花儿们显然也经过精心打理，一片万紫千红、香气扑鼻。
+<<elseif $temple_garden gte 80>>
+花园显得<span class="teal">十分干净整洁。</span>
+<<elseif $temple_garden gte 60>>
+花园<span class="lblue">十分整洁，</span>远处一些小草悄悄地生长在神殿和森林交界处。
+<<elseif $temple_garden gte 40>>
+花园<span class="blue">颇为整洁</span>，不过有不少树篱看起来需要修剪一下了。
+<<elseif $temple_garden gte 20>>
+花园看起来<span class="purple">有些凌乱</span>——只有树篱看起来经过了一定程度的修整。
+<<elseif $temple_garden gte 10>>
+花园看起来<span class="pink">杂乱无章，</span>野草窜进了花坛中恣意生长，树篱的冠幅枝叶凌乱，周围杂草丛生。
+<<else>>
+花园看起来<span class="red">就像是破败的荒野</span>一般。——树篱挣脱束缚而恣意滋长，枯枝败叶随意散落在地面堆积了一层又一层，枯花野草在上面杂乱无章地长了一茬又一茬。这里根本已经算不上是花园了。
+<</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passouttemple>>
+<<else>>
+	<<if $exposed gte 1>>
+	你藏在篱笆后企图维护自己的尊严。
+	<br><br>
+	<<investigateicon>><<link [[找一些蔽体的东西|Temple Garden Exposed]]>><</link>>
+	<br>
+	<<else>>
+		<<if Time.dayState is "night">>
+			天太黑了，你没办法在花园里继续工作。
+			<br>
+		<<elseif $temple_garden lt 100>>
+			<<templeicon "garden">>
+			<<link [[在花园里干活 (1:00)|Temple Garden Work]]>>
+			<<if currentSkillValue('tending') gte 1500>>
+				<<set $temple_garden += 9>>
+			<<elseif currentSkillValue('tending') gte 1200>>
+				<<set $temple_garden += 8>>
+			<<elseif currentSkillValue('tending') gte 800>>
+				<<set $temple_garden += 7>>
+			<<elseif currentSkillValue('tending') gte 600>>
+				<<set $temple_garden += 6>>
+			<<elseif currentSkillValue('tending') gte 400>>
+				<<set $temple_garden += 5>>
+			<<elseif currentSkillValue('tending') gte 200>>
+				<<set $temple_garden += 4>>
+			<<else>>
+				<<set $temple_garden += 3>>
+			<</if>>
+			<<pass 60>><<grace 1 monk>><<tiredness 6>><<tending 1>><</link>><<gtending>><<ggrace monk>><<gtiredness>> <i>护理技能会影响到效率。</i>
+			<br>
+		<<else>>
+			<span class="green">花园已经很完美了，看起来你今天已经没有什么可以继续做的了。</span>
+			<br>
+		<</if>>
+	<</if>>
+
+	<br>
+	<<wolficon>><<link [[神殿|Temple]]>><</link>>
+	<br>
+	<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><<set $forest to 0>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

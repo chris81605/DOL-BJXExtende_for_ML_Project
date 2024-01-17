@@ -1,0 +1,32 @@
+:: Island Sleep Motionless []
+<<effects>>
+
+你纹丝不动，看着<<person1>><<person>>和<<person2>><<person>>映入眼帘。
+<<if $rng gte $island_roll>>
+	<span class="green">他们完全没注意到你</span>，不知道他们会去哪。
+	<br><br>
+
+	<<link [[继续|Island]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $islander_language gte 100>>
+		他们窃窃私语。
+		<br>
+		“如果就是<<phim>>，那我们就能找德鲁伊领赏了。”
+		<br>
+		“是啊，所以别搞出动静！”
+		<br>
+		“不必了。<<pshe>>在那！”<span class="red"><<He>>指向你。</span>
+	<<elseif $islander_language gte 50>>
+		他们互相窃窃私语。很明显他们在找你。<<person2>><<person>>翻找地面，然后<span class="red">大喊并指向你。</span>
+	<<else>>
+		他们用一种难以理解的语言窃窃私语，并扫视着地面，好像在寻找着什么。<<person2>><<person>><span class="red">指着你大叫。</span>
+	<</if>>
+	<br><br>
+
+	<<link [[战斗|Island Sleep Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[屈服 (0:30)|Island Sleep Submit]]>><</link>>
+	<br>
+<</if>>
+<<unset $island_roll>>

@@ -1,0 +1,77 @@
+:: Sydney Leighton Aftermath []
+<<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+<<if $phase is 1>>
+	"至少我能做的，就是承认错误。"你低下了头，悉尼则一脸困惑地看向你。
+	<br><br>
+	"你什么意思？怎么就成你的错了？"
+	<br><br>
+	"我是那个偷书的人。"<<if $bookStolenKnown isnot undefined>><<if $studyBooks.stolen isnot "none">><<set $studyBooks.stolen to "none">><<unset $sydneyStolenKnown>><<set $bookStolenKnown += 1>><<set $recentReturnTimer to 14>>你打开你的包，把偷的书递还给了<<him>>。<</if>><</if>>
+	<br><br>
+	<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 40>>
+		悉尼震惊地看着你，但很快恢复平静。"这是很恶劣的行为，我对你很失望，但谢谢你最终能诚实地对我坦白……你依旧拥有美德。"<<He>>松开挽着你的手臂。
+	<<else>>
+		悉尼厌恶地松开你。"你怎么会做这种事？你有考虑过任何后果吗？我……"<<He>>顿了顿，深吸一口气，"抱歉，我听起来就像是<<nnpc_title "Leighton">>……谢谢你诚实地坦白，你依旧拥有美德。"
+	<</if>>
+	<<gglove>><<stress 3>><<gstress>>
+	<br><br>
+	<<He>><<if $sydneyromance is 1>>踮起脚尖，在你脸上印下一吻，然后<</if>>走回了租借柜台。
+<<elseif $phase is 2>>
+	<<if $speech_attitude is "meek">>
+		"我也很怕，但为了你的安全，我认为值得。"
+	<<elseif $speech_attitude is "bratty">>
+		"我不会眼看着让那个变态对你动手动脚。只要你没事，我就没事。"
+	<<else>>
+		"我没事，我不可能眼睁睁地看着你当替罪羊。"
+	<</if>>
+	你牵起悉尼的手，<<He>>绽开笑颜。<<takeHandholdingVirginity "Sydney" `($sydneyromance is 1 ?'romantic':'consensual')`>>
+	<br><br>
+	"你真的没必要为我做到那种份上……你真的……很好。"
+	<<if $sydneyromance is 1>>
+		<<He>>在你脸上亲了一口，随后返回了租借柜台。
+	<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].love gte 80>>
+		悉尼环视一圈，在你脸上亲了一口。<<he>>迅速地逃回了柜台，以掩盖<<him>>脸颊上的绯红。
+	<<else>>
+		<<He>>轻轻地环住了你，然后回到了柜台前。
+	<</if>>
+	<<ltrauma>><<llstress>><<trauma -4>><<stress -12>>
+<<else>>
+	你慢慢凑近悉尼，<<He>>讶异地后退几步。
+	<<if $speech_attitude is "meek">>
+		"好，好吧……要是我们继续这样一直担心对方……"
+	<<elseif $speech_attitude is "bratty">>
+		"没人敢动我的东西。"
+	<<else>>
+		"保持那个表情……我要记一辈子。"
+	<</if>>
+	你揽住<<his>>的腰肢，
+	<<if _sydneyStatus.includes("Lust")>>
+		<<He>>下意识地倾身，呼吸燎在你的脸上，全身发烫。你在<<he>>瞳孔上的影子逐渐被欲望所朦胧，闪烁着跳动的火光。
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<He>>脸红着与你的鼻尖相贴，
+	<<else>>
+		<<He>>眨了眨眼，耳根发红。
+	<</if>>
+	<<if $sydneyromance is 1>>
+		你缩短最后的距离，堵住了<<him>>的唇。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+		<br><br>
+		<<if _sydneyStatus.includes("Lust")>>
+			<<He>>瞬间瘫软在了你的怀里，眼神迷离，
+		<<else>>
+			双手紧紧环上你的脖颈，沉溺于你的唇舌之间。
+		<</if>>
+		你们缠绵许久才分开。<<if _npcKissVirginTemp>>"那是我的初吻。"<<he>>轻轻地笑了。<<else>>"我，嗯……我得……回去……对。"<</if>>悉尼再一次吻上了你的唇，然后回到了<<he>>的职务之中。
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+			<br><br>
+			<span class="red">凯拉尔在图书馆的另一边惊恐地看着你们。</span><<gggksuspicion>><<npcincr Kylar rage 10>>
+		<</if>>
+	<<else>>
+		过了一会儿，<<he>>从你的怀里起来。<<He>>无声地张张嘴，一言不发地回到了租借柜台。
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and !$daily.kylar.leightonPunch>>
+			<br><br>
+			凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+<<link [[继续|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

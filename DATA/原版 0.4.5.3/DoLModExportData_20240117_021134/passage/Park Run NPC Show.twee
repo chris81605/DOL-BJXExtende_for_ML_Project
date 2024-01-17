@@ -1,0 +1,116 @@
+:: Park Run NPC Show []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+
+<<if $phase is 1>><<npcincr Whitney lust 5>>
+	你跑到惠特尼的队伍前面，做出惊叫的样子，无效地试图'掩饰'。
+	一等所有人都看清楚了，你就跑开。
+	<<if $park_run_seen_by.includes("whitney")>>
+		<br>
+		"瞧瞧，"惠特尼嘲笑道。
+		<<if $liquidcount is 0>>
+			"可怜的骚货怎么能那么饥渴，甚至没有人会愿意强奸<<phim>>。"
+		<<else>>
+			<<if (setup.bodyliquid.combined("vagina")) gte 4>>"那贱穴已经被毁了
+			<<elseif (setup.bodyliquid.combined("anus")) gte 4>>"这个屁股已经被毁了
+			<<elseif $fame.bestiality gte 600 and ($player.bodyliquid.mouth.semen + $player.bodyliquid.face.semen + $player.bodyliquid.vagina.semen + $player.bodyliquid.anus.semen ) gte 3>>"那可能是动物的精液
+			<<elseif (setup.bodyliquid.combined("mouth") + setup.bodyliquid.combined("face")) gte 5>>"<<pHer>>的脸！吸过每一位老师
+			<<elseif $liquidoutsidecount gte 6>>"被精液覆盖
+			<<elseif $fame.rape gte 600>>"镇上一半的人都强奸过<<phim>>了
+			<<elseif $fame.bestiality gte 600>>"<<pShe>>可能已经被五只狗操过了
+			<<elseif (setup.bodyliquid.combined("vagina") + setup.bodyliquid.combined("anus")) gte 2>>"你甚至可以看到有精液在滴落
+			<<elseif $fame.sex gte 400>>"镇上一半的人都有<<pher>>的性交视频
+			<<else>>"今晚至少已经被操了一次
+			<</if>>这个小骚货还在到处乞求想要更多！"
+			<<if currentSkillValue('physique') gte ($physiquesize / 7) * 4>>
+			<br>
+			"美妙的身体。" 有人赞叹道。<</if>>
+		<</if>>
+	<<else>>
+		你最后一次回头看时，惠特尼还在<<print either("盯着你看","被吸入的烟雾呛到","微笑","难以置信地盯着'香烟'")>>。
+		<<set $park_run_seen_by.pushUnique("whitney")>>
+	<</if>>
+<<elseif $phase is 2>><<npc Leighton>><<person1>>
+	<<if Time.hour gte 21>>"晚上好，<<else>>"早上，<</if>><<sir>>，"你在经过时欢快地叫道。
+	<br>
+	<<if $park_run_seen_by.includes("leighton")>>
+		礼顿猛地站起来。"又是你？你为什么不走近一点？我有东西给你。"
+		<br>
+	<<else>>
+		礼顿猛地挺直身体。<<He>>朝你转身，神情有些内疚。"我只是……我……你？你为什么……？"
+		<br>
+		<<set $park_run_seen_by.pushUnique("leighton")>>
+	<</if>>
+	你挥挥手，随意地跑上前去。
+<<elseif $phase is 3>><<npc Doren>><<person1>>
+	<<if $park_run_seen_by.includes("doren")>>
+		这一次，多伦发现了你，移动<<his>>的目光，不敢置信地摇了摇<<his>>的头。
+		<br><br>
+		<<if Time.hour gte 21>>"晚上好，<<else>>"早上好，<</if>><<sir>>，"你喊道。
+		<br>
+		"是的，"<<he>>说，"你现在要小心了，<<lass>>。"
+	<<else>>
+		走了几步后，多伦似乎注意到了那个暴露的跑者在靠近，于是转过头去，避开你。你不确定，但你认为<<he>>没有认出你。
+		<br>
+		<<if Time.hour gte 21>>"晚上好，<<else>>"早上，<</if>><<sir>>，"你在经过时欢快地叫道。
+		<br>
+		多伦两眼放光，难以置信地回望着你。<<if $player.gender_appearance is "m">>"小伙子？<<else>>"小姑娘？<</if>>那是……？你在做什么？！"
+		<br><br>
+		你继续跑。当你走过下一个拐角时，你回头看到多伦用手抓住<<his>>的脸，看起来很不安。
+		<<set $park_run_seen_by.pushUnique("doren")>>
+	<</if>>
+<<elseif $phase is 4>><<npc Harper>><<person1>>
+	哈珀似乎完全沉浸在<<his>>文书工作中，专注地盯着它。
+	<br><br>
+	<<if $park_run_seen_by.includes("harper")>>
+		<<if Time.hour gte 21>>"晚上好，<<else>>"早上好，<</if>>医生，"你喊道。
+		<br>
+		"你好。"哈珀抬起头来。你跑过去的时候挥手。
+		<br><br>
+		"干得好。"医生伸手去拿<<his>>包里的东西。"很高兴看到有人认真对待自己的健康。"
+		<br>
+		你隐约看到你的身影在前面的灌木丛中有灯光亮起。好像是相机的闪光灯？
+		<<fameexhibitionism 1>>
+	<<else>>
+		<<if Time.hour gte 21>>"晚上好，<<else>>"早上好，<</if>>医生，"你喊道。
+		<br>
+		"你好。"哈珀继续盯着那一页。"我现在很忙，但如果你需要预约……"
+		<br>
+		"我没事。"
+		<br>
+		哈珀抬起头来。"注意身体健——"
+		<br>
+		哈珀盯着你，看着你跑进黑夜。
+		<<set $park_run_seen_by.pushUnique("harper")>>
+	<</if>>
+<<elseif $phase is 5>><<npc Bailey>><<person1>>
+	贝利数着钱路过，看到你在跑步。
+	<br><br>
+	<<if $park_run_seen_by.includes("bailey")>>
+		<<if $renttime lte 0>>
+			"你敢跑试试看。别忘了你欠我的——"
+			<br>
+			你迅速地冲了出去。
+
+		<<else>>
+			"你不知道脱衣舞可以得到报酬吗？学校难道没有教你任何东西吗？"
+			<br>
+			你继续跑。
+			<br>
+			"我最好能准时拿到我的钱。"
+		<</if>>
+	<<else>>
+		<<if $renttime lte 0>>
+			"我一直在找你。该付钱了——"
+			<br>
+			你迅速地冲了出去。
+		<<else>>
+			贝利点点头。"不错的选择。希望你能因此拿到报酬。"
+			<br>
+			你继续跑。
+		<</if>>
+		<<set $park_run_seen_by.pushUnique("bailey")>>
+	<</if>>
+<</if>>
+<br><br>
+<<endevent>><<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+<br>

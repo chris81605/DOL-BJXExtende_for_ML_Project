@@ -1,0 +1,32 @@
+:: Farm Ride Reassure []
+<<effects>>
+
+<<if $tendingSuccess>>
+	<<person1>>
+	你对着你的<<beasttype>>耳语了几句。<span class="green"><<bHe>>不再在马路上来回转弯，</span>更有把握地疾驰。
+	<br><br>
+
+	<<person2>><<person>>准备好套索准备再扔一次，而<<person3>><<person>>则试图再一次把你从马鞍上推下来。
+	<br><br>
+
+	<<link [[击打离你最近的骑手|Farm Ride Punch 2]]>><</link>><<physiquedifficulty 1 16000>>
+	<br>
+	<<link [[抓住套索|Farm Ride Grab 2]]>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 1000>>
+	<br>
+<<else>>
+	<<person1>>
+	你对着你的<<beasttype>>的耳朵低声说了几句话，<span class="red">但是你的声音在颤抖。</span><<bHe>>用后腿站立，把你从马鞍上摔下来。<<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	<br><br>
+	你的马独自疾驰而去。这两个人追着它跑，把你扔在泥土里。<<llrespect>><<farm_horses -3>>
+	<br><br>
+
+	<<tearful>>你站了起来。
+	<br><br>
+
+	<<if $bus is "east">>
+		<<link [[继续|Farm Road 4]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Farm Road 3]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

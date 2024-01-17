@@ -1,0 +1,43 @@
+:: Pound Abduction Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	那两人被推到了墙上，这给了你逃跑的机会。你挣扎着爬起来，冲向篱笆。
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<tearful>>你努力用肩膀撞门。门开了，你逃到外面的大街上。
+		<br><br>
+	<<else>>
+		<<tearful>>你跳起来，达到顶端。你爬到了外面的大街上。
+		<br><br>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	<<link [[继续|Starfish Street]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $enemyhealth lte 0>>
+	那两人稍微被推得后退了几步，这给了你机会。
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		<<tearful>>你努力用肩膀撞门。门开了，你逃到外面的大街上。
+		<br><br>
+	<<else>>
+		<<tearful>>你跳起来，达到顶端。你爬到了外面的大街上。
+		<br><br>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	<<link [[继续|Starfish Street]]>><<set $eventskip to 1>><</link>>
+
+<<else>>
+	<<tearful>>你摔倒在<<if $weather is "snow" or $weather is "rain">>泥里<<else>>地上<</if>>。因为受伤失去了战斗能力。
+	<br><br>
+	"把这贱狗弄进去，"<<person2>><<person>>说道。<<person1>><<person>>用力拉着你的皮带，把你拖进大楼。
+	<br><br>
+	<<clotheson>>
+	<<link [[继续|Pound Abduction 2]]>><</link>>
+	<br>
+
+<</if>>

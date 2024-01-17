@@ -1,0 +1,40 @@
+:: DP Test []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<generate2>><<maninit>>
+	<<set $NPCList[0].penis to "vagina">><<set $vaginause to "penis">><<set $vaginastate to "penetrated">><<set $vaginatarget to 0>>
+	<<set $NPCList[1].penis to "anus">><<set $anususe to "penis">><<set $anusstate to "penetrated">><<set $anustarget to 1>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[Next->DP Test]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[Next->Molestation Ejaculation]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[Next->Molestation Escape]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[Next->DP Test]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next->Molestation Ejaculation]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[Next->Molestation Escape]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next->DP Test]]>><</link>></span><<nexttext>>
+<</if>>

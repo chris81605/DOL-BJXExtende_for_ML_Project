@@ -1,0 +1,475 @@
+:: Temple Confess []
+<<set $outside to 0>><<set $location to "temple">><<sydneySchedule>><<temple_effects>><<effects>>
+<<set $confessionsTaken = ($confessionsTaken || 0) + 1>>
+你听见门打开的声音，于是出声向来访者打招呼。
+"欢迎。请完全将罪恶暴露于此，求你的罪得赦免，"你点燃香薰，尽最大努力掩藏你的本音。
+<br><br>
+
+<<cleareventpool>>
+
+<!-- Corrupted penitents (contrition or purge) -->
+<<if $confessionsTaken gte 5>>
+	<<addinlineevent "confession_corrupt_1" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_1">>
+		对方气喘吁吁地坐了下来。一个<<personsimple>>的声音向你问候。"洞……那么多洞……在这世上……在别的地方……别人都看不见……但你看得见，对吧？这是你的工作，对吧？"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_2" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_2">>
+		对方坐了下来。一个<<personsimple>>的声音向你问候。"您好，亲爱的<<sister>>。我担心我做了些非常可怕的事情。在过去几个月里，我每天都和一个娼妓见面。
+		我们干的事情一次比一次堕落，事到如今，我脑子里除了那些肉欲的事情，什么也装不下了。今天，我甚至发现一个念头在我脑子里出现：我要偷走这位性工作者，我要把这个人锁在我的地下室里……于是，我决定来到这里。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_3" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_3">>
+		对方焦虑地坐了下来。一个<<personsimple>>的声音向你问候。"我恐怕令主不悦了。"<<he>>说。
+		<br><br>
+
+		沉默半晌，你鼓励<<him>>说得详细一些。
+		<br><br>
+
+		"我开始看见……东西。听见声音。它们让我去做一些可怕的事情，想让我自己成为可怕的东西。我知道它们不是真的，虽然它们看起来、听起来是那么真实……我……我不知道我做错了什么，也不知道我该怎么做。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_4" 0.7>>
+		<<generateRole 0 0 "initiate" t>><<person1>><<set $attendant to "corrupt_4">>
+		对方坐了下来。一个<<personsimple>>的声音向你问候。"您好，<<sister>>。我最近……总在想一些糟糕的事情。这些事情我绝不会故意去想。我……我可以告诉您吗？里面有些东西真的很不妙。"
+		<br><br>
+
+		你准许<<him>>继续。
+		<br><br>
+
+		"我一直对我的同修有想法。我想让他们打破誓约，只为了看他们被惩罚的样子。我还对我们教会里别的成员有想法。我想要他们……来玷污我。我还，我还对<<nnpc_brother "Jordan">>约旦有想法……我甚至摘掉了我的<<if $pronoun is "m">>贞操笼<<else>>贞操带<</if>>，只是为了能更贴近<<nnpc_him "Jordan">>。"
+		<br><br>
+
+		<<He>>开始啜泣。"而且……而且我还开始喜欢上了这些想法！我讨厌我喜欢这些想法！这些不是我的想法！我不是这样的人！"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_5" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_5">>
+		对方坐了下来，你听到一个<<personsimple>>的声音。"还等什么呢，<<sister>>，污秽已经裹挟了我，请速速把它从我身上祛除。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_fake" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_5_fake">>
+		对方坐了下来，你听到一个<<personsimple>>的声音。"还等什么呢，<<sister>>，污秽已经裹挟了我，请速速把它从我身上祛除。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_6" 0.7>>
+		<<generatey1>><<person1>><<set $attendant to "corrupt_6">>
+		对方坐了下来，你听到一个<<personsimple>>恼怒的声音。"有、有人对我做了些什么，<<sister>>。我无法……我感觉不去记下这小镇上每一个罪恶，我就无法呼吸。但是，有时我又感觉错的是我。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_7" 0.7>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_7">>
+		对方坐了下来，你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我……还有什么坏事我没做过呢？我感觉我的身体已经死了，唯一让我感觉自己活着的方法，只是不断地、不断地去触摸罪恶的底线。我只能这么做了。"
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_8" 0.7>>
+		<<generatey1>><<person1>><<set $attendant to "corrupt_8">>
+		对方坐了下来，你听到一个<<personsimple>>单调的声音。"宽恕我。求你宽恕我求你宽恕我求你宽恕我求你宽恕我。"
+		<br><br>
+
+		你试着问<<him>>需要被宽恕什么，可<<He>>只是不停地重复，自言自语。
+	<</addinlineevent>>
+	<<addinlineevent "confession_corrupt_9" 1>>
+		<<generate1>><<person1>><<set $attendant to "corrupt_9">>
+		对方坐了下来，你听到一个<<personsimple>>的声音，<<his>>将手按在隔板上。
+		<<if $angel gte 6>>
+			"哦天，我一定是蒙受祝福了。您简直是个天使，我能透过隔板看到您的圣光。我请求您，您能洗去我这可悲罪人的罪愆吗？"
+		<<elseif $fallenangel gte 2>>
+			"哦天，看来我不是唯一一个需要宽恕的人。我能感觉到——您的痛苦，您的失落……我们为何不相互洗去罪愆呢，<<sister>>？"
+		<<elseif $demon gte 6>>
+			"啊啊——一个吸纳罪恶的容器。我想您现在一定正需要更多的堕落来帮助自己攀升吧，<<sister>>。我罪恶的杯正满溢，我正好需要将它清洗干净。"
+		<<elseif $wolfgirl gte 6>>
+			"你的样子，真新奇。你难道不应该待在森林的家里，和自己的同类待在一起吗，<<sister>>？算了，反正我是来这里进行净化的。"
+		<<elseif $cat gte 6>>
+			"啊啊——希望你的舌头不会太粗糙呢，<<sister>>。恐怕我唯一能提供的奶是我的肉体和我的罪恶。"
+		<<elseif $cow gte 6>>
+			"一个生命力的堡垒。真是有趣，没想到那些自大的牧场工人会让你逃出来。好吧，只要你替我净化，我就帮你保守秘密。"
+		<<elseif $harpy gte 6>>
+			"您有着这么漂亮的一对翅膀，把自己关在这么一个满溢罪恶的小盒子里，真是太可惜了。唱吧，<<sister>>，为救赎而歌唱。"
+		<<elseif $fox gte 6>>
+			"您似乎是个很诡诈的人啊，我都没有发觉有人在这里。您大概已经知道我来这里是干什么的了吧，<<sister>>。来洗去罪恶。"
+		<<else>>
+			"我觉得您别无选择，<<sister>>，来洗净我的罪恶吧。"
+		<</if>>
+	<</addinlineevent>>
+<</if>>
+
+<!-- Sinful penitents (forgive, repent, or either) -->
+<<addinlineevent "confession_sinner_1" 1>>
+	<<generate1>><<person1>><<set $attendant to "sinner_1">>
+	对方叹了口气，坐了下来。一个<<personsimple>>的声音向你问候。"宽恕我，<<sister>>，我……"<<he>>顿了顿。
+	"我做了些相当可怕的事情。我……有一个
+	<<if maleChance($pronoun) gte random(1, 100)>>
+		男孩。他急需用钱，估计是为了付给某人。我……我让他做了些事情。
+		<<if random(1,100) lte $npcvirginitychance>>
+			最终，我夺走了他的童贞。
+		<</if>>
+		他看起来不是很在乎，
+	<<else>>
+		女孩。她急需用钱，估计是为了付给某人。我……我让她做了些事情。
+		<<if $NPCList[0].penis is 0>>
+			<<if random(1,100) lte $npcVirginityChance>>
+				最终，我夺走了她的童贞。
+			<</if>>
+			她看起来不是很在乎，
+		<<else>>
+			<<if random(1,100) lte $npcVirginityChance>>
+				那应该是她的第一次。
+			<</if>>
+			她看起来不是很在乎，
+		<</if>>
+	<</if>>
+	但我还是感觉很堕落。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_2" 1>>
+	<<generate1>><<person1>><<set $attendant to "sinner_2">>
+	对方坐了下来，你听到了一个<<personsimple>>的声音。"嘿，我听说如果我坦白我的罪孽足够深重，你们这群人真的会把罪孽给用嘴吸出来。是这样吗？如果是这样，那我实在是罪孽深重啊！我……天天想着自慰！嘿嘿！"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_3" 1>>
+	<<generatey1>><<person1>><<set $attendant to "sinner_3">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"宽、宽恕我，<<sister>>，我犯下了罪过。我……我自慰了，在课堂上。"一阵沉默。"还在图书馆里。还在留堂期间。还在上次考试的时候。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_4" 1>>
+	<<generatey1>><<person1>><<set $attendant to "sinner_4">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我犯下了罪过。我逃课了。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_5" 1>>
+	<<generatey1>><<person1>><<set $attendant to "sinner_5">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我犯下了罪过。我……我上次考试作弊了。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_6" 1>>
+	<<generatev1>><<person1>><<set $attendant to "sinner_6">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"我……我干不下去了。我是达里尔俱乐部里的一名舞者。这种工作让我感觉……感觉很脏。但我需要钱。我该怎么办？"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_7" 1>>
+	<<generatev1>><<person1>><<set $attendant to "sinner_7">>
+	对方坐了下来，你听到一个<<personsimple>>的声音坦白地向你告解。"我是个肮脏的该死的娼妓。我恨我自己，可我无法停止。即便你的主宽恕了我……即便世界末日，我也停不下来。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_8" 1>>
+	<<generatey1>><<generateyp2>><<person1>><<set $attendant to "sinner_8">>
+	对方不屑地重重坐了下来，你听到一个<<personsimple>>向你开口，语气中满是无聊："我就直说了，我其实不想来这儿的，但我爸妈非得让我过来。在这里我们就是得坦白，对吧？这开头不错吧？嗯，好，我之所以被送到这里，<<person2>>是因为我和我<<- $pronoun is "m" ? "男" : "女">>朋友上床了。<<person1>>
+	<<if $NPCList[0].condom and !_noCondom>>
+		双方同意。而且连保护措施都做了。"
+	<<else>>
+		没戴套，而且双方同意。"
+	<</if>>
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_9" 1>>
+	<<generatey1>><<person1>><<set $attendant to "sinner_9">>
+	对方坐了下来。一个<<personsimple>>的声音向你问候。"我……我爱上了我的一个老师。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_10" 0.5>>
+	<<generate1>><<person1>><<set $attendant to "sinner_10">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<if $NPCList[0].penis isnot "none">>
+		<<if Time.month is 10>>
+			"我操了一个南瓜，"
+		<<else>>
+			"我操了一个西瓜，"
+		<</if>>
+	<<else>>
+		"我操了一个黄瓜，"
+	<</if>>
+	<<he>>直截了当地说道。你等着<<him>>继续，但<<he>>没有。
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_criminal_1" 1>>
+	<<generate1>><<person1>><<set $attendant to "sinner_criminal_1">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我犯下了罪过。我是一个罪犯。这几个月来，我一直在本地的购物中心顺手牵羊，而今天，报应大概终于来了。我很害怕，我不想坐牢，可我无法永远活在谎言里。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_criminal_2" 1>>
+	<<generate1>><<person1>><<set $attendant to "sinner_criminal_2">>
+	对方叹息着坐了下来，你听到一个<<personsimple>>坐了下来。"我是一名通缉犯。打我记事起，我就一直靠偷窃度日。如今，我已经不再需要靠偷窃生存，但我仍然忍不住去偷，因为我不知道我还能做什么。"
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_silent" 1>>
+	<<generate1>><<person1>><<set $attendant to "sinner_silent">>
+	对方坐了下来。你们就这么沉默地坐着，你听不到对面有一点声音。你靠近隔板，只听到对面祈祷的喃喃。
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_orphan_1" 1>>
+	<<generateyv1>><<person1>><<set $attendant to "sinner_orphan_1">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"呃……你、你好。我……我做了些坏事。"<<He>>沉默了。你鼓励<<him>>继续。
+	<br><br>
+
+	"我……我有债在身。贝……呃，我的监护人，要求我报答住在<<nnpc_his "Bailey">>那里多年来的……恩情。这笔钱太多了。我不得不做一些……肮脏的事情，才还得起。"你能自己填补<<he>>话中的空缺。
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_orphan_2" 1>>
+	<<generateyv1>><<person1>><<set $attendant to "sinner_orphan_2">>
+	对方坐了下来，你听到一个<<personsimple>>的声音。"蠢。太蠢了。"<<He>>咕哝了好一会儿，然后恼怒地长吁一口气。"你们这堆虚伪的傻逼，是看不见这狗屎镇子有毛病吗？还搁那信仰？我……我现在不得不为还债而出卖身体，而我甚至不知道这债是怎么莫名其妙在过去七年里欠上的。太恶心了，可是我不得不做。"
+	<br><br>
+
+	你张嘴正打算回应，却听到<<he>>继续说道："一……一开始感觉还行，我只是做些普通的工作，赚点外快。送快递啊，帮忙家务啊。但之后要交的钱越来越多，而且工作的时候，有些人还想操……摸我。我还没反应过来，就被推得跪在地上然后……然后……都是他妈的贝利的错！"
+<</addinlineevent>>
+<<if $panty_thief gte 1>>
+	<<addinlineevent "confession_sinner_panty_thief" 0.5>>
+		<<loadNPC 0 "panty_thief">><<person1>><<set $attendant to "sinner_panty_thief">>
+		对方叹息着坐了下来，你听到一个<<personsimple>>的声音。"我是个傻逼变态。我一直以来都在付钱给本地学校的学生，让他们互相偷不可说的那东西，然后带给我。"
+	<</addinlineevent>>
+<</if>>
+<<if $npcPregnancyDisable is "f">>
+	<<addinlineevent "confession_sinner_pregnant" 1>>
+		<<generate1>><<person1>><<set $attendant to "sinner_pregnant">>
+		对方坐了下来，你听到了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我…
+		<<if $pronoun is "m">>
+			我把人搞怀孕了——只是因为一时的胆怯与冲动。我很爱我的伴侣，但我……我还没有准备好。我不知道该做些什么。"
+		<<else>>
+			我意外有了身孕——只是因为一时的胆怯与冲动。我……我不知道该做些什么，我好害怕，我的伴侣还不知道，我……我好害怕他会离我而去。"
+		<</if>>
+	<</addinlineevent>>
+<</if>>
+<<addinlineevent "confession_sinner_generic_forgive" 3>>
+	<<generate1>><<person1>><<set $attendant to "sinner_generic_forgive">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<set _sinPoolForgive to [
+		`"宽恕我，<<sister>>，宽恕我的罪过。我觊觎我邻人的配偶。"`,
+		`"宽恕我，<<sister>>，宽恕我的罪过。我贪求我的邻居。"`,
+		`"宽恕我，<<sister>>，宽恕我的罪过。我赌输了，结果在镇子里裸奔。"`,
+		`"宽恕我，<<sister>>，宽恕我的罪过。这几个星期来，我一直背着我爱人去脱衣舞俱乐部溜达。"`,
+		`"宽恕我，<<sister>>，宽恕我的罪过。我……我之前一直在本地的妓院里放纵自己。"`,
+		`"我有麻烦了。我一直疯狂地赌博。"`,
+		`"宽恕我，<<sister>>，我对我的邻居有不纯的想法。"`,
+		`"宽恕我，<<sister>>，我对我一个好朋友有不纯的想法。"`,
+		`"宽恕我，<<sister>>，我对这里的神职人员有不纯的想法。"`,
+		`"宽恕我，<<sister>>，我有不纯的想法，对……呃，对很多人。"`,
+		`"宽恕我，<<sister>>，我沉溺于诱惑。"`,
+		`"宽恕我，<<sister>>，我在同伴中播下了诡诈的种子。"`,
+		`"宽恕我，<<sister>>，我对我的同伴说了不善的话语。"`,
+	]>>
+	<<set _sinForgive to _sinPoolForgive.pluck()>>
+	<<print _sinForgive>>
+<</addinlineevent>>
+<<addinlineevent "confession_sinner_generic_repent" 2>>
+	<<generate1>><<person1>><<set $attendant to "sinner_generic_repent">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<set _sinPoolRepent to [
+		`"宽恕我，<<sister>>，我对我的爱人……家暴。"`,
+		`"宽恕我，<<sister>>，我背叛了我的爱人，我出轨了。"`,
+		`"宽恕我，<<sister>>，我对我的爱人有不忠的想法。"`,
+		`"宽恕我，<<sister>>，我竟对我朋友的犯罪视若无睹。"`,
+		`"宽恕我，<<sister>>，我……我做了点小偷小摸。"`,
+		`"宽恕我，<<sister>>，在当地咖啡馆里，我偷了些没人要的钱。"`,
+		`"宽恕我，<<sister>>，我偷了我的朋友。我……我觉得我应该得到比他更多的东西。我很嫉妒。"`,
+	]>>
+	<<if $bestialitydisable is false>>
+		<<set _sinPoolRepent.push(
+			`"宽恕我，<<sister>>，我有不纯的想法，对……我的狗。"`,
+			`"宽恕我，<<sister>>，宽恕我的罪过。我像和人一样地和一只野兽交配了。"`,
+			)>>
+	<</if>>
+	<<set _sinRepent to _sinPoolRepent.pluck()>>
+	<<print _sinRepent>>
+<</addinlineevent>>
+
+<!-- Unsinful penitents (forgive) -->
+<<addinlineevent "confession_no_sin_generic" 0.5>>
+	<<generate1>><<person1>><<set $attendant to "no_sin_generic">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<set _noSinPool to [
+		`"请宽恕我，<<sister>>，因为我穿了混合布料的衣服。"`,
+		`"请宽恕我，<<sister>>，我偷吃了同事的食物。"`,
+		`"请宽恕我，<<sister>>，我……我吃了太多的冰激凌，我的配偶让我对此感到很内疚。"`,
+	]>>
+	<<set _noSin to _noSinPool.pluck()>>
+	<<print _noSin>>
+<</addinlineevent>>
+
+<!-- Rapist penitents (contrition) -->
+<<addinlineevent "confession_sinner_generic_rapist" 1.2>>
+	<<generate1>><<person1>><<set $attendant to "sinner_generic_rapist">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<set _sinPoolRepent to [
+		`"我是一个恶心强奸犯，"<<he>>的语气听起来十分的厌恶。`,
+		`"请宽恕我，<<sister>>，为我所犯下的罪，我……我是一个强奸犯。"`,
+		`"请宽恕我，<<sister>>，为我所犯下的罪，我是一个强奸犯。"`,
+		`"请宽恕我，<<sister>>，为我所犯下的罪，我让自己……出去瞎搞。"`,
+		`"请宽恕我，<<sister>>，为我所犯下的罪，我和其他人发生了性关系。"`,
+		`"请宽恕我，<<sister>>，为我……干，主啊，我真他妈一个操蛋的强奸犯啊。"`,
+	]>>
+	<<set _sinRepent to _sinPoolRepent.pluck()>>
+	<<print _sinRepent>>
+<</addinlineevent>>
+
+<!-- Temple penitents (repent or ring bell) -->
+<<addinlineevent "confession_temple_1" 1>>
+	<<generateyTemple 1>><<person1>><<set $attendant to "temple_1">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请原谅我，<<sister>>，为我对我的同修拥有不洁的想法。"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_2" 1>>
+	<<generateyTemple 1>><<person1>><<set $attendant to "temple_2">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请原谅我，<<sister>>，我……我好像喜欢上了我的一位同修。"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_3" 1>>
+	<<generateyTemple 1>><<person1>><<set $attendant to "temple_3">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，为我不洁的想法……呃，对……对<<nnpc_brother "Jordan">>约旦的。"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_4" 1>>
+	<<generateyTemple 1>><<person1>><<set $attendant to "temple_4">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我……我违背了我的誓言。"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_5" 1>>
+	<<generateTemple 1>><<person1>><<set $attendant to "temple_5">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我违背了我神圣的誓言。"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_6" 1>>
+	<<generateyTemple 1>><<person1>><<set $attendant to "temple_6">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，但是……求你不要告诉别人。我……打破了誓约。有人袭击了我，然后……"
+<</addinlineevent>>
+<<addinlineevent "confession_temple_generic" 1>>
+	<<generateTemple 1>><<person1>><<set $attendant to "temple_generic">>
+	对方坐了下来，你听见了一个<<personsimple>>的声音。
+	<<set _templeSinPool to [
+		`"请宽恕我，<<sister>>，为我未能尽我所职。"`,
+		`"宽恕我，<<sister>>，我曾想试着破坏我的誓言。"`,
+		`"请宽恕我，<<sister>>，为我对同修的色念。"`,
+	]>>
+	<<set _templeSin to _templeSinPool.pluck()>>
+	<<print _templeSin>>
+<</addinlineevent>>
+
+<!-- Other/Special penitents -->
+<<if _sydney_location is "temple" and $sydney_templeWork is "pray" and !$daily.sydneyConfession and C.npc.Sydney.init is 1 and $confessionsTaken gte 5>>
+	<<run statusCheck("Sydney")>>
+	<<if $templePromised is "Sydney" and $daily.sydney.sex gte 1>>
+		<<addinlineevent "confession_sydney_promised_1" 4>>
+			<<npc Sydney>><<person1>><<set $attendant to "sydney_promised">>
+			<<set $daily.sydneyConfession to true>>
+			<<if $sydneySeen.includes("confessionRevealed")>>
+				<span class="blue">你听到门框上传来三声敲门声。</span>
+			<</if>>
+			你听到了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我……犯下罪过了？我……我也不太清楚。"
+			<br><br>
+
+			<<He>>沉默了。你鼓励<<him>>继续。
+			<br><br>
+
+			"我爱人和我。我们进行了承诺仪式，但是……
+			<<if $daily.sydney.sex gte 2>>
+				我们今天已经做了多次亲密行为。我感觉很罪恶，可我仍在渴望<<pher>>的抚摸。"
+			<<else>>
+				我们今天做了亲密行为，可我现在仍然感觉很罪恶。"
+			<</if>>
+		<</addinlineevent>>
+	<<elseif $templePromised is "Sydney" and $sydney.sexTotal gte 3>>
+		<<addinlineevent "confession_sydney_promised_2" 3>>
+			<<npc Sydney>><<person1>><<set $attendant to "sydney_promised">>
+			<<set $daily.sydneyConfession to true>>
+			<<if $sydneySeen.includes("confessionRevealed")>>
+				<span class="blue">你听到门框上传来三声敲门声。</span>
+			<</if>>
+			你听到了一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我……犯下罪过了？我……我也不太清楚。"
+			<br><br>
+
+			<<He>>沉默了。你鼓励<<him>>继续。
+			<br><br>
+
+			"我爱人和我。我们进行了承诺仪式，但是……我们之间的亲密行为还是让我感觉很罪恶。"
+		<</addinlineevent>>
+	<<elseif $sydneyromance gte 1 and $sydney.sexTotal gte 1>>
+		<<addinlineevent "confession_sydney_romance" 2>>
+			<<npc Sydney>><<person1>><<set $attendant to "sydney_romance">>
+			<<set $daily.sydneyConfession to true>>
+			<<if $sydneySeen.includes("confessionRevealed")>>
+				<span class="blue">你听到门框上传来三声敲门声。</span>
+			<</if>>
+			你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我犯下了罪过。我和别人进行了亲密行为。
+			<<if _sydneyChastity>>
+				我的贞操装置让我无法打破誓约，但我承认，我想过移除装置。"
+			<<elseif C.npc.Sydney.virginity.temple is true>>
+				我还没有违背誓约，但是……也差不多了。"
+			<<else>>
+				我们做了……很多。"
+			<</if>>
+		<</addinlineevent>>
+	<<elseif !$sydneyromance and C.npc.Sydney.love gte 60>>
+		<<addinlineevent "confession_sydney_love" 1>>
+			<<npc Sydney>><<person1>><<set $attendant to "sydney_love">>
+			<<set $daily.sydneyConfession to true>>
+			你听到一个<<personsimple>>的声音。"请宽恕我，<<sister>>，我犯下了罪过。我渴求着一位同龄人。<<pShe>>是我的同班同学，
+			<<if $temple_rank isnot undefined and $temple_rank isnot "initiate">>
+				也是这里的<<temple_title>>。"
+			<<else>>
+				我和<<pShe>>亲密无间。"
+			<</if>>
+			<<if $sydneyFriendZoned>>
+				<br><br>
+
+				你张嘴正要回答，却听见<<he>>继续说道："而且，<<pShes>>已经拒绝了我。可是……可是我的渴望没有丝毫消退。我……我感觉它正撕裂我的内心。"
+			<</if>>
+		<</addinlineevent>>
+	<</if>>
+	<<if C.npc.Sydney.love gte 60 and C.npc.Kylar.init is 1 and C.npc.Kylar.love gte 40>>
+		<<addinlineevent "confession_sydney_kylar" 0.2>>
+			<<npc Sydney>><<person1>><<set $attendant to "sydney_kylar">>
+			<<set $daily.sydneyConfession to true>><<set _noOptions to true>>
+			你听到一个<<personsimple>>颤抖的声音。"请宽恕我，<<sister>>，我……我没有服从命令。我被禁止和一个人见面，那个人是我的同学。
+			<<nnpc_Hes "Kylar">>受到了我们纪律的制裁，但<<nnpc_he "Kylar">>毕竟是我的朋友——我唯一的朋友……<<nnpc_He "Kylar">>……我……在这么多年之后，我还是很想念<<nnpc_him "Kylar">>。"
+			<br><br>
+
+			你听到一声抽泣。"没……没关系。<<nnpc_He "Kylar">>看都不看我一眼。我真是说了些废话。非常抱歉浪费了您的时间，<<sister>>。日安。"
+			<br><br>
+
+			你还没来得及说话，<<He>>就匆匆离开了。
+			<br><br>
+
+			<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+			<br>
+		<</addinlineevent>>
+	<</if>>
+<</if>>
+
+<<if ($museumhorse is 1 or $museumduck is 1) and !$weekly.winterConfession and C.npc.Winter.init is 1 and $confessionsTaken gte 5>>
+	<<addinlineevent "confession_winter" 3>>
+		<<npc Winter>><<person1>><<set $attendant to "winter">>
+		<<set $weekly.winterConfession to true>>
+		你听到一个<<personsimple>>疲惫的声音。
+		"请宽恕我，<<sister>>，我犯下了罪过。我让我的一个学生到博物馆里帮我进行了一个……展示。
+		我希望精确地还原历史，但在那之后，我发现自己对<<phim>>有了不该有的想法。"
+		<br><br>
+
+		<<He>>顿了顿。
+		<<if C.npc.Winter.love gte 30>>
+			"在我脑中，对这个学生粗俗的想法恐怕也开始浮现。
+		<<else>>
+			"这样的想法同样常常化为罪恶的思想。或许是因为那些展示本身的性质。
+		<</if>>
+		请你宽恕我。"
+	<</addinlineevent>>
+<</if>>
+
+<<if Time.dayState isnot "night" and Time.dayState isnot "dusk" and $daily.jordanMissing isnot 1 and $weekly.jordanConfessionCheckin and $confessionsTaken gte 5>>
+	<<addinlineevent "confession_jordan" 0.5>>
+		<<npc Jordan>><<person1>><<set $attendant to "jordan">>
+		<<set $weekly.jordanConfessionCheckin to true>><<set _noOptions to true>>
+		你听到一个<<personsimple>>的声音。"你好，孩子。一切都好吗？"是约旦。
+		<br><br>
+
+		<<link [[是的|Temple Confess Jordan Yes]]>><</link>>
+		<br>
+		<<link [[不好|Temple Confess Jordan No]]>><</link>>
+		<br>
+	<</addinlineevent>>
+<</if>>
+<<runeventpool>>
+
+<<if !_noOptions>>
+	<br><br>
+
+	你打算该如何回应？
+	<br>
+
+	<<link [[宽恕|Temple Confess Forgive]]>><</link>>
+	<br>
+	<<link [[忏悔|Temple Confess Repent]]>><</link>>
+	<br>
+	<<link [[赎罪|Temple Confess Contrition]]>><</link>>
+	<br>
+	<<if $attendant.includes("temple") or $attendant is "corrupt_4">>
+		<<link [[摇铃|Temple Confess Purify]]>><</link>>
+		<br>
+	<</if>>
+	<<if !$attendant.includes("temple")>>
+		<<if $attendant.includes("sydney") and $sydneySeen.includes("confessionRevealed") and $sydneyromance gte 1>>
+			<<link [[邀请悉尼过来|Temple Confess Sydney Tempt]]>><<set $phase to 1>><</link>>
+			<br>
+		<<elseif $temple_confessor_intro>>
+			<<link [[净化|Temple Confess Purge]]>><</link>>
+			<br>
+		<<else>>
+			<<link [[净化|Temple Confess Purge]]>><</link>><<promiscuous1>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

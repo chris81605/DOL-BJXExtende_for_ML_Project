@@ -1,0 +1,30 @@
+:: Cabin Eden Prepare []
+<<effects>>
+<<if Time.hour lte 20>>/* if hour >= 21 and it's the last day of october, passing 3h will make it november, which unsets the variables, making nans */
+	<<if $edenwall lt 5>>
+		<<edenicon "fix">><<link [[修补墙壁的裂缝 (3:00)|Eden Wall]]>><<pass 3 hours>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<housekeeping 1 1000>><</link>><<glove>><<gdom "Eden">><<ghousekeeping 1000>>
+	<<else>>
+		<span class="green">墙壁已完全修复。</span>
+	<</if>>
+	<br>
+
+	<<if $edenchimney lt 5>>
+		<<edenicon "broom">><<link [[清理烟囱 (3:00)|Eden Chimney]]>><<pass 3 hours>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<housekeeping 1 1000>><</link>><<glove>><<gdom "Eden">><<ghousekeeping 1000>>
+	<<else>>
+		<span class="green">烟囱很干净。</span>
+	<</if>>
+	<br>
+
+	<<if $edenroof lt 5>>
+		<<edenicon "fix">><<link [[修理屋顶 (3:00)|Eden Roof]]>><<pass 3 hours>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<housekeeping 1 1000>><</link>><<glove>><<gdom "Eden">><<ghousekeeping 1000>>
+	<<else>>
+		<span class="green">屋顶已经修好了。</span>
+	<</if>>
+	<br>
+<<else>>
+	现在太晚了，没办法修理。
+	<br>
+<</if>>
+<br>
+
+<<getouticon>><<link [[回去|Eden Clearing]]>><<endevent>><</link>>

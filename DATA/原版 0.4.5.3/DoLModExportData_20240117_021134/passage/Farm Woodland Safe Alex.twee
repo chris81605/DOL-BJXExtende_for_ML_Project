@@ -1,0 +1,44 @@
+:: Farm Woodland Safe Alex []
+<<effects>>
+<<set _alex to $NPCName[$NPCNameList.indexOf("Alex")]>>
+
+<<if $speech_attitude is "meek">>
+	"我也觉得很安全，"你红着脸说，"当我在你身边的时候。"
+<<elseif $speech_attitude is "bratty">>
+	"你比那些树更能保护我，"你自豪地宣称。
+<<else>>
+	"我也觉得很安全，"你笑得很开心，"因为你。"
+<</if>>
+<br><br>
+
+艾利克斯挺起<<his>>的胸膛。
+<<if _alex.dom gte 30>>
+	"谢谢，<<girl>>。你告诉了我一些我不知道的东西，"<<he>>冲你眨眨眼。
+<<elseif _alex.dom lte -30>>
+	"我觉得你太看得起你身边这个<<nnpc_gendery "Alex">>了，"<<he>>开玩笑地说道。
+<<else>>
+	"你真的知道如何让一个<<nnpc_gendery "Alex">>开心，"<<he>>微笑着说道。
+<</if>>
+
+
+<<if Time.dayState is "night">>
+	"趁你还没着凉，我们该进屋去了。"
+	<br><br>
+	<<He>>牵起你的手，带你走向小屋。<<takeHandholdingVirginity "Alex" "loveInterest">><<pass 5>>
+	<br><br>
+
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+	<br>
+<<elseif $farm_work.alex is "relax">>
+	<<He>>恢复原来的姿势。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"不过，休息够了。我该回去工作了。"<<He>>朝小屋走去。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<</if>>

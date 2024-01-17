@@ -1,0 +1,100 @@
+:: Livestock Intro []
+<<set $outside to 0>><<set $location to "farm">><<effects>>
+<<endevent>>
+<<npc Remy>><<person1>><<pain 1>>
+你被领着穿过一扇大门。
+<<if Time.dayState is "night">>
+	你的眼睛适应了昏暗的光线，你发现自己面对着另一个更大的谷仓。在黑暗中很难分辨，但你认为你在农场。
+<<elseif Time.dayState is "dusk">>
+	你的眼睛适应了昏暗的光线，你发现自己面对着另一个更大的谷仓。田野向四面八方延伸，越过周围的山丘。你在一个农场里。
+<<elseif Time.dayState is "dawn">>
+	你的眼睛适应了昏暗的光线，你发现自己面对着另一个更大的谷仓。田野向四面八方延伸，越过周围的山丘。你在一个农场里。
+<<else>>
+	你发现自己面对着另一个更大的谷仓。田野向四面八方延伸，越过周围的山丘。你在一个农场里。
+<</if>>
+
+你的训练员使劲地拉着皮带，把你拉进去。
+<br><br>
+<<set $livestock_robin to 1>>
+<<set $livestock_noise to false>>
+<<set $livestock_dig to 0>>
+<<if $livestock_intro is undefined>><<set $livestock_intro to 0>>
+	<<livestock_init>>
+	<<set $livestock_obey to 50>>
+	<!-- Modified for Monster People -->
+	<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
+
+		一排排关在笼子里的牛站在边上，吃着食槽里的谷物。只有当你靠近时，你才意识到它们不是牛，而是长着牛耳朵和牛尾巴的人。它们还是从食槽里吃东西，只偶尔听到哞哞的叫声。
+		<br><br>
+
+		<<if $remy_seen is "riding_school">>
+			一个<<if $pronoun is "m">>浅棕色短发的男人<<else>>头发扎成发髻的浅棕发女人<</if>>正在照看它们。<<He>>在你进入时转身面对你。是雷米。<<He>>戴着手套的一只手里握着鞭子。<<He>>对你微笑，美丽的绿色眼睛闪闪发光。<<He>>看到你就像是在面对一个陌生人，没有任何特别之处。
+			<br><br>
+		<<else>>
+			一个<<if $pronoun is "m">>浅棕色短发的男人<<else>>头发扎成发髻的浅棕发女人<</if>>正在照看它们。<<He>>在你进入时转身面对你。<<He>>戴着手套的一只手里握着鞭子。<<He>>对你微笑，那双绿色眼睛闪闪发光。
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Livestock Intro 2]]>><</link>>
+		<br>
+	<<else>>
+
+		每边都有一排关在笼子里的奶牛。
+
+		<<if $remy_seen is "riding_school" or $remy_seen is "farm">>
+			一个<<if $pronoun is "m">>浅棕色短发的男人<<else>>头发扎成发髻的浅棕发女人<</if>>正在照看它们。<<He>>在你进入时转身面对你。是雷米。<<his>>戴着手套的一只手里握着鞭子。<<He>>对你微笑，美丽的绿色眼睛闪闪发光。<<He>>看到你就像是在面对一个陌生人，没有任何特别之处。
+			<br><br>
+		<<else>>
+			一个<<if $pronoun is "m">>浅棕色短发的男人<<else>>头发扎成发髻的浅棕发女人<</if>>正在照看它们。<<He>>在你进入时转身面对你。<<He>>戴着手套的一只手里握着鞭子。<<He>>对你微笑，那双绿色眼睛闪闪发光。
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Livestock Intro 2]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<livestock_obey -10>>
+	<!-- Modified for Monster People -->
+	<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
+
+		一排排关在笼子里的牛站在边上，吃着食槽里的谷物。只有当你靠近时，你才意识到它们不是牛，而是长着牛耳朵和牛尾巴的人。它们还是从食槽里吃东西，只偶尔听到哞哞的叫声。
+		<br><br>
+
+		<<if $livestock_obey lte 10>>
+			你希望和他们一起被关在牢房里。但是你被直直拉着向前走，你们穿过笼子，穿过另一扇门。
+			<br><br>
+
+			"别担心，你很快就会回家的，"你的训导员笑着说道。"但是老板给你准备了特别的东西。"<<stress 6>><<gstress>>
+			<br><br>
+
+			<<link [[继续|Livestock Return Kennel]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			雷米，也就是那个农民正在照看它们。<<He>>在你进入时转身面对你。<<He>>戴着手套的一只手里握着鞭子。<<He>>对你笑着眯起了绿色的眼睛，看起来是在对你打招呼。
+			<br><br>
+
+			<<link [[继续|Livestock Return]]>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+
+		每边都有一排关在笼子里的奶牛。
+		<<if $livestock_obey lte 10>>
+			你希望和他们一起被关在牢房里。但是你被直直拉着向前走，你们穿过笼子，穿过另一扇门。
+			<br><br>
+
+			"别担心，你很快就会回家的，"你的训导员笑着说道。"但是老板给你准备了特别的东西。"<<stress 6>><<gstress>>
+			<br><br>
+
+			<<link [[继续|Livestock Return Kennel]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			雷米，也就是那个农民正在照看它们。<<He>>在你进入时转身面对你。<<He>>戴着手套的一只手里握着鞭子。<<He>>对你笑着眯起了绿色的眼睛，看起来是在对你打招呼。
+			<br><br>
+
+			<<link [[继续|Livestock Return]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $remy_seen to "livestock">>

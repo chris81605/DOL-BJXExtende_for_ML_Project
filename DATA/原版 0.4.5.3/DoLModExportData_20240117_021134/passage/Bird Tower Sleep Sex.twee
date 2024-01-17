@@ -1,0 +1,37 @@
+:: Bird Tower Sleep Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<set $enemytrust += 200>>
+	<<set $enemyhealthmax to 600>>
+	<<set $enemyhealth to 600>>
+	<<if $monster isnot 1>>
+		<<set $position to "doggy">>
+		<<set $NPCList[0].stance to "top">>
+	<</if>>
+	<<if $phase is 1>>
+		<<npchand>>
+	<<elseif $phase is 2>>
+		<<npc_attempt_sex>>
+	<<else>>
+		<<deviancy1>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Bird Tower Sleep Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bird Tower Sleep Sex]]>><</link>></span><<nexttext>>
+<</if>>

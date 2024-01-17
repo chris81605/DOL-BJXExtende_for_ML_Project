@@ -1,0 +1,77 @@
+:: Garden Play []
+<<set $outside to 1>><<set $location to "home">><<effects>>
+
+<<if $rng gte 51>>
+	你加入了捉迷藏的游戏。
+		<<rng>>
+		<<if $rng gte 91>>
+		你躲在一个大盆栽后面，
+		<<elseif $rng gte 81>>
+		你躲在了树的后面，
+		<<elseif $rng gte 71>>
+		你躲在一座废弃的小屋里，
+		<<elseif $rng gte 61>>
+		你躲在孤儿院的拐角处，
+		<<elseif $rng gte 51>>
+		你躲在了灌木丛的后面，
+		<<elseif $rng gte 41>>
+		你躲在一片长的异常茂盛的草丛中，
+		<<elseif $rng gte 31>>
+		你躲在了花坛后面，
+		<<elseif $rng gte 21>>
+		你躲在了岩石后面，
+		<<elseif $rng gte 11>>
+		你躲在一辆旧手推车后面，
+		<<else>>
+		你躲在灌木丛的下面，
+		<</if>>
+		<<generates1>><<person1>>然后等待<<person>>找到你。
+		<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure)>>
+	这并没有花费<<him>>多长时间。"我抓住你了！"<<he>>边喊边将你从藏身处拉出来时候。当<<He>>让你暴露时，就没打算放手，恰恰相反，<<he>>将你拉近，并开始用<<his>>的双手探索起你的身体。
+	<br><br>
+
+	<<link [[推开|Garden Shove]]>><</link>>
+	<br>
+	<<if $promiscuity gte 15>>
+	<<link [[接受|Garden Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+	<br>
+	<</if>>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 81>>
+		你听到<<him>>一个接一个地搜索和寻找孤儿，直到最后只剩下你一个。又过了几分钟后，<<his>>的不耐烦使这场游戏得以结束，"我放弃了，你赢了！"在<<him>>喊完之后，你以胜利者的姿态离开了你的藏身处。
+		<br><br>
+
+		<<else>>
+		这并没有花费<<him>>多长时间。"我抓住你了！"当<<he>>将你从藏身处拉出来时候，<<he>>喊道。你觉得<<He>>一定是作弊了。
+		<br><br>
+
+		<</if>>
+
+		<<link [[继续|Garden]]>><<endevent>><</link>>
+	<</if>>
+	<<exit>>
+<</if>>
+
+<<generates1>><<person1>>一个<<person>>跑到你面前，戳了戳你的肩膀。"轮到你了！"<<he>>高兴地说道。
+<br><br>
+
+<<if $rng gte 81>>
+	你在抓到其他人后继续游玩，当你追赶<<person>>时，<<he>>被倒下的树枝绊倒，而你也被绊倒，摔在了<<him>>的身上。
+	<br><br>
+
+	<<link [[站起来|Garden]]>><<endevent>><</link>>
+	<br>
+
+	<<link [[调情|Garden Flirt]]>><</link>><<promiscuous1>>
+	<br>
+
+	<<else>>
+	你标记其他人后继续玩了一段时间。
+	<br><br>
+	<<link [[继续|Garden]]>><<endevent>><</link>>
+	<br>
+<</if>>

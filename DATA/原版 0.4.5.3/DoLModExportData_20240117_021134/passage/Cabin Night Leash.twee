@@ -1,0 +1,31 @@
+:: Cabin Night Leash []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $forestleashedwear gte 1>>
+	<<set $forestleashedwear += 1>>
+<<else>>
+	<<set $forestleashedwear to 1>>
+<</if>>
+
+你试图用绳索摩擦床头的木板，希望能够磨薄它。你似乎感觉到绳索变得越来越细了。
+<br><br>
+
+<<if $forestleashedwear gte 3>>
+	当绳子断裂时，阳光抚摸着你的脸，让你自由了。伊甸还在沉睡，没有什么能阻止你逃离。
+	<<detach_leash>>
+	<<set $forestleashed to 0>><<set $forestleashedwear to 0>>
+	<br><br>
+
+	<<link [[留在原地|Cabin Leash Broken]]>><</link>><<gtrust>><<gggstockholm>>
+	<br>
+	<<link [[逃脱|Cabin Night Escape]]>><<set $stress -= 2000>><</link>><<lllstockholm>>
+	<br>
+
+<<else>>
+	<<npc Eden>><<person1>>
+	过了一会儿，你听到伊甸动了一下。<<He>>翻了个身，亲了亲你的脸颊。"早上好。"<<He>>打了个哈欠，伸了个懒腰。"是时候吃早餐了。"
+	<br><br>
+
+	<<link [[继续|Forest Cabin]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,24 @@
+:: Robin's Lemonade High []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+你到商业街买了一大瓶水，然后回到了海滩上。
+<<if _robin.trauma gte 40>>
+	罗宾挥手让你过去。<<Hes>>正在发抖，"我很担心你，我还以为你出什么事儿了！"<<He>>紧紧地抱住了你。<<npcincr Robin trauma 1>><<grtrauma>>
+<<else>>
+	罗宾向你挥手。"谢谢你，如果不是你，我就得关闭小摊了。"<<He>>抱住了你。
+<</if>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	这个拥抱把你的身体推到了高潮的边缘。
+	<<orgasm>>
+	罗宾惊讶地放开了你，却还是受到了你的影响。<<npcincr Robin lust 1>>
+	<br><br>
+<</if>>
+<<if _robin.trauma gte 40>>
+	你悄悄地把找给罗宾的零钱放回<<his>>的桌子上。
+	<<set $robinmoney += 2>>
+	<br><br>
+<</if>>
+<<endevent>>
+<<lemonade_stand_options>>

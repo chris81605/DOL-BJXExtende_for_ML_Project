@@ -1,0 +1,74 @@
+:: Farm Alex Pregnancy Reveal []
+<<effects>><<npc "Alex">><<setKnowsAboutPregnancy "Alex" "pc">><<setTalkedAboutPregnancy "Alex" "pc">>
+<<set C.npc.Alex.pregnancy.selfKnowledge to true>>
+
+<<if $farm_stage gte 7 and $alex_countdown is undefined>>
+	你坐在艾利克斯旁边的沙发上。"所以，什么事？"你问。
+
+	<<if npcBellyVisible("Alex")>>
+		<<he>>轻叹一口气，然后牵起你的右手，放到<<his>>的肚子上。
+
+		你不用多想就知道这意味着什么。
+
+	<<else>>
+		<<He>>从口袋里掏出了什么，递给你。
+
+		是一根验孕棒，<span class="pink">结果是阳性。</span>
+
+	<</if>>
+	<<llstress>><<stress -12>>
+	<br><br>
+
+	许多念头闪过你的脑海，但你最终忍不住微笑起来。
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex", "pc") lte 0 or pregnancyCountBetweenParents("pc", "Alex") lte 0>>
+		"我们自己的小家。妈妈会很骄傲的。"<<he>>说着握住你的手，倾身拥住了你。
+
+	<<else>>
+		"看来我们的小家正在逐渐壮大啊。真想知道妈妈对此会怎么想。"<<he>>说着握住你的手，倾身拥住了你。
+
+	<</if>>
+	<<glove>><<npcincr Alex love 1>>
+	<br><br>
+
+	你们拥抱了一段时间，时不时亲吻对方。<<glust>><<npcincr Alex lust 1>>
+	<br><br>
+
+<<else>>
+	小屋里，你坐在了沙发上。艾利克斯去厨房沏了些茶，然后递给你一杯。
+	<br><br>
+
+	"所以，你想说什么？"你喝了一口茶问道。
+	<br><br>
+
+	<<if npcBellyVisible("Alex")>>
+		<<he>>叹了口气，抓起你的右手放在了<<his>>肚子上。你几乎不用多想就明白了其中的含义。
+
+	<<else>>
+		<<His>>的手轻轻颤抖，<<he>>从口袋中拿出了什么，递给了你。是验孕棒。<span class="pink">上面的结果是阳性。</span>
+
+	<</if>>
+	<br>
+
+	你被困惑的漩涡吞没，脑中瞬间闪过无数想法。你一时不知道要作何回应，你的眼睛转向艾利克斯。
+	<br><br>
+
+	<<if pregnancyCountBetweenParents("Alex","pc") lte 0 or pregnancyCountBetweenParents("pc","Alex") lte 0>>
+		"喂！别这样看我，我也没料到会这样。"<<he>>回答。
+
+	<<else>>
+		"我们太不小心了，然后自然就出现后果了。"<<He>>摇了摇头，"往好的方面想，至少我们还有时间准备，"<<he>>说。
+
+	<</if>>
+	<br><br>
+
+<</if>>
+
+<<if C.npc.Alex.pregnancy.nursery is true>>
+	<<link [[继续|Farm Cottage]]>><<endevent>><</link>>
+
+<<else>>
+	<<link [[继续|Farm Alex Pregnancy Reveal 2]]>><</link>>
+
+<</if>>

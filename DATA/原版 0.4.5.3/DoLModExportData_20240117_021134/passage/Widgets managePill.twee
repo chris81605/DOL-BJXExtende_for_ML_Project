@@ -1,0 +1,13 @@
+:: Widgets managePill [widget]
+<<widget "managePill">>
+	<<if _args[0] and _args[1] and _args[2]>>
+		<<if _args[3] isnot true or $sexStats.pills[_args[0]].owned[_args[1]] gt 0>>
+			<<set $sexStats.pills[_args[0]].owned[_args[1]] += _args[2]>>
+			<<if _args[3] is true>>
+				<<set $sexStats.pills[_args[0]].type to _args[1]>>
+				<<set $sexStats.pills[_args[0]].doseTaken++>>
+				<<set $pillsconsumed++>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

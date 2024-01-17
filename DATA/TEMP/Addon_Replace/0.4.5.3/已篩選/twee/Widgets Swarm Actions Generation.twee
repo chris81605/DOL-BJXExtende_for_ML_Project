@@ -1,0 +1,519 @@
+:: Widgets Swarm Actions Generation [widget]
+<<widget "generateActionsSwarm">>
+	<<set $combat to 1>>
+	<<if _targetlist is undefined>>
+		<<getTargetList>>
+	<</if>>
+	<div id="listContainer">
+	    /* 北极星模组 */
+	    <<if $options.bjx_eventTF and $ghost gte 1>>
+    		<div id="energyaction" @class="$options.combatControls + 'Control'">
+    			<<energyActionEscape>>
+    		</div>
+    	<</if>>
+    	/* 北极星 */
+		<div id="leftaction" @class="$options.combatControls + 'Control'">
+			<<if $lefttarget is "self">>
+				<<leftActionInitSelf>>
+			<<else>>
+				<<leftActionInitSwarm>>
+			<</if>>
+		</div>
+
+		<div id="rightaction" @class="$options.combatControls + 'Control'">
+			<<if $righttarget is "self">>
+				<<rightActionInitSelf>>
+			<<else>>
+				<<rightActionInitSwarm>>
+			<</if>>
+		</div>
+
+		<div id="feetaction" @class="$options.combatControls + 'Control'">
+			<<feetActionInitSwarm>>
+		</div>
+		
+		/* 北极星模组 */
+		<<if $options.bjx_animal>>
+    		<div id="tailaction" @class="$options.combatControls + 'Control'">
+    			<<tailActionInitSwarm>>
+    		</div>
+		<</if>>
+		/* 北极星 */
+
+		/* 北极星模组 */
+		<<if ($mouthuse is 0 and !($dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)))>>
+		/* 北极星 */
+			<div id="mouthaction" @class="$options.combatControls + 'Control'">
+				<<mouthActionInit>>
+			</div>
+		<</if>>
+	</div>
+<</widget>>
+
+<<widget "leftActionInitSwarm">>
+	<<set $lefttarget to "swarm">>
+	<<switch $leftarm>>
+		<<case 0>>
+			/* 北极星模组 */
+			<<if $orgasmdown gte 1 and $demonhunter lte 5>>
+			/* 北极星 */
+				<<set _leftOptions to "orgasm">>
+				<span class="lewd">你的左臂自由了，但你无法停止痉挛。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _leftOptions to "pain">>
+				<span class="red">你的左臂自由了，但疼痛使你动弹不得。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _leftOptions to "unreal">>
+				<span class="pink">你的左臂自由了，但感觉有些麻木。</span>
+			<<else>>
+				<<if _targetYourself is true and _targetnumber gt 1>>
+					<<set _targetlistarms["你自己"] to "self">>
+				<</if>>
+				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "left" _targetlistarms>>
+				<</if>>
+				<<set _leftOptions to "free">>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">你的左臂是自由的。</span>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "left" _targetlistarms>>
+					<br>
+				<</if>>
+			<</if>>
+		<<case "swarmgrappled">>
+		    /* 北极星模组 */
+			<<if $slime gt 0 and $options.bjx_eventTF>>
+			    <<set _leftOptions to "free">>
+				<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>想缠上你的左臂，但它失败了!</span><<if $options.combatControls.includes("adio")>><br><</if>>
+			<<else>>
+				<<set _leftOptions to "unable">>
+				<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正在勒紧你的左臂！</span><<if $options.combatControls.includes("adio")>><br><</if>>
+			<</if>>
+			/* 北极星 */
+		<<case "bound">>
+			/* 北极星模组 */
+			<<if $orgasmdown gte 1 and $demonhunter lte 5>>
+			/* 北极星 */
+				<<set _leftOptions to "unable">>
+				<span class="lewd">你的左臂因紧缚而抽搐。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _leftOptions to "unable">>
+				<span class="red">你的左臂因束缚而阵痛。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _leftOptions to "unable">>
+				<span class="pink">你的左臂因捆绑而瘫软无力。</span>
+			<<else>>
+				<<set _leftOptions to "bound">>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">你的左臂被束缚住，无法动弹。</span>
+			<</if>><<if $options.combatControls.includes("adio")>><br><</if>>
+		<<case "trapped">>
+			<<set $_changetype to true>><<leftActionInitVore>>
+		<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+			<<set $_changetype to true>><<leftActionInit>>
+		<<case "struggle">>
+			<<set $_changetype to true>><<leftActionInitStruggle>>
+		<<case "mechgrappled">>
+			<<set $_changetype to true>><<leftActionInitMachine>>
+		<<default>>
+			<<set $_changetype to true>><<leftActionInitTentacle>>
+	<</switch>>
+	<<if $_changetype isnot true>>
+		<<leftActionsSwarm>>
+		<<if Object.keys(_leftaction).length gt 0>>
+			<<if !(Object.values(_leftaction).includes($leftactiondefault))>>
+				<<set $leftactiondefault to "swarmrest">>
+			<</if>>
+			<<set $leftaction to $leftactiondefault>>
+			<<set _textColor to combatListColor('leftaction', (Object.values(_leftaction).includes($leftaction) ? $leftaction : Object.values(_leftaction)[0]), "Swarm")>>
+			<div class="extraMargin">
+				<<generateCombatActionOthers _leftaction "leftaction" _textColor $leftaction "Swarm">>
+			</div>
+			<<if $options.combatControls.includes("ists")>>
+				<div id="leftactionDifficulty">
+					<<leftactionDifficulty>>
+				</div>
+			<</if>>
+		<</if>>
+		<<set $lastOptions.left to clone(_leftOptions)>>
+	<</if>>
+<</widget>>
+
+<<widget "leftactionDifficultySwarm">>/* Yes, it is supposed to be blank. */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "leftActionsSwarm">>
+	<<set _leftaction to {}>>
+	<<switch _leftOptions>>
+		<<case "free">>
+			<<if $rightarm is "swarmgrappled" and ($lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _leftaction["解放你的右臂"] to "leftfree">>
+			<<elseif _swarmamounts.active[2] gte 1 and $lefttarget isnot "self">>
+				<<silently>><<swarmName>><</silently>>
+				<<set _leftaction[_swarmsteady + "其中一个" + _swarmname] to "leftswarm">>
+			<</if>>
+			<<if _swarmamounts.genital[0] lte 0 and _swarmamounts.genital[1] lte 0 and ($lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<silently>><<genitals>><</silently>>
+				<<set _leftaction["遮住你的"+ _text_output] to "frontcoverleft">>
+			<</if>>
+			<<if _swarmamounts.butt[0] lte 0 and _swarmamounts.butt[1] lte 0 and ($lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _leftaction["遮住你的屁股"] to "backcoverleft">>
+			<</if>>
+			<<if _swarmamounts.chest lte 0 and ($lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _leftaction["遮住你的胸部"] to "chestcoverleft">>
+			<</if>>
+			<<if $lefttarget isnot "self">>
+				<<if _swarmamounts.genital[1] gte 1 and !playerChastity()>>
+					<<silently>><<genitals>><</silently>>
+					<<set _leftaction["把"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "从你的" + _text_output + "拉开" ] to "frontpurgeleft">>
+				<</if>>
+				<<if _swarmamounts.genital[0] gte 1 and !playerChastity()>>
+					<<silently>><<genitals>><</silently>>
+					<<set _leftaction["阻挡"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "靠近你的" + _text_output] to "frontclearleft">>
+				<</if>>
+				<<if _swarmamounts.butt[1] gte 1 and !playerChastity("anus")>>
+					<<set _leftaction["把"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "从你的菊穴里拉出来"] to "backpurgeleft">>
+				<</if>>
+				<<if _swarmamounts.butt[0] gte 1 and !playerChastity("anus")>>
+					<<set _leftaction["阻挡"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "靠近你的屁股"] to "backclearleft">>
+				<</if>>
+				<<if _swarmamounts.chest gte 1>>
+					<<set _leftaction["把你胸口上的"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "清除"] to "chestclearleft">>
+				<</if>>
+			<</if>>
+			<<if $water is 1 and $vorecreature is 0 and ($consensual isnot 1 or $gamemode is "soft") and ($lefttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _leftaction["游到安全的地方"] to "swim">>
+			<</if>>
+			<<if $vorecreature is 0>>
+				<<set _leftaction["休息"] to "swarmrest">>
+			<</if>>
+			<<leftclothesnew>>
+		<<case "bound">>
+			<<if $gamemode is "soft" and $nowiggle isnot true>>
+				<<set _leftaction["扭动脱身"] to "leftwriggle">>
+			<</if>>
+		<<case "orgasm">>
+			<<set _leftaction["交叉手臂"] to "leftfold">>
+			<<set _leftaction["紧握"] to "leftgrip">>
+		<<case "pain">>
+			<<set _leftaction["挣扎"] to "leftstruggleweak">>
+			<<set _leftaction["防护"] to "leftprotect">>
+		<<case "unreal">>
+			<<set _leftaction["戳自己"] to "leftpoke">>
+			<<set _leftaction["把你的胳膊移开"] to "leftcurl">>
+	<</switch>>
+<</widget>>
+
+<<widget "rightActionInitSwarm">>
+	<<set $righttarget to "swarm">>
+	<<switch $rightarm>>
+		<<case 0>>
+			/* 北极星模组 */
+			<<if $orgasmdown gte 1 and $demonhunter lte 5>>
+			/* 北极星 */
+				<<set _rightOptions to "orgasm">>
+				<span class="lewd">你的右臂自由了，但你无法停止痉挛。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _rightOptions to "pain">>
+				<span class="red">你的右臂自由了，但疼痛使你动弹不得。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _rightOptions to "unreal">>
+				<span class="pink">你的右臂自由了，但感觉有些麻木。</span>
+			<<else>>
+				<<if _targetYourself is true and _targetnumber gt 1>>
+					<<set _targetlistarms["你自己"] to "self">>
+				<</if>>
+				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "right" _targetlistarms>>
+				<</if>>
+				<<set _rightOptions to "free">>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">你的右臂是自由的。</span>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "right" _targetlistarms>>
+					<br>
+				<</if>>
+			<</if>>
+		<<case "swarmgrappled">>
+		    /* 北极星模组 */
+			<<if $slime gt 0 and $options.bjx_eventTF>>
+			    <<set _rightOptions to "free">>
+				<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>想缠上你的左臂，但它失败了!</span><<if $options.combatControls.includes("adio")>><br><</if>>
+			<<else>>
+				<<set _rightOptions to "unable">>
+				<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正在勒紧你的右臂！</span><<if $options.combatControls.includes("adio")>><br><</if>>
+			<</if>>
+			/* 北极星 */
+		<<case "bound">>
+			/* 北极星模组 */
+			<<if $orgasmdown gte 1 and $demonhunter lte 5>>
+			/* 北极星 */
+				<<set _rightOptions to "unable">>
+				<span class="lewd">你的右臂因紧缚而抽搐。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _rightOptions to "unable">>
+				<span class="red">你的右臂因束缚而阵痛。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _rightOptions to "unable">>
+				<span class="pink">你的右臂因捆绑而瘫软无力。</span>
+			<<else>>
+				<<set _rightOptions to "bound">>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">你的右臂被束缚住，无法动弹。</span>
+			<</if>><<if $options.combatControls.includes("adio")>><br><</if>>
+		<<case "trapped">>
+			<<set $_changetype to true>><<rightActionInitVore>>
+		<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+			<<set $_changetype to true>><<rightActionInit>>
+		<<case "struggle">>
+			<<set $_changetype to true>><<rightActionInitStruggle>>
+		<<case "mechgrappled">>
+			<<set $_changetype to true>><<rightActionInitMachine>>
+		<<default>>
+			<<set $_changetype to true>><<rightActionInitTentacle>>
+	<</switch>>
+	<<if $_changetype isnot true>>
+		<<rightActionsSwarm>>
+		<<if Object.keys(_rightaction).length gt 0>>
+			<<if !(Object.values(_rightaction).includes($rightactiondefault))>>
+				<<set $rightactiondefault to "swarmrest">>
+			<</if>>
+			<<set $rightaction to $rightactiondefault>>
+			<<set _textColor to combatListColor('rightaction', (Object.values(_rightaction).includes($rightaction) ? $rightaction : Object.values(_rightaction)[0]), "Swarm")>>
+			<div class="extraMargin">
+				<<generateCombatActionOthers _rightaction "rightaction" _textColor $rightaction "Swarm">>
+			</div>
+			<<if $options.combatControls.includes("ists")>>
+				<div id="rightactionDifficulty">
+					<<rightactionDifficulty>>
+				</div>
+			<</if>>
+		<</if>>
+		<<set $lastOptions.right to clone(_rightOptions)>>
+	<</if>>
+<</widget>>
+
+<<widget "rightactionDifficultySwarm">>/* No, it cannot be removed. */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "rightActionsSwarm">>
+	<<set _rightaction to {}>>
+	<<switch _rightOptions>>
+		<<case "free">>
+			<<if $leftarm is "swarmgrappled" and ($righttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _rightaction["解放你的左臂"] to "rightfree">>
+			<<elseif _swarmamounts.active[2] gte 1 and $righttarget isnot "self">>
+				<<silently>><<swarmName>><</silently>>
+				<<set _rightaction[_swarmsteady + "其中一个" + _swarmname] to "rightswarm">>
+			<</if>>
+			<<if _swarmamounts.genital[0] lte 0 and _swarmamounts.genital[1] lte 0 and ($righttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<silently>><<genitals>><</silently>>
+				<<set _rightaction["遮住你的"+ _text_output] to "frontcoverright">>
+			<</if>>
+			<<if _swarmamounts.butt[0] lte 0 and _swarmamounts.butt[1] lte 0 and ($righttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _rightaction["遮住你的屁股"] to "backcoverright">>
+			<</if>>
+			<<if _swarmamounts.chest lte 0 and ($righttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _rightaction["遮住你的胸部"] to "chestcoverright">>
+			<</if>>
+			<<if $righttarget isnot "self">>
+				<<if _swarmamounts.genital[1] gte 1 and !playerChastity()>>
+					<<silently>><<genitals>><</silently>>
+					<<set _rightaction["把"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "从你的" + _text_output + "拉开"] to "frontpurgeright">>
+				<</if>>
+				<<if _swarmamounts.genital[0] gte 1 and !playerChastity()>>
+					<<silently>><<genitals>><</silently>>
+					<<set _rightaction["阻挡"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "靠近你的" + _text_output] to "frontclearright">>
+				<</if>>
+				<<if _swarmamounts.butt[1] gte 1 and !playerChastity("anus")>>
+					<<set _rightaction["把"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "从你的菊穴里拉出来"] to "backpurgeright">>
+				<</if>>
+				<<if _swarmamounts.butt[0] gte 1 and !playerChastity("anus")>>
+					<<set _rightaction["阻挡"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "靠近你的屁股"] to "backclearright">>
+				<</if>>
+				<<if _swarmamounts.chest gte 1>>
+					<<set _rightaction["把你胸口上的"+ $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫") + "清除"] to "chestclearright">>
+				<</if>>
+			<</if>>
+			<<if $water is 1 and $vorecreature is 0 and ($consensual isnot 1 or $gamemode is "soft") and ($righttarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+				<<set _rightaction["游到安全的地方"] to "swim">>
+			<</if>>
+			<<if $vorecreature is 0>>
+				<<set _rightaction["休息"] to "swarmrest">>
+			<</if>>
+			<<rightclothesnew>>
+
+		<<case "bound">>
+			<<if $gamemode is "soft" and $nowiggle isnot true>>
+				<<set _rightaction["扭动脱身"] to "rightwriggle">>
+			<</if>>
+		<<case "orgasm">>
+			<<set _rightaction["交叉手臂"] to "rightfold">>
+			<<set _rightaction["紧握"] to "rightgrip">>
+		<<case "pain">>
+			<<set _rightaction["挣扎"] to "rightstruggleweak">>
+			<<set _rightaction["防护"] to "rightprotect">>
+		<<case "unreal">>
+			<<set _rightaction["戳自己"] to "rightpoke">>
+			<<set _rightaction["把你的胳膊移开"] to "rightcurl">>
+	<</switch>>
+<</widget>>
+
+<<widget "feetActionInitSwarm">>
+	/* 北极星模组 */
+	<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)>>
+	/* 北极星 */
+		<<set $feettarget to "swarm">>
+		<<switch $feetuse>>
+			<<case 0>>
+				<<if _targetYourself is true and _targetnumber gt 1>>
+					<<set _targetlistall["你自己"] to "self">>
+				<</if>>
+				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<if ($leftleg is "grappled" and $rightleg is "grappled") or ($leftleg is "bound" and $rightleg is "bound")>>
+					<<else>>
+						<<targetListBox "feet" _targetlistall>>
+					<</if>>
+				<</if>>
+				<<if $leftleg is 0 and $rightleg is 0>>
+					<<set _feetOptions to "free">>
+					<span @class="($lastOptions.feet isnot _feetOptions ?'gold':'')">你的双脚是自由的。</span>
+				<<elseif $leftleg is 0>>
+					<<set _feetOptions to "leftfree">>
+					<span @class="($lastOptions.feet isnot _feetOptions ?'gold':'')">你的左腿是自由的。</span>
+				<<elseif $rightleg is 0>>
+					<<set _feetOptions to "rightfree">>
+					<span @class="($lastOptions.feet isnot _feetOptions ?'gold':'')">你的右腿是自由的。</span>
+				<<elseif $leftleg is "grappled" and $rightleg is "grappled">>
+					<<set $_changetype to true>><<feetActionInitTentacle>>
+				<<elseif $leftleg is "bound" and $rightleg is "bound">>
+					<<set $_changetype to true>><<feetActionInitTentacle>>
+				<<else>>
+					<<set _feetOptions to "free">>
+					<span @class="($lastOptions.feet isnot _feetOptions or _feetGold is true ?'gold':'')">你的双脚是自由的。</span>
+				<</if>>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1 and _feetOptions.toLowerCase().includes("free")>>
+					<<targetListBox "feet" _targetlistall>>
+				<</if>>
+				<<if _targetnumber is 1>>
+					<<set $feettarget to _firsttarget>>
+				<</if>>
+			<<case "bound" "penis" "othervagina" "walk" "strut" "run" "none">>
+				<<set $_changetype to true>><<feetActionInit>>
+			<<case "mechgrappled">>
+				<<set $_changetype to true>><<feetActionInitMachine>>
+			<<default>>
+				<<set $_changetype to true>><<feetActionInitTentacle>>
+		<</switch>>
+		<<if $lastOptions.feet isnot _feetOptions>>
+			<<set _feetGold to true>>
+		<</if>>
+		<<if $_changetype isnot true>>
+			<<feetActionsSwarm>>
+			<<if Object.keys(_feetaction).length gt 0>>
+				<<if !(Object.values(_feetaction).includes($feetactiondefault))>>
+					<<set $feetactiondefault to "swarmrest">>
+				<</if>>
+				<<set $feetaction to $feetactiondefault>>
+				<<set _textColor to combatListColor('feetaction', (Object.values(_feetaction).includes($feetaction) ? $feetaction : Object.values(_feetaction)[0]), "Swarm")>>
+				<div class="extraMargin">
+					<<generateCombatActionOthers _feetaction "feetaction" _textColor $feetaction "Swarm">>
+				</div>
+				<<if $options.combatControls.includes("ists")>>
+					<div id="feetactionDifficulty">
+						<<feetactionDifficulty>>
+					</div>
+				<</if>>
+			<</if>>
+			<<set $lastOptions.feet to clone(_feetOptions)>>
+		<</if>>
+	<<else>>
+		<<timed 100ms>>
+			<<run jQuery("#feetaction").remove();>>
+		<</timed>>
+	<</if>>
+<</widget>>
+
+<<widget "feetactionDifficultySwarm">>/* If removed, expect errors in combats with controls set to "lists". */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "feetActionsSwarm">>
+	<<set _feetaction to {}>>
+	<<if $swarm.amount.active[2] gte 1 and $feettarget isnot "self">>
+		<<silently>><<swarmName>><</silently>>
+		<<set _feetaction[_swarmsteady + "其中一个" + _swarmname] to "feetswarm">>
+	<</if>>
+	<<if _feetOptions is "free">>
+		<<if $water is 1 and $vorecreature is 0 and currentSkillValue('swimmingskill') gt 700 and $consensual isnot 1 and ($feettarget is "self" or $options.targetYourself is false or _targetnumber is 1)>>
+			<<set _feetaction["游到安全的地方"] to "swim">>
+		<</if>>
+	<</if>>
+	<<if $vorecreature is 0>>
+		<<set _feetaction["休息"] to "swarmrest">>
+	<</if>>
+<</widget>>
+
+/* 北极星模组 */
+<<widget "tailActionInitSwarm">>
+	<<if $hastail is "true" and $options.bjx_animal>>
+		<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)>>
+			<<set $tailtarget to "swarm">>
+				<<set _tailOptions to "free">>
+				<span @class="($lastOptions.tail isnot _tailOptions or _tailGold is true ?'gold':'')">你的尾巴是自由的。</span>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1 and _tailOptions.toLowerCase().includes("free")>>
+					<<targetListBox "tail" _targetlistall>>
+				<</if>>
+				<<if _targetnumber is 1>>
+					<<set $tailtarget to _firsttarget>>
+				<</if>>
+			<<if $lastOptions.tail isnot _tailOptions>>
+				<<set _tailGold to true>>
+			<</if>>
+			<<if $_changetype isnot true>>
+				<<tailActionsSwarm>>
+				<<if Object.keys(_tailaction).length gt 0>>
+					<<if !(Object.values(_tailaction).includes($tailactiondefault))>>
+						<<set $tailactiondefault to "swarmrest">>
+					<</if>>
+					<<set $tailaction to $tailactiondefault>>
+					<<set _textColor to combatListColor('tailaction', (Object.values(_tailaction).includes($tailaction) ? $tailaction : Object.values(_tailaction)[0]), "Swarm")>>
+					<div class="extraMargin">
+						<<generateCombatActionOthers _tailaction "tailaction" _textColor $tailaction "Swarm">>
+					</div>
+					<<if $options.combatControls.includes("ists")>>
+						<div id="tailactionDifficulty">
+							<<tailactionDifficulty>>
+						</div>
+					<</if>>
+				<</if>>
+				<<set $lastOptions.tail to clone(_tailOptions)>>
+			<</if>>
+		<<else>>
+			<<timed 100ms>>
+				<<run jQuery("#tailaction").remove();>>
+			<</timed>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "tailactionDifficultySwarm">>/* If removed, expect errors in combats with controls set to "lists". */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "tailActionsSwarm">>
+	<<if $hastail is "true" and $options.bjx_animal>>
+		<<set _tailaction to {}>>
+		<<if $swarm.amount.active[2] gte 1 and $tailtarget isnot "self" and $thicktail is "true">>
+			<<silently>><<swarmName>><</silently>>
+			<<set _tailaction[_swarmsteady + "其中一只" + _swarmname] to "tailswarm">>
+		<</if>>
+		<<if _tailOptions is "free" and $swimtail is "true">>
+			<<if $water is 1 and $vorecreature is 0 and $consensual isnot 1>>
+				<<set _tailaction["游到安全的地方"] to "swim">>
+			<</if>>
+		<</if>>
+		<<if $vorecreature is 0>>
+			<<set _tailaction["休息"] to "swarmrest">>
+		<</if>>
+	<</if>>
+<</widget>>
+/* 北极星 */

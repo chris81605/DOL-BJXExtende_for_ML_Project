@@ -1,0 +1,65 @@
+:: Forest Slime Wolf Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	那只<<beasttype>>从你身上爬了下来，然后消失在树林里。
+	<br><br>
+
+	随着史莱姆的控制逐渐消失，你的膝盖开始发软。<<tearful>>你稳住了自己。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest lte 20>>
+	<<gwylanForestRescue "beast" "slime">>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	你听到附近传来一声枪响，一颗子弹落在两人的脚边。他们惊恐地后退并逃进了森林里。
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<slimePunishmentForest>>
+		<br><br>
+
+		<<edenCagedSave>>
+	<<else>>
+		伊甸出现了，帮助你整理自己。"该死的狼，"<<nnpc_he "Eden">>嘟囔道。"你还好吗？"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<<slimePunishmentForest>>
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周片刻。"我们可能已经涉险过深，超出了那个店主的能力范围，"<<nnpc_he "Eden">>说道。
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<forestCabinReturnLinks>>
+	<</if>>
+<<else>>
+	那只<<beasttype>>呜咽着逃进了森林里。
+	<br><br>
+
+	<<tearful>>你试图站起来，但一阵疼痛让你倒地，这是史莱姆对你反抗的教训。
+	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<</if>>

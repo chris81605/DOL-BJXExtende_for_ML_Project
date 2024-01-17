@@ -1,0 +1,48 @@
+:: Temple Confess Self Sex Finish []
+<<temple_effects>><<effects>>
+<<set $punishmentposition to 0>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $gloryholestat += 1>>
+	<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		"你是无罪的，谢谢你的诚实。"
+	<<elseif $temple_rank is "initiate">>
+		"你被宽恕了，见习教徒。你做得很棒。"<<His>>从缝隙伸出，拍了拍你的头。
+	<<else>>
+		"你被宽恕了，<<sister>>。如果诱惑再次控制你，请回来."
+	<</if>>
+	<<tearful>>你站起来，等待<<him>>离开。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	你听到墙后传来一阵痛苦的叫喊，
+	<<if $NPCList[0].penis isnot "none">>
+		面前的$NPCList[0].penisdesc消失了。
+	<<else>>
+		面前的小穴消失了。
+	<</if>>
+	<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		"你的罪行不可饶恕，坏蛋！"
+	<<elseif $temple_rank is "initiate">>
+		"啊，又是你！执迷不悟！祈祷我不要告诉主教吧！"<<grace -5 "monk">><<llgrace "monk">>
+	<<else>>
+		"你不仅恶心而且下作！"<<grace -5 "priest">><<lgrace "priest">>
+	<</if>>
+	<<tearful>>你站起来，等待<<him>>离开。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+	<br>
+<<else>>
+	你听见<<person>>在墙的另一边发出不满的咕哝。
+	<br><br>
+	<<tearful>>你站了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Temple Confess Self End Alone]]>><</link>>
+	<br>
+<</if>>

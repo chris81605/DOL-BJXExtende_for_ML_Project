@@ -1,0 +1,85 @@
+:: Danube Breast Continue []
+<<effects>>
+
+你靠向<<his>>的另一侧乳房吸吮起来。<<He>>笑了笑，然后把手伸到你的大腿上。<<He>>抚摸着你的<<groin>>。
+<br><br>
+
+<<if $player.gender_appearance is "m" and !$player.penisExist>>
+	"哦，我的天，"<<he>>说道。"你在下面藏着东西。别担心。我可以保守秘密。"<<He>>进一步探索。
+<<elseif $player.gender_appearance is "f" and $player.penisExist>>
+	"哦，我的天，"<<he>>说道。"你在下面藏着东西。别担心。我可以保守秘密。"<<He>>进一步探索。
+<<else>>
+<</if>>
+
+<<if playerChastity("hidden")>>
+	"还想装纯洁？"<<he>>质疑的同时收回了<<his>>的手。
+	<<set _arousal to "low">>
+<<elseif $player.penisExist>>
+	<<set _canDrinkCum to true>>
+	<<if $worn.genitals.name is "chastity parasite">>
+		"奇怪，这是什么？" <<he>>一边揉捻着卡在你贞操锁上的寄生虫，一边享受着你的吮吸。
+		<<set _arousal to "high">>
+		<<set _canDrinkCum to false>>
+	<<elseif playerChastity("cage")>>
+		"你真可爱，"<<he>>说道。<<He>>一边让你吸吮着，一边<<if $player.ballsExist>>揉搓着你的蛋蛋<<else>>收回了<<his>>的手<</if>>。
+		<<set _arousal to "low">>
+	<<elseif $player.penissize gte 4>>
+		"啊！"<<He>>收回<<his>>的手，盯着你的下面。<<He>>看起来很惊愕。
+		"你怎么这么大？！"<<He>>抽回<<his>>的手，"抱歉，我失态了，刚才的失言无意冒犯。"<<He>>在你吸吮的时候继续抚摸。
+	<<elseif $player.penissize gte 3>>
+		"你这里可真够大。"<<he>>赞叹道。<<He>>在你吸吮的时候抚摸你的肉棒。
+	<<elseif $player.penissize gte 2>>
+		<<He>>在你吸吮的时候抚摸你的肉棒。
+	<<elseif $player.penissize gte 1>>
+		"真是可爱，"<<he>>说道。<<He>>在你吸吮的时候抚摸你的肉棒。
+	<<else>>
+		<<He>>笑了。"这可真是袖珍。哦，抱歉，我没有冒犯的意思。"<<He>>在你吸吮的时候抚摸你的肉棒。
+	<</if>>
+	<<if $player.vaginaExist>>
+		当<<his>>的手指碰到你的<<pussy>>时，<<He>>轻轻皱了一下眉。"是我想的那样么？"<<he>>问道，"看来你有不少秘密。"
+	<</if>>
+<<else>>
+	<<He>>在你吸吮的时候抚摸你的阴蒂。
+<</if>>
+<<if _arousal is "high">>
+	<<arousal 2000 "genitals">><<gggarousal>>
+<<elseif _arousal is "low">>
+	<<arousal 600 "genitals">><<garousal>>
+<<else>>
+	<<arousal 1200 "genitals">><<ggarousal>>
+<</if>>
+/* Note: Add some dialog describing the player orgasming from this if it puts them at max arousal? */
+/* Not sure why a simple scene was not added at least */
+<br><br>
+<<if $arousal gte $arousalmax>>
+	即将到达崩溃边缘时，你停止了饮酒。
+	<<if _canDrinkCum>><<set _released to calculateSemenReleased()>><</if>>
+	<<orgasm>>
+	<<if $femaleclimax or _deniedOrgasm>><<set _canDrinkCum to false>><</if>>
+	<<if _canDrinkCum and _released gte 1>>
+		<<if random(0,100) gte 50>>
+			<<He>>对你笑了笑说，“噢，你弄洒了一些，让我来帮你吧。”随即小心地用<<his>>手喂给了你。
+			<<semenswallowedstat _released>>
+			<<bodyliquid "mouth" "semen" 1>>
+			<<set $hunger -= _released>>
+			<<set $thirst -= _released>>
+		<<else>>
+			<<He>>吞下你的乳液后笑道，“很高兴我们都从乳汁分享中得到了释放。"
+		<</if>>
+	<<else>>
+		<<He>>对你微笑道，“很高兴我们都得到了释放。"
+	<</if>>
+	<br><br>
+	你又持续吸吮了几分钟，直至这股蜜液变为涓涓细流。
+<<else>>
+	这个过程持续了几分钟，直到漏液缓作涓涓细流。
+<</if>>
+
+<<He>>把衬衫穿上，然后把你带到了门口，还额外给了你一笔钱。
+<br><br>
+
+你赚到了<<moneyGain 10>>。
+<br><br>
+<<endevent>>
+
+<<link [[继续|Danube Street]]>><</link>>

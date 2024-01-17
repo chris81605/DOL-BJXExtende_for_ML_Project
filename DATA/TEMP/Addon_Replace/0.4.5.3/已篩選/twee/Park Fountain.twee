@@ -1,0 +1,38 @@
+:: Park Fountain []
+<<effects>>
+
+你靠近了中央喷泉，环顾空无一人的公园，看有没任何人活动的迹象。远处的引擎声是唯一的动静。
+<br><br>
+
+<<if $worn.upper.name is "naked" and $worn.lower.name is "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+	<<set $phase to 0>>
+<<else>>
+	你脱下了你的衣服，堆成一堆放在了旁边。
+	<<set $phase to 1>>
+	<<strip>>
+<</if>>
+<<covered>>你把一只脚伸进了喷泉。
+<<if Time.season is "winter">>
+	有点凉，但比周围的空气要暖和些。
+<<elseif Time.season is "summer">>
+	水很冷，你得花一段时间来适应。
+<<else>>
+	有点冷，但还能接受。
+<</if>>
+<<if currentSkillValue("history") gte 600>>
+	你记得你的历史老师唠唠叨叨地说过，喷泉的水源是在底下的天然含水层。
+<</if>>
+你把另一只脚伸了进去，水没过了你的腰。你赤身裸体暴露着涉水而前，直到到达中间的喷水处。
+/* 北极星模组 */
+<<if $options.bjx_eventTF and $slime gt 0>>
+    <br><br>
+    <span class='red'>你如此沉溺于自己的暴露行为，甚至忘记了要避开水流。</span>
+    <<violence 30>>
+    <br><br>
+<</if>>
+/* 北极星 */
+<<exhibitionism4>>
+
+
+<<link [[继续|Park Fountain 2]]>><<pass 10>><</link>>
+<br>

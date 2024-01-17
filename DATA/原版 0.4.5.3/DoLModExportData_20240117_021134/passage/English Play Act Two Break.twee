@@ -1,0 +1,135 @@
+:: English Play Act Two Break []
+<<effects>><<run statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+<<switch $englishPlayRoles.Player>>
+	<<case "Cass">>
+		"恐怕已经太晚了，斯特林<<sterlingTitle>>。听着，我跟泰勒已经上过床了！"你伸出了舌头。
+		<<if $pregnancyspeechdisable is "f">>
+			"没错，我们都操过这么多次了，肯定已经有孩子了！"你宣布道。
+			<<if playerBellyVisible()>>
+				你拍了拍你的<<bellyDescription "pc">>作为强调。
+			<<elseif !playerCanBreedWith($NPCList[1])>>
+				你懒得去质疑逻辑的合理性。
+			<</if>>
+		<</if>>
+		观众们为这下流的转折欢呼。<<set $englishPlayApproval += 15>><<gapproval>><<promiscuity1>>
+
+		<<if $englishPlayKylarReplace>>
+			"你他妈在说些什么？"<<person2>><<person>>忍不住说道："按脚本来，你这蠢货。"
+		<<else>>
+			凯拉尔吃了一惊，不过还是决定配合。"对、对啊！"<<he>>结结巴巴说道<<if $pregnancyspeechdisable is "f">>，"我们生了那么多的孩子，都得买栋大房子给他们住了！"<</if>>
+		<</if>>
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼一开始看起来很困惑，不过还是决定跟随你们的游戏。"泰勒，你个<<bastard>>！我为你做了那么多，你就这样回报我！？我从此跟你断绝关系，泰勒。你不再是我<<taylorSon>>了！"<<he>>宣告道。悉尼开玩笑地满口脏话咒骂着你离开了。
+		<<else>>
+			悉尼完全被震惊到了。"你、你什么了？！"<<person1>><<He>>尝试跟着<<his>>感觉去即兴表演。"我是说……你怎么能！好吧，如果你愿意的话就抱着这个异教徒吧，我不管了！"悉尼噘着嘴，匆匆离开了舞台。<<npcincr Sydney love -2>><<llove "Sydney">>
+		<</if>>
+		<<npcincr Sydney purity -2>><<lspurity>>
+	<<case "Taylor">>
+		"你现在什么也干不了了，<<sterlingFather>>，"你宣布，"因为我跟卡斯已经订婚了，我们明年年初就结婚！"你吐出了舌头。
+		<<if $pregnancyspeechdisable is "f">>
+			"事实上，我们已经有了孩子。"你宣布道。
+			<<if playerBellyVisible()>>
+				你拍了拍你的<<bellyDescription "pc">>作为强调。
+			<<elseif !playerCanBreedWith($NPCList[1])>>
+				你懒得去质疑逻辑的合理性。
+			<</if>>
+		<</if>>
+		观众为你给表演增加了更加有趣的转折而欢呼。<<set $englishPlayApproval += 20>><<gapproval>><<promiscuity1>>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼笑了，愿意配着你玩一下。"没错！你得习惯着看这张脸了，因为从今以后你都会经常看到的！"<<he>>嘲弄道："希望你有子孙满堂的打算。"
+		<<else>>
+			悉尼疑惑地看向四周，"有……有吗？"<<person1>><<he>>问道，"我是说，对，确实！我们爱着对方，现在你干什么都无法分开我们。去你的，斯特林<<sterlingTitle>>！"
+		<</if>>
+		<br><br>
+
+		<<if $englishPlayKylarReplace>>
+			<<person2>><<person>>都迷惑地看着你，"你们两个蠢货都他妈不知道自己的台词吗？完美。"<<he>>说完就回到了后台。
+		<<else>>
+			<<if _kylarStatus.includes("MaxRage") or (_kylarStatus.includes("Rage") and _kylarStatus.includes("Love") and $sydneyromance is 1)>>
+				凯拉尔安静地站在台上。<<person2>><<He>>凝视着虚空，然后快速地把手伸向了自己的口袋。<span class="red"><<He>>拿出了一把刀，冲向了悉尼。</span>
+				<br><br>
+
+				"我受够你了，"凯拉尔咆哮道，"都是你的错。我们两个人过得这么幸福又愉快……但你，你非要在这露出你那丑陋的脸。我不会让你从我身边夺走<<phim>>的。"
+				<br><br>
+
+				<<if _sydneyStatus.includes("corrupt")>>
+					悉尼轻笑道："怎么？你打算捅死我吗？等报社知道了这事，第二天早上的新闻标题肯定会是《商人斯特林<<sterlingTitle>>，在圣诞前夜残忍杀害了一个年轻乞丐！》"
+					<<person1>><<Hes>>表现出一副无畏的表情，但你可以从<<hes>>后退中看出<<He>>事实上非常紧张。"我已经失去了这世上的一切，那么也把我的生命也夺走吧！"
+				<<else>>
+					悉尼震惊地后退了一步。然后盯着凯拉尔道："什……什么，你打算把我捅死？等报社知道了这事，第二天早上的新闻标题肯定得是《商人斯特林<<sterlingTitle>>，在圣诞前夜残忍地杀害了一个年轻乞丐！》"
+					<<person1>><<He>>没能藏得住<<his>>颤抖的声音，"我已经失去了这世上的一切，那么也把我的生命也夺走吧！"
+				<</if>>
+				<br><br>
+
+				<span class="red">凯拉尔向前扑去</span>，但在你能做任何事之前，悉尼又后退了一步，撞到了圣诞树。圣诞树来回摇晃着，然后正好倒在了<<person1>><<him>>正冲过来的凯拉尔身上。他们摔倒在一起，刀子哐当掉落在地，观众们倒吸了一口凉气。
+				<br><br>
+
+				你冲到他们身边，多伦看起来也打算跑向舞台。凯拉尔完全呆住了，不过悉尼试着朝你跟多伦竖起大拇指，作出"继续"的嘴型。<span class="green">你完全明白了接下来该怎么做。</span>
+				<br><br>
+
+				你跪倒在地。"不……不！我这辈子都没想要过什么，但在这个圣诞前夜，我唯一的愿望都被夺走了！卡斯……<<sterlingFather>>……"你加上了一些啜泣来增加戏剧性。
+				"这就是作为乞丐的感觉吗，卡斯？这就是失去一切，一无所有的感觉？"你捡起了刀子。"那样的话，我会在虚无中陪伴着你的，我的爱人……"
+				<br><br>
+
+				你用戏剧性的动作，假装殉情，把刀捅在了胸口和手臂之间。你发出了一声痛苦的呼喊，然后倒在了地上。舞台灯光变暗了，随后帷幕缓缓落下。
+				<br><br>
+
+				<span class="gold">观众们都站了起来，献上最热烈的掌声跟欢呼，整个大厅都被喝彩声充满了。</span><<set $englishPlayApproval += 40>><<gggapproval>><<set _tragedyAhAhAhAh to true>>
+			<<elseif _kylarStatus.includes("Rage") or (_kylarStatus.includes("Sus") and _kylarStatus.includes("Love") and $sydneyromance is 1)>>
+				"跟……跟这个妓女？！"凯拉尔大声说道，"为什么？<<person1>><<He>>永远都不会像我一样爱你！你为什么看不出来？"<<npcincr Kylar rage 5>><<ggksuspicion>>
+				<br><br>
+
+				观众们狂热地看着，没有意识到凯拉尔脱离了剧本。
+				"我尝试了一遍又一遍，来向你证明我究竟有多么爱你。但你始终都是把我撇在一边，把我当成垃圾一样。这……太让我……伤心了……"凯拉尔继续说道。<<person2>><<His>>声音变得颤抖，留下了眼泪。
+				<br><br>
+
+				<span class="gold">观众们站起身来鼓掌。</span>悉尼难以置信地看着观众，然后，加入了掌声。凯拉尔看起来很困惑，但最终还是振作了起来。<<set $englishPlayApproval += 20>><<gapproval>>
+				<br><br>
+
+				<<person2>><<He>>羞耻地看向了你俩，完全不知道怎么回应，<<person2>><<he>>最后冲向了后台。
+			<<else>>
+				凯拉尔羞耻地看向了你俩，完全不知道怎么回应，<<person2>><<he>>最后冲向了后台。<<npcincr Kylar rage 10>><<gggksuspicion>>
+			<</if>>
+		<</if>>
+	<<case "Sterling">>
+		"恐怕我不会允许，我的<<taylorSon>>，"你用严肃的语气说道，"听着，卡斯实际上是……你失散已久的亲人！"
+		<br><br>
+
+		观众们倒吸了一口凉气，完全没有预料到。<<if !$englishPlayKylarReplace>>凯拉尔开始惊恐地颤抖。<</if>><<set $englishPlayApproval += 15>><<gapproval>>
+		<br><br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			悉尼笑着配合道，"这是真的，我，是<<taylorSibling>>。我会回到家里，去拿回我应得的财产！"
+		<<else>>
+			悉尼惊恐地看向四周，惊呼道："什、什么？！我失散已久的……嗯？"
+		<</if>>
+		<br><br>
+
+		<<if $englishPlayKylarReplace>>
+			<<person2>><<person>>轻蔑地看着你，"这出戏不是这么演的，你个自作聪明的家伙。"<<he>>啐了一口："滚开。"
+		<<else>>
+			为了修正这已经失控了的表演，凯拉尔插话道，"你、你错了，<<sterlingFather>>！我唯一的同辈很多年前已经死了，因为你粗心而造成的事故！现在离我们远点！"
+		<</if>>
+		<br><br>
+
+		你赶紧开溜，现在这出戏彻底乱套了。你把凯拉尔和悉尼丢下，让他们去对付观众。
+<</switch>>
+<br><br>
+
+<<if _tragedyAhAhAhAh>>
+	当帷幕完全落下之后，多伦冲上了舞台，把圣诞树扶了起来，并检查凯拉尔跟悉尼有没受伤。
+	<br><br>
+
+	<<link [[谢幕|English Play Curtain Call Early]]>><<pass 10>><</link>>
+	<br>
+<<else>>
+	这一幕以斯特林<<sterlingTitle>>的离场结束。
+	帷幕落下。给了你们几人宝贵的几分钟休息时间。休息时间很快就过去了，随着帷幕再次拉开，最后一幕开始了。
+	<br><br>
+
+	<<link [[第三幕|English Play Act Three]]>><<pass 5>><</link>>
+	<br>
+<</if>>

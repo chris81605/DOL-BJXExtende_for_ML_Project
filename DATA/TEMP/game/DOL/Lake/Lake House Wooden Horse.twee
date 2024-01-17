@@ -1,0 +1,52 @@
+:: Lake House Wooden Horse 
+<<effects>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<set $previousPassage to "Lake House Basement">>
+	<<passoutlakehouse>>
+<<else>>
+	<<if $phase is 0>>
+		<<set $phase to 1>>
+		你在腿上绑上金属重物，然后慢慢爬上木马，你感觉到它在挤压你的胯部。
+		<<masopain 25>><<arousal 1200 "genitals">>
+		<br><br>
+	<<else>>
+		木马的尖菱深入你的胯部，在重力的作用下狠狠压迫着你的<<print ($player.ballsExist ? "睾丸" : "阴唇")>>。
+		<<masopain 20>><<arousal 1000 "genitals">>
+		<br><br>
+	<</if>>
+
+	<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+		<span class="green">你咬紧牙关忍受着痛苦。</span>
+		<<gwillpower>><<willpower 3>>
+		<br><br>
+
+		<<link [[忍受|$passage]]>><</link>>
+		<br>
+		<<link [[停止|Lake House Basement]]>><<set $phase to 0>><</link>>
+		<br>
+	<<elseif ((currentSkillValue('physique') / 160) + (currentSkillValue('willpower') / 10)) gte (($pain - 100) + random(1, 100))>>
+		太疼了，你实在忍受不住了，连忙从木马上起身，爬了下来。
+		<<ggwillpower>><<willpower 10>>
+		<br><br>
+
+		尽管十分疼痛，但你感觉自己得到了充足的宣泄。<<trauma -12>>
+		<br><br>
+
+		<<link [[继续|Lake House Basement]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		太疼了，你实在忍受不住了，<span class="red">你想从木马上起身，但胳膊却使不上力气。</span>
+		<<ggwillpower>><<willpower 10>><<masopain 25>>
+		
+		<<if $pain gte 200>>
+			<br><br>
+			<span class="red">强烈的疼痛几乎压垮了你。</span>
+			<<gggstress>><<stress 50>>
+		<</if>>
+
+		<br><br>
+
+		<<link [[继续|$passage]]>><</link>>
+	<</if>>
+<</if>>

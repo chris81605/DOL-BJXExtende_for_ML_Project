@@ -1,0 +1,35 @@
+:: Domus Model Pillory Wait []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<generate1>><<generate2>><<pass 30>>
+被锁在颈手枷上
+<<set $NPCList[0] to clone($model_host)>><<set $NPCList[1] to clone($model_dom)>><<unset $model_host>><<unset $model_dom>>
+<<if $phase is 0>>
+	<<if $stress gte (($stressmax / 5) * 3)>>
+		被利用，被虐待，无计可施，
+	<<else>>
+		被利用，被虐待，
+	<</if>>
+	你甚至无法掩饰，因为全班同学都在热切地描绘你。
+	<br>
+<<else>>
+	你瞪着他们，期待着进一步的侵犯。但是没有，他们似乎沉浸在绘画中了。
+	<br>
+<</if>>
+被堵住嘴，你甚至不能抱怨。你没有选择，只能等待。每隔一段时间，<<person1>><<person>>就会出现。
+在你面前摆着另一幅你被虐待的画。
+<<gstress>><<stress 1>>
+<br><br>
+<<person1>><<person>>最终结束谈话。<<person2>><<person>><<print either("轻轻拍打你的屁股","快速挤压你的乳头","把你的头发往后拉，轻轻地吻你的额头")>>
+然后把你从枷锁中解脱出来，<<himself>>忙着整理舞台。美术课收工了。
+<br><br>
+
+<<person1>><<person>>帮你解开口球，同时带着你离开了房间。
+<br>
+"好一场演出！"你一走到走廊的隐私处，<<he>>就开始赞叹不已。"你很出色。我想他们中的大多数人都相信这是真的。我的意思是，这是一个老生常谈的问题——
+'模特工作失控了'——但你和你的搭档真的很有说服力。我自己都要信了——即使我们先前已经花了那么多
+时间在电话上安排这件事。这样的化学反应！这样的演技！令人瞩目的……你会发现一点额外的工资。"
+<br><br>
+<<He>>向浴室挥手。"慢慢来吧。你今天表现得很好。哇。"
+<<lstress>><<stress -2>>
+<br><br>
+<<link [[进入浴室|Domus Model Rape End]]>><<set $worn.face.type.push("broken")>><<faceruined>><<endevent>><<unbind>><</link>>

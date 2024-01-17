@@ -1,0 +1,26 @@
+:: Pirate Cabin []
+<<location "seapirates">><<set $outside to 0>><<effects>>
+
+你在海盗船的船舱里。
+<<if Time.dayState is "night">>
+	里面全是打呼噜的船员。
+<<else>>
+	地面来回摇晃。
+<</if>>
+<br><br>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutpirates>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<events_pirates_cabin>>
+	<<else>>
+
+
+	<<link [[甲板 (0:01)|Pirate Deck]]>><</link>>
+	<br>
+	<<link [[舱底 (0:01)|Pirate Bilge]]>><<pass 1>><</link>>
+	<br>
+
+	<</if>>
+<</if>>

@@ -1,0 +1,185 @@
+:: Maths Project Stim []
+<<effects>>
+你服用了兴奋剂后，坐了下来，然后开始工作。
+<<set _chair to Furniture.get('chair')>>
+<<if $location is "home" and _chair.type.includes("comfy")>>
+	有了药物和<span class="green">舒适的</span>椅子，你比以往任何时候都更容易集中精力完成项目。
+<<else>>
+	你的注意力高度集中，但<span class="red">不舒服的</span>椅子带来的轻微酸痛使兴奋剂的效果大打折扣。
+<</if>>
+<<if $mathschance lte 9>>
+	数学对你来说是全新的领域，但在兴奋剂的刺激下，你的头脑变得更加敏锐，你可以弄懂基本的数学知识。
+<<elseif $mathschance lte 24>>
+	在兴奋剂的帮助下，你可以看到完成项目所需的所有步骤。
+<<elseif $mathschance lte 44>>
+	项目的基础工作已经完成，现在你准备完成其余的部分。
+<<elseif $mathschance lte 69>>
+	虽然你的项目大体上令人满意，但在你看来还有很多地方需要改进。
+<<else>>
+	此时，剩下的就是打磨那些小瑕疵，直到项目完美。
+<</if>>
+<<if $location is "home">>
+	<<if Time.hour lte 2>>
+		时间飞逝，当你反应过来，才发现午夜已经过去，新的一天已经开始。
+	<<elseif Time.hour lte 3>>
+		孤儿院静悄悄的。
+	<<elseif Time.hour lte 5>>
+		你是如此专注于你的工作，以至于当太阳从地平线上升起时，你才惊讶地反应过来。
+	<<elseif Time.hour lte 7 and Time.schoolDay>>
+		你对工作的专注是坚不可摧的，即使贝利敲门叫醒你去上学。
+	<<elseif Time.hour lte 7>>
+		你可以听到孤儿院的其他居民起床和离开的声音，你可以很容易就忽略这些声音。
+	<<elseif Time.hour lte 12 and Time.schoolDay>>
+		你可能会逃课，但是你在工作中学到很多东西。
+	<<elseif Time.hour lte 12>>
+		一天的时间在你工作的时候飞逝而过。
+	<<elseif Time.hour lte 14 and Time.schoolDay>>
+		你听到孤儿院的其他孩子放学回家的声音，但这并没有打断你的注意力。
+	<<elseif Time.hour lte 14>>
+		你知道孤儿院的其他住户晚上都要回家了，但你还是继续工作。
+	<<elseif Time.hour lte 16>>
+		当下午渐渐进入傍晚时，你可以毫不费力地屏蔽孤儿院的活动声音。
+	<<elseif Time.hour lte 18>>
+		孤儿院里的声音渐渐安静下来，因为其他住户都已入睡，但你仍然像之前一样快速工作。
+	<<elseif Time.hour lte 20>>
+		你是如此专注于你的工作，以至于当太阳从地平线上落下时，你才惊讶地反应过来。
+	<<else>>
+		这个时候孤儿院很安静。你专注于工作。
+	<</if>>
+<<else>>
+	<<if Time.schoolDay>>
+		<<if Time.hour lte 6>>
+			你通宵达旦地工作。偶尔需要躲在桌子下面以避开巡查，但这并不会影响你的注意力。
+		<<elseif Time.hour lte 7>>
+			在你工作的时候，你几乎没有注意到晨光从图书馆的窗户爬进来。
+		<<elseif Time.hour lte 8>>
+			其他学生在你工作时到达。你忽略了他们的存在。
+		<<elseif Time.hour lte 11>>
+			你可能会逃课，但是你在工作中学到很多东西。
+		<<elseif Time.hour lte 12>>
+			在你工作的时候，图书馆里挤满了来寻求自己解决方案的学生。你发现忽略他们是一件很容易的事情。
+		<<elseif Time.hour lte 14>>
+			你可能会逃课，但是你在工作中学到很多东西。
+		<<elseif Time.hour lte 16>>
+			你不会因为其他学生熬夜追求自己的解决方案而分心。
+		<<elseif Time.hour lte 18>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 21>>
+			当你工作时，你几乎没有注意到天空变暗。
+		<<else>>
+			你通宵达旦地工作。偶尔需要躲在桌子下面以避开巡查，但这并不会影响你的注意力。
+		<</if>>
+	<<else>>
+		<<if Time.hour lte 6>>
+			你通宵达旦地工作。偶尔需要躲在桌子下面以避开巡查，但这并不会影响你的注意力。
+		<<elseif Time.hour lte 7>>
+			在你工作的时候，你几乎没有注意到晨光从图书馆的窗户爬进来。
+		<<elseif Time.hour lte 8>>
+			在你工作的时候，你几乎没有注意到晨光从图书馆的窗户爬进来。
+		<<elseif Time.hour lte 11>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 12>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 14>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 16>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 18>>
+			一天的时间在你工作的时候飞逝而过。
+		<<elseif Time.hour lte 21>>
+			当你工作时，你几乎注意不到图书馆窗外渐暗的灯光。
+		<<else>>
+			你通宵达旦地工作。偶尔需要躲在桌子下面以避开巡查，但这并不会影响你的注意力。
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+<<if $mathsstimused is 2 or $mathsstimused gte 4 and $rng gte 75>>
+	你坐下来欣赏你的工作。你感到皮肤下面有一种奇怪的热度。它生长并扩散到你的全身，集中在你的腰部。淫荡的幻想强行进入你的脑海。不一会儿，你脸颊泛红，发现自己正因为欲望而坐立不安。那兴奋剂肯定是被浓缩的催情剂污染了。
+	<<gggarousal>><<arousal 10000>><<drugs 500>>
+	<br><br>
+	你的双手在两腿之间游走，本能地试图满足你强烈的欲望。但触摸自己的刺激太强烈了，让人无法承受。这种快感在你体内喷射，强烈得令人痛苦。你的手退缩了，你的整个身体抽搐，你的眼前一片空白。余震让你颤抖。看来用你的手来安慰自己是不可行的。
+	<br><br>
+	你考虑着是否要离开你的房间去呼吸一些新鲜空气。但你被欲望冲昏了头脑。你可以想象当别人发现你毫无防备时会发生什么。而另一种选择，呆在这里，试着忍受这种性奋直到它消失，虽然你感觉可能会更糟。
+	<br><br>
+	<<if $location is "home">>
+		<<link [[忍耐 (4:00)|Maths Project Endure Home]]>><<pass 240>><<stress 24>><</link>><<ggstress>>
+		<br>
+		<<link [[出门|Maths Project Outside Home]]>><</link>>
+		<br>
+	/* 北极星模组 */
+	<<elseif $location is "lakehouse">>
+		<<link [[忍受 (4:00)|Maths Project Endure Lake House]]>><<pass 240>><<stress 24>><</link>><<ggstress>>
+		<br>
+		<<link [[出门|Maths Project Outside Lake House]]>><</link>>
+		<br>
+	/* 北极星 */
+	<<else>>
+		<<link [[忍耐 (4:00)|Maths Project Endure Library]]>><<pass 240>><<stress 24>><</link>>
+		<br>
+		<<link [[出去|Maths Project Outside Library]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $mathsstimused is 3 or $mathsstimused gte 4 and $rng gte 50>>
+    /* 北极星模组 */
+    你坐下来欣赏自己的成果，但有些地方不对劲。<<if $location is "home" or $location is "lakehouse">>你的房间<<else>>图书馆<</if>>中的物体开始移动和扭曲，布满奇怪的图案。你失去了平衡感，摇摇晃晃差点摔倒。这支兴奋剂一定是被浓缩的致幻剂污染了，然而即使知晓这些也无济于事，眼前的幻觉无法消失。
+	<<hallucinogen 500>>
+	<br><br>
+	<<if $location is "home" or $location is "lakehouse">>你想躺下，但还没来得及躺到床上，<<else>>你决定出去散散步，清醒一下头脑，但当你从椅子上站起来的那一刻，<</if>>周围的环境就变得扭曲而陌生。你跌跌撞撞地前行，寻找熟悉的东西依托，黑暗中无数充满威胁的形状在你周围移动，无数长着巨眼和惊悚舌头的怪异生物在远处注视着你，发出叽里咕噜的声音。地板开始液化，吞噬着你的脚踝、膝盖、腰部。最后你完全陷入进去，在一片漆黑的虚空中翻来覆去。
+	<br><br>
+	<<if $location is "home">>
+		<<set $bus to "residential">>
+	<<else>>
+		<<set $bus to "industrial">>
+	<</if>>
+	<<if $location is "lakehouse">>
+		<<link [[继续|Maths Project Void Lake]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Maths Project Void]]>><</link>>
+		<br>
+	<</if>>
+	/* 北极星 */
+<<elseif $mathsstimrobin isnot 1 and Time.schoolDay and Time.dayState isnot "night" and $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $location is "home">>
+	<<set $mathsstimrobin to 1>>
+	<<npc Robin>><<person1>>
+	你坐下来欣赏你的作品。你感到皮肤下有一股奇怪的热量。你的视线变得模糊，一切都变成了黑色。
+	<<ggarousal>><<arousal 1800>><<drugs 120>><<hallucinogen 120>>
+	<br><br>
+	你醒来时发现有人在摇你的胳膊。你躺在床上，罗宾皱着眉头坐在你身旁。
+	<br><br>
+	"你躺在外面的地板上，"<<he>>说道。<<He>>声音中包含着担忧，"你还好吗？"
+	<br><br>
+	<<if $robinromance is 1>>
+		那种奇怪的热度还没有离开你的身体。罗宾就贴在你身边。
+		<br><br>
+		<<link [[你把罗宾拉到身上|Maths Project Robin Sex]]>><<set $sexstart to 1>><</link>><<promiscuous1>>
+		<br>
+	<</if>>
+	<<link [[说你没事|Maths Project Robin]]>><</link>>
+	<br>
+<<else>>
+	你坐下来，欣赏你的成果。你感受到皮肤下有一种奇怪的热量。
+	<<ggarousal>><<arousal 1800>><<drugs 120>><<hallucinogen 120>>
+	<br><br>
+	<<if $mathsproject is "ongoing">>
+		<<link [[继续|Maths Project]]>><</link>>
+		<br>
+	<<else>>
+		你看了看时间，突然意识到<span class="red">数学竞赛已经结束了。</span>
+		<br><br>
+		在这个时候继续钻研下去的话是很愚蠢的，你将这个已经过时的项目扔进了垃圾桶，并对浪费的精力和时间感到烦躁。
+		<br><br>
+
+		<<if $location is "home">>
+			<<link [[继续|Bedroom]]>><</link>>
+		/* 北极星模组 */
+		<<elseif $location is "lakehouse">>
+			<<link [[继续|Lake House Bedroom]]>><</link>>
+		/* 北极星 */
+		<<else>>
+			<<link [[继续|School Library]]>><</link>>
+		<</if>>
+		<br>
+	<</if>>
+<</if>>

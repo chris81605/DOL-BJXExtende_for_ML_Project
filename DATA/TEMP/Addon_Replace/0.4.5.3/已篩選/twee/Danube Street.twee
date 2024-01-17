@@ -1,0 +1,126 @@
+:: Danube Street []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">><<getTarget true>>
+你正待在多瑙河街的大街上，这里的房子大多宽敞而庄严。
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		人们因为大雨而不得不躲在室内。
+	<<elseif $weather is "snow">>
+		人们因为大雪而不得不躲在室内。
+	<<else>>
+		你可以听到围墙后面传来的声音。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		人们中匆忙地从豪宅走入雨中，然后快速地进入豪车当中。
+	<<elseif $weather is "snow">>
+		偌大的园圃在清晨的雪地上看起来如诗如画。
+	<<else>>
+		你可以透过窗户看到某些人正在运动。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		上方的雨云早早地投下了它的影子。
+	<<elseif $weather is "snow">>
+		雪在夜幕的掩护下缓缓地下了起来。
+	<<else>>
+		那些东西在昏暗的灯光下投下令人毛骨悚然的阴影。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		你能看到来自窗户的光斑，那离马路还很远。
+	<<elseif $weather is "snow">>
+		光线穿过那些华丽的窗户，径直地投射到雪地上。
+	<<else>>
+		从窗户中透出的光线几乎无法缓解黑暗。
+	<</if>>
+<</if>>
+<<if $halloween is 1>>
+一些家庭置办了奢侈的万圣节装饰。
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "street">>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "danube">>
+			<br>
+		<</if>>
+		/* 北极星模组 */
+		<<if $TaylorFreed is 1 and $TaylorReward is undefined and Time.dayState is not "night">>
+			你看到泰勒正站在一栋房子门前朝你招手。
+			<br><br>
+			<<link [[走向泰勒|Taylor Meeting After Freed]]>><</link>>
+			<br>
+		<</if>>
+		/* 北极星 */
+		可访问地点
+		<br>
+		<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><<set $forest to 0>><<set $eventskip to 1>><</link>>
+		<br>
+		<<if $exposed lte 0 and $openinghours is 1>>
+			<<spaicon>><<link [[水疗中心 (0:02)|Spa]]>><<pass 2>><</link>>
+			<br>
+		<<elseif $openinghours is 0>>
+			<<spaicon>><<link [[水疗中心 (0:02)|Spa Lock]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if $syndromekylar gte 1>>
+			<<kylarmanoricon>><<link [[凯拉尔的庄园 (0:02)|Manor Garden]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if $exhibitionismrun is "danube" and $exposed lte 1>>
+			<<oakicon>><<link [[水疗中心的后门橡树 (0:02)|Danube Challenge]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		/* 北极星模组 */
+		<<if $TaylorFreed gte 1 and $TaylorReward is 1 and Time.dayState isnot "night">>
+			<<dooricon "danube">><<link [[泰勒的家 (0:02)|Taylor Meeting]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		/* 北极星 */
+		<<if Time.dayState is "night">>
+			<<dooricon "danube">><<link [[接近其中一间房子 (0:02)|Danube House Lock]]>><<pass 2>><</link>>
+			<br>
+		<<elseif $exposed lte 0>>
+			<<dooricon "danube">><<link [[敲其中一间房子的门 (0:02)|Danube House Knock]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "其他区域<br>">><<hideDisplay>>
+			<<domus>>
+			<<wolf>>
+			<<connudatus>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			/* 北极星模组 */
+			<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+				<<flywait>>
+			<</if>>
+			/* 北极星 */
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+		<<residential>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "danube">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

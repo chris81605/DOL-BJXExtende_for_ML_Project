@@ -1,0 +1,62 @@
+:: Chalets Work One Charge []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+"你可以摸，"你说，"但你得付钱。"
+<<elseif $speech_attitude is "bratty">>
+"别碰我，"你告诉他。"除非你付得起钱。"
+<<else>>
+"这项服务是额外的，”你说。
+<</if>>
+<br><br>
+<<rng>>
+<<if $rng gte 91>>
+<<person>>给了你<span class="gold">£60</span>。
+    <br><br>
+"既然这样，"<<he>>说，"那我也要完整服务，也就是说，包装也给我拆了吧。"
+    <br><br>
+    <<if $promiscuity gte 75>>
+<<link [[同意|Chalets Work One Sex Start]]>><</link>><<promiscuous5>>
+        <br>
+    <<elseif $uncomfortable.prostituting is false>>
+<<link [[同意|Chalets Work One Sex Start]]>><<set $desperateaction to 1>><<trauma 6>><<stress 6>><</link>><<promiscuous5>><<gtrauma>><<gstress>>
+        <br>
+    <<else>>
+<span class="blue">你还没有淫乱到可以接受<<his>>的提议。</span>
+        <br>
+    <</if>>
+<<link [[拒绝|Chalets Work One Sex Refuse]]>><</link>>
+<<elseif $rng gte 61>>
+这个<<person>>出给你<span class="gold">£50</span>。
+    <br><br>
+"既然如此，"<<he>>说道，"你也不妨用用你的那张小嘴。"
+    <br><br>
+    <<if $promiscuity gte 55>>
+<<link [[同意|Chalets Work One Oral Start]]>><</link>><<promiscuous4>>
+        <br>
+    <<elseif $uncomfortable.prostituting is false>>
+<<link [[同意|Chalets Work One Oral Start]]>><<set $desperateaction to 1>><<trauma 6>><<stress 6>><</link>><<promiscuous4>><<gtrauma>><<gstress>>
+        <br>
+    <<else>>
+<span class="blue">你还没有淫乱到可以接受<<his>>的提议。</span>
+        <br>
+    <</if>>
+<<link [[拒绝|Chalets Work One Sex Refuse]]>><</link>>
+<<else>>
+这个<<person>>出给你<<moneyGain 40>>。
+"我会让我的钱花得值的。"<<he>>说道。
+    <br><br>
+    <<if $arousal gte $arousalmax>>
+你试图忍受<<persons>>的动手动脚和挤压，但要去忍耐这个太难了。
+        <br><<orgasm>>
+
+"我就知道你会很享受的，"<<person>>坏笑着放开了你，给你的屁股来了个告别拍打。
+    <<else>>
+你忍受着<<persons>>的抚摸和揉捏，直到<<he>>最终放开你，给你的屁股来了个告别拍打。
+    <</if>>
+
+    <br><br>
+<<tearful>>你一把拿走钱，离开了小木屋。
+    <br><br>
+<<link [[继续|Chalets]]>><<endevent>><</link>>
+<</if>>

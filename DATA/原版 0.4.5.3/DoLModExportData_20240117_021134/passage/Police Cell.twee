@@ -1,0 +1,78 @@
+:: Police Cell []
+/*Punishment explanation:
+First time caught with crime gte 5000: Pillory.
+Caught additional times with crime above 5000: Prison.
+Caught with crime lt 5000: Community service.
+Caught with crime lt 5000 while already performing community service: Pillory. */
+
+<<set $outside to 0>><<set $location to "police_station">><<effects>>
+你坐在脏兮兮的床上等着。
+<br><br>
+一小时后，穿着警察制服的<<generatePolice 1>><<person1>><<person>>来到牢房外。"过来办个手续。"<<he>>说着，打开了牢房的门。"转过身。"
+<br><br>
+<<if $worn.neck.collared isnot 1>>
+	<<neckwear 21>>
+	你顺从了，随后听到<<him>>从<<his>>的腰带上取下了什么东西。<<He>>把它系在你的脖子上，然后你听到咔哒一声。"这个项圈有电击功能，只是为了确保你能老老实实的。一旦你服刑结束，我们就会把它取下来。"
+	<br><br>
+<<else>>
+	你顺从了。"哦，"<<he>>说，"你已经戴上项圈了啊。"<<He>>走到你身后，更仔细地检查项圈。"而且电击功能也没有问题。"<<He>>系上皮带。"一切正常。一旦你服刑结束，我们就会把它取下来。"
+	<br><br>
+<</if>>
+<<set $worn.neck.collaredpolice to 1>>
+<<He>>带你走上另一段楼梯，进入了一个小房间。三个西装革履的人坐在远处的桌子旁。坐在中间的<<generatePolice 2>><<person2>><<person>>指着<<him>>身前的椅子。"坐下，"<<he>>说道："别耽搁了。"<<person1>><<person>>跟着你进来，在你身后关上了门。
+<br><br>
+
+<<if crimeSumCurrent() gte 5000>>
+	<<if $stat_police.pillory gte 1>>
+		一旦安坐下来，<<person2>><<person>>就开口了。"你真是个调皮的<<girl>>……一位无可救药的罪犯。"
+		<<He>>开始朗读你的罪行。
+		<br><br>
+		<<crimeParade>>
+		<br>
+
+		"<span class="red">也许入狱一阵才能使你改邪归正。</span>我判你入狱<span class="red"><<print Math.trunc(crimeSumCurrent() / 250)>></span>天。"<<He>>给面前的文件盖章。"现在把这个混蛋从我面前带走。"
+		<br><br>
+
+		<<link [[继续|Police Prison Intro]]>><</link>>
+		<br>
+	<<else>>
+		一旦安坐下来，<<person2>><<person>>就开口了。"你以为你能躲得过法律吗？下次犯罪时学聪明点吧。"
+		<<He>>开始朗读你的罪行。
+		<br><br>
+		<<crimeParade>>
+		<br>
+		"然而这些只是轻微犯罪，所以当众羞辱会是恰当的惩罚。把<<phim>>带上颈手枷。"
+		<br><br>
+		<<link [[继续|Police Pillory Start]]>><<set $stat_police.pillory += 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $community_service gte 1>>
+		一旦安坐下来，<<person2>><<person>>就开口了。"我们已经给你改过自新的机会了，但你就是忍不住对吧？"
+		<<He>>开始朗读你的罪行。
+		<br><br>
+		<<crimeParade>>
+		<br>
+		"让这家伙感受一下群众们的温暖热心……送<<phim>>去颈手枷。"
+		<br><br>
+		<<link [[继续|Police Pillory Start]]>><<set $stat_police.pillory += 1>><</link>>
+		<br>
+	<<else>>
+		<<person2>><<person>>一入位就开始朗读你的罪行。
+		<br><br>
+		<<crimeParade>>
+		<br>
+		"这些只是轻微犯罪。你将被给予赎罪并回报社会的机会。<span class="pink">从明天起，你必须每天向警察局报告。</span>你会在那被分发服务任务。将会花你一个小时。你可以在白天的任何时间到达。"
+		<br><br>
+		"因这些罪行
+		<<set _service to Math.trunc(crimeSumCurrent() / 200)>>
+		社区服务<span class="pink">_service天</span>。如果你不悔改，或者不完成社区服务，就会受到更严厉的惩罚。带<<phim>>出去。"
+		<br><br>
+		<<set $community_service to _service>>
+		<<set $community_service_done to 1>>
+
+
+		<<link [[继续|Police Community Start]]>><<set $stat_police.community += 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

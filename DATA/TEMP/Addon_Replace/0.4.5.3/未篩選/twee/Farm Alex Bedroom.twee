@@ -1,0 +1,124 @@
+:: Farm Alex Bedroom []
+<<set $wardrobe_location to "farm alex bed">>
+<<effects>><<getTarget true>>
+<<wearoutfit>>
+<<farm_work_update>>
+你在艾利克斯的卧室里。这里和你的卧室很像，衣服从衣柜里滚落，桌子上乱七八糟。这扇窗户能俯瞰大路和远处的荒原。
+<br><br>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutfarmroad>>
+
+<<elseif npcIsPregnant("Alex") and !talkedAboutPregnancy("Alex","pc") and npcBellySize("Alex") gte 1>>
+	<<alex_cottage_pregnancy_reveal>>
+
+<<else>>
+	<<if $farm_attack_timer is 0 and Time.hour gte 21 and !$possessed>>
+		<<npc Alex>><<person1>>
+		你听到了喊叫。艾利克斯闩上了门。<span class="red">"<<nnpc_Hes Remy>>来了，"</span><<he>>说道，"是雷米，我们可以做到的。去准备一下，我去
+		<<if $farm.tower_guard>>
+			提醒一下$farm.tower_guard。"
+		<<else>>
+			看看能不能定位到他们的位置。"
+		<</if>>
+		<br><br>
+
+		<<farm_assault_intro>>
+		<br><br>
+
+		<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 3>><</link>>
+		<br>
+	<<elseif Time.hour is 21 and $alex_to_bed is undefined and !$possessed>>
+		<<set $alex_to_bed to 1>>
+		一天的劳累结束，艾利克斯打了个哈欠，爬上了床。
+		<br><br>
+
+	<<elseif Time.dayState is "night" and $alex_bed is undefined>>
+		<<npc Alex>><<person1>>
+		艾利克斯在床上打着鼾。
+		<<if Time.hour is 5>>
+			<br><br>
+			<<set $alex_bed to "none">>
+			<<He>>把被单扔到地板上。<<covered>>"早餐时间，"<<he>>打了个哈欠。
+			<<if $daily.alex.bedOrgasm>>
+				过了一会儿，<<he>>转向你，脸红了。"我昨晚应该听到了什么声音。算、算了，忘了我说的吧。"
+			<</if>>
+			<<if $exposed gte 1>>
+				<<He>>离开房间时，假装没有偷看。<<glust>><<npcincr Alex lust 1>>
+			<<else>>
+				<<He>>离开了房间，你听到楼梯在<<his>>脚下嘎吱作响。
+			<</if>>
+		<</if>>
+		<<endevent>>
+		<br><br>
+
+	<<elseif $farm_work.alex is "admin" or ($farm_work.alex is "clearing" and $farm_stage is 12) and !$possessed>>
+		<<npc Alex>><<person1>>
+		艾利克斯坐在<<his>>的办公桌前，面前是一台打开的笔记本电脑和一沓文件，正打着电话。
+		<<if $exposed gte 1>>
+			<<He>>努力不被你的猥亵行为分心，但还是忍不住时不时偷瞄几眼。<<npcincr Alex lust 1>><<glust>>
+		<</if>>
+		<br><br>
+
+		<<if $arousal gte $arousalmax>>
+			<<orgasmLocation "alexFarmAdmin">>
+		<</if>>
+		<<endevent>>
+
+		<<if playerIsPregnant() and playerAwareTheyArePregnant() and getPregnancyObject().potentialFathers.find(s => s.source === "Alex") and (C.npc.Alex.pregnancy.knowledge isnot true or C.npc.Alex.pregnancy.test is true)>>
+			<<pcPregnancyRevealToAlex>>
+		<</if>>
+
+		<<officeicon>><<link [[提供帮助 (1:00)|Farm Alex Admin]]>><<pass 60>><<npc Alex>><<person1>><<npcincr Alex love 1>><<stress 6>><</link>><<skill_difficulty `currentSkillValue("maths")` "数学" 1 1000>><<glove>><<gstress>>
+		<br>
+		<<if $alex_countdown is undefined and $NPCName[$NPCNameList.indexOf("Alex")].love gte 80>>
+			<<officeicon>><<link [[拥抱艾利克斯 (0:30)|Farm Phone Cuddle]]>><<pass 30>><<npc Alex>><<person1>><<npcincr Alex love 1>><</link>><<glove>>
+			<br>
+		<</if>>
+		<<if $promiscuity gte 55 and !$daily.alex.adminOral>>
+			<<officeicon>><<link [[爬到桌子下面|Farm Alex Admin Crawl]]>><<npc Alex>><<person1>><<set $daily.alex.adminOral to true>><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<if checkSextoysGift("Alex") and isLoveInterest("Alex") and checkIfNPCHasCategorySextoy("Alex","strap-on").length <= 5>>
+			<<sextoysicon "strap-on">><<link [[送艾利克斯一个假阳具|Alex Gift Strap-on]]>><<npc Alex>><<person1>><</link>>
+			<br>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $farm_stage gte 7>>
+		这里有一张桌子。你可以安排农场项目。
+		<br>
+		<<officeicon>><<link [[坐在桌子前|Farm Upgrades]]>><</link>>
+		<br><br>
+	<</if>>
+	<<if $earSlime.event and $earSlime.noSleep>>
+		<<if $possessed>>
+			<span class="red">你脑袋里的史莱姆很安静。</span>
+		<<else>>
+			<span class="red">史莱姆想要你在上床睡觉前<<print $earSlime.event.replace("go commando","裸奔").replace("have sex with someone or something","与某人或者某物做爱").replace("only sleep naked from now on","现在开始裸睡").replace("have sex with someone","与某人做爱").replace("go running or swimming naked","裸跑或者裸泳").replace("steal something","偷东西").replace("go running or swimming","跑步或者游泳").replace("study at the school library while naked","在学校图书馆裸体学习").replace("for an hour","一个小时").replace("for two hours","两个小时").replace("only wear","穿一会").replace("feminine","女装").replace("masculine","男装").replace("clothes for a while","").replace("ejaculate into someones vagina","在某人小穴里射精").replace("masturbate and orgasm at least","自慰并且高潮至少").replace("ten times","十次").replace("five times","五次").replace("get sperm into your" ,"用精液填满你的").replace("vagina","小穴").replace("anus","菊穴").replace(" ","")>>。</span>
+		<</if>>
+		<br>
+	<<elseif $alex_bed_spurned isnot 1>>
+		<<bedicon "yellow">><<link [[脱光并爬到艾利克斯床上|Farm Alex Bed]]>><<undressSleep "farm alex bed">><</link>>
+		<br>
+		<<if $earSlime.alwaysSleepNaked is false>>
+			<<bedicon "yellow">><<link [[爬到艾利克斯床上|Farm Alex Bed]]>><</link>>
+		<<else>>
+			<<if $possessed>>
+				<span class="red">史莱姆很安静。</span>
+			<<else>>
+				<span class="red">史莱姆不允许你穿着衣服睡觉。</span>
+			<</if>>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+	<<if $nextPassageCheck is "Farm Bedroom">>
+		<span class="nextLink"><<link [[你的房间 (0:01)|Farm Bedroom]]>><<pass 1>><</link>></span>
+	<<else>>
+		<<bedicon>><<link [[你的房间 (0:01)|Farm Bedroom]]>><<pass 1>><</link>>
+	<</if>>
+	<br>
+	<<main_hall_icon>><<link [[下楼 (0:01)|Farm Cottage]]>><<pass 1>><</link>>
+	<br>
+<</if>>

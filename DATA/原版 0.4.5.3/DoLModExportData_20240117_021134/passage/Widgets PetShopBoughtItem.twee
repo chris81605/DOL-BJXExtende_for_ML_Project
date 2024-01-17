@@ -1,0 +1,27 @@
+:: Widgets PetShopBoughtItem [widget]
+<<widget "PetShopBoughtItem">>
+	<<if $boughtItem isnot undefined>>
+		<<set _container to $container.home>>
+		<<switch $boughtItem>>
+		<<case "Small Fish Tank">>
+			<<set $money -= 20000>><<set _container.upgrades.capacity to 1>><<set _container.maxCount to 2>><<set _container.name to "小鱼缸">>
+		<<case "Fish Tank">>
+			<<set $money -= 50000>><<set _container.upgrades.capacity to 2>><<set _container.maxCount to 3>><<set _container.name to "鱼缸">>
+		<<case "Large Fish Tank">>
+			<<set $money -= 100000>><<set _container.upgrades.capacity to 3>><<set _container.maxCount to 4>><<set _container.name to "大鱼缸">>
+		<<case "Huge Fish Tank">>
+			<<set $money -= 500000>><<set _container.upgrades.capacity to 4>><<set _container.maxCount to 5>><<set _container.name to "超大鱼缸">>
+		<<case "Small Automatic Feeder">>
+			<<set $money -= 50000>><<set _container.upgrades.foodStorage to 1>><<set _container.maxDaysWithoutFood to 7>><<set _container.feederName to "小型自动喂食器">>
+		<<case "Automatic Feeder">>
+			<<set $money -= 150000>><<set _container.upgrades.foodStorage to 2>><<set _container.maxDaysWithoutFood to 14>><<set _container.feederName to "自动喂食器">>
+		<<case "Large Automatic Feeder">>
+			<<set $money -= 750000>><<set _container.upgrades.foodStorage to 3>><<set _container.maxDaysWithoutFood to 30>><<set _container.feederName to "大型自动喂食器">>
+		<<case "Standard Decorations">>
+			<<set $money -= 500000>><<set _container.upgrades.luxury to 1>><<set _container.decorations to "标准装饰">>
+		<<case "Exotic Decorations">>
+			<<set $money -= 1500000>><<set _container.upgrades.luxury to 2>><<set _container.decorations to "异国风情的装饰">>
+		<</switch>>
+		<<unset $boughtItem>>
+	<</if>>
+<</widget>>

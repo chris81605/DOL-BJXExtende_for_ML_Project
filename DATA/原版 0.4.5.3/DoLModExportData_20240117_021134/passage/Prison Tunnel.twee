@@ -1,0 +1,39 @@
+:: Prison Tunnel []
+<<effects>>
+
+<<if $prison.tunnel gte 120>>
+	你向隧道深处窥视，天空则回望你。
+	<br><br>
+
+	<<link [[爬到边缘 (0:03)|Prison Tunnel Edge]]>><<pass 3>><</link>>
+	<br>
+<<else>>
+	<<if $prison.tunnel gte 80>>
+		隧道延伸至黑暗之中。
+	<<elseif $prison.tunnel gte 40>>
+		隧道穿过监狱围墙，延伸至岛上的天然岩石。
+	<<elseif $prison.tunnel gte 20>>
+		短距隧道穿透了监狱围墙。
+	<<elseif $prison.tunnel gte 10>>
+		墙上的洞的宽度已经足以容纳你的身体。
+	<<else>>
+		墙壁裂开了。
+	<</if>>
+	<br><br>
+	<<for _i to 1; _i lt 9; _i++>>
+		<<if _i is 1>>
+			<<getouticon "dig">><<link [[挖1小时|Prison Tunnel Dig]]>><<set $prison_dig to 1>><</link>><<gtiredness>>
+			<br>
+		<<else>>
+			<<capture _i>>
+				<<getouticon "dig">><<link [["挖" + _i + "小时"|Prison Tunnel Dig]]>><<set $prison_dig to _i>><</link>><<gtiredness>>
+				<br>
+			<</capture>>
+		<</if>>
+	<</for>>
+
+<</if>>
+
+
+<<getouticon>><<link [[离开|Prison Cell]]>><</link>>
+<br>

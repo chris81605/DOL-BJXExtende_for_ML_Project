@@ -1,0 +1,25 @@
+:: Danube House Lock []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">><<set $lock to 300>>
+这扇门正紧锁着。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<link [[闯入 (0:05)|Danube House Sneak]]>><<pass 5>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span>
+	<<skulduggeryrequired>>
+	<br><br>
+<</if>>
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Danube House Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<link [[离开|Danube Street]]>><</link>>
+<br>

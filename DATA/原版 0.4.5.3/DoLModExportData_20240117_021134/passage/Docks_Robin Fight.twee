@@ -1,0 +1,22 @@
+:: Docks_Robin Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>><<set $enemyanger += 80>>
+	你跳上船。"好<<girl>>，现在——"你打断<<him>>，一拳砸在了<<his>>愚蠢的脸上。
+	<<set $enemyhealth -= 20>>
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Docks_Robin Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Docks_Robin Fight]]>><</link>></span><<nexttext>>
+<</if>>

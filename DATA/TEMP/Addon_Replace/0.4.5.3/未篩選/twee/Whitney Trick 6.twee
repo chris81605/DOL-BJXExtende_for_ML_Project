@@ -1,0 +1,30 @@
+:: Whitney Trick 6 []
+<<set $outside to 0>><<set $location to "park">><<effects>>
+<<npc Whitney>><<person1>>
+你听到警笛声。惠特尼抓住你的胳膊，把你推向一条小巷。"反正我们都腻了，"'<<he>>提出了下个目的地，"我们去公园吧。"
+<br><br>
+
+你穿过小街和小路，穿过康努达塔斯街和商业街，一路抵达了公园。惠特尼将你领到一圈树桩里。惠特尼才给<<himself>>拿了几瓶酒，<<His>>的朋友们就已经翻遍了酒袋。
+<br><br>
+他们喝着酒并交换着彼此的故事。听着他们的话语，似乎在你今晚加入他们之前，他们已经做了好些恶作剧。
+<br><br>
+
+<<if playerBellyVisible()>>
+	惠特尼递给你一瓶，但是很快又收了回去。
+	<br><br>
+
+	<<link [[继续|Whitney Trick Drink]]>><<set $phase to 2>><</link>>
+	<br>
+<<else>>
+	惠特尼递给你一瓶。
+	<br><br>
+
+	<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<span class="blue">你知道自己怀有身孕，不能喝酒。</span>
+	<<else>>
+		<<link [[接受|Whitney Trick Drink]]>><<set $phase to 0>><<alcohol 180>><</link>>
+	<</if>>
+	<br>
+	<<link [[拒绝|Whitney Trick Drink]]>><<set $phase to 1>><</link>>
+	<br>
+<</if>>

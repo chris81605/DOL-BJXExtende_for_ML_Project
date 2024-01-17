@@ -1,0 +1,260 @@
+:: Adult Shop []
+/* TEMPORARY fix to clean up NPC overflow issues */
+<<if $enemyno gte 1 or $phase gte 1>>
+	<<endevent>>
+<</if>>
+
+/* Variables */
+<<set $outside to 0>><<set $location to "adult_shop">><<effects>><<run statusCheck("Sydney")>>
+
+<<set $adultshopstate to "closed">>
+<<getadultshopstate>>
+<<if $adultshopintro is undefined>>
+	<<set $adultshopintro to 0>>
+<</if>>
+<<rng>>
+<<if $rng is 100>>
+	<<set _shopnameshort to "蜜穴丁城">>
+<<else>>
+	<<set _shopnameshort to "商店">>
+<</if>>
+<<set _shopnamelong to "蜜穴丁城玩具店">>
+<<set _shopgreeting to [
+	"请勿用假阳具互殴，",
+	"请勿将手伸入裤裆，",
+	"我们竭诚耐心为您服务",
+	"我们这儿不卖用过的内裤，",
+	"使用过的物品恕不退款，"
+	]>>
+<<set _shopmusic to ["轻柔的爵士乐","轻快的拉丁舞曲","欢快的探戈","雷鬼乐","R&B","抒情小调","经典摇滚","经典波普"]>>
+
+<<set _binds to ($leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound")>>
+<<set _gag to ($worn.face.type.includes("gag") and $worn.face.cursed is 1)>>
+<<set _both to (_binds and _gag)>>
+<<set _gagname to $worn.face.cn_name_cap>>
+<<set _predicament to ( (_binds ? "捆缚" : "") + (_both ? "和" : "") + (_gag ? _gagname : "") )>>
+
+/* Shop text */
+<<if $adultshopintro is 0 and $rng is 100>>
+	你在成人用品店，店名叫"_shopnamelong"，有些暧昧不清。货架上排列着各式穿戴式假阳具、内衣、情趣服饰，还有各种性玩具。
+<<else>>
+	你在成人用品店。货架上排列着各式穿戴式假阳具、内衣、情趣服饰，还有各种性玩具。
+<</if>>
+<br>
+<<if !$brothelVending and $brotheljob and $fame.business gte 100>>
+	<<set $brothelVending to {status: "idea", products: 0, condoms: 0, lube: 0, condomsSold: 0, lubeSold: 0, condomsToRefill: 0, lubeToRefill: 0, weeksRent: 0, weeksEmpty: 0}>>
+	/* $brothelVending.status
+	idea - PC has had the idea but not talked to Briar
+	asked - Talked with Briar But not bought the machine
+	bought Bought the vending machine but not installed it
+	sold - Briar sold the machine since it was empty for so long
+	set Installed the vending machine
+	BITS of $brothelVending.products
+	bit 0 - 1 Talked to the pharmacy nurse about reselling condoms
+	bit 1 - 2 Talked to Sirris about selling lube */
+	<br>
+	看着成人用品店里出售的产品，<span class="pink">一个想法跃入心头</span>。你认为在妓院的更衣室里设置一台自动售货机可能是个好主意，这样工作人员就可以为他们的工作购买润滑液或其他有用物品。在思索了一番之后，<span class="gold">你决定要和布莱尔谈谈这个问题。</span>
+	<br><br>
+<</if>>
+
+<<if $adultshopstate isnot "closed">>
+	店里正播着<<print _shopmusic[random(0,_shopmusic.length-1)]>>。
+	<br><br>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	你太勉强自己了。
+	<br><br>
+	<<passoutadultshop>>
+	<<pass 1 hour>>
+	<<trauma 6>><<set $stress -= 2000>>
+<<elseif Time.hour is 21>>
+	到关门的时间了，西里斯正在清场。
+	<<if $exposed gte 1>>
+		如果西里斯看见你穿成这样，会怎么想？恐惧在你的内心蔓延开来。
+	<</if>>
+	<br><br>
+
+	<<set $adultshopstate to "closed">>
+	<<if $exposed lte 0>>
+		<<elkicon>><<link [[离开|Elk Street]]>><<adultShopClear>><</link>>
+		<br>
+	<<else>>
+		<<link [["躲到结束 (1:00)"|Adult Shop]]>><<pass 1 hour>><</link>>
+	<</if>>
+<<else>>
+	/* States */
+	<<switch $adultshopstate>>
+		<<case "sirris">>
+			<<npc "Sirris">>
+			<<if $adultshopintro is 0>>
+				<<set _shopgreeting.push(
+					"巨型肛塞打折中，",
+					"我们一直都很乐意为您效劳，",
+					"试试我们各种口味的避孕套，",
+					"我们这儿是镇上最好的成人用品店，",
+					"我们这儿是镇上最好的成人用品店，",
+					"顾客永远排在第一位！",
+					"欢迎光临，",
+					"欢迎光临，",
+					"工业桶装润滑液八折优惠，")
+				>>
+				/* Shop intro text*/
+				"欢迎来到_shopnameshort，<<print _shopgreeting[random(0,_shopgreeting.length-1)]>>" 西里斯<<print either("微笑着表示欢迎","温柔地表示欢迎","笑着表示欢迎","微笑着招了招手","微笑着眨了眨眼","眨着眼竖起大拇指","热情澎湃，声音高扬")>>。
+				<<He>><<print either("继续介绍穿戴式假阳具的好处","继续向客人兜售商品","继续给客人们展示各种假阳具","继续讨论着润滑液的功效","继续展示各种情趣服饰")>>。
+				<br><br>
+				<<set $adultshopintro to 1>>
+			<</if>>
+			<<if _binds or _gag>> <!-- Remove bindings and forced gags, dynamically -->
+				<<set _oblige to ( (_binds ? "你在<<he>>扶你上台时" : "你跳上柜台时") + (_gag ? "疑惑地看着<<him>>" : "请求西里斯给你做解释") )>>
+				西里斯注意到了你的_predicament，捂着嘴窃笑着。你<<if _gag>>带着口球呜咽着，<<else>>张口想要说些什么，<</if>>但<<he>>举起了<<his>>手。"你这情况在这里多的是，请来柜台这边吧。"
+				<br><br>
+				你听了<<his>>话，_oblige。<<He>>弯下腰，寻找着什么。"一般来说，都是顾客未经许可擅自使用产品。我之前还不给他们解开，打算将此作为惩罚，但后来我发现大多数人就是不想让我给他们解开。"
+				<<He>>往后退了几步，手里拿着把小剪刀，"不要动。"
+				<br><br>
+				<<He>>用小剪刀剪开了你的
+				<<if _binds>>绑带<</if>>
+				<<if _both>>和你的<</if>>
+				<<if _gag>>_gagname<</if>>
+				，手法十分专业。
+				<<if _binds>>你的束缚<</if>>瞬间应声落地。<<He>>扶你离开了柜台，继续工作去了。
+				<br><br>
+				<<if _binds>><<unbind>><</if>>
+				<<if _gag>><<set $worn.face.type.push("broken")>><<faceruined>><</if>>
+			<</if>>
+			<<adultShopEvents>>
+			<br><br>
+
+		<<case "sydney">>
+			<<npc "Sydney">><<run statusCheck("Sydney")>>
+			<<if $adultshopintro is 0>>
+				<<set _sydneysays to ["热情地问候着","挥手欢迎着","挥手并微笑着"]>>
+				<<set _sydneyactivity to [
+					"，停下补货的工作，把头抬了起来",
+					"，从柜台后面看了过来",
+					"，推着一车货物从储物室里走出来",
+					"，停下为顾客退货的工作，把头抬了起来",
+					"，抬起头，放下手中的文件夹板",
+					"，手上拿着根鸡毛掸子",
+					"，躲开想揩油的顾客"
+				]>>
+				/* Switch tone between corrupt and noncorrupt */
+				<<if !_sydneyStatus.includes("corrupt")>>
+					<<set _shopgreeting to [
+						"请不要用商品互殴，",
+						"我们一直都很乐意为您效劳，",
+						"请尊重其他顾客，",
+						"我们这儿是镇上最好的成人用品店，",
+						"顾客永远排在第一位！",
+						"欢迎光临，"]>>
+						<<set _sydneysays.push("毫无声调地复述着","语气平平地介绍着","抑扬顿挫地复述着")>>
+				<<else>>
+					<<set _shopgreeting to [
+						"请勿用假阳具互殴，",
+						"请勿将手伸入裤裆，",
+						"我们竭诚耐心为您服务",
+						"我们这儿不卖用过的内裤，",
+						"我们一直很乐意为您效劳，",
+						"使用过的物品恕不退款，",
+						"这里可不是妓院，",
+						"我们这儿是镇上最好的成人用品店，",
+						"顾客永远排在第一位！",
+						"欢迎光临，",
+						"请不要偷窥其他顾客，",
+						"我不想看你的照片，",
+						"我们不回收润滑液，"]>>
+						<<set _sydneysays.push("笑了起来","眨了眨眼","愉快地说着","边说边挥舞着假阳具")>>
+				<</if>>
+				<<if $sydneyromance is 1>>
+					<<set _shopgreeting to ["嘿，","你好呀，", "很高兴又见面了！"]>>
+					<<set _sydneysays to ["露出灿烂的笑容","抛了个飞吻","比了个指枪","脸红着挥手"]>>
+
+					/* Shop intro text */
+					"<<print _shopgreeting[random(0,_shopgreeting.length-1)]>>"悉尼<<print _sydneysays[random(0,_sydneysays.length-1)]>><<print _sydneyactivity[random(0,_sydneyactivity.length-1)]>>。
+				<<else>>
+					/* Shop intro text */
+					"欢迎光临_shopnameshort，<<print _shopgreeting[random(0,_shopgreeting.length-1)]>>"
+					悉尼<<print _sydneysays[random(0,_sydneysays.length-1)]>><<print _sydneyactivity[random(0,_sydneyactivity.length-1)]>>。
+				<</if>>
+				<br><br>
+				<<set $adultshopintro to 1>>
+			<</if>>
+
+			<<if _binds or _gag>> <!-- Remove bindings and forced gags, dynamically -->
+				当悉尼注意到你的_predicament时，<<he>>瞪大了眼睛。
+				<<if _sydneyStatus.includes("corrupt")>>
+					"你明明只需要……告诉我就好了。"你的脸涨得通红<<if !_gag>>，试图为自己辩解<</if>>。悉尼笑了起来，<<if !_gag>>摆摆手打断了你的解释，<</if>>在柜台下寻找着什么。
+				<<else>>
+					"你没事吧？这是谁干的？还是……你试用的时候出了意外？"你努力解释着，悉尼匆匆消失在柜台后。
+				<</if>>
+				<br><br>
+				没过多久，悉尼拿着一把剪刀出现了。<<he>>向你招了招手，示意你到<<he>>那儿去。<<He>>精确地剪掉了你的
+				<<if _binds>>绑带<</if>>
+				<<if _both>>和你的<</if>>
+				<<if _gag>>_gagname<</if>>
+				，
+				<<if _binds>>你的束缚<<else>>你的束缚<</if>>
+				瞬间应声落地。
+				<<if $sydneyromance gte 1>>
+					<br>你还没来得及道谢，<<he>>便亲了亲你的脸颊。"以后小心点。"
+				<</if>>
+				<<He>>在确认你没事后，便继续回去工作去了。
+				<br><br>
+				<<if _binds>><<unbind>><</if>>
+				<<if _gag>><<set $worn.face.type.push("broken")>><<faceruined>><</if>>
+			<</if>>
+			<<adultShopEvents>>
+			<br><br>
+
+		<<default>> /* I.E. closed */
+			商店关门了。你独自站在黑暗之中，只有一个奇怪的阴茎灯散发着昏暗的光芒，稀稀落落地洒在你的身上。
+			<<if (Time.hour lt 16 or Time.hour gt $closinghour) and !$weekly.theft.adultShop>>
+					<br><br>
+					/* */
+					<<icon "clothes/traits/sticky_fingers.png">><<link [[检查收银机|Adult Shop Register]]>><</link>>
+				<</if>>
+			<br><br>
+
+	<</switch>>
+
+	/* Links */
+	<<if $adultshopclerk and $adultshopstate isnot "closed">>
+		/* work in this shop */
+		<<ind>><<link [[工作 (1:00)|Adult Shop Clerk Job]]>><<endevent>><<pass 60>><</link>>
+		<br>
+	<</if>>
+	<<if !$adultshopclerk and $debug is 1>>
+		<<link [[调试工具- 解锁 店员工作|$passage]]>><<set $adultshopclerk to true>><</link>>
+		<br>
+	<</if>>
+	<<if $adultshopstate isnot "closed">>
+		<<ind>><<link [[靠近西里斯 (0:01)|Adult Shop Approach Sirris]]>><<pass 1>><<endevent>><</link>>
+		<br>
+	<</if>>
+	<<if $adultshopstate is "sydney" and $debug is 1>>
+		<<ind>><<link [[靠近悉尼 (0:01)|Adult Shop Approach Sydney]]>><<pass 1>><<endevent>><</link>>
+		<br>
+	<</if>>
+	<<icon "adultclothing.png">><<link [[看看衣服 (0:01)|Adult Shop Store]]>><<pass 1>><</link>>
+	/* 北极星模组 */
+	<br>
+	<<if $adultshopstate isnot "closed" or $debug is 1>>
+		<<sextoysicon "strap-on">><<link [[浏览性玩具 (0:01)|Adult Shop Menu]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+	<<if $lakehouseinit is undefined>>
+		你看到一匹木马正在出售，却你没有地方放它。
+		<br>
+	<<elseif $lakehouse.woodenHorse isnot undefined>>
+	<<elseif $money gte 50000>>
+		<<link [[买一匹木马|$passage]]>><<set $money -= 50000>><<set $lakehouse.woodenHorse to 1>><</link>>
+		<br>
+	<<else>>
+		你没有足够的钱购买木马。
+		<br>
+	<</if>>
+	/* 北极星 */
+	<br><br>
+	<<exiticon>><<link [[离开 (0:01)|Elk Street]]>><<pass 1>><<adultShopClear>><</link>>
+
+<</if>>

@@ -1,0 +1,27 @@
+:: Wolf Halloween Fight []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>><<beastTrainGenerate>>
+
+	<<set $enemytrust -= 40>><<set $enemyanger to 60>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "学生们惊恐地看着，但是<span class='red'>什么也没做。</span>">>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Wolf Halloween Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Halloween Fight]]>><</link>></span><<nexttext>>
+<</if>>

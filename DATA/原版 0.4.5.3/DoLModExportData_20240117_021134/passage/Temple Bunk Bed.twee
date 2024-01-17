@@ -1,0 +1,16 @@
+:: Temple Bunk Bed []
+<<effects>>
+<<wearoutfit>>
+
+<<if numberOfEarSlime() and $location is "temple" and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) - $earSlime.eventTimer and !$earSlime.event>>
+	<<set $slimeBedExit to "Temple Bunk Bed">>
+	<<set $slimeBedroomExit to "Temple Bunk">>
+	<<setSlimeSleepEvents>>
+	<<if $earSlimeEvent>>
+		<<slimeSleepEvents>>
+	<</if>>
+<</if>>
+
+<<nightmareCheck "Temple Sleep">>
+<<generateSleepLinks "Temple Sleep">>
+<<link [[从床上起来|Temple Bunk]]>><<storeon "Temple Bunk Bed">><<set $wardrobe_location to "temple">><<loadTempHairStyle>><<endevent>><</link>>

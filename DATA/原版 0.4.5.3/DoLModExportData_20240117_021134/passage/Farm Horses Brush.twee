@@ -1,0 +1,30 @@
+:: Farm Horses Brush []
+<<effects>>
+
+<<if $rng gte 51>>
+
+	你走近一个<<farm_text horse>>，手里拿着刷子。
+
+	<<if $farm.beasts.horses gte 5>>
+		<<farm_He horse>>急切地向你跑来。
+	<<else>>
+		<<farm_He horse>>小心翼翼地看着你。
+	<</if>>
+	<br><br>
+
+	<<farm_brush>>
+
+<<else>>
+	<<farm_text_many horse>>在田野里奔跑着。你对其中一个大喊，命令<<farm_him horse>>停下来，但是<<farm_he horse>>太享受其中了。
+	<br><br>
+
+	<<link [[追逐|Farm Horses Chase]]>><<tiredness 2>><</link>><<athleticsdifficulty 1 1000>><<gtiredness>>
+	<br>
+	<!-- Modified for Monster People -->
+	<<if $deviancy gte 15 and $horsedisable is "f" and ($bestialitydisable is "f" or $farm_work.horse.monster is true)>>
+		<<link [[诱惑|Farm Horses Seduce]]>><</link>><<deviant2>>
+		<br>
+	<</if>>
+	<<link [[等待 (0:20)|Farm Horses Wait]]>><<pass 20>><<farm_count 20>><<farm_horses -1>><</link>><<lrespect>>
+	<br>
+<</if>>

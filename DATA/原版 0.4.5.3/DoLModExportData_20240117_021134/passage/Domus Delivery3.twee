@@ -1,0 +1,70 @@
+:: Domus Delivery3 []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<pass 5>>
+<<generate1>><<generate2>><<person2>>
+你到达了目的地，是多瑙河街上一座宏伟的庄园。你敲了敲门，应门的是一个<<person>>。
+"啊，我家<<person1>><<print ($pronoun is "m" ? "老爷" : "夫人")>>一直在等您，"<<person2>><<he>>说，"请进。"
+<br><br>
+
+你走进豪华的前厅，一个<<person1>><<person>>从楼梯上下来，察看了信封。
+你把信封递给<<him>>，<<he>>说："很好，我们一直在等你。"
+<<He>>从口袋里拿出一把小刀，向<<person2>><<person>>做了个手势："付钱给这位<<girl>>。"
+<br><br>
+
+<<if $phase is 1>>
+	<<He>>把说好的<<moneyGain 5>>交给你，然后一言不发地将你引到门外。
+	<br><br>
+
+	<<link [[继续|Danube Street]]>><<endevent>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	<<set $skulduggerydifficulty to 100>><<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<<He>>把说好的<<moneyGain 5>>交给你，然后一言不发地将你引到门外。
+		<br><br>
+
+		<<skulduggeryuse>>
+		<<link [[继续|Danube Street]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<He>>正要给你钱，但<<person1>><<person>>打断了<<person2>><<him>>。
+		"这个信封被人打开过了，"<<person1>><<he>>盯着你说，"还好，我觉得你看不懂内容，不然你会惹上真正的麻烦。"
+		<<He>>对着<<person2>><<person>>点了点头，后者把你推出门外，没有给你钱。
+		<br><br>
+
+		<<skulduggeryuse>>
+		<<link [[继续|Danube Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $phase gte 3>>
+	<<if $phase is 3>>
+		<<set $skulduggerydifficulty to 300>>
+	<<elseif $phase is 4>>
+		<<set $skulduggerydifficulty to 500>>
+	<<elseif $phase is 5>>
+		<<set $skulduggerydifficulty to 700>>
+	<</if>>
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<<He>>把说好的<<moneyGain 5>>交给你，然后一言不发地将你引到门外。
+		<br><br>
+
+		<<skulduggeryuse>>
+		<<link [[继续|Danube Street]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<He>>正要给你钱，但<<person1>><<person>>打断了<<person2>><<him>>。
+		"这个信封被人打开过了，"<<person1>><<he>>盯着你说，"里面东西也被拿走了。我想你需要上一堂礼仪课。"
+		<<He>>对着<<person2>><<person>>点点头，于是后者挡在了你和门之间。
+		<br><br>
+
+		<<skulduggeryuse>>
+
+		两人开始摸索你的衣服。"快说，你把它藏在哪儿了？"
+		<br><br>
+
+		<<link [[继续|Danube Delivery Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<</if>>
+<</if>>

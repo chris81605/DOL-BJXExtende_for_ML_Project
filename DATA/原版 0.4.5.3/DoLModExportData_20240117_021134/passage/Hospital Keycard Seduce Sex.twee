@@ -1,0 +1,29 @@
+:: Hospital Keycard Seduce Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<set $enemyno to 1>>
+	<<maninit>>
+	<<if $NPCList[0].skills.security gte 700 or $NPCList[0].skills.security lte 300>>
+		<<set $easySteal to 1>>
+	<</if>>
+	<<if $NPCList[0].skills.security lte 300>>
+		<<set $enemyhealthmax += 200>><<set $enemyhealth += 200>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<if !$speechsteal>>
+	<<man>>
+<</if>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $speechsteal is 1>>
+	<span id="next"><<link [[继续|Hospital Keycard Seduce Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hospital Keycard Seduce Sex]]>><</link>></span><<nexttext>>
+<</if>>

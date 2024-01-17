@@ -1,0 +1,41 @@
+:: Mason In Pond Naked []
+<<effects>><<water>>
+
+<<flaunting>>你滑入池塘。听到水声后，梅森睁开了眼睛，但在看到你<<lewdness>>后立马又闭上了眼睛。
+<<if !C.npc.Mason.chastityKeyCarried and playerChastity() and $worn.genitals.origin is "Winter" and (C.npc.Mason.love gte 5 or C.npc.Mason.lust gte 10)
+	and getVisibleClothesList().find(o => o === V.worn.genitals)>>
+	过了一会儿，<<he>>又一次睁开了眼睛，盯着你的$worn.genitals.cn_name_cap。
+	<<He>>盯得那么认真，你都有点不好意思了，<<he>>这才回过神来，红着脸移开了目光。
+	<<set C.npc.Mason.chastityKeyCarried to 1>><<set $daily.masonChastityRemovalDeclined to 1>>
+<</if>>
+<<if $exposed gte 2>>
+	<<if $daily.ex.mason isnot 1>>
+		<<exhibitionism5>>
+		<<set $daily.ex.mason to 1>>
+	<<else>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $daily.ex.mason isnot 1>>
+		<<exhibitionism3>>
+		<<set $daily.ex.mason to 1>>
+	<<else>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<if $mason_count gte 3>>
+
+	<<mason_greet_lust>>
+	<br><br>
+
+	<<mason_actions>>
+
+<<else>><<set $mason_count to 3>>
+
+	"我，我很高兴你在这里找到我，"<<he>>说道，"但是你能穿上衣服吗？"
+	<br><br>
+
+	<<mason_actions>>
+
+<</if>>

@@ -1,0 +1,26 @@
+:: Catacombs Barrow Plunder []
+<<effects>>
+
+你在废墟中寻找着有价值的东西，跪着在破碎的保险箱留下的碎片中翻找。
+
+<<if $rng gte 81>>
+	你运气不好，虽然你找到了一些破布碎片。
+	<<if $worn.face.type.includes("blindfold")>>
+		它们可以用来给火炬加料，<span class="pink">但是你看不见。</span>
+	<<else>>
+		你把它们加进了火炬里。<<gtorch>><<catacombs_torch 10>>
+	<</if>>
+<<elseif $rng gte 61>>
+	你的手指摸到一些又冷又硬的东西。你把它从土里拽出来。腐蚀的银制高脚杯表面布满了线条，这是一幅复杂的雕刻作品。对于一个收藏家来说，它可能是有价值的。
+	<<set $antiquemoney += 60>><<museumAntiqueStatus "antiquesilvergoblet" "found">><<crimeUp 60 "thievery">>
+<<else>>
+	你感觉到一种橡胶般的质地，接着便从泥里拔出了一尊古怪的神像。非人的手臂从一具衰朽的骨架上垂落下来。即便如此，对博物馆馆长而言它仍然有着它的价值。
+	<<set $antiquemoney += 15>><<museumAntiqueStatus "antiquestrangefetish" "found">><<crimeUp 15 "thievery">>
+<</if>>
+<br><br>
+
+<<if $skulduggery lte 600>>
+	<<skulduggeryskilluse>>
+<</if>>
+
+<<destination_catacombs>>

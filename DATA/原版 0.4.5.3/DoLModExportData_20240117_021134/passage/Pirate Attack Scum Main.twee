@@ -1,0 +1,97 @@
+:: Pirate Attack Scum Main []
+<<effects>>
+<<set $pirate_time += 1>>
+<<loadNPC 0 "cruise_captain">><<person1>>
+<<pass 5>>
+<<if $pirate_attention gte 10>>
+    客人们被你<span class="red">惊呆了</span>。
+<<elseif $pirate_attention gte 6>>
+    客人们被你<span class="blue">吸引住</span>了。
+<<elseif $pirate_attention gte 2>>
+    客人们<span class="teal">正在看</span>你。
+<<else>>
+    客人们<span class="green">认为你是个不错的消遣。</span>
+<</if>>
+<br><br>
+
+<<if $pirate_time is 3>>
+    <span class="blue">你透过一扇窗户注意到泽菲尔手下的一个海盗，对方正在翻找一个橱柜。</span>
+    <br><br>
+<<elseif $pirate_time is 6>>
+    <span class="blue">好几个泽菲尔的手下开始往船下扔赃物，但人群完全被吸引了，没有注意到。</span>
+    <br><br>
+<</if>>
+
+<<person>>示意观众们安静，准备宣布下一轮折磨。
+<br><br>
+
+<<if $pirate_time gte 10>>
+    <span class="red">一声枪响</span>惊扰了观众们。一些人俯身自卫，另一些则只是四周张望，并没有意识到危险。
+    <br><br>
+    <<link [[继续|Pirate Attack Scum End]]>><</link>>
+    <br>
+<<elseif $pirate_attention gte random(1, 20)>>
+    <<if $rng gte 51>>
+        "让我们给观众们一些特别展示，"<<he>>宣布道，"我想要三个人，没错，三个人，上台来跟<<phim>>互动。"<<He>>从无数双举起的手中点出三个人，"上来吧！"
+        <br><br>
+        <<endevent>>
+        <<generate1>><<person1>>
+        <<generate2>>
+        <<generate3>>
+        一个<<person>>，<<person2>><<person>>，以及<<person3>><<person>>来到了台上。
+        <br><br>
+        <<link [[继续|Pirate Attack Scum Trio]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <<else>>
+        "要不来给观众们一些更刺激的东西吧，如何？"<<person>>宣布道，"举起你们的手来。"<<He>>选出了参与的观众，不是一个，而是两个人。
+        <br><br>
+        <<endevent>>
+        <<generate1>><<person1>>
+        <<generate2>>
+        一个<<person>>和<<person2>><<person>>来到了台上。
+        <br><br>
+        <<link [[继续|Pirate Attack Scum Duo]]>><<set $molestationstart to 1>><</link>>
+        <br>
+
+    <</if>>
+<<else>>
+    <<if $rng gte 81>>
+        "来让这个<<girl>>好好展示一下<<pher>>自己，"<<he>>宣布道，"来，<<girl>>给我们摆个姿势。"
+        <br><br>
+        <<link [[摆个姿势，但是保持矜持|Pirate Attack Scum Pose Dignity]]>><</link>><<exhibitionist1>><<gattention>><<pirate_attention 1>>
+        <br>
+        <<if $exhibitionism gte 75>>
+            <<link [[摆一个色情的姿势|Pirate Attack Scum Pose Erotic]]>><</link>><<exhibitionist5>><<ggattention>><<pirate_attention 2>>
+            <br>
+        <</if>>
+        <<link [[拒绝|Pirate Attack Scum Pose Refuse]]>><</link>>
+        <br>
+    <<elseif $rng gte 61>>
+        "不知道我们的这位漂流者会不会跳舞，"<<he>>说，"要不让<<pshe>>展示给我们看看？"观众们期待地喊叫起来。
+        <br><br>
+
+        <<link [[跳舞|Pirate Attack Scum Dance]]>><<set $dancestart to 1>><</link>>
+        <br>
+    <<elseif $rng gte 41>>
+        "你们觉得这个<<girl>>的防晒霜足够吗？"<<he>>问。观众间发出嘈杂的嘀咕声。"有人愿意举手吗？你，上台来。"
+        <br><br>
+        <<endevent>>
+        <<generate1>><<person1>>
+        一个<<person>>爬上舞台，手里拿着一瓶防晒霜。<<He>>往手里挤了点。
+        <br><br>
+
+        <<link [[允许|Pirate Attack Scum Cream Allow]]>><<stress 6>><<arousal 2000>><</link>><<gstress>><<ggarousal>><<gattention>><<pirate_attention 1>>
+        <br>
+        <<link [[拒绝|Pirate Attack Scum Cream Refuse]]>><</link>>
+        <br>
+    <<else>>
+        "自愿的人请举手，"<<he>>宣布道。无数双手举了起来。"你，上台来！"
+        <br><br>
+        <<endevent>>
+        <<generate1>><<person1>>
+        一个<<person>>来到台上，一边走向你，一边用色眯眯的眼睛看着这边。
+        <br><br>
+        <<link [[继续|Pirate Attack Scum Rape]]>><<set $molestationstart to 1>><</link>>
+        <br>
+    <</if>>
+<</if>>

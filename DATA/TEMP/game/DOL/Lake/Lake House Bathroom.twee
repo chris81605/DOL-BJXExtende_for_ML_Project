@@ -1,0 +1,33 @@
+:: Lake House Bathroom 
+<<set $outside to 0>><<set $location to "lakehouse">><<effects>>
+你在浴室里。
+<br><br>
+<<if $stress gte $stressmax>>
+	<<set $previousPassage to $passage>>
+	<<passoutlakehouse>>
+<<else>>
+	<<if $lakehouse.billsphase gte 3>>
+		没有水的情况下你用不了浴室。
+		<br>
+	<<elseif $leftarm is "bound" and $rightarm is "bound">>
+		<<set _clothed = ![V.worn.upper.name, V.worn.lower.name, V.worn.under_upper.name, V.worn.under_lower.name, V.worn.over_upper.name, V.worn.over_lower.name].every(x => x == 'naked')>>
+		<<bathroomicon "bath">><<link [[(_clothed ? "穿着衣服" : "") +"洗澡" + "(0:30)"->Lake House Bath]]>><<water>><<pass 30>><<stress -6>><<set $hygiene to 0>><</link>><<lstress>>
+	<<else>>
+		<<bathroomicon "bath">><<link [[洗澡 (0:30)->Lake House Bath]]>><<strip>><<pass 30>><<stress -6>><<set $hygiene to 0>><</link>><<lstress>>
+	<</if>>
+	<br>
+	<!-- Check if there's any hair-->
+	<<if $lakehouse.billsphase gte 3>>
+		没有灯的情况下你没法剃毛。
+		<br>
+	<<elseif $pbdisable is "f" and ($pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2)>>
+		<<bathroomicon "shave">><<link [[剃阴毛->Lake House Shave]]>><</link>>
+		<br>
+	<</if>>
+	<<mushroomtfoptions>>
+	<<pregnancyTest "Lake House Bedroom">>
+	<br>
+
+	<<main_hall_icon>><<link [[起居室 (0:01)->Lake House]]>><<pass 1>><</link>>
+	<br>
+<</if>>

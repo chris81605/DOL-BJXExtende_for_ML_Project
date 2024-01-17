@@ -1,0 +1,44 @@
+:: Domus Model Gang Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+<<if $enemyarousal gte ($enemyarousalmax / 4) * 3>>
+	只有少数专门的艺术家还在作画，大多数人只是在看热闹。更多的人在偷偷摸摸地自慰。
+<<elseif $enemyarousal gte ($enemyarousalmax /4 ) * 2>>
+	有几位艺术家仍在画你的侵犯，但许多人现在<<print either("只在是观看。","只是在盯着你。","只是在偷偷看。","只是在手淫。")>>
+<<elseif $enemyarousal gte ($enemyarousalmax / 4)>>
+	一些艺术家正在兴奋地画下你被袭击的场景。
+<<else>>
+	一些艺术家坐在他们的画架前观看。他们在等待事情的开始。
+<</if>>
+<<if $pain gte 40 and (random(0,9)%3 is 0)>>
+	<br>
+	"记住：我们学习了画眼泪的技巧。使用它们。"
+<<elseif $mouthstate is "penetrated" and random(0,1)>>
+	<br>
+	"注意光影，大家。一定要画出喉咙的隆起。"
+<</if>>
+
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1>>
+	你身处一个私人住宅的深处。<span class="red">没有任何可能听到你呼救的人。</span>
+	<<set $alarm to 0>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续->Domus Model Rape Climax]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续->Domus Model Gang Rape]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,92 @@
+:: Sydney Temple Corrupt Search []
+<<effects>>
+<<if !$templeSearch>>
+	<<set $templeSearch to []>>
+<</if>>
+<<switch $phase>>
+	<<case 0>>
+		你和悉尼一起寻找。
+	<<case 1>>
+		你在塞满贞操带的橱柜里寻找。一个抽屉专门放坏掉了的贞操带，而剩下的都放着干净崭新的，或是被修好的贞操带。
+		<<if $fame.business gte 400>>
+			……有一堆贞操带下压着一张疑似订单的东西，看来有人花了大价钱在上面。
+		<<else>>
+			……有一堆贞操带下压着一张写满商业术语的单子，不过你看不大懂。
+		<</if>>
+		许多文字都被浸染开了，但在单子末尾留有一个"W"的标记。
+		<br><br>
+		每一个贞操带，甚至是坏掉的，都有一个相匹配的钥匙。但是，里面独独没有匹配悉尼贞操带的那一个。
+	<<case 2>>
+		你在刑杖架旁寻找。你找到一张木制用品的清理指南和一些脏兮兮的抹布——至少看样子它们被洗过了。
+		<br><br>
+		你捡起一个来，它比你预料的要重很多。一想到被这个玩意儿挨一下，你的额头就渗出汗来。<<if $masochism_level gte 1>><<arousal 50>><<garousal>><<else>><<stress 3>><<gstress>><</if>>
+	<<case 3>>
+		你在眼罩堆旁寻找。它们周围的东西不多，只有一些小型惩罚器具，器具上布满尖刺。
+	<<case 4>>
+		你在封口器旁寻找。它们都很干净，就像崭新的一样，有着不同的样式: 口球，口枷，布条，胶带……
+	<<case 5>>
+		你在粉色喷罐旁寻找。周围只有一些<<if $phase2 is 1>>，有的里面还是空的。"小心点，我可不想在之后把你抬走。"你把喷罐放了回去<</if>>。它们的味道闻起来隐约有些熟悉。
+	<<case 6>>
+		你<<if $templeSearch.length is 3>>和悉尼一起<</if>>在黑袍人身上寻找，很快在其中一人的衣服中摸出一把铜钥匙。<<if $templeSearch.length is 3>>这与<<his>>的贞操带并不匹配，但<<he>>把目光落在了锁住的抽屉上。<</if>>
+<</switch>>
+<br><br>
+<<if $templeSearch.length is 1>>
+	悉尼在挂架旁寻找，一些挂架上挂满了不同类型的索套。
+	<br><br>
+<<elseif $templeSearch.length is 2>>
+	悉尼发现了一个上锁的抽屉。
+	<<if $templeSearch.includes("figures")>>
+		你把你找到的钥匙递给<<him>>。<<he>>接过钥匙，紧张地扭了一下。<br><br>……<br><br>……<br><br><span class="green">刚好合适。</span>
+	<<else>>
+		<<if $phase2 is 1>>
+			<<He>>的目光落在了倒地的黑袍人身上。
+		<<else>>
+			<<He>>停下动作，稍加思索。
+		<</if>>
+	<</if>>
+	<br><br>
+<<elseif $templeSearch.length is 3>>
+	<<if $templeSearch.includes("figures")>>
+		悉尼开始一个一个翻找上锁的抽屉。
+	<<else>>
+		<<if $phase2 is 1>>
+			悉尼从黑袍人的衣服中摸出一把钥匙。这与<<his>>的贞操带并不匹配，但<<he>>沉思了一会，随后把目光落在了锁住的抽屉上。
+		<<else>>
+			悉尼从墙上摘下一个片状的器物，插进抽屉的锁眼里。<span class="green">锁咔哒一下打开了。</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+<<if $templeSearch.length gte 4>>
+	"我好像找到了！" 悉尼压着嗓子向你叫道。你停下了动作，溜到<<him>>的身边。只见<<Hes>>手举一把银钥匙，和<<his>>的贞操带一样泛着银光<<if playerChastity() and $worn.genitals.origin is "temple">>，甚至与你记忆中的自己的钥匙型号一致。果然，<<he>>很快找到了第二把<</if>>。
+	<br><br>
+	你抓住悉尼的贞操带，但<<he>>将你轻轻推开。"我想要，"<<he>>看着你，"我真的，真的非常想要，但不是在这儿。我们得找一个私密的地方——"<<He>>直视着你的双眼，眼里闪着热切，"一个完全隔音的地方。我知道在哪里。"悉尼牵起你的手，带你返回了廊道。<<takeHandholdingVirginity "Sydney" `($sydneyromance is 1?"romantic":"consensual")`>>
+	<br><br>
+	<<link [[继续 (0:10)|Sydney Temple Corrupt 3]]>><<pass 10>><<unset $templeSearch>><</link>>
+	<br>
+<<else>>
+	<<if !$templeSearch.includes("chastity")>>
+		<<link [[在贞操带旁搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("chastity")>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if !$templeSearch.includes("paddles")>>
+		<<link [[在刑杖旁搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("paddles")>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+	<<if !$templeSearch.includes("blindfolds")>>
+		<<link [[在眼罩旁搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("blindfolds")>><<set $phase to 3>><</link>>
+		<br>
+	<</if>>
+	<<if !$templeSearch.includes("gags")>>
+		<<link [[在封口器旁搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("gags")>><<set $phase to 4>><</link>>
+		<br>
+	<</if>>
+	<<if !$templeSearch.includes("canisters")>>
+		<<link [[在粉色喷罐旁搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("canisters")>><<set $phase to 5>><</link>>
+		<br>
+	<</if>>
+	<<if $phase2 is 1 and !$templeSearch.includes("figures") and $templeSearch.length lt 3>>
+		<<link [[在黑袍人身上搜寻 (0:10)|Sydney Temple Corrupt Search]]>><<pass 10>><<set $templeSearch.push("figures")>><<set $phase to 6>><</link>>
+		<br>
+	<</if>>
+<</if>>

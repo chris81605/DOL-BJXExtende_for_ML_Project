@@ -1,0 +1,40 @@
+:: Spa Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>><<npc_attempt_sex>>
+	<<if $daily.spaEvent isnot "party">>
+		<<enable_rescue>>
+	<</if>>
+	<<set $enemyarousal to ($enemyarousalmax * 0.65)>>
+	<<promiscuity5>>
+	<<if $player.penisExist>>
+		<<body_tip penile add>><<set $tip_add to ($tip + random(100, 1000))>>
+	<</if>>
+	<<if $player.vaginaExist>>
+		<<body_tip vaginal add>><<set $tip_add to ($tip + random(100, 1000))>>
+	<</if>>
+	<<prop table>>
+<</if>>
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1 and $rescue isnot 1>>
+	<span class="pink">你的哭声被聚会的喧嚣淹没了。</span>
+	<<set $alarm to 0>>
+	<br><br>
+<</if>>
+
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Spa Lewd Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Spa Sex]]>><</link>></span><<nexttext>>
+<</if>>

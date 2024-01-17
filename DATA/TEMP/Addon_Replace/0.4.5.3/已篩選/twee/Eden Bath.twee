@@ -1,0 +1,56 @@
+:: Eden Bath []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $phase is 0>>
+	<<if $edenClothes>>
+		<<if $edenjoin is 1>>
+			你脱下了自己的衣服，伊甸进入浴缸放松了下来。
+		<<else>>
+			你脱掉衣服，爬了进去。
+		<</if>>
+		<<unset $edenClothes>>
+	<</if>>
+	<<if $exhibitionism gte 55>>
+		你对你的裸体相当自在，你和<<him>>一起爬了进去。
+	<<else>>
+		<<covered>>你和<<him>>一起爬了进去。你没能抓住两侧，差点滑倒。
+	<</if>>
+	<br><br>
+
+	<<He>>斜靠在你对面，享受着温暖，同时审视着你的身体。
+	<<wash>>
+	<br><br>
+	/* 北极星模组 */
+	<<if $options.bjx_eventTF and $slime gt 0>>
+        <br>
+        <span class='red'>你忍受着皮肤上的刺痛。</span>
+        <br>
+        <<violence 20>>
+    <</if>>
+    /* 北极星 */
+
+	<<link [[回看伊甸|Eden Bath 2]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[清洗伊甸|Eden Bath 2]]>><<set $phase to 1>><<npcincr Eden love 1>><</link>><<glove>>
+	<br>
+	<<link [[休息|Eden Bath 2]]>><<set $phase to 2>><<stress -12>><</link>><<lstress>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[诱惑|Eden Bath Seduction]]>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 1>>
+		"随你便，"<<he>>一边说，一边把<<himself>>浸到水里。
+		<br><br>
+
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		"我叫你进来，"<<he>>说着，向你走来，"我觉得你需要再上一课。"<<He>>抓起你拉到<<his>>膝盖上。
+		<br><br>
+
+		<<link [[继续|Eden Cabin Punishment]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

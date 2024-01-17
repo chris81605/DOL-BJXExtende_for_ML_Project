@@ -1,0 +1,59 @@
+:: Wolf Rival Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<set _victory to 1>>
+	<<beastejaculation>>
+	<<beasttype>>的目光失去了焦点，<<bhe>>心事重重地离开了。敌对的狼群看起来很困惑，但还是跟在它们的首领后面，不情愿地离开了你和你的狼群。<<tearful>>你站了起来。
+<<elseif $enemyhealth lte 0>>
+	<<set _victory to 1>>
+	<<tearful>>你带着胜利站在被击败的敌人面前。<<beasttype>>匆匆离开了你们，逃回了能给它们安全的领地。而你和你的族群得以享受它的猎物。
+<<else>>
+	<<set _victory to 0>>
+	你摔倒在地，无法继续战斗。那头<<beasttype>><<if $monster isnot 1>>用<<bhis>>的牙齿<</if>>扼住了你的喉咙，但最终还是放开了你。<<trauma 6>><<gtrauma>>
+	<br><br>
+	<<if $monster is 1>>
+		"懦弱的头狼，"<<bhe>>嘲笑道。"你的族群肯定以你为耻。夹着尾巴滚回自己窝吧，弱者！"
+		<br><br>
+	<</if>>
+	敌对的狼群把尸体拖走了，留下你面对族群失望的表情。<<tearful>>你站起来，躲闪着他们的目光。<<lharmony>><<lferocity>>
+<</if>>
+<br>
+<<endcombat>><<clearNPC rival_wolf>><<npc "Black Wolf">>
+<<clotheson>>
+
+<<if _victory is 1>>
+	黑狼高声嚎叫，随后是你和族群的应和。森林里回响着你们凯旋的颂歌。<<stress -12>><<trauma -6>><<llstress>><<ltrauma>><<gharmony>><<gferocity>>
+	<br><br>
+
+	<<if $wolfpackharmony gte $wolfpackferocity>>
+		黑狼推了你一下。
+		<<if $monster is 1>>
+			"优秀的首领身强力壮，"<<bhe>>说道。"伟大的首领强大无匹。能有<<ppackbrother>>是族群的福祉。"
+		<<else>>
+			<<bHe>>舔了舔你的手。
+		<</if>>
+	<<else>>
+		黑狼朝另一群狼离开的方向狂吠了一声。
+		<<if $monster is 1>>
+			"该结束这场无聊的斗争了，"<<bhe>>咆哮道。"族群无需再理会敌人的威胁。伟大的首领绝不手软！"
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $wolfpackharmony gte $wolfpackferocity>>
+		黑狼温柔地用鼻子蹭你。
+		<<if $monster is 1>>
+			"首领战斗得很英勇，"<<bhe>>说道。"但族群崇尚力量。领袖必须足够强大才能获得族群的追随。"
+		<<else>>
+			<<bHe>>至少不会因为你的失败而鄙视你。
+		<</if>>
+	<<else>>
+		黑狼走到你面前，对你低吼一声。
+		<<if $monster is 1>>
+			"如果族群再在狩猎中依赖如此软弱的首领，族群将会饿死！"<<he>>龇牙低吼，"头狼要么下次继续获胜，要么就失去整个族群！"
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<endevent>>
+<<wolfpackhuntoptions>>

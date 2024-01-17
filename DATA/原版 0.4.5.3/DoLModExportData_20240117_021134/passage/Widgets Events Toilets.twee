@@ -1,0 +1,27 @@
+:: Widgets Events Toilets [widget]
+<<widget "eventstoilets">>
+	<<generate1>><<person1>>你进入了厕所，听到背后传来一阵叫喊声。"我看到你进去了，变态！"<<person>>怒气冲冲地跑了进来。"这就让你尝尝什么叫自作自受！"
+	<br><br>
+
+	<<link [[继续|Toilets Molestation]]>><<set $molestationstart to 1>><</link>>
+
+	<<if $player.gender_appearance isnot $player.gender>><<set $toiletsmistake to 1>><</if>>
+<</widget>>
+
+<<widget "eventstoiletssafe">>
+	<<if $weather is "rain">>
+		雨点猛烈地敲打着小窗户。
+		<br><br>
+	<<else>>
+		风吹得小窗户格格作响。
+		<br><br>
+	<</if>>
+
+	<<if $bus is "parkmens">>
+		<<link [[继续|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</widget>>

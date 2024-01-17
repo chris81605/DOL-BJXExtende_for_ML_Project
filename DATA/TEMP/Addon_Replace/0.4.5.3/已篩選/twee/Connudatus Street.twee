@@ -1,0 +1,207 @@
+:: Connudatus Street []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">><<getTarget true>>
+你正待在康努达塔斯街，众多的俱乐部、酒吧和餐馆使其成为该镇夜间最热闹的地方。而在白天，这条街的两边都是卖各种商品的小贩。
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		购物者们挤在有顶棚的摊位周围。
+	<<elseif $weather is "snow">>
+		街道上挤满了购物者，所有人都裹得严严实实以来抵御寒冷。
+	<<else>>
+		街道上挤满了购物者。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		小贩们正在摆摊，并迅速搭起顶棚以避雨。
+	<<elseif $weather is "snow">>
+		包得严严实实的摊贩们正在摆放摊位。
+	<<else>>
+		小贩们正在摆摊。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		小贩们正在忙着收摊去避雨。
+	<<elseif $weather is "snow">>
+		小贩们正在忙着收摊去取暖。
+	<<else>>
+		小贩们正在收摊，周围的餐馆里挤满了人。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		夜生活正如火如荼地进行着，丝毫不为雨水所动。
+	<<elseif $weather is "snow">>
+		夜生活正如火如荼地进行着，丝毫不受寒冷的影响。
+	<<else>>
+		夜生活正如火如荼地进行着，那耀眼的霓虹灯在上方闪耀着。
+	<</if>>
+<</if>>
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<if $exposed is 1 and $connudatus_stripped gte 1>>
+		街上大约有一半的人都只穿着内衣出门，这是由你发起的潮流，所以你现在的穿着没有什么不正常的。
+		<br><br>
+	<<else>>
+		<<exhibitionism "street">>
+	<</if>>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if currentSkillValue('skulduggery') gte 200 and $skulduggeryDintro isnot 1>>
+	<<set $skulduggeryDintro to 1>>
+	在经历过社会的黑暗面后，你对这条街道有了全新的认识，这么多人都把贵重物品放在身边，而且几乎完全不加看管。<span class="gold">你现在可以在康努达塔斯街上偷窃行人了。</span>
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutstreet>>
+<<elseif $bartend_info is 1 and !$possessed>>
+	<<set $bartend_info to 2>>
+	<<generate1>><<person1>>
+	"嘿，<<girl>>，"俱乐部门口附近传来一道声音，一个<<person>>正靠在墙边。"达里尔让我在这等你，说你可能会遇到一些麻烦，需要有人送你回家。"
+	<br><br>
+
+	<<link [[接受 (0:15)|Connudatus VIP Walk]]>><<pass 15>><</link>>
+	<br>
+	<<link [[拒绝|Connudatus VIP Refuse]]>><</link>>
+	<br>
+<<elseif $per_npc.bartend and !$possessed>>
+	<<loadNPC 0 bartend>><<person1>>
+	<<if $rng gte 81>>
+		<<generate2>><<generate3>>
+		三个在黑暗中若隐若现的身影挡住了你的去路，其中一人走进路灯的光照下。<span class="red">是那个在俱乐部骚扰你的<<person>>。</span>
+		<br><br>
+		"真他妈的操蛋，"<<he>>怒吼道，"像你这样的垃圾烂婊子也敢帮助别人拒绝我？是时候让你学学怎么尊重别人了，我还专门带了朋友来教教你呢！"说完，<<He>>向你扑了过来。
+		<br><br>
+	<<elseif $rng gte 51>>
+		<<generate2>>
+		两个在黑暗中若隐若现的身影挡住了你的去路，其中一人走进路灯的光照下。<span class="red">是那个在俱乐部骚扰你的<<person>>。</span>
+		<br><br>
+		"真他妈的操蛋，"<<he>>怒吼道，"像你这样的垃圾烂婊子也敢帮助别人拒绝我？是时候让你学学怎么尊重别人了，我还专门带了个朋友来教教你呢！"说完，<<He>>向你扑了过来。
+		<br><br>
+	<<else>>
+		一个在黑暗中若隐若现的身影挡住了你的去路，<<He>>走进路灯的光照下。<span class="red">是那个在俱乐部骚扰你的<<person>>。</span>
+		<br><br>
+
+		"真他妈的操蛋，"<<he>>怒吼道，"像你这样的垃圾烂婊子也敢帮助别人拒绝我？是时候让你学学怎么尊重别人了！"说完，<<He>>向你扑了过来。
+		<br><br>
+	<</if>>
+	<<link [[继续|Connudatus VIP Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $brothel_rivalry is undefined and $NPCName[$NPCNameList.indexOf("Darryl")].love gte 10 and !$possessed>>
+
+	一辆汽车急刹在你面前，在车门打开后，<span class="pink">一双强壮的手臂把你拉了进去。</span>
+	<br><br>
+
+	<<link [[继续|Connudatus Briar Abduct]]>><<set $brothel_rivalry to 1>><<set $brothel_rivalry_timer to 7>><</link>>
+	<br>
+
+<<elseif $rng gte 95 and Time.dayState is "day">>
+	<<generatey1>><<person1>>
+	市场上传来一阵嘈杂声和叫喊声，一个摊主刚刚抓住了一个<<person>>，正愤怒地对<<he>>大喊大叫。
+	<<if $rng % 2 == 0>>你认出这个人是孤儿院里的孤儿<<set $phase to 0>>
+	<<else>>你认出这个人是学校里的同学<<set $phase to 10>>
+	<</if>>。
+	<br><br>
+	<<link [[试着提供帮助 (0:05)|Market Street Urchin Help]]>><<pass 5>><</link>>
+	<br>
+	<<link [[无视|Connudatus Street]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "connudatus">>
+			<br>
+		<</if>>
+		可访问地点
+		<br>
+		/* 北极星模组 */
+		<<if Time.dayState is "dusk" and $weather isnot "rain" and $caseyagain is 0 and $caseymet is 0>>
+			你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf("凯西")].gender is "m">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。
+			<br><br>
+			<<link [[介绍你自己 (0:05)|Casey Introduction]]>><<pass 5>><</link>>
+			<br>
+		<<elseif Time.dayState is "dusk" and $weather isnot "rain" and $caseyagain is 1 and $caseymet is 0>>
+			你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf("凯西")].gender is "m">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。
+			<br><br>
+			<<link [[再次尝试交谈 (0:05)|Casey Again]]>><<pass 5>><</link>>
+			<br>
+		<<elseif Time.dayState is "dusk" and $weather isnot "rain" and $caseymet is 1>>
+			你看到凯西在老地方抽着雪茄。
+			<br><br>
+			<<link [[打招呼 (0:20)|Casey Hang Out]]>><<npcincr "凯西" love 2>><<pass 20>><</link>><<gglove>>
+			<br>
+		<</if>>
+		/* 北极星 */
+		<<if Time.dayState isnot "dawn" and Time.dayState isnot "day">>
+			<<if $exposed gte 1 and $stripclubintro is 1>>
+				<<stripclubicon>><<link [[脱衣舞俱乐部 (0:02)|Strip Club Exposed]]>><<pass 2>><</link>>
+				<br>
+			<<else>>
+				<<stripclubicon>><<link [[脱衣舞俱乐部 (0:02)|Strip Club]]>><<pass 2>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if Time.dayState isnot "dusk" and Time.dayState isnot "night" and Time.hour isnot 6>>
+			<<stripclubicon>><<link [[脱衣舞俱乐部 (0:01)|Strip Club Lock]]>><<pass 1>><</link>>
+			<br>
+		<<elseif Time.hour is 6>>
+			<span class="blue">人们正在离开俱乐部，</span>看来已经到了关门的时间。
+			<br>
+		<</if>>
+		<<if $skulduggeryDintro is 1 and $exposed lte 0>>
+			<<crimeicon "mark">><<link [[寻找可下手目标 (0:20)|Connudatus Street Thievery]]>><<pass 20>><<crimeUp 1 "petty">><</link>><<crime "petty">>
+			<br>
+		<</if>>
+		<<if Time.dayState is "dawn" and $exposed lte 0 and $daily.stallRented isnot 1>>
+			<<if $money gte 1500>>
+				<<stallicon>><<link [[租一个小摊 (0:20 £15)|Stall Rent]]>><</link>>
+				<br>
+			<<else>>
+				<span class="blue">如果你有钱的话，你可以在这里租一个摊位。</span>
+				<br>
+			<</if>>
+		<<elseif $daily.stallRented is 1 and Time.dayState isnot "night" and $exposed lte 0>>
+			<<stallicon "open">><<link [[经营你的小摊 (0:20)|Stall]]>><<pass 20>><</link>>
+			<br>
+		<</if>>
+		<<if Time.dayState is "night" and $exposed gte 2 and $exhibitionism gte 55 and $daily.ex.connudatus isnot 1>>
+			<<ind>><<link [[裸跑 (0:05)|Streak Naked]]>><<pass 5>><<set $daily.ex.connudatus to 1>><</link>><<exhibitionist4>>
+			<br>
+		<<elseif Time.dayState is "night" and $exposed gte 1 and $exhibitionism gte 15 and $daily.ex.connudatus isnot 1>>
+			<<ind>><<link [[裸跑 (0:05)|Streak Undies]]>><<pass 5>><<set $daily.ex.connudatus to 1>><</link>><<exhibitionist2>>
+			<br>
+		<</if>>
+		<br>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<add_link "其他区域<br>">><<hideDisplay>>
+			<<barb>>
+			<<danube>>
+			<<cliff>>
+			<<wolf>>
+			<<if $exposed lte 0>>
+				<<buswait>>
+			<</if>>
+			/* 北极星模组 */
+			<<if $options.bjx_animal and ($transformationParts.bird.wings isnot "disabled" and $birdFly gte 1 or $transformationParts.dragon.wings isnot "disabled")>>
+				<<flywait>>
+			<</if>>
+			/* 北极星 */
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>快捷小路<br>">><<hideDisplay>>
+		<<residential>>
+		<<commercial>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "connudatus">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

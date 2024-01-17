@@ -1,0 +1,26 @@
+:: Abduction Hospital Corridor []
+<<effects>><<set $lock to random(0, 1000)>>
+
+你跑向走廊。当你到达门口时，你听到一声尖锐的嗡嗡声和金属摩擦的声音。
+<<beastNEWinit 6 wolf>>
+
+<<if $rng gte 81 or ($monster isnot 1 and $bestialitydisable is "t")>>
+	你拉动把手，门被打开了。你冲过去，在你身后关上了门，看到一些<<beastsplural>>在走廊上奔跑。
+	<br><br>
+
+	<<endevent>>
+	<<nightingaleeventend>>
+<<else>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		你拉动门把手，但门纹丝不动。有把挂锁把它锁住了。你瞥了一眼身后，看到许多<<beastsplural>>正在逼近。你尝试撬锁，<span class="green">成功了！</span>你冲过门去，然后迅速关上了身后的门。
+		<br><br>
+
+		<<endevent>>
+		<<nightingaleeventend>>
+	<<else>>
+		你拉门把手，但门就是不动。有个挂锁锁着。你瞥了一眼身后，看到一群<<beastsplural>>正向你奔来。你试着撬锁，<span class="red">但失败了。</span><<beastsplural>>扑倒在你身上。
+		<br><br>
+
+		<<link [[继续|Abduction Hospital Corridor Wolves]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<</if>>

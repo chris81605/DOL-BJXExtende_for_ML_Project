@@ -1,0 +1,76 @@
+:: Avery Date []
+<<effects>>
+<<set $averydateattended to 1>><<set $endear to 0>>
+<<npc Avery>><<person1>>当你走近时，艾弗里抬起头来。<<if $pronoun is "m">><<He>>穿着设计考究的西装。<<else>><<He>>穿着一件华丽的礼服。<</if>> "你来啦，<<pcpetname "Avery">>。"<<he>>
+
+<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked">>
+	<<outfitChecks>>
+	<<he>>说，"让我看看你的外套下的样子。你可以把它脱到后座那边。"
+	<br><br>
+	你
+	<<if _overOutfit>>
+		$worn.over_upper.cn_name_cap
+	<<else>>
+		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked">>
+			$worn.over_upper.cn_name_cap和$worn.over_lower.cn_name_cap
+		<<elseif $worn.over_upper.name isnot "naked">>
+			$worn.over_upper.cn_name_cap
+		<<else>>
+			$worn.over_lower.cn_name_cap
+		<</if>>
+	<</if>>
+	坐在了后座。
+	<<undressOverClothes "averyCar">>
+<<else>>
+	说。
+<</if>>
+<<set $averyLastApp to $player.gender_appearance>>
+<<if $exposed gt 0>>
+	<br><br>
+	艾弗里面对你的丑态扬起了眉毛。"你确实知道如何设定期望值。让我们跳过晚餐，直接开始吧。"
+	<br><br>
+	<<link [[和艾弗里一起走|Avery Date 5]]>><<set $averydatedone to 1>><<npcincr Avery love 5>><<set $endear += 30>><</link>><<gendear>><<glove>>
+	<br>
+	<<link [[改变想法回家|Avery Date Refuse]]>><<set $averydatedone to 1>><</link>>
+	<br>
+<<elseif $worn.upper.type.includes("formal") or $worn.lower.type.includes("formal")>>
+	"你看起来很<<if $player.gender_appearance is "m">>英俊<<else>>美丽<</if>>。"
+	<br><br>
+	<<link [[赞美|Avery Date Compliment]]>><<npcincr Avery love 1>><<set $averydatedone to 1>><</link>><<glove>>
+	<br>
+	<<link [[微笑|Avery Date Smile]]>><<set $endear += 10>><<set $averydatedone to 1>><</link>><<gendear>>
+	<br>
+<<else>>
+	<<if $avery_misdressed gte 3>>
+		艾弗里微笑着注视着你的穿着，但是笑意不达眼底。"我想你根本没打算去吃晚餐。那我们直接开始吧，怎么样？"
+		<<npcincr Avery rage -5>><<set $endear -= 5>><<npcincr Avery love -3>><<larage>><<lendear>><<llove>>
+		<br><br>
+		<<set $avery_misdressed += 1>>
+		<<link [[和艾弗里一起走|Avery Date 5]]>><<set $averydatedone to 1>><<npcincr Avery love 1>><</link>><<glove>>
+		<br>
+		<<link [[改变想法回家|Avery Date Refuse]]>><<set $averydatedone to 1>><</link>>
+		<br>
+	<<elseif $avery_misdressed gte 2>>
+		艾弗里盯着你的衣服。愤怒掠过<<his>>的脸。"既然你不能听从指示，那我们就不吃饭了。你可以用其他方式招待我。"
+		<<npcincr Avery rage 5>><<set $endear -= 5>><<npcincr Avery love -3>><<garage>><<lendear>><<llove>>
+		<br><br>
+		<<link [[和艾弗里一起走|Avery Date 5]]>><<set $averydatedone to 1>><<set $avery_misdressed += 1>><</link>>
+		<br>
+		<<link [[改变想法回家|Avery Date Refuse]]>><<set $averydatedone to 1>><</link>>
+		<br>
+	<<elseif $avery_misdressed gte 1>>
+		艾弗里看着你的衣服眉头紧皱。"我们不是说好了吗？和我在一起的时候你要穿正装，去<span class="green">换一身衣服</span>吧。"
+		<<npcincr Avery rage 5>><<set $endear -= 5>><<garage>><<lendear>>
+		<br><br>
+		<<set $avery_misdressed += 1>>
+		<<link [[去换衣服|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		艾弗里看着你的衣服笑了。"这些衣服不行，去商店买些更<span class="green">正式的衣服</span>吧，这<span class="gold">£150</span>就当是给你买衣服的钱了。"
+		<br><br>
+		<<set $money += 15000>>
+		<<set $avery_misdressed to 1>>
+		<<link [[去换衣服|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

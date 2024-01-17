@@ -1,0 +1,91 @@
+:: Widgets PregEventsResult [widget]
+<<widget "PregEventsResult">>
+	<<set $outside to 0>><<set $location to $container.lastLocation>><<effects>>
+	<<set _pregnancy to $sexStats[$giveBirthLocation or "anus"].pregnancy>>
+	<<set _container to $container[$phase]>>
+	<<set $parasiteSelectionCount to 0>>
+	<<set $parasiteReplaceArray to []>>
+	<<set _availableStorage to (_container.maxCount - _container.count)>>
+	<<for _i to 0; _i lt $pregResult.length; _i++>>
+		<<if $checkboxResult[$pregResult[_i]] is true>>
+			<<set $parasiteSelectionCount += 1>>
+		<</if>>
+	<</for>>
+	<<for _i to 0; _i lt _container.count; _i++>>
+		<<if $checkboxReplace[_i] is true>>
+			<<set $parasiteReplaceArray.push(clone(_i))>>
+		<</if>>
+	<</for>>
+
+	<<if $debug is 1>>
+		Debug - Keep selected babies result (ID - Checkbox - Result)
+		<br>
+		<<for _i to 0; _i lt $pregResult.length;_i++>>
+			<<if $checkboxResult[$pregResult[_i]] is true>>
+				<<print $pregResult[_i]>> - <<print $checkboxResult[$pregResult[_i]]>> - 留下
+				<br>
+			<<elseif $checkboxResult[$pregResult[_i]] is false>>
+				<<print $pregResult[_i]>> - <<print $checkboxResult[$pregResult[_i]]>> - 售卖
+				<br>
+			<</if>>
+		<</for>>
+		<br>
+	<</if>>
+
+	<<if $parasiteSelectionCount lte _availableStorage>>
+		<<if $parasiteSelectionCount gt 0>>
+			<<if $pregnancyStats.namesParasitesChild is true>>
+				<<link [[留下选中的孩子|PregEventsResult2]]>>
+					<<set $pregChoice to "KeepSelected">>
+				<</link>>
+			<<else>>
+				<<link [[留下选中的寄生物|PregEventsResult2]]>>
+					<<set $pregChoice to "KeepSelected">>
+				<</link>>
+			<</if>>
+		<</if>>
+	<<elseif $parasiteSelectionCount gt 0>>
+		所选数量的存储空间不足。请更换<<number $parasiteSelectionCount-_availableStorage>><<if $pregnancyStats.namesParasitesChild is true>>寄生物孩子<<else>>寄生物<</if>>。
+		<br>
+		<<if ($parasiteSelectionCount - $parasiteReplaceArray.length) lte _availableStorage>>
+			<<if $pregnancyStats.namesParasitesChild is true>>
+				<<link [[换掉选中的孩子|PregEventsResult2]]>>
+					<<set $pregChoice to "ReplaceSelected">>
+				<</link>>
+			<<else>>
+				<<link [[更换选中的寄生物|PregEventsResult2]]>>
+					<<set $pregChoice to "ReplaceSelected">>
+				<</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $pregResult.length lte _availableStorage>>
+		<br>
+		<<if $pregnancyStats.namesParasitesChild is true>>
+			<<link [[留着所有的孩子|PregEventsResult2]]>>
+				<<set $pregChoice to "keepAll">>
+			<</link>>
+		<<else>>
+			<<link [[留着所有的寄生物|PregEventsResult2]]>>
+				<<set $pregChoice to "keepAll">>
+			<</link>>
+		<</if>>
+	<</if>>
+
+	<br><br>
+	<<if $pregnancyStats.namesParasitesChild is true>>
+		<<link [[卖掉所有的孩子们|PregEventsResult2]]>>
+			<<set $pregChoice to "sellAll">>
+		<</link>>
+	<<else>>
+		<<link [[出售所有寄生物|PregEventsResult2]]>>
+			<<set $pregChoice to "sellAll">>
+		<</link>>
+	<</if>>
+<</widget>>
+
+<<widget "resetPregButtons">>
+	<<replace #pregResult>>
+		<<PregEventsResult>>
+	<</replace>>
+<</widget>>

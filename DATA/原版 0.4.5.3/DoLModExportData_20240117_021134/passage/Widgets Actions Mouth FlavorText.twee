@@ -1,0 +1,62 @@
+:: Widgets Actions Mouth FlavorText [widget]
+<<widget "breastFlavorText">>
+	<<set _j to ($NPCList.findIndex(x => x.chest is "mouthentrance"))>>
+	<<if _j gte 0>>
+		<<personselect _j>>
+		你的头被<<print ($NPCList[_j].breastsize gte 6?"夹在":"压在")>>
+		<<if $enemyno gte 2>>
+			<<persons>>
+		<<else>>
+			<<his>>
+		<</if>>
+		的$NPCList[_j].breastsdesc<<print ($NPCList[_j].breastsize gte 6?"之间":"上")>>。
+	<<elseif $debug or $options.debugdisable is "f">>
+		Errors.report("breastFlavorText failed to find correct index, ignoring")
+	<</if>>
+<</widget>>
+
+<<widget "nippleFlavorText">>
+	<<set _j to ($NPCList.findIndex(x => x.chest is "mouth"))>>
+	<<if _j gte 0>>
+		<<personselect _j>>
+		你的头被压在
+		<<if $enemyno gte 2>>
+			<<persons>>
+		<<else>>
+			<<his>>
+		<</if>>
+		<<if $NPCList[_j].lactation is 1 and $breastfeedingdisable is "f">>
+			滴水的
+		<</if>>
+		$NPCList[_j].breastdesc.
+	<<elseif $debug or $options.debugdisable is "f">>
+		Errors.report("nippleFlavorText failed to find correct index, ignoring")
+	<</if>>
+<</widget>>
+
+<<widget "facesitFlavorText">>
+	<<if $enemyno lt 2>>
+		<<person1>>
+		<<if $npc.length isnot 0>>
+			<<print $npc[0].replace("Avery","艾弗里").replace("Bailey","贝利").replace("Briar","布莱尔").replace("Charlie","查里").replace("Darryl","达里尔").replace("Doren","多伦").replace("Eden","伊甸").replace("Gwylan","格威岚").replace("Harper","哈珀").replace("Jordan","约旦").replace("Kylar","凯拉尔").replace("Landry","兰德里").replace("Leighton","礼顿").replace("Mason","梅森").replace("Morgan","摩根").replace("River","瑞沃").replace("Robin","罗宾").replace("Sam","萨姆").replace("Sirris","西里斯").replace("Whitney","惠特尼").replace("Winter","温特").replace("Niki","尼奇").replace("Quinn","奎恩").replace("Remy","雷米").replace("Alex","艾利克斯").replace("Wren","伦恩").replace("Sydney","悉尼").replace("Taylor","泰勒").replace("Casey","凯西").replace("Ivory Wraith","象牙怨灵").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰").replace("Zephyr","泽菲尔")>>
+		<<else>>
+			<<He>>
+		<</if>>
+	<<else>>
+		<<if $mouthstate is "anal">>
+			<<selectNpcWithPartInPosition "vagina" "facesitanal">>
+		<<else>>
+			<<selectNpcWithPartInPosition "vagina" "facesit">>
+		<</if>>
+		<<if $npcrow.includes(_j)>>
+			<<print $npc[$npcrow.indexOf(_j)].replace("Avery","艾弗里").replace("Bailey","贝利").replace("Briar","布莱尔").replace("Charlie","查里").replace("Darryl","达里尔").replace("Doren","多伦").replace("Eden","伊甸").replace("Gwylan","格威岚").replace("Harper","哈珀").replace("Jordan","约旦").replace("Kylar","凯拉尔").replace("Landry","兰德里").replace("Leighton","礼顿").replace("Mason","梅森").replace("Morgan","摩根").replace("River","瑞沃").replace("Robin","罗宾").replace("Sam","萨姆").replace("Sirris","西里斯").replace("Whitney","惠特尼").replace("Winter","温特").replace("Niki","尼奇").replace("Quinn","奎恩").replace("Remy","雷米").replace("Alex","艾利克斯").replace("Wren","伦恩").replace("Sydney","悉尼").replace("Taylor","泰勒").replace("Casey","凯西").replace("Ivory Wraith","象牙怨灵").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰").replace("Zephyr","泽菲尔")>>
+		<<else>>
+			<<person>>
+		<</if>>
+	<</if>>
+	<<if $mouthstate is "anal">>
+		坐在你的嘴上。
+	<<else>>
+		坐在你的脸上。
+	<</if>>
+<</widget>>

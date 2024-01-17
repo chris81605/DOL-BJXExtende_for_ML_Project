@@ -1,0 +1,53 @@
+:: Estate Stone Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<person>>试图抓住你，但你逃脱了。虽然对方仍然守在门口，但是高潮使对方太虚弱而无法追逐。
+	<br><br>
+	<<tearful>>你躲在灌木丛里。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Estate]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	"雷米不值得我们付出这么多！"<<person1>><<person>>转身就跑，其他保安也四散而去。
+	<<estate_chaos 100>>
+	<br><br>
+	<<tearful>>你大步走进石头建筑。里面有条通往黑暗通道的斜坡，你可以看到通道尽头传来的亮光。
+	<br><br>
+
+
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Estate Stone Enter]]>><</link>>
+
+<<else>>
+	你倒在了地上，伤得太重，无力继续战斗。
+	<br><br>
+	"我们要拿<<phim>>怎么办？"<<person2>><<person>>问，"把<<phim>>交给老板？"
+	<br>
+	"让雷米把时间浪费在这些乌合之众身上可不好。"<<person1>><<person>>说，"我有个主意，把<<phim>>留在这里。"
+	<br><br>
+
+	当<<person1>><<person>>消失在通道中时，<<person2>><<person>>将一只脚踩在你的胸口。更多的暴徒赶来调查骚乱。一分钟后，那个<<person1>><<person>>出现了，手里还拿着一小瓶紫色液体，<<he>>脸上露出调皮的笑容。
+	<br><br>
+
+	<<if $worn.face.type.includes("covered") and $worn.face.type.includes("gag")>>
+		<<person2>><<person>>回应微笑。<<He>>俯下身，<span class="red">把你的$worn.face.cn_name_cap扔到一边。</span>"我喜欢你的思维方式。"
+		<br><br>
+		<<person1>><<person>>跪在你身边。"张开腿，"<<he>>命令道。
+		<<set $worn.face.type.push("broken")>>
+		<<faceruined>>
+	<<else>>
+		<<He>>蹲在你旁边说："张开嘴。"
+	<</if>>
+	<br><br>
+
+	<<link [[张开嘴巴|Estate Stone Aphrodisiac Accept]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>><<gggarousal>>
+	<br>
+	<<link [[拒绝|Estate Stone Aphrodisiac Refuse]]>><<pain 4>><<def 1>><</link>><<gpain>><<gggarousal>>
+	<br>
+
+<</if>>

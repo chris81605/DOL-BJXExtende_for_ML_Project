@@ -1,0 +1,34 @@
+:: Eden Caged Breakfast Oral Finish []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<nnpc_title "Eden">>喘了口气就松开了你。"味道好吗？我确实感觉很好，"<<he>>笑道。<<npcincr Eden trust 10>><<gtrust>>
+	<br><br>
+
+	<<He>>把你向后推，用力不大，但出乎意料的是你又跌回了笼子里。你又被关在里面了。"我晚点过来接你。"<<He>>假笑。"别走远。"
+<<else>>
+	愤怒的伊甸在将你送回禁闭室之前反手攻击了你。"你他妈的可以呆在里面想想你为什么这么混蛋。我希望你这次改变主意。"<<npcincr Eden trust -10>><<ltrust>>
+	<br><br>
+
+	<<He>>冲到隔断处准备出门。
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<npc Eden>><<person1>>
+
+<<tearful>>你坐在笼子里，想着该怎么办。
+<br><br>
+
+<<if $edenCaged.escape gte 9>>
+	<span class="purple">门松了，但从你幽闭恐惧症的位置来看，你无法判断伊甸已经走了多远。</span>你还不能冒险逃跑。
+	<br>
+<<else>>
+	<<link [[尝试逃跑 (10:00)|Eden Caged]]>><<set $phase to 1>><<set $edenCaged.escape += 1>><<pass 10 hours>><</link>>
+<</if>>
+<br>
+<<link [[休息 (10:00)|Eden Caged]]>><<set $phase to 2>><<pass 10 hours>><</link>>
+<br>

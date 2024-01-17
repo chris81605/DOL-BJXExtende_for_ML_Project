@@ -1,0 +1,65 @@
+:: Moor Fox Deviant Pet Sex Finish []
+<<location "moor">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $consensual is 1>>
+		满足之后，<<beasttype>>靠在了你身上。它舔着你的脸颊，你也抚摸了<<bhim>>一小会儿。<<stress -2>><<lstress>>
+		<br><br>
+
+		不过，你们的即兴拥抱不可能永远持续下去，最终你设法跟<<bhim>>拉开了距离。
+		<<if $monster is 1>>
+			<<if $NPCList[0].traits.includes("clever")>>
+				"真不错。不过，别以为这样我下次就会对你客气了。"<<bhe>>转头对你说着，然后走进了灌木丛中。
+			<<else>>
+				"谢谢你，你人很好，也许我们可以……"<<bhe>>犹豫了一下，"没关系。希望能再见到你！"<<bhe>>转头对你说着，然后走进了灌木丛中。
+			<</if>>
+		<<else>>
+			当<<bHe>>跑进石楠花丛的时候，<<bhe>>向你投去一个渴望的眼神。
+		<</if>>
+	<<else>>
+		<<if $enemyanger lte 60>>
+			<<if $monster is 1>>
+				<<beasttype>>和你拥抱了一会儿。然后，一言不发地起身走进灌木丛中。
+			<<else>>
+				<<beasttype>>在你身上蹭了一会儿。然后，突然，<<bhe>>从你身上跳了下来，窜进了灌木丛。
+			<</if>>
+		<<else>>
+			<<if $monster is 1>>
+				<<beasttype>>咆哮着撕咬着你的脖子，虽然没有刺穿皮肤，但还是很疼。<<pain 6>><<gpain>>
+				<br><br>
+
+				"或许这能让你学到点教训，"<<bhe>>说着从你身上跳下来，跑进灌木丛。
+			<<else>>
+				<<beasttype>>咆哮着撕咬着你的脖子，虽然没有刺穿皮肤，但还是很疼。<<pain 6>><<gpain>>
+				<br><br>
+
+				对你失去了兴趣后，<<beasttype>>从你身上跳下来，跑进了灌木丛。
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<tearful>>你站了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	你把<<bhim>>从你身边推开，慌张地爬了起来。当你转过身去的时候，你只来得及捕捉到一条毛茸茸的尾巴消失在灌木丛中。
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<beasttype>>从你身边离开，溜进了石楠花丛。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,30 @@
+:: Sydney Beach Promenade Move []
+<<effects>><<run statusCheck("Sydney")>><<pass 10>>
+就在那巨浪冲击海岸的时刻，你及时拉着悉尼离开长廊，衣服只被淋湿了一点。
+<br><br>
+<<His>>的脸离你的很近。
+<<if _sydneyStatus.includes("corrupt") and $sydneyromance is 1>>
+	<br>在你反应过来之前，<<he>>俯身给了你一个吻。又一波浪潮越过了长廊，把一层轻薄的水雾散落在你们的身上。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>><<npcincr Sydney lust 1>><<glust>>
+	<br><br>
+	<<if _npcKissVirginTemp>><<He>>的表情很是欠揍。"那可是我的初吻，你赚翻了耶。"<</if>>
+	过了一会儿，你们分开了。悉尼拽着你的衣服，朝大海望去。"谢谢，要是没有你，我的<<if $exit is "library">>校服<<else>>长袍<</if>>肯定都湿透了。也许我们应该找个地方躲一躲。"
+	<br><br>
+	<<link [[去找遮蔽的地方 (0:10)|Sydney Beach Promenade Bench]]>><<pass 10>><</link>>
+	<br>
+	<<link [[提前离去 (0:25)|Sydney Beach Leave]]>><<pass 25>><</link>>
+	<br>
+<<elseif $sydneyromance is 1>>
+	<br><<He>>与你相对视着，脸上泛起了红晕。
+	<br><br>
+	<<link [[亲吻|Sydney Beach Promenade Move Kiss]]>><<npcincr Sydney lust 1>><</link>><<glust>><<kissvirginitywarning>>
+	<br>
+	<<link [[什么也不做|Sydney Beach Promenade Move Continue]]>><</link>>
+	<br>
+<<else>>
+	<<He>>迅速松开你，把<<himself>>身上的水抖掉。"谢谢你，要是没有你，我现在的<<if $exit is "library">>校服<<else>>袍子<</if>>肯定都湿透了。也许我们应该找个地方躲一躲。"
+	<br><br>
+	<<link [[去找遮蔽的地方 (0:10)|Sydney Beach Promenade Bench]]>><<pass 10>><</link>>
+	<br>
+	<<link [[提前离去 (0:25)|Sydney Beach Leave]]>><<pass 25>><</link>>
+	<br>
+<</if>>

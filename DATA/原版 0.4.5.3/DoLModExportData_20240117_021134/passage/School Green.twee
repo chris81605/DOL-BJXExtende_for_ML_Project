@@ -1,0 +1,55 @@
+:: School Green []
+<<effects>>
+
+你坐到绿地处的桌旁，在橡树粗壮树枝的下方。
+
+<<if $cool gte 240>>
+	其他学生也过来坐到你附近。
+<<elseif $cool gte 120>>
+	其他学生很高兴你能加入。
+<<else>>
+	其他学生接纳了你，望着头顶微微摇晃的树枝，每个人都感到轻松闲适。
+<</if>>
+有些学生在吃午饭。
+<br><br>
+
+<<if $rng gte 67>>
+	<<generatey1>><<person1>>一个<<person>>正在<<his>>的朋友注视下试图攀爬大树。即使是最低的树枝也只能勉强够着，但<<he>>还是成功握住了它。<<He>>爬上去，继续尝试下一根树枝，结果不小心滑了一下，摔回到草地上。<<His>>的朋友们哈哈大笑。
+	<br><br>
+
+	<<link [[给他们露一手|School Green Climb]]>><<endevent>><</link>><<athleticsdifficulty 600 1000>>
+	<br>
+	<<link [[无视|School Rear Courtyard]]>><<endevent>><</link>>
+	<br>
+<<elseif $rng gte 33>>
+	<<generatey1>><<generatey2>><<person1>>
+	一个<<person>>推了<<person2>><<person>>一把。<<person>>也毫不示弱，推了回去。<<person1>>
+	<br><br>
+	"打起来！打起来！干他！"旁边人开始起哄。两个人扭打在一起，越来越多的学生过来围观。
+	<br><br>
+
+	<<link [[劝架|School Green Stop]]>><</link>>
+	<br>
+	<<person1>>
+	<<link [["为" + $description + "的打架者加油"|School Green Cheer 1]]>><<status 1>><</link>><<gcool>>
+	<br>
+	<<person2>>
+	<<link [["为" + $description + "的打架者加油"|School Green Cheer 2]]>><<status 1>><</link>><<gcool>>
+	<br>
+	<<link [[无视|School Rear Courtyard]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<generatey1>><<person1>>
+	草地上的康乃馨随风摇曳。一个<<person>>蹲下来，摘了一朵。
+	<br><br>
+
+	<<if !$plants_known.includes("carnation")>>
+		<<icon "tending/carnation.png">> <<link [[寻找种子|School Green Seeds]]>><<set $plants_known.push("carnation")>><</link>>
+		<br>
+	<<else>>
+		<<icon "tending/carnation.png">> <<link [[摘取康乃馨|School Green Pick]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+	<<ind>><<link [[无视|School Rear Courtyard]]>><<endevent>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,23 @@
+:: Domus House Safe Open []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<if $skulduggery lt 500>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+<<if $rng gte 10>>
+	你成功打开保险箱，并在里面找到了<<moneyGainDisplay 30 true true>>。
+	<br><br>
+	<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<else>>
+	你成功地打开了保险箱，发现里面有一块看起来很贵的手表。
+	<br><br>
+	<<link [[拿走|Domus Street]]>><<set $blackmoney += 100>><<crimeUp 100 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<</if>>

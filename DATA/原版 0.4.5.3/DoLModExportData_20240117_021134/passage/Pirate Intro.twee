@@ -1,0 +1,56 @@
+:: Pirate Intro []
+<<location "seapirates">><<effects>>
+
+<<npc Zephyr>><<person1>>
+<<generateRole 1 0 "pirate">><<generateRole 2 0 "pirate">>
+
+<<if $pirateintro is 1>>
+	有一双手握住了你的肩膀，将你从海中拉了上来。你砰的一声落在熟悉的甲板上，咳出一口水。
+	<br><br>
+	<<if $pirate_rank gte 1>>
+		“你为什么独自在这里游泳？”泽菲尔船长问道，“你再这样，我就会把你当作诱饵来使。”<<He>>帮助你站起来。“看什么看，回去工作！”
+		<br><br>
+
+		<<link [[继续|Pirate Deck]]>><</link>>
+		<br>
+	<<else>>
+		“这不是我们的小鱼吗，”泽菲尔船长招了招手。“欢迎回到我的船。”
+		<br><br>
+		<<link [[继续|Pirate Intro 2 Repeat]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你感觉有双手紧紧抓住了你的胳膊，把你从水里拉了出来。你重重地摔在坚硬的东西上，开始咳了起来。
+	<br><br>
+	几个人笑着站在你的身边。一只靴子把你踢翻在地。
+	<<if $pronoun is "m">>
+		绿眼睛被浓密的黑色胡子及黑色编发所环绕，眼睛的主人正低头凝视着你。
+	<<else>>
+		绿眼睛被黑色编发所环绕，眼睛的主人正低头凝视着你。
+	<</if>>
+	<<if $smuggler_pub_zephyr is 1>>
+		是泽菲尔。
+		<br><br>
+		<<if $pirate_rank gte 1>>
+			“你为什么独自在这里游泳？”泽菲尔船长问道，“你再这样，我就会把你当作诱饵来使。”<<He>>帮助你站起来。“看什么看，回去工作！”
+			<br><br>
+
+			<<link [[继续|Pirate Deck]]>><</link>>
+			<br>
+		<<else>>
+			“我们抓到了一个活的！”<<he>>双手叉着腰高声宣布。当<<he>>靠近你时，一阵欢呼声爆发出来。“所以你以流浪者的身份上了我们的船。”
+			<br><br>
+			<<link [[继续|Pirate Intro 2]]>><<set $pirate_rank to 0>><<set $pirate_intro to 1>><</link>>
+			<br>
+		<</if>>
+
+	<<else>>
+		<br><br>
+
+		"我们抓到了一个活的！"绿眼睛的主人双手叉腰宣布道。当<<he>>靠近你时，爆发了一阵欢呼。"我是泽菲尔船长，而你，<<lass>>，有幸来到我的船上作客。"
+		<br><br>
+
+		<<link [[继续|Pirate Intro 2]]>><<set $pirate_rank to 0>><<set $pirate_intro to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

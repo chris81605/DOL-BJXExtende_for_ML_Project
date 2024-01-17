@@ -1,0 +1,21 @@
+:: Hairdressers Gel []
+<<generate1>><<person1>>你浏览待售的美发产品。你决定拿起一个<<if $phase is 1>>小罐子<<else>>小瓶子<</if>>，上面的标签写着"发型挺住，心态稳住！"
+<br><br>
+理发师一边给你结账一边闲聊。"这可是好东西，"<<he>>说。
+
+<<if $phase is 1>>
+	"一罐量很少，所以只够你用<span class="teal">一次</span>，但不需要每天用。你不用担心头发不长，除非你打算再剪短。"
+<<else>>
+	"一瓶量很少，所以只够你用<span class="teal">一次</span>，但它可以保持到天荒地老。你不用担心头发会乱掉，至少在你决定给造型来点改变前是不会的。"
+<</if>>
+<br><br>
+<<He>>微笑着把包递给你。"<<print either("谢谢惠顾！","祝你过得愉快！","一路平安。","购物愉快。","欢迎再来！")>>"
+<br><br>
+<<if $phase is 1>>
+	你还剩下<span class="gold"><<print $sexStats.pills.pills["Hair Growth Formula"].owned>></span>份生发配方。
+<<else>>
+	你现在有<span class="gold">$hairgelBottles</span> <<print ($hairgelBottles is 1) ? "瓶" : "瓶">>发胶。
+<</if>>
+<br><br>
+
+<<link [[继续|Hairdressers]]>><<endevent>><</link>>

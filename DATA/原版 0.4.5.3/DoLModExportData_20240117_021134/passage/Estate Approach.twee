@@ -1,0 +1,34 @@
+:: Estate Approach []
+<<effects>>
+
+你走近栅栏。栏杆的高度是你的好几倍，顶部布满了带刺的铁丝网。远处的农场大部分被灌木丛和山丘所掩盖，但你可以看到上面一个谷仓的顶部。远处的山上耸立着一座庄严的庄园，俯瞰着沼地。
+<br><br>
+
+附近有扇门，门口站着保安。
+<br><br>
+
+<<if $daily.estateDone is true>>
+	<span class="purple">安全部门处于高度戒备状态。</span>你要到明天才能进去。
+	<br><br>
+<</if>>
+
+<<if $farm_stage gte 5 or isPubfameTaskAccepted("wren")>>
+	<<if $daily.estateDone isnot true>>
+		<<mooricon "remy">><<link [[接近大门|Estate Gate]]>><</link>>
+		<br>
+	<</if>>
+	<<if $estate_fence is "bird">>
+		<<investigateicon>><<link [[寻找别的入口 (0:30)|Estate Entrance Bird]]>><<pass 30>><</link>>
+		<br>
+	<<elseif $estate_fence is "landry">>
+		<<investigateicon>><<link [[寻找别的入口 (0:30)|Estate Entrance Landry]]>><<pass 30>><</link>>
+		<br>
+	<<elseif $estate_fence is "secret" and $daily.estateDone isnot true>>
+		<<getinicon>><<link [[使用秘密入口 (0:03)|Estate Entrance Secret]]>><<pass 3>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<br>
+<<getouticon>><<link [[离开|Moor]]>><<set $eventskip to 1>><</link>>
+<br>

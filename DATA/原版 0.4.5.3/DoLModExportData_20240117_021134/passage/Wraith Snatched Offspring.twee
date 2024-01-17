@@ -1,0 +1,44 @@
+:: Wraith Snatched Offspring []
+<<control 20>><<effects>><<getTarget>>
+你摇摇晃晃地走向$container[$location].name。
+<<set $outside to 0>>
+<<set _container to $container[$location]>>
+<<set $checkboxResult to {}>><<set _paleCount to 0>>
+<<for _i to 0; _i lt Object.keys(_container.creatures).length; _i++>>
+	<<if _container.creatures[_i] isnot null and _container.creatures[_i].creature.includes("Pale")>>
+		<<set _paleCount ++>>
+	<</if>>
+<</for>>
+你焦急地查看你那<<if _paleCount isnot 1>>些<</if>>苍白的孩子，把<<if _paleCount isnot 1>>它们<<else>>它<</if>>抱了出来，并把<<if _paleCount isnot 1>>它们<<else>>它<</if>>搂在怀里。
+<br>
+<<creatureVisit>>
+<br><br>
+你紧紧抱着<<if _paleCount isnot 1>>它们<<else>>它<</if>>。你感到一股奇怪的温暖在你的内心滋长，你的视野开始变得模糊。
+<br><br>
+你哭了。<<set $pain to 100>><<set $phase2 to 2>>
+<br><br>
+你不知道你在那里坐了多久。你几乎感觉不到任何东西。你的表情冷淡。<<set _palePass to (45 + (15 * _paleCount))>><<pass _palePass>><<ggcontrol>>
+<br><br>
+最终，你的目光转向<<if $wraith.exit is "home" and ($robinbed is "yours" or $robinbed is "theirs" or $kylarbed is 1)>><<if $robinbed is "yours" or $robinbed is "theirs">>罗宾。<<else>>凯拉尔。<</if>><<else>>湖水。<</if>>
+<br><br>
+
+<<switch $wraith.exit>>
+	<<case "home">>
+		<<set $nextPassage to "Bedroom">>
+		<<set $nextPassageCheck to "Bedroom">>
+		<span class="nextLink"><<link [[离开|Bedroom]]>><</link>></span>
+		<br>
+		<<link [[试着保持静止|Containers]]>><</link>>
+	<<case "lake">>
+		<<set $nextPassage to "Lake Waterfall">>
+		<<set $nextPassageCheck to "Lake Waterfall">>
+		<span class="nextLink"><<link [[湖泊|Lake Waterfall]]>><</link>></span>
+		<br>
+		<<link [[试着保持静止|Containers]]>><</link>>
+	<<case "alex_farm">>
+		<<set $nextPassage to "Bedroom">>
+		<span class="nextLink"><<link [[离开|Bedroom]]>><</link>></span>
+		<br>
+		<<link [[试着保持静止|Containers]]>><</link>>
+<</switch>>
+<br>

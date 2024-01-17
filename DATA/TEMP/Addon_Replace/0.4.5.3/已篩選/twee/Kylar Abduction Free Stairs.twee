@@ -1,0 +1,26 @@
+:: Kylar Abduction Free Stairs []
+<<effects>><<set $lock to 1000>>
+
+你爬上吱吱作响的楼梯。最上面的门上挂满了挂锁。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">数虽然数量很多，但是你不害怕。你很快就能搞定它们。</span>
+	<br><br>
+	<<link [[打开 (0:05)|Kylar Abduction Free Sneak]]>><<pass 5>><</link>>
+	<br>
+<<else>>
+	<span class="red">开锁的难度看起来超出了你的能力。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+
+/* 北极星模组 */
+<<set $ghostIn to false>>
+<<if $options.bjx_eventTF and $ghost gte 1>>
+	<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+	<br>
+	<<link [[穿越 (0:01)|Kylar Abduction Free Sneak]]>><<set $ghostIn to true>><<pass 1>><</link>>
+	<br>
+<</if>>
+/* 北极星 */
+<<link [[退回去|Kylar Abduction Free Breeze]]>><</link>>
+<br>

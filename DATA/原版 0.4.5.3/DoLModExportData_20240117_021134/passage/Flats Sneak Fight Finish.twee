@@ -1,0 +1,40 @@
+:: Flats Sneak Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	两人靠在墙上休息。<<tearful>>你抓住机会逃跑了。你能听到<<person1>><<person>>虚弱地呼叫支援的声音，你快速逃离了走廊。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<earnFeat "Panic Room">>
+	<<flats_alarm_end>>
+
+	<<link [[继续|Flats]]>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<person2>><<person>>倒下了，<<person1>><<person>>退后了几步，伸手拿起了<<his>>的对讲机。<<tearful>>你趁机逃跑了。你听到<<him>>在呼叫支援，而你则沿着走廊逃离了现场。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<earnFeat "Panic Room">>
+	<<flats_alarm_end>>
+
+	<<link [[继续|Flats]]>><</link>>
+	<br>
+<<else>>
+	<<tearful>>你摔倒在地，因为受伤了失去了战斗能力。
+	<br><br>
+	<<saveNPC 0 "flats_arrest_1">>
+	<<saveNPC 1 "flats_arrest_2">>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<flats_alarm_end>>
+
+	<<link [[继续|Hospital Arrest Journey]]>><<loadNPC 0 "flats_arrest_1">><<loadNPC 1 "flats_arrest_2">><<clearNPC "flats_arrest_1">><<clearNPC "flats_arrest_2">><</link>>
+	<br>
+
+<</if>>

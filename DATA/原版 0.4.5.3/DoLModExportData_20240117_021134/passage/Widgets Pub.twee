@@ -1,0 +1,52 @@
+:: Widgets Pub [widget]
+<<widget "landryoptions">>
+	<<if $blackmoney gte 1>>
+		<<link [[出售赃物|Pub Sell]]>><</link>>
+		<br>
+	<</if>>
+	<<if $spray lt $spraymax and $money gte 250000>>
+		<<link [[购买防狼喷雾 (£2500)|Pub Spray]]>><<spray 1>><<set $money -= 250000>><</link>>
+		<br>
+	<</if>>
+	<<if crimeSumCurrent() gte 500 and !$pubtask>>
+		<<link [[寻求帮助，消除你的犯罪记录|Pub Task]]>><</link>>
+		<br>
+	<</if>>
+	<<if $police_hack is 1>>
+		<<link [[求助如何黑入警用电脑|Pub Hack]]>><</link>>
+		<br>
+	<<elseif $police_hack is 4 and $money gte 30000>>
+		<<link [[购买警察电脑新的密码 (£ 300)|Pub Hack]]>><<set $money -= 30000>><</link>>
+		<br>
+	<<elseif $pub_hack_job is 3 and $hacker_tasks.length gte 2>>
+		<<link [["传递黑客的消息"|Pub Hack]]>><<set $pub_hack_job to 4>><</link>>
+		<br>
+	<</if>>
+	<<if $pubtask2 is 1>>
+		<<link [[交出黑匣子|Pub Box]]>><<set $pub_task_stat++>><</link>>
+		<br>
+	<</if>>
+	<<if $estate_fence is "quest" and _estate_asked isnot true>>
+		<<link [[询问关于闯入雷米庄园的问题|Pub Estate]]>><</link>>
+		<br>
+	<</if>>
+	<<if $pubfame>>
+		<<if $pubfame.status is "ready">>
+			<<link [[为名声寻求帮助|Pub Fame]]>><<set $phase to 0>><</link>>
+			<br>
+		<<elseif $pubfame.status is "hiding">>
+			<<link [[为名声寻求帮助|Pub Fame Hiding]]>><</link>>
+			<br>
+		<<elseif $pubfame.status is "accepted">>
+			<<link [[请求米奇帮个忙|Pub Fame]]>><<set $phase to 0>><</link>>
+			<br>
+		<<elseif $pubfame.status is "done">>
+			<<link [[和米奇谈谈关于你的请求|Pub Fame]]>><<set $phase to 0>><</link>>
+			<br>
+		<<elseif $pubfame.intro and $hacker_tasks.length gte 2>>
+			<<link [[为名声寻求帮助|Pub Fame Return]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<br>
+<</widget>>

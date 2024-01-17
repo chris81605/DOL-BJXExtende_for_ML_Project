@@ -1,0 +1,36 @@
+:: Events Swimming Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $timer to 18>>
+	<<enableSchoolRescue "delinquency">>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	在<<person2>><<person>>继续抚摸着你屁股的同时，<<person1>><<person>>弯下腰来抚摸你的胸部。
+	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1>>
+		<<he>>在盯着你的同时用<<his>>的舌尖轻轻舔弄着你的<<nipple>>。
+	<<elseif $worn.upper.exposed gte 2>>
+		<<he>>在死死地盯着你的同时，用<<his>>的舌头搁着你的$worn.under_upper.cn_name_cap舔舐你的<<nipple>>。
+	<<else>>
+		<<he>>在死死地盯着你的同时，用<<his>>的舌头隔着你的$worn.upper.cn_name_cap舔舐你的<<nipple>>。
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>梅森不理你，很有可能是因为你自己作为不良学生的名气太大了。</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Events Swimming Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Events Swimming Molestation]]>><</link>></span><<nexttext>>
+<</if>>

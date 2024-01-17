@@ -1,0 +1,34 @@
+:: Strip Club Dancing []
+<<set $outside to 0>><<set $location to "strip_club">><<effects>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+你不可能在如此暴露的情况下继续跳舞！你满脸通红地逃离了现场。
+<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+<<link [[继续|Strip Club]]>><<endevent>><<clotheson>><</link>>
+<<elseif $danceevent is "private">>
+	<<if $promiscuity gte 35>>
+		<<link [[包间|Strip Club Private Dance]]>><<dance_private_init>><</link>><<promiscuous3>>
+		<br>
+	<<elseif $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[包间|Strip Club Private Dance]]>><<set $desperateaction to 1>><<dance_private_init>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+	<<link [[逃走|Strip Club Dressing Room]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+	<<link [[逃走|Strip Club Dressing Room]]>><<clotheson>><<endevent>><</link>>
+	<<else>>
+	<<link [[停止|Strip Club]]>><<clotheson>><<endevent>><</link>>
+	<</if>>
+<</if>>

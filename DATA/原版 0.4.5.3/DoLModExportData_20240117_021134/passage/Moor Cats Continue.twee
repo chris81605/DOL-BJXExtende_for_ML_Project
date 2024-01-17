@@ -1,0 +1,63 @@
+:: Moor Cats Continue []
+<<effects>>
+
+你继续你的旅程。
+<<beastNEWinit 3 cat>>
+<<if $rng gte 51 and ($bestialitydisable is "f" or $monster is 1)>>
+
+	可能只是错觉吧。
+	<br><br>
+	你听到身后有啪塔啪塔的脚步声，转过身，对上了一双黄色的眼睛。你听到了更多的脚步声。你被包围了。
+	<br><br>
+	<<if $monster is 1>>
+		一只<<beasttype 0>>扑了过来，<span class="purple">把你按在地上。</span>"我很高兴你能来，"<<bhe 0>>说道，"真是无聊的一天。"<<bHe 0>>没有继续攻击，而是跳开了。你想要站起来，却又被<<bhis 0>>的同伴按住了。
+	<<else>>
+		一只大型猫科动物猛扑过来，<span class="purple">把你按在地上。</span>它向你咆哮了一会儿，但没有攻击你，而是跳开了。你想要站起来，却又被另一只猫压住了。
+	<</if>>
+	<<if $worn.lower.name isnot "naked">>
+		这一只把你翻转到肚皮朝上，并用<<bhis 1>>的爪子勾到你的$worn.lower.cn_name_cap里面。
+		<br><br>
+		<<set $worn.lower.integrity -= 100>>
+		<<if $worn.lower.integrity lte 0>>
+			<<bHe 1>><span class="pink">撕开你身上的布料，</span>毫不费力地露出你的<<undies>>。
+			<<integritycheck no_text>><<exposure>>
+			<br><br>
+		<<else>>
+			<<bHe 1>>试图撕开你身上的布料，但布料很牢固。你被甩到了空中，爪子松开了，你重新摔回了地上。
+			<br><br>
+		<</if>>
+	<<elseif $worn.under_lower.name isnot "naked">>
+		这一只把你翻转到肚皮朝上，并用<<bhis 1>>的爪子勾到你的$worn.under_lower.cn_name_cap里面。
+		<br><br>
+		<<set $worn.under_lower.integrity -= 100>>
+		<<if $worn.under_lower.integrity lte 0>>
+			<<bHe 1>><span class="pink">撕开你身上的布料，</span>毫不费力地露出你的<<genitals>>。
+			<<integritycheck no_text>><<exposure>>
+			<br><br>
+		<<else>>
+			<<bHe 1>>试图撕开你身上的布料，但布料很牢固。你被甩到了空中，爪子松开了，你重新摔回了地上。
+			<br><br>
+		<</if>>
+	<<else>>
+		这只将你翻转成了腹部朝上。
+		<br><br>
+	<</if>>
+
+		<<link [[安抚|Moor Cats Soothe]]>><</link>><<tendingdifficulty 500 1100>>
+		<br>
+		<<link [[战斗|Moor Cats Rape]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[顺从|Moor Cats Rape]]>><<set $phase to 1>><<set $molestationstart to 1>><</link>>
+		<br>
+<<elseif $rng gte 51>>
+	你听到身后有啪塔啪塔的脚步声，转过身，对上了一双黄色的眼睛。你听到了更多的脚步声。你疯狂地奔跑，尽管你的衣服磨损得更严重了，但你还是设法逃脱了。<<beastescape>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	可能只是错觉吧，你很快就抛诸脑后。
+	<br><br>
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<</if>>

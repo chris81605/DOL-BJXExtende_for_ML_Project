@@ -1,0 +1,123 @@
+:: Forest Nest Hide []
+<<effects>>
+你隐藏起来等待，专注地观察巢穴。
+<<if $forest_nest.fox is 3>>
+	<<if $fox gte 6>>
+		味道越来越近了。不久之后，你听到了一些沙沙声。
+	<<else>>
+		不久之后，沙沙声继续响起。
+	<</if>>
+<<else>>
+	<<if $forest_nest.fox is 1>>
+		<<beastNEWinit 1 fox>>
+	<</if>>
+	很快，你开始听到附近传来的沙沙声。
+<</if>>
+<<if $forest_nest.type lte 3>>
+	<<if $forest_nest.type lte 2>>
+		一道明亮的橙白色闪光窜上了树桩，是一只<<beasttype>>。
+		<br><br>
+
+		<<bHe>>在树顶上停留了一会儿，然后靠近了巢穴。<<bHe>>接近了一步，开始挖掘。不久之后，<<bhe>>探出头，
+		<<if $monster is 1>>
+			手里拿着几颗鸟蛋。<<bHe>>熟练地从树上跳了下来。
+		<<else>>
+			嘴里叼着一颗鸟蛋。<<bHe>>跳下树来，把收获堆了起来。
+		<</if>>
+	<<else>>
+		一只<<beasttype>>出现在视野中，专注地盯着巢穴。
+		<br><br>
+
+		<<bHe>>犹豫地向前迈了一步，四处张望。然后<<bHe>>向前猛冲，开始挖掘巢穴。
+		<<if $phase is 1>>
+			<<set $phase to 0>>
+			<<if $monster is 1>>
+				<<bHe>>先是贪婪地舔掉手指上的鸟蛋残余，
+			<<else>>
+				<<bHe>>先是贪婪地舔掉了鸟蛋碎片，
+			<</if>>
+			然后吃起了完整的鸟蛋。
+			<<if $forest_nest.eggs lte 0>><span class="purple">好像没剩多少了</span>。<</if>>
+		<<else>>
+			<<if $monster is 1>>
+				<<bHe>>抓了一把鸟蛋，嘴里放了一个，然后跳了几米远，把收获堆了起来。
+			<<else>>
+				<<bHe>>嘴里叼着一个鸟蛋，跳了几米远，把收获堆了起来。
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $forest_nest.eggs gt 0>>
+		<<if $NPCList[0].type.includes("clever")>>
+			<<set $forest_nest.eggs += 2>><span class="green"><<bHe>>看起来找到了相当多的鸟蛋，相对于巢穴的大小来说道。</span>
+		<<elseif $NPCList[0].type.includes("clumsy")>>
+			<<set $forest_nest.eggs -= 1>><span class="purple"><<bHe>>笨拙地掉落了一个鸟蛋，然后踩在了上面，</span>接着<<bhimself>>摔倒了。
+		<</if>>
+	<</if>>
+	<<set $_athlDiffMin to ($NPCList[0].traits.includesAny("terrirorial","cowardly") ? 200 : 1)>>
+	<<set $skulduggerydifficulty to $NPCList[0].skills.security>>
+	<br><br>
+
+	<<link [[只是看着 (0:05)|Forest Fox Nest Watch]]>><<pass 5>><<stress -3>><</link>><<lstress>>
+	<br>
+	<<if $harpy gte 6>>
+		<<link [[争夺|Forest Fox Nest Challenge]]>><</link>><<harpy>>
+		<br>
+	<<else>>
+		<<link [[争夺|Forest Fox Nest Challenge]]>><</link>><<physiquedifficulty 1 $physiquemax>>
+		<br>
+	<</if>>
+	<<link [[偷偷溜过去|Forest Fox Nest Sneak]]>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<if $fox gte 6>>
+		<<link [[追赶！|Forest Fox Nest Chase]]>><<set $phase2 to 1>><<stress -6>><<transform fox 1>><</link>><<llstress>><<fox>><<note "无蛋" "red">>
+		<br>
+	<<else>>
+		<<link [[追赶|Forest Fox Nest Chase]]>><<set $phase2 to 1>><<tiredness 6>><</link>><<gtiredness>><<athleticsdifficulty $_athlDiffMin $NPCList[0].skills.athletics>><<note "无蛋" "green">>
+		<br>
+	<</if>>
+<<else>>
+	一只<<beasttype>>出现在视野中，专注地盯着巢穴。
+	<br><br>
+
+	<<bHe>>犹豫地向前迈了一步，四处张望。然后<<bHe>>向前猛冲，开始挖掘巢穴。
+	<br><br>
+
+	你听到了一声滑动和嘶嘶声。<<bHe>>也听到了。<<if currentSkillValue('tending') lt 800>><span class="red">这不是鸟巢。</span><</if>>
+	<br><br>
+
+	一条巨大的蛇从灌木丛中爬出来，直视着<<beasttype>>。
+	<<if $NPCList[0].traits.includesAny("cowardly","clever")>>
+		<<bHe>>立刻往回跑，迅速离开了那个区域。
+		<br><br>
+
+		你也离开了，不想惹怒那条蛇。
+		<br><br>
+
+		<<link [[继续|Forest]]>><<endevent>><<set $eventskip to 1>><<unset $forest_nest>><</link>>
+		<br>
+	<<else>>
+		<<if $NPCList[0].traits.includes("territorial")>>
+			<<bHis>>的尾巴蓬起，背部弯曲，摆出攻击的姿势。蛇向前扑去。<<beasttype>>侧步反击，但被蛇的尾巴绊倒了。
+			<<bHe>>迅速恢复，翻了个身，然后
+			<<if $monster is 1>>
+				用双手抓住了蛇的尾巴。
+			<<else>>
+				咬住了蛇的尾巴。
+			<</if>>
+			<br><br>
+
+			<<bHes>>的力量不够。<<bHes>>挣扎着进行着艰苦的战斗，但蛇很快就缠住了<<bhim>>。
+		<<else>>
+			<<bHe>>看起来完全陷入了迷惑和冻结的状态。<<bHe>>只能弱弱地拍打蛇的攻击，很快就被制服了。
+		<</if>>
+		<<if $voredisable is "f">>
+			<span class="red">蛇的下颚张开了。</span>
+		<</if>>
+		<br><br>
+
+		<<link [[继续观察|Forest Nest Snake Watch]]>><<trauma 12>><<if $voretrait gte 1>><<arousal 20>><</if>><</link>><<ggtrauma>><<if $voretrait gte 1>><<garousal>><</if>>
+		<br>
+		<<link [[干涉！|Forest Nest Snake Intervene]]>><<stress 12>><</link>><<ggstress>><<physiquedifficulty 1 $physiquemax>>
+		<br>
+	<</if>>
+<</if>>

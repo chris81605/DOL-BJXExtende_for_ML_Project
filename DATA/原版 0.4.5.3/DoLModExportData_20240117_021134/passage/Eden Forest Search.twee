@@ -1,0 +1,69 @@
+:: Eden Forest Search []
+<<location "forest">><<effects>>
+/* eden is already generated on passages that lead here
+<<npc Eden>><<person1>>*/
+
+你和伊甸步行穿过森林寻找着有价值的东西。
+<br><br>
+
+<<rng>>
+<<if $rng gte 71>>
+	你们在一段腐朽的树根上发现了些能吃的蘑菇。
+	<br><br>
+
+	"狼菇……"伊甸沉默了，"我不会就为了这些跑这么大老远，但既然都来了。"
+	<br><br>
+
+	<span class="green">伊甸帮助你采摘了一些<<icon "tending/wolfshroom.png">>狼菇。</span>
+	<<tending_pick wolfshroom>>
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+<<elseif $rng gte 51>>
+	你们走进一片空地。伊甸突然伸出手臂挡在你身前。片刻之后，一只鹿从树林间冲了出来。
+	<br><br>
+
+	伊甸解开挂在身上的步枪，但那只野兽已经跑掉了。
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+<<elseif $rng gte 31>>
+	你们两个听到前面有轻微的嗡嗡声。一个大蜂巢挂在树上，工蜂们钻进钻出地采集花粉。蜂蜜会很值钱的。
+	<br><br>
+
+	你伸手去想摘蜂巢，伊甸阻止了你。
+	<br><br>
+
+	"别。"<<he>>说，"让我来。"
+	<br><br>
+
+	伊甸爬上树，掰下了一大块<<icon "tending/wild_honeycomb.png">>野生蜂巢。<span class="green">得益于<<his>>熟练的双手，蜜蜂没有做出反应。</span><<He>>爬了下来。
+	<<silently>><<tending_pick wild_honeycomb 1 1>><</silently>>
+	<br><br>
+
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+<<else>>
+	你们俩来到一片空地上。微风吹拂着你的脸，柔软的植物压在你的脚下。
+	<br><br>
+
+	一棵矮树上挂着一些柠檬。
+	<br><br>
+
+	<<if isBloodmoon()>>
+		伊甸在矮树丛中搜寻<<icon "tending/blood_lemon.gif">>柠檬。<span class="green"><<He>>找到了一簇，它们的黄色表皮上交错着红色的筋络。</span>
+		<<tending_pick blood_lemon 6 18>>
+		<br><br>
+
+		<<if $edenbloodmoon isnot 1>>
+			<<link [[继续|Eden Blood Moon]]>><<set $edenbloodmoon to 1>><</link>>
+		<<else>>
+			<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<</if>>
+	<<else>>
+		伊甸在矮树丛中搜寻<<icon "tending/lemon.png">>柠檬。<span class="green"><<He>>找到了一簇，它们的黄色表皮看起来很漂亮。</span>
+		<<tending_pick lemon 6 18>>
+		<br><br>
+
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

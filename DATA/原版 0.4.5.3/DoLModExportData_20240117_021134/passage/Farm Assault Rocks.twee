@@ -1,0 +1,21 @@
+:: Farm Assault Rocks []
+<<effects>>
+
+<<set _assault_keys to Object.keys($farm_assault.teams)>>
+<<for _s to 0; _s lt _assault_keys.length; _s++>>
+	<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+		<<if $physiqueSuccess>>
+			<<generate1>><<person1>>
+			你和艾利克斯在阴影中向<<farm_assault_intruders>>投掷着。大部分都空了，<span class="green">不过有一发命中了，</span>正中了那个<<person>>的头。<<He>>从<<farm_fence>>上滚落下来。
+			<br><br>
+			<<set $farm_assault.teams[_assault_keys[_s]].number -= 1>>
+		<<else>>
+			<<generate1>><<person1>>
+			你从阴影中向<<farm_assault_intruders>>投掷着。他们选择了从一个隐蔽的地方入侵，大部分地方都被土坡挡住了，其他地方则被树木遮蔽。<span class="red">你完全没扔中。</span>
+			<br><br>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+<br>

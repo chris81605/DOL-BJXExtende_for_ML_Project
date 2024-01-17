@@ -1,0 +1,69 @@
+:: Robin Forest Shop 4 []
+<<set $outside to 0>><<set $location to "forest_shop">><<effects>>
+<<set $robin_in_forest_shop to true>><<set $forest_costume to {}>>
+<<npc "Gwylan" 2>>
+
+<<if !$robin_forest_visited>>
+	<<set $robin_forest_visited to 1>>
+	你们一路捕捉着树林间隐约可见的<<person2>><<personsimple>>的身影，直到最后你们来到了一个陌生的建筑前。
+	<<person1>>
+	<<if $forest_shop_intro isnot 1>>
+		<<if $gwylan_rescue isnot 1>>
+			你听到里面有脚步声。门上的牌子写着"营业中。"
+			<br><br>
+
+			罗宾犹豫了一下，但还是鼓起勇气走了进去。
+		<<else>>
+			你猜，这是格威岚的店。
+			<br><br>
+
+			"没关系，"你对紧张的罗宾说，"我认识这里的老板，这只是一家商店。"听了你的话后罗宾放心了下来，<<he>>进了店门。
+		<</if>>
+		<br><br>
+
+		店内漆黑一片，高高的架子上摆满了各种各样的物品。寂静被一阵刮擦声打破，然后是砰的一声。一个<<person2>><<personsimple>>拿着一架梯子出现在了附近通道的尽头。
+		<<if $gwylan_rescue isnot 1>>
+			"是客人！"<<he>>放下梯子走了过来。<<He>>在围裙上擦了擦<<his>>的手。"欢迎光临。"
+			<br><br>
+
+			<<He>>看起来和你差不多大，<<he>>长着一头灰褐色的头发，脸上还有一些雀斑。"别看我这样，我只是娃娃脸而已，"<<he>>好像读懂了你的心思，"我的名字叫格威岚，"<<he>>向前伸出手，分别与你和罗宾握了握手，"很高兴见到你们，我卖——"<<he>>停顿了一下。"我的祖<<print ($pronoun is "m" ? "父" : "母")>>卖——"又停顿了一下。"我在这里卖一些小玩意儿，是你们在普通商店里买不到的东西。连我都不知道我有什么存货！"<<He>>的语气听起来很骄傲。
+		<<else>>
+			是格威岚。
+		<</if>>
+	<<else>>
+		格威岚的商店。
+		<br><br>
+
+		"没关系，"你对紧张的罗宾说，"我以前来过这里，这是一家商店。"罗宾看起来不再担忧了，<<he>>走进了店门。
+		<br><br>
+
+		你跟着罗宾进了商店。你的眼睛逐渐适应了黑暗，同时捕捉到了出现在通道尽头的格威岚。
+	<</if>>
+
+	<<if $forest_shop_intro is 1 or $gwylan_rescue is 1>>
+		<br><br>
+
+		"你带了一个朋友来！"<<person2>><<he>>冲过来用双手抓住了罗宾的手，"我叫格威岚，欢迎光临我的店。"
+		<<if $gwylan_aborted gte 1>>
+			<<gwylanRescueApologyShop "Robin">>
+			<<set $gwylan_aborted to 0>>
+		<</if>>
+	<</if>>
+	<<set $forest_shop_intro to 1>>
+	<br><br>
+	<<link [[继续|Robin Forest Shop 5]]>><</link>>
+
+<<else>>
+	当你进入时，格威岚向你问好。"我很高兴再次见到你，"<<person2>><<he>>一边说，一边握着你和罗宾的手，"你需要什么就告诉我。"
+
+	<<if $gwylan_aborted gte 1>>
+		<<gwylanRescueApologyShop "Robin">>
+		<<set $gwylan_aborted to 0>>
+	<</if>>
+	<br><br>
+
+	罗宾向黑色的屏风走去。
+	<br><br>
+
+	<<link [[继续|Forest Shop]]>><</link>>
+<</if>>

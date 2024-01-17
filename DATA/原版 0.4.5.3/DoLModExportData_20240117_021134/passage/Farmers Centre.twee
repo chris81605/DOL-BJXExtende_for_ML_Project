@@ -1,0 +1,61 @@
+:: Farmers Centre []
+<<set $outside to 0>><<set $location to "factory">><<effects>>
+<<if $farmersProduce is undefined>>
+	<<set $farmersProduce to {
+		selling:{},
+		toSell:{},
+		money:0,
+		sold:0,
+		totalSold:0,
+	}>>
+<</if>>
+
+<<if !$NPCList[0].pronoun>>
+	<<generate1>>
+<</if>>
+<<person1>>
+
+<<if $factory_intro is undefined>>
+	<<set $factory_intro to 1>>
+	你走向工厂，这是座位于城镇入口处的巨大建筑。你看见一个<<person>>正站在门口指挥着一队卡车进入。
+	<br><br>
+	<<He>>在大门关上的时候才转向了你。"这里没什么好看的，"<<he>>继续说道，"除非你有很多的作物要卖，否则你最好不要在这附近晃荡。如果你想要交易的话，你可以来找我。我们会收购你手里的所有作物，但是价格会低于零售价。"
+	<br><br>
+	<<link [[继续|Farmers Centre]]>><</link>>
+	<br>
+<<else>>
+	你正待在丰收街一家工厂的外面，他们收购你的作物用作加工和销售。虽然确实能很快将作物卖出去，但是每株作物的收购价并没有你摆摊的零售价格高。
+	<br><br>
+
+	<<if $rng gte 91>>
+		一个<<person>>正坐在外面的问讯亭里翻阅着杂志。
+	<<elseif $rng gte 81>>
+		一个<<person>>正靠在墙边抽烟。
+	<<elseif $rng gte 71>>
+		一个<<person>>正坐在问讯亭内，你注意到<<He>>正全神贯注地盯着角落里的一台小电视机。
+	<<elseif $rng gte 61>>
+		一个<<person>>正坐在问讯亭里盯着<<his>>的手机。
+	<<elseif $rng gte 51>>
+		一个<<person>>正在指挥着一队卡车进入工厂。
+	<<elseif $rng gte 41>>
+		一个<<person>>坐在外面的问讯亭里，<<his>>貌似在和谁打电话。
+	<<elseif $rng gte 31>>
+		一个<<person>>正坐在外面的问讯亭里翻阅着报纸。
+	<<elseif $rng gte 21>>
+		一个<<person>>靠在墙边盯着那来来往往的车辆。
+	<<elseif $rng gte 11>>
+		一个<<person>>正站在问讯亭里看着你。
+	<<else>>
+		一个<<person>>斜倚在问讯亭内的椅子上。
+	<</if>>
+	<br><br>
+
+	<<if $farmersProduce.money gt 10000>>
+		<<ind>><<link [[收钱|Farmers Centre Money Collection]]>><</link>>
+		<br>
+	<</if>>
+	<<askicon>><<link [[询问销售产品|Farmers Centre Produce Sale]]>><</link>>
+	<br><br>
+	<<harvesticon>><<link [[离开|Harvest Street]]>><<endevent>><</link>>
+
+<</if>>

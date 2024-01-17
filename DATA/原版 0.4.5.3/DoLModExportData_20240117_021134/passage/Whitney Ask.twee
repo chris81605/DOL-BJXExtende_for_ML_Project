@@ -1,0 +1,77 @@
+:: Whitney Ask []
+<<set $outside to 0>><<effects>>
+<<if $speech_attitude is "meek">>
+	"你……你通常不是一个人的。怎么了？"
+<<elseif $speech_attitude is "bratty">>
+	"今天你真安静，是有什么烦心事吗？"
+<<else>>
+	"什么事让你这么沮丧？"
+<</if>>
+<br><br>
+<<if $whitneyrescued and $whitneyRescueTalk is undefined>>
+	<<set $whitneyRescueTalk to 1>>
+	<<He>><<print playerBellyVisible() ? "把一块口香糖吐到草地上" : "把香烟扔到地上，然后踩了上去">>。"什么意思？"<<He>>看着你的眼睛。
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"嗯……我只是担心——"
+	<<elseif $speech_attitude is "bratty">>
+		"在这样的天气里，大多数人是不会无缘无故地在树下闷闷不乐的——"
+	<<else>>
+		"我只是担心——"
+	<</if>><<He>>抓住你，打断了你的话。
+	<br><br>
+	"你他妈的为什么要救我？在我对你做了那么多坏事之后？"你似乎看到泪水从<<his>>的眼中涌出，"我把你捆起来，准备卖掉你。你本可以让他们带走我，但你他妈没有。你他妈有什么毛病？任何精神正常的人都会……"
+	<br><br>
+	<<He>>停了下来，慢慢地松开了你。<<He>>转身，快步离去。"老实说，你真他妈不可理喻。"<<npcincr Whitney love 3>><<gglove>>
+	<br><br>
+	<<set $whitneyRescueStatus to "grateful">>
+	<<set $whitneyRescueTimer to 7>>
+	<<whitneyexit>>
+<<elseif C.npc.Whitney.love gte 12 or $whitneyrescued>>
+	<<He>>看了你一会儿，然后从树下走出来，走近喷泉。<<He>>示意你跟着<<him>>。
+	<<if C.npc.Whitney.dom gte 16>>
+		当你靠近时，<<he>>迅速抓住你，把你拉得更近。"你要是生病了，对我就没用了。"
+	<<elseif C.npc.Whitney.dom gte 8>>
+		你走在<<him>>身边，这时你才发现，没人的公园给人的感觉是如此的不同。
+	<<else>>
+		"别让我淋湿。"<<he>>边说边把伞递给你。
+	<</if>>
+	离喷泉只有几步路。
+	<<if $weather is "snow">>
+		雪慢慢地在冰面上堆积，<<he>>找到了一个还没有结冰的区域。
+	<<else>>
+		雨点掉落在水面泛起涟漪。
+	<</if>>
+	惠特尼开始从池底偷硬币。<<if $kylarSeen.includes("fountainIntro") is 1>>"最近的硬币比以前多了很多。一堆失败者。"<<else>>"真不敢相信人们就这么把这些东西扔掉了。迷信的白痴。"<</if>><<He>>微微一笑。
+	<br><br>
+	<<link [[加入|Whitney Ask 2]]>><<set $phase to 0>><<npcincr Whitney love 1>><</link>><<crime "thievery">><<glove>>
+	<br>
+	<<link [[看着|Whitney Ask 2]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[干涉|Whitney Ask 2]]>><<set $phase to 2>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<br>
+<<else>>
+	<<set _shoveChance to random(0,100)>>
+	<<if _shoveChance gte 65>>
+		<<athleticsdifficulty 650 1000 true>>
+		你还没反应过来，惠特尼就抓住了你，拖着你向喷泉跑去。
+		<<if $athleticsSuccess>>
+			然而，<span class="green">你稳住了自己，</span>设法阻止了<<him>>把你摁进水里。<<He>>徒劳地最后拽了你一下，然后放开了你。
+			<br><br>
+			"你真没意思。"<<He>>走回树下<<his>>原来待的位置。
+			<br><br>
+			<<whitneyoptions>>
+		<<else>>
+			你<span class="red">绊了一下，<<he>>把你推过水池边缘。</span>你掉了进去，<<if Time.season is "winter">>你的身体撞破了冰层，<</if>>整个人都湿透了。
+			<<water>>
+			<br><br>
+			"你不是问我怎么了吗？我告诉你，我一点儿事都没有。我现在甚至感觉好多了。谢谢你，<<bitch>>，"<<He>>把你留在喷泉里，笑着离开公园。
+			<br><br>
+			<<whitneyexit>>
+		<</if>>
+	<<else>>
+		"不是你自己想问我怎么了的吗？"<<He>>不屑地别开眼神，"滚出我的视线。"
+		<br><br>
+		<<whitneyoptions>>
+	<</if>>
+<</if>>

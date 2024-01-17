@@ -1,0 +1,215 @@
+:: Farm Sleep []
+<<set _autosavehere to true>>
+<<sleep>>
+<<if _dreaming>>
+	/* <<earSlimeFocusChoice>> or similar widgets are running */
+<<else>>
+	<<effects>>
+	<<if $bus is "farm_alex_room">>
+		<<if $exposed gte 2>>
+			<<npcincr Alex lust 3>>
+		<<else>>
+			<<npcincr Alex lust 1>>
+		<</if>>
+	<</if>>
+	<<if $bus is "farm_alex_room" or $alex_bed is "player">>
+		<<set $bedGuest to "Alex">>
+	<</if>>
+	<<if $wraith.nightmare is 2 and isBloodmoon()>>
+		<<sleepeffects>>
+		你梦见一个美丽的身影。祂披着白色的外衣，站在红色的月亮之下。祂向你张开双臂，做出欢迎的姿态。当你走近时，你能感受到祂的目光正穿过你的大脑。
+		<br><br>
+
+		祂被树木环绕，所有的树木都向内弯曲，漂浮在湖面上。周围的一切突然开始移动，你发现自己正浮在湖底的一个巨大的废墟上。你感到难以呼吸。
+		<br><br>
+
+		你慢慢睁开眼睛，迟缓地从床上起身。<<if $bus is "farm_alex_room" or $bus is "farm_bedroom" and $alex_bed is "player">>你轻手轻脚，确保没有惊动艾利克斯。<</if>>你的耳内嗡嗡作响。
+		<br><br>
+
+		<<wraithPossess "alex_cottage">>
+		<<if $bus is "farm_alex_room">>
+			<<storeon "farm alex bed" "wardrobe">>
+			<span class="nextLink"><<link [[行走|Farm Alex Bedroom]]>><<rainWraith>><</link>></span>
+		<<else>>
+			<<storeon "Farm Bed" "wardrobe">>
+			<span class="nextLink"><<link [[行走|Farm Bedroom]]>><<rainWraith>><</link>></span>
+		<</if>>
+		<br>
+	<<elseif _slimeWakeMasturbation is 1>>
+		<<set _masturbationExit to "Farm Sleep">>
+		<<slimeWakeMasturbation>>
+	<<else>>
+		<<wakingEffects $sleepHoursTotal>>
+		<<if $nightmares gte 1 and $controlled is 0>>
+			你梦见自己被一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。
+		<<else>>
+			<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+				你的睡眠被淫秽的梦所困扰。
+				<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+				<<arousal `100 * $sleepHoursTotal`>>
+				<<if $arousal gte $arousalmax>>
+					它们把你推向了高潮的顶点。
+					<<orgasm>><<set $daily.alex.bedOrgasm to true>>
+				<</if>>
+			<<elseif !_wakingEffect>>
+				你睡得很香。
+				<br><br>
+			<</if>>
+			<<if !_sleepinterrupt and (Time.hour gt 21 or Time.hour lt 6) and $bus is "farm_alex_room" or $alex_bed is "player">>
+				<<switch random(1, 6)>>
+					<<case 1>>
+						<<if Time.hour is 5>>
+							你试着摇醒艾利克斯。<<nnpc_He "Alex">>含糊不清地咕哝了一声。
+						<<else>>
+							你以为艾利克斯醒了，但<<nnpc_hes "Alex">>翻了个身，又睡了过去。
+						<</if>>
+					<<case 2>>
+						艾利克斯四仰八叉地躺在床上。你轻轻地把<<nnpc_his "Alex">>的胳膊从你脸上移开。
+					<<case 3>>
+						艾利克斯在梦里嗤嗤笑出了声。
+					<<case 4>>
+						艾利克斯<<print either("将被子扯到了自己那边", "在你耳旁打鼾", "嘴角淌出了口水。你把它们擦干净")>>。
+					<<case 5>>
+						艾利克斯的半个身体悬在床边。你抬起<<nnpc_him "Alex">>的腿，把<<nnpc_him "Alex">>摆正。
+					<<case 6>>
+						"<<print either("坏东西……今晚你没有晚饭了",
+										"别、别看",
+										"我感觉有点宿醉",
+										"笨鸟",
+										"离开……的地盘",
+										"我会让大家看到")>>……"
+						艾利克斯咕哝着。
+				<</switch>>
+			<</if>>
+		<</if>>
+		<<sleepeffects>>
+		<<if $remywake is 1>>
+			<<npc Alex>><<person1>>
+			"醒醒！"有人在摇你的肩膀，是艾利克斯。<span class="red">"<<nnpc_Hes Remy>>来了，"</span><<he>>说，"我们能做到的，去做好准备，我去
+			<<if $farm.tower_guard>>
+				提醒一下$farm.tower_guard。"
+			<<else>>
+				看看能不能定位到他们的位置。"
+			<</if>>
+			<br><br>
+
+			<<farm_assault_intro>>
+			<br><br>
+
+			<<set _bedroom to ($bus is "farm_alex_room" ? "farm alex bed" : "Farm Bed")>>
+			<<set $wardrobe_location to "alexFarm">>
+			<<wardrobeSelection true>>
+			<<storeon _bedroom "check">>
+			<<if _store_check is 1>>
+				<<storeon _bedroom>>
+			<</if>>
+			<<link [[去做准备|Farm Assault Wardrobe]]>><<endevent>><<set $phase to 1>><<unset $remywake>><</link>>
+			<br>
+		<<elseif _sleepinterrupt>>
+			<<npc Alex>><<person1>>
+
+			<<if _alexWake is 1>>
+				你被通往阁楼的楼梯发出的吱呀声吵醒了。
+
+				<<if $bus is "farm_alex_room">>
+					床单散乱地扔在一边，艾利克斯不见踪影。
+				<</if>>
+				<br><br>
+
+				<<link [[调查 (0:01)|Farm Cottage Nighttime Nursery]]>><<set $phase to 1>><<pass 1>><</link>>
+				<br>
+				<<link [[无视|Farm Cottage Nighttime Nursery]]>><<set $phase to 2>><</link>>
+
+			<<elseif $bus is "farm_alex_room">>
+					<<genitals>>上的触感把你从睡梦中唤醒，
+					<<if $NPCList[0].penis isnot "none">>
+						你感受到一个坚硬的物体抵住了你的<<bottom>>。
+					<<else>>
+						然后是
+						<<if $NPCList[0].breastsize is 0>>
+							胸部
+						<<else>>
+							<<print $NPCList[0].breastsdesc>>
+						<</if>>
+						紧贴着你的背。
+					<</if>>
+					另一只手放在了你的大腿上。
+					<br><br>
+
+					<<if $daily.alex.tvTease>>
+						"在弥补今早的事情吗？"艾利克斯说着，<<his>>的呼吸拂过你的脖子。"我可以原谅你。"
+					<<else>>
+						"你真是主动呢，"艾利克斯说着，<<his>>的呼吸拂过你的脖子。"睡在<<nnpc_gendery "Alex">>的床上。"
+					<</if>>
+					<br><br>
+
+					<<link [[推开|Farm Alex Climb]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+					<br>
+					<<link [[顺其自然|Farm Alex Allow]]>><<sub 1>><<npcincr Alex dom 1>><</link>><<promiscuous1>><<gdom>>
+					<br>
+			<<else>>
+				<<if $exposed gte 2 and random(1, 2) is 2>>
+					你打了个寒颤。你的被单不见了。门外传来某人离去的脚步声。<<covered>>
+					<br><br>
+
+					你的被子散落在床脚的地上。你怀疑艾利克斯是罪魁祸首。在你睡着的时候，<<He>>不怀好意地盯着你的<<lewdness>>。
+					<br><br>
+
+					<<link [[继续睡觉|Farm Bed]]>><<endevent>><</link>>
+					<br>
+					<<link [[起来|Farm Bedroom]]>><<endevent>><</link>>
+					<br>
+					<<link [[生气 (0:05)|Farm Bedroom Confront]]>><<pass 5>><<npcincr Alex love -1>><<npcincr Alex dom -1>><</link>><<llove>><<ldom>>
+					<br>
+					<<if $promiscuity gte 35>>
+						<<link [[报复 (0:20)|Farm Bedroom Revenge]]>><<pass 20>><<npcincr Alex dom -1>><<npcincr Alex lust 5>><</link>><<promiscuous3>><<ldom>><<gglust>>
+						<br>
+					<</if>>
+				<<else>>
+					<<genitals>>上的触感把你从睡梦中唤醒，
+					<<if $NPCList[0].penis isnot "none">>
+						你感受到一个坚硬的物体抵住了你的<<bottom>>。
+					<<else>>
+						然后是
+						<<if $NPCList[0].breastsize is 0>>
+							胸部
+						<<else>>
+							<<print $NPCList[0].breastsdesc>>
+						<</if>>
+						紧贴着你的背。
+					<</if>>
+					<br><br>
+
+					"我觉得你可能会寂寞，"艾利克斯说道，<<his>>的呼吸落在你的脖子上。
+					<br><br>
+
+					<<link [[推开|Farm Alex Push]]>><<def 1>><<npcincr Alex dom -1>><</link>><<ldom>>
+					<br>
+					<<link [[顺其自然|Farm Alex Go]]>><<sub 1>><<npcincr Alex dom 1>><</link>><<promiscuous1>><<gdom>>
+					<br>
+				<</if>>
+			<</if>>
+		<<else>>
+			<br><br>
+
+			<<if $bus is "farm_alex_room">>
+				<<link [[起来|Farm Alex Bedroom]]>>
+					<<set $wardrobe_location to "alexFarm">>
+					<<wardrobeSelection true>>
+					<<storeon "farm alex bed" "check">>
+					<<if _store_check is 1>>
+						<<storeon "farm alex bed">>
+					<</if>>
+				<</link>>
+				<br>
+			<<else>>
+				<<radiooutfits>>
+				<br><br>
+
+				<<link [[起来|Farm Bedroom]]>><<bedclotheson "Farm Bed">><</link>>
+			<</if>>
+			<br>
+		<</if>>
+	<</if>>
+	<<set $phase to 0>>
+<</if>>

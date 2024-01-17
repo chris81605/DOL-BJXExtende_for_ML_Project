@@ -1,0 +1,32 @@
+:: Hallways Pantsed Run []
+<<effects>>
+
+<<if $phase is 1>>
+
+	你把<<= setup.clothes.under_lower.find((e)=> e.name === $pantsed.underlower).cn_name_cap>>拉起来，但在所有同伴面前，你还是跟没穿一样。你跑到走廊上，笑声和欢呼声一路追随着你。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<clotheson>><<unset $pantsed>><<lowerruined>><<set $eventskip to 1>><</link>>
+
+<<elseif $phase is 2>>
+
+	你把<<= setup.clothes.lower.find((e)=> e.name === $pantsed.lower).cn_name_cap>>拉起来，让罪魁祸首留下了你的内裤。你跑到走廊上，笑声和欢呼声一路追随着你。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<clotheson>><<unset $pantsed>><<underlowerruined>><<set $eventskip to 1>><</link>>
+
+<<elseif $phase is 3>>
+
+	你在把你的<<if $pantsed.underlower isnot "naked">><<= setup.clothes.under_lower.find((e)=> e.name === $pantsed.underlower).cn_name_cap>>和<</if>><<= setup.clothes.lower.find((e)=> e.name === $pantsed.lower).cn_name_cap>>拉了起来后便匆忙跑到了走廊里，笑声和欢呼声则源源不断地从你身后传来。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<clotheson>><<unset $pantsed>><<set $eventskip to 1>><</link>>
+
+<<else>>
+
+	你无能为力，就沿着走廊跑了出去。当你跑开时，欢呼声和笑声伴随着你，其他学生看着你赤裸的屁股，直到你转过街角消失在视线之外。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<unset $pantsed>><<lowerruined>><<underlowerruined>><<set $eventskip to 1>><</link>>
+
+<</if>>

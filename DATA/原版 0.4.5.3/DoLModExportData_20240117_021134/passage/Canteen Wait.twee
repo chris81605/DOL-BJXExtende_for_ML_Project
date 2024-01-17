@@ -1,0 +1,15 @@
+:: Canteen Wait []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+当学生们吃午餐时，你蜷缩在柜台下等待。他们没有意识到你的存在，即便你离他们很近。
+铃声响起，食堂里的人陆陆续续地离开了。现在似乎很安全，你悄悄地离开了藏身之处。
+离开食堂之前，你从门缝里瞄了一眼，确保大厅里没有人。
+<br><br><br><br>
+<<link [[继续|Hallways]]>><</link>>
+<br>
+<<if $schoolstate is "lunch">>
+	<<set _time_left to 60 + random(3) - Time.minute>>
+	<!-- give up to 3 extra minutes for students to leave the canteen -->
+	<<pass _time_left>>
+	<<schooleffects>>
+<</if>>

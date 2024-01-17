@@ -1,0 +1,24 @@
+:: Livestock Plough Refuse 2 []
+<<effects>>
+
+<<if $edenwhip is 0>>
+	<<set $edenwhip to 1>>
+<</if>>
+
+雷米挥鞭抽打你的后背，你又哭又叫。<<He>>的鞭子一次又一次落下，一次比一次更痛苦。
+<<if $willpowerSuccess>>
+	<span class="green">你坚持了下来。</span>雷米整个人站在椅子上，<<his>>的鞭子正对着你。"你不想做一头乖巧的小牛是吧？"<<he>>冷笑，"很好。"
+	<<gwillpower>><<willpower 2>>
+	<br><br>
+
+	<<link [[拉|Livestock Plough]]>><<sub 1>><<pass 60>><<transform cow 1>><<npcincr Remy dom 1>><<tiredness 18>><</link>><<ggtiredness>>
+	<br>
+	<<link [[拒绝|Livestock Plough Refuse 3]]>><<def 1>><<npcincr Remy dom -1>><<pain 12>><</link>><<willpowerdifficulty 300 700>><<ggpain>>
+	<br>
+<<else>>
+	<span class="red">你承受不住了。</span>所有的坚强被击碎，你的身体不听使唤地垮掉了。
+	<<ggwillpower>><<willpower 12>>
+	<br><br>
+	<<link [[继续|Livestock Plough]]>><<pass 60>><<transform cow 1>><<npcincr Remy dom 1>><<tiredness 18>><</link>><<ggtiredness>>
+	<br>
+<</if>>

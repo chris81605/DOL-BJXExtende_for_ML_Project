@@ -1,0 +1,32 @@
+:: Robin's Lemonade Steal []
+<<location "beach">><<effects>>
+<<endevent>><<generate1>><<person1>>
+<<set _robin to statusCheck("Robin")>>
+<<skulduggerycheck>>
+
+<<if $skulduggerysuccess is 1>>
+	你走进商店，开始把大瓶装水装上手推车。完成后，你一边假装浏览商品一边等待。一位健谈的顾客和柜台后面的<<person>>攀谈起来，给了你机会。你推着手推车离开了商店。
+	<br><br>
+	<<endevent>><<npc Robin>><<person1>>
+	你一直把它推到罗宾那里。<<he>>看到你的时候眼睛都睁大了。
+	<<if _robin.trauma gte 40>>
+		"太谢谢你了！我很高兴你没有离开那么久，我都开始担心了。"罗宾看起来松了一口气。
+		当你回到<<his>>的小摊时，<<he>>紧紧抱住了你。你悄悄地把<<he>>给你的£20放在了小摊上。
+		<<set $robinmoney += 2>>
+	<<else>>
+		"我从没想过还能这样，"<<he>>说，"你真聪明。"你悄悄地把<<he>>给你的£2留在了小摊上。
+	<</if>>
+	<<npcincr Robin love 1>><<glove>>
+	<br><br>
+	<<skulduggeryuse>>
+	<<endevent>>
+	<<lemonade_stand_options>>
+<<else>>
+	你走进商店，开始把大瓶装水装上手推车。完成后，你一边假装浏览商品一边等待。一位健谈的顾客和柜台后面的<<person>>攀谈起来，给了你机会。你推着手推车离开了商店。
+	<br><br>
+	突然，一只手臂抓住了你的肩膀。是那个<<person>>。"你这个小混蛋。我要教训教训你，居然敢偷我的东西。"
+	<br><br>
+	<<skulduggeryuse>>
+	<<link [[继续|Robin's Lemonade Steal Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

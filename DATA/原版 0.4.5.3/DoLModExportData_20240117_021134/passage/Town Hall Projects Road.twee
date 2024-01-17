@@ -1,0 +1,47 @@
+:: Town Hall Projects Road []
+<<effects>>
+
+"交通部门，"接待员说道，"右边第三个门。"
+<br><br>
+<<endevent>>
+<<generate1>><<generate2>><<person1>>
+你顺着引导进入一个宽敞的房间，一个<<person>>正靠在桌边与一个<<person2>><<person>>聊天，后者先注意到你，在向<<person1>><<person>>点点头后，从你身边离开了房间。
+<br><br>
+
+"我能为你做些什么？"<<person1>><<person>>问道。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "我想修复通往湖边的路，"你说道。
+<<elseif $speech_attitude is "bratty">>
+    "我准备修复通往湖边的路，"你说道，"要花多少钱？"
+<<else>>
+    "我想修复通往湖边的路，"你说道。
+<</if>>
+<br><br>
+
+<<person>>注视着你，然后说道："我们知道那里曾有条路，那时候在湖边还有个公交站，但我们认为那些都是毫无节制的浪费，毕竟那里除了水什么都没有。"
+<br><br>
+
+<<if $speech_attitude is "meek">>
+    "但学校里的学生会在放学后去那里玩，"你回答道，"有条路会更安全的。"
+<<elseif $speech_attitude is "bratty">>
+    "那会儿并没有这种旅游业务，"你回答道，"不是么？"
+<<else>>
+    "很多人都会往那里去，"你说道，"包括学生们。"
+<</if>>
+<br><br>
+
+<<person>>用手指敲着桌子："我明白你的意思，但小镇没有多余的钱。如果你想修复它的话，你得出<span class="gold">£25000</span>。"
+<br><br>
+
+<<if $money gte 2500000>>
+    <<link [[支付道路的钱 (£25000)|Town Hall Projects Road Buy]]>><<set $money -= 2500000>><<set $town_projects.road to 3>><<status 25>><</link>><<gggcool>>
+    <br>
+<<else>>
+    <span class="blue">你手头没有那么多钱。</span>
+    <br>
+<</if>>
+
+<<link [[离开|Cliff Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

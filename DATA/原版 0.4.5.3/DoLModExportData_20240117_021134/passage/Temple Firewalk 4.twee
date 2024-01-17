@@ -1,0 +1,20 @@
+:: Temple Firewalk 4 []
+<<effects>>
+你再次向前迈步。煤炭变得更热了。
+<<pain 2>>
+<br><br>
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+	<span class="green">仍然没有你无法承受的事情。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<templeicon "trialcontinue">><<link [[继续|Temple Firewalk 5]]>><</link>><<gpain>>
+	<br>
+	<<templeicon "trialbail">><<link [[跳开|Temple Firewalk Jump]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">疼痛袭来。你倒吸了一口气，迅速从炙热中跳离。</span>
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+	<<link [[继续|Temple Firewalk Jump]]>><</link>>
+	<br>
+<</if>>

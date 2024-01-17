@@ -1,0 +1,121 @@
+:: Livestock Job End []
+<<effects>>
+<<unset $farm_phase>>
+<<npc Remy>><<person1>>
+雷米带你回到田野中。<<He>>停在外面，农场工人打开了大门。
+<br><br>
+
+<<if $worn.face.type.includes("gag")>>
+	伸手到你的头后，<<he>>解开并<span class="lblue">取下了你的$worn.face.cn_name_cap。</span>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	<br><br>
+<</if>>
+
+<<if $livestock_obey gte 95>>
+	"你真是个好<<girl>>，"雷米说道。<<He>>伸出手，一个农场工人递给<<him>>一个盖着床单的篮子。雷米把布掀开，露出了几个又大又多汁的苹果。
+
+	<<if $hunger gte 1600>>
+		看到这情景，你的心跳都要停止了。你很饿，它们看起来很好吃。你的胃在咆哮。
+	<<else>>
+		它们看起来很好吃。当然这是和你不得不忍受的草相比。你的肚子在咕噜叫。
+	<</if>>
+	<br><br>
+
+	"这些是给你的，"雷米说着把整个篮子递给你。<<if $cow gte 6 or $leftarm is "bound" and $rightarm is "bound">>你将篮子含在口中。<</if>>"好<<girls>>就应该得到奖励。"
+	<br><br>
+
+	<<if $cow gte 6 and $worn.neck.name isnot "cow bell">>
+		<<if $worn.neck.name isnot "naked">>
+			就在你要爬走的时候，雷米抓住你的肩膀，取下了$worn.neck.cn_name_cap，
+			"在我走之前还有一件事。我给你买了一个新铃铛，是给你这样的好<<girl>>的小礼物，"<<he>>边说边把铃铛系在你的脖子上。
+			<<set $worn.neck.type.push("broken")>>
+			<<neckruined>>
+		<<else>>
+			就在你要爬走的时候，雷米抓住你的肩膀，在你的脖子上绑了个东西。
+			"在我走之前还有一件事。我给你买了个新铃铛，这是好<<girl>>的奖励，"<<he>>说完就走开了。
+		<</if>>
+		你轻轻摇了摇头，它发出了叮铃铃的声音。这声音出奇地舒缓。
+		<<neckwear 8>>
+		<br><br>
+	<</if>>
+
+	门在你身后关上了。
+	<br><br>
+
+	<<link [[吃苹果|Livestock Job Eat]]>><<stress -6>><<trauma -6>><<hunger -2000>><</link>><<lllhunger>><<ltrauma>><<lstress>>
+	<br>
+	<<link [[留给其他人|Livestock Job Save]]>><</link>>
+	<br>
+<<elseif $livestock_obey gte 51>>
+	<<if $cow gte 6>>
+		<<transform cow 1>><<npcincr Remy love 1>>
+		"你一直都是个好<<girl>>，"雷米从<<his>>的口袋里拿出了一个漂亮的红苹果。"这是给你的。"<<He>>拿着它向你靠近。
+		<br><br>
+
+		你身体前倾咬了一口，它又甜又脆。果汁顺着你的下巴往下流。雷米把水果翻了个面，你又一次向前倾，一口接一口，直到只剩下了果核。雷米把<<his>>的手指放在你嘴边，你温顺地伸出舌头，一寸寸地舔着那上面的果汁。
+		<<lhunger>><<hunger -6>>
+		<br><br>
+
+		"还有很多事要忙呢，"雷米一边说一边揉着你的头发。"你是一头优秀的小<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>。"<<He>>把你拉进田野中。
+		<br><br>
+
+		<<if $worn.neck.name isnot "cow bell">>
+			<<if $worn.neck.name isnot "naked">>
+				就在你要爬走的时候，雷米抓住你的肩膀，取走了$worn.neck.cn_name_cap。
+				"在我走之前还有一件事。我给你买了一个新铃铛，是给你这样的好<<girl>>的小礼物，"<<he>>边说边把铃铛系在你的脖子上。
+				<<set $worn.neck.type.push("broken")>>
+				<<neckruined>>
+			<<else>>
+				就在你要爬走的时候，雷米抓住你的肩膀，在你的脖子上绑了个东西。
+				"在我走之前还有一件事。我给你买了个新铃铛，这是好<<girl>>的奖励，"<<he>>说完就走开了。
+			<</if>>
+			你轻轻摇了摇头，它发出了叮铃铃的声音。这声音出奇地舒缓。
+			<<neckwear 8>>
+			<br><br>
+		<</if>>
+
+		大门在你身后哐啷一声关上，你舔掉了下巴上沾的果屑。
+		<br><br>
+
+		<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+		<br>
+
+	<<elseif $leftarm is "bound" or $rightarm is "bound">>
+		"你一直都是个好<<girl>>，"雷米从<<his>>的口袋里拿出了一个漂亮的红苹果。"这是给你的。"<<He>>拿着它向你靠近。你的胳膊被绑住了，你够不到它。"你吃的时候我帮你拿着，"雷米好像读懂了你的心思。"这世界上哪有长手的<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>呢？你说是不是。"
+		<br><br>
+		<<link [[吃|Livestock Job Eat One]]>><<npcincr Remy love 1>><<hunger -400>><<livestock_obey 1>><<transform cow 1>><</link>><<gobey>><<lhunger>>
+		<br>
+		<<link [[拒绝|Livestock Job Eat Refuse]]>><<livestock_obey -1>><</link>><<lobey>>
+		<br>
+	<<else>>
+		"你一直是个好<<girl>>，"雷米说道。<<He>>从<<his>>的口袋里掏出一个闪亮的红苹果。"这是给你的。"<<He>>把它拿给你，但当你伸出手时，<<he>>又把它拉了回来。"不，不，"<<he>>说道。"<<if $player.gender_appearance is "m">>公牛<<else>>母牛<</if>>没有手。我会在你吃饭时帮你拿着。"
+		<br><br>
+
+		<<link [[吃|Livestock Job Eat One]]>><<npcincr Remy love 1>><<hunger -400>><<livestock_obey 1>><<transform cow 1>><</link>><<gobey>><<lhunger>>
+		<br>
+		<<link [[拒绝|Livestock Job Eat Refuse]]>><<livestock_obey -1>><</link>><<lobey>>
+		<br>
+	<</if>>
+<<elseif $livestock_obey gte 21>>
+	"你是个喜怒无常的人，"雷米从<<He>>的口袋里拿出一个漂亮的红苹果。"等某一天你说不定就能得到这个苹果了，只要你规矩点。"<<He>>重重咬了一口。
+
+	<<if $hunger gte 1600>>
+		它看起来很多汁，你的胃在抗议地咕噜叫。
+	<<else>>
+		和其他的食物相比，它看起来很甜，很好吃。
+	<</if>>
+	<br><br>
+
+	雷米把你拉进了农田中，大门在你身后哐当关上了。
+	<br><br>
+
+	<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	"你是个喜怒无常的家伙，"雷米一边说一边拉着你的皮带。"但是你总有一天会向我屈服的，你不是我调教的第一头牛，也不会是最后一头，我最懂你们这种野兽。"<<He>>把你推过大门。它在你身后哐当关上。
+	<br><br>
+
+	<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+	<br>
+<</if>>

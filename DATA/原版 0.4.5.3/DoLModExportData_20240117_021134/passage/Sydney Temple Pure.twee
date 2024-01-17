@@ -1,0 +1,37 @@
+:: Sydney Temple Pure []
+<<set $outside to 0>><<set $location to "temple">><<run statusCheck("Sydney")>><<sydneySchedule>><<temple_effects>><<effects>><<set _sydneyPray to true>>
+<<if !_sydneyStatus.includes("pure")>>
+	<<unset $sydneyChastityRemovePure>><<unset $sydneyChastityRemoveIntro>>
+	你告诉悉尼你已经准备好了，<<he>>却羞愧地埋下了头。"不行的，我不再纯洁了，他们不会批准我们的结合的。"
+	<br><br>
+	<i><span class="pink">悉尼的纯洁度不够让<<him>>和你结合在一起。你应该好好保护<<him>>，让<<his>>的心灵再次纯净。</span></i>
+	<br><br>
+	<<sydneyOptions>>
+<<elseif Time.dayState is "night" or Time.dayState is "dusk">>
+	你告诉悉尼你准备好了。<<He>>听罢点点头。"但我们得等到约旦回来……所以，大概要明天去了。"
+	<br><br>
+	<<sydneyOptions>>
+<<elseif $temple_rank is undefined or $temple_rank is "prospective">>
+	你告诉悉尼你准备好了，<<he>>听罢点点头。"你应该先去给约旦谈谈。神殿只会允许两名信徒，而不是一个信徒和一个外人许下诚诺。"
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	<<if !$sydneySeen.includes("evaluation")>>
+		你告诉悉尼你准备好了。<<He>>听罢深吸一口气，和你一起走向约旦。
+		<br><br>
+		约旦见你们走来，露出了微笑。"欢迎回来。" 悉尼紧紧握住了你的手。
+		<br><br>
+		"我，我们想提出一个申请，"悉尼断断续续地说着，手指在不停地揉搓。你对<<him>>笑了笑，给<<he>>一个安抚的目光，<<he>>便很快不再迟疑。"我们……真的很爱彼此，真的真的。我们想申请一个——一个对于先约的赦免。就是允许……"悉尼埋下头，脸唰的一下变红了。约旦笑了。
+		<br><br>
+		"我明白了。你也知道规矩，悉尼。当且仅当两个人之间的爱被认为是纯洁无瑕的，并且他们经历了结为伴侣或结婚的仪式时，两个人的结合才被允许……你们俩都还在上学，对吧？我个人建议不要在这个时候结婚。"
+		<br><br>
+		你能感受到悉尼手掌下跳动的脉搏。"是，是的，我们想好了，"<<He>>拉着你一起向前一步，"我们想进行伴侣仪式的评估程序。"
+	<<else>>
+		你告诉悉尼你准备好了，于是你们再次走向约旦。"欢迎回来，"<<nnpc_he "Jordan">>对你们笑了笑，"我想你们是来进行评估的吧？"你们点点头。
+	<</if>>
+	<br><br>
+	约旦的脸上的笑容变得庄严了起来。"请和我来，你们二人都通过了定期的贞操测试，所以我们可以跳过这个步骤。至于现在……"<<nnpc_He "Jordan">>带你们走出主殿，来到一个小房间。
+	<br><br>
+	<<link [[继续|Sydney Temple Pure 2]]>><<pass 5>><<set $temple_evaluation to 30>><</link>>
+	<br>
+<</if>>

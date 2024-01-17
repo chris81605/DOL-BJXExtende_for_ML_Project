@@ -1,0 +1,30 @@
+:: Moor Bird Resist []
+<<effects>>
+
+<<if $willpowerSuccess is 1>>
+	你从<<beasttype>>的凝视中挣脱出来，<span class="green">跳到一边。</span>鹰爪抓住了空气，
+	<<if $rng gte 51>>
+		这个生物再次飞向天空。你现在没事了。
+		<br><br>
+		<<set $moor_hunt to 5>>
+
+		<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<if $monster is 1>>
+			然后<<bhe>>落在地上，爪子嵌进地面。<<bHe>>慢慢地直起身，展开背部的翅膀。
+		<<else>>
+			然后<<bHe>>落在地上，爪子嵌进地面。<<bHe>><<if $monster is 1>>转过身<<else>>跳转过来<</if>>面对你，展开翅膀。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Moor Bird Fight]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">你无法移开你的双眼。</span>当<<bhis>>的爪子抓住你的肩膀时，你依然站在原地。<<if $monster is 1>>"抓住你了，"<<bhe>>拍打着背上的翅膀说道。<</if>>你被远远带离了地面。<<willpower 3>><<gwillpower>>
+	<br><br>
+	<<set $moor_hunt to 0>>
+	<<link [[继续|Bird Capture]]>><</link>>
+	<br>
+<</if>>

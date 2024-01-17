@@ -1,0 +1,219 @@
+:: Domus House Sneak []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+你成功地撬开了锁并进到了这栋房子里。
+<<if $skulduggery lt 200>>
+	<<skulduggeryskilluse>>
+<<else>>
+	<span class="blue">这锁对你来说轻而易举，你已经没法精进技巧了。</span>
+<</if>>
+<br><br>
+你偷偷摸摸地在房子里寻找着有价值的东西。
+<<if $rng gte 81>>
+	<!-- Modified for Beast People -->
+	<<beastNEWinit 1 dog>>
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		一声低沉的咆哮打断了你的动作，一只<<beasttype>>从黑暗中钻了出来，<<bHe>>朝你低声吠叫。
+		<br><br>
+		<<if $deviancy gte 15>>
+			<<link [[试着让它冷静|Domus House Dog]]>><<set $phase to 0>><<set $sexstart to 1>><<generate2>><</link>><<deviant2>>
+			<br>
+		<</if>>
+		<<link [[战斗|Domus House Dog]]>><<set $molestationstart to 1>><<set $phase to 0>><<generate2>><</link>>
+		<br>
+		<<link [[跑路|Domus House Run]]>><<transform cat 1>><</link>>
+		<br><br>
+	<<else>>
+		一声低沉的咆哮打断了你的动作，一只狗吠叫着从黑暗中钻了出来，而它正逐步向你靠近着。
+		<br><br>
+		你仓惶逃出房子，而这条狗对你紧追不舍。但它并没有追出前门，仅仅是对着门外的<<if Time.dayState is "night">>夜晚<<else>>街道<</if>>狂吠。
+		<<beastescape>>
+		<br><br>
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $rng gte 61>>
+	你找到了一个带密码锁的保险箱。
+	<br><br>
+	<<link [[尝试打开它|Domus House Safe]]>><</link>>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<elseif $rng gte 56>>
+	<<generate1>><<person1>>
+	当你蹑手蹑脚地穿过一个黑暗的房间时，一个低沉的声音吓了你一大跳。
+	<br><br>
+	"欢迎你继续四处寻找，亲爱的，但这里没有都什么，我想你是找不到你想要的东西的。虽然这条街的人都很好，但我没有什么值钱的东西。
+	如果你想要一些值钱的东西，那就去多瑙河街吧。那里有很多值得一去的地方，并且充满了各种各样的好东西。"
+	<br>
+	一个打火机被按响了两次，那微弱的火光映照出一个<<person>>的脸庞，在打着第三次之后，<<his>>嘴里的香烟终于被点着了，随着香烟的燃起，昏暗的房间里出现了那唯一的光亮。
+	<br><br>
+	"我曾经是个小偷，"<<he>>突然说道："你要记住，小偷在刚开始的那段时间内是很舒服的，很多好东西都可以用0元购来获得。那时候的生活让我沉迷，我本以为这样的生活会永久这样下去，但是我后面才明白，所有的一切都是有代价的。
+	那句话怎么说来着？所有的礼物都在暗中被标注好了价格……我们的人生如此的微不足道，单纯为了活着本身而活着，而不是为了活着之外的任何事物而活着。用偷窃，用身体，付出一切的代价，活在这操蛋的小镇……颈手枷固然是羞耻和残忍的，但是这里的监狱更加糟糕。那里与其说是监狱，不如说是地狱而更贴切一些。现如今，我已经与销赃的那家伙断了联系。
+	在这个镇上可以很容易地赚到钱，只要向那些家伙张开你的腿，钞票就会源源不断地流进你的口袋。这可比蹲监狱要容易得多，而且你至少可以选择买家。切记保持一些控制，毕竟这里的监狱可比我描述的还要残酷得多。"
+	<br><br>
+	一道道烟雾蜿蜒着向你这边聚拢，它轻而易举地穿过你的鼻腔，然后开始刺挠起你的喉咙。你忍不住咳嗽了起来。
+	<br><br>
+	"抱歉，"<<he>>说道："这是一个需要戒掉的坏习惯。总而言之，这里什么都没有，你自己去看看吧，总比有一天你再跌跌撞撞地来到这里好。
+	去吧，想怎么看就怎么看，随便拿些什么东西吧。我可以得到更多的，所以你自己去吧。不过宝宝还在那间屋子里刚刚睡下不到一个小时，
+	所以不要吵醒那孩子，好吗？这是我唯一的要求。"
+	<br>
+	你悄悄地离开了。
+	<br>
+	"在这个镇上长大，这个小混蛋会需要所有能得到的休息时间，"<<he>>小声说道，似乎是在自言自语，"可怜的小混蛋。"
+	<br><br>
+	你什么都没找到，空手而归。
+	<br><br>
+	<<endevent>>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<elseif $rng gte 51>>
+	在摸索一个房间里的贵重物品时，你发现一个抽屉里有许多手机。虽然大多数看起来都是二手货，但有一部分还是相当新的。
+	<<if currentSkillValue('skulduggery') gte 500>>
+		以你对盗贼的了解让你很快确定这些都是偷来的手机。
+		再次偷窃它们应该构不成犯罪，毕竟那些家伙又不能报告有人偷了他们的赃物。
+		<br><br>
+		<<link [[全部拿走|Domus Street]]>><<set $blackmoney += 60>><</link>>
+	<<else>>
+		为什么有人会有这么多几乎全新的手机？真奇怪。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $blackmoney += 60>><<crimeUp 60 "thievery">><</link>><<crime "thievery">>
+	<</if>>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	<<generate1>><<person1>>当你在起居室里翻找值钱东西的时候，突然听到有脚步声正在靠近，在那个<<person>>进入房间之前，你赶忙躲在了窗帘后面。<<He>>坐了下来并打开电视，<<he>>看起来可能要在那里坐上一段时间了。
+	<br><br>
+	<<link [[偷偷溜走|Domus House Sneak 2]]>><</link>>
+	<br>
+	<<link [[等待时机 (0:30)|Domus House Wait]]>><<pass 30>><</link>>
+	<br>
+<<elseif $rng gte 31>>
+	当你在起居室内翻找贵重物品时，你突然注意到某处地板像是空心的一样。
+	<<if currentSkillValue('skulduggery') gte 500>>怀疑有隐藏的藏匿处，<<else>>很困惑，<</if>>你在地毯下面找，发现了一个活板门。
+	你将活板门抬起来后往下看，似乎有一组台阶通向一个地下房间。
+	<br>
+	在黑暗之中，你无法辨认任何东西。
+	<br><br>
+	<<link [[顺着楼梯下去|Domus House Dungeon]]>><</link>>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<elseif $rng gte 21>>
+	<<switch $rng % 4>>
+		<<case 3>>
+			<<set _bigthing to "一整套非常高级的游戏设备">><<set _thebits to "超高清曲面屏幕，环绕立体声音响，带集成手柄的游戏椅">>
+			<<set _littlething to "一大叠色情游戏光盘">><<set _blackmoney to 50>>
+		<<case 2>>
+			<<set _bigthing to "一整套家庭影院系统">><<set _thebits to "巨型荧幕，继承立体声音响，带有控制面板的功能沙发">>
+			<<set _littlething to "一大叠色情片光盘">><<set _blackmoney to 80>>
+		<<case 1>>
+			<<set _bigthing to "一整套沉浸式VR系统">><<set _thebits to "VR头显，动漫主题的配件和家具，触觉反馈手套">>
+			<<set _littlething to "一箱动漫主题的 '原味内裤' ">><<set _blackmoney to 50>>
+		<<default>>
+			<<set _bigthing to "一个秘密的政府监视站">><<set _thebits to "间谍摄像头终端，手机窃听设备，网络监控和窃听装置">>
+			<<set _littlething to "一套与 '黑麋鹿计划' 有关的 '绝密' 政府文件">><<set _blackmoney to 110>>
+	<</switch>>
+	这所房子几乎完全是空的，就当你准备离开时，你偶然发现了一个专门用来摆放_bigthing的房间。
+	不幸的是，它里面的大部分——<<= _thebits>>——都太难拿走或太笨重而无法窃取。
+	<br>
+	还好，这个椅子边上的_littlething非常容易得手，并且应该能在黑市上卖个好价钱。
+	<br><br>
+	<<link [[拿走|Domus Street]]>><<set $blackmoney += _blackmoney>><<crimeUp _blackmoney "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Domus Street]]>><</link>>
+	<br>
+<<elseif $rng gte 16>>
+	整个房子里没有任何有价值的东西。即使是那张床，也只是在光秃秃的木地板上放上旧污渍床垫，然后在上面铺着油腻的床单而组成的恶心玩意。
+	<<print either("简直就是悲剧。","太悲哀了。","三个孩子，一个大人，橱柜里还有半块发霉的面包。")>>
+	<br><br>
+	你不能从这些人这里偷东西，你也许应该把钱留给<i>这些家伙</i>。
+	<br><br>
+	<<if $money gte 10000>>
+		<<link [[留下 £100|Domus Leave Money]]>><<set $phase to 0>><<set $money -= 10000>><<stress -6>><<trauma -6>><</link>><<lstress>><<ltrauma>>
+		<br>
+	<</if>>
+	<<if $money gte 50000>>
+		<<link [[留下 £500|Domus Leave Money]]>><<set $phase to 1>><<set $money -= 50000>><<stress -24>><<trauma -12>><</link>><<llstress>><<lltrauma>>
+		<br>
+	<</if>>
+	<<if $money gte 100000>>
+		<<link [[留下 £1000|Domus Leave Money]]>><<set $phase to 2>><<set $money -= 100000>><<stress -50>><<trauma -18>><</link>><<lllstress>><<llltrauma>>
+		<br>
+	<</if>>
+	<<link [[就此离开|Domus Street]]>><</link>>
+	<br>
+<<else>>
+	<<rng>>
+	<<if $rng gte 91>>
+		你没有发现什么，只有一些价值<<moneyGainDisplay 1 true true>>的零钱。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 81>>
+		你没有发现什么，只有一些价值<<moneyGainDisplay 2 true true>>的零钱。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 71>>
+		你发现<<moneyGainDisplay 5 true true>>藏在一个抽屉里。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 61>>
+		你在抽屉里找到一枚漂亮的饰针。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $blackmoney += 5>><<crimeUp 5 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 51>>
+		你在沙发上的一个垫子下面发现了<<moneyGainDisplay 10 true true>>。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		你在衣帽架旁边的凳子上发现了一条项链。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $blackmoney += 10>><<crimeUp 10 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 31>>
+		你发现了<<moneyGainDisplay 15 true true>>正躺在厨房的灶台上。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 21>>
+		你找到一套银质餐具。
+		<br>
+		<<link [[拿走|Domus Street]]>><<set $blackmoney += 15>><<crimeUp 15 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<elseif $rng gte 11>>
+		你在大衣口袋里发现了一对金袖扣。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $blackmoney += 20>><<crimeUp 20 "thievery">><</link>><<crime "thievery">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<<else>>
+		你在前门旁边的一个罐子里发现了<<moneyGainDisplay 30 true true>>。
+		<br><br>
+		<<link [[拿走|Domus Street]]>><<set $money += _money_gain>><<crimeUp `_money_gain / 100` "petty">><</link>><<crime "petty">>
+		<br>
+		<<link [[离开|Domus Street]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

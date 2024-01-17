@@ -1,0 +1,55 @@
+:: Domus House Dungeon Rape []
+<<if $molestationstart is 1>>
+	<<generate1>><<person1>>一个<<person>>牵制住你。
+	<br>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $rescue to 0>>/*no rescue possible*/
+	<<set $dun_counter to 1>>
+<</if>>
+<<effects>>
+<<effectsman>>
+
+<<if $alarm is 1>>
+	<<set $alarm to 0>>
+	<<switch $dun_counter>>
+	<<case 1>>
+		"隔音墙，"<<he>>轻叹，"这样我就能享受尖叫了。"
+	<<case 2>>
+		"继续尖叫！"<<he>>轻声细语。"更火热一些吧。"
+		<<set $enemyarousal += 10>>
+	<<case 3>>
+		"再大声尖叫！"<<he>>咆哮着。"你让我兴奋了。"
+		<<set $enemyarousal += 20>>
+	<<case 4>>
+		"尖叫！"<<he>>咆哮着。"就好像我在伤害你一样。"
+		<<set $enemyarousal += 20>>
+	<<default>>
+		"我得到你了，婊子！"<<he>>喃喃道。"尖叫！"
+		<<set $enemyarousal += 30>>
+	<</switch>>
+	<<if $NPCList[0].lefthand is "mouth" or $NPCList[0].righthand is "mouth">>
+		<br><span class="teal"><<He>>把<<his>>的手从你嘴里抽了出来。</span>
+		<<set $NPCList[0].righthand to 0>>
+		<<set $NPCList[0].lefthand to 0>>
+		<<set $mouthuse to 0>>
+	<</if>>
+	<<set $enemytrust -= 20>><<set $enemyanger -= 30>>/*reduce rate of anger/distrust*/
+	<<set $dun_counter += 1>>
+	<br><br>
+<</if>>
+<<man>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Domus House Dungeon Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Domus House Dungeon Rape]]>><</link>></span><<nexttext>>
+<</if>>

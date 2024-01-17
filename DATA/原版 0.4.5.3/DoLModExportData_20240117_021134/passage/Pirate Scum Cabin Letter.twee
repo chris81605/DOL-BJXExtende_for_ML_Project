@@ -1,0 +1,48 @@
+:: Pirate Scum Cabin Letter []
+<<effects>>
+<<set _answer to ["X","R","C","I"]>>
+<<set _answer.push($NPCList[0].name.charAt(0),$NPCList[0].name.charAt(0),$NPCList[0].name.charAt(0))>>
+<<set _answer to _answer.pluck()>>
+
+<<switch $phase>>
+	<<case "X">>
+		“是X，”你说，“因为X标记着地点。”
+	<<case "R">>
+		“是R，”你说。“啊呃！”你用手指做出钩子的形状，并摇晃着你的手。
+	<<case "C">>
+		“是C，”你说，“因为海盗的初恋是大海的朝夕。”
+	<<case "I">>
+		“是I，”你说。“系的系的，伙计！”你做出充满戏剧性的夸张敬礼动作。
+	<<default>>
+		你承认你不知道。<<He>>摇了摇<<his>>的头，就好像你已经回答过了一样。
+<</switch>>
+<br><br>
+
+<<if $phase is _answer>>
+	“不，不，不是这个原因，”
+<<else>>
+	“不，不是的，”
+<</if>>
+那位<<person>>笑着，摇了摇<<his>>的头。“那就是_answer，因为。”<<He>>停下来打了个嗝。
+<<switch _answer>>
+	<<case "X">>
+		“因为它是一个出色的字母。”
+	<<case "R">>
+		“因为我们就是如此。”
+	<<case "C">>
+		“因为海盗心系整个大海不仅仅是朝夕，你明白吗。”
+	<<case "I">>
+		“因为我们爱戴碍眼的眼罩。”
+	<<default>>
+		“因为我的名字是$NPCList[0].name。”
+<</switch>>
+<<He>>大笑着拍桌子，把瓶子都给弄翻了。
+<br><br>
+
+<<if $phase is _answer>>
+	好吧，至少你答对了。
+	<<stress -6>><<lstress>>
+	<br><br>
+<</if>>
+
+<<link [[继续|Pirate Cabin]]>><<endevent>><<set $eventskip to 1>><</link>>

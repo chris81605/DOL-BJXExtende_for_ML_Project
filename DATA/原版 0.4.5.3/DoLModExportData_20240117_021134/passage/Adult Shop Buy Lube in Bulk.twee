@@ -1,0 +1,91 @@
+:: Adult Shop Buy Lube in Bulk []
+<<effects>>
+<<if $brothelVending.products gte 2>>
+	<<if $weekly.brothelVMLube>>
+		本周你已经为自动售货机里的润滑液进行了补货。
+		<br><br>
+		<<link [[返回|Adult Shop Approach Sirris]]>><</link>>
+	<<elseif $brothelVending.lubeToRefill lt 10>>
+		你不需要给自动售货机里的润滑液补货。
+		<br><br>
+		<<link [[返回|Adult Shop Approach Sirris]]>><</link>>
+	<<elseif $money lt 20000>>
+		你买不起润滑液来给自动售货机补货。
+		<br><br>
+		<<link [[返回|Adult Shop Approach Sirris]]>><</link>>
+	<<else>>
+		你向西里斯购买所需的润滑液数量:
+		<br><br>
+		<<lubePrice 10>>
+		<<link [[买10瓶 (£200)|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to 10>><</link>>
+		<br>
+		<<if $brothelVending.lubeToRefill gte 25>>
+			<<lubePrice 25>>
+			<<if $money gte _price>>
+			<<formatmoney _price>>
+				<<link [[`买25瓶 (${_printmoney})`|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to 25>><</link>>
+				<br>
+			<<else>>
+				你买不起25瓶。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.lubeToRefill gte 50>>
+			<<lubePrice 50>>
+			<<if $money gte _price>>
+			<<formatmoney _price>>
+				<<link [[`买50瓶 (${_printmoney})`|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to 50>><</link>>
+				<br>
+			<<else>>
+				你买不起50瓶。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.lubeToRefill gte 100>>
+			<<lubePrice 100>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买100瓶 (${_printmoney})`|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to 100>><</link>>
+				<br>
+			<<else>>
+				你买不起100瓶。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.lubeToRefill gte 150>>
+			<<lubePrice 150>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买150瓶 (${_printmoney})`|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to 150>><</link>>
+				<br>
+			<<else>>
+				你买不起150瓶。
+				<br>
+			<</if>>
+		<</if>>
+		<<if $brothelVending.lubeToRefill gte 11>>
+			<<lubePrice $brothelVending.lubeToRefill>>
+			<<formatmoney _price>>
+			<<if $money gte _price>>
+				<<link [[`买${$brothelVending.lubeToRefill}瓶 (${_printmoney})`|Adult Shop Bought Lube in Bulk]]>><<set $lubeBought to $brothelVending.lubeToRefill>><</link>>
+				<br>
+			<<else>>
+				你买不起$brothelVending.lubeToRefill瓶。
+				<br>
+			<</if>>
+		<</if>>
+		<<link [["不买"|Adult Shop Approach Sirris]]>><</link>>
+	<</if>>
+<<else>>
+	你向西里斯解释你已经设法在妓院中安装了自动售货机，并且计划以此售卖润滑液。"这对我们俩来说都是一个商机，您的销售额增加了，我也能赚上一笔。"你想知道如果你批发润滑液，西里斯能不能给你打点折。
+	<br><br>
+	"那个妓院？"<<nnpc_he Sirris>>看起来非常震惊，"妓院对学生来说可不是一个安全的地方。不过我相信你知道自己在做什么，请你一定要小心。如果你已经在那安装了机器，我们可以谈谈批发折扣。让我看看……"西里斯翻了翻<<nnpc_his Sirris>>的文件，直到<<nnpc_he Sirris>>抽出一张看起来像账单的纸。
+	<br><br>
+	"好吧，在这儿。我可以将价格降低2%，但前提是你要购买10瓶以上。如果你购买50瓶以上，我可以为每瓶提供5%的折扣。如果你购买了超过150瓶的润滑液，我将为你提供8%折扣。听起来怎么样，还算公平？"西里斯面无表情地思考了一会，还没有等你回答，<<nnpc_he Sirris>>便告诉你<<nnpc_he Sirris>>会把产品送到妓院，这样你就不用自己去那里了。
+	<br><br>
+	<<set $brothelVending.products += 2>>
+	<<set $brothelVending.lubeToRefill to 200>>
+	<<link [[为妓院购买润滑液 (0:10)|Adult Shop Buy Lube in Bulk]]>><<pass 10>><</link>>
+	<br>
+	<<link [["不买"|Adult Shop Approach Sirris]]>><</link>>
+<</if>>

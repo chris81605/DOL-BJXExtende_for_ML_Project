@@ -1,0 +1,29 @@
+:: Maths Lesson Socialise []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $whitneymaths is "seat">>
+	你做了一些最基础的功课，转而专心于与惠特尼和<<nnpc_his "Whitney">>朋友们聊天。<<npcincr Whitney love 1>><<glove>>
+<<elseif $cool gte ($coolmax / 5 * 2)>>
+	你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。你很快就成为了大家关注的焦点。
+<<elseif $cool gte ($coolmax / 5)>>
+	你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。
+<<else>>
+	你做了一些最基础的功课，转而专注于努力让自己更受同学的欢迎。大多数人都避免和你交流。
+<</if>>
+<br><br>
+
+<<status 1>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<mathsLessonEnd>>
+<<else>>
+	<<mathsLessonEvent 2>>
+<</if>>

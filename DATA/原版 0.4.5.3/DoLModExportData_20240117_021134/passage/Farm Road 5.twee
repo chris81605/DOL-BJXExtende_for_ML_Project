@@ -1,0 +1,44 @@
+:: Farm Road 5 []
+<<set $outside to 1>><<set $location to "moor">><<effects>><<set $bus to "farmroad5">>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	你向乡村深处走去。山变得更平坦，地面变得更贫瘠。棕色的灌木丛挣扎着穿过泥土。奇怪的、多刺的植物缠绕着树木。<<physique 3>>
+<<elseif $phase is 2>>
+	<<set $phase to 0>>
+	你朝镇上走去。田地逐渐变得稀少，取而代之的是贫瘠的平原。棕色的灌木丛挣扎着穿过泥土。奇怪的、带刺的生长缠绕着树木。<<physique 3>>
+<<else>>
+	你走在连接城镇和周围农田的路上。这条路四周是贫瘠的平原。棕色的灌木丛挣扎着穿过泥土。奇怪的、多刺的植物缠绕着树木。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>>
+<<if $stress gte $stressmax>>
+	<<passoutfarmroad>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if $rng gte 51>>
+		你听到一声可怕的尖叫声。<<if $syndromebird isnot 1>><<gstress>><<stress 6>><</if>>
+		<br><br>
+
+		<<destinationfarmroad>>
+	<<else>>
+		<<hitchhike>>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "countryside">>
+	<</if>>
+	<<if $exposed lte 1>>
+		<<hitchhikeicon>><<link [[搭顺风车 (0:15)|Farm Hitchhike]]>><<pass 15>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">你太暴露了，不能搭便车！</span>
+		<br>
+	<</if>>
+	<<roadicon>><<link [[走进乡村 (0:30)|Farm Road 6]]>><<pass 30>><<set $phase to 1>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+	<<roadicon>><<link [[朝小镇走 (0:30)|Farm Road 4]]>><<pass 30>><<set $phase to 2>><<tiredness 3>><</link>><<gtiredness>>
+	<br>
+<</if>>
+
+<<set $eventskip to 0>>

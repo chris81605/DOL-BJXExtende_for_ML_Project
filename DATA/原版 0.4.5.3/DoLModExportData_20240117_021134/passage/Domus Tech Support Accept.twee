@@ -1,0 +1,60 @@
+:: Domus Tech Support Accept []
+<<effects>><<set $outside to 0>>
+<<He>>带你到客厅。咖啡桌上放着一本手册。
+<br><br>
+
+你按照手册中的故障排除指南，一步接一步地操作，直到找出问题所在：
+<<switch random(1,5)>>
+    <<case 1>>
+        插头没有插在墙上。
+        <br><br>
+    <<case 2>>
+        遥控器需要新电池。
+        <br><br>
+    <<case 3>>
+        它插的插线板开关没开。
+        <br><br>
+    <<case 4>>
+        <<he>>把电视遥控器和DVD播放器遥控器搞混了。
+        <br><br>
+    <<case 5>>
+        <<he>>把遥控器拿反了。
+        <br><br>
+<</switch>>
+
+<<cleareventpool>>
+
+<<addinlineevent "tech_support_normal" 4>>
+
+	你打开电视机确认。电视上正在放
+    <<switch random(1,4)>>
+        <<case 1>>
+            新闻广播
+        <<case 2>>
+            动画片
+        <<case 3>>
+            肥皂剧
+        <<case 4>>
+            动作片
+    <</switch>>
+    ，这正是屋主之前调的频道。
+    <br><br>
+
+    <<link [[继续|Domus Tech Support Normal]]>><</link>>
+
+<</addinlineevent>>
+
+<<addinlineevent "tech_support_lewd" 1>>
+
+	<<if $awareness gte 200>>
+        你打开电视机确认。电视上正在放色情片。<<garousal>><<gtrauma>><<arousal 600>><<trauma 1>>
+        <br><br>
+    <<else>>
+        你打开电视机确认。电视上正在放像是自然纪录片的东西，但里面的主角是人，而不是动物。<<gtrauma>><<trauma 1>>
+        <br><br>
+    <</if>>
+
+    <<link [[继续|Domus Tech Support Lewd]]>><</link>>
+
+<</addinlineevent>>
+<<runeventpool>>

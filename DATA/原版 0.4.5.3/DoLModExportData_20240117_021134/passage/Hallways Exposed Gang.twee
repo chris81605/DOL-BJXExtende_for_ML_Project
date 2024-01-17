@@ -1,0 +1,37 @@
+:: Hallways Exposed Gang []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+
+	/* Calling both rescue widgets is intentional. */
+	<<enable_rescue>><<enableSchoolRescue "Whitney">>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+
+	<<enable_rescue>><<enableSchoolRescue "Whitney">>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Hallways Exposed Gang Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hallways Exposed Gang]]>><</link>></span><<nexttext>>
+<</if>>

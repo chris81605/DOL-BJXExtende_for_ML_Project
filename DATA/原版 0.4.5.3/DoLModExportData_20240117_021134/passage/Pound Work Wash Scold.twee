@@ -1,0 +1,42 @@
+:: Pound Work Wash Scold []
+<<effects>>
+
+<<if $tendingSuccess>>
+	你拎住<<beasttype>>的项圈，警告<<bhim>>不要这么做。<<bHe 0>>似乎听懂了你在说什么，<span class="green">安静地等着你把<<bhimself>>再擦干净。</span><<gpound_status>><<pound_status 1>>
+	<br><br>
+
+	你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+	<br><br>
+
+	<<if Time.hour gte $closinghour>>
+		<<link [[继续|Pound]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Pound Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	你拎住<<beasttype>>的项圈，然后用严厉的语气训斥。你感觉你的训话起效果了，直到<<bhe>>开始用力地抖毛，<span class="red">把你弄得湿透。</span>
+	<<wet_all>>
+	<br><br>
+	<<exposure>>
+	<<covered>><<beasttype>>无辜地侧着<<bhis>>的脑袋。
+	<br><br>
+
+	<<if $exposed gte 1>>
+		<<link [[继续|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你赚取了<<moneyGain $pound.money>>。<<pass 60>>
+		<br><br>
+
+		<<if Time.hour gte $closinghour>>
+			<<link [[继续|Pound]]>><<endevent>><</link>>
+			<br>
+		<<else>>
+			<<link [[继续|Pound Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

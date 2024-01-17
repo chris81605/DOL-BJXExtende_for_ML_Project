@@ -1,0 +1,47 @@
+:: Brothel VM income []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+你问布莱尔<<he>>是否已经检查了你的自动售货机的库存，并在本周收取了钱。
+<br><br>
+<<if $brothelVending.status is "sold">>
+	布莱尔嗤之以鼻。"你的自动售货机已经空了整整$brothelVending.weeksEmpty周了。我告诉过你，如果它连续三周都是空的，我就会把它扔掉。你已经没有自动售货机了。"
+	<br><br>
+	你试图解释为什么你这么久都没能给机器补货，但布莱尔打断了你。
+	<br><br>
+	"我不关心你的生活，时间，或者你的钱。做生意，既需要时间，也需要金钱，有时候还需要点运气。如果你没有时间每周购买产品，你就多花钱来给机器补充大量的产品。如果你没有足够的钱给机器完全补货，你就多花点时间，每周给机器补一点货。"布莱尔从抽屉里拿出一叠钞票。"但你很幸运。我的一个朋友需要一台自动售货机放在学校厕所，因为有人把那里的一台弄坏了。我把你的售货机卖给了<<nnpc_him Leighton>>，而没有把它扔掉。这是£1000，给你。现在，如果你愿意的话，<span class="gold">你可以买一台新的自动售货机，把它摆在更衣室里</span>，但这次一定要让它维持有货。规则和以前一样。"
+	<br><br>
+	<<set $money += 100000>>
+	<<set $brothelVending.weeksEmpty to 0>>
+	<<if $brothelVending.condomsSold + $brothelVending.lubeSold>>
+		布莱尔停顿了一下，说道："你在售货机清空之前从不收取钱。
+	<</if>>
+<<else>>
+	"是的，我取了。
+<</if>>
+<<if $brothelVending.condomsSold + $brothelVending.lubeSold>>
+	<<set _productsSold = []>>
+	<<set _productCost = ($brothelVending.condomsSold * 6000)+($brothelVending.lubeSold * 2000)>>
+	<<set _productProfit = ($brothelVending.condomsSold * 2000 + $brothelVending.lubeSold * 1000)>>
+	<<if $brothelVending.condomsSold >>
+		<<run _productsSold.push(`$brothelVending.condomsSold个避孕套<<if $brothelVending.condomsSold gt 1>><</if>>`)>>
+	<</if>>
+	<<if $brothelVending.lubeSold>>
+		<<run _productsSold.push(`$brothelVending.lubeSold瓶<<if $brothelVending.lubeSold gt 1>><</if>>润滑液`)>>
+	<</if>>
+	你在过去<<print $brothelVending.weeksRent is 1 ? "一周" : $brothelVending.weeksRent + "周">>里卖出了<<print _productsSold.join("和")>>。我已经扣除了每周的租金，
+	<<set _productProfit to Math.max(0, _productProfit - $brothelVending.weeksRent * 5000)>>
+	<<if _productProfit>>
+		<<set _pcProfit to _productProfit * .4>>
+		还有属于我的60%的提成。这是你<span class="green"><<formatmoney _pcProfit>>_printmoney</span>的利润，再加上你用来进货所花的<span class="blue"><<formatmoney _productCost>>_printmoney</span>。"<<He>>把你的收入交给你。你获得了<<printmoney `_productCost + _pcProfit`>>。"很高兴和你做生意。"
+		<<famebusiness 2>>
+		<<set $money += _pcProfit>>
+	<<else>>
+		但不幸的是，这也吃掉了剩下的利润。你能拿回来的只有你在机器上存货的钱。"<<He>>把你的收入交给你。你获得了<<printmoney _productCost>>。"如果你想做得比只保本更好的话，下次试着进更多的产品。"
+	<</if>>
+	<<set $money += _productCost>>
+	<<set $brothelVending.condomsSold to 0>>
+	<<set $brothelVending.lubeSold to 0>>
+	<<set $brothelVending.weeksRent to 0>>
+	<<set $weekly.brothelVMCollect to true>>
+<</if>>
+<br><br>
+<<link [[继续|"Briar's Office"]]>><</link>>

@@ -1,0 +1,48 @@
+:: Farm Guard Pay Refuse []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我，我付不起那么多，"你支支吾吾地说，"非常抱歉。"
+<<elseif $speech_attitude is "bratty">>
+	"最近手头很紧，"你说，"下周一定按时还你。"
+<<else>>
+	"我现在付不起那么多，"你说，"我之后会还你的。"
+<</if>>
+<br><br>
+
+<<if $NPCList[0].trust gte 1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<print $NPCList[0].name>>叹了口气。<span class="green">"没事，"</span><<he>>说，"下周见吧。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<<print $NPCList[0].name>>耸了耸肩。<span class="green">"我可以等，"</span><<he>>说，"但不是永远。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="green">"我明白了，"</span><<print $NPCList[0].name>>说道。
+	<<else>>
+		<<print $NPCList[0].name>>踹了一脚旁边的土堆。<span class="green">"我会等的，"</span><<he>>说，"但仅仅是为了你，明白吗？"
+	<</if>>
+
+	<<He>>走开了。
+	<br><br>
+
+	<<set $NPCList[0].trust -= 3>>
+
+	<<link [[继续|Farm Work]]>><<saveNPC 0 "farm_tower_guard">><<set $farm.tower_guard_patience to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		<<print $NPCList[0].name>><span class="red">摇了摇头。</span>"抱歉，"<<he>>说，"我也很想帮忙，但我也要养活自己。后会有期。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		<span class="red">"抱歉，<<girl>>，"</span><<print $NPCList[0].name>>说，"我总不能一直去占我朋友的便宜。再见吧。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		<span class="red">"那就这样吧"</span><<print $NPCList[0].name>>说，"祝你好运。"
+	<<else>>
+		<span class="red">"抱歉，<<girl>>，"</span><<print $NPCList[0].name>>说，"尽管我很乐意从你的光芒中获取营养，但我也需要一些实在的东西。再见。"
+	<</if>>
+	<br><br>
+	<<He>>离开了农场。
+	<br><br>
+	<span class="purple">在找到替补之前，瞭望塔将停止运作。</span>
+	<br><br>
+	<<link [[继续|Farm Work]]>><<endevent>><<clearNPC "farm_tower_guard">><<set $farm.tower_guard to 0>><</link>>
+	<br>
+<</if>>

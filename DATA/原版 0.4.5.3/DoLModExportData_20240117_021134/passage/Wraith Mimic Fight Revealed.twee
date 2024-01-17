@@ -1,0 +1,56 @@
+:: Wraith Mimic Fight Revealed []
+<<effects>>
+<<if $phase is 1>>
+	<<His>>的头以一个不自然的角度扭曲着。你吓了一跳，身子开始退缩。<<His>>的手臂软软的垂下，就好像面条一样。
+	<br><br>
+	你惊恐地看着<<he>>。<<His>>的皮肤愈发的苍白，愈发的透明。慢慢地，<<him>>的脖子开始诡异地增长，嘴角拧出渗人的笑容。
+<<else>>
+	<<hes>>快要高潮了。突然的笑声如电流般刺过你的脑神经——诡异，恐怖，不是<<he>>的声音。
+	<<if $wraith.seen gte 3>>
+		你的脸唰的一下变得苍白，本能地拉开了你们间的距离。
+	<<else>>
+		你感到惊恐。
+	<</if>>
+	<br><br>
+	<<His>>的皮肤开始变白。<<His>>的眼睛闪烁着明亮的<<wraithEyes>>，一道邪恶的白光包围着<<him>>。<<rainWraith true>>
+<</if>>
+<br><br>
+这不是<<set _temp_pronoun to $NPCList[0].pronoun is 'm'? 0:1>><<= setup.NPCNameList_cn_name[_temp_pronoun][$NPCNameList.indexOf($wraith.mimic)]>>。<<trauma 24>><<gggtrauma>><<set $wraith.revealed to true>>
+<br><br>
+<<silently>><<endcombat>><</silently>>
+<<generateWraith 1 true>><<initWraith "abomination">>
+<<if $phase is 1>>
+	<<set $enemyhealth -= 200>>
+<<else>>
+	<<set $enemyarousal += 200>>
+<</if>>
+<<if $wraith.state is "haunt">>
+	<<if $wraith.mimic is "Eden">>
+		"<span class="wraith">秃鹫。</span>"
+	<<elseif $wraith.mimic is "Robin">>
+		"<span class="wraith">我们都有需要保护的东西。</span>"
+	<<else>>
+		"<span class="wraith">还给我。</span>"
+	<</if>>
+<<elseif $wraith.state is "despair">>
+	<<if C.npc["Ivory Wraith"].lust gte 12>>
+		"<span class="wraith"><<pcPetname "Wraith">>，没有它真的很冷……请让我暖和一下。</span>"
+	<<else>>
+		"<span class="wraith">在哪里？你看到了吗？我的项链……</span>"
+	<</if>>
+<<elseif $wraith.offspring is "dead" and $tentacledisable is "f">>
+	"<span class="wraith">是你害死了他们，我们不会停下的。</span>"
+<<elseif $wraith.offspring is "sold" and $tentacledisable is "f">>
+	"<span class="wraith">你把他们丢掉了。我们可以再造更多。</span>"
+<<else>>
+	"<span class="wraith">肉欲，激情，美丽，<<pcPetname "Wraith">>。</span>"
+<</if>>
+<br><br>
+<<startWraith>>
+<br><br>
+<<if isBloodmoon()>>
+	<<link [[继续|Wraith Caught]]>><</link>>
+<<else>>
+	<<link [[继续|Wraith Mimic Fight]]>><</link>>
+<</if>>
+<br>

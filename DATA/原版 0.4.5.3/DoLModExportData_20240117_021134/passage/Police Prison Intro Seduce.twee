@@ -1,0 +1,50 @@
+:: Police Prison Intro Seduce []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	<<gagged_speech "如，如果你让我走，">>你支支吾吾地祈求着，<<gagged_speech "你，你可以对我做任，任何想做的事。">>
+<<elseif $speech_attitude is "bratty">>
+	<<gagged_speech "我知道你想干什么，">>你双手抱胸，<<gagged_speech "只要你能让我走。">>
+<<else>>
+	<<gagged_speech "我们做个交易，你放我走。">>你双手抱胸。
+<</if>>
+<<promiscuity2>>
+
+
+<<set $seductiondifficulty to 10000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>>
+	<span class="gold">你对自己的诱惑力更有信心了。</span>
+	<br><br>
+<</if>>
+<<seductionskilluse>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+	<span class="green"><<persons>>眼中闪烁着色欲。</span>"放心好了，我们不会把你弄丢的，"<<he>>笑了起来，"但我们可以下次再见。"
+	<br><br>
+	<<set $prison_intro_officer to 1>>
+	<<saveNPC 1 "prison_intro_officer">>
+
+<<else>>
+
+	<span class="red">"不错的尝试，"</span><<person>>笑了起来，"但我们不能假装在车站和水域中间的什么地方把你弄丢。"
+	<br><br>
+
+<</if>>
+
+
+
+<<if $prison_intro is undefined>>
+	汽车抵达梅尔街，向着码头驶入，一艘小船正等着你。<<people>>站在船上，他们的着装与警察相似。你终于到了。
+	<br><br>
+
+	<<link [[继续|Police Prison Intro Bailey]]>><</link>>
+	<br>
+<<else>>
+	汽车抵达梅尔街，向着码头驶入，一艘小船正等着你……船上都是你的老熟人。
+	<br><br>
+	<<link [[继续|Police Prison Intro Docks]]>><</link>>
+	<br>
+<</if>>

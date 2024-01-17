@@ -1,0 +1,30 @@
+:: School Toilets []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<unset $changingRoomGender>>
+
+你待在学校前厅里，身旁是厕所。
+<br><br>
+<<if $stress gte $stressmax>>
+	<<link [[你眼前一黑……|School Passout]]>><</link>>
+<<else>>
+	<<maleicon>><<link [[男厕|School Boy's Toilets]]>><</link>>
+	<br>
+	<<femaleicon>><<link [[女厕|School Girl's Toilets]]>><</link>>
+	<br><br>
+	<<if $historytrait gte 2 and $schooldrainintro isnot 1>>
+		<<sewericon>><<link [[通往下水道的密道 (0:02)|School Drain]]>><<pass 2>><</link>>
+		<br><br>
+	<<elseif $historytrait gte 2>>
+		<<sewericon>><<link [[通往下水道的密道 (0:02)|Commercial Drain]]>><<pass 2>><</link>>
+		<br><br>
+	<</if>>
+	<<if $brothel_basement_intro is 1>>
+		<<if $promiscuity gte 55>>
+			<<brothelicon "gloryhole">><<link [[在靠前的隔间设置寻欢洞|School Gloryhole Start]]>><</link>><<promiscuous4>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<getouticon>><<link [[离开洗手间 (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>

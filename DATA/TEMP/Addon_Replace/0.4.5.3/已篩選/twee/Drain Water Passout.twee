@@ -1,0 +1,22 @@
+:: Drain Water Passout []
+<<effects>>
+/* 北极星模组 */
+<<if $parasite.left_ear.name is "slime" and $parasite.right_ear.name is "slime">>
+	你失去知觉的身体被水流带走，直到撞上下水道的河岸，昏了过去。
+	<br><br>
+	不知过了多久，你被耳边传来的奇怪声音惊醒，带着眩晕感勉强睁开眼睛，努力辨认着黑暗中向你接近的黑影。
+	<br><br>
+	一只巨大的黏液生物向你靠近，那是一只史莱姆！你想要逃跑，却被你的耳中史莱姆控制，无法移动，只能惊恐地看着它慢慢开始吞噬你的身体。
+	<br><br>
+	<<link [[继续|Sewers Slime]]>><</link>>
+	<br>
+<<elseif isPlayerNonparasitePregnancyEnding()>>
+/* 北极星 */
+	<<pregnancyWatersBrokenPassout "drain">>
+<<else>>
+	<<passout>>
+	你失去知觉的身体沿着排水沟移动，直到你掉进海里。你被电击醒了。
+	<br><br>
+	<<link [[继续|Sea Cliffs]]>><</link>>
+	<<set $stress -= 2000>><<trauma 6>>
+<</if>>

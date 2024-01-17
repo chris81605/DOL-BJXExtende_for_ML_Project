@@ -1,0 +1,84 @@
+:: Pub Hack []
+<<set $outside to 0>><<set $location to "pub">><<effects>><<set $bus to "harvest">><<set $phase to 1>>
+<<if $police_hack is 1>>
+	<<if $pubfame and !$pubfame.intro>>
+		"黑进警察的电脑？"兰德里斜倚着问道，"我喜欢你的行事风格。
+		<<if $pubfame.status is "hiding">>
+			<<set $pubfame.status to "hidingKnown">>
+			在这方面我帮不了你，而且不幸的是<span class="red">我们的朋友现在有别的事在忙。</span>那家伙得躲起来，不让那些坏人找到，这全是因为有人泄露关于那家伙的重要信息。”
+			<<stress 12>><<ggstress>>
+			<br><br>
+
+			<<He>>在你想说什么之前摇了摇头："别道歉，我可不想去被那些警察抓住。等那个家伙安定下来，我们就可以重新联系上了，你只要等到<span class="gold"><<if $pubfame.timer gt 1>><<number $pubfame.timer>>天后<<else>>明天<</if>>就可以了</span>。"
+			<br><br>
+
+			<<link [[离开|Pub]]>><<endevent>><</link>>
+		<<elseif $pubfame.status is "hidingKnown">>
+			我在那方面帮不了你，而且不幸的是，我们的朋友还在努力隐藏自己的位置。不过，一旦那家伙安顿下来，你就可以试图与其联系上。"
+			<br><br>
+
+			<<link [[离开|Pub]]>><<endevent>><</link>>
+		<<else>>
+			<<set $police_hack to 4>>
+			这并不是我所擅长的事情，但我想我知道谁能够帮你。"<<He>>环顾了一圈四周，在确认没有人看向这边后，用手指轻轻地指了一下旁边的门。"<span class="teal">我们共同的朋友应该能帮上你的忙。</span>"
+			<br><br>
+
+			你敲了敲门，"是我。"
+			<br><br>
+
+			'米奇'将门打开一条缝:"嘿，我偷听到你和兰德里的谈话。警察的密码？简单，但你要付<<printmoney 30000>>。" 米奇似乎对你惊讶的表情有些不满："干嘛，我也需要现金的，人情又不能当饭吃。"
+			<br><br>
+
+			<<if $money gte 30000>>
+				<<link [[支付 (£300)|Pub Hack Deal Mickey]]>><<set $police_hack to 5>><<set $phase to 1>><<set $money -= 30000>><</link>>
+				<br>
+				<<link [[不支付|Pub Hack Deal Mickey]]>><<set $police_hack to 4>><<set $phase to 2>><</link>>
+			<<else>>
+				你没有足够的钱。
+				<<link [[继续|Pub Hack Deal Mickey]]>><<set $police_hack to 4>><<set $phase to 2>><</link>>
+			<</if>>
+		<</if>>
+	<<else>>
+		"黑进警察的电脑？" 兰德里斜倚着问道，"我喜欢你的行事风格，但如果你想找我帮忙做网络方面的事，那你就不太走运了。"<<He>>搓着<<his>>的下巴在思考着，然后突然像是想到了什么，开口说道："有一个人，
+		<<if $pubfame and $pubfame.intro>>
+			还记得那个米奇吗？你因为名声问题来找我时，我指给你的那个黑客，那家伙应该能把事情办好。"
+		<<else>>
+			<span class="teal">那个家伙住在宅邸街的孤儿院里。</span>那家伙是个电脑天才，名字好像是米奇，麦琪？反正是差不多的名字。"
+			<br><br>
+
+			你想起来兰德里说的是谁了，但你从未听说过那家伙是个电脑天才，看来这家伙的保密措施做得很好。
+			<br><br>
+
+			"最好的期望就是，"兰德里继续说道："找到这个孤儿，然后如果你能说服那家伙来和我一起工作的话，我会给你一笔钱。只是，一定不要踩到贝利的痛脚。"<<He>>笑着说道，"你知道该怎么做的。"
+		<</if>>
+		<br><br>
+
+		<<link [[交易|Pub Hack Deal]]>><<set $police_hack to 2>><<if $pub_hack_job lte 1>><<set $pub_hack_job to 1>><</if>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[拒绝交易|Pub Hack Deal]]>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+<<elseif $police_hack is 4>>
+	"当然，"兰德里说道，"给我10分钟。"
+	<br><br>
+
+	在你观察酒吧的其他客人时，兰德里走了回来。
+	<br>
+	"给你，"兰德里说道，"一个新的警察电脑密码，向我们共同的朋友致谢吧。"
+	<br><br>
+	<<set $police_hack to 5>>
+	<<link [[离开|Pub]]>><<endevent>><</link>>
+	<br>
+<<else>>/*Was elseif $pub_hack_job is 4*/
+	"米奇来过了，"兰德里说道。"那家伙好像说你有一张SD卡？"
+	<br><br>
+	你交出了SD卡。作为回报，兰德里给了你一个信封，里面是钱和一张写着潦草字的卡片。
+	<br><br>
+	"谢谢，这是警察电脑的密码，另附£500，我非常欣赏你所展现出的才能，我将来可能再与你合作。"
+	<br><br>
+	"还有这个，"<<he>>说着的同时掏出一个U盘。"这里面装着一种病毒，它可以破坏电脑的系统。这让它会引起一些麻烦，或者让过去的某些麻烦消失，总之祝你好运。"
+	<br><br>
+	<<set $money += 50000>><<set $police_hack to 5>><<set $mickeyPub to 2>>
+	<<link [[离开|Pub]]>><<endevent>><</link>>
+	<br>
+<</if>>

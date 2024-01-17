@@ -1,0 +1,25 @@
+:: Park Lichen Climb []
+<<set $outside to 1>><<set $location to "park">><<effects>><<set $bus to "park">>
+<<if $athleticsSuccess>>
+	你<span class="green">成功</span>爬了上去。地衣附着得很牢固，你费了些力气才撬下来一点，有几个人转过头来看你，但没有人来打扰你，直到你听到一个声音从公园对面传来，"喂！"一个穿着像警察的<<npc Avery>><<initnpc Avery>><<generatePolice 2>><<person2>><<person>>喊道，"从那里下来，否则我就要逮捕你了。"
+	<<gstress>><<stress 3>>
+	<br><br>
+	<<link [[解释一下自己|Park Lichen Explain]]>><</link>>
+	<br>
+	<<link [[跑|Park Lichen Run]]>><</link>>
+	<br>
+<<else>>
+	你伸出手来试图撑起你的身体，但你的手臂脱力了，你向地上摔去。
+	<<gstress>><<gpain>><<stress 3>><<pain 6>>
+	<br><br>
+	<<npc Avery>><<initnpc Avery>><<person1>>你听到一个<<nnpc_gender "Avery">>的笑声，在你缓过劲之前，一双手臂托着你的肩膀将你扶了起来，不仅如此，<<he>>从胯部支撑住你，用惊人的力量把你托了上去，这足以让你爬上去了。
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		你感觉有些害臊，因为你意识到<<he>>可能已经看到你的$worn.lower.cn_name_cap了，不过<<he>>并没有任何的表示，你也不确定<<he>>到底看见没有。
+	<</if>>
+	<<He>>对你笑了笑，"你到底为什么要爬上去？"
+	<br><br>
+	<<link [[诚实回答|Park Lichen Honest]]>><</link>>
+	<br>
+	<<link [[回避问题|Park Lichen Evasive]]>><</link>>
+	<br>
+<</if>>

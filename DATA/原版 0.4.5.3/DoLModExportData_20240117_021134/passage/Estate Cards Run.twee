@@ -1,0 +1,52 @@
+:: Estate Cards Run []
+<<effects>>
+<!-- estate ends 7 and 8 -->
+<<if $wren_intro isnot undefined>>
+	<<set $estate_cards_end to "run">>
+<</if>>
+<<if $estate.cards.state is "ride">>
+	<!-- note - this is an impossible if clause. the player isn't given this option in the ride state. -->
+	<<if $estate.cards.position is "pc_lap" or $estate.cards.position is "penile">>
+		你把伦恩从腿上推下来，向门口跑去。
+	<<else>>
+		你从伦恩身上爬下来，在<<he>>抓住你之前跑向门口。
+	<</if>>
+<<else>>
+	你转身就跑。
+<</if>>
+<<if $athleticsSuccess>>
+	你听到了追赶的脚步声，但你拼命冲出了小屋，<span class="green">甩开了他们。</span>你跳进一个低处的坑里躲了起来。
+	<br><br>
+
+	<!-- estate end 7. currently still leads to the pot getting confiscated, we should add an extra option to try and run WITH the winnings for a higher chance of getting caught -->
+	<<card_pot_confiscated>>
+	<<estate_cards_finish>>
+
+	<<link [[继续|Estate]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你听见脚步声在追赶。你刚跑到外面，伦恩<span class="red">就把你扑倒在地。</span> "我们该怎么处理<<phim>>？"<<he>>问道，更多的手臂按住了你。
+	<br><br>
+
+	<<if $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+		"把<<phim>>丢进荒原里吧，"<<person2>><<person>>回答。
+	<<else>>
+		<<clothesruined>><<exposure>>
+		"还需要问吗，"<<person2>><<person>>回答道。手从各个方向伸过来，拉扯着你身上的布料，你的衣服被撕碎，身体完全暴露出来。<<covered>>
+	<</if>>
+	<<fameexhibitionism 7>>
+	<br><br>
+
+	他们把你举起来，就这样把光着身子的你抬向出口。门卫看见你，边笑着边打开了大门。
+	<br><br>
+
+	他们把你扔了出去。你身后的大门哐当地关上了，你踉跄地爬起来，一边摇摇晃晃地离开一边忍受着身后的嘲笑声。
+	<br><br>
+
+	<!-- estate end 8. -->
+	<<card_pot_confiscated>>
+	<<estate_cards_finish>>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><<estate_end>><</link>>
+	<br>
+<</if>>

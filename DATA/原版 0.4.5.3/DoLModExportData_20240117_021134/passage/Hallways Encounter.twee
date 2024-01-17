@@ -1,0 +1,33 @@
+:: Hallways Encounter []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $rng gte 81>>
+	<<if $schoolrep.herm gte 5>>
+		你们进行了简短的交谈。<<He>>看起来是个好人，但当你转身离开时，<<he>>抓住了你的胳膊。"我知道一个不会被打扰的地方，"<<he>>说，目光在你的身体上游走，并在你的裤裆上停下，"我听说你有一个秘密。"
+	<<elseif $schoolrep.crossdress gte 5 and $player.gender isnot $player.gender_appearance>>
+		你们进行了简短的交谈。<<He>>看起来是个好人，但当你转身离开时，<<he>>抓住了你的胳膊。"我知道一个不会被打扰的地方，"<<he>>说，目光在你的身体上游走，并在你的裤裆上停下，"我听说你有一个秘密。"
+	<<else>>
+		你们进行了简短的交谈。<<He>>看起来是个好人，但当你转身离开时，<<he>>抓住了你的胳膊。"我知道一个不会被打扰的地方，"<<he>>说罢，目光在你的身体上游走，并在你的裤裆上停下。
+	<</if>>
+	<br><br>
+
+	<<if $promiscuity lte 14>>
+		你没淫荡到能接受<<his>>的提议。
+		<br><br>
+	<</if>>
+
+	<<if $promiscuity gte 15>>
+		<<link [[接受|Hallways Encounter Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+
+	你进行了简短的谈话，<<He>>看上去感觉很不错。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+
+<</if>>

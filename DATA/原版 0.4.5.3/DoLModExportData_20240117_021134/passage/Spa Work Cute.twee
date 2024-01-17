@@ -1,0 +1,128 @@
+:: Spa Work Cute []
+<<effects>>
+
+<<switch $spa.personality>>
+<<case hesitant>>
+	"是的！"你说，"您只管躺下，剩下的交给我就行了。"
+	<br><br>
+
+	<<person>>按照指示躺下。你把精油抹到手上，<<handtext>>揉捏着<<his>>的背部。<<ghandskill>><<handskill 5>>
+	<br><br>
+
+	<<Hes>>有些紧张，但很快就改善了。<<Hes>>在按摩结束后感谢了你。<<body_tip hand 0.3>><<tipreceive>><<pass 50>>
+	<br><br>
+
+	<<spa_end>>
+<<case tired>>
+	"请好好放松，"你在双手间揉搓着精油。"我会好好——"
+	<br><br>
+	"安静点，"<<person>>不耐烦地说，"我花钱不是来听你说话的。"<<gstress>><<stress 6>>
+	<br><br>
+	<<body_tip hand 0.1>>
+	<<spa_rob_options>>
+<<case rude>>
+	<<if $beauty gte 8000>>
+		"十分感谢您的赞赏！"你说，"也希望您也会喜欢接下来的服务。"<<body_tip hand 0.5>>
+	<<else>>
+		"不要这样，"你说，"请照顾一下我的感受。"<<body_tip hand 0.3>>
+	<</if>>
+	你开始工作。你用双手<<handtext>>在<<his>>身上涂抹着精油。
+	<br><br>
+
+	<<He>>抱怨<<his>>的工作，<<his>>的家庭生活，和所有的一切。<<He>>在你结束动作之后看起来似乎冷静了下来。<<ghandskill>><<handskill 5>>
+	<br><br>
+
+	<<if $beauty gte 8000>>
+		<<if $rng gte 71>>
+			<<if $player.gender_appearance is "f" and random(1, 2) is 2>>
+				<<set $phase2 to 0>>
+				当<<He>>给你小费时，<<he>>咧开嘴笑着，并盯着你的<<breasts>>。<<tipreceive>><<pass 50>>
+				<br><br>
+				"让我偷偷瞄一眼，如何？"<<he>>问你。
+				<br><br>
+
+				<<link [[拒绝|Spa Rude Refuse]]>><</link>>
+				<br>
+				<<if $exhibitionism gte 55>>
+					<<link [[展示|Spa Rude Show]]>><</link>><<exhibitionist4>>
+					<br>
+					<<link [[要钱|Spa Rude Money]]>><</link>><<exhibitionist4>>
+					<br>
+				<</if>>
+			<<else>>
+				<<set $phase2 to 1>>
+				<<He>>给你小费的时候咧嘴笑着并看着你的裤裆。<<tipreceive>><<pass 50>>
+				<br><br>
+				"让我偷偷瞄一眼，如何？"<<he>>问你。
+				<br><br>
+				<<link [[拒绝|Spa Rude Refuse]]>><</link>>
+				<br>
+				<<if $exhibitionism gte 75>>
+					<<link [[展示|Spa Rude Show]]>><</link>><<exhibitionist5>>
+					<br>
+					<<link [[要钱|Spa Rude Money]]>><</link>><<exhibitionist5>>
+					<br>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<He>>给你留了小费。<<tipreceive>><<pass 50>>
+			<br><br>
+			<<spa_end>>
+		<</if>>
+	<<else>>
+		<<He>>一言不发地离开了。<<pass 50>>
+		<br><br>
+
+		<<spa_end>>
+	<</if>>
+<<case lewd>>
+	"您太着急了，"你说，"放松就好，我会全都照顾好的。"
+	<br><br>
+
+	"全部？"<<person>>说，
+	<<if $NPCList[0].penis isnot "none">>
+		"包括我勃起的鸡巴吗？"<<He>>笑道，"好啦我只是在开玩笑。"
+	<<else>>
+		"包括我的小穴吗？"<<He>>笑道，"好啦我只是在开玩笑。"
+	<</if>>
+	<<if $awareness lt 100>>
+		<<gawareness>><<awareness 1>>
+	<</if>>
+	<br><br>
+	<<if random(1, 2) is 2>>
+		<<He>>在你工作的时候呻吟，你的手<<handtext>>把精油揉搓在<<his>>的背上。<<ghandskill>><<handskill 5>>
+		<br><br>
+		<<He>>在结束的时候翻身面向天花板，把头枕在手上。你避开了目光。
+		<br><br>
+		"也许我不是在开玩笑，"<<he>>说，"多少钱能让我开心？"
+		<br><br>
+
+		<<link [[拒绝|Spa Lewd Hand Refuse]]>><</link>>
+		<br>
+		<<if $promiscuity gte 35>>
+			<<link [[谈判|Spa Lewd Hand Negotiate]]>><</link>><<promiscuous3>>
+			<br>
+		<<elseif $uncomfortable.prostituting is false>>
+			<<link [[谈判|Spa Lewd Hand Negotiate]]>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+	<<else>>
+		<<He>>在你工作时发出呻吟的声音，但并没有任何抗拒，并且在水疗结束时看起来很满意。<<handskill 5>><<ghandskill>>
+		<<body_tip hand 0.3>><<tipreceive>><<pass 50>>
+		<br><br>
+		<<spa_end>>
+	<</if>>
+<<case polite>>
+	"我是您今天的按摩师，"你说，"我希望我能让您变得舒服一些。"
+	<br><br>
+	<<body_tip hand 0.5>>
+
+	你将精油准备好，然后<<handtext>>揉搓<<persons>>的背。<<He>>看起来十分乐意在你工作的时候和你聊天。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<He>>在结束时感谢了你，并且给了你一笔小费。<<tipreceive>><<pass 50>>
+	<br><br>
+
+	<<spa_end>>
+
+<</switch>>

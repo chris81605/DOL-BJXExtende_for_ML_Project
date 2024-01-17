@@ -1,0 +1,63 @@
+:: Eden Lake []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+/* eden is already generated
+<<npc Eden>><<person1>>*/
+
+<<if $speech_attitude is "meek">>
+	"你能跟我去湖边吗？"你问。
+<<elseif $speech_attitude is "bratty">>
+	"我想走到湖边去。你要来吗？"
+<<else>>
+	"想和我一起去湖边散步吗？"你问。
+<</if>>
+
+<<if $exposed gte 1>>
+	伊甸的眼睛扫过你裸露的身躯。"我不会让你就这样离开的。穿上衣服。"
+	<br><br>
+
+	<<if $bus is "edenclearing">>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+<<else>>
+	<<set $daily.eden.walk to 1>>
+	伊甸想了一会儿，耸了耸肩。"反正我也没有其他更好的打算。"
+	<br><br>
+
+	<<if $edenraftintro is 1>>
+		<<if $speech_attitude is "meek">>
+			"等、等等。我刚想起来，"你说道。
+		<<elseif $speech_attitude is "bratty">>
+			"哦，差点忘了，"你说道。
+		<<else>>
+			"等等，我刚想起一件事，"你说道。
+		<</if>>
+		<br>
+
+		你把在购物中心买的充气筏递给伊甸。
+		<br>
+		<<He>>看着它，阅读盒子上的说明书。"充气筏？"<<he>>疑惑不解。
+		<br><br>
+
+		<<if $speech_attitude is "meek">>
+			"嗯……是的。我们可以在湖里用它。<<if Time.season is "autumn">>飘落的秋叶<<elseif Time.hour gte 6 and Time.hour lte 8>>日落<<else>>天空<</if>>在水面上看起来一定很美。"
+		<<elseif $speech_attitude is "bratty">>
+			"是的。我们可以在湖里用它。此外，我们可以顺便欣赏<<if Time.season is "autumn">>飘落的秋叶<<elseif Time.hour gte 6 and Time.hour lte 8>>日落<<else>>天空<</if>>在水上的景色。"
+		<<else>>
+			"是的。我想我们可以在湖里用它。此外，我们可以顺便欣赏<<if Time.season is "autumn">>飘落的秋叶<<elseif Time.hour gte 6 and Time.hour lte 8>>日落<<else>>天空<</if>>在水上的景色。"
+		<</if>>
+
+		<<He>>朝盒子里看了几秒钟，然后点头回应。你感激地对<<him>>微笑，然后开始向湖边走去。
+		<br><br>
+	<</if>>
+
+	<<if $edenraftintro is 1>>
+		<<link [[森林湖畔 (0:30)|Eden Raft Intro]]>><<pass 30>><<set $edenlake to 1>><</link>>
+	<<else>>
+		<<link [[森林湖畔 (0:30)|Eden Forest Lake]]>><<pass 30>><<set $edenlake to 1>><</link>>
+	<</if>>
+<</if>>

@@ -1,0 +1,43 @@
+:: Temple Lichen Lock []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+你试着去拽这个不知道有多少年头的青铜锁。稍微用力，锈迹斑斑的链条就断开了，而青铜锁也应声掉落。
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">所幸你及时抓住了它。</span>
+	<br><br>
+	<<skulduggeryuse>>
+
+	你通过塔内的旋梯到达塔顶，随后你伸手穿过窗户，剥下了粉色地衣。
+	<br><br>
+	<span class="gold">你可以将找到的地衣添加到你房间或学校图书馆的项目报告中。</span>
+	<br><br>
+	<<link [[继续|Temple]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">你还没来得及反应过来，它便重重地砸向地面，</span>在走廊内激起阵阵回响。
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<generateTemple 1>><<person1>>一个打扮成<<monk>>的<<person>>冲进了走廊。"你想干什么？"<<He>>往地上看去，发现了地板上的锁。
+	<<stress 6>><<gstress>>
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"我、我只是轻轻地碰了它一下，我保证！"你慌忙地开始解释，"上面有我需要的粉色地衣，用、用于我的科学项目。"
+	<<elseif $speech_attitude is "bratty">>
+		"不关你的事，"你白了一眼，"我正在为我的科学项目寻找一些东西。"
+	<<else>>
+		"我只是碰了它一下，它就坏掉了。"你尽量辩解，"那里有我科学项目所需要的粉色地衣。"
+	<</if>>
+	<br><br>
+	"科学项目么……"<<monk>>沉思着，"所以你是来拿地衣的……毕竟你也不是第一个来这儿的人。之前总是有一些来自麋鹿街的暴徒，说什么地衣具有科学意义的话——但那些家伙都被我们赶跑了。"<<He>>笑了笑。"放心吧，你在这儿等一会就好。"
+	<br><br>
+	<<He>>跨过坏掉的锁进入塔内。几分钟后，<<hes>>走了下来，随后将粉色地衣交给了你。
+	<br><br>
+	"请尽量不要破坏其他东西，"<<he>>最后露出了微笑。
+	<br><br>
+	<span class="gold">你可以将找到的地衣添加到你房间或学校图书馆的项目报告中。</span>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Temple]]>><</link>>
+	<br>
+<</if>>

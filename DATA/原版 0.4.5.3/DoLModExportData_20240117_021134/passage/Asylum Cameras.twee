@@ -1,0 +1,27 @@
+:: Asylum Cameras []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if random(1, 1000) lte (currentSkillValue('science') + 100)>>
+	<<if currentSkillValue('science') gte 400>>
+		你试图研究操作这台机器的方法。你发现了运作规律，并通过反复尝试，掌握了加大催情剂剂量的操作。突然间，一声警报响起。屏幕上现在显示着"<span class="red">警告！催情剂施用量：2000％</span>"，你听到外面有人在大喊大叫。
+		<br><br>
+	<<else>>
+		你试图研究如何操作这台机器。你胡乱按着按钮，表盘随之摆动着。突然间，一声警报响起。屏幕上现在显示着"<span class="red">警告！催情剂施用量：2000％</span>"，你听到外面有人在大喊大叫。
+		<br><br>
+	<</if>>
+	<<link [[继续|Asylum Escape]]>><</link>>
+	<br>
+<<else>>
+	你试图操作这台机器，但它没有反应。
+	<br><br>
+	<<if $asylumstate is "sleep">>
+		<<link [[再次尝试 (1:00)|Asylum Cameras]]>><<pass 60>><</link>>
+		<br>
+		<<link [[停止|Asylum]]>><</link>>
+		<br>
+	<<else>>
+		你听到门外有声音。幸好他们走开了，但如果你再呆下去就该被发现了。你偷偷溜了出去。
+		<br><br>
+		<<link [[继续|Asylum]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

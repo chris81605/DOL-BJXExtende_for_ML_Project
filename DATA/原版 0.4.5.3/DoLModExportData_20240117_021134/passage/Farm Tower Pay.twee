@@ -1,0 +1,29 @@
+:: Farm Tower Pay []
+<<effects>>
+
+<<if $NPCList[0].traits.includes("relaxed")>>
+	"谢了，"<<print $NPCList[0].name>>说，"我会好好坚守岗位的。"
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	"为爱欢呼，"<<print $NPCList[0].name>>的笑容变得灿烂起来。"这里比我预想的要热闹。"
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	<<print $NPCList[0].name>>再次顿了顿头，然后继续看向了荒原。
+<<else>>
+	"不错，"<<print $NPCList[0].name>>砸了砸嘴，"虽然我更喜欢另一种形式的付款，但现金也不是不行。"
+<</if>>
+<br><br>
+
+
+
+<<if $bus is "farm_fields">>
+	你爬下瞭望塔。
+	<br><br>
+
+	<<link [[离开|Farm Fields]]>><<saveNPC 0 "farm_tower_guard">><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<He>>走开了。
+	<br><br>
+
+	<<link [[离开|Farm Work]]>><<saveNPC 0 "farm_tower_guard">><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

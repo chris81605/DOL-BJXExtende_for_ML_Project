@@ -1,0 +1,83 @@
+:: Rent Hospital Fight Robin []
+<<set _robin to statusCheck("Robin")>>
+<<if $fightstart is 1>>
+	<<if $baileydefeatedchain gte 3>>
+		<<set $enemyno to 3>>
+		<<set $enemynomax to 3>>
+	<<elseif $baileydefeatedchain gte 1>>
+		<<set $enemyno to 2>>
+		<<set $enemynomax to 2>>
+	<<else>>
+		<<set $enemyno to 1>>
+		<<set $enemynomax to 1>>
+	<</if>>
+	<<set $fightstart to 0>>
+
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+	"控制住另一个，你们中的一个，”贝利说。
+	<<personselect $enemynomax>><<person>>点头并抓住罗宾，而贝利则将<<person1>><<his>>的目光转向你。
+	<br><br>
+
+	<<set $phase to 1>>
+	<<if _robin.dom gte 80>>
+		<<set $timer to 4>>
+	<<elseif _robin.dom gte 60>>
+		<<set $timer to 3>>
+	<<elseif _robin.dom gte 40>>
+		<<set $timer to 2>>
+	<<else>>
+		<<set $timer to 1>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+
+<<personselect $enemynomax>>
+<<if $timer gt 1>>
+	<span class="green">
+	<<if $rng gte 81>>
+		罗宾在<<nnpc_his "Robin">>被束缚的情况下努力挣扎。
+	<<elseif $rng gte 61>>
+		罗宾告诉你不要放弃。
+	<<elseif $rng gte 41>>
+		罗宾正踢着<<person>>的脚后跟。
+	<<elseif $rng gte 21>>
+		罗宾告诉你不要担心<<nnpc_him "Robin">>。
+	<<else>>
+		罗宾咬住了<<person>>的手抓住<<nnpc_him "Robin">>。
+	<</if>></span>
+<<elseif $timer is 1>>
+	<<person>>设法用<<his>>的手臂搂住罗宾的喉咙。<span class="red">罗宾痛苦地大叫着。</span>
+<<else>>
+	<span class="red">
+	<<if $rng gte 81>>
+		<<person>>缠住罗宾的脖子。
+	<<elseif $rng gte 61>>
+		你可以听到罗宾将要窒息而发出的呜咽声。
+	<<elseif $rng gte 41>>
+		<<person>>在勒住<<nnpc_him "Robin">>的同时朝罗宾的眼睛吐口水。
+	<<elseif $rng gte 21>>
+		罗宾试图屈服，但<<person>>并没有松开。
+	<<else>>
+		<<person>>在打了罗宾的同时掐住了<<nnpc_him "Robin">>的脖子。
+	<</if>>
+	</span>
+	<<npcincr Robin trauma 2>><<grtrauma true>>
+<</if>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Rent Hospital Robin Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Rent Hospital Fight Robin]]>><</link>></span><<nexttext>>
+<</if>>

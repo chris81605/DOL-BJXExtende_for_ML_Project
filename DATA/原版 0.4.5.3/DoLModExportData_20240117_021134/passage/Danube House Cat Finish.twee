@@ -1,0 +1,93 @@
+:: Danube House Cat Finish []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	<<beasttype 0>>在满意地打了个呵欠后，走到了窗前。
+
+	<<tearful>>你站了起来。
+	<br><br>
+
+	<<clotheson>>
+
+	你注意到<<beasttype 0>>的脖子处正在闪闪发光，你走近一看，发现是一条镶满了珠宝的项圈。
+	<br><br>
+	<<saveNPC 0 danube_cat>>
+	<<endcombat>>
+	<<loadNPC 0 danube_cat>>
+	<<clearNPC danube_cat>>
+	<br><br>
+
+	<<link [[拿走|Danube House Collar]]>><<crimeUp 100 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Danube Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+
+	这只<<beasttype>>畏缩不前，随后便翻身投降。
+
+	<<tearful>>你站了起来。
+	<br><br>
+
+	<<clotheson>>
+
+	<<beasttype>>平静下来，你注意到<<bhis>>的项圈闪烁着光芒。你走近一看，发现上面镶满了珠宝。
+	<br><br>
+	<<saveNPC 0 danube_cat>>
+	<<endcombat>>
+	<<loadNPC 0 danube_cat>>
+	<<clearNPC danube_cat>>
+	<br><br>
+
+	<<link [[拿走|Danube House Collar]]>><<crimeUp 100 "thievery">><</link>><<crime "thievery">>
+	<br>
+	<<link [[离开|Danube Street]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $alarm is 1>>
+
+	<<if $NPCList[0].stance is "top">>
+
+	<<person2>>"现在是什么情况？"一个<<person>>提问道。
+	当<<He>>看到你时，<<he>>笑了。"一位入侵者？"<<He>>坐了下来，"真是太棒了。"
+	<br><br>
+	<<if $monster is 1>>
+		"我抓住了入侵者！"<<beasttype 0>>骄傲地大叫。
+	<</if>>
+	<<set $alarm to 0>><<set $rescue to 0>>
+	<<link [[继续|Danube House Cat]]>><<set $phase to 1>><</link>>
+
+	<<else>>
+
+	<<person2>>"现在是什么情况？"一个<<person>>提问道。
+
+	当<<He>>看到你时，<<he>>笑了。"这就是你非法侵入的后果。"<<He>>吹了声口哨，<<beasttype 0>>停止了<<bhis>>的攻击。在你能站起来之前，<<he>>就用<<his>>的脚按住了你的<<genitals>>。
+	<<famebestiality 1>>
+	<<saveNPC 1 danube_cat_owner>>
+	<<endcombat>>
+	<<loadNPC 0 danube_cat_owner>>
+	<<clearNPC danube_cat_owner>>
+	<<person1>>
+
+	<br><br>
+
+	<<link [[继续|Danube House Sneak Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+	<</if>>
+
+<<else>>
+
+	<<beasttype 0>>从你身边退下了，<<bhe 0>>依然站着盯着你。<<tearful>>你看了看周围，没看到什么值钱的东西。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+<<link [[离开|Danube Street]]>><</link>>
+<br>
+
+<</if>>

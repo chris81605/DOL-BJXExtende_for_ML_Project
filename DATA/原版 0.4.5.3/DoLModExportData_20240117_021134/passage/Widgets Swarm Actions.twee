@@ -1,0 +1,180 @@
+:: Widgets Swarm Actions [widget]
+<<widget "swarmactions">>
+	<div @class="($debugLines ? 'debugLines-swarmactions' : '')">
+	<<set $chest to 0>>
+	<<set $front to 0>>
+	<<set $back to 0>>
+	<<if $vorecreature is 0>>
+		<<if $options.images is 1 and $options.combatImages is 1>>
+			<<if $swarm.amount.active>>
+				<<set _swarmactive to $swarm.amount.active[0]>>
+			<<else>>
+				<<set _swarmactive to 0>>
+			<</if>>
+			<<timed 100ms>>
+				<<combatimg>>
+				<br>
+			<</timed>>
+		<</if>>
+	<</if>>
+	<<willpowerpain>>
+	<<willpowerorgasm>>
+	<<actioncarry>>
+	<<actioncarrydrop>>
+
+	<<combatstate>>
+	<<carryblock>>
+
+	<<if $trance lte 0 and $panicparalysis is 0 and $panicviolence is 0 and $options.combatControls isnot "disabled">>
+		<<set _swarmsteady to $swarm["steady"]>>
+		<<set _swarmamounts to $swarm.amount>>
+		<<generateActionsSwarm>>
+	<</if>>
+	<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and $options.combatControls is "disabled">>
+		<<set _swarmsteady to $swarm["steady"]>>
+		<<set _swarmamounts to $swarm.amount>>
+
+		<<if $leftarm is "bound">>
+			你的左臂被束缚住，无法动弹。
+			<<if $gamemode is "soft" and $nowiggle isnot true>>
+				<br>
+				<label>扭动脱身<<radiobutton "$leftaction" "leftwriggle" checked>></label> |
+			<</if>>
+			<br><br>
+		<<elseif $leftarm is "swarmgrappled">>
+			<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正在勒紧你的左臂！</span>
+			<br><br>
+		<<elseif $leftarm is 0>>
+			你的左臂是自由的。
+			<br>
+			<<if $rightarm is "swarmgrappled">>
+				<label><span class="brat">解放你的右臂</span><<radiobutton "$leftaction" "leftfree">></label> |
+			<<elseif _swarmamounts.active[2] gte 1>>
+				<label>_swarmsteady其中一个<<swarmName>><<radiobutton "$leftaction" "leftswarm">></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[0] lte 0 and _swarmamounts.genital[1] lte 0>>
+				<label>遮住你的<<genitals>><<radiobutton "$leftaction" "frontcoverleft">></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[0] lte 0 and _swarmamounts.butt[1] lte 0>>
+				<label>遮住你的屁股<<radiobutton "$leftaction" "backcoverleft" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.chest lte 0>>
+				<label>遮住你的胸部<<radiobutton "$leftaction" "chestcoverleft">></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[1] gte 1 and !playerChastity()>>
+				<label><span class="brat">把<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的<<genitals>>拉开</span> <<radiobutton "$leftaction" "frontpurgeleft">></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[0] gte 1 and !playerChastity()>>
+				<label><span class="brat">阻挡<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>靠近你的<<genitals>></span> <<radiobutton "$leftaction" "frontclearleft">></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[1] gte 1 and !playerChastity("anus")>>
+				<label><span class="brat">把<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的菊穴拉开</span> <<radiobutton "$leftaction" "backpurgeleft" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[0] gte 1 and !playerChastity("anus")>>
+				<label><span class="brat">阻挡<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>靠近你的屁股</span> <<radiobutton "$leftaction" "backclearleft" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.chest gte 1>>
+				<label><span class="brat">把你胸口上的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>清除</span> <<radiobutton "$leftaction" "chestclearleft">></label> |
+			<</if>>
+
+			<<if $water is 1 and $vorecreature is 0 and ($consensual isnot 1 or $gamemode is "soft")>>
+				<label><span class="teal">游到安全的地方</span> <<radiobutton "$leftaction" "swim" checked>></label> |
+			<</if>>
+
+			<<if $vorecreature is 0>>
+				<label>休息<<radiobutton "$leftaction" "swarmrest">></label> |
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<if $rightarm is "bound">>
+			你的右臂被束缚住，无法动弹。
+			<<if $gamemode is "soft" and $nowiggle isnot true>>
+				<br>
+				<label>扭动脱身<<radiobutton "$rightaction" "rightwriggle" checked>></label> |
+			<</if>>
+			<br><br>
+		<<elseif $rightarm is "swarmgrappled">>
+			<span class="purple"><<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正在勒紧你的右臂！</span>
+			<br><br>
+		<<elseif $rightarm is 0>>
+			你的右臂是自由的。
+			<br>
+			<<if $leftarm is "swarmgrappled">>
+				<label><span class="brat">解放你的左臂</span><<radiobutton "$rightaction" "rightfree">></label> |
+			<<elseif _swarmamounts.active[2] gte 1>>
+				<label>_swarmsteady其中一个<<swarmName>><<radiobutton "$rightaction" "rightswarm">></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[0] lte 0 and _swarmamounts.genital[1] lte 0>>
+				<label>遮住你的<<genitals>><<radiobutton "$rightaction" "frontcoverright" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[0] lte 0 and _swarmamounts.butt[1] lte 0>>
+				<label>遮住你的屁股<<radiobutton "$rightaction" "backcoverright">></label> |
+			<</if>>
+
+			<<if _swarmamounts.chest lte 0>>
+				<label>遮住你的胸部<<radiobutton "$rightaction" "chestcoverright">></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[1] gte 1 and !playerChastity("hidden")>>
+				<label><span class="brat">把<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的<<genitals>>拉开</span> <<radiobutton "$rightaction" "frontpurgeright" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.genital[0] gte 1 and !playerChastity("hidden")>>
+				<label><span class="brat">阻挡<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>靠近你的<<genitals>></span> <<radiobutton "$rightaction" "frontclearright" checked>></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[1] gte 1 and !playerChastity("anus")>>
+				<label><span class="brat">把<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的菊穴拉开</span> <<radiobutton "$rightaction" "backpurgeright">></label> |
+			<</if>>
+
+			<<if _swarmamounts.butt[0] gte 1 and !playerChastity("anus")>>
+				<label><span class="brat">阻挡<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>靠近你的屁股</span> <<radiobutton "$rightaction" "backclearright">></label> |
+			<</if>>
+
+			<<if _swarmamounts.chest gte 1>>
+				<label><span class="brat">把你胸口上的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>清除</span> <<radiobutton "$rightaction" "chestclearright">></label> |
+			<</if>>
+
+			<<if $water is 1 and $vorecreature is 0 and ($consensual isnot 1 or $gamemode is "soft")>>
+				<label><span class="teal">游到安全的地方</span> <<radiobutton "$rightaction" "swim" checked>></label> |
+			<</if>>
+
+			<<if $vorecreature is 0>>
+				<label>休息<<radiobutton "$rightaction" "swarmrest">></label> |
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<if $feetuse is 0>>
+			你的脚自由了。
+			<br>
+			<<if $swarm.amount.active[2] gte 1>>
+				<label>_swarmsteady其中一个<<swarmName>><<radiobutton "$feetaction" "feetswarm" checked>></label> |
+			<</if>>
+
+			<<if $water is 1 and $vorecreature is 0 and currentSkillValue('swimmingskill') gt 700 and $consensual isnot 1>>
+				<label><span class="teal">游到安全的地方</span> <<radiobutton "$feetaction" "swim" checked>></label> |
+			<</if>>
+
+			<<if $vorecreature is 0>>
+				<label>休息<<radiobutton "$feetaction" "swarmrest">></label> |
+			<</if>>
+
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<br><br><br>
+	</div>
+<</widget>>

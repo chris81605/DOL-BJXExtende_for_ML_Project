@@ -1,0 +1,38 @@
+:: Wolf Cave Sleep Sex []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	你改变姿势，为了更方便好色的<<beasttype>>。
+	<<deviancy1>><<set $enemytrust -= 20>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $enemytrust -= 40>>
+	<<if $wolfpackharmony gte 1>>
+		<<enable_rescue>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'><<beastsplural>>忙着为自己着想而无法帮助你。</span>">>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Wolf Cave Sleep Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Cave Sleep Sex]]>><</link>></span><<nexttext>>
+<</if>>

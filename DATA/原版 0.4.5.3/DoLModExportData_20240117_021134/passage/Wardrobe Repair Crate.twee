@@ -1,0 +1,37 @@
+:: Wardrobe Repair Crate []
+你准备好把你的
+<<if $crateContents is "all">>
+	衣服
+<<elseif $crateContents is "damaged">>
+	损坏的衣服
+<<else>>
+	外套
+<</if>>
+装进箱子然后送去修理了吗？在这之后最好去买点儿新衣服。
+<br><br>
+<<set _value to 0>> /* recalculated with adding lower or upper halves when missing */
+<<for _label, _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<if _items[_i].outfitPrimary is undefined and _items[_i].outfitSecondary is undefined and $crateContents is "outfits">>
+			<<continue>>
+		<</if>>
+		<<set _value += Math.floor(tailorClothingCost(_items[_i],_label) * (1 - (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max'))) * 1.25)>>
+	<</for>>
+<</for>>
+将会花你
+<<if _value gt 5000>>
+	<<printmoney `_value - 5000`>>。
+<<else>>
+	£0，也就是免费。
+<</if>>
+<br><br>
+<<if $money gte _value>>
+	<<link [[好的|Wardrobe Repair Crate Result]]>><</link>>
+<<else>>
+	你没有足够的钱。
+<</if>>
+<br>
+<<link [[算了|$wardrobeReturnLink]]>>
+	<<unset $wardrobeReturnLink>>
+	<<unset $crateContents>>
+<</link>>

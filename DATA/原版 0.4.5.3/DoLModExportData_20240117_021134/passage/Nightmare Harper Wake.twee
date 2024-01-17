@@ -1,0 +1,42 @@
+:: Nightmare Harper Wake []
+<<effects>>
+
+<<if $phase is 2>>
+	手术刀靠近时，你的心跳加速，但你紧闭着眼睛。这不是真的，不会伤害你。你意志力地让自己醒来。
+<<elseif $phase is 1>>
+	你不理睬哈珀和其他人。一旦你醒来，他们就无法伤害你。你闭上眼睛。
+<<else>>
+	挣扎没有任何用处，如果你想要逃脱，你需要保持一个清晰的头脑。你闭上眼睛。
+<</if>>
+<br><br>
+
+<<if $willpowerSuccess>>
+	房间变得更加明亮。光线穿过你的眼睛，<span class="green">你感觉到四肢放松了下来。</span>你整个身体都自由了。你一直在一个白色的虚空中自由落体。最终，你着陆了。你的视野慢慢地变得清晰。
+	<br><br>
+
+	<<link [[继续|Nightmare Harper End]]>><<endevent>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	<<set $nightmareWake++>>
+
+	<<if $phase is 2>>
+		刀锋一点点地深入你的身体。你无法思考。<span class="red">威胁太过真实。</span>本能接管了你的思维，你拼命地扯动着绑着你的绳索。<<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Nightmare Harper 4]]>><<set $phase to 1>><</link>>
+		<br>
+	<<elseif $phase is 1>>
+		"太好了，"哈珀说，"非常放松。"<span class="red"><<person1>><<His>>的话打破了你的注意力。</span>你紧张地把目光从一个人转向另一个人。期待再次渐渐涌入你的心中。<<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Nightmare Harper 3]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		你试图集中注意力，<span class="red">但某些事物在你的脑海中咬着你。</span>你不记得自己为什么会在这里，但你知道这里不安全。<span class="red">你失去了注意力。</span><<stress 6>><<gstress>>
+		<br><br>
+
+		<<link [[继续|Nightmare Harper 2]]>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<br><br>

@@ -1,0 +1,49 @@
+:: Farm Horses Brush Run []
+<<effects>>
+
+<<if $athleticsSuccess>>
+	你朝门口跑去。那匹<<farm_text horse>>在你身后加速，<span class="green">但你在<<farm_he horse>>追上来之前赶紧通过了大门。</span>你关上了身后的门。
+	<br><br>
+
+	<<if $farm_work.horse.monster is true>>
+		半人马停下步伐，紧盯着大门。"我可以跳过去，"<<farm_he horse>>自夸道，"我只是选择不这么做。"另一匹半人马则对此嗤之以鼻。<<grespect>><<farm_horses 1>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<<else>>
+		那匹马停了下来，朝着大门喷着气。<<grespect>><<farm_horses 1>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你朝门口跑去。那匹<<farm_text horse>>在你身后加速，<span class="red">很快就超过了你。</span><<lrespect>><<farm_horses -1>><<gstress>><<stress -6>>
+	<br><br>
+
+	<<if $farm_work.horse.monster is true>>
+		<<if $farm_work.horse.genitals is "vagina">>
+			"我的小穴需要你的照顾，"<<farm_he horse>>抓住你的头发，把你拉倒在地，从你身上跨过去。<<farm_His horse>>的小穴悬在你上方。
+		<<else>>
+			"我的肉棒需要你的照顾，"<<farm_he horse>>抓着你的头发说道。<<farm_He horse>>把你拉倒在地，从你身上跨过去。<<farm_His horse>>巨大的阴茎悬在你的上方。
+		<</if>>
+	<<else>>
+		<<if $farm_work.horse.genitals is "vagina">>
+			它用嘴咬住你的头发，将你拉倒在地，从你身上跨过，<<farm_His horse>>的小穴悬在你的上方。
+		<<else>>
+			它用嘴咬住你的头发，将你拉倒在地，从你身上跨过，<<farm_His horse>>巨大的肉棒悬在你的上方。
+		<</if>>
+	<</if>>
+	<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[不情愿地摩擦|Farm Horses Brush Grudging]]>><<trauma 6>><<stress 6>><<farm_yield 1>><<set $handstat += 1>><<set $handejacstat += 1>><</link>><<gtrauma>><<gstress>><<gfarm>>
+	<br>
+	<<if $deviancy gte 35>>
+		<<link [[热情地摩擦|Farm Horses Brush Enthusiastic]]>><<farm_yield 1>><<set $handstat += 1>><<set $handejacstat += 1>><</link>><<deviant3>><<gfarm>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Farm Horses Brush Refuse]]>><</link>>
+	<br>
+<</if>>

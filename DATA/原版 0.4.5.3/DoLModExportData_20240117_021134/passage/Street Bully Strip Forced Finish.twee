@@ -1,0 +1,77 @@
+:: Street Bully Strip Forced Finish []
+<<set $outside to 1>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	<<He>>倒在地上开始大口喘气。<<npcincr Whitney lust -20>><<llust>>
+	<br><br>
+
+	你抓住了<<His>>晕头转向的这一刻。<<tearful>>你溜走了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<<elseif $enemyhealth lte 0>>
+	你把惠特尼推向<<generatey2>><<person2>><<person>>。他们都倒在了地上。其他人见状，都对你退避三舍。<<npcincr Whitney dom -1>><<ldom>>
+	<br><br>
+
+	<<tearful>>你逃离了巷子。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationeventend>>
+<<else>>
+	当<<he>>把你的衣服高高举起时，惠特尼的朋友们欢呼起来。<<He>>把每件衣服都扔给了不同的<<persony>>，粉碎了你要回它们的希望。<<trauma 6>><<stress 12>><<gtrauma>><<ggstress>>
+	<br><br>
+
+	<<if $enemyanger gte ($enemyangermax / 5) * 1>>
+		“你知道最有趣的是什么吗？”<<he>>说，“这次我本来想让你留着的。我只是想偷看一眼，但你却表现得像个<<bitch>>。”
+		<br><br>
+
+		<<He>>把你推倒在地。他们跑掉了，<span class="red">带走了你的衣服。</span>你跟着他们的笑声想追上去，但很快就在迷宫般的小巷和死胡同中迷失了他们。
+		<br><br>
+
+		<<tearful>>你躲在垃圾桶后面。
+		<br><br>
+
+		<<set $stealtextskip to 1>>
+		<<stealclothes>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<destinationeventend>>
+	<<else>>
+		<<silently>><<clotheson>><</silently>>
+		<<undressclothes "whitneyStreet">>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+
+		“现在搞定了，”惠特尼坏笑着说。
+		<<if Time.dayState is "night">>
+			“我们带你去散步吧。”
+			<br><br>
+
+			他们从小巷出发，<span class="red">带走了你的衣服。</span>
+			<br><br>
+
+			<<link [[跟上|Street Bully Strip Walk]]>><<set $phase to 0>><<set $phase2 to 1>><</link>>
+			<br>
+			<<link [[留在原地|Street Bully Strip Walk]]>><<set $phase2 to 0>><</link>>
+			<br>
+		<<else>>
+			“我们要走了。回头见。”
+			<br><br>
+
+			<<His>>的朋友们笑着冲到街上，<span class="red">带走了你的衣服。</span>
+			<br><br>
+
+			<<link [[继续|Street Bully Strip Streak]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

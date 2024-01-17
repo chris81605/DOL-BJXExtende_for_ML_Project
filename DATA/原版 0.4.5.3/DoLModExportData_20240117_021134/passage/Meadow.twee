@@ -1,0 +1,81 @@
+:: Meadow []
+<<set $location to "meadow">><<set $outside to 1>><<effects>>
+
+你在一片被高大树木环绕的草地上。长草轻抚着你的双腿，中间矗立着一棵孤零零的橡树。
+
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		黑暗的雨中你看不清任何东西。
+	<<elseif $weather is "snow">>
+		雪落在茂密的草叶间。
+	<<else>>
+		草叶在无声的微风中摇曳。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "rain">>
+		漆黑的云彩充满了天空。
+	<<elseif $weather is "clear">>
+		太阳逐渐从地平线上升起。
+	<<elseif $weather is "snow">>
+		雪花在晨光中飘落。
+	<<else>>
+		树随风摇摆。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "rain">>
+		天空被黑暗的云层覆盖。
+	<<elseif $weather is "clear">>
+		太阳在地平线下消失。
+	<<elseif $weather is "snow">>
+		雪花在暮色中飘落。
+	<<else>>
+		树随风摇摆。
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		草叶随风摇曳。
+	<<elseif $weather is "clear">>
+		鲜艳的花朵缤纷地开满一地。
+	<<elseif $weather is "snow">>
+		雪覆盖了树梢，落在草叶间。
+	<<else>>
+		草叶在微风中摇曳。
+	<</if>>
+<</if>>
+<br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "meadow">>
+<</if>>
+<<if !$daily.earSlimeMeadowRelax and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,100) gte 92>>
+	<<set $daily.earSlimeMeadowRelax to true>>
+	<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">你感觉到你脑袋里的史莱姆在命令你在草地上休息。</span>它承诺如果你遵守的话，就给予你奖励<<if $earSlime.startedThreats>>，如果你不遵守的话，就要承担相应的后果<</if>>。
+	<br><br>
+	/* Link decreases stress by both the ear slime and relaxing */
+	<<link [[服从|Meadow Relax]]>><<set $phase to 1>><<corruption 1>><<pain -4>><<stress -12>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<llstress>>
+	<br>
+	<<if $earSlime.startedThreats>>
+		<<link [[违抗|Meadow Relax Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<<else>>
+		<<link [[忽略|Meadow]]>><</link>>
+	<</if>>
+<<else>>
+	<<relaxicon>><<link [[休息 (1:00)|Meadow Relax]]>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<if $worn.upper.exposed gte 1 and $worn.upper.name isnot "plant top">>
+		<<foresticon "bush">><<link [[用枝叶做上衣 (0:10)|Meadow Plant]]>><<pass 10>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $worn.lower.exposed gte 1 and $worn.lower.name isnot "plant skirt">>
+		<<foresticon "bush">><<link [[用枝叶做裙子 (0:10)|Meadow Plant]]>><<pass 10>><<set $phase to 2>><</link>>
+		<br>
+	<</if>>
+
+	<<if $historytrait gte 3>>
+		<<coastalpathicon>><<link [[沿海小径 (0:30)|Coast Path Meadow]]>><<pass 30>><</link>>
+		<br>
+	<</if>>
+
+	<br>
+	<<farmicon>><<link [[进入农田 (0:10)|Farmland]]>><<pass 10>><</link>>
+<</if>>
+<br>

@@ -1,0 +1,34 @@
+:: Farmland Pigs Rape []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<beastTrainGenerate>>
+	<<set $timer to 90>>
+<</if>>
+<<effects>>
+
+<<if $timer gte 1>>
+	卡车在你周围隆隆作响。
+	<br><br>
+<<else>>
+	卡车停下来了>>
+	<br><br>
+<</if>>
+
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[继续|Farmland Pigs Rape End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farmland Pigs Rape]]>><</link>></span><<nexttext>>
+<</if>>

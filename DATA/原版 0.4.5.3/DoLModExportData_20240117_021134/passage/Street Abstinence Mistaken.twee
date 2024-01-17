@@ -1,0 +1,53 @@
+:: Street Abstinence Mistaken []
+<<effects>>
+现在你已经被识破了，你不知道如何摆脱这种局面。你决定撒谎。
+<<if $speech_attitude is "meek">>
+	"对不起，我不是你想的那种人，"你结结巴巴地说，"现在我可以走了吗？"
+<<elseif $speech_attitude is "bratty">>
+	"不，你没有，"你毫无歉意地耸耸肩。"我可不去做弥撒。"
+<<else>>
+	"恐怕你搞错了，"你解释说，"但祝你好运。"
+<</if>>
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	这个见习教徒看起来不是很相信，<span class="green">但<<he>>还是微笑着放你走了。</span>
+	"很抱歉打扰你。祝你生活愉快。"
+	<<skulduggeryuse>>
+
+	你赶忙躲开<<his>>执着的目光，你把自己藏在人群中。
+<<else>>
+	不顾及你的不安，<span class="red">这个见习教徒仍然坚持<<his>>的想法。</span><<He>>甚至搂住你的肩膀，更加仔细地打量起你。
+	"我肯定在神殿见过你！你是在开玩笑还是在干啥？"
+	<<skulduggeryuse>>
+
+	<<if $speech_attitude is "meek">>
+		你低下头，保持沉默，不敢与<<his>>对视。<<He>>终于意识到这看来该是什么样子，尴尬地放开了你。
+		"我的错，很抱歉占用了你的时间。祝你生活愉快。"
+		<br><br>
+
+		<<tearful>>你迅速离开，庆幸的是<<he>>在引起一场风波之前停了下来。
+	<<elseif $speech_attitude is "bratty">>
+		"把手拿开，"你厉声警告，然后轻轻推了<<him>>一把。
+		<br><br>
+
+		令人惊讶的是，这位见习教徒没能保持<<his>>的站姿，摔倒在地。当其他的见习教徒们冲到<<his>>身边把<<him>>扶起来时，你偷偷离开了。
+		<br><br>
+
+		"我做错了什么？！"<br>
+		"这不是你的错。那个<<girl>>是一个麻烦家伙。"
+		<<grace -5>><<llgrace>>
+	<<else>>
+		"我不是在开玩笑，"你皱着眉头。"我和你不认识，别碰我。"<br>
+		"但我认为……"当<<he>>意识到人们开始朝你这边看时，<<he>>顿住了。
+		<br><br>
+
+		<<He>>皱着眉头让你走，你趁这个机会逃脱了。尽管如此，你知道<<he>>看破了你的谎言。
+		<<grace -2>><<lgrace>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<endevent>>
+<<destinationeventend>>

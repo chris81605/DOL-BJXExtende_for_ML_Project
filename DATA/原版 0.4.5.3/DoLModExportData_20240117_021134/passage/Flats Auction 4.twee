@@ -1,0 +1,131 @@
+:: Flats Auction 4 []
+<<effects>>
+
+"下一个，"在你身后某处的<<person2>><<personsimple>>大声喊道："这虽然是一个出身卑微的<<girl>>，但没必要让这影响您的判断，毕竟正如您所看到的那样，
+<<set $flats_auction to 0>>
+<<if $beauty gte $beautymax>>
+    <<set $flats_auction += 6>>
+    <<pshe>>确实十分漂亮。"
+<<elseif $beauty gte ($beautymax * 0.8)>>
+    <<set $flats_auction += 5>>
+    <<pshe>>是个性感尤物。"
+<<elseif $beauty gte ($beautymax * 0.6)>>
+    <<set $flats_auction += 4>>
+    <<pshe>>是个冷面佳人。"
+<<elseif $beauty gte ($beautymax * 0.4)>>
+    <<set $flats_auction += 3>>
+    <<pshe>>是如此俊俏美丽。"
+<<elseif $beauty gte ($beautymax * 0.2)>>
+    <<set $flats_auction += 2>>
+    <<pshe>>是如此妩媚多娇。"
+<<else>>
+    <<set $flats_auction += 1>>
+    <<pshe>>是个可爱尤物。
+<</if>>
+台下传来嘈杂的声音，听起来这些家伙都很满意这段话。
+<br><br>
+
+<<set $flats_auction_fame to ["none"]>>
+<<if $fameexhibitionism gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("exhibitionism")>>
+<</if>>
+<<if $fame.prostitution gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("prostitution")>>
+<</if>>
+<<if $fame.bestiality gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("bestiality")>>
+<</if>>
+<<if $fame.rape gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("rape")>>
+<</if>>
+<<if $fame.sex gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("sex")>>
+<</if>>
+<<if $fame.pregnancy gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("pregnancy")>>
+<</if>>
+<<if $fame.impreg gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("impreg")>>
+<</if>>
+<<if $fame.good gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("good")>>
+<</if>>
+<<if $fame.business gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("business")>>
+<</if>>
+<<if $fame.pimp gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("pimp")>>
+<</if>>
+<<if $fame.scrap gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("scrap")>>
+<</if>>
+<<if $fame.social gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("social")>>
+<</if>>
+<<if $fame.model gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("model")>>
+<</if>>
+<<if $fame.dance gte 800>>
+    <<set $flats_auction += 1>>
+    <<set $flats_auction_fame.push("dance")>>
+<</if>>
+<<person3>>
+"我以前见过<<phim>>，"一个<<personsimple>>说道。
+<<set $flats_auction_select to $flats_auction_fame.pluck()>>
+<<switch $flats_auction_select>>
+    <<case "exhibitionism">>
+        <<if $exposed gte 2>>
+            "在哪儿我都能认出那个<<genitals>>。"
+        <<else>>
+            <<if $player.gender isnot $player.gender_appearance>>
+                "<i><<pShe>></i>看起来并不是<<pShe>>平时表现得的那样嘛。"
+            <<else>>
+                "<<pShe>>不穿衣服的时候更漂亮了。"
+            <</if>>
+        <</if>>
+    <<case "prostitution">>
+        "我想我可能和<<phim>>一起'玩过'。"
+    <<case "bestiality">>
+        "我告诉你，这家伙就是个异种癖。"
+    <<case "rape">>
+        "我可不会花钱买能白嫖到的东西"
+    <<case "sex">>
+        "我听说半个镇子的人都上过这货，也许现在该轮到我了。"
+    <<case "pregnancy" "impreg">>
+        "<<pShes>>把孩子们留下，也许<<pshe>>会乐意多做些。"
+    <<case "good">>
+        "<<pShes>>很温顺，应该很容易控制。"
+    <<case "business">>
+        "<<pShes>>堕落得很厉害，最后就沦落到这里了。"
+    <<case "pimp">>
+        "看到<<phim>>这幅模样，真是大快人心。"
+    <<case "scrap">>
+        "这可能是个难以管教的家伙。"
+    <<case "social">>
+        "听说<<pShes>>在高层有关系，这很有趣。"
+    <<case "model">>
+        "这里能够梦想成真。"
+    <<case "dance">>
+        "<<pShes>>已经习惯了聚光灯下的生活了。"
+    <<default>>
+        "<<pShe>>是孤儿院的孤儿，或者曾经是孤儿。"
+<</switch>>
+<br><br>
+"你也听到那个<<personsimple>>说的话了，"那个<<person2>><<person>>喊道，"<<pshe>>可以归你所有，但是现在让我们先开始出价吧，"<<he>>停顿了一下接着喊出了底价："£<<print Math.trunc($flats_auction * 100)>>！"
+<br><br>
+
+<<link [[继续|Flats Auction 5]]>><</link>>
+<br>

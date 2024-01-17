@@ -1,0 +1,51 @@
+:: English Exam []
+<<schooleffects>><<effects>>
+
+<<set _time_temp to (59 - Time.minute)>>
+<<pass _time_temp>>
+
+<<npc Doren>><<person1>>
+
+<<switch $phase>>
+	<<case 0>>
+		你专注于考试，尽你所能地不去理会其他学生的书写和抱怨声。
+	<<case 1>>
+		你深吸一口气，试着不让压力影响你的发挥。
+	<<case 2>>
+		<<skulduggerycheck>>
+		多伦经常背对你，但你没法预测<<his>>节奏。
+
+		<<if $skulduggerysuccess is 1>>
+			<<He>>随时都可能转过来，<span class="green">但你大胆地设法瞥到了邻桌的卷子。</span>
+			<<set $exam_chance += 10>><<passPercent 10>>
+		<<else>>
+			你等到<<he>>走过，然后偷瞄了一眼你的邻桌。多伦猛地转过身来，<span class="red">然后猛拍一下你的桌子。</span>
+			<br><br>
+
+			"这儿有只苍蝇，"<<he>>说。这让你免于被抓到作弊的尴尬，但你的试卷会被严加检查。<<gstress>><<stress 6>><<set $exam_chance -= 10>><<passPercent -10>><<ggdelinquency>><<detention 5>>
+		<</if>>
+		<br><br>
+
+		<<skulduggeryuse true>>
+	<<case 3>>
+		<<npc Kylar 2>><<person2>>
+		你瞥了一眼凯拉尔的卷子。<<He>>注意到了，于是急切地向你献殷勤，歪歪斜斜地抬起手臂，免得遮挡你的视线。<<He>>对难题似乎有着新颖的解法。
+<</switch>>
+<br><br>
+
+多伦巡视完一圈，拿起文件夹放在了<<person1>><<his>>的桌上。<<He>>在教室里走了一圈，收齐了卷子。
+<br><br>
+
+"马上出成绩，"<<he>>说，拿出红笔开始批改第一张试卷。<<Hes>>对教室里发出的窃窃私语不以为然。<<Hes>>很快就改完了。
+<br><br>
+
+写着你名字的试卷在你面前翻过。
+<<exam_result "english">>
+<br><br>
+
+<!-- Add text for interacting with Kylar here, if they are present? -->
+铃响了，你和其他学生一起拖着脚步加入走廊中的人群。
+<br><br>
+
+<<link [[继续|Hallways]]>><<endevent>><</link>>
+<br>

@@ -1,0 +1,44 @@
+:: Mason Pond []
+<<set $location to "lake">><<set $outside to 1>><<effects>>
+
+你沿着一条蜿蜒汇入湖泊的溪流，来到梅森喜欢来此放松的池塘。气泡从池底的泉涌不断冒出。
+<br><br>
+<<if !Time.schoolDay and $weather is "rain" and Time.dayState is "dusk">>
+	<<npc Mason>><<person1>>梅森正坐在里面，穿着泳衣。<<His>>的手臂搁在岩石岸边，眼睛紧闭着。
+	<br><br>
+
+	<<if $exposed gte 2>>
+		<<if $exhibitionism gte 75>>
+			<<ind>><<link [[坐在池塘里|Mason In Pond Naked]]>><</link>><<if $daily.ex.mason isnot 1>><<exhibitionist5>><</if>>
+			<br>
+			<<ind>><<link [[坐在池塘边|Mason Beside Pond Naked]]>><</link>><<if $daily.ex.mason isnot 1>><<exhibitionist5>><</if>>
+			<br>
+		<<else>>
+			<<covered>>你不能像这样出现在梅森面前！
+			<br><br>
+		<</if>>
+	<<elseif $exposed gte 1>>
+		<<if $exhibitionism gte 35>>
+			<<ind>><<link [[坐在池塘里|Mason In Pond Naked]]>><</link>><<if $daily.ex.mason isnot 1>><<exhibitionist3>><</if>>
+			<br>
+			<<ind>><<link [[坐在池塘边|Mason Beside Pond Naked]]>><</link>><<if $daily.ex.mason isnot 1>><<exhibitionist3>><</if>>
+			<br>
+		<<else>>
+			<<covered>>你不能像这样出现在梅森面前！
+			<br><br>
+		<</if>>
+	<<else>>
+		<<ind>><<link [[坐在池塘里|Mason In Pond]]>><</link>>
+		<br>
+		<<ind>><<link [[坐在池塘边|Mason Beside Pond]]>><</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|Lake Waterfall]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	池塘是空的。梅森喜欢在周末和学校假期的雨夜，在湖里游泳后来这里。
+	<br><br>
+
+	<<getouticon>><<link [[离开|Lake Waterfall]]>><</link>>
+	<br>
+<</if>>

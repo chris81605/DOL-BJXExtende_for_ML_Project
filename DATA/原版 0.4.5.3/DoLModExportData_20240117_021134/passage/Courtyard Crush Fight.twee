@@ -1,0 +1,32 @@
+:: Courtyard Crush Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<npcidlegenitals>>
+
+	<<enableSchoolRescue "Leighton">>
+
+	你猛扑向<<person1>><<person>>，双双扭倒地扭打成一团。<<person2>><<person>>也加入了争斗。<<person1>>
+	<br><br>
+
+	骚动吸引了一大群人。
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Courtyard Crush Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Courtyard Crush Fight]]>><</link>></span><<nexttext>>
+<</if>>

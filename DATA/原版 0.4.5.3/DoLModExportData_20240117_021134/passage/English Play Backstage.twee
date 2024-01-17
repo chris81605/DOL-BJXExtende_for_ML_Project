@@ -1,0 +1,40 @@
+:: English Play Backstage []
+<<effects>>
+
+你在后台看到无数的道具和配件排列在柜台和墙壁上，许多学生穿着各种不同的衣服和装扮焦虑地踱步着。你看见你的搭档正在角落准备着表演。
+<br><br>
+
+<<if !$englishPlayKylarTalk>>
+	<<if $englishPlayRoles.Kylar is "none" or $englishPlayKylarReplace>>
+		<<switch $englishPlayRoles.Player>>
+			<<case "Cass" "Sterling">>
+				<<set $englishPlayRoles.Kylar to "Taylor">>
+			<<default>>
+				<<set $englishPlayRoles.Kylar to "Sterling">>
+		<</switch>>
+		<<set $englishPlayRoles.KylarKnown to false>>
+		<<set $englishPlayKylarReplace to true>>
+		<<link [["跟那个扮演"+ $englishPlayRoles.Kylar.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒") +"的学生说话"|English Play Kylar Talk Replace]]>><</link>>
+		<br>
+	<<elseif !$englishPlayRoles.KylarKnown>>
+		<<link [["跟那个扮演"+ $englishPlayRoles.Kylar.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒") +"的学生说话"|English Play Kylar Talk]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[跟凯拉尔说话|English Play Kylar Talk]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if !$englishPlaySydneyTalk>>
+	<<if !$englishPlayRoles.SydneyKnown>>
+		<<link [["跟那个扮演" + $englishPlayRoles.Sydney.replace("Sterling","斯特林").replace("Cass","卡斯").replace("Taylor","泰勒") + "的学生说话"|English Play Sydney Talk]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[与悉尼交谈|English Play Sydney Talk]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<br>
+<<if $englishPlayRoles.KylarKnown and $englishPlayRoles.SydneyKnown>>
+	<<link [[准备演出|English Play Prep]]>><</link>>
+	<br>
+<</if>>

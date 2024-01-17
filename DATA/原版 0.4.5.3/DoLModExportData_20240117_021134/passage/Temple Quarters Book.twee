@@ -1,0 +1,40 @@
+:: Temple Quarters Book []
+<<effects>>
+
+<<if $rng - $pubfame.temple.chance gte $temple_quarters>>
+	<<set $pubfame.temple.chance += 10>>
+	<<if $rng % 3>>
+		你找到了一本关于建筑的书。你检查了一下内页。<span class="red">没有任何类似于密码的东西。</span>这不是那一本。
+	<<else>>
+		你搜索宿舍，但是<span class="red">没有发现任何关于建筑的书。</span>
+	<</if>>
+	<br><br>
+
+	<<if $pubfame.temple.chance is 30>>
+		<span class="purple">如果宿舍里更有条理，这可能会更容易。</span>不过你现在已经搜索了大部分的宿舍，所以它一定会很快出现。
+		<br><br>
+	<</if>>
+
+	<<link [[继续寻找 (0:05)|Temple Quarters Book]]>><<pass 5>><</link>>
+	<br>
+	<<link [[回去|Temple Quarters]]>><</link>>
+
+<<else>>
+	<<if $temple_quarters gte 75 and $pubfame.temple.chance is 0>>
+		<span class="green">多亏了宿舍里如此井井有条，</span>你很快找到了一本关于建筑的书。
+	<<else>>
+		你找到了一本关于建筑的书。
+	<</if>>
+	<<if $rng % 3>>
+		<<set $pubfame.detail to "templeBack">>
+		你检查了一下封面。没有任何类似于密码的东西。
+		<br><br>
+
+		你检查了一下封底，发现了<span class="green">一长串的字母、数字和符号。</span>这肯定是它了。
+	<<else>>
+		你检查了一下封面里面，发现了<span class="green">一长串的字母、数字和符号。</span>这肯定是它了。
+	<</if>>
+	<br><br>
+	<<pubfameComplete "temple">>
+	<<link [[继续|Temple Quarters]]>><</link>>
+<</if>>

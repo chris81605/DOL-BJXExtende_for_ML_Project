@@ -1,0 +1,175 @@
+:: Widgets Swarm Effects [widget]
+<<widget "swarmeffects">>
+	<<effectspain>>
+	<<effectsorgasm>>
+	<<effectsdissociation>>
+
+	<<set _swarmamounts to $swarm.amount>>
+
+	/* -------- Clothes -------- */
+	<<effectshandsclothes>>
+
+
+	<<set $leftactiondefault to $leftaction>><<set $rightactiondefault to $rightaction>>
+	/* -------- Both arms -------- */
+	<<if $leftaction is "swim" and $rightaction is "swim">><<set $leftaction to 0>><<set $rightaction to 0>>
+		<<set $swimdistance -= 2>>
+		你用双臂划向安全的地方。
+	<</if>>
+	/* -------- Left Arm -------- */
+	<<if $leftaction is "leftwriggle">><<set $leftaction to 0>>
+		<<if $leftarm is "bound">>
+			<<unbind>><span class="green">你挣脱了束缚。</span>
+		<</if>>
+	<</if>>
+
+	<<if $leftaction is "leftfree">><<set $leftaction to 0>><<set $rightarm to 0>>
+		<span class="lblue">你推开覆盖在右臂上的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>，解放右手自由。</span>
+	<</if>>
+
+	<<if $leftaction is "leftswarm">><<set $leftaction to 0>>
+		<<set _swarmamounts.active[2] -= 1>><<set _swarmamounts.active[3] += 1>>
+		<span class="lblue">你用左手$swarm["steady"]其中一个<<swarmName>>。</span>
+	<</if>>
+
+	<<if $leftaction is "frontcoverleft">><<set $leftaction to 0>>
+		<<set $front to "covered">>
+		你用左手遮住你的<<genitals>>，防止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>侵犯你。
+	<</if>>
+
+	<<if $leftaction is "backcoverleft">><<set $leftaction to 0>>
+		<<set $back to "covered">>
+		你用左手遮住你的屁股。希望这能阻止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>入侵你的后方。它们不停地探查戳着，但还没有成功。
+	<</if>>
+
+	<<if $leftaction is "chestcoverleft">><<set $leftaction to 0>>
+		<<set $chest to "covered">>
+		你用左手遮住你的胸部，让<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>远离你敏感的胸部。
+	<</if>>
+
+	<<if $leftaction is "frontpurgeleft">><<set $leftaction to 0>>
+		<<set _swarmamounts.genital[1] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="teal">你移开了一些<<print ($player.vaginaExist ? "正在侵入" : "缠绕在")>>你的<<if $player.vaginaExist and $player.penisExist>><<pussy>><<else>><<genitals>><</if>>的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.genital[1] gte 1>>虽然仍有一些在侵犯着你。<<else>>你认为你已经把它们都干掉了，暂时。<</if>>
+	<</if>>
+
+	<<if $leftaction is "frontclearleft">><<set $leftaction to 0>>
+		<<set _swarmamounts.genital[0] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你阻止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>><<print ($player.vaginaExist ? "进入" : "侵占")>>你的<<if $player.vaginaExist and $player.penisExist>><<pussy>><<else>><<genitals>><</if>>。</span>
+		<<if _swarmamounts.genital[0] gte 1>><span class="purple">但是它们太多了，有些成功突破了你的防御。</span><</if>>
+	<</if>>
+
+	<<if $leftaction is "backpurgeleft">><<set $leftaction to 0>>
+		<<set _swarmamounts.butt[1] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="teal">你从你的菊穴中抽出一些<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.butt[1] gte 1>>然而，还是有部分寄生在了你的身上。<<else>>你以为你把它们都干掉了。<</if>>
+	<</if>>
+
+	<<if $leftaction is "backclearleft">><<set $leftaction to 0>>
+		<<set _swarmamounts.butt[0] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你防止步步入侵的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>钻进你的菊穴。</span>
+		<<if _swarmamounts.butt[0] gte 1>><span class="purple">但是它们太多了，有些成功突破了你的防御。</span><</if>>
+	<</if>>
+
+	<<if $leftaction is "chestclearleft">><<set $leftaction to 0>>
+		<<set _swarmamounts.chest -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你清除掉一些围绕着你敏感乳头的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.chest gte 1>><span class="purple">然而，还有更多的留了下来。</span><</if>>
+	<</if>>
+
+	<<if $leftaction is "swim">><<set $leftaction to 0>>
+		<<set $swimdistance -= 1>>
+		你用左手划向安全的地方。
+	<</if>>
+
+	<<if $leftaction is "swarmrest">><<set $leftaction to 0>>
+		你放松自己的左臂。
+	<</if>>
+
+	/* -------- Right Arm -------- */
+	<<if $rightaction is "rightwriggle">><<set $rightaction to 0>>
+		<<if $rightarm is "bound">>
+			<<unbind>><span class="green">你挣脱了束缚。</span>
+		<</if>>
+	<</if>>
+
+	<<if $rightaction is "rightfree">><<set $rightaction to 0>><<set $leftarm to 0>>
+		<span class="lblue">你推开覆盖在左臂上的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>，解放左手自由。</span>
+	<</if>>
+
+	<<if $rightaction is "rightswarm">><<set $rightaction to 0>>
+		<<set _swarmamounts.active[2] -= 1>><<set _swarmamounts.active[3] += 1>>
+		<span class="lblue">你用右手$swarm["steady"]其中一个<<swarmName>>。</span>
+	<</if>>
+
+	<<if $rightaction is "frontcoverright">><<set $rightaction to 0>>
+		<<set $front to "covered">>
+		你用右手遮住你的<<genitals>>，防止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>侵犯你。
+	<</if>>
+
+	<<if $rightaction is "backcoverright">><<set $rightaction to 0>>
+		<<set $back to "covered">>
+		你用右手遮住你的屁股。希望这能阻止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>入侵你的后方。
+	<</if>>
+
+	<<if $rightaction is "chestcoverright">><<set $rightaction to 0>>
+		<<set $chest to "covered">>
+		你用右手遮住你的胸部，让<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>远离你敏感的胸部。
+	<</if>>
+
+	<<if $rightaction is "frontpurgeright">><<set $rightaction to 0>>
+		<<set _swarmamounts.genital[1] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="teal">你移开了一些<<print ($player.vaginaExist ? "正在侵入" : "缠绕在")>>你的<<if $player.vaginaExist and $player.penisExist>><<pussy>><<else>><<genitals>><</if>>的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.genital[1] gte 1>>虽然仍有一些在侵犯着你。<<else>>你认为你已经把它们都干掉了，暂时。<</if>>
+	<</if>>
+
+	<<if $rightaction is "frontclearright">><<set $rightaction to 0>>
+		<<set _swarmamounts.genital[0] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你阻止<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>><<print ($player.vaginaExist ? "进入" : "侵占")>>你的<<if $player.vaginaExist and $player.penisExist>><<pussy>><<else>><<genitals>><</if>>。</span>
+		<<if _swarmamounts.genital[0] gte 1>><span class="purple">但是它们太多了，有些成功突破了你的防御。</span><</if>>
+	<</if>>
+
+	<<if $rightaction is "backpurgeright">><<set $rightaction to 0>>
+		<<set _swarmamounts.butt[1] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="teal">你从你的菊穴中抽出一些<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.butt[1] gte 1>>然而，还是有部分寄生在了你的身上。<<else>>你以为你把它们都干掉了。<</if>>
+	<</if>>
+
+	<<if $rightaction is "backclearright">><<set $rightaction to 0>>
+		<<set _swarmamounts.butt[0] -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你防止步步入侵的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>钻进你的菊穴。</span>
+		<<if _swarmamounts.butt[0] gte 1>><span class="purple">但是它们太多了，有些成功突破了你的防御。</span><</if>>
+	<</if>>
+
+	<<if $rightaction is "chestclearright">><<set $rightaction to 0>>
+		<<set _swarmamounts.chest -= 1>><<set _swarmamounts.active[4] += 1>>
+		<span class="lblue">你清除掉一些围绕着你敏感乳头的<<print $swarm["type"].replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>。</span>
+		<<if _swarmamounts.chest gte 1>><span class="purple">然而，还有更多的留了下来。</span><</if>>
+	<</if>>
+
+	<<if $rightaction is "swim">><<set $rightaction to 0>>
+		<<set $swimdistance -= 1>>
+		你用右手划向安全的地方。
+	<</if>>
+
+	<<if $rightaction is "swarmrest">><<set $rightaction to 0>>
+		你放松自己的右臂。
+	<</if>>
+
+	/* -------- Legs -------- */
+	<<set $feetactiondefault to $feetaction>>
+	<<if $feetaction is "feetswarm">><<set $feetaction to 0>>
+		<<set $swarm.amount.active[2] -= 1>><<set $swarm.amount.active[3] += 1>>
+		<span class="lblue">你用双脚$swarm["steady"]其中一个<<swarmName>>。</span>
+	<</if>>
+
+	<<if $feetaction is "swim">><<set $feetaction to 0>><<set $swimdistance -= 1>>
+		你用双腿划向安全的地方。
+	<</if>>
+
+	<<if $feetaction is "swarmrest">><<set $feetaction to 0>>
+		你放松自己的双脚。
+	<</if>>
+
+	<br><br>
+<</widget>>

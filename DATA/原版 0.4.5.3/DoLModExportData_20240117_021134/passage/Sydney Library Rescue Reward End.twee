@@ -1,0 +1,55 @@
+:: Sydney Library Rescue Reward End []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+<<if $phase is 1>>
+	<<switch _sydneyStatus>>
+		<<case "pure">>
+			<<if !_sydneyChastity>>
+				<<pass 2>> <<He>>沉重地喘息着，用尽全力紧拥着你。"这……真是……"<<he>>低声说着。你搂着<<him>>，直到<<hes>>起身。
+				<<npcincr Sydney lust 3>><<npcincr Sydney purity -2>><<ggslust>><<lspurity>>
+			<<else>>
+				你完事后，<<Hes>>还在轻轻喘息。"刚才的感觉……我不知道。我……我想我喜欢这样？"你帮<<him>>站起身，<<he>>紧紧地靠了你一会儿。<<sydneyChastityMessage>><<npcincr Sydney lust 3>><<npcincr Sydney purity -2>><<ggslust>><<lspurity>>
+			<</if>>
+		<<default>>
+			<<if !_sydneyChastity>>
+				<<pass 2>><<He>>不住地呻吟着，随着你的动作达到了高潮。你们拥抱在了一起，享受片刻的温存。
+				<<npcincr Sydney lust 3>><<npcincr Sydney purity -2>><<ggslust>><<lspurity>>
+			<<else>>
+				你完事后，<<Hes>>还在微微喘息。"感觉还差点什么……但还是好爽……"你扶着悉尼起身，<<he>>紧紧地靠在了你的身上，享受着片刻的温存。<<sydneyChastityMessage>><<npcincr Sydney lust 3>><<npcincr Sydney purity -2>><<ggslust>><<lspurity>>
+			<</if>>
+	<</switch>>
+	<br><br>
+<</if>>
+悉尼伸着懒腰，打了个哈欠。
+<<if $exposed gte 1 or $exposedTemp is 1>>
+	<<unset $exposedTemp>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		"我等会儿给你拿点衣服过来……就是，我不知道啊，我还有点喜欢你无助的样子。"你瞪了悉尼一眼，<<he>>慌张地笑了起来，不敢看你。"开玩笑的！"
+	<<else>>
+		"我给你拿点衣服来，请等一下。"
+	<</if>>
+	<<He>>暂时离开了更衣室，不久便带着一些备用的校服回来了。
+	<<if $player.gender_appearance is "m">>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<set $clothingselector to "f">>
+			那些都是女装。"抱歉，这是我能拿出来的全部了。"<<He>>朝你眨眨眼。
+		<<else>>
+			<<set $clothingselector to "m">>
+		<</if>>
+	<<else>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<set $clothingselector to "m">>
+			那些都是男装。"抱歉，这是我能拿出来的全部了。"<<He>>朝你眨眨眼。
+		<<else>>
+			<<set $clothingselector to "f">>
+		<</if>>
+	<</if>>
+	"我现在应该回去工作了，如果有任何需要，尽管告诉我。"<<He>>转身离开了隔间。
+	<br><br>
+	<<link [[换好衣服然后离开 (0:01)|School Library]]>><<schoolspareclothes>><<endevent>><<set $eventskip to 1>><<pass 1>><</link>>
+	<br>
+<<else>>
+	"我现在应该回去工作了。如果有任何需要，尽管告诉我。"<<He>>在走出隔间前又担忧地回头看你一眼。
+	<br><br>
+	<<link [[继续|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

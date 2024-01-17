@@ -1,0 +1,345 @@
+:: Sleep []
+<<set _autosavehere to true>>
+<<set _robin to statusCheck("Robin")>>
+
+<<sleep>>
+
+<<effects>>
+<<sleepeffects>><<rngWraith 2 "noBlood">>
+<<if $sleepWraith>>
+	<<set $wraith.mimic to "Robin">><<set $wraith.exit to "sleep">><<unset $sleepWraith>><<unset $robinbed>>
+	你睡得很香，醒来时你感觉精神焕发。
+	<br><br>
+
+	你看向罗宾，<<Hes>>正盯着你看，你不知道<<hes>>已经醒了多久了。
+	<br><br>
+
+	你试图爬下床，但一只手抓住了你，罗宾将你拉回了床上，并将你按住后，<<He>>用第三只手轻轻抚摸着你的脸颊。
+	<br><br>
+
+	那不是一只手，是许多长长的、半透明的触手正把你钉在床上。
+	<br><br>
+
+	你看到<<his>>的皮肤出现波纹不断变化，就像是融化的蜡油滴落在水面上。<<His>>的手臂也呈现出一种不自然的象牙色苍白。<<endevent>><<generateWraith 1 true>><<initWraith "abomination">>
+	<br><br>
+
+	这不是罗宾，当你入睡之后，就已经不是罗宾了。<<trauma 18>><<gggtrauma>><<set $wraith.revealed to true>>
+	<br><br>
+
+	"<span class="wraith">闭上你的眼睛继续睡觉，</span>"<<he>>嘶吼道，"<span class="wraith">只有这样，我们才能真正看到。</span>" 半透明的肢体逐渐向你靠拢。
+	<br><br>
+
+	<<link [[继续|Wraith Mimic Fight]]>><</link>>
+<<elseif $robindebtwake is 1 and $robinbed is undefined>>
+	<<set $robindebtwake to 0>><<set $robindebtknown to 1>>
+	<<npc Robin>><<person1>>有人轻轻打开了你的门，你被惊醒了，害怕得不知所措，直到你看到罗宾的脸出现在门缝处。"我能进来吗？"<<he>>轻声询问。
+	<br><br>
+	<<if $exposed gte 1>>
+		你点头同意了，同时快速把被子拉了起来遮盖你的<<lewdness>>。
+	<<else>>
+		你点点头。
+	<</if>>
+	<<He>>在轻手轻脚地走进你的房间后，坐在了你的床尾。"希望我没有吵醒你，"<<he>>颤抖地说道。"我太害怕了，贝利让我付钱给<<endevent>><<npc Bailey>><<him>>，但是<<endevent>><<npc Robin>><<person1>>最近要的越来越多了。"<<Hes>>的眼泪在眼眶里打转，你向前倾身抱住<<him>>。"我不知道该怎么办了。"
+	<br><br>
+	你和<<him>>相拥了几分钟，直到<<he>>缓过劲来。"对不起，我只是想找个人倾诉一下。"<<He>>用袖子擦了擦<<his>>的眼睛。"谢谢你。"<<He>>又轻手轻脚地走出了房间，还轻轻将门带上了。
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Bed]]>><</link>>
+	<br>
+<<elseif _wraithEvent and _robin.lovewake is 1 and $robinromance is 1 and C.npc["Ivory Wraith"].lust gte 14 and $rng gte 61>>
+	<<set $wraith.mimic to "Robin">><<set $wraith.exit to "home">><<set $robinbed to "yours">>
+	<<npc Robin>><<person1>>你有一种感觉，貌似罗宾正在环抱着你。
+	<br><br>
+
+	<<link [[回抱|Wraith Mimic Robin Dominant]]>><</link>><<ltrauma>><<lstress>><<lrtrauma>>
+	<br>
+	<<link [[亲吻|Wraith Mimic Fight]]>><<set $sexstart to 1>><</link>>
+<<elseif _robin.lovewake is 1>>
+	<<set _robin.lovewake to 0>><<set $robinbed to "yours">><<set $bedGuest to "Robin">>
+	<<npc Robin>><<person1>>你突然感受到了熟悉的触感，是罗宾，<<his>>正用胳膊搂着你。
+	<<if _robin.trauma gte 50>>
+		"对不起，"你听到<<his>>在你耳边低语，"我最近一直都在做噩梦……"
+		<br><br>
+
+		在你回抱住<<him>>之后，<<his>>终于不再颤抖了。
+		<<if $trauma gte ($traumamax * 0.7)>>
+			在你被<<he>>回抱住之后，你终于不再颤抖了。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<if _robin.dom gte 80 and _robin.trauma lt 50>>
+		<<link [[拥抱|Robin Bed Dominant]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[抱住|Bed]]>><<endevent>><<trauma -6>><<stress -12>><<npcincr Robin trauma -3>><</link>><<ltrauma>><<lstress>><<lrtrauma>>
+		<br>
+	<</if>>
+	<<if _robin.trauma lt 50>>
+		<<link [[接吻|Bed Robin Sex]]>><<set $sexstart to 1>><</link>>
+	<</if>>
+	<br>
+<<elseif $location is "home" and $wraith and $wraith.nightmare is 2 and isBloodmoon()>>
+	你梦见一个美丽的身影。祂披着白色的外衣，站在红色的月亮之下。祂向你张开双臂，做出欢迎的姿态。当你走近时，你能感受到祂的目光正穿过你的大脑。
+	<br><br>
+	祂被树木环绕，所有的树木都向内弯曲，漂浮在湖面上。周围的一切突然开始移动，你发现自己正浮在湖底的一个巨大的废墟上。你感到难以呼吸。
+	<br><br>
+	你缓缓睁开眼，慢慢从床上站起身来。
+	<<if $robinbed is "yours" or $robinbed is "theirs">>
+		你小心地没有吵醒罗宾。
+	<<elseif $kylarbed is 1>>
+		你小心地没有吵醒凯拉尔。
+	<</if>>
+	你的耳朵嗡嗡作响。
+	<br><br>
+	<<storeon "bed" "wardrobe">><<wraithPossess "home">>
+	<span class="nextLink"><<link [[散步|Bedroom]]>><</link>></span>
+	<br>
+<<elseif $baileyrapewake is 1>>
+	<<set $baileyrapewake to 0>>
+	<<generate1>><<person1>>当你醒来时，感觉一个模糊的身影在你身上，一双手将你的被子扯了下来，是一个<<person>>。"不要挣扎，"<<he>>说道。
+	<<if $robinbed is "yours" or $kylarbed is 1>>
+		"我们不希望吵醒你的朋友。"<<if $robinbed is "yours">>罗宾<<else>>凯拉尔<</if>>正躺在你身边安稳的睡着。
+	<</if>>
+	"你看起来很是诱人，而且你有着那么安稳的睡相。我再也控制不住自己了。"
+	<br><br>
+	<span class="red">贝利正靠在门框那里数着手上的钱。</span>
+	<br><br>
+	<<link [[继续|Sleep Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $christmas_kylar is 1>>
+	<<set $christmas_kylar to 2>>
+	<<npc Kylar>><<person1>>
+	你被叮当声吵醒。
+	<br>
+	一抹白霜
+	<br>
+	从窗外洒落，
+	<br>
+	是起床还是转个身继续睡觉？
+	<br><br>
+
+	<<link [[起身调查|Kylar Christmas]]>><<set $christmas_kylar to 3>><<towelup>><</link>>
+	<br>
+	<<link [[翻身睡觉|Sleep]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $location is "home" and _kylarWake is 1>>
+	<<npc Kylar>><<person1>>
+	<<run statusCheck("Kylar")>>
+
+	当你醒来的时候，冷风正从你打开的窗户那长驱直入。
+	<br><br>
+
+	你想起身下床，但一双手臂从后面揽住了你的腰，限制了你的行动。
+	<br><br>
+
+	你汗毛竖起，但一个熟悉的声音在你耳边低语。是凯拉尔。
+	<br><br>
+
+	"我吓到你了吗？"<<he>>问道，<<his>>呼出的热气吹拂着你的脖子，"我很抱歉，我只是无法控制自己，我需要你。"
+	<br><br>
+
+	你感到<<his>>的<<npcGenitals>>摩擦着你的屁股，还有<<his>>愈加强烈的呼吸。<<He>>松开了手，开始用<<his>>的手在你身上游走<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked">>，迫不及待地想脱掉你的衣服，<<else>>试图将你紧紧抱住，感受你的每一寸肌肤。<</if>>
+	<br><br>
+
+	<<His>>松开双手，然后在一阵脱衣服的窸窣声后，<<his>>将身体再次压在了你的身上，"你不愿与我一起享受这份快乐么？"
+	<br><Br>
+
+	<<link [[默许凯拉尔接下来的行为|Bedroom Kylar Sneak Sex]]>><<set $sexstart to 1>><</link>><<gglove>><<npcincr Kylar love 2>>
+	<br>
+	<<link [[推开凯拉尔|Bedroom Kylar Sneak Push]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 6>><<npcincr Kylar lust -2>><</link>><<llove>><<ggksuspicion>><<gglust>>
+
+<<elseif $location is "home" and _kylarWake is 2>>
+	<<npc "Kylar">><<person1>>
+	<<run statusCheck("Kylar")>>
+
+	你被床上移动的东西吵醒了，就在准备睁开眼睛看看是什么的时候，你感觉到有呼吸喷在你的脸上。
+	<br><br>
+
+	" 你，你这样真<<if $player.gender_appearance is "f">>美丽<<else>>帅气<</if>>……"一个熟悉的声音喃喃自语，离你不过几英寸远。是凯拉尔的声音。"很快……我将拥有你的全部……"
+	<br><br>
+
+	<<link [[睁开眼睛|Bedroom Kylar Creep]]>><<set $phase to 1>><<npcincr Kylar lust 1>><</link>><<glust>>
+	<br>
+	<<link [[让其靠近|Bedroom Kylar Creep]]>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[生气|Bedroom Kylar Creep]]>><<set $phase to 3>><<npcincr Kylar rage 2>><<npcincr Kylar love -1>><<stress -6>><</link>><<lstress>><<llove>><<gksuspicion>>
+
+<<else>>
+	<<if $nightmares is 1 and $controlled is 0>>
+		<<if _sleepinterrupt>>
+			<<if $daily.motherWake is 1>>
+				你本打算继续睡觉，但贝利再次敲门，提醒你该起床了。
+			<<else>>
+				<<wakingEffects $sleepHoursTotal>>
+				<<if _wakingEffect isnot undefined>>
+					你梦到了
+				<<else>>
+					你梦见你是
+				<</if>>
+				被一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀。噩梦被敲门声惊断，是贝利来提醒你该上学了。
+			<</if>>
+			<br><br>
+			<<set $daily.motherWake to 1>>
+		<<else>>
+			<<wakingEffects $sleepHoursTotal>>
+			<<if _wakingEffect isnot undefined>>
+				你梦到了
+			<<else>>
+				你梦见你是
+			<</if>>
+			被一个<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>而可怕的东西追杀，虽然你很快就忘掉了具体的细节，但是噩梦带来的恐惧感却挥之不去。
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if _sleepinterrupt>>
+			<<if $daily.motherWake is 1>>
+				你本打算继续睡觉，但贝利再次敲门，提醒你该起床了。
+			<<else>>
+				<<wakingEffects $sleepHoursTotal>>
+				<<if _wakingEffect isnot undefined>>
+					在你睡着之后
+				<<else>>
+					你入睡之后
+				<</if>>
+				睡得很香，直到敲门声将你吵醒，是贝利来提醒你要去上学了。
+			<</if>>
+			<br><br>
+			<<set $daily.motherWake to 1>>
+		<<else>>
+			<<if !_wakingEffect>>
+				<<wakingEffects $sleepHoursTotal>>
+			<</if>>
+			<<if ["dryheaving","nausea"].includes(_wakingEffect)>>
+				你睡得很安稳，但你现在有些许不舒服。
+				<br><br>
+			<<elseif $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte ($arousalmax / 10) * 9>>
+				你的睡眠被淫秽的梦境<<if _wakingEffect>>打断<<else>>所困扰<</if>>。
+				<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+				<<arousal `100 * $sleepHoursTotal`>>
+				<<if $arousal gte $arousalmax>>
+					它们把你推向了高潮的顶点。
+					<<orgasm>><<set _orgasm to true>>
+				<<else>>
+					<br><br>
+				<</if>>
+			<<elseif !_wakingEffect>>
+				你睡得很香，醒来时你感觉精神焕发。
+				<br><br>
+			<<else>>
+				<br><br>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $robinbed is "yours">>
+		<<unset $robinbed>>
+		<<npc Robin>><<person1>>
+		<<if _wakingEffect is "dryheaving">>
+			"你还好吗？让我来帮你吧，"罗宾的关心让你放松了很多。<<He>>一直都很担心你，直到你说自己没事后才放心地离开了。
+		<<elseif _orgasm is true>>
+			<<if $exposed gte 2>>
+				罗宾轻轻抱着你："好了，我得去呃——"<<he>>反应过来，<<his>>和你身上都黏糊糊的，不由羞红了脸，随后起身去找纸巾。
+				<<if $rng gte 71>>
+					"没、没事，"<<he>>说道。
+				<<elseif $rng gte 31>>
+					"这可能是我的错，"<<he>>说道。
+				<<else>>
+					"我——我可能需要去洗个澡，"<<he>>说道。
+				<</if>>
+			<<else>>
+				罗宾拥抱了你，"我不打扰你穿——"<<he>>顿了顿，在注意到你胯间的湿斑后，<<he>>的脸涨得通红，随后<<he>>递给你一张纸巾。
+				"没、没事，"<<he>>说道。
+			<</if>>
+		<<else>>
+			罗宾松开抱着你的胳膊，"我不打扰你穿衣服了。"<<he>>说道。
+		<</if>>
+		<<if Time.hour is 6>><<run setRobinLocationOverride("orphanage", 6)>><</if>>
+		<<endevent>>
+		<br><br>
+
+	<<elseif $kylarbed is 1>>
+		<<npc Kylar>><<person1>>
+		<<if $kylarSleepEvent is 1>>
+			<<unset $kylarSleepEvent>>
+			<<unset $kylarbed>>
+
+			当你醒来时，你感觉一只手正细细地抚摸着你的头发，你转过身去看向凯拉尔，<<he>>微笑着说道："我真的很高兴你让我留了下来。"
+			<br><br>
+
+			你们在起床之前又依偎了一会，直到不得不分开的时候，<<he>>才满脸不情愿地从你身边离开。
+			<br><br>
+
+			"我真的该走了，"<<he>>说道，你轻拂起<<his>>脸上的一缕头发，<<he>>又笑了起来，随后<<He>>握住你的手，在把它放在<<his>>的脸上一会儿后，<<He>>离开了你的身边。
+			<br><br>
+
+			你目视着<<he>>顺着<<he>>来时的路回去了，直到听不到<<him>>离开时的沙沙声后，你才躺回了床上，想着你们俩刚刚一起度过的美好夜晚。
+			<br><br>
+
+		<<elseif _wakingEffect is "dryheaving">>
+
+		<<elseif $rng gte 81 and $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
+			你被门打开所传来的吱呀声惊醒，你听到门外传来了不知道是谁的抽气声，那人迅速关上了门。
+			<br><br>
+
+			“那是谁……？”你打了个哈欠，慢慢松开了凯拉尔。<<if $robinromance is 1>><<lllove "Robin">><<npcincr Robin love -5>><</if>>
+			<br><br>
+
+			"不知道，"凯拉尔揉着<<his>>的眼睛，"应该是无关紧要的家伙吧？"
+			<br><br>
+
+			<<link [[继续|Kylar Orphanage Cuddle]]>><<set $kylarbed to 0>><</link>>
+
+		<<elseif $rng gte 61>>
+			你被门打开所传来的吱呀声惊醒，你听到门外传来了不知是谁的抽气声，随后又有笑声传来。
+			<br><br>
+
+			<<generatey2>><<person2>>
+			一个<<person>>站在房间门口看着你和凯拉尔。"你在和<<nnpc_him "Kylar">>一起睡觉？！"<<he>>肆无忌惮地大笑，"这就是你邀请<<nnpc_him "Kylar">>来这里的原因么？你喜欢这个怪胎是吧？"
+			<br><br>
+
+			凯拉尔的脸上闪过愤怒的神情，但<<nnpc_he "Kylar">>最后还是什么都没说。
+			<br><br>
+
+			<<link [[保护凯拉尔|Kylar Orphanage Sleep Defend]]>><<set $kylarbed to 0>><<status -10>><<npcincr Kylar love 1>><</link>><<lcool>><<glove>>
+			<br>
+			<<link [[斥责凯拉尔|Kylar Orphanage Sleep Berate]]>><<set $kylarbed to 0>><<npcincr Kylar love -3>><</link>><<lllove>>
+			<br>
+			<<if $submissive lte 500 or $syndromekylar gte 1>>
+				<<link [[摔门而出|Kylar Orphanage Slam]]>><<set $kylarbed to 0>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><</link>><<glove>><<glust>><<if $syndromekylar gte 1>><<stockholmTrait "Kylar">><<else>><<defianttext>><</if>>
+			<</if>>
+
+		<<else>>
+			当你醒来时，<<if $submissive gte 1150 or $daily.kylar.sleepRape is true>>凯拉尔仍然抱着你<<else>>你依旧抱着凯拉尔<</if>>。过了一会儿，凯拉尔动了一下，随后懒懒地眨着眼睛。
+			<<if _orgasm is true>>
+				<<He>>用力嗅了嗅空气，然后看向你。"你也梦见我了吗？"<<he>>问道。
+			<</if>>
+			<br><br>
+
+			"我可能该走了，"<<he>>说道。尽管这么说了，但<<he>>并没有着急起身。
+			<br><br>
+
+			<<link [[继续|Kylar Orphanage Cuddle]]>><<set $kylarbed to 0>><</link>>
+		<</if>>
+	<</if>>
+	<<if $kylarbed isnot 1>>
+		<<set $wardrobe_location to "wardrobe">>
+		<<wardrobeSelection true>>
+		<<radiooutfits>>
+		<br><br>
+		<<if $renttime lte 0>>
+			<<set $bus to "home">>
+			<<getouticon>><<link [[起床|Bedroom Bailey]]>><</link>>
+			<br><br>
+
+		<<elseif $robinmissing is "landfill" and !$robinmistknown>>
+			<<getouticon>><<link [[起床|Bedroom Robin Mist Note]]>><</link>>
+			<br><br>
+		<<else>>
+			<<getouticon>><<link [[起床|Bedroom]]>><</link>>
+		<</if>>
+	<</if>>
+<</if>>
+<<if $kylarbed isnot 1>>
+	<<set $phase to 0>>
+<</if>>

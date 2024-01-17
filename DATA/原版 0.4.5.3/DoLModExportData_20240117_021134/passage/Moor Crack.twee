@@ -1,0 +1,25 @@
+:: Moor Crack []
+<<set $outside to 0>><<effects>>
+
+<<if $voredisable is "f" and $rng gte 51 and $phase isnot 1>>
+	地面继续隆隆作响，你紧紧抓住边缘，试着用自己的脚去寻找支点，但是墙面很软，而且非常滑。有东西在触碰着你的<<bottom>>，你低头一看，看到一个粉红色的，脉动着的肿块。
+	<br><br>
+
+	<<link [[继续|Moor Vore]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	你降落在离地面几米的软土上。<<if $phase isnot 1>>大地颤抖着停了下来，你看到面前有一条延伸进黑暗的通道。<</if>>
+	<br><br>
+	<<endevent>>
+	<<if $pain gte 100>>
+		<span class="blue">你太痛苦了，爬不上去。</span>
+		<br>
+	<<else>>
+		<<link [[向上爬|Moor Crack Climb]]>><</link>><<athleticsdifficulty 300 1300>>
+		<br>
+	<</if>>
+	<<link [[大声呼救|Moor Crack Call]]>><</link>><<if Time.dayState is "night">><<difficulty 10>><<else>><<difficulty 70>><</if>>
+	<br>
+	<<link [[沿着通道走 (0:20)|Moor Crack Passage]]>><<pass 20>><</link>>
+	<br>
+<</if>>

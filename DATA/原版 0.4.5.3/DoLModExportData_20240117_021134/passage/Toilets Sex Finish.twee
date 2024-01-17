@@ -1,0 +1,66 @@
+:: Toilets Sex Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+		<<He>>最后给了你一耳光，然后<<if $phase2 is 1>>他们离开了<<else>><<he>>离开了<</if>>，留你一个人躺在冰冷的地砖上。
+		<<violence 3>>
+		<br><br>
+	<<elseif $enemyanger gte 1>>
+		"谢了，骚货。"<<he>>说。<<if $phase2 is 1>>他们起身离开<<else>><<He>>起身离开<</if>>，把你留在躺在冰冷的地砖上。
+		<br><br>
+	<<else>>
+		微笑着，<<person1>><<person>>在你的脸颊上亲了一下。"这是给你的，"<<if $phase2 is 1>><<person2>><<person>>说着<<else>><<he>>说着<</if>>，翻出了<<his>>的钱包。<<if $phase2 is 1>>他们站起来，各自伸出手来拉<<else>><<He>>站起来，伸出手来拉<</if>>你的手，帮助你站起来。
+		<br>
+		你获得了<<moneyGain 10>>。
+		<br><br>
+	<</if>>
+	<<clearNPC toilets_1>>
+	<<if $phase2 is 1>>
+		<<clearNPC toilets_2>>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $bus is "parkmens">>
+		<<link [[继续|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	<<He>>摔在了洗手池上。你抓住机会，<<tearful>>逃离了现场。
+	<br><br>
+	<<storeon $bus "check">>
+	<<if _store_check is 1>>
+		<<storeon $bus>>
+		你的衣服在你身后被扔了出去。
+	<</if>>
+	<<clearNPC toilets_1>>
+	<<if $phase2 is 1>>
+		<<clearNPC toilets_2>>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Park]]>><<set $eventskip to 1>><</link>>
+<<elseif $finish is 1>>
+	<<if $phase2 is 1>>
+		他们停止抚摸你，让你离开隔间。他们很快就离开了洗手间，看向彼此的眼神里充满了尴尬。
+	<<else>>
+		<<He>>停止抚摸你，让你离开隔间。<<He>>不久后也离开了洗手间。
+	<</if>>
+	<br><br>
+	<<clearNPC toilets_1>>
+	<<if $phase2 is 1>>
+		<<clearNPC toilets_2>>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $bus is "parkmens">>
+		<<link [[继续|Men's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Women's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

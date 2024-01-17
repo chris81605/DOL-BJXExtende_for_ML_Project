@@ -1,0 +1,56 @@
+:: Street Bully Chased 2 []
+<<set $outside to 1>><<effects>>
+
+<<if $phase is 1>>
+	<<if $speech_attitude is "meek">>
+		"我没看见任何人，<<sir>>，”你说，“我保证。"
+	<<elseif $speech_attitude is "bratty">>
+		你耸耸肩。“我不知道。照你现在的速度，<<nnpc_hes "Whitney">>可能已经离开小镇了。"
+	<<else>>
+		"<<nnpc_He "Whitney">>往那边去了，"你指着街道说。
+	<</if>>
+	<br><br>
+
+	<<skulduggerycheck>>
+	<<if $skulduggerysuccess is 1>>
+		<<if currentSkillValue('skulduggery') gte 400>>
+			<<person>>点点头，从你身边冲过去，<span class="green">完全上当了。</span>
+		<<else>>
+			<<person>>怀疑地看着你，<span class="green">但把你推到一边，继续沿着小巷走。</span>
+		<</if>>
+		<<endevent>><<npc Whitney>><<person1>>
+		惠特尼从车底爬了出来。
+		<br><br>
+
+		<<if currentSkillValue('skulduggery') gte 400>>
+			"我不敢相信那个白痴真上当了，”<<he>>说，“你真是能言善辩。”<<He>>得意地笑道，“不知道你那舌头是不是还能干点别的。”<<npcincr Whitney lust 5>><<glust>>
+		<<else>>
+			"你骗人技术太烂了，”<<he>>说，“我一秒钟也不会相信你的。还好那个白痴比你还笨。"
+		<</if>>
+		<br><br>
+
+		<<He>>笑着走开了，你继续走你的路。
+		<<skulduggeryuse>>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<<else>>
+		<<person>>咬紧牙关，眯起眼睛。<<He>>没买你的帐。
+		<<skulduggeryuse>>
+
+		"我真的很想惩罚那个混蛋，”<<he>>咆哮道，“但你也行。"
+		<br><br>
+
+		<<link [[继续|Street Bully Chased Spank]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你指着停着的车。惠特尼只来得及瞪你一秒就被从车下拽了出来，并被拖回<<nnpc_he "Whitney">>来时的方向。
+	<br><br>
+
+	惠特尼的朋友们从藏身之处跳出来，向<<person>>扑去。一场打斗爆发了。你不打算留下来看谁赢。
+	<br><br>
+
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

@@ -1,0 +1,33 @@
+:: Stall Attention []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"<<if $pronoun is "m">>先……先生<<else>>女……女士<</if>>！" 你胆怯着出声，"您愿意看看我的商品吗？"
+<<elseif $speech_attitude is "bratty">>
+	"嘿嘿嘿，"你卖力吆喝，"各位！都来看看吧！"
+<<else>>
+	"需要我为你介绍一下吗？" 你说道，"这些都是本地货。"
+<</if>>
+<br><br>
+
+<<if $rng gte 51>>
+	那个<<person>>走了，找了个别处呆着。
+	<br><br>
+
+	<<stall_actions>>
+<<else>>
+	<<set $stall_plant to $stall_expensive>>
+	<<if setup.plants[$stall_plant].special.includes("large")>>
+		<<set $stall_amount to 1>>
+	<<elseif $stall_amount gte $plants[$stall_plant].amount>>
+		<<set $stall_amount to clone($plants[$stall_plant].amount)>>
+	<</if>>
+	<<set $stall_cost to Math.round(clone(setup.plants[$stall_plant].plant_cost))>>
+	那个<<person>>走了过来，并看了看你的<span class="green"><<print setup.plants[$stall_expensive].plural>></span>。"这些要<span class="green"><<stall_amount>></span>多少钱？"<<he>>问道。
+	<br><br>
+
+	<<stall_trust>>
+	<br><br>
+
+	<<stall_sell_actions>>
+<</if>>

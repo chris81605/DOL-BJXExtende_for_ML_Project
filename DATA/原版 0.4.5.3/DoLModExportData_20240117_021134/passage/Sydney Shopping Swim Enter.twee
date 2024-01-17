@@ -1,0 +1,57 @@
+:: Sydney Shopping Swim Enter []
+<<effects>><<run statusCheck("Sydney")>>
+<<if $open>>
+	<<unset $open>>
+	你成功撬开了锁，然后猛地推开门。<<set _continue to true>><<npcincr Sydney lust 1>><<promiscuity3>>
+<<else>>
+	你大步走到更衣室的门前，然后转动了把手。
+	<<if _sydneyStatus.includes("corrupt")>>
+		<span class="green">门没有锁，</span>你猛地推开门。<<set _continue to true>><<npcincr Sydney lust 1>><<promiscuity3>>
+	<<else>>
+		门是锁着的，你隐约听到悉尼在门后惊慌失措的声音。"里面有人！"
+		<br><br>
+		<<set $lock to 400>>
+		<<if currentSkillValue('skulduggery') gte $lock>>
+			<span class="green">这把锁看起来很容易被撬开。</span>
+			<br><br>
+			<<link [[撬开它 (0:01)|Sydney Shopping Swim Enter]]>><<set $open to true>><</link>>
+			<br>
+		<<else>>
+			<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+		<<link [[等待 (0:05)|Sydney Shopping Swim Wait]]>><<pass 5>><</link>>
+		<br>
+		<<link [[偷看悉尼 (0:05)|Sydney Shopping Swim Peek]]>><<npcincr Sydney lust 1>><<pass 5>><</link>><<glust>><<promiscuous1>>
+		<br>
+	<</if>>
+<</if>>
+<<if _continue>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<if $sydneyromance is 1>>
+			悉尼背对着你，然后平静地转过身来。"至少关上你身后的门。"<<Hes>>一丝不挂，也没有试图遮掩<<himself>>。<<if _sydneyChastity and !$sydneyChastityKnown>><<set $sydneyChastityKnown to 1>><span class="lewd">你看到一个贞操带紧紧缠绕在<<his>>的腰间。</span>"好吧，现在你知道了我下流的小秘密了。"<<elseif _sydneyChastity>>贞操带是唯一遮挡<<him>>身体的东西。<</if>>
+			<br><br>
+			<<he>>坐在长椅上，把腿叉了开来。"啊，我猜你过来是为了找乐子的。我早就在等着了，你还站在那里做什么？"
+			<br><br>
+			<<link [[锁上你身后的门|Sydney Shopping Lock]]>><</link>>
+			<br>
+		<<else>>
+			你瞥见悉尼的赤裸上身，<<he>>迅速地遮住了<<he>>裸露的身体。"什，我以为我已经锁上门了！"<<He>>笑了起来，做了一个夸张的捂脸动作，"我真是太~太太太太健忘了。嗯，你满意了嘛。如果你能让我继续换衣服，那就更好了。"
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $sydneyromance is 1>>
+			你瞥见了悉尼的内衣。<<He>>吓了一跳，差点尖叫出声，但当<<he>>意识到是你的时候，很快便冷静了下来。"吓死我了！"<<He>>撇着嘴把衣服抛向你，但<<He>>很快意识到了自己干了什么——<<he>>现在彻底裸着了。
+			<br><br>
+			<<He>>放下双手，再一次让你瞥到了<<his>>内裤。"哈，这就是你想要的，是不是？"<<His>>脸变得更红了。"如果……如果你要盯着看，或者做其他什么事情，至少把门关上……"
+			<br><br>
+			<<link [[锁上你身后的门|Sydney Shopping Lock]]>><</link>>
+			<br>
+		<<else>>
+			你瞥见悉尼的内衣。<<he>>迅速地遮住了<<he>>裸露的身体，失声尖叫了起来。"不行！不不不！出去！"<<He>>用一只手把你推出门外，同时用一堆衣服遮住了自己。
+			<br><br>
+		<</if>>
+	<</if>>
+	<<link [[离开|Sydney Shopping Swim Enter Leave]]>><</link>>
+	<br>
+<</if>>

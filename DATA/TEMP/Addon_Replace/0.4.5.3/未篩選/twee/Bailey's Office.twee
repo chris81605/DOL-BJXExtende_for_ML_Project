@@ -1,0 +1,123 @@
+:: Bailey's Office []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<if Object.values($children).find(child => child.mother === "Alex" && child.location === "home") or Object.values($children).find(child => child.father === "Alex" && child.location === "home")>>
+
+	<<if Object.values($children).find(child => child.mother === "Alex" && child.location === "home")>>
+		<<set _alexMother to Object.values($children).find(child => child.mother === "Alex" && child.location === "home")>>
+
+	<<elseif Object.values($children).find(child => child.father === "Alex" && child.location === "home")>>
+		<<set _alexFather to Object.values($children).find(child => child.father === "Alex" && child.location === "home")>>
+	<</if>>
+
+<</if>>
+
+<<npc Bailey>><<person1>>
+
+<<if Time.hour lte 6 or Time.hour gte 10>>
+	你进入贝利的办公室。<<Hes>>不在那里。<<He>>在早上7点到9点之间才会在里面。
+	<br><br>
+
+	<<if $kylar_camera is 3>>
+		<span class="blue">凯拉尔的猫头鹰，就是你送给孤儿的那只，在角落里的柜子顶上看着你。</span>一定是贝利没收的。
+		<br>
+		<<link [[检查猫头鹰|Bailey's Office Owl]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你走进贝利的办公室，发现<<him>>坐在<<his>>的办公桌旁。
+
+	<<if !$daily.baileyVisit>>
+		<<set $daily.baileyVisit to 0>>
+		<<set _options to 1>>
+		<<if $dissociation gte 1>>
+			<<He>>看着你的眼睛和痛苦的表情。"我敢肯定有人会中意那种表情，"<<he>>嘟囔着，把<<he>>手上读的一份文件放到一边。
+		<<elseif $pain gte 40>>
+			<<He>>看着你满是泪水的脸冷笑。"浴室里有绷带。"
+		<<elseif $goooutsidecount + $semenoutsidecount gte 25>>
+			<<He>>看着你的身体，上面沾满了<<if $semenoutsidecount gte 1 and $goooutsidecount gte 1>>精液和粘液<<elseif $semenoutsidecount gte 1>>精液<<else>>粘液<</if>>，贝利转过身去，"把自己洗干净，你真丢人。"
+		<<elseif $arousal gte ($arousalmax / 5) * 3>>
+			<<He>>看着你泛着潮红的脸。"这么性欲旺盛，你<<if $beauty lte 3000>>应该<</if>>随便找个人就能解决了，"<<he>>边说边回到<<his>>的文书工作上。"记得顺便赚点儿钱。"
+		<<else>>
+			<<He>>看着你。"你最好别浪费我的时间。"
+		<</if>>
+	<<elseif $daily.baileyVisit is 1>>
+		<<set _options to 1>>
+		<<if $daily.robin.debtAsk is 1>>
+			<<He>>盯着你看。"最好是关于你提到的那笔付款的事。"
+		<<elseif $mason_pond is 2>>
+			<<He>>盯着你。"是有关泉水池的事吗？你最好有钱。"
+		<<else>>
+			<<He>>瞪着你。"又是你？滚开。"
+		<</if>>
+	<<elseif $daily.baileyVisit is 2>>
+		<<set _options to 1>>
+		<<He>>瞪着你。"别再烦我了，滚蛋。"
+	<<elseif $daily.baileyVisit is 3>>
+		<<set _options to 2>>
+		<<He>>怒视着你，然后愤怒地从椅子上站起来，大步向你走去。"我告诉过你别再烦我了，"<<he>>咬着牙说。"你就是不能让自己一个人呆着是吗？"<<He>>在你反应过来之前抓住你，把你压在<<his>>的桌子上。
+		<br><br>
+		<<link [[继续|Bailey Beating]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+	<<elseif $daily.baileyVisit is 100>>
+		<<He>>看起来很疲惫。"你没有更好的事情做吗？"
+	<<else>>
+		<<He>>无视了你。
+		<<if ($robinpaid isnot 1 and $robindebtknown is 1) or ($pub_hack_job is 3 and not $hacker_tasks.includes("bailey")) or $mason_pond is 1 or $mason_pond is 2 or $bailey_pound is 1 or isPubfameTaskAccepted("bailey")>>
+			<span class="blue">你今天已经烦到<<him>>了，<<him>>现在不愿意听你说的任何话。</span>
+		<</if>>
+	<</if>>
+	<<set $daily.baileyVisit++>>
+<</if>>
+<br><br>
+
+<<if C.npc.Alex.pregnancy.fee isnot true and C.npc.Alex.pregnancy.nursery is true and (_alexMother or _alexFather) and (Time.hour gte 7 and Time.hour lte 9)>>
+	<<link [[把你的孩子带回农场|Bailey Office Alex Children Fee]]>><</link>>
+	<br>
+<</if>>
+
+<<if _options is 1>>
+	<<if $pub_hack_job is 3 and !$hacker_tasks.includes("bailey")>>
+		贝利正在处理<<his>>计算机上的某些东西。你已准备好了黑客的设备。
+		<br><br>
+		<<set $skulduggerydifficulty to 800>>
+
+		<<link [[欺骗贝利|Bailey's Office Hack]]>><<set $phase to 1>><</link>><<skulduggerydifficulty>>
+		<br>
+	<<elseif isPubfameTaskAccepted("bailey")>>
+		贝利正在处理<<his>>计算机上的某些东西。你已准备好了黑客的设备。
+		<br><br>
+		<<set $skulduggerydifficulty to 800>>
+
+		<<link [[欺骗贝利|Bailey Sheet]]>><<set $phase to 1>><</link>><<skulduggerydifficulty>>
+		<br>
+	<</if>>
+
+	<<if $robinpaid isnot 1 and $robindebtknown is 1>>
+		<<link [[承担罗宾的债务|Bailey's Office Robin]]>><</link>><<note "双倍每周债务" "red">>
+		<br>
+	<</if>>
+
+	<<if $renttime is 1 and ($promiscuity gte 35 or $uncomfortable.prostituting is false) and $baileyOfficeSeduced is undefined>>
+		<<link [[诱惑贝利|Bailey Office Seduce]]>><<set $baileyOfficeSeduced to 1>><<trauma 6>><</link>><<gtrauma>><<promiscuous3>>
+		<br>
+	<</if>>
+
+	<<if $mason_pond is 1>>
+		<<link [[询问泉水池的事|Bailey Pond]]>><<set $mason_pond to 2>><</link>>
+		<br>
+	<</if>>
+	<<if $mason_pond is 2>>
+		<<link [[询问泉水池的事|Bailey Pond 2]]>><</link>>
+		<br>
+	<</if>>
+
+	<<if $bailey_pound is 1>>
+		<<link [[就你在收容所发现的文件当面对质|Bailey Pound]]>><<awareness 18>><<set $bailey_pound to 2>><</link>><<gggawareness>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if _options isnot 2>>
+	<<link [[离开|Orphanage]]>><<endevent>><</link>>
+	<br>
+<</if>>

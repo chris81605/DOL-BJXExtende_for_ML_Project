@@ -1,0 +1,56 @@
+:: Street Bodywriting Seduce []
+<<effects>>
+
+<<if $phase gte 10000>>
+	<<set $seductiondifficulty to 8000>>
+<<elseif $phase gte 5000>>
+	<<set $seductiondifficulty to 4000>>
+<<else>>
+	<<set $seductiondifficulty to 2000>>
+<</if>>
+<br><br>
+
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+<br><br>
+
+你告诉<<him>>多少钱能够得到你的身体。
+<<promiscuity3>>
+
+<<if $seductionrating gte $seductionrequired>>
+
+<span class="green"><<He>>点头。</span>"好吧。"
+<br><br>
+
+你跟着<<him>>来到附近的巷子里。<<He>>把你推到墙上。一个垃圾箱遮挡了你，让街道那边看不到你。
+<br><br>
+
+<<link [[继续|Street Bodywriting Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+<<else>>
+
+<span class="red"><<He>>摇头。</span>"我不会给一个站街娼付钱。"
+
+	<<if $rng gte 81>>
+		<span class="red"><<He>>用手掌捂住你的嘴并把你拉到小巷子里。</span>"我会给你应得的。"
+		<br><br>
+
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			你的手臂被束缚住，让你无法防备。
+			<br>
+		<<else>>
+			<<link [[猛击|Street Bodywriting Smack]]>><<def 1>><</link>><<physiquedifficulty>>
+			<br>
+		<</if>>
+		<<link [[乖乖过去|Street Bodywriting Quiet]]>><<sub 1>><</link>>
+		<br>
+	<<else>>
+		<<He>>转身走开了。
+		<br><br>
+
+		<<endevent>>
+		<<destinationeventend>>
+	<</if>>
+<</if>>

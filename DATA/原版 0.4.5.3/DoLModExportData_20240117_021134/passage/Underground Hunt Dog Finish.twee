@@ -1,0 +1,28 @@
+:: Underground Hunt Dog Finish []
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	那只<<beasttype 0>>欢快地叫着。“好狗狗，”<<person2>><<person>>说道。
+	当<<he>>抓住你脖子上的皮带，把你拉起来的时候，人群开始窃窃私语起来。
+	<<if !$worn.feet.type.includes("shackle")>>
+		你的脚裸再次被冰冷的枷锁所铐住了。
+		<<shackle_feet>>
+	<</if>>
+	“希望其他组的狩猎能跟我们的一样有意思。”
+	<br><br>
+
+	附近突然响起一声尖叫，人群追了上去调查。留下<<person>>来把你拖回地牢的牢房里。
+	<<undergroundReturnToCell>>
+
+<<elseif $enemyhealth lte 0>>
+
+	那只<<beasttype 0>>呜咽着逃跑率。<<tearful>>你跳起身来，飞快地跑开了。
+	<<person2>><<person>>试着阻止你，但是你躲开了<<him>>然后逃进了森林里。
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<</if>>

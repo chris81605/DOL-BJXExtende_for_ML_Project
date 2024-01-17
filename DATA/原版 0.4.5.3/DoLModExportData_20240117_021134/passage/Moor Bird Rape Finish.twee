@@ -1,0 +1,57 @@
+:: Moor Bird Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<set _moor_bird_escape to true>>
+	<<beastejaculation>>
+
+	这个生物满意地消失了，你松了一口气。
+	<br><br>
+
+	<<endcombat>>
+
+<<elseif $enemyhealth lte 0>>
+	<<set _moor_bird_escape to true>>
+	那个生物吓得逃走了，消失在黑暗中。
+	<br><br>
+
+
+	<<endcombat>>
+
+<<elseif $timer lte 0>>
+	<<endcombat>>
+	<<set _moor_bird_escape to true>>
+
+<<else>>
+	<<set _moor_bird_escape to false>>
+	<<endcombat>>
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<br><br>
+
+	<<npc "Great Hawk">>
+	<span class="red"><<beasttype>>的眼睛突然对上了你的视线</span>，你的声音引起了它的警觉。它发出可怕的尖叫，将另一只生物吓得向黑暗深处仓皇逃走。你也试图往更深处挪动，但<<beasttype>>猛地跳了过来，它的利爪插进了离你脸只有一英寸的地里。
+	<br><br>
+
+	它展开双翼腾空而起，用利爪抓住了你的肩膀。<<if $monster is 1>>"抓到你了。"<<bhe>>说着，背上的翅膀疯狂扇动。<</if>>你离开了地面。
+	<br><br>
+
+	<<link [[继续|Bird Capture]]>><</link>>
+	<br>
+
+<</if>>
+
+
+<<if _moor_bird_escape isnot false>>
+	<<npc "Great Hawk">>
+	<<unset $moor_hunt>>
+	<<beasttype>>发出一声沮丧的尖叫，拍动着<<bhis>>的翅膀。
+	狂风吹乱了你的头发，<<bhe>>又一次冲向了天空。
+	<br><br>
+	<<clotheson>>
+	<<tearful>>你松了一口气，等了几分钟才从藏身之处出来。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

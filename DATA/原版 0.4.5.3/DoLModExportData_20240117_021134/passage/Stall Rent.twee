@@ -1,0 +1,33 @@
+:: Stall Rent []
+<<set $outside to 0>><<effects>>
+
+你进入了负责运行康努达塔斯市场的小办公室，一个<<generate1>><<person1>><<person>>向你问好。
+<br><br>
+"<span class="gold">£15</span>一天，"<<he>>说道，"我们在九点钟关门，而且我们还需要看到你打算卖的东西的样品，还有，我们还需要公民身份证明，除非你是卖花或其他农产品一类的。"
+<br><br>
+
+<<set _plant_keys to Object.keys($plants)>>
+<<for _t to 0; _t lt _plant_keys.length; _t++>>
+	<<if $plants[_plant_keys[_t]].amount gte 1>>
+		<<set _plant_temp to clone($plants[_plant_keys[_t]].plural)>>
+	<</if>>
+<</for>>
+<<if _plant_temp is undefined>><<pass 5>>
+	<span class="purple">你没有合适的东西可以出售。</span>
+
+	<br><br>
+	<<connudatusicon>><<link [[离开|Connudatus Street]]>><<endstall>><<endevent>><<clotheson>><</link>>
+	<br>
+<<else>>
+	<<set $money -= 1500>><<set $daily.stallRented to 1>><<set $stall_money to 0>><<set $stall_stats to {}>>
+	你给<<him>>看了你的一个_plant_temp。<<him>>似乎很满意，在让你签下文件并交了钱后，便让你离开去寻找你的摊位。
+	<br><br>
+	<<endevent>>
+	你把你的货物放在桌子上，然后试图以一种令人心情愉悦的方法摆放它们。在这里有一个小屋顶为你遮雨，如果你的腿累了的话还有一张凳子可以坐一会，在你的两侧，其他的商人正在往自己的货桌上摆动商品。
+	<br><br>
+
+	当你完成你的工作时，第一批顾客正向街道走来。
+	<br><br>
+
+	<<stall_actions>>
+<</if>>

@@ -1,0 +1,54 @@
+:: Street Rainy Follow 3 []
+<<effects>><<set $upperwet to 0>><<set $lowerwet to 0>><<set $underlowerwet to 0>>
+
+过了一会儿，<<person1>><<person>>重新现身，手里还提着一打衣服。"给你，<<girl>>。又暖和又舒服。"<<He>>又转过身来让你换衣服。
+<br><br>
+
+<<cleareventpool>>
+
+<<addinlineevent "rainy_day_harassement_normal" 4>>
+	<<person1>><<person>>在你把衣服穿好后，从你手中接回毛巾。<<clotheson>><<Hes>>说的没错，刚从烘干机出来的衣服确实又暖和又舒服。<<lstress>><<stress -6>>
+	<br><br>
+
+	你向<<him>>道谢，然后走回外面。"这种天气别在外面待太久！"<<he>>在你身后喊道。
+	<br><br>
+
+	<<if $bus is "domus">>
+		<<link [[继续|Domus Street]]>><<pass 15>><<endevent>><</link>>
+	<<else>>
+		<<link [[继续|Danube Street]]>><<pass 15>><<endevent>><</link>>
+	<</if>>
+
+<</addinlineevent>>
+
+<<addinlineevent "rainy_day_harassement_lewd" 1>>
+
+	<<if $rainyDayHarass is "naked">>
+		该在的一切都在，该来的一切都来，只不过有什么额外的东西在那里，很多很多。
+		<<if $forcedcrossdressingdisable is "t">>
+			这是一个<<print ($player.gender_appearance is "m" ? "男性内裤" : "女性内裤")>>。
+		<<else>>
+			这是一个<<print ($NPCList[0].pronoun is "m" ? "男性内裤" : "女性内裤")>>。
+		<</if>>
+		 它一定是和烘干机里你的衣服混在一起了。<<garousal>><<arousal 600>>
+		<br><br>
+	<<else>>
+		该在的一切都在，除了你的<<= setup.clothes.under_lower.find((e) => e.name is $rainyDayHarass).cn_name_cap>>。<<He>>一定是在烘干的时候拿走它的。<<gstress>><<stress 6>>
+		<br><br>
+	<</if>>
+
+	"我没听到你换衣服，"<<he>>侧过<<his>>的肩膀说。"咋了？"
+	<br><br>
+
+	<<if $rainyDayHarass isnot "naked">>
+		<<link [[要回内衣|Street Rainy Ask]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[就这样吧|Street Rainy Let]]>><</link>>
+	<<else>>
+		<<link [["告知" + $NPCList[0].pronouns.him|Street Rainy Tell]]>><</link>>
+		<br>
+		<<link [[先穿衣服|Street Rainy Let]]>><<set $phase to 2>><</link>>
+	<</if>>
+
+<</addinlineevent>>
+<<runeventpool>>

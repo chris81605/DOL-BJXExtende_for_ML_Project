@@ -1,0 +1,27 @@
+:: Street Private Photoshoot End []
+/* $phase 0: silent pass-through, 1: with pc request */
+<<set $outside to 1>><<effects>>
+
+<<if $phase gte 1>>
+	<<if $speech_attitude is "meek">>
+		你温顺地请求<<person>>，让事情就在这里停住。
+	<<elseif $speech_attitude is "bratty">>
+		你告诉<<person>>，这已经够了。
+	<<else>>
+		你决定就此打住。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<if $tipmod gt 0>>
+	<<tipset>>
+	<<He>>似乎很失望，但没有再向你施压。<<if $worn.upper.exposed gte 2 and $worn.over_upper.exposed gte 2>>你穿好衣服，<<else>>你<</if>>拿着钱离开了小巷。
+	<<tipreceive>>
+<<else>>
+	<<He>>似乎很失望，但没有再对你施压。<<He>>感谢你为<<him>>提供的这段乐子，友好地挥手离开了小巷。
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endevent>>
+<<destinationeventend>>

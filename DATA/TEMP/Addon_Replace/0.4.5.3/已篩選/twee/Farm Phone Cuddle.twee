@@ -1,0 +1,47 @@
+:: Farm Phone Cuddle []
+<<effects>>
+
+你坐在艾利克斯旁边，给自己找了个舒服的姿势。
+<<switch random(1, 8)>>
+	<<case 1>>
+		<<Hes>>正在与供应商进行一场激烈的交谈，不过似乎并没有受到打扰。<<He>>用空闲的手臂搂住了你。
+	<<case 2>>
+		<<Hes>>正在与客户交谈，但看起来并不介意。你发现<<him>>时不时冲你露出微笑。
+	<<case 3>>
+		电话那头是等待音乐，<<Hes>>把你拉近，在你的脸颊上亲了一下，露出微笑。
+	<<case 4>>
+		<<Hes>>正在拨着号。"真会找时候，"<<he>>开玩笑地说道，揉着你的头发，"现在是风暴前的宁静。之后你就等着瞧吧。"
+	<<case 5>>
+		<<he>>边打着电话，边努力分心出来，<<he>>的目光与你相遇。"我很高兴你能过来陪我，"<<he>>轻轻笑着说道。
+	<<case 6>>
+		你把脸颊贴在<<he>>的脸上，愉悦地听着<<he>>的声音。
+	<<case 7>>
+		你感到有些无聊，用自己的头撞了一下<<hers>>的头。
+		/* 北极星模组 */
+		<<if !$options.bjx_animal and (($demon gte 2 and $transformationParts.demon.horns isnot "hidden") or ($cow gte 2 and $transformationParts.cow.horns isnot "hidden")) or $options.bjx_animal and (($transformationParts.cow.horns isnot "disabled" or $transformationParts.sheep.horns isnot "disabled") or ($transformationParts.demon.horns isnot "disabled" or $transformationParts.deer.horns isnot "disabled" or $transformationParts.dragon.horns isnot "disabled"))>>
+		/* 北极星 */
+			<<he>>痛得缩了一下，你突然想起自己长了角。你刚要道歉，<<he>>也撞了回来。你们俩都笑了起来，双手放在各自额头上。
+		<<else>>
+			<<he>>也贴了过来，你们互相温存了许久。
+		<</if>>
+	<<case 8>>
+		<<if $exposed gte 1>>
+			<<he>>被你的<<lewdness>>迷住了，"是、是的，我在听。"<<he>>的声音变得结结巴巴，脸显而易见地红了。
+		<<else>>
+			你看着<<his>>桌子上一团糟的状况，听见<<him>>在一旁叹了口气，"我知道看起来很乱，但我一直有更重要的事情要做。"<<he>>冲你wink，用肩膀轻轻碰了碰你。
+		<</if>>
+<</switch>>
+<br><br>
+
+<<if Time.hour gte 21>>
+	<<He>>瞥了一眼<<his>>床头的钟，站起身来。"该睡觉了，"<<he>>说着，跟你交换了晚安吻。<<takeKissVirginity "Alex" "loveInterest">>
+<br><br>
+
+<<link [[起身|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+<<else>>
+<<link [[继续拥抱 (0:30)|Farm Phone Cuddle 2]]>><<npcincr Alex love 1>><<pass 30>><</link>><<glove>>
+<br>
+<<link [[起身|Farm Alex Bedroom]]>><<endevent>><</link>>
+<br>
+<</if>>

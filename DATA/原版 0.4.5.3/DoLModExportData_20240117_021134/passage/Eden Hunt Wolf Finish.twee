@@ -1,0 +1,45 @@
+:: Eden Hunt Wolf Finish []
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	<<beasttype>>满意地咕哝着，让你躺在树林中。
+	<br><br>
+
+	<<tearful>>你继续回到伊甸那里。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Eden>><<person1>>
+	<<link [[继续|Eden Hunt 3]]>><<set $phase to 0>><</link>>
+<<elseif $enemyhealth lte 0>>
+	那只<<beasttype>>尖叫着逃进了森林里。
+	<br><br>
+
+	<<tearful>>你继续回到伊甸那里。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Eden>><<person1>>
+	<<link [[继续|Eden Hunt 3]]>><<set $phase to 0>><</link>>
+<<else>>
+	枪声响起，吓得<<beasttype>>逃走了。伊甸走向你。
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Eden>><<person1>>
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 80>>
+		<<He>>抓住你的手臂，把你按在一棵树上。"该死的动物居然把爪子伸向了我的东西。"
+	<<else>>
+		<<He>>抓住你的手臂，把你弯曲在<<his>>的膝盖上。"愚蠢的<<bitch>>，我离抓住那只鹿就差一步之遥了。"
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Eden Hunt Punishment]]>><<set $molestationstart to 1>><</link>>
+<</if>>

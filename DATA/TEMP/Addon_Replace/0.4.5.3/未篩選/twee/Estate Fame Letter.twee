@@ -1,0 +1,69 @@
+:: Estate Fame Letter []
+<<effects>><<person1>><<set $wren_seen to "letter">>
+
+<<if $wren_intro is undefined>>
+	<<set $wren_intro to true>>
+	<<if $speech_attitude is "meek">>
+		"你、你叫伦恩？"你问道，"我有东西要给伦恩。"
+	<<elseif $speech_attitude is "bratty">>
+		"有给伦恩的快递，"你说道，"<<him>>应该就是你吧？"
+	<<else>>
+		"我有东西要转交伦恩，"你说道，"你是<<him>>吗？"
+	<</if>>
+	<br><br>
+
+	"<span class="gold">对，是我。</span>"<<personsimple>>说，"谁派你来的？圣诞老人？"
+	<br><br>
+<</if>>
+
+你拿出米奇给你的马尼拉纸信封，交给伦恩。
+<<if $speech_attitude is "meek">>
+	"这是你的老熟人给的。"
+<<elseif $speech_attitude is "bratty">>
+	"是你的老熟人派我来这儿的。"
+<<else>>
+	"你的老熟人让我把这个给你。"
+<</if>>
+<br><br>
+
+伦恩接过它，从正反两面看了看，然后笑了一下。<<He>>把它扔到附近的桌子上。"一直在等这个。不知道这次他又给我准备了什么。"
+<br><br>
+
+<<if !$pubfame.seen.includes("wrenOldman")>>
+	<<set $pubfame.seen.pushUnique("wrenOldman")>><<set $pubfame.detail to "wrenOldman">>
+	你想要收回你的手臂，但是伦恩在你来得及之前就抓住了你。<<he>>流畅地把你拉了过去，向后靠在了<<his>>的椅子上，让你来到桌子下面。<<He>>靠上前，你们的脸几乎贴到了一起。<<His>>的朋友们在旁边欢呼雀跃。
+	<<stress 6>><<gstress>>
+	<br><br>
+
+	"你可以告诉'老熟人'，让他别演了，"伦恩压低声音，"我确定'米奇'对于名字考虑了很多，但是这没有必要。"<<He>>抬头看了一眼桌子那头的其他人，"他们觉得我们是在互相爱抚，但是在他们这样吵闹的情况下他们听不到我们实际在说什么，很幸运，不是吗？"
+
+<<elseif !$pubfame.seen.includes("wrenLandry")>>
+	<<set $pubfame.seen.pushUnique("wrenLandry")>><<set $pubfame.detail to "wrenLandry">>
+	你想收回你的手臂，但伦恩在你还没反应过来时就抓住了你。在一个流畅的、熟练的的动作中，<<he>>把你拉向<<him>>，向后靠在了<<him>>的椅子上，让你来到桌子下面。<<He>>靠上前，你们的脸几乎贴到了一起。<<His>>的朋友们在旁边欢呼雀跃。
+	<br><br>
+
+	"你介意问问'米奇'为什么让你来，而不是让兰德里来吗？"伦恩低声说，"这有点不按常理出牌。"
+
+<<elseif $pubfame.seen.includes("wrenKiss")>>
+	你对伦恩伸出了手，<<he>>眨着眼握住了你的手。<<takeHandholdingVirginity "Wren" "romantic">>在一个流畅的、熟练的动作中，<<he>>把你拉向<<him>>，然后向后靠在了椅子上，让你来到桌子下面。<<He>>靠上前，你们的脸几乎贴到了一起。<<His>>的朋友们在旁边欢呼雀跃。"<<pShes>>对<<him>>来说太诱人了，"<<person2>><<person>>笑着说道。
+	<br><br>
+
+	"那又怎样？"你问，"你还有更多米奇的秘密想挖掘吗？"
+	<br><br>
+
+	"谁知道呢，"<<person1>><<him>>笑着说道，"也许我只是想吻你，我此时似乎正有此意。"
+
+<<else>>
+	你想收回你的手臂，但伦恩在你还没反应过来时就抓住了你。在一个流畅的、熟练的的动作中，<<he>>把你拉向<<him>>，向后靠在了<<him>>的椅子上，让你来到桌子下面。<<He>>靠上前，你们的脸几乎贴到了一起。<<His>>的朋友们在旁边欢呼雀跃。
+	<br><br>
+
+	"那又怎样？"你问，"你还有更多米奇的秘密想挖掘吗？"
+	<br><br>
+
+	"谁知道呢，"<<he>>笑着说道，"也许我只是想尝一尝你，我此时似乎正有此意。"
+<</if>>
+<br><br>
+
+<<link [[亲吻|Estate Fame Letter 2]]>><<set $phase to 0>><<arousal 1000 "mouth">><<npcincr Wren love 3>><</link>><<promiscuous1>><<ggarousal>><<glove>><<kissvirginitywarning>>
+<br>
+<<link [[拉开距离|Estate Fame Letter 2]]>><<set $phase to 1>><</link>>

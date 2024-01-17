@@ -1,0 +1,72 @@
+:: Lake House Backyard 
+<<set $outside to 1>><<effects>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<if $lakehouse.wall gte 2>>
+		<<set $previousPassage to $passage>>
+		<<passoutlakehouse>>
+	<<else>>
+		<<passoutlake>>
+	<</if>>
+<<else>>
+	你回到后院。
+	<br><br>
+
+	<<if $lakehouse.plots lt 3>>
+		<<set _clearing to (25 - $lakehouse.clearing)>>
+		<<set $percent=Math.floor((_clearing/25)*100)>>
+		其中一片田地正在被清理，
+		<<if $lakehouse.clearing lte 0>>
+			<span class="green">并已经做好种植准备了！</span>
+			<div class="meter">
+			<<print '<div class="greenbar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<elseif $lakehouse.clearing lte 5>>
+			<span class="teal">并基本可以种植了。</span>
+			<div class="meter">
+			<<print '<div class="tealbar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<elseif $lakehouse.clearing lte 10>>
+			<span class="lblue">它看起来没有那么荒芜了。</span>
+			<div class="meter">
+			<<print '<div class="lbluebar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<elseif $lakehouse.clearing lte 15>>
+			<span class="blue">其中一部分的土壤已经重现天日了。</span>
+			<div class="meter">
+			<<print '<div class="bluebar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<elseif $lakehouse.clearing lte 20>>
+			<span class="purple">但这里依旧处于乱糟糟的状态。</span>
+			<div class="meter">
+			<<print '<div class="purplebar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<elseif $lakehouse.clearing lte 24>>
+			<span class="pink">但看起来收效甚微。</span>
+			<div class="meter">
+			<<print '<div class="pinkbar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<<else>>
+			<span class="red">但它看起来依旧像一片原始丛林。</span>
+			<div class="meter">
+			<<print '<div class="redbar" style="width:' + $percent + '%"></div>'>>
+			</div>
+		<</if>>
+		<br>
+	<</if>>
+
+	<<if $lakehouse.plots lt 3>>
+		<<link [[清理田地 (0:40)|$passage]]>><<pass 40>><<tiredness 4>><<set $lakehouse.clearing -= 1>><<lakehouseclearplot>><</link>><<gtiredness>>
+		<br>
+	<</if>>
+	<<if $lakehouse.plots is 3 and $lakehouse.wetplot is undefined>>
+		<<link [[设置一块水田 (4:00)|$passage]]>><<pass 4 hour>><<tiredness 24>><<add_plot lakehouse water 3 medium>><<set $lakehouse.wetplot to 1>><</link>>
+		<br>
+	<</if>>
+	<<link [[回到屋内 (0:01)|Lake House]]>><<pass 1>><</link>>
+	<br>
+
+	<<if $lakehouse.plots gte 1>>
+		<<display_plot lakehouse>>
+	<</if>>
+<</if>>

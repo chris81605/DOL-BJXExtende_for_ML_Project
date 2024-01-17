@@ -1,0 +1,92 @@
+:: Farm Kennel Train Strict []
+<<effects>>
+
+<<if $farm.beasts.dogs gte 20>>
+
+	你不需要在训练时大喊大叫。这些<<beastsplural>>会好好完成每一项指令。你叫他们跳的时候他们就跳，叫他们翻滚的时候他们就会翻滚，叫他们攻击什么的时候他们就会攻击。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+
+<<elseif $farm.beasts.dogs gte 5>>
+
+	你对<<beastsplural>>大喊你的指令。他们毫不犹豫地遵从了。你不确定大喊大叫是否必要。他们似乎很渴望训练。
+	<br><br>
+
+	<<if $rng gte 80>>
+		你快要收尾时，一只<<beasttype>>向你跑了过来。<<bHe 0>>
+		<<if $monster is 1>>
+			抬头望着你。"主人，能摸摸我的头吗？"<<bhe 0>>恳求道。
+		<<else>>
+			抬头望着你，摇晃着尾巴。
+		<</if>>
+		<br><br>
+
+		<<link [[喜爱地轻拍|Farm Kennel Train Pat]]>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+		<br>
+		<<link [[收尾|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		训练进行地很顺利。你进行了收尾。<<grespect>><<farm_dogs 1>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+
+
+<<elseif $farm.beasts.dogs gte -5>>
+	你对<<beastsplural>>大声喊叫，命令他们服从命令。他们没什么热情地遵从了。
+	<br><br>
+
+	<<if $rng gte 51>>
+		训练进行地很顺利，但在结束时，一只<<beasttype>>把前肢搭向你，并伸出<<bhis 0>><<if $monster is 1>>脚掌<<else>>爪子<</if>>。
+		<br><br>
+
+		<<link [[伸向爪子|Farm Kennel Train Paw]]>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+		<br>
+		<<link [[收尾|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		训练感觉很有成效。<<grespect>><<farm_dogs 1>>
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<elseif $farm.beasts.dogs gte -20>>
+	你对着<<beastsplural>>大喊，要求他们服从命令。他们无视了你大部分的指令，有时只有他们中的一些会服从。
+	<br><br>
+
+	<<if $rng gte 51>>
+		进展很慢，但你觉得你已经取得了一些进展。<<grespect>><<farm_dogs 1>>
+	<<else>>
+		你希望下一个训练环节能进展顺利。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	你对<<beastsplural>>大声喊叫，命令他们服从命令。<span class="red">他们无视了你。</span>
+	<br><br>
+
+	<<if $rng gte 40>>
+		你叹息一声，结束了训练。当你离开狗窝时，你感到很沮丧。
+		<br><br>
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你失望地叹了口气，结束了训练，并朝着出口走去。<span class="red">一只<<beasttype>>挡住了你的路，朝你咆哮着。</span>其他的从你后方逼近。
+		<br><br>
+
+		<<link [[强行通过|Farm Kennel Gang Rape]]>><<endevent>><<beastNEWinit 3 dog>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[恳求|Farm Kennel Train Strict Plead]]>><</link>>
+		<br>
+		<<link [[妥协|Farm Kennel Train Strict Submit]]>><<sub 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

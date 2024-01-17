@@ -1,0 +1,216 @@
+:: Kylar Tease []
+<<set $outside to 0>><<effects>>
+<<set $kylar_action to "tease">>
+<<set _kylar to statusCheck("Kylar")>>
+<<cleareventpool>>
+
+<<if _kylarStatus.includes("Love")>>
+	<<if $genderknown.includes("Kylar") and !$worn.lower.type.includes("naked")>>
+		<<addevent "kylarFlirtEventClothesPull">> <!-- defined in Widgets Kylar -->
+	<</if>>
+	<<addinlineevent "kylarFlirtPat">>
+		你拍了拍凯拉尔的头，<<He>>幸福地闭上眼睛。
+	<</addinlineevent>><<addinlineevent "kylarFlirtWhisper">>
+		你对着凯拉尔耳边低声说着挑逗的话语。"别、别这样，"<<he>>笑了，"别人会听到的。"
+	<</addinlineevent>><<addinlineevent "kylarFlirtCheek">>
+		你舔了一下凯拉尔的脸颊，<<He>>也舔了回来。
+	<</addinlineevent>><<addinlineevent "kylarFlirtUndies">>
+		<<set _kylarLower to _kylar.clothes.lower.name>>
+		<<if $kylarSeen.includes("commando") or $daily.kylar.undies is true>>
+			你要求看凯拉尔的内裤。"当然，只是为了检查你有没有穿，"你说。
+			<<if _kylarLower.includes("skirt")>>
+				<<He>>脸红了，但还是从侧面掀开了<<his>>的<<print setup.npcClothesSets.find(item => item.name === _kylar.clothes.set).clothes.lower.desc>>，
+			<<else>>
+				<<He>>脸红了，但还是毫不犹豫地脱下了<<his>>的<<print setup.npcClothesSets.find(item => item.name === _kylar.clothes.set).clothes.lower.desc>>，
+			<</if>>
+			露出了
+			<<set _penis to (_kylar.penissize gte 3 ? "离<<his>>的_kylar.penisdesc只有几厘米" : "<<his>>的_kylar.penisdesc")>>
+			<<print (_kylar.penis isnot "none" ? (_kylar.vagina isnot "none" ? "<<his>>的小穴和_penis" : "_penis") : "<<his>>的小穴")>>。
+			<<arousal 100>><<garousal>>
+			<br><br>
+
+			"我，我没有穿，"<<he>>低声说道，"你高兴吗？"
+			<br><br>
+
+			你亲吻了<<him>>的脸颊，让这一切不言自明。
+		<<else>>
+			<<if !$daily.kylar.underwear>>
+				<<kylarRandomUnderwear>>
+			<</if>>
+			你要求看凯拉尔的内裤。"还是说，"你戏谑地说，"你根本没穿？"
+			<!-- Note for future writers: you COULD use $kylarStolenUnderwear here to reveal kylar is wearing the underwear they stole from the player. -->
+			<<if _kylarLower.includes("skirt")>>
+				<<He>>脸红了，但还是从侧面掀开了<<his>>的<<print setup.npcClothesSets.find(item => item.name === _kylar.clothes.set).clothes.lower.desc>>，露出了
+			<<else>>
+				<<He>>脸红了，但是毫不犹豫地脱下了<<his>>的<<print setup.npcClothesSets.find(item => item.name === _kylar.clothes.set).clothes.lower.desc>>，露出
+			<</if>>
+			<<print $daily.kylar.underwear.desc>>。
+			<br><br>
+
+			"不，不要告诉任何人，"<<he>>说，"这只给你一个人看。"
+			<<if $promiscuity gte 35 and !$kylarSeen.includes("commando") and ($whitneypantiescheck gte 1 or $exhibitionism gte 75 or $kylarSeen.includes("home")) and ($location is "park" or $location is "school")>>
+				<<set _lewdIdea to true>>
+			<</if>>
+		<</if>>
+	<</addinlineevent>><<addinlineevent "kylarFlirtThigh">>
+		你把手放在凯拉尔的大腿内侧，<<He>>的腿微微分开，方便你能更好地接近。
+	<</addinlineevent>><<addinlineevent "kylarFlirtEar">>
+		你对着凯拉尔的耳朵吹气，作为回应，<<He>>也微笑着向你吹了一口气。
+		<<if random(0,1)>>
+			"在我的梦中，你的耳朵非常敏感，"<<he>>说道，"现实中似乎不这样。"
+			<<gstress>><<stress 1>>
+			<br>
+		<</if>>
+	<</addinlineevent>><<addinlineevent "kylarFlirtBonk">>
+		你靠向凯拉尔耳边想低声说些挑逗的话，但<<He>>在同一时间转过头靠过来，导致你们的头撞在了一起。
+		<<gpain>><<pain 3>>
+		<br><br>
+		<<He>>赶忙检查了一下，以确保你没事，然后你们都咯咯笑了起来。
+	<</addinlineevent>><<addinlineevent "kylarFlirtStare">>
+		你用手托着凯拉尔的脸颊，凝视着<<his>>的双眼。<<He>>看了你几秒钟，然后把你的手移动到<<his>>的唇边，亲吻你的手掌。
+	<</addinlineevent>><<addinlineevent "kylarFlirtKink">>
+		<<set _kinkType to random(1,11)>>
+		<<if _kinkType is 11 and $sadism_level gte 1>>
+			<<if $sadism_level gte 3>>
+				你悄悄对凯拉尔说你真的很喜欢伤害别人。当你撞到或咬到某人，听到他们痛苦地呻吟时，你会感到非常兴奋。即使在性爱之外，在和他人的打斗中，它也会让你充满反常的喜悦。凯拉尔张开嘴巴，但又合上了。<<He>>没有回应。
+			<<else>>
+				你对凯拉尔低声说你喜欢伤害别人。你对此感到内疚，但考虑到你曾经遭遇过的虐待，把这种痛苦再施加给别人让你非常愉悦。"如果你愿意，我可以在做爱时把刀借给你，"<<he>>说。你稍微考虑了下自己是不是真的打算做到这种程度。
+				<<gstress>><<stress 3>>
+				<br>
+			<</if>>
+		<<elseif _kinkType is 10 and $orgasmtrait gte 1>>
+			你悄悄对凯拉尔说，你无法只满足于一次高潮。你想要两次，三次，更多次。如果你有时间的话，连续几十次高潮都行。要是你吃得消，那就连续上百次。"我可以做到，"<<he>>说，"我向你承诺。"
+		<<elseif _kinkType is 9 and $choketrait gte 1>>
+			你悄悄对凯拉尔说，你真的很喜欢被掐脖子，越紧越好。当你无法呼吸时，那种濒临窒息的感觉会让你疯狂。"如果你愿意，我会做的，"<<he>>说，"但我不想伤害你。"
+		<<elseif _kinkType is 8 and $ejactrait gte 1>>
+			你悄悄对凯拉尔说，你喜欢全身被挂满淫液。被下流的液体浸湿的感觉在某种程度上会让你平静下来。它让你感到安全，被需要。这证明你还活着——而且它的味道也……很好。
+			<<if _kylar.penis isnot "none">>
+				"我可以做到这一点，"<<he>>说，"给我几个……小时？"
+			<<else>>
+				<<He>>似乎很沮丧。
+			<</if>>
+		<<elseif _kinkType is 7 and $molesttrait gte 1>>
+			你对凯拉尔低声说，尽管你希望自己不要被骚扰，但你内心深处的某一部分却会对此感到兴奋。一想到完全陌生的人会因为你的身体而做出这样的事情，就让你浑身乱颤。凯拉尔没有回应。
+			<<gksuspicion>><<npcincr Kylar rage 1>>
+			<br>
+		<<elseif _kinkType is 6 and $rapetrait gte 1>>
+			你对凯拉尔低声说，尽管你讨厌镇上所有的强奸犯，但你内心深处的某一部分却会对他们感到兴奋。不知怎么的，被人进行强迫行为的感觉不像以前那么可怕了。凯拉尔没有回应。
+			<<gksuspicion>><<npcincr Kylar rage 1>>
+			<br>
+		<<elseif _kinkType is 5 and $bestialitytrait gte 1>>
+			你对凯拉尔低声说，你发现和<<if $bestialitydisable is "f">>野兽<<else>>怪物<</if>>做爱的感觉和人类比起来也差不多，有时候还更舒服。它们本能驱动的兽性交配让你浑身乱颤。凯拉尔无言以对。
+			<<gksuspicion>><<npcincr Kylar rage 1>>
+			<br>
+		<<elseif _kinkType is 4 and $tentacletrait gte 1>>
+			你对凯拉尔低声说，你幻想过被一群触手纠缠，然后被它们为所欲为。它们在你身上蠕动，狠狠地插入你，缠绕捆绑着你，用你身上的每一个洞来发泄它们的原始欲望。"我真希望我能为你长出触手，"<<he>>说，<<He>>停下来想了一会儿，然后遗憾地摇了摇头。
+		<<elseif _kinkType is 3 and $voretrait gte 1>>
+			你悄悄地对凯拉尔说，你被各种各样的生物吞噬过，但你并不讨厌。只要你的身体一有动作，软肉都会在你的皮肤上游走，抚摸你身体的每一寸，每当你想起它时，都会起鸡皮疙瘩。凯拉尔似乎不知道该说什么。
+		<<elseif _kinkType is 2 and $masochism_level gte 1>>
+			<<if $masochism_level gte 3>>
+				你悄悄对凯拉尔说你真的很喜欢被伤害。一想到有人把你当物品使用，扇你耳光，打你屁股，殴打你，留下你在地板上颤抖，你就会兴奋到发狂。"我想让你开心，"<<he>>犹豫着说，"但我……我觉得我做不到那么过分，对不起。"
+			<<else>>
+				你悄悄对凯拉尔说你喜欢被伤害。一想到有人扇你耳光，或者用指甲抓你，你就会脸红。"如果你愿意，我会做的，"<<he>>有些犹豫，"但我不想伤害你。"
+			<</if>>
+		<<elseif _kinkType is 1 and $milkdranktrait gte 1>>
+			你悄悄对凯拉尔说你真的很喜欢母乳。除了吮吸别人乳房的快感外，吸出的母乳总是温热的，浓稠的，而且还美味可口。
+			<<if $trauma gte ($traumamax / 5) * 3>>
+				有时候，在你吮吸时，她们还会抚摸你的后脑勺，这让你感觉自己是被需要的。就像你和……你自己切断了联系。
+			<</if>>
+			<<if _kylar.pronoun is "m">>
+				<<He>>似乎很沮丧。
+			<<else>>
+				"我可以做到的，"<<he>>说，"一定有办法让我也能挤出奶。"
+				<<switch _kylar.breastsize>>
+					<<case 0 1 2>><<He>>开始焦虑地用双手拍打着<<his>>的衬衫，就在<<his>>乳头的位置。"我可能需要先把胸变、变大一点……"
+					<<case 3 4 5>><<He>>在公开场合下把手放进<<his>>的衬衫里，开始摩擦<<his>>的_kylar.breastsdesc，"也许只要按摩足够长的时间，奶，奶水就会流出来？"
+					<<case 6 7 8>><<He>>在公开场合下把手放进<<his>>的衬衫里，开始摩擦<<his>>的_kylar.breastsdesc，"如果我继续努力的话，我相信我肯定能把奶，奶水弄出来！"
+					<<case 9 10 11 12>><<He>>在公开场合下把手放进<<his>>的衬衫里，开始揉捏<<his>>的_kylar.breastsdesc，"这、这样做下去的话肯定会对奶水有用的！"
+				<</switch>>
+			<</if>>
+		<<else>>
+			你悄悄对凯拉尔诉说着你那些深埋的幻想。
+			"<<print either("在婚前做爱吗？太，太淫荡了。","我可以做到。","我想我能做到。","你什，什么？","那种事……嗯，很正常。","你也这样认为？！","也许有一天我们可以一起。")>>"<<he>>脸红了起来。
+		<</if>>
+	<</addinlineevent>>
+<<else>>
+	<<if $genderknown.includes("Kylar") and !$worn.lower.type.includes("naked")>>
+		<<addevent "kylarFlirtEventClothesPull">> <!-- defined in Widgets Kylar -->
+	<</if>>
+	<<addinlineevent "kylarTeasePat">>
+		你拍了拍凯拉尔的头。每次你的手碰到头顶时，<<He>>都会瑟缩一下，就好像被电击中了一般。当你停下来的时候，<<he>>低声请求，"还，还想要。"
+	<</addinlineevent>><<addinlineevent "kylarTeaseWhisper">>
+		你对着凯拉尔耳边低声说着挑逗的话语，<<He>>红着脸移开了视线。
+	<</addinlineevent>><<addinlineevent "kylarTeaseCheek">>
+		你舔了一下凯拉尔的脸颊。<<He>>瞬间紧张起来，但却伸出手捂住了被你舔过的位置。
+	<</addinlineevent>><<addinlineevent "kylarTeaseUndies">>
+		你要求看凯拉尔的内裤。"还是说，"你戏谑地说，"你根本没穿？"<<He>>的身体轻颤。
+	<</addinlineevent>><<addinlineevent "kylarTeaseThigh">>
+		你的手伸进凯拉尔大腿内侧，<<He>>吓了一跳，瞬间合上腿夹住了你的手。"对，对不起！"<<He>>大叫，再次分开了腿。
+		<<gpain>><<pain 3>>
+		<br>
+	<</addinlineevent>><<addinlineevent "kylarTeaseEar">>
+		你对着凯拉尔的耳朵吹气，<<His>>呼吸紊乱了一会儿，让你觉得很有趣。
+	<</addinlineevent>><<addinlineevent "kylarTeaseBonk">>
+		你对着凯拉尔耳边低声说着挑逗的话语，<<He>>呜咽出声。
+	<</addinlineevent>><<addinlineevent "kylarTeaseStare">>
+		你用手托着凯拉尔的脸颊，凝视着<<his>>的双眼，<<He>>也看向你，就像面对着车灯的惊慌的小鹿。你可以感觉到<<him>>在颤抖，在<<him>>被吓跑之前，你松开了手。
+	<</addinlineevent>><<addinlineevent "kylarTeaseKink">>
+		<<set _kinkType to random(1,11)>>
+		<<if _kinkType is 11 and $sadism_level gte 1>>
+			<<if $sadism_level gte 3>>
+				你悄悄对凯拉尔说你真的很喜欢伤害别人。当你撞到或咬到某人，听到他们痛苦地呻吟时，你会感到非常兴奋。即使在性爱之外，在和他人的打斗中，它也会让你充满反常的喜悦。<<He>>看向别处，满头大汗。
+			<<else>>
+				你对凯拉尔低声说你喜欢伤害别人。你对此感到内疚，但考虑到你曾经遭遇过的虐待，把这种痛苦再施加给别人让你非常愉悦。<<he>>移开视线，满脸通红。
+			<</if>>
+		<<elseif _kinkType is 10 and $orgasmtrait gte 1>>
+			你悄悄对凯拉尔说，你无法只满足于一次高潮。你想要两次，三次，更多次。如果你有时间的话，连续几十次高潮都行。要是你吃得消，那就连续上百次。<<he>>移开视线，满脸通红。
+		<<elseif _kinkType is 9 and $choketrait gte 1>>
+			你悄悄对凯拉尔说，你真的很喜欢被掐脖子，越紧越好。当你无法呼吸时，那种濒临窒息的感觉会让你疯狂。<<he>>移开视线，满脸通红。
+		<<elseif _kinkType is 8 and $ejactrait gte 1>>
+			你悄悄对凯拉尔说，你喜欢全身被挂满淫液。被下流的液体浸湿的感觉在某种程度上会让你平静下来。它让你感到安全，被需要。这证明你还活着——而且它的味道也……很好。
+			<<He>>移开视线，<<print (_kylar.penis isnot "none" ? "满脸通红" : "皱着眉头")>>。
+		<<elseif _kinkType is 7 and $molesttrait gte 1>>
+			你对凯拉尔低声说，尽管你希望自己不要被骚扰，但你内心深处的某一部分却会对此感到兴奋。一想到完全陌生的人会因为你的身体而做出这样的事情，就让你浑身乱颤。<<He>>看向别处，眉头紧皱。
+			<br><br>
+		<<elseif _kinkType is 6 and $rapetrait gte 1>>
+			你对凯拉尔低声说，尽管你讨厌镇上所有的强奸犯，但你内心深处的某一部分却会对他们感到兴奋。不知怎么的，被人进行强迫行为的感觉不像以前那么可怕了。<<He>>看向别处，眉头紧锁。
+			<br><br>
+		<<elseif _kinkType is 5 and $bestialitytrait gte 1>>
+			你对凯拉尔低声说，你发现和<<print ($bestialitydisable is "f" ? "野兽" : "怪物")>>做爱的感觉和人类比起来也差不多，有时候还更舒服。它们本能驱动的兽性交配让你浑身乱颤。<<He>>惊讶地睁大眼睛，移开视线。
+			<br><br>
+		<<elseif _kinkType is 4 and $tentacletrait gte 1>>
+			你对凯拉尔低声说，你幻想过被一群触手纠缠，然后被它们为所欲为。它们在你身上蠕动，狠狠地插入你，缠绕捆绑着你，用你身上的每一个洞来发泄它们的原始欲望。<<he>>移开视线，满脸通红。
+		<<elseif _kinkType is 3 and $voretrait gte 1>>
+			你悄悄地对凯拉尔说，你被各种各样的生物吞噬过，但你并不讨厌。只要你的身体一有动作，软肉都会在你的皮肤上游走，抚摸你身体的每一寸，每当你想起它时，都会起鸡皮疙瘩。<<He>>惊讶地睁大眼睛，移开视线。
+		<<elseif _kinkType is 2 and $masochism_level gte 1>>
+			<<if $masochism_level gte 3>>
+				你悄悄对凯拉尔说你真的很喜欢被伤害。一想到有人把你当物品使用，扇你耳光，打你屁股，殴打你，留下你在地板上颤抖，你就会兴奋到发狂。<<He>>看向别处，眉头紧皱。
+			<<else>>
+				你悄悄对凯拉尔说你喜欢被伤害。一想到有人扇你耳光，或者用指甲抓你，你就会感到兴奋。<<he>>移开视线，满脸通红。
+			<</if>>
+		<<elseif _kinkType is 1 and $milkdranktrait gte 1>>
+			你悄悄对凯拉尔说你真的很喜欢母乳。除了吮吸别人乳房的快感外，吸出的母乳总是温热的，浓稠的，而且还美味可口。
+			<<if $trauma gte ($traumamax / 5) * 3>>
+				有时候，在你吮吸时，她们还会抚摸你的后脑勺，这让你感觉自己是被需要的。就像你和……你自己切断了联系。
+			<</if>>
+			<<He>>移开视线，<<print (_kylar.pronoun is "m" ? "眉头紧皱" : "满脸通红")>>。
+		<<else>>
+			你悄悄对凯拉尔诉说着你深埋的幻想。<<He>>移开视线，<<print either("满脸通红","眉头紧皱","惊讶地睁大眼睛","额头直冒冷汗","忍不住偷笑")>>。
+		<</if>>
+	<</addinlineevent>>
+<</if>>
+<<runeventpool>>
+<<promiscuity1>>
+
+<<if ($location is "park" or $bus is "starfish") and _kylar.love gte 80 and _kylar.lust gte 80 and $daily.kylar.invite isnot "home">>
+	<<set $daily.kylar.invite to "home">>
+	凯拉尔盯着你，眼里充满着欲望，视线好想要融化了一般。"你，你愿意，"<<he>>寻找着措辞，然后移开了视线，"你愿意和我去一个更隐蔽的地方，做，做一些事情吗？"
+	<br><br>
+
+	<<link [[邀请凯拉尔去孤儿院 (0:15)|Kylar Invite]]>><<unset $kylar_action>><<pass 15>><</link>><<promiscuous1>>
+	<br>
+	<<link [[拒绝|Kylar Invite Decline]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>><<llove>><<gksuspicion>>
+	<br>
+<<else>>
+	<<kylaroptions>>
+<</if>>

@@ -1,0 +1,54 @@
+:: Kylar Bathroom Sex Finish []
+<<set _kylar to statusCheck("Kylar")>>
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<npcincr Kylar lust -20>>
+	凯拉尔靠在你身上，凝视着你的眼睛。"谢谢你，"<<he>>说，"谢谢你成全我。"<<His>>的头发蓬乱，但<<he>>毫不在意。
+	<<lllust>>
+	<br><br>
+
+	<<if $orgasmcurrent is 0 and !playerChastity()>>
+		<<if _kylarStatus.includes("Rage")>>
+			几秒钟后，<<he>>跪到了你面前。"你没有高潮，"<<he>>低声说道，"是……是我做得不够好吗？"<<He>>猛烈地摇头，"我会补偿的，我会好好表现的。"
+		<<else>>
+			几秒钟后，<<he>>跪到了你面前。"你还没到高潮，"<<he>>喃喃地说，"这对你不公平。是你邀请我的，我来弥补你。"
+		<</if>>
+		<br><br>
+		<<kylarFinish>>
+	<</if>>
+
+<<elseif $enemyhealth lte 0>>
+	"呜！"凯拉尔瘫倒在厕所门上，"我，我做错什么了吗？"
+	<<lllove>><<npcincr Kylar love -3>>
+	<br><br>
+	<<tearful>>你站起来，从<<him>>身边走开了。
+	<br><br>
+
+<<else>>
+	"我，我做错什么了吗？"凯拉尔一边问，一边退开了。
+	<br><br>
+	<<tearful>>你站了起来。
+	<br><br>
+<</if>>
+
+<<clotheson>>
+<<endcombat>>
+<<npc Kylar>><<person1>>
+
+<<if Time.hour isnot 12>>
+	<<He>>看了看<<his>>的手表。"我得走了，"<<he>>说，"我上课快要迟到了。"<<He>>在离开的时候仍然时不时回头看你一眼。
+	<<if $kylarBathroomGender isnot _kylar.pronoun and random(1,100) lte 75>>
+		听到大厅里传来的笑声，<<He>>退缩了。有人看到<<him>>从<<print ($kylarBathroomGender is "m" ? "男" : "女")>>卫生间出来。
+	<</if>>
+	<br><br>
+
+	<<set _destination to ($kylarBathroomGender is "m" ? "School Boy's Toilets" : "School Girl's Toilets")>>
+	<<link [[继续|_destination]]>><<endevent>><</link>>
+
+<<else>>
+	"我们回<<print ($weather is "rain" or $weather is "snow" ? "图书馆" : "操场")>>吧，"<<he>>说。
+	<br><br>
+	<<link [[继续|Kylar Bathroom Return]]>><</link>>
+<</if>>
+<<unset $kylarBathroomGender>>
+<br>

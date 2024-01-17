@@ -1,0 +1,55 @@
+:: School Pool Locker Argue []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我，我没有偷任何东西，"你恳求道，"真的。"
+<<elseif $speech_attitude is "bratty">>
+	"你有什么证据，" 你说道。
+<<else>>
+	"你怎么知道我就是那个小偷？" 你说道。
+<</if>>
+<br><br>
+梅森似乎没被骗到。
+<<if $exposed gte 1>>
+	<<if $genderknown.includes("Mason")>>
+		<<if $player.gender is "m" and $changingRoomGender is "girls">>
+			"你，你就不应该进女更衣室，更不应该穿成那样。快去换衣服。"
+		<<elseif $player.gender is "f" and $changingRoomGender is "boys">>
+			"你，你就不应该进男更衣室，更不应该穿成那样。快去换衣服。"
+		<<else>>
+			"我，我必须告诉校长，"<<he>>回答道，"你该把衣服穿上。"
+		<</if>>
+	<<else>>
+		<<if $player.gender_appearance is "m" and $changingRoomGender is "girls">>
+			"你，你就不应该进女更衣室，更不应该穿成那样。快去换衣服。"
+		<<elseif $player.gender_appearance is "f" and $changingRoomGender is "boys">>
+			"你，你就不应该进男更衣室，更不应该穿成那样。快去换衣服。"
+		<<else>>
+			"我，我必须告诉校长，"<<he>>回答道，"你该把衣服穿上。"
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $genderknown.includes("Mason")>>
+		<<if $player.gender is "m" and $changingRoomGender is "girls">>
+			"首先，你根本就不应该进女更衣室。"
+		<<elseif $player.gender is "f" and $changingRoomGender is "boys">>
+			"首先，你根本就不应该进男更衣室。"
+		<<else>>
+			"我必须告诉校长，"<<he>>回答道，"希望<<nnpc_he Leighton>>能对你手下留情。"
+		<</if>>
+	<<else>>
+		<<if $player.gender_appearance is "m" and $changingRoomGender is "girls">>
+			"别让我再在女更衣室见到你。"
+		<<elseif $player.gender_appearance is "f" and $changingRoomGender is "boys">>
+			"别让我再在男更衣室见到你。"
+		<<else>>
+			"我必须告诉校长，"<<he>>回答道，"希望<<nnpc_he Leighton>>能对你手下留情。"
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+<<He>>回去上<<his>>的课了。
+<br><br>
+
+<<endevent>>
+<<destination_pool>>

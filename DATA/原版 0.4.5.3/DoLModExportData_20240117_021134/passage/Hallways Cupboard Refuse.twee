@@ -1,0 +1,27 @@
+:: Hallways Cupboard Refuse []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"抱歉，"你说，"我对此不感兴趣。"
+<<elseif $speech_attitude is "bratty">>
+	"想得美，"你说，"滚。"
+<<else>>
+	“你不太行，”你说。
+<</if>>
+<br><br>
+
+<<if $rng gte 51>>
+	<<person>>想了想，转身离开了你。<<He>>咕哝着什么"玩我呢"。
+	<br><br>
+
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<else>>
+	"不。"<<he>>冷笑道，"我可不是你可以随便玩弄的人。"<<He>>用力拽着你的手臂。
+	<<gpain>><<pain 1>><<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[再一次拒绝|Hallways Cupboard Refuse 2]]>><<detention 1>><</link>><<gdelinquency>>
+	<br>
+	<<link [[屈服|Hallways Cupboard Sex]]>><<set $sexstart to 1>><<set $phase to 1>><</link>><<promiscuous1>>
+	<br>
+<</if>>

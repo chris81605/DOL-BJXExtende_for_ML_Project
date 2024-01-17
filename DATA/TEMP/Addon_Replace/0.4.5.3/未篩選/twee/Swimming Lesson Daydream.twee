@@ -1,0 +1,67 @@
+:: Swimming Lesson Daydream []
+<<set $outside to 0>><<set $location to "pool">><<schooleffects>><<water>><<effects>>
+
+<<if $trauma gte (($traumamax / 10) * 7)>>
+	你全神贯注的警惕着周围，害怕会因为一个错误的举动而导致全班人都来调戏你。
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	你专注于你自己的想法，试图控制住不断蔓延的焦虑。
+<<else>>
+	<<if $swimall is 1>>
+		尽管每个人都很容易被骚扰，但你并没有真正的去注意听这一课，而是懒洋洋地划着水并炫耀你的<<lewdness>>。你想知道是否有人在乎它。
+	<<elseif $exposed gte 1>>
+		尽管你很容易被袭击，但你并没有吸取到教训，而是懒洋洋地划着水，以此来掩盖你的<<lewdness>>。
+	<<elseif $exposed lte 1>>
+		你并没有认真听课，而是无所事事地划水，并开始思考放学后要做些什么。
+	<</if>>
+<</if>>
+<br><br>
+
+<<status 1>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	<<if $swimall is 1>>
+		当下课的铃声响起时，你爬出了游泳池。尽管每个人都是赤身裸体的状态，但似乎没有人关心这个。只有梅森会在每个学生经过的时候递上毛巾并尽量避免目光接触。
+		<br><br>
+	<<elseif $exposed gte 1>>
+		当下课的铃声响起时，你继续待在泳池中以等待其他学生的离开，但有一些学生依旧徘徊不前。
+		毫无疑问，那些家伙希望在你爬出来的时候能看到独特的风景线，但梅森把那些家伙都赶走了，以此来为你留下一些隐私。
+		<br><br>
+	<<elseif $exposed lte 0>>
+		当下课的铃声响起时，你爬出了游泳池。
+		<br><br>
+	<</if>>
+	<<if $exposed lte 0>>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+		<br>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<maleicon>><<link [[拿一条毛巾裹住身体并进入男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+		<br>
+		<<femaleicon>><<link [[拿一条毛巾裹住身体并进入女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - ($allure / 2))>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<<elseif $exposed lte 0>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - ($allure / 10))>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<</if>>
+<</if>>

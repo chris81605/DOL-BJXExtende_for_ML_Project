@@ -1,0 +1,26 @@
+:: Sydney Shopping Hairdressers []
+<<set $outside to 0>><<set $location to "shopping_centre">><<effects>><<run statusCheck("Sydney")>>
+<<set $daily.sydney.shopHair to true>>
+你和悉尼走进理发店。你们可以在这里理发或者染发，这里还有两张空位。
+<br><br>
+<<if !$sydneySeen.includes("hairchange")>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<Hes>>兴奋得几乎跳了起来。"我有几次想染发或做个发型，我们今天就要在这里做吗？"
+	<<else>>
+		<<He>>看起来很焦虑，"约旦<<nnpc_Brother "Jordan">>总是夸我的头发漂亮，所以我从来没有染过或剪过头发。但是，如果你想让我……"
+	<</if>>
+<<elseif $NPCName[$NPCNameList.indexOf("Sydney")].hairColour isnot "strawberryblond">>
+	<<He>>顿了顿，"我们要把我的染发剂去掉吗？"
+<<else>>
+	<<He>>笑了笑，"让专业人士做头发让我感到奇怪的放松。我喜欢这里。"
+<</if>>
+<br><br>
+<<if $money gte 3000>>
+	<<link [[找座位坐下|Sydney Hairdressers Sit]]>><</link>>
+	<br>
+<<else>>
+	<span class="purple">你的钱不够。</span>
+<</if>>
+<br>
+<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<pass 1>><</link>>
+<br>

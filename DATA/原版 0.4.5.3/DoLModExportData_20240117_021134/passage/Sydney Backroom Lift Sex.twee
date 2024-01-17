@@ -1,0 +1,101 @@
+:: Sydney Backroom Lift Sex []
+<<run statusCheck("Sydney")>>
+
+<<if $sexstart is 1>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 600>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<set $enemyarousalmax += 100>>
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+
+	<<if $phase is 1>>
+		<<set $position to "doggy">><<set $position_lock to 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<if $player.penisExist and (!$player.vaginaExist or random(1))>>
+				<<set _sydneyOralPenis to true>>
+				<<He>>慢慢舔着你的<<penis>>，用舌头画着圈，舌尖停在了你<<penis>>的根部。
+			<<else>>
+				<<His>>来回舔弄你的阴唇，轻轻摩擦着你的小穴。你感到<<he>>的舌尖正拨弄着你的阴蒂。
+			<</if>>
+			<<promiscuity1>>
+		<<elseif _sydneyStatus.includes("pure")>>
+			<<if $player.penisExist and (!$player.vaginaExist or random(1))>>
+				<<set _sydneyOralPenis to true>>
+			<</if>>
+			<<His>>用舌头戳了戳你的<<genitals>>，又马上缩了回去。稍微犹豫了一会后，又戳了戳。
+			<br><br>
+		<<else>>
+			<<if $player.penisExist and (!$player.vaginaExist or random(1))>>
+				<<set _sydneyOralPenis to true>>
+				<<He>>闭上眼睛靠近你，舌头在你的龟头上绕着圈。
+			<<else>>
+				<<He>>闭上眼睛靠近你，用舌头舔着你的<<pussy>>。
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<if $speech_attitude is "meek">>
+			你张开双腿，让<<him>>更好地进入。
+		<<elseif $speech_attitude is "bratty">>
+			你吻上了<<his>>的嘴唇，以此鼓励着<<him>>。
+		<<else>>
+			你往后靠，让<<him>>随心所欲。
+		<</if>>
+		<br><br>
+
+		<<if _sydneyOralPenis>>
+			<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+		<<else>>
+			<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+		<</if>>
+		<<if $NPCList[0].penis isnot "none">>
+			<<set $NPCList[0].penis to "othermouth">>
+		<</if>>
+		<<if $NPCList[0].vagina isnot "none">>
+			<<set $NPCList[0].vagina to "othermouth">>
+		<</if>>
+		<<set $NPCList[0].location.head to "genitals">>
+	<<else>>
+		<<set $position to "missionary">><<set $position_lock to 1>>
+		<<if $NPCList[0].penis isnot "none">>
+			<<he>>一边任由你上下舔着<<his>>的<<penis>>，一边在你身上改变着姿势。
+			<<promiscuity1>>
+
+			<<npcoral>>
+		<<elseif $facesitdisable is "f">>
+			<<he>>一边任由你舔着<<his>>的小穴，一边骑在了你的脸上。
+			<<promiscuity1>>
+
+			<<set $NPCList[0].vagina to "facesit">><<set $NPCList[0].location.genitals = "head">>
+			<<set $mouthuse to "facesit">><<set $mouthstate to "vagina">><<set $mouthtarget to 0>>
+		<<else>>
+			你舔舐着<<his>>的小穴。
+			<<promiscuity1>>
+			<<set $NPCList[0].vagina to "mouth">><<set $NPCList[0].location.genitals to "head">>
+			<<set $mouthuse to "othervagina">><<set $mouthstate to "othervagina">><<set $mouthtarget to 0>>
+		<</if>>
+	<</if>>
+<</if>>
+
+<<set $enemyanger to -10>>
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Sydney Backroom Lift Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sydney Backroom Lift Sex]]>><</link>></span><<nexttext>>
+<</if>>

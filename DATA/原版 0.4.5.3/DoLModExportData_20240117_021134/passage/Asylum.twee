@@ -1,0 +1,198 @@
+:: Asylum []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+你在森林的深处的精神病院里。这座建筑已经有一百多岁了，还保留着当年的模样。保安在建筑物和围栏之间的空地巡逻。
+<<if $asylumstate is "sleep">>
+	你应该在你的病房里待着。
+	<br><br>
+<<else>>
+	其他病人要么在娱乐室里放松，要么在外面锻炼。大部分人都独来独往。
+	<<if $o_long_and_beautiful gte 1 and $o_long_and_beautiful lte 7 and $rng % 4 == 0>>
+		一个长发凌乱的苗条女孩<<print either("沿着走廊离去，", "进入了一个私人房间，", "进入了病房，", "走进了花园里，")>>，从视野里消失了。
+	<</if>>
+	<br><br>
+	<<asylumstats>>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutasylum>>
+<<elseif $daily.eden.distract gte 1 and Time.hour gte 21 and $daily.eden.distract isnot 4>>
+	一声震耳欲聋的爆炸巨响从远处传来，病人们顿时陷入恐慌，保安们也赶忙去调查爆炸。
+	<br><br>
+	你趁机赶紧爬上旁边的围栏。爬到一半的时候，你回头瞥了一眼。
+	<<if $daily.eden.distract is 2>>
+		<<npc Eden>><<person1>>
+		<<unset $eden_asylum_fence>>
+		这附近的保安已经全部被调走了，<span class="green">警卫塔的探照灯似乎也坏了。</span>你翻过围栏，不一会儿就碰到了伊甸。<<He>>抓住你的胳膊，带你回到了<<He>>的小屋。
+		<br><br>
+		<<link [[继续|Eden Asylum Rescue]]>><<pass 10>><</link>>
+	<<else>>
+		这附近的保安已经全部被调走了，<span class="red">但警卫塔的探照灯还亮着。</span>一束强光打在你身上，你本能地用手遮光。你听到一声哨响，随后你的肩膀传来一阵剧痛。你失去了意识，随后落在了地上。
+		<br><br>
+		<<link [[继续|Eden Asylum Fail]]>><<pass 30>><</link>>
+	<</if>>
+<<elseif $asylumstate is "firsttreatment" and $daily.asylumTreatment1 isnot 1>>
+	<<set $daily.asylumTreatment1 to 1>>
+	<<generateDoctor 1>><<person1>><<person>>接近了你。<<Hes>>是个护士。
+	<br><br>
+	<<asylumoptions>>
+	"医生说该给你治疗了，"<<he>>说道。"跟我来吧。"
+	<br><br>
+	<<endevent>>
+	<<asylumtreatments>>
+<<elseif $asylumstate is "secondtreatment" and $daily.asylumTreatment2 isnot 1>>
+	<<set $daily.asylumTreatment2 to 1>>
+	<<generateDoctor 1>><<person1>><<person>>接近了你。<<Hes>>是个护士。
+	<br><br>
+	<<asylumoptions>>
+	"医生说该给你治疗了，"<<he>>说道。"跟我来吧。"
+	<br><br>
+	<<endevent>>
+	<<asylumtreatments>>
+<<elseif $asylumstate is "assessment" and $daily.asylumAssessment isnot 1>>
+	<<set $daily.asylumAssessment to 1>>
+	<<generateDoctor 1>><<person1>><<person>>接近了你。<<Hes>>是个护士。
+	<br><br>
+	<<asylumoptions>>
+	"医生说该给你进行精神评估了，"<<he>>说道。"跟我来吧。"
+	<br><br>
+	<<endevent>>
+	<<asylumassessment>>
+<<elseif $asylumstate is "exercise" and $daily.asylumExcercise isnot 1>>
+	<<set $daily.asylumExcercise to 1>>
+	<<generateDoctor 1>><<person1>><<person>>接近了你。<<Hes>>是一名护工。
+	<br><br>
+	<<asylumoptions>>
+	"该锻炼了，"<<he>>说道，"医生在等你。"
+	<br><br>
+	<<endevent>>
+	<<npc Harper>><<person1>>
+	医生正在外面等着。其他病人在<<him>>身旁排队。<<Hes>>拿着一个哨子。"你们的每日锻炼时间到了，我吹第一下口哨时，你们就要绕着空地跑圈，我没吹第二下就不许停。"
+	<br><br>
+	<<He>>吹响了口哨，你便开始跑。步伐并不是很快，但护工一直跟在最后，斥责那些掉队的人。
+	<<gathletics>><<athletics 3>><<physique 3>><<pass 30>>
+	<br><br>
+	<<He>>又吹了一声，队伍停了下来。有几个人坐在了地上。"还没完呢，"<<he>>接着说道。
+	<br><br>
+	<<link [[继续|Asylum Shower]]>><</link>>
+	<br>
+<<elseif Time.hour is 22>>
+	<<generateDoctor 1>><<person1>>"到睡觉时间了，" 一个护士大声宣布： "所有人，回到你们的病房。"
+	<br><br>
+	<<asylumicon  "cell">><<link [[去病房 (0:02)|Asylum Cell]]>><<pass 2>><<endevent>><</link>>
+	<br>
+	<<refuseicon>><<link [[躲藏 (1:00)|Asylum Hide]]>><<pass 60>><</link>>
+	<br>
+<<elseif $asylumstate is "sleep">>
+	<<asylumicon "door">><<link [[员工用门|Asylum Staff]]>><</link>>
+	<br>
+	<<asylumicon  "cell">><<link [[病房|Asylum Cell]]>><</link>>
+	<br>
+<<elseif numberOfEarSlime() and !$daily.earSlimeAsylum and random(0,100) gte 92>>
+	<<set $daily.earSlimeAsylum to true>>
+	<<if earSlimeMakingMundaneRequests()>>
+		<<set _asylumEvents to [
+			["出去锻炼","Asylum Exercise"],
+			["社交","Asylum Socialise"],
+			["学习","Asylum Study"],
+		]>>
+		<<if Time.hour is 6>>
+			<<run _asylumEvents.push(["吃早饭","Asylum Breakfast"])>>
+		<</if>>
+		<<set $asylumEarSlimeEvent to _asylumEvents.random()>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">你感觉到你脑袋里的史莱姆在命令你<<print $asylumEarSlimeEvent[0]>>。</span>它承诺如果你遵守的话，就给予你奖励<<if $earSlime.startedThreats>>，如果你不遵守的话，就要承担相应的后果<</if>>。
+		<br><br>
+		<<set _nextPassage to $asylumEarSlimeEvent[1]>>
+		<<link [[服从|_nextPassage]]>>
+			<<if ($exposed is 1 and $exhibitionism lt 35) or ($exposed is 2 and $exhibitionism lt 75)>>
+				<<set $desperateaction to "耳中史莱姆命令你这么做">>
+			<</if>>
+			<<switch $asylumEarSlimeEvent[1]>>
+				<<case "Asylum Breakfast">><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>>
+				<<case "Asylum Exercise">><<tiredness 3>><<stress -6>><<pass 30>>
+				<<case "Asylum Socialise">><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>>
+				<<case "Asylum Study">><<pass 50>><<schoolskill>>
+			<</switch>>
+			<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>>
+			<<unset $asylumEarSlimeEvent>>
+		<</link>><<gcorruption>><<lpain>><<lltrauma>><<llstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[违抗|Asylum Mundane Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[忽略|Asylum]]>><<unset $asylumEarSlimeEvent>><</link>>
+		<</if>>
+	<<else>>
+		<<generate1>><<person1>>一个附近的病人经过你身边。<<He>>冲你点点头，继续离开了。
+		<br><br>
+		<span class="lewd">你感受到脑中的史莱姆命令你对<<him>>献上自己。</span>它承诺如果你遵守的话，就给予你奖励，如果你不遵守的话，就要承担相应的后果。
+		<br><br>
+
+		<<if $promiscuity gte 55 and $submissive gte 1900>>
+			<<link [[心甘情愿地服从|Asylum Patient Slime Submit willingly]]>><<corruption 3>><<pain -8>><<stress -12>><<trauma -24>><<sub 2>><</link>><<promiscuous4>><<ggcorruption>><<llpain>><<llltrauma>><<llstress>>
+			<br>
+		<</if>>
+		<<link [[服从|Asylum Patient Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<link [[违抗|Asylum Patient Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<dressasyouwereicon>><<link [[索要衣物|Asylum Towels]]>><<trauma 6>><<stress 3>><<suspicion 1>><</link>><<gsuspicion>><<gtrauma>><<gstress>>
+		<br>
+	<</if>>
+	<<if $daily.eden.distract is 1>>
+		<<investigateicon>><<link [[寻找配电室|Asylum Breaker]]>><</link>>
+		<br>
+	<</if>>
+	<<if $daily.eden.asylumDisarm is 1>>
+		<<investigateicon>><<link [[寻找警报系统|Asylum Alarm]]>><</link>>
+		<br>
+	<</if>>
+	<<if $exposed gte 2 and $exhibitionism gte 75>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[吃早饭 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<exhibitionist5>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[去外面锻炼 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><<pass 30>><</link>><<exhibitionist5>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[社交 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<exhibitionist5>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[学习 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<exhibitionist5>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[花园 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<<elseif $exposed gte 1 and $exhibitionism gte 35>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[吃早饭 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<exhibitionist3>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[去外面锻炼 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><<pass 30>><</link>><<exhibitionist3>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[社交 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<exhibitionist3>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[学习 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<exhibitionist3>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[花园 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<<elseif $exposed is 0>>
+		<<if Time.hour is 6>>
+			<<foodicon "pancakes">><<link [[吃早饭 (1:00)|Asylum Breakfast]]>><<asylumstatus 1>><<awareness -10>><<trauma -3>><<stress -6>><<pass 60>><</link>><<gcool>><<llawareness>><<ltrauma>><<lstress>>
+			<br>
+		<</if>>
+		<<exerciseicon>><<link [[去外面锻炼 (0:30)|Asylum Exercise]]>><<tiredness 3>><<stress -6>><<pass 30>><</link>><<gtiredness>><<lstress>><<gathletics>>
+		<br>
+		<<socialiseicon>><<link [[社交 (0:30)|Asylum Socialise]]>><<asylumstatus 1>><<trauma -3>><<stress -6>><<pass 30>><</link>><<gcool>><<ltrauma>><<lstress>>
+		<br>
+		<<schoolicon "library">><<link [[学习 (0:50)|Asylum Study]]>><<pass 50>><<schoolskill>><</link>><<gschool>>
+		<br>
+		<<gardenicon>><<link [[花园 (0:02)|Asylum Garden]]>><<pass 2>><</link>>
+		<br>
+	<</if>>
+	<<if $asylumstatus gte 80 and $asylumdistracted isnot 1>>
+		<<askicon>><<link [[让病人分散护工的注意力|Asylum Distract]]>><<set $asylumdistracted to 1>><<asylumstatus -30>><</link>><<lllcool>>
+		<br>
+	<</if>>
+	<br>
+	<<asylumicon  "cell">><<link [[病房 (0:02)|Asylum Cell]]>><<pass 2>><</link>>
+	<br>
+<</if>>

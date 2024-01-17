@@ -1,0 +1,36 @@
+:: Prison Beach Escape []
+<<effects>>
+
+你涉水而出，直到一阵海浪将你掀起。起初，水是温和的，
+<<if currentSkillValue('swimmingskill') gte 1000>>
+	但你很快不得不挣扎着保持平衡。<span class="green">你与海浪争斗，直到水面再次平静。</span>
+	<br><br>
+	<<if $prison.schedule is "revolt">>
+		在你游泳的时候，一切顺利。<span class="green">观察者们被其他囚犯分散了注意力。</span>
+		<br><br>
+
+		<<link [[继续|Prison Beach Escape 2]]>><</link>>
+		<br>
+	<<elseif $prison.watchers_friend is 2>>
+		你听到翅膀拍打的声音。<<beastNEWinit 2 hawk>>两个<<beastsplural>>盘旋在你的上空，<span class="green">但随后便飞向了尖顶。</span>他们不会再干扰你了。
+		<br><br>
+
+		<<link [[继续|Prison Beach Escape 2]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		你听到翅膀的拍打声，<<beastNEWinit 2 hawk>><span class="red">一个<<beasttype>>俯冲向你。</span>你慌忙地躲在了水面之下，但<<bhis>>还是发现了你。爪子把你举到高空，扔回到了海滩上。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+		<br><br>
+
+		<<link [[继续|Prison Beach]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">你还没喘过气就被拖到了水面之下。</span>你踢打着作出可怜的挣扎，但无济于事。
+	<br><br>
+
+	路程很短，但足够让你胆战心惊。你被冲到了最初的地方。<<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+
+	<<link [[继续|Prison Beach]]>><</link>>
+	<br>
+<</if>>

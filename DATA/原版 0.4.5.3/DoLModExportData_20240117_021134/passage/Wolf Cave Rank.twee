@@ -1,0 +1,39 @@
+:: Wolf Cave Rank []
+<<set $location to "wolf_cave">><<effects>>
+
+<<if $phase is 0>>
+	你抚摸着这地位较低的<<beasttype 0>>，它的耳朵竖起来了。地位更高的<<beasttype 1>>发出低吼，但并没有进一步的举动。
+	<<gharmony>><<lferocity>><<deviancy1>>
+
+	<<endevent>>
+	<<loadNPC 0 wolf_rank_1>>
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+
+	<<link [[继续|Wolf Cave Fight]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 1>>
+	你抚摸着这地位更高的<<beasttype 1>>。地位较低的<<beasttype 0>>垂着尾巴溜走了。
+	<<lharmony>><<gferocity>><<deviancy1>>
+	<<endevent>>
+	<<loadNPC 0 wolf_rank_2>>
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+
+	<<link [[继续|Wolf Cave Fight]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	你一同抚摸他们两个。高地位的<<beasttype 1>>似乎有点不高兴，但没有惹事。它坚持要先占有你。
+	<<gharmony>><<gferocity>><<deviancy2>>
+
+	<<clearNPC wolf_rank_1>>
+	<<clearNPC wolf_rank_2>>
+	<<link [[继续|Wolf Cave Fight Duo]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	你转身离开他们俩。地位更高的<<beasttype 1>>低吼着，但并未采取进一步行动。
+	<br><br>
+	<<endevent>>
+
+	<<destinationwolfcave>>
+<</if>>

@@ -1,0 +1,23 @@
+:: Cell Bee Sex 
+<<effects>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<set $enemytrust += 100>>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<<actionsman>>
+<<if $finish is 1>>
+	<span id="next"><<link [[继续|Cell Bee Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Cell Bee Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Cell Bee Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Cell Bee Sex]]>><</link>></span><<nexttext>>
+<</if>>

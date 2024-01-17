@@ -1,0 +1,111 @@
+:: Temple Jordan []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<if $NPCName[$NPCNameList.indexOf("Jordan")].init isnot 1>>
+	<<npc Jordan>><<person1>>
+	你走近这个人影。在你靠近时，<<he>>起身转向你。修道长袍从头到脚包裹着<<him>>，只能瞧见一张年轻的脸庞。金色的头发从兜帽的两侧倾泻而出。<<His>>微笑着，但是蔚蓝的双眸中没有半点笑意。
+	<br><br>
+	"贵安，"<<he>>说。"我们似乎未曾谋面。我是约旦<<nnpc_brother "Jordan">>。"<<He>>微微颔首。"你来此处，是为了寻求贞操带，以庇护身体纯洁吗？切记，虽然不洁者亦可从中受益，但终归报应不爽。"
+	<br><br>
+	<<He>>继续说："切勿打扰其他<<if $pronoun is "m">>修士<<else>>修女<</if>>，因为他们已经起了圣誓，你的出现或将扰动他们的心神。"
+	<br><br>
+<<else>>
+	<<npc Jordan>><<person1>>
+	你接近那个人影。当你靠近时，<<He>>转过身来迎接你，露出约旦那张熟悉的脸。"欢迎回来。"<<he>>说。
+	<br><br>
+<</if>>
+<<if $spear_vessel is "held">>
+	<<if $temple_spear_mission is 1>>
+		当<<he>>看到长矛时，<<His>>的呼吸急促起来。随后<<he>>移开目光，低声祈祷。“哦，孩子，”<<he>>说，“你对世界的贡献比你所知的更多。”
+	<<else>>
+		<<His>>的眼睛看着长矛。"我的孩子，武器不是——"<<his>>的眉头现出了一丝皱纹，然后<<he>>移开了目光。
+		<br><br>
+		"孩子，"<<he>>低声说。"那支长矛。你在哪儿找——这不重要。谢谢你，你对世界的贡献比你所知的更多。"
+	<</if>>
+	<br><br>
+	<<link [[继续|Temple Spear]]>><</link>>
+	<br>
+<<elseif $temple_spear_mission is undefined and ($temple_rank is "monk" or $temple_rank is "priest") and $grace gte 100>>
+	"很高兴你在这里，"<<he>>说，"一场节日即将到来，这是一场百年一遇的节日，每个世纪，我们的同伴中会有一人被选中前往海上的一个岛屿进行朝圣，并取回一把文物的矛。这把矛是节日的关键，我们很乐意将这一任务交给你。"
+	<br><br>
+	"但，有一个问题，"<<he>>继续说道，"并没有现存的有关这个岛屿的记录。我们的神殿有许多相关的记载，但也就只有这里了。博物馆的历史学家告诉我们，相关的传说被和监狱或是海岸上的其他场所混淆了。"
+	<br><br>
+	"你的第一个任务是找到岛屿的位置，以及到达那里的方式。很抱歉，我帮不上忙。也许这也是朝圣的一部分。我相信你。"
+	<br><br>
+	<<set $spearQuestions to []>>
+	<<link [[询问为什么一定要是你|Temple Spear Questions]]>><<set $temple_spear_mission to 1>><<set $spearQuestion to "why">><<set $spearQuestions.push("why")>><</link>>
+	<br>
+	<<link [[询问节日内容|Temple Spear Questions]]>><<set $temple_spear_mission to 1>><<set $spearQuestion to "what">><<set $spearQuestions.push("what")>><</link>>
+	<br>
+	<<link [[询问你应该从哪里寻找|Temple Spear Questions]]>><<set $spearQuestion to "where">><<set $spearQuestions.push("where")>><</link>>
+	<br><br>
+<<else>>
+	<<if $vaginalchastityparasite is 0 and $analchastityparasite is 0 and $penilechastityparasite is 0>>
+	<<else>>
+		<<He>>看着你的下体，一脸关切的样子。"如果你有因贞操带引起的寄生物问题，我们可以帮忙，只需£20。"
+		<br><br>
+	<</if>>
+	<<if $kylar_manor_secret is 1>>
+		<<askicon>><<link [["询问你在凯拉尔庄园发现的圣物"|Temple Kylar Monstrance]]>><<set $kylar_manor_secret to 2>><</link>>
+		<br>
+	<</if>>
+	<<if numberOfEarSlime()>>
+		<<askicon>><<link [[询问耳中史莱姆|Temple Slime]]>><</link>>
+	<br>
+	<</if>>
+	<<if $wraith.seen gte 10>>
+		<<wraithicon>><<link [[询问苍白身影|Temple Pale Story]]>><</link>>
+	<br>
+	<</if>>
+	<<templeicon "chastity">><<link [[询问贞操锁|Temple Chastity]]>><</link>>
+	<br>
+	<<if $vaginalchastityparasite is 0 and $analchastityparasite is 0 and $penilechastityparasite is 0>>
+	<<elseif $money gte 2000>>
+		<<ind>><<link [[移除寄生虫 (£20 0:05)|Temple Parasite]]>><<set $money -= 2000>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $forgiveintro isnot 1 and $fallenangel gte 2>>
+		<<templeicon "pray">><<link [[请求宽恕|Temple Forgiveness]]>><</link>><<fallenangel>>
+		<br>
+	<<elseif $money gte 1000000 and $fallenangel gte 2>>
+		<<templeicon "pray">><<link [[买赎罪券 (£10,000 1:00)|Temple Buy Forgiveness]]>><<trauma 6>><<set $money -= 1000000>><</link>><<gtrauma>><<garousal>><<fallenangel>> <<note "移除堕天使特质" "italic">>
+		<br>
+	<<elseif $fallenangel gte 2>>
+		<span class="blue">你付不起宽恕的代价。</span>
+		<br>
+	<</if>>
+	<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		<<askicon>><<link [[询问加入神殿|Temple Join]]>><</link>>
+		<br>
+	<<elseif !$weekly.templeFire>>
+		<<templeicon "trial">><<link [[询问神殿的相关测验|Temple Fire Repeat]]>><</link>>
+		<br>
+	<</if>>
+	<<if $temple_rank is "initiate">>
+		<<askicon>><<link [[询问有关神殿晋升的事宜|Temple Vigil Inquire]]>><</link>>
+		<br>
+	<</if>>
+	<<if $temple_harassed is 1>>
+		<<templeicon>><<link [[说你受到了教会成员的骚扰 (0:05)|Temple Harass Inform]]>><<pass 5>><</link>>
+		<br>
+	<<elseif $temple_harassed gte 2>>
+		<<templeicon>><<link [[说你受到了神殿成员的骚扰 (0:05)|Temple Harass Inform]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if isPubfameTaskAccepted("temple")>>
+		<<schoolicon "library">><<link [[询问书籍 (0:05)|Temple Book Ask]]>><</link>>
+		<br>
+	<</if>>
+	<<if $jordan_ritual_dance is 2>>
+		<<danubeicon>><<link [[告知约旦你在庄园那儿发现了什么|Temple Ritual Inform]]>><<set $jordan_ritual_dance to 3>><</link>>
+		<br>
+	<</if>>
+	<<if $spear_vessel is "sea" and !($temple_spear_mission gte 2)>>
+		<<ind>><<link [[告知约旦长矛在海上遗失了|Temple Spear Sea]]>><</link>>
+		<br>
+	<</if>>
+	<<if $spear_vessel is "Zephyr" and !($temple_spear_mission gte 2)>>
+		<<ind>><<link [[告知约旦长矛被海盗拿走了|Temple Spear Zephyr]]>><</link>>
+		<br>
+	<</if>>
+	<<getouticon>><<link [[离开|Temple]]>><<endevent>><</link>>
+<</if>>

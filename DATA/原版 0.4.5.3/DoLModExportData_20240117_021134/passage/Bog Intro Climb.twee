@@ -1,0 +1,34 @@
+:: Bog Intro Climb []
+<<effects>>
+你爬过悬崖边缘，在岩壁上找到了支持点。
+<<if $athleticsSuccess>>
+	<<unset $athleticsSuccess>>
+	你花了些时间，慢慢向下直到<span class="green">踏到木走道上。</span>
+	<br><br>
+
+	<<if $worn.lower.name isnot "naked">>
+		你拍了拍$worn.lower.cn_name_cap，抖落尘土。
+	<<elseif $worn.upper.name isnot "naked">>
+		你拍了拍$worn.upper.cn_name_cap，抖落尘土。
+	<<else>>
+		你拍了拍手上的灰。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 0>><</link>>
+	<br>
+<<else>>
+	你花了些时间，慢慢向下但<span class="red">你半路脱手了</span>。你摔了下去，掉进泥潭。<<pain 4>><<stress 12>><<trauma 6>><<gpain>><<gstress>><<gtrauma>>
+	<br><br>
+
+	<<water>>
+	<<if $season is "winter">>
+		冰冷的水让你喘不过气来。你几乎要本能地背过气去，但你努力在陷落于此前浮上了水面。
+	<<else>>
+		水浑浊不堪。你浮出水面，身上沾满了杂草。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 1>><</link>>
+	<br>
+<</if>>

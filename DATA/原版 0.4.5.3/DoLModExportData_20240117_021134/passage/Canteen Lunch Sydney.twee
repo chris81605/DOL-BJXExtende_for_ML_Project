@@ -1,0 +1,221 @@
+:: Canteen Lunch Sydney []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<run statusCheck("Sydney")>>
+<<npc "Sydney">><<person1>>
+<<if $phase2 is 1>>
+	你和悉尼走进食堂，帮<<him>>把书抱了过去。你们在一个偏僻的角落落了座。
+	<br><br>
+<<else>>
+	你挨着悉尼坐下。
+	<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 10>>
+		<<sydneyGreeting>><<He>>微微一笑，挪开书给你腾位子。
+	<</if>>
+<</if>>
+<<if $NPCName[$NPCNameList.indexOf("Sydney")].love gte 10>>
+	<<if !$daily.sydney.writing and random(1, 6) is 1>>
+		<<set $daily.sydney.writing to true>>
+		你一边吃饭，一边和悉尼愉快地聊天。<<He>>拿出一支笔，<<if $worn.upper.name isnot "naked">>撸起你的袖子<<else>>指着你的手臂<</if>>问道："可以吗？"
+		<br><br>
+		<<link [[推开|Sydney Canteen Bodywriting Stop]]>><</link>>
+		<br>
+		<<if $bodywritingLvl gte 1>>
+			<<link [[可以|Sydney Canteen Bodywriting Allow]]>><<npcincr Sydney lust 1>><</link>><<gslust>><<gbodywriting>>
+			<br>
+		<<else>>
+			<span class="purple">别人在你身上涂写会让你感到不适。</span>
+		<</if>>
+	<<else>>
+		<<switch random(1, 10)>>
+			<<case 1>>
+				"我永远可以为你腾出时间。"
+			<<case 2>>
+				<<if $sydneyScience is 1>>
+					"我以前很怕上科学课，但现在和你在一起会好很多。"
+				<<else>>
+					"我最近可能会换科学教室……看来我们要上同一堂课了。"
+				<</if>>
+			<<case 3>>
+				"我<<sydneymum>>一直对我的功课要求很严格，我基本没时间休息。"
+			<<case 4>>
+				<<if $purity lte 500 or $demon gte 6>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"你今天看起来特别颓丧。"
+					<<else>>
+						"只要你愿意，任何时候回头都不算太晚。"
+					<</if>>
+				<<elseif $purity gte 1000 or $angel gte 6>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"我真嫉妒你的纯洁……应该说是羡慕。"
+					<<else>>
+						"我有没有和你说过，你就像天使一样？"
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"最近我的一些念头向罪恶的边缘滑去。"
+					<<else>>
+						"我很难将精力兼顾于神殿和学业，但我会尽力。"
+					<</if>>
+				<</if>>
+			<<case 5>>
+				<<if $stress gte ($stressmax / 5) * 3>>
+					"你看起来……比我还张惶。一切都还好吗？"
+				<<else>>
+					"别像我一样把自己逼得太紧，求你了，我不想看见你变成这个样子。"
+				<</if>>
+			<<case 6>>
+				<<if $arousal gte ($arousalmax / 5) * 3>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"你看起来非常烦躁不安，或许在一些地方我能帮到你。"
+					<<else>>
+						"你脸色发红，"<<He>>把手放在你的额头上，"还有点烫。要叫校医吗？"
+					<</if>>
+				<<else>>
+					<<if _sydneyStatus.includes("Lust")>>
+						"欲望折磨着我，甚至在学校也是……真来得不是时候。"
+					<<else>>
+						"一定要小心自己的欲望，那是罪恶的深渊。"
+					<</if>>
+				<</if>>
+			<<case 7>>
+				"我更喜欢我<<sydneymum>>的手艺，所以我都是自己带午餐来吃。"
+			<<case 8>>
+				"大多数人都会让我独自专心工作，这样确实更容易专注，但有时我也渴望着交流……所以，很感谢你能陪着我。"
+			<<case 9>>
+				<<if $delinquency gte 400>>
+					"我不会羡慕老师们。他们的工作<<if _sydneyStatus.includes("corrupt")>>可以说是地狱<<else>>非常辛苦<</if>>。你应该配合一点他们。"
+				<<else>>
+					<<if $sydneySeen.includes("parent")>>
+						"老师最喜欢你了。相信我，<<sydneymum>>经常提到你。"
+					<<else>>
+						"老师们最喜欢你了。相信我，他们经常提到你。"
+					<</if>>
+				<</if>>
+			<<case 10>>
+				<<if $cool lte 40>>
+					"我看见好些学生用异样的眼光看你。面对这么多嘲弄不容易，但你要坚强。"
+				<<elseif $cool gte 160>>
+					"你真的很受欢迎，不过为什么选择我？不要会错意，我真的很开心。"
+				<<else>>
+					"这儿的学生真的很过分，<<if _sydneyStatus.includes("corrupt")>>有些是十足的死变态，还很冲。<<else>>脑子里全是些污言秽语。<</if>>请多加小心。"
+				<</if>>
+		<</switch>>
+		<br><br>
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 60 and random(1, 100) gte 50>>
+			<<npc "Kylar" 2>><<person2>>
+			你和悉尼边吃饭边聊天，直到在你对面落座的某人将你们打断。是凯拉尔，<<nnpc_him "Kylar">>挤进了座位，微笑地看着你。"你刚才没，没在那儿看见我，"<<he>>双手捧着脸颊，"没事。我不介意挪挪位子。"
+			<br><br>
+			没等你说话，悉尼先开口了，"凯拉尔，很高兴见到你。" 凯拉尔浑身一紧，没敢打断<<nnpc_him "Sydney">>。"<<print either("我相信你已经改掉在书上乱涂乱画的习惯了。", "你语文最近怎么样？需要额外辅导吗？", "你有本书明天到期了。", "我真希望你不要再遇上麻烦。", "你有保持橱柜整洁吧？", "能交换笔记看看吗？你在科学方面很有天赋呢。")>>"
+			凯拉尔看向一边，假装没听见。
+			<br><br><<person1>>
+			<<if $rng gte 51 and $bodywritingLvl gte 2>>
+				悉尼习惯性地拔开笔盖，准备在你身上动笔。凯拉尔一记眼刀甩过去，<<he>>似乎没注意。
+				<<sydneyBodywritingLocation>>
+				<<if _writingFail isnot 1>>
+					你的<<bodypart _bodypart>>现在被写上了: <<if $sydneyromance is 1>><<bodywriting_npc_sydney _bodypart "pen">><<else>><<bodywriting_npc_sydney_friendly _bodypart "pen">><</if>>
+					<br><br>
+					<<He>>埋头工作去了。你正跟<<him>>聊着天，突然感到另一只笔悬在你的皮肤上——这次是凯拉尔。
+					<br><br>
+					<<link [[鼓励两人|Sydney Kylar Bodywriting Encourage]]>><<npcincr Sydney love 1>><<npcincr Kylar lust 1>><</link>><<glove "悉尼">><<glust "凯拉尔">><<gggbodywriting>>
+					<br>
+					<<link [[推开凯拉尔|Sydney Kylar Bodywriting Refuse]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 1>><</link>><<llove "Kylar">><<gksuspicion>>
+					<br>
+					<<link [[无视|Sydney Kylar Bodywriting Ignore]]>><</link>><<gbodywriting>>
+					<br>
+				<<else>>
+					不过，你的身上已经被写满了。<<He>>扫兴地把笔帽盖上，凯拉尔见了，在一旁咯咯直笑。
+					<br><br>
+					<<He>>飞速吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了。谢谢你一直陪着我。"<<He>>收捡好图书，快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。凯拉尔瞪向<<him>>，<<if _sydneyStatus.includes("corrupt")>><<he>><<if $sydneyromance is 1>>也用眼神冷冷瞪了回去。<<else>>则是回了个白眼。<</if>><<else>>但<<he>>好像完全没注意到。<</if>>
+					<br><br>
+					<<link [[继续|Canteen]]>><<endevent>><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				悉尼飞速吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了。谢谢你一直陪着我。"<<He>>收捡好图书，快步离开食堂<<if $sydneyromance is 1>>，在回去的路上给了你一个飞吻<</if>>。凯拉尔瞪向<<him>>，<<if _sydneyStatus.includes("corrupt")>><<he>><<if $sydneyromance is 1>>也用眼神冷冷瞪了回去。<<else>>则是回了个白眼。<</if>><<else>>但<<he>>好像完全没注意到。<</if>>
+				<br><br>
+				<<link [[继续|Canteen]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<elseif random(1, 100) gte 96 and !$sydney.glasses.includes("broken")>>
+			<<set $corruptionEvent to 1>>
+			<<generatey2>><<person1>>
+			有人突然从悉尼背后冒了出来。
+			<<if $sydney.glasses is "glasses" or $sydney.glasses is "playerbought">>
+				没等你俩反应过来，<<his>>的眼镜就被抽走了。始作俑者，一个<<person2>><<person>>，得意地看着你们。
+				"这就是糟蹋了我脸蛋的报复。"<<he>>随手一甩，把眼镜扔到了地上。"哇哦，没碎耶。"<<He>>抬起了脚，嬉皮笑脸地看着你们。"我可能会改变主意，但要看你表现了……那么就
+				<<if $NPCName[$NPCNameList.indexOf("Sydney")].pronoun is "f">>
+					给我看看你的内裤。"
+				<<else>>
+					给我看看你的内衣。"
+				<</if>>
+				<br><br>
+				<<if $sydney.glasses is "playerbought" and _sydneyStatus.includes("corrupt")>>
+					悉尼双眼微眯，拳头紧握。<<He>>直接推了<<person2>><<person>>一把，那人踉跄退到了墙边。悉尼把<<person1>><<his>>躺在地上的眼镜捡起，缓缓戴上。
+					<br><br>
+					"这是<<pShe>>买给我的，对我来说相当重要——现在，给我滚。"
+					<br><br>
+					其他学生纷纷看了过来。<<person2>><<person>>满脸通红，一言不发地溜走了。悉尼重重地吐出一口气，又回到了座位上。
+					<br><br>
+					"抱歉，我不想这样。"你吃完午饭，悉尼也开始收拾东西。"我们待会儿见，我现在要回图书馆了。"<<person1>><<He>>快步离开了。
+					<br><br>
+					<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+						凯拉尔从食堂的另一端看过来。
+						<<gksuspicion>><<npcincr Kylar rage 1>>
+						<br><br>
+					<</if>>
+					<<link [[继续|Canteen]]>><<endevent>><</link>>
+					<br>
+				<<else>>
+					悉尼看向你。<<person1>><<He>>似乎不确定要怎么做。
+					<br><br>
+					<<link [[鼓励|Sydney Canteen Encourage]]>><<npcincr Sydney purity -5>><</link>><<llspurity>><<promiscuous1>><<sydneyWarning>>
+					<br>
+					<<link [[干涉|Sydney Canteen Intervene]]>><<npcincr Sydney purity 2>><<npcincr Sydney love 1>><</link>><<gspurity>><<glove>>
+					<br>
+					<<link [[无动于衷|Sydney Canteen Break]]>><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				紧接着是一双手，它猛地在<<person1>>悉尼的脸前一抓，似乎要拿走某样原本在那的东西——但悉尼本能地躲开了。
+				<br><br>
+				<<person2>><<person>>满脸恼怒。"为什么你不戴眼镜了？我还准备把你那眼镜砸烂，当作你糟蹋我脸蛋的报复呢。"<<He>>转头看见了你，"噢，是啊，你有<<girlfriend>>了。但我会再来的。"
+				<br><br>
+				悉尼看上去很迷惑，但还是对你笑了笑。"看来，戴隐形眼镜总归是个好主意，谢谢你。"<<person1>><<He>>吃完了午饭。"我得回图书馆了。谢谢你一直陪着我。"<<He>>把书收捡好，快步离开食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+				<br><br>
+				<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+					凯拉尔从食堂的另一端看过来。
+					<<gksuspicion>><<npcincr Kylar rage 1>>
+					<br><br>
+				<</if>>
+				<<link [[继续|Canteen]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			悉尼快速吃完了午饭。你和<<him>>聊着天，<<hes>>很开心地静静坐着听你讲话。"我要回图书馆了，谢谢你一直陪着我。"<<He>>收捡好图书，快步离开了食堂<<if $sydneyromance is 1>>，在出去的路上给了你一个飞吻<</if>>。
+			<br><br>
+			<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+				凯拉尔从食堂的另一端看过来。
+				<<gksuspicion>><<npcincr Kylar rage 1>>
+				<br><br>
+			<</if>>
+			<<link [[继续|Canteen]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $sydneySeen.includes("initiate")>>
+		<<He>>注意到你，朝你一笑。"午安，<<temple_title>>。我很忙，但还是谢谢你来陪我。"
+	<<elseif $sydneySeen.includes("mass")>>
+		<<He>>注意到你，朝你一笑。"我很忙，但还是谢谢你来陪我。"
+	<<else>>
+		<<He>>沉浸在工作中，一开始甚至完全没注意到你。但随后<<he>>突然开口说道："抱歉，没能抽出时间和你聊天，但还是感谢你的陪伴。"
+	<</if>>
+	<br><br>
+	<<He>>一边分心工作，一边大口往嘴里送着食物。"虔诚的人不需要休息，我要回图书馆了。"<<he>>抱着一摞书快步离开食堂，你独自吃完了午饭。
+	<br><br>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+		凯拉尔从食堂的另一端看过来。
+		<<gksuspicion>><<npcincr Kylar rage 1>>
+		<br><br>
+	<</if>>
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br>
+<</if>>

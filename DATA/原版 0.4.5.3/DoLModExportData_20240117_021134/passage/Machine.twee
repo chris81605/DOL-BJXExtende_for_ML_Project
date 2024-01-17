@@ -1,0 +1,85 @@
+:: Machine []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 10>><<set $machine_ammo to 3>>/*Used by following widget. Must be set.*/
+	<<machine_init tattoo vaginal anal arm_chains leg_chains>>/*Include each machine type you want present as an argument*/
+	<<set $machine.tattoo.armed to 1>>/*Remove if there's no tattoo gun, or you don't want the tattoo gun to be able to remove tattoos*/
+	<<set $machine.vaginal.armed to 1>>/*Remove if there's no vaginal sex machine, or you don't want the sex machine to be able to easily destroy clothes.*/
+	<<set $machine.anal.armed to 1>>
+	<<prop rails table milk neck_shackle>>/*Delete props as appropriate*/
+	<<set $bodywriting_special to "dungeon">>/*Makes all tattoos appropriate for dungeon. Remove for a broader range of tattoos.*/
+<</if>>
+
+<<effects>>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+
+/*Debug info. Remove from playable events*/
+运行中的机器数量: <<print $machine.number>><br>
+<br>
+<<if $machine.tattoo>>
+	纹身枪使用: <<print $machine.tattoo.use>><br>
+	纹身枪状态: <<print $machine.tattoo.state>><br>
+	纹身枪完好度: <<print $machine.tattoo.health>><br>
+	纹身枪破损度: <<print $machine.tattoo.hack>><br>
+<</if>>
+<br>
+<<if $machine.vaginal>>
+	阴茎机械使用: <<print $machine.vaginal.use>><br>
+	阴茎机械状态:<<print $machine.vaginal.state>><br>
+	阴茎机械完好:<<print $machine.vaginal.health>><br>
+	炮机破损度: <<print $machine.vaginal.hack>><br>
+	炮机弹药: <<print $machine.vaginal.ammo>><br>
+	炮机速度: <<print $machine.vaginal.speed>><br>
+<</if>>
+<br>
+<<if $machine.anal>>
+	小型炮机使用: <<print $machine.anal.use>><br>
+	小型炮机状态: <<print $machine.anal.state>><br>
+	小型炮机完好度: <<print $machine.anal.health>><br>
+	小型炮机破损度: <<print $machine.anal.hack>><br>
+	小型炮机弹药: <<print $machine.anal.ammo>><br>
+	小型炮机速度: <<print $machine.anal.speed>><br>
+<</if>>
+<br>
+<<if $machine.arm_chains>>
+	臂链使用: <<print $machine.arm_chains.use>><br>
+	臂链状态: <<print $machine.arm_chains.state>><br>
+	臂链完好度: <<print $machine.arm_chains.health>><br>
+	臂链破损度: <<print $machine.arm_chains.hack>><br>
+<</if>>
+<br>
+<<if $machine.leg_chains>>
+	腿链使用: <<print $machine.leg_chains.use>><br>
+	腿链状态: <<print $machine.leg_chains.state>><br>
+	腿链完好度: <<print $machine.leg_chains.health>><br>
+	腿链破损度: <<print $machine.leg_chains.hack>><br>
+<</if>>
+/*Debug info end*/
+
+
+<br><br>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1>>
+	<<link [[继续|Machine End]]>><</link>>
+<<else>>
+	<<link [[继续|Machine]]>><</link>>
+	<<if $machine.vaginal or $machine.anal>>
+		<br>
+		<<if $machine.vaginal.speed is "high" or $machine.anal.speed is "high">>
+			<<link [[减！速！|Machine]]>><<machine_speed "normal">><</link>>
+		<<else>>
+			<<link [[提！速！|Machine]]>><<machine_speed "high">><</link>>
+		<</if>>
+	<</if>>
+<</if>>
+<br>
+
+<<link [[结束|Machine End]]>><</link>>
+<br>

@@ -1,0 +1,69 @@
+:: Lake Waterfall []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $forest to 40>><<set $bus to "lakewaterfall">>
+<<if Time.season is "winter">>
+	<<if Time.dayState is "night">>
+		你在瀑布处。月光下，水幕如同一道银帘。
+	<<else>>
+		你在瀑布处。它通过冰面的狭缝向湖中注入水流。
+	<</if>>
+	<<if $weather is "snow">>
+		雪花飘落在水面上。
+	<<else>>
+		冰面显得非常寂静。
+	<</if>>
+<<else>>
+	<<if $laketeenspresent is 1>>
+		你在瀑布这里。一些学生在瀑布中玩耍，其他人则坐在上方的池塘里。
+	<<elseif Time.dayState is "night">>
+		你在瀑布处。月光下，水幕如同一道银帘。
+	<<else>>
+		你在瀑布处。水从岩石上的池塘中流下，带来了一股清新的雾气。
+	<</if>>
+	<<if $weather is "rain">>
+		雨打在湖面上，水波荡漾。
+	<<else>>
+		水面显得非常平静。
+	<</if>>
+<</if>>
+
+<br><br>
+<<if $exposed gte 1 and $laketeenspresent is 1>>
+	<<if $exhibitionism gte 75>>
+		你低下身子，躲在树丛中。你真的很想展示你的<<lewdness>>，但你克制自己没有这么做。
+	<<else>>
+		你低下身子，躲在树丛中，以免被看到你的<<lewdness>>。
+	<</if>>
+	<br><br>
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
+	<<eventlake>>
+<<else>>
+	<<eventlakesafe>>
+	<<lakereturnjourney>>
+	<<if $pregnancyStats.parasiteDoctorEvents gte 2>>
+		<<investigateicon>><<containersLink>>
+	<</if>>
+	<<if $mason_count gte 2 and Time.season isnot "winter">>
+		<<lakeicon "pond">><<link [[梅森的池塘 (0:05)|Mason Pond]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Lake Shore">>
+		<<lakeicon>><span class="nextLink"><<link [[湖边|Lake Shore]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<lakeicon>><<link [[北上到岸边 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<</if>>
+	<br>
+	<<lakeicon "fishing">><<link [[南至钓鱼岩 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<br><br>
+
+	<<foresticon>><<link [[森林 (0:10)|Forest]]>><<pass 10>><</link>>
+	<br>
+	<<set $eventskip to 0>>
+<</if>>

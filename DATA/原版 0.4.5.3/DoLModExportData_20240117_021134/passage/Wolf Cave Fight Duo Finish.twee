@@ -1,0 +1,58 @@
+:: Wolf Cave Fight Duo Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+		<<if $combatTrain.length gt 0>>
+		<<beasttype>>吃痛退开，但另一个家伙正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Wolf Cave Fight Duo]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Wolf Cave Fight Duo Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足之后，<<beasttype>>离开了。但是另一个家伙抓住机会迎了上来。
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Wolf Cave Fight Duo]]>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<<combatTrainAdvance>>
+		<<wolfpacktrust>>
+		<br><br>
+		<<link [[继续|Wolf Cave Fight Duo Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<else>>
+	<<if $consensual is 1>>
+	狼群互相为对方舔毛梳理。
+	<br><br>
+	<<else>>
+		<<if $enemywounded is 1 and $enemyejaculated is 0>>
+			<<beasttype>>呜咽着逃进了树林的阴影中。
+		<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+			<<beasttype>>离开了你躺着草坪上。
+		<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+			由于你的奋力抵抗，感到无趣的狼们离开进了树林中。
+		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+			狼群留下了疲惫不堪，身体发软的你在草丛上。
+		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+			狼群留下了疲惫不堪，身体发软的你在草丛上。
+		<</if>>
+		<br><br>
+	<</if>>
+
+	<<tearful>>你振作了起来。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<destinationwolfcave>>
+<</if>>

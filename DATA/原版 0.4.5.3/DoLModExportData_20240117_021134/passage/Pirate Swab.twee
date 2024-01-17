@@ -1,0 +1,27 @@
+:: Pirate Swab []
+<<effects>>
+
+<<if currentSkillValue('housekeeping') gte 1000>>
+	<<generateRole 0 0 "pirate">><<person1>>
+	你拿起拖把，开始擦拭甲板，并抹干上面的水。你非常有效率，独自一人就将整个甲板都擦干净了，还有闲暇时间和一个<<person>>聊天。
+	<br><br>
+	“再也没人会在这甲板上滑倒，”<<he>>评论道。“真可惜。”<<lstress>><<stress -12>>
+	<br><br>
+<<elseif currentSkillValue('housekeeping') gte 600>>
+	<<generateRole 0 0 "pirate">><<person1>>
+	你拿起拖把擦地，与海水争夺着甲板。虽然这只是在做无谓的挣扎，但你至少保持了主要通道干燥。一个<<person>>甚至向你表示了感谢。
+	<br><br>
+<<elseif currentSkillValue('housekeeping') gte 200>>
+	你拿起拖把，开始抹干甲板的水以保持它的干燥。海上的浪花不断地把你的努力化作泡影，但你动作足够快，大体上仍能保持主要通道是干的。
+	<br><br>
+<<else>>
+	你找到了一个拖把，开始抹尽甲板上的水以保持它的干燥。海上的浪花溅过来，几乎在你刚擦完的瞬间就把你的努力全都抹去了。
+	<br><br>
+	<<generateRole 0 0 "pirate">><<person1>>
+	一个<<person>>看在眼里，并怜悯地给了你一些基础指导。“对于一个初学者来说，你其实做得还不错，”<<he>>说。“至少你自己还是干的。”<<ghousekeeping>><<housekeeping 1>>
+	<br><br>
+<</if>>
+<br><br>
+
+<<link [[继续|Pirate Deck]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

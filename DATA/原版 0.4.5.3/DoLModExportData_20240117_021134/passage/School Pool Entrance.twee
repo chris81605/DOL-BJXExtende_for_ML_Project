@@ -1,0 +1,68 @@
+:: School Pool Entrance []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $changingRoomGender>><<set _cameFrom to ($changingRoomGender is "boys" ? "m" : "f")>><</if>>
+
+<<unset $audienceforcegirl>>
+<<unset $audienceforceboy>>
+<<unset $changingRoomGender>>
+
+<<set _studentsKnow to ($schoolrep.crossdress gte 4 and $changingroomstate is "own") or ($schoolrep.crossdress gte 5 and $changingroomstate isnot "empty")>>
+<<if !$daily.changingRoomPregnancyFame>><<set $daily.changingRoomPregnancyFame to random(100,1000)>><</if>>
+<<if $player.gender_appearance is "f" and $fame.pregnancy gte $daily.changingRoomPregnancyFame or playerBellyVisible()>>
+	<<set _studentsKnow to false>>
+<</if>>
+
+<<set _seenGender to ($NudeGenderDC isnot -1 and $schoolrep.crossdress gte 4 and _studentsKnow) ? $player.gender : $player.gender_appearance>>
+<<set _uncomfortableGender to ($backgroundTraits.includes("crossdresser") ? $player.gender : false)>>
+<<set _delinquentGender to ($changingroomstate is "empty" ? false : _seenGender)>>
+<<if _delinquentGender is "m" and ($fame.pregnancy gte $daily.changingRoomPregnancyFame or playerBellyVisible())>>
+	<<set _delinquentGender to false>>
+<</if>>
+<<if !$daily.changingRoomPregnancyFame>><<set $daily.changingRoomPregnancyFame to random(100,1000)>><</if>>
+
+<<if $changingroomstate is "empty">>
+	你在学校更衣室外面，需要穿过更衣室才能进入游泳池。
+<<else>>
+	你在学校更衣室外面，需要穿过更衣室才能进入游泳池。你能听到两边的说话声。
+
+	<<if $NudeGenderDC isnot -1 and _studentsKnow>>
+		<<if $schoolrep.crossdress gte 4>>
+			<br><br>
+			<<print ($changingroomstate is "own" ? "你的同学们知道" : "所有人都知道")>>你应该使用<<print ($player.gender is "m" ? "男" : "女")>>更衣室。
+			<<if _uncomfortableGender>>这样做会让你感到不舒服。<</if>>
+		<<elseif $player.gender isnot $player.gender_appearance>>
+			<br><br>
+			进入<<print ($player.gender_appearance is "m" ? "女" : "男")>>更衣室会让你看起来格格不入。
+		<<elseif _cameFrom and _seenGender isnot _cameFrom>>
+			<br><br>
+			重新进入<<print (_cameFrom is "m" ? "男" : "女")>>更衣室会让你看起来格格不入。
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $exposed gte 1>>
+	一堆毛巾放在门边的手推车上。
+	<br><br>
+	<<towelicon>><<link [[拿一些毛巾|School Pool Entrance]]>><<towelup>><</link>>
+	<br><br>
+<</if>>
+
+<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>><<if _uncomfortableGender is "m">><<gstress>><</if>><<if _delinquentGender is "f">><<gdelinquency>><</if>>
+<br>
+<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>><<if _uncomfortableGender is "f">><<gstress>><</if>><<if _delinquentGender is "m">><<gdelinquency>><</if>>
+<br><br>
+
+<<if $changingroomstate isnot "empty" and $player.gender_appearance isnot $player.gender>>
+	<<if $player.gender_appearance is "m">>
+		<<loitericon>><<link [[等女生离开 (0:06)|School Pool Entrance]]>><<pass 6>><</link>>
+		<br><br>
+	<<elseif $player.gender_appearance is "f">>
+		<<loitericon>><<link [[等男生离开 (0:06)|School Pool Entrance]]>><<pass 6>><</link>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<getouticon>><<link [[离开 (0:01)|Hallways]]>><<pass 1>><</link>>
+<br>

@@ -1,0 +1,84 @@
+:: Pub Guard []
+<<effects>>
+
+<<generate1>><<set $NPCList[0].skills.security to random(1, 600)>><<npcClothesName $NPCList[0] "wildsFlannel">>
+<<generate2>><<person2>>
+你问老板是否认识需要工作的人，<<He>>指了指一个<<person1>><<person>>，
+<<if $NPCList[0].traits.includes("relaxed")>>
+	<<He>>正斜靠在窗户附近，在你走过去的时候，<<He>>将头抬了起来。"我能怎么帮你？"<<he>>指着对面的座位说道。
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我……我需要护卫来保护我的农场，"你说道。"一个能在晚上工作的人。"
+	<<elseif $speech_attitude is "bratty">>
+		"我想为我的农场配备护卫，"你说道，"先说好，安排的是夜班工作，你有兴趣吗？"
+	<<else>>
+		"我正在为我的农场寻找安全保障，"你说道。"一个可以通宵工作的人。"
+	<</if>>
+	<br><br>
+
+	<<person>>喝着<<his>>的饮料回应道："听起来很有趣，但是你也需要付出相应的代价。"
+	<br><br>
+<<elseif $NPCList[0].traits.includes("sociable")>>
+	<<He>>正和朋友坐在一起聊天。你必须轻拍<<his>>的肩膀才能引起<<his>>的注意。
+	<br><br>
+
+	<<He>>同意和你坐在另一张桌子上。"所以，你想要些什么？"<<he>>问道。
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我……我需要护卫来保护我的农场，"你说道。"一个能在晚上工作的人。"
+	<<elseif $speech_attitude is "bratty">>
+		"我想为我的农场配备护卫，"你说道，"先说好，安排的是夜班工作，你有兴趣吗？"
+	<<else>>
+		"我正在为我的农场寻找安全保障，"你说道。"一个可以通宵工作的人。"
+	<</if>>
+	<br><br>
+
+	"安全？我敢打赌这很无聊，但工作就是工作。"
+	<br><br>
+
+<<elseif $NPCList[0].traits.includes("brooding")>>
+	<<He>>正一个人坐在黑暗的角落里。而在你看过去时，<<Hes>>已经在盯着你看了。
+	<br><br>
+
+	你坐在<<him>>对面的座位上。
+	<<if $speech_attitude is "meek">>
+		"我，我需要——"
+	<<elseif $speech_attitude is "bratty">>
+		"我在看——"
+	<<else>>
+		"我正在寻找——"
+	<</if>>
+	<br>
+	"我会做的，"<<person>>打断了你接下来要说的话。<<He>>笑道："别这样看我，你也不是那么不起眼，我们商量一下雇佣的条件吧。"
+	<br><br>
+
+<<else>>
+	试图在酒馆里搭讪一个<<print maleChance($pronoun) gte random(1, 100) ? "男孩" : "女孩">>。<<His>>的猎物走开了，留下<<him>>靠在柜台上。你占了那个空位。
+	<br><br>
+
+	而<<His>>径直向你走来，"你看起来也挺不错的，"<<person>>说着的同时上下打量着你。
+	<br><br>
+
+	<<if $speech_attitude is "meek">>
+		"我……我需要护卫来保护我的农场，"你说道。"一个能在晚上工作的人。"
+	<<elseif $speech_attitude is "bratty">>
+		"我想为我的农场配备护卫，"你说道，"先说好，安排的是夜班工作，你有兴趣吗？"
+	<<else>>
+		"我正在为我的农场寻找安全保障，"你说道。"一个可以通宵工作的人。"
+	<</if>>
+	<br><br>
+
+	"农场？"<<he>>问道，随后耸了耸肩。"只要不让我干农活我就接受，是谁让我是个穷光蛋呢？"
+	<br><br>
+
+<</if>>
+
+<<guard_terms>>
+<br><br>
+
+<<link [[雇佣|Pub Guard Accept]]>><<famebusiness 2>><</link>>
+<br>
+<<link [[拒绝|Pub]]>><<endevent>><</link>>
+<br>

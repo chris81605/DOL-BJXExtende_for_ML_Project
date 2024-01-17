@@ -1,0 +1,32 @@
+:: Pharmacy Morning After pill []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+你向护士索要事后避孕药。
+<br><br>
+<<if playerBellyVisible()>>
+	"你<<if $pregnancyStats.aftermorningpills>>看样子已经知道<</if>>在怀孕的情况下不该服用这些药物，当然，很明显你确实怀孕了。服药会对你的健康有很大的害处，而且不会产生你想要的效果。"<<he>>一边说明，一边看着你<<bellyDescription "pc">>。"如果你坚持想要的话，请给我£500。由于法律原因，我们不能批量出售这些产品。你必须在我监督你的期间服用，以防出现问题。"
+	<br><br>
+	<<if not getPregnancyObject().awareOf>>
+		<<if $money gte 50000>>
+			<<link [[交钱，坚持吃药 (0:15)|Pharmacy Morning After pill 2]]>><<pass 15>><</link>>
+		<<else>>
+			<span class="purple">你没有那么多钱。</span>
+		<</if>>
+	<<else>>
+		你知道自己怀孕了，你不打算冒任何风险。
+		<br>
+	<</if>>
+	<br>
+	<<link [["不买"|Pharmacy]]>><</link>>
+<<else>>
+	"这些药片只在性交后的短时间内有效。如果一个卵子已经受精并依偎在你的子宫里，服用它们可能对你的健康有害。<<if $pregnancyStats.aftermorningpills>>记住，这些药片不是避孕方法。也许你应该考虑使用避孕套或避孕药，你可以在这里买到，它们危害较小。<</if>>"
+	<br><br>
+	<<He>>打开一个抽屉，拿出一个装有一颗药丸的水泡。"£500。由于法律原因，我们不能批量销售这些产品。你必须在我监督你的时候服用，以防万一。"
+	<br><br>
+	<<if $money gte 50000>>
+		<<link [[把钱交出来，然后吃药 (0:15)|Pharmacy Morning After pill 2]]>><<pass 15>><</link>>
+	<<else>>
+		<span class="purple">你没有那么多钱。</span>
+	<</if>>
+	<br>
+	<<link [["不买"|Pharmacy]]>><</link>>
+<</if>>

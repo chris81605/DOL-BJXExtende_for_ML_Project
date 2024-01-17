@@ -1,0 +1,78 @@
+:: Eden Hunt 2 []
+<<location "forest">><<effects>>
+
+<<if $phase is 0>>
+
+	你悄悄地走到灌木丛旁，小心翼翼地不打扰一根树枝。一旦到达那里，你就采摘水果并把篮子装满。满意之后，你开始悄悄地回到伊甸身边。
+	<br><br>
+
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - ($allure))>>
+		<<set $daily.eden.huntCaught to 1>>
+
+		<<if $rng gte 81 and $bestialitydisable is "f" and $voredisable is "f">>
+			你绕过一棵树，眼前突然出现一双眼睛，离你的脸只有几英寸远。你因恐惧而力量全失，摔倒在地。随后，蛇缓缓地滑到林地上。
+			<<set $trance to 1>>
+			<br><br>
+
+			<<link [[继续|Eden Hunt Snake]]>><<set $molestationstart to 1>><</link>>
+			<br>
+			<!-- Modified for monster people -->
+		<<elseif $rng gte 41>>
+			<<beastNEWinit 1 wolf>>
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				一只<<beasttype>>从树林中走了出来，露出了它的利齿。
+				<<if $monster is 1>>
+					<<bHis>>的目光与你相遇。"嘶嘶，猎物。猎人不会救你。"
+				<</if>>
+				伊甸会从这里听到你的尖叫声，但不会对你感到高兴。
+				<br><br>
+
+				<<link [[继续|Eden Hunt Wolf]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<else>>
+				<<endevent>>
+				<<generate1>><<generate2>>有东西顶在你的背后。"看我发现了什么？"<<person1>><<person>>说着，<<Hes>>的枪口顶在你的背上。
+				<br><br>
+
+				<<person2>><<person>>在你的肩膀上轻轻拍了一下，"转过身来，<<girl>>。现在，像你这样一个小家伙独自一人在森林里做什么？"
+				<br><br>
+
+				<<person1>>"这里很危险，"<<person>>插话道，"但没关系，我们可以保护你。"<<He>>抓住了你的<<bottom>>，将你拉得更近了。
+				<br><br>
+
+				伊甸会从这里听到你的尖叫声，但不会对你感到高兴。
+				<br><br>
+
+				<<link [[继续|Eden Hunt Molestation]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<generate1>><<generate2>>有东西顶在你的背后。"看我发现了什么？"<<person1>><<person>>说着，<<Hes>>的枪口顶在你的背上。
+			<br><br>
+
+			<<person2>><<person>>在你的肩膀上轻轻拍了一下，"转过身来，<<girl>>。现在，像你这样一个小家伙独自一人在森林里做什么？"
+			<br><br>
+
+			<<person1>>"这里很危险，"<<person>>插话道，"但没关系，我们可以保护你。"<<He>>抓住了你的<<bottom>>，将你拉得更近了。
+			<br><br>
+
+			伊甸会从这里听到你的尖叫声，但不会对你感到高兴。
+			<br><br>
+
+			<<link [[继续|Eden Hunt Molestation]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<npc Eden>><<person1>>
+		<<link [[继续|Eden Hunt 3]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+
+<<elseif $phase is 1>>
+	你被告知要保持静止，所以你就这样待着。几分钟后，一声枪响穿过森林。
+	<br><br>
+
+	<<link [[继续|Eden Hunt 3]]>><<set $phase to 2>><</link>>
+	<br>
+<</if>>

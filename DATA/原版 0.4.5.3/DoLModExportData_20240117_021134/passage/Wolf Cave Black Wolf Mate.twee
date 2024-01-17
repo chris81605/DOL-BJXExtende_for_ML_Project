@@ -1,0 +1,35 @@
+:: Wolf Cave Black Wolf Mate []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<beastCombatInit>>
+	<<clothesstrip>>
+	<<if $phase is 1>>
+		<<set $position to "missionary">>
+		<<set $position_lock to 1>>
+	<<else>>
+		<<set $position to "doggy">>
+		<<set $position_lock to 1>>
+	<</if>>
+	<<npc_attempt_sex>>
+	<<set $NPCList[0].location.head to "head">>
+	<<set $NPCList[0].location.genitals to "genitals">>
+	<<blackwolfhealth>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Wolf Cave Black Wolf Mate Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Wolf Cave Black Wolf Mate]]>><</link>></span><<nexttext>>
+<</if>>

@@ -1,0 +1,66 @@
+:: Shave []
+<<effects>>
+<<dontHideForNow>>
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<span class="red">你的双臂都被绑住了。</span>而你很难以这种姿态来对你的阴毛做任何事情。
+	<br>
+	<<link [[返回->Bathroom]]>><<dontHideRevert>><</link>>
+	<<exit>>
+<</if>>
+
+<<shavestrip>>
+你脱掉衣服，看着你的<<genitals>>。
+<br>
+<<if $worn.genitals.name is "chastity belt" or $worn.genitals.name is "gold chastity belt">>
+	皮带紧贴着你的身体，看来要用剃须刀够到阴毛几乎是不可能的。
+	<br>
+	<<link [[穿上->Bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+	<<exit>>
+<</if>>
+
+<<if $worn.genitals.name is "chastity cage">>
+你的肉棒被锁在笼子里，在它周围刮阴毛会有点棘手，但这并不是什么大问题。
+<br>
+<</if>>
+<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>
+	<<shavestyleicon 'clean'>><<link [[白虎型 (0:15)->Shave clean]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 2 or ($pbstrip is 1 and $pblevel gte 2)>>
+	<<shavestyleicon 'strip'>><<link [[一线天型 (0:15)->Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "整洁的条纹">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 1>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 3 or ($pbstrip gte 2 and $pblevel gte 2)>>
+	<<shavestyleicon 'heart'>><<link [[心型 (0:15)->Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "可爱的心形">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 2>><</link>>
+	<br>
+<</if>>
+<<if $pblevel gte 5 or $pbstrip gte 4 or ($pbstrip gte 3 and $pblevel gte 2)>>
+	<<shavestyleicon 'triangle'>><<link [[三角型 (0:15)->Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "整洁的三角形">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 3>><</link>>
+	<br>
+<</if>>
+<<if $player.ballsExist is true>>
+	<<if $pblevel gte 2 or $pbstrip gte 1>>
+		<<shavestyleicon 'clean'>><<link [[只刮小腹下部 (0:10)->Shave pubis]]>><<pass 10>><<arousal 50>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 0>><<if $pblevelballs is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+	<<if $pblevelballs gte 3>>
+		<<shavestyleicon 'balls'>><<link [[球型 (0:05)->Shave balls]]>><<pass 5>><<arousal 50>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<if $pblevel is 0 and $pbstrip is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if $pblevel gt 5 or $pblevelballs gt 5>>
+	<<shavestyleicon 'trim'>><<link [[剪短 (0:10)->Shave trim]]>><<pass 10>><<arousal 100>>
+	<<if $pblevel gte 5>>
+		<<set $pblevel to 5>><<set $pbgrowth to 7>><<set $pbstrip to 0>>
+	<</if>>
+	<<if $pblevelballs gte 5>>
+		<<set $pblevelballs to 5>><<set $pbgrowthballs to 10>>
+	<</if>>
+	<</link>>
+	<br>
+<</if>>
+<<if $worn.genitals.name isnot "chastity belt">>
+	<<cosmeticsicon "dyes">><<link [[给阴毛染色->Dye pubic hair]]>><</link>>
+	<br>
+<</if>>
+<<refuseicon>><<link [[什么也不刮->Bathroom]]>><<clotheson>><<dontHideRevert>><</link>>

@@ -1,0 +1,26 @@
+:: Sea Vore Finish []
+<<effects>>
+<<if $stress gte $stressmax or $vorestomach gte 5>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<link [[继续|Passout Beach]]>><<pass 1 hour>><</link>>
+<<else>>
+	<<tearful>>你把自己从<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>的嘴里解救出来，它决定不再继续追击你，并消失在深处。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<</if>>

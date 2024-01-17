@@ -1,0 +1,36 @@
+:: School Pool Locker Take []
+<<effects>>
+
+<<if $locker_suspicion gte random(21, 30) and $daily.lockerMason isnot 1>>
+	<<set $daily.lockerMason to 2>>
+	在你顺走其中的"好东西"时，<span class="red">你听到水池那边的门打开了</span>，接着是湿哒哒的脚步声。没时间躲到别的地方了。你进入储物柜，关上了门。
+	<br><br>
+	<<npc Mason>><<person1>>
+	你从缝隙里偷看。梅森走了进来。水从<<nnpc_his "Mason">>光滑的身体上滴下。
+	<<He>>在几英尺外的一个储物柜旁停了下来，打开门锁，接着猛地把门拽开。<<He>>对着下一个柜子重复这个动作，下一个，再下一个。<span class="red"><<Hes>>马上就会找到你了。</span>
+	<br><br>
+
+	<<link [[跑|School Pool Locker Run]]>><</link>><<athleticsdifficulty 1 1000>>
+	<br>
+	<<if $promiscuity gte 15>>
+		<<link [[伏击|School Pool Locker Ambush]]>><<detention 7>><<npcincr Mason lust 5>><</link>><<promiscuous2>><<ggdelinquency>><<glust>>
+		<br>
+	<</if>>
+<<elseif $locker_suspicion gte random(11, 20) and $daily.lockerMason isnot 1>>
+	<<set $daily.lockerMason to 1>>
+	在你顺走其中的"好东西"时，<span class="red">你听到水池那边的门打开了</span>，接着是湿哒哒的脚步声。没时间躲到别的地方了。你进入储物柜，关上了门。
+	<br><br>
+
+	你从缝隙里偷看。梅森走了进来。水从<<nnpc_his "Mason">>光滑的身体上滴下。
+	<<nnpc_He "Mason">>经过你身边，朝入口走去，然后看了看四周。"还以为我这次能抓到那个小偷呢，"<<nnpc_he "Mason">>嘟囔着转过身去。<<nnpc_He "Mason">>进入泳池，关上了身后的门。
+	<br><br>
+
+	你从藏身之处逃出来。<span class="pink">你的盗窃行为已经引起注意了。</span>
+	<br><br>
+
+	<<destination_pool>>
+<<else>>
+	你掠夺了你的战利品，然后关上了锁柜。
+	<br><br>
+	<<destination_pool>>
+<</if>>

@@ -1,0 +1,198 @@
+:: Moor Abduction Walk []
+<<set $outside to 1>><<effects>>
+
+你们穿过荒原，忍受着俘虏你们的人的目光。
+<<set $moor -= 5>><<pass 60>>
+<<if $moor lte 10 or $moor is undefined>>
+	你来到一个高高的栅栏前，隔着栅栏你可以看到牧草。
+	<<if $monsterchance gte 1 and $hallucinations gte 1 or $monsterchance gte 1 and $monsterhallucinations is "f" or $bestialitydisable is "t">>
+		<<if beastMaleChance() is 100>>
+			牛男孩们。
+		<<elseif beastMaleChance() is 0>>
+			牛女孩们。
+		<<else>>
+			牛男孩和牛女孩们。
+		<</if>>
+	<<else>>
+		牛。
+	<</if>>
+	<br><br>
+	你来到一扇大门前，门旁的标志写着：<span class="red">"雷米庄园"</span>
+	<br><br>
+
+	<<link [[继续|Moor Abduction Remy]]>><<end_moor_captive>><</link>>
+	<br>
+
+<<elseif $moor is 20>>
+	地形变得不那么多岩石了，你前面是一片石楠花的平原。
+<<elseif $moor is 50>>
+	地形变得不那么泥泞，前面是奇怪的岩层。
+<<elseif $moor gte 51>>
+	他们有时列成纵队行进，似乎很了解这片土地。
+<<elseif $moor gte 21>>
+	他们避开奇怪的岩层。
+<<else>>
+	他们的靴子压平了石楠花。
+<</if>>
+<br><br>
+
+
+<<if $moor gte 11>>
+	<<moor_binding_text>>
+	<br><br>
+	<<if $stress gte $stressmax>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<pregnancyWatersBrokenPassout "remyAbduction">>
+		<<else>>
+			你再也承受不住了，你眼前一黑。
+			<br><br>
+
+			<<passout>>
+			<<link [[继续|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
+			<br>
+		<</if>>
+	<<elseif Time.dayState is "night">>
+		"扎营，"喊声响起，"我们不能摸黑赶路。"
+		<br><br>
+
+		<<if $moor lte 20>>
+			你听到一些抱怨，几乎回到了庄园，但他们得到了工作，无论如何。
+		<</if>>
+		他们点起灯，开始搭起帐篷，你们暂时无人居住。
+		<br><br>
+
+		<<if $moor gte 51>>
+			你向黑暗中窥视。你被隐藏的池塘和天坑包围。逃跑将是困难的。
+			<br><br>
+
+			<<if $moor_binding lte 0>>
+				<<link [[挣脱束缚逃跑|Moor Abduction Mire Run]]>><<unbind>><</link>><<athleticsdifficulty 900 1900>>
+			<<else>>
+				<<link [[跑|Moor Abduction Mire Run]]>><</link>><<athleticsdifficulty 900 1900>>
+			<</if>>
+			<br>
+		<<elseif $moor gte 21>>
+			你凝视着黑暗，在黑暗中跑过这样不平的地面可能是危险的。
+			<br><br>
+
+			<<if $moor_binding lte 0>>
+				<<link [[挣脱束缚逃跑|Moor Abduction Rock Run]]>><<unbind>><</link>><<athleticsdifficulty 800 1500>>
+			<<else>>
+				<<link [[跑|Moor Abduction Rock Run]]>><</link>><<athleticsdifficulty 800 1500>>
+			<</if>>
+			<br>
+		<<else>>
+			你向黑暗中窥视，你可以逃跑，但是他们很快就会发现你不见了，然后追上来。
+			<br><br>
+
+			<<if $moor_binding lte 0>>
+				<<link [[挣脱束缚逃跑|Moor Abduction Plain Run]]>><<unbind>><</link>><<athleticsdifficulty 500 1500>>
+			<<else>>
+				<<link [[跑|Moor Abduction Plain Run]]>><</link>><<athleticsdifficulty 500 1500>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if $submissive gte 1000>>
+			<<link [[留在原地 (0:30)|Moor Abduction Camp Bide]]>><<pass 30>><</link>>
+			<br>
+		<<else>>
+			<<link [[等待时机 (0:30)|Moor Abduction Camp Bide]]>><<pass 30>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 81>>
+		"在这里搜索，"一个威严的声音喊道。这里的地面很平，有一些金属锁链埋在地上。看来他们以前在这里扎过营。
+		<br><br>
+
+		暴徒们成群结队地带着空笼子从不同的方向离开营地。只剩下两个暴徒保护你。
+		<br><br>
+
+		<<if $moor_binding gte 1>>
+			<<link [[引诱哄骗|Moor Abduction Seduce]]>><</link>>
+			<br>
+			<<link [[摩擦绑带 (1:00)|Moor Abduction Loosen]]>><<pass 60>><</link>>
+			<br>
+		<<else>>
+			<<link [[打破你的束缚并攻击|Moor Abduction Attack]]>><<unbind>><</link>>
+			<br>
+			<<link [[等待时机 (1:00)|Moor Abduction Bide]]>><<pass 60>><</link>>
+			<br>
+		<</if>>
+	<<elseif $rng gte 61>>
+		<<if $syndromebird is 1>>
+			<span class="green">一声熟悉的尖叫划破天空。</span>
+		<<else>>
+			<span class="red">一声可怕的尖鸣声刺破了空气。</span><<if $syndromebird isnot 1>><<ggstress>><<stress 12>><</if>>
+		<</if>>
+		<br><br>
+
+		<<if $syndromebird is 1 and $harpy gte 6>>
+			暴徒们聚拢过来，手里紧握着武器，抬头看着天空。
+			<br><br>
+
+			<<link [[尖叫 (0:20)|Moor Abduction Bird Screech]]>><<pass 20>><</link>><<harpy>>
+			<br>
+			<<link [[等待|Moor Abduction Bird Wait]]>><</link>>
+			<br>
+		<<else>>
+			暴徒们聚拢过来，手里紧握着武器，抬头看着天空。另一声尖叫让你感到寒冷，但这一声非常远。暴徒们放松了。
+			<br><br>
+			<<generate1>><<person1>>"别站着了，"一个<<person>>大喊道，<<his>>的声音中几乎掩盖不住恐惧。"我们还有工作要做。"你的随行人员又开始移动了。
+			<br><br>
+
+			<<endevent>>
+			<<moor_captive_actions>>
+		<</if>>
+
+	<<elseif $rng gte 41>>
+		你感觉一只手在摸你的<<bottom>>，<<generate1>><<person1>><<person>>是罪魁祸首。<<He>>走的很近。<<gstress>><<garousal>><<stress 6>><<arousal 600 "bottom">>
+		<br><br>
+
+		似乎没有人注意到或关心。
+		<br><br>
+
+		<<link [[生气|Moor Abduction Angry]]>><<def 1>><<trauma -6>><</link>><<ltrauma>>
+		<br>
+		<<link [[忍耐|Moor Abduction Endure]]>><<sub 1>><<trauma 6>><</link>><<gtrauma>>
+	<<elseif $rng gte 21>>
+		<<if $moor gte 51>>
+
+			你听到一声尖叫从前面传来，然后从后面传来。奇怪的、黏糊糊的生物从黑色的水池里冲出来。你被分流到人群中间，但看到暴徒用长武器自卫的火花。
+			<br><br>
+
+			大部分的生物逃走了，但是有一些仍然留在原地，受到惊吓，动弹不得。抓你的人把他们装进笼子里，然后再转移。
+			<<if $awarelevel gte 2>>
+				这个团体感觉比以前更小了。
+			<</if>>
+			<br><br>
+
+		<<elseif $moor gte 21>>
+			你听到一声尖叫从前面传来，然后从后面传来。奇怪的、黏糊糊的生物从奇怪的岩层顶部猛扑而出。你被分流到人群中间，但看到暴徒用长武器自卫的火花。
+			<br><br>
+
+			大部分的生物逃走了，但是有一些仍然留在原地，受到惊吓，动弹不得。抓你的人把他们装进笼子里，然后再转移。
+			<br><br>
+		<<else>>
+			你听到一声尖叫从前面传来，然后从后面传来。奇怪的、黏糊糊的生物从石楠丛中扑了出来。你被分流到人群中间，但看到暴徒用长武器自卫的火花。
+			<br><br>
+
+			大部分的生物逃走了，但是有一些仍然留在原地，受到惊吓，动弹不得。抓你的人把他们装进笼子里，然后再转移。
+			<br><br>
+		<</if>>
+
+		<<endevent>>
+		<<moor_captive_actions>>
+	<<else>>
+		<<generate1>><<person1>>
+		一个<<person>>拿着水壶向你走来。"这儿，<<girl>>，"<<he>>说道，"站稳脚跟。"
+		<br><br>
+
+		<<link [[喝|Moor Abduction Drink]]>><</link>>
+		<br>
+		<<if currentSkillValue('skulduggery') gte 100>>
+			<<link [[先闻一闻|Moor Abduction Sniff]]>><</link>>
+			<br>
+		<</if>>
+		<<link [[拒绝|Moor Abduction Refuse]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

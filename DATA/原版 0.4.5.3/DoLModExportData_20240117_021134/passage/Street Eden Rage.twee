@@ -1,0 +1,47 @@
+:: Street Eden Rage []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<if $phase is 1>>
+	伊甸是对的。你离开太久了。你可能无法挣脱。
+	<br><br>
+
+	<<He>>引导你走向森林。大多数人都没有注意到你。跟上<<his>>快速的步伐很困难。
+<<else>>
+	担心伊甸为你准备的事情，你用力拉扯。
+	<<if $physiqueSuccess>>
+		伊甸抵抗着，转身用警告的眼神看着你。经过一番拉扯，<span class="green"><<his>>的抓握松了，你得以溜出去，并开始全速奔跑。</span>你的手臂有些疼痛，但你忽略了这种感觉。<<pain 2>><<gpain>>
+		<br><br>
+
+		伊甸紧追不舍，在几分钟内紧紧跟在你的后面。当你拉开距离时，<<He>>向你喊叫，愤怒的情绪明显可见。
+		<br><br>
+
+		几分钟后，<<his>>的声音渐渐消失，直到完全消失。你现在是安全的。但现在只是暂时的。
+		<br>
+		<i><span class="red">和这么生气的伊甸回到小屋可能很危险。</span></i>
+		<<set $edenCagedEscape to true>>
+	<<else>>
+		伊甸的抓握依旧紧紧地抓住你，几乎要折断你的骨头。<span class="red">你无法挣脱。</span>伊甸沉默地怒视着你，同时拉近你的距离。
+		<br><br>
+
+		<<He>>引导你走向森林，人们看着你经过，但没有人敢于干预，尽管你在呼喊着求救。<<trauma 3>><<gtrauma>>
+		<br><br>
+
+		即使在你们走出城镇的郊区后，伊甸也没有放松，仍然紧紧地拉着你穿过树林。城镇的声音逐渐被大自然的死寂所取代。
+		<<set $phase to 1>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $phase is 1>>
+	<<set $outside to 0>><<set $location to "cabin">>
+	你被拉进小屋。伊甸在你身后砰地关上门。一切都和你离开的时候一样。除了睡觉区域附近的笼子。
+	<br><br>
+
+	<<link [[挣扎|Eden Caged Intro]]>><<set $phase to 0>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[顺从|Eden Caged Intro]]>><<set $phase to 1>><<sub 1>><<stress 6>><<npcincr Eden dom 1>><</link>><<gstress>><<gdom>>
+	<br>
+<<else>>
+	<<endevent>>
+	<<destinationeventend>>
+<</if>>

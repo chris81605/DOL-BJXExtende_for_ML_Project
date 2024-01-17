@@ -1,0 +1,15 @@
+:: Domus House Safe []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">><<set $lock to 400>>
+保险箱看起来很普通平凡。
+<br><br>
+<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+	<<link [[闯入 (0:05)|Domus House Safe Open]]>><<pass 5>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+<</if>>
+<<link [[离开|Domus Street]]>><</link>>
+<br>

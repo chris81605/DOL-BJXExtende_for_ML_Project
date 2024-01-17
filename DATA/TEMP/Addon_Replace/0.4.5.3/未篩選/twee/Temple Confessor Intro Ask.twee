@@ -1,0 +1,255 @@
+:: Temple Confessor Intro Ask []
+<<temple_effects>><<effects>>
+
+<<switch $confessorQuestion>>
+	<<case "who">>
+		<<set $temple_confessor_intro to true>><<earnFeat "Withering Truth">>
+		"过于虚幻的问题。那么，告诉我，你是在向谁提问？我并不是唯一站在你面前的人。"<<He>>轻轻地笑了。"我是主教。"<br>
+		"<<Father>>。"<br>
+		"至圣者。"<br><br>
+
+		"这些是我的臂膀。"<br>
+		"右手。"<br>
+		"左手。"<br><br>
+
+		"我们，所有的我们，忏悔者……现在你见到我们了，我们也看到了你。我们只是与环境相融。对于约旦的信众，我们处理那些……过于罪恶的事情。"<br>
+		"愚昧。"<br>
+		"福祉。"<br><br>
+	<<case "remember">>
+		"啊，这么说你果然还记得我们的初次见面。一听说你从庄园里出来，我就知道你是个值得关注的对象。"<br>
+		"命运？"<br>
+		"天意？"<br><br>
+	<<case "jordan">>
+		<<bishop>>放声大笑。<<He>>仰起头，擦去了脸上淌溢的泪水。"放轻松，我可爱的孩子。"其他所有的黑衣人也都坐了下来。
+		<br><br>
+		
+		"以约旦为首的信众是我们教会的主力。他们听取忏悔，给予施舍，管理饭厅，剿灭从缝隙中潜入的生物。但他们永远不会伤害……我们。人类，他们无法对付那些受到侵蚀的人类——所以我们得以诞生。"
+		<br><br>
+		
+		<<He>>滔滔不绝地讲述，"没有我们，神殿很早就可能沦陷了。实际上，这确实曾经发生过。约旦和<<nnpc_his "Jordan">>的同僚们可以为人们施粥，可以对抗威胁，可以与迷雾中的邪恶生物战斗，但你试着问问自己：
+		<<if $kylar_manor_secret is 3>>
+			他们是否能给予你<<nnpc_girlfriend "Kylar">>的父母真正的正义？然后留下他们的孩子？
+		<</if>>
+		他们是否能与名为<i>人类</i>的怪物战斗？不，如果约旦知道我们能做到这点，这只会引起又一次教内分裂罢了。不过别误会，约旦是我们的<<nnpc_brother "Jordan">>。我们是一家人，是亲人。我们都在为一个目标努力，那就是保护——我们都寻求从黑麋鹿的侵蚀中保护这个世界。"
+		<br><br>
+
+		<<He>>暂停了一下，然后皱起眉，"而且，约旦非常强大。比我们所有人都强大。比我们能做到的极限都要强大。<<nnpc_His "Jordan">>的纯洁让<<nnpc_him "Jordan">>得以如此。纯洁是<<nnpc_His "Jordan">>的护盾。信仰是真实的，比麋鹿的邪恶眷属还要真实。让约旦继续保持对我们的所作所为不知情是非常重要的，否则我们的护盾将会崩坏。忏悔的隔板必须保持完美，若不是如此，世界将会沦陷。"<br>
+		"我们最强大的力量。"<br>
+		"我们最致命的弱点。"<br><br>
+
+		<<run statusCheck("Sydney")>>
+		<<if _sydneyStatus.includes("pure")>>
+			<<He>>叹了口气，"我们只有一个成员有希望能达到约旦那样的纯洁。"
+		<<else>>
+			<<He>>叹了口气，"我们本只有一个成员有希望能达到约旦那样的纯洁。"
+		<</if>>
+		<br><br>
+	<<case "replacement">>
+		<<He>>咧嘴一笑。
+		<<run statusCheck("Sydney")>>
+		<<if $templePromised is "Sydney">>
+			"你应该已经知道是谁了——是你所爱的人，悉尼。"<br>
+		<<elseif $sydneyromance gte 1>>
+			"你应该已经知道是谁了，孩子。毕竟你和<<nnpc_him "Sydney">>已经有了如此亲密的关系——那个人就是我们的小悉尼。"
+		<<else>>
+			"相信你已经见过<<nnpc_him "Sydney">>了——那个人就是我们的小悉尼。"
+		<</if>>
+		<br>
+
+		<<if _sydneyStatus.includes("corrupt")>>
+			<<if $templePromised is "Sydney">>
+				"合为一体。"<br>
+				"永远，合二为一。"<br><br>
+			<<else>>
+				"凋零。"<br>
+				"绽放。"<br><br>
+			<</if>>
+			"你已经毁坏了<<nnpc_him "Sydney">>不是吗？<<nnpc_His "Sydney">>的纯洁已经不在了。你对此并不知情，孩子，你已经在此弥补我们了。
+		<<else>>
+			<<if $templePromised is "Sydney">>
+				"合为一体。"<br>
+				"永远，合二为一。"<br><br>
+			<<else>>
+				"纯净的。"<br>
+				"可爱……噢！"右侧的<<person2>><<priest>>拍了一下左边那人的后脑勺。<br><br>
+			<</if>>
+			"<<nnpc_Hes "Sydney">>已经成为信徒好几年了，但一直因为约旦的过度保护被束缚着。
+		<</if>>
+		<<if $sydney.rank is "monk">>
+			我明白，<<nnpc_him "Sydney">>能通过苦难审判需要归功于你，我们对你表示真诚的感谢。"
+		<<else>>
+			可怜的<<nnpc_gendery "Sydney">>一直没能通过苦难审判。"
+		<</if>>
+		<br><br>
+
+		<<person1>><<bishop>>低下头，皱起眉头。你似乎从中看出了一丝真实的悲伤。"悉尼的<<sydneyOtherParent>>曾是约旦的上一任担当者，那是一位非常优秀的<<sydneyOtherParentGender>>。从那以后我们一直在照顾悉尼。至少，我们现在能够偿还我们欠下的了。"
+		<br><br>
+	<<case "what">>
+		"你曾净化。你曾肃清。你救过一位
+		<<if $drainedPronoun is "m">>
+			<<if $drainedAge is 1>>男人的<<else>>男孩的<</if>>
+		<<else>>
+			<<if $drainedAge is 1>>女人的<<else>>女孩的<</if>>
+		<</if>>
+		灵魂。<<if $drainedPronoun is "m">>他<<else>>她<</if>>会没事的。我们已经明晓。"<br>
+		"空的。"<br>
+		"纯净的。"<br><br>
+		<<unset $drainedAge>><<unset $drainedPronoun>>
+
+		"你吸尽了奥利加体内的腐化，并置于自己的体内净化。"<br>
+		"容器。"<br>
+		"净化者。"<<gawareness>><<awareness 10>><br><br>
+	<<case "how">>
+		"孩子，你已经看到了这个世界的缝隙。那些事件，那些地点，那些人物——它们构成的整体几乎清晰可辨，但有些东西脆弱不堪。最关键的一部分失踪了，一条缺失的臂膀。"<br>
+		"一只折断的翅膀。"<br>
+		"一根消失的羽毛。" <<ggawareness>><<awareness 20>>
+		<br><br>
+
+		"通过这些缝隙，奥利加的腐化渗入。它侵蚀。它引诱。它扭曲了那些被渗透的人的意志，无论他们是否知晓，这些缝隙都将会变得愈发庞大。这种腐化……由那些受害者所释放的……" <<he>>舔了舔嘴唇，"在每一次高潮的极点。"<br>
+		"肃清。"<br>
+		"冲动。"<<ggawareness>><<awareness 20>>
+		<br><br>
+
+		"被驱逐的这种释放出的腐化会重新渗入世界——在那里它将感染别人，或者凝聚怪物。但在神圣的地方，比如我们圣洁的住所，它不能——我们的结界将其包裹。但在其他地方，它会被受侵蚀的人的伴侣所吸收。这不是我们所期望的，因为它只是将污染转嫁给别人。"<br>
+		"增殖。"<br>
+		"满溢而出。"<br><br>
+
+		"然而，一旦侵蚀者的伴侣通过一次试炼被引入我们的秩序，腐化也无法侵蚀他们的肉体。它将无从而去，被他们内心的，神圣的，真理所扼杀……这是维戈的恩赐。"房间中的每个身着袍子的人都站得笔直。他们整齐地躲着脚跟，声音在你的胸腔中回响。<br>
+		"我们的救星。"<br>
+		"我们的狱卒。"<br>
+		"一体。"<br>
+		"永恒。"<br><br>
+
+		"苦难审判会让这一过程……更加高效。这就是我们如何去净化世界。当约旦的信众打击非人道的表象，我们去拯救受害者的灵魂。通过肉体，实现净化。"<br>
+		"吸收，然后救赎。"<br>
+		"磨砺，然后悔忏。"<br><br>
+	<<case "many">>
+		<<bishop>>展开双臂，用手势示意房间的所有的人。你很难分辨出到底有多少穿着袍子的人。在<<he>>的袍子下，你看到更多的银色钩子，它们都缠绕在线圈之上。
+		<br><br>
+
+		"坐到我们所有人前面来。约旦的同僚们，绝大多数人，依旧不知道我们所作所为的具体内容。而我们，对他们却了如指掌。这一切必须继续下去，这是我们忏悔的屏障。我们承担罪孽，而其余的人就不需要遭遇那些苦难。"<br>
+		"牢牢抓稳。"<br>
+		"殉道者。"<br><br>
+	<<case "cruel">>
+		<<bishop>>弯下身子再次笑起来。"哦，<<sister>>，你对那些残酷的事一无所知，总有一天你会亲自看到，奥利加的孩子们的伟大姿态。到那时候你就会明白，真正的残酷是什么。我无法指责你，对我们来说你只是个孩子，你的怜悯心是……可贵的。"<br>
+		"珍惜它吧。"<br>
+		"在它从你的指间溜走前。"<br><br>
+	<<case "where">>
+		<<bishop>>露出微笑，这个笑容逐渐扩大。"欢迎回家，<<sister>>。"<br>
+		"安全。"<br>
+		"被爱。"<br><br>
+
+		"你正身处忏悔室，就在回廊旁边。除了我们，谁也没资格进来；除了我们，谁也找不到这扇门。你现在就是我们的一员了，<<sister>>，一位真正的告解员。"<br>
+		"一个容器。"<br>
+		"一个净化者。"<br><br>
+
+	<<case "auriga">>
+		你艰难地从口中挤出这个词，脊背不寒而栗。
+		<br><br>
+
+		"黑麋鹿，"<<bishop>>忿忿地说。<br>
+		"紫罗兰色的虚空。"<br>
+		"燃烧的战车。"<br>
+		"另一个。"<br>
+		"从不。"<br><br>
+
+		"被称为奥利加之子的邪教试图破坏阻止奥利加进入我们世界的锁。他们像发情的疯狗一样咬嚼，崇拜一种远超理智的激情和欲望的邪恶。我们以各种方式对抗他们。我们堵塞缝隙。我们解救受害者。我们惩戒——"<<he>>舔了舔嘴唇，"他们的信徒。"
+		<br><br>
+
+		"念出这个名字前务必三思。这个词本身就是一种污秽，你尚不能免疫它的影响。"<br>
+		"卑鄙，"左右手异口同声地说道。<br><br>
+	<<case "self">>
+		<<if $spear_vessel is "temple" or $jordan_ritual_dance is 4>>
+			"约旦对你的评价非常高，<<sister>>。
+			<<if $spear_vessel is "temple" and $jordan_ritual_dance is 4>>
+				你不仅从邪教仪式中解救了一位<<nnpc_his "Jordan">>的同僚，还找回了维戈之矛。"所有的身影都站起身，开始踏起右脚。<br>
+				"我们的救星。"<br>
+				"我们的狱卒。"
+			<<elseif $spear_vessel is "temple">>
+				我们不能漠视取回维戈之矛的<<sister>>。"所有的身影都站起身，开始踏起右脚。<br>
+				"我们的救星。"<br>
+				"我们的狱卒。"
+			<<else>>
+				你从邪教仪式中解救了一位<<nnpc_his "Jordan">>的同僚，"<<he>>说着，舔了舔自己的嘴唇。
+			<</if>>
+			<br><br>
+
+			<<if $angel gte 6>>
+				"你的内在有一种独特的光芒，那种光芒非常……诱人。它正是净化污秽的完美容器。"
+			<<elseif $fallenangel gte 2>>
+				"你对污浊之事并不陌生，对吗？你的内在有着某种虚空，所有污秽无法从中逃脱。"
+			<<elseif $demon gte 6>>
+				"像你这样亵渎的人依然能派上用场，那些污秽已经无法对你造成其他影响。"
+			<</if>>
+			<<bishop>>露出微笑。"除此之外，我们相信，任何有力量清除污秽的人都能靠自己发掘道路。这也是为什么你来到了这里。"<<He>>鼓起掌来，"当然，所有我们的成员都做得很好，理智或愚昧，强大或弱小，虔诚或堕落。那些打破誓言的人，他们的肉体被困在了悔过之墙上，献身于小镇的堕落之人——那些我们通过忏悔召唤到神殿的人。他们各怀着自己的目的。"<br>
+			"忏悔，"左右手异口同声地说道。<br><br>
+
+			"这也让我们得以密切关注那些……存在隐患的个体。某类特定的人或地点尤其容易受到污秽的沾染。一旦他们出现了投身麋鹿的倾向，我们将会……有一些手段来处理。<<if $kylar_manor_secret is 3>>就像你已经知道的那样。<</if>>"
+		<<else>>
+			<<if $angel gte 6>>
+				"你的内在有一种独特的光芒，那种光芒非常……诱人。它正是净化污秽的完美容器。"<<bishop>>笑了笑，"除此之外，我们相信，
+			<<elseif $fallenangel gte 2>>
+				"你对污浊之事并不陌生，对吗？你的内在有着某种虚空，所有污秽无法从中逃脱。"<<bishop>>笑了笑，"除此之外，我们相信，
+			<<elseif $demon gte 6>>
+				"像你这样亵渎的人依然能派上用场，那些污秽已经无法对你造成其他影响。"<<bishop>>笑了笑，"除此之外，我们相信，
+			<<else>>
+				<<bishop>>笑了笑，"我们相信，
+			<</if>>
+			任何有力量清除污秽的人都能靠自己发掘道路。这也是为什么你来到了这里。"<<He>>鼓起掌来，"当然，所有我们的成员都做得很好，理智或愚昧，强大或弱小，虔诚或堕落。那些打破誓言的人，他们的肉体被困在了悔过之墙上，献身于小镇的堕落之人——那些我们通过忏悔召唤到神殿的人。他们各怀着自己的目的。"<br>
+			"忏悔，"左右手异口同声地说道。<br><br>
+
+			"这也让我们得以密切关注那些……存在隐患的个体。某类特定的人或地点尤其容易受到污秽的沾染。一旦他们出现了投身麋鹿的倾向，我们将会……有一些手段来处理。<<if $kylar_manor_secret is 3>>就像你已经知道的那样。<</if>>"
+		<</if>>
+		<br><br>
+<</switch>>
+
+<<if !$confessorQuestions.includes("who")>>
+	<<link [[你是谁？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("who")>><<set $confessorQuestion to "who">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("who") and !$confessorQuestions.includes("remember") and $kylar_manor_secret is 3>>
+	<<link [[我记得你……|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("remember")>><<set $confessorQuestion to "remember">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("who") and !$confessorQuestions.includes("jordan")>>
+	<<link [[你反对约旦吗？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("jordan")>><<set $confessorQuestion to "jordan">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("jordan") and !$confessorQuestions.includes("replacement")>>
+	<<link [[谁又能取代约旦呢？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("replacement")>><<set $confessorQuestion to "replacement">><</link>>
+	<br>
+<</if>>
+<<if !$confessorQuestions.includes("what")>>
+	<<link [[发生什么事了？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("what")>><<set $confessorQuestion to "what">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("what") and !$confessorQuestions.includes("how")>>
+	<<link [[侵蚀？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("how")>><<set $confessorQuestion to "how">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("how") and $confessorQuestions.includes("who") and !$confessorQuestions.includes("many")>>
+	<<link [[神殿到底知道多少？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("many")>><<set $confessorQuestion to "many">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("many") and !$confessorQuestions.includes("cruel")>>
+	<<link [[你的所作所为实在是太过分了！|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("cruel")>><<set $confessorQuestion to "cruel">><</link>>
+	<br>
+<</if>>
+<<if !$confessorQuestions.includes("where")>>
+	<<link [[我在哪儿？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("where")>><<set $confessorQuestion to "where">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includesAny("what","acts","how") and !$confessorQuestions.includes("auriga")>>
+	<<link [[奥利加？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("auriga")>><<set $confessorQuestion to "auriga">><</link>>
+	<br>
+<</if>>
+<<if $confessorQuestions.includes("who") and $confessorQuestions.includes("where") and !$confessorQuestions.includes("self")>>
+	<<link [[为什么是我？|Temple Confessor Intro Ask]]>><<set $confessorQuestions.push("self")>><<set $confessorQuestion to "self">><</link>>
+	<br>
+<</if>>
+<br><br><br>
+
+<<if $confessorQuestions.includesAll("who","what","where","jordan","how")>>
+	<<link [[我没其他问题了|Temple Confessor Intro 6]]>><<unset $confessorQuestions>><<unset $confessorQuestion>><<unset $drainedPronoun>><<unset $drainedAge>><</link>>
+	<br>
+<</if>>

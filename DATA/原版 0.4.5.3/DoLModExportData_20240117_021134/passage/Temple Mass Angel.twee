@@ -1,0 +1,30 @@
+:: Temple Mass Angel []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>><<sydneySchedule>>
+<<npc Jordan>><<person1>>你在教堂的尽头坐下来，约旦正在读圣经。<<His>>悠扬的声音使你平静。你感到很宁静。
+<<if $sydneySeen is undefined or !$sydneySeen.includes("mass")>>
+	<<sydneyMass>>
+<<else>>
+	<br><br>
+	你被叫到前面领圣餐。你跪在约旦面前，其他<<if $pronoun is "m">>修士<<else>>修女<</if>>在一旁观看。<<He>>把一小块面包塞进你的嘴，并把一个杯子放在你的面前。
+	<<if playerBellyVisible() or knowsAboutPregnancy("pc", "Jordan")>>
+		你啜饮甜美的液体，发现没有酒精的余味。当你想要你让位给下一个人时，约旦轻轻抓住你的手腕，将你拉到<<him>>身边。
+		<br><br>
+
+		<<He>>似乎凭记忆读了一段经文。许多其他<<if $pronoun is "m">>修士<<else>>修女<</if>>一脸惊讶。群众全神贯注地聆听。有些人甚至掩面而泣。约旦的话在你脑海中回响宛如未语先闻。
+		<br><br>
+
+		<<he>>说完，将一只手放在你的<<bellyDescription "pc">>上。一股暖流涌向你，而信徒们都以崇敬的目光注视着你。约旦示意你再次入座，而<<him>>继续圣餐流程，将众人注意力拉回到<<he>>身上。<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">><<gggrace>><<grace 5>><</if>>
+	<<elseif playerIsPregnant() and playerAwareTheyArePregnant()>>
+		<<setKnowsAboutPregnancy "pc" "Jordan">>
+		你用手捂住肚子并忧虑地看了约旦一眼。<<He>>似乎明白了什么，拿起另一个杯子。你抿了一口甘甜的饮料，然后为下一个人让路。你注意到嘴里的液体似乎不含酒精。
+	<<else>>
+		你喝了一口甘甜的液体，为后面的下一位让出了位置。<<alcohol 15>>
+	<</if>>
+	<br><br>
+	<<sydneyMass>>
+	约旦以祈祷结束。
+	<br><br>
+<</if>>
+<<endevent>>
+<<link [[继续|Temple]]>><</link>>
+<br>

@@ -1,0 +1,24 @@
+:: Hypnotist Test Tentacles []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<controlloss>>
+	<<molested>>
+	<<tentaclestart 8 15>>
+	<<for _t to 0; _t lt $tentacles.max; _t++>>
+		<<set $tentacles[_t].traits.pushUnique("hypno")>>
+	<</for>>
+	A hoard of tentacles accosts you. Each one is capable of hypnotising you, including tentacles that typically don't have the hypno trait.
+<</if>>
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<statetentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[Next|Hypnotist Test Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Hypnotist Test Tentacles]]>><</link>></span><<nexttext>>
+<</if>>

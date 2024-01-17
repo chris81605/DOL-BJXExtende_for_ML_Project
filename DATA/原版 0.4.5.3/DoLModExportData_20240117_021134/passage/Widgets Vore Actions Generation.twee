@@ -1,0 +1,233 @@
+:: Widgets Vore Actions Generation [widget]
+<<widget "generateActionsVore">>
+	<<set $combat to 1>>
+	<<if _targetlist is undefined>>
+		<<getTargetList>>
+	<</if>>
+	<div id="listContainer">
+		<div id="leftaction" @class="$options.combatControls + 'Control'">
+			<<leftActionInitVore>>
+		</div>
+
+		<div id="rightaction" @class="$options.combatControls + 'Control'">
+			<<rightActionInitVore>>
+		</div>
+
+		<<if ($mouthuse is 0 and !($dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)))>>
+			<div id="mouthaction" @class="$options.combatControls + 'Control'">
+				<<mouthActionInit>>
+			</div>
+		<</if>>
+	</div>
+<</widget>>
+
+<<widget "leftActionInitVore">>
+	<<set $lefttarget to "vore">>
+	<<switch $leftarm>>
+		<<case 0>>
+			<<set $lefttarget to "vore">>
+			<<if $orgasmdown gte 1>>
+				<<set _leftOptions to "orgasm">>
+				<span class="lewd">你的左臂自由了，但你无法停止痉挛。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _leftOptions to "pain">>
+				<span class="red">你的左臂自由了，但疼痛使你动弹不得。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _leftOptions to "unreal">>
+				<span class="pink">你的左臂自由了，但感觉有些麻木。</span>
+			<<else>>
+				<<if _targetYourself is true and _targetnumber gt 1>>
+					<<set _targetlistarms["你自己"] to "self">>
+				<</if>>
+				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "left" _targetlistarms>>
+				<</if>>
+				<<set _leftOptions to "free">>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">你的左臂是自由的。</span>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<br>
+					<<targetListBox "left" _targetlistarms>>
+					<br>
+				<</if>>
+			<</if>>
+		<<case "bound">>
+			<<set _leftOptions to "bound">>
+			<<if $orgasmdown gte 1>>
+				<span class="lewd">你的左臂因紧缚而抽搐。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<span class="red">你的左臂因束缚而阵痛。</span>
+			<<elseif $dissociation gte 2>>
+				<span class="pink">你的左臂因捆绑而瘫软无力。</span>
+			<<else>>
+				<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">你的左臂被绑住。</span>
+			<</if>><<if $options.combatControls.includes("adio")>><br><</if>>
+		<<case "trapped">>
+			<<set _leftOptions to "trapped">>
+			<span @class="($lastOptions.left isnot _leftOptions ?'gold':'purple')">你的左臂被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>缠住了。</span><<if $options.combatControls.includes("adio")>><br><</if>><<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>
+		<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+			<<set $_changetype to true>><<leftActionInit>>
+		<<case "struggle">>
+			<<set $_changetype to true>><<leftActionInitStruggle>>
+		<<case "swarmgrappled">>
+			<<set $_changetype to true>><<leftActionInitSwarm>>
+		<<case "mechgrappled">>
+			<<set $_changetype to true>><<leftActionInitMachine>>
+		<<default>>
+			<<set $_changetype to true>><<leftActionInitTentacle>>
+	<</switch>>
+	<<if $_changetype isnot true>>
+		<<leftActionsVore>>
+		<<if Object.keys(_leftaction).length gt 0>>
+			<<if !(Object.values(_leftaction).includes($leftactiondefault))>>
+				<<set $leftactiondefault to "rest">>
+			<</if>>
+			<<set $leftaction to $leftactiondefault>>
+			<<set _textColor to combatListColor('leftaction', (Object.values(_leftaction).includes($leftaction) ? $leftaction : Object.values(_leftaction)[0]), "Vore")>>
+			<div class="extraMargin">
+				<<generateCombatActionOthers _leftaction "leftaction" _textColor $leftaction "Vore">>
+			</div>
+			<<if $options.combatControls.includes("ists")>>
+				<div id="leftactionDifficulty">
+					<<leftactionDifficulty>>
+				</div>
+			<</if>>
+		<</if>>
+		<<set $lastOptions.left to clone(_leftOptions)>>
+	<</if>>
+<</widget>>
+
+<<widget "leftactionDifficultyVore">>/* Blank widget to pacify the JavaScript Gods. */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "leftActionsVore">>
+	<<set _leftaction to {}>>
+	<<if !(["orgasm", "pain", "unreal"].includes(_leftOptions))>>
+		<<set _leftaction["休息"] to "rest">>
+	<</if>>
+	<<switch _leftOptions>>
+		<<case "free">>
+			<<set _leftaction["逃出"+$vorecreature.replace("frog","青蛙").replace("whale","鲸鱼").replace("snake","蛇").replace("giant lurker","巨大潜伏者").replace("slug","蛞蝓")] to "leftescape">>
+			<<if $vorestage lte 6>>
+				<<set _leftaction["在"+$vorecreature.replace("frog","青蛙").replace("whale","鲸鱼").replace("snake","蛇").replace("giant lurker","巨大潜伏者").replace("slug","蛞蝓")+"里稳住自己"] to "lefthold">>
+			<</if>>
+			<<if $rightarm is "trapped">>
+				<<set _leftaction["解放你的右手"] to "leftvorefree">>
+			<</if>>
+		<<case "bound" "trapped">>
+		<<case "orgasm">>
+			<<set _leftaction["交叉手臂"] to "leftfold">>
+			<<set _leftaction["紧握"] to "leftgrip">>
+		<<case "pain">>
+			<<set _leftaction["挣扎"] to "leftstruggleweak">>
+			<<set _leftaction["防护"] to "leftprotect">>
+		<<case "unreal">>
+			<<set _leftaction["戳自己"] to "leftpoke">>
+			<<set _leftaction["把你的胳膊移开"] to "leftcurl">>
+	<</switch>>
+<</widget>>
+
+<<widget "rightActionInitVore">>
+	<<set $righttarget to "vore">>
+	<<switch $rightarm>>
+		<<case 0>>
+			<<if $orgasmdown gte 1>>
+				<<set _rightOptions to "orgasm">>
+				<span class="lewd">你的右臂自由了，但你无法停止痉挛。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<<set _rightOptions to "pain">>
+				<span class="red">你的右臂自由了，但疼痛使你动弹不得。</span>
+			<<elseif $dissociation gte 2>>
+				<<set _rightOptions to "unreal">>
+				<span class="pink">你的右臂自由了，但感觉有些麻木。</span>
+			<<else>>
+				<<if _targetYourself is true and _targetnumber gt 1>>
+					<<set _targetlistarms["你自己"] to "self">>
+				<</if>>
+				<<if not $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<<targetListBox "right" _targetlistarms>>
+				<</if>>
+				<<set _rightOptions to "free">>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">你的右臂是自由的。</span>
+				<<if $options.combatControls.includes("adio") and _targetnumber gt 1>>
+					<br>
+					<<targetListBox "right" _targetlistarms>>
+					<br>
+				<</if>>
+			<</if>>
+		<<case "bound">>
+			<<set _rightOptions to "bound">>
+			<<if $orgasmdown gte 1>>
+				<span class="lewd">你的右臂因紧缚而抽搐。</span>
+			<<elseif $pain gte 100 and $willpowerpain is 0>>
+				<span class="red">你的右臂因束缚而阵痛。</span>
+			<<elseif $dissociation gte 2>>
+				<span class="pink">你的右臂因捆绑而瘫软无力。</span>
+			<<else>>
+				<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">你的右臂被绑住。</span>
+			<</if>>
+		<<case "trapped">>
+			<<set _rightOptions to "trapped">>
+			<span @class="($lastOptions.right isnot _rightOptions ?'gold':'purple')">你的右臂被<<print setup.vorecreatureList[1][setup.vorecreatureList[0].indexOf($vorecreature)]>>缠住了。</span><br>
+		<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+			<<set $_changetype to true>><<rightActionInit>>
+		<<case "struggle">>
+			<<set $_changetype to true>><<rightActionInitStruggle>>
+		<<case "swarmgrappled">>
+			<<set $_changetype to true>><<rightActionInitSwarm>>
+		<<case "mechgrappled">>
+			<<set $_changetype to true>><<rightActionInitMachine>>
+		<<default>>
+			<<set $_changetype to true>><<rightActionInitTentacle>>
+	<</switch>>
+	<<if $_changetype isnot true>>
+		<<rightActionsVore>>
+		<<if Object.keys(_rightaction).length gt 0>>
+			<<if !(Object.values(_rightaction).includes($rightactiondefault))>>
+				<<set $rightactiondefault to "rest">>
+			<</if>>
+			<<set $rightaction to $rightactiondefault>>
+			<<set _textColor to combatListColor('rightaction', (Object.values(_rightaction).includes($rightaction) ? $rightaction : Object.values(_rightaction)[0]), "Vore")>>
+			<div class="extraMargin">
+				<<generateCombatActionOthers _rightaction "rightaction" _textColor $rightaction "Vore">>
+			</div>
+			<<if $options.combatControls.includes("ists")>>
+				<div id="rightactionDifficulty">
+					<<rightactionDifficulty>>
+				</div>
+			<</if>>
+		<</if>>
+		<<set $lastOptions.right to clone(_rightOptions)>>
+	<</if>>
+<</widget>>
+
+<<widget "rightactionDifficultyVore">>/* But seriously, not having this blank widget will cause red blocks of error in the "lists" actions types */
+	<!-- Does nothing -->
+<</widget>>
+
+<<widget "rightActionsVore">>
+	<<set _rightaction to {}>>
+	<<if !(["orgasm", "pain", "unreal"].includes(_rightOptions))>>
+		<<set _rightaction["休息"] to "rest">>
+	<</if>>
+	<<switch _rightOptions>>
+		<<case "free">>
+			<<set _rightaction["逃出"+$vorecreature.replace("frog","青蛙").replace("whale","鲸鱼").replace("snake","蛇").replace("giant lurker","巨大潜伏者").replace("slug","蛞蝓")] to "rightescape">>
+			<<if $vorestage lte 6>>
+				<<set _rightaction["在"+$vorecreature.replace("frog","青蛙").replace("whale","鲸鱼").replace("snake","蛇").replace("giant lurker","巨大潜伏者").replace("slug","蛞蝓")+"里稳住自己"] to "righthold">>
+			<</if>>
+			<<if $rightarm is "trapped">>
+				<<set _rightaction["解放你的右手"] to "rightvorefree">>
+			<</if>>
+		<<case "bound" "trapped">>
+		<<case "orgasm">>
+			<<set _rightaction["交叉手臂"] to "rightfold">>
+			<<set _rightaction["紧握"] to "rightgrip">>
+		<<case "pain">>
+			<<set _rightaction["挣扎"] to "rightstruggleweak">>
+			<<set _rightaction["防护"] to "rightprotect">>
+		<<case "unreal">>
+			<<set _rightaction["戳自己"] to "rightpoke">>
+			<<set _rightaction["把你的胳膊移开"] to "rightcurl">>
+	<</switch>>
+<</widget>>

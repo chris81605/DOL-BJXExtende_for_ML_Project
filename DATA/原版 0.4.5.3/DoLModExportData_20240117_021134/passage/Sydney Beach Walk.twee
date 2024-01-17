@@ -1,0 +1,96 @@
+:: Sydney Beach Walk []
+<<location "beach">><<effects>><<run statusCheck("Sydney")>>
+你和悉尼在海岸上漫步。
+<<if $weather is "clear">>
+	<<switch $season>>
+		<<case "spring">>
+			微风轻抚，你们沐浴在温暖的阳光下。
+		<<case "summer">>
+			强烈的阳光让你们俩都感到燥动。你们闲聊着，让思绪远离酷热。
+		<<case "autumn">>
+			天气不再闷热，空气中弥漫着丝丝寒意。
+		<<case "winter">>
+			你们沉浸在聊天中，阳光似乎驱散了萦绕在你们身上的寒意。
+	<</switch>>
+	<<tiredness 3>><<gtiredness>>
+<<else>>
+	<<switch $season>>
+		<<case "summer">>
+			天气非常凉爽，你们愉快地在一起聊天。
+		<<default>>
+			天气很冷，你们两人在聊天时都不自觉地缩起脖子，呼出白色的气息。
+	<</switch>>
+<</if>>
+<<physique 3>><<tiredness 3>>
+<br><br>
+<<if random(1, 2) is 1>>
+	<<if $sydney.swim is "lewd">>
+		你和悉尼走着，你注意到有人正目不转睛地盯着悉尼的衣服。<<if _sydneyStatus.includes("corrupt")>><<He>>得意地笑了起来，旋转着大方地展示着自己。<<else>><<He>>的脸瞬间变红，害羞地把自己捂住。<</if>><<npcincr Sydney purity -1>><<lspurity>>
+		<br><br>
+	<<elseif $sydney.swim is "crossdress">>
+		<<if $pronoun is "m">>
+			你和悉尼走着，你注意到有人正目不转睛地盯着悉尼的下体。<<if _sydneyStatus.includes("corrupt")>><<he>>得意地笑了起来，在你们走远时扭了扭<<his>>的屁股。<<else>><<he>>的脸瞬间变红，害羞地把自己捂住。<</if>><<npcincr Sydney purity -1>><<lspurity>>
+		<<else>>
+			你和悉尼走着，你注意到有人正目不转睛地盯着悉尼的胸口。<<if _sydneyStatus.includes("corrupt")>><<He>>得意地笑了起来，放肆地向他们抖动着自己的<<print $NPCName[$NPCNameList.indexOf("Sydney")].breastsdesc>>。<<else>><<He>>害羞地捂住了自己，直到发现这会更加的引人注目。<</if>><<npcincr Sydney purity -1>><<lspurity>>
+		<</if>>
+		<br><br>
+	<</if>>
+<</if>>
+<<switch random(1, 7)>>
+	<<case 1>>
+		<<if $weather is "clear">>
+			"今天太阳真好，也许我会晒黑一点。"
+		<<else>>
+			"我更喜欢多云的日子，毕竟曾经一不小心被晒伤过。"
+		<</if>>
+	<<case 2>>
+		"我的<<sydneyOtherParent>>曾在我小时候带我来这里玩，真是怀念。"
+	<<case 3>>
+		"这里的海洋生物很……奇怪。<<sydneyMum>>说它们<<if _sydneyStatus.includes("corrupt")>>的性欲很强<<else>>有很激烈的发情期<</if>>。"
+	<<case 4>>
+		"这片海真的很美。我曾幻想着有一天能在海面上，永远地漂流下去。"
+	<<case 5>>
+		"海水对金属饰品有腐蚀性。如果我们去游泳，请提醒我摘掉<<if $templePromised is "Sydney">>我们的戒指和<</if>>我的吊坠，好吗？"
+	<<case 6>>
+		<<if $sydneyromance is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].virginity.kiss isnot true>>
+			悉尼双手搂着你的胳膊，在你反应过来之前俯身亲吻了你的嘴唇。<<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>><<npcincr Sydney lust 1>><<glust>>
+			<br><br>
+			"只是觉得要提醒你一下我很爱你。"<<He>>咯咯地笑了起来。
+		<<else>>
+			当你们走路时，悉尼搭住你的胳膊。"如果这让你感到不舒服，请告诉我。我……我只是单纯想把我喜欢的人拽得更紧一点。"
+		<</if>>
+	<<case 7>>
+		<<He>>扯了扯<<his>>的<<sydneySwimwear>>。
+		<<switch $sydney.swim>>
+			<<case "school">>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"学校的泳装很耐用，如果不那么的朴素就更好了。"
+				<<else>>
+					"我觉得穿着学校的泳装很不自在。不过，我想谦虚一点也没有错。"
+				<</if>>
+			<<case "normal">>
+				<<if $pronoun is "m">>
+					"我不习惯光着上身。我的吊坠很容易变烫，挂在胸前会有点难受。"
+				<<else>>
+					"我不习惯这么穿的这么暴露，我的吊坠很容易变烫，挂在胸前会有点难受。"
+				<</if>>
+			<<case "lewd">>
+				<<if _sydneyStatus.includes("corrupt")>>
+					"暴露在外真是爽啊，似乎现在只需要有人帮我脱掉剩下的东西。"<<He>>给了你一个wink。<<garousal>><<arousal 50>>
+				<<else>>
+					"我不敢相信我真的这样穿了……人，人们在看……"<<he>>立马跑到你身后，试图遮住裸露的皮肤。
+				<</if>>
+			<<case "crossdress">>
+				<<if _sydneyStatus.includes("corrupt")>>
+					<<if random(1, 5) is 1>>
+						"我……穿着……<i>'异'装</i>！"<<He>>举起<<his>>的十字架，突然笑了起来，"我……是个……<i>'异'端</i>！"
+					<<else>>
+						“我居然那么轻易的就堕落了……真是让人有点不爽。我应该感到不安吗？……也许吧。”
+					<</if>>
+				<<else>>
+					"我不应该这样子的，我的心跳得好快……"
+				<</if>>
+		<</switch>>
+<</switch>>
+<br><br>
+<<link [[继续|Sydney Beach]]>><</link>>

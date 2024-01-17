@@ -1,0 +1,46 @@
+:: Eden Table []
+<<npc Eden>><<person1>>
+<<effects>>
+
+<<if Time.hour gte 0 and Time.hour lte 6>>
+	你在餐桌旁坐下，看着伊甸在被子里打鼾。即将熄灭的炉火余烬在<<his>>身上投下了遥远的光芒。
+	<br><br>
+
+	<<link [[继续|Cabin House Actions]]>><<endevent>><</link>>
+<<elseif Time.hour lte 8>>
+	你在餐桌旁坐下，看着伊甸为一天做准备。<<He>>花了一些时间在水槽边洗漱。
+	<br><br>
+
+	<<link [[继续|Cabin House Actions]]>><<endevent>><</link>>
+<<elseif Time.hour lte 16>>
+	你在餐桌旁坐下来，凝视着窗外。森林里的树木在空地上轻轻摇曳。
+	<br><br>
+
+	<<link [[继续|Cabin House Actions]]>><<endevent>><</link>>
+<<elseif Time.hour lte 17>>
+	<<if $daily.eden.bath isnot 1>>
+		你在餐桌旁坐下，看着伊甸从前门进来。<<He>>走向浴室，准备洗澡。
+		<br><br>
+
+		<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+	<<else>>
+		你在餐桌旁坐下，看向浴室的方向。伊甸在浴缸里伸了个懒腰，在水中放松。
+		<br><br>
+
+		<<link [[继续|Cabin House Actions]]>><<endevent>><</link>>
+	<</if>>
+<<elseif Time.hour lte 18 and $daily.eden.dinner isnot 1 and $NPCName[$NPCNameList.indexOf("Eden")].love gte 100>>
+	你在窗边休息，看着伊甸准备晚餐。弄完后，<<he>>把食物端到餐桌上。
+	<br><br>
+
+	<<link [[继续|Eden Cabin]]>><<endevent>><</link>>
+<<else>>
+	<<if Time.days % 2 is 0>>
+		你坐在餐桌旁，看着伊甸在炉火旁清洁<<his>>的枪。场面出奇的平静。<<stress -1>><<lstress>>
+	<<else>>
+		你坐在餐桌旁，看着伊甸在炉火旁读书。场面出奇的平静。<<stress -1>><<lstress>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Cabin House Actions]]>><<endevent>><</link>>
+<</if>>

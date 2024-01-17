@@ -1,0 +1,55 @@
+:: Tattoo Choice []
+<<effects>>
+
+他们有块展板，上面有很多纹身图案。
+<br><br>
+
+地点：<br>
+<<for _active_bodypart range setup.bodyparts>>
+	<<if !$skin[_active_bodypart].writing>>
+		<<set _bodypart_detected to 1>>
+		<label>你的<<bodypart _active_bodypart>><<capture _active_bodypart>><<radiobutton "$tattoo_bodypart" _active_bodypart>><</capture>></label>
+		<br>
+	<</if>>
+<</for>>
+<<if _bodypart_detected isnot 1>>
+	<span class="red">你的皮肤上已经没有可纹身的空间了。</span>
+	<br>
+<</if>>
+<br>
+
+<span class="pink">适合女孩的</span>纹身:
+<br>
+<label>独角兽<span class="pink">♀</span><<radiobutton "$tattoo_choice" "unicorn">></label>|
+<label>红心<span class="pink">♀</span><<radiobutton "$tattoo_choice" "heart">></label>|
+<label>花朵<span class="pink">♀</span><<radiobutton "$tattoo_choice" "flower">></label>|
+<label>蝴蝶<span class="pink">♀</span><<radiobutton "$tattoo_choice" "butterfly">></label>|
+<label>星星<span class="pink">♀</span><<radiobutton "$tattoo_choice" "star">></label>|
+
+<br><br>
+<span class="blue">适合男孩的</span>纹身:
+<br>
+<label>颅骨<span class="blue">♂</span><<radiobutton "$tattoo_choice" "skull">></label>|
+<label>火焰<span class="blue">♂</span><<radiobutton "$tattoo_choice" "flame">></label>|
+
+<br><br>
+
+<span class="gold">圣洁的</span>纹身:
+<br>
+<label>十字架<<radiobutton "$tattoo_choice" "cross">></label>|
+
+<br><br>
+
+<span class="lewd">反常的</span>纹身:
+<br>
+<<if $deviancy gte 35>>
+	<label>爪印<<radiobutton "$tattoo_choice" "paw_print">></label>|
+<<else>>
+	你对异种的接纳程度还不够。
+<</if>>
+<br><br>
+
+<<link [[纹身 (£500 1:00)|Tattoo Get]]>><</link>><<gpain>>
+<br>
+<<link [[返回|Tattoo Parlour]]>><<unset $tattoo_bodypart>><<unset $writebodyaction>><</link>>
+<br>

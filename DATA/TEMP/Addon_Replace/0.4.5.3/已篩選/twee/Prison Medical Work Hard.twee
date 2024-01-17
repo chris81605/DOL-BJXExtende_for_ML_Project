@@ -1,0 +1,87 @@
+:: Prison Medical Work Hard []
+<<effects>>
+
+<<generate_methodical_guard 0>><<person1>>你帮助<<methodical_guard 0>>移动病人、测量生命体征和包扎。<<He>>只在必要时说话，很少关心病人的舒适度。
+<br><br>
+
+<<rng 6>>
+<<switch $rng>>
+<<case 1>>
+	"止痛药适合这个人，"<<he>>说。<<He>>从<<his>>的口袋里掏出一个瓶子，但难以打开。"你介意吗？实际上只有这个。" 瓶子啪的一声打开了。里面是鲨鱼牙齿。
+	<<generate2>><<person2>>
+	<br><br>
+	病人，一个<<person>>，拽着你的<<if $exposed gte 2>>胳膊<<else>>袖子<</if>>。"确实很疼。你能多给我塞点吗？<<person1>><<He>>不会注意到的。"
+	<br><br>
+
+	<<set $skulduggerydifficulty to 300>>
+	/* 北极星模组 */
+	<<link [[多塞一点|Prison Medical Work Slip]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+	/* 北极星 */
+	<br>
+	<<set $skulduggerydifficulty to 700>>
+	/* 北极星模组 */
+	<<link [[多塞一点, 给自己也来点|Prison Medical Work Extra]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>
+	/* 北极星 */
+	<br>
+	<<link [[拒绝|Prison Medical Work Slip Refuse]]>><</link>>
+	<br>
+<<case 2>>
+	<<if currentSkillValue('tending') gte random(1, 1000)>>
+		"把药膏涂在皮疹上。你已经涂了吗？那就帮我——哦。你也做好了吗。" <span class="green"><<methodical_guard 0 cap>>对你的能力印象深刻。</span><<glove>><<lsuspicion>><<prison_rep methodical 1>><<prison_guards 1>>
+		<br><br>
+	<<else>>
+		"把药膏涂在皮疹上。不，涂在腿上，是另一条腿。不，<span class="red">不是<i>这里。</i></span>"<<methodical_guard 0 cap>>对你的帮助不太满意。
+		<br><br>
+	<</if>>
+
+	<<prison_medical_options>>
+<<case 3>>
+	<<generate2>><<person2>>
+	当你转过身的时候，一个病人拍了拍你的<<bottom>>。
+	<br><br>
+
+	<<link [[生气|Prison Medical Work Angry]]>><<prison_inmates 1>><<prison_guards -1>><</link>><<gsuspicion>><<grespect>>
+	<br>
+	<<link [[无视|Prison Medical Work Angry Ignore]]>><<prison_guards 1>><<trauma 6>><<stress 6>><<pain 1>><</link>><<gpain>><<gtrauma>><<gstress>><<lsuspicion>>
+	<br>
+
+<<case 4>>
+	橱柜自顾自发出咯咯的声响，直到<<methodical_guard 0>>重重拍打了它一下才平静下来。
+	<br><br>
+
+	<<prison_medical_options>>
+<<case 5>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		当你用被捆绑的双臂艰难地完成工作时，你意识到病人们的目光在注视着你，毫不掩饰他们被逗得多开心。<<lrespect>><<prison_inmates -1>><<gstress>><<stress 6>>
+		<br><br>
+		<<prison_medical_options>>
+	<<else>>
+		<<generate2>><<person2>>
+		其中一位病人在你工作时用淫荡的眼神盯着你。
+		<<if $NPCList[1].penis isnot "none">>
+			<<his>>的床单下方突然出现了凸起。"嘿，护士，"当你走近时<<he>>说，"有急事，是我的鸡巴。"<<He>>干咳一声。"你得帮我射出来，否则我会病得更重。"
+		<<else>>
+			"嘿，护士，"当你走近时<<he>>说，"有急事，是我的小穴。"<<He>>干咳一声。"你得帮我喷出来，否则我会病得更重。"
+		<</if>>
+		<br><br>
+		<<link [[忽视|Prison Medical Work Handjob Ignore]]>><</link>>
+		<br>
+		<<if $promiscuity gte 15>>
+			<<link [[帮忙手交|Prison Medical Work Handjob]]>><<prison_hope 1>><</link>><<promiscuous2>><<ghope>>
+			<br>
+		<</if>>
+		<<if $submissive lte 500 and !$worn.face.type.includes("gag")>>
+			<<link [[恐吓|Prison Medical Work Handjob Scare]]>><<prison_reb 1>><<prison_inmates 1>><</link>><<defianttext>><<greb>><<grespect>>
+			<br>
+		<</if>>
+	<</if>>
+<<default>>
+	灯光闪烁。
+	<<if $hallucinations gte 2 and random(1, 10) is 10>>
+		刹那间，所有的床上都挤满了瘦长的畸形蛆虫。它们从被子里漏出来，然后渗过地板。你眨了眨眼，画面消失了。<<gstress>><<stress 6>>
+	<<else>>
+		它很快就停止了，但光线似乎更加暗淡了。
+	<</if>>
+	<br><br>
+	<<prison_medical_options>>
+<</switch>>

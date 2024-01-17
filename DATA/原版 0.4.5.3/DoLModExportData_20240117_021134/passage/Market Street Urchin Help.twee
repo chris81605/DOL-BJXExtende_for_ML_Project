@@ -1,0 +1,22 @@
+:: Market Street Urchin Help []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">>
+<<set $urchin_debt to random(500,2000)>>
+原来这个<<person1>><<person>>偷了一些<<if $phase is 0>>食物<<else>>摊位上的商品<</if>>，大约<<printmoney $urchin_debt>>。摊主正准备报警。
+<br><br>
+<<if $phase is 0>>
+	<<link [[尝试解释孤儿绝望的饥饿|Market Street Urchin Help Persuade]]>><</link>>
+	<br>
+<<else>>
+	<<link [[哀求摊主放过|Market Street Urchin Help Persuade]]>><</link>>
+	<br>
+<</if>>
+<<if $money gte $urchin_debt>>
+	<<link [[主动提出付款|Market Street Urchin Help Pay]]>><<set $phase += 1>><</link>> /* incr $phase to indicate price not agreed. */
+	<br>
+<</if>>
+<<if $submissive lte 1100 and (($phase is 0) or ($phase is 10 and ($delinquency gte 400 or $cool gte 40)))>>
+	<<link [[袭击小摊的摊主|Market Street Urchin Help Hit]]>><<crimeUp 200 "assault">><</link>><<gcrime "assault">>
+	<br>
+<</if>>
+<<link [[走开|Connudatus Street]]>><<unset $urchin_debt>><<endevent>><</link>>
+<br>

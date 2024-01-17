@@ -1,0 +1,21 @@
+:: Livestock Slime Field Grass Extreme Defy []
+<<effects>>
+
+<<if $earSlime.corruption gte (currentSkillValue('willpower') / 10)>>
+	<<set $earSlime.defyCooldown += 8>>
+	你试图忽略史莱姆，但感到一阵剧痛，这是史莱姆对你反抗的教训。然而，<span class="red">你无法</span>抵抗它的影响。<<ggwillpower>><<willpower 3>>
+	<br><br>
+	你四肢着地。当你拔起第一簇草时，你感觉自己陷入了一种恍惚状态。<span class="green">你从未有过如此宁静的感觉。</span>你想吃掉所有美味的草。
+	<br><br>
+	<<link [[吃草……|Livestock Slime Field Grass Extreme Eat]]>><<pass 60>><<livestock_obey 1>><<transform cow 1>><<hunger -400>><</link>>
+<<else>>
+	<<if $earSlime.growth gte 100>>
+		<<set $earSlime.defyCooldown += 2>>
+		你感到一阵剧痛，这是史莱姆对你反抗的教训。然而<span class="red">它并未阻止你，毕竟还有其它的惩罚正等着你。</span>
+	<<else>>
+		你试着忽略史莱姆，但感到一阵剧痛，这是史莱姆对你反抗的教训。你觉得它尝试过，<span class="green">但是失败了，</span>它没能强迫你按照它想要的方式吃草。<<gwillpower>><<willpower 1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Livestock Field]]>><<endevent>><</link>>
+<</if>>

@@ -1,0 +1,49 @@
+:: Farm Woodland Forage []
+<<effects>>
+
+你拿着一个篮子走进树林，在树枝和地上寻找成熟的食物。
+<br><br>
+
+<<if $rng gte 75>>
+	<span class="green">你发现一些成熟的<<icon "tending/strawberry.png">>草莓。</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick strawberry 10 50>>
+	<<else>>
+		<<tending_pick strawberry 5 25>>
+	<</if>>
+<<elseif $rng gte 50>>
+	<span class="green">你发现一些成熟的<<icon "tending/peach.png">>桃子。</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick peach 10 50>>
+	<<else>>
+		<<tending_pick peach 5 25>>
+	<</if>>
+<<elseif $rng gte 25>>
+	<span class="green">你发现一些成熟的<<icon "tending/plum.png">>李子。</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick plum 10 50>>
+	<<else>>
+		<<tending_pick plum 5 25>>
+	<</if>>
+<<else>>
+	<span class="green">你发现一些<<icon "tending/mushroom.png">>蘑菇。</span>
+	<<if $farm.woodland gte 3>>
+		<<tending_pick mushroom 10 50>>
+	<<else>>
+		<<tending_pick mushroom 5 25>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if random(1, 5) is 5>>
+	你闻到了迷人的甜味。它引导你找到了一朵奇怪的紫花。
+	<br><br>
+
+	<<icon "tending/strange_flower.png">> <<link [[摘取|Farm Woodland Harvest]]>><<drugs 60>><</link>><<garousal>>
+	<br>
+	<<link [[无视|Farm Woodland]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Farm Woodland]]>><</link>>
+	<br>
+<</if>>

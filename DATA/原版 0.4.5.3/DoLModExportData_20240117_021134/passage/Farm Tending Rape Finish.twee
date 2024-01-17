@@ -1,0 +1,52 @@
+:: Farm Tending Rape Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<person>>留下你一个人躺在<<if $weather is "rain" or $weather is "snow">>泥里<<else>>地上<</if>>，然后翻过围栏回去了。
+	<br><br>
+	<<tearful>>你爬了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+
+<<elseif $enemyhealth lte 0>>
+	<<person>>转身逃跑。<<He>>从围栏上翻了出去，逃跑的同时害怕地回头看了你一眼。
+	<br><br>
+	<<tearful>>你拍去身上的灰尘。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destination_farm>>
+<<else>>
+	<<set $rescued += 1>>
+	"我来了！"是艾利克斯。<<person>>从你身边后退，向<<he>>来的方向逃跑了。
+	<br><br>
+	<<tearful>>你爬了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Alex>><<person1>>
+
+	艾利克斯赶到了。"那个混蛋爬围栏进来的？"<<he>>问道。你点头。"别再让我在这里逮到你了，"艾利克斯在闯入者身后喊道，那家伙已经跑出一段路了。
+	<br><br>
+
+	"太不尊重人了，"<<he>>嘟囔着。
+
+	<<if $exposed gte 1 and $farm_naked isnot 1>>
+		<<covered>><<He>>红着脸看向了别处，好像刚刚才注意到你的穿着。"我给你找点什么遮着。"<<garousal>><<towelup>>
+		<br><br>
+
+		<<He>>很快拿着毛巾回来了，然后继续回到工作中。
+	<<else>>
+		"我得回去工作了。"
+	<</if>>
+	<<gdom>><<npcincr Alex dom 1>>
+	<<if $exposed gte 1>>
+		<<glust>><<npcincr Alex lust 1>>
+	<</if>>
+	<br><br>
+
+	<<destination_farm>>
+<</if>>

@@ -1,0 +1,20 @@
+:: Temple Firewalk 5 []
+<<effects>>
+你再次向前迈步，现在已经在炭火上走过了一半。炽热的温度持续上升。
+<<pain 3>>
+<br><br>
+<<if (currentSkillValue('willpower') / 10) gte (($pain - 100) + random(1, 100))>>
+	<span class="green">你感觉脚底在燃烧，但你决心继续前进。</span>
+	<<gwillpower>><<willpower 1>>
+	<br><br>
+	<<templeicon "trialcontinue">><<link [[继续|Temple Firewalk 6]]>><</link>><<gpain>>
+	<br>
+	<<templeicon "trialbail">><<link [[跳开|Temple Firewalk Jump]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">你感到脚底发烫，无法忍受。</span>你跳到安全的地方。<<person2>><<monk>>和见习教徒为你的尝试鼓掌。
+	<<ggwillpower>><<willpower 10>>
+	<br><br>
+	<<link [[继续|Temple Firewalk Jump]]>><</link>>
+	<br>
+<</if>>

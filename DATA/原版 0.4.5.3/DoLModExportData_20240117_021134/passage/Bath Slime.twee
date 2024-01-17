@@ -1,0 +1,40 @@
+:: Bath Slime []
+<<effects>>
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+
+	<<if $tentacledisable is "f">>
+		<<set $enemytype to "tentacles">>
+		<<tentaclestart 2 15 "tendril">>
+	<<else>>
+		<<set $enemytype to "swarm">>
+	<</if>>
+
+
+	<<swarminit "slimes" "史莱姆" "向你移动" "包围着你" "击退" 8 0>>
+	<<set $timer to 20>>
+<</if>>
+
+<<swarmeffects>>
+<<if $tentacledisable is "f">>
+	<<effectstentacles>>
+<</if>>
+
+<<swarm>>
+<<if $tentacledisable is "f">>
+	<<tentacles>>
+	<<statetentacles>>
+	<<actionsOmni>>
+<<else>>
+	<<swarmactions>>
+<</if>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Bath Slime Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|$passage]]>><</link>></span><<nexttext>>
+<</if>>

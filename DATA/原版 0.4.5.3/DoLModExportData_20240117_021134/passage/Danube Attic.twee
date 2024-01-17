@@ -1,0 +1,54 @@
+:: Danube Attic []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<person>>带着你上了一段楼梯，拉动天花板上的活板门。伴随着一阵灰尘，一架梯子掉了出来。
+"那古物是我祖先的一副画像。我看起来很像他们，所以当你找到它时，你就知道了。"
+<<He>>让你独自登上嘎吱作响的梯子。
+<br><br>
+
+当你爬到上面时，忍不住咳嗽了几声，透过阴暗朝里面张望。这里有很多旧家具，但你没有看到任何画作。
+它可能在那些堆着的盒子里。房间角落里有张巨大的蜘蛛网，大概有你的两倍大。你希望织起它的家伙不在那边。
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+
+	<<if $swarmdisable is "f" and $spiderdisable is "f" and $rng gte 1>>
+
+		<<pass 30>>
+		经过半小时的搜寻，终于在房间角落的蜘蛛网后面发现了你要找的东西。
+		你想要绕过去，但房间的那片区域完全被它挡住了，蛛网上方的黑暗中似乎有什么东西正在移动。
+		你一抬头，就看到几个巨大的蛋囊正在抽动，它们每个都有你的头那么大。
+		<br><br>
+
+		<<link [[放弃你的任务|Danube Abandon]]>><</link>>
+		<br>
+		<<link [[破坏蛛网|Danube Spiders]]>><<set $molestationstart to 1>><</link>>
+		<br>
+
+	<<else>>
+
+		<<pass 1 hour>>
+		你花了一个小时去搜索阁楼的每一寸地方，但还是没有找到这幅画的任何踪迹。
+		<br><br>
+
+		<<link [[放弃你的任务|Danube Abandon]]>><</link>>
+		<br>
+
+	<</if>>
+
+<<else>>
+
+	你花了一个小时才发现画原来藏在其中一个盒子里。它比看起来要重上不少，你设法把它从阁楼上搬了下来。
+	那<<person>>应该是听到了你下楼的动静，所以很快就走了过来。
+	"可以了，谢谢你，"<<he>>拿起画向你道谢，交给你<<moneyGain 25>>。
+	当<<he>>注意到你满是灰尘的衣服时，<<his>>的笑容消失了，"请离开，免得弄脏我的地毯。"
+	<br><br>
+
+	<<pass 1 hour>>
+	<<endevent>>
+
+	<<link [[继续|Danube Street]]>><</link>>
+	<br>
+
+<</if>>

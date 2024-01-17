@@ -1,0 +1,1307 @@
+:: Widgets Island [widget]
+<<widget "island_tide_text">>
+<<switch $island.tide>>
+	<<case 0>>
+		<span class="teal">潮水离这里还有一段距离。</span>
+	<<case 1>>
+		<span class="lblue">海浪还没有打到你身上。</span>
+	<<case 2>>
+		<span class="blue">水花拍打着你的脚。</span>
+	<<case 3>>
+		<span class="purple">水没过了你的脚踝。</span>
+	<<case 4>>
+		<span class="pink">水深及膝，海浪几乎要把你冲倒。</span>
+	<<default>>
+		<span class="red">水上涨到你的腰部，即将吞没你！</span>
+<</switch>>
+<</widget>>
+
+<<widget "island_tide">>
+<<if _args[0]>>
+	<<set $island.tide += _args[0]>>
+	<<set $island.tide to Math.clamp($island.tide, 0, 5)>>
+<</if>>
+<</widget>>
+
+<<widget "gisland_tide">>
+	<<if $statdisable is "f">> |
+		<span class="red">+ 潮水</span>
+	<</if>>
+<</widget>>
+
+<<widget "lisland_tide">><<if $statdisable is "f">> |
+		<span class="green">- 潮水</span>
+	<</if>>
+<</widget>>
+
+<<widget "gwalnut">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ 一把核桃</span>
+	<</if>>
+<</widget>>
+
+<<widget "ggwalnut">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + 一把核桃</span>
+	<</if>>
+<</widget>>
+
+<<widget "lwalnut">>
+	<<if $statdisable is "f">> |
+		<span class="red">- 一把核桃</span>
+	<</if>>
+<</widget>>
+
+<<widget "gwood">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ 木材</span>
+	<</if>>
+<</widget>>
+
+<<widget "lwood">>
+	<<if $statdisable is "f">> |
+		<span class="red">- 木材</span>
+	<</if>>
+<</widget>>
+
+<<widget "wood_required">> |
+	<<if _args[0]>>
+		需要的木材数量：<<print _args[0]>>
+	<<else>>
+		不需要木材
+	<</if>>
+<</widget>>
+
+<<widget "gcamp_concealment">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ 营地隐蔽性</span>
+	<</if>>
+<</widget>>
+
+<<widget "lcamp_concealment">>
+	<<if $statdisable is "f">> |
+		<span class="red">- 营地隐蔽性</span>
+	<</if>>
+<</widget>>
+
+<<widget "gcomprehension">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ 领悟</span>
+	<</if>>
+<</widget>>
+
+<<widget "ggcomprehension">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + 领悟</span>
+	<</if>>
+<</widget>>
+
+<<widget "gggcomprehension">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + + 领悟</span>
+	<</if>>
+<</widget>>
+
+<<widget "walnutStoreMessage">>
+	<<if $statdisable is "f">> |
+		<i>储存的核桃会随着时间的推移更加干燥，最终更有营养。</i>
+	<</if>>
+<</widget>>
+
+<<widget "campFurnitureMessage">>
+	<<if $statdisable is "f">> |
+		 <i>在旧营地留下一些家具。</i>
+	<</if>>
+<</widget>>
+
+<<widget "islander_language">>
+	<<if _args[0]>>
+		<<set $islander_language += (_args[0] * 3)>>
+	<</if>>
+<</widget>>
+
+<<widget "island_tide_options">>
+	<<link [[爬到树林边缘 (0:05)|Island Beach Walk]]>><<set $phase to 1>><<island_tide 1>><<set $island.tide_distance += 1>><<island_pass 5>><</link>><<gisland_tide>><<lharass>>
+	<br>
+	<<link [[走到树林边缘 (0:02)|Island Beach Walk]]>><<set $phase to 2>><<island_pass 2>><<set $island.tide_distance += 1>><</link>>
+	<br>
+	<<link [[跑到树林边缘 (0:01)|Island Beach Walk]]>><<set $phase to 3>><<island_tide -1>><<set $island.tide_distance += 1>><<island_pass 1>><</link>><<lisland_tide>><<gharass>>
+	<br>
+<</widget>>
+
+<<widget "island_init">>
+	<<if $island is undefined>>
+		<<set $island to {}>>
+		<<set $island.rocky_hillock to {}>>
+		<<set $island.rocky_hillock.space to 1>>
+		<<set $island.rocky_hillock.space_used to 0>>
+		<<set $island.waterfall to {}>>
+		<<set $island.waterfall.space to 3>>
+		<<set $island.waterfall.space_used to 0>>
+		<<set $island.gulch to {}>>
+		<<set $island.gulch.space to 5>>
+		<<set $island.gulch.space_used to 0>>
+		<<set $island.walnut to 0>>
+		<<set $island.walnut_dried to 0>>
+		<<set $island.explore_count to 0>>
+		<<set $island.explore_locations to []>>
+		<<set $island.wood to 0>>
+	<</if>>
+	<<if $islander_language is undefined>>
+		<<set $islander_language to 0>>
+	<</if>>
+	<<set $island.tide to 0>>
+	<<set $island.tide_distance to 0>>
+	<<set $island.hide to 1>>
+	<<set $hunger to 0>>
+	<<set $island.explore to "none">>
+<</widget>>
+
+<<widget "island_var_list">>
+	岩石山空间已使用: <<print $island.rocky_hillock.space_used>>
+	<br>
+	瀑布空间已使用: <<print $island.waterfall.space_used>>
+	<br>
+	峡谷空间已使用: <<print $island.gulch.space_used>>
+	<br>
+	核桃: <<print $island.walnut>>
+	<br>
+	干核桃: <<print $island.walnut_dried>>
+	<br>
+	探索次数: <<print $island.explore_count>>
+	<br>
+	探索地点数: <<print $island.explore_locations>>
+	<br>
+	语言: <<print $islander_language>>
+	<br>
+	潮水: <<print $island.tide>>
+	<br>
+	潮水距离: <<print $island.tide_distance>>
+	<br>
+	隐蔽: <<print $island.hide>>
+	<br>
+	探明: <<print $island.explore>>
+	<br>
+	饥饿: <<print $hunger>>
+	<br>
+	木材: <<print $island.wood>>
+	<br>
+	空间: <<print $island[$island.home].space>>
+	<br>
+<</widget>>
+
+<<widget "island_end">>
+<<set $island.tide to undefined>>
+<<set $island.tide_distance to undefined>>
+<<set $island.hide to undefined>>
+<<set $island.walk to undefined>>
+<<set $island.kneel to undefined>>
+<<set $hunger to 0>>
+<</widget>>
+
+<<widget "island_explore_end">>
+<<if $island[$island.home].decor is "simple">>
+	<<set $island_simple_decor_message to 1>>
+<<elseif $island[$island.home].decor is "basic">>
+	<<set $island_basic_decor_message to 1>>
+<<elseif $island[$island.home].decor is "advanced">>
+	<<set $island_advanced_decor_message to 1>>
+<</if>>
+<<if $island[$island.home].bird_feeder is "simple" and random(1, 20) is 20>>
+	<<set $island_bird_message to 1>>
+<<elseif $island[$island.home].bird_feeder is "basic" and random(1, 10) is 10>>
+	<<set $island_bird_message to 1>>
+<<elseif $island[$island.home].bird_feeder is "advanced" and random(1, 5) is 5>>
+	<<set $island_bird_message to 1>>
+<</if>>
+<</widget>>
+
+<<widget "island_tattoo_check">>
+<<set _island_tattoo to 0>>
+<<if $skin.right_bottom.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.left_bottom.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.left_thigh.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.right_thigh.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.pubic.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.back.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.breasts.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.left_shoulder.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.right_shoulder.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.left_cheek.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.right_cheek.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+
+<<if $skin.forehead.special is "islander">>
+	<<set _island_tattoo += 1>>
+<</if>>
+<</widget>>
+
+<<widget "island_tattoo">>
+	<<if $skin[_bodypart].writing>>
+		<<bodywriting_clear _bodypart>>
+	<</if>>
+	<<rng 3>>
+	<<switch $rng>>
+		<<case 1>>
+			<<add_bodywriting _bodypart square tattoo>>
+		<<case 2>>
+			<<add_bodywriting _bodypart triangle tattoo>>
+		<<case 3>>
+			<<add_bodywriting _bodypart circle tattoo>>
+	<</switch>>
+<</widget>>
+
+<<widget "island_pass">>
+<<if _args[0]>>
+	<<pass _args[0]>>
+	<<hunger _args[0]>>
+<</if>>
+<</widget>>
+
+<<widget "island_rope_end">>
+	<<unset $island_rope_distance>>
+	<<unset $island_rope_orgasm>>
+	<<unset $island_rope_enemy_action>>
+	<<unset $island_rope_action>>
+<</widget>>
+
+<<widget "island_rope_options">>
+	<<if $rng gte 67>>
+		<<set $island_rope_enemy_action to "watch">>
+		岛民只是在观望你，暂时。
+		<br><br>
+	<<elseif $rng gte 33>>
+		<<set $island_rope_enemy_action to "shout">>
+		岛民开始大声喊叫，声音嘹亮，你甚至可以在湍急的水声中听到。
+		<br><br>
+	<<else>>
+		<<set $island_rope_enemy_action to "bow">>
+		<span class="purple">岛民把箭矢搭在弓上，拉紧弦索。</span>
+		<br><br>
+	<</if>>
+
+	<<if $island_rope_distance gte 4>>
+		<span class="teal">你快到岸边了！</span>
+	<<elseif $island_rope_distance is 3>>
+		<span class="lblue">岸更近了。</span>
+	<<elseif $island_rope_distance is 2>>
+		<span class="blue">你到达半路。</span>
+	<<elseif $island_rope_distance is 1>>
+		<span class="purple">你还有很长的路要走。</span>
+	<<else>>
+		<span class="pink">你几乎没动。</span>
+	<</if>>
+	<br><br>
+	<<link [[尽可能快地划桨|Island Rope 3]]>><<set $island_rope_distance += 1>><<set $island_rope_action to "shuffle">><<arousal 600>><</link>><<garousal>>
+	<br>
+	<<link [[屏住呼吸|Island Rope 3]]>><<set $island_rope_action to "breath">><<arousal -600>><</link>><<larousal>>
+	<br>
+	<<link [[低头躲避|Island Rope 3]]>><<set $island_rope_action to "duck">><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_rope_shout">>
+	<<if random(1, 2) is 2>>
+		“用绳子在人们面前自慰吧！”
+	<<else>>
+		“这个人正在享受<<pher>>生命中最美好的时刻。”
+	<</if>>
+	<br>
+	<<if random(1, 2) is 2>>
+		“回到这里，我们会好好照顾你的。”
+	<<else>>
+		“我迫不及待想把手放在<<pher>>身上玩弄了。”
+	<</if>>
+	<br>
+	<<if random(1, 2) is 2>>
+		“这个<<girl>>要把绳子弄脏了。”
+	<<else>>
+		“这个<<girl>>真是不知羞耻。”
+	<</if>>
+<</widget>>
+
+<<widget "island_rope_bow">>
+	<<if _args[0] is "duck">>
+		<<set _rng to random(-1, 3)>>
+	<<else>>
+		<<set _rng to random(0, 6)>>
+	<</if>>
+	<<if _rng is 6>>
+		<span class="red">六支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 3600>><<drugs 60>>
+	<<elseif _rng is 5>>
+		<span class="pink">五支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 3000>><<drugs 50>>
+	<<elseif _rng is 4>>
+		<span class="purple">四支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 2400>><<drugs 40>>
+	<<elseif _rng is 3>>
+		<span class="blue">三支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 1800>><<drugs 30>>
+	<<elseif _rng is 2>>
+		<span class="lblue">两支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 1200>><<drugs 20>>
+	<<elseif _rng is 1>>
+		<span class="teal">一支箭射中了你。</span>你几乎感觉不到，但令人性奋的毒素从伤口扩散开来。<<gdrugged>><<garousal>><<arousal 600>><<drugs 10>>
+	<<else>>
+		<span class="green">然而，没有一支箭射中你。</span>他们看起来很失望。
+	<</if>>
+<</widget>>
+
+<<widget "island_events_snake">>
+	<<generateRole 0 0 "islander">><<person1>>
+	吓人的嘶嘶声引起了你的注意。你朝声音的方向转过身，和蛇的眼睛来了个眼对眼。一条蛇被<<person>>高高举起，变成了武器。
+	<br><br>
+	你全身的力气都消失了，瘫倒在满是树叶的地面上。<<person>>把蛇绕在附近的树枝上，逼近了你。
+	<br><br>
+
+	<<link [[继续|Island Snake Rape]]>><<set $molestationstart to 1>><<set $trance to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_trap">>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<person1>>
+	你正沿着一条稍有人迹的小路行走，突然听到脚下有一声细微的 <i>喀啦</i> 在你脚下响起。
+	<<dancedifficulty 1 1000 true>>
+	<<if $danceSuccess>>
+		当陷阱弹出的同时，你无意识地跳到一边，陷阱<span class="green">没有套住</span>你的脚踝。
+		<br><br>
+		你听到一声愤怒的呼喊，两个人影从树丛中出现，是一个<<person>>和<<person2>><<person>>。他们不怀好意地逼近你。
+		<br><br>
+
+		<<link [[继续|Island Trap Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="red">一条绳子拴住了你的脚踝，</span>把你倒吊在空中，晃来晃去。你听到一声得意洋洋的嚎叫，<<person>>和<<person2>><<person>>从树丛中现身。
+		<br><br>
+		<<if $islander_language gte 100>>
+			他们分别站在你两侧。"我说了这能有用！"
+			<br>
+			"纯是运气好。"
+			<br>
+			"随你怎么说。"
+		<<elseif $islander_language gte 50>>
+			他们分别站在你两侧，争论不休。
+		<<else>>
+			他们站在你两侧，用难懂的语言交谈。
+		<</if>>
+		<br><br>
+
+		<<link [[挣扎|Island Trap Struggle]]>><</link>><<physiquedifficulty 1 16000>>
+		<br>
+		<<link [[保存体力|Island Defeat]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_flower">>
+	你发现一片诡异的花田。稀薄的瘴气迷惑着你的感官。<<ghallucinogens>><<garousal>><<hallucinogen 120>><<drugs 120>><<arousal 600>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_pleasant_flower">>
+	你发现一片诡异的花田。芬芳的花香刺激着你的嗅觉。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_plumeria">>
+你发现一片空地上长满了优雅的鸡蛋花，它们螺旋形的花瓣在微风中摇曳。
+<br><br>
+<<if !$plants_known.includes("plumeria")>>
+	<<if $sciencetrait gte 3>>
+		<<icon "tending/plumeria.png">> <<link [[寻找种子 (0:30)|Island Plumeria]]>><<island_pass 30>><<tending 6>><<set $plants_known.push("plumeria")>><</link>><<gtending>>
+		<br>
+	<<else>>
+		<span class="blue">更高的科学技能可以让你收获鸡蛋花种子。</span>
+		<br>
+	<</if>>
+<</if>>
+<<if currentSkillValue('tending') gte 300>>
+	<<icon "tending/plumeria.png">> <<link [[捡鸡蛋花 (0:20)|Island Plumeria Pick]]>><<island_pass 20>><</link>><<tendingdifficulty 300 600>>
+	<br>
+<<else>>
+	<span class="blue">你需要更高的护理技能来挑选出可出售的个体。</span>
+	<br>
+<</if>>
+<br>
+<<link [[离开|Island]]>><<island_explore_end>><</link>>
+<</widget>>
+
+<<widget "island_events_mosquitoes">>
+	你发现一个死水池，周围蚊虫成群。你加快脚步，以免被叮咬。<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_walnut">>
+	你找到一棵核桃树，核桃挂在枝条上，硕果累累。
+	<br><br>
+
+	<<if $cow gte 6>>
+		<<link [[用头撞树|Island Walnut Headbutt]]>><<set $island.walnut += 1>><</link>><<cow>>
+		<br>
+	<<else>>
+		<<link [[揍树|Island Walnut Punch]]>><</link>><<physiquedifficulty 1 16000>>
+		<br>
+	<</if>>
+	<<if $cat gte 6>>
+		<<link [[爬树|Island Walnut Climb Cat]]>><<set $island.walnut += 1>><</link>><<cat>><<gwalnut>>
+		<br>
+	<<else>>
+		<<link [[爬树|Island Walnut Climb]]>><</link>><<athleticsdifficulty 1 1000>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_walnut_2">>
+你找到一棵核桃树，树下落了些新鲜核桃。
+<br><br>
+
+<<link [[吃|Island]]>><<hunger -200>><<island_explore_end>><</link>><<lhunger>>
+<br>
+<<link [[储存以备不时之需|Island]]>><<set $island.walnut += 1>><</link>><<gwalnut>><<walnutStoreMessage>>
+<</widget>>
+
+<<widget "island_events_walnut_3">>
+	你沿着海岸寻找，直到你发现了一棵胡桃树，它被更大的植物群遮风挡雨。树上的果实饱满成熟得让你觉得稍稍摇晃就能将它们摇落。
+	<br><br>
+	你越过它，看到另一棵核桃树，接着还有另一棵，排成一行。它们看起来被照料得很好，就像一个果园。
+	<br><br>
+
+	<<link [[收集核桃 (0:05)|Island Walnut Gather]]>><<island_pass 5>><<set $island.walnut += 3>><</link>><<ggwalnut>>
+	<br>
+	<<link [[离开|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_rocky">>
+	你发现了你第一次露营时的岩石山丘。这里<span class="teal">易守难攻</span>，而且<span class="teal">很方便</span>寻找食物，但是几块巨大的石头让这个地方只有<span class="pink">拥挤的</span>空间以居住。
+	<br><br>
+
+	<<link [[欣赏风景后离开|Island]]>><<island_explore_end>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[把营地搬到这里|Island]]>><<island_explore_end>><<set $island.home to "rocky_hillock">><</link>><<campFurnitureMessage>>
+	<br>
+<</widget>>
+
+<<widget "island_events_waterfall">>
+	你找到一个美丽的瀑布，周围树木丛生，百草丰茂。瀑布和峭壁组成了两边<span class="blue">坚固</span>的屏障，看起来很适合露营。在其他方面这里也有<span class="blue">很好的优势</span>，食物很容易找，水边很<span class="blue">宽广</span>。
+	<br><br>
+
+	<<link [[欣赏风景后离开|Island]]>><<island_explore_end>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[把营地迁移到这|Island]]>><<island_explore_end>><<set $island.home to "waterfall">><</link>><<campFurnitureMessage>>
+	<br>
+<</widget>>
+
+<<widget "island_events_gulch">>
+	你找到了一个周围都被林地包围的峡谷，在溪流的边缘有<span class="green">许多的空间</span>，足够你去扎营。但是，你会<span class="pink">四面暴露</span>于危险之中，威胁可以通过树林悄悄接近。这里<span class="pink">视野较差</span>，所以寻找食物会很困难。
+	<br><br>
+	在这里扎营需要勇气，但是可以获得<span class="teal">巨大的营地空间。</span>
+	<br><br>
+	<<link [[欣赏风景后离开|Island]]>><<island_explore_end>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[把营地迁移到这|Island]]>><<island_explore_end>><<set $island.home to "gulch">><</link>><<campFurnitureMessage>>
+<</widget>>
+
+<<widget "island_events_wood_1">>
+	你发现了一片被大风刮落的厚厚的落叶。你走过时被一根被隐藏在落叶下面的树枝绊倒，让它掉落了出来。它看起来很有用。<<gwood>><<set $island.wood += 1>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_wood_2">>
+	你找到一条河，沿着河走。你看见河中间有两根木头漂流，仿佛在一起旅行。它们看起来会派上用场。
+	<br><br>
+	<<link [[游向木头|Island Wood Swim]]>><</link>><<swimmingdifficulty 1 1000>>
+	<br>
+	<<link [[无视|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_wood_3">>
+	<<generateRole 0 0 "islander">><<person1>>
+	你听到前方有动静。一个<<person>>沿着小路走着，双臂抱着一捆树枝。
+	<br><br>
+
+	<<if $islander_language gte 100>>
+		<<link [[索要木材|Island Wood Ask]]>><</link>>
+		<br>
+	<<elseif $islander_language gte 50>>
+		<<link [[索要木材|Island Wood Ask Try]]>><</link>><<difficulty 50>>
+		<br>
+	<<else>>
+		<span class="blue">你们无法交流。</span>
+		<br>
+	<</if>>
+	<<link [[无视|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_wood_4">>
+	你在茂密树木的树木下搜寻，周围散发着似乎没有来源的均匀光线。虽然这里有些阴暗，但可以用的树枝还是很容易被发现。你抱着三根树枝从树林中出来。<<gwood>><<set $island.wood += 3>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+<</widget>>
+
+<<widget "island_events_hunted">>
+	<<generateRole 0 0 "islander">><<person1>>
+	<<if $wolfgirl gte 6>>
+		你的狼耳朵竖了起来。有人在跟踪你。<<wolfgirl>>
+		<br><br>
+
+		<<link [[对峙|Island Hunted Confront]]>><</link>>
+		<br>
+		<<link [[躲藏|Island Hunted Hide]]>><</link>>
+		<br>
+	<<elseif $cat gte 6>>
+		你的猫耳朵竖了起来。有人在跟踪你。<<cat>>
+		<br><br>
+
+		<<link [[对峙|Island Hunted Confront]]>><</link>>
+		<br>
+		<<link [[躲藏|Island Hunted Hide]]>><</link>>
+		<br>
+    <<elseif $fox gte 6>>
+		你的狐狸耳朵竖了起来。有人在跟踪你。<<fox>>
+		<br><br>
+
+		<<link [[对峙|Island Hunted Confront]]>><</link>>
+		<br>
+		<<link [[躲藏|Island Hunted Hide]]>><</link>>
+		<br>
+	<<else>>
+		你唯一的警告就是树梢传来的哨声，<span class="red">一支箭射中了你的后背。</span>你一阵刺痛，但箭没扎进肉里。它的尖端很钝，你似乎连皮都没破，<span class="pink">但你感到一股暖流穿过你的身体。</span><<garousal>><<gdrugged>><<drugs 120>>
+		<br><br>
+
+		<<link [[继续|Island]]>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_runes">>
+	<<island_tattoo_check>>
+	你发现了一块刻满符文的扁平岩石。你无法解读它们的含义。
+	<br><br>
+
+	<<if _island_tattoo gte 1>>
+		你试图转身离开，
+		<<if _island_tattoo gte 2>>
+			<span class="red">但来自岛民给你的那些纹身的强大能量阻止了你。</span>
+		<<else>>
+			<span class="red">但来自岛民给你的那个纹身的能量阻止了你。</span>
+		<</if>>
+		你的双腿突然充满了能量，它们擅自迈开了步伐，就像是要将你带去哪里一样。
+		<br><br>
+
+		<<link [[任其发生 (0:20)|Island Runes Submit]]>><<island_pass 20>><</link>>
+		<br>
+		<<link [[奋力抵抗|Island Runes Physique]]>><</link>><<physiquedifficulty 1 (_island_tattoo * 3000)>>
+		<br>
+		<<link [[探清虚实|Island Runes Willpower]]>><</link>><<willpowerdifficulty 1 (_island_tattoo * 200)>>
+		<br>
+	<<else>>
+		你从那些记号边走开。
+		<br><br>
+
+		<<link [[继续|Island_events_runes]]>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_shore">>
+	<<set $island.explore_locations.pushUnique("shore")>>
+	你爬上两棵树之间的斜坡，迎面吹来一阵凉爽的海风。你站在岸边的悬崖顶上，在下方的水中有些奇怪的波动。
+	<br><br>
+	<span class="gold">你发现了海岸。</span>
+	<br><br>
+	你注意到你身边两侧高耸的植物是胡桃树，它们的坚果满地都是。你捡起了几把。这里食物应该很容易找到。
+	<br><br>
+	<<link [[食用|Island]]>><<hunger -400>><<island_explore_end>><</link>><<lhunger>>
+	<br>
+	<<link [[贮存起来|Island]]>><<set $island.walnut += 2>><<island_explore_end>><</link>><<gwalnut>><<walnutStoreMessage>>
+	<br>
+<</widget>>
+
+<<widget "island_events_wood">>
+	<<set $island.explore_locations.pushUnique("wood")>>
+	当你走进树林，周围的树干变得越来越粗，树枝也长得越来越大。它们形成的树冠变得极为密集，形成一个低悬的无法穿透的天花板。你的脚下没有任何植被生长。
+	<br><br>
+
+	在这种荒芜的地面上，你很容易看到脚边躺着几根可用的树枝。这是一个很好的捡树枝地点。<<gwood>><<set $island.wood += 2>>
+	<br><br>
+
+	<span class="gold">你发现了茂密的林地。</span>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_battleground">>
+	<<set $island.explore_locations.pushUnique("battleground")>>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<generateRole 2 0 "islander">>
+	<<person1>>
+	你在一棵树上发现了一支箭。当你继续前进时，又发现了其他箭，有的断裂落在地上，有的嵌入植被中。交叉的脚印遍布各处。这里似乎是一片经常有人来往的区域。
+	<br><br>
+	你听到前方传来急促的脚步声，于是躲在灌木丛后面，这时一个<<person>>从树丛中冲了出来，抓住<<his>>受伤的手臂。<<He>>不安地瞥了一眼<<his>>的肩膀。
+	<br><br>
+	片刻后一个<<person2>><<person>>和一个<<person3>><<person>>从树林中现身。<<person2>><<person>>指向<<person1>><<person>>，于是他们开始追赶着<<him>>。
+	<br><br>
+
+	<<if $islander_language gte 100>>
+		"出来吧，我们不会害你的。"<<person2>><<person>>喊道。
+		<br>
+		"对，"<<person3>><<person>>补充。"梅尔不会，但我们会。"
+	<<elseif $islander_language gte 50>>
+		他们以嘲弄的口吻追着猎物喊叫。
+	<<else>>
+		他们用无法理解的语言喊叫着。
+	<</if>>
+	<<gcomprehension>><<islander_language 1>>
+	<br><br>
+	这里似乎是某个战场。你不知道他们为什么在这里交战，但如果你有需要的话，这会是一个寻找当地人的好地方。
+	<br><br>
+
+	<span class="gold">你发现了战场。</span>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_castle">>
+	<<set $island.explore_locations.pushUnique("castle")>>
+	你翻过一座山脊，发现另一边隐约可见一座破败的城堡。城垛上耸立着三座塔楼，墙壁上长满了苔藓。
+	<<generateRole 0 0 "islander">><<person1>>
+	<br><br>
+
+	下面有很多活动。戴着面具的岛民从大门进进出出。<<person>>把守着，牵着驯服的<<endevent>><<beastNEWinit 3 cat>><<beastsplural>>。透过破碎的砖石，你窥见了更多没戴面具的岛民。
+	<br><br>
+
+	附近有桥与其中一座塔相连。两个岛民站在入口两侧，每个人都挥舞着长矛。这些人戴着面具。
+	<br><br>
+	<<set $islander_mask to 1>>
+	<span class="gold">你发现了去城堡的路。建造菜单中出现了一个新选项。</span>
+	<br><br>
+
+	<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_bay">>
+	<<set $island.explore_locations.pushUnique("bay")>>
+	<<set $island.raft to 1>>
+	你发现了一个隐蔽的海湾。这里没有之前在其他海滩遇到的可怕生物的踪迹。这里非常宁静。<<lstress>><<stress -6>>
+	<br><br>
+	靠近树林边缘躺着一个木质框架。这看起来像是一只未完成的木筏。虽然需要大量木材，但你可以完成它然后离开这个岛屿。
+	<br><br>
+
+	<span class="gold">你发现了海湾。</span>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_plain">>
+	<<earnFeat "Prehistoric Landscape">>
+	<<set $island.explore_locations.pushUnique("plain")>>
+	分开树木，就通向一片广阔而不平的平原。这里到处都是树木，还有几乎和你一样高的参差不齐的岩石。长长的草丛扫过你的膝盖，有点发痒。
+	<br><br>
+	<<set $antiquemoney += 500>><<museumAntiqueStatus "antiqueobsidiandisc" "found">>
+	光线打在你脚边的东西上。你定睛一看，一个黑曜石圆盘半埋在土中，大小和形状就像一枚巨大的硬币。虽然没有任何标记，但完美的圆形展现出了极高的工艺水平。说不定这是个找古董的好地方。
+	<br><br>
+
+	<span class="gold">你发现了平原。</span>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_arrow">>
+	你在地面上发现了一支嵌入其中的箭。箭很脏，但完好无损。这种奇怪的手工制品或许对收藏家来说具有一定价值。
+	<br><br>
+	<<set $antiquemoney += 20>><<museumAntiqueStatus "antiqueislandarrow" "found">>
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_broken_mask">>
+	你在一棵树边发现了一个棱角分明的岛民面具，它靠在树上。面具已损坏，带子断裂，中间还有一道裂痕。但对收藏家来说，它可能仍具有一定的价值。
+	<br><br>
+	<<set $antiquemoney += 40>><<museumAntiqueStatus "antiquewoodenmask" "found">>
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_trilobite">>
+	你发现一个突出的岩石坐落在小山丘的顶部。岩石表面躺着一块三叶虫化石，看起来这块化石直到最近还被埋在地下，迫于某种压力被挤出地表，揭示了长久隐藏的秘密。
+	<br><br>
+	这个化石应该放在博物馆。你很容易就可以把它掰下来。
+	<br><br>
+	<<set $antiquemoney += 50>><<museumAntiqueStatus "antiquetrilobitefossil" "found">>
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+<</widget>>
+
+<<widget "island_events_overhear">>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<person1>>
+	你无意中听到两个声音。透过树叶间隙望去，你发现了<<person>>和<<person2>><<person>>，每个人都戴着鹿角面具，拿着弓，但他们看起来很放松。
+	<br><br>
+
+	<<if $islander_language gte 100>>
+		<<link [[交谈|Island Chat]]>><<trauma -6>><<stress -6>><</link>><<ltrauma>><<lstress>>
+		<br>
+	<<else>>
+		<<link [[偷听|Island Eavesdrop]]>><</link>><<gcomprehension>>
+		<br>
+	<</if>>
+	<<link [[离开|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_battle">>
+	你发现一片被树包围的空地，停了下来。有点不对劲。空气中有一种能量。
+	<br><br>
+	一排箭划过空地，随后相反方向一排箭又划过，它们打破了寂静。你听到一声痛苦的呼喊。
+	<br><br>
+	当冲突在上面肆虐时，你躲在一条小水沟里。
+	<br><br>
+
+	<<link [[观战|Island Observe]]>><<islander_language 2>><</link>><<if $islander_language lt 100>><<ggcomprehension>><</if>>
+	<br>
+	<<link [[离开|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_birds">>
+	你发现了一棵大橡树。它的树枝伸展开来，仿佛在保护着周围的植物。种类繁多的鸟儿栖息在树枝上，唱着各式各样的歌，这些歌汇聚成奇妙的协奏曲。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<if $harpy gte 6>>
+		<<link [[唱歌 (0:10)|Island Sing]]>><<island_pass 10>><<trauma -6>><<stress -6>><</link>><<harpy>><<ltrauma>><<lstress>>
+		<br>
+		<<link [[离开|Island]]>><<island_explore_end>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|Island]]>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_cat">>
+	<<beastNEWinit 1 cat>>
+	你感到身后有敌意。转身，你看到了一只觅食的<<beasttype>>向你靠近。
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			"我现在是更饿还是更欲火焚身？"<<bhe>>说道，"让我们来看看吧。"
+			<br><br>
+		<</if>>
+		<<link [[继续|Island Cat]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		你拼命后退，转身穿过树林。
+		<br><br>
+
+		你设法逃脱了，但并非毫发无伤。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_cat_2">>
+	<<beastNEWinit 2 cat>>
+	<<beasttype 0>>落在你身前，从看不见的树枝上跳下来。<<bHe 0>>走得越来越近，舔着<<bhis 0>>的嘴唇。
+	<br><br>
+
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<if $monster is 1>>
+			"哼姆~"<<bhe 0>>思索着。"我要把你吃掉！"
+		<</if>>
+		<br><br>
+		你感觉到附近有另一个威胁。
+		<br><br>
+		<<link [[战斗|Island Cats Fight]]>><</link>>
+		<br>
+		<<link [[跑|Island Cats Run]]>><</link>>
+		<br>
+		<<link [[让他们先手|Island Cats Bide]]>><</link>>
+		<br>
+	<<else>>
+		你拼命后退，转身穿过树林。
+		<br><br>
+
+		你设法逃脱了，但并非毫发无伤。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_tear">>
+	你发现了一片茂密的灌木丛。荆棘和细枝刺痛着你的皮肤，你很难穿越它。
+
+	<<if !$worn.lower.type.includes("naked")>>
+		你的<<print $worn.lower.cn_name_cap>>被一根树枝勾住了。你听到前面有声音，似乎有三个岛民正朝你走来。
+		<br><br>
+
+		<<link [[撕碎衣服|Island Tear]]>><</link>>
+		<br>
+		<<link [[小心翼翼地解开衣服|Island Careful]]>><</link>>
+		<br>
+	<<elseif !$worn.under_lower.type.includes("naked")>>
+		你的<<print $worn.under_lower.cn_name_cap>>被一根树枝勾住了。你听到前面有声音，似乎有三个岛民正朝你走来。
+		<br><br>
+
+		<<link [[撕碎衣服|Island Tear]]>><</link>>
+		<br>
+		<<link [[小心翼翼地解开衣服|Island Careful]]>><</link>>
+		<br>
+	<<elseif !$worn.upper.type.includes("naked")>>
+		你的<<print $worn.lower.cn_name_cap>>被一根树枝勾住了。你听到前面有声音，似乎有三个岛民正朝你走来。
+		<br><br>
+
+		<<link [[撕碎衣服|Island Tear]]>><</link>>
+		<br>
+		<<link [[小心翼翼地解开衣服|Island Careful]]>><</link>>
+		<br>
+	<<elseif !$worn.under_upper.type.includes("naked")>>
+		你的<<print $worn.under_upper.cn_name_cap>>被一根树枝勾住了。你听到前面有声音，似乎有三个岛民正朝你走来。
+		<br><br>
+
+		<<link [[撕碎衣服|Island Tear]]>><</link>>
+		<br>
+		<<link [[小心翼翼地解开衣服|Island Careful]]>><</link>>
+		<br>
+	<<else>>
+		你能轻易绕过一根树枝。但当你经过时，某种力量将它弹回原位，甚至能反弹回另一边，抽打你的<<bottom>>。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+		<br><br>
+
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_sing">>
+	<<generateRole 0 0 "islander">><<person1>>
+	你听到歌声。<<person>>坐在河边的原木上，手里握着根鱼竿。
+
+	<<if $islander_language gte 100>>
+		<br><br>
+		<i>"七条鱼儿在珊瑚上游荡，哦。"</i>
+		<br>
+		<i>"深渊之眼在其下方闪光，哦。"</i>
+		<br>
+		<i>"手伸向前，渴望的手指，哦。"</i>
+		<br>
+		<i>"六条惊恐的鱼儿在珊瑚上游荡，哦……"</i>
+		<br><br>
+		令人舒心的旋律。<<lstress>><<stress -6>>
+	<<elseif $islander_language gte 50>>
+		<<hes>>仿佛在对鱼儿唱歌，希望把它们哄近点。<<gcomprehension>><<islander_language 1>>
+	<<else>>
+		你不理解这些词句，但仅仅是听着，就让人舒心。<<gcomprehension>><<islander_language 1>>
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_slugs">>
+	一团史莱姆粘液在你面前滴下，一只巨型蛞蝓从粘液上滑了下来，啪叽一声落到地上。你的两耳都能听到类似的声音。
+	<br><br>
+
+	<<link [[继续|Island Slugs]]>><<set $struggle_start to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_rope">>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<generateRole 2 0 "islander">>
+	<<generateRole 3 0 "islander">>
+	<<generateRole 4 0 "islander">>
+	<<generateRole 5 0 "islander">>
+	<<person1>>
+	你发现了一条河，并沿着它向岛的深处走去。你沿着河绕过一块大石头，发现河上横着一根绳子。一端挂着一个桶子。看来有人用它在水面上运送物品。
+	<br><br>
+	你听到一些声音，转过身来，只见迎面走来六个岛民。水流汹涌澎湃，掩盖了他们的脚步声。
+	<br><br>
+	他们也停了下来，然后伸手去拿武器。战斗似乎不是个好主意。
+	<br><br>
+
+	<<link [[战斗|Island Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[利用绳索逃跑|Island Rope]]>><</link>>
+	<br>
+	<<link [[屈服|Island Defeat]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "island_events_squirrel">>
+	你发现一只松鼠。它看了你一眼，跳到一棵树上，消失在林木间。<<lstress>><<stress -6>>
+	<br><br>
+
+	<<if $fox gte 6>>
+		你的本能占据了上风。你四肢着地，嗅着地面的气味，将你的<<bottom>>对着天空，追寻着松鼠的痕迹。你发现了新翻的泥土。下面有一颗核桃。<<fox>><<gwalnut>><<set $island.walnut += 1>>
+		<br><br>
+		<<link [[吃|Island]]>><<hunger -200>><<island_explore_end>><</link>><<lhunger>>
+		<br>
+		<<link [[储存以备不时之需|Island]]>><<set $island.walnut += 1>><</link>><<gwalnut>><<walnutStoreMessage>>
+	<<else>>
+		<<link [[继续|Island]]>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "island_events_duel">>
+	<<generateRole 0 0 "islander">>
+	<<generateRole 1 0 "islander">>
+	<<person1>>
+	<<if $islander_language gte 100>>
+		你听到前方传来喊声。<<person>>和<<person2>><<person>>正在用长矛搏斗。他们互相奚落，毫不相让。
+		<br>
+		<<if $rng gte 81>>
+			"接招吧，你这个操鱼的怪胎！"
+			<br>
+			"哈哈！你的口味还不如操鱼的呢！
+		<<elseif $rng gte 61>>
+			"等我完事了，我要日你<<if $pronoun is "m">>亲爹<<else>>亲娘<</if>>。"
+			<br>
+			"哈哈！真有趣。我已经操过你的了。"
+		<<elseif $rng gte 41>>
+			"你会被淹死在自己的血泊中！"
+			<br>
+			"冷静点，那只是个核桃。"
+		<<elseif $rng gte 21>>
+			"你看起来像个刚操过山羊的红萝卜。"
+			<br>
+			"哈？行吧，你和你<<if $pronoun is "m">>父亲<<else>>母亲<</if>>真像。"
+		<<else>>
+			"你听这些会兴奋？"
+			<br>
+			"想得美，变态。"
+		<</if>>
+		<br><br>
+		你在被注意到前溜走了。
+		<br><br>
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+	<<elseif $islander_language gte 50>>
+		你听见前方传来了叫喊声。一个<<person>>和<<person2>><<person>>正在用长矛战斗。两人一边攻击对方嘴里一边互嘲着，虽然两种攻击方式都没怎么奏效。<<gcomprehension>><<islander_language 1>>
+		<br><br>
+		你在被注意到前溜走了。
+		<br><br>
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+
+	<<else>>
+		你听见前方传来不明所以的叫喊声。一个<<person>>和<<person2>><<person>>正在用长矛战斗，两人彼此周旋着，一边找准机会向对方发起攻击，虽然攻击都没怎么奏效。
+		<br><br>
+		你并不明白他们在说什么，但你能感觉到言辞间非常激烈。<<gcomprehension>><<islander_language 1>>
+		<br><br>
+		你在被注意到前溜走了。
+		<br><br>
+
+		<<link [[继续|Island]]>><<endevent>><<island_explore_end>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "islandBuildOption">>
+	<div>
+		<<if _islandUpgrades is undefined>><<set _islandUpgrades to {}>><</if>>
+		<<set _islandUpgrades[_args[0]] to {}>>
+		<<switch _args[0]>>
+			<<case "trap">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].trap>>
+					<span class="red">没有陷阱</span>：袭击者很容易接近你。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Simple Trap">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 0>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 0>>
+				<<elseif $island[$island.home].trap is "simple">>
+					<span class="teal">简单陷阱</span>：50%的几率捉住袭击者。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Basic Trap">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 180>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 2>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 200>>
+				<<elseif $island[$island.home].trap is "basic">>
+					<span class="teal">基本陷阱</span>：75%的几率捉住袭击者。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Advanced Trap">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 240>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 3>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 400>>
+				<<elseif $island[$island.home].trap is "advanced">>
+					<span class="green">高级陷阱</span>：100%的几率捉住袭击者。
+				<</if>>
+			<<case "curtains">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].curtains>>
+					<span class="red">没有遮挡</span>：睡眠质量差。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Simple Curtains">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 6>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 100>>
+				<<elseif $island[$island.home].curtains is "simple">>
+					<span class="teal">简易帷幔</span>：略微改善睡眠质量。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Basic Curtains">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 0>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 300>>
+				<<elseif $island[$island.home].curtains is "basic">>
+					<span class="teal">基本帷幔</span>：改善睡眠质量。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Advanced Curtains">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 2>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 500>>
+				<<elseif $island[$island.home].curtains is "advanced">>
+					<span class="green">高级帷幔</span>：大大改善睡眠质量。
+				<</if>>
+			<<case "bird_feeder">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].bird_feeder>>
+					<span class="red">没有喂鸟器</span>：必须自己收集食物。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Simple Bird Feeder">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 8>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 100>>
+				<<elseif $island[$island.home].bird_feeder is "simple">>
+					<span class="teal">简易喂鸟器</span>：当你外出探险时，鸟儿很少会给你留下胡桃。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Basic Bird Feeder">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 2>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 300>>
+				<<elseif $island[$island.home].bird_feeder is "basic">>
+					<span class="teal">基本喂鸟器</span>：当你外出探险时，鸟儿有时会给你留下胡桃。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Advanced Bird Feeder">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 2>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 500>>
+				<<elseif $island[$island.home].bird_feeder is "advanced">>
+					<span class="green">高级喂鸟器</span>：当你外出探险时，鸟儿经常会给你留下胡桃。
+				<</if>>
+			<<case "camouflage">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].camouflage>>
+					<span class="red">没有伪装</span>：暴露在外。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Simple Camouflage">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 0>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 100>>
+				<<elseif $island[$island.home].camouflage is "simple">>
+					<span class="teal">简单伪装</span>：在睡觉时稍微降低发生敌对事件的可能性。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Basic Camouflage">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 0>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 400>>
+				<<elseif $island[$island.home].camouflage is "basic">>
+					<span class="teal">基本伪装</span>：适度降低睡觉时发生敌对事件的几率。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Advanced Camouflage">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 120>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 0>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 700>>
+				<<elseif $island[$island.home].camouflage is "advanced">>
+					<span class="green">高级伪装</span>：大大降低睡觉时发生敌对事件的几率。
+				<</if>>
+			<<case "decor">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].decor>>
+					<span class="red">没有装饰</span>：在探索之后没有办法放松。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Simple Decor">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 240>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 2>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 200>>
+				<<elseif $island[$island.home].decor is "simple">>
+					<span class="teal">简单装饰</span>：每次探险后返回营地时，都会减少一点压力。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Basic Decor">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 240>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 8>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 400>>
+				<<elseif $island[$island.home].decor is "basic">>
+					<span class="teal">基本装饰</span>：每次探险后返回营地，都能减轻更多压力。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Advanced Decor">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 240>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 8>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 600>>
+				<<elseif $island[$island.home].decor is "advanced">>
+					<span class="green">高级装饰</span>：每次探险后返回营地，都能减轻更多的压力。
+				<</if>>
+			<<case "chair">>
+				<<set $_build to true>>
+				<<if !$island[$island.home].chair>>
+					<span class="red">没有座椅</span>：无处可坐。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Stool">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 360>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 7>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 300>>
+				<<elseif $island[$island.home].chair is "simple">>
+					<span class="teal">凳子</span>：很难建造，但没多大用处。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Chair">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 360>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 5>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 700>>
+				<<elseif $island[$island.home].chair is "basic">>
+					<span class="teal">椅子</span>：更难建造，但仍然没有用处。
+					<<set _islandUpgrades[_args[0]].passage to "Island Build Throne">>
+					<<set _islandUpgrades[_args[0]].timeTaken to 360>>
+					<<set _islandUpgrades[_args[0]].woodUsed to 12>>
+					<<set _islandUpgrades[_args[0]].housekeeping to 1000>>
+				<<elseif $island[$island.home].chair is "advanced">>
+					<span class="green">王座</span>：适合荒野之主。
+				<</if>>
+			<<case "islanderMask">>
+				<<if $islander_mask gte 100>>
+					<span class="green">合格的岛民面具</span>：
+				<<elseif $islander_mask gte 80>>
+					<span class="teal">熟练的岛民面具</span>：
+				<<elseif $islander_mask gte 60>>
+					<span class="lblue">好的岛民面具</span>：
+				<<elseif $islander_mask gte 40>>
+					<span class="blue">很差的岛民面具</span>：
+				<<elseif $islander_mask gte 20>>
+					<span class="purple">糟糕的岛民面具</span>:
+				<<else>>
+					<span class="pink">垃圾的岛民面具</span>:
+				<</if>>
+				可能会帮你通过城堡守卫。<br>
+				<<if $island.wood lt 1>>
+					<span class="black">需要更多的木材。</span> <<wood_required 1>>
+					<br>
+				<<else>>
+					 <<link [[制作 (1:00)|Island Build Mask]]>><<island_pass 60>><<set $islander_mask += 10>><<set $island.wood -= 1>><</link>> <<wood_required 1>>
+					<br>
+				<</if>>
+			<<case "raft">>
+				<<if $island.raft gte 100>> <span class="green">木筏</span><<else>><span class="red">没有木筏</span><</if>>：可以让你逃离这个岛。
+				<br>
+				<<if $island.raft gte 100>>
+					<<link [[乘坐木筏回到镇上 (1:00)|Island Sail]]>><<island_pass 60>><</link>>
+				<<else>>
+					<<if $island.wood gte 5>>
+						<<link [[修建 (3:00)|Island Build Raft]]>><<island_pass 180>><<set $island.raft += 10>><<set $island.wood -= 5>><</link>> <<wood_required 5>>
+					<<else>>
+						<span class="black">需要更多的木材。</span> <<wood_required 5>>
+					<</if>>
+				<</if>>
+			<<default>>
+				<span class="red">选项无效：_args[0]</span>
+		<</switch>>
+		<<if $_build and _islandUpgrades[_args[0]].passage>>
+			<<if currentSkillValue('housekeeping') lt _islandUpgrades[_args[0]].housekeeping>>
+				<br>
+				<span class="black">
+					<<switch _islandUpgrades[_args[0]].housekeeping>>
+						<<case 100>><span class="pink">F+</span>
+						<<case 200>><span class="purple">D</span>
+						<<case 300>><span class="purple">D+</span>
+						<<case 400>><span class="blue">C</span>
+						<<case 500>><span class="blue">C+</span>
+						<<case 600>><span class="lblue">B</span>
+						<<case 700>><span class="lblue">B+</span>
+						<<case 800>><span class="teal">A</span>
+						<<case 900>><span class="teal">A+</span>
+						<<case 1000>><span class="green">S</span>
+					<</switch>>
+					需要有家政技能。
+				</span>
+				<<set $_disableBuild to true>>
+			<</if>>
+			<<if !$island[$island.home][_args[0]] and $island[$island.home].space lte 0>>
+				<br>
+				<span class="black">需要更多空间。</span>
+				<<set $_disableBuild to true>>
+			<</if>>
+			<<if _islandUpgrades[_args[0]].woodUsed and _islandUpgrades[_args[0]].woodUsed gt $island.wood>>
+				<br>
+				<span class="black">需要更多的木材。</span> <<wood_required _islandUpgrades[_args[0]].woodUsed>>
+				<<set $_disableBuild to true>>
+			<</if>>
+			<<if _islandUpgrades[_args[0]].timeTaken>>
+				<<set _hours to Math.floor(_islandUpgrades[_args[0]].timeTaken / 60)>>
+				<<set _minutes to _islandUpgrades[_args[0]].timeTaken % 60>>
+				<<set _timeString to " (" +_hours+":"+(_minutes lt 10 ? "0": "")+_minutes+")">>
+			<<else>>
+				<<set _timeString to "">>
+			<</if>>
+			<<if $_disableBuild>>
+			<<elseif !$island[$island.home][_args[0]]>>
+				<br>
+				<<link [["修建" + _timeString|_islandUpgrades[_args[0]].passage]]>>
+					<<set $island[$island.home].space -= 1>>
+					<<set $island[$island.home][_args[0]] to "simple">>
+					<<if _islandUpgrades[_args[0]].timeTaken>><<island_pass `_islandUpgrades[_args[0]].timeTaken`>><</if>>
+					<<if _islandUpgrades[_args[0]].woodUsed>><<set $island.wood -= _islandUpgrades[_args[0]].woodUsed>><</if>>
+				<</link>>
+				<<if _islandUpgrades[_args[0]].woodUsed>><<wood_required _islandUpgrades[_args[0]].woodUsed>><</if>>
+				| 需要空间
+			<<else>>
+				<br>
+				<<link [["升级" + _timeString|_islandUpgrades[_args[0]].passage]]>>
+					<<switch $island[$island.home][_args[0]]>>
+						<<case "simple">><<set $island[$island.home][_args[0]] to "basic">>
+						<<case "basic">><<set $island[$island.home][_args[0]] to "advanced">>
+					<</switch>>
+					<<if _islandUpgrades[_args[0]].timeTaken>><<island_pass `_islandUpgrades[_args[0]].timeTaken`>><</if>>
+					<<if _islandUpgrades[_args[0]].woodUsed>><<set $island.wood -= _islandUpgrades[_args[0]].woodUsed>><</if>>
+				<</link>>
+				<<if _islandUpgrades[_args[0]].woodUsed>><<wood_required _islandUpgrades[_args[0]].woodUsed>><</if>>
+			<</if>>
+		<</if>>
+		<<if $island[$island.home][_args[0]]>>
+			<br>
+			<<link [[拆除 (1:00)|Island Build]]>><<island_pass 60>><<set $island[$island.home][_args[0]] to undefined>><<set $island[$island.home].space += 1>><</link>>
+		<</if>>
+	</div>
+<</widget>>

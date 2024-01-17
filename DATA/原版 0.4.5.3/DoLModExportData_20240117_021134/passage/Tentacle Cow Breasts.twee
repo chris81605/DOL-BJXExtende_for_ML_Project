@@ -1,0 +1,51 @@
+:: Tentacle Cow Breasts []
+<<location "tentworld">><<effects>>
+<<if $tentaclecow is undefined>>
+	<<set $tentaclecow to 1>>
+	你认为你知道满足触手的方法。
+<<else>>
+	你准备满足触手的饥渴。
+<</if>>
+你四肢着地，他们开始爬上你的手臂。
+<<if $worn.upper.name isnot "naked">>
+	<<if $leftarm is "bound" or $rightarm is "bound">>
+		一对触手
+	<<else>>
+		你
+	<</if>>
+	脱掉了你的$worn.upper.cn_name_cap<<if $worn.under_upper.name isnot "naked">>和$worn.under_upper.cn_name_cap<<underupperstrip>><</if>>。<<upperstrip>>
+<<else>>
+	<<if !$worn.under_upper.type.includes("naked")>>
+		<<if $leftarm is "bound" or $rightarm is "bound">>
+			一对触手
+		<<else>>
+			你
+		<</if>>
+		脱掉了你的$worn.under_upper.cn_name_cap。<<underupperstrip>>
+	<</if>>
+<</if>>
+你在原地扭动，将注意力吸引到你的<<breasts>>。响应几乎是立即的。触手抓住你的胸部，开始吮吸。
+<br><br>
+乳汁从你的乳房中喷出，你浑身颤抖。触手咽下了你的乳汁。你保持着伏跪的姿势，两条触手紧贴着你的<<breasts>>。<<arousal 1000 "breasts">><<ggarousal>>
+<br><br>
+<<if $lactating is 1>>
+	<<set _tentacles_milk to ($milk_amount / 2)>>
+	<<milk_amount `-_tentacles_milk`>>
+	<<set $milk_produced_stat += Math.trunc(_tentacles_milk)>>
+
+	<<if _tentacles_milk gte 50>>
+		<<set $tentacleorgasmignore += 1>>
+		触手完全释放你并散开。<span class = "green">他们似乎很满意。你的下一次高潮可能不会那么危险。</span>
+	<<else>>
+		触手不停吸吮。<span class = "red">他们对你生产的牛奶量不满意。</span>最终，他们的吸吮变得痛苦，迫使你将他们拉下来。<<pain 10>><<gpain>>
+	<</if>>
+<<else>>
+	你没有流出一滴奶。<span class = "red">触手不满意。</span>
+<</if>>
+<<purity -5>>
+<<clotheson>>
+<<endcombat>>
+
+
+<<link [[继续|Tentacle Plains]]>><<endevent>><</link>>
+<br>

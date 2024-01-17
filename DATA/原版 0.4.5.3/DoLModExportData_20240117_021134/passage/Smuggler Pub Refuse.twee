@@ -1,0 +1,26 @@
+:: Smuggler Pub Refuse []
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"我，我不会，"你低声说道，"我不会跳舞。"
+<<elseif $speech_attitude is "bratty">>
+	"滚啊，"你斥责道，"我才不会为你这种渣滓跳舞。"
+<<else>>
+	"我不会跳舞的，"你拒绝了他们，"放我走。"
+<</if>>
+<br><br>
+
+"跳舞！跳舞！跳舞！"这可不太妙。
+<br><br>
+
+<<if ($leftarm is "bound" or $rightarm is "bound") and $phase isnot 1>>
+	<<link [[说你手臂绑着没法跳舞|Smuggler Pub Arms]]>><<set $phase to 1>><</link>><<englishdifficulty 200 1000>>
+	<br>
+<<elseif $submissive lte 500 and $phase is 1>>
+	<<link [[抓起匕首|Smuggler Pub Knife]]>><</link>><<defianttext>><<dancedifficulty 200 1000>>
+	<br>
+<</if>>
+<<link [[跳舞|Smuggler Pub Dance]]>><<danceinit>><<set $dancing to 1>><<set $audience to 25>><<set $venuemod to 4>><<set $timer to 24>><<set $dancelocation to "smuggler_forced">><<set $forceddance to 1>><</link>>
+<br>
+<<link [[拒绝|Smuggler Pub Refuse 2]]>><</link>>
+<br>

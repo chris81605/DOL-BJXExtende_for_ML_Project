@@ -1,0 +1,35 @@
+:: Moor Abduction Sneak []
+<<effects>>
+
+<<generate1>><<person1>>
+你等到<<person>>警卫，从瓶子里喝了一大口，然后溜出去。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你绕过帐篷，<span class="green">然后神不知鬼不觉地逃走了。</span>
+	<<if Time.dayState is "dawn">>
+		太阳在地平线上升起，但它仍然足够黑暗，以隐藏你。在他们醒来之前，你应该离得够远了。
+	<<else>>
+		你悄悄潜入黑夜，在别人注意到你离开之前，你已经远走高飞了。
+	<</if>>
+	<br><br>
+
+	<<skulduggeryuse>>
+	<<earnFeat "Slippery">>
+	<<link [[继续|Moor]]>><<endevent>><<end_moor_captive>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+
+	你绕过帐篷，<span class="red">但是被绳子绊倒了，</span>滚到地上。
+	<br><br>
+	还没等你回过神来，<<person>>就扑到了你身上。"不听话的<<girl>>，"<<he>>说着，抓住了你的胳膊。"差点就让我放跑你了。"<<His>>的目光在你的身上游移。
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<link [[继续|Moor Abduction Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<</if>>

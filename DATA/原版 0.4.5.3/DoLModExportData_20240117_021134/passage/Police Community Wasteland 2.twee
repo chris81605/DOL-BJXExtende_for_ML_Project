@@ -1,0 +1,95 @@
+:: Police Community Wasteland 2 []
+<<effects>>
+<<pass 20>>
+你和其他罪犯站在路边，在一座小山前。棕色的荆棘一直延伸到山顶。
+<br><br>
+
+<<person1>>
+"好吧，你们这些人渣，"警察说，把一盒园艺工具扔在<<his>>的脚边。"今天我们要清理这些灌木，让它们远离道路。你们能做到吗？"
+<<if $leftarm is "bound" or $rightarm is "bound">>
+	<<He>>移除你手臂上的束缚带。
+	<<unbind>>
+<</if>>
+<br><br>
+
+<<if $police_wasteland gte 2 and random(1, 2) is 2 and $fame.scrap gte 100>>
+	<<if $police_wasteland is 2>>
+		<<set $police_wasteland to 3>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>打量着你。"我想你可以处理这个，"<<he>>说着递给你一把斧头。"现在小心点。"
+	<<else>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>递给你一把斧头。"开始砍吧。"
+	<</if>>
+	<br><br>
+	你开始工作，其他罪犯剪掉枝叶，你就砍下面露出来的树干。这个<<person>>在路上走来走去，注意任何偷懒的人。
+	<br><br>
+	<<generate3>><<person3>>
+	一个<<person>>抓住你的腰，从后面把身体压在你身上。"你这样的荡妇是犯了什么被判刑的？"<<he>>问道。
+	<<if $fame.bestiality gte 400>>
+		"被抓到和狗乱搞？"
+	<</if>>
+	<<if $NPCList[2].penis isnot "none">>
+		你可以看到<<his>>的<<print $NPCList[2].penisdesc>>对着你的<<bottom>>。
+	<</if>>
+	<<gstress>><<garousal>><<stress 6>><<arousal 600 "bottom">>
+	<br><br>
+
+	<<link [[忍耐|Police Community Wasteland Endure]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+	<br>
+	<<set $skulduggerydifficulty to 600>>
+	<<link [[威胁|Police Community Wasteland Threaten]]>><<def 1>><</link>><<skulduggerydifficulty>>
+	<br>
+<<elseif $police_wasteland gte 1 and random(1, 2) is 1>>
+	<<if $police_wasteland is 1>>
+		<<set $police_wasteland to 2>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>很看重你。"让我们试试这个，"<<he>>说着递给你一把铲子。"其中一些扎根很深。"
+		<br><br>
+	<<else>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>递给你一把铲子。"使劲干吧。"
+	<</if>>
+	<br><br>
+	你们开始在较粗的树干周围挖掘。这个<<person>>在路上走来走去，留意有没有偷懒的人。
+	<br><br>
+
+	你弯下腰去拔荆棘的根。"干得不错，"货车上的<<person2>><<person>>说道。<<He>>拍了一下你的屁股。<<gstress>><<gpain>><<stress 6>><<pain 4>>
+	<br><br>
+
+	<<link [[无视|Police Community Wasteland Ignore 2]]>><<trauma 6>><<sub 1>><</link>><<gtrauma>>
+	<br>
+	<<set $skulduggerydifficulty to 400>>
+	<<link [[重击|Police Community Wasteland Whack]]>><<def 1>><</link>><<skulduggerydifficulty>>
+	<br>
+<<else>>
+	<<if $police_wasteland is undefined>>
+		<<set $police_wasteland to 1>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>打量着你。"这是你第一次来？就用这个吧。"<<He>>给你一把剪刀。
+	<<else>>
+		当<<he>>分发工具时，你在警官前面排队。<<He>>给你一把剪刀。
+	<</if>>
+	<br><br>
+	你的工作是剪掉带刺的树枝，为那些使用大型工具的人扫清障碍。这个<<person>>在路上走来走去，留意有没有偷懒的人。
+	<br><br>
+
+	<<if $worn.upper.name isnot "naked" and random(1, 2) is 2>>
+		你的$worn.upper.cn_name_cap被刺钩住了。要花一分钟才能取下，而警官可能会认为这是在偷懒。
+		<br><br>
+
+		<<link [[小心地取|Police Community Wasteland Careful]]>><</link>><<difficulty 50>>
+		<br>
+		<<link [[挣脱|Police Community Wasteland Upper Tear]]>><</link>>
+		<br>
+	<<elseif $worn.lower.name isnot "naked" and random(1, 2) is 2>>
+		你的$worn.lower.cn_name_cap被荆棘夹住。要花一分钟才能取下，警察可能会认为这是偷懒。
+		<br><br>
+
+		<<link [[小心地取|Police Community Wasteland Careful]]>><</link>><<difficulty 50>>
+		<br>
+		<<link [[挣脱|Police Community Wasteland Lower Tear]]>><</link>>
+		<br>
+	<<else>>
+		你在荆棘上划破了手臂，但除此之外整个过程并没有什么特别的，尽管这很辛苦。<<gpain>><<gtiredness>><<pain 4>><<tiredness 6>>
+		<br><br>
+
+		<<link [[继续|Police Community Wasteland End]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

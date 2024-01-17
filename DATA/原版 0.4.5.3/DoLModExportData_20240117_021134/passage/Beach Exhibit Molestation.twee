@@ -1,0 +1,101 @@
+:: Beach Exhibit Molestation []
+<<location "beach">><<effects>>
+
+<<if $phase is 0>>
+
+	<<if $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+
+		<<generatey2>><<generatey3>><<generatey4>><<generatey5>>
+		<<maninit>><<npcstrip>><<npcexhibit>>
+		"也许你喜欢这样被人看见？我们可以帮你。"双臂从你的周围伸出来！
+		<br><br>
+		<<enable_rescue>>
+	<</if>>
+
+	<<effects>>
+	<<effectsman>>
+	<<alarmstate>>
+	<<man>>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
+
+	<<if $alarm is 1>>
+		<<if $rescue is 1>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation Alarm]]>><</link>></span><<nexttext>>
+		<<else>>
+			<<set $alarm to 0>>
+			<br><br>
+			<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation Ejaculation]]>><</link>></span><<nexttext>>
+			<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation Escape]]>><</link>></span><<nexttext>>
+			<<elseif $orgasmdown gte 1>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation Orgasm]]>><</link>></span><<nexttext>>
+			<<else>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation]]>><</link>></span><<nexttext>>
+			<</if>>
+		<</if>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation Escape]]>><</link>></span><<nexttext>>
+	<<elseif $orgasmdown gte 1>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation Orgasm]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation]]>><</link>></span><<nexttext>>
+	<</if>>
+
+<<elseif $phase is 1>>
+
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>>
+		<<set $consensual to 1>>
+		<<neutral 1>>
+
+		<<maninit>><<npcoral>>
+		<<set $enemytrust -= 40>>
+		<<enable_rescue>>
+	<</if>>
+
+	<<effects>>
+	<<effectsman>>
+	<<alarmstate>>
+	<<man>>
+	<<stateman>>
+	<br><br>
+	<<actionsman>>
+
+	<<if $alarm is 1>>
+		<<if $rescue is 1>>
+			<span id="next"><<link [[继续->Beach Exhibit Molestation Alarm]]>><</link>></span><<nexttext>>
+		<<else>>
+			<<set $alarm to 0>>
+			<br><br>
+			<<if $enemyarousal gte $enemyarousalmax>>
+				<span id="next"><<link [[继续->Beach Exhibit Molestation Ejaculation]]>><</link>></span><<nexttext>>
+			<<elseif $enemyhealth lte 0>>
+				<span id="next"><<link [[继续->Beach Exhibit Molestation Escape]]>><</link>></span><<nexttext>>
+			<<elseif $finish is 1>>
+				<span id="next"><<link [[继续|Beach Exhibit Molestation Finish]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续->Beach Exhibit Molestation]]>><</link>></span><<nexttext>>
+			<</if>>
+		<</if>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation Ejaculation]]>><</link>></span><<nexttext>>
+	<<elseif $enemyhealth lte 0>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation Escape]]>><</link>></span><<nexttext>>
+	<<elseif $finish is 1>>
+		<span id="next"><<link [[继续|Beach Exhibit Molestation Finish]]>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续->Beach Exhibit Molestation]]>><</link>></span><<nexttext>>
+	<</if>>
+
+<</if>>

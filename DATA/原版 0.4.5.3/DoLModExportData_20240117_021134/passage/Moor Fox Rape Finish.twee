@@ -1,0 +1,65 @@
+:: Moor Fox Rape Finish []
+<<location "moor">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $enemyanger lte 60>>
+		<<if $monster is 1>>
+			<<beasttype>>和你拥抱了一会儿。然后，一言不发地起身走进灌木丛中。
+		<<else>>
+			<<beasttype>>在你身上蹭了一会儿。然后，突然，<<bhe>>从你身上跳了下来，窜进了灌木丛。
+		<</if>>
+	<<else>>
+		<<if $monster is 1>>
+			<<beasttype>>咆哮着撕咬着你的脖子，虽然没有刺穿皮肤，但还是很疼。<<pain 6>><<gpain>>
+			<br><br>
+
+			"或许这能让你学到点教训，"<<bhe>>说着从你身上跳下来，跑进灌木丛。
+		<<else>>
+			<<beasttype>>咆哮着撕咬着你的脖子，虽然没有刺穿皮肤，但还是很疼。<<pain 6>><<gpain>>
+			<br><br>
+
+			对你失去了兴趣后，<<beasttype>>从你身上跳下来，跑进了灌木丛。
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<tearful>>你站了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $NPCList[0].traits.includes("territorial")>>
+		<<if $monster is 1>>
+			<<bHe>>畏缩了一下，冲你呲起牙。"不错，<<foxnickname>>。"
+		<<else>>
+			<<bHe>>从你身上滚开，沮丧地喘着气。
+		<</if>>
+	<<elseif $NPCList[0].traits.includes("friendly")>>
+		<<if $monster is 1>>
+			"噢！噢！住手！"
+		<<else>>
+			<<bHe>>从你身上滚开。
+		<</if>>
+	<<else>>
+		<<bHe>>从你身上滚开。
+	<</if>>
+	<<beasttype>>逃进了石楠花丛。
+	<br><br>
+
+	<<tearful>>你振作了起来。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<beasttype>>从你身边离开，溜进了石楠花丛。
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

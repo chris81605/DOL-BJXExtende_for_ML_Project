@@ -1,0 +1,37 @@
+:: Head's Office Refusal []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set _offeredclothing to ($clothingselector is "m" ? "男生校服" : "女生校服")>>
+<<if $speech_attitude is "meek">>
+	"但……但这是_offeredclothing，"你很疑惑。
+<<elseif $speech_attitude is "bratty">>
+	"我才不要穿_offeredclothing！"你吼道。
+<<else>>
+	<<if $player.gender is $clothingselector and !$backgroundTraits.includes("crossdresser")>><!-- Crossdresser trait makes PC distressed by not crossdressing and so goes to "I can't" -->
+		"你确定你没有<<print ($clothingselector is "f" ? "短裤" : "短裙")>>？"你问道。
+	<<else>>
+		"不！我不能穿_offeredclothing！"你拒绝了对方的要求。
+	<</if>>
+<</if>>
+<br><br>
+<<if ($player.gender_appearance is $clothingselector) and !$genderknown.includes("Leighton") and !playerChastity("hidden")>> <!-- Leighton didn't expect this and checks the PC's records for their sex -->
+	<<He>>看起来犹豫了一阵子，然后回到了<<his>>的电脑前开始查什么东西。<<He>>粗略的浏览了一下
+		<<if $player.penisExist and $player.vaginaExist>><!-- implication: PC's ambiguous sex is recorded as medical information -->
+			对自己的发现感到惊讶。
+		<<elseif $backgroundTraits.includes("crossdresser")>><!-- deliberately ambiguous implication: PC has been crossdressing for long enough for it to be on file -->
+			对着<<he>>发现的东西，露出得意的笑容。
+		<<else>>
+			对<<he>>发现的东西皱了皱眉头，然后输入了一些东西。
+		<</if>>
+		<<He>>回头对你说："抱歉，我只有这套制服，现在就把它穿上吧。"
+	<<set $genderknown.pushUnique("Leighton")>><<if $player.penisExist and $player.vaginaExist>><<detention -1>><</if>> <!-- Leighton is too surprised to be angry at herm PC right now -->
+<<elseif $player.gender is $clothingselector and $genderknown.includes("Leighton")>>
+	<<He>>严厉地盯着你然后挖苦道："如果你想穿得像个<<print ($clothingselector is "m" ? "女孩" : "男孩")>>，那是你的自由，下次也许可以。但现在给我穿好衣服。"
+<<else>>
+	<<He>>严厉地看着你，"别顶嘴。我叫你穿好衣服，现在！马上！"
+<</if>>
+<br><br>
+
+<<link [[穿好衣服并离开 (0:01)|Hallways]]>><<schoolspareclothes>><<pass 1>><<endevent>><</link>>
+<br>
+<<link [[出去|Hallways]]>><<detention 3>><<endevent>><</link>><<gdelinquency>>
+<br>

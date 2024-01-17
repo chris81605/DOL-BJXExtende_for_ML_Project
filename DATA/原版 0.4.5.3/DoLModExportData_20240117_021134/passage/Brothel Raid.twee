@@ -1,0 +1,22 @@
+:: Brothel Raid []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+/* Police raid in the middle of action */
+<<set $brothel_raid += 1>>
+<<set $brothel_raid_day to Time.days>>
+<span class="red">你听到外面一声巨响，随后便是叫喊和尖叫。</span><<person>>停下了。
+<<set $enemyarousal to 0>><<set $enemytrust to -200>>
+<<set $enemyhealth to ($enemyhealthmax / 5) * 4>><<set $enemyanger to ($enemyangermax / 5) * 2>>
+<<if $options.images is 1 and $options.combatImages is 1>>
+	<<timed 100ms>>
+		<br><br><br>
+		<<combatimg>>
+		<br>
+	<</timed>>
+<</if>>
+<<stateman>>
+<br><br>
+<span class="red">"所有人不许动！警察！呆在原地！"</span>
+<br><br>
+<<person>>咒骂着，把你推开，穿好了衣服。
+<br><br>
+<span id="next"><<link [[整理自己的仪表|Brothel Raid 2]]>><</link>></span><<nexttext>>

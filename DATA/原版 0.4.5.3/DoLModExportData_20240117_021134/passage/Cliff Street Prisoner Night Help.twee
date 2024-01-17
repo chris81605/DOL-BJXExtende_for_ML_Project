@@ -1,0 +1,72 @@
+:: Cliff Street Prisoner Night Help []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "cliff">>
+<<if $phase is 0>><<stress 6>><<famegood 10>><<trauma -10>><<set $pillory_tenant.upperexposed to 0>><<set $pillory_tenant.lowerexposed to 0>>
+	当人们看到你走向颈手枷时，所有人都安静下来，<<The_pillory_person>>也警惕地看向了你。但当你开始为<<his>>整理起衣服时，<<his>>也放松了那紧绷的神经，
+	这也帮助其恢复了一点点尊严。
+	<br><br>
+	当观众们意识到你在做什么时，人群不屑地转过了身，当你迅速地把<<his>>的衣服放回原处时，你听到背后传来阴险的嘟囔声。
+	<br><br>
+	<<rng 12>>
+	<<if $rng gte $pillory_tenant.crowd>>
+		在其他人还没来得及太过放肆的时候，你就迅速离开了。<br>
+		你感觉到人群中某些人对你的敌意还在持续着，
+		<<if $speech_attitude is "bratty">>
+			但那些家伙没有胆量去做任何事。<br>
+			"什么？？"你摇了摇头，然后在对人群竖起一根中指后便随意地离开了。<<lstress>><<stress -10>><br><br>
+			你觉得这样做非常好。<<ltrauma>>
+		<<else>>
+			但你对自己的所作所为感到很满意。<br>
+			你成功地离开了现场。<<ltrauma>>
+		<</if>>
+		<<endevent>>
+		<br><br>
+		<<link [[继续| Cliff Street]]>><</link>>
+		<br>
+	<<else>>
+		<<if $pillory_tenant.crowd gt 6>><<athleticsdifficulty 400 1000 f>><<else>><<athleticsdifficulty 0 500 f>><</if>>
+		"小心！"<<The_pillory_person>>突然喊道。
+		<<if $athleticsSuccess>>
+			有人想抓住你，但你躲开了那家伙的手并冲了出去。<br>
+			你听到了追赶你的脚步声，但没什么问题，你能轻松地跑掉。<br><br>
+
+			当你停下来喘息的时候，你发现自己在不自觉地微笑，你对自己所做的事很满意。<<lstress>><<stress -6>>
+			<<endevent>>
+			<br><br>
+			<<if $rng % 4 is 3>><<link [[继续| Starfish Street]]>><<set $eventskip to 1>><</link>>
+			<<elseif $rng % 3 is 2>><<link [[继续| High Street]]>><<set $eventskip to 1>><</link>>
+			<<elseif $rng % 3 is 1>><<link [[继续| Connudatus Street]]>><<set $eventskip to 1>><</link>>
+			<<else>><<link [[继续| Barb Street]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+			<br>
+		<<else>>
+			有人抓住了你！
+			<<endevent>>
+			<br><br>
+			<<link [[继续|Cliff Street Prisoner Night Strip]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $phase is 1>>
+	你鼓起了所有的信心，大摇大摆地走向颈手枷，就像你应该在那里一样。<br><br>
+	你摆开架势，然后粗暴地抓住<<the_pillory_person>>的头发，然后把<<his>>的脑袋用力向后一拽，随后贴在<<his>>耳边低语道。
+	<br><br>
+	"抱歉，但我是来帮忙的，我会带你离开这里，但在这之前需要看起来和平常一样。"
+	<br><br>
+	"好了，各位，表演结束了，"你大声说道。"我们要回局里去了，这个人要供出其同伙了。
+	没错，人渣，我们有更多问题要问你，而且你这次最好乖乖地合作。"
+	<<skulduggerycheck "silent">><<crimeUp 200 "obstruction">>
+	<<endevent>>
+	<br><br>
+	<<if $skulduggerysuccess is 1>>
+		<<link [[继续|Cliff Street Prisoner Escape]]>><</link>>
+	<<else>>
+		<<link [[继续|Cliff Street Prisoner Escape Fail]]>><</link>>
+	<</if>>
+	<br>
+<<else>>
+	没有人看到你做了什么，也没有人理解它，更没有人能够解释，就像矩阵中的一个小插曲，你在人群中回到了现实。(错误：请报告)
+	<<endevent>>
+	<br><br>
+	<<link [[继续|Cliff Street Pillory]]>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,40 @@
+:: Toilets Molestation Finish []
+<<effects>>
+
+<<if $enemyhealth lte 0>>
+
+	<<He>>摔在了洗手池上。你抓住机会，<<tearful>>逃离了现场。
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+
+	<<ejaculation>>
+
+	<<if $player.gender is $player.gender_appearance and $toiletsmistake is 1>>
+		"这是你看起来像<<if $player.gender_appearance is "f">>个男孩<<else>>个女孩<</if>>的错。"<<He>>把你推到门外。
+		<br><br>
+	<<else>>
+		"让这成为你的一个教训吧，"<<He>>把你推到门外。
+		<br><br>
+	<</if>>
+
+	<<tearful>>你手脚并用挣扎着站起身来。
+
+<</if>>
+
+<br><br>
+<<if $phase2>>
+	<<storeon $bus "check">>
+	<<if _store_check is 1>>
+		<<storeon $bus>>
+		你的衣服在你身后被扔了出去。
+	<</if>>
+	<<clearNPC toilets_1>>
+	<<if $phase2 is 1>>
+		<<clearNPC toilets_2>>
+	<</if>>
+<</if>>
+
+<<clotheson>>
+<<endcombat>>
+<<unset $toiletsmistake>>
+<<parkeventend>>

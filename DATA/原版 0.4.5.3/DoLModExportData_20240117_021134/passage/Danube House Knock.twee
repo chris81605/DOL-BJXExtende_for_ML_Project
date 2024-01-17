@@ -1,0 +1,90 @@
+:: Danube House Knock []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+你走到其中一栋豪宅前，敲了敲门。
+<br><br>
+<<if $rng lte 30>> /* Default case*/
+
+	没有回应。
+	<br><br>
+
+	<<lockpickicon>><<link [[闯入|Danube House Lock]]>><</link>>
+	<br>
+	<<ind>><<link [[去下一家 (0:02)|Danube House Knock]]>><<pass 2>><</link>>
+	<br>
+	<<getouticon>><<link [[停止|Danube Street]]>><</link>>
+	<br>
+
+<<elseif $unlocked is true>>
+	/*To return this housekeeping check?
+	- Remove `$unlocked is true` and place
+	- Add `danube_housekeeping is undefined`*/
+
+	<<if $danube_housekeeping is undefined>>
+		<<generate1>><<person1>>一个<<person>>打开了门。“……你不是我在等的客人，”<<he>>说，“算了，有什么事吗？”
+		<br><br>
+		<<askicon>><<link [[询求工作|Danube House Intro]]>><</link>>
+		<br>
+		<<getouticon>><<link [[说你敲错门了，然后离开|Danube Street]]>><<endevent>><</link>>
+		<br>
+
+	<</if>>
+
+<<else>>
+	<<cleareventpool>>
+
+	<<set $phase to 0>>
+	<<addinlineevent "Danube Party Pre-Intro">>
+		<<generate1>><<generate2>><<person2>>一个<<person>>来应门。"你不是我们想找的人，"<<he>>说道。
+		<<set $phase to 1>>
+	<</addinlineevent>>
+	<<addinlineevent "Danube Attic Pre-Intro">>
+		<<generate1>><<person1>>一个<<person>>来应门。"我不喜欢被打搅，"<<he>>说道。
+		<<set $phase to 2>>
+	<</addinlineevent>>
+	<<addinlineevent "Danube Tea Pre-Intro">>
+		一个<<generate1>><<person1>><<person>>开了门。<<He>>把你从头到脚审视了一遍，开口道："可真是个尤物啊，我能为你做些什么吗？"
+		<<set $phase to 3>>
+	<</addinlineevent>>
+	<<addinlineevent "Danube Garden Pre-Intro">>
+		一个<<generate1>><<generate2>><<person1>><<person>>出来应门。"有话快说，我的<<person2>><<master>>不喜欢被打搅，"<<he>>说道。
+		<<set $phase to 4>>
+	<</addinlineevent>>
+	<<addinlineevent "Danube Doll Pre-Intro">>
+		<<generatey1>><<person1>>一个<<person>>来应门。<<He>>轻轻地打开门，从缝隙里看着你，什么话也没有说。
+		<<set $phase to 5>>
+	<</addinlineevent>>
+	<<addinlineevent "Danube Tutor Pre-Intro">>
+		一个<<generatey1>><<generate2>><<person2>><<person>>开了门。"有什么事么？"<<he>>问道。
+		<<set $phase to 6>>
+	<</addinlineevent>>
+	<<if $breastfeedingdisable is "f" and maleChance() lt 100>>
+		<<addinlineevent "Danube Breast Pre-Intro">>
+			一个<<generatef1>><<person1>><<person>>开了门。<<Hes>>除了衬衫和内裤什么都没穿。"有什么事吗？"<<he>>问道。
+			<<set $phase to 7>>
+		<</addinlineevent>>
+	<</if>>
+	<<addinlineevent "Danube Catperson Pre-Intro">>
+		一个<<generate1>><<person1>><<person>>开了门。
+		<<if $fame.bestiality gte 400>>
+			当<<he>>看到你时，<<His>>的眼睛一亮。"哦，我知道你。你在照顾动物方面很有心得，是吗？"
+		<<else>>
+			"噢，你好。我能为你做些什么吗？"<<he>>问道。
+		<</if>>
+		<<set $phase to 8>>
+	<</addinlineevent>>
+
+	<<runeventpool>>
+
+	<br><br>
+	<<if $phase is 0>>
+		<<errorp "Eventpool selection failed! Please export your save on this screen and report this bug.">>
+	<<elseif $phase is 8>>
+		<<askicon>><<link [[询求工作|Danube Catperson Intro]]>><</link>>
+	<<else>>
+		<<askicon>><<link [[询求工作|Danube House Work]]>><</link>>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[说你敲错门了，然后离开|Danube Street]]>><<endevent>><</link>>
+	<br>
+<</if>>

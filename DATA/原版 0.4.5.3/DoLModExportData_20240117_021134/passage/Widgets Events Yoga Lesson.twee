@@ -1,0 +1,87 @@
+:: Widgets Events Yoga Lesson [widget]
+<<widget "yogalessons">>
+	<<if $worn.under_upper.type.includes("dance")>>
+		<<switch random(1,4)>>
+			<<case 1>>
+				<<if ["lightheaded","dizzy"].includes(_pregnancyDailyEvent)>>
+					查里看了看你的<<bellyDescription>>，然后关切地询问你感觉如何。
+					<br><br>
+					<<if $speech_attitude is "meek">>
+						"我还撑得住，"你怯怯地笑着说道，"只是最近有点头晕。我还担心今天早上会晕倒呢。"
+					<<elseif $speech_attitude is "bratty">>
+						"嗯，还行吧。"你耸耸肩继续说道，"那种眩晕感把我今天折腾得够呛。"
+					<<else>>
+						"有点头晕，"你承认道 "但其他地方没什么大碍。"
+					<</if>>
+					<br><br>
+					查里点点头，"那是意料之中的事，"<<nnpc_he "Charlie">>接着说道："我们今天在课堂上会做一些恢复性瑜伽动作来放松一下，其中有些姿势可以促进血液循环，改善平衡感，从而缓解头晕。"<<nnpc_He "Charlie">>示范了一些姿势，跟着完成动作后，你感觉脚步更稳了。
+				<<else>>
+					课程继续进行，你现在不费吹灰之力就能跟上课程的节奏。
+				<</if>>
+			<<case 2>>
+				<<if ["cramping"].includes(_pregnancyDailyEvent)>>
+					查里带领全班同学做侧卧撑，当你按照<<nnpc_his "Charlie">>的指示做时，你感觉到你的骨盆开始拉伸，这缓解了你的痉挛，让你松了一口气。<<lpain>><<pain -12>>
+				<<else>>
+					查里演示了几个比较简单的姿势，都是些是不错的热身运动，你能感觉到身体得到了良好的拉伸。
+				<</if>>
+			<<case 3>>
+				<<if ["crying"].includes(_pregnancyDailyEvent)>>
+					查里带领全班做了一个叫做婴儿式的动作，你听到这个名字后笑了笑，把手放在<<bellyDescription>>上。你跪了下去，将额头贴在垫子上，双臂前伸，脚跟向后坐。查里指导你保持这个姿势做几次长而平稳的呼吸，以释放你身体里的紧张情绪。不知道为什么，你很快就哭出声来。
+					<br><br>
+					当你做完这个姿势，你的瑜伽垫已经被泪水打湿了。你还在擦着脸时，查里那关切的眼神看了过来。<<nnpc_He "Charlie">>小心翼翼地接近了你。"瑜伽就是用来宣泄的，不是吗？"<<nnpc_he "Charlie">>接着喃喃道："不要害怕释放那些情绪。"<<nnpc_He "Charlie">>说罢轻快地捏了捏你的手，然后回到了教室前面。<<ltrauma>><<glove>><<trauma -6>><<npcincr Charlie love 1>>
+				<<else>>
+					<<if ["angry"].includes(_pregnancyDailyEvent)>>
+						在查里的指导下，你和其他人一起练习呼吸法，这种动作旨在帮助排出压抑的情绪，当你通过每个伸展动作来呼吸时，所有积聚了一整天的压力都会消散。<<lstress>><<stress -12>>
+					<<else>>
+						查里演示了几个更难的姿势，这些姿势更难保持，你很快就感到你的身体发出了疲惫的信号。
+					<</if>>
+				<</if>>
+			<<case 4>>
+				随着课程的推进，查里选了个特别难以维持的姿势。在注意到你的挣扎之后，<<nnpc_he "Charlie">>接近你并指出你的错误，然后帮忙纠正了你的动作。你很快就找到了动作的重心，这让你能够更容易地保持姿势。
+		<</switch>>
+	<<else>>
+		<<switch random(1,4)>>
+			<<case 1>>
+				课程继续进行，尽管你既兴奋又尴尬，但你还是能够毫无困难地跟上那些动作。
+			<<case 2>>
+				查里演示了几个比较简单的姿势，它们是很好的热身运动。但这也使你对你目前的淫乱状态更加在意，你敢发誓，其他人一定在偷偷地看向你。
+			<<case 3>>
+				查里演示了几个比较困难的姿势。它们具有足够的挑战性，以至于你都忘记了你现在的穿着状态，不过幸运的是，大多数地其他人也专注于练习而没有注意到你。
+			<<case 4>>
+				随着课程的推进，查里做出一个特别难以维持的姿势。在注意到你的挣扎之后，<<nnpc_he "Charlie">>走了过来，虽然<<nnpc_his "Charlie">>看起来有些尴尬，但<<nnpc_he "Charlie">>还是指出你的错误并帮忙纠正了你的动作。你很快就找到了这个动作的重心，这让你能够更容易地保持姿势。
+		<</switch>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Yoga Classes Start 2]]>><</link>>
+<</widget>>
+
+<<widget "yogalewd">>
+	<<if $worn.under_upper.type.includes("dance")>>
+		<<endevent>><<generate1>>
+		<<switch random (1,2)>>
+			<<case 1>>
+				查里让你和另一个学员帮忙把垫子放好，你们俩各自拿了几个垫子前往储物室。在一进去之后，你听到了垫子落地和门被关上的声音。你回头一看，那个<<person1>><<person>>向你走了过来。
+				<br><br>
+				<<link [[继续|Yoga Classes Molestation]]>><<set $molestationstart to 1>><</link>>
+			<<case 2>>
+				在课程进行到一半时，查里被叫到了教室外面。<<nnpc_He "Charlie">>告诉大家继续保持姿势，<<nnpc_he "Charlie">>应该会在一分钟内赶回来，你试着按照<<nnpc_he "Charlie">>说的话做，但很快，你就感觉到一只手在摸你的屁股。
+				<br><br>
+				"最好保持安静，"那个<<person1>><<person>>说道，"你也不想引起骚乱，不是吗？"
+				<br><br>
+				<<link [[继续|Yoga Classes Molestation]]>><<set $molestationstart to 1>><</link>>
+		<</switch>>
+	<<else>>
+		<<endevent>><<generate1>><<generate2>><<generate3>><<generate4>>
+		随着课程的进行，查里被叫到教室外面。<<nnpc_He "Charlie">>告诉大家保持姿势，<<nnpc_he "Charlie">>马上就回来。你试着按<<nnpc_he "Charlie">>说的做，但很快就感觉到一只手在摸你的屁股。
+		<br><br>
+		"穿成这样来这里，"那个<<person1>><<person>>说道，"那这就你是自找的，不对吗？"
+		<br><br>
+		你环顾四周，注意到其他几个人也靠了过来，而且也都在色眯眯地盯着你的<<lewdness>>。
+		<br><br>
+		<<link [[保持沉默|Yoga Classes Non-Orgy]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<if $promiscuity gte 75>>
+			<<link [[主动献身|Yoga Classes Orgy]]>><<set $sexstart to 1>><</link>><<promiscuous5>>
+		<</if>>
+	<</if>>
+<</widget>>

@@ -1,0 +1,54 @@
+:: Police Back Office []
+<<set $outside to 0>><<set $location to "police_station">><<effects>>
+<<if ndef $police_access_card>><<set $police_access_card to 0>><</if>>
+<<if ndef $police_hack>><<set $police_hack to 0>><</if>>
+<<if Time.dayState is "night">>
+	<<if $police_intro is 0>>
+		你发现自己身处于两间行政后勤办公室中间的一条小通道里。
+		附近的房间又黑又空。沿着走廊再往前走，有几间办公室发着光，然而一扇厚厚的玻璃门挡住了去路。
+		你听到远处的说话声，奇怪的哭声和咕哝声，偶尔还有笑声爆发出来。
+		<br>
+		附近一间办公室的门大开着，办公室里光线昏暗，只有电脑屏幕发出些许亮光。你溜了进去。
+		你发现一台被锁定的电脑。
+		<<set $police_intro to 1>>
+	<<else>>
+		办公室很昏暗，那台被锁定的电脑附近被照亮了少许。
+		<<print either("一阵类似于鞭打的声音在走廊中回荡。","隔着墙可以听到一个低沉的声音。","从更远的地方传来醉鬼的歌声。",
+			"阴险的笑声回荡在大厅里。", "从大楼的深处传来阵阵抽泣声。","附近的某扇门砰的一声关上了。")>>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "policeStation">>
+	<</if>>
+	<<if $police_hack lte 2>>
+		<span class="red">登录提示仿佛是在嘲弄你。</span>你不知道如何才能访问电脑数据，<span class="teal">你需要黑客或盗贼的帮助。</span>
+		<<if $police_hack is 0>><<set $police_hack to 1>><</if>>
+		<br>
+	<</if>>
+	<<if $police_access_card is 0 and ($rng % 3) is 0>>
+		<br><span class="gold">桌子上放着一张警察通行证。</span>上面写着"仅限外部访问"。
+		<br><br>
+		<<link [[盗取门禁卡|Police Back Office]]>><<set $police_access_card to 1>><</link>>
+		<br>
+	<<else>>
+	<br><br>
+	<</if>>
+	<<if $police_hack is 4>>
+		<!-- SANITY: Intentional mismatch between stated time and actual time, to avoid letting the user know that it will fail -->
+		<<link [[调查警方电脑 (0:10)|Police Computer]]>><<pass 1>><<set $phase to 0>><</link>>
+		<br>
+	<<elseif $police_hack is 5>>
+		<<link [[调查警方电脑 (0:10)|Police Computer]]>><<pass 10>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你发现自己身处一间行政后勤办公室中。外面到处都是警察，你没法溜去其他办公室，更没办法调查任何东西。被警察发现只是时间问题，你别无选择，只能偷偷溜走。
+	<br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "policeStation">>
+	<</if>>
+	<span class="gold">晚上可能会更安静一些。</span>
+	<br><br>
+<</if>>
+<br>
+<<link [[离开|Barb Street]]>><<set $police_intro to 0>><</link>>
+<br>

@@ -1,0 +1,94 @@
+:: Farm Hitchhike Assistant Driver 3 []
+<<effects>>
+<<pass 5>>
+
+<<set _outerUpper to [$worn.over_upper, $worn.upper, $worn.under_upper].find(u => u.name !== "naked")>>
+/* _outLower *should* be done like above but .skirt is only stored on setup. */
+<<set _outerLower to $worn[["over_lower", "lower", "under_lower", "genitals"].find(l => {
+	return V.worn[l].name !== "naked" && (T.lowerIsSkirt = setup.clothes[l][clothesIndex(l, V.worn[l])].skirt, true);
+})]>>
+你专注于驾驶，任由这个<<person>>继续<<his>>的胡闹。
+<<promiscuity3>>
+<<His>>的左手开始
+<<if _outerUpper>>
+	<<if _outerUpper.one_piece and !_outerUpper.open>>
+		伸向
+	<<else>>
+		伸进
+	<</if>>
+	你的_outerUpper.cn_name_cap
+<</if>>
+，触摸你的胸膛，手指有节奏地逗弄起你的乳头<<if $player.breastsize gte 3>>，揉捏着你的<<breasts>><</if>>。
+<<His>>的右手
+<<if _outerLower and !_outerLower.type.includes("chastity")>>
+	<<if _lowerIsSkirt>>
+		伸进
+	<<elseif _outerLower.one_piece>>
+		拨开
+	<<else>>
+		褪下
+	<</if>>
+	你的_outerLower.cn_name_cap
+<</if>>
+<<if !playerChastity("hidden") and !playerHasStrapon()>>
+	<<if $player.penisExist>>
+		，抓住你的<<penis>>，缓缓上下抚摸着你的柱身。
+	<<else>>
+		，挑逗你的阴蒂，轻轻抚摸着你的<<pussy>>。
+	<</if>>
+<<else>>
+	揉捏着你的<<genitals>>。
+<</if>><<gggarousal>><<arousal `$arousalmax * 2`>>
+<br><br>
+
+<<if $willpower gte random(1, 1000)>>
+	你的身体起了反应，但你还是忍着专注在路上。
+	就在高潮快要来临时，你靠边停下了卡车，
+	<<rng>>
+	<<if $rng lte 75>>
+		然后释放了出来。
+		<<willpower 1>><<gwillpower>>
+		<br><br>
+
+		<<orgasm>>
+
+		"哈，真有意思，"<<he>>坏笑了起来，"接下来让我开车，怎么样？"
+		<br><br>
+
+		几分钟后，你到达了你的目的地。<<person>>面带微笑地冲你眨眨眼，让你下车到了
+		<<include "Farm Hitchhike Assistant End">>
+	<<else>>
+		<<personsimple>>却突然停了下来。<<arousal -10>>
+		<br><br>
+
+		"哈，这下有意思了，"<<he>>坏笑了起来，"接下来我会开车的。"
+		<<He>>示意你回到副驾驶座位上。
+		<br><br>
+
+		<<if $promiscuity gte 55>>
+			<<if $speech_attitude is "meek">>
+				<<link [[祈求继续|Farm Hitchhike Assistant Driver 4]]>><</link>>
+			<<elseif $speech_attitude is "bratty">>
+				<<link [[要求继续|Farm Hitchhike Assistant Driver 4]]>><</link>>
+			<<else>>
+				<<link [[请求继续|Farm Hitchhike Assistant Driver 4]]>><</link>>
+			<</if>>
+			<<promiscuous4>><<englishdifficulty 1 500>>
+			<br>
+			<<link [[自行解决|Farm Hitchhike Assistant Driver 5]]>><</link>><<promiscuous4>>
+		<<else>>
+			<span class="red">你还没有淫乱到可以让事情发展得更过分。</span>
+		<</if>>
+		<br>
+		<<link [[接受|Farm Hitchhike Assistant Passenger]]>><<pass 2>><<set $phase2 to 2>><</link>>
+	<</if>>
+<<else>>
+	你内心的性奋不断增强着，让你几乎失去了对卡车的控制！
+	这个<<personsimple>>迅速地握住方向盘，把你们重新带回公路上，就这样突然停止了爱抚。
+	<<arousal -500>><<gstress>><<stress 10>>
+	<br><br>
+
+	"也许我们今天的驾驶课就先到此为止吧，"<<he>>说道，示意你回到副驾驶座上。
+	在你平静下来之后，剩下的车程就显得有点安静了，但你还是被送到了
+	<<include "Farm Hitchhike Assistant End">>
+<</if>>

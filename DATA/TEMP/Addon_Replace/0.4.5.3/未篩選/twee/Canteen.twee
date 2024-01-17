@@ -1,0 +1,187 @@
+:: Canteen []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<sydneySchedule>>
+你正呆在学校食堂。
+<<if Time.schoolDay>>
+	<<if $schoolstate is "early">>
+		食堂里空无一人。
+		<br><br>
+	<<elseif $schoolstate is "late">>
+		食堂里空无一人。
+		<br><br>
+	<<elseif $schoolstate is "lunch">>
+		里面挤满了吃午饭和聊天的学生。
+		<br><br>
+	<<else>>
+		食堂的人基本都走了，只剩下一小群学生还在餐桌上聊着天。
+		<br><br>
+	<</if>>
+<<else>>
+	食堂里空无一人。
+	<br><br>
+<</if>>
+
+<<if $exposed gte 1>>
+	<<if $schoolstate is "lunch">>
+		你躲在柜台下面。在几英尺远的地方，你能听到学生们的喧闹。
+		<br><br>
+	<<elseif Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+		你躲在柜台之下。如果动作够快，你应该可以溜走。
+		<br><br>
+	<<else>>
+		<<exhibitionclassroom>>
+	<</if>>
+<</if>>
+
+<<if $stress gte $stressmax>>
+	<<link [[你眼前一黑……|School Passout]]>><</link>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "canteen">>
+	<</if>>
+	<<if Time.schoolDay>>
+		<<if $schoolstate is "early">>
+		<<elseif $schoolstate is "late">>
+		<<elseif $schoolstate is "lunch">>
+			<<run statusCheck("Robin")>>
+
+			<<if _robin_location is "school" and ($robinReunionScene is "dungeon" or $robinReunionScene is "dungeonRobin") and $exposed lte 0>>
+				<<npc Robin>><<person1>>
+				<<if $robinReunionScene is "dungeon">><<set $robinPostMortem to true>><</if>>
+				有人倒吸了一口气。你循声望去，罗宾正坐在一张挤满了人的桌子旁，张大嘴巴呆呆地看着你。
+				他们的附近放着一个相框，里面有一张你们俩的照片。<<He>>猛地跳了起来，径直地朝你冲去。
+				<br><br>
+				<<if $robinReunionScene is "dungeon">>
+					"我不敢相信这是真的！"<<he>>尖叫着扑到你怀里，"我，我以为你再也回不来了！"
+					<br>
+					罗宾最终冷静了下来，泪眼朦胧地看着你。
+					"我们回去谈谈好么，"<<he>>抽泣了起来，"当然，如，如果你准备好了的话。"
+					<br><br>
+				<<else>>
+					"我不敢相信这是真的！"<<he>>尖叫着扑到你的怀里。"我还以为你永远都逃不出来了！"
+					<br>
+					罗宾最终冷静了下来，泪眼朦胧地看着你。
+					"我们可以一起回家了，"<<he>>抽泣了起来，"你能回来我真的很高兴。"
+					<br><br>
+				<</if>>
+				<<unset $robinReunionScene>>
+				<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+					<<if $NPCName[$NPCNameList.indexOf("Kylar")].rage gte 60>>
+						你张开嘴想说些什么，但还没等你开口，凯拉尔就挤进你们俩的中间。
+						<<nnpc_He "Kylar">>把罗宾推到了一边。
+						<br>
+						"我，我也很担心你，"<<nnpc_he "Kylar">>支支吾吾地说道，"我找不到你……我。"<<stress 3>><<gstress>>
+						<br><br>
+						你告诉他们俩你没事。凯拉尔跟着点头，但双眼一直紧盯着罗宾。
+						<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 80>>
+							罗宾注意到了，<<he>>双手抱胸，表情严肃地转向凯拉尔。
+							<br>
+							"你能不能适可而止一点？"<<he>>强硬的态度令凯拉尔浑身一震。
+							"你真的很过分。<<pShes>>现在肯定压力很大，所以拜托，要么正常点，要么离我的<<if $robinromance is 1>><<girl>><</if>>朋友远点！"
+							<br>
+							罗宾喘着粗气，身子微微地颤抖着。凯拉尔看起来很震惊。
+							<<nnpc_He "Kylar">>目瞪口呆地看着罗宾，啧了一声，迅速溜回了<<nnpc_his "Kylar">>的桌子。
+							<br><br>
+							罗宾逐渐冷静了下来，<<He>>看起来有些尴尬。
+							"抱，抱歉，我有些无礼了，"<<he>>咕哝着，"我应该给<<nnpc_him "Kylar">>道个歉。"
+							<<He>>瞥向凯拉尔所在的桌子，凯拉尔带着比以往更深的怨念，用叉子狠狠戳着<<nnpc_his "Kylar">>的食物。
+							"也，也许还是晚点再说比较好。"
+							<br>
+							<<He>>回到了座位，给了你一个紧张的微笑。
+						<<else>>
+							罗宾似乎没注意到，但即使<<he>>注意到了，也因为过于担心你而无暇顾及。
+							<br><br>
+							两人对你嘘寒问暖了一会儿，然后回到了各自的位置上。
+						<</if>>
+					<<else>>
+						你告诉罗宾你很好。<<He>>点了点头，在离开之前再次用抱了你。
+						<br>
+						凯拉尔在食堂的对面看着。<<nnpc_his "Kylar">>的脸上透露出一丝担忧。<<npcincr Kylar rage 1>><<gksuspicion>>
+					<</if>>
+				<<else>>
+					你告诉罗宾你很好。<<He>>点了点头，在离开之前再次用抱了你。
+				<</if>>
+				<br><br>
+
+				<<link [[继续|Canteen]]>><<endevent>><</link>>
+				<br>
+			<<else>>
+				<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 0>>
+					<<set $robindebt to 0>><<set $robindebtlimit to 5>>
+					<<npc Robin>><<initnpc Robin>><<person1>>你听到身后有个人在叫你。"嘿！" 那是罗宾。<<Hes>>也是孤儿院里的一个孩子。
+					<<He>>一直很仰慕你，尽管你们年龄相仿。
+					<<He>>朝你跑过来，来不及减速，和你撞在一起，<<his>>的食物差点从托盘上洒出来。
+					你扶住了<<him>>。"谢谢，"<<he>>看上去很尴尬，但仍然保持微笑。
+					<br><br>
+					"我早上没看见你。别忘了，<span class="gold">你可以来我房间找我玩</span>，随时都可以，只要你想的话。
+					我一直期待着给你看些东西。一想到这个我就很兴奋！"
+					<<He>>给了你一个单手拥抱，小心翼翼地用另一只手臂维持着托盘的平衡，匆匆忙忙地前去自己的座位。
+					<br><br>
+					<<endevent>>
+					<<foodicon "eat">><<link [[和罗宾一起吃 (0:20)|Canteen Lunch Robin]]>><<stress -6>><<trauma -2>><<pass 20>><<set $daily.school.lunchEaten to 1>><<npcincr Robin love 1>><</link>><<ltrauma>><<lstress>>
+					<br>
+				<<elseif _robin_location is "school" and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $daily.school.lunchEaten isnot 1 and $exposed lte 0>>
+					<<if $NPCName[$NPCNameList.indexOf("Robin")].cdquest is 5 and $NPCName[$NPCNameList.indexOf("Robin")].trauma lte 20>>
+						你看到罗宾正吃着午饭，<<npc Robin>><<person1>><<he>>似乎引起了一些注意。<<endevent>>
+						<br>
+						<<foodicon "eat">><<link [[和罗宾一起吃 (0:20)|Canteen Lunch Robin CD 1]]>><<stress -6>><<trauma -2>><<pass 20>><<set $daily.school.lunchEaten to 1>><<npcincr Robin love 1>><</link>><<ltrauma>><<lstress>>
+						<br>
+					<<else>>
+						<<rng>>
+						<<if $rng gte 96>>
+							<<npc Robin>><<person1>>一群混混正骚扰着罗宾。<<endevent>>
+							<br>
+							<<ind>><<link [[干涉 (0:20)|Canteen Lunch Intervene]]>><<set $daily.school.lunchEaten to 1>><<npcincr Robin love 5>><</link>>
+							<br><br>
+						<<elseif $rng gte 91 and $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 16 and $NPCName[$NPCNameList.indexOf("Whitney")].state isnot "dungeon">>
+							你看到罗宾正吃着午饭。
+							<br>
+							<<foodicon "eat">><<link [[和罗宾一起吃 (0:20)|Robin Kiyoura Start]]>><<stress -6>><<trauma -2>><<pass 20>><<set $daily.school.lunchEaten to 1>><<npcincr Robin love 1>><</link>><<ltrauma>><<lstress>>
+							<br>
+						<<else>>
+							你看到罗宾正吃着午饭。
+							<br>
+							<<foodicon "eat">><<link [[和罗宾一起吃 (0:20)|Canteen Lunch Robin]]>><<stress -6>><<trauma -2>><<pass 20>><<set $daily.school.lunchEaten to 1>><<npcincr Robin love 1>><</link>><<ltrauma>><<lstress>>
+							<br>
+						<</if>>
+					<</if>>
+				<</if>>
+				<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $daily.school.lunchEaten isnot 1 and $exposed lte 0>>
+					凯拉尔独自坐着，用叉子叉着食物。
+					<br>
+					<<foodicon "eat">><<link [[和凯拉尔一起吃 (0:20)|Canteen Lunch Kylar]]>><<pass 20>><<set $daily.school.lunchEaten to 1>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><</link>><<glove>><<lksuspicion>>
+					<br>
+				<</if>>
+				<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and _sydney_location is "canteen" and $exposed lte 0>>
+					悉尼坐在一个偏僻的角落里，周围堆着一堆书和纸张。
+					<br>
+					<<foodicon "eat">><<link [[和悉尼一起吃 (0:15)|Canteen Lunch Sydney]]>><<stress -6>><<trauma -2>><<pass 15>><<set $daily.school.lunchEaten to 1>><<npcincr Sydney love 1>><</link>><<glove>><<lstress>>
+					<br><br>
+				<</if>>
+				<<if $daily.school.lunchEaten isnot 1 and $exposed lte 0>>
+					<<foodicon "eat">><<link [[吃午饭 (0:10)|Canteen Lunch]]>><<pass 10>><<stress -6>><<set $daily.school.lunchEaten to 1>><</link>><<lstress>>
+					<br>
+				<</if>>
+			<</if>>
+		<<elseif $daily.school.canteenApproach isnot 1 and $exposed lte 0>>
+			<<ind>><<link [[靠近学生们|Canteen Students]]>><</link>>
+			<br>
+		<</if>>
+	<<if def $milkshake and $milkshake gt 0>>
+		<<foodicon "milkshake">><<link [[喝奶昔 (0:10)|Canteen Milkshake]]>><<pass 10>><<set $milkshake -= 1>><<stress -5>><</link>><<lstress>>
+		<br>
+	<</if>>
+
+	<</if>>
+
+	<<if $exposed gte 1 and $schoolstate is "lunch">>
+		<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+			<<ind>><<link [[用托盘盖住自己并尝试离开|Canteen Tray]]>><</link>>
+			<br>
+		<</if>>
+		<<ind>><<link [[等安全了再行动|Canteen Wait]]>><</link>>
+		<br>
+	<<else>>
+		<<getouticon>><<link [[离开食堂 (0:01)|Hallways]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

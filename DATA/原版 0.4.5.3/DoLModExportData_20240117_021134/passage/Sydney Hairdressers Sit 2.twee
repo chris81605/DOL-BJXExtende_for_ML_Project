@@ -1,0 +1,60 @@
+:: Sydney Hairdressers Sit 2 []
+<<effects>>
+<<set _sydneyPresent to true>><<set _pass to 0>>
+<<if $sydneyHairOption is $sydney.hair and $dyeOption is "noChange">>
+	<<set _cancel to true>>
+	你和悉尼决定不动<<he>>的头发。理发师缓缓走到了你的身后，"好吧，那你呢？"<<person2>>
+<<else>>
+	<<set $sydneyHairDone to true>>
+	你付了钱，<<person2>><<he>>开始处理悉尼的头发。
+	<<if !$sydneySeen.includes("hairchange")>>
+		<<person1>><<His>>眼睛睁大了。"嘿，你确定吗？我本可以付钱的。"
+	<</if>>
+	<<if $sydneyHairOption isnot $sydney.hair>>
+		<<set $sydneyStyle to true>>
+		理发师<<if $sydney.hair is "ponytail">>轻轻地解开悉尼的马尾，开始处理悉尼的头发<<else>>拿起了一只梳子，开始处理悉尼的头发<</if>>。
+		<<set $sydney.hair to clone($sydneyHairOption)>>
+		<<set _pass += 5>>
+		<<unset $sydneyHairOption>>
+	<</if>>
+	<<if $dyeOption is "removeDye">>
+		<<set $sydneyDyeRemove to true>>
+		<<if _pass gt 0>>
+			随后，<<He>>翻找身边的盒子，开始洗掉悉尼的染发剂。
+		<<else>>
+			理发师把悉尼的头向后倾斜，开始洗掉<<nnpc_his "Sydney">>头发上的染发剂。
+		<</if>>
+		<<set $NPCName[$NPCNameList.indexOf("Sydney")].hairColour to "strawberryblond">>
+		<<set _pass += 15>>
+		<<unset $dyeOption>>
+	<<elseif $dyeOption isnot "noChange">>
+		<<set $sydneyDye to true>>
+		<<set $NPCName[$NPCNameList.indexOf("Sydney")].hairColour to clone($dyeOption)>>
+		<<if _pass gt 0>>
+			<<He>>翻找身边的盒子，开始给头发染色。
+		<<else>>
+			理发师开始仔细地给悉尼涂上选定的颜色。
+		<</if>>
+		<<set _pass += 15>>
+		<<unset $dyeOption>>
+	<</if>>
+<</if>>
+<<pass _pass>>
+<br><br>
+另一位理发师在为悉尼做发型时走近了你。"那你呢？"<<hairdressersPricelist>>
+
+<<set $hairOption to $hairlength>>
+<<set $fringeOption to $fringelength>>
+<<set $dyeOption to "noChange">>
+<<set $browsDyeOption to "noChange">>
+<<set $twoToneDyeOption1 to "noChange">>
+<<set $twoToneDyeOption2 to "noChange">>
+<<set $twoToneHairDye to false>>
+<<set $twoToneStyle to $hairColourGradient.style>>
+<div id="currentCost" class="gold">
+	付款：£0
+</div>
+<div id="hairDressers">
+	<<hairDressersOptions>>
+</div>
+<<hairdressersReset>>

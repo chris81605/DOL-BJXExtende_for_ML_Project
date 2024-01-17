@@ -1,0 +1,355 @@
+:: StoryCaption []
+<div @class="(Errors.log.length==0?'hidden':'') + ' error-reporter-btn'" onclick="Errors.Reporter.toggle()"></div>
+<<run T.buttons = new window.Tab("overlayButtons", "macro-button-selected")>>
+<<if $intro is 0>>
+	<<if $debug is 1>>
+		<div id="debugOverlay" class="debugOverlay unstowable"></div>
+	<</if>>
+
+	<<weatherdisplay>>
+	<<if $gamemode is "soft">>
+		<<set $pain to 0>>
+	<</if>>
+	<<if $options.images is 1>>
+		<<addclass body has-images>>
+		<<removeclass body no-images>>
+		<div id="sidebar-img-container">
+			<<img>>
+		</div>
+	<<else>>
+		<<removeclass body has-images>>
+		<<addclass body no-images>>
+	<</if>>
+	<<combateffects>>
+	<div id="storyCaptionDiv" @class="($extendedStats ? 'statsExtended' : '')">
+		
+	<div id="debugWindow"></div>
+	<<if $options.images is 1>>
+		<div id="stats" onclick="extendStats()">
+			<<statsCaption>>
+		</div>
+	<</if>>
+	<div id="storyCaptionContent">
+		
+		<<if $options.numpad is true>>
+			<style>
+				.mob-btn-group{
+					position: fixed;
+					top: 100px;
+					right: 0;
+					display: flex;
+					align-items: end;
+					flex-direction: column;
+					cursor: pointer;
+					color: #fff;
+				}
+				.mob-btn-group>div{
+					padding: 10px;
+					background-color: var(--850);
+					border: 1px solid var(--750);
+					border-radius: 5px 0 0 5px;
+				}
+				.mob-btn-group>div:hover{
+					background-color: var(--800);
+				}
+			</style>
+			<div class="mob-btn-group unstowable">
+				<div class="mob-btn-h" onclick="mobBtnShow()" style="display:none;"></div>
+				<div class="mob-btn" onclick="mobBtnHide()"></div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 1 ? ' red' : '')" onclick="mobClick(1)">1</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 2 ? ' link-disabled' : '')" onclick="mobClick(2)">2</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 3 ? ' link-disabled' : '')" onclick="mobClick(3)">3</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 4 ? ' link-disabled' : '')" onclick="mobClick(4)">4</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 5 ? ' link-disabled' : '')" onclick="mobClick(5)">5</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 6 ? ' link-disabled' : '')" onclick="mobClick(6)">6</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 7 ? ' link-disabled' : '')" onclick="mobClick(7)">7</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 8 ? ' link-disabled' : '')" onclick="mobClick(8)">8</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 9 ? ' link-disabled' : '')" onclick="mobClick(9)">9</div>
+				<div @class="'mob-btn' + (Links.currentLinks.length < 10 ? ' link-disabled' : '')" onclick="mobClick(10)">0</div>
+			</div>
+		<</if>>
+		<<if $endeventerror isnot undefined>>
+			<<if $options.debugdisable is "f">>
+				<<if $options.images is 1>><img class="layer-sexmouth" src="img/ui/sym_awareness.png"><</if>><span class="red"><<print StartConfig.version>>错误：“$endeventerror”流程中生成的某个NPC脱离限制。请告知Vrelnir。<<if $cheatdisable is "f">>若正使用作弊功能，请无视此报错。<</if>></span>
+				<br><br>
+			<</if>>
+			<<unset $endeventerror>>
+		<</if>>
+
+		<<if $physiquechange is 1>><<set $physiquechange to 0>>
+			<<if $physiqueuse gte $physique / 1000>>
+				<span class="gold">由于你的锻炼，你的体能得到了改善。</span>
+				<<set $physiqueuse to 0>>
+				<br><br>
+			<<else>>
+				<span class="pink">你昨天没有得到足够的锻炼，你的体能略有下降。</span>
+				<<set $physiqueuse to 0>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<if !$lessonmissedtext>>
+		<<else>>
+			<<if $lessonmissedtext is 1>>
+				<span class="pink">你昨天错过了一节课。</span>
+			<<elseif $lessonmissedtext gte 2>>
+				<span class="pink">你昨天错过了$lessonmissedtext节课。</span>
+			<</if>>
+			<<if $lessonmissed gte 25>>
+				<span class="red">你错过太多课了，你的风评变差了。</span>
+				<<detention 50>><<gggdelinquency>><<status -5>><<lcool>>
+			<</if>>
+			<<set $lessonmissedtext to 0>>
+			<br>
+		<</if>>
+		<<if $options.images is 0>>
+			<div id="money-noimg">
+				<<statsMoneyNoImg>>
+			</div>
+			<br>
+
+			现在是<<ampm>>。
+			<br>
+			现在是<<print Time.weekDayName>>。
+			<br>
+		<</if>>
+		<<schoolday>>
+		<br>
+		/* 北极星模组 */
+		<<support>>
+		/* 北极星 */
+		<div id="sidebar-look-description">
+			<<sidebarlookdescription>>
+		</div>
+		<br>
+
+		<<caption_clamp>>
+
+		<<calculateallure>>
+		<<rng>>
+
+		<<if $worn.neck.collared gte 1>>
+			<span class="pink">一个项圈套在你的脖子上。</span>
+			<br>
+		<</if>>
+
+		<<if $penilechastityparasite isnot 0>>
+			<span class="pink">你感到<<= $penilechastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正摩擦着你的阴茎。</span>
+			<br>
+		<</if>>
+		<<if $vaginalchastityparasite isnot 0 and $vaginalchastityparasite eq $analchastityparasite>>
+			<span class="pink">你感到<<= $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>正在你的小穴和肠腔内蠕动。</span>
+			<br>
+		<<else>>
+			<<if $vaginalchastityparasite isnot 0>>
+				<span class="pink">你感觉到<<- $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>在你的小穴里蠕动。</span>
+				<br>
+			<</if>>
+			<<if $analchastityparasite isnot 0>>
+				<span class="pink">你感到<<= $analchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>在你的肠内蠕动。</span>
+				<br>
+			<</if>>
+		<</if>>
+
+		<<for _type range $parasite.types>>
+			<<switch $parasite[_type].length>>
+			<<case 0>>
+			<<case 1>>
+				<<if $parasite[_type][0] is "nipples">>
+					<span class="pink"><<print _type.replace("urchin", "海胆").replace("slime", "史莱姆").replace("maggot", "蛆虫")>>们紧紧地吸在你的<<print $parasite[_type][0].replace("nipples", "乳头").replace("bottom", "屁股").replace("penis", "阴茎").replace("balls", "蛋蛋").replace("clit", "阴蒂").replace("anus", "菊穴").replace("vagina", "小穴").replace("labia", "阴唇").replace("left thigh", "左腿").replace("right thigh", "右腿").replace("left foot", "左脚").replace("right foot", "右脚").replace("left arm", "左臂").replace("right arm", "右臂").replace("left hand", "左手").replace("right hand", "右手").replace("tummy", "肚子").replace("back", "后背").replace("face", "脸").replace("mouth", "嘴").replace("left ear", "左耳").replace("right ear", "右耳").replace("hair", "头发").replace(", and ", "以及").replace(", ", "、")>>上，不断地刺激着你。</span>
+				<<else>>
+					<span class="pink"><<print _type.replace("urchin", "海胆").replace("slime", "史莱姆").replace("maggot", "蛆虫")>>们紧紧地吸在你的<<print $parasite[_type][0].replace("nipples", "乳头").replace("bottom", "屁股").replace("penis", "阴茎").replace("balls", "蛋蛋").replace("clit", "阴蒂").replace("anus", "菊穴").replace("vagina", "小穴").replace("labia", "阴唇").replace("left thigh", "左腿").replace("right thigh", "右腿").replace("left foot", "左脚").replace("right foot", "右脚").replace("left arm", "左臂").replace("right arm", "右臂").replace("left hand", "左手").replace("right hand", "右手").replace("tummy", "肚子").replace("back", "后背").replace("face", "脸").replace("mouth", "嘴").replace("left ear", "左耳").replace("right ear", "右耳").replace("hair", "头发").replace(", and ", "以及").replace(", ", "、")>>上，不断地刺激着你。</span>
+				<</if>>
+				<br>
+			<<case 2>>
+				<span class="pink"><<print _type.replace("urchin", "海胆").replace("slime", "史莱姆").replace("maggot", "蛆虫")>>们紧紧地吸在你的<<print $parasite[_type][0].replace("nipples", "乳头").replace("bottom", "屁股").replace("penis", "阴茎").replace("balls", "蛋蛋").replace("clit", "阴蒂").replace("anus", "菊穴").replace("vagina", "小穴").replace("labia", "阴唇").replace("left thigh", "左腿").replace("right thigh", "右腿").replace("left foot", "左脚").replace("right foot", "右脚").replace("left arm", "左臂").replace("right arm", "右臂").replace("left hand", "左手").replace("right hand", "右手").replace("tummy", "肚子").replace("back", "后背").replace("face", "脸").replace("mouth", "嘴").replace("left ear", "左耳").replace("right ear", "右耳").replace("hair", "头发").replace(", and ", "以及").replace(", ", "、")>>和<<print $parasite[_type][1].replace("nipples", "乳头").replace("bottom", "屁股").replace("penis", "阴茎").replace("balls", "蛋蛋").replace("clit", "阴蒂").replace("anus", "菊穴").replace("vagina", "小穴").replace("labia", "阴唇").replace("left thigh", "左腿").replace("right thigh", "右腿").replace("left foot", "左脚").replace("right foot", "右脚").replace("left arm", "左臂").replace("right arm", "右臂").replace("left hand", "左手").replace("right hand", "右手").replace("tummy", "肚子").replace("back", "后背").replace("face", "脸").replace("mouth", "嘴").replace("left ear", "左耳").replace("right ear", "右耳").replace("hair", "头发").replace(", and ", "以及").replace(", ", "、")>>上，不断地刺激着你。</span>
+				<br>
+			<<default>>
+				<<set _pstring to $parasite[_type][0]>>
+				<<for _i to 1; _i lt $parasite[_type].length - 1; _i++>>
+					<<set _pstring += ", " + $parasite[_type][_i]>>
+				<</for>>
+				<<set _pstring += ", and " + $parasite[_type][_i]>>
+				<span class="pink"><<print _type.replace("urchin", "海胆").replace("slime", "史莱姆").replace("maggot", "蛆虫")>>们紧紧地吸在你的<<print _pstring.replace("nipples", "乳头").replace("bottom", "屁股").replace("penis", "阴茎").replace("balls", "蛋蛋").replace("clit", "阴蒂").replace("anus", "菊穴").replace("vagina", "小穴").replace("labia", "阴唇").replace("left thigh", "左腿").replace("right thigh", "右腿").replace("left foot", "左脚").replace("right foot", "右脚").replace("left arm", "左臂").replace("right arm", "右臂").replace("left hand", "左手").replace("right hand", "右手").replace("tummy", "肚子").replace("back", "后背").replace("face", "脸").replace("mouth", "嘴").replace("left ear", "左耳").replace("right ear", "右耳").replace("hair", "头发").replace(", and ", "以及").replace(", ", "、")>>上，不断地刺激着你。</span>
+				<br>
+			<</switch>>
+		<</for>>
+
+		<<if $parasite.left_ear.name and $parasite.left_ear.name eq $parasite.right_ear.name>>
+			<<if $parasite.left_ear.name is "slime">>
+				<span class="lewd">你耳内的<<print $parasite.left_ear.name.replace("slime", "史莱姆")>>操纵着你的思维<<if $earSlime.growth gte 100>>与行动<</if>>。</span>
+				<br>
+			<</if>>
+		<<else>>
+			<<if $parasite.left_ear.name is "slime">>
+				<span class="lewd">你左耳内的<<print $parasite.left_ear.name.replace("slime", "史莱姆")>>正操纵着你的思维。</span>
+				<br>
+			<</if>>
+			<<if $parasite.right_ear.name is "slime">>
+				<span class="lewd">你右耳内的<<print $parasite.right_ear.name.replace("slime", "史莱姆")>>正操纵着你的思维。</span>
+				<br>
+			<</if>>
+		<</if>>
+
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<span class="pink">你的双臂被绑。</span>
+			<br>
+		<<elseif $leftarm is "bound">>
+			<span class="purple">你的左臂被绑。</span>
+			<br>
+		<<elseif $rightarm is "bound">>
+			<span class="purple">你的右臂被绑。</span>
+			<br>
+		<</if>>
+		<<if $feetuse is "bound" or $worn.feet.type.includes("shackle")>>
+			<span class="pink">你的双腿被绑在一起。</span>
+			<br>
+		<</if>>
+		<<goo>>
+
+		<div id="statmeters">
+			<<if $gamemode isnot "soft">>
+				<<paincaption>>
+			<</if>>
+			<<arousalcaption>>
+			<<tirednesscaption>>
+			<<stresscaption>>
+			<<if $innocencestate is 1>>
+				<<innocencecaption>>
+			<<else>>
+				<<traumacaption>>
+			<</if>>
+			<<if $gamemode isnot "soft">>
+				<<controlcaption>>
+			<</if>>
+			/* 北极星模组 */
+			<<if $ghost gte 1>>
+				<<energycaption>>
+			<</if>>
+			/* 北极星 */
+			<<allurecaption>>
+			<<if $underwater is 1>>
+				<<oxygencaption true>>
+			<</if>>
+			<<drunkcaption>><<druggedcaption>><<hallucinogencaption>>
+		</div>
+		<br>
+		<<if $passage isnot "Start" and $passage isnot "Start2">>
+			<<if $options.sidebarTime is "top">>
+				<<append #mobileStats>><<mobileStatsTime>><</append>>
+			<</if>>
+			<<if $options.sidebarStats isnot "disabled">>
+				<<append #mobileStats>><<mobileStats>><</append>>
+			<</if>>
+			<<if $options.sidebarTime is "bottom">>
+				<<append #mobileStats>><<mobileStatsTime>><</append>>
+			<</if>>
+		<</if>>
+		
+		/* 北极星模组 */
+		<<if $options.bjx_antiques and ($museumAntiques.antiques.antiquescroll is "found" or $museumAntiques.antiques.antiquescroll is "take")>>
+		    <<if $antiquescrollText is undefined>>
+		        <<set $antiquescrollText to "">>
+		    <</if>>
+			你携带着言灵卷轴，上面写着$antiquescrollText
+			<br><br>
+		<</if>>
+		/* 北极星 */
+
+		<<if $options.tipdisable is "f">>
+			<span class="gold">小贴士: </span> <<tips>>
+			<br><br>
+		<</if>>
+
+		<div id="overlayButtons">
+			<<button 属性>>
+				<<overlayReplace "characteristics">>
+			<</button>>
+			<<button 社交>>
+				<<overlayReplace "social">>
+			<</button>>
+			<div class="sidebarButtonSplit">
+				<<button 特质>>
+					<<overlayReplace "traits">>
+				<</button>>
+				<<button 日志>>
+					<<overlayReplace "journal">>
+				<</button>>
+			</div>
+			<div class="sidebarButtonSplit">
+				<<button 统计>>
+					<<overlayReplace "statistics">>
+				<</button>>
+				<<button 成就>>
+					<<overlayReplace "gameFeats">>
+				<</button>>
+			</div>
+			<br>
+			<div class="sidebarButtonSplit">
+				<<if $dancing is 0 and $combat is 0 and $passage isnot "Start2" and $cheatdisable is "f" or $debug is 1>>
+					<<button 作弊>>
+						<<overlayReplace "cheats">>
+					<</button>>
+				<</if>>
+				<<if $debug is 1>>
+					<<debug>>
+				<</if>>
+			</div>
+			<!-- Event debug button - Shows an overlay stored in debug-events.twee. -->
+			<<if $event isnot undefined and $options.debugdisable is "f">>
+				<!-- Default _temp to what we should people regularly if an event active. -->
+				<<set _temp to "<span class='yellow'>显示事件信息</span>">>
+				<!-- Prepare for cases where we want to update the button view. -->
+				<<if EventSystem.any()>>
+					<<if !EventSystem.validate()>>
+						<!-- Could not validate the NPC list with event data. -->
+						<<set _temp to "<span class='red'>事件错误</span>">>
+					<<elseif EventSystem.has(0) and EventSystem.get(0).area[0] is $passage>>
+						<<set _eventAlertMajorArea to false>>
+						<<set _temp to "<span class='green'>事件进行中</span>">>
+					<<elseif setup.majorAreas.includes($passage)>>
+						<<set _eventAlertMajorArea to true>>
+						<<set _temp to "<span class='red'>事件进行中</span>">>
+					<<elseif $event.buffer.map(e => e.area[0]).length is 1 and EventSystem.has(0) and ["Forest Cabin", "Eden Cabin", "Eden Clearing"].includes(EventSystem.get(0).area[0])>>
+						<<set _temp to "<span class='green'>事件进行中</span>">>
+					<</if>>
+				<</if>>
+				<<button _temp>><<overlayReplace "eventExtraInfo">><</button>>
+				<<unset _temp>>
+			<</if>>
+			<<if $options.showDebugRenderer>>
+				<<button "DEBUG渲染器">><<overlayReplace "canvasModel">><</button>>
+			<</if>>
+			<div class="sidebarButtonSplit">
+				<<button 选项>>
+					<<overlayReplace "options">>
+				<</button>>
+				<<button 存档>>
+					<<overlayReplace "saves">>
+				<</button>>
+			</div>
+		</div>
+	</div>
+</div>
+<<else>>
+	<<if StartConfig.enableImages is true>>
+		<div id="startingPlayerImage" class="hidden"></div>
+	<</if>>
+	<div id="overlayButtons">
+		<div id="versioninfo"><<versioninfo>></div>
+			<<button 存档>>
+				<<overlayReplace "saves">>
+			<</button>>
+		<div class="sidebarButtonSplit">
+			<<button 选项>>
+				<<overlayReplace "options">>
+			<</button>>
+			<<button 成就>>
+				<<overlayReplace "startFeats">>
+			<</button>>
+		</div>
+	</div>
+<</if>>
+
+<br>
+
+<<unset _currentOverlay>>

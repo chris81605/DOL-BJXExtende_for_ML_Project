@@ -1,0 +1,24 @@
+:: Pub Landry []
+<<set $outside to 0>><<set $location to "pub">><<effects>><<set $bus to "harvest">>
+
+<<if $phase is 1>>
+	<<endevent>><<npc Landry>><<person1>>
+	你走回兰德里的桌旁。"你现在有什么打算？"<<he>>问道。
+<<else>>
+	<<npc Landry>><<person1>>你和酒保说要找兰德里，酒保点点头，随后示意你坐在老地方。而你刚坐下，兰德里就过来并坐在了你的对面。
+	<br><br>
+
+	"你有什么东西要给我吗？"<<he>>问道。
+	<<if $pubfame>>
+		<<if $pubfame.status is "finished">>
+			"如果你在找我们的共同朋友，那你要等一段时间。虽然那家伙确实很忙，但还是愿意<span class="gold"><<if $pubfame.timer gt 1>>在<<number $pubfame.timer>>天后<<else>>明天<</if>>见你</span>。"
+		<<elseif $pubfame.status is "hidingKnown">>
+			"如果你在找我们的共同朋友，那家伙还在隐藏自己，但其还是愿意<span class="gold"><<if $pubfame.timer gt 1>>在<<number $pubfame.timer>>天后<<else>>明天<</if>>见你</span>。"
+		<</if>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<landryoptions>>
+<<link [[离开|Pub]]>><<endevent>><</link>>
+<br>

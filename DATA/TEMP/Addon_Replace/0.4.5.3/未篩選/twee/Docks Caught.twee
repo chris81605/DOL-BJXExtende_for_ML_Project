@@ -1,0 +1,38 @@
+:: Docks Caught []
+<<effects>>
+
+你坐在前门旁边的保安室里。<<person1>><<person>>照看着你，<<person2>><<person>>则给警察打电话。
+<br><br>
+
+<<if crimeSumCurrent() gte 5000>>
+	"是吗？"<<he>>说道，"好吧。我们会把<<phim>>留在这里。"<<He>>挂断了电话。"看来你身上已经有逮捕令了，你在外面也不老实啊<<girl>>。"
+	<br><br>
+
+	<<link [[等待 (0:10)|Docks Caught Wait]]>><<pass 10>><</link>>
+	<br>
+	<<link [[逃离 (0:02)|Docks Caught Run]]>><<pass 2>><<crimeUp 100 "resisting">><</link>><<athleticsdifficulty 600 1200>><<crime "resisting">>
+	<br>
+<<elseif crimeSumCurrent() gte 1000>>
+	"是这样的吗？"<<he>>说道，"好吧。我们会把<<phim>>留在这里。"<<He>>挂断了电话。"听起来你一点都不受欢迎啊……对你的逮捕令已经获批了。"
+	<br><br>
+
+	<<link [[等待 (0:10)|Docks Caught Wait]]>><<pass 10>><</link>>
+	<br>
+	<<link [[逃离 (0:02)|Docks Caught Run]]>><<pass 2>><<crimeUp 100 "resisting">><</link>><<athleticsdifficulty 600 1200>><<crime "resisting">>
+	<br>
+<<else>>
+	"好的，"<<he>>讲道。"嗯……好。"<<He>>挂断了电话。"你很幸运，看来你并没有惹到什么麻烦。"
+	<br><br>
+
+	<<if $exposed gte 1>>
+		他们给你一些毛巾，并护送你通过大门。
+		<<towelup>>
+	<<else>>
+		他们护送你通过大门。
+	<</if>>"我不想抓到你再次非法侵入，"<<person1>><<person>>说着，"快点，走吧。"
+	<br><br>
+	<<endcombat>>
+
+	<<link [[继续|Docks]]>><</link>>
+	<br>
+<</if>>

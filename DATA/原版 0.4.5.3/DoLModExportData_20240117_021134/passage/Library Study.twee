@@ -1,0 +1,64 @@
+:: Library Study []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<sydneySchedule>><<rngWraith 1>>
+
+<<if $phase is 1>><<scienceskill>>
+	你坐了下来，开始专注地学习科学教材。
+<<elseif $phase is 2>><<mathsskill>>
+	你坐了下来，开始专注地学习数学教材。
+<<elseif $phase is 3>><<englishskill>>
+	你坐了下来，开始专注地学习语文教材。
+<<elseif $phase is 4>><<historyskill>>
+	你坐了下来，开始专注地学习历史教材。
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+	<<if $rng gte 51>>
+		<<generatey1>><<generatey2>>当你正忙于学业的时候，一伙<<fullGroup>>开始骚扰你。
+		<br><br>
+
+		<<link [[忽视他们|School Library Harass]]>><<set $phase to 0>><<trauma 2>><<stress 2>><</link>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[请求图书管理员帮忙|School Library Harass]]>><<set $phase to 1>><<status -10>><</link>><<lcool>>
+		<br>
+		<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $sydneySeen.includes("library") and _sydney_location is "library">>
+			<<link [[请求悉尼帮忙|School Library Harass]]>><<set $phase to 2>><</link>>
+			<br>
+		<</if>>
+	<<elseif _wraithEvent>>
+		过了一段时间，你开始感到焦虑。你把教材放回书架上。
+		<br><br>
+		透过另一边的缝隙，你瞥见了一张苍白的脸。<<stress 12>><<ggstress>><<trauma 4>><<gtrauma>>
+		<br><br>
+		<<link [[继续|School Library]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<if !$worn.over_lower.type.includes("naked")>>
+			<<set $worn.over_lower.integrity -= 10>>
+			<<if $worn.over_lower.integrity lte 0>>
+				当你从凳子上起身时，你的$worn.over_lower.cn_name_cap<<overlowerplural>>被凳子钩住了。你尝试把解救你的衣服，但<<overloweritis>>从你身上扯成碎条<<if !$worn.lower.type.includes("naked")>>，暴露了你的<<undies>><</if>>。
+				<<overlowerruined>><<trauma 3>>
+				<br><br>
+			<<elseif $worn.over_lower.integrity gte 0>>
+				当你从凳子上站起来时，底下传来衣服撕裂的声音。看上去你的$worn.over_lower.cn_name_cap<<overlowerplural>>被桌子勾住了。
+				<br><br>
+			<</if>>
+		<<else>>
+			<<set $worn.lower.integrity -= 10>>
+			<<if $worn.lower.integrity lte 0>>
+				当你从凳子上站起来时，底下传来衣服撕裂的声音——你的$worn.lower.cn_name_cap<<lowerplural>>被桌子勾住了。你试图把它解开，但<<loweritis>>被扯了下来，露出了你的<<undies>>。
+				<<lowerruined>><<trauma 3>>
+				<br><br>
+			<<elseif $worn.lower.integrity gte 0>>
+				你从座位上站起来时，底下传来衣服撕裂的声音。看起来你的$worn.lower.cn_name_cap<<lowerplural>>被桌子勾住了。
+				<br><br>
+			<</if>>
+		<</if>>
+		<<link [[继续|School Library]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[继续|School Library]]>><<endevent>><</link>>
+	<br>
+<</if>>

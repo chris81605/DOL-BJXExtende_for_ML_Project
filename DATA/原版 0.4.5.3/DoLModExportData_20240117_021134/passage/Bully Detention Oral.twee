@@ -1,0 +1,76 @@
+:: Bully Detention Oral []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>>
+
+	<<set _start to true>>
+<</if>>
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+
+	<<set _start to true>>
+<</if>>
+
+<<if _start>>
+	<<set $enemyanger to ($phase is 2 ? 50 : 70)>>
+	<<if $phase is 0>>
+		<<if $NPCList[0].penis isnot "none">>
+			你随意地舔了一下龟头，想要马上拉开距离，但是<<he>>按着你的头，将你的嘴唇直接贴在了上面。
+		<<else>>
+			你试着轻舔应付过去，但<<he>>直接将你的嘴唇抵在<<his>>的入口处。
+		<</if>>
+	<<elseif $phase is 1>>
+		<<if $NPCList[0].penis isnot "none" and $NPCList[0].vagina isnot "none">>
+			你用舌尖挑逗<<his>>的阴蒂，随后沿着<<his>>的根部向上舔，直到你抵达龟头处。
+		<<elseif $NPCList[0].penis isnot "none">>
+			你用舌尖挑逗着<<his>>的龟头底部。
+		<<else>>
+			你用舌尖挑逗着<<his>>的阴蒂。
+		<</if>>
+		<<promiscuity4>>
+	<<elseif $phase is 2>>
+		<<if $NPCList[0].penis isnot "none" and $NPCList[0].vagina isnot "none">>
+			你在<<his>>的阴唇上快速地留下一吻，然后一路向上。<<He>>在你舔弄时粗暴地拉扯着你的头发。
+		<<elseif $NPCList[0].penis isnot "none">>
+			你亲吻着<<his>>阴茎的根部，然后一路向上。当你亲吻到<<his>>的龟头时，<<He>>减轻了抓你头发的粗暴力道。
+		<<else>>
+			你在<<his>>的阴唇上留下轻吻。当你亲着<<his>>的阴蒂时，<<He>>放松了<<his>>抓头发的粗暴力道。
+		<</if>>
+		<<promiscuity1>>
+	<</if>>
+	<br><br>
+
+	<<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $NPCList[0].righthand to "none">><<set $head to "grappled">><<set $NPCList[0].mouth to "none">><<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
+	<<enable_rescue>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+礼顿一直在教育惠特尼，完全没有意识到你的存在，也没有发现你在桌子底下正做着些什么。
+<br><br>
+
+<<stateman>>
+<br><br>
+
+<!-- unclear if this is a misplaced line or if enemyanger is meant to be the exact same value on every turn -->
+<<set $enemyanger to ($phase is 2 ? 50 : 70)>>
+<<set $enemyarousal += 20>>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Bully Detention Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bully Detention Oral]]>><</link>></span><<nexttext>>
+<</if>>

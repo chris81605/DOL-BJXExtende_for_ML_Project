@@ -1,0 +1,65 @@
+:: Robin Cinema Popcorn []
+<<set $outside to 0>><<set $location to "town">><<effects>>
+<<switch $phase>>
+	<<case 1>>
+		<<set _popcornIntro to "”我们能吃爆米花吗？“罗宾在你买票的时候问，”电影就适合配上爆米花。“">>
+		<<set _theatreLink to "Romance">>
+	<<case 2>>
+		<<set _popcornIntro to "罗宾的脸色煞白。”恐怖电影？“<<he>>问道，”我不擅长恐怖类型的东西。至少买点爆米花吧？可能边看边吃就没那么吓人了。“">>
+		<<set _theatreLink to "Horror">>
+	<<default>>
+		<<set _popcornIntro to "”我早就想看这个了，“罗宾在你买票时说道。<<He>>来回踮起<<his>>的脚后跟。”我们能吃爆米花吗？“">>
+		<<set _theatreLink to "Superhero">>
+<</switch>>
+_popcornIntro
+<br><br>
+<<if $popcorn is 1>>
+	<<if $speech_attitude is "meek">>
+		"啊，当然！"你拍了一下手，掏出你从气球摊位买的爆米花，"我提早买了爆米花，特意为特别场合留着。它肯定比这里卖的便宜多了。"
+	<<elseif $speech_attitude is "bratty">>
+		"可以得不得了！"咧嘴笑着，把你从气球摊上买的爆米花掏了出来，"看看我偷偷带进来什么。让影院卖的那价格见鬼去吧，对不对？"
+	<<else>>
+		"当然了，"你点点头，掏出你从气球摊位买的爆米花，"我提早买了爆米花，这样能省点钱。"
+	<</if>>
+	<br><br>
+	"你是从<<print Time.season is "winter" ? "公园里的" : "海滩上的">>气球摊那里买的吗？
+	<<if $balloonStand.robin.status is "helped">>
+		那个人似乎很好。很高兴能支持到另一位创业者。"罗宾微笑起来。
+	<<elseif $balloonStand.robin.status is "sabotaged">>
+		<<if $balloonStand.robin.knows is false>>
+			你为什么要光顾那边？"罗宾开口问你，听起来有些受伤，"我现在也很难，我不想我<<print  $robinromance is 1 ? "<<girlfriend>>" : "最好的朋友">>光顾竞争对手。"
+		<<else>>
+			你还去那里买了东西？"罗宾开口问，听起来十分惊恐，"只是给他们出主意都不够吗？"
+		<</if>>
+		<br><br>
+		你花了好一会儿才让罗宾平静下来，<<he>>并不情愿地接受了你并无恶意这个说辞。<<npcincr Robin love -5>><<npcincr Robin dom -3>>
+	<<else>>
+		我对分享海滩还是持谨慎态度，但他们的爆米花确实闻起来很香……"罗宾给了你一个犹豫的微笑。
+	<</if>>
+	<br><br>
+	<<socialiseicon "cinema">><<link [[进入放映厅|"Robin Cinema " + _theatreLink]]>><<set $phase2 to "popcorn">><</link>>
+
+<<else>>
+	<<if $money gte 1000>>
+		<<foodicon "popcorn">><<link [[买爆米花 (£10)|"Robin Cinema " + _theatreLink]]>><<set $money -= 1000>><<set $popcorn += 1>><<set $phase to "purchase">><<set $phase2 to "popcorn">><</link>><br>
+		<<socialiseicon "cinema">><<link [[进入放映厅|"Robin Cinema " + _theatreLink]]>><</link>>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"对、对不起……我买不起……"你咬着嘴唇，从罗宾身上移开视线。
+		<<elseif $speech_attitude is "bratty">>
+			你拍了拍自己的口袋。"看，我什么都没有。你那么想要就自己去买吧。"
+		<<else>>
+			"对不起，"你说，"我付不起。"
+		<</if>>
+		<br><br>
+		<<if $robinmoney gte 10>>
+			"没关系，"罗宾安慰道，"我请客！"<<He>>买了一包爆米花，和你一起分享。<<set $robinmoney -= 10>><<set $popcorn += 1>>
+			<br><br>
+			<<socialiseicon "cinema">><<link [[进入放映厅|"Robin Cinema " + _theatreLink]]>><<set $phase2 to "popcorn">><</link>>
+		<<else>>
+			"啊，"罗宾看起来失落了一会儿，但<<he>>很快重新打起精神，"没关系！我不该提这个的，我自己也买不起爆米花呢。"<<He>>冲你露出一个小小的羞怯的笑容。
+			<br><br>
+			<<socialiseicon "cinema">><<link [[进入放映厅|"Robin Cinema " + _theatreLink]]>><</link>>
+		<</if>>
+	<</if>>
+<</if>>

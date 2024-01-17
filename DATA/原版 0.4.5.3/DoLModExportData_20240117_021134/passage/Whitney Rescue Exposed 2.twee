@@ -1,0 +1,159 @@
+:: Whitney Rescue Exposed 2 []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 1 and $NPCName[$NPCNameList.indexOf("Whitney")].lust gte random(1, 80)>>
+	你伸手去拿衣服，但惠特尼突然把它们举高，让你够不着。
+	<br><br>
+
+	"别着急。"<<He>>坏笑。
+	<<if $whitneyRescueSafe>>
+		"既然我救了你两次，我们也该谈谈我的奖——"
+		<br><br>
+
+		一个愤怒的声音从走廊里传了出来，打断了惠特尼的话。<<He>>做了个鬼脸。"妈的，我得走了。"然后
+		<<He>>
+		<<print either(
+			"弄乱了你的头发",
+			"拍了一下你的<<bottom>>",
+			"轻轻拍了一下你的脸颊"
+		)>>
+		，跑走了。衣服被留了下来。<<tearful>>你把它们拾起来，匆匆跑到一个僻静的角落去穿衣服。
+		<br><br>
+
+		<<set _rng to random(1, 100)>>
+		<<if $worn.upper.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<upperwear 5>>
+				<<elseif _rng gte 20>>
+					<<upperwear 58>>
+				<<else>>
+					<<upperwear 37>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<upperwear 5>>
+				<<elseif _rng gte 40>>
+					<<upperwear 59>>
+				<<elseif _rng gte 20>>
+					<<upperwear 60>>
+				<<else>>
+					<<upperwear 5>>
+				<</if>>
+			<</if>>
+			<<set $worn.upper.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+		<<if $worn.lower.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<lowerwear 6>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 53>>
+				<<else>>
+					<<lowerwear 28>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<lowerwear 7>>
+				<<elseif _rng gte 40>>
+					<<lowerwear 54>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 56>>
+				<<else>>
+					<<lowerwear 26>>
+				<</if>>
+			<</if>>
+			<<set $worn.lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+
+		<<whitneyRescueEnd>>
+	<<else>>
+		"你还欠我的。"
+		<br><br>
+
+		<<if $trauma gte ($traumamax / 5) * 4>>
+			<<link [[崩溃 (0:05)|Whitney Rescue Break]]>><<pass 5>><<npcincr Whitney dom 3>><</link>><<ggdom>>
+			<br>
+		<</if>>
+		<<if $promiscuity gte 55>>
+			<<link [[跪下|Whitney Rescue Sex]]>><<set $sexstart to 1>><<stress 6>><<npcincr Whitney dom 1>><</link>><<promiscuous1>><<gstress>><<gdom>>
+			<br>
+		<</if>>
+		<<link [[用吻回报|Whitney Rescue Kiss]]>><<npcincr Whitney dom 1>><<npcincr Whitney lust 5>><</link>><<promiscuous1>><<kissvirginitywarning>><<gdom>><<glust>>
+		<br>
+		<<link [["对" + $NPCList[0].pronouns.him + "道谢"|Whitney Rescue Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><<npcincr Whitney dom -1>><</link>><<ldom>>
+		<br>
+	<</if>>
+<<elseif $phase isnot 0>>
+	在你换衣服时，惠特尼站在你的面前，<<if !$whitneyRescueAlone>>替你挡住<<his>>朋友们色眯眯的目光，<</if>>并不时回头偷看。你一换完衣服<<He>>就转过身来。
+	<br><br>
+
+	<<if $player.gender_appearance isnot $whitneyRescueUniform and $whitneyRescueUniform isnot "n">>
+		"不错，"<<he>>鼓掌，"真是个不得了的<<if $whitneyRescueUniform is "m">>帅哥<<else>>美女<</if>>。"
+	<<else>>
+		"可爱，"<<he>>鼓掌，"但我更喜欢你以前的样子。"
+	<</if>>
+	<br><br>
+
+		<<set _rng to random(1, 100)>>
+		<<if $worn.upper.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<upperwear 5>>
+				<<elseif _rng gte 20>>
+					<<upperwear 58>>
+				<<else>>
+					<<upperwear 37>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<upperwear 5>>
+				<<elseif _rng gte 40>>
+					<<upperwear 59>>
+				<<elseif _rng gte 20>>
+					<<upperwear 60>>
+				<<else>>
+					<<upperwear 5>>
+				<</if>>
+			<</if>>
+			<<set $worn.upper.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+		<<if $worn.lower.name is "naked">>
+			<<if $whitneyRescueUniform is "m">>
+				<<if _rng gte 40>>
+					<<lowerwear 6>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 53>>
+				<<else>>
+					<<lowerwear 28>>
+				<</if>>
+			<<else>>
+				<<if _rng gte 60>>
+					<<lowerwear 7>>
+				<<elseif _rng gte 40>>
+					<<lowerwear 54>>
+				<<elseif _rng gte 20>>
+					<<lowerwear 56>>
+				<<else>>
+					<<lowerwear 26>>
+				<</if>>
+			<</if>>
+			<<set $worn.lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow")>>
+		<</if>>
+
+	<<He>>在你的屁股上拍了一下就把你打发走了。
+	<<print either(
+		`"别给自己惹上麻烦。"<<he>>笑着说，"我喜欢我的荡妇完好无损。"`,
+		`"注意安全，"<<he>>警告，"我不想让别人认为我的<<girl>>很容易下手。"`,
+		`"如果我抓到别人和你鬼混，我会狠狠揍他们一顿，"<<he>>说，"你也逃不掉。"`
+	)>>
+	<<stress 2>><<gstress>>
+	<br><br>
+
+	<<whitneyRescueEnd>>
+<<else>>
+	你把衣服扔在地板上，匆匆穿过走廊，尽你所能隐藏你<<lewdness>>。惠特尼没有阻止你，满足地看着你离开。
+	<br><br>
+
+	<<whitneyRescueEnd>>
+<</if>>

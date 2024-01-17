@@ -1,0 +1,139 @@
+:: Danube Tutor []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+<<set _subject to ["science", "maths", "English", "history"][$rng1]>>
+你进入休息室。<<person2>><<person>>简单问了你几个<<print _subject.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")>>问题。
+<<switch $rng1>>
+	<<case 0>>
+		<<if $sciencetrait lte 0>>
+			你没听懂，只能微笑着看着<<he>>侃侃而谈，说出那些听起来甚至不像本国语言的句子。你无法回答<<he>>提出的任何问题。
+			<br><br>
+			<<He>>摇了摇头。"还不够……"<<he>>说道，"就当是复习了，好歹能帮<<person1>><<him>>集中注意力。
+			<<He>>光是向你解释事情就可能学到一些东西。"
+			<br><br>
+			<<person2>><<He>>交给你<<moneyGain 20>>。
+			<<set $phase to 0>>
+		<<elseif $sciencetrait lte 1>>
+			<<His>>的问题很棘手，你很难回答许多问题。
+			<<he>>花了一两分钟告诉你了一些所谓真相，关于
+			<<print either(
+				"政府的化学污染。","水中的氟化物。","顺势疗法。",
+				"范艾伦带和登月骗局。","疫苗有多么的'安全'。","水中的化学物质。"
+			)>>
+			你饶有兴趣地听着。
+			<br><br>
+			"当然，你的学校永远不会告诉你这些东西，"<<he>>说，递给你<<moneyGain 50>>。"继续吧。通过。"
+			<<set $phase to 1>>
+		<<elseif $sciencetrait lte 2>>
+			你能够回答所有<<his>>的问题，尽管有些问题很棘手。
+			<<He>>热情地向你介绍了一些<<his>>钟爱的理论。它们大多听起来像伪科学。
+			<br><br>
+			"好吧，"<<he>>说，递给你<<moneyGain 120>>。"你知道你在说什么。"
+			<<set $phase to 2>>
+		<<else>>
+			<<His>>的问题是微不足道的，你轻松地回答了他们。
+			在接下来的一两分钟里，你毫不费力地拆穿了几个<<his>>的伪科学 "理论 "和错误观念。
+			<br><br>
+			"哇，"<<he>>说，递给你全额<<moneyGain 150>>的钱。"你真是与众不同。"
+			<<set $phase to 3>>
+		<</if>>
+	<<case 1>>
+		<<if $mathstrait lte 0>>
+			你几乎不理解问题，也不知道如何计算答案。
+			<br><br>
+			<<He>>摇了摇头。"还不够……"<<he>>说道。
+			"我想和你这样的人一起工作会给<<person1>><<him>>带来信心。<<He>>可以在向你解释事情时学到一些东西。"
+			<br><br>
+			<<person2>><<He>>交给你<<moneyGain 20>>。
+			<<set $phase to 0>>
+		<<elseif $mathstrait lte 1>>
+			有几个<<his>>的问题是直截了当的，但<<he>>在统计学和代数方面让你输了。
+			<br><br>
+			"你可以帮助解决基本问题，"<<he>>说，递给你<<moneyGain 50>>。"那就去吧。通过那里。"
+			<<set $phase to 1>>
+		<<elseif $mathstrait lte 2>>
+			你能够回答<<his>>的大部分问题，尽管有几个问题你需要纸张。
+			<br><br>
+			"好吧，"<<he>>说，递给你<<moneyGain 120>>。"你知道你在说什么。"
+			<<set $phase to 2>>
+		<<else>>
+			<<His>>的问题是微不足道的，你轻松地回答了他们。在接下来的一两分钟里，你毫不费力地解释了几个数学概念。
+			<br><br>
+			"哇哦，"<<he>>说道，递给你整整<<moneyGain 150>>，"继续像那样教我的<<person1>><<daughter>>。"
+			<<set $phase to 3>>
+		<</if>>
+	<<case 2>>
+		<<if $englishtrait lte 0>>
+			首先<<he>>问你那些用不押韵的诗歌写成的旧剧。
+			当你解释说你对旧书了解不多，<<he>>问起你的"祖母"。你开始向<<him>>讲述你的祖母。
+			<br><br>
+			<<He>>当着你的面笑。<<if $rapestat gte 5>>很粗鲁，但至少<<he>>没有试图强奸你。<<else>>太粗鲁了。<</if>>
+			<br><br>
+			<<He>>摇了摇头。"向你解释基础知识将是很好的语文练习。"
+			<br><br>
+			<<person2>><<He>>交给你<<moneyGain 20>>。
+			<<set $phase to 0>>
+		<<elseif $englishtrait lte 1>>
+			<<his>>前面的几个问题还可以应对，但<<he>>很快就用中世纪文学和高级语法把你甩开了。
+			<br><br>
+			"你可以帮助解决基本问题，"<<he>>说，递给你<<moneyGain 50>>。"那就去吧。通过那里。"
+			<<set $phase to 1>>
+		<<elseif $englishtrait lte 2>>
+			你能够回答<<his>>的大部分问题，尽管很明显<<he>>比你了解更多的现代文学。
+			<br><br>
+			"不错，"<<he>>说道，递给你<<moneyGain 120>>，"你说得条理清晰。去做家教吧。"
+			<<set $phase to 2>>
+		<<else>>
+			<<His>>的问题是微不足道的，你轻松地回答了他们。
+			在接下来的一两分钟里、
+			关于语法如何随时间变化的讨论变成了关于语法应该是现代而可变的还是应该传统而固定的简短辩论。
+			<br><br>
+			"非常有趣，"<<he>>说道，递给你满满的<<moneyGain 150>>。"也很有说服力。请教给我<<person1>><<daughter>>一些这种口才。"
+			<<set $phase to 3>>
+		<</if>>
+	<<case 3>>
+		<<if $historytrait lte 0>>
+			你微笑着看着<<he>>列举各种日期、事件和历史上的 "重要 "事件。其中一些听起来很熟悉，但你无法回答任何问题。
+			<br><br>
+			<<He>>摇了摇头。"你都几乎不知道上周发生过什么。"<<He>>耸耸肩。
+			"复述并订正有助于<<person1>><<him>>集中注意力。光是向你解释基础知识就足够<<He>>学到东西了。"
+			<br><br>
+			<<person2>><<He>>交给你<<moneyGain 20>>。
+			<<set $phase to 0>>
+		<<elseif $historytrait lte 1>>
+			<<His>>的问题相当棘手，你很难回答许多问题。
+			<br><br>
+			"你可以帮助解决基本问题，"<<he>>说，递给你<<moneyGain 50>>。"那就去吧。通过那里。"
+			<<set $phase to 1>>
+		<<elseif $historytrait lte 2>>
+			你能够回答<<his>>的所有问题，尽管很明显，<<he>>对某些时间段的了解更为详细。
+			<br><br>
+			"不错，"<<he>>说道，递给你<<moneyGain 120>>，"你说得条理清晰。去做家教吧。"
+			<<set $phase to 2>>
+		<<else>>
+			<<His>>的问题小菜一碟，你轻松地回答了它们。你继续告诉了<<him>>一些<<he>>从不知道的关于<<his>>自己街道的历史事实。
+			<br><br>
+			"了不起，"<<he>>说道，递给你满满的<<moneyGain 150>>。"你是个很好的学者。请继续吧。"
+			<<set $phase to 3>>
+		<</if>>
+<</switch>>
+<br><br>
+你花了一个小时的时间向这<<person1>><<person>>传授<<print _subject.replace("science", "科学").replace("maths", "数学").replace("English", "语文").replace("history", "历史")>>知识。
+<<if $phase is 0>>
+	你竭尽全力。<<He>>水平比你高得多，花了大把时间给你解释基础知识。
+	这<<person>>看起来有些恼火，因为<<his>>的时间被浪费在这上面了。然而当你离开时，这<<person2>><<person>>还是感谢了你。
+<<elseif $phase is 1>>
+	你竭尽全力。你们半斤八两，这段工作与其说是教学，不如说是小组学习。
+	<br><br>
+	当你离开时，<<person2>><<person>>向你表示感谢。
+<<elseif $phase is 2>>
+	你竭尽全力，那个<<person>>在这个领域上差你非常多，有时你得不得不全力为<<he>>解释那些<<he>>完全无法理解的问题。
+	<br><br>
+	在你离开时，这<<person2>><<person>>微笑着感谢你。
+<<elseif $phase is 3>>
+	你讲得很详细。你用简洁的术语来解释这个议题，让<<he>>想通了一些困扰<<he>>很久的问题。
+	<br><br>
+	在你离开时，这<<person2>><<person>>微笑着感谢你。"干得好！欢迎随时再来。"
+<</if>>
+<br><br>
+<<link [[离开 (1:00)|Danube Street]]>><<pass 60>><<endevent>><</link>>
+<br>

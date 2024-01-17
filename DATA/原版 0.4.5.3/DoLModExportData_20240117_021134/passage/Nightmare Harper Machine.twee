@@ -1,0 +1,122 @@
+:: Nightmare Harper Machine []
+<<effects>>
+
+<<if $phase is "resist">>
+	你试图忽略机器侵入性的探测。
+	<<if $willpowerSuccess>>
+		<span class="green">你可以将自己从这种感觉中分离出来。</span>感觉几乎不真实。
+	<<else>>
+		<span class="red"><<if $phase2 is 0>>振动证明<<else>>吸力证明<</if>>作用太大，</span>但是你却感觉比以前更热。<<arousal 2500>><<garousal>>
+	<</if>>
+	<br><br>
+
+	<<print either(
+		`"这个过程需要时间，"哈珀告诉<<his>>的同事。"<<pShe>>会暖和起来的。"`,
+		`哈珀向护工报出号码。他们相应地调整了机器。`,
+		`哈珀摇了摇头。"治疗只对那些愿意接受治疗的人有效。"`,
+		`哈珀饶有兴趣地看着。<<He>>经常做笔记。`,
+		`哈珀皱眉。"这种紧张是不健康的。"`
+	)>>
+<<elseif $phase is "struggle">>
+	虽然被束缚住了，你还是使劲地抽打着机器。
+	<<if $physiqueSuccess>>
+		<<set $harperNightmareMachine -= 1>>
+		<span class="green">那机器在你的力量下火花四溅。</span>管子脱落了，哪怕只是一瞬间。
+	<<else>>
+		<span class="red">它仍然紧贴着，</span>你的挣扎很快被它的<<if $phase2 is 0>>振动<<else>>吸力<</if>>侵蚀。<<arousal 2500>><<garousal>>
+	<</if>>
+	<br><br>
+
+	<<print either(
+		`"<<pShe>>可能会挣扎，"哈珀对<<his>>的同事说，"但我向你保证，<<pshe>>不会挣脱的。"`,
+		`哈珀恼怒地啧了一声。"请控制自己的行为，这是为你好。"`,
+		`哈珀向护工报出号码。他们相应地调整了机器。`,
+		`哈珀饶有兴趣地看着。<<He>>经常做笔记。`,
+		`哈珀叹了一口气。"如果你放松点儿，事情就容易多了。"`
+	)>>
+<<elseif $phase is "let">>
+	你让"治疗"结束。
+	<<switch $phase2>>
+		<<case 2>>
+			管子在你的<<penis>>周围收紧，抽吸它。
+			<<if $arousal gte 5000>>
+				它的节奏迅速而机械，令人痛苦。
+			<<else>>
+				一开始很缓慢，但速度稳步增加。
+			<</if>>
+			上面的罩杯夹住你的<<breasts>>。<span class="lewd">当你被用力吸时，精液和乳汁在管子中流动。</span>
+		<<case 1>>
+			管子在你的<<penis>>周围收紧，抽吸它。
+			<<if $arousal gte 5000>>
+				它的节奏迅速而机械，令人痛苦。
+			<<else>>
+				一开始很缓慢，但速度稳步增加。
+			<</if>>
+			<span class="lewd">精液从吸管中滴漏而出。</span>
+		<<default>>
+			设备对着你的<<pussy>>震动。
+			<<if $arousal gte 5000>>
+				光是压力就足以把你压垮。
+			<<else>>
+				一开始是轻微的，但逐渐增加压力。
+			<</if>>
+			上面的杯子<<if $player.breastsize is 0>>紧紧按住你的胸部<<else>>紧紧夹住你的<<breasts>><</if>>。
+			<<if $lactating is 1>>
+				<span class="lewd">牛奶漏了出来，从管子里滴了出来。</span>
+			<<else>>
+				它玩弄你的乳头，让你高兴得喘不过气来。
+			<</if>>
+	<</switch>>
+	你被绑得发抖。<<garousal>><<arousal 2500>>
+	<br><br>
+
+	<<print either(
+		`哈珀向护工报出号码。他们相应地调整了机器。`,
+		`"看看<<pshe>>是怎么抽搐的，"哈珀对<<his>>的同伴笑着说。`,
+		`哈珀饶有兴趣地看着。<<He>>经常做笔记。`,
+		`哈珀拍了拍双手。"好漂亮的腮红！"`,
+		`哈珀微笑："感觉很好，不是吗？"`
+	)>>
+<<elseif $phase is "start">>
+	<<set $harperNightmareTimer to 9>>
+	<<set $harperNightmareMachine to 4>>
+	<<set $position to "missionary">>
+
+	机器隆隆作响。你不舒服地扭动身体，但你的绑带把你锁在了原地。哈珀和<<person2>><<person>>密切关注。<<person1>>
+<</if>>
+<br><br>
+
+<<switch $phase2>>
+	<<case 2>><<barn_img both no_livestock table>>
+	<<case 1>><<barn_img penis no_livestock table>>
+	<<default>><<barn_img breasts no_livestock table>>
+<</switch>>
+
+<<if $arousal gte $arousalmax>>
+	这种感觉太强烈了。<<orgasm>>
+	<br>
+
+	<<link [[继续|Nightmare Harper Machine Finish]]>><<set $phase to "orgasm">><</link>>
+	<br>
+<<elseif $harperNightmareMachine lte 0>>
+	<span class="green">机器发出嘶嘶声，</span>它的探测头从你的<<if $phase2 isnot 1>>胸部和<</if>>腹股沟滑动。哈珀紧握着<<his>>手中的钢笔。
+	<br><br>
+
+	<<link [[继续|Nightmare Harper Machine Finish]]>><<set $phase to "break">><</link>>
+	<br>
+<<elseif $harperNightmareTimer lte 0>>
+	机器里有东西发出咔哒声。一盏灯闪烁着，突然，<span class="green">停了下来。</span>必须排水。哈珀皱眉。
+	<br><br>
+
+	<<link [[继续|Nightmare Harper Machine Finish]]>><<set $phase to "timer">><</link>>
+	<br>
+<<else>>
+	<<set $harperNightmareTimer -= 1>>
+
+	<<link [[抵抗|Nightmare Harper Machine]]>><<set $phase to "resist">><</link>><<willpowerdifficulty 1 $willpowermax>>
+	<br>
+	<<link [[反抗|Nightmare Harper Machine]]>><<set $phase to "struggle">><</link>><<physiquedifficulty 1 $physiquemax>>
+	<br>
+	<<link [[顺其自然|Nightmare Harper Machine]]>><<set $phase to "let">><</link>>
+	<br>
+<</if>>

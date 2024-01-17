@@ -1,0 +1,235 @@
+:: Widgets Office Executive [widget]
+<<widget "execstripperform">>
+	<<switch $stripItems[$stripCount]>>
+		<<case "shoes">>
+			<<execremoveshoes>>
+		<<case "skirt">>
+			<<execremovebottom>>
+		<<case "top">>
+			<<execremovetop>>
+		<<case "dress">>
+			<<execremovedress>>
+		<<case "bra">>
+			<<execremoveundertop>>
+		<<case "panties" "underclothes">>
+			<<execremoveunderbottom>>
+		<<default>>
+			<<error "execstripperform error: " + $stripItems[$stripCount] + " is not a valid entry">>
+	<</switch>>
+<</widget>>
+
+<<widget "execremoveshoes">>
+	<<He>>轻轻地碰了碰你的手。"不，先把你的$worn.feet.cn_name_cap脱掉。"
+	<br>
+	你答应了，退后一步，脱掉了你的$worn.feet.cn_name_cap。
+	<<if $worn.legs.name.includes("stockings") or $worn.legs.name.includes("tights")>>
+		你穿着长袜踏着脚下的豪华地毯，真是美妙极了。
+	<<elseif $worn.legs.name is "naked">>
+		你光着脚趾踏着脚下的豪华地毯，感觉真奇妙。
+	<<else>>
+		你轻柔地踏着脚下的豪华地毯，非常柔软。
+	<</if>>
+	<<He>>捡起你丢下的鞋子，放在<<his>>的桌子上。"请继续。"<<feetundress "exec room">>
+	<br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+<<widget "execremovebottom">>
+	<<set $removedItem to $worn.lower.cn_name_cap>>
+	<<lowerundress "exec room">>
+	<<if $speech_attitude is "meek">>
+		你的手颤抖着，解开你那件$removedItem，慢慢地把它降到脚踝处。你犹豫了，站着遮掩你的<<lewdness>>。
+		<br>
+		<<person1>><<person>>弯下腰，抓住那件皱巴巴的衣服。"来吧，别害羞。"
+		你慢慢地从$removedItem中走出来，<<he>>把它从你下面捡起来，漂亮地叠在<<his>>的桌子上，然后把<<his>>的注意力转移到你身上。
+	<<elseif $speech_attitude is "bratty">>
+		你解开你的$removedItem，优雅地调整你的姿势，让其顺着你的身体滑到地板上，露出你的<<lewdness>>。
+		你用一只脚走出去，用另一只脚把$removedItem踢到<<person1>><<person>>脚下。<<He>>把它捡起来，很好地叠在<<his>>的桌子上，然后把<<his>>的注意力转移到你身上。
+	<<else>>
+		你解开你的$removedItem，把它放到你的脚上，然后再走出它。<<person1>><<person>>弯腰捡起来，看着你的<<lewdness>>。
+		<<He>>把你的$removedItem很好地折叠到<<his>>的桌子上，然后才把<<his>>的注意力转移到你身上。
+	<</if>>
+	<br><br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+
+<<widget "execremovetop">>
+	<<set $removedItem to $worn.upper.cn_name_cap>>
+	<<upperundress "exec room">>
+	<<if $speech_attitude is "meek">>
+		你抓住$removedItem的下摆，长长地叹了口气，然后慢慢地把它举过头顶，同时弯腰，试图用它盖住你的<<undertop>>。
+		<<He>>微笑着拿在<<his>>的手上。
+		<<if $stripCount gte 1>>
+			你把$removedItem交给<<him>>，然后<<he>>把它和你的其他东西一起叠起来。
+		<<else>>
+			你把$removedItem交给<<him>>，<<he>>把它折叠整齐，然后放在<<his>>的桌子上。
+		<</if>>
+	<<elseif $speech_attitude is "bratty">>
+		你慢慢地移动$removedItem，直到它在你的<<undertop>>上堆起来。你停了一会儿，看着<<person1>><<person>>，然后把它举过头顶，扔给<<him>>。
+		<br>
+		<<if $stripCount gte 1>>
+			<<He>>抓住你的$removedItem，并将它整齐地与你的其他衣服放在一起。
+		<<else>>
+			<<He>>抓住你的$removedItem，折叠整齐，然后把它放在<<his>>的桌子上。
+		<</if>>
+	<<else>>
+		你把$removedItem从头上拉下来，露出了你的<<undertop>>。
+		<<if $stripCount gte 1>>
+			你把它掉在脚边，那个<<person1>><<person>>把它捡起来，和你放在<<his>>桌子上的那堆衣服一起。
+		<<else>>
+			你把它掉在脚边，那个<<person1>><<person>>把它捡起来，折得整整齐齐，放在<<his>>的桌子上。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+<<widget "execremovedress">>
+	<<set $removedItem to $worn.upper.cn_name_cap>>
+	<<upperundress "exec room">>
+	<<lowerundress "exec room">>
+	<<if $speech_attitude is "meek">>
+		你抓住$removedItem的下摆，长长地叹了口气，然后慢慢地把它举过头顶，同时弯腰，试图用它盖住你的<<undertop>>。
+		<<He>>微笑着拿在<<his>>的手上。
+		<<if $stripCount gte 1>>
+			你把$removedItem交给<<him>>，然后<<he>>把它和你的其他东西一起叠起来。
+		<<else>>
+			你把$removedItem交给<<him>>，<<he>>把它折叠整齐，然后放在<<his>>的桌子上。
+		<</if>>
+	<<elseif $speech_attitude is "bratty">>
+		你慢慢地移动$removedItem，直到它在你的<<undertop>>上堆起来。你停了一会儿，看着<<person1>><<person>>，然后把它举过头顶，扔给<<him>>。
+		<br>
+		<<if $stripCount gte 1>>
+			<<He>>抓住你的$removedItem，并将它整齐地与你的其他衣服放在一起。
+		<<else>>
+			<<He>>抓住你的$removedItem，折叠整齐，然后把它放在<<his>>的桌子上。
+		<</if>>
+	<<else>>
+		<<if $worn.under_lower.name isnot "naked">>
+		你把$removedItem拉过你的头顶，暴露出你的<<undertop>>和$worn.under_lower.cn_name_cap。
+		<<else>>
+		你把$removedItem从头上拉过来，露出你的<<undertop>>和<<genitals>>。
+		<</if>>
+		<<if $stripCount gte 1>>
+			你把它掉在脚边，然后<<person1>><<person>>把它捡起来，放到<<his>>桌子上的一堆衣服里。
+		<<else>>
+			你把它掉在脚边，那个<<person1>><<person>>把它捡起来，折得整整齐齐，放在<<his>>的桌子上。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+<<widget "execremoveundertop">>
+	<<set $removedItem to $worn.under_upper.cn_name_cap>>
+	<<underupperundress "exec room">>
+	<<if $speech_attitude is "meek">>
+		你在脱掉$removedItem之前转过身来，将<<breasts>>从<<person1>><<person>>隐藏起来。
+		<br>
+		你转过身，拿出$removedItem，但是<<he>>没有拿。"转过身来把它递给我，"<<he>>说。
+		<br>
+		<<if $stripCount gte 1>>
+			你转向<<him>>，害羞地把$removedItem放到<<his>>的手里，然后<<he>>把它添加到不断增长的堆中。
+		<<else>>
+			你转向<<him>>，害羞地把$removedItem放到<<his>>的手里，然后<<he>>把它放在<<his>>的桌上。
+		<</if>>
+	<<elseif $speech_attitude is "bratty">>
+		你用一只手臂慢慢地取出$removedItem，另一只手臂害羞地捂着你的<<breasts>>。
+		<<if $stripCount gte 1>>
+			你把$removedItem扔到越来越多的衣服堆上。<<He>>笑着说。
+		<<else>>
+			你把$removedItem扔到<<his>>的桌子上。<<He>>笑着说。
+		<</if>>
+	<<else>>
+		你取出$removedItem并将其递给<<person1>><<person>>，快速地用一只手臂遮住你的<<breasts>>。
+		<<if $stripCount gte 1>>
+			<<He>>微笑着<<he>>把你的$removedItem和你剩下的衣服放在一起。
+		<<else>>
+			<<He>>微笑，<<he>>把你的$removedItem放在<<his>>桌子上。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+<<widget "execremoveunderbottom">>
+	<<set $removedItem to $worn.under_lower.cn_name_cap>>
+	<<underlowerundress "exec room">>
+	你把$removedItem慢慢放到腿上。
+	<<if $arousal gte ($arousalmax * .8)>>
+		<<if $player.penisExist>>一股股浓稠的精液<<else>>淫液<</if>>从你的<<genitals>>喷洒出来，然后断断续续地，汇集到你的$removedItem中。
+		<<if $speech_attitude is "meek">>
+			<<embarrassment>>
+		<<elseif $speech_attitude is "bratty">>
+			"看来我弄得有点乱，"你腼腆地说。
+		<</if>>
+		<br>
+		你把湿透的衣服递给<<person1>><<person>>，<<he>>把它放在<<his>>的桌子上。
+	<<else>>
+		<<if $stripCount gte 1>>
+			你把衣服递给<<person1>><<person>>，<<he>>把它和你的其他衣服放在一起。
+		<<else>>
+			你把这件衣服递给<<person1>><<person>>，<<he>>把它放在<<his>>的桌子上。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<link [[继续|Office Executive Undress]]>><<set $stripCount++>><</link>>
+<</widget>>
+
+
+<<widget "execstriporder">>
+	<<if $execFetish is 1 or $execFetish is 4>>
+		<<if $worn.feet.name isnot "naked">>
+			<<set $stripItems.push("shoes")>>
+		<</if>>
+	<</if>>
+	<<if $execFetish is 4>>
+		<<if $worn.lower.set is $worn.upper.set>>
+			<<set $stripItems.push("dress")>>
+		<<else>>
+			<<if $worn.lower.name isnot "naked">>
+				<<set $stripItems.push("skirt")>>
+			<</if>>
+			<<if $worn.upper.name isnot "naked">>
+				<<set $stripItems.push("top")>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $execFetish is 3>>
+		<<if $worn.lower.set is $worn.upper.set>>
+			<<set $stripItems.push("dress")>>
+		<<else>>
+			<<if $worn.lower.name isnot "naked">>
+				<<set $stripItems.push("skirt")>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $execFetish is 2>>
+		<<if $worn.upper.set is $worn.lower.set>>
+			<<set $stripItems.push("dress")>>
+		<<else>>
+			<<if $worn.upper.name isnot "naked">>
+				<<set $stripItems.push("top")>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $execFetish is 2 or $execFetish is 4>>
+		<<if $worn.under_upper.name isnot "naked">>
+			<<if $worn.under_upper.set is $worn.under_lower.set>>
+				<<set $stripItems.pushUnique("underclothes")>>
+			<<else>>
+				<<set $stripItems.push("bra")>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $execFetish is 3 or $execFetish is 4>>
+		<<if $worn.under_lower.name isnot "naked">>
+			<<if $worn.under_lower.set is $worn.under_upper.set>>
+				<<set $stripItems.pushUnique("underclothes")>>
+			<<else>>
+				<<set $stripItems.push("panties")>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

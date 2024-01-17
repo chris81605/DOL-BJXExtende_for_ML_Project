@@ -1,0 +1,41 @@
+:: Domus Model Dog []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $position to "wall">>
+	<<set $walltype to "pillory">>
+	<<set $head to "grappled">>
+<</if>>
+<<if $enemyarousal gte ($enemyarousalmax / 4) * 3>>
+	只有少数敬业的艺术家还在画画，大多数人只是在看。更多的人在偷偷摸摸地自慰。
+<<elseif $enemyarousal gte ($enemyarousalmax / 4) * 2>>
+	有几位艺术家还在画你被侵犯的画面，但很多人现在只是呆呆地看着。
+<<elseif $enemyarousal gte ($enemyarousalmax / 4)>>
+	有很多艺术家画你被性侵的画面。
+<<else>>
+	助手帮助稳定了<<beasttype>>，而全班则重新燃起了兴趣。
+<</if>>
+<<if (random(0,9)%3 ==0)>>
+	<br>
+	助手<<print either("扇了你一耳光。","抓住你的乳头，慢慢扭动。","用皮带抽打你的大腿内侧。")>>
+	<<gpain>><<pain 2>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Domus Model Dog Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Domus Model Dog]]>><</link>></span><<nexttext>>
+<</if>>

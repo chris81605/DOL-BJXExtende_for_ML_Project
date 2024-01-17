@@ -1,0 +1,50 @@
+:: Domus Errand End []
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "domus">><<pass 5>>
+<<person1>>
+<<if $phase is 0>>
+	你两手空空地回到房子里，敲了敲门。
+	<br><br>
+	那个<<person>>茫然地看着你。"酒在哪里？"
+	<br>
+	"那家商店不肯招待我。"
+	<br>
+	"该死，"<<he>>说道。
+	<<if $weather is "rain">>
+		<<He>>看了看你湿漉漉的衣服和乱糟糟的头发。"好吧，显然你已经尽力了。"
+		<br>
+		带着怜悯的神情，<<he>>递给你<<moneyGain 5>>。
+	<<elseif $rng % 2>>"我想你已经努力过了。"
+		<br>
+		<<He>>不情愿地递给你<<moneyGain 5>>。
+	<<else>>
+		"那么你为什么在这里？你以为我花钱请你来散步吗！？滚蛋吧！"
+	<</if>>
+<<elseif $phase is 1>>
+	你把板条箱搬回屋里。它比看起来要重
+	<<switch $weather>>
+		<<case "clear">>在太阳的照射下，你出了不少汗。
+		<<case "rain">>雨水打在你身上，真的没有帮助。
+		<<case "overcast">>但你能做到。
+		<<case "snow">>和冰冷的地面并没有帮助。
+	<</switch>>
+	<br><br>
+	回来后，<<person1>><<person>>递给你<<moneyGain 5>>并拿走了板条箱。
+	<<if $rng % 3 is 0>>
+		这时，屋内传来一声巨大的轰鸣声，接着是
+		<<if $rng % 2>>
+			响亮的欢呼声和鼓掌声。
+		<<else>>
+			嘲笑、嘘声和一些非常粗俗的咒骂声。
+		<</if>>
+		<br>
+		"他妈的，"<<he>>破口大骂，砰的一声关上门，冲回屋里。
+	<<else>>
+		<br>
+		"谢谢。救世主，"<<he>>说，关上了门。
+	<</if>>
+<<else>>
+	你把薛定谔的啤酒搬回屋里去。(这是一个错误，请报告)
+<</if>>
+<br><br>
+<<link [[继续|Domus Street]]>><<endevent>><</link>>
+<br>

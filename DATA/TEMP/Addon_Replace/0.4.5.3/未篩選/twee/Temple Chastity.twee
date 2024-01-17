@@ -1,0 +1,76 @@
+:: Temple Chastity []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<if !playerChastity()>>
+	"我们会为任何守节者安装贞操带。
+	<<if playerBellyVisible()>>
+		然而，出于安全考虑，我们不能将贞操带提供给子宫里孕育着生命的人。抱歉。"
+	<<else>>
+		开始前，需要做项简单的检查，以便我们确认你的贞洁。若你贞洁不再，我们亦可为你提供贞操带，但需要你捐赠£80。若你已有贞操带，还可捐赠£50加装护肛板；即使是处子之身，装护肛板也仍需费用。"
+		<br><br>
+
+		"我们的贞操带经久耐用，旨在抵御穷凶极恶者的袭击。我们不使用钥匙；一旦戴上，只有专门设备才能取下。然而，无法泄欲之人或将以其他暴力行径泄愤。还要记住，它无法遮蔽过多隐私，也无法抵挡像是手指这样的精密攻击。它们的设计旨在保护圣典中记载的贞洁。"
+	<</if>>
+	<br><br>
+<<else>>
+	<<if playerBellyVisible()>>
+		<<setKnowsAboutPregnancy("pc", "Jordan")>>
+		"我们应该立即帮你取下。怀孕期间佩戴它是不安全的。"
+	<<elseif $player.virginity.penile is true and $player.virginity.vaginal is true>>
+		"圣典有言，我们不应从守节者身上取下贞操带。然而，如果你需要，我们可以忽略这条规矩，但你需要捐赠 £80。"
+	<<else>>
+		"如果你愿意，我们可以取下你的贞操带。不过，一旦解开，你就需要再次付费，才能换上另一条。"
+	<</if>>
+	<br><br>
+
+	<<if $worn.genitals.anal_shield is 0 and !playerBellyVisible()>>
+		"或者你想获得更多保护？我们可为你安装价值£50的护肛板，保护你的后门。"
+		<br><br>
+	<</if>>
+<</if>>
+<<if !playerChastity() and !playerBellyVisible() and !knowsAboutPregnancy("pc", "Jordan")>>
+	<<if $templetest isnot "failed">>
+		<<templeicon "virginity">><<link [[贞洁测验 (0:05)|Temple Test]]>><<set $phase to 0>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $money gte 8000>>
+		<<templeicon "chastity">><<link [[请求为自己装上贞操带 (£80 0:05)|Temple Chastity Fitting]]>><<pass 5>><<set $money -= 8000>><</link>>
+		<br>
+	<</if>>
+<<elseif !playerChastity() and $player.penisExist and (playerBellyVisible() or knowsAboutPregnancy("pc", "Jordan"))>>
+	<<if $templetest isnot "failed">>
+		<<templeicon "virginity">><<link [[贞洁测验 (0:05)|Temple Test]]>><<set $phase to 0>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $money gte 8000>>
+		<<templeicon "chastity">><<link [[请求为自己装上贞操笼 (£80 0:05)|Temple Male Chastity Fitting]]>><<genitalswear 2>><<pass 5>><<set $money -= 8000>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if playerChastity() and $worn.genitals.anal_shield is 0 and !playerBellyVisible()>>
+	<<if $money gte 5000>>
+		<<templeicon "chastity">><<link [[请求为自己装上护肛板 (£50 0:05)|Temple Chastity Shield]]>><<pass 5>><<set $money -= 5000>><</link>>
+		<br>
+	<<else>>
+		你无法承担安装护肛板的费用。
+		<br><br>
+	<</if>>
+<<elseif playerChastity() and $worn.genitals.anal_shield is null>>
+	你无法安装护肛板到你的$worn.genitals.cn_name_cap。
+	<br>
+<</if>>
+<<if playerChastity() and playerChastity("anus")>>
+	<<templeicon "chastity release">><<link [[请求移除护肛板 (0:05)|Temple Chastity Shield Removal]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+<<if playerChastity() and $player.virginity.penile is true and $player.virginity.vaginal is true and !playerBellyVisible()>>
+	<<if $money gte 8000>>
+		<<templeicon "chastity release">><<link [[请求移除贞操装置 (£80 0:05)|Temple Chastity Removal]]>><<set $money -= 8000>><<pass 5>><</link>>
+		<br>
+	<<else>>
+	<</if>>
+<<elseif playerChastity()>>
+	<<templeicon "chastity release">><<link [[取下贞操锁 (0:05)|Temple Chastity Removal]]>><<pass 5>><</link>>
+	<br>
+<</if>>
+<<getouticon>><<link [[离开|Temple]]>><<endevent>><</link>>
+<br>

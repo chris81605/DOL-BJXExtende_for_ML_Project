@@ -1,0 +1,27 @@
+:: Robin Chocolate Take []
+<<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+你开始准备你的弹药。
+
+<<if _robin.dom gte 20 and _robin.trauma lt 40>>
+	<<if _robin.dom gte 60>><<set $phase to 0>><<else>><<set $phase to 1>><</if>>
+	罗宾在一旁看着<span class="green">然后加入了进来。</span>你们团结协作，很快便有了足够的雪球。<<note "+ 弹药" "green">>
+<<else>>
+	<<set $phase to 2>>
+	罗宾带着惊恐的表情在一旁围观。你认为你有足够的雪球。
+<</if>>
+<br><br>
+你需要把战火从罗宾的位置那里引开，你一只手搂住所有雪球，从藏身处跳了出来。
+<br><br>
+你打算如何战斗？
+<br><br>
+
+<<generatey2>><<generatey3>><<generatey4>><!--<<generatey5>>-->
+<<set _handMaxDifficulty to ($phase is 2 ? 2000 : 1200)>>
+<<link [[大胆的攻击|Robin Chocolate Audacious]]>><</link>><<skill_difficulty `currentSkillValue("handskill")` "手部技巧" 1 _handMaxDifficulty>>
+<br>
+<<link [[耐心的行动|Robin Chocolate Patient]]>><</link>><<dancedifficulty 1 1200>>
+<br>
+<<link [[光靠耐心可不行|Robin Chocolate Cover]]>><<set $phase to 1>><</link>>
+<br>

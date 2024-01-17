@@ -1,0 +1,38 @@
+:: Wolf River []
+<<location "forest">><<effects>>
+你和狼群一起沿着河边跑。你来到一片柔软的草地上。一些<<wolf_cave_plural>>躺下休息。
+<br><br>
+<<if $wolfpackleader gte 1>>
+	<<link [[休息 (1:00)|Wolf River Rest]]>><<tiredness -12>><<pass 1 hour>><</link>>
+	<br>
+	<<link [[没时间休息|Wolf River Rouse]]>><</link>>
+	<br>
+	<<if $rng gte 51>>
+		<<link [[让黑狼决定|Wolf River Rest]]>><<tiredness -12>><<pass 1 hour>><</link>>
+		<br>
+	<<else>>
+		<<link [[让黑狼决定|Wolf River Rouse]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<npc "Black Wolf">>
+	<<if $rng gte 51>>
+		黑狼也躺了下来，你和其他的<<wolf_cave_plural>>也跟着躺下了。
+		<<if $monster is 1>>
+			"休息。节省体力。"
+		<</if>>
+		<br><br>
+		<<link [[继续 (1:00)|Wolf River Rest]]>><<tiredness -12>><<pass 1 hour>><</link>>
+		<br>
+	<<else>>
+		<<if $monster is 1>>
+			黑狼叫了一声。"没时间休息了！有风的味道。快点。"
+		<<else>>
+			黑狼对它们咆哮，它们又站了起来。
+		<</if>>
+		<br><br>
+		<<link [[继续|Wolf River Rouse]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<endevent>>

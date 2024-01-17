@@ -1,0 +1,58 @@
+:: Lake Ruin Box []
+<<set $outside to 0>><<set $location to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<skulduggeryuse>>
+	<<if $rng gte 95>>
+		<<if random(0,100) gte 80>>
+			你发现了一个黄金做的贞操带。
+			<<set $antiquemoney += 2000>><<museumAntiqueStatus "antiquegoldchastitybelt" "found">>
+			<<set _goldchastity to true>>
+			<br><br>
+		<<else>>
+			你发现了一条金项链。
+			<<set $antiquemoney += 500>><<museumAntiqueStatus "antiquegoldnecklace" "found">>
+			<br><br>
+		<</if>>
+	<<else>>
+		你发现了一枚银戒指。
+		<<set $antiquemoney += 30>><<museumAntiqueStatus "antiquesilverring" "found">>
+		<br><br>
+	<</if>>
+	<<if $historytrait gte 4>>
+		你也拿走了这个空盒子。它应该放在博物馆里。
+		<<set $antiquemoney += 20>><<museumAntiqueStatus "antiquebox" "found">>
+		<br><br>
+	<</if>>
+
+	<<if $worn.genitals.name is "naked" and _goldchastity and playerBellySize() lte 7>>
+		<<templeicon "chastity">><<link [[穿上|Lake Gold Chastity Belt]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+	<</if>>
+	<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>>
+	<<if _goldchastity>>
+		<<set $gold_chastity_held to true>>
+	<</if>>
+	<<wateraction>><</link>><<loxygen>>
+	<br>
+	<<swimicon "back">><<link [[游向出口|Lake Ruin]]>>
+	<<if _goldchastity>>
+		<<set $gold_chastity_held to true>>
+	<</if>>
+	<<wateraction>><</link>><<loxygen>>
+	<br>
+<<else>>
+	你没能打开锁。
+	<br><br>
+	<<if $historytrait gte 4>>
+		<<ind>><<link [[带走盒子|Lake Ruin Deep]]>><<set $antiquemoney += 20>><<museumAntiqueStatus "antiquebox" "found">><</link>>
+		<br>
+	<</if>>
+	<<ind>><<link [[再次尝试|Lake Ruin Box]]>><<wateraction>><</link>><<skulduggerydifficulty>><<loxygen>>
+	<br>
+	<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+	<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+<</if>>

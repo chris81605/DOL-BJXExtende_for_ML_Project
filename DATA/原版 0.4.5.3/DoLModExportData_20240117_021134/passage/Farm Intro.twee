@@ -1,0 +1,34 @@
+:: Farm Intro []
+<<set $outside to 0>><<set $location to "alex_cottage">><<effects>>
+
+<<npc Alex>><<person1>>
+你向农舍走去。农舍的正对面有一个鸡笼。有个<<nnpc_gendery "Alex">>从那后面走出来，<<his>>肩上还扛着一大捆干草。<<He>>注意到你，朝你露出微笑。"嘿，"<<he>>说，"我马上就来。"
+<br><br>
+
+你站在门廊下，而<<nnpc_gendery "Alex">>把<<his>>的东西搬到了旁边的畜棚里。<<He>>把它放在里面，干草落地时激起一阵灰尘。
+<br><br>
+
+<<nnpc_gendery "Alex">>朝你走来时伸展了一下腰背，
+<<if $weather is "rain">>
+	从<<his>>眼睛上拨开红色的刘海，说道："先进来避避雨吧。"接着打开了门。
+<<elseif $weather is "snow">>
+	从<<his>>眼睛上拨开红色的刘海，说道："先进来避避寒吧。"接着打开了门。
+<<else>>
+	汗水在<<his>>额头上闪闪发光。<<He>>拨开了眼睛上的刘海，打开了门。
+<</if>>
+<<if playerBellyVisible()>>
+	<<setKnowsAboutPregnancy "pc" "Alex">>
+	"我去烧点水，茶还是……？"<<He>>看了看你的<<bellyDescription "pc">>，"茶，我去泡杯茶。"
+	<br><br>
+
+	<<link [[继续|Farm Intro 2]]>><<set $phase to 0>><<stress -6>><</link>><<lstress>>
+	<br>
+<<else>>
+	"我去烧壶水，茶还是咖啡？"
+	<br><br>
+
+	<<link [[茶|Farm Intro 2]]>><<set $phase to 0>><<stress -6>><</link>><<lstress>>
+	<br>
+	<<link [[咖啡|Farm Intro 2]]>><<set $phase to 1>><<tiredness -6>><</link>><<ltiredness>>
+	<br>
+<</if>>

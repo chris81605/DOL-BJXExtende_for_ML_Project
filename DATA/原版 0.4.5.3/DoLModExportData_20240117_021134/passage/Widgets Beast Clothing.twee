@@ -1,0 +1,275 @@
+:: Widgets Beast Clothing [widget]
+<<widget "beastclothing">>
+	<<outfitChecks>>
+	<<rng>>
+
+	<<if $NPCList[_n].mouth is "overlowerclothes">>
+		<<if $NPCList[_n].stance is "top">>
+			<<set $NPCList[_n].mouth to 0>>
+		<<else>>
+			<<if $worn.over_lower.name is "naked">>
+				<span class="purple"><<bHe>>把破布吐了出来。</span>
+				<<set $NPCList[_n].mouth to 0>>
+			<<elseif $overlowerstruggle is 1>>
+				<<set $overlowerstruggle to 0>>
+				<<bHe>>拉扯着你$worn.over_lower.cn_name_cap，但是你阻止了<<him>>剥掉你的衣服。
+				<<set $overlowerstruggle to 0>><<neutral 1>><<set $worn.over_lower.integrity -= 5>>
+			<<elseif $rng gte 91>>
+				<span class="blue"><<bHe>>从<<bhis>>嘴里松开了你$worn.over_lower.cn_name_cap。</span>
+				<<set $NPCList[_n].mouth to 0>>
+			<<elseif $rng lte 90>>
+				<<if _overOutfit>>
+					<<if $worn.over_upper.open is 1>>
+						<<if $worn.over_upper.state_top is "chest">>
+							<<bHe>>拉扯着你$worn.over_lower.cn_name_cap，把你$worn.over_upper.cn_name_cap拉下，<span class="lewd">露出了你的<<breasts>>。</span>
+							<<set $worn.over_upper.state_top to "midriff">><<set $worn.over_upper.exposed to 2>><<neutral 3>><<set $speechbreasts to 1>>
+							<<if $worn.over_upper.state is "chest">>
+								<<set $worn.over_upper.state to "midriff">>
+							<</if>>
+							<<if $worn.over_lower.state is "chest">>
+								<<set $worn.over_lower.state to "midriff">>
+							<</if>>
+						<<elseif $worn.over_upper.state_top is "midriff">>
+							<<bHe>>拉扯着你$worn.over_lower.cn_name_cap，把你$worn.over_upper.cn_name_cap拉到了你的腰部以下。
+							<<set $worn.over_upper.state_top to "waist">><<neutral 1>>
+							<<if $worn.over_upper.state is "midriff">>
+								<<set $worn.over_upper.state to "waist">>
+							<</if>>
+							<<if $worn.over_lower.state is "midriff">>
+								<<set $worn.over_lower.state to "waist">>
+							<</if>>
+						<<elseif $worn.over_upper.state_top is "waist">>
+							<<bHe>>把你的$worn.over_upper.cn_name_cap拉到你的大腿，露出你的
+							<<if $worn.lower.state is "waist">>
+								$worn.lower.cn_name_cap
+								<<neutral 2>>
+							<<elseif $worn.under_lower.state is "waist">>
+								$worn.under_lower.cn_name_cap
+								<<neutral 2>>
+							<<else>>
+								<span class="lewd"><<genitals>>。</span>
+								<<neutral 5>><<set $speechgenitals to 1>>
+							<</if>>
+							<<set $worn.over_upper.state_top to "thighs">><<set $worn.over_upper.state to "thighs">><<set $worn.over_lower.vagina_exposed to 1>><<set $worn.over_lower.anus_exposed to 1>><<set $worn.over_lower.exposed to 2>>
+							<<if $worn.over_lower.state is "waist">>
+								<<set $worn.over_lower.state to "thighs">>
+							<</if>>
+						<<elseif $worn.over_upper.state_top is "thighs">>
+							<<bHe>>把你的$worn.over_upper.cn_name_cap拉到了你的膝盖处。
+							<<set $worn.over_upper.state_top to "knees">><<set $worn.over_upper.state to "knees">><<neutral 1>>
+							<<if $worn.over_lower.state is "thighs">>
+								<<set $worn.over_lower.state to "knees">>
+							<</if>>
+						<<elseif $worn.over_upper.state_top is "knees">>
+							<<bHe>>把你的$worn.over_upper.cn_name_cap拉到了你的脚踝处。
+							<<set $worn.over_upper.state_top to "ankles">><<set $worn.over_upper.state to "ankles">><<neutral 1>>
+							<<if $worn.over_lower.state is "knees">>
+								<<set $worn.over_lower.state to "ankles">>
+							<</if>>
+						<<elseif $worn.over_upper.state_top is "ankles">>
+							<span class="purple"><<bHe>>把你$worn.over_upper.cn_name_cap从你的腿底下脱掉。</span>
+							<<neutral 5>><<set $worn.over_upper.state_top to 0>><<set $worn.over_upper.state to 0>><<overupperstrip>>
+							<<if $worn.over_lower.state is "ankles">>
+								<<set $worn.over_lower.state to 0>><<overlowerstrip>>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<bHe>>拉扯着你的$worn.over_lower.cn_name_cap，把你的$worn.over_upper.cn_name_cap拉到了你的肩膀上。你听到了撕裂的声音。
+						<<set $worn.over_lower.integrity -= 20>><<neutral 1>>
+					<</if>>
+				<<elseif _overOutfit isnot true>>
+					<<if $worn.over_lower.state is "waist">>
+						<<bHe>>拉下你的$worn.over_lower.cn_name_cap，暴露你的
+						<<if $worn.lower.state is "waist">>
+							$worn.lower.cn_name_cap。
+						<<elseif $worn.under_lower.state is "waist">>
+							$worn.under_lower.cn_name_cap。
+						<<else>>
+							<span class="lewd"><<genitals>>。</span>
+							<<neutral 5>><<set $speechgenitals to 1>>
+						<</if>>
+						<<set $worn.over_lower.state to "thighs">><<set $worn.over_lower.vagina_exposed to 1>><<set $worn.over_lower.anus_exposed to 1>><<set $worn.over_lower.exposed to 2>>
+					<<elseif $worn.over_lower.state is "thighs">>
+						<<bHe>>把$worn.over_lower.cn_name_cap拉到你的膝盖上。
+						<<set $worn.over_lower.state to "knees">><<neutral 1>>
+					<<elseif $worn.over_lower.state is "knees">>
+						<<bHe>>把$worn.over_lower.cn_name_cap拉到你的脚踝。
+						<<set $worn.over_lower.state to "ankles">><<neutral 1>>
+					<<elseif $worn.over_lower.state is "ankles">>
+						<span class="purple"><<bHe>>把$worn.over_lower.cn_name_cap从你腿上扯下来。</span>
+						<<overlowerstrip>>
+						<<set $NPCList[_n].mouth to 0>><<neutral 3>><<clothesstripstat>>
+					<</if>>
+				<<else>>
+					<<bHe>>拽你的$worn.over_lower.cn_name_cap，你听到了织物撕裂的声音。
+					<<neutral 1>><<set $worn.over_lower.integrity -= 20>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<rng>>
+
+	<<if $NPCList[_n].mouth is "lowerclothes">>
+		<<if $NPCList[_n].stance is "top">>
+			<<set $NPCList[_n].mouth to 0>>
+		<<else>>
+			<<if $worn.lower.name is "naked">>
+				<span class="purple"><<bHe>>把破布吐了出来。</span>
+				<<set $NPCList[_n].mouth to 0>>
+			<<elseif $lowerstruggle is 1>>
+				<<set $lowerstruggle to 0>>
+				<<bHe>>拉你的$worn.lower.cn_name_cap，但你不让<<him>>剥你的衣服。
+				<<set $lowerstruggle to 0>><<neutral 1>><<set $worn.lower.integrity -= 5>>
+			<<elseif $rng gte 91>>
+				<span class="blue"><<bHe>>从<<bhis>>口中释放$worn.lower.cn_name_cap。</span>
+				<<set $NPCList[_n].mouth to 0>>
+			<<elseif $rng lte 90>>
+				<<if _middleOutfit>>
+					<<if $worn.upper.open is 1>>
+						<<if $worn.upper.state_top is "chest">>
+							<<bHe>>拖拽你的$worn.lower.cn_name_cap，拉下你的$worn.upper.cn_name_cap，<span class="lewd">露出你的<<breasts>>。</span>
+							<<set $worn.upper.state_top to "midriff">><<set $worn.upper.exposed to 2>><<neutral 3>><<set $speechbreasts to 1>>
+							<<if $worn.upper.state is "chest">>
+								<<set $worn.upper.state to "midriff">>
+							<</if>>
+							<<if $worn.lower.state is "chest">>
+								<<set $worn.lower.state to "midriff">>
+							<</if>>
+						<<elseif $worn.upper.state_top is "midriff">>
+							<<bHe>>拽住你的$worn.lower.cn_name_cap，同时把你的$worn.upper.cn_name_cap拉到腰部。
+							<<set $worn.upper.state_top to "waist">><<neutral 1>>
+							<<if $worn.upper.state is "midriff">>
+								<<set $worn.upper.state to "waist">>
+							<</if>>
+							<<if $worn.lower.state is "midriff">>
+								<<set $worn.lower.state to "waist">>
+							<</if>>
+						<<elseif $worn.upper.state_top is "waist">>
+							<<bHe>>把你的$worn.upper.cn_name_cap拉到你的大腿上，露出你的
+							<<if $worn.under_lower.state is "waist">>
+								$worn.under_lower.cn_name_cap
+								<<neutral 2>>
+							<<else>>
+								<span class="lewd"><<genitals>>。</span>
+								<<neutral 5>><<set $speechgenitals to 1>>
+							<</if>>
+							<<set $worn.upper.state_top to "thighs">><<set $worn.upper.state to "thighs">><<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
+							<<if $worn.lower.state is "waist">>
+								<<set $worn.lower.state to "thighs">>
+							<</if>>
+						<<elseif $worn.upper.state_top is "thighs">>
+							<<bHe>>把你的$worn.upper.cn_name_cap拉到你的膝盖上。
+							<<set $worn.upper.state_top to "knees">><<set $worn.upper.state to "knees">><<neutral 1>>
+							<<if $worn.lower.state is "thighs">>
+								<<set $worn.lower.state to "knees">>
+							<</if>>
+						<<elseif $worn.upper.state_top is "knees">>
+							<<bHe>>把你的$worn.upper.cn_name_cap拉到你的脚踝。
+							<<set $worn.upper.state_top to "ankles">><<set $worn.upper.state to "ankles">><<neutral 1>>
+							<<if $worn.lower.state is "knees">>
+								<<set $worn.lower.state to "ankles">>
+							<</if>>
+						<<elseif $worn.upper.state_top is "ankles">>
+							<span class="purple"><<bHe>>把你的$worn.upper.cn_name_cap从你腿的底部拉下来。</span>
+							<<neutral 5>><<set $worn.upper.state_top to 0>><<set $worn.upper.state to 0>><<upperstrip>>
+							<<if $worn.lower.state is "ankles">>
+								<<set $worn.lower.state to 0>><<lowerstrip>>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<bHe>>拽着你的$worn.lower.cn_name_cap，在你的肩膀上拽着你的$worn.upper.cn_name_cap。你听到一声撕裂的声音。
+						<<set $worn.lower.integrity -= 20>><<neutral 1>>
+					<</if>>
+				<<elseif _middleOutfit isnot true>>
+					<<if $worn.lower.state is "waist">>
+						<<bHe>>拉下$worn.lower.cn_name_cap，暴露你的
+						<<if $worn.under_lower.state is "waist">>
+							$worn.under_lower.cn_name_cap。
+							<<neutral 2>>
+						<<else>>
+							<span class="lewd"><<genitals>>。</span>
+							<<neutral 5>><<set $speechgenitals to 1>>
+						<</if>>
+						<<set $worn.lower.state to "thighs">><<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
+					<<elseif $worn.lower.state is "thighs">>
+						<<bHe>>把你的$worn.lower.cn_name_cap拉到你的膝盖上。
+						<<set $worn.lower.state to "knees">><<neutral 1>>
+					<<elseif $worn.lower.state is "knees">>
+						<<bHe>>把你的$worn.lower.cn_name_cap拉到你的脚踝。
+						<<set $worn.lower.state to "ankles">><<neutral 1>>
+					<<elseif $worn.lower.state is "ankles">>
+						<span class="purple"><<bHe>>把$worn.lower.cn_name_cap从你腿上扯下来。</span>
+						<<lowerstrip>>
+						<<set $NPCList[_n].mouth to 0>><<neutral 3>><<clothesstripstat>>
+					<</if>>
+				<<else>>
+					<<bHe>>拽你的$worn.lower.cn_name_cap，你听到织物撕裂的声音。
+					<<neutral 1>><<set $worn.lower.integrity -= 20>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<rng>>
+
+	<<if $NPCList[_n].mouth is "underlowerclothes">>
+		<<if $worn.under_lower.name is "naked">>
+			<span class="purple"><<bHe>>把破布吐了出来。</span>
+			<<set $NPCList[_n].mouth to 0>>
+		<<elseif $rng gte 91 or ($worn.under_lower.type.includes("strap-on") and $penisstate isnot 0)>>
+			<span class="blue"><<bHe>>从<<bhis>>口中释放$worn.under_lower.cn_name_cap。</span>
+			<<set $NPCList[_n].mouth to 0>>
+		<<elseif $underlowerstruggle is 1>>
+			<<bHe>>拽你的$worn.under_lower.cn_name_cap，但你不让<<him>>剥你的衣服。
+			<<set $underlowerstruggle to 0>><<set $speechstripstruggle to 1>><<neutral 1>><<set $worn.under_lower.integrity -= 5>>
+		<<elseif $rng lte 90>>
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+				<<if $worn.under_lower.state is "waist">>
+					<<bHe>>把你的$worn.under_lower.cn_name_cap拉下你的大腿，<span class="lewd">露出你的<<genitals>>。</span>
+					<<set $worn.under_lower.state to "thighs">><<neutral 5>><<set $worn.under_lower.vagina_exposed to 1>><<set $worn.under_lower.anus_exposed to 1>><<set $worn.under_lower.exposed to 1>><<set $speechgenitals to 1>>
+				<<elseif $worn.under_lower.state is "thighs">>
+					<<bHe>>把$worn.under_lower.cn_name_cap拉到你的膝盖上。
+					<<set $worn.under_lower.state to "knees">><<neutral 1>>
+				<<elseif $worn.under_lower.state is "knees">>
+					<<bHe>>把$worn.under_lower.cn_name_cap拉到你的脚踝。
+					<<set $worn.under_lower.state to "ankles">><<neutral 1>>
+				<<elseif $worn.under_lower.state is "ankles">>
+					<span class="purple"><<bHe>>把$worn.under_lower.cn_name_cap从你腿上扯下来。</span>
+					<<underlowerstrip>><<neutral 3>><<set $NPCList[_n].mouth to 0>><<clothesstripstat>>
+				<</if>>
+			<<elseif $worn.lower.state isnot "waist">>
+				<<if $worn.under_lower.state is "waist">>
+					<<bHe>>把你的$worn.under_lower.cn_name_cap拉下你的大腿，<span class="lewd">露出你的<<genitals>>。</span>
+					<<set $worn.under_lower.state to "thighs">><<neutral 5>><<set $worn.under_lower.vagina_exposed to 1>><<set $worn.under_lower.anus_exposed to 1>><<set $worn.under_lower.exposed to 1>><<set $speechgenitals to 1>>
+				<<elseif $worn.under_lower.state is "thighs">>
+					<<bHe>>把$worn.under_lower.cn_name_cap拉到你的膝盖上。
+					<<set $worn.under_lower.state to "knees">><<neutral 1>>
+				<<elseif $worn.under_lower.state is "knees">>
+					<<bHe>>把$worn.under_lower.cn_name_cap拉到你的脚踝。
+					<<set $worn.under_lower.state to "ankles">><<neutral 5>>
+				<<elseif $worn.under_lower.state is "ankles">>
+					<span class="purple"><<bHe>>把$worn.under_lower.cn_name_cap从你腿上扯下来。</span>
+					<<underlowerstrip>><<neutral 3>><<set $NPCList[_n].mouth to 0>><<clothesstripstat>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $oxygen lt $oxygenmax and $underwater isnot 1 and _strangle is 1>>
+		<<unset _strangle>>
+		<br>空气:<<oxygencaption>>
+	<</if>>
+<</widget>>
+
+<<widget "bhisnext">>
+	<<if $combatTrain.monsters[_next_beast] is "monster">>
+		<<if $combatTrain.pronouns[_next_beast] is "m">>
+			<<print "他">>
+		<<else>>
+			<<print "她">>
+		<</if>>
+	<<else>>
+		<<print "它">>
+	<</if>>
+<</widget>>

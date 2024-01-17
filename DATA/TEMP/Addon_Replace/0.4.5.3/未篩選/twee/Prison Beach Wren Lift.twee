@@ -1,0 +1,33 @@
+:: Prison Beach Wren Lift []
+<<effects>>
+
+<<if $prison.watchers_friend is 2 or $prison.schedule is "revolt">>
+	伦恩抬起了头，"天气真好，"<<he>>看着天空，"我可以带你一程，带你带陆地上。不过这将是一次单程旅行，毕竟那些家伙警惕得很。"
+	<br><br>
+
+	<<if $prison.kylar is "solitary">>
+		你可以带上凯拉尔，但你需要等到<<nnpc_hes "Kylar">>从禁闭中出来才行。
+		<br><br>
+	<</if>>
+
+	<<if $prison.kylar is "active">>
+		<<link [[独自逃跑 (0:30)|Prison Wren Escape]]>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>>
+		<br>
+		<<link [[和凯拉尔一起逃跑 (0:40)|Prison Kylar Escape]]>><<prison_end>><<prisoncrimeUp "kylar">><<pass 40>><<prison_guards -40>><<npcincr Kylar rage -60>><<npcincr Kylar love 20>><</link>><<gggcrime "obstruction">><<gggsuspicion>><<ggglove>><<lllksuspicion>>
+		<br>
+	<<else>>
+		<<link [[逃跑 (0:30)|Prison Wren Escape]]>><<prison_end>><<prisoncrimeUp>><<pass 30>><<prison_guards -40>><</link>><<gggcrime>><<gggsuspicion>>
+		<br>
+	<</if>>
+
+<<else>>
+	伦恩指了指天空，<span class="blue">"我不能在这些鸟的眼皮子底下带你走。"</span><<he>>耸了耸肩，"躲在甲板后面也是不行的，与这些家伙搞好关系，或者分散他们的注意力，我们就可以逃走了。"
+	<br><br>
+	<<if $prison.kylar is "solitary">>
+		你可以带着凯拉尔，但你需要等到<<nnpc_hes "Kylar">>从禁闭室里释放出来。
+		<br><br>
+	<</if>>
+<</if>>
+
+<<link [[离开|Prison Beach]]>><<endevent>><</link>>
+<br>

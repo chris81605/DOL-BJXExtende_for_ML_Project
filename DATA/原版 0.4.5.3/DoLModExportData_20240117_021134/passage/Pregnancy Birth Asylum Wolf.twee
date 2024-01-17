@@ -1,0 +1,33 @@
+:: Pregnancy Birth Asylum Wolf []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<endevent>>
+<<generate1>><<person1>>
+<<set $litter_size to getPregnancyObject().fetus.length>>
+<<set _baby_type to getPregnancyObject().fetus[0].type>>
+你在另一个房间醒来，微弱的哭声传到耳边，一个助产士正微笑着站在你的床边。
+<<if $litter_size is 1>>
+	怀抱着一个裹在襁褓中的<<print _baby_type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>幼崽。
+	<br><br>
+
+	“看来妈妈醒了。”<<he>>说着，把幼崽递给了你。幼崽闭着双眼躺在你的怀里，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我们已经做了全套检查，"助产士说，"孩子很健康。你想好名字了吗？"
+	<br><br>
+
+<<else>>
+	手里推着一个装着<<number $litter_size>>只<<print _baby_type.replace("human","人类").replace("dog","狗").replace("cat","猫").replace("pig","猪").replace("wolf","狼").replace("dolphin","海豚").replace("lizard","蜥蜴").replace("bear","熊").replace("boar","野猪").replace("creature","生物").replace("horse","马").replace("fox","狐狸").replace("hawk","鹰").replace("cow","奶牛").replace("spider","蜘蛛").replace("plant","植物").replace("sheep","绵羊").replace("ram","公羊").replace("deer","鹿").replace("stag","鹿").replace("bee","蜜蜂").replace("wasp","黄蜂").replace("dragon","龙").replace("ant","蚂蚁").replace("raccoon","浣熊").replace("frog","青蛙").replace("rat","老鼠").replace("slime","史莱姆").replace("slug","蛞蝓").replace("lurker","潜伏者").replace("squid","鱿鱼").replace("bull","公牛").replace("centaur","半人马").replace("harpy","哈比").replace("boy","男孩").replace("girl","女孩").replace("horned","长角的").replace(" ","")>>崽的婴儿床。
+	<br><br>
+
+	"看来妈妈醒了。"<<he>>说着，把婴儿车推到了你身旁。你伸手从婴儿车中一个个把幼崽们抱了起来。它们闭着双眼躺在你的怀里，胸膛随着平稳的呼吸上下起伏着。
+	<br><br>
+
+	"我们已经做了全套检查，"助产士说，"孩子们都很健康。你想好名字了吗？"
+	<br><br>
+
+<</if>>
+
+<<set $bornChildrenIds to []>>
+<<run getPregnancyObject().fetus.forEach(child => $bornChildrenIds.push(child.childId))>>
+
+<<birthUi "pc" "asylum" "wolf_cave" "Pregnancy Birth Asylum Wolf 2" 180>>

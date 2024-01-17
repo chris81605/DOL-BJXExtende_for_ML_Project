@@ -1,0 +1,53 @@
+:: Pharmacy Morning After pill 2 []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+<<set $money -= 50000>>
+<<set $pregnancyStats.aftermorningpills++>>
+<<pregnancyMorningAfterPill>>
+
+护士指给你一张椅子坐下，你吃了药，而<<he>>仔细地看着你。
+<br><br>
+<<switch _morningAfterPillResult>>
+	<<case "no pregnant">>
+		你坐在椅子上等它生效。你觉得肚子有点冷。几分钟后，护士检查了你的瞳孔和血压。"一切都没问题，你可以走了。"<<lllarousal>> <<llstress>>
+		<br><br>
+		<<arousal -5000>>
+		<<stress -12>>
+		<<clamp>>
+		<<link [[离开|Pharmacy]]>><</link>>
+	<<case "successful">>
+		你坐在椅子上等它生效。你觉得肚子有点冷，还有点痛。几分钟后，护士检查了你的瞳孔和血压。<<He>>能看出你脸上的不适。"看来这药丸起作用了。你可能会感到一些疼痛，但很快就会过去的。你可以走了。"<<lllarousal>> <<llstress>> <<gpain>>
+		<br><br>
+		<<arousal -5000>>
+		<<stress -12>>
+		<<pain 2>>
+		<<clamp>>
+		<<link [[离开|Pharmacy]]>><</link>>
+	<<case "a little late">>
+		你坐在椅子上，等待它起作用。你感觉肚子有一种不舒服的感觉和一阵剧痛。护士注意到你痛苦的脸，走近你。<<He>>检查了你的瞳孔和血压。"看来药丸已经起作用了，不过上课时间到了。如果你还需要这种药，不要等那么久。你现在的疼痛过一段时间就会消失。你可以走了。"<<lllarousal>> <<llstress>> <<ggpain>>
+		<br><br>
+		<<arousal -5000>>
+		<<stress -12>>
+		<<pain 8>>
+		<<clamp>>
+		<<link [[离开|Pharmacy]]>><</link>>
+	<<case "late">>
+		你坐在椅子上，等待着它起作用。你感到肚子里有一种奇怪的感觉，你痛得直打滚。护士冲向你，检查你的瞳孔和血压。<<He>>可以看到你脸上的不适。"好像很久没……"你感觉腹部被狠狠地捏了一下，疼得抽搐起来。护士注意到了你痛苦的脸。"好吧，不管怎么说，药丸已经起作用了。你会感到一阵疼痛，这是正常的，会过去的。如果你再需要这种药，不要等那么久。你现在可以走了。"<<lllarousal>> <<ggtrauma>> <<ggpain>>
+		<br><br>
+		<<arousal -5000>>
+		<<trauma 20>>
+		<<pain 20>>
+		<<clamp>>
+		<<link [[离开|Pharmacy]]>><</link>>
+	<<case "too late">>
+		你坐在椅子上，并开始等待它生效。你感到腹部有一种难受的感觉，随后转换成了扭曲的疼痛感。护士马上冲到你身边，开始检查你的瞳孔和血压。<<He>>可以看到你那因疼痛而苍白的面庞。"看来已经很久没有……"你的腹部传来一阵非常剧烈的疼痛，这迫使你弯下身子，从椅子上摔下来。你的视线开始模糊了，这种疼痛感真的让人难以忍受。<<lllarousal>> <<ggtrauma>> <<ggpain>>
+		<br><br>
+		<<set $arousal to 0>>
+		<<trauma 50>>
+		<<pain 200>>
+		<<clamp>>
+		<<link [[视线渐渐黑了下去……|Pharmacy Morning After pill passout]]>><<pass 60>><<endevent>><</link>>
+	<<default>>
+		这是一个错误……
+		<br><br>
+		<<link [[离开|Pharmacy]]>><</link>>
+<</switch>>

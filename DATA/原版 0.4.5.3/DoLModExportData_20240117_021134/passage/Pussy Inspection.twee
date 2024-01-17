@@ -1,0 +1,55 @@
+:: Pussy Inspection []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<generateyf2>><<generateyf3>>
+<<set $inspection to {}>>
+<<set $inspection.gender_appearance to $player.gender_appearance>> /* this locks in the player's gender appearance so logic remains consistent during this scene .*/
+<<inspectionexpect "f">>
+
+礼顿把西里斯的讲台清空。"能请所有女生有序地排成一列吗？男生们，用你们的椅子绕着讲台围成一个半圆。"
+<br><br>
+
+<<if $genderknown.includes("Leighton")>>
+	<<if ($player.penisExist and $player.vaginaExist) or ($player.gender is "f" and $inspection.gender_appearance is "m") or $leightonParasitePenisInspection>>
+		你注意到礼顿瞟了你一眼，<span class="purple">你被提醒了一下，毕竟<<he>>知道你的小秘密。</span><<Hes>>期待你加入队伍。
+	<<else>>
+		你应该<<if $inspection.expect is "join">>加入队伍<<else>>继续坐着<</if>>。
+	<</if>>
+	<br><br>
+<<elseif $schoolrep.herm gte 4 or ($schoolrep.crossdress gte 4 and $player.gender is "f" and $inspection.gender_appearance is "m")>>
+	<<if $inspection.gender_appearance is "m">>
+		礼顿希望你能继续坐着。
+		<span class="purple"><<He>>不知道你的小秘密，但你的同学们都知道那个"秘密"。</span>
+
+		<<if $cool lte 120>>
+			如果你不去排队，你的同学们会注意到的，而且以你的声望来看，他们肯定会毫不犹豫地出卖你。
+		<<elseif $cool gte 240>>
+			如果你不去排队，你的同学们会注意到的，但从你的声望来看，没有人会出卖你。
+		<<else>>
+			如果你不去排队，你的同学们会注意到你。
+		<</if>>
+	<<else>>
+		你被期望加入队伍。
+	<</if>>
+	<br><br>
+<<elseif $exhibitionism gte 35 or $inspection.gender_appearance is "f">>
+	你应该<<if $inspection.expect is "join">>加入队伍<<else>>继续坐着<</if>>。
+	<br><br>
+<</if>>
+
+
+<<set $inspection.choice to "">>
+<<if $inspection.expect is "join">>
+	<<link [[加入队伍|Pussy Inspection 1]]>><<set $inspection.choice to "join">><</link>>
+	<br>
+
+	<<link [[继续坐着|Pussy Inspection 1]]>><<set $inspection.choice to "sit">><</link>><<gstress>><<gdelinquency>>
+	<br>
+<<else>>
+	<<if $exhibitionism gte 35>>
+		<<link [[加入队伍|Pussy Inspection 1]]>><<set $inspection.choice to "join">><</link>><<exhibitionist3>><<if !$player.vaginaExist>><<gdelinquency>><</if>>
+	<br>
+	<</if>>
+
+	<<link [[继续坐着|Pussy Inspection 1]]>><<set $inspection.choice to "sit">><</link>>
+	<br>
+<</if>>

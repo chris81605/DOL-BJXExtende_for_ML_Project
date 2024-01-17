@@ -1,0 +1,58 @@
+:: Sydney Leighton Punch []
+<<schooleffects>><<effects>><<set _kylar to statusCheck("Kylar")>><<run statusCheck("Sydney")>>
+礼顿把悉尼的手抓住了。你立刻弹起，挥出一拳。
+<<if $leightonAssaulted>>
+	但是，<span class="red">礼顿一把擒住你的手臂。</span> "你不会觉得还会奏效吧，嗯？"<<nnpc_He "Leighton">>把你的手别在背后，把你摁到了柜台上。悉尼倒吸了一口凉气。<<pain 3>><<gpain>>
+	<br><br>
+	"请所有人立即离开图书馆，有两个学生将要在此受罚。"你听见一阵嘈杂。周围学生纷纷收拾好东西，陆陆续续地离开了图书馆。
+	<br><br>
+	<<if _kylar.state is "active" and _kylarStatus.includes("Rage") and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch">>
+		<<set $daily.kylar.leightonPunch to true>>
+		你听见一声惊呼，随后<span class="green">手臂突然被礼顿松开。</span>你扭头，看见凯拉尔正压在礼顿身上，所有人都傻了。礼顿反应过来，一把抓住凯拉尔的手臂，然后慢慢站起身。"不可接受，"你听见校长的声音异常柔和，"要不是看在你父母的份上——"
+		<br><br>
+		凯拉尔随后便被拽出了图书馆。离开前<<nnpc_his "Kylar">>用剩下的一只胳膊朝你挥了挥手。
+		<br><br>
+		悉尼双手缠上你的胳膊。"简直不敢相信凯拉尔会对礼顿出手……你还好吗？<<nnpc_He "Leighton">>没伤到你，对吧？"
+		<br><br>
+		<<if $sydneyLeightonPlayerGuilty is 1>>
+			<<link [[承认偷窃|Sydney Leighton Aftermath]]>><<npcincr Sydney love 3>><<set $phase to 1>><</link>><<gglove>>
+			<br>
+		<</if>>
+		<<link [[安慰悉尼|Sydney Leighton Aftermath]]>><<set $phase to 2>><<npcincr Sydney love 3>><</link>><<gglove>> <<handholdingvirginitywarning>><<NPCvirginitywarning "Sydney" "handholding">>
+		<br>
+		<<link [[调戏悉尼|Sydney Leighton Aftermath]]>><<set $phase to 3>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><</link>><<glove>><<glust>>
+		<br>
+	<<else>>
+		<br><br>
+		<<link [[继续|Sydney Leighton Spank]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<set $leightonAssaulted to 1>>
+	没有丝毫犹豫，你握紧拳头，朝礼顿的肚子直招呼过去。<<nnpc_He "Leighton">>被打倒在地，满脸震惊和痛苦。<<stress 3>><<gstress>><<trauma -3>><<ltrauma>>
+	<br><br>
+	"我不会允许任何人把我的Syd弄哭。"你站在悉尼面前，<<he>>挽着你的胳膊。<<npcincr Sydney love 1>><<glove>>
+	<br><br>
+	<<He>>感激但惊恐地看了你一眼，其他学生也慢慢围了过来。礼顿摇摇晃晃的爬起，死死地瞪着你。"你会为之付出代价的，你们一个都跑不掉，等着吧。"<<nnpc_He "Leighton">>拨开围住的学生，消失在人群之中。
+	<br><br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		悉尼攥住你的胳膊。"漂亮的一拳，但……这样真的明智吗？我很担心<<nnpc_he "Leighton">>会对你做什么。"
+	<<elseif _sydneyStatus.includes("pure")>>
+		悉尼抱住你，有些颤抖。"你疯了，居然对校长动手，但你救了我！我害怕<<nnpc_Title "Leighton">>会对我做什么，但我现在更恐惧<<nnpc_he "Leighton">>会把你怎么样。"
+	<<else>>
+		悉尼攥住你的胳膊。"你救了我的命……！但现在我很担心<<nnpc_he "Leighton">>会对你做什么。你刚才对校长动了手，你真是疯了！"
+	<</if>>
+	<br><br>
+	<<if _kylar.state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch">>
+		凯拉尔从图书馆的另一边静静地凝视着。<<gksuspicion>><<npcincr Kylar rage 1>>
+		<br><br>
+	<</if>>
+	<<if $sydneyLeightonPlayerGuilty is 1>>
+		<<link [[承认偷窃|Sydney Leighton Aftermath]]>><<npcincr Sydney love 3>><<set $phase to 1>><</link>><<gglove>>
+		<br>
+	<</if>>
+	<<link [[安慰悉尼|Sydney Leighton Aftermath]]>><<set $phase to 2>><<npcincr Sydney love 3>><</link>><<gglove>> <<handholdingvirginitywarning>><<NPCvirginitywarning "Sydney" "handholding">>
+	<br>
+	<<link [[调戏悉尼|Sydney Leighton Aftermath]]>><<set $phase to 3>><<npcincr Sydney love 1>><<npcincr Sydney lust 1>><</link>><<glove>><<glust>>
+	<br>
+<</if>>

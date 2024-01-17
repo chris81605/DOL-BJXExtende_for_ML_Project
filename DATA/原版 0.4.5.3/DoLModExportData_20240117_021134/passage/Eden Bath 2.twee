@@ -1,0 +1,75 @@
+:: Eden Bath 2 []
+<<set $outside to 0>><<set $location to "cabin">><<effects>>
+
+<<if $phase is 0>>
+	你观察着伊甸的身体，<<His>>的肌肉线条分明看起来非常结实。<<He>>察觉到你的注目。"如果像我这样生活的话，无可避免地会拥有这样的身体。"<<he>>的语气听起来有点难为情。
+	<br><br>
+
+	<<link [[安抚|Eden Bath 2]]>><<set $phase to 3>><<npcincr Eden love 1>><<npcincr Eden dom -1>><</link>><<ldom>><<glove>>
+	<br>
+	<<link [[把目光移开，拿起海绵|Eden Bath 2]]>><<set $phase to 1>><<npcincr Eden love 1>><</link>><<glove>>
+	<br>
+	<<link [[看向别处，放松|Eden Bath 2]]>><<set $phase to 2>><<stress -12>><</link>><<lstress>>
+	<br>
+<<elseif $phase is 1>>
+	<<if $soap gte 1>>
+		<<set $soap -= 1>>
+		你拿起海绵和肥皂摆摆手。伊甸背向了你，你开始替<<his>>擦洗。
+	<<else>>
+		你拿起海绵摆摆手。伊甸背向了你，你开始替<<his>>擦洗。
+	<</if>>
+
+	<<if $exhibitionism lt 55>>
+	在你裸体状态下，让<<his>>背对着你让你感到更自在。
+	<</if>>
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 150>>
+		<<if $soap gte 1>>
+			正当你准备把海绵和肥皂放在一边时，伊甸坚定而温柔地抓住了你的手腕。
+		<<else>>
+			正当你准备把海绵放在一边时，伊甸坚定而温柔地抓住了你的手腕。
+		<</if>>
+		"要我也给你洗吗？"<<he>>问道。
+		<br><br>
+
+		<<if !$edenbathintro>>
+			<<link [[同意|Eden Bath Wash Intro]]>><<set $edenbathintro to 1>><</link>>
+		<<else>>
+			<<link [[同意|Eden Bath Wash]]>><</link>>
+		<</if>>
+		<br>
+		<<link [[婉拒|Eden Bath Wash No]]>><</link>>
+	<<else>>
+		过了一会儿水开始变冷了。"你现在可以出去了，反正我也想伸展一下身体。"你觉得也没有理由抱怨。
+		<br><br>
+
+		<<link [[继续|Eden Cabin]]>><<clotheson>><<unset $edenjoin>><<endevent>><</link>>
+	<</if>>
+<<elseif $phase is 2>>
+	你向后靠去，放松下来，让温暖渗入你的肌肉。
+	<br><br>
+
+	过了一会儿水开始变冷了。"你现在可以出去了，反正我也想伸展一下身体。"你觉得也没有理由抱怨。
+	<br><br>
+
+	<<link [[继续|Eden Cabin]]>><<clotheson>><<unset $edenjoin>><<endevent>><</link>>
+<<elseif $phase is 3>>
+	<<if $speech_attitude is "meek">>
+		"你看起来棒极了，"你说道。
+	<<elseif $speech_attitude is "bratty">>
+		"别傻了，"你说道，"人们会为你这样的身材而杀人的。"
+	<<else>>
+		"你看起来不错，"你说道。
+	<</if>>
+
+	<br><br>
+
+	<<He>>露出微笑，"谢谢。"
+	<br><br>
+
+	<<link [[清洗伊甸|Eden Bath 2]]>><<set $phase to 1>><<npcincr Eden love 1>><</link>><<glove>>
+	<br>
+	<<link [[休息|Eden Bath 2]]>><<set $phase to 2>><<stress -12>><</link>><<lstress>>
+	<br>
+<</if>>

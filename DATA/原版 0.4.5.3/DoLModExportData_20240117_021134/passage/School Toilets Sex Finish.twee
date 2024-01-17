@@ -1,0 +1,73 @@
+:: School Toilets Sex Finish []
+<<effects>>
+<<if $finish is 1>>
+	<<person3>><<person>>看起来很不高兴，因为另外两个人把<<him>>从你身边拉开。<<tearful>>你向他们挥手告别。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $consensual is 1>>
+		三人在整理衣服时，都在避免接触对方的目光。<<tearful>>你向他们挥手告别。
+		<br><br>
+	<<else>>
+		<<person1>><<person>>将你推倒在地，他们三个笑着离开，只留你一个人躺在地上。<<tearful>>你挣扎着站起来。
+		<br><br>
+	<</if>>
+	<<clotheson>>
+	<<endcombat>>
+	<<if $changingRoomGender is "boys">>
+		<<link [[继续|School Boy's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<link [[继续|School Girl's Toilets]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	三人因为吃痛而后退，这给了你逃跑的机会。<<tearful>>你逃离了房间。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|School Toilets]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	<<set $rescued += 1>>
+	当有人冲进房间时，<<group>>抬起了头。是惠特尼。
+	<<if ($changingRoomGender is "boys" and $NPCName[$NPCNameList.indexOf("Whitney")].pronoun isnot "m") or ($changingRoomGender is "girls" and $NPCName[$NPCNameList.indexOf("Whitney")].pronoun isnot "f")>>
+		当<<print $changingRoomGender is "boys" ? "他们" : "她们">>在<<print $changingRoomGender is "boys" ? "男" : "女">>厕所里看到<<nnpc_gendery "Whitney">>时吓了一跳，但<<nnpc_he "Whitney">>无视了<<print $changingRoomGender is "boys" ? "他们" : "她们">>。随后<<nnpc_He "Whitney">>把你抓住并拖到了外面。
+	<<else>>
+		<<nnpc_He "Whitney">>在其他人作出反应之前抓住你并将你拖到外面。
+	<</if>>
+	<br><br>
+
+	<<silently>>
+	<<if $changingRoomGender is "boys">>
+		<<storeactions "schoolboys">>
+		<<if _temp_clothes_present is 1>>
+			<<storeon "schoolboys" "delete">>
+		<</if>>
+	<<else>>
+		<<storeactions "schoolgirls">>
+		<<if _temp_clothes_present is 1>>
+			<<storeon "schoolgirls" "delete">>
+		<</if>>
+	<</if>>
+	<</silently>>
+	<<if _temp_clothes_present is 1>>
+		在出去的途中你无法找回你的衣服。
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Whitney>><<person1>>
+
+	<<link [[继续|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><</link>>
+	<br>
+<</if>>

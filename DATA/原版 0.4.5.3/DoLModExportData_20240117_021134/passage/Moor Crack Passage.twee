@@ -1,0 +1,87 @@
+:: Moor Crack Passage []
+<<effects>>
+
+你进入了通道。里面很黑，但天花板上有小洞能够透进一点光线。地面凹凸不平。
+<<if $worn.feet.type.includes("naked")>>
+	此时你希望自己能有一双结实的靴子。<<gpain>><<pain 4>>
+<</if>>
+<br><br>
+
+
+<<if $moor_hunt gte 1>>
+	<<npc "Great Hawk">>
+	<<set $moor_hunt = Math.clamp($moor_hunt - random(2, 5), 1, 10)>>
+	通道蜿蜒曲折，希望这能帮你摆脱<<beasttype>>的追猎。
+	<<endevent>>
+<<else>>
+	通道蜿蜒曲折。
+<</if>>
+
+<br><br>
+
+<<if $rng gte 81>>
+	走到最后，通道终于延伸向斜上方，你出现在<<daylight>>下。
+	<br><br>
+	你依然身处荒原，这里离原来的地方并没有多远。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $rng gte 61>>
+	走到最后，通道终于延伸向斜上方，你出现在<<daylight>>下。
+	<br><br>
+	你依然身处荒原，离原来的地方已经有一段距离。这里的地表更加泥泞，你一定已经进入了荒原更深处。
+	<<set $moor += 20>>
+	<<set $moor to Math.clamp($moor, 0, 100)>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $rng gte 41>>
+	走到最后，通道终于延伸向斜上方，你出现在<<daylight>>下。
+	<br><br>
+
+	你依然身处荒原，离原来的地方已经有一段距离。这里的地面遍布了更多岩石，你一定比之前更加接近农田了。
+	<<set $moor -= 20>>
+	<<set $moor to Math.clamp($moor, 0, 100)>>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $rng gte 21>>
+	<<set $location to "underground">>
+	隧道不断通向地底更深处，你逐渐变得不得不沿着墙壁摸索前进。
+	<br><br>
+
+	你留意到了前方的光线，那是一个水池反射的光。发光的植物排列在黑色的岸边。水一直延伸到黑暗中。你看不出水池究竟有多大。
+	<br><br>
+
+	你看到水面上的一丝微光，微弱到能令人误以为是幻想。
+	<br><br>
+
+	<<link [[游过去|Moor Passage Swim]]>><</link>><<swimmingdifficulty 600 1000>>
+	<br>
+	<<link [[沿着边缘走 (0:30)|Moor Passage Walk]]>><<pass 30>><</link>>
+	<br>
+<<else>>
+	<<if $bestialitydisable is "f" and $lurkerdisable is "f">>
+		<span class="red">你听到前方有碎步疾跑的声音。</span>它越来越近了。
+		<br><br>
+
+		<<link [[继续|Moor Passage Struggle]]>><<set $struggle_start to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="red">你听到后方有匆匆追来的声音。</span>它越来越近了。你顾不得两侧嶙峋的岩石，开始逃跑。
+		<<if $exposed gte 2>>
+			它们刮伤了你的皮肤，但你不敢放慢脚步。
+		<<else>>
+			它们撕坏了你的衣服，但你不敢放慢脚步。
+		<</if>>
+		<br><br>
+		通道延伸向斜上方，你出现在<<daylight>>下。急促的声音渐渐消失。<<beastescape>>
+		<br><br>
+
+		<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

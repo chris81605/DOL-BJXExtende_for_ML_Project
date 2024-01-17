@@ -1,0 +1,66 @@
+:: Canteen Lunch Sandwich []
+<<effects>>
+
+<<if $phase is 0>>
+	你耸耸肩，把袋子扔进了垃圾桶。你并不相信陌生人准备的食物，还是食堂的饭菜比较好。你独自一人静静地吃完了午饭。
+	<br><br>
+
+	那个<<person>>在食堂对面不满地着你。<<lcool>>
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+<<else>>
+	你打开纸袋，里面是一个简易三明治，旁边还有一包薯片。你咬了口三明治。
+	<br><br>
+
+	<<if $fame.sex gte random(1,2000) or $cool lt 40>>
+		<<if $NPCList[0].penis isnot "none" or $NPCList[1].penis isnot "none">>
+			<<if $ejactrait is 1>>
+				<span class="lewd">还挺好吃的。</span>你好奇地拿开了顶上的面包，发现里面的面包和芝士上盖着一滩白色的粘稠液体——是精液。
+				<<arousal 600>><<garousal>>
+			<<else>>
+				<span class="pink">吃起来怪怪的。</span>你好奇地拿开了顶上的面包，发现里面的面包和芝士上盖着一滩白色的粘稠液体<<if $awarelevel gte 1>>——是精液。<</if>>
+				<<stress 6>><<gstress>>
+			<</if>>
+			<br><br>
+
+			旁边桌子传来了窃笑。<<person>>和<<person2>><<person>>看着你，偷偷地说着些什么。
+			<br><br>
+
+			<<if $promiscuity gte 55 or $ejactrait is 1>>
+				<<link [[吃掉它|Canteen Lunch Sandwich Finish]]>><<set $phase to 1>><</link>><<if $ejactrait is 1>><<ejacTrait>><</if>><<if $promiscuity gte 55>><<promiscuous4>><</if>>
+			<<else>>
+				<span class="blue">你还不够淫荡，没办法继续吃下去，现在你知道里面到底是什么了。</span>
+			<</if>>
+			<br>
+			<<link [[`朝${$NPCList[0].pronouns.him}扔过去`|Canteen Lunch Sandwich Throw]]>><</link>><<athleticsdifficulty>>
+			<br>
+			<<link [[扔进垃圾桶|Canteen Lunch Sandwich Garbage]]>><</link>><<lcool>>
+			<br>
+		<<else>>
+			<span class="pink">面包上有一缕黏糊糊的东西。</span>你掀开面包，发现面包正中央有一个清晰的喷溅痕迹——他们朝你的食物吐了口水。<<stress 6>><<gstress>>
+			<br><br>
+
+			你听到邻桌传来咯咯的笑声。<<person>>、<<person2>><<person>>看着你开始窃窃私语。
+			<br><br>
+
+			<<if $promiscuity gte 55 or $submissive gte 1500>>
+				<<link [[吃完它|Canteen Lunch Sandwich Finish]]>><<set $phase to 0>><</link>><<if $submissive gte 1500>><<submissivetext>><</if>><<if $promiscuity gte 55>><<promiscuous4>><</if>>
+			<<else>>
+				<span class="blue">你还不够淫荡，没办法继续吃下去，现在你知道里面到底是什么了。</span>
+			<</if>>
+			<br>
+			<<link [[`朝${$NPCList[0].pronouns.him}扔过去`|Canteen Lunch Sandwich Throw]]>><</link>><<athleticsdifficulty>>
+			<br>
+			<<link [[扔进垃圾桶|Canteen Lunch Sandwich Garbage]]>><</link>><<lcool>>
+			<br>
+		<</if>>
+	<<else>>
+		传统的搭配，放了火腿和芝士，没抹黄油……不能说特别好吃，但总比食堂的东西要好。你看到<<person>>在另一桌微笑着向你挥了挥手。
+		<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+		<br><br>
+
+		<<link [[继续|Canteen]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>

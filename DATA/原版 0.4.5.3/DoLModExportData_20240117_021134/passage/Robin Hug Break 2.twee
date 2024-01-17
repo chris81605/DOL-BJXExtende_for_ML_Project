@@ -1,0 +1,55 @@
+:: Robin Hug Break 2 []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<if $phase is 0>>
+	你不能就这样等着罗宾带贝利回来。你设法振作起来，不顾一切地冲出大楼。
+	<br><br>
+	<<endevent>>
+	<<link [[继续|Domus Street]]>><</link>>
+	<br>
+
+<<elseif $phase is 1>>
+	<<set $robinbaileyhelp to 1>>
+	你蜷缩成胎儿的姿势，双手捂住脸，继续哭泣。
+	几分钟后，你听到有沉重的脚步声走来，突然你被人抓住头发坐了起来。
+	<span class="red">是贝利。</span>
+	<br><br>
+
+	<<npc Bailey 2>><<person2>>
+	"你这该死的出了什么毛病？"<<He>>对你咆哮。罗宾站在门框那边。贝利用凶恶的目光打量了你，然后狠狠扇了你一耳光。
+	很疼，你吓得停止了哭泣。<<pain 2>>
+	<br>
+	"给我闭嘴。你让这个流浪儿担心到来烦我。我不会在你身上浪费时间的。"
+	<br><br>
+
+	"别再用你们的屁事来烦我了，"<<he>>边对罗宾说着，离开了房间。
+	<br><br>
+
+	<<person1>>
+	罗宾冲向你，抓住你的手臂。<<He>>难以置信地盯着门外，你渐渐缓过神来。
+	你对这整场闹剧发自心底地感到恶心，跑回了自己的房间。
+	<br><br>
+
+	<<endevent>>
+	<<link [[继续|Bedroom]]>><</link>>
+	<br>
+
+<<else>>
+	你不能就这样等着罗宾带贝利回来。你设法振作起来，回到了自己的房间。
+	到了之后，你失控的眼泪已经缓和成了平静的哭泣。
+	<br><br>
+	大约五分钟后，你听到有敲门的声音。是罗宾。
+	<<He>>出声问你是否在房间里，但不等你回答，<<his>>就自己打开了门。
+	<br><br>
+	"你在这儿！"<<he>>跑进来说。"你不在我房间，贝利对我大喊大叫，发生了什么事？"
+	<br><br>
+	<<link [[抱怨 (0:05)|Robin Hug Break 3]]>><<set $phase to 0>><<pass 5>><<stress -12>><</link>><<lstress>>
+	<br>
+	<<link [[责备 (0:05)|Robin Hug Break 3]]>><<set $phase to 1>><<pass 5>><<npcincr Robin love -1>><<npcincr Robin dom -1>><<npcincr Robin trauma 1>><<trauma -6>><<stress -12>><</link>><<ltrauma>><<llstress>><<grtrauma>><<llove>><<ldom>>
+	<br>
+	<<link [[找麻烦 (0:05)|Robin Hug Break 3]]>><<set $phase to 2>><<pass 5>><<npcincr Robin love -1>><<npcincr Robin dom -1>><<npcincr Robin trauma 3>><<stress -12>><<trauma -12>><</link>><<lltrauma>><<llstress>><<ggrtrauma>><<llove>><<ldom>>
+	<br>
+	<<link [[让罗宾离开|Robin Hug Break 3]]>><<set $phase to 3>><</link>>
+	<br>
+
+<</if>>

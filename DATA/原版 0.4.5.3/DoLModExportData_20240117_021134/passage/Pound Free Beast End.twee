@@ -1,0 +1,62 @@
+:: Pound Free Beast End []
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Free Beast]]>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Free Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		满足后，<<beasttype>>离开了，轮到了另一个。<<llpound_status>><<pound_status -5>>
+		<br><br>
+
+		<<combatTrainAdvance>>
+
+		<<switch $enemyejaculated>>
+			<<case 6>>
+				一只<<beasttype>>走近，<span class="red">看着你，好像你是一块肉。</span>
+			<<case 5>>
+				一只<<beasttype>>走近，<span class="pink">看着你，好像你是一个需要被虐待的小不点儿。</span>
+			<<case 4>>
+				一只<<beasttype>>走近，<span class="purple">看着你，好像你是个发情的婊子。</span>
+			<<case 3>>
+				一只<<beasttype>>走近，<span class="blue">看起来很想蹂躏你。</span>
+			<<case 2>>
+				一只<<beasttype>>走近，<span class="lblue">看起来很想操你。</span>
+			<<case 1>>
+				一只<<beasttype>>走近，<span class="teal">看起来很想占你便宜。</span>
+			<<default>>
+				一只<<beasttype>>接近，<span class="green">但看起来不太确定。</span>
+		<</switch>>
+		<br><br>
+		<<link [[继续|Pound Free Beast]]>><</link>>
+	<<else>>
+		满足后，<<beasttype>>离开了。<<llpound_status>><<pound_status -5>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Pound Free Beast End]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<unbind>>
+	<<endcombat>>
+	<<generate1>><<person1>>
+	<<tearful>>你准备接受更多的虐待。"现在就够了，"一个<<person>>说道。"把小狗放回笼子里。"
+	<br><br>
+
+	<<clotheson>>
+	工作人员继续虐待你。他们让你玩捡回来，从狗碗里吃东西，以及做其他狗的行为。最后，他们解开皮带，把你锁在了一个笼子里。“晚安，”那<<person>>说。“你的培训从明天开始。”员工们笑着离开。<<detach_leash>>
+	<<pass 60>>
+	<br><br>
+	<<link [[继续|Pound Cage]]>><<endevent>><</link>>
+	<br>
+<</if>>

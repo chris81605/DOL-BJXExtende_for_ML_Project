@@ -1,0 +1,78 @@
+:: Pub Fame Remind []
+<<effects>>
+米奇叹了口气，"行吧，这次听仔细点，我不会再讲第三遍。"米奇顿了顿，继续说道，"其实我还是会的，毕竟我还要你帮忙，只是我自己不乐意而已。"
+<br><br>
+
+<<switch $pubfame.task>>
+	<<case "river">>
+		"你认识瑞沃吗？学校的数学老师。检查<<nnpc_him "River">>，确保<<nnpc_hes "River">>状态良好。不要告诉<<nnpc_him "River">>关于我的事，只告诉我<<nnpc_he "River">>怎么样。"米奇揉了揉自己的胳膊。"<<nnpc_He "River">>曾经帮助过我。我关心的是<<nnpc_him "River">>。"
+
+	<<case "gwylan">>
+		"有一个雪花玻璃球，它的底部有一个重要的代码。"米奇交叉着手臂。"是的，我很严肃。这条联络方式没有别的东西可以写。而且他们很着急。找到雪花玻璃球并把它带给我。<span @class="$forest_shop_intro isnot 1 ? 'gold' : ''">在森林的外围有一家商店，</span>它很有可能就在那里。那地方收集任何东西。"
+
+	<<case "temple">>
+		"我在破解一个废弃账户，需要一串密码。"米奇说，"那密码至少由64个随机字符组成，他们真带点被害妄想。暴力破解行不通。我认为他们把密码留在了一本书里，那本书就在狼街的神殿里。我进不去，但你可以。明白了吗？很好。我认为那本书与建筑有关。"
+		<<if $temple_rank is undefined or $temple_rank is "prospective">>
+			<br><br>
+
+			"<span class="gold">如果你不是神殿里的人，那就让领头的<<nnpc_title "Jordan">>帮帮忙。</span>"米奇补充道，"<<nnpc_his "Jordan">>的名字是约旦。<<nnpc_Hes "Jordan">>会帮你的。"
+		<</if>>
+
+	<<case "office">>
+		"我给你的那个信封，你需要把它送到别处。"米奇说，"商业街上的办公大楼，15层高的那栋，就是那儿。把信交给经理，别说谁送的，只告诉他们把信拿到地下室，他们会懂的。"
+		<<if $officejobintro isnot 1>>
+			<br><br>
+			"如果你不是那儿的工作人员，"米奇补充说，"那就把信交给问讯亭，或者类似的地方。那边会把信放到合适的地方的。"
+		<</if>>
+
+	<<case "wren">>
+		"走私者伦恩。我需要和<<nnpc_Hes "Wren">>聊一聊。需要你传个消息。你还拿者那个信封吧？把信封给<<nnpc_him "Wren">>，就说是老熟人给的。兰德里认识伦恩，但不能让兰德里做这事。我不想让伦恩发现我和兰德里有关联。"
+
+	<<case "hospital">>
+		"我需要医院的钥匙卡。"米奇说。"不是我用，兰德里要用。我欠<<him>>个人情。<<He>>帮过我，我也得报答<<He>>。"
+		<br><br>
+
+		米奇看了你一眼。"进医院，偷钥匙卡，出医院。你可以从接待员身上弄一个
+		<span @class="$hospitalintro isnot 1 ? 'gold' : ''">哈珀医生<<nnpc_he "Harper">>这个人有点问题。</span>但还好，你不一定非得跟<<nnpc_him "Harper">>打交道。"
+
+	<<case "morgan">>
+		"很遗憾，"米奇说道，"我需要一个U盘，但很遗憾的是，它在下水道里。"米奇摇了摇头。"不需要你费心去找，<span @class="$sewersintro isnot 1 ? 'gold' : ''">下水道里还有别人，</span><<nnpc_Hes "Morgan">>可能已经找到U盘了。可以让<<nnpc_him "Morgan">>把U盘给你，或者想办法从<<nnpc_him "Morgan">>那儿拿走，怎么都行。我真的很抱歉。"
+		<<if $sewersintro isnot 1>>
+			<br><br>
+
+			米奇盯着你脸上的表情。"不是普通的下水道，"米奇解释说，"是旧下水道，在更下面。可以从主污水管网过去。"
+		<</if>>
+
+	<<case "niki">>
+		<<loadNPC 2 "pubfame_model">><<person3>>
+		"尼奇有几张我想销毁的照片。"米奇说道。"不是我的，是委托人的。以前缺钱拍的，现在后悔了。<span class="gold">是一个<<if $pubfame.niki.hair is "no">>光头的<<else>>留着<<print setup.colourName($pubfame.niki.hair.replace("blonde","金色"))>>头发的<</if>><<person>>。</span>找到目标，销毁目标，方式随意。"米奇顿了顿，又补充道，"是指照片，不是指<<personsimple>>。"
+		<<clearsinglenpc 2>>
+
+	<<case "bailey">>
+		米奇叹了口气。"很抱歉让你承担这个任务，但我需要你再次黑进<<nnpc_he "Bailey">>的电脑里。我需要确保贝利没有记住我，并将我添加到某个列表中。"对方递给你一个USB驱动器。"和上次一样。等到<<nnpc_hes "Bailey">>在使用电脑时，分散<<nnpc_him "Bailey">>的注意力，然后插上这个。你知道他有多危险，别被抓住了。"声音停顿了一下。"请，不要被抓住。"
+
+	<<case "briar">>
+		"布莱尔，"米奇咂舌，"一个讨厌的家伙，但<<nnpc_he "Briar">>知道很多事情，重要的事情。"对方递给你一个USB驱动器。"去妓院。趁着<<nnpc_his "Briar">>的电脑开着的时候，用这个黑进去，我在找一些东西。插进去，等一会儿，然后拔出来离开。别被抓住了，<<nnpc_Hes "Briar">>是个无情的家伙。"
+		<br><br>
+
+		米奇想了一会儿。"想完成目标的话，需要令其分心，或者干脆利落地脱身。最好两者兼具。"
+
+	<<case "remy">>
+		"你认识雷米吗？"米奇问，"<span @class="$ridingschoolintro is undefined ? 'gold' : ''"><<nnpc_He "Remy">>在农村有一所骑术学校</span>，兰德里的一个联系人会在那里。你问他们花在哪里开，他们会说<span class="gold"><<pubfameRemyPassword>></span>。明白了吗？"
+		<br><br>
+
+		看到你点头，对方继续说道。"跟他们会面，告诉他们是老熟人派你来的。取回包裹，把它带回给我。如果他们没有给你包裹，告诉我。别只是不去，然后说你没拿到包裹。我会知道的。"
+		<br><br>
+
+		米奇严肃地看着你。"小心点。如果他们和雷米在一起，他们可能很危险。雷米是个麻烦人物。不要让他们欺骗你。<span class="gold"><<pubfameRemyPassword 0 "cap">></span>。"
+
+	<<case "compound">>
+		"大院，"米奇讲解道，"就在麋鹿街上的那个。我把摄像头都给你了，就看起来像石头的那些？把它们藏在四周。每个建筑物放一个，庭院里也放一个，不要一次全放。唔，或许也行。但一次性放完是不需要的。如果他们发现了你，就跑，留到另一天再试。"
+		<br><br>
+
+	<<default>> <!-- all conditions should be met in the above cases -->
+		米奇皱了皱眉。"我是要你做什么来着？"对方摇了摇头。"算了，当作完成了吧。"<span class="black"><i>（这是任务"<<print $pubfame.task>>"出现的错误，请通知Vrelnir。）</i></span>
+<</switch>>
+<br><br>
+
+<<link [[继续|Pub Fame]]>><<set $phase to 1>><</link>>

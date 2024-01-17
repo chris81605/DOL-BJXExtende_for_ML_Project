@@ -1,0 +1,94 @@
+:: Street Bully Flash Forced []
+<<set $outside to 1>><<effects>>
+<<set _whitney to $NPCName[$NPCNameList.indexOf("Whitney")]>>
+当惠特尼把你拖出小巷时，你无力反抗<<he>>。
+<<switch $phase>>
+	<<case 3>>
+		<<He>>用一只手就将你的胳膊扭到了身后，而另一只手抓住了你<<print $worn.upper.cn_name_cap>>的下摆。
+		<br><br>
+
+		"你这么害羞干什么？”<<he>>笑了起来，揉捏着你的<<breasts>>。
+		<<if $player.breastsize is 0>>
+			"反正这里也没什么好看的。"
+			<<insecurity "breasts_tiny" 5>><<ginsecurity "breasts_tiny">>
+		<<elseif $player.breastsize lte 5>>
+			"要有人愿意瞧一眼你这对可怜的奶子，你应该高兴才是。"
+			<<insecurity "breasts_tiny" 5>><<ginsecurity "breasts_tiny">>
+		<<elseif $player.breastsize lte 7>>
+			"这些奶子应该被露出来。"
+		<<else>>
+			"反正这对奶子装在你衣服里，用不了多久就得漏出来。"
+			<<insecurity "breasts_big" 5>><<ginsecurity "breasts_big">>
+		<</if>>
+	<<case 2>>
+		<<He>>用一只手就将你的胳膊扭到了身后，而另一只手滑入了你<<print $worn.lower.cn_name_cap>>。
+		<br><br>
+
+		<<if $player.gender isnot $player.gender_appearance and !$genderknown.includes("Whitney")>>
+			<<set $genderknown.pushUnique("Whitney")>>
+			<<He>>抓住你的裤裆，然后突然停下来。随后，<<he>>用一种更刻意的触摸方式
+			<<if $player.penisExist and $player.vaginaExist>>
+				沿着你的<<penis>>的轮廓滑动<<his>>的手指，然后用力压住你的<<pussy>>。
+				<br><br>
+
+				<<if _whitney.penis isnot "none" and _whitney.vagina isnot "none">> /* whitney is also a herm */
+					"哇哦。”<<He>>听起来很惊喜，但并不困惑，“下一个出现的变态就等着看好戏吧。"
+				<<else>>
+					"不管你这边有什么，”<<he>>笑着说，“很快就会有个路过的变态欣赏这出好戏了。"
+				<</if>>
+			<<elseif $player.penisExist>>
+				隔着你的<<print $worn.lower.cn_name_cap>>挤压你的根部，咯咯笑着。
+				<br><br>
+
+				<<if $player.penissize gte 4>>
+					"我之前怎么没注意到？”<<he>>笑着说，“随便了，反正下一个出现的变态肯定不会像我这么大意。"
+					<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
+				<<elseif $player.penissize gte 1>>
+					"这本该是个秘密吗？”<<he>>嗤笑道，“瞒不了多久了。"
+				<<else>>
+					"我猜我搞错了，”<<he>>冷笑着说，“毕竟没什么可看的。"
+					<<insecurity "penis_tiny" 1>><<ginsecurity "penis_tiny">>
+				<</if>>
+			<<else>>
+				隔着你的<<print $worn.lower.cn_name_cap>>戳弄着你的洞口，轻声笑着。
+				<br><br>
+
+				"这本该是个秘密吗？”<<he>>嗤笑道，“瞒不了多久了。"
+			<</if>>
+		<<else>>
+			"害怕吗？”<<he>>边问边摸着你的胯部，“某个变态会看到你的
+			<<set _hermText to (_whitney.gender is "h" ? "小秘密" : "怪东西")>>
+			<<print ($player.penisExist ? (!$player.vaginaExist ? "肉棒" : _hermText) : "阴道")>>，而你对此无能为力。"
+		<</if>>
+	<<case 1>>
+		<<He>>抓住你的腰，让你弯下腰，你的<<bottom>>面朝街道。<<He>>用拇指勾住你的<<print $worn.lower.cn_name_cap>>。
+		<br><br>
+
+		"不要害羞，”<<he>>笑道，“这屁股生来就是让人看的。”<<He>>给了你一巴掌。
+<</switch>>
+<br><br>
+
+你只能紧闭双眼忍受，惠特尼
+<<if $phase is 3>>
+	将你的<<print $worn.upper.cn_name_cap>>向上拉起<<if !$worn.under_upper.type.includes("naked")>>，同时把你的<<print $worn.under_upper.cn_name_cap>>向下拉<</if>>，
+<<else>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		把你的<<if !$worn.under_lower.type.includes("naked")>><<print $worn.under_lower.cn_name_cap>>拉下，然后把你的<</if>>裙子掀起来，
+	<<else>>
+		把你的<<print $worn.lower.cn_name_cap>><<if !$worn.under_lower.type.includes("naked")>>和<<print $worn.under_lower.cn_name_cap>><</if>>拉下，
+	<</if>>
+<</if>>
+<<switch $phase>>
+	<<case 3>>
+		<span class="lewd">露了一下你的<<breasts>>。</span>
+	<<case 2>>
+		<span class="lewd">露出了你的<<genitals>>。</span>
+	<<case 1>>
+		<span class="lewd">露出你的<<bottom>>。</span>
+<</switch>>
+一个<<generate2>><<person2>><<person>>开车经过，一边色迷迷地看着一边按了按<<his>>的喇叭。幸运的是，你的羞辱很短暂，惠特尼很快就<<if $phase is 1>>扔下了你，<<else>>把你推到地上<</if>>。
+<<fameexhibitionism 2>>
+<br><br>
+
+<<link [[继续|Street Bully Flash 3]]>><<set $phase2 to 0>><<person1>><</link>>
+<br>

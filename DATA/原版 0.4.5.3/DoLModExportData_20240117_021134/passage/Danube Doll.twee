@@ -1,0 +1,97 @@
+:: Danube Doll []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<He>>带领你上楼到<<his>>的卧室，那里有一张桌子在等你。
+桌上放着一套玩具茶具，各式各样的娃娃和泰迪熊围坐在桌子旁，好像正在出席茶话会。<<He>>坐下来，示意你也坐下来。
+<br><br>
+
+你坐在<<him>>的对面，在一个缺少一只眼睛的娃娃和一只灰熊之间。
+"女士们，先生们，"<<he>>向聚集在一起的玩具们说道，"让我来介绍一下我的外国朋友。"
+<<He>>指着你。"请让<<phim>>感到受欢迎。"<<He>>拿起空茶壶，开始模拟将茶水倒入茶杯。
+<br><br>
+
+这种情况持续了一段时间。
+那个<<person>>讲述了一些冒险和阴谋的奇幻故事，偶尔还会对<<his>>的某个玩具做出回应，就好像他们正在聊天。
+你没有说太多，但<<he>>似乎很满足。
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+
+	<<pass 20>>后<<he>>给了你一个狡猾的眼神。
+	"我有没有说过，在我朋友的家乡，他们穿着内裤喝茶？" 你不喜欢这种情况。
+	"<<pShe>>很有礼貌，但<<pshe>>穿得少会更舒服。你应该脱掉衣服。"
+	<br><br>
+
+	<<if $worn.under_lower.type.includes("naked") and !playerChastity()>>
+		<<if $exhibitionism gte 75>>
+			你对自己没有穿内衣感到很自责。暴露自己的想法让你兴奋。
+			<br><br>
+
+			<<link [[脱光衣服|Danube Doll Strip]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+			<br>
+		<<else>>
+			你对自己没有穿内衣感到很自责。你不可能脱光衣服。
+			<br><br>
+		<</if>>
+
+	<<elseif $worn.under_lower.type.includes("naked") and playerChastity()>>
+		<<if $exhibitionism gte 75>>
+			你能清楚的感知到正在穿戴着的$worn.genitals.cn_name_cap，所以你一想到要脱光衣服，就感到十分兴奋。
+			<br><br>
+
+			<<link [[脱光衣服|Danube Doll Strip]]>><<set $phase to 2>><</link>><<exhibitionist5>>
+			<br>
+		<<else>>
+			你对你的$worn.genitals.cn_name_cap有自我意识。你不可能脱到这个程度。
+			<br><br>
+		<</if>>
+
+	<<elseif $player.gender_appearance is "f">>
+		<<if $exhibitionism gte 55>>
+			你对你的<<breasts>>感到难为情。一想到自己被看光了你就兴奋不已。
+			<br><br>
+
+			<<link [[脱|Danube Doll Strip]]>><<set $phase to 3>><</link>><<exhibitionist4>>
+			<br>
+		<<else>>
+			你对你的<<breasts>>感到难为情。绝不能展露自己的身体。
+			<br><br>
+		<</if>>
+
+	<<elseif $player.breastsize gte 3>>
+		<<if $exhibitionism gte 55>>
+			你对你的<<breasts>>感到难为情。一想到自己被看光了你就兴奋不已。
+			<br><br>
+
+			<<link [[脱|Danube Doll Strip]]>><<set $phase to 4>><</link>><<exhibitionist4>>
+			<br>
+		<<else>>
+			你对你的<<breasts>>感到难为情。绝不能展露自己的身体。
+			<br><br>
+		<</if>>
+	<<else>>
+		<<if $exhibitionism gte 15>>
+			剥离的想法让你兴奋不已，而你仍然会有你的$worn.under_lower.cn_name_cap。
+			<br><br>
+
+			<<link [[脱|Danube Doll Strip]]>><<set $phase to 5>><</link>><<exhibitionist2>>
+			<br>
+		<<else>>
+			你不可能做得出如此羞耻的事。
+			<br><br>
+		<</if>>
+	<</if>>
+
+	<<link [[拒绝|Danube Doll Refuse]]>><</link>>
+	<br>
+
+<<else>>
+
+	<<pass 40>>40分钟后，<<he>>站起身。"不好意思，我的朋友在别处等我有事。"
+	你跟着<<him>>回到了前门，<<he>>给了你<<moneyGain 25>>之后便向你告别。
+	<br><br>
+
+	<<link [[继续|Danube Street]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

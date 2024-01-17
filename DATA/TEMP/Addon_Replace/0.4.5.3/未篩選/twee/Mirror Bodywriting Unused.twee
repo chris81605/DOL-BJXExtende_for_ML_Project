@@ -1,0 +1,61 @@
+:: Mirror Bodywriting Unused []
+<<effects>>
+<<set _skin_keys to Object.keys(setup.bodywriting)>>
+<<if $mirror_bodypart>>
+	$mirror_bodypart
+	<br>
+	<<print $writeaction>>
+	<br>
+	<<add_bodywriting $mirror_bodypart $writeaction pen>>
+	<<unset $mirror_bodypart>><<unset $writeaction>>
+<<else>>
+	你将笔贴近你的皮肤。
+<</if>>
+<br><br>
+<<for _active_bodypart range setup.bodyparts>>
+	<<if $skin[_active_bodypart].writing>>
+	<<else>>
+		<<capture _active_bodypart>><<link [[写东西|Mirror Bodywriting]]>><<set $mirror_bodypart to _active_bodypart>><</link>><</capture>>在你的<<bodypart _active_bodypart>>
+		<br>
+	<</if>>
+<</for>>
+<br>
+Something non-explicit:
+<<for _s to 0; _s lt _skin_keys.length; _s++>>
+	<<if setup.bodywriting[_skin_keys[_s]].lewd is 0>>
+		<label><<print setup.bodywriting[_skin_keys[_s]].writ_cn>><<radiobutton "$writeaction" clone(setup.bodywriting[_skin_keys[_s]].index)>></label>
+		|
+		<br>
+	<</if>>
+<</for>>
+<br><br>
+<<if $promiscuity gte 35>>
+	<span class="lewd">淫荡下流的内容</span>:
+	<<for _s to 0; _s lt _skin_keys.length; _s++>>
+		<<if setup.bodywriting[_skin_keys[_s]].special isnot "bestiality" and setup.bodywriting[_skin_keys[_s]].lewd is 1>>
+			<label><<print setup.bodywriting[_skin_keys[_s]].writ_cn>><<radiobutton "$writeaction" "clone(setup.bodywriting[_skin_keys[_s]].index)">></label>
+			|
+		<</if>>
+	<</for>>
+	<br>
+<<else>>
+	淫荡下流的内容:<span class="pink">你还不够淫荡。</span>
+	<br>
+<</if>>
+<br>
+<<if $deviancy gte 35>>
+	<span class="lewd">非比寻常的内容</span>:
+	<<for _s to 0; _s lt _skin_keys.length; _s++>>
+		<<if setup.bodywriting[_skin_keys[_s]].special is "bestiality">>
+			<label><<print setup.bodywriting[_skin_keys[_s]].writ_cn>><<radiobutton "$writeaction" "clone(setup.bodywriting[_skin_keys[_s]].index)">></label>
+			|
+		<</if>>
+	<</for>>
+	<br>
+<<else>>
+	非比寻常的内容:<span class="pink">你的异种癖还不够高。</span>
+	<br>
+<</if>>
+<br>
+<<link [[停止|$passage_mirror]]>><</link>>
+<br>

@@ -1,0 +1,24 @@
+:: Prison Breakfast Prayer []
+<<effects>>
+
+<<generate_methodical_guard 0>><<methodical_guard 0 cap>><<person1>><<his>>清了清嗓子，低头看了下手里的书。"低头，现在祈祷。"大多数囚犯开始摆出祈祷的姿势。
+<br><br>
+
+<<link [[低下你的头|Prison Breakfast Prayer Bow]]>><<sub 1>><<purity 2>><</link>><<gpurity>>
+<br>
+<<link [[低头做白日梦|Prison Breakfast Prayer Daydream]]>><<stress -6>><</link>><<lstress>>
+<br>
+<<link [[拒绝|Prison Breakfast Prayer Refuse]]>><<def 1>><<prison_inmates 1>><<suspicion 1>><</link>><<gsuspicion>><<grespect>>
+<br>
+<<if $angel gte 6 and !$worn.face.type.includes("gag")>>
+	<<link [[提议举行布道|Prison Breakfast Prayer Angel]]>><<prison_hope 1>><</link>><<angel>><<ghope>>
+	<br>
+<</if>>
+<<if $fallenangel gte 2 and !$worn.face.type.includes("gag")>>
+	<<link [[提议举行布道|Prison Breakfast Prayer Fallen]]>><<prison_reb 3>><<prison_hope -1>><</link>><<fallenangel>><<lhope>><<ggreb>>
+	<br>
+<</if>>
+<<if $demon gte 6 and !$worn.face.type.includes("gag")>>
+	<<link [[提议举行布道|Prison Breakfast Prayer Demon]]>><<prison_reb 1>><</link>><<demon>><<greb>>
+	<br>
+<</if>>

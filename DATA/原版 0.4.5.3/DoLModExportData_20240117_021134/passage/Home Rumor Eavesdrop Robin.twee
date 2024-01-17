@@ -1,0 +1,35 @@
+:: Home Rumor Eavesdrop Robin []
+<<effects>><<rng>>
+你听着他们的对话，
+<<if $robinmissing isnot 0>>
+	他们正考虑组成小队去寻找罗宾。你注意到<<person2>><<person>>拿着个看起来像失踪海报的东西。<<hope -3>><<llhope>>
+<<elseif $robin_injured gte 1>>
+	<<person1>><<person>>想把罗宾带到医院，但<<person2>><<person>>认为贝利不会允许。<<hope -1>><<lhope>>
+<<elseif $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 40>>
+	<<person1>><<person>>盯着地面，眼睛在闪烁。"即使是罗宾也没能逃过这一切……你认为<<nnpc_him "Robin">>怎么了？"<<hope -1>><<lhope>>
+<<elseif $rng gte 70>>
+	他们在谈论罗宾在周末经营的柠檬水摊。
+	<<if $orphan_hope lte 0 and $watersportsdisable is "f">>
+		他们在开关于<<nnpc_he "Robin">>实际上可能在卖什么液体的玩笑。<<person1>><<person>>笑了。
+	<<else>>
+		他们认为柠檬水很好喝，而且<<nnpc_his "Robin">>的所作所为也很鼓舞人心。<<hope 1>><<ghope>>
+	<</if>>
+
+<<elseif $rng gte 35>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].dom lte 50>>
+		他们在谈论罗宾似乎从来不会诉诸暴力。<<hope 1>><<reb -1>><<ghope>><<lreb>>
+	<<else>>
+		他们对罗宾在面对危险时依然能保持着善良而印象深刻。<<reb 1>><<greb>>
+	<</if>>
+
+<<else>>
+	<<if $orphan_hope gte 10>>
+		<<person1>><<person>>提到罗宾很擅长鼓舞其他孤儿的精神。<<hope 1>><<ghope>>
+	<<else>>
+		他们在谈论罗宾为何总是躲在<<nnpc_his "Robin">>的房间里。他们也希望这样做。<<hope -1>><<lhope>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<link [[离开|Orphanage]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>

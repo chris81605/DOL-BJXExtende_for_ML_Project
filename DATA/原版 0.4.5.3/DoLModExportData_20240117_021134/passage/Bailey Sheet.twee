@@ -1,0 +1,86 @@
+:: Bailey Sheet []
+<<set $outside to 0>><<set $location to "home">><<effects>>
+
+<<rng>>
+<<if $pronoun is "m">>"先生，"<<else>>"贝利小姐，"<</if>>
+<<if $rng gte 67>>
+	你大喊。"花园里有个<<personsimple>>想把一个孤儿拖走！"
+	<br>
+	贝利冷笑了一声，大步走出办公室，朝花园的方向走去。
+<<elseif $rng gte 33>>
+	你小声说。"有个奇怪的<<personsimple>>在后窗那边偷看。太吓人了。"
+	<br>
+	贝利冷笑了一声，大步走出办公室。
+	<br>
+	<<He>>大步地朝着宿舍方向走去。
+<<else>>
+	你喘气。"外面有个<<personsimple>>在喊这个地方应该关闭。那我们住哪里？"
+	<br>
+	贝利皱着眉头，大步走出办公室。
+<</if>>
+<br><br>
+
+<<skulduggerycheck "silent">><<skulduggeryuse>>
+
+在插上USB后，桌面上立即弹出了一个文件夹，应该是USB自行找到了什么。
+<br><br>
+
+<<rng>>
+<<if $rng gte 76 and $skulduggerysuccess is 1>>
+	你翻看文件夹。贝利离开的时间应该够长，足以让你相对彻底地看一遍。<span class="green">你找不到任何关于米奇的信息。</span>
+	<<pubfameComplete "bailey">>
+
+	你在贝利回来之前拿走装置并离开了。
+	<br><br>
+
+	<<link [[继续|Orphanage]]>><<endevent>><</link>>
+
+<<elseif $rng gte 51 and $skulduggerysuccess is 0>>
+	你翻看了一遍文件夹，找不到任何关于米奇的信息。当<span class="red">贝利回到房间</span>时，你还在翻看文档。
+	<br>
+	"我就知道你在搞什么鬼，小混蛋。"
+	<br>
+	<<He>>把设备扯出来并抓住你的胳膊。
+	<br><br>
+
+	<<link [[继续|Bailey Beating]]>><<set $molestationstart to 1>><</link>>
+
+<<elseif $rng gte 26>>
+	<<set $pubfame.detail to "baileyList">>
+	你浏览文件夹，找到了一个文本文件，里面列出了一周要做的事情。在一行行你不认得的姓名与旁边标的数字中，你看到了<span class="blue">追回黑客</span>这几个字，你觉得这指的就是米奇。
+	<br><br>
+
+	<<if $skulduggerysuccess is 1>>
+		你删除了这一行，在原处写上了一行"重新加注燃油"。<span class="green">贝利离开的时间够长，足以让你取出USB并逃跑。</span>
+		<<pubfameComplete "bailey" "list">>
+
+		<<link [[继续|Orphanage]]>><<endevent>><</link>>
+	<<else>>
+		你删除了这一行，在原处写上了一行"重新加注燃油"。但当你拔下USB并准备离开时，<span class="red">怒视着你的贝利拦在了门口</span>。
+		<br>
+		"我就知道你在搞什么鬼，小混蛋。"
+		<br>
+		<<He>>抓住你的手臂。
+		<br><br>
+
+		<<pubfameComplete "bailey" "list">>
+
+		<<link [[继续|Bailey Beating]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<<else>>
+	你翻看文件夹，找到一个电子表格。你打开它浏览起来，上面写满了几十个名字，<span class="red">而且全都是从孤儿院逃跑的孤儿。</span>
+	<br><br>
+
+	你认出了两周前失踪，后来又出现在孤儿院的那个<<girl>>的名字，<<pShes>>的名字在"已捉回"的一列中。其他的一些名字分别列在了"已售出"、"已释放"、"已逃逸"和"其他"列里。米奇的名字在逃逸列中，也是唯一一个没有列出姓氏的名字。
+	<br><br>
+
+	你可以把米奇从名单上删除来确保那家伙的安全，你也可以尝试删除整个电子表格，但贝利可能会十分生气。
+	<<if $skulduggerysuccess is 1>>
+		而且这所需要的时间十分久，久到无论贝利被支走多长时间都一定能回来逮住你。
+	<</if>>
+	<br><br>
+
+	<<link [[删除米奇的内容|Bailey Sheet 2]]>><<set $phase to $skulduggerysuccess>><</link>>
+	<br>
+	<<link [[删除整个文件|Bailey Sheet 2]]>><<set $phase to 2>><</link>><<dangerousText>>
+<</if>>

@@ -1,0 +1,44 @@
+:: Lake Mermaid Eden []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+你听到林子里传来一声枪响。一颗子弹落在你附近，学生们惊恐地四散逃开。"那是什么？"其中一个人用犹豫的声音问道。
+<br><br>
+
+第二枪响彻空中。这次子弹落得更近，使他们跳起来。第三枪随之而来，让他们惊慌失措地逃跑了。
+<br><br>
+
+岸边的其他人也听到枪声，纷纷逃离现场，留下你被困在沙滩上。突然，你听到脚步声靠近了你。
+<br><br>
+
+<<endevent>><<npc Eden>>
+"这里有什么？"一个熟悉的声音说道。是伊甸。
+
+<<if $edenCagedEscape>>
+	"我告诉过你我会再次抓住你的。"<<He>>把你挖了出来，紧紧抓住你的手腕。在你站起来的一刻，<<he>>就开始把你拖进树林里。
+	<br><br>
+
+	"你总是让我失望，还依赖我来救你的屁股。"<<He>>转过身来瞪着你，眼睛眯成一条缝。"你已经拖欠了惩罚。"
+	<<set $location to "forest">>
+	<br><br>
+
+	<<link [[反抗|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[试着拉开 (0:01)|Eden Caged Caught Pull]]>><<pass 1>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[顺从 (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif ($edenfreedom gte 2 and $edendays lt 8) or ($edenfreedom is 1 and $edendays lt 2)>>
+	"我就知道你会变成这样。这里很危险。"<<he>>说着，把你挖出来，然后扶你起来。"我们回家吧。"
+	<br><br>
+
+	<<He>>把你带回<<his>>的小屋。
+	<br><br>
+
+	<<link [[继续 (0:30)|Eden Cabin]]>><<endevent>><<pass 30>><</link>>
+	<br>
+<<else>>
+	"我信任你。"<<he>>说道。"如果你不听从我，就会发生这种事情。这是为了你的安全。"<<He>>把你挖出来，拉着你站起来。"我们回家吧。"
+	<br><br>
+
+	<<link [[继续 (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
+	<br>
+<</if>>

@@ -1,0 +1,65 @@
+:: Riding School Contact []
+<<effects>><<set $pubfame.remy.attempts++>>
+
+你在院子里找一个人。大多数学生都是两三个人一组，悠闲地聊天，但你也会看到一些掉队的人。
+<br><br>
+
+<<generate1>><<person1>>
+一个<<person>>吸引了你的目光，<<print either("靠在篱笆上","靠在马厩上","在滑动着<<his>>的手机","无所事事地绕着圈走")>>。"对不起，"你走近<<him>>。"花儿在哪里盛开？"
+<br><br>
+
+<<rng>>
+<<if $rng gte 86 or $pubfame.remy.attempts % 10 is 0>> <!-- 15% chance. Correct answer. Also guaranteed correct answer after ten failed attempts -->
+	<<set $phase to 1>>
+	<<set _looks to ["没有看","没有看","没有看","瞥了瞥"][random(3)]>>
+	<<set _password to 0>>
+<<elseif $rng gte 51>> <!-- 35% chance. Wrong or almost answer, leads to rape -->
+	<<set $phase to 2>>
+	<<set _looks to ["没有看","没有看","没有看","瞥了瞥"][random(3)]>>
+	<<set _password to ["wrong","wrong","wrong","almost","almost"][random(4)]>>
+<<elseif $rng gte 31>> <!-- 20% chance. Wrong or almost answer answer, leads to capture -->
+	<<set $phase to 3>>
+	<<set _looks to ["没有看","瞥了瞥","瞥了瞥","瞥了瞥"][random(3)]>>
+	<<set _password to ["wrong","wrong","wrong","almost","almost"][random(4)]>>
+<<elseif $rng gte 26>> <!-- 5% chance. Correct answer, leads to capture-->
+	<<set $phase to 4>>
+	<<set _looks to ["没有看","瞥了瞥","瞥了瞥","瞥了瞥"][random(3)]>>
+	<<set _password to 0>>
+<<else>> <!-- 30% chance. No password at all -->
+	<<set _failed to true>>
+	<<He>>茫然地盯着你看了一会儿。
+	"<<print either(
+		"这是个谜语吗？我不擅长猜谜语。",
+		"路那边有个农场，去那儿试试。",
+		"我对你信什么可不感兴趣，<<girl>>。",
+		"那是……指什么？",
+		"我正忙着呢。",
+		"我有个<<spouse>>。"
+	)>>"<<He>>转身对着你。
+	<br><br>
+
+	<<if Time.hour isnot $closinghour>>
+		<<investigateicon>><<link [[找别人 (0:20)|Riding School Contact]]>><<pass 20>><<endevent>><</link>>
+		<br>
+		<<getouticon>><<link [[暂时放弃|Riding School]]>><<endevent>><</link>>
+	<<else>>
+		关门的时间到了。马匹们被赶回马圈，游客们也在离开。<<if $exposed gte 1>>你偷偷溜走，趁还没有人看到你的<<lewdness>>。<</if>>
+		<br><br>
+
+		<<link [[继续|Farmland]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<<if !_failed>>
+	<<He>>_looks你。"<<pubfameRemyPassword _password "cap">>，"<<he>>说道。<<He>>转身走到马厩后面。
+	<<if $awareness gte 1000 and $phase gte 3>>
+		<br>
+		<span class="purple">你注意到雷米在用眼角盯着你。</span>
+	<</if>>
+	<br><br>
+
+	<<link [["跟着" + $NPCList[0].pronouns.him|Riding School Contact Follow]]>><</link>>
+	<br>
+	<<link [[离开|Riding School Contact Leave]]>><<set $phase to Math.ceil($phase / 2)>><</link>>
+<</if>>

@@ -1,0 +1,39 @@
+:: Robin's Lemonade []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<<npc Robin>><<person1>>
+<<set _scandalous to ($robinromance is 1 and $worn.under_upper.type.includesAny("swim", "naked") and $worn.under_lower.type.includesAny("swim", "naked") and $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_upper.reveal gte 800 and $worn.under_lower.reveal gte 800)>>
+
+你看到罗宾站在<<his>>的柠檬水摊后面。
+<<print $robin.timer.hurt gte 1 ? "看见你时，<<He>>看向一边。" : _robin.trauma gte 40 ? "每当有人经过时，<<him>>都会畏缩。看见你时，<<he>>怯生生地挥了挥手。" : _scandalous ? "<<He>>张大嘴巴盯着你，被你的泳装惊吓到了。<<He>>有些犹豫地朝你挥起手。" : "看见你时，<<he>>挥起手。">>
+
+<<if $robin.timer.hurt gte 1>>
+	<br><br>
+	"嘿，"<<he>>你走近时罗宾冲你打招呼。<<He>>的声音听起来有些虚弱，没有更进一步打招呼。
+<<elseif $robinlemonadeintro isnot 1>><<set $robinlemonadeintro to 1>><<set $daily.robin.freeDrink to 1>>
+	<br><br>
+	"嗨。"在你靠近的时候<<he>>向你打招呼，似乎很开心见到你。"见到你真高兴，希望你能来尝尝我的柠檬水。"<<He>>把水、柠檬汁和糖混合在一起后递给了你一杯柠檬水。"别客气。"柠檬水非常甜。
+<<else>>
+	<<if _robin.crossdressing is 2>>
+		<<if _robin.pronoun is "f">>
+			<<if _robin.breastsize gte 9>> /* massive, huge, gigantic, enormous */
+				罗宾的<<breastsizedesc _robin.breastsize>>胸部在<<his>>的束胸下看起来不太明显。
+				但由于<<his>>的天然尺寸如此之大，它们仍然很难被隐藏起来。
+			<<elseif _robin.breastsize gte 6>> /* full, large, ample */
+				罗宾的<<breastsizedesc _robin.breastsize>>胸部在<<his>>的束胸下看起来不太明显。
+				但如果仔细看的话，你还是能看出<<his>>胸部的隆起。
+			<<elseif _robin.breastsize gte 3>> /* small, pert, modest */
+				罗宾<<breastsizedesc _robin.breastsize>>的胸部在<<his>>的束胸下几乎看不出来。
+			<<elseif _robin.breastsize gte 0>> /* budding, tiny */
+				罗宾<<breastsizedesc _robin.breastsize>>的胸部在<<his>>的束胸下完全看不出来。
+			<</if>>
+			<<He>>看起来很开心。
+		<<else>>
+			<<His>>的<<npcClothesText _robin "upper">>和大大的微笑使<<him>>看起来像一个快乐的女孩。
+		<</if>>
+	<</if>>
+<</if>>
+<<balloonRobinTalk>>
+<<endevent>>
+<br><br>
+<<lemonade_stand_options>>

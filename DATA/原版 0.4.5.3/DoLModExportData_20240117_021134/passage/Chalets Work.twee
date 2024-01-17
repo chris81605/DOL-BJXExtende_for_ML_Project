@@ -1,0 +1,34 @@
+:: Chalets Work []
+<<set $location to "chalets">><<set $outside to 1>><<effects>>
+
+你可以沿道路走到小镇和木屋之间的沙地上。
+
+<<if Time.weekDay is 1 or Time.weekDay is 7>>
+    <<if $chaletsintro is 2>>
+        <<loadNPC 0 "chalets_manager">><<person1>>
+        <<set $chaletsintro to 3>>
+        管理员将头从<<his>>的办公室探了出来。"只是提醒一下，在这里和小屋之间的沙滩上有一个摄制组，那些人会在周末过来拍照，那些家伙可能有马，所以在经过沙滩的时候多注意一点，毕竟谁也不知道那些家伙还有什么。"
+        <br><br>
+        <<endevent>>
+    <</if>>
+    你看到不远处有一群人和车辆，看起来像是摄制组。
+    <br><br>
+<<else>>
+    <br><br>
+<</if>>
+
+在这样泥泞的地面上行走很是困难。
+<<if ($weather is "rain" or $weather is "snow") and random(1, 200) is 200>>
+    当你走到一半时，你注意到海浪的声音越来越大。然后，<span class="red">一个比你还要高出许多倍的巨浪</span>向沙滩袭来。
+    <br><br>
+    你根本无法逃脱，而它也裹挟着你冲进大海。
+    <br><br>
+
+    <<link [[继续|Sea Rocks]]>><<chalets_end>><</link>>
+    <br>
+<<else>>
+    你靠近岛屿，一条木板路蜿蜒在地面上，为你提供一条固定的路径。你沿着木板路爬上一个斜坡，到达了被沙丘环绕的小木屋处。
+    <br><br>
+    <<link [[继续|Chalets]]>><</link>>
+    <br>
+<</if>>

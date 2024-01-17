@@ -1,0 +1,87 @@
+:: Danube Catperson Feed []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "danube">>
+
+<<switch $phase>>
+	<<case 1>>
+		<<if $speech_attitude is "meek">>
+			"那好吧，"你说道。"如果这是你想要的。"
+		<<elseif $speech_attitude is "bratty">>
+			"只要能让你闭嘴就行，"你嘟哝道。
+		<<else>>
+			"好吧，"你说道。"我们给你们弄点吃的吧。"
+		<</if>>
+		你撕开袋子。你还没来得及倒，不耐烦的<<beasttype>>就扑过来了！
+		<br><br>
+
+		你看到它的到来，
+		<<if $danceSuccess>>
+			<span class="green">然后闪开。</span><<bHe>>错过了你，撞上了另一个<<person2>><<beasttype>>。你趁机把碗装满。<<stress -6>><<lstress>>
+			<br><br>
+
+			食物掉落的声音打断了<<beastsplural>>之间的战斗。它们奔向食物，虽然不是没有发出一两声嘶嘶声。
+			<br><br>
+
+			吃完饭，<<beastsplural>>又回去闲逛了。你也一样。
+		<<else>>
+			<span class="red">但是<<bhes>>太快了。</span><<bHe>>撞上了你。袋子从你手中滑落，食物洒得到处都是。<<pain 15>><<stress 5>><<ggpain>><<gstress>>
+			<br><br>
+
+			<<beastsplural>>帮助自己解决了这些麻烦。
+			<<if $speech_attitude is "meek">>
+				"对不起，我来慢了，"你咕哝着说道。
+			<<elseif $speech_attitude is "bratty">>
+				"混蛋，"你抱怨道，向<<bhis>>竖起中指。
+			<<else>>
+				"没有耐心的小东西，"你抱怨道。
+			<</if>>
+			<br><br>
+
+			你尽你所能地清理，而那些<<beastsplural>>狼吞虎咽。你希望老板不会生气。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Danube Catperson Sofa]]>><<endevent>><<pass 60>><</link>>
+		<br>
+	<<case 2>>
+		你对那两只猫说不。它们凝视了几秒钟，
+		<<if random(1, 100) gte 36>>
+			<span class="green">在溜出食品储藏室之前。</span>
+			<<if $monster is 1>>
+				"主人应该有，"<<person2>><<beasttype>>在<<bhe>>经过时喃喃自语。
+			<</if>>
+			<br><br>
+
+			安抚了<<beastsplural>>后，你回到沙发上。
+			<br><br>
+
+			<<link [[继续|Danube Catperson Sofa]]>><<endevent>><<pass 60>><</link>>
+			<br>
+		<<else>>
+			<span class="red">然后发出嘶嘶声。</span>
+			<<if $monster is 1>>
+				"你不要告诉我们不行，"<<beasttype>>说道。
+			<</if>>
+			<<bHe>>扑向你，把你撞倒在地。
+			<br><br>
+
+			<<link [[继续|Danube Catperson Feed Sex]]>><<set $molestationstart to 1>><</link>>
+		<</if>>
+	<<case 3>>
+		你倒在地上，摆出一个暗示性的姿势。
+		<br><br>
+
+		"我不应该喂你，"你低声说道。"但是款待一下也无妨。"
+		<<deviancy3>>
+
+		<<beastsplural>>慢慢靠近，发出呼噜声。
+		<br><br>
+
+		<<link [[继续|Danube Catperson Feed Sex]]>><<set $sexstart to 1>><</link>>
+	<<default>>
+		你看着这两个家伙，不知道该怎么做，就回到你之前做的事情。它们没有停止吟唱，但你坚持你的冷漠，最后它们停了下来，和平回归。
+		<br><br>
+
+		<<link [[继续|Danube Catperson Sofa]]>><<endevent>><<pass 60>><</link>>
+		<br>
+<</switch>>
+<br>

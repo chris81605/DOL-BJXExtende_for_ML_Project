@@ -1,0 +1,40 @@
+:: Avery Party Dance Lead []
+<<effects>>
+
+艾弗里试图引导你，但你却把<<him>>拉向了另一个方向。
+
+<<if $danceSuccess>>
+	<<He>>稍微抵触了一下，<span class="green">但还是选择顺从你的行为。</span>
+
+	<<if currentSkillValue('danceskill') gte 600>>
+		毕竟你很擅长这个。
+	<<elseif currentSkillValue('danceskill') gte 400>>
+		你是一个自信的舞者，但你很小心没有让<<him>>丢面子。
+	<<elseif currentSkillValue('danceskill') gte 100>>
+		这不是你的第一支舞，但你还是害怕让<<him>>出丑。你努力跟着音乐跳舞，好在没出什么错。
+	<<else>>
+		你担心你会让<<him>>出丑，直到你注意到其他舞者也都是新手，你放下心来。
+	<</if>>
+
+	艾弗里舞跳得很好，你们很快就吸引了不少观众。
+	<<danceskilluse>><<gglove>><<ggendear>><<npcincr Avery love 3>><<set $endear += 20>>
+	<br><br>
+
+	你们继续跳舞。其他舞伴们停下来，饶有兴趣地看着你和艾弗里。除了某一对伴侣，他们也吸引了自己的观众。
+	<br><br>
+
+	<<link [[继续|Avery Party Dance Competition]]>><</link>>
+	<br>
+
+<<else>>
+	<span class="red">你的舞步太笨拙，丑态百出，</span>你俩都倒在地板上。人群中传来了一阵笑声。艾弗里试图一笑置之，但你很肯定<<hes>>一定是生气了。
+	<<danceskilluse>><<garage>><<llove>><<lendear>><<npcincr Avery rage 5>><<npcincr Avery love -1>><<set $endear -= 5>><<gstress>><<stress 6>><<gpain>><<pain 6>>
+	<br><br>
+
+	你们不再参加剩下的舞会，只是在旁边看着其他人的舞蹈。艾弗里全程一言不发，即使是在晚会结束时，几位客人走过来跟<<him>>道别<<him>>也没多说几句话。<<his>>的态度让想嘲笑你们在舞池里不幸事件的那几个人无功而返。
+	<br><br>
+
+	<<link [[继续|Avery Party End]]>><</link>>
+	<br>
+
+<</if>>

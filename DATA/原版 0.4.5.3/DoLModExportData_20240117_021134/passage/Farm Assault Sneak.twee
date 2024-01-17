@@ -1,0 +1,58 @@
+:: Farm Assault Sneak []
+<<effects>>
+
+
+你尽可能快地跑着。$farm.tower_guard试着吸引打手们的注意力。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green">你冲到一个<<person>>面前，用力推了一把。</span><<He>>发出惊讶的叫声，翻过了围栏，从塔楼上摔了出去。
+	<<if $enemynomax gte 2>>
+		<<His>>的同伙惊讶地转过了身。$farm.tower_guard抓住了这个机会，一拳打在了<<person2>><<person>>的脸上。<<He>>摇摇晃晃地后退着，然后摔下了楼梯。
+		<br><br>
+
+		剩下的打手跟着<<him>>跑了。
+		<br><br>
+	<<else>>
+		<<His>>的同伙惊讶地转过了身。$farm.tower_guard抓住了这个机会，把剩下的打手都扔下了楼梯。
+		<br><br>
+	<</if>>
+
+	<<skulduggeryuse>>
+	<<endevent>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"你反应很快，"$farm.tower_guard说道，"很高兴你来帮忙了。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"这就是你们的报应，"$farm.tower_guard从塔上大喊道，然后转向了你说道，"谢谢你的支援，我会继续监视的。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"干得不错，"$farm.tower_guard说道，"我会继续回去工作的。"
+	<<else>>
+		"我们配合得不错，"$farm.tower_guard说道，"或许我们以后可以其他方式合作。"<<He>>笑了。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+	<<set $farm_assault.tower to "manned">>
+
+<<else>>
+
+	<span class="red">地板吱吱作响，</span>打手们转身看向了你。$farm.tower_guard抓住这个机会，向最近的一人挥出了拳头。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Farm Assault Tower Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<</if>>

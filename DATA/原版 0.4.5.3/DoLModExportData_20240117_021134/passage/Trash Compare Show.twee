@@ -1,0 +1,83 @@
+:: Trash Compare Show []
+<<effects>>
+<<set _audience to [0,1,2,3,4,5]>>
+
+<<if $player.gender_appearance is "f">>
+	<<if $exhibitionism gte 55>>
+		"我的回合，" 你轻笑着说，然后抓起你的$worn.upper.cn_name_cap。
+	<<else>>
+		你紧张地抓着你的$worn.upper.cn_name_cap。
+	<</if>>
+	<<pullupall>><<flaunting>>你观察着他们的反应。
+	<<upperstrip>><<exposure>>
+	<<exhibitionism4>>
+
+	<<TrashComparePlayerBreastsReact>>
+
+<<else>>
+	<<if $exhibitionism gte 55>>
+		"我的回合，" 你轻笑着说，然后抓起你的$worn.lower.cn_name_cap。
+	<<else>>
+		你紧张地抓着你的$worn.lower.cn_name_cap。
+	<</if>>
+	<<pulldownall>><<flaunting>>你观察着他们的反应。
+	<<lowerstrip>><<exposure>>
+	<<exhibitionism4>>
+
+	<<if playerChastity()>>
+		<<TrashComparePlayerChastity>>
+	<<elseif $player.penisExist>>
+		<<TrashComparePlayerPenisReact>>
+	<<else>>
+		<<set _result to "vagina">>
+		那些<<group>>对你的<<genitals>>感到惊讶。"哇，你是女生？"<<trashSelect>><<person>>说。<<trashSelect>><<person>>似乎既恼怒又激动，显然对你的欺骗行为感到不满，但因为你公平竞争，所以愿意放手。他们看起来几乎被你的<<pussy>>迷住了，无法将视线从它身上移开。
+	<</if>>
+<</if>>
+<br><br>
+
+<<if _result is "vagina" or _result is "herm">>
+	<<trashSelect>><<person>>满怀希望地看着你。"嘿，既然我们展示了一切……你能把你的胸部也展示给我们吗？"<<He>>挠了挠<<his>>的后颈。
+	<<if _result is "vagina">>
+		"如果我们知道你是女孩，我们会第一时间要求你脱掉你的上衣。"
+	<<else>>
+		"如果你两个都有，那你也有胸部吗？"
+	<</if>>
+	<br><br>
+
+	<<link [[拒绝|Trash Compare Show Refuse]]>><<set $phase to 2>><</link>>
+	<br>
+	<<if $exhibitionism gte 55>>
+		<<link [[展示给他们看|Trash Compare Breasts Show All]]>><</link>><<exhibitionist4>>
+	<</if>>
+
+<<elseif _result is "flat">>
+	<<trashSelect>><<person>>交叉<<his>>的双臂。"我不知道你们其他人怎么想，但我怀疑<<pher>>的胸部。<<pShes>>真的非常非常平。"<<His>>眯起眼睛。"像男孩一样平。"
+	<br><br>
+
+	<<He>>向前迈出一步。"让我们看看你的阴部。或者，如果我是对的……你的阴茎。"
+	<br><br>
+
+	<<link [[拒绝|Trash Compare Show Refuse]]>><<set $phase to 1>><</link>>
+	<br>
+	<<if $exhibitionism gte 55>>
+		<<link [[展示给他们看|Trash Compare Penis Show All]]>><</link>><<exhibitionist4>>
+	<</if>>
+
+<<elseif _result is "breastEnvy">>
+	<<link [[为那个羡慕的女孩提供帮助|Trash Compare Secret]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[收拾东西|Trash Compare Wrap It Up]]>><</link>>
+
+<<elseif _result is "penisEnvy">>
+	<<link [[`为妒忌的${_boy}提供有偿帮助`|Trash Compare Secret]]>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[收拾东西|Trash Compare Wrap It Up]]>><</link>>
+
+<<else>>
+	"嗯，我想我们现在都见过彼此了，"<<trashSelect>><<person>>一边说，一边整理着<<his>>的衣服。"我想我会出去的。"
+	<br><br>
+
+	"是的，我也是，"<<trashSelect>><<person>>表示同意。<<group>>的其他人点头同意并跟随<<him>>重新穿好衣服。你跟着他们穿好衣服，感觉有点尴尬。<<person>>最后看了你一眼，然后向你眨了眨眼，然后加入了其他人。
+	<br><br>
+	<<link [[离开|Trash]]>><<endevent>><<clotheson>><<unset $trashCompare>><<set $eventskip to 1>><</link>>
+<</if>>

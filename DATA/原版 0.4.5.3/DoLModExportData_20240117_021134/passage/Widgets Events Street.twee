@@ -1,0 +1,766 @@
+:: Widgets Events Street [widget]
+<<widget "eventsstreet">>
+	<<set $dangerevent to random(1, 100)>>
+	<<rng>>
+	<<if $wraith.state and $eventforced and isBloodmoon() and !_wraithEventSkipped>>
+		<<wraithEventStreet>>
+	<<elseif $kylarwatched is 1>>
+		<<kylarwatched>>
+	<<elseif $kylar_manor_secret is 2>>
+		<<monstrance_accost>>
+	<<elseif Time.dayState is "night">>
+		<<if $exposed gte 1>>
+			<<if $bus is "residential">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<residentialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<residentialex2>>
+				<<else>>
+					<<residentialex3>>
+				<</if>>
+			<<elseif $bus is "commercial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<commercialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<commercialex2>>
+				<<else>>
+					<<commercialex3>>
+				<</if>>
+			<<elseif $bus is "industrial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<industrialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<industrialex2>>
+				<<else>>
+					<<industrialex3>>
+				<</if>>
+			<<elseif $bus is "park">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<parkex1>>
+				<<elseif $dangerevent lte 20>>
+					<<parkex2>>
+				<<else>>
+					<<parkex3>>
+				<</if>>
+			<<else>>
+				<<set $dangerevent to random(1, 60)>>
+				<<if $dangerevent lte 20>>
+					<<streetex1>>
+				<<elseif $dangerevent lte 30>>
+					<<streetex2>>
+				<<elseif $dangerevent lte 40>>
+					<<streetex3>>
+				<<elseif $dangerevent lte 50>>
+					<<streetex4>>
+				<<elseif $dangerevent lte 60>>
+					<<streetex5>>
+				<</if>>
+			<</if>>
+		<<elseif $rng gte 51>>
+			<<set $dangerevent to random(1, 150)>>
+			<<if $dangerevent lte 9>>
+				<<if ($exhibitionismrun is undefined or $exhibitionismrun is "danubedone") and ($exhibitionismrunon is 1 or $exhibitionismrunon is 0) and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer2>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 2 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer3>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 3 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer4>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon isnot 1 and Time.days gte 8 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 18>>
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "dungeon" and $whitneyposter isnot 1>>
+					<<whitneyposter>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 27>>
+				<<if $hallucinations gte 2 and $tentacledisable is "f">>
+					<<streettentacle>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 36>>
+				<<if $fame.sex gte random(1, 1000)>>
+					<<streetsexfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 45>>
+				<<if $fame.rape gte random(1, 1000)>>
+					<<streetrapefame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 54>>
+				<<if $fame.bestiality gte random(1, 1000)>>
+					<<streetbestialityfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 63>>
+				<<if $fame.prostitution gte random(1, 1000)>>
+					<<streetprostitutionfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 72>>
+				<<if $fame.pregnancy gte random(1, 1000)>>
+					<<streetpregnancyfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 81>>
+				<<if $fame.exhibitionism gte random(1, 1000)>>
+					<<streetexhibitionismfame>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 90>>
+				<<if $syndromeeden is 1 and (($edenfreedom isnot 2 or $edenCagedEscape) and $edendays gte 7) or ($edenfreedom gte 2 and $edendays gte 21)>>
+					<<streetedenrage>>
+				<<elseif !$edenCagedEscape and ($edenfreedom is 1 and $edendays gte 2) or ($edenfreedom gte 2 and $edendays gte 8)>>
+					<<if $edenfreedom gte 2 and $NPCName[$NPCNameList.indexOf("Eden")].love gte 60>>
+						<<streetedenworried>>
+					<<else>>
+						<<streetedenangry>>
+					<</if>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 100>>
+				<<if !$weekly.streetPolice and crimeSumCurrent() gte 1000 and !$worn.lower.type.includes("naked")>>
+					<<streetpolice>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 110>>
+				<<if $worn.neck.collared is 1>>
+					<<streetcollared>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 120>>
+				<<if $leftarm is "bound" or $rightarm is "bound">>
+					<<streetbound>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 130>>
+				<<if $worn.lower.name is "towel" or $worn.lower.name is "large towel bottom">>
+					<<streetlowertowel>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 140>>
+				<<if $worn.upper.name is "towel" or $worn.upper.name is "large towel">>
+					<<streetuppertowel>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<<elseif $dangerevent lte 150>>
+				<<if crimeSumCurrent() gte 5000>>
+					<<streetwanted>>
+				<<else>>
+					<<eventsstreetnight>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<eventsstreetnight>>
+		<</if>>
+	<<else>>
+		<<if $exposed gte 1>>
+			<<if $bus is "residential">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<residentialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<residentialex2>>
+				<<else>>
+					<<residentialex3>>
+				<</if>>
+			<<elseif $bus is "commercial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<commercialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<commercialex2>>
+				<<else>>
+					<<commercialex3>>
+				<</if>>
+			<<elseif $bus is "industrial">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<industrialex1>>
+				<<elseif $dangerevent lte 20>>
+					<<industrialex2>>
+				<<else>>
+					<<industrialex3>>
+				<</if>>
+			<<elseif $bus is "park">>
+				<<set $dangerevent to random(1, 30)>>
+				<<if $dangerevent lte 10>>
+					<<parkex1>>
+				<<elseif $dangerevent lte 20>>
+					<<parkex2>>
+				<<else>>
+					<<parkex3>>
+				<</if>>
+			<<else>>
+				<<set $dangerevent to random(1, 20)>>
+				<<if $dangerevent lte 10>>
+					<<streetexday1>>
+				<<elseif $dangerevent lte 20>>
+					<<streetexday2>>
+				<</if>>
+			<</if>>
+
+		<<elseif $NPCName[$NPCNameList.indexOf("Avery")].state isnot "dismissed" and $averyseen isnot 1 and Time.weekDay is 7 and Time.dayState is "day" and ($scienceproject is "won" or $scienceproject is "done" or $NPCName[$NPCNameList.indexOf("Avery")].init is 1)>>
+			<<set $averyseen to 1>>
+			<<streetavery>>
+		<<elseif fameTotal() gte 3000 and $photo_known is undefined>>
+			<<set $photo_known to 1>>
+			<<street_niki>>
+			<<set $niki_seen to "street">>
+		<<elseif $rng gte 52>>
+			<<set $dangerevent to random(1, 210)>>
+			<<if $dangerevent lte 10>>
+				<<if $exhibitionismrun is undefined and $exhibitionismrunon is 1 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer2>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 2 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer3>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon is 3 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer4>>
+				<<elseif $exhibitionismrun is undefined and $exhibitionismrunon isnot 1 and Time.days gte 8 and ($challengetimer lte 0 or $challengetimer is undefined)>>
+					<<streetexoffer>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 18>>
+				<<if $NPCName[$NPCNameList.indexOf("Whitney")].state is "dungeon" and $whitneyposter isnot 1>>
+					<<whitneyposter>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 27>>
+				<<if $hallucinations gte 2 and $tentacledisable is "f">>
+					<<streettentacle>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 36>>
+				<<if $fame.sex gte random(1, 1000)>>
+					<<streetsexfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 45>>
+				<<if $fame.rape gte random(1, 1000)>>
+					<<streetrapefame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 54>>
+				<<if $fame.bestiality gte random(1, 1000)>>
+					<<streetbestialityfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 63>>
+				<<if $fame.prostitution gte random(1, 1000)>>
+					<<streetprostitutionfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 72>>
+				<<if $fame.pregnancy gte random(1, 1000)>>
+					<<streetpregnancyfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 81>>
+				<<if $fame.exhibitionism gte random(1, 1000)>>
+					<<streetexhibitionismfame>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 90>>
+				<<if $syndromeeden is 1 and (($edenfreedom isnot 2 or $edenCagedEscape) and $edendays gte 7) or ($edenfreedom gte 2 and $edendays gte 21)>>
+					<<streetedenrage>>
+				<<elseif ($edenfreedom is 1 and $edendays gte 2) or ($edenfreedom gte 2 and $edendays gte 8)>>
+					<<if $edenfreedom gte 2 and $NPCName[$NPCNameList.indexOf("Eden")].love gte 60>>
+						<<streetedenworried>>
+					<<else>>
+						<<streetedenangry>>
+					<</if>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 100>>
+				<<if !$weekly.streetPolice and crimeSumCurrent() gte 1000 and !$worn.lower.type.includes("naked")>>
+					<<streetpolice>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 110>>
+				<<if $worn.neck.collared is 1>>
+					<<streetcollared>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 120>>
+				<<if $leftarm is "bound" or $rightarm is "bound">>
+					<<streetbound>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 130>>
+				<<if $worn.lower.name is "towel" or $worn.lower.name is "large towel bottom">>
+					<<streetlowertowel>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 140>>
+				<<if $worn.upper.name is "towel" or $worn.upper.name is "large towel">>
+					<<streetuppertowel>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 150>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1>>
+					<<streetbodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 160>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1 and $skin[_bodypart].special is "prostitution">>
+					<<streetwhorebodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 170>>
+				<<if crimeSumCurrent() gte 5000>>
+					<<streetwanted>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 180>>
+				<<bodywritingExposureCheck true>>
+				<<if _bodywriting_exposed is 1 and $skin[_bodypart].special is "criminal">>
+					<<streetcriminalbodywriting>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 190>>
+				<<if $bus is "domus" or $bus is "danube">>
+					<<streetorphancookie>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<<elseif $dangerevent lte 200>>
+				<<streetstray>>
+			<<elseif $dangerevent lte 210>>
+				<<if $condomLvl gte 1 and ["wolf", "nightingale", "cliff", "starfish", "high"].includes($bus) and Time.days gte 4>>
+					<<streetabstinence>>
+				<<else>>
+					<<eventsstreetday>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<<eventsstreetday>>
+		<</if>>
+	<</if>>
+	<<if $eventforced>>
+		<<unset $eventforced>>
+	<</if>>
+<</widget>>
+
+<<widget "pantsdownscene">>
+	<<npc Whitney>><<person1>>
+	<<if $leftarm is "bound" and $rightarm is "bound">>
+		"骚货，是你吗？" 你转过身，看到惠特尼正沿着人行道向你走来。
+		<br><br>
+		"我就觉得是你！你怎么被绑成了这样？"
+		<br><br>
+		<<He>>把你转过来，看到你的手腕被绑在一起。<<He>>沉默了几秒后才开口说话。
+		<br><br>
+		"我倒是有了个主意。别动。"
+		<br><br>
+		你还没来得及想<<he>>是什么意思，感觉到<<his>>的手指伸进了你的腰带里。惠特尼把你的<<bottoms>>往下拉时，你惊呼起来。
+		<br><br>
+	<<else>>
+		你突然听到了惠特尼的声音。"嘿，小骚货！站着别动！"
+		<br><br>
+		你转过身来，看到惠特尼向你走来，<<his>>的眼睛里流露出调皮的神情。你准备好迎接<<he>>的任何计划。"别动，我想试试东西。"
+		<br><br>
+		<<He>>把<<his>>的手伸向你的裤腰带。
+		<br><br>
+	<</if>>
+<<link [[保持不动|High Public Pants Down Still]]>><<trauma 6>><<stress 6>><<sub 1>><<npcincr Whitney dom 1>><</link>><<gstress>><<gtrauma>><<gdom>>
+<br>
+<<if $leftarm isnot "bound" and $rightarm isnot "bound">>
+	<<link [[把惠特尼的手拍开|High Public Pants Down Push]]>><<set $fightstart to 1>><<def 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+<<else>>
+	<span class="blue">双臂被绑，你没法阻止<<him>>。</span>
+<</if>>
+<</widget>>
+
+<<widget "street_alley_detour">>
+	当你在大街上行走时，你看到了前面闪烁着人们熟知的蓝色警灯。
+	<br><br>
+
+	你逐渐靠近，发现交叉路口被一起仍在清理中的车祸堵住了。人行横道暂时关闭了。你可以等待有关部门完成清理工作，或者从<<if $bus isnot "park" or $bus isnot "nightingale">>附近的小巷<<else>>公园<</if>>绕道。
+	<br><br>
+
+	<<if $bus is "domus" or $bus is "danube" or $bus is "barb" or $bus is "connudatus">>
+		<<link[[绕道而行|Residential alleyways]]>><</link>>
+	<<elseif $bus is "cliff" or $bus is "high" or $bus is "wolf" or $bus is "harvest">>
+		<<link[[绕道而行|Commercial alleyways]]>><</link>>
+	<<elseif $bus is "oxford" or $bus is "mer" or $bus is "elk">>
+		<<link[[绕道而行|Industrial alleyways]]>><</link>>
+	<<elseif $bus is "starfish" or $bus is "nightingale">>
+		<<link[[绕道而行|Park]]>><</link>>
+	<</if>>
+	<br>
+
+	<<switch $bus>>
+		<<case "nightingale">>
+			<<link[[等待 (0:20)|Nightingale Street]]>><<pass 20>><</link>>
+		<<case "domus">>
+			<<link[[等待 (0:20)|Domus Street]]>><<pass 20>><</link>>
+		<<case "elk">>
+			<<link[[等待 (0:20)|Elk Street]]>><<pass 20>><</link>>
+		<<case "high">>
+			<<link[[等待 (0:20)|High Street]]>><<pass 20>><</link>>
+		<<case "starfish">>
+			<<link[[等待 (0:20)|Starfish Street]]>><<pass 20>><</link>>
+		<<case "barb">>
+			<<link[[等待 (0:20)|Barb Street]]>><<pass 20>><</link>>
+		<<case "connudatus">>
+			<<link[[等待 (0:20)|Connudatus Street]]>><<pass 20>><</link>>
+		<<case "wolf">>
+			<<link[[等待 (0:20)|Wolf Street]]>><<pass 20>><</link>>
+		<<case "harvest">>
+			<<link[[等待 (0:20)|Harvest Street]]>><<pass 20>><</link>>
+		<<case "oxford">>
+			<<link[[等待 (0:20)|Oxford Street]]>><<pass 20>><</link>>
+		<<case "danube">>
+			<<link[[等待 (0:20)|Danube Street]]>><<pass 20>><</link>>
+		<<case "mer">>
+			<<link[[等待 (0:20)|Mer Street]]>><<pass 20>><</link>>
+		<<case "cliff">>
+			<<link[[等待 (0:20)|Cliff Street]]>><<pass 20>><</link>>
+		<<case "park">>
+			<<link[[等待 (0:20)|Park]]>><<pass 20>><</link>>
+	<</switch>>
+
+<</widget>>
+
+<<widget "eventsstreetday">>
+	<<set $dangerevent to random(1, 190)>>
+	<<rng>>
+	<<if $location is "alley" and !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $daily.whitney.park is undefined>>
+		<<set $bullytimer to 0>>
+		<<eventsWhitneyStreet>>
+	<<elseif !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $bus is "high" and $dangerevent lte 30 and C.npc.Whitney.dom gte 10>>
+		<<set $bullytimer to 0>>
+		<<pantsdownscene>>
+	<<elseif $rng lte 10 and $worn.feet.type.includes("heels") and currentSkillValue("feetskill") lt $worn.feet.reveal>>
+		<<streetheeltrip>>
+	<<elseif $rng gte 91>>
+		<<street1>>
+	<<elseif $dangerevent lte 10>>
+		<<streetfamerape>>
+	<<elseif $dangerevent lte 15 and $location isnot "alley" and $bus isnot "park">>
+		<<street_alley_detour>>
+	<<elseif $dangerevent lte 20>>
+		<<streetbox>>
+	<<elseif $dangerevent lte 30>>
+		<<street8>>
+	<<elseif $dangerevent lte 40>>
+		<<street9>>
+	<<elseif $dangerevent lte 50>>
+		<<street7>>
+	<<elseif $dangerevent lte 55>>
+		<<street10>>
+	<<elseif $dangerevent lte 60>>
+		<<streetrocks>>
+	<<elseif $dangerevent lte 65>>
+		<<street6>>
+	<<elseif $dangerevent lte 75>>
+		<<street5>>
+	<<elseif $dangerevent lte 85>>
+		<<street4>>
+	<<elseif $dangerevent lte 95>>
+		<<street2>>
+	<<elseif $dangerevent lte 96>>
+		<<street3>>
+	<<elseif $dangerevent lte 106>>
+		<<streetbullies>>
+	<<elseif $dangerevent lte 116>>
+		<<streetfootbridge>>
+	<<elseif $dangerevent lte 126>>
+		<<streetbottomgrope>>
+	<<elseif $dangerevent lte 132>>
+		<<shadyFan>>
+	<<elseif $dangerevent lte 142>>
+		<<streetvan>>
+	<<elseif $dangerevent lte 152>>
+		<<streetfriendly1>>
+	<<elseif $dangerevent lte 162>>
+		<<eventAmbient>>
+		<<destinationeventend>>
+	<<elseif $dangerevent lte 172>>
+		<<streetdog>>
+	<<elseif $dangerevent lte 176>>
+		<<streetexshow>>
+	<<elseif $dangerevent lte 180>>
+		<<streetmodelshow>>
+	<<elseif $dangerevent lte 184>>
+		<<streetnpcflash>>
+	<<elseif $dangerevent lte 190>>
+		<<if ($bus is "domus" or $bus is "danube") and $weather is "rainy" and ($upperwetstage is 1 or $lowerwetstage is 1)>>
+			<<rainyDayHarass>>
+		<<else>>
+			<<eventAmbient>>
+			<<destinationeventend>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsstreetnight">>
+	<<set $dangerevent to random(1, 158)>>
+	<<rng>>
+	<<if $location is "alley" and !Time.schoolDay and $bullytimer gte $rng and C.npc.Whitney.init is 1 and !["dungeon", "pillory"].includes(C.npc.Whitney.state) and $daily.whitney.park is undefined>>
+		<<set $bullytimer to 0>>
+		<<eventsWhitneyStreet>>
+	<<elseif $rng lte 10 and $worn.feet.type.includes("heels") and currentSkillValue("feetskill") lt $worn.feet.reveal>>
+		<<streetheeltrip>>
+	<<elseif $rng gte 91>>
+		<<street1>>
+	<<elseif $dangerevent lte 10>>
+		<<streetbox>>
+	<<elseif $dangerevent lte 20>>
+		<<street8>>
+	<<elseif $dangerevent lte 30>>
+		<<street9>>
+	<<elseif $dangerevent lte 40>>
+		<<street7>>
+	<<elseif $dangerevent lte 45>>
+		<<streetrocks>>
+	<<elseif $dangerevent lte 50>>
+		<<street6>>
+	<<elseif $dangerevent lte 55>>
+		<<street10>>
+	<<elseif $dangerevent lte 65>>
+		<<street5>>
+	<<elseif $dangerevent lte 75>>
+		<<street4>>
+	<<elseif $dangerevent lte 85>>
+		<<streetfamerape>>
+	<<elseif $dangerevent lte 95>>
+		<<street2>>
+	<<elseif $dangerevent lte 105>>
+		<<street3>>
+	<<elseif $dangerevent lte 107>>
+		<<streetnight1>>
+	<<elseif $dangerevent lte 109>>
+		<<streetnight2>>
+	<<elseif $dangerevent lte 119>>
+		<<streetbottomgrope>>
+	<<elseif $dangerevent lte 121>>
+		<<streetlurker>>
+	<<elseif $dangerevent lte 131>>
+		<<streetvan>>
+	<<elseif $dangerevent lte 136>>
+		<<streetexshow>>
+	<<elseif $dangerevent lte 139>>
+		<<streetkidnap>>
+	<<elseif $dangerevent lte 149>>
+		<<eventAmbient>>
+		<<destinationeventend>>
+	<<elseif $dangerevent lte 154>>
+		<<streetmodelshow>>
+	<<elseif $dangerevent lte 158>>
+		<<streetnpcflash>>
+	<</if>>
+<</widget>>
+
+<<widget "streeteffects">>
+	<<if !$possessed>>
+		<<if wraithCanHunt() and $wraith.state and $wraith.hunt is 0 and $wraith.timer gte (random(0, 60))>>
+			<<wHunt "town">>
+		<<elseif $wraith.hunt>>
+			<<wHunt "town">>
+		<<elseif $kylar and $kylar.timer.street gte ($rng + 65) and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and $kylarwatched isnot 1 and $exposed lte 0>>
+			<<set $kylar.timer.street to 0>><<set $kylarwatchedtimer to 2>>
+			你打了个寒颤，这是来自某种原始本能的警告。<span class="blue">有什么东西正在暗处注视着你。</span>
+			<<set $kylarwatched to 1>><<set $eventskip to 1>>
+		<<elseif $kylarwatched is 1>>
+			<<if $exposed gte 1 or $NPCName[$NPCNameList.indexOf("Kylar")].state isnot "active" or $kylarwatchedtimer lte 0>>
+				<<set $kylarwatched to 0>>
+			<<else>>
+				<span class="blue">有什么东西正在暗处注视着你。</span>
+			<</if>>
+		<</if>>
+		<<wTimerProgress>>
+	<</if>>
+<</widget>>
+
+<<widget "loiter">>
+	<<add_link "<<loitericon>><<link [[消磨时间 (0:15)|$passage]]>><<pass 15>><</link>><br>">>
+	<<hideDisplay>>
+<</widget>>
+
+<<widget "street_rescue">>
+	<<generate1>><<person1>>
+	一个<<person>>来到你的身侧。
+	<<if $exposed gte 1>>
+		<<covered>><<He>>移开了<<his>>的眼睛。
+	<</if>>
+	"我听到了尖叫声，"<<he>>说，"你还好吗？你认识附近的人吗，或者我可以带你去什么地方？"<<he>>问。
+	<br><br>
+
+	<<link [[说你没事|Street Rescue Fine]]>><</link>>
+	<br>
+	<<link [[请求搭车去孤儿院 (0:05)|Street Rescue Orphanage]]>><<pass 5>><</link>>
+	<br>
+	<<if $farm_stage gte 7>>
+		<<link [[请求搭车去农场 (0:15)|Street Rescue Farm]]>><<pass 15>><</link>>
+		<br>
+	<</if>>
+	<<if $trauma gte $traumamax * 0.8>>
+		<<link [[崩溃 (1:00)|Street Rescue Break]]>><<pass 60>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "monstrance_accost">>
+	<<if $per_npc.bishop>>
+		<<loadNPC 0 "bishop">>
+	<<else>>
+		<<generateConfessor 1>>
+		<<saveNPC 0 "bishop">>
+	<</if>>
+	<<person1>>
+	<<if $temple_rank is undefined or $temple_rank is "prospective">>
+		"孩子，"
+	<<else>>
+		"<<temple_Title "dark">>,"
+	<</if>>
+	一个声音从阴暗的小巷里传来。<<He>>走进光线里，是一个身披黑袍的身影。<<His>>的兜帽遮住了<<his>>的眼睛。
+	<<if $temple_confessor_intro>>
+		是主教，<<His>>的两个同伴从阴影中走出。
+	<<else>>
+		"不要害怕，我来自神殿。"<<his>>的脖子上确实挂着一个印有神殿标志的吊坠。又有两个身披黑袍的身影从阴影中出现，站在<<him>>两侧。
+	<</if>>
+	<br><br>
+
+	"我听说你对某处的<span class="pink">神龛</span>进行了调查？听说它是在一个庄园里的，能告诉我那里的居民是什么样的人吗？他们有没有吓到你？"<<gstress>><<stress 6>>
+	<br><br>
+
+	<<link [[说那里没什么奇怪的|Street Monstrance Nothing]]>><</link>>
+	<br>
+	<<link [[说那里有怪物，但你没想管|Street Monstrance Brave]]>><</link>>
+	<br>
+	<<link [[说那里有怪物，而且超吓人的|Street Monstrance Scary]]>><</link>>
+	<br>
+	<<link [[什么都不说|Street Monstrance Silent]]>><</link>>
+	<br>
+<</widget>>
+
+<<widget "text_pillory_release_fail_strip">>
+	我认为那是毒品。"
+	<br><br>
+	"是啊，"<<person4>><<person>>咧嘴一笑，看了看你的身体。"绝对是毒品。"
+	<br><br>
+	管事的<<person2>><<person>>点点头，转向人群。<br>
+	"大家听着，"<<he>>说，"这个<<girl>>的举止非常奇怪。我怀疑<<pshe>>已经嗑药嗑得过嗨了。
+	现在，如果有人真的看到<<phim>>把毒品藏在<<pher>>身上……那就有理由马上对<<phim>>进行脱衣搜身了，我会这么说。
+	事实上，根据护理责任，我认为我们有义务这样做。为了<<pher>>的医疗安全。所以，我想没有人还有什么要告诉我的吧。"
+	<br><br>
+	<<set _exhib_bar to random(15,35)>>
+	<<if $player.gender_appearance is "m">>
+		人群中有一个人认为他们记得看到你往内裤里塞了一袋可疑的粉末。而另一个人确认了这件事。
+		<<if $worn.under_lower.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				看到有人如此明目张胆地对警察撒谎，你感到很震惊。你连内裤都没穿！
+			<<elseif $speech_attitude is "bratty">>
+				"这<<print either("显然","明显")>>是个谎言，"
+				<<if $exhibitionism gte _exhib_bar>>
+					你怒气冲冲地拉下你$worn.lower.cn_name_cap的后边，露出你的屁股。"没穿内裤。这能看见吧？！"
+				<<else>>
+					你厉声说道："我连底裤都没穿！"
+				<</if>>
+				<br>
+				从大家的表情来看，你意识到澄清事实可能对你的情况没什么帮助。
+			<<else>>
+				"但那显然是谎言啊，警官！"
+				<br><br>
+				<<person2>><<person>>耸耸肩。"那对我来说不怎么明显。"
+				<br><br>
+				"我没有，"你小声说，"我连内裤都没穿。"
+				<br>
+				从<<his>>脸上的表情可以看出，在这里澄清事实对你的情况没有任何帮助。
+			<</if>>
+		<</if>>
+	<<else>>
+		人群中有一个人记得看到你把一袋可疑的粉末塞进了胸罩。另一个人确认了这点，但认为你把它藏在了内裤里。
+		<<if $worn.under_lower.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				看到有人如此明目张胆地对警察撒谎，你很震惊。你连内裤都没穿！
+			<<elseif $speech_attitude is "bratty">>
+				"这<<print either("显然","明显")>>是个谎言，"
+				<<if $exhibitionism gte _exhib_bar>>
+					你怒气冲冲地拉下你$worn.lower.cn_name_cap的后襟，短暂地露出你的屁股。"看到了吗？没有内裤！"
+				<<else>>
+					你厉声说道："我连内裤都没穿！"
+				<</if>>
+				<br>
+				从大家的表情来看，你突然对自己"澄清事实"的小聪明产生了怀疑。
+			<<else>>
+				"但那显然是谎言啊，警官！"
+				<br><br>
+				<<person2>><<person>>耸耸肩。"那对我来说不怎么明显。"
+				<br><br>
+				"我没有，"你小声说，"我连内裤都没穿。"
+				<br>
+				从<<his>>的表情来看，你觉得澄清事实对你的情况毫无帮助。
+			<</if>>
+		<<elseif $worn.under_upper.type.includes("naked")>><br>
+			<<if $speech_attitude is "meek">>
+				看到有人如此明目张胆地对警察撒谎，你感到很震惊。你连胸罩都没穿！
+			<<elseif $speech_attitude is "bratty">>
+				"这<<print either("显然","明显")>>是个谎言，"
+				<<if $exhibitionism gte _exhib_bar>>
+					你气坏了，你<<if $breastsize lte 3>>试着<</if>>不受$worn.upper.cn_name_cap拘束地抖动你的<<breasts>>。"没有胸罩！不会这都看不见吧？"
+				<<else>>
+					你厉声说道："我连胸罩都没穿！"
+				<</if>>
+				<br>
+				从大家的表情来看，你突然对自己"澄清事实"的小聪明产生了怀疑。
+			<<else>>
+				"但那显然是谎言啊，警官！"
+				<br><br>
+				<<person2>><<person>>耸耸肩。"我倒是没看出来。"
+				<br><br>
+				"我没有，"你小声说，"我甚至没穿胸罩。"
+				<br>
+				从<<his>>的表情来看，你觉得澄清事实对你的情况毫无帮助。
+			<</if>>
+		<</if>>
+	<</if>>
+	<br><br>
+	"我听够了。"<<person2>><<person>>严肃地点点头。向你眨眼。
+	<br><br>
+	<<person4>><<person>>抓着你。
+	<br><br>
+<</widget>>

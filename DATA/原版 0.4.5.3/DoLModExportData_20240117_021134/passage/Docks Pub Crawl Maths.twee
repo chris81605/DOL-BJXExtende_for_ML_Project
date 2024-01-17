@@ -1,0 +1,68 @@
+:: Docks Pub Crawl Maths []
+<<set $outside to 0>><<set $location to "pub">><<dockeffects>><<effects>>
+
+<<if $phase2 is 0>>
+
+	<<if random(1, 2) is 2>>
+		<<set $dockquizhome += 1>>
+
+		你让你的同事们回答问题。他们写下了答案，把答案纸折好递给了老板。水手们也如法炮制。
+		<br><br>
+
+		"码头工人队得一分，"老板说道。你和你的同事们一起欢呼。
+		<<lstress>><<stress -1>>
+		<br><br>
+
+	<<else>>
+
+		你让你的同事们回答问题。他们写下了答案，把答案纸折好递给了老板。水手们也如法炮制。
+		<br><br>
+
+		老板读出了你的答案。"码头工人队不得分。"你和同事们一起嘟囔着。
+		<br><br>
+
+	<</if>>
+
+<<elseif $phase2 is 1>>
+
+	<<if currentSkillValue('maths') gte random(1, 1000)>>
+		<<set $dockquizhome += 1>>
+
+		你写下了答案，把答案纸折好递给了老板。水手们也如法炮制。
+		<br><br>
+
+		"码头工人队得一分，"老板说道。你和你的同事们一起欢呼。
+		<<lstress>><<stress -1>>
+		<br><br>
+
+	<<else>>
+
+		<<if currentSkillValue('maths') lte 300>>你没有信心，但还是写下了答案并折起来递给酒吧老板。<<else>>你写下答案并折好递给酒吧老板。<</if>> 水手们也如法炮制。
+		<br><br>
+
+		老板读出了你的答案。"码头工人队不得分。"你和同事们一起嘟囔着。<<if currentSkillValue('maths') gte 700>>你确信你明明答对了。<</if>>
+		<br><br>
+
+	<</if>>
+
+<<else>>
+
+	你说服了你的同事，表示没有人比你更懂答案，然后一通乱写。你把答案纸折好递给了老板。
+	<br><br>
+
+	老板读出了你的答案。"码头工人队不得分。"你和同事们一起嘟囔着。真是"意外"。
+	<br><br>
+
+<</if>>
+老板读出了水手队的答案。
+<<if random(1, 2) is 2>><<set $dockquizaway += 1>>
+	"水手队得一分。"水手那桌传来欢呼声。
+	<br><br>
+<<else>>
+	"很遗憾，无人得分。"他们嘟囔了几声。
+	<br><br>
+
+<</if>>
+
+<<link [[继续|Docks Pub Crawl Quiz]]>><</link>>
+<br>

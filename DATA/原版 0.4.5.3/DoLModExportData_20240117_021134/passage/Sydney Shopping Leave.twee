@@ -1,0 +1,40 @@
+:: Sydney Shopping Leave []
+<<set $outside to 1>><<set $location to "town">><<effects>><<run statusCheck("Sydney")>><<sydneySchedule>>
+<<if _sydney_location is "science">>
+	<<set $location to "park">>
+	你和悉尼再次抄近路穿过公园。<<He>>冲进学校的前门，跟在你后面直奔西里斯的教室。
+	<br><br>
+	<<link [[继续|Science Classroom]]>><<endevent>><<set $daily.sydney.scienceWalk to 1>><</link>>
+	<br>
+<<elseif Time.schoolDay and $sydneyScience and ((Time.hour is 8 and Time.minute gte 44) or Time.hour is 9)>>
+	<<set $location to "park">>
+	你和悉尼再次抄近路穿过公园。<<He>>冲进学校的前门，跟在你后面直奔西里斯的教室。
+	<br><br>
+	<<link [[继续|Science Classroom]]>><<endevent>><<set $daily.sydney.scienceWalk to 1>><</link>>
+	<br>
+<<elseif _sydney_location is "shop" or _sydney_location is "home">>
+	你和悉尼一起离开了购物中心。<<if $sydneyromance is 1>><<if _sydneyStatus.includes("corrupt")>><<He>>轻轻挽住了你的手<<else>>你轻轻挽住了<<his>>的手<</if>>。<<takeHandholdingVirginity "Sydney" "romantic">><</if>>
+	<br><br>
+	"我现在得走了，谢谢你陪我！"<<if $sydneyromance is 1>><<He>>吻了你的脸颊，然后向你挥手告别<<else>><<he>>站了一会儿，背对着你挥手告别<</if>>。
+	<br><br>
+	<<link [[继续|High Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $exit is "library">>
+	<<set $location to "school">><<set $bus to "schoollibrary">><<schooleffects>>
+	你和悉尼一起离开了购物中心，向着牛津街走去。当你们到达图书馆之后，<<He>>坐到了<<his>>的椅子上。"谢谢你带我去那儿！我真的很开心。"
+	<br><br>
+	<<sydneyOptions>>
+<<elseif $exit is "temple">>
+	<<set $location to "temple">><<set $bus to "wolf">>
+	你和悉尼一起离开了购物中心，向着狼街走去。你们平安的抵达了神殿。"谢谢你带我去那儿！我真的很开心。"
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	你和悉尼一起离开了购物中心，"谢谢你带我去！我现在必须回神殿了。<<if $sydneyromance is 1>>你……介意和我一起走过去吗？<<else>>我还有很多事情要做，你愿意和我一起来么？<</if>>"
+	<br><br>
+	<<link [[陪悉尼到神殿 (0:25)|Sydney Leave Temple]]>><<pass 25>><<npcincr Sydney love 1>><<stress -3>><</link>><<glove>><<lstress>>
+	<br>
+	<<link [[离开|Sydney Shopping Leave 2]]>><</link>>
+	<br>
+<</if>>
+<<unset $exit>>

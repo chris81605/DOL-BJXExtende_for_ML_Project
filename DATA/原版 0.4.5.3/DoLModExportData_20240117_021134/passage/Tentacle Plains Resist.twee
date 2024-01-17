@@ -1,0 +1,41 @@
+:: Tentacle Plains Resist []
+<<location "tentworld">><<effects>>
+<<if $tentacleangel is undefined>>
+	<<set $tentacleangel to 0>>
+	你跪下并反思将你带到这个地方的事件。你对周围的环境感到完全厌恶，但你找到了继续前进的意志力。这些恐怖不会阻止你。
+	<<llarousal>><<arousal -1200>>
+	<br><br>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<elseif $tentacleangel is 0>>
+	<<set $tentacleangel to 1>>
+	当你在贫瘠的平原上冥想时，你周围的地面似乎变得更加明亮。你对自己的处境感觉好多了。
+	<<lstress>><<stress -6>><<llarousal>><<arousal -1200>>
+	<br><br>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<elseif $tentacleangel is 1>>
+	<<set $tentacleangel to 2>>
+	在你的脑海深处，你听到远处的合唱团在唱一个音符。你头顶的光环越来越亮，你身上的淫荡暖意消散。<span class="gold">这个地方容不下你。</span>
+	<<lllarousal>><<arousal -2400>>
+	<br><br>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<elseif $tentacleangel is 2>>
+	<<set $tentacleangel to 3>>
+	你是一盏明灯。抓住你脚的触手从你身边缩回。你在这片荒原之上，它不值得你光彩照人。你不断地对自己重复那句话。<span class="gold">这个地方容不下你。</span>
+	<<lllarousal>><<arousal -2400>>
+	<br><br>
+	<<link [[继续|Tentacle Plains]]>><</link>>
+	<br>
+<<else>>
+	你的光环发出的光很刺眼。你在这个地方之上。你在这个地方之上。你大声重复咒语。地面离你越来越远。你看不到触手。来自你光环的光笼罩着一切。你感觉自己飞得越来越高，黑暗的天空对你的上升没有任何阻力。你越飞越高。
+	<br><br>
+	<<if $tentacleEntrance is "asylum">>
+		<<asylumescape>>
+	<</if>>
+	<<endevent>><<tentacleworldend>>
+	<<set $forest to random(50, 100)>>
+	<<link [[继续|Mirror]]>><<set $location to "home">><</link>>
+	<br>
+<</if>>

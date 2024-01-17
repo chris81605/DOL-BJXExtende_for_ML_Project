@@ -1,0 +1,28 @@
+:: Schism Awakening []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<controlloss>>
+	<<molested>>
+	<<tentaclestart 18 15>>
+	<<set $timer to 30>>
+<</if>>
+紫雾在室内盘旋。<<hallucinogen 10>><<ghallucinogens>>
+<br>
+
+<<statetentacles>>
+
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2) or $timer lte 0>>
+	<span id="next"><<link [[继续|Schism Awake]]>><</link>></span><<nexttext>>
+<<elseif $pain gte 100 and $willpowerpain is 0 or $stress gte $stressmax or $trauma gte $traumamax>>
+	<span id="next"><<link [[继续|Schism Failure]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Schism Awakening]]>><</link>></span><<nexttext>>
+<</if>>

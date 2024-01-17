@@ -1,0 +1,101 @@
+:: Street Car Sex Police []
+<<set $outside to 0>><<effects>>
+<<unset $street_car_police>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $prostitutionstat += 1>><<fameprostitution 1>>
+	<<if crimeSumCurrent() gte 2000 and $rng % 2>>
+		<<if $enemyanger lt 1 and crimeSumCurrent() lte 4000 and $beauty gte ($beautymax / 7) * 5>>
+			<<person1>><<person>>看起来很矛盾。最后<<he>>开口。
+			<br>
+			"听着，"<<he>>说道，"我是警方的人。目标是你。我们都知道你被指证的犯罪和卖淫很容易就能把你逮捕归案。所……所以这。"
+			<br><br>
+			"听好我……"<<he>>说道："你是个可爱、漂亮的<<if $player.gender_appearance is "m">>男孩<<else>>女孩<</if>>，你现在这样挺好。我喜欢。很喜欢。而且还没人知道我在抓你，所以……我们能假装这一切没发生过，对吧。"
+			<br><br>
+			<<if $stealtarget isnot "">>
+				"你已经自己从我的钱包里把钱拿走了，我们也同意你已取得的报酬。"
+			<<else>>
+				"这是你的报酬。"
+				<<tipreceive>>
+			<</if>>
+			<br><br>
+			"小心点。追你的人比你想得还要靠近。"
+			<br>
+			<<clotheson>>
+			<<endcombat>>
+			<<destinationeventend>>
+		<<else>>
+			<<person1>><<person>>深情地看着你。
+			<br>
+			"这么惊人的性爱我该给你多少钱？你自己开个价吧。"
+			<br><br>
+			<<if currentSkillValue('skulduggery') gte 700>>
+				<span class="gold">对亏了你的诡术与欺骗技巧，你有所警觉。车子，人，任何东西都不对劲。这里就像是一个局。</span>
+				<br><br>
+			<</if>>
+			<<link [[免费|Street Car Sex Entrap]]>><<set $phase to 0>><</link>>
+			<br>
+			<<link [[£50|Street Car Sex Entrap]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[£100|Street Car Sex Entrap]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[£150|Street Car Sex Entrap]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[£200|Street Car Sex Entrap]]>><<set $phase to 2>><</link>>
+			<br>
+			<<link [[£500|Street Car Sex Entrap]]>><<set $phase to 2>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		"太棒了。"
+		<br>
+		<<He>>微笑着抚摸你的脸颊，随后向你展示警徽。
+		<br>
+		"这应该是不用付钱的，对吧？那可就是卖淫了。你这样的<<girl>>应该不是娼妓吧？否则我就必须把你抓进去了。"
+		<br><br>
+		<<if $submissive lte 500>>
+			<<link [[要求付款|Street Car Sex Entrap]]>><<set $phase to 3>><<crimeUp 50 "prostitution">><</link>><<crime "prostitution">>
+			<br>
+		<</if>>
+		<<link [[免费|Street Car Sex Entrap]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+<<elseif $finish is 1>>
+	"很好，我希望你没有想要得到任何东西。"<<He>>将你从车里推出，开着车走了。<<tearful>>你挣扎着站了起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<destinationeventend>>
+<<else>> /*only triggers if event goes nonconsens and fight*/
+	<<if $rng % 2>>
+		你成功将<<person>>击退，获得了逃跑的时间。<<tearful>>你离开车子，逃进小巷里。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<destinationeventend>>
+	<<else>>
+		你成功将<<person>>击退，你想要逃跑，<span class="red">但是打不开车门。</span>
+		<br>
+		<<person>>抓住你，随后迅速地将你两臂锁住。
+		<br><br>
+		"你刚刚袭警了，"<<he>>把什么东西拷在你的双臂上，将它们束缚在你身后。
+		<br><br>
+		<<set $rightarm to "bound">><<set $leftarm to "bound">>
+		<<rng 50 100>>
+		<<if crimeSumCurrent() gt ($rng + ($enemyangermax - $enemyanger)) * 20>> /*more angry = more likely to arrest you for smaller crime value*/
+			"因为你的案底，关于我是怎么抓住你的事情上，没人会问太多尴尬的问题。我甚至还能拿到奖金。"
+			<br><br>
+			<<link [[继续|Street Car Sex Entrap]]>><<set $phase to 1>><</link>>
+			<br>
+			<<else>>
+			"今天是你的幸运日。我现在和上司的关系如履薄冰，如果我在这里逮捕你就要被问太多问题了。"
+			<br><br>
+			"我本能打你一顿，"<<He>>恶毒地笑了笑："你很幸运我是警察。我会放你走的，但是你的衣服要给我留作'证据'。"
+			<br><br>
+			<<He>>将你全裸地从车里推出。因为你的双臂仍被束缚着，你无法阻止自己撞到墙上。
+			<br><br>
+			"祝你回家愉快！"<<His>>的车发出刺耳的噪音离开。<<upperruined>><<lowerruined>><<underruined>>
+			<<endcombat>>
+			<<destinationeventend>>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,49 @@
+:: Widgets Pirates [widget]
+<<widget "pirate_watch">>
+	<<if _args[0]>>
+		<<if $pirate_watch is undefined>>
+			<<set $pirate_watch to 0>>
+		<</if>>
+		<<set $pirate_watch += _args[0]>>
+		<<set $pirate_watch to Math.clamp($pirate_watch, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "pirate_status">>
+	<<if _args[0]>>
+		<<if $pirate_status is undefined>>
+			<<set $pirate_status to 0>>
+		<</if>>
+		<<set $pirate_status += _args[0]>>
+		<<set $pirate_status to Math.clamp($pirate_status, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "events_pirates_deck">>
+<<cleareventpool>>
+<<if $pirate_rank is 1>>
+	<<addinlineevent "pirate_mate_deck_1" 1>>
+		
+	<</addinlineevent>>
+<<else>>
+
+<</if>>
+<<runeventpool>>
+<</widget>>
+
+<<widget "events_pirates_cabin">>
+
+<</widget>>
+
+<<widget "events_pirates_bilge">>
+
+<</widget>>
+
+<<widget "passoutpirates">>
+你把自己逼得太紧了，你眼前一黑。
+<br><br>
+<<link [[继续|Pirate Passout]]>><</link>>
+<br>
+<<pass 1 hour>>
+<<trauma 6>><<passout>>
+<</widget>>

@@ -1,0 +1,48 @@
+:: Kylar Tease 2 []
+<<effects>><<set _kylar to statusCheck("Kylar")>>
+<<set $daily.kylar.invite to ($bus is "kylarmanor" ? "manor" : $location)>>
+
+你再次靠近，把嘴唇紧贴在凯拉尔的脸颊上。当<<he>>微笑时，你可以感觉到<<his>>的脸在抽搐。你更进一步，用一只手将<<his>>的头固定住，然后再次亲吻<<his>>，这次吻的位置低一点，靠近下颌线。你不停地亲吻着，越过<<his>>的下巴，顺着脖颈一路往下。<<His>>的呼吸慢慢变得粗重。
+<br><br>
+
+你将另一只手放在<<his>>的<<print setup.npcClothesSets.find(item => item.name === _kylar.clothes.set).clothes.lower.desc>>上，正好位于<<his>>的胯部上，然后轻轻向下按压。<<He>>喘着粗气，你趁机开始吮吸<<his>>的颈部内侧。喘息变成了难耐的呻吟。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+	"我想让你更舒服些，凯拉尔，"你在<<his>>的耳边低声说道，"你愿意吗？"
+<<elseif $speech_attitude is "bratty">>
+	"我想和你做爱，凯拉尔，"你在<<his>>的耳边低语，然后轻轻咬了一下<<his>>的耳垂，"我要让你成为我的。"
+<<else>>
+	"我想触碰你，凯拉尔，"你在<<his>>的耳边低声说道，"全——部。"
+<</if>>
+<<promiscuity2>>
+
+<<if $bus is "kylarmanor">>
+	<<if _kylarStatus.includes("Lust")>>
+		凯拉尔呜咽着，把手放在你的肩膀上。"我，我想要你，"<<he>>说，"求求你求求你求求你——"<<He>>蹭了蹭你的手。
+	<<else>>
+		凯拉尔呜咽着，把手放在你的肩膀上。"我，我们现在就可以做，"<<he>>说，"只要你想，随时都可以。"
+	<</if>>
+<<else>>
+	<<if _kylarStatus.includes("Lust")>>
+		凯拉尔呜咽着，把手放在你的肩膀上。"我、我想要你，"<<he>>说，"我们去找一个隐蔽的地方，怎么样？"<<He>>蹭了蹭你的手。
+	<<else>>
+		凯拉尔呜咽着，把手放在你的肩膀上。"我们去找一个隐蔽的地方，怎么样？"<<he>>说，"你想去哪里都行，我陪着你。"
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $location is "school">>
+	<<link [[带凯拉尔去卫生间 (0:05)|Kylar Tease Bathroom]]>><<unset $kylar_action>><<pass 5>><</link>><<promiscuous2>>
+<<elseif $bus is "kylarmanor">>
+	<<link [[把凯拉尔带到床上|Manor Kylar Invite]]>><<unset $kylar_action>><<set $phase to 0>><</link>><<promiscuous2>>
+	<<if currentSkillValue('physique') gte $physiquesize>>
+		<br>
+		<<link [[公主抱凯拉尔|Manor Kylar Invite]]>><<unset $kylar_action>><<set $phase to 1>><<npcincr Kylar lust 10>><</link>><<promiscuous2>><<gglust>>
+	<</if>>
+<<else>>
+	<<link [[邀请凯拉尔去孤儿院 (0:15)|Kylar Invite]]>><<unset $kylar_action>><<pass 15>><</link>><<promiscuous2>>
+<</if>>
+<br>
+<<link [[拒绝|Kylar Tease 2 Decline]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 3>><</link>><<llove>><<ggksuspicion>>
+<br>

@@ -1,0 +1,58 @@
+:: English Play Kylar Follow []
+<<effects>>
+<<run statusCheck("Sydney")>>
+
+<<if $speech_attitude is "meek">>
+	"好吧……不过我们得先等一下，免得<<nnpc_he "Kylar">>发现我们。"
+<<elseif $speech_attitude is "bratty">>
+	"当然，这次就让<<nnpc_him "Kylar">>尝尝被跟踪是什么感觉吧。"
+<<else>>
+	"好吧，不如我们得先等一下。免得凯拉尔发现我们。"
+<</if>>
+悉尼犹豫了一下，不过最后还是点了点头。
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	你尽量混在人群中、躲在小巷里，避开凯拉尔的视线。<span class="green">你设法一路跟踪凯拉尔到了多瑙河街。</span>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	悉尼跟着你移动，差点在不平整的人行道上摔了一跤，几乎暴露了你们的踪迹。
+	<<if _sydneyStatus.includes("corrupt")>>
+		"你从哪学到这么好的跟踪技巧的？我以后走路得留意一点了。"<<he>>开玩笑地拍了拍你的脸颊后说道。
+	<<else>>
+		"希望我们看起来没太可疑，我们现在真的很像一对跟踪狂。"<<he>>紧张地笑道。
+	<</if>>
+	<br><br>
+
+	你看见凯拉尔消失在一个精致的拱门后面。你靠过去，看到了一座长满了藤蔓跟杂草，看起来荒废了的庄园。
+	悉尼花了点时间把气喘匀，然后看向了拱门。"<<nnpc_he "Kylar">>……不可能还住在这里吧？"你跟着悉尼的目光，注意到有块连接到大门上的石头上，刻有神殿的标志。
+	<br><br>
+
+	<<link [["\"还住在？\""|English Play Manor Talk]]>><</link>>
+	<br>
+
+<<else>>
+	你混在人群里，试着避开凯拉尔的视线，<span class="red">凯拉尔似乎注意到了你</span>。<<nnpc_He "Kylar">>穿过一条繁忙的街道，当你终于找到路径穿过去的时候<<nnpc_hes "Kylar">>已经消失了。<<npcincr Kylar rage 1>><<gksuspicion>>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	过了一会，悉尼追了上来。
+	"你追丢<<nnpc_him "Kylar">>了吗？"你点了点头。"那好吧，反正我们可能也有些越界了。如果凯拉尔可以这么轻松地摆脱我们，那<<nnpc_he "Kylar">>肯定可以平安回家的。"
+	<br><br>
+
+	悉尼似乎注意到了时间。
+	<<set $bus to "nightingale">>
+	<<sydneyOptionsLeave>>
+<</if>>

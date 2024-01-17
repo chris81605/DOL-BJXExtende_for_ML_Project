@@ -1,0 +1,77 @@
+:: Farm Spy []
+<<effects>>
+<<npc Alex>><<person1>>
+<<set $daily.farmAlexShowerSpy to true>>
+你偷偷溜到淋浴小屋前，把门推开。
+<<promiscuity1>>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<<earnFeat "I Spy">>
+	你从缝隙里偷看，看到了里面的艾利克斯。<<His>>正闭着眼睛，<span class="green"><<he>>没有注意到你。</span>
+	<br><br>
+
+
+	<<if $NPCList[0].gender is "f">>
+		<<if $NPCList[0].penis isnot "none">>
+			水流沿着<<his>>健美的身体流下，流过<<his>><<print $NPCList[0].breastsdesc>>和<<print $NPCList[0].penisdesc>>
+		<<else>>
+			水流沿着<<his>><<print $NPCList[0].breastsdesc>>流下，流过<<his>>健美的身体<<if npcBellyVisible("Alex")>>和<<his>>隆起的肚子<</if>>。
+		<</if>>
+	<<else>>
+		<<if $NPCList[0].penis isnot "none">>
+			水流沿着<<his>>健美的身体流下，流过<<his>><<print $NPCList[0].penisdesc>>。
+		<<else>>
+			水流沿着<<his>>健美的身体<<if npcBellyVisible("Alex")>>和<<his>>隆起的肚子<</if>>流下。
+		<</if>>
+	<</if>>
+
+	<<His>>的脸部、手臂和腿部的颜色比从阳光的暴晒中受到保护的部分要深得多。<<garousal>><<arousal 600>>
+	<br><br>
+
+	<<if (npcIsPregnant("Alex") and C.npc.Alex.pregnancy.selfKnowledge is true) or npcBellyVisible("Alex")>>
+		艾利克斯闭上眼睛，将双手放在<<his>>的肚子上，开始温柔地按摩它。
+
+		<<if pregnancyCountBetweenParents("Alex", "PC", true) is 0>>
+			<<if npcBellyVisible("Alex")>>
+				"你这样的小东西还真占了我不少空间呢，"
+
+			<<else>>
+				"我？当妈妈了？到现在还感觉有点不真实。"
+
+			<</if>>
+
+		<<else>>
+			<<if pregnancyCountBetweenParents("Alex","pc",true) gte 1>>
+				"真奇怪，这种感觉好像很怀念。像这样被充满的感觉。"
+
+			<<else>>
+				"希望你和你的<<if childrenCountBetweenParents("Alex","pc") is 1>>兄弟姐妹<<else>>兄弟姐妹们<</if>>能相处愉快，"
+
+			<</if>>
+
+		<</if>>
+
+		<<he>>说着话，就像在和<<his>>未出世的孩子对话。
+		<br><br>
+	<</if>>
+
+	一股风从门缝里吹进来。艾利克斯睁开眼睛，但你已经离开了。<<He>>关上门，没有发现你的偷窥。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<span class="red">门砰地一声关上了，你看到的只是一丝丝裸露的皮肤。</span>"你这个变态，"艾利克斯在门后喊道，"让我安静地洗澡吧。"<<llove>><<ldom>><<npcincr Alex love -1>><<npcincr Alex dom -1>><<glust>><<npcincr Alex lust 1>><<gstress>><<stress 6>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Farm Work]]>><<endevent>><</link>>
+	<br>
+
+<</if>>

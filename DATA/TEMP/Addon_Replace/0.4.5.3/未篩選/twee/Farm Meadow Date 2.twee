@@ -1,0 +1,82 @@
+:: Farm Meadow Date 2 []
+<<effects>>
+
+<<if $alex_meadow_date isnot 1 and $alex_meadow_date_scold isnot 1>>
+帮你骑上<<steed_text>>之后，艾利克斯也骑上了马，然后用欢快的声音说道，"走吧！"
+    <br><br>
+
+<<elseif $alex_meadow_date is 1 and $alex_meadow_date_scold isnot 1>>
+艾利克斯看着你登上<<steed_text>>，然后骑上了另一匹，"走吧！"
+    <br><br>
+
+<</if>>
+
+<<if currentSkillValue("thighskill") gte 200 or $alex_meadow_date_scold is 1>>
+
+	你专心骑着马，紧握着缰绳。
+
+    <<if $weather is "clear">>
+<<steed_text>>越过牧场，和煦的微风吹拂着你。
+        <br>
+
+太阳在云层之间闪耀着。在这里，你可以看到如此自然而又美丽的景象。这在城镇里是无论如何都看不到的。<<lstress>><<stress -6>>
+        <br><br>
+
+    <<elseif $weather is "overcast">>
+<<steed_text>>越过牧场，凉爽的风吹拂着你。
+        <br>
+
+你可以闻到空气当中肥沃泥土和青草的味道。尽管太阳被云层遮住了，但牧场依旧看上去如此美丽。<<lstress>><<stress -6>>
+        <br><br>
+
+    <<else>>
+<<steed_text>>在牧场上奔弛着，雪花落在你的脸上，融化开来。
+        <br>
+
+寒风让你睁不开眼睛，但骑着马在无人踏过的雪地上奔跑，让你感到无拘无束。<<lstress>><<stress -6>>
+        <br><br>
+
+    <</if>>
+
+    <<set _random to random(1,3)>>
+
+    <<if _random is 1>>
+艾利克斯骑马从你身边经过，<<his>>红色的刘海在风中飘扬。你听到<<him>>高兴地吹着口哨。<<glove>><<npcincr Alex love 1>>
+        <br>
+
+<<He>>放慢<<steed_text>>的速度。你可以看到<<his>>脸上洋溢着兴奋的笑容。
+        <br><br>
+
+    <<elseif _random is 2>>
+艾利克斯骑着<<steed_text>>跟在你后面。你可以听到<<him>>开心的笑声。<<glove>><<npcincr Alex love 1>>
+        <br><br>
+
+    <<else>>
+艾利克斯骑着一匹<<steed_text>>与你齐头并进。两匹<<steed_text>>并排奔跑，它们的步调完全一致。
+        <br><br>
+
+    <</if>>
+
+<<link [[继续|Farm Meadow Date 3]]>><</link>>
+
+<<else>>
+你竭尽全力不让自己摔倒，<span class="red">但你没能控制住<<steed_text>>。</span><<gstress>><<stress 6>>
+    <br><br>
+
+	<<set $worn.lower.integrity -= 15>>
+	<<set $worn.upper.integrity -= 15>>
+
+    <<if $steed is "male" or $steed is "female">>
+"小心点，<<girl>>！我可不会让你耍脾气，现在来瞧瞧谁才是缰绳的主人！"
+        <br><br>
+
+    <</if>>
+
+<<steed_text>>猛地扭动<<steed_his>>的身体，把你甩了下来，随后向你跑来，<<steed_his>>眼中充满了欲望。<<gpain>><<violence 3>>
+    <br><br>
+
+<<link [[训斥|Farm Meadow Date Fail]]>><<set $phase to 1>><</link>><<tendingdifficulty 1 600>>
+	<br>
+	<<link [[呼喊求救|Farm Meadow Date Fail]]>><<set $phase to 2>><<npcincr Alex dom 1>><<farm_horses -1>><</link>><<gdom "Alex">><<lrespect>>
+
+<</if>>

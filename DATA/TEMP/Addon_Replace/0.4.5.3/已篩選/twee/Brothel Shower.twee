@@ -1,0 +1,26 @@
+:: Brothel Shower []
+<<effects>><<set $location to "brothel">><<set $outside to 0>>
+
+<<if Time.dayState isnot "day" and Time.dayState isnot "dawn" and $rng % 3>>妓院一直很忙，淋浴间也是如此。淋浴头向你喷出冰冷的水，让你喘不过气来。你想，洗个冷水澡总比不洗澡好，于是就这样做了。
+<<larousal>>
+<br><br>
+<<elseif Time.dayState isnot "night" and $rng % 2>>淋浴头喷出的冷水冲击着你，让你喘不过气来。似乎有人把热水用完了。你觉得冷水澡也比不洗好，于是便将就着洗了。
+<<larousal>>
+<br><br>
+<<else>>发现还有热水，你就放心了。<</if>>
+
+你洗得干干净净。<<wash>>
+/* 北极星模组 */
+<<if $options.bjx_eventTF and $slime gt 0>>
+	<span class='red'>你忍受着刺痛。
+	<<violence 20>>
+	</span>
+<</if>>
+/* 北极星 */
+<br><br>
+
+<<ind>><<link [[自慰|Brothel Shower Masturbation]]>><<set $masturbationstart to 2>><</link>>
+<br>
+
+<<getouticon>><<link [[出去->Brothel Bathroom]]>><<clotheson>><</link>>
+<br>

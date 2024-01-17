@@ -1,0 +1,112 @@
+:: Temple Confess Purge []
+<<temple_effects>><<effects>>
+<<if $temple_confessor_intro>>
+	"我将称你为<span class="red">堕落者</span>。"你跪了下来，靠在隔板上，打开了金属百叶窗，"脱掉你的衣物，靠在忏悔的隔板前，我会承受你的堕落，你会被原谅的。"
+	<br><br>
+<<else>>
+	"你需要接受净化。脱掉你的衣服，靠在忏悔的隔板前。"你仍然不是很确定自己在做什么，但你还是跪下，打开了金属百叶窗。
+	<<promiscuity1>>
+<</if>>
+
+<<switch $attendant>>
+	<<case "corrupt_1">>
+		<<set _accepted to true>>
+		"啊……是的！把那些洞填上！我现在理解了！祝福你，<<sister>>！"<<He>>顺从了。
+	<<case "corrupt_2">>
+		<<set _accepted to true>>
+		"哦？出乎我的意料。不过如果你坚持这个判断的话，亲爱的<<sister>>。"<<He>>顺从了。
+	<<case "corrupt_3">>
+		<<set _accepted to true>>
+		<<He>>顺从了。"这样就能让主原谅我了吗？"
+	<<case "corrupt_4">>
+		<<set _accepted to true>>
+		"是要净化吗？这样我就能从……那些墙解脱了吗？谢、谢谢你，<<sister>>。"<<He>>顺从了。
+	<<case "corrupt_5">>
+		<<set _accepted to true>>
+		"终于遇到准时的人了。"<<He>>顺从了。
+	<<case "corrupt_5_fake">>
+		<<set _accepted to true>>
+		"终于遇到准时的人了。"<<He>>顺从了。但你听见<<him>>的呼吸中似乎夹杂着一丝窃笑。
+	<<case "corrupt_6">>
+		<<set _accepted to true>>
+		"请快点吧，<<sister>>。只要能让这种感觉停下来。只是，会……会疼吗？"
+	<<case "corrupt_7">>
+		<<set _accepted to true>>
+		<<He>>顺从了你的要求。"感觉……似乎有些罪恶。但我相信你，<<sister>>。"
+	<<case "corrupt_8">>
+		<<set _accepted to true>>
+		<<He>>沉默了一会儿。"净化，立刻，净化，立刻。"
+		<br><br>
+
+		<<He>>继续不断重复着口中的话，但还是顺从了你的要求。
+	<<case "corrupt_9">>
+		<<set _accepted to true>>
+		"太棒了！谢谢你，<<sister>>。"<<He>>顺从了你的要求。
+	<<case "sinner_1" "sinner_9" "sinner_pregnant" "sinner_generic_forgive" "no_sin_generic">>
+		"什、什么？这好像……有点不合适。我……不太想这么做。很抱歉！"<<He>>离开了忏悔室。<<grace -2>><<lgrace>>
+	<<case "sinner_2">>
+		<<set _accepted to true>>
+		"操，居然是真的！太好了！"<<He>>迅速脱掉了衣服。
+	<<case "sinner_3">>
+		<<set _accepted to true>>
+		"如……如果你觉得这会有用的话……"<<He>>顺从了。
+	<<case "sinner_4" "sinner_5">>
+		"呃？什么？！变态！"<<He>>逃出了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_6">>
+		"你是要……利用我说的这些来占我便宜对吗！"<<He>>逃出了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_7">>
+		"操，我才不要。要做的话我宁愿去妓院，至少我还能赚点钱。"<<He>>离开了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_8">>
+		"看吧，我早就跟我爸妈说过你们这群人都不正常。"<<He>>离开了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_10">>
+		<<set _accepted to true>>
+		"不错，那来看看你是不是比水果更美味吧。"<<He>>听从了你的话。
+	<<case "sinner_criminal_1" "sinner_criminal_2">>
+		"看来我来错地方了。"<<He>>迅速离开了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_silent">>
+		<<He>>什么也没说，只是沉默地离开了隔间。
+	<<case "sinner_orphan_1">>
+		"连……连这里都？已……已经没有希望了。"<<He>>脚步沉重地离开了隔间。<<grace -2>><<lgrace>><<hope -1>><<lhope>>
+	<<case "sinner_orphan_2">>
+		"连这里都这样了。真棒，看来这个镇子已经跟我的人生一样都烂透了。"<<He>>脚步沉重地离开了隔间。<<grace -2>><<lgrace>><<hope -1>><<lhope>><<reb -1>><<lreb>>
+	<<case "sinner_panty_thief">>
+		"哇，呃，不！我才不要把我的DNA弄得这里到处都是，恕我拒绝！"<<He>>离开了隔间。<<grace -2>><<lgrace>>
+	<<case "sinner_generic_repent">>
+		<<set _accepted to true>>
+		"如果这是获得宽恕所必须做的。"<<He>>顺从了。
+	<<case "sinner_generic_rapist">>
+		<<set _accepted to true>>
+		"这是什么恶趣味的玩笑吗？不……看来你是认真的，对吗？"<<He>>顺从了。
+	<<case "sydney_promised" "sydney_romance">>
+		<<set _noOptions to true>>
+		<<run statusCheck("Sydney")>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			"你在说什么？这可不对。防止你刚才没听清，我再说一遍——我有对象了，变态。"
+		<<else>>
+			"我……我刚才说我有对象了，我不能像这样暴露我自己，<<sister>>。"
+		<</if>>
+		<<his>>声音中的愤怒暴露了<<his>>的真实身份。<span class="pink">是悉尼。</span><<He>>转身准备离开隔间。<<grace -2>><<lgrace>>
+		<br><br>
+
+		<<link [[现身|Temple Confess Purge Sydney]]>><</link>>
+		<br>
+		<<link [["让" + $NPCList[0].pronouns.him + "离开"|Temple Confess Start]]>><<endconfession>><</link>>
+		<br>
+	<<case "sydney_love">>
+		"什、什么？我……我不确定我们能这么做。我……我做不到！对不起！"<<He>>逃出了忏悔室。<<grace -2>><<lgrace>><<npcincr "Sydney" purity -2>><<lspurity>>
+	<<case "winter">>
+		"你在说什么？你是在开什么恶趣味的玩笑吗？我要走了。"<<He>>离开了。<<grace -2>><<lgrace>>
+	<<default>>
+	<br><br>
+
+	"谢谢你，<<sister>>。"<<He>>离开了忏悔室。<<grace 1>><<ggrace>>
+<</switch>>
+<br><br>
+
+<<if _accepted>>
+	<<link [[继续|Temple Confess Purge Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<elseif !_noOptions>>
+	<<link [[继续|Temple Confess Start]]>><<endconfession>><</link>>
+	<br>
+<</if>>

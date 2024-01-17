@@ -1,0 +1,25 @@
+:: Livestock Plough Refuse 4 []
+<<effects>>
+
+<<if $edenwhip is 0>>
+	<<set $edenwhip to 1>>
+<</if>>
+
+倒刺刺进你的肉里。时间一分一秒地模糊起来，你不确定自己是否还清醒。
+<<if $willpowerSuccess>><<pass 60>>
+	这并没有起到太大影响。<span class="green">你还是很倔强。</span>
+	<<gwillpower>><<willpower 2>>
+	<br><br>
+
+	雷米的鞭打变得有些吃力，甚至有几下没能挥中你。最后，<<he>>停了下来，"……够了，"<<he>>喘着气，声音里有一丝挫败感，"把这头牲口带回草场里去，今天到此为止。"
+	<br><br>
+
+	<<link [[继续|Livestock Plough Refuse 5]]>><<pass 60>><</link>>
+	<br>
+<<else>>
+	<span class="red">你承受不住了。</span>所有的坚强被击碎，你的身体不听使唤地垮掉了。
+	<<ggwillpower>><<willpower 12>>
+	<br><br>
+	<<link [[继续|Livestock Plough]]>><<pass 60>><<transform cow 1>><<npcincr Remy dom 1>><<tiredness 18>><</link>><<ggtiredness>>
+	<br>
+<</if>>

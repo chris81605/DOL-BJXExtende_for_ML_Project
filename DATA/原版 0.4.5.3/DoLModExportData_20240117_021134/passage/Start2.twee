@@ -1,0 +1,78 @@
+:: Start2 [nosave]
+<<variablesStart2>>
+<!-- <<effects>> --> <!-- commented this out - why were we running effects without a working player init'd? -->
+
+欢迎游玩欲都孤儿！
+<br><br>
+
+倘若你不想被卷入麻烦，那么请牢记要穿着得体，并待在安全、明亮的地方。夜晚是非常危险的，尤其当你身穿色情下流的服饰时，那将引起某些人的注意——而这究竟会给你带来好运还是霉头，谁知道呢？
+<br><br>
+
+<<if Time.season is "winter">>
+	新的学年将于一月的首个周一<<ampm 9 0>>开始。<br>巴士是这个小镇里最便捷的交通方式，上学的时候别忘记背好书包穿好校服！
+<<elseif Time.season is "spring" or Time.season is "summer">>
+	学校将会在明日<<ampm 9 0>>开学。<br>巴士是这个小镇里最便捷的交通方式，上学的时候记得别忘了穿上校服背上书包！
+<<else>>
+	新的学年将于明天<<ampm 9 00>>开始。<br>巴士是这个小镇里最便捷的交通方式，上学的时候别忘记背好书包穿好校服！
+<</if>>
+<br><br>
+
+<<doVersionCheck>>
+
+<<link [[继续|Orphanage Intro]]>><</link>>
+
+<br><br>
+
+<<if $debug is 1>>
+	以下选项将自动开启作弊并额外添加£5000
+	<br>
+	<<link [[标准模式开局|Orphanage Intro]]>><<cheatStart>><</link>>
+	<br>
+	<<link [[学校地位提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><</link>>
+	<br>
+	<<link [[科学能力提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 2 hours>><</link>>
+	<br>
+	<<link [[数学能力提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 3 hours>><</link>>
+	<br>
+	<<link [[英语能力提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 4 hours>><</link>>
+	<br>
+	<<link [[历史能力提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 6 hours>><</link>>
+	<br>
+	<<link [[游泳能力提升开局|Oxford Street]]>><<cheatStart>><<pass 1 day>><<pass 7 hours>><</link>>
+	<br>
+	<<link [[测试房间|Testing Room]]>><<cheatStart>><<upperstrip>><<lowerstrip>><<underlowerstrip>><</link>>
+	<br>
+	<<link [[以罗宾更低创伤低爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 0>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[以罗宾低创伤中爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 50>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[以罗宾低创伤高爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 90>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 2>><<trauma 60>><</link>>
+	<br>
+	<<link [[以罗宾高创伤低爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 0>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[以罗宾高创伤中爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 50>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[以罗宾高创伤高爱意开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Robin")].love to 90>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[以”已为罗宾付钱给警察“开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $daily.robin.policePay to 1>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[以”罗宾用身体支付警察“开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $daily.robin.policeBody to 1>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br>
+	<<link [[以已承担罗宾债务开局|Robin's Room Entrance]]>><<cheatStart>><<npc Robin>><<endevent>><<set $robinpaid to 1>><<set $NPCName[$NPCNameList.indexOf("Robin")].init to 1>><<set $trauma to ($traumamax / 7) * 4>><<trauma 60>><</link>>
+	<br><br>
+
+	<<link [[黑狼|ForestHuntDebug]]>><<cheatStart>><<npc "Black Wolf">><<ruined>><<endevent>><<set $blackwolfhunt to 1>><<set $wolfpacktrust to 10>><</link>>
+
+
+	<br><br>
+
+	<<link [[冬季开局|Orphanage Intro]]>><<set Time.startDate to new DateTime(2022, 12, 4, 7)>><<set $weather to "snow">><</link>> (从冬季开始游戏。供测试使用。)
+	<br>
+
+	<<link [[圣诞节开局|Orphanage Intro]]>><<npc Kylar>><<person1>><<endevent>><<set $NPCName[$NPCNameList.indexOf("Kylar")].state to "active">><<set Time.startDate to new DateTime(2022, 12, 23, 7)>><<set $weather to "snow">><<set $money += 50000>><</link>> (从圣诞节前两天开始游戏。供测试使用。)
+	<br>
+
+	<<link [[情人节开局|Orphanage Intro]]>><<set Time.startDate to new DateTime(2022, 2, 12, 7)>><<set $weather to "clear">><</link>> (从情人节前两天开始游戏。供测试使用。)
+	<br>
+
+<</if>>

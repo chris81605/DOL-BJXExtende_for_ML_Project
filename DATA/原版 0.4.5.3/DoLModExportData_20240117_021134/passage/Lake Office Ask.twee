@@ -1,0 +1,142 @@
+:: Lake Office Ask []
+<<set $outside to 0>><<effects>>
+<<set $winterLakeTalk = ($winterLakeTalk || 0)>>
+<<if $winterLakeTalk is 0>>
+	<<if $speech_attitude is "meek">>
+		“这——这物有所值吗？你研究到什么了吗？”
+	<<elseif $speech_attitude is "bratty">>
+		“所以这整个工程值这么多钱吗？你研究到什么了吗？”
+	<<else>>
+		“工作站帮上忙了吗？你研究到什么了吗？”
+	<</if>>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		“你——你有什么新发现吗？”
+	<<elseif $speech_attitude is "bratty">>
+		“有新东西吗？”
+	<<else>>
+		“有什么新发现吗？”
+	<</if>>
+<</if>>
+你问道。
+<br><br>
+
+<<switch $winterLakeTalk>>
+	<<case 0>>
+		<<set $winterLakeTalk to 1>><<set $weekly.winterLakeTalk to true>>
+		<<His>>侧过头，“一般来说，分享尚可能有不足之处的新信息不是我的作风。不过能有这一切都得多谢你的帮助，所以我可以给你破个例。”<<npcincr Winter love 1>><<glove>>
+		<br><br>
+
+		“人工干预的痕迹是显而易见的，甚至比埋没湖底的遗迹废墟还要明显。侵蚀的方式表明，向北通往小镇的河道至少有一部分由人工开凿。河水改道导致原先向东流淌的天然水道变成了一条小溪。”
+		<br><br>
+
+		<<He>>停顿片刻，“我们无法确定一系列地貌形成的确切日期，镇上的记录中也没有关于北部水道的任何记载。不过，水流量减少而导致的泥沙沉积可能是东面沼泽的形成原因。<span class="green">我们有可能穿过河床的干涸部分，绕过郁郁葱葱的密林</span>，或许很快你就能知道更多信息，就看我能不能找到人<span class="blue">帮我探察小溪了。</span>”
+		<br><br>
+
+		<<if !$brookIntro>>
+			<<set $brookIntro to 1>>
+			<span class="gold">你发现了瀑布附近的小溪支流。</span>
+			<br><br>
+		<</if>>
+
+		<<link [[继续|Lake Office]]>><</link>>
+		<br>
+	<<case 1>>
+		<<if $bogProgress gte 2>>
+			<<set $winterLakeTalk to 2>><<set $weekly.winterLakeTalk to true>>
+			<<He>>转向你，“森林湖发源自西面山上的一条河流支流。然而，森林湖并不是一直都存在的。这一点从湖底存在古老的遗迹就能看出来。问题是它是什么时候，以及为什么出现在此的？在此以前，这条河又通向哪里？”
+			<br><br>
+
+			<<He>>停顿片刻，“我会派个小组去沼泽做些记录。<span class="green">多亏了你的探察，我们终于招募到了一些志愿者。</span>一周后再来找我吧，我或许能有更多的信息分享给你。”
+		<<else>>
+			<<set $weekly.winterLakeTalk to true>>
+			<<He>>蹙起眉头，“恐怕还没。<span class="blue">我需要有人来调查小溪小径。</span>迄今为止，我们的调研还囿于现状。”
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Lake Office]]>><</link>>
+		<br>
+	<<case 2>>
+		<<set $winterLakeTalk to 3>>
+		<<set $bogTeam to {
+			state: "active",
+			robinKnown: false,
+			robinPresent: false,
+			timer: 0
+		}>>
+		<<He>>点点头，“我的调查团队收集到了一些样本——”
+		<br><br>
+
+		话音未落，就有人走进了帐篷。是西里斯。<<npc Sirris 2>><<person2>> <<He>>把一个大背包放在温特身旁的桌子上，微笑着开口，“剪下来的树枝，一幅关于年轮的速写，还有一小罐树汁。”<<he>>的声音中满是骄傲，而后对你微笑。
+		<br><br>
+
+		<<npc Niki 3>><<npc Wren 4>>
+		<<run getRobinLocation()>>
+		<<if _robin_location isnot $robinmissing>>
+			<<npc Robin 5>><<set $bogTeam.robinKnown to true>><<set $bogTeam.robinPresent to true>>
+			又走进来两个人。率先引起你注意的是罗宾，<<He>>正笨拙地拖着脚，看上去垂头丧气。然而<<person5>><<He>>一看见你便又眉开眼笑，“嘿。温特说<<person1>><<he>>需要有人帮忙，所以我就自告奋勇了！”
+			在<<person5>><<him>>身后站着一个留着<<if $pronoun is "m">>短发的<<else>>齐肩发的<</if>><<person4>><<personsimple>>，<<his>>腰带上挂着手枪的枪套。
+			<<if $wren_seen is "cards" or $wren_seen is "letter" or $wren_seen is "catsuit" or $wren_seen is "prison">>
+				<span class="gold">是伦恩。</span>
+				<br><br>
+
+				“哦，这不是我最喜欢的小麻烦鬼吗，”<<he>>咧嘴一笑。<<He>>把手放在罗宾的头上，拨弄着<<person5>><<his>>的头发。
+				<<if $robinromance is 1>>
+					“没想到这就是你<<girlfriend>>啊，罗。”罗宾推开了伦恩的手。<<his>>脸上神色莫辨，但你觉得你捕捉到了一种混杂着反感和“帮帮我”的表情。
+				<<else>>
+					“没想到这就是你常和我提起的那位朋友啊，罗。”罗宾推开了伦恩的手。<<his>>脸上神色莫辨。
+				<</if>>
+			<<else>>
+				<br><br>
+
+				<<if $robinromance is 1>>
+					“哦，这是你<<girlfriend>>吗，罗？<span class="gold">我叫伦恩。</span>”<<he>>把手放在罗宾头上，在看着你的时候拨弄着罗宾的头发。罗宾推开了伦恩的手。<<person5>><<his>>脸上神色莫辨，但你觉得你捕捉到了一种混杂着反感和“帮帮我”的表情。
+				<<else>>
+					“哦，这是你常和我提起的那位朋友吗，罗？<span class="gold">我叫伦恩。</span>”<<he>>把手放在罗宾头上，在看着你的时候拨弄着罗宾的头发。罗宾推开了伦恩的手，退开了一步，不让伦恩摸到头。<<person5>><<his>>脸上神色莫辨。
+				<</if>>
+			<</if>>
+			伦恩皱起眉头，想说些什么，但被打断了。
+		<<else>>
+			帐篷里又走进来两个人。率先引起你注意的是一个留着<<person4>><<if $pronoun is "m">>短发的<<else>>齐肩发的<</if>><<personsimple>>，<<his>>腰带上挂着一把装在枪套里的手枪。
+			<<if $wren_seen is "cards" or $wren_seen is "letter" or $wren_seen is "catsuit" or $wren_seen is "prison">>
+				<span class="gold">是伦恩。</span>
+				<br><br>
+
+				“好啊，这不是我最喜欢的小麻烦鬼吗，”<<he>>咧嘴一笑。
+			<<else>>
+				“该死的，你还打算拉多少人下水啊，温特？”<<He>>咧嘴一笑，朝你致意，<span class="gold">“我叫伦恩。”</span>
+			<</if>>
+			<<Hes>>被打断了。
+		<</if>>
+		一个年轻<<person3>><<personsimple>>走入了帐篷，<<his>>嘴里叼着根棒棒糖棍，低头看着一架相机。
+		<br><br>
+
+		<<if $niki_seen is undefined>>
+			“那是尼奇，镇上的摄影师。”西里斯说道，“温特叫人帮忙，我觉得<<he>>会感兴趣，就也叫过来了。”尼奇朝着你点头致意。
+		<<elseif $niki_seen is "adult_shop_opening">>
+			是摄影师尼奇。“你记得尼奇，对吧？”西里斯问道，“在开业典礼上见过的。”尼奇朝着你点头致意。
+		<<elseif $niki_seen is "farm">>
+			<span class="red">是尼奇，</span>雷米庄园的摄影师。<<He>>看见你吃了一惊。“那是尼奇，”西里斯说道，“镇上的摄影师。温特叫人帮忙，我觉得<<he>>会感兴趣。”<<gtrauma>><<trauma 6>>
+		<<else>>
+			是摄影师尼奇。<<He>>朝着你点头致意。“那是尼奇，镇上的摄影师。温特叫人帮忙，我觉得<<he>>会感兴趣。”
+		<</if>>
+		<br><br>
+
+		<<set $wren_seen to "winter">>
+		<<set $niki_seen to "winter">>
+
+		<<link [[继续|Lake Office Volunteers]]>><</link>>
+		<br>
+	<<case 3>>
+		“目前没什么新信息。要取得有意义的进展我们还得花点时间。”
+		<br><br>
+
+		<<link [[继续|Lake Office]]>><</link>>
+		<br>
+	<<default>>
+		“还没有，”<<he>>带着一丝遗憾说，“我们陷入了某种僵局。”
+		<br><br>
+
+		<<link [[继续|Lake Office]]>><</link>>
+		<br>
+<</switch>>

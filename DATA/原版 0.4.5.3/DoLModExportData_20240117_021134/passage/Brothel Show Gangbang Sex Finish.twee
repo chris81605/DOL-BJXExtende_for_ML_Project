@@ -1,0 +1,77 @@
+:: Brothel Show Gangbang Sex Finish []
+/* Check variables before combat is reset */
+	<<set _extremeshow to "f">>
+	<<if $anusstate is "doublepenetrated" and $vaginastate isnot "penetrated" and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+		<<set _extremeshow to "da">>
+	<<elseif $anusstate is "doublepenetrated" and $vaginastate is "penetrated" and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+		<<set _extremeshow to "t">>
+	<<elseif $vaginastate is "doublepenetrated" and $anusstate isnot "penetrated" and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+		<<set _extremeshow to "dv">>
+	<<elseif $vaginastate is "doublepenetrated" and $anusstate is "penetrated" and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+		<<set _extremeshow to "t">>
+	<</if>>
+<<effects>>
+<<if $finish is 1>>
+	<<person1>><<person>>稳住了你，其他人给你让出了空间。<<endevent>><<npc Briar>><<person1>>"你们停下干什么？"布莱尔冲上了舞台。<<He>>瞪了你一眼，然后似乎是想起自己还在台上，便向观众们露出了微笑。"抱歉朋友们，今天的表演到此为止了。"<<He>>催促着你们几个下了舞台。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Briar>><<person1>>"太不专业了，"<<he>>说，一旦你离开舞台，离开人们的视线。"就别想能得到报酬了。"<<llove>>
+	<<npcincr Briar love -1>>
+	<br><br>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $phase is 0>>
+	<<person1>>"还牛逼吗你？"<<person>>说道。他们抛下躺倒在舞台上的你，走下了舞台。观众们欢呼着，鼓着掌，你也站了起来，对观众们鞠躬。
+	<<else>>
+	"我，我还要……"你呜咽着。他们抛下躺倒在舞台上的你，走下了舞台。观众们欢呼着，鼓着掌，你也站了起来，对观众们鞠躬。
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Briar>><<person1>>布莱尔在舞台后台等着你。"干得好，"<<he>>说道。
+	<<if $brothel_pig_improv is true>>
+		"至少匆忙上马能做成这样很不错了。"
+	<<elseif $phaselast is 0>>
+		"大家都喜欢看这种高傲的<<girl>>被玷污。"
+	<<else>>
+		"你的表演我自己都快信了。"
+	<</if>>
+	/* Double anal/vaginal/oral */
+	<<if _extremeshow is "da">>
+		<br>
+		<<He>>顿了顿，舔了舔嘴唇，似乎在思考着什么。"菊穴双插，真是好本事。观众们很喜欢。继续努力，用你那大肛穴给我们赚个盆满钵满。"
+		<<He>>递给你<<he>>承诺过的<<moneyGain 1000>>，除此之外还有奖金<<moneyGain 200>>。<<gglove>>
+		<<npcincr Briar love 2>>
+	<<elseif _extremeshow is "dv">>
+		<br>
+		<<He>>顿了顿，舔了舔嘴唇，似乎在思考着什么。"小穴双插，真是好本事。观众们很喜欢。继续努力，用你那淫穴给我们赚个盆满钵满。"
+		<<He>>递给你<<he>>承诺过的<<moneyGain 1000>>，除此之外还有奖金<<moneyGain 200>>。<<gglove>>
+		<<npcincr Briar love 2>>
+	<<elseif _extremeshow is "t">>
+		<br>
+		<<He>>眼里放着光。"一穴三入，真是个当巨星的好苗头。观众们都求着想看更多你的表演呢。继续努力，用你那两个大淫穴给我们赚个盆满钵满。"
+		<<He>>递给你<<moneyGain 1000>><<he>>承诺过的，除此之外还有奖金<<moneyGain 300>>。<<gglove>>
+		<<npcincr Briar love 2>>
+	<<else>>
+		<<He>>递给你<<he>>承诺的<<moneyGain 1000>>。<<glove>>
+		<<npcincr Briar love 1>>
+	<</if>>
+	<br><br>
+<<elseif $enemyhealth lte 0>>
+	你把演员们从你身上推开，逃离了舞台。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Briar>><<person1>>布莱尔在你经过时拦下了你。"别急，"<<he>>说。"听着。"你听到观众正在欢呼。"真是让人惊讶，但人们很喜欢。"<<He>>递给你<<moneyGain 1000>><<he>>承诺的。<<glove>>
+	<<npcincr Briar love 1>>
+	<br><br>
+<</if>>
+<<endevent>>
+<<if $brothel_pig_improv is true>>
+	<<unset $brothel_pig_improv>>
+	<<storeon "brothelimprov">>
+<</if>>
+你回到了更衣室里。
+<br><br>
+<<link [[继续|Brothel Dressing Room]]>><</link>>

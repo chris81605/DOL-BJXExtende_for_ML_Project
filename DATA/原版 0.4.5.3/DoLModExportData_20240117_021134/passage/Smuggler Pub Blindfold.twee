@@ -1,0 +1,33 @@
+:: Smuggler Pub Blindfold []
+<<effects>>
+<<pass 5>>
+<<set $bus to "commercial">>
+他们继续用眼罩蒙着你，把你推进另外一条隧道里。你能听到左右两边以及后面的脚步声。
+<br><br>
+
+<<set $stress -= 3000>>
+
+"爬上去，"年轻的<<nnpc_gender "Wren">>说。"在我改变主意之前。"你向前伸手，摸到了一个梯子。
+<br><br>
+
+你往上爬，直到你的头撞上了东西。"注意脑袋，"一个声音笑道。"把它推开。"你这样做了，然后从梯子上爬了出来。你感到一阵微风，听到附近的交通声。你身后传来金属碰撞的声音。
+<br><br>
+<<if $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	<<blindfoldintro>>
+<<else>>
+	你现在终于安全了，你把眼罩拿开，并把它扔到一边。
+	<br><br>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+<<clotheson>>
+<<endevent>>
+
+
+
+<<set $eventskip to 1>>
+<<if $worn.face.type.includes("blindfold")>>
+	<<destinationbondage>>
+<<else>>
+	<<destinationeventend>>
+<</if>>

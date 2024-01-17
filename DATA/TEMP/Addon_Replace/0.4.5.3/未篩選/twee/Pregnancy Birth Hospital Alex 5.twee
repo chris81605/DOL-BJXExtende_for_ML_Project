@@ -1,0 +1,48 @@
+:: Pregnancy Birth Hospital Alex 5 []
+<<effects>>
+<<set _alex to statusCheck("Alex")>>
+<<generate1>><<person1>>
+
+<<if $NPCList[0].gender is "f">>
+	<<set $alex_parent to "母亲">>
+<<else>>
+	<<set $alex_parent to "父亲">>
+<</if>>
+
+<<set $ward_unlocked to true>>
+<<run Object.values(V.children).filter(child => {
+if (child.location === "home" && (child.father === "Alex" || child.mother === "Alex")) child.location = "alex_cottage";
+})>>
+
+艾利克斯的$alex_parent对你俩招手。
+<br><br>
+
+艾利克斯替你打开门，<<He>>搀扶着你坐下，然后自己坐到了你旁边。
+<br><br>
+
+<<if pregnancyCountBetweenParents("pc", "Alex") gte 2>>
+"又来了？"<<nnpc_His "Alex">>的$alex_parent笑了，"看来我的<<if _alex.pronoun is "f">>女儿<<else>>儿子<</if>><<nnpc_he "Alex">>害得你很忙嘛？"
+	<br><br>
+
+艾利克斯红着脸转过了头去。
+	<br><br>
+
+<<else>>
+"我家<<if _alex.gender is "f">>姑娘<<else>>小子<</if>>终于安定下来了，"<<he>>边说边笑着。
+	<br>
+
+艾利克斯红着脸转过了头去。
+	<br><br>
+
+"还是和这么个<<if $player.gender_appearance is "f">>美女<<else>>帅哥<</if>>！"<<he>>补充道。
+	<br>
+
+"<<if $alex_parent is "母亲">>妈<<else>>爸<</if>>！"艾利克斯抗议道。
+	<br>
+
+"什么？我只是在实话实说，"<<he>>捉弄道，你觉得艾利克斯的脸红得不能更红了。
+	<br><br>
+
+<</if>>
+
+<<link [[继续|Pregnancy Birth Hospital Alex 6]]>><</link>>

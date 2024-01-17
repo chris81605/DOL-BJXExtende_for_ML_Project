@@ -1,0 +1,21 @@
+:: Arcade Watch High Score []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+<<if $phase is 1>>
+	你决定加入人群，观察这个<<person>>。你看到汗水从<<his>>的脸上滴下，<<his>>的手在控制台上左右翻滚。随着一声呼喊，<<he>>举起了手臂。你看向机台，发现<<he>>创下了新记录，与第二名拉开了极大的差距。
+	<br><br>
+	人群中爆发出欢呼声，大家把<<him>>举到了空中，你也加入了其中。过了一会，众人将<<person>>放回原处，并开始相互交谈。<<trauma -6>><<ltrauma>>
+	<br><br>
+	<<arcadeEndLink>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<generate1>><<person1>>
+		你决定专注于你自己的游戏。然而，一个<<person>>靠近了你。"大家都在忙着找那个菜鸡的乐子，你陪我来一把怎么样？"<<He>>一把抓住了你。
+		<br><br>
+		<<link [[继续|Arcade Watched Rape]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		你决定专注于自己的游戏。过了一会儿，人群开始散去。
+		<br><br>
+		<<arcadeEndLink>>
+	<</if>>
+<</if>>

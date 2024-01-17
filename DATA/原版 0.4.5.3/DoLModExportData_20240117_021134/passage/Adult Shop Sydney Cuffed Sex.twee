@@ -1,0 +1,50 @@
+:: Adult Shop Sydney Cuffed Sex []
+<<run statusCheck("Sydney")>>
+<<if $sexstart is 1>>
+	<<set $daily.sydney.sex = ($daily.sydney.sex || 0) + 1>><<set $sydney.sexTotal += 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $enemytrust += 500>>
+	<<set $enemyarousalmax to 600>>
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<set $enemyarousalmax += 100>>
+	<<elseif _sydneyStatus.includes("pure")>>
+		<<set $enemyarousalmax -= 100>>
+	<</if>>
+
+	<<if $NPCList[0].penis isnot "none">>
+		<<set $NPCList[0].penis to "clothed">>
+	<</if>>
+	<<if $NPCList[0].vagina isnot "none">>
+		<<set $NPCList[0].vagina to "clothed">>
+	<</if>>
+	<<set $NPCList[0].lefthand to "idle">>
+	<<set $NPCList[0].righthand to "idle">>
+	<<set $npcSub to 1>>
+
+	你悄悄接近悉尼，像猎人打量着猎物一般看着<<nnpc_his "Sydney">>。
+	<<if _sydneyStatus.includes("corrupt")>>
+		<<He>>笑了起来，抬起双腿盘在你腰间，把你拉了过去。
+	<<else>>
+		<<He>>象征性地挣扎了几下，笑着想要把你推开，随后便"屈服"于你了。
+	<</if>>
+	<<promiscuity1>>
+<</if>>
+
+<<set $enemyanger to -10>>
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Adult Shop Sydney Cuffed Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Adult Shop Sydney Cuffed Sex]]>><</link>></span><<nexttext>>
+<</if>>

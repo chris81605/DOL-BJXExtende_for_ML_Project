@@ -1,0 +1,179 @@
+:: Domus Shy []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+<<rng>><<generates2>>
+<<set $NPCList[1].virginity to setup.NPCVirginityTypesVirgin>>
+
+<<if fameSum("sex","rape","prostitution") gte 400>>
+	就在门里面，<<person1>><<person>>把你拉到一边。
+	<br>
+	"听着，"<<he>>几乎是低声说道。
+	"我要在这里坦诚地告诉你。我见过你。你因为……性方面的行为比较出名。"
+	<br><br>
+
+	<<He>>紧张地瞥着一扇内门。
+	<br>
+	"你看，我<<person2>><<daughter>>是个长得不错的<<personsimple>>，而且非常性感，但是……
+	<<if $pronoun is $player.gender_appearance>>
+		我想，<<hes>>是同性恋。还有困惑？矛盾的？我不知道，但
+	<<else>>
+		<<hes>>非常害羞。如果让<<himself>>来的话，
+	<</if>>
+	<<he>>永远不会主动出击。<<He>>需要有人来指导<<him>>。"
+	<br><br>
+
+	<<person1>><<person>>指向门口。
+	<br>
+	"你进去诱惑<<person2>><<him>>。帮助<<him>>。我现在就给你£20，如果你让<<him>>有一个美妙的初夜，我再给你£100。成交吗？"
+	<br><br>
+
+	<<link [[同意|Domus Shy Seduce]]>><<set $money += 2000>><</link>>
+	<br>
+	<<link [[拒绝并离开|Domus Street]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<generateBEAST 3 dog>>
+	<<person1>><<person>>带你穿过客厅，一个看起来很害羞的<<person2>><<person>>坐在那里，不自在地摸着一只
+	<<beasttype 2>>。<!-- sic! beasttype/bhim/... take 0-based indices -->
+	<br>
+	"我给你带了一个可以说话的人。看起来和你差不多大。"
+	<br>
+
+	<<person>>抬起头，
+	<<if currentSkillValue("seductionskill") gte 600 and $rng gte 67>>
+		<<pass 60>>
+		脸红了，接着低下头看地面。
+		<br>
+		"你们谈谈吧。比如说你们现在都在研究的东西。就是那个……你知道的吧？那个在互联网上很流行的东西，连新闻都在报道。"
+		<br>
+		那个<<person>>继续盯着一块地毯。
+		<br>
+		"你知道的，对吧？"<<person1>><<person>>看向你。
+		<br>
+		你耸耸肩。
+		<br><br>
+
+		时间过得很慢。因为无聊，你试着和<<person2>><<person>>调情。这招不管用，但确实引起了<<his>>的注意。
+		在一次特别明显的示爱后，<<person1>><<person>>看起来<<print either("不自在","兴奋","相当尴尬")>>，
+		但是<<person2>><<person>>打开了。
+		<br>
+		<<He>>开始跟你讲学校的事，说以前还好，但现在<<hes>>害怕跟任何人说话，因为<<hes>>担心别人会发现<<hes>>喜欢<<personsimple>>。
+		这在<<his>>的大家庭中是不允许的。也许在家里也不行。
+		<<He>>看着<<his>>的<<person1>><<father>>。
+		<br>
+		那个<<person>>什么也没说，也没离开。
+		<br><br>
+
+		<<person2>><<person>>告诉你
+		<<if $player.gender_appearance is $pronoun>>
+			<<he>>认为你很可爱，还因为终于可以这么告诉你而松了一口气。
+		<<else>>
+			<<he>>认为你很可爱，并且<<he>>很欣赏你的关注，但现在<<he>>终于可以诚实地说，你不是<<he>>想要的。
+		<</if>>
+		<br><br>
+
+		<<He>>开始告诉你<<his>>的爱好和兴趣。<<He>>谈论书籍，游戏和网络小组。
+		<<He>>说终于有人说话了，这是一种解脱。<<He>>甚至感觉不能和<<his>>父母说话。
+		<br>
+		<<person1>><<person>>什么也没说，但看起来有些悲伤。
+		<br><br>
+
+		在这之后不久，<<person1>><<person>>带你走出房间。
+		<br>
+		"谢谢你，"<<he>>说道。
+		<<if $rng %2>>
+			"哇。我没想到会这样。我自己的<<person2>><<daughter>>。不过，这仍然是一个突破。<<He>>好多年没这么说过了。谢谢你。"
+		<<else>>
+			"多年来我们一直怀疑。但是现在<<person2>><<hes>>终于有勇气说出来了。真是松了一口气。非常感谢。"
+		<</if>>
+		<br><br>
+
+		<<person1>><<He>>在带你出去的时候，递给你<<moneyGain 40>>。
+		<br><br>
+
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<<elseif $deviancy gte 35 and $rng lte 33 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+		<<pass 60>>
+		脸红了，接着低下头看地面。
+		<br>
+		"你们谈谈吧。比如说你们现在都在研究的东西。就是那个……你知道的吧？那个在互联网上很流行的东西，连新闻都在报道。"
+		<br>
+		<<person>>继续抚摸<<beasttype 2>>，同时盯着一小块地毯。
+		<br>
+		你注意到<<he>>抚摸<<beasttype 2>>的方式有些异常亲密。
+		<br>
+		"那是一只美丽的<<beasttype 2>>，"你说道。<<beasttype 2>>听到你的话后，耳朵竖了起来。
+		你注意到<<bhim 2>>靠近<<person>>，几乎要拥抱<<him>>。
+		"我可以摸摸<<bhim 2>>吗？"
+		<br><br>
+
+		在你聊天的过程中，你开始抚摸那只<<beasttype 2>>。
+		<<person1>><<person>>没有注意到，但是<<person2>><<persons>>睁大了眼睛。
+		<<if $NPCList[2].monster is "monster">><<beasttype 2>>的脸涨红了。<</if>>
+		<<He>>变得更加兴奋。
+		<br><br>
+
+		你说："每个人都说他们爱动物，但很少有人真正做到。"
+		<br>
+		<<person>>兴奋地点点头，而<<person1>><<person>>打了个呵欠。
+		<br><br>
+
+		你和<<person2>><<person>>在剩下的时间里讨论你们对动物的共同热爱。
+		<br><br>
+
+		当你离开时<<person1>><<person>>阻止了你。
+		<br>
+		"我不知道怎么做到的，"<<he>>说道。"但你说服了<<person2>><<him>>。"
+		<br><br>
+
+		<<He>>给了你<<moneyGain 30>>。
+		<br><br>
+
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<<elseif $hairlength gte 500 and ($rng % 4)>>/*75% chance if here with long hair*/
+		<<pass 5>>
+		停了下来。盯着你看了很久。
+		<br><br>
+
+		"你的头发，"<<he>>小声说道。
+		<br>
+		"什么？"
+		<br>
+		"你的头发这么长，这么漂亮，"<<he>>轻声说。"就像……我可以把它编成辫子吗。求你了。你会让我编辫子吗？"
+		<br>
+		<<person1>><<person>>期待地看着你。
+		<br><br>
+
+		<<link [[接受|Domus Braid]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[拒绝|Domus Braid]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		<<pass 60>>
+		脸红了，接着低下头看地面。
+		<br>
+		"你们谈谈吧。比如说你们现在都在研究的东西。就是那个……你知道的吧？那个在互联网上很流行的东西，连新闻都在报道。"
+		<br>
+		那个<<person>>继续盯着一块地毯。
+		<br>
+		"你知道的，对吧？"<<person1>><<person>>看向你。
+		<br>
+		你耸耸肩。
+		<br><br>
+
+		时间似乎变得漫长无比。这一小时也许相当几十年。缓慢、尴尬、痛苦的几十年，
+		在这期间<<person>>与你费力地拉扯话题，<<person2>><<person>>也只是偶尔从口中勉强挤出几个单词。
+		你试图继续说话，但尴尬得令人痛苦。
+		<br><br>
+
+		最后，在一个小时结束时，<<person1>><<he>>带你回到门口。耸了耸肩。
+		<br>
+		"好吧。"<<he>>叹了口气，递给你<<moneyGain 10>>，"谢谢你的努力。"
+		<br><br>
+
+		<<link [[继续|Domus Street]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<unset $shy_dog>>

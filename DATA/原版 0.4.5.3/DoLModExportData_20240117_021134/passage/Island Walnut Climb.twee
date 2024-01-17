@@ -1,0 +1,17 @@
+:: Island Walnut Climb []
+<<effects>>
+树皮十分坚硬粗糙，你很难抓牢。
+<<if $athleticsSuccess>>
+	当你往高处爬时，树干开始弯曲，你离树枝更近了。你把腿缠绕在树干上，用一只手去够核桃。<<gwalnut>><<set $island.walnut += 1>>
+	<br><br>
+
+	<<link [[吃掉|Island Walnut Eat]]>><<hunger -200>><<set $island.walnut -= 1>><</link>><<lhunger>><<lwalnut>>
+	<br>
+	<<link [[留着|Island]]>><<island_explore_end>><</link>><<walnutStoreMessage>>
+	<br>
+<<else>>
+	你以最快的速度爬上了树，迅速来到了离地几英尺的高度，<span class="red">在你失去控制掉下来之前，</span>你最好再找一棵树。<<gpain>><<pain 4>>
+	<br><br>
+	<<link [[继续|Island]]>><<island_explore_end>><</link>>
+	<br>
+<</if>>

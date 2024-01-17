@@ -1,0 +1,92 @@
+:: Mason Chastity Accept []
+<<effects>>
+<<if C.npc.Mason.chastityRemoved is undefined>><<set C.npc.Mason.chastityRemoved to 0>><</if>>
+
+/* Player */
+<<switch C.npc.Mason.chastityRemoved>>
+	<<case 0>>
+		<<if $speech_attitude is "meek">>
+			"如、如果你得觉得它有用的话，"你说着红透了脸，移开你的目光。
+		<<elseif $speech_attitude is "bratty">>
+			"它绝对有用，"你笑着说道，暗示地歪了歪头。
+		<<else>>
+			"你觉得它有用吗？"你问道，来回打量着钥匙和梅森。
+		<</if>>
+	<<case 1>>
+		<<if $speech_attitude is "meek">>
+			"你、你真的不是想再偷看我？"你说着红透了脸，移开你的目光。
+		<<elseif $speech_attitude is "bratty">>
+			"你绝对只是想再偷看我，"你笑着说道，暗示地歪了歪头。
+		<<else>>
+			"我不介意你再看一眼，"你说道，来回打量着钥匙和梅森。
+		<</if>>
+	<<default>>
+		<<if $speech_attitude is "meek">>
+			"你、你可以再看我一次。如、如果你想的话，还能摸一摸，"你说着红透了脸，移开了你的目光。
+		<<elseif $speech_attitude is "bratty">>
+			"你绝对只是想再偷看我。哦，或许你还想上手，我都可以的。"你笑着说道，暗示地歪了歪头。
+		<<else>>
+			"当然了，你可以再看我一次，如果你想要的话，也能摸一摸。"你笑着说。
+		<</if>>
+<</switch>>
+<br><br>
+
+/* Action */
+<<He>>试图无视你的发言，但不自觉舔了舔嘴唇。<<He>>
+<<if $location is "pool">>
+	把你拉到泳池边缘，让你至少能有一点隐私，
+<</if>>
+然后颤抖着手指把钥匙伸向你的$worn.genitals.cn_name_cap。
+<<if $worn.over_lower.vagina_exposed gte 1 and $worn.lower.vagina_exposed gte 1 and $worn.under_lower.vagina_exposed gte 1>>
+	<<switch random(0,1)>>
+		<<case 0>>
+			你把胯部向前顶去，让梅森更容易在你的$worn.genitals.cn_name_cap上操作。
+		<<default>>
+			你张开双腿，让梅森更容易在你的$worn.genitals.cn_name_cap上操作。
+	<</switch>>
+<<else>>
+	<<set _worn to [$worn.over_lower, $worn.lower, $worn.under_lower].filter(w => w.name !== "naked").map(w => w.cn_name_cap).formatList({"conjunction":"和","useOxfordComma":true,"separator":"、"})>>
+	你拉下你<<print $underlowerwetstage gte 3 or $overlowerwetstage gte 3 or $lowerwetstage gte 3 ? "湿透" : "">>的_worn，让梅森能更容易接触你的$worn.genitals.cn_name_cap。
+<</if>>
+钥匙完美地契合了，随着响亮的咔哒一声，$worn.genitals.cn_name_cap脱落下来，露出了你的<<genitals 1>>。
+<<set $worn.genitals.type.push("broken")>><<genitalsruined>>
+<br><br>
+
+/* Reaction */
+<<switch C.npc.Mason.chastityRemoved>>
+	<<case 0>>
+		梅森呆呆地盯着你的<<genitals 2>>，好一段时间，<<he>>才意识到这点，闭上眼睛赶紧转过身去。
+		"嗯，这钥匙确实有用，所以，不用谢。这不是我第一次碰到这种东西了。"
+		<<npcincr Mason lust 5>><<gglust>><<npcincr Mason love 1>><<glove>>
+	<<case 1>>
+		梅森呆呆地盯着你的<<genitals 2>>，伸出手来，就在马上要碰到你时，<<he>>突然回过神来，赶紧收回手，闭着眼睛转过身去。
+		"不用谢，不过你得小心点。温特……有些独特的兴趣爱好。"
+		<<npcincr Mason lust 5>><<gglust>><<npcincr Mason love 1>><<glove>>
+	<<default>>
+		梅森呆呆地盯着你的<<genitals 2>>，不知不觉地抬起手来。
+<</switch>>
+<<set C.npc.Mason.chastityRemoved += 1>>
+<br><br>
+
+/* Options */
+<<if C.npc.Mason.chastityRemoved gte 3>>
+	<<if $promiscuity lt 35>>
+		<span class="blue">你不够淫乱，无法让事情更进一步发展。</span>
+	<<else>>
+		<<link [[抓住梅森的手|Mason Chastity Grab]]>><</link>><<handholdingvirginitywarning>><<NPCvirginitywarning "Mason" "handholding">>
+	<</if>>
+	<br>
+	<<if $location is "pool">> /* Exit to Pool */
+		<<link [[什么也不做|Mason Chastity Escape]]>><<endevent>><</link>>
+	<<else>> /* Exit to Mason Pond */
+		<<mason_actions>>
+	<</if>>
+<<else>>
+	<<if $location is "pool">>
+		<<link [[回到课堂|Swimming Lesson]]>><<endevent>><</link>>
+	<<else>>
+		<<mason_actions>>
+	<</if>>
+<</if>>
+
+<br>

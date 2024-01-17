@@ -1,0 +1,66 @@
+:: Farm Assault Defeat []
+<<effects>>
+
+<<npc Alex>><<person1>>
+你在田地里发现了不省人事的艾利克斯。<<his>>脸朝下栽在地上，身边有一个已经空了的瓶子。<<llldom>><<npcincr Alex dom -15>>
+<br><br>
+
+<<if $farm_assault.tower is "defeated">>
+	你设法把<<him>>带回了小屋，将<<him>>安置在床上，然后动身去寻找$farm.tower_guard。
+	<<endevent>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+	你看见<<him>>坐在瞭望塔的底部，
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		正试着点燃一根捡来的烟屁股。"这活可比我想象中难多了，"<<he>>说，"能拉我一把不？"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		正在跟别人打电话。"——老大来了，一会再打给你。"<<He>>冲你笑了笑："你真该看看我在被放倒前解决了多少个杂种。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		盯着天空。"抱歉，老大，"<<he>>看到了你，"我已经尽力了。"
+	<<else>>
+		看着你走近。"是天使来带我上天堂了吗？"<<he>>哈哈大笑。
+	<</if>>
+	你帮<<him>>起身。
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"我没事，"<<he>>继续说，"伸展伸展腿脚就好了。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"那里面有把椅子，"<<he>>指了指瞭望塔，"我得稍微休息一下。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"不用担心我，"<<he>>说，"我能照顾好自己。"
+	<<else>>
+		"光是碰碰你的小手就已经快治好我了，"<<he>>继续说，"我甚至觉得现在就能回到岗位上去了。"
+	<</if>>
+	<br><br>
+	你回到了小屋。这一回合雷米赢了，但战争还没有结束。
+	<br><br>
+<<elseif $farm_assault.tower is "manned" or $farm_assault.tower is "attacked">>
+	$farm.tower_guard一瘸一拐走了过来。
+
+	<<endevent>>
+	<<loadNPC 0 "farm_tower_guard">><<person1>>
+
+	<<if $NPCList[0].traits.includes("relaxed")>>
+		"我们一起把<<nnpc_him Alex>>抬进去，"<<he>>指了指地上的艾利克斯，"然后我得去找根烟清醒清醒。"
+	<<elseif $NPCList[0].traits.includes("sociable")>>
+		"<<nnpc_he Alex>>还好吧？"<<he>>问道，然后注意到了地上的瓶子，"啊。"
+	<<elseif $NPCList[0].traits.includes("brooding")>>
+		"抱歉，老大，"<<he>>说，"至少你还没事。我们把<<nnpc_him Alex>>抬进屋里吧。"
+	<<else>>
+		"一团乱啊，"<<he>>说："睡一觉是挺好的，就是这地方可不太对。"
+	<</if>>
+	<br><br>
+
+	<<endevent>>
+	<<npc Alex>><<person1>>
+	你们一起把艾利克斯抬回了小屋，把<<him>>安置在床上。这一回合雷米赢了，但战争还没有结束。
+	<br><br>
+<<else>>
+	你把<<him>>带回小屋之后，将<<him>>安置在了床上。这一回合雷米赢了，但战争还没有结束。
+	<br><br>
+<</if>>
+
+<<unset $fields_damaged>>
+<<unset $farm_destroyed>>
+<<farm_assault_end>>
+
+<<link [[继续|Farm Bedroom]]>><<endevent>><</link>>
+<br>

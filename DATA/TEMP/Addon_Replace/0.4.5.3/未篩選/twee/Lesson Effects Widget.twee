@@ -1,0 +1,325 @@
+:: Lesson Effects Widget [widget]
+<<widget "swimminglessoneffects">>
+	<<advancelesson>>
+	<<stress _lesson_progress>>
+	<<tiredness _lesson_progress>>
+
+	<<if $phase is 1>>
+		<<set $phase to 0>>
+		<<if $exposed gte 1 and $swimall isnot 1>>
+			当下课的铃声响起时，你继续待在泳池中以等待其他学生的离开，但有一些学生依旧徘徊不前。毫无疑问，那些家伙希望在你爬出来的时候能看到独特的风景线，但梅森把那些家伙都赶走了，以此来为你留下一些隐私。
+			<br><br>
+
+		<<elseif $exposed lte 0>>
+			当下课的铃声响起时，你爬出了游泳池。
+			<br><br>
+
+		<</if>>
+
+		<<if $exposed lte 0 or $swimall is 1>>
+			<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+			<br>
+			<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+			<br><br>
+
+		<</if>>
+
+		<<if $exposed gte 1>>
+			<<link [[拿起一些毛巾裹住自己并进入男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+			<br>
+			<<link [[拿起一些毛巾裹住自己并进入女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+			<br><br>
+
+		<</if>>
+	<<else>>
+		<<if $exposed gte 1>>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (8900 - $allure)>>
+				<<eventsswimming>>
+			<<else>>
+				<<eventsswimmingsafe>>
+			<</if>>
+		<<elseif $exposed lte 0>>
+			<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+			<<if $danger gte (8900 - ($allure / 5))>>
+				<<eventsswimming>>
+			<<else>>
+				<<eventsswimmingsafe>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "bookRentalOptions">>
+	<<if $studyBooks is undefined>>
+		<<set $studyBooks to {}>>
+		<<set $studyBooks.rented to "none">>
+		<<set $studyBooks.stolen to "none">>
+	<</if>>
+	<<if (!Time.schoolDay or $schoolstate is "early" or $schoolstate is "late")>>
+		图书馆内异常安静。
+	<<else>>
+		有许多教科书可供租用。
+		<<if $studyBooks.rented isnot "none">>
+			你必须在借出另一本之前归还你所租的书。你目前的租书是<<if $book_rent_timer gt 0>>应在<span class="gold">$book_rent_timer 日<<if $book_rent_timer gt 1>><</if>>后到期。</span><<elseif $book_rent_timer is 0>><span class="blue">今日到期。</span><<else>><span class="red">过期的。</span><</if>>
+		<<else>>
+			没有需要你归还的书。
+		<</if>>
+	<</if>>
+	<br>
+	<<switch $studyBooks.rented>>
+		<<case "science" "maths" "English" "history">>
+			<<schoolicon "library">><<link [[`归还${$studyBooks.rented.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")}课本`|Book Rental]]>><<set $bookRent to "return">><</link>>
+			<br>
+		<<case "Raul and Janet">>
+			<<schoolicon "library">><<link [[归还《劳尔与珍妮特》|Book Rental]]>><<set $phase to 5>><<set $bookRent to "return">><</link>>
+			<br>
+		<<case "Pinch">>
+			<<schoolicon "library">><<link [[归还橄榄色封皮的书|Book Rental]]>><<set $phase to 6>><<set $bookRent to "return">><</link>>
+			<br>
+		<<default>>
+	<</switch>>
+	<<switch $studyBooks.stolen>>
+		<<case "science" "maths" "English" "history">>
+			<<schoolicon "library">><<link [[`归还你偷来的${$studyBooks.stolen.replace("science","科学").replace("maths","数学").replace("English","语文").replace("history","历史")}课本`|Book Rental Return Stolen]]>><</link>>
+			<br>
+		<<case "Raul and Janet">>
+			<<schoolicon "library">><<link [[归还你偷来的《劳尔与珍妮特》|Book Rental Return Stolen]]>><<set $phase to 5>><</link>>
+			<br>
+		<<case "Pinch">>
+			<<schoolicon "library">><<link [[归还你偷来的橄榄色封皮的书|Book Rental Return Stolen]]>><<set $phase to 6>><</link>>
+			<br>
+		<<default>>
+	<</switch>>
+	<<sydneySchedule>>
+	<<if _sydney_location is "library">>
+		<<if $money gte 2000>>
+			<<if $studyBooks.rented is "none">>
+				<<if $studyBooks.stolen isnot "science">>
+					<<scienceicon>><<link [[租借科学课本 (£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 1>><<set $studyBooks.rented to "science">><</link>><<note "+ 被动科学提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.stolen isnot "maths">>
+					<<mathicon>><<link [[租借数学课本 (£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 2>><<set $studyBooks.rented to "maths">><</link>><<note "+ 被动数学提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.stolen isnot "English">>
+					<<englishicon>><<link [[租借语文课本 (£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 3>><<set $studyBooks.rented to "English">><</link>><<note "+ 被动语文提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.stolen isnot "history">>
+					<<historyicon>><<link [[租借历史课本 (£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 4>><<set $studyBooks.rented to "history">><</link>><<note "+ 被动历史提升" "green">>
+					<br>
+				<</if>>
+				<<if currentSkillValue('english') gte 300 and $studyBooks.stolen isnot "Raul and Janet">>
+					<<scarleticon>><<link [[租借《劳尔与珍妮特》(£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 5>><<set $studyBooks.rented to "Raul and Janet">><</link>>
+					<br>
+				<</if>>
+				<<if ((Time.monthName is "November" and Time.monthDay gte 24) or Time.monthName is "December") and $studyBooks.stolen isnot "Pinch">>
+					<<oliveicon>><<link [[租借橄榄色的书 (£20)|Book Rental]]>><<set $money -= 2000>><<set $bookRent to "rent">><<set $phase to 6>><<set $studyBooks.rented to "Pinch">><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				<<if $money gte 1500 and $book_rent_timer lte 13 and $book_rent_timer gt 0>>
+					<<highicon>><<link [[续借你的书 (£15)|Book Rental]]>><<set $money -= 1500>><<set $bookRent to "renew">><</link>>
+					<br>
+				<<elseif $money lt 1500>>
+					<span class=purple>你无法承担续租的费用。</span>
+					<br>
+				<<else>>
+				<</if>>
+			<</if>>
+		<<else>>
+			<span class=purple>你没钱租课本了。</span>
+			<br>
+		<</if>>
+	<<else>>
+		<<if (!Time.schoolDay or $schoolstate is "early" or $schoolstate is "late")>>
+			<<if $studyBooks.stolen is "none">>
+				<<if $studyBooks.rented isnot "science">>
+					<<scienceicon>><<link [[偷科学课本|Book Rental]]>><<set $bookRent to "steal">><<set $studyBooks.stolen to "science">><</link>><<crime "thievery">><<note "+ 被动科学提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.rented isnot "maths">>
+					<<mathicon>><<link [[偷数学课本|Book Rental]]>><<set $bookRent to "steal">><<set $studyBooks.stolen to "maths">><</link>><<crime "thievery">><<note "+ 被动数学提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.rented isnot "English">>
+					<<englishicon>><<link [[偷语文课本|Book Rental]]>><<set $bookRent to "steal">><<set $studyBooks.stolen to "English">><</link>><<crime "thievery">><<note "+ 被动语文提升" "green">>
+					<br>
+				<</if>>
+				<<if $studyBooks.rented isnot "history">>
+					<<historyicon>><<link [[偷历史课本|Book Rental]]>><<set $bookRent to "steal">><<set $studyBooks.stolen to "history">><</link>><<crime "thievery">><<note "+ 被动历史提升" "green">>
+					<br>
+				<</if>>
+				<<if currentSkillValue('english') gte 300 and $studyBooks.rented isnot "Raul and Janet">>
+					<<scarleticon>><<link [[偷《劳尔与珍妮特》|Book Rental]]>><<set $phase to 5>><<set $bookRent to "steal">><<set $studyBooks.stolen to "Raul and Janet">><</link>><<crime "thievery">>
+					<br>
+				<</if>>
+				<<if ((Time.monthName is "November" and Time.monthDay gte 24) or Time.monthName is "December") and $studyBooks.stolen isnot "Pinch">>
+					<<oliveicon>><<link [[偷橄榄色的书|Book Rental]]>><<set $phase to 6>><<set $bookRent to "steal">><<set $studyBooks.stolen to "Pinch">><</link>><<crime "thievery">>
+					<br>
+				<</if>>
+			<<else>>
+				你一次只能携带一本被偷的书。
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "homeStudyOptions">>
+	<<if $studyBooks isnot undefined>>
+		<<switch $studyBooks.rented>>
+			<<case "science">>
+				/*<<link [[Study science (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 1>><</link>><<gscience>>
+				<br>*/
+			<<case "maths">>
+				/*<<link [[Study maths (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 2>><</link>><<gmaths>>
+				<br>*/
+			<<case "English">>
+				/*<<link [[Study English (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 3>><</link>><<genglish>>
+				<br>*/
+			<<case "history">>
+				/*<<link [[Study history (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 4>><</link>><<ghistory>>
+				<br>*/
+			<<case "Raul and Janet">>
+				<<scarleticon>><<link [[阅读《劳尔与珍妮特》(0:01)|ScarletBook1]]>><<pass 1>><<set $scarletExitPassage to $passage>><</link>>
+				<br>
+			<<case "Pinch">>
+				<<oliveicon>><<link [[阅读橄榄色封皮的书 (0:01)|Olive Book 1]]>><<pass 1>><<set $oliveExitPassage to $passage>><</link>>
+				<br>
+			<<default>>
+		<</switch>>
+		<<switch $studyBooks.stolen>>
+			<<case "science">>
+				/*<<link [[Study science (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 1>><</link>><<gscience>>
+				<br>*/
+			<<case "maths">>
+				/*<<link [[Study maths (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 2>><</link>><<gmaths>>
+				<br>*/
+			<<case "English">>
+				/*<<link [[Study English (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 3>><</link>><<genglish>>
+				<br>*/
+			<<case "history">>
+				/*<<link [[Study history (0:20)|$passage]]>><<set $study to 1>><<pass 20>><<set $phase to 4>><</link>><<ghistory>>
+				<br>*/
+			<<case "Raul and Janet">>
+				<<scarleticon>><<link [[阅读《劳尔与珍妮特》(0:01)|ScarletBook1]]>><<pass 1>><<set $scarletExitPassage to $passage>><</link>>
+				<br>
+			<<case "Pinch">>
+				<<oliveicon>><<link [[阅读橄榄色封皮的书 (0:01)|Olive Book 1]]>><<pass 1>><<set $oliveExitPassage to $passage>><</link>>
+				<br>
+			<<default>>
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<!-- "upperruined" doesn't take sets into account, so use "strip" and destroy the carried towel parts -->
+<<widget "droptowel">>
+	<<if _toweldrop is "both">>
+		<<generalStrip "upper">>
+		<<generalStrip "lower">>
+	<<elseif _toweldrop is "lower">>
+		<<generalStrip "lower">>
+	<<elseif _toweldrop is "upper">>
+		<<generalStrip "upper">>
+	<</if>>
+<</widget>>
+
+<!-- Will check if the pc can drop a towel to expose themselves. Returns its result in "_exlevel" and "_toweldrop".-->
+<<widget "checkdroptowel">>
+	<<set _bottom to "nothing">>
+	<<set _top to "nothing">>
+	<<if $exhibitionism gte 55>>
+		<<if ($worn.lower.name is "towel skirt" or $worn.lower.name is "large towel bottom") and $worn.over_lower.exposed gte 2>>
+			<<if $worn.under_lower.exposed lt 1 or $exhibitionism gte 75>>
+				<<set _bottom to "strip">>
+			<</if>>
+		<</if>>
+		<<if ($worn.upper.name is "towel top" or $worn.upper.name is "large towel") and $worn.over_upper.exposed gte 2>>
+			<<if $worn.upper.one_piece isnot 1 or _bottom is "strip">>
+				<<set _top to "strip">>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if _bottom is "strip" and _top is "strip">>
+		<<set _exlevel to ($worn.under_lower.exposed lt 1 ? 1 : 2)>>
+		<<set _toweldrop to "both">>
+	<<elseif _bottom is "strip">>
+		<<set _exlevel to ($worn.under_lower.exposed lt 1 ? 1 : 2)>>
+		<<set _toweldrop to "lower">>
+	<<elseif _top is "strip">>
+		<<set _exlevel to 1>>
+		<<set _toweldrop to "upper">>
+	<<else>>
+		<<set _exlevel to 0>>
+		<<set _toweldrop to "none">>
+	<</if>>
+<</widget>>
+
+<<widget "school_infirmary_options">>
+	<<if $passage isnot "School Infirmary Ask Painkiller">>
+		<<schoolicon "infirmary">><<link [[请求提供止痛药|School Infirmary Ask Painkiller]]>><</link>>
+		<br>
+	<</if>>
+	<<if $passage isnot "School Infirmary Ask Bed">>
+		<<bedroomicon>><<link [[请求使用一张床|School Infirmary Ask Bed]]>><</link>>
+		<br>
+	<</if>>
+	<<if $passage isnot "School Infirmary Cabinet">>
+		<<pillicon>><<link [[查看橱柜内部|School Infirmary Cabinet]]>><</link>>
+		<br>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[离开|Hallways]]>><<endevent>><</link>>
+	<br>
+<</widget>>
+
+<<widget "infirmary_excused">>
+	<<switch $schoolstate>>
+		<<case "first">>
+			<<set $daily.school.scienceExcused to true>>
+		<<case "second">>
+			<<set $daily.school.mathsExcused to true>>
+		<<case "third">>
+			<<set $daily.school.englishExcused to true>>
+		<<case "fourth">>
+			<<set $daily.school.historyExcused to true>>
+		<<case "fifth">>
+			<<set $daily.school.swimmingExcused to true>>
+	<</switch>>
+<</widget>>
+
+<<widget "enableSchoolRescue">>
+	/* Call with all applicable conditions for a rescue in any order. ex: <<enableSchoolRescue "Whitney" "delinquency">> for scenes where Whitney or low delinquency can save you, or <<enableSchoolRescue "Leighton">> for scenes where just Leighton can save you. */
+	/* Shouldn't be called without any arguments; just use the standard "enable_rescue" widget for those cases. */
+	<<if $drugged lte 0>>
+		<<set $_rescue to []>>
+
+		<<if _args.includes("Whitney") and C.npc.Whitney.dom gte random(10, 25) and C.npc.Whitney.state is "active" and $whitneyromance is 1>>
+			<<set $_rescue.push("Whitney")>>
+		<</if>>
+
+		/* There are no cases where Leighton being present and low delinquency are separate conditions for rescue, but there are some where both are required. ex: "Maths Note Molestation" */
+		<<if _args.includesAll("delinquency", "Leighton") and $delinquency lt 400 and $pillory_tenant.special.name isnot "Leighton">>
+			<<set $_rescue.push("Leighton")>>
+		<<elseif _args.includes("delinquency") and $delinquency lt 400>>
+			<<set $_rescue.push("delinquency")>>
+		<<elseif _args.includes("Leighton") and $pillory_tenant.special.name isnot "Leighton">>
+			<<set $_rescue.push("Leighton")>>
+		<</if>>
+
+		<<if $_rescue.includes("Whitney") and $_rescue.includes("delinquency", "Leighton")>>
+			/* Safe Whitney rescue */
+			<<set $rescue to 3>>
+		<<elseif $_rescue.includes("Whitney")>>
+			/* Lone Whitney rescue */
+			<<set $rescue to 2>>
+		<<elseif $_rescue.length gt 0 or !_args[0]>>
+			/* Safe rescue */
+			<<set $rescue to 1>>
+		<</if>>
+	<</if>>
+<</widget>>

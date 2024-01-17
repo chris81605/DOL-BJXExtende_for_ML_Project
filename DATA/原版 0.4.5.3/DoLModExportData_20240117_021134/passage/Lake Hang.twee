@@ -1,0 +1,73 @@
+:: Lake Hang []
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<if $rng gte 81>>
+	你和其他人一起在湖面上玩打水漂，有的人一口气打了六次。
+<<elseif $rng gte 61>>
+	你帮忙建了一个沙堡，直到它因自身重量而倒塌。不过你还是度过了愉快的时光。
+<<elseif $rng gte 41>>
+	你和别人一起玩飞盘接球。
+	<<gathletics>><<athletics 3>><<physique 3>>
+<<elseif $rng gte 21>>
+	<<if $cool gte 160>>
+		你和一些你在课堂上认识的同学聊天。一位<<generates1>><<person1>><<person>>试图通过独自进入森林来给你留下印象。没走多远，<<he>>就被奇怪的声音吓了回来。
+		<<ltrauma>><<trauma -3>><<endevent>>
+	<<elseif $cool gte 40>>
+		你和一些你在课堂上认识的同学聊天。
+	<<else>>
+		你试图和一些你在课堂上认识的同学聊天，但大部分人都不理你。
+		<<gtrauma>><<trauma 3>>
+	<</if>>
+<<else>>
+	一场追逐游戏突然开始了，
+	<<if currentSkillValue('athletics') gte 800>>
+		没有人能追到你。
+		<<gcool>><<status 1>><<gathletics>><<athletics 3>><<physique 3>>
+	<<elseif currentSkillValue('athletics') gte 400>>
+		你尽全力奔跑着。
+		<<gathletics>><<athletics 3>><<physique 3>>
+	<<else>>
+		轮到你当"鬼"的时候，你很难抓到其他人。
+		<<lcool>><<status -10>><<gathletics>><<athletics 3>><<physique 3>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if Time.hour is 20>>
+	天色渐晚，森林的影子变长了。人们准备回到城镇，毕竟没有人想独自在夜间的森林里行走。
+	<br><br>
+
+	<<if $exposed lte 0>>
+		<<link [[和他们一起去 (0:30)|Lake Return Journey]]>><<set $foresthunt to 0>><<pass 30>><</link>>
+		<br>
+	<</if>>
+	<<link [[留下|Lake Shore]]>><</link>>
+	<br>
+<<elseif $danger gte (9900 - $allure)>>
+	<<if $cool gte 160>>
+		一个<<generates1>><<person1>><<person>>走过来。"嗨，嗨，"<<he>>说道。"唔，我，我能问你件事吗？"<<He>>深深地吸了口气。"你可以吻我吗？他们说如果我能从你这里得到一个吻，他们会离我远点。"<<He>>低下头，脸已通红。<<He>>提到的那些学生们就在不远处的岩石上看着。你曾见过他们欺负<<person>>。
+		<br><br>
+
+		<<link [[亲吻|Lake Kiss]]>><<status -10>><</link>><<promiscuous1>><<lcool>>
+		<br>
+		<<link [[拒绝|Lake Refuse]]>><</link>>
+		<br>
+		<<link [[笑|Lake Laugh]]>><<status 1>><</link>><<gcool>>
+		<br>
+	<<else>>
+		一位<<generatey1>><<person1>><<person>>在岩石后面抓住你并摸你。
+		<br><br>
+
+		<<if $promiscuity gte 15>>
+			<<link [[摸回来|Lake Hang Sex]]>><<set $sexstart to 1>><</link>><<promiscuous2>>
+			<br>
+		<</if>>
+		<<link [[推开|Lake Hang Shove]]>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[闲晃 (0:30)|Lake Hang]]>><<pass 30>><<stress -6>><<status 1>><</link>><<gcool>><<lstress>>
+	<br>
+	<<link [[停止|Lake Shore]]>><</link>>
+	<br>
+<</if>>

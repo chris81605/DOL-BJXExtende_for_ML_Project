@@ -1,0 +1,56 @@
+:: Lake Lichen []
+<<set $outside to 0>><<set $location to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+<<hallucinogen 180>>
+苔藓在你触摸时破碎了，但你收集了足够的用于科学项目。<<if !$wraithPrison>>在苔藓破碎的地方，你注意到墙上刻着一个符文。<</if>>
+<br><br>
+<span class="gold">你可以将找到的地衣添加到你房间或学校图书馆的项目报告中。</span>
+<br><br>
+一股温暖从你的手指传遍全身，你感到头晕目眩。
+<br><br>
+<i>你被迷幻剂影响了。直到它消失，你将拥有幻觉和严重幻觉的特征。高创伤或意识也会导致幻觉。</i>
+<br><br>
+<<generateWraith 1 true>>
+<<if $wraith.state isnot "">>
+	<<rainWraith>>
+	你突然感到自己被猛拉着，然后与一个美丽的苍白的人影面对面。
+	<<if $wraith.state is "haunt">>
+		"<span class="wraith">小偷又回来偷窃了。</span>"
+	<<else>>
+		"<span class="wraith">闯入者……</span>"
+	<</if>>
+	<br><br>
+	<<initWraith "abomination">>
+	<<He>>的一只手紧紧地勒住你的脖子。
+	<<set $NPCList[0].lefthand to "throat">><<set $neckuse to "hand">>
+	<<if $wraith.gen is "abomination">>
+		<<He>>举起<<his>>的另一只手，一群苍白的触手从阴影中升起。
+	<<else>>
+		还有几双手臂在你周围蠕动。
+	<</if>>
+	<br><br>
+	<<if $wraith.state is "haunt" and isBloodmoon()>>
+		<<link [[继续|Wraith Caught]]>><<set $wraith.exit to "lake_ruin">><</link>>
+	<<else>>
+		<<link [[继续|Wraith Underwater Rape]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+	<br>
+<<else>>
+	<<initWraith "man">>
+	你听到低语声，转过头看到一个美丽的苍白人影漂浮在你面前。
+	<<if $museumAntiques.antiques.antiqueivorynecklace isnot "notFound">>
+		<<Hes>>赤身裸体，手按在<<his>>的脖子上，愤怒地看着你。
+	<<else>>
+		<<Hes>>赤身裸体，颈部系着一条象牙项链。
+	<</if>>
+	<<if $tentacledisable is "f">>
+		<<He>>举起<<his>>的手，一团触手从黑暗中升起。它向你飞奔而来。
+		<br><br>
+		<<link [[继续|Lake Underwater Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<He>>喊出一些听不懂的话，然后向你扑来。
+		<br><br>
+		<<link [[继续|Lake Underwater Rape]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

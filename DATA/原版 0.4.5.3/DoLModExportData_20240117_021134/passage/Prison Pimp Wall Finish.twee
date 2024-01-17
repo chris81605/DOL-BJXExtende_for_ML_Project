@@ -1,0 +1,39 @@
+:: Prison Pimp Wall Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<set $prison_pimp_serviced += 1>>
+	<<ejaculation>><<set $forcedprostitutionstat += 1>><<fameprostitution 3>>
+	他们的声音渐渐消失了，<<tearful>>你振作起来。
+	<br><br>
+	<<endcombat>>
+
+
+<<else>>
+	他们愤怒的声音渐渐消失了，<<tearful>>你振作起来。
+	<br><br>
+	<<endcombat>>
+
+<</if>>
+
+<<set $prison_pimp -= 1>>
+
+<<if $prison_pimp lte 0>>
+	<<link [[继续|Prison Pimp End]]>><</link>>
+	<br>
+<<elseif $stress gte $stressmax>>
+	你再也承受不住了。你失去了意识。
+	<br><br>
+
+	<<link [[继续|Passout Prison Pimp]]>><</link>>
+	<br>
+<<else>>
+	<<generate1>><<generate2>><<generate3>>
+	<<for _i = 0; _i < $NPCList.length; _i++>>
+		<<npcClothesType $NPCList[_i] "town">>
+	<</for>>
+	更多声音在靠近——有人在抚摸你的<<bottom>>。
+	<br><br>
+
+	<<link [[继续|Prison Pimp Wall]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>

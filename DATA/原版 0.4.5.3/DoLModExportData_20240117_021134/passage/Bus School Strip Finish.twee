@@ -1,0 +1,64 @@
+:: Bus School Strip Finish []
+<<if $enemyhealth lte 0>>
+	<<person1>><<person>>向后倒在通道上，另外两人从你身边离开。"走吧，"<<he>>说道。"这个精神病不值得我们这么做。"
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	公共汽车很快就到了你的目的地。
+	<<destination5>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"你至少还有点长处。"<<tearful>>你振作起来。他们三个去找别人骚扰。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	公共汽车很快就到了你的目的地。
+	<<destination5>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	开车的<<generate4>><<person4>><<person>>说："你们后面别闹了，否则我会来收拾你们的。"三人停止了侵犯。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	公共汽车很快就到了你的目的地。
+	<<destination5>>
+<<elseif $timer lte 0>>
+	汽车停了下来。"我们需要在这里下车，"<<person2>><<person>>说道。
+	<<if $upperoff is 0 and $loweroff is 0 and $underloweroff is 0 and $underupperoff is 0>>
+	<<else>>
+		他们下了车，带走了你的衣服。
+		<<set $stealtextskip to 1>>
+		<<stealclothes>>
+	<</if>>
+	<<if $exposed gte 1>>
+		<<clotheson>>
+		<<endcombat>>
+		<<tearful>>你躲在座位上以免被人看见。
+		<br><br>
+		你很快就到了目的地，但你不能就这样离开。公共汽车必须在某个时间点返回车站。
+		<br><br>
+		<<link [[向别人求助|Bus School Strip Help]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[等待 (1:00)|Bus Station]]>><<pass 1 hour>><</link>>
+	<<else>>
+		<<tearful>>你坐回座位。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		公共汽车很快就到了你的目的地。
+		<<destination5>>
+	<</if>>
+<<else>>
+	"好多了，"<<person1>><<person>>说道。"现在每个人都能看到你了。"汽车停了下来。"我们到站了。再见，荡妇。"他们带走了你的衣服。
+	<br><br>
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+	<<tearful>>你躲在座位上以免被人看见。
+	<br><br>
+	你很快就到了目的地，但你不能就这样离开。公共汽车必须在某个时间点返回车站。
+	<br><br>
+	<<link [[向别人求助|Bus School Strip Help]]>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[等待 (1:00)|Bus Station]]>><<pass 1 hour>><</link>>
+<</if>>

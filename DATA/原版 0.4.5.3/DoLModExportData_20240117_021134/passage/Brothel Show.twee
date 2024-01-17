@@ -1,0 +1,176 @@
+:: Brothel Show []
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<npc Briar>><<person1>>
+<<if $brothelshowdata.type is "flirt">>
+	<<startbrothelshow "flirt">>
+	布莱尔看向你，"万事俱备，就等着明星上场了，小心那顶蓝帽子。"你走上舞台。一盏白色的灯在你上方亮起，黑暗又吵闹的房间内瞬间鸦雀无声。你看不到舞台边缘以外的东西，但你能感觉到目光都聚焦在你身上。
+	<br><br>
+	<<endevent>><<generate1>><<person1>>
+	你和观众们调情。你的眼睛适应了黑暗，就要看到了。你看到面前有一个戴着蓝色帽子的<<person>>。
+	<br><br>
+	"我忍不住我的性欲了，"你说，"我再也受不了了，我需要一个志愿者。"许多人跃跃欲试，纷纷举起了手。
+	<<promiscuity4>>
+
+	<<link [[指向演员|Brothel Show Flirt]]>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[指向观众|Brothel Show Flirt]]>><<set $phase to 1>><</link>>
+	<br>
+<<elseif $brothelshowdata.type is "gangbang">>
+	<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school")>>
+		<<startbrothelshow "gangbang">>
+		布莱尔转过身来看着你。"小可爱，我们都准备好了。这次的节目没有剧本，试着给观众们来一段即兴表演。"你走上舞台，一盏白色的灯在你上方亮起，黑暗房间里的喧闹声停止下来。你看不到舞台边缘以外的东西，但你能感觉到眼睛在盯着你。
+		<br><br>
+		"女士们，先生们！"布莱尔的声音响彻整个房间。"今天，我们将见证一个学校的人气<<girl>>误入镇子上最邪恶的地方所发生的故事。"观众中爆发出欢呼声和口哨声。"<<pShes>>在班上名列前茅，但对象牙塔外的事情毫无经验。<<phim>>会面临怎样的命运呢？让我们拭目以待。"
+		<<endevent>><<generate1>><<generate2>><<generate3>><<generate4>><<person1>>布莱尔的其他四名员工爬到你旁边。他们面对面，假装在说话，没有注意到你，等待你的引导。
+		<br><br>
+		<<link [[装作高傲的样子|Brothel Show Gangbang]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[装作迷了路害怕的样子|Brothel Show Gangbang]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		布莱尔转过身来看着你。"我们准备好了，换上你的校服，我们就可以开始了。"
+		<br><br>
+		<<link [[继续|Brothel]]>><<endevent>><</link>>
+	<</if>>
+<<elseif $brothelshowdata.type is "pig">>
+	<<startbrothelshow "pig">>
+	<<endevent>>
+
+	/* guarantees pig will be generated as a monster - regardless of monsterchance - if monsterpeople are possible and beasts are disabled; otherwise generated as usual */
+	<<if $bestialitydisable is "t" and $monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f")>>
+		<<if maleChance() gte random(1, 100)>>
+			<<if $cbchance gte random(1, 100)>>
+				<<beastNEWinit 1 pig m vagina monster>>
+			<<else>>
+				<<beastNEWinit 1 pig m penis monster>>
+			<</if>>
+		<<else>>
+			<<if $dgchance gte random(1, 100)>>
+				<<beastNEWinit 1 pig f penis monster>>
+			<<else>>
+				<<beastNEWinit 1 pig f vagina monster>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<beastNEWinit 1 pig>>
+	<</if>>
+
+	/* defaults to gangbang show if the player changed their beast settings, or has lost hallucinations since accepting the job */
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		布莱尔看向你。"我们都准备好了，正在等待明星。"<<nnpc_him "Briar">>旁边的笼子在摇晃。"野兽有点激动，但我相信你能应付。"你走上舞台。一盏白光在你上方亮起，黑暗房间里的喧闹声停止下来。你看不到舞台边缘以外的东西，但你能感觉到眼睛在盯着你。
+		<br><br>
+
+		"女士们，先生们！"布莱尔的声音响彻整个房间。"今天我们有一个特别的节目。一个<<girl>>在森林中迷路，被一只贪婪的野兽袭击了的故事！"你听到笼子打开的声音，在那之后<<beasttype>>走上舞台。一条皮带连接着<<bhis>>的脖子和后面的步道上。皮带的松弛度足以让它够到你，观众为之欢呼。
+		<<deviancy5>>
+
+		<<link [[继续|Brothel Show Pig]]>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		"你是什么意思，预订？整支钢笔？！什么样的变态……"<<nnpc_He "Briar">>开始了一系列的咒骂，最后这位工人被解雇了。"真是难以置信。"
+		<br><br>
+
+		<<nnpc_He "Briar">>沉浸于台上的狂风暴雨，连看都不看你一眼。在后台，你听到<<nnpc_his "Briar">>的声音，然后是失望的低语。不久之后，布莱尔回来了，身边是一群困惑的舞台管理员<<nnpc_He "Briar">>还拿着一件似乎是旧校服的东西。
+		<br><br>
+
+		"改变计划。"<<nnpc_He "Briar">>将制服塞进你的怀里。"换衣服，马上上台。"
+		<br><br>
+
+		<<nnpc_His "Briar">>的语气不容置疑。你乖乖照做了。
+		<br><br>
+
+		<<undress "brothelimprov">>
+		<<set $uppertemp to "init">><<upperwear 5>><<set $worn.upper.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine")>><<set $worn.upper.integrity /= 2>>
+		<<set $lowertemp to "init">><<if $player.gender_appearance is "m">><<lowerwear 60>><<else>><<lowerwear 61>><</if>><<set $worn.lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine")>><<set $worn.lower.integrity /= 2>>
+
+		<<link [[继续|Brothel Show Pig Improv]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $brothelshowdata.type is "swarm">>
+	<<startbrothelshow "swarm">>
+	布莱尔看向你，"我们都准备好了，都在等你呢。"
+	<br><br>
+	<<generate2>><<generate3>>
+	<<if $worn.upper.name is "naked" and $worn.lower.name is "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+		一名<<person2>><<person>>和一名<<person3>><<person>>登上了舞台，把你的双手绑在背后。
+		他们绑的恰到好处，限制住了你的行动，但又不至于让你不舒服。
+	<<else>>
+		一名<<person2>><<person>>和一名<<person3>><<person>>走上了舞台，他们脱下了你的衣服，然后把你的双手绑在背后。
+		他们绑的恰到好处，限制住了你的行动，但又不至于让你不舒服。
+		<<undressclothes "wardrobe">>
+	<</if>>
+	<<bindtemp>>
+	<<legbind>>
+	<<person1>>
+	<br><br>
+	他们把你带到了一块板子上，把你的手脚固定在了一个金属环上，又在放下四块透明的墙板，把它们固定在地上，组成了一个玻璃缸，把你围住，
+	你被关在其中，动弹不得。
+	<br><br>
+	"女士们，先生们！"布莱尔向观众们宣告着。"如果您看到爬虫类的东西会感到不适，那我强烈建议您离场。"
+	<br><br>
+	"如果您不怕，"<<he>>呼喊着，声音提高了一档。"请欣赏我们最为奇特的表演！"刚才那两人又登上了舞台，搬着一个颤动着的箱子。
+	<br><br>
+	"请尽情欣赏<<pshe>>在这些小家伙们的爱抚下淫荡颤抖的样子吧！"<<deviancy5>>
+	<<endevent>>
+	<<link [[继续|Brothel Show Swarm]]>><<set $sexstart to 1>><<rng>><</link>>
+<<elseif $brothelshowdata.type is "machine">>
+	<<startbrothelshow "machine">>
+	<<endevent>><<generate1>><<generate2>><<person1>>
+	布莱尔看向你。"都准备好了，就等你呢。记住，观众们想看插入戏。"你登上舞台，站在摆好的桌子旁。今天的观众比平时少。布莱尔说过，这是一场私人表演。一盏白色的灯在你头上亮起，观众席暗了下去。
+	<br><br>
+	"女士们，先生们！"布莱尔的声音响彻整个房间。"今天我们将看到：一名骄傲的学生测试自己的科学项目，却不知道自己的造物成功过头了。"一名<<fullGroup>>，穿着黑色的连体衣，把性爱机器推上了舞台，放在了你身后。润滑液从机器上的阴茎滴落着。
+	<br><br>
+
+	<<link [[继续|Brothel Show Machine Intro]]>><</link>>
+	<br>
+<<elseif $brothelshowdata.type is "tentacles">>
+	<<startbrothelshow "tentacles">>
+	<<endevent>><<generate1>><<generate2>><<person1>>
+	布莱尔看向你。"都准备好了，就等你呢。记住，观众们想看插入戏。"你登上舞台，站在摆好的桌子旁。今天的观众比平时少。布莱尔说过，这是一场私人表演。一盏白色的灯在你头上亮起，观众席暗了下去。
+	<br><br>
+	"女士们先生们！"布莱尔的声音响彻整个房间，"这次，我们有了一位求知似渴的学生，想要测试<<pher>>的科学项目，但<<pShe>>似乎没意识到，<<pShe>>的发明似乎有些成功过头了。"一队穿着黑衣的<<fullGroup>>将性爱机器推到了你身后。上面的几个面板开始闪烁。
+	<br><br>
+
+	<<link [[继续|Brothel Show Tentacles Intro]]>><</link>>
+	<br>
+<<elseif $brothelshowdata.type is "horse">>
+	<<startbrothelshow "horse">>
+	<<endevent>><<loadNPC 0 "saddled_steed">><<person1>>
+	布莱尔看向你，"我们和你这位朋友都准备好了。"
+	<br><br>
+	<<if $monster is 1>>
+		你的$farm.steed骏马点了点头。"我可一直想当明星呢，"<<he>>笑着。"还以为出名的时候是被人骑着，没想到居然反过来了。"
+	<<else>>
+		你的$farm.steed骏马期待地叫了一声。
+	<</if>>
+	你牵着<<bhim>>的缰绳，走上了明亮的舞台。舞台中间有张桌子，铺着粉红色的垫子。你看不清身处暗处的观众们，但你听得见他们讶异又期待的低语。台下听上去似乎座无虚席。
+	<br><br>
+
+	"女士们，先生们！"布莱尔向观众们宣告着。"今天我们有一场特殊的节目。一名高傲的骑手，刚刚赢下一场万众瞩目的胜利。而带给<<phim>>胜利的那匹骏马，也将获得<<pshe>>应有的奖励。"
+	<br><br>
+
+	<<link [[继续|Brothel Show Horse Intro]]>><</link>>
+	<br>
+<<elseif $brothelshowdata.type is "bukkake">>
+	<<startbrothelshow "bukkake">>
+	<<endevent>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	布莱尔看向你。"万事俱备，就等肉便器出场了。记住，<span class="gold">你每帮忙一次我就发你£50</span>。"
+	<<if $demon gte 6>>
+		<<nnpc_He "Briar">>看向你甩动的尾巴。"完美，你简直就是生来干这种活的。"
+	<</if>>
+	<br><br>
+	你走上了舞台。一盏白灯从上方照向了你。"女士们先生们，很抱歉，我们的场地内闯入了一只肮脏的
+	<<if $player.gender_appearance is "m">>
+		魅影。"
+	<<else>>
+		魅魔。"
+	<</if>>
+	你听到观众席中传来窃窃私语。"这家伙把我们都劫作人质了！<<pShe>>不会放了我们，除非我们能给<<pshe>>足够的淫液当赎金！"
+	<br><br>
+
+	<<brothelicon>><<link [[舔嘴唇|Brothel Show Bukkake Intro]]>><<set $phase to 0>><</link>>
+	<br>
+	<<ind>><<link [[拍屁股|Brothel Show Bukkake Intro]]>><<set $phase to 1>><</link>>
+	<br>
+
+<</if>>

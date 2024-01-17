@@ -1,0 +1,244 @@
+:: Widgets State Man [widget]
+<<widget "stateman">>
+	<div @class="($debugLines ? 'debugLines-stateman' : '')">
+		<<if $position isnot "stalk">>
+			<<if $fightTargets is undefined or $fightTargets.length lte 0>>
+				<<set $_enemies to $enemyno>>
+			<<else>>
+				<<set $_enemies to $fightTargets.length>>
+			<</if>>
+			<<set _looks to "看起来">>
+			<<set _doesntlook to ($_enemies is 1? "doesn't look" : "don't look")>>
+			<<set _is to ($_enemies is 1? "is" : "are")>>
+			<<set $_n to 0>>
+			<<if $enemyno is 1 and $enemynomax gt 1>>
+				<<for $_i to 0; $_i lt $enemynomax; $_i++>>
+					<<if $NPCList[$_i].active is "active" and $NPCList[$_i].stance isnot "defeated">>
+						<<set $_n to $_i>>
+						<<break>>
+					<</if>>
+				<</for>>
+			<</if>>
+			<<if ["m", "f", "i", "n", "t"].includes($NPCList[$_n].pronoun)>>
+				<<set $pronoun to $NPCList[$_n].pronoun>>
+			<<elseif $options.debugdisable is "f">>
+				<span class="red">ERROR: Unexpected $$NPCList[0].pronoun: [$NPCList[0].pronoun]</span>
+			<</if>>
+			<<if $enemytype is "beast" and $monster is 0>>
+				<<set $pronoun to "i">>
+			<</if>>
+			<<if $_enemies gt 1>>
+				<<set $pronoun to "t">>
+			<</if>>
+			
+			/* 北极星模组 */
+			<<if $options.bjx_health>>
+			<<if $enemyhealth lte 0>>
+			    <<combatcontrol 15>><<def 10>>
+			<</if>>
+			<<if $_enemies is 1>>
+			    <<if $loveDrunk>>
+        	        <<set _col to "lustful">>
+    			<<elseif $enemyhealth gte $enemyhealthmax>>
+    				<<set _col to "red">>
+    			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 4>>
+    				<<set _col to "pink">>
+    			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 3>>
+    				<<set _col to "purple">>
+    			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 2>>
+    				<<set _col to "blue">>
+    			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 1>>
+    				<<set _col to "lblue">>
+    			<<elseif $enemyhealth gt 0>>
+    				<<set _col to "teal">>
+    			<<elseif $enemyhealth lte 0>>
+    				<<set _col to "green">>
+    			<</if>>
+        		<span @class=_col><<He>>的血量: <<print Math.ceil($enemyhealth)>> / $enemyhealthmax</span>
+        		<br>
+			<<else>>
+    			<<for _npctodamage to 0; _npctodamage lt $enemynomax; _npctodamage++>>
+        			<<if $NPCList[_npctodamage].active is "active" and $NPCList[_npctodamage].stance isnot "defeated">>
+        			    <<if $loveDrunk>>
+        			        <<set _col to "lustful">>
+            			<<elseif $NPCList[_npctodamage].health gte $NPCList[_npctodamage].healthmax>>
+            				<<set _col to "red">>
+            			<<elseif $NPCList[_npctodamage].health gte ($NPCList[_npctodamage].healthmax / 5) * 4>>
+            				<<set _col to "pink">>
+            			<<elseif $NPCList[_npctodamage].health gte ($NPCList[_npctodamage].healthmax / 5) * 3>>
+            				<<set _col to "purple">>
+            			<<elseif $NPCList[_npctodamage].health gte ($NPCList[_npctodamage].healthmax / 5) * 2>>
+            				<<set _col to "blue">>
+            			<<elseif $NPCList[_npctodamage].health gte ($NPCList[_npctodamage].healthmax / 5) * 1>>
+            				<<set _col to "lblue">>
+            			<<elseif $NPCList[_npctodamage].health gt 0>>
+            				<<set _col to "teal">>
+            			<<elseif $NPCList[_npctodamage].health lte 0>>
+            				<<set _col to "green">>
+            			<</if>>
+            			<<set _nameB to $NPCList[_npctodamage].fullDescription.replace("Avery","艾弗里").replace("Bailey","贝利").replace("Briar","布莱尔").replace("Charlie","查里").replace("Darryl","达里尔").replace("Doren","多伦").replace("Eden","伊甸").replace("Gwylan","格威岚").replace("Harper","哈珀").replace("Jordan","约旦").replace("Kylar","凯拉尔").replace("Landry","兰德里").replace("Leighton","礼顿").replace("Mason","梅森").replace("Morgan","摩根").replace("River","瑞沃").replace("Robin","罗宾").replace("Sam","萨姆").replace("Sirris","西里斯").replace("Whitney","惠特尼").replace("Winter","温特").replace("Niki","尼奇").replace("Quinn","奎恩").replace("Remy","雷米").replace("Alex","艾利克斯").replace("Wren","伦恩").replace("Sydney","悉尼").replace("Taylor","泰勒").replace("Casey","凯西").replace("Ivory Wraith","象牙幽灵").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰").replace("Zephyr","泽菲尔")>>
+        				<span @class=_col>_nameB血量: <<print Math.ceil($NPCList[_npctodamage].health)>> / $NPCList[_npctodamage].healthmax</span>
+        				<br>
+        			<</if>>
+        		<</for>>
+    		<</if>>
+    		<<if $enemyarousal gte $enemyarousalmax>>
+				<<set _col to "red">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<set _col to "pink">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 3>>
+				<<set _col to "purple">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<set _col to "blue">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 1>>
+				<<set _col to "lblue">>
+			<<elseif $enemyarousal gt 0>>
+				<<set _col to "teal">>
+			<<elseif $enemyarousal lte 0>>
+				<<set _col to "green">>
+			<</if>>
+    		<span @class=_col><<He>>的性奋: <<print Math.ceil($enemyarousal)>> / $enemyarousalmax</span>
+    		<br>
+    		<<if $enemyanger gte $enemyangermax>>
+				<<set _col to "red">>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 4>>
+				<<set _col to "pink">>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 3>>
+				<<set _col to "purple">>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 2>>
+				<<set _col to "blue">>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 1>>
+				<<set _col to "lblue">>
+			<<elseif $enemyanger gt 0>>
+				<<set _col to "teal">>
+			<<elseif $enemyanger lte 0>>
+				<<set _col to "green">>
+			<</if>>
+    		<span @class=_col><<He>>的愤怒: <<print Math.ceil($enemyanger)>> / $enemyangermax</span>
+    		<br>
+    		<<if $enemytrust lte -100>>
+				<<set _col to "red">>
+			<<elseif $enemytrust lte -60>>
+				<<set _col to "pink">>
+			<<elseif $enemytrust lte -20>>
+				<<set _col to "purple">>
+			<<elseif $enemytrust lte 20>>
+				<<set _col to "blue">>
+			<<elseif $enemytrust lte 60>>
+				<<set _col to "lblue">>
+			<<elseif $enemytrust lte 100>>
+				<<set _col to "teal">>
+			<<elseif $enemytrust gt 100>>
+				<<set _col to "green">>
+			<</if>>
+    		<span @class=_col><<He>>的信任: <<print Math.ceil($enemytrust)>></span>
+    		<br>
+			<<else>>
+			/* 北极星 */
+
+			<<if $loveDrunk>>
+				<span class="lustful"><<He>>_looks<<print either("陶醉于爱情", "罪孽深重", "疯了", "欲火焚身", "极度狂喜")>>。</span>
+			<<elseif $enemyhealth gte $enemyhealthmax>>
+				<span class="red"><<He>>_looks很急切。</span>
+			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 4>>
+				<span class="pink"><<He>>_looks有些难受。</span>
+			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 3>>
+				<span class="purple"><<He>>_looks有些痛苦。</span>
+			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 2>>
+				<span class="blue"><<He>>_looks十分痛苦。</span>
+			<<elseif $enemyhealth gte ($enemyhealthmax / 5) * 1>>
+				<span class="lblue"><<He>>_looks受到了不少伤害。</span>
+			<<elseif $enemyhealth gt 0>>
+				<span class="teal"><<He>>看起来无法承受更多的痛苦。</span>
+			<<elseif $enemyhealth lte 0>>
+				<span class="green"><<He>>吃痛退开。</span>
+				<<combatcontrol 15>><<def 10>>
+			<</if>>
+
+			<<if $enemyarousal gte $enemyarousalmax>>
+				<<if $NPCList[0].penis isnot "none" and !npcHasStrapon(0)>>
+					<span class="red">射精迫在眉睫。</span>
+				<<else>>
+					<span class="red">高潮迫在眉睫。</span>
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<span class="pink">你觉得<<he>>应该快要高潮了。</span>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 3>>
+				<span class="purple"><<He>>_looks充满欲望。</span>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<span class="blue"><<He>>_looks非常性奋。</span>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 1>>
+				<span class="lblue"><<He>>_looks被激起了性欲。</span>
+			<<elseif $enemyarousal gt 0>>
+				<span class="teal"><<He>>_looks有些兴奋。</span>
+			<<elseif $enemyarousal lte 0>>
+				<<if $_enemies gt 1>>
+					<span class="green"><<He>>_looks无动于衷。</span>
+				<<else>>
+					<<if $npcSub>>
+						<span class="green"><<He>>静静地躺着，就这样等待着你。</span>
+					<<else>>
+						<span class="green"><<He>>的下身<<if $NPCList[0].penis isnot "none">>软趴趴的<<else>>很干<</if>>。</span>
+					<</if>>
+				<</if>>
+			<</if>>
+
+			<<if $enemyanger gte $enemyangermax>>
+				<span class="red"><<He>>异常愤怒。</span>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 4>>
+				<span class="pink"><<He>>_looks非常生气。</span>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 3>>
+				<span class="purple"><<He>>_looks已经生气了。</span>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 2>>
+				<span class="blue"><<He>>_looks有些恼怒。</span>
+			<<elseif $enemyanger gte ($enemyangermax / 5) * 1>>
+				<span class="lblue"><<He>>_looks有些躁动。</span>
+			<<elseif $enemyanger gt 0>>
+				<span class="teal"><<He>>_looks有些失望。</span>
+			<<elseif $enemyanger lte 0>>
+				<span class="green"><<He>>_looks很平静。</span>
+			<</if>>
+
+			<<if $enemytrust lte -100>>
+				<span class="red"><<He>>_looks充满猜疑。</span>
+			<<elseif $enemytrust lte -60>>
+				<span class="pink"><<He>>_looks很警惕。</span>
+			<<elseif $enemytrust lte -20>>
+				<span class="purple"><<He>>_looks很谨慎。</span>
+			<<elseif $enemytrust lte 20>>
+				<span class="blue"><<He>>_looks有些谨慎。</span>
+			<<elseif $enemytrust lte 60>>
+				<span class="lblue"><<He>>_looks尚有疑虑。</span>
+			<<elseif $enemytrust lte 100>>
+				<span class="teal"><<He>>_looks很放松。</span>
+			<<elseif $enemytrust gt 100>>
+				<span class="green"><<He>>_looks对你很信任。</span>
+			<</if>>
+			/* 北极星模组 */
+			<</if>>
+			/* 北极星 */
+		<</if>>
+
+		<<if $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0>>
+			<<if $panicattacks gte 1 and _panicchecked isnot true and random(1, 100) is 100>>
+				<<set $panicparalysis to 5>>
+			<</if>>
+			<<set _panicchecked to true>>
+			<<if $panicattacks gte 2 and _paniccheckedviolence isnot true and random(1, 100) is 100>>
+				<<set $panicviolence to 3>>
+				<<if $position is "stalk">>
+					<<set $feetuse to "run">>
+				<</if>>
+			<</if>>
+			<<set _paniccheckedviolence to true>>
+		<</if>>
+		<br><br>
+
+		<<if $arousal gte $arousalmax and $orgasmdown lte 0>>
+			<<orgasm>>
+		<</if>>
+		<<sexcheck>>
+	</div>
+
+	<<unset $speechcamerapose>>
+<</widget>>

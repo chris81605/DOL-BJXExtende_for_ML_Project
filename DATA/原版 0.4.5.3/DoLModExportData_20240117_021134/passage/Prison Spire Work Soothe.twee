@@ -1,0 +1,27 @@
+:: Prison Spire Work Soothe []
+<<effects>>
+
+<<if $tendingSuccess>>
+	你唱起歌来，<span class="green">一首舒缓动听的曲调从你心底流淌而出。</span>那只<<beasttype>>蜷成一团，睡着了。
+	<br><br>
+	<<endevent>>
+	<<generate_anxious_guard 0>>
+	你把$hawk_loot还给了<<anxious_guard 0>>。"真不知道你是怎么做到的，"<<he>>说道。<<glove>><<lsuspicion>><<prison_rep anxious 1>><<prison_guards 1>>
+	<br><br>
+	<<unset $hawk_loot>>
+	<<prison_spire_options>>
+<<else>>
+	"做个好鸟，好吗？"你问道。
+	<<if $monster is 1>>
+		<span class="red"><<bHe>>大笑起来，</span>似乎不以为然。
+	<<else>>
+		<<bHe>>继续盯着你看，<span class="red">不为所动。</span>
+	<</if>>
+	<br><br>
+
+
+	<<link [[暴力夺取|Prison Spire Work Force]]>><</link>><<difficulty 50>>
+	<br>
+	<<link [[放弃|Prison Spire Work Give Up]]>><<prison_birds 1>><<prison_guards -1>><</link>><<gsuspicion>><<prison_birds_text>>
+	<br>
+<</if>>

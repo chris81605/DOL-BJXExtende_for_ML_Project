@@ -1,0 +1,30 @@
+:: Park Streak Police Bluff []
+<<effects>>
+"等等！"你说，"我的衣服被偷了。一群暴徒扑向我夺走了我的衣服！我只是想回家。"
+<br><br>
+你发出微微颤抖的声音并做出楚楚可怜的表情。
+<<if $englishSuccess>>
+	那两位警官看起来很吃这套。他们走到警车前给你解开手铐并从车里拿出了一条毛巾。
+	<br><br>
+	"幸好我们有这个，"其中一个人说，"我们以前就有过这些暴徒袭击人的报告。注意安全早点回家。"
+	<br><br>
+	"我会的！" 你说，露出一副非常感激的表情，"谢谢您！太感谢您了！"
+	<br><br>
+	这两个警察上车后开车离开了。你逃过一劫，为没有被逮捕而感到高兴。
+	<br><br>
+	你平安地跑回了厕所，深呼吸着平息自己的脉搏。
+	<<ltrauma>><<lstress>><<trauma -3>><<stress -3>>
+	<br><br>
+	<<unbind>>
+	<<if $player.gender_appearance is "f">>
+		<<towelup>>
+	<<else>>
+		<<towelupm>>
+	<</if>>
+	<<eventParkStreakEnd>>
+<<else>>
+	<<crimeUp 100 "exposure">>
+	"不错的尝试，"其中一个警察说，"但我们一看就知道你是个变态。"
+	<br><br>
+	<<link [[继续|Park Streak Police Car]]>><<pass 10>><</link>>
+<</if>>

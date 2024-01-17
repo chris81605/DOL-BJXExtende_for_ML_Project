@@ -1,0 +1,32 @@
+:: Pillory Whip Master []
+<<set $outside to 1>><<set $location to "town">><<effects>>
+
+<<He>>往地上打了几次鞭子，然后突然将鞭子挥向你。
+<br><br>
+<<if $phase is 1>>
+	<<if $danceskill gte random(1, 1000)>>
+		你的<<bottom>>结结实实挨了好几下，一阵刺痛，<span class="green">但你躲过了大部分挥击。</span>
+		几位观众互相嘀咕着。很明显，你正在毁掉<<personsimple>>的表演。
+		<<he>>逐渐放弃了，拿上帽子愤然离开。人群发出唏嘘声，有一对无赖向<<him>>扔水果。
+		<<violence_noncombat 5 0.3>>
+		<br><br>
+
+		<<endevent>>
+		<<link [[继续 (1:00)|Pillory]]>><<pass 1 hour>><<set $pillorytime -= 1>><</link>>
+	<<else>>
+		<span class="red">你没法躲开<<his>>的攻击。</span>当鞭子打在你的<<bottom>>时，你试图忍着不哭。
+		你的领班在你身后深吸了一口气。你的动作似乎比<<he>>想得更笨拙。
+		<<violence_noncombat 20 0.3>>
+		<br><br>
+
+		<<link [[继续|Pillory Whip Master 2]]>><</link>>
+	<</if>>
+<<else>>
+	你绷紧自己的身体，为即将到来的疼痛做好准备。<span class="green">疼痛没有你想的剧烈。</span>
+	<<His>>眼角微微颤动，很明显你的领班并不想去伤害你。
+	<<violence_noncombat 4 0.5 0.5 0.5>>
+	<br><br>
+
+	<<link [[继续|Pillory Whip Master 2]]>><</link>>
+<</if>>
+<br>

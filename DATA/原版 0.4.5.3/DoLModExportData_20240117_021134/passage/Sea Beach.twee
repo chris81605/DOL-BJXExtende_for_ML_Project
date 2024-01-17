@@ -1,0 +1,86 @@
+:: Sea Beach []
+<<location "seabeach">><<water>><<effects>>
+你正沿着海滩在海里游泳。
+<<if Time.dayState is "day">>
+	<<if $weather is "clear">>
+		这里聚集着很多游客，孩子们有些在玩沙子堆沙堡，还有些在水中玩耍，他们的父母在一边晒日光浴。还有一群学生正在打排球。
+	<<elseif $weather is "overcast">>
+		乌云驱散了大多数潜在的游客，但仍有人沿着水边散步。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩本身几乎空无一人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		寒冷已经远离了大部分地区，但是猛烈的海浪已经吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	<<if $weather is "clear">>
+		这是一个受欢迎的地方，一些人与他们的狗慢跑，一些家庭正在架设防风衣，一群学生正在打排球。
+	<<elseif $weather is "overcast">>
+		这是一个受慢跑者欢迎的目的地，有些人还带着狗。大雾阻挡了你观看海洋的视野。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩本身几乎空无一人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		寒冷已经远离了大部分地区，但是猛烈的海浪已经吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "dusk">>
+	<<if $weather is "clear">>
+		太阳落山时，一家人正在离开。一群学生正在打排球。
+	<<elseif $weather is "overcast">>
+		这里大部分地方都没有人，但有些人正沿着水边散步。
+	<<elseif $weather is "rain">>
+		由于下雨，海滩本身几乎空无一人，但猛烈的海浪吸引了冲浪者。
+	<<elseif $weather is "snow">>
+		寒冷已经远离了大部分地区，但是猛烈的海浪已经吸引了冲浪者。
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "clear">>
+		除了一群围着火堆喝酒的学生之外，这里看起来空无一人。
+	<<elseif $weather is "overcast">>
+		看起来很荒凉。
+	<<elseif $weather is "rain">>
+		看起来很荒凉。
+	<<elseif $weather is "snow">>
+		看起来很荒凉
+	<</if>>
+<</if>>
+<br><br>
+<<if $seaswim is 1>>
+	<<set $seaswim to 0>>
+	你花了一些时间游泳。
+	<<physique 3>><<swimmingskilluse>>
+	<br><br>
+<</if>>
+<<if $exposed gte 1>>
+	你把你的<<lewdness>>隐藏在水下。
+	<<if Time.dayState isnot "night">>
+		你不能在这里离开水面，人们会看到你的！
+	<</if>>
+	<br><br>
+<</if>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventsseabeach>>
+	<<else>>
+		<<if $exposed lte 0 or Time.dayState is "night">>
+			<<beachicon>><<link [[离开水面 (0:02)|Beach]]>><<pass 2>><</link>>
+			<br>
+		<<elseif $exposed is 1 and $exhibitionism gte 15>>
+			<<beachicon>><<link [[离开水面 (0:02)|Beach Exposed]]>><<pass 2>><<set $phase to 1>><</link>><<exhibitionist2>>
+			<br>
+		<<elseif $exposed gte 2 and $exhibitionism gte 75>>
+			<<beachicon>><<link [[离开水面 (0:02)|Beach Exposed]]>><<pass 2>><<set $phase to 0>><</link>><<exhibitionist5>>
+			<br>
+		<</if>>
+		<<swimicon "back">><<link [[练习游泳 (0:30)|Sea Beach]]>><<pass 30>><<stress -6>><<tiredness 6>><<set $seaswim to 1>><<slimeEventEnd "swimming">><</link>><<gswimming>><<lstress>><<gtiredness>>
+		<br>
+		<<swimicon>><<link [[游向外海 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><<set $sea to 0>><</link>><<gtiredness>><<swimmingdifficulty 1 100>>
+		<br><br>
+		<<searocks>><<swimmingdifficultytext0>>
+		<br>
+		<<seadocks>><<swimmingdifficultytext0>>
+		<br>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

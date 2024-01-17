@@ -1,0 +1,73 @@
+:: Underground Plant Molestation Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<if $enemyanger lte 0>>
+		<<location "forest">>
+		"那真是太棒了！”<<person1>><<person>>尖叫着，把手搭在了你的脖子上。“你是迄今为止表现得最好的。我喜欢你！"
+		<<He>>开始在你的脖子上种草莓。
+		<<bodyliquid "neck" "goo">>
+		<br><br>
+
+		"这就行了。”<<person2>><<person>>一边朝你走来一边说道。
+		在<<he>>接近你的瞬间，那个<<person1>><<person>>紧紧地抱住你，咆哮着。<<His>>藤条威胁地抖动着。
+		<br><br>
+
+		<<person2>><<person>>往后退了，与此同时<<person3>><<person>>揉着<<his>>脸。
+		"永远别从这些东西里拿玩具，我们告诉你多少次了？"
+		<br><br>
+
+		当警卫后退时，<<person1>><<personsimple>>发出了满意的声音，并在你耳边说道，“我喜欢你。"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<loadNPC 0 underground_plant>><<loadNPC 1 underground_guard_1>><<loadNPC 2 underground_guard_2>>
+		<<link [[继续|Underground Plant Escape 1]]>><</link>>
+	<<else>>
+		<<set $outside to 0>><<set $location to "underground">>
+		"太棒了！”那个<<person>>咧着嘴说道，“你们确实值得怎么挑选。"
+		<br><br>
+
+		当<<person2>><<person>>领着你离开时，<<person3>><<person>>说道，“根据我们的协议，你现在需要给我们提供你的花蜜。"
+		你听到<<person1>><<person>>发出了一声夸张的呻吟。
+		<br><br>
+
+		<<person2>><<person>>把你领回了牢房。
+		<<undergroundReturnToCell>>
+		<<unset $plantFame>>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	<<if $tentacles.active lte $tentacles.max/2>>
+		<<set $outside to 0>><<set $location to "underground">>
+		<<person>>痛苦地后退倒下了。你急忙爬起来试图逃跑，但是<span class="red">一根藤蔓缠绕住了你的腿。</span>
+		<br><br>
+
+		"你说过这个可以的！”<<he>>嘟囔着，抓着你的腿说道。“你一直在骗我，我恨你们。"
+		<br><br>
+
+		"我们会给你个更好的。”<<person3>><<person>>说道，用<<his>>的手安抚着<<him>>。
+		与此同时，<<person2>><<person>>抓住你的手臂并沿着楼梯把你带了下去。你被领过舞台，回到了自己的牢房。
+		<br><br>
+
+		<<if $undergroundbrothel.water gte 1>>
+			<<He>>到了你的牢房，打开门然后把你扔了进去。“你会放弃的。”<<he>>说道。
+			"就算你没有，最后也只会虚弱得没法抵抗，何必要为难自己呢？”<<He>>砰的一声关上了门。
+		<<else>>
+			<<He>>到了你的牢房，打开门然后把你扔了进去。“所以这就是你的打算吗？”<<he>>失望地说道。
+			"好吧，让我看看没水喝之后你还会不会这么顽强。”<<He>>砰地关上了门。
+			<<set $undergroundbrothel.water to 1>>
+		<</if>>
+		<<undergroundReturnToCell>>
+	<<else>>
+		<<location "forest">>
+		<<person>>后退时痛苦地倒下。<<tearful>>你急忙逃跑了。
+		<<He>>试图用藤蔓抓住你，<span class="green">但藤蔓在半空中无力向前，<<he>>发出了痛苦的吸气声。</span>
+		<<person3>><<person>>对着对讲机大喊着什么。
+		<br><br>
+
+		<<undergroundEscapeForestStart>>
+	<</if>>
+	<<unset $plantFame>>
+<</if>>
+<<clearNPC underground_plant>><<clearNPC underground_guard_1>><<clearNPC underground_guard_2>>

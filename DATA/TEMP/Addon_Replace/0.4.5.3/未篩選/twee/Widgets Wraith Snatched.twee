@@ -1,0 +1,341 @@
+:: Widgets Wraith Snatched [widget]
+<<widget "getTarget">>
+	<<if $possessed>>
+		<<set $eventskip to 1>>
+		<<if _args[0]>>
+			<<switch $passage>>
+				<<case "Bedroom">>
+					<<pass 1>>
+					<<set $wraith.exit to "home">>
+					<<if !$nextPassageCheck>>
+						<<set $phaseWraith to 0>>
+						<<set $nextPassageCheck to "Mirror">>
+						<<set $nextPassage to "Wraith Snatched Home Mirror">>
+						<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
+							<<set $unbind to 1>>
+						<</if>>
+					<<else>>
+						<<if $phaseWraith lt 1 and $container and $container.home and $container.home.count gte 1 and !$wraithPaleVisit>>
+							<<for _i to 0; _i lt Object.keys($container.home.creatures).length; _i++>>
+								<<if $container.home.creatures[_i] isnot null and $container.home.creatures[_i].creature.includes("Pale")>>
+									<<set $wraithPaleVisit to "home">>
+								<</if>>
+							<</for>>
+							<<set $phaseWraith to 1>>
+						<</if>>
+						<<if $phaseWraith lt 2 and $wraithPaleVisit and $wraithPaleVisit is "home">>
+							<<set $nextPassageCheck to "Containers">>
+							<<set $nextPassage to "Wraith Snatched Offspring">>
+							<<set $phaseWraith to 2>>
+						<<elseif $phaseWraith lt 3 and ($robinbed is "yours" or $robinbed is "theirs" or $kylarbed is 1)>>
+							<<set $nextPassageCheck to "Bed">>
+							<<set $nextPassage to "Wraith Snatched Guest">>
+							<<set $phaseWraith to 3>>
+						<<else>>
+							<<set $nextPassageCheck to "Bedroom">>
+							<<set $nextPassage to "Wraith Snatched Home Window">>
+							<<set $phaseWraith to 4>>
+						<</if>>
+					<</if>>
+				<<case "Eden Cabin">>
+					<<pass 1>>
+					<<set $wraith.exit to "cabin">>
+					<<if !$nextPassageCheck>>
+						<<set $nextPassageCheck to "Cabin Actions">>
+						<<set $nextPassage to "Cabin Actions">>
+						<<set $phaseWraith to 0>>
+					<<else>>
+						<<set $phaseWraith to 4>>
+						<<set $nextPassageCheck to "Eden Clearing">>
+						<<set $nextPassage to "Wraith Snatched Cabin Leave">>
+					<</if>>
+				<<case "Cabin Actions">>
+					<<pass 1>>
+					<<if $phaseWraith is 0>>
+						<<set $phaseWraith to 1>>
+						<<set $nextPassageCheck to "Eden Mirror">>
+						<<set $nextPassage to "Wraith Snatched Cabin Mirror">>
+					<<elseif $phaseWraith lt 2>>
+						<<set $nextPassageCheck to "Eden Cabin Bed">>
+						<<set $nextPassage to "Wraith Snatched Guest">>
+						<<set $phaseWraith to 2>>
+					<<elseif $phaseWraith lt 3>>
+						<<set $nextPassageCheck to "Eden Cabin">>
+						<<set $nextPassage to "Eden Cabin">>
+						<<set $phaseWraith to 3>>
+						<<endevent>>
+						<<set $phase2 to 1>>
+					<</if>>
+				<<case "Wolf Cave">>
+					<<pass 1>>
+					<<if !$nextPassageCheck>>
+						<<set $nextPassageCheck to "Wolf Cave Clearing">>
+						<<set $nextPassage to "Wolf Cave Clearing">>
+						<<set $phaseWraith to 0>>
+					<</if>>
+				<<case "Wolf Cave Clearing">>
+					<<pass 5>>
+					<<if $phaseWraith is 0>>
+						<<set $nextPassageCheck to "Wolf Cave Wash">>
+						<<set $nextPassage to "Wraith Snatched Cave Reflection">>
+						<<set $phaseWraith to 1>>
+					<<else>>
+						<<set $nextPassageCheck to "Forest">>
+						<<set $nextPassage to "Wraith Snatched Cave Leave">>
+					<</if>>
+				<<case "Bird Tower">>
+					<<set $nextPassageCheck to "Bird Tower Mirror">>
+					<<set $nextPassage to "Wraith Snatched Far Mirror">>
+				<<case "Farm Alex Bedroom">>
+					<<set $nextPassageCheck to "Farm Bedroom">>
+					<<set $nextPassage to "Farm Bedroom">>
+				<<case "Farm Bedroom">>
+					<<set $nextPassageCheck to "Farm Mirror">>
+					<<set $nextPassage to "Wraith Snatched Far Mirror">>
+				<<case "Domus Street" "Barb Street" "Danube Street" "Residential Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Residential alleyways">>
+					<<set $nextPassage to "Residential alleyways">>
+				<<case "Residential alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Connudatus Street">>
+					<<set $nextPassage to "Connudatus Street">>
+				<<case "Connudatus Street" "Cliff Street" "Wolf Street" "Commercial Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Commercial alleyways">>
+					<<set $nextPassage to "Commercial alleyways">>
+				<<case "Commercial alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "High Street">>
+					<<set $nextPassage to "High Street">>
+				<<case "Drain Exit">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Industrial Drain">>
+					<<set $nextPassage to "Industrial Drain">>
+				<<case "Sewers Residential" "Sewers Commercial" "Sewers Industrial">>
+					<<set $nextPassageCheck to "Sewers Possessed">>
+					<<set $nextPassage to "Sewers Possessed">>
+				<<case "Sewers Scrap" "Sewers Wood">>
+					<<set $nextPassageCheck to "Sewers Residential">>
+					<<set $nextPassage to "Sewers Residential">>
+				<<case "Sewers Mud" "Sewers Ruins">>
+					<<set $nextPassageCheck to "Sewers Commercial">>
+					<<set $nextPassage to "Sewers Commercial">>
+				<<case "Sewers Waterfall" "Sewers Algae" "Sewers Rubble">>
+					<<set $nextPassageCheck to "Sewers Industrial">>
+					<<set $nextPassage to "Sewers Industrial">>
+				<<case "Sewers Lake">>
+					<<set $nextPassageCheck to "Sewers Waterfall">>
+					<<set $nextPassage to "Sewers Waterfall">>
+				<<case "Sewers Webs">>
+					<<set $nextPassageCheck to "Sewers Wood">>
+					<<set $nextPassage to "Sewers Wood">>
+				<<case "Sewers Shrooms">>
+					<<set $nextPassageCheck to "Sewers Mud">>
+					<<set $nextPassage to "Sewers Mud">>
+				<<case "Sewers Hole">>
+					<<set $nextPassageCheck to "Sewers Ruins">>
+					<<set $nextPassage to "Sewers Ruins">>
+				<<case "Sewers Workshop">>
+					<<set $nextPassageCheck to "Sewers Scrap">>
+					<<set $nextPassage to "Sewers Scrap">>
+				<<case "Harvest Street" "Mer Street" "Industrial Drain">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Industrial alleyways">>
+					<<set $nextPassage to "Industrial alleyways">>
+				<<case "Industrial alleyways">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Oxford Street">>
+					<<set $nextPassage to "Oxford Street">>
+				<<case "Oxford Street" "Starfish Street" "High Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Park">>
+					<<set $nextPassage to "Park">>
+				<<case "Park" "Elk Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Nightingale Street">>
+					<<set $nextPassage to "Nightingale Street">>
+				<<case "Nightingale Street">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Forest">>
+					<<set $nextPassage to "Forest">>
+					<<set $forest to 0>>
+					<<set $wraith.exit to "forest">>
+				<<case "Forest">>
+					<<pass 8>>
+					<<if $forest lte 20>>
+						<<set $nextPassageCheck to "Forest Blood Deeper">>
+						<<set $nextPassage to "Forest">>
+						<<if $phaseWraith isnot 5>>
+							<<set $phaseWraith to 5>>
+						<<else>>
+							<<set $forestmod to 1.5>><<set $forest += 5>>
+						<</if>>
+					<<elseif $forest gt 40 and $forest lte 50>>
+						<<set $nextPassageCheck to "Lake Fishing Rock">>
+						<<set $nextPassage to "Lake Fishing Rock">>
+						<<set $wraith.exit to "lake">>
+					<<elseif $forest gt 30>>
+						<<set $nextPassageCheck to "Forest Blood Less Deep">>
+						<<set $nextPassage to "Forest">>
+						<<if $phaseWraith isnot 5>>
+							<<set $phaseWraith to 5>>
+						<<else>>
+							<<set $forestmod to 1.5>><<set $forest -= 5>>
+							<<if $forest is 50>>
+								<<set _nextPassageCheckTemp to "Lake Fishing Rock">>
+								<<set _nextPassageTemp to "Lake Fishing Rock">>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<set $nextPassageCheck to "Lake Shore">>
+						<<set $nextPassage to "Lake Shore">>
+						<<set $wraith.exit to "lake">>
+					<</if>>
+				<<case "Lake Campsite">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Fishing Rock">>
+					<<set $nextPassage to "Lake Fishing Rock">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Fishing Rock">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Waterfall">>
+					<<set $nextPassage to "Lake Waterfall">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Firepit">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Shore">>
+					<<set $nextPassage to "Lake Shore">>
+					<<set $wraith.exit to "lake">>
+				<<case "Lake Waterfall">>
+					<<pass 5>>
+					<<if $phaseWraith lt 1 and $container and $container.lake and $container.lake.count gte 1 and !$wraithPaleVisit>>
+						<<for _i to 0; _i lt Object.keys($container.lake.creatures).length; _i++>>
+							<<if $container.lake.creatures[_i] isnot null and $container.lake.creatures[_i].creature.includes("Pale")>>
+								<<set $wraithPaleVisit to "lake">>
+							<</if>>
+						<</for>>
+						<<set $phaseWraith to 1>>
+					<</if>>
+					<<if $wraithPaleVisit and $wraithPaleVisit is "lake" and $phaseWraith lt 3>>
+						<<set $nextPassageCheck to "Containers">>
+						<<set $nextPassage to "Wraith Snatched Offspring">>
+						<<set $phaseWraith to 3>>
+					<<else>>
+						<<set $nextPassageCheck to "Lake Shore">>
+						<<set $nextPassage to "Lake Shore">>
+						<<set $wraith.exit to "lake">>
+					<</if>>
+				<<case "Lake Shore">>
+					<<pass 5>>
+					<<if $phaseWraith lt 1 and $container and $container.lake and $container.lake.count gte 1 and !$wraithPaleVisit>>
+						<<for _i to 0; _i lt $container.lake.count; _i++>>
+							<<if $container.lake.creatures[_i].creature.includes("Pale")>>
+								<<set $wraithPaleVisit to "lake">>
+							<</if>>
+						<</for>>
+						<<set $phaseWraith to 1>>
+					<</if>>
+					<<if $phaseWraith lt 2 and $wraithPaleVisit and $wraithPaleVisit is "lake">>
+						<<set $nextPassageCheck to "Lake Waterfall">>
+						<<set $nextPassage to "Lake Waterfall">>
+						<<set $phaseWraith to 2>>
+					<<else>>
+						<<if Time.season is "winter">>
+							<<set $nextPassageCheck to "Lake Shallows Ice">>
+							<<set $nextPassage to "Lake Shallows Ice">>
+						<<else>>
+							<<set $nextPassageCheck to "Lake Shallows">>
+							<<set $nextPassage to "Lake Shallows">>
+						<</if>>
+					<</if>>
+				<<case "Lake Shallows">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths">>
+					<<set $nextPassage to "Lake Depths">>
+				<<case "Lake Shallows Ice">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths Ice">>
+					<<set $nextPassage to "Lake Depths Ice">>
+				<<case "Lake Depths">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Underwater">>
+					<<set $nextPassage to "Lake Underwater">>
+				<<case "Lake Depths Ice">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Depths Ice Break">>
+					<<set $nextPassage to "Lake Depths Ice Break">>
+				<<case "Lake Underwater" "Lake Ruin Deep">>
+					<<pass 5>>
+					<<set $nextPassageCheck to "Lake Ruin">>
+					<<set $nextPassage to "Lake Ruin">>
+				<<case "Lake Ruin">>
+					<<pass 2>>
+					<<set $nextPassageCheck to "Lake Ruin Prison Intro">>
+					<<set $nextPassage to "Lake Ruin Prison Intro">>
+			<</switch>>
+		<</if>>
+		<<if !$wraith.will>>
+			<<if $wraith.state is "haunt">>
+				<<set $wraith.will to random(1300, 1700)>>
+			<<else>>
+				<<set $wraith.will to random(1100, 1500)>>
+			<</if>>
+		<</if>>
+		<<set _wraithWill to Math.floor(1 + $wraith.will)>>
+		<<if $wraith.possessCount is undefined>>
+			<<if $location is "forest" or $location is "lake">>
+				<<set _wraithWill /= 3>>
+			<<else>>
+				<<set _wraithWill /= 2>>
+			<</if>>
+		<</if>>
+		<<if $wraithWillMessage and !$combat>>
+			<<if $phase2 is 1>>
+				<<set $phase2 to 0>>
+				<<controlcaption>>
+				<br>
+			<<elseif $passage isnot "Forest" and $passage is $nextPassageIntended or $nextPassageCheck is $nextPassageIntended>>
+				<<controlcaption>>
+				<<set $willpowerSuccess to 0>>
+				<br>
+				<span class="pink">你让祂控制着你。</span>
+				<<pain -2>><<stress -12>><<sub 2>><<lpain>><<llstress>><<set $wraith.will += 30>>
+				<br><br>
+			<<else>>
+				<<set $willpowerSuccess to 0>>
+				<<willpowerdifficulty 1 _wraithWill true>>
+				<<if $willpowerSuccess>>
+					<<control `Math.floor(currentSkillValue('willpower') / 80)`>>
+					<<controlcaption>>
+					<br>
+					<span class="green">你为身体的控制权而战，你感觉到祂开始慢了下来。</span>
+					<<pass 4>><<pain 4>><<stress 12>><<trauma 12>><<def 2>><<gpain>><<ggtrauma>><<ggstress>><<gcontrol>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 8)>>
+					<br><br>
+				<<else>>
+					<<controlcaption>>
+					<br>
+					<span class="red">你的身体不受控制。</span>
+					<<stress 6>><<trauma 6>><<willpower 1>><<def 1>><<gtrauma>><<gstress>><<gwillpower>><<set $wraith.will -= Math.floor(currentSkillValue('willpower') / 10)>>
+					<br><br>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if _nextPassageCheckTemp>>
+			<<set $nextPassage to _nextPassageTemp>>
+			<<set $nextPassageCheck to _nextPassageCheckTemp>>
+		<</if>>
+		<<if $phase2 is 2>>
+			<<set $phase2 to 0>><<set $pain to 0>>
+		<</if>>
+		<<if _args[0]>>
+			<<if $bus isnot "lake_ruin_prison" and (Time.hour gte 6 and $moonstate is "morning" and $wraith.exit isnot "home" or $control gte $controlmax)>>
+				<<if $location is "lake_ruin">>
+					<<set $nextPassage to "Wraith Resisted Lake">>
+				<<else>>
+					<<set $nextPassage to "Wraith Resisted">>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>

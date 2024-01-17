@@ -1,0 +1,73 @@
+:: Farm Assault Alex Fight Bailey Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"你会继续走下去的，"<<person1>><<person>>喃喃自语道。
+	<<if $enemynomax gte 2>>
+		贝利的打手们太过茫然跟疲惫，无法继续入侵。<span class="green">他们摇摇晃晃地离开了田地。</span>
+	<<else>>
+		<<Hes>>太过茫然跟疲惫，无法继续入侵。<span class="green">摇摇晃晃地离开了田地。</span>
+	<</if>>
+	<br><br>
+
+	<<endcombat>>
+	<<clotheson>>
+	<<npc Alex>><<person1>><<generate2>>
+	<<tearful>>你冲到艾利克斯身边。你发现<<him>>正在与剩下的入侵者 - 一个<<person2>><<person>>搏斗。入侵者占了上风，直到你从后面击中<<him>>的头部。<<person1>><<npcincr Alex dom 1>>
+	<br><br>
+	"你给了他们点颜色看看，"艾利克斯说着，你扶着<<him>>站起来。你觉得<<he>>可能没有意识到你是怎么制服对方的。
+	<br><br>
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<elseif $enemyhealth lte 0>>
+	"该死，"那个<<person1>><<person>>说道，"贝利会很不高兴的。"
+	<<if $enemynomax gte 2>>
+		<span class="green">贝利的打手们逃离了田地，</span>消失在了夜色中。
+	<<else>>
+		<span class="green"><<He>>逃离了田地，</span>消失在了夜色中。
+	<</if>>
+	<br><br>
+	<<endcombat>>
+	<<clotheson>>
+	<<npc Alex>><<person1>><<generate2>>
+	<<tearful>>你冲到艾利克斯身边。你发现<<him>>正在与剩下的入侵者 - 一个<<person2>><<person>>搏斗。入侵者占了上风，直到你从后面击中<<him>>的头部。<<person1>><<npcincr Alex dom 1>>
+	<br><br>
+	"你教训了他们一顿，"你扶起艾利克斯的时候<<him>>说道。
+	<br><br>
+	<<link [[继续|Farm Assault]]>><<endevent>><</link>>
+	<br>
+
+	<<set _assault_keys to Object.keys($farm_assault.teams)>>
+	<<for _s to 0; _s lt _assault_keys.length; _s++>>
+		<<if $bus is $farm_assault.teams[_assault_keys[_s]].location>>
+			<<set $farm_assault.teams[_assault_keys[_s]].location to "done">>
+		<</if>>
+	<</for>>
+<<else>>
+	你摔倒在地上，因为受伤了失去了战斗能力。
+	<br><br>
+	那个<<person1>><<person>>蹲在你身边说道："抱歉，不过这就是这个世界的运行方式。"<<He>>拿出了一段绳子，还有口球。
+	<br><br>
+	<<endcombat>>
+	<<npc Alex>><<person1>><<generate2>>
+	"你敢！"艾利克斯大声喊道。<<He>>跑得更近了，但是一个<<person2>><<person>>从后面将<<person1>><<him>>扑倒在地。
+	<br><br>
+	"你的朋友很精神。不过不是问题，我们总带着很多绳子。"他们不由分说地将你的手脚绑在一起，还将你的嘴堵住。你听到了艾利克斯在附近的闷声。"待会儿见，<<girl>>。"
+	<br><br>
+	<<tearful>>你在绳索中挣扎着。虽然很困难，不过应该还是可以挣脱的。
+	<br><br>
+	<<endevent>>
+	<<set $farm_assault.bindings to 3>>
+	<<set $farm_assault.bindings_alex to 3>>
+	<<bind>>
+	<<facewear 23>>
+	<<link [[继续|Farm Assault]]>><</link>>
+	<br>
+
+<</if>>

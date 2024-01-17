@@ -1,0 +1,40 @@
+:: Temple Chastity Removal []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+<<He>>带领你离开主厅，来到一个小房间。<<he>>说："请脱掉衣服。"尽管有些担忧，你还是照做了。
+
+<<if $worn.genitals.origin is "temple">>
+	<<He>>从斗篷里拿出阴森的刀片，然后跪在了你面前。
+	几秒钟后，贞操带被毁在地板上，你的<<genitals_are 1>>暴露在外，变得裸露和脆弱。
+	<br><br>
+	<<He>>站起来说："好了，如果你想要换一个，你知道在哪里找我。"<<He>>离开房间，让你独自待在那里。
+	<br><br>
+	<<set $worn.genitals.type.push("broken")>>
+	<<genitalsruined>>
+	<<if $vaginalchastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴道中脱落。</span>
+		<br>
+		<<set $vaginalchastityparasite to 0>>
+	<</if>>
+	<<if $penilechastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $penilechastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的阴茎上脱落下来。</span>
+		<br>
+		<<set $penilechastityparasite to 0>>
+	<</if>>
+	<<if $analchastityparasite isnot 0>>
+		<span class="pink">随着贞操带的解除，<<= $analchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>从你的肛门掉了出来。</span>
+		<br>
+		<<set $analchastityparasite to 0>>
+	<</if>>
+	<<if playerChastity("anus")>><<set $worn.genitals.anal_shield to 0>><</if>>
+	<<clotheson>>
+<<else>>
+	<br><br>
+	<<if $worn.genitals.name is "chastity parasite">>
+		<<He>>困惑地看着你， "对不起，我无法移除，看起来像某种寄生虫，也许去医院能帮你。"
+	<<else>>
+		<<He>>用困惑的表情看着你，"对不起，我不能移除你的$worn.genitals.cn_name_cap，我们只有钥匙来解开从这里直接获得的贞操带或贞操笼。"
+	<</if>>
+	<br><br>
+<</if>>
+
+<<link [[继续|Temple]]>><<endevent>><</link>>

@@ -1,0 +1,42 @@
+:: Temple Arcade End []
+<<effects>>
+<<if $per_npc.bishop>>
+	<<loadNPC 0 "bishop">>
+<<else>>
+	<<generateConfessor 1>>
+	<<saveNPC 0 "bishop">>
+<</if>>
+<<person1>>
+神情严峻的<<monks>>将你和其他受害者集中在一起。
+<<if $temple_confessor_intro>>
+	<<loadNPC 1 "bishop_right_hand">><<loadNPC 2 "bishop_left_hand">>
+	主教站在房间中央，身侧是<<his>>的两个同伴。
+	<br><br>
+	"恭喜我的孩子们，"<<he>>拖着声音说，"你们再次变得纯洁了。感谢你们的奉献。"左边的<<person3>><<priest>>走到你身后，解开你的口球。<<He>>还取下了你的项圈。"警告你们，" 那<<person1>><<bishop>>继续说道，"不要向任何人透露此事。不要告诉朋友，不要告诉约旦，也不要告诉父母——如果他们有幸健在的话。再让人知道你们被玷污了，我会很不高兴。"那个黑发的$temple_wall_victim呜咽着。
+<<else>>
+	一位身穿漆黑长袍的<<priest>>站在房间中央。<<Hes>>的身旁还有两个黑袍人。
+	<br><br>
+	"恭喜我的孩子们，"<<he>>拖着声音说，"你们再次变得纯洁了。感谢你们的奉献。"一个<<monk>>走到你身后，解开你的口球。<<He>>还取下了你的项圈。"警告你们，" 那位<<priest>>继续说道，"不要向任何人透露此事。不要告诉你的朋友。不要告诉约旦。也不要告诉你的父母，如果你还拥有的话。我不喜欢再认为你们被玷污了。"那个黑发的$temple_wall_victim呜咽着。
+<</if>>
+<br><br>
+<<if $player.virginity.penile isnot true or $player.virginity.vaginal isnot true>>
+	你获得了<span class="blue">贞操誓言</span>特质。
+	<br><br>
+<</if>>
+<<set $worn.face.type.push("broken")>>
+<<faceruined>>
+<<set $worn.neck.type.push("broken")>>
+<<neckruined>>
+<<unset $temple_arcade_phase>>
+<<unset $temple_wall_victim>>
+<<set $player.virginity.temple to true>>
+<br><br>
+<<clotheson>>
+<<endevent>>
+
+<<pass 20>>
+你被带领穿过隧道，回到了神殿。一路上其他人都保持着沉默。
+<br><br>
+
+<<link [[继续|Temple]]>><</link>>
+<br>

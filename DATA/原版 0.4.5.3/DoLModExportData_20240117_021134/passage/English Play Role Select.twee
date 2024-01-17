@@ -1,0 +1,59 @@
+:: English Play Role Select []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+你打算报名参演
+<<switch $phase>>
+	<<case 1>>
+		卡斯，那位爱上了富家子弟泰勒的年轻乞丐。
+		<<set $englishPlayRoles to {
+			Player: "Cass",
+			Kylar: "Taylor",
+			Sydney: "Sterling",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: false,
+			SydneyCount: 0
+		}>>
+	<<case 2>>
+		泰勒，那位爱上了年轻乞丐的富家子弟。
+		<<set $englishPlayRoles to {
+			Player: "Taylor",
+			Kylar: "Sterling",
+			Sydney: "Cass",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: false,
+			SydneyCount: 0
+		}>>
+	<<case 3>>
+		<<set _playPronoun to ($player.gender_appearance is "m" ? "先生" : "女士")>>
+		斯特林<<print _playPronoun>>，泰勒富有的家长，反对泰勒跟卡斯的恋情。
+		<<set $englishPlayRoles to {
+			Player: "Sterling",
+			Kylar: "Taylor",
+			Sydney: "Cass",
+			KylarKnown: false,
+			KylarCount: 0,
+			SydneyKnown: false,
+			SydneyCount: 0
+		}>>
+<</switch>>
+<<if C.npc.Kylar.state is "prison">>
+	<<set $englishPlayRoles.Kylar to "none">>
+<</if>>
+<br><br>
+
+"很好，"多伦说道，"这是剧目的册子，里面写了你跟你搭档的台词。
+<span class="blue">我非常推荐你先跟他们见见面，然后一起排练一下台词</span>，你肯定不会想跟他们脱节的！一旦他们得到角色之后，我会叫他们来跟你一起练习的。"
+<br><br>
+
+<<if $kylarenglishstate isnot "absent">>
+	你离开老师的桌子，凯拉尔就马上靠了过去。<<nnpc_He "Kylar">>看着你，脸红了一下，然后写下了<<nnpc_his "Kylar">>名字。
+	<br><br>
+<</if>>
+
+<span class="gold">话剧演出已添加到日志中。你可以自己练习台词，也可以和你的搭档一起练习，以获得更好的效果。你们可以在放学后在语文教室里见面。</span>
+<br><br>
+
+<<endevent>>
+<<link [[继续|English Lesson]]>><</link>>
+<br>

@@ -1,0 +1,19 @@
+:: Farm Saddle []
+<<effects>>
+
+<<loadNPC 0 "saddled_steed">>
+
+你给你的$farm.steed<<beasttype>>装鞍，然后爬上了马。
+<br><br>
+
+<<if $farm.stable gte 1>>
+	<<farmicon "horse">><<link [[骑马到镇子 (0:15)|Farm Ride Town]]>><<tiredness 2>><<pass 15>><</link>><<gtiredness>>
+	<br>
+<<else>>
+	<<farmicon "horse">><<link [[骑马到镇子 (0:30)|Farm Ride Town]]>><<tiredness 3>><<pass 30>><</link>><<gtiredness>>
+	<br>
+<</if>>
+<<animalicon "horse">><<link [[给另一匹马备鞍 (0:10)|Farm Steed]]>><<pass 10>><<endevent>><</link>>
+<br>
+<<getouticon>><<link [[下马|Farm Work]]>><<endevent>><</link>>
+<br>

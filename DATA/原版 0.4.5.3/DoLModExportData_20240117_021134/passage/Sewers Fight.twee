@@ -1,0 +1,24 @@
+:: Sewers Fight []
+<<if $fightstart is 1>>
+	<<set $fightstart to 0>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust -= 100>>
+	<<set $enemyanger += 200>>
+	<<set $enemyhealthmax += 100>><<set $enemyhealth += 100>><<set $enemyarousalmax += 100>>
+	<<npcidlegenitals>>
+	“你敢，”摩根咆哮道，"等我们回去后，就等着我把你的屁股打肿吧！"
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[继续|Sewers Fight Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sewers Fight]]>><</link>></span><<nexttext>>
+<</if>>

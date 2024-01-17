@@ -1,0 +1,30 @@
+:: Tailor Monthly Repair []
+"当然，<<if $player.gender_appearance is "m">>先生<<else>>女士<</if>>，我们会让人把箱子送来。你准备好要修补衣服的时候，就把衣服装进去。请记住，修补需要<span class="gold">一天时间</span>。修好后我们会把衣服送还给你。
+请确保在送来后不要买太多新衣服，否则我们的司机将不得不把它们当作捐赠收回。"
+<br><br>
+
+<<set _value to 0>>
+<<for _label, _items range $wardrobe>>
+	<<for _i to 0; _i lt _items.length; _i++>>
+		<<set _value += Math.floor(tailorClothingCost(_items[_i],_label) * (1 - (_items[_i].integrity / clothingData(_label,_items[_i],'integrity_max'))) * 1.25,_label)>>
+	<</for>>
+<</for>>
+押金降低了成本，你预计需要花
+<<if _value gt 5000>>
+	<<printmoney `_value - 5000`>>
+<<else>>
+	£0，也就是免费
+<</if>>
+。
+
+<br><br>
+<<if $money gte 5000>>
+	<<shopicon "tailor">><<link [[确认修补并支付定金£50|Tailor Monthly Driver]]>>
+		<<set $money -= 5000>>
+		<<set $tailorMonthlyService to "repair">>
+	<</link>>
+<<else>>
+	你付不起定金。
+<</if>>
+<br>
+<<getouticon>><<link [[退出修复|Tailor Shop]]>><<endevent>><</link>>

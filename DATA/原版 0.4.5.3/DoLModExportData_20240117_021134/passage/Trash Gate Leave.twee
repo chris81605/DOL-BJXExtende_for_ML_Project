@@ -1,0 +1,20 @@
+:: Trash Gate Leave []
+<<set $location to "landfill">><<set $outside to 1>><<effects>>
+
+大门被铁链和挂锁牢牢锁住。你想知道这附近是否有一把钥匙可以打开它。
+<br><br>
+
+<<set $lock to 800>>
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+	<span class="green">这把锁看起来很容易被撬开。</span>
+	<br><br>
+
+	<<lockpickicon>><<link [[撬锁(0:05)|Trash Lock Leave]]>><<pass 5>><<crimeUp 5 "trespassing">><</link>><<crime "trespassing">>
+	<br>
+	<<else>>
+	<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+	<br><br>
+	<</if>>
+
+<<getouticon>><<link [[离开|Trash]]>><</link>>

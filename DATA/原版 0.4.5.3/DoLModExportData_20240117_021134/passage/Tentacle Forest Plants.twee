@@ -1,0 +1,52 @@
+:: Tentacle Forest Plants []
+<<set $bus to "tentacle_forest_plants">><<effects>>
+
+你在触手森林里，在一片长满齐肩高触手的空地上。它们底部呈深紫色，向顶部逐渐变浅。它们给人一种长草的印象。
+<br><br>
+
+<<tentacle_forest_safe_orgasm>>
+<<tentacle_forest_time>>
+<br><br>
+
+<<if $tentacle_forest_time gte 60>>
+    <<tentacle_forest_end_scene>>
+<<elseif $town_projects.green gte 5>>
+    有些触手足够高可以攀爬，但你需要小心。
+    <br><br>
+    <<if $tentacle_forest_time gte 60>>
+        <<tentacle_forest_end_scene>>
+    <<elseif $stress gte $stressmax>>
+        <<tentacle_forest_stress_scene>>
+    <<elseif $arousal gte 10000 and !$tentacle_forest_lurker.includes("defeated")>>
+        <<tentacle_forest_orgasm_scene>>
+    <<else>>
+        <<link [[晃动 (0:05)|Tentacle Forest Plants Swing]]>><<tentacle_forest_pass 5>><</link>><<willpowerdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br>
+        <<link [[攀爬 (0:05)|Tentacle Forest Plants Climb]]>><<tentacle_forest_pass 5>><</link>><<athleticsdifficulty 1 1000>><<note "向森林深处移动" "lblue">>
+        <br><br>
+        类似的、更高的触手从你的两侧升起，足够高，可以在园地周围更粗的触手之间编织。它们低垂在地面上。
+        <br>
+        <<link [[摇晃 (0:15)|Tentacle Forest Thighs]]>><<tentacle_forest_pass 15>><</link>><<note "+ 腿部技巧？" "blue">>
+        <br><br>
+        <<link [[回到起点 (0:05)|Tentacle Forest]]>><<tentacle_forest_pass 5>><</link>>
+        <br>
+    <</if>>
+<<elseif $town_projects.green gte 4>>
+    <<set $town_projects.green to 5>>
+    一些触手已经长到惊人的尺寸。它们在自身重量的作用下弯曲，许多低到足以触及。<span class="green">现在应该可以穿越了。</span>
+    <br><br>
+    <<link [[继续|Tentacle Forest Plants]]>><</link>>
+    <br>
+<<else>>
+    你试图在它们之间推挤，但它们比看起来更坚固，并向你推挤。它们形成了一个无法逾越的障碍。<span class="blue">你需要找到另一个解决方案。</span>
+    <<if $town_projects.green is undefined>>
+        <<set $town_projects.green to 1>>
+    <</if>>
+    <br><br>
+    类似的、更高的触手从你的两侧升起，足够高，可以在园地周围更粗的触手之间编织。它们低垂在地面上。
+    <br>
+    <<link [[摇晃 (0:15)|Tentacle Forest Thighs]]>><<tentacle_forest_pass 15>><</link>><<note "+ 腿部技巧？" "blue">>
+    <br><br>
+    <<link [[回头|Tentacle Forest]]>><</link>>
+    <br>
+<</if>>

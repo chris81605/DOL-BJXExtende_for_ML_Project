@@ -1,0 +1,43 @@
+:: Temple Confess Self Temptation []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+
+<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+	"原谅我，<<sister_npc>>，我曾被诱惑所试探。"
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"原谅我，原谅我做出的恶行。"
+	<<elseif $speech_attitude is "bratty">>
+		"是的，我是肮脏的罪人。"
+	<<else>>
+		"原谅我，我犯下了罪过。"
+	<</if>>
+<</if>>
+你向<<him>>告解了你罪恶的思想和你遇见的诱惑。<<He>>自始至终倾听你的告解，一言不发，直到你结束。
+<br><br>
+
+<<switch $attendant>>
+	<<case "Jordan">>
+		"遇见试探并不好受。你需要承认罪恶的思想，也要感激你不去施行的能力，"<<He>>的声音中满是信心和恩典。
+	<<case "Sydney">>
+		<<run statusCheck("Sydney")>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			你听到一声轻叹。"我也是，"那个身影向后靠去，"我最近饱受肮脏思想的困扰。但重要的是，我们从未施行。思想只是思想。"
+		<<else>>
+			"试探如同杂草长在花园里，需要时常清理，即便你并非自己种植它们。"
+		<</if>>
+	<<case "Confessor">>
+		"有意思。这些思想是从你自己脑子里生出来的吗？还是你感觉它们是别人强迫放在你脑子里的？这可能不是你的错，"<<He>>的声音中满是好奇。
+	<<default>>
+		"既然你没有屈从诱惑，你就是无罪的。"
+<</switch>>
+<br><br>
+
+<<if $promiscuity gte 35>>
+	<<link [["告诉" + $NPCList[0].pronouns.him + "你从" + $NPCList[0].pronouns.him + "身上感受到诱惑" |Temple Confess Self Temptation Goad]]>><</link>><<promiscuous3>>
+	<br>
+	<<link [[继续|Temple Confess Self End]]>><</link>>
+	<br>
+<<else>>
+	<<link [[继续|Temple Confess Self End]]>><</link>>
+	<br>
+<</if>>

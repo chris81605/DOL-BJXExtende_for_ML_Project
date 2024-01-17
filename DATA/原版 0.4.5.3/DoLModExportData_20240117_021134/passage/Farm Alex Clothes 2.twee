@@ -1,0 +1,43 @@
+:: Farm Alex Clothes 2 []
+<<effects>>
+
+一捆东西从上面掉了下来。
+
+<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+	是一件格子衬衫。<<upperwear 33>>
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte $npcdomhigh and $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+		紧随其后的是一条牛仔短裤。<<lowerwear 31>>
+	<<elseif playerBellySize() gte 8>>
+		又是一捆东西掉在你面前，是一条运动裤。<<lowerwear 67>>
+	<<else>>
+		又是一捆东西掉在你面前，是一条牛仔裤。<<lowerwear 22>>
+	<</if>>
+<<elseif $worn.upper.type.includes("naked")>>
+	是一件格子衬衫。<<upperwear 33>>
+<<else>>
+	<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte $npcdomhigh and $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+		一条牛仔短裤。<<lowerwear 31>>
+	<<elseif playerBellySize() gte 8>>
+		是一条运动裤。<<lowerwear 67>>
+	<<else>>
+		一条牛仔裤。<<lowerwear 22>>
+	<</if>>
+<</if>>
+<<if $upperwetstage gte 1 or $lowerwetstage gte 2>>
+	接着掉下来的是一条卷起来的毛巾。"擦干身体用的，"艾利克斯喊道。
+	<<dry>>
+<</if>>
+<br><br>
+
+
+你在厨房里穿好了衣服。你听到艾利克斯下了楼梯。<<he>>在进入厨房之前向你确认是否穿好了衣服。
+
+<<if $NPCName[$NPCNameList.indexOf("Alex")].dom gte $npcdomhigh and $NPCName[$NPCNameList.indexOf("Alex")].lust gte 10>>
+	<<His>>的眼睛扫过你的身体。"你穿好像有点紧，"<<he>>说道，"走吧，我们需要回去工作了。"
+<<else>>
+	"穿得很合身，"<<he>>说道，"走吧，我们需要回去工作了。"
+<</if>>
+<br><br>
+
+<<link [[继续|Farm Work]]>><<endevent>><</link>>
+<br>

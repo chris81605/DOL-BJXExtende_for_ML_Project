@@ -1,0 +1,20 @@
+:: Rocks Pool []
+<<water>><<effects>>
+
+你溜进池塘，惊扰了一群小鱼。它比海水暖和。
+<br><br>
+
+<<if $museumAntiques.antiques.antiquediamond isnot "found" and $museumAntiques.antiques.antiquediamond isnot "talk" and $museumAntiques.antiques.antiquediamond isnot "museum">>
+	光线照在下面很深的地方，水池很深。
+	<br><br>
+<<else>>
+<</if>>
+
+<<if $swarmdisable is "f" and $deviancy gte 75 and $daily.rocksPoolInvite isnot 1>>
+	<<ind>><<link [[邀请鱼群 (0:05)|Rocks Swarm Invite]]>><<set $daily.rocksPoolInvite to 1>><<pass 5>><</link>><<deviant5>>
+	<br>
+<</if>>
+<<swimicon "dive">><<link [[潜水 (0:01)|Rocks Dive]]>><<pass 1>><<set $phase to 0>><</link>>
+<br>
+<<swimicon "leave">><<link [[爬出来 (0:01)|Rocks]]>><<pass 1>><</link>>
+<br>

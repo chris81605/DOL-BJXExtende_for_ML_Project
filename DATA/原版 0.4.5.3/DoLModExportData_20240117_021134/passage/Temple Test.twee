@@ -1,0 +1,378 @@
+:: Temple Test []
+<<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
+约旦向你郑重点头。"请随我来。"
+<br><br>
+<<He>>带领你离开主厅，来到一个小房间。"须在此处举行一项简单的仪式。我准备一下，你先褪去衣物。"
+<br><br>
+
+你解开衣服，祈祷这里不要太冷。约旦在<<his>>的双手之间擦拭白色粉末，然后跪在你的面前。
+<<if ($phase is 1 or $phase is 2) and playerChastity() and $worn.genitals.origin is "temple">>
+	<<He>>拿着一根奇怪的杆状物靠住你的$worn.genitals.cn_name_cap，然后那个装置就咔嗒一声掉在了地上。
+	<<if playerIsPregnant() and playerChastity("hidden") and knowsAboutPregnancy("pc", "Jordan")>>
+		"抱歉，我们不能在你的孕期归还贞操带，这对你和孩子都很危险。"
+		<<set $worn.genitals.type.push("broken")>>
+		<<genitalsruined>>
+		<br><br>
+	<</if>>
+<</if>>
+<<if $player.penisExist>>
+	<<if playerChastity("penis") and $worn.genitals.origin isnot "temple">>
+		<<He>>用双手的食指捏住你的$worn.genitals.cn_name_cap，紧盯着它，轻轻地摆弄着。你试图分散注意力，但很快就感觉到你的<<penis>>在<<his>>的审视下变得更硬了。
+	<<else>>
+		<<He>>用两个食指捏住你的阴茎，紧盯着它，轻轻地摆弄着。你试图分散注意力，但很快就感觉到在<<his>>的审视下它变得更硬了。
+	<</if>>
+<</if>>
+<<if $player.vaginaExist>>
+	<<if playerChastity("vagina") and $worn.genitals.origin isnot "temple">>
+		<<He>>用<<his>>双手的拇指放在你的$worn.genitals.cn_name_cap边上，试图检查你的阴部。
+		<br>
+	<<else>>
+		<<He>>用<<his>>双手的拇指轻触着你的阴部，温柔地打开了你的
+		<<if setup.bodyliquid.combined("vagina") gte 2>>
+			<<if setup.bodyliquid.combined("vagina") gte 6>>
+				阴唇。精液喷出，喷在约旦的脸上，并沿着<<his>>的双臂流淌。
+				<<He>>惊讶地向后退去，急忙从<<his>>的眼睛和嘴巴上擦拭精液。
+				<br>
+				<<He>>看向你。
+			<<elseif setup.bodyliquid.combined("vagina") gte 4>>
+				阴唇。一股浓稠的淫秽液体喷涌而出。有些流到了约旦的手臂上，很快就消失在<<his>>的袖子上。
+				<<He>>吓得尖叫着往后跳，惊恐地摇晃<<his>>的手臂。
+				<br>
+			<<else>>
+				阴唇。精液从你的腿上流出来。约旦惊讶地收回了<<his>>的手。
+				<br>
+			<</if>>
+			"这可不妙……"<<he>>咕哝道。
+			<br><br>
+		<<else>>
+			阴唇，让<<him>>清晰地看到了里面。
+			<br>
+		<</if>>
+	<</if>>
+	你不想承认，但身体对这样的检查起了淫秽的反应。
+<</if>>
+<br><br>
+抚摸持续了几分钟。最后，<<he>>完成了<<his>>的工作。<<He>>退后一步看着你。
+<<arousal 1000 "genitals">>
+<<set [_pregnancyObject, _pregnancyGenital] to getPregnancyObject("pc", true)>>
+<<if $phase is 2>>
+	<<if $player.virginity.penile is true and $player.virginity.vaginal is true or $player.virginity.temple is true>>
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and (($player.virginity.vaginal is true and _pregnancyGenital is "vagina") or _pregnancyGenital is "anus") and !$templeVirginPregnancy>>
+			<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">><<set $templeVirginPregnancy to true>>
+			<<He>>无法掩饰<<his>>的喜悦之情。
+			<<if !_preggy.awareOf>>
+				<<set _preggy.awareOf to "temple">>
+				<<if _pregnancyGenital is "vagina">>
+					"<span class="green">你纯洁无瑕</span>。而且，<span class="lewd">你有了孩子</span>。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+				<<else>>
+					"<span class="green">你是纯洁无瑕的</span>。"<<He>>顿了顿，又看了看你。"然而，你却在不可能怀孕的时候怀孕了。我向你表示最诚挚的祝贺，你被一个奇迹所眷顾。"
+				<</if>>
+				<br><br>
+
+				你的双腿发软。约旦很快扶着你坐下。
+				<<if _preggy.potentialFathers.length is 1>>
+					<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+					<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+				<<else>>
+					<span class="red">你不知道孩子的父亲是谁。</span>
+				<</if>>
+				<br><br>
+
+				"对不起，突然向你透露这些，是我疏忽大意了。"<<He>>陪在你身边直到你重新站稳。
+			<<else>>
+				<<if _pregnancyGenital is "vagina">>
+					"<span class="green">你纯洁无瑕</span>。而且，<span class="lewd">你有了孩子</span>。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+				<<elseif _pregnancyGenital is "anus">>
+					"<span class="green">你是纯洁无瑕的</span>。"<<He>>顿了顿，又看了看你。"然而，你却在不可能怀孕的时候怀孕了。我向你表示最诚挚的祝贺，你被一个奇迹所眷顾。"
+				<</if>>
+			<</if>>
+			<<ggggrace>><<grace 15>>
+			<br><br>
+
+			<<if playerChastity("hidden") and $worn.genitals.origin is "temple">>
+				"出于安全考虑，我不能在你怀孕期间，把你的贞操带还给你。"
+				<<set $worn.genitals.type.push("broken")>>
+				<<genitalsruined>>
+				<br><br>
+			<</if>>
+		<<else>>
+			"<span class="green">纯洁无瑕</span>，愿你保持如此。"
+			<<if playerChastity() and $worn.genitals.origin is "temple">>
+				<<if playerChastity("hidden") and playerIsPregnant() and knowsAboutPregnancy("pc", "Jordan")>>
+					"抱歉，我们不能在你的孕期归还贞操带，这对你和孩子都很危险。"
+					<<set $worn.genitals.type.push("broken")>>
+					<<genitalsruined>>
+				<<else>>
+					<<he>>飞快地将$worn.genitals.cn_name_cap装了回去，护住你的裆部。
+				<</if>>
+			<</if>>
+			<br><br>
+		<</if>>
+
+		<<He>>转身让你穿衣服。
+			<<if $grace gte 90>>
+				<<he>>没有看你，只是把一个信封放在了你旁边的架子上。"这是你的月度津贴。你的表现非常出色。<span class="green">你是我们信仰中值得称赞的人，我们每个人都可以向你学习。</span>谢谢。"
+				<br><br>
+				你打开信封。里面有<span class="gold">£<<print ($grace * 40)>></span>。
+				<<set $money += ($grace * 4000)>>
+			<<elseif $grace gte 50>>
+				<<he>>没有看你，只是把一个信封放在你旁边的架子上。"这是你的月津贴。<span class="teal">你一直是我们教会中表现良好的成员，</span>每一分钱都是应得的。"
+				<br><br>
+				你打开信封。里面有<span class="gold">£<<print ($grace * 40)>></span>。
+				<<set $money += ($grace * 4000)>>
+			<<elseif $grace gte 1>>
+				<<he>>没有看你，只是把一个信封放在你旁边的架子上。"这是你的月度津贴。<span class="lblue">你一直是我们教会中表现良好的成员。</span>当然，还有提高的空间，但我们所有人都需要进步。我们应该每天努力变得更好。"
+				<br><br>
+				你打开信封。里面有<span class="gold">£<<print ($grace * 40)>></span>。
+				<<set $money += ($grace * 4000)>>
+			<<else>>
+				<span class="red">"尽管你很纯洁，但你的行为并不适合我们成员的信仰，"</span><<he>>说，"我们知道你可以做得更好。因此，我们决定暂停发放你这个月的津贴。希望下次我能支付给你。"
+				<br><br>
+			<</if>>
+
+		<br><br>
+		<<clotheson>>
+		<<endevent>>
+		<<link [[继续|Temple]]>><</link>>
+	<<else>>
+		<<set $templetest to "failed">>
+		"很遗憾，你已经被玷污了。"<<His>>的声音微微颤抖，你不确定是不是自己的错觉。
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and !playerAwareTheyArePregnant>>
+			<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">>
+			<<if !_preggy.awareOf>>
+				<<set _preggy.awareOf to "temple">>
+				<<if _pregnancyGenital is "vagina">>
+					"而且……<span class="red">你有了孩子</span>。"
+				<<else>>
+					"而且……<span class="red">你不知何故有了孩子。</span>你得到了另一种奇迹的眷顾。"
+				<</if>>
+				<br><br>
+
+				你双腿发软。
+				<<if _preggy.potentialFathers.length is 1>>
+					<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+					<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+				<<else>>
+					<span class="red">你不知道孩子的父亲是谁。</span>
+				<</if>>
+				<br><br>
+			<</if>>
+		<</if>>
+		"你必须被净化。我会召集专门人员。请配合他们的工作。"<<He>>从长袍里拿出一个小铃铛，摇了摇。
+		<br><br>
+		<<endevent>>
+		<<link [[继续|Temple Arcade Intro]]>><</link>>
+		<br>
+
+	<</if>>
+<<elseif $phase is 1>>
+	<<if $player.virginity.penile is true and $player.virginity.vaginal is true>>
+		<<inittemple>>
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and (($player.virginity.vaginal is true and _pregnancyGenital is "vagina") or _pregnancyGenital is "anus") and !$templeVirginPregnancy>>
+			<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">><<set $templeVirginPregnancy to true>>
+			<<He>>无法掩饰<<his>>的喜悦之情。
+			<<if !_preggy.awareOf>>
+				<<set _preggy.awareOf to "temple">>
+				<<if _pregnancyGenital is "vagina">>
+					"<span class="green">你纯洁无瑕</span>。而且，<span class="lewd">你有了孩子</span>。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+				<<else>>
+					"<span class="green">你是纯洁无瑕的</span>。"<<He>>顿了顿，又看了看你。"然而，你却在不可能怀孕的时候怀孕了。我向你表示最诚挚的祝贺，你被一个奇迹所眷顾。"
+				<</if>>
+				<br><br>
+
+				你的双腿发软。约旦很快扶着你坐下。
+				<<if _preggy.potentialFathers.length is 1>>
+					<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+					<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+				<<else>>
+					<span class="red">你不知道孩子的父亲是谁。</span>
+				<</if>>
+				<br><br>
+
+				"对不起，突然向你透露这些，是我疏忽大意了。"<<He>>陪在你身边直到你重新站稳。
+			<<else>>
+				"<span class="green">你毫无瑕疵</span>。然而，你有了孩子。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+			<</if>>
+			<<ggggrace>><<grace 15>>
+			<br><br>
+
+			<<if playerChastity("hidden") and $worn.genitals.origin is "temple">>
+				"出于安全考虑，我不能在你怀孕期间归还你的贞操带。"
+				<<set $worn.genitals.type.push("broken")>>
+				<<genitalsruined>>
+				<br><br>
+			<</if>>
+			"你现在是神殿的见习教徒了。欢迎你，<<sister>>。"
+			<<if playerChastity() and $worn.genitals.origin is "temple">>
+				<<he>>飞快地将$worn.genitals.cn_name_cap装了回去，护住你的裆部。
+			<</if>>
+			<br><br>
+			<<He>>转过身来让你穿衣服。"见习教徒的任务是在神殿内做一些杂活，譬如清扫、园艺以及看护长者。相应的，你可以在神殿内自由行动，只是别进画有红色十字架图案的门。"
+			<br><br>
+			"我们还有一些教规：禁止盗窃；禁止暴力；禁止性行为，<span class="pink">每个月，所有人都要检查贞洁；</span>不得拒绝长辈的要求。如果有人对你做出不当行为，请忍耐并在适当时候告知我。处理这类问题在我的职责范围内。"
+			<br><br>
+			"我会将你加入的喜讯传达给其他人，"<<he>>微笑着说，"这是我们的荣幸。"
+			<br><br>
+			<<clotheson>>
+			<<endevent>>
+			<<link [[继续|Temple]]>><</link>>
+		<<else>>
+			"纯洁无瑕，愿你保持如此。你现在是神殿的见习教徒了。欢迎你，<<sister>>。"
+			<<if playerChastity() and $worn.genitals.origin is "temple">>
+				<<if playerChastity("hidden") and playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and knowsAboutPregnancy("pc", "Jordan")>>
+					"抱歉，我们不能在你的孕期归还贞操带，这对你和孩子都很危险。"
+					<<set $worn.genitals.type.push("broken")>>
+					<<genitalsruined>>
+				<<else>>
+					<<he>>飞快地将$worn.genitals.cn_name_cap装了回去，护住你的裆部。
+				<</if>>
+			<</if>>
+			<br><br>
+			<<He>>转过身来让你穿衣服。"见习教徒的任务是在神殿内做一些杂活，譬如清扫、园艺以及看护长者。相应的，你可以在神殿内自由行动，只是别进画有红色十字架图案的门。"
+			<br><br>
+			"我们还有一些教规：禁止盗窃；禁止暴力；禁止性行为，<span class="pink">每个月，所有人都要检查贞洁；</span>不得拒绝长辈的要求。如果有人对你做出不当行为，请忍耐并在适当时候告知我。处理这类问题在我的职责范围内。"
+			<br><br>
+			"我将知会其他人，"<<he>>微笑着说，"很高兴你能加入。"
+			<br><br>
+			<<clotheson>>
+			<<endevent>>
+			<<link [[继续|Temple]]>><</link>>
+		<</if>>
+	<<else>>
+		<<set $templetest to "failed">>
+		"很遗憾，你已经被玷污了。"<<His>>的声音微微颤抖，你不确定是不是自己的错觉。
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and !playerAwareTheyArePregnant()>>
+			<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">>
+			<<if !_preggy.awareOf>>
+				<<set _preggy.awareOf to "temple">>
+				<<if _pregnancyGenital is "vagina">>
+					"而且……<span class="red">你有了孩子</span>。"
+				<<else>>
+					"而且……<span class="red">你不知何故有了孩子。</span>你得到了另一种奇迹的眷顾。"
+				<</if>>
+				<br><br>
+
+				你双腿发软。
+				<<if _preggy.potentialFathers.length is 1>>
+					<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+					<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+				<<else>>
+					<span class="red">你不知道孩子的父亲是谁。</span>
+				<</if>>
+				<br><br>
+			<</if>>
+		<</if>>
+		"你仍然可以成为见习教徒，但你必须通过纯洁试炼。"<<He>>走出房间，但在门口停下了脚步。"我很遗憾你在这么年轻的时候就失去了你的……"<<He>>说完消失在拐角处。
+		<br><br>
+		<<link [[继续|Temple]]>><<endevent>><</link>>
+	<</if>>
+<<else>>
+	<<if $player.virginity.penile is true and $player.virginity.vaginal is true>>
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1>>
+			<<if !$templeVirginPregnancy>>
+				<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">><<set $templeVirginPregnancy to true>>
+				<<He>>无法掩饰<<his>>的喜悦之情。
+				<<if !_preggy.awareOf>>
+					<<set _preggy.awareOf to "temple">>
+					<<if _pregnancyGenital is "vagina">>
+						"<span class="green">你纯洁无瑕</span>。而且，<span class="lewd">你有了孩子</span>。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+					<<else>>
+						"<span class="green">你是纯洁无瑕的</span>。"<<He>>顿了顿，又看了看你。"然而，你却在不可能怀孕的时候怀孕了。我向你表示最诚挚的祝贺，你被一个奇迹所眷顾。"
+					<</if>>
+					<br><br>
+
+					你的双腿发软。约旦很快扶着你坐下。
+					<<if _preggy.potentialFathers.length is 1>>
+						<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+						<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+					<<else>>
+						<span class="red">你不知道孩子的父亲是谁。</span>
+					<</if>>
+					<br><br>
+
+					"对不起，突然向你透露这些，是我疏忽大意了。"<<He>>陪在你身边直到你重新站稳。
+				<<else>>
+					"<span class="green">你毫无瑕疵</span>。然而，你有了孩子。我向你送去最诚挚的祝贺，你被奇迹眷顾。"
+				<</if>>
+				<<if $temple_rank isnot undefined and $temple_rank isnot "prospective">>
+					<<ggggrace>><<grace 15>>
+				<</if>>
+				<br><br>
+			<</if>>
+
+			<<if $player.penisExist>>
+				"不幸的是，在你怀孕期间我不能为你安装贞操带。这是出于安全考虑。你可以戴上这个贞操笼，固定在你的腿根部<<penisSimple>>。但它只能保护你的<<penisSimple>>，而不能保护你于肛交。"
+				<<if $temple_rank is undefined>>
+					<<He>>停顿了一下。"然而，能有你这样的人加入我们是我们的荣幸。"
+				<</if>>
+				<br><br>
+				<<link [[请求戴贞操笼|Temple Male Chastity Fitting]]>><<genitalswear 2>><</link>>
+				<br>
+			<<else>>
+				"很遗憾，出于安全考虑，我不能在你怀孕期间为你安装贞操带。"
+				<<if $temple_rank is undefined>>
+					<<He>>停顿了一下。"然而，能有你这样的人加入我们是我们的荣幸。"
+				<</if>>
+				<br><br>
+			<</if>>
+
+			<<link [[返回神殿|Temple]]>><<endevent>><</link>>
+		<<else>>
+			"我现在去拿你的贞操带，请稍候。"<<He>>离开了一小会儿，然后带着
+			<<if $player.gender isnot "m">>
+				金属装置。<<he>>再次跪下，不发一语，将它缠绕在你的腰间。你听到了一个响亮的"咔嚓"声，约旦后退一步，欣赏着<<his>>的杰作。
+				<br><br>
+				你低头检查了一下，并没有想象中那样紧或不舒服。你把手伸入贞操带检查有没有戴好，但伸不进去。你双手向下按压贞操带，但它纹丝不动。
+				<br><br>
+				<<genitalswear 1>>
+				<<set $worn.genitals.origin to "temple">>
+
+				"一切顺利，"<<he>>很满意，"如有问题，请来找我。"<<He>>离开房间，让你独自待在里面。
+				<br><br>
+				<<clotheson>>
+				<<link [[继续|Temple]]>><<endevent>><</link>>
+			<<else>>
+				金属贞操带和贞操笼。
+				<br><br>
+				"由于你的<<genitals 2>>，你有两种选择。你可以戴上这个贞操笼，固定在你的<<penisSimple>>底部。然而，它只能保护你的<<penisSimple>>，无法保护你于肛交。"
+				<br><br>
+				在让你检查过之后，<<he>>继续说道："你的另一个选择是这个贞操带。它可以保护你的<<genitals 2>>，并且可以安装一个护肛板来防止肛交。它被设计成既能防止摩擦，又能固定软弱的阴茎。这是最好的保护方式，但其他人可能会误认为你是女孩。"
+				<br><br>
+
+				<<link [[请求戴贞操笼|Temple Male Chastity Fitting]]>><<genitalswear 2>><</link>>
+				<br>
+				<<if playerIsPregnant() and playerAwareTheyArePregnant()>>
+					你知道自己莫名其妙地怀孕了，不能取下贞操带。
+				<<else>>
+					<<link [[请求带贞操带|Temple Male Chastity Fitting]]>><<genitalswear 1>><</link>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<set $templetest to "failed">>
+		"很遗憾，你已经被玷污了。"<<His>>的声音微微颤抖，你不确定是不是自己的错觉。
+		<<if playerIsPregnant() and _pregnancyObject.timer / _pregnancyObject.timerEnd gte 0.1 and !playerAwareTheyArePregnant()>>
+			<<set _preggy to getPregnancyObject()>><<setKnowsAboutPregnancy "pc" "Jordan">>
+			<<if !_preggy.awareOf>>
+				<<set _preggy.awareOf to "temple">>
+				"而且……<span class="red">你有了孩子</span>。"
+				<br><br>
+
+				你双腿发软。
+				<<if _preggy.potentialFathers.length is 1>>
+					<<set _fatherName to pregnancyNameCorrection(_preggy.potentialFathers[0].source)>>
+					<span class="lewd">很明显，<<print _fatherName === "你自己" ? "你是" : _fatherName + "是">>孩子他爸。</span>
+				<<else>>
+					<span class="red">你不知道孩子的父亲是谁。</span>
+				<</if>>
+				<br><br>
+				"出于安全考虑在你怀孕期间我不能为你安装贞操带<<if $player.penisExist>>，不过我们可以为您安装贞操笼<</if>>。"<<He>>走出房间，但在门口停了下来。"很遗憾你还这么年轻就失去了童贞。"<<He>>消失在拐角处。
+			<</if>>
+		<<else>>
+			"我们仍可为你安装贞操带，但你需要支付费用。"<<He>>走出房间，但在门口停了下来。"很遗憾你还这么年轻就失去了童贞。"<<He>>消失在拐角处。
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Temple]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

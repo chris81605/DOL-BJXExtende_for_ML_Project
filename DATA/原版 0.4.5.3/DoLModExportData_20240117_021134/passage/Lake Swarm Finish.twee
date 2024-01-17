@@ -1,0 +1,29 @@
+:: Lake Swarm Finish []
+<<set $outside to 0>><<set $location to "lake_ruin">><<underwater>><<effects>><<lakeeffects>>
+<<if $stress gte $stressmax>>
+	你再也承受不住了，你昏倒了。
+	<br><br>
+	<<if $upperoff isnot 0>>
+		<<upperruined>>
+	<</if>>
+	<<if $loweroff isnot 0>>
+		<<lowerruined>>
+	<</if>>
+	<<if $underloweroff isnot 0>>
+		<<underlowerruined>>
+	<</if>>
+	<<if $underupperoff isnot 0>>
+		<<underupperruined>>
+	<</if>>
+	<<endcombat>>
+	<<passoutlake>>
+<<else>>
+	<<tearful>>你游离开了鱼群，它们留在了它们的罐子里。它们消失在罐子里。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<swimicon "back">><<link [[游向出口|Lake Ruin]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+	<<lakeicon "pots">><<link [[搜索罐子|Lake Pots]]>><<wateraction>><</link>><<loxygen>>
+	<br>
+<</if>>

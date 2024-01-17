@@ -1,0 +1,92 @@
+:: Wolf Halloween 7 []
+<<effects>>
+
+<<if $phase is 0>>
+	<<if $wolfpackleader is 1 or $blackDog>>
+		<<famegood 10>>
+		<<if $wolfpackleader is 1>>
+			"我说够了！"你喊道。"我可是狼王，你们要听我的！"
+			<br><br>
+
+			<<wolf_cave_plural>>放松了它们的攻击，而是威胁性地向你踱步。一只<<beasttype 1>>咆哮着，然后把你推到一边，和其他狼一起愤怒地向洞穴行进。
+		<<else>>
+			"我说停下来！"你喊道。"他们已经收到警告了！"
+			<br><br>
+
+			<<wolf_cave_plural>>放松了它们的攻击，而是威胁性地向你踱步。<<beasttype 1>>准备冲刺，但被黑狗拦住，黑狗走在你前面，在<<bhim 2>>后面保护你。<<beasttype 1>>咆哮，然后加入<<bhis 1>>的兄弟们返回洞穴的路上。
+		<</if>>
+		<<if $monster is 1>>"<<pPackbrother>>不应该妨碍族群。"<</if>><<gferocity>>
+		<br><br>
+
+		<<if $blackDog>>
+			<<if $monster is 1>>
+				当<<bhe 2>>离开时，黑狗向你微微一笑表示赞同。"很高兴，我的朋友今晚表现出了怜悯之心，"<<bhe 2>>说道。"永远不应该用更多的暴力来惩罚暴力。"
+			<<else>>
+				黑狗高兴地摇着尾巴表示赞同。考虑到这些青年人毫无防御能力，<<bhe 2>>会同情他们吗？
+			<</if>>
+			<br><br>
+		<</if>>
+
+		你走近哭泣的学生。<<person4>><<person>>对你的触摸感到害怕，但你设法帮助<<him>>站起来，拍下<<his>>服装上的污垢。
+		<<if $speech_attitude is "meek">>
+			"我、我不应该做得这么过分，"你说，"求你了，只是……不要再把伙伴们弄得一团糟。"
+		<<elseif $speech_attitude is "bratty">>
+			"你知道吗？你们差点就完蛋了，"你说，"远离狼群，这样就不会再发生这种事了。"
+		<<else>>
+			"我失去了对局势的控制，"你说，"很抱歉让你们受到惊吓，但不要再攻击狼群了。"
+		<</if>>
+		<br><br>
+
+		学生们爬起来逃跑，消失在树后。你决定现在最好回到洞穴。
+		<br><br>
+
+		<<unset $blackDog>>
+		<<destinationwolfcave>>
+	<<else>>
+		"我说停下来！"你喊道。"他们已经收到警告了！"
+		<br><br>
+
+		<<wolf_cave_plural>>放松了它们的攻击，而是威胁性地向你踱步。<<beasttype 1>>咆哮。<<if $monster is 1>>"<<pPackbrother>>已经忘记了地方。我很乐意提醒！"<</if>>
+		<br><br>
+
+		<<saveNPC 3 "halloween_lake">>
+		<<beastNEWinit 3 wolf>>
+		<<link [[继续|Wolf Halloween Fight]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<<elseif $phase is 1>>
+	你离开<<wolf_cave_plural>>，看到它们扑向无助的三人组。当他们的服装被撕成碎片，身体暴露在野兽面前时，织物在空中飞舞。<<if $monster is 1>><<beasttype 0>>发出狂野的咆哮，不再纠缠于言语。<</if>>
+	<br><br>
+
+	<<if $blackDog>>
+		黑狗试图介入，但被一只<<beasttype 1>>挡住了去路。
+		<<if $monster is 1>>
+			"退后，局外人！"<<bhe>>喊道。"幸运的是，我们甚至允许你跟随！"
+		<<else>>
+			在这样的时刻激起它们的愤怒似乎并不明智。
+		<</if>>
+		<br><br>
+	<</if>>
+
+	你恐惧地目睹了狼群的残忍和无情，它们对那三个学生进行了残忍的性侵犯。他们被无情地强奸了数小时，直到最后一只<<wolf_cave_plural>>得到了满足。它们离开了横七竖八的猎物，踏着草地离开了。
+	<<trauma 6>>
+	<br><br>
+
+	学生们艰难地站起身来，他们的服装已经被完全摧毁。他们无法自已地哭泣着，带着仅存的尊严艰难地离开了。
+	<br><br>
+
+	<<if $blackDog>>
+		黑狗留在你的身边，没有离开。
+		<<if $monster is 1>>
+			"对不起，人类，"<<bhe>>以沮丧的语气说道。"别怪我的朋友们，我从来没有想过会这样。"你
+		<<else>>
+			<<bhe 2>>在看着学生们离开时低声发出叹息。你想知道，连黑狗也觉得它们的惩罚太过严厉了吗？你安慰地抚摸了一下<<bhim 2>>，然后
+		<</if>>
+		你和黑狗一起走回狼穴，回到相对安全的地方。
+	<<else>>
+		你无法帮助那些学生。你决定最好回到相对安全的狼穴过夜。
+	<</if>>
+	<br><br>
+
+	<<unset $blackDog>>
+	<<destinationwolfcave>>
+<</if>>

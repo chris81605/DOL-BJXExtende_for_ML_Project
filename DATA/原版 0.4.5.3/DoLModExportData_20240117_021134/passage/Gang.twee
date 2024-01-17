@@ -1,0 +1,40 @@
+:: Gang []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+	<<ganginit>>你感觉到有东西在触摸你的下体，有谁的手从周围伸了出来。
+	<br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate 1>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $alarm is 1>>
+	<<if $rescue is 1>>
+		<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+	<<else>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续->Gang]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Gang]]>><</link>></span><<nexttext>>
+<</if>>

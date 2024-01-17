@@ -1,0 +1,159 @@
+:: Rent Intro []
+<<effects>>
+<<set $baileydefeatedchain to 0>><<set $soldCount += 1>>
+<<set $baileyRefusedToPay to 0>>
+<<set _robin to statusCheck("Robin")>>
+<<unset $bailey_encroach>>
+<<npc Bailey 1>>
+
+<<set _robinIsPresent to ($phase is 1)>>
+<<set _andRobin to (_robinIsPresent ? "和罗宾" : "")>>
+
+你的脑袋上被套上头罩，双手被绑在背后，随后你_andRobin被带下一段楼梯，沿着一条隧道走下去。
+路上你被绊了好几次，贝利将你拖了起来，愤怒地扇你巴掌。
+<br><br>
+
+<<if _robinIsPresent>>
+	"求你，别再伤害<<phim>>了！"罗宾恳求着说道，但贝利忽略了<<nnpc_him "Robin">>的诉求。
+	<br><br>
+<</if>>
+<<pass 20>>
+
+<<if $tutorial is 0>>
+	<<endevent>>
+	<<generate1>><<person1>>
+	走了一段时间后，你听到另外一组脚步声。"这就是那个胆小鬼？"你听到一个<<personsimple>>的声音说道。
+	<br><br>
+	<<if _robinIsPresent>>
+		"是的，我只是带着我的<<print (_robin.pronoun is $player.gender_appearance ? (_robin.pronoun is "m" ? "男孩们" : "女孩们") : "孩子们")>>出来见识下外面的世界，"
+	<<else>>
+		"是的，我只是带着我的<<girl>>出来见识下外面的世界，"
+	<</if>>
+	贝利说道，<<person1>>语气里的讽刺很难掩盖<<nnpc_his "Bailey">>的脾气。
+	"把钱给我就行了。还有，10分钟后，我要看到你走人。"
+	<br><br>
+	有人把手放在你肩膀上，把你推到前面，进入另一个人手中。一段时间后，你的头套被摘了下来，眼前是一个<<person>>。"你是我这周见过最可爱的一个！来吧。"
+	<br><br>
+	<<link [[继续|Tutorial]]>><<set $molestationstart to 1>><<set $tutorialExit to "Tutorial Bailey">><</link>>
+
+<<elseif $rentsale is 3>>
+	<<set $rentsale to 0>><<generate2>><<person2>>
+	在走了一段时间后，你听到了其他的脚步声正在靠近。
+	<<if _robinIsPresent>>
+		"把他们交出来，"一个<<personsimple>>的声音说道。
+		<br><br>
+
+		"先交钱，"贝利回答，"他们之后还能回来吗？"
+		<br><br>
+
+		"在我们玩完之后，你是不会想把他们要回去的。"
+		<br><br>
+	<<else>>
+		"把<<phim>>交出来，"一个<<personsimple>>的声音说道。
+		<br><br>
+
+		"先交钱，"贝利回答，"<<phim>>之后还能回来吗？"
+		<br><br>
+
+		"在我们玩完之后，你是不会想把<<phim>>要回去的。"
+		<br><br>
+	<</if>>
+
+	你在隧道内被拖拽着行进，你听到类似于纸张摩擦的沙沙声。
+	<br><br>
+	<<if _robinIsPresent>>
+		<<link [[继续|Underground Intro]]>><<set $baileySold to true>><<endevent "phaseless">><<set $phase to 1>><</link>>
+	<<else>>
+		<<link [[继续|Underground Intro]]>><<set $baileySold to true>><</link>>
+	<</if>>
+	<br>
+<<elseif $rentsale is 2>>
+	<<set $rentsale += 1>>
+	<<leash 21>>
+	<<if _robinIsPresent>>
+		你走了很长一段时间，直到你感觉到脚下传来水泥地的触感。这时你听见有一组脚步声逐渐逼近。
+		你似乎听到了警察腰带摩擦传来的沙沙声。
+		<br><br>
+
+		"把嫌疑犯交出来，"一个声音命令道。
+		<br><br>
+
+		"现金优先，没时间坐牢了。"贝利的愤怒是显而易见的，"我要<<nnpc_him 'Robin'>>完好无损的回来。"
+		<br><br>
+
+		"很好。反正我们也有其它安排。"你听到像是现金的沙沙声。
+		<br><br>
+
+		罗宾哭了出来。"我、我什么都没做！求求你！不要！"<<nnpc_His "Robin">>的声音渐渐消失了。而贝利将你拖到别处。
+		<<robinPunishment "pillory">>
+		<br><br>
+
+		你再继续走了一段时间，
+	<<else>>
+		你继续走了一段时间，
+	<</if>>
+	直到你听到前面传来引擎的声音。这声音在隧道内回响并且离你越来越近，直到你感觉到它就在你周围。
+	"真是好货，"一个陌生的声音说，"想必能成为优秀的种牛。"
+	<br>
+	"钱，"贝利不耐烦地回道。
+	<br>
+	"啊，在这里。"一旁传来类似纸张摩擦的沙沙声，接着有人拽着你的链子，将你向前拉去。
+	<br>
+	"合作愉快。"贝利说完就离开了。
+	<br><br>
+
+	"注意脚下，"那陌生的声音说道，你感觉脚下有些颠簸晃动，"坐。"
+	你在膝盖周围摸索，找到一个感觉像是长凳的地方。
+	你坐了下来，然后听到门的砰砰声，几分钟后，当脚下的地板开始移动时，你随之摇晃了起来。你意识到你现在正在车里。
+	<br><br>
+
+	<<link [[继续|Street Van Bailey]]>><<set $baileySold to true>><</link>>
+	<br>
+<<elseif $rentsale is 1>>
+	<<set $rentsale += 1>>
+	<<if _robinIsPresent>>
+		<<rentRobinPunishment>>
+		<<endevent>>
+		<<npc Bailey 1>><<person1>>
+		<br><br>
+
+		你和贝利的行程还在继续。
+	<<else>>
+		在走了一段时间后，你发现你来到了户外。
+	<</if>>
+	你听到风吹过树叶沙沙作响。
+	贝利将你举起，把你的绑带钩在你身后的某个东西上，让你悬在空中。
+	"哪儿都别想着去，你很快就会被抓起来的，"<<he>>说道。你听到<<him>>离开，只留下你一个人在这里。
+	<br><br>
+
+	<<endevent>>
+	<<rentEdenTrade>>
+<<else>>
+	<<set $rentsale to 1>>
+	<<generate2>><<person2>>
+	在走了一段时间后，你听到了另一串脚步声。"这就是商品么？"一个<<personsimple>>的声音响起。
+	<br><br>
+	<<if _robinIsPresent>>
+		"不，我只是带着我的<<print (_robin.pronoun is $player.gender_appearance ? (_robin.pronoun is "m" ? "男孩" : "女孩") : "小孩")>>散散步，"
+	<<else>>
+		"不，我只是带我的<<girl>>散散步，"
+	<</if>>
+	贝利说着，<<person1>><<his>>的怒气几乎没法被那讽刺的口吻所掩盖。
+	"把现金给我就行了。还有，我要他们完好无损地回来，你付的钱就只够做这些……"
+	<br><br>
+
+	<<if _robinIsPresent>>
+		<<if _robin.dom lte 50>>
+			"求你了，让我们走吧！我们什么都没做——"
+		<<else>>
+			"等等！放开<<phim>>！请不要伤害我的<<girlfriend>>——"
+		<</if>>
+		罗宾的声音突然变小，令你感到害怕的是，你听到<<nnpc_him "Robin">>摔倒在地上。
+		<br><br>
+	<</if>>
+	片刻之后，你感觉到有人将什么东西按在你的嘴上，你的意识逐渐远去了。<<arousal 6000>><<gggarousal>>
+	<br><br>
+
+	<<link [[继续|Danube Meal]]>><<endevent>><<set $phase to (_robinIsPresent ? 1 : 0)>><</link>>
+	<br>
+<</if>>

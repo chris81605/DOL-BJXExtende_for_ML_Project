@@ -1,0 +1,53 @@
+:: Underground Plant Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit "plant">><<npcexpose>>
+	<<set $enemyarousalmax to 800>>
+	<<set $enemyanger to 20>>
+	<<set $apologised to 1>>
+	<<set _randomtentacles to random(6, 10)>>
+	<<makeAbomination _randomtentacles 6 "vine" "vine" true>>
+	<<set $timer to 3>><<set $plantFame to 0>>
+<</if>>
+
+<<if $timer is 3>>
+	<br>
+	<span class="blue">你看到<<person3>><<person>>在设置着摄影机。</span>
+<<elseif $timer is 2>>
+	<br>
+	<span class="purple">你看到<<person3>><<person>>正在打开摄影机。</span>
+	"那么你怎么打算，在不会有人被吓坏的情况下，出售这段视频呢？”<<person2>><<person>>问道，“公众不应该知道这个的。"
+<<elseif $timer is 1>>
+	<br>
+	<span class="pink">你看到<<person3>><<person>>拿着摄像机对着你。</span>
+	"我们会在后期处理中剪掉它。”<<person3>><<person>>回答道，“保留<<girl>>和藤蔓的镜头，这样人们会就认为这是CG了。"
+	<<if $face isnot "covered">>
+		<<fameexhibitionism 1>><<famerape 1>><<famebestiality 1>>
+		<<set $plantFame -= 1>>
+	<</if>>
+<<elseif $timer lte 0>>
+	<br>
+	<span class="pink"><<person3>><<person>>拍摄着你。</span>
+	<<if $face isnot "covered">>
+		<<fameexhibitionism 1>><<famerape 1>><<famebestiality 1>>
+		<<set $plantFame -= 1>>
+	<</if>>
+<</if>>
+
+<<person1>>
+<br>
+<<effects>>
+<<effectsabomination>><<abomination>>
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Underground Plant Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Underground Plant Molestation]]>><</link>></span><<nexttext>>
+<</if>>

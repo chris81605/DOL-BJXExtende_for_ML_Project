@@ -1,0 +1,131 @@
+:: Hospital Foyer []
+<<set $outside to 0>><<set $location to "hospital">><<effects>>
+
+你在医院门厅内。<<if $psych is 1>>你看到一个指向哈珀办公室的牌子。<<if Time.weekDay is 6 and $daily.harperVisit isnot 1 and $trauma gte ($traumamax / 10) * 9>><span class="red">你不记得你的预约是什么时候。</span><<elseif Time.weekDay is 6 and $daily.harperVisit isnot 1>>你准时赶到。<<else>>你预约的时间不是现在。<</if>><</if>>
+<br><br>
+
+<<if $stress gte $stressmax>>
+	<<passouthospital>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "hospital">>
+	<</if>>
+	<<if $exposed gte 1>>
+		你躲在一张病床下，希望没有人发现你的这种裸体状态。你看到不远处有一个装满床单的手推车，你可以用它来遮盖自己。你可以等着，直到确保安全后闯出去。或者，你也可以把床靠近推车，试图保持隐蔽。
+		<br><br>
+
+		<<link [[放手一搏 (0:05)|Hospital Exhibition]]>><<set $phase to 0>><<pass 5>><</link>>
+		<br>
+		<<link [[把床滑近些 (0:10)|Hospital Exhibition]]>><<set $phase to 1>><<pass 10>><</link>>
+		<br><br>
+	<<else>>
+		<<if isPubfameTaskAccepted("hospital")>>
+			米奇让你偷一张医院的钥匙卡。
+			<<if Time.hour gte 6 and Time.hour lte 21>>
+				医院全天开放，所以即使是晚上也非常忙碌。
+			<<else>>
+				医院全天开放，所以此时也和白天一样忙碌。
+			<</if>>
+			<br><br>
+
+			<<ind>><<link [[接待处|Hospital Keycard Receptionist]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+
+		<<if $schoolPsych>>
+			<<askicon>><<link [[找哈珀医生|Doctor Harper's Office School]]>><</link>>
+			<br>
+		<<elseif $psych is 1 and $daily.harperVisit isnot 1>>
+			<<if $trauma gte ($traumamax / 10) * 9>>
+				<<askicon>><<link [[要求与哈珀医生进行紧急预约|Doctor Harper Emergency]]>><<set $daily.harperVisit to 1>><</link>><<note "如果你被哈珀看到现在这个样子，恐怕<<nnpc_he 'Harper'>>会采取必要的措施" "red">>
+			<<elseif Time.weekDay is 6>>
+				<<officeicon>><<link [[哈珀医生的办公室|Doctor Harper's Office]]>><<set $daily.harperVisit to 1>><</link>>
+			<</if>>
+			<br>
+		<</if>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<ind>><<link [[说你的羊水破了|Pregnancy Birth Hospital]]>><</link>>
+			<br>
+		<</if>>
+		<<if $vaginalchastityparasite isnot 0>>
+			<span class="pink">你感觉到<<- $vaginalchastityparasite.replace("eels","鳗鱼").replace("worms","蠕虫").replace("pale slimes","苍白史莱姆").replace("slimes","史莱姆").replace("snakes","蛇").replace("fish","鱼").replace("spiders","蜘蛛").replace("maggots","蛆虫")>>在你的小穴里蠕动。</span>
+			<br>
+		<</if>>
+
+		<<if C.npc.Alex.pregnancy.sample is true and playerIsPregnant() and !isPlayerNonparasitePregnancyEnding()>>
+			<<procedureicon "paternity">><<link [[询问亲子鉴定 (0:10)|Hospital Paternity Test]]>><<pass 10>><</link>>
+			<br><br>
+		<</if>>
+
+		<<if $penilechastityparasite is 0 and $vaginalchastityparasite is 0 and $analchastityparasite is 0 and $parasite.clit.name is undefined and $parasite.penis.name is undefined and $parasite.nipples.name is undefined and $parasite.bottom.name is undefined and $parasite.left_ear.name is undefined and $parasite.right_ear.name is undefined>>
+		<<else>>
+			<<askicon>><<link [[咨询体内寄生虫清除 (0:10)|Hospital Parasite]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		/* 北极星模组 */
+		<<if $demonhunter gte 2 and $demonhunter lte 4>>
+			<<askicon>><<link [[要求学习催眠术 (0:10)|Hospital Demonhunter]]>><<pass 10>><</link>><<demonhunter>> <<note "获取' 摄魂之眼' " "italic">>
+			<br>
+		<</if>>
+		<<if $mushroom gte 1>>
+			<<askicon>><<link [[咨询你的蘑菇感染问题 (0:10)|Hospital Mushroom]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $slime gt 0>>
+			<<askicon>><<link [[咨询你的史莱姆情况(0:10)|Harper Slime Inquiry]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		/* 北极星 */
+		<<if $player.breastsize lte 11>>
+			<<procedureicon "breast enlarge">><<link [[询问关于丰胸的信息 (0:10)|Hospital Breast Enlargement]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $player.breastsize gte 1>>
+			<<procedureicon "breast reduce">><<link [[询问关于缩胸的信息 (0:10)|Hospital Breast Reduction]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $player.penisExist and $player.penissize lt $penissizemax>>
+			<<procedureicon "penis enlarge">><<link [[询问有关阴茎增大的信息 (0:10)|Hospital Penis Enlargement]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $player.penisExist and $player.penissize gt $penissizemin>>
+			<<procedureicon "penis reduce">><<link [[询问有关阴茎缩小的信息 (0:10)|Hospital Penis Reduction]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<set _aPregnancy to $sexStats.anus.pregnancy>>
+		<<set _vPregnancy to $sexStats.vagina.pregnancy>>
+		<<if $pregnancyStats.parasiteDoctorEvents is 1>>
+			<<askicon>><<link [[咨询你肚子里的动静 (0:10)|Pregnancy Introduction]]>><<pass 10>><</link>>
+			<br>
+		<</if>>
+		<<if $pregnancyStats.parasiteDoctorEvents is 3 or ((_aPregnancy.motherStatus is 2 or (_vPregnancy.motherStatus is 2 and !$worn.genitals.type.includes("hidden"))) and $pregnancyStats.parasiteDoctorEvents gt 3) or ($pregnancyStats.parasiteBook is 1 and $pregnancyStats.parasiteDoctorEvents gte 2) or $container.portable.value gt 0>>
+			<<if $deviancy gte 75>><<set $pregnancyStats.namesParasitesChild to true>><<else>><<set $pregnancyStats.namesParasitesChild to false>><</if>>
+			<<if $pregnancyStats.namesParasitesChild is true>>
+				<<askicon>><<link [[咨询你的怀孕和孩子 (0:10)|Pregnancy Discussion]]>><<pass 10>><</link>>
+				<br>
+			<<else>>
+				<<askicon>><<link [[咨询你体内的寄生虫 (0:10)|Pregnancy Discussion]]>><<pass 10>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+		<<set _pregnancy to getPregnancyObject()>>
+		<<if _pregnancy.awareOf is true and !$daily.ultrasoundDone and between(_pregnancy.timer / _pregnancy.timerEnd, 0.1, 1)>>
+			<<askicon>><<link [[咨询做超声波检查的事 (0:10)|Pregnancy ultrasound]]>><<pass 10>><<set $daily.ultrasoundDone to true>><</link>>
+			<br>
+		<</if>>
+		<<for _active_bodypart range setup.bodyparts>>
+			<<if $skin[_active_bodypart].pen is "tattoo">>
+				<<shopicon "tattoo">><<link [[询问关于去除纹身的信息 (0:10)|Hospital Tattoo Removal]]>><<pass 10>><</link>>
+				<br>
+				<<break>>
+			<</if>>
+		<</for>>
+		<br>
+
+		<<pillicon>><<link [[药房 (0:02)|Pharmacy]]>><<pass 2>><</link>>
+		<br><br>
+
+		<<getouticon>><<link [[出去 (0:01)->Hospital front]]>><<pass 1>><</link>>
+		<br>
+	<</if>>
+<</if>>

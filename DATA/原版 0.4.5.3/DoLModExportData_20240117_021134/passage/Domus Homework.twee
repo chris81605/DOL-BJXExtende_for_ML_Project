@@ -1,0 +1,44 @@
+:: Domus Homework []
+<<set $outside to 0>><<set $location to "town">><<effects>><<set $bus to "domus">>
+
+你尝试辅导<<person>>完成<<his>>的作业，但<<he>>并不感兴趣，结果更像是你在替<<him>>完成作业。
+<<pass 30>>
+
+<<if $school gte 1600>>
+	这种方式至少更快。
+<<elseif $school gte 1200>>
+
+<<else>>
+	你尽力而为，但仍然有些吃力。
+<</if>>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and !$worn.upper.type.includes("naked")>>
+	<br><br>
+
+	"我好无聊，"大概三十分钟后，<<he>>发起了牢骚。突然，<<his>>眼前一亮。
+	"我有个主意。如果你把你的上衣脱掉，我就能轻松地集中注意力了。"<<He>>看着你，眼睛里充满了希望。
+	<br><br>
+
+	<<if $player.gender_appearance is "m" and $player.breastsize lte 2>>
+		<<link [[把你的上衣脱掉|Domus Homework Strip]]>><<set $phase to 1>><</link>><<exhibitionist1>>
+		<br>
+	<<elseif $exhibitionism gte 35>>
+		<<link [[把你的上衣脱掉|Domus Homework Strip]]>><<set $phase to 2>><</link>><<exhibitionist3>>
+		<br>
+	<</if>>
+	<<link [[拒绝|Domus Homework 2]]>><</link>>
+	<br>
+<<else>>
+	<<if $worn.upper.type.includes("naked")>>
+		<<He>>一直在斜瞟你裸露的胸部，以为你注意不到<<he>>。
+	<<else>>
+		<<He>>把<<his>>的头靠在桌子上，看上去百无聊赖。
+	<</if>>
+	<br><br>
+
+	<<link [[调情|Domus Homework Flirt]]>><</link>><<promiscuous1>>
+	<br>
+	<<link [[结束工作|Domus Homework 2]]>><</link>>
+	<br>
+<</if>>

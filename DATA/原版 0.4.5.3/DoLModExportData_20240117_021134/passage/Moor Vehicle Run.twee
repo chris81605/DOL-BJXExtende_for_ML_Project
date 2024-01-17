@@ -1,0 +1,20 @@
+:: Moor Vehicle Run []
+<<effects>>
+
+你跑了。
+<<if $athleticsSuccess>>
+	两人追逐着你，<span class="green">但你成功甩掉了他们。</span>
+	<br><br>
+
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	两人紧追不舍，<span class="red">很快就追上你了。</span><<person1>><<person>>将你扑倒在地。
+	<br><br>
+
+	<<saveNPC 0 moor_pair_1>>
+	<<saveNPC 1 moor_pair_2>>
+
+	<<link [[继续|Moor Vehicle Defeat]]>><</link>>
+	<br>
+<</if>>

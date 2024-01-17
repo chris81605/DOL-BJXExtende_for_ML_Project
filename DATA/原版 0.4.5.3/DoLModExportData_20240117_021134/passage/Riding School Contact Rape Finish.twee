@@ -1,0 +1,41 @@
+:: Riding School Contact Rape Finish []
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $enemyanger gte ($enemyangermax / 5) * 3>>
+		<<He>>抽了你一耳光，然后留你独自躺在干草里。
+		<br>
+		<<underlowersteal>>
+		<<violence 3>>
+	<<elseif $enemyanger gte 1>>
+		没有一句话，<<he>>离开了。
+		<br>
+		<<underlowersteal>>
+	<<else>>
+		<<he>>微笑着吻了你的脸颊。"这是给你的。"<<He>>起身离开，把你留在了地上。
+		<br>
+		你获得了<<moneyGain 5>>。
+	<</if>>
+<<else>>
+	你把<<him>>从你身上推开，然后<<he>>哭着倒在马厩里。
+<</if>>
+<br><br>
+
+<<tearful>>你站了起来。
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<if Time.hour isnot $closinghour>>
+	<<investigateicon>><<link [[找别人 (0:20)|Riding School Contact]]>><<pass 20>><<endevent>><</link>>
+	<br>
+	<<getouticon>><<link [[暂时放弃|Riding School]]>><<endevent>><</link>>
+<<else>>
+	关门的时间到了。马匹们被赶回马圈，游客们也在离开。<<if $exposed gte 1>>你偷偷溜走，趁还没有人看到你的<<lewdness>>。<</if>>
+	<br><br>
+
+	<<link [[继续|Farmland]]>><<endevent>><</link>>
+	<br>
+<</if>>

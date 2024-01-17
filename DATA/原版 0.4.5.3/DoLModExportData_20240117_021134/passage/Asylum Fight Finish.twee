@@ -1,0 +1,26 @@
+:: Asylum Fight Finish []
+<<set $outside to 0>><<set $location to "asylum">><<asylumeffects>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He>>瘫坐在座位上，闭上了眼睛。你轻易地从<<his>>的口袋里偷走了钥匙卡。<<tearful>>你离开了办公室。护工在门外等着你，却不知道你已经偷到了钥匙卡。
+	<<set $asylumkeycard to 1>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<pubfameComplete "hospital" "asylum">>
+	<<asylumpunish2>>
+<<elseif $enemyhealth lte 0>>
+	哈珀畏缩了，试图逃离房间，但你抓住了<<his>>的外套。<<He>>挣脱了外套逃走了。外套口袋里有一张钥匙卡。<<tearful>>你离开了办公室。护工在外面等你。
+	<<set $asylumkeycard to 1>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<pubfameComplete "hospital" "asylum">>
+	<<asylumpunish2>>
+<<else>>
+	<<tearful>>你倒在了地上。哈珀喘着气。"所以才要把你关在这里，"<<he>>说道。"你无法控制自己的情绪。"护工到达了现场。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<asylumpunish2>>
+<</if>>

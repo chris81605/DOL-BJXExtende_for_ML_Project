@@ -1,0 +1,43 @@
+:: Pound Escape Back []
+<<effects>>
+
+你冲出大厅，进入后院。
+<<generate1>><<person1>>
+一个<<person>>抬脚一步步向你走来，手里握着一条皮带。一串钥匙在<<his>>的臀部发出咔嗒咔嗒的清脆声音。"发现了一个逃跑的，"<<he>>说，"我知道该怎么对待一只固执的狗。"
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<<He>>扑向你，试图用双臂抓住你。<span class="green">你躲过去，</span>并攻向<<his>>的胫部。你再次躲过<<He>>的抓捕，并狠狠踢向<<his>>的膝盖。
+	<br><br>
+
+	在<<he>>手里的皮带掉下时，你迅速抓住了它，并在<<he>>反应过来之前把<<him>>绑了起来。"你在干什么——"接着，你夺过钥匙，<<him>>用力挣扎着。带子撑不了多久，但这时间对你来说应该够用了。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Pound Escape Free]]>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He>>扑向你，试图用双臂抓住你。你想要躲避，<span class="red">但是失败了。</span><<Hes>>很快就制住了你。
+	<br><br>
+
+	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
+		<<skulduggeryskilluse>>
+	<<else>>
+		<span class="blue">这太简单了，你什么都没学到。</span>
+		<br><br>
+	<</if>>
+
+	<<link [[继续|Pound Escape Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+<</if>>

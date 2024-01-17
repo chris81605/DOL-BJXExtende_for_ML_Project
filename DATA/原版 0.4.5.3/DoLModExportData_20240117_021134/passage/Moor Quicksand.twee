@@ -1,0 +1,160 @@
+:: Moor Quicksand []
+<<effects>><<rngWraith 1>><<if _wraithEvent>><<set $quicksandWraith to true>><</if>>
+<<if $quicksandWraith>><<if $wraith.state is "haunt">><<set _drown to "溺死">><<else>><<set _drown to "平静">><</if>><<ind>><<ind>><<ind>><span class="wraith_flicker">_drown</span><br><</if>>
+
+你的
+<<switch $quicksand_depth>>
+<<case 1>>
+	脚踝
+<<case 2>>
+	膝盖
+<<case 3>>
+	大腿
+<<case 4>>
+	腰部
+<<case 5>>
+	胸部
+<<case 6>>
+	颈部
+<</switch>>
+以下陷在了流沙里！
+<br><br>
+
+<<if $stress gte $stressmax>>
+	你把自己逼得太紧了。
+	<br><br>
+	<<quicksand_end>>
+	<<passout_moor>>
+<<elseif $phase is 0>>
+	<<if $willpowerSuccess>>
+		你集中于自己的呼吸，<span class="green">设法保持冷静。</span>
+		<<set $quicksand += 1>>
+		<<if $quicksand gte 5>>
+			你不是在下沉，而是在漂浮。如果你分散体重保持平衡，你应该能够爬到安全的地方。<<ltrauma>><<trauma -6>><<llstress>><<stress -12>>
+			<br><br>
+			<<earnFeat "Not Like the Movies">>
+			<span class="gold">你获得了关于流沙的知识！</span>
+			<br><br>
+		<<else>>
+			你觉得自己只要保持不动应该就不会往下沉。<<lstress>><<gknowledge>><<stress -6>>
+			<br><br>
+
+			也许你不会沉下去，但这样你也没办法出去。恐慌再次蔓延开。
+			<br><br>
+		<</if>>
+
+		<<quicksand_actions>>
+	<<else>>
+		你努力保持冷静，但<span class="red">地面将你吞下时，你的大脑一片空白。</span><<ggstress>><<gstress 12>><<gwillpower>><<willpower 3>>
+		<br><br>
+
+		<<quicksand_actions>>
+	<</if>>
+<<elseif $phase is 1>>
+	你躺下来分摊你的重量，慢慢地移动你的腿，将它们从沙子中解放出来。挪出沙子表面之后，你开始在沙地上蠕动爬行，直到自己来到安全的地方。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<quicksand_end>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $phase is 2>>
+	<<if Time.dayState is "night" and random(1, 100) gte 91 or Time.dayState isnot "night" and random(1, 100) gte 30>>
+		<<if random(1, 2) is 2>>
+			你大声呼救。
+			<br><br>
+			<<generate1>><<generate2>>
+			<span class="green">"我们来了！"</span>有人叫喊着回应道。片刻后，<<fullGroup>>出现在一侧的山脊上。<<person1>><<person>>立即趴在地上匍匐前进，爬过沙地。<<He>>并没有陷下去。
+			<br><br>
+			<<He>>抓住你的肩膀。"我抓住你了，"<<he>>说道。"蹬腿。"你照着做，慢慢地从流沙中升起。<<He>>将你的上半身拽了出来，然后你们一起缓慢蠕动回坚固的地面上。
+			<br><br>
+
+
+			<<link [[继续|Moor Quicksand Rescue]]>><<quicksand_end>><</link>>
+			<br>
+		<<else>>
+			你大声呼救。
+			<br><br>
+
+			<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>>
+			<span class="red">"瞧瞧我们发现了什么？"</span>一个声音在你的背后响起。另一个声音笑了起来，一双手抓住了你的肩膀。"用力踢吧，<<girl>>，我会把你拉出来的。"
+			<br><br>
+
+			你照做了。慢慢地，你的上半身被拉了出来。<<person1>><<person>>托着你，微笑着。
+			<br>
+			<<if $exposed gte 1>>
+				"你怎么没穿衣服？"蹲在<<person1>><<his>>身边的<<person2>><<person>>说道。连绵不断的笑声响起。
+				<br>
+			<<else>>
+				<br><br>
+			<</if>>
+
+			他们一直拉，直到把你拽回到坚实的地面上。
+			<br><br>
+
+			<<link [[继续|Moor Quicksand Gang]]>><<quicksand_end>><</link>>
+		<</if>>
+	<<else>>
+		你大声呼救。
+		<br><br>
+
+		没有人回应你。<<if $quicksand lt 5>><<ggstress>><<stress 12>><</if>>
+		<br><br>
+
+		<<if $hallucinations gte 2 and $controlled is 0>>
+			<<quicksand_pull>>
+		<<else>>
+			<<quicksand_actions>>
+		<</if>>
+	<</if>>
+<<else>>
+	你朝着困住你的沙子踢去。
+	<<if $physiqueSuccess>>
+		<span class="green">你能感觉到它有所松动。</span>
+		<<switch $quicksand_depth>>
+		<<case 1>>
+			你把自己的脚踝从沙子里拔了出来，<span class="green">最终踩在了坚固踏实的地面上。</span>
+			<br><br>
+
+			<<link [[继续|Moor]]>><<quicksand_end>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 2>>
+			你往上挣扎，沙子现在<span class="teal">在你的脚踝位置。</span>
+			<br><br>
+		<<case 3>>
+			你往上挣扎，沙子现在<span class="teal">在你的膝盖位置。</span>
+			<br><br>
+		<<case 4>>
+			你往上挣扎，沙子现在<span class="lblue">在你的大腿位置。</span>
+			<br><br>
+		<<case 5>>
+			你往上挣扎，沙子现在<span class="lblue">在你腰的位置。</span>
+			<br><br>
+		<<case 6>>
+			你往上挣扎，沙子现在<span class="blue">在你胸前的位置。</span>
+			<br><br>
+		<</switch>>
+		<<set $quicksand_depth -= 1>>
+		<<if $quicksand_depth is 0>>
+		<<else>>
+			<<quicksand_actions>>
+		<</if>>
+	<<else>>
+		<span class="red">没有任何进展。</span>
+		<<if $quicksand lt 5>>
+			你担心自己会陷得更深。<<ggstress>><<stress 12>>
+		<</if>>
+		<br><br>
+
+		<<if $hallucinations gte 2 and $controlled is 0>>
+			<<if random(1, 2) is 2>>
+				<<quicksand_pull>>
+			<<else>>
+				<span class="purple">有东西在摸你的脚踝，</span>但它并没有把你往深处拽。
+				<br><br>
+
+				<<quicksand_actions>>
+			<</if>>
+		<<else>>
+			<<quicksand_actions>>
+		<</if>>
+	<</if>>
+<</if>>

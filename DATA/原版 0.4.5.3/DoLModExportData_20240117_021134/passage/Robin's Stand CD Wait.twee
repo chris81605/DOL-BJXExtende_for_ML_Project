@@ -1,0 +1,84 @@
+:: Robin's Stand CD Wait []
+<<set $outside to 1>><<set $location to (Time.season is "winter" ? "park" : "beach")>><<effects>>
+	<<set _robin to statusCheck("Robin")>>
+
+	你没能出面干涉，所以你等了一会儿，看看会发生什么。
+	<br><br>
+
+	<<person2>><<person>>说了些你听不清的话，然后试图抚摸罗宾的裆部。
+	<br><br>
+
+	<!-- if robin is male, then while crossdressing, they appear female and npcs "expect" them to have a vagina -->
+	<<set _expectedPartFound to ((_robin.pronoun is "m" ? _robin.vagina : _robin.penis) isnot "none")>>
+	<<set _unexpectedPartFound to ((_robin.pronoun is "m" ? _robin.penis : _robin.vagina) isnot "none")>>
+
+	<<if _robin.dom gte 60>>
+		罗宾拍开了<<his>>的手，大声喊道，"停下！"然后用手示意<<He>>离开。
+		<<person2>><<personsimple>>沮丧地走开了。
+		<br><br>
+
+		<<person>>看了看罗宾的裆部，
+		<<if _expectedPartFound and !_unexpectedPartFound>>
+			说道，"嘿，别太保守了。"<<He>>把手拿开了，"我只是想玩得开心点而已。"
+			<br><br>
+
+			"离开。"罗宾的声音颤抖着，但<<person2>><<person>>明白了罗宾的意思。
+			<br><br>
+
+			"好吧。"<<person2>><<person>>嗤笑着转身离开了。
+		<<else>>
+			大喊，"你不是<<person1>><<genderswap>><<personsimple>>！你就是个<<print (_expectedPartFound ? "怪物" : "异装癖")>>！"
+			<<person2>><<He>>愤怒地走开了。
+		<</if>>
+		<br><br>
+
+		<<person2>><<personsimple>>离开后，你走出藏身之处，走向罗宾。<<person1>><<He>>看起来很震惊。
+		<<if $speech_attitude is "meek">>
+			"对不起，我没能在你身边。"你紧紧地拥抱着<<him>>，感觉到<<him>>在发抖，"你没事吧？"
+		<<elseif $speech_attitude is "bratty">>
+			"罗宾，我看到那个混蛋做了什么，"你告诉<<him>>，"你没事吧？"你紧紧拥抱着<<him>>。
+		<<else>>
+			你怒视着<<person2>>走远的背影。"你还好吧，罗宾？"
+		<</if>>
+		<br><br>
+
+		罗宾深吸了几口气。"我想应该没事吧。我只是没想到会发生这种事。"<<person1>>虽然<<His>>这么说，但<<His>>的表情出卖了<<his>>。
+		过了一会儿，<<he>>终于在你的怀抱里放松下来，"谢谢。我不知道会发生什么，"
+		<<he>>说着，声音略微发抖。"可能我还没有准备好面对这些吧。"罗宾紧紧地拥抱着你。
+	<<else>>
+		在<<his>>的触碰下，罗宾看起来很紧张，你注意到<<person1>><<his>>的眼睛逐渐变得湿润起来。
+		<br><br>
+
+		<!-- if robin is male, then while crossdressing, they appear female and npcs "expect" them to have a vagina -->
+		<<set _expectedPartFound to ((_robin.pronoun is "m" ? _robin.vagina : _robin.penis) isnot "none")>>
+		<<set _unexpectedPartFound to ((_robin.pronoun is "m" ? _robin.penis : _robin.vagina) isnot "none")>>
+
+		<<if _expectedPartFound and !_unexpectedPartFound>>
+			<<person2>><<person>>微笑着看着罗宾，低声说了些话。
+			<<person1>>罗宾听着那人的低语，似乎僵在了原地。那个人说完后就走开了。
+		<<else>>
+			<<person2>><<person>>猛地抽回了手，大声喊道："你这狗屎异装癖，你差点骗到了我！"
+			<<He>>快步走开，留下罗宾静静地发抖。
+			<br><br>
+		<</if>>
+
+		<<person2>><<personsimple>>离开后，你走出藏身之处，走向罗宾。<<person1>><<He>>看起来很震惊。
+		<<if $speech_attitude is "meek">>
+			"对不起，我没能在你身边。"你紧紧地拥抱着<<him>>，感觉到<<him>>在发抖，"你没事吧？"
+		<<elseif $speech_attitude is "bratty">>
+			"罗宾，我看到那个混蛋做了什么，"你告诉<<him>>，"你没事吧？"你紧紧拥抱着<<him>>。
+		<<else>>
+			你怒视着<<person2>>走远的背影，然后转过身来抱住了罗宾。"你还好吗？"
+		<</if>>
+		<br><br>
+
+		罗宾一开始没有回答，只是微微发抖。最终，<<person1>><<he>>在你的怀抱中放松下来。
+		"我不知道我还能不能再做这样的尝试，"<<he>>看着你，"我喜欢这样的感觉，但是……"<<he>>紧紧地回抱住你。
+		"我不想受伤。"
+	<</if>>
+	<br><br>
+
+	<<link [[安慰|Robin's Stand CD Reassure]]>><<npcincr Robin love 3>><</link>><<glove>>
+	<br>
+	<<link [[劝阻|Robin's Stand CD Discourage]]>><<npcincr Robin love -3>><</link>><<llove>>
+	<br>

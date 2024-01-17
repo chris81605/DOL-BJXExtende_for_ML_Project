@@ -1,0 +1,51 @@
+:: Farm Dogs Feed []
+<<effects>>
+
+你把饲料带到了地里。一些年幼的<<farm_text_many dog>>跟着你讨要狗粮，但大多数正老实地在狗窝附近等待。
+<br><br>
+<<set $danger to random(1, 10000)>>
+<!-- Modified for Monster People -->
+<<if $danger gte (9900 - $allure) and $farm.beasts.dogs lte -20 and ($bestialitydisable is "f" or $farm_work.dog.monster is true)>>
+	你留下<<farm_text_many dog>>享用它们的食物。但当你从田野走出来时，你听到脚步声靠近。
+	<<if $farm_work.dog.monster is true>>
+		在你转身之前，一双手落在了你的肩膀上。一个重物把你压在了地上。
+	<<else>>
+		在你转身之前，一对爪子落在了你的肩膀上，一个下巴靠在你的脖子上。重量把你压在了地上。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Farm Dogs Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<!-- Modified for Monster People -->
+<<elseif ($danger gte (9900 - $allure) or $farm.beasts.dogs lte -5) and ($bestialitydisable is "f" or $farm_work.dog.monster is true)>>
+	你留下<<farm_text_many dog>>享用它们的食物。但当你从田野走出来时，你听到脚步声靠近。
+	<<if $farm_work.dog.monster is true>>
+		一只<<farm_text dog>>将<<farm_his dog>>的手臂环绕在你的脖子上，开始用下体往你身上顶。
+	<<else>>
+		一只<<farm_text dog>>将<<farm_his dog>>的爪子搭在你的肩膀上，开始用下体往你<<bottom>>上顶。
+	<</if>>
+	<br><br>
+	<<link [[训斥|Farm Dogs Scold]]>><</link>><<tendingdifficulty 1 800>>
+	<br>
+	<<link [[忍耐|Farm Dogs Endure]]>><<sub 1>><<farm_dogs -1>><<trauma 6>><<stress 6>><</link>><<lrespect>><<gtrauma>><<gstress>>
+	<br>
+	<<if $deviancy gte 15>>
+		<<link [[跪下来|Farm Dogs Drop]]>><</link>><<deviant2>>
+		<br>
+	<</if>>
+<<elseif $danger gte (9900 - $allure)>>
+	其中一只年幼的<<farm_text dog>>对你咆哮，但它的长辈制止住了它。<<gstress>><<stress 6>>
+	<br><br>
+
+	你留下<<farm_text_many dog>>享用它们的食物，从田野离开了。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<<else>>
+	你留下<<farm_text_many dog>>享用它们的食物，从田野离开了。
+	<br><br>
+
+	<<link [[继续|Farm Work]]>><</link>>
+	<br>
+<</if>>

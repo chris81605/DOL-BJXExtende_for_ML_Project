@@ -1,0 +1,792 @@
+:: Widgets Kylar [widget]
+<<widget "kylargag">>
+	<<set $mouthuse to "gagged">>
+	<<facewear 28>>
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].clothes.lower.name.includes("skirt")>>
+		<<He>>从<<his>>裙子下面抽出一把刀。
+	<<else>>
+		<<He>>从<<his>>的口袋里掏出一把刀。
+	<</if>>
+	<<His>>依旧保持着诡异的笑容。"我知道，你只是在发牢骚，因为我们已经分开太久了。不过，这是给你的哦！"
+	<<He>>在说着的同时掏出一卷胶带，并剪下一截贴在了你的嘴上。
+	<br><br>
+
+	"这儿，"<<he>>抬头看着你，"你感觉好些了吗？"你只能呜呜回应。<<He>>慌忙地走到桌旁，从底下拿出了一台笔记本电脑。
+	你看不清屏幕上的内容，半响之后，一个声音传了过来，那是你的声音。
+	<br><br>
+
+	"我感觉挺好的，"那个声音说道，那的确是你的声音，但这句话听起来就像是在不同的地方录制，然后拼接在一起的那种感觉。
+	<br><br>
+
+	凯拉尔对你笑了笑，"我就知道。"
+	<br><br>
+
+	<<He>>又点击了一下鼠标，"我爱你，"那个像你的声音再次响起。
+	<br><br>
+
+	凯拉尔捧着<<his>>的脸颊，"我知道，因为你每天都会和我说。"
+	<br><br>
+<</widget>>
+
+<<widget "kylarangry">>
+	<<if $speech_attitude is "meek">>
+		"太可怕了，"你请求，"求你放过我。"
+	<<elseif $speech_attitude is "bratty">>
+		"你这个混蛋，" 你吼道，"赶快放我走。"
+	<<else>>
+		"你真的不正常，"你很害怕，"让我走吧。"
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "kylaroptions">>
+	<<set _kylar to statusCheck("Kylar")>>
+	<<if _args[0] isnot "notext">>
+		<<kylaroptionstext>>
+		<br><br>
+	<</if>>
+
+	<<if $location is "school" and Time.hour gte 17>>
+		<<if $syndromekylar is 1>>
+			<<He>>看了看手表，"我得走了，他们在等我。"<<He>>看着你。
+		<<elseif _kylarStatus.includes("Love")>>
+			<<He>>看了看手表，"我得走了，他们在等我。"<<his>>在离开的时候总是时不时回头看你一眼。
+		<<else>>
+			<<He>>看了看<<his>>的手表，然后在咕哝了几句后便直接离开了。
+		<</if>>
+		<br><br>
+
+		<<kylaroptionsleave "manor">>
+	<<elseif $location is "school" and Time.hour isnot 12 and $schoolstate isnot "afternoon">>
+		<<if _kylarStatus.includes("Love")>>
+			<<He>>看了看<<his>>的手表，"我得走了，"<<he>>说道，"我的课快要迟到了。"<<his>>在离开的时候仍然时不时回头看你一眼。
+		<<else>>
+			<<He>>看了看<<his>>的手表，然后在咕哝了几句后便直接离开了。
+		<</if>>
+		<br><br>
+
+		<<kylaroptionsleave>>
+	<<elseif ($bus is "starfish" or $bus is "park") and Time.dayState isnot "day">>
+		<<if $syndromekylar is 1>>
+			<<He>>看了看手表，"我得走了，他们在等我。"<<He>>看着你。
+		<<elseif _kylarStatus.includes("Love")>>
+			<<He>>看了看手表，"我得走了，他们在等我。"<<his>>在离开的时候总是时不时回头看你一眼。
+		<<else>>
+			<<He>>看了看<<his>>的手表，然后在咕哝了几句后便直接离开了。
+		<</if>>
+		<br><br>
+
+		<<kylaroptionsleave "manor">>
+	<<elseif $bus is "kylarmanor" and Time.hour lt 18>>
+		<<unset $kylar_action>>
+		凯拉尔正盯着一个显示屏，不知道在看些什么。"我想我该睡觉了，"说完，<<He>>走到床边，倒在上面，连衣服也不脱。你注意到<<He>>正以一副渴望的神情看向你，但<<he>>什么也没有说。
+		<br><br>
+
+		<<link [[道一声晚安|Manor Kylar Goodnight]]>><</link>>
+		<br>
+		<<link [[猛扑|Manor Kylar Pounce]]>><<npcincr Kylar love 1>><</link>><<promiscuous1>><<glove>>
+		<br>
+	<<elseif _kylarStatus.includes("Love") and $NPCName[$NPCNameList.indexOf("Kylar")].love gte 90 and $kylar_camera is undefined>>
+		凯拉尔看起来比平时更加焦虑，<<He>>垂下头盯着自己的脚，不断轻轻晃动身体。"我，我，"<<his>>咽了口唾沫，"我给你带了点东西。"<<He>>蹲下身子，把手伸到长椅后面，拽出一个绑着蝴蝶结的盒子，然后递向你。
+		<br><br>
+
+		<<link [[打开|Kylar Gift Box Open]]>><<npcincr Kylar rage -5>><<npcincr Kylar love 1>><</link>><<glove>><<llksuspicion>>
+		<br>
+		<<link [[拒绝|Kylar Gift Box Refuse]]>><<npcincr Kylar love -1>><<npcincr Kylar rage 3>><</link>><<llove>><<gksuspicion>>
+		<br>
+	<<else>>
+		<<if _lewdIdea>>
+			<<if $kylarSeen.includes("home")>>
+				你想起曾经见过凯拉尔在你的房间里窥探，还有之前你丢失了一条内裤的事，
+			<<elseif $whitneypantiescheck is 1>>
+				你想起惠特尼与你达成的关于不穿内裤来学校的协议，
+			<<elseif $whitneypantiescheck is 2>>
+				你想起惠特尼与你达成的关于不穿内裤来学校的协议，以及
+			<<else>>
+				你想起你在公共场合裸露身体的经历，
+			<</if>>
+			<span class="lewd">一个淫荡的想法从你的脑中诞生。</span>
+			<br><br>
+
+			<<ind>><<link [[`向凯拉尔要${_kylar.pronouns.his}的${$daily.kylar.underwear.simpleDesc}`|Kylar Tease Underwear]]>><<arousal 600>><<npcincr Kylar lust 3>><</link>><<promiscuous3>><<garousal>><<gglust>>
+			<br><br>
+		<</if>>
+		<<if !$daily.kylar.walkKiss and $kylar_action is "walk">>
+			<<ind>><<link [[亲吻|Kylar Walk In The Park End 2]]>><</link>><<glove>><<glust>><<llksuspicion>><<kissvirginitywarning>><<NPCvirginitywarning "Kylar" "kiss">>
+			<br>
+		<</if>>
+		<<if $location is "school" and $englishPlay is "ongoing" and $englishPlayRoles.Kylar isnot "none" and $englishPlayRoles.KylarKnown and $schoolstate is "afternoon">>
+			<<ind>><<link [[排练你的角色 (2:00)|English Play Rehearse Kylar]]>><<pass 2 hours>><<npcincr Kylar rage -5>><<englishskill 18>><</link>><<llksuspicion>><<gggenglish>><<ggreadiness>>
+			<br><br>
+		<</if>>
+		<<ind>><<link [[聊天 (0:15)|Kylar Chat]]>><<pass 15>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<stress -2>><</link>><<lstress>><<glove>><<lksuspicion>>
+		<br>
+		<<set _linkText to (_kylarStatus.includes("Love") ? "调情 (0:15)" : "戏弄 (0:15)")>>
+		<<ind>><<link [[_linkText|Kylar Tease]]>><<pass 15>><<npcincr Kylar love 1>><<npcincr Kylar lust 1>><<stress -2>><</link>><<promiscuous1>><<lstress>><<glove>><<glust>>
+		<br>
+		<<if $kylar_action is "tease" and $promiscuity gte 15 and _kylarStatus.includes("Love") and !$daily.kylar.invite>>
+			<<ind>><<link [[更近一步|Kylar Tease 2]]>><<npcincr Kylar lust 3>><</link>><<promiscuous2>><<gglust>>
+			<br>
+		<</if>>
+		<<if $bus is "starfish">>
+			<<ind>><<link [[玩游戏 (0:15)|Kylar Game]]>><<pass 15>><<stress -2>><<npcincr Kylar love 1>><</link>><<glove>><<lstress>>
+			<br>
+		<</if>>
+		<<if $location is "school">>
+			<<if _kylar.love gte 10 and $milkshake gte 2>>
+				<<foodicon "milkshake">><<link [[提供奶昔 (0:20)|Kylar Give Milkshake]]>><<pass 20>><<set $milkshake -= 2>><<npcincr Kylar love 1>><<npcincr Kylar rage -1>><<stress -5>><<set $kylar_action to "milkshake">><</link>><<lstress>><<glove>><<lksuspicion>>
+				<br>
+			<</if>>
+			<<if _kylar.love gte 20 and $milkshake gte 1>>
+				<<foodicon "milkshake">><<link [[分享奶昔 (0:20)|Kylar Share Milkshake]]>><<pass 20>><<set $milkshake -= 1>><<npcincr Kylar love 2>><<npcincr Kylar rage -1>><<stress -10>><<set $kylar_action to "milkshake">><</link>><<lstress>><<gglove>><<lksuspicion>>
+				<br>
+			<</if>>
+		<</if>>
+		<<if $bus is "park" and !$daily.kylar.walk and _kylarStatus.includes("Love")>>
+			<<ind>><<link [[邀请去散步 (0:15)|Kylar Walk In The Park]]>><<pass 15>><<stress -3>><<npcincr Kylar love 1>><<npcincr Kylar rage -3>><<set $daily.kylar.walk to true>><</link>><<lstress>><<glove>><<llksuspicion>>
+			<br>
+		<</if>>
+		<<if $loft_known is 1 and $loft_kylar isnot 1 and _kylar.love gte 90 and $kylar_action isnot "loft">>
+			<<lofticon>><<link [[告诉凯拉尔孤儿院阁楼的事|Kylar Loft]]>><</link>>
+			<br>
+		<</if>>
+		<<if checkSextoysGift("Kylar") and isLoveInterest("Kylar") and checkIfNPCHasCategorySextoy("Kylar","strap-on").length <= 5>>
+			<<sextoysicon "strap-on">><<link [[送凯拉尔一个穿戴式假阳具|Kylar Gift Strap-on]]>><</link>><<glove>><<lksuspicion>><<gglust>><<lstress>>
+			<br>
+		<</if>>
+		<<kylaroptionsleave "leave">>
+	<</if>>
+<</widget>>
+
+<<widget "kylaroptionsleave">>
+	<<run statusCheck("Kylar")>>
+
+	<<if $kylar_action is "stop">>
+		<<ind>><<link [[甩开|Kylar Shake]]>><<npcincr Kylar rage 5>><</link>><<ggksuspicion>>
+	<<elseif _args[0] is "leave" and random(1, 100) lte 40 and _kylarStatus.includes("Love")>>
+		<<getouticon>><<link [[离开|Kylar Stop]]>><</link>>
+	<<else>>
+		<<switch $bus>>
+			<<case "park">>
+				<<set $_dest to "Park">>
+			<<case "schoollibrary">>
+				<<set $_dest to "School Library">>
+			<<case "starfish">>
+				<<set $_dest to "Arcade">>
+			<<case "kylarmanor">>
+				<<set $_dest to "Manor Kylar Room">>
+			<<case "rehearsal">>
+				<<set $_dest to "Oxford Street">>
+			<<default>>
+				<<set $_dest to "School Rear Courtyard">>
+		<</switch>>
+		<<if _args[0] is "manor" and $syndromekylar is 1>>
+			<<kylarmanoricon>><<link [["和" + _kylar.pronouns.him + "一起走走" + " (0:20)"|Kylar Walk Manor]]>><</link>>
+			<br>
+		<</if>>
+		<<getouticon>><<link [[离开|$_dest]]>><<endevent>><<unset $kylar_action>><</link>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "kylaroptionstext">>
+	<<set _kylar to statusCheck("Kylar")>>
+	<<rng>>
+	<<if $kylar_text_trigger is true>>
+		<<unset $kylar_text_trigger>>
+		<<if _kylarStatus.includes("Love") and !$kylarSeen.includes("chatIntro")>>
+			<<set $kylarSeen.pushUnique("chatIntro")>>
+			<<He>>握紧拳头，将头抬了起来。<<he>>直视着你的双眼，"嘿……嗨，"
+			<<if $kylarSeen.includes("home")>>
+				"我，我对在你卧室里发生的事情感到抱歉。"<<He>>吞吞吐吐地说着。
+				<<if $kylarignored isnot 1>>
+					"我只是想感谢你对我的帮助。"
+				<<else>>
+					"我只是想告、告诉你……你非常<<print ($player.gender_appearance is "m" ? "帅气" : "漂亮")>>。"
+				<</if>>
+			<<else>>
+				<<if $kylarignored isnot 1>>
+					"谢谢你那时候对我的帮助。"
+				<<else>>
+					"你很<<print ($player.gender_appearance is "m" ? "帅气" : "漂亮")>>。"
+				<</if>>
+			<</if>>
+			<<He>>看向别处。
+		<<elseif $bus is "park" and $kylar.fountain is 1 and Time.season is "winter" and !$kylarSeen.includes("fountainWinter")>>
+			<<set $kylarSeen.pushUnique("fountainWinter")>>
+			<<He>>似乎被眼前的景象迷住了，源源不断的水流和寒冷的温度致使喷泉的大部分被冻结，形成比你的手臂还要粗的冰柱，长度至少是它们的两倍。在中心附近，仍有一些水还在流淌。
+			"它太漂亮了，这是我见过的最棒的东西！"<<He>>瞥了你一眼，"呃……嗯，第二棒的东西。"
+		<<elseif $rng gte 91 and !$daily.kylar.fameConfronted and $fame.sex gte ($kylar.fameStage * 2) + 100>>
+			<<if $kylar.fameStage is 0>> /* $fame.sex is 100+ */
+				<<set $daily.kylar.fameConfronted to true>><<set $kylar.fameStage to 1>>
+				"我，我发现了一张关于你的奇怪照片，"<<he>>有些不安，"有人用PS做了修改，使它看起来像你在做淫秽的事情一样。"<<He>>笑了笑，"有些家伙真是不知羞耻。"
+				<<npcincr Kylar rage 3>><<gksuspicion>>
+			<<elseif $kylar.fameStage is 1>> /* $fame.sex is 300+ */
+				<<set $daily.kylar.fameConfronted to true>><<set $kylar.fameStage to 2>>
+				"我，我发现了一张关于你的奇怪照片，"<<he>>有些不安，"有人用PS做了修改，使它看起来像你在做淫秽的事情一样。"<<He>>笑了笑，"看来你一定很受某些变态的欢迎。"
+				<<npcincr Kylar rage 10>><<ggksuspicion>>
+			<<elseif $kylar.fameStage is 2>> /* $fame.sex is 500+ */
+				<<set $daily.kylar.fameConfronted to true>>
+				"你，你绝对猜不到我找到了什么，"<<he>>大笑，"更多经过PS后的你做变态事情的照片。"<<His>>的笑声几近歇斯底里，"看来某，某人真的在上面耗费了很长，很长时间。"
+				<<npcincr Kylar rage 30>><<gggksuspicion>>
+			<</if>>
+		<<elseif _kylarStatus.includes("Rage")>>
+			"你来见我了呢，"<<he>>笑了，"你当然会来了，你为什么会不来呢。"
+		<<elseif $bus is "park" and $kylar.fountain is 1 and $rng gte 85>>
+			<<He>>将另一枚硬币扔进喷泉。
+		<<else>>
+			<<He>>对你笑了笑。
+		<</if>>
+	<<else>>
+		<<if $englishPlay is "ongoing" and $englishPlayRoles.Kylar isnot "none" and !$englishPlayRoles.KylarKnown>>
+			<<set $englishPlayRoles.KylarKnown to true>>
+			"那，那个，"凯拉尔说着轻轻地用手拉住了你的胳膊。"我有个惊喜要给你，我们要一起表演舞台剧。"<<He>>从<<his>>的包里拿出了一本小册子给你看。
+			<br><br>
+
+			<<switch $englishPlayRoles.Kylar>>
+				<<case "Sterling">>
+					<<set _playPronoun to (C.npc.Kylar.pronoun is "m" ? "先生" : "女士")>>
+					"我将扮演父母角色，斯特林<<= _playPronoun>>，"<<he>>说，"总会有人挡在我们的路上，但爱情终究会战胜一切，不是吗？"<<He>>说着向你靠近，但马上意识到自己的行为有些不妥，立刻向后退去，"抱歉。"
+				<<default>>
+					"我会扮演一个有钱人家的孩子，名字是泰勒。在剧情里会跟某个人坠入爱河。"<<He>>红着脸看着你的眼睛，"不过，我……我还不清楚会是谁。"
+			<</switch>>
+			<br><br>
+
+			<<he>>腼腆地低下头，"或许我们应该花时间一起……呃，我，我是说，排练一下。"<<he>>还想说些什么，但最终没说出口，"就是说……有空的时候来找我<<if $schoolstate isnot "afternoon">>，就放学后吧<</if>>，好吗？<span class="gold">我会在后操场那边。</span>"
+		<<elseif _kylar.love gte 90 and $spray lt $spraymax and !$daily.kylar.spray>>
+			<<set $daily.kylar.spray to true>>
+			"我有东西要给你，"<<he>>说着的同时在包里翻找了起来。<<He>>将一罐防狼喷雾递给了你。
+			"这是我自己做的，它能让那些婊子和变态远离你。"<<He>>笑了笑。
+			<<spray 1>><<gspray>>
+
+		<<elseif $kylar.riddle is 2>>
+			<<set $kylar.riddle to 0>>
+			"<<print either("狮身人面像", "阴影", "水管工", "一个小丑", "蓝色", "大写字母E", "炸薯条", "礼顿", "一块橡皮", "一条蛇",
+				"蛋","防狼喷雾","四十二","我","秋天","一款电子游戏","一部恐怖电影","洞察力","劳尔和珍妮特","下水道","足迹",
+				"开始","昨天、今天和明天","火","因为他们在街道的左边")>>，"
+			<<he>>静静地看着你<<if $bus is "starfish" and _kylarStatus.includes("Love")>>，等待着答案<</if>>。
+			"<<print (_kylarStatus.includes("Love") ? "" : "昨——")>>昨天的谜语，答案是这个，对吗？"
+			<br><br>
+
+			<<He>><<print either("答对了","答对了","答对了","答错了","答错了","很接近","差得很远",
+			"可能忘了你的谜语是什么","猜对了。你很惊讶，因为这个挺难的")>>。
+		<<else>>
+			<<He>>满脸通红地看向别处。
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "dismissKylar">>
+	<<npcset Kylar state "prison">>
+	<<if $loveInterest.primary is "Kylar">>
+		<<if $loveInterest.secondary isnot "None">>
+			<<set $loveInterest.primary to $loveInterest.secondary>>
+			<<set $loveInterest.secondary to "None">>
+		<<else>>
+			<<set $loveInterest.primary to "None">>
+		<</if>>
+		<span class="red">凯拉尔已被监禁，<<nnpc_He "Kylar">>不再是你的爱人了。</span>
+	<<elseif $loveInterest.secondary is "Kylar">>
+		<<set $loveInterest.secondary to "None">>
+		<span class="red">凯拉尔已被监禁，<<nnpc_He "Kylar">>不再是你的爱人了。</span>
+	<<elseif $kylarenglish gte 1>>
+		<span class="red">凯拉尔被关进了监狱，<<nnpc_He "Kylar">>不能再作为你的爱人了。</span>
+	<<else>>
+		<span class="red">凯拉尔已锒铛入狱。</span>
+	<</if>>
+	<<if $englishPlay is "ongoing">>
+		<<if $englishPlayRoles.Kylar isnot "none">>
+			<<set $englishPlayKylarReplace to true>>
+			<<set $englishPlayRoles.Kylar to "none">>
+		<</if>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "kylarFinish">>
+	<<set _kylarNPC to $NPCList[$npcrow[$npc.indexOf('Kylar')]]>>
+	<<if $player.penisExist and $player.vaginaExist>>
+		<<set $penisuse to "othermouth">><<set $penisstate to "othermouth">>
+		<<set _kylarNPC.mouth to "penis">>
+		<<He>>舔舐着你的阴茎根部，一只手揉搓着你的外阴。
+		另一只手握住你的阴茎，然后用嘴含住了它。
+		<<takeNPCVirginity "Kylar" "oral">><<His>>用舌头舔弄着龟头。"太完美了，"<<he>>在喘息的空档时喃喃，"如此完美的存在。"
+		<<gpenisacceptance 10>>
+		<br><br>
+
+		<<arousal 2500 "genitals">>
+		<<if $arousal lte $arousalmax>>
+			<<His>>的注意力突然转向了你的阴部，<<He>>将两根手指插了进去，然后开始持续抽插起来。
+			<<his>>的抽插，<<his>>的吸吮，以及<<he>>那近乎崇拜的抬头仰望你的方式——你再也受不住了。
+			<<set $arousal to $arousalmax>>
+			<br><br>
+
+		<</if>>
+		<<orgasm>><<penileejacstat>><<penilestat>>
+
+	<<elseif $player.penisExist>>
+		<<set $penisuse to "othermouth">><<set $penisstate to "othermouth">>
+		<<set _kylarNPC.mouth to "penis">>
+		<<He>>舔弄着你肉棒的根部，同时用手握住了它。
+		<<He>>缓慢而有力地抚摸着它，那双握着肉棒的手将它引导向<<his>>的嘴。
+		你感受着从你的龟头上传来的炽热呼吸，半响，<<he>>便将你的肉棒塞进了<<his>>的口中。
+		<<takeNPCVirginity "Kylar" "oral">>"太完美了，"<<he>>在喘息的空档时喃喃，"如此完美的存在。"
+		<<gpenisacceptance 10>>
+		<br><br>
+
+		<<arousal 2500 "genitals">>
+		<<if $arousal lte $arousalmax>>
+			<<He>>一开始只是用舌头舔，但很快<<he>>就试图更加深入，将你的<<genitals>>向着喉咙深处引去。
+			<<His>>用空出来的手抓住你的<<bottom>>，并借此用力让自己的脑袋更往前探，以此来让你的肉棒更加深入<<he>>的喉咙。
+			在<<his>>的吸吮，以及<<he>>那几乎崇拜的抬头仰望你的方式下，你再也受不住了。
+			<<set $arousal to $arousalmax>>
+			<br><br>
+
+		<</if>>
+		<<orgasm>><<penileejacstat>><<penilestat>>
+
+	<<else>>
+		<<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">>
+		<<set _kylarNPC.mouth to "vagina">>
+		<<He>>戳弄了一会你的阴唇后，将整张脸尽可能地贴在了你的外阴上。
+		<<His>>用空闲的双手抓住了你的<<bottom>>，然后用力拉着你贴向自己。
+		<<if $player.virginity.vaginal is true and $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
+			<<His>>用舌头拂过你的处女膜，轻轻地戳探着它，但却没有用力去刺穿它。
+			<<if _kylarNPC.penis isnot "none">>"很快，只要再等一下，"<<he>>低声说道。<</if>>
+		<<elseif $vaginafucked is 1>>
+			你感到<<his>>的精液正从你的阴道里滑出来，但<<he>>却用舌头把它推了回去，"让我的印记好好留在你体内，"<<he>>笑了，声音很轻。
+		<</if>>
+		<br><br>
+
+		<<arousal 2500 "genitals">>
+		<<if $arousal lte $arousalmax>>
+			<<He>>将一只手从你的<<bottom>>上移开，捏住了你的阴蒂。随后，<<he>>开始揉搓扭弄了起来。
+			在<<his>>的揉搓，<<his>>的舔舐，以及<<he>>那近乎崇拜的抬头仰望你的方式下——你再也忍不住了。
+			<<set $arousal to $arousalmax>>
+			<br><br>
+
+		<</if>>
+		<<orgasm>>
+	<</if>>
+
+	凯拉尔贪婪地用手紧紧抓住你的大腿。你们的高潮结束后，<<he>>才笑着从你的私处离开
+	<<if !$player.penisExist>>
+		。淫液顺着<<he>>的脸颊缓缓流下，打湿了<<he>>的头发。
+	<<elseif $semen_amount gte 1>>
+		，将你的精子全部吞咽。<<he>>事后还特地张开了嘴，证明自己一滴不漏的全部吞下了。
+	<<else>>
+		然后笑了。
+	<</if>>
+	<br><br>
+
+	<<if _acceptanceAchieved>>
+		你思考着凯拉尔的话语，突然醒悟了过来。你的<<penis>>是如此的完美，你为什么要在乎他人的闲言碎语？
+		你获得了
+		<<switch _acceptanceAchieved>>
+			<<case "penis_tiny">><span class="green">已接受: 小巧的阴茎</span>
+			<<case "penis_small">><span class="green">已接受: 偏小的阴茎</span>
+			<<case "penis_big">><span class="green">已接受: 粗壮的阴茎</span>
+		<</switch>>
+		特质。
+		<br><br>
+	<</if>>
+<</widget>>
+
+<<widget "kylarRandomUnderwear">>
+	<<if !_kylar>>
+		<<set _kylar to statusCheck("Kylar")>>
+	<</if>>
+	<<set $_underwearGender to _args[0] or _kylar.pronoun>> <!-- Futureproofing for kylar crossdressing -->
+	<<set $_underwearSet to []>>
+
+	<<set $_colour to ["black", "white", "grey", "pink", "red", "green"].random()>>
+	<<set $_colourBase to ["black", "white", "white"].filter(c => c !== $_colour).random()>>
+
+	<!-- gender neutral underwear -->
+	<!-- <<set $_underwearSet.push()>> --> /* empty for now */
+
+	<<if $_underwearGender is "m">>
+		<<set $_underwearSet.push(
+			{id: 4, desc: "XX三角裤", simpleDesc: "三角裤", colourDesc: "XX三角裤", hasAcc: false},
+		)>>
+	<<else>>
+		<<set $_underwearSet.push(
+			{id: 20, desc: "XXYY条纹女式内裤", simpleDesc: "女式内裤", colourDesc: "XXYY条纹女式内裤", hasAcc: true},
+			{id: 1, desc: "XX女式内裤", simpleDesc: "女式内裤", colourDesc: "XX女式内裤", hasAcc: false},
+		)>>
+	<</if>>
+	<<set _kylarUndies to $_underwearSet.random()>>
+
+	<<if _kylarUndies.hasAcc>>
+		<!-- If the underwear has two colours, the second colour is its base, so "white with red stripes" and "red" both use $_colour for "red" -->
+		<<set _kylarUndies.colour to $_colourBase>>
+		<<set _kylarUndies.colourAcc to $_colour>>
+	<<else>>
+		<<set _kylarUndies.colour to $_colour>>
+	<</if>>
+
+	<!-- Replace the XX and YY in the descriptions with the colours that have been randomly chosen -->
+	<<set _kylarUndies.desc to _kylarUndies.desc.replace("XX", _kylarUndies.colour).replace("YY", _kylarUndies.colourAcc).replace("black", "黑色").replace("white", "白色").replace("grey", "灰色").replace("pink", "粉色").replace("red", "红色").replace("green", "绿色")>>
+	<<set _kylarUndies.colourDesc to _kylarUndies.colourDesc.replace("XX", _kylarUndies.colour).replace("YY", _kylarUndies.colourAcc).replace("black", "黑色").replace("white", "白色").replace("grey", "灰色").replace("pink", "粉色").replace("red", "红色").replace("green", "绿色")>>
+
+	<<if !($kylarSeen.includes("commando") or $daily.kylar.underwear)>>
+		<<set $daily.kylar.underwear to _kylarUndies>>
+	<</if>>
+<</widget>>
+
+<<widget "kylarFlirtEventClothesPull">>
+	你将你的$worn.lower.cn_name_cap提起，勒紧在
+	<<if $worn.under_lower.type.includes("naked")>>
+		你的胯间，这让你<<genitals>>的轮廓清晰可见。
+	<<else>>
+		你的$worn.under_lower.cn_name_cap上，勾勒出你<<genitals>>的轮廓。
+	<</if>>
+	<br><br>
+
+	<<if $worn.lower.plural>>
+		"我想我需要新的$worn.lower.cn_name_cap了，这件太
+	<<else>>
+		"我想我需要新的$worn.lower.cn_name_cap了，这件太
+	<</if>>
+	<<if $exhibitionism gte 75>>
+		大了，"你调侃道，"它根本展示不出我的身材！"
+	<<else>>
+		小了，"你调侃道，"我可不想让任何人看到我的私处。"
+	<</if>>
+	<br><br>
+
+	<<if _kylarStatus.includes("Love") and $bus isnot "kylarmanor">>
+		凯拉尔的脸唰的一下变红了，<<he>>急忙跳起来挡住旁人的视线。
+	<<else>>
+		凯拉尔的脸红了起来。
+	<</if>>
+<</widget>>
+
+<<widget "kylar_abduction_init">>
+	<<set $kylar_abduction_binds to 100>>
+	<<set $syndromekylarbuild to 0>>
+	<<set $kylar_parents_trust to 0>>
+<</widget>>
+
+<<widget "kylar_parents_trust">>
+	<<if _args[0]>>
+		<<set $kylar_parents_trust += _args[0]>>
+		<<set Math.clamp($kylar_parents_trust, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "kylar_abduction_end">>
+	<<earnFeat "Longing">>
+	<<unset $kylar_abduction_binds>>
+	<<unset $kylar_clothes>>
+	<<unset $kylar_clothes_init>>
+	<<unset $kylar_abduction_stupid>>
+	<<unset $kylar_abduction_password>>
+	<<unset $kylar_abduction_torch>>
+	<<unset $kylar_abduction_key>>
+	<<unset $kylar_abduction_bailey>>
+	<<unset $kylar_abduction_knife>>
+	<<npcincr Kylar dom -100>>
+	<<clotheson>>
+<</widget>>
+
+<<widget "kylar_abduction_return">>
+	<<endevent>>
+	<<npc Kylar>><<person1>>
+
+	<<set _kylar to statusCheck("Kylar")>>
+	<<if _args[0] is "rest">>
+		一双颤抖的手正摇晃着你的腿。"醒醒吧，<<kylar_pet_name>>，"<<he>>站了起来。
+	<<elseif _args[0] isnot "none">>
+		你听到脚步声正逐步靠近，门打开了，是凯拉尔。"我想你了，<<kylar_pet_name>>，"<<he>>将身后的门顺势带上。
+	<</if>>
+	<<if $kylar_clothes_init is 1>>
+		<<unset $kylar_clothes_init>>
+		<<Hes>>穿着<<npcClothesText $NPCList[0] "both">>，正如你所要求的那样。"你喜，喜欢吗？"<<he>>在说着的同时在你面前转了一圈。
+		<<if $kylar_clothes is "formal">>
+			它看起来十分昂贵，你注意到衣服的标签甚至还没剪。
+		<<elseif $kylar_clothes is "goth">>
+			<<Hes>>的脸上画了黑色的眼线，虽然<<Hes>>可能做得有些过头了，但确实很适合<<him>>。
+		<<elseif $kylar_clothes is "swimsuit">>
+			它不太合身，有些太宽松了。<<He>>不得不在旋转展示的过程中停下来，以避免衣服垮掉。
+		<<else>>
+			这件衣服似乎很合身。
+		<</if>>
+	<<else>>
+		<<He>>调整了一下<<his>>的<<npcClothesText $NPCList[0] "both">>，似乎非常紧张。
+	<</if>>
+	<br><br>
+
+	<<if $rng gte 91>>
+		<<He>>将手搭在你的肩上，跨过你的大腿，骑到了你身上。<<He>>把脸埋进你的头发里，深吸一口气。"你好香。"<<he>>笑了起来，捏住你的下巴，抬起，露出脖颈。<<He>>把唇印上去，舔舐亲吻，不时地咬你一口。
+		<br><br>
+
+		<<link [[试着忽略|Kylar Abduction Neck Resist]]>><</link>><<willpowerdifficulty 1 1000>>
+		<br>
+		<<link [[头槌|Kylar Abduction Neck Headbutt]]>><</link>>
+		<br>
+		<<link [[亲回去|Kylar Abduction Neck Kiss]]>><</link>>
+		<br>
+	<<elseif $rng gte 81>>
+		<<if $kylar_abduction_knife gte 5 or $kylar_abduction_knife is undefined>>
+			<<set $kylar_abduction_knife to 0>>
+		<</if>>
+		<<if $kylar_abduction_knife is 1>>
+			"我有东西给你看。"<<he>>说着，把刀子晃到你眼前。只见一个粉色蝴蝶结系在刀柄上。"喜欢吗？"<<he>>观察着你的表情，"我特意做得很漂亮。"
+			<br><br>
+		<<elseif $kylar_abduction_knife is 2>>
+			"我有东西给你看。"<<he>>将<<his>>的刀子拿到你眼前晃了晃，你注意到刀柄上刻有一颗心。"喜欢吗？"<<he>>观察着你的表情，"我专门为你而准备的，很漂亮吧。"
+			<br><br>
+		<<elseif $kylar_abduction_knife is 3>>
+			"我有东西给你看。"<<he>>将<<his>>的刀子拿到你眼前晃了晃，你注意到刀柄上贴着一副你和凯拉尔手牵手的画。"喜欢吗？"<<he>>观察着你的表情，"我专门为你而准备的，很漂亮吧。"
+			<br><br>
+		<<elseif $kylar_abduction_knife is 4>>
+			"我有东西给你看。"<<he>>将<<his>>的刀子拿到你的眼前晃了晃，刀柄上有一些以极其怪异的角度嵌入的钉子。"喜欢吗？"<<he>>观察着你的表情，"我专门为你而准备的，很漂亮吧。"
+			<br><br>
+		<<else>>
+			"你喜欢我的刀吗？"<<he>>问的同时在你眼前晃了晃。这刀的刀柄是由乌木制成的，刀身接近柄的位置有一个符号，但由于时间久远，已经变得十分模糊了。"这是我父母的刀，在他们——"<<he>>停顿了一下，"在他们仍然有时间做饭的时候，这把刀就存在了。"
+			<<set $kylar_abduction_knife to 1>>
+			<br><br>
+		<</if>>
+
+		"怎么样？"<<he>>问道，"很美，不是吗！"
+		<br><br>
+
+		<<link [[同意|Kylar Abduction Knife Agree]]>><</link>>
+		<br>
+		<<link [[不同意|Kylar Abduction Knife Disagree]]>><</link>>
+		<br>
+		<<link [[啜泣|Kylar Abduction Knife Whimper]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<<elseif $rng gte 71>>
+		凯拉尔围着你转圈，伸出手想碰你，又退后好几步。<<He>>重复了几次，每一次都变得愈发放肆，就像一只受惊的耗子，或是一条逗弄猎物的鲨鱼。
+		<br><br>
+
+		<<link [[鼓励|Kylar Abduction Circle Encourage]]>><</link>><<promiscuous1>>
+		<br>
+		<<link [[打击|Kylar Abduction Circle Discourage]]>><</link>>
+		<br>
+		<<link [[什么都不做|Kylar Abduction Circle Nothing]]>><</link>>
+		<br>
+	<<elseif $rng gte 61>>
+		凯拉尔拿出<<his>>的手机，蹲在你面前。"对镜头笑一个，"<<he>>说，"别担心，我不会给别人看。这是私，私用。"
+		<br><br>
+
+		<<link [[微笑|Kylar Abduction Camera Smile]]>><</link>>
+		<br>
+		<<link [[皱眉|Kylar Abduction Camera Frown]]>><</link>>
+		<br>
+		<<link [[怒视|Kylar Abduction Camera Glare]]>><</link>>
+		<br>
+		<<link [[闭眼|Kylar Abduction Camera Close]]>><</link>>
+		<br>
+	<<elseif $rng gte 51>>
+		凯拉尔从屋角拖出一张桌子，推到你跟前。"我马上回来！"<<He>>窜出去，消失在黑暗中，留下半掩的门。
+		<br><br>
+
+		你听到外面有些动静，似乎是金属摩擦石头的声音。但是凯拉尔很快回来了，带上了身后的门。<<Hes>>拿着一个金属托盘，上面盖着一个圆盖。<<He>>把它放在你面前，然后走到你的对面，爬上椅子，盘腿坐下。
+		<br><br>
+
+		<<link [[继续|Kylar Abduction Food]]>><</link>>
+		<br>
+	<<elseif $rng gte 41>>
+		凯拉尔捧住你的脸。"我写了一首歌给你。"<<he>>说着，深吸一口气。
+		<br><br>
+
+		"我爱你我真的好爱你我们一起很幸福很……"<<he>>干瘪地念下去，没有什么特别的音调……听起来十分渗人。
+		<br><br>
+		"怎、怎么样？"<<he>>喘了一口气，"你喜欢吗？"
+		<br><br>
+
+		<<link [[说你喜欢|Kylar Abduction Song Like]]>><</link>>
+		<br>
+		<<link [[说你不喜欢|Kylar Abduction Song Hate]]>><</link>>
+		<br>
+		<<link [[保持沉默|Kylar Abduction Song Silent]]>><</link>>
+		<br>
+	<<elseif $rng gte 31>>
+		凯拉尔瞥了一眼天花板。"抱歉，噪音太大了。"<<he>>回头看着你，"是我的父母。我很想让你见见他们，不过他们总是那么忙。"<<He>>停下来思考了一会儿，好像不确定该告诉你什么。
+		<br><br>
+
+		<<link [[鼓励|Kylar Abduction Parents Encourage]]>><</link>>
+		<br>
+		<<link [[保持沉默|Kylar Abduction Parents Silent]]>><</link>>
+		<br>
+	<<elseif $rng gte 21>>
+		凯拉尔拿出一个写生本。"我想画你，"<<he>>说，"你，你愿意做我的模特吗？"
+		<br><br>
+		<<link [[同意|Kylar Abduction Draw Agree]]>><</link>>
+		<br>
+		<<link [[拒绝|Kylar Abduction Draw Refuse]]>><</link>>
+		<br>
+	<<elseif $rng gte 11 and $pregnancyspeechdisable is "f">>
+		"我已经给我们的孩子想好名字了。"凯拉尔笑了起来，<<he>>飞快地报出了几个男孩和女孩的名字。你听出来有些是动漫角色的名字，甚至怀疑其它你不知道的也是。
+		<br><br>
+
+		<<set $_breed to (playerCanBreedWith("Kylar") ? "生孩子" : "建立一个家庭")>>
+		<<link [[`告诉凯拉尔你不会和${_kylar.pronouns.him}${$_breed}——即使世界上只剩下${_kylar.pronouns.he}一个${_kylar.pronouns.boy} `|Kylar Abduction Kids Insult]]>><</link>>
+		<br>
+		<<link [[说这些名字很好听|Kylar Abduction Kids Nice]]>><</link>>
+		<br>
+		<<link [[说这些名字很垃圾|Kylar Abduction Kids Terrible]]>><</link>>
+		<br>
+		<<link [[保持沉默|Kylar Abduction Kids Silent]]>><</link>>
+		<br>
+	<<else>>
+		凯拉尔把一张椅子推到你面前，反着坐下，面对你。
+		<<rng>>
+		<<switch $rng>>
+			<<case 1>>
+				"我的父母能让你在这里过夜真是太好了，"<<he>>说，"他们一直都很忙，似乎从不睡觉。"
+			<<case 2>>
+				"希望这里有你需要的所有东西，"<<he>>说。一滴水滴到你的头上。
+			<<case 3>>
+				"你喜欢这些家具吗？"<<he>>说，椅子在你下面吱吱作响。"它们可是古董！"
+			<<case 4>>
+				"我真的很想向学校里的朋友们公布我们的关系，"<<he>>说。你不知道<<he>>指的是谁。"但他们只会嫉妒我们的爱。"
+			<<case 5>>
+				"我非常爱你，"<<he>>说，"如此，如此的爱你！超过所有的一切！"
+			<<case 6>>
+				"我想在森林里举办婚礼，"<<he>>陶醉的想，"那里有一块场地，但还不够好。我们需要一个和所有人都不一样的地方。"
+			<<case 7>>
+				"我们应该邀请全镇的人来参加我们的婚礼，"<<he>>说，"但是要提前准备很多安全措施，觊觎你的人太多，很多人想把你从我身边偷走。"
+			<<case 8>>
+				"你在这里很安全，"<<he>>说，"我把大蒜挂在门上了，不会有东西闯进来的。"
+			<<case 9>>
+				"你没有父母，是吗？"<<he>>很抱歉的样子，"真遗憾，我，我很想见见他们。"
+			<<default>>
+				"我说过很多次我们两个在交往，但是学校里的人都不相信我，"<<he>>有些咬牙切齿，"等他们看到结婚照就会明白了。"
+		<</switch>>
+		<<He>>继续嘀咕了几分钟，直到上方突然传来砰的一声巨响。<<pass 8>><<gstress>><<stress 6>>
+		<br><br>
+
+		<<link [[继续|Kylar Abduction Event End]]>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+
+<<widget "kylar_abduction_rage">>
+	<<set _kylar to statusCheck("Kylar")>>
+	<<if _kylar.dom gte 90>>
+		<<His>>身体颤抖着，突然向你扑来，把你和椅子撞翻在地。<<gpain>><<pain 4>>
+		<br><br>
+
+		<<He>>爬到你的身上，脸上的表情因愤怒而扭曲。<<He>>用双拳重重地击打你的胸口，然后打向你的脸。<<He>>一次又一次地打击着你，疯狂的笑声在这狭小的房间里回荡。<<gggpain>><<pain 12>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+		<br><br>
+
+		<span class="red"><<He>>用刀抵着你的喉咙。</span><<He>>盯着你，然后视线下移，看向了<<his>>自己的手，突然尖叫出声。
+	<<elseif _kylar.dom gte 50>>
+		<<His>>身体颤抖得越来越厉害，但突然，<<he>>变得死一般的安静。<<He>>一步步向你走来，嘴角挂着凄惨的笑容。"我爱你，"<<he>>重复道，"我不能这样对待你。"
+		<br><br>
+
+		<<He>>向你扑去，把你和椅子撞翻在地。<<gpain>><<pain 4>>
+		<br><br>
+
+		<<He>>爬到你的身上，脸上的扭曲着一个邪恶的笑容。刀尖顺着你脸颊滑过。"太棒了，真是太棒了。"<<gggpain>><<pain 12>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+		<br><br>
+
+		<span class="red"><<He>>用刀抵着你的喉咙。</span><<He>>盯着你，然后视线下移，看向了自己的手，突然尖叫出声。
+	<<elseif _kylar.dom gte 10>>
+		<<He>>猛地抬起头，尖叫一声，然后扑向你，把你和椅子撞翻在地。<<gpain>><<pain 4>>
+		<br><br>
+
+		"你为什么不爱我？！"<<he>>咆哮着，用双手抓住你的脖子。你能感觉到冰冷的刀刃。"为什么能这么残忍？！"<<His>>的力道非常大，你濒临窒息。<<gggpain>><<pain 12>><<gtrauma>><<trauma 6>><<gstress>><<stress 6>>
+		<br><br>
+
+		<span class="red"><<He>>用刀抵着你的喉咙。</span><<He>>盯着你，然后视线下移，看向了自己的手，突然尖叫出声。
+	<<else>>
+		<<He>>跪倒在地，爬向你，泪水顺着<<his>>的脸颊流下。"如果我不能拥有你，"<<he>>颤抖着抓住你椅子的前腿，"其他人也不能。"<<He>>把你和椅子翻倒在地。<<gpain>><<pain 4>>
+		<br><br>
+
+		<<He>>爬到你身上，抓着刀的手垂在身后，显得似乎很艰难。刀刮过地面。
+		<br><br>
+
+		<<He>>用一只手抓住你的脖子，<span class="red">另一只手用刀抵着你的喉咙。</span><<He>>盯着你，然后视线下移，看向了<<his>>自己的手，突然尖叫出声。
+	<</if>>
+	<br><br>
+
+	<<link [[继续|Kylar Abduction Rage]]>><</link>>
+	<br>
+<</widget>>
+
+
+<<widget "kylar_pet_name">><<silently>>
+	<<set _kylar to statusCheck("Kylar")>>
+
+	/*
+	<<set $_dom to Math.floor(_kylar.dom/40)>>
+	<<set $_rage to Math.floor(_kylar.rage/40)>>
+
+	<<set $_petNames to [
+		[ "my love",    "my love",   "my love"         ],
+		[ "my blossom", "my cherry", "my lover"        ],
+		[ "my gaoler",  "my flame",  "my little tease" ]
+	]>>
+
+	<<set _text_output to $_petNames[$_rage][$_dom]>>
+	*/
+
+	<<if _kylar.dom gte 80>>
+		<<if _kylar.rage gte 80>>
+			<<set _text_output to "我的小淘气">>
+		<<elseif _kylar.rage gte 40>>
+			<<set _text_output to "我的爱人">>
+		<<else>>
+			<<set _text_output to "我的挚爱">>
+		<</if>>
+	<<elseif _kylar.dom gte 40>>
+		<<if _kylar.rage gte 80>>
+			<<set _text_output to "我的焰火">>
+		<<elseif _kylar.rage gte 40>>
+			<<set _text_output to "我的小樱桃">>
+		<<else>>
+			<<set _text_output to "我的挚爱">>
+		<</if>>
+	<<else>>
+		<<if _kylar.rage gte 80>>
+			<<set _text_output to "我的狱卒">>
+		<<elseif _kylar.rage gte 40>>
+			<<set _text_output to "我的甜心">>
+		<<else>>
+			<<set _text_output to "我的挚爱">>
+		<</if>>
+	<</if>>
+	<<if _args[0] is "cap">>
+		<<set _text_output to _text_output.toUpperFirst()>>
+	<</if>>
+<</silently>><<print _text_output>><</widget>>
+
+<<widget "kylar_stockholm_start">>
+	<<earnFeat "Longing">>
+	<<set $syndromekylar to 1>>
+	<<unset $syndromekylarbuild>>
+<</widget>>
+
+<<widget "kylarStockholmDefaultRape">>
+	"啊，哈啊，哈啊。"凯拉尔喘着气，眼里满是欲望。
+
+	<<if _kylar.penis isnot "none">>
+		<!-- Kylar penis - will try to fuck you -->
+		<<his>>抬起你的大腿，把你的腿搁在<<his>>的肩上。
+	<<elseif ($genderknown.includes("Kylar") and $player.penisExist) or $player.gender_appearance is "m">>
+		<!-- Kylar vag and you penis - will try to ride you -->
+		<<his>>跨坐在你的腿上，贴上你的身子。
+	<<else>>
+		<!-- Kylar vag and you vag - will try to scissor -->
+		<<He>>分开了你的双腿，靠上前，紧贴着你。
+	<</if>>
+	<br><br>
+	<<if $pregnancyspeechdisable is "f" and (
+		(_kylar.vagina isnot "none" and ($genderknown.includes("Kylar") ? $player.penisExist : $player.gender_appearance is "m") )
+		or
+		(_kylar.penis isnot "none" and ($genderknown.includes("Kylar") ? $player.vaginaExist : $player.gender_appearance is "f") )
+	)>>
+		"我们要生很多孩子，"<<he>>说。
+	<</if>>
+	<<He>>盯着你，眼里满是疯狂。"我会一直一直地操你，直到我变成唯一一个可以满足你的人。"
+	<br><br>
+
+	<<link [[继续|Kylar Abduction Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>

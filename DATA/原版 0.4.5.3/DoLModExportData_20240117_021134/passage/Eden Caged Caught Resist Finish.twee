@@ -1,0 +1,48 @@
+:: Eden Caged Caught Resist Finish []
+<<set $outside to 1>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>><<if $foresthunt gte 1>><<set $foresthunt to 0>><</if>>
+	<<ejaculation "short">>
+	伊甸倒在附近的<<if $location is "forest">>树<<else>>街灯<</if>>旁边。
+	<br><br>
+
+	<<tearful>>你抓住机会，逃进<<if $location is "forest">>树林<<else>>街道<</if>>中。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $edenCagedEscape to true>>
+
+	<<if $location is "forest">>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<destinationeventend>>
+	<</if>>
+<<elseif $enemyhealth lte 0>><<if $foresthunt gte 1>><<set $foresthunt to 0>><</if>>
+	伊甸倒在附近的<<if $location is "forest">>树<<else>>街灯<</if>>旁边。
+	<br><br>
+
+	<<tearful>>你抓住机会，逃进<<if $location is "forest">>树林<<else>>街道<</if>>中。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<set $edenCagedEscape to true>>
+
+	<<if $location is "forest">>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<<else>>
+		<<destinationeventend>>
+	<</if>>
+<<else>>
+	你摔倒在地上，伤得无法动弹。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<npc Eden>><<person1>>
+
+	<<link [[继续|Eden Caged Caught]]>><<set $phase to 0>><<pass 30>><</link>>
+<</if>>

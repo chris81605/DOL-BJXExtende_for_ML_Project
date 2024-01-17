@@ -1,0 +1,19 @@
+:: Elk Compound Pipes []
+<<set $outside to 0>><<set $location to "compound">><<effects>>
+大楼的门打开了，你进去了。里面是一池粉红色的液体。
+<<if !$compoundpipes>>
+	在中心的底座上有一个粉红色的水晶，通过一条细长的走道与侧面相连。它看起来很值钱。
+	<br><br>
+	<<link [[拿走|Elk Compound Crystal]]>><</link>><<crime "thievery">><<gsecurity>>
+	<br>
+<<else>>
+	<br><br>
+<</if>>
+
+<<if isPubfameTaskAccepted("compound") and !$pubfame.compound.cameras.includes("the building with storage tanks")>>
+	<<link [[放下相机|Elk Compound Pipes Camera]]>><<set $compoundalarm++>><<set $pubfame.compound.cameras.pushUnique("the building with storage tanks")>><</link>><<gsecurity>>
+	<br>
+<</if>>
+
+<<link [[离开|Elk Compound]]>><</link>>
+<br>

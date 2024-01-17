@@ -1,0 +1,33 @@
+:: Sydney Shopping Swim Wait []
+<<effects>><<run statusCheck("Sydney")>>
+你等待着悉尼。几分钟过去了，
+<<if _sydneyStatus.includes("corrupt")>>
+	<<he>>穿着<<his>>的新<<sydneySwimwear>>出现了。
+	<<if $select is "lewd">>
+		<<He>>突然的害羞起来，你的目光在<<his>>身上游走。"那个，喜欢我现在的样子吗？"
+	<<elseif $select is "crossdress" and !$sydneySeen.includes("swimcross")>>
+		<<set $sydneySeen.pushUnique("swimcross")>>
+		当你<<if $pronoun is "m">>盯着<<his>>的裆部时，<<He>>突然间的有些害羞。比基尼几乎无法遮住<<him>>的下体，但<<he>>这样打扮很容易被误认为是个女孩子。<<else>>盯着<<his>>裸露的胸膛，<<He>>突然间的有些害羞。十字架依然挂在胸前，左右晃动。现在<<He>>这样打扮很容易被误认为是个男孩子。<</if>>"这没什么大不了的。我……我还挺喜欢你这样子看我。"
+	<<elseif $select is "crossdress">>
+		<<He>>卖弄自己的身体，享受着你投来的目光。"我们什么时候把它穿出去呢。"
+	<</if>>
+	<br><br>
+	<<if $sydneyromance is 1 and _sydneyStatus.includes("Lust")>>
+		<<He>>弯腰向前，手搭着你的肩膀，同时做了几个夸张的伸展动作。"不知为何我感到有些酸痛。我想你是否可以帮我换回我的<<if $exit is "library">>校服<<else>>长袍<</if>>？"<<He>>给了你一个wink。<<arousal 50>><<garousal>>
+		<br><br>
+		<<link [[接受|Sydney Shopping Sex]]>><<npcincr Sydney purity -2>><<set $sexstart to 1>><<set $phase2 to 1>><</link>><<lspurity>><<sydneyWarning corrupt>>
+		<br>
+		<<link [[拒绝|Sydney Shopping Sex Refuse]]>><<npcincr Sydney purity 2>><</link>><<gspurity>>
+		<br>
+	<<else>>
+		<<He>>转过身来，轻轻地扭动着<<his>>的臀部。"我要换回去了，再次感谢你的提议，希望你已经看满意了~"又过了几分钟，悉尼换回了<<his>>的<<if $exit is "library">>校服<<else>>长袍<</if>>。
+		<br><br>
+		<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<unset $select>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<he>>出来了，重新换回<<his>>的<<if $exit is "library">>校服<<else>>长袍<</if>>。"很适合，谢谢你让我去尝试<<if $select is "lewd" or $select is "crossdress">>，尽管这可能……不是我平常的风格。"<<He>>垂下头，脸上浮现出了一抹红晕。<<else>>！"<</if>>
+	<br><br>
+	<<link [[离开 (0:01)|Sydney Shopping Centre]]>><<unset $select>><</link>>
+	<br>
+<</if>>

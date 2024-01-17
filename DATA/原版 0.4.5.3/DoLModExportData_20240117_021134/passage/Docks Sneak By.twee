@@ -1,0 +1,64 @@
+:: Docks Sneak By []
+<<effects>>
+
+
+你看到前面的那一对<<fullGroup>>。你压低身子，趁他们看向别处时快速穿过集装箱。
+<br><br>
+
+
+<<rng 5>>
+<<if $rng is 1>>
+	"不管那是什么……至少它闻起来真香。"<<person1>><<person>>说。
+	<br>
+	"把你的鼻子放灵光点，"<<person2>><<person>>回答道，"别把时间在浪费这里。"
+	<br>
+	<<person1>><<person>>点了点头。
+	<br><br>
+<<elseif $rng is 2>>
+	"夜里可真安静，"<<person1>><<person>>说道，"我觉得是时候干它一票了。"
+	<br>
+	"不，别说这种话。"<<person2>><<person>>回应道，"这份工作只是无聊而已，这可比我经历的那些破事好上一千倍。"
+	<br><br>
+<<elseif $rng is 3>>
+	"……这不值得冒险，"<<person1>><<person>>说道，"你知道的，他们一直在监视我们。"
+	<br>
+	<<person2>><<person>>看向<<his>>的身后，仿佛<<person1>><<person>>真的有人在看着他们一样。
+	<br><br>
+<<elseif $rng is 4>>
+	"真庆幸自己在能在远离那里的地方工作，" <<person1>><<person>>说道。
+	<br>
+	<<person2>><<person>>点点头。"我才懒得管什么公司处理规范，"<<he>>说道，"光是这些烟雾就已经够让我头晕了。"
+	<br><br>
+<<else>>
+	他们保持沉默。
+	<br><br>
+<</if>>
+
+
+
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	你偷偷从他们身边略过，继续穿行在迷宫般的集装箱群中。
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[继续|Docks Sneak]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+
+<<else>>
+
+	你听到脚下发出了"嘎吱"的声音，保安们转过身来看向你，他们用手电照亮了你。"你的声音可太大了点，"<<person1>><<person>>说着向前走了一步。<<gsecurity>><<dock_security 1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[乖乖过去|Docks Quiet]]>><</link>>
+	<br>
+	<<link [[战斗|Docks Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+
+
+<</if>>

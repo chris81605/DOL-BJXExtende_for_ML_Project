@@ -1,0 +1,47 @@
+:: Prison Cell Fight Finish []
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+
+	<<if $enemynomax gte 2>>
+		当狱警踉踉跄跄地走出你的牢房时，囚犯们欢呼雀跃。<<veteran_guard 1>>谨慎地盯着你，但<<methodical_guard 0>><<person1>>摇了摇头。"没时间了，"<<he>>说，摸索着寻找<<his>>的眼镜。"我们会盯着你的。"<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<<else>>
+		当<<methodical_guard 0>>从你的牢房里踉踉跄跄地走出来时，囚犯们欢呼雀跃，要不是有栏杆，他们就要从走道上摔下去了。"没时间了，"<<he>>说着，摸索着捡起眼镜，"我会盯着你的。"<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<</if>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<prison_revolt_options>>
+
+<<elseif $enemyhealth lte 0>>
+	<<if $enemynomax gte 2>>
+		当狱警踉踉跄跄地走出你的牢房时，囚犯们欢呼雀跃。<<veteran_guard 1>>谨慎地盯着你，但<<methodical_guard 0>><<person1>>摇了摇头。"没时间了，"<<he>>说，摸索着寻找<<his>>的眼镜。"我们会盯着你的。"<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<<else>>
+		当<<methodical_guard 0>>从你的牢房里踉踉跄跄地走出来时，囚犯们欢呼雀跃，要不是有栏杆，他们就要从走道上摔下去了。"没时间了，"<<he>>说着，摸索着捡起眼镜，"我会盯着你的。"<<ggsuspicion>><<prison_guards -3>><<ggrespect>><<prison_inmates 3>>
+	<</if>>
+	<<switch $enemynomax>>
+		<<case 1>>
+			<<greb>><<prison_reb 1>>
+		<<case 2>>
+			<<greb>><<prison_reb 2>>
+		<<case 3>>
+			<<ggreb>><<prison_reb 3>>
+		<<default>>
+			<<ggreb>><<prison_reb 4>>
+	<</switch>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<prison_revolt_options>>
+<<else>>
+	当<<methodical_guard 0>>把你铐起，拖出牢房时，你已经伤得无法反抗了。其他囚犯在你经过时取笑你，但听起来不算恶意。<<grespect>><<prison_inmates 1>>
+	<<bind>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Prison Punishment]]>><</link>>
+	<<cell_trouble -5>>
+<</if>>
+
+<<set $prison.hours_worked to 0>>

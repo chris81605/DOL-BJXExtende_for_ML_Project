@@ -1,0 +1,129 @@
+:: School Infirmary Robin CD Widgets [widget]
+<<widget "robinInfirmaryCDUndressLower">>
+		<<if $worn.lower.type.includes("naked") and ($worn.under_lower.type.includes("naked") or playerHasStrapon())>>
+			你已经脱光，迫不及待要进行下一步了。
+		<<else>>
+			<<set $_layer to (!$worn.lower.type.includes("naked") ? "lower" : "under_lower")>>
+			<<if $speech_attitude is "meek">>
+				你朝<<him>>点点头，然后把$worn[$_layer].cn_name_cap取下来，轻轻地把<<it $_layer>>放在地板上。
+			<<elseif $speech_attitude is "bratty">>
+				“当然可以。”你给了<<him>>一个热切的笑容，然后脱下了你的$worn[$_layer].cn_name_cap，把<<it $_layer>>扔在你身后。
+			<<else>>
+				你给了罗宾最后一个吻，然后脱掉了你的$worn[$_layer].cn_name_cap。
+			<</if>>
+
+			<<if !$worn.under_lower.type.includes("naked") and !playerHasStrapon()>>
+				你的$worn.under_lower.cn_name_cap很快也落到了地上。
+			<</if>>
+		<</if>>
+		<<lowerstrip>>
+		<<if !playerHasStrapon()>>
+			<<underlowerstrip>>
+		<</if>>
+		<<legsstrip>>
+		<<feetstrip>>
+
+		<<if playerChastity("hidden")>>
+			<<if playerHasStrapon()>>
+				<br><br>
+				$worn.under_lower.cn_name_cap对着罗宾，罗宾睁大眼睛看着它。
+			<</if>>
+		<<elseif $player.penisExist and $player.vaginaExist>>
+			<br><br>
+			你的
+			<<if playerChastity("cage")>>
+				装着笼子的
+			<<elseif playerChastity("penis")>>
+				锁住的
+			<</if>>
+			阴茎和小穴明显被唤醒，液体从上面滴落。
+			<<if playerHasStrapon()>>
+				$worn.under_lower.cn_name_cap对着罗宾，罗宾睁大眼睛看着它。
+			<</if>>
+		<<elseif $player.penisExist>>
+			<br><br>
+			<<if $worn.genitals.name is "chastity parasite">>
+			<<elseif playerChastity("cage")>>
+				尽管你的阴茎被关在笼子里，精前液还是从尖端漏了出来。
+			<<elseif playerChastity("penis")>>
+				尽管你的阴茎被锁住了，精前液还是从你的$worn.genitals.cn_name_cap中漏了出来。
+			<<else>>
+				你的阴茎硬了，精前液从龟头漏出。
+			<</if>>
+			<<if playerHasStrapon()>>
+				$worn.under_lower.cn_name_cap对着罗宾，罗宾睁大眼睛看着它。
+			<</if>>
+		<<elseif $player.vaginaExist>>
+			<br><br>
+			你的<<pussy>>滴着水。
+			<<if playerHasStrapon()>>
+				$worn.under_lower.cn_name_cap对着罗宾，罗宾睁大眼睛看着它。
+			<</if>>
+		<</if>>
+	<</widget>>
+
+	<<widget "robinInfirmaryCDOptions">>
+		<<if $robinCDI.acts is 2>>
+			<<link [[继续|School Infirmary Robin CD Aftercare]]>><</link>><<pass 5>><<gglove>><<npcincr Robin love 5>>
+			<br>
+		<<else>>
+			<<if $passage is "School Infirmary Robin CD Receive Oral">>
+				<<if ($player.penisExist and $player.penissize gte 0 and !playerChastity("penis")) or playerHasStrapon()>>
+					<<if _robin.vagina isnot "none">>
+						<<link [[插入罗宾的阴道 (0:10)|School Infirmary Robin CD Penetrate]]>><<set $phase to 0>><<pass 10>><</link>><<promiscuous1>><<penilevirginitywarning>><<NPCvirginitywarning "Robin" "vaginal">>
+						<br>
+						<<link [[插入罗宾的屁股 (0:10)|School Infirmary Robin CD Penetrate]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>><<penilevirginitywarning>><<NPCvirginitywarning "Robin" "anal">>
+						<br>
+					<<else>>
+						<<link [[插入罗宾 (0:10)|School Infirmary Robin CD Penetrate]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>><<penilevirginitywarning>><<NPCvirginitywarning "Robin" "anal">>
+						<br>
+					<</if>>
+				<</if>>
+			<</if>>
+			<<if $passage is "School Infirmary Robin CD Give Oral">>
+				<<if _robin.penis isnot "none">>
+					<<if $player.vaginaExist>>
+						<<if !playerChastity("hidden")>>
+							<<link [[让罗宾插入你的阴道 (0:10)|School Infirmary Robin CD Get Penetrated]]>><<set $phase to 0>><<pass 10>><</link>><<promiscuous1>><<oralvirginitywarning>><<vaginalvirginitywarning>><<NPCvirginitywarning "Robin" "penile">>
+							<br>
+						<</if>>
+						<<if !playerChastity("anus")>>
+							<<link [[让罗宾插入你的屁股 (0:10)|School Infirmary Robin CD Get Penetrated]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>><<oralvirginitywarning>><<analvirginitywarning>><<NPCvirginitywarning "Robin" "penile">>
+							<br>
+						<</if>>
+					<<elseif !playerChastity("anus")>>
+						<<link [[让罗宾插入你 (0:10)|School Infirmary Robin CD Get Penetrated]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>><<oralvirginitywarning>><<analvirginitywarning>><<NPCvirginitywarning "Robin" "penile">>
+						<br>
+					<</if>>
+				<</if>>
+			<</if>>
+			<<if $passage isnot "School Infirmary Robin CD Receive Oral">>
+				<<if $player.penisExist and $player.penissize gte 0 and !playerChastity("penis") and !playerHasStrapon()>>
+					<<link [[让罗宾给你口交 (0:10)|School Infirmary Robin CD Receive Oral]]>><<set $phase to 0>><<pass 10>><</link>><<promiscuous1>><<NPCvirginitywarning "Robin" "oral">>
+					<br>
+				<</if>>
+				<<if $player.vaginaExist and !playerChastity("hidden")>>
+					<<link [[让罗宾给你口交 (0:10)|School Infirmary Robin CD Receive Oral]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>>
+					<br>
+				<</if>>
+			<</if>>
+			<!-- May add tribbing version at a later point -->
+			<<if $passage isnot "School Infirmary Robin CD Give Oral">>
+				<<if _robin.penis isnot "none">>
+					<<link [[给罗宾口交 (0:10)|School Infirmary Robin CD Give Oral]]>><<set $phase to 0>><<pass 10>><</link>><<promiscuous1>><<oralvirginitywarning>>
+					<br>
+				<</if>>
+				<<if _robin.vagina isnot "none">>
+					<<link [[给罗宾口交 (0:10)|School Infirmary Robin CD Give Oral]]>><<set $phase to 1>><<pass 10>><</link>><<promiscuous1>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[拥抱 (0:10)|School Infirmary Robin CD No Sex]]>><<pass 10>><<set $phase to 1>><</link>><<gglove>><<npcincr Robin love 5>>
+			<br>
+		<</if>>
+	<</widget>>
+
+	<<widget "robinInfirmaryVariableCleanup">>
+		<<unset $robinCDI>>
+		<<unset $playerHasStraponOverride>>
+	<</widget>>

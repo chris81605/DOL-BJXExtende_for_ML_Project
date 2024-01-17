@@ -1,0 +1,44 @@
+:: Brothel Show Machine []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 10>><<set $machine_ammo to 8>>
+	<<if $player.vaginaExist and $analdisable is "f">>
+		<<machine_init vaginal anal>>
+		<<set $machine.vaginal.armed to 1>>
+		<<set $machine.anal.armed to 1>>
+	<<elseif $player.vaginaExist>>
+		<<machine_init vaginal>>
+		<<set $machine.vaginal.armed to 1>>
+	<<else>>
+		<<machine_init anal>>
+		<<set $machine.anal.armed to 1>>
+	<</if>>
+	<<prop table>>
+	<<set $phase to 0>>
+<</if>>
+
+<<effects>>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+<<if $phase is 0>>
+	眼睛适应了灯光后，你得以再次看清楚观众们。他们都穿着得体，大部分都坐在座位上。
+	<<set $phase to 1>>
+	<br><br>
+<<elseif $phase is 1 and ($penisfucked is 1 or $vaginafucked is 1 or $anusfucked is 1)>>
+	随着你被机器插入，观众们礼貌地鼓起了掌。你听到了碰杯的声音。
+	<<set $phase to 2>>
+	<br><br>
+<</if>>
+
+<br><br>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1>>
+	<span id="next"><<link [[继续|Brothel Show Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Brothel Show Machine]]>><</link>></span><<nexttext>>
+<</if>>

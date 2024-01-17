@@ -1,0 +1,47 @@
+:: Nightmare Wraith Wake []
+<<effects>>
+
+<<if $phase is 2>>
+	风和水拍打着你的脸，但你忽略了不适。这不是真的。当你醒来时，它就会消失。你闭上眼睛。
+<<elseif $phase is 1>>
+	你闭上眼睛，捂住耳朵。无论这首歌有多美妙，你都不能让它或歌手控制你。你试着想要醒来。
+<<else>>
+	你闭上眼睛，集中精力。不管身处何方，这里没有值得你留下的东西。你深吸一口气，强迫自己醒来。
+<</if>>
+<br><br>
+
+<<if $willpowerSuccess>>
+	你感到寒冷，死亡的寒冷。恐慌开始升起，但你不让它压倒你。你离现实非常近了。
+	<br><br>
+
+	"<span class="wraith">躲在黑暗中，<<pcpetname "Wraith">>。躲在自己的内心深处。</span>"
+	<br><br>
+
+	一只冰冷的手拂过你的脸颊。你喘着气睁开眼睛。
+	<br><br>
+
+	<<link [[继续|Nightmare Wraith End]]>><<endevent>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	<<set $nightmareWake++>>
+
+	<<if $phase is 2>>
+		<span class="red">一片巨大的海浪冲向你，将你冲倒在地。</span>你试图站起来，但一个幽灵般的存在压制住了你。苍白的身影屹立在你的上方，祂的<<wraithEyes>>眼睛盯着你的眼睛。<<stress 6>><<gstress>>
+		<br><br>
+
+		<span class="nextLink"><<link [[看着|Nightmare Wraith 4]]>><</link>></span>
+		<br>
+	<<elseif $phase is 1>>
+		但无论你如何努力，<span class="red">你都无法忽略祂。</span>祂让你感到安全。你的眼睛不由自主地睁开了，你的手无力地垂在身旁。你唯一能做的就是观看和倾听。<<stress 6>><<gstress>>
+		<br><br>
+
+		<span class="nextLink"><<link [[倾听|Nightmare Wraith 3]]>><</link>></span>
+		<br>
+	<<else>>
+		<span class="red">一道低语打破了你的专注。</span>你可能只听到了不到一秒钟，但那已经足够了。祂让你脱离现实，诱惑你留下来。<span class="red">你被牢牢地困在了原地。</span><<stress 6>><<gstress>>
+		<br><br>
+
+		<span class="nextLink"><<link [[看着|Nightmare Wraith 2]]>><<set $phase to 0>><</link>></span>
+		<br>
+	<</if>>
+<</if>>

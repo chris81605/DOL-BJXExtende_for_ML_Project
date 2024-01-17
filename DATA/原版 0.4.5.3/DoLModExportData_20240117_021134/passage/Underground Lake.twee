@@ -1,0 +1,57 @@
+:: Underground Lake []
+<<set $outside to 0>><<set $location to "underground">><<water>><<effects>>
+<<set _fromUB to $undergroundbrothel isnot undefined>>
+<<set _withRobin to _fromUB ? $undergroundbrothel.robin : false>>
+<<rngWraith>>
+<<if _wraithEvent>>
+	<<set _drown to ($wraith.state is "haunt" ? "溺死" : "不要")>>
+	<<ind>><<ind>><<ind>><span class="wraith_flicker">_drown</span>
+	<br><br>
+<</if>>
+
+<<set $stress -= 1000>>
+<<if $historytrait gte 4 and !_withRobin>>
+	你被一股水流拉过黑暗。你了解过这些隧道，应该能决定自己最终流向哪里。
+	<br><br>
+
+	<<link [[海岸附近|Underground Lake2]]>><<set $sea to 10>><</link>>
+	<br>
+	<<link [[去更远的海上|Underground Lake2]]>><<set $sea to 50>><</link>>
+	<br><br>
+<<else>>
+	你被一股水流拉过黑暗。毫无征兆地，你被吸到了水下。
+	你试图对抗它，但那股力量太强大了。过了一会儿，黑暗被光明所取代，你被推上去了。
+	你继续向上挣扎，回到了<<print Time.dayState.replace("night","夜晚").replace("day","白天").replace("dawn","黎明").replace("dusk","黄昏")>>的空气中。
+	<br><br>
+
+	<<if _withRobin>>
+		<<set _robin to statusCheck("Robin")>>
+		<<npc Robin 1>>
+		罗宾最终在你旁边浮出水面。
+		<br><br>
+		<<if _robin.dom gte 40>>
+			<<set _swimtestdiff to 400>>
+			<<He>>尽力保持浮起的状态，但是<<his>>急促的呼吸让这一点变得很难。
+			“抓住我！”<<He>>在你靠近时大喊，“我们不能在这里走散！”
+			你靠近<<him>>，让<<him>>抓住你。
+		<<else>>
+			<<set _swimtestdiff to 600>>
+			<<He>>看起来几乎无法在海浪中保持浮起。
+			“救，救命！”<<He>>在你靠近的时候咳嗽起来，你让<<He>>抓住了你。
+		<</if>>
+		<br><br>
+
+		<<link [[游向岸边|Underground Robin Escape Swim]]>><</link>><<swimmingdifficulty 1 _swimtestdiff>>
+		<br>
+	<<else>>
+		<<link [[继续|Sea]]>><<set $sea to 50>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<if _fromUB>>
+	<<dungeonescape>>
+<</if>>
+<<if _wraithEvent and !_withRobin>>
+	<<ind>><<ind>><<ind>><<ind>><<ind>><<ind>><span class="wraith_flicker">_drown</span>
+	<br><br><br><br><br><br><span class="wraith_flicker">_drown</span>
+<</if>>

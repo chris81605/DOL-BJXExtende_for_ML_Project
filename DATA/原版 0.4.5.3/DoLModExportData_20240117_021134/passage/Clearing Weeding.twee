@@ -1,0 +1,33 @@
+:: Clearing Weeding []
+<<set $outside to 1>><<set $location to "cabin">><<effects>>
+你跪在地上，开始拔除杂草。有些草的根扎的很深。
+<<physique 6>><<set $edengarden += 1>>
+<br><br>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $rng gte 51 and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+		你周围的藤蔓生机勃勃。你试着站起来，但它们缠住了你的手腕，你不得不保持跪姿。
+		<br><br>
+		<<link [[挣扎|Clearing Weeding Tentacles]]>><<set $molestationstart to 1>><</link>>
+		<br>
+		<<link [[安抚|Clearing Weeding Soothe]]>><</link>><<tendingdifficulty 1 1200>>
+		<br>
+	<<elseif (Time.hour gt 6 and Time.hour lt 11) or Time.hour gt 14>>
+		<!-- eden is already generated on passages that lead here <<npc Eden>><<person1>> -->伊甸从背后突然抓住了你，吓了你一跳。<<He>>把身子压在你的背上，不让你站起来。"你为什么不能就待在这呢？"<<he>>向你发问，抱住你并开始<<groin "轻抚">>。
+		<br><br>
+		<<link [[让伊甸继续|Clearing Fondle]]>><<npcincr Eden love 1>><<sub 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>><<garousal>>
+		<br>
+		<<link [[推开伊甸|Clearing Shove]]>><<npcincr Eden love -3>><<def 1>><<npcincr Eden dom -1>><</link>><<lllove>><<ldom>>
+		<br>
+	<<else>>
+		努力了几个小时后，你退后一步欣赏结果。现在看起来比刚开始的时候好多了。
+		<br><br>
+		<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	努力了几个小时后，你退后一步欣赏结果。现在看起来比刚开始的时候好多了。
+	<br><br>
+	<<link [[继续|Eden Clearing]]>><<endevent>><</link>>
+	<br>
+<</if>>

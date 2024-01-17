@@ -1,0 +1,34 @@
+:: Robin's Lemonade Offer Molestation Finish []
+<<location "beach">><<effects>>
+<<set _robin to statusCheck("Robin")>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"比妓院便宜，"<<person1>><<person>>打开车门说，"回到你朋友身边去吧。"
+	<br><br>
+<<elseif $enemyhealth lte 0>>
+	你把<<person1>><<person>>推到了刹车上。汽车开到了路上，他们俩都争先恐后地去想去控制方向盘。你抓住机会逃走了。
+	<<crime "assault">><<crimeUp 100 "assault">>
+	<br><br>
+<</if>>
+<<clothesontowel>>
+<<endcombat>>
+<<npc Robin>><<person1>>
+<<tearful>>你走回罗宾身边。<<He>>一看到你就跑了过来。
+<br><br>
+<<if $pain gte 40>>
+	<<He>>看到你的眼泪，抱住了你。
+	<<if _robin.dom gte 60>>
+		"他们是不是弄伤你了……"<<he>>说。
+	<<else>>
+		"我希望他们没有伤害你，"<<he>>说。
+	<</if>>
+<<else>>
+	<<He>>拥抱了你。"我希望他们没有伤害你，"<<he>>说。
+<</if>>
+<br><br>
+"不，不，"你说，"一切都很好。"
+<<npcincr Robin love 1>><<glove>><<npcincr Robin trauma -3>><<lrtrauma>>
+<br><br>
+<<endevent>>
+<<lemonade_stand_options>>

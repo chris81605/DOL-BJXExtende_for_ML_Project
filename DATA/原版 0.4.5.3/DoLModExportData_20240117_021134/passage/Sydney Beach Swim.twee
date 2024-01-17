@@ -1,0 +1,68 @@
+:: Sydney Beach Swim []
+<<location "seabeach">><<water>><<effects>><<run statusCheck("Sydney")>>
+<<if $phase is 1>>
+	你和悉尼一起在海滩上游泳。
+<<else>>
+	<<set $phase to 1>>
+	你和悉尼一起步入海潮。
+<</if>>
+<<if Time.hour gte 20>>
+	夕阳被浪潮吞没，消失在了海岸线上，<<He>>伸了个懒腰。"我们最好快点擦干身体然后离开。"你们从水里离开，回到了更衣间。
+	<br><br>
+	<<link [[继续|Sydney Beach Changing Room Leave]]>><<pass 25>><</link>>
+<<else>>
+	<br><br>
+	<<if $seaswim is 1>>
+		<<set $seaswim to 0>>
+		你和悉尼一起游泳嬉戏。
+		<<physique 3>><<swimmingskilluse>>
+		<br><br>
+	<</if>>
+	<<switch random(1, 15)>>
+		<<case 1 2 3>>
+			悉尼咯咯笑着朝你泼水，你险些被呛到，然后便立马展开了回击。一场激烈的泼水对决在你们之间拉开了帷幕。
+			突然间悉尼冲向你，坏笑着把你扑倒在水中。"抓到你了！"你们两人最后被冲上了沙滩，悉尼还紧紧地压住了你。
+			<<if _sydneyStatus.includes("corrupt")>>
+				<<if $sydneyromance is 1 and $NPCName[$NPCNameList.indexOf("Sydney")].virginity.kiss isnot true>>
+					<<He>>站起身，然后跨坐在你身上。"我喜欢你在我下面的样子。"<<He>>俯身，给了你一个吻。<<arousal 200>><<garousal>><<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>><<npcincr Sydney lust 1>><<glust>>
+				<<else>>
+					<<He>>站起身，然后跨坐在你身上。"哈，我想我已经习惯在你上面了。"<<arousal 100>><<garousal>><<npcincr Sydney lust 1>><<glust>>
+				<</if>>
+			<<else>>
+				<<if $sydneyromance is 1>>
+					<<He>>把你压在身下，一脸享受的样子。"我可以一直这样压着你。"<<He>>吻了吻你的脸颊。<<npcincr Sydney lust 1>><<glust>>
+				<<else>>
+					<<He>>从你身上滚了下来，脸唰的一下变红了。"对不起！真的对不起。" <<npcincr Sydney lust 1>><<glust>>
+				<</if>>
+			<</if>>
+			<br><br>
+			潮水把你们俩向更深的地方推去。
+		<<case 4 5>>
+			一大波浪潮向你们袭来，你们被卷入波浪，然后吸向上方，再从另一侧漂回水面。真的好好玩！<<lstress>><<stress -6>>
+		<<case 6 7>>
+			你的腰突然间被海草所缠住，悉尼迅速地游到你身边，帮助你挣脱。<<he>>紧紧地贴着你，把海藻扯了下来。<<npcincr Sydney lust 1>><<glust>>
+		<<case 8>>
+			<<generate2>><<person2>>
+			突然间，一股无形的力量抓住了你的脚踝，企图把你拽下去。在你的身后，一个戴着潜水面罩的<<person>>从水面上浮现。悉尼猛地朝<<he>>游去，给了那人重重的一击，连面罩都被打飞了出去。在意识到你并不是孤身一人之后，<<he>>落荒而逃，转而寻找更容易的猎物去了。
+			<br><br>
+			<<endevent>><<npc "Sydney">><<person1>><<set $phase to 1>>
+			"你还好么？刚才真的是太吓人了，有人差点要把你淹到水里！"悉尼花了很久来检视你是否安好，你试着说服<<him>>你已经没事了。
+		<<default>>
+			<<if currentSkillValue('swimmingskill') lte 100>>
+				你被水呛着了。<<He>>能感觉到你在扑腾，于是游到你身旁小心地托着你，确保你不会游着游着就没影了。
+			<<elseif currentSkillValue('swimmingskill') lte 300>>
+				<<He>>领着你去适应水里的环境，并且希望你不要过多的勉强自己。
+			<<elseif currentSkillValue('swimmingskill') lte 500>>
+				你试图跟上<<him>>的速度，你们都玩得很开心。
+			<<elseif currentSkillValue('swimmingskill') lte 900>>
+				<<Hes>>游得真的很好，但你还是设法跟上了<<him>>。
+			<<else>>
+				<<He>>似乎对你精湛的游泳技巧留下了深刻的影响，你们都玩得很开心。
+			<</if>>
+	<</switch>>
+	<br><br>
+	<<swimicon>><<link [[和悉尼一起游泳 (0:20)|Sydney Beach Swim]]>><<pass 20>><<stress -6>><<tiredness 6>><<set $seaswim to 1>><<npcincr Sydney love 1>><</link>><<gswimming>><<lstress>><<gtiredness>><<glove>>
+	<br>
+	<<beachicon>><<link [[离开海面 (0:01)|Sydney Beach]]>><<pass 1>><<endevent>><<npc "Sydney">><<person1>><</link>>
+	<br>
+<</if>>

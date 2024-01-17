@@ -1,0 +1,48 @@
+:: Street Follow []
+<<set $outside to 1>><<effects>>
+你跟着<<beasttype>>走进了巷子里。<<bHe>>绕过一个拐角。
+
+<<if $stray_happiness lte random(1, 100) and random(1, 100) gte 98 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	你发现<<bhim>>就这样站在巷子中央，正注视着你。你听见左右两侧都传来咆哮声。你被包围了。
+	<br><br>
+	<<endevent>>
+	<<beastNEWinit 3 dog>>
+	<<link [[继续|Street Follow Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $rng gte 90>>
+	你发现<<bhim>>站在一块棕色地毯旁。地毯突然咳嗽一声，翻了个身。<<generate2>><<person2>>原来是一个<<person>>，<<he>>看起来病了。<<beasttype 0>>看着你，呜咽着。<<if $monster is 1>><<person2>>"<<Hes>>生病了。我不知道该怎么帮忙。"<</if>>
+	<br><br>
+	你从巷子里跑出来。一个<<generate3>><<person3>><<person>>站在附近，正在浏览<<his>>的手机。你扯了扯<<his>>的外套。<<He>>转过身来。"怎么了？"<<he>>恼怒地问。
+	<br><br>
+	你向<<his>>解释了情况，并请求借用一下<<his>>的手机。<<He>>用怀疑的眼光看着你。"好吧。但你必须在我这留下一件抵押物，这样我才能认为你不会突然逃跑。"<<He>>退后一步，审视着你。"你的<<bottoms>>就不错。"
+	<br><br>
+	你对<<he>>提出这样的要求感到愤怒。你不知道<<person2>><<person>>是否耽搁得起。<<person3>><<He>>在你面前摇晃着手机。
+	<br><br>
+	<<link [[脱下衣服 (0:10)|Street Follow Strip]]>><<pass 10>><<trauma 6>><<stress 6>><<lowerstrip>><</link>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[抢夺手机 (0:10)|Street Follow Snatch]]>><<pass 10>><<crimeUp 30 "thievery">><<trauma -6>><</link>><<crime "thievery">><<ltrauma>>
+	<br>
+<<else>>
+	你发现<<bhim>>站在一块破旧的皮革旁边，那是一个钱包。
+	<<rng>>
+	<<if $rng gte 51>>
+		里面既没有钱也没有身份证件，只塞着几张早已褪色的收据。
+	<<elseif $rng gte 11>>
+		里面有一张<<moneyGain 5>>的钞票。
+	<<else>>
+		里面有<<moneyGain 100>>！
+		你又翻找个遍，并没有找到任何身份证件。
+	<</if>>
+	<<if $monster is 1>>
+		"我很高兴能帮上你的忙。"那个<<beasttype>>说道。
+	<<else>>
+		那<<beasttype>>欢快地吠叫着。
+	<</if>>
+	<br><br>
+	<<if $deviancy gte 15 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+		<<link [[给予奖励|Street Follow Sex]]>><<set $sexstart to 1>><</link>><<deviant2>>
+		<br>
+	<</if>>
+	<<link [[给予爱抚|Street Follow Pet]]>><<trauma -6>><<stress -12>><</link>><<ltrauma>><<lstress>>
+	<br>
+<</if>>

@@ -1,0 +1,33 @@
+:: Bully Panties []
+<<effects>>
+<<if $whitneypantiescheck is 0>>
+	<<set $whitneypantiescheck to 1>>
+	<<if $player.gender is "m" and !playerChastity("hidden") and ($player.penissize lte 0 or playerChastity("cage")) and $forcedcrossdressingdisable is "f">>
+		惠特尼撕下你的$worn.under_lower.cn_name_cap并将其塞进口袋里，然后看向你的<<genitals>>。
+		<<if playerChastity("cage")>>
+			"你知道吗，看看你的贞操笼，你完全可以穿女式内裤了。"
+		<<elseif $player.penissize lte 0>>
+			"你看看你，小的可怜，你可以直接穿女式内裤了。"
+		<<else>>
+			"看看你这逼样，你可以直接穿女式内裤了。"
+		<</if>>
+		<br><br>
+		<<set $stealtextskip to 1>>
+		<<underlowersteal strip>>
+		<<link [[同意穿上女式内裤|Bully Panties 2]]>><<set $whitneypantiescheck to 2>><<set $phase to 0>><</link>> <i><small class="red">这会让惠特尼想出其他点子</small></i>
+		<br>
+		<<link [[Disagree|Bully Panties 2]]>><<set $phase to 1>><<npcincr Whitney dom -1>><</link>><<ldom>>
+	<<else>>
+		惠特尼撕下你的$worn.under_lower.cn_name_cap并将其塞进口袋里。"我会留意你的，骚货。"
+		<br><br>
+		<<set $stealtextskip to 1>>
+		<<underlowersteal strip>>
+		<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>
+<<else>>
+	惠特尼和<<his>>的朋友们脱掉你的衣服，然后把你推倒在地。<<tearful>>你自己站了起来。
+	<br><br>
+	<<clothesruined>>
+	<<link [[继续|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<</if>>
+<br>

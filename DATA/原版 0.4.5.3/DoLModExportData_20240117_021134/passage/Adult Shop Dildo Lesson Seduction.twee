@@ -1,0 +1,36 @@
+:: Adult Shop Dildo Lesson Seduction []
+<<set $location to "adult_shop">><<set $outside to 0>><<effects>>
+
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">你对自己的诱惑力更有信心了。</span><</if>><<seductionskilluse>>
+
+你靠近了<<person>>。
+<<if $speech_attitude is "meek">>
+	"我来展示给你看吧，我会尽力为你服务的。"你在<<his>>耳旁轻声说道。
+<<elseif $speech_attitude is "bratty">>
+	"嗯，来吧小笨蛋，我给你看看怎么用。"你戏弄着，向后面的房间点了点头。
+<<else>>
+	"你是想要……私人演示吗？后面有个房间，我们可以好好玩玩。"你悄悄说道。
+<</if>>
+<<promiscuity2>>
+<<if $seductionrating gte $seductionrequired>>
+	<<He>>瞟了瞟周围，抓住了你的胳膊。你带着<<him>>走近了后面的房间，<<he>>转过身，抱住了你。
+	<br><br>
+	<<link [[继续|Adult Shop Dildo Lesson Sex]]>><<giveNPCsextoy 0 "dildo">><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if random(0,2) is 0>>
+		"呃，我突然想起来有急事。"<<he>>说着，把东西放在柜台上，离开了。
+		<<gstress>><<stress 3>>
+	<<else>>
+		"啥？我就想要个清洁指南！<<print either("变态！\"<<He>>冲出了店里。","\"<<he>>被吓到了，匆忙离开了店里。","\"<<he>>瞪大眼睛，手中的东西掉在了地上，一步步向后走着，退出了店里。")>>
+		<<gstress>><<gtrauma>><<lcontrol>><<control -5>><<stress 5>><<trauma 5>>
+	<</if>>
+	<br><br>
+	剩下的工作时间里无事发生。你赚到了<<adultShopWage>><<moneyGain _wage>>。
+	<br><br>
+	<<endevent>>
+	<<link [[返回|Adult Shop]]>><</link>>
+<</if>>

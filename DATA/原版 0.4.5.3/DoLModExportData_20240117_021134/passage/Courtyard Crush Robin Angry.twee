@@ -1,0 +1,49 @@
+:: Courtyard Crush Robin Angry []
+<<set $outside to 1>><<set $location to "school">><<schooleffects>><<effects>>
+
+你走向那两个看着你的人，你装出很生气地样子，让他们大吃一惊。
+<br><br>
+
+<<if $speech_attitude is "meek">>
+"我、我是罗宾的朋友，"你说道，"别靠近！"
+<<elseif $speech_attitude is "bratty">>
+"罗宾是我的，"你揪起<<person1>><<persons>>的衣领警告，"忘了它，否则后果自负！"然后你松手放<<him>>离开。
+<<else>>
+"罗宾可不是你能得到的，"你说，"给我记住了。"
+<</if>>
+<br><br>
+"我们只是在开玩笑，"<<person2>><<person>>为<<his>>朋友辩护。
+
+<<if $cool gte 240>>
+	"我们知道罗宾是你的，我们不会惹你的。"<<person1>><<person>>点了点头，他们看起来很真诚。
+	<<gcool>><<status 1>>
+	<br><br>
+
+	<<endevent>>
+	<<courtyard>>
+<<elseif $cool gte 120>>
+	<<if $cool gte random(1, 240)>>
+		"我们知道罗宾是你的，我们不会惹你的。"<<person1>><<person>>点了点头，他们看起来很真诚。
+		<<gcool>><<status 1>>
+		<br><br>
+
+		<<endevent>>
+		<<courtyard>>
+	<<else>>
+		"你想开始什么吗？"
+		<br><br>
+
+		<<link [[教训那两个人|Courtyard Crush Fight]]>><<set $fightstart to 1>><</link>>
+		<br>
+		<<link [[识趣走开|Courtyard Crush Robin Walk]]>><<stress 6>><</link>><<lstress>>
+		<br>
+	<</if>>
+<<else>>
+	"你他妈的疯了！在你被弄死之前快滚开！"
+	<br><br>
+
+	<<link [[教训那两个人|Courtyard Crush Fight]]>><<set $fightstart to 1>><</link>>
+	<br>
+	<<link [[识趣走开|Courtyard Crush Robin Walk]]>><<stress 6>><</link>><<lstress>>
+	<br>
+<</if>>

@@ -1,0 +1,62 @@
+:: Kylar Canteen Away []
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<sydneySchedule>>
+
+<<if $speech_attitude is "meek">>
+	"突然闯入很不礼貌，"你说，"请离开。"
+<<elseif $speech_attitude is "bratty">>
+	"没人邀请你，"你说，"走开。"
+<<else>>
+	"请离开，"你说，"这边没位置了。"
+<</if>>
+<br><br>
+
+凯拉尔笑了。"我、我忘了，"<<he>>有些尴尬，"我还有事要做。"<<He>>站起来，却被长椅绊倒了，引来其他几个学生的笑声。
+<br><br>
+
+"把<<him>>赶走让我觉得很难过。"当<<hes>>离开时，罗宾说，"每个人都喜欢欺负<<him>>。"
+<br><br>
+<<endevent>><<npc Robin>><<person1>>
+<<if $sydneyromance is 1 and _sydney_location is "library" and $schoolstate is "lunch" and Time.minute lte 35 and random(1, 100) gte 50>>
+	/* Checks if _sydney_location is "library" instead of "canteen" because it's impossible for it to be "canteen" given the time passed from eating with Robin */
+	你边吃边和罗宾聊天，你注意到悉尼站在食堂的角落里，正抱着<<nnpc_his "Sydney">>的书快步走向图书馆。<<nnpc_He "Sydney">>在你的桌边停下来亲了一口你的脸颊，差点把<<nnpc_his "Sydney">>的一本书掉在你的桌子上。<<arousal 50>><<garousal>>
+	<br><br>
+	<<if $robinnote is 1 and $robinromance isnot 1>>
+		罗宾的话噎在了嗓子里。"你真受欢迎，悉尼很适合你，我为你感到高兴。"<<Hes>>微笑着，但无法掩饰声音中的悲伤。
+		你边吃边和<<him>>聊天，尽量避开悉尼的话题。
+	<<elseif $robinromance is 1>>
+		罗宾的话噎在了嗓子里。<<he>>呆呆地盯着悉尼，而悉尼已经赶去图书馆了。
+		<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 50>>
+			<<He>>不高兴地撅起嘴，然后在悉尼刚刚吻过的地方同样亲了一下，"我做得更好。"
+		<<else>>
+			"为什么……发生了什么事？"<<He>>皱着眉头。
+		<</if>>
+		你边吃边和<<him>>聊天，尽量避开悉尼的话题。
+	<<else>>
+		罗宾的话噎在了嗓子里，反应过来后开始逗起你来，"某人很受欢迎啊！悉尼很适合你，我为你感到高兴。"
+		你和罗宾边吃饭边聊着悉尼，气氛十分愉快。
+	<</if>>
+	"我去教室里等着，"你吃完后<<he>>说，"我不喜欢迟到。"<<He>>拥抱了你。
+	<br><br>
+
+	<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+		凯拉尔在食堂对面看着。
+		<<ggksuspicion>><<npcincr Kylar rage 3>>
+		<br><br>
+	<</if>>
+	<<endevent>>
+
+	<<link [[继续|Canteen]]>><</link>>
+	<br>
+<<else>>
+	你吃完了自己的食物。"我去教室里等着，"罗宾在你放下餐具时说，"我不喜欢迟到。"<<He>>拥抱了你。
+	<br><br>
+
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+			凯拉尔在食堂对面看着。
+			<<gksuspicion>><<npcincr Kylar rage 1>>
+			<br><br>
+		<</if>>
+	<<endevent>>
+	<<link [[继续|Canteen]]>><</link>>
+	<br>
+<</if>>

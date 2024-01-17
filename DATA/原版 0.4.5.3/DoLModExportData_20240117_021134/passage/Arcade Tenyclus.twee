@@ -1,0 +1,117 @@
+:: Arcade Tenyclus []
+<<set $outside to 0>><<set $location to "arcade">><<effects>>
+你正在游玩Tenyclus，你发现自己的情绪和反应比平时要强烈得多。
+<br><br>
+
+<<tenyclusPlay>>
+<<if $tenyclusRounds gt 0 and $tenyclusLives gt 0>>
+	<<link [[继续|Arcade Tenyclus]]>><</link>>
+	<br>
+	<<link [[停止游戏|Arcade Tenyclus Leave]]>><<willpowerdifficulty 1 $willpowermax>><</link>>
+<<else>>
+	<<if $tenyclusLives lte 0>>
+		你的血条空了。游戏结束。<<control -25>><<lcontrol>>
+	<<elseif $tenyclusRounds lte 0>>
+		你消灭了屏幕上最后一个外星人。你赢了！<<control 25>><<gcontrol>>
+	<</if>>
+	<br><br>
+	<<unset $tenyclusRounds>><<unset $tenyclusLives>><<set $daily.tenyclusPlayed to 1>>
+	<<set $tenyclusPlayCount += 1>>
+	<<if $tenyclusPlayCount is 6 and $tentacledisable isnot "f">>
+		<<set $tenyclusPlayCount += 1>>
+	<</if>>
+	<<switch $tenyclusPlayCount>>
+		<<case 1>>
+			你的脑海里真的有一些奇怪的声音。它奇怪地让你感到飘飘乎的，呢喃地说着各种各样的让你感到高兴的事情。
+			你四处寻找声音的来源，但在你移开目光的那一刻，街机毫无征兆地关闭了。
+			奇怪的是，似乎并不是因为停电了。游戏厅中的其他人都在自己的机柜上愉快地玩耍着。
+			<br><br>
+
+			<span class = "red">你有明天再玩的冲动。</span>
+			<br><br>
+
+			<<link [[继续|Arcade]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 2>>
+			这太有趣了！你取得了相当高的分数，让你的成就感拉满。<<trauma -6>><<ltrauma>>
+			<br><br>
+
+			你微笑着正准备回到游戏厅，但你注意到屏幕像以前一样立即关闭了。你怀疑机器是否出了点问题。
+			<br><br>
+
+			<span class = "red">你有明天再玩的冲动。</span>
+			<br><br>
+
+			<<link [[继续|Arcade]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 3>>
+			你变得更加自信。声音鼓励着你，激励你取得越来越高的分数。<<stress -6>><<control 10>><<lstress>><<gcontrol>>
+			<br><br>
+
+			你的新高分显示在排行榜上最顶端，你为自己的成就感到骄傲。当你退后一步想欣赏你的成就时，屏幕没有任何征兆地变黑了。你心满意足地回到街机大厅。
+			<br><br>
+
+			<span class = "red">你有明天再玩的冲动。</span>
+			<br><br>
+
+			<<link [[继续|Arcade]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 4>>
+			那声音鼓励你继续。你开始忘记时间，在你意识到之前，屏幕变黑了，你也陷入了黑暗之中。
+			<br><br>
+
+			你花了一点时间才适应了黑暗，却注意到
+			<<if Time.hour gte 21>>
+				你似乎是一个人在游戏厅里。你疑惑着保安怎么没有注意到你。
+			<<elseif Time.hour gte 17>>
+				天已经比你刚来时黑了许多。
+			<<else>>
+				很明显已经过了一段时间。
+			<</if>>
+			你究竟玩了多长时间？
+			<br><br>
+
+			<span class = "red">你有明天再玩的冲动。</span>
+			<br><br>
+
+			<<link [[继续|Arcade]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 5>>
+			你闻到了一些奇怪的味道，但你选择忽略它继续玩游戏，你感觉自己的魂都要被这游戏吸进去了。就在你要创造新记录之际，<span class = "red">一片水花击打在你脸上。</span>
+			<br><br>
+
+			你正准备寻找罪魁祸首，但猛然注意到自己来到了海滩边上，并且大半个身子都没入了海水之中。你感觉脑袋里一阵迷糊。<<hallucinogen 20>><<drugs 20>>
+			<br><br>
+			<<water>><<effects>>
+
+			<<link [[继续|Sea Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<<case 6>>
+			空气中弥漫着一股奇怪的味道，就像上次一样。你低头一看，一股甜美的粉色薄雾从机器里冒了出来。<<hallucinogen 180>><<drugs 180>><<garousal>><<arousal 200>>
+			<br><br>
+
+			它爬到你的脸上，你感到自己因兴奋而升温。当你分心时，一大群蠕动的触手从屏幕里伸了出来。它们盘绕着你的手臂，把你缠住。
+			<br><br>
+
+			<<link [[继续|Arcade Tentacle Rape]]>><<set $molestationstart to 1>><</link>>
+			<br>
+		<<case 7>>
+			你打破了最高分的记录。这些数字还在不断上升着，直到它们看起来不再是数字。
+			<br><br>
+
+			你发现你的身体无法移动，视线边缘也变得模糊起来。你听到身后有脚步声，接着是一个陌生的声音，然后一切都变黑了。
+			<br><br>
+
+			<<link [[继续|Arcade Tenyclus Kidnapped]]>><<endevent>><</link>>
+		<<default>>
+			你虽然完成了这次游戏，但却没有正确游玩。这是一个bug，请告知Vrelnir<<control -100>><<lllcontrol>>
+			<br><br>
+
+			<span class = "red">你有明天再玩的冲动。</span>
+			<br><br>
+
+			<<link [[继续|Arcade]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+	<</switch>>
+
+<</if>>

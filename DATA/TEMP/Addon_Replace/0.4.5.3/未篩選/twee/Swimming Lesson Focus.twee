@@ -1,0 +1,80 @@
+:: Swimming Lesson Focus []
+<<set $outside to 0>><<set $location to "pool">><<schooleffects>><<water>><<effects>>
+
+<<if $exposed lte 0 or $swimall is 1>>
+	你专注于遵循梅森的指示并为此而努力。虽然这很困难，但你认为你正在取得进展。
+	<<physique 3>><<swimmingskilluse>>
+<<elseif $exposed gte 1>>
+	你专注于听从梅森的指示并为此而努力。事实证明，在让你的身体隐藏在水底的情况下这样做是很困难的。
+	<<physique 3>><<swimmingskilluse>>
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<stress _lesson_progress>>
+<<tiredness _lesson_progress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	<<if $swimall is 1>>
+		<<if playerBellyVisible()>>
+			下课的铃声响起了，在梅森的示意下，你爬出了游泳池，而<<nnpc_he "Mason">>也在你的旁边协助着你。尽管每个人都是赤身裸体的状态，但似乎没有人关心这个。一个<<generatey1>><<person1>><<person>>在每个学生经过的时候递上毛巾并尽量避免目光接触。<<endevent>>
+		<<else>>
+			当下课的铃声响起时，你爬出了游泳池。尽管每个人都是赤身裸体的状态，但似乎没有人关心这个。只有梅森会在每个学生经过的时候递上毛巾并尽量避免目光接触。
+		<</if>>
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<if playerBellyVisible()>>
+			当下课的铃声响起时，你继续待在泳池中以等待其他学生的离开。在梅森的示意下，你爬出了游泳池，而<<nnpc_he "Mason">>也在你的旁边协助着你。但有一些学生依旧徘徊不前，毫无疑问，那些家伙希望在你爬出来的时候能看到独特的风景线，但梅森把那些家伙都赶走了，以此来为你留下一些隐私。
+		<<else>>
+			当下课的铃声响起时，你继续待在泳池中以等待其他学生的离开，但有一些学生依旧徘徊不前。
+			毫无疑问，那些家伙希望在你爬出来的时候能看到独特的风景线，但梅森把那些家伙都赶走了，以此来为你留下一些隐私。
+		<</if>>
+		<br><br>
+	<<elseif $exposed lte 0>>
+		<<if playerBellyVisible()>>
+			下课的铃声响起了，在梅森的示意下，你爬出了游泳池，而<<nnpc_he "Mason">>也在你的旁边协助着你。
+		<<else>>
+			当下课的铃声响起时，你爬出了游泳池。
+		<</if>>
+		<br><br>
+	<</if>>
+	<<if $exposed lte 0>>
+		<<maleicon>><<link [[男更衣室|School Boy Changing Room]]>><</link>>
+		<br>
+		<<femaleicon>><<link [[女更衣室|School Girl Changing Room]]>><</link>>
+		<br><br>
+	<<elseif $exposed gte 1>>
+		<<maleicon>><<link [[拿一条毛巾裹住身体并进入男更衣室|School Boy Changing Room]]>><<towelupm>><</link>>
+		<br>
+		<<femaleicon>><<link [[拿一条毛巾裹住身体并进入女更衣室|School Girl Changing Room]]>><<towelup>><</link>>
+		<br><br>
+	<</if>>
+<<else>>
+	<<if $exposed gte 1>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - $allure)>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<<elseif $exposed lte 0>>
+		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+		<<if $danger gte (8900 - ($allure / 5))>>
+			<<eventsswimming>>
+		<<else>>
+			<<eventsswimmingsafe>>
+		<</if>>
+	<</if>>
+<</if>>
+	<<if Time.minute gte 5 and Time.minute lte 57>>
+	<<else>>
+		<<if $player.gender_appearance is "m">>
+			<<loitericon>><<link [[等女生离开 (0:05)|School Pool]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+		<<if $player.gender_appearance is "f">>
+			<<loitericon>><<link [[等男生离开 (0:05)|School Pool]]>><<pass 5>><</link>>
+			<br><br>
+		<</if>>
+	<</if>>

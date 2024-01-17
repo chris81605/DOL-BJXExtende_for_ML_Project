@@ -1,0 +1,91 @@
+:: Dance Job Stage Explore 2 []
+<<effects>>
+
+庄园大厅可谓富丽堂皇。
+
+<<cleareventpool>>
+
+<<if $jordan_ritual_dance lt 4>>
+	<<addinlineevent "dance_explore_passage">>
+		<span class="teal">你听到诵经声，</span>在聚会的低沉声音中几不可闻。
+		<br><br>
+
+		你转向声音的方向，面对面地看到一张旧挂毯。你感到有风。你把挂毯拉到一边，露出了一条黑暗的通道。
+		<br><br>
+
+		<<link [[进入|Dance Job Stage Passage]]>><</link>>
+		<br>
+		<<link [[离开|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
+		<br>
+	<</addinlineevent>>
+<</if>>
+
+<<addinlineevent "dance_explore_jewelry">>
+	<<generate1>><<person1>>
+	你进入一个长长的房间，里面摆满了陈列柜，展示着珠宝和古董。一个<<person>>靠在最边上的墙上。<<He>>似乎在打瞌睡。
+	<br><br>
+	这些箱子都是锁着的，可能还装了警报器。
+	<br><br>
+	/* 北极星模组 */
+	<<set $skulduggerydifficulty to 1000>>
+	<<link [[偷珠宝|Dance Job Stage Explore Jewelry]]>><<set $skulduggerydifficulty to 1000>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime "thievery">>
+	<br>
+	<<set $skulduggerydifficulty to 600>>
+	<<link [[偷古董|Dance Job Stage Explore Antique]]>><<set $skulduggerydifficulty to 600>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime "thievery">>
+	<br>
+	/* 北极星 */
+<</addinlineevent>>
+
+<<addinlineevent "dance_explore_tapestry">>
+	你经过一排排绘画和挂毯。它们虽然价值不菲，但体积太大，不方便偷。
+	<br><br>
+	<<set $skulduggerydifficulty to 1300>>
+	<<link [[仔细看|Dance Job Stage Explore Look]]>><</link>><<skulduggerydifficulty>>
+	<br>
+	<<link [[回到派对|Dance Job Stage Explore End]]>><<stress -6>><</link>><<lstress>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "dance_explore_safe">>
+	你爬上一个厚厚的楼梯，出现在几个豪华的、相同的走廊前。它们看起来像一排排的卧室。其中一扇门是虚掩着的。你偷看一下里面。
+	<br><br>
+
+	你看不到里面有什么人。在一个打开的柜子里，有一个无人看管的保险箱。
+	<br><br>
+	<<set $skulduggerydifficulty to 400>>
+	/* 北极星模组 */
+	<<link [[破解保险箱|Dance Job Stage Explore Safe]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime "thievery">>
+	/* 北极星 */
+	<br>
+	<<link [[回到派对|Dance Job Stage Explore End]]>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "dance_explore_kitchen">>
+	你进入厨房。蒸汽顺着天花板氤氲开来，几个厨师忙着进进出出。
+	<br><br>
+	<<generate1>><<person1>>
+	"你，"一个<<person>>说，迈步走过来。"你的围裙呢？不要紧。这里来。"<<He>>把一盘胡萝卜塞到你手里。"去工作吧。我们的进度已经落后了！"
+	<br><br>
+
+	/*homemaking skill */
+	<<link [[试着辩解|Dance Job Stage Explore Explain]]>><</link>>
+	<br>
+	<<link [[切胡萝卜 (0:05)|Dance Job Stage Explore Carrots]]>><<pass 5>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<addinlineevent "dance_explore_pool">>
+	你爬上一个螺旋大理石楼梯，面前是一个游泳池。
+	<br><br>
+	<<generate1>><<generatep2>>
+	一个<<fullGroup>>正在裸泳。他们忙于接吻而没有注意到你。
+	<br><br>
+
+	<<link [[搜寻贵重物品|Dance Job Stage Explore Pool]]>><</link>><<crime "petty">><<skulduggerydifficulty 1 800>>
+	<br>
+	<<link [[离开|Dance Job Stage Explore End]]>><<endevent>><</link>>
+	<br>
+<</addinlineevent>>
+
+<<runeventpool>>

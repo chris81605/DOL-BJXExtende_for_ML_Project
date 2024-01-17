@@ -1,0 +1,170 @@
+:: Widgets Exams [widget]
+<<widget "exam">>
+	<<switch _args[0]>>
+		<<case "science">>
+			<<set $exam_chance to $science_exam>><<set $_teacher_name to "Sirris">>
+		<<case "maths">>
+			<<set $exam_chance to $maths_exam>><<set $_teacher_name to "River">>
+		<<case "english">>
+			<<set $exam_chance to $english_exam>><<set $_teacher_name to "Doren">>
+		<<case "history">>
+			<<set $exam_chance to $history_exam>><<set $_teacher_name to "Winter">>
+		<<default>>
+			<<run throw new Error("Invalid argument passed to 'exam' widget: ", _args[0])>>
+	<</switch>>
+	理解度：<span class="black"><<print Math.trunc($exam_chance)>>%</span>
+	<br>
+	<<if $NPCName[$NPCNameList.indexOf($_teacher_name)].love gte 10>>
+		<<set $exam_chance += 5>>
+		<span class="green"><<= $_teacher_name.replace("Sirris","西里斯").replace("River","瑞沃").replace("Winter","温特").replace("Doren","多伦")>>的喜爱:</span> <span class="black">+5%</span>
+		<br>
+	<</if>>
+	<<if _args[0] is "maths">>
+		<<if $whitneymaths is "active">>
+			<<set $exam_chance -= 5>>
+			<span class="pink">惠特尼的捣乱：</span><span class="black">-5%</span>
+			<br>
+		<<elseif $whitneymaths is "seat">>
+			<<set $exam_chance -= 10>>
+			<span class="red">惠特尼的捣乱: </span> <span class="black">-10%</span>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $anxiety gte 2>>
+		<<set $exam_chance -= 20>>
+		<span class="red">极度焦虑：</span><span class="black">-20%</span>
+		<br>
+	<<elseif $anxiety gte 1>>
+		<<set $exam_chance -= 10>>
+		<span class="red">焦虑：</span><span class="black">-10%</span>
+		<br>
+	<</if>>
+
+	通过率：<<print Math.trunc($exam_chance)>>%
+<</widget>>
+
+<<widget "exam_result">>
+	<<set $_subject to _args[0]>>
+	<<if $exam_chance gte V[$_subject + '_exam_difficulty']>>
+		<<if V[$_subject + 'trait'] gte 4>>
+			<<school_skill_up $_subject>>
+			<<school_mark $_subject>>被印在卷首，圈了起来，旁边还用绿笔写着<span class="green">"优秀"</span>二字。<<ggcontrol>><<control 25>><<ldelinquency>><<detention -6>>
+			<<distinction_stat>>
+		<<else>>
+			<<school_skill_up $_subject>>
+			<<school_mark $_subject>>被印在卷首，圈了起来。<span class="green">你的等级提升了！</span>
+			<br>
+			<<school_skill_up_text $_subject>>
+		<</if>>
+	<<else>>
+		<<school_mark $_subject>>被印在卷首，圈了起来。意料之中的分数。
+	<</if>>
+	<<unset $exam_chance>>
+<</widget>>
+
+<<widget "exam_difficulty">>
+	<<set $science_exam_difficulty to random(1, 100)>>
+	<<set $maths_exam_difficulty to random(1, 100)>>
+	<<set $english_exam_difficulty to random(1, 100)>>
+	<<set $history_exam_difficulty to random(1, 100)>>
+<</widget>>
+
+<<widget "school_mark">>
+	<<set $_trait to V[_args[0] + 'trait']>>
+	<<switch Math.clamp($_trait,-1,4)>>
+		<<case 4>><span class="green">A*</span>
+		<<case 3>><span class="teal">A</span>
+		<<case 2>><span class="lblue">B</span>
+		<<case 1>><span class="blue">C</span>
+		<<case 0>><span class="purple">D</span>
+		<<default>><span class="red">F</span>
+	<</switch>>
+<</widget>>
+
+<<widget "school_skill_up">>
+	<<school_skill_change _args[0] 1>>
+<</widget>>
+
+<<widget "school_skill_down">>
+	<<school_skill_change _args[0] -1>>
+<</widget>>
+
+<<widget "school_skill_change">>
+	<!-- args[0] is the school subject, while args[1] is the change in value (1 or -1) -->
+	<<set $_skill to _args[0]>>
+	<<set $_change to _args[1]>>
+	<<set $_trait to  $_skill + "trait">>
+
+	<<set V[$_trait] to Math.clamp(V[$_trait] + $_change, -1, 4)>>
+	<<set V[$_skill] to [0,100,200,400,700,1000][V[$_trait] + 1]>>
+	<<set V[$_skill + '_exam'] to 0>>
+<</widget>>
+
+<<widget "exam_cheat">>
+	<<set $_trait to V[_args[0] + 'trait']>>
+	<<set $skulduggerydifficulty to [100,200,400,700,1100,1100][Math.clamp($_trait + 1, 0, 5)]>>
+<</widget>>
+
+
+<<widget "science_skill_up_text">>
+	<<school_skill_up_text "science">>
+<</widget>>
+
+<<widget "maths_skill_up_text">>
+	<<school_skill_up_text "maths">>
+<</widget>>
+
+<<widget "english_skill_up_text">>
+	<<school_skill_up_text "english">>
+<</widget>>
+
+<<widget "history_skill_up_text">>
+	<<school_skill_up_text "history">>
+<</widget>>
+
+<<widget "school_skill_up_text">>
+	<<set $_subject to _args[0].toUpperFirst()>>
+	<<set $_trait to V[_args[0] + 'trait']>>
+	<<if $_trait lt 1>>
+		精诚所至，金石为开。
+	<<else>>
+		<<set $_colour to ["","blue", "lblue", "teal", "green"][$_trait]>>
+		<<set $_traitname to ["", "Passable", "Decent", "Good", "Excellent"][$_trait] + " " + $_subject>>
+		<span class="gold">
+			你获得了<span @class="$_colour"><<print $_traitname.replace("Passable","及格的").replace("Decent","尚可的").replace("Good","良好的").replace("Excellent","优秀的").replace("Science","科学成绩").replace("Maths","数学成绩").replace("English","语文成绩").replace("History","历史成绩").replace(" ","")>></span>特质，
+		</span>
+		<<switch _args[0]>>
+			<<case "science">>
+				<<switch $_trait>>
+					<<case 4>> 能应对超量的疼痛。<!-- Excellent Science -->
+					<<case 3>> 能应对大量的疼痛。<!-- Good Science -->
+					<<case 2>> 能应对适量的疼痛。<!-- Decent Science -->
+					<<case 1>> 能应对微量的疼痛。<!-- Passable Science -->
+				<</switch>>
+			<<case "maths">>
+				<<switch $_trait>>
+					<<case 4>>让您从小费和谈判报酬中多赚100%。<!-- Excellent Maths -->
+					<<case 3>> 让你从小费和谈判报酬中多赚75%。<!-- Good Maths -->
+					<<case 2>> 让你从小费和谈判报酬中多赚50%。<!-- Decent Maths -->
+					<<case 1>> 让你从小费和谈判报酬中多赚25%。<!-- Passable Maths -->
+				<</switch>>
+			<<case "english">>
+				<<switch $_trait>>
+					<<case 4>>言语行动的效果是原来的五倍。<!-- Excellent English -->
+					<<case 3>>言语行动的效果是原来的四倍。<!-- Good English -->
+					<<case 2>>言语行动的效果是原来的三倍。<!-- Decent English -->
+					<<case 1>> 言语行动（恳求、呻吟、要求、道歉、嘲笑、挑逗、请求）的效果是原来的两倍。<!-- Passable English -->
+				<</switch>>
+			<<case "history">>
+				<<switch $_trait>>
+					<<case 4>> 你知道镇上绝大多数的秘密小路。<!-- Excellent History -->
+					<<case 3>>你知道镇上大部分的秘密小路。<!-- Good History -->
+					<<case 2>>你知道镇上部分的秘密小路。<!-- Decent History -->
+					<<case 1>>你知道镇上小部分的秘密小路。<!-- Passable History -->
+				<</switch>>
+		<</switch>>
+	<</if>>
+	<<if $_trait lt 4>>
+		然而，下一级的测验将会更加困难。
+	<</if>>
+<</widget>>

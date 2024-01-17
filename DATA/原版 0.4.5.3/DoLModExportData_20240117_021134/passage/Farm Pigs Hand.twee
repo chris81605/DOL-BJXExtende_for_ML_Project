@@ -1,0 +1,35 @@
+:: Farm Pigs Hand []
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<if $farm_work.pig.monster is true>>
+		<<beastNEWinit 1 pig $farm_work.pig.gender $farm_work.pig.genitals monster>>
+	<<else>>
+		<<beastNEWinit 1 pig $farm_work.pig.gender $farm_work.pig.genitals beast>>
+	<</if>>
+	<<beastCombatInit>>
+	<<if Time.hour lt 21 or Time.hour gt 4>>
+		<<enable_rescue>>
+	<</if>>
+	<<farm_trust pig>>
+	你把手伸向后面，开始在<<farm_text pig>>的下面摸索。
+	<<npchand>><<deviancy3>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[继续|Farm Pigs Hand Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Farm Pigs Hand]]>><</link>></span><<nexttext>>
+<</if>>

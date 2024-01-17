@@ -1,0 +1,79 @@
+:: Wraith Mimic Fight []
+<<effects>>
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<set $wraith.type to "man">><<set $wraith.gen to "man">>
+	<<switch $wraith.mimic>>
+		<<case "Kylar">>
+			<<He>>把你拉进小巷，转到另一个角落，远离窥探的目光。这里不知道什么时候放了一张床垫。凯拉尔倒在上面，把你拉到<<him>>身上。
+		<<case "Robin">>
+			<<npckiss>><<unset $robinbed>>
+		<</switch>>
+	<<set $speechdisable to 1>>
+<<elseif $struggle_start is 1>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<if $player.penisExist>>
+		<<set $struggle.penis.creature to "pale slime">><<set $penisuse to "struggle">><<set $penisstate to "struggle">><<set $struggle.enemy[0].location to "penis">>
+	<<else>>
+		<<set $struggle.vagina.creature to "pale slime">><<set $vaginause to "struggle">><<set $vaginastate to "struggle">><<set $struggle.enemy[0].location to "vagina">>
+	<</if>>
+	<<unset $struggle_start>>
+<<elseif $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<if $wraith.revealed>>
+		<<set $enemytype to $wraith.type>>
+	<<else>>
+		<<set $wraith.type to "man">><<set $wraith.gen to "man">>
+		<<maninit>><<set $enemyhealth to 600>><<set $enemyhealthmax to 600>>
+	<</if>>
+	<<set $speechdisable to 1>>
+<</if>>
+
+<<effectsWraith>>
+
+<<if $wraith.revealed>>
+
+	<<switch $wraith.type>>
+		<<case "man">>
+			<<if _combatend>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight Finish]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight]]>><</link>></span><<nexttext>>
+			<</if>>
+		<<case "tentacles">>
+			<<if $tentacles.active lte ($tentacles.max / 2)>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight Finish]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight]]>><</link>></span><<nexttext>>
+			<</if>>
+		<<case "slime">>
+			<<if $struggle.done gte $struggle.number>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight Finish]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[继续|Wraith Mimic Fight]]>><</link>></span><<nexttext>>
+			<</if>>
+	<</switch>>
+
+<<else>>
+
+	<<if $enemyhealth lte ($enemyhealthmax / 2)>>
+		<span id="next"><<link [[继续|Wraith Mimic Fight Revealed]]>><<set $phase to 1>><</link>></span><<nexttext>>
+	<<elseif $enemyarousal gte $enemyarousalmax>>
+		<span id="next"><<link [[继续|Wraith Mimic Fight Revealed]]>><<set $phase to 2>><</link>></span><<nexttext>>
+	<<else>>
+		<span id="next"><<link [[继续|Wraith Mimic Fight]]>><</link>></span><<nexttext>>
+	<</if>>
+	<br>
+<</if>>

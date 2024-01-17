@@ -1,0 +1,34 @@
+:: Moor Mid Swim []
+<<effects>>
+
+<<if $swimmingSuccess>>
+	你随波逐流，屏住呼吸，任由水流将你卷入其中。你在黑暗中被拉扯了一会儿，<span class="green">但还是设法找到了一股能把你带回水面的水流。</span>你现在应该没事了。
+	<br><br>
+
+	你把自己洗得一尘不染。
+	<br><br>
+
+	<<link [[继续|Moor]]>><<clotheson>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	你对抗着水的吸力，<span class="red">但是它太强烈了。</span>它把你吸进一个洞穴般的深度，比它表面看起来要深得多，也宽得多。它根本不是一条小溪，而是一条部分暴露在地表的地下河。
+	<br><br>
+
+	你试着游到能呼吸的地方，但却只能触及到石头的天花板，紧接着水流就会再次把你拖拽下去。
+	<br><br>
+
+	最后，一股向上的水流抓住你，把你带到水面上。你被从水里扔了出去。最后你瘫倒在岸上，不知道自己身在何处。
+	<<if $phase is 1>>
+		<span class="pink">你的衣服都没了。</span>
+	<</if>>
+	<<gtrauma>><<gstress>><<gpain>><<trauma 6>><<stress 6>><<pain 4>>
+	<br><br>
+	<<if random(1, 2) is 2>>
+		<<set $moor -= 15>>
+	<<else>>
+		<<set $moor += 15>>
+	<</if>>
+
+	<<link [[继续|Moor]]>><<clothesruined>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

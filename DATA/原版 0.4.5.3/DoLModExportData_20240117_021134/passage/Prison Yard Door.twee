@@ -1,0 +1,29 @@
+:: Prison Yard Door []
+<<effects>>
+
+你走近大门。门是锁着的。
+<br><br>
+
+<<if $prison.yard_key is 1>>
+	<<lakeicon "key">><<link [[使用钥匙|Prison Yard Door Key]]>><<set $prison.yard_door to 1>><</link>>
+	<br>
+<<else>>
+	<<set $lock to 1000>>
+
+	这扇门正紧锁着。
+	<br><br>
+
+	<<if currentSkillValue('skulduggery') gte $lock>>
+		<span class="green">这把锁看起来很容易被撬开。</span>
+		<br><br>
+
+		<<lockpickicon>><<link [[闯入 (0:05)|Prison Yard Door Pick]]>><<set $prison.yard_door to 1>><<pass 5>><</link>>
+		<br>
+	<<else>>
+		<span class="red">这把锁看起来超出了你的能力范围。</span><<skulduggeryrequired>>
+		<br><br>
+	<</if>>
+<</if>>
+
+<<getouticon>><<link [[离开|Prison Yard]]>><</link>>
+<br>

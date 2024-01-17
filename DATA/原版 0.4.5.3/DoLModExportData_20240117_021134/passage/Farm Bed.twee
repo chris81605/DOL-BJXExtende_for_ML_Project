@@ -1,0 +1,23 @@
+:: Farm Bed []
+<<effects>>
+<<wearoutfit>>
+
+<<set $bus to "farm_bedroom">><<effects>>
+你偎在被窝里。
+<<if $alex_bed is "player">>
+	艾利克斯躺在你身旁，打着呼噜。
+<</if>>
+<<if $wraith.state and $wraithPrison and ($moonstate is "evening" or $moonstate is _nightstate)>>
+	你感到焦虑，你的目光向镜子移去。
+<</if>>
+<br><br>
+
+<<if numberOfEarSlime() and $alex_bed isnot "player" and random(0,100) lt 3 + Math.floor($earSlime.growth / 100) - $earSlime.eventTimer and !$earSlime.event>>
+	<<set $slimeBedExit to "Farm Bed">>
+	<<set $slimeBedroomExit to "Farm Bedroom">>
+	<<setSlimeSleepEvents>>
+	<<if $earSlimeEvent>>
+		<<slimeSleepEvents>>
+	<</if>>
+<</if>>
+<<farm_sleep_options>>

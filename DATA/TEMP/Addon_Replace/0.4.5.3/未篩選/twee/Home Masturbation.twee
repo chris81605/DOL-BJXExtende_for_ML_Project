@@ -1,0 +1,57 @@
+:: Home Masturbation []
+<<set $outside to 0>><<set $location to "home">><<effects>><<set _robin to statusCheck("Robin")>>
+
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+
+	你沉进长毛绒床垫里，让你的手移动。
+	<<if $exhibitionism gte 35>>
+		你不知道墙有多薄。
+	<<else>>
+		希望没人闯进来。
+	<</if>>
+	<br><br>
+<</if>>
+<<masturbationeffects>>
+<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and !$daily.robin.masturbation and $rng gte 91 and _robin_location is "orphanage" and _robin.lust gte 2 and _robin.love gte 50 and _robin.trauma lt 20>>
+	<<set $daily.robin.masturbation to true>>
+	<<if $robinromance and _robin.lust gte 30 and _robin.love gte 80>>
+		<<set $timer to 20>>
+		<<set $robinWatchingMasturbation to 1>>
+		<<set $robinWatchingMasturbationCount to ($robinWatchingMasturbationCount or 0) + 1>>
+	<<else>>
+		<<npc Robin>><<person1>>
+		你听到一丝咯吱声，然后是喘息声。<span @class="$robinromance ? 'lewd' : 'red'">罗宾正站在门口，</span>
+		<<if $worn.over_lower.vagina_exposed gte 1 and $worn.lower.vagina_exposed gte 1 and $worn.under_lower.vagina_exposed gte 1>>
+			眼睛盯着你的<<genitals>>。
+			<<if $exhibitionism gte 35>>
+				你不用费心掩饰。<<Hes>>可能比你还尴尬。
+			<<else>>
+				你把被子盖在你的裸体上，羞愧得脸都红了。<<stress 6>><<gstress>>
+			<</if>>
+			<<arousal 500>><<npcincr Robin lust 2>><<garousal>><<glust>>
+		<<else>>
+			震惊地睁大了眼睛。
+			<<if $exhibitionism gte 15>>
+				你并不在意这个小插曲。<<Hes>>可能比你更尴尬。
+			<<else>>
+				你猛地站起来，羞愧得脸都红了。<<stress 6>><<gstress>>
+			<</if>>
+			<<arousal 200>><<npcincr Robin lust 1>><<garousal>><<glust>>
+		<</if>>
+		<br><br>
+
+		"对、对不起！”<<he>>结巴。<<He>>匆忙地关上你的门。
+		<br><br>
+	<</if>>
+<</if>>
+<<if $robinWatchingMasturbation and $timer gt 0>>
+	<span class="lewd">你感觉自己正在被监视。</span>
+	<br><br>
+<</if>>
+<<masturbationactions>>
+<<if $robinWatchingMasturbation and $timer gt 0 and $orgasmdown is 3>><<set $robinWatchingMasturbation++>><</if>>
+
+<<masturbationControls "robinWatching">>

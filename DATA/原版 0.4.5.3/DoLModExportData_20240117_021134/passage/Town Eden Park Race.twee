@@ -1,0 +1,81 @@
+:: Town Eden Park Race []
+<<effects>>
+
+你向伊甸发起了一场跑步比赛。
+<br><br>
+
+"没门，"<<he>>说道，"我在这里陪你，不是来瞎闹的——"
+<br><br>
+
+你突然开始奔跑。伊甸在你身后咒骂着，但你听到了<<his>>的脚步声，<<he>>开始追赶你。
+<br><br>
+
+
+<<if $athleticsSuccess is 1>>
+	你拼命地穿过公园，全力奔跑。你保持着平稳的呼吸，集中精力。
+	你全身肌肉紧绷，努力向前冲刺。虽然优势只有一点点，但你还是领先在前面。
+	<<if Time.dayState is "night">>
+		凉爽的夜风吹在你的脸上。
+	<<elseif $weather is "rain">>
+		风和雨猛烈地拍打着你的脸。
+	<</if>>
+	<br><br>
+
+	伊甸速度很快，但<span class="green">你更快。</span><<He>>越来越落后。你满意地证明了你的胜利，停在了河边。
+	<<athletics 10>><<trauma -5>><<stress -50>><<tiredness 10>><<physique 5>>
+	<<gathletics>><<lstress>><<ltrauma>><<gtiredness>>
+	<<npcincr Eden dom -2>><<ldom>>
+	<br><br>
+
+	你弯下腰，喘着粗气。你听到伊甸的脚步声逐渐靠近。"我以为，"<<he>>停下来喘着气，"以为我又要失去你了。你很健康，但如果我们分开的时候有什么东西抓走了你怎么办？"<<He>>看起来像是松了口气。
+	<br><br>
+
+	<<link [[继续|Town Eden Park Finish]]>><</link>>
+<<else>>
+	/* We run a silent second athletics check that is slightly easier, to determine if you come close or are utterly outclassed */
+	<<athleticsdifficulty 250 1000 true>>
+
+	<<if $athleticsSuccess is 1>>
+		你拼命地穿过公园，全力奔跑。你保持着平稳的呼吸，集中精力。
+		你全身肌肉紧绷，努力向前冲刺。虽然有一点点领先，<span class="red">但是伊甸正在缩小差距。</span>
+		<<if Time.dayState is "night">>
+			凉爽的夜风吹在你的脸上。
+		<<elseif $weather is "rain">>
+			风和雨猛烈地拍打着你的脸。
+		<</if>>
+		<br><br>
+
+		伊甸已经可以触及到你了。<<He>>伸出手试着抓你，手指在你的背上轻轻划过。你尝试进一步拉开距离，但是<<he>>突然扑了过来，将你扑倒在地。
+		<<athletics 10>><<tiredness 10>><<physique 5>>
+		<<gathletics>><<gtiredness>>
+		<<npcincr Eden dom 2>><<gdom>>
+		<br><br>
+
+		<<He>>将你压在草地上，跨在你身上，双手紧紧抓住你的手腕。"这不好笑，"<<he>>说道。<<He>>停下来喘了口气，"如果我们分开的时候有什么东西抓走了你怎么办？"
+		<br><br>
+
+		<<link [[挑逗|Town Eden Park Race Tease]]>><</link>>
+		<br>
+		<<link [[道歉|Town Eden Park Race Apologise]]>><<npcincr Eden dom 1>><</link>><<gdom>>
+		<br>
+
+	<<else>>
+		你拼命地穿过公园，全力奔跑。然而你的肌肉开始抗议了。虽然你有一点点领先，<span class="red">但伊甸很快就缩小了差距。</span>
+		<br><br>
+
+		只用了几秒钟，<<him>>就追上了你。<<He>>将你扑倒在地。
+		<<athletics 10>><<tiredness 20>><<physique 5>>
+		<<gathletics>><<gtiredness>>
+		<<npcincr Eden dom 2>><<gdom>>
+		<br><br>
+
+		<<He>>将你压在草地上，跨在你身上，双手紧紧抓住你的手腕。"这不好笑，"<<he>>说道。<<He>>停下来喘了口气，"如果我们分开的时候有什么东西抓走了你怎么办？"
+		<br><br>
+
+		<<link [[挑逗|Town Eden Park Race Tease]]>><</link>>
+		<br>
+		<<link [[道歉|Town Eden Park Race Apologise]]>><<npcincr Eden dom 1>><</link>><<gdom>>
+		<br>
+
+	<</if>>
+<</if>>

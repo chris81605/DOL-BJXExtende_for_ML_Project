@@ -1,0 +1,145 @@
+:: Whitney Park Cigarette Smoke []
+<<set $hasUmbrella to ($worn.handheld.type.includes("rainproof") ? 1 : 0)>>
+<<if $phase is 1>>
+	/*Refuse*/
+	你摇摇头。惠特尼耸耸肩，重新叼起烟。"随你便，"<<he>>说，声音听起来有些不快，"这样我就能多抽点了。"
+
+	<<if C.npc.Whitney.lust gte 40>>
+		<br><br>
+		惠特尼重新吸了一大口烟，然后突然拉过你，吻了过来。在你们嘴唇接触前，<<he>>缓缓呼出一小团烟，你猝不及防，对着<<his>>的脸咳嗽起来。
+		<br><br>
+		惠特尼重新拉开距离，恼怒地呼了口气，将剩下的烟吐了出来。"蠢货，"<<he>>不满地咕哝。<<He>>将烟扔到地上踩灭，"早该知道像你这样笨的骚货连怎么抽烟都不知道。"
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			"对、对不起，"你结结巴巴地回应，"只是烟让我觉得有点突然。"
+		<<elseif $speech_attitude is "bratty">>
+			"这怎么是我的错？我说了我不想抽烟，你也没警告过我要做这种事，"你说。
+		<<else>>
+			"对不起，"你说，"我只是没料到你会那么做。"
+		<</if>>
+		<br><br>
+		<<He>>摇摇头。"是啊，没错，随便了。反正刚才是我最后一根。我要走了。"<<He>>一声不吭地离开了。<<npcincr Whitney love -1>><<llove "Whitney">><<npcincr Whitney dom -1>><<ldom "Whitney">>
+		<<set $whitney_shotgun to 0>>
+		<br><br>
+		<<whitneyexit>>
+	<<else>>
+		<br><br>
+		你感觉<<he>>似乎有些希望能跟你分享烟。
+	<</if>>
+	<<set $whitney_smoke to 0>>
+	<<set $daily.whitney.smoke to true>>
+<<else>>
+	/*Smoke*/
+	<<wearProp "cigarette">>
+	<<if $whitney_smoke isnot undefined>>
+		<<if $speech_action is "meek">>
+			"呃，我们抽同一根没问题吗？"你一边问，一边朝惠特尼的烟示意。
+		<<elseif $speech_action is "bratty">>
+			"我就这么抽一口没问题吗？"你一边问，一边随意地朝惠特尼的烟抬抬下巴。
+		<<else>>
+			"不介意我们抽同一根吗？"你一边问，一边朝惠特尼的烟抬抬下巴。
+		<</if>>
+	<</if>>
+	<br><br>
+	<<if $whitney_smoke is undefined or $whitney_smoke is 0>>
+		<<print $whitney_smoke is undefined ? '你接过递来的烟。' : '惠特尼看上去对你的提议感到既愉快又惊讶。"嗯？上次当过胆小鬼之后突然就长出胆子了？"<<He>>将手中的烟递给你。'>>你小心翼翼地将烟移向嘴边，惠特尼盯着你的嘴唇。你刚吸了一口，立马被烟呛得剧烈咳嗽起来。<<if $daily.hookah isnot undefined>>尼古丁燃烧的气味和你过去曾吸过的水烟甜甜的气味形成了强烈的反差。<</if>>
+		<br><br>
+		惠特尼大笑起来。"什么，别告诉我这是你第一次？"你咳嗽得太过剧烈，无法回答。
+		<<if $player.virginity.vaginal is "Whitney" or $player.virginity.penile is "Whitney">>
+			"我还能说什么呢，看来我很擅长拿走你的第一次。"
+		<<elseif $player.virginity.oral is "Whitney">>
+			"你嘴那里的第一次反正已经被我好好照顾过了。"
+		<<else>>
+			"像你这样的骚货居然还有第一次可以失去。"
+		<</if>>
+		<<He>>窃笑起来，你把烟递回给<<him>>，你的眼里满是眼泪。
+		<br><br>
+		<<if $speech_action is "meek">>
+			"你对我太刻薄了，"你不满地回应，终于缓过呼吸。
+		<<elseif $speech_action is "bratty">>
+			"你是个烂人，"你回应道，终于缓过了呼吸。
+		<<else>>
+			"粗鲁，"你回应道，终于缓过了呼吸。
+		<</if>>
+		<br><br>
+		"我说的没错吧，宝贝。"惠特尼咧开嘴笑了，在你额头落下一个吻。<<npcincr Whitney love 1>><<glove "Whitney">>
+		<<set $whitney_smoke to 1>>
+	<<else>>
+		惠特尼<<print either("悠闲地", "用力", "迅速", "最后")>>吸了口<<his>>的烟，然后递向你。
+		<br><br>
+		<<if $whitney_smoke gte 7>>
+			<<He>>看着你熟练地将烟叼进嘴里。你屏住呼吸很长时间，然后缓缓呼出一小团烟。"<<print either("这才是我的<<girl>>，", "厉害，", "干得不错，", "这么用嘴就对了，",)>>"<<he>>点点头，"我猜你为了练习到这种程度都练出一副铁肺了吧。过来，我来试试是不是这样。"
+			<br><br>
+			<<if $science gte 400>>
+				你成功忍住了没有指正<<he>>，你的肺活量其实变得更差了。
+			<<else>>
+				通过吸烟提升肺活量似乎有些不对，但你的科学知识不够，无法反驳。
+			<</if>>
+		<<elseif $whitney_smoke gte 5>>
+			你练习抽烟的时候，<<He>>眼睛盯着你的嘴唇。"你的嘴大概不仅仅擅长<<if $NPCList[0].penis isnot "none">>吸我下面<<else>>舔我下面<</if>>，"<<he>>评论道，<<if C.npc.Whitney.lust gte 10>>"要改变我的想法，需要你给我进行一下演示。"<<He>>抓了抓<<his>>的裤裆，露出一个下流的笑容。<<else>>"要改变我的想法，需要你下次给我进行一下演示。"<</if>>
+		<<elseif $whitney_smoke gte 3>>
+			你抽了一口烟，<<His>>的眼睛在你的嘴唇上徘徊。
+			<br><br>
+			<<if $speech_action is "meek">>
+				"喜欢你看到的吗？"你羞涩地说，"你一直在盯着我的嘴……"
+			<<elseif $speech_action is "bratty">>
+				"你还不够熟练，"你调侃道，"我发现你在盯着我的嘴。"
+			<<else>>
+				"是我的错觉吗，"你咧开嘴笑了，"我看见你在盯着我的嘴。"
+			<</if>>
+			<br><br>
+			惠特尼脸红了，看向一边。"我不知道你在说什么，"<<he>>说着，清了清嗓子，伸手接过了烟。
+		<<elseif $whitney_smoke gt 1>>
+			你小心翼翼地吸着，<<He>>盯着你看。你深吸入一口烟，然后缓缓呼出来。你成功压抑住了咳嗽的冲动，惠特尼看起来有些失望。
+			<br><br>
+			<<if $speech_action is "meek">>
+				"看见了吗？"你说，"我告诉过你我能做得更好！"
+			<<elseif $speech_action is "bratty">>
+				"怎么样，混蛋？我说过我只是需要热身，"你说。
+			<<else>>
+				"现在是谁赢了？"你说，"我说过了，我只是不够熟练。"
+			<</if>>
+			<br><br>
+			"是啊，"惠特尼回应。<<He>>伸出手示意你把烟还回去。"遗憾，我还想能找个乐子呢。看来你得用点其它方式娱乐我了。"<<He>>重新把烟叼在了嘴里。
+		<<else>>
+			你把烟放进嘴里的时候，<<He>>坏笑着看着你，显而易见地期待着你下一次糟糕的表现。这一回，你坚持了更长的时间，但最终还是忍不住咳嗽了起来。"怎么了？可怜的小宝宝吸不了烟吗？"<<he>>嘲讽道。
+			<br><br>
+			<<if $speech_action is "meek">>
+				"我、我能做得更好！等着瞧。"你回应<<him>>。
+			<<elseif $speech_action is "bratty">>
+				"是，是，你就笑吧。我只是在热身而已，"你回应<<him>>。
+			<<else>>
+				"我只是不熟练，等等看谁笑到最后吧，"你回应<<him>>。
+			<</if>>
+			你把烟递回给<<him>>。
+			<br><br>
+			"好吧，"<<he>>会意地回答，"你的身体只是需要慢慢适应。你已经习惯了，对吧，骚货？"<<He>>笑起来，但当你最后又咳嗽了一下时，<<He>>摩擦起你的背。<<npcincr Whitney love 1>><<glove>>
+		<</if>>
+		<<set $whitney_smoke++>>
+	<</if>>
+	<<set $daily.whitney.smoke to true>>
+<</if>>
+<br><br>
+<<if $whitney_smoke gte 3>>
+	<<if $whitney_smoke gte 7>>
+		<<if $whitney_shotgun gte 0>>
+			<<link [[和惠特尼进行烟雾交换的吻|Whitney Park Cigarette Smoke Kiss]]>><<npcincr Whitney love 1>><<npcincr Whitney dom -1>><<npcincr Whitney lust 1>><<oralskill 1>><</link>><<gcontrol>><<glove>><<ldom>><<glust>><<goralskill>><<promiscuous1>><<kissvirginitywarning>>
+		<<else>>
+			<<link [[亲惠特尼|Whitney Park Cigarette Smoke Kiss]]>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<gcontrol>><<glove>><<glust>><<promiscuous1>><<kissvirginitywarning>>
+		<</if>>
+		<br>
+	<<elseif $whitney_smoke gte 5>>
+		<<if $promiscuity gte 55>>
+			<<link [[跪下|Whitney Park Cigarette Smoke Oral]]>><<npcincr Whitney love 1>><</link>><<glove>><<promiscuous4>>
+		<<else>>
+			<span class="blue">你不够淫乱，无法让事情更进一步发展。</span>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[调侃|Whitney Park Cigarette Smoke Tease]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[把烟递回去|Whitney Park Cigarette Smoke 2]]>><<clotheson>><</link>>
+<<else>>
+	<<link [[继续|Park]]>><<clotheson>><<unset $hasUmbrella>><<endevent>><<set $eventskip to 1>><</link>>
+<</if>>

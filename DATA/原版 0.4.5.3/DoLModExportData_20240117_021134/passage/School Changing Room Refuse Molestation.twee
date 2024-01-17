@@ -1,0 +1,31 @@
+:: School Changing Room Refuse Molestation []
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	<<enableSchoolRescue "delinquency">>
+	<<if $changingRoomGender is "boys">>
+		<<set $audienceforceboy to 1>>
+	<<else>>
+		<<set $audienceforcegirl to 1>>
+	<</if>>
+	"你要被扒光了，"那个<<person>>冷哼了一声，"不管你想不想。"<<He>>突然犹豫了一下，但其他的<<print $changingRoomGender is "boys" ? "男孩" : "女孩">>为<<him>>加油鼓劲。
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked") or $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and playerChastity())>>
+	<span id="next"><<link [[继续|School Changing Room Refuse Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|School Changing Room Refuse Molestation]]>><</link>></span><<nexttext>>
+<</if>>

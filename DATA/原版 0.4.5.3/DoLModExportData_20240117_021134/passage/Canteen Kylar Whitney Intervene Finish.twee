@@ -1,0 +1,122 @@
+:: Canteen Kylar Whitney Intervene Finish []
+<<effects>><<run statusCheck("Kylar")>>
+
+<<if $enemyhealth lte 0>>
+	你让惠特尼跪下了，观众为你欢呼。<<gcool>><<status 1>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Kylar 1>><<person1>><<npc Whitney 2>><<person2>>
+	<<if isLoveInterest("Kylar")>>
+		<<if $speech_attitude is "meek">>
+			"欺负我是一回事，"你说，"但请不要再烦我的<<nnpc_girlfriend "Kylar">>了。"
+		<<elseif $speech_attitude is "bratty">>
+			你抓住惠特尼的衣领，把<<his>>的脸拉近。"你敢再碰我的<<nnpc_girlfriend "Kylar">>，"你说。
+		<<else>>
+			"离我的<<nnpc_girlfriend "Kylar">>远一点。"你吼道。
+		<</if>>
+		<<npcincr Kylar rage -20>><<lllksuspicion>>
+	<<else>>
+		<<if $speech_attitude is "meek">>
+			"欺负我是一回事，"你说，"但请放过我的朋友。"
+		<<elseif $speech_attitude is "bratty">>
+			你抓住惠特尼的衬衫，把<<his>>的脸拉近，"你敢再碰我的朋友试试！"
+		<<else>>
+			"离我朋友远点，"你警告。
+		<</if>>
+		<<npcincr Kylar rage -10>><<llksuspicion>>
+	<</if>>
+	<br><br>
+
+	惠特尼推开你，挤进了人群中。
+	<br><br>
+
+	凯拉尔从背后拥抱你。"我、我知道你会救我的，"<<person1>><<he>>对你感激涕零。<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+
+	惠特尼离开后，其他学生都失去了兴趣。你吃完了你的食物，凯拉尔明显如释重负，<<He>>帮你收走了托盘，然后朝<<if $weather is "rain" or $weather is "snow">>图书馆<<else>>后操场<</if>>走去。
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br><br>
+
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"你……笨蛋……" 惠特尼气喘吁吁地靠在墙上。观众们爆发出笑声，<<he>>的脸红了，急忙钻进人群中。<<llust>><<npcincr Whitney lust -20>>
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	凯拉尔从背后拥抱你。"我，我知道你会来救我的，"<<he>>说。<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+
+	惠特尼离开后，其他学生都失去了兴趣。你吃完了你的食物，凯拉尔明显如释重负，<<He>>帮你收走了托盘，然后朝<<if $weather is "rain" or $weather is "snow">>图书馆<<else>>后操场<</if>>走去。
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br>
+
+<<elseif $alarm is 1 and $rescue is 1>><<set $rescued += 1>>
+	你的叫喊被食堂里的嘈杂声淹没了。惠特尼抬起胳膊，挥拳想要殴打你，但突然被人从后面抓住了<<his>>的手臂。
+	<br><br>
+
+	<<if $robinmissing is 0 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1 and $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+		<span class="green">是罗宾，</span>另两个学生也来帮忙了，他们抓住了惠特尼的另一只手臂。因为重量，他们一起向后摔倒。
+		<br><br>
+	<<elseif $cool gte 240>>
+		一个学生从人群中走出来帮助你，另一个学生也上前，抓住惠特尼的另一只手臂。他们一起向后摔倒。
+		<br><br>
+	<<else>>
+		惠特尼拼命想要甩开他们，但这给了你需要的时机。
+		<br><br>
+	<</if>>
+	<br><br>
+	你抓住凯拉尔的手逃到人群中。惠特尼在你身后大喊大叫，但你拖延了足够长的时间。礼顿来了，<<him>>驱散了人群，抓着惠特尼离开了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<endevent>><<npc Kylar>><<person1>>
+	凯拉尔从背后拥抱你。"我，我知道你会来救我的，"<<he>>说。<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+
+	惠特尼离开后，其他学生都失去了兴趣。你吃完了你的食物，凯拉尔明显如释重负，<<He>>帮你收走了托盘，然后朝<<if $weather is "rain" or $weather is "snow">>图书馆<<else>>后操场<</if>>走去。
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br><br>
+
+<<else>>
+	惠特尼占了上风，把你按在墙上。"愚蠢的小混蛋！"
+	<<if playerBellySize(true) gte 8>>
+		<<He>>将你推倒在地，然后离开了，把你留在餐厅的地板上。<<lcool>><<status -10>>
+	<<else>>
+		<<He>>的膝盖猛地撞向你的腹部，你痛苦地弯下腰。<<He>>把你独自一人留在餐厅的地板上。<<lcool>><<status -10>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<npc Kylar>><<person1>>
+	当凯拉尔冲到你身边时，人群散开了。"你，你受伤了，"<<he>>说。<<He>>看着惠特尼的背影，恐惧变成了愤怒。<<gglove>><<npcincr Kylar love 3>>
+	<br><br>
+
+	"我，我很抱歉，"<<he>>抚摸着你的手臂说，"很抱歉我帮不了你。"<<He>>怒视着惠特尼离开的方向。
+	<<if _kylarStatus.includes("Rage")>>
+		"肮脏的老鼠，"<<his>>喘着气嘶哑地说，"毫无价值，愚蠢，可怕，真让人想……"<<His>>的咕哝声慢慢变得微弱。
+	<<else>>
+		"我希望能够勇敢地面对<<nnpc_him "Whitney">>，特别是为你。但，但是<<nnpc_hes "Whitney">>真的太……"<<He>>的声音越来越小。
+	<</if>>
+
+	<<tearful>>你吃完了自己的食物，一旁的凯拉尔阴郁地沉默着。<<He>>帮你收走了托盘，然后朝<<if $weather is "rain" or $weather is "snow">>图书馆<<else>>后操场<</if>>走去。
+	<br><br>
+
+	<<link [[继续|Canteen]]>><<endevent>><</link>>
+	<br>
+<</if>>

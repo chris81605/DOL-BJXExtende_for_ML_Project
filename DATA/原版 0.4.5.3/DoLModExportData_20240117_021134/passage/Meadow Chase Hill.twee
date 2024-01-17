@@ -1,0 +1,76 @@
+:: Meadow Chase Hill []
+<<effects>>
+
+你压低重心谨慎前行着，即使周围并没有看见其他人。
+<<if $athleticsSuccess>>
+	你爬上小丘，<span class="green">看到<<beasttype>>跑向周围的林地。</span>你继续追逐，跳过一排栅栏后，你们之间的距离缩短了。
+	<br><br>
+
+	<<beasttype>>在树木附近转过一个急转弯，紧接着又是一个。
+	<<if currentSkillValue('skulduggery') gte random(1, 1050)>>
+		你及时注意到悬挂着的陷阱绳圈，<span class="green">然后像<<beasttype>>那样避开了它们。</span>
+		<br><br>
+
+		你追上了你的猎物，在<<bhim>>刚跳进树林的时候抓住了<<bhim>>。
+		<<if $monster is 1>>
+			<<if $museumAntiques.antiques.antiquestonetalisman isnot "found" and $museumAntiques.antiques.antiquestonetalisman isnot "talk" and $museumAntiques.antiques.antiquestonetalisman isnot "museum">>
+				"我、我很抱歉，"你搂着<<bhis>>脖子的时候，<<bhe>>说道，"我没有恶意，来。"<<bHe>>扔下你的衣服，"如果你不伤害我，我还会给你一件礼物。是我在山洞里找到的东西。"
+				<br><br>
+
+				<<link [[接受|Meadow Chase Hill Accept]]>><</link>>
+				<br>
+			<<else>>
+				"我、我很抱歉，"你搂着<<bhis>>脖子的时候，<<bhe>>说道，"我没有恶意，来。"<<bHe>>扔下你的衣服，"请放我走吧。"
+				<br><br>
+				<<link [[原谅|Meadow Chase Hill Accept]]>><</link>>
+				<br>
+			<</if>>
+
+			<<if $fox gte 3>>
+				<<link [[表现自己|Meadow Chase Hill Sex]]>><<set $sexstart to 1>><</link>><<deviant1>><<fox>>
+				<br>
+			<<elseif $deviancy gte 55>>
+				<<link [[表现自己|Meadow Chase Hill Sex]]>><<set $sexstart to 1>><</link>><<deviant4>>
+				<br>
+			<</if>>
+			<<if $submissive lte 500 and $deviancy gte 15>>
+				<<link [[惩罚|Meadow Chase Hill Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<deviant2>><<defianttext>><<ltrauma>><<lstress>>
+				<br>
+			<</if>>
+		<<else>>
+			它看起来很抱歉，还把你的衣服往你身上推了推。
+			<<if $museumAntiques.antiques.antiquestonetalisman isnot "found" and $museumAntiques.antiques.antiquestonetalisman isnot "talk" and $museumAntiques.antiques.antiquestonetalisman isnot "museum">>
+				一块奇怪的石头放在你的衣服上。上面刻了些字，博物馆馆长可能会收购这种东西。
+			<</if>>
+			<br><br>
+
+			<<link [[原谅|Meadow Chase Hill Accept]]>><</link>>
+			<br>
+			<<if $fox gte 3>>
+				<<link [[表现自己|Meadow Chase Hill Sex]]>><<set $sexstart to 1>><</link>><<deviant1>><<fox>>
+				<br>
+			<<elseif $deviancy gte 55>>
+				<<link [[表现自己|Meadow Chase Hill Sex]]>><<set $sexstart to 1>><</link>><<deviant4>>
+				<br>
+			<</if>>
+		<</if>>
+	<<else>>
+		你就快要追上<<bhim>>了，只差一步之遥。
+		<br><br>
+
+		突然<span class="red">你的脚踝被拽到空中，</span>你被一根绳子吊了起来，就这样赤身裸体地在草地上晃悠着。<<beasttype>>并没有踩中旁边的另一个陷阱，继续跑着消失在了树丛中。
+		<br><br>
+
+		<<link [[继续|Meadow Chase Hill Trap]]>><<clothesruined>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	你登上了小丘，<span class="red">但是哪里都没有看到<<beasttype>>。</span><<bHe>>一定已经逃进了树林中。
+	<br><br>
+
+	你爬下了小丘。也许你可以用附近的植物做一些临时的衣物。
+	<br><br>
+
+	<<link [[继续|Meadow]]>><<clothesruined>><<endevent>><</link>>
+	<br>
+<</if>>

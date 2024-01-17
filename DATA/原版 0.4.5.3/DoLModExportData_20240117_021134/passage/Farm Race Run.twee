@@ -1,0 +1,70 @@
+:: Farm Race Run []
+<<effects>>
+
+你转身跑到艾利克斯身边。野猪紧跟在后面，你听到它在靠近。
+
+<<if $athleticsSuccess>>
+	它追上了艾利克斯，咬住了<<his>>的<<if $pronoun is "f">>裙子<<else>>短裤<</if>>，把<<him>>拖到地上。
+	<br><br>
+
+	那个
+	<<if $pronoun is "f">>
+		裙子被撕开了，露出了艾利克斯红黑相间的平角裤。
+	<<else>>
+		短裤被撕开了，露出了艾利克斯红黑相间的四角裤。
+	<</if>>
+	野猪转身向森林深处跑去，织物还在它的嘴里。
+	<br><br>
+
+	"操，"艾利克斯说，"它不见了吗？"<<He>>环顾四周，然后站了起来。<<He>>没有注意到<<his>>消失的<<if $pronoun is "f">>裙子<<else>>短裤<</if>>。
+	<br><br>
+
+	<<link [[盯着看|Farm Race Stare]]>><<npcincr Alex love -1>><<npcincr Alex dom -1>><<npcincr Alex lust 1>><</link>><<promiscuous1>><<llove>><<ldom>><<glust>>
+	<br>
+	<<link [[移开视线|Farm Race Look]]>><</link>>
+	<br>
+	<<link [[笑出声|Farm Race Laugh]]>><<npcincr Alex dom -1>><</link>><<ldom>>
+	<br>
+<<else>>
+	<<if $worn.lower.name is "naked">>
+		它追上你，把你撞到一边。当你摔倒在地时，你感到世界在旋转。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+		<br><br>
+
+		你及时调整着自己恢复过来，然后看到野猪消失在森林里。"你还好吗？"艾利克斯边问，边蹲到了你身边。<<He>>帮你站起来，然后大笑，"还好，刚才真的挺险的。我们回去工作吧。"
+		<br><br>
+
+		<<link [[继续|Farm Work]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<set $worn.lower.integrity -= 100>>
+		<<if $worn.lower.integrity lte 0>>
+			它追上了你，嘴里咬着你的$worn.lower.cn_name_cap，把你拉到地上。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+			<br><br>
+
+			<span class="pink">你跌倒时，你的衣服被撕破了，暴露出你的<<undies>>。</span>野猪调转方向，跑进了森林深处，你的$worn.lower.cn_name_cap仍然在它的嘴里。
+			<br><br>
+			<<integritycheck "no_text">><<exposure>>
+			"你、你还好吗？"艾利克斯蹲在你身边问道。<<Hes>>的脸红了，不知道该往哪里看。你爬了起来。<<covered>><<glust>><<npcincr Alex lust 1>>
+			<br><br>
+
+			艾利克斯带着你回到农舍。<<He>>消失在屋子里，然后带着一些毛巾回来了。<<towelup>>
+			<br><br>
+
+			<<link [[继续|Farm Work]]>><<endevent>><</link>>
+			<br>
+
+		<<else>>
+			它追上了你，嘴里咬着你的$worn.lower.cn_name_cap，把你拉到地上。<<gpain>><<gstress>><<pain 4>><<stress 6>>
+			<br><br>
+
+			你摔倒时，身上的衣物被撕裂了。野猪突然转向，跑进了森林深处。
+			<br><br>
+
+			"你没事吧？"艾利克斯蹲在你旁边问道。<<He>>帮助你站了起来，然后笑出了声，"还好，刚才真的挺险的。我们回去工作吧。"
+			<br><br>
+
+			<<link [[继续|Farm Work]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

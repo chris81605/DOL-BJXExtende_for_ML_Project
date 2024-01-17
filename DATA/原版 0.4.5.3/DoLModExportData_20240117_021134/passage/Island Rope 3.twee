@@ -1,0 +1,93 @@
+:: Island Rope 3 []
+<<effects>>
+
+<<if $island_rope_action is "shuffle">>
+	<<if $island_rope_enemy_action is "watch">>
+		岛民们看着你沿着绳子小心翼翼地移动。绳子上的纤维摩擦着你的<<genitals>>，令人尴尬的感觉在你的身体里回荡。
+	<<elseif $island_rope_enemy_action is "shout">>
+		<<if $islander_language gte 100>>
+			岛民们在你沿着绳子移动时冲你大骂脏话。
+			<br><br>
+			<<island_rope_shout>>
+			<br><br>
+			事实证明，了解他们的语言是一把双刃剑。<<ggarousal>><<arousal 1200>>
+		<<elseif $islander_language gte 50>>
+			岛民们在你沿着绳子移动时大声叫唤着。虽然你不能完全理解，但他们的语气充满猥亵。<<garousal>><<arousal 600>>
+		<<else>>
+			岛民们在你沿着绳子移动时用你无法理解的语言大喊大叫。
+		<</if>>
+	<<elseif $island_rope_enemy_action is "bow">>
+		当你沿着绳索移动时，岛民们会发射一排箭。
+		<br><br>
+		<<island_rope_bow>>
+	<</if>>
+<<elseif $island_rope_action is "breath">>
+	<<if $island_rope_enemy_action is "watch">>
+		你停下来喘口气。岛民们在岸边看着你。
+	<<elseif $island_rope_enemy_action is "shout">>
+		<<if $islander_language gte 100>>
+			当岛民们大声辱骂时，你停下来喘口气。
+			<br><br>
+			<<island_rope_shout>>
+			<br><br>
+			事实证明，了解他们的语言是一把双刃剑。<<ggarousal>><<arousal 1200>>
+		<<elseif $islander_language gte 50>>
+			岛民们在你停下来喘口气时大声叫唤着。虽然你不能完全理解，但他们的语气充满猥亵。<<garousal>><<arousal 600>>
+		<<else>>
+			岛民们在你停下来喘口气时用你无法理解的语言大喊大叫。
+		<</if>>
+	<<elseif $island_rope_enemy_action is "bow">>
+		当你停下来喘口气时，岛民们会发射一排箭。
+		<br><br>
+		<<island_rope_bow>>
+	<</if>>
+<<elseif $island_rope_action is "duck">>
+	<<if $island_rope_enemy_action is "watch">>
+		你躲闪着，紧紧地抱住绳子，尽量缩小自己的轮廓。岛民们在岸上笑着看你。
+	<<elseif $island_rope_enemy_action is "shout">>
+		<<if $islander_language gte 100>>
+			当岛民们大骂脏话时，你回避了。
+			<br><br>
+			<<island_rope_shout>>
+			<br><br>
+			事实证明，了解他们的语言是一把双刃剑。<<ggarousal>><<arousal 1200>>
+		<<elseif $islander_language gte 50>>
+			当岛民们大声叫唤时，你躲闪着，紧紧地抱住绳子，尽量缩小自己的轮廓。虽然你不能完全理解，但他们的语气充满猥亵。<<garousal>><<arousal 600>>
+		<<else>>
+			当岛民们用他们听不懂的语言喊叫时，你躲闪着，紧紧地抱住绳子，尽量缩小自己的轮廓。
+		<</if>>
+	<<elseif $island_rope_enemy_action is "bow">>
+		当岛民们发射箭矢时，你躲了过去，你较小的身形有助于避开射出的箭矢。
+		<br><br>
+		<<island_rope_bow duck>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasm>>
+	<br>
+	<<if $island_rope_orgasm gte 1>>
+		你从绳索上滑落，直到挂在绳索下端，你饱受折磨的四肢挣扎着，紧紧抓住上面沾满油腻的纤维，水流拍打着<<bottom>>。
+		<br><br>
+
+		<<link [[继续|Island Rope Fall]]>><</link>>
+		<br>
+	<<else>>
+		<<set $island_rope_orgasm += 1>>
+		你向前摔去。只有通过将手臂和腿伸展到更长的绳子上，你才有力气紧紧抓住它。
+		<br><br>
+
+		<<island_rope_options>>
+	<</if>>
+<<elseif $island_rope_distance gte 5>>
+	你的脚接触到了坚实的地面，爬到了对岸。岛民们发射了一排箭矢，但你躲在一棵树后，箭砰地一声射进了树皮。
+	<br><br>
+
+	<<link [[海岛|Island]]>><<endevent>><<island_rope_end>><<island_explore_end>><</link>>
+	<br>
+<<else>>
+
+	<<island_rope_options>>
+
+<</if>>
