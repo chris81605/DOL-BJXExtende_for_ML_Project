@@ -1,0 +1,61 @@
+:: Deer Rape Finish 
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+
+	这只鹿紧紧地扣住你，紧接着将精子射入你的体内。之后它便拔出来，一路小跑走了。
+	<br><br>
+
+	<<tearful>>你稳住自己。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest lte 20>>
+	<<gwylanForestRescue "beast">>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	你听见不远处传来一声枪响，随后一颗子弹穿过了这只野兽的足部。它恐惧地向后退去，最后逃向深林之中。
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<br><br>
+
+		<<edenCagedSave>>
+	<<else>>
+		伊甸出现了，他帮你冷静下来。"该死的动物，"<<nnpc_he "Eden">>嘟囔着，"你没事吧？"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周片刻。"我们可能已经涉险过深，超出了那个店主的能力范围，"<<nnpc_he "Eden">>说道。
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<forestCabinReturnLinks>>
+	<</if>>
+<<else>>
+	你一把将<<beasttype>>从你身旁推开。<<tearful>>你逃走了。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+<</if>>

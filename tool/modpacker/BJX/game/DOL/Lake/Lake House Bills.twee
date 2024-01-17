@@ -1,0 +1,15 @@
+:: Lake House Bills 
+<<effects>>
+你打开门。<span class="red">是房产部门人员。</span>
+<br><br>
+"您好，您的房屋账单已逾期，请您及时付款，以免影响您的使用。"对方说道。
+<br><br>
+<<set _moneyB to 2000 * $lakehouse.billsphase * $rentmod>>
+<<if $money gte (200000 * $lakehouse.billsphase * $rentmod)>>
+    <<link [["支付租金 (£" + _moneyB + ")"|Lake House]]>><<set $money -= (200000 * $lakehouse.billsphase * $rentmod)>><<set $lakehouse.billsphase to 0>><</link>>
+    <br>
+<<else>>
+    你没有 £_moneyB 用来支付租金。
+<</if>>
+<<link [[暂不支付|Lake House]]>><</link>>
+<br>

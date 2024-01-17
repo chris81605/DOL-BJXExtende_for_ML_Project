@@ -1,0 +1,22 @@
+:: Forest Mansion Study 
+<<set $outside to 0>><<set $location to "kylar_manor">><<set $forestmansionstage to 8>><<effects>>
+你走进一个大房间，里面摆满了书架，在中间有一张桌子。这是豪宅主人读书和工作的地方。这些书都比这座豪宅古老得多，而且正在分崩离析。你试着打开其中的一本书，但是它在你手的中散开了，书页上的单词也都褪色了，你看不清楚上面写的什么东西。
+<br><br>
+
+<<if $rng lte 50 and $eventskip is 0>>
+	<<forestmansionrandomevents>>
+<<else>>
+	<<if $TaylorWith is 1>>
+		"这些书被损坏得如此之多，真是令人惋惜，这上面可能是一些没有记录的或一些重要的内容。"泰勒看起来很沮丧。"我还是要拿走部分的，也许我能找到复原它们的方法。"
+		<br><br>
+	<</if>>
+
+	<<if $forestmansionrunestone is 1>>
+		<<link [[仔细检查书本上的石头符号(1:00)|Forest Mansion Research Rune]]>><<pass 60>><</link>>
+		<br>
+	<<elseif $forestmansionrunestone is 2>>
+		<<link [[在石头上重新刻画被磨损的符文(0:20)|Forest Mansion Redraw]]>><<pass 20>><</link>>
+		<br>
+	<</if>>
+	<<link [[回到走廊上 (0:05)|Forest Mansion Right Hallway]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+<</if>>

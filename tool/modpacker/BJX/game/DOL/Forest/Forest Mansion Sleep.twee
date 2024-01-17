@@ -1,0 +1,41 @@
+:: Forest Mansion Sleep 
+<<set $rng to random(1,100)>>
+<<set _autosavehere to true>>
+<<sleep>><<effects>>
+<<sleepeffects>>
+<<if $TaylorWith is 1>>
+	"等等，你打算睡在这地方？天已经黑了，我们还在森林中。"<<He>>唉声叹气。"我该怎么跟我妈妈解释啊，特别是经历完之前那次失踪后。"你俩躺在床上尝试着入睡，然而在大半夜，太阳不见丝毫踪迹的时候，你俩被阵阵冷意折腾地实在无法入眠。 
+<<elseif $options.bjx_eventTF and $ghost is 0 and $slime is 0 and $mushroom is 0 and $exorcised is 0 and $rng lte 10>>
+	你将你的头放在古老别墅的某件枕物上。然后睡着了。你睡得不咋安稳，寒意使你在睡醒前的睡眠断断续续。在起床之前，你坐起身来伸了个懒腰。
+	<br><br>
+	你突然…感觉有些…不对劲。你去揉自己的太阳穴，但什么也没摸到。你惊慌失措，赶忙掀开镜子上的盖子，发现自己变得和原来截然不同。
+	<br><br>
+	你的皮肤像幽灵一样的苍白。燃烧的蓝色球火在你周围若隐若现。你去摸你的脸，但令人震惊的是，你的手穿过了你自己的脑袋。你呼吸急促，惊恐万状，因为你原本的手被留在了原地一动不动。
+	<br><br>
+	你用力拉扯，最终将它撕裂成半固态的块状物，蓝色的液体从你的脸颊滴下。你的身体不见了。在考虑接下来该做什么之前，你冷静了下来。
+	<<ghosttransform>>
+	<<earnFeat "Ghost">>
+<<elseif $options.bjx_eventTF and $ghost is 0 and $slime is 0 and $mushroom is 0 and $exorcised is 1 and $rng lte 15>>
+	你把脑袋靠在枕头上并迷迷糊糊地入睡了。然而你被寒意惊醒了，没有睡完一个安稳觉。你坐起来伸了伸懒腰，然后离开了床。
+	<br><br>
+	你突然…感觉有些…不对劲。你去揉自己的太阳穴，但什么也没摸到。你意识到了什么，赶忙掀开镜子上的盖子，发现自己变得和原来截然不同。
+	<br><br>
+	你的皮肤像幽灵一样的苍白。燃烧的蓝色球火在你周围若隐若现。你去摸你的脸，不出所料的，你的手穿过了你自己的脑袋。
+	<br><br>
+	看来你的身体不见了，你又一次变成了幽灵，因为有过这样的经历，你很快冷静了下来。
+	<<ghosttransform>>
+<<else>>
+	你把脑袋靠在枕头上并迷迷糊糊地入睡了。然而你被寒意惊醒了，没有睡完一个安稳觉。你坐起来伸了伸懒腰，然后离开了床。
+<</if>>
+<br><br>
+<<if $TaylorWith is 1>>
+	<<link [[同意离开|Forest Mansion Coffee Ending]]>><</link>>
+	<br>
+	<<link [[执意留下|Forest Mansion Goodbye]]>><</link>>
+<<else>>
+	<<if $forestmansionstage is 11>>
+		<<link [[继续|Forest Mansion Master Suite]]>><</link>>
+	<<else>>
+		<<link [[继续|Forest Mansion Guest Suite]]>><</link>>
+	<</if>>
+<</if>>

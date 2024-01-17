@@ -1,0 +1,84 @@
+:: Lake House 
+<<set $outside to 0>><<set $location to "lakehouse">><<effects>>
+<<lakehouseinit>>
+<<if ($lakehouse_countdown lte 0 or $lakehouse_countdown is undefined) and ($renttime lte -2 or ($renttime lte 0 and Time.hour gte 4 and Time.hour lte 21))>>
+	<<unset $lakehouse_countdown>><<unset $baileyReunionScene>>
+	<span class="red">你听到了敲门声。</span>
+	<br><br>
+
+	<<link [[应门|Lake House Bailey]]>><</link>>
+	<br>
+/* <<elseif $lakehouse_attack_timer lte 0 and Time.hour gte 21>> */
+<<elseif $lakehouse_bills>>
+    <<unset $lakehouse_bills>>
+	<spawn class="red">你听见门外有人敲门。</span>
+	<br><br>
+	
+	<<link [[应门|Lake House Bills]]>><</link>>
+	<br>
+<<elseif $stress gte $stressmax and !$possessed>>
+	<<set $previousPassage to $passage>>
+	<<passoutlakehouse>>
+<<else>>
+	<<set _tv to Furniture.get('television')>>
+	<<set _gameconsole to Furniture.get('gameconsole')>>
+
+	你进入了起居室。 
+	<br>
+	<<if _tv>>
+		你看见你的电视摆在起居室的桌子上，
+		<<if _gameconsole>>
+			旁边放着你的游戏机，
+		<</if>>
+		<br>
+	<</if>>
+	
+	<<if $lakehouse.petbed isnot undefined and $lakehouse.pet isnot undefined>>
+		<<if $lakehouse.petbed gte 1>>
+			角落里放着$lakehouse.petbed张看起来很柔软的宠物床，
+			<br>
+		<</if>>
+		<<if $lakehouse.pet.length gte 1>>
+			你的宠物们躺在里面睡觉，
+			<br>
+		<</if>>
+	<</if>>
+	
+	<br>
+
+	<<bedroomicon>><<link [[去卧室|Lake House Bedroom]]>><</link>>
+	<br>
+	<<bathroomicon>><<link [[去浴室|Lake House Bathroom]]>><</link>>
+	<br>
+	<<gardenicon>><<link [[去后院|Lake House Backyard]]>><</link>>
+	<br>
+	<<if _tv>>
+		<<if $lakehouse.billsphase gte 3>>
+		没电的情况下你用不了电视。
+		<br>
+		<<else>>
+			<<link [[看电视|Lake House TV]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if _tv and _gameconsole>>
+		<<if $lakehouse.billsphase gte 3>>
+			没电的情况下你玩不了游戏机。
+			<br>
+		<<else>>
+			<<link [[玩游戏(0:30)|Lake House Console]]>><<trauma -3>><<set $handskill += 1>><</link>><<ghandskill>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $lakehouse.pet isnot undefined>>
+		<<for _i to 0; _i lt $lakehouse.pet.length; _i++>>
+		    <<lakehouse_pet_options _i>>
+		<</for>>
+	<</if>>
+	/* <<link [[Robin options|Lake House Robin Options]]>><</link>>
+	<br> */
+	<<link [[去地下室|Lake House Basement]]>><</link>>
+	<br>
+	<<getouticon>><<link [[离开|Lake House Outdoor]]>><</link>>
+	<br>
+<</if>>

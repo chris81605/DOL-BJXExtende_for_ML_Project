@@ -1,0 +1,145 @@
+:: Seasons Island 
+<<effects>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutisland>>
+<<else>>
+    <<if $islanddistance is 0>>
+        <<location "beach">>
+        <<set $chill_day to 0>>
+        <<set _weather_display to "normal">>
+        你站在沙滩上，巨大的海浪拍打着沙滩。
+    <<elseif $islanddistance lt 5>>
+        <<location "beach">>
+        <<set $chill_day to 0>>
+        <<set _weather_display to "normal">>
+        你站在温暖的沙滩中央，沙滩上覆盖着柔软的细沙，即使只是站在上面，你的脚也会陷得很深。
+    <<elseif $islanddistance is 10>>
+        <<location "desert">>
+        <<set $chill_day to -120>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "clear">>
+        你发现一个巨大的沙堆，它看起来像某种昆虫的巢穴。
+    <<elseif $islanddistance is 20>>
+        <<location "desert">>
+        <<set $chill_day to -120>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "clear">>
+        你遇到了一个小村庄，坐落在一片水和棕榈树构成的绿洲上。
+    <<elseif $islanddistance lt 30>>
+        <<location "desert">>
+        <<set $chill_day to -120>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "clear">>
+        酷热的沙漠侵蚀着你，茫茫多的沙丘在前方不断地伸展着。
+    <<elseif $islanddistance is 30>>
+        <<location "forest">>
+        <<set $chill_day to 0>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "rain">>
+        当沙漠与植被茂盛的山林相接的时候，地势开始不断变得陡峭起来。
+    <<elseif $islanddistance is 40>>
+        <<location "forest">>
+        <<set $chill_day to 0>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "rain">>
+        当你爬上山路时，你发现了一个钢铁残骸，继续沿着这条路走下去，你发现了越来越多的残骸，最后你遇到了一架巨大的飞机残骸。它的周围杂草丛生，残骸上锈迹斑斑。
+    <<elseif $islanddistance lt 50>>
+        <<location "forest">>
+        <<set $chill_day to 0>>
+        <<set _weather_display to "normal">>
+        <<set $weather to "rain">>
+        群山继续向上延伸，植被依旧茂盛。尽管树木线遮住了太阳，但潮湿的环境依旧让你十分痛苦。
+    <<elseif $islanddistance is 50>>
+        <<location "snowforest">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        在半山腰上，凉爽的风吹了进来，雪花轻轻地飘向了海拔更高的松柏树上。
+    <<elseif $islanddistance is 55>>
+        <<location "snowforest">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        当你在雪景中漫步时，你发现了一个古老的石屋，里面是破碎的透明材料制成的线。
+    <<elseif $islanddistance lt 60>>
+        <<location "snowforest">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        山上白雪皑皑，巨大的松树耸立在你的头顶，动物于落雪上的足迹点缀着大地。
+    <<elseif $islanddistance is 60>>
+        <<location "glacier">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        你到达山顶，另一边是一片广阔的冰川，似乎一直延伸到地平线上。
+    <<elseif $islanddistance is 61>>
+        <<location "glacier">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        你的双脚踩在冰川坚硬的冰面上，迎面吹来阵阵寒风。没有什么东西能在这里存活。云层停滞在山岭组成的屏障前，给大地笼罩上了一层厚厚的浓雾。
+    <<elseif $islanddistance is 65>>
+        <<location "glacier">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        你继续往冰原深处走，发现了一处在冰中雕凿出来的奇怪洞穴。
+    <<elseif $islanddistance lte 70>>
+        <<location "glacier">>
+        <<set $chill_day to 150>>
+        <<set $weather to "snow">>
+        你正沿着一块坚硬的冰层前行，各种峭壁随处可见，除此之外，别无他物。
+    <</if>>
+    <br><br>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $eventskip is 0>>
+		<<rng>>
+		<<if $rng gte 81>>
+			<<eventislanditem>>
+		<<elseif $danger gte (9900 - ($allure * $forestmod))>>
+			<<eventisland>>
+		<<else>>
+			<<eventislandsafe>>
+		<</if>>
+    <<else>>
+        <<if $islanddistance is 70 and $museumAntiques.antiques.antiquegreed is "notFound">>
+		    突然你被什么东西绊了一下，你好奇地挖开积雪，居然是一个宝箱。
+		    <br><br>
+	    <</if>>
+        <<if $islanddistance is 0>>
+            <<link [[游回大海 (0:10)|Sea Reef]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+            <br>
+        <</if>>
+        <<if $islanddistance is 10>>
+            <<link [[靠近蚁穴 (0:05)|Anthill]]>><<set $guard1 to 0>><<set $guard2 to 0>><<set $guard3 to 0>><<set $sandmound to 1>><<pass 5>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance is 20 and $exposed gt 0>>
+            你不能穿成这样进村。
+            <br>
+        <<elseif $islanddistance is 20>>
+            <<link [[进入村庄 (0:05)|Desert Village]]>><<pass 5>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance is 40>>
+            <<link [[探索飞机 (0:30)|Plane Explore]]>><<pass 30>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance is 55>>
+            <<link [[进入小屋 (0:10)|Hut Explore]]>><<pass 10>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance is 65>>
+            <<link [[进入洞中 (0:05)|Ice Shrine]]>><<pass 5>><</link>>
+            <br>
+        <</if>>
+        <<if $options.bjx_antiques and $islanddistance is 70 and $museumAntiques.antiques.antiquegreed is "notFound">>
+            <<link [[打开宝箱 (0:05)|Antique Greed Open Box]]>><<pass 5>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance gte 1>>
+            <<link [[回到海岸 (0:20)|Seasons Island]]>><<pass 20>><<set $islanddistance -= 1>><</link>>
+            <br>
+        <</if>>
+        <<if $islanddistance lt 70>>
+            <<link [[深入岛屿 (0:20)|Seasons Island]]>><<pass 20>><<set $islanddistance += 1>><</link>>
+        <</if>>
+    <</if>>
+<</if>>
+
+<<set $eventskip to 0>>

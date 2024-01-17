@@ -1,0 +1,52 @@
+:: Deep Sea Ship Pots 
+<<underwater>><<effects>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutbeach>>
+<<else>>
+	<<if $rng gte 80>>
+		<<rng>>
+		<<if $rng gte 95>>
+			你找到了一块金条。
+			<<set $antiquemoney += 800>><<museumAntiqueStatus "antiquebullion" "found">>
+			<br><br>
+		<<elseif $rng gte 30>>
+			你会发现一枚原始硬币。
+			<<set $antiquemoney += 40>><<museumAntiqueStatus "antiquereal" "found">>
+			<br><br>
+		<<elseif $rng gte 0>>
+			你找到一小瓶靛蓝染料。
+			<<set $antiquemoney += 60>><<museumAntiqueStatus "antiqueindigo" "found">>
+			<br><br>
+		<</if>>
+		<<link [[搜索陶罐|Deep Sea Ship Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<link [[游回入口处|Deep Sea Ship]]>><<wateraction>><<set $shiproom -= 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+		<br>
+		<<link [[游向更深处|Deep Sea Ship]]>><<wateraction>><<set $shiproom += 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+	<<elseif $rng gte 60 and $swarmdisable is "f">>
+		你把手伸进其中一个陶罐里，成群的小鱼涌了出来，把你团团围住。
+		<br><br>
+		<<link [[继续|Deep Sea Ship Swarm]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		<<rng>>
+		<<if $rng gte 81>>
+			你把手伸进其中一个陶罐里，里面全是破碎的陶瓷。
+		<<elseif $rng gte 61>>
+			你把手伸进其中一个陶罐里，里面有东西向你咬来。幸好你反应迅速，及时把手抽了出来。
+			<<gstress>><<stress 3>>
+		<<elseif $rng gte 41>>
+			你把手伸进其中一个陶罐里，里面全是泥巴。
+		<<elseif $rng gte 21>>
+			你把手伸进其中一个陶罐里，里面装满了鹅卵石。
+		<<else>>
+			你把手伸进其中一个陶罐里，里面是空的。
+		<</if>>
+		<br><br>
+		<<link [[搜索陶罐|Deep Sea Ship Pots]]>><<wateraction>><</link>><<loxygen>>
+		<br>
+		<<link [[游回入口处|Deep Sea Ship]]>><<wateraction>><<set $shiproom -= 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+		<br>
+		<<link [[游向更深处|Deep Sea Ship]]>><<wateraction>><<set $shiproom += 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+	<</if>>
+<</if>>

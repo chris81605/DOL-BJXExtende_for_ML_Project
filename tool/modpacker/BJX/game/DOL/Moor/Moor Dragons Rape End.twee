@@ -1,0 +1,44 @@
+:: Moor Dragons Rape End 
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<beastwound>>
+	<<if $combatTrain.length gt 0>>
+		<<beasttype>>在痛苦和恐惧中退缩，但另一只正跃跃欲试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Moor Dragons Rape]]>><<set $finish to 1>><</link>>
+	<<else>>
+		<<beasttype>>吃痛退开，畏惧着。
+		<br><br>
+		<<tearful>>你挣扎着站起来。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		在满足之后，<<beasttype>>离开了。但是另一个家伙想要试试。
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[继续|Moor Dragons Rape]]>><<set $finish to 1>><</link>>
+	<<else>>
+		心满意足之后，那只<<beasttype>>离开了你。
+		<br><br>
+		<<tearful>>你挣扎着站起来。
+		<br><br>
+		<<clotheson>>
+		<<endcombat>>
+		<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<tearful>>你挣扎着站起来。
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[继续|Moor]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

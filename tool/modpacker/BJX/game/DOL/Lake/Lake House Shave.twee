@@ -1,0 +1,69 @@
+:: Lake House Shave 
+<<effects>>
+<<dontHideForNow>>
+<<if $leftarm is "bound" and $rightarm is "bound">>
+	<span class="red">你的双臂被绑着</span>，而你发现在这种情况下很难对阴毛做出任何事情。
+	<br>
+	<<link [[返回->Lake House Bathroom]]>><<dontHideRevert>><</link>>
+<<else>>
+	<<shavestrip>>
+	你脱下衣服，看着自己的<<genitals>>。
+	<br>
+	<<if $worn.genitals.name is "chastity belt" or $worn.genitals.name is "gold chastity belt">>
+    	贞操带紧贴身体，几乎不可能用剃刀触及阴毛。
+    	<br>
+	    <<link [[返回->Lake House Bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+	<<else>>
+    	<<if $worn.genitals.name is "chastity cage">>
+        	你的肉棒被锁在笼子里，在它周围刮阴毛会有点棘手，但这并不是什么大问题。
+        	<br>
+    	<</if>>
+        <<if ($pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2) and $slime gt 0 and $options.bjx_eventTF>>
+        	<<link [[自动脱毛 (0:15)->Lake House Slime Shave]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>><<slime>>
+        	<br>
+        <</if>>
+    	<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>
+    		<<shavestyleicon 'clean'>><<link [[剃干净 (0:15)->Lake House Shave clean]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>>
+    		<br>
+    	<</if>>
+    	<<if $pblevel gte 5 or $pbstrip gte 2 or ($pbstrip is 1 and $pblevel gte 2)>>
+    		<<shavestyleicon 'strip'>><<link [[剃成条状 (0:15)->Lake House Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "neat landing strip">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 1>><</link>>
+    		<br>
+    	<</if>>
+    	<<if $pblevel gte 5 or $pbstrip gte 3 or ($pbstrip gte 2 and $pblevel gte 2)>>
+    		<<shavestyleicon 'heart'>><<link [[剃成心形 (0:15)->Lake House Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "cute heart shape">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 2>><</link>>
+    		<br>
+    	<</if>>
+    	<<if $pblevel gte 5 or $pbstrip gte 4 or ($pbstrip gte 3 and $pblevel gte 2)>>
+    		<<shavestyleicon 'triangle'>><<link [[剃成一个箭头 (0:15)->Lake House Shave strip]]>><<pass 15>><<arousal 100>><<set $pbstripName to "neat triangle">><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 3>><</link>>
+    		<br>
+    	<</if>>
+    	<<if $player.ballsExist is true>>
+    		<<if $pblevel gte 2 or $pbstrip gte 1>>
+    			<<shavestyleicon 'clean'>><<link [[只刮阴毛 (0:10)->Lake House Shave pubis]]>><<pass 10>><<arousal 50>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pbstrip to 0>><<if $pblevelballs is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+    			<br>
+    		<</if>>
+    		<<if $pblevelballs gte 3>>
+    			<<shavestyleicon 'balls'>><<link [[只刮蛋蛋 (0:05)->Lake House Shave balls]]>><<pass 5>><<arousal 50>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<if $pblevel is 0 and $pbstrip is 0>><<set $makeup.pbcolour to 0>><</if>><</link>>
+    			<br>
+    		<</if>>
+    	<</if>>
+    	<<if $pblevel gt 5 or $pblevelballs gt 5>>
+    		<<shavestyleicon 'trim'>>
+    		<<link [[刮短 (0:10)->Lake House Shave trim]]>><<pass 10>><<arousal 100>>
+    			<<if $pblevel gte 5>>
+    				<<set $pblevel to 5>><<set $pbgrowth to 7>><<set $pbstrip to 0>>
+    			<</if>>
+    			<<if $pblevelballs gte 5>>
+    				<<set $pblevelballs to 5>><<set $pbgrowthballs to 10>>
+    			<</if>>
+    		<</link>>
+    		<br>
+    	<</if>>
+    	<<if $worn.genitals.name isnot "chastity belt">>
+    		<<dyeicon>><<link [[给阴毛染色->Lake House Dye pubic hair]]>><</link>>
+    		<br>
+    	<</if>>
+	    <<ind>><<link [[什么也不刮->Lake House Bathroom]]>><<clotheson>><<dontHideRevert>><</link>>
+	<</if>>
+<</if>>

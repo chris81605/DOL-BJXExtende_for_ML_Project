@@ -1,0 +1,28 @@
+:: Lake House Upgrades Guard Post 
+<<effects>>
+
+可以建一个岗哨来安置看守。你需要雇佣人员来值班。
+<br><br>
+
+<span class="green">使用防卫设施与任何试图通过的打手战斗。</span>
+<br>
+<span class="purple">只有在配备人员的情况下才能工作。</span>
+<br>
+<span class="gold">花费£10000。</span>
+<br>
+<span class="blue">需要一个星期来建造。</span>
+<br>
+<span class="blue">在工程完工之前，湖边小屋一直会有工人在施工。</span>
+<br>
+<br>
+
+<<if $lakehouse.build>>
+	<span class="blue">一次只能进行一个建筑的升级。</span>
+	<br>
+<<elseif $money gte 1000000>>
+	<<link [[建造 (0:20)|Lake House Upgrades Build]]>><<pass 20>><<set $money -= 1000000>><<set $lakehouse.build to "guard post">><<set $lakehouse.build_timer to 7>><</link>>
+	<br>
+<</if>>
+<br>
+<<link [[返回|Lake House Upgrades]]>><</link>>
+<br>

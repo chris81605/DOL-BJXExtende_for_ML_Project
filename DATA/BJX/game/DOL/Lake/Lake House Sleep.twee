@@ -1,0 +1,66 @@
+:: Lake House Sleep 
+<<set _autosavehere to true>>
+<<sleep>><<effects>>
+	<<wakingEffects $sleepHoursTotal>>
+	<<if $nightmares gte 1 and $controlled is 0>>
+		你梦到自己被<<if ["haunt", "despair"].includes($wraith.state) and $rng lte 25>>苍白<<else>>黑暗<</if>>且恐怖的存在追捕着。
+	<<else>>
+		<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+			你的睡眠被淫荡的梦境所困扰。
+			<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+			<<arousal `100 * $sleepHoursTotal`>>
+			<<if $arousal gte $arousalmax>>
+				这将你推向了高潮。
+				<<orgasm>>
+			<</if>>
+		<<elseif !_wakingEffect>>
+			你睡了个好觉。
+			<br><br>
+		<<else>>
+			<br><br>
+		<</if>>
+	<</if>>
+	<<sleepeffects>>
+	/*
+	    <<if $baileywake is 1 and $placeholder is 1>>
+		You startle awake hearing commotion outside. <span class="red"><<nnpc_Hes Bailey>> here</span>.
+		<br><br>
+
+		<<lakehouse_assault_intro>>
+		<br><br>
+
+		<<set _bedroom to "Lake House Bed">>
+		<<set $wardrobe_location to "lakehouse">>
+		<<wardrobeSelection true>>
+		<<storeon _bedroom "check">>
+		<<if _store_check is 1>>
+			<<storeon _bedroom>>
+		<</if>>
+		<<link [[Prepare|Lake House Assault Wardrobe]]>><<endevent>><<set $phase to 1>><<unset $baileywake>><</link>>
+		<br>
+	*/
+	<<if $lakehouse.billsphase gte 4>>
+		你听到外面的动静惊醒了。<span class="red">他们是来收回房子的</span>。
+		<br><br>
+
+		<<radiooutfits>>
+		<br><br>
+
+		<<link [[起床|Lake House Repossession]]>><<bedclotheson "Lake House Bed">><</link>>
+		<br>
+	<<elseif $lakehouse.billsphase gte 3>>
+		你睡醒后想开灯，但灯似乎不亮了。事实上，房子里的任何电子设备似乎都无法正常运作。门前夹着一张纸，上面写着：“由于您未按时支付账单，您的水电已被切断。请立即支付账单，否则您的房屋将被收回。"
+		<br><br>
+
+		<<radiooutfits>>
+		<br><br>
+
+		<<link [[起床|Lake House Repossession]]>><<bedclotheson "Lake House Bed">><</link>>
+		<br>
+	<<else>>
+		<<radiooutfits>>
+		<br><br>
+
+		<<link [[起床|Lake House Bedroom]]>><<bedclotheson "Lake House Bed">><</link>>
+		<br>
+	<</if>>

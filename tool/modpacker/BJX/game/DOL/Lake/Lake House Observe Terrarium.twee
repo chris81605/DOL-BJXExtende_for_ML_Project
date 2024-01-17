@@ -1,0 +1,36 @@
+:: Lake House Observe Terrarium 
+<<effects>>
+<<if $lakehouse.smallpet is undefined>>
+	<<set $lakehouse.smallpet to {}>>
+<</if>>
+<<set _total to 0>>
+<<for _type, _num range $lakehouse.smallpet>>
+	<<set _total += _num>>
+<</for>>
+<<set _stress to -1 * ( 1 + _total)>>
+<<set _trauma to -1 * ( 1 + _total)>>
+<<stress _stress>><<trauma _trauma>>
+
+你坐了下来，观察着
+<<if _total is 0>>
+    空空如也的饲养箱，你思考着自己是不是应该去宠物店买些小生物养。
+    <br><br>
+<<else>>
+    饲养箱里的
+    <<for _type, _num range $lakehouse.smallpet>>
+	    <<if _num gte 1>>
+    	    <<if _type is "geckos">>
+        		小蜥蜴、
+        	<<elseif _type is "crabs">>
+        		小螃蟹、
+        	<<elseif _type is "turtles">>
+        		小乌龟、
+        	<</if>>
+	    <</if>>
+    <</for>>
+    看着它们的互动，不一会儿你就平静了下来。
+    <br><br>
+<</if>>
+
+<<link [[继续|Lake House Bedroom]]>><</link>>
+<br>

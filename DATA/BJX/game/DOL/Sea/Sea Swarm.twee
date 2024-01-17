@@ -1,0 +1,30 @@
+:: Sea Swarm 
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "fish" "鱼群" "朝你游来" "包围你" "抵挡" 1 9>>
+	<<set $swimdistance to 8>>
+	<<set $water to 1>>
+<</if>>
+<<if $swimdistance gte 8>>
+	你被困在鱼群中央。
+<<elseif $swimdistance gte 2>>
+	你正在逃离鱼群。
+<<else>>
+	你几乎就要逃脱。
+<</if>>
+<<underwater>>
+<<effects>>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+<<if $stress gte $stressmax>>
+	<span id="next"><<link [[继续|Sea Swarm Finish]]>><</link>></span><<nexttext>>
+<<elseif $swimdistance lte 0>>
+	<span id="next"><<link [[继续|Sea Swarm Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Sea Swarm]]>><</link>></span><<nexttext>>
+<</if>>

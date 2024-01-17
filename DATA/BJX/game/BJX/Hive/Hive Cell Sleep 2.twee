@@ -1,0 +1,25 @@
+:: Hive Cell Sleep 2 
+<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
+<<if _preventUpdate is undefined>>
+	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName})>>
+<</if>>
+<<sleep>><<effects>>
+<<if $nightmares gte 1 and $controlled is 0>>
+	你梦见你被一些黑暗可怖的东西追猎。
+<<else>>
+	<<if $specialClothesEffects.bimboTotal gte random(100,1000) or $arousal gte 9000>>
+		你的睡眠被肮脏的梦境所扰乱。
+		<<arousal `$specialClothesEffects.bimboTotal / 10 * $sleepHoursTotal`>>
+		<<arousal `100 * $sleepHoursTotal`>>
+		<<if $arousal gte $arousalmax>>
+			你把自己推向了顶点。
+			<<orgasm>><<set _orgasm to true>>
+		<</if>>
+	<<else>>
+		你睡的很安稳。
+	<</if>>
+<</if>>
+<br><br>
+<<sleepeffects>>
+<br><br>
+<<link [[起床|Hive Cell]]>><</link>>

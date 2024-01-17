@@ -1,0 +1,36 @@
+:: Seasons Island Market 
+你在市场里，绿洲旁的水果摊一字排开，出售各种商品。
+<br><br>
+<span class="gold">购买</span>
+<br><br>
+<<set _sellitem to ["apple","orange","banana","lemon","pear","strawberry","peach","plum","bottle_of_milk","chicken_egg"]>>
+<<for _key, _value range setup.plants>>
+	<<if _sellitem.includes(_value.name)>>
+        <<set _type to _value.name>>
+	    <<set _name to _value.plural>>
+	    <<set _cost to _value.plant_cost * 0.5 * 0.8>>
+	    <<if $money gte _cost * 100>>
+            <<set _title to "买50个" + _name + " £" + _cost + " (0:02)">>
+            <<print "<<link [[" + _title + "|Seasons Island Market]]>><<pass 2>><<tending_give " + _type + " 50>><<set $money -= " + _cost + " * 100>><</link>>">>
+            <br>
+        <</if>>
+	<</if>>
+<</for>>
+<br>
+
+<span class="gold">出售</span>
+<br><br>
+<<for _key, _value range setup.plants>>
+	<<if ["flower","produce","fruit"].includes(_value.type)>>
+	    <<set _type to _value.name>>
+	    <<set _name to _value.plural>>
+	    <<set _cost to _value.plant_cost * 0.5 * 0.6>>
+		<<if $plants[_type] isnot undefined and $plants[_type].amount >= 50>>
+            <<set _title to "卖50个" + _name + " £" + _cost + " (0:02)">>
+            <<print "<<link [[" + _title + "|Seasons Island Market]]>><<pass 2>><<set $plants['" + _type + "'].amount -= 50>><<set $money += " + _cost + " * 100>><<famebusiness 1>><</link>>">>
+	        <br>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<link [[返回 (0:05)|Desert Village]]>><<pass 5>><</link>>

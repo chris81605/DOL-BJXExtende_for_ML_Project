@@ -1,0 +1,28 @@
+:: Hive Cell 
+<<set $outside to 0>><<set $location to "hive">><<effects>>
+你看到自己在一个潮湿的蜂窝状监狱中。窗栏比你想象的要坚固，但你感觉后墙似乎有一些破损。
+<br><br>
+
+<<link [[等待 (0:15)|Hive Cell Wait]]>><<pass 15>><</link>>
+<br>
+<<link [[睡觉|Hive Cell Sleep 1]]>><</link>>
+<br>
+<<if $hivecelltear gte 13>>
+	<<link [[脱身|Hive Cell Hole]]>><</link>>
+	<br>
+<<elseif $hivecelltear gte 12 and $physiquesize lte 12000>>
+	<<link [[脱身|Hive Cell Hole]]>><</link>><<small_text>>
+	<br>
+<<elseif $hivecelltear gte 11 and $physiquesize lte 10000>>
+	<<link [[脱身|Hive Cell Hole]]>><</link>><<small_text>>
+	<br>
+<<elseif $hivecelltear gte 10 and $physiquesize lte 6000>>
+	<<link [[脱身|Hive Cell Hole]]>><</link>><<small_text>>
+	<br>
+<<elseif $hivecelltear gte 1>>
+	<<link [[破坏牢房墙壁 (1:00)|Hive Cell Wall Tear]]>><<pass 1 hour>><<set $hivecelltear += 1>><</link>>
+	<br>
+<<else>>
+	<<link [[观察破损墙壁|Hive Cell Wall Examine]]>><<set $hivecelltear to 1>><</link>>
+	<br>
+<</if>>

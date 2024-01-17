@@ -1,0 +1,53 @@
+:: Hive Corridor 
+<<set $outside to 0>><<set $location to "hive">><<effects>><<set $hivestage to 1>>
+<<if $foresthunt gte 1>>
+	<span class="lblue">你在蜂巢里很安全，无论什么都伤害不到你。</span>
+	<br><br>
+	<<set $foresthunt to 0>>
+<</if>>
+<<if $stress gte 10000>>
+	<<passouthive>>
+<<elseif $NPCName[$NPCNameList.indexOf("泰勒")].love gte $npclovehigh and $TaylorFreed is 0>>
+    你刚来到走廊，突然一名护卫走近并拦住了你。
+    <br><br>
+    <<link [[继续|Throne Vouch 1]]>><</link>>
+    <br>
+<<else>>
+	<<if Time.dayState is "dawn">>
+		<<if random(1)>>
+			<<beastNEWinit 5 bee>>
+		<<else>>
+			<<beastNEWinit 5 wasp>>
+		<</if>>
+		走廊里熙熙攘攘，<<beastsplural>>正赶着去工作。
+	<<elseif Time.dayState is "day">>
+		走廊里沉默始终，所有成员都各就其位。
+	<<elseif Time.dayState is "dusk">>
+		<<if random(1)>>
+			<<beastNEWinit 5 bee>>
+		<<else>>
+			<<beastNEWinit 5 wasp>>
+		<</if>>
+		走廊里开始嘈杂，大多数<<beastsplural>>都结束了手头的工作，开始谈天说地。
+	<<elseif Time.dayState is "night">>
+		走廊里沉默始终，大家不是在睡觉就是在轻手轻脚。
+	<<else>>
+		你正站在蜂巢的走廊里。 
+	<</if>>
+	<br><br>
+
+	<<if $TaylorSeen is 0 and $TaylorMissing is 0>>
+		你在走廊上看见警卫把一个小孩带进牢房。
+		<br><br>
+		<<set $TaylorSeen to 1>><<set $TaylorMissing to 1>>
+	<</if>>
+	
+	<<link [[营房|Hive Barracks]]>><<endevent>><</link>>
+	<br>
+	<<link [[牢房|Hive Cell Outside]]>><<endevent>><</link>>
+	<br>
+	<<link [[御室|Hive Throne Room]]>><<endevent>><</link>>
+	<br>
+	<<link [[离开蜂巢|Hive Approach]]>><<endevent>><</link>>
+	<br>
+<</if>>

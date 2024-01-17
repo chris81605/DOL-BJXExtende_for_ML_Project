@@ -1,0 +1,23 @@
+:: Sea Reef 
+<<set $location to "sea">><<water>><<effects>>
+你朝着四色的光芒游去。
+<<physique>>
+<br><br>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<swimmingdifficulty 1 100 true>>
+	<<if $swimmingSuccess>>
+		<span class="green">你成功游到了光芒处，</span>一座奇怪的小岛顿时出现在眼前。
+		<br><br>
+		<<link [[调头回去 (0:10)|Sea]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>><<swimmingdifficulty 1 300>>
+		<br>
+		<<link [[游向小岛 (0:10)|Seasons Island Landing]]>><<pass 10>><<tiredness 2>><</link>><<gtiredness>>
+		<br>
+	<<else>>
+		还没等你接近，一个大浪打来，<span class="red">你被裹挟在其中，</span>进一步推向大海深处。
+		<br><br>
+		<<link [[继续|Sea]]>><<set $sea += 10>><</link>>
+		<br>
+	<</if>>
+<</if>>

@@ -1,0 +1,34 @@
+:: Bunker Spider 
+<<effects>>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "spiders" "蜘囊" "爬行着" "破开" "稳定" 1 9>>
+	<<set $timer to 30>>
+<</if>>
+
+<<if $timer gte 25>>
+    上方那些满是蜘蛛网的老旧铁链正在吱呀作响，这样下去的话，它们一定会断开的。
+<<elseif $timer gte 20>>
+    伴随着轰的一声，天花板骤然碎裂，碎片散落的满地都是。
+<<elseif $timer gte 10>>
+    那些铁制的东西正在被继续腐蚀着。
+<<elseif $timer gte 1>>
+    天花板上正在发出不妙的嘎吱声。
+<<else>>
+    天花板上的一根钢梁骤然断裂，蜘蛛网也随之塌落到了地面上。
+<</if>>
+<br><br>
+
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+
+<<if $timer lte 0>>
+	<span id="next"><<link [[继续|Bunker Spider Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bunker Spider]]>><</link>></span><<nexttext>>
+<</if>>

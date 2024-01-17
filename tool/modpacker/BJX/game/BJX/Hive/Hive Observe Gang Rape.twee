@@ -1,0 +1,24 @@
+:: Hive Observe Gang Rape 
+<<if $molestationstart is 1>>
+    <<set $molestationstart to 0>>
+    <<controlloss>>
+    <<violence 1>>
+    <<neutral 1>>
+    <<molested>>
+    <<beastCombatInit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<beast $enemyno>>
+<<if $enemyhealth gt 0>><<npcdamage>><</if>>
+<<stateman>>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Hive Observe Gang Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Hive Observe Gang Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hive Observe Gang Rape]]>><</link>></span><<nexttext>>
+<</if>>

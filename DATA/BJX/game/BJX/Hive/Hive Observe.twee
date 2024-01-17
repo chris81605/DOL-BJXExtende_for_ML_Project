@@ -1,0 +1,47 @@
+:: Hive Observe 
+<<set $outside to 1>><<set $location to "hive">><<effects>>
+<<cleareventpool>>
+<<addinlineevent "observe_cooperate">>
+    <<beastNEWinit 5 bee>>
+    你看着<<beastsplural>>合作完成任务，这让你更深入地了解了它们如何生活。
+    <br><br>
+    <<transform bee 1>>
+    <<link [[继续|Hive Entrance]]>><<endevent>><</link>>
+<</addinlineevent>>
+<<addinlineevent "observe_enemyhive">>
+    <<beastNEWinit 3 wasp>>
+    来自另一个蜂巢的一小群<<beastsplural>>接近你正观察的蜂巢入口，而后被工蜂拦下。  
+    <br><br>
+    在来自另一个蜂巢的<<beastsplural>>逃离之前，一场战斗爆发了。这让你对蜜蜂的领地意识有了更深入的认知。
+    <br><br>
+    <<transform bee 1>>
+    <<link [[继续|Hive Entrance]]>><<endevent>><</link>>
+<</addinlineevent>>
+<<addinlineevent "observe_queen">>
+    你瞥到了蜂后一眼，但很快她就从你的视线里消失了。管中窥豹，她很漂亮。古怪的感觉油然而生：汝需服从。
+    <br><br>
+    <<transform bee 1>>
+    <<link [[继续|Hive Entrance]]>><<endevent>><</link>>
+<</addinlineevent>>
+<<addinlineevent "observe_hunt" 0.5>>
+    <<beastNEWinit 3 wasp>>
+    一小群<<beastsplural>>带着简陋的长矛离开了蜂巢。你看见它们进入树林，便蹑手蹑脚地跟上，突然间<<beastsplural>>停下了脚步。
+    <br><br>
+    <<if random(1)>>
+        <<link [[继续|Hive Wasp Detect]]>><</link>>
+    <<else>>
+        <<link [[继续|Hive Wasp Continue]]>><</link>>
+    <</if>>  
+<</addinlineevent>>
+<<addinlineevent "observe_workers" 0.5>>
+    <<beastNEWinit 3 bee>>
+    你跟着一群<<beastsplural>>进入森林里的一片小空地。空地上开满了美丽的花朵。 
+    <br><br>
+    你小心翼翼地看着<<beastsplural>>轻手轻脚地收集花粉。在填满自己后，它们将返回蜂巢。 
+    <br><br>
+    看见<<beastsplural>>为蜂巢忙前忙后，你的内心感到温暖。
+    <br><br>
+    <<transform bee 1>>
+    <<link [[继续|Hive Entrance]]>><<endevent>><</link>>  
+<</addinlineevent>>
+<<runeventpool>>

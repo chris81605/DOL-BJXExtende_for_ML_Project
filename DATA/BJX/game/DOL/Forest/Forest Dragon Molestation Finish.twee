@@ -1,0 +1,68 @@
+:: Forest Dragon Molestation Finish 
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	满意之后，<<beasttype>>回到了它的巢穴。
+	<<if $monster is 1>>
+		"下次我可能会把你带上，软绵绵的小家伙。"<<bhe>>轻声说道。
+	<</if>>
+	<br><br>
+
+	<<tearful>>你继续前行。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+
+	你吓退了那只强壮的<<beasttype>>，<<bHe>>逃进森林深处。
+	<<if $monster is 1>>
+		"你根本不是小点心！也不是软绵绵的！"<<bhe>>大叫着，边跑边喊。
+	<</if>>
+	<br><br>
+
+	<<tearful>>你继续前行。
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $rescue is 1 and $alarm is 1>>
+	你听到附近传来一声枪响，一颗子弹落在<<beasttype>>附近。<<bHe>>惊恐地后退并逃进了森林里。
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		伊甸冒了出来，帮助你振作起来。"见鬼，我从没见过这么大的龙。"<<nnpc_he "Eden">>喃喃道，"你还好吗？"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			伊甸环顾四周片刻。"我们可能已经涉险过深，超出了那个店主的能力范围，"<<nnpc_he "Eden">>说道。
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			伊甸拍了拍你的肩膀。"我能救你是因为碰巧在这个区域，"<<nnpc_he "Eden">>说，"<span class="gold">我可能不会一直在你身边，但我应该能在森林的任何地方救你。</span>如果你有麻烦，请大声呼喊我。"
+			<br><br>
+		<</if>>
+
+		<<link [[回到小屋 (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[道别|Forest]]>><<endevent>><</link>>
+	<</if>>
+<</if>>

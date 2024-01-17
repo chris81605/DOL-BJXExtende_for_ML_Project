@@ -1,0 +1,14 @@
+:: Seasons Island Inn 
+你在一座较大的石头建筑内，房间里摆满了小桌子，一个皮肤黝黑的大个子坐在柜台前。你进来时，他抬起头问道，"你需要什么？"一块牌子上写着旅馆住一晚的价格是800。
+<br><br>
+<<if $money gte 80000 and $desertinn isnot 1 and Time.hour isnot 6>>
+    <<link [[过夜|Desert Village Pay]]>><<set $money -= 80000>><</link>>
+    <br>
+<<elseif Time.hour is 6>>
+    你必须等待一个小时，其他顾客离开后才能买到房间。
+    <br>
+<<elseif $desertinn is 1>>
+    <<link [[进入你的房间|Desert Village Room]]>><</link>>
+    <br>
+<</if>>
+<<link [[离开 (0:05)|Desert Village]]>><<pass 5>><<set $desertinn to 0>><</link>>
