@@ -1,0 +1,393 @@
+:: Temple Blessing
+
+<<temple_effects>><<effects>>
+Not knowing how to give a blessing exactly, you wave your hand over the <<persons>> head. It seems to satisfy <<him>>.
+"Thank you child," <<he>> says. "Lord watch over you."
+<br><br>
+"Could I have a blessing too?" says a <<person2>><<person>> behind you.
+<br><br>
+"And me!" says a <<person3>><<person>> to the side. "I want your angel magic."
+<br><br>
+You spend several minutes blessing everyone who asks.
+<br><br>
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Blessing Refuse
+
+<<temple_effects>><<effects>>
+The <<person1>><<person>> turns away, disappointed but not impolite.
+<br><br>
+<<endevent>>
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple Garden Join
+
+<<temple_effects>><<effects>>
+You sit on the grass beside the initiates.
+<<if $temple_rank is "initiate">>
+	They're happy to accept you. You recognise a couple from school.
+<<else>>
+	They're initially wary due to your rank at the temple, but you soon convince them you mean no harm.
+<</if>>
+<br><br>
+<<if $weather is "rain">>
+	You chat with them for a while, sheltering from the rain beneath the boughs of a tree.
+<<elseif $weather is "snow">>
+	You chat with them for a while, sheltering from the snow beneath the boughs of a tree.
+<<elseif $weather is "clear">>
+	You chat with them for a while, enjoying the gentle feel of the sun.
+<<else>>
+	You chat with them for a while, enjoying the cool breeze washing into the nearby forest.
+<</if>>
+<br><br>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Garden Join Sydney
+
+<<temple_effects>><<effects>><<run statusCheck("Sydney")>>
+You sit on the grass beside Sydney. <<sydneyGreeting>> <<if $sydneyromance is 1>><<He>> scoots closer to you, and puts <<his>> head on your shoulder.<<else>><<He>> smiles at you.<</if>>
+<<if $temple_rank is "initiate">>
+	They're happy to accept you. You recognise a couple from school.
+<<elseif $temple_rank is undefined or $temple_rank is "prospective">>
+	They're initially wary around you for being an outsider, but Sydney assures them that you're fine. <<if $sydneyromance is 1>>A few whisper of your relationship, but seem to warm up to you regardless.<</if>>
+<<else>>
+	They're initially wary due to your rank at the temple, but Sydney assures them you mean no harm.
+<</if>>
+<br><br>
+<<if $weather is "rain">>
+	You chat with them for a while, sheltering from the rain beneath the boughs of a tree.
+<<elseif $weather is "snow">>
+	You chat with them for a while, sheltering from the snow beneath the boughs of a tree.
+<<elseif $weather is "clear">>
+	You chat with them for a while, enjoying the gentle feel of the sun.
+<<else>>
+	You chat with them for a while, enjoying the cool breeze washing into the nearby forest.
+<</if>>
+<br><br>
+They begin to leave, and Sydney joins them. <<if $sydneyromance is 1>><<He>> kisses you on the cheek before leaving. <</if>>"Back to work, no rest for the <<if _sydneyStatus.includes("corrupt")>>wicked<<else>>pious<</if>>."
+<br><br>
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple Garden Encourage
+
+<<temple_effects>><<effects>>
+<<set $temple_garden += 10>>
+You encourage the initiates to help tidy the garden. They don't seem motivated, so you get stuck in, pulling weeds and trimming hedges. This works, and together you soon have the garden looking much more presentable.
+<br><br>
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple Garden Encourage Sydney
+
+<<temple_effects>><<effects>>
+<<set $temple_garden += 15>>
+You encourage the initiates to help tidy the garden. They don't seem motivated, up until Sydney joins in. Together you soon have the garden looking much more presentable.
+<br><br>
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple Stairs Join
+
+<<temple_effects>><<effects>>
+You duck beneath the stairs, and sit beside the initiates.
+<<if $temple_rank is "initiate" or $temple_rank is "monk" or $temple_rank is "priest">>
+	They're happy to accept one of their own.
+<<else>>
+	They're wary at first due to your rank at the temple, but they soon warm up.
+<</if>>
+<br><br>
+You chat for a while. Hiding whenever a <<generate1>><<person1>><<monk>> walks by is fun.
+<br><br>
+<<endevent>>
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure)>>
+	<<if $temple_rank is "initiate">>
+		You leave the space beneath a stairwell. A moment later you hear footsteps behind you. One of the initiates, a <<generateyTemple 1>><<person1>><<person>>, catches up to you. "You're cute," <<he>> says. <<He>> lightly grasps your forearm. "I know a quiet place we can be alone."
+	<<else>>
+		You leave the space beneath a stairwell. A moment later you hear footsteps behind you. One of the initiates, a <<generateyTemple 1>><<person1>><<person>>, catches up to you. "Excuse me, <<sister>>..." <<he>> says. <<He>> lightly grasps your forearm. "I've been having sinful thoughts about you. Won't you help me repent?"
+	<</if>>
+	<br><br>
+	<<link [[Accept|Temple Stairs Sex Accept]]>><<grace -1 monk>><</link>><<promiscuous2>><<lgrace monk>>
+	<br>
+	<<link [[Refuse|Temple Stairs Sex Refuse]]>><<grace 3 monk>><</link>><<ggrace monk>>
+	<br>
+<<else>>
+	<<link [[Next|Temple]]>><</link>>
+	<br>
+<</if>>
+
+:: Temple Stairs Encourage
+
+<<temple_effects>><<effects>>
+<<set $temple_quarters += 10>>
+You encourage the initiates to help tidy the quarters. They don't seem motivated, so you get stuck in, sweeping dust and sorting clothes. This works, and together you soon have the quarters looking much more presentable.
+<br><br>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Stairs Sex Accept
+
+<<temple_effects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"O-okay," you say. "But be gentle."
+<<elseif $speech_attitude is "bratty">>
+	"I thought you'd never ask," you say.
+<<else>>
+	"As long as you're discreet," you say.
+<</if>>
+<br><br>
+The <<person>> tightens <<his>> grip on your arm. Eager, <<he>> pulls you along a corridor, and down a flight of stairs. There's an open door on the left. Inside is a large, full sack. <<He>> pushes you onto it. The contents are soft, which is fortunate. The <<person>> leaps atop you.
+<br><br>
+<<link [[Next|Temple Stairs Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Temple Stairs Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>><<promiscuity5>>
+	<<enable_rescue>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Temple Stairs Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Temple Stairs Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Temple Stairs Sex Finish
+
+<<set $outside to 0>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person>> falls on top of you, panting. "I bet those <<monks>> would love a piece of you too," <<he>> says. "Thanks babe."
+	<br><br>
+	Satisfied, the <<person>> leaves the room. <<He>> pokes <<his>> head around the corner first as a precaution. <<tearful>> you follow suit.
+	<br><br>
+<<elseif $enemyhealth lte 0>>
+	You shove the <<person>> onto another sack. This one contains harder material if <<his>> shout of pain is anything to go by. <<tearful>> you dash from the room and back up the stairs.
+	<br><br>
+<<elseif $rescue is 1 and $alarm is 1>>
+	You hear steps thunder down the stairs outside. The <<person>> tries to flee, but gets <<his>> legs tangled in the sack. <<He>> tumbles to the floor.
+	<br><br>
+	<<generate2>><<person2>>A <<monk>> runs into the room, takes one look at the scene, and grasps the <<person1>><<persons>> arm. "Time for discipline," <<person2>><<he>> growls. <<He>> glares at you. "Don't think you're getting away with it either. I've got my eye on you." <<He>> hauls the <<person1>><<person>> from the room.
+	<<lgrace>><<grace -1>>
+	<br><br>
+	<<tearful>> you climb back up the stairs.
+	<br><br>
+<<else>>
+	The <<person>> backs away from you, looking dejected. <<He>> leaves the room, poking <<his>> head around the corner first as a precaution. <<tearful>> you follow suit.
+	<br><br>
+<</if>>
+<<clotheson>>
+<<endcombat>>
+<<link [[Next|Temple]]>><</link>>
+
+:: Temple Stairs Sex Refuse
+
+<<temple_effects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"But that's forbidden!" you say. It comes out louder than you meant it to. The <<person>> leaves in a hurry.
+<<elseif $speech_attitude is "bratty">>
+	"You're not worth getting in trouble," you say. The <<person>> leaves, looking a little dejected.
+<<else>>
+	"You're cute too," you say. "But I'm trying to be good. Sorry." The <<person>> looks disappointed, but nods.
+<</if>>
+<br><br>
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Help
+
+<<temple_effects>><<effects>>
+You drop to your knees and begin gathering the scrolls. This shakes the initiate out of <<his>> lethargy, and <<he>> joins in. Some of the scrolls travelled a long way, and many need to be fished out from beneath pews. Despite this, you manage to gather them all.
+<br><br>
+"Thank you," the initiate says, smiling. "I'm so clumsy." <<He>> pauses for a moment. Then, in a burst of daring, leans in and plants a kiss on your cheek. <<He>> scurries away before you can respond.
+<br><br>
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Donations
+
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+You join the procession, falling in line behind a <<person2>><<person>>.
+<br><br>
+The <<person1>><<monk>> leads you to Danube Street, and up to one of the mansion doors. <<He>> rings the bell, and <<person4>><<person>> answers.
+<<if $rng gte 51>>
+	"Salvation is bloody expensive," <<he>> mutters, pushing <<his>> card into a machine proffered by the <<monk>>. <<He>> enters <<his>> pin, removes the card, and shuts the door without another word.
+	<br><br>
+	"<<Hes>> always like that," the <<person1>><<monk>> says as <<he>> herds you and the others back to the street.
+<<else>>
+	<<He>> takes one look at the assembled procession, then slams the door.
+	<br><br>
+	"Some people are like that," the <<person1>><<monk>> mutters as <<he>> herds you and the others back to the street.
+<</if>>
+<br><br>
+<<pass 30>>
+The rest of the street continues in much the same way. Some homes are more polite than others.
+<<if currentSkillValue('skulduggery') gte 400>>
+	<span class="purple">You notice the <<monk>> trace a holy symbol on each doorframe as <<he>> reaches to knock.</span>
+	<<gawareness>><<awareness 1>>
+<</if>>
+<br><br>
+<<link [[Next|Temple Donations 2]]>><</link>>
+<br>
+
+:: Temple Donations 2
+
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+<<pass 60>>
+You arrive before another door. A <<person5>><<person>> answers. The <<person1>><<monk>> asks for a donation and talks about the importance of maintaining the local temple. The <<person5>><<person>> barely listens, instead leering at the <<person2>><<person>>.
+<br><br>
+<<if $promiscuity gte 35>>
+	<<link [[Pull up the initiate's skirt|Temple Donations Pull]]>><<famesex 5>><</link>><<promiscuous3>>
+	<br>
+<</if>>
+<<link [[Wait|Temple Donations Still]]>><</link>>
+<br>
+
+:: Temple Donations Pull
+
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+
+You grasp the hem of the initiate's habit, and <span class="lewd">pull it above <<his>> waist.</span> <<Hes>> not wearing <<if $pronoun is "m">>underwear<<else>>panties<</if>>.
+<<promiscuity3>>
+
+The initiate shrieks and struggles to cover up. The other initiates avert their eyes, or stare astonished. The <<person1>><<monk>> moves to interrupt you.
+<br><br>
+
+"Hang on!" the <<person5>><<person>> says, pulling a card from <<his>> pocket. The <<person1>><<monk>> hesitates.
+<br><br>
+
+<<link [[Take it further|Temple Donations Take]]>><<famesex 5>><</link>><<promiscuous3>>
+<br>
+<<link [[Release the initiate|Temple Donations Release]]>><</link>>
+<br>
+
+:: Temple Donations Take
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+
+You bunch up the skirt in one hand, and stroke the <<person2>><<persons>> <<if $NPCList[1].penis isnot "none" and !npcHasStrapon(1)>>$NPCList[1].penisdesc<<else>>pussy<</if>> with the other. <<He>> gives up trying to pull <<his>> habit down, and instead raises one leg to cover. This doesn't work much better.
+<<promiscuity3>>
+
+<<if $NPCList[1].penis isnot "none" and !npcHasStrapon(1)>>
+	You feel <<him>> harden under your attentions, despite <<his>> protests. The <<person5>><<person>> is impressed.
+<<else>>
+	You part the <<persons>> pussy lips, giving the <<person5>><<person>> a glimpse inside.
+<</if>>
+The initiate shrieks again, and squirms with more vigour. The <<person1>><<monk>> breaks from <<his>> stupour. <<He>> pulls the initiate away from you.
+<br><br>
+
+"Nice," the <<person5>><<person>> chuckles, "Worth a donation, I think."
+<br><br>
+
+No one says anything on the way back to the temple, but the initiates blush the whole way.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Donations Release
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+
+Deciding not to be too cruel, you release the initiate. <<person2>><<He>> scrambles to cover back up. The <<person5>><<person>> sighs in disappointment, and puts <<his>> card away.
+<br><br>
+
+No one says anything on the way back to the temple, but the initiates blush the whole way.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple Donations Still
+<<set $outside to 1>><<set $location to "town">><<temple_effects>><<effects>>
+
+You wait for the <<person1>><<monk>> to make <<his>> pitch. The <<person5>><<person>> isn't interested. The <<person2>><<person>> stares at <<his>> feet.
+<br><br>
+
+The procession returns to the temple. You don't think you made much, but the <<person1>><<monk>> seems happy.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Temple]]>><</link>>
+<br>
+
+:: Temple March Clink
+<<effects>>
+
+A <<personsimple>> smiles at you as <<he>> passes. "Our holy ornaments are quite clunky," <<he>> says. "Thank you for your concern, child."
+<<if $skulduggery gte 400>>
+	<span class="green">You can tell this is a practised remark. </span> <<Hes>> hiding something.
+<</if>>
+<br><br>
+
+They march down a passage, deeper into the temple.
+<br><br>
+
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple March Encourage
+<<effects>>
+
+"Thank you," says a <<monk>>. <<He>> glances around. "We fulfilled our duties without incident, and we go now to prayer."
+<br><br>
+
+They disappear down the passage to the armoury. They'll be there awhile, cleaning gunk off their whips.
+<br><br>
+
+<<link [[Next|Temple]]>><<endevent>><</link>>
+<br>
+
+:: Temple March Help
+<<effects>>
+
+You follow the <<monks>> down the passage to the armoury, and help clean their whips of the gunk of battle.
+<br><br>
+<<if $rng gte 81>>
+	"That was a greater monstrosity," says one. "Surely."
+	<br>
+	"That weren't even a regular monstrosity!" replies another. "That was a babe!"
+<<elseif $rng gte 61>>
+	"They almost got me this time," laughs one.
+	<br>
+	"Would have, if not for me." This causes an argument.
+<<elseif $rng gte 41>>
+	"I bagged six," says one.
+	<br>
+	"Seven!" replies another.
+<<elseif $rng gte 21>>
+	"It's worse than when I first arrived," says one. "More of them."
+	<br>
+	"The grass is just greener in the past," replies another.
+<<else>>
+	"Do you think guns would work better?" muses one.
+	<br>
+	"We're conspicuous enough as it is," replies another.
+<</if>>
+<br><br>
+"This talk is not proper," interrupts a senior <<monk>>. "Stay focused." They're silent until the weapons are spotless.
+<br><br>
+
+<<link [[Next|Temple]]>><<endevent>><</link>>

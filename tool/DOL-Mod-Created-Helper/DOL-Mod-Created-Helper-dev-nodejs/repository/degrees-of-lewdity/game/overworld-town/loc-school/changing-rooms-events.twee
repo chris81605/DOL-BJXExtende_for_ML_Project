@@ -1,0 +1,795 @@
+:: School Changing Room Escape
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<if $physiqueSuccess>>
+	<span class="green">You wrench your arm free of the <<persons>> grip.</span> You dodge <<his>> second attempt and flee the room.
+	<br><br>
+	<<link [[Next|School Pool Entrance]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	You try to wrench your arm free of the <<persons>> grip, <span class="red">but you are not strong enough.</span> "I know just how to punish a pervert," <<he>> says. "You've seen us undressed, so now we see you. Strip."
+	<br><br>
+	<<if $exhibitionism gte 75>>
+		<<link [[Strip|School Changing Room Strip]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+		<br>
+	<<else>>
+		<<link [[Strip|School Changing Room Strip]]>><<trauma 6>><<stress 6>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+		<br>
+	<</if>>
+	<<if $promiscuity gte 35>>
+		<<link [[Seduce|School Changing Room Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [[Refuse|School Changing Room Refuse Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: School Changing Room Flirt
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<endevent>>
+<<if $changingRoomGender is "boys">>
+	<<generatesm1>>
+<<else>>
+	<<generatesf1>>
+<</if>>
+<<person1>>
+"I can't help it," you say. "You're all so hot."
+<<promiscuity1>>
+Some of the $changingRoomGender blush. The <<person>> seems less impressed. "I know just how to punish a pervert," <<he>> says. "You've seen us undressed, so now we see you. Take off your clothes."
+<br><br>
+<<if $exhibitionism gte 75>>
+	<<link [[Strip|School Changing Room Strip]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+	<br>
+<<else>>
+	<<link [[Strip|School Changing Room Strip]]>><<trauma 6>><<stress 6>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+	<br>
+<</if>>
+<<if $promiscuity gte 35>>
+	<<link [[Seduce|School Changing Room Seduce]]>><</link>><<promiscuous3>>
+	<br>
+<</if>>
+<<link [[Refuse|School Changing Room Refuse Molestation]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: School Changing Room Apologise
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+"I-I'm sorry," you say. "I get the rooms muddled."
+<br><br>
+"You think I'll believe that?" the <<person>> laughs. "I know just how to punish a pervert. You've seen us undressed, so now we see you. Take off your clothes."
+<br><br>
+<<if $exhibitionism gte 75>>
+	<<link [[Strip|School Changing Room Strip]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+	<br>
+<<else>>
+	<<link [[Strip|School Changing Room Strip]]>><<trauma 6>><<stress 6>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+	<br>
+<</if>>
+<<if $promiscuity gte 35>>
+	<<link [[Seduce|School Changing Room Seduce]]>><</link>><<promiscuous3>>
+	<br>
+<</if>>
+<<link [[Refuse|School Changing Room Refuse Molestation]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: School Changing Room Strip
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<set _genderAppearance to $player.gender_appearance is "m" ? "boy" : "girl">>
+<<if $phase is 1>>
+	You <<nervously>> remove your clothing. Some $changingRoomGender blush and look away, but most are at least curious. A crowd forms around you. You're soon bare in front of them.
+	<<covered>>
+	<br><br>
+<<else>>
+	<<flaunting>> you <<nervously>> remove your clothing. You make eye contact with as many $changingRoomGender as you can as you undress. Many blush and look away, but a crowd still forms around you. You're soon bare in front of them.
+	<<covered>><<exhibitionism5>>
+<</if>>
+<<strip>>
+
+<<if $player.gender is $player.gender_appearance or playerChastity("hidden")>>
+	The <<person>> snatches your clothes away. "If you want them back," <<he>> says. "You better do what we say."
+	<br><br>
+	The other $changingRoomGender shout suggestions.
+	<<if $worn.neck.collared is 1>>
+		The <<person>> ignores them, and picks up your leash. "Perfect," <<he>> says. "Time for walkies. Get on your knees like a good dog."
+		<br><br>
+		<<link [[Get on knees (0:10)|School Changing Room Knees]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<<else>>
+		"Everyone get your phones," <<he>> says to the $changingRoomGender around <<him>>. "Make sure you get lots of evidence." <<He>> looks back at you. "Time for your punishment. Bend over."
+		<br><br>
+		<<link [[Bend over (0:10)|School Changing Room Bend]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $player.penisExist and $player.vaginaExist>>
+	<<if $schoolrep.herm gte 5 and !$worn.face.type.includes("mask")>>
+		The $changingRoomGender break into excitement as your <<genitals_are>> revealed. "I knew it," the <<person>> says, reaching forward to seize your clothes. "You're the school freak."
+		<br><br>
+	<<elseif $schoolrep.herm gte 3 and !$worn.face.type.includes("mask")>>
+		The $changingRoomGender break into excitement as they see your <<genitals>>. "You're the freak I keep hearing about," the <<person>> says, reaching forward to seize your clothes. "I didn't believe it."
+		<br><br>
+	<<else>>
+		The $changingRoomGender gape at your <<genitals>>, too stunned to speak. The <<person>> is first to shake free of <<his>> stupour. "You're a freak," <<he>> says as <<he>> seizes your clothes.
+		<br><br>
+	<</if>>
+	<<if $promiscuity gte 35>>
+		<<link [[Seduce|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [[Say that's just the way you are|School Changing Room Crossdress Honest]]>><</link>>
+	<br>
+	<<link [[Blame a curse (0:05)|School Changing Room Herm Explain]]>><<set $phase to 0>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<link [[Blame strange science (0:05)|School Changing Room Herm Explain]]>><<set $phase to 1>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<schoolrep herm 1>>
+<<else>>
+	<<if $schoolrep.crossdress gte 5 and !$worn.face.type.includes("mask")>>
+		"So the rumours are true," the <<person>> says, satisfied. "You're really a <<gender>>. Why do you do it? Are you just a pervert?"
+	<<elseif $schoolrep.crossdress gte 3 and !$worn.face.type.includes("mask")>>
+		The <<person>> gapes. "You're the crossdresser I keep hearing about," <<he>> says. "Why do you do it? Are you just a pervert?"
+	<<else>>
+		The <<person>> gapes. "You're not a _genderAppearance?" <<he>> says. "Why were you dressed as one?"
+	<</if>>
+	<br><br>
+	<<if $promiscuity gte 35>>
+		<<link [[Seduce|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+	<<link [["Say you like dressing as a " + _genderAppearance|School Changing Room Crossdress Honest]]>><</link>>
+	<br>
+	<<link [[Say you were forced to (0:05)|School Changing Room Crossdress Forced]]>><<pass 5>><<status -10>><</link>><<lcool>>
+	<br>
+	<<schoolrep crossdress 1>>
+<</if>>
+
+
+:: School Changing Room Refuse Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	<<enableSchoolRescue "delinquency">>
+	<<if $changingRoomGender is "boys">>
+		<<set $audienceforceboy to 1>>
+	<<else>>
+		<<set $audienceforcegirl to 1>>
+	<</if>>
+	"You're getting stripped," the <<person>> says. "Whether you want it or not." <<He>> hesitates, but the other $changingRoomGender cheer <<him>> on.
+	<br><br>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("naked") or $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and playerChastity())>>
+	<span id="next"><<link [[Next|School Changing Room Refuse Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|School Changing Room Refuse Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: School Changing Room Refuse Molestation Finish
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set _genderAppearance to $player.gender_appearance is "m" ? "boy" : "girl">>
+<<if $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+	<<endevent>><<npc Mason>><<person1>>Mason rushes in to investigate the scream. The $changingRoomGender back away and pretend they had no part in it.
+	<<if $exposed gte 1>>
+		<<He>> wraps towels around you and escorts you from the room.
+	<<else>>
+		<<He>> escorts you from the room.
+	<</if>>
+	<<if ($player.gender is "m" and $changingRoomGender is "girls") or ($player.gender is "f" and $changingRoomGender is "boys") and $genderknown.includes("Mason")>>
+		"You shouldn't be in the $changingRoomGender' changing room," <<he>> says once you're alone. "That doesn't make what they did okay, but you need to be more careful in the future."
+		<<gdelinquency>><<detention 1>>
+	<<elseif $player.penisExist and $player.vaginaExist and $genderknown.includes("Mason")>>
+		<<He>> stops once you're alone, but struggles to look you in the eye. "You need to hide your uniqueness," <<he>> says. "I know that isn't fair, but people can be cruel. Be careful."
+	<<elseif ($player.gender_appearance is "m" and $changingRoomGender is "girls") or ($player.gender_appearance is "f" and $changingRoomGender is "boys")>>
+		"You shouldn't be in the $changingRoomGender' changing room," <<he>> says once you're alone. "That doesn't make what they did okay, but you need to be more careful in the future."
+		<<gdelinquency>><<detention 1>>
+	<<else>>
+		"What they were doing isn't okay," <<he>> says once you're alone. "I'll have a word with them."
+		<<lcool>><<status -10>>
+	<</if>>
+	<br><br>
+	<<tearful>> you watch the teacher return to <<his>> class.
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+	<<link [[Next|School Pool Entrance]]>><</link>>
+<<elseif $enemyhealth lte 0>>
+	You knock the <<person>> against a locker. The other $changingRoomGender try to grab you, but you shove them away. <<tearful>> you escape the room.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|School Pool Entrance]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	You shake free of the <<persons>> weakened grip. The other $changingRoomGender try to grab you, but you shove them away. <<tearful>> you escape the room.
+	<br><br>
+	<<clothesontowel>>
+	<<endcombat>>
+	<<link [[Next|School Pool Entrance]]>><</link>>
+<<else>>
+	<<strip>>
+	<<if $player.gender is $player.gender_appearance or playerChastity("hidden")>>
+		The <<person>> backs away from you, your clothes in hand. "If you want them back," <<he>> says. "You better do what we say."
+		<br><br>
+		The other $changingRoomGender shout suggestions.
+		<<if $worn.neck.collared is 1>>
+
+			The <<person>> ignores them, and picks up your leash. "Perfect," <<he>> says. "Time for walkies. Get on your knees like a good dog."
+			<br><br>
+
+			<<link [[Get on knees (0:10)|School Changing Room Knees]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+			<br>
+			<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+			<br>
+		<<else>>
+			"Everyone get your phones," <<he>> says to the $changingRoomGender around <<him>>. "Make sure you get lots of evidence." <<He>> looks back at you. "Time for your punishment. Bend over."
+			<br><br>
+			<<link [[Bend over (0:10)|School Changing Room Bend]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+			<br>
+			<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+			<br>
+		<</if>>
+	<<elseif $player.penisExist and $player.vaginaExist>>
+		The <<person>> backs away from you, your clothes in hand.
+		<<if $schoolrep.crossdress gte 5 and !$worn.face.type.includes("mask")>>
+			The $changingRoomGender murmur in excitement. "I knew it," the <<person>> says. "You're the school freak."
+			<br><br>
+		<<elseif $schoolrep.crossdress gte 3 and !$worn.face.type.includes("mask")>>
+			The $changingRoomGender murmur in excitement. "You're the freak I keep hearing about," the <<person>> says. "I didn't believe it."
+			<br><br>
+		<<else>>
+			The $changingRoomGender gape at your <<genitals>>, too stunned to speak. The <<person>> is first to shake free of <<his>> stupour. "You're a freak," <<he>> says.
+			<br><br>
+		<</if>>
+		<<if $promiscuity gte 35>>
+			<<link [[Seduce|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+		<<link [[Say that's just the way you are|School Changing Room Crossdress Honest]]>><</link>>
+		<br>
+		<<link [[Blame a curse (0:05)|School Changing Room Herm Explain]]>><<set $phase to 0>><<pass 5>><<status -10>><</link>><<lcool>>
+		<br>
+		<<link [[Blame strange science (0:05)|School Changing Room Herm Explain]]>><<set $phase to 1>><<pass 5>><<status -10>><</link>><<lcool>>
+		<br>
+
+		<<schoolrep herm 1>>
+	<<else>>
+		The <<person>> backs away from you, your clothes in hand.
+		<<if $schoolrep.crossdress gte 5 and !$worn.face.type.includes("mask")>>
+			"So the rumours are true," the <<person>> says, satisfied. "You're really a <<gender>>. Why do you do it? Are you just a pervert?"
+		<<elseif $schoolrep.crossdress gte 3 and !$worn.face.type.includes("mask")>>
+			The <<person>> gapes. "You're the crossdresser I keep hearing about," <<he>> says. "Why do you do it? Are you just a pervert?"
+		<<else>>
+			The <<person>> gapes. "You're not a _genderAppearance?" <<he>> says. "Why were you dressed as one?"
+		<</if>>
+		<br><br>
+		<<if $promiscuity gte 35>>
+			<<link [[Seduce|School Changing Room Crossdress Seduce]]>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+		<<link [["Say you like dressing as a " + _genderAppearance|School Changing Room Crossdress Honest]]>><</link>>
+		<br>
+		<<link [[Say you were forced to (0:05)|School Changing Room Crossdress Forced]]>><<pass 5>><<status -10>><</link>><<lcool>>
+		<br>
+		<<schoolrep crossdress 1>>
+	<</if>>
+<</if>>
+
+:: School Changing Room Seduce
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<set $seductiondifficulty to 4000>>
+<<seductioncheck>>
+<br><br>
+<<if $seductionskill lt 1000>><span class="gold">You feel more confident in your powers of seduction.</span><</if>><<seductionskilluse>>
+<br><br>
+"You only want to look?" you purr. "How about we both strip down?"
+<<promiscuity3>>
+<<if $seductionrating gte $seductionrequired>>
+	The <<person>> tries to respond, but just stammers. You begin to undress <<him>>.
+	<br><br>
+	<<link [[Next|School Changing Room Seduce Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	"No chance," the <<person>> says. "You're the one getting ogled now."
+	<br><br>
+	<<if $exhibitionism gte 75>>
+		<<link [[Strip|School Changing Room Strip]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+		<br>
+	<<else>>
+		<<link [[Strip|School Changing Room Strip]]>><<trauma 6>><<stress 6>><<set $phase to 1>><</link>><<gtrauma>><<gstress>>
+		<br>
+	<</if>>
+	<<link [[Refuse|School Changing Room Refuse Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: School Changing Room Seduce Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<if $changingRoomGender is "boys">>
+		<<set $audienceforceboy to 1>>
+	<<else>>
+		<<set $audienceforcegirl to 1>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|School Changing Room Seduce Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|School Changing Room Seduce Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: School Changing Room Seduce Sex Finish
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person>> lies on the ground, <<his>> face bright red. <<tearful>> you saunter from the room. You feel the $changingRoomGender' hungry gaze on your back.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	You knock the <<person>> against a locker. <<tearful>> you escape the room. You feel the $changingRoomGender' hungry gaze on your back.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $finish is 1>>
+	The <<person>> looks embarrassed as <<he>> fixes <<his>> clothing. <<tearful>> you leave the room. You feel the $changingRoomGender' hungry gaze on your back.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+<br><br>
+<<link [[Next|School Pool Entrance]]>><</link>>
+
+:: School Changing Room Knees
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+You drop to your knees. "Good doggy," the <<person>> says. <<He>> looks at the other $changingRoomGender. "Let's go."
+<br><br>
+<<He>> leads you to the entrance of the changing rooms, then through the doors leading into the rest of the school. You're naked on your hands and knees, with a collar around your neck and the leash held by the <<person>>. The other $changingRoomGender surround you and jeer. Now and then one gropes or spanks you.
+<br><br>
+You are being led down a corridor when you run into the first group of students. "Oh my god," you hear one say, before any speech is drowned out by laughter. They join the procession. Soon there's a crowd marching around the school, revolving around the naked <<girl>> with the collar and leash.
+<<fameexhibitionism 50 "pic">>
+<br><br>
+<<endcombat>>
+<<link [[Next|School Changing Room Knees 2]]>><</link>>
+<br>
+
+:: School Changing Room Knees 2
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<npc Leighton>><<person1>>
+Leighton's voice appears behind the group. It's not long before the crowd has dissipated. The headteacher arrives beside you, and stares down. <<He>> found your clothes somewhere, and drops them on top of you. <<He>> walks away, smiling.
+<<if !playerChastity("hidden")>>
+	<<set $genderknown.pushUnique("Leighton")>>
+<</if>>
+<br><br>
+<<clothesontowel>>
+<<endevent>>
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: School Changing Room Bend
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+You lean against the lockers and bend over. The <<person>> walks beside you, and leans on your back. "Make sure you get this," <<he>> says. There's silence for a moment, then a loud smack as something hits your <<bottom>>. Then another. <<Hes>> spanking you with a pool float. It's made of foam, but <<he>> whips it against your skin with such speed that the pain makes you jolt.
+<<gpain>><<pain 10>>
+<br><br>
+<<fameexhibitionism 50 "pic">>
+"Someone else have a go," <<he>> says after a while. Someone does. They aren't as effective, but the <<person>> leans against the lockers and pulls your hair back. <<He>> leans close. "This is what happens to <<if $exposed gte 2 and $player.penisExist and $player.vaginaExist>>freaks<<elseif $player.gender_appearance is "f">>girls<<else>>boys<</if>> who come in here," <<he>> says. Another jolt of pain. "Consider yourself lucky I'm so nice. Some wanted much worse." <<He>> glances at your body, and regret darkens <<his>> face. <<He>> stands up. "That's enough. <<pShes>> learnt <<pher>> lesson." <<He>> throws your clothes at you. <<tearful>> you take your clothing and leave the room.
+<br><br>
+<<clothesontowel>>
+<<endcombat>>
+<<link [[Next|School Pool Entrance]]>><</link>>
+<br>
+
+:: School Changing Room Naked Refuse
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+The <<person>> shrugs. "Fine," <<he>> says. "Everyone. Let's show <<phim>> out."
+<br><br>
+Groping hands fondle you all over, and push you towards an open window. It's small and near the ceiling, but the $changingRoomGender lift you and push you through, head first. You tumble to the ground on the other side. The window clicks shut above you. You're not even on school grounds any more.
+<<covered>>
+<br><br>
+<<endcombat>>
+<<link [[Next|Oxford Street]]>><<clotheson>><<upperruined>><<lowerruined>><<underruined>><<set $eventskip to 1>><</link>>
+<br>
+
+:: School Changing Room Crossdress Seduce
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<set $seductiondifficulty to 6000>>
+<<seductioncheck>>
+<br><br>
+<<if $player.penisExist and $player.vaginaExist>>
+	"Don't be shy," you purr. "I know you want this 'freak.'"
+<<else>>
+	"I can be your <<gender>>," you purr. "If you want."
+<</if>>
+<br><br>
+<<if $seductionrating gte $seductionrequired>>
+	<<He>> tries to respond, but stammers. You begin to undress <<him>>.
+	<br><br>
+	<<link [[Next|School Changing Room Crossdress Sex]]>><<set $sexstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if $player.penisExist and $player.vaginaExist>>
+		"N-no I don't," <<he>> stammers. "You're a freak, and need to be treated as one." <<He>> looks around at the other $changingRoomGender. "What should we do with it?"
+	<<else>>
+		"N-no," <<he>> says, "But if you want to be treated like a <<gender>>, that's fine. What should we do with <<pher>>?"
+	<</if>>
+	<br><br>
+	The other $changingRoomGender shout suggestions.
+	<<if $worn.neck.collared is 1>>
+		The <<person>> ignores them, and picks up your leash. "Perfect," <<he>> says. "Time for walkies. Get on your knees like a good dog."
+		<br><br>
+		<<link [[Get on knees (0:10)|School Changing Room Knees]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<<else>>
+		"Everyone get your phones," <<he>> says to the $changingRoomGender around <<him>>. "Make sure you get lots of evidence." <<He>> looks back at you. "Time for your punishment. Bend over."
+		<br><br>
+		<<link [[Bend over (0:10)|School Changing Room Bend]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: School Changing Room Crossdress Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<if $changingRoomGender is "boys">>
+		<<set $audienceforceboy to 1>>
+	<<else>>
+		<<set $audienceforcegirl to 1>>
+	<</if>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|School Changing Room Crossdress Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|School Changing Room Crossdress Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: School Changing Room Crossdress Sex Finish
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person>> lies on the ground, <<his>> face bright red. <<tearful>> you saunter from the room. The other $changingRoomGender' laugh at <<him>>, but you can feel their hungry gaze on your back.
+<<elseif $enemyhealth lte 0>>
+	You knock the <<person>> against a locker. <<tearful>> you escape the room. The other $changingRoomGender' laugh at <<him>>, but you can feel their hungry gaze on your back.
+<<elseif $finish is 1>>
+	The <<person>> looks embarrassed as <<he>> fixes <<his>> clothing. <<tearful>> you leave the room. The other $changingRoomGender' laugh at <<him>>, but you can feel their hungry gaze on your back.
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<<link [[Next|School Pool Entrance]]>><</link>>
+
+:: School Changing Room Crossdress Honest
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+
+<<if $player.penisExist and $player.vaginaExist>>
+	<<if $speech_attitude is "meek">>
+		"Th-this is just the way I am," you say. "Please don't hate me."
+	<<elseif $speech_attitude is "bratty">>
+		"I'm just great like this," <<he>> says. "You lot are the freaks."
+	<<else>>
+		"This is just how I am," you say.
+	<</if>>
+	<br><br>
+	The $changingRoomGender laugh. "What should we do with it?" the <<person>> asks.
+	<br><br>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"I like dressing as a <<print $changingRoomGender is "boys" ? "girl" : "boy">>," you say. "It makes me feel pretty."
+	<<elseif $speech_attitude is "bratty">>
+		"I dress how I want," you say. "And I like dressing as a <<print $changingRoomGender is "boys" ? "girl" : "boy">>."
+	<<else>>
+		"I like dressing as a <<print $changingRoomGender is "boys" ? "girl" : "boy">>," you say.
+	<</if>>
+	<br><br>
+	The $changingRoomGender laugh. "You really are a pervert," the <<person>> says. "What should we do with <<phim>> I wonder."
+	<br><br>
+<</if>>
+The other $changingRoomGender shout suggestions.
+<<if $worn.neck.collared is 1>>
+	The <<person>> ignores them, and picks up your leash. "Perfect," <<he>> says. "Time for walkies. Get on your knees like a good dog."
+	<br><br>
+	<<link [[Get on knees (0:10)|School Changing Room Knees]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+	<br>
+<<else>>
+	"Everyone get your phones," <<he>> says to the $changingRoomGender around <<him>>. "Make sure you get lots of evidence." <<He>> looks back at you. "Time for your punishment. Bend over."
+	<br><br>
+	<<link [[Bend over (0:10)|School Changing Room Bend]]>><<pass 10>><<status -10>><<trauma 6>><<stress 6>><</link>><<lcool>><<gtrauma>><<gstress>>
+	<br>
+	<<link [[Refuse|School Changing Room Naked Refuse]]>><</link>>
+	<br>
+<</if>>
+
+:: School Changing Room Crossdress Forced
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<if $speech_attitude is "meek">>
+	"I-I didn't want to dress like a <<gender>>" you say. "I forgot my uniform."
+<<elseif $speech_attitude is "bratty">>
+	"Some idiot made me dress this way."
+<<else>>
+	"I had no choice," you say. "I forgot my uniform."
+<</if>>
+<br><br>
+The $changingRoomGender enjoy a laugh at your expense. "We're not letting you in here looking like a <<gender>>," <<he>> says. "It's distracting." <<He>> blushes and throws you your clothes.
+<br><br>
+<<clotheson>>
+<<endevent>>
+<<link [[Next|School Pool Entrance]]>><</link>>
+<br>
+
+:: School Changing Room Herm Explain
+<<set $outside to 0>><<schooleffects>><<effects>>
+
+<<if $phase is 0>>
+	<<if $speech_attitude is "meek">>
+		"I-I was cursed," you say. "Please don't hate me."
+	<<elseif $speech_attitude is "bratty">>
+		"I was cursed by foul sorcery," you say. "Stay back, or you'll be cursed too!"
+	<<else>>
+		"I was cursed," you say. "By evil magic."
+	<</if>>
+	<br><br>
+	Some of the $changingRoomGender step back. The <<person>> stands <<his>> ground, but <<his>> voice quivers. "C-curses aren't real," <<he>> says. "Right?" <<He>> glances around for support, but no one gives it.
+	<br><br>
+	<<He>> throws you your clothes, as if afraid of a disease. "You should dress like a <<print $changingRoomGender.slice(0, -1)>> if you're gonna come in here," <<he>> says. "And stay away from me."
+	<br><br>
+<<else>>
+	<<if $speech_attitude is "meek">>
+		"A strange experiment made me like this," you say. "Please don't hate me."
+	<<elseif $speech_attitude is "bratty">>
+		"I'm a scientific experiment gone right," you say.
+	<<else>>
+		"I'm a scientific experiment gone wrong," you say.
+	<</if>>
+	<br><br>
+	The $changingRoomGender laugh. "They can't do that," the <<person>> says, looking around <<him>> for support. "Can they?" One of the $changingRoomGender shrugs, and the <<person>> turns back to you. <<He>> throws you your clothes. "It doesn't matter. We're not letting you in here looking like a <<gender>>. It's distracting."
+	<br><br>
+<</if>>
+
+<<clotheson>>
+<<endevent>>
+<<link [[Next|School Pool Entrance]]>><</link>>
+<br>
+
+:: School Changing Room Watch
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+You watch the $changingRoomGender dress, oblivious to your gaze. Your heart beats faster with the fear of being caught.
+<<promiscuity1>>
+<<if $exhibitionism gte 35>>
+	<<link [[Masturbate (0:01)|School Changing Room Masturbation]]>><<pass 1>><<set $masturbationstart to 1>><</link>>
+	<br>
+<</if>>
+<<link [[Stop|School Pool Entrance]]>><</link>>
+
+:: School Changing Room Exhibitionism
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+<<flaunting>> you enter the changing room. The response to a naked <<girl>> arriving is mixed. Some grab whatever they can to cover with. Some freeze on the spot. Others cheer and whistle. All stare at you.
+<<exhibitionism5>>
+<<link [[Flaunt (0:05)|School Changing Room Flaunt]]>><<pass 5>><<status 1>><<arousal 600>><</link>><<gcool>><<garousal>>
+<br>
+<<if $promiscuity gte 5>> <!-- DEBUG -->
+	<<link [[Goad|School Changing Room Goad]]>><<set $sexstart to 1>><</link>><<promiscuous5>>
+	<br>
+<</if>>
+
+:: School Changing Room Flaunt
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+You march into the middle of the room and twirl.
+<<if $speech_attitude is "meek">>
+	"I'm naked and exposed in front of you," you say. "I hope I look nice."
+<<elseif $speech_attitude is "bratty">>
+	"You're so easy to enthral," you say.
+<<else>>
+	"It's rude to stare," you say.
+<</if>>
+<<if $changingRoomGender is "boys">><<generatesm1>><<else>><<generatesf1>><</if>>
+A <<person1>><<person>> reaches out to touch, but you slap <<his>> hand away.
+<br><br>
+You continue teasing them. The $changingRoomGender become more noisy, and daring. Until Mason shouts from the pool, "Is everything okay in there?" The spell breaks, and they back away from you. You saunter from the room.
+<br><br>
+
+<<link [[Next|School Pool Entrance]]>><<endevent>><</link>>
+<br>
+
+:: School Changing Room Goad
+
+<<if $sexstart is 1>>
+	<<if $changingRoomGender is "boys">>
+		<<generatesm1>><<generatesm2>><<generatesm3>><<generatesm4>><<generatesm5>><<generatesm6>>
+	<<else>>
+		<<generatesf1>><<generatesf2>><<generatesf3>><<generatesf4>><<generatesf5>><<generatesf6>>
+	<</if>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<if $changingRoomGender is "boys">>
+		<<set $audienceforceboy to 1>>
+	<<else>>
+		<<set $audienceforcegirl to 1>>
+	<</if>>
+	You march into the middle of the room.
+
+	<<if $speech_attitude is "meek">>
+		"Y-you can do whatever you like to me," you say.
+	<<elseif $speech_attitude is "bratty">>
+		"What are you waiting for," you say. "I don't have all day."
+	<<else>>
+		"Don't keep me waiting $changingRoomGender," you say.
+	<</if>>
+	They don't need much convincing.
+	<<promiscuity5>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|School Changing Room Goad Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|School Changing Room Goad]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: School Changing Room Goad Finish
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"Is everything okay in there?" Mason shouts from the pool. <<tearful>> you saunter from the room. You feel the $changingRoomGender' thirsty gaze on your back.
+<<elseif $enemyhealth lte 0>>
+	You knock the <<person>> against a locker. <<tearful>> you escape the room. You feel the $changingRoomGender' thirsty gaze on your back.
+<<elseif $finish is 1>>
+	"Is everything okay in there?" Mason shouts from the pool. <<tearful>> you leave the room. You feel the $changingRoomGender' thirsty gaze on your back.
+<</if>>
+<br><br>
+<<clotheson>>
+<<endcombat>>
+<br><br>
+<<link [[Next|School Pool Entrance]]>><</link>>
+
+:: School Changing Room Run
+
+<<set $outside to 0>><<schooleffects>><<effects>>
+You run past the laughing <<person>> and away from the changing rooms.
+<br><br>
+<<fameexhibitionism 1>>
+<<endevent>>
+<<link [[Next|Hallways]]>><</link>>
+
+:: School Changing Room Masturbation
+<<effects>>
+
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<masturbationstart>>
+	Exposed yet hidden, you ogle the undressed $changingRoomGender. You think about what they'd do if they caught you, naked as you are. Your hands wander.
+	<<exhibitionism3>>
+	<<set $timer to random(1, 100)>>
+	<<set $mouth to "disabled">>
+<</if>>
+
+<<masturbationeffects>>
+<<masturbationactions>>
+
+<<if $corruptionMasturbation>>
+	<span class="red">The slime in your ear will not allow you to stop.</span>
+<</if>>
+<div id="masturbationButtons">
+	<<if $timer lte 0>>
+		<div id="next"><<link [[Continue|School Changing Room Masturbation Caught]]>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next"><<link [[Continue|$passage]]>><</link>><<nexttext>></div>
+	<</if>>
+	<<masturbationStopControls>>
+</div>
+<br><br><br><br><br>
+
+:: School Changing Room Masturbation Finish
+
+<<effects>>
+One of the $changingRoomGender glances in your direction. You back away from the door, your heart pounding.
+<br><br>
+<<endmasturbation>>
+<<clotheson>>
+<<endcombat>>
+<<link [[Next|School Pool Entrance]]>><</link>>
+
+:: School Changing Room Masturbation Caught
+
+<<effects>>
+<<endmasturbation>>
+<<endcombat>>
+<<if $changingRoomGender is "boys">>
+	<<generatesm1>>
+<<else>>
+	<<generatesf1>>
+<</if>>
+<<person1>>
+<<if $rng gte 81>>
+	You hear a thud from behind. A <<person>> stands gaping at you, <<his>> bag on the floor beside <<him>>. <<He>> blinks free of <<his>> shock and grins."Guys!" <<he>> shouts. "You have an audience." The changing room falls silent.
+	<br><br>
+	<<if $exhibitionism gte 75>>
+		<<link [[Enter|School Changing Room Exhibitionism]]>><<detention 3>><</link>><<gdelinquency>><<exhibitionist5>>
+		<br>
+	<</if>>
+	<<link [[Run|School Changing Room Run]]>><</link>>
+	<br>
+<<else>>
+	You hear a thud from behind. A <<person>> stands gaping at you, <<his>> bag on the floor beside <<him>>. Blushing, <<he>> grabs <<his>> bag and runs the way <<he>> came.
+	<<gstress>><<stress 3>>
+	<br><br>
+	<<clotheson>>
+	<<link [[Next|School Pool Entrance]]>><</link>>
+<</if>>

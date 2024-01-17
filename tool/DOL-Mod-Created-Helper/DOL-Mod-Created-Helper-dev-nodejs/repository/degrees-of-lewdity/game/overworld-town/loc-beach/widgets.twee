@@ -1,0 +1,399 @@
+:: Widgets Beach [widget]
+<<widget "beachday1">>
+	<<generatey1>>You hear someone behind you. You turn just in time to see a <<person1>><<person>> rushing into you. <<He>> tackles you to the sand and tries to remove your clothes!
+	<br><br>
+	<<link [[Next|Beach Day Molestation]]>><<set $molestationstart to 1>><<set $eventskip to 1>><</link>>
+<</widget>>
+
+<<widget "beachday2">>
+	<<if !$worn.over_upper.type.includes("naked")>>
+		<<set _slot to "over_lower">>
+	<<else>>
+		<<set _slot to "lower">>
+	<</if>>
+	<<beastNEWinit 1 dog>>
+	You feel something yanking at your <<print $worn[_slot].name>>. Looking over your shoulder, you see a small <<beasttype>> with your clothes between <<bhis>> teeth.
+
+	<<if $worn.over_lower.integrity lte 20 and !$worn.over_upper.type.includes("naked")>>
+		<<set $worn.over_lower.integrity -= 20>>
+		You try to wrestle your clothes free from its maw, but your $worn.over_lower.name <<overlowerplural>> torn from your body!
+		<<if $worn.under_lower.type.includes("naked") and $worn.lower.type.includes("naked")>>
+			The <<beasttype>> scampers away, leaving you humiliated with your <<genitals>> on display.
+			<<gtrauma>><<trauma 1>><<stress 1>><<gstress>>
+		<<else>>
+			The <<beasttype>> scampers away, leaving you humiliated with your $worn.over_lower.name on display.
+			<<stress 1>><<gstress>>
+		<</if>>
+		<<overlowerruined>><<trauma 6>>
+	<<elseif $worn.lower.integrity lte 20 and $worn.over_upper.type.includes("naked")>>
+		<<set $worn.lower.integrity -= 20>>
+		You try to wrestle your clothes free from its maw, but your $worn.lower.name <<lowerplural>> torn from your body!
+		<<if $worn.under_lower.type.includes("naked")>>
+			The <<beasttype>> scampers away, leaving you humiliated with your <<genitals>> on display.
+			<<gtrauma>><<trauma 1>><<stress 1>><<gstress>>
+		<<else>>
+			The <<beasttype>> scampers away, leaving you humiliated with your $worn.under_lower.name on display.
+			<<stress 1>><<gstress>>
+		<</if>>
+		<<lowerruined>><<trauma 6>>
+	<<else>>
+		You manage to wrestle your clothes free from <<bhis>> maw, though the ordeal has left them a little worse for wear.
+	<</if>>
+	<br><br>
+	<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</widget>>
+
+<<widget "beachday3">>
+	<<generate1>><<set $NPCList[0].virginity.penile to false>><<set $NPCList[0].virginity.vaginal to false>>You see a <<person1>><<person>> watching you. <<He>> seems to be here with <<his>> kids who are playing in the sand some way away. <<He>> looks away as you make eye contact.
+	<br><br>
+
+	<<link [[Look away|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+	<<link [[Approach|Beach Day Encounter]]>><<set $phase to 0>><</link>>
+	<br>
+<</widget>>
+
+<<widget "beachday4">>
+	A gust of wind blows in from the ocean, pleasantly caressing your skin.
+	<<lstress>><<stress -2>>
+	<br><br>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		/* variables */
+		<<set _helpless to 0>>
+		<<if $leftarm is "bound" and $rightarm is "bound">>
+			<<set _helpless to 1>>
+		<</if>>
+		<<set _nopan to 0>>
+		<<if $worn.under_lower.type.includes("naked")>>
+			<<set _nopan to 1>>
+		<</if>>
+		<<set _trauma_gain to 0>>
+		<<set _arousal_gain to 0>>
+
+		<<set _seen to 0>>
+		<<if random(0, 10) gte 5>>
+			<<set _seen to 1>>
+		<</if>>
+
+		<<set _caught_on_camera to 0>>
+		<<if _seen and random(0, 10) gte 7>>
+			<<set _caught_on_camera to 1>>
+		<</if>>
+
+		/* event */
+		It flares up your skirt, exposing your
+		<<if _nopan>>
+			<<set _arousal_gain += 200>>
+			<<set _trauma_gain += .5>>
+			<<genitals>>
+		<<else>>
+			<<set _arousal_gain += 100>>
+			$worn.under_lower.name
+		<</if>>in the middle of the beach.
+
+		<<if _helpless>>
+			<<set _arousal_gain += 100>>
+			<<set _trauma_gain += 1>>
+			Bound and helpless you can do nothing but endure the wind as it toys with your exposure, until finally it abates and your skirt hem settles back where it should be.
+		<</if>>
+		<<if _seen>>
+			<<print [
+			"A sudden giggle causes you to turn, facing the onlooker.",
+			"A sudden giggle grabs your attention.",
+			"An onlooker gasping in shock grabs your attention.",
+			"An onlooker giggling grabs your attention.",
+			"A group of people gasping in shock draws your attention.",
+			"A group of people giggling grabs your attention."
+			].pluck()>>
+			<<fameexhibitionism 1>>
+
+			<<if _caught_on_camera>>
+				<<endevent>>
+				<span class="pink">
+					You notice a phone pointing at you, and realise they were probably recording.
+				</span>
+				<<fameexhibitionism 5 "vid">>
+				<<set _trauma_gain += 2>>
+				<<set _arousal_gain += 100>>
+			<<else>>
+				They must have seen everything.
+				<<set _trauma_gain += 1>>
+				<<set _arousal_gain += 50>>
+			<</if>>
+		<</if>>
+
+		<<if $uncomfortable.nude and $exhibitionism gte 75 and _trauma_gain>>
+			Your stomach churns horribly at having been exposed in such a public place, and you do your best to put it out of your mind as you try and recover some of your dignity.
+			<<set _trauma_gain += 1>>
+		<<else>>
+			Your stomach churns with excitement at having been exposed in such a public place, and you can't help but hold on to the sensation of it all as you pretend to recover some of your dignity.
+			<<set _arousal_gain += 50>>
+		<</if>>
+
+		/* stats application */
+		<<if _arousal_gain>>
+			<<garousal>><<arousal _arousal_gain>>
+		<</if>>
+		<<if _trauma_gain and $uncomfortable.nude>>
+			<<gtrauma>><<trauma _trauma_gain>>
+		<</if>>
+
+		/* choices */
+		<br><br>
+		<<if _helpless>>
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><</link>>
+		<<else>>
+			<<link [[Try to hold your skirt down|Beach Skirt Flare Stop]]>><</link>>
+			<<if $exhibitionism gte 35 and !$worn.under_lower.type.includes("naked")>>
+				<br>
+				<<link [[Let it happen|Beach Skirt Flare Allow]]>><</link>><<exhibitionist2>>
+			<<elseif $exhibitionism gte 55>>
+				<br>
+				<<link [[Let it happen|Beach Skirt Flare Allow]]>><</link>><<exhibitionist4>>
+			<</if>>
+		<</if>>
+
+		/* cleanup */
+		<<unset _helpless>>
+		<<unset _nopan>>
+		<<unset _arousal_gain>>
+		<<unset _trauma_gain>>
+		<<unset _seen>>
+		<<unset _caught_on_camera>>
+	<<else>>
+		<<link [[Next|Beach]]>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "beachday5">>
+	You are walking along the shoreline when you hear a commotion behind you. Looking over your shoulder, you see a few of your classmates running towards you.
+	<br><br>
+	<<link[[Stop and wait|Beach Day Classmates]]>><<set $phase to 0>><</link>><br>
+	<<link[[Run|Beach Day Classmates]]>><<set $phase to 1>><</link>><<athleticsdifficulty 1 800>>
+<</widget>>
+
+<<widget "beachday6">>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt isnot 1 and !$worn.lower.type.includes("naked")>>
+	<<generatey1>><<person1>>
+	You are strolling along the coast when a <<person>> tugs on your waistband, exposing your <<bottom>>. Before you can react, <<he>> dumps a large bucket of sand into your <<if $worn.under_lower.name is "naked" or $worn.under_lower.one_piece is 1>>$worn.lower.name<<else>>$worn.under_lower.name<</if>>. <<He>> gives you a hard spank before running off, presumably to find another victim to prank.
+	<br><br>
+	You do your best to shake the sand out of your clothing. Some of it inevitably becomes lodged in your butt crack, where it chafes and annoys you. <<gpain>><<gstress>><<pain 1>><<stress 2>>
+	<br><br>
+	<<link [[Next|Beach]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	A gust of wind blows in from the ocean, pleasantly caressing your skin.
+	<<lstress>><<stress -2>>
+	<br><br>
+	<<link [[Next|Beach]]>><<set $eventskip to 1>><</link>>
+<</if>>
+<</widget>>
+
+<<widget "beachnight1">>
+	<<beastNEWinit 1 dog>>
+	<<if $monster is 1>>
+		A <<beasttype>> emerges from the darkness. <<bHis>> shaggy body gives <<bhim>> a savage look. <<bHe>> bares <<bhis>> fangs, eyes alight with hunger as <<bhe>> stares at you.
+	<<else>>
+		A wild-looking <<beasttype>> emerges from the darkness, teeth bared and eyes alight with hunger.
+	<</if>>
+	<br><br>
+	<!-- Modified for Beast People -->
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		<<link [[Next|Beach Night Dog]]>><<set $eventskip to 1>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		You manage to escape, but not unscathed.<<beastescape>>
+		<br><br>
+		<<link [[Next|Beach]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "beachnight2">>
+	<<generate1>>It's so dark, you don't see the <<person1>><<person>> lying on the sand until <<he>> grasps you by the ankle and pulls you to the ground.
+	<br><br>
+	<<link [[Next|Beach Night Molestation]]>><<set $molestationstart to 1>><</link>>
+<</widget>>
+
+<<widget "beachex1">>
+	<<generatey1>>A <<person1>><<person>> spots you in your fragile state and calls out, <<lewdcatcall>> Other heads turn in response and you quickly find yourself the centre of attention.
+	<<if $panicattacks gte 1>>
+		You are overcome by anxiety. Robbed of higher thought, you can do nothing flee away from the crowds, chased by jeering laughter.
+		<<fameexhibitionism 30>><<gstress>><<gtrauma>><<stress 6>><<trauma 6>>
+		<br><br>
+		When your fear subsides you find yourself slumped against the inside wall of a changing room.
+		<br><br>
+		<<link [[Changing room|Changing Room]]>><<endevent>><</link>>
+	<<else>>
+		<<gstress>><<gtrauma>><<stress 6>><<trauma 6>>
+		<br><br>
+		<<link [[Keep walking|Beach Exhibition]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[Ask for help|Beach Exhibition]]>><<set $phase to 1>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "beachex2">>
+	<<generatey1>>A <<person1>><<person>> spots you in your fragile state and calls out to <<his>> friends. You quickly find yourself surrounded. The <<person>> speaks, "You know this isn't a nudist beach right? In fact, I think I should report you." You tense as <<he>> visibly inhales as if to shout, anticipating even more attention drawn to your predicament. Instead however, <<he>> and <<his>> friends burst into derisive laughter. "Or, you know, I could help you out, give you something to cover up with. Of course, I'll want something in return. Get on your knees."
+	<<fameexhibitionism 20>>
+	<br><br>
+	<<if $promiscuity gte 35>>
+		<<link [[Comply|Beach Exhibit Molestation]]>><<set $phase to 1>><<set $sexstart to 1>><</link>>
+		<br>
+	<</if>>
+	<<if $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[Reluctantly comply|Beach Exhibit Molestation]]>><<set $desperateaction to 2>><<set $phase to 1>><<set $sexstart to 1>><</link>>
+		<br>
+	<</if>>
+	<<link [[Refuse|Beach Exhibit Molestation]]>><<set $phase to 0>><<set $molestationstart to 1>><</link>>
+	<br>
+<</widget>>
+
+:: Widgets Events Beach [widget]
+<<widget "eventsbeach">>
+	<<set $dangerevent to random(1, 100)>>
+	<<if Time.dayState is "night">>
+		<<if $dangerevent lte 15>>
+			<<beachnight1>>
+		<<elseif $dangerevent lte 30>>
+			<<beachnight2>>
+		<<elseif $dangerevent lte 100>>
+			<<beachday4>>
+		<</if>>
+	<<elseif $exposed gte 1>>
+		<<if $dangerevent lte 80>>
+			<<beachex1>>
+		<<elseif $dangerevent lte 100>>
+			<<beachex2>>
+		<</if>>
+	<<else>>
+		<<if $dangerevent lte 10>>
+			<<beachday1>>
+		<<elseif $dangerevent lte 20 and !$worn.lower.type.includes("naked")>>
+			<<beachday2>>
+		<<elseif $dangerevent lte 50>>
+			<<beachday3>>
+		<<elseif $dangerevent lte 70>>
+			<<beachday4>>
+		<<elseif $dangerevent lte 90>>
+			<<beachday5>>
+		<<elseif $dangerevent lte 100>>
+			<<beachday6>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+:: Widgets Passout Beach [widget]
+
+<<widget "passoutbeach">>
+	<<if isPlayerNonparasitePregnancyEnding()>>
+		<<pregnancyWatersBrokenPassout "beach">>
+	<<else>>
+		<<link [[Everything fades to black...->Passout Beach]]>><</link>>
+	<</if>>
+<</widget>>
+
+:: Widgets Beach Strip Events [widget]
+
+<<widget "beach_strip_events">>
+<<cleareventpool>>
+<<if $cool gte 160>>
+	<<addinlineevent "beach_strip_group_1" 0.5>>
+		<<generate1>><<person1>>
+		<<generate1>><<person1>>
+		<<fameexhibitionism 10>>
+
+		You are splashing through the water when you notice a group of people your age staring at you. You don't know their names, but you recognise them from school. You suspect that the story of the naked <<girl>><<if $player.penisExist and $player.vaginaExist>> <<schoolrep herm 1>>with unusual genitalia<</if>> at the beach will quickly spread.
+		<br><br>
+
+		A <<person>> shouts at you, it's the lifeguard. "You need to put something on," <<he>> says. "This is not a nude beach."
+		<br><br>
+
+		Before you can respond, you notice that the group of students have stripped off their bathing suits and are running towards the water.
+		<br><br>
+
+		"Are you sure about that?" you say.
+		<br><br>
+
+		The lifeguard turns around to see your naked classmates entering the water. <<He>> stares in confusion before blowing impotently on <<his>> whistle. Everyone ignores him. Before long, others at the beach take off their swimsuits to sunbathe. Eventually the lifeguard gives up and returns to <<his>> stand. 
+		<br><br>
+
+		<<link [[Next|Beach Strip Group 2]]>><<endevent>><</link>>
+	<</addinlineevent>>
+	<<addinlineevent "beach_strip_party_1" 0.7>>
+		<<fameexhibitionism 10>>
+
+		You are completely naked at the beach, baring it all to everyone there. You have gotten dozens of cheers, whistles, and even a few angry shouts. Most are content to openly stare at your naked body.
+		<br><br>
+
+		You see that one <<generatey1>><<person1>><<person>> is talking to <<his>> friends and pointing at you. They are all gathered sharing beer and snacks. Finally the <<person1>><<person>> gets up and walks towards you.
+		<br><br>
+
+		"Hey," <<he>> says when he's a few feet away.
+		<br><br>
+
+		"Hey," you say back, suppressing an urge to cover yourself. You've been proudly showing off for everyone on the beach, but you can't help but feel self-conscious at being approached.
+		<br><br>
+
+		"You seem pretty cool," he says. "Why don't you come join us for some beer and food?"
+		<br><br>
+
+		You look past <<him>> to <<his>> friends. They're all looking at you expectantly. You can't tell if any of them have ill intentions. 
+		<br><br>
+
+		<<link [[Agree (0:10)|Beach Strip Party Agree 1 ]]>><<pass 10>><</link>>
+		<br>
+		<<link [[Decline|Beach Strip Party Decline]]>><</link>>
+	<</addinlineevent>>
+<</if>>
+<<addinlineevent "beach_strip_lifeguard" 0.7>>
+	A whistle pierces the air. You turn and see a lifeguard running towards you.
+
+	<<generate1>><<person1>>
+
+	<<He>> stops in front of you, but looks away. "I'm sorry, but I need to ask you to cover up. This isn't a nudist beach."
+	<br><br>
+
+	<<link [[Comply|Beach Strip Comply]]>><</link>>
+	<br>
+	<<link [[Refuse (1:00)|Beach Strip Refuse]]>><<stress -12>><<trauma -6>><<crimeUp 50 "exposure">><<pass 1 hour>><</link>><<crime "exposure">><<ltrauma>><<lstress>>
+	<br>
+	<<if $promiscuity gte 15>>
+	<<link [[Seduce|Beach Strip Seduce]]>><</link>><<promiscuous2>>
+	<br>
+	<</if>>		
+<</addinlineevent>>
+<<addinlineevent "beach_strip_camera" 0.7>>
+	You stroll across the sand and splash through waves. The sun feels warm and gentle against your bare skin.
+	<br><br>
+	<<generate1>><<person1>>
+	On a slightly calmer part of the beach, your path takes you near a <<person>> scurrying to get <<his>> expensive-looking camera ready.
+
+	<br><br>
+	<<if $uncomfortable.nude is true>>
+		<<link [[Take a detour|Beach Strip End]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[Walk past|Beach Strip Camera Snap]]>><<set $phase to 0>><</link>>
+	<br>
+	<<if $uncomfortable.nude is false>>
+		<<link [[Stop and pose|Beach Strip Camera Snap]]>><<set $phase to 1>><</link>><<exhibitionist5>>
+		<br>
+		<<if $arousal gte $arousalmax / 2>>
+			<<link [[Stop and pose lewdly|Beach Strip Camera Snap]]>><<set $phase to 2>><</link>><<exhibitionist5>><<promiscuous1>>
+		<br>
+		<</if>>
+	<</if>>	
+<</addinlineevent>>
+<<addinlineevent "beach_strip_next" 0.7>>
+	<<location "beach">><<effects>>
+	You run across the sand and splash through waves. The sun feels warm and gentle against your bare skin. After a while though, the wind starts to pick up and the cold makes you shiver. You decide to get dressed for now. There's always another day.
+	<br><br>
+	<<endevent>>
+	<<if $rng % 2 == 0>>
+    	<<link [[Next|Beach]]>><<clotheson>><</link>>
+	<<else>>
+		<<link [[Next|Beach Clothes Stolen 1]]>><</link>> 
+	<</if>>
+	<br>
+<</addinlineevent>>
+<<runeventpool>>
+<</widget>>

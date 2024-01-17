@@ -1,0 +1,508 @@
+:: Widgets Machine [widget]
+<<widget "machine_init">>
+	<<combatinit>>
+	<<set $enemytype to "machine">>
+	<<set $machine to {}>>
+	<<set $machine.number to 0>>
+	<<set $machine.speed to 2>>
+	<<for _i = 0; _i < _args.length; _i++>>
+		<<set $machine[_args[_i]] to {}>>
+		<<set $machine[_args[_i]].health to $machine_health>>
+		<<set $machine[_args[_i]].ammo to $machine_ammo>>
+		<<set $machine[_args[_i]].hack to 0>>
+		<<set $machine[_args[_i]].state to "ready">>
+		<<set $machine[_args[_i]].use to "ready">>
+		<<if _args[_i] isnot "arm_chains" and _args[_i] isnot "leg_chains">>
+			<<set $machine.number += 1>>
+		<</if>>
+	<</for>>
+	<<set $leftactiondefault to "rest">>
+	<<set $rightactiondefault to "rest">>
+	<<set $feetactiondefault to "rest">>
+<</widget>>
+
+<<widget "machine_damage">>
+	<<if $machine[_args[0]].health gte $machine_health>>
+		<span class="red">sturdy</span>
+	<<elseif $machine[_args[0]].health gte ($machine_health * 0.8)>>
+		<span class="pink">dented</span>
+	<<elseif $machine[_args[0]].health gte ($machine_health * 0.6)>>
+		<span class="purple">dented</span>
+	<<elseif $machine[_args[0]].health gte ($machine_health * 0.4)>>
+		<span class="blue">fractured</span>
+	<<elseif $machine[_args[0]].health gte ($machine_health * 0.2)>>
+		<span class="lblue">cracked</span>
+	<<elseif $machine[_args[0]].health gte ($machine_health * 0.1)>>
+		<span class="teal">cracked</span>
+	<<else>>
+		<span class="green">ruined</span>
+	<</if>>
+<</widget>>
+
+<<widget "machine_end">>
+	<<unset $machine>>
+	<<unset $machine_health>>
+	<<unset $machine_ammo>>
+	<<endcombat>>
+<</widget>>
+
+<<widget "machine_combat">>
+	<<if $machine.tattoo>>
+		<<switch $machine.tattoo.state>>
+		<<case "ready">>
+			<<if $position is "doggy">>
+				<<set _machine_selection to random(1, 5)>>
+				<<if _machine_selection is 1 and $machine.tattoo.back isnot 1>>
+					<<set _machine_choice to "back">>
+				<<elseif _machine_selection is 2 and $machine.tattoo.left_shoulder isnot 1>>
+					<<set _machine_choice to "left_shoulder">>
+				<<elseif _machine_selection is 3 and $machine.tattoo.left_cheek isnot 1>>
+					<<set _machine_choice to "left_cheek">>
+				<<elseif _machine_selection is 4 and $machine.tattoo.left_bottom isnot 1>>
+					<<set _machine_choice to "left_bottom">>
+				<<elseif $machine.tattoo.hack gte 3>>
+					<<set $machine.tattoo.use to "inert">>
+					<<set $machine.tattoo.state to "inert">>
+					<<set $machine.number -= 1>>
+					<<set $machine_stat += 1>>
+					The tattoo gun darts around your body, <span class="green">before falling inert.</span>
+				<<else>>
+					<<set _machine_choice to "hover">>
+					<<set $machine.tattoo.hack += 1>>
+					The tattoo gun points to each of your body parts in turn, as if making a decision.
+				<</if>>
+			<<else>>
+				<<set _machine_selection to random(1, 8)>>
+				<<if _machine_selection is 1 and $machine.tattoo.breasts isnot 1>>
+					<<set _machine_choice to "breasts">>
+				<<elseif _machine_selection is 2 and $machine.tattoo.forehead isnot 1>>
+					<<set _machine_choice to "forehead">>
+				<<elseif _machine_selection is 3 and $machine.tattoo.left_thigh isnot 1>>
+					<<set _machine_choice to "left_thigh">>
+				<<elseif _machine_selection is 4 and $machine.tattoo.pubic isnot 1>>
+					<<set _machine_choice to "pubic">>
+				<<elseif _machine_selection is 5 and $machine.tattoo.right_bottom isnot 1>>
+					<<set _machine_choice to "right_bottom">>
+				<<elseif _machine_selection is 6 and $machine.tattoo.right_cheek isnot 1>>
+					<<set _machine_choice to "right_cheek">>
+				<<elseif _machine_selection is 7 and $machine.tattoo.right_shoulder isnot 1>>
+					<<set _machine_choice to "right_shoulder">>
+				<<elseif _machine_selection is 8 and $machine.tattoo.right_thigh isnot 1>>
+					<<set _machine_choice to "right_thigh">>
+				<<else>>
+					<<set _machine_choice to "hover">>
+					<<set $machine.tattoo.hack += 1>>
+					The <<machine_damage tattoo>> tattoo gun points to each of your body parts in turn, as if making a decision.
+				<</if>>
+			<</if>>
+			<<if _machine_choice isnot "hover" and $machine.tattoo.use isnot "destroyed" and $machine.tattoo.use isnot "inert">>
+				Accompanied by a whirring sound, <span class="purple">the <<machine_damage tattoo>> tattoo gun hovers over your <<bodypart _machine_choice>>.</span>
+				<<set $machine.tattoo.use to _machine_choice>>
+				<<set $machine.tattoo.state to "entrance">>
+			<</if>>
+
+		<<case "destroyed">>
+			The tattoo gun twitches, <span class="green">but remains disabled.</span>
+		<<case "inert">>
+			The tattoo gun <span class="green">remains motionless.</span>
+		<<case "entrance">>
+			<<if !$skin[$machine.tattoo.use].pen>>
+				The <<machine_damage tattoo>> tattoo gun presses against your <<bodypart $machine.tattoo.use>>. <span class="pink">The whirring intensifies as it prepares to write.</span><<gstress>><<stress 6>>
+				<<set $machine.tattoo.state to "imminent">>
+			<<elseif $machine.tattoo.armed is 1>>
+				The <<machine_damage tattoo>> tattoo gun beeps as a red light scans your skin. <span class="purple">A canister opens on its underside.</span>
+				<<set $machine.tattoo.state to "foam">>
+			<<else>>
+				The <<machine_damage tattoo>> tattoo gun presses against your <<bodypart $machine.tattoo.use>>, <span class="lblue">but then withdraws.</span> A red light runs over your skin, and the gun moves away.
+				<<set $machine.tattoo[$machine.tattoo.use] to 1>>
+				<<set $machine.tattoo.use to "ready">>
+				<<set $machine.tattoo.state to "ready">>
+				<<set $machine.tattoo.hack += 1>>
+			<</if>>
+		<<case "imminent">>
+			<span class="red">The <<machine_damage tattoo>> tattoo gun writes on your <<bodypart $machine.tattoo.use>>: <<bodywriting_machine $machine.tattoo.use>></span><<ggpain>><<ggtrauma>><<ggstress>><<trauma 18>><<stress 18>><<pain 8>>
+			<br><br>
+			<<set $machine.tattoo[$machine.tattoo.use] to 1>>
+			<<set $machine.tattoo.ammo -= 1>>
+			<<set $machine_tattoo_success to true>>/*Just controls NPC response following encounter in underground dungeon.*/
+			<<if $machine.tattoo.ammo gte 1>>
+				The <<machine_damage tattoo>> tattoo gun pulls away, but remains primed.
+				<<set $machine.tattoo.use to "ready">>
+				<<set $machine.tattoo.state to "ready">>
+			<<else>>
+				The <<machine_damage tattoo>> tattoo gun pulls away, <span class="green">and falls inert.</span>
+				<<set $machine.tattoo.use to "inert">>
+				<<set $machine.tattoo.state to "inert">>
+				<<set $machine.number -= 1>>
+				<<set $machine_stat += 1>>
+			<</if>>
+		<<case "foam">>
+			<span class="pink">The <<machine_damage tattoo>> tattoo gun sprays a pink foam over your <<bodypart $machine.tattoo.use>>.</span>
+			<<if $skin[$machine.tattoo.use] and $skin[$machine.tattoo.use].pen and ["brand", "magic"].includes($skin[$machine.tattoo.use].pen)>>
+				<span class="blue">Nothing happens to your <<tattoo $machine.tattoo.use>> as the foam clears.</span>
+				The <<machine_damage tattoo>> tattoo gun pulls away.
+				<<set $machine.tattoo.use to "ready">>
+				<<set $machine.tattoo.state to "ready">>
+				<<set $machine.tattoo.ammo -= 1>>
+			<<else>>
+				<<bodywriting_clear $machine.tattoo.use>>
+				<br><br>
+				The <<machine_damage tattoo>> tattoo gun presses against your <<bodypart $machine.tattoo.use>>. <span class="pink">The whirring intensifies as it prepares to write.</span>
+				<<set $machine.tattoo.state to "imminent">>
+			<</if>>
+		<</switch>>
+		<br>
+	<</if>>
+	<<if $machine.vaginal>>
+		<<if $machine.vaginal.ammo lte 0 and $machine.vaginal.state isnot "inert" and $machine.vaginal.state isnot "destroyed">>
+			<<if $machine.vaginal.state is "penetrated">>
+				The <<machine_damage vaginal>> phallic machine withdraws from your <<pussy>> with a plop, <span class="green">and shudders to a halt.</span>
+			<<elseif $machine.vaginal.state is "imminent" or $machine.vaginal.state is "entrance">>
+				The <<machine_damage vaginal>> phallic machine stops menacing you <<pussy>>, <span class="green">and shudders to a halt</span>.
+			<<else>>
+				<span class="green">The <<machine_damage vaginal>> phallic machine shudders to a halt.</span>
+			<</if>>
+			<<set $machine.vaginal.use to "inert">>
+			<<set $machine.vaginal.state to "inert">>
+			<<set $machine.number -= 1>>
+			<<machine_vaginal_disable>>
+		<<else>>
+			<<switch $machine.vaginal.state>>
+			<<case "ready">>
+				The <<machine_damage vaginal>> phallic machine <span class="purple">prods your <<pussy>>.</span>
+				<<neutral 5 "genitals">>
+				<<set $vaginause to "machine">><<set $vaginastate to "entrance">><<set $machine.vaginal.use to "vagina">><<set $machine.vaginal.state to "entrance">>
+			<<case "entrance">>
+				<<if $worn.over_lower.exposed lte 1>>
+					<<if $machine.vaginal.armed is 1>>
+						A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.over_lower.name, <span class="purple">dissolving it.</span>
+						<<set $worn.over_lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage vaginal>> phallic machine tries to push through your $worn.over_lower.name, tearing the fabric.
+						<<set $worn.over_lower.integrity -= 20>>
+					<</if>>
+				<<elseif $worn.lower.exposed lte 1>>
+					<<if $machine.vaginal.armed is 1>>
+						A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.lower.name, <span class="purple">dissolving it.</span>
+						<<set $worn.lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage vaginal>> phallic machine tries to push through your $worn.lower.name, tearing the fabric.
+						<<set $worn.lower.integrity -= 20>>
+					<</if>>
+				<<elseif $worn.under_lower.exposed lte 0>>
+					<<if $machine.vaginal.armed is 1>>
+						A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.under_lower.name, <span class="purple">dissolving the fabric.</span>
+						<<set $worn.under_lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage vaginal>> phallic machine tries to push through your $worn.under_lower.name, tearing the fabric.
+						<<set $worn.under_lower.integrity -= 20>>
+					<</if>>
+				<<elseif playerChastity("vagina")>>
+					<<if $machine.vaginal.armed is 1>>
+						A canister atop the <<machine_damage vaginal>> phallic machine opens, and sprays a pink foam over your $worn.genitals.name, <span class="purple">dissolving the fabric.</span>
+						<<set $worn.genitals.integrity -= 100>>
+					<<else>>
+						The <<machine_damage vaginal>> phallic machine tries to push through your $worn.genitals.name, tearing the fabric.
+						<<set $worn.genitals.integrity -= 20>>
+					<</if>>
+				<<else>>
+					The <<machine_damage vaginal>> phallic machine pushes against your <<pussy>>, <span class="pink">about to penetrate.</span>
+					<<sex 5 "genitals">>
+					<<set $vaginastate to "imminent">><<set $machine.vaginal.state to "imminent">>
+				<</if>>
+			<<case "imminent">>
+				<<if $player.virginity.vaginal isnot true>>
+					<<sex 30 "genitals">>
+					<<violence 1>>
+					<<set $vaginastate to "penetrated">><<set $machine.vaginal.state to "penetrated">><<vaginalstat>><<bruise vagina>><<violence 1>><<raped>><<vaginaraped>>
+					<span class="pink">The <<machine_damage vaginal>> phallic machine thrusts into your <<pussy>>.</span>
+				<<else>>
+					<<sex 100 "genitals">>
+					<<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
+					<<set $vaginastate to "penetrated">><<set $machine.vaginal.state to "penetrated">>
+					<span class="red">The <<machine_damage vaginal>> phallic machine thrusts into your virgin pussy,
+						<<if $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
+							despite your lack of a hymen, you feel something inside you change as your virginity and purity are taken.<<violence 10>>
+						<<else>>
+							breaking your hymen and forever robbing you of your purity.<<violence 25>>
+						<</if>>
+					</span>
+				<</if>>
+				<<takeVirginity "sex machine" "vaginal">>
+			<<case "penetrated">>
+				<<if $machine.speed is 3>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage vaginal>> phallic machine fucks your <<pussy>> with irregular thrusts, catching you off guard.
+						<<case 2>>
+							The <<machine_damage vaginal>> phallic machine seems to inflate inside your <<pussy>>, stretching you out.
+						<<case 3>>
+							The <<machine_damage vaginal>> phallic machine fucks your <<pussy>> hard enough to send you lurching forward with each thrust.
+						<<case 4>>
+							The <<machine_damage vaginal>> phallic machine hammers deep into your <<pussy>>.
+						<<case 5>>
+							The <<machine_damage vaginal>> phallic machine pauses a moment, then <span class="purple">assaults your <<pussy>> with a blur of thrusts.</span>
+							<<violence 10>><<gpain>>
+					<</switch>>
+					<<sex 20 "genitals">><<violence 10>>
+				<<elseif $machine.speed is 2>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage vaginal>> phallic machine fucks your <<pussy>> with a mechanical rhythm.
+						<<case 2>>
+							The <<machine_damage vaginal>> phallic machine shifts between each thrust into your <<pussy>>.
+						<<case 3>>
+							The <<machine_damage vaginal>> phallic machine pounds your <<pussy>> with a mechanical rhythm.
+						<<case 4>>
+							The <<machine_damage vaginal>> phallic machine hammers your <<pussy>> faster than anything alive.
+						<<case 5>>
+							The <<machine_damage vaginal>> phallic machine pauses a moment, then <span class="purple">assaults your <<pussy>> with a blur of thrusts.</span>
+							<<sex 30 "genitals">><<garousal>>
+					<</switch>>
+					<<sex 20 "genitals">>
+				<<else>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage vaginal>> phallic machine fucks your <<pussy>> with a gentle rhythm.
+						<<case 2>>
+							The <<machine_damage vaginal>> phallic machine rubs against your <<pussy>>.
+						<<case 3>>
+							The <<machine_damage vaginal>> phallic machine slowly thrusts into your <<pussy>>.
+						<<case 4>>
+							The <<machine_damage vaginal>> phallic machine stops inside your <<pussy>> for a moment, before continuing.
+						<<case 5>>
+							The <<machine_damage vaginal>> phallic machine vibrates against the entrance to your <<pussy>>
+					<</switch>>
+				<</if>>
+				<<sex 10 "genitals">><<bruise vagina>><<violence 1>>
+				<<set $machine.vaginal.ammo -= 1>>
+			<<case "destroyed">>
+				The <<machine_damage vaginal>> phallic machine twitches, <span class="green">but remains immobile.</span>
+			<<case "inert">>
+				The <<machine_damage vaginal>> phallic machine <span class="green">remains inert.</span>
+			<</switch>>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $machine.anal>>
+		<<if $machine.anal.ammo lte 0 and $machine.anal.state isnot "inert" and $machine.anal.state isnot "destroyed">>
+			<<if $machine.anal.state is "penetrated">>
+				The <<machine_damage anal>> small phallic machine withdraws from your <<bottom>> with a plop, <span class="green">and shudders to a halt.</span>
+			<<elseif $machine.anal.state is "imminent" or $machine.anal.state is "entrance">>
+				The <<machine_damage anal>> small phallic machine stops menacing you <<bottom>>, <span class="green">and shudders to a halt</span>.
+			<<else>>
+				<span class="green">The <<machine_damage anal>> small phallic machine shudders to a halt.</span>
+			<</if>>
+			<<set $machine.anal.use to "inert">>
+			<<set $machine.anal.state to "inert">>
+			<<set $machine.number -= 1>>
+			<<machine_anal_disable>>
+		<<else>>
+			<<switch $machine.anal.state>>
+			<<case "ready">>
+				The <<machine_damage anal>> small phallic machine <span class="purple">prods your <<bottom>>.</span>
+				<<neutral 5 "anus">>
+				<<set $anususe to "machine">><<set $anusstate to "entrance">><<set $machine.anal.use to "anus">><<set $machine.anal.state to "entrance">>
+			<<case "entrance">>
+				<<if $worn.over_lower.exposed lte 1>>
+					<<if $machine.anal.armed is 1>>
+						A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.over_lower.name, <span class="purple">dissolving it.</span>
+						<<set $worn.over_lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage anal>> small phallic machine tries to push through your $worn.over_lower.name, tearing the fabric.
+						<<set $worn.over_lower.integrity -= 20>>
+					<</if>>
+				<<elseif $worn.lower.exposed lte 1>>
+					<<if $machine.anal.armed is 1>>
+						A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.lower.name, <span class="purple">dissolving it.</span>
+						<<set $worn.lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage anal>> small phallic machine tries to push through your $worn.lower.name, tearing the fabric.
+						<<set $worn.lower.integrity -= 20>>
+					<</if>>
+				<<elseif $worn.under_lower.exposed lte 0>>
+					<<if $machine.anal.armed is 1>>
+						A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.under_lower.name, <span class="purple">dissolving the fabric.</span>
+						<<set $worn.under_lower.integrity -= 100>>
+					<<else>>
+						The <<machine_damage anal>> small phallic machine tries to push through your $worn.under_lower.name, tearing the fabric.<<set $worn.under_lower.integrity -= 20>>
+					<</if>>
+				<<elseif playerChastity("anus")>>
+					<<if $machine.anal.armed is 1>>
+						A canister atop the <<machine_damage anal>> small phallic machine opens, and sprays a pink foam over your $worn.genitals.name, <span class="purple">dissolving the fabric.</span>
+						<<set $worn.genitals.integrity -= 100>>
+					<<else>>
+						The <<machine_damage anal>> small phallic machine tries to push through your $worn.genitals.name, tearing the fabric.
+						<<set $worn.genitals.integrity -= 20>>
+					<</if>>
+				<<else>>
+					The <<machine_damage anal>> small phallic machine pushes against your <<bottom>>, <span class="pink">about to penetrate.</span>
+					<<sex 5 "anus">>
+					<<set $anusstate to "imminent">><<set $machine.anal.state to "imminent">>
+				<</if>>
+			<<case "imminent">>
+				<<if $player.virginity.anal isnot true>>
+					<<sex 30 "anus">>
+					<<violence 1>>
+					<<set $anusstate to "penetrated">><<set $machine.anal.state to "penetrated">><<analstat>><<bruise anus>><<violence 1>><<raped>><<anusraped>>
+					<span class="pink">The <<machine_damage anal>> small phallic machine thrusts into your <<bottom>>.</span>
+				<<else>>
+					<<sex 100 "anus">>
+					<<violence 25>>
+					<<takeVirginity "sex machine" "anal">><<bruise anus>><<analstat>><<raped>><<anusraped>>
+					<<set $anusstate to "penetrated">><<set $machine.anal.state to "penetrated">>
+					<span class="red">The <<machine_damage anal>> small phallic machine thrusts into your virgin ass, violating you in a way you hadn't conceived of.</span>
+				<</if>>
+			<<case "penetrated">>
+				<<if $machine.speed is 3>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>> with vicious speed.
+						<<case 2>>
+							The <<machine_damage anal>> small phallic machine slams into your <<bottom>>, hitting painfully deep each time.
+						<<case 3>>
+							The <<machine_damage anal>> small phallic machine is a blur as it thrusts into your <<bottom>> faster than anything living.
+						<<case 4>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>> fast enough to push you forward.
+						<<case 5>>
+							The <<machine_damage anal>> small phallic machine hilts itself inside your <<bottom>> and <span class="purple">begins to spin</span>, painfully drilling against the inside of your ass.
+							<<violence 10>><<gpain>>
+					<</switch>>
+					<<sex 20 "anus">><<violence 10>>
+				<<elseif $machine.speed is 2>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>> with a mechanical rhythm.
+						<<case 2>>
+							The <<machine_damage anal>> small phallic machine pounds your <<bottom>> with a mechanical rhythm.
+						<<case 3>>
+							The <<machine_damage anal>> small phallic machine is a blur as it fucks your <<bottom>> faster than anything living.
+						<<case 4>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>>, shifting between each thrust.
+						<<case 5>>
+							The <<machine_damage anal>> small phallic machine vibrates against your <<prostate>> at the end of each thrust into your <<bottom>>, <span class="purple">sending a tingling jolt through you.</span>
+							<<sex 30 "anus">><<garousal>>
+					<</switch>>
+					<<sex 20 "anus">>
+				<<else>>
+					<<switch random(1,5)>>
+						<<case 1>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>> with a gentle rhythm.
+						<<case 2>>
+							The <<machine_damage anal>> small phallic machine pauses for a moment.
+						<<case 3>>
+							The <<machine_damage anal>> small phallic machine slowly thrusts in and out of your <<bottom>>.
+						<<case 4>>
+							The <<machine_damage anal>> small phallic machine fucks your <<bottom>> with a soft touch.
+						<<case 5>>
+							The <<machine_damage anal>> small phallic machine halts inside your <<bottom>> and begins to gently vibrate.
+					<</switch>>
+				<</if>>
+				<<sex 10 "anus">><<bruise anus>><<violence 1>>
+				<<set $machine.anal.ammo -= 1>>
+			<<case "destroyed">>
+				The <<machine_damage anal>> small phallic machine twitches, <span class="green">but remains immobile.</span>
+			<<case "inert">>
+				The <<machine_damage anal>> small phallic machine <span class="green">remains inert.</span>
+			<</switch>>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $machine.arm_chains>>
+		<<if $machine.arm_chains.state is "ready">>
+			<<if _machine_arms is 1>>
+				The <<machine_damage arm_chains>> chains attached to your shackles retract, <span class="pink">lifting your arms into the air and immobilising them.</span>
+				<<set $leftactiondefault to "chain_struggle">><<set $rightactiondefault to "chain_struggle">>
+				<<set $machine.arm_chains.use to "grapple">>
+				<<set $machine.arm_chains.state to "grapple">>
+				<<if $leftarm isnot "bound">>
+					<<set $leftarm to "mechgrappled">><<set $lefttarget to "machine">>
+				<</if>>
+				<<if $rightarm isnot "bound">>
+					<<set $rightarm to "mechgrappled">><<set $righttarget to "machine">>
+				<</if>>
+			<<else>>
+				The <<machine_damage arm_chains>> chains holding your arms resist your movements, <span class="lblue">but remain loose.</span>
+			<</if>>
+		<<elseif $machine.arm_chains.state is "recovering">>
+			The <<machine_damage arm_chains>> chains holding your arms twitch, <span class="teal">but remain loose.</span>
+		<<elseif $machine.arm_chains.state is "destroyed">>
+			<span class="teal">The <<machine_damage arm_chains>> chains holding your arms remain loose.</span>
+		<<elseif $machine.arm_chains.state is "inert">>
+			<span class="teal">The <<machine_damage arm_chains>> chains holding your arms remain loose.</span>
+		<</if>>
+		<br>
+	<</if>>
+	<<if $machine.leg_chains>>
+		<<if $machine.leg_chains.state is "ready">>
+			<<if _machine_legs is 1>>
+				The <<machine_damage leg_chains>> chains attached to your shackles retract, <span class="pink">pulling on your legs and immobilising them.</span>
+				<<set $feetactiondefault to "chain_struggle">>
+				<<set $feetuse to "mechgrappled">><<set $feettarget to "machine">>
+				<<set $machine.leg_chains.use to "grapple">>
+				<<set $machine.leg_chains.state to "grapple">>
+				<<if $leftleg isnot "bound">>
+					<<set $leftleg to "mechgrappled">>
+				<</if>>
+				<<if $rightleg isnot "bound">>
+					<<set $rightleg to "mechgrappled">>
+				<</if>>
+			<<else>>
+				The <<machine_damage leg_chains>> chains holding your legs resist your movements, <span class="lblue">but remain loose.</span>
+			<</if>>
+		<<elseif $machine.leg_chains.state is "recovering">>
+			The <<machine_damage leg_chains>> chains holding your legs twitch, <span class="teal">but remain loose.</span>
+		<<elseif $machine.leg_chains.state is "destroyed">>
+			<span class="teal">The <<machine_damage leg_chains>> chains holding your legs remain loose.</span>
+		<<elseif $machine.leg_chains.state is "inert">>
+			<span class="teal">The <<machine_damage leg_chains>> chains holding your legs remain loose.</span>
+		<</if>>
+		<br>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget "machine_vaginal_disable">>
+	<<if $vaginause is "machine">>
+		<<set $vaginause to 0>>
+		<<set $vaginastate to 0>>
+	<</if>>
+<</widget>>
+
+<<widget "machine_anal_disable">>
+	<<if $anususe is "machine">>
+		<<set $anususe to 0>>
+		<<set $anusstate to 0>>
+	<</if>>
+<</widget>>
+
+<<widget "machine_arm_chains_disable">>
+	<<if $leftarm isnot "bound">>
+		<<set $leftarm to 0>>
+		<<set $leftactiondefault to "rest">>
+	<</if>>
+	<<if $rightarm isnot "bound">>
+		<<set $rightarm to 0>>
+		<<set $rightactiondefault to "rest">>
+	<</if>>
+<</widget>>
+
+<<widget "machine_leg_chains_disable">>
+	<<if $leftleg isnot "bound">>
+		<<set $leftleg to 0>>
+		<<set $feetuse to 0>>
+		<<set $feetactiondefault to "rest">>
+	<</if>>
+	<<if $rightleg isnot "bound">>
+		<<set $rightleg to 0>>
+		<<set $feetuse to 0>>
+		<<set $feetactiondefault to "rest">>
+	<</if>>
+<</widget>>
+
+<<widget "machine_speed">>
+	<<set $machine.speed to _args[0]>>
+	<<if $robinMachineSpeed>>
+		<<set $robinMachineSpeed to 4 - _args[0]>>
+	<</if>>
+<</widget>>

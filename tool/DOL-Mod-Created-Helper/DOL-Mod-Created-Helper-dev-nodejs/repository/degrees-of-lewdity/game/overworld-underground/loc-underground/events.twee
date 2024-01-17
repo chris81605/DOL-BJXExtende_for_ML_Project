@@ -1,0 +1,1373 @@
+:: Underground Cell Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $phase is 1>>
+		<<set $enemytrust -= 80>>
+		<<set $enemyanger += 120>>
+	<<else>>
+		<<set $enemytrust -= 40>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Cell Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Cell Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Cell Molestation Finish
+
+<<if $enemyhealth lte 0>>
+	The <<person>> recoils from you in pain and hobbles over to where <<he>> entered. <<He>> slams <<his>> fist into the door.
+	"Let me out," <<he>> shouts. "You locked me in with a psycho." The door opens and <<he>> leaves.
+	<br><br>
+
+	<<endevent>>
+	<<generate1>><<person1>>
+	<<if $undergroundbrothel.water gte 1>>
+		The door opens again, and a <<person>> stands in the doorway. "You'll give in," <<he>> says.
+		"And if you don't, you'll become too weak to fight back. Why make it harder on yourself?" <<He>> slams the door shut.
+	<<else>>
+		The door opens again, and a <<person>> stands in the doorway. "So that's how it's gonna be?" <<he>> says, looking disappointed.
+		"Fine. We'll see how stubborn you are without water." <<He>> slams the door shut.
+		<<set $undergroundbrothel.water to 1>>
+	<</if>>
+	<<undergroundReturnToCell "skip">>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<set $forcedprostitutionstat += 1>><<fameprostitution 1>>
+	Satisfied, <<he>> leaves you on the mattress and exits the way <<he>> came in.
+	<<undergroundReturnToCell false>>
+
+	<<if $undergroundbrothel.water gte 22>>
+		<<generate1>><<person1>>
+		The door opens again, and a <<person>> stands in the doorway. "Good <<girl>>," <<he>> says, smiling.
+		<<if $undergroundbrothel.water gte 6>>
+			<<if $NPCList[0].penis isnot "none">>
+				<<He>> enters the room, closing the door behind <<him>>. "We'll turn your tap back on. But first a treat. You get to drink straight from my cock."
+				<br><br>
+				<<link [[Next|Underground Cell Oral]]>><<set $molestationstart to 1>><</link>>
+				<br>
+			<<else>>
+				"We'll turn your tap back on. You're gonna make us lots of money." <<He>> shuts the door, once more plunging you into darkness.
+				<<set $undergroundbrothel.water to 0>>
+				<br><br>
+				<<link [[Next|Underground Cell]]>><<set $eventskip to 1>><</link>>
+			<</if>>
+		<<else>> <!-- unreachable because water is always greater than 6, if water is greater than 22. -->
+			"We're not gonna give you back your water just yet, you haven't suffered enough for your disobedience. Keep up the good work though."
+			<<He>> slams the door shut.
+			<br><br>
+			<<link [[Next|Underground Cell]]>><<set $eventskip to 1>><</link>>
+		<</if>>
+	<<else>>
+		<<link [[Next|Underground Cell]]>><<set $eventskip to 1>><</link>>
+	<</if>>
+<</if>>
+
+:: Underground Cell Oral
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<npcoral>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Cell Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Cell Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Cell Oral Finish
+
+<<if $enemyhealth lte 0>>
+	You shove the <<person1>><<person>> away from you. "You still haven't learned your place," <<he>> says, nursing a bruise.
+	"We'll see how long you can keep it up."
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"Good <<girl>>," <<he>> says. "I'll switch your water back on. Hopefully you've learned your lesson."
+	<<set $undergroundbrothel.water to 0>>
+<</if>>
+The door slams shut behind <<him>>, plunging you into darkness.
+<<undergroundReturnToCell "skip">>
+
+:: Underground Dance Intro
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+You are led from your cell into a corridor outside. It looks medieval like your cell but with modern furnishings.
+You round a corner and see a large group of <<people>> surrounding a stage. You see a staircase on the opposite side of the room, which might be the way out.
+<<covered>>
+All eyes are on you as you are led up to the central platform. There's music playing.
+<br><br>
+<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+"Go on," A <<person1>><<person>> says. "Do something."
+<br><br>
+
+<<set $audiencearousal to 51>>
+
+<<link [[Dance for them|Underground Dance]]>>
+	<<danceinit>>
+	<<set $audience to 50>>
+	<<set $venuemod to 0>>
+	<<set $dancelocation to "underground">>
+	<<set $forceddance to 1>>
+<</link>><<gstress>><<gtiredness>>
+<br><br>
+
+<<link [[Refuse|Underground Stage Refuse]]>><<endevent>><</link>>
+<br>
+
+:: Underground Cell Resist
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<set $enemytrust -= 120>>
+	<<set $enemyanger += 120>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or ($pain gte 100 and $willpowerpain is 0)>>
+	<span id="next"><<link [[Next|Underground Cell Resist Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Cell Resist]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Cell Resist Finish
+<<if $enemyhealth lte 0>>
+
+	The <<person>> staggers away from you.
+	<<if $undergroundbrothel.water gte 1>>
+		"You'll give in," <<he>> says. "And if you don't, you'll become too weak to fight back. Why make it harder on yourself?" <<He>> slams the door shut.
+	<<else>>
+		"So that's how it's gonna be?" <<he>> says, looking disappointed. "Fine. We'll see how stubborn you are without water." <<He>> slams the door shut.
+		<<set $undergroundbrothel.water to 1>>
+	<</if>>
+
+	<<undergroundReturnToCell>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<He>> pants. "Maybe... maybe another time. I need a lie down." The door slams shut behind <<him>>, plunging you into darkness.
+	<br><br>
+
+	<<undergroundReturnToCell>>
+
+<<elseif $pain gte 1>>
+
+	You're too badly beaten to put up a fight. The <<person>> drags your helpless body from the cell.
+	<br><br>
+
+	<<endcombat>>
+	<<set $phase to $phaselast>>
+
+	<<if $phase is 1>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[Next|Underground Robin Dice Intro]]>><</link>>
+		<<else>>
+			<<link [[Next|Underground Dance Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 2>>
+		<<if $undergroundbrothel.robin>>
+			<<if $tentacledisable is "t">>
+				<<link [[Go quietly|Underground Robin Stage Intro]]>><</link>>
+			<<else>>
+				<<link [[Go quietly|Underground Robin Tentacles Intro]]>><</link>>
+			<</if>>
+		<<else>>
+			<<link [[Next|Underground Presentation]]>><</link>>
+		<</if>>
+	<<elseif $phase is 3>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[Next|Underground Robin Machine Intro]]>><</link>>
+		<<else>>
+			<<link [[Next|Underground Stage Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 4>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[Go quietly|Underground Robin Kiss Intro]]>><</link>>
+		<<else>>
+			<<link [[Next|Underground Film Intro]]>><</link>>
+		<</if>>
+	<<elseif $phase is 5>>
+		<<if $undergroundbrothel.robin>>
+			<<link [[Next|Underground Robin Hunt Intro]]>><</link>>
+		<<else>>
+			<<link [[Next|Underground Hunt Intro]]>><</link>>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Underground Dance
+<<set $outside to 0>><<set $location to "Underground">><<effects>>
+
+<<danceeffects>>
+<<danceaudience>>
+
+<<if $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		Being so exposed is humiliating, but there's nothing you can do.
+		<br><br>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34 and !$worn.under_lower.type.includes("dance")>>
+		Being so exposed is humiliating, but there's nothing you can do.
+		<br><br>
+	<</if>>
+<</if>>
+
+<<danceactions>>
+
+<<if $danceevent is "finish">>
+<<elseif $danceevent is "private">>
+	<<link [[Next|Underground Dance Oral]]>><<dance_private_init>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $danceevent is "rape">>
+	<<link [[Next|Underground Dance Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Underground Stage Refuse
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+<<if $speech_attitude is "meek">>
+	You stare meekly at your feet, but refuse their demand.
+<<elseif $speech_attitude is "bratty">>
+	You stare out at the crowd in defiance, and refuse their demand.
+<<else>>
+	Though afraid, you refuse their demand.
+<</if>>
+
+The crowd starts booing. A <<generate1>><<person1>><<person>> runs on stage. "Please accept our apologies," <<he>> says, picking up your leash.
+
+<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	<<endevent>>
+	<<beastNEWinit 1 pig>>
+	"Instead of our scheduled show, we have a special treat for you." A metal shutter opens behind you, revealing a gigantic <<beasttype>>.
+	<br><br>
+
+	<<link [[Next|Underground Stage Pig]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	"Instead of our scheduled show, we invite you to watch our punishment of this insolent <<bitch>>."
+	<br><br>
+
+	<<link [[Next|Underground Stage Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+	<br>
+<</if>>
+
+:: Underground Stage Pig
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Stage Pig Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Stage Pig]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Stage Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $phase is 1>>
+		<<set $enemytrust -= 200>>
+		<<set $enemyanger += 200>>
+	<<else>>
+		<<set $enemytrust -= 120>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Stage Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Stage Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Stage Molestation Finish
+<<if $enemyhealth lte 0>>
+
+	The <<person1>><<person>> recoils in pain and tumbles from the stage. <<tearful>> you jump over <<him>> and run for the stairs.
+	The audience are so bemused they make no move to stop you.
+	You climb the stairs as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	The crowd applauds as you are led off the stage and back to your cell.
+	<<undergroundReturnToCell>>
+
+<</if>>
+
+:: Underground Stage Pig Finish
+<<if $enemyhealth lte 0>>
+
+	The <<beasttype>> flees in pain and fear, running amok among the audience in an attempt to find an exit.
+	<<tearful>> you leap from the stage and run for the stairs.
+	The audience are so distracted they make no move to stop you.
+	You climb the stairs as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>><<famebestiality 50>>
+
+	The crowd applauds as you are led off the stage and back to your cell.
+
+	<<undergroundReturnToCell>>
+
+<</if>>
+
+:: Underground Dance Oral
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>The <<person>> climbs on stage.<<npcoral>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Dance Oral Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Dance Oral]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Dance Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Dance Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Dance Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Dance Oral Finish
+<<if $enemyhealth lte 0>>
+
+	The <<person1>><<person>> recoils in pain and tumbles from the stage. <<tearful>> you jump over <<him>> and run for the stairs.
+	The audience are so bemused they make no move to stop you.
+	You climb the stairs as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	The crowd applauds and the <<person>> holds <<his>> arms in the air, as if abusing you were some sort of triumph.
+	You are led off the stage and back to your cell.
+
+	<<undergroundReturnToCell>>
+
+<</if>>
+
+:: Underground Dance Rape Finish
+<<if $enemyhealth lte 0>>
+
+	The <<person1>><<person>> recoils in pain and tumbles from the stage, and the others back off in instinctive fear.
+	<<tearful>> you jump over <<him>> and run for the stairs.
+	The audience are so bemused they make no move to stop you.
+	You climb the stairs as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	A voice rings out. "We hope you enjoyed our product, but we need to ask you to vacate the stage." The crowd does as instructed.
+	<br><br>
+
+	You are led off the stage and back to your cell.
+
+	<<undergroundReturnToCell>>
+
+<</if>>
+
+:: Underground Stage Intro
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+You are led once more to the stage, where the crowd awaits. <<covered>>
+
+<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
+	<<beastNEWinit 1 pig>>
+	Once there, a metal shutter rattles open behind you, and a gigantic <<beasttype>> steps out. The audience cheers it on.
+	<br><br>
+
+	<<link [[Next|Underground Stage Pig]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<<else>>
+	There's a <<generate1>><<person1>><<person>> already waiting for you. <<He>> takes hold of you leash and pulls you closer while looking at the audience.
+	"What shall I do with <<phim>> my friends?"
+	<br><br>
+
+	<<link [[Next|Underground Stage Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<</if>>
+
+:: Underground Presentation
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<generate1>><<generate2>>
+
+You are led to the stage where four <<victimgirls>> stand in a line, eyes downcast. Each wears a collar similar to your own.
+As soon as you take your place among them, a pair of large wooden doors opens and a <<person1>><<person>> strides into the room.
+<<He>> is flanked by a <<person2>><<person>> who struggles to keep up.
+"We have a nice selection for you today <<person1>><<sir>>. Just the sort of thing you like." Says the <<person2>><<person>>.
+<br><br>
+
+"I'll see for myself," the <<person1>><<person>> responds. <<He>> stops in front of the stage and eyes the <<victimgirls>> up, including you. <<covered>>
+"This one's all skin and bone," <<he>> says, pointing at the <<victimgirl>> on the far side from you. "<<pShe>> looks likely to faint at any moment."
+<br><br>
+
+"Our <<victimgirls>> are all fed a-"
+<br><br>
+
+<<if $attractiveness gte 3000>>
+
+	"Spare me," <<he>> turns to you and smiles. "This one will do nicely. Bring <<phim>> in."
+	<br><br>
+
+	<<link [[Next|Underground Presentation2]]>><</link>>
+	<br>
+
+<<else>>
+
+	"Spare me," <<he>> turns to you, but looks away dismissively. "I've made my choice." <<He>> lunges for the <<person2>><<person>> and drags <<him>> to the ground.
+	<br><br>
+
+	"I-I'm not... Stop!"
+
+	The protestations are no use. You hear a loud smack and the <<person>> yelp in pain as you are led back to your cell.
+	<br><br>
+	<<endevent>>
+	<<link [[Next|Underground Cell]]>><</link>>
+	<br>
+
+<</if>>
+
+:: Underground Presentation2
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+The <<person1>><<person>> leaves the way they came as the <<person2>><<person>> climbs the stage and picks up your leash.
+<<He>> pulls you after the <<person1>><<person>>, through the same wooden doors. The room beyond is spacious and decorated like the abode of a monarch.
+A four-poster bed sits opposite you, on which the <<person1>><<person>> lounges.
+<br><br>
+
+The <<person2>><<person>> moves to leave but is interrupted.
+"Did I say you could leave? You're gonna help me discipline this little thing, or I'll punish you next. Both of you come here."
+<br><br>
+
+As you walk close to <<person1>><<him>>, <<he>> grabs you and bends you over <<his>> thighs.
+<br><br>
+
+<<link [[Next|Underground Presentation Molestation]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Underground Presentation Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>><<npcspank>>
+	<<set $enemytrust -= 120>>
+	<<set $timer to 30>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[Next|Underground Presentation Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Presentation Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Presentation Molestation Finish
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The <<person1>><<person>> falls backward on the bed and lies still, apparently asleep.
+	The <<person2>><<person>> picks up your leash and leads you back to your cell. <<He>> avoids looking at you the whole time.
+	<br><br>
+
+	<<undergroundReturnToCell>>
+<<elseif $enemyhealth lte 0>>
+	The <<person1>><<person>> falls against one of the bed posts, breaking it.
+	<<tearful>> you jump over <<him>> and run out the room, towards the stairs. You climb as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+	<<dungeonescape>>
+
+	<<link [[Next|Forest]]>><<set $forest to 40>><</link>>
+<<elseif $timer lte 0>>
+	The <<person1>><<person2>> reclines on the bed. "It's been a long day," <<he>> says as <<he>> waves both of you from the room.
+	The <<person2>><<person>> picks up your leash and leads you back to your cell. <<He>> avoids looking at you the whole time.
+	<br><br>
+
+	<<undergroundReturnToCell>>
+<</if>>
+
+:: Underground Hunt Intro
+<<location "forest">><<effects>>
+
+You are led past the empty stage and up the flight of stairs. The air becomes cooler and fresher as you ascend, and you soon emerge outside.
+
+<<if Time.dayState is "dawn">>
+	The sun is hidden behind trees, but you think it's dawn.
+<<elseif Time.dayState is "dusk">>
+	The sun is hidden behind trees, but you think it's dusk.
+<<elseif Time.dayState is "day">>
+	You have to shield your eyes from the sunlight, and you realise just how dim those lights were.
+<<elseif Time.dayState is "night">>
+	The cool night air blows against your skin.
+<</if>>
+
+It looks like you're in a forest clearing.
+<br><br>
+
+<<if $rng gte 51 and $plantdisable is "f" and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+	<<generatePlant1>><<generate2>><<generate3>>
+	<<saveNPC 0 underground_plant>><<saveNPC 1 underground_guard_1>><<saveNPC 2 underground_guard_2>>
+
+	You see a <<person2>><<person>> and a <<person1>><<person "normal">> talking up ahead, with a <<person3>><<person>> nearby smoking while watching the door.
+	The <<person2>><<person>> cuts <<himself>> off as you approach, gesturing to you. "See, <<pshes>> right here. We upheld our end."
+	<br><br>
+
+	The <<person1>><<person "normal">> ignores <<person2>><<him>> and examines you. "Ooh, I like this one!"
+	<<person1>><<He>> has <<plant_details>> braided into <<his>> hair, and a collection of vines protruding from <<his>> back.
+	<br><br>
+
+	The <<person>> prances toward you and smiles. "Hey! Do you want to have sex with me?"
+	<br><br>
+
+	<<set _link to true>>
+	<span id="choice">
+		<<if $deviancy gte 35>>
+			<<link "Yes">><<replace "#choice">><<undergroundPlantFakeChoice>><</replace>><<run Links.generateLinkNumbers($(".passage"))>><</link>><<deviant3>>
+		<<else>>
+			<span class="blue">You are not deviant enough to agree to sex with a <<personsimple>>.</span>
+		<</if>>
+		<br>
+		<<link "No">><<replace "#choice">><<undergroundPlantFakeChoice>><</replace>><<run Links.generateLinkNumbers($(".passage"))>><</link>>
+	</span>
+
+<<else>>
+	Several naked <<victimgirls>> are lined up, with a rope suspended in front of them. There's a large crowd stood around them, leering.
+	The <<victimgirls>> stare at their feet. <<covered>> You're dragged to the end of the line.
+	<<if $worn.feet.type.includes("shackle")>>
+		You hear a click as the cuffs around your ankles are unlocked and removed.
+		<<remove_shackle>>
+	<</if>>
+	<br><br>
+	<<beastNEWinit 1 dog>>
+	<<generate2>>
+	<<person2>> A <<person>> in a waistcoat enters the clearing, holding three <<beasttype 0>>s on leashes.
+	They strain against <<person2>><<him>>, practically pulling <<him>> along. "We're ready," <<he>> says, brandishing a pistol.
+	"First shot, the prey run. Second shot, we hunt!" The crowd cheers. You hear one of the <<victimgirls>> sob.
+	<br><br>
+
+	<<link [[Next|Underground Hunt]]>><</link>><<athleticsdifficulty 1 1200>>
+<</if>>
+
+:: Underground Hunt
+<<location "forest">><<effects>>
+
+The pistol sounds off, and you run.
+<br><br>
+
+You've barely reached the trees when the second shot rings out. You run as fast you can. You hear the <<victimgirls>> scream as they are caught, one by one.
+
+<<if $athleticsSuccess>>
+	<<rng>>
+	Eventually your legs give out and you collapse against a tree. You hear nothing but your beating heart and the wind rustling through leaves.
+	You got away.
+	<<pass 5>>
+	<br><br>
+
+	<<endevent>>
+	<<dungeonescape>>
+
+	<<link [[Next|Forest]]>><<set $forest to 1>><</link>>
+<<else>>
+	<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for BeastPeople -->
+		You hear something running through the grass behind you, and feel <<print ($monster is 1 ? "hands" : "paws")>> on your back as you are forced to your knees.
+		The <<beasttype 0>> starts humping<<if $NPCList[0].penis isnot "none">>, you feel <<bhis 0>> penis prodding your <<bottom>><</if>>.
+		<br><br>
+
+		"Looks like <<bhe 0>> likes you," you hear the <<person>> say as <<he>> catches up. <<He>> is not alone, much of the crowd follows behind <<him>>.
+		"And it's only fair <<bhe 0>> gets to do as <<bhe 0>> likes with <<bhis 0>> quarry." The crowd forms a circle around you.
+		<br><br>
+
+		<<link [[Next|Underground Hunt Dog]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		You run as fast you can. You hear the <<victimgirls>> scream as they are caught, one by one.
+		You hear something running through the grass behind you right before you are tackled to the ground.
+		<br><br>
+
+		"Got you," the <<person>> says. A number of others from the crowd arrive, panting. "Now the hunter devours <<his>> prey."
+		<br><br>
+
+		<<saveNPC 1 "underground_hunt_1">>
+		<<endevent>>
+		<<loadNPC 0 "underground_hunt_1">>
+		<<clearNPC "underground_hunt_1">>
+
+		<<link [[Next|Underground Hunt Molestation]]>><<set $molestationstart to 1>><</link>>
+	<</if>>
+<</if>>
+
+:: Underground Hunt Dog
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $enemytrust -= 80>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast>>
+<br><br>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Hunt Dog Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Hunt Dog]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Hunt Dog Finish
+<<location "forest">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+
+	<<beastejaculation>>
+
+	The <<beasttype 0>> barks happily. "Good dog," says the <<person2>><<person>>.
+	The crowd whisper among themselves as <<he>> grabs your leash and pulls you to your feet.
+	<<if !$worn.feet.type.includes("shackle")>>
+		You're held still as cold metal is clamped around your ankles once more.
+		<<shackle_feet>>
+	<</if>>
+	"I hope the other groups had as much fun with their prey as we did."
+	<br><br>
+
+	A scream erupts nearby, and the crowd rushes away to investigate, leaving the <<person>> to drag you back into the dungeon and down to your cell.
+	<<undergroundReturnToCell>>
+
+<<elseif $enemyhealth lte 0>>
+
+	The <<beasttype 0>> whimpers and flees. <<tearful>> you jump to your feet and run for it.
+	The <<person2>><<person>> tries to stop you, but you dodge <<him>> and escape into the forest.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<</if>>
+
+:: Underground Hunt Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Hunt Molestation Finish]]>><</link>></span><<nexttext>>
+
+<<else>>
+	<span id="next"><<link [[Next|Underground Hunt Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Hunt Molestation Finish
+
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	You hear the crowd whisper among themselves as the <<person>> grabs your leash and pulls you to your feet.
+	<<if !$worn.feet.type.includes("shackle")>>
+		You're held still as cold metal is clamped around your ankles once more.
+		<<shackle_feet>>
+	<</if>>
+	"I hope the other groups had as much fun with their prey as we did."
+	<br><br>
+
+	A scream erupts nearby, and the crowd rushes away to investigate, leaving the <<person>> to drag you back into the dungeon and down to your cell.
+	<<undergroundReturnToCell>>
+<<elseif $enemyhealth lte 0>>
+	The <<person>> falls against a tree. <<tearful>> you jump to your feet and run for it.
+	<<He>> tries to stop you, but you dodge <<him>> and escape into the forest.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+<</if>>
+
+:: Underground Film Intro
+
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<generate1>><<generate2>>
+You are led to another part of the dungeon, and into a well-lit room. A <<person2>><<person>> is already here, holding a camera.
+Stood beside <<him>> is a <<person1>><<person>>.
+<<if $rng gte 51 and $swarmdisable is "f">>
+	There's a bath sitting in the middle of the room. The <<person1>><<person>> pulls you over to it and pushes you inside.
+	Before you get your bearings, <<he>> attaches a clip on the bottom of the bath to your collar, locking you in place.
+	You look up at the <<person>>, now holding a bucket, and <<person2>><<person>> and wonder what they intend.
+	<br><br>
+
+	The <<person1>><<person>> tips the bucket over you, covering you in thick, long worms. They wriggle all over you, inciting shameful feelings.
+	<br><br>
+
+	<<link [[Next|Underground Film Worms]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	The <<person>> walks right up behind you, uncomfortably close. The <<person2>><<person>> nods, and the <<person1>><<person>> starts to grope you.
+	<br><br>
+
+	<<link [[Next|Underground Film Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Underground Film Worms
+
+<<set $outside to 1>><<set $location to "underground">><<effects>><<set $bus to "danube">>
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<molested>>
+	<<controlloss>>
+	<<set $combat to 1>>
+	<<set $enemytype to "swarm">>
+	<<swarminit "worms" "container" "shaking" "shatter" "steady" 2 0>>
+	<<set $timer to 24>>
+<</if>>
+<<if $timer is 21>>
+	The <<person2>><<person>> moves to get a better shot of your face.
+	You feel more self-conscious about your reactions, but there's little you can do to control them.
+<<elseif $timer is 18>>
+	<span class="pink">The <<person1>><<person>> tips another bucket of worms into the bath.</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<<elseif $timer is 15>>
+	The <<person2>><<person>> moves to get a better shot of your <<breasts>>.
+<<elseif $timer is 12>>
+	<span class="pink">The <<person1>><<person>> tips another bucket of worms into the bath.</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<<elseif $timer is 9>>
+	The <<person2>><<person>> moves to get a better shot of your <<genitals>>.
+<<elseif $timer is 6>>
+	<span class="pink">The <<person1>><<person>> tips another bucket of worms into the bath.</span>
+	<<set $swarm.amount.active[0] += 2>>
+	<<set $swarm.amount.active[4] += 2>>
+<<elseif $timer is 3>>
+	The <<person2>><<person>> moves to get a better shot of your face.
+<<else>>
+	The <<person2>><<person>> continues to film your ordeal.
+<</if>>
+<br><br>
+
+<<if $face isnot "covered">>
+	<<fameexhibitionism 1>>
+<</if>>
+<<swarmeffects>>
+<<swarm>>
+<<swarmactions>>
+<<if $timer lte 0>>
+	<span id="next"><<link [[Next|Underground Film Worms Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Film Worms]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Film Worms Finish
+
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+"That should do it," says the <<person2>><<person>> as <<he>> stops filming.
+The <<person1>><<person>> unplugs your collar from the bath and you scramble to you feet.
+The worms tumble off you, but you still shiver in horror and disgust.
+<br><br>
+
+The <<person>> tugs on your leash, and you almost trip as you leave the bath.
+You're horrified at the thought of more people seeing what just happened to you,
+but there's nothing you can do as the <<person1>><<person>> takes you back to your cell.
+<br><br>
+
+<<undergroundReturnToCell>>
+
+:: Underground Film Molestation
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<set $enemyno to 1>><<set $enemynomax to 1>><<maninit>>
+	<<set $timer to 24>>
+	<<set $NPCList[1].penis to "none">>
+	<<set $NPCList[1].lefthand to "none">>
+	<<set $NPCList[1].righthand to "none">>
+	<<set $NPCList[1].mouth to "none">>
+	<<set $NPCList[1].vagina to "none">>
+<</if>>
+<<effects>>
+<<effectsman>><<man>>
+<<if $timer is 21>>
+	The <<person2>><<person>> moves to get a close shot of your face.
+<<elseif $timer is 18>>
+	The <<person2>><<person>> moves to get a close shot of your <<bottom>>.
+<<elseif $timer is 15>>
+	The <<person2>><<person>> moves to get a close shot of your <<breasts>>.
+<<elseif $timer is 12>>
+	The <<person2>><<person>> moves to get a close shot of your <<genitals>>
+<<elseif $timer is 9>>
+	The <<person2>><<person>> moves to get a close shot of your face.
+<<elseif $timer is 6>>
+	The <<person2>><<person>> steps back to get a shot of your whole body.
+<<elseif $timer is 3>>
+	The <<person2>><<person>> continues to film.
+<<else>>
+	The <<person2>><<person>> continues to film.
+<</if>>
+<br><br>
+<<if $face isnot "covered">>
+	<<fameexhibitionism 1>><<famerape 1>>
+<</if>>
+<<person1>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[Next|Underground Film Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Film Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Film Molestation Finish
+
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+<<if $enemyhealth lte 0>>
+	The <<person1>><<person>> trips and falls against the <<person2>><<person>>.
+	The camera drops to the ground and shatters. "You idiot," says the <<person2>><<person>>.
+	<br><br>
+
+	The <<person1>><<person>> struggles to <<his>> feet. "Shut up," <<he>> says. "Before <<pshe>> gets away."
+	But you're already well ahead of them. You run down the corridor, past your cell, then into the empty theatre.
+	You run towards the stairs on the far side, and climb as fast as you can, footsteps thundering beneath you.
+	You emerge in the forest and run in a random direction, aware you are still being pursued.
+	<br><br>
+
+	<<undergroundEscapeForestStart>>
+
+<<else>>
+	<<if $enemyarousal gte $enemyarousalmax>>
+		<<ejaculation>>
+	<</if>>
+	"That'll do," says the <<person2>><<person>> as <<he>> stops filming.
+	You're horrified at the thought of other people seeing what happened to you,
+	but there's nothing you can do as the <<person1>><<person>> leads you back to your cell.
+	<br><br>
+
+	<<undergroundReturnToCell>>
+	<br>
+<</if>>
+
+:: Underground Tattoo Struggle
+<<effects>>
+
+You struggle against the chains as the <<person>> pushes a button. The rails bow above you, and the chains tighten.
+Worse, a light flickers on the machine behind the needle, and it shudders into life.
+<br><br>
+
+The <<person>> and the others step back, leaving the machine to work.
+<br><br>
+<<endevent>>
+<<link [[Next|Underground Tattoo Machine]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+
+:: Underground Tattoo Still
+<<effects>>
+
+You lie still, eyes focused on the contraption in front of you. "Maybe we don't need restraints after all!" the <<person3>><<person>> <<print ($pronoun is "f" ? "giggles" : "chuckles")>>.
+The <<person1>><<person>> pushes a button. The rails bow above you, and the chains tighten. Worse, a light flickers on the machine behind the needle, and it shudders into life.
+<br><br>
+
+The <<person>> and the others step back, leaving the machine to work.
+<br><br>
+<<endevent>>
+<<link [[Next|Underground Tattoo Machine]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Underground Tattoo Machine
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<set $machine_health to 15>><<set $machine_ammo to 3>>
+	<<machine_init tattoo arm_chains leg_chains>>
+	<<set $machine.tattoo.armed to 1>>
+	<<prop rails table neck_shackle>>
+	<<set $bodywriting_special to "dungeon">>
+<</if>>
+
+<<effects>>
+
+Your captors watch with mild interest, as if accustomed to this.
+<br><br>
+
+<<machine_effects>><<machine_combat>>
+<<machine_state>>
+<<machine_actions>>
+
+<<if $machine.number lte 0 or $finish is 1>>
+	<span id="next"><<link [[Next|Underground Tattoo Machine End]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Tattoo Machine]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Underground Tattoo Machine End
+<<effects>>
+
+<<generate1>><<person1>>
+
+<<if $machine_tattoo_success>>
+	"So you don't forget," a <<person>> says as the machine falls silent.
+<<else>>
+	"Got some fight this one," a <<person>> says as the machine falls silent.
+<</if>>
+Your captors leave the room, taking the machine with them. You're plunged into darkness once more.
+<br><br>
+<<tearful>> you sit upright.
+<br><br>
+
+<<clotheson>>
+<<machine_end>>
+
+
+<<link [[Next|Underground Cell]]>><</link>>
+<br>
+
+:: Underground Tattoo
+
+<<effects>>
+The <<person1>><<person>> hovers the needle over your pelvis, then gets to work.
+<br><br>
+It stings.
+<<gpain>><<pain 6>>
+<br><br>
+<<pass 60>>
+
+<<if !["brand", "magic", "tattoo"].includes($skin.left_shoulder.pen)>>
+	The <<person2>><<person>> lifts a needle of <<his>> own and, holding your arm down with <<his>> knees, gets to work on your shoulder.
+	<br><br>
+<</if>>
+
+You remain held down through the procedure. By the end you've grown accustomed to the pain, and even your anxiety has subsided a little.
+It flares back up when the <<person1>><<person>> pulls away, wearing an evil smile ear-to-ear.
+<br><br>
+You look down.
+
+<<if !["brand", "magic", "tattoo"].includes($skin.left_shoulder.pen)>>
+	They've tattooed <span class="pink">"Slave"</span> onto your pelvis, and <span class="pink">"163"</span> onto your shoulder.
+	<<add_bodywriting left_shoulder one_six_three tattoo>>
+<<else>>
+	They've tattooed <span class="pink">"Slave"</span> onto your pelvis.
+<</if>>
+<<add_bodywriting pubic slave tattoo>>
+
+"So you don't forget," the <<person1>><<person>> says as the others release you.
+<br><br>
+
+They leave the room, taking their machine with them. You're once more plunged into darkness.
+<br><br>
+
+<<endevent>>
+<<link [[Next|Underground Cell]]>><</link>>
+<br>
+
+:: Underground Plant Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit "plant">><<npcexpose>>
+	<<set $enemyarousalmax to 800>>
+	<<set $enemyanger to 20>>
+	<<set $apologised to 1>>
+	<<set _randomtentacles to random(6, 10)>>
+	<<makeAbomination _randomtentacles 6 "vine" "vine" true>>
+	<<set $timer to 3>><<set $plantFame to 0>>
+<</if>>
+
+<<if $timer is 3>>
+	<br>
+	<span class="blue">You see the <<person3>><<person>> setting up a camera.</span>
+<<elseif $timer is 2>>
+	<br>
+	<span class="purple">You see the <<person3>><<person>> turning the camera on.</span>
+	"So how are you gonna sell this footage without people freaking out over that thing?" the <<person2>><<person>> asks. "Public's not supposed to know."
+<<elseif $timer is 1>>
+	<br>
+	<span class="pink">You see the <<person3>><<person>> facing the camera your way.</span>
+	"We'll just crop it out in post," the <<person3>><<person>> replies. "Keep the <<girl>> and the vines in the shot, people will assume it's CG."
+	<<if $face isnot "covered">>
+		<<fameexhibitionism 1>><<famerape 1>><<famebestiality 1>>
+		<<set $plantFame -= 1>>
+	<</if>>
+<<elseif $timer lte 0>>
+	<br>
+	<span class="pink">The <<person3>><<person>> films you.</span>
+	<<if $face isnot "covered">>
+		<<fameexhibitionism 1>><<famerape 1>><<famebestiality 1>>
+		<<set $plantFame -= 1>>
+	<</if>>
+<</if>>
+
+<<person1>>
+<br>
+<<effects>>
+<<effectsabomination>><<abomination>>
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Underground Plant Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Underground Plant Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Underground Plant Molestation Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation "short">>
+	<<if $enemyanger lte 0>>
+		<<location "forest">>
+		"That was great!" the <<person1>><<person>> squeals, flinging <<his>> arms around your neck. "You were one of the best ones yet. I like you!"
+		<<He>> begins planting syrupy kisses on your neck.
+		<<bodyliquid "neck" "goo">>
+		<br><br>
+
+		"That'll do," the <<person2>><<person>> says as <<he>> walks toward you.
+		The moment <<he>> gets close, the <<person1>><<person>> clutches you close to <<his>> body and growls. <<His>> vines flick at the guard threateningly.
+		<br><br>
+
+		The <<person2>><<person>> steps back, while the <<person3>><<person>> rubs <<his>> face.
+		"Never take a toy from these things, how many times have we told you this?"
+		<br><br>
+
+		The <<person1>><<personsimple>> makes a content sound once the guard backs off, and nuzzles back into your neck. "I like you."
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<loadNPC 0 underground_plant>><<loadNPC 1 underground_guard_1>><<loadNPC 2 underground_guard_2>>
+		<<link [[Next|Underground Plant Escape 1]]>><</link>>
+	<<else>>
+		<<set $outside to 0>><<set $location to "underground">>
+		"That was pretty good!" the <<person>> says, grinning. "You guys know how to pick 'em."
+		<br><br>
+
+		"As per our agreement, you'll supply us with your nectar now," the <<person3>><<person>> says, as the <<person2>><<person>> leads you away.
+		You hear the <<person1>><<person>> let out an exaggerated groan.
+		<br><br>
+
+		The <<person2>><<person>> leads you back to your cell.
+		<<undergroundReturnToCell>>
+		<<unset $plantFame>>
+	<</if>>
+<<elseif $enemyhealth lte 0>>
+	<<if $tentacles.active lte $tentacles.max/2>>
+		<<set $outside to 0>><<set $location to "underground">>
+		The <<person>> falls back with a wince. You scramble to your feet and try to run, but <span class="red">a vine ensnares your leg.</span>
+		<br><br>
+
+		"You said this one would be good!" <<he>> pouts, restraining your leg. "You keep lying to me. I hate you guys."
+		<br><br>
+
+		"We'll send you a better one," the <<person3>><<person>> says, holding <<his>> hands in front of <<him>> placatingly,
+		while the <<person2>><<person>> grabs your arm and marches you back down the stairs. You're led past the stage and back to your cell.
+		<br><br>
+
+		<<if $undergroundbrothel.water gte 1>>
+			<<He>> reaches your cell, opens the door and throws you in. "You'll give in," <<he>> says.
+			"And if you don't, you'll become too weak to fight back. Why make it harder on yourself?" <<He>> slams the door shut.
+		<<else>>
+			<<He>> reaches your cell, opens the door and throws you in. "So that's how it's gonna be?" <<he>> says, looking disappointed.
+			"Fine. We'll see how stubborn you are without water." <<He>> slams the door shut.
+			<<set $undergroundbrothel.water to 1>>
+		<</if>>
+		<<undergroundReturnToCell>>
+	<<else>>
+		<<location "forest">>
+		The <<person>> falls back with a wince. <<tearful>> you jump to your feet and run for it.
+		<<He>> sends a vine to try to catch you, <span class="green">but it falters midair and <<he>> hisses in pain</span>.
+		The <<person3>><<person>> shouts something into a walkie-talkie.
+		<br><br>
+
+		<<undergroundEscapeForestStart>>
+	<</if>>
+	<<unset $plantFame>>
+<</if>>
+<<clearNPC underground_plant>><<clearNPC underground_guard_1>><<clearNPC underground_guard_2>>
+
+:: Underground Plant Escape 1
+<<location "forest">><<effects>>
+
+The <<person1>><<person>> holds you close and continues to lick along your neck, while the guards watch with bemused expressions.
+<<He>> shifts, and you feel <<his>> breath on your ear.
+<br><br>
+
+"Keep your voice down," <<he>> whispers.
+"I like you. But you know who I don't like? Those lumps of compost. Calling me a thing and using me for my nectar. I'm tired of them."
+<<He>> strokes your head. "You wanna ditch this joint? Let's get out of here."
+<br><br>
+
+<<link [[Nod|Underground Plant Escape 2]]>><<set $phase to 0>><<dungeonescape>><</link>>
+<br>
+<<link [[Shake your head|Underground Plant Escape Refuse]]>><<set $phase to 1>><</link>>
+
+:: Underground Plant Escape Refuse
+<<set $outside to 0>><<set $location to "underground">><<effects>>
+
+The <<person1>><<person>> blinks, before frowning. "Aw... well, if you're sure, I guess. Would've loved to keep you for myself..." <<He>> reluctantly lets you go.
+<br><br>
+
+"We'll take <<phim>> from here," the <<person3>><<person>> says, walking toward you. "As per our agreement, you'll supply us with your nectar now-"
+<br><br>
+
+The <<person1>><<person>> lazily flips <<person3>><<him>> off. A vine whips forward and <span class="green">smashes the camera, wrecking it</span>.
+"You shit!" the <<person3>><<person>> shouts. "We just lost the footage, you-"
+<<fameexhibitionism $plantFame>><<famerape $plantFame>><<famebestiality $plantFame>>
+<<unset $plantFame>>
+
+The <<persons>> shouting fades away as you're led back to your cell. You sit on the mattress.
+<br><br>
+
+<<link [[Next|Underground Cell]]>><<endevent>><</link>>
+
+:: Underground Plant Escape 2
+<<location "forest">><<effects>>
+
+"Sweet." The <<person>> stiffens slightly. "Now, on my mark..."
+<br><br>
+
+<<He>> snaps <<his>> fingers, and <<his>> vines surge toward the guards.
+The <<person2>><<person>> shouts in alarm as <<hes>> restrained. The <<person3>><<person>> grimaces and reaches for <<his>> walkie-talkie. "It went rogue, we need-"
+<br><br>
+
+A vine slaps the radio out of <<his>> hand and entangles <<him>>. Another vine <span class="green">smashes the camera, wrecking it</span>.
+The <<person1>><<person>> lets you go and waves at the forest. "Go, go, go! I'll catch up!"
+<<fameexhibitionism $plantFame>><<famerape $plantFame>><<famebestiality $plantFame>>
+<<unset $plantFame>>
+<br><br>
+
+You scramble to your feet and bolt in a random direction into the forest.
+The <<person2>><<person>> and <<person3>><<person>> shouts expletives at the <<person1>><<person>>, their voices fading away as you run.
+<br><br>
+
+<<link [[Next|Underground Plant Escape 3]]>><</link>>
+
+:: Underground Plant Escape 3
+<<location "forest">><<effects>>
+
+You are in the forest, surrounded by nature. You don't hear the guards anymore, but the hairs on the back of your neck stand up.
+<span class="red">Something is following you.</span>
+<br><br>
+
+A bush nearby rustles and you tense up. Somebody pops their head out the top. <span class="green">It's the <<person>> that helped you escape.</span>
+<<stress -6>><<lstress>>
+<br><br>
+
+"Told you I'd catch up," <<he>> says with a wink. "Those clowns can find another <<personsimple>> to use. I'm done with them."
+<br><br>
+
+<<if $worn.feet.type.includes("shackle")>>
+	You feel something shifting around your feet. You look down to see vines coiling around your shackles.
+	The <<person>> grunts and the vines pull taut, snapping the shackles.
+	<<remove_shackle>>
+	<br><br>
+<</if>>
+
+<<He>> eyes you up for a moment. "Hey, now that we're away from them, do you want to have sex with me?" <<He>> shrugs.
+"I know we technically just did, but... for real this time."
+<br><br>
+
+<<if $deviancy gte 35>>
+	<<link [[Yes|Underground Plant Escape 4]]>><<set $phase to 2>><</link>><<deviant3>>
+<<else>>
+	<span class="blue">You are not deviant enough to agree to sex with a <<personsimple>>.</span>
+<</if>>
+<br>
+<<link [[No|Underground Plant Escape 4]]>><</link>>
+
+:: Underground Plant Escape 4
+<<location "forest">><<effects>>
+
+<<if $phase is 2>>
+	You step forward and open your mouth. Before you can say anything, the <<person>> grins and tugs you to the forest floor, flipping on top of you.
+	<<He>> caresses your face with one of <<his>> vines.
+	<<deviancy3>>
+
+	"You know why those guys wanted me to work with them?" <<he>> whispers. "It's because of my nectar. It's very special."
+	<<He>> gives you a sultry smile. "Let me show you why."
+	<br><br>
+	<<link [[Next|Forest Plant Sex]]>><<set $sexstart to 1>><<set $phase to 2>><</link>>
+<<else>>
+	The <<person>> frowns in disappointment, but nods. "Still tired out, huh? That makes sense."
+	<<He>> shakes <<his>> head, dislodging a few <<plant_details>>. "Well, good luck out here."
+	<br><br>
+
+	<<He>> plants one more kiss on your cheek, then departs into the forest. One of <<his>> vines waves at you.
+	<<stress -6>><<trauma -6>><<lstress>><<ltrauma>>
+	<br><br>
+
+	<<link [[Next|Forest]]>><<endevent>><</link>>
+<</if>>
+
+:: Underground Shirt
+<<effects>>
+
+You wear the shirt. It's better than nothing.
+<br><br>
+
+<<link [[Next|Underground Cell]]>><<endevent>><</link>>
+<br>
+
+:: Underground Shirt Tear
+<<effects>>
+
+You tear the fabric to pieces, and throw the remains into the corner. You won't give in to the humiliation.
+<br><br>
+
+<<link [[Next|Underground Cell]]>><<endevent>><</link>>
+<br>

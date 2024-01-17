@@ -1,0 +1,94 @@
+:: Commercial alleyways
+
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "commercial">><<getTarget true>>
+You are in an alleyway in the commercial district.
+<<if Time.dayState is "day">>
+	<<if $weather is "rain">>
+		You can hear the commotion of the high street, even over the sound of rain.
+	<<elseif $weather is "snow">>
+		You can hear the commotion of the high street, muffled by the snow.
+	<<else>>
+		You can hear the commotion of the high street.
+	<</if>>
+<<elseif Time.dayState is "night">>
+	<<if $weather is "rain">>
+		Rainwater falls from gutters in waterfalls.
+	<<elseif $weather is "snow">>
+		Snow clogs the pathways.
+	<<else>>
+		You hear laughter from a nearby building.
+	<</if>>
+<<elseif Time.dayState is "dawn">>
+	Many doors stand open and you hear voices within.
+<<elseif Time.dayState is "dusk">>
+	Many doors stand open and you hear voices within.
+<</if>>
+There's a ladder to your left; you think it will take you to the rooftops.
+<<streeteffects>>
+<br><br>
+<<if $exposed gte 1>>
+	<<exhibitionism "alley">>
+	<<if Time.dayState isnot "night">>
+		Connudatus street is packed with stalls. You might be able to cross the street by hiding under them. If something went wrong however, you'd find yourself exposed in the middle of a busy public street.
+		<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte $arousalmax>>
+	<<orgasmstreet>>
+<</if>>
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutalley>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
+		<<eventsstreet>>
+	<<else>>
+		<<if $options.mapTop is true>>
+			<<map "commercial">>
+			<br>
+		<</if>>
+		Places of interest
+		<br>
+		<<if Time.dayState isnot "night" and $exposed gte 1>>
+			<<sneakicon>><<link [[Sneak under the stalls (0:10)|Stalls Ex]]>><<pass 10>><</link>>
+			<br>
+			<<if $exposed gte 2>>
+				<<if $exhibitionism gte 75>>
+					<<parkicon>><<link [[Cross the High Street into the park (0:05)|Cream Ex Naked]]>><</link>><<if $daily.ex.cream isnot 1>><<exhibitionist5>><</if>>
+					<br>
+				<</if>>
+			<</if>>
+			<<if $exposed is 1>>
+				<<if $exhibitionism gte 35>>
+					<<parkicon>><<link [[Cross the High Street into the park (0:05)|Cream Ex Undies]]>><</link>><<if $daily.ex.cream isnot 1>><<exhibitionist3>><</if>>
+					<br>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<laddericon>><<link [[Climb the ladder (0:02)->Commercial rooftops]]>><<pass 2>><</link>>
+		<br>
+		<<if Time.dayState isnot "night" and $exposed gte 1>>
+		<<else>>
+			<br>
+			<<add_link "Travel<br>">><<hideDisplay>>
+			<<connudatus>>
+			<<cliff>>
+			<<wolf>>
+			<<high>>
+			<<loiter>>
+		<</if>>
+		<<add_link "<br>Alternate routes<br>">><<hideDisplay>>
+		<<if $exposed gte 1 and Time.dayState isnot "night">>
+		<<else>>
+			<<residential>>
+			<<park>>
+		<</if>>
+		<<stormdrain>>
+		<<displayLinks>>
+		<<if $options.mapTop isnot true>>
+			<br>
+			<<map "commercial">>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>

@@ -1,0 +1,282 @@
+:: Island Build
+<<effects>>
+
+You look around your camp. There's plenty of leaves and grasses of all sizes. Usable wood will be harder to come by, as you lack the tools to cut it. You'll need to keep an eye out for appropriately-sized and shaped pieces while exploring, and make minor adjustments with sharp stone.
+<br><br>
+With enough elbow grease, you should be able to make simple furniture.
+<br><br>
+<<if $island[$island.home].space is 0>>
+	You have no more space for furniture.
+	<br><br>
+<<else>>
+	You have space for <<number $island[$island.home].space>> more furniture.
+	<br><br>
+<</if>>
+
+You have <<number $island.wood>> wood.
+<br><br>
+
+<<if $tiredness gte $tirednessmax>>
+	You're too tired to build anything.
+<<else>>
+	<div id="islandUpgrades">
+		<<islandBuildOption trap>>
+		<<islandBuildOption curtains>>
+		<<islandBuildOption bird_feeder>>
+		<<islandBuildOption camouflage>>
+		<<islandBuildOption decor>>
+		<<islandBuildOption chair>>
+		<<if $islander_mask gte 1>>
+			<<islandBuildOption islanderMask>>
+		<</if>>
+		<<if $island.explore_locations.includes("bay")>>
+			<<islandBuildOption raft>>
+		<</if>>
+	</div>
+<</if>>
+<br><br>
+
+<<link [[Back|Island]]>><</link>>
+<br>
+
+
+:: Island Build Simple Trap
+<<effects>>
+
+You tie some leaves together, forming a length of fibre. You tie both ends around separate trees on the path to your camp. It should trip someone up, and perhaps injure them enough to put them out of the fight.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Basic Trap
+<<effects>>
+
+You carve two pieces of wood into a simple contraption, and half-bury it in the earth. Next, you tie the rope into a loop, and weave the other end around an overhanging branch. This trap should prove more effective.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Advanced Trap
+<<effects>>
+
+You build a more sophisticated contraption to attach the rope to both trees to either side, and an overhanging branch. It covers a wide area, and anyone stepping into the fibre will find their ankle snared before they can react.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Simple Curtains
+<<effects>>
+
+You carve notches in wood, and rest them about above your sleeping spot. It takes a while to find leaves of appropriate length, but you're able to ensconce your sleeping spot within a green veil. It's far from opaque, but it keeps some of the light out, and makes it feel less like you're sleeping outside.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Basic Curtains
+<<effects>>
+
+You spend time winding more leaves into the curtains, making them fuller. When you finish, the sleeping spot feels like an enclosed space.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Advanced Curtains
+<<effects>>
+
+With more wood and elbow grease, you're able to improve the curtain further. It can now be pulled and held back, creating a welcoming archway, then let down when it's time to sleep.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Simple Decor
+<<effects>>
+
+You sit down with a few pieces of wood, and a sharp rock. With a little time, you should be able to carve some decoration. But what will you carve?
+<br><br>
+<<set $island[$island.home].decoration to "figurines">>
+<<textbox "$island[$island.home].decoration" "figurines">>
+
+<<link [[Next|Island Build]]>>
+	<<if $island[$island.home].decoration is undefined or $island[$island.home].decoration is "">>
+		<<set $island[$island.home].decoration to "figurines">>
+	<</if>>
+	<<set $island[$island.home].decoration to Util.escape($island[$island.home].decoration).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>>
+<</link>>
+<br>
+
+:: Island Build Simple Decor 2
+<<effects>>
+
+With patient grace, you carve the wood into <<print $island[$island.home].decoration>>. This should make your camp look more homely.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Basic Decor
+<<effects>>
+
+Some of the small trees dotting the camp are beautiful in their own right, and should be brought into the fold. You set to work removing weeds from around their bases, making them look more dignified in their solitude. Next, you place a wooden frame around the base of each, so that they almost look like their planting is deliberate.
+<br><br>
+It's just for show, but it does make the camp look more sophisticated.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Advanced Decor
+<<effects>>
+
+With a deft combination of long leaves and wood, you're able to fashion a number of basket-like containers. Next, you fill them with soil and search the surroundings for the prettiest flowers you can find.
+<br><br>
+
+You plant them in the baskets and hang them on your pet trees. Between this and the <<print $island[$island.home].decoration>>, it could almost be someone's garden.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Simple Bird Feeder
+<<effects>>
+
+You carve notches in your wood, and put together a platform for birds to stand on. There's a space in the middle. It shouldn't be hard to fill it with seeds shaken from nearby grasses, making a handy lunch for passing birds. Perhaps they'll leave something in return.
+<br><br>
+
+<<if $harpy gte 4>>
+	You resist the urge to peck at them yourself.
+	<br><br>
+<</if>>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Basic Bird Feeder
+<<effects>>
+
+You carve a bowl and place it in the centre of your bird feeder. This should make lunch a more convenient experience for your feathered friends.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Advanced Bird Feeder
+<<effects>>
+
+It's not an easy process with your tools limited to different shaped rocks, but you're able to to carve your wood into the facsimile of a cage. Slotted into the middle of your bird feeder and filled with seeds, this should prove a popular feeding area for passing birds.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+
+:: Island Build Stool
+<<effects>>
+
+You make a platform for your <<bottom>>, with notches for other wood to slot into for legs. It takes a while, and it's difficult to make it sturdy without nails, but the result should be more sturdy while your weight presses on it, not less.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Chair
+<<effects>>
+
+You carve notches in one side of the seat of your stool, and slot in more pieces of wood. It takes a few attempts, but you're able to create a sturdy frame that should support your weight.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Throne
+<<effects>>
+<<earnFeat "Wild Monarch">>
+You sit down with a few sharp stones, and get to work caring elegent curves into wood. Once finished, you affix them to your chair, creating a throne worthy a monarch. Among thrones made from sticks and stones on remote islands, anyway.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Simple Camouflage
+<<effects>>
+
+You rearrange the flora, moving fronds and interlocking the branches of bushes to conceal pathways. It's not much, but it should stop anyone wandering from following a trail right into your camp.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Basic Camouflage
+<<effects>>
+
+You dig up some of the ferns and smaller plants, replanting them to give the impression of dense foliage. From outside, there's nothing to indicate anyone lives here, though the observant might still spy a hidden path.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Advanced Camouflage
+<<effects>>
+
+A strategic pruning, and a scattering of stones, just so. Now your passage in and out should leave no impression. Just another patch of dense woodland.
+<br><br>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Mask
+<<effects>>
+
+<<if $islander_mask gte 100>>
+	<<earnFeat "Face of a Guardian">>
+	<<facewear 38>>
+	The wood endures your ministrations, yielding to the stone without breaking, until you have a near-perfect angular frame in immitation of the islander masks. The eyes and mouth come next, then the strap.
+	<br><br>
+	You hold the completed mask in your hands. It stares up at you. You look away. The roaming islanders will remain suspicious, <span class="gold">but this should help fool the guards at the castle.</span>
+	<br><br>
+<<elseif $islander_mask gte 40>>
+	You carve the wood with a sharp stone, and manage to shape it into an angular frame. It cracks right down the middle as you try to add the eyes.<<note "Mask carving proficiency" "green">>
+	<br><br>
+<<else>>
+	You carve at the wood with a sharp stone. You have trouble getting the shape right, and carve it down more and more, trying to fix previous errors, until it snaps in half.<<note "Mask carving proficiency" "green">>
+	<br><br>
+<</if>>
+
+<<link [[Next|Island Build]]>><</link>>
+<br>
+
+:: Island Build Raft
+<<effects>>
+
+You carry the wood across the island, to the secluded bay where the raft waits. Using the vines growing around the bay, you tie the wood onto the raft, and step back to admire your handiwork.
+
+<<if $island.raft gte 100>>
+	<span class="green">The raft is sea-worthy,</span> at least for a short trip.
+	<br><br>
+	<<link [[Sail the raft back to town (1:00)|Island Sail]]>><<island_pass 60>><</link>>
+	<br>
+<<elseif $island.raft gte 80>>
+	<span class="teal">The raft is almost finished.</span>
+<<elseif $island.raft gte 50>>
+	<span class="lblue">The raft is over half-way done.</span>
+<<elseif $island.raft gte 20>>
+	<span class="blue">The raft is taking shape.</span>
+<<else>>
+	<span class="purple">You've still a long way to go.</span>
+<</if>>
+<br><br>
+
+<<link [[Return to camp|Island Build]]>><</link>>
+<br>

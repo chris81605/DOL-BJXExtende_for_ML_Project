@@ -1,0 +1,990 @@
+:: School Library
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<set $bus to "schoollibrary">>
+You are in the school library.
+<<if Time.schoolDay>>
+	/* indev - double <br> replaced with single */
+	<<if $schoolstate is "early">>
+		The library is devoid of people, it being so early in the day.
+		<br>
+	<<elseif $schoolstate is "late">>
+		The library is devoid of people, students and teachers having gone home for the day.
+		<br>
+	<<elseif $schoolstate is "lunch">>
+		The room is packed with students using their lunch break to catch up with homework.
+		<br>
+	<<else>>
+		Several students are present, working at the desks and searching among the bookshelves.
+		<br>
+	<</if>>
+<<else>>
+	The library is devoid of people.
+	<br>
+<</if>>
+/*indev - Extra library description*/
+A large desk sits near the back of the library, with a sign reading "Book Rental + Clothing" hanging above.
+<br>
+There are several shelves with typical academic literature. You see books on engineering, biology, social sciences and language learning. Everything that is useful in catching up.
+<br>
+Next to it is a small basket with returned and not yet sorted books.
+<<if (Time.monthName is "November" and Time.monthDay gte 24) or Time.monthName is "December">>
+	You notice a strange, olive-coloured book tucked amidst the rest.
+<</if>>
+<<if currentSkillValue('english') lt 200>>
+	You wonder if there may be something more interesting here if you were one of those bookworms.
+<</if>>
+
+/* Just some hints and tips for the player */
+<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late" and random(1, 3) is 1>>
+	<br><br>
+	You overhear some students talking to each other.
+	<br>
+	<<if $rng gte 96>>
+		"Did you know that some nerds sneak into the library at night in order to study?"
+		<br>
+		"Don't be ridiculous, as if someone would be such a dork."
+	<<elseif $rng gte 91>>
+		"It's awful! I just know that I totally failed the exam."
+		<br>
+		"I told you to study properly!"
+	<<elseif $rng gte 86>>
+		"I couldn't concentrate at all at the exam since my anxiety always goes through the roof..."
+		<br>
+		"I usually just rub one out at the toilets beforehand in order to relax."
+		<br>
+		"Weirdo."
+	<<elseif $rng gte 81>>
+		"How do you manage to get good grades but still have so much free time left?"
+		<br>
+		"That's easy! I study each day for a short period of time. You see, the human brain can't handle too much information at once so it's more effective to spread out your study time."
+		<br>
+		"I always work through the night before a test..."
+	<<elseif $rng gte 76>>
+		"Winter once mentioned that there is a secret path connecting the school toilets to the sewer."
+		<br>
+		"I wouldn't know. I never pay attention in class."
+	<<elseif $rng gte 71>>
+		"Do you know that girl who went missing for a month?"
+		<br>
+		"The one living at the orphanage?"
+		<br>
+		"Yeah, that one. I have no idea what happened to her, but she changed completely. Sometimes she screams in terror for no apparent reason. Some even think she can see things others don't."
+		<br>
+		"Like ghosts? Do you believe that, too?"
+		<br>
+		"Of course not! Ghosts only exist in movies or games."
+	<<elseif $rng gte 66>>
+		"Did you know that you learn more when you're naked?"
+		<br>
+		"For the last time, I will never take off my clothes when we study together."
+	<<elseif $rng gte 61>>
+		"What's with those dorky glasses?"
+		<br>
+		"They help me to focus in class."
+		<br>
+		"How would that even work? Do you even need to wear them?"
+		<br>
+		"No, but whenever I wear them, I feel like a nerd and subconsciously act like one thereby paying more attention to the teacher."
+		<br>
+		"Have you tried feeling more like a normal person?"
+	<<elseif $rng gte 56>>
+		"Why in the world do we have to pay to take books home? We'd all do so much better with easier access to the material."
+		<br>
+		"I don't know, but you'd better make sure to return them on time. The librarian's assistant is a terror."
+		<br>
+		"I heard about <<nnpc_him "Sydney">>. Isn't <<nnpc_he "Sydney">> one of the teachers' kids?"
+		<br>
+		"Apparently. Last time I returned a book late, I couldn't get the marker off my skin for days..."
+	<<elseif $rng gte 51>>
+		"You ever try reading that red book? The one with the lovers?"
+		<br>
+		"What?"
+		<br>
+		"I tried a few pages, and ended up reading the whole thing. I swear it felt like a spiritual experience. I can't stop thinking about it."
+		<br>
+		"...What?"
+	<<elseif $rng gte 46>>
+		"What's up with the moon on the last day of the month? It gets all red, and everyone acts weird."
+		<br>
+		"It's only real if you let it be. Watch your back, because you're not the only one watching it."
+		<br>
+		"I see you're having a moment. I'll ask later."
+	<<elseif $rng gte 41>>
+		"Hey, did you know that cum is actually brain tissue?"
+		<br>
+		"Are you being serious?"
+		<br>
+		"Yeah. You know, every time you jerk off, your brain shrinks a little."
+		<br>
+		"I can see that."
+	<<elseif $rng gte 36>>
+		"Did you know that sex makes you dumb?"
+		<br>
+		"You think so?"
+		<br>
+		"Yeah, it's a proven fact. The more you fuck, the more airheaded you get."
+		<br>
+		"I see...just like a certain student I could mention."
+	<<elseif $rng gte 31>>
+		"Hey, have you heard about masturbation? They say it's dangerous!"
+		<br>
+		"Really?"
+		<br>
+		"Yes. If you do it too often, you'll go blind!"
+		<br>
+		"Is that why you're wearing these colors?"
+	<<elseif $rng gte 26>>
+		"Did you see that student recently? You-know-who, the talk of the school."
+		<br>
+		"No...doesn't seem to attend class much."
+		<br>
+		"Not exactly the sharpest knife in the drawer, huh?"
+		<br>
+		"Never was, but recently their brain slipped below their belt."
+	<<elseif $rng gte 21>>
+		<<rngWraith>>
+		<<if _wraithEvent>>
+			<<silently>><<speechWraith "lines">><</silently>>
+			"_line1"
+			<br>
+			"_line2"
+			<br>
+			Those weren't students.
+			<<trauma 6>><<gtrauma>>
+		<<else>>
+			"<<print either("If you think about it, neither of us are really here.","Hey, listen. You hear that? It's nothing.","Don't knock it 'till you try it. Jazz metal just works.","Winter's actually kinda hot, in a fossil kinda way.","I'd let a wolf knot me, to be honest.","If quizzes are quizzical, then what are tests?","You. Me. That bookshelf. Library dodgeball. You in?","I haven't seen a single recycling bin in this school. Unbelievable.","The canteen food is actually pretty good. It's a guilty pleasure of mine.","Oh, to be a caterpillar, unaware of the woes of the world.", "Someone said they saw a whale that had, like, tentacles, like a squid. Think squids and whales finally put their differences aside and got busy?")>>"
+			<br>
+			"<<print either ("Why am I friends with you?","I told you to stop hanging out with me.","What the fuck?","I'm out of here.","Can we please have a normal conversation for once?","...What?","Pretty sure you're not supposed to come to school drunk.","I'm calling the police.","I gotta get that restraining order. For real, this time.","Can I peg you?","Can you make like a tree and die for the winter?")>>"
+			<br>
+			They're just chattering. Nothing useful.
+		<</if>>
+	<<else>>
+		But they're too far for you to hear them properly.
+	<</if>>
+<</if>>
+
+<br><br>
+<<if $exposed gte 1>>
+	<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+		You hide between the bookshelves, doing your best to conceal your <<nudity>>.
+		<br>
+	<<else>>
+		<<exhibitionclassroom>>
+	<</if>>
+<</if>>
+<<sydneySchedule>>
+<<if $stress gte $stressmax>>
+	<<link [[Everything fades to black...|School Passout]]>><</link>>
+<<elseif _sydney_location is "library" and ($sydneyLeightonConfront is 1 or $leightonAssaulted is 1) and $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Leighton")].init is 1 and $pillory_tenant.special.name isnot "Leighton" and !$sydneyLeightonConfrontTimer>>
+	<<unset $sydneyLeightonConfront>><<set $sydneyLeightonConfrontTimer to 7>><<set $corruptionEvent to 1>>
+	<<if ($bookStolenKnown isnot undefined and $bookStolenKnown gte 3) or $libraryMoneyStolen gte 1000 or $leightonAssaulted is 1>>
+		<<if $leightonAssaulted is 1>>
+			<<set $leightonAssaulted to 2>>
+		<</if>>
+		<<npc "Sydney">><<person1>>
+		You hear footsteps behind you, and feel a hand on your shoulder. "Perfect timing." It's Leighton. "It seems you just can't learn your lesson. I should get the police involved with how often you've been stealing from us, but I'll settle for a more... homely punishment instead."
+		<br><br>
+		<<nnpc_He "Leighton">> begins to lead you towards the rental counter. "Your friend will be sharing in your punishment.<<if $studyBooks.stolen isnot "none">><<set $studyBooks.stolen to "none">><<unset $sydneyStolenKnown>> Oh, and I'll be taking that stolen book back.<</if>>"
+		<br><br>
+		A few students linger, but a glare from Leighton hurries them out. Leighton locks the door behind them.
+		<br><br>
+		<<link [[Next|Sydney Leighton Spank]]>><<set $phase to 4>><</link>>
+		<br>
+	<<else>>
+		You see Leighton stood in front of Sydney's counter. <<nnpc_He "Leighton">> seems to be harshly scolding <<nnpc_him "Sydney">> for something. After a moment, <span class="red">Leighton grabs <<nnpc_his "Sydney">> arm and begins to raise <<nnpc_his "Leighton">> voice.</span>
+		<br><br>
+		<<link [[Intervene|Sydney Leighton Intervene]]>><<npcincr Sydney love 1>><</link>><<glove>>
+		<br>
+		<<link [[Ignore|Sydney Leighton Ignore]]>><<stress 12>><<npcincr Sydney love -10>><<npcincr Sydney purity -5>><</link>><<ggstress>><<llllove>><<llspurity>><<sydneyWarning>>
+		<br>
+	<</if>>
+<<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "library">>
+	<</if>>
+	<<if $exposed gte 1 and Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+	<<else>>
+		<<if $exposed lte 0>>
+			<<if _sydney_location is "library" and ($sydneySeen is undefined or !$sydneySeen.includes("library"))>>
+				<<if $sydneySeen>>Sydney<<else>>A student<</if>> sits at the rental counter, shuffling papers and stamping cards.
+				<br>
+				<<schoolicon "library desk">><<link [[Counter|Sydney Library Intro]]>><</link>>
+				<br><br>
+			<<elseif _sydney_location isnot "library">>
+				<<schoolicon "library desk">><<link [[Counter|Library Rental Counter]]>><<set $counterApproach to 1>><</link>>
+				<br><br>
+			<<elseif _sydney_location is "library">>
+				Sydney sits at the desk of the rental counter, shuffling papers and stamping cards.
+				<br>
+				<<schoolicon "library desk">><<link [[Approach Sydney|Library Rental Counter]]>><<set $counterApproach to 1>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<if $exposed lte 0 and Time.schoolDay and ($schoolstate is "morning" or $schoolstate is "afternoon" or $schoolstate is "lunch") and $mathsproject is "ongoing" and $mathslibrarystudent isnot 1 and $mathslibraryknown isnot 1>>
+			You see a student working on a solution for the maths competition.
+			<br>
+
+			<<icon "projectMaths.png">><<link [[Approach|Maths Library Student]]>><</link>>
+			<br><br>
+		<</if>>
+		<<if $exposed lte 0 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active" and ($weather is "rain" or $weather is "snow") and $schoolstate is "lunch" and $daily.school.lunchEaten is 1>>
+			Kylar sits at a desk, scribbling something.
+			<br>
+			<<furnitureicon "deskAntique.png">><<link [[Approach Kylar|Kylar Library]]>><<set $kylar_text_trigger to true>><</link>>
+			<br><br>
+		<<elseif $englishPlay is "ongoing" and $englishPlayRoles.Kylar isnot "none" and $englishPlayRoles.KylarKnown and $exposed lte 0 and ($weather is "rain" or $weather is "snow") and $schoolstate is "afternoon">>
+			<<if $englishPlayReadiness gte 56 and $englishPlayRoles.SydneyKnown and !$englishPlayDoubleRehearsal>>
+				Kylar isn't here. There's a note on the desk <<nnpc_he "Kylar">> usually sits at. It reads "<span class="gold">Meet me in the English classroom.</span>"
+				<br><br>
+			<<else>>
+				Kylar sits at a desk, scribbling something.
+				<br>
+				<<furnitureicon "deskAntique.png">><<link [[Approach|Kylar Library]]>><<set $kylar_text_trigger to true>><</link>>
+				<br><br>
+			<</if>>
+		<</if>>
+		<<projectoptions>>
+		<<if $exposed gte 1>>
+			<<scienceicon>><<link [[Study science (0:20)|Library Study Exposed]]>><<pass 20>><<set $phase to 1>><</link>><<gscience>>
+			<br>
+			<<mathicon>><<link [[Study maths (0:20)|Library Study Exposed]]>><<pass 20>><<set $phase to 2>><</link>><<gmaths>>
+			<br>
+			<<englishicon>><<link [[Study English (0:20)|Library Study Exposed]]>><<pass 20>><<set $phase to 3>><</link>><<genglish>>
+			<br>
+			<<historyicon>><<link [[Study history (0:20)|Library Study Exposed]]>><<pass 20>><<set $phase to 4>><</link>><<ghistory>>
+			<br>
+		<<else>>
+			<<scienceicon>><<link [[Study science (0:20)|Library Study]]>><<pass 20>><<set $phase to 1>><</link>><<gscience>>
+			<br>
+			<<mathicon>><<link [[Study maths (0:20)|Library Study]]>><<pass 20>><<set $phase to 2>><</link>><<gmaths>>
+			<br>
+			<<englishicon>><<link [[Study English (0:20)|Library Study]]>><<pass 20>><<set $phase to 3>><</link>><<genglish>>
+			<br>
+			<<historyicon>><<link [[Study history (0:20)|Library Study]]>><<pass 20>><<set $phase to 4>><</link>><<ghistory>>
+			<br>
+		<</if>>
+		/*indev - scarlet book possible to be taken. English 200+ required*/
+		<<if currentSkillValue('english') gte 300>>
+			<<scarleticon>><<link [[Take "Raul and Janet" from the basket (0:01)|ScarletBook1]]>><<pass 1>><<set $scarletExitPassage to "School Library">><</link>>
+			<br>
+		<<elseif currentSkillValue('english') gte 200>>
+			<<scarleticon>><<link [[Take the medium-sized scarlet book from the basket (0:01)|ScarletBook1]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+		<<if (Time.monthName is "November" and Time.monthDay gte 24) or Time.monthName is "December">>
+			<<oliveicon>><<link [[Take the olive-coloured book from the basket (0:01)|Olive Book 1]]>><<set $oliveExitPassage to "School Library">><<pass 1>><</link>>
+			<br>
+		<</if>>
+	<br>
+	<</if>>
+<<getouticon>><<link [[Leave the library (0:01)|Hallways]]>><<pass 1>><</link>>
+<br>
+<</if>>
+
+:: Library Study
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<sydneySchedule>><<rngWraith 1>>
+
+<<if $phase is 1>><<scienceskill>>
+	You settle down at a desk with a science textbook and read through the material.
+<<elseif $phase is 2>><<mathsskill>>
+	You settle down at a desk with a maths textbook and read through the material.
+<<elseif $phase is 3>><<englishskill>>
+	You settle down at a desk with an English textbook and read through the material.
+<<elseif $phase is 4>><<historyskill>>
+	You settle down at a desk with a history textbook and read through the material.
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - $allure) and Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late">>
+	<<if $rng gte 51>>
+		<<generatey1>><<generatey2>>While you are minding your own business, a <<fullGroup>> start harassing you.
+		<br><br>
+
+		<<link [[Ignore them|School Library Harass]]>><<set $phase to 0>><<trauma 2>><<stress 2>><</link>><<gtrauma>><<gstress>>
+		<br>
+		<<link [[Ask the librarian for help|School Library Harass]]>><<set $phase to 1>><<status -10>><</link>><<lcool>>
+		<br>
+		<<if $NPCName[$NPCNameList.indexOf("Sydney")].init is 1 and $sydneySeen.includes("library") and _sydney_location is "library">>
+			<<link [[Ask Sydney for help|School Library Harass]]>><<set $phase to 2>><</link>>
+			<br>
+		<</if>>
+	<<elseif _wraithEvent>>
+		After some time, you begin to feel anxious. You move to replace your textbook in the bookshelf.
+		<br><br>
+		You catch a brief glimpse of a pale face through the gaps on the other side. <<stress 12>><<ggstress>><<trauma 4>><<gtrauma>>
+		<br><br>
+		<<link [[Next|School Library]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<if !$worn.over_lower.type.includes("naked")>>
+			<<set $worn.over_lower.integrity -= 10>>
+			<<if $worn.over_lower.integrity lte 0>>
+				As you rise from the chair, you hear a tear. Your $worn.over_lower.name <<overlowerplural>> caught on the desk. You try to free them, but <<overloweritis>> torn clean off your body<<if !$worn.lower.type.includes("naked")>>, exposing your <<undies>><</if>>.
+				<<overlowerruined>><<trauma 3>>
+				<br><br>
+			<<elseif $worn.over_lower.integrity gte 0>>
+				As you rise from the seat, you hear a tear. Your $worn.over_lower.name <<overlowerplural>> caught on the desk.
+				<br><br>
+			<</if>>
+		<<else>>
+			<<set $worn.lower.integrity -= 10>>
+			<<if $worn.lower.integrity lte 0>>
+				As you rise from the chair, you hear a tear. Your $worn.lower.name <<lowerplural>> caught on the desk. You try to free them, but <<loweritis>> torn clean off your body, exposing your <<undies>>.
+				<<lowerruined>><<trauma 3>>
+				<br><br>
+			<<elseif $worn.lower.integrity gte 0>>
+				As you rise from the seat, you hear a tear. Your $worn.lower.name <<lowerplural>> caught on the desk.
+				<br><br>
+			<</if>>
+		<</if>>
+		<<link [[Next|School Library]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<link [[Next|School Library]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Library Study Exposed
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>><<rngWraith 1>><<slimeEventEnd "study">>
+
+<<if $phase is 1>>
+	You settle down at a desk with a science textbook and read through the material. Being sat here in the school library with your <<lewdness>> on display feels naughty, even with no one around. It keeps you alert and focused.
+	<<gscience>><<scienceskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 2>>
+	You settle down at a desk with a maths textbook and read through the material. Being sat here in the school library with your <<lewdness>> on display feels naughty, even with no one around. It keeps you alert and focused.
+	<<gmaths>><<mathsskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 3>>
+	You settle down at a desk with an English textbook and read through the material. Being sat here in the school library with your <<lewdness>> on display feels naughty, even with no one around. It keeps you alert and focused.
+	<<genglish>><<englishskill>><<garousal>><<arousal 300>>
+<<elseif $phase is 4>>
+	You settle down at a desk with a history textbook and read through the material. Being sat here in the school library with your <<lewdness>> on display feels naughty, even with no one around. It keeps you alert and focused.
+	<<ghistory>><<historyskill>><<garousal>><<arousal 300>>
+<</if>>
+<br><br>
+
+<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+<<if $danger gte (9900 - ($allure / 2))>>
+	<<if $rng gte 51>>
+		<<generate1>><<person1>>You fumble the book as you try to place it on its shelf. It thumps against the floor. "That better not be another cat," a voice responds from the corridor outside. You take cover behind the shelf and peek between the books. A <<person>> wearing a security uniform enters. "Who's there?"
+		<br><br>
+		<<if $earSlime.growth gte 200 - ($earSlime.promiscuity * 10) and $exposed gte 1>>
+			<span class="lewd">You feel the slime in your head command you to expose yourself and ask <<him>> to rape you.</span> <span class="red">It expects to be obeyed.</span>
+			<br><br>
+			<<link [[Obey|Library Study Exposed Slime Obey]]>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+			<br>
+			<<link [[Defy|Library Study Exposed Slime Defy]]>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+			<br>
+		<<else>>
+			<<if $exposed gte 2>>
+				<<if $exhibitionism gte 75>>
+					<<link [[Show yourself|Library Study Show]]>><<set $phase to 0>><</link>><<exhibitionist5>>
+					<br>
+				<</if>>
+			<<elseif $exposed is 1>>
+				<<if $exhibitionism gte 15>>
+					<<link [[Show yourself|Library Study Show]]>><<set $phase to 1>><</link>><<exhibitionist2>>
+					<br>
+				<</if>>
+			<</if>>
+			<<link [[Stay hidden (0:10)|Library Study Hide]]>><<stress 3>><<pass 10>><</link>><<gstress>>
+		<</if>>
+		<br>
+	<<elseif _wraithEvent>>
+		After some time, you begin to feel anxious. You move to replace your textbook in the bookshelf.
+		<br><br>
+		You catch a brief glimpse of a pale face through the gaps on the other side. <<stress 12>><<ggstress>><<trauma 4>><<gtrauma>>
+		<br><br>
+		<<link [[Next|School Library]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<generate1>><<generate2>>A <<fullGroup>> walk along the street outside the window. They will see you if they look through.
+
+		<<if $earSlime.growth gte 200 and $earSlime.exhibitionism gte 3>>
+			<span class="red">You know the ear slimes wouldn't let you do anything but risk exposing yourself.</span>
+			<br><br>
+			<<link [[Next|Library Study Risk]]>><</link>>
+		<<else>>
+			<br><br>
+			<<link [[Risk it|Library Study Risk]]>><</link>>
+			<br>
+			<<link [[Hide (0:20)|Library Study Pair Hide]]>><<pass 20>><</link>>
+		<</if>>
+		<br>
+
+	<</if>>
+<<else>>
+	<<link [[Next|School Library]]>><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: Library Study Risk
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $rng gte 81>>
+	You ignore the pair, and keep studying. The <<person1>><<person>> glances over <<his>> shoulder and spots you. <<He>> grabs the <<person2>><<persons>> arm and they both grin at you through the glass. <<covered>> You feel your face flush.
+	<<gstress>><<garousal>><<stress 3>><<arousal 600>><<fameexhibitionism 2>>
+	<br><br>
+
+	They move on, still smiling.
+	<br><br>
+<<else>>
+	You ignore the pair, and keep studying. They don't notice you.
+	<br><br>
+<</if>>
+
+<<endevent>>
+<<link [[Next|School Library]]>><</link>>
+<br>
+
+:: Library Study Pair Hide
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You take cover in the darkness behind the librarian's desk. The pair stop by the window, turn and start to chat. You wait until they move on.
+<br><br>
+
+<<endevent>>
+<<link [[Next|School Library]]>><</link>>
+<br>
+
+:: Library Study Hide
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You remain hidden. <<He>> patrols through the library, but you're able to avoid <<him>>. <<He>> frowns over <<his>> shoulder as <<he>> leaves the room.
+<br><br>
+<<endevent>>
+<<link [[Next|School Library]]>><</link>>
+<br>
+
+:: Library Study Show
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You step out from your hiding place. The <<persons>> jaw drops when <<he>> sees you.
+<<if $phase is 0>>
+	<<exhibitionism5>>
+<<else>>
+	<<exhibitionism2>>
+<</if>>
+
+<<if $rng gte 51>>
+	"Y-you aren't supposed to be here," <<he>> stammers. "Y-you need to come with me."
+	<br><br>
+
+	<<link [[Comply|Library Study Comply]]>><</link>>
+	<br>
+	<<link [[Refuse (0:20)|Library Study Refuse]]>><<pass 20>><</link>>
+	<br>
+<<else>>
+	"What a treat," <<he>> says. <<He>> thumbs <<his>> baton as <<he>> steps closer, then lunges for you.
+	<br><br>
+
+	<<link [[Next|Library Exposed Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Library Study Exposed Slime Obey
+<<effects>>
+Following the slime's command, you step out from your hiding place. The <<persons>> jaw drops when <<he>> sees you.
+<br><br>
+"Rape me," you say, causing <<him>> to briefly freeze.
+<br><br>
+"What a treat, I was already planning on doing so," <<he>> replies. <<He>> thumbs <<his>> baton as <<he>> steps closer, then lunges for you.
+<br><br>
+<<link [[Next|Library Exposed Molestation]]>><<set $molestationstart to 1>><<set $libraryStudyEarSlime to true>><</link>>
+
+:: Library Study Exposed Slime Defy
+<<effects>>
+<<set $earSlime.defyCooldown += 4>>
+
+You remain hidden. <<He>> patrols through the library, but you're able to avoid <<him>>. <<He>> frowns over <<his>> shoulder as <<he>> leaves the room.
+
+You feel a jolt of pain as the slime punishes you for your defiance. However, <span class="red">it doesn't stop you, knowing that it can punish you in other ways.</span>
+<br><br>
+<<endevent>>
+
+<<link [[Next|School Library]]>><</link>>
+
+:: Library Exposed Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+	<<if $libraryStudyEarSlime>>
+		<<npc_attempt_sex>>
+		<<set $enemytrust -= 150>>
+		<<set $enemyanger += 150>>
+	<</if>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Library Exposed Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Library Exposed Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Library Exposed Molestation Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	"You're lucky I don't turn you in," <<he>> says. "They'd eat a <<girl>> like you alive." <<He>> whistles as <<he>> leaves the library.
+	<br><br>
+
+	<<tearful>> you struggle to your feet.
+	<br><br>
+	<<if $libraryStudyEarSlime and $rapeavoid is 0 and $stress gte 1000>>
+		<span class="green">You feel the slime in your head help calm you.</span><<if $stress gte 5000>><<lllstress>><<else>><<llstress>><</if>><<stress `$stress / -200`>>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|School Library]]>><</link>>/*Point links wherever you want the player to end up*/
+<<elseif $enemyhealth lte 0>>
+	<<He>> stumbles away from you and fumbles for <<his>> baton. It slips from <<his>> fingers. "Fuck," <<he>> says, then runs from the library.
+	<br><br>
+
+	<<tearful>> you listen to <<his>> footsteps fade.
+	<br><br>
+	<<if $libraryStudyEarSlime>>
+		<span class="red">You feel the slime in your head punish you for not doing as it asked.</span>
+		<<pain 12>><<stress 12>><<trauma 18>><<ggpain>><<ggtrauma>><<ggstress>><<set $earSlime.defyCooldown += 4>>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|School Library]]>><</link>>
+<</if>>
+<<unset $libraryStudyEarSlime>>
+
+:: Library Study Comply
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You nod and walk to the <<persons>> side with nary a care. <<He>> blushes and looks away. "I-I'll escort you from the premises," <<he>> says. "P-please."
+<br><br>
+
+You follow <<him>> down the corridor toward the entrance. "H-here," <<he>> says at the school gates. <<He>> hands you some towels. "You'll catch a cold." <<He>> locks the gate behind you.
+<br><br>
+
+<<towelup>>
+<<endevent>>
+<<link [[Next|Oxford Street]]>><</link>>
+<br>
+
+:: Library Study Refuse
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<He>> chases you down the aisles. You avoid <<him>> with ease. <<He>> seems afraid of touching you, lest <<he>> come in contact with something <<he>> shouldn't. After some time <<he>> stops, panting. "I-if anyone asks," <<he>> says. "I never saw you." <<He>> leaves the room.
+<br><br>
+
+<<endevent>>
+<<link [[Next|School Library]]>><</link>>
+
+:: School Library Harass
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $phase is 0>>
+	<<if $rng gte 81>>
+		The <<person1>><<person>> looks at the <<person2>><<person>> and smiles. "<<pShe>> thinks <<pshe>> can ignore us." <<person1>><<He>> gags you with <<his>> hand.
+		<br><br>
+
+		<<link [[Next|School Library Molestation]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<<else>>
+		You ignore their pestering until they tire and leave you alone.
+		<br><br>
+
+		<<link [[Next|School Library]]>><<endevent>><</link>>
+	<</if>>
+<<elseif $phase is 1>>
+	<<generate3>><<person3>>You shout for help. Several people arrive to investigate, including the librarian. <<He>> glares at the pair. "You two again. Out."
+	<br>
+	<<person2>>The <<person>> looks indignant. "We're just play-"
+	<br>
+	The librarian interrupts. "I said OUT." The pair comply, leaving you in peace.
+	<br><br>
+
+	<<person3>>The librarian asks if you're okay, and you nod. Assured that you're fine, <<he>> returns to <<his>> duties.
+	<br><br>
+
+	<<link [[Next|School Library]]>><<endevent>><</link>>
+<<elseif $phase is 2>>
+	<<run statusCheck("Sydney")>>
+	You shout for Sydney. The <<person2>><<person>> sneers. "Oh no, not Sydney, <<nnpc_he "Sydney">>'s gonna write on us, whatever will we do?" The two begin to laugh.
+	<br>
+	However, they're cut off by the thwap of a ruler against skin. The <<person1>><<person>> cries out in pain. You turn to see Sydney's furious gaze, just in time for a second ruler to bounce off of the <<person2>><<persons>> head.
+	<br>
+	"That fucking hurt! I'm telling."
+	<br>
+	<<if _sydneyStatus.includes("corrupt")>>
+		Sydney grins. "Oh, really? Who do you think the <<nnpc_title "Leighton">> will believe? Get out. Now."
+	<<else>>
+		Sydney glares. "You're causing a fuss in a library. You're the one at fault. Leave immediately."
+	<</if>>
+	<br>
+	The pair grumble, leaving the library while nursing their fresh bruises. You manage to overhear "Fucking teacher's pet religious shitstain" from the <<person1>><<person>>.
+	<br><br>
+	<<if $sydneyromance is 1>>
+		<<if _sydneyStatus.includes("corrupt")>>
+			As you turn, Sydney grabs you behind the head, pulling you into a kiss. <<takeKissVirginity "Sydney" `($sydneyromance is 1?"loveInterest":"romantic")`>>
+			<br><br>
+			<<nnpc_He "Sydney">> pulls away after a moment.
+		<<else>>
+			You feel Sydney's arms wrap around you.
+		<</if>>
+		"I hope they didn't hurt you." You spend some time reassuring <<nnpc_him "Sydney">>, but <<nnpc_he "Sydney">> still seems hesitant to leave your side. After some time, <<nnpc_he "Sydney">> returns to the rental counter, looking back over <<nnpc_his "Sydney">> shoulder a few times.
+		<br><br>
+	<<else>>
+		"Are you alright?" Sydney puts a hand on your shoulder. You nod, but Sydney seems hesitant to leave your side. After a moment, <<nnpc_he "Sydney">> returns to the rental counter, looking back over <<nnpc_his "Sydney">> shoulder a few times.
+		<br><br>
+	<</if>>
+
+	<<link [[Next|School Library]]>><<endevent>><</link>>
+<</if>>
+
+:: School Library Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>><<hand_gag 0 left>>
+	<<enableSchoolRescue "delinquency">>
+	<<set $timer to 20>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<alarmstate "<span class='red'>No one comes to your aid, likely due to your reputation as a delinquent.</span>">>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend or $timer lte 0>>
+	<span id="next"><<link [[Next|School Library Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|School Library Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: School Library Molestation Finish
+<<if $enemyhealth lte 0>>
+	They recoil in pain, a glint of fear in their eyes. "Fucking psycho!" They leave you in peace. <<tearful>> you gather yourself.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|School Library]]>><</link>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<person1>>The <<person>> looks at the <<person2>><<person>>. "I came first, pay up!"
+	<br><br>
+
+	The <<person>> shakes <<his>> head. "No way, I started shuddering before you."
+	<br><br>
+
+	They leave you slumped over the desk. They're still arguing as their voices fade. <<tearful>> you gather yourself.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|School Library]]>><</link>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<<set $rescued += 1>>
+
+	<<endevent>>
+
+	The librarian, startled by your cries, arrives to investigate.
+	<br><br>
+
+	The pair cease their assault and flee between the bookshelves, as the librarian rushes over to you.
+
+	<<clotheson>>
+	<<endcombat>>
+	<<exposure>>
+	<<generate1>><<person1>>
+	<<if $exposed gte 1>>
+		<<He>> gives you some towels to cover up with.<<towelup>>
+	<</if>>
+	"Are you OK?" <<he>> asks.
+	<<if $stress gte $stressmax>>
+		Your consciousness is already slipping away, however.
+		<br><br>
+		<<endevent>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<pregnancyWatersBrokenPassout "schoolLibrarian">>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		You try to speak, but instead burst into tears. You feel the librarian's arms around you as you pass out.
+		<br><br>
+		<<endevent>>
+		<<if isPlayerNonparasitePregnancyEnding()>>
+			<<pregnancyWatersBrokenPassout "schoolLibrarian">>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<<elseif $pain gte 20>>
+		<<tearful>> you nod and smile at the librarian through your tears. Once assured that you're unhurt, <<he>> returns to <<his>> duties.
+		<<endevent>>
+		<br><br>
+		<<link [[Next|School Library]]>><</link>>
+	<<else>>
+		<<tearful>> you nod and smile at the blushing librarian. Once assured that you're unhurt, <<he>> returns to <<his>> duties.
+		<br><br>
+		<<endevent>>
+		<<link [[Next|School Library]]>><</link>>
+	<</if>>
+<<elseif $timer lte 0>>
+	Seeming to grow bored, the pair leave you alone. <<tearful>> you gather yourself.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|School Library]]>><</link>>
+<</if>>
+
+:: Library Rental Counter
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>>
+<<if $counterApproach is 1>>
+	<<unset $counterApproach>>
+	<<set _counterApproach to 1>>
+	You approach the rental counter.
+<<elseif $schoolShopAction is undefined>>
+	You are at the library's rental counter.
+<</if>>
+<<switch _sydney_location>>
+	<<case "library">>
+		<<sydneyLibrary>>
+	<<case "science">>
+		A sign hangs from the front. <span class="blue">"In class"</span>.
+		<br><br>
+		<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<case "canteen">>
+		A sign hangs from the front. <span class="blue">"At canteen"</span>.
+		<br><br>
+		<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<case "class">>
+		A sign hangs from the front. <span class="blue">"In class"</span>.
+		<br><br>
+		<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<default>>
+		<<if Time.schoolDay and $schoolstate isnot "early" and $schoolstate isnot "late" and _counterApproach is 1>>
+			No one's there. You ring the bell. No one responds.
+			<<if Time.hour lt 8 and $sydneyLate is 1 and $sydneySeen and $sydneySeen.includes("library")>>
+				It seems Sydney is late<<if $sydneySeen.includes("science")>> again<</if>>.
+			<</if>>
+		<</if>>
+		<<if !Time.schoolDay or $schoolstate is "early" or $schoolstate is "late">>
+			<br><br>
+			<<bookRentalOptions>>
+		<</if>>
+		<<if !$weekly.theft.schoolLibraryMoney>>
+			<br>
+			<<shopicon "register">><<link [[Examine the cash register|School Library Register]]>><</link>>
+			<br>
+		<</if>>
+		<br>
+		<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+<</switch>>
+
+
+:: Book Rental
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>><<run statusCheck("Sydney")>>
+You
+<<switch $bookRent>>
+	<<case "return">>
+		return the<<if $book_rent_timer lt 0>><<set $recentReturnTimer to 14>> overdue<</if>>
+		<<switch $phase>>
+			<<case 6>>
+				<<if $per_npc.pinch isnot undefined>>
+					copy of "How <<if $per_npc.pinch.pronoun is "m">>Mr<<else>>Ms<</if>>. Pinch Groped Christmas"
+					<<clearNPC pinch>>
+				<<else>>
+					olive-coloured book.
+				<</if>>
+			<<case 5>>
+				copy of "Raul and Janet".
+			<<default>>
+				$studyBooks.rented textbook.
+		<</switch>>
+		<<set $studyBooks.rented to "none">>
+		<<if _sydney_location is "library">>
+			<<if $book_rent_timer lt 0>>
+				<<if $NPCName[$NPCNameList.indexOf("Sydney")].love lt 10>>
+					"Late. But at least it isn't damaged. Please try to be more punctual on returns." Sydney writes something down, frowning. <<bookCriminal>>
+				<<elseif $sydneyromance is 1>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						"I wish you'd stay on top of your rentals as well as you stay on top of me," <<he>> says while blushing. <<bookCriminal>>
+					<<else>>
+						"I wish I could make exceptions for you, but... <<nnpc_Title "Leighton">> Leighton scares me." <<bookCriminal>>
+					<</if>>
+				<<else>>
+					"Late." Sydney looks up. "I know you know better." <<bookCriminal>>
+				<</if>>
+			<<elseif $book_rent_timer is 14>>
+				"That was... fast." Sydney fumbles around with the register for a moment, before handing you <<moneyGain 15>>.
+			<<elseif $book_rent_timer gt 7>>
+				"Done early?" Sydney fumbles around with the register for a moment, before handing you <<moneyGain 10>>.
+			<<else>>
+				"Thanks for being punctual!" Sydney happily takes the book from you, before returning it to its place.
+			<</if>>
+			<<unset $bookOverdue>>
+			<<set $book_rent_timer to 0>>
+			<br><br>
+			<<sydneyOptions>>
+		<<else>>
+			<<set $bookReturnedAbsent to 1>>
+			<<set $book_rent_timer to 0>>
+			<br><br>
+			<<bookRentalOptions>>
+			<br>
+			<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+			<br>
+		<</if>>
+	<<case "rent">>
+		rent
+		<<if $phase is 6>>
+			the strange, olive-coloured book.
+			<<switch _sydneyStatus>>
+				<<case "corrupt" "corruptLust">>
+					Sydney snickers. "I thought this book was for kids. Dunno what it's doing here. But hey, knock yourself out."
+				<<default>>
+					Sydney smiles. "Oh, I love this old book! <<nnpc_Brother "Jordan">> Jordan used to read it to me every year around Christmastime."
+			<</switch>>
+			<br><br>
+			<<He>> slides the book towards you, but stops, staring down at the cover with a frown. "That's weird..." <<He>> starts to thumb through the pages, before shaking <<his>> head and handing it to you. "Enjoy."
+		<<elseif $phase is 5>>
+			a copy of "Raul and Janet".
+			<<switch _sydneyStatus>>
+				<<case "pure">>
+					<<if $sydneyromance is 1>>
+						Sydney smiles at you. "Romance on your mind? I wish it had a happier ending." <<He>> looks down, face flushed. "Do.... do you think we'll get a happy ending?"
+					<<else>>
+						Sydney looks down at the book and frowns. "A good love story, but I never really got what they were doing near the end. Why did they have to-" <<he>> cuts <<himself>> off. "Oh! Sorry, don't want to spoil it. Enjoy!"
+					<</if>>
+				<<case "pureLust">>
+					Sydney's cheeks turn red. "An... interesting read!<<if $sydneyromance is 1>> Maybe... maybe you can read it to me, sometime.<</if>>" <<He>> slides the book back to you, avoiding eye contact.
+				<<case "corrupt">>
+					Sydney looks down at the book and grins. "Such a sinful read. Don't have too much fun, now."
+				<<case "corruptLust">>
+					Sydney looks down at the book and grins. "Such a sinful read. Don't have too much fun, now." <<He>> hands the book back to you<<if $sydneyromance is 1>>, and gently places <<his>> hand on yours when you reach for it. "Maybe we can re-enact Act 3 Scene V sometime." <<arousal 1000>><<garousal>><<else>>.<</if>>
+				<<default>>
+					Sydney looks down at the book and frowns. "A story full of love and sin." <<if $temple_rank>><<He>> leans in and whispers. "Jordan's actually a big fan of this book, but don't tell <<nnpc_him "Jordan">> I told you! <<nnpc_He "Jordan">> says it's a good cautionary tale of the consequences of lust."<</if>> <<He>> hands the book back to you. "Enjoy."
+			<</switch>>
+		<<else>>
+			a $studyBooks.rented textbook.
+			<<if $sydneyromance is 1>>
+				Sydney smiles at you. "Look at you, putting the extra work in! I'm proud of you."
+			<<else>>
+				Sydney smiles. "Thanks for your rental!"
+			<</if>>
+		<</if>>
+		<<set $book_rent_timer to 14>>
+		<br><br>
+		<<sydneyOptions>>
+	<<case "renew">>
+		renew your rented
+		<<if $studyBooks.rented is "Raul and Janet">>
+			copy of "Raul and Janet".
+		<<elseif $studyBooks.rented is "Pinch">>
+			olive-coloured book.
+		<<else>>
+			$studyBooks.rented textbook.
+		<</if>>
+		<<set $book_rent_timer to 14>>
+		Sydney smiles. "Thanks for staying on top of this.<<if $sydneyromance is 1 and _sydneyStatus.includes("corrupt")>> Now if only you'd stay on top of me.<</if>>"
+		<br><br>
+		<<sydneyOptions>>
+	<<case "steal">>
+		steal
+		<<if $phase is 6>>
+			an olive-coloured book.
+		<<elseif $phase is 5>>
+			a copy of "Raul and Janet".
+		<<else>>
+			a $studyBooks.stolen textbook.
+		<</if>>
+		<<set $bookStolen to 1>>
+		<br><br>
+		<<bookRentalOptions>>
+		<br>
+		<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><<crimeUp 20 "thievery">><</link>><<crime "thievery">>
+		<br>
+	<<default>>
+<</switch>>
+<br><br>
+<br>
+
+:: Book Rental Return Stolen
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<sydneySchedule>><<run statusCheck("Sydney")>>
+You return the stolen
+<<if $phase is 6>>
+	<<if $per_npc.pinch isnot undefined>>
+		copy of "How <<if $per_npc.pinch.pronoun is "m">>Mr<<else>>Ms<</if>>. Pinch Groped Christmas"
+		<<clearNPC pinch>>
+	<<else>>
+		olive-coloured book.
+	<</if>>
+<<elseif $phase is 5>>
+	copy of "Raul and Janet".
+<<else>>
+	$studyBooks.stolen textbook.
+<</if>>
+<<if _sydney_location is "library">>
+	<<if $bookStolenKnown isnot undefined>>
+		<<switch $bookStolenKnown>>
+			<<case 1>>
+				"That's...!" Sydney looks aghast as you hand the book over. "You found it!" Before you can interject, Sydney pulls you into a hug from over the counter.
+				"I was so afraid of being punished by <<nnpc_Title "Leighton">> Leighton. You've really saved my <<if _sydneyStatus.includes("corrupt")>>ass<<else>>skin<</if>>." <<npcincr Sydney love 5>><<gglove>>
+			<<case 2>>
+				<<set $recentReturnTimer to 14>>
+				"That book is in the record as stolen. This is the second time you've returned one of those..." Sydney stands up with a look of sudden understanding and frowns at you. "I'm disappointed. But thank you for returning it and being honest." <<bookCriminal>>
+			<<default>>
+				<<set $recentReturnTimer to 14>>
+				Sydney looks to be on the verge of tears. "Why do you keep doing this?! You understand that the <<nnpc_title "Leighton">> will hold me responsible for all this, right?" <<npcincr Sydney love -10>><<lllove>>
+		<</switch>>
+		<<set $bookStolenKnown += 1>>
+		<<unset $sydneyStolenKnown>>
+	<<else>>
+		Sydney looks at you, confused. "That book was never checked out. Did you just find it lying around?"
+	<</if>>
+	<<set $studyBooks.stolen to "none">>
+	<br><br>
+	<<sydneyOptions>>
+<<else>>
+	<<set $bookStolenAbsent to 1>>
+	<<set $studyBooks.stolen to "none">>
+	<<unset $sydneyStolenKnown>>
+	<br><br>
+	<<bookRentalOptions>>
+	<br>
+	<<getouticon>><<link [[Leave|School Library]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>

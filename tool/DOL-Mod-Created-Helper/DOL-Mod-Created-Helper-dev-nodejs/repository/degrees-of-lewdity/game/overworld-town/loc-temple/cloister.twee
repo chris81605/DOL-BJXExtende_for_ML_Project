@@ -1,0 +1,1033 @@
+:: Temple Cloister
+<<set $location to "temple">><<set $outside to 0>><<effects>>
+
+You are in the temple cloister, an area not accessible by the public. <<if $malechance is 100>>Monks<<elseif $malechance is 0>>Nuns<<else>>Monks and nuns<</if>> prowl around the outskirts, emerging from and disappearing into the many passages leading away.
+<br><br>
+
+A six-armed, six-winged angel statue stands resolute in the centre. Its bottom two arms hold a large mirror at ground level.
+<br><br>
+
+<<if isPlayerNonparasitePregnancyEnding() and !$possessed>>
+	<<pregnancyWatersBrokenPassout "temple">>
+<<elseif $stress gte $stressmax>>
+	<<passouttemple>>
+<<elseif $exposed gte 1>>
+    You creep around the cloister, concealing your nudity behind a column of gargoyles whenever you hear the shuffle of feet.
+    <br><br>
+    <<if $temple_cloister_progress>>
+        <<link [[Secret passage to quarters (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[Public hall (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 7 and $temple_cloister_week_event is undefined>>
+    <<generateTemple 1>><<person1>>
+    You notice a <<monk desc>> knelt in prayer before the statue, so still <<he>> could be a statue <<himself>>. <<His>> lips move, then <<he>> rises and opens <<his>> eyes.
+    <br><br>
+    "Ah," <<he>> says with a smile. "I haven't seen you before." <<He>> bows. "Welcome to our order."
+    <br><br>
+    <<link [[Next|Temple Loris]]>><<saveNPC 0 "loris_younger">><<set $temple_cloister_week_event to 1>><</link>>
+    <br>
+<<elseif $temple_monk_days gte 14 and $temple_cloister_week_event is 1>>
+    <<generateTemple 1>><<person1>>
+    You hear panting. A <<monk desc>> flails in the middle of the grass, twirling a whip around <<himself>> in erratic fashion. <<He>> looks bewildered.
+    <br><br>
+    <<His>> eyes meet yours, and <<he>> cries out in surprise, losing control of <<his>> whip. It winds around <<his>> body, snapping <<his>> arms and legs together. <<He>> tumbles to the ground.
+    <br><br>
+
+    <<link [[Help|Temple Lemur Help]]>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+    <br>
+    <<link [[Watch (0:02)|Temple Lemur Watch]]>><<pass 2>><<saveNPC 0 "lemur_plum">><<set $temple_cloister_week_event to 2>><</link>>
+    <br>
+
+<<else>>
+    <<if $temple_cloister_progress is undefined>>
+        <<link [[Explore (1:00)|Temple Cloister Explore]]>><<set $temple_cloister_progress to 1>><<pass 60>><</link>>
+        <br>
+    <<else>>
+        <<link [[Training room (0:01)|Temple Cloister Training]]>><<pass 1>><</link>>
+        <br>
+        <<if $temple_confessor_intro>>
+            <<link [[Examine the statue of Virgo|Temple Cloister Statue]]>><</link>>
+            <br>
+        <<else>>
+            <<link [[Examine the six-armed statue|Temple Cloister Statue]]>><</link>>
+            <br>
+        <</if>>
+        <<link [[Look into the mirror|Temple Cloister Mirror]]>><<preMirror>><</link>>
+        <br>
+        <<link [[Showers (0:01)|Temple Cloister Showers]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <br>
+    <<if $temple_cloister_progress>>
+        <<link [[Secret passage to quarters (0:01)|Temple Quarters]]>><<pass 1>><</link>>
+        <br>
+    <</if>>
+    <<link [[Public hall (0:01)|Temple]]>><<pass 1>><</link>>
+    <br>
+<</if>>
+
+:: Temple Cloister Explore
+<<set $outside to 0>><<effects>>
+
+<<npc "Jordan">><<person1>>
+<<generateTemple 2>>
+<<generateTemple 3>>
+<<generateTemple 4>>
+<<generateTemple 5>>
+<<generateTemple 6>>
+
+You explore the tunnels leading away from the cloister. <<Monks_and_Nuns>> emerge from various rooms, or otherwise pass you in the corridor, and give you a polite nod. You find old prayer rooms, as well as modern amenities.
+<br><br>
+
+Other corridors, however, lead to a serpentine labyrinth. Here, the function of the rooms is less clear. You glimpse odd garb, strange altars, and stranger processions.
+<br><br>
+
+You wander for a while, unable to find the way back to the cloister. You hesitate to ask for directions, from embarrassment rather than fear, as at no point does anyone make you feel less than welcome. At last however, you emerge back at the cloister, and its jovial gargoyles.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 2]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 2
+<<effects>>
+
+
+You look at the closest gargoyle. It grins back at you. One hand rests on the statue beneath it, and its tail curls around the one above. They look ready to take flight, removing the support from the ceiling above.
+<br><br>
+
+"<<Sister>>." It's Jordan. <<He>> smiles at you from beneath <<his>> cowl. "You're exploring so soon. Come, let me show you around."
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 3]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 3
+<<effects>>
+
+Jordan leads you down one of the underground passages, and pauses beside a wooden door. "Remember," <<he>> says over the sound of clanging metal. "Everything you learn here is a secret to the outside world." The clanging becomes much louder as the heavy door swings open.
+<br><br>
+
+A <<person2>><<monk desc>> and <<person3>><<monk desc>> dance in the middle of a circular room. They pirouette away from each other, then lunge to meet once more, leaving a trail of sand in their wake. Then they repeat. Each time, a clang of metal rings out. They're not dancing. They're fighting.
+<br><br>
+
+Three others stand with arms folded, watching. Jordan claps <<person1>><<his>> hands, and the battle stops.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 4]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 4
+<<effects>>
+<<person1>>
+"This is one of our training rooms," Jordan says. <<He>> <<person2>>addresses the <<monk desc>>. "<<if $pronoun is "m">>Brother<<else>>Sister<</if>>. Please present your weapon."
+<br><br>
+
+The <<monk desc>> rests <<his>> baton in both hands as <<he>> steps forward, holding it out for you to see. Rings of metal surround a thick wooden shaft.
+<br><br>
+
+"We use two weapons in our duties here," Jordan continues. "This baton is one of them." <<person1>><<He>> reaches beneath <<his>> habit, and produces a coiled whip. <<He>> holds it out for you to inspect. "This is the other. Choose one."
+<br><br>
+
+<<set $prof.baton to 0>>
+<<set $prof.whip to 0>>
+
+<<link [[Baton|Temple Cloister Baton]]>><<set $temple_weapon to "baton">><</link>>
+<br>
+<<link [[Whip|Temple Cloister Whip]]>><<set $temple_weapon to "whip">><</link>>
+<br>
+
+
+:: Temple Cloister Baton
+<<effects>>
+
+The <<person2>><<monk desc>> hands you the baton. It's heavier than it looks, particularly at the tip.
+<br><br>
+
+"Now step into the arena <<sister>>," Jordan says, addressing you. "Don't worry. This is just a demonstration."
+<br><br>
+
+You step with Jordan onto the sand. <<person3>>The <<monk desc>> hands <<person1>><<him>> a baton of <<his>> own. "By sparring, we become closer to one another. Don't put too much force into your blows. Not here." Without warning, <<he>> springs forward <span class="red">delivering a painful smack to your hip</span> and landing behind you.<<pain 1>><<gpain>>
+<br><br>
+
+<<link [[Counterattack|Temple Cloister Baton Counterattack]]>><</link>>
+<br>
+<<link [[Guard|Temple Cloister Baton Guard]]>><</link>>
+<br>
+
+:: Temple Cloister Baton Counterattack
+<<effects>>
+
+You don't wait for further words. You spring at Jordan while <<his>> back is turned, aiming your baton at <<his>> hip. <<He>> ducks and turns with miraculous agility, spinning on the spot, both evading your blow and delivering <<his>> own to your ankle.
+<br><br>
+
+In the moment you fall, instinct takes over, and you grasp the hem of <<his>> habit. You glimpse surprise on <<his>> face, then <<he>> topples, landing atop you. The other <<monks_and_nuns>> laugh.
+<br><br>
+
+Jordan looks bashful as <<he>> stands, and helps you to your feet.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Baton Guard
+<<effects>>
+
+You hold your baton ready for another attack. Jordan pirouettes, kicking up sand, but doesn't follow with another assault. Instead, <<he>> bows.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Whip
+<<effects>>
+
+Jordan hands you the whip. You hold it by the handle, letting the thong fall to the ground.
+<br><br>
+
+"Now step into the arena," Jordan says, addressing you. "Don't worry. This is just a demonstration."
+<br><br>
+
+You step with Jordan onto the sand. <<He>> produces another whip from <<his>> habit. "By sparring, we become closer to one another." <<He>> lets <<his>> whip unfurl, then cracks it. "We only aim at the feet while sparring." Without warning, <<he>> lunges forward. The whip dances into life beside <<him>>, wrapping around your ankles as <<he>> lands behind you.
+<br><br>
+
+<<link [[Counterattack|Temple Cloister Whip Counterattack]]>><</link>>
+<br>
+<<link [[Struggle free|Temple Cloister Whip Guard]]>><</link>>
+<br>
+
+:: Temple Cloister Whip Counterattack
+<<effects>>
+
+You flick your whip at Jordan's feet. <<He>> hops over it with a practised grace, raising <<his>> own weapon and tripping you.
+<br><br>
+
+In the moment you fall, instinct takes over, and you grasp the hem of <<his>> habit. You glimpse surprise on <<his>> face, then <<he>> topples, landing atop you. The other <<monks_and_nuns>> laugh.
+<br><br>
+
+Jordan looks bashful as <<he>> stands, and helps you to your feet.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Whip Guard
+<<effects>>
+
+You try to squirm free from the coil around your ankles, but it's too tight. Jordan pirouettes, holding the handle of <<his>> hip aloft as <<he>> does, then releases you with a flick of <<his>> wrist.
+<br><br>
+
+<<He>> doesn't follow up with another assault. Instead, <<he>> bows.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 5]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 5
+<<effects>>
+
+"These weapons take practice," Jordan says. "You're welcome to visit here to train whenever you like. There should be someone to spar with, as long as it's not too late. You can carry your weapon from the temple, too, but there are rules."
+<br><br>
+
+"First rule. <span class="pink">Never use your weapon on another natural being.</span> Whether person or animal."
+<br>
+"Second rule. You can only carry one weapon at a time."
+<br><br>
+
+"You're welcome to swap your weapon here whenever you like. The baton might seem harder to master, but it is not so. Some argue that it is easier for beginners. I'm not so sure."
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 6]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 6
+<<effects>>
+
+An uneasy silence descends on the arena. The <<monks_and_nuns>> glance at each other. "There is," Jordan begins. "Something you need to see. Follow me."
+<br><br>
+
+<<endevent>>
+<<npc "Jordan">><<person1>>
+<<generateTemple 2>>
+<<generateTemple 3>>
+
+Jordan leads you from the room, and back to the cloister. You follow <<him>> around the edge, and down another passage. There are no doors along the corridor here, save at the end. Jordan opens it.
+<br><br>
+
+Inside are a <<person2>><<monk desc>> and <<person3>><<monk desc>>, standing beside a lit brazier. Smoke rises through a hole in the ceiling.
+<br><br>
+
+The pair bow to Jordan, and observe you with curious eyes.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 7]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 7
+<<effects>>
+
+<<person1>>"Light the brazier," Jordan says. A curious command, as the brazier is already lit. "I want a demonstration for our new <<sister>>."
+<br><br>
+The <<person2>><<monk desc>> approaches a row of shelves along one wall, and reaches into a jar. <<He>> withdraws the hand, now clasped, and returns to the brazier.
+<br><br>
+A sweet-smelling incense fills the room as <<he>> flicks a fistful of powder on the flame.<<garousal>><<ghallucinogens>><<hallucinogen 60>><<arousal 600>>
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 8]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 8
+<<effects>>
+
+<<person1>>Jordan walks past the brazier, and stands at an empty portion of the room. The pair step to <<his>> right and left, facing each other. "We'll need your help," Jordan says to you. "Look here."
+<br><br>
+
+You notice, now, grooves on the floor. Like a trap door of stone. You take your place beside your <<brothers_and_sisters>>, and together lift the heavy slab.
+<br><br>
+
+The others stand still, as if waiting. Then you notice it, half-seen in the firelight. <span class="pink">A tentacle of shadow rises from the depths,</span> flickering in and out of existence. It's as if a battle is being fought in your mind, over whether this entity is real.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 9]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 9
+<<effects>>
+
+"This is the enemy," Jordan says, with a slightly embarrassed, but mundane, tone. As if <<he>> were showing you the facility's toilets. "There are cracks all over this town, where these things squirm through. It is why the temple is here. And why we learn to fight."
+<br><br>
+
+<<He>> retrieves the whip from <<his>> habit, whirls the thong above your heads, then snaps it down around the creature. A ghost of a glow lights the room, and the creature evaporates.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 10]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 10
+<<effects>>
+
+The slab is restored with a thud. "More experienced <<brothers_and_sisters>> will go on missions to fight these creatures," Jordan says. "You are one of us, but still too green. You have other duties, however. Come."
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 11]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 11
+<<effects>>
+<<generate4>>
+You follow Jordan back to the cloister, then to the temple proper. <<He>> leads you towards the confessional. A <<person4>><<monk desc>> emerges at that moment, looking serene.
+<br><br>
+Jordan pauses, and watches <<him>> leave the building.
+<br><br>
+<<link [[Next|Temple Cloister Explore 12]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 12
+<<effects>>
+
+"You now have a duty to listen to the confessions of others," Jordan says. "Most people simply need forgiveness. Reassurance. The particularly sinful will need contrition." <<person1>><<He>> blushes. "They don't tell me what that involves, but I hear it's intense. Your role will simply be to mark their name down for the specialists, so you needn't worry either."
+<br><br>
+
+<<He>> pauses. Then smiles. "I'll explain more later. Follow me to the quarters. I've picked out your bed."
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 13]]>><</link>>
+<br>
+
+
+:: Temple Cloister Explore 13
+<<effects>>
+
+Jordan leads you up the stairs to the quarters. "You'll no longer come here just to clean," <<he>> says without interrupting <<his>> stride. <<He>> stops at a bunk near the far side of the room. "This one. The windows on this side have a lovely view of the forest."
+<br><br>
+
+You need to kneel on your bunk to get a good view, but <<hes>> right. The temple is taller than you realised. Treetops stretch to the horizon.
+<br><br>
+
+"There's a cupboard for you to keep your clothes, and a screen, here, for the sake of decency."
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 14]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 14
+<<effects>>
+
+"There's one more thing to show you," Jordan says. "Another secret."
+<br><br>
+
+Rather than walk towards the entrance, <<he>> continues to the end of the quarters, into an alcove hidden from view. You follow, and a large portrait of a stern-looking priest greets you.
+<br><br>
+
+"Don't be afraid of the scary expression." Jordan says, running <<his>> fingers over wall. "That's just to scare away initiates." <<He>> presses <<his>> palm against one of the stone bricks. It shifts a little, and the portrait swings open, cutting the stern figure in half. A secret stairwell is revealed, spiralling out of view.
+<br><br>
+
+Jordan motions for you to lead the way.
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 15]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 15
+<<effects>>
+
+You descend the steps, and find another tall picture. This one of a silver gate, surrounded by trees and drenched in moonlight.
+<br><br>
+
+After another brief fumble, Jordan presses a brick and the gate swings open, revealing a corridor heading to your left and right. "Recognise it?" Jordan asks. "These are the tunnels beneath the cloister. This is useful, because-" <<he>> pauses. "Let me show you."
+<br><br>
+
+<<He>> steps into the corridor, and opens the door opposite. At once, you hear the sound of running water. "The showers are here." <<He>> smiles. "It won't do for our muddy <<brothers_and_sisters>> to march the long way around!"
+<br><br>
+
+<<link [[Next|Temple Cloister Explore 16]]>><</link>>
+<br>
+
+:: Temple Cloister Explore 16
+<<effects>>
+
+Jordan bows. "I've informed you of the basics," <<he>> says. "I must return to my own duties. Welcome, <<sister>>."
+<br><br>
+
+The hem of <<his>> habit flares as <<he>> turns and departs.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Training
+<<effects>><<set $outside to 0>>
+
+<<if Time.dayState isnot "night">>
+    <<generateTemple 1>>
+    <<generateTemple 2>>
+    <<person1>>
+    You enter one of the training rooms, and find a <<monk desc>> sparring with a <<person2>><<monk desc>>. A weapon rack sits at the back of the room, sporting vicious-looking whips and batons.
+    <br><br>
+<<else>>
+    You enter one of the training rooms. It's empty. Despite the heavy use it sees during the day, not a grain of sand lies outside the arena in the centre. A weapon rack sits at the back of the room, sporting vicious-looking whips and batons.
+    <br><br>
+    You could spar here, during the day.
+    <br><br>
+<</if>>
+<<if Time.dayState isnot "night">>
+	<<set _bound to []>>
+	<<if $leftarm is "bound" or $rightarm is "bound">><<run _bound.push("arms")>><</if>>
+	<<if $feetuse is "bound" or $worn.feet.type.includes("shackle")>><<run _bound.push("legs")>><</if>>
+    <<if _bound.length>>
+		<span class="blue">You're unable to spar with your <<print formatList(_bound, "and")>> bound.</span>
+		<br>
+    <<elseif $temple_spar is 1>>
+        <<link [[Spar|Temple Cloister Spar Fail]]>><</link>>
+        <br>
+    <<else>>
+        <<if $temple_weapon is "baton">>
+            <<if $prof.baton gte 1000>>
+                <<link [[Spar (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<gggrace bishop>>
+            <<else>>
+                <<link [[Spar (1:00)|Temple Cloister Spar Baton]]>><<prof baton 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gbaton>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <<elseif $temple_weapon is "whip">>
+            <<if $prof.whip gte 1000>>
+                <<link [[Spar (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 3 bishop>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<gggrace bishop>>
+            <<else>>
+                <<link [[Spar (1:00)|Temple Cloister Spar Whip]]>><<prof whip 3>><<set $temple_spar to 1>><<physique 6>><<tiredness 6>><<grace 1 priest>><<pass 60>><</link>><<gtiredness>><<gwhip>><<gphysique>><<ggrace priest>>
+            <</if>>
+        <</if>>
+        <br>
+    <</if>>
+<</if>>
+<<if $temple_weapon is "baton">>
+    <<link [[Swap your weapon for a whip|Temple Training Whip]]>><<set $temple_weapon to "whip">><</link>>
+    <br>
+<<elseif $temple_weapon is "whip">>
+    <<link [[Swap your weapon for a baton|Temple Training Baton]]>><<set $temple_weapon to "baton">><</link>>
+    <br>
+<</if>>
+<br><br>
+<<link [[Leave|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Training Whip
+<<effects>>
+
+You approach the weapon rack. An assortment of savage whips and decisive batons greet you.
+<br><br>
+
+You place your baton, and select a whip. The thong shakes in anticipation.
+<br><br>
+
+<<link [[Next|Temple Cloister Training]]>><</link>>
+<br>
+
+:: Temple Training Baton
+<<effects>>
+
+You approach the weapon rack. An assortment of savage whips and decisive batons greet you.
+<br><br>
+
+You place your whip, and take a baton. The metal gleams, eager.
+<br><br>
+
+<<link [[Next|Temple Cloister Training]]>><</link>>
+<br>
+
+:: Temple Cloister Spar Fail
+<<effects>>
+
+"You've sparred enough for one day <<sister>>!" the <<person1>><<monk desc>> says. "Our bodies can only take so much. I don't want to have to inform Jordan that I injured you during a friendly bout."
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton
+<<effects>>
+
+The <<person1>><<monk desc>> and <<person2>><<monk desc>> bow to each other, then the <<monk desc>> steps from the arena. <<He>> watches from the sidelines as you step onto the sand.
+<br><br>
+
+The <<person1>><<monk desc>> bows to you, then assumes a guarded posture.
+<br><br>
+
+<<if $prof.baton gte 1000>>
+    <<if $temple_spar_baton is 5>>
+        <<link [[Next|Temple Cloister Spar Baton 6]]>><<set $temple_spar_baton to 6>><</link>>
+        <br>
+    <<else>>
+        You leap at each other. <<He>> parries the first blow, but it takes everything <<he>> has. It's clear <<he>> can't keep up with your skill, but you can help <<him>> improve.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 800>>
+    <<if $temple_spar_baton is 4>>
+        <<link [[Next|Temple Cloister Spar Baton 5]]>><<set $temple_spar_baton to 5>><</link>>
+        <br>
+    <<else>>
+        You exchange blows. You win most bouts, but your opponent is no slouch. The slightest lapse in concentration on your part is exploited, and the <<monk desc>> is occasionally able to force a draw.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 600>>
+    <<if $temple_spar_baton is 3>>
+        <<link [[Next|Temple Cloister Spar Baton 4]]>><<set $temple_spar_baton to 4>><</link>>
+        <br>
+    <<else>>
+        You leap to meet <<him>>, again and again. The bouts increase in intensity, until one of you falters. You give as good as you get, and win as often as not.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 400>>
+    <<if $temple_spar_baton is 2>>
+        <<link [[Next|Temple Cloister Spar Baton 3]]>><<set $temple_spar_baton to 3>><</link>>
+        <br>
+    <<else>>
+        You leap at each other, the batons clanging. These bouts last several exchanges. The <<monk desc>> usually gets the upper hand, but you sometimes force a draw.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.baton gte 200>>
+    <<if $temple_spar_baton is 1>>
+        <<link [[Next|Temple Cloister Spar Baton 2]]>><<set $temple_spar_baton to 2>><</link>>
+        <br>
+    <<else>>
+        You defend yourself as best you can. You parry the <<monk desc>>'s attacks now and then, but it's a struggle to keep up.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $temple_spar_baton is undefined>>
+        <<link [[Next|Temple Cloister Spar Baton 1]]>><<set $temple_spar_baton to 1>><</link>>
+        <br>
+    <<else>>
+        You defend yourself as best you can, but its a struggle to keep up. You manage to launch the occasional counterattack at the <<monk desc>>, but <<he>> parries each one.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Temple Cloister Spar Baton 1
+<<effects>>
+
+Without warning, <<he>> springs at you. You try to shield yourself with your baton, <span class="pink">but <<hes>> too quick.</span> <<He>> delivers a light tap on your hip, spins into a defensive stance.
+<br><br>
+
+Before you can get your bearings, <<he>> attacks again, and again. Each time the blow strikes from a different angle, and never where you hold your baton ready to parry.
+<br><br>
+
+You go decide to go on the offensive. <<He>> looks shocked for a moment, but manages to parry your blow to the side. You stumble, and <<he>> taps you on the shin as you pass.
+<br><br>
+
+"You might not feel it," the <<person2>><<monk desc>> says, still watching from the sidelines. "But you're making progress."
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Baton 2
+<<effects>>
+
+<<He>> leaps at you. You evade <<his>> blow while moving your baton to meet <<his>> weapon, but <<he>> recovers from one attack and flows into the next <span class="purple">before you can recover,</span> smacking you on the thigh.
+<br><br>
+<<He>> bows, and then assumes a guarded posture once more. You do likewise. The next time <<he>> leaps, you keep your feet firm on the spot, and your batons meet. The force pushes you onto your <<bottom>>.
+<br><br>
+<<He>> helps you to your feet, bows, then attacks again, and again. Each time <<he>> either recovers too fast for you to defend a second time, or the force shoves you to the sand.
+<br><br>
+You decide to be more aggressive. You step into <<his>> blow, parry it, and let <<his>> own force almost trip <<him>>. You bring your baton round for a counterattack. <<He>> frowns in concentration, and manages to bring <<his>> weapon up to intercept yours just in time, then backs away.
+<br><br>
+The <<person2>><<monk desc>> claps. "You're a natural. Keep at it."
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 3
+<<effects>>
+
+<<He>> observes you, watching for any twitch of a muscle that might betray your intent. You're not sure if you gave anything away, but you leap at each other at the same time, your batons colliding with a clang.
+<br><br>
+You're sometimes able to leap back into the fray quick enough to meet <<him>>, <span class="blue">but it's inconsistent.</span> Whenever you fail, you take a hit. After a while you're able to get into a good rhythm. Ten, eleven, twelve parries without failing.
+<br><br>
+Your concentration falters a little, and your recovery is too slow. You realise you won't respond quick enough. In that instant, you decide to remain rooted to the spot, and try to catch out your opponent with an unusual parry.
+<br><br>
+You manage to deflect <<his>> lunge, but the force is too great. You both end up on the sand.
+<br><br>
+"An unusual draw," the <<person2>><<monk desc>> says.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 4
+<<effects>>
+
+You watch each other, conscious of each small movement, each twist of a muscle that could signal an attack.
+<br><br>
+<span class="lblue">You trade blows,</span> then pirouette with a kick of sand, and fly at each other once more. The slightest mistake from either party would end the fight. Instead, the intensity increases, the speed increases, until at last the <<monk desc>>'s concentration falters. <<He>> succeeds in parrying your blow, but fails the landing, and falls on <<his>> rear.
+<br><br>
+The <<person2>><<monk desc>> applauds. You help the <<person1>><<monk desc>> to <<his>> feet, and bow.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Baton 5
+<<effects>>
+
+You strike first, forcing your opponent to react. Your batons meet, you land, pirouette, and lunge again. <<He>> matches you each time. You move so fast that you have to close your eyes to avoid the flying sand.
+<br><br>
+You press each other like this for a while, <span class="teal">but it's clear the <<monk desc>> is tiring faster.</span> <<He>> knows it as well. <<He>> makes a desperate, wild assault, putting all that remains of <<his>> strength into a single blow.
+<br><br>
+Your batons meet. The slightest mistake on your part would cause your defeat. Instead, you parry it like any other. Your opponent skids on the sand, throwing it into the air as they tumble to a halt.
+<br><br>
+The <<person2>><<monk desc>> claps twice. "I love a bout between experts."
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Baton 6
+<<effects>>
+You wait, watching your opponent's movements, each twitch of a muscle a feint. When <<he>> moves, you meet <<him>>, pirouette, and attack again.
+<br><br>
+<<His>> recovery is too slow, your blow too forceful. <<His>> back is still turned, while you're prepared for another lunge. <<Hes>> aware of it, and evades instead of attempting to parry. You sail by <<him>>, land, spring at <<him>> once more. Every part of <<his>> considerable will is bent on simply evading your assault.
+<br><br>
+<span class="green">It's inevitable.</span> <<He>> tires, and you land a blow on <<his>> hip. You bow, and <<he>> tries again, and again. Each time <<he>> evades until you manage to land a blow, or <<he>> tries to parry, and your force knocks <<him>> to the sand.
+<br><br>
+After a while <<he>> starts to get the hang of it, a little, managing to redirect the energy of your attack and forcing you into a quick recovery. You deflect <<his>> counter attack, and smack <<him>> with your own.
+<br><br>
+Exhausted, you bow to each other. The <<person2>><<monk desc>> applauds.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Spar Whip
+<<effects>>
+
+The <<person1>><<monk desc>> and <<person2>><<monk desc>> bow to each other, then the <<monk desc>> steps from the arena. <<He>> watches from the sidelines as you step onto the sand.
+<br><br>
+
+The <<person1>><<monk desc>> bows to you, then flies into a dance.
+<br><br>
+
+<<if $prof.whip gte 1000>>
+    <<if $temple_spar_whip is 5>>
+        <<link [[Next|Temple Cloister Spar Whip 6]]>><<set $temple_spar_whip to 6>><</link>>
+        <br>
+    <<else>>
+        You dance. <<His>> eyes dart around you, trying to discern the pattern in your whip, and almost trips over the edge of the arena as <<he>> backs away. It's clear <<he>> can't match your skill, but you can help <<him>> improve.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 800>>
+   <<if $temple_spar_whip is 4>>
+        <<link [[Next|Temple Cloister Spar Whip 5]]>><<set $temple_spar_whip to 5>><</link>>
+        <br>
+    <<else>>
+        You dance to meet <<him>>, putting <<him>> on the defensive. It usually ends with your whip around <<his>> legs, and <<his>> back on the sand, though <<he>> occasionally returns the favour.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 600>>
+    <<if $temple_spar_whip is 3>>
+        <<link [[Next|Temple Cloister Spar Whip 4]]>><<set $temple_spar_whip to 4>><</link>>
+        <br>
+    <<else>>
+        You dance to meet one another, twirling side by side, until one of you falters, and lies bound on the sand.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 400>>
+    <<if $temple_spar_whip is 2>>
+        <<link [[Next|Temple Cloister Spar Whip 3]]>><<set $temple_spar_whip to 3>><</link>>
+        <br>
+    <<else>>
+        <<He>> springs into life. You're able to discern the movements of <<his>> whip, but your body can't keep up. <<He>> trips you a lot, though you're occasionally able to return the favour.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<elseif $prof.whip gte 200>>
+    <<if $temple_spar_whip is 1>>
+        <<link [[Next|Temple Cloister Spar Whip 2]]>><<set $temple_spar_whip to 2>><</link>>
+        <br>
+    <<else>>
+        <<His>> whip whirls into life. You're able to discern the movements now and then, well enough to evade, or even launch a counterattack, though the <<monk desc>> evades them without breaking <<his>> dance.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<<else>>
+    <<if $temple_spar_whip is undefined>>
+        <<link [[Next|Temple Cloister Spar Whip 1]]>><<set $temple_spar_whip to 1>><</link>>
+        <br>
+    <<else>>
+        <<His>> whip whirls and lashes at your feet, forcing you against the edge of the arena. You're sometimes able to escape the trap, but more often end up on your <<bottom>>.
+        <br><br>
+        You leave the arena, aching all over.
+        <br><br>
+
+        <<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+        <br>
+    <</if>>
+<</if>>
+
+:: Temple Cloister Spar Whip 1
+<<effects>>
+
+The whip whirls around <<him>>, <span class="pink">faster than your eyes can keep up with,</span> a blur that moves closer with each step. <<He>> forces you back so far you trip over the edge of the arena, landing on your <<bottom>>.
+<br><br>
+<<He>> bows as you rise to your feet, then returns to the starting position. You try again, and again, but each time the violent whirling of the <<monk desc>>'s whip proves too much for you to overcome. Your opponent begins each bout with the same solemnity as the first.
+<br><br>
+Then, for a moment, you glimpse a pattern in the chaos. Rather than step backwards, you step forwards and bring your whip against <<his>>, forcing <<him>> to react. <<He>> evades your attack, and twirls into a counterattack, snapping the length of <<his>> weapon around your legs. You topple to the ground. The <<person2>><<monk desc>> applauds your progress.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 2
+<<effects>>
+
+The blur coalesces into a discernable pattern. You extend your whip to meet <<his>>, but <<he>> changes the tempo of <<his>> movements, <span class="purple">evading your blows and continuing the assault.</span> You can only slow <<his>> march across the arena, until you're backed into a corner.
+<br><br>
+
+With nowhere to turn, you lash your whip directly at the <<monk desc>>'s legs. <<He>> hops over it, but there's a respite in <<his>> assault. You seize the moment, and dash through the opening, escaping the trap. The <<person2>><<monk desc>> smiles, but you've no time to appreciate this small victory.
+<br><br>
+
+<<person1>><<He>> corners you again, and again. Each time, backed against the wall, you find a sudden desperate will, and manage to escape. But the attacks don't relent, until at last, exhausted, you haven't the speed for such a gambit. <<He>> brings <<his>> whip around your knees, and drags you to the sand.
+<br><br>
+
+As <<he>> helps you to your feet, you notice <<his>> chest rising and falling, and a single bead of sweat run down <<his>> cheek.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 3
+<<effects>>
+
+<<His>> attacks are aggressive, testing what you can do. You're able to keep up with <<his>> movements, but your body lags behind your mind. Each time <<he>> moves in for a disabling strike, you anticipate it, <span class="blue">but can't respond fast enough.</span>
+<br><br>
+<<He>> knocks you on your back, again and again, but you're no longer afraid of defeat. With each fall, you learn a little more. You brush off the sand and prepare for another bout.
+<br><br>
+You occasionally make attacks of your own. Your opponent evades them with seeming ease, until the last. <<His>> delicate footwork fails, and <<he>> almost stumbles. You seize the chance, snap your whip around <<his>> thighs, and pull with all your might.
+<br><br>
+
+It's only then that you notice <<his>> whip coiling around your own thighs. You pull each other to the sand.
+<br><br>
+
+The <<person2>><<monk desc>> applauds. "A draw."
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 4
+<<effects>>
+
+You dance to meet <<him>>, ducking beneath one blow, leaping over the next. <<He>> evades your blows in turn. You spin, jump, duck, pirouette, right next to each other, in the eye of the storm. No one would guess you were fighting, your aggression channeled into the cords flying around you.
+<br><br>
+This continues for a time, your heart racing, <span class="lblue">your mind focused.</span> The <<person2>><<monk desc>> watches, silent, in suspense. Until at last, you get the upper hand. Your opponent, worn down by the bout, fails to jump over your final blow. It catches the tip of <<person1>><<his>> shoes, making <<him>> stumble. <<His>> own whip twirls around <<him>>, binding <<his>> legs. <<He>> falls to the sand.
+<br><br>
+The <<person2>><<monk desc>> claps <<his>> hands twice.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 5
+<<effects>>
+
+You dance to meet <<him>>. <<His>> brow furrows in concentration as you <span class="teal">put <<him>> on the defensive at once.</span> Each time <<he>> manages make an attack of <<his>> own, you evade with grace and continue your assault without missing a beat.
+<br><br>
+
+<<He>> tires until <<he>> can no longer keep up with your pace. <<His>> concentration slips for just a moment, and your whip finds purchase around <<his>> ankles. You spin and yank the thong, pulling <<him>> to the sand.
+<br><br>
+The <<person2>><<monk desc>> nods approvingly.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Cloister Spar Whip 6
+<<effects>>
+
+You dance to meet <<him>>, putting <<him>> on the defensive at once. Such is your speed that you and the whip seem to dance independently from one another. <span class="green">A graceful dancer surrounded by whirling violence.</span>
+<br><br>
+You back <<him>> into the corner, forcing <<him>> to make a desperate gambit to stay on <<his>> feet. <<He>> succeeds, darting through your attack with every ounce of will, and escaping to open space. You press the assault, keeping <<him>> on <<his>> toes.
+<br><br>
+This continues for a time, until <<he>> no longer has the strength for such a gambit. You trip <<him>> with the tip of your whip, and leave <<him>> sprawled on the sand.
+<br><br>
+You help your opponent to <<his>> feet, and bow. The <<person2>><<monk desc>> applauds.
+<br><br>
+
+You leave the arena, aching all over.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+
+:: Temple Cloister Showers
+<<effects>>
+
+You are in the showers within the temple cloister. Each has a separate cubicle, with an adjoining space for undressing.
+<br><br>
+
+<<bathroomicon "shower">><<link [[Shower (0:20)|Temple Cloister Shower Take]]>><<undress>><<pass 20>><</link>>
+<br>
+<<ind>><<link [[Leave|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Shower Take
+<<effects>>
+
+<<wash>>
+You enclose yourself within a cubicle, undress, and step into the shower proper. The warm water cleanses you of filth.
+<br><br>
+
+You dry yourself, dress, and return to the cloister.
+<br><br>
+
+<<link [[Leave|Temple Cloister]]>><<clotheson>><</link>>
+<br>
+
+:: Temple Cloister Statue
+<<effects>>
+<<if $temple_confessor_intro>>
+    You approach the statue of Virgo.
+<<else>>
+    You approach the statue.
+<</if>>
+It appears to be made of marble. Its wings are spread out wide, and its middle arms are open as if to welcome someone in a loving embrace.
+<br><br>
+<<if $world_corruption_soft lte 25>>
+    You feel as though this gesture is aimed at you. Its upper arms are raised in rapture, and as you look up to its face, you can't shake the feeling that it's smiling at you.
+    <br><br>
+
+    You reach up to touch one of the lower hands.
+    <<if $world_corruption_hard gte 3>>
+        <span class="blue">You feel reassured, yet worried. Like a child being cradled by <<pher>> parent as a storm rolls in. This is merely the calm before the tempest.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        <span class="teal">You feel reassured, as if you're being praised while also told to remain vigilant. The taint will spread.</span>
+    <<else>>
+        <span class="green">You feel warm and safe, as if all is right in the world.</span>
+    <</if>>
+<<elseif $world_corruption_soft lte 99>>
+    The gesture is warm, but stern. Signs of a lapse in vigil are apparent. The lower right arm isn't actually attached to the statue, a large crack having seperated it at some point. Only its grip on the mirror keeps it in place.
+    <br><br>
+
+    One of the wings seems to be on the verge of breaking off, too, while another is missing a small piece.
+    <br><br>
+
+    <span class="purple">A lost arm. A broken wing. A single missing feather.</span>
+    <<if $world_corruption_hard gte 3>>
+       <span class="purple">The taint spreads quickly. You feel as though something terrible will happen soon if things don't change.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        Yet all is not lost. <span class="teal">The taint is spreading slowly.</span>
+    <<else>>
+        Despite the damage, you do not lose hope. <span class="teal">The corruption has halted, if only temporarily.</span>
+    <</if>>
+<<else>>
+    As you look closer, you feel cold and empty. The arms are not part of the main body, as if torn off and loosely floating. No longer part of the whole.
+    A fissure runs through the midsection of the statue. In some places you can see straight through it, only small chunks of marble keeping it together.
+    <br><br>
+
+    The wings, large and majestic despite the many cracks running through them, seem to be withering. As if they were alive.
+    <br><br>
+
+    A portrayal of a once loving entity now unable or unwilling to warmly greet those who worship it. You look up to its face.
+    <br><br>
+
+    <span class="red">A spike of dread shoots through you. An inexplicable feeling of urgency makes itself known, as if something terrible is bubbling up beneath the surface of the world.</span>
+    <<if $world_corruption_hard gte 3>>
+        <span class="red">The figure before you, disarmed and helpless, feels as though it's begging you for help.</span>
+    <<elseif $world_corruption_hard gt 0>>
+        You're filled with a small, almost vacant reassurance. <span class="purple">There's still time to fix the world.</span>
+    <<else>>
+        You're filled with a small reassurance, however. <span class="teal">The corruption has halted, if only temporarily.</span> It may yet be possible to let the world heal.
+    <</if>>
+<</if>>
+<br><br>
+
+<<link [[Leave|Temple Cloister]]>><</link>>
+<br>
+
+:: Temple Cloister Mirror
+<<effects>>
+<<if $temple_confessor_intro>>
+    You stand before the statue of Virgo.
+<<else>>
+    You stand before the statue.
+<</if>>
+The mirror it holds is almost wide enough to see the whole room.
+<br><br>
+<<link [[Step away|Temple Cloister]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>
+<br>
+<<mirror>>
+<br><br>
+
+
+:: Temple Loris
+<<effects>>
+
+"Have you been practising your weapon skills?" the <<monk desc>> asks. "I suspect Jordan is keeping you from danger, but <<nnpc_he "Jordan">> won't be able to hold you back forever. Keep your wits sharp."
+<br><br>
+
+<<He>> rests <<his>> hand on <<his>> hip, revealing the shape of a baton. "My name is Loris Younger. When the time comes, I'll face you in the arena. I hope you prove a trial."
+<br><br>
+
+<<He>> disappears among the gargoyles.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Lemur Help
+<<effects>>
+
+You help the <<monk desc>> liberate <<himself>> from <<his>> whip. "Thank you," <<he>> says, avoiding eye contact. "I'm Lemur Plum. I want to get better at fighting, but the arena scares me. I thought practising alone would help my confidence. I didn't know someone was watching."
+<br><br>
+
+<<He>> looks at the whip in <<his>> hand, then at you. "I see now this isn't going to work. I'll ask Jordan for advice. Thank you." <<He>> bows, and disappears between the gargoyles.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>
+
+:: Temple Lemur Watch
+<<effects>>
+
+You watch the <<monk desc>> try to squirm free, but <<he>> only tightens the coils. Then <<he>> pauses for a moment. It almost looks like <<hes>> given up, but then <<he>> adopts a more methodical approach, and manages to liberate <<himself>>.
+<br><br>
+
+"I hope I didn't startle you," <<he>> says as <<he>> stands, avoiding eye contact. "I'm Lemur Plum. I want to get better at fighting, but the arena scares me. I thought practising alone would help my confidence. I didn't know someone was watching."
+<br><br>
+
+<<He>> looks at the whip in <<his>> hand, then at you. "I see now this isn't going to work. I'll ask Jordan for advice. Thank you." <<He>> bows, and disappears between the gargoyles.
+<br><br>
+
+<<link [[Next|Temple Cloister]]>><<endevent>><</link>>
+<br>

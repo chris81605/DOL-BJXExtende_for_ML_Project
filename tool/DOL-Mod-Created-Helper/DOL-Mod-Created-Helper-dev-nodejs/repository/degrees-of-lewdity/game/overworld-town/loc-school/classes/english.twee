@@ -1,0 +1,417 @@
+:: English Classroom
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $schoolstate is "third">>
+	<<classRoomEarSlime "english">>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<outfitChecks>>
+		/*Check for when the pc is only wearing an overcoat*/
+		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're naked underneath.
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing swimwear underneath.
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing underwear underneath.
+		<</if>>
+		<br><br>
+		<<npc Doren>><<person1>>
+		Doren laughs. "Something wrong? You can't attend my lesson without a uniform. Not my rules. Leighton might have something spare."
+		<br><br>
+		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
+		<br><br> good starting point for when you can go to class naked-->
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<elseif $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound">>
+		<<if $daily.school.attended.english>>
+			You rejoin the English lesson,
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				hang your coat at the back of the class
+				<<undressOverClothes "englishClassroom">>
+			<</if>>
+			and take your seat.
+			<br><br>
+			<<englishstart>>
+		<<elseif Time.minute lte 5>>
+			You enter the English classroom.
+			<<npc Doren>><<person1>>
+			Doren is preparing at the front of the room while the seats fill.
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				<<undressOverClothes "englishClassroom">>
+				You hang your coat at the back of the class and take your seat.
+			<</if>>
+			<br><br>
+			<<englishstart>>
+		<<else>>
+			You
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				hang your coat at the back of the class and
+				<<undressOverClothes "englishClassroom">>
+			<</if>>
+			enter the English classroom.
+			<<npc Doren>><<person1>>
+			Doren cuts off mid-sentence and smiles at you.
+			<<if $daily.school.englishExcused>>
+				<<run delete $daily.school.englishExcused>>
+				"Don't worry, <<lass>>. You're in the clear."
+			<<else>>
+				"Better late than never! Sit down, you've got lost time to make up for."
+				<<gdelinquency>>
+				<<detention 1>>
+			<</if>>
+			<br><br>
+			You take a seat as Doren continues.
+			<br><br>
+
+			<<englishstart>>
+		<</if>>
+
+	<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+		Doren looks concerned. "La<<if $player.gender_appearance is "m">>d<<else>>ss<</if>>, who tied you up like that? Are you okay? Leighton should have something to cut you free. Go see the head."
+		<br><br>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		<<npc Doren>><<person1>>
+		Doren laughs. "You can't attend my lesson without a uniform. Not my rules. Leighton might have something spare."
+		<br><br>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<</if>>
+
+<<elseif $schoollesson is 1>>
+	<<if $daily.school.englishInterrupted is 1>>
+		<<npc Doren>><<person1>>You enter the English classroom. Doren stops speaking abruptly and looks your way. "Hah! I'm glad you're eager to study in my class, but don't you have another lesson to be at? I have to mark you down for detention or Leighton'll give me another talking to." <<He>> shoos you out the door.
+		<<gdelinquency>>
+		<br><br>
+		<<detention 1>>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+	<<else>>
+		<<npc Doren>><<person1>>You enter the English classroom. Doren stops speaking abruptly and looks your way. "Something I can do for you, <<lass>>?" It seems you've interrupted the lesson.
+		<br><br>
+		<<set $daily.school.englishInterrupted to 1>>
+
+		<<link [[Apologise|English Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+		<br>
+		<<if $trauma gte 1>>
+			<<link [[Mock|English Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $schoolstate is "afternoon" and $englishPlay is "ongoing">>
+	The English classroom is full of students rehearsing for various stage plays.
+	<br><br>
+
+	<<if $englishPlayLate>>
+		<<link [[Sign up for a play|English Play Late Signup]]>><</link>>
+		<br><br>
+	<</if>>
+	You spot Sydney near a group of students.
+	<<if !$englishPlayLate>>
+		<<if $englishPlayReadiness gte 56 and $englishPlayRoles.SydneyKnown and $englishPlayRoles.Kylar isnot "none" and $englishPlayRoles.KylarKnown and !$englishPlayDoubleRehearsal>>
+			<span class="blue">Kylar is with <<nnpc_him "Sydney">>.</span>
+			<br>
+			<<link [[Rehearse with Kylar and Sydney (2:00)|English Play Rehearse Both]]>><<pass 30>><<englishskill 18>><</link>><<gggenglish>><<gggreadiness>>
+		<<elseif $englishPlayRoles.SydneyKnown and $englishPlayRoles.Player isnot "none">>
+			<br>
+			<<link [[Rehearse with Sydney (2:00)|English Play Rehearse Sydney]]>><<pass 2 hours>><<englishskill 18>><<npcincr Sydney love 5>><</link>><<gggenglish>><<ggreadiness>><<gglove>>
+		<<elseif $englishPlayRoles.SydneyKnown>>
+			<br>
+			<<link [[Help Sydney rehearse (2:00)|English Play Rehearse Sydney No Role]]>><<pass 2 hours>><<englishskill 12>><<npcincr Sydney love 5>><</link>><<ggenglish>><<gglove>>
+		<<elseif $englishPlayRoles.Player isnot "none">>
+			<br>
+			<<link [[Approach Sydney|English Play Intro Sydney]]>><</link>>
+		<</if>>
+		<br>
+		<<if $englishPlayRoles.Kylar isnot "none" and !$englishPlayRoles.KylarKnown>>
+			Kylar stands alone in a corner. Others seem to be avoiding <<nnpc_him "Kylar">>.
+			<br>
+			<<link [[Approach Kylar|English Play Intro Kylar]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<br>
+	<<link [[Help other students rehearse (2:00)|English Play Rehearse Others]]>><<pass 2 hours>><<englishskill 6>><<status 8>><<trauma -12>><</link>><<genglish>><<ggcool>><<lltrauma>>
+	<br>
+	<<link [[Leave the room (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<<else>>
+	You are in the English classroom. Bookshelves line the walls.
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		You take your coat at the back of the class.
+		<br><br>
+	<</if>>
+	<<exhibitionclassroom>>
+
+	<<emptyClassroomMasturbationIntro>>
+
+	<<link [[Leave the room (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+
+:: English Lesson
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.english to true>>
+
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	<<npc Doren>><<person1>>
+	"It's that time of week," Doren announces, lifting a booklet-filled tray from beneath <<his>> desk. <<He>> walks around the room, placing one in front of each student. "Don't worry. I'm sure you'll all do great."<<gstress>><<stress 6>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<exam english>>
+	<br><br>
+
+	There's a shuffle of paper as students open the first page. Doren prowls the aisles.
+	<br><br>
+	<<endevent>>
+	<<exam_cheat english>>
+	<<if !$daily.earSlimeCheatExam and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,200) gte 150 - $earSlime.corruption>>
+		<<set $daily.earSlimeCheatExam to true>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">You feel the slime in your head command you to cheat in the exam.</span> It promises rewards if you comply<<if $earSlime.startedThreats>>, and threatens consequences if you do not<</if>>.
+		<br><br>
+		<<link [[Obey|English Exam]]>><<set $phase to 4>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[Defy|English Exam]]>><<set $phase to 6>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[Ignore|English Exam]]>><<set $phase to 5>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[Focus|English Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+		<br>
+		<<link [[Try to relax|English Exam]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[Cheat|English Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+		<br>
+		<<if $kylarenglishstate is "active">>
+			<<link [[Copy Kylar|English Exam]]>><<set $phase to 3>><<npcincr Kylar lust 3>><<set $exam_chance += 5>><</link>><<glust>> <<passPercent 5>>
+			<br>
+		<</if>>
+	<</if>>
+<<elseif $kylarenglishstate is "active">>
+
+	<<if Time.minute lte 5>>
+		The English lesson begins, how do you want to conduct yourself?
+		<br><br>
+	<<else>>
+		The English lesson continues, how do you want to conduct yourself?
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[Focus on the lesson|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[Socialise with classmates|English Lesson Socialise]]>><</link>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[Daydream|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 75>>
+		<<ind>><<link [[Masturbate|English Lesson Masturbate]]>><<set $masturbationstart to 1>><<npcincr Kylar lust 5>><</link>><<exhibitionist5>><<glust>>
+		<br>
+	<</if>>
+<<else>>
+
+	<<if Time.minute lte 5>>
+		The English lesson begins, how do you want to conduct yourself?
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		The English lesson continues, how do you want to conduct yourself?
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Doren">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<englishicon>><<link [[Focus on the lesson|English Lesson Focus]]>><</link>><<gstress>><<genglish>>
+	<br>
+	<<socialiseicon>><<link [[Socialise with classmates|English Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[Daydream|English Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 55>>
+		<<ind>><<link [[Masturbate|English Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
+<</if>>
+
+:: English Classroom Apology
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+Embarrassed, you apologise and leave.
+<br><br>
+
+<<link [[Next|Hallways]]>><<endevent>><</link>>
+
+:: English Classroom Mock
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You mock the teacher. "Sorry for interrupting <<sir>>, please don't eat me!" Laughter erupts among the seated students.
+<br><br>
+
+Doren also laughs. "Go to your class, or I just might!" <<He>> holds the door open for you.
+<<gdelinquency>>
+<br><br>
+<<detention 1>>
+<<link [[Next|Hallways]]>><<endevent>><</link>>
+
+:: English Lesson Focus
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $kylarenglishstate is "active">>
+	You focus on listening to the teacher and studying the material. You think you're making progress, despite Kylar's distractions.
+	<br><br>
+<<else>>
+	You focus on listening to the teacher and studying the material. It's hard going, but you think you're making progress.
+	<br><br>
+<</if>>
+
+<<towelup>>
+
+<<advancelesson>>
+<<englishskill _lesson_progress>>
+<<stress _lesson_progress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<link [[Next|Hallways]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - $allure)>>
+		<<eventsenglish>>
+	<<else>>
+		<<eventsenglishsafe>>
+	<</if>>
+<</if>>
+
+:: English Lesson Socialise
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $kylarenglishstate is "active">>
+	You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates. Kylar's presence makes this difficult.
+<<elseif $cool gte ($coolmax / 5 * 2)>>
+	You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates. You soon become the centre of attention.
+<<elseif $cool gte ($coolmax / 5)>>
+	You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates.
+<<else>>
+	You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates. Most avoid interacting with you.
+<</if>>
+<br><br>
+
+<<if $kylarenglishstate is "active">>
+<<else>>
+	<<status 1>>
+<</if>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<link [[Next|Hallways]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure * 2))>>
+		<<eventsenglish>>
+	<<else>>
+		<<eventsenglishsafe>>
+	<</if>>
+<</if>>
+
+:: English Lesson Daydream
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $kylarenglishstate is "active">>
+	You stare out the window and daydream. Kylar sketches you in <<nnpc_his "Kylar">> sketchbook.
+<<elseif $trauma gte (($traumamax / 10) * 7)>>
+	You keep to yourself, afraid that one wrong move will result in the whole class molesting you.
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	You focus on your own thoughts, trying to keep the creeping anxiety at bay.
+<<else>>
+	You don't really pay attention to the lesson, instead idly staring out the window and thinking about what you'll do after school.
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "englishClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "englishClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<link [[Next|Hallways]]>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure / 2))>>
+		<<eventsenglish>>
+	<<else>>
+		<<eventsenglishsafe>>
+	<</if>>
+<</if>>
+
+:: English Kylar Move
+
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 90>>
+	You pick up your things to move to another seat. Kylar rests a hand on your thigh. <<His>> hand clutches a knife. "Wh-where are you going, my love?" <<he>> says. "We already have our seats."
+	<br><br>
+	<<link [[Next|English Lesson]]>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<set $kylarenglishstate to "watching">>
+	You pick up your things and move to another seat. Kylar doesn't follow, but starts stabbing <<his>> hand with a pen.
+	<br><br>
+	<<link [[Next|English Lesson]]>><<endevent>><</link>>
+	<br>
+<</if>>

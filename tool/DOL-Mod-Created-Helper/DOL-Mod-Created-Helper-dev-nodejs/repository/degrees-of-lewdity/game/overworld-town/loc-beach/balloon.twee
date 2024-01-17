@@ -1,0 +1,630 @@
+:: Balloon Stand [exitCheckBypass]
+<<loadNPC 0 "stall_owner">><<person1>>
+
+<div id="clothingShop-div" class="main-shop-div">
+	<<stallShop-main>>
+</div>
+
+:: Balloon Purchase
+<<effects>>
+	<<if $balloonStand.owner is "angry" and ["hot drink","cold drink"].includes($phase)>>
+		The <<person>> regards you for a long moment before sighing. "Sure," <<he>> says, sounding resigned. "Look, I'm sorry for losing my cool. It was kind of a dick move to start selling my own drinks after promising to help, but to be fair, you hurt me after you promised to get me off. I don't like being angry, though. We're good, right?"
+		<br><br>
+		<<He>> has a point. You nod. "We're good."
+		<<set $balloonStand.owner to "appeased">>
+	<<else>>
+		<<set _sir to $player.gender_appearance is 'f' ? 'miss' : 'sir'>>
+		"<<print $balloonStand.owner is "angry" ? "Sure, whatever," : either("Certainly,", "Right away, _sir,", "Sure thing,", "Coming right up,", "Absolutely!")>>" the <<person>> says.
+	<</if>>
+	<br><br>
+	<<switch $phase>>
+		<<case "hot drink" "cold drink">>
+			<<set $daily.ex.balloonDrink to ($daily.ex.balloonDrink or 0) + 1>>
+			<<set _prop to $phase is "cold drink" ? "lemonade" : "mug">>
+			<<wearProp _prop>>
+
+			<<set _drink to $phase is "hot drink" ?
+			"a cup of steaming <<seasonal_beverage>>. The paper cup warms your hands" :
+			"glass of ice-cold <<seasonal_beverage>>. The plastic cup swelters in your hand">>
+			<<He>> pours you a _drink.
+
+			<<if $daily.ex.balloonDrink is 2>>
+				"Thirsty, eh?" <<he>> says. "<<print playerBellyVisible() ? "Guess you gotta keep that little one hydrated" : "Glad to see you're staying hydrated">>." <<He>> smiles at you.
+			<<elseif $daily.ex.balloonDrink is 3>>
+				"Gotta save some for the other customers, so I'm gonna have to cut you off after this." <<He>> gives you an apologetic smile.
+			<</if>>
+
+		<<case "popcorn">>
+			<<He>> scoops out some freshly-popped popcorn. The bag's still warm when <<he>> hands it to you.
+			<<set $daily.ex.popcorn to ($daily.ex.popcorn or 0) + 1>>
+			<<wearProp "popcorn">>
+
+			<<if $daily.ex.popcorn is 2 and $balloonStand.owner isnot "angry">>
+				"You must be hungry," <<he>> says. <<print playerBellyVisible() ? `"I suppose you are eating for two." <<He>> smiles, glancing affectionately at your baby bump.` : `"Not getting enough to eat at home?" <<His>> brow creases momentarily, but <<he>> quickly shakes it off.`>>
+			<<elseif $daily.ex.popcorn is 3>>
+				"Gotta save some for the other customers, so I'm gonna have to cut you off after this." <<print $balloonStand.owner is "angry" ? "<<His>> voice is curt" : "<<He>> gives you an apologetic smile">>.
+			<</if>>
+	<</switch>>
+	"<<print $balloonStand.owner is "angry" ? "There you go. Get lost." : either("Good to see you, love.", "Have a great rest of your day now.", "Thanks for your custom.", "Enjoy!")>>"
+	<br><br>
+	<<switch $phase>>
+		<<case "hot drink" "cold drink">>
+			<<link [[Take a sip (0:15)|Balloon Consume]]>><<stress -9>><<pass 15>><</link>><<lstress>><br>
+		<<case "popcorn">>
+			<<link [[Eat the popcorn (0:15)|Balloon Consume]]>><<set $phase to $balloonStand.robin.status is "help needed" ? "ask_eat" : "popcorn">><<trauma -3>><</link>><<ltrauma>><br>
+			<<if $balloonStand.robin.status is "help needed">>
+				<<link [[Save it for later|Balloon Consume]]>><<set $phase to "ask">> <<set $popcorn += 1>><<handheldon>><</link>><br>
+			<<else>>
+				<<link [[Save it for later|Beach]]>><<set $eventskip to 1>><<set $popcorn += 1>><<endevent>><</link>>
+			<</if>>
+	<</switch>>
+
+:: Balloon Consume
+<<effects>>
+
+<<switch $phase>>
+	<<case "hot drink">>You take a careful sip, careful not to scald your tongue. The <<seasonal_beverage>> is rich <<print Time.season is "winter" ? "and creamy" : "with spices">>, and you can feel the stress melting away.
+	<<case "cold drink">>You take a sip. The <<seasonal_beverage>> is <<print Time.season is "spring" ? "pleasantly fruity" : "tart">> and refreshing, and you can feel the stress melting away.
+	<<case "popcorn" "park" "ask_eat">>You pop a handful of popcorn into your mouth. It's buttery and salty, and it brings back nostalgic memories of trips to the cinema.
+	<<case "ask">>You fold over the top of the bag so popcorn doesn't spill everywhere before pocketing it.<<handheldon>>
+<</switch>>
+<br><br>
+<<if ["ask","ask_eat"].includes($phase)>>
+	"I've been meaning to ask," the <<person>> says, resting <<his>> elbows on the stall as <<he>> leans over to chat with you. "What do you think of the popcorn? Good, right?"
+	<br><br>
+	<<if $speech_attitude is "meek">>
+		"It's very good, <<sir>>," you tell <<him>>. "Although, it is, um, kind of salty?"
+	<<elseif $speech_attitude is "bratty">>
+		"Yeah, gotta admit, you did good with it. Salty, though. I'm parched." You smack your lips frankly.
+	<<else>>
+		"It's tasty, yeah! If I had to critique it, it is a bit salty, though."
+	<</if>>
+	<br><br>
+	"Salt is addictive. That's how you keep 'em coming back," <<he>> says with a wink. "But good to know. I'm always open to ways to improve."
+	<br><br>
+	<<link [[Suggest that the stall owner partner with Robin|Balloon Partner]]>><<set $phase to "help">><<handheldon>><</link>><br>
+	<<link [[Suggest that the stall owner sell beverages|Balloon Partner]]>><<set $phase to "sabotage">><<handheldon>><</link>>
+<<elseif $phase is "park">>
+	<<link [[Next|Park]]>><<set $eventskip to 1>><<endevent>><</link>>
+<<else>>
+	<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>
+
+:: Balloon Partner
+<<effects>>
+<<npc Robin 2>><<person2>>
+<<set _boyfriend to ($robinromance ? "<<person2>><<personsimple>>friend" : "friend")>>
+
+<<switch $phase>>
+	<<case "help">>
+		<<if getRobinLocation() is "beach">>
+			"My _boyfriend's selling lemonade, right across the way there." You nod at Robin's lemonade stand. "It's really tasty. I think your customers would appreciate a nice cold drink after some of your popcorn."
+		<<else>>
+			"<<print Time.season is "winter" ? "When it's not cold out," : "<<Hes>> not there right now, but">> my _boyfriend spends the weekend selling lemonade, right across the way there. You've probably seen <<him>> around." You nod at the spot where Robin normally sets up shop. "<<print Time.season is "winter" ? "Now that it's winter, <<hes>> selling hot cocoa over in the park." : "It's really tasty.">> I think it'd hit the spot after some of your popcorn."
+		<</if>>
+		<br><br>
+		The <<person1>><<person>> cocks <<his>> head, considering your words. "I've tried that lemonade of <<person2>><<hers>> before," <<person1>><<he>> says. "It's mostly sugar water. I'm not saying no, but you're gonna have to work a little harder to convince me that partnering with your little _boyfriend isn't a terrible idea."
+		<br><br>
+		<<link [[Persuade|Balloon Convince]]>><<set $phase to "persuade">><</link>><<englishdifficulty 1 1000>><br>
+		<<if $promiscuity gte 55>>
+			<<link [[Seduce|Balloon Convince]]>><<set $phase to "seduce">><</link>><<promiscuous4>>
+			<br>
+		<</if>>
+		<<if $money gte 30000>>
+			<<link [[Bribe (£300)|Balloon Convince]]>><<set $phase to "bribe">><<set $money -= 30000>><</link>>
+		<</if>>
+
+	<<case "sabotage">>
+		"Have you considered selling beverages alongside your popcorn?" you ask.
+		<br><br>
+		The <<person1>><<person>> hums noncommittally as <<he>> wipes down <<his>> stand. "Like your buddy <<print getRobinLocation() is "beach" ? "over there" : Time.season is "winter" ? "who sells hot chocolate in the park" : "who sells lemonade">>?" <<He>> leans in conspiratorially. "I've tried <<person2>><<his>> lemonade before. <<Hes>> a bit heavy-handed on the sugar, and really ought to invest in a proper juicer."
+		<br><br>
+		 <<person1>><<He>> straightens back up. "What does your friend charge, anyway?" <<he>> muses, glancing over at <<print getRobinLocation() is "beach" ? "Robin's stall" : "where Robin normally sets up shop">>. "A pound? You can't make a living like that. Who knows, maybe a little friendly rivalry will help drum up some business for <<person2>><<him>>." The <<person1>><<person>> chuckles. "I'm already thinking of a seasonal menu. Cider in the fall, strawberry lemonade in the spring... this'll be fun. Stop by tomorrow, why don't you? I'll give you a drink on the house." <<set $balloonStand.freeDrink to true>>
+		<br><br>
+		<<if $speech_attitude is "meek">>
+			"That's very kind of you, <<sir>>." You give <<him>> a tiny smile. "Thank you."
+		<<elseif $speech_attitude is "bratty">>
+			"Sure, sign me up." You grin. "I'm always down for a freebie."
+		<<else>>
+			"I'd like that very much." You smile. "Thank you."
+		<</if>>
+		<br><br>
+		"Don't expect me to make a habit of it, though. I gotta earn a living here," <<he>> says with a wink. "You know, you're a shrewd one, <<girl>>. Keep it up, and you'll make a fine business magnate someday." <<stress -6>><<lstress>>
+
+		<<balloonRobinSabotaged>>
+		<br><br>
+		<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>
+
+:: Balloon Convince
+<<effects>>
+<<npc Robin 2>><<person2>>
+
+<<switch $phase>>
+	<<case "persuade">>
+		You talk at length about the virtues of Robin's <<print Time.season is "winter" ? "hot chocolate" : "lemonade">>. For good measure, you spin up a sob story about Robin's history as an orphan.
+		<br><br>
+		<<if $englishSuccess>>
+			"You'd really be helping <<person2>><<him>> out, <<person1>><<sir>>," you say, eyes wide and earnest. "<<Hes>> a good person, and <<he>> just needs someone to cut <<him>> a break for once. And it will be a two-way street, I assure you. <<He>>'ll happily send customers your way as well. Plus, think of all the good karma you'll be racking up, helping an unfortunate orphan get a leg up in this cruel world!"
+			<br><br>
+			The <<person1>><<person>> looks moved by your passionate words. <<balloonRobinHelped>>
+			<br><br>
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<<else>>
+			The <<person1>><<person>> looks unmoved. "So, the <<person2>><<personsimple>>'s had a rough life. Who hasn't? I'm not providing a charity service here, and I don't see what <<he>> has to offer that will benefit me."
+			<br><br>
+			<<person1>><<He>> sighs. "Look, I'm not an asshole," the <<personsimple>> says. "I'm not convinced, but I like you. Stop by the stall some other time, and I'd be happy to hear you out."
+			<<set $daily.ex.balloonConvince to 1>>
+			<<set $balloonStand.robin.status to "convince">>
+			<br><br>
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<</if>>
+
+	<<case "seduce">>
+		<<set $seductiondifficulty to 8000>>
+		<<seductioncheck>>
+		<br><br>
+		<<seductionskilluptext>>
+		<<seductionskilluse>>
+
+		"Are you sure I can't convince you?" you purr, leaning over <<person1>><<his>> stall. You lick your lips and glance pointedly at <<his>> crotch. "I am very good with my mouth... I'm sure we can come to an agreement." <<promiscuity4>>
+
+		<<if $seductionrating gte $seductionrequired>>
+			<<He>> looks conflicted for a moment, but relents. "Ah, alright." <<He>> glances around quickly, then ushers you under the stall. "Make good use of that mouth, and I'll help you out. Hurry, before someone sees. I think I spot some potential customers over there."
+			<br><br>
+			<<link [[Next|Balloon Sex]]>><<set $sexstart to 1>><</link>>
+		<<else>>
+			The <<person>> looks at you and bursts into laughter, leaving you self-conscious. "Not a chance, sorry. Look, I'm not an asshole," <<he>> says. "I'm not interested, but I like you. Stop by the stall again tomorrow, and I'd be happy to hear you out. Use your words next time, not... whatever this was." <<He>> chuckles to <<himself>> and waves you off.
+			<<set $daily.ex.balloonConvince to 1>>
+			<<set $balloonStand.robin.status to "convince">>
+			<br><br>
+			<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+		<</if>>
+
+	<<case "bribe">>
+		<<if $speech_attitude is "meek">>
+			"Might this help sweeten the deal?" You count out £300 and hand it to <<person1>><<him>>.
+		<<elseif $speech_attitude is "bratty">>
+			"Money talks, yeah? How's 300 quid sound?" You count out the money and stuff it in <<person1>><<his>> hands.
+		<<else>>
+			"Would 300 quid convince you?" You count out the money and hand it to <<person1>><<him>>.
+		<</if>>
+		<br><br>
+		<<He>> pockets the money, looking impressed. <<balloonRobinHelped>>
+		<br><br>
+		<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>
+
+:: Balloon Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<set $enemyno to 1>><<set $enemynomax to 1>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	You crawl under the stall and give <<him>> a teasing lick.
+	<<promiscuity4>><<npcoral>><<set $NPCList[0].mouth to "none">>
+	<<set $enemytrust += 10>>
+<</if>>
+<<effects>>
+The <<personsimple>> chats up a customer, doing <<his>> best to keep <<his>> voice steady.
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Balloon Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Balloon Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Balloon Sex Finish
+<<location "beach">><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<He>> pants as <<he>> comes down from <<his>> orgasm. <<He>> gives your cheek a clumsy pat, and you crawl out from underneath the stall, wiping your mouth.
+	<br><br>
+	<<balloonRobinHelped>>
+<<elseif $enemyhealth lte 0>>
+	"Ow, you fucking whore!" the <<person>> shouts, kicking you away from <<him>>. You scramble out from under the stall. "You can forget about me helping your little friend!" <<he>> shouts after you as you sprint away from the stand. "In fact, <span class="red">I'm gonna start selling my own lemonade</span>! Next time, don't bite the hand that feeds you, asshole."
+
+	<<balloonRobinSabotaged "angry">>
+<<elseif $finish is 1>>
+	<<He>> looks disappointed as you crawl out from the stand. "Was that supposed to convince me?" <<He>> shakes <<his>> head. "Look, I like you. Stop by the stall some other time, and I'm willing to hear you out. Use your words next time, not... whatever this was." <<He>> waves you off.
+	<<set $balloonStand.robin.status to "convince">>
+	<<set $daily.ex.balloonConvince to 1>>
+<</if>>
+<<clotheson>>
+<<endcombat>>
+<<link [[Next|Beach]]>><</link>>
+
+:: Balloon Robin Check-In
+<<effects>>
+<<loadNPC 0 "stall_owner">><<npc Robin 2>>
+<<set $balloonStand.robin.talked to true>>
+<<set $balloonStand.robin.knows to ($phase is "confess_helped" or $phase is "confess_sabotaged" ? true : false)>>
+<<set _lemonade to Time.season is "winter" ? "hot chocolate" : "lemonade">>
+<<set _botchedHelp to ["angry", "appeased"].includes($balloonStand.owner)>>
+
+<<switch $phase>>
+	<<case "confess_helped">>
+		<<if $speech_attitude is "meek">>
+			"Well," you say coyly, "I might know what's causing it..." Robin looks at you with wide eyes, and you're barely able to suppress a giggle. "You have a new business partner! I asked that <<person1>><<personsimple>> who sells popcorn to send you <<his>> thirsty customers. <<He>> only asks that you point interested customers <<his>> way as well."
+		<<elseif $speech_attitude is "bratty">>
+			"Oh, I can tell you exactly why your business is booming," you say, grinning widely. Robin looks at you, wide-eyed and questioning. "It's because I'm a genius, and I convinced that schmuck selling popcorn to send you <<person1>><<his>> thirsty customers. Just send anyone who looks hungry over to <<him>>, and you're square."
+		<<else>>
+			"Well," you begin, offering Robin a smile. "You know that stall that sells popcorn? I convinced <<person1>><<him>> to send you <<his>> thirsty customers. <<He>> just wants you to send some customers <<his>> way occasionally too."
+		<</if>>
+		<br><br>
+		<<balloonRobinGrateful>>
+
+	<<case "confess_sabotaged">>
+		<<if _botchedHelp>>
+			You take a deep breath and
+			<<if $speech_attitude is "meek">>
+				glance away from Robin. "W-well... I might, um, know the reason. See, I tried to convince that <<person1>><<personsimple>> who sells popcorn to send you <<his>> thirsty customers... but I ended up upsetting <<him>>. I think <<he>> started selling _lemonade in retaliation."
+			<<elseif $speech_attitude is "bratty">>
+				look Robin square in the eye. "I know what's going on. See, I tried to convince that schmuck who sells popcorn to send you <<person1>><<his>> thirsty customers. Accidentally pissed <<him>> off, and <<he>> started selling _lemonade to stick it to me."
+			<<else>>
+				address Robin. "I have some bad news. You know that stall that sells popcorn? I tried to convince <<person1>><<him>> to send you <<his>> thirsty customers, but it didn't work. I upset <<him>>, and <<he>> retaliated by selling <<his>> own lemonade."
+			<</if>>
+			<br><br>
+			Robin looks conflicted. "You're the reason why I'm losing customers?"
+		<<else>>
+			You take a deep breath and
+			<<if $speech_attitude is "meek">>
+				glance away from Robin. "W-well... I might, um, know the reason.
+			<<elseif $speech_attitude is "bratty">>
+				look Robin square in the eye. "I know what's going on.
+			<<else>>
+				address Robin. "I think I know why.
+			<</if>>
+			It's because I told the <<person1>><<personsimple>> who runs that balloon stand to start selling drinks."
+			<br><br>
+			<<person2>><<print C.npc.Robin.trauma gte 20 ? "Robin stares at you hollowly" : C.npc.Robin.dom gte 50 ? "Robin clenches <<his>> fists" : "Tears spring to Robin's eyes, and <<he>> blinks them away">>. <<He>> looks at a loss for words. "You did what?" <<he>> finally whispers. "Why would you do that? It's already hard enough making money without my <<if $robinromance is 1>><<girlfriend>><<else>>best friend<</if>> giving my competitor ideas. I thought we were in this together."
+		<</if>>
+
+	<<case "quiet_helped">>
+		You choose to keep quiet. Robin barely notices your silence as <<he>> channels <<his>> giddy energy into rearranging <<his>> ingredients.
+		<br><br>
+		"Excuse me?" a <<generate3>><<person3>><<person>> interrupts you. "<<print Time.season is "winter" ? "A <<person1>><<personsimple>> at the beach" : "That <<person1>><<personsimple>> over there">> told me you're selling _lemonade? May I buy some?"
+		<br><br>
+		Robin's eyes widen slightly. "That's where the customers are coming from!" <<person2>><<he>> whispers to you, sounding excited. "What a nice <<person1>><<print $pronoun is "m" ? "man" : "lady">>... I guess there are good people in this world after all! I should start sending my customers <<his>> way too." Robin starts to make some _lemonade for the <<person3>><<person>>, humming as <<person2>><<he>> goes. <<llrtrauma>><<npcincr Robin trauma -5>><<ggdom Robin>><<npcincr Robin dom 5>>
+		<br><br>
+		A warm glow fills you as you watch Robin help the customer, oblivious to the role you played. It feels good to do something nice, regardless of public recognition. <<stress -12>><<trauma -6>><<lstress>><<ltrauma>>
+
+	<<case "quiet_sabotaged">>
+		You decide not to say anything. Robin doesn't need to know about your <<print ["angry", "appeased"].includes($balloonStand.owner) ? "failure to help <<him>>" : "betrayal">>. Robin fidgets, restlessly rearranging <<his>> ingredients. "Oh well," <<he>> finally says with a sigh. "I guess there's no helping it. I'll just have to keep working hard."
+		<br><br>
+		You chat for a bit, and Robin seems in slightly better spirits by the time you bid <<him>> farewell.
+<</switch>>
+<br><br>
+<<if $phase is "confess_sabotaged">>
+	<<set $robin.hurtReason to "the balloon stand situation">>
+	<<set $robin.timer.hurt to _botchedHelp ? 8 : 15>>
+	<<set _trauma to _botchedHelp ? 3 : 6>>
+	<<set _robin_trauma to _botchedHelp ? 2 : 15>>
+	<<set _robin_love to _botchedHelp ? -1 : -10>>
+
+	<<link [[Apologise|Balloon Robin Check-In 2]]>><<set $phase to 0>><</link>><br>
+	<<capture _robin_trauma _robin_love>>
+		<<link [[Yell|Balloon Robin Check-In 2]]>><<set $phase to 1>><<trauma -6>><<npcincr Robin trauma _robin_trauma>><<npcincr Robin love _robin_love>><<npcincr Robin dom -1>><</link>><<ltrauma>><<lstress>><<grtrauma>><<llove Robin>><<ldom Robin>><br>
+	<</capture>>
+	<<capture _trauma>>
+		<<link [[Say nothing|Balloon Robin Check-In 2]]>><<set $phase to 2>><<trauma _trauma>><</link>><<gtrauma>><<if !_botchedHelp>><<grtrauma>><</if>>
+	<</capture>>
+<<else>>
+	<<switch $location>>
+		<<case "park">><<link [[Next|Park]]>><<endevent>><</link>>
+		<<default>>	<<link [[Next|Beach]]>><<endevent>><</link>>
+	<</switch>>
+<</if>>
+
+:: Balloon Robin Check-In 2
+
+<<if ["angry", "appeased"].includes($balloonStand.owner)>>
+	<<if $phase is 0>>
+		"<<print $speech_attitude is "meek" ? "I-it was an accident! I'm sorry..." : $speech_attitude is "bratty" ? "My bad, alright? I was just trying to help," : "I messed up. I'm sorry,">>" you tell <<person2>><<him>>.
+	<<elseif $phase is 1>>
+		You berate Robin, reminding <<person2>><<him>> that you did your best to help. <<He>> <<print C.npc.Robin.dom gte 80 ? "cuts you off before you can get too far in your diatribe" : "hangs <<his head as you lay into <<him>>. When you're finished, <<he>> looks up">>.
+	<<else>>
+		You keep your mouth shut. Robin looks at you balefully before continuing.
+	<</if>>
+	"I know it's not your fault," Robin says. <<person2>><<He>> <<print C.npc.Robin.dom gte 50 ? "stares at you, <<his>> fists tightly clenched" : "can't quite look you in the eye">>. "Thank you for trying, but <<print C.npc.Robin.dom gte 50 ? "I can take care of myself" : "I think you hurt more than you helped">>." <<He>> sighs. "I just... need some time, okay?"
+	<br><br>
+<<else>>
+	<<if $phase is 0>>
+		"<<print $speech_attitude is "meek" ? "I-I'm sorry..." : $speech_attitude is "bratty" ? "My bad, alright?" : "I'm sorry,">>" you tell <<person2>><<him>>. "I just wanted to help."
+		<br><br>
+		"Help who? <<person1>><<Him>> or me?" Robin asks. <<person2>><<He>> sounds on the verge of tears. "If you wanted to help me, you should have told <<person1>><<him>> to send people to me for drinks, not to sell <<his>> own."
+		<br><br>
+		"I'm sorry," you repeat helplessly. "You're right, I shouldn't have done that. I thought maybe..." You break off and shake your head. "I didn't mean to hurt you."
+		<br><br>
+		"I know." <<person2>><<He>> stares at the ground. "Thank you for wanting to help."
+	<<elseif $phase is 1>>
+		You raise your voice as you lay into Robin, berating <<him>> for <<his>> naivete. You tell <<him>> that you did <<him>> a favor, <<print $robinpaid gte 1 ? "and if <<he>> ever hopes to pay <<his>> own way, <<he>> needs to get a real job" : "because <<he>> can't make a living just from selling lemonade">>. By the time you're done, <<hes>> in tears.
+		<br><br>
+		"I'll do better," <<he>> mumbles, "so you don't have to keep supporting me..." <<He>> needs a few moments to compose <<himself>>.
+	<<else>>
+		You keep your mouth shut, unable to find the appropriate words.
+		<br><br>
+		Robin seems even more upset at your reticence. "You can't even tell me why?" <<person2>><<he>> says, voice quivering with tears. <<npcincr Robin trauma 5>><<grtrauma>>
+	<</if>>
+	<br><br>
+	Finally, Robin takes a shuddery breath and swallows. "<<print C.npc.Robin.dom gte 50 ? "I'd like you to leave now" : "P-please, just go">>," <<person2>><<he>> says. "I just... want to be alone right now."
+<</if>>
+
+<<He>> turns back to <<his>> stand, avoiding your gaze until you finally leave.
+<br><br>
+
+<<switch $location>>
+	<<case "park">><<link [[Next|Park]]>><<endevent>><</link>>
+	<<default>>	<<link [[Next|Beach]]>><<endevent>><</link>>
+<</switch>>
+
+:: Balloon Decline
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"Sorry, but I can't right now. Thank you for the free balloon though, that's very kind of you," you say.
+<<elseif $speech_attitude is "bratty">>
+	"Nah, I'm good. But thanks for the freebie," you say.
+<<else>>
+	"I'm fine, but thanks for the balloon," you say.
+<</if>>
+<br><br>
+You take your leave and let the <<person>> finish setting up <<his>> stall.
+<br><br>
+<<if getRobinLocation() is "beach">>
+	<<npc Robin 2>><<person2>>
+	<<balloonRobinIntro>>
+<<else>>
+	<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</if>>
+
+:: Balloon Robin Response
+<<if $phase is 0>>
+	<<set _lemonade to Time.season is "winter" ? "hot chocolate" : "lemonade">>
+	You tell Robin <<he>> has nothing to worry about. The stall owner isn't selling _lemonade and would attract a different crowd.
+	<br><br>
+	"I guess that's true," Robin says. <<He>> glances <<print Time.season is "winter" ? "in the direction of the beach" : "at the stall">>. <<person1>>"<<Hes>> selling popcorn, right? Maybe <<he>>'ll send people over to me if they get thirsty," <<person2>><<he>> says, sounding <<print C.npc.Robin.trauma gte 40 ? "like <<hes>> trying to convince <<himself>> of the impossible" : "hopeful">>.
+	<br><br>
+	You nod encouragingly. <span class="blue">Maybe you can convince the stall owner to help Robin if you purchase some popcorn.</span>
+	<br><br>
+	The two of you make small talk for a bit. Eventually, Robin says <<he>> needs to get back to <<his>> stand.
+	<br>
+	<<if C.npc.Robin.trauma gte 40>>
+		<<He>> slowly ambles off, <<his>> gaze fixed on the ground.
+	<<else>>
+		<<He>> smiles and waves goodbye.
+	<</if>>
+<<else>>
+	You don't respond. The silence stretches awkwardly between you. Robin fidgets.
+	<br><br>
+	"Yeah," <<person2>><<he>> finally says. "I guess maybe I should be worried."
+	<<if C.npc.Robin.trauma gte 40>>
+		<<He>> sighs, staring vacantly at the stall. "Well, I should get back to it, then." <<He>> slowly ambles off, <<his>> gaze fixed on the ground.
+	<<else>>
+		<<He>> sighs, looking momentarily despondent before bouncing back to <<his>> usual happy-go-lucky self. "Well, what can you do? I'll just have to keep on working hard." <<He>> smiles and waves goodbye.
+	<</if>>
+<</if>>
+<<set $balloonStand.robin.status to "help needed">>
+<br><br>
+<<switch $location>>
+	<<case "park">><<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<<default>><<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+<</switch>>
+
+:: Balloon Widgets [widget]
+
+<<widget "stallShop-text">>
+	<<set _popcorn to $balloonStand.robin.status is "sabotaged" ? "popcorn and <<print Time.season is 'winter' ? 'hot chocolate' : 'lemonade'>>" : "popcorn">>
+
+	<<if (getRobinLocation() is "beach")>>
+		<<if $balloonStand.robin.status is "sabotaged">>
+			<<set _robinText to "Customers mill around you. Across the way, a harried Robin desperately tries to attract people to <<nnpc_his Robin>> stand.">>
+		<<elseif $balloonStand.robin.status is "helped">>
+			<<set _robinText to "Across the way, Robin has more customers than usual. <<nnpc_He Robin>> catches you looking and waves at you.">>
+		<<else>>
+			<<set _robinText to "Across the way, Robin speaks to a solitary customer. <<nnpc_He Robin>> catches you looking and smiles tentatively.">>
+		<</if>>
+	<<elseif $robinmissing isnot 0>>
+		<<if $balloonStand.robin.status is "sabotaged">>
+			<<set _robinText to "Customers mill around you. You glance over at the spot where Robin normally set up shop. You can't help but feel responsible for <<nnpc_his Robin>> absence.">>
+		<<elseif $balloonStand.robin.status is "helped">>
+			<<set _robinText to "The <<personsimple>> begins to point another customer looking for a drink in the direction of Robin's stand. <<He>> quickly corrects <<himself>>, looking disspirited at Robin's absence.">>
+		<<else>>
+			<<set _robinText to "You glance over at the spot where Robin normally set up shop.">>
+		<</if>>
+	<<elseif $balloonStand.robin.status is "sabotaged">>
+		<<set _robinText to "Customers mill around you.">>
+	<<else>>
+		<<set _robinText to "">>
+	<</if>>
+
+	<<if $phase is "firstcustomer">>
+		"Excellent!" The <<person>> claps <<his>> hands in delight. "What would you like?"
+	<<elseif $balloonStand.freeDrink>>
+		"Hey, you!" the <<person1>><<person>> says, flashing you a quick smile. "Thanks again for the business idea. I'm already seeing an influx of customers." Here, one drink on the house, as promised." <<set $balloonStand.freeDrink to false>>
+	<<else>>
+		The <<person>> <<print $balloonStand.owner is "angry" ? "scowls" : "smiles">> at you as you peruse <<his>> stand. The smell of fresh _popcorn fills the air. <<print _robinText>>
+	<</if>>
+	<br><br>
+<</widget>>
+
+<<widget "stallShop-main">>
+	<<if $balloonStand.freeDrink>>
+		<<set $balloonStand.freeDrink to false>>
+		<<switch Time.season>>
+			<<case "winter" "autumn">><<set _cold to "hot">><<wearProp "mug">>
+			<<default>><<set _cold to "ice-cold">><<wearProp "lemonade">>
+		<</switch>>
+
+		"Hey, you!" the <<person1>><<person>> says, flashing you a quick smile. "Thanks again for the business idea. I'm already seeing an influx of customers. Here, one drink on the house, as promised."
+		<br><br>
+
+		<<switch _cold>>
+			<<case "hot">>You take a careful sip of the offered drink, careful not to scald your tongue. The <<seasonal_beverage>> is rich <<print Time.season is "winter" ? "and creamy" : "with spices">>.
+			<<case "ice-cold">>You take a sip of the offered drink. The _cold <<seasonal_beverage>> is <<print Time.season is "spring" ? "pleasantly fruity" : "tart">> and refreshing.
+		<</switch>>
+		<<stress -9>><<lstress>>
+		<br><br>
+
+		You make small talk with the stall owner until a customer interrupts. You thank <<him>> for the free drink and step away.
+		<br><br>
+
+		<<link [[Next|Beach]]>><<set $eventskip to 1>><<endevent>><</link>>
+
+	<<else>>
+		<<if $tryOn.autoReset isnot false>><<tryOnReset>><</if>><<unset $tempDisable>>
+		<<set $outside to 0>><<effects>>
+		<<set $shopName = "stall">>
+		<<stallShop-text>>
+
+		<div id="tryonstats-div"><<tryOnStats>></div>
+		<<unset $shopListStartCount>>
+		<<unset $clothes_choice>>
+		<<set $shopPage = 0>>
+
+		<div id="warmth-description" class="hidden">
+			<<warmthscale>>
+			<<warmth_description>>
+		</div>
+
+		<<gifticon "balloons">><<link "Browse items">><<replace "#clothingShop-div">><<AllShop>><</replace>><<set $phase to 0>><</link>>
+		<<run linkifyDivs('.button-back-to-shop')>>
+		<<if ndef $popcorn>><<set $popcorn to 0>><</if>>
+		<<if ndef $daily.ex.popcorn >><<set $daily.ex.popcorn to 0>><</if>>
+		<<if $popcorn gte 3>>
+			<br>
+			<span class="blue">You can only carry three bags of <<foodicon "popcorn">>popcorn at once.</span>
+		<<elseif $money gte 600 and $daily.ex.popcorn lt 3>>
+			<br>
+			<<foodicon "popcorn">><<link [[Buy popcorn (0:02 £6)|Balloon Purchase]]>><<set $money -= 600>><<set $phase to "popcorn">><<pass 2>><</link>>
+		<</if>>
+		<<if $balloonStand.robin.status is "sabotaged" and $money gte 300 and !($daily.ex.balloonDrink gte 3)>>
+			<<switch Time.season>>
+				<<case "winter">><<set _drink to "hotcocoa">><<set _phase to "hot drink">>
+				<<case "spring">><<set _drink to "strawberrylemonade">><<set _phase to "cold drink">>
+				<<case "summer">><<set _drink to "lemonade">><<set _phase to "cold drink">>
+				<<default>><<set _drink to "hotcider">><<set _phase to "hot drink">>
+			<</switch>>
+			<br>
+			<<foodicon _drink>><<link [[Buy something to drink (0:02 £3)|Balloon Purchase]]>><<set $money -= 300>><<set $phase to _phase>><<pass 2>><</link>>
+		<</if>>
+		<<if $balloonStand.robin.status is "convince" and !$daily.ex.balloonConvince>>
+			<br>
+			<<socialiseicon>><<link [[Persuade the stall owner to partner with Robin|Balloon Convince]]>><<set $phase to "persuade">><</link>><<englishdifficulty 1 1000>>
+		<</if>>
+		<br><br>
+		<<if $tryOn.value gt 0>>
+			<<if $tryOn.value lt $money>>
+				<<sendItemsToDropdown>>
+				<<shopicon "register">><<link "Buy items">><<buyTryOnClothes "wear">><<updateclothingshop>><</link>>
+				<br>
+				<<wardrobeicon>><<link "Buy items and send to wardrobe">>
+					<<buyTryOnClothes "wardrobe">>
+					<<updatesidebarmoney>>
+					<<updatewarmthscale>>
+					<<updatewarmthdescription>>
+					<<updatesidebarimg>>
+					<<updatesidebardescription>>
+					<<updateallure>>
+					<<updatetryonstats>>
+					<<updateclothingshop>>
+					<<run updateMoment()>>
+				<</link>>
+				<br>
+			<</if>>
+		<<else>>
+			<<getouticon>><<link [[Leave|Beach]]>><<shopClothingFilterReset>><<set $tryOn.autoReset to true>><<endevent>><</link>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "balloonRobinHelped">>
+	<<set _boyfriend to ($robinromance ? "<<person2>><<personsimple>>friend" : "friend")>>
+
+	"You're either <<print $robinromance ? "really in love with <<person2>><<him>>" : "a really good friend">>, or you really believe in the quality of <<person2>><<his>> stuff. Either way, I'll take it. Sure, we've got a deal. I'll send my customers to your _boyfriend's stall, if <<he>>'ll send any peckish customers my way."
+
+	<<set $robin.moneyModifier += 50>>
+	<<set $balloonStand.robin.status to "helped">>
+	<<set $robin.timer.customer to 5>> /*Give Robin a few days to notice the effects on their stall*/
+<</widget>>
+
+<<widget "balloonRobinSabotaged">>
+	<<set $robin.moneyModifier -= 50>>
+	<<set $balloonStand.robin.status to "sabotaged">>
+	<<set $balloonStand.owner to _args[0] or "friendly">>
+	<<set $robin.timer.customer to 5>> /*Give Robin a few days to notice the effects on their stall*/
+	<<set $daily.ex.balloonDrink to 3>> /*So the balloon owner doesn't start selling lemonade three seconds after*/
+<</widget>>
+
+<<widget "balloonRobinGrateful">>
+	<<set _boyfriend to ($robinromance ? "<<person2>><<personsimple>>friend" : "best friend")>>
+	<<set _lemonade to Time.season is "winter" ? "hot chocolate" : "lemonade">>
+	<<set _stall to Time.season is "winter" ? "A <<person1>><<personsimple>> at the beach" : "That <<person1>><<personsimple>> over there">>
+
+	Robin's mouth gapes for a few minutes. "You... did that for me?"
+	<br><br>
+	"Of course I did," you say. "You're my _boyfriend."
+	<br><br>
+	Robin looks at you for a moment before flinging <<person2>><<his>> arms around your neck and
+	<<if $robinromance is 1>>
+		kissing you. <<takeKissVirginity "Robin" "loveInterest">> <<He>> breaks away with a gasp, looking flustered.
+	<<else>>
+		hugging you hard enough to hurt. <<He>> breaks away first, visibly choked up.
+	<</if>>
+	There's tears in <<his>> eyes as <<he>> whispers, "Thank you. You do so much for me... what would I do without you?" <<He>> hugs you <<print $robinromance is 1 ? "tenderly" : "again">>, and the two of you stay like that for a moment.
+	<br><br>
+	"Excuse me?" a <<generate3>><<person3>><<person>> interrupts your embrace. "<<print _stall>> told me you're selling _lemonade? May I buy some?"
+	<<if $location isnot "park">>
+		<br><br>
+		You glance over at the balloon stall. The <<person>> gives you a wink.
+		<br><br>
+	<</if>>
+	"Ah, of course!" Robin says. "I'll make you some right now, <<person3>><<sir>>!" <<person2>><<He>> gives you one last grateful smile and busies <<himself>> with the _lemonade. <<ggglove "Robin">><<llrtrauma>><<npcincr Robin trauma -10>><<npcincr Robin love 10>>
+	<br><br>
+	A warm glow fills you. You watch Robin help the customer before bidding <<him>> farewell. <<He>> mouths you one last grateful "thank you" before you leave. <<famegood 5>><<stress -3>><<trauma -3>><<lstress>><<ltrauma>>
+<</widget>>
+
+<<widget "balloonRobinAngryHelp">>
+	"I'm okay. I don't need <<print ["angry", "appeased"].includes($balloonStand.owner) ? "any more of your" : "your">> help right now." Robin fidgets. "Would you mind leaving me alone for a few?" It's clear <<hes>> still <<npcHurt "robin">>.
+	<br><br>
+	<<endevent>>
+<</widget>>
+
+<<widget "balloonRobinAngryPurchase">>
+	"Thanks for your purchase," <<he>> says. <<He>> seems to feel bad about being icy towards you, and <<his>> face softens as <<he>> puts the money under the counter.
+<</widget>>
+
+<<widget "balloonRobinTalk">>
+	<<if $balloonStand.robin.status is "helped" and $balloonStand.robin.talked is false and $robin.timer.customer is 0>>
+		<br><br>
+		"I don't know if you've noticed, but I've been getting so many more customers lately!" <<He>> looks pleased, if a bit flustered. "I don't know what's causing it, but... wow!"
+	<<elseif $balloonStand.robin.status is "sabotaged" and $balloonStand.robin.talked is false and $robin.timer.customer is 0>>
+		<br><br>
+		"You know, I haven't been getting a lot of customers lately." <<His>> expression clouds over. "That stall <<print getRobinLocation() is "beach" ? "over there started selling lemonade" : "on the beach with the popcorn and balloons started selling <<seasonal_beverage>>">>..." <<He>> sighs. "I wish I knew why."
+	<</if>>
+<</widget>>
+
+<<widget "balloonRobinIntro">>
+	<<loadNPC 0 "stall_owner">><<npc Robin 2>><<person2>>
+	<<set _lemonade to Time.season is "winter" ? "hot chocolate" : "lemonade">>
+
+	You see Robin stood behind <<his>> _lemonade stand. When <<he>> notices you, <<he>> leaves the stand and
+	<<if C.npc.Robin.trauma gte 40>>
+		shuffles over to you. "Hey," <<he>> mumbles. "Have you... <<print Time.season is "winter" ? "heard about that stall on the beach" : "seen that stall over there">>? The one selling the balloons and popcorn. Should I be worried? It's already hard enough to find customers."
+	<<else>>
+		approaches you. "Hey, I'm happy to see you here! I hope you'll stop by the stand later." Robin chews <<his>> lip. "Have you seen that other stall that's set up shop <<print Time.season is "winter" ? "on the beach" : "here">>? Should I be worried? I don't want my customers getting distracted by popcorn!"
+	<</if>>
+	<br><br>
+	<<link [[Reassure Robin|Balloon Robin Response]]>><<set $phase to 0>><</link>><br>
+	<<link [[Say nothing|Balloon Robin Response]]>><<set $phase to 1>><</link>>
+<</widget>>

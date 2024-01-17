@@ -1,0 +1,568 @@
+:: History Classroom
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set _robin to statusCheck("Robin")>>
+<<if _robin_location is "school">>
+	<<set $robinhistory to "active">>
+<<else>>
+	<<set $robinhistory to "missing">>
+<</if>>
+<<if $schoolstate is "fourth">>
+	<<classRoomEarSlime "history">>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<<outfitChecks>>
+		/*Check for when the pc is only wearing an overcoat*/
+		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're naked underneath.
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing swimwear underneath.
+		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
+			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing underwear underneath.
+		<</if>>
+		<br><br>
+		<<npc Winter>><<person1>>
+		Winter speaks during your brief hesitation. "You can't have believed I wouldn't notice. Go see the head."
+		<br><br>
+		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
+		<br><br> good starting point for when you can go to class naked-->
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<elseif $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound">>
+		<<if $daily.school.attended.history>>
+			You rejoin the history lesson,
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				hang your coat at the back of the class
+				<<undressOverClothes "historyClassroom">>
+			<</if>>
+			and take your seat.
+			<br><br>
+			<<link [[Next|History Lesson]]>><<endevent>><</link>>
+			<br>
+		<<elseif Time.minute lte 5>>
+			You enter the history classroom.
+			<<npc Winter>><<person1>>
+			Winter is preparing at the front of the room while the seats fill.
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				<<undressOverClothes "historyClassroom">>
+				You hang your coat at the back of the class.
+			<</if>>
+			<<if _robin_location is "school">>
+				Robin waves you over, and points at an empty seat beside <<nnpc_him Robin>>.
+				<br><br>
+				<<if random(1, 2) is 2>>
+					<<endevent>>
+					<<npc Robin>><<generatey2>><<person2>>
+					You approach, but a <<person>> sits there before you arrive.
+					<br><br>
+					<<if _robin.dom gte 20>>
+						"Excuse me," Robin says. "My <<if $robinromance is 1>><<girlfriend>><<else>>friend<</if>> was going to sit there."
+						<br><br>
+						<<if random(1, 2) is 2>>
+							"I got here first," the <<person2>><<person>> replies, refusing to budge.
+							<br><br>
+
+							<<link [[Ask the student to move|History Robin Move]]>><</link>>
+							<br>
+							<<link [[Find a new seat|History Robin New]]>><</link>>
+							<br>
+						<<else>>
+							"Fine," the <<person2>><<person>> replies. <<He>> grabs <<his>> bag and stands. You sit beside Robin.
+							<br><br>
+							<<link [[Next|History Lesson]]>><<endevent>><<set $robinhistory to "seat">><</link>>
+							<br>
+						<</if>>
+					<<else>>
+						<<person1>>
+						Robin lowers <<his>> head.
+						<br><br>
+
+						<<link [[Ask the student to move|History Robin Move]]>><</link>>
+						<br>
+						<<link [[Find a new seat|History Robin New]]>><</link>>
+						<br>
+					<</if>>
+				<<else>>
+					<<link [[Next|History Lesson]]>><<endevent>><<set $robinhistory to "seat">><</link>>
+					<br>
+				<</if>>
+			<<else>>
+				<br><br>
+
+				<<link [[Next|History Lesson]]>><<endevent>><</link>>
+				<br>
+			<</if>>
+		<<else>>
+			You enter the history classroom.
+			<<npc Winter>><<person1>>
+			Winter cuts off mid-sentence and looks at you.
+			<<if $daily.school.historyExcused>>
+				<<run delete $daily.school.historyExcused>>
+				"Excused tardiness," <<he>> says simply, pointing to your seat.
+			<<else>>
+				<<He>> taps <<his>> watch and points to your seat.
+				<<gdelinquency>>
+				<<detention 1>>
+			<</if>>
+			<br><br>
+			You
+			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
+				hang your coat at the back of the class and
+				<<undressOverClothes "historyClassroom">>
+			<</if>>
+			take your seat as Winter continues.
+			<br><br>
+
+			<<link [[Next|History Lesson]]>><<endevent>><</link>>
+			<br>
+		<</if>>
+
+	<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+		Winter looks at your bindings. "Whatever that's about you need to sort it out before you enter my class. Go see the head."
+		<br><br>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<<else>>
+		<<npc Winter>><<person1>>
+		Winter looks at your clothing. "You can't have believed I wouldn't notice. Go see the head."
+		<br><br>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+		<br><br>
+	<</if>>
+<<elseif $schoolstate is "lunch">>
+	<<classRoomEarSlime "history">>
+	You enter the history classroom.
+	<<if _robin_location is "school" and $daily.school.lunchEaten is 1>>
+		Robin is already here.
+		<<if _robin.trauma gte 20>>
+			<<nnpc_He Robin>> stares out the window.
+		<<elseif $robinromance is 1>>
+			<<nnpc_He Robin>> smiles and waves you over.
+		<<else>>
+			<<nnpc_He Robin>> smiles and waves.
+		<</if>>
+		<<set $robinhistory to "seat">>
+	<<else>>
+		No one else has arrived yet.
+	<</if>>
+	You could use the extra time to study.
+	<br><br>
+	<<classgrades>>
+
+	<<schoolperiodtext>>
+	<<if $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked")>>
+		<!-- Should be changed once naked classes are a thing -->
+		You don't think you should study while not being properly dressed.
+		<br>
+	<<elseif !$worn.handheld.type.includes("bookbag")>>
+		<span class="blue">You can't study without your bookbag.</span>
+		<br>
+	<<else>>
+		<<historyicon>><<link [[Study history|History Classroom Study]]>><</link>><<gstress>><<ghistory>>
+	<</if>>
+	<br>
+	<<getouticon>><<link [[Leave|Hallways]]>><</link>>
+	<br>
+<<elseif $schoollesson is 1>>
+	<<if $daily.school.historyInterrupted is 1>>
+		<<npc Winter>><<person1>>You enter the history classroom. Winter stops speaking abruptly and looks your way. "Every time you interrupt me you damage your fellow student's chances. I'll mark you down for detention." <<He>> guides you to the door.
+		<<gdelinquency>>
+		<br><br>
+		<<detention 1>>
+
+		<<link [[Next|Hallways]]>><<endevent>><</link>>
+	<<else>>
+		<<npc Winter>><<person1>>You enter the history classroom. Winter stops speaking abruptly and looks your way. "And what can I do for you?" It seems you've interrupted the lesson.
+		<br><br>
+		<<set $daily.school.historyInterrupted to 1>>
+
+		<<link [[Apologise|History Classroom Apology]]>><<trauma 1>><<stress 1>><</link>><<gstress>><<gtrauma>>
+		<br>
+		<<if $trauma gte 1>>
+			<<link [[Mock|History Classroom Mock]]>><<status 1>><<stress -12>><</link>><<lstress>><<gcool>><<gdelinquency>>
+			<br>
+		<</if>>
+	<</if>>
+<<else>>
+	You are in the History classroom. It has a stuffy atmosphere.
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		You take your coat at the back of the class.
+		<br><br>
+	<</if>>
+	<<exhibitionclassroom>>
+
+	<<emptyClassroomMasturbationIntro>>
+	<<link [[Leave the room (0:01)|Hallways]]>><<pass 1>><</link>>
+	<br>
+<</if>>
+
+:: History Lesson
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<set $daily.school.attended.history to true>>
+
+<<if Time.weekDay is 6 and Time.minute gte 37>>
+	<<npc Winter>><<person1>>
+	"Time to prove you've been paying attention," Winter says, placing a stack of booklets on <<his>> desk. "Form an orderly queue. Anyone who begins before I give the go ahead will be disciplined."<<gstress>><<stress 6>>
+	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Winter">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<exam history>>
+	<br><br>
+	You return to your desk, and await Winter's signal. "Begin."
+	<br><br>
+
+	<<endevent>>
+	<<exam_cheat history>>
+	<<if !$daily.earSlimeCheatExam and numberOfEarSlime() and earSlimeMakingMundaneRequests() and random(0,200) gte 150 - $earSlime.corruption>>
+		<<set $daily.earSlimeCheatExam to true>>
+		<span @class="$earSlime.startedThreats ? 'lewd' : 'lblue'">You feel the slime in your head command you to cheat in the exam.</span> It promises rewards if you comply<<if $earSlime.startedThreats>>, and threatens consequences if you do not<</if>>.
+		<br><br>
+		<<link [[Obey|History Exam]]>><<set $phase to 3>><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</link>><<gcorruption>><<lpain>><<lltrauma>><<lstress>>
+		<br>
+		<<if $earSlime.startedThreats>>
+			<<link [[Defy|History Exam]]>><<set $phase to 5>><<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<def 1>><</link>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<<else>>
+			<<link [[Ignore|History Exam]]>><<set $phase to 4>><</link>>
+		<</if>>
+		<br>
+	<<else>>
+		<<link [[Focus|History Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
+		<br>
+		<<link [[Try to relax|History Exam]]>><<set $phase to 1>><</link>>
+		<br>
+		<<link [[Cheat|History Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
+	<</if>>
+	<br>
+<<else>>
+	<<if Time.minute lte 5>>
+		The history lesson begins, how do you want to conduct yourself?
+		<br><br>
+		<<classgrades>>
+	<<else>>
+		The history lesson continues, how do you want to conduct yourself?
+		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Winter">>
+		<<orgasmLocation "classroom">>
+	<</if>>
+
+	<<historyicon>><<link [[Focus on the lesson|History Lesson Focus]]>><</link>><<gstress>><<ghistory>>
+	<br>
+	<<socialiseicon>><<link [[Socialise with classmates|History Lesson Socialise]]>><</link>><<gcool>><<ltrauma>><<lstress>><<gharass>>
+	<br>
+	<<daydreamicon>><<link [[Daydream|History Lesson Daydream]]>><</link>><<lstress>> <<lharass>>
+	<br>
+	<<if $exhibitionism gte 75>>
+		<<if $robinhistory is "seat">>
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
+				<<ind>><<link [[Masturbate|History Lesson Masturbate Robin]]>><</link>>
+				<br>
+			<<else>>
+				<<ind>><<link [[Masturbate|History Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist5>>
+				<br>
+			<</if>>
+		<<else>>
+			<<ind>><<link [[Masturbate|History Lesson Masturbate]]>><<set $masturbationstart to 1>><</link>><<exhibitionist4>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: History Classroom Apology
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+Embarrassed, you apologise and leave.
+<br><br>
+
+<<link [[Next|Hallways]]>><<endevent>><</link>>
+
+:: History Classroom Mock
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You mock the teacher. "Sorry for interrupting <<sir>>, I got you muddled with the skeleton in the science room." Laughter erupts among the seated students.
+<br><br>
+
+Winter sighs. "Is this really what passes for humour today?" <<He>> guides you to the exit and shuts the door behind you.
+<<gdelinquency>>
+<br><br>
+<<detention 1>><<npcincr Winter love -1>>
+<<link [[Next|Hallways]]>><<endevent>><</link>>
+
+:: History Lesson Focus
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You focus on listening to the teacher and studying the material.
+<<if $robinhistory is "seat">>
+	Robin is eager to help.
+<</if>>
+It's hard going, but you think you're making progress.
+<br><br>
+
+<<towelup>>
+
+<<advancelesson>>
+<<historyskill _lesson_progress>>
+<<stress _lesson_progress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[Next|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[Next|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - $allure)>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>
+
+:: History Lesson Socialise
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $robinhistory is "seat" and $daily.robin.historyChat isnot 1>>
+	<<set $daily.robin.historyChat to 1>>
+	<<npc Robin>><<person1>>
+	<<if $NPCName[$NPCNameList.indexOf("Robin")].trauma gte 20>>
+		You try to strike up a conversation, but <<hes>> busy struggling to focus on the lesson instead.
+	<<elseif $robinromance is 1>>
+		You try to strike up a conversation with Robin. <<He>> stays focused on the lesson, but nudges your hand beneath the desk. You wrap your fingers around <<his>>, and <<he>> squeezes.
+	<<elseif $NPCName[$NPCNameList.indexOf("Robin")].love gte 50>>
+		You try to strike up a conversation with Robin. <<He>> nods and occasionally smiles at you, but <<hes>> more focused on the lesson.
+	<<else>>
+		You try to strike up a conversation with Robin. <<He>> nods as you speak, but <<hes>> more focused on the lesson.
+	<</if>>
+	<<endevent>>
+<<else>>
+	<<if $cool gte ($coolmax / 5 * 2)>>
+		You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates. You soon become the centre of attention.
+	<<elseif $cool gte ($coolmax / 5)>>
+		You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates.
+	<<else>>
+		You do the bare minimum of work, focusing instead on trying to endear yourself to your classmates. Most avoid interacting with you.
+	<</if>>
+<</if>>
+<br><br>
+
+<<status 1>>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+<<set _trauma to _lesson_progress * -0.5>>
+<<trauma _trauma>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[Next|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[Next|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure * 2))>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>
+
+:: History Lesson Daydream
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<towelup>>
+
+<<if $trauma gte (($traumamax / 10) * 7)>>
+	You keep to yourself, afraid that one wrong move will result in the whole class molesting you.
+<<elseif $trauma gte (($traumamax / 10) * 2)>>
+	You focus on your own thoughts, trying to keep the creeping anxiety at bay.
+<<else>>
+	You don't really pay attention to the lesson, instead idly staring out the window and thinking about what you'll do after school.
+<</if>>
+<br><br>
+
+<<advancelesson>>
+<<set _stress to _lesson_progress * -1>>
+<<stress _stress>>
+
+<<if $phase is 1>>
+	<<set $phase to 0>>
+	The bell rings, signifying the end of the lesson. You
+	<<storeon "historyClassroom" "check">>
+	<<if _store_check is 1>>
+		<<storeon "historyClassroom">>
+		grab your coat and
+	<</if>>
+	leave the classroom.
+	<br><br>
+
+	<<if $robinhistory isnot "missing" and $robinReunionScene isnot undefined>>
+		<<link [[Next|Robin After Class]]>><</link>>
+	<<else>>
+		<<link [[Next|Hallways]]>><</link>>
+	<</if>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (8900 - ($allure / 2))>>
+		<<eventshistory>>
+	<<else>>
+		<<eventshistorysafe>>
+	<</if>>
+<</if>>
+
+:: History Classroom Study
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<run statusCheck("Robin")>>
+<<if $robinhistory is "seat">>
+	You sit beside Robin and read a history textbook.
+<<else>>
+	You take a seat and read a history textbook.
+	<<if _robin_location is "school" and $daily.school.lunchEaten isnot 1>>
+		Robin is the next to arrive, and takes the seat beside you.
+		<<set $robinhistory to "seat">>
+	<</if>>
+<</if>>
+<br><br>
+
+<<npc Winter>><<person1>>The classroom soon fills and Winter arrives to begin the lesson.
+<br><br>
+
+<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school") and $rightarm isnot "bound" and $leftarm isnot "bound" and $feetuse isnot "bound">>
+	<<link [[Next|History Lesson]]>><<endevent>><</link>>
+	<br>
+<<elseif $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	Winter looks at your bound limbs. "You need to sort that out before attending my class. Go see the head."
+	<br><br>
+
+	<<link [[Next|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<<else>>
+	Winter looks at your clothing. "You can't have believed I wouldn't notice. Go see the head."
+	<br><br>
+
+	<<link [[Next|Hallways]]>><<endevent>><</link>>
+	<br><br>
+<</if>>
+
+<!-- option to study only appears at lunchtime and lasts until the next hour -->
+<<set _time_to_pass to 60 - Time.minute>>
+<<pass _time_to_pass>>
+<<schooleffects>>
+<!-- add stress every 5 minutes -->
+<<set _stress to Math.trunc(_time_to_pass / 5)>>
+<<stress _stress>>
+<!-- gain history skill with same efficiency as studying in the library -->
+<<set _history to _time_to_pass / 20>>
+<<historyskill _history>>
+
+
+
+:: History Robin Move
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"E-excuse me," you say. "I was going to sit there. C-can you move?"
+<<elseif $speech_attitude is "bratty">>
+	"I'm sitting there," you say.
+<<else>>
+	"I was going to sit there," you say. "Do you mind moving?"
+<</if>>
+<br><br>
+
+<<if random(1, $coolmax) gt $cool>>
+	"Nope," the <<person2>><<person>> sneers. "What you gonna do about it?"
+	<<if $submissive lte 500>>
+		Your fists clench.
+	<</if>>
+	Other students turn to watch.
+	<br><br>
+
+	<<link [[Find another seat|History Robin New]]>><</link>>
+	<br>
+	<<if $submissive gte 1500>>
+		<<link [[Beg|History Robin Beg]]>><<sub 1>><</link>><<submissivetext>>
+		<br>
+	<</if>>
+	<<if $submissive lte 500>>
+		<<link [[Get physical|History Robin Fight]]>><<def 1>><</link>><<defianttext>>
+		<br>
+	<</if>>
+<<else>>
+	The <<person2>><<person>> nods. "Sure." <<He>> grabs <<his>> bag and looks for another seat.
+	<br><br>
+	<<link [[Next|History Lesson]]>><<set $robinhistory to "seat">><<endevent>><</link>>
+	<br>
+<</if>>
+
+:: History Robin New
+<<effects>>
+
+You find another seat. Robin gives you a sad wave from the other side of the room once you're settled.
+<br><br>
+
+<<link [[Next|History Lesson]]>><<endevent>><</link>>
+<br>
+
+:: History Robin Beg
+<<effects>>
+
+You grasp the <<person2>><<persons>> shirt and nearly drop to your knees. "P-please," you say, pouring everything into your words and stance. "I have to sit by Robin."
+<br><br>
+
+The <<person>> shifts in discomfort. "Fine," <<he>> says. "Get off me." <<He>> grabs <<his>> bag and finds another seat.
+<br><br>
+
+Robin looks concerned as you sit.
+<br><br>
+
+<<link [[Next|History Lesson]]>><<set $robinhistory to "seat">><<endevent>><</link>>
+<br>
+
+:: History Robin Fight
+<<effects>>
+
+You grasp the <<persons>> collar, and pull <<him>> closer. <<He>> tries to steady <<himself>> against <<his>> desk, but loses <<his>> grip.
+<br><br>
+"Get off my seat," you say. You release <<him>>, and <<he>> almost falls to the carpet.
+<br><br>
+"F-fine," <<he>> says while grabbing <<his>> bag. "You're crazy."
+<br><br>
+<<person1>>Robin gives you a concerned look as you sit beside <<him>>.
+<br><br>
+
+<<link [[Next|History Lesson]]>><<set $robinhistory to "seat">><<endevent>><</link>>
+<br>

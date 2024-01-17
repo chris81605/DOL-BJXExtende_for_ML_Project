@@ -1,0 +1,125 @@
+:: Chalets Intro
+<<set $location to "chalets">><<set $outside to 1>><<effects>>
+
+<<if $chaletsintro is undefined>>
+    <<generate1>><<person1>>
+    <<saveNPC 0 "chalets_manager">>
+    You approach the chalets. They sit on a small island of sorts, separated from the mainland by a stretch of sand. The tide is rarely high enough to reach here, and it would take five minutes to cross.
+    <br><br>
+
+    A building with a colourful door stands beside a road leading down to the sand. A mass of seagulls sit outside, fighting over a newspaper caked in greasy potato, until the door swings open.
+    <br><br>
+    "Clear off!" says a <<person1>><<person>>, swinging a broom. The birds take flight in all directions. The <<person>> tuts and sweeps up the torn scraps of paper.
+    <br><br>
+
+    <<link [[Next|Chalets Intro 2]]>><<set $chaletsintro to 1>><</link>>
+    <br>
+<<elseif $chaletsintro is 1>>
+    <<loadNPC 0 "chalets_manager">><<person1>>
+    You approach the chalets and enter the management building. The manager looks up from <<his>> desk.
+    <br><br>
+    "Ah," <<he>> says. "Changed your mind? Interested in work?"
+    <br><br>
+
+    <<link [[Say yes|Chalets Intro Yes]]>><<set $chaletsintro to 2>><</link>>
+    <br>
+    <<link [[Say no|Chalets Intro No]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets Intro 2
+<<set $outside to 0>><<effects>>
+
+The <<person>> looks up. "A local?" <<he>> asks, then continues before you can respond. "Interested in work?" <<he>> gestures at the chalets across the expanse of sand.
+<br><br>
+"It's a nature reserve, but they insist on covering it in rubbish. The tourists, that is. And the gulls. We need someone to brave them both and clean up. You'll get <span class="gold">£10</span> per bag of rubbish on weekdays, and <span class="gold">£15</span> per bag on weekends."
+<br><br>
+"Should take an hour to fill a bag," <<he>> continues. "You'll have a skeleton key to the chalets, so you can enter as you please. Just say you're there to clean. Interested?"
+<br><br>
+
+<<link [[Say yes|Chalets Intro Yes]]>><<set $chaletsintro to 2>><</link>>
+<br>
+<<link [[Say no|Chalets Intro No]]>><</link>>
+<br>
+
+:: Chalets Intro Yes
+<<effects>>
+
+"Great. Start when you like." <<He>> turns back to the building.
+<br><br>
+"Oh," <<he>> calls as you leave. "Take care that the holiday makers can get a bit handsy. Just don't give them an excuse, alright? Higher ups turn a blind eye to that sort of thing."
+<br><br>
+
+<<link [[Next|Starfish Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Chalets Intro No
+<<effects>>
+
+"I'm sorry to hear it," <<he>> says, entering the buildilng. "I'll be here if you change your mind."
+<br><br>
+
+<<link [[Next|Starfish Street]]>><<endevent>><</link>>
+
+:: Chalets Work
+<<set $location to "chalets">><<set $outside to 1>><<effects>>
+
+You walk down the road to the sandy expanse between the town and the chalet island.
+
+<<if Time.weekDay is 1 or Time.weekDay is 7>>
+    <<if $chaletsintro is 2>>
+        <<loadNPC 0 "chalets_manager">><<person1>>
+        <<set $chaletsintro to 3>>
+        The manager's head pokes from <<his>> office. "Just a heads up," <<he>> says. "There's a film crew on the stretch of sand between here and the chalets. There often is on weekends. Just be careful when crossing. They might have horses, and who knows what else."
+        <br><br>
+        <<endevent>>
+    <</if>>
+    You see a cluster of people and vehicles some distance away. It looks like a film crew.
+    <br><br>
+<<else>>
+    <br><br>
+<</if>>
+
+It's hard to walk on such mushy ground.
+<<if ($weather is "rain" or $weather is "snow") and random(1, 200) is 200>>
+    You're halfway across when you notice the roar of the ocean growing louder. Then you see it, <span class="red">a freak wave,</span> taller than you, sweeping across the sand.
+    <br><br>
+    You're unable to escape. It snatches and carries you out to sea.
+    <br><br>
+
+    <<link [[Next|Sea Rocks]]>><<chalets_end>><</link>>
+    <br>
+<<else>>
+    A boardwalk emerges from the ground as you near the island, providing a set path. It leads you up a slope, to a collection of chalets surrounded by dunes.
+    <br><br>
+    <<link [[Next|Chalets]]>><</link>>
+    <br>
+<</if>>
+
+:: Chalets
+<<set $location to "chalets">><<set $outside to 0>><<effects>>
+
+You are among the chalets, on an island near the beach.
+<<if $weather is "rain">>
+    Rain blows in from the sea.
+<<else>>
+    Wind blows in from the sea and over the dunes, stinging your skin.
+<</if>>
+<br><br>
+<<chalets_bags>>
+<br><br>
+<<if $openinghours is 1>>
+    <<chalets_links>>
+    <br>
+<<elseif Time.hour is $closinghour>>
+	<span class="blue">Tourists are returning to their chalets for the night.</span>
+	<br>
+<</if>>
+<<getouticon>><<link [[Leave|Chalets Work End]]>><</link>>
+<br>
+
+:: Chalets Knock
+<<set $outside to 0>><<effects>>
+
+You approach one of the chalets, and knock on the door.
+<<eventschalets>>

@@ -1,0 +1,160 @@
+:: Orphanage Ward Intro
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>>
+<<set $orphanageWardIntro to true>>
+
+You walk into the youth ward. It wasn't so long ago that you were relegated here, yourself.
+The walls are cleaner, the air seems more fresh. Even the atmosphere itself somehow feels less bleak.
+You never realised how much bigger this place felt on the inside.
+<br><br>
+
+<<generatey1>><<person1>>
+A young orphan runs by, and smiles up at you briefly. <<He>> has no idea how safe <<he>> is, and how much worse the world outside is.
+A pit forms in your stomach, as you become acutely aware of something.
+You can't ever remember leaving the youth ward on your own. It was always with Bailey, or one of <<nnpc_his "Bailey">> workers.
+So many of your memories are from behind heavily tinted windows and through crowds of people. <<gawareness>><<awareness 3>>
+<br><br>
+
+As soon as the thought reaches you, though, it fades, leaving only a mild sense of anxiety in its wake. That couldn't be true...
+<br><br>
+
+...Right?
+<br><br>
+
+<<link [[Next|Orphanage Ward]]>><<endevent>><</link>>
+<br>
+
+:: Orphanage Ward
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>>
+
+You are in the youth ward of the orphanage. One of Bailey's thugs stands guard at the entrance.
+<<switch Time.dayState>>
+	<<case "dawn">>
+		Many of the children are still asleep.
+	<<case "day">>
+		Laughter and young voices echo through the halls.
+	<<case "dusk">>
+		Most of the children have already been tucked in for bed.
+	<<case "night">>
+		The children are all asleep, and the ward is silent.
+<</switch>>
+<br><br>
+
+<<if $baileydefeatedchain gte 3 or $baileyRefusedToPay gte 3>>
+	The thug stops you at the door. "Sorry, <<girl>>. Bailey says you're not allowed to enter until you <span class="red">pay up</span>." You're turned away.
+	<br><br>
+
+	<<link [[Next|Orphanage]]>><</link>>
+	<br>
+<<elseif $home_event_ward_timer lte 0 and Time.hour gte 6 and Time.hour lte 21>>
+	<<set $home_event_ward_timer to 6>>
+	<<switch $home_event_ward_count>>
+		<<case 0>><<set $home_event_ward_count += 1>>
+			As the sounds and smells of the youth ward hit you, you're flooded with a wave of nostalgia.
+			In a twisted way, this innocence and ignorance feels safe. A part of you yearns for the simpler days, when you were oblivious to the world outside. <<trauma -3>><<ltrauma>>
+			<br><br>
+
+			<<orphanageWardOptions>>
+		<<case 1>><<set $home_event_ward_count += 1>>
+			You briefly feel lost. You stare down one of the longer hallways. The number of rooms that branch off seems wrong. You wonder how much else has changed since you were moved.
+			<br><br>
+
+			<<orphanageWardOptions>>
+		<<case 2>><<set $home_event_ward_count += 1>>
+			You suddenly find yourself wondering if you could find your old room. You try to remember where it was, but you draw a blank. It's probably already occupied by someone else, anyways.
+			<br><br>
+
+			<<if $awareness gte 200>>
+				How many orphans are there? How do the rooms fill so quickly?
+				<br><br>
+			<</if>>
+
+			<<orphanageWardOptions>>
+		<<case 3>><<set $home_event_ward_count += 1>>
+			You hear a young orphan lightly sobbing. Another orphan is trying to calm them down. It looks like one of them is getting moved to the other wing soon.
+			<br><br>
+
+			<<if C.npc.Robin.init is 1 and C.npc.Robin.love gte 20 and $awareness gte 300>>
+				It reminds you of when you and Robin were younger. <<nnpc_He "Robin">> had made friends with orphans older than <<nnpc_himself "Robin">>, and one by one, they had all moved to the other wing.
+				You haven't seen any of them since. You wonder what happened to them.
+				<br><br>
+
+				You realise that you might be Robin's last friend.
+			<<else>>
+				The whole scene looks familiar to you, but you can't place why.
+			<</if>>
+			<br><br>
+
+			<<orphanageWardOptions>>
+		<<case 4>><<set $home_event_ward_count += 1>>
+			You take a moment to make a mental map of the youth ward. It's a bit larger than the other wing, and you don't remember the exact layout.
+			<br><br>
+
+			You feel as though you should know the layout better, with how long you were here.
+			<br><br>
+
+			Just how long were you here?
+			<br><br>
+
+			<<orphanageWardOptions>>
+		<<default>>
+			<<orphanageWardOptions>>
+	<</switch>>
+<<else>>
+	<<orphanageWardOptions>>
+<</if>>
+
+:: Orphanage Ward Door
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>>
+As you leave the youth ward, you run your hands against the door frame. You feel something, and pause. There's a pattern of notches carved into the sides.
+<br><br>
+
+You take a step back. The entire door is covered in carved symbols. The jambs house a litany of letters you can't read, and the patterns of the wood underneath swirl and shine.
+<br><br>
+
+You blink. You're back in the main hall. You feel dizzy.
+<br><br>
+
+<<link [[Next|Orphanage]]>><</link>>
+<br>
+
+:: Orphanage Ward Wraith Sing
+<<set $outside to 0>><<set $location to "home">><<home_effects>><<effects>>
+<<getChildrenIds `{location:"home", father:"Ivory Wraith"}`>>
+<<set _childNumber to _childrenIds.length>>
+As you make your way to the nursery, you think you can hear singing. As you get closer, you make out what sounds like the words of a long forgotten lullaby.
+<br><br>
+
+You turn the corner. A familiar pale figure stands amidst the cots.
+<<if _childNumber is 1>>
+	<<childSelect _childrenIds>>
+	It tenderly holds <<childname `_childrenIds`>> in its arms as it continues to sing softly. <<childHe>> looks like <<childhe>> just fell asleep.
+<<elseif _childNumber is 2 or _childNumber is 3>>
+	It tenderly holds <<childrenNames _childrenIds>> in multiple sets of arms, singing to them. They sleep peacefully.
+<<else>>
+	It tenderly holds <<childrenNames _childrenIds>> in myriad arms, singing to all of them at once. They all sleep peacefully.
+<</if>>
+<<if $storedChildrenToys and $storedChildrenToys[$location] and $storedChildrenToys[$location].length gt 0>>
+	<<set _wraithToy to $storedChildrenToys[$location].random().name_lower>>
+	<<A _wraithToy>> floats in the air, suspended by a translucent tentacle attached to the figure's back.
+<</if>>
+<br><br>
+
+It turns to you, smiling, before raising a finger to its mouth and making a hushing gesture. It gingerly places
+<<if _childNumber is 1>>
+	<<childname `_childrenIds`>> back in <<childhis>> cot.
+<<elseif _childNumber is 2 or _childNumber is 3>>
+	<<childrenNames _childrenIds>> back in their cots.
+<<else>>
+	<<childrenNames _childrenIds>> back in their cots, meticulously ensuring each one is in their proper place. The extra arms fold in and disappear.
+<</if>>
+The lullaby ends with a soothing hum that echoes in your ears. <<tiredness 3>><<gtiredness>>
+<br><br>
+
+"<span class="wraith">Beautiful. So beautiful. Love <<if _childNumber is 1>><<childhim>><<else>>them<</if>> for me, <<pcpetname "Wraith" "nice">>. Please.</span>"
+<br><br>
+
+A <<wraithEyes>> tear streaks down its cheek as the figure slowly fades away.
+<br><br>
+
+<<childicon "crib">><<link [[Next|Childrens Home]]>><</link>>
+<br>

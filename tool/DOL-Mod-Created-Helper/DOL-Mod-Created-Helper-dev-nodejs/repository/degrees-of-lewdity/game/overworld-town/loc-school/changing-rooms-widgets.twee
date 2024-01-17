@@ -1,0 +1,381 @@
+:: Widgets Changing Room [widget]
+
+<<widget "changingRoom">>
+	<<unset $lastChangingRoom>>
+	<<set _studentsKnow to ($schoolrep.crossdress gte 4 and $changingroomstate is "own") or ($schoolrep.crossdress gte 5 and $changingroomstate isnot "empty")>>
+	<<set _changingRoomGenderType to ($changingRoomGender is "girls" ? "f" : "m")>>
+	<<if !$daily.changingRoomPregnancyFame>><<set $daily.changingRoomPregnancyFame to random(100,1000)>><</if>>
+	<<if _changingRoomGenderType is "f" and ($fame.pregnancy gte $daily.changingRoomPregnancyFame or playerBellyVisible())>>
+		<<set _seenGender to "f">>
+	<<else>>
+		<<set _seenGender to (_studentsKnow ? $player.gender : $player.gender_appearance)>> <!-- If they know you crossdress, then they won't judge you by appearance -->
+	<</if>>
+	<<set _playerGenderAppearance to (_seenGender is _changingRoomGenderType ? "same" : "other")>>
+	<<set _uncomfortable to ($backgroundTraits.includes("crossdresser") and $player.gender is _changingRoomGenderType)>>
+	<<set _justChangedClothes to ["School Pool Wardrobe", "School Boy Changing Room", "School Girl Changing Room"].includes($passagePrev)>>
+	<<if $changingRoomGender is "girls">>
+		<<set _chance to 100 - maleChance()>>
+		<<set _playerGenitals to $player.vaginaExist and !$player.penisExist ? "same" : "other">>
+	<<else>>
+		<<set _chance to maleChance()>>
+		<<set _playerGenitals to !$player.vaginaExist and $player.penisExist ? "same" : "other">>
+	<</if>>
+	<<outfitChecks>>
+
+	<<if _playerGenderAppearance is "same">>
+		<<if $changingroomstate isnot "empty">>
+			It's full of $changingRoomGender in various states of undress.
+			<<if $changingRoomGender is "boys">>
+				<!-- TODO: Add events for girls and for possible herm reveals. Also, add more boys events too if you feel like it. -->
+				<<eventsSchoolChangingRoomsBoys>>
+			<</if>>
+			<<if !_nomessage>>
+				<<if $player.gender is "m" and $changingRoomGender is "girls" and playerBellyVisible()>>
+					No one gives you a second glance, not realising you're a <<gender>> due to your <<print playerAwareTheyArePregnant() ? "pregnancy" : "pregnant looking belly">>. <<if $NudeGenderDC isnot -1 and !_uncomfortable>>You feel naughty.<</if>>
+				<<elseif $changingRoomGender is "boys" and playerBellyVisible()>>
+					Some of the $changingRoomGender look at you uncomfortably, mostly to your <<print playerAwareTheyArePregnant() ? "pregnant belly" : "pregnant looking belly">>. It's clearly making them think you're a girl.<<gstress>>
+				<<elseif $player.penisExist and $player.vaginaExist>>
+					<<if $changingRoomGender is "boys">><<generatesm1>><<else>><<generatesf1>><</if>><<person1>>
+					<<switch $schoolrep.herm>>
+						<<case 0>> No one gives you a second glance, unaware of your hermaphroditism.
+						<<case 1>> A <<person>> glances at your crotch. <<He>> whispers something to <<his>> friend, who shakes <<his>> head<<print either (", unconvinced", " skeptically", " doubtfully", " and rolls <<his>> eyes", " and laughs")>>. <span class="purple">Rumours about your genitalia are beginning to spread.</span>
+						<<case 2>> A <<person>> glances at your crotch. <<He>> whispers something to <<his>> friend, who <<print either ("shakes <<his>> head, unconvinced", "appears convinced", "nods thoughtfully", "eyes you warily", "snickers")>>. <span class="purple">Rumours about your genitalia are beginning to spread.</span>
+						<<case 3>> Some glance at your crotch. A few <<print either("point at you and whisper to their friends", "make rude gestures", "stare for an uncomfortably long period of time", "look as though they're going to say something, but remain quiet", "ask intrusive questions about what's in your pants")>>. <span class="pink">They've heard the rumours.</span>
+						<<case 4>> Some glance at your crotch. A <<person>> points at you and <<print either("laughs", "cracks a rude joke", "elbows <<his>> friend", "mocks you")>> as you head to your locker. <span class="pink">They've heard the rumours.</span>
+						<<case 5>> Many glance at your crotch, openly whispering and pointing at you. A few <<print either("make snide comments", "laugh", "jeer", "mock you", "catcall you")>> as you pass them on the way to your locker. <span class="red">They've heard the rumours, and you suspect everyone else has too.</span>
+					<</switch>>
+					<<endevent>>
+				<<elseif $player.gender isnot $player.gender_appearance and $NudeGenderDC isnot -1>>
+					<<if $schoolrep.crossdress is 3>>
+						Some of the $changingRoomGender look at you uncomfortably. A few keep their eyes glued on you as you head to your locker. <span class="pink">They suspect the rumours of you crossdressing are true.</span> <<gstress>>
+					<<elseif $schoolrep.crossdress lt 3>>
+						No one gives you a second glance, not realising you're a <<gender>>.
+						<<if $backgroundTraits.includes("crossdresser") and $player.gender isnot _changingRoomGenderType>>
+							<<if !$daily.school.changingRoomStressRelief>>
+								<span class="green">You feel good about that.</span><<lstress>><<stress -3>><<set $daily.school.changingRoomStressRelief to true>>
+							<<else>>
+								You feel good about that.
+							<</if>>
+						<<elseif !_uncomfortable>>
+							You feel naughty.
+						<</if>>
+					<</if>>
+				<</if>>
+				<<changingRoomFeelings 0>>
+				<br><br>
+			<</if>>
+		<<elseif $poolroomstate isnot "empty">>
+			It's currently empty, though you can hear activity in the pool proper. <<if $poolroomstate is "own">>Your lesson is in session.<</if>>
+			<<changingRoomFeelings 1>>
+			<br><br>
+			<<schoolPoolSwap>>
+			<<raidLockers>>
+		<<else>>
+			It's empty.
+			<<changingRoomFeelings 2>>
+			<br><br>
+		<</if>>
+		<<schoolChangingRoomLinks>>
+	<<elseif _justChangedClothes and $changingroomstate isnot "empty">>
+		It's full of $changingRoomGender in various states of undress.
+		<br><br>
+		<<if $NudeGenderDC isnot -1>>
+			<<if _bottomless and _playerGenitals is "other">>
+				<!-- TODO: Write something better for this. -->
+				They can't see your <<genitals>> from here.
+			<<elseif _topless and $changingRoomGender is "boys" and ($player.breastsize gte 4 or $lactating is 1)>>
+				<<if $player.breastsize gte 9>>
+					A number of the $changingRoomGender openly stare at your exposed <<breasts>>. They still think you're a boy, but <<if maleChance("f") gt 0>>your chest is making some of them embarrassed<<else>>now they're very confused<</if>>.
+				<<elseif $player.breastsize gte 4>>
+					You overhear some of the $changingRoomGender whisper about your exposed <<breasts>>. They think your chest looks feminine.
+				<<else>>
+					You overhear some of the $changingRoomGender whisper about your exposed <<breasts>>.
+				<</if>>
+				<<if $lactating is 1>>
+					One of them addresses you directly. "Hey, what's going on with your nipples? Is that milk?"
+				<</if>>
+			<<elseif _topless and $changingRoomGender is "girls" and $player.breastsize lte 2>>
+				You overhear some of the $changingRoomGender whisper about your exposed <<breasts>>. One of them addresses you directly.
+				"Damn, I've <<print either("seen boys with", "had boyfriends with", "slept with boys that had", "fucked boys with")>> bigger tits than you."
+				They don't realize you really are a <<girl>>.
+			<<else>>
+				One of the $changingRoomGender looks at you <<print either("quizzically", "curiously", "strangely", "contemplatively")>>.
+				"Wow, you <<print either("really", "kinda", "almost", "")>> look like a <<girl>> wearing that."
+			<</if>>
+			<br><br>
+		<</if>>
+		<<schoolChangingRoomLinks>>
+	<<else>>
+		<<if $changingroomstate isnot "empty">>
+			<<if $exposed gte 2 and _chance isnot 0>>
+				You peek around the corner. You see $changingRoomGender in various states of undress. They'd spot you if you tried to enter.
+				<br><br>
+				<<ind>><<link [[Watch (0:05)|School Changing Room Watch]]>><<pass 5>><</link>><<promiscuous1>>
+				<br>
+				<<if $exhibitionism gte 35>>
+					<<ind>><<link [[Masturbate (0:01)|School Changing Room Masturbation]]>><<pass 1>><<set $masturbationstart to 1>><</link>><<exhibitionist3>>
+					<br>
+				<</if>>
+				<<if $exhibitionism gte 75>>
+					<<ind>><<link [[Enter (0:05)|School Changing Room Exhibitionism]]>><<pass 5>><<detention 3>><</link>><<gdelinquency>><<exhibitionist5>>
+					<br>
+				<</if>>
+				<<ind>><<link [[Leave|School Pool Entrance]]>><</link>>
+			<<elseif $daily.school.changingRoomEntered is Time.hour and _chance isnot 0>>
+				<<if $changingRoomGender is "boys">><<generatesm1>><<else>><<generatesf1>><</if>><<person1>>
+				<<if $player.gender_appearance isnot _changingRoomGenderType and $NudeGenderDC isnot -1>>
+					It's full of $changingRoomGender in various states of undress who, thinking you're a <<girl>>, hastily cover up as you enter. Many look angry. A <<person>> drops <<his>> bag and steps forward. "You pervert," <<he>> says. "You can't keep barging in here." <<He>> grabs your arm.
+				<<else>>
+					It's full of $changingRoomGender in various states of undress who hastily cover up as you enter. Many look angry. A <<person>> drops <<his>> bag and steps forward. "You pervert," <<he>> says. "You can't keep barging in here." <<He>> grabs your arm.
+				<</if>>
+				<<detention 3>><<gdelinquency>>
+				<br><br>
+				<<ind>><<link [[Try to escape|School Changing Room Escape]]>><</link>><<physiquedifficulty 4000 14000>>
+				<br>
+				<<ind>><<link [[Flirt|School Changing Room Flirt]]>><</link>><<promiscuous1>>
+				<br>
+				<<ind>><<link [[Apologise|School Changing Room Apologise]]>><</link>>
+			<<else>>
+				<<set $daily.school.changingRoomEntered to Time.hour>>
+				<<if $player.gender_appearance isnot _changingRoomGenderType and $NudeGenderDC isnot -1>>
+					It's full of $changingRoomGender in various states of undress who, thinking you're a <<girl>>, hastily cover up as you enter. Many look about to die from embarrassment, but some are angry and shoo you out.
+				<<else>>
+					It's full of $changingRoomGender in various states of undress who hastily cover up as you enter. Many look about to die from embarrassment, but some are angry and shoo you out.
+				<</if>>
+				<<detention 3>><<gdelinquency>>
+				<br><br>
+				<<ind>><<link [[Next|School Pool Entrance]]>><</link>>
+			<</if>>
+		<<elseif $poolroomstate isnot "empty">>
+			It's currently empty, though you can hear activity in the pool proper. <<if $poolroomstate is "own">>Your lesson is in session.<</if>>
+			<<changingRoomFeelings 1>>
+			<br><br>
+			<<raidLockers>>
+			<<schoolChangingRoomLinks>>
+		<<else>>
+			It's empty.
+			<<changingRoomFeelings 2>>
+			<br><br>
+			<<schoolChangingRoomLinks>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolChangingRoomLinks">>
+	<<if $exposed gte 2 and $exhibitionism gte 75 and $poolroomstate isnot "empty">>
+		<<swimmingicon>><<link [[Enter the pool room|School Pool]]>><<set $lastChangingRoom to $passage>><<set $justEntered to true>><</link>><<if $swimall isnot 1>><<gdelinquency>><</if>>
+	<<elseif $exposed gte 2 and $swimall isnot 1 and $poolroomstate isnot "empty">>
+		<span class="pink">You can't enter the pool while so exposed!</span>
+	<<else>>
+		<<swimmingicon>><<link [[Enter the pool room|School Pool]]>><<set $lastChangingRoom to $passage>><<set $justEntered to true>><</link>>
+	<</if>>
+	<br>
+	<<if $earSlime.forcedCommando isnot undefined and !$worn.under_lower.type.includes("naked")>>
+		<span class="red">The slime in your ear refuses to allow you to leave with swimwear on.</span>
+	<<elseif $exhibitionism lte 75 and $exposed gte 1>>
+		<span class="pink">You can't go out while so exposed!</span>
+	<<elseif $exposed gte 1>>
+		<<getouticon>><<link [[Leave|School Pool Entrance Exhibitionism]]>><</link>>
+	<<else>>
+		<<getouticon>><<link [[Leave|School Pool Entrance]]>><</link>>
+	<</if>>
+	<<schoolpoolclothes _store_location>>
+	<<lockericon>><<link [[Locker|School Pool Wardrobe]]>><<set $wardrobe_location to "schoolBoys">><</link>>
+<</widget>>
+
+<<widget "destination_pool">>
+	<<if $changingRoomGender is "boys">>
+		<<link [[Next|School Boy Changing Room]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[Next|School Girl Changing Room]]>><<endevent>><</link>>
+	<</if>>
+<</widget>>
+
+<<widget "changingRoomFeelings">>
+	<<if _uncomfortable>>
+		<br><br>
+		<<switch _args[0]>>
+			<<case 1>>Even alone, being in the $changingRoomGender' changing room makes you <span class="red">uncomfortable.</span>
+			<<case 2>>Even so, being in the $changingRoomGender' changing room makes you <span class="red">uncomfortable.</span>
+			<<default>>Being in the $changingRoomGender' changing room makes you <span class="red">uncomfortable.</span>
+		<</switch>><<gstress>><<stress 1>>
+	<<elseif $NudeGenderDC isnot -1 and _playerGenderAppearance is "other">>
+		/* Intentional lack of br */
+		<<switch _args[0]>>
+			<<case 1>>Even alone, being here makes you feel naughty, as well as worried you'll be caught.
+			<<case 2>>Even so, being here makes you feel naughty.
+			<<default>> /* Intentional blank, this one is handled outside the widget */
+		<</switch>>
+	<</if>>
+<</widget>>
+
+<<widget "eventsSchoolChangingRoomsBoys">>
+	<<rng>>
+	<<if $poolroomstate is "own" and $rng gte 80 and $worn.under_lower.name is "naked" and ($worn.lower.name is "naked" or $worn.lower.name.includes("towel"))>>
+		<<rng>>
+		<<if $worn.lower.name.includes("towel")>>
+			<<if $rng gte 50 and $player.penisExist>>
+				<br><br>
+				One of your classmates yanks your towel off your hips while your hands are out of the way, exposing your <<genitals>> in front of your classmates.
+				<<lowerstrip>>
+				<<if $player.penissize is 4>>
+					The changing room erupts into laughter and a few students make crude comments about your <<EZbig>> <<EZpenis>> as you rush to cover yourself.
+				<<elseif $player.penissize lte 1>>
+					The changing room erupts into laughter at your newly exposed <<EZsmall>> <<genitals>>. <<Penisremarkquote>> says one of the boys as you clasp your hands over your <<EZsmall>> <<EZpenis>> in shame.
+					<<status -5>><<lcool>>
+				<<else>>
+					The changing room erupts into laughter and a few students make crude comments about your <<EZpenis>> as you rush to cover yourself.
+				<</if>>
+				<<incgpenisinsecurity>><<trauma 5>><<gtrauma>>
+				<<set _nomessage to 1>>
+			<</if>>
+		<<else>> /* $worn.lower.name is "naked" */
+			<<if $rng gte 75 and $player.penisExist>>
+				<br><br>
+				One of your classmates grabs both of your arms and tugs them behind your back as he yells for everyone to look.
+				<<if $player.penissize is 4>>
+					The changing room erupts into laughter and a few students make crude comments about your <<EZbig>> <<genitals>>.
+					<br><br>
+
+					Having had their fun, the boy lets you go, and the room goes back to how it was. You still hear the odd whisper about your unusual size mixed in with the general murmoring between students.
+				<<elseif $player.penissize lte 1>>
+					The changing room erupts into laughter at your newly exposed <<EZsmall>> <<genitals>>.
+					<br><br>
+
+					<<Penisremarkquote>> says one of the boys, before your arms are released and you quickly clasp your hands over your <<EZsmall>> <<EZpenis>> in shame.
+					<<status -5>><<lcool>>
+				<<else>>
+					The changing room erupts into laughter and a few students make crude comments about your <<genitals>>.
+					<br><br>
+
+					Having had their fun, the boy lets you go, and the room goes back to how it was.
+				<</if>>
+				<<trauma 5>><<gtrauma>><<incgpenisinsecurity>>
+			<<else>>
+				<br><br>
+				One of the boys whips your naked backside with a towel, and the changing room erupts into laughter. "If you don't want us using your butt for target practise you should <<print ["cover it", "get dressed", "put something over it", "put something on", "put your clothes on"].pluck()>>" says the boy.
+				<<pain 2>><<gpain>>
+			<</if>>
+			<<set _nomessage to 1>>
+		<</if>>
+		<<if _nomessage>>
+			<br><br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolPoolSwap">>
+	<<if $schoolrep.crossdress gte 1 and !$weekly.schoolPoolSwap and currentSkillValue('skulduggery') gte 400>>
+		<br>
+		<<if Time.minute lte 40>>
+			<span class="lblue">An idea strikes you.</span> Perhaps you could distract from your reputation as a crossdresser.
+			<br>
+			<<link [[Swap the boys' and girls' clothes (0:20)|School Changing Swap]]>><<schoolrep crossdress -1>><<pass 20>><<detention 12>><<set $weekly.schoolPoolSwap to true>><</link>><<ggdelinquency>>
+			<br>
+		<<else>>
+			<span class="lblue">An idea strikes you.</span> Perhaps you could distract from your reputation as a crossdresser.
+			<br>
+			You peek into the pool. The lesson will end soon. You'd need more time to prepare.
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "raidLockers">>
+	<<if $panty_thief gte 1>>
+		<<if $daily.lockerMason is 2>>
+			<span class="blue">Mason keeps poking <<nnpc_his Mason>> head in. You won't be able to raid any more lockers today.</span>
+			<br>
+		<<elseif Time.minute lte 47>>
+			<<ind>><<link [[Raid a locker (0:10)|School Changing Room Locker]]>><<pass 10>><<arousal 600>><</link>><<garousal>>
+			<br>
+		<<else>>
+			<span class="blue">The lesson will be over soon. There's no time to raid a locker.</span>
+			<br>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "schoolpoolclothesreset">>
+	<<storereturn _args[0]>>
+	<<wardrobeSelection true>>
+	<<wearoutfit>>
+<</widget>>
+
+<<widget "schoolpoolclothes">>
+	<<if $wearoutfittext isnot undefined>>
+		<br><br>
+		<span class="purple">
+		<<switch $wearoutfittext>>
+			<<case 1>>
+				You gather your clothing from the bench and carefully put them on.
+			<<case 2>>
+				You put away the clothing into your locker.
+			<<default>>
+				You change into your <<print $wearoutfittext.toLowerCase()>>.
+		<</switch>>
+		</span>
+		<<unset $wearoutfittext>>
+	<</if>>
+	<<storeon _args[0] "check">>
+	<<if _store_check is 1>>
+		<<set _clothes to clothingInStorage(_args[0])>>
+		<<if _clothes.length gt 0>>
+			<br><br>
+			<<if _clothes.length gt 2>>
+				Your clothes are gathered in a neat pile next to the lockers.
+				<br>
+			<<elseif _clothes.length is 2>>
+				Your _clothes[0].name and _clothes[1].name are lying on the bench next to the lockers.
+				<br>
+			<<else>>
+				Your _clothes[0].name is lying on the bench next to the lockers.
+				<br>
+			<</if>>
+			<<dressasyouwereicon>><<link [[Put on|$passage]]>><<storeload _args[0]>><<set $eventskip to 1>><<set $wearoutfittext to 1>><</link>>
+			<br>
+			<<lockericon "put in">><<link [[Put away|$passage]]>><<storeon _args[0] "return">><<set $eventskip to 1>><<set $wearoutfittext to 2>><</link>>
+		<</if>>
+	<</if>>
+	<br><br>
+	//Swimming sets://
+	<br>
+	<<listswimoutfits $wardrobe_location _args[0] true>>
+	<br>
+	//Normal sets://
+	<br>
+	<<listoutfitsPassage $wardrobe_location _args[0] true>>
+	<br>
+	<<temperature>>
+<</widget>>
+
+<<widget "schoolpoolundress">>
+	<<set _store_location to "school pool">>
+	<<if $player.gender_appearance is "m">>
+		<<set _store_location += " boys">>
+		<<set $schoolpoolundress to "boys">>
+	<<else>>
+		<<set _store_location += " girls">>
+		<<set $schoolpoolundress to "girls">>
+	<</if>>
+	<<if clothingInStorage(_store_location).length is 0>>
+		<<storesave _store_location>>
+	<<else>>
+		<<strip>>
+		<<returnCarried>>
+		<<set $schoolpoolundress to "wardrobe">>
+	<</if>>
+<</widget>>
+
+<<widget "schoolclothesreset">>
+	<<storeon "school pool boys" "return">>
+	<<storeon "school pool girls" "return">>
+<</widget>>
+
+<<widget "enterChangingRoomLink">>
+	<<if _args[0] is "m">>
+		<<maleicon>><<link [[Boys' changing room|School Boy Changing Room]]>><</link>>
+	<<else>>
+		<<femaleicon>><<link [[Girls' changing room|School Girl Changing Room]]>><</link>>
+	<</if>>
+<</widget>>

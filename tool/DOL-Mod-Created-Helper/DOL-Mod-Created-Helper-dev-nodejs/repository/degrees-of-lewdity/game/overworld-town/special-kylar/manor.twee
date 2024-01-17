@@ -1,0 +1,701 @@
+:: Manor Garden
+<<set $outside to 1>><<location "kylarmanor_outside">><<effects>>
+
+You are in the front garden of Kylar's manor. Choking weeds and thorny bushes surround the grass.
+<br><br>
+
+<<if $daily.manorGarden is undefined and $kylar_parents_trust lt 100>>
+	<<link [[Trim the hedges (1:00)|Manor Garden Trim]]>><<kylar_parents_trust 1>><<set $daily.manorGarden to 1>><<pass 60>><</link>><<tendingdifficulty 1 1000>><<gtrust>>
+	<br><br>
+<</if>>
+
+<<getinicon>><<link [[Enter the manor (0:01)|Manor Hall]]>><<pass 1>><</link>>
+<br>
+<<walkicon>><<link [[Walk around the side of the manor (0:01)|Manor Grounds]]>><<pass 1>><</link>>
+<br><br>
+<<getouticon>><<link [[Leave (0:02)|Danube Street]]>><<pass 2>><</link>>
+<br>
+
+:: Manor Hall
+<<set $outside to 0>><<location "kylarmanor">><<effects>>
+
+You are in the front hall of Kylar's manor. A chemical scent lingers in the air. You hear a disturbing noise upstairs.
+<br><br>
+
+<<link [[Kitchen|Manor Kitchen]]>><</link>>
+<br>
+<<link [[Lab|Manor Lab]]>><</link>>
+<br>
+<<link [[Kylar's room|Manor Kylar Room]]>><</link>>
+<br>
+<<link [[Parents' room|Manor Parents Room]]>><</link>>
+<br>
+
+<<getouticon>><<link [[Leave (0:01)|Manor Garden]]>><<pass 1>><</link>>
+<br>
+
+
+:: Manor Parents Room
+<<effects>>
+
+Kylar's parents' room looks like the master bedroom. The four-poster bed is untouched, but the rest of the furniture has been torn to pieces. Splinters and old fabric litter the carpet. You hear breathing beneath the bed.
+<br><br>
+
+<<if $daily.manorParents is undefined and $kylar_parents_trust lt 100>>
+	<<link [[Soothe Kylar's parents (1:00)|Manor Parents Room Soothe]]>><<set $daily.manorParents to 1>><<kylar_parents_trust 1>><<pass 60>><</link>><<gstress>><<gtrust>>
+	<br><br>
+<</if>>
+
+
+<<getouticon>><<link [[Leave|Manor Hall]]>><</link>>
+<br>
+
+:: Manor Lab
+<<set $outside to 0>><<location "kylarmanor">><<effects>>
+
+You are in the lab in Kylar's manor. A peppery chemical smell fills the air.
+<br><br>
+
+<<if $daily.manorLab is undefined and $kylar_parents_trust lt 100>>
+	<<link [[Clean (1:00)|Manor Lab Clean]]>><<set $daily.manorLab to 1>><<kylar_parents_trust 1>><<pass 60>><</link>><<skill_difficulty `currentSkillValue("science")` "Science" 1 1000>><<gtrust>>
+	<br><br>
+<</if>>
+
+<<getouticon>><<link [[Leave|Manor Hall]]>><</link>>
+<br>
+
+:: Manor Kitchen
+<<set $outside to 0>><<location "kylarmanor">><<effects>>
+
+You are in the kitchen in Kylar's manor.
+
+<br><br>
+
+<<if $daily.manorKitchen isnot 1 and $kylar_parents_trust lt 100>>
+	<<link [[Clean (1:00)|Manor Kitchen Clean]]>><<set $daily.manorKitchen to 1>><<kylar_parents_trust 1>><<pass 60>><</link>><<gtrust>>
+	<br>
+<</if>>
+
+<<link [[Front hall|Manor Hall]]>><</link>>
+<br>
+<<link [[Outside (0:01)|Manor Grounds]]>><<pass 1>><</link>>
+<br>
+
+:: Manor Grounds
+<<set $outside to 1>><<location "forest">><<effects>>
+
+You are in the grounds behind Kylar's manor, an elevated patch of woodland full of curious mushrooms.
+<br><br>
+
+<<if $daily.manorForage is undefined>>
+	<<tendingicon "ghostshrooms">> <<link [[Pick mushrooms (1:00)|Manor Forage]]>><<set $daily.manorForage to 1>><<pass 60>><</link>><<tendingdifficulty 1 500>>
+	<br>
+<</if>>
+
+<<gardenicon>><<link [[Garden (0:01)|Manor Garden]]>><<pass 1>><</link>>
+<br>
+<<foresticon>><<link [[Forest (0:10)|Forest]]>><<pass 10>><<set $forest to 0>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Manor Forage
+<<effects>>
+
+You search the bases of trees for the ash-coloured <<tendingicon "ghostshrooms">> mushrooms. Most aren't ready for harvest,
+<<if $tendingSuccess>>
+	<span class="green">but you find enough to fill a basket.</span>
+	<<tending_pick ghostshroom 12 36>>
+	<br><br>
+
+	They're cold to the touch.<<arousal -600>><<larousal>>
+	<br><br>
+
+	<<link [[Next|Manor Grounds]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">and the rest are already rotting.</span><<gtending>><<tending 2>>
+	<br><br>
+
+	<<link [[Next|Manor Grounds]]>><</link>>
+	<br>
+<</if>>
+
+:: Manor Kylar Room
+<<set $outside to 0>><<location "kylarmanor">><<effects>>
+
+You are in Kylar's bedroom. A perpetually active computer sits on the far side, connected to six monitors. There's a large bed covered in a number of sheets and pillows.
+<<if Time.dayState is "night">>
+	<<if $weather is "rain">>
+		Rain hammers the skylights.
+	<<elseif $weather is "clear">>
+		Moonlight beams through the skylights.
+	<<else>>
+		The skylights are black crystal.
+	<</if>>
+<<else>>
+	<<if $weather is "rain">>
+		Rain hammers the skylights.
+	<<elseif $weather is "clear">>
+		Sunlight pours through the skylights.
+	<<else>>
+		The skylights reveal the clouds above.
+	<</if>>
+<</if>>
+<br><br>
+
+<<set _kylar to statusCheck("Kylar")>>
+<<if _kylar.state isnot "prison">>
+	<<if Time.hour gte 18>>
+		Kylar sits at <<nnpc_his "Kylar">> computer.
+		<br><br>
+
+		<<link [[Approach Kylar|Manor Kylar]]>><</link>>
+		<br>
+	<<elseif Time.hour lte 6>>
+		Kylar lies on <<nnpc_his "Kylar">> bed at a haphazard angle, a multitude of sheets partially covering <<nnpc_him "Kylar">>.
+		<br><br>
+	<</if>>
+
+	<<if $kylar_sleep_abduction is undefined>>
+		<<link [[Sleep|Manor Sleep Abduction]]>><<set $kylar_sleep_abduction to 1>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+<<link [[Leave (0:01)|Manor Hall]]>><<pass 1>><</link>>
+<br>
+
+:: Manor Kylar
+<<effects>><<set $bus to "kylarmanor">>
+
+<<run statusCheck("Kylar")>>
+
+<<npc Kylar>><<person1>>
+Kylar instinctively minimises all <<his>> windows as you approach, then spins <<his>> chair to face you.
+<br><br>
+<<kylaroptions>>
+<<if $kylar_parents_trust gte 100 and $kylar_manor_secret is undefined>>
+	<<link [[Tell Kylar that the manor is clean|Manor Kylar Secret]]>><<set $kylar_manor_secret to 1>><</link>>
+	<br>
+<<elseif $kylar_parents_trust gte 1 and $kylar_manor_secret is undefined>>
+	<<link [[Have a word about the state of the manor|Manor Kylar Word]]>><</link>>
+	<br>
+<</if>>
+
+:: Manor Kylar Word
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"I-I know looking after a building like this would be hard alone," you say. "But could you help me keep it clean?"
+<<elseif $speech_attitude is "bratty">>
+	"This place is a dump," you say. "You should at least keep the kitchen clean."
+<<else>>
+	"The manor is a bit messy," you say. "Could you help keep it clean?"
+<</if>>
+<br><br>
+
+Kylar looks ashamed. "I-I clean up after myself," <<he>> says. "Though I'm a bit behind. M-my parents make a lot of mess."
+<br><br>
+
+<<kylaroptions>>
+
+<<link [["Ask what happened to " + $NPCList[0].pronouns.his + " parents"|Manor Kylar Word 2]]>><</link>>
+<br>
+
+:: Manor Kylar Word 2
+<<effects>>
+
+"I-I don't," <<hes>> struggling to look at you. "I don't know. One night they were really excited. They put me to bed early. Then I heard windows smashing. I-I hid under the covers. In the morning, they were like this."
+<br><br>
+<<kylaroptions>>
+
+:: Manor Kylar Secret
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"I-I got the manor nice and clean for you," you say. "You should be able to stay on top of it now."
+<<elseif $speech_attitude is "bratty">>
+	"I cleaned up your years of filth," you say. "I better not have to do it again."
+<<else>>
+	"I tidied the manor," you say. "It should be easy enough for you to stay on top of it now."
+<</if>>
+<br><br>
+"Thank you," Kylar says. "I saw you doing it, but I didn't want to interrupt. I-I'm not sure how to clean. The lab especially. Do you use a hose?"
+<br><br>
+
+<<link [[Next|Manor Kylar Secret 2]]>><</link>>
+<br>
+
+:: Manor Kylar Secret 2
+<<effects>>
+
+You lead Kylar downstairs, and into the lab, eager to show <<him>> how it's done. <span class="red">You arrive to find a presence already there, waiting.</span>
+<br><br>
+
+One of Kylar's parents crouches on a table, staring right at you. "W-we should come back later," Kylar says. <<He>> turns, and almost walks right into <<his>> other parent. There's little to distinguish them. Even the black rags covering them are similar.
+<br><br>
+
+"Wh-what's wrong?" Kylar asks. <<He>> pushes you into the corner, and steps in front of you protectively. "You're acting strange."
+<br><br>
+
+The first parent jumps from the table, into the middle of the room. It reaches for the light above, and tugs. <span class="green">A concealed hatch opens, and a ladder descends.</span>
+<br><br>
+
+<<link [[Next|Manor Kylar Secret 3]]>><</link>>
+<br>
+
+
+:: Manor Kylar Secret 3
+<<effects>>
+
+"I-I didn't know this was here," says Kylar, staring into the dark. "D-do you want us to go up?" <<His>> parents answer with a shriek, startling <<him>>. They run from the room. One scrapes a gash in the door frame with their nails.
+<br><br>
+
+Kylar looks up the staircase. "D-do you want to go first?"
+<br><br>
+
+<<link [[You go first|Manor Kylar Secret 4]]>><<set $phase to 0>><<stress 6>><</link>><<gstress>>
+<br>
+<<link [[Have Kylar go first|Manor Kylar Secret 4]]>><<set $phase to 1>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+:: Manor Kylar Secret 4
+<<effects>>
+
+<<if $phase is 0>>
+	You climb the stairs, into the gloom. You almost cough on the dust. Kylar follows behind. <<He>> coughs.
+	<br><br>
+<<else>>
+	Kylar climbs the stairs. "I can't-" <<he>> coughs. "I can't see anything." You almost cough on the dust yourself when you reach the top.
+	<br><br>
+<</if>>
+Your eyes adjust. There's a pull switch within arm's reach. You tug it, and a light buzzes into life.
+<br><br>
+
+In front of you stands a bizarre monstrance, almost as tall as you. Numerous spikes of silver and bronze surround a central space, giving the impression of a sun. The metal at the top is distorted, as if someone has hacked part of it off. Bronze tendrils emerge from the base, running along the lower half of the spikes, licking them.
+<br><br>
+
+"Wh-what is it?" Kylar asks.
+<br><br>
+<<if currentSkillValue("history") gte 600>>
+	<span class="green">You recognise it from history class.</span> "It's a host for sacramental bread," you explain. <span class="gold">"The temple might know more about this one."</span>
+	<br><br>
+<<else>>
+	<span class="red">You're not quite sure yourself.</span> "It's some kind of religious thing," you say. <span class="gold">"Maybe the temple will know more."</span>
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Kylar Secret 5]]>><</link>>
+<br>
+
+
+:: Manor Kylar Secret 5
+<<effects>>
+
+"I didn't think my parents were religious," Kylar says as you return to the lab. "Why did they show this to us? Why now?" <<He>> looks uncomfortable.
+<br><br>
+
+You return to Kylar's bedroom. <<He>> seems keen to put the mystery behind <<him>>.
+<br><br>
+
+<<link [[Next|Manor Kylar Room]]>><<endevent>><</link>>
+<br>
+
+
+:: Manor Sleep Abduction
+<<effects>>
+
+<<npc Kylar>><<person1>>
+<<if Time.hour gte 18>>
+	You climb beneath the covers. Kylar's head turns towards you, just a silhouette against the glow of the monitors. <<He>> watches, then creeps closer, afraid of making a sound. <<He>> climbs into the bed beside you, and wraps a pair of shaking arms around your waist.
+	<br><br>
+<<elseif Time.hour lte 6>>
+	You climb beneath the covers. Kylar bolts upright, and stares at you a moment before settling down and wrapping a pair of shaking arms around your waist.
+	<br><br>
+<<else>>
+	You climb beneath the covers. It's surprisingly comfy.
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Sleep Abduction 2]]>><</link>>
+<br>
+
+:: Manor Sleep Abduction 2
+<<location "forest">><<effects>>
+
+You awaken. A pair of white eyes stare straight into yours. With a screech, Kylar's parent snatches you from the bed, and bounds for the exit.
+<br><br>
+
+"No!" screams Kylar. "Let <<phim>> go!" Kylar's parent ignores <<him>>, and dashes down the stairs. You try to struggle, but its grip is iron.<<ggstress>><<gtrauma>><<stress 12>><<trauma 6>>
+<br><br>
+
+<<link [[Next|Manor Sleep Abduction 3]]>><</link>>
+<br>
+
+:: Manor Sleep Abduction 3
+<<effects>>
+<<pass 10>>
+It runs through a door in the kitchen, into the overgrown back garden. Trees flash by as the creature leaves the manor behind, rushing deeper into the woods. You remain helpless in its grasp, until it comes to an abrupt stop.
+<br><br>
+
+You glimpse a stone altar in front of you, which it places you upon with surprising gentleness. Then it turns and vanishes in a thicket.
+<br><br>
+
+You lie still for a moment. Nothing happens. The stone is shaped like a large disk. Ivy snakes across its surface. You crawl to the edge, and drop to the grass below. The stone disk is held aloft by a single stout leg. It looks like an altar.
+<br><br>
+
+<<link [[Next|Manor Sleep Abduction 4]]>><</link>>
+<br>
+
+
+:: Manor Sleep Abduction 4
+<<effects>>
+
+Kylar arrives, <<his>> clothes torn and pierced by twigs. <<He>> kneels in relief, and seizes your thighs. "I-I," <<he>> stammers. "I'm sorry! They've never done something l-like that before." <<Hes>> crying.
+<br><br>
+
+<<link [[Reassure|Manor Sleep Abduction Reassure]]>><<npcincr Kylar love 1>><</link>><<glove>>
+<br>
+<<link [[Get angry|Manor Sleep Abduction Angry]]>><<npcincr Kylar love -3>><</link>><<lllove>>
+<br>
+<<link [[Remain silent|Manor Sleep Abduction Silent]]>><<npcincr Kylar love -1>><</link>><<llove>>
+<br>
+
+
+:: Manor Sleep Abduction Reassure
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"D-don't cry," you say, stroking <<his>> hair. "I'm safe."
+<<elseif $speech_attitude is "bratty">>
+	"You worry too much," you say, stroking <<his>> hair.
+<<else>>
+	"Don't worry," you say, stroking <<his>> hair. "I'm safe."
+<</if>>
+<br><br>
+
+Kylar looks up at you, and nods. You help <<him>> to <<his>> feet. "You can't sleep there anymore," <<he>> says. "It's not safe. B-but you can still visit! Pl-please don't stop visiting."
+<br><br>
+
+<<link [[Next|Manor Sleep Abduction 5]]>><</link>>
+<br>
+
+:: Manor Sleep Abduction Angry
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"St-stop crying," you say. "You're making it worse."
+<<elseif $speech_attitude is "bratty">>
+	"You put me in danger," you say. "Now you're begging for comfort?"
+<<else>>
+	"I could have been hurt!" you say.
+<</if>>
+<br><br>
+
+Kylar stands and tries to stifle <<his>> tears. "I-I-I'm sorry," <<he>> sobs. "You can't sleep there anymore. It's not safe. B-but you can still visit! Pl-please don't stop visiting."
+<br><br>
+
+<<link [[Next|Manor Sleep Abduction 5]]>><</link>>
+<bR>
+
+:: Manor Sleep Abduction Silent
+<<effects>>
+
+Kylar stands, and tries to stifle <<his>> tears. "I-I'm sorry," <<he>> sobs. "You can't sleep there anymore. It's not safe. B-but you can still visit! Pl-please don't stop visiting."
+<br><br>
+
+<<link [[Next|Manor Sleep Abduction 5]]>><</link>>
+<br>
+
+:: Manor Sleep Abduction 5
+<<effects>>
+
+You walk with Kylar through the forest. Kylar is silent for the journey. <<He>> slips away when you arrive back at the manor. <<Hes>> guilty, and wants to hide from you.
+<br><br>
+
+<<link [[Next|Manor Grounds]]>><<endevent>><</link>>
+<br>
+
+
+:: Manor Kylar Pounce
+<<effects>>
+
+You creep towards Kylar. <<He>> conceals <<his>> face with a sheet, only <<his>> eyes are visible. You launch yourself atop <<him>>, and pin <<him>> to the bed. <<He>> looks ready to faint.
+<<promiscuity1>>
+
+<<link [[Next|Manor Kylar Sex]]>><<set $sexstart to 1>><</link>>
+<br>
+
+:: Manor Kylar Sex
+
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+	<<set $enemytrust += 100>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if _combatend>>
+	<span id="next"><<link [[Next|Manor Kylar Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Manor Kylar Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Manor Kylar Sex Finish
+
+<<set $outside to 0>><<effects>><<run statusCheck("Kylar")>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>><<npcincr Kylar lust -20>><<lllust>>
+	<<He>> lies back, eyes shut in contentment.
+	<<if $orgasmcurrent is 0 and !playerChastity()>>
+		<<if _kylarStatus.includes("Rage")>>
+			After a few seconds, <<he>> backs up until <<hes>> facing your <<genitals>>. "You didn't cum," <<he>> murmurs. "Was I... not good enough?" <<He>> shakes <<his>> head violently. "I'll make up for it. I'll show you."
+		<<else>>
+			After a few seconds, <<he>> backs up until <<hes>> facing your <<genitals>>. "You didn't get to cum," <<he>> murmurs. "That's not fair to you. You're the one that invited me. Here, I'll make it up."
+		<</if>>
+		<br><br>
+		<<kylarFinish>>
+		<<if Time.hour lt 18>>
+			<<He>> closes <<his>> eyes again, and starts to snore.
+		<<else>>
+			<<He>> eventually sits back up and returns to <<his>> computer.
+		<</if>>
+	<<else>>
+		<<if Time.hour lt 18>>
+			<<He>> starts to snore.
+		<<else>>
+			<<He>> eventually sits back up and returns to <<his>> computer.
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<tearful>> you climb off the bed.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyhealth lte 0>>
+	You shove Kylar away from you.
+	<<if Time.hour lt 18>>
+		<<He>> disappears beneath a bundle of covers. You feel <<him>> peering at you through a shadowy gap.
+	<<else>>
+		<<He>> sits up and returns to <<his>> computer, glancing at you warily.
+	<</if>>
+	<br><br>
+	<<tearful>> you climb off the bed.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<<else>>
+	<<if Time.hour lt 18>>
+		<<He>> disappears beneath a bundle of covers. You feel <<him>> peering at you through a shadowy gap.
+	<<else>>
+		<<He>> sits up and returns to <<his>> computer.
+	<</if>>
+	<br><br>
+	<<tearful>> you climb off the bed.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+<</if>>
+
+<<link [[Next|Manor Kylar Room]]>><</link>>
+<br>
+
+:: Manor Kylar Goodnight
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"G-goodnight my love," you whisper.
+<<elseif $speech_attitude is "bratty">>
+	"Night love," you say.
+<<else>>
+	"Goodnight love," you say.
+<</if>>
+<br><br>
+Kylar covers <<himself>> with a sheet. You feel <<his>> eyes staring at you from a shadowy gap.
+<br><br>
+
+<<link [[Next|Manor Kylar Room]]>><<endevent>><</link>>
+<br>
+
+
+:: Manor Garden Trim
+<<effects>>
+
+You use a pair of shears to trim the near-wild hedge growing around the garden.
+<<if $tendingSuccess>>
+	The barbed branches put up a fight, <span class="green">but you're able to tame them.</span>
+	<br><br>
+<<else>>
+	The barbed branches seem to grope for you,
+	<<if $exposed gte 2>>
+		<span class="red">grazing your skin.</span><<gpain>><<pain 4>>
+	<<else>>
+		<span class="red">tearing your clothes.</span>
+		<<set $worn.upper.integrity -= 10>>
+		<<set $worn.lower.integrity -= 10>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 80>>
+	You think you see movement in your periphery, as if an arm were reaching from the hedge and helping you cut the barbs. But when you turn, nothing's there.
+<<elseif $kylar_parents_trust gte 60>>
+	Your heart skips a beat at the sight of pale eyes, half-visible through the branches. Or did you imagine them?
+<<elseif $kylar_parents_trust gte 40>>
+	You catch snippets of a song, half-heard on the wind.
+<<elseif $kylar_parents_trust gte 20>>
+	You think you hear something behind you. It might just be the wind.
+<<else>>
+	You shiver, and see a figure watching from the manor through a window on the second story.<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">The manor is much more tidy than when you arrived. You should visit Kylar in <<nnpc_his "Kylar">> room.</span>
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Garden]]>><</link>>
+<br>
+
+
+:: Manor Lab Clean
+<<effects>>
+
+The equipment is extensive and robust, if a little dated. Kylar uses some of it to make pepper spray, and doesn't do a good job cleaning up. The rest is covered in dust.
+<br><br>
+
+You grab a bottle of rubbing alcohol, and get to work. You start with the exterior of a large beaker.
+<<if currentSkillValue("science") gte random(1, 1000)>>
+	<span class="green">You leave it spotless,</span> and move on to a more complex apparatus.
+<<else>>
+	<span class="red">You almost knock it off the table,</span>
+	<<if $exposed gte 1>>
+		and only just manage to stabilise it in time.<<gstress>><<stress 6>>
+	<<else>>
+		and get a little corrosive fluid on your clothes.
+		<<set $worn.upper.integrity -= 10>>
+		<<set $worn.lower.integrity -= 10>>
+		<<set $worn.under_upper.integrity -= 10>>
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 80>>
+	The lab is much cleaner than when you arrived. This should help Kylar.
+<<elseif $kylar_parents_trust gte 60>>
+	You wipe down the walls. They're caked in a flakey orange substance, a black tar-like substance, and worse.
+<<elseif $kylar_parents_trust gte 40>>
+	You scoop a chemical sludge out of a copper alembic. The alembic itself looks like an antique, but it's too heavy to move.
+<<elseif $kylar_parents_trust gte 20>>
+	You clear some of the paper scattered on the ground, storing the sheets in a cupboard. They detail complex chemical formulae. You're not sure if they're still useful to anyone.
+<<else>>
+	You clear some of the paper scattered on the ground. They're covered in thick blood-red chemical stains. You hope they're chemical stains, at least.<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">The manor is much more tidy than when you arrived. You should visit Kylar in <<nnpc_his "Kylar">> room.</span>
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Lab]]>><</link>>
+<br>
+
+
+:: Manor Kitchen Clean
+<<effects>>
+
+Kylar isn't great at cleaning up after <<nnpc_himself "Kylar">>.
+
+<<if $kylar_parents_trust gte 80>>
+	You clean the wooden floor, though you fear you'll have to live with some of these stains.
+<<elseif $kylar_parents_trust gte 60>>
+	You wipe down the counters with a sponge, removing all sorts of gunk.
+<<elseif $kylar_parents_trust gte 40>>
+	You work on the mountain of unwashed dishes teetering on the counter. At least the taps work.
+<<elseif $kylar_parents_trust gte 20>>
+	You check the cupboards for expired food. There's a lot. You dust the empty shelves.
+<<else>>
+	You clear up some of the rubbish scattered across the floor, and march it outside in several bin bags. You startle a mouse that made its home among the litter, and it startles you in turn.<<gstress>><<stress 6>>
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">The manor is much more tidy than when you arrived. You should visit Kylar in <<nnpc_his "Kylar">> room.</span>
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Kitchen]]>><</link>>
+<br>
+
+
+:: Manor Parents Room Soothe
+<<effects>>
+
+You're not sure if one, or both, are beneath the bed, but you sit atop it and talk about yourself. You're their
+<<if $NPCName[$NPCNameList.indexOf("Kylar")].pronoun is "m">>
+	son's
+<<else>>
+	daughter's
+<</if>>
+<<girlfriend>>, after all. They should get to know you.
+<br><br>
+<<if $kylar_parents_trust gte 80>>
+	A figure rises from beneath the bed, and a gaunt face greets you. It extends a handful of silver nails towards you, and strokes your skin. You don't dare move until it retreats into the dark.
+<<elseif $kylar_parents_trust gte 60>>
+	A hand extends from beneath the bed as you talk, and rests on the sheet beside you. You touch the cold silver, and colder flesh, before it withdraws.
+<<elseif $kylar_parents_trust gte 40>>
+	A head rises from beneath the bed. Pale eyes observe you a moment, before it disappears once more.
+<<elseif $kylar_parents_trust gte 20>>
+	There's no response, except a dismissive hiss.
+<<else>>
+	There's no response.
+<</if>>
+<br><br>
+
+<<if $kylar_parents_trust gte 100>>
+	<span class="green">The manor is much more tidy than when you arrived. You should visit Kylar in <<nnpc_his "Kylar">> room.</span>
+	<br><br>
+<</if>>
+
+<<link [[Next|Manor Parents Room]]>><</link>>
+<br>
+
+:: Manor Kylar Invite
+<<effects>>
+
+<<if $phase is 1>>
+	You pick Kylar up, making <<him>> squeal, and carry <<him>> over to the bed. <<He>> clings to you on the way over, rubbing <<his>> face into your body. When you arrive at the bed, you lower yourself and Kylar onto it.
+<<else>>
+	You gently tug Kylar away from the chair, and <<he>> walks over to the bed with you. <<He>> flops onto it and gazes up at you with needy eyes.
+<</if>>
+<br><br>
+
+<<link [[Next|Manor Kylar Sex]]>><<set $sexstart to 1>><</link>>
+
+:: Kylar Walk Manor
+<<effects>><<location "kylarmanor">>
+
+<<if $speech_attitude is "bratty">>
+	"Not without me, you're not," you say as you grab Kylar's arm. "Don't want you getting lost."
+<<elseif $speech_attitude is "meek">>
+	"Is it okay if I come with you?" You hold out your arm to Kylar, and <<he>> wraps <<hers>> around yours.
+<<else>>
+	"I'm coming with you," you say, taking Kylar's arm.
+<</if>>
+You walk to the manor together. Kylar gives you a hug before sitting at <<his>> computer.
+<br><br>
+
+<<kylaroptions>>

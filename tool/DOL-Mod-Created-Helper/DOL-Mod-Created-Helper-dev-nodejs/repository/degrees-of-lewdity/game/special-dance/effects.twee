@@ -1,0 +1,1489 @@
+:: Widgets Dance Effects [widget]
+
+<<widget "danceeffects">>
+	<<person_dance>>
+	<<set $danceevent to 0>>
+	<<set $audiencemod -= 1>><<set $audiencemod to Math.clamp($audiencemod, 1, 10)>>
+	<<set _danceaction to $danceaction>>
+	<<if $danceaction is "vippush">>
+		<<set $danceaction to 0>><<set $audienceexcitement -= 5>>
+		You push and twist away from the <<person>>. "I'm not refused often," <<he>> warns.
+	<</if>>
+
+	<<if $danceaction is "vipallow">>
+		<<set $danceaction to 0>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>>
+		The <<person>> pulls you to a sitting position and wraps an arm around your waist.
+		<<if $worn.under_lower.type.includes("naked") and ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+			<<His>> hand crawls beneath your skirt, where it finds your exposed <<genitals>>.
+			<<if playerChastity("hidden")>>
+				<<He>> grasps it, and tugs, to no avail. The pressure on your <<genitals 1>> makes you squirm. "You're such a tease," <<he>> says. "All these people slavering over you, but they haven't a chance." <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you. <<He>> leans close and whispers. "Maybe I should lift this cute skirt of yours. Then everyone will see."
+			<<elseif $player.penisExist and $player.vaginaExist>>
+				<<He>> pulls <<his>> hand away in surprise, but soon recovers, reaching in again. The light touch is enough to make you squirm. "You have a special secret indeed," <<he>> teases. <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you. <<He>> leans close and whispers. "Maybe I should lift this cute skirt of yours. Then everyone will see."
+				<<ggarousal>><<arousal 1200 "genitals">>
+				<br><br>
+			<<else>>
+				<<He>> brushes <<his>> fingers against it, and the light touch is enough to make you squirm. "Sensitive, aren't you?" <<he>> teases. <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you. <<He>> leans close and whispers. "Maybe I should lift this cute skirt of yours. Then everyone will see."
+				<<ggarousal>><<arousal 1200 "genitals">>
+				<br><br>
+			<</if>>
+		<<elseif $worn.under_lower.type.includes("naked") and $worn.lower.type.includes("naked")>>
+			<<His>> hand crawls over your exposed <<genitals>>. <<He>> brushes <<his>> fingers against it, and the light touch is enough to make you squirm. "Sensitive, aren't you?" <<he>> teases. <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you.
+			<<ggarousal>><<arousal 1200 "genitals">>
+			<br><br>
+		<<elseif !$worn.upper.type.includes("naked")>>
+			<<His>> hand crawls over your chest, and <<if $player.perceived_breastsize gte 2>>cups your <<breasts>>.<<else>>rests above your <<breasts>>.<</if>> <<He>> brushes <<his>> fingers against your buds, enough to make you squirm even through your $worn.upper.name. <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you. "Maybe I should <<pullup>> this top of yours." <<He>> whispers. "Let everyone see."
+			<<garousal>><<arousal 600 "breasts">>
+			<br><br>
+		<<else>>
+			<<His>> hand crawls over your bare chest, and <<if $player.breastsize gte 2>>cups your <<breasts>>.<<else>>rests above your <<breasts>>.<</if>> <<He>> brushes <<his>> fingers against your buds, enough to make you squirm. <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you.
+			<<garousal>><<arousal 600 "breasts">>
+			<br><br>
+		<</if>>
+		<<if $arousal gte $arousalmax>>
+			<<orgasm>>
+			<<if $worn.under_lower.type.includes("naked") and ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked"))) and $player.penisExist>>
+				<<if $femaleclimax is 1>>
+					Your lack of cum causes several to laugh at you. The <<person>> grins as <<he>> releases you. <<tearful>> you clamber to your feet.
+					<<set $audiencearousal += 15>><<set $audienceexcitement += 15>><<set $audiencemod += 4>><<set $dancespeech to "nocum">>
+				<<else>>
+					Your cum arcs towards the audience. A <<person>> drops to <<his>> knees and tries to catch it with <<his>> mouth. The <<person>> laughs as <<he>> releases you. <<tearful>> you clamber to your feet.
+					<<set $audiencearousal += 15>><<set $audienceexcitement += 15>><<set $audiencemod += 4>><<set $dancespeech to "cum">>
+				<</if>>
+			<<else>>
+				The audience cheers. "Cumming in front of all these people," the <<person>> tuts as <<he>> releases you. <<tearful>> you clamber to your feet.
+				<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<set $dancespeech to "cum">>
+			<</if>>
+		<<else>>
+			The audience grow more excited. They suggest the <<person>> perform all sorts of lewd acts, but <<he>> releases you after a few moments. <<tearful>> you clamber to your feet.
+			<<set $audiencemod += 1>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "darrylreassure">>
+		<<set $danceaction to 0>>
+		You smile at Darryl. <<nnpc_He Darryl>> nods in acknowledgement, and moves to the next stage.
+	<</if>>
+
+	<<if $danceaction is "briarwink">>
+		<<set $danceaction to 0>>
+		You wink at Briar.
+		<<if $NPCName[$NPCNameList.indexOf("Briar")].love gte 40>>
+			<<nnpc_He Briar>> winks back, and licks the patron's ear.
+		<<elseif $NPCName[$NPCNameList.indexOf("Briar")].love gte 20>>
+			<<nnpc_He Briar>> winks back and adopts a seductive smile, still whispering in the patron's ear.
+		<<elseif $NPCName[$NPCNameList.indexOf("Briar")].love gte 1>>
+			<<nnpc_He Briar>> winks back, still whispering in the patron's ear.
+		<<else>>
+			<<nnpc_He Briar>> looks at the stage, reminding you to stay focused on your job.
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "briarseduce">>
+		<<if $NPCName[$NPCNameList.indexOf("Briar")].love gte 40>>
+			<<set $seductiondifficulty to 10000>>
+			<<seductioncheck>>
+			<br><br>
+			<<if $seductionskill lt 1000>>
+				<span class="gold">You feel more confident in your powers of seduction.</span>
+				<br><br>
+			<</if>>
+			<<seductionskilluse>>
+
+			You drop to your knees and thrust your arm towards Briar, beckoning <<nnpc_him Briar>> to join you.
+			<<promiscuity3>>
+
+			<<if $seductionrating gte $seductionrequired>>
+				<<set $danceevent to "briarseduce">>
+				Briar hesitates a moment, <span class="green">then strides to the stage.</span> A cheer erupts from the audience, attracting more attention, as <<nnpc_he Briar>> climbs atop it, and atop you. "Forward of you, darling," <<nnpc_he Briar>> says. "Let's give them a real show."
+			<<else>>
+				<<set $danceaction to 0>>
+				Briar hesitates. "Foward of you, darling!" <<nnpc_he Briar>> shouts above the din. "But my performing days are behind me." <<nnpc_He Briar>> walks towards another stage, bobbing with the music.
+			<</if>>
+		<<else>>
+			<<set $danceaction to 0>>
+			Briar laughs loud enough that you can hear it above the din, before walking towards the next stage, bobbing with the music. <span class="blue">Briar must be pretty inured to lewdity. You'll need to endear yourself to <<nnpc_him Briar>> before your charms have a chance of working.</span>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "darrylpull">>
+		<<set $danceaction to 0>>
+		You step to the edge of the stage, and lean down. A frown of concern crosses Darryl's face, until you grasp <<nnpc_his Darryl>> arm and pull <<nnpc_him Darryl>> up.
+		<br><br>
+		<<if $audience gte 2>>
+			The audience cheers.
+		<</if>>
+		<<if $NPCName[$NPCNameList.indexOf("Darryl")].love gte 40>>
+			<<set $audiencemod += 3>>
+			Darryl takes the sudden limelight in <<nnpc_his Darryl>> stride, and <span class="lewd">removes <<nnpc_his Darryl>> <<print $NPCList[0].clothes.upper.name>></span> as <<nnpc_he Darryl>> dances alongside you. <<nnpc_He Darryl>> jumps from the stage and covers after a moment, smiling and sporting a furious blush. "Thank you," <<nnpc_he Darryl>> says. "It's fun to let my hair down now and then."
+		<<elseif $NPCName[$NPCNameList.indexOf("Darryl")].love gte 20>>
+			<<set $audiencemod += 2>>
+			Darryl looks surprised and flustered to be the centre of attention, but <<nnpc_he Darryl>> dances alongside you all the same. <<nnpc_His Darryl>> movements are careful and stiff, unpractised. <<nnpc_He Darryl>> flashes the room a smile, and climbs from the stage. "I'm glad you're doing okay," <<nnpc_he Darryl>> says.
+		<<elseif $NPCName[$NPCNameList.indexOf("Darryl")].love gte 1>>
+			<<set $audiencemod += 1>>
+			Darryl looks surprised and flustered to be the centre of attention, but <<nnpc_he Darryl>> flashes the room a shy smile before climbing from the stage. "I'm glad you're doing okay," <<nnpc_he Darryl>> says.
+		<<else>>
+			Darryl looks flustered, and carefully climbs from the stage. "Sorry," <<nnpc_he Darryl>> says. "I-I have others to check up on."
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "stripperhelp">>
+		<<set $danceaction to 0>><<set $audiencearousal -= 10>><<set $audienceexcitement -= 1>>
+		You stop your dance, fold your arms and stare at the <<person>>. It disrupts the flow of your performance, but <<he>> gets the hint and stops bothering the other dancer. The dancer gives you a grateful smile.
+		<<trauma -6>><<ltrauma>><<famegood 1>>
+	<</if>>
+
+	<<if $danceaction is "stripperignore">>
+		<<set $danceaction to 0>>
+		You turn away from the other dancer.
+	<</if>>
+
+	<<if $danceaction is "noteapproach">>
+		<<set $danceaction to 0>>
+		<<set $tipmod to 0.6>><<tipset>>
+		The <<person>> makes a twirling motion with <<his>> finger. You turn around.
+		<<if $rng gte 91>>
+			<<if $audience gte 6>>
+				Cheered on by the crowd, <<he>>
+			<<else>>
+				<<He>>
+			<</if>>
+			reaches up and seizes you by the thighs. <<He>> leans in and kisses your <<bottom>> as
+			<<if !$worn.over_lower.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+				<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+					<<if playerChastity() and $worn.under_lower.type.includes("naked")>>
+						<<he>> reaches beneath your skirt and pushes the note beneath your <<print $worn.genitals.name>>.
+					<<elseif $worn.under_lower.type.includes("naked")>>
+						<<he>> reaches beneath your skirt and pushes the note between your bare cheeks.
+					<<else>>
+						<<he>> reaches beneath your skirt and pushes the note into your $worn.under_lower.name.
+					<</if>>
+				<<else>>
+					<<he>> pushes the note into your <<if !$worn.over_lower.type.includes("naked")>>$worn.over_lower.name<<else>>$worn.lower.name<</if>>.
+				<</if>>
+			<<else>>
+				<<if playerChastity() and $worn.under_lower.type.includes("naked")>>
+					<<he>> pushes the note beneath your <<print $worn.genitals.name>>.
+				<<elseif $worn.under_lower.type.includes("naked")>>
+					<<he>> pushes the note between your bare cheeks.
+				<<else>>
+					<<he>> pushes the note into your $worn.under_lower.name.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if !$worn.over_lower.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+				<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+					<<if playerChastity() and $worn.under_lower.type.includes("naked")>>
+						<<He>> reaches beneath your skirt and pushes the note beneath your <<print $worn.genitals.name>>.
+					<<elseif $worn.under_lower.type.includes("naked")>>
+						<<He>> reaches beneath your skirt and pushes the note between your bare cheeks.
+					<<else>>
+						<<He>> reaches beneath your skirt and pushes the note into your $worn.under_lower.name.
+					<</if>>
+				<<else>>
+					<<He>> pushes the note into your <<if !$worn.over_lower.type.includes("naked")>>$worn.over_lower.name<<else>>$worn.lower.name<</if>>.
+				<</if>>
+			<<else>>
+				<<if playerChastity() and $worn.under_lower.type.includes("naked")>>
+					<<He>> pushes the note beneath your <<print $worn.genitals.name>>.
+				<<elseif $worn.under_lower.type.includes("naked")>>
+					<<He>> pushes the note between your bare cheeks.
+				<<else>>
+					<<He>> pushes the note into your $worn.under_lower.name.
+				<</if>>
+			<</if>>
+		<</if>>
+		It attracts attention, and others throw money onto the stage.
+		<<tipreceive>><<garousal>><<arousal 600>>
+	<</if>>
+
+	<<if $danceaction is "noteignore">>
+		<<set $danceaction to 0>>
+		You ignore the <<person>> and <<his>> banknote.
+	<</if>>
+
+	<<if $danceaction is "cop">>
+		<<set $danceaction to 0>>
+		<<arousal 300 "breasts">><<set $dancespeech to "cop">>
+		You let the <<person>> feel you up.
+		<<if $audience gte 6>>
+			Cheered on by the crowd, <<he>>
+		<<else>>
+			<<He>>
+		<</if>>
+		reaches round and grips both your nipples between thumb and forefinger while massaging your <<breasts>> with <<his>> remaining digits. They pinch and fondle for a few moments, before running their fingers down your tummy. You tense in anticipation as their hands draw closer to your <<genitals>>. However, they release you before things become too lewd, giving your <<bottom>> a swift spank as they do.
+	<</if>>
+
+	<<if $danceaction is "rape">>
+		<<set $danceaction to 0>>
+		<<arousal 300 "breasts">><<set $danceevent to "rape">>
+		You let the <<person>> feel you up.
+		<<if $audience gte 6>>
+			Cheered on by the crowd, <<he>>
+		<<else>>
+			<<He>>
+		<</if>>
+		reaches round and grips both your nipples between thumb and forefinger while massaging your <<breasts>> with <<his>> remaining digits. They pinch and fondle for a few moments, before running their fingers down your tummy. Suddenly, they snatch you from the stage!
+	<</if>>
+
+	<<if $danceaction is "finish">>
+		<<set $danceevent to "finish">>
+		<<set $danceaction to 0>>
+		You decide it's best to quit before the audience becomes too brave. They're disappointed, but leave you unmolested.
+		<br><br>
+		<<clotheson>>
+	<</if>>
+
+	<<if $danceaction is "skirtstruggle">>
+		<<set $danceaction to 0>>
+		You try to hold up your $worn.under_lower.name with one hand while holding down the hem of your skirt with the other.
+		<<if !$worn.lower.type.includes("dance")>>
+			You twist the flexible material free, regaining control with <span class="teal">no damage done,</span> and your dignity mostly intact.
+		<<else>>
+			After a brief struggle, you manage to regain control of your clothes, dignity mostly intact.
+			<<set $worn.under_lower.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.under_lower.integrity lte 0>>
+			Your $worn.under_lower.name <<underlowerplural>> damaged by the struggle however. The ruined fabric soon gives way and the tatters fall to the ground between your legs. A breeze caresses your <<genitals>>, covered now only by your $worn.lower.name.
+			<<set $audiencemod += 2>><<arousal 100>><<underruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+			<<if $audience gte 3>>
+				The audience cheer as they realise your predicament.
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "skirtsurrender">>
+		<<set $danceaction to 0>>
+		You hold down the hem of your skirt to give yourself some protection as your $worn.under_lower.name <<underlowerplural>> torn from your thighs. Now bare beneath your $worn.lower.name you move away from further prying, conscious of the fact that your <<genitals_are>> dangerously close to being displayed for all to see.
+		<<set $audiencemod += 2>><<arousal 200>><<underlowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+	<</if>>
+
+	<<if $danceaction is "overupperstruggle">>
+		<<set $danceaction to 0>>
+		You struggle to prevent your $worn.over_upper.name being ripped clean from your body.
+		<<if !$worn.over_upper.type.includes("dance")>>
+			You twist the flexible material free, regaining control with <span class="teal">no damage done,</span> and your dignity mostly intact.
+		<<else>>
+			After a brief tussle, you manage to regain control of your clothes, dignity mostly intact.
+			<<set $worn.over_upper.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.over_upper.integrity lte 0>>
+			Your $worn.over_upper.name <<overupperplural>> damaged by the struggle however.
+			<<overupperruined>>
+			The ruined fabric soon falls apart, leaving your <<exposedupper>> exposed for the world to leer at.
+			<<arousal 100>><<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "overuppersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.over_upper.name <<overupperplural>> torn from your body, leaving your <<overupperruined>><<exposedupper>> exposed for the world to see.
+		<<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<arousal 200>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+	<</if>>
+
+	<<if $danceaction is "upperstruggle">>
+		<<set $danceaction to 0>>
+		You struggle to prevent your $worn.upper.name being ripped clean from your body.
+		<<if !$worn.upper.type.includes("dance")>>
+			You twist the flexible material free, regaining control with <span class="teal">no damage done,</span> and your dignity mostly intact.
+		<<else>>
+			After a brief tussle, you manage to regain control of your clothes, dignity mostly intact.
+			<<set $worn.upper.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.upper.integrity lte 0>>
+			Your $worn.upper.name <<upperplural>> damaged by the struggle however. The ruined fabric soon falls apart, leaving your <<breasts>> exposed for the world to leer at.
+			<<arousal 100>><<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<upperruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "uppersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.upper.name <<upperplural>> torn from your body, leaving your <<upperruined>><<exposedupper>> exposed for the world to see.
+		<<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<arousal 200>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+	<</if>>
+
+	<<if $danceaction is "overlowerstruggle">>
+		<<set $danceaction to 0>>
+		You struggle to keep hold of your $worn.over_lower.name and
+		<<if !$worn.over_lower.type.includes("dance")>>
+			regain control with <span class="teal">no damage done,</span> and your dignity mostly intact.
+		<<else>>
+			manage to prevent it from being ripped from your body.
+			<<set $worn.over_lower.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.over_lower.integrity lte 0>>
+			However, the struggle was fierce and you soon find your $worn.over_lower.name falling from your body in tatters.
+			<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<overlowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+			<<if $worn.lower.name isnot "naked">>
+				Your breath catches in your throat as your $worn.lower.name <<lowerplural>> revealed for all to see.
+				<<set $audiencearousal += 3>><<set $audienceexcitement += 3>><<set $audiencemod += 1>><<arousal 100>>
+			<<elseif $worn.under_lower.name is "naked">>
+				Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+				<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
+				<<if $audience gte 2>>
+					<<dance_crossdress_reveal>>
+				<</if>>
+			<<else>>
+				Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "overlowersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.over_lower.name <<lowerplural>> ripped from your body.
+		<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<overlowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+		<<if $worn.lower.name is "naked">>
+			Your breath catches in your throat as your $worn.lower.name <<lowerplural>> revealed for all to see.
+			<<set $audiencearousal += 3>><<set $audienceexcitement += 3>><<set $audiencemod += 1>><<arousal 100>>
+		<<elseif $worn.under_lower.name is "naked">>
+			Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
+			<<if $audience gte 2>>
+				<<dance_crossdress_reveal>>
+			<</if>>
+		<<else>>
+			Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "lowerstruggle">>
+		<<set $danceaction to 0>>
+		You struggle to keep hold of your $worn.lower.name and
+		<<if !$worn.over_lower.type.includes("dance")>>
+			regain control with <span class="teal">no damage done,</span> and your dignity mostly intact.
+		<<else>>
+			manage to prevent it from being ripped from your body.
+			<<set $worn.lower.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.lower.integrity lte 0>>
+			However, the struggle was fierce and you soon find your $worn.lower.name falling from your body in tatters.
+			<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<lowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+			<<if $worn.under_lower.name is "naked">>
+				Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+				<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
+				<<if $audience gte 2>>
+					<<dance_crossdress_reveal>>
+				<</if>>
+			<<else>>
+				Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "lowersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.lower.name <<lowerplural>> ripped from your body.
+		<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<lowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+		<<if $worn.under_lower.name is "naked">>
+			Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
+			<<if $audience gte 2>>
+				<<dance_crossdress_reveal>>
+			<</if>>
+		<<else>>
+			Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "understruggle">>
+		<<set $danceaction to 0>>
+		<<if !$worn.under_lower.type.includes("dance")>>
+			You fight desperately to keep your $worn.under_lower.name held up. <span class="teal">The flexible material is able to withstand such a struggle.</span>
+		<<else>>
+			You fight desperately to keep your $worn.under_lower.name held up.
+			<<set $worn.under_lower.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.under_lower.integrity lte 0>>
+			You are starting to win the tug of war when the fabric tears, throwing you onto the ground minus your underwear. Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 4>><<arousal 100>><<underlowerruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
+			<<if $audience gte 2>>
+				<<dance_crossdress_reveal>>
+			<</if>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "undersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.under_lower.name <<underlowerplural>> torn from you, freeing your <<genitals>> for the world to see. Your heart pounds at the humiliation.
+		<<set $audiencearousal += 10>><<set $audienceexcitement += 10>><<set $audiencemod += 4>><<arousal 300>><<underlowerruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
+		<<if $audience gte 2>>
+			<<dance_crossdress_reveal>>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "underupperstruggle">>
+		<<set $danceaction to 0>>
+		<<if !$worn.under_upper.type.includes("dance")>>
+			You fight desperately to keep your $worn.under_upper.name held up. <span class="teal">The flexible material is able to withstand such a struggle.</span>
+		<<else>>
+			You fight desperately to keep your $worn.under_upper.name held up.
+			<<set $worn.under_upper.integrity -= 10>>
+		<</if>>
+		<<arousal 100>><<set $dancespeech to "struggle">>
+		<<if $worn.under_upper.integrity lte 0>>
+			You are starting to win the tug of war when the fabric tears, throwing you onto the ground minus your underwear. Your breath catches in your throat as your <<breasts>> revealed for all to see.
+			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 4>><<arousal 100>><<underupperruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
+		<</if>>
+	<</if>>
+
+	<<if $danceaction is "underuppersurrender">>
+		<<set $danceaction to 0>>
+		Your $worn.under_upper.name <<underupperplural>> torn from you, freeing your <<breasts>> for the world to see. Your heart pounds at the humiliation.
+		<<set $audiencearousal += 10>><<set $audienceexcitement += 10>><<set $audiencemod += 4>><<arousal 300>><<underupperruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
+	<</if>>
+
+	<<if $danceaction is "robinignore">>
+		You avert your gaze and pretend not to notice Robin's presence. <<nnpc_He "Robin">> continues to call out your name, sounding increasingly desperate.
+		<br>
+		In a last ditch effort, <<nnpc_he "Robin">> tries to shove <<nnpc_his "Robin">> way through the crowd, but <<nnpc_he "Robin">> only ends up getting violently jostled about. <<nnpc_He "Robin">> gives you a dejected look before sulking away.
+	<</if>>
+
+	<<if ($danceaction is "cool" or $danceaction is "sexual" or $danceaction is "sophisticated" or $danceaction is "seductive") and $arousal gte $arousalmax>>
+		<<orgasmstage>>
+	<<elseif $danceaction is "cool">>
+
+		<<set $danceaction to 0>><<set $danceactiondefault to "cool">>
+		<<stress -2>><<tiredness 1>><<dancestat>><<set $dancespeech to "dance">>
+		<<if $audience gte 1>>
+			<<set $audiencearousal += $allure / 2000 + currentSkillValue('danceskill') / 100>>
+			<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
+		<</if>>
+		<<if currentSkillValue('danceskill') lte 200>>
+			Not knowing what else to do, you just bob along rhythmically.
+		<<elseif currentSkillValue('danceskill') lte 400>>
+			You try to mimic a fashionable dance you've seen on the internet. You end up feeling and looking a little silly.
+		<<elseif currentSkillValue('danceskill') lte 600>>
+			You decide to keep things simple, and focus on making sure you dance with competence.
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			You try to mimic a fashionable dance you've seen, and pull it off.
+		<<elseif currentSkillValue('danceskill') lte 999>>
+			You dance energetically yet smoothly, each move flowing naturally into the next.
+		<<else>>
+			You dominate the area with your moves.
+		<</if>>
+		<br><br>
+		<<danceskilluse>><<pass 1>>
+		<<set $dancephysique += 1>>
+		<<if $dancephysique gte 10>>
+			<<set $dancephysique -= 10>>
+			<<physique>>
+		<</if>>
+	<<elseif $danceaction is "sophisticated">>
+		<<set $danceaction to 0>><<set $danceactiondefault to "sophisticated">>
+		<<stress -2>><<tiredness 1>><<dancestat>><<set $dancespeech to "dance">>
+		<<if $audience gte 1>>
+			<<set $audiencearousal += $allure / 3000 + currentSkillValue('danceskill') / 100>>
+			<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
+		<</if>>
+		<<if currentSkillValue('danceskill') lte 200>>
+			You sway around in what you hope is a refined manner.
+		<<elseif currentSkillValue('danceskill') lte 400>>
+			You assume a refined posture, then sway around in what you hope is a refined manner.
+		<<elseif currentSkillValue('danceskill') lte 600>>
+			You focus on maintaining balance as you twirl and glide.
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			Without sacrificing poise, you move with speed and confidence.
+		<<elseif currentSkillValue('danceskill') lte 999>>
+			You move with a serenity that conceals the confidence and focus of your mind.
+		<<else>>
+			You are the very model of dignity as you pirouette.
+		<</if>>
+		<br><br>
+		<<danceskilluse>><<pass 1>>
+		<<set $dancephysique += 1>>
+		<<if $dancephysique gte 10>>
+			<<set $dancephysique -= 10>>
+			<<physique>>
+		<</if>>
+	<<elseif $danceaction is "seductive">>
+		<<set $danceaction to 0>><<set $danceactiondefault to "seductive">>
+		<<stress -2>><<tiredness 1>><<exhibitionism1>><<dancestat>><<set $dancespeech to "dance">>
+		<<if $audience gte 1>>
+			<<set $audiencearousal += $allure / 1000 + currentSkillValue('danceskill') / 100>>
+			<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
+		<</if>>
+		<<if currentSkillValue('danceskill') lte 200>>
+			You try to dance seductively, but look more silly than sexy.
+		<<elseif currentSkillValue('danceskill') lte 400>>
+			You dance slowly and daintily, trying to emphasise your beauty.
+		<<elseif currentSkillValue('danceskill') lte 600>>
+			Your dance moves emphasise the beauty of your body.
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			You dance smoothly yet suggestively.
+		<<elseif currentSkillValue('danceskill') lte 999>>
+			You dance with grace and eroticism, showcasing your body.
+		<<else>>
+			Your beguiling movements give little away yet promise the world.
+		<</if>>
+		<br><br>
+		<<danceskilluse>><<pass 1>>
+		<<set $dancephysique += 1>>
+		<<if $dancephysique gte 10>>
+			<<set $dancephysique -= 10>>
+			<<physique>>
+		<</if>>
+	<<elseif $danceaction is "sexual">>
+		<<set $danceaction to 0>><<set $danceactiondefault to "sexual">>
+		<<stress -2>><<tiredness 1>><<exhibitionism2>><<dancestat>><<set $dancespeech to "dance">>
+		<<if $audience gte 1>>
+			<<set $audiencearousal += $allure / 500 + currentSkillValue('danceskill') / 100>>
+			<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
+		<</if>>
+		<<if currentSkillValue('danceskill') lte 200>>
+			You try to dance provocatively. Due to your lack of skill, this amounts to little more than waving your buttocks around.
+		<<elseif currentSkillValue('danceskill') lte 400>>
+			You shake your assets, giving a show to anyone who looks.
+		<<elseif currentSkillValue('danceskill') lte 600>>
+			You dance flirtatiously, your movements emphasising your lewder parts.
+		<<elseif currentSkillValue('danceskill') lte 800>>
+			You dance skilfully and provocatively, your movements emphasising your lewder parts.
+		<<elseif currentSkillValue('danceskill') lte 999>>
+			You dance skilfully and provocatively, your entire body advertising a raw sexual energy.
+		<<else>>
+			Your moves radiate a primal and intoxicating sexuality.
+		<</if>>
+		<<danceskilluse>>
+		<<pass 1>>
+		<<set $dancephysique += 1>>
+		<<if $dancephysique gte 10>>
+			<<set $dancephysique -= 10>>
+			<<physique>>
+		<</if>>
+	<<elseif $danceaction is "orgasm">>
+			<<orgasmstage>>
+	<<elseif $danceaction is "groom">>
+		<<set $audiencearousal += 4>><<set $audienceexcitement += 4>><<set $audiencemod += 1>><<set $danceactiondefault to "groom">>
+		<<set _bl to []>><<set _nectar to []>>
+		<<for _bodypart range setup.bodyliquid.bodyparts>>
+			<<if !["vagina","anus","mouth"].includes(_bodypart)>>
+				<<if setup.bodyliquid.combined(_bodypart) gte 1>>
+					<<set _bl.pushUnique(_bodypart)>>
+					<<if $player.bodyliquid[_bodypart].nectar gte 1>>
+						<<set _nectar.pushUnique(_bodypart)>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</for>>
+		<<if $backgroundTraits.includes("plantlover") and _nectar.length gte 1>>
+			<<set _part to _nectar.random()>>
+			<<set _nectarPriority to true>>
+		<<else>>
+			<<set _part to _bl.random()>>
+		<</if>>
+		<<if _nectarPriority>>
+			<<set _liq to "nectar">>
+		<<else>>
+			<<if $player.bodyliquid[_part].nectar gte 1 and (random(1,3) is 1 or $player.bodyliquid[_part].goo is 0 and $player.bodyliquid[_part].semen is 0)>>
+				<<set _liq to "nectar">>
+			<<elseif $player.bodyliquid[_part].goo gte 1 and random(1,3) is 2 or ($player.bodyliquid[_part].semen is 0 and $player.bodyliquid[_part].nectar is 0)>>
+				<<set _liq to "slime">>
+			<<else>>
+				<<set _liq to "semen">>
+			<</if>>
+		<</if>>
+		You groom yourself,
+		<<switch _part>>
+			<<case "leftarm">>
+				lapping _liq off your left arm.
+			<<case "rightarm">>
+				lapping _liq off your right arm.
+			<<case "bottom">>
+				scooping up the _liq on your <<bottom>> and lapping it off your hands.
+			<<case "vaginaoutside">>
+				scooping up the _liq on your <<pussy>> and lapping it off your hands.
+			<<case "penis">>
+				scooping up the _liq on your <<penis>> and lapping it off your hands.
+			<<case "thigh">>
+				scooping up the _liq on your thighs and lapping it off your hands.
+			<<default>>
+				scooping up the _liq on your _part and lapping it off your hands.
+		<</switch>>
+		<<if _liq is "nectar">><<nectarfed 4>><</if>>
+		<<bodyliquid _part _liq -1>><<goocount>>
+		<<if $liquidoutsidecount lt 1>>
+			<<set $danceactiondefault to "cool">>
+		<</if>>
+		<<pass 1>>
+	<<elseif $danceaction is "drink">>
+		<<if $danceSuccess>>
+			You take the drink, <span class="green">weaving the motion into the dance,</span> and down it. The audience cheer.
+			<<if random(1, 10) is 10>>
+				<span class="pink">You feel warm.</span><<drugs 60>>
+			<<else>>
+				You feel dizzier.
+			<</if>>
+			<<set $audiencemod += 4>><<alcohol 60>>
+		<<else>>
+			You try to take the drink without breaking the flow of the dance, <span class="red">but knock the glass from the <<persons>> hand instead</span> spilling wine over <<him>>. The audience seem amused.<<set $audiencemod += 1>>
+		<</if>>
+	<<elseif $danceaction is "drink_careful">>
+		<<set $danceaction to 0>>
+		You slow your moves as you safely take the drink. You feel dizzier, but the audience are pleased.<<alcohol 60>><<set $audiencemod += 2>>
+	<<elseif $danceaction is "drink_ignore">>
+		<<set $danceaction to 0>>
+		You ignore the drink, and continue dancing. The <<person>> looks disappointed, and <<hes>> not alone.<<set $audienceexcitement -= 5>>
+	<<elseif $danceaction is "light_flaunt">>
+		<<set $danceaction to 0>>
+		You strut to the edge of the stage, turn, and bend over with one hand on your shin and your legs a little splayed. You slowly rise, running your hand over your knee and up your thigh as you do. An arm reaches from the dark, but you strut away, leaving it to grope the air.
+		<<dance_job_interest 5>>
+		<<set $audienceexcitement += 5>>
+		<<set $audiencearousal += 5>>
+	<<elseif $danceaction is "light_cover">>
+		<<set $danceaction to 0>>
+		You dance as best you can with your arms covering your body, waiting for the light's hue to change and become safe again.
+		<<set $audiencearousal += 5>>
+	<<elseif $danceaction is "privaterefuse">>
+		You ignore the potential client.
+	<<elseif $danceaction is "corruptionResult">>
+		<<if $corruptionResult is "defy">>
+			<<if $earSlime.growth gte (currentSkillValue('willpower') / 10)>>
+				<span class="red">Fearing the slime's control, you attempt to leave the stage. The slime doesn't allow it.</span>
+				<<set $corruptionDancing to 1>>
+			<<else>>
+				Fearing the slime's control, you decide to leave the stage to give yourself a chance to calm down.
+				<<set $danceevent to "finish">>
+			<</if>>
+			<<elseif $corruptionResult is "obey">>
+				You allow the slime to prevent you from leaving the stage.
+				<<set $corruptionDancing to 1>>
+			<<elseif $corruptionResult is "submit">>
+			You willfully follow the slimes order.
+			<<promiscuity5>>
+			<<set $corruptionDancing to 2>>
+		<</if>>
+		<<unset $corruptionResult>>
+	<</if>>
+	<<dancestripeffects>>
+	<br><br>
+<</widget>>
+
+<<widget "person_dance">>
+	<<if $dance_place gte 0 and $dance_place lte 5 and $dance_place lt $enemyno>>
+		<<personselect $dance_place>>
+	<</if>>
+<</widget>>
+
+<<widget "dance_crossdress_reveal">>
+	<<if $crossdressing is 2>>
+		<<if $rng gte 96>>
+			<span class="red">Your audience recoils in horror at the sight!</span> They pelt you with bottles and shout profanities, but seem no less entertained.
+			<<pain 6>><<stress 6>><<trauma 6>><<set $audiencemod += 3>><<set $dancespeech to "hermangry">>
+		<<elseif $rng gte 85>>
+			<span class="purple">Your audience cheers at the sight,</span> an emboldened lust in their eyes.
+			<<set $audienceexcitement += 20>><<set $audiencearousal += 20>><<set $audiencemod += 3>><<set $dancespeech to "hermaroused">>
+		<<elseif $rng gte 50>>
+			<span class="blue">They recoil in shock at the sight.</span>
+			<<set $audienceexcitement -= 20>><<set $audiencearousal -= 20>><<set $dancespeech to "hermshock">>
+		<<elseif $rng gte 30>>
+			They're taken aback by your <<genitals>>. <<if $audience gte 7>>Someone sighs and walks away.<<set $audience -= 1>><</if>>
+			<<set $dancespeech to "hermdisappointed">>
+		<<else>>
+			Your audience jeers and taunts, pleased at seeing you in such a vulnerable state despite your genitals.
+		<</if>>
+	<<elseif $crossdressing is 1>>
+		<<if $rng gte 96>>
+			<span class="red">Your audience recoils in horror at the sight!</span> They pelt you with bottles and shout profanities, but seem no less entertained.
+			<<pain 6>><<stress 6>><<trauma 6>><<set $audiencemod += 3>><<set $dancespeech to "crossdressangry">>
+		<<elseif $rng gte 85>>
+			<span class="purple">Your audience cheers at the sight,</span> an emboldened lust in their eyes.
+			<<set $audienceexcitement += 20>><<set $audiencearousal += 20>><<set $audiencemod += 3>><<set $dancespeech to "crossdressaroused">>
+		<<elseif $rng gte 50>>
+			<span class="blue">They recoil in shock at the sight.</span>
+			<<set $audienceexcitement -= 20>><<set $audiencearousal -= 20>><<set $dancespeech to "crossdressshock">>
+		<<elseif $rng gte 30>>
+			They're taken aback by your <<genitals>>. <<if $audience gte 7>>Someone sighs and walks away.<<set $audience -= 1>><</if>>
+			<<set $dancespeech to "crossdressdisappointed">>
+		<<else>>
+			Your audience jeers and taunts, pleased at seeing you in such a vulnerable state despite your gender.
+		<</if>>
+	<<else>>
+		Your audience jeers and taunts, pleased at seeing you in such a vulnerable state.
+	<</if>>
+<</widget>>
+
+:: Widgets Dance Speech [widget]
+<<widget "dancespeech">>
+	<<rng>>
+	<<if $audience is 1>>
+		<<person1>><<He>> shouts.
+	<<elseif $audience is 2>>
+		<<if $rng gte 51>>
+		The <<person1>><<person>> shouts.
+		<<else>>
+		The <<person2>><<person>> shouts.
+		<</if>>
+	<<elseif $audience is 3>>
+		<<if $rng gte 71>>
+			The <<person1>><<person>> shouts.
+		<<elseif $rng gte 41>>
+			The <<person2>><<person>> shouts.
+		<<else>>
+			The <<person3>><<person>> shouts.
+		<</if>>
+	<<elseif $audience gte 4>>
+		<<if $rng gte 71>>
+			A <<person1>><<person>> shouts.
+		<<elseif $rng gte 36>>
+			A <<person2>><<person>> shouts.
+		<<else>>
+			A <<person3>><<person>> shouts.
+		<</if>>
+	<</if>>
+
+	<<if $dancespeechselector is 1>>
+		<<set $dancespeechselector to 2>>
+	<<elseif $dancespeechselector is 2>>
+		<<set $dancespeechselector to 3>>
+	<<elseif $dancespeechselector is 3>>
+		<<set $dancespeechselector to 4>>
+	<<else>>
+		<<set $dancespeechselector to 1>>
+	<</if>>
+
+	<<if $audience isnot 0>>
+	<<rng>>
+		<<if $dancespeech is "hermangry">>
+			<<if $rng gte 76>>
+				"<<pShes>> a freak!"
+			<<elseif $rng gte 51>>
+				"I shouldn't have thrown that. They charge a lot for drinks."
+			<<elseif $rng gte 26>>
+				"I wasn't expecting a freak show. Nice."
+			<<else>>
+				"Do you think anyone would care if we raped it?"
+			<</if>>
+		<<elseif $dancespeech is "hermaroused">>
+			<<if $rng gte 76>>
+				"Both a cock and pussy? That's hot."
+			<<elseif $rng gte 51>>
+				"I never thought I'd see a hermaphrodite. I don't think I can hold back."
+			<<elseif $rng gte 26>>
+				"I want to fuck <<pher>> cock and pussy both."
+			<<else>>
+				"Both! No one will believe me."
+			<</if>>
+		<<elseif $dancespeech is "hermshock">>
+			<<if $rng gte 76>>
+				"I wasn't expecting both a cock and pussy."
+			<<elseif $rng gte 51>>
+				"<<pShes>> still cute, but that's just weird."
+			<<elseif $rng gte 26>>
+				"I wasn't expecting something so exotic."
+			<<else>>
+				"Fuck. I don't know where to look."
+			<</if>>
+		<<elseif $dancespeech is "hermdisappointed">>
+			<<if $rng gte 76>>
+				"I thought <<pshe>> was normal."
+			<<elseif $rng gte 51>>
+				"Still cute, I guess."
+			<<elseif $rng gte 26>>
+				"Never seen a cock and pussy on one person before. Dunno what to think."
+			<<else>>
+				"This might be too exotic for me."
+			<</if>>
+		<<elseif $dancespeech is "crossdressangry">>
+			<<if $rng gte 76>>
+				"Fucking crossdressing pervert."
+			<<elseif $rng gte 51>>
+				"I bet you're real happy you tricked us."
+			<<elseif $rng gte 26>>
+				"I'd throw more, but the drinks are expensive."
+			<<else>>
+				"Anyone else up for punishing this crossdressing slut?"
+			<</if>>
+		<<elseif $dancespeech is "crossdressaroused">>
+			<<if $rng gte 76>>
+				<<if $player.penisExist>>
+					"The cock makes it better."
+				<<else>>
+					"The pussy makes it better."
+				<</if>>
+			<<elseif $rng gte 51>>
+				<<if $player.penisExist>>
+					"Surprise cock is the best."
+				<<else>>
+					"Surprise pussy is the best."
+				<</if>>
+			<<elseif $rng gte 26>>
+				"I was fooled. So hot."
+			<<else>>
+				"Best reveal ever."
+			<</if>>
+		<<elseif $dancespeech is "crossdressshock">>
+			<<if $rng gte 76>>
+				"I wasn't expecting that."
+			<<elseif $rng gte 51>>
+				"I need to lie down."
+			<<elseif $rng gte 26>>
+				"I was completely fooled."
+			<<else>>
+				<<if $player.penisExist>>
+					"A penis? No way."
+				<<else>>
+					"A pussy? No way."
+				<</if>>
+			<</if>>
+		<<elseif $dancespeech is "crossdressdisappointed">>
+			<<if $rng gte 76>>
+				"This isn't what I'm normally into. Still cute though."
+			<<elseif $rng gte 51>>
+				<<if $player.penisExist>>
+					"Dunno what to make of that cock."
+				<<else>>
+					"Dunno what to make of that pussy."
+				<</if>>
+			<<elseif $rng gte 26>>
+				"I was hoping for something else. It's okay I guess."
+			<<else>>
+				"Not what I was expecting."
+			<</if>>
+		<<elseif $dancespeechselector is 1>>
+			<<rng>>
+			<<if $dancespeech is "cop">>
+				<<if $rng gte 76>>
+					"I bet you love being groped."
+				<<elseif $rng gte 51>>
+					"Aww, I think <<pshes>> shy."
+				<<elseif $rng gte 26>>
+					"You can't display yourself like this without people wanting a taste."
+				<<else>>
+					"You like being fondled, don't you."
+				<</if>>
+			<<elseif $dancespeech is "cum">>
+				<<if $rng gte 76>>
+					"<<pShe>> must be a right slut to cum on stage like that."
+				<<elseif $rng gte 51>>
+					"Did <<pshe>> really just cum?"
+				<<elseif $rng gte 26>>
+					"Seeing lewd <<girls>> orgasm is so much better in person."
+				<<else>>
+					"I bet you got another orgasm in you."
+				<</if>>
+			<<elseif $dancespeech is "nocum">>
+				<<if $rng gte 76>>
+					"<<pShe>> must be a real slut to have a dry orgasm like that."
+				<<elseif $rng gte 51>>
+					"Did <<pshe>> really just cum like a girl?"
+				<<elseif $rng gte 26>>
+					"Seeing lewd <<girls>> orgasm is so much better in person."
+				<<else>>
+					"I wonder if <<pshe>> has been having a little too much fun."
+				<</if>>
+			<<elseif $dancespeech is "struggle">>
+				<<if $rng gte 76>>
+					"I love it when they struggle."
+				<<elseif $rng gte 51>>
+					"Come on! Take it off!"
+				<<elseif $rng gte 26>>
+					"Hurry up and strip, I don't have all day."
+				<<else>>
+					"Don't be a tease, let's see some skin."
+				<</if>>
+			<<elseif $dancespeech is "strip">>
+				<<if $rng gte 76>>
+					"I bet you wish you had something to cover up with."
+				<<elseif $rng gte 51>>
+					"<<pShe>> looks better with less clothes."
+				<<elseif $rng gte 26>>
+					"You must be a massive perv to strip in front of strangers."
+				<<else>>
+					"Getting stripped on stage, you have no dignity."
+				<</if>>
+			<<elseif $dancespeech is "dance">>
+				<<if currentSkillValue('danceskill') gte 800>>
+					<<if $rng gte 76>>
+						"This <<girl>> can really move."
+					<<elseif $rng gte 51>>
+						"<<pShe>> really knows how to show it all off."
+					<<elseif $rng gte 26>>
+						"You're a fantastic dancer."
+					<<else>>
+						"Think <<pshe>> fucks as well as <<pshe>> dances?"
+					<</if>>
+				<<elseif currentSkillValue('danceskill') gte 400>>
+					<<if $rng gte 76>>
+						"You'd almost be worth watching even if you weren't hot."
+					<<elseif $rng gte 51>>
+						"This <<girl>> ain't a bad dancer."
+					<<elseif $rng gte 26>>
+						"Love watching these sluts shake their assets around."
+					<<else>>
+						"I bet <<pshes>> loving the attention."
+					<</if>>
+				<<elseif currentSkillValue('danceskill') gte 200>>
+					<<if $rng gte 76>>
+						"You can keep to a rhythm, at least."
+					<<elseif $rng gte 51>>
+						"<<pHer>> dancing is so boring."
+					<<elseif $rng gte 26>>
+						"Stop dancing and do something lewd."
+					<<else>>
+						"You can't really dance <<bitch>>. You might be an acceptable fucktoy."
+					<</if>>
+				<<else>>
+					<<if $rng gte 76>>
+						"I could do a better job than this <<bitch>>. I have some dignity though."
+					<<elseif $rng gte 51>>
+						"Where'd this slut learn to dance? The zoo?"
+					<<elseif $rng gte 26>>
+						"They must let anyone up there."
+					<<else>>
+						"You'd be pretty hot if it weren't for the awful dancing."
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $rng gte 76>>
+					"You must be a right slut to get up on stage like that."
+				<<elseif $rng gte 51>>
+					"You're pretty hot, <<girl>>, but I bet you know that."
+				<<elseif $rng gte 26>>
+					"I think this <<bitch>> is in need of a good seeing to."
+				<<else>>
+					"Do something naughty."
+				<</if>>
+			<</if>>
+		<<elseif $dancespeechselector is 2>>
+			<<rng>>
+			<<if $rng gte 51>>
+				<<if $worn.over_upper.type.includes("naked") and $worn.upper.type.includes("naked")>>
+					<<if $player.perceived_breastsize lte 0>>
+						<<if $player.gender_appearance is "m">>
+							<<rng>>
+							<<if $rng gte 76>>
+								"Imagine that sleek chest being fondled from all angles."
+							<<elseif $rng gte 51>>
+								"I wanna lick the sweat off his chest."
+							<<elseif $rng gte 26>>
+								"He must like being exposed in front of a crowd."
+							<<else>>
+								"I bet you love having your nipples toyed with."
+							<</if>>
+						<<else>>
+							<<rng>>
+							<<if $rng gte 76>>
+								"Your chest is so sleek, I'd think you a boy if I didn't know better."
+								<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
+							<<elseif $rng gte 51>>
+								"Small tits are delicious."
+								<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
+							<<elseif $rng gte 26>>
+								"Such small boobs must make dancing easier."
+								<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
+							<<else>>
+								"I bet you love having your nipples toyed with."
+							<</if>>
+						<</if>>
+					<<elseif $player.perceived_breastsize lte 5>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Nice tits."
+						<<elseif $rng gte 51>>
+							"Those are some nicely shaped breasts. A bit small though."
+							<<insecurity "breasts_small" 1>><<ginsecurity "breasts_small">>
+						<<elseif $rng gte 26>>
+							"<<pHer>> small tits really add to the dance."
+							<<insecurity "breasts_small" 1>><<ginsecurity "breasts_small">>
+						<<else>>
+							"<<pShes>> so confident, exposing <<pher>> small breasts like that."
+							<<insecurity "breasts_small" 1>><<ginsecurity "breasts_small">>
+						<</if>>
+					<<elseif $player.perceived_breastsize lte 7>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"I wonder what those breasts feel like."
+							<<if $player.gender is "m">><<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">><</if>>
+						<<elseif $rng gte 51>>
+							"I bet your tits make great pillows."
+							<<if $player.gender is "m">><<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">><</if>>
+						<<elseif $rng gte 26>>
+							"You're such a slut, shaking your tits around like this."
+							<<if $player.gender is "m">><<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">><</if>>
+						<<else>>
+							"I bet your tits taste wonderful."
+							<<if $player.gender is "m">><<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">><</if>>
+						<</if>>
+					<<else>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Shake those udders!"
+							<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+						<<elseif $rng gte 51>>
+							"Dancing with tits that big must be difficult."
+							<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+						<<elseif $rng gte 26>>
+							"Those huge tits are mesmerising."
+							<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+						<<else>>
+							"Those breasts were made to be shown off."
+							<<insecurity "breasts_big" 1>><<ginsecurity "breasts_big">>
+						<</if>>
+					<</if>>
+				<<else>>
+					<<rng>>
+					<<if $rng gte 76>>
+						"Take your <<if !$worn.over_upper.type.includes("naked")>>$worn.over_upper.name<<else>>$worn.upper.name<</if>> off, <<girls>> like you don't need clothes anyway."
+					<<elseif $rng gte 51>>
+						"Let's see some more skin."
+					<<elseif $rng gte 26>>
+						"Are you some sort of prude? Take your <<if !$worn.over_upper.type.includes("naked")>>$worn.over_upper.name<<else>>$worn.upper.name<</if>> off."
+					<<else>>
+						"Strip your <<if !$worn.over_upper.type.includes("naked")>>$worn.over_upper.name<<else>>$worn.upper.name<</if>>, I wanna see your chest."
+					<</if>>
+				<</if>>
+			<<elseif $rng gte 1>>
+				<<if $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked")>>
+					<<if $worn.under_lower.type.includes("naked") and !playerChastity("hidden")>>
+						<<if $player.penisExist and $player.vaginaExist and random(1, 2) is 2>>
+							<<rng 10>>
+							<<switch $rng>>
+							<<case 1>>
+								"Hermaphrodite freaks like <<phim>> should be sex slaves."
+							<<case 2>>
+								"I didn't know hermaphrodites were real."
+							<<case 3>>
+								"I bet <<pshe>> loves flaunting <<pher>> penis and pussy."
+							<<case 4>>
+								"Two lickable sets of genitals."
+							<<case 5>>
+								"Both? I bet <<pshe>> can charge extra."
+							<<case 6>>
+								"I wonder if <<pshes>> ever used both cock and pussy at the same time."
+							<<case 7>>
+								"Both a pussy and cock? I'm glad I didn't miss this."
+							<<case 8>>
+								"I don't know if I want to taste <<pher>> cock or pussy more."
+							<<case 9>>
+								"I thought hermaphrodites were a myth."
+							<<default>>
+								"Do you think <<pshe>> was born with both genitals?"
+							<</switch>>
+						<<elseif $player.penisExist>>
+							<<rng>>
+							<<if playerChastity("cage")>>
+								<<if $rng gte 76>>
+									"Look at <<pher>> poor penis all caged up!"
+								<<elseif $rng gte 51>>
+									"<<pHer>> penis is so cute being caged like that. I can't look away."
+								<<elseif $rng gte 26>>
+									"I want to suck that <<penis>>, but I don't have the key."
+								<<else>>
+									"I bet you would love having a free <<penis>>."
+								<</if>>
+							<<elseif $player.penissize gte 4>>
+								<<if $rng gte 76>>
+									"Look at <<pher>> gigantic penis flop around!"
+									<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
+								<<elseif $rng gte 51>>
+									"<<pHer>> penis is so big. I can't look away."
+									<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
+								<<elseif $rng gte 26>>
+									"I want to suck that <<penis>>, but I don't think it would fit."
+									<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
+								<<else>>
+									"I bet you love showing off your <<penis>>."
+									<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
+								<</if>>
+							<<elseif $player.penissize is 3>>
+								<<if $rng gte 76>>
+									"Look at <<pher>> <<penis>> flop around!"
+									<<if $player.penisExist and $player.vaginaExist>><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
+								<<elseif $rng gte 51>>
+									"What's it like having your <<penis>> out in front of all these strangers?"
+									<<if $player.penisExist and $player.vaginaExist>><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
+								<<elseif $rng gte 26>>
+									"Your <<penis>> is so cute. I want to taste it."
+									<<if $player.penisExist and $player.vaginaExist>><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
+								<<else>>
+									"I bet you love having your <<penis>> ogled."
+									<<if $player.penisExist and $player.vaginaExist>><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
+								<</if>>
+							<<elseif $player.penissize is 2>>
+								<<if $rng gte 76>>
+									"Look at <<pher>> <<penis>> flop around!"
+								<<elseif $rng gte 51>>
+									"What's it like having your <<penis>> out in front of all these strangers?"
+								<<elseif $rng gte 26>>
+									"You've such a cute <<penis>>, I want to taste it."
+								<<else>>
+									"I bet you love having your <<penis>> ogled."
+								<</if>>
+							<<elseif $player.penissize is 1>>
+								<<if $rng gte 76>>
+									"<<pHer>> penis is so small!"
+									<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
+								<<elseif $rng gte 51>>
+									"What's it like having your <<penis>> out in front of all these strangers?"
+									<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
+								<<elseif $rng gte 26>>
+									"You've such a cute <<penis>>, I want to taste it."
+									<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
+								<<else>>
+									"I bet you love having your <<penis>> ogled."
+									<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
+								<</if>>
+							<<else>>
+								<<if $rng gte 76>>
+									"<<pHer>> penis is so tiny!"
+									<<insecurity "penis_tiny" 1>><<ginsecurity "penis_tiny">>
+								<<elseif $rng gte 51>>
+									"What's it like having your <<penis>> out in front of all these strangers?"
+									<<insecurity "penis_tiny" 1>><<ginsecurity "penis_tiny">>
+								<<elseif $rng gte 26>>
+									"I've never seen such a tiny cock."
+									<<insecurity "penis_tiny" 1>><<ginsecurity "penis_tiny">>
+								<<else>>
+									"I bet you love having your <<penis>> ogled."
+									<<insecurity "penis_tiny" 1>><<ginsecurity "penis_tiny">>
+								<</if>>
+							<</if>>
+						<<else>>
+							<<rng>>
+							<<if setup.bodyliquid.combined("vaginaoutside") gte 1>>
+								<<if $rng gte 76>>
+									"Is that cum coming out of <<pher>> <<pussy>>? What a slut!"
+								<<elseif $rng gte 51>>
+									"I love <<pher>> cum-covered <<pussy>>."
+								<<elseif $rng gte 26>>
+									"All that cum in <<pher>> pussy. How many cocks do you think are responsible?"
+								<<else>>
+									"Look at how drenched that <<pussy>> is."
+								<</if>>
+							<<else>>
+								<<if $rng gte 76>>
+									"You love showing off your <<pussy>>, don't you."
+								<<elseif $rng gte 51>>
+									"What's it like having your <<pussy>> out in front of all these strangers?"
+								<<elseif $rng gte 26>>
+									"You've such a cute <<pussy>>, I want to taste it."
+								<<else>>
+									"I bet you love having your <<pussy>> ogled."
+								<</if>>
+							<</if>>
+						<</if>>
+					<<elseif $worn.under_lower.type.includes("naked") and playerChastity("hidden")>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Where's your <<master>> keep the key?"
+						<<elseif $rng gte 51>>
+							"Nice belt. Are you being punished for being a slut?"
+						<<elseif $rng gte 26>>
+							"<<pShes>> locked up tight."
+						<<else>>
+							"I bet you're aching for someone to rip that belt off and fuck you senseless."
+						<</if>>
+					<<elseif $worn.under_lower.type.includes("naked") and playerChastity("cage")>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Where's your <<master>> keep the key?"
+						<<elseif $rng gte 51>>
+							"Nice cage. Are you being punished for being a slut?"
+						<<elseif $rng gte 26>>
+							"<<pShes>> locked up tight."
+						<<else>>
+							"I bet you're aching for someone to rip that cage and fuck you senseless."
+						<</if>>
+					<<else>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"I wonder what <<pher>> <<print $worn.under_lower.name_simple>> <<print ($worn.under_lower.plural is 1 ? "smell" : "smells")>> like."
+						<<elseif $rng gte 51>>
+							"Hey <<bitch>>, chuck us your <<print $worn.under_lower.name_simple>>."
+						<<elseif $rng gte 26>>
+							<<if $worn.under_lower.plural is 1>>
+								"Those <<print $worn.under_lower.name_simple>> don't conceal much."
+							<<else>>
+								"That <<print $worn.under_lower.name_simple>> doesn't conceal much."
+							<</if>>
+						<<else>>
+							"<<pShes>> so exposed, I love it."
+						<</if>>
+					<</if>>
+				<<else>>
+					<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Give us a peek beneath your skirt."
+						<<elseif $rng gte 51>>
+							"Twirl faster <<girl>>, let's see that skirt flare."
+						<<elseif $rng gte 26>>
+							"I love it when they dance in skirts."
+						<<else>>
+							"Let me get closer, I want to look up <<pher>> skirt."
+						<</if>>
+					<<else>>
+						<<rng>>
+						<<if $rng gte 76>>
+							"Take
+							<<if !$worn.over_lower.type.includes("naked")>>
+								<<if $worn.over_lower.plural is 1>>those<<else>>that<</if>> $worn.over_lower.name
+							<<else>>
+								<<if $worn.lower.plural is 1>>those<<else>>that<</if>> $worn.lower.name
+							<</if>>off, <<girl>>."
+						<<elseif $rng gte 51>>
+							"I bet you aren't wearing underwear. Prove me wrong."
+						<<elseif $rng gte 26>>
+							"You must be getting warm with all that movement, why not take off your <<if !$worn.over_lower.type.includes("naked")>>$worn.over_lower.name<<else>>$worn.lower.name<</if>>?"
+						<<else>>
+							<<if !$worn.over_lower.type.includes("naked")>>
+								"<<if $worn.over_lower.plural is 1>>Those<<else>>That<</if>> $worn.over_lower.name <<overlowerplural>>
+							<<else>>
+								"<<if $worn.lower.plural is 1>>Those<<else>>That<</if>> $worn.lower.name <<lowerplural>>
+							<</if>>cute, but you'd be cuter without <<if !$worn.over_lower.type.includes("naked")>><<if $worn.over_lower.plural is 1>>them<<else>>it<</if>><<else>><<if $worn.lower.plural is 1>>them<<else>>it<</if>><</if>>."
+						<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<<elseif $dancespeechselector is 3>>
+			<<if $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked") and playerHasButtPlug()>>
+				<<rng>>
+					<<if $rng gte 76>>
+						"<<pShes>> got a toy in <<pher>> ass!"
+					<<elseif $rng gte 51>>
+						"<<pShe>> really has a toy up <<pher>> ass, how lewd!"
+					<<elseif $rng gte 26>>
+						"I'd take that toy out and lick it."
+					<<else>>
+						"You like things in your ass? I can help."
+					<</if>>
+			<<elseif $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked") and $vaginaWetness gte 75>>
+				<<rng>>
+					<<if $rng gte 76>>
+						"Look at how wet <<pshe>> is!"
+					<<elseif $rng gte 51>>
+						"<<pShes>> fucking dripping everywhere."
+					<<elseif $rng gte 26>>
+						"I volunteer to mop all that up!"
+					<<else>>
+						"You're making a mess, don't slip up!"
+					<</if>>
+			<<elseif ["collar", "free use collar", "leather collar", "spiked collar"].includes($worn.neck.name)>>
+				<<rng>>
+					<<if $rng gte 76>>
+						"Who owns you, <<girl>>?"
+					<<elseif $rng gte 51>>
+						"I'd take <<phim>> on a walk!"
+					<<elseif $rng gte 26>>
+						"Nice collar, did you get it yourself!?"
+					<<else>>
+						"I also have a <<master>>!"
+					<</if>>
+			<<else>>
+				<<rng>>
+					<<if $rng gte 76>>
+						"We should get another <<girl>> up with <<phim>>."
+					<<elseif $rng gte 51>>
+						"Dance, <<girl>>, dance!"
+					<<elseif $rng gte 26>>
+						"Move it, slut!"
+					<<else>>
+						"Shake that body!"
+					<</if>>
+			<</if>>
+		<<else>>
+			<<rng>>
+			<<if $audienceexcitement gte 100>>
+				<<if $audiencearousal gte 100>>
+					"You're an angel, <<girl>>. Have you come down for a rough fucking?"
+				<<elseif $audiencearousal gte 80>>
+					"I want to fuck <<phim>> but don't want to interrupt <<pher>> dance."
+				<<elseif $audiencearousal gte 60>>
+					"<<pShes>> the perfect <<girl>>."
+				<<elseif $audiencearousal gte 40>>
+					"<<pShes>> so beautiful."
+				<<elseif $audiencearousal gte 20>>
+					"I wonder if <<pshes>> for sale."
+				<<else>>
+					"<<pShes>> so graceful, I'm entranced."
+				<</if>>
+			<<elseif $audienceexcitement gte 81>>
+				<<if $audiencearousal gte 100>>
+					"<<pShes>> so lovely, I don't think I can hold back."
+				<<elseif $audiencearousal gte 80>>
+					"I want <<phim>> all to myself."
+				<<elseif $audiencearousal gte 60>>
+					"More! Show us more!"
+				<<elseif $audiencearousal gte 40>>
+					"I bet you know lewder moves than this."
+				<<elseif $audiencearousal gte 20>>
+					"I don't think you're as innocent as you look."
+				<<else>>
+					<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+						"Let's see some real dancing, <<girl>>."
+					<<else>>
+						"<<pShes>> a lot better than the usual sluts we get here."
+					<</if>>
+				<</if>>
+			<<elseif $audienceexcitement gte 61>>
+				<<if $audiencearousal gte 100>>
+					"This <<girl>> needs a good fuck."
+				<<elseif $audiencearousal gte 80>>
+					"I wonder how much <<pshe>> is."
+				<<elseif $audiencearousal gte 60>>
+					"You're pretty hot, <<girl>>."
+				<<elseif $audiencearousal gte 40>>
+					"Damn, I need to get me a <<girl>> like this."
+				<<elseif $audiencearousal gte 20>>
+					"Shake that <<bottom>> for me!"
+				<<else>>
+					"This <<girl>> is pretty good."
+				<</if>>
+			<<elseif $audienceexcitement gte 41>>
+				<<if $audiencearousal gte 100>>
+					"Anyone else feel like dragging <<phim>> off the stage and giving <<phim>> a good fucking?"
+				<<elseif $audiencearousal gte 80>>
+					"Really wish I could afford this slut."
+				<<elseif $audiencearousal gte 60>>
+					"I bet <<pshes>> an easy fuck."
+				<<elseif $audiencearousal gte 40>>
+					"<<pShes>> pretty cool, I guess."
+				<<elseif $audiencearousal gte 20>>
+					"Where can I get me a <<bitch>> like this?"
+				<<else>>
+					"You can dance, but how about you show us a bit more?"
+				<</if>>
+			<<elseif $audienceexcitement gte 21>>
+				<<if $audiencearousal gte 100>>
+					"I got something for you, <<bitch>>." <<He>> gestures at <<his>> crotch.
+				<<elseif $audiencearousal gte 80>>
+					"I really want to see <<phim>> get ravaged."
+				<<elseif $audiencearousal gte 60>>
+					"Do you think <<pshe>> would be cheap to fuck?"
+				<<elseif $audiencearousal gte 40>>
+					"Dance harder, let's see some sweat."
+				<<elseif $audiencearousal gte 20>>
+					"Do something lewder."
+				<<else>>
+					<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+						"Do something, <<bitch>>. I'm getting bored."
+					<<else>>
+						"That other <<girl>> was better."
+					<</if>>
+				<</if>>
+			<<else>>
+				<<if $audiencearousal gte 100>>
+					"<<pShe>> can't dance for shit, but I'd fuck <<pher>> brains out anyway."
+				<<elseif $audiencearousal gte 80>>
+					"It's always funny when these pretty <<girls>> think they can dance."
+				<<elseif $audiencearousal gte 60>>
+					"<<pShe>> can't dance, but at least <<pshes>> hot."
+				<<elseif $audiencearousal gte 40>>
+					"<<pShes>> boring, but at least <<pshes>> cute."
+				<<elseif $audiencearousal gte 20>>
+					<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+						"Are we really settling on this slut?"
+					<<else>>
+						"Where'd that cute <<girl>> go? Put <<phim>> back on."
+					<</if>>
+				<<else>>
+					<<if $rng gte 76>>
+						<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+							"What hole did this useless slut crawl from?"
+						<<else>>
+							"Where'd they find these useless sluts anyway?"
+						<</if>>
+					<<elseif $rng gte 51>>
+						"Just fuck off and let someone better on."
+					<<elseif $rng gte 26>>
+						"Who let this idiot up there?"
+					<<else>>
+						"Get off the stage, <<bitch>>."
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<set $dancespeech to 0>>
+<</widget>>
+
+<<widget "dance_npc_masturbation">>
+	<<if ["brothel", "underground", "smuggler_forced", "stage"].includes($dancelocation)>>
+		<<for $_index to 0; $_index lt $enemyno; $_index++>>
+			<<if ($NPCList[$_index].lefthand is 0 or $NPCList[$_index].righthand is 0)>>
+				<<personselect $_index>>
+				<<if $NPCList[$_index].masturbating is undefined>>
+					<<if $audiencearousal gte random(1, 300)>>
+						<br>
+						The <<print $NPCList[$_index].fullDescription>> reveals <<his>>
+						<<if $NPCList[$_index].penis isnot "none">>
+							<<print $NPCList[$_index].penisdesc>>,
+						<<else>>
+							pussy,
+						<</if>>
+						and starts masturbating.
+						<<set $NPCList[$_index].masturbating to 1>>
+					<</if>>
+				<<else>>
+					<<if $NPCList[$_index].masturbating gte random(1, 25)>>
+						<br>
+						<<set $NPCList[$_index].masturbating to 1>>
+						The <<print $NPCList[$_index].fullDescription>> shakes as <<he>> reaches climax.
+						<<if $NPCList[$_index].penis isnot "none">>
+							A thick rope of cum erupts from <<his>> <<print $NPCList[$_index].penisdesc>>.
+							<<if $dance_place is $_index>>
+								<<random_semen>><<set $audiencemod += 2>>
+							<<else>>
+								It splatters the <span class="blue">stage.</span>
+								<<dance_stage_cum 1>>
+							<</if>>
+						<</if>>
+					<<else>>
+						<<if $NPCList[$_index].traits.includes("relaxed") and _danceaction is "sophisticated">>
+							<<set $NPCList[$_index].masturbating += 2>>
+						<<elseif $NPCList[$_index].traits.includes("sociable") and _danceaction is "cool">>
+							<<set $NPCList[$_index].masturbating += 2>>
+						<<elseif $NPCList[$_index].traits.includes("brooding") and _danceaction is "sensual">>
+							<<set $NPCList[$_index].masturbating += 2>>
+						<<elseif $NPCList[$_index].traits.includes("lecher") and _danceaction is "sexual">>
+							<<set $NPCList[$_index].masturbating += 2>>
+						<</if>>
+						<<set $NPCList[$_index].masturbating += 1>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "dance_npc_masturbation_chance">>
+	Orgasm chance:
+	<<set $_npcMast to $NPCList[_args[0]].masturbating>>
+	<<set $_orgasmChance to $_npcMast * 4>>
+	<<if $_orgasmChance gte 30>>
+		<span class="red">Dangerous</span>
+	<<elseif $_orgasmChance gte 25>>
+		<span class="pink">Risky</span>
+	<<elseif $_orgasmChance gte 20>>
+		<span class="purple">Very High</span>
+	<<elseif $_orgasmChance gte 15>>
+		<span class="blue">High</span>
+	<<elseif $_orgasmChance gte 10>>
+		<span class="lblue">Moderate</span>
+	<<elseif $_orgasmChance gte 5>>
+		<span class="teal">Low</span>
+	<<else>>
+		<span class="green">Very low</span>
+	<</if>>
+	/*<<if $_npcMast gte 16>>
+		<<set $_spanColour to "red">>
+	<<elseif $_npcMast gte 13>>
+		<<set $_spanColour to "pink">>
+	<<elseif $_npcMast gte 10>>
+		<<set $_spanColour to "purple">>
+	<<elseif $_npcMast gte 7>>
+		<<set $_spanColour to "blue">>
+	<<elseif $_npcMast gte 4>>
+		<<set $_spanColour to "lblue">>
+	<<elseif $_npcMast gte 2>>
+		<<set $_spanColour to "teal">>
+	<<else>>
+		<<set $_spanColour to "green">>
+	<</if>>
+	<span class="$_spanColour"><<print $_orgasmChance>>%</span>*/
+<</widget>>

@@ -1,0 +1,637 @@
+:: Empty Classroom Masturbation Widgets [widget]
+<<widget "emptyClassroomMasturbationIntro">>
+	<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+		The hallway, usually filled with the sounds of people walking and talking, is now in complete silence.
+		<<set _exhibLevel to 2>><<set _exhibNeeded to 15>>
+		<<if $exhibitionism gte _exhibNeeded>>
+			<br><br>
+
+			<span class="lewd">A lewd thought strikes you.</span>
+			<<if $exposed gte 2>>
+				Since you're already naked, maybe you could push things a bit further.
+			<<else>>
+				No one would notice if you had some fun in this empty classroom, right?
+			<</if>>
+		<</if>>
+	<<elseif ["morning", "lunch", "afternoon"].includes($schoolstate)>>
+		You can still hear the muffled sounds from the hallway.
+		<<if $schoolstate is "morning">>
+			People coming and going. Students greeting each other. Still, it should be a while before anyone comes in.
+		<<elseif $schoolstate is "lunch">>
+			People coming and going. Students talking to each other. Still, it should be a while before anyone comes in.
+		<<else>> <!-- afternoon -->
+			People going home. Students saying goodbye to each other. Still, no one should come in anymore.
+		<</if>>
+		<<set _exhibLevel to 3>><<set _exhibNeeded to 35>>
+		<<if $exhibitionism gte _exhibNeeded>>
+			<br><br>
+
+			<span class="lewd">A lewd thought strikes you.</span>
+			It's risky, but maybe you could have some fun before
+			<<if $schoolstate is "morning">>classes begin<<elseif $schoolstate is "lunch">>lunch ends<<else>>school closes<</if>>.
+		<</if>>
+	<</if>>
+
+	<br><br>
+	<<if $exhibitionism gte _exhibNeeded>>
+		<<if $exposed gte 2>>
+			<<link [[Masturbate|Empty Classroom Masturbation]]>><<set $masturbationstart to 1>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+		<<else>>
+			<<link [[Strip|Empty Classroom Strip]]>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+		<</if>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "emptyClassroomCaughtOrgasm">>
+	<<if $arousal gte 9000>>
+		The shock sets your heart racing, and it pushes you over the edge<<if $masturbationorgasm gte 1>> one last time<</if>>.
+		<<orgasm>><<set $masturbationorgasm += 1>>
+	<</if>>
+<</widget>>
+
+<<widget "emptyClassroomMasturbationDescription">>
+	<<set $_caught to _args[0]>> /* true or false */
+	<<set $_stood to ($_caught ? "stand" : "stood")>>
+	<<if _masturbation_semen gt 0>>
+		<<if _masturbation_semen gte 1000>>
+			Your cum covers the desks, forming large pools and numerous trails that all point back to where you $_stood. <<if !$_caught>>People will find it very hard to believe it all came from one person.<</if>>
+		<<elseif _masturbation_semen gte 500>>
+			Your cum landed across a number of desks, leaving numerous trails that all point back to where you $_stood. <<if !$_caught>>People will find it hard to believe it all came from one person.<</if>>
+		<<elseif _masturbation_semen gte 250>>
+			Your cum managed to land a good distance from where you $_stood, covering multiple desks along the way.
+		<<elseif _masturbation_semen gte 100>>
+			The desk near the front is covered in your cum.
+		<<else>>
+			There's a bit of your cum on the desk near the front.
+		<</if>>
+	<</if>>
+
+	<<if _masturbation_milk gt 0>>
+		<<if _masturbation_milk gte 1000>>
+			Your milk covers the desks near the front, and you wouldn't be surprised if some was found further back, too.
+		<<elseif _masturbation_milk gte 500>>
+			Your milk is all over the desks near the front.
+		<<elseif _masturbation_milk gte 250>>
+			Your milk has sprayed over a number of the desks.
+		<<elseif _masturbation_milk gte 100>>
+			The desk closest to where you $_stood has been sprayed with your milk.
+		<<else>>
+			The desk closest to where you $_stood is covered with drops of your milk.
+		<</if>>
+	<</if>>
+<</widget>>
+
+:: Empty Classroom Strip
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You walk to the middle of the classroom. You can already feel
+<<if $player.penisExist and $player.vaginaExist>>
+	your cock hardening and your pussy getting wet
+<<elseif $player.penisExist>>
+	your cock getting hard
+<<elseif $player.vaginaExist>>
+	your pussy getting wet
+<</if>>
+in anticipation of what you're about to do.
+<br><br>
+
+Piece by piece, you let your clothes fall to the floor. Soon, you're standing naked. <<clothesstrip>>
+<br><br>
+
+<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+	The prevailing silence only serves to embolden you. Still, despite how empty the school looks, there should still be guards patrolling the building.
+	For a moment, you wonder what a guard would do if they caught you, but the thought only increases your arousal.
+	<br><br>
+<<else>>
+	The sounds of the hallway remind you of how risky this is, but that only serves to increase your arousal.
+	<<if $arousal gte 10000>>
+		You begin to imagine what someone might do if they caught you, and that thought alone pushes you over the edge.
+		<<orgasm>>
+	<<elseif $arousal gte 9000>>
+		You begin to imagine what someone might do if they caught you, and that thought alone almost sends you over the edge.
+		<br><br>
+	<<else>>
+		A shiver goes up your spine as you begin to imagine what someone might do if they caught you.
+		<br><br>
+	<</if>>
+<</if>>
+
+You wonder if you should take things further.
+<<set _exhibLevel to (Time.dayState is "night" ? 3 : 4)>>
+<<if $exhibitionism gte (Time.dayState is "night" ? 35 : 55)>>
+	<<if $exhibitionism lt 55>> <!-- if exhibitionism gte 35 and lt 55 and it's not night -->
+		<span class="blue">You feel more confident doing this at night.</span>
+	<</if>>
+	<br><br>
+
+	<<link [[Masturbate|Empty Classroom Masturbation]]>><<set $masturbationstart to 1>><<exhibitionismN _exhibLevel>><</link>><<exhibitionist _exhibLevel>>
+	<br>
+<<else>>
+	<span class="blue">However, you're not enough of an exhibitionist to go through with it.</span> <<if $exhibitionism gte 35>>Maybe you should come back at night.<</if>>
+	<br><br>
+
+<</if>>
+<<link [[Get dressed and leave (0:01)|Hallways]]>><<pass 1>><<clotheson>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Empty Classroom Masturbation
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $masturbationstart is 1>>
+	<<set $masturbationstart to 0>>
+	<<set $masturbationstat += 1>>
+	<<set $timer to 50>><<set _justStarted to true>>
+	You move to the front of the classroom, leaving your clothes behind. Facing the empty desks, you ponder what you're about to do, and what others would think if they knew.
+	You shiver, not wanting or being able to hold back anymore.
+	<br><br>
+	<<masturbationstart>>
+	<<set $phase to 1>>
+<<else>>
+	<<set $phase to 0>>
+<</if>>
+<<masturbationeffects>>
+<<masturbationactions>>
+
+<<if ["first","second","third","fourth","fifth"].includes($schoolstate)>>
+	<<set _interruption to "Empty Classroom Masturbation Finish">>
+<<elseif $timer lte 0>>
+	<<if $schoolstate.includes("noschool") or $schoolstate is "early" or $schoolstate is "late">>
+		<<set _interruption to "Empty Classroom Masturbation Guard">>
+	<<elseif Time.hour lte 14>>
+		<<set _interruption to "Empty Classroom Masturbation Student">>
+	<<else>> <!-- lunch -->
+		<<set _interruption to "Empty Classroom Masturbation Janitor">>
+	<</if>>
+<</if>>
+
+<<if $corruptionMasturbation>>
+	<span class="red">The slime in your ear will not allow you to stop.</span>
+<</if>>
+<div id="masturbationButtons">
+	<<if _interruption>>
+		<div id="next"><<link [[Continue|_interruption]]>><<set $finish to 0>><</link>><<nexttext>></div>
+	<<else>>
+		<div id="next"><<link [[Continue|Empty Classroom Masturbation]]>><</link>><<nexttext>></div>
+	<</if>>
+	<<masturbationStopControls>>
+</div>
+<br><br><br><br><br>
+
+:: Empty Classroom Masturbation Finish
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<if $finish is 0>>
+	You are interrupted by the sound of the school bell. Class will be starting any minute now.
+	You gather your clothes and hastily get dressed. You're lucky no one caught you. Still, the excitement was worth the risk.
+<<elseif $phase is 1>>
+	<!-- Silly bullshit if players decide to stop masturbating immediately after they just started. -->
+	Actually, you are able to hold back. You gather your clothes and hastily get dressed. You're lucky no one caught you, although you barely took a risk at all. Still, the excitement was probably worth the risk? Maybe next time you'll go a bit further.
+<<else>>
+	Deciding you've had enough, you gather your clothes and hastily get dressed. You're lucky no one caught you. Still, the excitement was worth the risk.
+<</if>>
+<br><br>
+
+<<endmasturbation>>
+<<endcombat>>
+<<silently>><<clothesontowel>><</silently>>
+<br><br>
+
+<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+	You look back at the classroom and survey the results of your work.
+	<<emptyClassroomMasturbationDescription>>
+	<br><br>
+
+<</if>>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Empty Classroom Masturbation Student
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+<<generates1>><<person1>><<saveNPC 0 "masturbation_classroom_NPC">>
+
+<<set _rng to random(1,3)>>
+<<switch _rng>>
+	<<case 1>>
+		You hear the door opening. Startled, you look to find an equally stunned student looking back at you.
+		You both freeze in place for a moment.
+		<br><br>
+
+		<<emptyClassroomCaughtOrgasm>>
+		<<set _masturbation_semen to $masturbation_semen>><<set _masturbation_milk to $masturbation_milk>>
+
+		<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+			You look around the classroom and notice what you've done to it.
+			<<emptyClassroomMasturbationDescription true>>
+			<br><br>
+		<</if>>
+
+		There is no way you could explain yourself.
+		<br><br>
+
+		"S-Sorry!" <<He>> finally shouts, closing the door before you can say anything. You decide it's best to get dressed and leave, before others come to see what happened.
+		<<silently>><<clothesontowel>><</silently>>
+		<br><br>
+
+		<<endmasturbation>>
+		<<endcombat>>
+		<br>
+
+		<<link [[Next|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<br>
+	<<case 2>>
+		You hear the door opening. Startled, you look to find an equally stunned student looking back at you.
+		You both freeze in place for a moment.
+		<br><br>
+
+		<<emptyClassroomCaughtOrgasm>>
+		<<endmasturbation>>
+		<<endcombat>>
+		<<loadNPC 0 "masturbation_classroom_NPC">><<person1>>
+
+		<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+			You look around the classroom and notice what you've done to it.
+			<<emptyClassroomMasturbationDescription true>>
+			<br><br>
+		<</if>>
+		There is no way you could explain yourself.
+		<br><br>
+
+		Breaking out from <<his>> stupor, the <<person>> steps into the classroom, closing the door behind <<him>>.
+		"Well, if the pervert wants to have some fun, I think I can help." You have nowhere to run.
+		<br><br>
+
+		<<link [[Next|Empty Classroom Student Molestation]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>
+		<br>
+	<<default>>
+		You hear the sound of a camera going off. Startled, you look at the door to find a <<person>> with <<his>> cellphone in hand.
+		You didn't even hear the door open.
+		<br><br>
+
+		<<emptyClassroomCaughtOrgasm>>
+		<<endmasturbation>>
+		<<endcombat>>
+		<<loadNPC 0 "masturbation_classroom_NPC">><<person1>>
+
+		<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+			You quickly glance around the classroom and notice what you've done to it.
+			<<emptyClassroomMasturbationDescription true>>
+			<br><br>
+		<</if>>
+
+		There is no way you could explain yourself.
+		<br><br>
+
+		"Now now, no need to panic," the <<person>> says, stepping into the classroom and closing the door behind <<him>>.
+		"If you let me have some fun with you," <<he>> says deliberately, "then I will delete the photo. If not, then I'll do whatever I want with it. I won't force you, though. It's your choice."
+		<<He>> grins. <<if $beauty gte ($beautymax * 3/7)>>"You make quite a pretty picture, too."<</if>>
+		<br><br>
+
+		<<if $promiscuity gte 35>>
+			<<link [[Submit|Empty Classroom Student Molestation]]>><<set $sexstart to 1>><<set $phase to 2>><</link>><<promiscuous3>>
+			<br>
+		<</if>>
+		<<link [[Refuse|Empty Classroom Masturbation Student 2]]>><</link>><<llcool>>
+		<br>
+<</switch>>
+<!-- Clearing the NPC here is good because this code runs last during page generation, and it'll always be run, so the NPC is cleared after it's been used -->
+<<clearNPC "masturbation_classroom_NPC">>
+
+
+:: Empty Classroom Masturbation Student 2
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+The <<person1>><<person>> doesn't seem pleased, but <<he>> also doesn't come closer.
+"Suit yourself." As <<he>> leaves the classroom, however, you can hear <<him>> talking to someone. "Hey, you would not believe who I just saw..." <<status -10>><<llcool>>
+<br><br>
+
+You decide it's best to get dressed and leave, before others come to see what happened.
+<br><br>
+
+<<link [[Next|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Empty Classroom Student Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<controlloss>>
+	<<maninit>>
+<<elseif $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	The <<person1>><<person>> smiles, coming closer. "Better make this fast, before someone else comes in," <<he>> says, with <<his>> hands reaching to you.
+	<br><br>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Empty Classroom Student Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Empty Classroom Student Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Empty Classroom Student Molestation Finish
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<He>> backs off for a moment, shocked by your aggression. <<tearful>> you flee to safety.
+	<br><br>
+
+	<<if $phase is 2>>
+		"I'm keeping the photo, crazy <<bitch>>!" <<status -10>><<llcool>><<fameexhibitionism 5 "pic">>
+		<br><br>
+	<</if>>
+
+	<<clotheson>>
+	<<endcombat>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $phase is 1>>
+		"You might wanna be more careful in the future," the <<person1>><<person>> says, as <<he>> redresses. "Or not. It was fun," <<he>> adds, before leaving.
+		<br><br>
+
+		Trying to shake off the feeling of violation, you put on your clothes and hastily leave the classroom.
+	<<else>>
+		As you redress, the <<person1>><<person>> shows you the picture <<he>> took on <<his>> phone.
+		<<He>> presses a couple buttons, and soon the picture is gone.
+		<br><br>
+
+		"There," <<he>> proclaims. "All gone. Nice doing business with you." <<He>> grins, taking <<his>> leave. You follow soon after.
+	<</if>>
+	<br><br>
+
+	<<silently>><<clothesontowel>><</silently>>
+	<<endcombat>>
+<</if>>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Empty Classroom Masturbation Janitor
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+"<<print either("You've gotta be kidding me!", "Are you serious?", "What the fuck are you doing in here?")>>"
+<br><br>
+
+Startled by the voice, you look to the door to find a janitor there, staring at you.
+<<emptyClassroomCaughtOrgasm>>
+
+<<endmasturbation>>
+<<endcombat>>
+<<generate1>><<person1>>
+<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+	You quickly glance around the classroom and notice what you've done to it.
+	<<emptyClassroomMasturbationDescription true>>
+	<br><br>
+<</if>>
+
+"Who do you think is going to have to clean up your mess after you've had your fun, you pervert?"
+<<He>> walks up to you, grabbing your arm before you can try and run away. "Go play with your <<if $player.penisExist>><<if $player.penissize lte 1>>pathetic <</if>>cock<<else>>cunt<</if>> somewhere else!"
+<<He>> pulls you towards the door, and shoves you outside of the classroom, where a crowd of students have gathered to see what the commotion is about.
+<br><br>
+
+The janitor tosses your clothing at you and closes the door behind you. Several students are now gawking at you, waiting to see what you'll do.
+<<schoolrep_naked>> <!-- Note for future development: Find a way to detect whether or not the player's schoolrep has changed, and then write a line for the students reacting to it -->
+<<endevent>>
+<br><br>
+
+<<if $exhibitionism gte 75>>
+	<<link [[Flaunt|Empty Classroom Students Flaunt]]>><<exhibitionism5>><</link>><<exhibitionist5>>
+	<br>
+<</if>>
+<<if $promiscuity gte 75>>
+	<<link [[Goad|Empty Classroom Students Goad]]>><<promiscuity5>><</link>><<promiscuous5>>
+	<br>
+<</if>>
+<<link [[Run|Empty Classroom Students Run]]>><</link>>
+<br>
+
+:: Empty Classroom Students Run
+
+You dash through the hallway, bumping into a couple of students on the way. This seems to break their stupor, and you hear shouts and cheers from behind you.
+<br><br>
+
+You do your best to ignore them, however, and soon find a place to hide.
+<br><br>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Empty Classroom Students Flaunt
+
+<<generates1>><<person1>>
+You keep your head up as you start to slowly walk down the hallway. You're careful with your movement, being all the more enticing with each step.
+A <<person>> reaches to touch you, but you playfully slap <<his>> hand away.
+<br><br>
+
+A couple of students pull out their phones, and you stop to pose for a moment so they can take pictures.
+<<fameexhibitionism 5 "pic">>
+Having so much attention focused on your <<genitals>> arouses you even further.
+<br><br>
+
+Your gambit pays off. The crowd is totally mesmerized, too under your spell to try anything beyond just looking.
+Once you've rounded a corner, you hide from the students until you're sure they're no longer looking for you.
+<br><br>
+
+<<link [[Next|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+
+:: Empty Classroom Students Goad
+
+<<generates1>><<generates2>><<generates3>><<generates4>>
+<<person1>>
+
+<<if $speech_attitude is "meek">>
+	You put your hands behind your back and look down at the floor. "Aww... I was so close, too..."
+	<<if $player.penisExist>>
+		You gently touch the head of your cock, playing with the precum.
+	<<else>>
+		You slowly rub your pussy, doing your best to draw attention to it.
+	<</if>>
+	You look up without raising your head, and lock eyes with a <<person>> who looks more curious than the rest.
+<<elseif $speech_attitude is "bratty">>
+	<<if $player.penisExist>>
+		You put one hand on your hip and the other on your hard cock, squeezing up the shaft and letting your precum fall on the floor.
+	<<else>>
+		You put both hands on your hips, and stand with your legs slightly apart, emphasising your wet pussy.
+	<</if>>
+	"Damn, I wasn't done yet. What am I gonna do now?" You lock eyes with a <<person>> who looks more curious than the rest.
+<<else>>
+	You smile, putting your hands behind your back, and your legs slightly apart. "Damn, I was so close to cumming."
+	<<if $player.penisExist>>
+		You thrust your hips forward a little, causing your cock to bounce.
+	<<else>>
+		You slowly rub your pussy with your fingers, doing your best to draw attention to it.
+	<</if>>
+	You lock eyes with a <<person>> who looks more curious than the rest. "Maybe I could get some help?"
+<</if>>
+<br><br>
+
+The <<personsimple>> steps forward and reaches out to touch your <<chest>>. Eager for their own turns, the rest of the students crowd around you.
+<br><br>
+
+Their hands are all over you in a matter of seconds, busily rubbing and groping every sensitive part of you they can reach. A <<person2>><<person>>'s fingers even find their way into your mouth.
+<br><br>
+
+"What kind of students would we be if we refused to help someone in need?" The <<person1>><<person>> muses, hand already moving towards <<his>> waistband.
+<br><br>
+
+<<link [[Next|Empty Classroom Students Gangbang]]>><<set $sexstart to 1>><</link>>
+<br>
+
+
+:: Empty Classroom Students Gangbang
+<<if $sexstart is 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Empty Classroom Students Gangbang Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Empty Classroom Students Gangbang]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Empty Classroom Students Gangbang Finish
+<<effects>>
+
+<<if $finish is 1>>
+	The crowd backs away from you as you stand up. You wonder if they might start doing things to each other, but they don't seem comfortable with the idea.
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	The other students lie around you in a satisfied pile.
+<<elseif $enemyhealth lte 0>>
+	You knock the students away from you. They get the hint, and cease pestering you.
+<</if>>
+<br><br>
+
+<<tearful>> you gather yourself.
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[Next|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Empty Classroom Masturbation Guard
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+"And what do we have here?" Startled, you look to the door to find one of the school's security guards standing there.
+<br><br>
+
+<<emptyClassroomCaughtOrgasm>>
+
+<<endmasturbation>>
+<<endcombat>>
+<<generate1>><<person1>>
+
+<<if _masturbation_semen gt 0 or _masturbation_milk gt 0>>
+	You look around the classroom and notice what you've done to it.
+	<<emptyClassroomMasturbationDescription true>>
+	<br><br>
+<</if>>
+There's no way you can explain yourself.
+<br><br>
+
+<<if random(1,4) gte 4>>
+	<<if _masturbation_semen + _masturbation_milk gte 1000>>"Wow, you really did a number on this place."<<else>>"Guess I got lucky."<</if>> <<He>> smiles, stepping into the classroom and closing the door behind <<him>>. "Good thing I don't have to clean these rooms."
+	Before you can think of running, <<hes>> already by your side, grabbing your arm.
+	<br><br>
+	<<link [[Next|Empty Classroom Guard Molestation]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<if _masturbation_semen + _masturbation_milk gte 1000>>"Wow, you really did a number on this place,"<<else>>"I swear I always get the worst shifts,"<</if>> <<he>> mumbles, stepping into the classroom.
+	Before you can think of running, <<hes>> already by your side, grabbing your arm.
+	"Now, you pervert, you're coming with me."
+	<br><br>
+
+	You try to free your arm, but <<he>> is much stronger, dragging you naked through the school hallway and out to the entrance gates.
+	<<He>> opens them with <<his>> free hand, before throwing you out, and tossing your clothes out after you.
+	"And be grateful I didn't call the cops," <<he>> says, locking the gate once more and going back inside.
+	<br><br>
+
+	<<link [[Next|Oxford Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Empty Classroom Guard Molestation
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<controlloss>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Empty Classroom Guard Molestation Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Empty Classroom Guard Molestation]]>><</link>></span><<nexttext>>
+<</if>>
+
+
+:: Empty Classroom Guard Molestation Finish
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyhealth lte 0>>
+	<<He>> backs off for a moment, shocked by your aggression. <<tearful>> you flee to safety.
+	<br><br>
+
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<endcombat>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"Now you better get your ass out of here fast," the guard says as <<he>> dresses.
+	"And if I see you around again, you won't be getting off the hook with just that."
+	<br><br>
+
+	<<He>> leaves, and you decide it's best you do the same.
+	<br><br>
+
+	<<clothesontowel>>
+	<<endcombat>>
+<</if>>
+
+<<link [[Next|Hallways]]>><<set $eventskip to 1>><</link>>
+<br>

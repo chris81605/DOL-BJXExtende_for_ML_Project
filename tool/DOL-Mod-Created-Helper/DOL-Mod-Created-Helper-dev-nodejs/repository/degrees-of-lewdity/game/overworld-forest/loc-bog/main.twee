@@ -1,0 +1,662 @@
+:: Bog Intro
+<<set $location to "bog">><<set $outside to 1>><<effects>>
+<<if !$bogProgress>>
+	<<set $bogProgress to 1>>
+	You follow the brook downstream until you come to the edge of a rocky outcrop. A wall of drenched leaves obscures the horizon ahead.
+	<br><br>
+
+	You carefully peer over the edge. You see a rickety wooden walkway at the bottom off to the right, worn by the trickle of water from the end of the brook. The water beyond is stagnant, but looks deep enough to jump into.
+	<br><br>
+
+	<span class="gold">You've discovered the bog.</span>
+<<else>>
+	You follow the brook downstream, to the edge of the bog.
+<</if>>
+<br><br>
+
+<<if $harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2>>
+	<<link [[Glide down (0:01)|Bog Intro Glide]]>><<pass 1>><</link>><<flight_text>>
+	<br>
+<</if>>
+<<link [[Climb down (0:10)|Bog Intro Climb]]>><<pass 10>><</link>><<athleticsdifficulty 200 800>>
+<br>
+<<link [[Jump into the water (0:01)|Bog Intro Jump]]>><<pass 1>><</link>>
+<br>
+
+:: Bog Intro Glide
+<<effects>>
+
+You jump, falling several feet before the stagnant air catches your wings. You land hard, but unharmed, on the wooden walkway.
+<br><br>
+
+<<link [[Next|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 0>><</link>>
+<br>
+
+:: Bog Intro Climb
+<<effects>>
+You clamber over the ledge and find purchase against the rock wall.
+<<if $athleticsSuccess>>
+	<<unset $athleticsSuccess>>
+	You take your time, slowly working your way down until <span class="green"> your feet touch the wooden walkway.</span>
+	<br><br>
+
+	<<if $worn.lower.name isnot "naked">>
+		You dust off your hands on your $worn.lower.name.
+	<<elseif $worn.upper.name isnot "naked">>
+		You dust off your hands on your $worn.upper.name.
+	<<else>>
+		You dust off your hands.
+	<</if>>
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 0>><</link>>
+	<br>
+<<else>>
+	You take your time, slowly working your way down until <span class="red">you slip about half way</span>. You fall, plunging into the mire. <<pain 4>><<stress 12>><<trauma 6>><<gpain>><<gstress>><<gtrauma>>
+	<br><br>
+
+	<<water>>
+	<<if $season is "winter">>
+		The frigid water steals the breath from your lungs. You nearly gasp for breath on instinct, but manage to surface before doing so.
+	<<else>>
+		The water is murky and unpleasent. You surface, covered in stray plant matter.
+	<</if>>
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 1>><</link>>
+	<br>
+<</if>>
+
+:: Bog Intro Jump
+<<effects>>
+You take a deep breath, a step back, and a moment to collect yourself.
+<br><br>
+
+With a running start, you leap over the precipice, clearing the walkway and plunging into the murky water.
+<br><br>
+
+<<water>>
+<<if $season is "winter">>
+	The frigid mire steals the breath from your lungs. You nearly gasp for breath on instinct, but manage to surface before doing so.
+<<else>>
+	You surface, covered in stray plant matter.
+<</if>>
+<br><br>
+
+<<link [[Next|Bog]]>><<set $bogdepth to 4>><<set $bogwater to 1>><</link>>
+<br>
+
+:: Bog
+<<set $location to "bog">><<set $outside to 1>><<effects>>
+
+You're in the bog between the forest and moor.
+<<if $bogwater gte 1>>
+	<<water>><<set _bogmod to 1.5>>
+	The water here is just shallow enough to stand in.
+<<else>>
+	A wooden pathway spares you from traversing the mire.
+<</if>>
+<<switch $weather>>
+	<<case "clear" "overcast">>
+		<<switch Time.dayState>>
+			<<case "dawn">>
+				The low morning sun casts an enchanting light through the trees.
+			<<case "day">>
+				The sun's rays fight to pierce the canopy.
+			<<case "dusk">>
+				Strange shapes of light dance against the walkway and reflect from the water.
+			<<case "night">>
+				<<if isBloodmoon()>>
+					The stagnant water reflects red light back into the canopy.
+				<<else>>
+					The stagnant water reflects just enough moonlight to allow you to see.
+				<</if>>
+		<</switch>>
+		A stone tower is visible far in the distance, to the east.
+	<<case "rain">>
+		Rain drips in patches through the thick canopy, creating a percussive rhythm as it assails the path.
+	<<case "snow">>
+		The canopy catches most of the snow, creating a surreal <<if isBloodmoon()>>red<<else>>white<</if>> blanket above.
+<</switch>>
+<<if $bogdepth is 4>>
+	A rocky cliff face blocks the way back to the forest. <span class="red">There's no way up.</span>
+<<elseif $bogdepth is 1>>
+	The treeline is thin, and you can see the moor from here.
+<</if>>
+<br><br>
+
+<<if $arousal gte $arousalmax>>
+	<<orgasmbog>>
+<</if>>
+
+<<if $stress gte $stressmax and !$possessed>>
+	<<passoutbog>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $eventskip is 0>>
+		<<rng>>
+		<<if $danger gte (9900 - ($allure * _bogmod))>>
+			<<eventbog>>
+		<<else>>
+			<<eventbogsafe>>
+		<</if>>
+	<<else>>
+		<<if $bogwater gte 1>>
+			<<link [[Pull yourself back onto the walkway|Bog]]>><<set $bogwater to 0>><<set $eventskip to 1>><</link>>
+			<br>
+		<<else>>
+			Follow the walkway
+			<br>
+			<<if $bogdepth lte 3>>
+				<<foresticon>><<link [[West, towards the forest (0:15)|Bog]]>><<set $bogdepth += 1>><<pass 15>><</link>>
+				<br>
+			<</if>>
+			<<if $bogdepth gte 2>>
+				<<mooricon>><<link [[East, towards the moor (0:15)|Bog]]>><<set $bogdepth -= 1>><<pass 15>><</link>>
+				<br>
+			<<elseif $bogdepth lte 1>>
+				<<mooricon>><<link [[East, into the moor (0:15)|Moor]]>><<set $bogdepth to 0>><<set $bogwater to 0>><<set $moor to 85>><<set $eventskip to 1>><<pass 15>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+<<set $eventskip to 0>>
+
+:: Bog Lizard Stand
+<<effects>>
+
+You widen your posture and shoot a glare at the <<beasttype>>.
+<<if $physiqueSuccess>>
+	<<bHe>> hisses and takes a few steps forward, <<bhis>> footfalls shaking the wooden slats. <span class="green"><<bHe>> stops short, seemingly deciding that you're more trouble than you're worth.</span>
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	<span class="red"><<bHe>> charges you.</span> You turn to run, but <<bhe>> catches you almost immediately, dragging you into the water.
+	<br><br>
+
+	<<link [[Next|Bog Lizard Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+:: Bog Lizard Run
+<<effects>>
+
+You sprint away from the <<beasttype>>. <<bHis>> claws dig into the wood, and <<bhe>> charges.
+<<if $athleticsSuccess>>
+	<span class="green">You run fast enough that the <<beasttype>> gives up.</span> You turn and see <<bhim>> slinking back into the mire.
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+<<else>>
+	<<water>>
+	<span class="red">You're not fast enough.</span> The <<beasttype>> easily knocks you down, dragging you into the water.
+	<br><br>
+
+	<<link [[Next|Bog Lizard Rape]]>><<set $molestationstart to 1>><<set $bogwater to 1>><</link>>
+	<br>
+<</if>>
+
+:: Bog Lizard Rape
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+	<<set $water to 1>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Bog Lizard Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Bog Lizard Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Bog Lizard Rape Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	The <<beasttype>> hisses <<bhis>> satisfaction, and dives back into the stagnant water.
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $enemyhealth lte 0>>
+	The <<beasttype>> hisses in pain and dives back into the stagnant water.
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</if>>
+
+:: Bog Tentacles
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<molested>>
+	<<controlloss>>
+	<<tentaclestart 10 15 "root" "vine" true>>
+<<elseif $molestationstart is 2>>
+	<<set $molestationstart to 0>>
+	<<set $combat to 1>>
+	<<set $enemytype to "tentacles">>
+	<<consensual>>
+	<<set $consensual to 1>>
+
+	You draw them closer through the water.
+	<<deviancy5>>
+
+	<<set _randomtentacles to (6 + random(1, 10))>>
+	<<tentaclestart _randomtentacles 15 "root" "vine" true>>
+<</if>>
+<<statetentacles>>
+
+<<effects>>
+<<effectstentacles>>
+<<tentacles>>
+<<actionstentacles>>
+
+<<if $tentacles.active lte ($tentacles.max / 2)>>
+	<span id="next"><<link [[Next|Bog Tentacles Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Bog Tentacles]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Bog Tentacles Finish
+<<effects>>
+
+The vines lose interest in you, and retreat back into the canopy. <<tearful>> you untangle yourself from the plants and vines surrounding you.
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Bog Lost
+<<effects>>
+You travel along the
+<<switch $phase>>
+	<<case 0>>last
+	<<case 1>>first
+	<<case 2>>second
+	<<case 3>>third
+	<<case 4>>fourth
+	<<case 5>>fifth
+	<<case 6>>sixth
+	<<case 7>>seventh
+	<<case 8>>eighth
+	<<case 9>>ninth
+<</switch>>
+path.
+
+<<rng>>
+<<if $boglost gte 5>>
+	<<pass 1 hour>><<pain 2>>
+	You run. And run. More and more pathways sprout from the one you're on, almost like branches or the prongs of an impossibly large set of antlers.
+	<br><br>
+
+	<<link [[Stay the course (?:??)|Bog Lost Follow]]>><</link>><<willpowerdifficulty 600 1000>>
+	<br>
+	<<link [[Block everything out|Bog Lost Block]]>><<trauma 30>><</link>><<gggtrauma>>
+	<br>
+<<elseif $rng lte 15>>
+	The path begins to look familiar, even as the one behind you looks entirely different. You think you've found the correct way.
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	<<switch $boglost>>
+		<<case 0>>You see no sign of your original route.
+		<<case 1>>You don't recognise any landmarks. <<stress 6>><<gstress>>
+		<<case 2>>Your heart begins to race. <<stress 12>><<ggstress>>
+		<<case 3>>The trees themselves seem to change behind you as you walk. You double back, trying to find anything that will guide you. <<stress 12>><<ggstress>>
+		<<case 4>>You run, directionless and lost. Nothing seems real. <<stress 12>><<ggstress>><<trauma 12>><<ggtrauma>>
+	<</switch>>
+	<<set $boglost++>>
+	<br><br>
+
+	More paths branch off ahead.
+	<br><br>
+
+	<<link [[Try to backtrack (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 0>><</link>>
+	<br>
+	<<link [[Follow the first path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 1>><</link>>
+	<br>
+	<<link [[Follow the second path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 2>><</link>>
+	<br>
+	<<link [[Follow the third path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 3>><</link>>
+	<br>
+	<<link [[Follow the fourth path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 4>><</link>>
+	<br>
+	<<link [[Follow the fifth path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 5>><</link>>
+	<br>
+	<<if $boglost gte 2>>
+		<<link [[Follow the sixth path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 6>><</link>>
+		<br>
+		<<if $boglost gte 3>>
+			<<link [[Follow the seventh path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 7>><</link>>
+			<br>
+			<<if $boglost gte 4>>
+				<<link [[Follow the eighth path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 8>><</link>>
+				<br>
+				<<link [[Follow the ninth path (0:15)|Bog Lost]]>><<pass 15>><<set $phase to 9>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Bog Lost Follow
+<<effects>>
+<<set _lost to random(120, 360)>>
+<<pass _lost>>
+<<if $willpowerSuccess>>
+	You stay the course, and decide to follow this path to its end no matter what. You'll find a way out eventually, so long as you continue straight ahead.
+	<br><br>
+
+	Each side path splits into two more, and each of those into four. <span class="green">You ignore them.</span> Each one spirals into the unknown depths of the bog, tempting you. Each one looks more like salvation. <span class="green">You ignore them.</span>
+	<br><br>
+
+	The path ends ahead. You don't care. You continue to walk forward. <span class="green">Planks rise from the depths of the mire to meet your determined stride.</span> There is only one path, and it's ahead of you.
+	<br><br>
+
+	The trees begin to part. The moor spreads out before you. The path behind you is normal and unbroken. You won't fall prey to it again.
+	<br><br>
+
+	<<link [[Next|Bog]]>><<endevent>><<set $bogdepth to 1>><<set $eventskip to 1>><<set $boglost to 10>><</link>>
+	<br>
+<<else>>
+	You keep moving forward. Each side path splits into two more, and each of those into four. Each one spirals into the unknown depths of the bog, tempting you. Each one looks more like salvation. <span class="red">It's too much.</span>
+	<br><br>
+
+	Your mind tries to map each path, to make some rational sense of what's happening to you. It can't. Each pathway fights for your attention, forcing its way into your mind. There are too many. A lifetime isn't long enough to tread them all. One mind can't map their destinations.
+	<br><br>
+
+	You collapse in a heap, clutching your head. The path doesn't catch you.
+	<br><br>
+
+	<<water>>
+	The water brings you back to your senses. You surface and gasp for breath, clinging to the side desperately. You pant, looking around. There is only one path.
+	<br><br>
+
+	You hoist yourself back up.
+	<br><br>
+
+	<<link [[Next|Bog]]>><<endevent>><<set $eventskip to 1>><<unset $boglost>><</link>>
+	<br>
+<</if>>
+
+:: Bog Lost Block
+<<effects>>
+
+Hundreds of pathways extend in every direction, twisting into utter darkness. Your ears ring. You cover them.
+<br><br>
+
+You collapse to your knees. The pathway isn't just below you anymore. Pathways extend in a spiral up thick tree trunks, down below the surface of the water, and upside-down above you in the canopy.
+<br><br>
+
+All at once, they begin to collapse. Planks of wood rain down, splashing into the water. Trees reclaim the treated wood into their bark, crushing them. The water swallows what remains, spreading rot and algae across their surfaces until they are nothing.
+<br><br>
+
+Your eyes lie. You shut them.
+<br><br>
+
+You steady your breathing. You don't know how long you kneel for. When you open your eyes, all that remains is the path ahead of you.
+<br><br>
+
+<<link [[Next|Bog]]>><<endevent>><<set $eventskip to 1>><<unset $boglost>><</link>>
+<br>
+
+:: Bog Lost Stay
+<<effects>>
+You know the bog's tricks. You step into the water ahead. The path reveals itself to you. You stay the course.
+<br><br>
+
+<<link [[Next|Bog]]>><<endevent>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Bog Swing
+<<effects>>
+
+You grab the vine with both hands and take a step back, ready to make a running jump.
+<<if $rng gte 71 and $plantdisable is "f" and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
+	You clear the distance and make it to the other side, <span class="red">but your hands stick to the vine.</span> You swing back, unable to let go.
+	<br><br>
+
+	You gradually lose speed until you're hanging over the broken section. <span class="red">The vine begins to pull itself upwards into the canopy.</span>
+	<br><br>
+
+	"I've caught such a pretty little flower this time," you hear from above you. You look to the source. A <<person>> hangs upside-down from the canopy, with <<plant_details>> braided into <<his>> hair. "You're such a rare treat. Let me enjoy you for a while. Or I could drop you. Your choice." Countless vines shoot down and encircle you!
+	<br><br>
+
+	<<link [[Next|Bog Plant Suspended Sex]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $athleticsSuccess>>
+	You clear the distance and make it to the other side, <span class="green">landing without issue.</span>
+	<br><br>
+
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	You can't hold on, and <span class="red">slip from it.</span> You plunge into the mire.
+	<br><br>
+
+	<<water>>
+	<<link [[Next|Bog]]>><<set $bogwater to 1>><</link>>
+	<br>	
+<</if>>
+
+
+:: Bog Plant Tentacle Passout
+<<effects>><<set $location to "bog">>
+<<generatePlant1>><<person1>>
+
+You wake up with a lurch forward and feel like you're falling. You move to arrest your fall, but find yourself completeley entangled by vines. You're suspended in the air. You look down and see no solid ground below. It's a long drop into the water.
+<br><br>
+
+"Never thought I'd find such a pretty flower out here of all places," you hear from above you. You struggle against your bindings and manage to look to the source. A <<person>> hangs upside-down from the canopy, with <<plant_details>> braided into <<his>> hair.
+<<if $exposed lte 1>>
+	Your $worn.lower.name <<lowerhas>> been <<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>lifted up<<else>>pulled down<</if>>, <<if !$worn.under_lower.type.includes("naked")>> and your $worn.under_lower.name <<underlowerhas>> been pulled aside,<</if>> <span class="pink">revealing your <<genitals>>.</span>
+<</if>>
+<<if $bogwater is 1>>
+	"You exhausted yourself to the point of collapse, right in the middle of the bog. If not for me, you could have drowned!
+<<else>>
+	"You exhausted yourself to the point of collapse. If not for me, you could have rolled right into the water and drowned!
+<</if>>
+<<set $bogwater to 0>>
+Naturally, I had to secure you to make sure you were safe." The vines around you tighten, as if by command. <<He>> moves through the canopy with ease, encircling you. It's hard to tell where <<he>> ends and the trees begin.
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>><<set $worn.lower.skirt_down to 0>><<else>><<set $worn.lower.state to "thighs">><</if>>
+<<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
+<<set $worn.under_lower.vagina_exposed to 1>><<set $worn.under_lower.anus_exposed to 1>><<set $worn.under_lower.exposed to 1>><<set $worn.under_lower.state to "thighs">>
+<br><br>
+
+"You're such a rare treat. Let me enjoy you for a while. Or I could drop you. Your choice."
+<br><br>
+
+<<link [[Next|Bog Plant Suspended Sex]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+:: Bog Plant Suspended Sex
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>><<set $consensual to 1>>
+		<<neutral 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<</if>>
+	<<maninit "plant">><<npcexpose>>
+	<<set $enemyarousalmax to 800>>
+	<<set _randomtentacles to random(10, 12)>>
+	<<makeAbomination _randomtentacles 8 "vine" "vine" true>>
+	<<set $tentacles[0].shaft to "tummy">>
+	<<if $player.breastsize gte 2 and $chestuse is 0>>
+		<<set $tentacles[1].shaft to "breasts">><<set $chestuse to "squeezed">>
+	<<else>>
+		<<set $tentacles[1].shaft to "chest">>
+	<</if>>
+	<<set $tentacles[2].shaft to "waist">>
+	<<set $tentacles[3].shaft to "neck">><<set $head to "grappled">>
+	<<set $tentacles[4].shaft to "leftleg">><<set $leftleg to "grappled">>
+	<<set $tentacles[5].shaft to "rightleg">><<set $rightleg to "grappled">><<set $feettarget to "tentacles">>
+<</if>>
+
+<<effects>>
+<<effectsabomination>>
+<<abomination>>
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if _combatend or $tentacles.active lte 3>>
+	<span id="next"><<link [[Next|Bog Plant Suspended Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Bog Plant Suspended Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Bog Plant Suspended Sex Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $tentacles.active lte 4>>
+		The remaining tentacles aren't strong enough to hold you through <<his>> orgasmic spasms, and you drop into the water.
+		<<water>>
+		<br><br>
+
+		"Oh dear, I've lost my catch!" A few more vines slither down and lift you from the water, gingerly placing you on the nearby walkway. "So sorry, little flower, I got carried away! I'll be more careful next time, come back soon!"
+	<<else>>
+		The <<if $tentacles.active lte $tentacles.max>>remaining <</if>>vines loosen, gently lowering you down and around the tree, onto the walkway.
+		"Thanks for indulging me, little flower," the <<person>> chirps. "Come back soon!"
+	<</if>>
+	<br><br>
+
+	<<He>> vanishes into the canopy, <<his>> vines following.
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+<<elseif $enemyhealth lte 0>>
+	As you fight back, the <<persons>> tentacles all suddenly retract, letting you drop into the water. <<stress 12>><<pain 6>><<ggstress>><<gpain>>
+	<<water>>
+	<br><br>
+
+	"This little flower is covered in thorns." <<He>> disappears into the canopy, nursing some new bruises. You pull yourself back up onto the walkway.
+
+	<<tearful>> you gather yourself.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+<<elseif $tentacles.active lte 3>>
+	The remaining tentacles can't hold up your weight, and you're dropped into the water. <<stress 12>><<pain 6>><<ggstress>><<gpain>>
+	<<water>>
+	<br><br>
+
+	"Oh dear, I've lost my catch!" A few more vines slither down and lift you from the water, gingerly placing you on the nearby walkway. "So sorry, little flower, I got carried away! I'll be more careful next time, come back soon!"
+	<br><br>
+
+	<<He>> vanishes into the canopy, <<his>> vines following.
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>
+<<else>>
+	The <<if $tentacles.active lte $tentacles.max>>remaining <</if>>vines loosen, gently lowering you down onto the walkway.
+	"Thanks for indulging me, little flower," the <<person>> chirps. "Come back soon!"
+	<br><br>
+
+	<<He>> vanishes into the canopy, <<his>> vines following.
+	<br><br>
+
+	<<tearful>> you gather yourself.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Bog]]>><<set $eventskip to 1>><</link>>	
+<</if>>
+
+:: Bog Passout
+<<effects>><<hallucinogen 40>>
+
+You awaken to the sound of wet sloshing. You shoot up straight, looking around.
+<<if Time.dayState is "night">>
+	It's too dark to see anything.
+<<else>>
+	You don't see the source.
+<</if>>
+<br><br>
+
+A shiver runs up your spine. You're not sure why, but you feel like you need to move.
+<<if $bogwater gte 1>>
+	You wade through the water, pulling yourself up onto the walkway.
+<<else>>
+	You scramble to your feet, trusting your instincts.
+<</if>>
+<br><br>
+
+You take a step back. Just in time. A muddy black appendage shoots up from the murky water, grasping at where your leg just was. <<stress 12>><<ggstress>>
+<br><br>
+
+From the darkness between the trees, dim pairs of yellow light flicker into existence. Dozens. Hundreds of limbs shoot up, grasping the walkway as if to make it one with the swamp. The wood creaks and groans. Masses of mud rise from the depths. A chorus of howling shrieks fills the dead air. <<trauma 30>><<gggtrauma>>
+<br><br>
+
+Adrenaline finally unfreezes your paralysed muscles, and you run.
+<br><br>
+
+<<link [[Next|Bog Passout 2]]>><</link>>
+<br>
+
+:: Bog Passout 2
+<<effects>>
+You keep running. You don't know which way you're going. More shapes appear from the water ahead. More eyes peer from every direction. Your lungs burn.
+<br><br>
+
+You push onwards. The sounds are almost unbearable. Stars creep into your vision. The walkway pushes back against your feet, seemingly trying to wear you down.
+<br><br>
+
+You run until you throw yourself off the end of the walkway, tumbling into the moor. You look back into the bog, but see nothing pursuing you.
+<br><br>
+
+You collapse onto your back, exhaustion finally overtaking you. It takes some time to catch your breath and steady your nerves. <<gtiredness>><<tiredness 8>>
+<br><br>
+
+<<link [[Next|Moor]]>><<set $bogdepth to 0>><<set $bogwater to 0>><<set $moor to 85>><<set $eventskip to 1>><</link>>
+<br>

@@ -1,0 +1,695 @@
+:: Smuggler Pub Intro
+<<effects>>
+<<generate1>><<person1>>
+<<generate2>><<generate3>><<generate4>><<generate5>><<generate6>>
+You trip up a set of stairs. Voices jeer all around. <<covered>>
+<br><br>
+
+"Dance! Dance! Dance!"
+<br><br>
+
+
+<<link [[Say you can't dance with your arms bound|Smuggler Pub Arms]]>><<set $phase to 1>><</link>><<englishdifficulty 200 1000>>
+<br>
+<<link [[Dance|Smuggler Pub Dance]]>><<danceinit>><<set $dancing to 1>><<set $audience to 25>><<set $venuemod to 4>><<set $timer to 24>><<set $dancelocation to "smuggler_forced">><<set $forceddance to 1>><</link>>
+<br>
+<<link [[Refuse|Smuggler Pub Refuse]]>><</link>>
+<br>
+
+
+:: Smuggler Pub Arms
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"I-I can't dance with my arms tied," you say.
+<<elseif $speech_attitude is "bratty">>
+	"How the fuck am I supposed to dance with my arms tied?" you ask.
+<<else>>
+	"Could you untie my arms first?" you ask. "So I can dance properly."
+<</if>>
+<br><br>
+
+
+<<if $englishSuccess>>
+	The stage creaks as another steps onto it. "Alright <<girl>>," says a <<personsimple>>'s voice. "But don't tire yourself. I don't want you passing out before my turn." A knife slices through the rope, <span class="green">freeing your arms.</span>
+	<br><br>
+	<<unbind>>
+	<<link [[Dance|Smuggler Pub Dance]]>><<danceinit>><<set $dancing to 1>><<set $audience to 25>><<set $venuemod to 4>><<set $timer to 24>><<set $dancelocation to "smuggler_forced">><<set $forceddance to 1>><</link>>
+	<br>
+	<<link [[Refuse|Smuggler Pub Refuse]]>><</link>>
+	<br>
+	<<if $submissive lte 500>>
+		<<link [[Grab the knife|Smuggler Pub Knife]]>><</link>><<defianttext>><<dancedifficulty 200 1000>>
+		<br>
+	<</if>>
+<<else>>
+	<span class="red">They ignore you.</span> "Dance! Dance! Dance!" They start hammering the edge of the stage in anticipation.
+	<br><br>
+
+	<<link [[Dance|Smuggler Pub Dance]]>><<danceinit>><<set $dancing to 1>><<set $audience to 25>><<set $venuemod to 4>><<set $timer to 24>><<set $dancelocation to "smuggler_forced">><<set $forceddance to 1>><</link>>
+	<br>
+	<<link [[Refuse|Smuggler Pub Refuse]]>><</link>>
+	<br>
+<</if>>
+
+
+:: Smuggler Pub Refuse
+<<effects>>
+
+<<if $speech_attitude is "meek">>
+	"I-I won't," you say. "I can't dance."
+<<elseif $speech_attitude is "bratty">>
+	"Fuck off," you say. "I'm not dancing for scum like you."
+<<else>>
+	"I won't dance," you say. "Let me go."
+<</if>>
+<br><br>
+
+"Dance! Dance! Dance!" It's no good.
+<br><br>
+
+<<if ($leftarm is "bound" or $rightarm is "bound") and $phase isnot 1>>
+	<<link [[Say you can't dance with your arms bound|Smuggler Pub Arms]]>><<set $phase to 1>><</link>><<englishdifficulty 200 1000>>
+	<br>
+<<elseif $submissive lte 500 and $phase is 1>>
+	<<link [[Grab the knife|Smuggler Pub Knife]]>><</link>><<defianttext>><<dancedifficulty 200 1000>>
+	<br>
+<</if>>
+<<link [[Dance|Smuggler Pub Dance]]>><<danceinit>><<set $dancing to 1>><<set $audience to 25>><<set $venuemod to 4>><<set $timer to 24>><<set $dancelocation to "smuggler_forced">><<set $forceddance to 1>><</link>>
+<br>
+<<link [[Refuse|Smuggler Pub Refuse 2]]>><</link>>
+<br>
+
+
+
+:: Smuggler Pub Refuse 2
+<<effects>>
+
+You refuse again. The crowd boo, and the stage shakes as several bodies climb atop it.
+<br><br>
+
+<<link [[Next|Smuggler Pub Gang Rape]]>><<set $molestationstart to 1>><</link>>
+<br>
+
+
+:: Smuggler Pub Knife
+<<effects>>
+
+<<if $danceSuccess>>
+	You spin and <span class="green">twist the knife from the <<persons>> grip.</span> You predict <<his>> movements, ducking under <<his>> arms as you slice through your blindfold. You spin and push your knife against <<his>> throat.
+	<br><br>
+
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+	The crowd roars with laughter as your eyes adjust to the light. You're stood on a stage in the middle of an open part of the cave. Tables and chairs surround you, all occupied by rough-looking <<people>>. Lights hang overhead, and the bar in the corner looks well-stocked.
+	<<if $smuggler_pub_known is 1>>
+		You're in the smuggler's pub.
+	<</if>>
+	<<set $smuggler_pub_known to 1>>
+	<br><br>
+	"I'm leaving," you say, prompting more laughter.
+	<br>
+	"Th-this isn't funny," the <<person>> stammers. "Do what <<pshe>> says."
+	<br><br>
+	Careful not to fall, you back from the stage towards one of the exits. The one strung with more lights.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Knife 2]]>><</link>>
+	<br>
+
+<<else>>
+	You spin and blindly reach for the knife. <span class="red">The <<persons>> fist connects with your face,</span> knocking you to the floor. The crowd roars with laughter.<<gtrauma>><<gstress>><<garousal>><<trauma 6>><<stress 6>><<pain 4>>
+	<br><br>
+
+	"<<pShe>>'s a spirited one,"
+	<br>
+	"Time to learn <<pher>> place."
+	<br><br>
+
+	Others climb the stage.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Gang Rape]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<</if>>
+
+
+:: Smuggler Pub Knife 2
+<<effects>>
+
+The crowd parts to let you through, though they seem to play along for the amusement more than anything. You make it through the ring of tables, shove the <<person>> over one, and run.
+<br><br>
+<<endcombat>>
+Echoing laughter chases you through the cave, but they don't seem to be following.
+<br><br>
+
+<<clotheson>>
+<<earnFeat "Leverage">>
+<<if $sewersintro is 1>>
+	You come to an old brick wall with a hole smashed through. You crawl to the other side, and almost slip on algae.
+	<br><br>
+	<<link [[Next|Sewers Algae]]>><<sewersstart>><<set $eventskip to 1>><</link>>
+	<br>
+<<else>>
+	You come to an old brick wall with a hole smashed through. You try to crawl through, but your hips get stuck.
+	<br><br>
+	"Need a hand?" asks a voice from behind. Before you can respond, a boot kicks your <<bottom>>, pushing you through and sending you skidding across algae-covered stone.
+	<br><br>
+	<<link [[Next|Sewers Intro]]>><</link>>
+<</if>>
+
+
+:: Smuggler Pub Dance
+
+<<effects>>
+
+<<danceeffects>>
+<<danceaudience>>
+
+<<if $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+Being so exposed is humiliating, but there's nothing you can do.
+<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+Being so exposed is humiliating, but there's nothing you can do.
+<br><br>
+<</if>>
+
+<<danceactions>>
+
+<<if $danceevent is "finish">>
+<<elseif $danceevent is "smuggler_rescue">>
+<<link [[Next|Smuggler Pub Rescue]]>><<set $enemyno to 1>><<set $enemynomax to 1>><<set $molestationstart to 1>><</link>>
+<br>
+<<elseif $danceevent is "rape">>
+<<link [[Next|Smuggler Pub Gang Rape]]>><<set $molestationstart to 1>><</link>>
+<</if>>
+
+:: Smuggler Pub Rescue
+<<effects>>
+
+<<endcombat>>
+
+<span class="blue">You hear a whistle,</span> and the room quiets. "Calm down guys," says a <<nnpc_gender "Wren">>'s voice. <<if $wren_seen>><span class="blue">A voice you recognise, but can't place.</span><</if>> It's coming from above. "I think that's a good enough show. Besides, we don't know who <<pshe>> is. Someone might come looking."
+<br><br>
+The owner of the voice doesn't sound much older than you, but the others heed <<nnpc_him "Wren">>.
+<br><br>
+
+<<link [[Next|Smuggler Pub Blindfold]]>><</link>>
+
+:: Smuggler Pub Gang Rape
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+<span id="next"><<link [[Next|Smuggler Pub Gang Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+<span id="next"><<link [[Next|Smuggler Pub Gang Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Smuggler Pub Gang Rape Finish
+<<effects>>
+<<set $bus to "commercial">>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<tearful>> you struggle to stand. The <<group>> vacate the stage, only to be replaced by others.
+	<br><br>
+
+	<<endcombat>>
+	<<generate1>><<generate2>><<generate3>><<generate4>><<generate5>><<generate6>><<person1>>
+	<<link [[Next|Smuggler Pub Gang Rape 2]]>><<set $molestationstart to 1>><</link>>
+
+<<else>>
+	You hear the <<person1>><<person>> tumble from the stage and smash into something. <<tearful>> you jump after <<him>>. <<He>> shouts as your foot lands, and you run. It's no use. You can't see a thing, and have no clue where the exit is. You run straight into someone's arms.
+	<br><br>
+
+	<<endcombat>>
+
+	<span class="blue">You hear a whistle,</span> and the room quiets. "Calm down guys," says a <<nnpc_gender "Wren">>'s voice. <<if $wren_seen>><span class="blue">A voice you recognise, but can't place.</span><</if>> It's coming from above. "Putting up a fight like that, I think <<pshe>>s earned a chance."
+	<br><br>
+	The owner of the voice doesn't sound much older than you, but the others heed <<nnpc_him "Wren">>.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Blindfold]]>><</link>>
+<</if>>
+
+
+
+:: Smuggler Pub Gang Rape 2
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<maninit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if _combatend>>
+	<span id="next"><<link [[Next|Smuggler Pub Gang Rape 2 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Smuggler Pub Gang Rape 2]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Smuggler Pub Gang Rape 2 Finish
+<<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<tearful>> you struggle to stand. The <<group>> vacate the stage, only to be replaced by others.
+	<br><br>
+
+	<<endcombat>>
+
+	<span class="blue">You hear a whistle,</span> and the room quiets. "Calm down guys," says a <<nnpc_gender "Wren">>'s voice. <<if $wren_seen>><span class="blue">A voice you recognise, but can't place.</span><</if>> "We don't know who <<pshe>> is. Someone might come looking for <<phim>>."
+	<br><br>
+	The owner of the voice doesn't sound much older than you, but the others heed <<nnpc_him "Wren">>.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Blindfold]]>><</link>>
+	<br>
+
+<<else>>
+	You hear the <<person1>><<person>> tumble from the stage and smash into something. <<tearful>> you jump after <<him>>. <<He>> shouts as your foot lands, and you run. It's no use. You can't see a thing, and have no clue where the exit is. You run straight into someone's arms.
+	<br><br>
+
+	<<endcombat>>
+
+	<span class="blue">You hear a whistle,</span> and the room quiets. "Calm down guys," says a <<nnpc_gender "Wren">>'s voice. <<if $wren_seen>><span class="blue">A voice you recognise, but can't place.</span><</if>> It's coming from above. "Putting up a fight like that, I think <<pshe>>s earned some leniency."
+	<br><br>
+	The owner of the voice doesn't sound much older than you, but the others heed <<nnpc_him "Wren">>.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Blindfold]]>><</link>>
+	<br>
+<</if>>
+
+
+
+:: Smuggler Pub Blindfold
+<<effects>>
+<<pass 5>>
+<<set $bus to "commercial">>
+They leave the blindfold on as they push you down another tunnel. You hear the shuffling of feet either side, as well as behind.
+<br><br>
+
+<<set $stress -= 3000>>
+
+"Climb," says the young <<nnpc_gender "Wren">>. "Before I change my mind." You reach forward, and feel a ladder.
+<br><br>
+
+You climb until your head bumps against something. "Watch your head," laughs the voice. "Just push it." You do so, and climb atop the ladder. You feel a breeze, and hear traffic all around. There's a metallic thud behind you
+<br><br>
+<<if $rightarm is "bound" or $leftarm is "bound" or $feetuse is "bound">>
+	<<blindfoldintro>>
+<<else>>
+	Now that you're in the clear, you pull the blindfold off and toss it aside.
+	<br><br>
+	<<set $worn.face.type.push("broken")>>
+	<<faceruined>>
+<</if>>
+<<clotheson>>
+<<endevent>>
+
+
+
+<<set $eventskip to 1>>
+<<if $worn.face.type.includes("blindfold")>>
+	<<destinationbondage>>
+<<else>>
+	<<destinationeventend>>
+<</if>>
+
+:: Smuggler Pub Sewer Intro
+<<effects>>
+<<set $smuggler_pub_known to 1>>
+You crawl through the hole in the brick walls, and find a natural cave on the other side. You follow the passage. It reminds you of the smuggler passages you've read about in history class.
+<br><br>
+You hear voices. They sound like they're enjoying themselves. Artifical light shines on the walls up ahead. You walk around a corner, and emerge in an open space, full of lively people. Wooden platforms and walls have been erected over and around natural rock, supporting numerous tables and chairs, most occupied. There's a bar in the corner, and it looks well-stocked.
+<br><br>
+<<if $exposed gte 1>>
+	A cheer erupts from the nearby table as the occupants notice your <<lewdness>>. It draws attention, and the room reverberates with the resulting sound.<<covered>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	You take cover behind one of the wooden walls.
+	<br><br>
+<<else>>
+	Some of the <<people>> sat at the tables throw lascivious glances your way, but most don't pay your arrival any attention.
+	<br><br>
+<</if>>
+
+<<link [[Next|Smuggler Pub]]>><</link>>
+<br>
+
+:: Smuggler Pub Beach Cave Intro
+<<effects>>
+<<set $smuggler_pub_known to 1>>
+You walk through the passage, leaving the water behind, following the sound of the voices. They sound like they're enjoying themselves. The tunnel reminds you of the smuggler passages you've read about in history class. 
+<br><br>
+Artifical light shines on the walls up ahead. You walk around a corner, and emerge in an open space, full of lively people. Wooden platforms and walls have been erected over and around natural rock, supporting numerous tables and chairs, most occupied. There's a bar in the corner, and it looks well-stocked.
+<br><br>
+<<if $exposed gte 1>>
+	A cheer erupts from the nearby table as the occupants notice your <<lewdness>>. It draws more attention. The room reverberates with the sound.<<covered>><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+	<br><br>
+	You take cover behind one of the wooden walls.
+	<br><br>
+<<else>>
+	Some of the <<people>> sat at the tables throw lascivious glances your way, but most don't pay your arrival any attention.
+	<br><br>
+<</if>>
+
+<<link [[Next|Smuggler Pub]]>><</link>>
+<br>
+
+:: Smuggler Pub
+<<set $location to "underground">><<set $outside to 0>><<effects>>
+
+You are in the smuggler's pub, hidden underground. Wooden platforms and walls have been erected within a natural cave. It's full of people, some carousing, others more guarded.
+<br><br>
+
+<<if $exposed gte 1>>
+	You hide behind one of the wooden walls to conceal your <<nudity>>. You peer through a crack between planks.
+	<br><br>
+<</if>>
+
+<<if $temple_spear_mission gte 1 and !$smuggler_pub_zephyr>>
+	<<npc "Zephyr">><<person1>>
+	<<generate2>><<person2>><span class="pink">A pair of strong arms lifts you from behind.</span>
+	<br><br>
+
+	<<link [[Struggle|Smuggler Pub Zephyr Struggle]]>><</link>><<physiquedifficulty 12000 16000>>
+	<br>
+	<<link [[Wait|Smuggler Pub Zephyr Wait]]>><</link>>
+	<br>
+<<else>>
+	<<if $debug is 1>>
+		<<if $exposed lte 0>>
+			<<stripclubicon>><<link [[Work as a dancer|Smuggler Pub Work Dance]]>><<set $dancestart to 1>><<stress -4>><<tiredness 4>><</link>><<lstress>><<gtiredness>>
+			<br>
+		<</if>>
+	<</if>>
+	<<if $smuggler_pub_zephyr is 1>>
+		<<link [[Speak to Zephyr|Smuggler Pub Zephyr]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[Enter Sewers (0:05)|Sewers Algae]]>><<pass 5>><<sewersstart>><</link>>
+	<br>
+	<<if $historytrait gte 4>>
+		<<link [[Follow the tunnel to the watery cave (0:05)|Beach Cave Pub Entrance]]>><</link>>
+		<br>
+	<</if>>
+<</if>>
+
+:: Smuggler Pub Zephyr Struggle
+<<effects>>
+
+You squirm and kick against the <<personsimple>> holding you as <<he>> tries to take you somewhere. Eyes are drawn from around the pub.
+<<if $physiqueSuccess>>
+	Your size alone is enough to make it hard for <<him>>, and with your kicking and squirming <span class="green"><<he>> soon loses <<his>> grip.</span>
+	<br><br>
+	<<person1>>
+	<<if $pirateintro is 1>>
+		"I knew it was ye, <<lass>>!" says a familiar voice. Captain Zephyr watches you from a table, a tall mug of dark liquid gripped in one hand. "I said this one had some fight in <<phim>>."
+		<br><br>
+		Zephyr leans back, and kicks the chair opposite <<him>> away from the table. "Have a seat."
+		<br><br>
+
+		<<link [[Sit|Smuggler Pub Zephyr Known]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[Stand|Smuggler Pub Zephyr Known]]>><<set $phase to 1>><</link>>
+		<br>
+	<<else>>
+		"That's it <<lass>>!" shouts a <<personsimple>> with black braided hair. "You're just what I need for me crew." <<He>> leans back, and kicks the chair opposite away from the table. "Have a seat."
+		<br><br>
+		<<link [[Sit|Smuggler Pub Zephyr Unknown]]>><<set $phase to 0>><</link>>
+		<br>
+		<<link [[Stand|Smuggler Pub Zephyr Unknown]]>><<set $phase to 1>><</link>>
+		<br>
+	<</if>>
+<<else>>
+	<<He>> grunts as your foot connects with some weak spot on <<his>> shin, <span class="red">but it's not enough to break <<his>> grip.</span>
+	<br><br>
+	<<person1>>
+	<<if $pirateintro is 1>>
+		"I knew it was ye, <<lass>>!" says a familiar voice. Captain Zephyr watches you from a table, a tall mug of dark liquid grasped in one hand. "What are ye waiting for?" <<he>> leans back, and kicks the chair opposite away from the table. "Put <<phim>> down."
+		<br><br>
+		The <<person2>><<person>> does as bid, almost dropping you across from Zephyr.
+		<br><br>
+		<<link [[Next|Smuggler Pub Zephyr Known]]>><<set $phase to 0>><</link>>
+		<br>
+	<<else>>
+		"This <<lass>> has some fight in <<phim>>!" says a <<person1>><<personsimple>> sat at a nearby table. <<His>> black braided hair swings as <<he>> takes a swig of dark liquid from a mug. "What are ye waiting for?" <<he>> leans back, and kicks the chair opposite away from the table. "Put <<phim>> down."
+		<br><br>
+		The <<person2>><<person>> does as bid, almost dropping you on the chair opposite.
+		<br><br>
+
+		<<link [[Next|Smuggler Pub Zephyr Unknown]]>><<set $phase to 0>><</link>>
+		<br>
+	<</if>>
+	
+<</if>>
+
+
+:: Smuggler Pub Zephyr Wait
+<<effects>>
+
+You allow yourself to be carried through the pub, enduring the glances of the patrons.
+<br><br>
+<<person1>>
+<<if $pirateintro is 1>>
+	"Well if it ain't my favourite <<lass>>," says a familiar voice. Captain Zephyr sits nearby, a mug of dark liquid in one hand. "Ye look a might silly being carried. Here." <<He>> leans back, and kicks the chair opposite away from the table. "Have a seat."
+	<br><br>
+	The <<person2>><<person>> drops you on the chair, and slides it back in.
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Zephyr Known]]>><<set $phase to 1>><</link>>
+	<br>
+<<else>>
+	"Well what do we have here," says a <<personsimple>> sat nearby. <<His>> black braided hair swings as <<he>> takes a swig of dark liquid from a mug. "Why don't ye have a seat." <<He>> leans back, and kicks the chair opposite away from the table. "Put <<phim>> down."
+	<br><br>
+
+	<<link [[Next|Smuggler Pub Zephyr Unknown]]>><<set $phase to 0>><</link>>
+	<br>
+<</if>>
+
+:: Smuggler Pub Zephyr Unknown
+<<effects>>
+<<set $smuggler_pub_zephyr to 1>>
+<<person1>>
+<<if $phase is 1>>
+	"Stand if ye must," the <<personsimple>> says. "I won't keep ye long. The name's Captain Zephyr," <<he>> says, watching your face for a glimmer of recognition. <<He>> hides <<his>> disappointment with a swig from <<his>> mug.
+<<else>>
+	"I won't keep ye long. The name's Captain Zephyr," <<he>> says, watching your face for a glimmer of recognition. <<He>> hides <<his>> disappointment with a swig from <<his>> mug.
+<</if>>
+<<if $pronoun is "m">>
+	The liquid dribbles over <<his>> beard.
+<<else>>
+	The liquid dribbles over <<his>> chin.
+<</if>>
+<br><br>
+"A little bird told me ye be looking for a way to that legendary island. Hah! I'm just the <<personsimple>> ye need. See, I have a ship that can take ye there. All I ask in return is that ye help look after me ship and its crew on the journey."
+<br><br>
+"Or," <<he>> continues. "If ye like, ye can pay me upfront for a cushier experience. Ye'll still be expected to help out, but we'll leave the rougher work to others. <span class="gold">£15000</span> should cover expenses. It's up to ye."
+<br><br>
+
+"Ye'll find me here," <<he>> says, downing the rest of the drink and slamming the mug on the table. "Another!"
+<br><br>
+
+<<link [[Next|Smuggler Pub]]>><</link>>
+<br>
+
+:: Smuggler Pub Zephyr Known
+<<effects>>
+<<set $smuggler_pub_zephyr to 1>>
+<<person1>>
+<<if $phase is 1>>
+	"Stand if ye must," Zephyr says, taking another swig from <<his>> mug. 
+<</if>>
+"Just thought I'd introdude ye to a, ah, drier way to come aboard me ship. It's docked not far from here. Better than searching for me on the open water, aye? A little bird told me ye be looking for a way to that legendary island. I know the way."
+<br><br>
+
+<<if $pirate_rank gte 1>>
+	"Just let me know if ye be feeling a yearning for the salty breeze in your hair, and I'll show ye to it."
+	<br><br>
+<<else>>
+	"I'll even give ye an upgrade to your station. For a price of <span class="gold">£15000.</span> Or you can sail as the scum ye are. Hah!"
+	<br><br>
+<</if>>
+
+<<He>> downs the last of <<his>> drink, and shouts for another.
+<br><br>
+
+<<link [[Next|Smuggler Pub]]>><<endevent>><</link>>
+<br>
+
+:: Smuggler Pub Zephyr
+<<effects>>
+
+<<npc "Zephyr">><<person1>>
+You sit at Zephyr's table. "Well if it isn't me old chum," <<he>> says. "Fancy a trip aboard me vessel?"
+<br><br>
+<<if $pirate_rank gte 1>>
+	<<link [[Board|Pirate Smuggler Entrance]]>><</link>>
+	<br>
+<<else>>
+	"For <span class="gold">£15000</span> you can sail first class. Or you can sail second class for no money at all. A bargain!"
+	<br><br>
+	"Oh," <<he>> adds. "One more thing. <span class="pink">This trip won't be a short one.</span> I'd say it'll take us a week to get to the island, and who's telling how long ye'll be staying there. Make sure ye have your business seen to before ye set off."
+	<br><br>
+	<<if $money gte 1500000>>
+		<<link [[Ride first class (£15000)|Pirate Smuggler Entrance]]>><<set $phase to 1>><<set $money -= 1500000>><<set $pirate_rank to 1>><</link>>
+		<br>
+	<<else>>
+		<span class="blue">You can't afford to sail first class.</span>
+		<br>
+	<</if>>
+	<<if $pirate_rank is 0>>
+		<<link [[Ride second class|Pirate Smuggler Entrance]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[Ride second class|Pirate Smuggler Entrance]]>><<set $phase to 1>><<set $pirate_rank to 0>><</link>>
+		<br>
+	<</if>>
+<</if>>
+<<link [[Leave|Smuggler Pub]]>><</link>>
+<br>
+
+:: Smuggler Pub Work Dance
+<<effects>>
+
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<danceinit>>
+	<<set $dancing to 1>>
+	<<set $venuemod to 3>>
+	<<set $dancelocation to "smuggler_pub">>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1))>>
+	There's no way you could normally continue dancing while so exposed.
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
+	<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+	<<unset $corruptionDancing>>
+	<<link [[Next|Smuggler Pub]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is "rape">>
+	<<link [[Next|Smuggler Pub Work Dance Rape]]>><<set $molestationstart to 1>><<unset $corruptionDancing>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $corruptionDancing isnot undefined>>
+		The slime in your ear is forcing you.
+	<<elseif $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[Flee|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[Flee|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<else>>
+		<<link [[Stop|Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+<</if>>
+
+:: Smuggler Pub Work Dance Rape
+
+<<if $corruptionDancing is 2>>
+	<<unset $corruptionDancing>>
+	<<set $molestationstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<maninit>>
+<<elseif $molestationstart is 1>>
+	<<unset $corruptionDancing>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<br>
+	<<violence 1>>
+	<<neutral 1>>
+	<<maninit>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<alarmstate>>
+<<man>>
+<<audience>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $alarm is 1>>
+	<<if $rescue is 0>>
+		<<set $alarm to 0>>
+		<br><br>
+		<<if $enemyarousal gte $enemyarousalmax>>
+			<span id="next"><<link [[Next->Smuggler Pub Dance Rape Finish]]>><</link>></span><<nexttext>>
+		<<elseif $enemyhealth lte 0>>
+			<span id="next"><<link [[Next->Smuggler Pub Dance Rape Finish]]>><</link>></span><<nexttext>>
+		<<else>>
+			<span id="next"><<link [[Next->Smuggler Pub Dance Rape]]>><</link>></span><<nexttext>>
+		<</if>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next->Smuggler Pub Dance Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[Next->Smuggler Pub Dance Rape Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next->Smuggler Pub Dance Rape]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Smuggler Pub Work Dance Rape Finish
+
+<<effects>>
+<<if $enemyhealth lte 0>>
+	<<if Time.dayState isnot "night">>
+		<<He>> recoils in pain, giving you the chance you need. <<tearful>> you escape into the dressing room.
+		<br><br>
+	<<else>>
+		<<He>> recoils in pain, giving you the chance you need. <<tearful>> you escape into the dressing room.
+		<br><br>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $audience is 1>>
+		A cheer erupts from the crowd as the <<person1>><<person>> climaxes. <<tearful>> you manage to stagger away before anyone else gets ideas.
+	<<elseif $audience lte 6>>
+		The <<person1>><<person>> and <<person2>><<person>> high-five each other. <<tearful>> you manage to stagger away while the audience congratulates each other.
+	<<else>>
+		A cheer erupts from the crowd, seems they enjoyed the show. <<tearful>> you manage to stagger away before anyone else gets any ideas.
+	<</if>>
+	<br><br>
+	<<stealclothes>>
+<</if>>
+
+<<clotheson>>
+<<endcombat>>
+<<link [[Next|Smuggler Pub]]>><</link>>
+<br>

@@ -1,0 +1,38 @@
+:: Widgets Hospital [widget]
+<<widget "harper_intro">>
+	<<if $hospitalintro is 0>>
+		<<set $hospitalintro to 1>>
+
+		<<npc Harper>><<person1>>You don't have to wait long. A <<personsimple>> wearing a white medical coat and carrying a clipboard emerges from an adjacent room and beckons you over.
+		<br><br>
+
+		<<He>> smiles at you. "Hello, I'm Doctor Harper." You enter <<his>> office and take a seat. <<He>> looks young, can't be older than 25.
+		<br><br>
+
+	<<elseif $hospitalintro is "livestock">>
+		<<set $hospitalintro to 1>>
+		<<npc Harper>><<person1>>
+		You don't have to wait long. A <<personsimple>> wearing a white medical coat and carrying a clipboard emerges from an adjacent room and beckons you over.
+		<br><br>
+
+		It's the doctor from the farm. The one who experimented on you. "Hello, I'm Doctor Harper." There's no recognition on <<his>> face. You hesitate, but enter <<his>> office and take a seat. You're in a busy hospital now, not an isolated farm.
+		<br><br>
+
+	<<else>>
+
+		<<npc Harper>><<person1>>You don't have to wait long. Doctor Harper emerges from <<his>> office and beckons you over. You follow <<him>> in and take a seat.
+		<br><br>
+
+	<</if>>
+<</widget>>
+
+:: Pharmacy Condoms Price [widget]
+<<widget condomsPrice>>
+	<<if _args[0] lte 50>>
+		<<set _price to _args[0] * 6000>>
+	<<elseif _args lte 100>>
+		<<set _price to 50 * 6000 + (_args[0] - 50) * 6000 * .98>>
+	<<else>>
+		<<set _price to 50 * 6000 + 50 * 6000 * .98 + (_args[0] - 100) * 6000 * .95>>
+	<</if>>
+<</widget>>

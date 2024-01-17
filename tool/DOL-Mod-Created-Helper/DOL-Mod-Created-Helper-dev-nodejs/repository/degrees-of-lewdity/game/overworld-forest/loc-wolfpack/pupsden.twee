@@ -1,0 +1,330 @@
+
+:: Pups Den Widgets [widget]
+
+<<widget "wolfwetnurse">>
+	<<if $monster is 1>>
+		You spot an angry wolfgirl marching towards you, with your pups in tow.
+		<br><br>
+
+		"<<pPackbrother>> finally back!" <<bhe>> protests. <<bHe>> draws attention to <<bhis>> breasts. <<bHis>> nipples look sore.
+		<br><br>
+
+		"Black Wolf told me to feed pups! Savage beasts, bit me all over and dried me up!" <<bHe>> pushes you aside as <<bhe>> leaves. "Look for different pack sister to help next time!"
+		<br><br>
+
+		Your pups seem eager to see you back, at least. You gather them in your embrace and take them inside.
+		<br><br>
+	<<else>>
+		You spot an angry female wolf marching towards you, with your pups in tow.
+		<br><br>
+
+		<<bHis>> nipples look sore. <<bHe>> must have been feeding your pups, and by the looks of things, they haven't been gentle about it.
+		<br><br>
+
+		The female wolf growls at you before turning to leave. Black Wolf will have to look for a different pack sister to help next time.
+		<br><br>
+
+		Your pups seem eager to see you back, at least. You gather them in your embrace and take them inside.
+		<br><br>
+	<</if>>
+    <<destinationwolfcave>>
+<</widget>>
+
+:: Pups Den
+<<set $outside to 0>><<set $location to "wolf_cave">><<effects>>
+
+<<if ((Time.hour gte 8 and Time.hour lte 15) or (Time.hour gte 18))>>
+    <<unset $breastfeedend>>
+<</if>>
+
+You are in a secluded den inside the wolf cave. Makeshift chew toys are scattered around. 
+<br><br>
+
+One of your packmates guards the entrance to the pups den.
+<br><br>
+
+<<if Object.values($children).find(child => child.mother === "Black Wolf" && child.location === "wolf_cave") and ((Time.hour gte 6 and Time.hour lte 7) or (Time.hour gte 16 and Time.hour lte 17))>>
+    The Black Wolf lays down in a corner of the den, surrounded by a group of puppies.
+    <br><br>
+
+    <<if $breastfeedend isnot 1>>
+       <<ind>> <<link [[Approach|BW Pups Breastfeed]]>><</link>>
+        <br>
+
+    <<else>>
+        <<ind>><<link [[Approach|BW Pups Breastfeed]]>><</link>>
+    <br>
+
+    <</if>>
+
+<</if>>
+
+<<if $bestialitydisable is "f" and $breastfeedingdisable is "f" and $lactating is 1 and $deviancy gte 35 and ($monsterchance lt 100 or ($monsterhallucinations is "t" and $hallucinations is 0))>>
+
+	<<if $wolfcavebreast is 3>>
+		<span class="blue">The pups are full of milk.</span>
+        <br>
+	<<else>>
+		<<ind>><<link [[Breastfeed some pups (0:05)|Wolf Cave Breastfeed]]>><<set $phase to 0>><</link>><<deviant3>>
+        <br>
+	<</if>>
+<</if>>
+
+<<if Object.values($children).find(child => child.mother === "pc" && child.location === "wolf_cave") and ((Time.hour gte 6 and Time.hour lte 7) or (Time.hour gte 16 and Time.hour lte 17)) and $breastfeedend isnot 1>>
+
+    <<ind>><<link [[Check on your children|PC Pups Breastfeed]]>><</link>>
+    <br>
+
+<<else>>
+    <<ind>><<link [[Check on your children|Childrens Home]]>><<set $exitPassage to $passage>><</link>>
+    <br>
+<</if>>
+
+
+<<getouticon>><<link [[Leave|Wolf Cave]]>><</link>>
+
+:: BW Pups Breastfeed
+<<effects>><<npc "Black Wolf">>
+
+<<if $breastfeedend isnot 1>>
+
+    The pups have gathered around the Black Wolf's breasts. They shove each other away trying to claim their share of the milk.
+    <br><br>
+
+    Black Wolf remains still and absent-minded, only giving the pups the occasional growl whenever they become too feisty.
+    <br><br>
+
+    <<if $monster is 1>>
+
+        "Pups too impatient," <<bhe>> sulks. "Takes more patience than I thought..."
+        <br><br>
+
+    <<else>>
+
+        You take notice of the Black's exasperation and lack of patience with the pups.
+        <br><br>
+
+    <</if>>
+
+    <<link [[Try to drink some of the milk (0:30)|BW Pups Breastfeed Drink]]>><<pass 30>><</link>>
+    <br>
+
+    <<if $lactating is 1 and $breastfeedingdisable is "f" and $milk_amount gte 1>>
+
+        <<link [[Feed some of the pups yourself (0:30)|BW Pups Breastfeed Help]]>><<pass 30>><</link>>
+        <br>
+
+    <</if>>
+
+   <<link [[Leave|Pups Den]]>><</link>>
+
+<<else>>
+
+    The pups are resting in a small pile around Black Wolf.
+    <br><br>
+
+    <<if $monster is 1>>
+
+        "Pups finally calmed down," <<bhe>> says relieved.
+        <br><br>
+
+    <<else>>
+
+        <<bHe>> seems relieved that the pups finally calmed down.
+        <br><br>
+
+    <</if>>
+
+    <<link [[Next|Pups Den]]>><<endevent>><</link>>
+
+<</if>>
+
+:: BW Pups Breastfeed Drink
+<<effects>>
+
+You wait expectantly for your pups to finish feeding. Once sated, they gather in a small pile around Black Wolf to rest. You inch closer to the Black Wolf's <<if $monster is 1>>breasts<<else>>tits<</if>>. You give them a gentle lick.<<garousal>><<arousal 600>>
+<br><br>
+
+<<if $monster is 1>>
+    Black Wolf shoves you away. "Stop that," <<bhe>> growls. "<<pPackbrother>> is not pup."
+    <br><br>
+<<else>>
+    Black Wolf shoves you away. Seemingly annoyed by your attempt to feed like a pup.
+    <br><br>
+<</if>>
+
+<<link [[Insist|BW Pups Breastfeed Insist]]>><</link>>
+<br>
+<<link [[Leave|Pups Den]]>><<set $breastfeedend to 1>><<endevent>><</link>>
+
+:: BW Pups Breastfeed Insist
+<<effects>>
+
+You won't let that stop you. You ignore the wolf's warning and shift closer once again.
+
+<<if $wolfpackharmony gte 15>>
+
+    <<if $monster is 1>>
+
+        <<bHe>> growls again, but in a softer tone this time. The Black Wolf moves <<bhis>> arm aside, leaving <<bhis>> bare breasts at your reach.
+        <br><br>
+
+    <<else>>
+
+        <<bHe>> growls again, but in a softer tone this time. The Black Wolf moves <<bhis>> leg aside, leaving <<bhis>> bare chest at your reach.
+        <br><br>
+
+    <</if>>
+
+    You don't waste the opportunity. Reaching forward, you wrap <<bhis>> nipple around your lips and begin sucking. <span class="pink">Sweet creamy milk begins to flow out.</span> You squeeze <<bhis>> breast with your hand, making sure to get even the last drop as you continue feeding.
+    <br><br>
+
+    Despite the pups' hungrily drinking earlier, there seems to be enough for you as well. You move over to the other breast and repeat the process. Black Wolf remains still, yet remorseful.
+    <br><br>
+
+    You stand up once finished, wiping some leftover milk off your mouth. Black Wolf looks ashamed. 
+    
+    <<if $monster is 1>>
+        "Hope <<ppackbrother>> won't make habit out of this," <<bhe>> says without looking at you. "What would pack think if they saw?"
+        <br><br>
+
+    <<else>>
+        You stand up once finished, wiping some leftover milk off your mouth. Black Wolf looks ashamed. Your behaviour may have put <<bhim>> off. You wonder if the other wolves would find this strange
+        <br><br>
+
+    <</if>>
+
+<<else>>
+
+    <span class="red"><<bHe>> grabs a hold of your collar and forces you down on the ground.</span>
+
+    <<if $monster is 1>>
+
+        "Not in mood for playing now!" <<bHe>> protests.
+        <br><br>
+
+        You decide not to push things further and leave them be.
+        <br><br>
+
+    <<else>>
+
+        <<bHe>> growls louder this time. This might not be a good time to try your luck.
+        <br><br>
+
+    <</if>>
+
+    You decide not to push things further and leave them be.
+    <br><br>
+
+<</if>>
+
+<<link [[Next|Pups Den]]>><<set $breastfeedend to 1>><<endevent>><</link>>
+
+:: BW Pups Breastfeed Help
+<<effects>>
+<<set _pupsCount to  Object.values($children).reduce((prev,curr) => curr.location === "wolf_cave" ? prev + 1: prev,0)>>
+
+You bare your breasts and lay down on the ground. You pat the ground, beckoning some of the pups over.
+<br><br>
+
+A few of them take notice of you, and split off from the group to start piling around you instead. It doesn't take long for the pups to begin hungrily feeding.
+<br><br>
+
+The Black Wolf seems mildly confused, but relieved. 
+
+<<if $monster is 1>>
+    "Not sure if will be enough, even with both of us..." <<bhe>> says with a smile.
+<</if>>
+<br><br>
+
+The pups continue with their feeding for a while longer, before settling down at last. Black Wolf moves over and gives your face a long lick of thanks, before settling down along with the pups to rest.
+<br><br>
+
+<<set $milk_amount -=_pupsCount/2>>
+
+<<link [[Next|Pups Den]]>><<endevent>><</link>>
+
+:: PC Pups Breastfeed
+<<effects>>
+
+You approach your pups, who cry and whimper at your arrival. More tiny wolves gather around you, trying desperately to reach for your breasts.
+<br><br>
+
+<<link [[Feed (0:30)|PC Pups Breastfeed Feed]]>><<pass 30>><</link>>
+<br>
+<<getouticon>><<link [[Leave|Pups Den]]>><<endevent>><</link>>
+
+:: PC Pups Breastfeed Feed
+<<effects>>
+
+<<set _pupsCount to  Object.values($children).reduce((prev,curr) => curr.location === "wolf_cave" ? prev + 1: prev,0)>>
+
+<<if $catbuild gte 50 or $wolfbuild gte 30>>
+    You remove your top and lower yourself to the ground, laying on your side. You leave your breasts exposed to the pups, who don't waste any time before piling on them.
+    <br><br>
+
+    The small beasts push and shove each other aside. They squirm and compete for a spot, with you only being able to feed two at once. The pups give the occasional bite, making you wince.<<gpain>><<violence 3>>
+    <br><br>
+
+    Moments later, the pups settle down and begin to grow weary.
+
+    <<if _pupsCount lte 16>>
+        You're pretty sure they all received their fair share. With their bellies full, they soon drift off into a gentle sleep.
+        <br><br>
+
+    <<else>>
+        You were unable to feed some of the puppies, leading them to a nearby <<if $monster is 1>>wolfgirl<<else>>female wolf<</if>>.
+        <br><br>
+
+    <</if>>
+
+    <<set $milk_amount -=_pupsCount>>
+
+<<elseif $cowbuild gte 40>>
+    You remove your top and lower yourself to the ground, resting on your hands and knees. Your breasts hang over the pups, who don't waste any time before piling below them.
+    <br><br>
+
+    The tiny beasts push and shove each other aside. They try to stand and reach for a spot, with you only being able to feed two at once. The pups give the occasional bite, making you wince.<<gpain>><<violence 3>>
+    <br><br>
+
+    Moments later, the pups settle down and begin to grow weary. 
+    
+    <<if _pupsCount lte 32>>
+        You're pretty sure they all received their fair share. With their bellies full, they soon drift off into a gentle sleep.
+        <br><br>
+
+    <<else>>
+        You were unable to feed some of the puppies, leading them to a nearby <<if $monster is 1>>wolfgirl<<else>>female wolf<</if>>.
+        <br><br>
+
+    <</if>>
+
+    <<set $milk_amount -=_pupsCount>>
+
+<<else>>
+    You remove your top and lower yourself to the ground, taking a seat near the small crowd. You try to cradle the pups, who wiggle eagerly in your arms.
+    <br><br>
+
+    The tiny beasts push and shove each other aside. They beg incessantly at you, impatient for their turn to feed. You soon become overwhelmed, being able to feed only two of them at once.<<gstress>><<stress 6>>
+    <br><br>
+
+    The pups give the occasional bite, making you wince.<<gpain>><<violence 3>>
+    <br><br>
+
+     Moments later, the pups settle down and begin to grow weary. 
+
+    <<if _pupsCount lte 8>>
+        You're pretty sure they all received their fair share. With their bellies full, they soon drift off into a gentle sleep.
+        <br><br>
+
+    <<else>>
+        You were unable to feed some of the puppies, leading them to a nearby <<if $monster is 1>>wolfgirl<<else>>female wolf<</if>>.
+        <br><br>
+
+    <</if>>
+
+    <<set $milk_amount -=_pupsCount>>
+
+<</if>>
+
+<<link [[Next|Pups Den]]>><<set $breastfeedend to 1>><<endevent>><</link>>

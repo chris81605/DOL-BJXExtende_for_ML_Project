@@ -1,0 +1,292 @@
+:: Widgets Chalets [widget]
+<<widget "eventschalets">>
+<<cleareventpool>>
+
+<<addinlineevent "chalets_empty_1" 1>>
+    No one answers, so you unlock the door and let yourself in. You get to work cleaning the chalet, gathering all the rubbish you can find into a black bin bag.
+    <br><br>
+    You finish up, and leave the chalet.
+    <br><br>
+
+    <<link [[Next|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+<</addinlineevent>>
+
+<<addinlineevent "chalets_empty_2" 1>>
+    No one answers, so you unlock the door and let yourself in. You get to work cleaning the chalet, gathering all the rubbish you can find into a black bin bag.
+    <br><br>
+    Dirty plates stack high in the kitchen sink, surrounded by filthy glasses. It would take a while to clean it all.
+    <br><br>
+
+    <<link [[Ignore|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+    <<link [[Leave a passive aggressive note making fun of the occupants|Chalets Work Plates Note]]>><<pass 60>><<set $chalets_bags += 1>><<stress -6>><</link>><<lstress>>
+    <br>
+    <<link [[Clean (0:30)|Chalets Work Plates Clean]]>><<pass 60>><<set $chalets_bags += 1>><<housekeeping 1 300>><</link>><<ghousekeeping 300>>
+    <br>
+<</addinlineevent>>
+
+<<addinlineevent "chalets_empty_3" 1>>
+    No one answers, so you unlock the door and let yourself in. You get to work cleaning the chalet, gathering all the rubbish you can find into a black bin bag.
+    <br><br>
+
+    <<generate1>><<person1>><<generate2>>
+    You're just finishing up when a <<person>> enters, followed by a <<person2>><<person>>.
+    <br><br>
+    "Intruder!" the <<person1>><<person>> shouts, reaching for the mop you left by the door.
+    <br>
+    "I think <<pshe>>'s the cleaner," the <<person2>><<person>> says.
+    <br>
+    "If <<pshe>>'s the cleaner, why is there sand everywhere?"
+    <br>
+    "Because you just kicked it in."
+    <br><br>
+    You leave them to bicker.
+    <br><br>
+
+    <<endevent>>
+    <<link [[Next|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+<</addinlineevent>>
+
+<<addinlineevent "chalets_empty_4" 0.05>>
+    No one answers, so you unlock the door and let yourself in. You get to work cleaning the chalet, gathering all the rubbish you can find into a black bin bag.
+    <br><br>
+    You're emptying a bin in the bedroom when you notice a fat wad of cash, half-stuffed beneath the mattress.
+    <br><br>
+
+    <<link [[Count it|Chalets Work Cash Count]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+    <<link [[Ignore|Chalets Work Cash Ignore]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+    <br>
+<</addinlineevent>>
+
+<<if $upperwetstage gte 2 or $lowerwetstage gte 2>>
+    <<addinlineevent "chalets_wet_1" 1>>
+        <<generate1>><<person1>>
+        A <<person>> answers the door. At once, <<he>> regards your body with a naked lust. Such a display seems strange, until you look down. <<covered>> <span class="lewd">Water has soaked right through your clothes!</span><<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
+        <br><br>
+
+        <<link [[Run (0:02)|Chalets Work Wet Run]]>><<tiredness 3>><</link>><<gtiredness>> <i>Ends job</i>
+        <br>
+        <<link [[Ask for some towels|Chalets Work Wet Ask]]>><<stress 6>><</link>><<gstress>>
+        <br>
+        <<if $exhibitionism gte 55>>
+            <<link [[Take advantage|Chalets Work Wet Exhibitionism]]>><</link>><<exhibitionist4>>
+            <br>
+        <</if>>
+    <</addinlineevent>>
+<<else>>
+    <<addinlineevent "chalets_event_1" 1>>
+        <<endevent>>
+        <<generate1>><<person1>>
+        A <<person>> answers.
+        <br>
+        "I'm here to clean the chalet," you say.
+        <br>
+        <<He>> nods, and lets you inside.
+        <br><br>
+        You get to work cleaning the chalet, gathering all the rubbish you can find into a black bin bag.
+        <<if random(1, 2) is 2>>
+            The <<person>> sits in front of the television screen, ignoring you, only giving a nod when you say you've finished.
+            <br><br>
+            You leave the chalet.
+            <br><br>
+            <<link [[Next|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+            <br>
+        <<else>>
+            The <<person>> sits in front of the television, but watches you while you work, eyeing up your body.
+            <br><br>
+            You finish up, but as you approach to tell <<him>>, <<he>> reaches out and grasps your <<bottom>>.<<gstress>><<garousal>><<stress 6>><<arousal 6>>
+            <br><br>
+
+            <<link [[Endure|Chalets Work One Endure]]>><<pass 60>><<set $chalets_bags += 1>><<trauma 6>><<stress 6>><<arousal 1200>><</link>><<gtrauma>><<gstress>><<ggarousal>>
+            <br>
+            <<link [[Smack hand away|Chalets Work One Smack]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+            <br>
+            <<if $promiscuity gte 35>>
+                <<link [[Charge extra|Chalets Work One Charge]]>><<pass 60>><<set $chalets_bags += 1>><<arousal 1200>><</link>><<promiscuous3>><<ggarousal>>
+                <br>
+            <<elseif $uncomfortable.prostituting is false>>
+                <<link [[Charge extra|Chalets Work One Charge]]>><<pass 60>><<set $chalets_bags += 1>><<arousal 1200>><<trauma 6>><<stress 6>><</link>><<promiscuous3>><<ggarousal>><<gtrauma>><<gstress>>
+                <br>
+            <</if>>
+        <</if>>
+    <</addinlineevent>>
+
+    <<addinlineevent "chalets_event_2" 1>>
+        <<endevent>>
+        <<generate1>><<person1>><<generate2>>
+        A <<person>> answers.
+        <br>
+        "I'm here to clean," you say.
+        <br>
+        "Oh good," says a <<person2>><<personsimple>>'s voice from deeper in. "Hurry in. We've made a bit of a mess."
+        <br><br>
+        The voice belongs to a <<person>>. The mess is a mountain of cans, and snack packaging. Some have stuck to the carpet.
+        <br><br>
+        <<if $footdisable is "f">>
+            You're cleaning on your hands and knees when you feel something rest on your back. It's the <<person1>><<persons>> feet.
+            <br><br>
+            "You don't mind if I rest my feet a little, right?" <<he>> asks.
+            <br><br>
+
+            <<link [[Allow|Chalets Work Feet Allow]]>><<pass 60>><<set $chalets_bags += 1>><<stress 6>><</link>><<gstress>>
+            <br>
+            <<link [[Charge extra|Chalets Work Feet Charge]]>><<pass 60>><<set $chalets_bags += 1>><<pain 4>><<stress 6>><</link>><<gpain>><<gstress>>
+            <br>
+            <<link [[Refuse|Chalets Work Feet Refuse]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+            <br>
+        <<else>>
+            You need to work on your hands and knees, but you manage to clear the litter. You leave the chalet.
+            <br><br>
+
+            <<link [[Next|Chalets]]>><<pass 60>><<endevent>><<set $chalets_bags += 1>><</link>>
+            <br>
+        <</if>>
+    <</addinlineevent>>
+
+    <<addinlineevent "chalets_event_3" 1>>
+        <<endevent>>
+        <<generate1>><<generate2>><<generate3>><<person1>>
+        A <<person>> answers.
+        <br>
+        "I'm here to clean," you say.
+        <br><br>
+        A smile flashes across <<his>> face. "Come in."
+        <br><br>
+        There are two others inside, a <<person2>><<person>> and a <<person3>><<person>>, both seated. They pretend to ignore you as you go about your work.
+        <br><br>
+        <<if random(1, 3) is 3>>
+            "Fancy making some extra cash?" the <<person1>><<person>> asks as you're finishing up. "We could use some entertainment." <<He>> holds a dog collar and leash.
+            <br><br>
+            "I'll give you <span class="gold">£30</span> If you let me lead you around with this, just for five minutes."
+            <br><br>
+
+            <<link [[Wear the collar (0:05)|Chalets Work Collar]]>><<pass 60>><<set $chalets_bags += 1>><<pass 5>><</link>><<exhibitionist1>>
+            <br>
+            <<link [[Refuse|Chalets Work Collar Refuse]]>><<pass 60>><<set $chalets_bags += 1>><</link>>
+            <br>
+        <<else>>
+            You finish up and leave the chalet.
+            <br><br>
+            <<link [[Next|Chalets]]>><<pass 60>><<set $chalets_bags += 1>><<endevent>><</link>>
+            <br>
+        <</if>>
+    <</addinlineevent>>
+<</if>>
+
+<<runeventpool>>
+<</widget>>
+
+<<widget "chalets_start">>
+    <<set $chalets_bags to 0>>
+<</widget>>
+
+<<widget "chalets_end">>
+    <<set $chalets_bags to 1>>
+<</widget>>
+
+<<widget "chalets_fall_events">>
+<<if $weather is "rain" or $weather is "snow">>
+    The inclement weather makes it worse, turning the sand into a boggy mush liable to swallow a foot whole.
+    <br><br>
+    <<if currentSkillValue('housekeeping') gte 300>>
+        It's a question of balance, and one you can answer. <span class="green">You cross the sand on light and nimble feet.</span>
+        <br><br>
+        <<chalets_end_link>>
+    <<else>>
+        How do you proceed?
+        <br><br>
+        <<link [[Slow and careful (0:20)|Chalets Work End Slow]]>><<pass 20>><</link>><<ghousekeeping 100>>
+        <br>
+        <<link [[Fast|Chalets Work End Fast Wet]]>><</link>><<housekeepingdifficulty 1 300>><<ghousekeeping 300>>
+        <br>
+    <</if>>
+<<else>>
+    <<if currentSkillValue('housekeeping') gte 200>>
+        It's a question of balance, and one you can answer. <span class="green">You cross the sand on light and nimble feet.</span>
+        <br><br>
+        <<chalets_end_link>>
+    <<else>>
+        How do you proceed?
+        <br><br>
+        <<link [[Slow and careful (0:20)|Chalets Work End Slow]]>><<pass 20>><</link>><<ghousekeeping 100>>
+        <br>
+        <<link [[Fast|Chalets Work End Fast]]>><</link>><<housekeepingdifficulty 1 200>><<ghousekeeping 200>>
+        <br>
+    <</if>>
+<</if>>
+<</widget>>
+
+<<widget "chalets_end_link">>
+<<if $chalets_bags gte 1>>
+    <<link [[Next|Chalets Work End 2]]>><<endevent>><</link>>
+    <br>
+<<else>>
+    <<link [[Next|Starfish Street]]>><<chalets_end>><</link>>
+    <br>
+<</if>>
+<</widget>>
+
+<<widget "chalets_bags">>
+<<switch $chalets_bags>>
+    <<case 5>>
+        You have <span class="gold">5</span> bags of rubbish. Deliver them to the manager on Starfish Street for payment.
+    <<case 4>>
+        You have <span class="gold">4</span> bags of rubbish. Deliver them to the manager on Starfish Street for payment.
+    <<case 3>>
+        You have <span class="gold">3</span> bags of rubbish. Deliver them to the manager on Starfish Street for payment.
+    <<case 2>>
+        You have <span class="gold">2</span> bags of rubbish. Deliver them to the manager on Starfish Street for payment.
+    <<case 1>>
+        You have <span class="gold">1</span> bag of rubbish. Deliver them to the manager on Starfish Street for payment.
+    <<default>>
+        You have no bags of rubbish.
+<</switch>>
+<<if currentSkillValue('housekeeping') gte 300>>
+    Your housekeeping skill lets you carry a total of 5.
+<<elseif currentSkillValue('housekeeping') gte 200>>
+    Your housekeeping skill lets you carry a total of 4.
+<<elseif currentSkillValue('housekeeping') gte 100>>
+    Your housekeeping skill lets you carry a total of 3.
+<<else>>
+    Your housekeeping skill lets you carry a total of 2.
+<</if>>
+<</widget>>
+
+<<widget "chalets_links">>
+<<if currentSkillValue('housekeeping') gte 300>>
+    <<if $chalets_bags lt 5>>
+        <<link [[Clean a chalet (1:00)|Chalets Knock]]>><</link>>
+        <br>
+    <<else>>
+        <span class="blue">You can't carry any more bags.</span>
+        <br>
+    <</if>>
+<<elseif currentSkillValue('housekeeping') gte 200>>
+    <<if $chalets_bags lt 4>>
+        <<link [[Clean a chalet (1:00)|Chalets Knock]]>><</link>>
+        <br>
+    <<else>>
+        <span class="blue">You can't carry any more bags.</span>
+        <br>
+    <</if>>
+<<elseif currentSkillValue('housekeeping') gte 100>>
+    <<if $chalets_bags lt 3>>
+        <<link [[Clean a chalet (1:00)|Chalets Knock]]>><</link>>
+        <br>
+    <<else>>
+        <span class="blue">You can't carry any more bags.</span>
+        <br>
+    <</if>>
+<<else>>
+    <<if $chalets_bags lt 2>>
+        <<link [[Clean a chalet (1:00)|Chalets Knock]]>><</link>>
+        <br>
+    <<else>>
+        <span class="blue">You can't carry any more bags.</span>
+        <br>
+    <</if>>
+<</if>>
+<</widget>>

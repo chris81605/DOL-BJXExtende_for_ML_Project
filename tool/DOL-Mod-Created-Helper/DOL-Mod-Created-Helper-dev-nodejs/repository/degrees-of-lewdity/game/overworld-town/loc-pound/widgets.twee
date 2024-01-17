@@ -1,0 +1,206 @@
+:: Widgets Pound [widget]
+<<widget "pound_init">>
+	<<set $pound to {}>>
+	<<set $pound.status to 0>>
+	<<set $pound.sneak to 0>>
+	<<set $pound.progress to 0>>
+	<<set $pound.tasks to []>>
+<</widget>>
+
+<<widget "pound_text">>
+	<<if ($monsterchance gte $rng and $hallucinations gte 1) or ($monsterchance gte $rng and $monsterhallucinations is "f")>>
+		<<if $monsterchance gte 100 or $bestialitydisable is "f">>
+			<<if maleChance() is 100>>
+				<<set _text_output to "dogboys">>
+			<<elseif maleChance() is 0>>
+				<<set _text_output to "doggirls">>
+			<<else>>
+				<<set _text_output to "dogpeople">>
+			<</if>>
+		<<else>>
+			<<set _text_output to "hounds">>
+		<</if>>
+	<<else>>
+		<<set _text_output to "dogs">>
+	<</if>>
+	<<if _args[0] is "cap">>
+		<<set _text_output to _text_output.toUpperFirst()>>
+	<</if>>
+	<<print _text_output>>
+<</widget>>
+
+<<widget "pound_punishment_links">>
+	<<if Time.hour is 12 and !$pound.compete>>
+		<<link [[Next|Pound Show Crawl]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[Next|Pound Food]]>><<detach_leash>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "pound_stats">>
+	<<if $pound.status gte 100>>
+		The <<pound_text>> see you as <span class="green">alpha.</span>
+		<<earnFeat "Pound Alpha">>
+	<<elseif $pound.status gte 80>>
+		The <<pound_text>> consider you <span class="teal">dominant.</span>
+	<<elseif $pound.status gte 60>>
+		The <<pound_text>> think you're <span class="lblue">strong.</span>
+	<<elseif $pound.status gte 40>>
+		The <<pound_text>> see you as <span class="blue">a normal packmate.</span>
+	<<elseif $pound.status gte 20>>
+		The <<pound_text>> think you're <span class="purple">weak.</span>
+	<<elseif $pound.status gte 1>>
+		The <<pound_text>> consider you <span class="pink">submissive.</span>
+	<<else>>
+		The <<pound_text>> see you as a <span class="red">runt.</span>
+		<<earnFeat "Pound Runt">>
+	<</if>>
+<</widget>>
+
+<<widget "pound_status">>
+	<<if _args[0]>>
+		<<set $pound.status += (_args[0] * 2)>>
+		<<set $pound.status to Math.clamp($pound.status, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "stray_happiness">>
+	<<if _args[0]>>
+		<<set $stray_happiness += _args[0]>>
+		<<set $stray_happiness to Math.clamp($stray_happiness, 0, 100)>>
+	<</if>>
+<</widget>>
+
+<<widget "gstray_happiness">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ Stray contentment</span>
+	<</if>>
+<</widget>>
+
+<<widget "gpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "ggpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "gggpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="green">+ + + Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "lpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="red">- Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "llpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="red">- - Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "lllpound_status">>
+	<<if $statdisable is "f">> |
+		<span class="red">- - - Pound respect</span>
+	<</if>>
+<</widget>>
+
+<<widget "pound_compete_text">>
+	<<if $pound.compete gte 5>>
+		<span class="green">You're in first place.</span>
+	<<elseif $pound.compete is 4>>
+		<span class="teal">You're in second place.</span>
+	<<elseif $pound.compete is 3>>
+		<span class="lblue">You're in third place.</span>
+	<<elseif $pound.compete is 2>>
+		<span class="blue">You're in fourth place.</span>
+	<<else>>
+		<span class="purple">You're last.</span>
+	<</if>>
+<</widget>>
+
+<<widget "stray_happiness_text">>
+	<<if $stray_happiness gte 100>>
+		<span class="green">The <<pound_text>> are cheerful.</span>
+	<<elseif $stray_happiness gte 80>>
+		<span class="teal">The <<pound_text>> are content.</span>
+	<<elseif $stray_happiness gte 60>>
+		<span class="lblue">The <<pound_text>> are sullen.</span>
+	<<elseif $stray_happiness gte 40>>
+		<span class="blue">The <<pound_text>> brood in dark corners.</span>
+	<<elseif $stray_happiness gte 20>>
+		<span class="purple">The <<pound_text>> are agitated.</span>
+	<<elseif $stray_happiness gte 1>>
+		<span class="pink">The <<pound_text>> are rebellious.</span>
+	<<else>>
+		<span class="red">The <<pound_text>> are feral.</span>
+	<</if>>
+	<i>Higher contentment makes events with stray mutts around town less dangerous.</i>
+<</widget>>
+
+<<widget "pound_walk_end">>
+	You make <<moneyGain $pound.money>>.<<if $phase isnot 2>><<pass 60>><</if>>
+	<br><br>
+	<<exposure>>
+	<<if $exposed gte 1>>
+		You close the last cage, and look down at your body. <span class="pink">Your clothes are soaking wet and transparent!</span>
+		<br><br>
+		<<link [[Next|Pound Exposed]]>><<endevent>><</link>>
+		<br>
+	<<else>>
+		<<link [[Next|Pound]]>><<endevent>><</link>>
+		<br>
+	<</if>>
+<</widget>>
+
+<<widget "pound_muzzle">>
+	<<if $wolfgirl gte 6>>
+		<<facewear 24>>
+	<<elseif $cat gte 6 or $fox gte 6>>
+		<<facewear 25>>
+	<<else>>
+		<<facewear 17>>
+	<</if>>
+<</widget>>
+
+<<widget "earSlimePoundLinks">>
+	<<set _linkName to $args[0] or "Next">>
+	<<switch $slimePoundTask>>
+		<<case "Sweep">>
+			<<link [[_linkName|Pound Work Sweep]]>>
+				<<if !$pound.tasks.includes("sweep")>><<stray_happiness 1>><<set $pound.tasks.push("sweep")>><</if>><<set $pound.money to 5>>
+				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+		<<case "Feed">>
+			<<link [[_linkName|Pound Work Feed]]>>
+				<<set $pound.tasks.push("feed")>><<set $pound.money to 8>>
+				<<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>>
+				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+		<<case "Brush">>
+			<<link [[_linkName|Pound Work Brush]]>>
+				<<if !$pound.tasks.includes("brush")>><<stray_happiness 1>><<set $pound.tasks.push("brush")>><</if>><<set $pound.money to 10>>
+				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+		<<case "Wash">>
+			<<link [[_linkName|Pound Work Wash]]>>
+				<<if !$pound.tasks.includes("wash")>><<stray_happiness 1>><<set $pound.tasks.push("wash")>><</if>><<set $pound.money to 12>>
+				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+		<<case "Walk">>
+			<<link [[_linkName|Pound Work Walk]]>>
+				<<if !$pound.tasks.includes("walk")>><<stray_happiness 1>><<set $pound.tasks.push("walk")>><</if>><<set $pound.money to 15>>
+				<<if _linkName is "Obey">><<corruption 1>><<pain -4>><<stress -6>><<trauma -12>><<sub 2>><</if>>
+			<</link>><<if _linkName is "Obey">><<gcorruption>><<lpain>><<lltrauma>><<lstress>><</if>>
+	<</switch>>
+<</widget>>
