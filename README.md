@@ -1,7 +1,7 @@
 # DOL-BJXExtende_for_ML_Project
 # 簡介
 * [DOL-北極星擴展][bjx] For [Modloader][ml] 移植
-* 感謝[北极星勾陈一@北极星mod测试群][bjx]提供如此優秀的遊戲擴展已及提供授權移植為[modloader][ml]安裝包
+* 感謝[北极星勾陈一@北极星mod测试群][bjx]提供如此優秀的遊戲擴展以及提供授權移植為[modloader][ml]安裝包
 # Todo
 已完成
 * √ (1) 將北極星擴展內容(0.4.3.3 BJX-2.8.8 chs alpha 0.2.5.1)透過Modloader導出
