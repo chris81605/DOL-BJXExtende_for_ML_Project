@@ -12,10 +12,10 @@
 
 未完成
 * (1) 編寫boot.json
-    * 使用[ModdedClothesAddon][ca]新增轉化服裝
-    * 使用[ModdedFeatsAddon][fa]新增成就
-    * 使用[ReplacePatch][RP]新增JS腳本修改 (透過winmerge比對文本)
-    * 使用[TweeReplacer][tr]新增TWEE修改 (透過winmerge比對文本)
+    * 使用[ModdedClothesAddon][ca]新增轉化服裝 進度：`(0/1)`
+    * 使用[ModdedFeatsAddon][fa]新增成就 進度：`(0/1)`
+    * 使用[ReplacePatch][RP]新增JS腳本修改 (透過winmerge比對文本) 進度：`(0/13)`
+    * 使用[TweeReplacer][tr]新增TWEE修改 (透過winmerge比對文本) 進度：`(32/350)`
 
 
 
