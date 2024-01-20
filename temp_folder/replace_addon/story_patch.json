@@ -257,5 +257,65 @@
     "passage": "Clothing Shop Sneak",
     "findString": "<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>",
     "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Clothing Shop]]>><<set $ghostIn to true>><<pass 1>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>"
+  },
+  {
+    "passage": "Domus House Sneak",
+    "findString": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n你成功地撬开了锁并进到了这栋房子里。",
+    "replace": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁并进到了这栋房子里。\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Domus Street",
+    "findString": "\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t\t/* 北极星模组 */\n    \t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n    \t\t\t\t<<flywait>>\n    \t\t\t<</if>>\n    \t\t\t/* 北极星 */\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Doren Shower 1",
+    "findString": "你将自己洗到干干净净为止。\n<br><br>",
+    "replace": "你将自己洗到干干净净为止。\n<br><br>\n/* 北极星模组 */\n<<if $options.bjx_eventTF and $slime gt 0>>\n    <span class='red'>你忍受着剧烈的痛苦。你是一只史莱姆，请尽力避开水。</span>\n    <br><br>\n    <<violence 100>>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Drain Ladder",
+    "findString": "<<if $historytrait gte 1>>\n\t你听说过雨水渠下面的旧下水道。它们已经有一个多世纪没有被使用过了，据说很危险。还有着关于怪物和宝藏的传言。\n<<else>>\n\t你还记得关于雨水渠下面的旧下水道的谣言。下面有宝藏和怪物。你不确定这条传言的真假，但无论如何要保持警惕。\n<</if>>",
+    "replace": "/* 北极星模组 */\n<<if $historytrait gte 1>>\n\t你听说过雨水渠下面的旧下水道。它们已经有一个多世纪没有被使用过了，据说很危险。还有着关于怪物和宝藏的传言。\n\t<<if $slimedisable is \"f\">>\n    \t<span class=\"green\">\n    \t你突然想起有小道消息称，在下水道和垃圾填埋场里存在着一种奇怪的黏液生物。\n    \t</span>\n\t<</if>>\n\t你怀疑这些说法的真实性，但无论如何都要保持警惕。\n<<else>>\n\t你模糊记得关于雨水渠下面的旧下水道的传言，据说那里有着宝藏和怪物。\n\t<<if $slimedisable is \"f\">>\n    \t<span class=\"green\">\n    \t里面还有一些关于奇怪的黏液生物的传说......也可能是当地的垃圾填埋场。\n    \t</span>\n\t<</if>> \n\t你还记得关于雨水渠下面的旧下水道的谣言。下面有宝藏和怪物。你不确定这条传言的真假，但无论如何要保持警惕。\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Drain Slime Physique 2",
+    "findString": "<<link [[继续|Drain Struggle]]>><<set $phase to 1>><<set $struggle_start to 1>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<if $parasite.left_ear.name is \"slime\" and $parasite.right_ear.name is \"slime\" and $ghost is 0 and $mushroom is 0>>\n    \t大型史莱姆的行动似乎让你耳朵里的史莱姆也变得疯狂起来! 它们蠕动着，似乎产生了某种共鸣，起初共鸣频率很慢，但很快就开始剧烈加速。\n    \t<br><br>\n    \t与此同时，一股暖流从你的头顶蔓延开来，流遍全身。<span class='green'>吞噬你的史莱姆化作球状将你完全包裹起来，</span>尽管情况如此，你却感到异常平静。\n    \t<br><br>\n    \t这种感觉既陌生又熟悉，犹如在母亲的子宫中，让你感到安宁，昏昏欲睡。周围的粘液开始有节奏地抚摸着你的身体，而你渐渐沉入梦乡...\n    \t<br><br>\n    \t<<link [[顺其自然|Slime Transformation 1]]>><<pass 60>><</link>>\n        <br>\n\t<</if>>\n\t<<link [[抵抗|Drain Struggle]]>><<set $phase to 1>><<set $struggle_start to 1>><</link>>\n\t<br>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Drain Slime Watch",
+    "findString": "<<link [[继续|Drain Struggle]]>><<set $phase to 1>><<set $struggle_start to 1>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<if $parasite.left_ear.name is \"slime\" and $parasite.right_ear.name is \"slime\" and $ghost is 0 and $mushroom is 0>>\n\t    在你的反复高潮中，你耳朵里的史莱姆也变得疯狂起来! 它们蠕动着，似乎产生了某种共鸣，起初共鸣频率很慢，但很快就开始剧烈加速。\n\t    <br><br>\n    \t与此同时，一股暖流从你的头顶蔓延开来，流遍全身。<span class='green'>吞噬你的史莱姆化作球状将你完全包裹起来，</span>尽管情况如此，你却感到异常平静。\n    \t<br><br>\n    \t这种感觉既陌生又熟悉，犹如在母亲的子宫中，让你感到安宁，昏昏欲睡。周围的粘液开始有节奏地抚摸着你的身体，而你渐渐沉入梦乡...\n    \t<br><br>\n    \t<<link [[顺其自然|Slime Transformation 1]]>><<pass 60>><</link>>\n        <br>\n\t<</if>>\n\t<<link [[抵抗|Drain Struggle]]>><<set $phase to 1>><<set $struggle_start to 1>><</link>>\n\t<br>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Drain Water Passout",
+    "findString": "<<if isPlayerNonparasitePregnancyEnding()>>",
+    "replace": "/* 北极星模组 */\n<<if $parasite.left_ear.name is \"slime\" and $parasite.right_ear.name is \"slime\">>\n\t你失去知觉的身体被水流带走，直到撞上下水道的河岸，昏了过去。\n\t<br><br>\n\t不知过了多久，你被耳边传来的奇怪声音惊醒，带着眩晕感勉强睁开眼睛，努力辨认着黑暗中向你接近的黑影。\n\t<br><br>\n\t一只巨大的黏液生物向你靠近，那是一只史莱姆！你想要逃跑，却被你的耳中史莱姆控制，无法移动，只能惊恐地看着它慢慢开始吞噬你的身体。\n\t<br><br>\n\t<<link [[继续|Sewers Slime]]>><</link>>\n\t<br>\n<<elseif isPlayerNonparasitePregnancyEnding()>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Eden Bath",
+    "findString": "\t<<wash>>\n\t<br><br>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $options.bjx_eventTF and $slime gt 0>>\n        <br>\n        <span class='red'>你忍受着皮肤上的刺痛。</span>\n        <br>\n        <<violence 20>>\n    <</if>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Eerie Mirror 5",
+    "findString": "<<link [[离开|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<if $location is \"lakehouse\">>\n    \t<<link [[离开|Lake House Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>\n    <<else>>\n    \t<<link [[离开|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>\n    <</if>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Eerie Mirror Stop",
+    "findString": "<<link [[离开|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $location is \"lakehouse\">>\n\t<<link [[离开|Lake House Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>\n<<else>>\n\t<<link [[离开|Bedroom]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><<postMirror>><</link>>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Eerie Mirror Tentacle Plains",
+    "findString": "<<link [[继续|Tentacle Plains]]>><<set $tentacleEntrance to \"mirror\">><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $location is \"lakehouse\">>\n\t<<link [[继续|Tentacle Plains]]>><<set $tentacleEntrance to \"lakehouse\">><</link>>\n<<else>>\n\t<<link [[继续|Tentacle Plains]]>><<set $tentacleEntrance to \"mirror\">><</link>>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Elk Compound Central",
+    "findString": "<<getouticon>><<link [[离开|Elk Compound]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Elk Compound Interior]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Elk Compound]]>><</link>>"
   }
 ]
