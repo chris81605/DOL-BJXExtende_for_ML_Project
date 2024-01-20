@@ -259,6 +259,147 @@
     "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Clothing Shop]]>><<set $ghostIn to true>><<pass 1>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>"
   },
   {
+    "passage": "Club Cosplay Rape 2",
+    "findString": "<<maninit>>",
+    "replace": "\t/* 北极星模组 */\n\t<<person1>><<person2>><<maninit>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Coast Path Farmland",
+    "findString": "<<if $harpy gte 6 and $birdFly gte 1>>",
+    "replace": "/* 北极星模组 */\n<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Coast Path",
+    "findString": "<<if $harpy gte 6 and $birdFly gte 1>>",
+    "replace": "\t<</if>>\n\t/* 北极星模组 */\n\t<<if !$options.bjx_animal and $harpy gte 6 and $birdFly gte 1 or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Commercial rooftops",
+    "findString": "<<if $harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if !$options.bjx_animal and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" or $transformationParts.dragon.wings isnot \"disabled\" or $transformationParts.angel.wings isnot \"disabled\" or $transformationParts.fallenAngel.wings isnot \"disabled\" or $transformationParts.demon.wings isnot \"disabled\" or $transformationParts.bee.wings isnot \"disabled\")>>\n\t\t/* 北极星 */",
+    "all": true
+  },
+  {
+    "passage": "Connudatus Street",
+    "findString": "\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 0 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[介绍你自己 (0:05)|Casey Introduction]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 1 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[再次尝试交谈 (0:05)|Casey Again]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseymet is 1>>\n\t\t\t你看到凯西在老地方抽着雪茄。\n\t\t\t<br><br>\n\t\t\t<<link [[打招呼 (0:20)|Casey Hang Out]]>><<npcincr \"凯西\" love 2>><<pass 20>><</link>><<gglove>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>"
+  },
+  {
+    "passage": "Connudatus Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Cosmetics Lock",
+    "findString": "<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Cosmetics Store]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>"
+  },
+  {
+    "passage": "Dance Job Party Intermission",
+    "findString": "<<socialiseicon>><<link [[闲谈|Dance Job Party Schmooze]]>><</link>><<englishdifficulty 1 1000>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<link [[偷藏一些食物带给孤儿们|Dance Job Party Food]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t/* 北极星 */\n\t\t<br>\n\t\t<<socialiseicon>><<link [[闲谈|Dance Job Party Schmooze]]>><</link>><<englishdifficulty 1 1000>>"
+  },
+  {
+    "passage": "Dance Job Stage Explore 2",
+    "findString": "<<addinlineevent \"dance_explore_jewelry\">>\n\t<<generate1>><<person1>>\n\t你进入一个长长的房间，里面摆满了陈列柜，展示着珠宝和古董。一个<<person>>靠在最边上的墙上。<<He>>似乎在打瞌睡。\n\t<br><br>\n\t这些箱子都是锁着的，可能还装了警报器。\n\t<br><br>\n\t<<set $skulduggerydifficulty to 1000>>\n\t<<link [[偷珠宝|Dance Job Stage Explore Jewelry]]>><<set $skulduggerydifficulty to 1000>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t<br>\n\t<<set $skulduggerydifficulty to 600>>\n\t<<link [[偷古董|Dance Job Stage Explore Antique]]>><<set $skulduggerydifficulty to 600>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t<br>\n<</addinlineevent>>",
+    "replace": "<<addinlineevent \"dance_explore_jewelry\">>\n\t<<generate1>><<person1>>\n\t你进入一个长长的房间，里面摆满了陈列柜，展示着珠宝和古董。一个<<person>>靠在最边上的墙上。<<He>>似乎在打瞌睡。\n\t<br><br>\n\t这些箱子都是锁着的，可能还装了警报器。\n\t<br><br>\n\t/* 北极星模组 */\n\t<<set $skulduggerydifficulty to 1000>>\n\t<<link [[偷珠宝|Dance Job Stage Explore Jewelry]]>><<set $skulduggerydifficulty to 1000>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t<br>\n\t<<set $skulduggerydifficulty to 600>>\n\t<<link [[偷古董|Dance Job Stage Explore Antique]]>><<set $skulduggerydifficulty to 600>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t<br>\n\t/* 北极星 */\n<</addinlineevent>>"
+  },
+  {
+    "passage": "Dance Job Stage Explore 2",
+    "findString": "\t<<link [[打开保险箱|Dance Job Stage Explore Safe]]>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<link [[打开保险箱|Dance Job Stage Explore Safe]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Dance Studio Lock",
+    "findString": "<<getouticon>><<link [[离开|Barb Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Dance Studio]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Barb Street]]>><</link>>"
+  },
+  {
+    "passage": "Danube House Knock",
+    "findString": "\t<<runeventpool>>\n\n\t<br><br>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $days gte 30 and $hivemember is 0>>\n        <<addinlineevent \"Danube Taylor Mom\">>\n        \t<<set $TaylorMissing to 1>>\n        \t你走到一栋很好看的房子前并敲门。一个眼睛红肿，看起来很伤心的女人开了门。\"孩子，你有什么事情吗？\"\n        \t<br><br>\n        \n        \t<<link [[询问发生了什么事|Missing Poster]]>><</link>>\n        \t<br>\n        \t<<link [[说你敲错门了，然后离开|Danube Street]]>><</link>>\n        \t<br>\n        <</addinlineevent>>\n\t<</if>>\n\t/* 北极星 */\n\n\t<<runeventpool>>\n\n\t<br><br>"
+  },
+  {
+    "passage": "Danube House Lock",
+    "findString": "<<danubeicon>><<link [[离开|Danube Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Danube House Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<danubeicon>><<link [[离开|Danube Street]]>><</link>>"
+  },
+  {
+    "passage": "Danube House Sneak",
+    "findString": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"danube\">>\n你成功地撬开锁并进入住所。",
+    "replace": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"danube\">>\n/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开锁并进入住所。\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Danube House Sneak",
+    "findString": "\t<<link [[尝试打开它|Danube House Wine Cellar]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t/* 北极星模组 */\n\t<<link [[尝试打开它|Danube House Wine Cellar]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Danube House Sneak",
+    "findString": "\t<<link [[抢劫|Danube House Rob]]>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<link [[抢劫|Danube House Rob]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>",
+    "replace": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed is 1 and $TaylorReward is undefined and Time.dayState is not \"night\">>\n\t\t\t你看到泰勒正站在一栋房子门前朝你招手。\n\t\t\t<br><br>\n\t\t\t<<link [[走向泰勒|Taylor Meeting After Freed]]>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t<<if Time.dayState is \"night\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed gte 1 and $TaylorReward is 1 and Time.dayState isnot \"night\">>\n\t\t\t<<dooricon \"danube\">><<link [[泰勒的家 (0:02)|Taylor Meeting]]>><<pass 2>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState is \"night\">>"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Demon Sex Finish",
+    "findString": "<<schooleffects>><<effects>>\n<<unset $o>><<unset $ostart>><<unset $oindex>>\n<<person1>>\n<<if $enemyarousal gte $enemyarousalmax>>\n\t<<ejaculation-demon>>\n\tYou wake on a grassy field, refreshed but drenched in semen and goo... the <<person>> is gone, <span class=\"blue\">leaving you with a deep sense of longing you can't shake or understand.</span>\n\t<br><br>\n\t<<set $tiredness to 1>>\n\t<<set $pain to 0>>\n\t<<drench \"semen\" \"slime\" 5>>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[Next|Park]]>><</link>>\n<<else>>\n\t<<He>> recoils and vanishes. You are left with a deep sense of longing you can't shake or understand.\n\t<br><br>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[Next|Hallways]]>><</link>>\n<</if>>",
+    "replace": "/* 北极星模组 */\n<<schooleffects>><<effects>>\n<<unset $o>><<unset $ostart>><<unset $oindex>>\n<<person1>>\n<<if $enemyarousal gte $enemyarousalmax>>\n\t<<ejaculation-demon>>\n\t不久之后你醒了过来，浑身沾满了精液和粘液，但你感觉神清气爽，往日疲劳与创伤一扫而空...那<<person>>已经走了，<span class=\"blue\">留给你一种挥之不去的莫名思念。</span>\n\t<br><br>\n\t<<set $tiredness to 1>>\n\t<<set $pain to 0>>\n\t<<drench \"semen\" \"slime\" 5>>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[继续|Churchyard]]>><</link>>\n<<else>>\n\t<<He>>向后退去，然后消失在空气中，<span class=\"blue\">留给你一种挥之不去的莫名思念。</span>\n\t<br><br>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[继续|Churchyard]]>><</link>>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Demon Sex",
+    "findString": "\t<span class=\"pink\">Prepare yourself, mortal.</span>",
+    "replace": "/* 北极星模组 */\n\t<span class=\"pink\">做好准备吧，小家伙。</span>\n\t<br>\n    <<chastityBreakDemon>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Demon Sex",
+    "findString": "You have cum $o times. <span class=\"purple\">The <<person>> grows in power as <<he>> drains you.",
+    "replace": "/* 北极星模组 */\n\t你已经高潮了$o次，<span class=\"purple\">那<<person>>吸取了你的意识。\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Demon Sex",
+    "findString": "<<if $enemyhealth lte 0>>\n\t<span id=\"next\"><<link [[Next|Demon Sex Finish]]>><</link>></span><<nexttext>>\n<<elseif $enemyarousal gte $enemyarousalmax>>\n\t<span id=\"next\"><<link [[Next|Demon Sex Finish]]>><</link>></span><<nexttext>>\n<<else>>\n\t<span id=\"next\"><<link [[Next|Demon Sex]]>><</link>></span><<nexttext>>\n<</if>>",
+    "replace": "/* 北极星模组 */\n<<if $enemyhealth lte 0>>\n\t<span id=\"next\"><<link [[继续|Demon Sex Finish]]>><</link>></span><<nexttext>>\n<<elseif $enemyarousal gte $enemyarousalmax>>\n\t<span id=\"next\"><<link [[继续|Demon Sex Finish]]>><</link>></span><<nexttext>>\n<<else>>\n\t<span id=\"next\"><<link [[继续|Demon Sex]]>><</link>></span><<nexttext>>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Demon Start",
+    "findString": "<<set $outside to 0>><<set $location to \"school\">><<schooleffects>><<effects>>\n<!-- Generate Demon -->\n<<generateDemon 1>><<person1>>\nYou investigate the noise coming from the school's hallway.\n\nSuddenly, with a HERMMMMM-POP a portal swirls open in front out you. From the portal <span class=\"blue\">a <<person>> strides out,</span> <<his>> red eyes never leaving contact with yours.\n<br><br>\n\nThe <<person>> opens <<his>> mouth and roars hotly. <span class=\"red\">Your clothes are shredded to nothing in a blast of heat and wind as you wince from the impact,</span> your skin glowing hotly.\n<<tanned 2400>><<gggtanned>>\n<br>\n<<set $worn.lower.integrity to 0>><<set $worn.upper.integrity to 0>><<set $worn.under_lower.integrity to 0>><<set $worn.under_upper.integrity to 0>>\n<<headruined>><<legsruined>><<feetruined>>\n<<integritycheck>>\n<br>\nYou look up, feeling a combination of awe and terror. The <<persons>> $NPCList[0].breastsdesc are standing straight out in defiance of gravity, <<his>> $NPCList[0].penisdesc dangling semi-engorged over <<his>> vagina... while the <<person>> is standing in front of you, everything shifts about lazily, as if you were looking at painting being swirled.\n<br><br>\n\nThe <<person>> speaks in a commanding voice breaking your reverie, \"Serve me well mortal and you shall be rewarded.\"\n<br><br>\n\nYou consider your options...\n<br><br>\n\n<<link [[Run away screaming|Oxford Street]]>><</link>>\n<br>\n<<link [[Stay and see what happens...|Demon Sex]]>><<set $sexstart to 1>><</link>>\n<br>",
+    "replace": "/* 北极星模组 */\n<<location \"cemetery\">><<set $outside to 1>><<effects>>\n<!-- Generate Demon -->\n<<generateDemon 1>><<person1>>\n就像你在城堡脚下的古书里读到的那样，你在墓地附近找了个安静的地方，用各种找到的石头和树枝摆出一个五芒星。\n<br>\n你用一种禁忌的语言，以单调的声调吟唱着几个世纪以来从来没被串在一起过的词语。\n<br>\n\"螺旋楼梯，独角仙，废弃街道，无花果塔，独角仙，德蕾莎之道，独角仙，特异点，乔托，天使，绣球花，独角仙，特异点，秘密皇帝！\"\n<br><br>\n<span class=\"red\">突然间，一道传送门从你面前如漩涡般打开。<span class=\"blue\">一个<<person>>从传送门走出</span>，<<his>>鲜红的眼睛一直盯着你。</span>\n<br><br>\n\n你抬头看去，心里泛起莫名的敬畏与恐惧。那<<persons>>$NPCList[0].breastsdesc违反地心引力般的挺翘着，<<his>>充血的$NPCList[0].penisdesc在<<his>>的小穴上面悬立着...那<<person>>站立在你面前，你眼前的一切开始缓缓地转动，就像在看一副旋转的画。\n<br><br>\n\n<<if $angel gte 6>>\n    那<<person>>语带怒意地冷笑道: \n    <br>\n    <span class=\"red\">\"一位天使？！当初困住我那么久，现在居然还敢召唤我，因为太过久远忘记了我的厉害？正好让我给你个深刻的教训...\"</span>\n    <br><br>\n<<elseif $fallenangel gte 2>>\n    那<<person>>用嘲弄的语气说道: \n    <br>\n    <span class=\"lewd\">\"看来那些困住我的天使们抛弃了你，嗯哼？别担心，我会帮你度过一段快乐时光，让你忘记烦恼。\"</span>\n    <br><br>\n<<elseif $demon gte 6>>\n    那<<person>>用淫荡的语气说道: \n    <br>\n    <span class=\"lewd\">\"啊哈，来了个小家伙，是来找前辈学习经验的吗？来吧，让我们找点乐子。\"</span>\n    <br><br>\n<<else>>\n    那<<person>>的娇媚声音传入你的脑海，让你感到有些眩晕。\n    <br>\n    <span class=\"blue\">\"好好服侍我，凡人，你会得到奖赏。\"</span>\n    <br><br>\n<</if>>\n\n<<if $demon gte 6>>\n    要和这位恶魔玩一玩吗?\n    <br><br>\n<<else>>\n    你慎重地思考着决定...\n    <br><br>\n<</if>>\n\n<<if $angel lt 6>>\n    <<link [[等待看看会发生什么|Demon Sex]]>><<set $sexstart to 1>><</link>>\n    <br>\n<</if>>\n<<if $angel gte 6>>\n    <<link [[害怕地捂住脸|Demon Rape 1]]>><<set $molestationstart to 1>><</link>>\n    <br>\n<<else>>\n    <<link [[尝试逃跑|Demon Rape 2]]>><<set $molestationstart to 1>><</link>>\n    <br>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Docks Sneak Start",
+    "findString": "<<getouticon>><<link [[离开|Docks]]>><<endevent>><<set $bus to \"mer\">><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Docks Sneak Pick]]>><<pass 1>><<endevent>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Docks]]>><<endevent>><<set $bus to \"mer\">><</link>>"
+  },
+  {
+    "passage": "Docks",
+    "findString": "<<if $robindebtevent gte 1 and $docksrobinintro isnot 1>>",
+    "replace": "/* 北极星模组 */\n<<if $money gte 100000 and $history gte 700 and $exposed lte 0>>\n\t<<link [[找船去四季岛 (0:20)|Docks Ride]]>><<pass 20>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<if $robindebtevent gte 1 and $docksrobinintro isnot 1>>"
+  },
+  {
+    "passage": "Domus Delivery",
+    "findString": "<<link [[打开|Domus Delivery2]]>><<set $phase to 2>><<crimeUp 5 \"petty\">><</link>><<skulduggerydifficulty>><<crime \"petty\">>",
+    "replace": "/* 北极星模组 */\n<<link [[打开|Domus Delivery2]]>><<set $phase to 2>><<crimeUp 5 \"petty\">><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"petty\">>\n/* 北极星 */"
+  },
+  {
+    "passage": "Domus House Lock",
+    "findString": "<<domusicon>><<link [[离开|Domus Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Domus House Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<domusicon>><<link [[离开|Domus Street]]>><</link>>"
+  },
+  {
     "passage": "Domus House Sneak",
     "findString": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n你成功地撬开了锁并进到了这栋房子里。",
     "replace": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁并进到了这栋房子里。\n<</if>>\n/* 北极星 */"
