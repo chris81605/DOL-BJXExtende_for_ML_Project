@@ -458,5 +458,140 @@
     "passage": "Elk Compound Central",
     "findString": "<<getouticon>><<link [[离开|Elk Compound]]>><</link>>",
     "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Elk Compound Interior]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Elk Compound]]>><</link>>"
+  },
+  {
+    "passage": "Elk Compound Interior",
+    "findString": "你成功地撬开了锁，进入了建筑里。",
+    "replace": "/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁，进入了建筑里。\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Elk Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "English Play Rehearse Alone",
+    "findString": "<<link [[继续|Bedroom]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $location is \"lakehouse\">>\n\t<<link [[继续|Lake House Bedroom]]>><</link>>\n\t<br>\n<<else>>\n\t<<link [[继续|Bedroom]]>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Farm Alex Dry 2",
+    "findString": "<<if $weather is \"rain\" and (!$worn.head.type.includes(\"rainproof\") || !$worn.handheld.type.includes(\"rainproof\"))>>",
+    "replace": "/* 北极星模组 */\n<<if $weather is \"rain\" and !$worn.head.type.includes(\"rainproof\") and !$worn.over_head.type.includes(\"rainproof\")>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Farm Intro 10",
+    "findString": "<<link [[接受|Farm Intro Accept]]>><<set $farm_stage to 2>><</link>>",
+    "replace": "/* 北极星模组 */\n<<link [[接受|Farm Intro Accept]]>><<set $farm_stage to 2>><<set $farm_stage_cheat to 1>><</link>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Farm Kennel",
+    "findString": "\t<<else>>\n\n\t\t一只<<beasttype>>抬起头来。很快，整个狗窝都看向了你。",
+    "replace": "\t/* 北极星模组 */\n\t<<elseif $dragon gte 6>>\n        它们审视着你的龙角，看起来很是困惑。\n        <br><br>\n\n        <<kennel_intro>>\n        <br><br>\n    /* 北极星 */\n\n\t<<else>>\n\n\t\t一只<<beasttype>>抬起头来。很快，整个狗窝都看向了你。"
+  },
+  {
+    "passage": "Farm Phone Cuddle",
+    "findString": "<<if ($demon gte 2 and $transformationParts.demon.horns isnot \"hidden\") or ($cow gte 2 and $transformationParts.cow.horns isnot \"hidden\")>>",
+    "replace": "/* 北极星模组 */\n\t\t<<if !$options.bjx_animal and (($demon gte 2 and $transformationParts.demon.horns isnot \"hidden\") or ($cow gte 2 and $transformationParts.cow.horns isnot \"hidden\")) or $options.bjx_animal and (($transformationParts.cow.horns isnot \"disabled\" or $transformationParts.sheep.horns isnot \"disabled\") or ($transformationParts.demon.horns isnot \"disabled\" or $transformationParts.deer.horns isnot \"disabled\" or $transformationParts.dragon.horns isnot \"disabled\"))>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Farm Shave",
+    "findString": "<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>",
+    "replace": "/* 北极星模组 */\n<<if ($pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2) and $slime gt 0 and $options.bjx_eventTF>>\n\t<<link [[自动脱毛 (0:15)->Farm Slime Shave]]>><<pass 15>><<arousal 100>><<set $pblevel to 0>><<set $pbgrowth to 0>><<set $pblevelballs to 0>><<set $pbgrowthballs to 0>><<set $pbstrip to 0>><<set $makeup.pbcolour to 0>><</link>><<slime>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<if $pblevel gte 2 or $pbstrip gte 1 or $pblevelballs gte 2>>"
+  },
+  {
+    "passage": "Farm Shower Sex",
+    "findString": "<br><br>\n\n<<effectsman>>",
+    "replace": "/* 北极星模组 */\n<<if $slime gt 0 and $options.bjx_eventTF>>\n\t<span class='red'>你忍受着刺痛。\n\t<<violence 20>>\n\t</span>\n<</if>>\n/* 北极星 */\n<br><br>\n\n<<effectsman>>"
+  },
+  {
+    "passage": "Farm Shower",
+    "findString": "<br><br>\n\n<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>",
+    "replace": "/* 北极星模组 */\n<<if $slime gt 0 and $options.bjx_eventTF>>\n\t<span class='red'>你忍受着刺痛。\n\t<<violence 20>>\n\t</span>\n<</if>>\n/* 北极星 */\n<br><br>\n\n<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>"
+  },
+  {
+    "passage": "Farm Work",
+    "findString": "<<if $farm.build isnot undefined and $farm.build isnot 0>>\n",
+    "replace": "/* 北极星模组 */\n<<if $farm isnot undefined>>\n\t<<if $farm.tractor is undefined>>\n\t\t<<set $farm.tractor to 0>>\n\t\t<<set $farm.tractorplough to false>>\n\t\t<<set $farm.tractorseeddrill to false>>\n\t\t<<set $farm.tractorharvester to false>>\n\t\t<<set $farm.tractorloader to false>>\n\t<</if>>\n<</if>>\n/* 北极星 */\n\n<<if $farm.build isnot undefined and $farm.build isnot 0>>"
+  },
+  {
+    "passage": "Farm Yard Hurl net",
+    "findString": "<<if $danceSuccess and $athleticsSuccess>>\n\t<span class=\"green\">网结实地扣住了它。</span>你将这个生物收入自己的囊中。",
+    "replace": "/* 北极星模组 */\n<<if $lurkers_held gte 1>>\n    <span class=\"red\">由于你的捕网满了，之前的潜伏者跑掉了。</span>\n    <<set $lurkers_held -= 1>>\n<</if>>\n/* 北极星 */\n<<if $danceSuccess and $athleticsSuccess>>\n\t<span class=\"green\">网结实地扣住了它。</span>你将这个生物收入自己的囊中。\n\t/* 北极星模组 */\n\t<<gnet>><<prof net 1>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Farm Yard",
+    "findString": "<<if $farm_stage gte 10 and $lurkers_held lt 1>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $farm_stage gte 10>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Farmland",
+    "findString": "<<if $farm_stage is undefined>>",
+    "replace": "/* 北极星模组 */\n这附近有个汉堡摊。\n<br><br>\n/* 北极星 */\n\n<<if $farm_stage is undefined>>"
+  },
+  {
+    "passage": "Farmland",
+    "findString": "<<farmicon \"barn\">><<link [[接受农场的工作 (0:05)|Farm Intro Accept 2]]>><<pass 5>><<set $farm_stage to 2>><</link>>",
+    "replace": " /* 北极星模组 */\n\t\t\t<<farmicon \"barn\">><<link [[接受农场的工作(0:05)|Farm Intro Accept 2]]>><<pass 5>><<set $farm_stage to 2>><<set $farm_stage_cheat to 1>><</link>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Farmland",
+    "findString": "\t<<if $exposed lte 0>>\n\t\t<<if Time.dayState is \"night\">>",
+    "replace": "\t<<if $exposed lte 0>>\n\t    /* 北极星模组 */\n\t    <<if $weather is \"rain\" or $weather is \"snow\" or Time.dayState is \"night\">>\n\t\t\t汉堡摊关门了。\n\t\t\t<br>\n\t\t<<else>>\n\t\t\t<<link [[逛一逛附近的汉堡摊(0:05)|Moor Food Stand]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState is \"night\">>"
+  },
+  {
+    "passage": "Farmland",
+    "findString": "\t<<farmicon \"meadow\">><<link [[草地 (0:10)|Meadow]]>><<pass 10>><</link>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t<<flywait>>\n\t<</if>>\n\t/* 北极星 */\n\t<<farmicon \"meadow\">><<link [[草地 (0:10)|Meadow]]>><<pass 10>><</link>>"
+  },
+  {
+    "passage": "Flats Hookah Smoke",
+    "findString": "<<if $awareness gte 400>>",
+    "replace": "/* 北极星模组 */\n<<if $awareness gte 400 or currentSkillValue('willpower') gte 600>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Flats Lock",
+    "findString": "\t<br><br>\n<</if>>",
+    "replace": "\t<br><br>\n<</if>>\n/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Flats Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Flats Sneak",
+    "findString": "你成功地撬开了锁并进到了这栋房子里。",
+    "replace": "/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁并进到了这栋房子里。\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Forest Deer",
+    "findString": "<<location \"forest\">><<effects>>\n\n<<if $rng gte 51>>",
+    "replace": "/* 北极星模组 */\n<<location \"forest\">><<effects>><<transform deer 1>><<beastNEWinit 1 deer>>\n<<if $danger gte (9900 - ($allure * $forestmod))>>\n\t你匍匐前进，这只<<beasttype>>仍旧一动不动。你靠近到触手可及的距离，随后伸出了你的手。它嗅了嗅你，随后向你猛扑过来。\n\t<br><br>\n\n\t<<link [[继续|Deer Rape]]>><<set $molestationstart to 1>><</link>>\n\t<br>\n\n<<elseif $rng gte 51>>"
+  },
+  {
+    "passage": "Forest",
+    "findString": "\t\t\t\t\t<<lakeicon>><<link [[湖泊 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>\n\t\t\t\t<</if>>\n\t\t\t<</if>>",
+    "replace": "\t\t\t\t\t<<lakeicon>><<link [[湖泊 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>\n\t\t\t\t<</if>>\n\t\t\t<</if>>\n\t\t\t\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $historytrait gte 1>>\n\t\t\t\t<br><<kylarmanoricon>><<link [[废弃庄园 (0:10)|Forest Mansion Explore]]>><</link>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Forest",
+    "findString": "<<elseif $forest lte 99>>",
+    "replace": "<<elseif $forest lte 99>>\n    /* 北极星模组 */\n    <<location \"forest\">>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Forest",
+    "findString": "\t\t<<if $eventskip is 0>>\n\t\t\t<<rng>>\n\t\t\t<<if $rng gte 81 or ($forest_search is true and $rng gte 61)>>",
+    "replace": "\t\t<<if $eventskip is 0>>\n\t\t\t<<rng>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $hive_intro isnot 1 and $rng gte 50>>\n\t\t\t\t<<set $hive_intro to 1>>\n\t\t\t\t你在树丛中发现了一个巨大的蜡制蜂巢。你可以看到里面有动静，两只看起来很强壮的黄蜂守在入口处。 \n\t\t\t\t<br><br>\n\t\t\t\t<<link [[靠近 (0:20)|Hive Approach]]>><<pass 20>><<set $eventskip to 1>><</link>>\n\t\t\t\t<br>\n\t\t\t<<elseif $rng gte 81 or ($forest_search is true and $rng gte 61)>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Forest",
+    "findString": "\t\t\t\t\t<<foresticon \"river\">><<link [[沿着小溪走 (0:20)|Forest Brook]]>><<pass 20>><</link>>\n\t\t\t\t<</if>>\n\t\t\t\t<br>\n\t\t\t<</if>>",
+    "replace": "\t\t\t\t\t<<foresticon \"river\">><<link [[沿着小溪走 (0:20)|Forest Brook]]>><<pass 20>><</link>>\n\t\t\t\t<</if>>\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $hive_intro is 1>>\n\t\t\t\t<br>\n\t\t\t\t<<link [[蜂巢 (0:20)|Hive Entrance]]>><<pass 20>><</link>>\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Forest",
+    "findString": "<<elseif $forest gte 100>>\n\t<<set $forest to 100>>\n\t<<forestmove>>",
+    "replace": "/* 北极星模组 */\n<<elseif $forest lt 150>>\n\t<<location \"bog\">>\n\t<<bogmove>>\n\t<<if $stress gte $stressmax and !$possessed>>\n\t\t<<passoutforest>>\n\t<<else>>\n\t\t<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>\n\t\t<<if $eventskip is 0>>\n\t\t\t<<rng>>\n\t\t\t<<if $rng gte 81 or ($forest_search is true and $rng gte 61)>>\n\t\t\t\t<<eventbogitem>>\n\t\t\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t\t\t<<eventbog>>\n\t\t\t<<else>>\n\t\t\t\t<<eventbogsafe>>\n\t\t\t<</if>>\n\t\t<<elseif $eventskip gte 1>>\n\t\t\t<<if $foresthunt gte 1>>\n\t\t\t\t<span class=\"lblue\">你在沼泽里相对安全，不管是谁在跟踪你，应该都会选择放弃。</span>\n\t\t\t\t<br><br>\n\t\t\t\t<<set $foresthunt to 0>>\n\t\t\t<</if>>\n\t\t\t你穿过森林，来到了一片大沼泽。树木稀疏，静静地停驻在水池中，空气中弥漫着浓重的湿气。\n\t\t\t<br><br>\n\t\t\t<<bogdeeper>>\n\t\t\t<br><br>\n\n\t\t\t<<bogsearch>>\n\t\t\t<br><br>\n\n\t\t\t<<boglessdeep>>\n\t\t<</if>>\n\t<</if>>\n\t\n<<elseif $forest gte 150>>\n\t<<set $forest to 150>>\n\t<<bogmove>>"
+  },
+  {
+    "passage": "Forest",
+    "findString": "\t\t\t\t<<eventforestitem>>\n\t\t\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t\t\t<<eventforestdeep>>\n\t\t\t<<else>>\n\t\t\t\t<<eventforestsafe>>\n\t\t\t<</if>>\n\t\t<<elseif $eventskip gte 1>>\n\t\t\t你在森林深处。你可以透过树枝辨认出精神病院。\n\t\t\t<br><br>\n\n\t\t\t<<forestsearch>>\n\t\t\t<br><br>\n\n\t\t\t<<forestlessdeep>>",
+    "replace": "\t\t\t\t<<eventbogitem>>\n\t\t\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t\t\t<<eventbog>>\n\t\t\t<<else>>\n\t\t\t\t<<eventbogsafe>>\n\t\t\t<</if>>\n\t\t<<elseif $eventskip gte 1>>\n\t\t\t你在沼泽深处。空气中弥漫着刺鼻的气味，你觉得不应该继续前进。\n\t\t\t<br><br>\n\t\t\t\n\t\t\t<<if $museumAntiques.antiques.antiquemushroom is \"notFound\">>\n\t\t\t    你在沼泽的地上发现了一尊奇怪的蘑菇神像，上面雕刻着繁复而神秘的花纹。\n\t\t\t    <br><br>\n\t\t    <</if>>\n\t\t    \n\t\t    <<if $options.bjx_antiques and $museumAntiques.antiques.antiquemushroom is \"notFound\">>\n    \t\t\t<<link [[捡起蘑菇神像|$passage]]>><<pass 2>><<museumAntiqueStatus \"antiquemushroom\" \"found\">><<set $antiquemoney += 7000>><</link>>\n    \t\t\t<br>\n    \t\t<</if>>\n\n\t\t\t<<bogsearch>>\n\t\t\t<br><br>\n\n\t\t\t<<boglessdeep>>"
   }
 ]

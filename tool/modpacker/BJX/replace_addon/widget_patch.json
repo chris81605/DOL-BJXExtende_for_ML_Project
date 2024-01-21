@@ -69,5 +69,110 @@
     "passage": "Ejaculation Demon",
     "findString": "\tYou pass out from exertion, completely spent, <span class=\"blue\">while the <<person>> roars and continues to work away on your limp body.</span>",
     "replace": "   /* 北极星模组 */\n\t你筋疲力尽，昏了过去，<span class=\"blue\">而那<<person>>依旧在你软弱无力的身体上耕耘着。</span>\n\t<br><br>\n\t等你再次醒来，一个声音在你脑海中想起。\n    <br>\n    \"谢谢你，我玩的很开心。<span class=\"blue\">有缘的话，下次再和你一起玩哟。</span>\"\n    <br><br><br>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "\t<<if $farm_stage isnot 12 and $farm_work.alex is \"clearing\" and ($exposed lt 2 or $exhibitionism gte 75) and Time.dayState isnot \"night\">>\n\t\t<<farmicon \"clear yard\">><<link [[帮助艾利克斯开垦农田 (0:20)|Farm Clearing]]>><<farm_count 20>><<pass 20>><<tiredness 2>><<physique 2>><<set $farm.clearing -= 1>><</link>><<gtiredness>><<run _actions++>>\n\t\t<br>\n\t<</if>>\n\t<<if $farm_stage isnot 12 and $farm_stage gte 7 and _actions is 0 and $farm_work.alex isnot \"clearing\" and ($exposed lt 2 or $exhibitionism gte 75)>>\n\t\t<<farmicon \"clear yard\">><<link [[独自开垦农田 (0:40)|Farm Clearing Alone]]>><<farm_count 40>><<pass 40>><<tiredness 4>><<physique 3>><<set $farm.clearing -= 1>><</link>><<ggtiredness>><<run _actions++>>\n\t\t<br>\n\t<</if>>\n\n\t<<if (_actions lt 2 or $farm_stage lt 7) and ($farm_work.alex isnot \"relax\" or $exposed gte 0)>>\n\t\t<!-- as worker you can be lazy any time, but as partner you only get that luxury when there's (nearly) nothing else to do.\n\t\t\talso, if Alex is resting you should join them unless you're too naked for comfort -->\n\t\t<<relaxicon>><<link [[在马厩附近休息 (0:15)|Farm Stables Rest]]>><<pass 15>><<stress -2>><</link>><<lstress>>\n\t<</if>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $farm_stage isnot 12 and $farm_work.alex is \"clearing\" and ($exposed lt 2 or $exhibitionism gte 75) and Time.dayState isnot \"night\">>\n\t\t<<farmicon \"clear yard\">><<link [[帮艾历克斯开垦农田(0:20)|Farm Clearing]]>><<physique 2>><<farm_clear>><</link>><<gtiredness>><<run _actions++>>\n\t\t<br>\n\t<</if>>\n\t<<if $farm_stage isnot 12 and $farm_stage gte 7 and $farm_work.alex isnot \"clearing\" and ($exposed lt 2 or $exhibitionism gte 75)>>\n\t\t<<farmicon \"clear yard\">><<link [[独自开垦农田(0:40)|Farm Clearing Alone]]>><<physique 3>><<farm_clear>><</link>><<ggtiredness>><<run _actions++>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */\n\n\t<<if (_actions lt 2 or $farm_stage lt 7) and ($farm_work.alex isnot \"relax\" or $exposed gte 0)>>\n\t\t<!-- as worker you can be lazy any time, but as partner you only get that luxury when there's (nearly) nothing else to do.\n\t\t\talso, if Alex is resting you should join them unless you're too naked for comfort -->\n\t\t/* 北极星模组 */\n\t\t<<relaxicon>><<link [[在马厩附近休息(0:15)|Farm Stables Rest]]>><<pass 15>><<stress -2>><<tiredness -3>><</link>><<lstress>><<ltiredness>>\n\t\t/* 北极星 */\n\t<</if>>"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "<<link [[\"用手挤奶 (0:\" + String(_cattleMilkHand).padStart(2, '0') + \")\"|Farm Cattle Milk Hand]]>><<farm_yield 1>><<set $cattle_milked += 1>><<set $farm_work.cattle_milked += 1>><<tending 1>><<farm_cattle 1>><<set $phase to _cattleMilkHand>><<pass _cattleMilkHand>><</link>><<deviant1>><<gfarm>><<gtending>><<grespect>>",
+    "replace": "/* 北极星模组 */\n\t\t<<link [[\"用手挤奶 (0:\" + String(_cattleMilkHand).padStart(2, '0') + \")\"|Farm Cattle Milk Hand]]>><<farm_yield 1>><<set $cattle_milked += 1>><<set $farm_work.cattle_milked += 1>><<tending 1>><<set $handskill += 1>><<farm_cattle 1>><<set $phase to _cattleMilkHand>><<pass _cattleMilkHand>><</link>><<deviant1>><<gfarm>><<gtending>><<ghandskill>><<grespect>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "<<link [[用嘴挤奶 (0:03)|Farm Cattle Milk Mouth]]>><<set $cattle_milked += 1>><<set $farm_work.cattle_milked += 1>><<tending 1>><<farm_count 3>><</link>><<deviant4>><<gtending>>",
+    "replace": "/* 北极星模组 */\n\t\t    <<link [[用嘴挤奶(0:03)|Farm Cattle Milk Mouth]]>><<set $cattle_milked += 1>><<set $farm_work.cattle_milked += 1>><<tending 1>><<farm_count 3>><<oralskill 1>><</link>><<deviant4>><<gtending>><<goralskill>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "<<widget \"guard_skill_text\">>\n\t<<if _args[0] is \"tower\" and $farm.tower_guard_skill isnot undefined>>\n\t\t<<set _guard_skill to $farm.tower_guard_skill>>",
+    "replace": "<<widget \"guard_skill_text\">>\n\t<<if _args[0] is \"tower\" and $farm.tower_guard_skill isnot undefined>>\n\t\t<<set _guard_skill to $farm.tower_guard_skill>>\n\t/* 北极星模组 */\n\t<<elseif _args[0] is \"lakehouse_tower\" and $lakehouse.tower_guard_skill isnot undefined>>\n\t\t<<set _guard_skill to $lakehouse.tower_guard_skill>>\n\t<<elseif _args[0] is \"lakehouse_post\" and $lakehouse.post_guard_skill isnot undefined>>\n\t\t<<set _guard_skill to $lakehouse.post_guard_skill>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "\t\t农场灌溉：\n\t\t<<if $farm.irrigation gte 9>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t拖拉机:\n\t\t<<if $farm isnot undefined>>\n\t\t\t<<if $farm.tractor is undefined>>\n\t\t\t\t<<set $farm.tractor = 0>>\n\t\t\t<</if>>\n\t\t<</if>>\n\t\t<<if $farm.tractor gte 3>>\n\t\t\t<span class=\"green\">最大马力</span>\n\t\t<<elseif $farm.tractor gte 2>>\n\t\t\t<<link [[升级|Farm Upgrades Tractor 3]]>><</link>>\n\t\t<<elseif $farm.tractor gte 1>>\n\t\t\t<<link [[升级|Farm Upgrades Tractor 2]]>><</link>>\n\t\t<<else>>\n\t\t\t<<link [[购买|Farm Upgrades Tractor 1]]>><</link>>\n\t\t<</if>>\n\t\t<br>\n\t\t<<if $farm.tractor gte 1>>\n\t\t\t犁:\n\t\t\t<<if $farm.tractorplough is true>>\n\t\t\t\t<span class=\"green\">已购买</span>\n\t\t\t<<else>>\n\t\t\t\t<<link [[购买|Farm Upgrades Tractor Plough]]>><</link>>\n\t\t\t<</if>>\n\t\t\t<br>\n\t\t\t播种机:\n\t\t\t<<if $farm.tractorseeddrill is true>>\n\t\t\t\t<span class=\"green\">已购买</span>\n\t\t\t<<else>>\n\t\t\t\t<<link [[购买|Farm Upgrades Tractor Seed Drill]]>><</link>>\n\t\t\t<</if>>\n\t\t\t<br>\n\t\t\t收割机:\n\t\t\t<<if $farm.tractorharvester is true>>\n\t\t\t\t<span class=\"green\">已购买</span>\n\t\t\t<<else>>\n\t\t\t\t<<link [[购买|Farm Upgrades Tractor Harvester]]>><</link>>\n\t\t\t<</if>>\n\t\t\t<br>\n\t\t\t装载机:\n\t\t\t<<if $farm.tractorloader is true>>\n\t\t\t\t<span class=\"green\">已购买</span>\n\t\t\t<<else>>\n\t\t\t\t<<link [[购买|Farm Upgrades Tractor Loader]]>><</link>>\n\t\t\t<</if>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t<br>\n\t\t/* 北极星 */\n\t\t农场灌溉：\n\t\t<<if $farm.irrigation gte 9>>"
+  },
+  {
+    "passage": "Farm Widgets",
+    "findString": "<<widget \"alex_pregnancy_comment\">>\n\t<<if playerBellyVisible()>>",
+    "replace": "/* 北极星模组 */\n<<widget \"farm_clear\">>\n\t<<if $farm_work.alex is \"clearing\">>\n\t\t<<set _baseTime = 20>>\n\t\t<<set _baseTiredsness = 2>>\n\t<<else>>\n\t\t<<set _baseTime = 40>>\n\t\t<<set _baseTiredsness = 4>>\n\t<</if>>\n\t<<if $location is \"alex_farm\">>\n\t\t<<if $farm.tractor gte 1>>\n\t\t\t<<set _baseTiredsness = Math.round(_baseTiredsness * 0.8)>>\n\t\t<</if>>\n\t\t<<if $farm.tractor gte 3>>\n\t\t\t<<set _tractor = 0.25>>\n\t\t<<elseif $farm.tractor gte 2>>\n\t\t\t<<set _tractor = 0.5>>\n\t\t<<elseif $farm.tractor gte 1>>\n\t\t\t<<set _tractor = 1>>\n\t\t<</if>>\n\t\t<<if $farm.tractorloader is true>>\n\t\t\t<<set _baseTime = Math.round(_baseTime * (0.5 * _tractor))>>\n\t\t\t<<set _baseTiredsness = Math.round(_baseTiredsness * (0.5 * _tractor))>>\n\t\t<</if>>\n\t<</if>>\n\t<<farm_count _baseTime>>\n\t<<pass _baseTime>>\n\t<<tiredness _baseTiredsness>>\n\t<<if $farm.tractor gte 1>>\n\t\t<<set $farm.clearing = Math.round($farm.clearing - (1 + (1 / _tractor)))>>\n\t<<else>>\n\t\t<<set $farm.clearing = Math.round($farm.clearing - 1)>>\n\t<</if>>\n<</widget>>\n/* 北极星 */\n\n<<widget \"alex_pregnancy_comment\">>\n\t<<if playerBellyVisible()>>"
+  },
+  {
+    "passage": "Farmers Centre Widgets",
+    "findString": "<<if $farmersProduce.sold gt 5000>>\n\t\t\t<<set _famebusinessSold to $farmersProduce.sold - ($farmersProduce.sold % 5000)>>\n\t\t\t<<set $farmersProduce.sold -= _famebusinessSold>>\n\t\t\t<<famebusiness `Math.floor(_famebusinessSold / 5000)`>>\n\t\t<</if>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<set _basesellnum to 5000>>\n\t\t<<if $options.bjx_sellproduce>>\n\t\t\t<<set _basesellnum to 250>>\n\t\t<</if>>\n\t\t<<if $farmersProduce.sold gt _basesellnum>>\n\t\t\t<<set _famebusinessSold to $farmersProduce.sold - ($farmersProduce.sold % _basesellnum)>>\n\t\t\t<<set $farmersProduce.sold -= _famebusinessSold>>\n\t\t\t<<famebusiness `Math.floor(_famebusinessSold / _basesellnum)`>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Feats",
+    "findString": "\t\t\t<<if $fallenangel gte 2>>\n\t\t\t\t<<earnFeat \"Fallen Angel\">>\n\t\t\t<</if>>\n\t\t\t<<if $demon gte 6>>\n\t\t\t\t<<earnFeat \"Demon\">>",
+    "replace": "\t\t\t<<if $fallenangel gte 2>>\n\t\t\t\t<<earnFeat \"Fallen Angel\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $demonhunter gte 2>>\n\t\t\t\t<<earnFeat \"Demon Hunter\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<if $demon gte 6>>\n\t\t\t\t<<earnFeat \"Demon\">>"
+  },
+  {
+    "passage": "Feats",
+    "findString": "\t\t\t<<if $fox gte 6>>\n\t\t\t\t<<earnFeat \"Fox\">>\n\t\t\t<</if>>",
+    "replace": "\t\t\t<<if $fox gte 6>>\n\t\t\t\t<<earnFeat \"Fox\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $dog gte 6>>\n\t\t\t\t<<earnFeat \"Dog\">>\n\t\t\t<</if>>\n\t\t\t<<if $raccoon gte 6>>\n\t\t\t\t<<earnFeat \"Raccoon\">>\n\t\t\t<</if>>\n\t\t\t<<if $dragon gte 6>>\n\t\t\t\t<<earnFeat \"Dragon\">>\n\t\t\t<</if>>\n\t\t\t<<if $dolphin gte 6>>\n\t\t\t\t<<earnFeat \"Dolphin\">>\n\t\t\t<</if>>\n\t\t\t<<if $lizard gte 3>>\n\t\t\t\t<<earnFeat \"Lizard\">>\n\t\t\t<</if>>\n\t\t\t<<if $bear gte 6>>\n\t\t\t\t<<earnFeat \"Bear\">>\n\t\t\t<</if>>\n\t\t\t<<if $deer gte 6>>\n\t\t\t\t<<earnFeat \"Deer\">>\n\t\t\t<</if>>\n\t\t\t<<if $sheep gte 6>>\n\t\t\t\t<<earnFeat \"Sheep\">>\n\t\t\t<</if>>\n\t\t\t<<if $bee gte 6>>\n\t\t\t\t<<earnFeat \"Bee\">>\n\t\t\t<</if>>\n\t\t\t<<if $fish gte 6>>\n\t\t\t\t<<earnFeat \"Fish\">>\n\t\t\t<</if>>\n\t\t\t<<if $horse gte 6>>\n\t\t\t\t<<earnFeat \"Horse\">>\n\t\t\t<</if>>\n\t\t\t<<if $pig gte 6>>\n\t\t\t\t<<earnFeat \"Pig\">>\n\t\t\t<</if>>\n\t\t\t<<if $spider gte 6>>\n\t\t\t\t<<earnFeat \"Spider\">>\n\t\t\t<</if>>\n\t\t\t<<if $frog gte 6>>\n\t\t\t\t<<earnFeat \"Frog\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Feats",
+    "findString": "\t\t<<if $earSlime.corruption gte 100 and $earSlime.growth gte 200>>\n\t\t\t<<earnFeat \"Ear Slime Amalgam\">>\n\t\t<</if>>",
+    "replace": "\t\t<<if $earSlime.corruption gte 100 and $earSlime.growth gte 200>>\n\t\t\t<<earnFeat \"Ear Slime Amalgam\">>\n\t\t<</if>>\n\t\t<<if $feats.allSaves.points gte 300>>\n\t\t\t<<earnFeat \"My Timeless Collection of Feats\">>\n\t\t<</if>>"
+  },
+  {
+    "passage": "Forest Shop Widgets",
+    "findString": "\t\t<<link \"查看全部\">><<replace \"#clothingShop-div\">><<AllShop>><</replace>><</link>>\n\t\t<br><br>",
+    "replace": "\t\t<<link \"查看全部\">><<replace \"#clothingShop-div\">><<AllShop>><</replace>><</link>>\n\t\t<br><br>\n\t\t/* 北极星模组 */\n\t\t<<if $options.bjx_clothes>>\n    \t\t<<clothingcategoryicon \"overoutfit\">>\n    \t\t<<link \"走近磨毛屏风后\">><<replace \"#clothingShop-div\">><<OverOutfitShop>><</replace>><</link>>\n    \t\t<br>\n    \t\t<<clothingcategoryicon \"overupper\">>\n    \t\t<<link \"走近阔叶门帘后\">><<replace \"#clothingShop-div\">><<OverUpperShop>><</replace>><</link>>\n    \t\t<br>\n    \t\t<<clothingcategoryicon \"overlower\">>\n    \t\t<<link \"浏览藤蔓木箱里\">><<replace \"#clothingShop-div\">><<OverLowerShop>><</replace>><</link>>\n    \t\t<br>\n    \t\t<<clothingcategoryicon \"overhead\">>\n    \t\t<<link \"浏览黄铜质排钩\">><<replace \"#clothingShop-div\">><<OverHeadShop>><</replace>><</link>>\n    \t\t<br>\n    \t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set Time.startDate to new DateTime()>>\n\t<<set $timeStamp to 0>>",
+    "replace": "\t/* 北极星模组 */\n\t<<run $.extend($options, {\n\t        bjx_divine: true,\n\t        bjx_animal: true,\n\t        bjx_eventTF: true,\n\t        bjx_antiques: true,\n\t    })>>\n\t/* 北极星 */\n\n\t<<set Time.startDate to new DateTime()>>\n\t<<set $timeStamp to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $bullyeventoutside to 0>>\n\t<<set $masturbationorgasm to 0>>",
+    "replace": "\t<<set $bullyeventoutside to 0>>\n\t/* 北极星模组 */\n\t<<set $caseyagain to 0>>\n\t<<set $caseymet to 0>>\n\t<<set $caseyridefirst to 0>>\n\t<<set $caseyromance to 0>>\n\t<<set $motorupgrade to 0>>\n\t/* 北极星 */\n\t<<set $masturbationorgasm to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $specialTransform to 0>>\n\t<<set $angelbuild to 0>>",
+    "replace": "\t<<set $specialTransform to 0>>\n\t/* 北极星模组 */\n\t<<set $eventTransform to 0>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $demonabsorb to 0>>\n\t<<set $fallenangel to 0>>",
+    "replace": "\t<<set $demonabsorb to 0>>\n\t/* 北极星模组 */\n\t<<set $demonseduce to 0>>\n\t<<set $demonejac to 0>>\n\t<<set $daynoabsorb to 0>>\n\t<<set $demonhunterhypnosis to 0>>\n\t<<set $hunterbuild to 0>>\n\t<<set $demonhunter to 0>>\n\t<<set $fallenangelretribution to 0>>\n\t<<set $fallenangelvirginitylost to 0>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $fox to 0>>\n\t<<set $stray_happiness to 50>>",
+    "replace": "\t<<set $fox to 0>>\n\t/* 北极星模组 */\n\t<<set $sheepbuild to 0>>\n\t<<set $sheep to 0>>\n\t<<set $beebuild to 0>>\n\t<<set $bee to 0>>\n\t<<set $deerbuild to 0>>\n\t<<set $deer to 0>>\n\t<<set $bearbuild to 0>>\n\t<<set $bear to 0>>\n\t<<set $dragonbuild to 0>>\n\t<<set $dragon to 0>>\n\t<<set $lizardbuild to 0>>\n\t<<set $lizard to 0>>\n\t<<set $dolphinbuild to 0>>\n\t<<set $dolphin to 0>>\n\t<<set $dogbuild to 0>>\n\t<<set $dog to 0>>\n\t<<set $raccoonbuild to 0>>\n\t<<set $raccoon to 0>>\n\t<<set $fishbuild to 0>>\n\t<<set $fish to 0>>\n\t<<set $horsebuild to 0>>\n\t<<set $horse to 0>>\n\t<<set $pigbuild to 0>>\n\t<<set $pig to 0>>\n\t<<set $spiderbuild to 0>>\n\t<<set $spider to 0>>\n\t<<set $frogbuild to 0>>\n\t<<set $frog to 0>>\n\t<<set $slime to 0>>\n\t<<set $ghost to 0>>\n\t<<set $mushroom to 0>>\n\t<<set $fungalgrowth to 0>>\n\t<<set $fungalpoint to 0>>\n\t<<set $exorcism to 0>>\n\t<<set $exorcised to 0>>\n\t<<set $onemoreslime to 0>>\n\t<<set $mushroomtf to {}>>\n\t<<set $dencounter to 0>>\n\t<<set $prutimonster to 2>>\n\t<<set $enemyhealthmult to 1>>\n\t<<set $enemyarousalmult to 1>>\n\t/* 北极星 */\n\t\n\t<<set $stray_happiness to 50>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $skulduggeryday to 0>>\n\t<<set $danceskill to 0>>",
+    "replace": "\t<<set $skulduggeryday to 0>>\n\t/* 北极星模组 */\n\t<<set $skulduggeryhands to 0>>\n\t/* 北极星 */\n\t<<set $danceskill to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $genderknown to [\"Robin\", \"Bailey\"]>>\n\n\t<<set $vaginause to 0>>",
+    "replace": "\t<<set $genderknown to [\"Robin\", \"Bailey\"]>>\n    \n    /* 北极星模组 */\n    <<set $tail to 0>>\n\t<<set $tailuse to 0>>\n\t/* 北极星 */\n\t<<set $vaginause to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $traumasaved to 0>>\n\t<<set $stresssaved to 0>>",
+    "replace": "\t<<set $traumasaved to 0>>\n\t/* 北极星模组 */\n\t<<set $awarenesssaved to 0>>\n\t<<set $awarenessgain to 0>>\n\t/* 北极星 */\n\t<<set $stresssaved to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<set $sea to 0>>\n\n\t<<set $penilechastityparasite to 0>>",
+    "replace": "\t<<set $sea to 0>>\n    \n    /* 北极星模组 */\n    <<set $beeprisoner to 0>>\n\t<<set $hivemember to 0>>\n\t<<set $bjob to 0>>\n\t<<set $TaylorArrested to 0>>\n\t<<set $TaylorChase to 0>>\n\t<<set $TaylorFreed to 0>>\n\t<<set $TaylorMissing to 0>>\n\t<<set $TaylorSeen to 0>>\n\t<<set $forestmansionstage to 0>>\n\t<<set $forestmansionpicked to 0>>\n\t<<set $forestmansionkitchen to 0>>\n\t<<set $forestmansionhaunt to 0>>\n\t<<set $TaylorReadMansion to 0>>\n\t<<set $TaylorWith to 0>>\n\t<<set $TaylorSaveForLater to 0>>\n\t/* 北极星 */\n\t\n\t<<set $penilechastityparasite to 0>>"
+  },
+  {
+    "passage": "gameStartOnly",
+    "findString": "\t<<initEstatePersistent>>\n\n\t<<set $modeloptionsOverride to {}>>",
+    "replace": "\t<<initEstatePersistent>>\n\t\n\t/* 北极星模组 */\n\t<<variablesBJXModUpdate>>\n\t/* 北极星 */\n\n\t<<set $modeloptionsOverride to {}>>"
   }
 ]
