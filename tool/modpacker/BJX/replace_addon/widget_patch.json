@@ -174,5 +174,35 @@
     "passage": "gameStartOnly",
     "findString": "\t<<initEstatePersistent>>\n\n\t<<set $modeloptionsOverride to {}>>",
     "replace": "\t<<initEstatePersistent>>\n\t\n\t/* 北极星模组 */\n\t<<variablesBJXModUpdate>>\n\t/* 北极星 */\n\n\t<<set $modeloptionsOverride to {}>>"
+  },
+  {
+    "passage": "Location Widgets",
+    "findString": "\t\tsetup.addlocation( \"lake\"                     ).parent(\"forest\").location().tanning(1.0).build();\n\t\tsetup.addlocation( \"lake_ruin\"                ).parent(\"lake\").location().inside().build();",
+    "replace": "\t\t/* 北极星模组 */\n\t\tsetup.addlocation( \"lakehouse\"                ).parent(\"forest\").location().inside().build();\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Location Widgets",
+    "findString": "\t\tsetup.addlocation( \"farmroad3\"                ).parent(\"forest\").bus().tanning(1.0).build();\n\n\t\tsetup.addlocation( \"plains\"                   ).parent(\"world\").area().build();",
+    "replace": "\t\tsetup.addlocation( \"farmroad3\"                ).parent(\"forest\").bus().tanning(1.0).build();\n\t\t/* 北极星模组 */\n\t\tsetup.addlocation( \"hive\"                    ).parent(\"forest\").location().inside().build();\n\t\tsetup.addlocation( \"bog\"                    ).parent(\"forest\").location().inside().build();\n\t\t/* 北极星 */\n\n\t\tsetup.addlocation( \"plains\"                   ).parent(\"world\").area().build();"
+  },
+  {
+    "passage": "Location Widgets",
+    "findString": "\t\tsetup.addlocation( \"tower\"                    ).parent(\"castle\").location().build();\n\n\t\tsetup.addlocation( \"sea\"                      ).parent(\"world\").area().location().bus().build();",
+    "replace": "\t\tsetup.addlocation( \"tower\"                    ).parent(\"castle\").location().build();\n        /* 北极星模组 */\n        setup.addlocation( \"old_cemetery\"             ).parent(\"plains\").location().outside().build();\n        /* 北极星 */\n\n\t\tsetup.addlocation( \"sea\"                      ).parent(\"world\").area().location().bus().build();"
+  },
+  {
+    "passage": "Location Widgets",
+    "findString": "\t\tsetup.addlocation( \"island\"                   ).parent(\"sea\").location().build();",
+    "replace": "\t\tsetup.addlocation( \"island\"                   ).parent(\"sea\").location().build();\n        /* 北极星模组 */\n        setup.addlocation( \"seadive\"                   ).parent(\"sea\").location().inside().build();\n\t\t/* 北极星 */\n\t\t\n\t\t/* 北极星模组 */\n\t\tsetup.addlocation(\"island\"                       ).parent(\"world\").area().location().build();\n\t\tsetup.addlocation( \"desert\"                     ).parent(\"island\").location().build();\n\t\tsetup.addlocation( \"snowforest\"                     ).parent(\"island\").location().build();\n\t\tsetup.addlocation( \"glacier\"                     ).parent(\"island\").location().build();\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Machine Actions",
+    "findString": "\t<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0\n\tand $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and $options.combatControls is \"disabled\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0\n\tand ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined) and $options.combatControls is \"disabled\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Machine Effects",
+    "findString": "\t<<if $leftaction is \"rest\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $energyaction is \"ghostescape\">>\n\t    <<set $energyaction to \"rest\">>\n\t    <<if $energy gte 800>>\n\t        <<set $energy -= 800>>\n\t        <<set $finish to 1>>\n\t        <span class=\"wraith\">你全力催动灵能，使自己灵体化，尝试逃脱。</span>\n\t    <<else>>\n\t        <span class=\"red\">你的能量不足，无法灵体化逃脱。</span>\n\t    <</if>>\n\t<</if>>\n\t/* 北极星 */\n\t\n\t<<if $leftaction is \"rest\">>"
   }
 ]

@@ -593,5 +593,130 @@
     "passage": "Forest",
     "findString": "\t\t\t\t<<eventforestitem>>\n\t\t\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t\t\t<<eventforestdeep>>\n\t\t\t<<else>>\n\t\t\t\t<<eventforestsafe>>\n\t\t\t<</if>>\n\t\t<<elseif $eventskip gte 1>>\n\t\t\t你在森林深处。你可以透过树枝辨认出精神病院。\n\t\t\t<br><br>\n\n\t\t\t<<forestsearch>>\n\t\t\t<br><br>\n\n\t\t\t<<forestlessdeep>>",
     "replace": "\t\t\t\t<<eventbogitem>>\n\t\t\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t\t\t<<eventbog>>\n\t\t\t<<else>>\n\t\t\t\t<<eventbogsafe>>\n\t\t\t<</if>>\n\t\t<<elseif $eventskip gte 1>>\n\t\t\t你在沼泽深处。空气中弥漫着刺鼻的气味，你觉得不应该继续前进。\n\t\t\t<br><br>\n\t\t\t\n\t\t\t<<if $museumAntiques.antiques.antiquemushroom is \"notFound\">>\n\t\t\t    你在沼泽的地上发现了一尊奇怪的蘑菇神像，上面雕刻着繁复而神秘的花纹。\n\t\t\t    <br><br>\n\t\t    <</if>>\n\t\t    \n\t\t    <<if $options.bjx_antiques and $museumAntiques.antiques.antiquemushroom is \"notFound\">>\n    \t\t\t<<link [[捡起蘑菇神像|$passage]]>><<pass 2>><<museumAntiqueStatus \"antiquemushroom\" \"found\">><<set $antiquemoney += 7000>><</link>>\n    \t\t\t<br>\n    \t\t<</if>>\n\n\t\t\t<<bogsearch>>\n\t\t\t<br><br>\n\n\t\t\t<<boglessdeep>>"
+  },
+  {
+    "passage": "Hairdressers Lock",
+    "findString": "<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Hairdressers]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>"
+  },
+  {
+    "passage": "Harvest Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Head's Stash",
+    "findString": "<<link [[撬锁 (0:30)|Head's Stash 2]]>><<pass 30>><</link>><<skulduggerydifficulty>>",
+    "replace": "/* 北极星模组 */\n<<link [[撬锁 (0:30)|Head's Stash 2]]>><<pass 30>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n/* 北极星 */"
+  },
+  {
+    "passage": "High Public Pants Down Still 2",
+    "findString": "<<if Time.daystate is \"day\">>",
+    "replace": "/* 北极星模组 */\n<<if Time.dayState is \"day\">>\n/* 北极星 */"
+  },
+  {
+    "passage": "High Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Hospital Foyer",
+    "findString": "\t\t<<if $player.breastsize lte 11>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $demonhunter gte 2 and $demonhunter lte 4>>\n\t\t\t<<askicon>><<link [[要求学习催眠术 (0:10)|Hospital Demonhunter]]>><<pass 10>><</link>><<demonhunter>> <<note \"获取' 摄魂之眼' \" \"italic\">>\n\t\t\t<br>\n\t\t<</if>>\n\t\t<<if $mushroom gte 1>>\n\t\t\t<<askicon>><<link [[咨询你的蘑菇感染问题 (0:10)|Hospital Mushroom]]>><<pass 10>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t<<if $slime gt 0>>\n\t\t\t<<askicon>><<link [[咨询你的史莱姆情况(0:10)|Harper Slime Inquiry]]>><<pass 10>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if $player.breastsize lte 11>>"
+  },
+  {
+    "passage": "Hospital Parasite",
+    "findString": "<br><br>\n\t\t\"不过你说的其他东西倒是有迹可循，这是一种罕见但相对良性的病症，以我们现在的技术应该能够治愈你。\"听此，你松了一口气。\"稍等一下，我马上就好。\"<<He>>在说完之后又转身回到了<<his>>的电脑面前。",
+    "replace": "\t\t<br><br>\n\t\t\"顺便说一句，\"<<he>>喃喃自语, \"最近听说我们镇下水道里粘液具有了某种<i>腐蚀性</i>，如果不慎沾染了会腐蚀衣服甚至皮肤，所以如果你要去那里，请务必小心谨慎。甚至有传言说，粘液似乎具有了生命，会主动寻找人类吞噬，被其吞噬的人类也会变成其中一员。不过这都是一些嗑药出了<span class=\"gold\">幻觉</span>的瘾君子的胡言乱语，没有任何科学合理性。\"\n\t\t<br><br>\t\t\"不过你说的其他东西倒是有迹可循，这是一种罕见但相对良性的病症，以我们现在的技术应该能够治愈你。\"听此，你松了一口气。\"稍等一下，我马上就好。\"<<He>>在说完之后又转身回到了<<his>>的电脑面前。"
+  },
+  {
+    "passage": "Hospital Parasite",
+    "findString": "\t<<He>>开始敲击面前的键盘。\"你还有什么问题吗？\" 你摇摇头。\n\t<br><br>",
+    "replace": "\t\"顺便说一句，\"<<he>>喃喃自语, \"最近听说我们镇下水道里粘液具有了某种<i>腐蚀性</i>，如果不慎沾染了会腐蚀衣服甚至皮肤，所以如果你要去那里，请务必小心谨慎。甚至有传言说，粘液似乎具有了生命，会主动寻找人类吞噬，被其吞噬的人类也会变成其中一员。不过这都是一些嗑药出了<span class=\"gold\">幻觉</span>的瘾君子的胡言乱语，没有任何科学合理性。\"\n\t<br><br>\n\t/* 北极星 */\n\n\t<<He>>开始敲击面前的键盘。\"你还有什么问题吗？\" 你摇摇头。\n\t<br><br>"
+  },
+  {
+    "passage": "Hospital Parasite",
+    "findString": "\t<br><br>\n\n\t<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>",
+    "replace": "\t<br><br>\n\n\t<<link [[继续|Hospital Foyer]]>><<endevent>><</link>>\n/* 北极星模组 */\n<<elseif $parasite.clit.name is \"livingclothes\" or $parasite.penis.name is \"livingclothes\" or\n\t$parasite.nipples.name is \"livingclothes\" or $parasite.bottom.name is \"livingclothes\">>\n\t<<He>>认真地听着，并时不时的点点头，好像你说的任何事情都没什么奇怪的。在你讲完后之后，<<he>>默默地转向<<his>>的电脑，开始浏览一些东西。\"好吧，\"<<he>>说道。\n\t<br><br>\n\t一种罕见但相对良性的病症，我们现在就能治好你。\"你松了一口气。\"请稍等片刻。\"<<He>>转身回到<<his>>的电脑前。\n\t<br><br>\n\t一分钟后<<he>>回过头来。\"我们可以用一种特殊的电击法对你进行电击, 其波长可以使这种寄生虫丧失能力。它对人完全无害, 但你可能会感到刺痛。\"\n\t<br><br>\n\t\"手术需要 £2500\"<<He>>说。\n\t<br><br>\n\t<<if $money gte 250000>>\n\t\t<<link [[付款 (£2500 0:30)|Hospital Parasite Private Livingclothes]]>><<set $money -= 250000>><<pass 30>><</link>>\n\t\t<br>\n\t<</if>>\n\t<<link [[拒绝治疗并离开|Hospital Foyer]]>><<endevent>><</link>>\n\t<br>\n/* 北极星 */"
+  },
+  {
+    "passage": "Kylar Abduction Free Stairs",
+    "findString": "<<link [[退回去|Kylar Abduction Free Breeze]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Kylar Abduction Free Sneak]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Kylar Halloween Bed",
+    "findString": "<<npc Whitney>><<person1>>",
+    "replace": "/* 北极星模组 */\n<<set $forestmansionhaunt to 1>>\n/* 北极星 */\n<<npc Whitney>><<person1>>"
+  },
+  {
+    "passage": "Lake Pots",
+    "findString": "\t\t<<set $skulduggerydifficulty to 300>>",
+    "replace": "\t\t<<set $skulduggerydifficulty to 300>>\n\t\t/* 北极星模组 */\n\t\t<<templeicon \"chastity release\">><<link [[打开|Lake Ruin Box]]>><<wateraction>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<loxygen>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Lake Ruin Deep Consentacles Leave",
+    "findString": "<<if $swimmingSuccess>>\n\t<span class=\"green\">你解开了脚踝，逃脱了。</span>",
+    "replace": "/* 北极星模组 */\n<<if $swimmingSuccess or $slime gt 0>>\n\t<span class=\"green\"><<if $slime gt 0>>它们无法牢牢抓住你的四肢。<</if>>你解放出脚踝，然后逃跑。</span>"
+  },
+  {
+    "passage": "Lake Ruin Door",
+    "findString": "<br><br>",
+    "replace": "<<if $museumAntiques.antiques.antiqueivorynecklace is \"notFound\">>\n    一条象牙项链被放在基座顶部，蓝色的宝石镶嵌其上。\n<</if>>\n/* 北极星 */\n<br><br>"
+  },
+  {
+    "passage": "Lake Ruin Plinth",
+    "findString": "<<elseif $tentacledisable is \"f\" and _bmoon and $phase isnot 1 and $museumAntiques.antiques.antiqueivorynecklace isnot \"notFound\">>",
+    "replace": "/* 北极星模组 */\n<<elseif $tentacledisable is \"f\" and _bmoon and $phase isnot 1 and $museumAntiques.antiques.antiqueivorynecklace isnot \"notFound\" and $slime gt 0>>\n\t<br><br>\n\t你感觉水在你周围搅动，当你环顾四周时，水搅动得越来越强烈了。在红色月光的微弱照射下，触手从黑暗中伸出。<span class=\"red\">其中两条试图缠住你的脚踝，但无法抓住。</span>\n\t<br><br>\n\n\t<<link [[触碰|Lake Ruin Sit]]>><</link>>\n\t<br>\n/* 北极星 */\n<<elseif $tentacledisable is \"f\" and _bmoon and $phase isnot 1 and $museumAntiques.antiques.antiqueivorynecklace isnot \"notFound\">>"
+  },
+  {
+    "passage": "Lake Ruin Plinth",
+    "findString": "<<else>>\n\t在黑暗的房间里，水随着你的动作摇摆。",
+    "replace": "\t/* 北极星模组 */\n\t<<if $slime gt 0>>\n    \t<span class=\"green\">你感觉底座对你有股奇怪的吸引力……</span>\n    \t<br><br>\n    \t<<link [[触碰|Lake Ruin Sit]]>><</link>>\n    \t<br><br>\n\t<</if>>\n\t/* 北极星 */\n<<else>>\n\t在黑暗的房间里，水随着你的动作摇摆。"
+  },
+  {
+    "passage": "Lake Ruin Sit",
+    "findString": "<<if !(!$player.vaginaExist and playerIsPregnant())>>",
+    "replace": "<<if $slime gt 0>>\n\t你猛地后退，痉挛着。房间摇晃颤动，地板上出现了一道裂缝。它变宽了，更多的红光透了进来。\n\t你的全身沐浴在深红色之中。你的身体开始在房间颤抖。你的皮肤开始扭曲和起泡，颜色变成红色，就像里面的核心一样。\n\t<br><br>\n\t与此同时，同样的核心越来越大……\n\t<br><br>\n\t<<link [[继续|Slime Reversion]]>><<pass 10>><</link>><br><br><<elseif !(!$player.vaginaExist and playerIsPregnant())>>"
+  },
+  {
+    "passage": "Lake Shore",
+    "findString": "\t\t<<if Time.season isnot \"winter\" and !isBloodmoon()>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $town_projects.home isnot undefined>>\n\t\t\t<<if $town_projects.home gte 3>>\n\t\t\t\t<<domusicon>><<link [[湖边小屋 (0:02)|Lake House Outdoor]]>><<pass 2>><</link>>\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t<</if>>\n\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t<<flywait>>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.season isnot \"winter\" and !isBloodmoon()>>"
+  },
+  {
+    "passage": "Livestock Job Hypnosis 2",
+    "findString": "\t<<purity -3>><<internalejac>><<creampie \"self\" \"vagina\">><<set $hygiene += 1000>><<bodyliquid \"vagina\" \"semen\" 3>><<bodyliquid \"vagina\" \"goo\">>",
+    "replace": "/* 北极星模组 */\n\t<<purity -3>><<byinternalejac>><<creampie \"self\" \"vagina\">><<set $hygiene += 1000>><<bodyliquid \"vagina\" \"semen\" 3>><<bodyliquid \"vagina\" \"goo\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Livestock Job Hypnosis 2",
+    "findString": "\t<<purity -3>><<internalejac>><<creampie \"self\" \"anus\">><<set $hunger -= 200>><<set $thirst -= 200>><<set $hygiene += 1000>><<bodyliquid \"anus\" \"semen\" 3>><<bodyliquid \"anus\" \"goo\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<purity -3>><<byinternalejac>><<creampie \"self\" \"anus\">><<set $hunger -= 200>><<set $thirst -= 200>><<set $hygiene += 1000>><<bodyliquid \"anus\" \"semen\" 3>><<bodyliquid \"anus\" \"goo\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Lock",
+    "findString": "<<set $compoundcentre to 1>><<set $compoundalarm += 1>>\n",
+    "replace": "/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开门锁，推门而入。\n<</if>>\n/* 北极星 */\n<<set $compoundcentre to 1>><<set $compoundalarm += 1>>\n"
+  },
+  {
+    "passage": "Maths Project Stim",
+    "findString": "\t<<else>>\n\t\t<<link [[忍耐 (4:00)|Maths Project Endure Library]]>><<pass 240>><<stress 24>><</link>>",
+    "replace": "\t/* 北极星模组 */\n\t<<elseif $location is \"lakehouse\">>\n\t\t<<link [[忍受 (4:00)|Maths Project Endure Lake House]]>><<pass 240>><<stress 24>><</link>><<ggstress>>\n\t\t<br>\n\t\t<<link [[出门|Maths Project Outside Lake House]]>><</link>>\n\t\t<br>\n\t/* 北极星 */\n\t<<else>>\n\t\t<<link [[忍耐 (4:00)|Maths Project Endure Library]]>><<pass 240>><<stress 24>><</link>>\n"
+  },
+  {
+    "passage": "Maths Project Stim",
+    "findString": "你坐下来欣赏你的工作，但有些地方出了问题。<<if $location is \"home\">>",
+    "replace": "/* 北极星模组 */\n    你坐下来欣赏自己的成果，但有些地方不对劲。<<if $location is \"home\" or $location is \"lakehouse\">>"
+  },
+  {
+    "passage": "Maths Project Stim",
+    "findString": "\t<<if $location is \"home\">>\n\t\t<<set $bus to \"residential\">>\n\t<<else>>\n\t\t<<set $bus to \"industrial\">>\n\t<</if>>\n\t<<link [[继续|Maths Project Void]]>><</link>>\n\t<br>",
+    "replace": "\t<<if $location is \"home\">>\n\t\t<<set $bus to \"residential\">>\n\t<<else>>\n\t\t<<set $bus to \"industrial\">>\n\t<</if>>\n\t<<if $location is \"lakehouse\">>\n\t\t<<link [[继续|Maths Project Void Lake]]>><</link>>\n\t\t<br>\n\t<<else>>\n\t\t<<link [[继续|Maths Project Void]]>><</link>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Maths Project Stim",
+    "findString": "\t\t<<if $location is \"home\">>\n\t\t\t<<link [[继续|Bedroom]]>><</link>>\n\t\t<<else>>\n\t\t\t<<link [[继续|School Library]]>><</link>>\n\t\t<</if>>",
+    "replace": "\t\t<<if $location is \"home\">>\n\t\t\t<<link [[继续|Bedroom]]>><</link>>\n\t\t/* 北极星模组 */\n\t\t<<elseif $location is \"lakehouse\">>\n\t\t\t<<link [[继续|Lake House Bedroom]]>><</link>>\n\t\t/* 北极星 */\n\t\t<<else>>\n\t\t\t<<link [[继续|School Library]]>><</link>>\n\t\t<</if>>"
   }
 ]
