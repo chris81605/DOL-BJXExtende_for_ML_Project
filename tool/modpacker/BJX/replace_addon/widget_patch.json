@@ -204,5 +204,40 @@
     "passage": "Machine Effects",
     "findString": "\t<<if $leftaction is \"rest\">>",
     "replace": "\t/* 北极星模组 */\n\t<<if $energyaction is \"ghostescape\">>\n\t    <<set $energyaction to \"rest\">>\n\t    <<if $energy gte 800>>\n\t        <<set $energy -= 800>>\n\t        <<set $finish to 1>>\n\t        <span class=\"wraith\">你全力催动灵能，使自己灵体化，尝试逃脱。</span>\n\t    <<else>>\n\t        <span class=\"red\">你的能量不足，无法灵体化逃脱。</span>\n\t    <</if>>\n\t<</if>>\n\t/* 北极星 */\n\t\n\t<<if $leftaction is \"rest\">>"
+  },
+  {
+    "passage": "mobileStats",
+    "findString": "\t\t\t<mouse class=\"tooltip-centertop\">控<span>自控: <<print $control.toFixed(2)>></span></mouse>\n\t\t</div>\n\t<</if>>",
+    "replace": "\t\t\t<mouse class=\"tooltip-centertop\">控<span>自控: <<print $control.toFixed(2)>></span></mouse>\n\t\t</div>\n\t<</if>>\n\t/* 北极星模组 */\n\t<<if Number.isFinite($energy) and $ghost gte 1>>\n\t\t<<mobileStatsColor \"energy\">>\n\t\t<div @class=\"'stat ' + _mobileColor\">\n\t\t\t<mouse class=\"tooltip-centertop\">能<span>能量: <<print $energy.toFixed(2)>></span></mouse>\n\t\t</div>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "mobileStats",
+    "findString": "\t\t<<case \"hallucinogen\">>\n\t\t\t<<mobileStatsColorSet `Math.clamp($hallucinogen, 50, 500)` 500>>",
+    "replace": "\t\t<<case \"hallucinogen\">>\n\t\t\t<<mobileStatsColorSet `Math.clamp($hallucinogen, 50, 500)` 500>>\n\t\t/* 北极星模组 */\n\t\t<<case \"energy\">>\n\t\t\t<<mobileStatsColorSetIverted `Math.clamp($energy, 0, $energymax)` $energymax>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Moor Widgets",
+    "findString": "\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t\t<<rng 10>>",
+    "replace": "\t<<elseif $danger gte (9900 - ($allure * $forestmod))>>\n\t    /* 北极星模组 */\n\t\t<<rng 11>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Moor Widgets",
+    "findString": "\t\t\t<<if $harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if !$options.bjx_animal and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" or $transformationParts.dragon.wings isnot \"disabled\" or $transformationParts.angel.wings isnot \"disabled\" or $transformationParts.fallenAngel.wings isnot \"disabled\" or $transformationParts.demon.wings isnot \"disabled\" or $transformationParts.bee.wings isnot \"disabled\")>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Moor Widgets",
+    "findString": "\t\t\t<<moor_hunt_start>>\n\t\t<<case 10>>\n\t\t\t<<moor_fox>>",
+    "replace": "\t\t\t<<moor_hunt_start>>\n\t\t<<case 10>>\n\t\t\t<<moor_fox>>\n\t\t/* 北极星模组 */\n\t\t<<case 11>>\n\t\t\t<span class=\"blue\">你感觉被什么监视了。</span>你环顾四周，任何东西都可能潜伏在你周围。<<gstress>><<stress 6>>\n\t\t\t<br><br>\n\n\t\t\t<<link [[绕路 (0:30)|Moor Dragons Detour]]>><<pass 30>><<trauma 6>><</link>><<gtrauma>>\n\t\t\t<br>\n\t\t\t<<link [[继续|Moor Dragons Continue]]>><<set $rng to random(1,100)>><</link>>\n\t\t\t<br>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Moor Widgets",
+    "findString": "\t\t\t\t<br>\n\t\t\t\t<<set $skulduggerydifficulty to 600>>",
+    "replace": "\t\t\t\t<br>\n\t\t\t\t<<set $skulduggerydifficulty to 600>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<link [[撬锁|Moor Shackle Pick]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Moor Widgets",
+    "findString": "\t<<if $moor_binding gte 1>>\n\t\t<<set $skulduggerydifficulty to 500>>",
+    "replace": "\t<<if $moor_binding gte 1>>\n\t\t<<set $skulduggerydifficulty to 500>>\n\t\t/* 北极星模组 */\n\t\t<<link [[摩破你身上的束缚|Moor Abduction Walk Loosen]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t/* 北极星 */"
   }
 ]
