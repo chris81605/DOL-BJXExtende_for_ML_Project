@@ -16,6 +16,11 @@
   },
   {
     "passage": "MuseumAntiques",
+    "findString": "\t<<if $museumAntiques is undefined>>",
+    "replace": "\t<<if $museumAntiques isnot undefined>>\n\t\t<<for _labelM, _valueM range $museumAntiques.antiques>>\n\t\t\t<<print '<<if $museumAntiques.antiques.'+_labelM+' isnot undefined>>'+\n\t\t\t\t'<<set $$'+_labelM+' to $museumAntiques.antiques.'+_labelM+'>>'+\n\t\t\t'<</if>>'>>\n\t\t<</for>>\n\t\t<</if>>"
+  },
+  {
+    "passage": "MuseumAntiques",
     "findString": "\t\t\tmuseumCount:0\n\t\t}>>",
     "replace": "\t\tmuseumCount:0,\n\t\tstolenCount:0,\n\t\trecoveredCount:0\n\t}>>\n\t<<if $options.bjx_antiques>>\n        <<set _bjxAntiques to {\n\t\t\t\"antiqueliquor\":\"notFound\",\n\t\t\t\"antiquebogplate\":\"notFound\",\n\t\t\t\"antiquebogbone\":\"notFound\",\n\t\t\t\"antiquebogtool\":\"notFound\",\n\t\t\t\"antiquebunkertablet\":\"notFound\",\n\t\t\t\"antiquebunkertag\":\"notFound\",\n\t\t\t\"antiquecannonball\":\"notFound\",\n\t\t\t\"antiquearttablet\":\"notFound\",\n\t\t\t\"antiqueterracottastatue\":\"notFound\",\n\t\t\t\"antiqueredvial\":\"notFound\",\n\t\t\t\"antiquetribemask\":\"notFound\",\n\t\t\t\"antiqueebonystatuette\":\"notFound\",\n\t\t\t\"antiqueglacierplant\":\"notFound\",\n\t\t\t\"antiquebullion\":\"notFound\",\n\t\t\t\"antiquereal\":\"notFound\",\n\t\t\t\"antiqueindigo\":\"notFound\",\n\t\t\t\"antiquescroll\":\"notFound\",\n\t\t\t\"antiquemushroom\":\"notFound\",\n\t\t\t\"antiquegreed\":\"notFound\"\n\t\t}>>\n\t\t<<for _labelM, _valueM range _bjxAntiques>>\n    \t    <<set $museumAntiques.antiques[_labelM] to _valueM>>\n    \t<</for>>\n\t<</if>>"
   },
@@ -23,5 +28,10 @@
     "passage": "MuseumAntiques",
     "findString": "\t\t\t<<if $museumAntiques.antiques[_labelM] is \"museum\" or $museumAntiques.antiques[_labelM] is \"stolen\" or $museumAntiques.antiques[_labelM] is \"recovered\">>\n\t\t\t\t<<set $museumAntiques.museumCount++>>\n\t\t\t<</if>>",
     "replace": "\t\t<<if $museumAntiques.antiques[_labelM] is \"museum\" or $museumAntiques.antiques[_labelM] is \"stolen\" or $museumAntiques.antiques[_labelM] is \"recovered\">>\n\t\t\t<<set $museumAntiques.museumCount++>>\n\t\t<</if>>\n\t\t<<if $museumAntiques.antiques[_labelM] is \"stolen\">>\n\t\t\t<<set $museumAntiques.stolenCount++>>\n\t\t<</if>>\n\t\t<<if $museumAntiques.antiques[_labelM] is \"recovered\">>\n\t\t\t<<set $museumAntiques.recoveredCount++>>\n\t\t<</if>>"
+  },
+  {
+    "passage": "MuseumAntiques",
+    "findString": "\t<</if>>\n\t<<if $winterHint is undefined>>\n\t\t<<set $winterHint to \"notGiven\">>",
+    "replace": "\t<<if $winterHint is undefined>>\n\t\t<<set $winterHint to \"notGiven\">>"
   }
 ]
