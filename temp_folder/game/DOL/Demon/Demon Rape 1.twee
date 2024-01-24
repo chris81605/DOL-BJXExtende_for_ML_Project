@@ -1,0 +1,38 @@
+:: Demon Rape 1 
+<<effects>><<person1>>
+<<if $molestationstart is 1>>
+    <span class="red">进行这个仪式是你最大的错误，看看你能承受多大的惩罚。</span>
+    <br>
+    <<chastityBreakDemon>>
+    <<set $molestationstart to 0>>
+    <<controlloss>>
+    <<violence 1>>
+    <<neutral 1>>
+    <<molested>>
+
+    <<maninit>>
+    <<set $enemyarousalmax to 10000>>
+    <<set $ostart to $orgasmcount>><<set $oindex to 0>><<set $o to 0>>
+<</if>>
+
+<<set $o to ($orgasmcount - $ostart)>>
+<<if $o gt $oindex>>
+    你已经高潮了$o次，<span class="purple">那<<person>>吸取了你的意识。
+    <<awareness -10>><<llawareness>></span>
+    <br>
+    <<set $oindex to $o>>
+<</if>>
+
+<<set $enemyanger to 500>>
+<<effects>>
+<<effectsman>><<man>>
+<<stateman>>
+<br><br>
+<<actionsman>>
+<<if $enemyhealth lte 0>>
+    <span id="next"><<link [[继续|Demon Rape 1 Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+    <span id="next"><<link [[继续|Demon Rape 1 Finish]]>><</link>></span><<nexttext>>
+<<else>>
+    <span id="next"><<link [[继续|Demon Rape 1]]>><</link>></span><<nexttext>>
+<</if>>

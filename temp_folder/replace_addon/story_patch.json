@@ -113,11 +113,6 @@
     "replace": "\t<<if $exposed lte 0>>\n\t\t<<buswait>>\n\t<</if>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t<<flywait>>\n\t<</if>>\n\t/* 北极星 */"
   },
   {
-    "passage": "Barb Street",
-    "findString": "\t\t\t<<if $exposed lte 0>>\n\t\t\t\t<<buswait>>\n\t\t\t<</if>>",
-    "replace": "\t\t\t<<if $exposed lte 0>>\n\t\t\t\t<<buswait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
-  },
-  {
     "passage": "Bath",
     "findString": "\t你洗得干干净净。<<wash>>\n\t<br><br>",
     "replace": "\t你洗得干干净净。<<wash>>\n\t<br><br>\n\t\n\t/* 北极星模组 */\n\t<<if $options.bjx_eventTF and $slime gt 0>>\n\t    <<violence 100>>\n\t    <span class='red'>你承受了巨大的痛苦。你是一只史莱姆，你干嘛这么干？</span>\n\t    <br><br>\n\t<</if>>\n\t/* 北极星 */",
@@ -249,11 +244,6 @@
     "replace": "/* 北极星模组 */\n\t<<elseif $rng gte 60 and (!$options.bjx_animal and $harpy gte 6 and $birdFly gte 1 or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\"))>> /* harpies get a bit more chance */\n\t/* 北极星 */"
   },
   {
-    "passage": "Cliff Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
-  },
-  {
     "passage": "Clothing Shop Sneak",
     "findString": "<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>",
     "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Clothing Shop]]>><<set $ghostIn to true>><<pass 1>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>"
@@ -278,16 +268,6 @@
     "findString": "<<if $harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2>>",
     "replace": "\t\t/* 北极星模组 */\n\t\t<<if !$options.bjx_animal and ($harpy gte 6 or $angel gte 6 or $demon gte 6 or $fallenangel gte 2) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" or $transformationParts.dragon.wings isnot \"disabled\" or $transformationParts.angel.wings isnot \"disabled\" or $transformationParts.fallenAngel.wings isnot \"disabled\" or $transformationParts.demon.wings isnot \"disabled\" or $transformationParts.bee.wings isnot \"disabled\")>>\n\t\t/* 北极星 */",
     "all": true
-  },
-  {
-    "passage": "Connudatus Street",
-    "findString": "\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>",
-    "replace": "\t\t/* 北极星模组 */\n\t\t<<if Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 0 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[介绍你自己 (0:05)|Casey Introduction]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 1 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[再次尝试交谈 (0:05)|Casey Again]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseymet is 1>>\n\t\t\t你看到凯西在老地方抽着雪茄。\n\t\t\t<br><br>\n\t\t\t<<link [[打招呼 (0:20)|Casey Hang Out]]>><<npcincr \"凯西\" love 2>><<pass 20>><</link>><<gglove>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>"
-  },
-  {
-    "passage": "Connudatus Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
   },
   {
     "passage": "Cosmetics Lock",
@@ -340,21 +320,6 @@
     "replace": "\t/* 北极星模组 */\n\t<<link [[抢劫|Danube House Rob]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"thievery\">>\n\t/* 北极星 */"
   },
   {
-    "passage": "Danube Street",
-    "findString": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>",
-    "replace": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed is 1 and $TaylorReward is undefined and Time.dayState is not \"night\">>\n\t\t\t你看到泰勒正站在一栋房子门前朝你招手。\n\t\t\t<br><br>\n\t\t\t<<link [[走向泰勒|Taylor Meeting After Freed]]>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */"
-  },
-  {
-    "passage": "Danube Street",
-    "findString": "\t\t<<if Time.dayState is \"night\">>",
-    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed gte 1 and $TaylorReward is 1 and Time.dayState isnot \"night\">>\n\t\t\t<<dooricon \"danube\">><<link [[泰勒的家 (0:02)|Taylor Meeting]]>><<pass 2>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState is \"night\">>"
-  },
-  {
-    "passage": "Danube Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
-  },
-  {
     "passage": "Demon Sex Finish",
     "findString": "<<schooleffects>><<effects>>\n<<unset $o>><<unset $ostart>><<unset $oindex>>\n<<person1>>\n<<if $enemyarousal gte $enemyarousalmax>>\n\t<<ejaculation-demon>>\n\tYou wake on a grassy field, refreshed but drenched in semen and goo... the <<person>> is gone, <span class=\"blue\">leaving you with a deep sense of longing you can't shake or understand.</span>\n\t<br><br>\n\t<<set $tiredness to 1>>\n\t<<set $pain to 0>>\n\t<<drench \"semen\" \"slime\" 5>>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[Next|Park]]>><</link>>\n<<else>>\n\t<<He>> recoils and vanishes. You are left with a deep sense of longing you can't shake or understand.\n\t<br><br>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[Next|Hallways]]>><</link>>\n<</if>>",
     "replace": "/* 北极星模组 */\n<<schooleffects>><<effects>>\n<<unset $o>><<unset $ostart>><<unset $oindex>>\n<<person1>>\n<<if $enemyarousal gte $enemyarousalmax>>\n\t<<ejaculation-demon>>\n\t不久之后你醒了过来，浑身沾满了精液和粘液，但你感觉神清气爽，往日疲劳与创伤一扫而空...那<<person>>已经走了，<span class=\"blue\">留给你一种挥之不去的莫名思念。</span>\n\t<br><br>\n\t<<set $tiredness to 1>>\n\t<<set $pain to 0>>\n\t<<drench \"semen\" \"slime\" 5>>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[继续|Churchyard]]>><</link>>\n<<else>>\n\t<<He>>向后退去，然后消失在空气中，<span class=\"blue\">留给你一种挥之不去的莫名思念。</span>\n\t<br><br>\n\t<<clotheson>>\n\t<<endcombat>>\n\t<<link [[继续|Churchyard]]>><</link>>\n<</if>>\n/* 北极星 */"
@@ -403,11 +368,6 @@
     "passage": "Domus House Sneak",
     "findString": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n你成功地撬开了锁并进到了这栋房子里。",
     "replace": "<<set $outside to 0>><<set $location to \"town\">><<effects>><<set $bus to \"domus\">>\n/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁并进到了这栋房子里。\n<</if>>\n/* 北极星 */"
-  },
-  {
-    "passage": "Domus Street",
-    "findString": "\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t\t/* 北极星模组 */\n    \t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n    \t\t\t\t<<flywait>>\n    \t\t\t<</if>>\n    \t\t\t/* 北极星 */\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
   },
   {
     "passage": "Doren Shower 1",
@@ -463,11 +423,6 @@
     "passage": "Elk Compound Interior",
     "findString": "你成功地撬开了锁，进入了建筑里。",
     "replace": "/* 北极星模组 */\n<<if $ghostIn>>\n\t你成功地穿门而入。\n<<else>>\n\t你成功地撬开了锁，进入了建筑里。\n<</if>>\n/* 北极星 */"
-  },
-  {
-    "passage": "Elk Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
   },
   {
     "passage": "English Play Rehearse Alone",
@@ -600,11 +555,6 @@
     "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Hairdressers]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>"
   },
   {
-    "passage": "Harvest Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
-  },
-  {
     "passage": "Head's Stash",
     "findString": "<<link [[撬锁 (0:30)|Head's Stash 2]]>><<pass 30>><</link>><<skulduggerydifficulty>>",
     "replace": "/* 北极星模组 */\n<<link [[撬锁 (0:30)|Head's Stash 2]]>><<pass 30>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n/* 北极星 */"
@@ -613,11 +563,6 @@
     "passage": "High Public Pants Down Still 2",
     "findString": "<<if Time.daystate is \"day\">>",
     "replace": "/* 北极星模组 */\n<<if Time.dayState is \"day\">>\n/* 北极星 */"
-  },
-  {
-    "passage": "High Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
   },
   {
     "passage": "Hospital Foyer",
@@ -750,11 +695,6 @@
     "replace": "/* 北极星模组 */\n<<relaxicon>><<link [[休息 (1:00)|Meadow Relax]]>><<stress -6>><<tiredness -12>><</link>><<lstress>><<lltiredness>>\n/* 北极星 */\n"
   },
   {
-    "passage": "Mer Street",
-    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
-    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
-  },
-  {
     "passage": "Monster Tower",
     "findString": "\t\t<<if $harpy gte 6 and $birdFly gte 1>>",
     "replace": "\t\t/* 北极星模组 */\n\t\t<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t/* 北极星 */"
@@ -793,5 +733,50 @@
     "passage": "Museum",
     "findString": "\t<<if $museumAntiqueJournalHints is undefined>>\n\t\t<<set $museumAntiqueJournalHints to []>>\n\t<</if>>\n\t<<museumtalk>>\n",
     "replace": "\t<<if $museumAntiqueJournalHints is undefined>>\n\t\t<<set $museumAntiqueJournalHints to []>>\n\t<</if>>\n\t<<museumtalk>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_antiques>>\n    \t<<museumtake>>\n    \t<<museumreturn>>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Ocean Breeze Lock",
+    "findString": "<<clifficon>><<link [[离开|Cliff Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Ocean Breeze]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<clifficon>><<link [[离开|Cliff Street]]>><</link>>"
+  },
+  {
+    "passage": "Orphanage",
+    "findString": "\t<<officeicon>><<link [[贝利办公室 (0:01)|Bailey's Office]]>><<pass 1>><</link>>\n\t<br>",
+    "replace": "\t/* 北极星模组 */\n\t<<if Time.dayState is \"night\" and $town_projects.home is 1 and $baileypicked is 1>>\n\t\t<<officeicon>><<link [[闯入贝利的办公室(0:20)|Bailey's Office Break In]]>><<pass 5>><</link>>\n\t\t<br><br>\n\t<<elseif Time.dayState is \"night\" and $town_projects.home is 1>>\n\t\t<<set $lock to 250>>\n\t\t<<if $skulduggery gte $lock>>\n\t\t\t<span class=\"green\">这锁看起来很容易开。</span>\n\t\t\t<br>\n\t\t\t<<officeicon>><<link [[撬开贝利的办公室门锁(0:05)|Bailey's Office Lockpick]]>><<pass 20>><</link>>\n\t\t\t<br><br>\n\t\t<<else>>\n\t\t\t<span class=\"blue\">这锁看起来超出了你的能力范围。</span> <<skulduggeryrequired>>\n\t\t\t<br><br>\n\t\t<</if>>\n\t\t<<if $options.bjx_eventTF and $ghost gte 1>>\n        \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n        \t<br>\n        \t<<link [[穿越 (0:01)|Bailey's Office Break In]]>><<pass 1>><<set $ghostIn to true>><</link>>\n        \t<br><br>\n        <</if>>\n\t<<else>>\n\t\t<<officeicon>><<link [[贝利办公室（0:01）|Bailey's Office]]>><<pass 1>><</link>>\n\t\t<br><br>\n\t<</if>>\n\t<<if Time.dayState is \"night\" and $town_projects.home is 1 and $basement is 1 and $basementpicked is 1>>\n\t\t<<officeicon>><<link [[闯入地下室(0:01)|Orphanage Basement]]>><<pass 1>><</link>>\n\t\t<br><br>\n\t<<elseif Time.dayState is \"night\" and $town_projects.home is 1 and $basement is 1>>\n\t\t<<set $lock to 1000>>\n\t\t<<if $skulduggery gte $lock>>\n\t\t\t<span class=\"green\">这锁看起来很容易开。</span>\n\t\t\t<br>\n\t\t\t<<officeicon>><<link [[撬开地下室门锁(0:30)|Basement Lockpick]]>><<pass 30>><</link>>\n\t\t\t<br><br>\n\t\t<<else>>\n\t\t\t<span class=\"blue\">这锁看起来超出了你的能力范围。</span> <<skulduggeryrequired>>\n\t\t\t<br><br>\n\t\t<</if>>\n\t\t<<if $options.bjx_eventTF and $ghost gte 1>>\n        \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n        \t<br>\n        \t<<link [[穿越 (0:01)|Orphanage Basement]]>><<pass 1>><<set $ghostIn to true>><</link>>\n        \t<br><br>\n        <</if>>\n\t<</if>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Park Fountain",
+    "findString": "<<exhibitionism4>>",
+    "replace": "/* 北极星模组 */\n<<if $options.bjx_eventTF and $slime gt 0>>\n    <br><br>\n    <span class='red'>你如此沉溺于自己的暴露行为，甚至忘记了要避开水流。</span>\n    <<violence 30>>\n    <br><br>\n<</if>>\n/* 北极星 */\n<<exhibitionism4>>"
+  },
+  {
+    "passage": "Park",
+    "findString": "\t\t<<femaleicon>><<link [[女厕所 (0:01)|Women's Toilets]]>><<pass 1>><</link>>",
+    "replace": "\t\t<<femaleicon>><<link [[女厕所 (0:01)|Women's Toilets]]>><<pass 1>><</link>>\n\t\t/* 北极星模组 */\n\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t<<flywait>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Passout Tentacle World 3",
+    "findString": "<<link [[继续|Passout Tentacle World 4]]>><<clotheson>><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $slime gt 0 and $slime isnot 2>>\n    你体内的核心突然发出紫色的光芒，它开始稳定地跳动。随着脉搏的跳动，你注意到攻击你的触手在蠕动。它们突然停了下来，然后，随着你脉动的核心慢慢回旋。\n    <br><br>\n    高潮几乎榨干了你，但你本能地觉得继续保持清醒会以某种方式改变你身体的本质。你努力如是，但你觉得自己现在好像站在十字路口。\n    <br><br>\n\t<<link [[凝神|Lust Slime]]>><</link>><<slime>>\n\t<br>\n<</if>>\n\n<<link [[昏倒|Passout Tentacle World 4]]>><<clotheson>><</link>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Passout Tentacle World 4",
+    "findString": "\t<<tentacleworldend>>\n\t<<link [[继续|Bedroom]]>><</link>>",
+    "replace": "\t<<tentacleworldend>>\n\t<<if $slime is 2>>\n\t\t……但这一切真实过头了。随着昏昏沉沉的感觉逐渐消退，你仔细照了照镜子。你的皮肤是半透明的紫色，你感觉自己的体液具有了催情的效果，这效果对你本身似乎无碍，但你的性高潮经历似乎对你史莱姆的身体产生了某种影响。<span class='lust'>你突然心有所悟，在性爱过程中，你的新能力将得到最好的发挥。</span>\n\t\t<br><br>\n\t\t思考了一下你的选择后，你从地上站了起来。\n\t\t<br><br>\n\t<</if>>\n\t<<link [[继续|Bedroom]]>><</link>>\n<<elseif $tentacleEntrance is \"lakehouse\">>\n\t<<set $location to \"lakehouse\">>\n\t你在镜子旁边的地板上醒来。 那真是一场噩梦。\n\t<br><br>\n\t<<tentacleworldend>>\n\t<<if $slime is 2>>\n\t\t……但这一切真实过头了。随着昏昏沉沉的感觉逐渐消退，你仔细照了照镜子。你的皮肤是半透明的紫色，你感觉自己的体液具有了催情的效果，这效果对你本身似乎无碍，但你的性高潮经历似乎对你史莱姆的身体产生了某种影响。<span class='lust'>你突然心有所悟，在性爱过程中，你的新能力将得到最好的发挥。</span>\n\t\t<br><br>\n\t\t思考了一下你的选择后，你从地上站了起来。\n\t\t<br><br>\n\t<</if>>\n\t<<link [[继续|Lake House Bedroom]]>><</link>>"
+  },
+  {
+    "passage": "Passout Tentacle World 4",
+    "findString": "\t<<tentacleworldend>>\n\t<<link [[继续|Asylum Room 2]]>><</link>>",
+    "replace": "\t<<tentacleworldend>>\n\t<<if $slime is 2>>\n\t\t你感觉自己的体液具有了催情的效果，这效果对你本身似乎无碍，但你的性高潮经历似乎对你史莱姆的身体产生了某种影响。<span class='lust'>你突然心有所悟，在性爱过程中，你的新能力将得到最好的发挥。</span>\n\t\t<br><br>\n\t\t你摇摇头理清思绪。\n\t\t<br><br>\n\t<</if>>\n\t<<link [[继续|Asylum Room 2]]>><</link>>"
+  },
+  {
+    "passage": "Pet Shop Lock",
+    "findString": "<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Pet Shop]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>"
+  },
+  {
+    "passage": "Pet Shop",
+    "findString": "<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $lakehouseinit is 1 and $lakehouse isnot undefined>>\n\t<<if $lakehouse.petbed is undefined or $lakehouse.petbed is 0>>\n\t\t<<if $money gte 200000>>\n\t\t\t<li><<link [[购买一张宠物床 (£2000)|$passage]]>><<set $money -= 200000>><<set $lakehouse.petbed to 1>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £2,000 购买宠物床。</li>\n\t\t<</if>>\n\t<<elseif $lakehouse.petbed is 2>>\n\t\t家里放不下更多宠物床了。\n\t<<elseif $lakehouse.petbed gte 1>>\n\t\t<<if $money gte 200000>>\n\t\t\t<li><<link [[再购买一张宠物床 (£2000)|$passage]]>><<set $money -= 200000>><<set $lakehouse.petbed to 2>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £2,000 再购买宠物床。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.terrarium is undefined or $lakehouse.terrarium is 0>>\n\t\t<<if $money gte 100000>>\n\t\t\t<li><<link [[购买玻璃缸 (£1000)|$passage]]>><<set $money -= 100000>><<set $lakehouse.terrarium to 1>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £1,000 购买玻璃缸。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.petbed isnot undefined and $lakehouse.pet isnot undefined and $lakehouse.petbed gt $lakehouse.pet.length>>\n\t\t<<if $money gte 50000>>\n\t\t\t<li><<link [[领养一只狗狗 (£500)|Pet Shop Dog Buy]]>>\n\t\t\t\t<<set $money -= 50000>>\n\t\t\t\t<<set $pet_now to {}>>\n\t\t\t\t<<set $pet_now.type to \"dog\">>\n\t\t\t\t<<set $pet_now.name to \"狗子\">>\n\t\t\t\t<<if random(1, 100) lte $beastmalechance>>\n\t\t\t\t\t<<set $pet_now.gender to \"m\">>\n\t\t\t\t<<else>>\n\t\t\t\t\t<<set $pet_now.gender to \"f\">>\n\t\t\t\t<</if>>\n\t\t\t<</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £500 买狗狗。</li>\n\t\t<</if>>\n\t\t<<if $money gte 50000>>\n\t\t\t<li><<link [[领养一只猫猫 (£500)|Pet Shop Cat Buy]]>>\n\t\t\t\t<<set $money -= 50000>>\n\t\t\t\t<<set $pet_now to {}>>\n\t\t\t\t<<set $pet_now.type to \"cat\">>\n\t\t\t\t<<set $pet_now.name to \"小猫咪\">>\n\t\t\t\t<<if random(1, 100) lte $beastmalechance>>\n\t\t\t\t\t<<set $pet_now.gender to \"m\">>\n\t\t\t\t<<else>>\n\t\t\t\t\t<<set $pet_now.gender to \"f\">>\n\t\t\t\t<</if>>\n\t\t\t<</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £500 买猫猫。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.terrarium isnot undefined and $lakehouse.terrarium gte 1>>\n\t\t<<if $lakehouse.smallpet is undefined>>\n\t\t\t<<set $lakehouse.smallpet to {}>>\n\t\t<</if>>\n\t\t<<set _total to 0>>\n\t\t<<for _type, _num range $lakehouse.smallpet>>\n    \t\t<<set _total += _num>>\n    \t<</for>>\n\t\t<<if _total lt 10 * $lakehouse.terrarium>>\n\t\t\t<<if $money gte 30000>>\n\t\t\t\t<li><<link [[领养一只壁虎 (£300)|$passage]]>>\n\t\t\t\t\t<<set $money -= 30000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.geckos is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.geckos to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.geckos += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £300 买壁虎。</li>\n\t\t\t<</if>>\n\t\t\t<<if $money gte 20000>>\n\t\t\t\t<li><<link [[领养一只螃蟹 (£200)|$passage]]>>\n\t\t\t\t\t<<set $money -= 20000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.crabs is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.crabs to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.crabs += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £200 买螃蟹。</li>\n\t\t\t<</if>>\n\t\t\t<<if $money gte 40000>>\n\t\t\t\t<li><<link [[领养一只乌龟 (£400)|$passage]]>>\n\t\t\t\t\t<<set $money -= 40000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.turtles is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.turtles to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.turtles += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £400 买乌龟。</li>\n\t\t\t<</if>>\n\t\t<</if>>\n\t<</if>>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>"
   }
 ]

@@ -1,0 +1,33 @@
+:: Forest Mansion Cellar 
+<<set $outside to 0>><<set $location to "kylar_manor">><<set $forestmansionstage to 4>><<effects>>
+你走下一个嘎吱作响的旧梯子，来到一个潮湿漆黑的房间。<<if $TaylorWith is 1>>泰勒打开<<his>>的手电筒，环顾房间。<<else>>你打开手电筒，环顾房间。<</if>>这里有几十个旧的空瓶子，其间有几个装满了红色物质。 
+
+<<if $rng lte 50 and $eventskip is 0>>
+	<<forestmansionrandomevents>>
+<<else>>
+	<<if $forestmansionsleep is 1>>
+		你看到有一块之小石头出现在地上，明明之前什么也没有。
+		<br><br>
+	<</if>>
+	
+	<<if $TaylorWith is 1>>
+		"这一定是那个酒窖。我们镇过去以出口优质葡萄酒而自豪，我不敢相信这些东西依然存在。"
+		<br><br>
+	<</if>>
+
+	<<if $museumAntiques.antiques.antiqueliquor is "notFound">>
+	    在摸索中，你无意间不知碰到了什么机关，伴随着一阵咔啦声，一个暗格打开，里面是一瓶被精心收纳的古老且精美的葡萄酒。
+	    <br><br>
+		<<link [[拿走瓶子 (0:02)|Forest Mansion Bottle Take]]>><<pass 2>><<museumAntiqueStatus "antiqueliquor" "found">><<set $antiquemoney += 5000>><</link>>
+		<br>
+		<<link [[喝一口 (0:02)|Forest Mansion Bottle Drink]]>><<pass 2>><<museumAntiqueStatus "antiqueliquor" "found">><<set $antiquemoney += 5000>><</link>>
+		<br>
+	<</if>>
+
+	<<if $forestmansionrunestone is 0 and $forestmansionsleep is 1>>
+		<<link [[捡起石头|Forest Mansion Stone]]>><</link>>
+		<br>
+	<</if>>
+
+	<<link [[回到厨房 (0:05)|Forest Mansion Kitchen]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+<</if>>

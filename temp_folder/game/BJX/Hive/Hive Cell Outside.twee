@@ -1,0 +1,22 @@
+:: Hive Cell Outside 
+<<set $outside to 0>><<set $location to "hive">><<effects>><<set $hivestage to 3>>
+<<if $stress gte 10000>>
+	<<passouthive>>
+<<else>>
+	<<if ($TaylorArrested is 1 or $TaylorMissing is 1) and $TaylorFreed is 0>>
+		<<npc "泰勒">><<person1>>
+		一排牢房排列在蜂巢的后壁上。其中一间被一名人类占据。
+	<<else>>
+		一排牢房排列在蜂巢的后壁上。尽管目前所有的牢房都是空的，但仍然有警卫驻扎在这里。 
+	<</if>>
+	<br><br>
+	<<if ($TaylorArrested is 1 or $TaylorMissing is 1) and $TaylorIntroduction is undefined and $TaylorFreed is 0>>
+		<<link [[和囚犯说话 (0:30)|Hive Taylor Introduction]]>><<npcincr "泰勒" love 1>><<pass 30>><</link>><<glove>>
+		<br>
+	<<elseif ($TaylorArrested is 1 or $TaylorMissing is 1) and $TaylorFreed is 0>>
+		<<link [[和泰勒说话 (0:30)|Hive Taylor Hangout]]>><<npcincr "泰勒" love 1>><<pass 30>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<link [[走廊|Hive Corridor]]>><</link>>
+	<br>
+<</if>>

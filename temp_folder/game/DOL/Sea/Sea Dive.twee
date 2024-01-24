@@ -1,0 +1,59 @@
+:: Sea Dive 
+<<location "seadive">><<set $bus to "seadive">><<set $outside to 0>><<underwater>><<effects>>
+<<if $stress gte $stressmax>>
+	<<passoutbeach>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+		<<eventsdeepseadive>>
+	<<else>>
+		<<if $phase is 0>>
+			你潜入水下，光线穿过开阔的水面上，照亮了附近的景象。
+		<<elseif $phase is 1>>
+			从水面之上穿越下来的光在海洋的这个深度也变暗了很多。
+		<<elseif $phase is 2>>
+			你可以看到远处珊瑚礁的模糊轮廓。
+		<<elseif $phase is 3>>
+			你周围的光线已经暗淡，但你还在继续游。
+		<<elseif $phase is 4>>
+			你注意到有小鱼在你的视野里游来游去，它们好奇地注释着你，在你的周围游成一圈。
+		<<elseif $phase is 5>>
+			你开始看到远处奇怪的形状，你游向它们，好奇地想看看它们是什么。原来它们是巨大的悬崖，从海底升起，就像古代被遗忘的哨兵。
+		<<elseif $phase is 6>>
+			光线已经完全照射不到这里，但海水却散发着令人毛骨悚然的蓝色光芒。
+		<<elseif $phase is 7>>
+			你开始看到远处奇怪的、脉动的形状。当你靠近时，它们变得更加清晰。它们是巨大的海洋生物，行动优雅而有力。
+		<<elseif $phase is 8>>
+			你被完全的黑暗包围，唯一的声音是深海微弱的回声。
+		<<elseif $phase is 9>>
+			尽管能见度有限，你仍然可以辨认出在你周围游泳的各种海洋生物的形状。你看到一大群水母漂过，它们的触手在黑暗中闪闪发光，你甚至能瞥见远处游来游去的鲸鱼的影子。
+		<<elseif $phase is 10>>
+			你终于到达了底部，你花了一点时间整理自己，沉浸在水下如此之深的独特孤独感中。
+		<</if>>
+		<br><br>
+
+		<<if $phase is 0>>
+			<<link [[浮上水面|Sea]]>><<wateraction>><</link>>
+			<br>
+		<</if>>
+		<<if $phase is 1>>
+			<<link [[浮上水面|Sea]]>><<wateraction>><</link>>
+			<br>
+		<</if>>
+		<<if $phase gt 1>>
+			<<link [[向上游去|Sea Dive]]>><<wateraction>><<set $phase -= 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+			<br>
+		<</if>>
+		<<if $phase lt 10>>
+			<<link [[向下潜水|Sea Dive]]>><<wateraction>><<set $phase += 1>><<tiredness 2>><</link>><<loxygen>><<gtiredness>>
+			<br>
+		<</if>>
+		<<if $phase is 10 and $ship is undefined>>
+			<<link [[探索海底|Deep Sea Ship Find]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<<elseif $phase is 10>>
+			<<link [[游向沉船|Deep Sea Ship]]>><<wateraction>><</link>><<loxygen>>
+			<br>
+		<</if>>
+	<</if>>
+<</if>>

@@ -1,0 +1,31 @@
+:: Forest Mansion Kitchen 
+<<if $foresthunt gte 1>>
+	<span class="lblue">在这里你是相对安全的。不论是什么在追捕你，现在都已经放弃了。</span>
+	<br><br>
+	<<set $foresthunt to 0>>
+<</if>>
+
+<<set $outside to 0>><<set $location to "kylar_manor">><<set $forestmansionstage to 3>><<effects>>
+你走进小房间，里面摆满了很久以前的烹饪用具和器皿。靠墙摆放着一个古旧的木制烤箱和冰柜，柜台上摆放着银器。角落里有一扇满是灰尘的活板门，通往下方。
+<br><br>
+
+<<if $rng lte 50 and $eventskip is 0>>
+	<<forestmansionrandomevents>>
+<<else>>
+	<<if $TaylorWith is 1>>
+		"这一定是那个酒窖。我们镇过去以出口优质葡萄酒而自豪，我不敢相信这些东西依然存在 。"
+		<br>
+	<</if>>
+
+	<<link [[下到地窖里 (0:05)|Forest Mansion Cellar]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<link [[去往大厅 (0:05)|Forest Mansion Left Hallway]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<if $TaylorWith is 1>>
+		<<link [[从窗口离开|Forest Mansion Taylor Leave]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[从窗口离开|Forest Mansion Look Around]]>><</link>>
+		<br>
+	<</if>>
+<</if>>

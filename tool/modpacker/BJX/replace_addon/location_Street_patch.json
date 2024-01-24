@@ -1,0 +1,77 @@
+[
+  {
+    "passage": "Barb Street",
+    "findString": "\t\t\t<<if $exposed lte 0>>\n\t\t\t\t<<buswait>>\n\t\t\t<</if>>",
+    "replace": "\t\t\t<<if $exposed lte 0>>\n\t\t\t\t<<buswait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+  "passage": "Cliff Street",
+  "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+  "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Connudatus Street",
+    "findString": "\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 0 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[介绍你自己 (0:05)|Casey Introduction]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseyagain is 1 and $caseymet is 0>>\n\t\t\t你看到一个年轻的<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].gender is \"m\">>男孩<<else>>女孩<</if>>穿着机车夹克，抽着雪茄，靠在路边，嘴里吐出一口烟雾，涂满油脂的黑发闪闪发光。\n\t\t\t<br><br>\n\t\t\t<<link [[再次尝试交谈 (0:05)|Casey Again]]>><<pass 5>><</link>>\n\t\t\t<br>\n\t\t<<elseif Time.dayState is \"dusk\" and $weather isnot \"rain\" and $caseymet is 1>>\n\t\t\t你看到凯西在老地方抽着雪茄。\n\t\t\t<br><br>\n\t\t\t<<link [[打招呼 (0:20)|Casey Hang Out]]>><<npcincr \"凯西\" love 2>><<pass 20>><</link>><<gglove>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState isnot \"dawn\" and Time.dayState isnot \"day\">>"
+  },
+  {
+    "passage": "Connudatus Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>",
+    "replace": "\t\t<<if $options.mapTop is true>>\n\t\t\t<<map \"danube\">>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed is 1 and $TaylorReward is undefined and Time.dayState is not \"night\">>\n\t\t\t你看到泰勒正站在一栋房子门前朝你招手。\n\t\t\t<br><br>\n\t\t\t<<link [[走向泰勒|Taylor Meeting After Freed]]>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t<<if Time.dayState is \"night\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $TaylorFreed gte 1 and $TaylorReward is 1 and Time.dayState isnot \"night\">>\n\t\t\t<<dooricon \"danube\">><<link [[泰勒的家 (0:02)|Taylor Meeting]]>><<pass 2>><</link>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.dayState is \"night\">>"
+  },
+  {
+    "passage": "Danube Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Domus Street",
+    "findString": "\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t\t/* 北极星模组 */\n    \t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n    \t\t\t\t<<flywait>>\n    \t\t\t<</if>>\n    \t\t\t/* 北极星 */\n\t\t\t\t<br>\n\t\t\t<</if>>\n\t\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Elk Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Harvest Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "High Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Mer Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Nightingale Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  },
+  {
+    "passage": "Oxford Street",
+    "findString": "\t\t\t\t<<lakeicon>><<link [[一起去湖边 (0:30)|Lake Journey]]>><<pass 30>><</link>>\n\t\t\t<</if>>\n\t\t\t<br><br>\n\t\t<</if>>",
+    "replace": "\t\t\t\t<<lakeicon>><<link [[一起去湖边 (0:30)|Lake Journey]]>><<pass 30>><</link>>\n\t\t\t<</if>>\n\t\t\t<br><br>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if Time.schoolDay and Time.hour is 15 and $NPCName[$NPCNameList.indexOf(\"凯西\")].love gte 41 and $exposed lte 0 and $weather isnot \"rain\" and $weather isnot \"snow\">>\n\t\t\t你看到凯西躺在树荫下而其旁边是一辆破旧的摩托车。\n\t\t\t<br><br>\n\t\t\t<<if $motorupgrade is 1>>\n\t\t\t\t<<link [[坐凯西的车回家 (0:05)|Casey Ride Home]]>><<npcincr \"凯西\" love 3>><<willpowerdifficulty 1 300>><<pass 5>><</link>><<ggglove>>\n\t\t\t<<else>>\n\t\t\t\t<<link [[坐凯西的车回家 (0:10)|Casey Ride Home]]>><<npcincr \"凯西\" love 3>><<willpowerdifficulty 1 100>><<pass 10>><</link>><<ggglove>>\n\t\t\t<</if>>\n\t\t\t<br><br>\n\t\t<<elseif Time.schoolDay and Time.hour is 15 and $NPCName[$NPCNameList.indexOf(\"凯西\")].love gte 41 and $exposed lte 0>>\n\t\t\t你看到凯西撑着雨伞在学校外面等着。\n\t\t\t<br><br>\n\t\t\t<<link [[跟凯西一起走回家 (0:20)|Casey Walk Home]]>><<npcincr \"凯西\" love 3>><<pass 30>><</link>><<ggglove>>\n\t\t\t<br>\n\t\t\t<<link [[带罗宾跟凯西一起回家 (0:30)|Casey Walk Home Robin]]>><<npcincr \"凯西\" love 1>><<pass 40>><<run setRobinLocationOverride(\"orphanage\", 15)>><</link>><<glove>>\n\t\t\t<br><br>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Oxford Street",
+    "findString": "\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t<<flywait>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<loiter>>\n\t\t<</if>>\n\t\t<<add_link \"<br>快捷小路<br>\">><<hideDisplay>>"
+  }
+]

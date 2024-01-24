@@ -1,0 +1,28 @@
+:: Bunker Rat 
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+	<<beastCombatInit>>
+<</if>>
+
+<<effects>>
+<<effectsman>>
+<br>
+<<beast $enemyno>>
+<br><br>
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $finish is 1>>
+	<span id="next"><<link [[继续|Bunker Rat Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Bunker Rat Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Bunker Rat Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Bunker Rat]]>><</link>></span><<nexttext>>
+<</if>>

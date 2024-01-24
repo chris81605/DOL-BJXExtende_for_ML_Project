@@ -1,0 +1,48 @@
+:: Forest Mansion Entrance 
+<<if $foresthunt gte 1>>
+	<span class="lblue">你在这座废弃的宅邸里算是安全了。不管是什么在追捕你，都已经放弃了。</span>
+	<br><br>
+	<<set $foresthunt to 0>>
+<</if>>
+
+<<set $outside to 0>><<set $location to "kylar_manor">><<set $forestmansionstage to 1>><<effects>>
+你发现自己在一个有着落满灰尘大门的房间里。旁边有个衣架，上面放着件看起来很旧的外套和帽子，上面积满了多年的灰尘和污垢。
+<br><br>
+
+<<if $rng lte 50 and $eventskip is 0>>
+	<<forestmansionrandomevents>>
+<<else>>
+	<<if $TaylorWith is 1>>
+		"这个地方虽然历史悠久，但仍然保持着相当不错的状态。"泰勒评价道。
+	<</if>>
+
+	左右都有一排门，前方还有一段向上的楼梯。
+	<br><br>
+
+	<<link [[向左走 (0:05)|Forest Mansion Left Hallway]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<link [[向右走 (0:05)|Forest Mansion Right Hallway]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<link [[上楼 (0:05)|Forest Mansion Landing]]>><<pass 5>><<set $eventskip to 0>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<if $forestmansionpicked is 0>>
+		<<if $skulduggery gte $lock>>
+			<span class="green">这锁看起来很好撬开。</span>
+			<br><br>
+			<<link [[撬锁 (0:05)|Forest Mansion Pick Lock]]>><<pass 5>><</link>>
+			<br>
+		<<else>>
+			<span class="blue">这锁看起来超出了你的能力范围。</span> <<skulduggeryrequired>>
+			<br>
+		<</if>>
+		<<if $options.bjx_eventTF and $ghost gte 1>>
+			<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+			<br><br>
+			<<link [[穿越 (0:01)|Forest Mansion Explore]]>><<pass 1>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		<<link [[离开 (0:05)|Forest Mansion Explore]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+<</if>>

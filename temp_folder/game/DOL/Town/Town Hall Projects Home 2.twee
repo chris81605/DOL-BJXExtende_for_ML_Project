@@ -1,0 +1,36 @@
+:: Town Hall Projects Home 2 
+<<effects>>
+<<person1>><<person>>向下指着大厅说："右边第一扇门，那里是接待室，请在那等待。"
+<br><br>
+<<endevent>>
+<<generate1>><<person1>>
+你按照指示进入一个小房间。一个面无表情的<<person>>坐在桌子后面，盯着显示器。
+<br><br>
+"你需要办理什么业务，"<<he>>说。
+<br><br>
+
+<<if $submissive gte 1150>>
+    "湖边有一些闲置地皮，"你说。"我想有一间属于自己的家。"
+<<elseif $submissive lte 850>>
+    "湖边有一些闲置地皮，"你说。"我想建造一间家庭住宅。"
+<<else>>
+    "湖边有一些闲置地皮，"你说。"我想盖一所属于自己的房。"
+<</if>>
+<br><br>
+
+<<person>>闻言露出了微笑。"原来是您来了，放心，市长已经交待过了，我们的人手早已做好了准备工作。"
+<br><br>
+"不过，"<<person>>话锋一转。"请您原谅，房子并不是免费的，您需要支付<span class="gold">£100000</span>购买房屋的所有权。"
+<br><br>
+"当然，如果您手头不太宽裕，您也可以选择暂时租用这所房屋，只需要每月<span class="gold">£2000</span>的房租费用。"
+<br><br>
+
+<<set _price to 100000 * $rentmod>>
+<<if $money gte 10000000 * $rentmod>>
+    <<link [["全款买下 (£"+_price+")"|Town Hall Projects Home Buy]]>><<set $money -= 10000000 * $rentmod>><<set $town_projects.home to 3>><<lakehouseinit>><<famebusiness 100>><<set $lakehouse.owner to true>><</link>>
+    <br>
+<</if>>
+<<link [[暂时租用|Town Hall Projects Home Buy]]>><<set $town_projects.home to 3>><<lakehouseinit>><</link>>
+<br>
+<<link [[再想想|Cliff Street]]>><<endevent>><</link>>
+<br>

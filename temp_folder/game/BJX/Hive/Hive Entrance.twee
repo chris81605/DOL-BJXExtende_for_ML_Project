@@ -1,0 +1,65 @@
+:: Hive Entrance 
+<<set $outside to 1>><<set $location to "hive">><<effects>>
+<<if $foresthunt gte 1 and $edenforesthunt is 1>>
+	<<set $rng to random(1, 60)>>
+	<<if $rng lte 20>>
+	<span class="red">你正在被追捕。你看到子弹壳散落在地上。</span>
+	<br><br>
+	<<elseif $rng lte 40>>
+	<span class="red">你正在被追捕。你看到地上有靴子的脚印。</span>
+	<br><br>
+	<<else>>
+	<span class="red"> 你正在被追捕。你听到远处传来枪声。</span>
+	<br><br>
+	<</if>>
+<<elseif $foresthunt gte 1 and $blackwolfhunt is 1>>
+	<<set $rng to random(1, 60)>>
+	<<if $rng lte 20>>
+	<span class="red">你正在被追猎，你留意到树枝上挂着一撮狼毛。</span>
+	<br><br>
+	<<elseif $rng lte 40>>
+	<span class="red">你正在被追猎，你看到地上有狼活动的痕迹。</span>
+	<br><br>
+	<<else>>
+	<span class="red">你正在被追猎。你听到远处传来一声咆哮。</span>
+	<br><br>
+	<</if>>
+<</if>>
+<<if $arousal gte 10000>>
+	<<orgasmforest>>
+<</if>>
+<<if $stress gte 10000>>
+	<<passoutforest>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	你面前是一个巨大的蜂巢，由两只看起来就很强壮的黄蜂守卫。 
+	<br><br>
+	<<if Time.hour lte 9>>
+		<<if $bjob is "Worker">>
+			你还看见一群工蜂准备出去采蜜。
+			<br><br>
+		<<elseif $bjob is "Hunter">>
+			你还看见一群猎手准备出去狩猎。
+			<br><br>
+		<</if>>
+	<</if>>
+	<<if Time.dayState isnot "night" and !random(3)>>
+		<<link [[观察|Hive Observe]]>><</link>>
+		<br>
+	<</if>>
+	<<link [[接近 (0:02)|Hive Approach]]>><<pass 2>><</link>>
+	<br>
+	<<if Time.hour lte 10 and Time.hour gte 6>>
+		<<if $bjob is "Worker">>
+			<<link [[工作|Hive Pollen Collection]]>><</link>>
+			<br>
+		<<elseif $bjob is "Hunter">>
+			<<link [[狩猎|Hive Animal Hunting]]>><</link>>
+			<br>
+		<</if>>
+	<</if>>
+	<<link [[森林 (0:20)|Forest]]>><<pass 20>><</link>>
+	<br>
+<</if>>

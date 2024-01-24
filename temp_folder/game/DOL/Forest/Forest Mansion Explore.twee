@@ -1,0 +1,89 @@
+:: Forest Mansion Explore 
+<<set $outside to 1>><<set $location to "kylar_manor">><<set $forestmansionstage to 0>><<effects>>
+
+<<if $foresthunt gte 1 and $edenforesthunt is 1>>
+	<<set $rng to random(1, 60)>>
+	<<if $rng lte 20>>
+	    <span class="red">你正在被追猎，你看到地上落着猎枪弹壳。</span>
+	    <br><br>
+	<<elseif $rng lte 40>>
+    	<span class="red">你正在被追猎，你看到地上有靴子的踪迹。</span>
+    	<br><br>
+	<<else>>
+    	<span class="red">你正在被追捕，你听到远处传来枪鸣声。</span>
+    	<br><br>
+	<</if>>
+<<elseif $foresthunt gte 1 and $blackwolfhunt is 1>>
+	<<set $rng to random(1, 60)>>
+	<<if $rng lte 20>>
+    	<span class="red">你正在被追猎，你看到树上缠绕着狼毛。</span>
+    	<br><br>
+	<<elseif $rng lte 40>>
+    	<span class="red">你正在被追杀，你看到地面上有着狼的足迹。</span>
+    	<br><br>
+	<<else>>
+    	<span class="red">你正在被追猎，你听到附近传来狼吼声。</span>
+    	<br><br>
+	<</if>>
+<</if>>
+
+<<if $arousal gte 10000>>
+	<<orgasmforest>>
+<</if>>
+
+<<if $stress gte 10000 and $TaylorWith is 0>>
+	<<passoutforest>>
+<<elseif $foresthunt gte 10 and $TaylorWith is 0>>
+	<<foresthunt>>
+<<elseif $exorcism is 1>>
+	<<npc Jordan>><<person1>>
+	一进门，你就看见约旦穿着件宽大的衣袍，拿着一本小册子等待着你。
+	<br><br>
+	"啊，你终于来了。准备好找回你的身体了吗？"<<He>>一脸严肃。
+	<br><br>
+	<<link [[说你准备好了|Forest Mansion Cellar Exorcism]]>><<pass 5>><</link>>
+	<<link [[说你后悔了|Forest Mansion Cellar Exorcism Return]]>><<pass 5>><</link>>
+<<else>>
+	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
+	<<set $lock to 1000>>
+	<<if $TaylorWith is 1>>
+		<<npc "泰勒">><<person1>>
+		你和泰勒穿过树林，来到一座破败的老宅跟前。
+	<<else>>
+		你蹑手蹑脚地穿过树林，来到一座破败的老宅面前。 
+	<</if>>
+	<<if $forestmansionpicked is 0>>
+		一把模样古怪的锁拴住了前门，是你从未见过的样式。
+		<br><br>
+
+		<<if $skulduggery gte $lock>>
+			<span class="green">这锁看起来很好撬开。</span>
+			<br><br>
+			<<link [[撬锁 (0:05)|Forest Mansion Pick Lock]]>><<pass 5>><</link>>
+			<br>
+		<<else>>
+			<span class="blue">这锁看起来超出了你的能力范围。</span> <<skulduggeryrequired>>
+			<br><br>
+		<</if>>
+		<<set $ghostIn to false>>
+		<<if $options.bjx_eventTF and $ghost gte 1>>
+			<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>
+			<br>
+			<<link [[穿越 (0:01)|Forest Mansion Entrance]]>><<pass 1>><<set $ghostIn to true>><</link>>
+			<br>
+		<</if>>
+	<<else>>
+		前门没有上锁，略微虚掩着。
+		<br><br>
+
+		<<link [[进入 (0:05)|Forest Mansion Entrance]]>><<pass 5>><</link>>
+		<br>
+	<</if>>
+	<<if $TaylorWith is 1>>
+		<<link [[询问泰勒 (0:20)|Forest Mansion Look Around]]>><<pass 20>><</link>>
+	<<else>>
+		<<link [[看看周围 (0:30)|Forest Mansion Look Around]]>><</link>>
+	<</if>>
+	<br>
+	<<link [[返回 (0:10)|Forest]]>><<pass 10>><</link>>
+<</if>>

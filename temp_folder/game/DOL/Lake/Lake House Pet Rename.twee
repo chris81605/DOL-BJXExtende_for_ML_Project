@@ -1,0 +1,13 @@
+:: Lake House Pet Rename 
+<<effects>>
+<<set _ind to $phase>>
+<<set $pet_now to $lakehouse.pet[_ind]>>
+
+你决定给$pet_now.name重新取一个名字。
+<br><br>
+
+<<textbox "$pet_now.name" $pet_now.name>>
+<br>
+
+<<link [[确定|Lake House]]>><<set $pet_now.name to Util.escape($pet_now.name).replace(/\[/g, "&#91;").replace(/\]/g, "&#93;")>><<set $lakehouse.pet[_ind].name to $pet_now.name>><</link>>
+<br>

@@ -1,0 +1,25 @@
+:: Hive Pollen Collection 2 Resist 
+<<if $molestationstart is 1>>
+    <<set $molestationstart to 0>>
+    <<controlloss>>
+    <<violence 1>>
+    <<neutral 1>>
+    <<molested>>
+	<<beastCombatInit>>
+    <<set $enemytrust -= 40>>
+<</if>>
+<<effects>>
+<<effectsman>>
+<<beast $enemyno>>
+<<stateman>>
+<<actionsman>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Resist Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyhealth lte 0>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Resist Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Resist Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[继续|Hive Pollen Collection 2 Resist]]>><</link>></span><<nexttext>>
+<</if>>
