@@ -778,5 +778,186 @@
     "passage": "Pet Shop",
     "findString": "<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>",
     "replace": "/* 北极星模组 */\n<<if $lakehouseinit is 1 and $lakehouse isnot undefined>>\n\t<<if $lakehouse.petbed is undefined or $lakehouse.petbed is 0>>\n\t\t<<if $money gte 200000>>\n\t\t\t<li><<link [[购买一张宠物床 (£2000)|$passage]]>><<set $money -= 200000>><<set $lakehouse.petbed to 1>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £2,000 购买宠物床。</li>\n\t\t<</if>>\n\t<<elseif $lakehouse.petbed is 2>>\n\t\t家里放不下更多宠物床了。\n\t<<elseif $lakehouse.petbed gte 1>>\n\t\t<<if $money gte 200000>>\n\t\t\t<li><<link [[再购买一张宠物床 (£2000)|$passage]]>><<set $money -= 200000>><<set $lakehouse.petbed to 2>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £2,000 再购买宠物床。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.terrarium is undefined or $lakehouse.terrarium is 0>>\n\t\t<<if $money gte 100000>>\n\t\t\t<li><<link [[购买玻璃缸 (£1000)|$passage]]>><<set $money -= 100000>><<set $lakehouse.terrarium to 1>><</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £1,000 购买玻璃缸。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.petbed isnot undefined and $lakehouse.pet isnot undefined and $lakehouse.petbed gt $lakehouse.pet.length>>\n\t\t<<if $money gte 50000>>\n\t\t\t<li><<link [[领养一只狗狗 (£500)|Pet Shop Dog Buy]]>>\n\t\t\t\t<<set $money -= 50000>>\n\t\t\t\t<<set $pet_now to {}>>\n\t\t\t\t<<set $pet_now.type to \"dog\">>\n\t\t\t\t<<set $pet_now.name to \"狗子\">>\n\t\t\t\t<<if random(1, 100) lte $beastmalechance>>\n\t\t\t\t\t<<set $pet_now.gender to \"m\">>\n\t\t\t\t<<else>>\n\t\t\t\t\t<<set $pet_now.gender to \"f\">>\n\t\t\t\t<</if>>\n\t\t\t<</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £500 买狗狗。</li>\n\t\t<</if>>\n\t\t<<if $money gte 50000>>\n\t\t\t<li><<link [[领养一只猫猫 (£500)|Pet Shop Cat Buy]]>>\n\t\t\t\t<<set $money -= 50000>>\n\t\t\t\t<<set $pet_now to {}>>\n\t\t\t\t<<set $pet_now.type to \"cat\">>\n\t\t\t\t<<set $pet_now.name to \"小猫咪\">>\n\t\t\t\t<<if random(1, 100) lte $beastmalechance>>\n\t\t\t\t\t<<set $pet_now.gender to \"m\">>\n\t\t\t\t<<else>>\n\t\t\t\t\t<<set $pet_now.gender to \"f\">>\n\t\t\t\t<</if>>\n\t\t\t<</link>></li>\n\t\t<<else>>\n\t\t\t<li>你没有 £500 买猫猫。</li>\n\t\t<</if>>\n\t<</if>>\n\t<<if $lakehouse.terrarium isnot undefined and $lakehouse.terrarium gte 1>>\n\t\t<<if $lakehouse.smallpet is undefined>>\n\t\t\t<<set $lakehouse.smallpet to {}>>\n\t\t<</if>>\n\t\t<<set _total to 0>>\n\t\t<<for _type, _num range $lakehouse.smallpet>>\n    \t\t<<set _total += _num>>\n    \t<</for>>\n\t\t<<if _total lt 10 * $lakehouse.terrarium>>\n\t\t\t<<if $money gte 30000>>\n\t\t\t\t<li><<link [[领养一只壁虎 (£300)|$passage]]>>\n\t\t\t\t\t<<set $money -= 30000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.geckos is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.geckos to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.geckos += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £300 买壁虎。</li>\n\t\t\t<</if>>\n\t\t\t<<if $money gte 20000>>\n\t\t\t\t<li><<link [[领养一只螃蟹 (£200)|$passage]]>>\n\t\t\t\t\t<<set $money -= 20000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.crabs is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.crabs to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.crabs += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £200 买螃蟹。</li>\n\t\t\t<</if>>\n\t\t\t<<if $money gte 40000>>\n\t\t\t\t<li><<link [[领养一只乌龟 (£400)|$passage]]>>\n\t\t\t\t\t<<set $money -= 40000>>\n\t\t\t\t\t<<if $lakehouse.smallpet.turtles is undefined>>\n            \t\t\t<<set $lakehouse.smallpet.turtles to 0>>\n            \t\t<</if>>\n\t\t\t\t\t<<set $lakehouse.smallpet.turtles += 1>>\n\t\t\t\t<</link>></li>\n\t\t\t<<else>>\n\t\t\t\t<li>你没有 £400 买乌龟。</li>\n\t\t\t<</if>>\n\t\t<</if>>\n\t<</if>>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre]]>><</link>>"
+  },
+  {
+  "passage": "Police Community Clean 2",
+  "findString": "\t<<link [[轻松点，并偷点垃圾|Police Community Clean Laze]]>><</link>><<skulduggerydifficulty>>",
+  "replace": "\t/* 北极星模组 */\n\t<<link [[摸鱼并偷别人的垃圾|Police Community Clean Laze]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Pound Abduction",
+    "findString": "<<link [[顺从地爬行|Pound Abduction Crawl]]>><<sub 1>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>>\n<br>\n<<link [[拒绝动弹|Pound Abduction Refuse]]>><<def 2>><<pain 8>><</link>><<ggpain>>\n<br>\n<<if $wolfgirl gte 6>>\n\t<<link [[咆哮|Pound Abduction Growl]]>><<transform wolf 1>><</link>><<wolfgirl>>\n\t<br>\n<</if>>",
+    "replace": "/* 北极星模组 */\n<<link [[顺从地爬行|Pound Abduction Crawl]]>><<sub 1>><<trauma 6>><<stress 6>><<transform dog 1>><</link>><<gtrauma>><<gstress>>\n/* 北极星 */\n<br>\n<<link [[拒绝动弹|Pound Abduction Refuse]]>><<def 2>><<pain 8>><</link>><<ggpain>>\n<br>\n/* 北极星模组 */\n<<if $dog gte 6>>\n\t<<link [[咆哮|Pound Abduction Growl]]>><<transform dog 1>><</link>><<dog>>\n\t<br>\n<</if>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Pound Door",
+    "findString": "<<link [[试着强行打开 (1:00)|Pound Door Force]]>><<pass 60>><<tiredness 12>><</link>><<ggtiredness>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Pound Door Sneak]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n\n<<link [[试着强行打开 (1:00)|Pound Door Force]]>><<pass 60>><<tiredness 12>><</link>><<ggtiredness>>"
+  },
+  {
+    "passage": "Pound Food Def",
+    "findString": "\t<<if $wolfgirl gte 6>>\n\t\t<<link [[咆哮|Pound Food Growl]]>><<def 1>><<pound_status 3>><<transform wolf 1>><</link>><<wolfgirl>><<gpound_status>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $dog gte 6>>\n\t\t<<link [[咆哮|Pound Food Growl]]>><<def 1>><<pound_status 3>><<transform dog 1>><</link>><<dog>><<gpound_status>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Pound Food Event",
+    "findString": "\t<<link [[保持不动|Pound Food Still]]>><<sub 1>><</link>>",
+    "replace": "    /* 北极星模组 */\n\t<<link [[保持不动|Pound Food Still]]>><<sub 1>><<transform dog 1>><</link>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Pound Food Rape Finish",
+    "findString": "\t\t<<if $wolfgirl gte 6>>\n\t\t\t<<link [[咬|Pound Food Bite]]>><<trauma -6>><<transform wolf 1>><<def 1>><<pound_status 3>><</link>><<gpound_status>><<ltrauma>><<wolfgirl>>\n\t\t\t<br>\n\t\t<</if>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $dog gte 6>>\n\t\t\t<<link [[咬|Pound Food Bite]]>><<trauma -6>><<transform dog 1>><<def 1>><<pound_status 3>><</link>><<gpound_status>><<ltrauma>><<dog>>\n\t\t\t<br>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Pound Lock",
+    "findString": "<<starfishicon>><<link [[离开|Starfish Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Pound]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<starfishicon>><<link [[离开|Starfish Street]]>><</link>>"
+  },
+  {
+    "passage": "Pound Show End 2",
+    "findString": "<<link [[待在地板上|Pound Show End Floor]]>><<trauma 6>><</link>><<gtrauma>>",
+    "replace": "/* 北极星模组 */\n<<link [[像狗一样趴着|Pound Show End Floor]]>><<trauma 6>><<transform dog 1>><</link>><<gtrauma>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Pound Show",
+    "findString": "<<link [[坐|Pound Show Sit]]>><<sub 1>><</link>>",
+    "replace": "/* 北极星模组 */\n<<link [[坐|Pound Show Sit]]>><<sub 1>><<transform dog 1>><</link>>\n/* 北极星 */"
+  },
+  {
+    "passage": "pregnancyTest",
+    "findString": "<<switch $lastPassage>>\n\t<<case \"Bedroom\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<case \"Bedroom\" \"Lake House Bedroom\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Prison Laundry Work Hard",
+    "findString": "\t\t\t<<link [[偷|Prison Laundry Work Steal]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t\t    /* 北极星模组 */\n\t\t\t<<link [[偷走|Prison Laundry Work Steal]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Prison Laundry Work Hard",
+    "findString": "\t\t<<link [[继续|Prison Laundry Work Keep]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<link [[偷偷留下|Prison Laundry Work Keep]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Prison Medical Work Hard",
+    "findString": "\t<<link [[悄悄塞一些额外的鲨鱼牙齿|Prison Medical Work Slip]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t/* 北极星模组 */\n\t<<link [[悄悄塞一些额外的鲨鱼牙齿|Prison Medical Work Slip]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Prison Medical Work Hard",
+    "findString": "\t<<link [[悄悄塞一些额外的鲨鱼牙齿，自己也拿一点|Prison Medical Work Extra]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t/* 北极星模组 */\n\t<<link [[悄悄塞一些额外的鲨鱼牙齿，自己也拿一点|Prison Medical Work Extra]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Prison Shower Take",
+    "findString": "<<wash>>",
+    "replace": "/* 北极星模组 */\n<<if $options.bjx_eventTF and $slime gt 0>>\n    <span class='red'>你忍受着皮肤上的刺痛。</span>\n    <br><br>\n    <<violence 20>>\n<</if>>\n/* 北极星 */\n<<wash>>"
+  },
+  {
+    "passage": "Prison Spire",
+    "findString": "<<if $harpy gte 6 and $birdFly gte 1>>",
+    "replace": "/* 北极星模组 */\n\t\t\t\t<<if !$options.bjx_animal and ($harpy gte 6 and $birdFly gte 1) or $options.bjx_animal and ($transformationParts.bird.wings isnot \"disabled\" and $birdFly gte 1 or $transformationParts.dragon.wings isnot \"disabled\")>>\n\t\t\t\t/* 北极星 */",
+    "all": true
+  },
+  {
+    "passage": "Prison Yard Door",
+    "findString": "<</if>>\n\n<<getouticon>><<link [[离开|Prison Yard]]>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Prison Beach]]>><<pass 1>><<set $ghostIn to true>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n<</if>>\n<<getouticon>><<link [[离开|Prison Yard]]>><</link>>"
+  },
+  {
+    "passage": "Pub White Pill Van",
+    "findString": "<<link [[继续|Street Van Journey]]>><<pass 60>><</link>>",
+    "replace": "/* 北极星模组 */\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br><br>\n\t<<link [[穿越 (0:01)|Ghost Van Escape]]>><<pass 1>><<endevent>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<link [[继续|Street Van Journey]]>><<pass 60>><</link>>"
+  },
+  {
+    "passage": "Riding School Lesson Revenge",
+    "findString": "<<link [[脱去衣服|Riding School Lesson Strip]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "/* 北极星模组 */\n<<link [[脱去衣服|Riding School Lesson Strip]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Riding School Lock",
+    "findString": "<<getouticon>><<link [[离开|Farmland]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Riding School]]>><<pass 1>><<set $ghostIn to true>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Farmland]]>><</link>>"
+  },
+  {
+    "passage": "Robin Chocolate Help",
+    "findString": "\t\t<<link [[偷牛奶|Robin Milk Steal]]>><<crimeUp 5 \"petty\">><</link>><<skulduggerydifficulty>><<crime \"petty\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<link [[偷牛奶|Robin Milk Steal]]>><<crimeUp 5 \"petty\">><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"petty\">>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Robin Trick Hall",
+    "findString": "\t\t\t你要和我们一起去玩不给糖就捣蛋吗？”",
+    "replace": "\t\t\t你要和我们一起去玩不给糖就捣蛋吗？\"\n\t\t/* 北极星模组 */\n\t\t<<case \"sheep TF\">>\n\t\t\t\"我喜欢你的服装，\"<<he>>说。\"你的绒毛真柔软！你要和我们一起去不给糖就捣蛋吗？\"\n\t\t<<case \"bee TF\">>\n\t\t\t\"我喜欢你的服装，\"<<he>>说。\"那根毒刺看起来好吓人! 你要和我们一起不给糖就捣蛋吗？\"\n\t\t<<case \"dragon TF\">>\n\t\t\t\"哇，我从来没见过这么酷的服装。\"<<he>>说。\"特别是这对翅膀，又大又威猛，简直帅呆了好不好。\"\n\t\t<<case \"lizard TF\">>\n\t\t\t\"唔，很无聊的服装。\"\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Robin's Lemonade Help",
+    "findString": "\t\t<<link [[偷水|Robin's Lemonade Steal]]>><<crimeUp 20 \"petty\">><</link>><<skulduggerydifficulty>><<crime \"petty\">>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<link [[偷水|Robin's Lemonade Steal]]>><<crimeUp 20 \"petty\">><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"petty\">>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "School Detention",
+    "findString": "\t\t<<link [[假装抽几下|School Detention Paddle Gentle]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<link [[假装抽几下|School Detention Paddle Gentle]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "School Gate Exit",
+    "findString": "<<getouticon>><<link [[离开|School Front Courtyard]]>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Oxford Street]]>><<set $ghostIn to true>><<pass 1>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n\n<<getouticon>><<link [[离开|School Front Courtyard]]>><</link>>"
+  },
+  {
+    "passage": "School Infirmary Drugs",
+    "findString": "<br>\n<<getouticon>><<link [[离开|School Infirmary]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<schoolicon \"infirmary\">><<link [[闯入 (0:01)|School Infirmary Steal Drugs]]>><<pass 1>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<crime \"trespassing\">>\n/* 北极星 */\n<br>\n<<getouticon>><<link [[离开|School Infirmary]]>><</link>>"
+  },
+  {
+    "passage": "School Leave Whitney",
+    "findString": "\t\t\t<<link [[甩掉惠特尼|School Leave Whitney Throw]]>><<npcincr Whitney love -1>><</link>><<llove>>",
+    "replace": "\t\t\t<<link [[甩掉惠特尼|School Leave Whitney Throw]]>><<npcincr Whitney love -1>><</link>><<llove>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $dragon gte 6>>\n\t\t\t\t<<link [[朝惠特尼喷火|School Leave Whitney Hurt]]>><<npcincr Whitney love -5>><<npcincr Whitney dom -5>><</link>><<llove>><<ldom>>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "School Locked",
+    "findString": "<<getouticon>><<link [[离开|Oxford Street]]>><</link>>",
+    "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|School Front Courtyard]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<getouticon>><<link [[离开|Oxford Street]]>><</link>>"
+  },
+  {
+    "passage": "Science Fair Lichen",
+    "findString": "<<link [[暗中阻挠|Science Fair Sabotage]]>><</link>><<skulduggerydifficulty>><<note \"$sciencelichenchance%的获胜机率\" \"gold\">>",
+    "replace": "/* 北极星模组 */\n<<link [[暗中阻挠|Science Fair Sabotage]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<note \"$sciencelichenchance%的获胜机率\" \"gold\">>\n/* 北极星 */"
+  },
+  {
+    "passage": "Science Fair Mushroom",
+    "findString": "<<link [[暗中阻挠|Science Fair Sabotage]]>><</link>><<skulduggerydifficulty>><<note \"+ 获胜机率\" \"gold\">>",
+    "replace": "/* 北极星模组 */\n<<link [[暗中阻挠|Science Fair Sabotage]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<note \"$sciencelichenchance%的获胜机率\" \"gold\">>\n/* 北极星 */"
+  },
+  {
+    "passage": "Science Fair Phallus",
+    "findString": "<<link [[暗中阻挠|Science Fair Sabotage]]>><</link>><<skulduggerydifficulty>><<note \"+ 获胜机率\" \"gold\">>",
+    "replace": "/* 北极星模组 */\n<<link [[暗中阻挠|Science Fair Sabotage]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>><<note \"$sciencelichenchance%的获胜机率\" \"gold\">>\n/* 北极星 */"
+  },
+  {
+    "passage": "Science Project Lichen",
+    "findString": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>",
+    "replace": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>\n\t/* 北极星模组 */\n\t<<elseif $location is \"lakehouse\">>\n\t\t<<link [[停止|Lake House Bedroom]]>><</link>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Science Project Phallus",
+    "findString": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>\n",
+    "replace": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>\n\t/* 北极星模组 */\n\t<<elseif $location is \"lakehouse\">>\n\t\t<<link [[停止|Lake House Bedroom]]>><</link>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Science Project Shroom",
+    "findString": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>\n",
+    "replace": "\t<<if $location is \"home\">>\n\t\t<<link [[继续|Bedroom]]>><</link>>\n\t/* 北极星模组 */\n\t<<elseif $location is \"lakehouse\">>\n\t\t<<link [[停止|Lake House Bedroom]]>><</link>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Science Project",
+    "findString": "<<if $location is \"home\">>\n\t<<getouticon>><<link [[停止|Bedroom]]>><</link>>\n\t<br>",
+    "replace": "<<if $location is \"home\">>\n\t<<getouticon>><<link [[停止|Bedroom]]>><</link>>\n\t<br>\n/* 北极星模组 */\n<<elseif $location is \"lakehouse\">>\n\t<<getouticon>><<link [[停止|Lake House Bedroom]]>><</link>>\n\t<br>\n/* 北极星 */"
+  },
+  {
+    "passage": "Sea Eye Refuse",
+    "findString": "<<link [[继续|Sea]]>><<set $eventskip to 1>><</link>>",
+    "replace": "/* 北极星模组 */\n<<destinationeventend>>\n/* 北极星 */"
   }
 ]
