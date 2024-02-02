@@ -1219,5 +1219,65 @@
     "passage": "Toy Shop Lock",
     "findString": "<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>",
     "replace": "/* 北极星模组 */\n<<set $ghostIn to false>>\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Toy Shop]]>><<set $ghostIn to true>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n\n<<getouticon>><<link [[离开|Shopping Centre Top]]>><</link>>"
+  },
+  {
+    "passage": "Trash Gate Enter",
+    "findString": "<</if>>\n\n<<elkicon>><<link [[离开|Elk Street]]>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Trash]]>><<pass 1>><<set $trash to 0>><<set $ghostIn to true>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n<</if>>\n\n<<elkicon>><<link [[离开|Elk Street]]>><</link>>"
+  },
+  {
+    "passage": "Trash Gate Leave",
+    "findString": "<<getouticon>><<link [[离开|Trash]]>><</link>>",
+    "replace": "\t/* 北极星模组 */\n    <<set $ghostIn to false>>\n    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n    \t<br>\n    \t<<link [[穿越 (0:01)|Elk Street]]>><<pass 1>><<set $ghostIn to true>><</link>>\n    \t<br>\n    <</if>>\n    /* 北极星 */\n<<getouticon>><<link [[离开|Trash]]>><</link>>"
+  },
+  {
+    "passage": "Trash Intro",
+    "findString": "<<set $location to \"landfill\">><<set $bus to \"elk\">><<set $outside to 1>><<effects>>",
+    "replace": "<<set $location to \"landfill\">><<set $bus to \"elk\">><<set $outside to 1>><<effects>>\n\n/* 北极星模组 */\n<<if $dencounter is undefined>>\n\t<<set $dencounter to 0>>\n<</if>>\n/* 北极星 */\n"
+  },
+  {
+    "passage": "Trash Search",
+    "findString": "<<set $brothel_machine_repair to 3>>",
+    "replace": "<<set $brothel_machine_repair to 3>>\n\t/* 北极星模组 */\n\t<<elseif $rng gte 90 and $bunker isnot \"found\">>\n\t\t当你探索垃圾填埋场时，你注意到垃圾堆中有一个奇怪的大洞。一个生锈的活板门半开着，仿佛在邀请你进去。\n\t\t<<set $bunker to \"found\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Trash Search",
+    "findString": "<<else>>\n\t\t你没有找到任何东西。",
+    "replace": "\t/* 北极星模组 */\n\t<<elseif $rng gte 20>>\n\t\t当你在垃圾堆里搜寻有用的东西时，你听到附近有窃窃私语声。快速转过身，你看到一个黑色的小东西跑进了附近的裂缝。那是一只浣熊吗？\n\t/* 北极星 */\n\t<<else>>\n\t\t你没有找到任何东西。"
+  },
+  {
+    "passage": "Trash",
+    "findString": "你正待在垃圾场的前门这里，在这你可以看到另一边的麋鹿街。而在旁边的一块牌子上写着：\"这片土地和其中的所有物品都是私人财产\"。",
+    "replace": "/* 北极星模组 */\n\t你正待在垃圾场的前门这里，在这你可以看到另一边的麋鹿街。而在旁边的一块牌子上写着：\"这片土地和其中的所有物品都是私人财产\"。\n\t<br><br>\n\t<i>你听到附近有奇怪的声音...</i>\n\t<br><br>\n\t\t\n\t<<if $dencounter is undefined>>\n\t\t<<set $dencounter to 0>>\n\t<</if>>\n\n\t<<if $stress lt $stressmax and $eventskip is 1>>\n\t\t在周围的垃圾堆里，你注意到有一堆特别结实的垃圾。\n\t\t<br><br>\n\t\t里面似乎有一块空地，地上铺着头发或布料。\n\t\t<br><br>\n\t\t<<if $dencounter is 0>>\n\t\t\t你看到里面有什么东西，那是条纹尾巴吗？ \n\t\t\t<br><br>\n\t\t\t<span class='lewd'>调查可能不是个好主意</span>，但你还是很好奇。\n\t\t\t<br><br>\n\t\t<<else>>\n\t\t\t你以前来过这里，或者至少去过类似的地方。很难说，因为这里到处都是垃圾，但你可以肯定这是一个<span class='green'>浣熊窝。</span> \n\t\t\t<br><br>\n\t\t\t考虑到你第一次进去时发生过的事，你正在犹豫是否要进入。\n\t\t\t<br><br>\n\t\t\t<<if $deviancy gte 15>>\n\t\t\t    <span class='lewd'>不过，这次可能会有所不同，会更令人愉快。</span>\n\t\t\t    <br><br>\n\t\t\t<</if>>\n\t\t<</if>>\n\t\t<<link [[进入内部(0:03)|Trash Mammals]]>><<beastNEWinit 3 raccoon>><<pass 3>><</link>>\n\t\t<br><br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Trash",
+    "findString": "<<if $rng gte 51 and $parasitedisable is \"f\" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is \"f\" and $hallucinations gte 1>>",
+    "replace": "/* 北极星模组 */\n\t<<if $rng gte 51 and $parasitedisable is \"f\" and ($parasite.left_ear.name is undefined or $parasite.right_ear.name is undefined) and $slimedisable is \"f\" and $hallucinations gte 1 and $slime is 0>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Trash",
+    "findString": "\t<</if>>\n<</if>>\n<<set $eventskip to 0>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $NPCName[$NPCNameList.indexOf(\"凯西\")].love gte 41 and Time.dayState is \"day\">>\n\t\t\t你看到凯西在垃圾堆里翻找东西，偶尔会把什么放进口袋或扔掉。\n\t\t\t<<link [[打招呼(0:05)|Casey Hello]]>><<pass 5>><</link>>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t<</if>>\n\t<<if $trash gte 1>>\n\t\t<<link [[朝有着车辆行驶声音的方向走去 (0:10)|Trash]]>><<pass 10>><<set $trash -= 10>><</link>>\n\t\t<br>\n\t<</if>>\n\t<<if $trash lte 99>>\n\t\t<<link [[朝着有着重型机械声音的方向走去 (0:10)|Trash]]>><<pass 10>><<set $trash += 10>><</link>>\n\t\t<br>\n\t<<elseif $trash gte 100 and $robinmissing is \"landfill\" and $robinmistknown>>\n\t\t<<link [[朝着有着重型机械声音的方向走去 (0:10)|Robin Mist Intro]]>><<pass 10>><</link>>\n\t\t<br>\n\t/* 北极星模组 */\n\t<<elseif $trash gte 100 and $bunker is \"found\">>\n\t\t<<link [[进入活板门(0:02)|The Bunker Intro]]>><<set $eventskip to 1>><<pass 2>><</link>>\n\t/* 北极星 */\n\t<</if>>\n<</if>>\n<<set $eventskip to 0>>"
+  },
+  {
+    "passage": "Underground Cell Lock",
+    "findString": "<<set $undergroundbrothel.timepass to false>>",
+    "replace": "/* 北极星模组 */\n<<if $options.bjx_eventTF and $ghost gte 1>>\n\t<span class ='wraith'>只要你集中精力，就能穿越这扇门。</span>\n\t<br>\n\t<<link [[穿越 (0:01)|Underground Cell Sneak]]>><<pass 1>><</link>>\n\t<br>\n<</if>>\n/* 北极星 */\n<<set $undergroundbrothel.timepass to false>>"
+  },
+  {
+    "passage": "Upgrade Waiting Room",
+    "findString": "<<variablesVersionUpdate>>",
+    "replace": "<<variablesVersionUpdate>>\n/* 北极星模组 */\n<<variablesBJXModUpdate>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Wardrobe Repair Crate",
+    "findString": "<<if $money gte _value>>",
+    "replace": "/* 北极星模组 */\n<<if $money gte _value - 5000>>\n/* 北极星 */"
+  },
+  {
+    "passage": "Whitney Trick 1",
+    "findString": "\t\t\t希望你不介意我拉你的尾巴。\"\n\t\t<</if>>",
+    "replace": "\t\t\t希望你不介意我拉你的尾巴。\"\n\t\t<</if>>\n\t/* 北极星模组 */\n\t<<case \"bee TF\">>\n\t\t\"我喜欢你的打扮，那跟毒刺看起来挺赞的。\"\n\t<<case \"sheep TF\">>\n\t    \"我喜欢你的打扮，你怎么扮得这么软乎乎的？\"\n\t/* 北极星 */"
   }
 ]

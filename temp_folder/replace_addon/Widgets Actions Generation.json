@@ -1,0 +1,89 @@
+[
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t<<if !$stalk_end>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $options.bjx_eventTF and $ghost gte 1>>\n\t\t<div id=\"energyaction\" @class=\"$options.combatControls + 'Control'\">\n\t\t\t<<energyActionInit>>\n\t\t</div>\n\t<</if>>\n\t<<if $stalk_end>>\n\t<<elseif $options.bjx_eventTF and $ghost gte 1 and $energyaction is \"ghost\">>\n\t    <div id=\"speakaction\" @class=\"$options.combatControls + 'Control'\">\n\t\t\t<<speakActionInit>>\n\t\t</div>\n\t<<else>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t\t<div id=\"mouthaction\" @class=\"$options.combatControls + 'Control'\">",
+    "replace": "            /* 北极星模组 */\n            <<if $options.bjx_animal>>\n    \t\t\t<div id=\"tailaction\" @class=\"$options.combatControls + 'Control'\">\n    \t\t\t\t<<tailActionInit>>\n    \t\t\t</div>\n\t\t    <</if>>\n\t\t\t/* 北极星 */\n\t\t\t\n\t\t\t<div id=\"mouthaction\" @class=\"$options.combatControls + 'Control'\">"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t<<safereplace #feetaction>><<feetActionInit true>><</safereplace>>",
+    "replace": "\t<<safereplace #feetaction>><<feetActionInit true>><</safereplace>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_eventTF and $ghost gte 1>>\n\t    <<safereplace #energyaction>><<energyActionInit true>><</safereplace>>\n\t<</if>>\n\t<<if $options.bjx_eventTF and $ghost gte 1 and $energyaction is \"ghost\">>\n\t\t<<safereplace #speakaction>><<speakActionInit true>><</safereplace>>\n\t<</if>>\n\t<<if $options.bjx_animal>>\n\t    <<safereplace #tailaction>><<tailActionInit true>><</safereplace>>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "$orgasmdown gte 1",
+    "replace": "$orgasmdown gte 1 and $demonhunter lte 5",
+    "all": true
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "<<leftspraynew>>\n\t\t\t\t<<leftstealnew>>",
+    "replace": "<<leftspraynew>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<leftantiques>>\n\t\t\t\t/* 北极星 */\n\t\t\t\t<<leftstealnew>>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "<<rightspraynew>>\n\t\t\t\t<<rightstealnew>>",
+    "replace": "<<rightspraynew>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<rightantiques>>\n\t\t\t\t/* 北极星 */\n\t\t\t\t<<rightstealnew>>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t\t\t\t<<elseif $leftleg is \"grappled\" and $rightleg is \"grappled\">>\n\t\t\t\t\t\t<<set _feetOptions to \"grappled\">>\n\t\t\t\t\t\t<span @class=\"($lastOptions.feet isnot _feetOptions ?'gold':'')\">你的腿被缠着被迫分开，直白地裸露出你的<<genitals>>。</span>",
+    "replace": "\t\t\t\t\t<<elseif $leftleg is \"grappled\" and $rightleg is \"grappled\">>\n\t\t\t\t\t\t/* 北极星模组 */\n\t\t\t\t\t\t<<if $slime gt 0 and $options.bjx_eventTF>>\n\t\t\t\t\t\t\t<<set $leftleg to 0>>\n\t\t\t\t\t\t\t<<set $rightleg to 0>>\n\t\t\t\t\t\t\t<<set _feetOptions to \"free\">>\n\t\t\t\t\t\t\t<br><span class='green'>抓住你双脚的尝试失败了，你的身体直接就滑了出来！</span><br>\n\t\t\t\t\t\t<<else>>\n\t\t\t\t\t\t\t<<set _feetOptions to \"grappled\">>\n\t\t\t\t\t\t\t<span @class=\"($lastOptions.feet isnot _feetOptions ?'gold':'')\">你的腿被缠着被迫分开，直白地裸露出你的<<genitals>>。</span>\n\t\t\t\t\t\t<</if>>\n\t\t\t\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t<<case \"hide\">><<if $NPCList[0].state is \"stalk\">><<stalk_skulduggery_difficulty>><</if>>",
+    "replace": "\t\t<<case \"hide\">><<if $NPCList[0].state is \"stalk\">><<stalk_skulduggery_difficulty>><</if>>\n\t\t/* 北极星模组 */\n\t\t<<case \"pleaseagain\">><span class=\"lewd\">- 恶魔</span>\n\t\t<<case \"forceagain\">><span class=\"gold\">- 龙</span>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t<<set _feetaction[\"休息\"] to \"rest\">>",
+    "replace": "\t\t<<set _feetaction[\"休息\"] to \"rest\">>\n\t\t/* 北极星模组 */\n\t\t<<if $options.bjx_divine and $demon gte 6 and $enemyarousal gte $enemyarousalmax>>\n    \t\t<<set _feetaction[\"再来一发\"] to \"pleaseagain\">>\n    \t<</if>>\n    \t<<if $options.bjx_animal and $dragon gte 6 and $enemyarousal gte $enemyarousalmax>>\n    \t\t<<set _feetaction[\"贪婪索取\"] to \"forceagain\">>\n    \t<</if>>\n    \t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t\t\t<<set $_changetype to true>><<mouthActionInitStruggle>>",
+    "replace": "\t\t\t\t<<set $_changetype to true>><<mouthActionInitStruggle>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<case \"frog\">>\n\t\t\t\t<<set $_changetype to true>><<mouthActionInitStruggle>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t\t\t<<combatApologise>>\n\t\t\t<<case \"othervagina\" \"facesit\">>",
+    "replace": "\t\t\t\t<<combatApologise>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<if $options.bjx_animal and $dragon gte 6 and $consensual isnot 1 and ($dragonbreathuse lte 5 or $dragonbreathuse is undefined)>>\n\t\t\t\t\t<<set _mouthaction[\"龙息\"] to \"dragonBreath\">>\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星 */\n\t\t\t<<case \"othervagina\" \"facesit\">>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t\t\t\t<</if>>\n\t\t\t\t<<if $mouthstate isnot \"kiss\" and $mouthstate isnot \"kissimminent\">>",
+    "replace": "\t\t\t\t<</if>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<if $options.bjx_eventTF and $consensual isnot 1 and $slime is 1 and ($fightTargets is undefined or $fightTargets.includes($mouthtarget))>>\n\t\t\t\t\t<<set _mouthaction[\"腐蚀\"] to \"corrode\">>\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星 */\n\t\t\t\t<<if $mouthstate isnot \"kiss\" and $mouthstate isnot \"kissimminent\">>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>",
+    "replace": "<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>",
+    "all": true
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t<<set _penisaction to {}>>\n\t<<if $position is \"stalk\">>",
+    "replace": "\t<<set _penisaction to {}>>\n\t/* 北极星模组 */\n\t<<if $demonhunter gte 2>>\n\t\t<<set _penisaction[\"忍耐\"] to \"endure\">>\n\t<</if>>\n\t/* 北极星 */\n\t<<if $position is \"stalk\">>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "\t<<set _vaginaaction to {}>>\n\t<<if $position is \"stalk\">>",
+    "replace": "\t<<set _vaginaaction to {}>>\n\t/* 北极星模组 */\n\t<<if $demonhunter gte 2>>\n\t\t<<set _vaginaaction[\"忍耐\"] to \"endure\">>\n\t<</if>>\n\t/* 北极星 */\n\t<<if $position is \"stalk\">>"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>",
+    "replace": "/* 北极星模组 */\n\t<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Generation",
+    "findString": "<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and [\"man\", \"plant\", \"beast\"].includes($enemytype)>>",
+    "replace": "/* 北极星模组 */\n\t\t<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined) and [\"man\", \"plant\", \"beast\"].includes($enemytype)>>\n\t\t/* 北极星 */"
+  }
+]
