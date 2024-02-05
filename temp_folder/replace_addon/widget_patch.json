@@ -324,5 +324,110 @@
     "passage": "Widgets Actions Man",
     "findString": "<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>",
     "replace": "/* 北极星模组 */\n\t\t<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Right Hand",
+    "findString": "<<set $skulduggerydifficulty to (1000 - ($enemyarousal / $enemyarousalmax * 400) - $skulduggery - $enemytrust + $enemyanger) * $stealdifficulty>>",
+    "replace": "/* 北极星模组 */\n\t\t\t<<set $skulduggerydifficulty to (1000 - ($enemyarousal / $enemyarousalmax * 400) - $skulduggery - $enemytrust + $enemyanger - ($options.bjx_stealhand ? $handskill / 5 : 0)) * $stealdifficulty>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Speak",
+    "findString": "\t<<if $underwater lte 0>>",
+    "replace": "    /* 北极星模组 */\n\t<<if $underwater lte 0 or $options.bjx_animal and $fish gte 6 or $options.bjx_eventTF and $ghost is 4>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Speak",
+    "findString": "\t\t\t<<if $wolfgirl gte 2>>",
+    "replace": "\t\t    /* 北极星模组 */\n\t\t\t<<if $wolfgirl gte 6 or (!$options.bjx_animal and $wolfgirl gte 2)>>"
+  },
+  {
+    "passage": "Widgets Actions Speak",
+    "findString": "\t\t\t<<if $noFinish isnot 1>>",
+    "replace": "\t\t\t<<if $options.bjx_animal and $harpy gte 6>>\n\t\t\t\t<<set _mouthaction[\"唱歌\"] to \"sing\">>\n\t\t\t<</if>>\n\t\t\t<<if $options.bjx_animal and $fox gte 6>>\n\t\t\t\t<<set _mouthaction[\"撒娇\"] to \"coquetry\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<if $noFinish isnot 1>>"
+  },
+  {
+    "passage": "Widgets Actions Speak",
+    "findString": "\t\t\t<<if $submissive lte 850>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $fallenangel gte 2 and $fallenangelretribution isnot 1>>\n\t\t\t\t<<set _mouthaction[\"报应\"] to \"retribution\">>\n\t\t\t<</if>>\n\t\t\t<<if $demonhunter gte 5 and $demonhunterhypnosis isnot 1>>\n\t\t\t\t<<set _mouthaction[\"催眠\"] to \"hypnosis\">>\n\t\t\t<</if>>\n\t\t\t<<if $demon gte 6 and $demonseduce isnot 1>>\n\t\t\t\t<<set _mouthaction[\"诱惑\"] to \"seduce\">>\n\t\t\t<</if>>\n\t\t\t/* 北极星 */\n\t\t\t<<if $submissive lte 850>>"
+  },
+  {
+    "passage": "Widgets Actions Text",
+    "findString": "<<widget \"actionspenislick\">>\n\t你<<oraltext>>地舔着<<their _args[0]>>$NPCList[_n].penisdesc。\n\t<<if $NPCList[$mouthtarget].type is \"plant\">>\n\t\t<span class=\"pink\">你用舌头舔起了甜蜜的汁液。</span>\n\t\t<<nectarfed 8>>\n\t<</if>>",
+    "replace": "<<widget \"actionspenislick\">>\n\t你<<oraltext>>地舔着<<their _args[0]>>$NPCList[_n].penisdesc。\n\t<<if $NPCList[$mouthtarget].type is \"plant\">>\n\t\t<span class=\"pink\">你用舌头舔起了甜蜜的汁液。</span>\n\t\t<<nectarfed 8>>\n\t<</if>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $transformationParts.traits.longtongue isnot \"disabled\">>\n\t\t<span class='lewd'>你敏感的长舌带给其更加强烈的感觉。</span>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Text",
+    "findString": "<<widget \"actionspussylick\">>\n\t<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>\n\t\t你<<oraltext>>舔舐着唇上的蜜穴，任凭<<theowner>>在你身上磨来磨去。\n\t<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>\n\t\t你<<oraltext>>舔舐着口中的蜜穴，任凭<<theowner>>在你身上磨来磨去。\n\t<<else>>\n\t\t你<<oraltext>>舔舐着唇上的蜜穴。\n\t<</if>>\n\t<<if $NPCList[$mouthtarget].type is \"plant\">>\n\t\t<span class=\"pink\">你用舌头舔起了甜蜜的汁液。</span>\n\t\t<<nectarfed 8>>\n\t<</if>>",
+    "replace": "<<widget \"actionspussylick\">>\n\t<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>\n\t\t你<<oraltext>>舔舐着唇上的蜜穴，任凭<<theowner>>在你身上磨来磨去。\n\t<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>\n\t\t你<<oraltext>>舔舐着口中的蜜穴，任凭<<theowner>>在你身上磨来磨去。\n\t<<else>>\n\t\t你<<oraltext>>舔舐着唇上的蜜穴。\n\t<</if>>\n\t<<if $NPCList[$mouthtarget].type is \"plant\">>\n\t\t<span class=\"pink\">你用舌头舔起了甜蜜的汁液。</span>\n\t\t<<nectarfed 8>>\n\t<</if>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $transformationParts.traits.longtongue isnot \"disabled\">>\n\t\t<span class='lewd'>你敏感的长舌带给其更加强烈的感觉。</span>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Actions Text",
+    "findString": "\t<<elseif $demon gte 6 and random(1, 2) is 2>>",
+    "replace": "\t/* 北极星模组 */\n\t<<elseif $demonhunter gte 2 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"你要'猎食'我吗？\"你脸上假装笑容: \"试试看。\"\n\t\t\t<<case 2>>\"无法移开你的目光？\"你笑道: \"那就永远注视我吧。\"\n\t\t\t<<case 3>>\"来玩呀，\"你勾勾手指，\"保证让你永世难忘。\"\n\t\t<</switch>>\n\t/* 北极星 */\n\t<<elseif $demon gte 6 and random(1, 2) is 2>>"
+  },
+  {
+    "passage": "Widgets Actions Text",
+    "findString": "\t\t<</switch>>\n\t<<elseif $anxiety gte 1 and $controlled is 0>>",
+    "replace": "\t\t<</switch>>\n\t/* 北极星模组 */\n\t<<elseif $raccoon gte 6 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"这可能不会如你所愿，\"你说道: \"退后。\"\n\t\t\t<<case 2>>你发出威胁的咆哮声。\n\t\t\t<<case 3>>\"别轻易尝试，\"你警告道: \"否则你离开的时候会比现在少块肉。\"\n\t\t<</switch>>\n\t<<elseif $horse gte 6 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"这可能不会如你所愿，\"你说道: \"退后。\"\n\t\t\t<<case 2>>你威胁似地嗤着鼻。\n\t\t\t<<case 3>>\"我能一脚把你踹进地狱里，\"你警告道: \"别给我找到理由。\"\n\t\t<</switch>>\n\t<<elseif $frog gte 6 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"我可没时间搞这个，你这么闲吗？\"你啐道，\"滚蛋。\"\n\t\t\t<<case 2>>你呱呱叫着......你希望这看起来很有威胁性。\n\t\t\t<<case 3>>\"我能一脚把你踹进地狱里，\"你警告道: \"别给我找到理由。\"\n\t\t<</switch>>\n\t<<elseif $spider gte 6 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"哦，你以为你是那个猎手吗，\"你嘲笑道，\"要有好戏上演了。\"\n\t\t\t<<case 2>>你威胁性地瞪了一眼。\n\t\t\t<<case 3>>\"这些獠牙可不是用来看的，\"你警告道，\"想试试吗？\"\n\t\t<</switch>>\n\t<<elseif $pig gte 6 and random(1, 2) is 2>>\n\t\t<<switch random(1, 3)>>\n\t\t\t<<case 1>>\"这可能不会如你所愿，\"你说道: \"退后。\"\n\t\t\t<<case 2>>你发出具有威胁性的咕哝声。\n\t\t\t<<case 3>>\"喂，我可不怕脏了我的手，\"你警告道。\"等一切完事后你可会更脏。\"\n\t\t<</switch>>\n\t<<elseif $dragon gte 6 and random(1, 2) is 2>>\n    <<switch random(1, 3)>>\n        \t<<case 1>>\"放开我，\"你警告道，\"不然我就要拿你的内脏饱餐一顿了。\"\n        \t<<case 2>>你咆哮出声。\n        \t<<case 3>>\"继续啊，\"你说着舔过自己的獠牙，\"今天要走运了，我可饿着呢。\"\n\t<</switch>>\n\t/* 北极星 */\n\t<<elseif $anxiety gte 1 and $controlled is 0>>"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t<<if $wolfgirl gte 2>>\n\t\t<<set _mouth[\"咆哮\"] to \"growl\">>\n\t<</if>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $wolfgirl gte 6 or (!$options.bjx_animal and $wolfgirl gte 2)>>\n\t\t<<set _mouth[\"咆哮\"] to \"growl\">>\n\t<</if>>\n\t<<if $options.bjx_animal and $harpy gte 6>>\n\t\t<<set _mouth[\"唱歌\"] to \"sing\">>\n\t<</if>>\n\t<<if $options.bjx_animal and $fox gte 6>>\n\t\t<<set _mouth[\"撒娇\"] to \"coquetry\">>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t<<if $submissive lte 850 and _args[0] is true>>\n\t\t<<set _mouth[\"挑衅\"] to \"demand\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $options.bjx_divine>>\n    \t<<if $fallenangel gte 2 and $fallenangelretribution isnot 1 and _args[0] is true>>\n    \t\t<<set _mouth[\"报应\"] to \"retribution\">>\n    \t<</if>>\n    \t<<if $demonhunter gte 5 and $demonhunterhypnosis isnot 1>>\n\t\t\t<<set _mouth[\"催眠\"] to \"hypnosis\">>\n\t\t<</if>>\n    \t<<if $demon gte 6 and $demonseduce isnot 1 and _args[0] is true>>\n    \t\t<<set _mouth[\"诱惑\"] to \"seduce\">>\n    \t<</if>>\n    <</if>>\n    /* 北极星 */\n\t<<if $submissive lte 850 and _args[0] is true>>"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t/*After bay*/\n\t<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $demonhunter gte 2>>\n\t\t<<set _penis[\"忍耐\"] to \"endure\">>\n\t<</if>>\n\t/* 北极星 */\n\n\t/*After bay*/\n\t<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t/*After penisthighs*/\n\t<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $demonhunter gte 2>>\n\t\t<<set _vagina[\"忍耐\"] to \"endure\">>\n\t<</if>>\n\t/* 北极星 */\n\n\t/*After penisthighs*/\n\t<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t<<set _npc = [\"None\",\"Robin\",\"Whitney\",\"Kylar\",\"Sydney\",\"Eden\",\"Avery\",\"Black Wolf\",\"Great Hawk\",\"Alex\"]>>",
+    "replace": "\t<<set _npc = [\"None\",\"Robin\",\"Whitney\",\"Kylar\",\"Sydney\",\"Eden\",\"Avery\",\"Black Wolf\",\"Great Hawk\",\"Alex\"]>>\n\t/* 北极星模组 */\n\t<<set _npc = _npc.concat([\"凯西\"])>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Attitudes",
+    "findString": "\t<<if $syndromeeden is 1>>\n\t\t<<run _potentialLoveInterests.push(\"Eden\")>>\n\t<</if>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $caseyromance is 1>>\n\t\t<<run _potentialLoveInterests.push(\"凯西\")>>\n\t<</if>>\n\t/* 北极星 */\n\t<<if $syndromeeden is 1>>\n\t\t<<run _potentialLoveInterests.push(\"Eden\")>>\n\t<</if>>\n"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t<<set _ps to [2,2,2,3,2,2,3,3,2,5,2,2,4,2]>> <!-- Size of penises -->",
+    "replace": "\t<<set _ps to [2,2,2,3,2,2,3,3,2,5,2,2,4,2]>> <!-- Size of penises -->\n\t/* 北极星模组 */\n\t<<set _h to _h.concat([300,250,300,400,500,300,150,200,300])>>\n\t<<set _t to _t.concat([\"sheep\",\"deer\",\"bee\",\"wasp\",\"dragon\",\"ant\",\"raccoon\",\"frog\",\"rat\"])>>\n\t<<set _d to _d.concat([ [\"松软的\"],[\"俊美的\"],[\"奇怪的\"],[\"奇怪的\"],[\"有鳞的\"],[\"奇怪的\"],[\"俊美的\"],[\"湿滑的\"],[\"肮脏的\"] ])>>\n\t<<set _pd to _pd.concat([\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\",\"肉棒\"])>>\n\t<<set _ps to _ps.concat([4,3,2,2,5,3,2,2,3])>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t<<elseif $NPCList[_n].type is \"pig\" or $NPCList[_n].type is \"boar\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<elseif $NPCList[_n].type is \"pig\" or $NPCList[_n].type is \"boar\" or $NPCList[_n].type is \"deer\">>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t\t<</if>>\n\t\t<<if $NPCList[_n].type is \"horse\">>",
+    "replace": "\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if [\"deer\",\"raccoon\",\"frog\",\"rat\"].includes($NPCList[_n].type)>>\n\t\t\t<<run delete $NPCList[_n].claws>>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if $NPCList[_n].type is \"horse\">>"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t\t\t<<set $NPCList[_n].type to \"harpy\">>\n\t\t<<elseif $NPCList[_n].gender is \"f\">>",
+    "replace": "\t\t\t<<set $NPCList[_n].type to \"harpy\">>\n\t\t/* 北极星模组 */\n\t\t<<elseif $NPCList[_n].type is \"sheep\">>\n\t\t\t<<if $NPCList[_n].gender is \"f\">>\n\t\t\t\t<<set $NPCList[_n].type to \"sheepgirl\">>\n\t\t\t<<else>>\n\t\t\t\t<<set $NPCList[_n].type to \"ramboy\">>\n\t\t\t<</if>>\n\t\t<<elseif $NPCList[_n].type is \"deer\">>\n\t\t\t<<if $NPCList[_n].gender is \"f\">>\n\t\t\t\t<<set $NPCList[_n].type to \"deergirl\">>\n\t\t\t<<else>>\n\t\t\t\t<<set $NPCList[_n].type to \"stagboy\">>\n\t\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<elseif $NPCList[_n].gender is \"f\">>"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t\t<<if $NPCList[_n].pronoun is \"f\" and [\"catgirl\", \"doggirl\", \"wolfgirl\", \"beargirl\", \"foxgirl\", \"cowgirl\"].includes($NPCList[_n].type)>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $NPCList[_n].pronoun is \"f\" and [\"catgirl\", \"doggirl\", \"wolfgirl\", \"beargirl\", \"foxgirl\", \"cowgirl\", \"deergirl\", \"sheepgirl\", \"raccoongirl\", \"dolphingirl\"].includes($NPCList[_n].type)>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Beast Generation",
+    "findString": "\t\t<<rng 5>>\n\t\t<<switch $rng>>",
+    "replace": "\t    /* 北极星模组 */\n\t\t<<set $foxrng to random (1, 5)>>\n\t\t<<switch $foxrng>>\n\t    /* 北极星 */"
   }
 ]
