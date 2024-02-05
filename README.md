@@ -15,7 +15,7 @@
     * 使用[ModdedClothesAddon][ca]新增轉化服裝 進度：`(0/1)`
     * 使用[ModdedFeatsAddon][fa]新增成就 進度：`(0/1)`
     * 使用[ReplacePatch][RP]新增JS腳本修改 (透過winmerge比對文本) 進度：`(0/14)`
-    * 使用[TweeReplacer][tr]新增TWEE修改 (透過winmerge比對文本) 進度：`(259/350)`
+    * 使用[TweeReplacer][tr]新增TWEE修改 (透過winmerge比對文本) 進度：`(261/350)`
 
 
 
