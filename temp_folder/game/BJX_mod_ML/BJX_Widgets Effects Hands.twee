@@ -1,0 +1,91 @@
+:: BJX_Widgets Effects Hands [widget]
+/* 北极星模组 */
+<<widget "effectsoverarousal">>
+    <<if $enemyoverarousal gt 0 and !$options.bjx_noenduredmg>>
+		<<set _totalDamage to $enemyoverarousal>>
+		<<set $enemyoverarousal to 0>>
+		<<set $enemyhealth -= _totalDamage>>
+		<<group>>
+		<<if $options.bjx_health>>
+    		<span class='lewd'>受到<<print _totalDamage>>点寸止伤害，</span>
+    	<</if>>
+    	求饶道: "
+		<<if _totalDamage gte 100>>
+    		<span class='lewd'>让我高潮吧，我什么都给你。</span>
+    	<<elseif _totalDamage gte 80>>
+    	    <span class='lewd'>求求你放过我，让我高潮吧。</span>
+    	<<elseif _totalDamage gte 60>>
+    	    <span class='lewd'>不要折磨我了，好想要高潮。</span>
+    	<<elseif _totalDamage gte 40>>
+    	    <span class='lewd'>让我高潮吧，求你。</span>
+    	<<elseif _totalDamage gte 20>>
+    	    <span class='lewd'>好想要，想要高潮。</span>
+    	<<elseif _totalDamage gt 0>>
+    		<span class='lewd'>唔，还不能高潮吗？</span>
+    	<</if>>
+    	"
+    	<br>
+		<<set _npctodefeat to []>>
+		<<for _npctodamage to 0; _npctodamage lt $enemynomax; _npctodamage++>>
+			<<if $NPCList[_npctodamage].active is "active" and $NPCList[_npctodamage].stance isnot "defeated" and (!$fightTargets or $fightTargets.includes(_npctodamage))>>
+				<<set _enemydivide to $fightTargets ? $enemyno-$fightTargets.length : $enemyno>> /* Divide damage by all current active enemies. */
+				<<set _thedamage to _totalDamage/_enemydivide>>
+				<<set $NPCList[_npctodamage].health -= _thedamage>>
+				<<if $enemyno gte 2 and $NPCList[_npctodamage].health lte 0>>
+					<<set _npctodefeat.push(_npctodamage)>>
+				<</if>>
+			<</if>>
+		<</for>>
+		<<for $_defeatcontroller to 0; $_defeatcontroller lt _npctodefeat.length; $_defeatcontroller++>>
+			<<if $enemyno gte 2>>
+			    <<defeatnpc _npctodefeat[$_defeatcontroller]>>
+			<</if>>
+		<</for>>
+	<</if>>
+<</widget>>
+
+<<widget "effectspoison">>
+	<<set _npctodefeat to []>>
+	<<for _npctodamage to 0; _npctodamage lt $enemynomax; _npctodamage++>>
+		<<if $NPCList[_npctodamage].active is "active" and $NPCList[_npctodamage].stance isnot "defeated">>
+		    <<if $NPCList[_npctodamage].poison is undefined>>
+		        <<set $NPCList[_npctodamage].poison = 0>>
+		    <</if>>
+		    <<if $NPCList[_npctodamage].poison gte 1>>
+		        <<set _npcDescription to $NPCList[_npctodamage].fullDescription.replace("Avery","艾弗里").replace("Bailey","贝利").replace("Briar","布莱尔").replace("Charlie","查里").replace("Darryl","达里尔").replace("Doren","多伦").replace("Eden","伊甸").replace("Gwylan","格威岚").replace("Harper","哈珀").replace("Jordan","约旦").replace("Kylar","凯拉尔").replace("Landry","兰德里").replace("Leighton","礼顿").replace("Mason","梅森").replace("Morgan","摩根").replace("River","瑞沃").replace("Robin","罗宾").replace("Sam","萨姆").replace("Sirris","西里斯").replace("Whitney","惠特尼").replace("Winter","温特").replace("Niki","尼奇").replace("Quinn","奎恩").replace("Remy","雷米").replace("Alex","艾利克斯").replace("Wren","伦恩").replace("Sydney","悉尼").replace("Taylor","泰勒").replace("Casey","凯西").replace("Ivory Wraith","象牙幽灵").replace("Black Wolf","黑狼").replace("Great Hawk","巨鹰").replace("Zephyr","泽菲尔")>>
+    			<<if $NPCList[_npctodamage].poison gte 100>>
+            		<span class='gold'>_npcDescription看起来剧毒攻心。</span>
+            	<<elseif $NPCList[_npctodamage].poison gte 80>>
+            	    <span class='gold'>_npcDescription看起来脸色发紫。</span>
+            	<<elseif $NPCList[_npctodamage].poison gte 60>>
+            	    <span class='gold'>_npcDescription看起来眼冒金星。</span>
+            	<<elseif $NPCList[_npctodamage].poison gte 40>>
+            	    <span class='gold'>_npcDescription看起来头晕目眩。</span>
+            	<<elseif $NPCList[_npctodamage].poison gte 20>>
+            	    <span class='gold'>_npcDescription看起来有些难受。</span>
+            	<<elseif $NPCList[_npctodamage].poison gt 0>>
+            		<span class='gold'>_npcDescription看起来不太舒服。</span>
+            	<</if>>
+            	<<if $options.bjx_health>>
+            		<span class='green'>受到<<print $NPCList[_npctodamage].poison * 10>>点中毒伤害。</span>
+            	<</if>>
+            	<<set $NPCList[_npctodamage].health -= $NPCList[_npctodamage].poison * 10>>
+		        <<set $enemyhealth -= $NPCList[_npctodamage].poison * 10>>
+		        <<set $NPCList[_npctodamage].poison -= 1>>
+            	<br>
+		    <</if>>
+			<<if $enemyno gte 2 and $NPCList[_npctodamage].health lte 0>>
+				<<set _npctodefeat.push(_npctodamage)>>
+				<<set $NPCList[_npctodamage].poison = 0>>
+			<</if>>
+		<<else>>
+		    <<set $NPCList[_npctodamage].poison = 0>>
+		<</if>>
+	<</for>>
+	<<for $_defeatcontroller to 0; $_defeatcontroller lt _npctodefeat.length; $_defeatcontroller++>>
+		<<if $enemyno gte 2>>
+		    <<defeatnpc _npctodefeat[$_defeatcontroller]>>
+		<</if>>
+	<</for>>
+<</widget>>
+/* 北极星 */
