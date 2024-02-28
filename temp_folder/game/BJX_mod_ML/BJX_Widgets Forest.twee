@@ -1,0 +1,228 @@
+:: BJX_Widgets Forest [widget]
+/* 北极星模组 */
+<<widget "forestraccoon">>
+	一双眼睛从一个被挖空的树洞里露了出来，盯着你。
+	<<gstress>><<stress 6>>
+	<br><br>
+	<<beastNEWinit 1 raccoon>>
+	<<if $deviancy gte 35 and ($bestialitydisable is "f" or $monster is 1)>>
+		<br>
+		<<link [[摆出交配姿势|Forest Raccoon]]>><</link>><<deviant3>>
+		<br>
+	<</if>>
+	<<link [[继续|Forest]]>><<endevent>><<if $foresthunt gte 1>><<set $foresthunt += 1>><</if>><<set $eventskip to 1>><</link>>
+	<br>
+<</widget>>
+/* 北极星 */
+/* 北极星模组 */
+<<widget "forestdragon">>
+	你在泥土中发现了巨大的奇怪脚印。
+	<br><br>
+	<<beastNEWinit 1 dragon>>
+	<<if $foresthunt gte 1>>
+	你感觉追捕你的生物越靠越近。
+	<br><br>
+	<</if>>
+
+	<<link [[绕道而行 (0:30)|Forest]]>><<endevent>><<pass 30>><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><<set $eventskip to 1>><</link>>
+	<br>
+	<<if random(1, 2) is 2 and ($bestialitydisable is "f" or $monster is 1)>>
+    	<<link [[无视它|Forest Dragon Molestation]]>><<set $molestationstart to 1>><</link>>
+    	<br>
+	<<else>>
+    	<<link [[无视它|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+    	<br>
+	<</if>>
+<</widget>>
+/* 北极星 */
+/* 北极星模组 */
+<<widget "forest_deer">>
+	<<beastNEWinit 1 deer>>
+	当你走进一片空地的时候，迎面吹来一阵轻风。站在中间的是一只<<beasttype>>，它虽然在注意到你之后便停止了进食，但也没有表现出想要逃跑或者攻击的欲望。
+	<br><br>
+
+	<<link [[接近|Forest Deer]]>><<set $rng to random(1,100)>><</link>>
+	<br>
+	<<link [[无视|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</widget>>
+
+<<widget "bogmove">>
+	<<if $possessed>>
+		你蹒跚着穿行在沼泽里。你清楚你在向哪里前进。
+	<<elseif $forestmove is "quickly">>
+		你在黏滑的沼泽地形上尽可能快地穿行。
+	<<elseif $forestmove is "normally">>
+		你穿行在沼泽里。潺潺流水声愉悦你的旅途。
+	<<elseif $forestmove is "carefully">>
+		你小心翼翼地穿过沼泽，尽可能地不发出任何声响。
+	<<elseif $forestmove is "hobble">>
+		你步履蹒跚地穿过沼泽，并时刻小心注意着不被绊倒。
+	<<elseif $forestmove is "quick_search">>
+		你在黏滑的沼泽地形上尽可能快地搜寻。
+	<<elseif $forestmove is "normal_search">>
+		你搜寻隐藏在淤泥中的任何有价值的东西。
+	<<elseif $forestmove is "careful_search">>
+		你沿着沼泽泥地，仔细地寻找任何有价值的东西。
+	<</if>>
+	<<if $weather is "rain">>
+		瓢泼大雨落在你的周围。
+	<</if>>
+	<<if $forestmove or $possessed>>
+		<br><br>
+	<</if>>
+    <<set $forestmove to 0>>
+<</widget>>
+
+<<widget "bogdeeper">>
+	往沼泽深处走
+	<br>
+	<<if $worn.feet.type.includes("heels") and !$possessed>>
+		<<walkicon>><<link [[穿着高跟鞋慢慢走(0:30)|Forest]]>><<set $forestmod to 3>><<set $forest += 5>><<pass 30>><<set $forestmove to "hobble">><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><</link>><<gharass>>
+	<<else>>
+		<<if !$worn.feet.type.includes("shackle")>>
+			<<runicon>><<link [[快速前进 (0:05)|Forest]]>><<set $forestmod to 3>><<set $forest += 5>><<pass 5>><<set $forestmove to "quickly">><<if $foresthunt gte 1>><<set $foresthunt += 0.5>><</if>><</link>><<gharass>>
+			<br>
+		<</if>>
+		<<walkicon>><<link [[正常前进 (0:10)|Forest]]>><<set $forestmod to 1.5>><<set $forest += 5>><<set $forestmove to "normally">><<pass 10>><<if $foresthunt gte 1>><<set $foresthunt += 1>><</if>><</link>>
+		<br>
+		<<sneakicon>><<link [[谨慎前进 (0:30)|Forest]]>><<set $forestmod to 1>><<set $forest += 5>><<pass 30>><<set $forestmove to "carefully">><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><</link>><<lharass>>
+	<</if>>
+<</widget>>
+
+<<widget "bogsearch">>
+	搜索这片区域<<gtreasure>>
+	<br>
+	<<if !$worn.feet.type.includes("shackle")>>
+		<<runicon>><<link [[快速搜索 (0:05)|Forest]]>><<set $forest_search to true>><<set $forestmod to 3>><<pass 5>><<set $forestmove to "quick_search">><<if $foresthunt gte 1>><<set $foresthunt += 0.5>><</if>><</link>><<gharass>>
+		<br>
+	<</if>>
+	<<walkicon>><<link [[常规搜索 (0:10)|Forest]]>><<set $forest_search to true>><<set $forestmod to 1.5>><<set $forestmove to "normal_search">><<pass 10>><<if $foresthunt gte 1>><<set $foresthunt += 1>><</if>><</link>>
+	<br>
+	<<sneakicon>><<link [[谨慎搜索 (0:30)|Forest]]>><<set $forest_search to true>><<set $forestmod to 1>><<pass 30>><<set $forestmove to "careful_search">><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><</link>><<lharass>>
+<</widget>>
+
+<<widget "boglessdeep">>
+	往城里走
+	<br>
+	<<if $worn.feet.type.includes("heels") and !$possessed>>
+		<<walkicon>><<link [[穿着高跟鞋慢慢走(0:30)|Forest]]>><<set $forestmod to 3>><<set $forest -= 5>><<pass 30>><<set $forestmove to "hobble">><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><</link>><<gharass>>
+	<<else>>
+		<<if !$worn.feet.type.includes("shackle")>>
+			<<runicon>><<link [[快速前进 (0:05)|Forest]]>><<set $forestmod to 3>><<set $forest -= 5>><<pass 5>><<set $forestmove to "quickly">><<if $foresthunt gte 1>><<set $foresthunt += 0.5>><</if>><</link>><<gharass>>
+			<br>
+		<</if>>
+		<<walkicon>><<link [[正常前进 (0:10)|Forest]]>><<set $forestmod to 1.5>><<set $forest -= 5>><<set $forestmove to "normally">><<pass 10>><<if $foresthunt gte 1>><<set $foresthunt += 1>><</if>><</link>>
+		<br>
+		<<sneakicon>><<link [[谨慎前进 (0:30)|Forest]]>><<set $forestmod to 1>><<set $forest -= 5>><<pass 30>><<set $forestmove to "carefully">><<if $foresthunt gte 1>><<set $foresthunt += 2>><</if>><</link>><<lharass>>
+	<</if>>
+<</widget>>
+
+<<widget "BJX_eventbog">>
+	<<cleareventpool>>
+	<<addinlineevent "bog_frog">>
+		<<beastNEWinit 1 frog>>
+		你小心翼翼地绕过一滩淤泥，突然之间闻到一股刺鼻的气味，这味道直冲天灵。然后水面开始泛起涟漪，从中钻出一条长长的、黏糊糊的舌头缠绕着你并把你拉入水中。
+		<br><br>
+
+		<<link [[继续|Bog Frog]]>><<set $molestationstart to 1>><</link>>
+	<</addinlineevent>>
+	<<addinlineevent "bog_mosquito">>
+		在你穿越沼泽的时候，你感觉有什么东西在跟着你。一阵嗡嗡的响声萦绕在你耳边，原来是一群蚊子。
+		<br><br>
+
+		<<link [[继续|Bog Mosquito]]>><<set $struggle_start to 1>><</link>>
+	<</addinlineevent>>
+	<<addinlineevent "bog_wolf">>
+		<<beastNEWinit 1 wolf>>
+		一只孤独的<<beasttype>>呲着牙从树林间钻了出来。
+		<<if $monster is 1>>
+			"猎物， 不要做无谓的挣扎."
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Forest Wolf]]>><<set $molestationstart to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<if $options.bjx_eventTF and $mushroom is 0 and $ghost is 0 and $slime is 0>>
+		<<addevent "mushroomgrove" 0.1>>
+	<</if>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "BJX_eventbogsafe">>
+	<<cleareventpool>>
+	<<addinlineevent "safeforest_wolfhowl">>
+		你听到了远处传来的狼嚎声。
+		<<if $wolfgirl gte 3>>
+			<<garousal>><<arousal 600>>
+		<<else>>
+			<<gstress>><<stress 1>>
+		<</if>>
+		<br><br>
+
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<addinlineevent "safeforest_easytrail" 0.33>>
+		你找到了一条小路，这让你走得更轻松一些。
+		<<lstress>><<stress -2>>
+		<br><br>
+
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<if $options.bjx_eventTF and $mushroom is 0 and $ghost is 0 and $slime is 0>>
+		<<addevent "mushroomgrove" 0.1>>
+	<</if>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "eventbogitem">>
+	<<cleareventpool>>
+	<<addinlineevent "bogplate">>
+		你发现有东西在泥水中闪闪发光。
+		<br><br>
+
+		你慢慢地沉入像淤泥一样的脏水中，从中摸出一块旧的钢板。
+		<br><br>
+
+		<<set $antiquemoney += 300>><<museumAntiqueStatus "antiquebogplate" "found">>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<addinlineevent "bogbone">>
+		当你在泥水池边走时，你的脚被一块小石头绊了一下。
+		<br><br>
+
+		你慢慢地把它挖出来，是一块相当大的动物骨头。
+		<br><br>
+
+		<<set $antiquemoney += 500>><<museumAntiqueStatus "antiquebogbone" "found">>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<addinlineevent "bogtool">>
+		你走的时候被锋利的东西刮伤了腿。
+		<br><br>
+
+		你挖出一个看起来很老旧的农具。
+		<br><br>
+
+		<<set $antiquemoney += 100>><<museumAntiqueStatus "antiquebogtool" "found">>
+		<<link [[继续|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</addinlineevent>>
+	<<runeventpool>>
+<</widget>>
+
+<<widget "mushroomgrove">>
+	你看到一条长满蘑菇的沼泽小径。
+	<br><br>
+
+	<<link [[沿小径走|Mushroom Grove]]>><</link>>
+	<br>
+	<<link [[忽略它|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
+<</widget>>
+/* 北极星 */

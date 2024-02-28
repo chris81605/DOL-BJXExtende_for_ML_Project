@@ -1,0 +1,39 @@
+:: BJX_Widgets Mirror [widget]
+/* 北极星模组 */
+<<widget "specialHair">>
+	<<if $slime gt 0>>
+		<br><br>
+		<span class='green'>也许你不能像大多数史莱姆那样把你身体塑型到那种程度...
+		<br>但只要你集中注意力，改变你头发的长度应该不会太困难。</span>
+		<br><br>
+	<<elseif $ghost gte 1>>
+		<br><br>
+		<span class='wraith'>你的超自然能力通常限于穿过墙壁...
+		<br>但只要你集中注意力，改变你头发的长度应该不会太困难。</span>
+		<br><br>
+	<<elseif $mushroom gte 1>>
+		<br><br>
+		<span class='yellow'>只要你集中注意力，你可以通过改变你的生物质来增加或缩短你的头发长度。
+		</span>
+		<br><br>
+	<</if>>
+	<<link "<<<">><<set $hairlength -= 1000>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>> |
+	<<link "<<">><<set $hairlength -= 100>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>> |
+	<<link "<">><<set $hairlength -= 10>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>> |
+	头发长度: <span id="statshairlength"><<print Math.trunc($hairlength)>></span>
+	| <<link ">">><<set $hairlength += 10>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>>
+	| <<link ">>">><<set $hairlength += 100>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>>
+	| <<link ">>>">><<set $hairlength += 1000>><<clamp>><<replace "#statshairlength">><<print Math.trunc($hairlength)>><</replace>><</link>>
+	<br><br><br>
+	<<link "<<<">><<set $fringelength -= 1000>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>> |
+	<<link "<<">><<set $fringelength -= 100>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>> |
+	<<link "<">><<set $fringelength -= 10>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>> |
+	刘海长度: <span id="statsfringelength"><<print Math.trunc($fringelength)>></span>
+	| <<link ">">><<set $fringelength += 10>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>>
+	| <<link ">>">><<set $fringelength += 100>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>>
+	| <<link ">>>">><<set $fringelength += 1000>><<clamp>><<replace "#statsfringelength">><<print Math.trunc($fringelength)>><</replace>><</link>>
+	<br><br>
+	<<link [[确认 (0:20)|$passage]]>><<pass 20>><<replace #mirror>><<mirrorMenu>><</replace>><<numberify "#passages > .passage">><<unset $mirrorMenu>><</link>>
+	<br>
+<</widget>>
+/* 北极星 */

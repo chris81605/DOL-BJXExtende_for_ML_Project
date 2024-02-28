@@ -843,5 +843,258 @@
     "passage": "Widgets Effects Hands",
     "findString": "\t\t\t<<if (1000 - ($rng * 10) - ((currentSkillValue('physique') / $physiquemax * 100) * _freestrength) + ($enemyanger * 0.5)) lte\n\t\t\t\t\t(200 + $enemytrust)>>",
     "replace": "\t\t    /* 北极星模组 */\n\t\t\t<<if (1000 - ($rng * 10) - ((currentSkillValue('physique') / $physiquemax * 100) * _freestrength) + ($enemyanger * 0.5)) lte\n\t\t\t\t\t(200 + $enemytrust) or $slime gt 0 and $options.bjx_eventTF>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Effects Possessed",
+    "findString": "\t\t<<if currentSkillValue('physique') gte random(1, 48000)>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if currentSkillValue('physique') gte random(1, 48000) or $slime gt 0 and $options.bjx_eventTF>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Effects",
+    "findString": "\t<<set $inwater to 0>>\n\n\t<<if $scienceproject is \"ongoing\" and $scienceprojectdays is 0 and $scienceprojectwarning isnot 1>>",
+    "replace": "\t<<set $inwater to 0>>\n\n\t/* 北极星模组 */\n\t<<if $slime gte 1>>\n\t\t<<set $pblevel to 0>>\n\t\t<<set $pbgrowth to 0>>\n\t\t<<set $pblevelballs to 0>>\n\t\t<<set $pbgrowthballs to 0>>\n\t\t<<set $pbstrip to 0>>\n\t\t<<set $makeup.pbcolour to 0>>\n\t<</if>>\n\n\t<<if $ghost gte 1>>\n\t\t<<set $pblevel to 0>>\n\t\t<<set $pbgrowth to 0>>\n\t\t<<set $pblevelballs to 0>>\n\t\t<<set $pbgrowthballs to 0>>\n\t\t<<set $pbstrip to 0>>\n\t\t<<set $makeup.pbcolour to 0>>\n\t<</if>>\n\n\t<<if $mushroom gte 1>>\n\t\t<<set $pblevel to 0>>\n\t\t<<set $pbgrowth to 0>>\n\t\t<<set $pblevelballs to 0>>\n\t\t<<set $pbgrowthballs to 0>>\n\t\t<<set $pbstrip to 0>>\n\t\t<<set $makeup.pbcolour to 0>>\n\t<</if>>\n\t\n\t<<if $options.bjx_eventTF>>\n        <<if $slime gt 0 and $oxygen lte $oxygenmax>>\n    \t    <<oxygenrefresh>>\n    \t<</if>>\n    \t\n    \t<<if $slime gt 0 and $nooxygen is 1>>\n    \t\t<<set $nooxygen to 0>>\n    \t\t<br><span class='green'>通常情况下，窒息可能会使你失去意识，但幸运的是，你是一坨史莱姆。</span><br>\n    \t<</if>>\n    \n    \t<<if $slime gt 0>>\n    \t\t<<if $outside is 1 and $weather is \"rain\" and !($worn.head.type.includes(\"rainproof\") or $worn.over_head.type.includes(\"rainproof\"))>>\n        \t<<violence 40>>\n    \t\t<br>快去躲雨！<span class='red'>雨真的很痛啊啊啊啊！<br><br></span>\n    \t\t<</if>>\n    \t<</if>>\n\t<</if>>\n\t\n\t<<if $smuggler_known is 1 and $smuggler_timer is 0 and $smuggler_warning isnot 1>>\n\t\t<<set $smuggler_warning to 1>>\n\t\t<span class=\"gold\">你想起今晚有走私者将要把贵重物品走私入城中，\n\t\t\t<<if $smuggler_location is \"forest\">>\n\t\t\t\t走私犯会带着东西穿过森林。\n\t\t\t<<elseif $smuggler_location is \"sewer\">>\n\t\t\t\t走私犯将会通过旧下水道运输物品。\n\t\t\t<<elseif $smuggler_location is \"beach\">>\n\t\t\t\t走私犯计划在沙滩旁的大礁石上登陆。\n\t\t\t<<elseif $smuggler_location is \"bus\">>\n\t\t\t\t走私犯会把它藏在公交车上。\n\t\t\t<</if>>\n\t\t</span>\n\t<</if>>\n\t/* 北极星 */\n\n\t<<if $scienceproject is \"ongoing\" and $scienceprojectdays is 0 and $scienceprojectwarning isnot 1>>"
+  },
+  {
+    "passage": "Widgets Effects",
+    "findString": "\t\t<<if $fallenangelmessage is 1>>\n\t\t\t<<unset $fallenangelmessage>>\n\t\t\t<span class=\"red\">你感觉在黑暗之中有什么东西正在抓挠你的皮肤。</span>\n\t\t\t<<gstress>><<set $stress += $stressmax>>\n\t\t<</if>>\n\t\t<<if $demonmessage is 1>>\n\t\t\t<<unset $demonmessage>>\n\t\t\t<span class=\"red\">你感觉到一束可怕的光线灼伤了你。</span>\n\t\t\t<<gstress>><<set $stress += $stressmax>>\n\t\t<</if>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if $options.bjx_animal and $raccoon gte 6 and $raccoonrequiredText and $raccoonrequired>>\n\t\t    <br>\n\t\t    <span class=\"gold\">你今天特别想实施犯罪行为：<<crimeType $raccoonrequired>></span>\n\t\t    <<set $raccoonrequiredText to false>>\n\t\t<</if>>\n\t\t<<if $fallenangelmessage is 1>>\n\t\t\t<<unset $fallenangelmessage>>\n\t\t\t<br>\n\t\t\t<span class=\"red\">你感觉在黑暗之中有什么东西正在抓挠你的皮肤。</span>\n\t\t\t<br>\n\t\t\t<span class=\"red\">它们仿佛在吞噬你的灵魂，你感到一阵虚弱。</span>\n\t\t\t<<set $fallenangel -= 1>>\n\t\t\t<<gstress>><<set $stress += $stressmax>>\n\t\t<</if>>\n\t\t<<if $fallenangelmessage is 2>>\n        \t<<unset $fallenangelmessage>>\n        \t<br>\n        \t<span class=\"green\">你感觉下体一阵酥痒，片刻之后你的童贞恢复了。</span>\n        <</if>>\n\t\t<<if $fallenangelmessage is 3>>\n        \t<<unset $fallenangelmessage>>\n        \t<br>\n        \t<span class=\"green\">你的下体一阵酥痒，恢复童贞的感觉让你浑身舒畅。</span>\n        \t<<gpurity>><<ltrauma>><<lstress>>\n        \t<<trauma -200>>\n        \t<<set $stress -= $stressmax * ($purity/1000)>>\n        \t<<if $innocencestate is 1>>\n        \t    <<awareness -100>>\n        \t    <<lawareness>>\n        \t<</if>>\n        <</if>>\n        <<if $fallenangelmessage is 4>>\n        \t<<unset $fallenangelmessage>>\n        \t<br>\n        \t<span class=\"red\">你试图恢复童贞，但你的身体太过污浊所以失败了。</span>\n        \t<<gstress>><<set $stress += 2000>>\n        <</if>>\n\t\t<<if $demonmessage is 1>>\n\t\t\t<<unset $demonmessage>>\n\t\t\t<br>\n\t\t\t<span class=\"red\">你感觉到一束可怕的光线灼伤了你。</span>\n\t\t\t<<gstress>><<set $stress += $stressmax>>\n\t\t\t<<set $demonbuild -= 5>>\n\t\t<</if>>\n\t\t<<if $huntermessage is 1>>\n\t\t    <<unset $huntermessage>>\n\t\t    <br>\n\t\t\t<span class=\"lustful\">你的体液沸腾着，仿佛清理垃圾一般，消灭了身体里的残留纯洁。</span>\n\t\t<</if>>\n\t\t<<if $huntermessage is 2>>\n\t\t    <<unset $huntermessage>>\n\t\t    <br>\n\t\t    <span class=\"lustful\">你的体液不停地沸腾翻滚，试图消灭身体里的过量纯洁。</span>\n\t\t    <br>\n\t\t    <span class=\"red\">但似乎力量不足，你的体内乱做一团，剧痛席卷了你。</span>\n\t\t    <<set $demonhunter -= 1>>\n\t\t\t<<gstress>><<set $stress += $stressmax>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Effects",
+    "findString": "\t<<if $inwater is 1>>\n\t\t<<if Time.season is \"winter\" and ![\"sea\", \"beach\", \"school\", \"underground\", \"pool\"].includes($location)>>",
+    "replace": "\t<<if $inwater is 1>>\n\t    /* 北极星模组 */\n\t    <<if $fish gte 6 and $options.bjx_animal>>\n            <<set $stress -= 500>>\n            <span class=\"green\"><br><br>浸泡于水中让你感到安心。<br><br></span>\n        <</if>>\n\t\t<<if $slime gt 0 and $options.bjx_eventTF>>\n\t\t\t<<violence 60>>\n\t\t\t<span class=\"red\"><br><br>你的身体在慢慢溶解，快点离开水源！<br><br></span>\n\t\t<</if>>\n\t\t/* 北极星 */\n\t\t<<if Time.season is \"winter\" and ![\"sea\", \"beach\", \"school\", \"underground\", \"pool\"].includes($location)>>"
+  },
+  {
+    "passage": "Widgets Effects",
+    "findString": "\t<<if $outside is 1 or _water_warmth isnot undefined>>\n\t\t<<set $body_temperature to $body_temperature_outside>>\n\t<<else>>\n\t\t<<set $body_temperature to \"comfy\">>\n\t<</if>>",
+    "replace": "\t<<if $outside is 1 or _water_warmth isnot undefined>>\n\t\t<<set $body_temperature to $body_temperature_outside>>\n\t<<else>>\n\t\t<<set $body_temperature to \"comfy\">>\n\t<</if>>\n\t\n\t/* 北极星模组 */\n    <<if $options.bjx_eventTF>>\n    \t<<if $fungalgrowth gte 30 and $mushroom gte 1 and $fungalstagelimiter is 0>>\n    \t\t<<set $fungalgrowth -= 30>>\n    \t\t<<set $fungalpoint += 1>>\n    \t\t<span class='yellow'>你积攒了足够的营养物质，已获得进化点，可在浴室中进行进化！</span>\n    \t<</if>>\n    <</if>>\n    /* 北极星 */"
+  },
+  {
+    "passage": "Widgets End Combat",
+    "findString": "\t<<if $enemyhealth lte 0>>\n\t\t<<if $enemytype is \"man\">>\n\t\t\t<<famescrap $enemynomax>>\n\t\t<</if>>\n\t\t<<if $audiencepresent is 1>>\n\t\t\t<<famescrap 10>>\n\t\t<</if>>\n\t<</if>>\n\n\t<<if $demonabsorb gte 1>>\n\t\t<<if $enemytype is \"tentacles\" or $enemytype is \"struggle\">>\n\t\t\t<<pain `-(5 * $demonabsorb)`>>\n\t\t\t<<set $stress -= (300 * $demonabsorb)>>\n\t\t<<else>>\n\t\t\t<<set $trauma -= (150 * $demonabsorb)>>\n\t\t<</if>>\n\t\t<span class=\"lewd\">你吸收了性爱的精华，感觉更加舒畅了。</span>\n\t\t<<set $demonabsorb to 0>>\n\t\t<<traumaclamp>>\n\t\t<<set $_br to true>>\n\t\t<br>\n\t<</if>>",
+    "replace": "\t<<if $enemyhealth lte 0>>\n\t\t<<if $enemytype is \"man\">>\n\t\t\t<<famescrap $enemynomax>>\n\t\t<</if>>\n\t\t<<if $audiencepresent is 1>>\n\t\t\t<<famescrap 10>>\n\t\t<</if>>\n\t<</if>>\n\t\n\t/* 北极星模组 */\n\t<<set $enemyoverarousal to 0>>\n\t<<set $againfail to false>>\n\t<<unset $mushroomsatisfy>>\n\t<<if $worn.neck.name is \"ivory necklace\">>\n\t    <<unset $possessed>>\n\t<</if>>\n\t\n\t<<for _i = 0; _i < $NPCList.length; _i++>>\n        <<set $NPCList[_i].poison = 0>>\n        <<set $NPCList[_i].freeze to false>>\n\t<</for>>\n\n\t<<if $demonabsorb gte 1>>\n\t    <<if $demonhunter gte 2>>\n\t\t    <<set $daynoabsorb = 0>>\n            <<pain `(5 * $demonabsorb)`>>\n    \t\t<<set $stress += (300 * $demonabsorb)>>\n    \t\t<<set $trauma += (150 * $demonabsorb)>>\n    \t\t<span class=\"red\">你变异的身体排斥着外来的体液，仿佛泼入了冷水的油锅，让你痛不欲生。</span>\n        <<elseif $demon gte 2 and $options.bjx_divine>>\n            <<set $daynoabsorb = 0>>\n\t\t\t<<pain `-(5 * $demonabsorb)`>>\n\t\t\t<<set $stress -= (300 * $demonabsorb)>>\n\t\t\t<<set $trauma -= (150 * $demonabsorb)>>\n    \t\t<span class=\"lewd\">你吸收了性爱的精华，精华滋补着你，让你感到身心舒畅。</span>\n    \t<<elseif $demon gte 6 and !$options.bjx_divine>>\n            <<set $daynoabsorb = 0>>\n            <<if $enemytype is \"tentacles\" or $enemytype is \"struggle\">>\n    \t\t\t<<pain `-(5 * $demonabsorb)`>>\n    \t\t\t<<set $stress -= (300 * $demonabsorb)>>\n    \t\t<<else>>\n    \t\t\t<<set $trauma -= (150 * $demonabsorb)>>\n    \t\t<</if>>\n    \t\t<span class=\"lewd\">你吸收了性爱的精华，精华滋补着你，让你感到身心舒畅。</span>\n        <</if>>\n\t\t<<set $demonabsorb to 0>>\n\t\t<<traumaclamp>>\n\t\t<<set $_br to true>>\n\t\t<br>\n\t<</if>>\n\t\t\n\t<<if $demonejac gte 1>>\n\t    <<if $demon gte 2 and $demonhunter lt 2>>\n            <<set $daynoabsorb = 0>>\n\t\t\t<<set $stress -= (300 * $demonabsorb)>>\n\t\t\t<<set $trauma -= (150 * $demonabsorb)>>\n    \t\t<span class=\"lewd\">内射他人让你无比愉悦，玷污他人的快感，让你感到满足。</span>\n        <</if>>\n\t\t<<set $demonejac to 0>>\n\t\t<<traumaclamp>>\n\t\t<<set $_br to true>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets End Combat",
+    "findString": "\t<<if $transformationParts.traits.mateForLife isnot \"disabled\" and $sexavoid is 0>>\n\t\t<<if $enemyno is 1 and isLoveInterest($npc[$npcrow.indexOf(0)])>>\n\t\t\t<<if $fox gte 3>>\n\t\t\t\t<<transform fox 1>>\n\t\t\t<</if>>\n\t\t\t<<stress -10>><<trauma -5>>\n\t\t\t<span class=\"lewd\">与你所选择的伴侣交合满足了你本能的欲望。</span><<llstress>><<ltrauma>>\n\t\t\t<<set $_br to true>>\n\t\t\t<br>\n\t\t<</if>>\n\t<</if>>",
+    "replace": "\t<<if $transformationParts.traits.mateForLife isnot \"disabled\" and $sexavoid is 0>>\n\t\t<<if $enemyno is 1 and isLoveInterest($npc[$npcrow.indexOf(0)])>>\n\t\t\t<<if $fox gte 3>>\n\t\t\t\t<<transform fox 1>>\n\t\t\t<</if>>\n\t\t\t<<stress -10>><<trauma -5>>\n\t\t\t<span class=\"lewd\">与你所选择的伴侣交合满足了你本能的欲望。</span><<llstress>><<ltrauma>>\n\t\t\t<<set $_br to true>>\n\t\t\t<br>\n\t\t<</if>>\n\t<</if>>\n\t\n\t/* 北极星模组 */\n\t<<if $slime gt 0 and $options.bjx_eventTF>> \n\t\t<<if $weather isnot \"rain\" and $underwater isnot 1 and $inwater isnot 1 and $pain gt 10 and $liquidcount gte 2>>\n\t\t\t<<wash>>\n\t\t\t<<pain -20>>\n\t\t\t<span class ='green'>你的身体吸收了大量的液体，并进行自我修复。</span><br><br>\n\t\t<<elseif $weather isnot \"rain\" and $underwater isnot 1 and $inwater isnot 1 and $pain gte 10 and $liquidcount lt 2>>\n\t\t\t<<pain -10>>\n\t\t\t<<wash>>\n\t\t\t<span class ='green'>你的身体通过吸收可用液体来试着自愈。</span><br><br>\n\t\t<<elseif $weather isnot \"rain\" and $underwater isnot 1 and $inwater isnot 1 and $pain lt 10>>\n\t\t\t<<wash>>\n\t\t\t<span class ='green'>你的身体基本上没有伤口，但还是吸收了可用的液体。</span><br><br>\n\t\t<<elseif $weather is \"rain\" and $outside is 1 or $underwater is 1 or $inwater is 1 and $pain gte 0>>\n\t\t\t<span class ='red'>你的身体试图自愈，但环境过于恶劣。请避免与水直接接触！</span><br><br>\n\t\t<</if>>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets End Combat",
+    "findString": "\t<<set $walltype to \"wall\">>\n\t<<set $angelforgive to 0>>\n\t<<unset $banishDisable>>\n\t<<unset $penisfucked>>",
+    "replace": "\t<<set $walltype to \"wall\">>\n\t<<set $angelforgive to 0>>\n\t/* 北极星模组 */\n\t<<set $fallenangelretribution to 0>>\n\t<<set $fallenangelvirginitylost to 0>>\n\t<<set $demonseduce to 0>>\n\t<<set $demonhunterhypnosis to 0>>\n\t<<set $tailshaked to false>>\n\t/* 北极星 */\n\t<<unset $banishDisable>>\n\t<<unset $penisfucked>>"
+  },
+  {
+    "passage": "Widgets End Combat",
+    "findString": "\t<<set $bodyaction to 0>>\n\t<<set $stealdifficulty to 1>>\n\n\t<<set $lefttarget to 0>>\n\t<<set $righttarget to 0>>",
+    "replace": "\t<<set $bodyaction to 0>>\n\t<<set $stealdifficulty to 1>>\n\t/* 北极星模组 */\n\t<<set $tailaction to 0>>\n\t/* 北极星 */\n\n\t<<set $lefttarget to 0>>\n\t<<set $righttarget to 0>>"
+  },
+  {
+    "passage": "Widgets End Combat",
+    "findString": "\t<<set $front to 0>>\n\t<<set $chest to 0>>\n\n\t<!-- <<set $claws to 1>> -->\n\t<<set $water to 0>>",
+    "replace": "\t<<set $front to 0>>\n\t<<set $chest to 0>>\n\t/* 北极星模组 */\n\t<<set $mouth to 0>>\n\t/* 北极星 */\n\n\t<!-- <<set $claws to 1>> -->\n\t<<set $water to 0>>"
+  },
+  {
+    "passage": "Widgets End Speech",
+    "findString": "\t<<unset $speechpenisvirgin>>\n\t<<unset $speechkissvirgin>>\n\t<<unset $speechgrowl>>\n\t<<unset $speechgrowlheat>>",
+    "replace": "\t<<unset $speechpenisvirgin>>\n\t<<unset $speechkissvirgin>>\n\t/* 北极星模组 */\n\t<<unset $speechdragonbreath>>\n\t/* 北极星 */\n\t<<unset $speechgrowl>>\n\t<<unset $speechgrowlheat>>"
+  },
+  {
+    "passage": "Widgets Events History",
+    "findString": "\t\t\t<<link [[耍对方一回|History Events Trick]]>><</link>><<skulduggerydifficulty>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<link [[耍对方一回|History Events Trick]]>><<set $skulduggeryhands to 1>><</link>><<skulduggerydifficulty>>\n\t\t    /* 北极星 */"
+  },
+  {
+  "passage": "Widgets Forest",
+  "findString": "<<widget \"forestdeeper\">>\n\t深入森林\n\t<br>",
+  "replace": "<<widget \"forestdeeper\">>\n\t深入森林\n\t<br>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $deer gte 6>>\n\t\t<<link [[自由穿梭 (0:02)|Forest]]>><<set $forestmod to 0>><<set $forest += 5>><<pass 2>><<set $forestmove to \"normally\">><<if $foresthunt gte 1>><<set $foresthunt -= 1>><</if>><</link>><<deer>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "<<widget \"forestsearch\">>\n\t搜索这片区域<<gtreasure>>\n\t<br>",
+    "replace": "<<widget \"forestsearch\">>\n\t搜索这片区域<<gtreasure>>\n\t<br>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $deer gte 6>>\n\t\t<<link [[随性寻找 (0:05)|Forest]]>><<set $forest_search to true>><<set $forestmod to 0>><<pass 5>><<set $forestmove to \"normal_search\">><<if $foresthunt gte 1>><<set $foresthunt -= 0>><</if>><</link>><<deer>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "<<widget \"forestlessdeep\">>\n\t往城里走\n\t<br>",
+    "replace": "<<widget \"forestlessdeep\">>\n\t往城里走\n\t<br>\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $deer gte 6>>\n\t\t<<link [[自由穿梭 (0:02)|Forest]]>><<set $forestmod to 0>><<set $forest -= 5>><<pass 2>><<set $forestmove to \"normally\">><<if $foresthunt gte 1>><<set $foresthunt -= 1>><</if>><</link>><<deer>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t<<addevent \"forestwolfspy\">>\n\t<<addinlineevent \"forest_wolf\" 0.33>>",
+    "replace": "\t<<addevent \"forestwolfspy\">>\n\t/* 北极星模组 */\n\t<<addevent \"forestraccoon\">>\n\t/* 北极星 */\n\t<<addinlineevent \"forest_wolf\" 0.33>>"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t\t<</addinlineevent>>\n\t\t<<addevent \"forestbear\" 0.15>>\n\t\t<<addevent \"forestrock\" 0.25>>",
+    "replace": "\t\t<</addinlineevent>>\n\t\t<<addevent \"forestbear\" 0.15>>\n\t\t/* 北极星模组 */\n\t\t<<addevent \"forestraccoon\" 0.15>>\n\t\t<<addevent \"forestdragon\" 0.05>>\n\t\t/* 北极星 */\n\t\t<<addevent \"forestrock\" 0.25>>"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t\t<<if $fox_grudge>>\n\t\t\t<<addevent \"fox_grudge\" 0.33>>\n\t\t<</if>>\n\t\t<<runeventpool>>",
+    "replace": "\t\t<<if $fox_grudge>>\n\t\t\t<<addevent \"fox_grudge\" 0.33>>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<addevent \"forestriver\" 0.33>>\n\t\t/* 北极星 */\n\t\t<<runeventpool>>"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t\t<<if $voredisable is \"f\" and $bestialitydisable is \"f\">>\n\t\t\t<<addevent \"forestsnake\" 0.33>>\n\t\t<</if>>\n\t\t<<addevent \"forestbear\">>",
+    "replace": "\t\t<<if $voredisable is \"f\" and $bestialitydisable is \"f\">>\n\t\t\t<<addevent \"forestsnake\" 0.33>>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<addevent \"forestbear\" 0.15>>\n\t\t<<addevent \"forestraccoon\" 0.15>>\n\t\t<<addevent \"forestdragon\" 0.05>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t<<if $fox_grudge>>\n\t\t<<addevent \"fox_grudge\" 0.33>>\n\t<</if>>\n\t\t<<runeventpool>>",
+    "replace": "    \t<<if $fox_grudge>>\n    \t\t<<addevent \"fox_grudge\" 0.33>>\n    \t<</if>>\n    \t/* 北极星模组 */\n\t    <<addevent \"forest_deer\">>\n\t    /* 北极星 */\n\t\t<<runeventpool>>"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t\t<<addinlineevent \"safeforest_deer\" 0.33>>\n\t\t\t当你进入一片空地时，微风轻抚过你的面庞，在空地中间有一只鹿，当它注意到你时，它停止了进食，但没有逃跑。\n\t\t\t<br><br>\n\n\t\t\t<<link [[接近|Forest Deer]]>><</link>>\n\t\t\t<br>\n\t\t\t<<link [[无视|Forest]]>><<set $eventskip to 1>><</link>>\n\t\t\t<br>\n\t\t<</addinlineevent>>",
+    "replace": "\t    /* 北极星模组 */\n\t\t<<addevent \"forest_deer\">>\n\t\t/* 北极星 */\n"
+  },
+  {
+    "passage": "Widgets Forest",
+    "findString": "\t<!-- Modified for Monster People -->\n\t<<if random(1, 5) is 5 and ($bestialitydisable is \"f\" or $monster is 1)>>",
+    "replace": "\t<!-- Modified for Monster People -->\n\t/* 北极星模组 */\n\t<<if random(1, 2) is 2 and ($bestialitydisable is \"f\" or $monster is 1)>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Forest",
+    "findString": "<<eventbog>>",
+    "replace": "<<BJX_eventbog>>",
+    "all": true
+  },
+  {
+    "passage": "Forest",
+    "findString": "<<eventbogsafe>>",
+    "replace": "<<BJX_eventbogsafe>>",
+    "all": true
+  },
+  {
+    "passage": "Widgets Furniture",
+    "findString": "<<widget \"furnitureLinks\">>\n\t<<set _furnitureLinks to [\n\t\t{ id: 'bed', label: '床' },\n\t\t{ id: 'table', label: '茶几' },\n\t\t{ id: 'chair', label: '椅子' },\n\t\t{ id: 'desk', label: '书桌'},\n\t\t{ id: 'wardrobe', label: '衣橱' },\n\t\t{ id: 'decoration', label: '饰品' },\n\t\t{ id: 'windowsill', label: '杂项' }\n\t]>>",
+    "replace": "<<widget \"furnitureLinks\">>\n\t<<set _furnitureLinks to [\n\t\t{ id: 'bed', label: '床' },\n\t\t{ id: 'table', label: '茶几' },\n\t\t{ id: 'chair', label: '椅子' },\n\t\t{ id: 'desk', label: '书桌'},\n\t\t{ id: 'wardrobe', label: '衣橱' },\n\t\t{ id: 'decoration', label: '饰品' },\n\t\t{ id: 'windowsill', label: '杂项' }\n\t]>>\n\t/* 北极星模组 */\n\t<<set _furnitureLinks_bjx to [\n\t\t{ id: 'television', label: '电视' },\n\t\t{ id: 'gameconsole', label: '游戏机' },\n\t\t{ id: 'pc', label: '个人电脑' },\n\t\t{ id: 'bookshelf', label: '书架' },\n\t\t{ id: 'mirror', label: '镜子' }\n\t]>>\n\t<<set _furnitureLinks = _furnitureLinks.concat(_furnitureLinks_bjx)>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Img",
+    "findString": "<<widget \"img\">>",
+    "replace": "<<widget \"img\">>\n    /* 北极星模组 */\n    <<if $transformationParts.sheep is undefined or $transformationParts.deer is undefined or $transformationParts.bear is undefined or $transformationParts.bee is undefined or $transformationParts.dragon is undefined or $transformationParts.lizard is undefined or $transformationParts.dolphin is undefined or $transformationParts.dog is undefined or $transformationParts.raccoon is undefined or $transformationParts.fish is undefined or $transformationParts.horse is undefined or $transformationParts.spider is undefined or $transformationParts.pig is undefined or $transformationParts.frog is undefined>>\n\t\t<<set $tfFIX to undefined>>\n\t\t<<backComp>>\n\t\t<<variablesBJXModUpdate>>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Img",
+    "findString": "\t\t\t\t<<if !_disabled.includes($transformationParts.bird.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/rightwing/'+$transformationParts.bird.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t<<elseif _coverLeft is true>>",
+    "replace": "\t\t\t\t<<if !_disabled.includes($transformationParts.bird.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/rightwing/'+$transformationParts.bird.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<if !_disabled.includes($transformationParts.bee.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair anim-idle-2f\" @src=\"'img/transformations/bee/rightwing/'+$transformationParts.bee.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星 */\n\t\t\t<<elseif _coverLeft is true>>"
+  },
+  {
+    "passage": "Widgets Img",
+    "findString": "\t\t\t\t<<if !_disabled.includes($transformationParts.bird.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/leftwing/'+$transformationParts.bird.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t<<elseif _coverRight is true>>",
+    "replace": "\t\t\t\t<<if !_disabled.includes($transformationParts.bird.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/leftwing/'+$transformationParts.bird.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星模组 */\n\t\t\t\t<<if !_disabled.includes($transformationParts.bee.wings)>>\n\t\t\t\t\t<img class=\"layer-backhair anim-idle-2f\" @src=\"'img/transformations/bee/leftwing/'+$transformationParts.bee.wings+'.png'\">\n\t\t\t\t<</if>>\n\t\t\t\t/* 北极星 */\n\t\t\t<<elseif _coverRight is true>>"
+  },
+  {
+    "passage": "Widgets Img",
+    "findString": "\t\t<<if !_disabled.includes($transformationParts.bird.pubes)>>\n\t\t\t<img class=\"layer-hirsute colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'\">\n\t\t<</if>>\n\n\t\t<<if $hairposition is \"front\">>",
+    "replace": "\t\t<<if !_disabled.includes($transformationParts.bird.pubes)>>\n\t\t\t<img class=\"layer-hirsute colour-hair anim-idle-2f\" @src=\"'img/transformations/bird/pubes/'+$transformationParts.bird.pubes+'.png'\">\n\t\t<</if>>\n\t\t\n\t\t/* 北极星模组 */\n\t\t<<if !_disabled.includes($transformationParts.sheep.horns)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/sheep/horns/'+$transformationParts.sheep.horns+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.sheep.ears)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/sheep/ears/'+$transformationParts.sheep.ears+'.png'\">\n\t\t\t<img class=\"layer-face anim-idle-2f\" src=\"img/transformations/sheep/tag.png\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.deer.horns)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/deer/horns/'+$transformationParts.deer.horns+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.deer.ears)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/deer/ears/'+$transformationParts.deer.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.deer.tail)>>\n\t\t\t<img class=\"layer-backhair anim-idle-2f\" @src=\"'img/transformations/deer/tail/'+$transformationParts.deer.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.bee.ears)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/bee/ears/'+$transformationParts.bee.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.bee.tail)>>\n\t\t\t<img class=\"layer-backhair anim-idle-2f\" @src=\"'img/transformations/bee/tail/'+$transformationParts.bee.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.bear.ears)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/bear/ears/'+$transformationParts.bear.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.bear.tail)>>\n\t\t\t<img class=\"layer-backhair anim-idle-2f\" @src=\"'img/transformations/bear/tail/'+$transformationParts.bear.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.raccoon.mask)>>\n\t\t\t<img class=\"layer-skin anim-idle-2f\" @src=\"'img/transformations/raccoon/mask/'+$transformationParts.raccoon.mask+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.raccoon.ears)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/raccoon/ears/'+$transformationParts.raccoon.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.raccoon.tail)>>\n\t\t\t<img class=\"layer-tail anim-idle-2f\" @src=\"'img/transformations/raccoon/tail/'+$transformationParts.raccoon.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.fish.fins)>>\n\t\t\t<img class=\"layer-horns anim-idle-2f\" @src=\"'img/transformations/fish/fins/'+$transformationParts.fish.fins+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.fish.tail)>>\n\t\t\t<img class=\"layer-tail anim-idle-2f\" @src=\"'img/transformations/fish/tail/'+$transformationParts.fish.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.horse.ears)>>\n\t\t\t<img class=\"layer-fronthair anim-idle-2f\" @src=\"'img/transformations/horse/ears/'+$transformationParts.horse.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.horse.tail)>>\n\t\t\t<img class=\"layer-tail anim-idle-2f\" @src=\"'img/transformations/horse/tail/'+$transformationParts.horse.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.pig.ears)>>\n\t\t\t<img class=\"layer-fronthair anim-idle-2f\" @src=\"'img/transformations/pig/ears/'+$transformationParts.pig.ears+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.pig.tail)>>\n\t\t\t<img class=\"layer-tail anim-idle-2f\" @src=\"'img/transformations/pig/tail/'+$transformationParts.pig.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.spider.eyes)>>\n\t\t\t<img class=\"layer-irisacc anim-idle-2f\" @src=\"'img/transformations/spider/eyes/'+$transformationParts.spider.eyes+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.spider.tail)>>\n\t\t\t<img class=\"layer-tail anim-idle-2f\" @src=\"'img/transformations/spider/tail/'+$transformationParts.spider.tail+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.frog.cheeks)>>\n\t\t\t<img class=\"layer-skin anim-idle-2f\" @src=\"'img/transformations/frog/cheeks/'+$transformationParts.frog.cheeks+'.png'\">\n\t\t<</if>>\n\n\t\t<<if !_disabled.includes($transformationParts.frog.eyes)>>\n\t\t\t<img class=\"layer-irisacc anim-idle-2f\" @src=\"'img/transformations/frog/eyes/'+$transformationParts.frog.eyes+'.png'\">\n\t\t<</if>>\n\t\t/* 北极星 */\n\n\t\t<<if $hairposition is \"front\">>"
+  },
+  {
+    "passage": "Widgets Img",
+    "findString": "\t<!-- Eyes -->\n\t<<if ($trauma gte ($traumamax * 0.9) and _diagram is 0) or $possessed>>",
+    "replace": "\t<!-- Eyes -->\n\t/* 北极星模组 */\n\t<<if ($trauma gte ($traumamax * 0.9) and _diagram is 0) or $possessed or ($traumatized and $options.bjx_divine)>>\n\t\t<<set $traumatized to true>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Journal",
+    "findString": "\t\t\t<</if>>\n\n\t\t\t<<if $averydate is 1 and Time.hour lte 21 and $averydatedone isnot 1>>",
+    "replace": "\t\t\t<</if>>\n\n\t/* 北极星模组 */\n\t<<if $options.bjx_animal and $raccoon gte 6 and $raccoonrequired>>\n\t    <li class=\"gold\">你今天特别想实施犯罪行为：<<crimeType $raccoonrequired>></li>\n\t<</if>>\n\t/* 北极星 */\n\n\t\t\t<<if $averydate is 1 and Time.hour lte 21 and $averydatedone isnot 1>>"
+  },
+  {
+    "passage": "Widgets Journal",
+    "findString": "\t\t\t\t<</if>>\n\t\t\t<</if>>\n\n\t\t\t<<if $photo>>",
+    "replace": "\t\t<</if>>\n\t<</if>>\n\n\t<<if $farm_stage gte 7>>\n\t\t<li>雷米将在\n\t\t\t<<if $farm_attack_timer is 0>>\n\t\t\t\t今晚\n\t\t\t<<elseif $farm_attack_timer is 1>>\n\t\t\t\t明天\n\t\t\t<<else>>\n\t\t\t\t$farm_attack_timer天后袭击农场。\n\t\t\t<</if>>\n\t\t\t他们会在<span class=\"red\"><<ampm 21 00>>至午夜期间赶来。</span>\n\t\t</li>\n\t<</if>>\n\t\n\t/* 北极星模组 */\n\t<<if $lakehouse_attack_timer>>\n\t\t贝利将在\n\t\t<<if $lakehouse_attack_timer is 0>>\n\t\t\t今晚\n\t\t<<elseif $lakehouse_attack_timer is 1>>\n\t\t\t明天\n\t\t<<else>>\n\t\t\t$lakehouse_attack_timer天后袭击湖边小屋。\n\t\t<</if>>\n\t\t他们会在<span class=\"red\"><<ampm 21 00>>至午夜期间赶来。</span>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */\n\n\t<<if $photo>>"
+  },
+  {
+    "passage": "Widgets Journal",
+    "findString": "\t\t\t\t<</if>>\n\t\t\t<</if>>\n\n\t\t\t<<if $farm>>",
+    "replace": "\t\t<</if>>\n\t<</if>>\n\t\n\t/* 北极星 */\n\t<<if $lakehouseinit is 1 and $lakehouse.build isnot undefined and $lakehouse.build isnot 0>>\n\t\t<li>\n\t\t\t<<switch $lakehouse.build>>\n        \t<<case \"wall 1\">>\n        \t\t<span class=\"lblue\">正在设立围栏地基。</span>\n        \t<<case \"wall 2\">>\n        \t\t<span class=\"lblue\">一圈现代风格的栅栏正围着湖边小屋修建。</span>\n        \t<<case \"wall 3\">>\n        \t\t<span class=\"lblue\">正在往栅栏上加装铁丝网。</span>\n        \t<<case \"tower 1\">>\n        \t\t<span class=\"lblue\">正在建造着一座瞭望塔。</span>\n        \t<<case \"tower 2\">>\n        \t\t<span class=\"lblue\">瞭望塔顶正在安装探照灯。</span>\n        \t<<case \"guard post\">>\n        \t\t<span class=\"lblue\">岗哨正在修建中。</span>\n        \t<<case \"dog training\">>\n        \t\t<span class=\"lblue\">驯兽设施正在建设中。</span>\n        \t<<case \"traps 1\">>\n        \t\t<span class=\"lblue\">你的地产周围正在设置着陷阱。</span>\n        \t<<case \"traps 2\">>\n        \t\t<span class=\"lblue\">你的地产周围正在设置着更多的陷阱。</span>\n        \t<</switch>>\n\t\t\t<<if $lakehouse.build_timer is 1>>\n\t\t\t\t估计将会在<span class=\"gold\">明天</span>竣工。\n\t\t\t<<else>>\n\t\t\t\t估计将于<span class=\"gold\"><<number $lakehouse.build_timer>></span>天后竣工。\n\t\t\t<</if>>\n\t\t</li>\n\t<</if>>\n\t/* 北极星 */\n\n\t<<if $farm>>"
+  },
+  {
+    "passage": "Widgets Machine Actions Generation",
+    "findString": "\t<div id=\"listContainer\">\n\t\t<div id=\"leftaction\" @class=\"$options.combatControls + 'Control'\">",
+    "replace": "\t<div id=\"listContainer\">\n\t    /* 北极星模组 */\n\t    <<if $options.bjx_eventTF and $ghost gte 1>>\n    \t\t<div id=\"energyaction\" @class=\"$options.combatControls + 'Control'\">\n    \t\t\t<<energyActionEscape>>\n    \t\t</div>\n    \t<</if>>\n    \t/* 北极星 */\n\t\t<div id=\"leftaction\" @class=\"$options.combatControls + 'Control'\">"
+  },
+  {
+    "passage": "Widgets Machine Actions Generation",
+    "findString": "\t\t<<if ($mouthuse is 0 and !($dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)))>>",
+    "replace": "\t\t/* 北极星模组 */\n\t\t<<if ($mouthuse is 0 and !($dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)))>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Machine Actions Generation",
+    "findString": "\t\t\t<<if $orgasmdown gte 1>>",
+    "replace": "\t\t\t/* 北极星模组 */\n\t\t\t<<if $orgasmdown gte 1 and $demonhunter lte 5>>\n\t\t\t/* 北极星 */",
+    "all": true
+  },
+  {
+    "passage": "Widgets Machine Actions Generation",
+    "findString": "\t<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $dissociation lte 1 and ($orgasmdown lte 0 or $demonhunter gte 6) and ($pain lt 100 or $willpowerpain is undefined)>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Market",
+    "findString": "\t<<famebusiness 1>>\n<</widget>>\n\n<<widget \"eventsstall\">>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $options.bjx_sellproduce>>\n    \t<<if $enemytrust gte 50>>\n    \t\t<<famebusiness 10>>\n    \t<<elseif $enemytrust gte 30>>\n    \t\t<<famebusiness 3>>\n    \t<<elseif $enemytrust gte 10>>\n    \t\t<<famebusiness 1>>\n    \t<<elseif $enemytrust gte -10>>\n    \t\t<<famebusiness 0>>\n    \t<<elseif $enemytrust gte -30>>\n    \t\t<<famebusiness -3>>\n    \t<<else>>\n    \t\t<<famebusiness -10>>\n    \t<</if>>\n    <<else>>\n\t    <<famebusiness 1>>\n\t<</if>>\n\t/* 北极星 */\n<</widget>>\n\n<<widget \"eventsstall\">>"
+  },
+  {
+    "passage": "Widgets Missionary",
+    "findString": "\t\t\t<<run defineCustomEyeColourStyle()>>\n\t\t\t<<if $trauma gte ($traumamax * 0.9) or $possessed>>",
+    "replace": "\t\t\t<<run defineCustomEyeColourStyle()>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<if $trauma gte ($traumamax * 0.9) or $possessed or $traumatized is 1 and $options.bjx_divine>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Museum",
+    "findString": "<<widget \"museumdonate\">>\n\t<<museumAntiqueStatus \"antiquebox\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilverring\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldnecklace\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueivorynecklace\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecrystal\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquehorn\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquewatch\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquedildo\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecandlestick\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueforestarrow\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueforestdagger\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueforestgem\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilverbrooch\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquetrashcup\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquetrashburner\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquebrassstatuette\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldchastitybelt\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecoppercompass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegrenade\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquestonetalisman\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilvermask\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquediamond\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilvercompass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilverdagger\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquerustedcutlass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecutlass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueleathermap\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquebell\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquebullet\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueshell\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldring\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldbrooch\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecoralring\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquehourglass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecoppercoin\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilvercoin\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldcoin\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilverblade\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueivorystatuette\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquestrangefetish\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilvergoblet\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquesilvercrown\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquewhitecrystal\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueminesign\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueobsidiandisc\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquewoodenmask\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquetrilobitefossil\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueislandarrow\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquegoldcompass\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueswordcane\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquechocolate\" \"talk\">>\n\t<<museumAntiqueStatus \"antiqueteacaddy\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquewoodenfigurine\" \"talk\">>\n\t<<museumAntiqueStatus \"antiquecopperring\" \"talk\">>\n<</widget>>",
+    "replace": "<<widget \"museumdonate\">>\n    <<for _labelM, _valueM range $museumAntiques.antiques>>\n\t\t<<museumAntiqueStatus _labelM \"talk\">>\n\t<</for>>\n\t<<if $worn.neck.name is \"ivory necklace\">>\n        <<neckstrip>>\n    <</if>>\n<</widget>>"
+  },
+  {
+    "passage": "Widgets Museum",
+    "findString": "\t<<if $museumAntiques.antiques.antiquebell is \"talk\">>\n\t\t<<link [[问问余音缭绕的铃铛的事|Museum Bell]]>><<museumAntiqueStatus \"antiquebell\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n\t\t<br>\n\t<</if>>",
+    "replace": "\t/* 北极星模组 */\n\t<<if $museumAntiques.antiques.antiquebell is \"talk\">>\n\t\t<<link [[询问恐惧铃铛的情况|Museum Bell]]>><<museumAntiqueStatus \"antiquebell\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Museum",
+    "findString": "\t<<if $museumAntiques.antiques.antiqueislandarrow is \"talk\">>\n\t\t<<link [[问问岛民之箭的事|Museum Island Arrow]]>><<museumAntiqueStatus \"antiqueislandarrow\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n\t\t<br>\n\t<</if>>",
+    "replace": "\t<<if $museumAntiques.antiques.antiqueislandarrow is \"talk\">>\n\t\t<<link [[问问岛民之箭的事|Museum Island Arrow]]>><<museumAntiqueStatus \"antiqueislandarrow\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n\t\t<br>\n\t<</if>>\n\t/* 北极星模组 */\n\t<<if $options.bjx_antiques>>\n    \t<<if $museumAntiques.antiques.antiqueliquor is \"talk\">>\n    \t\t<<link [[询问古董酒的情况|Museum Antique Liquor]]>><<museumAntiqueStatus \"antiqueliquor\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebogplate is \"talk\">>\n    \t\t<<link [[询问博格板的情况|Museum Bog Plate]]>><<museumAntiqueStatus \"antiquebogplate\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebogbone is \"talk\">>\n    \t\t<<link [[询问沼泽骨的情况|Museum Bog Bone]]>><<museumAntiqueStatus \"antiquebogbone\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebogtool is \"talk\">>\n    \t\t<<link [[询问有关沼泽工具的信息|Museum Bog Tool]]>><<museumAntiqueStatus \"antiquebogtool\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebunkertablet is \"talk\">>\n    \t\t<<link [[询问碉堡石碑的情况|Museum Bunker Tablet]]>><<museumAntiqueStatus \"antiquebunkertablet\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebunkertag is \"talk\">>\n    \t\t<<link [[询问掩体标签的情况|Museum Bunker Tag]]>><<museumAntiqueStatus \"antiquebunkertag\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquecannonball is \"talk\">>\n    \t\t<<link [[询问炮弹的情况|Museum Cannonball]]>><<museumAntiqueStatus \"antiquecannonball\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquearttablet is \"talk\">>\n    \t\t<<link [[询问艺术石碑的情况|Museum Art Tablet]]>><<museumAntiqueStatus \"antiquearttablet\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiqueterracottastatue is \"talk\">>\n    \t\t<<link [[询问有关兵马俑雕像的信息|Museum Terracotta Statue]]>><<museumAntiqueStatus \"antiqueterracottastatue\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiqueredvial is \"talk\">>\n    \t\t<<link [[询问红色小瓶的情况|Museum Red Vial]]>><<museumAntiqueStatus \"antiqueredvial\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquetribemask is \"talk\">>\n    \t\t<<link [[询问有关部落面具的情况|Museum Tribal Mask]]>><<museumAntiqueStatus \"antiquetribemask\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiqueebonystatuette is \"talk\">>\n    \t\t<<link [[询问黑檀木雕像的情况|Museum Ebony Statue]]>><<museumAntiqueStatus \"antiqueebonystatuette\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiqueglacierplant is \"talk\">>\n    \t\t<<link [[询问冰川植物的信息|Museum Glacier Plant]]>><<museumAntiqueStatus \"antiqueglacierplant\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquebullion is \"talk\">>\n    \t\t<<link [[询问古旧金条的情况|Museum Bullion]]>><<museumAntiqueStatus \"antiquebullion\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquereal is \"talk\">>\n    \t\t<<link [[询问原始硬币的信息|Museum Real]]>><<museumAntiqueStatus \"antiquereal\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiqueindigo is \"talk\">>\n    \t\t<<link [[询问靛蓝染料的情况|Museum Indigo]]>><<museumAntiqueStatus \"antiqueindigo\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquescroll is \"talk\">>\n    \t\t<<link [[询问言灵卷轴的信息|Museum Antique Scroll]]>><<museumAntiqueStatus \"antiquescroll\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquemushroom is \"talk\">>\n    \t\t<<link [[询问蘑菇神像的信息|Museum Antique Mushroom]]>><<museumAntiqueStatus \"antiquemushroom\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    \t<<if $museumAntiques.antiques.antiquegreed is \"talk\">>\n    \t\t<<link [[向温特展示贪婪之杯|Museum Antique Greed Cup]]>><<museumAntiqueStatus \"antiquegreed\" \"museum\">><<npcincr Winter love 1>><</link>><<glove>>\n    \t\t<br>\n    \t<</if>>\n    <</if>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Named Npcs",
+    "findString": "\t\t\t<<case Sydney>>\n\t\t\t\t<<set $NPCName[_i].outfits.pushUnique(\n\t\t\t\t\t\"maleSchoolLong\", \"femaleSchoolLong\",\n\t\t\t\t\t\"maleSchoolSwimShirt\", \"femaleSchoolSwim\",\n\t\t\t\t\t\"neutralRobe\", \"coldTrench\"\n\t\t\t\t)>>",
+    "replace": "\t\t\t<<case Sydney>>\n\t\t\t\t<<set $NPCName[_i].outfits.pushUnique(\n\t\t\t\t\t\"maleSchoolLong\", \"femaleSchoolLong\",\n\t\t\t\t\t\"maleSchoolSwimShirt\", \"femaleSchoolSwim\",\n\t\t\t\t\t\"neutralRobe\", \"coldTrench\"\n\t\t\t\t)>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<case \"泰勒\">>\n\t\t\t\t<<set $NPCName[_i].outfits.pushUnique(\n\t\t\t\t\t\"maleSchool\", \"femaleSchool\", \"maleSchoolLong\", \"femaleSchoolLong\",\n\t\t\t\t\t\"maleSchoolSwimShirt\", \"femaleSchoolSwim\",\n\t\t\t\t\t\"maleTown1\", \"femaleTown1\", \"maleWarm1\", \"femaleWarm1\", \"coldPuffer\", \"pyjamas\"\n\t\t\t\t)>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Named Npcs",
+    "findString": "\t\t\t<<case Charlie>><<set $NPCName[_i].outfits.pushUnique(\"dance\")>>\n\t\t\t<<case Harper>><<set $NPCName[_i].outfits.pushUnique(\"doctor\")>>",
+    "replace": "\t\t\t<<case Charlie>><<set $NPCName[_i].outfits.pushUnique(\"dance\")>>\n\t\t\t<<case Harper>><<set $NPCName[_i].outfits.pushUnique(\"doctor\")>>\n\t\t\t/* 北极星模组 */\n\t\t\t<<case \"凯西\">><<set $NPCName[_i].outfits.pushUnique(\"maleTown1\", \"femaleTown1\")>>\n\t\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets Outfits",
+    "findString": "\t\t<<case \"Pirate Bed Lie\">>\n\t\t\t<<set _passage to \"Pirate Bed Lie\">>\n\t\t\t<<set $wardrobe_location to \"pirate\">>\n\t\t\t<<set $storeLocation to \"Pirate Bed Lie\">>\n\t\t<<default>>",
+    "replace": "\t\t<<case \"Pirate Bed Lie\">>\n\t\t\t<<set _passage to \"Pirate Bed Lie\">>\n\t\t\t<<set $wardrobe_location to \"pirate\">>\n\t\t\t<<set $storeLocation to \"Pirate Bed Lie\">>\n\t\t/* 北极星模组 */\n\t\t<<case \"Lake House Bed\">>\n\t\t\t<<set _passage to \"Lake House Bed\">>\n\t\t\t<<set $wardrobe_location to \"lakehouse\">>\n\t\t\t<<set $storeLocation to \"Lake House Bed\">>\n\t\t/* 北极星 */\n\t\t<<default>>"
+  },
+  {
+  "passage": "Widgets Parasites",
+  "findString": "\t<<set $parasite.types to [\n\t\t\"urchin\",\n\t\t\"slime\",\n\t\t\"maggot\",\n\t\t\"parasite\",]>>",
+  "replace": "\t<<set $parasite.types to [\n\t\t\"urchin\",\n\t\t\"slime\",\n\t\t\"maggot\",\n\t\t\"parasite\",]>>\n\t/* 北极星模组 */\n\t<<set $parasite.types to $parasite.types.concat([\n\t\t\"livingclothes\"])>>\n\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets physicalAdjustments",
+    "findString": "\t\t<<if $parasite.nipples.name is \"slime\">>\n\t\t\t<<set $breastgrowthtimer += 300>>\n\t\t<</if>>",
+    "replace": "\t\t<<if $parasite.nipples.name is \"slime\">>\n\t\t\t<<set $breastgrowthtimer += 300>>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $parasite.nipples.name is \"livingclothes\">>\n\t\t\t<<set $breastgrowthtimer -= 300>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets physicalAdjustments",
+    "findString": "\t\t<<if $parasite.penis.name is \"slime\">>\n\t\t\t<<set $penisgrowthtimer += 250>>\n\t\t\t<<set $sexStats.pills[\"pills\"][\"penis reduction\"].overdose += random(1,2)>>\n\t\t<</if>>",
+    "replace": "\t\t<<if $parasite.penis.name is \"slime\">>\n\t\t\t<<set $penisgrowthtimer += 250>>\n\t\t\t<<set $sexStats.pills[\"pills\"][\"penis reduction\"].overdose += random(1,2)>>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $parasite.penis.name is \"livingclothes\">>\n\t\t\t<<set $penisgrowthtimer -= 250>>\n\t\t\t<<set $sexStats.pills[\"pills\"][\"penis growth\"].overdose += random(1,2)>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets physicalAdjustments",
+    "findString": "\t\t<<if $parasite.bottom.name is \"slime\">>\n\t\t\t<<set $bottomgrowthtimer += 300>>\n\t\t<</if>>",
+    "replace": "\t\t<<if $parasite.bottom.name is \"slime\">>\n\t\t\t<<set $bottomgrowthtimer += 300>>\n\t\t<</if>>\n\t\t/* 北极星模组 */\n\t\t<<if $parasite.bottom.name is \"livingclothes\">>\n\t\t\t<<set $bottomgrowthtimer -= 300>>\n\t\t<</if>>\n\t\t/* 北极星 */"
+  },
+  {
+    "passage": "Widgets physicalAdjustments",
+    "findString": "\t\t<<if $molestationstart isnot 1 and $combat is 0 and ([\"home\", \"alex_cottage\", \"asylum\", \"prison\"].includes($location) or ($location is \"cabin\" and $syndromeeden gte 1) or ($location is \"temple\" and V.wardrobes.temple.unlocked) or ($location is \"seapirates\" and V.wardrobes.pirate.unlocked))>> <!-- Eden Syndrome is 0 or 1, but could be higher in the future. -->",
+    "replace": "/* 北极星模组 */\n\t\t<<if $molestationstart isnot 1 and $combat is 0 and ([\"home\", \"alex_cottage\", \"asylum\", \"prison\"].includes($location) or ($location is \"cabin\" and $syndromeeden gte 1) or ($location is \"temple\" and V.wardrobes.temple.unlocked) or ($location is \"seapirates\" and V.wardrobes.pirate.unlocked))>> <!-- Eden Syndrome is 0 or 1, but could be higher in the future. -->\n\t\t/* 北极星 */"
   }
 ]
